@@ -1,0 +1,162 @@
+/*******************************************************************************
+ * Name            : er_frmwk.hpp
+ * Project         : paradyn
+ * Module          : erf
+ * Description     : Header file for Event Reporting Framework (ERF) base class
+ * Creation Date   : Wed Jun 24 14:42:12 2015
+ * Original Author : jharwell
+ *
+ ******************************************************************************/
+
+#ifndef _ER_FRMWK_HPP
+#define _ER_FRMWK_HPP
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+#include "altypes.h"
+#include "dbg.h"
+#include "er_frmwk_mod.hpp"
+#include "shared_queue.hpp"
+#include "threadable.hpp"
+
+#include <vector>
+#include <fstream>
+#include <thread>
+#include <mutex>
+
+/*******************************************************************************
+ * SVN Version
+ ******************************************************************************/
+static char __unused svnid_er_frmwk_hpp[] =
+  "$Id:$ SwRI";
+
+/*******************************************************************************
+ * Class Definitions
+ ******************************************************************************/
+class er_frmwk : public threadable
+{
+public:
+    struct erf_msg {
+        boost::uuids::uuid id;
+        erf_lvl::value lvl;
+        std::string str;
+        explicit erf_msg(
+            const boost::uuids::uuid& id_,
+            const erf_lvl::value& lvl_,
+            const std::string& str_) :
+            id(id_),
+            lvl(lvl_),
+            str(str_) {}
+    };
+
+    enum {
+        queue_size = 100,
+        max_modules = 10
+    };
+    /* data members */
+    char hostname[32];
+
+    /* constructors */
+    er_frmwk(void) {}
+    er_frmwk(
+        const std::string& logfile_fname_,
+        const erf_lvl::value& dbglvl_,
+        const erf_lvl::value& loglvl_);
+
+    /* destructor */
+    ~er_frmwk(void);
+
+    /* member functions */
+    void self_dbg_en(void) {
+        insmod(erf_id,"ERF");
+        mod_dbglvl(erf_id,erf_lvl::nom);
+    }
+    status_t insmod(
+        const boost::uuids::uuid& mod_id,
+        const erf_lvl::value& loglvl_,
+        const erf_lvl::value& dbglvl_,
+        const std::string& mod_name);
+    status_t insmod(
+        const boost::uuids::uuid& id,
+        const std::string& name);
+    status_t rmmod(
+        const boost::uuids::uuid& id);
+    status_t mod_dbglvl(
+        const boost::uuids::uuid& id,
+        const erf_lvl::value& lvl);
+    status_t mod_loglvl(
+        const boost::uuids::uuid& id,
+        const erf_lvl::value& lvl);
+    int flush(void);
+    status_t recv(
+        const boost::uuids::uuid& id,
+        const erf_lvl::value& lvl,
+        const std::string& str);
+    void report_msg(
+        const erf_msg& msg);
+    boost::uuids::uuid idgen(void) { return gen(); }
+    void thread_main(void);
+    erf_lvl::value loglvl(void) { return loglvl_dflt; }
+    erf_lvl::value dbglvl(void) { return dbglvl_dflt; }
+    void loglvl(
+        const erf_lvl::value& lvl) { loglvl_dflt = lvl; }
+    void dbglvl(
+        const erf_lvl::value& lvl) { dbglvl_dflt = lvl; }
+    void logfile(
+        const std::string& file) { logfile_fname = file; }
+private:
+
+    /* data members */
+    std::vector<er_frmwk_mod> modules;
+    shared_queue<erf_msg> queue;
+    std::string logfile_fname;
+    std::ofstream _logfile;
+    erf_lvl::value loglvl_dflt;
+    erf_lvl::value dbglvl_dflt;
+    boost::uuids::random_generator gen;
+    boost::uuids::uuid erf_id;
+};
+
+/*******************************************************************************
+ * Macros
+ ******************************************************************************/
+/*
+ * Reporting events. This needs to be a macro, instead of a function call so
+ * I can get the line # and function from the preprocessor/compiler.
+ */
+#define report(lvl,msg, ...) {                                          \
+        char _str[6000];                                                \
+        struct timespec _curr_time;                                     \
+        clock_gettime(CLOCK_REALTIME,&_curr_time);                      \
+        sprintf(_str,"[%s:%lu.%lu]:%s:%d:%s: " msg "\n",                    \
+                the_erf.hostname, _curr_time.tv_sec,_curr_time.tv_nsec, \
+                __FILE__,__LINE__,__FUNCTION__, ##__VA_ARGS__);         \
+        er_frmwk::erf_msg _msg(erf_id,lvl,std::string(_str));           \
+        the_erf.report_msg(_msg);                                      \
+    }
+/*
+ * Like report, but only reports errors and goes to the error/bailout section
+ * of a function only if a condition is false.
+ */
+#define check_report(cond,msg,...) {            \
+        if(!(cond)) {                                                   \
+            report(erf_lvl::err,msg,##__VA_ARGS__); \
+            goto error;                                                 \
+        }                                                               \
+    }
+#define sentinel(msg,...) {                     \
+        report(erf_lvl::err,msg,##__VA_ARGS__);     \
+        goto error;                             \
+    }
+
+#define pdassert(cond,msg,...)  if(!(cond)) {                           \
+        report(erf_lvl::err, msg, ##__VA_ARGS__);                       \
+        assert(0);                                                      \
+    }                                                                   \
+
+/*******************************************************************************
+ * Global Variables
+ ******************************************************************************/
+
+#endif /*  _ER_FRMWK_HPP  */

@@ -1,0 +1,144 @@
+/*******************************************************************************
+ * Name            : er_frwk_mod.cpp
+ * Project         : paradyn
+ * Module          : erf
+ * Description     : ERF module class
+ * Creation Date   : Wed Jun 24 14:28:05 2015
+ * Original Author : jharwell
+ *
+ ******************************************************************************/
+
+#ifndef _ER_FRWK_MOD_CPP_
+#define _ER_FRWK_MOD_CPP_
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+#include "er_frmwk_mod.hpp"
+#include <fstream>
+
+/*******************************************************************************
+ * SVN Version
+ ******************************************************************************/
+static char __unused svnid_er_frmwk_mod_cpp_[] =
+  "$Id:$ SwRI";
+
+/*******************************************************************************
+ * Namespaces
+ ******************************************************************************/
+
+/*******************************************************************************
+ * Constructors
+ ******************************************************************************/
+er_frmwk_mod::er_frmwk_mod(
+    const boost::uuids::uuid&  id_,
+    const erf_lvl::value& loglvl_,
+    const erf_lvl::value& dbglvl_,
+    const std::string& name_) :
+    id(id_),
+    name(name_),
+    loglvl(loglvl_),
+    dbglvl(dbglvl_) {}
+
+er_frmwk_mod::er_frmwk_mod(
+    const boost::uuids::uuid& id_,
+    const std::string& name_) :
+    id(id_),
+    name(name_),
+    loglvl((erf_lvl::value)0),
+    dbglvl((erf_lvl::value)0) {}
+
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+
+/**
+ * er_frmwk_mod::set_dbglvl() - Set the debug level for a module
+ *
+ * RETURN:
+ *     N/A
+ *
+ **/
+void er_frmwk_mod::set_dbglvl(
+    const erf_lvl::value& lvl)
+{
+    dbglvl = lvl;
+} /* er_frmwk_mod::set_dbglvl() */
+
+/**
+ * er_frmwk_mod::set_loglvl() - Set the logging level for a module
+ *
+ * RETURN:
+ *     N/A
+ *
+ **/
+void er_frmwk_mod::set_loglvl(
+    const erf_lvl::value& lvl)
+{
+    loglvl = lvl;
+} /* er_frmwk_mod::set_loglvl() */
+
+/**
+ * er_frmwk_mod::dbgmsg() - Print a debug msg to stdout
+ *
+ * RETURN:
+ *     N/A
+ *
+ **/
+void er_frmwk_mod::dbgmsg(
+    const std::string& msg,
+    const erf_lvl::value& lvl) const
+{
+    if (lvl <= dbglvl) {
+        std::cout << msg;
+        std::cout.flush();
+    }
+} /* er_frmwk_mod::dbgmsg() */
+
+/**
+ * er_frmwk_mod::logmsg() - Log a msg to a file
+ *
+ * RETURN:
+ *     N/A
+ *
+ **/
+void er_frmwk_mod::logmsg(
+    const std::string& msg,
+    const erf_lvl::value& lvl,
+    std::ofstream& file) const
+{
+    if (lvl >= loglvl) {
+        file << msg;
+        file.flush();
+    }
+} /* er_frmwk_mod::logmsg() */
+
+/**
+ * operator==() - Compare two ERF modules for equality
+ *
+ * RETURN:
+ *     bool - true if they are the same, false otherwise
+ *
+ **/
+bool er_frmwk_mod::operator==(
+    const er_frmwk_mod& rhs)
+{
+    return (this->id == rhs.id);
+} /* operator==() */
+
+/**
+ * operator<<() - For printing an er_frmwk_mod
+ *
+ * RETURN:
+ *     std::ostream& - The output stream
+ *
+ **/
+std::ostream& operator<<(
+    std::ostream& os,
+    const er_frmwk_mod& mod)
+{
+    os << mod.id << ": " << mod.name;
+    return os;
+} /* operator<<() */
+
+#endif /*  _ER_FRMWK_MOD_CPP_  */
