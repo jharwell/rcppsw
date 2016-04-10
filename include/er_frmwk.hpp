@@ -26,97 +26,94 @@
 #include <mutex>
 
 /*******************************************************************************
- * SVN Version
- ******************************************************************************/
-static char __unused svnid_er_frmwk_hpp[] =
-  "$Id:$ SwRI";
-
-/*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class er_frmwk : public threadable
-{
-public:
-    struct erf_msg {
-        boost::uuids::uuid id;
-        erf_lvl::value lvl;
-        std::string str;
-        explicit erf_msg(
-            const boost::uuids::uuid& id_,
-            const erf_lvl::value& lvl_,
-            const std::string& str_) :
-            id(id_),
-            lvl(lvl_),
-            str(str_) {}
+namespace rcppsw {
+
+    class er_frmwk : public threadable
+    {
+    public:
+        struct erf_msg {
+            boost::uuids::uuid id;
+            erf_lvl::value lvl;
+            std::string str;
+            explicit erf_msg(
+                const boost::uuids::uuid& id_,
+                const erf_lvl::value& lvl_,
+                const std::string& str_) :
+                id(id_),
+                lvl(lvl_),
+                str(str_) {}
+        };
+
+        enum {
+            queue_size = 100,
+            max_modules = 10
+        };
+        /* data members */
+        char hostname[32];
+
+        /* constructors */
+        er_frmwk(
+            const std::string& logfile_fname_="logfile",
+            const erf_lvl::value& dbglvl_= erf_lvl::nom,
+            const erf_lvl::value& loglvl_= erf_lvl::nom);
+
+        /* destructor */
+        ~er_frmwk(void);
+
+        /* member functions */
+        void self_dbg_en(void) {
+            insmod(erf_id,"ERF");
+            mod_dbglvl(erf_id,erf_lvl::nom);
+        }
+        status_t insmod(
+            const boost::uuids::uuid& mod_id,
+            const erf_lvl::value& loglvl_,
+            const erf_lvl::value& dbglvl_,
+            const std::string& mod_name);
+        status_t insmod(
+            const boost::uuids::uuid& id,
+            const std::string& name);
+        status_t rmmod(
+            const boost::uuids::uuid& id);
+        status_t mod_dbglvl(
+            const boost::uuids::uuid& id,
+            const erf_lvl::value& lvl);
+        status_t mod_loglvl(
+            const boost::uuids::uuid& id,
+            const erf_lvl::value& lvl);
+        int flush(void);
+        status_t recv(
+            const boost::uuids::uuid& id,
+            const erf_lvl::value& lvl,
+            const std::string& str);
+        boost::uuids::uuid idgen(void) { return gen(); }
+        void thread_main(void);
+        erf_lvl::value loglvl(void) { return loglvl_dflt; }
+        erf_lvl::value dbglvl(void) { return dbglvl_dflt; }
+        void loglvl(
+            const erf_lvl::value& lvl) { loglvl_dflt = lvl; }
+        void dbglvl(
+            const erf_lvl::value& lvl) { dbglvl_dflt = lvl; }
+        void report_msg(
+            erf_msg& msg);
+
+    private:
+
+        /* member functions */
+
+        /* data members */
+        std::vector<er_frmwk_mod> modules;
+        shared_queue<erf_msg> queue;
+        std::string logfile_fname;
+        std::ofstream _logfile;
+        erf_lvl::value loglvl_dflt;
+        erf_lvl::value dbglvl_dflt;
+        boost::uuids::random_generator gen;
+        boost::uuids::uuid erf_id;
     };
-
-    enum {
-        queue_size = 100,
-        max_modules = 10
-    };
-    /* data members */
-    char hostname[32];
-
-    /* constructors */
-    er_frmwk(void) {}
-    er_frmwk(
-        const std::string& logfile_fname_,
-        const erf_lvl::value& dbglvl_,
-        const erf_lvl::value& loglvl_);
-
-    /* destructor */
-    ~er_frmwk(void);
-
-    /* member functions */
-    void self_dbg_en(void) {
-        insmod(erf_id,"ERF");
-        mod_dbglvl(erf_id,erf_lvl::nom);
-    }
-    status_t insmod(
-        const boost::uuids::uuid& mod_id,
-        const erf_lvl::value& loglvl_,
-        const erf_lvl::value& dbglvl_,
-        const std::string& mod_name);
-    status_t insmod(
-        const boost::uuids::uuid& id,
-        const std::string& name);
-    status_t rmmod(
-        const boost::uuids::uuid& id);
-    status_t mod_dbglvl(
-        const boost::uuids::uuid& id,
-        const erf_lvl::value& lvl);
-    status_t mod_loglvl(
-        const boost::uuids::uuid& id,
-        const erf_lvl::value& lvl);
-    int flush(void);
-    status_t recv(
-        const boost::uuids::uuid& id,
-        const erf_lvl::value& lvl,
-        const std::string& str);
-    void report_msg(
-        const erf_msg& msg);
-    boost::uuids::uuid idgen(void) { return gen(); }
-    void thread_main(void);
-    erf_lvl::value loglvl(void) { return loglvl_dflt; }
-    erf_lvl::value dbglvl(void) { return dbglvl_dflt; }
-    void loglvl(
-        const erf_lvl::value& lvl) { loglvl_dflt = lvl; }
-    void dbglvl(
-        const erf_lvl::value& lvl) { dbglvl_dflt = lvl; }
-    void logfile(
-        const std::string& file) { logfile_fname = file; }
-private:
-
-    /* data members */
-    std::vector<er_frmwk_mod> modules;
-    shared_queue<erf_msg> queue;
-    std::string logfile_fname;
-    std::ofstream _logfile;
-    erf_lvl::value loglvl_dflt;
-    erf_lvl::value dbglvl_dflt;
-    boost::uuids::random_generator gen;
-    boost::uuids::uuid erf_id;
-};
+} /* namespace rcppsw */
 
 /*******************************************************************************
  * Macros
@@ -126,14 +123,10 @@ private:
  * I can get the line # and function from the preprocessor/compiler.
  */
 #define report(lvl,msg, ...) {                                          \
-        char _str[6000];                                                \
-        struct timespec _curr_time;                                     \
-        clock_gettime(CLOCK_REALTIME,&_curr_time);                      \
-        sprintf(_str,"[%s:%lu.%lu]:%s:%d:%s: " msg "\n",                    \
-                the_erf.hostname, _curr_time.tv_sec,_curr_time.tv_nsec, \
-                __FILE__,__LINE__,__FUNCTION__, ##__VA_ARGS__);         \
-        er_frmwk::erf_msg _msg(erf_id,lvl,std::string(_str));           \
-        the_erf.report_msg(_msg);                                      \
+    char _str[1000];                                                    \
+    sprintf(_str,"%s:%d:%s: " msg "\n",__FILE__,__LINE__,__FUNCTION__, ##__VA_ARGS__); \
+    rcppsw::er_frmwk::erf_msg _msg(erf_id,lvl,std::string(_str));       \
+    erf_handle.report_msg(_msg);                                        \
     }
 /*
  * Like report, but only reports errors and goes to the error/bailout section
@@ -153,10 +146,17 @@ private:
 #define pdassert(cond,msg,...)  if(!(cond)) {                           \
         report(erf_lvl::err, msg, ##__VA_ARGS__);                       \
         assert(0);                                                      \
-    }                                                                   \
+    }
 
-/*******************************************************************************
- * Global Variables
- ******************************************************************************/
+/*
+ * OK to undefine, because if this file is include I want the C++ version, not
+ * the C version
+ */
+#if defined(check_ptr)
+#undef check_ptr
+#endif
+#define check_ptr(ptr) if (nullptr == (ptr)) {  \
+        report(erf_lvl::err, "ERROR: " #ptr " is NULL"); goto error;}   \
+
 
 #endif /*  _ER_FRMWK_HPP  */

@@ -21,14 +21,9 @@
 #include "er_frmwk.hpp"
 
 /*******************************************************************************
- * SVN Version
+ * Namespace Definitions
  ******************************************************************************/
-static char __unused svnid_er_frmwk_base_cpp_[] =
-  "$Id:$ SwRI";
-
-/*******************************************************************************
- * Namespace
- ******************************************************************************/
+using namespace rcppsw;
 
 /*******************************************************************************
  * Macros
@@ -143,13 +138,21 @@ status_t er_frmwk::recv(
  *     N/A
  *
  **/
+
 void er_frmwk::report_msg(
-    const erf_msg& msg)
+    erf_msg& msg)
 {
     er_frmwk_mod tmp(msg.id,"tmp");
     std::vector<er_frmwk_mod>::const_iterator iter = std::find(modules.begin(), modules.end(),tmp);
 
     if (iter != modules.end()) {
+        struct timespec curr_time;
+        clock_gettime(CLOCK_REALTIME,&curr_time);
+        std::string header;
+        sprintf((char*)header.c_str(),"[%s:%lu.%lu]:",
+                hostname, curr_time.tv_sec%1000,curr_time.tv_nsec%1000);
+
+        msg.str = header + msg.str;
         iter->logmsg(msg.str,msg.lvl,_logfile);
         iter->dbgmsg(msg.str,msg.lvl);
     }
@@ -240,13 +243,13 @@ error:
  **/
 void er_frmwk::thread_main(void)
 {
-    report_internal(erf_lvl::nom,"Main thread start");
+    report_internal(erf_lvl::nom,"Start");
     while (!terminated()) {
         while (0 == queue.size()) sleep(1);
         erf_msg msg = queue.dq();
         report_msg(msg);
     } /* while() */
-    report_internal(erf_lvl::nom,"Main thread exit");
+    report_internal(erf_lvl::nom,"Exit");
 
     /* make sure all events remaining in queue are reported */
     while (queue.size()) {

@@ -19,55 +19,53 @@
 
 
 /*******************************************************************************
- * SVN Version
- ******************************************************************************/
-static char __unused svnid_threadable_hpp_[] =
-  "$Id:$ SwRI";
-
-/*******************************************************************************
  * Structure Definitions
  ******************************************************************************/
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class threadable
-{
-public:
-    /* data members */
+namespace rcppsw {
 
-    /* member functions */
-    threadable(void) : thread_run(false),
-                       internal_thread() {}
-    virtual ~threadable(void) {}
+    class threadable
+    {
+    public:
+        /* data members */
 
-    virtual void start(
-        int core = -1);
+        /* member functions */
+        threadable(void) : thread_run(false),
+                           internal_thread() {}
+        virtual ~threadable(void) {}
 
-    virtual void term(void)
-        {
-            thread_run = false;
-            internal_thread.join();
-        } /* phenf::term() */
-    bool terminated(void) { return (false == thread_run); }
-    virtual void join(void) { internal_thread.join(); }
-    virtual void thread_main(void) = 0;
-    status_t thread_lock_to_core(
-        pthread_t thread,
-        int core);
+        virtual void start(
+            int core = -1);
 
-protected:
-    pthread_t thread_handle(void) { return internal_thread.native_handle(); }
+        virtual void term(void)
+            {
+                thread_run = false;
+                internal_thread.join();
+            } /* phenf::term() */
+        bool terminated(void) { return (false == thread_run); }
+        virtual void join(void) { internal_thread.join(); }
+        virtual void thread_main(void) = 0;
+        status_t thread_lock_to_core(
+            pthread_t thread,
+            int core);
 
-private:
-    /* data members */
-    bool thread_run;
-    std::thread internal_thread;
+    protected:
+        pthread_t thread_handle(void) { return internal_thread.native_handle(); }
 
-    /* non-member functions */
-    static void entry_point(void* this_p) { threadable *pt = (threadable*)this_p; pt->thread_main(); }
-    /* operators */
-};
+    private:
+        /* data members */
+        bool thread_run;
+        std::thread internal_thread;
+
+        /* non-member functions */
+        static void entry_point(void* this_p) { threadable *pt = (threadable*)this_p; pt->thread_main(); }
+        /* operators */
+    };
+
+} /* namespace rcppsw */
 
 /*******************************************************************************
  * Operater Definitions
