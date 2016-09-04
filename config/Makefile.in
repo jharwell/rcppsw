@@ -31,9 +31,9 @@ BINDIR          = ./bin
 TESTDIR         = ./tests
 OBJDIR          = ./obj
 PREPROCDIR      = ./preproc
-LSTDIR          = ./lst
 ANALYSIS_DIR    = ./analysis
 SCANDIR         = $(ANALYSIS_DIR)/scan
+RELEASE_DIR      = ./release
 LOGDIR          = ./logs
 
 ###############################################################################
@@ -45,17 +45,30 @@ PREFIX         ?= /usr/local
 # Tell make we want to execute all commands using bash (otherwise it uses sh)
 SHELL           = bash
 
-# Flag indicating that tests should be run after they are built
-RUNTESTS       ?= 0
+# Tell make we want to:
+# 1 - Redirect results to a file--nothing is printed on stdout.
+# 0 - Dump results to stdout, AND redirect them to a file.
+#
+NO_STDOUT ?= 0
 
-# Flag indicating that the output of tests should be redirected to a log
-export TEST_REDIRECT  ?= 1
+ifeq ($(NO_STDOUT),1)
+REDIRECT1 = >
+REDIRECT2 = 2>&1
+else
+REDIRECT1 = | tee
+REDIRECT2 = 2>&1
+endif
+
+DATE = $(shell date --iso=seconds)
+
+# Define the remote host/location things should be copied to. Useful if your
+# devel machine is different than the machine which is connected to the board
+# you're using.
+REMOTE =
 
 ###############################################################################
 # Library Directories
 ###############################################################################
-CCLIBDIRS  ?=
-CXXLIBDIRS ?=
 
 ###############################################################################
 # Include Directories
@@ -63,28 +76,25 @@ CXXLIBDIRS ?=
 # Query the gcc-ish compiler and build a list of the system includes. Not
 # necessary for compilation (obviously), but needed for some of the analysis
 # tools to work.
-CCSYS_INCDIRS  = $(addprefix -isystem,$(call inc-query,$(CC))
-CXXSYS_INCDIRS = $(addprefix -isystem,$(call inc-query,$(CXX))
+CCSYS_INCDIRS  := $(addprefix -isystem,$(call inc-query,$(CC)))
+CXXSYS_INCDIRS := $(addprefix -isystem,$(call inc-query,$(CXX)))
 
 ###############################################################################
 # CC Compilation Options
 ###############################################################################
-CCOPTFLAGS =
-CCOPTLIBS  =
-CCLIB_SELF = -l$(shell echo $(notdir $(shell pwd))).a
-CCLIBS     = $(LIB_SELF) -lrt -lm $(CCOPTLIBS)
+CCLIBDIRS  = -L$(LIBDIR)
+CCLIB_SELF = -l$(shell echo $(notdir $(shell pwd))).x86
+CCLIBS     = -lrt -lm -lpthread
 OPT        = -O0
 
 ###############################################################################
 # C Compilation Options
 ###############################################################################
 CDEBUG    = -DDBG_LVL_DYNAMIC=DBG_N
-COPTFLAGS = $(CCOPTFLAGS)
-COPTLIBS  = $(CCOPTLIBS)
 
 CMODULE  ?= -DMODULE_NAME=$(shell echo $(notdir $(shell pwd)) | tr 'a-z' 'A-Z')
-CLIBS     = $(CCLIBS) -lcommon.@target@ -levtlog.@target@ -lds.@target@ -lutils.@target@ -lm $(COPTLIBS)
-CLIBDIRS  = -L$(rcswroot)/lib/@target@/@host@
+CLIBS     = $(CCLIB_SELF) -lcommon.x86 -levtlog.x86 -lds.x86 -lutils.x86 $(CCLIBS)
+CLIBDIRS  = $(CCLIBDIRS) -L$(rcswroot)/lib/x86/linux
 
 define CINCDIRS
 -I$(rcsw)/al/include \
@@ -95,15 +105,25 @@ define CINCDIRS
 -Iinclude
 endef
 
-CFLAGS   = $(OPT) @CCDEFS@ -m32 -W -Wall -Wextra -std=gnu99 -fmessage-length=0 $(CINCDIRS) $(CDEBUG) $(CMODULE) $(COPTFLAGS)
+CFLAGS   = $(OPT) -g -D__linux__ -m32 -W -Wall -Wextra -std=gnu99 -fmessage-length=0 $(CINCDIRS) $(CDEBUG) $(CMODULE)
 CC       = $(develcc)
 
 ###############################################################################
 # C++ Compilation Options
 ###############################################################################
-CXXOPTFLAGS = $(CCCOPTFLAGS)
-CXXINCDIRS  = -Iinclude -I$(rcsw)/utils/include -I$(rcsw)/al/include -I$(rcsw)/common/include
-CXXFLAGS    = $(OPT) @CCDEFS@ -m32 -W -Wall -Wextra -Weffc++ -std=gnu++11 -fmessage-length=0 $(CXXINCDIRS) $(CXXOPTFLAGS)
+CXXLIBDIRS ?= -L$(rcppsw)/lib -L$(LIBDIR)
+
+define CXXINCDIRS
+-Iinclude \
+-I$(rcsw)/utils/include \
+-I$(rcsw)/al/include \
+-I$(rcsw)/common/include \
+-I$(rcppsw)/include \
+-I$(develroot)/catch/single_include
+endef
+
+CXXFLAGS    = $(OPT) -g -D__linux__ -m32 -W -Wall -Wextra -Weffc++ -std=gnu++11 -fmessage-length=0 $(CXXINCDIRS)
+CXXLIBS     = $(CCLIB_SELF) -lrcppsw.x86 -lboost_system -lboost_filesystem -lboost_thread $(CCLIBS)
 CXX         = $(develcxx)
 
 ###############################################################################
@@ -133,25 +153,99 @@ rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2)  $(filter $(subst
 # this makefile.
 #
 make-depend-cc=$(CC) -MM -MF $3 -MP -MT $2 $(CFLAGS) $1
+make-depend-cxx=$(CXX) -MM -MF $3 -MP -MT $2 $(CXXFLAGS) $1
 
+# cppcheck analyzer: An analyzer that sometimes reports different things than the
+# clang static checker. Sometimes it reports the same stuff too. This command
+# redirects the output of all issues found to a file rather than reporting them
+# to stdout.
+#
+# usage: $(call analyze-cppcheck-cmd,lang-type)
+#
+# lang-type must be either C or CXX, and there must be the following variables defined
+# elsewhere in the Makefile for the analyzer to give accurate results:
+# ANALYZE_SRC_[C,CXX],
+# [C,CXX]MODULE,
+# [C,CXX]INCDIRS,
+# [C,CXX]SYS_INCDIRS,
+# [C,CXX]DEBUG
 define analyze-cppcheck-cmd
-cppcheck --enable=all $($(addprefix ANALYZE_SRC_,$2)) $($(addprefix $1,MODULE)) \
+cppcheck --enable=all $($(addprefix ANALYZE_SRC_,$1)) $($(addprefix $1,MODULE)) \
 $($(addprefix $1,INCDIRS)) $($(addprefix $1,SYS_INCDIRS)) $($(addprefix $1,DEBUG)) \
->& $(ANALYSIS_DIR)/cppcheck-analysis-$(shell date --iso=seconds).txt
+$(REDIRECT1) $(ANALYSIS_DIR)/cppcheck-analysis-$(DATE).txt $(REDIRECT2)
 endef
 
+# clang-syntax: A VERY verbose set of compiler warnings (way more than
+# gcc/g++), which can be helpful at times. This command redirects all reported
+# warnings to a file rather than reporting them to stdout.
+#
+# usage: $(call analyze-clang-syntax-cmd,lang-type)
+#
+# lang-type must be either C or CXX, and there must be the following variables defined
+# elsewhere in the Makefile for the analyzer to give accurate results:
+# ANALYZE_SRC_[C,CXX],
+# [C,CXX]INCDIRS,
+# [C,CXX]SYS_INCDIRS,
+# [C,CXX]FLAGS
 define analyze-clang-syntax-cmd
 clang -fsyntax-only -fcolor-diagnostics -Weverything -Wno-undef -Wno-pedantic\
 -Wno-padded -Wno-packed -Wno-gnu-zero-variadic-macro-arguments \
-$($(addprefix $1,CFLAGS)) $($(addprefix $1,SYS_INCDIRS)) \
-$($(addprefix ANALYZE_SRC_,$2)) >& $(ANALYSIS_DIR)/clang-syntax-analysis-$(shell date --iso=seconds).txt
+$($(addprefix $1,FLAGS)) $($(addprefix $1,SYS_INCDIRS)) \
+$($(addprefix ANALYZE_SRC_,$1)) $(REDIRECT1)  $(ANALYSIS_DIR)/clang-syntax-analysis-$(DATE).txt $(REDIRECT2)
 endef
 
+# clang-check: A very good static analyzer for all types of
+# bugs/ambiguities. This command redirects all reported warnings to a file
+# rather than reporting them to stdout.
+#
+# usage: $(call analyze-clang-check-cmd,lang-type)
+#
+# lang-type must be either C or CXX, and there must be the following variables defined
+# elsewhere in the Makefile for the analyzer to give accurate results:
+# ANALYZE_SRC_[C,CXX],
+# [C,CXX]SYS_INCDIRS,
+# [C,CXX]FLAGS
 define analyze-clang-static-cmd
-clang-check -analyze $($(addprefix ANALYZE_SRC_,$2)) -ast-dump -- $($(addprefix $1,FLAGS)) \
-$($(addprefix $1,SYS_INCDIRS)) -fcolor-diagnostics >& \
-$(ANALYSIS_DIR)/clang-static-analysis-$(shell date --iso=seconds).txt
+clang-check -analyze $($(addprefix ANALYZE_SRC_,$1)) -ast-dump -- $($(addprefix $1,FLAGS)) \
+$($(addprefix $1,SYS_INCDIRS)) -fcolor-diagnostics $(REDIRECT1) $(ANALYSIS_DIR)/clang-static-analysis-$(DATE).txt $(REDIRECT2)
 endef
+
+# clang-tidy-check: Check your code for adherence to a given coding standard, flag
+# potential readability issues, etc. This command redirects all reported
+# issues to a file rather than reporting them to stdout.
+#
+# usage: $(call check-clang-tidy-cmd,lang-type)
+#
+# lang-type must be either C or CXX, and there must be the following variables defined
+# elsewhere in the Makefile for the analyzer to give accurate results:
+# ANALYZE_SRC_[C,CXX],
+# [C,CXX]SYS_INCDIRS
+# [C,CXX]FLAGS
+define check-clang-tidy-cmd
+clang-tidy -checks=\* $($(addprefix ANALYZE_SRC_,$1)) -- $($(addprefix $1,FLAGS)) \
+$($(addprefix $1,SYS_INCDIRS)) $(REDIRECT1) $(ANALYSIS_DIR)/clang-tidy-analysis-$(DATE).txt $(REDIRECT2)
+endef
+
+# clang-tidy-fix: Same as clang-tidy-check, but automatically fix the issues
+# instead of reporting them.
+#
+# usage: $(call fix-clang-tidy-cmd,lang-type)
+#
+# lang-type must be either C or CXX, and there must be the following variables defined
+# elsewhere in the Makefile for the analyzer to give accurate results:
+# ANALYZE_SRC_[C,CXX],
+# [C,CXX]SYS_INCDIRS
+# [C,CXX]FLAGS
+define fix-clang-tidy-cmd
+clang-tidy -checks=\* $($(addprefix ANALYZE_SRC_,$1)) -- $($(addprefix $1,FLAGS)) \
+$($(addprefix $1,SYS_INCDIRS)) > /dev/null 2>&1
+endef
+
+# Variable checking: Check to be sure the user defined a
+# variable, and printing a helpful message when it's not before
+# exiting. Note that all checks using this function must be AFTER this
+# definition.
+check-var-defined=$(if $(strip $($1)),,$(error "$1" is not defined ($(strip $2))))
 
 ###############################################################################
 # Target Definitions
@@ -163,69 +257,78 @@ SRC_CXX    = $(call rwildcard,$(SOURCES),*.cpp)
 SRC        = $(SRC_C) $(SRC_CXX)
 ANALYZE_SRC_C ?= $(SRC_C)
 ANALYZE_SRC_CXX ?= $(SRC_CXX)
-OBJECTS_C    = $(notdir $(patsubst %.c,%.o,$(SRC_C))) $(notdir $(patsubst %.c,%.o,$(SRC_C)))
-OBJECTS_CXX  = $(notdir $(patsubst %.cpp,%.o,$(SRC_CPP))) $(notdir $(patsubst %.cpp,%.o,$(SRC_CXX)))
+OBJECTS_C    = $(notdir $(patsubst %.c,%.o,$(SRC_C)))
+OBJECTS_CXX  = $(notdir $(patsubst %.cpp,%.o,$(SRC_CXX)))
 OBJECTS      = $(OBJECTS_C) $(OBJECTS_CXX)
 VPATH        = $(SRCDIR):$(TESTDIR)
 
 # The target library
-TARGET = $(LIBDIR)/lib$(notdir $(shell pwd)).@target@.a
+TARGET = $(LIBDIR)/lib$(notdir $(shell pwd)).x86.a
 
 # The built-in C tests. My convention is that all tests will end in -test, and
 # that all test harness files will end in _test.
 TEST_SOURCES = $(TESTDIR)
-TEST_SRC = $(notdir $(call rwildcard,$(TEST_SOURCES),*-test.c))
-TEST_HARNESS = $(strip $(call rwildcard,$(TEST_SOURCES),*_test.c))
-TESTS = $(patsubst %.c,$(BINDIR)/%,$(TEST_SRC))
+CTEST_SRC = $(notdir $(call rwildcard,$(TEST_SOURCES),*-test.c))
+CTEST_HARNESS = $(strip $(call rwildcard,$(TEST_SOURCES),*_test.c))
+CTESTS = $(patsubst %.c,$(BINDIR)/%,$(CTEST_SRC))
+
+CXXTEST_SRC = $(notdir $(call rwildcard,$(TEST_SOURCES),*-test.cpp))
+CXXTEST_HARNESS = $(strip $(call rwildcard,$(TEST_SOURCES),*_test.cpp))
+CXXTESTS = $(patsubst %.cpp,$(BINDIR)/%,$(CXXTEST_SRC))
 
 # Preprocessor output for source code, test code, and test harness. Very
 # useful for debugging strange compilation errors.
 define PREPROC_OBJECTS
 $(addprefix $(PREPROCDIR)/,$(addsuffix .preproc, \
-$(basename $(notdir $(call rwildcard, $(TEST_SOURCES) $(SOURCES),*.c)) \
-$(call rwildcard, $(TEST_SOURCES) $(SOURCES),*.cpp))))
+$(basename $(notdir $(call rwildcard, $(CTEST_SOURCES) $(CXXTEST_SOURCES) $(SOURCES),*.c)) \
+$(notdir $(call rwildcard, $(CTEST_SOURCES) $(CXXTEST_SOURCES) $(SOURCES),*.cpp))))
 endef
 
 ###############################################################################
 # All targets
 ###############################################################################
-.PHONY: analyze-c analyze-cppcheck-c syntax-analyze-clang-c static-analyze-clang-c
-.PHONY: analyze-c++ analyze-cppcheck-c++ syntax-analyze-clang-c++ static-analyze-clang-c++
-.PHONY: analyze-scan clean veryclean scan unit_tests
+.PHONY: analyze-c analyze-cppcheck-c analyze-clang-syntax-c analyze-clang-static-c
+.PHONY: analyze-c++ analyze-cppcheck-c++ analyze-clang-syntax-c++ analyze-clang-static-c++
+.PHONY: check-clang-tidy-c check-clang-tidy-c++
+.PHONY: fix-clang-tidy-c fix-clang-tidy-c++
+.PHONY: analyze-scan clean veryclean scan unit_tests rcopy release
 
-# The default target
+# The Target Library (default target)
+$(addprefix $(OBJDIR)/, $(OBJECTS)): | $(OBJDIR)
+$(TARGET): $(addprefix $(OBJDIR)/, $(OBJECTS)) | $(LIBDIR)
+ar rcs $@ $(addprefix $(OBJDIR)/, $(OBJECTS))
+@ranlib $@
+
+# Build ALL THE THINGS!
 all: $(TARGET)
 
-# Release; turn off debugging for C programs
-release: CDEBUG=
-release: all
+# The Releaser. Build target and then copy it and everything used to build it
+# to a timestamped directory.
+release: $(TARGET) | $(RELEASE_DIR)/$(DATE)
+	@cp $(BINDIR)/* $(OBJDIR)/* $(LIBDIR)/* $(RELEASE_DIR)/$(DATE)
 
 # Unless invoked with make clean, include generated dependencies
 ifneq "$MAKECMDGOALS" "clean"
--include $(addprefix $(OBJDIR)/,$(OBJECTS:.o=.d))
+-include $(addprefix $(OBJDIR)/,$(OBJECTS_C:.o=.d))
+-include $(addprefix $(OBJDIR)/,$(OBJECTS_CXX:.o=.d))
 endif
 
-# The Target Library
-$(addprefix $(OBJDIR)/, $(OBJECTS)): | $(OBJDIR) $(LSTDIR)
-$(TARGET): $(addprefix $(OBJDIR)/, $(OBJECTS)) | $(LIBDIR)
-	@ar rcs $@ $(addprefix $(OBJDIR)/, $(OBJECTS))
-	@ranlib $@
-
 # Bootstrap Bill
-$(LIBDIR) $(BINDIR) $(LOGDIR) $(OBJDIR) $(PREPROCDIR) $(LSTDIR) $(ANALYSIS_DIR) $(SCANDIR):
+$(LIBDIR) $(BINDIR) $(LOGDIR) $(OBJDIR) $(PREPROCDIR) $(ANALYSIS_DIR) $(SCANDIR) $(RELEASE_DIR)/$(DATE):
 	@mkdir -p $@
 
 # The Unit Tests Engine
-$(TESTS): $(TARGET) $(TEST_HARNESS) | $(BINDIR) $(LOGDIR) $(LSTDIR)
-unit_tests: $(TESTS)
-ifeq ($(RUNTESTS),1)
-	@bash ./runtests.sh
-endif
+$(CTESTS) $(CXXTESTS): $(TARGET) $(CTEST_HARNESS) $(CXXTEST_HARNESS) | $(BINDIR) $(LOGDIR)
+unit_tests: $(CTESTS) $(CXXTESTS)
 
 # The Installer
 install: $(TARGET)
 	@install -d $(PREFIX)
 	@install $(TARGET) $(PREFIX)
+
+# The Remote Copier
+rcopy:
+	@scp $(TARGET) $(REMOTE)
 
 # The Memory Savant
 valgrind:
@@ -241,36 +344,51 @@ preprocessor: $(PREPROC_OBJECTS)
 
 # The Cleaner
 clean:
-	@rm -rf $(LIBDIR) $(LOGDIR) $(BINDIR) $(OBJDIR) $(PREPROCDIR) $(LSTDIR) $(TESTS) \
+	@rm -rf $(LIBDIR) $(LOGDIR) $(BINDIR) $(OBJDIR) $(PREPROCDIR) $(TESTS) \
 	config.status config.log autom4te.cache *.o *~
 
 # The Super Cleaner
 veryclean: clean
-	@rm -rf $(ANALYSIS_DIR)
+	@rm -rf $(ANALYSIS_DIR) $(RELASE_DIR)
 
 # The Analyzers
-analyze-c: cppcheck-analyze-c analyze-clang-syntax-c analyze-clang-static-c
-analyze-c++: cppcheck-analyze-c++ analyze-clang-syntax-c++ analyze-clang-static-c++
+analyze-c: analyze-cppcheck-c analyze-clang-syntax-c analyze-clang-static-c analyze-clang-tidy-c
+analyze-c++: analyze-cppcheck-c++ analyze-clang-syntax-c++ analyze-clang-static-c++ analyze-clang-tidy-c++
 analyze-cppcheck-c: | $(ANALYSIS_DIR)
-	$(call analyze-cppcheck-cmd,$(CC),C)
+	$(call analyze-cppcheck-cmd,C)
 analyze-clang-syntax-c: | $(ANALYSIS_DIR)
-	$(call analyze-clang-syntax-cmd,$(CC),C)
+	$(call analyze-clang-syntax-cmd,C)
 analyze-clang-static-c: | $(ANALYSIS_DIR)
-	$(call analyze-clang-static,$(CC),C)
+	$(call analyze-clang-static,C)
 	@rm -rf *.plist
 
 analyze-cppcheck-c++: | $(ANALYSIS_DIR)
-	$(call analyze-cppcheck-cmd,$(CXX),CXX)
+	$(call analyze-cppcheck-cmd,CXX)
 analyze-clang-syntax-c++: | $(ANALYSIS_DIR)
-	$(call analyze-clang-syntax-cmd,$(CXX),CXX)
-
+	$(call analyze-clang-syntax-cmd,CXX)
 analyze-clang-static-c++: | $(ANALYSIS_DIR)
-	$(call analyze-clang-static,$(CXX),CXX)
+	$(call analyze-clang-static-cmd,CXX)
 	@rm -rf *.plist
 
 # The Scanner
+#
+# Presents the results of the clang static analyzer in a nice GUI/webpage. To
+# use this target, you must run 'make clean' first, so scan-build can hook into
+# your build process.
 analyze-scan: | $(SCANDIR)
-	scan-build -V -o $(SCANDIR) -analyze-headers -enable-checker core -enable-checker unix -enable-checker security -enable-checker llvm -enable-checker alpha -disable-checker alpha.core.CastToStruct $(MAKE)
+	scan-build -V --use-cc=$(CC) --use-c++=$(CXX) -o $(SCANDIR) -analyze-headers -enable-checker core -enable-checker unix -enable-checker security -enable-checker llvm -enable-checker alpha -disable-checker alpha.core.CastToStruct $(MAKE)
+
+# The Tidy Checkers
+check-clang-tidy-c: | $(ANALYSIS_DIR)
+	$(call check-clang-tidy-cmd,C)
+check-clang-tidy-c++: | $(ANALYSIS_DIR)
+	$(call check-clang-tidy-cmd,CXX)
+
+# The Tidy Fixers
+fix-clang-tidy-c: | $(ANALYSIS_DIR)
+	$(call fix-clang-tidy-cmd,C)
+fix-clang-tidy-c++: | $(ANALYSIS_DIR)
+	$(call fix-clang-tidy-cmd,CXX)
 
 ###############################################################################
 # Pattern Rules
@@ -278,20 +396,24 @@ analyze-scan: | $(SCANDIR)
 # For compiling the C source
 $(OBJDIR)/%.o:: $(SRCDIR)/%.c
 	@$(call make-depend-cc,$<,$@,$(subst .o,.d,$@))
-	$(CC) $(CFLAGS) $(CLIBDIRS) -c -o  $@ $< $(CLIBS)
+	$(CC) $(CFLAGS) $(CLIBDIRS) -c -o  $@ $<
 
 # For compiling the C++ source
 $(OBJDIR)/%.o:: $(SRCDIR)/%.cpp
 	@$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
-	$(CXX) $(CXXFLAGS) $(CXXLIBDIRS) -c -o  $@ $< $(CXXLIBS)
+	$(CXX) $(CXXFLAGS) $(CXXLIBDIRS) -c -o  $@ $<
 
 # For compiling the C tests
 $(BINDIR)/%:: %.c
-	$(CC) $(CFLAGS) $(CLIBDIRS) $(LDFLAGS) $(TEST_HARNESS) $< -o $@ $(CLIBS)
+	$(CC) $(CFLAGS) $(CLIBDIRS) $(CXXTEST_HARNESS) $< -o $@ $(CLIBS)
+
+# For compiling the C++ tests
+$(BINDIR)/%:: %.cpp
+	$(CXX) $(CXXFLAGS) $(CXXLIBDIRS) $(CTEST_HARNESS) $< -o $@ $(CXXLIBS)
 
 # For getting preprocessor C/C++ output
-$(PREPROCDIR)/%.preproc:: %.c
+$(PREPROCDIR)/%.preproc: %.c
 	$(CC) $(CFLAGS) $(CINCDIRS) -E $< -o $@
 
-$(PREPROCDIR)/%.preproc:: %.cpp
+$(PREPROCDIR)/%.preproc: %.cpp
 	$(CXX) $(CXXFLAGS) $(CXXINCDIRS) -E $< -o $@
