@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Name            : er_frmwk_mod.hpp
- * Project         : paradyn
+ * Project         : rcppsw
  * Module          : erf
  * Description     : Header file for Event Reporting Framework Module class
  * Creation Date   : Wed Jun 24 14:15:34 2015
@@ -23,19 +23,14 @@
 #include "altypes.h"
 
 /*******************************************************************************
- * SVN Version
- ******************************************************************************/
-static char __unused svnid_er_frmwk_mod_hpp_[] =
-  "$Id:$ SwRI";
-
-/*******************************************************************************
  * Namespace Definitions
  ******************************************************************************/
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class erf_lvl
+namespace rcppsw {
+    class erf_lvl
     {
     public:
         enum value {
@@ -82,12 +77,13 @@ class erf_lvl
         erf_lvl::value loglvl;
         erf_lvl::value dbglvl;
     };
+} /* namespace rcppsw */
 
 /*******************************************************************************
  * Operator Definitions
  ******************************************************************************/
 std::ostream& operator<<(
     std::ostream& os,
-    const er_frmwk_mod& mod);
+    const rcppsw::er_frmwk_mod& mod);
 
 #endif /*  _ER_FRMWK_MOD_HPP_  */

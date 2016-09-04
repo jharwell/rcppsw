@@ -1,14 +1,13 @@
 /*******************************************************************************
  * Name            : threadable.cpp
- * Project         : paradyn
- * Module          : common
+ * Project         : rcppsw
+ * Module          : utils
  * Description     : Threadable base class
  * Creation Date   : Mon Nov 16 16:04:20 2015
  * Original Author : jharwell
  *
  ******************************************************************************/
 
-#ifndef _THREADABLE_CPP_
 #define _THREADABLE_CPP_
 
 /*******************************************************************************
@@ -22,26 +21,6 @@
  * Namespace Definitions
  ******************************************************************************/
 using namespace rcppsw;
-
-/*******************************************************************************
- * Constant Definitions
- ******************************************************************************/
-
-/*******************************************************************************
- * Structure Definitions
- ******************************************************************************/
-
-/*******************************************************************************
- * Global Variables
- ******************************************************************************/
-
-/*******************************************************************************
- * Forward Declarations
- ******************************************************************************/
-
-/*******************************************************************************
- * Constructors/Destructors
- ******************************************************************************/
 
 /*******************************************************************************
  * Member Functions
@@ -61,18 +40,18 @@ void threadable::start(
 
     internal_thread = std::thread(&threadable::entry_point,this);
     if (-1 != core) {
-        thread_lock_to_core(internal_thread.native_handle(),core);
+        thread_core_lock(internal_thread.native_handle(),core);
     }
 } /* threadable::start() */
 
 /**
- * threadable::thread_lock_to_core() - Lock a thread to a core
+ * threadable::thread_core_lock() - Lock a thread to a core
  *
  * RETURN:
  *     status_t - OK if successful, ERROR otherwise
  *
  **/
-status_t threadable::thread_lock_to_core(
+status_t threadable::thread_core_lock(
     pthread_t thread,
     int core)
 {
@@ -85,7 +64,7 @@ status_t threadable::thread_lock_to_core(
 
 error:
     return ERROR;
-} /* threadable::thread_lock_to_core() */
+} /* threadable::thread_core_lock() */
 
 
-#endif /*  _THREADABLE_CPP_  */
+#undef _THREADABLE_CPP_

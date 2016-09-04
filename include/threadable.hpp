@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Name            : threadable.hpp
- * Project         : paradyn
- * Module          : paradyn
+ * Project         : rcppsw
+ * Module          : utils
  * Description     : Common threading functionality
  * Creation Date   : Sat Jul 18 14:33:49 2015
  * Original Author : jharwell
@@ -16,11 +16,6 @@
  ******************************************************************************/
 #include "altypes.h"
 #include <thread>
-
-
-/*******************************************************************************
- * Structure Definitions
- ******************************************************************************/
 
 /*******************************************************************************
  * Class Definitions
@@ -48,7 +43,7 @@ namespace rcppsw {
         bool terminated(void) { return (false == thread_run); }
         virtual void join(void) { internal_thread.join(); }
         virtual void thread_main(void) = 0;
-        status_t thread_lock_to_core(
+        status_t thread_core_lock(
             pthread_t thread,
             int core);
 

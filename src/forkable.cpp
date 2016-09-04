@@ -1,14 +1,13 @@
 /*******************************************************************************
  * Name            : forkable.cpp
- * Project         : paradyn
- * Module          : paradyn
+ * Project         : rcppsw
+ * Module          : utils
  * Description     : Common fork()/exec() wrappers
  * Creation Date   : Sun Aug 16 10:30:07 2015
  * Original Author : jharwell
  *
  ******************************************************************************/
 
-#ifndef _FORKABLE_CPP_
 #define _FORKABLE_CPP_
 
 /*******************************************************************************
@@ -29,31 +28,9 @@
 #include <fcntl.h>
 
 /*******************************************************************************
- * SVN Version
- ******************************************************************************/
-static char __unused svnid_forkable_cpp_[] =
-  "$Id:$ SwRI";
-
-/*******************************************************************************
  * Namespaces
  ******************************************************************************/
-using namespace paradyn;
-
-/*******************************************************************************
- * Constant Definitions
- ******************************************************************************/
-
-/*******************************************************************************
- * Structure Definitions
- ******************************************************************************/
-
-/*******************************************************************************
- * Global Variables
- ******************************************************************************/
-
-/*******************************************************************************
- * Forward Declarations
- ******************************************************************************/
+using namespace rcppsw;
 
 /*******************************************************************************
  * Member Functions
@@ -72,7 +49,7 @@ pid_t forkable::start(
     _pid = fork();
     if (_pid == 0) {
         if (-1 != core) {
-            proc_lock_to_core(core);
+            proc_core_lock(core);
         }
         entry_point(this);
     }
@@ -98,7 +75,7 @@ pid_t forkable::start(
             return -1;
         }
         if (-1 != core) {
-            proc_lock_to_core(core);
+            proc_core_lock(core);
         }
         entry_point(this);
     }
@@ -109,13 +86,13 @@ pid_t forkable::start(
  * Non-Member Functions
  ******************************************************************************/
 /**
- * proc_lock_to_core() - Lock a process to a core
+ * proc_core_lock() - Lock a process to a core
  *
  * RETURN:
  *     OK if successful, ERROR otherwise
  *
  **/
-status_t proc_lock_to_core(
+status_t proc_core_lock(
     int core)
 {
     cpu_set_t cpuset;
@@ -128,7 +105,44 @@ status_t proc_lock_to_core(
 
 error:
     return ERROR;
-} /* proc_lock_to_core() */
+} /* proc_core_lock() */
+
+/**
+ * proc_socket_lock() - Lock a process to a cpu socket.
+ *
+ * RETURN:
+ *     OK if successful, ERROR otherwise
+ *
+ **/
+status_t proc_socket_lock(
+                       int socket)
+
+{
+    cpu_set_t cpuset;
+    char buffer[50];
+    char* line;
+    int n_cpus,n_sockets,cores_per_socket;
+    CPU_ZERO(&cpuset);
+    FILE* f = popen("lscpu | grep Socket|awk '{print $2}'","r");
+    check_ptr(f);
+
+    line = fgets(buffer,sizeof(buffer),f);
+    check_ptr(line);
+    pclose(f);
+    n_cpus = std::thread::hardware_concurrency();
+    n_sockets = std::stoi(line);
+    cores_per_socket = n_cpus/n_sockets;
+
+    for (int i = socket*cores_per_socket; i < (socket+1)*cores_per_socket; ++i) {
+      CPU_SET(i,&cpuset);
+    } /* for(i..) */
+
+    check(0 == sched_setaffinity(0,sizeof(cpu_set_t),&cpuset));
+    return OK;
+
+error:
+    return ERROR;
+} /* proc_socket_lock() */
 
 /**
  * fork_exec() - Fork(), exec(), returning pid of child in parent
@@ -177,4 +191,4 @@ pid_t fork_exec(
     }
 } /* fork_exec() */
 
-#endif /*  _FORKABLE_CPP_  */
+#undef _FORKABLE_CPP_

@@ -1,8 +1,8 @@
 /*******************************************************************************
  * Name            : ipc.hpp
- * Project         : paradyn
- * Module          : paradyn
- * Description     : Interprocess communication definitions for paradyn
+ * Project         : rcppsw
+ * Module          : common
+ * Description     : Interprocess communication definitions
  * Creation Date   : Sat Jul 25 18:02:48 2015
  * Original Author : jharwell
  *
@@ -31,12 +31,6 @@
 #include "ptypes.h"
 
 /*******************************************************************************
- * SVN Version
- ******************************************************************************/
-static char __unused svnid_ipc_hpp_[] =
-  "$Id:$ SwRI";
-
-/*******************************************************************************
  * Namespace Definitions
  ******************************************************************************/
 namespace bip = boost::interprocess;
@@ -45,7 +39,7 @@ namespace bip = boost::interprocess;
  * Template Definitions
  ******************************************************************************/
 template <typename T>
-using ipc_allocator = bip::allocator<T, bip::managed_shared_memory::segment_manager>;
+using ipc_allocator =  bip::allocator<T, bip::managed_shared_memory::segment_manager>;
 
 template <typename T>
 using ipc_vector = std::vector<T,ipc_allocator<T> >;

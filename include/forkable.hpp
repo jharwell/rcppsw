@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Name            : forkable.hpp
- * Project         : paradyn
- * Module          : paradyn
+ * Project         : rcppsw
+ * Module          : utils
  * Description     : Common threading functionality
  * Creation Date   : Sat Jul 18 14:33:49 2015
  * Original Author : jharwell
@@ -20,19 +20,13 @@
 #include <sys/wait.h>
 
 /*******************************************************************************
- * SVN Version
- ******************************************************************************/
-static char __unused svnid_forkable_hpp_[] =
-  "$Id:$ SwRI";
-
-/*******************************************************************************
  * Structure Definitions
  ******************************************************************************/
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-namespace paradyn {
+namespace rcppsw {
     class forkable
     {
     public:
@@ -50,11 +44,7 @@ namespace paradyn {
             const std::string& new_wd,
             int core = -1);
 
-
-        virtual void term(void)
-            {
-                proc_run = false;
-            } /* phenf::term() */
+        virtual void term(void) { proc_run = false; }
         bool terminated(void) { return (false == proc_run); }
         virtual void proc_main(void) = 0;
 
@@ -78,7 +68,7 @@ pid_t fork_exec(
     const std::string& new_wd,
     bool stdout_sup,
     int * pipefd);
-status_t proc_lock_to_core(
+status_t proc_core_lock(
     int core);
 
 #endif /*  _FORKABLE_HPP_  */

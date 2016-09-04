@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Name            : er_frmwk_base.cpp
- * Project         : paradyn
+ * Project         : rcppsw
  * Module          : erf
  * Description     : Event Reporting Framework (ERF)
  * Creation Date   : Wed Jun 24 15:21:29 2015
@@ -8,7 +8,6 @@
  *
  ******************************************************************************/
 
-#ifndef _ER_FRMWK_BASE_CPP_
 #define _ER_FRMWK_BASE_CPP_
 
 /*******************************************************************************
@@ -66,7 +65,7 @@ er_frmwk::er_frmwk(
     if (boost::filesystem::exists(logfile_fname)) {
         boost::filesystem::remove(logfile_fname);
     }
-    _logfile.open(logfile_fname);
+    _logfile.open(logfile_fname.c_str());
 } /* er_frmwk::er_frmwk() */
 
 er_frmwk::~er_frmwk(void) {
@@ -140,19 +139,12 @@ status_t er_frmwk::recv(
  **/
 
 void er_frmwk::report_msg(
-    erf_msg& msg)
+    const erf_msg& msg)
 {
     er_frmwk_mod tmp(msg.id,"tmp");
     std::vector<er_frmwk_mod>::const_iterator iter = std::find(modules.begin(), modules.end(),tmp);
 
     if (iter != modules.end()) {
-        struct timespec curr_time;
-        clock_gettime(CLOCK_REALTIME,&curr_time);
-        std::string header;
-        sprintf((char*)header.c_str(),"[%s:%lu.%lu]:",
-                hostname, curr_time.tv_sec%1000,curr_time.tv_nsec%1000);
-
-        msg.str = header + msg.str;
         iter->logmsg(msg.str,msg.lvl,_logfile);
         iter->dbgmsg(msg.str,msg.lvl);
     }
@@ -258,4 +250,4 @@ void er_frmwk::thread_main(void)
     }
 } /* er_frmwk::thread_main() */
 
-#endif /*  _ER_FRMWK_CPP_  */
+#undef _ER_FRMWK_CPP

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Name            : er_frmwk.hpp
- * Project         : paradyn
+ * Project         : rcppsw
  * Module          : erf
  * Description     : Header file for Event Reporting Framework (ERF) base class
  * Creation Date   : Wed Jun 24 14:42:12 2015
@@ -97,7 +97,7 @@ namespace rcppsw {
         void dbglvl(
             const erf_lvl::value& lvl) { dbglvl_dflt = lvl; }
         void report_msg(
-            erf_msg& msg);
+            const erf_msg& msg);
 
     private:
 
@@ -122,41 +122,41 @@ namespace rcppsw {
  * Reporting events. This needs to be a macro, instead of a function call so
  * I can get the line # and function from the preprocessor/compiler.
  */
-#define report(lvl,msg, ...) {                                          \
+#define er_report(lvl,msg, ...) {                                          \
     char _str[1000];                                                    \
     sprintf(_str,"%s:%d:%s: " msg "\n",__FILE__,__LINE__,__FUNCTION__, ##__VA_ARGS__); \
     rcppsw::er_frmwk::erf_msg _msg(erf_id,lvl,std::string(_str));       \
     erf_handle.report_msg(_msg);                                        \
     }
+
 /*
  * Like report, but only reports errors and goes to the error/bailout section
  * of a function only if a condition is false.
  */
-#define check_report(cond,msg,...) {            \
+#define er_check(cond,msg,...) {            \
         if(!(cond)) {                                                   \
             report(erf_lvl::err,msg,##__VA_ARGS__); \
             goto error;                                                 \
         }                                                               \
     }
-#define sentinel(msg,...) {                     \
+#define er_sentinel(msg,...) {                     \
         report(erf_lvl::err,msg,##__VA_ARGS__);     \
         goto error;                             \
     }
 
-#define pdassert(cond,msg,...)  if(!(cond)) {                           \
+#define er_assert(cond,msg,...)  if(!(cond)) {                           \
         report(erf_lvl::err, msg, ##__VA_ARGS__);                       \
         assert(0);                                                      \
     }
 
 /*
- * OK to undefine, because if this file is include I want the C++ version, not
- * the C version
+ * OK to undefine, because if this file is included I want the C++ version, not
+ * the C version defined in rcsw.
  */
 #if defined(check_ptr)
 #undef check_ptr
 #endif
 #define check_ptr(ptr) if (nullptr == (ptr)) {  \
         report(erf_lvl::err, "ERROR: " #ptr " is NULL"); goto error;}   \
-
 
 #endif /*  _ER_FRMWK_HPP  */

@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Name            : shared_queue.hpp
- * Project         : paradyn
- * Module          : utils
+ * Project         : rcppsw
+ * Module          : ds
  * Description     : A simple multiple-producer, single-consumer queue with locking
  * Creation Date   : Thu Jun 25 17:18:36 2015
  * Original Author : jharwell

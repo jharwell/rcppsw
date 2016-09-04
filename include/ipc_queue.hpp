@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Name            : ipc_queue.hpp
- * Project         : paradyn
- * Module          : paradyn
+ * Project         : rcppsw
+ * Module          : ds
  * Description     : Interprocess synchronized queue
  * Creation Date   : Sun Jul 26 14:20:04 2015
  * Original Author : jharwell
@@ -17,12 +17,6 @@
 #include <boost/thread/thread_time.hpp>
 #include "ptypes.h"
 #include "ipc.hpp"
-
-/*******************************************************************************
- * SVN Version
- ******************************************************************************/
-static char __unused svnid_ipc_queue_hpp_[] =
-  "$Id:$ SwRI";
 
 /*******************************************************************************
  * Structure Definitions
@@ -106,9 +100,5 @@ public:
         } /* pop_timed_wait() */
     void clear(void) { sQueue.clear(); }
 };
-
-/*******************************************************************************
- * Operater Definitions
- ******************************************************************************/
 
 #endif /*  _IPC_QUEUE_HPP_  */
