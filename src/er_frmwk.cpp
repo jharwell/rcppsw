@@ -96,7 +96,8 @@ status_t er_frmwk::insmod(
     return OK;
 
 error:
-    report_internal(erf_lvl::err,"Failed to install module %s: module exists",mod_name.c_str());
+    report_internal(erf_lvl::err,"Failed to install module %s: module exists",
+                    mod_name.c_str());
     return ERROR;
 } /* insmod() */
 
