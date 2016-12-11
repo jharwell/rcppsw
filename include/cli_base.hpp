@@ -34,9 +34,9 @@ class cli_base {
   int parse(int argc,char **argv);
   virtual status_t validate(void) { return OK; }
   void print(void);
-  bpo::variables_map vm(void) { return vm_; }
-  bpo::options_description desc(void) { return desc_; }
-  std::string prog_name(void) { return prog_name_; }
+  const bpo::variables_map& vm(void) { return vm_; }
+  bpo::options_description* desc(void) { return &desc_; }
+  const std::string& prog_name(void) { return prog_name_; }
 
  private:
   bpo::variables_map vm_;
