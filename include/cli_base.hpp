@@ -27,7 +27,7 @@ namespace bpo = boost::program_options;
  ******************************************************************************/
 class cli_base {
  public:
-  cli_base(
+  explicit cli_base(
       const std::string& mnemonic = "");
   virtual ~cli_base() {}
 

@@ -55,7 +55,7 @@ namespace rcppsw {
 
         /* non-member functions */
         static void entry_point(
-            void* this_p) { forkable *pt = (forkable*)this_p; pt->proc_main(); }
+            void* this_p) { forkable *pt = static_cast<forkable*>(this_p); pt->proc_main(); }
         /* operators */
     };
 }

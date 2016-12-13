@@ -369,7 +369,7 @@ clean:
 veryclean: clean
 	@rm -rf $(ANALYSIS_ROOT) $(RELEASE_DIR)
 
-p# The Analyzers
+# The Analyzers
 analyze-c: analyze-cppcheck-c analyze-clang-syntax-c analyze-clang-static-c analyze-clang-tidy-c
 analyze-c++: analyze-cppcheck-c++ analyze-clang-syntax-c++ analyze-clang-static-c++ analyze-clang-tidy-c++
 analyze-cppcheck-c: | $(ANALYSIS_DIR)
@@ -379,7 +379,7 @@ analyze-clang-syntax-c: | $(ANALYSIS_DIR)
 analyze-clang-static-c: | $(ANALYSIS_DIR)
 	$(call analyze-clang-static-cmd,C)
 	@rm -rf *.plist
-p
+
 analyze-cppcheck-c++: | $(ANALYSIS_DIR)
 	$(call analyze-cppcheck-cmd,CXX)
 analyze-clang-syntax-c++: | $(ANALYSIS_DIR)

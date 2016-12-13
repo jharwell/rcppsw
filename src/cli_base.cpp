@@ -97,7 +97,7 @@ int cli_base::parse(
 void cli_base::print(void)
 {
   std::cout << prog_name_ << " invoked with: ";
-  for (bpo::variables_map::iterator it = vm_.begin(); it != vm_.end(); it++) {
+  for (bpo::variables_map::iterator it = vm_.begin(); it != vm_.end(); ++it) {
     std::cout << it->first;
     if (((boost::any)it->second.value()).empty()) {
       std::cout << "(empty)";
@@ -144,7 +144,7 @@ void cli_base::print(void)
         std::vector<std::string> vect = vm_[it->first].as<std::vector<std::string> >();
         uint i = 0;
         for (std::vector<std::string>::iterator oit=vect.begin();
-             oit != vect.end(); oit++, ++i) {
+             oit != vect.end(); ++oit, ++i) {
           std::cout << "\r> " << it->first << "[" << i << "]=" << (*oit) << std::endl;
         }
       } catch (const boost::bad_any_cast &) {

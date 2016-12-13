@@ -56,7 +56,7 @@ class threadable
   std::thread internal_thread;
 
   /* non-member functions */
-  static void entry_point(void* this_p) { threadable *pt = (threadable*)this_p; pt->thread_main(); }
+  static void entry_point(void* this_p) { threadable *pt = static_cast<threadable*>(this_p); pt->thread_main(); }
   /* operators */
 };
 
