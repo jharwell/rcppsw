@@ -31,9 +31,10 @@ BINDIR          = ./bin
 TESTDIR         = ./tests
 OBJDIR          = ./obj
 PREPROCDIR      = ./preproc
-ANALYSIS_DIR    = ./analysis/$(DATE1)
-SCANDIR         = $(ANALYSIS_DIR)/scan
-RELEASE_DIR      = ./release/$(DATE1)
+ANALYSIS_ROOT   = ./analysis
+ANALYSIS_DIR    = $(ANALYSIS_ROOT)/$(DATE1)
+SCANDIR         = $(ANALYSIS_ROOT)/scan
+RELEASE_DIR     = ./release/$(DATE1)
 LOGDIR          = ./logs
 
 ###############################################################################
@@ -95,7 +96,6 @@ OPT        = -O0
 ###############################################################################
 CDEBUG    = -DDBG_LVL_DYNAMIC=DBG_N
 
-CMODULE  ?= -DMODULE_NAME=$(shell echo $(notdir $(shell pwd)) | tr 'a-z' 'A-Z')
 CLIBS     = $(CCLIB_SELF) -lcommon.x86 -levtlog.x86 -lds.x86 -lutils.x86 $(CCLIBS)
 CLIBDIRS  = $(CCLIBDIRS) -L$(rcswroot)/lib/x86/linux
 
@@ -104,7 +104,7 @@ define CINCDIRS
 -Iinclude
 endef
 
-CFLAGS   = $(OPT) -g -D__linux__ -W -Wall -Wextra -std=gnu99 -fmessage-length=0 $(CINCDIRS) $(CDEBUG) $(CMODULE)
+CFLAGS   = $(OPT) -g -D__linux__ -W -Wall -Wextra -std=gnu99 -fmessage-length=0 $(CINCDIRS) $(CDEBUG)
 CC       = $(develcc)
 
 ###############################################################################
@@ -162,19 +162,17 @@ make-depend-cxx=$(CXX) -MM -MF $3 -MP -MT $2 $(CXXFLAGS) $1
 # lang-type must be either C or CXX, and there must be the following variables defined
 # elsewhere in the Makefile for the analyzer to give accurate results:
 # ANALYZE_SRC_[C,CXX],
-# [C,CXX]MODULE,
 # [C,CXX]INCDIRS,
 # [C,CXX]SYS_INCDIRS,
 # [C,CXX]DEBUG
 define analyze-cppcheck-cmd
-cppcheck --enable=all $($(addprefix ANALYZE_SRC_,$1)) $($(addprefix $1,MODULE)) \
+cppcheck --enable=all $($(addprefix ANALYZE_SRC_,$1)) \
 $($(addprefix $1,INCDIRS)) $($(addprefix $1,SYS_INCDIRS)) $($(addprefix $1,DEBUG)) \
 $(REDIRECT1) $(ANALYSIS_DIR)/cppcheck-analysis-$(DATE2).txt $(REDIRECT2)
 endef
 
 # clang-syntax: A VERY verbose set of compiler warnings (way more than
-# gcc/g++), which can be helpful at times. This command redirects all reported
-# warnings to a file rather than reporting them to stdout.
+# gcc/g++), which can be helpful at times.
 #
 # usage: $(call analyze-clang-syntax-cmd,lang-type)
 #
@@ -182,17 +180,17 @@ endef
 # elsewhere in the Makefile for the analyzer to give accurate results:
 # ANALYZE_SRC_[C,CXX],
 # [C,CXX]INCDIRS,
+# [C,CXX]FLAGS,
 # [C,CXX]SYS_INCDIRS,
 define analyze-clang-syntax-cmd
 clang -fsyntax-only -fcolor-diagnostics -Weverything -Wno-undef -Wno-pedantic\
 -Wno-padded -Wno-packed -Wno-gnu-zero-variadic-macro-arguments \
-$($(addprefix $1,INCDIRS)) $($(addprefix $1,SYS_INCDIRS)) \
+$($(addprefix $1,INCDIRS)) $($(addprefix $1,SYS_INCDIRS)) $($(addprefix $1,FLAGS)) \
 $($(addprefix ANALYZE_SRC_,$1)) $(REDIRECT1)  $(ANALYSIS_DIR)/clang-syntax-analysis-$(DATE2).txt $(REDIRECT2)
 endef
 
 # clang-check: A very good static analyzer for all types of
-# bugs/ambiguities. This command redirects all reported warnings to a file
-# rather than reporting them to stdout.
+# bugs/ambiguities.
 #
 # usage: $(call analyze-clang-check-cmd,lang-type)
 #
@@ -200,30 +198,30 @@ endef
 # elsewhere in the Makefile for the analyzer to give accurate results:
 # ANALYZE_SRC_[C,CXX],
 # [C,CXX]SYS_INCDIRS,
+# [C,CXX]FLAGS,
 # [C,CXX]INCDIRS
 define analyze-clang-static-cmd
-clang-check -analyze $($(addprefix ANALYZE_SRC_,$1)) -ast-dump -- $($(addprefix $1,INCDIRS)) \
+clang-check -analyze $($(addprefix ANALYZE_SRC_,$1)) -ast-dump -- $($(addprefix $1,INCDIRS)) $($(addprefix $1,FLAGS)) \
 $($(addprefix $1,SYS_INCDIRS)) -fcolor-diagnostics $(REDIRECT1) $(ANALYSIS_DIR)/clang-static-analysis-$(DATE2).txt $(REDIRECT2)
 endef
 
 # clang-tidy-check: Check your code for adherence to a given coding standard, flag
-# potential readability issues, etc. This command redirects all reported
-# issues to a file rather than reporting them to stdout.
+# potential readability issues, etc. You must have clang-tidy installed
 #
-# usage: $(call check-clang-tidy-cmd,lang-type)
+# usage: $(call analyze-clang-tidy-cmd,lang-type)
 #
 # lang-type must be either C or CXX, and there must be the following variables defined
 # elsewhere in the Makefile for the analyzer to give accurate results:
 # ANALYZE_SRC_[C,CXX],
 # [C,CXX]SYS_INCDIRS
 # [C,CXX]FLAGS
-define check-clang-tidy-cmd
+define analyze-clang-tidy-cmd
 clang-tidy -checks=\* $($(addprefix ANALYZE_SRC_,$1)) -- $($(addprefix $1, FLAGS)) \
 $($(addprefix $1,SYS_INCDIRS)) $(REDIRECT1) $(ANALYSIS_DIR)/clang-tidy-analysis-$(DATE2).txt $(REDIRECT2)
 endef
 
 # clang-tidy-fix: Same as clang-tidy-check, but automatically fix the issues
-# instead of reporting them.
+# instead of reporting them. You must have clang-tidy installed.
 #
 # usage: $(call fix-clang-tidy-cmd,lang-type)
 #
@@ -233,8 +231,23 @@ endef
 # [C,CXX]SYS_INCDIRS
 # [C,CXX]FLAGS
 define fix-clang-tidy-cmd
-clang-tidy -checks=\* $($(addprefix ANALYZE_SRC_,$1)) -- $($(addprefix $1,FLAGS)) \
-$($(addprefix $1,SYS_INCDIRS)) > /dev/null 2>&1
+clang-tidy -fix
+clang-tidy -fix -checks=cert\*,clang-analyzer*,cppcoreguidelnes\*,google\*,llvm\*,modernize\*,readability\*,-readability-else-after-return,modernize\* \
+$($(addprefix ANALYZE_SRC_,$1)) -- $($(addprefix $1,FLAGS)) \
+$($(addprefix $1,SYS_INCDIRS))
+endef
+
+# format-clang-cmd: Format the code according to user-specified rules in a
+# .clang-format file (must be in same directory as Makefile). This WILL modify
+# the source code. You must have clang-format installed.
+#
+# usage: $(call clang-format-cmd,lang-type)
+#
+# lang-type must be either C or CXX, and there must be the following variables defined
+# elsewhere in the Makefile for the analyzer to give accurate results:
+# ANALYZE_SRC_[C,CXX],
+define format-clang-cmd
+clang-format -i $($(addprefix ANALYZE_SRC_,$1))
 endef
 
 # Variable checking: Check to be sure the user defined a
@@ -256,7 +269,7 @@ ANALYZE_SRC_CXX ?= $(SRC_CXX)
 OBJECTS_C    = $(notdir $(patsubst %.c,%.o,$(SRC_C)))
 OBJECTS_CXX  = $(notdir $(patsubst %.cpp,%.o,$(SRC_CXX)))
 OBJECTS      = $(OBJECTS_C) $(OBJECTS_CXX)
-VPATH        = $(SRCDIR):$(TESTDIR)
+VPATH        = $(shell find $(SRCDIR) -type d):$(shell find $(TESTDIR) -type d)
 
 # The target library
 TARGET = $(LIBDIR)/lib$(notdir $(shell pwd)).x86.a
@@ -291,8 +304,9 @@ endef
 ###############################################################################
 .PHONY: analyze-c analyze-cppcheck-c analyze-clang-syntax-c analyze-clang-static-c
 .PHONY: analyze-c++ analyze-cppcheck-c++ analyze-clang-syntax-c++ analyze-clang-static-c++
-.PHONY: check-clang-tidy-c check-clang-tidy-c++
+.PHONY: analyze-clang-tidy-c analyze-clang-tidy-c++
 .PHONY: fix-clang-tidy-c fix-clang-tidy-c++
+.PHONY: format-clang-c format-clang-c++
 .PHONY: analyze-scan clean veryclean scan unit_tests rcopy release
 
 # The Target Library (default target)
@@ -353,9 +367,9 @@ clean:
 
 # The Super Cleaner
 veryclean: clean
-	@rm -rf $(ANALYSIS_DIR) $(RELASE_DIR)
+	@rm -rf $(ANALYSIS_ROOT) $(RELEASE_DIR)
 
-# The Analyzers
+p# The Analyzers
 analyze-c: analyze-cppcheck-c analyze-clang-syntax-c analyze-clang-static-c analyze-clang-tidy-c
 analyze-c++: analyze-cppcheck-c++ analyze-clang-syntax-c++ analyze-clang-static-c++ analyze-clang-tidy-c++
 analyze-cppcheck-c: | $(ANALYSIS_DIR)
@@ -363,9 +377,9 @@ analyze-cppcheck-c: | $(ANALYSIS_DIR)
 analyze-clang-syntax-c: | $(ANALYSIS_DIR)
 	$(call analyze-clang-syntax-cmd,C)
 analyze-clang-static-c: | $(ANALYSIS_DIR)
-	$(call analyze-clang-static,C)
+	$(call analyze-clang-static-cmd,C)
 	@rm -rf *.plist
-
+p
 analyze-cppcheck-c++: | $(ANALYSIS_DIR)
 	$(call analyze-cppcheck-cmd,CXX)
 analyze-clang-syntax-c++: | $(ANALYSIS_DIR)
@@ -380,13 +394,13 @@ analyze-clang-static-c++: | $(ANALYSIS_DIR)
 # use this target, you must run 'make clean' first, so scan-build can hook into
 # your build process.
 analyze-scan: | $(SCANDIR)
-	scan-build -V --use-cc=$(CC) --use-c++=$(CXX) -o $(SCANDIR) -analyze-headers -enable-checker core -enable-checker unix -enable-checker security -enable-checker llvm -enable-checker alpha -disable-checker alpha.core.CastToStruct $(MAKE)
+	scan-build -V --use-cc="$(CC)" --use-c++="$(CXX)" -o $(SCANDIR) -analyze-headers -enable-checker core -enable-checker unix -enable-checker security -enable-checker llvm -enable-checker alpha -disable-checker alpha.core.CastToStruct $(MAKE)
 
 # The Tidy Checkers
-check-clang-tidy-c: | $(ANALYSIS_DIR)
-	$(call check-clang-tidy-cmd,C)
-check-clang-tidy-c++: | $(ANALYSIS_DIR)
-	$(call check-clang-tidy-cmd,CXX)
+analyze-clang-tidy-c: | $(ANALYSIS_DIR)
+	$(call analyze-clang-tidy-cmd,C)
+analyze-clang-tidy-c++: | $(ANALYSIS_DIR)
+	$(call analyze-clang-tidy-cmd,CXX)
 
 # The Tidy Fixers
 fix-clang-tidy-c: | $(ANALYSIS_DIR)
@@ -394,6 +408,11 @@ fix-clang-tidy-c: | $(ANALYSIS_DIR)
 fix-clang-tidy-c++: | $(ANALYSIS_DIR)
 	$(call fix-clang-tidy-cmd,CXX)
 
+# The Formatters
+format-clang-c:
+	$(call format-clang-cmd,C)
+format-clang-c++:
+	$(call format-clang-cmd,C)
 ###############################################################################
 # Pattern Rules
 ###############################################################################
@@ -413,7 +432,7 @@ $(BINDIR)/%:: %.c
 
 # For compiling the C++ tests
 $(BINDIR)/%:: %.cpp
-	$(CXX) $(CXXFLAGS) $(CXXLIBDIRS) $(addprefix $(OBJDIR)/,$(TH_OBJECTS)) -o $@ $(CXXLIBS)
+	$(CXX) $(CXXFLAGS) $(CXXLIBDIRS) $(addprefix $(OBJDIR)/,$(TH_OBJECTS)) $< -o $@ $(CXXLIBS)
 
 # For getting preprocessor C/C++ output
 $(PREPROCDIR)/%.preproc: %.c
