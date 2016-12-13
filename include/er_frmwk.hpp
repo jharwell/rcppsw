@@ -20,7 +20,6 @@
 #include <mutex>
 
 #include "altypes.h"
-#include "dbg.h"
 #include "er_frmwk_mod.hpp"
 #include "shared_queue.hpp"
 #include "threadable.hpp"
@@ -39,6 +38,12 @@
     rcppsw::er_frmwk::erf_msg _msg(erf_id,lvl,std::string(_str));       \
     erf_handle.msg_report(_msg);                                        \
   }
+
+#define check(cond) {                \
+    if(!(cond)) {                               \
+      goto error;                               \
+    }                                           \
+ }
 
 /*
  * Like report, but only reports errors and goes to the error/bailout section
@@ -60,15 +65,7 @@
     assert(0);                                  \
   }
 
-/*
- * OK to undefine, because if this file is included I want the C++ version, not
- * the C version defined in rcsw.
- */
-#if defined(check_ptr)
-#undef check_ptr
-#endif
-#define check_ptr(ptr) if (nullptr == (ptr)) {                          \
-    report(erf_lvl::err, "ERROR: " #ptr " is NULL"); goto error;}       \
+#define check_ptr(ptr) if (nullptr == (ptr)) { goto error; }            \
 
 /*******************************************************************************
  * Namespaces

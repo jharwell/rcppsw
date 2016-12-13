@@ -8,8 +8,6 @@
  *
  ******************************************************************************/
 
-#define _ER_FRWK_MOD_CPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
@@ -39,8 +37,8 @@ er_frmwk_mod::er_frmwk_mod(
     const std::string& name_) :
     id(id_),
     name(name_),
-    loglvl((erf_lvl::value)0),
-    dbglvl((erf_lvl::value)0) {}
+    loglvl(static_cast<erf_lvl::value>(0)),
+    dbglvl(static_cast<erf_lvl::value>(0)) {}
 
 /*******************************************************************************
  * Member Functions
@@ -134,5 +132,3 @@ std::ostream& operator<<(
     os << mod.id << ": " << mod.name;
     return os;
 } /* operator<<() */
-
-#undef _ER_FRMWK_MOD_CPP_

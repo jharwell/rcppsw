@@ -18,6 +18,7 @@
 #include <vector>
 #include <unistd.h>
 #include <sys/wait.h>
+#include "altypes.h"
 
 /*******************************************************************************
  * Structure Definitions
@@ -33,10 +34,10 @@ namespace rcppsw {
         /* data members */
 
         /* member functions */
-        forkable(void) : proc_run(false),
-                         _pid(0) {}
+        forkable(void) : proc_run_(false),
+                         pid_(0) {}
         virtual ~forkable(void) {}
-        pid_t pid(void) { return _pid; };
+        pid_t pid(void) { return pid_; }
         virtual pid_t start(
             int core = -1);
 
@@ -44,14 +45,14 @@ namespace rcppsw {
             const std::string& new_wd,
             int core = -1);
 
-        virtual void term(void) { proc_run = false; }
-        bool terminated(void) { return (false == proc_run); }
+        virtual void term(void) { proc_run_ = false; }
+        bool terminated(void) { return (false == proc_run_); }
         virtual void proc_main(void) = 0;
 
     private:
         /* data members */
-        bool proc_run;
-        pid_t _pid;
+        bool proc_run_;
+        pid_t pid_;
 
         /* non-member functions */
         static void entry_point(
@@ -68,7 +69,7 @@ pid_t fork_exec(
     const std::string& new_wd,
     bool stdout_sup,
     int * pipefd);
-status_t proc_core_lock(
+status_t proc_socket_lock(
     int core);
 
-#endif /* FORKABLE_HPP_ */
+#endif /* FORKABLE_HPP */

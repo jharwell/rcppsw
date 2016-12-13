@@ -183,8 +183,8 @@ endef
 # [C,CXX]FLAGS,
 # [C,CXX]SYS_INCDIRS,
 define analyze-clang-syntax-cmd
-clang -fsyntax-only -fcolor-diagnostics -Weverything -Wno-undef -Wno-pedantic\
--Wno-padded -Wno-packed -Wno-gnu-zero-variadic-macro-arguments \
+clang -fsyntax-only -fcolor-diagnostics -Weverything -Wno-undef -Wno-pedantic -Wno-reserved-id-macro\
+-Wno-padded -Wno-packed -Wno-gnu-zero-variadic-macro-arguments -Wno-c++98-compat -Wno-c++98-compat-pedantic\
 $($(addprefix $1,INCDIRS)) $($(addprefix $1,SYS_INCDIRS)) $($(addprefix $1,FLAGS)) \
 $($(addprefix ANALYZE_SRC_,$1)) $(REDIRECT1)  $(ANALYSIS_DIR)/clang-syntax-analysis-$(DATE2).txt $(REDIRECT2)
 endef

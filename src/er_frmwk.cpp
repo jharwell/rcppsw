@@ -8,17 +8,12 @@
  *
  ******************************************************************************/
 
-#define _ER_FRMWK_BASE_CPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include "er_frmwk.hpp"
-
-#define BOOST_NO_CXX11_SCOPED_ENUMS
 #include <boost/filesystem.hpp>
 #include <algorithm>
-#include "utils.h"
 
 /*******************************************************************************
  * Namespaces
@@ -255,5 +250,3 @@ void er_frmwk::thread_main(void)
     msg_report(msg);
   }
 } /* er_frmwk::thread_main() */
-
-#undef _ER_FRMWK_CPP

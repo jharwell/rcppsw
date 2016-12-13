@@ -8,14 +8,11 @@
  *
  ******************************************************************************/
 
-#define _THREADABLE_CPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include "threadable.hpp"
-#include "utils.h"
-#include "dbg.h"
+#include "er_frmwk.hpp"
 
 /*******************************************************************************
  * Namespace Definitions
@@ -65,6 +62,3 @@ status_t threadable::thread_core_lock(
 error:
     return ERROR;
 } /* threadable::thread_core_lock() */
-
-
-#undef _THREADABLE_CPP_

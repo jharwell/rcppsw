@@ -8,15 +8,10 @@
  *
  ******************************************************************************/
 
-#define _FORKABLE_CPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "utils.h"
-#include "dbg.h"
 #include "forkable.hpp"
-
 #include <vector>
 #include <string>
 #include <stdlib.h>
@@ -26,6 +21,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include "er_frmwk.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -45,15 +41,15 @@ using namespace rcppsw;
 pid_t forkable::start(
     int core)
 {
-    proc_run = true;
-    _pid = fork();
-    if (_pid == 0) {
+    proc_run_ = true;
+    pid_ = fork();
+    if (pid_ == 0) {
         if (-1 != core) {
-            proc_core_lock(core);
+            proc_socket_lock(core);
         }
         entry_point(this);
     }
-    return _pid;
+    return pid_;
 } /* forkable::start() */
 
 /**
@@ -67,46 +63,24 @@ pid_t forkable::start(
     const std::string& new_wd,
     int core)
 {
-    proc_run = true;
-    _pid = fork();
-    if (_pid == 0) {
+    proc_run_ = true;
+    pid_ = fork();
+    if (pid_ == 0) {
         if (0 != chdir(new_wd.c_str())) {
 
             return -1;
         }
         if (-1 != core) {
-            proc_core_lock(core);
+            proc_socket_lock(core);
         }
         entry_point(this);
     }
-    return _pid;
+    return pid_;
 } /* forkable::start() */
 
 /*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
-/**
- * proc_core_lock() - Lock a process to a core
- *
- * RETURN:
- *     OK if successful, ERROR otherwise
- *
- **/
-status_t proc_core_lock(
-    int core)
-{
-    cpu_set_t cpuset;
-
-    CPU_ZERO(&cpuset);
-    CPU_SET(core,&cpuset);
-
-    check(0 == sched_setaffinity(0,sizeof(cpu_set_t),&cpuset));
-    return OK;
-
-error:
-    return ERROR;
-} /* proc_core_lock() */
-
 /**
  * proc_socket_lock() - Lock a process to a cpu socket.
  *
@@ -116,12 +90,12 @@ error:
  **/
 status_t proc_socket_lock(
                        int socket)
-
 {
     cpu_set_t cpuset;
     char buffer[50];
     char* line;
-    int n_cpus,n_sockets,cores_per_socket;
+    int n_sockets,cores_per_socket,n_cpus;
+
     CPU_ZERO(&cpuset);
     FILE* f = popen("lscpu | grep Socket|awk '{print $2}'","r");
     check_ptr(f);
@@ -129,7 +103,7 @@ status_t proc_socket_lock(
     line = fgets(buffer,sizeof(buffer),f);
     check_ptr(line);
     pclose(f);
-    n_cpus = std::thread::hardware_concurrency();
+    n_cpus = static_cast<int>(std::thread::hardware_concurrency());
     n_sockets = std::stoi(line);
     cores_per_socket = n_cpus/n_sockets;
 
@@ -190,5 +164,3 @@ pid_t fork_exec(
         return pid;
     }
 } /* fork_exec() */
-
-#undef _FORKABLE_CPP_

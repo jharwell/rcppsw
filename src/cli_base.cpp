@@ -8,8 +8,6 @@
  *
  ******************************************************************************/
 
-#define _CLI_BASE_CPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
@@ -37,7 +35,7 @@ cli_base::cli_base(
   struct tm* timeinfo = localtime(&rawtime);
   strftime(buffer,80,"%Y-%m-%d",timeinfo);
 
-  std::string output_dir_base_ = "outputs/" + mnemonic + "/" + std::string(buffer) + "/";
+  output_dir_base_ = "outputs/" + mnemonic + "/" + std::string(buffer) + "/";
   std::string logfile = output_dir_base_ + std::to_string(getpid()) + "-log";
   desc_.add_options()("help", "Produce this message");
 
@@ -99,7 +97,7 @@ void cli_base::print(void)
   std::cout << prog_name_ << " invoked with: ";
   for (bpo::variables_map::iterator it = vm_.begin(); it != vm_.end(); ++it) {
     std::cout << it->first;
-    if (((boost::any)it->second.value()).empty()) {
+    if ((static_cast<boost::any>(it->second.value())).empty()) {
       std::cout << "(empty)";
     }
     if (vm_[it->first].defaulted() || it->second.defaulted()) {
@@ -122,13 +120,13 @@ void cli_base::print(void)
       is_str = false;
     }
 
-    if (((boost::any)it->second.value()).type() == typeid(int)) {
+    if ((static_cast<boost::any>(it->second.value()).type()) == typeid(int)) {
       std::cout << vm_[it->first].as<int>() << " ";
-    } else if (((boost::any)it->second.value()).type() == typeid(bool)) {
+    } else if ((static_cast<boost::any>(it->second.value()).type()) == typeid(bool)) {
       std::cout << vm_[it->first].as<bool>() << " ";
-    } else if (((boost::any)it->second.value()).type() == typeid(double)) {
+    } else if ((static_cast<boost::any>(it->second.value()).type()) == typeid(double)) {
       std::cout << vm_[it->first].as<double>() << " ";
-    } else if (((boost::any)it->second.value()).type() == typeid(float)) {
+    } else if ((static_cast<boost::any>(it->second.value()).type()) == typeid(float)) {
       std::cout << vm_[it->first].as<float>() << " ";
     } else if (is_char) {
       std::cout << vm_[it->first].as<const char * >() << " ";
@@ -148,7 +146,7 @@ void cli_base::print(void)
           std::cout << "\r> " << it->first << "[" << i << "]=" << (*oit) << std::endl;
         }
       } catch (const boost::bad_any_cast &) {
-        std::cout << "UnknownType(" << ((boost::any)it->second.value()).type().name() << ")" << std::endl;
+        std::cout << "UnknownType(" << (static_cast<boost::any>(it->second.value()).type()).name() << ")" << std::endl;
       }
     }
   } /* for() */
