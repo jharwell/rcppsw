@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef _ER_FRMWK_MOD_HPP_
-#define _ER_FRMWK_MOD_HPP_
+#ifndef ER_FRMWK_MOD_HPP_
+#define ER_FRMWK_MOD_HPP_
 
 /*******************************************************************************
  * Includes
@@ -86,4 +86,4 @@ std::ostream& operator<<(
     std::ostream& os,
     const rcppsw::er_frmwk_mod& mod);
 
-#endif /*  _ER_FRMWK_MOD_HPP_  */
+#endif /* ER_FRMWK_MOD_HPP_ */

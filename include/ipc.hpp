@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef _IPC_HPP_
-#define _IPC_HPP_
+#ifndef IPC_HPP_
+#define IPC_HPP_
 
 /*******************************************************************************
  * Includes
@@ -55,4 +55,4 @@ using ipc_map = bip::map<key,value,std::less<key>,ipc_allocator<std::pair<const 
  ******************************************************************************/
 typedef bip::basic_string<char, std::char_traits<char>,ipc_allocator<char> > ipc_string;
 
-#endif /*  _IPC_HPP_  */
+#endif /* IPC_HPP_ */

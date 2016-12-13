@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef _THREADABLE_HPP_
-#define _THREADABLE_HPP_
+#ifndef THREADABLE_HPP_
+#define THREADABLE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -66,4 +66,4 @@ class threadable
  * Operater Definitions
  ******************************************************************************/
 
-#endif /*  _THREADABLE_HPP_  */
+#endif /* THREADABLE_HPP_ */

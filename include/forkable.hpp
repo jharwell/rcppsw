@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef _FORKABLE_HPP_
-#define _FORKABLE_HPP_
+#ifndef FORKABLE_HPP_
+#define FORKABLE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -71,4 +71,4 @@ pid_t fork_exec(
 status_t proc_core_lock(
     int core);
 
-#endif /*  _FORKABLE_HPP_  */
+#endif /* FORKABLE_HPP_ */

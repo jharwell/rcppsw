@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef _SHARED_QUEUE_HPP_
-#define _SHARED_QUEUE_HPP_
+#ifndef SHARED_QUEUE_HPP_
+#define SHARED_QUEUE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -76,4 +76,4 @@ public:
     } // Lock is automatically released here
 };
 
-#endif /*  _SHARED_QUEUE_HPP_  */
+#endif /* SHARED_QUEUE_HPP_ */

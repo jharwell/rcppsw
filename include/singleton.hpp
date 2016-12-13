@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef _SINGLETON_HPP_
-#define _SINGLETON_HPP_
+#ifndef SINGLETON_HPP_
+#define SINGLETON_HPP_
 
 /*******************************************************************************
  * Includes
@@ -45,4 +45,4 @@ class singleton
     singleton& operator=(singleton const&) = delete;
 };
 
-#endif /*  _SINGLETON_HPP_  */
+#endif /* SINGLETON_HPP_ */

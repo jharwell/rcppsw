@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef _ERF_CLIENT_HPP_
-#define _ERF_CLIENT_HPP_
+#ifndef ERF_CLIENT_HPP_
+#define ERF_CLIENT_HPP_
 
 /*******************************************************************************
  * Includes
@@ -57,4 +57,4 @@ namespace rcppsw {
  * Operater Definitions
  ******************************************************************************/
 
-#endif /*  _ERF_CLIENT_HPP_  */
+#endif /* ERF_CLIENT_HPP_ */

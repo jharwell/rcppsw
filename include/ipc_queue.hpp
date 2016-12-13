@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef _IPC_QUEUE_HPP_
-#define _IPC_QUEUE_HPP_
+#ifndef IPC_QUEUE_HPP_
+#define IPC_QUEUE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -101,4 +101,4 @@ public:
     void clear(void) { sQueue.clear(); }
 };
 
-#endif /*  _IPC_QUEUE_HPP_  */
+#endif /* IPC_QUEUE_HPP_ */

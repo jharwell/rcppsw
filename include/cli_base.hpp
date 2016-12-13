@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef _CLI_BASE_HPP_
-#define _CLI_BASE_HPP_
+#ifndef CLI_BASE_HPP_
+#define CLI_BASE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -45,4 +45,4 @@ class cli_base {
   std::string output_dir_base_;
 };
 
-#endif /*  _CLI_BASE_HPP_  */
+#endif /* CLI_BASE_HPP_ */

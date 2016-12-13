@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef _ER_FRMWK_HPP
-#define _ER_FRMWK_HPP
+#ifndef ER_FRMWK_HPP
+#define ER_FRMWK_HPP
 
 /*******************************************************************************
  * Includes
@@ -160,4 +160,4 @@ class er_frmwk : public threadable
 
 } /* namespace rcppsw */
 
-#endif /*  _ER_FRMWK_HPP  */
+#endif /* ER_FRMWK_HPP */
