@@ -30,42 +30,50 @@
 /*
  * Reporting events. This needs to be a macro, instead of a function call so
  * I can get the line # and function from the preprocessor/compiler.
+ *
+ * This macro requires that:
+ *
+ * (1) You have a variable called erf_handle defined in the current scope that
+ *     is of type rcppsw::er_rfmwk
+ * (2) You have a variable called erf_id defined in the current scope that is of
+ *     type boost::uuids::uuid for the module you want to report for.
+ *
  */
-#define er_report(lvl,msg, ...) {                                       \
+#define ER_REPORT(lvl,msg, ...) {                                       \
     char _str[1000];                                                    \
-    sprintf(_str,"%s:%d:%s: " msg "\n",__FILE__,__LINE__,__FUNCTION__, \
+    sprintf(_str,"%s:%d:%s: " msg "\n",__FILE__,__LINE__,__FUNCTION__,  \
             ##__VA_ARGS__);                                             \
-    rcppsw::er_frmwk::erf_msg _msg(erf_id,lvl,std::string(_str));       \
-    erf_handle.msg_report(_msg);                                        \
+    erf_handle.report(erf_id,lvl,std::string(_str));                    \
   }
 
-#define check(cond) {                \
-    if(!(cond)) {                               \
-      goto error;                               \
-    }                                           \
- }
 
 /*
  * Like report, but only reports errors and goes to the error/bailout section
  * of a function only if a condition is false.
  */
-#define er_check(cond,msg,...) {                \
+#define ER_CHECK(cond,msg,...) {                \
     if(!(cond)) {                               \
-      report(erf_lvl::err,msg,##__VA_ARGS__);   \
+      REPORT(erf_lvl::err,msg,##__VA_ARGS__);   \
       goto error;                               \
     }                                           \
   }
-#define er_sentinel(msg,...) {                  \
-    report(erf_lvl::err,msg,##__VA_ARGS__);     \
+#define ER_SENTINEL(msg,...) {                  \
+    REPORT(erf_lvl::err,msg,##__VA_ARGS__);     \
     goto error;                                 \
   }
 
-#define er_assert(cond,msg,...)  if(!(cond)) {  \
-    report(erf_lvl::err, msg, ##__VA_ARGS__);   \
+#define ER_ASSERT(cond,msg,...)  if(!(cond)) {  \
+    ER_REPORT(erf_lvl::err, msg, ##__VA_ARGS__);   \
     assert(0);                                  \
   }
 
-#define check_ptr(ptr) if (nullptr == (ptr)) { goto error; }            \
+#define CHECK(cond) {                           \
+    if(!(cond)) {                               \
+      goto error;                               \
+    }                                           \
+  }
+
+#define CHECK_PTR(ptr) if (nullptr == (ptr)) { goto error; }
 
 /*******************************************************************************
  * Namespaces
@@ -138,6 +146,14 @@ class er_frmwk : public threadable
   void msg_report(
       const erf_msg& msg);
   char* hostname(void) { return hostname_; }
+
+  void report(
+      const boost::uuids::uuid& erf_id,
+      const erf_lvl::value& lvl,
+      const std::string& str) {
+    erf_msg msg(erf_id,lvl,str);
+    msg_report(msg);
+  }
 
  private:
 

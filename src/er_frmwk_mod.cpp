@@ -99,7 +99,7 @@ void er_frmwk_mod::logmsg(
     const erf_lvl::value& lvl,
     std::ofstream& file) const
 {
-    if (lvl >= loglvl) {
+    if (lvl <= loglvl) {
         file << msg;
         file.flush();
     }

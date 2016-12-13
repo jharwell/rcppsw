@@ -98,10 +98,10 @@ status_t proc_socket_lock(
 
     CPU_ZERO(&cpuset);
     FILE* f = popen("lscpu | grep Socket|awk '{print $2}'","r");
-    check_ptr(f);
+    CHECK_PTR(f);
 
     line = fgets(buffer,sizeof(buffer),f);
-    check_ptr(line);
+    CHECK_PTR(line);
     pclose(f);
     n_cpus = static_cast<int>(std::thread::hardware_concurrency());
     n_sockets = std::stoi(line);
@@ -111,7 +111,7 @@ status_t proc_socket_lock(
       CPU_SET(i,&cpuset);
     } /* for(i..) */
 
-    check(0 == sched_setaffinity(0,sizeof(cpu_set_t),&cpuset));
+    CHECK(0 == sched_setaffinity(0,sizeof(cpu_set_t),&cpuset));
     return OK;
 
 error:

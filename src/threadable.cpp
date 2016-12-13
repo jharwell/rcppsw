@@ -56,7 +56,7 @@ status_t threadable::thread_core_lock(
 
     CPU_ZERO(&cpuset);
     CPU_SET(core,&cpuset);
-    check(0 == pthread_setaffinity_np(thread,sizeof(cpu_set_t),&cpuset));
+    CHECK(0 == pthread_setaffinity_np(thread,sizeof(cpu_set_t),&cpuset));
     return OK;
 
 error:

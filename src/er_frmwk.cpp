@@ -28,7 +28,7 @@ using namespace rcppsw;
  * I can get the line # and function from the preprocessor/compiler. For
  * internal use inside ERF only.
  */
-#define report_internal(lvl,msg, ...) {                         \
+#define REPORT_INTERNAL(lvl,msg, ...) {                         \
     char _str[6000];                                            \
     struct timespec _curr_time;                                 \
     clock_gettime(CLOCK_REALTIME,&_curr_time);                  \
@@ -87,12 +87,12 @@ status_t er_frmwk::insmod(
   er_frmwk_mod mod(mod_id,loglvl,dbglvl,mod_name);
 
   /* make sure module not already present */
-  check(modules_.end() == std::find(modules_.begin(), modules_.end(),mod));
+  CHECK(modules_.end() == std::find(modules_.begin(), modules_.end(),mod));
   modules_.push_back(mod);
   return OK;
 
 error:
-  report_internal(erf_lvl::err,"Failed to install module %s: module exists",
+  REPORT_INTERNAL(erf_lvl::err,"Failed to install module %s: module exists",
                   mod_name.c_str());
   return ERROR;
 } /* insmod() */
@@ -183,15 +183,15 @@ status_t er_frmwk::mod_dbglvl(
   std::vector<er_frmwk_mod>::iterator iter = std::find(modules_.begin(),
                                                        modules_.end(),
                                                        mod);
-  check(iter != modules_.end());
+  CHECK(iter != modules_.end());
   iter->set_dbglvl(lvl);
 
-  report_internal(erf_lvl::ver,"Successfully updated dbglvl for module %s",
+  REPORT_INTERNAL(erf_lvl::ver,"Successfully updated dbglvl for module %s",
                   iter->name.c_str());
   return OK;
 
 error:
-  report_internal(erf_lvl::err,
+  REPORT_INTERNAL(erf_lvl::err,
                   "Failed to update dbglvl for module %s: no such module",
                   iter->name.c_str());
   return ERROR;
@@ -213,15 +213,15 @@ status_t er_frmwk::mod_loglvl(
   /* make sure module is already present */
   std::vector<er_frmwk_mod>::iterator iter = std::find(modules_.begin(),
                                                        modules_.end(),mod);
-  check(iter != modules_.end());
+  CHECK(iter != modules_.end());
   iter->set_loglvl(lvl);
 
-  report_internal(erf_lvl::ver,"Successfully updated loglvl for module %s",
+  REPORT_INTERNAL(erf_lvl::ver,"Successfully updated loglvl for module %s",
                   iter->name.c_str());
   return OK;
 
 error:
-  report_internal(erf_lvl::err,
+  REPORT_INTERNAL(erf_lvl::err,
                   "Failed to update loglvl for module %s: no such module",
                   iter->name.c_str());
   return ERROR;
@@ -236,13 +236,13 @@ error:
  **/
 void er_frmwk::thread_main(void)
 {
-  report_internal(erf_lvl::nom,"Start");
+  REPORT_INTERNAL(erf_lvl::nom,"Start");
   while (!terminated()) {
     while (0 == queue_.size()) sleep(1);
     erf_msg msg = queue_.dq();
     msg_report(msg);
   } /* while() */
-  report_internal(erf_lvl::nom,"Exit");
+  REPORT_INTERNAL(erf_lvl::nom,"Exit");
 
   /* make sure all events remaining in queue are reported */
   while (queue_.size()) {
