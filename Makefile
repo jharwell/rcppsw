@@ -327,8 +327,7 @@ $(addprefix $(OBJDIR)/, $(OBJECTS) $(TH_OBJECTS)): | $(OBJDIR)
 
 # Unless invoked with make clean, include generated dependencies
 ifneq "$MAKECMDGOALS" "clean"
--include $(addprefix $(OBJDIR)/,$(OBJECTS_C:.o=.d))
--include $(addprefix $(OBJDIR)/,$(OBJECTS_CXX:.o=.d))
+-include $(OBJDIR)/*.d
 endif
 
 # Bootstrap Bill
@@ -432,6 +431,7 @@ $(BINDIR)/%:: %.c
 
 # For compiling the C++ tests
 $(BINDIR)/%:: %.cpp
+	@$(call make-depend-cxx,$<,$@,$(OBJDIR)/$*.d)
 	$(CXX) $(CXXFLAGS) $(CXXLIBDIRS) $(addprefix $(OBJDIR)/,$(TH_OBJECTS)) $< -o $@ $(CXXLIBS)
 
 # For getting preprocessor C/C++ output

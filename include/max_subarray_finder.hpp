@@ -3,8 +3,8 @@
  * Project         : rcppsw
  * Module          : algorithm
  * Description     : Find the maximal subarray of an array
- * Creation Date   : Thu Jan 26 17:37:56 2017
- * Original Author : jharwell
+ * Creation Date   : 1/26/17
+ * Copyright       : Copyright 2017 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
@@ -15,8 +15,8 @@
  * Includes
  ******************************************************************************/
 #include <algorithm>
-#include <vector>
-#include <limits>
+#include "include/common/fpc.h"
+#include "include/al/altypes.h"
 
 /*******************************************************************************
  * Namespaces
@@ -38,16 +38,18 @@ template<typename T> class max_subarray_finder {
       arr_(arr) {}
 
   /* member functions */
-  std::vector<int> find(void) {
-    T max_sum = std::numeric_limits<T>::min();
-    T current_sum = std::numeric_limits<T>::min();
+  status_t find(std::vector<int>* const res) {
+    FPC_CHECK(ERROR, arr_.size() > 0);
+    T max_sum = arr_[0];
+    T current_sum = arr_[0];
     int start_index = 0;
     int end_index = 0;
+
+    /* Kadane's algorithm - O(n) */
     for (int i = 0; i < arr_.size(); ++i) {
           current_sum += arr_[i];
           if (current_sum > max_sum) {
             max_sum = current_sum;
-            start_index = end_index;
             end_index = i;
           } else if (current_sum < 0) {
             start_index = i + 1;
@@ -55,7 +57,10 @@ template<typename T> class max_subarray_finder {
           }
     } /* for(i..) */
 
-    return {max_sum, start_index, end_index};
+    res->push_back(max_sum);
+    res->push_back(start_index);
+    res->push_back(end_index);
+    return OK;
   } /* find() */
 
  private:
