@@ -2,9 +2,10 @@
  * Name            : shared_queue.hpp
  * Project         : rcppsw
  * Module          : ds
- * Description     : A simple multiple-producer, single-consumer queue with locking
- * Creation Date   : Thu Jun 25 17:18:36 2015
- * Original Author : jharwell
+ * Description     : A simple multiple-producer, single-consumer queue with
+ *                   locking
+ * Creation Date   : 06/25/15
+ * Copyright       : Copyright 2015 John Harwell, All rights reserved
  *
  ******************************************************************************/
 

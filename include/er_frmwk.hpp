@@ -3,22 +3,22 @@
  * Project         : rcppsw
  * Module          : erf
  * Description     : Header file for Event Reporting Framework (ERF) base class
- * Creation Date   : Wed Jun 24 14:42:12 2015
- * Original Author : jharwell
+ * Creation Date   : 06/24/15
+ * Copyright       : Copyright 2015 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
-#ifndef ER_FRMWK_HPP
-#define ER_FRMWK_HPP
+#ifndef INCLUDE_ER_FRMWK_HPP_
+#define INCLUDE_ER_FRMWK_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <vector>
+#include <string>
 #include <fstream>
 #include <thread>
 #include <mutex>
-
 #include "include/al/altypes.h"
 #include "include/er_frmwk_mod.hpp"
 #include "include/shared_queue.hpp"
@@ -39,11 +39,11 @@
  *     type boost::uuids::uuid for the module you want to report for.
  *
  */
-#define ER_REPORT(lvl,msg, ...) {                                       \
+#define ER_REPORT(lvl, msg, ...) {                                      \
     char _str[1000];                                                    \
-    sprintf(_str,"%s:%d:%s: " msg "\n",__FILE__,__LINE__,__FUNCTION__,  \
-            ##__VA_ARGS__);                                             \
-    erf_handle.report(erf_id,lvl,std::string(_str));                    \
+    snprintf(_str, sizeof(_str), "%s:%d:%s: " msg "\n", __FILE__, __LINE__, \
+             __FUNCTION__, ##__VA_ARGS__);                               \
+    erf_handle.report(erf_id, lvl, std::string(_str));                  \
   }
 
 
@@ -51,24 +51,24 @@
  * Like report, but only reports errors and goes to the error/bailout section
  * of a function only if a condition is false.
  */
-#define ER_CHECK(cond,msg,...) {                \
+#define ER_CHECK(cond, msg, ...) {               \
     if(!(cond)) {                               \
-      REPORT(erf_lvl::err,msg,##__VA_ARGS__);   \
+      REPORT(erf_lvl::err, msg, ##__VA_ARGS__); \
       goto error;                               \
     }                                           \
   }
-#define ER_SENTINEL(msg,...) {                  \
-    REPORT(erf_lvl::err,msg,##__VA_ARGS__);     \
+#define ER_SENTINEL(msg, ...) {                  \
+    REPORT(erf_lvl::err, msg, ##__VA_ARGS__);   \
     goto error;                                 \
   }
 
-#define ER_ASSERT(cond,msg,...)  if(!(cond)) {          \
+#define ER_ASSERT(cond, msg, ...)  if (!(cond)) {         \
     ER_REPORT(erf_lvl::err, msg, ##__VA_ARGS__);        \
     assert(0);                                          \
   }
 
 #define CHECK(cond) {                           \
-    if(!(cond)) {                               \
+    if (!(cond)) {                              \
       goto error;                               \
     }                                           \
   }
@@ -86,7 +86,6 @@ namespace rcppsw {
 class er_frmwk : public threadable
 {
  public:
-
   struct erf_msg {
     explicit erf_msg(
         const boost::uuids::uuid& id,
@@ -102,17 +101,17 @@ class er_frmwk : public threadable
 
   /* constructors */
   er_frmwk(
-      const std::string& logfile_fname_="logfile",
-      const erf_lvl::value& dbglvl_= erf_lvl::nom,
-      const erf_lvl::value& loglvl_= erf_lvl::nom);
+      const std::string& logfile_fname_ = "logfile",
+      const erf_lvl::value& dbglvl_ = erf_lvl::nom,
+      const erf_lvl::value& loglvl_ = erf_lvl::nom);
 
   /* destructor */
   ~er_frmwk(void);
 
   /* member functions */
   void self_dbg_en(void) {
-    insmod(erf_id_,"ERF");
-    mod_dbglvl(erf_id_,erf_lvl::nom);
+    insmod(erf_id_, "ERF");
+    mod_dbglvl(erf_id_, erf_lvl::nom);
   }
   status_t insmod(
       const boost::uuids::uuid& mod_id,
@@ -151,7 +150,7 @@ class er_frmwk : public threadable
       const boost::uuids::uuid& erf_id,
       const erf_lvl::value& lvl,
       const std::string& str) {
-    erf_msg msg(erf_id,lvl,str);
+    erf_msg msg(erf_id, lvl, str);
     msg_report(msg);
   }
 
@@ -170,4 +169,4 @@ class er_frmwk : public threadable
 
 } /* namespace rcppsw */
 
-#endif /* ER_FRMWK_HPP */
+#endif /* INCLUDE_ER_FRMWK_HPP_ */

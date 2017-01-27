@@ -3,13 +3,13 @@
  * Project         : rcppsw
  * Module          : rcppsw
  * Description     : Interface for classes that want to be able to use the ERF
- * Creation Date   : Sat Apr  9 19:13:05 2016
- * Original Author : jharwell
- *
+ * Creation Date   : Sat 04/9/16
+ * Copyright       : Copyright 2016 John Harwell, All rights reserved
+  *
  ******************************************************************************/
 
-#ifndef ERF_CLIENT_HPP_
-#define ERF_CLIENT_HPP_
+#ifndef INCLUDE_ERF_CLIENT_HPP_
+#define INCLUDE_ERF_CLIENT_HPP_
 
 /*******************************************************************************
  * Includes
@@ -47,4 +47,4 @@ class erf_client
  * Operater Definitions
  ******************************************************************************/
 
-#endif /* ERF_CLIENT_HPP_ */
+#endif /* INCLUDE_ERF_CLIENT_HPP_ */

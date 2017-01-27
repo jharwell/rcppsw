@@ -1,10 +1,10 @@
 /*******************************************************************************
  * Name            : forkable.cpp
  * Project         : rcppsw
- * Module          : utils
+ * Module          : multithread
  * Description     : Common fork()/exec() wrappers
- * Creation Date   : Sun Aug 16 10:30:07 2015
- * Original Author : jharwell
+ * Creation Date   : 08/16/15
+ * Copyright       : Copyright 2015 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
@@ -67,7 +67,6 @@ pid_t forkable::start(
     pid_ = fork();
     if (pid_ == 0) {
         if (0 != chdir(new_wd.c_str())) {
-
             return -1;
         }
         if (-1 != core) {
@@ -94,13 +93,13 @@ status_t proc_socket_lock(
     cpu_set_t cpuset;
     char buffer[50];
     char* line;
-    int n_sockets,cores_per_socket,n_cpus;
+    int n_sockets, cores_per_socket, n_cpus;
 
     CPU_ZERO(&cpuset);
-    FILE* f = popen("lscpu | grep Socket|awk '{print $2}'","r");
+    FILE* f = popen("lscpu | grep Socket|awk '{print $2}'", "r");
     CHECK_PTR(f);
 
-    line = fgets(buffer,sizeof(buffer),f);
+    line = fgets(buffer, sizeof(buffer), f);
     CHECK_PTR(line);
     pclose(f);
     n_cpus = static_cast<int>(std::thread::hardware_concurrency());
@@ -108,10 +107,10 @@ status_t proc_socket_lock(
     cores_per_socket = n_cpus/n_sockets;
 
     for (int i = socket*cores_per_socket; i < (socket+1)*cores_per_socket; ++i) {
-      CPU_SET(i,&cpuset);
+      CPU_SET(i, &cpuset);
     } /* for(i..) */
 
-    CHECK(0 == sched_setaffinity(0,sizeof(cpu_set_t),&cpuset));
+    CHECK(0 == sched_setaffinity(0, sizeof(cpu_set_t), &cpuset));
     return OK;
 
 error:
@@ -142,22 +141,22 @@ pid_t fork_exec(
 
         /* suppress stdout */
         if (stdout_sup) {
-            int fd = open("/dev/null",O_WRONLY);
-            dup2(fd,1);
+            int fd = open("/dev/null", O_WRONLY);
+            dup2(fd, 1);
         }
 
         /* the child will read data on stdin from the parent */
         if (NULL != pipefd) {
-            dup2(pipefd[0],STDIN_FILENO);
+            dup2(pipefd[0], STDIN_FILENO);
         }
         char *argv[cmd.size() + 1];
-        memset(argv,0,sizeof(argv));
+        memset(argv, 0, sizeof(argv));
         unsigned i;
         for (i = 0; i < cmd.size(); ++i) {
             argv[i] = const_cast<char*>(cmd[i].c_str());
         } /* for() */
         argv[i] = NULL;
-        execv(argv[0],argv);
+        execv(argv[0], argv);
         perror(NULL);
         assert(0); /* execv() should never return */
     } else {

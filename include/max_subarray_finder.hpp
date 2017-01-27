@@ -3,7 +3,7 @@
  * Project         : rcppsw
  * Module          : algorithm
  * Description     : Find the maximal subarray of an array
- * Creation Date   : 1/26/17
+ * Creation Date   : 01/26/17
  * Copyright       : Copyright 2017 John Harwell, All rights reserved
  *
  ******************************************************************************/
@@ -15,6 +15,7 @@
  * Includes
  ******************************************************************************/
 #include <algorithm>
+#include <vector>
 #include "include/common/fpc.h"
 #include "include/al/altypes.h"
 
@@ -64,8 +65,6 @@ template<typename T> class max_subarray_finder {
   } /* find() */
 
  private:
-  /* member functions */
-
   /* data members */
   const std::vector<T> &arr_;
 };

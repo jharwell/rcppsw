@@ -3,21 +3,22 @@
  * Project         : rcppsw
  * Module          : utils
  * Description     : Common threading functionality
- * Creation Date   : Sat Jul 18 14:33:49 2015
- * Original Author : jharwell
+ * Creation Date   : 07/18/15
+ * Copyright       : Copyright 2015 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
-#ifndef FORKABLE_HPP_
-#define FORKABLE_HPP_
+#ifndef INCLUDE_FORKABLE_HPP_
+#define INCLUDE_FORKABLE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <thread>
-#include <vector>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <thread>
+#include <string>
+#include <vector>
 #include "include/al/altypes.h"
 
 /*******************************************************************************
@@ -54,7 +55,9 @@ class forkable
 
   /* non-member functions */
   static void entry_point(
-      void* this_p) { forkable *pt = static_cast<forkable*>(this_p); pt->proc_main(); }
+      void* this_p) { forkable *pt = static_cast<forkable*>(this_p);
+    pt->proc_main();
+  } /* entry_point() */
 };
 
 } /* namespace rcppsw */
@@ -70,4 +73,4 @@ pid_t fork_exec(
 status_t proc_socket_lock(
     int core);
 
-#endif /* FORKABLE_HPP */
+#endif /* INCLUDE_FORKABLE_HPP_ */

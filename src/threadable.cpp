@@ -1,10 +1,10 @@
 /*******************************************************************************
  * Name            : threadable.cpp
  * Project         : rcppsw
- * Module          : utils
+ * Module          : multithread
  * Description     : Threadable base class
- * Creation Date   : Mon Nov 16 16:04:20 2015
- * Original Author : jharwell
+ * Creation Date   : 11/16/15
+ * Copyright       : Copyright 2015 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
@@ -35,9 +35,9 @@ void threadable::start(
     /* start main thread */
     thread_run = true;
 
-    internal_thread = std::thread(&threadable::entry_point,this);
+    internal_thread = std::thread(&threadable::entry_point, this);
     if (-1 != core) {
-        thread_core_lock(internal_thread.native_handle(),core);
+        thread_core_lock(internal_thread.native_handle(), core);
     }
 } /* threadable::start() */
 
@@ -55,8 +55,8 @@ status_t threadable::thread_core_lock(
     cpu_set_t cpuset;
 
     CPU_ZERO(&cpuset);
-    CPU_SET(core,&cpuset);
-    CHECK(0 == pthread_setaffinity_np(thread,sizeof(cpu_set_t),&cpuset));
+    CPU_SET(core, &cpuset);
+    CHECK(0 == pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset));
     return OK;
 
 error:

@@ -3,17 +3,18 @@
  * Project         : rcppsw
  * Module          : cli
  * Description     : Header file for abstract class CLI.
- * Creation Date   : Fri Jun 19 16:10:50 2015
- * Original Author : jharwell
+ * Creation Date   : 06/19/16
+ * Copyright       : Copyright 2016 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
-#ifndef CLI_BASE_HPP_
-#define CLI_BASE_HPP_
+#ifndef INCLUDE_CLI_BASE_HPP_
+#define INCLUDE_CLI_BASE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
 #include <boost/program_options.hpp>
 #include "include/al/altypes.h"
 
@@ -32,7 +33,7 @@ class cli_base {
       const std::string& mnemonic = "");
   virtual ~cli_base() {}
 
-  int parse(int argc,char **argv);
+  int parse(int argc, char **argv);
   virtual status_t validate(void) { return OK; }
   void print(void);
   const bpo::variables_map& vm(void) { return vm_; }
@@ -48,4 +49,4 @@ class cli_base {
 
 } /* namespace rcppsw */
 
-#endif /* CLI_BASE_HPP_ */
+#endif /* INCLUDE_CLI_BASE_HPP_ */

@@ -3,8 +3,8 @@
  * Project         : rcppsw
  * Module          : ds
  * Description     : Interprocess synchronized queue
- * Creation Date   : Sun Jul 26 14:20:04 2015
- * Original Author : jharwell
+ * Creation Date   : 07/26/15
+ * Copyright       : Copyright 2015 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
@@ -14,6 +14,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <memory>
+#include <deque>
 #include <boost/thread/thread_time.hpp>
 #include "include/ipc.hpp"
 
@@ -25,81 +27,81 @@
  * Class Definitions
  ******************************************************************************/
 template <class T> class ipc_queue {
-
-public:
-    typedef bip::allocator<T, bip::managed_shared_memory::segment_manager> allocator_type;
+ public:
+  typedef bip::allocator<T, bip::managed_shared_memory::segment_manager> allocator_type;
 
  private:
-    bip::deque<T, allocator_type> sQueue;
-    mutable bip::interprocess_mutex io_mutex_;
-    mutable bip::interprocess_condition waitCondition;
+  bip::deque<T, allocator_type> queue_;
+  mutable bip::interprocess_mutex io_mutex_;
+  mutable bip::interprocess_condition wait_condition;
 
  public:
-    ipc_queue(allocator_type alloc) :
-        sQueue(alloc),
-        io_mutex_(),
-        waitCondition()
-        {}
+  explicit ipc_queue(allocator_type alloc) :
+      queue_(alloc),
+      io_mutex_(),
+      wait_condition()
+  {}
 
-    void push(T element) {
-        bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
-        sQueue.push_back(element);
-        waitCondition.notify_one();
+  void push(T element) {
+    bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
+    queue_.push_back(element);
+    wait_condition.notify_one();
+  }
+  bool empty() const {
+    bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
+    return queue_.empty();
+  }
+  T pop(void) {
+    bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
+
+    T element = queue_.front();
+    queue_.pop_front();
+
+    return element;
+  }
+  bool pop(T *const element) {
+    bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
+
+    if (queue_.empty()) {
+      return false;
     }
-    bool empty() const {
-        bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
-        return sQueue.empty();
+
+    *element = queue_.front();
+    queue_.pop_front();
+
+    return true;
+  }
+  unsigned int size() const {
+    // try to lock the mutex
+    bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
+    return queue_.size();
+  }
+  void pop_wait(T *const element) {
+    bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
+
+    while (queue_.empty()) {
+      wait_condition.wait(lock);
     }
-    T pop(void) {
-        bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
 
-        T element = sQueue.front();
-        sQueue.pop_front();
-
-        return element;
+    *element = queue_.front();
+    queue_.pop_front();
+  }
+  bool pop_timed_wait(
+      T &element,
+      int to_sec)
+  {
+    bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
+    boost::system_time to = boost::get_system_time() +
+                            boost::posix_time::seconds(to_sec);
+    wait_condition.timed_wait(lock, to);
+    if (queue_.empty()) {
+      return false;
     }
-    bool pop(T &element) {
-        bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
-
-        if (sQueue.empty()) {
-            return false;
-        }
-
-        element = sQueue.front();
-        sQueue.pop_front();
-
-        return true;
-    }
-    unsigned int size() const {
-        // try to lock the mutex
-        bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
-        return sQueue.size();
-    }
-    void pop_wait(T &element) {
-        bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
-
-        while (sQueue.empty()) {
-            waitCondition.wait(lock);
-        }
-
-        element = sQueue.front();
-        sQueue.pop_front();
-    }
-    bool pop_timed_wait(
-        T &element,
-        int to_sec)
-        {
-            bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
-            boost::system_time to = boost::get_system_time() + boost::posix_time::seconds(to_sec);
-            waitCondition.timed_wait(lock,to);
-            if (sQueue.empty()) {
-                return false;
-            }
-            element = sQueue.front();
-            sQueue.pop_front();
-            return true;
-        } /* pop_timed_wait() */
-    void clear(void) { sQueue.clear(); }
+    element = queue_.front();
+    queue_.pop_front();
+    return true;
+  } /* pop_timed_wait() */
+  void clear(void) { queue_.clear(); }
 };
 
 #endif /* INCLUDE_IPC_QUEUE_HPP_ */

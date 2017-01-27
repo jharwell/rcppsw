@@ -3,8 +3,8 @@
  * Project         : rcppsw
  * Module          : erf
  * Description     : ERF module class
- * Creation Date   : Wed Jun 24 14:28:05 2015
- * Original Author : jharwell
+ * Creation Date   : 06/24/15
+ * Copyright       : Copyright 2015 John Harwell, All rights reserved
  *
  ******************************************************************************/
 

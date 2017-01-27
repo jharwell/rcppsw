@@ -3,13 +3,13 @@
  * Project         : rcppsw
  * Module          : erf
  * Description     : Header file for Event Reporting Framework Module class
- * Creation Date   : Wed Jun 24 14:15:34 2015
- * Original Author : jharwell
+ * Creation Date   : 6/24/15
+ * Copyright       : Copyright 2016 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
-#ifndef ER_FRMWK_MOD_HPP_
-#define ER_FRMWK_MOD_HPP_
+#ifndef INCLUDE_ER_FRMWK_MOD_HPP_
+#define INCLUDE_ER_FRMWK_MOD_HPP_
 
 /*******************************************************************************
  * Includes
@@ -45,7 +45,6 @@ class erf_lvl
 class er_frmwk_mod
 {
  public:
-
   /* data members */
   boost::uuids::uuid id;
   std::string name;
@@ -86,4 +85,4 @@ std::ostream& operator<<(
     std::ostream& os,
     const rcppsw::er_frmwk_mod& mod);
 
-#endif /* ER_FRMWK_MOD_HPP_ */
+#endif /* INCLUDE_ER_FRMWK_MOD_HPP_ */

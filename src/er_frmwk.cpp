@@ -3,8 +3,8 @@
  * Project         : rcppsw
  * Module          : erf
  * Description     : Event Reporting Framework (ERF)
- * Creation Date   : Wed Jun 24 15:21:29 2015
- * Original Author : jharwell
+ * Creation Date   : 06/24/15
+ * Copyright       : Copyright 2015 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
@@ -12,8 +12,8 @@
  * Includes
  ******************************************************************************/
 #include "include/er_frmwk.hpp"
-#include <boost/filesystem.hpp>
 #include <algorithm>
+#include <boost/filesystem.hpp>
 
 /*******************************************************************************
  * Namespaces
@@ -28,15 +28,15 @@ using namespace rcppsw;
  * I can get the line # and function from the preprocessor/compiler. For
  * internal use inside ERF only.
  */
-#define REPORT_INTERNAL(lvl,msg, ...) {                         \
+#define REPORT_INTERNAL(lvl, msg, ...) {                        \
     char _str[6000];                                            \
     struct timespec _curr_time;                                 \
-    clock_gettime(CLOCK_REALTIME,&_curr_time);                  \
-    sprintf(_str,"[%s:%lu.%lu]:%s:%d:%s: " msg "\n",            \
-            hostname_, _curr_time.tv_sec,_curr_time.tv_nsec,     \
-            __FILE__,__LINE__,__FUNCTION__, ##__VA_ARGS__);     \
-    er_frmwk::erf_msg _msg(erf_id_,lvl,std::string(_str));       \
-    msg_report(_msg);                                           \
+    clock_gettime(CLOCK_REALTIME, &_curr_time);                  \
+    snprintf(_str, sizeof(_str), "[%s:%lu.%lu]:%s:%d:%s: " msg "\n", \
+             hostname_, _curr_time.tv_sec, _curr_time.tv_nsec, \
+             __FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__);         \
+    er_frmwk::erf_msg _msg(erf_id_, lvl, std::string(_str));            \
+    msg_report(_msg);                                                   \
   }
 
 /*******************************************************************************
@@ -56,7 +56,7 @@ er_frmwk::er_frmwk(
     erf_id_(idgen())
 {
   /* get hostname */
-  gethostname(hostname_,32);
+  gethostname(hostname_, 32);
 
   if (boost::filesystem::exists(logfile_fname_)) {
     boost::filesystem::remove(logfile_fname_);
@@ -84,15 +84,15 @@ status_t er_frmwk::insmod(
     const erf_lvl::value& dbglvl,
     const std::string& mod_name)
 {
-  er_frmwk_mod mod(mod_id,loglvl,dbglvl,mod_name);
+  er_frmwk_mod mod(mod_id, loglvl, dbglvl, mod_name);
 
   /* make sure module not already present */
-  CHECK(modules_.end() == std::find(modules_.begin(), modules_.end(),mod));
+  CHECK(modules_.end() == std::find(modules_.begin(), modules_.end(), mod));
   modules_.push_back(mod);
   return OK;
 
 error:
-  REPORT_INTERNAL(erf_lvl::err,"Failed to install module %s: module exists",
+  REPORT_INTERNAL(erf_lvl::err, "Failed to install module %s: module exists",
                   mod_name.c_str());
   return ERROR;
 } /* insmod() */
@@ -108,7 +108,7 @@ status_t er_frmwk::insmod(
     const boost::uuids::uuid& id,
     const std::string& name)
 {
-  return insmod(id,loglvl_dflt_,dbglvl_dflt_,name);
+  return insmod(id, loglvl_dflt_, dbglvl_dflt_, name);
 } /* insmod() */
 
 /**
@@ -123,7 +123,7 @@ status_t er_frmwk::recv(
     const erf_lvl::value& lvl,
     const std::string& str)
 {
-  queue_.enqueue(erf_msg(mod_id,lvl,str));
+  queue_.enqueue(erf_msg(mod_id, lvl, str));
   return OK;
 } /* er_frmwk::recv() */
 
@@ -138,13 +138,13 @@ status_t er_frmwk::recv(
 void er_frmwk::msg_report(
     const erf_msg& msg)
 {
-  er_frmwk_mod tmp(msg.id_,"tmp");
+  er_frmwk_mod tmp(msg.id_, "tmp");
   std::vector<er_frmwk_mod>::const_iterator iter = std::find(modules_.begin(),
-                                                             modules_.end(),tmp);
+                                                             modules_.end(), tmp);
 
   if (iter != modules_.end()) {
-    iter->logmsg(msg.str_,msg.lvl_,logfile_);
-    iter->dbgmsg(msg.str_,msg.lvl_);
+    iter->logmsg(msg.str_, msg.lvl_, logfile_);
+    iter->dbgmsg(msg.str_, msg.lvl_);
   }
 } /* er_frmwk::msg_report() */
 
@@ -177,7 +177,7 @@ status_t er_frmwk::mod_dbglvl(
     const boost::uuids::uuid& id,
     const erf_lvl::value& lvl)
 {
-  er_frmwk_mod mod(id,erf_lvl::nom,erf_lvl::nom,"tmp");
+  er_frmwk_mod mod(id, erf_lvl::nom, erf_lvl::nom, "tmp");
 
   /* make sure module is already present */
   std::vector<er_frmwk_mod>::iterator iter = std::find(modules_.begin(),
@@ -186,7 +186,7 @@ status_t er_frmwk::mod_dbglvl(
   CHECK(iter != modules_.end());
   iter->set_dbglvl(lvl);
 
-  REPORT_INTERNAL(erf_lvl::ver,"Successfully updated dbglvl for module %s",
+  REPORT_INTERNAL(erf_lvl::ver, "Successfully updated dbglvl for module %s",
                   iter->name.c_str());
   return OK;
 
@@ -208,15 +208,15 @@ status_t er_frmwk::mod_loglvl(
     const boost::uuids::uuid& id,
     const erf_lvl::value& lvl)
 {
-  er_frmwk_mod mod(id,erf_lvl::nom,erf_lvl::nom,"tmp");
+  er_frmwk_mod mod(id, erf_lvl::nom, erf_lvl::nom, "tmp");
 
   /* make sure module is already present */
   std::vector<er_frmwk_mod>::iterator iter = std::find(modules_.begin(),
-                                                       modules_.end(),mod);
+                                                       modules_.end(), mod);
   CHECK(iter != modules_.end());
   iter->set_loglvl(lvl);
 
-  REPORT_INTERNAL(erf_lvl::ver,"Successfully updated loglvl for module %s",
+  REPORT_INTERNAL(erf_lvl::ver, "Successfully updated loglvl for module %s",
                   iter->name.c_str());
   return OK;
 
@@ -236,13 +236,13 @@ error:
  **/
 void er_frmwk::thread_main(void)
 {
-  REPORT_INTERNAL(erf_lvl::nom,"Start");
+  REPORT_INTERNAL(erf_lvl::nom, "Start");
   while (!terminated()) {
     while (0 == queue_.size()) sleep(1);
     erf_msg msg = queue_.dequeue();
     msg_report(msg);
   } /* while() */
-  REPORT_INTERNAL(erf_lvl::nom,"Exit");
+  REPORT_INTERNAL(erf_lvl::nom, "Exit");
 
   /* make sure all events remaining in queue are reported */
   while (queue_.size()) {

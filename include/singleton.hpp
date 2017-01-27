@@ -1,10 +1,10 @@
 /*******************************************************************************
  * Name            : singleton.hpp
  * Project         : rcppsw
- * Module          : rcppsw
+ * Module          : common
  * Description     : Singleton design pattern implementation
- * Creation Date   : Fri Jun 26 10:56:54 2015
- * Original Author : jharwell
+ * Creation Date   : 06/26/15
+ * Copyright       : Copyright 2015 John Harwell, All rights reserved
  *
  ******************************************************************************/
 

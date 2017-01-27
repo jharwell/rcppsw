@@ -1,10 +1,10 @@
 /*******************************************************************************
  * Name            : ipc.hpp
  * Project         : rcppsw
- * Module          : common
+ * Module          : ipc
  * Description     : Interprocess communication definitions
- * Creation Date   : Sat Jul 25 18:02:48 2015
- * Original Author : jharwell
+ * Creation Date   : 08/25/2015
+ * Copyright       : Copyright 2015 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
@@ -19,6 +19,8 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <functional>
+#include <utility>
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/allocators/allocator.hpp>
 #include <boost/interprocess/containers/deque.hpp>
@@ -40,7 +42,8 @@ namespace bip = boost::interprocess;
  * Template Definitions
  ******************************************************************************/
 template <typename T>
-using ipc_allocator =  bip::allocator<T,bip::managed_shared_memory::segment_manager>;
+using ipc_allocator =  bip::allocator<T,
+                                      bip::managed_shared_memory::segment_manager>;
 
 template <typename T>
 using ipc_vector = std::vector<T, ipc_allocator<T> >;
@@ -55,6 +58,7 @@ using ipc_map = bip::map<key, value, std::less<key>,
 /*******************************************************************************
  * Type Definitions
  ******************************************************************************/
-typedef bip::basic_string<char, std::char_traits<char>, ipc_allocator<char>> ipc_string;
+typedef bip::basic_string<char, std::char_traits<char>,
+                          ipc_allocator<char>> ipc_string;
 
 #endif /* INCLUDE_IPC_HPP_ */

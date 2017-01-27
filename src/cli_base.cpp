@@ -3,8 +3,8 @@
  * Project         : rcppsw
  * Module          : cli
  * Description     : CLI base class
- * Creation Date   : Fri Jun 19 16:10:00 2015
- * Original Author : jharwell
+ * Creation Date   : 06/14/15
+ * Copyright       : Copyright 2015 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
@@ -37,7 +37,7 @@ cli_base::cli_base(
   char buffer[80];
   time(&rawtime);
   struct tm* timeinfo = localtime(&rawtime);
-  strftime(buffer,80,"%Y-%m-%d",timeinfo);
+  strftime(buffer, 80, "%Y-%m-%d", timeinfo);
 
   output_dir_base_ = "outputs/" + mnemonic + "/" + std::string(buffer) + "/";
   std::string logfile = output_dir_base_ + std::to_string(getpid()) + "-log";
@@ -52,10 +52,10 @@ cli_base::cli_base(
        ("Specify the file where stuff will be logged to. Default=" + logfile).c_str())
       ("dbglvl",
        bpo::value<int>()->default_value(3),
-       "Set the initial debug printing level. Higher numbers = more verbose output. Range=[0,5]. Default=3.")
+       "Set the initial debug printing level. Higher numbers = more verbose output. Range=[0, 5]. Default=3.")
       ("loglvl",
        bpo::value<int>()->default_value(3),
-       "Set the initial logging printing level. Higher numbers = more verbose logging. Range=[0,5]. Default=3.");
+       "Set the initial logging printing level. Higher numbers = more verbose logging. Range=[0, 5]. Default=3.");
 } /* cli_base::cli_base() */
 
 /*******************************************************************************
@@ -74,7 +74,7 @@ int cli_base::parse(
 {
   prog_name_ = std::string(argv[0]);
   try {
-    bpo::store(bpo::parse_command_line(argc,argv,desc_),vm_);
+    bpo::store(bpo::parse_command_line(argc, argv, desc_), vm_);
     if (vm_.count("help")) {
       std::cout << "\n" << desc_ << "\n";
       return 1;

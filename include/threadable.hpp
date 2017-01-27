@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Name            : threadable.hpp
  * Project         : rcppsw
- * Module          : utils
+ * Module          : multithread
  * Description     : Common threading functionality
- * Creation Date   : Sat Jul 18 14:33:49 2015
- * Original Author : jharwell
+ * Creation Date   : 06/18/15
+ * Copyright       : Copyright 2015 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
-#ifndef THREADABLE_HPP_
-#define THREADABLE_HPP_
+#ifndef INCLUDE_THREADABLE_HPP_
+#define INCLUDE_THREADABLE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "include/al/altypes.h"
 #include <thread>
+#include "include/al/altypes.h"
 
 /*******************************************************************************
  * Namespaces
@@ -59,7 +59,10 @@ class threadable
   std::thread internal_thread;
 
   /* non-member functions */
-  static void entry_point(void* this_p) { threadable *pt = static_cast<threadable*>(this_p); pt->thread_main(); }
+  static void entry_point(void* this_p) {
+    threadable *pt = static_cast<threadable*>(this_p);
+    pt->thread_main();
+  } /* entry_point() */
   /* operators */
 };
 
@@ -69,4 +72,4 @@ class threadable
  * Operater Definitions
  ******************************************************************************/
 
-#endif /* THREADABLE_HPP_ */
+#endif /* INCLUDE_THREADABLE_HPP_ */
