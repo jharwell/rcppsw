@@ -18,48 +18,46 @@
 #include <vector>
 #include <unistd.h>
 #include <sys/wait.h>
-#include "altypes.h"
+#include "include/al/altypes.h"
 
 /*******************************************************************************
- * Structure Definitions
+ * Namespaces
  ******************************************************************************/
+namespace rcppsw {
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-namespace rcppsw {
-    class forkable
-    {
-    public:
-        /* data members */
+class forkable
+{
+ public:
+  /* member functions */
+  forkable(void) : proc_run_(false),
+                   pid_(0) {}
+  virtual ~forkable(void) {}
+  pid_t pid(void) { return pid_; }
+  virtual pid_t start(
+      int core = -1);
 
-        /* member functions */
-        forkable(void) : proc_run_(false),
-                         pid_(0) {}
-        virtual ~forkable(void) {}
-        pid_t pid(void) { return pid_; }
-        virtual pid_t start(
-            int core = -1);
+  virtual pid_t start(
+      const std::string& new_wd,
+      int core = -1);
 
-        virtual pid_t start(
-            const std::string& new_wd,
-            int core = -1);
+  virtual void term(void) { proc_run_ = false; }
+  bool terminated(void) { return (false == proc_run_); }
+  virtual void proc_main(void) = 0;
 
-        virtual void term(void) { proc_run_ = false; }
-        bool terminated(void) { return (false == proc_run_); }
-        virtual void proc_main(void) = 0;
+ private:
+  /* data members */
+  bool proc_run_;
+  pid_t pid_;
 
-    private:
-        /* data members */
-        bool proc_run_;
-        pid_t pid_;
+  /* non-member functions */
+  static void entry_point(
+      void* this_p) { forkable *pt = static_cast<forkable*>(this_p); pt->proc_main(); }
+};
 
-        /* non-member functions */
-        static void entry_point(
-            void* this_p) { forkable *pt = static_cast<forkable*>(this_p); pt->proc_main(); }
-        /* operators */
-    };
-}
+} /* namespace rcppsw */
 
 /*******************************************************************************
  * Non-member Functions

@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef SINGLETON_HPP_
-#define SINGLETON_HPP_
+#ifndef INCLUDE_SINGLETON_HPP_
+#define INCLUDE_SINGLETON_HPP_
 
 /*******************************************************************************
  * Includes
@@ -23,26 +23,24 @@
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template <class T>
-class singleton
+template <class T> class singleton
 {
-    public:
-    static T& instance() {
-        static T inst;
-        return inst;
-    }
+ public:
+  static T& instance() {
+    static T inst;
+    return inst;
+  }
 
-    protected:
-    /* constructor */
-    singleton(void) {}
+ protected:
+  /* constructor */
+  singleton(void) {}
 
-    /* destructor */
-    ~singleton(void) {}
+  /* destructor */
+  ~singleton(void) {}
 
-    private:
-
-    singleton(singleton const&) = delete;
-    singleton& operator=(singleton const&) = delete;
+ private:
+  singleton(singleton const&) = delete;
+  singleton& operator=(singleton const&) = delete;
 };
 
-#endif /* SINGLETON_HPP_ */
+#endif /* INCLUDE_SINGLETON_HPP_ */

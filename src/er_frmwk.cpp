@@ -11,7 +11,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "er_frmwk.hpp"
+#include "include/er_frmwk.hpp"
 #include <boost/filesystem.hpp>
 #include <algorithm>
 
@@ -123,7 +123,7 @@ status_t er_frmwk::recv(
     const erf_lvl::value& lvl,
     const std::string& str)
 {
-  queue_.enq(erf_msg(mod_id,lvl,str));
+  queue_.enqueue(erf_msg(mod_id,lvl,str));
   return OK;
 } /* er_frmwk::recv() */
 
@@ -159,7 +159,7 @@ int er_frmwk::flush(void)
 {
   int count = 0;
   while (queue_.size() > 0) {
-    erf_msg next = queue_.dq();
+    erf_msg next = queue_.dequeue();
     er_frmwk::msg_report(next);
     count++;
   } /* while() */
@@ -239,14 +239,14 @@ void er_frmwk::thread_main(void)
   REPORT_INTERNAL(erf_lvl::nom,"Start");
   while (!terminated()) {
     while (0 == queue_.size()) sleep(1);
-    erf_msg msg = queue_.dq();
+    erf_msg msg = queue_.dequeue();
     msg_report(msg);
   } /* while() */
   REPORT_INTERNAL(erf_lvl::nom,"Exit");
 
   /* make sure all events remaining in queue are reported */
   while (queue_.size()) {
-    erf_msg msg = queue_.dq();
+    erf_msg msg = queue_.dequeue();
     msg_report(msg);
   }
 } /* er_frmwk::thread_main() */

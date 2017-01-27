@@ -8,15 +8,14 @@
  *
  ******************************************************************************/
 
-#ifndef IPC_QUEUE_HPP_
-#define IPC_QUEUE_HPP_
+#ifndef INCLUDE_IPC_QUEUE_HPP_
+#define INCLUDE_IPC_QUEUE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <boost/thread/thread_time.hpp>
-#include "ptypes.h"
-#include "ipc.hpp"
+#include "include/ipc.hpp"
 
 /*******************************************************************************
  * Structure Definitions
@@ -29,11 +28,13 @@ template <class T> class ipc_queue {
 
 public:
     typedef bip::allocator<T, bip::managed_shared_memory::segment_manager> allocator_type;
-private:
+
+ private:
     bip::deque<T, allocator_type> sQueue;
     mutable bip::interprocess_mutex io_mutex_;
     mutable bip::interprocess_condition waitCondition;
-public:
+
+ public:
     ipc_queue(allocator_type alloc) :
         sQueue(alloc),
         io_mutex_(),
@@ -101,4 +102,4 @@ public:
     void clear(void) { sQueue.clear(); }
 };
 
-#endif /* IPC_QUEUE_HPP_ */
+#endif /* INCLUDE_IPC_QUEUE_HPP_ */

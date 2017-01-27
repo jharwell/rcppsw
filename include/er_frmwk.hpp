@@ -19,10 +19,10 @@
 #include <thread>
 #include <mutex>
 
-#include "altypes.h"
-#include "er_frmwk_mod.hpp"
-#include "shared_queue.hpp"
-#include "threadable.hpp"
+#include "include/al/altypes.h"
+#include "include/er_frmwk_mod.hpp"
+#include "include/shared_queue.hpp"
+#include "include/threadable.hpp"
 
 /*******************************************************************************
  * Macros
@@ -62,9 +62,9 @@
     goto error;                                 \
   }
 
-#define ER_ASSERT(cond,msg,...)  if(!(cond)) {  \
-    ER_REPORT(erf_lvl::err, msg, ##__VA_ARGS__);   \
-    assert(0);                                  \
+#define ER_ASSERT(cond,msg,...)  if(!(cond)) {          \
+    ER_REPORT(erf_lvl::err, msg, ##__VA_ARGS__);        \
+    assert(0);                                          \
   }
 
 #define CHECK(cond) {                           \
@@ -109,7 +109,7 @@ class er_frmwk : public threadable
   /* destructor */
   ~er_frmwk(void);
 
-    /* member functions */
+  /* member functions */
   void self_dbg_en(void) {
     insmod(erf_id_,"ERF");
     mod_dbglvl(erf_id_,erf_lvl::nom);
@@ -156,9 +156,6 @@ class er_frmwk : public threadable
   }
 
  private:
-
-  /* member functions */
-
   /* data members */
   char hostname_[32];
   std::vector<er_frmwk_mod> modules_;

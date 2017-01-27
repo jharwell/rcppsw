@@ -8,12 +8,17 @@
  *
  ******************************************************************************/
 
-#ifndef IPC_HPP_
-#define IPC_HPP_
+#ifndef INCLUDE_IPC_HPP_
+#define INCLUDE_IPC_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <vector>
+#include <list>
+#include <map>
+#include <memory>
+#include <string>
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/allocators/allocator.hpp>
 #include <boost/interprocess/containers/deque.hpp>
@@ -25,10 +30,6 @@
 #include <boost/interprocess/sync/interprocess_mutex.hpp>
 #include <boost/interprocess/sync/interprocess_semaphore.hpp>
 #include <boost/interprocess/sync/named_mutex.hpp>
-#include <vector>
-#include <list>
-#include <map>
-#include "ptypes.h"
 
 /*******************************************************************************
  * Namespace Definitions
@@ -39,20 +40,21 @@ namespace bip = boost::interprocess;
  * Template Definitions
  ******************************************************************************/
 template <typename T>
-using ipc_allocator =  bip::allocator<T, bip::managed_shared_memory::segment_manager>;
+using ipc_allocator =  bip::allocator<T,bip::managed_shared_memory::segment_manager>;
 
 template <typename T>
-using ipc_vector = std::vector<T,ipc_allocator<T> >;
+using ipc_vector = std::vector<T, ipc_allocator<T> >;
 
 template <typename T>
-using ipc_list = bip::list<T,ipc_allocator<T> >;
+using ipc_list = bip::list<T, ipc_allocator<T> >;
 
-template <typename key,typename value>
-using ipc_map = bip::map<key,value,std::less<key>,ipc_allocator<std::pair<const key,value> > >;
+template <typename key, typename value>
+using ipc_map = bip::map<key, value, std::less<key>,
+                         ipc_allocator<std::pair<const key, value>>>;
 
 /*******************************************************************************
  * Type Definitions
  ******************************************************************************/
-typedef bip::basic_string<char, std::char_traits<char>,ipc_allocator<char> > ipc_string;
+typedef bip::basic_string<char, std::char_traits<char>, ipc_allocator<char>> ipc_string;
 
-#endif /* IPC_HPP_ */
+#endif /* INCLUDE_IPC_HPP_ */

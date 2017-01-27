@@ -8,72 +8,71 @@
  *
  ******************************************************************************/
 
-#ifndef SHARED_QUEUE_HPP_
-#define SHARED_QUEUE_HPP_
+#ifndef INCLUDE_SHARED_QUEUE_HPP_
+#define INCLUDE_SHARED_QUEUE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <queue>
+#include <deque>
 #include <boost/thread/locks.hpp>
 #include <boost/thread.hpp>
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template <typename T>
-class shared_queue
+template <typename T> class shared_queue
 {
-private:
-    std::deque<T> queue;  // Use STL queue to store data
-    boost::mutex mtx;   // The mutex to synchronise on
-    boost::condition_variable cv;// The condition to wait for
+ private:
+  std::deque<T> queue_;  // Use STL queue to store data
+  boost::mutex mtx_;   // The mutex to synchronise on
+  boost::condition_variable cv_;  // The condition to wait for
 
-public:
-    shared_queue(void) :
-        queue(),
-        mtx(),
-        cv() {}
-    bool empty(void) { return 0 == size(); }
+ public:
+  shared_queue(void) :
+      queue_(),
+      mtx_(),
+      cv_() {}
+  bool is_empty(void) { return 0 == size(); }
 
-    // Add data to the queue and notify others
-    void enq(const T& data)
-        {
-            // Acquire lock on the queue
-            boost::unique_lock<boost::mutex> lock(mtx);
+  // Add data to the queue and notify others
+  void enqueue(const T& data)
+  {
+    // Acquire lock on the queue
+    boost::unique_lock<boost::mutex> lock(mtx_);
 
-            // Add the data to the queue
-            queue.push_back(data);
+    // Add the data to the queue
+    queue_.push_back(data);
 
-            // Notify others that data is ready
-            cv.notify_one();
+    // Notify others that data is ready
+    cv_.notify_one();
+  }  // Lock is automatically released here
 
-        } // Lock is automatically released here
+  // Get data from the queue. Wait for data if not available
+  T dequeue()
+  {
+    // Acquire lock on the queue
+    boost::unique_lock<boost::mutex> lock(mtx_);
 
-    // Get data from the queue. Wait for data if not available
-    T dq()
-        {
-            // Acquire lock on the queue
-            boost::unique_lock<boost::mutex> lock(mtx);
+    // When there is no data, wait till someone fills it.
+    // Lock is automatically released in the wait and obtained
+    // again after the wait
+    while (queue_.size() == 0) cv_.wait(lock);
 
-            // When there is no data, wait till someone fills it.
-            // Lock is automatically released in the wait and obtained
-            // again after the wait
-            while (queue.size()==0) cv.wait(lock);
+    // Retrieve the data from the queue
+    T result = static_cast<T>(queue_.front());
+    queue_.pop_front();
+    return result;
+  }  // Lock is automatically released here
 
-            // Retrieve the data from the queue
-            T result=static_cast<T>(queue.front()); queue.pop_front();
-            return result;
+  // get the size of the queue
+  size_t size() {
+    // Acquire lock on the queue
+    boost::unique_lock<boost::mutex> lock(mtx_);
 
-        } // Lock is automatically released here
-
-    // get the size of the queue
-    size_t size() {
-        // Acquire lock on the queue
-        boost::unique_lock<boost::mutex> lock(mtx);
-
-        return queue.size();
-    } // Lock is automatically released here
+    return queue_.size();
+  }  // Lock is automatically released here
 };
 
-#endif /* SHARED_QUEUE_HPP_ */
+#endif /* INCLUDE_SHARED_QUEUE_HPP_ */

@@ -15,12 +15,13 @@
  * Includes
  ******************************************************************************/
 #include <boost/program_options.hpp>
-#include "altypes.h"
+#include "include/al/altypes.h"
 
 /*******************************************************************************
- * Namespace Definitions
+ * Namespaces
  ******************************************************************************/
 namespace bpo = boost::program_options;
+namespace rcppsw {
 
 /*******************************************************************************
  * Class Definitions
@@ -44,5 +45,7 @@ class cli_base {
   std::string prog_name_;
   std::string output_dir_base_;
 };
+
+} /* namespace rcppsw */
 
 #endif /* CLI_BASE_HPP_ */

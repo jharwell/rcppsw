@@ -14,45 +14,35 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "er_frmwk.hpp"
+#include "include/er_frmwk.hpp"
 
 /*******************************************************************************
- * Structure Definitions
+ * Namespaces
  ******************************************************************************/
+namespace rcppsw {
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-namespace rcppsw {
-    class erf_client
-    {
-    public:
-        /* constructors */
-        erf_client(
-            er_frmwk& erf_handle_) :
-            erf_handle(erf_handle_),
-            erf_id(erf_handle.idgen()) {}
+class erf_client
+{
+ public:
+  /* constructors */
+  erf_client(
+      er_frmwk& erf_handle_) :
+      erf_handle(erf_handle_),
+      erf_id(erf_handle.idgen()) {}
 
-        /* destructor */
-        virtual ~erf_client(void) {}
+  /* destructor */
+  virtual ~erf_client(void) {}
 
-        /* member functions */
-
-        /* operators */
-
-    protected:
-        er_frmwk& erf_handle;
-        boost::uuids::uuid erf_id;
-
-    private:
-        /* data members */
-
-        /* member functions */
-
-        /* operators */
-    };
+ protected:
+  er_frmwk& erf_handle;
+  boost::uuids::uuid erf_id;
+};
 
 } /* namespace rcppsw */
+
 /*******************************************************************************
  * Operater Definitions
  ******************************************************************************/
