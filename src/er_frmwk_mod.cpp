@@ -22,23 +22,18 @@ using namespace rcppsw;
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-er_frmwk_mod::er_frmwk_mod(
-    const boost::uuids::uuid&  id_,
-    const erf_lvl::value& loglvl_,
-    const erf_lvl::value& dbglvl_,
-    const std::string& name_) :
-    id(id_),
-    name(name_),
-    loglvl(loglvl_),
-    dbglvl(dbglvl_) {}
+er_frmwk_mod::er_frmwk_mod(const boost::uuids::uuid& id_,
+                           const erf_lvl::value& loglvl_,
+                           const erf_lvl::value& dbglvl_,
+                           const std::string& name_)
+    : id(id_), name(name_), loglvl(loglvl_), dbglvl(dbglvl_) {}
 
-er_frmwk_mod::er_frmwk_mod(
-    const boost::uuids::uuid& id_,
-    const std::string& name_) :
-    id(id_),
-    name(name_),
-    loglvl(static_cast<erf_lvl::value>(0)),
-    dbglvl(static_cast<erf_lvl::value>(0)) {}
+er_frmwk_mod::er_frmwk_mod(const boost::uuids::uuid& id_,
+                           const std::string& name_)
+    : id(id_),
+      name(name_),
+      loglvl(static_cast<erf_lvl::value>(0)),
+      dbglvl(static_cast<erf_lvl::value>(0)) {}
 
 /*******************************************************************************
  * Member Functions
@@ -51,10 +46,8 @@ er_frmwk_mod::er_frmwk_mod(
  *     N/A
  *
  **/
-void er_frmwk_mod::set_dbglvl(
-    const erf_lvl::value& lvl)
-{
-    dbglvl = lvl;
+void er_frmwk_mod::set_dbglvl(const erf_lvl::value& lvl) {
+  dbglvl = lvl;
 } /* er_frmwk_mod::set_dbglvl() */
 
 /**
@@ -64,10 +57,8 @@ void er_frmwk_mod::set_dbglvl(
  *     N/A
  *
  **/
-void er_frmwk_mod::set_loglvl(
-    const erf_lvl::value& lvl)
-{
-    loglvl = lvl;
+void er_frmwk_mod::set_loglvl(const erf_lvl::value& lvl) {
+  loglvl = lvl;
 } /* er_frmwk_mod::set_loglvl() */
 
 /**
@@ -77,14 +68,12 @@ void er_frmwk_mod::set_loglvl(
  *     N/A
  *
  **/
-void er_frmwk_mod::dbgmsg(
-    const std::string& msg,
-    const erf_lvl::value& lvl) const
-{
-    if (lvl <= dbglvl) {
-        std::cout << msg;
-        std::cout.flush();
-    }
+void er_frmwk_mod::dbgmsg(const std::string& msg,
+                          const erf_lvl::value& lvl) const {
+  if (lvl <= dbglvl) {
+    std::cout << msg;
+    std::cout.flush();
+  }
 } /* er_frmwk_mod::dbgmsg() */
 
 /**
@@ -94,15 +83,12 @@ void er_frmwk_mod::dbgmsg(
  *     N/A
  *
  **/
-void er_frmwk_mod::logmsg(
-    const std::string& msg,
-    const erf_lvl::value& lvl,
-    std::ofstream& file) const
-{
-    if (lvl <= loglvl) {
-        file << msg;
-        file.flush();
-    }
+void er_frmwk_mod::logmsg(const std::string& msg, const erf_lvl::value& lvl,
+                          std::ofstream& file) const {
+  if (lvl <= loglvl) {
+    file << msg;
+    file.flush();
+  }
 } /* er_frmwk_mod::logmsg() */
 
 /**
@@ -112,10 +98,8 @@ void er_frmwk_mod::logmsg(
  *     bool - true if they are the same, false otherwise
  *
  **/
-bool er_frmwk_mod::operator==(
-    const er_frmwk_mod& rhs)
-{
-    return (this->id == rhs.id);
+bool er_frmwk_mod::operator==(const er_frmwk_mod& rhs) {
+  return (this->id == rhs.id);
 } /* operator==() */
 
 /**
@@ -125,10 +109,7 @@ bool er_frmwk_mod::operator==(
  *     std::ostream& - The output stream
  *
  **/
-std::ostream& operator<<(
-    std::ostream& os,
-    const er_frmwk_mod& mod)
-{
-    os << mod.id << ": " << mod.name;
-    return os;
+std::ostream& operator<<(std::ostream& os, const er_frmwk_mod& mod) {
+  os << mod.id << ": " << mod.name;
+  return os;
 } /* operator<<() */

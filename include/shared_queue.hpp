@@ -15,31 +15,27 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <queue>
-#include <deque>
-#include <boost/thread/locks.hpp>
 #include <boost/thread.hpp>
+#include <boost/thread/locks.hpp>
+#include <deque>
+#include <queue>
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template <typename T> class shared_queue
-{
+template <typename T>
+class shared_queue {
  private:
-  std::deque<T> queue_;  // Use STL queue to store data
-  boost::mutex mtx_;   // The mutex to synchronise on
+  std::deque<T> queue_;           // Use STL queue to store data
+  boost::mutex mtx_;              // The mutex to synchronise on
   boost::condition_variable cv_;  // The condition to wait for
 
  public:
-  shared_queue(void) :
-      queue_(),
-      mtx_(),
-      cv_() {}
+  shared_queue(void) : queue_(), mtx_(), cv_() {}
   bool is_empty(void) { return 0 == size(); }
 
   // Add data to the queue and notify others
-  void enqueue(const T& data)
-  {
+  void enqueue(const T& data) {
     // Acquire lock on the queue
     boost::unique_lock<boost::mutex> lock(mtx_);
 
@@ -51,8 +47,7 @@ template <typename T> class shared_queue
   }  // Lock is automatically released here
 
   // Get data from the queue. Wait for data if not available
-  T dequeue()
-  {
+  T dequeue() {
     // Acquire lock on the queue
     boost::unique_lock<boost::mutex> lock(mtx_);
 

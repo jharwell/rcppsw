@@ -24,14 +24,11 @@ namespace rcppsw {
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class erf_client
-{
+class erf_client {
  public:
   /* constructors */
-  erf_client(
-      er_frmwk& erf_handle_) :
-      erf_handle(erf_handle_),
-      erf_id(erf_handle.idgen()) {}
+  erf_client(er_frmwk& erf_handle_)
+      : erf_handle(erf_handle_), erf_id(erf_handle.idgen()) {}
 
   /* destructor */
   virtual ~erf_client(void) {}

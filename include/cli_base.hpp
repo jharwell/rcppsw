@@ -29,11 +29,10 @@ namespace rcppsw {
  ******************************************************************************/
 class cli_base {
  public:
-  explicit cli_base(
-      const std::string& mnemonic = "");
+  explicit cli_base(const std::string& mnemonic = "");
   virtual ~cli_base() {}
 
-  int parse(int argc, char **argv);
+  int parse(int argc, char** argv);
   virtual status_t validate(void) { return OK; }
   void print(void);
   const bpo::variables_map& vm(void) { return vm_; }

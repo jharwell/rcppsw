@@ -16,8 +16,8 @@
  ******************************************************************************/
 #include <algorithm>
 #include <vector>
-#include "include/common/fpc.h"
 #include "include/al/altypes.h"
+#include "include/common/fpc.h"
 
 /*******************************************************************************
  * Namespaces
@@ -31,12 +31,11 @@ namespace rcppsw {
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template<typename T> class max_subarray_finder {
+template <typename T>
+class max_subarray_finder {
  public:
   /* constructors */
-  max_subarray_finder(
-      const std::vector<T>& arr) :
-      arr_(arr) {}
+  max_subarray_finder(const std::vector<T>& arr) : arr_(arr) {}
 
   /* member functions */
   status_t find(std::vector<int>* const res) {
@@ -48,14 +47,14 @@ template<typename T> class max_subarray_finder {
 
     /* Kadane's algorithm - O(n) */
     for (int i = 0; i < arr_.size(); ++i) {
-          current_sum += arr_[i];
-          if (current_sum > max_sum) {
-            max_sum = current_sum;
-            end_index = i;
-          } else if (current_sum < 0) {
-            start_index = i + 1;
-            current_sum = 0;
-          }
+      current_sum += arr_[i];
+      if (current_sum > max_sum) {
+        max_sum = current_sum;
+        end_index = i;
+      } else if (current_sum < 0) {
+        start_index = i + 1;
+        current_sum = 0;
+      }
     } /* for(i..) */
 
     res->push_back(max_sum);
@@ -66,9 +65,9 @@ template<typename T> class max_subarray_finder {
 
  private:
   /* data members */
-  const std::vector<T> &arr_;
+  const std::vector<T>& arr_;
 };
 
-}  /* namespace rcppsw */
+} /* namespace rcppsw */
 
 #endif /* INCLUDE_MAX_SUBARRAY_FINDER_HPP_ */

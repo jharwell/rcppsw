@@ -23,8 +23,8 @@
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template <class T> class singleton
-{
+template <class T>
+class singleton {
  public:
   static T& instance() {
     static T inst;

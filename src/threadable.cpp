@@ -29,16 +29,14 @@ using namespace rcppsw;
  *     N/A
  *
  **/
-void threadable::start(
-    int core)
-{
-    /* start main thread */
-    thread_run = true;
+void threadable::start(int core) {
+  /* start main thread */
+  thread_run = true;
 
-    internal_thread = std::thread(&threadable::entry_point, this);
-    if (-1 != core) {
-        thread_core_lock(internal_thread.native_handle(), core);
-    }
+  internal_thread = std::thread(&threadable::entry_point, this);
+  if (-1 != core) {
+    thread_core_lock(internal_thread.native_handle(), core);
+  }
 } /* threadable::start() */
 
 /**
@@ -48,17 +46,14 @@ void threadable::start(
  *     status_t - OK if successful, ERROR otherwise
  *
  **/
-status_t threadable::thread_core_lock(
-    pthread_t thread,
-    int core)
-{
-    cpu_set_t cpuset;
+status_t threadable::thread_core_lock(pthread_t thread, int core) {
+  cpu_set_t cpuset;
 
-    CPU_ZERO(&cpuset);
-    CPU_SET(core, &cpuset);
-    CHECK(0 == pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset));
-    return OK;
+  CPU_ZERO(&cpuset);
+  CPU_SET(core, &cpuset);
+  CHECK(0 == pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset));
+  return OK;
 
 error:
-    return ERROR;
+  return ERROR;
 } /* threadable::thread_core_lock() */

@@ -14,9 +14,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <memory>
-#include <deque>
 #include <boost/thread/thread_time.hpp>
+#include <deque>
+#include <memory>
 #include "include/ipc.hpp"
 
 /*******************************************************************************
@@ -26,9 +26,11 @@
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template <class T> class ipc_queue {
+template <class T>
+class ipc_queue {
  public:
-  typedef bip::allocator<T, bip::managed_shared_memory::segment_manager> allocator_type;
+  typedef bip::allocator<T, bip::managed_shared_memory::segment_manager>
+      allocator_type;
 
  private:
   bip::deque<T, allocator_type> queue_;
@@ -36,11 +38,8 @@ template <class T> class ipc_queue {
   mutable bip::interprocess_condition wait_condition;
 
  public:
-  explicit ipc_queue(allocator_type alloc) :
-      queue_(alloc),
-      io_mutex_(),
-      wait_condition()
-  {}
+  explicit ipc_queue(allocator_type alloc)
+      : queue_(alloc), io_mutex_(), wait_condition() {}
 
   void push(T element) {
     bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
@@ -86,13 +85,10 @@ template <class T> class ipc_queue {
     *element = queue_.front();
     queue_.pop_front();
   }
-  bool pop_timed_wait(
-      T &element,
-      int to_sec)
-  {
+  bool pop_timed_wait(T &element, int to_sec) {
     bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
-    boost::system_time to = boost::get_system_time() +
-                            boost::posix_time::seconds(to_sec);
+    boost::system_time to =
+        boost::get_system_time() + boost::posix_time::seconds(to_sec);
     wait_condition.timed_wait(lock, to);
     if (queue_.empty()) {
       return false;
