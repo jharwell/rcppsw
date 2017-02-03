@@ -100,7 +100,6 @@ CLIBS     = $(CCLIB_SELF) -lcommon.x86 -levtlog.x86 -lds.x86 -lutils.x86 $(CCLIB
 CLIBDIRS  = $(CCLIBDIRS) -L$(rcswroot)/lib/x86/linux
 
 define CINCDIRS
--I$(rcsw) \
 -I.
 endef
 
@@ -114,8 +113,6 @@ CXXLIBDIRS ?= -L$(rcppsw)/lib -L$(LIBDIR)
 
 define CXXINCDIRS
 -I. \
--I$(rcsw) \
--I$(rcppsw) \
 -I$(develroot)/catch/single_include
 endef
 

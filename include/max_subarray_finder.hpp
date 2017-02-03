@@ -16,8 +16,8 @@
  ******************************************************************************/
 #include <algorithm>
 #include <vector>
-#include "include/al/altypes.h"
-#include "include/common/fpc.h"
+#include "rcsw/include/al/altypes.h"
+#include "rcsw/include/common/fpc.h"
 
 /*******************************************************************************
  * Namespaces

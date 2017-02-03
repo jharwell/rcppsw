@@ -15,7 +15,7 @@
  * Includes
  ******************************************************************************/
 #include <thread>
-#include "include/al/altypes.h"
+#include "rcsw/include/al/altypes.h"
 
 /*******************************************************************************
  * Namespaces
@@ -33,19 +33,19 @@ class threadable {
   threadable(void) : thread_run(false), internal_thread() {}
   virtual ~threadable(void) {}
 
-  virtual void start(int core = -1);
-
+  virtual void thread_main(void) = 0;
+  virtual void start(void* arg, int core = -1);
   virtual void term(void) {
     thread_run = false;
     internal_thread.join();
   }
+
   bool terminated(void) { return (false == thread_run); }
   virtual void join(void) { internal_thread.join(); }
-  virtual void thread_main(void) = 0;
   status_t thread_core_lock(pthread_t thread, int core);
 
  protected:
-  pthread_t thread_handle(void) { return internal_thread.native_handle(); }
+  pthread_t self(void) { return internal_thread.native_handle(); }
 
  private:
   /* data members */
