@@ -13,6 +13,7 @@
  ******************************************************************************/
 #include "include/threadable.hpp"
 #include "include/er_frmwk.hpp"
+#include "rcsw/include/multithread/threadm.h"
 
 /*******************************************************************************
  * Namespace Definitions
@@ -26,34 +27,20 @@ using namespace rcppsw;
  * threadable::start() - Start a thread
  *
  * RETURN:
- *     N/A
- *
- **/
-void threadable::start(int core) {
-  /* start main thread */
-  thread_run = true;
-
-  internal_thread = std::thread(&threadable::entry_point, this);
-  if (-1 != core) {
-    thread_core_lock(internal_thread.native_handle(), core);
-  }
-} /* threadable::start() */
-
-/**
- * threadable::thread_core_lock() - Lock a thread to a core
- *
- * RETURN:
  *     status_t - OK if successful, ERROR otherwise
  *
  **/
-status_t threadable::thread_core_lock(pthread_t thread, int core) {
-  cpu_set_t cpuset;
+status_t threadable::start(void* arg, int core) {
+  /* start main thread */
+  thread_run_ = true;
 
-  CPU_ZERO(&cpuset);
-  CPU_SET(core, &cpuset);
-  CHECK(0 == pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset));
+  arg_ = arg;
+  CHECK(0 == pthread_create(&thread_, NULL, &threadable::entry_point, arg));
+  if (-1 != core) {
+    CHECK(OK == threadm_core_lock(thread_, core));
+  }
   return OK;
 
 error:
   return ERROR;
-} /* threadable::thread_core_lock() */
+} /* threadable::start() */

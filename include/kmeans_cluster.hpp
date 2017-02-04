@@ -25,8 +25,10 @@
 namespace rcppsw {
 
 /*******************************************************************************
- * Structure Definitions
+ * Type Definitions
  ******************************************************************************/
+template <typename T>
+using multidim_point = std::vector<T>;
 
 /*******************************************************************************
  * Class Definitions
@@ -37,10 +39,23 @@ template <typename T> class kmeans_cluster {
   kmeans_cluster(void): queue_(), center_(), hash_(0) {}
 
   /* member functions */
-  const std::vector<T>& center(void) { return center_; }
-  std::size_t size(void) { return queue_.size(); }
+  friend std::ostream& operator<<(std::ostream& stream,
+                                  const kmeans_cluster<T>& cluster) {
+    std::for_each(cluster.queue_.begin(), cluster.queue_.end(),
+                  [&](const multidim_point<T>* p) {
+                    stream << p;
+                  });
+    return stream;
+  } /* operator<<() */
 
-  void add(const std::vector<T>& point) { queue_.push_back(&point); }
+  /* Const iterators: thread safe */
+  typename shared_queue<T>::const_iterator begin(void) { return queue_.begin(); }
+  typename shared_queue<T>::const_iterator end(void) { return queue_.end(); }
+
+  const multidim_point<T>& center(void) const { return center_; }
+  std::size_t size(void) const { return queue_.size(); }
+  void add(multidim_point<T> *point) { queue_.enqueue(point); }
+
   bool convergence(void) {
     if (prev_hash_ == hash_ && prev_center_ == center_) {
       return true;
@@ -54,27 +69,30 @@ template <typename T> class kmeans_cluster {
    *
    * void - N/A
    **/
-  void update_center(void) const {
-    std::vector<T> accum(queue_[0]->size());
+  void update_center(void) {
+    multidim_point<T> accum(queue_.size());
     prev_center_ = center_;
     prev_hash_ = hash_;
     hash_ = 0;
-    std::for_each(queue_.begin(), queue_.end(), [&](const T& e) {
-        hash_ ^= 0x9e3779b9 + (hash_ << 6) + (hash_ >> 2);
-        accum += *e;
+
+    std::for_each(queue_.begin(), queue_.end(), [&](multidim_point<T>* e) {
+        for (std::size_t i = 0; i < e->size(); ++i) {
+          /* hash_ ^= 0x9e3779b9 + (hash_ << 6) + (hash_ >> 2); */
+          accum[i] += e->at(i);
+        } /* for(i..) */
       });
 
-    /* std::for_each(accum.begin(), accum.end(), [&](const T& e) { */
-    /*     e = e/accum.size(); */
-    /*   }); */
-    center_ = accum/accum.size();
+    std::for_each(accum.begin(), accum.end(), [&](T& e) {
+        e = e/accum.size();
+      });
+    center_ = accum;
   } /* kmeans_cluster::update_center() */
 
  private:
   /* member functions */
 
   /* data members */
-  shared_queue<std::vector<T>*> queue_;
+  shared_queue<multidim_point<T>*> queue_;
   std::vector<T> center_;
   std::vector<T> prev_center_;
   std::size_t hash_;

@@ -15,10 +15,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <deque>
 #include <boost/thread.hpp>
 #include <boost/thread/locks.hpp>
-#include <deque>
-#include <queue>
 
 /*******************************************************************************
  * Class Definitions
@@ -31,8 +30,10 @@ class shared_queue {
   boost::condition_variable cv_;  // The condition to wait for
 
  public:
-  shared_queue(void) : queue_(), mtx_(), cv_() {}
-  bool is_empty(void) { return 0 == size(); }
+  /* type definitions */
+  typedef typename std::deque<T>::const_iterator const_iterator;
+  typename std::deque<T>::const_iterator begin(void) const { return queue_.begin(); }
+  typename std::deque<T>::const_iterator end(void) const { return queue_.end(); }
 
   // Add data to the queue and notify others
   void enqueue(const T& data) {

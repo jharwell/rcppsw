@@ -34,10 +34,11 @@ template <typename T> class kmeans_algorithm {
  public:
   /* constructors */
   kmeans_algorithm(void);
+  virtual ~kmeans_algorithm(void) {}
 
   /* member functions */
-  void report_algorithms(const std::vector<std::vector<T>>& clusters) = 0;
-  void report_centroids(const std::vector<T>& centroids) = 0;
+  virtual void report_clusters(void) = 0;
+  virtual void report_centroids(void) = 0;
   std::vector<kmeans_cluster<T>>& clusters(void) { return clusters_; }
   std::vector<std::vector<T>>& data(void) { return data_; }
 
@@ -50,13 +51,13 @@ template <typename T> class kmeans_algorithm {
   } /* kmeans_algorithm::cluster() */
 
  protected:
-  bool cluster_iterate(void) = 0;
+  virtual bool cluster_iterate(void) = 0;
 
  private:
   /* member functions */
 
   /* data members */
-  std::vector<std::vector<T>> data_;
+  std::vector<multidim_point<T>> data_;
   int n_iterations_;
   std::vector<kmeans_cluster<T>> clusters_;
 };

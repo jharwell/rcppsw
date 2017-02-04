@@ -1,4 +1,4 @@
-n/*******************************************************************************
+/*******************************************************************************
  * Name            : kmeans_cluster_worker.hpp
  * Project         : rcsw
  * Module          : algorithm
@@ -38,47 +38,34 @@ template <typename T> class kmeans_cluster_worker: public threadable {
   kmeans_cluster_worker(void);
 
   /* member functions */
-  static void clusters(const std::vector<kmeans_cluster<T>>& c) { clusters_ = c; }
-  static void n_trheads(int n) { n_threads_ = n; }
+  static void clusters(std::vector<kmeans_cluster<T>>* c) { clusters_ = c; }
+  static void n_threads(int n) { n_threads_ = n; }
 
-  /**
-   * kmeans_cluster_worker::thread_main() - Main worker function
-   *
-   * RETURN:
-   *     void* - N/A (must be void* to satisfy pthread_create())
-   **/
   void* thread_main(void* arg) {
     if (NULL == arg) {
           clusters_->at(self()).update_center();
           return NULL;
     }
-    std::vector<std::vector<T>>* data = arg;
-    for (int i = data->size()/n_threads_; i < data->size()/n_threads_ + n_threads_; ++i) {
+    std::vector<multidim_point<T>>* data = static_cast<std::vector<multidim_point<T>>*>(arg);
+    for (std::size_t i = data->size()/n_threads_; i < data->size()/n_threads_ + n_threads_; ++i) {
       int min_queue;
       T min_dist = std::numeric_limits<T>::max();
-      for (int j = 0; j < clusters_[j].size(); ++j) {
-        T dist = euclidean_dist(clusters_[j].center(), data[i]);
+      for (std::size_t j = 0; j < clusters_[j].size(); ++j) {
+        T dist = euclidean_dist(clusters_->at(j).center(), data->at(i));
         if (dist < min_dist) {
           min_dist = dist;
           min_queue = j;
         }
       } /* for(j..) */
-      clusters_[min_queue].add(data[i]);
+      clusters_->at(min_queue).add(&data->at(i));
     } /* for(i..) */
     return NULL;
   } /* kmeans_cluster_worker::thread_main() */
 
  private:
   /* member functions */
-  /**
-   * kmeans_cluster_worker::euclidean_dist() - Calculate the Euclidean
-   * dist between two vectors
-   *
-   * RETURN:
-   *     float - The dist
-   **/
-  T (euclidean_dist)(const std::vector<T>& p1,
-                             const std::vector<T>& p2) {
+  T euclidean_dist(const multidim_point<T>& p1,
+                   const multidim_point<T>& p2) const {
     T dist = -1;
     std::for_each(p1.begin(), p1.end(), [&](const T& e1) {
         std::for_each(p2.begin(), p2.end(), [&](const T& e2) {
@@ -89,7 +76,7 @@ template <typename T> class kmeans_cluster_worker: public threadable {
   } /* kmeans_cluster_worker::euclidean_dist() */
 
   /* data members */
-  static const std::vector<kmeans_cluster<T>>& clusters_;
+  static std::vector<kmeans_cluster<T>>* clusters_;
   static int n_threads_;
 };
 

@@ -113,6 +113,7 @@ CXXLIBDIRS ?= -L$(rcppsw)/lib -L$(LIBDIR)
 
 define CXXINCDIRS
 -I. \
+-I$(rcsw) \
 -I$(develroot)/catch/single_include
 endef
 

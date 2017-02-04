@@ -215,7 +215,7 @@ error:
  *     N/A
  *
  **/
-void er_frmwk::thread_main(void) {
+void* er_frmwk::thread_main(void* arg) {
   REPORT_INTERNAL(erf_lvl::nom, "Start");
   while (!terminated()) {
     while (0 == queue_.size()) sleep(1);
@@ -228,5 +228,6 @@ void er_frmwk::thread_main(void) {
   while (queue_.size()) {
     erf_msg msg = queue_.dequeue();
     msg_report(msg);
-  }
+  } /* while() */
+  return NULL;
 } /* er_frmwk::thread_main() */

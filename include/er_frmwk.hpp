@@ -125,7 +125,7 @@ class er_frmwk : public threadable {
   status_t recv(const boost::uuids::uuid& id, const erf_lvl::value& lvl,
                 const std::string& str);
   boost::uuids::uuid idgen(void) { return gen_(); }
-  void thread_main(void);
+  void* thread_main(void* arg);
   erf_lvl::value loglvl(void) { return loglvl_dflt_; }
   erf_lvl::value dbglvl(void) { return dbglvl_dflt_; }
   void loglvl(const erf_lvl::value& lvl) { loglvl_dflt_ = lvl; }
