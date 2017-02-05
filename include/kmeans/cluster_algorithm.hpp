@@ -1,7 +1,7 @@
 /*******************************************************************************
- * Name            : kmeans_cluster_algorithm.hpp
+ * Name            : cluster_algorithm.hpp
  * Project         : rcppsw
- * Module          : algorithm
+ * Module          : kmeans
  * Description     : Base class implementation of K-means clustering algorithm
  * Creation Date   : 02/02/17
  * Copyright       : Copyright 2017 John Harwell, All rights reserved
@@ -18,13 +18,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "include/kmeans_cluster.hpp"
-#include "include/kmeans_cluster_worker.hpp"
+#include "include/kmeans/cluster.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 namespace rcppsw {
+namespace kmeans {
 
 /*******************************************************************************
  * Structure Definitions
@@ -33,16 +33,16 @@ namespace rcppsw {
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template <typename T> class kmeans_cluster_algorithm {
+template <typename T> class cluster_algorithm {
  public:
   /* constructors */
-  kmeans_cluster_algorithm(int n_iterations,
+  cluster_algorithm(int n_iterations,
                            const std::string& clusters_fname,
                            const std::string& centroids_fname,
                            const std::vector<T>* const data) :
       n_iterations_(n_iterations), clusters_fname_(clusters_fname),
       centroids_fname_(centroids_fname), data_(data), clusters_(NULL) {}
-  virtual ~kmeans_cluster_algorithm(void);
+  virtual ~cluster_algorithm(void) {}
 
   /* member functions */
   std::vector<kmeans_cluster<T>>* clusters(void) { return clusters_; }
@@ -50,16 +50,16 @@ template <typename T> class kmeans_cluster_algorithm {
 
   virtual void report_clusters(void) {
     std::ofstream ofile(clusters_fname_);
-    std::for_each(kmeans_cluster_algorithm<T>::clusters()->begin(),
-                  kmeans_cluster_algorithm<T>::clusters()->end(),
+    std::for_each(cluster_algorithm<T>::clusters()->begin(),
+                  cluster_algorithm<T>::clusters()->end(),
                   [&](const kmeans_cluster<T>& c) {
                     ofile << c;
                   });
   }
   virtual void report_centroids(void) {
     std::ofstream ofile(centroids_fname_);
-    std::for_each(kmeans_cluster_algorithm<T>::clusters()->begin(),
-                  kmeans_cluster_algorithm<T>::clusters()->end(),
+    std::for_each(cluster_algorithm<T>::clusters()->begin(),
+                  cluster_algorithm<T>::clusters()->end(),
                   [&](const kmeans_cluster<T>& c) {
                     ofile << &c.center();
                   });
@@ -71,15 +71,15 @@ template <typename T> class kmeans_cluster_algorithm {
         break;
       }
     } /* for(i..) */
-  } /* kmeans_cluster_algorithm::cluster() */
+  } /* cluster_algorithm::cluster() */
 
  protected:
   virtual bool cluster_iterate(void) = 0;
 
  private:
   /* member functions */
-  kmeans_cluster_algorithm(const kmeans_cluster_algorithm& other) = delete;
-  kmeans_cluster_algorithm& operator=(const kmeans_cluster_algorithm& other) = delete;
+  cluster_algorithm(const cluster_algorithm& other) = delete;
+  cluster_algorithm& operator=(const cluster_algorithm& other) = delete;
 
   /* data members */
   int n_iterations_;
@@ -89,10 +89,7 @@ template <typename T> class kmeans_cluster_algorithm {
   std::vector<kmeans_cluster<T>>* clusters_;
 };
 
+} /* namespace kmeans */
 } /* namespace rcppsw */
-
-/*******************************************************************************
- * Operater Definitions
- ******************************************************************************/
 
 #endif /* INCLUDE_KMEANS_CLUSTER_ALGORITHM_HPP_ */

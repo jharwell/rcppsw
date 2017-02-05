@@ -1,7 +1,7 @@
 /*******************************************************************************
- * Name            : kmeans_cluster.hpp
+ * Name            : cluster.hpp
  * Project         : rcppsw
- * Module          : algorithm
+ * Module          : kmeans
  * Description     : Representation of the current state of a cluster during the
  *                   execution of the clustering algorithm
  * Creation Date   : 02/02/17
@@ -23,6 +23,7 @@
  * Namespaces
  ******************************************************************************/
 namespace rcppsw {
+namespace kmeans {
 
 /*******************************************************************************
  * Type Definitions
@@ -99,6 +100,7 @@ template <typename T> class kmeans_cluster {
   std::size_t prev_hash_;
 };
 
+} /* namespace kmeans */
 } /* namespace rcppsw */
 
 #endif /* INCLUDE_KMEANS_CLUSTER_HPP_ */

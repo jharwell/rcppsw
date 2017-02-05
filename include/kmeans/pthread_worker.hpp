@@ -1,7 +1,7 @@
 /*******************************************************************************
- * Name            : kmeans_cluster_worker.hpp
- * Project         : rcsw
- * Module          : algorithm
+ * Name            : pthread_worker.hpp
+ * Project         : rcppsw
+ * Module          : kmeans
  * Description     : Workers for pthread-based implementation of K-means
  *                   clustering
  * Creation Date   : 02/02/17
@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_KMEANS_CLUSTER_WORKER_HPP_
-#define INCLUDE_KMEANS_CLUSTER_WORKER_HPP_
+#ifndef INCLUDE_KMEANS_PTHREAD_WORKER_HPP_
+#define INCLUDE_KMEANS_PTHREAD_WORKER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -18,12 +18,13 @@
 #include <vector>
 #include <limits>
 #include "include/threadable.hpp"
-#include "include/kmeans_cluster.hpp"
+#include "include/kmeans/cluster.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 namespace rcppsw {
+namespace kmeans {
 
 /*******************************************************************************
  * Structure Definitions
@@ -32,10 +33,10 @@ namespace rcppsw {
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template <typename T> class kmeans_cluster_worker: public threadable {
+template <typename T> class pthread_worker: public threadable {
  public:
   /* constructors */
-  kmeans_cluster_worker(void);
+  pthread_worker(void);
 
   /* member functions */
   static void clusters(std::vector<kmeans_cluster<T>>* c) { clusters_ = c; }
@@ -60,7 +61,7 @@ template <typename T> class kmeans_cluster_worker: public threadable {
       clusters_->at(min_queue).add(&data->at(i));
     } /* for(i..) */
     return NULL;
-  } /* kmeans_cluster_worker::thread_main() */
+  } /* kmeans_pthread_worker::thread_main() */
 
  private:
   /* member functions */
@@ -74,13 +75,14 @@ template <typename T> class kmeans_cluster_worker: public threadable {
     } /* for(e1...) */
 
     return dist;
-  } /* kmeans_cluster_worker::euclidean_dist() */
+  } /* kmeans_pthread_worker::euclidean_dist() */
 
   /* data members */
   static std::vector<kmeans_cluster<T>>* clusters_;
   static int n_threads_;
 };
 
+} /* namespace kmeans */
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_KMEANS_CLUSTER_WORKER_HPP_ */
+#endif /* INCLUDE_KMEANS_PTHREAD_WORKER_HPP_ */

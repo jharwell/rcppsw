@@ -24,12 +24,8 @@
  ******************************************************************************/
 template <typename T>
 class shared_queue {
- private:
-  std::deque<T> queue_;           // Use STL queue to store data
-  boost::mutex mtx_;              // The mutex to synchronise on
-  boost::condition_variable cv_;  // The condition to wait for
-
  public:
+  shared_queue(void) : queue_(), mtx_(), cv_() {}
   /* type definitions */
   typedef typename std::deque<T>::const_iterator const_iterator;
   typename std::deque<T>::const_iterator begin(void) const { return queue_.begin(); }
@@ -65,6 +61,11 @@ class shared_queue {
 
   // get the size of the queue
   size_t size() const { return queue_.size(); }
+
+ private:
+  std::deque<T> queue_;           // Use STL queue to store data
+  boost::mutex mtx_;              // The mutex to synchronise on
+  boost::condition_variable cv_;  // The condition to wait for
 };
 
 #endif /* INCLUDE_SHARED_QUEUE_HPP_ */
