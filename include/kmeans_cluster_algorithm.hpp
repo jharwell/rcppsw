@@ -15,6 +15,9 @@
  * Includes
  ******************************************************************************/
 #include <vector>
+#include <iostream>
+#include <fstream>
+#include <string>
 #include "include/kmeans_cluster.hpp"
 #include "include/kmeans_cluster_worker.hpp"
 
@@ -33,16 +36,34 @@ namespace rcppsw {
 template <typename T> class kmeans_cluster_algorithm {
  public:
   /* constructors */
-  explicit kmeans_cluster_algorithm(int n_iterations,
-                                    const std::vector<T>* const data) :
-      n_iterations_(n_iterations), data_(data), clusters_(NULL) {}
+  kmeans_cluster_algorithm(int n_iterations,
+                           const std::string& clusters_fname,
+                           const std::string& centroids_fname,
+                           const std::vector<T>* const data) :
+      n_iterations_(n_iterations), clusters_fname_(clusters_fname),
+      centroids_fname_(centroids_fname), data_(data), clusters_(NULL) {}
   virtual ~kmeans_cluster_algorithm(void);
 
   /* member functions */
-  virtual void report_clusters(void) = 0;
-  virtual void report_centroids(void) = 0;
   std::vector<kmeans_cluster<T>>* clusters(void) { return clusters_; }
   const std::vector<T>* data(void) { return data_; }
+
+  virtual void report_clusters(void) {
+    std::ofstream ofile(clusters_fname_);
+    std::for_each(kmeans_cluster_algorithm<T>::clusters()->begin(),
+                  kmeans_cluster_algorithm<T>::clusters()->end(),
+                  [&](const kmeans_cluster<T>& c) {
+                    ofile << c;
+                  });
+  }
+  virtual void report_centroids(void) {
+    std::ofstream ofile(centroids_fname_);
+    std::for_each(kmeans_cluster_algorithm<T>::clusters()->begin(),
+                  kmeans_cluster_algorithm<T>::clusters()->end(),
+                  [&](const kmeans_cluster<T>& c) {
+                    ofile << &c.center();
+                  });
+  }
 
   void cluster(void) {
     for (int i = 0; i < n_iterations_; ++i) {
@@ -62,6 +83,8 @@ template <typename T> class kmeans_cluster_algorithm {
 
   /* data members */
   int n_iterations_;
+  const std::string& clusters_fname_;
+  const std::string& centroids_fname_;
   const std::vector<T>* const data_;
   std::vector<kmeans_cluster<T>>* clusters_;
 };

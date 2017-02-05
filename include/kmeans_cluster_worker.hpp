@@ -50,7 +50,7 @@ template <typename T> class kmeans_cluster_worker: public threadable {
     for (std::size_t i = data->size()/n_threads_; i < data->size()/n_threads_ + n_threads_; ++i) {
       int min_queue;
       float min_dist = std::numeric_limits<float>::max();
-      for (std::size_t j = 0; j < clusters_[j].size(); ++j) {
+      for (std::size_t j = 0; j < clusters_->at(j).size(); ++j) {
         float dist = euclidean_dist(clusters_->at(j).center(), data->at(i));
         if (dist < min_dist) {
           min_dist = dist;

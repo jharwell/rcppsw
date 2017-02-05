@@ -64,12 +64,7 @@ class shared_queue {
   }  // Lock is automatically released here
 
   // get the size of the queue
-  size_t size() {
-    // Acquire lock on the queue
-    boost::unique_lock<boost::mutex> lock(mtx_);
-
-    return queue_.size();
-  }  // Lock is automatically released here
+  size_t size() const { return queue_.size(); }
 };
 
 #endif /* INCLUDE_SHARED_QUEUE_HPP_ */
