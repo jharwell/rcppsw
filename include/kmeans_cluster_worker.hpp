@@ -46,12 +46,12 @@ template <typename T> class kmeans_cluster_worker: public threadable {
           clusters_->at(self()).update_center();
           return NULL;
     }
-    std::vector<multidim_point<T>>* data = static_cast<std::vector<multidim_point<T>>*>(arg);
+    std::vector<T>* data = static_cast<std::vector<T>*>(arg);
     for (std::size_t i = data->size()/n_threads_; i < data->size()/n_threads_ + n_threads_; ++i) {
       int min_queue;
-      T min_dist = std::numeric_limits<T>::max();
+      float min_dist = std::numeric_limits<float>::max();
       for (std::size_t j = 0; j < clusters_[j].size(); ++j) {
-        T dist = euclidean_dist(clusters_->at(j).center(), data->at(i));
+        float dist = euclidean_dist(clusters_->at(j).center(), data->at(i));
         if (dist < min_dist) {
           min_dist = dist;
           min_queue = j;
@@ -64,14 +64,15 @@ template <typename T> class kmeans_cluster_worker: public threadable {
 
  private:
   /* member functions */
-  T euclidean_dist(const multidim_point<T>& p1,
-                   const multidim_point<T>& p2) const {
-    T dist = -1;
-    std::for_each(p1.begin(), p1.end(), [&](const T& e1) {
-        std::for_each(p2.begin(), p2.end(), [&](const T& e2) {
-            dist += std::pow(e1 - e2, 2);
-          });
-            });
+  float euclidean_dist(const T& p1,
+                       const T& p2) const {
+    float dist = -1;
+    for (auto& e1 : p1) {
+      for (auto& e2 : p2) {
+        dist += std::pow(e1 - e2, 2);
+      } /* for(e2...) */
+    } /* for(e1...) */
+
     return dist;
   } /* kmeans_cluster_worker::euclidean_dist() */
 

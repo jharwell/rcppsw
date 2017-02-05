@@ -35,12 +35,12 @@ class file_parser {
   explicit file_parser(const std::string& fname): fname_(fname) {}
 
   /* member functions */
-  template <typename T> std::vector<std::vector<T>> parse_file(
+  template <typename T> std::vector<T> parse_file(
       const std::string& delimiters = " ", bool trim_empty = false);
 
  private:
   /* member functions */
-  template <typename T> std::vector<T> parse_line(
+  template <typename T> T parse_line(
       const std::string& line,
       const std::string& delimiters, bool trim_empty);
 

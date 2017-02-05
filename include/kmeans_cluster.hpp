@@ -42,7 +42,7 @@ template <typename T> class kmeans_cluster {
   friend std::ostream& operator<<(std::ostream& stream,
                                   const kmeans_cluster<T>& cluster) {
     std::for_each(cluster.queue_.begin(), cluster.queue_.end(),
-                  [&](const multidim_point<T>* p) {
+                  [&](const T* p) {
                     stream << p;
                   });
     return stream;
@@ -52,9 +52,9 @@ template <typename T> class kmeans_cluster {
   typename shared_queue<T>::const_iterator begin(void) { return queue_.begin(); }
   typename shared_queue<T>::const_iterator end(void) { return queue_.end(); }
 
-  const multidim_point<T>& center(void) const { return center_; }
+  const T& center(void) const { return center_; }
   std::size_t size(void) const { return queue_.size(); }
-  void add(multidim_point<T> *point) { queue_.enqueue(point); }
+  void add(T *point) { queue_.enqueue(point); }
 
   bool convergence(void) {
     if (prev_hash_ == hash_ && prev_center_ == center_) {
@@ -70,21 +70,21 @@ template <typename T> class kmeans_cluster {
    * void - N/A
    **/
   void update_center(void) {
-    multidim_point<T> accum(queue_.size());
+    T accum(queue_.size());
     prev_center_ = center_;
     prev_hash_ = hash_;
     hash_ = 0;
 
-    std::for_each(queue_.begin(), queue_.end(), [&](multidim_point<T>* e) {
+    std::for_each(queue_.begin(), queue_.end(), [&](T* e) {
         for (std::size_t i = 0; i < e->size(); ++i) {
           /* hash_ ^= 0x9e3779b9 + (hash_ << 6) + (hash_ >> 2); */
           accum[i] += e->at(i);
         } /* for(i..) */
       });
 
-    std::for_each(accum.begin(), accum.end(), [&](T& e) {
-        e = e/accum.size();
-      });
+    for (std::size_t i = 0; i < accum.size(); ++i) {
+      accum[i] = accum[i]/accum.size();
+    } /* for(i..) */
     center_ = accum;
   } /* kmeans_cluster::update_center() */
 
@@ -92,9 +92,9 @@ template <typename T> class kmeans_cluster {
   /* member functions */
 
   /* data members */
-  shared_queue<multidim_point<T>*> queue_;
-  std::vector<T> center_;
-  std::vector<T> prev_center_;
+  shared_queue<T*> queue_;
+  T center_;
+  T prev_center_;
   std::size_t hash_;
   std::size_t prev_hash_;
 };

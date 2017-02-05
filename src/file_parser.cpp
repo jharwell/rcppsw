@@ -49,7 +49,7 @@ using namespace rcppsw;
  * std::vector<std::vector<T>> - The results of parsing
  **/
 template <typename T>
-std::vector<std::vector<T>> file_parser::parse_file(
+std::vector<T> file_parser::parse_file(
     const std::string& delimiters, bool trim_empty) {
   std::vector<std::vector<T>> tokens_set;
   std::string line;
@@ -70,9 +70,9 @@ std::vector<std::vector<T>> file_parser::parse_file(
  * std::vector<int> - The parsed token set
  **/
 template <typename T>
-std::vector<T> file_parser::parse_line(const std::string& line,
-                                       const std::string& delimiters,
-                                       bool trim_empty) {
+T file_parser::parse_line(const std::string& line,
+                          const std::string& delimiters,
+                          bool trim_empty) {
   std::string::size_type pos;
   std::size_t last_pos = 0;
   std::size_t length = line.length();

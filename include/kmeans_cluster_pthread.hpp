@@ -18,7 +18,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include "include/kmeans_algorithm.hpp"
+#include "include/kmeans_cluster_algorithm.hpp"
 #include "include/kmeans_cluster_worker.hpp"
 
 /*******************************************************************************
@@ -33,34 +33,37 @@ namespace rcppsw {
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template <typename T> class kmeans_cluster_pthread : public kmeans_algorithm<T> {
+template <typename T> class kmeans_cluster_pthread : public kmeans_cluster_algorithm<T> {
  public:
   /* constructors */
-  explicit kmeans_cluster_pthread(int n_threads,
-                                  const std::string& clusters_fname,
-                                  const std::string& centroids_fname) :
+  kmeans_cluster_pthread(int n_threads,
+                         int n_iterations,
+                         const std::vector<T>* const data,
+                         const std::string& clusters_fname,
+                         const std::string& centroids_fname) :
+      kmeans_cluster_algorithm<T>(n_iterations, data),
       n_threads_(n_threads), workers_(), clusters_fname_(clusters_fname),
       centroids_fname_(centroids_fname) {
     for (int i = 0; i < n_threads_; ++i) {
       workers_.emplace_back(kmeans_cluster_worker<T>());
     } /* for(i..) */
 
-    kmeans_cluster_worker<T>::clusters(&kmeans_algorithm<T>::clusters());
+    kmeans_cluster_worker<T>::clusters(kmeans_cluster_algorithm<T>::clusters());
     kmeans_cluster_worker<T>::n_threads(n_threads_);
   } /* kmeans_pthreads_cluster::kmeans_cluster_pthread() */
 
   void report_clusters(void) {
     std::ofstream ofile(clusters_fname_);
-    std::for_each(kmeans_algorithm<T>::clusters().begin(),
-                  kmeans_algorithm<T>::clusters().end(),
+    std::for_each(kmeans_cluster_algorithm<T>::clusters()->begin(),
+                  kmeans_cluster_algorithm<T>::clusters()->end(),
                   [&](const kmeans_cluster<T>& c) {
         ofile << c;
       });
   }
   void report_centroids(void) {
     std::ofstream ofile(centroids_fname_);
-    std::for_each(kmeans_algorithm<T>::clusters().begin(),
-                  kmeans_algorithm<T>::clusters().end(),
+    std::for_each(kmeans_cluster_algorithm<T>::clusters()->begin(),
+                  kmeans_cluster_algorithm<T>::clusters()->end(),
                   [&](const kmeans_cluster<T>& c) {
                     ofile << &c.center();
                   });
@@ -68,8 +71,8 @@ template <typename T> class kmeans_cluster_pthread : public kmeans_algorithm<T> 
 
   /* member functions */
   /**
-   * kmeans_algorithm::cluster_iterate() - Perform one iteration of the K-means
-   * clustering algorithm
+   * kmeans_cluster_pthread::cluster_iterate() - Perform one iteration of the
+   * K-means clustering algorithm
    *
    * RETURN:
    *     bool - true if convergence was achieved, false otherwise
@@ -80,7 +83,7 @@ template <typename T> class kmeans_cluster_pthread : public kmeans_algorithm<T> 
      * into the queue with the closest centroid.
      */
     for (std::size_t i = 0; i < workers_.size(); ++i) {
-      workers_[i].start(&kmeans_algorithm<T>::data()[i*n_threads_]);
+      workers_[i].start((void*)(&kmeans_cluster_algorithm<T>::data()[i*n_threads_]));
     } /* for(i..) */
 
     for (std::size_t i = 0; i < workers_.size(); ++i) {
@@ -100,8 +103,8 @@ template <typename T> class kmeans_cluster_pthread : public kmeans_algorithm<T> 
     } /* for(i..) */
 
     /* Finally, check for convergence */
-    for (std::size_t i = 0; i < kmeans_algorithm<T>::clusters().size(); ++i) {
-      if (!kmeans_algorithm<T>::clusters()[i].convergence()) {
+    for (std::size_t i = 0; i < kmeans_cluster_algorithm<T>::clusters()->size(); ++i) {
+      if (!kmeans_cluster_algorithm<T>::clusters()->at(i).convergence()) {
         return false;
       }
     } /* for(i..) */
