@@ -37,32 +37,43 @@ using multidim_point = std::vector<T>;
 template <typename T> class kmeans_cluster {
  public:
   /* constructors */
-  kmeans_cluster(void): queue_(), center_(), hash_(0) {}
+  kmeans_cluster(T *initial_center): queue_(),
+                                     center_(),
+                                     prev_center_() {
+    add(initial_center);
+    update_center();
+    reset();
+  }
 
-  /* member functions */
-  friend std::ostream& operator<<(std::ostream& stream,
-                                  const kmeans_cluster<T>& cluster) {
-    std::for_each(cluster.queue_.begin(), cluster.queue_.end(),
-                  [&](const T* p) {
-                    stream << p;
-                  });
-    return stream;
-  } /* operator<<() */
-
-  /* Const iterators: thread safe */
-  typename shared_queue<T>::const_iterator begin(void) { return queue_.begin(); }
-  typename shared_queue<T>::const_iterator end(void) { return queue_.end(); }
-
-  const T& center(void) const { return center_; }
-  std::size_t size(void) const { return queue_.size(); }
+  /* reentrant member functions */
   void add(T *point) { queue_.enqueue(point); }
 
-  bool convergence(void) {
-    if (prev_hash_ == hash_ && prev_center_ == center_) {
-      return true;
-    }
-    return false;
-  } /* kmeans_cluster::convergence() */
+  /* non reentrant member functions */
+  typename shared_queue<T>::const_iterator begin(void) { return queue_.begin(); }
+  typename shared_queue<T>::const_iterator end(void) { return queue_.end(); }
+  const T& center(void) const { return center_; }
+  std::size_t size(void) const { return queue_.size(); }
+  void reset(void) { queue_.clear(); }
+
+  void report_center(std::ofstream& stream) {
+    using value_type = typename T::value_type;
+    std::for_each(center_.begin(), center_.end(),
+                  [&](const value_type& p) {
+                    stream << std::sqrt(p)  << " ";
+                  });
+    stream << std::endl;
+  } /* report_center() */
+
+  /* Determine if a point is contained within the queue */
+  bool contains_point(const T& point) {
+    return (std::find(queue_.begin(), queue_.end(), &point) != queue_.end());
+  }
+
+  /*
+   * Determine if the cluster has converged, by checking if the center of the
+   * cluster has changed.
+   */
+  bool convergence(void) { return (prev_center_ == center_); }
 
   /**
    * kmeans_cluster::update_center() - Update the center (mean) of the points
@@ -71,20 +82,23 @@ template <typename T> class kmeans_cluster {
    * void - N/A
    **/
   void update_center(void) {
-    T accum(queue_.size());
+    T accum(queue_.front()->size());
     prev_center_ = center_;
-    prev_hash_ = hash_;
-    hash_ = 0;
 
+    /*
+     * To compute the center, square each point currently in the cluster, and
+     * sum. Divide the sum by the # of points in the cluster to get the new
+     * center. Note that no sqrt() is used, as all calculations can be done in
+     * "squared" space to save CPU cycles.
+     */
     std::for_each(queue_.begin(), queue_.end(), [&](T* e) {
         for (std::size_t i = 0; i < e->size(); ++i) {
-          /* hash_ ^= 0x9e3779b9 + (hash_ << 6) + (hash_ >> 2); */
-          accum[i] += e->at(i);
+          accum[i] += std::pow(e->at(i), 2);
         } /* for(i..) */
       });
 
     for (std::size_t i = 0; i < accum.size(); ++i) {
-      accum[i] = accum[i]/accum.size();
+      accum[i] = accum[i]/queue_.size();
     } /* for(i..) */
     center_ = accum;
   } /* kmeans_cluster::update_center() */
@@ -96,8 +110,6 @@ template <typename T> class kmeans_cluster {
   shared_queue<T*> queue_;
   T center_;
   T prev_center_;
-  std::size_t hash_;
-  std::size_t prev_hash_;
 };
 
 } /* namespace kmeans */

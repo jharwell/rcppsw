@@ -18,6 +18,7 @@
 #include <string>
 #include "include/kmeans/cluster_algorithm.hpp"
 #include "include/kmeans/pthread_worker.hpp"
+#include "rcsw/include/common/dbg.h"
 
 /*******************************************************************************
  * Namespaces
@@ -35,20 +36,19 @@ namespace kmeans {
 template <typename T> class cluster_pthread : public cluster_algorithm<T> {
  public:
   /* constructors */
-  cluster_pthread(int n_threads,
-                         int n_iterations,
-                         const std::vector<T>* const data,
-                         const std::string& clusters_fname,
-                         const std::string& centroids_fname) :
-      cluster_algorithm<T>(n_iterations, clusters_fname,
-                                  centroids_fname, data),
+  cluster_pthread(std::size_t n_iterations,
+                  std::size_t n_clusters,
+                  std::size_t n_threads,
+                  const std::vector<T>* const data,
+                  const std::string& clusters_fname,
+                  const std::string& centroids_fname) :
+      cluster_algorithm<T>(n_iterations, n_clusters, clusters_fname,
+                           centroids_fname, data),
       n_threads_(n_threads), workers_() {
-    for (int i = 0; i < n_threads_; ++i) {
-      workers_.emplace_back(pthread_worker<T>());
+    for (std::size_t i = 0; i < n_threads_; ++i) {
+      workers_.emplace_back(pthread_worker<T>(i, n_threads_,
+                                              cluster_algorithm<T>::clusters()));
     } /* for(i..) */
-
-    pthread_worker<T>::clusters(cluster_algorithm<T>::clusters());
-    pthread_worker<T>::n_threads(n_threads_);
   } /* kmeans_pthreads_cluster::kmeans_cluster_pthread() */
 
   /* member functions */
@@ -60,6 +60,10 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
    *     bool - true if convergence was achieved, false otherwise
    **/
   bool cluster_iterate(void) {
+    for (std::size_t i = 0; i < cluster_algorithm<T>::clusters()->size(); ++i) {
+      cluster_algorithm<T>::clusters()->at(i)->reset();
+    } /* for(i..) */
+
     /*
      * cluster the data via Euclidean distance, putting each matching vector
      * into the queue with the closest centroid.
@@ -86,9 +90,10 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
 
     /* Finally, check for convergence */
     for (std::size_t i = 0; i < cluster_algorithm<T>::clusters()->size(); ++i) {
-      if (!cluster_algorithm<T>::clusters()->at(i).convergence()) {
+      if (!cluster_algorithm<T>::clusters()->at(i)->convergence()) {
         return false;
       }
+      DBGTN("Cluster %lu reports convergence\n", i);
     } /* for(i..) */
     return true;
   } /* cluster_pthread::cluster_iterate() */
@@ -97,7 +102,7 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
   /* member functions */
 
   /* data members */
-  int n_threads_;
+  std::size_t n_threads_;
   std::vector<pthread_worker<T>> workers_;
 };
 

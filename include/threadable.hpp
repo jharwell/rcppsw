@@ -15,6 +15,8 @@
  * Includes
  ******************************************************************************/
 #include <pthread.h>
+#include <sys/types.h>
+#include <sys/syscall.h>
 #include "rcsw/include/al/altypes.h"
 
 /*******************************************************************************
@@ -41,15 +43,11 @@ class threadable {
   }
 
   bool terminated(void) { return (false == thread_run_); }
-  virtual int join(void) {
-    int ret;
-    pthread_join(thread_, (void**)&ret);
-    return ret;
-  }
+  virtual void join(void) { pthread_join(thread_, NULL); }
 
  protected:
-  pthread_t self(void) { return thread_; }
-
+  pthread_t thread_handle(void) { return thread_; }
+  int thread_id(void) { return syscall(__NR_gettid); }
   /* operators */
   threadable(const threadable&& other) : thread_run_(other.thread_run_),
                                          thread_(other.thread_),

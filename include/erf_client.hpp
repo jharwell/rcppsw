@@ -27,15 +27,15 @@ namespace rcppsw {
 class erf_client {
  public:
   /* constructors */
-  erf_client(er_frmwk& erf_handle_)
-      : erf_handle(erf_handle_), erf_id(erf_handle.idgen()) {}
+  erf_client(er_frmwk& erf_handle)
+      : erf_handle_(erf_handle), erf_id_(erf_handle_.idgen()) {}
 
   /* destructor */
   virtual ~erf_client(void) {}
 
  protected:
-  er_frmwk& erf_handle;
-  boost::uuids::uuid erf_id;
+  er_frmwk& erf_handle_;
+  boost::uuids::uuid erf_id_;
 };
 
 } /* namespace rcppsw */

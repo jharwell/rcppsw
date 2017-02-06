@@ -33,10 +33,11 @@
  *
  * This macro requires that:
  *
- * (1) You have a variable called erf_handle defined in the current scope that
- *     is of type rcppsw::er_rfmwk
- * (2) You have a variable called erf_id defined in the current scope that is of
- *     type boost::uuids::uuid for the module you want to report for.
+ * (1) You have a variable called erf_handle_ defined in the current scope that
+ *     is of type rcppsw::er_rfmwk.
+ *
+ * (2) You have a variable called erf_id_ defined in the current scope that is
+ *     of type boost::uuids::uuid for the module you want to report for.
  *
  */
 #define ER_REPORT(lvl, msg, ...)                                            \
@@ -44,7 +45,7 @@
     char _str[1000];                                                        \
     snprintf(_str, sizeof(_str), "%s:%d:%s: " msg "\n", __FILE__, __LINE__, \
              __FUNCTION__, ##__VA_ARGS__);                                  \
-    erf_handle.report(erf_id, lvl, std::string(_str));                      \
+    erf_handle_.report(erf_id_, lvl, std::string(_str));                      \
   }
 
 /*
