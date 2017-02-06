@@ -15,8 +15,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
+#include <list>
 #include <limits>
+#include <boost/shared_ptr.hpp>
 #include "include/threadable.hpp"
 #include "include/kmeans/cluster.hpp"
 
@@ -32,39 +33,46 @@ namespace kmeans {
 template <typename T> class pthread_worker: public threadable {
  public:
   /* constructors */
-  pthread_worker(int id, int n_threads,
-                 std::vector<kmeans_cluster<T>*>* clusters) :
-      threadable(), id_(id), n_threads_(n_threads), clusters_(clusters) {}
+  pthread_worker(std::size_t id, std::size_t n_threads, std::size_t chunk_size, std::size_t dimension,
+                 const boost::shared_ptr<std::vector<kmeans_cluster<T>*>>& clusters) :
+      threadable(), id_(id), n_threads_(n_threads), chunk_size_(chunk_size), dimension_(dimension),
+      clusters_(const_cast<boost::shared_ptr<std::vector<kmeans_cluster<T>*>>&>(clusters)) {}
 
   /* member functions */
   void* thread_main(void* arg) {
-    assert(clusters_->size() % n_threads_ == 0);
     if (NULL == arg) {
-      int n_centers = clusters_->size()/n_threads_;
-      for (int i = n_centers * id_; i < n_centers; ++i) {
-        DBGD("Worker %d: updating cluster %d center\n",id_, i);
+      std::size_t n_centers = clusters_->size()/n_threads_;
+      for (std::size_t i = n_centers * id_; i < n_centers * id_ + n_centers; ++i) {
+        DBGD("Worker %lu: updating cluster %lu center\n",id_, i);
         clusters_->at(i)->update_center();
       } /* for(i..) */
       return NULL;
     }
-    std::vector<T>* data = static_cast<std::vector<T>*>(arg);
-    assert(data->size() % n_threads_ == 0);
-    std::size_t n_iterations = data->size()/n_threads_;
+    double *data = (double*)arg;
 
-    DBGN("Worker %d: %lu - %lu\n", id_, n_iterations * id_,
-         n_iterations * id_ + n_iterations );
-    for (std::size_t i = n_iterations * id_; i < n_iterations * id_ + n_iterations; ++i) {
-      int min_queue = 0;
-      float min_dist = std::numeric_limits<float>::max();
+    DBGN("Worker %lu: %lu - %lu\n", id_, chunk_size_ * id_,
+         chunk_size_ * id_ + chunk_size_);
+
+    /*
+     * For each point in the data that is assigned to the current thread,
+     * calculate its Euclidean distance from the center of each to the point,
+     * and assign the point to the closest cluster.
+     */
+    for (std::size_t i = id_ * chunk_size_; i < id_ * chunk_size_ + chunk_size_; ++i) {
+      int closest = -1;
+      double min_dist = std::numeric_limits<float>::max();
           for (std::size_t j = 0; j < clusters_->size(); ++j) {
-            float dist = euclidean_dist(clusters_->at(j)->center(), data->at(i));
-        if (dist < min_dist) {
-          min_dist = dist;
-          min_queue = j;
-        }
-      } /* for(j..) */
-      clusters_->at(min_queue)->add(&data->at(i));
+            double dist = clusters_->at(j)->dist_to_center(data + (i * dimension_));
+            if (dist < min_dist) {
+              min_dist = dist;
+              closest = j;
+            }
+          } /* for(j..) */
+          clusters_->at(closest)->add_point(data + i * dimension_);
     } /* for(i..) */
+
+    DBGD("Worker%lu FINISHED: cluster size: %d/%lu %d/%lu\n",id_, 0,
+         clusters_->at(0)->size(),1, clusters_->at(1)->size());
     return NULL;
   } /* kmeans_pthread_worker::thread_main() */
 
@@ -72,30 +80,20 @@ template <typename T> class pthread_worker: public threadable {
   pthread_worker(const pthread_worker& other) : threadable(),
                                                 id_(other.id_),
                                                 n_threads_(other.n_threads_),
+                                                chunk_size_(other.chunk_size_),
+                                                dimension_(other.dimension_),
                                                 clusters_(other.clusters_) {}
 
  private:
-  /* member functions */
-  float euclidean_dist(const T& center,
-                       const T& point) const {
-    float sum1 = 0;
-    float sum2 = 0;
-    for (auto& e : center) {
-      sum1 += e;
-    } /* for(e...) */
-    for (auto& e : point) {
-      sum2 += std::pow(e, 2);
-    } /* for(e...) */
-    return std::abs(sum1 - sum2);
-  } /* kmeans_pthread_worker::euclidean_dist() */
-
   /* operators */
   pthread_worker& operator=(pthread_worker&) = delete;
 
   /* data members */
-  int id_;
-  int n_threads_;
-  std::vector<kmeans_cluster<T>*>* clusters_;
+  std::size_t id_;
+  std::size_t n_threads_;
+  std::size_t chunk_size_;
+  std::size_t dimension_;
+  boost::shared_ptr<std::vector<kmeans_cluster<T>*>> clusters_;
 };
 
 } /* namespace kmeans */

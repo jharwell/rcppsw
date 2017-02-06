@@ -43,15 +43,15 @@ template <typename T> class file_parser {
   /**
    * file_parser::parse_file() - Parse a file into a vector of sets of tokens,
    *
-   * std::vector<std::vector<T>> - The results of parsing
+   * std::vector<T> - The results of parsing
    **/
-  std::vector<T> parse_file(void) {
-    std::vector<T> tokens_set;
+  std::vector<T>* parse_file(void) {
+    std::vector<T>* tokens_set = new std::vector<T>;
     std::string line;
     std::ifstream infile(fname_);
 
     while (std::getline(infile, line)) {
-      tokens_set.push_back(parse_line(line));
+      tokens_set->push_back(parse_line(line));
     } /* while() */
 
     return tokens_set;

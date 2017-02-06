@@ -63,6 +63,8 @@ class shared_queue {
   size_t size() const { return queue_.size(); }
   T front(void) { return queue_.front(); }
   void clear(void) { queue_.clear(); }
+  const T& operator[](std::size_t pos) const { return queue_[pos]; }
+
  private:
   std::deque<T> queue_;           // Use STL queue to store data
   boost::mutex mtx_;              // The mutex to synchronise on

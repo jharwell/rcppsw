@@ -14,6 +14,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <omp.h>
 #include <vector>
 #include <string>
 #include "include/kmeans/cluster_algorithm.hpp"
@@ -30,11 +31,13 @@ namespace kmeans {
 template <typename T> class cluster_openmp : public cluster_algorithm<T> {
  public:
   /* constructors */
-  cluster_openmp(int n_iterations,
-                 const std::vector<T>* const data,
-                 const std::string& clusters_fname,
-                 const std::string& centroids_fname) :
-      cluster_algorithm<T>(n_iterations, clusters_fname,
+  cluster_openmp(std::size_t n_iterations,
+                  std::size_t n_clusters,
+                  std::size_t n_threads,
+                  const std::vector<T>* const data,
+                  const std::string& clusters_fname,
+                  const std::string& centroids_fname) :
+      cluster_algorithm<T>(n_iterations, n_clusters, n_threads, clusters_fname,
                            centroids_fname, data) {}
 
   /* member functions */
@@ -46,53 +49,45 @@ template <typename T> class cluster_openmp : public cluster_algorithm<T> {
    *     bool - true if convergence was achieved, false otherwise
    **/
   bool cluster_iterate(void) {
+#pragma omp parallel for num_threads(cluster_algorithm<T>::n_threads())
+    for (std::size_t i = 0; i < cluster_algorithm<T>::clusters()->size(); ++i) {
+      cluster_algorithm<T>::clusters()->at(i)->reset();
+    } /* for(i..) */
+
     /*
      * cluster the data via Euclidean distance, putting each matching vector
      * into the queue with the closest centroid.
      */
-
+#pragma omp parallel for num_threads(cluster_algorithm<T>::n_threads())
     for (std::size_t i = 0; i < cluster_algorithm<T>::data()->size(); ++i) {
-      int min_queue;
-      float min_dist = std::numeric_limits<float>::max();
-      for (std::size_t j = 0; j < cluster_algorithm<T>::clusters()->at(j).size(); ++j) {
-        float dist = euclidean_dist(cluster_algorithm<T>::clusters()->at(j).center(),
-                                    cluster_algorithm<T>::data()->at(i));
+      int closest = -1;
+      double min_dist = std::numeric_limits<float>::max();
+      for (std::size_t j = 0; j < cluster_algorithm<T>::clusters()->size(); ++j) {
+        double dist = cluster_algorithm<T>::clusters()->at(j)->dist_to_center(cluster_algorithm<T>::data()->at(i));
         if (dist < min_dist) {
           min_dist = dist;
-          min_queue = j;
+          closest = j;
         }
       } /* for(j..) */
-      cluster_algorithm<T>::clusters()->at(min_queue).add(const_cast<T*>(&cluster_algorithm<T>::data()->at(i)));
+      cluster_algorithm<T>::clusters()->at(closest)->add_point(&(const_cast<std::vector<T>*>(cluster_algorithm<T>::data())->at(i)));
     } /* for(i..) */
 
     /*
-     * Update the center/hash for the queue corresponding to the thread ID
-     * of the worker.
+     * Update the center/hash for all clusters
      */
-    for (std::size_t i = 0; i < cluster_algorithm<T>::data()->size(); ++i) {
-      cluster_algorithm<T>::clusters()->at(i).update_center();
+#pragma omp parallel for num_threads(cluster_algorithm<T>::n_threads())
+    for (std::size_t i = 0; i < cluster_algorithm<T>::clusters()->size(); ++i) {
+      cluster_algorithm<T>::clusters()->at(i)->update_center();
     } /* for(i..) */
 
     /* Finally, check for convergence */
     for (std::size_t i = 0; i < cluster_algorithm<T>::clusters()->size(); ++i) {
-      if (!cluster_algorithm<T>::clusters()->at(i).convergence()) {
+      if (!cluster_algorithm<T>::clusters()->at(i)->convergence()) {
         return false;
       }
     } /* for(i..) */
     return true;
   } /* cluster_openmp::cluster_iterate() */
-
-  float euclidean_dist(const T& p1,
-                       const T& p2) const {
-    float dist = -1;
-    for (auto& e1 : p1) {
-      for (auto& e2 : p2) {
-        dist += std::pow(e1 - e2, 2);
-      } /* for(e2...) */
-    } /* for(e1...) */
-
-    return dist;
-  } /* cluster_openmp::euclidean_dist() */
 
  private:
   /* member functions */
