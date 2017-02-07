@@ -37,22 +37,22 @@ using multidim_point = std::vector<T>;
 template <typename T> class kmeans_cluster {
  public:
   /* constructors */
-  kmeans_cluster(T *initial_center,
-                 std::size_t dimension): queue_(),
+  kmeans_cluster(std::size_t dimension): queue_(),
                                          center_(dimension),
                                          prev_center_(dimension),
                                          hash_(),
                                          prev_hash_(),
-                                         dimension_(dimension) {
-    add_point(initial_center);
-    update_center();
-    reset();
-  }
+                                         dimension_(dimension) {}
 
-  /* reentrant member functions */
+    /* reentrant member functions */
   void add_point(T *point) { queue_.enqueue(point); }
 
   /* non reentrant member functions */
+  void initialize_center(T* center) {
+    add_point(center);
+    update_center();
+    reset();
+  }
   typename shared_queue<T>::const_iterator begin(void) { return queue_.begin(); }
   typename shared_queue<T>::const_iterator end(void) { return queue_.end(); }
   const T* center(void) const { return center_; }
@@ -60,7 +60,7 @@ template <typename T> class kmeans_cluster {
   void reset(void) { queue_.clear(); }
 
 double dist_to_center(const T* const point) {
-    double sum = 0.0;
+    T sum = 0;
     for (std::size_t i = 0; i < dimension_; ++i) {
       sum += std::pow(point[i] - center_[i],2);
     } /* for(i..) */
@@ -118,7 +118,6 @@ double dist_to_center(const T* const point) {
 
     for (std::size_t i = 0; i < accum.size(); ++i) {
       accum[i] /= queue_.size();
-      printf("center[%d] = %f\n",i,accum[i]);
     } /* for(i..) */
     center_ = accum;
   } /* kmeans_cluster::update_center() */

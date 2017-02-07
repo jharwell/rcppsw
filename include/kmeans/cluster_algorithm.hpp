@@ -45,14 +45,14 @@ template <typename T> class cluster_algorithm {
   cluster_algorithm(std::size_t n_iterations,
                     std::size_t n_clusters,
                     std::size_t n_threads,
-                    const T* const data,
                     std::size_t dimension,
                     std::size_t n_points,
                     const std::string& clusters_fname,
                     const std::string& centroids_fname) :
       n_iterations_(n_iterations), n_clusters_(n_clusters),
-      n_threads_(n_threads), data_(data),
+      n_threads_(n_threads),
       dimension_(dimension), n_points_(n_points),
+      data_(NULL),
       clusters_fname_(clusters_fname),
       centroids_fname_(centroids_fname),
       clusters_(new std::vector<kmeans_cluster<T>*>()) {
@@ -63,7 +63,7 @@ template <typename T> class cluster_algorithm {
          n_clusters_, n_iterations_);
 
     for (std::size_t i = 0; i < n_clusters_; ++i) {
-      clusters_->emplace_back(new kmeans_cluster<T>((T*)data + i * dimension_, dimension_));
+      clusters_->emplace_back(new kmeans_cluster<T>(dimension_));
     } /* for(i..) */
   }
 
@@ -76,7 +76,8 @@ template <typename T> class cluster_algorithm {
   /* member functions */
   boost::shared_ptr<std::vector<kmeans_cluster<T>*>>& clusters(void) { return clusters_; }
   std::size_t n_threads(void) { return n_threads_; }
-  const double* data(void) { return data_; }
+  T* data(void) { return data_; }
+  void data(T* in) { data_ = in; }
   std::size_t n_points(void) { return n_points_; }
   std::size_t dimension(void) { return dimension_; }
   virtual void report_clusters(void) {
@@ -105,16 +106,18 @@ template <typename T> class cluster_algorithm {
   void cluster(void) {
     DBGTN("Begin clustering\n");
     for (std::size_t i = 0; i < n_iterations_; ++i) {
-      DBGTN("Iteration %lu\n", i);
+      printf("Iteration %lu\n", i);
       double start = monotonic_seconds();
       if (cluster_iterate()) {
         DBGTN("Clusters report convergence: terminating\n");
         break;
       }
       double end = monotonic_seconds();
-      DBGTN("Iteration %lu time: %.8fms\n", i, (end - start)*1000);
+      printf("Iteration %lu time: %.8fms\n", i, (end - start)*1000);
     } /* for(i..) */
   } /* cluster_algorithm::cluster() */
+
+  virtual void initialize(std::vector<multidim_point<T>>* data_in) = 0;
 
  protected:
   virtual bool cluster_iterate(void) = 0;
@@ -133,9 +136,9 @@ template <typename T> class cluster_algorithm {
   std::size_t n_iterations_;
   std::size_t n_clusters_;
   std::size_t n_threads_;
-  const T* const data_;
   std::size_t dimension_;
   std::size_t n_points_;
+  T* data_;
   const std::string& clusters_fname_;
   const std::string& centroids_fname_;
   boost::shared_ptr<std::vector<kmeans_cluster<T>*>> clusters_;

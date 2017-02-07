@@ -1,16 +1,16 @@
 /*******************************************************************************
- * Name            : shared_queue.hpp
+ * Name            : mt_queue.hpp
  * Project         : rcppsw
- * Module          : ds
+ * Module          : multithread
  * Description     : A simple multiple-producer, single-consumer queue with
  *                   locking
- * Creation Date   : 06/25/15
- * Copyright       : Copyright 2015 John Harwell, All rights reserved
+ * Creation Date   : 02/06/16
+ * Copyright       : Copyright 2017 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_SHARED_QUEUE_HPP_
-#define INCLUDE_SHARED_QUEUE_HPP_
+#ifndef INCLUDE_MT_QUEUE_HPP_
+#define INCLUDE_MT_QUEUE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -23,13 +23,13 @@
  * Class Definitions
  ******************************************************************************/
 template <typename T>
-class shared_queue {
+class mt_queue {
  public:
-  shared_queue(void) : queue_(), mtx_(), cv_() {}
+  mt_queue(void) : queue_(), mtx_(), cv_() {}
   /* type definitions */
-  typedef typename std::deque<T>::const_iterator const_iterator;
-  typename std::deque<T>::const_iterator begin(void) const { return queue_.begin(); }
-  typename std::deque<T>::const_iterator end(void) const { return queue_.end(); }
+  typedef typename std::vector<T>::const_iterator const_iterator;
+  typename std::vector<T>::const_iterator begin(void) const { return queue_.begin(); }
+  typename std::vector<T>::const_iterator end(void) const { return queue_.end(); }
 
   // Add data to the queue and notify others
   void enqueue(const T& data) {
@@ -71,4 +71,4 @@ class shared_queue {
   boost::condition_variable cv_;  // The condition to wait for
 };
 
-#endif /* INCLUDE_SHARED_QUEUE_HPP_ */
+#endif /* INCLUDE_MT_QUEUE_HPP_ */

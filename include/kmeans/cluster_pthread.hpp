@@ -39,12 +39,11 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
   cluster_pthread(std::size_t n_iterations,
                   std::size_t n_clusters,
                   std::size_t n_threads,
-                  const double * const data,
                   std::size_t dimension,
                   std::size_t n_points,
                   const std::string& clusters_fname,
                   const std::string& centroids_fname) :
-      cluster_algorithm<T>(n_iterations, n_clusters, n_threads, data, dimension,
+      cluster_algorithm<T>(n_iterations, n_clusters, n_threads, dimension,
                            n_points, clusters_fname, centroids_fname),
       workers_() {
     assert(n_points % n_threads == 0);
@@ -57,6 +56,33 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
   } /* kmeans_cluster_pthread::kmeans_cluster_pthread() */
 
   /* member functions */
+  void initialize(std::vector<multidim_point<T>>* data_in) {
+    for (std::size_t i = 0; i < cluster_algorithm<T>::clusters()->size(); ++i) {
+      cluster_algorithm<T>::clusters()->at(i)->initialize_center(data_in->at(i).data());
+    } /* for(i..) */
+
+    cluster_algorithm<T>::data(new T[data_in->size() * cluster_algorithm<T>::dimension()]);
+
+    /*
+     * Perform first touch allocation
+     */
+    typename pthread_worker<T>::instructions instr = {0, cluster_algorithm<T>::data()};
+    for (std::size_t i = 0; i < workers_.size(); ++i) {
+      workers_[i].start(&instr);
+    } /* for(i..) */
+
+    for (std::size_t i = 0; i < workers_.size(); ++i) {
+      workers_[i].join();
+    } /* for(i..) */
+
+    for (std::size_t i = 0; i < data_in->size(); ++i) {
+      std::copy(data_in->at(i).begin(),
+      data_in->at(i).end(),
+                cluster_algorithm<T>::data() + i*data_in->at(0).size());
+    } /* for(i..) */
+
+  } /* load_data() */
+
   /**
    * kmeans_cluster_pthread::cluster_iterate() - Perform one iteration of the
    * K-means clustering algorithm
@@ -74,8 +100,9 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
      * into the queue with the closest centroid.
      */
     assert(cluster_algorithm<T>::dimension() % workers_.size() == 0);
+    typename pthread_worker<T>::instructions instr1 = {1, cluster_algorithm<T>::data()};
     for (std::size_t i = 0; i < workers_.size(); ++i) {
-      workers_[i].start((void*)(cluster_algorithm<T>::data()));
+      workers_[i].start(&instr1);
     } /* for(i..) */
 
     for (std::size_t i = 0; i < workers_.size(); ++i) {
@@ -85,8 +112,9 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
     /*
      * Update the center for all clusters
      */
+    typename pthread_worker<T>::instructions instr2 = {2, NULL};
     for (std::size_t i = 0; i < workers_.size(); ++i) {
-      workers_[i].start(NULL);
+      workers_[i].start(&instr2);
     } /* for(i..) */
 
     for (std::size_t i = 0; i < workers_.size(); ++i) {
