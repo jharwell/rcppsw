@@ -17,7 +17,7 @@
  ******************************************************************************/
 #include <vector>
 #include <algorithm>
-#include "include/shared_queue.hpp"
+#include "include/mt_vector.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -37,7 +37,7 @@ using multidim_point = std::vector<T>;
 template <typename T> class kmeans_cluster {
  public:
   /* constructors */
-  kmeans_cluster(std::size_t dimension): queue_(),
+  kmeans_cluster(std::size_t dimension): vector_(),
                                          center_(dimension),
                                          prev_center_(dimension),
                                          hash_(),
@@ -45,7 +45,7 @@ template <typename T> class kmeans_cluster {
                                          dimension_(dimension) {}
 
     /* reentrant member functions */
-  void add_point(T *point) { queue_.enqueue(point); }
+  void add_point(T *point) { vector_.push_back(point); }
 
   /* non reentrant member functions */
   void initialize_center(T* center) {
@@ -53,13 +53,13 @@ template <typename T> class kmeans_cluster {
     update_center();
     reset();
   }
-  typename shared_queue<T>::const_iterator begin(void) { return queue_.begin(); }
-  typename shared_queue<T>::const_iterator end(void) { return queue_.end(); }
+  typename mt_vector<T>::const_iterator begin(void) { return vector_.begin(); }
+  typename mt_vector<T>::const_iterator end(void) { return vector_.end(); }
   const T* center(void) const { return center_; }
-  std::size_t size(void) const { return queue_.size(); }
-  void reset(void) { queue_.clear(); }
+  std::size_t size(void) const { return vector_.size(); }
+  void reset(void) { vector_.clear(); }
 
-double dist_to_center(const T* const point) {
+  double dist_to_center(const T* const point) {
     T sum = 0;
     for (std::size_t i = 0; i < dimension_; ++i) {
       sum += std::pow(point[i] - center_[i],2);
@@ -75,10 +75,10 @@ double dist_to_center(const T* const point) {
     stream << std::endl;
   } /* report_center() */
 
-  /* Determine if a point is contained within the queue */
+  /* Determine if a point is contained within the vector */
   bool contains_point(const T* const point) {
-    for (std::size_t i = 0; i < queue_.size(); ++i) {
-      if (memcmp(queue_[i], point, dimension_* sizeof(T)) == 0) {
+    for (std::size_t i = 0; i < vector_.size(); ++i) {
+      if (memcmp(vector_[i], point, dimension_* sizeof(T)) == 0) {
         return true;
       }
     } /* for(i..) */
@@ -108,16 +108,16 @@ double dist_to_center(const T* const point) {
      * center. Note that no sqrt() is used, as all calculations can be done in
      * "squared" space to save CPU cycles.
      */
-    std::size_t hash_ = queue_.size();
-    for (std::size_t i = 0; i < queue_.size(); ++i) {
+    std::size_t hash_ = vector_.size();
+    for (std::size_t i = 0; i < vector_.size(); ++i) {
       for (std::size_t j = 0; j < dimension_; ++j) {
-        accum[j] += queue_[i][j];
-        hash_ ^= (std::size_t)queue_[i][j] + 0x9e3779b9 + (hash_ << 6) + (hash_ >> 2);
+        accum[j] += vector_[i][j];
+        hash_ ^= (std::size_t)vector_[i][j] + 0x9e3779b9 + (hash_ << 6) + (hash_ >> 2);
       } /* for(j..) */
     } /* for(i..) */
 
     for (std::size_t i = 0; i < accum.size(); ++i) {
-      accum[i] /= queue_.size();
+      accum[i] /= vector_.size();
     } /* for(i..) */
     center_ = accum;
   } /* kmeans_cluster::update_center() */
@@ -126,7 +126,7 @@ double dist_to_center(const T* const point) {
   /* member functions */
 
   /* data members */
-  shared_queue<T*> queue_;
+  mt_vector<T*> vector_;
   std::vector<T> center_;
   std::vector<T> prev_center_;
   std::size_t hash_;

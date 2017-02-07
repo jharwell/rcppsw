@@ -21,7 +21,7 @@
 #include <vector>
 #include "rcsw/include/al/altypes.h"
 #include "include/er_frmwk_mod.hpp"
-#include "include/shared_queue.hpp"
+#include "include/mt_queue.hpp"
 #include "include/threadable.hpp"
 
 /*******************************************************************************
@@ -144,7 +144,7 @@ class er_frmwk : public threadable {
   /* data members */
   char hostname_[32];
   std::vector<er_frmwk_mod> modules_;
-  shared_queue<erf_msg> queue_;
+  mt_queue<erf_msg> queue_;
   std::string logfile_fname_;
   std::ofstream logfile_;
   erf_lvl::value loglvl_dflt_;

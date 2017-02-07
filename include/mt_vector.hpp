@@ -15,7 +15,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <deque>
 #include <vector>
 #include <boost/thread.hpp>
 #include <boost/thread/locks.hpp>
@@ -26,7 +25,8 @@
 template <typename T>
 class mt_vector {
  public:
-  mt_vector(void) : v_(), mtx_(), {}
+  mt_vector(void) : v_(), mtx_() {}
+
   /* type definitions */
   typedef typename std::vector<T>::const_iterator const_iterator;
   typename std::vector<T>::const_iterator begin(void) const { return v_.begin(); }

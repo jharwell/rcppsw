@@ -27,9 +27,9 @@ class mt_queue {
  public:
   mt_queue(void) : queue_(), mtx_(), cv_() {}
   /* type definitions */
-  typedef typename std::vector<T>::const_iterator const_iterator;
-  typename std::vector<T>::const_iterator begin(void) const { return queue_.begin(); }
-  typename std::vector<T>::const_iterator end(void) const { return queue_.end(); }
+  typedef typename std::deque<T>::const_iterator const_iterator;
+  typename std::deque<T>::const_iterator begin(void) const { return queue_.begin(); }
+  typename std::deque<T>::const_iterator end(void) const { return queue_.end(); }
 
   // Add data to the queue and notify others
   void enqueue(const T& data) {
