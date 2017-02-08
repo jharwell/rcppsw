@@ -31,16 +31,49 @@ namespace kmeans {
 template <typename T> class cluster_openmp : public cluster_algorithm<T> {
  public:
   /* constructors */
-  cluster_openmp(std::size_t n_iterations,
-                  std::size_t n_clusters,
-                  std::size_t n_threads,
-                  const std::vector<T>* const data,
-                  const std::string& clusters_fname,
-                  const std::string& centroids_fname) :
-      cluster_algorithm<T>(n_iterations, n_clusters, n_threads, clusters_fname,
-                           centroids_fname, data) {}
-
+  cluster_algorithm(std::size_t n_iterations,
+                    std::size_t n_clusters,
+                    std::size_t n_threads,
+                    std::size_t dimension,
+                    std::size_t n_points,
+                    const std::string& clusters_fname,
+                    const std::string& centroids_fname) :
+      cluster_algorithm<T>(n_iterations, n_clusters, n_threads, dimension,
+                           n_points, clusters_fname, centroids_fname) {}
   /* member functions */
+  /*
+   * Initialize the algorithm, performing first touch allocation and copying the
+   * provided data into a format that can be efficiently processed.
+   */
+  void initialize(std::vector<multidim_point<T>>* data_in) {
+
+    /*
+     * Perform first touch allocation for all threads
+     */
+    typename pthread_worker<T>::instruction_data instr = {
+      pthread_worker<T>::instruction::FIRST_TOUCH,
+      cluster_algorithm<T>::data(),
+      cluster_algorithm<T>::membership(),
+    };
+
+    std::for_each(workers_.begin(), workers_.end(),
+                  [&](pthread_worker<T>& w) { w.start(&instr); });
+    std::for_each(workers_.begin(), workers_.end(),
+                  [&](pthread_worker<T>& w) { w.join(); });
+
+    /*
+     * Initialize center for all clusters
+     */
+    for (std::size_t i = 0; i < cluster_algorithm<T>::n_clusters(); ++i) {
+      cluster_algorithm<T>::clusters()->at(i)->initialize_center(data_in->at(i).data());
+    } /* for(i..) */
+
+    for (std::size_t i = 0; i < cluster_algorithm<T>::n_points(); ++i) {
+      std::copy(data_in->at(i).begin(), data_in->at(i).end(),
+                cluster_algorithm<T>::data() + (i * dimension));
+    } /* for(i..) */
+  } /* load_data() */
+
   /**
    * cluster_openmp::cluster_iterate() - Perform one iteration of the
    * K-means clustering algorithm

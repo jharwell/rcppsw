@@ -33,30 +33,43 @@ namespace kmeans {
 template <typename T> class pthread_worker: public threadable {
  public:
   /* constructors */
-  pthread_worker(std::size_t id, std::size_t n_threads, std::size_t chunk_size, std::size_t dimension,
+  pthread_worker(std::size_t id, std::size_t n_threads, std::size_t chunk_size,
+                 std::size_t dimension,
                  const boost::shared_ptr<std::vector<kmeans_cluster<T>*>>& clusters) :
-      threadable(), id_(id), n_threads_(n_threads), chunk_size_(chunk_size), dimension_(dimension),
+      threadable(), id_(id), n_threads_(n_threads), chunk_size_(chunk_size),
+      dimension_(dimension),
       clusters_(const_cast<boost::shared_ptr<std::vector<kmeans_cluster<T>*>>&>(clusters)) {}
 
-  struct instructions {
-    int type;
+  enum instruction {
+    FIRST_TOUCH,
+    UPDATE_CENTER,
+    CLUSTER_POINTS
+  };
+  struct instruction_data {
+    enum instruction type;
     T* const data;
+    std::size_t* membership;
   };
 
   /* member functions */
   void* thread_main(void* arg) {
-    struct instructions* instr = (struct instructions*)arg;
+    struct instruction_data* instr = (struct instruction_data*)arg;
 
-    if (0 == instr->type) {
+    if (FIRST_TOUCH == instr->type) {
       for (std::size_t i = id_ * chunk_size_; i < id_ * chunk_size_ + chunk_size_; ++i) {
         instr->data[i*dimension_] = 0;
+        instr->membership[i] = -1;
       } /* for(i...) */
       return NULL;
-    } else if (2 == instr->type) {
+    } else if (UPDATE_CENTER == instr->type) {
+
+      /*
+       * Each thread is responsible for update the centers of clusters that fall
+       * within a range based on the id of the thread
+       */
       std::size_t n_centers = clusters_->size()/n_threads_;
       for (std::size_t i = n_centers * id_; i < n_centers * id_ + n_centers; ++i) {
-        DBGD("Worker %lu: updating cluster %lu center\n",id_, i);
-        clusters_->at(i)->update_center();
+        clusters_->at(i)->update_center(chunk_size_ * n_threads_);
       } /* for(i..) */
       return NULL;
     } else {
@@ -72,18 +85,16 @@ template <typename T> class pthread_worker: public threadable {
     for (std::size_t i = id_ * chunk_size_; i < id_ * chunk_size_ + chunk_size_; ++i) {
       int closest = -1;
       double min_dist = std::numeric_limits<float>::max();
-          for (std::size_t j = 0; j < clusters_->size(); ++j) {
-            double dist = clusters_->at(j)->dist_to_center(instr->data + (i * dimension_));
-            if (dist < min_dist) {
-              min_dist = dist;
-              closest = j;
-            }
-          } /* for(j..) */
-          clusters_->at(closest)->add_point(instr->data + i * dimension_);
+      for (std::size_t j = 0; j < clusters_->size(); ++j) {
+        double dist = clusters_->at(j)->dist_to_center(instr->data + i * dimension_);
+        if (dist < min_dist) {
+          min_dist = dist;
+          closest = j;
+        }
+      } /* for(j..) */
+      clusters_->at(closest)->add_point(i);
     } /* for(i..) */
 
-    DBGD("Worker%lu FINISHED: cluster size: %d/%lu %d/%lu\n",id_, 0,
-         clusters_->at(0)->size(),1, clusters_->at(1)->size());
     return NULL;
     }
   } /* kmeans_pthread_worker::thread_main() */
