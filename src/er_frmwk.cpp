@@ -11,7 +11,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "include/er_frmwk.hpp"
+#include "include/rcppsw/er_frmwk.hpp"
 #include <algorithm>
 #include <boost/filesystem.hpp>
 

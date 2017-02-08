@@ -19,7 +19,7 @@
 #include <boost/uuid/uuid_io.hpp>
 #include <iostream>
 #include <string>
-#include "rcsw/include/al/altypes.h"
+#include "rcsw/al/altypes.h"
 
 /*******************************************************************************
  * Namespaces

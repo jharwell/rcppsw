@@ -11,7 +11,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "include/cli_base.hpp"
+#include "include/rcppsw/cli_base.hpp"
 #include <ctime>
 #include <iomanip>
 #include <iostream>

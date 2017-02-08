@@ -41,7 +41,7 @@ LOGDIR          = ./logs
 # Definitions
 ###############################################################################
 # The prefix to install things to via 'make install'
-PREFIX         ?= /usr/local
+PREFIX         ?= $(HOME)/local
 
 # Tell make we want to execute all commands using bash (otherwise it uses sh)
 SHELL           = bash
@@ -97,13 +97,14 @@ OPT        = -O0
 CDEBUG    = -DDBG_LVL_DYNAMIC=DBG_N
 
 CLIBS     = $(CCLIB_SELF) -lcommon.x86 -levtlog.x86 -lds.x86 -lutils.x86 $(CCLIBS)
-CLIBDIRS  = $(CCLIBDIRS) -L$(rcswroot)/lib/x86/linux
+CLIBDIRS  = $(CCLIBDIRS) -L$(localroot)/lib
 
 define CINCDIRS
--I.
+-I. \
+-I$(localroot)/include
 endef
 
-CFLAGS   = $(OPT) -g -D__linux__ -W -Wall -Wextra -std=gnu99 -fmessage-length=0 $(CINCDIRS) $(CDEBUG)
+CFLAGS   = $(OPT) -g -W -Wall -Wextra -std=gnu99 -fmessage-length=0 $(CINCDIRS) $(CDEBUG)
 CC       = $(develcc)
 
 ###############################################################################
@@ -113,11 +114,11 @@ CXXLIBDIRS ?= -L$(rcppsw)/lib -L$(LIBDIR)
 
 define CXXINCDIRS
 -I. \
--I$(rcsw) \
+-I$(localroot)/include \
 -I$(develroot)/catch/single_include
 endef
 
-CXXFLAGS    = $(OPT) -g -D__linux__ -W -Wall -Wextra -Weffc++ -std=gnu++11 -fmessage-length=0 $(CXXINCDIRS)
+CXXFLAGS    = $(OPT) -g -W -Wall -Wextra -Weffc++ -std=gnu++11 -fmessage-length=0 $(CXXINCDIRS)
 CXXLIBS     = $(CCLIB_SELF) -lrcppsw.x86 -lboost_system -lboost_filesystem -lboost_thread $(CCLIBS)
 CXX         = $(develcxx)
 
@@ -338,8 +339,17 @@ unit_tests: $(CTESTS) $(CXXTESTS)
 
 # The Installer
 install: $(TARGET)
-	@install -d $(PREFIX)
-	@install $(TARGET) $(PREFIX)
+	@install -d $(PREFIX)/include/$(notdir $(shell pwd))
+	@install -d $(PREFIX)/lib/$(notdir $(shell pwd))
+	@install -d $(PREFIX)/bin
+	@install $(TARGET) $(PREFIX)/lib/$(notdir $(shell pwd))
+	@cp -r include/$(notdir $(shell pwd)) $(PREFIX)/include/
+
+# The Uninstaller
+uninstall:
+	@rm -rf $(PREFIX)/include/$(notdir $(shell pwd))
+	@rm -rf $(PREFIX)/lib/$(notdir $(shell pwd))
+	@rm -rf $(PREFIX)/lib/$(notdir $(shell pwd))
 
 # The Remote Copier
 rcopy:

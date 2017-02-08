@@ -11,7 +11,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "include/forkable.hpp"
+#include "include/rcppsw/forkable.hpp"
 #include <assert.h>
 #include <fcntl.h>
 #include <limits.h>
@@ -21,7 +21,7 @@
 #include <sys/types.h>
 #include <string>
 #include <vector>
-#include "rcsw/include/multithread/procm.h"
+#include "rcsw//multithread/procm.h"
 
 /*******************************************************************************
  * Namespaces

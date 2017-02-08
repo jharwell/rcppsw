@@ -17,7 +17,7 @@
 #include <pthread.h>
 #include <sys/types.h>
 #include <sys/syscall.h>
-#include "rcsw/include/al/altypes.h"
+#include "rcsw/al/altypes.h"
 
 /*******************************************************************************
  * Namespaces

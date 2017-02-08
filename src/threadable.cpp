@@ -11,9 +11,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "include/threadable.hpp"
-#include "include/er_frmwk.hpp"
-#include "rcsw/include/multithread/threadm.h"
+#include "include/rcppsw/threadable.hpp"
+#include "include/rcppsw/er_frmwk.hpp"
+#include "rcsw//multithread/threadm.h"
 
 /*******************************************************************************
  * Namespace Definitions
