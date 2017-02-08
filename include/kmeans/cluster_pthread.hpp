@@ -73,13 +73,6 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
   std::for_each(workers_.begin(), workers_.end(),
                 [&](pthread_worker<T>& w) { w.join(); });
   }
-  /*
-   * Initialize the algorithm, performing first touch allocation and copying the
-   * provided data into a format that can be efficiently processed.
-   */
-  void initialize(std::vector<multidim_point<T>>* data_in) {
-    cluster_algorithm<T>::initialize(data_in);
-  } /* initialize() */
 
   /**
    * kmeans_cluster_pthread::cluster_iterate() - Perform one iteration of the

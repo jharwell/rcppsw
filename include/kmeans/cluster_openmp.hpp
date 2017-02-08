@@ -31,7 +31,7 @@ namespace kmeans {
 template <typename T> class cluster_openmp : public cluster_algorithm<T> {
  public:
   /* constructors */
-  cluster_algorithm(std::size_t n_iterations,
+  cluster_openmp(std::size_t n_iterations,
                     std::size_t n_clusters,
                     std::size_t n_threads,
                     std::size_t dimension,
@@ -41,38 +41,14 @@ template <typename T> class cluster_openmp : public cluster_algorithm<T> {
       cluster_algorithm<T>(n_iterations, n_clusters, n_threads, dimension,
                            n_points, clusters_fname, centroids_fname) {}
   /* member functions */
-  /*
-   * Initialize the algorithm, performing first touch allocation and copying the
-   * provided data into a format that can be efficiently processed.
-   */
-  void initialize(std::vector<multidim_point<T>>* data_in) {
 
-    /*
-     * Perform first touch allocation for all threads
-     */
-    typename pthread_worker<T>::instruction_data instr = {
-      pthread_worker<T>::instruction::FIRST_TOUCH,
-      cluster_algorithm<T>::data(),
-      cluster_algorithm<T>::membership(),
-    };
-
-    std::for_each(workers_.begin(), workers_.end(),
-                  [&](pthread_worker<T>& w) { w.start(&instr); });
-    std::for_each(workers_.begin(), workers_.end(),
-                  [&](pthread_worker<T>& w) { w.join(); });
-
-    /*
-     * Initialize center for all clusters
-     */
-    for (std::size_t i = 0; i < cluster_algorithm<T>::n_clusters(); ++i) {
-      cluster_algorithm<T>::clusters()->at(i)->initialize_center(data_in->at(i).data());
-    } /* for(i..) */
-
+  void first_touch_allocation(void) {
+#pragma omp parallel for num_threads(cluster_algorithm<T>::n_threads())
     for (std::size_t i = 0; i < cluster_algorithm<T>::n_points(); ++i) {
-      std::copy(data_in->at(i).begin(), data_in->at(i).end(),
-                cluster_algorithm<T>::data() + (i * dimension));
-    } /* for(i..) */
-  } /* load_data() */
+      cluster_algorithm<T>::data()[i*cluster_algorithm<T>::dimension()] = 0;
+      cluster_algorithm<T>::membership()[i] = -1;
+    } /* for(i...) */
+  }
 
   /**
    * cluster_openmp::cluster_iterate() - Perform one iteration of the
@@ -82,27 +58,22 @@ template <typename T> class cluster_openmp : public cluster_algorithm<T> {
    *     bool - true if convergence was achieved, false otherwise
    **/
   bool cluster_iterate(void) {
-#pragma omp parallel for num_threads(cluster_algorithm<T>::n_threads())
-    for (std::size_t i = 0; i < cluster_algorithm<T>::clusters()->size(); ++i) {
-      cluster_algorithm<T>::clusters()->at(i)->reset();
-    } /* for(i..) */
-
     /*
      * cluster the data via Euclidean distance, putting each matching vector
      * into the queue with the closest centroid.
      */
 #pragma omp parallel for num_threads(cluster_algorithm<T>::n_threads())
-    for (std::size_t i = 0; i < cluster_algorithm<T>::data()->size(); ++i) {
+    for (std::size_t i = 0; i < cluster_algorithm<T>::n_points(); ++i) {
       int closest = -1;
       double min_dist = std::numeric_limits<float>::max();
       for (std::size_t j = 0; j < cluster_algorithm<T>::clusters()->size(); ++j) {
-        double dist = cluster_algorithm<T>::clusters()->at(j)->dist_to_center(cluster_algorithm<T>::data()->at(i));
+        double dist = cluster_algorithm<T>::clusters()->at(j)->dist_to_center(cluster_algorithm<T>::data() + i * cluster_algorithm<T>::dimension());
         if (dist < min_dist) {
           min_dist = dist;
           closest = j;
         }
       } /* for(j..) */
-      cluster_algorithm<T>::clusters()->at(closest)->add_point(&(const_cast<std::vector<T>*>(cluster_algorithm<T>::data())->at(i)));
+      cluster_algorithm<T>::clusters()->at(closest)->add_point(i);
     } /* for(i..) */
 
     /*
@@ -110,7 +81,7 @@ template <typename T> class cluster_openmp : public cluster_algorithm<T> {
      */
 #pragma omp parallel for num_threads(cluster_algorithm<T>::n_threads())
     for (std::size_t i = 0; i < cluster_algorithm<T>::clusters()->size(); ++i) {
-      cluster_algorithm<T>::clusters()->at(i)->update_center();
+      cluster_algorithm<T>::clusters()->at(i)->update_center(cluster_algorithm<T>::n_points());
     } /* for(i..) */
 
     /* Finally, check for convergence */
