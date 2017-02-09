@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_MT_VECTOR_HPP_
-#define INCLUDE_MT_VECTOR_HPP_
+#ifndef INCLUDE_MULTITHREAD_MT_VECTOR_HPP_
+#define INCLUDE_MULTITHREAD_MT_VECTOR_HPP_
 
 /*******************************************************************************
  * Includes
@@ -49,4 +49,4 @@ class mt_vector {
   boost::mutex mtx_;
 };
 
-#endif /* INCLUDE_MT_VECTOR_HPP_ */
+#endif /* INCLUDE_MULTITHREAD_MT_VECTOR_HPP_ */
