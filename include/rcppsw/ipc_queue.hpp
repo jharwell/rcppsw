@@ -17,7 +17,7 @@
 #include <boost/thread/thread_time.hpp>
 #include <deque>
 #include <memory>
-#include "include/rcppsw/ipc.hpp"
+#include "rcppsw/ipc.hpp"
 
 /*******************************************************************************
  * Structure Definitions

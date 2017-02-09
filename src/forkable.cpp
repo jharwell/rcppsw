@@ -11,7 +11,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "include/rcppsw/forkable.hpp"
+#include "rcppsw/forkable.hpp"
 #include <assert.h>
 #include <fcntl.h>
 #include <limits.h>

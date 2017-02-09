@@ -17,7 +17,7 @@
 #include <omp.h>
 #include <vector>
 #include <string>
-#include "include/rcppsw/kmeans/cluster_algorithm.hpp"
+#include "rcppsw/kmeans/cluster_algorithm.hpp"
 
 /*******************************************************************************
  * Namespaces

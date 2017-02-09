@@ -16,9 +16,9 @@
  ******************************************************************************/
 #include <vector>
 #include <string>
-#include "include/rcppsw/kmeans/cluster_algorithm.hpp"
-#include "include/rcppsw/kmeans/pthread_worker.hpp"
-#include "rcsw//include/common/dbg.h"
+#include "rcppsw/kmeans/cluster_algorithm.hpp"
+#include "rcppsw/kmeans/pthread_worker.hpp"
+#include "rcsw/common/dbg.h"
 
 /*******************************************************************************
  * Namespaces

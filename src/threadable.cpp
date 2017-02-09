@@ -11,8 +11,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "include/rcppsw/threadable.hpp"
-#include "include/rcppsw/er_frmwk.hpp"
+#include "rcppsw/threadable.hpp"
+#include "rcppsw/er_frmwk.hpp"
 #include "rcsw//multithread/threadm.h"
 
 /*******************************************************************************

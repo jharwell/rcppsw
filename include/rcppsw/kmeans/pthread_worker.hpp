@@ -18,8 +18,8 @@
 #include <list>
 #include <limits>
 #include <boost/shared_ptr.hpp>
-#include "include/rcppsw/threadable.hpp"
-#include "include/rcppsw/kmeans/cluster.hpp"
+#include "rcppsw/threadable.hpp"
+#include "rcppsw/kmeans/cluster.hpp"
 
 /*******************************************************************************
  * Namespaces

@@ -97,11 +97,10 @@ OPT        = -O0
 CDEBUG    = -DDBG_LVL_DYNAMIC=DBG_N
 
 CLIBS     = $(CCLIB_SELF) -lcommon.x86 -levtlog.x86 -lds.x86 -lutils.x86 $(CCLIBS)
-CLIBDIRS  = $(CCLIBDIRS) -L$(localroot)/lib
+CLIBDIRS  = $(CCLIBDIRS)
 
 define CINCDIRS
--I. \
--I$(localroot)/include
+-Iinclude
 endef
 
 CFLAGS   = $(OPT) -g -W -Wall -Wextra -std=gnu99 -fmessage-length=0 $(CINCDIRS) $(CDEBUG)
@@ -113,8 +112,8 @@ CC       = $(develcc)
 CXXLIBDIRS ?= -L$(rcppsw)/lib -L$(LIBDIR)
 
 define CXXINCDIRS
--I. \
--I$(localroot)/include \
+-Iinclude \
+-I$(rcsw)/include \
 -I$(develroot)/catch/single_include
 endef
 
@@ -430,7 +429,7 @@ $(OBJDIR)/%.o: %.c
 
 # For compiling the C++ source and test harness
 $(OBJDIR)/%.o:: $(SRCDIR)/%.cpp
-	@$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
+	$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
 	$(CXX) $(CXXFLAGS) $(CXXLIBDIRS) -c -o  $@ $<
 
 # For compiling the C tests

@@ -20,9 +20,9 @@
 #include <thread>
 #include <vector>
 #include "rcsw/al/altypes.h"
-#include "include/rcppsw/er_frmwk_mod.hpp"
-#include "include/rcppsw/mt_queue.hpp"
-#include "include/rcppsw/threadable.hpp"
+#include "rcppsw/er_frmwk_mod.hpp"
+#include "rcppsw/mt_queue.hpp"
+#include "rcppsw/threadable.hpp"
 
 /*******************************************************************************
  * Macros

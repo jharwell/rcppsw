@@ -21,8 +21,8 @@
 #include <fstream>
 #include <string>
 #include <boost/shared_ptr.hpp>
-#include "include/rcppsw/kmeans/cluster.hpp"
-#include "include/rcppsw/include/common/dbg.h"
+#include "rcppsw/kmeans/cluster.hpp"
+#include "rcsw/common/dbg.h"
 
 /*******************************************************************************
  * Constant Definitions
