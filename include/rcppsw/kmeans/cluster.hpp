@@ -9,14 +9,15 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_KMEANS_CLUSTER_HPP_
-#define INCLUDE_KMEANS_CLUSTER_HPP_
+#ifndef INCLUDE_RCPPSW_KMEANS_CLUSTER_HPP_
+#define INCLUDE_RCPPSW_KMEANS_CLUSTER_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <iomanip>
 #include <vector>
+#include <cmath>
 
 /*******************************************************************************
  * Namespaces
@@ -111,6 +112,8 @@ template <typename T> class kmeans_cluster {
 
  private:
   /* member functions */
+  kmeans_cluster& operator=(const kmeans_cluster&) = delete;
+  kmeans_cluster(const kmeans_cluster&) = delete;
 
   /* data members */
   std::size_t id_;
@@ -124,4 +127,4 @@ template <typename T> class kmeans_cluster {
 } /* namespace kmeans */
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_KMEANS_CLUSTER_HPP_ */
+#endif /* INCLUDE_RCPPSW_KMEANS_CLUSTER_HPP_ */

@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_SINGLETON_HPP_
-#define INCLUDE_SINGLETON_HPP_
+#ifndef INCLUDE_RCPPSW_SINGLETON_HPP_
+#define INCLUDE_RCPPSW_SINGLETON_HPP_
 
 /*******************************************************************************
  * Includes
@@ -43,4 +43,4 @@ class singleton {
   singleton& operator=(singleton const&) = delete;
 };
 
-#endif /* INCLUDE_SINGLETON_HPP_ */
+#endif /* INCLUDE_RCPPSW_SINGLETON_HPP_ */

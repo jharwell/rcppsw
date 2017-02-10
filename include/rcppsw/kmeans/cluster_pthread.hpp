@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_KMEANS_CLUSTER_PTHREAD_HPP_
-#define INCLUDE_KMEANS_CLUSTER_PTHREAD_HPP_
+#ifndef INCLUDE_RCPPSW_KMEANS_CLUSTER_PTHREAD_HPP_
+#define INCLUDE_RCPPSW_KMEANS_CLUSTER_PTHREAD_HPP_
 
 /*******************************************************************************
  * Includes
@@ -18,7 +18,6 @@
 #include <string>
 #include "rcppsw/kmeans/cluster_algorithm.hpp"
 #include "rcppsw/kmeans/pthread_worker.hpp"
-#include "rcsw/common/dbg.h"
 
 /*******************************************************************************
  * Namespaces
@@ -42,18 +41,24 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
                   std::size_t dimension,
                   std::size_t n_points,
                   const std::string& clusters_fname,
-                  const std::string& centroids_fname) :
+                  const std::string& centroids_fname,
+                  er_frmwk *const erf) :
       cluster_algorithm<T>(n_iterations, n_clusters, n_threads, dimension,
-                           n_points, clusters_fname, centroids_fname),
+                           n_points, clusters_fname, centroids_fname, erf),
       workers_() {
-    assert(n_points % n_threads == 0);
     assert(n_clusters % n_threads == 0);
     std::size_t chunk_size = n_points/n_threads;
     for (std::size_t i = 0; i < n_threads; ++i) {
-      workers_.emplace_back(pthread_worker<T>(i, n_threads, chunk_size, dimension,
-                                              cluster_algorithm<T>::clusters()));
-    } /* for(i..) */
+      if (n_points % n_threads != 0) {
+        chunk_size += n_points % n_threads;
+      }
+      ER_REPORT(erf_lvl::NOM, "Worker %lu: %lu - %lu\n", i, chunk_size * i,
+             chunk_size * i + chunk_size);
 
+     workers_.emplace_back(pthread_worker<T>(i, n_threads, chunk_size,
+                                             dimension,
+                                             cluster_algorithm<T>::clusters()));
+    } /* for(i..) */
   } /* kmeans_cluster_pthread::kmeans_cluster_pthread() */
 
   /* member functions */
@@ -120,9 +125,9 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
     bool ret = true;
     for (std::size_t i = 0; i < cluster_algorithm<T>::n_clusters(); ++i) {
       if (cluster_algorithm<T>::clusters()->at(i)->convergence()) {
-        DBGTN("Cluster %lu reports convergence\n", i);
+        ER_REPORT(erf_lvl::DIAG, "Cluster %lu reports convergence\n", i);
       } else {
-        DBGTN("Cluster %lu reports no convergence\n", i);
+        ER_REPORT(erf_lvl::DIAG, "Cluster %lu reports no convergence\n", i);
         ret = false;
       }
     } /* for(i..) */
@@ -139,4 +144,4 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
 } /* namespace kmeans */
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_KMEANS_CLUSTER_PTHREAD_HPP_ */
+#endif /* INCLUDE_RCPPSW_KMEANS_CLUSTER_PTHREAD_HPP_ */

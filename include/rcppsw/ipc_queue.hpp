@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_IPC_QUEUE_HPP_
-#define INCLUDE_IPC_QUEUE_HPP_
+#ifndef INCLUDE_RCPPSW_IPC_QUEUE_HPP_
+#define INCLUDE_RCPPSW_IPC_QUEUE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -100,4 +100,4 @@ class ipc_queue {
   void clear(void) { queue_.clear(); }
 };
 
-#endif /* INCLUDE_IPC_QUEUE_HPP_ */
+#endif /* INCLUDE_RCPPSW_IPC_QUEUE_HPP_ */

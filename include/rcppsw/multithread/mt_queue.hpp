@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_MULTITHREAD_MT_QUEUE_HPP_
-#define INCLUDE_MULTITHREAD_MT_QUEUE_HPP_
+#ifndef INCLUDE_RCPPSW_MULTITHREAD_MT_QUEUE_HPP_
+#define INCLUDE_RCPPSW_MULTITHREAD_MT_QUEUE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -71,4 +71,4 @@ class mt_queue {
   boost::condition_variable cv_;  // The condition to wait for
 };
 
-#endif /* INCLUDE_MULTITHREAD_MT_QUEUE_HPP_ */
+#endif /* INCLUDE_RCPPSW_MULTITHREAD_MT_QUEUE_HPP_ */

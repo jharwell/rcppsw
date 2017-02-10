@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_MAX_SUBARRAY_FINDER_HPP_
-#define INCLUDE_MAX_SUBARRAY_FINDER_HPP_
+#ifndef INCLUDE_RCPPSW_MAX_SUBARRAY_FINDER_HPP_
+#define INCLUDE_RCPPSW_MAX_SUBARRAY_FINDER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -70,4 +70,4 @@ class max_subarray_finder {
 
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_MAX_SUBARRAY_FINDER_HPP_ */
+#endif /* INCLUDE_RCPPSW_MAX_SUBARRAY_FINDER_HPP_ */

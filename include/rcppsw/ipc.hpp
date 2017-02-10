@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_IPC_HPP_
-#define INCLUDE_IPC_HPP_
+#ifndef INCLUDE_RCPPSW_IPC_HPP_
+#define INCLUDE_RCPPSW_IPC_HPP_
 
 /*******************************************************************************
  * Includes
@@ -61,4 +61,4 @@ using ipc_map = bip::map<key, value, std::less<key>,
 typedef bip::basic_string<char, std::char_traits<char>, ipc_allocator<char>>
     ipc_string;
 
-#endif /* INCLUDE_IPC_HPP_ */
+#endif /* INCLUDE_RCPPSW_IPC_HPP_ */

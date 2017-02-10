@@ -86,7 +86,7 @@ status_t er_frmwk::insmod(const boost::uuids::uuid& mod_id,
   return OK;
 
 error:
-  REPORT_INTERNAL(erf_lvl::err, "Failed to install module %s: module exists",
+  REPORT_INTERNAL(erf_lvl::ERR, "Failed to install module %s: module exists",
                   mod_name.c_str());
   return ERROR;
 } /* insmod() */
@@ -161,7 +161,7 @@ int er_frmwk::flush(void) {
  **/
 status_t er_frmwk::mod_dbglvl(const boost::uuids::uuid& id,
                               const erf_lvl::value& lvl) {
-  er_frmwk_mod mod(id, erf_lvl::nom, erf_lvl::nom, "tmp");
+  er_frmwk_mod mod(id, erf_lvl::NOM, erf_lvl::NOM, "tmp");
 
   /* make sure module is already present */
   std::vector<er_frmwk_mod>::iterator iter =
@@ -169,12 +169,12 @@ status_t er_frmwk::mod_dbglvl(const boost::uuids::uuid& id,
   CHECK(iter != modules_.end());
   iter->set_dbglvl(lvl);
 
-  REPORT_INTERNAL(erf_lvl::ver, "Successfully updated dbglvl for module %s",
+  REPORT_INTERNAL(erf_lvl::VER, "Successfully updated dbglvl for module %s",
                   iter->name.c_str());
   return OK;
 
 error:
-  REPORT_INTERNAL(erf_lvl::err,
+  REPORT_INTERNAL(erf_lvl::ERR,
                   "Failed to update dbglvl for module %s: no such module",
                   iter->name.c_str());
   return ERROR;
@@ -189,7 +189,7 @@ error:
  **/
 status_t er_frmwk::mod_loglvl(const boost::uuids::uuid& id,
                               const erf_lvl::value& lvl) {
-  er_frmwk_mod mod(id, erf_lvl::nom, erf_lvl::nom, "tmp");
+  er_frmwk_mod mod(id, erf_lvl::NOM, erf_lvl::NOM, "tmp");
 
   /* make sure module is already present */
   std::vector<er_frmwk_mod>::iterator iter =
@@ -197,12 +197,12 @@ status_t er_frmwk::mod_loglvl(const boost::uuids::uuid& id,
   CHECK(iter != modules_.end());
   iter->set_loglvl(lvl);
 
-  REPORT_INTERNAL(erf_lvl::ver, "Successfully updated loglvl for module %s",
+  REPORT_INTERNAL(erf_lvl::VER, "Successfully updated loglvl for module %s",
                   iter->name.c_str());
   return OK;
 
 error:
-  REPORT_INTERNAL(erf_lvl::err,
+  REPORT_INTERNAL(erf_lvl::ERR,
                   "Failed to update loglvl for module %s: no such module",
                   iter->name.c_str());
   return ERROR;
@@ -216,13 +216,13 @@ error:
  *
  **/
 void* er_frmwk::thread_main(void* arg) {
-  REPORT_INTERNAL(erf_lvl::nom, "Start");
+  REPORT_INTERNAL(erf_lvl::NOM, "Start");
   while (!terminated()) {
     while (0 == queue_.size()) sleep(1);
     erf_msg msg = queue_.dequeue();
     msg_report(msg);
   } /* while() */
-  REPORT_INTERNAL(erf_lvl::nom, "Exit");
+  REPORT_INTERNAL(erf_lvl::NOM, "Exit");
 
   /* make sure all events remaining in queue are reported */
   while (queue_.size()) {

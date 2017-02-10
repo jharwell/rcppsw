@@ -22,11 +22,12 @@
 #include <string>
 #include <vector>
 #include "rcsw//multithread/procm.h"
+#include "rcppsw/er_frmwk.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-using namespace rcppsw;
+namespace rcppsw {
 
 /*******************************************************************************
  * Member Functions
@@ -61,13 +62,15 @@ pid_t forkable::start(const std::string& new_wd, int core) {
   proc_run_ = true;
   pid_ = fork();
   if (pid_ == 0) {
-    if (0 != chdir(new_wd.c_str())) {
-      return -1;
-    }
+    CHECK(0 == chdir(new_wd.c_str()));
     if (-1 != core) {
       procm_socket_lock(core);
     }
     entry_point(this);
   }
   return pid_;
+error:
+  return -1;
 } /* forkable::start() */
+
+} /* namespace rcppsw */

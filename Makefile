@@ -146,7 +146,7 @@ CXXSYS_INCDIRS := $(addprefix -isystem,$(call inc-query,$(CXX)))
 ###############################################################################
 # CC Compilation Options
 ###############################################################################
-CCLIBDIRS  = -L$(LIBDIR) -L$(localroot)
+CCLIBDIRS  = -L$(LIBDIR)
 CCLIBS     = -lrt -lm -lpthread
 FPC        = -DFPC_TYPE=FPC_ABORT
 
@@ -163,7 +163,7 @@ define CINCDIRS
 -I$(develroot)/catch/single_include
 endef
 
-CFLAGS   = -g $(FPC) $(CINCDIRS) $(CCDEBUG) -std=gnu99
+CFLAGS   = -g $(FPC)  $(CINCDIRS) $(CCDEBUG)
 CC       = $(develcc)
 
 ###############################################################################
@@ -177,7 +177,7 @@ define CXXINCDIRS
 -I$(develroot)/catch/single_include
 endef
 
-CXXFLAGS    = -g $(FPC) $(CXXINCDIRS) $(CCDEBUG) -std=gnu++11
+CXXFLAGS    = -g $(FPC) $(CXXINCDIRS) $(CCDEBUG)
 CXXLIBS     = -lrcppsw.x86 -lboost_system -lboost_filesystem -lboost_thread $(CCLIBS)
 CXX         = $(develcxx)
 
@@ -190,16 +190,19 @@ INTEL_OPTFLAGS = -O3 -ipo -no-prec-div -static -xHost -fp-model fast=2 $(INTEL_P
 GNU_OPTFLAGS = -O3 -fno-trapping-math -fno-signed-zeros -frename-registers -funroll-loops -march=native -mtune=native -fopenmp
 
 ifneq ($(findstring gcc,$(CC)),)
-CFLAGS += $(GNU_OPTFLAGS)
+OPT_CFLAGS += $(GNU_OPTFLAGS)
 else
-CFLAGS += $(INTEL_OPTFLAGS)
+OPT_CFLAGS += $(INTEL_OPTFLAGS)
 endif
 
 ifneq ($(findstring g++,$(CXX)),)
-CXXFLAGS += $(GNU_OPTFLAGS)
+OPT_CXXFLAGS += $(GNU_OPTFLAGS)
 else
-CXXFLAGS += $(INTEL_OPTFLAGS)
+OPT_CXXFLAGS += $(INTEL_OPTFLAGS)
 endif
+
+CFLAGS += $(OPT_CFLAGS)
+CXXFLAGS += $(OPT_CXXFLAGS)
 
 # Guided optimization (Intel only)
 INTEL_GFLAGS =  -guide -parallel -guide-par -guide-vec -guide-data-trans
@@ -213,8 +216,8 @@ INTEL_GFLAGS =  -guide -parallel -guide-par -guide-vec -guide-data-trans
 # 2282 - warnings about unrecognized gcc/g++ pragmas
 # 10382 - Telling me what option xHost was setting
 ###############################################################################
-GNU_CDFLAGS = -W -Wall -Wextra -fmessage-length=0 -fdiagnostics-color=always
-GNU_CXXDFLAGS = -W -Wall -Wextra -Weffc++ -Wshadow -fmessage-length=0 -fdiagnostics-color=always
+GNU_CDFLAGS = -W -Wall -Wextra -std=gnu99 -fmessage-length=0 -fdiagnostics-color=always
+GNU_CXXDFLAGS = -W -Wall -Wextra -Weffc++ -Wshadow -std=gnu++11 -fmessage-length=0 -fdiagnostics-color=always
 INTEL_CDFLAGS += -w2 -Wall -Wcheck -Weffc++ -Winline -Wshadow  -Wremarks -wd2259 -wd181 -wd981 -wd2282 -wd10382
 INTEL_CXXDFLAGS += -w2 -Wall -Wcheck -Winline -Wshadow -Wremarks -wd2259 -wd181 -wd981 -wd981 -wd2282 -wd10382
 
@@ -233,16 +236,16 @@ endif
 ###############################################################################
 # Reporting Options (gcc/icc, g++/icpc)
 ###############################################################################
-INTEL_RFLAGS = -qopt-report-phase=all -qopt-report-file=$(REPORTDIR)/$(patsubst %.o,%.rprt,$(notdir $@))
+INTEL_RFLAGS = -qopt-report-phase=all -qopt-report-file=$(REPORTDIR)/opt.rprt
 GNU_RFLAGS = -fopt-info-optimized-optall=$(REPORTDIR)/$(patsubst %.o,%.rprt,$(notdir $@))
 
-ifneq ($(findstring gcc,$(CC)),)
+ifneq ($(findstring g++,$(CXX)),)
 REPORT_FLAGS = $(GNU_RFLAGS)
 else
 REPORT_FLAGS = $(INTEL_RFLAGS)
 endif
 
-ifneq ($(findstring g++,$(CXX)),)
+ifneq ($(findstring gcc,$(CC)),)
 REPORT_FLAGS = $(GNU_RFLAGS)
 else
 REPORT_FLAGS = $(INTEL_RFLAGS)
@@ -456,10 +459,6 @@ $(TARGET): $(addprefix $(OBJDIR)/, $(OBJECTS)) | $(LIBDIR)
 # printing, and then copy it and everything used to build it to a timestamped
 # directory.
 release: CCDEBUG=-DNDEBUG
-
-
-# The Releaser. Build target and then copy it and everything used to build it
-# to a timestamped directory.
 release: $(TARGET) | $(RELEASE_DIR)
 	@cp $(BINDIR)/* $(OBJDIR)/* $(LIBDIR)/* $(RELEASE_DIR)
 

@@ -9,17 +9,20 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_KMEANS_PTHREAD_WORKER_HPP_
-#define INCLUDE_KMEANS_PTHREAD_WORKER_HPP_
+#ifndef INCLUDE_RCPPSW_KMEANS_PTHREAD_WORKER_HPP_
+#define INCLUDE_RCPPSW_KMEANS_PTHREAD_WORKER_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <sched.h>
+#include <pthread.h>
 #include <list>
 #include <limits>
 #include <boost/shared_ptr.hpp>
 #include "rcppsw/threadable.hpp"
 #include "rcppsw/kmeans/cluster.hpp"
+#include "rcsw/multithread/threadm.h"
 
 /*******************************************************************************
  * Namespaces
@@ -38,7 +41,8 @@ template <typename T> class pthread_worker: public threadable {
                  const boost::shared_ptr<std::vector<kmeans_cluster<T>*>>& clusters) :
       threadable(), id_(id), n_threads_(n_threads), chunk_size_(chunk_size),
       dimension_(dimension),
-      clusters_(const_cast<boost::shared_ptr<std::vector<kmeans_cluster<T>*>>&>(clusters)) {}
+      clusters_(const_cast<boost::shared_ptr<std::vector<kmeans_cluster<T>*>>&>(clusters)) {
+  }
 
   enum instruction {
     FIRST_TOUCH,
@@ -53,6 +57,12 @@ template <typename T> class pthread_worker: public threadable {
 
   /* member functions */
   void* thread_main(void* arg) {
+
+    /*
+     * Lock each new invocation to a core--don't want the OS moving threads
+     * around.
+     */
+    threadm_core_lock(thread_handle(), id_);
     struct instruction_data* instr = (struct instruction_data*)arg;
 
     if (FIRST_TOUCH == instr->type) {
@@ -73,9 +83,6 @@ template <typename T> class pthread_worker: public threadable {
       } /* for(i..) */
       return NULL;
     } else {
-
-    DBGN("Worker %lu: %lu - %lu\n", id_, chunk_size_ * id_,
-         chunk_size_ * id_ + chunk_size_);
 
     /*
      * For each point in the data that is assigned to the current thread,
@@ -122,4 +129,4 @@ template <typename T> class pthread_worker: public threadable {
 } /* namespace kmeans */
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_KMEANS_PTHREAD_WORKER_HPP_ */
+#endif /* INCLUDE_RCPPSW_KMEANS_PTHREAD_WORKER_HPP_ */

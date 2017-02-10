@@ -11,14 +11,14 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/threadable.hpp"
+#include "rcppsw/multithread/threadable.hpp"
 #include "rcppsw/er_frmwk.hpp"
-#include "rcsw//multithread/threadm.h"
+#include "rcsw/multithread/threadm.h"
 
 /*******************************************************************************
  * Namespace Definitions
  ******************************************************************************/
-using namespace rcppsw;
+namespace rcppsw {
 
 /*******************************************************************************
  * Member Functions
@@ -44,3 +44,5 @@ status_t threadable::start(void* arg, int core) {
 error:
   return ERROR;
 } /* threadable::start() */
+
+} /* namespace rcppsw */

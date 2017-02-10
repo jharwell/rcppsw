@@ -4,12 +4,12 @@
  * Module          : utils
  * Description     : File parsing class using template design pattern
  * Creation Date   : 02/01/17
- * Copyright       : Copyright 2017 NAME, All rights reserved
+ * Copyright       : Copyright 2017 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_FILE_PARSER_HPP_
-#define INCLUDE_FILE_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_FILE_PARSER_HPP_
+#define INCLUDE_RCPPSW_FILE_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -83,4 +83,4 @@ template <typename T> class file_parser {
 
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_FILE_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_FILE_PARSER_HPP_ */

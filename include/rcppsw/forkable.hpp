@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_FORKABLE_HPP_
-#define INCLUDE_FORKABLE_HPP_
+#ifndef INCLUDE_RCPPSW_FORKABLE_HPP_
+#define INCLUDE_RCPPSW_FORKABLE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -64,4 +64,4 @@ pid_t fork_exec(const std::vector<std::string>& cmd, const std::string& new_wd,
                 bool stdout_sup, int* pipefd);
 status_t proc_socket_lock(int core);
 
-#endif /* INCLUDE_FORKABLE_HPP_ */
+#endif /* INCLUDE_RCPPSW_FORKABLE_HPP_ */

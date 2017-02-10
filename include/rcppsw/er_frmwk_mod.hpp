@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_ER_FRMWK_MOD_HPP_
-#define INCLUDE_ER_FRMWK_MOD_HPP_
+#ifndef INCLUDE_RCPPSW_ER_FRMWK_MOD_HPP_
+#define INCLUDE_RCPPSW_ER_FRMWK_MOD_HPP_
 
 /*******************************************************************************
  * Includes
@@ -31,7 +31,7 @@ namespace rcppsw {
  ******************************************************************************/
 class erf_lvl {
  public:
-  enum value { off, err, warn, nom, diag, ver };
+  enum value { OFF, ERR, WARN, NOM, DIAG, VER };
 };
 
 class er_frmwk_mod {
@@ -63,4 +63,4 @@ class er_frmwk_mod {
  ******************************************************************************/
 std::ostream& operator<<(std::ostream& os, const rcppsw::er_frmwk_mod& mod);
 
-#endif /* INCLUDE_ER_FRMWK_MOD_HPP_ */
+#endif /* INCLUDE_RCPPSW_ER_FRMWK_MOD_HPP_ */

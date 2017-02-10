@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_CLI_BASE_HPP_
-#define INCLUDE_CLI_BASE_HPP_
+#ifndef INCLUDE_RCPPSW_CLI_BASE_HPP_
+#define INCLUDE_RCPPSW_CLI_BASE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -48,4 +48,4 @@ class cli_base {
 
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_CLI_BASE_HPP_ */
+#endif /* INCLUDE_RCPPSW_CLI_BASE_HPP_ */

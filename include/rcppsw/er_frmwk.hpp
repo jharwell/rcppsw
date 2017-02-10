@@ -8,8 +8,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_ER_FRMWK_HPP_
-#define INCLUDE_ER_FRMWK_HPP_
+#ifndef INCLUDE_RCPPSW_ER_FRMWK_HPP_
+#define INCLUDE_RCPPSW_ER_FRMWK_HPP_
 
 /*******************************************************************************
  * Includes
@@ -21,7 +21,7 @@
 #include <vector>
 #include "rcsw/al/altypes.h"
 #include "rcppsw/er_frmwk_mod.hpp"
-#include "rcppsw/mt_queue.hpp"
+#include "rcppsw/multithread/mt_queue.hpp"
 #include "rcppsw/threadable.hpp"
 
 /*******************************************************************************
@@ -31,21 +31,16 @@
  * Reporting events. This needs to be a macro, instead of a function call so
  * I can get the line # and function from the preprocessor/compiler.
  *
- * This macro requires that:
- *
- * (1) You have a variable called erf_handle_ defined in the current scope that
- *     is of type rcppsw::er_rfmwk.
- *
- * (2) You have a variable called erf_id_ defined in the current scope that is
- *     of type boost::uuids::uuid for the module you want to report for.
- *
+ * This macro requires that the class you are using it in derives from
+ * erf_client.
  */
 #define ER_REPORT(lvl, msg, ...)                                            \
   {                                                                         \
-    char _str[1000];                                                        \
+    char _str[1000];                                                    \
     snprintf(_str, sizeof(_str), "%s:%d:%s: " msg "\n", __FILE__, __LINE__, \
-             __FUNCTION__, ##__VA_ARGS__);                                  \
-    erf_handle_.report(erf_id_, lvl, std::string(_str));                      \
+             __FUNCTION__, ##__VA_ARGS__);                              \
+    erf_client::erf_handle()->report(erf_client::erf_id(), lvl,         \
+                                     std::string(_str));                \
   }
 
 /*
@@ -55,19 +50,19 @@
 #define ER_CHECK(cond, msg, ...)                \
   {                                             \
     if (!(cond)) {                              \
-      REPORT(erf_lvl::err, msg, ##__VA_ARGS__); \
+      REPORT(erf_lvl::ERR, msg, ##__VA_ARGS__); \
       goto error;                               \
     }                                           \
   }
 #define ER_SENTINEL(msg, ...)                 \
   {                                           \
-    REPORT(erf_lvl::err, msg, ##__VA_ARGS__); \
+    REPORT(erf_lvl::ERR, msg, ##__VA_ARGS__); \
     goto error;                               \
   }
 
 #define ER_ASSERT(cond, msg, ...)                \
   if (!(cond)) {                                 \
-    ER_REPORT(erf_lvl::err, msg, ##__VA_ARGS__); \
+    ER_REPORT(erf_lvl::ERR, msg, ##__VA_ARGS__); \
     assert(0);                                   \
   }
 
@@ -104,8 +99,8 @@ class er_frmwk : public threadable {
 
   /* constructors */
   er_frmwk(const std::string& logfile_fname_ = "logfile",
-           const erf_lvl::value& dbglvl_ = erf_lvl::nom,
-           const erf_lvl::value& loglvl_ = erf_lvl::nom);
+           const erf_lvl::value& dbglvl_ = erf_lvl::NOM,
+           const erf_lvl::value& loglvl_ = erf_lvl::NOM);
 
   /* destructor */
   ~er_frmwk(void);
@@ -113,7 +108,7 @@ class er_frmwk : public threadable {
   /* member functions */
   void self_dbg_en(void) {
     insmod(erf_id_, "ERF");
-    mod_dbglvl(erf_id_, erf_lvl::nom);
+    mod_dbglvl(erf_id_, erf_lvl::NOM);
   }
   status_t insmod(const boost::uuids::uuid& mod_id,
                   const erf_lvl::value& loglvl, const erf_lvl::value& dbglvl,
@@ -155,4 +150,4 @@ class er_frmwk : public threadable {
 
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_ER_FRMWK_HPP_ */
+#endif /* INCLUDE_RCPPSW_ER_FRMWK_HPP_ */
