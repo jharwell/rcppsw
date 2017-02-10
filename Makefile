@@ -1,18 +1,76 @@
 ################################################################################
 # Name            : Makefile
-# Project         : Project
+# Project         : Templates
 # Description     : Makefile Template
-# Creation Date   : Fri May 16 14:59:49 2014
-# Original Author : jharwell
+# Creation Date   : 05/16/14
+# Copyright       : 2014 John Harwell, All rights reserved
 #
-# Note: This file is -j (parallel build) safe, provided you don't mess with it
-# too much
+# Note: This file is -j (parallel build) safe
 #
 #  Products:
-#  Make Target     Product                  Description
-#  ===========     =======                  ===================
+#  Make Target      Product           Description
+#  ===========      =======           ===================
+#  all              $(TARGET)          The target library/executable, with
+#                                      optimizations disabled and debugging
+#                                      enabled
 #
-################################################################################
+#  release          $(TARGET)          The target library/excetubale, with
+#                                      optimizations enabled and debugging
+#                                      disabled.
+#
+#  opt-guide        N/A                Intel only. Ask the compiler to give me
+#                                      more info about where it thinks it can
+#                                      speed things up.
+#
+#  opt-report       reports/*          Ask the compiler to tell you what it
+#                                      was/was not able to optimize and
+#                                      WHY. To use this target, you must run
+#                                      'make clean' first.
+#
+#  unit_tests       bin/*              Build all the C/C++ unit tests (after
+#                                      $(TARGET))
+#
+#  install          varies             Install $(TARGET) to the filesysetm
+#
+#  uninstall        N/A                Uninstall $(TARGET) from the filesystem
+#
+#  rcopy            $(TARGET)          Build the target and then copy it to a
+#                                      remote machine
+#
+#  preprocessor     preproc/*          Preprocess C/C++ code and output the
+#                                      result. Useful for tracking down strange
+#                                      bugs/compiler errors
+#
+#  clean           N/A                 Removes all files/directories this
+#                                      Makefile can generate, except release/
+#                                      and analysis/
+#
+#  veryclean       N/A                 Does everything clean does, but also
+#                                      removes the release/ and analysis/
+#                                      directories
+#
+#  analyze-[c,c++] analysis/*         Runs the cppcheck, clang syntax check,
+#                                     and clang static analysis check on C
+#                                     code. Each analysis can be run
+#                                     individually via the analyze-[cppcheck-c,
+#                                     clang-syntax-c, clang-static-c], or
+#                                     analyze-[cppcheck-c++, clang-syntax-c++,
+#                                     clang-static-c++].
+#
+#  analyze-scan                       Runs clang-static analysis and presents
+#                                     the results in a nice GUI/webpage. To use
+#                                     this target, you must run 'make clean'
+#                                     first, so scan-build can hook into your
+#                                     build process.
+#
+#  analyze-clang-tidy-[c,c++]         Diagnose common C/C++ programming errors
+#                                     with libclang
+#  fix-clang-tidy-[c,c++]             Diagnose AND fix common C/C++ programming
+#                                     errors. Not perfect--can introduce bugs
+#                                     occasionally.
+#  format-clang-[c,c++]               Format C/C++ code via a .clang-format
+#                                     file in the current directory
+###############################################################################
 
 ###############################################################################
 # Directory Definitions
@@ -25,6 +83,7 @@
 # lst/      - Direcory where all assembly listing (.lst) files are built
 # analysis/ - Root directory for all code analysis that are run
 # logs/     - Output directory of stdout of unit tests and some tools
+# reports   - Output director for optimization reports
 SRCDIR          = ./src
 LIBDIR          = ./lib
 BINDIR          = ./bin
@@ -36,6 +95,7 @@ ANALYSIS_DIR    = $(ANALYSIS_ROOT)/$(DATE1)
 SCANDIR         = $(ANALYSIS_ROOT)/scan
 RELEASE_DIR     = ./release/$(DATE1)
 LOGDIR          = ./logs
+REPORTDIR       = ./reports
 
 ###############################################################################
 # Definitions
@@ -86,40 +146,107 @@ CXXSYS_INCDIRS := $(addprefix -isystem,$(call inc-query,$(CXX)))
 ###############################################################################
 # CC Compilation Options
 ###############################################################################
-CCLIBDIRS  = -L$(LIBDIR)
-CCLIB_SELF = -l$(shell echo $(notdir $(shell pwd))).x86
+CCLIBDIRS  = -L$(LIBDIR) -L$(localroot)
 CCLIBS     = -lrt -lm -lpthread
-OPT        = -O0
+FPC        = -DFPC_TYPE=FPC_ABORT
 
 ###############################################################################
 # C Compilation Options
 ###############################################################################
-CDEBUG    = -DDBG_LVL_DYNAMIC=DBG_N
-
-CLIBS     = $(CCLIB_SELF) -lcommon.x86 -levtlog.x86 -lds.x86 -lutils.x86 $(CCLIBS)
+CCDEBUG    =
+CLIBS     = $(CCLIBS)
 CLIBDIRS  = $(CCLIBDIRS)
 
 define CINCDIRS
--Iinclude
+-Iinclude \
+-I$(localroot)/include \
+-I$(develroot)/catch/single_include
 endef
 
-CFLAGS   = $(OPT) -g -W -Wall -Wextra -std=gnu99 -fmessage-length=0 $(CINCDIRS) $(CDEBUG)
+CFLAGS   = -g $(FPC) $(CINCDIRS) $(CCDEBUG) -std=gnu99
 CC       = $(develcc)
 
 ###############################################################################
 # C++ Compilation Options
 ###############################################################################
-CXXLIBDIRS ?= -L$(rcppsw)/lib -L$(LIBDIR)
+CXXLIBDIRS = $(CCLIBDIRS)
 
 define CXXINCDIRS
 -Iinclude \
--I$(rcsw)/include \
+-I$(localroot)/include \
 -I$(develroot)/catch/single_include
 endef
 
-CXXFLAGS    = $(OPT) -g -W -Wall -Wextra -Weffc++ -std=gnu++11 -fmessage-length=0 $(CXXINCDIRS)
-CXXLIBS     = $(CCLIB_SELF) -lrcppsw.x86 -lboost_system -lboost_filesystem -lboost_thread $(CCLIBS)
+CXXFLAGS    = -g $(FPC) $(CXXINCDIRS) $(CCDEBUG) -std=gnu++11
+CXXLIBS     = -lrcppsw.x86 -lboost_system -lboost_filesystem -lboost_thread $(CCLIBS)
 CXX         = $(develcxx)
+
+###############################################################################
+# Optimization Options (icc/gcc, g++/icpc)
+###############################################################################
+INTEL_POPTS = -qopenmp -parallel -parallel-source-info=2
+GNU_POPTS = -fopenmp
+INTEL_OPTFLAGS = -O3 -ipo -no-prec-div -static -xHost -fp-model fast=2 $(INTEL_POPTS)
+GNU_OPTFLAGS = -O3 -fno-trapping-math -fno-signed-zeros -frename-registers -funroll-loops -march=native -mtune=native -fopenmp
+
+ifneq ($(findstring gcc,$(CC)),)
+CFLAGS += $(GNU_OPTFLAGS)
+else
+CFLAGS += $(INTEL_OPTFLAGS)
+endif
+
+ifneq ($(findstring g++,$(CXX)),)
+CXXFLAGS += $(GNU_OPTFLAGS)
+else
+CXXFLAGS += $(INTEL_OPTFLAGS)
+endif
+
+# Guided optimization (Intel only)
+INTEL_GFLAGS =  -guide -parallel -guide-par -guide-vec -guide-data-trans
+
+###############################################################################
+# Diagnostic Options (icc/gcc, g++/icpc)
+#
+# 981 - warnings about operands evaluated in unspecified order
+# 181 - warnings about using an int for a %lu or a long for a %d, etc
+# 2259 - warnings about converting uint16_t to uint8_t losing precision
+# 2282 - warnings about unrecognized gcc/g++ pragmas
+# 10382 - Telling me what option xHost was setting
+###############################################################################
+GNU_CDFLAGS = -W -Wall -Wextra -fmessage-length=0 -fdiagnostics-color=always
+GNU_CXXDFLAGS = -W -Wall -Wextra -Weffc++ -Wshadow -fmessage-length=0 -fdiagnostics-color=always
+INTEL_CDFLAGS += -w2 -Wall -Wcheck -Weffc++ -Winline -Wshadow  -Wremarks -wd2259 -wd181 -wd981 -wd2282 -wd10382
+INTEL_CXXDFLAGS += -w2 -Wall -Wcheck -Winline -Wshadow -Wremarks -wd2259 -wd181 -wd981 -wd981 -wd2282 -wd10382
+
+ifneq ($(findstring gcc,$(CC)),)
+CFLAGS += $(GNU_CDFLAGS)
+else
+CFLAGS += $(INTEL_CDFLAGS)
+endif
+
+ifneq ($(findstring g++,$(CXX)),)
+CXXFLAGS += $(GNU_CXXDFLAGS)
+else
+CXXFLAGS += $(INTEL_CXXDFLAGS)
+endif
+
+###############################################################################
+# Reporting Options (gcc/icc, g++/icpc)
+###############################################################################
+INTEL_RFLAGS = -qopt-report-phase=all -qopt-report-file=$(REPORTDIR)/$(patsubst %.o,%.rprt,$(notdir $@))
+GNU_RFLAGS = -fopt-info-optimized-optall=$(REPORTDIR)/$(patsubst %.o,%.rprt,$(notdir $@))
+
+ifneq ($(findstring gcc,$(CC)),)
+REPORT_FLAGS = $(GNU_RFLAGS)
+else
+REPORT_FLAGS = $(INTEL_RFLAGS)
+endif
+
+ifneq ($(findstring g++,$(CXX)),)
+REPORT_FLAGS = $(GNU_RFLAGS)
+else
+REPORT_FLAGS = $(INTEL_RFLAGS)
+endif
 
 ###############################################################################
 # Functions
@@ -306,20 +433,56 @@ endef
 .PHONY: fix-clang-tidy-c fix-clang-tidy-c++
 .PHONY: format-clang-c format-clang-c++
 .PHONY: analyze-scan clean veryclean scan unit_tests rcopy release
+.PHONY: opt-guide opt-report
+
+#
+# Executable/library producing targets (feel free to build any of these)
+#
+
+# Build ALL THE THINGS! (in development mode, that is)
+all: dev
+
+# The Development Target (disables optimization)
+dev: OPT_CFLAGS=-O0
+dev: OPT_CXXFLAGS=-O0
+dev: $(TARGET)
 
 # The Target Library (default target)
 $(TARGET): $(addprefix $(OBJDIR)/, $(OBJECTS)) | $(LIBDIR)
 	ar rcs $@ $(addprefix $(OBJDIR)/, $(OBJECTS))
 	@ranlib $@
 
-# Build ALL THE THINGS!
-all: $(TARGET)
+# The Releaser. Build target with (1) maximum optimization, and (2) no debug
+# printing, and then copy it and everything used to build it to a timestamped
+# directory.
+release: CCDEBUG=-DNDEBUG
+
 
 # The Releaser. Build target and then copy it and everything used to build it
 # to a timestamped directory.
 release: $(TARGET) | $(RELEASE_DIR)
 	@cp $(BINDIR)/* $(OBJDIR)/* $(LIBDIR)/* $(RELEASE_DIR)
 
+#
+# Diagnostic/optimization guide targets (feel fre to build any of these)
+#
+
+# Guided Optimization. Ask the compiler to give me more info about where it
+# thinks it can speed things up.
+opt-guide: CFLAGS += $(INTEL_GFLAGS)
+opt-guide: CXXFLAGS += $(INTEL_GFLAGS)
+opt-guide: $(TARGET)
+
+# Optimization Reporting. Ask the compiler to tell you what it was/was not
+# able to optimize and WHY.
+opt-report: CFLAGS += $(REPORT_FLAGS)
+opt-report: CXXFLAGS += $(REPORT_FLAGS)
+opt-report: | $(REPORTDIR)
+opt-report: $(TARGET)
+
+#
+# Helper targets for executable/library targets (don't build any of these directly)
+#
 # The Objectifier
 $(addprefix $(OBJDIR)/, $(OBJECTS) $(TH_OBJECTS)): | $(OBJDIR)
 
@@ -329,7 +492,7 @@ ifneq "$MAKECMDGOALS" "clean"
 endif
 
 # Bootstrap Bill
-$(LIBDIR) $(BINDIR) $(LOGDIR) $(OBJDIR) $(PREPROCDIR) $(ANALYSIS_DIR) $(SCANDIR) $(RELEASE_DIR):
+$(LIBDIR) $(BINDIR) $(LOGDIR) $(OBJDIR) $(PREPROCDIR) $(ANALYSIS_DIR) $(SCANDIR) $(RELEASE_DIR) $(REPORTDIR):
 	@mkdir -p $@
 
 # The Unit Tests Engine
@@ -353,14 +516,6 @@ uninstall:
 # The Remote Copier
 rcopy:
 	@scp $(TARGET) $(REMOTE)
-
-# The Memory Savant
-valgrind:
-	@VALGRIND="valgrind --log-file=./logs/valgrind.log" $(MAKE)
-
-# The Function Call Profiler
-callgrind:
-	@CALLGRIND="valgrind --tool=callgrind --log-file=./logs/callgrind.log" $(MAKE)
 
 # The Helpful Preprocessor
 $(PREPROC_OBJECTS): | $(PREPROCDIR)
@@ -419,6 +574,7 @@ format-clang-c:
 	$(call format-clang-cmd,C)
 format-clang-c++:
 	$(call format-clang-cmd,C)
+
 ###############################################################################
 # Pattern Rules
 ###############################################################################
@@ -429,11 +585,12 @@ $(OBJDIR)/%.o: %.c
 
 # For compiling the C++ source and test harness
 $(OBJDIR)/%.o:: $(SRCDIR)/%.cpp
-	$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
+	@$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
 	$(CXX) $(CXXFLAGS) $(CXXLIBDIRS) -c -o  $@ $<
 
 # For compiling the C tests
 $(BINDIR)/%:: %.c
+	@$(call make-depend-cc,$<,$@,$(OBJDIR)/$*.d)
 	$(CC) $(CFLAGS) $(CLIBDIRS) $(addprefix $(OBJDIR)/,$(TH_OBJECTS)) $< -o $@ $(CLIBS)
 
 # For compiling the C++ tests
