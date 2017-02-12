@@ -22,7 +22,7 @@
 #include "rcsw/al/altypes.h"
 #include "rcppsw/er_frmwk_mod.hpp"
 #include "rcppsw/multithread/mt_queue.hpp"
-#include "rcppsw/threadable.hpp"
+#include "rcppsw/multithread/threadable.hpp"
 
 /*******************************************************************************
  * Macros
@@ -35,17 +35,31 @@
  * erf_client.
  */
 #ifndef NDEBUG
-#define ER_REPORT(lvl, msg, ...)                                            \
-  {                                                                         \
+/* ---------- Explicit debug level statements (use these) ---------- */
+#define ER_ERROR(...) ER_REPORT(erf_lvl::ERROR, __VA_ARGS__)
+#define ER_WARN(...) ER_REPORT(erf_lvl::WARN, __VA_ARGS__)
+#define ER_NOM(...) ER_REPORT(erf_lvl::NOM, __VA_ARGS__)
+#define ER_DIAG(...) ER_REPORT(erf_lvl::DIAG, __VA_ARGS__)
+#define ER_VER(...) ER_REPORT(erf_lvl::VER, __VA_ARGS__)
+
+/* -------- Debug statements with level parameter (Don't use these) -------- */
+#define ER_REPORT(lvl, msg, ...)                                        \
+  {                                                                     \
     char _str[1000];                                                    \
     snprintf(_str, sizeof(_str), "%s:%d:%s: " msg "\n", __FILE__, __LINE__, \
              __FUNCTION__, ##__VA_ARGS__);                              \
-    erf_client::erf_handle()->report(erf_client::erf_id(), lvl,         \
+    rcppsw::erf_client::erf_handle()->report(rcppsw::erf_client::erf_id(), lvl, \
                                      std::string(_str));                \
   }
+
 #else
 #define ER_REPORT(lvl, msg, ...)
-#endif
+#define ER_ERROR(...)
+#define ER_WARN(...)
+#define ER_NOM(...)
+#define ER_DIAG(...)
+#define ER_VER(...)
+#endif /* NDEBUG */
 
 /*
  * Like report, but only reports errors and goes to the error/bailout section
@@ -58,28 +72,28 @@
       goto error;                               \
     }                                           \
   }
-#define ER_SENTINEL(msg, ...)                 \
-  {                                           \
-    REPORT(erf_lvl::ERR, msg, ##__VA_ARGS__); \
-    goto error;                               \
+#define ER_SENTINEL(msg, ...)                   \
+  {                                             \
+    REPORT(erf_lvl::ERR, msg, ##__VA_ARGS__);   \
+    goto error;                                 \
   }
 
-#define ER_ASSERT(cond, msg, ...)                \
-  if (!(cond)) {                                 \
-    ER_REPORT(erf_lvl::ERR, msg, ##__VA_ARGS__); \
-    assert(0);                                   \
+#define ER_ASSERT(cond, msg, ...)                       \
+  if (!(cond)) {                                        \
+    ER_REPORT(erf_lvl::ERR, msg, ##__VA_ARGS__);        \
+    assert(0);                                          \
   }
 
-#define CHECK(cond) \
-  {                 \
-    if (!(cond)) {  \
-      goto error;   \
-    }               \
+#define CHECK(cond)                             \
+  {                                             \
+    if (!(cond)) {                              \
+      goto error;                               \
+    }                                           \
   }
 
-#define CHECK_PTR(ptr)    \
-  if (nullptr == (ptr)) { \
-    goto error;           \
+#define CHECK_PTR(ptr)                          \
+  if (nullptr == (ptr)) {                       \
+    goto error;                                 \
   }
 
 /*******************************************************************************
@@ -107,7 +121,7 @@ class er_frmwk : public threadable {
            const erf_lvl::value& loglvl_ = erf_lvl::NOM);
 
   /* destructor */
-  ~er_frmwk(void);
+  ~er_frmwk(void) { logfile_.close(); }
 
   /* member functions */
   void self_dbg_en(void) {
@@ -136,7 +150,7 @@ class er_frmwk : public threadable {
   void report(const boost::uuids::uuid& erf_id, const erf_lvl::value& lvl,
               const std::string& str) {
     erf_msg msg(erf_id, lvl, str);
-    msg_report(msg);
+    queue_.enqueue(msg);
   }
 
  private:

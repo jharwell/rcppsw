@@ -37,11 +37,16 @@ class threadable {
 
   virtual void* thread_main(void* arg) = 0;
   virtual status_t start(void* arg, int core = -1);
-  virtual void term(void* ret) {
+  virtual void exit(void* ret = NULL) {
     thread_run_ = false;
-    pthread_exit(ret);
+    if (!ret) {
+      int ret2;
+      pthread_exit(&ret2);
+    } else {
+      pthread_exit(ret);
+    }
   }
-
+  virtual void term(void) { thread_run_ = false; }
   bool terminated(void) { return (false == thread_run_); }
   virtual void join(void) { pthread_join(thread_, NULL); }
 

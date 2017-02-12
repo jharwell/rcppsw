@@ -62,8 +62,6 @@ er_frmwk::er_frmwk(const std::string& logfile_fname,
   logfile_.open(logfile_fname_.c_str());
 } /* er_frmwk::er_frmwk() */
 
-er_frmwk::~er_frmwk(void) { logfile_.close(); } /* er_frmwk::~er_frmwk() */
-
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/

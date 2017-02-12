@@ -84,18 +84,18 @@
 # analysis/ - Root directory for all code analysis that are run
 # logs/     - Output directory of stdout of unit tests and some tools
 # reports   - Output director for optimization reports
-SRCDIR          = ./src
-LIBDIR          = ./lib
-BINDIR          = ./bin
-TESTDIR         = ./tests
-OBJDIR          = ./obj
-PREPROCDIR      = ./preproc
-ANALYSIS_ROOT   = ./analysis
+SRCDIR          = src
+LIBDIR          = lib
+BINDIR          = bin
+TESTDIR         = tests
+OBJDIR          = obj
+PREPROCDIR      = preproc
+ANALYSIS_ROOT   = analysis
 ANALYSIS_DIR    = $(ANALYSIS_ROOT)/$(DATE1)
 SCANDIR         = $(ANALYSIS_ROOT)/scan
-RELEASE_DIR     = ./release/$(DATE1)
-LOGDIR          = ./logs
-REPORTDIR       = ./reports
+RELEASE_DIR     = release/$(DATE1)
+LOGDIR          = logs
+REPORTDIR       = reports
 
 ###############################################################################
 # Definitions
@@ -169,16 +169,16 @@ CC       = $(develcc)
 ###############################################################################
 # C++ Compilation Options
 ###############################################################################
-CXXLIBDIRS = $(CCLIBDIRS)
+CXXLIBDIRS = $(CCLIBDIRS) -L$(localroot)/lib/rcsw
 
 define CXXINCDIRS
 -Iinclude \
--I$(localroot)/include \
+-I$(rcsw)/include \
 -I$(develroot)/catch/single_include
 endef
 
 CXXFLAGS    = -g $(FPC) $(CXXINCDIRS) $(CCDEBUG)
-CXXLIBS     = -lrcppsw.x86 -lboost_system -lboost_filesystem -lboost_thread $(CCLIBS)
+CXXLIBS     = -lrcppsw.x86 -lrcsw.x86 -lboost_system -lboost_filesystem -lboost_thread $(CCLIBS)
 CXX         = $(develcxx)
 
 ###############################################################################
@@ -200,9 +200,6 @@ OPT_CXXFLAGS += $(GNU_OPTFLAGS)
 else
 OPT_CXXFLAGS += $(INTEL_OPTFLAGS)
 endif
-
-CFLAGS += $(OPT_CFLAGS)
-CXXFLAGS += $(OPT_CXXFLAGS)
 
 # Guided optimization (Intel only)
 INTEL_GFLAGS =  -guide -parallel -guide-par -guide-vec -guide-data-trans
@@ -446,8 +443,8 @@ endef
 all: dev
 
 # The Development Target (disables optimization)
-dev: OPT_CFLAGS=-O0
-dev: OPT_CXXFLAGS=-O0
+dev: CFLAGS +=-O0
+dev: CXXFLAGS += -O0
 dev: $(TARGET)
 
 # The Target Library (default target)
@@ -459,6 +456,8 @@ $(TARGET): $(addprefix $(OBJDIR)/, $(OBJECTS)) | $(LIBDIR)
 # printing, and then copy it and everything used to build it to a timestamped
 # directory.
 release: CCDEBUG=-DNDEBUG
+release: CFLAGS += $(OPT_CFLAGS)
+release: CXXFLAGS += $(OPT_CXXFLAGS)
 release: $(TARGET) | $(RELEASE_DIR)
 	@cp $(BINDIR)/* $(OBJDIR)/* $(LIBDIR)/* $(RELEASE_DIR)
 
@@ -584,7 +583,7 @@ $(OBJDIR)/%.o: %.c
 
 # For compiling the C++ source and test harness
 $(OBJDIR)/%.o:: $(SRCDIR)/%.cpp
-	@$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
+	$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
 	$(CXX) $(CXXFLAGS) $(CXXLIBDIRS) -c -o  $@ $<
 
 # For compiling the C tests
@@ -594,7 +593,7 @@ $(BINDIR)/%:: %.c
 
 # For compiling the C++ tests
 $(BINDIR)/%:: %.cpp
-	@$(call make-depend-cxx,$<,$@,$(OBJDIR)/$*.d)
+	$(call make-depend-cxx,$<,$@,$(OBJDIR)/$*.d)
 	$(CXX) $(CXXFLAGS) $(CXXLIBDIRS) $(addprefix $(OBJDIR)/,$(TH_OBJECTS)) $< -o $@ $(CXXLIBS)
 
 # For getting preprocessor C/C++ output
