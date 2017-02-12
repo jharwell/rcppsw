@@ -100,14 +100,16 @@ template <typename T> class cluster_algorithm: public erf_client {
     for (std::size_t i = 0; i < n_iterations_; ++i) {
       double iter_start = monotonic_seconds();
       if (cluster_iterate()) {
-        ER_REPORT(erf_lvl::DIAG,"Clusters report convergence: terminating\n");
+        ER_REPORT(erf_lvl::NOM, "Clusters report convergence: terminating\n");
+        end = monotonic_seconds();
         break;
+      } else {
+        end = monotonic_seconds();
       }
-      end = monotonic_seconds();
       ER_REPORT(erf_lvl::DIAG, "Iteration %lu time: %.8fms\n", i, (end - iter_start)*1000);
     } /* for(i..) */
 
-    ER_REPORT(erf_lvl::NOM, "Total time: %.8fms\n", (end - start)*1000);
+    ER_REPORT(erf_lvl::NOM,"k-means clustering time: %0.04fs\n", end-start);
   } /* cluster_algorithm::cluster() */
 
   virtual void initialize(std::vector<multidim_point<T>>* data_in)  {
@@ -130,7 +132,7 @@ template <typename T> class cluster_algorithm: public erf_client {
      * Initialize all clusters, including centers
      */
     for (std::size_t i = 0; i < n_clusters_; ++i) {
-      clusters_->emplace_back(new kmeans_cluster<T>(i, dimension_,
+      clusters_->emplace_back(new kmeans_cluster<T>(i, dimension_, n_points_,
                                                     data_, membership_));
     } /* for(i..) */
   }

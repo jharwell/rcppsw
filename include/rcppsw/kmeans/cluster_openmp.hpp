@@ -46,7 +46,9 @@ template <typename T> class cluster_openmp : public cluster_algorithm<T> {
   void first_touch_allocation(void) {
 #pragma omp parallel for num_threads(cluster_algorithm<T>::n_threads())
     for (std::size_t i = 0; i < cluster_algorithm<T>::n_points(); ++i) {
-      cluster_algorithm<T>::data()[i*cluster_algorithm<T>::dimension()] = 0;
+      for (std::size_t j = 0; j < cluster_algorithm<T>::dimension(); ++j) {
+        cluster_algorithm<T>::data()[i*cluster_algorithm<T>::dimension() +j] = 0;
+      } /* for(j..) */
       cluster_algorithm<T>::membership()[i] = -1;
     } /* for(i...) */
   }
@@ -82,16 +84,17 @@ template <typename T> class cluster_openmp : public cluster_algorithm<T> {
      */
 #pragma omp parallel for num_threads(cluster_algorithm<T>::n_threads())
     for (std::size_t i = 0; i < cluster_algorithm<T>::clusters()->size(); ++i) {
-      cluster_algorithm<T>::clusters()->at(i)->update_center(cluster_algorithm<T>::n_points());
+      cluster_algorithm<T>::clusters()->at(i)->update_center();
     } /* for(i..) */
 
     /* Finally, check for convergence */
+    std::size_t sum = 0;
+#pragma omp parallel for num_threads(cluster_algorithm<T>::n_threads()) reduction(+: sum)
     for (std::size_t i = 0; i < cluster_algorithm<T>::clusters()->size(); ++i) {
-      if (!cluster_algorithm<T>::clusters()->at(i)->convergence()) {
-        return false;
-      }
+      sum +=cluster_algorithm<T>::clusters()->at(i)->convergence();
     } /* for(i..) */
-    return true;
+
+    return (sum == cluster_algorithm<T>::clusters()->size());
   } /* cluster_openmp::cluster_iterate() */
 
  private:

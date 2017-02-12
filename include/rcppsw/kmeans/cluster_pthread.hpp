@@ -46,18 +46,35 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
       cluster_algorithm<T>(n_iterations, n_clusters, n_threads, dimension,
                            n_points, clusters_fname, centroids_fname, erf),
       workers_() {
-    assert(n_clusters % n_threads == 0);
-    std::size_t chunk_size = n_points/n_threads;
-    for (std::size_t i = 0; i < n_threads; ++i) {
-      if (n_points % n_threads != 0) {
-        chunk_size += n_points % n_threads;
-      }
-      ER_REPORT(erf_lvl::NOM, "Worker %lu: %lu - %lu\n", i, chunk_size * i,
-             chunk_size * i + chunk_size);
+    std::size_t data_chunk_size = n_points/n_threads;
+    std::size_t centers_chunk_size = n_clusters/n_threads;
+    std::size_t prev_centers_i = 0;
+    std::size_t prev_data_i = 0;
+    std::size_t data_chunk_start = 0;
+    std::size_t centers_chunk_start = 0;
 
-     workers_.emplace_back(pthread_worker<T>(i, n_threads, chunk_size,
-                                             dimension,
-                                             cluster_algorithm<T>::clusters()));
+    for (std::size_t i = 0; i < n_threads; ++i) {
+      if (n_points % n_threads != 0 && i == n_threads -1) {
+        data_chunk_size = n_points - data_chunk_start;
+      }
+      if (n_clusters % n_threads != 0 && i == n_threads -1) {
+        centers_chunk_size = n_points - centers_chunk_start;
+      }
+      ER_REPORT(erf_lvl::NOM, "Worker %lu: %lu - %lu, %lu - %lu\n", i,
+                data_chunk_start,
+                data_chunk_start + data_chunk_size,
+                centers_chunk_start,
+                centers_chunk_start + centers_chunk_size);
+
+      workers_.emplace_back(pthread_worker<T>(i,
+                                              data_chunk_start, data_chunk_size,
+                                              centers_chunk_start, centers_chunk_size,
+                                              dimension,
+                                              cluster_algorithm<T>::clusters()));
+      data_chunk_start = prev_data_i + data_chunk_size;
+      centers_chunk_start = prev_centers_i + centers_chunk_size;
+      prev_centers_i += centers_chunk_size;
+      prev_data_i += data_chunk_size;
     } /* for(i..) */
   } /* kmeans_cluster_pthread::kmeans_cluster_pthread() */
 

@@ -34,6 +34,7 @@
  * This macro requires that the class you are using it in derives from
  * erf_client.
  */
+#ifndef NDEBUG
 #define ER_REPORT(lvl, msg, ...)                                            \
   {                                                                         \
     char _str[1000];                                                    \
@@ -42,6 +43,9 @@
     erf_client::erf_handle()->report(erf_client::erf_id(), lvl,         \
                                      std::string(_str));                \
   }
+#else
+#define ER_REPORT(lvl, msg, ...)
+#endif
 
 /*
  * Like report, but only reports errors and goes to the error/bailout section

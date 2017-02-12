@@ -37,10 +37,11 @@ using multidim_point = std::vector<T>;
 template <typename T> class kmeans_cluster {
  public:
   /* constructors */
-  kmeans_cluster(std::size_t id, std::size_t dimension,
+  kmeans_cluster(std::size_t id, std::size_t dimension, std::size_t n_points,
                  const T* const data, std::size_t * const membership) :
       id_(id),
       dimension_(dimension),
+      n_points_(n_points),
       data_(data),
       membership_(membership),
       center_(dimension),
@@ -74,7 +75,7 @@ template <typename T> class kmeans_cluster {
    * Determine if the cluster has converged, by checking if the center of the
    * cluster has changed.
    */
-  bool convergence(void) { return (prev_center_ == center_); }
+  std::size_t convergence(void) { return (prev_center_ == center_); }
 
   /**
    * kmeans_cluster::update_center() - Update the center (mean) of the points
@@ -82,7 +83,7 @@ template <typename T> class kmeans_cluster {
    *
    * void - N/A
    **/
-  void update_center(std::size_t total_points) {
+  void update_center(void) {
     std::vector<T> accum(dimension_);
     prev_center_ = center_;
     /*
@@ -92,7 +93,7 @@ template <typename T> class kmeans_cluster {
      * "squared" space to save CPU cycles.
      */
     std::size_t cluster_points = 0;
-    for (std::size_t i = 0; i < total_points; ++i) {
+    for (std::size_t i = 0; i < n_points_; ++i) {
       if (membership_[i] == id_) {
         for (std::size_t j = 0; j < dimension_; ++j) {
           accum[j] += data_[i*dimension_ + j];
@@ -118,6 +119,7 @@ template <typename T> class kmeans_cluster {
   /* data members */
   std::size_t id_;
   std::size_t dimension_;
+  std::size_t n_points_;
   const T* const data_;
   std::size_t* const membership_;
   std::vector<T> center_;
