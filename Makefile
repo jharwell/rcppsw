@@ -582,7 +582,7 @@ $(OBJDIR)/%.o: %.c
 	$(CC) $(CFLAGS) $(CLIBDIRS) -c -o  $@ $<
 
 # For compiling the C++ source and test harness
-$(OBJDIR)/%.o:: $(SRCDIR)/%.cpp
+$(OBJDIR)/%.o:: %.cpp
 	$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
 	$(CXX) $(CXXFLAGS) $(CXXLIBDIRS) -c -o  $@ $<
 
