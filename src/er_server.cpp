@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Name            : er_frmwk_base.cpp
+ * Name            : er_server_base.cpp
  * Project         : rcppsw
  * Module          : erf
  * Description     : Event Reporting Framework (ERF)
@@ -11,14 +11,15 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/er_frmwk.hpp"
+#include "rcppsw/er_server.hpp"
 #include <algorithm>
 #include <boost/filesystem.hpp>
+#include "rcsw/common/dbg.h"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-using namespace rcppsw;
+namespace rcppsw {
 
 /*******************************************************************************
  * Macros
@@ -36,15 +37,15 @@ using namespace rcppsw;
     snprintf(_str, sizeof(_str), "[%s:%lu.%lu]:%s:%d:%s: " msg "\n",     \
              hostname_, _curr_time.tv_sec, _curr_time.tv_nsec, __FILE__, \
              __LINE__, __FUNCTION__, ##__VA_ARGS__);                     \
-    er_frmwk::erf_msg _msg(erf_id_, lvl, std::string(_str));             \
+    er_server::erf_msg _msg(erf_id_, lvl, std::string(_str));             \
     msg_report(_msg);                                                    \
   }
 
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-er_frmwk::er_frmwk(const std::string& logfile_fname,
-                   const erf_lvl::value& dbglvl, const erf_lvl::value& loglvl)
+er_server::er_server(const std::string& logfile_fname,
+                   const er_lvl::value& dbglvl, const er_lvl::value& loglvl)
     : modules_(),
       queue_(),
       logfile_fname_(logfile_fname),
@@ -60,7 +61,7 @@ er_frmwk::er_frmwk(const std::string& logfile_fname,
     boost::filesystem::remove(logfile_fname_);
   }
   logfile_.open(logfile_fname_.c_str());
-} /* er_frmwk::er_frmwk() */
+} /* er_server::er_server() */
 
 /*******************************************************************************
  * Member Functions
@@ -72,11 +73,11 @@ er_frmwk::er_frmwk(const std::string& logfile_fname,
  *     status_t - OK if successful, ERROR otherwise
  *
  **/
-status_t er_frmwk::insmod(const boost::uuids::uuid& mod_id,
-                          const erf_lvl::value& loglvl,
-                          const erf_lvl::value& dbglvl,
+status_t er_server::insmod(const boost::uuids::uuid& mod_id,
+                          const er_lvl::value& loglvl,
+                          const er_lvl::value& dbglvl,
                           const std::string& mod_name) {
-  er_frmwk_mod mod(mod_id, loglvl, dbglvl, mod_name);
+  er_server_mod mod(mod_id, loglvl, dbglvl, mod_name);
 
   /* make sure module not already present */
   CHECK(modules_.end() == std::find(modules_.begin(), modules_.end(), mod));
@@ -84,7 +85,7 @@ status_t er_frmwk::insmod(const boost::uuids::uuid& mod_id,
   return OK;
 
 error:
-  REPORT_INTERNAL(erf_lvl::ERR, "Failed to install module %s: module exists",
+  REPORT_INTERNAL(er_lvl::ERR, "Failed to install module %s: module exists",
                   mod_name.c_str());
   return ERROR;
 } /* insmod() */
@@ -96,131 +97,132 @@ error:
  *     status_t - OK if successful, ERROR otherwise
  *
  **/
-status_t er_frmwk::insmod(const boost::uuids::uuid& id,
+status_t er_server::insmod(const boost::uuids::uuid& id,
                           const std::string& name) {
   return insmod(id, loglvl_dflt_, dbglvl_dflt_, name);
 } /* insmod() */
 
 /**
- * er_frmwk::recv() - Add a msg to the queue
+ * er_server::recv() - Add a msg to the queue
  *
  * RETURN:
  *     status_t - OK if successful, ERROR otherwise
  *
  **/
-status_t er_frmwk::recv(const boost::uuids::uuid& mod_id,
-                        const erf_lvl::value& lvl, const std::string& str) {
-  queue_.enqueue(erf_msg(mod_id, lvl, str));
+status_t er_server::recv(const boost::uuids::uuid& mod_id,
+                        const er_lvl::value& lvl, const std::string& str) {
+  /* queue_.enqueue(erf_msg(mod_id, lvl, str)); */
+  msg_report(erf_msg(mod_id, lvl, str));
   return OK;
-} /* er_frmwk::recv() */
+} /* er_server::recv() */
 
 /**
- * er_frmwk::msg_report() - Report a msg
+ * er_server::msg_report() - Report a msg
  *
  * RETURN:
  *     N/A
  *
  **/
 
-void er_frmwk::msg_report(const erf_msg& msg) {
-  er_frmwk_mod tmp(msg.id_, "tmp");
-  std::vector<er_frmwk_mod>::const_iterator iter =
+void er_server::msg_report(const erf_msg& msg) {
+  er_server_mod tmp(msg.id_, "tmp");
+  std::vector<er_server_mod>::const_iterator iter =
       std::find(modules_.begin(), modules_.end(), tmp);
 
   if (iter != modules_.end()) {
     iter->logmsg(msg.str_, msg.lvl_, logfile_);
     iter->dbgmsg(msg.str_, msg.lvl_);
   }
-} /* er_frmwk::msg_report() */
+} /* er_server::msg_report() */
 
 /**
- * er_frmwk::flush() - Flush all msgs in the queue to stdout/logfile
+ * er_server::flush() - Flush all msgs in the queue to stdout/logfile
  *
  * RETURN:
  *     int - How many msgs were flushed
  *
  **/
-int er_frmwk::flush(void) {
+int er_server::flush(void) {
   int count = 0;
   while (queue_.size() > 0) {
     erf_msg next = queue_.dequeue();
-    er_frmwk::msg_report(next);
+    er_server::msg_report(next);
     count++;
   } /* while() */
   return count;
-} /* er_frmwk::flush() */
+} /* er_server::flush() */
 
 /**
- * er_frmwk::mod_dbglvl() - Set debugging lvl for a module
+ * er_server::mod_dbglvl() - Set debugging lvl for a module
  *
  * RETURN:
  *     status_t - OK if successful, ERROR otherwise
  *
  **/
-status_t er_frmwk::mod_dbglvl(const boost::uuids::uuid& id,
-                              const erf_lvl::value& lvl) {
-  er_frmwk_mod mod(id, erf_lvl::NOM, erf_lvl::NOM, "tmp");
+status_t er_server::mod_dbglvl(const boost::uuids::uuid& id,
+                              const er_lvl::value& lvl) {
+  er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
-  std::vector<er_frmwk_mod>::iterator iter =
+  std::vector<er_server_mod>::iterator iter =
       std::find(modules_.begin(), modules_.end(), mod);
   CHECK(iter != modules_.end());
   iter->set_dbglvl(lvl);
 
-  REPORT_INTERNAL(erf_lvl::VER, "Successfully updated dbglvl for module %s",
+  REPORT_INTERNAL(er_lvl::VER, "Successfully updated dbglvl for module %s",
                   iter->name.c_str());
   return OK;
 
 error:
-  REPORT_INTERNAL(erf_lvl::ERR,
+  REPORT_INTERNAL(er_lvl::ERR,
                   "Failed to update dbglvl for module %s: no such module",
                   iter->name.c_str());
   return ERROR;
-} /* er_frmwk::mod_dbglvl() */
+} /* er_server::mod_dbglvl() */
 
 /**
- * er_frmwk::mod_loglvl() - Set logging lvl for a module
+ * er_server::mod_loglvl() - Set logging lvl for a module
  *
  * RETURN:
  *     status_t - OK if successful, ERROR otherwise
  *
  **/
-status_t er_frmwk::mod_loglvl(const boost::uuids::uuid& id,
-                              const erf_lvl::value& lvl) {
-  er_frmwk_mod mod(id, erf_lvl::NOM, erf_lvl::NOM, "tmp");
+status_t er_server::mod_loglvl(const boost::uuids::uuid& id,
+                              const er_lvl::value& lvl) {
+  er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
-  std::vector<er_frmwk_mod>::iterator iter =
+  std::vector<er_server_mod>::iterator iter =
       std::find(modules_.begin(), modules_.end(), mod);
   CHECK(iter != modules_.end());
   iter->set_loglvl(lvl);
 
-  REPORT_INTERNAL(erf_lvl::VER, "Successfully updated loglvl for module %s",
+  REPORT_INTERNAL(er_lvl::VER, "Successfully updated loglvl for module %s",
                   iter->name.c_str());
   return OK;
 
 error:
-  REPORT_INTERNAL(erf_lvl::ERR,
+  REPORT_INTERNAL(er_lvl::ERR,
                   "Failed to update loglvl for module %s: no such module",
                   iter->name.c_str());
   return ERROR;
-} /* er_frmwk::mod_loglvl() */
+} /* er_server::mod_loglvl() */
 
 /**
- * er_frmwk::thread_main() - Main ERF thread for the master
+ * er_server::thread_main() - Main ERF thread for the master
  *
  * RETURN:
  *     N/A
  *
  **/
-void* er_frmwk::thread_main(void* arg) {
-  REPORT_INTERNAL(erf_lvl::NOM, "Start");
+void* er_server::thread_main(void* arg) {
+  REPORT_INTERNAL(er_lvl::NOM, "Start");
   while (!terminated()) {
     while (0 == queue_.size()) sleep(1);
     erf_msg msg = queue_.dequeue();
     msg_report(msg);
   } /* while() */
-  REPORT_INTERNAL(erf_lvl::NOM, "Exit");
+  REPORT_INTERNAL(er_lvl::NOM, "Exit");
 
   /* make sure all events remaining in queue are reported */
   while (queue_.size()) {
@@ -228,4 +230,6 @@ void* er_frmwk::thread_main(void* arg) {
     msg_report(msg);
   } /* while() */
   return NULL;
-} /* er_frmwk::thread_main() */
+} /* er_server::thread_main() */
+
+} /* namespace rcppsw */

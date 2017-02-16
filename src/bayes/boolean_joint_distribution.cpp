@@ -117,18 +117,39 @@ std::vector<std::size_t> bayes::boolean_joint_distribution::indices_f(
   return indices_f;
 } /* boolean_joint_distribution::indices_f() */
 
-bayes::boolean_joint_distribution bayes::boolean_joint_distribution::operator*(const bayes::boolean_joint_distribution& rhs) {
+/**
+ * boolean_joint_distribution::sum_out() - Sum out a variable from the
+ * distribution
+ *
+ * void - N/A
+ **/
+void bayes::boolean_joint_distribution::sum_out(const std::string& name) {
+  std::vector<std::size_t> indices_true = indices_t(name);
+  std::vector<std::size_t> indices_false = indices_f(name);
+  std::vector<float> dist_new(indices_true.size());
+  for (size_t i = 0; i < indices_true.size(); ++i) {
+    dist_new[i] = indices_true[i] + indices_false[i];
+  } /* for(i..) */
+  dist_ = dist_new;
+} /* boolean_joint_distribution::sum_out() */
+
+/*******************************************************************************
+ * Operators
+ ******************************************************************************/
+bayes::boolean_joint_distribution bayes::boolean_joint_distribution::operator*(
+    const bayes::boolean_joint_distribution& rhs) {
     std::vector<std::string> new_names = this->names_;
 
     /* Find the 1 var that both distributions have in common */
     std::string common;
-    assert(this->names_[0] == common);
-    for (std::vector<std::string>::const_iterator it = new_names.begin(); it!= new_names.end(); ++it) {
+    for (std::vector<std::string>::const_iterator it = new_names.begin();
+         it!= new_names.end(); ++it) {
       if (std::find(rhs.names_.begin(),
                     rhs.names_.end(), *it) != rhs.names_.end()) {
         common = *it;
       }
     } /* for(i..) */
+    assert(this->names_[0] == common);
 
     /* get common indices (must be same size!) */
     std::vector<std::size_t> lhs_indices_t = this->indices_t(common);
@@ -159,20 +180,26 @@ bayes::boolean_joint_distribution bayes::boolean_joint_distribution::operator*(c
                                  ret.names_.end(), common),
                      ret.names_.end());
     return ret;
-}
+} /* boolean_joint_distribution::operator*() */
 
-/**
- * boolean_joint_distribution::sum_out() - Sum out a variable from the
- * distribution
- *
- * void - N/A
- **/
-void bayes::boolean_joint_distribution::sum_out(const std::string& name) {
-  std::vector<std::size_t> indices_true = indices_t(name);
-  std::vector<std::size_t> indices_false = indices_f(name);
-  std::vector<float> dist_new(indices_true.size());
-  for (size_t i = 0; i < indices_true.size(); ++i) {
-    dist_new[i] = indices_true[i] + indices_false[i];
+
+std::ostream& bayes::boolean_joint_distribution::operator<<(
+    std::ostream& stream) const {
+  std::for_each(names_.begin(), names_.end(),
+                [&](const std::string& name) {
+                  stream << name;
+                });
+  stream << std::endl;
+  stream << "----------\n";
+  for (size_t i = 0; i < std::pow(2, n_vars_); ++i) {
+    for (size_t j = 0; j < n_vars_; ++j) {
+      if (i & (1 << j)) {
+        stream << "T ";
+      } else {
+        stream << "F ";
+      }
+    } /* for(j..) */
+    stream << dist_[i] << std::endl;
   } /* for(i..) */
-  dist_ = dist_new;
-} /* boolean_joint_distribution::sum_out() */
+  return stream;
+} /* boolean_joint_distribution::operator<<() */

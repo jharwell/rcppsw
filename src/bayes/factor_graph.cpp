@@ -65,8 +65,9 @@ std::list<bayes::node*>* bayes::factor_graph::find_leaf_nodes(void) const {
  * void - N/A
  **/
 void bayes::factor_graph::calculate_marginals(void) {
-
+  ER_NOM("Begin calculating marginals");
   for (size_t i = 0; i < nodes_.size(); ++i) {
+    ER_DIAG("Calculate marginals step%lu", i);
     calculate_marginals_step();
   } /* for(i..) */
 } /* factor_graph::calculate_marginals() */

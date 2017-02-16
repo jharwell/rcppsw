@@ -16,6 +16,7 @@
  ******************************************************************************/
 #include <list>
 #include "rcppsw/bayes/node.hpp"
+#include "rcppsw/er_client.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -30,10 +31,14 @@ namespace bayes {
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class factor_graph {
+class factor_graph: public er_client {
  public:
   /* constructors */
-  explicit factor_graph(std::list<node*> nodes): nodes_(nodes) {}
+  explicit factor_graph(std::list<node*> nodes, er_server* const handle) :
+      er_client(handle),
+      nodes_(nodes) {
+    insmod("Factor graph");
+  }
 
   /* member functions */
   void calculate_marginals(void);

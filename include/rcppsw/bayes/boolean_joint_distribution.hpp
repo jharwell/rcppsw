@@ -22,6 +22,7 @@
 #include <cmath>
 #include <algorithm>
 #include <utility>
+#include <iostream>
 #include "rcppsw/bayes/boolean_variable.hpp"
 
 /*******************************************************************************
@@ -41,7 +42,7 @@ class boolean_joint_distribution {
  public:
   /* constructors */
   explicit boolean_joint_distribution(const std::vector<std::string>& names) :
-      n_vars_(names_.size()),
+      n_vars_(names.size()),
       dist_(std::pow(2, n_vars_)), names_(names) {
   }
   boolean_joint_distribution(void) : n_vars_(0), dist_(), names_() {}
@@ -60,6 +61,7 @@ class boolean_joint_distribution {
   /* operators */
   boolean_joint_distribution operator*(
       const bayes::boolean_joint_distribution& rhs);
+  std::ostream& operator<<(std::ostream& stream) const;
 
  private:
   /* member functions */

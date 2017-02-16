@@ -42,7 +42,7 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
                   std::size_t n_points,
                   const std::string& clusters_fname,
                   const std::string& centroids_fname,
-                  er_frmwk *const erf) :
+                  er_server *const erf) :
       cluster_algorithm<T>(n_iterations, n_clusters, n_threads, dimension,
                            n_points, clusters_fname, centroids_fname, erf),
       workers_() {
@@ -60,7 +60,7 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
       if (n_clusters % n_threads != 0 && i == n_threads -1) {
         centers_chunk_size = n_points - centers_chunk_start;
       }
-      ER_REPORT(erf_lvl::NOM, "Worker %lu: %lu - %lu, %lu - %lu\n", i,
+      ER_REPORT(er_lvl::NOM, "Worker %lu: %lu - %lu, %lu - %lu\n", i,
                 data_chunk_start,
                 data_chunk_start + data_chunk_size,
                 centers_chunk_start,
@@ -142,9 +142,9 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
     bool ret = true;
     for (std::size_t i = 0; i < cluster_algorithm<T>::n_clusters(); ++i) {
       if (cluster_algorithm<T>::clusters()->at(i)->convergence()) {
-        ER_REPORT(erf_lvl::DIAG, "Cluster %lu reports convergence\n", i);
+        ER_REPORT(er_lvl::DIAG, "Cluster %lu reports convergence\n", i);
       } else {
-        ER_REPORT(erf_lvl::DIAG, "Cluster %lu reports no convergence\n", i);
+        ER_REPORT(er_lvl::DIAG, "Cluster %lu reports no convergence\n", i);
         ret = false;
       }
     } /* for(i..) */

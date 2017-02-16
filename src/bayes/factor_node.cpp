@@ -49,7 +49,7 @@ namespace bayes = rcppsw::bayes;
  * void - N/A
  **/
 void bayes::factor_node::sum_product_update(void) {
-
+  ER_DIAG("Updating distribution for factor node %s", name_.c_str());
   if (n_links() == 1) {
     /*
      * If it is the first iteration, and we are a leaf node, send the initial
@@ -57,16 +57,24 @@ void bayes::factor_node::sum_product_update(void) {
      * node and we get a message, we are done.
      */
     if (first_iteration()) {
+      ER_DIAG("%s: First iteration leaf factor node -> send initial distribution",
+              name_.c_str());
       outgoing_msg(dist_);
       return;
     } else if (n_msgs_recvd() == 1) {
+      ER_DIAG("%s: Last iteration leaf factor node", name_.c_str());
       return;
     }
   } else if (n_msgs_recvd() == 1 && exclude()->has_outgoing_msg()) {
+    ER_DIAG("%s: Received message from excluded node", name_.c_str());
     outgoing_msg(dist_);
+    return;
+  } else if (n_msgs_recvd() != n_links() - 1) {
+    ER_DIAG("%s: Have not received messages from all non-excluded nodes yet", name_.c_str());
     return;
   }
 
+  ER_DIAG("Messages received from all non-excluded nodes");
   /* have an incoming message */
   auto it = links().begin();
   if (links().front() == exclude()) {

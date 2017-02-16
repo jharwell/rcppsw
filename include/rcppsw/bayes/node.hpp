@@ -39,7 +39,7 @@ class node {
   virtual ~node(void) {}
 
   /* member functions */
-  void add_link(node* const node) { links_.push_back(node); }
+  void add_link(node* const n) { links_.push_back(n); }
   virtual void sum_product_update(void) = 0;
   std::size_t n_links(void) const { return links_.size(); }
   void exclude(const node* const n) { exclude_ = n; }

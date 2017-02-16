@@ -59,7 +59,7 @@ template <typename T> class pthread_worker: public threadable {
 
   /* member functions */
   void* thread_main(void* arg) {
-    ER_REPORT(erf_lvl::DIAG, "%lu: points %lu - %lu, centers %lu - %lu\n",id_, 
+    ER_REPORT(er_lvl::DIAG, "%lu: points %lu - %lu, centers %lu - %lu\n",id_, 
                points_start_, points_start_ + points_size_, centers_start_, 
                centers_start_ + centers_size_); 
     /*

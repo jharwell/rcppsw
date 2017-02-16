@@ -21,8 +21,8 @@
 #include <sys/types.h>
 #include <string>
 #include <vector>
-#include "rcsw//multithread/procm.h"
-#include "rcppsw/er_frmwk.hpp"
+#include "rcsw/multithread/procm.h"
+#include "rcsw/common/dbg.h"
 
 /*******************************************************************************
  * Namespaces

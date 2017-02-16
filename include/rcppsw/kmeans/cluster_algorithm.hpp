@@ -44,7 +44,7 @@ template <typename T> class cluster_algorithm: public erf_client {
                     std::size_t n_points,
                     const std::string& clusters_fname,
                     const std::string& centroids_fname,
-                    er_frmwk *const erf) :
+                    er_server *const erf) :
       erf_client(erf),
       n_iterations_(n_iterations), n_clusters_(n_clusters),
       n_threads_(n_threads),
@@ -55,7 +55,7 @@ template <typename T> class cluster_algorithm: public erf_client {
       centroids_fname_(centroids_fname),
       clusters_(new std::vector<kmeans_cluster<T>*>()) {
     erf_handle()->insmod(erf_id(), "KMEANS");
-    ER_REPORT(erf_lvl::NOM, "n_points=%lu, n_clusters=%lu, n_iterations=%lu\n",
+    ER_REPORT(er_lvl::NOM, "n_points=%lu, n_clusters=%lu, n_iterations=%lu\n",
               n_points_, n_clusters_, n_iterations_);
   }
 
@@ -94,22 +94,22 @@ template <typename T> class cluster_algorithm: public erf_client {
                   });
   }
   void cluster(void) {
-    ER_REPORT(erf_lvl::NOM, "Begin clustering\n");
+    ER_REPORT(er_lvl::NOM, "Begin clustering\n");
     double end = 0.0;
     double start = monotonic_seconds();
     for (std::size_t i = 0; i < n_iterations_; ++i) {
       double iter_start = monotonic_seconds();
       if (cluster_iterate()) {
-        ER_REPORT(erf_lvl::NOM, "Clusters report convergence: terminating\n");
+        ER_REPORT(er_lvl::NOM, "Clusters report convergence: terminating\n");
         end = monotonic_seconds();
         break;
       } else {
         end = monotonic_seconds();
       }
-      ER_REPORT(erf_lvl::DIAG, "Iteration %lu time: %.8fms\n", i, (end - iter_start)*1000);
+      ER_REPORT(er_lvl::DIAG, "Iteration %lu time: %.8fms\n", i, (end - iter_start)*1000);
     } /* for(i..) */
 
-    ER_REPORT(erf_lvl::NOM,"k-means clustering time: %0.04fs\n", end-start);
+    ER_REPORT(er_lvl::NOM,"k-means clustering time: %0.04fs\n", end-start);
   } /* cluster_algorithm::cluster() */
 
   virtual void initialize(std::vector<multidim_point<T>>* data_in)  {

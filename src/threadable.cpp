@@ -12,7 +12,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/multithread/threadable.hpp"
-#include "rcppsw/er_frmwk.hpp"
+#include "rcsw/common/dbg.h"
 #include "rcsw/multithread/threadm.h"
 
 /*******************************************************************************

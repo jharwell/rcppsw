@@ -15,6 +15,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/bayes/node.hpp"
+#include "rcppsw/er_client.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -29,10 +30,14 @@ namespace bayes {
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class factor_node: public node {
+class factor_node: public node, private er_client {
  public:
   /* constructors */
-  explicit factor_node(const boolean_joint_distribution& dist): dist_(dist) {}
+  factor_node(const std::string& name, const boolean_joint_distribution& dist,
+              er_server* const handle): er_client(handle), name_(name),
+                                        dist_(dist) {
+    insmod("Factor node");
+  }
 
   /* member functions */
   void sum_product_update(void);
@@ -42,6 +47,7 @@ class factor_node: public node {
   /* member functions */
 
   /* data members */
+  std::string name_;
   boolean_joint_distribution dist_;
 };
 
