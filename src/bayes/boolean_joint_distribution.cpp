@@ -13,6 +13,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/bayes/boolean_joint_distribution.hpp"
+#include <algorithm>
 #include "rcsw/common/fpc.h"
 
 /*******************************************************************************
@@ -45,7 +46,7 @@ namespace bayes = rcppsw::bayes;
  ******************************************************************************/
 /**
  * boolean_joint_distribution::value() - Set the value of a preposition over the
- * distribution
+ * distribution. The preposition must be ordered from MSB to LSB variables
  *
  * bool - TRUE is successful, FALSE otherwise
  **/
@@ -53,10 +54,15 @@ bool bayes::boolean_joint_distribution::preposition(
     const std::vector<std::pair<std::string, bool>>& spec,
     float value) {
   FPC_CHECK(false, spec.size() == n_vars_);
+
+  auto spec2 = spec;
+  std::reverse(spec2.begin(), spec2.end());
+
   std::size_t index = 0;
-  for (std::size_t i = 0; i < n_vars_; ++i) {
-    if (spec[i].second) {
-      index += std::pow(2,i);
+  for (size_t i = 0 ; i < n_vars_; ++i) {
+    /* std::cout << "pos " << i << " " << spec2[i].second <<std::endl; */
+    if (spec2[i].second) {
+      index += std::pow(2, i);
     }
   } /* for(i..) */
   dist_[index] = value;
@@ -89,7 +95,7 @@ std::vector<std::size_t> bayes::boolean_joint_distribution::indices_t(
                                   std::find(names_.begin(), names_.end(), name));
 
   std::vector<std::size_t> indices_t;
-  for (std::size_t i = 0; i < n_vars_; ++i) {
+  for (std::size_t i = 0; i < std::pow(2, n_vars_); ++i) {
     if (i & (1 << pos)) {
       indices_t.push_back(i);
     }
@@ -109,7 +115,7 @@ std::vector<std::size_t> bayes::boolean_joint_distribution::indices_f(
                                   std::find(names_.begin(), names_.end(), name));
 
   std::vector<std::size_t> indices_f;
-  for (std::size_t i = 0; i < n_vars_; ++i) {
+  for (std::size_t i = 0; i < std::pow(2, n_vars_); ++i) {
     if (!(i & (1 << pos))) {
       indices_f.push_back(i);
     }
@@ -127,10 +133,25 @@ void bayes::boolean_joint_distribution::sum_out(const std::string& name) {
   std::vector<std::size_t> indices_true = indices_t(name);
   std::vector<std::size_t> indices_false = indices_f(name);
   std::vector<float> dist_new(indices_true.size());
+
   for (size_t i = 0; i < indices_true.size(); ++i) {
-    dist_new[i] = indices_true[i] + indices_false[i];
+    dist_new[i] = dist_[indices_true[i]] + dist_[indices_false[i]];
   } /* for(i..) */
+
   dist_ = dist_new;
+  names_.erase(std::remove(names_.begin(),
+                           names_.end(), name),
+               names_.end());
+  n_vars_--;
+
+  /*
+   *  Now that the variable has been summed out, normalize resulting
+   * distribution
+   */
+  float total = std::accumulate(dist_.begin(), dist_.end(), 0.0);
+  for (size_t i = 0; i < dist_.size(); ++i) {
+    dist_[i] /= total;
+  } /* for(i..) */
 } /* boolean_joint_distribution::sum_out() */
 
 /*******************************************************************************
@@ -139,7 +160,9 @@ void bayes::boolean_joint_distribution::sum_out(const std::string& name) {
 bayes::boolean_joint_distribution bayes::boolean_joint_distribution::operator*(
     const bayes::boolean_joint_distribution& rhs) {
     std::vector<std::string> new_names = this->names_;
-
+    if (rhs.names_[0] == "unity") {
+      return *this;
+    }
     /* Find the 1 var that both distributions have in common */
     std::string common;
     for (std::vector<std::string>::const_iterator it = new_names.begin();
@@ -149,50 +172,57 @@ bayes::boolean_joint_distribution bayes::boolean_joint_distribution::operator*(
         common = *it;
       }
     } /* for(i..) */
-    assert(this->names_[0] == common);
 
     /* get common indices (must be same size!) */
     std::vector<std::size_t> lhs_indices_t = this->indices_t(common);
     std::vector<std::size_t> rhs_indices_t = rhs.indices_t(common);
     std::vector<std::size_t> lhs_indices_f = this->indices_f(common);
     std::vector<std::size_t> rhs_indices_f = rhs.indices_f(common);
-    assert(lhs_indices_t.size() == rhs_indices_t.size());
-    assert(lhs_indices_f.size() == rhs_indices_f.size());
 
     std::vector<float> res;
 
     /* MULTIPLY! */
-    for (size_t i = 0; i < this->dist_.size(); ++i) {
+    for (int i = std::pow(2, n_vars_) - 1; i >= 0; --i) {
       std::vector<std::pair<std::string, bool>> prep = index_to_preposition(i);
       if (true == value_in_preposition(prep, common)) {
-        std::for_each(rhs_indices_t.begin(), rhs_indices_t.end(), [&](float f) {
-            res.push_back(this->dist_[i]*f);
+        std::for_each(rhs_indices_t.begin(), rhs_indices_t.end(),
+                      [&](std::size_t index) {
+            res.push_back(this->dist_[i]*index);
           });
       } else {
-        std::for_each(rhs_indices_f.begin(), rhs_indices_f.end(), [&](float f) {
-            res.push_back(this->dist_[i]*f);
+        std::for_each(rhs_indices_f.begin(), rhs_indices_f.end(),
+                      [&](std::size_t index) {
+            res.push_back(this->dist_[i]*rhs.dist_[index]);
           });
       }
+      /* std::cout << "PRINT\n"; */
+      /* for (auto q : res) */
+      /*   std::cout << q << " "; */
+      /* std::cout << std::endl; */
     } /* for(i..) */
     bayes::boolean_joint_distribution ret(this->names_);
-    ret.names_.insert(ret.names_.end(), rhs.names_.begin(), rhs.names_.end());
-    ret.names_.erase(std::remove(ret.names_.begin(),
-                                 ret.names_.end(), common),
-                     ret.names_.end());
+    /* ret.names_.insert(ret.names_.end(), rhs.names_.begin(), rhs.names_.end()); */
+    /* ret.names_.erase(std::remove(ret.names_.begin(), */
+    /*                              ret.names_.end(), common), */
+    /*                  ret.names_.end()); */
+    ret.dist_ = res;
     return ret;
 } /* boolean_joint_distribution::operator*() */
 
-
+std::ostream& bayes::operator<<(std::ostream& stream,
+                         const bayes::boolean_joint_distribution& rhs) {
+  return rhs.operator<<(stream);
+}
 std::ostream& bayes::boolean_joint_distribution::operator<<(
     std::ostream& stream) const {
-  std::for_each(names_.begin(), names_.end(),
+  std::for_each(names_.rbegin(), names_.rend(),
                 [&](const std::string& name) {
-                  stream << name;
+                  stream << name << ",";
                 });
   stream << std::endl;
   stream << "----------\n";
   for (size_t i = 0; i < std::pow(2, n_vars_); ++i) {
-    for (size_t j = 0; j < n_vars_; ++j) {
+    for (int j = n_vars_ - 1; j >= 0; --j) {
       if (i & (1 << j)) {
         stream << "T ";
       } else {
@@ -202,4 +232,4 @@ std::ostream& bayes::boolean_joint_distribution::operator<<(
     stream << dist_[i] << std::endl;
   } /* for(i..) */
   return stream;
-} /* boolean_joint_distribution::operator<<() */
+} /* boolean_joint_distribution::to_stream() */

@@ -14,7 +14,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <list>
+#include <vector>
 #include "rcppsw/bayes/node.hpp"
 #include "rcppsw/er_client.hpp"
 
@@ -34,7 +34,7 @@ namespace bayes {
 class factor_graph: public er_client {
  public:
   /* constructors */
-  explicit factor_graph(std::list<node*> nodes, er_server* const handle) :
+  explicit factor_graph(std::vector<node*> nodes, er_server* const handle) :
       er_client(handle),
       nodes_(nodes) {
     insmod("Factor graph");
@@ -42,14 +42,15 @@ class factor_graph: public er_client {
 
   /* member functions */
   void calculate_marginals(void);
+  std::vector<node*>* find_leaf_nodes(void) const;
 
  private:
   /* member functions */
-  bool calculate_marginals_step(void);
-  std::list<node*>* find_leaf_nodes(void) const;
+  void calculate_marginals_step(void);
+
 
   /* data members */
-  std::list<node*> nodes_;
+  std::vector<node*> nodes_;
 };
 
 /*******************************************************************************

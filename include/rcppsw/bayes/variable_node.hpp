@@ -35,7 +35,7 @@ class variable_node: public node, private er_client {
  public:
   /* constructors */
   variable_node(const std::string& name, er_server* const handle) :
-      er_client(handle), name_(name) {
+      node(name), er_client(handle) {
     insmod("Variable node");
   }
 
@@ -46,7 +46,6 @@ class variable_node: public node, private er_client {
   /* member functions */
 
   /* data members */
-  std::string name_;
 };
 
 /*******************************************************************************

@@ -49,7 +49,9 @@ namespace bayes = rcppsw::bayes;
  * void - N/A
  **/
 void bayes::factor_node::sum_product_update(void) {
-  ER_DIAG("Updating distribution for factor node %s", name_.c_str());
+  ER_DIAG("%s: Updating factor node (%lu links/%lu msgs)",
+          name_.c_str(), n_links(), incoming_count());
+
   if (n_links() == 1) {
     /*
      * If it is the first iteration, and we are a leaf node, send the initial
@@ -57,54 +59,63 @@ void bayes::factor_node::sum_product_update(void) {
      * node and we get a message, we are done.
      */
     if (first_iteration()) {
-      ER_DIAG("%s: First iteration leaf factor node -> send initial distribution",
+      ER_DIAG("%s: First iteration leaf node -> send initial distribution",
               name_.c_str());
-      outgoing_msg(dist_);
+      send_msg(exclude(), dist_);
+      first_iteration(false);
       return;
-    } else if (n_msgs_recvd() == 1) {
-      ER_DIAG("%s: Last iteration leaf factor node", name_.c_str());
+    } else {
+      if (incoming_count() == 1) {
+        ER_DIAG("%s: Last iteration leaf node", name().c_str());
+        recvd_2nd_msg(true);
+      }
       return;
     }
-  } else if (n_msgs_recvd() == 1 && exclude()->has_outgoing_msg()) {
-    ER_DIAG("%s: Received message from excluded node", name_.c_str());
-    outgoing_msg(dist_);
-    return;
-  } else if (n_msgs_recvd() != n_links() - 1) {
-    ER_DIAG("%s: Have not received messages from all non-excluded nodes yet", name_.c_str());
-    return;
+  } else {
+    if (!recvd_all_msgs()) {
+      return;
+    }
   }
 
-  ER_DIAG("Messages received from all non-excluded nodes");
-  /* have an incoming message */
-  auto it = links().begin();
-  if (links().front() == exclude()) {
-    it++;
-  }
-
+  ER_DIAG("Processing %lu received messages", incoming_count());
+  /* std::cout <<"Before multiplying\n"; */
+  /* std::cout << dist_; */
   /*
    * Compute the product of all incoming messages from variable nodes, and
    * multiply by the factor (i.e. distribution) at the current factor node.
    */
   boolean_joint_distribution accum = dist_;
-  while (it != links().end()) {
-    node* n = *it;
-    if (n != exclude()) {
-      accum = accum * n->outgoing_msg();
-
-      /* notify all connected nodes that we have processed their messages */
-      n->ack_msg();
-    }
-    it++;
-  } /* while() */
+  ER_DIAG("Multiplying distributions: base=%s", name().c_str());
+  std::for_each(incoming_msgs().begin(), incoming_msgs().end(), [&](boolean_joint_distribution& b) {
+      accum = accum * b;
+    });
+  /* std::cout <<"Before summing out\n"; */
+  /* std::cout << accum; */
 
   /* Sum out all variables the factor node is operating over/on */
+  std::vector<std::string> names = accum.names();
   std::for_each(
-      accum.names().begin(),
-      accum.names().end(),
-      [&](const std::string& name) {
-        accum.sum_out(name);
+      names.begin(),
+      names.end(),
+      [&](const std::string& var_name) {
+        if (var_name != name()) {
+          ER_DIAG("Sum out %s", var_name.c_str());
+          accum.sum_out(var_name);
+          std::cout << accum;
+        }
       });
 
   /* set outgoing message */
-  outgoing_msg(accum);
+  printf("last msg src: %p exclude: %p\n",last_msg_src(), exclude());
+  if (last_msg_src() == exclude()) {
+    std::for_each(links().begin(), links().end(), [&](node* n) {
+        if (n != exclude()) {
+          ER_DIAG("Send msg to variable node %s",((variable_node*)n)->name().c_str());
+          send_msg(n, accum);
+        }
+      });
+  } else {
+    send_msg(exclude(), accum);
+    ER_DIAG("Send msg to variable node %s",((variable_node*)exclude())->name().c_str());
+  }
 } /* factor_node::sum_product_update() */

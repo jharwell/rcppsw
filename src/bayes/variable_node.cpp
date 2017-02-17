@@ -34,7 +34,8 @@ namespace bayes = rcppsw::bayes;
  * void - N/A
  **/
 void bayes::variable_node::sum_product_update(void) {
-  ER_DIAG("%s: Updating variable node", name_.c_str());
+  ER_DIAG("%s: Updating variable node (%lu links/%lu msgs)",
+          name().c_str(), n_links(), incoming_count());
 
   /*
    * I'm a leaf node, so send a boolean distribution of unity to the
@@ -42,43 +43,48 @@ void bayes::variable_node::sum_product_update(void) {
    */
   if (n_links() == 1) {
     if (first_iteration()) {
-      ER_DIAG("%s: First iteration leaf variable node", name_.c_str());
+      ER_DIAG("%s: First iteration leaf node -> send unity",
+              name().c_str());
       boolean_joint_distribution msg({"unity"});
       msg.preposition({{"unity", true}}, 1.0);
       msg.preposition({{"unity", false}}, 0.0);
-      outgoing_msg(msg);
+      std::for_each(links().begin(), links().end(), [&](node* n) {
+          send_msg(n, msg);
+        });
+      first_iteration(false);
       return;
-    } else if (n_msgs_recvd() == 1) {
-      ER_DIAG("%s: Last Iteration leaf variable node", name_.c_str());
+    } else {
+      if (incoming_count() == 1) {
+        ER_DIAG("%s: Last Iteration leaf node", name().c_str());
+        recvd_2nd_msg(true);
+      }
+      ER_DIAG("%s: Mid iteration msg count: %lu", name().c_str(), incoming_count());
       return;
     }
-  } else if (n_msgs_recvd() == 1 && exclude()->has_outgoing_msg()) {
-    outgoing_msg(exclude()->outgoing_msg());
-    return;
-  } else if (n_msgs_recvd() != n_links() - 1) {
-    ER_DIAG("%s: Have not received messages from all non-excluded nodes yet", name_.c_str());
-    return;
+  } else {
+    if (!recvd_all_msgs()) {
+      return;
+    }
   }
-  ER_DIAG("Messages received from all non-excluded nodes");
-  /* have an incoming message from all non-excluded nodes */
-  auto it = links().begin();
-  node* start;
-  if (links().front() == exclude()) {
-    it++;
-  }
-  start = *it;
-  it++;
+  ER_DIAG("Processing %lu received messages", incoming_count());
 
   /* compute the product of all incoming messages from factor nodes */
-  boolean_joint_distribution accum = dynamic_cast<factor_node*>(start)->dist();
-  while (it != links().end()) {
-    if (*it != exclude()) {
-      accum = accum * (*it)->outgoing_msg();
+  boolean_joint_distribution accum = incoming_msgs()[0];
+  ER_DIAG("Multiplying distributions: base=%s", name().c_str());
+  std::for_each(incoming_msgs().begin()+1, incoming_msgs().end(), [&](boolean_joint_distribution& b) {
+      accum = accum * b;
+    });
 
-      /* notify all connected nodes that we have processed their messages */
-      (*it)->ack_msg();
-    }
-  } /* while() */
   /* set outgoing message */
-  outgoing_msg(accum);
+  if (last_msg_src() == exclude()) {
+    std::for_each(links().begin(), links().end(), [&](node* n) {
+        if (n != exclude()) {
+          ER_DIAG("Send msg to factor node %s",((factor_node*)n)->name().c_str());
+          send_msg(n, accum);
+        }
+      });
+  } else {
+    ER_DIAG("Send msg to factor node %s",((factor_node*)exclude())->name().c_str());
+    send_msg(exclude(), accum);
+  }
 } /* variable_node::sum_product_update() */

@@ -34,11 +34,11 @@ class factor_node: public node, private er_client {
  public:
   /* constructors */
   factor_node(const std::string& name, const boolean_joint_distribution& dist,
-              er_server* const handle): er_client(handle), name_(name),
+              er_server* const handle): node(name), er_client(handle), name_(name),
                                         dist_(dist) {
     insmod("Factor node");
   }
-
+  const std::string& name(void) { return name_; }
   /* member functions */
   void sum_product_update(void);
   boolean_joint_distribution dist(void) const { return dist_; }

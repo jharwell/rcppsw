@@ -44,7 +44,9 @@ class boolean_joint_distribution {
   explicit boolean_joint_distribution(const std::vector<std::string>& names) :
       n_vars_(names.size()),
       dist_(std::pow(2, n_vars_)), names_(names) {
+    std::reverse(names_.begin(), names_.end());
   }
+
   boolean_joint_distribution(void) : n_vars_(0), dist_(), names_() {}
 
   /* member functions */
@@ -61,7 +63,8 @@ class boolean_joint_distribution {
   /* operators */
   boolean_joint_distribution operator*(
       const bayes::boolean_joint_distribution& rhs);
-  std::ostream& operator<<(std::ostream& stream) const;
+  std::ostream& operator<<(
+      std::ostream& stream) const;
 
  private:
   /* member functions */
@@ -75,19 +78,22 @@ class boolean_joint_distribution {
     } /* for(i..) */
     return index;
   }
+
   std::vector<std::pair<std::string, bool>> index_to_preposition(
       std::size_t index) const {
+    assert(index <= std::pow(2, n_vars_) - 1);
     std::vector<std::pair<std::string, bool>> res(n_vars_,
                                                   std::pair<std::string,
                                                   bool>("", false));
-    for (int j = index; j >= 0; --j) {
-      for (std::size_t i = 0; i < std::pow(2, n_vars_); ++i) {
-        res[i].first = names_[i];
-        if (j & (1 << i)) {
-          res[j].second = true;
-        }
-      } /* for(i..) */
-    } /* for(j..) */
+    for (size_t i = 0; i < n_vars_; ++i) {
+      res[i].first = names_[i];
+    } /* for(i..) */
+
+    for (std::size_t i = 0; i < index; ++i) {
+      if (index & (1 << i)) {
+        res[i].second = true;
+      }
+    } /* for(i..) */
     return res;
   }
   bool value_in_preposition(
@@ -111,6 +117,9 @@ class boolean_joint_distribution {
 /*******************************************************************************
  * Operater Definitions
  ******************************************************************************/
+std::ostream& operator<<(std::ostream& stream,
+                         const boolean_joint_distribution& rhs);
+
 } /* namespace bayes */
 } /* namespace rcppsw */
 

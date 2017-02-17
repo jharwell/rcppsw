@@ -103,20 +103,6 @@ status_t er_server::insmod(const boost::uuids::uuid& id,
 } /* insmod() */
 
 /**
- * er_server::recv() - Add a msg to the queue
- *
- * RETURN:
- *     status_t - OK if successful, ERROR otherwise
- *
- **/
-status_t er_server::recv(const boost::uuids::uuid& mod_id,
-                        const er_lvl::value& lvl, const std::string& str) {
-  /* queue_.enqueue(erf_msg(mod_id, lvl, str)); */
-  msg_report(erf_msg(mod_id, lvl, str));
-  return OK;
-} /* er_server::recv() */
-
-/**
  * er_server::msg_report() - Report a msg
  *
  * RETURN:

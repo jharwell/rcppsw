@@ -64,8 +64,6 @@ class er_server : public threadable {
   status_t mod_dbglvl(const boost::uuids::uuid& id, const er_lvl::value& lvl);
   status_t mod_loglvl(const boost::uuids::uuid& id, const er_lvl::value& lvl);
   int flush(void);
-  status_t recv(const boost::uuids::uuid& id, const er_lvl::value& lvl,
-                const std::string& str);
   boost::uuids::uuid idgen(void) { return gen_(); }
   void* thread_main(void* arg);
   er_lvl::value loglvl(void) { return loglvl_dflt_; }
@@ -78,7 +76,8 @@ class er_server : public threadable {
   void report(const boost::uuids::uuid& erf_id, const er_lvl::value& lvl,
               const std::string& str) {
     erf_msg msg(erf_id, lvl, str);
-    queue_.enqueue(msg);
+    msg_report(msg);
+    /* queue_.enqueue(msg); */
   }
 
  private:
