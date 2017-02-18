@@ -139,9 +139,8 @@ void bayes::boolean_joint_distribution::sum_out(const std::string& name) {
   } /* for(i..) */
 
   dist_ = dist_new;
-  names_.erase(std::remove(names_.begin(),
-                           names_.end(), name),
-               names_.end());
+  names_.erase(std::find(names_.begin(),
+                         names_.end(), name));
   n_vars_--;
 
   /*
@@ -153,6 +152,21 @@ void bayes::boolean_joint_distribution::sum_out(const std::string& name) {
     dist_[i] /= total;
   } /* for(i..) */
 } /* boolean_joint_distribution::sum_out() */
+
+/**
+ * boolean_joint_distribution::not_sum() - Sum out all variables except the one
+ * specified
+ *
+ * void - N/A
+ **/
+void bayes::boolean_joint_distribution::not_sum(const std::string& name) {
+  std::vector<std::string> names2 = names_;
+  for (auto it = names2.begin(); it != names2.end(); ++it) {
+    if ((*it) != name) {
+      sum_out(*it);
+    }
+  } /* (it...) */
+} /* boolean_joint_distribution::not_sum() */
 
 /*******************************************************************************
  * Operators
@@ -173,7 +187,7 @@ bayes::boolean_joint_distribution bayes::boolean_joint_distribution::operator*(
       }
     } /* for(i..) */
 
-    /* get common indices (must be same size!) */
+    /* get common indices */
     std::vector<std::size_t> lhs_indices_t = this->indices_t(common);
     std::vector<std::size_t> rhs_indices_t = rhs.indices_t(common);
     std::vector<std::size_t> lhs_indices_f = this->indices_f(common);

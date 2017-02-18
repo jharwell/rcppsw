@@ -14,32 +14,11 @@
  ******************************************************************************/
 #include "rcppsw/bayes/factor_graph.hpp"
 #include <algorithm>
-#include "rcppsw/bayes/factor_node.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 namespace bayes = rcppsw::bayes;
-
-/*******************************************************************************
- * Constant Definitions
- ******************************************************************************/
-
-/*******************************************************************************
- * Structure Definitions
- ******************************************************************************/
-
-/*******************************************************************************
- * Global Variables
- ******************************************************************************/
-
-/*******************************************************************************
- * Forward Declarations
- ******************************************************************************/
-
-/*******************************************************************************
- * Constructors/Destructors
- ******************************************************************************/
 
 /*******************************************************************************
  * Member Functions
@@ -79,46 +58,38 @@ void bayes::factor_graph::calculate_marginals(void) {
     std::for_each(nodes_.begin(), nodes_.end(), [&](bayes::node* n) {
         n->update_msg_status();
       });
-    ER_DIAG("Calculate marginals step%lu", step++);
+    ER_NOM("step%lu", step++);
     for (size_t i = 0; i < nodes_.size(); ++i) {
-      if (i < nodes_.size()/2) {
+      factor_node * f = dynamic_cast<factor_node*>(nodes_[i]);
+
+      if (f) {
         ER_DIAG("Factor node %s: %lu links, %lu incoming messages",
-                nodes_[i]->name().c_str(), nodes_[i]->n_links(), nodes_[i]->incoming_count());
-        std::cout << ((bayes::factor_node*)nodes_[i])->dist();
+                nodes_[i]->name().c_str(), nodes_[i]->n_links(),
+                nodes_[i]->incoming_count());
+        /* std::cout << ((bayes::factor_node*)nodes_[i])->dist(); */
       } else {
         ER_DIAG("Variable node %s: %lu links, %lu incoming messages",
-                nodes_[i]->name().c_str(), nodes_[i]->n_links(), nodes_[i]->incoming_count());
-
+                nodes_[i]->name().c_str(), nodes_[i]->n_links(),
+                nodes_[i]->incoming_count());
       }
-
     } /* for(i..) */
 
-    calculate_marginals_step();
-
+    /* one step of the algorithm */
+    std::for_each(nodes_.begin(), nodes_.end(), [&](bayes::node* n) {
+        n->sum_product_update();
+      });
     bool term = true;
     std::for_each(leaves->begin(), leaves->end(), [&](bayes::node* n) {
         if (!n->recvd_2nd_msg()) {
-          std::cout << "Leaf node has not received 2nd message yet\n";
+          ER_VER("Leaf node has not received 2nd message yet");
           term = false;
         } else {
-          std::cout << "Leaf node has received 2nd message\n";
+          ER_VER("Leaf node has received 2nd message\n");
         }
       });
     if (term) {
+      ER_NOM("Finished calculating marginals");
       break;
     }
   } /* while() */
 } /* factor_graph::calculate_marginals() */
-
-/**
- * factor_graph::calculate_marginals_step() - One iteration of the marginal
- * calculation algorithm
- *
- * void - N/A
- **/
-void bayes::factor_graph::calculate_marginals_step(void) {
-  std::for_each(nodes_.begin(), nodes_.end(), [&](bayes::node* n) {
-      n->sum_product_update();
-    });
-
-} /* factor_graph::calculate_marginals_step() */

@@ -55,10 +55,12 @@ class boolean_joint_distribution {
   float preposition(const std::vector<std::pair<std::string,
                     bool>>& spec) const;
 
+  const std::vector<std::string>& names(void) const { return names_; }
   std::vector<std::size_t> indices_t(const std::string& name) const;
   std::vector<std::size_t> indices_f(const std::string& name) const;
+
   void sum_out(const std::string& name);
-  const std::vector<std::string>& names(void) const { return names_; }
+  void not_sum(const std::string& name);
 
   /* operators */
   boolean_joint_distribution operator*(
@@ -99,13 +101,14 @@ class boolean_joint_distribution {
   bool value_in_preposition(
       const std::vector<std::pair<std::string, bool>>& prep,
       const std::string& name) {
+    bool ret = false;
     std::for_each(prep.begin(), prep.end(),
                   [&](const std::pair<std::string, bool>& p) {
                     if (p.first == name) {
-                      return p.second;
+                      ret = true;
                     }
-      });
-    return false;
+                  });
+    return ret;
   }
 
   /* data members */

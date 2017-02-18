@@ -21,10 +21,6 @@
 namespace bayes = rcppsw::bayes;
 
 /*******************************************************************************
- * Constructors/Destructors
- ******************************************************************************/
-
-/*******************************************************************************
  * Member Functions
  ******************************************************************************/
 /**
@@ -43,22 +39,19 @@ void bayes::variable_node::sum_product_update(void) {
    */
   if (n_links() == 1) {
     if (first_iteration()) {
-      ER_DIAG("%s: First iteration leaf node -> send unity",
+      ER_VER("%s: First iteration leaf node -> send unity",
               name().c_str());
       boolean_joint_distribution msg({"unity"});
       msg.preposition({{"unity", true}}, 1.0);
       msg.preposition({{"unity", false}}, 0.0);
-      std::for_each(links().begin(), links().end(), [&](node* n) {
-          send_msg(n, msg);
-        });
+      send_msg(paired_node(), msg);
       first_iteration(false);
       return;
     } else {
       if (incoming_count() == 1) {
-        ER_DIAG("%s: Last Iteration leaf node", name().c_str());
+        ER_DIAG("%s: Last iteration leaf node", name().c_str());
         recvd_2nd_msg(true);
       }
-      ER_DIAG("%s: Mid iteration msg count: %lu", name().c_str(), incoming_count());
       return;
     }
   } else {
@@ -69,22 +62,19 @@ void bayes::variable_node::sum_product_update(void) {
   ER_DIAG("Processing %lu received messages", incoming_count());
 
   /* compute the product of all incoming messages from factor nodes */
-  boolean_joint_distribution accum = incoming_msgs()[0];
-  ER_DIAG("Multiplying distributions: base=%s", name().c_str());
-  std::for_each(incoming_msgs().begin()+1, incoming_msgs().end(), [&](boolean_joint_distribution& b) {
-      accum = accum * b;
-    });
+  boolean_joint_distribution accum = multiply_distributions(&incoming_msgs()[0], 1);
 
   /* set outgoing message */
-  if (last_msg_src() == exclude()) {
+  if (last_msg_src() == paired_node()) {
     std::for_each(links().begin(), links().end(), [&](node* n) {
-        if (n != exclude()) {
-          ER_DIAG("Send msg to factor node %s",((factor_node*)n)->name().c_str());
+        if (n != paired_node()) {
+          ER_VER("Send msg to factor node %s",((factor_node*)n)->name().c_str());
           send_msg(n, accum);
         }
       });
+
   } else {
-    ER_DIAG("Send msg to factor node %s",((factor_node*)exclude())->name().c_str());
-    send_msg(exclude(), accum);
+    ER_VER("Send msg to factor node %s",((factor_node*)paired_node())->name().c_str());
+    send_msg(paired_node(), accum);
   }
 } /* variable_node::sum_product_update() */

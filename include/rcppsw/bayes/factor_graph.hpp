@@ -17,6 +17,8 @@
 #include <vector>
 #include "rcppsw/bayes/node.hpp"
 #include "rcppsw/er_client.hpp"
+#include "rcppsw/bayes/factor_node.hpp"
+#include "rcppsw/bayes/variable_node.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -42,11 +44,18 @@ class factor_graph: public er_client {
 
   /* member functions */
   void calculate_marginals(void);
+  void show_marginals(void) {
+    std::for_each(nodes_.begin(), nodes_.end(), [&](bayes::node* n) {
+        factor_node * f = dynamic_cast<factor_node*>(n);
+        if (NULL != f) {
+          std::cout << f->dist();
+        }
+      });
+  }
   std::vector<node*>* find_leaf_nodes(void) const;
 
  private:
   /* member functions */
-  void calculate_marginals_step(void);
 
 
   /* data members */

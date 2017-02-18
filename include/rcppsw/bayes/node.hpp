@@ -2,7 +2,7 @@
  * Name            : node.hpp
  * Project         : rcppsw
  * Module          : bayes
- * Description     : base class for nodes in a Bayesian network
+n * Description     : base class for nodes in a Bayesian network
  * Creation Date   : 02/13/17
  * Copyright       : Copyright 2017 John Harwell, All rights reserved
  *
@@ -16,8 +16,10 @@
  ******************************************************************************/
 #include <algorithm>
 #include <list>
+#include <string>
 #include "rcsw/al/altypes.h"
 #include "rcppsw/bayes/boolean_joint_distribution.hpp"
+#include "rcppsw/er_client.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -32,27 +34,35 @@ namespace bayes {
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class node {
+class node: public er_client {
  public:
-  node(const std::string& name):
-      first_iteration_(true),
-      has_incoming_msg_(false), recvd_2nd_msg_(false),
-      outgoing_count_(0), incoming_count_(0), last_msg_src_(NULL),
-      next_iter_last_msg_src_(NULL), exclude_(NULL), links_(), name_(name) {}
+  node(const std::string& name, er_server* handle):
+      er_client(handle),
+      first_iteration_(true), recvd_2nd_msg_(false), last_msg_src_(NULL),
+      next_iter_last_msg_src_(NULL), paired_node_(NULL), incoming_msgs_(),
+      next_iter_incoming_msgs_(), links_(),
+      name_(name) {
+    insmod("Bayes node");
+  }
   virtual ~node(void) {}
 
   /* member functions */
-    const std::string& name(void) const { return name_; }
-  void add_link(node* const n) { links_.push_back(n); }
   virtual void sum_product_update(void) = 0;
+
+  const std::string& name(void) const { return name_; }
+  void add_link(node* const n) { links_.push_back(n); }
   std::size_t n_links(void) const { return links_.size(); }
-  void exclude(node* const n) { exclude_ = n; }
-  node* exclude(void) { return exclude_; }
+
+  void pair_with(node* const n) { paired_node_ = n; }
+  node* paired_node(void) { return paired_node_; }
+
   std::size_t incoming_count(void) const { return incoming_msgs_.size(); }
-  std::vector<boolean_joint_distribution>& incoming_msgs(void) { return incoming_msgs_; }
+  std::vector<boolean_joint_distribution>& incoming_msgs(void) {
+    return incoming_msgs_;
+  }
   node* last_msg_src(void) const { return last_msg_src_; }
   bool recvd_all_msgs(void) {
-    return (last_msg_src_ == exclude() && incoming_msgs().size() == 1) ||
+    return (last_msg_src_ == paired_node() && incoming_msgs().size() == 1) ||
         (incoming_msgs().size() > 0 && incoming_msgs().size() == n_links() - 1);
   }
   void recv_msg(node* src, const boolean_joint_distribution& b) {
@@ -66,6 +76,7 @@ class node {
     next_iter_incoming_msgs_.clear();
     last_msg_src_ = next_iter_last_msg_src_;
     next_iter_last_msg_src_ = NULL;
+
   }
   void recvd_2nd_msg(bool b) { recvd_2nd_msg_ = b; }
   bool recvd_2nd_msg(void) const { return recvd_2nd_msg_; }
@@ -76,31 +87,30 @@ class node {
     dest->recv_msg(this, b);
     incoming_msgs_.clear();
   }
-
- private:
-  std::size_t n_msgs_recvd(void) {
-    std::size_t count = 0;
-    for (std::list<node*>::const_iterator it = links_.begin(); it != links_.end() ; ++it) {
-      /* count += (*it)->outgoing_count(); */
+  boolean_joint_distribution multiply_distributions(
+      boolean_joint_distribution* const seed,
+      std::size_t start_pos) {
+    ER_DIAG("Multiplying distributions: base=%s", name().c_str());
+    boolean_joint_distribution accum = *seed;
+    for (size_t i = start_pos; i < incoming_msgs().size(); ++i) {
+      accum = accum * incoming_msgs()[i];
     } /* for(i..) */
-    return count;
+    return accum;
   }
 
+ private:
   /* member functions */
   node(const node& other) = delete;
   node& operator=(const node& other) = delete;
 
   /* data members */
   bool first_iteration_;
-  bool has_incoming_msg_;
-  bool recvd_2nd_msg_;
-  std::size_t outgoing_count_;
-  std::size_t incoming_count_;
-  std::vector<boolean_joint_distribution> incoming_msgs_;
-  std::vector<boolean_joint_distribution> next_iter_incoming_msgs_;
+ bool recvd_2nd_msg_;
   node* last_msg_src_;
   node* next_iter_last_msg_src_;
-  node* exclude_;
+  node* paired_node_;
+  std::vector<boolean_joint_distribution> incoming_msgs_;
+  std::vector<boolean_joint_distribution> next_iter_incoming_msgs_;
   std::list<node*> links_;
   std::string name_;
 };

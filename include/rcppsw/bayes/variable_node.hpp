@@ -16,7 +16,6 @@
  ******************************************************************************/
 #include "rcppsw/bayes/node.hpp"
 #include "rcppsw/bayes/boolean_joint_distribution.hpp"
-#include "rcppsw/er_client.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -31,13 +30,11 @@ namespace bayes {
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class variable_node: public node, private er_client {
+class variable_node: public node {
  public:
   /* constructors */
   variable_node(const std::string& name, er_server* const handle) :
-      node(name), er_client(handle) {
-    insmod("Variable node");
-  }
+      node(name, handle) {}
 
   /* member functions */
   void sum_product_update(void);
