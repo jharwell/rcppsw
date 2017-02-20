@@ -11,8 +11,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/bayes/factor_node.hpp"
-#include "rcppsw/bayes/variable_node.hpp"
+#include "rcppsw/bayes/factor_graph_fnode.hpp"
+#include "rcppsw/bayes/factor_graph_vnode.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -23,14 +23,14 @@ namespace bayes = rcppsw::bayes;
  * Member Functions
  ******************************************************************************/
 /**
- * factor_node::sum_product_update() - Update node during an iteration
+ * factor_graph_fnode::sum_product_update() - Update node during an iteration
  * of the sum-product algorithm
  *
  * void - N/A
  **/
-void bayes::factor_node::sum_product_update(void) {
+void bayes::factor_graph_fnode::sum_product_update(void) {
   ER_DIAG("%s: Updating factor node (%lu links/%lu msgs)",
-          name_.c_str(), n_links(), incoming_count());
+          name().c_str(), n_links(), incoming_count());
 
   if (n_links() == 1) {
     /*
@@ -40,8 +40,8 @@ void bayes::factor_node::sum_product_update(void) {
      */
     if (first_iteration()) {
       ER_VER("%s: First iteration leaf node -> send initial distribution",
-              name_.c_str());
-      send_msg(paired_node(), dist_);
+              name().c_str());
+      send_msg(paired_node(), dist());
       first_iteration(false);
       return;
     } else {
@@ -64,8 +64,9 @@ void bayes::factor_node::sum_product_update(void) {
    * then perform a not sum over all the variables except the one for the
    * current node.
    */
-  dist_ = multiply_distributions(&dist_, 0);
-  dist_.not_sum(name_);
+  boolean_distribution tmp = dist();
+  dist(multiply_distributions(&tmp, 0));
+  dist().not_sum(name());
 
   /*
    * If the message was received from the paired variable node, send to all
@@ -73,14 +74,16 @@ void bayes::factor_node::sum_product_update(void) {
    * from all other connected nodes, and should only send to the paired node
    */
   if (last_msg_src() == paired_node()) {
-    std::for_each(links().begin(), links().end(), [&](node* n) {
+    std::for_each(links().begin(), links().end(), [&](bayes_node* n) {
         if (n != paired_node()) {
-          ER_VER("Send msg to variable node %s",((variable_node*)n)->name().c_str());
-          send_msg(n, dist_);
+          ER_VER("Send msg to variable node %s",
+                 (dynamic_cast<factor_graph_vnode*>(n))->name().c_str());
+          send_msg(dynamic_cast<factor_graph_node*>(n), dist());
         }
       });
   } else {
-    send_msg(paired_node(), dist_);
-    ER_VER("Send msg to variable node %s",((variable_node*)paired_node())->name().c_str());
+    send_msg(paired_node(), dist());
+    ER_VER("Send msg to variable node %s",
+           (dynamic_cast<factor_graph_vnode*>(paired_node()))->name().c_str());
   }
-} /* factor_node::sum_product_update() */
+} /* factor_graph_fnode::sum_product_update() */

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Name            : boolean_joint_distribution.cpp
+ * Name            : boolean_distribution.cpp
  * Project         : rcppsw
  * Module          : bayes
  * Description     : Implementation of Boolean joint distribution, and
@@ -12,7 +12,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/bayes/boolean_joint_distribution.hpp"
+#include "rcppsw/bayes/boolean_distribution.hpp"
 #include <algorithm>
 #include "rcsw/common/fpc.h"
 
@@ -22,36 +22,16 @@
 namespace bayes = rcppsw::bayes;
 
 /*******************************************************************************
- * Constant Definitions
- ******************************************************************************/
-
-/*******************************************************************************
- * Structure Definitions
- ******************************************************************************/
-
-/*******************************************************************************
- * Global Variables
- ******************************************************************************/
-
-/*******************************************************************************
- * Forward Declarations
- ******************************************************************************/
-
-/*******************************************************************************
- * Constructors/Destructors
- ******************************************************************************/
-
-/*******************************************************************************
  * Member Functions
  ******************************************************************************/
 /**
- * boolean_joint_distribution::value() - Set the value of a preposition over the
+ * boolean_distribution::value() - Set the value of a preposition over the
  * distribution. The preposition must be ordered from MSB to LSB variables
  *
  * bool - TRUE is successful, FALSE otherwise
  **/
-bool bayes::boolean_joint_distribution::preposition(
-    const std::vector<std::pair<std::string, bool>>& spec,
+bool bayes::boolean_distribution::preposition(
+    const boolean_preposition& spec,
     float value) {
   FPC_CHECK(false, spec.size() == n_vars_);
 
@@ -67,29 +47,29 @@ bool bayes::boolean_joint_distribution::preposition(
   } /* for(i..) */
   dist_[index] = value;
   return true;
-} /* boolean_joint_distribution::preposition() */
+} /* boolean_distribution::preposition() */
 
 /**
- * boolean_joint_distribution::preposition() - Get the preposition of a
+ * boolean_distribution::preposition() - Get the value of a
  * preposition over the distribution
  *
- * float - The preposition
+ * float - The value
  **/
-float bayes::boolean_joint_distribution::preposition(
-    const std::vector<std::pair<std::string, bool>>& spec) const {
+float bayes::boolean_distribution::preposition(
+    const boolean_preposition& spec) const {
   FPC_CHECK(std::numeric_limits<float>::quiet_NaN(),spec.size() == n_vars_);
 
   std::size_t index = preposition_to_index(spec);
   return dist_[index];
-} /* boolean_joint_distribution::preposition() */
+} /* boolean_distribution::preposition() */
 
 /**
- * boolean_joint_distribution::indices_t() - Get a list of all indices for
+ * boolean_distribution::indices_t() - Get a list of all indices for
  * which the specified variable is true
  *
  * std::vector<std::size_t> - The list
  **/
-std::vector<std::size_t> bayes::boolean_joint_distribution::indices_t(
+std::vector<std::size_t> bayes::boolean_distribution::indices_t(
     const std::string& name) const {
   std::size_t pos = std::distance(names_.begin(),
                                   std::find(names_.begin(), names_.end(), name));
@@ -101,15 +81,15 @@ std::vector<std::size_t> bayes::boolean_joint_distribution::indices_t(
     }
   } /* for(i..) */
   return indices_t;
-} /* boolean_joint_distribution::indices_t() */
+} /* boolean_distribution::indices_t() */
 
 /**
- * boolean_joint_distribution::indices_f() - Get a list of all indices for
+ * boolean_distribution::indices_f() - Get a list of all indices for
  * which the specified variable is false
  *
  * std::vector<std::size_t> - The list
  **/
-std::vector<std::size_t> bayes::boolean_joint_distribution::indices_f(
+std::vector<std::size_t> bayes::boolean_distribution::indices_f(
     const std::string& name) const {
   std::size_t pos = std::distance(names_.begin(),
                                   std::find(names_.begin(), names_.end(), name));
@@ -121,15 +101,15 @@ std::vector<std::size_t> bayes::boolean_joint_distribution::indices_f(
     }
   } /* for(i..) */
   return indices_f;
-} /* boolean_joint_distribution::indices_f() */
+} /* boolean_distribution::indices_f() */
 
 /**
- * boolean_joint_distribution::sum_out() - Sum out a variable from the
+ * boolean_distribution::sum_out() - Sum out a variable from the
  * distribution
  *
  * void - N/A
  **/
-void bayes::boolean_joint_distribution::sum_out(const std::string& name) {
+void bayes::boolean_distribution::sum_out(const std::string& name) {
   std::vector<std::size_t> indices_true = indices_t(name);
   std::vector<std::size_t> indices_false = indices_f(name);
   std::vector<float> dist_new(indices_true.size());
@@ -151,28 +131,28 @@ void bayes::boolean_joint_distribution::sum_out(const std::string& name) {
   for (size_t i = 0; i < dist_.size(); ++i) {
     dist_[i] /= total;
   } /* for(i..) */
-} /* boolean_joint_distribution::sum_out() */
+} /* boolean_distribution::sum_out() */
 
 /**
- * boolean_joint_distribution::not_sum() - Sum out all variables except the one
+ * boolean_distribution::not_sum() - Sum out all variables except the one
  * specified
  *
  * void - N/A
  **/
-void bayes::boolean_joint_distribution::not_sum(const std::string& name) {
+void bayes::boolean_distribution::not_sum(const std::string& name) {
   std::vector<std::string> names2 = names_;
   for (auto it = names2.begin(); it != names2.end(); ++it) {
     if ((*it) != name) {
       sum_out(*it);
     }
   } /* (it...) */
-} /* boolean_joint_distribution::not_sum() */
+} /* boolean_distribution::not_sum() */
 
 /*******************************************************************************
  * Operators
  ******************************************************************************/
-bayes::boolean_joint_distribution bayes::boolean_joint_distribution::operator*(
-    const bayes::boolean_joint_distribution& rhs) {
+bayes::boolean_distribution bayes::boolean_distribution::operator*(
+    const bayes::boolean_distribution& rhs) {
     std::vector<std::string> new_names = this->names_;
     if (rhs.names_[0] == "unity") {
       return *this;
@@ -214,20 +194,20 @@ bayes::boolean_joint_distribution bayes::boolean_joint_distribution::operator*(
       /*   std::cout << q << " "; */
       /* std::cout << std::endl; */
     } /* for(i..) */
-    bayes::boolean_joint_distribution ret(this->names_);
+    bayes::boolean_distribution ret(this->names_);
     /* ret.names_.insert(ret.names_.end(), rhs.names_.begin(), rhs.names_.end()); */
     /* ret.names_.erase(std::remove(ret.names_.begin(), */
     /*                              ret.names_.end(), common), */
     /*                  ret.names_.end()); */
     ret.dist_ = res;
     return ret;
-} /* boolean_joint_distribution::operator*() */
+} /* boolean_distribution::operator*() */
 
 std::ostream& bayes::operator<<(std::ostream& stream,
-                         const bayes::boolean_joint_distribution& rhs) {
+                         const bayes::boolean_distribution& rhs) {
   return rhs.operator<<(stream);
 }
-std::ostream& bayes::boolean_joint_distribution::operator<<(
+std::ostream& bayes::boolean_distribution::operator<<(
     std::ostream& stream) const {
   std::for_each(names_.rbegin(), names_.rend(),
                 [&](const std::string& name) {
@@ -246,4 +226,4 @@ std::ostream& bayes::boolean_joint_distribution::operator<<(
     stream << dist_[i] << std::endl;
   } /* for(i..) */
   return stream;
-} /* boolean_joint_distribution::to_stream() */
+} /* boolean_distribution::to_stream() */

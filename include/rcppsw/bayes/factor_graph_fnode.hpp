@@ -1,23 +1,21 @@
 /*******************************************************************************
- * Name            : factor_graph.hpp
+ * Name            : factor_node.hpp
  * Project         : rcppsw
  * Module          : bayes
- * Description     : Class representing a factor graph for a Bayesian network
+ * Description     : Class for factor nodes in a Bayesian network
  * Creation Date   : 02/13/17
  * Copyright       : Copyright 2017 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_RCPPSW_BAYES_FACTOR_GRAPH_HPP_
-#define INCLUDE_RCPPSW_BAYES_FACTOR_GRAPH_HPP_
+#ifndef INCLUDE_RCPPSW_BAYES_FACTOR_GRAPH_FNODE_HPP_
+#define INCLUDE_RCPPSW_BAYES_FACTOR_GRAPH_FNODE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
-#include "rcppsw/er_client.hpp"
-#include "rcppsw/bayes/factor_graph_fnode.hpp"
-#include "rcppsw/bayes/factor_graph_vnode.hpp"
+#include <string>
+#include "rcppsw/bayes/factor_graph_node.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -32,40 +30,28 @@ namespace bayes {
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class factor_graph: public er_client {
+class factor_graph_fnode: public factor_graph_node {
  public:
   /* constructors */
-  factor_graph(std::vector<factor_graph_node*> nodes, er_server* const handle) :
-      er_client(handle),
-      nodes_(nodes) {
-    insmod("Factor graph");
-  }
+  factor_graph_fnode(const std::string& name,
+                     const boolean_distribution& dist,
+                     er_server* const handle) :
+      factor_graph_node(name, handle) {}
 
   /* member functions */
-  void calculate_marginals(void);
-  void show_marginals(void) {
-    std::for_each(nodes_.begin(), nodes_.end(), [&](bayes::factor_graph_node* n) {
-        factor_graph_fnode * f = dynamic_cast<factor_graph_fnode*>(n);
-        if (NULL != f) {
-          std::cout << f->dist();
-        }
-      });
-  }
-  std::vector<factor_graph_node*>* find_leaf_nodes(void) const;
+  void sum_product_update(void);
 
  private:
   /* member functions */
-
-
   /* data members */
-  std::vector<factor_graph_node*> nodes_;
 };
 
 /*******************************************************************************
  * Operater Definitions
  ******************************************************************************/
 
-} /* namespace bayes */
+
+} /* namespace namespace bayes */
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_RCPPSW_BAYES_FACTOR_GRAPH_HPP_ */
+#endif  /* INCLUDE_RCPPSW_BAYES_FACTOR_GRAPH_FNODE_HPP_ */

@@ -42,7 +42,8 @@
     char _str[1000];                                                    \
     snprintf(_str, sizeof(_str), "%s:%d:%s: " msg "\n", __FILE__, __LINE__, \
              __FUNCTION__, ##__VA_ARGS__);                              \
-    rcppsw::er_client::server_handle()->report(rcppsw::er_client::er_id(), lvl, \
+    rcppsw::er_client::server_handle()->report(rcppsw::er_client::er_id(), \
+                                               lvl,                     \
                                                std::string(_str));      \
   }
 

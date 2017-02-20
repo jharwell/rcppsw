@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Name            : boolean_joint_distribution.hpp
+ * Name            : boolean_distribution.hpp
  * Project         : rcppsw
  * Module          : bayes
  * Description     : Representation of a joint probability distribution between
@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_RCPPSW_BAYES_BOOLEAN_JOINT_DISTRIBUTION_HPP_
-#define INCLUDE_RCPPSW_BAYES_BOOLEAN_JOINT_DISTRIBUTION_HPP_
+#ifndef INCLUDE_RCPPSW_BAYES_BOOLEAN_DISTRIBUTION_HPP_
+#define INCLUDE_RCPPSW_BAYES_BOOLEAN_DISTRIBUTION_HPP_
 
 /*******************************************************************************
  * Includes
@@ -32,28 +32,28 @@ namespace rcppsw {
 namespace bayes {
 
 /*******************************************************************************
- * Structure Definitions
+ * Type Definitions
  ******************************************************************************/
+typedef std::pair<std::string, bool> boolean_pair;
+typedef std::vector<boolean_pair> boolean_preposition;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class boolean_joint_distribution {
+class boolean_distribution {
  public:
   /* constructors */
-  explicit boolean_joint_distribution(const std::vector<std::string>& names) :
+  explicit boolean_distribution(const std::vector<std::string>& names) :
       n_vars_(names.size()),
       dist_(std::pow(2, n_vars_)), names_(names) {
     std::reverse(names_.begin(), names_.end());
   }
 
-  boolean_joint_distribution(void) : n_vars_(0), dist_(), names_() {}
+  boolean_distribution(void) : n_vars_(0), dist_(), names_() {}
 
   /* member functions */
-  bool preposition(const std::vector<std::pair<std::string, bool>>& spec,
-                   float value);
-  float preposition(const std::vector<std::pair<std::string,
-                    bool>>& spec) const;
+  bool preposition(const boolean_preposition& spec, float value);
+  float preposition(const boolean_preposition& spec) const;
 
   const std::vector<std::string>& names(void) const { return names_; }
   std::vector<std::size_t> indices_t(const std::string& name) const;
@@ -63,15 +63,14 @@ class boolean_joint_distribution {
   void not_sum(const std::string& name);
 
   /* operators */
-  boolean_joint_distribution operator*(
-      const bayes::boolean_joint_distribution& rhs);
+  boolean_distribution operator*(
+      const bayes::boolean_distribution& rhs);
   std::ostream& operator<<(
       std::ostream& stream) const;
 
  private:
   /* member functions */
-  std::size_t preposition_to_index(const std::vector<std::pair<std::string,
-                                   bool>>& spec) const {
+  std::size_t preposition_to_index(const boolean_preposition& spec) const {
     std::size_t index = 0;
     for (std::size_t i = 0; i < n_vars_; ++i) {
       if (spec[i].second) {
@@ -81,12 +80,9 @@ class boolean_joint_distribution {
     return index;
   }
 
-  std::vector<std::pair<std::string, bool>> index_to_preposition(
-      std::size_t index) const {
+  boolean_preposition index_to_preposition(std::size_t index) const {
     assert(index <= std::pow(2, n_vars_) - 1);
-    std::vector<std::pair<std::string, bool>> res(n_vars_,
-                                                  std::pair<std::string,
-                                                  bool>("", false));
+    boolean_preposition res(n_vars_, boolean_pair("", false));
     for (size_t i = 0; i < n_vars_; ++i) {
       res[i].first = names_[i];
     } /* for(i..) */
@@ -99,11 +95,11 @@ class boolean_joint_distribution {
     return res;
   }
   bool value_in_preposition(
-      const std::vector<std::pair<std::string, bool>>& prep,
+      const boolean_preposition& prep,
       const std::string& name) {
     bool ret = false;
     std::for_each(prep.begin(), prep.end(),
-                  [&](const std::pair<std::string, bool>& p) {
+                  [&](const boolean_pair& p) {
                     if (p.first == name) {
                       ret = true;
                     }
@@ -121,9 +117,9 @@ class boolean_joint_distribution {
  * Operater Definitions
  ******************************************************************************/
 std::ostream& operator<<(std::ostream& stream,
-                         const boolean_joint_distribution& rhs);
+                         const boolean_distribution& rhs);
 
 } /* namespace bayes */
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_RCPPSW_BAYES_BOOLEAN_JOINT_DISTRIBUTION_HPP_ */
+#endif /* INCLUDE_RCPPSW_BAYES_BOOLEAN_DISTRIBUTION_HPP_ */

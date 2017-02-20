@@ -28,9 +28,9 @@ namespace bayes = rcppsw::bayes;
  *
  * std::list<node*>* - The list of nodes, or NULL if an error occurred
  **/
-std::vector<bayes::node*>* bayes::factor_graph::find_leaf_nodes(void) const {
-  std::vector<bayes::node*>* leaves = new std::vector<bayes::node*>();
-  for (bayes::node* n : nodes_) {
+std::vector<bayes::factor_graph_node*>* bayes::factor_graph::find_leaf_nodes(void) const {
+  std::vector<bayes::factor_graph_node*>* leaves = new std::vector<bayes::factor_graph_node*>();
+  for (bayes::factor_graph_node* n : nodes_) {
     if (n->n_links() == 1) {
       leaves->push_back(n);
     }
@@ -47,20 +47,21 @@ std::vector<bayes::node*>* bayes::factor_graph::find_leaf_nodes(void) const {
 void bayes::factor_graph::calculate_marginals(void) {
   ER_NOM("Begin calculating marginals");
 
-  std::vector<bayes::node*>* leaves = find_leaf_nodes();
-  std::for_each(leaves->begin(), leaves->end(), [&](bayes::node* const n) {
+  std::vector<bayes::factor_graph_node*>* leaves = find_leaf_nodes();
+  std::for_each(leaves->begin(), leaves->end(), [&](bayes::factor_graph_node* const n) {
       n->first_iteration(true);
     });
 
+  delete leaves;
   std::size_t step = 1;
 
   while (true) {
-    std::for_each(nodes_.begin(), nodes_.end(), [&](bayes::node* n) {
+    std::for_each(nodes_.begin(), nodes_.end(), [&](bayes::factor_graph_node* n) {
         n->update_msg_status();
       });
     ER_NOM("step%lu", step++);
     for (size_t i = 0; i < nodes_.size(); ++i) {
-      factor_node * f = dynamic_cast<factor_node*>(nodes_[i]);
+      factor_graph_fnode * f = dynamic_cast<factor_graph_fnode*>(nodes_[i]);
 
       if (f) {
         ER_DIAG("Factor node %s: %lu links, %lu incoming messages",
@@ -75,11 +76,11 @@ void bayes::factor_graph::calculate_marginals(void) {
     } /* for(i..) */
 
     /* one step of the algorithm */
-    std::for_each(nodes_.begin(), nodes_.end(), [&](bayes::node* n) {
+    std::for_each(nodes_.begin(), nodes_.end(), [&](bayes::factor_graph_node* n) {
         n->sum_product_update();
       });
     bool term = true;
-    std::for_each(leaves->begin(), leaves->end(), [&](bayes::node* n) {
+    std::for_each(leaves->begin(), leaves->end(), [&](bayes::factor_graph_node* n) {
         if (!n->recvd_2nd_msg()) {
           ER_VER("Leaf node has not received 2nd message yet");
           term = false;
