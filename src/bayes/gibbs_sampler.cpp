@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Name            : bayes_network.cpp
+ * Name            : gibbs_sampler.cpp
  * Project         : rcppsw
  * Module          : bayes
  * Description     : Implementation routines to manipulate Bayesian network
@@ -12,7 +12,7 @@
  * Includes
  ******************************************************************************/
 #include <list>
-#include "rcppsw/bayes/bayes_network.hpp"
+#include "rcppsw/bayes/gibbs_sampler.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -38,14 +38,12 @@ std::pair<std::size_t, std::size_t> gibbs_sampler::sample_ask(
     const std::string& query,
     const std::vector<boolean_pair>& fixed_vars,
      std::size_t n_steps) {
-  rcppsw::er_server * server = new rcppsw::er_server("logfile",
-                                                     rcppsw::er_lvl::NOM,
-                                                     rcppsw::er_lvl::NOM);
-
   std::vector<std::map<std::string, bool>> samples;
   std::pair<std::size_t, std::size_t> counts;
   boolean_preposition current_state;
-  std::vector<std::string> non_evidence_vars = vars_;
+  std::vector<std::string> non_evidence_vars;
+
+  /* create list of active variables */
   for (size_t i = 0; i < vars_.size(); ++i) {
     bool not_found = true;
     for (size_t j = 0; j < fixed_vars.size(); ++j) {
@@ -75,28 +73,22 @@ std::pair<std::size_t, std::size_t> gibbs_sampler::sample_ask(
   auto query_it = std::find_if(current_state.begin(), current_state.end(),
                                [&](const ::rcppsw::bayes::boolean_pair& p)
                                { return p.first == query;});
-
   /* perform sampling */
   for (size_t i = 0; i < n_steps; ++i) {
-    /* std::cout << "Current state: "; */
-    /*     for (auto a : current_state) */
-    /*       std::cout << a.first << ": " << a.second << " "; */
-    /* std::cout << std::endl; */
     for (const std::string& name : non_evidence_vars) {
         double rando = static_cast<double>(rand()) /
-                       static_cast<double>(RAND_MAX);
+                      static_cast<double>(RAND_MAX);
 
-        ::rcppsw::bayes::boolean_preposition::iterator it =
-              std::find_if(current_state.begin(), current_state.end(),
-                           [&](const ::rcppsw::bayes::boolean_pair& p)
-                           { return p.first == name;});
+        auto it = std::find_if(current_state.begin(), current_state.end(),
+                               [&](const ::rcppsw::bayes::boolean_pair& p)
+                               { return p.first == name;});
 
         boolean_preposition tmp = current_state;
         boolean_pair pair = {(*it).first, (*it).second};
         tmp.erase(std::remove(tmp.begin(), tmp.end(), pair));
         double current = blankets_[{pair, tmp}];
+        /* verify that the needed Markov blanket was found */
         assert(current > 0);
-        /* printf("rando: %f current: %f\n",rando,current); */
         if (rando <= current) {
         } else {
           (*it).second = !(*it).second;

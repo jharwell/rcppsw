@@ -1,15 +1,15 @@
 /*******************************************************************************
- * Name            : bayes_network.hpp
+ * Name            : gibbs_sampler.hpp
  * Project         : rcppsw
  * Module          : bayes
- * Description     : Class representing a Bayesian network
+ * Description     : Class representing a Gibbs Sampler
  * Creation Date   : 02/13/17
  * Copyright       : Copyright 2017 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_RCPPSW_BAYES_BAYES_NETWORK_HPP_
-#define INCLUDE_RCPPSW_BAYES_BAYES_NETWORK_HPP_
+#ifndef INCLUDE_RCPPSW_BAYES_GIBBS_SAMPLER_HPP_
+#define INCLUDE_RCPPSW_BAYES_GIBBS_SAMPLER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -61,4 +61,4 @@ class gibbs_sampler: public er_client {
 } /* namespace bayes */
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_RCPPSW_BAYES_BAYES_NETWORK_HPP_ */
+#endif /* INCLUDE_RCPPSW_BAYES_GIBBS_SAMPLER_HPP_ */
