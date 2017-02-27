@@ -34,15 +34,18 @@ namespace bayes {
  ******************************************************************************/
 class factor_graph_node: public bayes_node {
  public:
-  factor_graph_node(const std::string& name, er_server* handle) :
+  factor_graph_node(const std::string& name,
+                    const boolean_distribution& dist, er_server* handle) :
       bayes_node(name, handle),
       first_iteration_(true), recvd_2nd_msg_(false), last_msg_src_(NULL),
       next_iter_last_msg_src_(NULL), paired_node_(NULL),
-      next_iter_incoming_msgs_(), incoming_msgs_(){}
+      next_iter_incoming_msgs_(), incoming_msgs_(), dist_(dist) {}
   virtual ~factor_graph_node(void) {}
 
   /* member functions */
   virtual void sum_product_update(void) = 0;
+  boolean_distribution dist(void) { return dist_; }
+  void dist(const boolean_distribution& d) { dist_ = d; }
 
   void pair_with(factor_graph_node* const n) { paired_node_ = n; }
   factor_graph_node* paired_node(void) const {
@@ -108,6 +111,8 @@ class factor_graph_node: public bayes_node {
   factor_graph_node* paired_node_;
   std::vector<boolean_distribution> next_iter_incoming_msgs_;
   std::vector<boolean_distribution> incoming_msgs_;
+  boolean_distribution dist_;
+
 };
 
 /*******************************************************************************

@@ -52,7 +52,6 @@ void bayes::factor_graph::calculate_marginals(void) {
       n->first_iteration(true);
     });
 
-  delete leaves;
   std::size_t step = 1;
 
   while (true) {
@@ -67,7 +66,7 @@ void bayes::factor_graph::calculate_marginals(void) {
         ER_DIAG("Factor node %s: %lu links, %lu incoming messages",
                 nodes_[i]->name().c_str(), nodes_[i]->n_links(),
                 nodes_[i]->incoming_count());
-        /* std::cout << ((bayes::factor_node*)nodes_[i])->dist(); */
+        std::cout << ((bayes::factor_graph_node*)nodes_[i])->dist();
       } else {
         ER_DIAG("Variable node %s: %lu links, %lu incoming messages",
                 nodes_[i]->name().c_str(), nodes_[i]->n_links(),
@@ -93,4 +92,5 @@ void bayes::factor_graph::calculate_marginals(void) {
       break;
     }
   } /* while() */
+  delete leaves;
 } /* factor_graph::calculate_marginals() */

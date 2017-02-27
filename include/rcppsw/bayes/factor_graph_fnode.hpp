@@ -36,7 +36,7 @@ class factor_graph_fnode: public factor_graph_node {
   factor_graph_fnode(const std::string& name,
                      const boolean_distribution& dist,
                      er_server* const handle) :
-      factor_graph_node(name, handle) {}
+      factor_graph_node(name, dist, handle) {}
 
   /* member functions */
   void sum_product_update(void);

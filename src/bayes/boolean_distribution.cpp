@@ -189,10 +189,10 @@ bayes::boolean_distribution bayes::boolean_distribution::operator*(
             res.push_back(this->dist_[i]*rhs.dist_[index]);
           });
       }
-      /* std::cout << "PRINT\n"; */
-      /* for (auto q : res) */
-      /*   std::cout << q << " "; */
-      /* std::cout << std::endl; */
+      std::cout << "PRINT\n";
+      for (auto q : res)
+        std::cout << q << " ";
+      std::cout << std::endl;
     } /* for(i..) */
     bayes::boolean_distribution ret(this->names_);
     /* ret.names_.insert(ret.names_.end(), rhs.names_.begin(), rhs.names_.end()); */

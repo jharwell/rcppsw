@@ -38,14 +38,15 @@ class factor_graph: public er_client {
   factor_graph(std::vector<factor_graph_node*> nodes, er_server* const handle) :
       er_client(handle),
       nodes_(nodes) {
-    insmod("Factor graph");
+    insmod(er_lvl::VER, er_lvl::VER, "Factor graph");
+
   }
 
   /* member functions */
   void calculate_marginals(void);
   void show_marginals(void) {
     std::for_each(nodes_.begin(), nodes_.end(), [&](bayes::factor_graph_node* n) {
-        factor_graph_fnode * f = dynamic_cast<factor_graph_fnode*>(n);
+        factor_graph_fnode *f = dynamic_cast<factor_graph_fnode*>(n);
         if (NULL != f) {
           std::cout << f->dist();
         }

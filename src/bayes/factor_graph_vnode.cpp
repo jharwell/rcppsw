@@ -51,7 +51,7 @@ void bayes::factor_graph_vnode::sum_product_update(void) {
       if (incoming_count() == 1) {
         ER_DIAG("%s: Last iteration leaf node", name().c_str());
         recvd_2nd_msg(true);
-        marginal_prob(dist().preposition({{name(), true}}));
+        /* marginal_prob(dist().preposition({{name(), true}})); */
       }
       return;
     }

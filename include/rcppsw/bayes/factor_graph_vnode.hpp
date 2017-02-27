@@ -32,8 +32,9 @@ namespace bayes {
 class factor_graph_vnode: public factor_graph_node {
  public:
   /* constructors */
-  factor_graph_vnode(const std::string& name, er_server* const handle) :
-      factor_graph_node(name, handle) {}
+  factor_graph_vnode(const std::string& name,
+                     er_server* const handle) :
+      factor_graph_node(name, boolean_distribution(), handle) {}
 
   /* member functions */
   void sum_product_update(void);

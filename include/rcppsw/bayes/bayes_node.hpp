@@ -51,8 +51,6 @@ class bayes_node: public er_client {
   void add_link(bayes_node* const n) { links_.push_back(n); }
   std::size_t n_links(void) const { return links_.size(); }
   const std::list<bayes_node*>& links(void) { return links_; }
-  boolean_distribution dist(void) { return dist_; }
-  void dist(const boolean_distribution& d) { dist_ = d; }
   double marginal_prob(void) const { return marginal_prob_; }
   void marginal_prob(double d) { marginal_prob_ = d; }
   double mb_prob(void) const { return mb_prob_; }
@@ -68,7 +66,6 @@ class bayes_node: public er_client {
   double mb_prob_;
   std::list<bayes_node*> links_;
   std::string name_;
-  boolean_distribution dist_;
 };
 
 } /* namespace namespace bayes */

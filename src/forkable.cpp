@@ -21,7 +21,7 @@
 #include <sys/types.h>
 #include <string>
 #include <vector>
-#include "rcsw/multithread/procm.h"
+#include "rcsw/multiprocess/procm.h"
 #include "rcsw/common/dbg.h"
 
 /*******************************************************************************
