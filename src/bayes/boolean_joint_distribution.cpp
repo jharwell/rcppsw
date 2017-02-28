@@ -133,7 +133,7 @@ void bayes::boolean_joint_distribution::sum_out(const std::string& name) {
   std::vector<std::size_t> indices_true = indices_t(name);
   std::vector<std::size_t> indices_false = indices_f(name);
   std::vector<float> dist_new(indices_true.size());
-
+  std::cout << "Sum out " << name << std::endl;
   for (size_t i = 0; i < indices_true.size(); ++i) {
     dist_new[i] = dist_[indices_true[i]] + dist_[indices_false[i]];
   } /* for(i..) */
@@ -142,15 +142,11 @@ void bayes::boolean_joint_distribution::sum_out(const std::string& name) {
   names_.erase(std::find(names_.begin(),
                          names_.end(), name));
   n_vars_--;
+  assert(names_.size() == n_vars_);
+  assert(dist_.size() == std::pow(2,n_vars_));
 
-  /*
-   *  Now that the variable has been summed out, normalize resulting
-   * distribution
-   */
-  float total = std::accumulate(dist_.begin(), dist_.end(), 0.0);
-  for (size_t i = 0; i < dist_.size(); ++i) {
-    dist_[i] /= total;
-  } /* for(i..) */
+  std::cout << "Result:\n";
+  std::cout << *this;
 } /* boolean_joint_distribution::sum_out() */
 
 /**
@@ -161,11 +157,14 @@ void bayes::boolean_joint_distribution::sum_out(const std::string& name) {
  **/
 void bayes::boolean_joint_distribution::not_sum(const std::string& name) {
   std::vector<std::string> names2 = names_;
+  std::cout << "Not sum over " << name << std::endl;
   for (auto it = names2.begin(); it != names2.end(); ++it) {
     if ((*it) != name) {
       sum_out(*it);
     }
   } /* (it...) */
+  std::cout << "Result:\n";
+  std::cout << *this;
 } /* boolean_joint_distribution::not_sum() */
 
 /*******************************************************************************
@@ -174,6 +173,10 @@ void bayes::boolean_joint_distribution::not_sum(const std::string& name) {
 bayes::boolean_joint_distribution bayes::boolean_joint_distribution::operator*(
     const bayes::boolean_joint_distribution& rhs) {
     std::vector<std::string> new_names = this->names_;
+    std::cout << "Multiplying" << std::endl;
+    std::cout << *this;
+    std::cout << "and" << std::endl;
+    std::cout << rhs;
     if (rhs.names_[0] == "unity") {
       return *this;
     }
@@ -196,12 +199,12 @@ bayes::boolean_joint_distribution bayes::boolean_joint_distribution::operator*(
     std::vector<float> res;
 
     /* MULTIPLY! */
-    for (int i = std::pow(2, n_vars_) - 1; i >= 0; --i) {
+    for (int i = 0; i < std::pow(2, n_vars_); ++i) {
       std::vector<std::pair<std::string, bool>> prep = index_to_preposition(i);
       if (true == value_in_preposition(prep, common)) {
         std::for_each(rhs_indices_t.begin(), rhs_indices_t.end(),
                       [&](std::size_t index) {
-            res.push_back(this->dist_[i]*index);
+            res.push_back(this->dist_[i]*rhs.dist_[index]);
           });
       } else {
         std::for_each(rhs_indices_f.begin(), rhs_indices_f.end(),
@@ -209,17 +212,21 @@ bayes::boolean_joint_distribution bayes::boolean_joint_distribution::operator*(
             res.push_back(this->dist_[i]*rhs.dist_[index]);
           });
       }
-      /* std::cout << "PRINT\n"; */
-      /* for (auto q : res) */
-      /*   std::cout << q << " "; */
-      /* std::cout << std::endl; */
     } /* for(i..) */
-    bayes::boolean_joint_distribution ret(this->names_);
-    /* ret.names_.insert(ret.names_.end(), rhs.names_.begin(), rhs.names_.end()); */
+    std::vector<std::string> names2 = this->names_;
+    std::reverse(names2.begin(), names2.end());
+    bayes::boolean_joint_distribution ret(names2);
+    std::vector<std::string> additional_names = rhs.names_;
+    additional_names.erase(std::remove(additional_names.begin(),
+                                       additional_names.end(),
+                                       common));
+    ret.names_.insert(ret.names_.end(), additional_names.begin(), additional_names.end());
     /* ret.names_.erase(std::remove(ret.names_.begin(), */
     /*                              ret.names_.end(), common), */
     /*                  ret.names_.end()); */
     ret.dist_ = res;
+    std::cout << "Result:\n";
+    std::cout << ret;
     return ret;
 } /* boolean_joint_distribution::operator*() */
 

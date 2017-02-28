@@ -46,9 +46,9 @@ class factor_graph: public er_client {
   void calculate_marginals(void);
   void show_marginals(void) {
     std::for_each(nodes_.begin(), nodes_.end(), [&](bayes::node* n) {
-        factor_node * f = dynamic_cast<factor_node*>(n);
+        variable_node * f = dynamic_cast<variable_node*>(n);
         if (NULL != f) {
-          std::cout << f->dist();
+          std::cout << f->marginal_dist();
         }
       });
   }

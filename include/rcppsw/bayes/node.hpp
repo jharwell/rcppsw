@@ -76,7 +76,6 @@ class node: public er_client {
     next_iter_incoming_msgs_.clear();
     last_msg_src_ = next_iter_last_msg_src_;
     next_iter_last_msg_src_ = NULL;
-
   }
   void recvd_2nd_msg(bool b) { recvd_2nd_msg_ = b; }
   bool recvd_2nd_msg(void) const { return recvd_2nd_msg_; }

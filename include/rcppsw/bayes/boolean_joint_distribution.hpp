@@ -61,6 +61,13 @@ class boolean_joint_distribution {
 
   void sum_out(const std::string& name);
   void not_sum(const std::string& name);
+  boolean_joint_distribution& normalize(void) {
+    float total = std::accumulate(dist_.begin(), dist_.end(), 0.0);
+    for (size_t i = 0; i < dist_.size(); ++i) {
+      dist_[i] /= total;
+    } /* for(i..) */
+    return *this;
+  }
 
   /* operators */
   boolean_joint_distribution operator*(
@@ -110,7 +117,6 @@ class boolean_joint_distribution {
                   });
     return ret;
   }
-
   /* data members */
   std::size_t n_vars_;
   std::vector<float> dist_;

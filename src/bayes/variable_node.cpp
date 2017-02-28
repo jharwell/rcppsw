@@ -51,6 +51,7 @@ void bayes::variable_node::sum_product_update(void) {
       if (incoming_count() == 1) {
         ER_DIAG("%s: Last iteration leaf node", name().c_str());
         recvd_2nd_msg(true);
+        marginal_dist_ = incoming_msgs()[0];
       }
       return;
     }
@@ -62,7 +63,9 @@ void bayes::variable_node::sum_product_update(void) {
   ER_DIAG("Processing %lu received messages", incoming_count());
 
   /* compute the product of all incoming messages from factor nodes */
-  boolean_joint_distribution accum = multiply_distributions(&incoming_msgs()[0], 1);
+  marginal_dist_ = incoming_msgs()[0];
+  boolean_joint_distribution accum = multiply_distributions(&incoming_msgs()[0],
+                                                            1);
 
   /* set outgoing message */
   if (last_msg_src() == paired_node()) {

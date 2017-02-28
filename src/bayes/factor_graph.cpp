@@ -92,4 +92,10 @@ void bayes::factor_graph::calculate_marginals(void) {
       break;
     }
   } /* while() */
+  std::for_each(nodes_.begin(), nodes_.end(), [&](bayes::node* n) {
+      variable_node * f = dynamic_cast<variable_node*>(n);
+      if (NULL != f) {
+        f->marginal_dist(f->marginal_dist().normalize());
+      }
+    });
 } /* factor_graph::calculate_marginals() */

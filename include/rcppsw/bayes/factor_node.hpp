@@ -39,7 +39,7 @@ class factor_node: public node {
   /* member functions */
   void sum_product_update(void);
   boolean_joint_distribution dist(void) const { return dist_; }
-
+  void  dist(const boolean_joint_distribution& b) { dist_ = b; }
  private:
   /* member functions */
 

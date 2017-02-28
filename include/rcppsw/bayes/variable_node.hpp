@@ -34,15 +34,18 @@ class variable_node: public node {
  public:
   /* constructors */
   variable_node(const std::string& name, er_server* const handle) :
-      node(name, handle) {}
+      node(name, handle), marginal_dist_() {}
 
   /* member functions */
   void sum_product_update(void);
+  boolean_joint_distribution marginal_dist(void) const { return marginal_dist_; }
+  void marginal_dist(const boolean_joint_distribution& b) { marginal_dist_ = b; }
 
  private:
   /* member functions */
 
   /* data members */
+  boolean_joint_distribution marginal_dist_;
 };
 
 /*******************************************************************************
