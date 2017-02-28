@@ -97,16 +97,12 @@ std::pair<std::size_t, std::size_t> gibbs_sampler::sample_ask(
 
         /* verify that the needed Markov blanket was found */
         assert(current > 0);
-        /* printf("rand: %f current: %s/%f\n",rando, name.c_str(), current); */
         if (rando <= current) {
           (*it2).second = (*it2).second;
         } else {
           (*it2).second = !(*it2).second;
         }
       } /* for(var...) */
-    /* for(auto e: current_state) */
-    /*   std::cout << e.first << " " << e.second << " "; */
-    /* std::cout << std::endl; */
     counts.first += (*query_it).second == true;
     counts.second += (*query_it).second == false;
   } /* for(i..) */

@@ -14,7 +14,7 @@
 #include "rcppsw/er_server.hpp"
 #include <algorithm>
 #include <boost/filesystem.hpp>
-#include "rcsw/common/dbg.h"
+#include "rcppsw/er_client.hpp"
 
 /*******************************************************************************
  * Namespaces
