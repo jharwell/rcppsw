@@ -41,7 +41,7 @@ void bayes::variable_node::sum_product_update(void) {
     if (first_iteration()) {
       ER_VER("%s: First iteration leaf node -> send unity",
               name().c_str());
-      boolean_joint_distribution msg({"unity"});
+      boolean_distribution msg({"unity"});
       msg.preposition({{"unity", true}}, 1.0);
       msg.preposition({{"unity", false}}, 0.0);
       send_msg(paired_node(), msg);
@@ -64,7 +64,7 @@ void bayes::variable_node::sum_product_update(void) {
 
   /* compute the product of all incoming messages from factor nodes */
   marginal_dist_ = incoming_msgs()[0];
-  boolean_joint_distribution accum = multiply_distributions(&incoming_msgs()[0],
+  boolean_distribution accum = multiply_distributions(&incoming_msgs()[0],
                                                             1);
 
   /* set outgoing message */

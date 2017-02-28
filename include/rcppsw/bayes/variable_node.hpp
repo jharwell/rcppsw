@@ -15,7 +15,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/bayes/node.hpp"
-#include "rcppsw/bayes/boolean_joint_distribution.hpp"
+#include "rcppsw/bayes/boolean_distribution.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -38,14 +38,14 @@ class variable_node: public node {
 
   /* member functions */
   void sum_product_update(void);
-  boolean_joint_distribution marginal_dist(void) const { return marginal_dist_; }
-  void marginal_dist(const boolean_joint_distribution& b) { marginal_dist_ = b; }
+  boolean_distribution marginal_dist(void) const { return marginal_dist_; }
+  void marginal_dist(const boolean_distribution& b) { marginal_dist_ = b; }
 
  private:
   /* member functions */
 
   /* data members */
-  boolean_joint_distribution marginal_dist_;
+  boolean_distribution marginal_dist_;
 };
 
 /*******************************************************************************

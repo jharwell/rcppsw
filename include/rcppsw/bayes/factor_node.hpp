@@ -32,20 +32,20 @@ namespace bayes {
 class factor_node: public node {
  public:
   /* constructors */
-  factor_node(const std::string& name, const boolean_joint_distribution& dist,
+  factor_node(const std::string& name, const boolean_distribution& dist,
               er_server* const handle): node(name, handle), name_(name),
                                         dist_(dist) {}
   const std::string& name(void) { return name_; }
   /* member functions */
   void sum_product_update(void);
-  boolean_joint_distribution dist(void) const { return dist_; }
-  void  dist(const boolean_joint_distribution& b) { dist_ = b; }
+  boolean_distribution dist(void) const { return dist_; }
+  void  dist(const boolean_distribution& b) { dist_ = b; }
  private:
   /* member functions */
 
   /* data members */
   std::string name_;
-  boolean_joint_distribution dist_;
+  boolean_distribution dist_;
 };
 
 /*******************************************************************************

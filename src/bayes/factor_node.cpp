@@ -64,7 +64,7 @@ void bayes::factor_node::sum_product_update(void) {
    * then perform a not sum over all the variables except the one for the
    * current node.
    */
-  boolean_joint_distribution dist_new = multiply_distributions(&dist_, 0);
+  boolean_distribution dist_new = multiply_distributions(&dist_, 0);
 
   /*
    * If the message was received from the paired variable node, send to all
@@ -75,7 +75,7 @@ void bayes::factor_node::sum_product_update(void) {
     std::for_each(links().begin(), links().end(), [&](node* n) {
         if (n != paired_node()) {
           ER_VER("Send msg to variable node %s",((variable_node*)n)->name().c_str());
-          boolean_joint_distribution tmp = dist_new;
+          boolean_distribution tmp = dist_new;
           tmp.not_sum(n->name());
           send_msg(n, tmp);
         }

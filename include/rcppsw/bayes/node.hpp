@@ -18,7 +18,7 @@ n * Description     : base class for nodes in a Bayesian network
 #include <list>
 #include <string>
 #include "rcsw/al/altypes.h"
-#include "rcppsw/bayes/boolean_joint_distribution.hpp"
+#include "rcppsw/bayes/boolean_distribution.hpp"
 #include "rcppsw/er_client.hpp"
 
 /*******************************************************************************
@@ -57,7 +57,7 @@ class node: public er_client {
   node* paired_node(void) { return paired_node_; }
 
   std::size_t incoming_count(void) const { return incoming_msgs_.size(); }
-  std::vector<boolean_joint_distribution>& incoming_msgs(void) {
+  std::vector<boolean_distribution>& incoming_msgs(void) {
     return incoming_msgs_;
   }
   node* last_msg_src(void) const { return last_msg_src_; }
@@ -65,7 +65,7 @@ class node: public er_client {
     return (last_msg_src_ == paired_node() && incoming_msgs().size() == 1) ||
         (incoming_msgs().size() > 0 && incoming_msgs().size() == n_links() - 1);
   }
-  void recv_msg(node* src, const boolean_joint_distribution& b) {
+  void recv_msg(node* src, const boolean_distribution& b) {
     next_iter_incoming_msgs_.push_back(b);
     next_iter_last_msg_src_ = src;
   }
@@ -82,15 +82,15 @@ class node: public er_client {
 
  protected:
   const std::list<node*>& links(void) { return links_; }
-  void send_msg(node* const dest, const boolean_joint_distribution& b) {
+  void send_msg(node* const dest, const boolean_distribution& b) {
     dest->recv_msg(this, b);
     incoming_msgs_.clear();
   }
-  boolean_joint_distribution multiply_distributions(
-      boolean_joint_distribution* const seed,
+  boolean_distribution multiply_distributions(
+      boolean_distribution* const seed,
       std::size_t start_pos) {
     ER_DIAG("Multiplying distributions: base=%s", name().c_str());
-    boolean_joint_distribution accum = *seed;
+    boolean_distribution accum = *seed;
     for (size_t i = start_pos; i < incoming_msgs().size(); ++i) {
       accum = accum * incoming_msgs()[i];
     } /* for(i..) */
@@ -108,8 +108,8 @@ class node: public er_client {
   node* last_msg_src_;
   node* next_iter_last_msg_src_;
   node* paired_node_;
-  std::vector<boolean_joint_distribution> incoming_msgs_;
-  std::vector<boolean_joint_distribution> next_iter_incoming_msgs_;
+  std::vector<boolean_distribution> incoming_msgs_;
+  std::vector<boolean_distribution> next_iter_incoming_msgs_;
   std::list<node*> links_;
   std::string name_;
 };

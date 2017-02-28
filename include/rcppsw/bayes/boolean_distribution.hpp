@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Name            : boolean_joint_distribution.hpp
+ * Name            : boolean_distribution.hpp
  * Project         : rcppsw
  * Module          : bayes
  * Description     : Representation of a joint probability distribution between
@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_RCPPSW_BAYES_BOOLEAN_JOINT_DISTRIBUTION_HPP_
-#define INCLUDE_RCPPSW_BAYES_BOOLEAN_JOINT_DISTRIBUTION_HPP_
+#ifndef INCLUDE_RCPPSW_BAYES_BOOLEAN_DISTRIBUTION_HPP_
+#define INCLUDE_RCPPSW_BAYES_BOOLEAN_DISTRIBUTION_HPP_
 
 /*******************************************************************************
  * Includes
@@ -38,16 +38,16 @@ namespace bayes {
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class boolean_joint_distribution {
+class boolean_distribution {
  public:
   /* constructors */
-  explicit boolean_joint_distribution(const std::vector<std::string>& names) :
+  explicit boolean_distribution(const std::vector<std::string>& names) :
       n_vars_(names.size()),
       dist_(std::pow(2, n_vars_)), names_(names) {
     std::reverse(names_.begin(), names_.end());
   }
 
-  boolean_joint_distribution(void) : n_vars_(0), dist_(), names_() {}
+  boolean_distribution(void) : n_vars_(0), dist_(), names_() {}
 
   /* member functions */
   bool preposition(const std::vector<std::pair<std::string, bool>>& spec,
@@ -61,7 +61,7 @@ class boolean_joint_distribution {
 
   void sum_out(const std::string& name);
   void not_sum(const std::string& name);
-  boolean_joint_distribution& normalize(void) {
+  boolean_distribution& normalize(void) {
     float total = std::accumulate(dist_.begin(), dist_.end(), 0.0);
     for (size_t i = 0; i < dist_.size(); ++i) {
       dist_[i] /= total;
@@ -70,8 +70,8 @@ class boolean_joint_distribution {
   }
 
   /* operators */
-  boolean_joint_distribution operator*(
-      const bayes::boolean_joint_distribution& rhs);
+  boolean_distribution operator*(
+      const bayes::boolean_distribution& rhs);
   std::ostream& operator<<(
       std::ostream& stream) const;
 
@@ -127,9 +127,9 @@ class boolean_joint_distribution {
  * Operater Definitions
  ******************************************************************************/
 std::ostream& operator<<(std::ostream& stream,
-                         const boolean_joint_distribution& rhs);
+                         const boolean_distribution& rhs);
 
 } /* namespace bayes */
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_RCPPSW_BAYES_BOOLEAN_JOINT_DISTRIBUTION_HPP_ */
+#endif /* INCLUDE_RCPPSW_BAYES_BOOLEAN_DISTRIBUTION_HPP_ */
