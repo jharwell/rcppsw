@@ -1,25 +1,20 @@
 /*******************************************************************************
- * Name            : gibbs_sampler.hpp
+ * Name            : variable_node.hpp
  * Project         : rcppsw
  * Module          : bayes
- * Description     : Class representing a Gibbs Sampler
+ * Description     : Class for variable nodes in a Bayesian network
  * Creation Date   : 02/13/17
  * Copyright       : Copyright 2017 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_RCPPSW_BAYES_GIBBS_SAMPLER_HPP_
-#define INCLUDE_RCPPSW_BAYES_GIBBS_SAMPLER_HPP_
+#ifndef INCLUDE_RCPPSW_BAYES_VARIABLE_NODE_HPP_
+#define INCLUDE_RCPPSW_BAYES_VARIABLE_NODE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
-#include <list>
-#include <string>
-#include <utility>
-#include <map>
-#include "rcppsw/er_client.hpp"
+#include "rcppsw/bayes/node.hpp"
 #include "rcppsw/bayes/boolean_distribution.hpp"
 
 /*******************************************************************************
@@ -29,36 +24,36 @@ namespace rcppsw {
 namespace bayes {
 
 /*******************************************************************************
- * Type Definitions
+ * Structure Definitions
  ******************************************************************************/
-typedef std::pair<boolean_pair, boolean_preposition> markov_blanket;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class gibbs_sampler: public er_client {
+class variable_node: public node {
  public:
   /* constructors */
-  gibbs_sampler(er_server* const handle, const std::vector<std::string>& vars,
-                const std::map<markov_blanket, double>& blankets) :
-      er_client(handle), vars_(vars), blankets_(blankets) {
-    insmod("Gibbs Sampler");
-  }
+  variable_node(const std::string& name, er_server* const handle) :
+      node(name, handle), marginal_dist_() {}
 
   /* member functions */
-  std::pair<std::size_t, std::size_t> sample_ask(
-      const std::string& query,
-      const std::vector<boolean_pair>& fixed_vars,
-      std::size_t n_steps);
-  void show_gibbs_samples(void);
+  void sum_product_update(void);
+  boolean_distribution marginal_dist(void) const { return marginal_dist_; }
+  void marginal_dist(const boolean_distribution& b) { marginal_dist_ = b; }
 
  private:
+  /* member functions */
+
   /* data members */
-  std::vector<std::string> vars_;
-  std::map<markov_blanket, double> blankets_;
+  boolean_distribution marginal_dist_;
 };
 
-} /* namespace bayes */
+/*******************************************************************************
+ * Operater Definitions
+ ******************************************************************************/
+
+
+} /* namespace namespace bayes */
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_RCPPSW_BAYES_GIBBS_SAMPLER_HPP_ */
+#endif  /* INCLUDE_RCPPSW_BAYES_VARIABLE_NODE_HPP_ */

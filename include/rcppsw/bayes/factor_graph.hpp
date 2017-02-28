@@ -1,26 +1,24 @@
 /*******************************************************************************
- * Name            : gibbs_sampler.hpp
+ * Name            : factor_graph.hpp
  * Project         : rcppsw
  * Module          : bayes
- * Description     : Class representing a Gibbs Sampler
+ * Description     : Class representing a factor graph for a Bayesian network
  * Creation Date   : 02/13/17
  * Copyright       : Copyright 2017 John Harwell, All rights reserved
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_RCPPSW_BAYES_GIBBS_SAMPLER_HPP_
-#define INCLUDE_RCPPSW_BAYES_GIBBS_SAMPLER_HPP_
+#ifndef INCLUDE_RCPPSW_BAYES_FACTOR_GRAPH_HPP_
+#define INCLUDE_RCPPSW_BAYES_FACTOR_GRAPH_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <vector>
-#include <list>
-#include <string>
-#include <utility>
-#include <map>
+#include "rcppsw/bayes/node.hpp"
 #include "rcppsw/er_client.hpp"
-#include "rcppsw/bayes/boolean_distribution.hpp"
+#include "rcppsw/bayes/factor_node.hpp"
+#include "rcppsw/bayes/variable_node.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -29,36 +27,46 @@ namespace rcppsw {
 namespace bayes {
 
 /*******************************************************************************
- * Type Definitions
+ * Structure Definitions
  ******************************************************************************/
-typedef std::pair<boolean_pair, boolean_preposition> markov_blanket;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class gibbs_sampler: public er_client {
+class factor_graph: public er_client {
  public:
   /* constructors */
-  gibbs_sampler(er_server* const handle, const std::vector<std::string>& vars,
-                const std::map<markov_blanket, double>& blankets) :
-      er_client(handle), vars_(vars), blankets_(blankets) {
-    insmod("Gibbs Sampler");
+  explicit factor_graph(std::vector<node*> nodes, er_server* const handle) :
+      er_client(handle),
+      nodes_(nodes) {
+    insmod("Factor graph");
   }
 
   /* member functions */
-  std::pair<std::size_t, std::size_t> sample_ask(
-      const std::string& query,
-      const std::vector<boolean_pair>& fixed_vars,
-      std::size_t n_steps);
-  void show_gibbs_samples(void);
+  void calculate_marginals(void);
+  void show_marginals(void) {
+    std::for_each(nodes_.begin(), nodes_.end(), [&](bayes::node* n) {
+        variable_node * f = dynamic_cast<variable_node*>(n);
+        if (NULL != f) {
+          std::cout << f->marginal_dist();
+        }
+      });
+  }
+  std::vector<node*>* find_leaf_nodes(void) const;
 
  private:
+  /* member functions */
+
+
   /* data members */
-  std::vector<std::string> vars_;
-  std::map<markov_blanket, double> blankets_;
+  std::vector<node*> nodes_;
 };
+
+/*******************************************************************************
+ * Operater Definitions
+ ******************************************************************************/
 
 } /* namespace bayes */
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_RCPPSW_BAYES_GIBBS_SAMPLER_HPP_ */
+#endif /* INCLUDE_RCPPSW_BAYES_FACTOR_GRAPH_HPP_ */
