@@ -41,6 +41,7 @@ std::pair<std::size_t, std::size_t> gibbs_sampler::sample_ask(
   std::vector<std::map<std::string, bool>> samples;
   std::pair<std::size_t, std::size_t> counts;
   boolean_preposition current_state;
+  boolean_preposition next_state;
   std::vector<std::string> non_evidence_vars;
 
   /* create list of active variables */
@@ -73,28 +74,39 @@ std::pair<std::size_t, std::size_t> gibbs_sampler::sample_ask(
   auto query_it = std::find_if(current_state.begin(), current_state.end(),
                                [&](const ::rcppsw::bayes::boolean_pair& p)
                                { return p.first == query;});
-  /* perform sampling */
+
+/* perform sampling */
+  next_state = current_state;
   for (size_t i = 0; i < n_steps; ++i) {
+    current_state = next_state;
+
     for (const std::string& name : non_evidence_vars) {
         double rando = static_cast<double>(rand()) /
                       static_cast<double>(RAND_MAX);
 
-        auto it = std::find_if(current_state.begin(), current_state.end(),
+        auto it1 = std::find_if(current_state.begin(), current_state.end(),
                                [&](const ::rcppsw::bayes::boolean_pair& p)
                                { return p.first == name;});
-
+        auto it2 = std::find_if(next_state.begin(), next_state.end(),
+                               [&](const ::rcppsw::bayes::boolean_pair& p)
+                               { return p.first == name;});
         boolean_preposition tmp = current_state;
-        boolean_pair pair = {(*it).first, (*it).second};
+        boolean_pair pair = {(*it1).first, (*it1).second};
         tmp.erase(std::remove(tmp.begin(), tmp.end(), pair));
         double current = blankets_[{pair, tmp}];
+
         /* verify that the needed Markov blanket was found */
         assert(current > 0);
+        /* printf("rand: %f current: %s/%f\n",rando, name.c_str(), current); */
         if (rando <= current) {
+          (*it2).second = (*it2).second;
         } else {
-          (*it).second = !(*it).second;
+          (*it2).second = !(*it2).second;
         }
       } /* for(var...) */
-
+    /* for(auto e: current_state) */
+    /*   std::cout << e.first << " " << e.second << " "; */
+    /* std::cout << std::endl; */
     counts.first += (*query_it).second == true;
     counts.second += (*query_it).second == false;
   } /* for(i..) */
