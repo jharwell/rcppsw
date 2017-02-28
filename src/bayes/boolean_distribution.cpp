@@ -133,7 +133,7 @@ void bayes::boolean_distribution::sum_out(const std::string& name) {
   std::vector<std::size_t> indices_true = indices_t(name);
   std::vector<std::size_t> indices_false = indices_f(name);
   std::vector<float> dist_new(indices_true.size());
-  std::cout << "Sum out " << name << std::endl;
+  /* std::cout << "Sum out " << name << std::endl; */
   for (size_t i = 0; i < indices_true.size(); ++i) {
     dist_new[i] = dist_[indices_true[i]] + dist_[indices_false[i]];
   } /* for(i..) */
@@ -145,8 +145,8 @@ void bayes::boolean_distribution::sum_out(const std::string& name) {
   assert(names_.size() == n_vars_);
   assert(dist_.size() == std::pow(2,n_vars_));
 
-  std::cout << "Result:\n";
-  std::cout << *this;
+  /* std::cout << "Result:\n"; */
+  /* std::cout << *this; */
 } /* boolean_distribution::sum_out() */
 
 /**
@@ -157,14 +157,14 @@ void bayes::boolean_distribution::sum_out(const std::string& name) {
  **/
 void bayes::boolean_distribution::not_sum(const std::string& name) {
   std::vector<std::string> names2 = names_;
-  std::cout << "Not sum over " << name << std::endl;
+  /* std::cout << "Not sum over " << name << std::endl; */
   for (auto it = names2.begin(); it != names2.end(); ++it) {
     if ((*it) != name) {
       sum_out(*it);
     }
   } /* (it...) */
-  std::cout << "Result:\n";
-  std::cout << *this;
+  /* std::cout << "Result:\n"; */
+  /* std::cout << *this; */
 } /* boolean_distribution::not_sum() */
 
 /*******************************************************************************
@@ -173,10 +173,10 @@ void bayes::boolean_distribution::not_sum(const std::string& name) {
 bayes::boolean_distribution bayes::boolean_distribution::operator*(
     const bayes::boolean_distribution& rhs) {
     std::vector<std::string> new_names = this->names_;
-    std::cout << "Multiplying" << std::endl;
-    std::cout << *this;
-    std::cout << "and" << std::endl;
-    std::cout << rhs;
+    /* std::cout << "Multiplying" << std::endl; */
+    /* std::cout << *this; */
+    /* std::cout << "and" << std::endl; */
+    /* std::cout << rhs; */
     if (rhs.names_[0] == "unity") {
       return *this;
     }
@@ -220,13 +220,11 @@ bayes::boolean_distribution bayes::boolean_distribution::operator*(
     additional_names.erase(std::remove(additional_names.begin(),
                                        additional_names.end(),
                                        common));
-    ret.names_.insert(ret.names_.end(), additional_names.begin(), additional_names.end());
-    /* ret.names_.erase(std::remove(ret.names_.begin(), */
-    /*                              ret.names_.end(), common), */
-    /*                  ret.names_.end()); */
+    ret.names_.insert(ret.names_.end(), additional_names.begin(),
+                      additional_names.end());
     ret.dist_ = res;
-    std::cout << "Result:\n";
-    std::cout << ret;
+    /* std::cout << "Result:\n"; */
+    /* std::cout << ret; */
     return ret;
 } /* boolean_distribution::operator*() */
 

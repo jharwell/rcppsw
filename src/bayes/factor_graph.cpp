@@ -84,7 +84,7 @@ void bayes::factor_graph::calculate_marginals(void) {
           ER_VER("Leaf node has not received 2nd message yet");
           term = false;
         } else {
-          ER_VER("Leaf node has received 2nd message\n");
+          ER_VER("Leaf node has received 2nd message");
         }
       });
     if (term) {
