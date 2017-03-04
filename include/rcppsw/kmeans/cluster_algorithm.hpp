@@ -24,6 +24,7 @@
 #include <boost/shared_ptr.hpp>
 #include "rcppsw/kmeans/cluster.hpp"
 #include "rcppsw/erf_client.hpp"
+#include "rcsw/utils/utils.h"
 
 /*******************************************************************************
  * Namespaces
@@ -96,15 +97,15 @@ template <typename T> class cluster_algorithm: public erf_client {
   void cluster(void) {
     ER_REPORT(er_lvl::NOM, "Begin clustering\n");
     double end = 0.0;
-    double start = monotonic_seconds();
+    double start = utils_monotonic_sec();
     for (std::size_t i = 0; i < n_iterations_; ++i) {
-      double iter_start = monotonic_seconds();
+      double iter_start = utils_monotonic_sec();
       if (cluster_iterate()) {
         ER_REPORT(er_lvl::NOM, "Clusters report convergence: terminating\n");
-        end = monotonic_seconds();
+        end = utils_monotonic_sec();
         break;
       } else {
-        end = monotonic_seconds();
+        end = utils_monotonic_sec();
       }
       ER_REPORT(er_lvl::DIAG, "Iteration %lu time: %.8fms\n", i, (end - iter_start)*1000);
     } /* for(i..) */
@@ -145,11 +146,6 @@ template <typename T> class cluster_algorithm: public erf_client {
   /* member functions */
   cluster_algorithm(const cluster_algorithm& other) = delete;
   cluster_algorithm& operator=(const cluster_algorithm& other) = delete;
-  double monotonic_seconds(void) {
-    struct timespec ts;
-    clock_gettime(CLOCK_MONOTONIC, &ts);
-    return ts.tv_sec + ts.tv_nsec * 1e-9;
-  }
 
   /* data members */
   std::size_t n_iterations_;
