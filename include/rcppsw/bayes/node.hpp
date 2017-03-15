@@ -17,7 +17,7 @@ n * Description     : base class for nodes in a Bayesian network
 #include <algorithm>
 #include <list>
 #include <string>
-#include "rcsw/al/altypes.h"
+#include "rcsw/common/common.h"
 #include "rcppsw/bayes/boolean_distribution.hpp"
 #include "rcppsw/er_client.hpp"
 

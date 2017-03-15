@@ -16,7 +16,7 @@
  ******************************************************************************/
 #include <string>
 #include <boost/program_options.hpp>
-#include "rcsw/al/altypes.h"
+#include "rcsw/common/common.h"
 
 /*******************************************************************************
  * Namespaces

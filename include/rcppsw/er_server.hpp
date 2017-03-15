@@ -19,7 +19,7 @@
 #include <string>
 #include <thread>
 #include <vector>
-#include "rcsw/al/altypes.h"
+#include "rcsw/common/common.h"
 #include "rcppsw/er_server_mod.hpp"
 #include "rcppsw/multithread/mt_queue.hpp"
 #include "rcppsw/multithread/threadable.hpp"

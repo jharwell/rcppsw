@@ -79,18 +79,24 @@
     assert(0);                                          \
   }
 
+/*
+ * Define debug macros also in rcsw to eliminate dependencies
+ */
+#ifndef CHECK
 #define CHECK(cond)                             \
   {                                             \
     if (!(cond)) {                              \
       goto error;                               \
     }                                           \
   }
+#endif /* CHECK */
 
+#ifndef CHECK_PTR
 #define CHECK_PTR(ptr)                          \
   if (nullptr == (ptr)) {                       \
     goto error;                                 \
   }
-
+#endif /* CHECK_PTR */
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/

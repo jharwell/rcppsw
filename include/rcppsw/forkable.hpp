@@ -19,7 +19,7 @@
 #include <string>
 #include <thread>
 #include <vector>
-#include "rcsw/al/altypes.h"
+#include "rcsw/common/common.h"
 
 /*******************************************************************************
  * Namespaces
