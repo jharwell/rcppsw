@@ -50,9 +50,11 @@ GTAGS
 bin/*
 lib/*
 obj/*
+preproc/*
 analysis/*
 reports/*
-preproc/*
 lib/*
 obj/*
 bin/*
+doc/latex
+doc/html

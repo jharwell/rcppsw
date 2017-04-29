@@ -1,11 +1,12 @@
 /*******************************************************************************
  * Name            : er_client.hpp
  * Project         : rcppsw
- * Module          : rcppsw
+ * Module          : dbg
  * Description     : Interace for classes that want to be able to use the ER
+ *                   Server.
  * Creation Date   : Sat 04/9/16
- * Copyright       : Copyright 2016 John Harwell, All rights reserved
-  *
+ * Copyright       : Copyright 2016 John Harwell, All rights reserved.
+ *
  ******************************************************************************/
 
 #ifndef INCLUDE_RCPPSW_ER_CLIENT_HPP_
@@ -21,12 +22,10 @@
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-/*
- * Reporting events. This needs to be a macro, instead of a function call so
- * I can get the line # and function from the preprocessor/compiler.
- *
- * This macro requires that the class you are using it in derives from
- * erf_client.
+/**
+ * @brief Event reporting macros. Use of these macros requires the class you are
+ * using it in derives from er_client. You cannot use these macros in a
+ * non-class context.
  */
 #ifndef NDEBUG
 /* ---------- Explicit debug level statements (use these) ---------- */
@@ -56,9 +55,10 @@
 #define ER_VER(...)
 #endif /* NDEBUG */
 
-/*
- * Like report, but only reports errors and goes to the error/bailout section
- * of a function only if a condition is false.
+/**
+ * @brief Check a condition in a function. If condition is not true, go to the
+ * error/bailout section for function (you must have a label called "error" in
+ * your function).
  */
 #define ER_CHECK(cond, msg, ...)                \
   {                                             \
@@ -67,20 +67,29 @@
       goto error;                               \
     }                                           \
   }
+
+/**
+ * @brief Mark a place in the code as being universally bad. If execution ever
+ * reaches this spot, report a message and error out.
+ */
 #define ER_SENTINEL(msg, ...)                   \
   {                                             \
     REPORT(er_lvl::ERR, msg, ##__VA_ARGS__);   \
     goto error;                                 \
   }
 
+/**
+ * @brief Check a condition in a function, halting the program if the condition
+ * is not true. Like assert(), but allows for an additional custom message.
+ */
 #define ER_ASSERT(cond, msg, ...)                       \
   if (!(cond)) {                                        \
-    ER_REPORT(er_lvl::ERR, msg, ##__VA_ARGS__);        \
+    ER_REPORT(er_lvl::ERR, msg, ##__VA_ARGS__);         \
     assert(0);                                          \
   }
 
 /*
- * Define debug macros also in rcsw to eliminate dependencies
+ * Define debug macros also in rcsw to eliminate dependencies.
  */
 #ifndef CHECK
 #define CHECK(cond)                             \
@@ -97,6 +106,7 @@
     goto error;                                 \
   }
 #endif /* CHECK_PTR */
+
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
@@ -111,12 +121,45 @@ class er_client {
   explicit er_client(er_server* const server_handle)
       : server_handle_(server_handle), er_id_(server_handle_->idgen()) {}
 
+  /**
+   * @brief Add a module to the active list (long version).
+   *
+   * @param loglvl The initial logging level for the module.
+   * @param dbglvl The initial debug printing level for the module.
+   * @param mod_name The name of the module, which will be prepended to all
+   * debugging/logging statements.
+   * @return OK if successful, ERROR otherwise.
+   */
   status_t insmod(const er_lvl::value& loglvl, const er_lvl::value& dbglvl,
                   const std::string& mod_name) {
     return server_handle_->insmod(er_id_, loglvl, dbglvl, mod_name); }
+
+  /**
+   * @brief Add a module to the active list (short version). The added module
+   * will get the default values for initial logging/debugging levels, according
+   * to the current defaults on the ER server.
+   *
+   * @param mod_name The name of the module, which will be predended to all
+   * debugging/logging statements.
+   *
+   * @return OK if successful, ERROR otherwise.
+   */
   status_t insmod(const std::string& mod_name) {
     return server_handle_->insmod(er_id_, mod_name); }
+
+  /**
+   * @brief Get a reference to the ER server.
+   *
+   * @return A reference to the server handle.
+   */
   er_server * server_handle(void) { return server_handle_; }
+
+  /**
+   * @brief Get a reference to the UUID for the module. Should not be called
+   * directly by the application (why would you even need this?).
+   *
+   * @return The UUID.
+   */
   boost::uuids::uuid er_id(void) {return er_id_; }
 
   /* destructor */
@@ -130,9 +173,5 @@ class er_client {
 };
 
 } /* namespace rcppsw */
-
-/*******************************************************************************
- * Operater Definitions
- ******************************************************************************/
 
 #endif /* INCLUDE_RCPPSW_ER_CLIENT_HPP_ */

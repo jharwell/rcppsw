@@ -2,7 +2,6 @@
  * Name            : cli_base.cpp
  * Project         : rcppsw
  * Module          : cli
- * Description     : CLI base class
  * Creation Date   : 06/14/15
  * Copyright       : Copyright 2015 John Harwell, All rights reserved
  *
@@ -21,7 +20,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-using namespace rcppsw;
+namespace rcppsw {
 
 /*******************************************************************************
  * Constructors/Destructor
@@ -55,37 +54,23 @@ cli_base::cli_base(const std::string &mnemonic)
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-/**
- * cli_base::parse() - Parse command line options
- *
- * RETURN:
- *     int - 0 successful, non-zero otherwise
- *
- **/
-int cli_base::parse(int argc, char **argv) {
+status_t cli_base::parse(int argc, char **argv) {
   prog_name_ = std::string(argv[0]);
   try {
     bpo::store(bpo::parse_command_line(argc, argv, desc_), vm_);
     if (vm_.count("help")) {
       std::cout << "\n" << desc_ << "\n";
-      return 1;
+      return ERROR;
     }
     bpo::notify(vm_);
   } catch (bpo::error &e) {
     std::cerr << "ERROR: " << e.what() << "\n\n";
     std::cerr << desc_ << "\n";
-    return -1;
+    return ERROR;
   }
-  return 0;
+  return ERROR;
 } /* cli_base::parse() */
 
-/**
- * cli_base::print() - Print all options that were passed to stdout
- *
- * RETURN:
- *     N/A
- *
- **/
 void cli_base::print(void) {
   std::cout << prog_name_ << " invoked with: ";
   for (bpo::variables_map::iterator it = vm_.begin(); it != vm_.end(); ++it) {
@@ -153,3 +138,5 @@ void cli_base::print(void) {
   } /* for() */
   std::cout << "\n";
 } /* cli_base::print() */
+
+} /* namespace rcppsw */

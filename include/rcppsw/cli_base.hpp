@@ -2,9 +2,9 @@
  * Name            : cli_base.hpp
  * Project         : rcppsw
  * Module          : cli
- * Description     : Header file for abstract class CLI.
+ * Description     : Base CLI.
  * Creation Date   : 06/19/16
- * Copyright       : Copyright 2016 John Harwell, All rights reserved
+ * Copyright       : Copyright 2016 John Harwell, All rights reserved.
  *
  ******************************************************************************/
 
@@ -32,18 +32,55 @@ class cli_base {
   explicit cli_base(const std::string& mnemonic = "");
   virtual ~cli_base() {}
 
-  int parse(int argc, char** argv);
-  virtual status_t validate(void) { return OK; }
+  /**
+   * @brief Parse command line options.
+   *
+   * @param argc The argc from main().
+   * @param argv The argv from main().
+   *
+   * @return OK if successful, ERROR otherwise.
+   */
+  status_t parse(int argc, char** argv);
+
+  /**
+   * @brief Determine if parameters passed are valid, by some criterion.
+   *
+   * @return TRUE if the condition is met, and FALSE otherwise.
+   */
+
+  virtual bool validate(void) { return OK; }
+
+  /**
+   * @brief Print all options and their help to stdout.
+   */
   void print(void);
+
+  /**
+   * @brief Get a handle on the variables map.
+   *
+   * @return The variables map handle.
+   */
   const bpo::variables_map& vm(void) { return vm_; }
+
+  /**
+   * @brief Get a handle on the options description.
+   *
+   * @return The variables map handle.
+   */
   bpo::options_description* desc(void) { return &desc_; }
+
+  /**
+   * @brief Get the program name.
+   *
+   * @return The program name.
+   */
   const std::string& prog_name(void) { return prog_name_; }
 
  private:
   bpo::variables_map vm_;
   bpo::options_description desc_;
   std::string prog_name_;
-  std::string output_dir_base_;
+  std::string output_dir_base_;  /// The root directory for program outputs.
 };
 
 } /* namespace rcppsw */

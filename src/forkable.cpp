@@ -32,13 +32,6 @@ namespace rcppsw {
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-/**
- * forkable::start() - Start a process
- *
- * RETURN:
- *     pid_t - PID of child process
- *
- **/
 pid_t forkable::start(int core) {
   proc_run_ = true;
   pid_ = fork();
@@ -51,13 +44,6 @@ pid_t forkable::start(int core) {
   return pid_;
 } /* forkable::start() */
 
-/**
- * forkable::start() - Change cwd and Start a process
- *
- * RETURN:
- *     pid_t - PID of child process
- *
- **/
 pid_t forkable::start(const std::string& new_wd, int core) {
   proc_run_ = true;
   pid_ = fork();
@@ -69,6 +55,7 @@ pid_t forkable::start(const std::string& new_wd, int core) {
     entry_point(this);
   }
   return pid_;
+
 error:
   return -1;
 } /* forkable::start() */

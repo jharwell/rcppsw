@@ -35,13 +35,42 @@ class forkable {
   forkable(void) : proc_run_(false), pid_(0) {}
   virtual ~forkable(void) {}
   pid_t pid(void) { return pid_; }
+
+  /**
+   * @brief Start a process.
+   *
+   * @param core The core to bind the process (and any threads it might spawn)
+   * to. By default, no binding.
+   *
+   * @return PID of child process in parent
+   */
   virtual pid_t start(int core = -1);
 
+  /**
+   * @brief Start a process in a new directory.
+   * @param core The core to bind the process (and any threads it might spawn)
+   * to. By default, no binding.
+   *
+   * @return PID of child process in parent
+   */
   virtual pid_t start(const std::string& new_wd, int core = -1);
 
+
+  /**
+   * @brief Signal a process that it should terminate, from outside the process.
+   */
   virtual void term(void) { proc_run_ = false; }
-  bool terminated(void) { return (false == proc_run_); }
+
+  /**
+   * @brief Entry point for the new process.
+   */
   virtual void proc_main(void) = 0;
+
+ protected:
+  /**
+   * @brief Check if a process object has been told to terminate elsewhere.
+   */
+  bool terminated(void) { return (false == proc_run_); }
 
  private:
   /* data members */
@@ -56,12 +85,5 @@ class forkable {
 };
 
 } /* namespace rcppsw */
-
-/*******************************************************************************
- * Non-member Functions
- ******************************************************************************/
-pid_t fork_exec(const std::vector<std::string>& cmd, const std::string& new_wd,
-                bool stdout_sup, int* pipefd);
-status_t proc_socket_lock(int core);
 
 #endif /* INCLUDE_RCPPSW_FORKABLE_HPP_ */

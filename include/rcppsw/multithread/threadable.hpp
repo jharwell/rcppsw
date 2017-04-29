@@ -35,8 +35,47 @@ class threadable {
   threadable(void) : thread_run_(false), thread_(), arg_(NULL) {}
   virtual ~threadable(void) {}
 
+  /**
+   * @brief The entry point for a thread.
+   *
+   * @param arg Argument passed to thread (can be NULL).
+   * @return The return value of the thread.
+   */
   virtual void* thread_main(void* arg) = 0;
+
+  /**
+   * @brief Start a thread.
+   *
+   * @param arg Argument passed to thread (can be NULL).
+   * @param core The core to bind the thread to. By default, the thread is
+   *             unbound.
+   * @return status_t - OK if successful, ERROR otherwise
+   */
   virtual status_t start(void* arg, int core = -1);
+
+
+  /**
+   * @brief Signal a thread that it should terminate, from outside the thread.
+   */
+  virtual void term(void) { thread_run_ = false; }
+
+  /**
+   * @brief Join a thread (i.e. wait for it to finish)
+   */
+  virtual void join(void) { pthread_join(thread_, NULL); }
+
+ protected:
+  /**
+   * @brief Check if a thread object has been told to terminate elsewhere.
+   */
+  bool terminated(void) { return (false == thread_run_); }
+
+  /**
+   * @brief Exit a thread from within the thread itself.
+   *
+   * @param ret If non-NULL, will be filled with the return value of the thread
+   * as it exits.
+   */
   virtual void exit(void* ret = NULL) {
     thread_run_ = false;
     if (!ret) {
@@ -46,13 +85,21 @@ class threadable {
       pthread_exit(ret);
     }
   }
-  virtual void term(void) { thread_run_ = false; }
-  bool terminated(void) { return (false == thread_run_); }
-  virtual void join(void) { pthread_join(thread_, NULL); }
 
- protected:
+  /**
+   * @brief Get the pthread handle for the thread.
+   *
+   * @return The handle.
+   */
   pthread_t thread_handle(void) { return thread_; }
+
+  /**
+   * @brief Get the ID of the thread within the parent process.
+   *
+   * @return The thread ID (guaranteed to be unique among threads in a process).
+   */
   int thread_id(void) { return syscall(__NR_gettid); }
+
   /* operators */
   threadable(const threadable&& other) : thread_run_(other.thread_run_),
                                          thread_(other.thread_),
