@@ -2,7 +2,7 @@
  * Name            : max_subarray_finder.hpp
  * Project         : rcppsw
  * Module          : algorithm
- * Description     : Find the maximal subarray of an array
+ * Description     : Find the maximal subarray of an array.
  * Creation Date   : 01/26/17
  * Copyright       : Copyright 2017 John Harwell, All rights reserved
  *
@@ -38,6 +38,13 @@ class max_subarray_finder {
   max_subarray_finder(const std::vector<T>& arr) : arr_(arr) {}
 
   /* member functions */
+  /**
+   * @brief Find the maximal subarray using Kadane's algorithm, which is O(n).
+   *
+   * @param res The maximal subarray, to be filled.
+   *
+   * @return OK if successful, ERROR otherwise.
+   */
   status_t find(std::vector<int>* const res) {
     FPC_CHECK(ERROR, arr_.size() > 0);
     T max_sum = arr_[0];

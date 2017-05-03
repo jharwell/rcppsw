@@ -1,8 +1,8 @@
 /*******************************************************************************
  * Name            : forkable.hpp
  * Project         : rcppsw
- * Module          : utils
- * Description     : Common threading functionality
+ * Module          : multiprocess
+ * Description     : Common fork()ing management routines.
  * Creation Date   : 07/18/15
  * Copyright       : Copyright 2015 John Harwell, All rights reserved
  *
@@ -49,7 +49,7 @@ class forkable {
   /**
    * @brief Start a process in a new directory.
    * @param core The core to bind the process (and any threads it might spawn)
-   * to. By default, no binding.
+   *             to. By default, no binding.
    *
    * @return PID of child process in parent
    */

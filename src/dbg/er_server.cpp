@@ -10,10 +10,10 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/er_server.hpp"
+#include "rcppsw/dbg/er_server.hpp"
 #include <algorithm>
 #include <boost/filesystem.hpp>
-#include "rcppsw/er_client.hpp"
+#include "rcppsw/dbg/er_client.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -120,13 +120,13 @@ status_t er_server::mod_dbglvl(const boost::uuids::uuid& id,
   iter->set_dbglvl(lvl);
 
   REPORT_INTERNAL(er_lvl::VER, "Successfully updated dbglvl for module %s",
-                  iter->name.c_str());
+                  iter->name().c_str());
   return OK;
 
 error:
   REPORT_INTERNAL(er_lvl::ERR,
                   "Failed to update dbglvl for module %s: no such module",
-                  iter->name.c_str());
+                  iter->name().c_str());
   return ERROR;
 } /* er_server::mod_dbglvl() */
 
@@ -141,13 +141,13 @@ status_t er_server::mod_loglvl(const boost::uuids::uuid& id,
   iter->set_loglvl(lvl);
 
   REPORT_INTERNAL(er_lvl::VER, "Successfully updated loglvl for module %s",
-                  iter->name.c_str());
+                  iter->name().c_str());
   return OK;
 
 error:
   REPORT_INTERNAL(er_lvl::ERR,
                   "Failed to update loglvl for module %s: no such module",
-                  iter->name.c_str());
+                  iter->name().c_str());
   return ERROR;
 } /* er_server::mod_loglvl() */
 

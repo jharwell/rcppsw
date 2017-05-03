@@ -12,7 +12,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/multithread/threadable.hpp"
-#include "rcppsw/er_client.hpp"
+#include "rcppsw/dbg/er_client.hpp"
 #include "rcsw/multithread/threadm.h"
 
 /*******************************************************************************

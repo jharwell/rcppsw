@@ -56,5 +56,4 @@ reports/*
 lib/*
 obj/*
 bin/*
-doc/latex
-doc/html
+doc/*

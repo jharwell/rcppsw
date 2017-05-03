@@ -17,7 +17,7 @@
  ******************************************************************************/
 #include <string>
 #include <boost/uuid/uuid.hpp>
-#include "rcppsw/er_server.hpp"
+#include "rcppsw/dbg/er_server.hpp"
 
 /*******************************************************************************
  * Macros

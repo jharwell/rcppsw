@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Name            : er_server.hpp
  * Project         : rcppsw
- * Module          : er
+ * Module          : dbg
  * Description     : Event Reporting Server, used for level and & module based
  *                   debug printing and logging.
  * Creation Date   : 06/24/15
@@ -19,7 +19,7 @@
 #include <string>
 #include <vector>
 #include "rcsw/common/common.h"
-#include "rcppsw/er_server_mod.hpp"
+#include "rcppsw/dbg/er_server_mod.hpp"
 #include "rcppsw/multithread/mt_queue.hpp"
 #include "rcppsw/multithread/threadable.hpp"
 

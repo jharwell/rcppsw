@@ -2,7 +2,7 @@
  * Name            : file_parser.hpp
  * Project         : rcppsw
  * Module          : utils
- * Description     : File parsing class using template design pattern
+ * Description     : File parsing class using template design pattern.
  * Creation Date   : 02/01/17
  * Copyright       : Copyright 2017 John Harwell, All rights reserved
  *
@@ -41,10 +41,10 @@ template <typename T> class file_parser {
 
   /* member functions */
   /**
-   * file_parser::parse_file() - Parse a file into a vector of sets of tokens,
+   * @brief Parse a file into a vector of sets of tokens.
    *
-   * std::vector<T> - The results of parsing
-   **/
+   * @return A vector of the parse results.
+   */
   std::vector<T>* parse_file(void) {
     std::vector<T>* tokens_set = new std::vector<T>;
     std::string line;
@@ -58,12 +58,12 @@ template <typename T> class file_parser {
   } /* file_parser::parse_file() */
 
   /**
-   * file_parser::parse_line() - Parse a line into a set of tokens, using a
-   * specified delimiter (space by default). Also it allows you to trim empty
-   * tokens from the results via the last parameter.
+   * @brief Parse a line into a set of tokens, using a space delimiter.
    *
-   * T - The parsed token set
-   **/
+   * @param line The line to parse.
+   *
+   * @return The parsed token set.
+   */
   T parse_line(const std::string& line) {
     T tokens;
     std::istringstream iss(line);
