@@ -10,7 +10,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/cli_base.hpp"
+#include "rcppsw/utils/cli_base.hpp"
 #include <ctime>
 #include <iomanip>
 #include <iostream>
