@@ -1,5 +1,5 @@
 /**
- * @file singleton.hpp
+ * @file event.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -17,11 +17,12 @@
  * You should have received a copy of the GNU General Public License along with
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
-#ifndef INCLUDE_RCPPSW_UTILS_SINGLETON_HPP_
-#define INCLUDE_RCPPSW_UTILS_SINGLETON_HPP_
+
+#ifndef INCLUDE_RCPPSW_STATE_EVENT_HPP_
+#define INCLUDE_RCPPSW_STATE_EVENT_HPP_
 
 /*******************************************************************************
- * Namespace Definitions
+ * Namespaces
  ******************************************************************************/
 namespace rcppsw {
 namespace patterns {
@@ -29,25 +30,15 @@ namespace patterns {
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template <class T>
-class singleton {
+/// @brief Unique state machine event data must inherit from this class.
+class event_data {
  public:
-  static T& instance() {
-    static T inst;
-    return inst;
-  }
-
- protected:
-  singleton(void) {}
-
-  ~singleton(void) {}
-
- private:
-  singleton(singleton const&) = delete;
-  singleton& operator=(singleton const&) = delete;
+  virtual ~event_data() {}
 };
+
+typedef event_data no_event_data;
 
 } /* namespace patterns */
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_RCPPSW_UTILS_SINGLETON_HPP_ */
+#endif /* INCLUDE_RCPPSW_STATE_EVENT_HPP_ */
