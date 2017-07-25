@@ -44,7 +44,7 @@ GPATH
 GRTAGS
 GTAGS
 .clang_complete
-compile_options.json
+compile_commands.json
 
 # Build process
 build
