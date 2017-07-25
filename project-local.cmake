@@ -29,14 +29,14 @@ endif()
 ################################################################################
 get_filename_component(target ${CMAKE_CURRENT_LIST_DIR} NAME)
 
-add_library(${target}
+add_library(${target} SHARED
   $<TARGET_OBJECTS:dbg>
   $<TARGET_OBJECTS:multithread>
   $<TARGET_OBJECTS:utils>
   )
 
 if(WITH_MPI)
-add_library(${target}
+add_library(${target} SHARED
   $<TARGET_OBJECTS:multiprocess>)
 endif()
 
