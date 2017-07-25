@@ -1,15 +1,25 @@
-/*******************************************************************************
- * Name            : file_parser.hpp
- * Project         : rcppsw
- * Module          : utils
- * Description     : File parsing class using template design pattern.
- * Creation Date   : 02/01/17
- * Copyright       : Copyright 2017 John Harwell, All rights reserved
+/**
+ * @file file_parser.hpp
  *
- ******************************************************************************/
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
 
-#ifndef INCLUDE_RCPPSW_FILE_PARSER_HPP_
-#define INCLUDE_RCPPSW_FILE_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_UTILS_FILE_PARSER_HPP_
+#define INCLUDE_RCPPSW_UTILS_FILE_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -28,18 +38,17 @@
 namespace rcppsw {
 
 /*******************************************************************************
- * Structure Definitions
- ******************************************************************************/
-
-/*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @brief File parsing class using template design pattern. Parses each line of
+ * a file into a vector of whitespace delimited tokens, and returns a vector of
+ * vectors (1 per line).
+ */
 template <typename T> class file_parser {
  public:
-  /* constructors */
   explicit file_parser(const std::string& fname): fname_(fname) {}
 
-  /* member functions */
   /**
    * @brief Parse a file into a vector of sets of tokens.
    *
@@ -77,10 +86,9 @@ template <typename T> class file_parser {
   } /* file_parser::parse_line() */
 
  private:
-  /* data members */
   const std::string& fname_;
 };
 
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_RCPPSW_FILE_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_UTILS_FILE_PARSER_HPP_ */

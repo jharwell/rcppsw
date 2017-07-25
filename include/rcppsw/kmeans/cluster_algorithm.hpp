@@ -1,13 +1,22 @@
-/*******************************************************************************
- * Name            : cluster_algorithm.hpp
- * Project         : rcppsw
- * Module          : kmeans
- * Description     : Base class implementation of K-means clustering algorithm
- * Creation Date   : 02/02/17
- * Copyright       : Copyright 2017 John Harwell, All rights reserved
+/**
+ * @file cluster_algorithm.hpp
  *
- ******************************************************************************/
-
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
 #ifndef INCLUDE_RCPPSW_KMEANS_CLUSTER_ALGORITHM_HPP_
 #define INCLUDE_RCPPSW_KMEANS_CLUSTER_ALGORITHM_HPP_
 
@@ -35,9 +44,11 @@ namespace kmeans {
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @brief Base class implementation of k-means clustering algorithm.
+ */
 template <typename T> class cluster_algorithm: public erf_client {
  public:
-  /* constructors */
   cluster_algorithm(std::size_t n_iterations,
                     std::size_t n_clusters,
                     std::size_t n_threads,
@@ -67,7 +78,6 @@ template <typename T> class cluster_algorithm: public erf_client {
     free(membership_);
   }
 
-  /* member functions */
   boost::shared_ptr<std::vector<kmeans_cluster<T>*>>& clusters(void) {
     return clusters_;
   }
@@ -143,11 +153,9 @@ template <typename T> class cluster_algorithm: public erf_client {
   virtual bool cluster_iterate(void) = 0;
 
  private:
-  /* member functions */
   cluster_algorithm(const cluster_algorithm& other) = delete;
   cluster_algorithm& operator=(const cluster_algorithm& other) = delete;
 
-  /* data members */
   std::size_t n_iterations_;
   std::size_t n_clusters_;
   std::size_t n_threads_;

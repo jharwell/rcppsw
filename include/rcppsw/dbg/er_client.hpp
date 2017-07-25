@@ -1,16 +1,27 @@
-/*******************************************************************************
- * Name            : er_client.hpp
- * Project         : rcppsw
- * Module          : dbg
- * Description     : Interace for classes that want to be able to use the ER
- *                   Server.
- * Creation Date   : Sat 04/9/16
- * Copyright       : Copyright 2016 John Harwell, All rights reserved.
+/**
+ * @file er_client.hpp
  *
- ******************************************************************************/
+ * Interface for classes that want to be able to use the ER Server.
+ *
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
 
-#ifndef INCLUDE_RCPPSW_ER_CLIENT_HPP_
-#define INCLUDE_RCPPSW_ER_CLIENT_HPP_
+#ifndef INCLUDE_RCPPSW_DBG_ER_CLIENT_HPP_
+#define INCLUDE_RCPPSW_DBG_ER_CLIENT_HPP_
 
 /*******************************************************************************
  * Includes
@@ -117,7 +128,6 @@ namespace rcppsw {
  ******************************************************************************/
 class er_client {
  public:
-  /* constructors */
   explicit er_client(er_server* const server_handle)
       : server_handle_(server_handle), er_id_(server_handle_->idgen()) {}
 
@@ -162,7 +172,6 @@ class er_client {
    */
   boost::uuids::uuid er_id(void) {return er_id_; }
 
-  /* destructor */
   virtual ~er_client(void) {}
 
  private:
@@ -174,4 +183,4 @@ class er_client {
 
 } /* namespace rcppsw */
 
-#endif /* INCLUDE_RCPPSW_ER_CLIENT_HPP_ */
+#endif /* INCLUDE_RCPPSW_DBG_ER_CLIENT_HPP_ */

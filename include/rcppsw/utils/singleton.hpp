@@ -1,24 +1,29 @@
-/*******************************************************************************
- * Name            : singleton.hpp
- * Project         : rcppsw
- * Module          : common
- * Description     : Singleton design pattern implementation
- * Creation Date   : 06/26/15
- * Copyright       : Copyright 2015 John Harwell, All rights reserved
+/**
+ * @file singleton.hpp
  *
- ******************************************************************************/
-
-#ifndef INCLUDE_RCPPSW_SINGLETON_HPP_
-#define INCLUDE_RCPPSW_SINGLETON_HPP_
-
-/*******************************************************************************
- * Includes
- ******************************************************************************/
-#include <stddef.h>  // defines NULL
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
+#ifndef INCLUDE_RCPPSW_UTILS_SINGLETON_HPP_
+#define INCLUDE_RCPPSW_UTILS_SINGLETON_HPP_
 
 /*******************************************************************************
  * Namespace Definitions
  ******************************************************************************/
+namespace rcppsw {
 
 /*******************************************************************************
  * Class Definitions
@@ -32,10 +37,8 @@ class singleton {
   }
 
  protected:
-  /* constructor */
   singleton(void) {}
 
-  /* destructor */
   ~singleton(void) {}
 
  private:
@@ -43,4 +46,6 @@ class singleton {
   singleton& operator=(singleton const&) = delete;
 };
 
-#endif /* INCLUDE_RCPPSW_SINGLETON_HPP_ */
+} /* namespace rcppsw */
+
+#endif /* INCLUDE_RCPPSW_UTILS_SINGLETON_HPP_ */

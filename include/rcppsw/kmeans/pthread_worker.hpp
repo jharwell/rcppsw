@@ -1,13 +1,22 @@
-/*******************************************************************************
- * Name            : pthread_worker.hpp
- * Project         : rcppsw
- * Module          : kmeans
- * Description     : Workers for pthread-based implementation of K-means
- *                   clustering
- * Creation Date   : 02/02/17
- * Copyright       : Copyright 2017 John Harwell, All rights reserved
+/**
+ * @file pthread_worker.hpp
  *
- ******************************************************************************/
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
 
 #ifndef INCLUDE_RCPPSW_KMEANS_PTHREAD_WORKER_HPP_
 #define INCLUDE_RCPPSW_KMEANS_PTHREAD_WORKER_HPP_
@@ -35,7 +44,6 @@ namespace kmeans {
  ******************************************************************************/
 template <typename T> class pthread_worker: public threadable {
  public:
-  /* constructors */
   pthread_worker(std::size_t id, std::size_t points_start,
                  std::size_t points_size, std::size_t centers_start,
                  std::size_t centers_size, std::size_t dimension,
@@ -57,11 +65,11 @@ template <typename T> class pthread_worker: public threadable {
     std::size_t* membership;
   };
 
-  /* member functions */
+
   void* thread_main(void* arg) {
-    ER_REPORT(er_lvl::DIAG, "%lu: points %lu - %lu, centers %lu - %lu\n",id_, 
-               points_start_, points_start_ + points_size_, centers_start_, 
-               centers_start_ + centers_size_); 
+    ER_REPORT(er_lvl::DIAG, "%lu: points %lu - %lu, centers %lu - %lu\n",id_,
+               points_start_, points_start_ + points_size_, centers_start_,
+               centers_start_ + centers_size_);
     /*
      * Lock each new invocation to a core--don't want the OS moving threads
      * around.
@@ -111,7 +119,6 @@ template <typename T> class pthread_worker: public threadable {
     }
   } /* kmeans_pthread_worker::thread_main() */
 
-  /* operators */
   pthread_worker(const pthread_worker& other) : threadable(),
                                                 id_(other.id_),
                                                 points_start_(other.points_start_),
@@ -122,10 +129,8 @@ template <typename T> class pthread_worker: public threadable {
                                                 clusters_(other.clusters_) {}
 
  private:
-  /* operators */
   pthread_worker& operator=(pthread_worker&) = delete;
 
-  /* data members */
   std::size_t id_;
   std::size_t points_start_;
   std::size_t points_size_;

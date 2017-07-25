@@ -1,19 +1,38 @@
-/*******************************************************************************
- * Name            : ipc.hpp
- * Project         : rcppsw
- * Module          : ipc
- * Description     : Interprocess communication definitions
- * Creation Date   : 08/25/2015
- * Copyright       : Copyright 2015 John Harwell, All rights reserved
+/**
+ * @file ipc.hpp
  *
- ******************************************************************************/
+ * Interprocess communication definitions.
+ *
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
 
-#ifndef INCLUDE_RCPPSW_IPC_HPP_
-#define INCLUDE_RCPPSW_IPC_HPP_
+#ifndef INCLUDE_RCPPSW_MULTIPROCESS_IPC_HPP_
+#define INCLUDE_RCPPSW_MULTIPROCESS_IPC_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <functional>
+#include <list>
+#include <map>
+#include <memory>
+#include <string>
+#include <utility>
+#include <vector>
 #include <boost/interprocess/allocators/allocator.hpp>
 #include <boost/interprocess/containers/deque.hpp>
 #include <boost/interprocess/containers/list.hpp>
@@ -25,13 +44,6 @@
 #include <boost/interprocess/sync/interprocess_mutex.hpp>
 #include <boost/interprocess/sync/interprocess_semaphore.hpp>
 #include <boost/interprocess/sync/named_mutex.hpp>
-#include <functional>
-#include <list>
-#include <map>
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
 
 /*******************************************************************************
  * Namespace Definitions
@@ -61,4 +73,4 @@ using ipc_map = bip::map<key, value, std::less<key>,
 typedef bip::basic_string<char, std::char_traits<char>, ipc_allocator<char>>
     ipc_string;
 
-#endif /* INCLUDE_RCPPSW_IPC_HPP_ */
+#endif /* INCLUDE_RCPPSW_MULTIPROCESS_IPC_HPP_ */

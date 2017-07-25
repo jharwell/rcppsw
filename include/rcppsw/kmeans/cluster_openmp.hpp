@@ -1,13 +1,22 @@
-/*******************************************************************************
- * Name            : cluster_openmp.hpp
- * Project         : rcppsw
- * Module          : kmeans
- * Description     : K-means clustering using OpenMP
- * Creation Date   : 02/02/17
- * Copyright       : Copyright 2017 John Harwell, All rights reserved
+/**
+ * @file cluster_openmp.hpp
  *
- ******************************************************************************/
-
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
 #ifndef INCLUDE_RCPPSW_KMEANS_CLUSTER_OPENMP_HPP_
 #define INCLUDE_RCPPSW_KMEANS_CLUSTER_OPENMP_HPP_
 
@@ -28,9 +37,11 @@ namespace kmeans {
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @brief K-means clustering using OpenMP.
+ */
 template <typename T> class cluster_openmp : public cluster_algorithm<T> {
  public:
-  /* constructors */
   cluster_openmp(std::size_t n_iterations,
                  std::size_t n_clusters,
                  std::size_t n_threads,
@@ -41,7 +52,6 @@ template <typename T> class cluster_openmp : public cluster_algorithm<T> {
                  er_server *const erf) :
       cluster_algorithm<T>(n_iterations, n_clusters, n_threads, dimension,
                            n_points, clusters_fname, centroids_fname, erf) {}
-  /* member functions */
 
   void first_touch_allocation(void) {
 #pragma omp parallel for num_threads(cluster_algorithm<T>::n_threads())
@@ -97,10 +107,6 @@ template <typename T> class cluster_openmp : public cluster_algorithm<T> {
     return (sum == cluster_algorithm<T>::clusters()->size());
   } /* cluster_openmp::cluster_iterate() */
 
- private:
-  /* member functions */
-
-  /* data members */
 };
 
 } /* namespace kmeans */

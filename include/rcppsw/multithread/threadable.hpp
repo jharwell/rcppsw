@@ -1,15 +1,25 @@
-/*******************************************************************************
- * Name            : threadable.hpp
- * Project         : rcppsw
- * Module          : multithread
- * Description     : Common threading functionality
- * Creation Date   : 06/18/15
- * Copyright       : Copyright 2015 John Harwell, All rights reserved
+/**
+ * @file threadable.hpp
  *
- ******************************************************************************/
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
 
-#ifndef INCLUDE_RCPPSW_THREADABLE_HPP_
-#define INCLUDE_RCPPSW_THREADABLE_HPP_
+#ifndef INCLUDE_RCPPSW_MULTITHREAD_THREADABLE_HPP_
+#define INCLUDE_RCPPSW_MULTITHREAD_THREADABLE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -29,9 +39,6 @@ namespace rcppsw {
  ******************************************************************************/
 class threadable {
  public:
-  /* data members */
-
-  /* member functions */
   threadable(void) : thread_run_(false), thread_(), arg_(NULL) {}
   virtual ~threadable(void) {}
 
@@ -100,23 +107,19 @@ class threadable {
    */
   int thread_id(void) { return syscall(__NR_gettid); }
 
-  /* operators */
   threadable(const threadable&& other) : thread_run_(other.thread_run_),
                                          thread_(other.thread_),
                                          arg_(other.arg_) {}
 
  private:
-  /* non-member functions */
   static void* entry_point(void* this_p) {
     threadable* pt = static_cast<threadable*>(this_p);
     return pt->thread_main(pt->arg_);
   } /* entry_point() */
 
-  /* operators */
   const threadable& operator=(const threadable& rhs) = delete;
   threadable(const threadable& other) = delete;
 
-  /* data members */
   bool thread_run_;
   pthread_t thread_;
   void *arg_;
@@ -128,4 +131,4 @@ class threadable {
  * Operater Definitions
  ******************************************************************************/
 
-#endif /* INCLUDE_RCPPSW_THREADABLE_HPP_ */
+#endif /* INCLUDE_RCPPSW_MULTITHREAD_THREADABLE_HPP_ */

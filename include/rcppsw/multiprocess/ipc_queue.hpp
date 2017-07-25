@@ -1,31 +1,40 @@
-/*******************************************************************************
- * Name            : ipc_queue.hpp
- * Project         : rcppsw
- * Module          : multiprocess
- * Description     : Interprocess synchronized queue.
- * Creation Date   : 07/26/15
- * Copyright       : Copyright 2015 John Harwell, All rights reserved
+/**
+ * @file ipc_queue.hpp
  *
- ******************************************************************************/
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
 
-#ifndef INCLUDE_RCPPSW_IPC_QUEUE_HPP_
-#define INCLUDE_RCPPSW_IPC_QUEUE_HPP_
+#ifndef INCLUDE_RCPPSW_MULTIPROCESS_IPC_QUEUE_HPP_
+#define INCLUDE_RCPPSW_MULTIPROCESS_IPC_QUEUE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <boost/thread/thread_time.hpp>
 #include <deque>
 #include <memory>
-#include "rcppsw/ipc.hpp"
-
-/*******************************************************************************
- * Structure Definitions
- ******************************************************************************/
+#include <boost/thread/thread_time.hpp>
+#include "rcppsw/multiprocess/ipc.hpp"
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @brief Interprocess synchronized queue.
+ */
 template <class T>
 class ipc_queue {
  public:
@@ -159,4 +168,4 @@ class ipc_queue {
   }
 };
 
-#endif /* INCLUDE_RCPPSW_IPC_QUEUE_HPP_ */
+#endif /* INCLUDE_RCPPSW_MULTIPROCESS_IPC_QUEUE_HPP_ */

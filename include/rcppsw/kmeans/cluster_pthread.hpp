@@ -1,12 +1,22 @@
-/*******************************************************************************
- * Name            : cluster_pthread.hpp
- * Project         : rcppsw
- * Module          : kmeans
- * Description     : K-means clustering using pthreads
- * Creation Date   : 02/02/17
- * Copyright       : Copyright 2017 John Harwell, All rights reserved
+/**
+ * @file cluster_pthread.hpp
  *
- ******************************************************************************/
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
 
 #ifndef INCLUDE_RCPPSW_KMEANS_CLUSTER_PTHREAD_HPP_
 #define INCLUDE_RCPPSW_KMEANS_CLUSTER_PTHREAD_HPP_
@@ -26,15 +36,14 @@ namespace rcppsw {
 namespace kmeans {
 
 /*******************************************************************************
- * Structure Definitions
- ******************************************************************************/
-
-/*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @brief K-means clustering using pthreads.
+ *
+ */
 template <typename T> class cluster_pthread : public cluster_algorithm<T> {
  public:
-  /* constructors */
   cluster_pthread(std::size_t n_iterations,
                   std::size_t n_clusters,
                   std::size_t n_threads,
@@ -78,8 +87,10 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
     } /* for(i..) */
   } /* kmeans_cluster_pthread::kmeans_cluster_pthread() */
 
-  /* member functions */
 
+  /**
+   * @brief Perform first-touch memory/page allocation for all threads.
+   */
   void first_touch_allocation(void) {
   /*
    * Perform first touch allocation for all threads
@@ -97,12 +108,10 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
   }
 
   /**
-   * kmeans_cluster_pthread::cluster_iterate() - Perform one iteration of the
-   * K-means clustering algorithm
+   * @brief Perform one iteration of the K-means clustering algorithm
    *
-   * RETURN:
-   *     bool - true if convergence was achieved, false otherwise
-   **/
+   * @return true if converged, false otherwise.
+   */
   bool cluster_iterate(void) {
     /*
      * cluster the data via Euclidean distance, putting each matching vector
@@ -152,9 +161,6 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
   } /* cluster_pthread::cluster_iterate() */
 
  private:
-  /* member functions */
-
-  /* data members */
   std::vector<pthread_worker<T>> workers_;
 };
 

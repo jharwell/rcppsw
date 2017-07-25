@@ -1,13 +1,22 @@
-/*******************************************************************************
- * Name            : mt_queue.hpp
- * Project         : rcppsw
- * Module          : multithread
- * Description     : A simple multiple-producer, single-consumer queue with
- *                   locking
- * Creation Date   : 02/06/16
- * Copyright       : Copyright 2017 John Harwell, All rights reserved
+/**
+ * @file mt_queue.hpp
  *
- ******************************************************************************/
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
 
 #ifndef INCLUDE_RCPPSW_MULTITHREAD_MT_QUEUE_HPP_
 #define INCLUDE_RCPPSW_MULTITHREAD_MT_QUEUE_HPP_
@@ -22,6 +31,9 @@
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @brief A simple multiple-producer/consumer queue with locking.
+ */
 template <typename T>
 class mt_queue {
  public:
