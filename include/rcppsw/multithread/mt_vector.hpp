@@ -27,6 +27,12 @@
 #include <vector>
 #include <boost/thread.hpp>
 #include <boost/thread/locks.hpp>
+#include "rcppsw/common/common.hpp"
+
+/*******************************************************************************
+ * Namespaces
+ ******************************************************************************/
+NS_START(rcppsw, multithread);
 
 /*******************************************************************************
  * Class Definitions
@@ -64,5 +70,7 @@ class mt_vector {
   std::vector<T> v_;
   boost::mutex mtx_;
 };
+
+NS_END(multithread, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_MULTITHREAD_MT_VECTOR_HPP_ */

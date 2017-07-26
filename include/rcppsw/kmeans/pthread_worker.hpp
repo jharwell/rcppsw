@@ -29,6 +29,7 @@
 #include <list>
 #include <limits>
 #include <boost/shared_ptr.hpp>
+#include "rcppsw/common/common.hpp"
 #include "rcppsw/threadable.hpp"
 #include "rcppsw/kmeans/cluster.hpp"
 #include "rcsw/multithread/threadm.h"
@@ -36,8 +37,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
-namespace kmeans {
+NS_START(rcppsw, kmeans);
 
 /*******************************************************************************
  * Class Definitions
@@ -140,7 +140,6 @@ template <typename T> class pthread_worker: public threadable {
   boost::shared_ptr<std::vector<kmeans_cluster<T>*>> clusters_;
 };
 
-} /* namespace kmeans */
-} /* namespace rcppsw */
+NS_END(kmeans, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_KMEANS_PTHREAD_WORKER_HPP_ */

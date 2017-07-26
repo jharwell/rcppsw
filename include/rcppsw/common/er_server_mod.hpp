@@ -31,12 +31,12 @@
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
-#include "rcsw/common/common.h"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw, common);
 
 /*******************************************************************************
  * Class Definitions
@@ -97,11 +97,12 @@ class er_server_mod {
   er_lvl::value dbglvl_;
 };
 
-} /* namespace rcppsw */
+NS_END(common, rcppsw);
 
 /*******************************************************************************
  * Operator Definitions
  ******************************************************************************/
-std::ostream& operator<<(std::ostream& os, const rcppsw::er_server_mod& mod);
+std::ostream& operator<<(std::ostream& os,
+                         const rcppsw::common::er_server_mod& mod);
 
 #endif /* INCLUDE_RCPPSW_DBG_ER_SERVER_MOD_HPP_ */

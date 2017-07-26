@@ -27,12 +27,12 @@
 #include <pthread.h>
 #include <sys/types.h>
 #include <sys/syscall.h>
-#include "rcsw/common/common.h"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw, multithread);
 
 /*******************************************************************************
  * Class Definitions
@@ -125,10 +125,6 @@ class threadable {
   void *arg_;
 };
 
-} /* namespace rcppsw */
-
-/*******************************************************************************
- * Operater Definitions
- ******************************************************************************/
+NS_END(multithread, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_MULTITHREAD_THREADABLE_HPP_ */

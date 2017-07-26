@@ -1,5 +1,5 @@
 /**
- * @file expression.hpp
+ * @file common.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,68 +18,28 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_EXPRESSION_HPP_
-#define INCLUDE_RCPPSW_MATH_EXPRESSION_HPP_
+#ifndef INCLUDE_RCPPSW_COMMON_HPP_
+#define INCLUDE_RCPPSW_COMMON_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
-#include <cstddef>
-#include "rcppsw/common/common.hpp"
+#include "rcsw/common/common.h"
+
+/*******************************************************************************
+ * Macros
+ ******************************************************************************/
+#define NS_START_(ns) namespace ns {
+#define NS_END_(ns) }
+#define NS_START(...) XFOR_EACH1(NS_START_, __VA_ARGS__)
+#define NS_END(...) XFOR_EACH1(NS_END_, __VA_ARGS__)
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, math);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/**
- * @brief A base class for easy swapping/manipulating of mathematical expressions.
- */
-template<typename T>
-class expression {
- public:
-  explicit expression(size_t n_vars) :
-      vars_(n_vars) {}
 
-  /**
-   * @brief Get the last value calculated
-   */
-  T last(void) { return last_; }
-
-  /**
-   * @brief Calculate the result of the expression over the variables.
-   *
-   * @return The new result.
-   */
-  virtual T calculate(void) = 0;
-
-  /**
-   * @brief Update the variable values in the expression and calculate the new
-   * value over the updated variables.
-   *
-   * @param vars The new variables.
-   *
-   * @return \ref status_t.
-   */
-  status_t update(const std::vector<T>& vars) {
-    FPC_CHECK(ERROR, vars.size() == vars_.size);
-    vars_ = vars;
-    last_ = calculate();
-    return OK;
-  }
-
- protected:
-  std::vector<T>& vars(void) const { return vars_; }
-
- private:
-  T last_;
-  std::vector<T> vars_;
-};
-
-NS_END(rcppsw, math);
-
-#endif /* INCLUDE_RCPPSW_MATH_EXPRESSION_HPP_ */
+#endif /* INCLUDE_RCPPSW_COMMON_HPP_ */

@@ -27,6 +27,12 @@
 #include <deque>
 #include <boost/thread.hpp>
 #include <boost/thread/locks.hpp>
+#include "rcppsw/common/common.hpp"
+
+/*******************************************************************************
+ * Namespaces
+ ******************************************************************************/
+NS_START(rcppsw, multithread);
 
 /*******************************************************************************
  * Class Definitions
@@ -82,5 +88,7 @@ class mt_queue {
   boost::mutex mtx_;              // The mutex to synchronise on
   boost::condition_variable cv_;  // The condition to wait for
 };
+
+NS_END(multithread, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_MULTITHREAD_MT_QUEUE_HPP_ */

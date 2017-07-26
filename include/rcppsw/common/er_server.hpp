@@ -30,20 +30,20 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "rcsw/common/common.h"
-#include "rcppsw/dbg/er_server_mod.hpp"
+#include "rcppsw/common/common.hpp"
+#include "rcppsw/common/er_server_mod.hpp"
 #include "rcppsw/multithread/mt_queue.hpp"
 #include "rcppsw/multithread/threadable.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw, common);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class er_server : public threadable {
+class er_server : public multithread::threadable {
  public:
   /**
    * @brief Internal class wrapping all the information needed to processing a
@@ -220,7 +220,7 @@ class er_server : public threadable {
   char hostname_[32];
   bool threaded_;  /// If true. the server is handling events synchronously.
   std::vector<er_server_mod> modules_;  /// The currently active modules.
-  mt_queue<er_msg_int> queue_;  /// Thread safe producer-consumer queue.
+  multithread::mt_queue<er_msg_int> queue_;  /// Thread safe producer-consumer queue.
   std::string logfile_fname_;  /// File to log events to.
   std::ofstream logfile_;  /// Logfile handle.
   er_lvl::value loglvl_dflt_;  /// Default logging level for new modules
@@ -231,6 +231,6 @@ class er_server : public threadable {
   boost::uuids::uuid er_id_;
 };
 
-} /* namespace rcppsw */
+NS_END(common, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_DBG_ER_SERVER_HPP_ */

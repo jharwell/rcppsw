@@ -28,7 +28,7 @@
  ******************************************************************************/
 #include <string>
 #include <boost/uuid/uuid.hpp>
-#include "rcppsw/dbg/er_server.hpp"
+#include "rcppsw/common/er_server.hpp"
 
 /*******************************************************************************
  * Macros
@@ -121,7 +121,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw, common);
 
 /*******************************************************************************
  * Class Definitions
@@ -181,6 +181,6 @@ class er_client {
   er_client(const er_client& other) = delete;
 };
 
-} /* namespace rcppsw */
+NS_END(rcppsw, common);
 
 #endif /* INCLUDE_RCPPSW_DBG_ER_CLIENT_HPP_ */

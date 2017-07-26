@@ -12,13 +12,12 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/multithread/threadable.hpp"
-#include "rcppsw/dbg/er_client.hpp"
 #include "rcsw/multithread/threadm.h"
 
 /*******************************************************************************
  * Namespace Definitions
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw, multithread);
 
 /*******************************************************************************
  * Member Functions
@@ -43,6 +42,6 @@ status_t threadable::start(void* arg, int core) {
 
 error:
   return ERROR;
-} /* threadable::start() */
+} /* start() */
 
-} /* namespace rcppsw */
+NS_END(multithread, rcppsw);

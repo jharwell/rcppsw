@@ -10,13 +10,13 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/dbg/er_server_mod.hpp"
+#include "rcppsw/common/er_server_mod.hpp"
 #include <fstream>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw, common);
 
 /*******************************************************************************
  * Constructors/Destructors
@@ -70,4 +70,4 @@ std::ostream& operator<<(std::ostream& os, const er_server_mod& mod) {
   return os;
 } /* operator<<() */
 
-} /* namespace rcppsw */
+NS_END(common, rcppsw);

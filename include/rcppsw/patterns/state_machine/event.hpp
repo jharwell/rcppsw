@@ -18,14 +18,18 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_STATE_EVENT_HPP_
-#define INCLUDE_RCPPSW_STATE_EVENT_HPP_
+#ifndef INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_EVENT_HPP_
+#define INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_EVENT_HPP_
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
-namespace patterns {
+NS_START(rcppsw, patterns);
 
 /*******************************************************************************
  * Class Definitions
@@ -38,7 +42,6 @@ class event_data {
 
 typedef event_data no_event_data;
 
-} /* namespace patterns */
-} /* namespace rcppsw */
+NS_END(patterns, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_STATE_EVENT_HPP_ */
+#endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_EVENT_HPP_ */

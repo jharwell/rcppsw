@@ -27,12 +27,12 @@
 #include <oftream>
 #include <vector>
 #include <cmath>
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
-namespace kmeans {
+NS_START(rcppsw, kmeans);
 
 /*******************************************************************************
  * Type Definitions
@@ -137,7 +137,6 @@ template <typename T> class kmeans_cluster {
   std::vector<T> prev_center_;
 };
 
-} /* namespace kmeans */
-} /* namespace rcppsw */
+NS_END(kmeans, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_KMEANS_CLUSTER_HPP_ */

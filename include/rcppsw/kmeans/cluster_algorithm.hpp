@@ -31,6 +31,7 @@
 #include <string>
 #include <vector>
 #include <boost/shared_ptr.hpp>
+#include "rcppsw/common/common.hpp"
 #include "rcppsw/kmeans/cluster.hpp"
 #include "rcppsw/erf_client.hpp"
 #include "rcsw/utils/utils.h"
@@ -38,8 +39,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
-namespace kmeans {
+NS_START(rcppsw, kmeans);
 
 /*******************************************************************************
  * Class Definitions
@@ -173,7 +173,6 @@ template <typename T> class cluster_algorithm: public erf_client {
   boost::shared_ptr<std::vector<kmeans_cluster<T>*>> clusters_;
 };
 
-} /* namespace kmeans */
-} /* namespace rcppsw */
+NS_END(kmeans, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_KMEANS_CLUSTER_ALGORITHM_HPP_ */

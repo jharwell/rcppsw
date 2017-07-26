@@ -10,15 +10,15 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/dbg/er_server.hpp"
+#include "rcppsw/common/er_server.hpp"
 #include <algorithm>
 #include <boost/filesystem.hpp>
-#include "rcppsw/dbg/er_client.hpp"
+#include "rcppsw/common/er_client.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw, common);
 
 /*******************************************************************************
  * Macros
@@ -168,4 +168,4 @@ void* er_server::thread_main(void* arg) {
   return NULL;
 } /* er_server::thread_main() */
 
-} /* namespace rcppsw */
+NS_END(common, rcpppsw);

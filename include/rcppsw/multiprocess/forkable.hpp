@@ -29,12 +29,12 @@
 #include <string>
 #include <thread>
 #include <vector>
-#include "rcsw/common/common.h"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw, multiprocess);
 
 /*******************************************************************************
  * Class Definitions
@@ -94,6 +94,6 @@ class forkable {
   } /* entry_point() */
 };
 
-} /* namespace rcppsw */
+NS_END(multiprocess, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_MULTIPROCESS_FORKABLE_HPP_ */

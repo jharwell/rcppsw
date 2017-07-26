@@ -26,14 +26,14 @@
  ******************************************************************************/
 #include <vector>
 #include <string>
+#include "rcppsw/common/common.hpp"
 #include "rcppsw/kmeans/cluster_algorithm.hpp"
 #include "rcppsw/kmeans/pthread_worker.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
-namespace kmeans {
+NS_START(rcppsw, kmeans);
 
 /*******************************************************************************
  * Class Definitions
@@ -164,7 +164,6 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
   std::vector<pthread_worker<T>> workers_;
 };
 
-} /* namespace kmeans */
-} /* namespace rcppsw */
+NS_END(kmeans, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_KMEANS_CLUSTER_PTHREAD_HPP_ */

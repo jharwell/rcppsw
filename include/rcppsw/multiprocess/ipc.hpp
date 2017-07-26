@@ -44,10 +44,12 @@
 #include <boost/interprocess/sync/interprocess_mutex.hpp>
 #include <boost/interprocess/sync/interprocess_semaphore.hpp>
 #include <boost/interprocess/sync/named_mutex.hpp>
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
- * Namespace Definitions
+ * Namespaces
  ******************************************************************************/
+NS_START(rcppsw, multiprocess);
 namespace bip = boost::interprocess;
 
 /*******************************************************************************
@@ -72,5 +74,7 @@ using ipc_map = bip::map<key, value, std::less<key>,
  ******************************************************************************/
 typedef bip::basic_string<char, std::char_traits<char>, ipc_allocator<char>>
     ipc_string;
+
+NS_END(multiprocess, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_MULTIPROCESS_IPC_HPP_ */

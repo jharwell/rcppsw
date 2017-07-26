@@ -28,6 +28,12 @@
 #include <memory>
 #include <boost/thread/thread_time.hpp>
 #include "rcppsw/multiprocess/ipc.hpp"
+#include "rcppsw/common/common.hpp"
+
+/*******************************************************************************
+ * Namespaces
+ ******************************************************************************/
+NS_START(rcppsw, multiprocess);
 
 /*******************************************************************************
  * Class Definitions
@@ -167,5 +173,7 @@ class ipc_queue {
     return queue_.size();
   }
 };
+
+NS_END(multiprocess, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_MULTIPROCESS_IPC_QUEUE_HPP_ */
