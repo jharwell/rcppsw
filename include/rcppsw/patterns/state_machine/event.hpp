@@ -29,7 +29,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, patterns);
+NS_START(rcppsw, patterns, state_machine);
 
 /*******************************************************************************
  * Class Definitions
@@ -42,6 +42,6 @@ class event_data {
 
 typedef event_data no_event_data;
 
-NS_END(patterns, rcppsw);
+NS_END(state_machine, patterns, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_EVENT_HPP_ */

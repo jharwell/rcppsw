@@ -136,23 +136,19 @@ class simple_fsm {
   void state_engine(const state_map_row* const state_map);
   void state_engine(const state_map_row_ex* const state_map_ex);
 
-  /// The maximum number of state machine states.
-  const uint8_t MAX_STATES_;
-
-  /// The current state machine state.
-  uint8_t current_state_;
-
-  /// The new state the state machine has yet to transition to.
-  uint8_t new_state_;
-
-  /// Set to TRUE when an event is generated.
-  bool event_generated_;
-
-  /// The state event data pointer.
-  const event_data* event_data_;
-
-  std::mutex mutex_;
+  const uint8_t MAX_STATES_;  /// The maximum number of state machine states.
+  uint8_t current_state_;     /// The current state machine state.
+  uint8_t new_state_;         /// The new state (not transitioned to yet).
+  bool event_generated_;      /// Set to TRUE when an event is generated.
+  const event_data* event_data_;  /// The state event data pointer.
+  std::mutex mutex_;          /// Mutual exclusion lock for thread safety.
 };
+
+NS_END(state_machine, patterns, rcppsw);
+
+/*******************************************************************************
+ * Macros
+ ******************************************************************************/
 
 #define STATE_DECLARE(sm, state_name, event_data)                       \
   void ST_##state_name(const event_data*);                              \
@@ -183,7 +179,6 @@ class simple_fsm {
   void sm::EX_##exitName(void)
 
 #define BEGIN_TRANSITION_MAP static const uint8_t TRANSITIONS[] = {
-
 #define TRANSITION_MAP_ENTRY(entry) entry,
 
 #define END_TRANSITION_MAP(data)                                        \
@@ -228,7 +223,5 @@ class simple_fsm {
           };                                                            \
         STATIC_ASSERT((sizeof(kSTATE_MAP)/sizeof(state_map_row_ex)) == ST_MAX_STATES); \
         return &kSTATE_MAP[0]; }
-
-NS_END(state_machine, patterns, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_STATE_MACHINE_HPP_ */
