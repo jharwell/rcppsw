@@ -1,5 +1,5 @@
 /**
- * @file common.hpp
+ * @file singleton.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -17,29 +17,40 @@
  * You should have received a copy of the GNU General Public License along with
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
-
-#ifndef INCLUDE_RCPPSW_COMMON_COMMON_HPP_
-#define INCLUDE_RCPPSW_COMMON_COMMON_HPP_
+#ifndef INCLUDE_RCPPSW_PATTERNS_SINGLETON_HPP_
+#define INCLUDE_RCPPSW_PATTERNS_SINGLETON_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcsw/common/common.h"
-
-/*******************************************************************************
- * Macros
- ******************************************************************************/
-#define NS_START_(ns) namespace ns {
-#define NS_END_(ns) }
-#define NS_START(...) XFOR_EACH1(NS_START_, __VA_ARGS__)
-#define NS_END(...) XFOR_EACH1(NS_END_, __VA_ARGS__)
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
+NS_START(rcppsw, patterns);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+template <class T>
+class singleton {
+ public:
+  static T& instance() {
+    static T inst;
+    return inst;
+  }
 
-#endif /* INCLUDE_RCPPSW_COMMON_COMMON_HPP_ */
+ protected:
+  singleton(void) {}
+
+  ~singleton(void) {}
+
+ private:
+  singleton(singleton const&) = delete;
+  singleton& operator=(singleton const&) = delete;
+};
+
+NS_END(patterns, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_PATTERNS_SINGLETON_HPP_ */

@@ -35,7 +35,7 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class simple_fsm;
+class base_fsm;
 
 /**
  * @brief Abstract state base class that all states inherit from.
@@ -51,7 +51,7 @@ class state_base {
    * @param sm A state machine instance.
    * @param data The event data.
    */
-  virtual void invoke_state_action(simple_fsm* sm,
+  virtual void invoke_state_action(base_fsm* sm,
                                    const event_data* data) const = 0;
 };
 
@@ -66,7 +66,7 @@ template <class SM, class Data, void (SM::*Func)(const Data*)>
 class state_action : public state_base {
  public:
   virtual ~state_action() {}
-  virtual void invoke_state_action(simple_fsm* sm,
+  virtual void invoke_state_action(base_fsm* sm,
                                    const event_data* data) const {
     /* Downcast the state machine and event data to the correct derived type */
     SM* derived_fsm = static_cast<SM*>(sm);
@@ -76,7 +76,7 @@ class state_action : public state_base {
      * data type and the data type being sent to the state function.  For
      * instance, given the following state defintion:
      *
-     * STATE_DECLARE(Mysimple_fsm, MyStateFunction, Myevent_data)
+     * STATE_DECLARE(Mybase_fsm, MyStateFunction, Myevent_data)
      *
      * The following internal event transition is valid:
      *
@@ -111,7 +111,7 @@ class state_guard_base {
    * @return Returns TRUE if no guard condition or the guard condition evaluates
    * to TRUE.
   */
-  virtual bool invoke_guard_condition(simple_fsm* sm,
+  virtual bool invoke_guard_condition(base_fsm* sm,
                                       const event_data* data) const = 0;
 };
 
@@ -124,7 +124,8 @@ class state_guard_base {
 template <class SM, class Data, bool (SM::*Func)(const Data*)>
 class state_guard_condition : public state_guard_base {
  public:
-  virtual bool invoke_guard_condition(simple_fsm* sm,
+  virtual ~state_guard_condition() {}
+  virtual bool invoke_guard_condition(base_fsm* sm,
                                       const event_data* data) const {
     SM* derived_fsm = static_cast<SM*>(sm);
     const Data* derived_data = dynamic_cast<const Data*>(data);
@@ -146,7 +147,7 @@ class state_entry_base {
    * @param sm A state machine instance.
    * @param data The event data.
    */
-  virtual void invoke_entry_action(simple_fsm* sm,
+  virtual void invoke_entry_action(base_fsm* sm,
                                    const event_data* data) const = 0;
 };
 
@@ -160,7 +161,7 @@ class state_entry_base {
 template <class SM, class Data, void (SM::*Func)(const Data*)>
 class state_entry_action : public state_entry_base {
  public:
-  virtual void invoke_entry_action(simple_fsm* sm,
+  virtual void invoke_entry_action(base_fsm* sm,
                                    const event_data* data) const {
     SM* derived_fsm = static_cast<SM*>(sm);
     const Data* derived_data = dynamic_cast<const Data*>(data);
@@ -183,7 +184,7 @@ class state_exit_base {
    *
    * @param sm A state machine instance.
    */
-  virtual void invoke_exit_action(simple_fsm* sm) const = 0;
+  virtual void invoke_exit_action(base_fsm* sm) const = 0;
 };
 
 /**
@@ -195,10 +196,11 @@ class state_exit_base {
 template <class SM, void (SM::*Func)(void)>
 class state_exit_action : public state_exit_base {
  public:
-  virtual void invoke_exit_action(simple_fsm* sm) const {
+  virtual void invoke_exit_action(base_fsm* sm) const {
     SM* derivedSM = static_cast<SM*>(sm);
     (derivedSM->*Func)();
   }
+  virtual ~state_exit_action() {}
 };
 
 NS_END(state_machine, patterns, rcppsw);

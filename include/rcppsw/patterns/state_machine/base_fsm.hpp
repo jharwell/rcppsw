@@ -1,5 +1,5 @@
 /**
- * @file state_machine.hpp
+ * @file base_fsm.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_STATE_MACHINE_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_STATE_MACHINE_HPP_
+#ifndef INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_BASE_FSM_HPP_
+#define INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_BASE_FSM_HPP_
 
 /*******************************************************************************
  * Includes
@@ -50,7 +50,7 @@ struct state_map_row {
 /**
  * @brief A structure to hold a single row within the extended state map.
  */
-struct state_map_row_ex {
+struct state_map_ex_row {
   const state_base* const state;
   const state_guard_base* const guard;
   const state_entry_base* const entry;
@@ -61,10 +61,10 @@ struct state_map_row_ex {
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief simple_fsm implements a software-based state machine.
+ * @brief base_fsm implements a software-based state machine.
  *
  */
-class simple_fsm {
+class base_fsm {
  public:
   enum {
     EVENT_IGNORED = 0xFE,
@@ -75,9 +75,9 @@ class simple_fsm {
    * @param max_states The maximum number of state machine states.
    * @param initial_state Initial state machine state.
    */
-  explicit simple_fsm(uint8_t max_states, uint8_t initial_state = 0);
+  explicit base_fsm(uint8_t max_states, uint8_t initial_state = 0);
 
-  virtual ~simple_fsm() {}
+  virtual ~base_fsm() {}
 
   uint8_t current_state() { return current_state_; }
   uint8_t max_allowed_states() { return MAX_STATES_; }
@@ -111,7 +111,7 @@ class simple_fsm {
    * @return An array of state_map_row pointers with the array size MAX_STATES
    *         or NULL if the state machine uses the state_map_ex().
    */
-  virtual const state_map_row* state_map() = 0;
+  virtual const state_map_row* state_map() { return NULL; }
 
   /**
    * @brief Gets the extended state map as defined in the derived class.
@@ -121,10 +121,10 @@ class simple_fsm {
    * machine only needs to return a state map using either state_map() or
    * state_map_ex() but not both.
    *
-   * @return An array of state_map_row_ex pointers with the array size
+   * @return An array of state_map_ex_row pointers with the array size
    *         max_states or NULL if the state machine uses the state_map().
    */
-  virtual const state_map_row_ex* state_map_ex() = 0;
+  virtual const state_map_ex_row* state_map_ex() { return NULL; }
 
   void current_state(uint8_t new_state) { current_state_ = new_state; }
 
@@ -134,7 +134,7 @@ class simple_fsm {
    */
   void state_engine(void);
   void state_engine(const state_map_row* const state_map);
-  void state_engine(const state_map_row_ex* const state_map_ex);
+  void state_engine(const state_map_ex_row* const state_map_ex);
 
   const uint8_t MAX_STATES_;  /// The maximum number of state machine states.
   uint8_t current_state_;     /// The current state machine state.
@@ -149,31 +149,36 @@ NS_END(state_machine, patterns, rcppsw);
 /*******************************************************************************
  * Macros
  ******************************************************************************/
+#define EVENT_DECLARE(event_name, event_data)                       \
+  void ST_##event_name(const event_data*);
+
+#define EVENT_DEFINE(sm, event_name, event_data)        \
+  void sm::EV_##event_name(const event_data* data)
 
 #define STATE_DECLARE(sm, state_name, event_data)                       \
   void ST_##state_name(const event_data*);                              \
-  state_action<sm, event_data, &sm::ST_##state_name> state_name;
+  rcppsw::patterns::state_machine::state_action<sm, event_data, &sm::ST_##state_name> state_name;
 
 #define STATE_DEFINE(sm, state_name, event_data)        \
   void sm::ST_##state_name(const event_data* data)
 
 #define GUARD_DECLARE(sm, guardName, event_data)                        \
   bool GD_##guardName(const event_data*);                               \
-  state_guard_condition<sm, event_data, &sm::GD_##guardName> guardName;
+  rcppsw::patterns::state_machine::state_guard_condition<sm, event_data, &sm::GD_##guardName> guardName;
 
 #define GUARD_DEFINE(sm, guardName, event_data)         \
   bool sm::GD_##guardName(const event_data* data)
 
 #define ENTRY_DECLARE(sm, entryName, event_data)                        \
   void EN_##entryName(const event_data*);                               \
-  state_entry_action<sm, event_data, &sm::EN_##entryName> entryName;
+  rcppsw::patterns::state_machine::state_entry_action<sm, event_data, &sm::EN_##entryName> entryName;
 
 #define ENTRY_DEFINE(sm, entryName, event_data)         \
   void sm::EN_##entryName(const event_data* data)
 
 #define EXIT_DECLARE(sm, exitName)                      \
   void EX_##exitName(void);                             \
-  state_exit_action<sm, &sm::EX_##exitName> exitName;
+  rcppsw::patterns::state_machine::state_exit_action<sm, &sm::EX_##exitName> exitName;
 
 #define EXIT_DEFINE(sm, exitName)               \
   void sm::EX_##exitName(void)
@@ -193,25 +198,19 @@ NS_END(state_machine, patterns, rcppsw);
     ExternalEvent(state);                       \
     return; }
 
-#define BEGIN_STATE_MAP                                                 \
+#define BEGIN_STATE_MAP(type)                                           \
   private:                                                              \
-  virtual const state_map_row_ex* state_map_ex() { return NULL; }      \
-  virtual const state_map_row* state_map() {                          \
-    static const state_map_row kSTATE_MAP[] = {
+  virtual const rcppsw::patterns::state_machine::JOIN(type, _row)* JOIN(type, )() { \
+    static const rcppsw::patterns::state_machine::JOIN(type, _row) kSTATE_MAP[] = {
 
 #define STATE_MAP_ENTRY(state_name)             \
       state_name,
 
-#define END_STATE_MAP                                                   \
-      };                                                                \
-    STATIC_ASSERT((sizeof(kSTATE_MAP)/sizeof(state_map_row)) == ST_MAX_STATES); \
+#define END_STATE_MAP(type)                                             \
+  };                                                                    \
+    STATIC_ASSERT((sizeof(kSTATE_MAP)/sizeof(JOIN(type, _row)),         \
+                   state_map_does_not_cover_all_states) == ST_MAX_STATES); \
     return &kSTATE_MAP[0]; }
-
-#define BEGIN_STATE_MAP_EX                                              \
-      private:                                                          \
-      virtual const state_map_row* state_map() { return NULL; }       \
-      virtual const state_map_row_ex* state_map_ex() {                 \
-        static const state_map_row_ex kSTATE_MAP[] = {
 
 #define STATE_MAP_ENTRY_EX(state_name)          \
           { state_name, 0, 0, 0 },
@@ -219,9 +218,4 @@ NS_END(state_machine, patterns, rcppsw);
 #define STATE_MAP_ENTRY_ALL_EX(state_name, guard_name, entry_name, exit_name) \
           { state_name, guard_name, entry_name, exit_name },
 
-#define END_STATE_MAP_EX                                                \
-          };                                                            \
-        STATIC_ASSERT((sizeof(kSTATE_MAP)/sizeof(state_map_row_ex)) == ST_MAX_STATES); \
-        return &kSTATE_MAP[0]; }
-
-#endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_STATE_MACHINE_HPP_ */
+#endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_BASE_FSM_HPP_ */

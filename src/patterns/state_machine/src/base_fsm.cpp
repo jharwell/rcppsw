@@ -1,5 +1,5 @@
 /**
- * @file state_machine.cpp
+ * @file base_fsm.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -22,7 +22,7 @@
  * Includes
  ******************************************************************************/
 #include <assert.h>
-#include "rcppsw/patterns/state_machine/state_machine.hpp"
+#include "rcppsw/patterns/state_machine/base_fsm.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -32,7 +32,7 @@ namespace fsm = rcppsw::patterns::state_machine;
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-fsm::simple_fsm::simple_fsm(uint8_t max_states, uint8_t initial_state) :
+fsm::base_fsm::base_fsm(uint8_t max_states, uint8_t initial_state) :
     MAX_STATES_(max_states),
     current_state_(initial_state),
     new_state_(false),
@@ -45,7 +45,7 @@ fsm::simple_fsm::simple_fsm(uint8_t max_states, uint8_t initial_state) :
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void fsm::simple_fsm::external_event(uint8_t new_state,
+void fsm::base_fsm::external_event(uint8_t new_state,
                                     const event_data* data) {
   /* if we are supposed to ignore this event */
   if (new_state == EVENT_IGNORED) {
@@ -61,7 +61,7 @@ void fsm::simple_fsm::external_event(uint8_t new_state,
   }
 }
 
-void fsm::simple_fsm::internal_event(uint8_t new_state,
+void fsm::base_fsm::internal_event(uint8_t new_state,
                                     const event_data* data) {
   if (data == NULL)
     data = new event_data();
@@ -72,12 +72,12 @@ void fsm::simple_fsm::internal_event(uint8_t new_state,
 }
 
 
-void fsm::simple_fsm::state_engine(void) {
+void fsm::base_fsm::state_engine(void) {
   const state_map_row* map = state_map();
   if (map != NULL) {
     state_engine(map);
   } else {
-    const state_map_row_ex* map_ex = state_map_ex();
+    const state_map_ex_row* map_ex = state_map_ex();
     if (map_ex != NULL) {
       state_engine(map_ex);
     }
@@ -87,7 +87,7 @@ void fsm::simple_fsm::state_engine(void) {
   }
 }
 
-void fsm::simple_fsm::state_engine(const state_map_row* const map) {
+void fsm::base_fsm::state_engine(const state_map_row* const map) {
   const event_data* data_tmp = NULL;
 
   /* While events are being generated keep executing states */
@@ -114,7 +114,7 @@ void fsm::simple_fsm::state_engine(const state_map_row* const map) {
   } /* while() */
 } /* state_engine() */
 
-void fsm::simple_fsm::state_engine(const state_map_row_ex* const map_ex) {
+void fsm::base_fsm::state_engine(const state_map_ex_row* const map_ex) {
   const event_data* data_tmp = NULL;
 
   /*
