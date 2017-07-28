@@ -1,12 +1,22 @@
-/*******************************************************************************
- * Name            : threadable.cpp
- * Project         : rcppsw
- * Module          : multithread
- * Description     : Threadable base class
- * Creation Date   : 11/16/15
- * Copyright       : Copyright 2015 John Harwell, All rights reserved
+/**
+ * @file threadable.cpp
  *
- ******************************************************************************/
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
 
 /*******************************************************************************
  * Includes
@@ -15,20 +25,13 @@
 #include "rcsw/multithread/threadm.h"
 
 /*******************************************************************************
- * Namespace Definitions
+ * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, multithread);
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-/**
- * threadable::start() - Start a thread
- *
- * RETURN:
- *     status_t - OK if successful, ERROR otherwise
- *
- **/
 status_t threadable::start(void* arg, int core) {
   /* start main thread */
   m_thread_run = true;

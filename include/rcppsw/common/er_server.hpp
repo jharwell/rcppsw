@@ -217,14 +217,20 @@ class er_server : public multithread::threadable {
   void msg_report(const er_msg_int& msg);
 
   /* data members */
-  char hostname_[32];
-  bool threaded_;  /// If true. the server is handling events synchronously.
-  std::vector<er_server_mod> modules_;  /// The currently active modules.
-  mt_queue<er_msg_int> queue_;  /// Thread safe producer-consumer queue.
-  std::string logfile_fname_;  /// File to log events to.
-  std::ofstream logfile_;  /// Logfile handle.
-  er_lvl::value loglvl_dflt_;  /// Default logging level for new modules
-  er_lvl::value dbglvl_dflt_;  // Default debug printing level for new modules.
+  char                              m_hostname[32];
+
+  /** If true. the server is handling events synchronously. */
+  bool                              m_threaded;
+  std::vector<er_server_mod>        m_modules;
+  multithread::mt_queue<er_msg_int> m_queue;
+  std::string                       m_logfile_fname;  /// File to log events to.
+  std::ofstream                     m_logfile;        /// Logfile handle.
+
+  /** Default log level for new modules */
+  er_lvl::value                     m_loglvl_dflt;
+
+  /** Default debug printing level for new modules. */
+  er_lvl::value                     m_dbglvl_dflt;
 
   /** Generator for universally unique identifiers for modules */
   boost::uuids::random_generator m_gen;
