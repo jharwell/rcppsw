@@ -43,12 +43,12 @@ template<typename T>
 class expression {
  public:
   explicit expression(size_t n_vars) :
-      vars_(n_vars) {}
+      m_vars(n_vars) {}
 
   /**
    * @brief Get the last value calculated
    */
-  T last(void) { return last_; }
+  T last(void) { return m_last; }
 
   /**
    * @brief Calculate the result of the expression over the variables.
@@ -66,18 +66,18 @@ class expression {
    * @return \ref status_t.
    */
   status_t update(const std::vector<T>& vars) {
-    FPC_CHECK(ERROR, vars.size() == vars_.size);
-    vars_ = vars;
-    last_ = calculate();
+    FPC_CHECK(ERROR, vars.size() == m_vars.size);
+    m_vars = vars;
+    m_last = calculate();
     return OK;
   }
 
  protected:
-  std::vector<T>& vars(void) const { return vars_; }
+  std::vector<T>& vars(void) const { return m_vars; }
 
  private:
-  T last_;
-  std::vector<T> vars_;
+               T m_last;
+  std::vector<T> m_vars;
 };
 
 NS_END(rcppsw, math);

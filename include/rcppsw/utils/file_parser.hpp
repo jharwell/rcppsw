@@ -31,11 +31,12 @@
 #include <iostream>
 #include <iterator>
 #include <algorithm>
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw);
 
 /*******************************************************************************
  * Class Definitions
@@ -47,7 +48,7 @@ namespace rcppsw {
  */
 template <typename T> class file_parser {
  public:
-  explicit file_parser(const std::string& fname): fname_(fname) {}
+  explicit file_parser(const std::string& fname): m_fname(fname) {}
 
   /**
    * @brief Parse a file into a vector of sets of tokens.
@@ -57,7 +58,7 @@ template <typename T> class file_parser {
   std::vector<T>* parse_file(void) {
     std::vector<T>* tokens_set = new std::vector<T>;
     std::string line;
-    std::ifstream infile(fname_);
+    std::ifstream infile(m_fname);
 
     while (std::getline(infile, line)) {
       tokens_set->push_back(parse_line(line));
@@ -86,9 +87,9 @@ template <typename T> class file_parser {
   } /* file_parser::parse_line() */
 
  private:
-  const std::string& fname_;
+  const std::string& m_fname;
 };
 
-} /* namespace rcppsw */
+NS_END(rcppsw);
 
 #endif /* INCLUDE_RCPPSW_UTILS_FILE_PARSER_HPP_ */

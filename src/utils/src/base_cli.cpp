@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Name            : cli_base.cpp
+ * Name            : base_cli.cpp
  * Project         : rcppsw
  * Module          : cli
  * Creation Date   : 06/14/15
@@ -10,7 +10,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/utils/cli_base.hpp"
+#include "rcppsw/utils/base_cli.hpp"
 #include <ctime>
 #include <iomanip>
 #include <iostream>
@@ -20,25 +20,25 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw);
 
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-cli_base::cli_base(const std::string &mnemonic)
-    : vm_(), desc_("Program options"), prog_name_(), output_dir_base_() {
+base_cli::base_cli(const std::string &mnemonic)
+    : m_vm(), m_desc("Program options"), m_prog_name(), m_base_output_dir() {
   time_t rawtime;
   char buffer[80];
   time(&rawtime);
   struct tm *timeinfo = localtime(&rawtime);
   strftime(buffer, 80, "%Y-%m-%d", timeinfo);
 
-  output_dir_base_ = "outputs/" + mnemonic + "/" + std::string(buffer) + "/";
-  std::string logfile = output_dir_base_ + std::to_string(getpid()) + "-log";
-  desc_.add_options()("help", "Produce this message");
+  m_base_output_dir = "outputs/" + mnemonic + "/" + std::string(buffer) + "/";
+  std::string logfile = m_base_output_dir + std::to_string(getpid()) + "-log";
+  m_desc.add_options()("help", "Produce this message");
 
   /* define auxillary command line options */
-  desc_.add_options()
+  m_desc.add_options()
 
       /* Add options for configuring logging */
       ("logfile", bpo::value<std::string>()->default_value(logfile),
@@ -49,36 +49,36 @@ cli_base::cli_base(const std::string &mnemonic)
           "loglvl", bpo::value<int>()->default_value(3),
           "Set the initial logging printing level. Higher numbers = more "
           "verbose logging. Range=[0, 5]. Default=3.");
-} /* cli_base::cli_base() */
+} /* base_cli::base_cli() */
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-status_t cli_base::parse(int argc, char **argv) {
-  prog_name_ = std::string(argv[0]);
+status_t base_cli::parse(int argc, char **argv) {
+  m_prog_name = std::string(argv[0]);
   try {
-    bpo::store(bpo::parse_command_line(argc, argv, desc_), vm_);
-    if (vm_.count("help")) {
-      std::cout << "\n" << desc_ << "\n";
+    bpo::store(bpo::parse_command_line(argc, argv, m_desc), m_vm);
+    if (m_vm.count("help")) {
+      std::cout << "\n" << m_desc << "\n";
       return ERROR;
     }
-    bpo::notify(vm_);
+    bpo::notify(m_vm);
   } catch (bpo::error &e) {
     std::cerr << "ERROR: " << e.what() << "\n\n";
-    std::cerr << desc_ << "\n";
+    std::cerr << m_desc << "\n";
     return ERROR;
   }
   return ERROR;
-} /* cli_base::parse() */
+} /* base_cli::parse() */
 
-void cli_base::print(void) {
-  std::cout << prog_name_ << " invoked with: ";
-  for (bpo::variables_map::iterator it = vm_.begin(); it != vm_.end(); ++it) {
+void base_cli::print(void) {
+  std::cout << m_prog_name << " invoked with: ";
+  for (bpo::variables_map::iterator it = m_vm.begin(); it != m_vm.end(); ++it) {
     std::cout << it->first;
     if ((static_cast<boost::any>(it->second.value())).empty()) {
       std::cout << "(empty)";
     }
-    if (vm_[it->first].defaulted() || it->second.defaulted()) {
+    if (m_vm[it->first].defaulted() || it->second.defaulted()) {
       std::cout << "(default)";
     }
     std::cout << "=";
@@ -99,20 +99,20 @@ void cli_base::print(void) {
     }
 
     if ((static_cast<boost::any>(it->second.value()).type()) == typeid(int)) {
-      std::cout << vm_[it->first].as<int>() << " ";
+      std::cout << m_vm[it->first].as<int>() << " ";
     } else if ((static_cast<boost::any>(it->second.value()).type()) ==
                typeid(bool)) {
-      std::cout << vm_[it->first].as<bool>() << " ";
+      std::cout << m_vm[it->first].as<bool>() << " ";
     } else if ((static_cast<boost::any>(it->second.value()).type()) ==
                typeid(double)) {
-      std::cout << vm_[it->first].as<double>() << " ";
+      std::cout << m_vm[it->first].as<double>() << " ";
     } else if ((static_cast<boost::any>(it->second.value()).type()) ==
                typeid(float)) {
-      std::cout << vm_[it->first].as<float>() << " ";
+      std::cout << m_vm[it->first].as<float>() << " ";
     } else if (is_char) {
-      std::cout << vm_[it->first].as<const char *>() << " ";
+      std::cout << m_vm[it->first].as<const char *>() << " ";
     } else if (is_str) {
-      std::string temp = vm_[it->first].as<std::string>();
+      std::string temp = m_vm[it->first].as<std::string>();
       if (temp.size()) {
         std::cout << temp << " ";
       } else {
@@ -122,7 +122,7 @@ void cli_base::print(void) {
     } else {  // Assumes that the only remainder is vector<string>
       try {
         std::vector<std::string> vect =
-            vm_[it->first].as<std::vector<std::string> >();
+            m_vm[it->first].as<std::vector<std::string> >();
         uint i = 0;
         for (std::vector<std::string>::iterator oit = vect.begin();
              oit != vect.end(); ++oit, ++i) {
@@ -137,6 +137,6 @@ void cli_base::print(void) {
     }
   } /* for() */
   std::cout << "\n";
-} /* cli_base::print() */
+} /* base_cli::print() */
 
-} /* namespace rcppsw */
+NS_END(rcppsw);

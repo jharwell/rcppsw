@@ -47,14 +47,8 @@ class ipc_queue {
   typedef bip::allocator<T, bip::managed_shared_memory::segment_manager>
       allocator_type;
 
- private:
-  bip::deque<T, allocator_type> queue_;
-  mutable bip::interprocess_mutex io_mutex_;
-  mutable bip::interprocess_condition wait_condition;
-
- public:
   explicit ipc_queue(allocator_type alloc)
-      : queue_(alloc), io_mutex_(), wait_condition() {}
+      : m_queue(alloc), m_io_mutex(), m_wait_condition() {}
 
   /**
    * @brief Push an element onto the queue, notifying at most 1 process waiting
@@ -63,9 +57,9 @@ class ipc_queue {
    * @param element The element to add.
    */
   void push(T element) {
-    bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
-    queue_.push_back(element);
-    wait_condition.notify_one();
+    bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
+    m_queue.push_back(element);
+    m_wait_condition.notify_one();
   }
   /**
    * @brief Determine if the queue is current empty or not. This function
@@ -76,8 +70,8 @@ class ipc_queue {
    * @return TRUE if the condition is met, FALSE otherwise.
    */
   bool is_empty() const {
-    bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
-    return queue_.empty();
+    bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
+    return m_queue.empty();
   }
 
   /**
@@ -86,10 +80,10 @@ class ipc_queue {
    * @return The front element.
    */
   T pop(void) {
-    bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
+    bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
 
-    T element = queue_.front();
-    queue_.pop_front();
+    T element = m_queue.front();
+    m_queue.pop_front();
 
     return element;
   }
@@ -102,14 +96,14 @@ class ipc_queue {
    * @return TRUE if the front element was removed, FALSE otherwise.
    */
   bool pop_try(T *const element) {
-    bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
+    bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
 
-    if (queue_.empty()) {
+    if (m_queue.empty()) {
       return false;
     }
 
-    *element = queue_.front();
-    queue_.pop_front();
+    *element = m_queue.front();
+    m_queue.pop_front();
 
     return true;
   }
@@ -121,14 +115,14 @@ class ipc_queue {
    * @param element To be filled with the front item in the queue.
    */
   void pop_wait(T *const element) {
-    bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
+    bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
 
-    while (queue_.empty()) {
-      wait_condition.wait(lock);
+    while (m_queue.empty()) {
+      m_wait_condition.wait(lock);
     } /* while() */
 
-    *element = queue_.front();
-    queue_.pop_front();
+    *element = m_queue.front();
+    m_queue.pop_front();
   }
 
   /**
@@ -141,15 +135,15 @@ class ipc_queue {
    * @return TRUE if an item was removed from the queue, FALSE otherwise.
    */
     bool pop_timed_wait(T * const element, int to_sec) {
-      bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
+      bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
     boost::system_time to =
         boost::get_system_time() + boost::posix_time::seconds(to_sec);
-    wait_condition.timed_wait(lock, to);
-    if (queue_.empty()) {
+    m_wait_condition.timed_wait(lock, to);
+    if (m_queue.empty()) {
       return false;
     }
-    *element = queue_.front();
-    queue_.pop_front();
+    *element = m_queue.front();
+    m_queue.pop_front();
     return true;
   } /* pop_timed_wait() */
 
@@ -157,8 +151,8 @@ class ipc_queue {
    * @brief Empty the queue.
    */
   void clear(void) {
-    bip::scoped_lock<bip::interprocess_mutex> lock(io_mutex_);
-    queue_.clear();
+    bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
+    m_queue.clear();
   }
 
   /**
@@ -170,8 +164,14 @@ class ipc_queue {
    * @return The current # elements in the queue.
    */
   size_t size() const {
-    return queue_.size();
+    return m_queue.size();
   }
+
+ private:
+  bip::deque<T, allocator_type>       m_queue;
+  mutable bip::interprocess_mutex     m_io_mutex;
+  mutable bip::interprocess_condition m_wait_condition;
+
 };
 
 NS_END(multiprocess, rcppsw);

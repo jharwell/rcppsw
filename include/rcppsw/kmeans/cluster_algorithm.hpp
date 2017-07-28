@@ -33,8 +33,8 @@
 #include <boost/shared_ptr.hpp>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/kmeans/cluster.hpp"
-#include "rcppsw/erf_client.hpp"
-#include "rcsw/utils/utils.h"
+#include "rcppsw/common/er_client.hpp"
+#include "rcsw/utils/time_utils.h"
 
 /*******************************************************************************
  * Namespaces
@@ -47,7 +47,7 @@ NS_START(rcppsw, kmeans);
 /**
  * @brief Base class implementation of k-means clustering algorithm.
  */
-template <typename T> class cluster_algorithm: public erf_client {
+template <typename T> class cluster_algorithm: public common::er_client {
  public:
   cluster_algorithm(std::size_t n_iterations,
                     std::size_t n_clusters,
@@ -56,95 +56,95 @@ template <typename T> class cluster_algorithm: public erf_client {
                     std::size_t n_points,
                     const std::string& clusters_fname,
                     const std::string& centroids_fname,
-                    er_server *const erf) :
-      erf_client(erf),
-      n_iterations_(n_iterations), n_clusters_(n_clusters),
-      n_threads_(n_threads),
-      dimension_(dimension), n_points_(n_points),
-      data_(NULL),
-      membership_(NULL),
-      clusters_fname_(clusters_fname),
-      centroids_fname_(centroids_fname),
-      clusters_(new std::vector<kmeans_cluster<T>*>()) {
-    erf_handle()->insmod(erf_id(), "KMEANS");
-    ER_REPORT(er_lvl::NOM, "n_points=%lu, n_clusters=%lu, n_iterations=%lu\n",
-              n_points_, n_clusters_, n_iterations_);
+                    common::er_server *const erf) :
+      common::er_client(erf),
+      m_n_iterations(n_iterations), m_n_clusters(n_clusters),
+      m_n_threads(n_threads),
+      m_dimension(dimension), m_n_points(n_points),
+      m_data(NULL),
+      m_membership(NULL),
+      m_clusters_fname(clusters_fname),
+      m_centroids_fname(centroids_fname),
+      m_clusters(new std::vector<kmeans_cluster<T>*>()) {
+    server_handle()->insmod(er_id(), "KMEANS");
+    ER_NOM("n_points=%lu, n_clusters=%lu, n_iterations=%lu\n",
+              m_n_points, m_n_clusters, m_n_iterations);
   }
 
   virtual ~cluster_algorithm(void) {
-    for (std::size_t i = 0; i < n_clusters_; ++i) {
-      delete(clusters_->at(i));
+    for (std::size_t i = 0; i < m_n_clusters; ++i) {
+      delete(m_clusters->at(i));
     } /* for(i..) */
-    free(membership_);
+    free(m_membership);
   }
 
   boost::shared_ptr<std::vector<kmeans_cluster<T>*>>& clusters(void) {
-    return clusters_;
+    return m_clusters;
   }
-  std::size_t n_clusters(void) { return n_clusters_; }
-  std::size_t n_threads(void) { return n_threads_; }
-  T* data(void) { return data_; }
-  void data(T* in) { data_ = in; }
-  std::size_t* membership(void) { return membership_; }
-  void membership(std::size_t* in) { membership_ = in; }
-  std::size_t n_points(void) { return n_points_; }
-  std::size_t dimension(void) { return dimension_; }
+  std::size_t n_clusters(void) { return m_n_clusters; }
+  std::size_t n_threads(void) { return m_n_threads; }
+  T* data(void) { return m_data; }
+  void data(T* in) { m_data = in; }
+  std::size_t* membership(void) { return m_membership; }
+  void membership(std::size_t* in) { m_membership = in; }
+  std::size_t n_points(void) { return m_n_points; }
+  std::size_t dimension(void) { return m_dimension; }
 
   virtual void report_clusters(void) {
-    std::ofstream ofile(clusters_fname_);
-    for (std::size_t j = 0; j < n_points_; ++j) {
-      ofile << membership_[j] << std::endl;
+    std::ofstream ofile(m_clusters_fname);
+    for (std::size_t j = 0; j < m_n_points; ++j) {
+      ofile << m_membership[j] << std::endl;
     } /* for(j..) */
   }
   virtual void report_centroids(void) {
-    std::ofstream ofile(centroids_fname_);
-    ofile << clusters_->size() << " " << dimension_ << std::endl;
-    std::for_each(clusters_->begin(), clusters_->end(),
+    std::ofstream ofile(m_centroids_fname);
+    ofile << m_clusters->size() << " " << m_dimension << std::endl;
+    std::for_each(m_clusters->begin(), m_clusters->end(),
                   [&](const kmeans_cluster<T>* c) {
                     c->report_center(ofile);
                   });
   }
   void cluster(void) {
-    ER_REPORT(er_lvl::NOM, "Begin clustering\n");
+    ER_NOM("Begin clustering\n");
     double end = 0.0;
-    double start = utils_monotonic_sec();
-    for (std::size_t i = 0; i < n_iterations_; ++i) {
-      double iter_start = utils_monotonic_sec();
+    double start = time_monotonic_sec();
+    for (std::size_t i = 0; i < m_n_iterations; ++i) {
+      double iter_start = time_monotonic_sec();
       if (cluster_iterate()) {
-        ER_REPORT(er_lvl::NOM, "Clusters report convergence: terminating\n");
-        end = utils_monotonic_sec();
+        ER_NOM("Clusters report convergence: terminating\n");
+        end = time_monotonic_sec();
         break;
       } else {
-        end = utils_monotonic_sec();
+        end = time_monotonic_sec();
       }
-      ER_REPORT(er_lvl::DIAG, "Iteration %lu time: %.8fms\n", i, (end - iter_start)*1000);
+      ER_DIAG("Iteration %lu time: %.8fms\n", i, (end - iter_start)*1000);
     } /* for(i..) */
 
-    ER_REPORT(er_lvl::NOM,"k-means clustering time: %0.04fs\n", end-start);
+    ER_NOM("k-means clustering time: %0.04fs\n", end-start);
   } /* cluster_algorithm::cluster() */
 
   virtual void initialize(std::vector<multidim_point<T>>* data_in)  {
     /* allocate contiguous memory */
-    std::size_t* data_block = (std::size_t*)malloc(sizeof(T) * n_points_ * dimension_
-                                                   + sizeof(std::size_t) * n_points_);
+    std::size_t* data_block = (std::size_t*)malloc(sizeof(T) * m_n_points * m_dimension
+                                                   + sizeof(std::size_t) * m_n_points);
     assert(NULL != data_block);
-    data_ = reinterpret_cast<T*>(data_block + n_points_);
-    membership_ = data_block;
+    m_data = reinterpret_cast<T*>(data_block + m_n_points);
+    m_membership = data_block;
 
     first_touch_allocation();
 
     /* Copy data into contiguous chunk */
-    for (std::size_t i = 0; i < n_points_; ++i) {
+    for (std::size_t i = 0; i < m_n_points; ++i) {
       std::copy(data_in->at(i).begin(), data_in->at(i).end(),
-                data_ + (i * dimension_));
+                m_data + (i * m_dimension));
     } /* for(i..) */
 
     /*
      * Initialize all clusters, including centers
      */
-    for (std::size_t i = 0; i < n_clusters_; ++i) {
-      clusters_->emplace_back(new kmeans_cluster<T>(i, dimension_, n_points_,
-                                                    data_, membership_));
+    for (std::size_t i = 0; i < m_n_clusters; ++i) {
+      m_clusters->emplace_back(new kmeans_cluster<T>(i, m_dimension, m_n_points,
+                                                    m_data, m_membership));
     } /* for(i..) */
   }
   virtual void first_touch_allocation(void) {}
@@ -156,21 +156,21 @@ template <typename T> class cluster_algorithm: public erf_client {
   cluster_algorithm(const cluster_algorithm& other) = delete;
   cluster_algorithm& operator=(const cluster_algorithm& other) = delete;
 
-  std::size_t n_iterations_;
-  std::size_t n_clusters_;
-  std::size_t n_threads_;
+  std::size_t m_n_iterations;
+  std::size_t m_n_clusters;
+  std::size_t m_n_threads;
 
   /*
    * Dimension is 1 more than the actual data dimension, to efficiently store
    * the cluster associated with each data point.
    */
-  std::size_t dimension_;
-  std::size_t n_points_;
-  T* data_;
-  std::size_t* membership_;
-  const std::string& clusters_fname_;
-  const std::string& centroids_fname_;
-  boost::shared_ptr<std::vector<kmeans_cluster<T>*>> clusters_;
+  std::size_t m_dimension;
+  std::size_t m_n_points;
+  T* m_data;
+  std::size_t* m_membership;
+  const std::string& m_clusters_fname;
+  const std::string& m_centroids_fname;
+  boost::shared_ptr<std::vector<kmeans_cluster<T>*>> m_clusters;
 };
 
 NS_END(kmeans, rcppsw);

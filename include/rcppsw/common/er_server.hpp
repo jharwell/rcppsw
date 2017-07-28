@@ -21,8 +21,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DBG_ER_SERVER_HPP_
-#define INCLUDE_RCPPSW_DBG_ER_SERVER_HPP_
+#ifndef INCLUDE_RCPPSW_COMMON_ER_SERVER_HPP_
+#define INCLUDE_RCPPSW_COMMON_ER_SERVER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -52,8 +52,8 @@ class er_server : public multithread::threadable {
   struct er_msg_int {
     explicit er_msg_int(const boost::uuids::uuid& id, const er_lvl::value& lvl,
                      const std::string& str)
-        : id_(id), lvl_(lvl), str_(str) {}
-    boost::uuids::uuid id_;
+        : m_id(id), lvl_(lvl), str_(str) {}
+    boost::uuids::uuid m_id;
     er_lvl::value lvl_;
     std::string str_;
   };
@@ -76,16 +76,16 @@ class er_server : public multithread::threadable {
             bool threaded = true);
 
   /* destructor */
-  ~er_server(void) { join(); logfile_.close(); }
+  ~er_server(void) { join(); m_logfile.close(); }
 
   /* member functions */
   /**
    * @brief Enable debugging for the ER server. For debugging purposes only.
    */
 
-  void self_dbg_en(void) {
-    insmod(er_id_, "ER Server");
-    mod_dbglvl(er_id_, er_lvl::NOM);
+  void self_common_en(void) {
+    insmod(m_er_id, "ER Server");
+    mod_dbglvl(m_er_id, er_lvl::NOM);
   }
   /**
    * @brief Install a new module into the list of active debugging/logging
@@ -154,7 +154,7 @@ class er_server : public multithread::threadable {
    *
    * @return The UUID.
    */
-  boost::uuids::uuid idgen(void) { return gen_(); }
+  boost::uuids::uuid idgen(void) { return m_gen(); }
 
   /**
    * @brief The entry point of the er_server thread.
@@ -170,31 +170,31 @@ class er_server : public multithread::threadable {
    *
    * @return The current logging level.
    */
-  er_lvl::value loglvl(void) { return loglvl_dflt_; }
+  er_lvl::value loglvl(void) { return m_loglvl_dflt; }
 
   /**
    * @brief Get the current debug printing level.
    *
    * @return The current debug printing level.
    */
-  er_lvl::value dbglvl(void) { return dbglvl_dflt_; }
+  er_lvl::value dbglvl(void) { return m_dbglvl_dflt; }
 
   /**
    * @brief Set the logging level.
    */
-  void loglvl(const er_lvl::value& lvl) { loglvl_dflt_ = lvl; }
+  void loglvl(const er_lvl::value& lvl) { m_loglvl_dflt = lvl; }
 
   /**
    * @brief Set the debug printing level.
    */
-  void dbglvl(const er_lvl::value& lvl) { dbglvl_dflt_ = lvl; }
+  void dbglvl(const er_lvl::value& lvl) { m_dbglvl_dflt = lvl; }
 
   /**
    * @brief Get the hostname the server is running on.
    *
    * @return The hostname.
    */
-  char* hostname(void) { return hostname_; }
+  char* hostname(void) { return m_hostname; }
 
   /**
    * @brief Report a message. Messages may or not actually be printed/logged,
@@ -208,8 +208,8 @@ class er_server : public multithread::threadable {
               const std::string& str) {
     er_msg_int msg(er_id, lvl, str);
     msg_report(msg);
-    if (threaded_) {
-      queue_.enqueue(msg);
+    if (m_threaded) {
+      m_queue.enqueue(msg);
     }
   }
 
@@ -220,17 +220,17 @@ class er_server : public multithread::threadable {
   char hostname_[32];
   bool threaded_;  /// If true. the server is handling events synchronously.
   std::vector<er_server_mod> modules_;  /// The currently active modules.
-  multithread::mt_queue<er_msg_int> queue_;  /// Thread safe producer-consumer queue.
+  mt_queue<er_msg_int> queue_;  /// Thread safe producer-consumer queue.
   std::string logfile_fname_;  /// File to log events to.
   std::ofstream logfile_;  /// Logfile handle.
   er_lvl::value loglvl_dflt_;  /// Default logging level for new modules
   er_lvl::value dbglvl_dflt_;  // Default debug printing level for new modules.
 
   /** Generator for universally unique identifiers for modules */
-  boost::uuids::random_generator gen_;
-  boost::uuids::uuid er_id_;
+  boost::uuids::random_generator m_gen;
+  boost::uuids::uuid m_er_id;
 };
 
 NS_END(common, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DBG_ER_SERVER_HPP_ */
+#endif /* INCLUDE_RCPPSW_COMMON_ER_SERVER_HPP_ */

@@ -31,12 +31,12 @@ NS_START(rcppsw, multithread);
  **/
 status_t threadable::start(void* arg, int core) {
   /* start main thread */
-  thread_run_ = true;
+  m_thread_run = true;
 
-  arg_ = arg;
-  CHECK(0 == pthread_create(&thread_, NULL, &threadable::entry_point, this));
+  m_arg = arg;
+  CHECK(0 == pthread_create(&m_thread, NULL, &threadable::entry_point, this));
   if (-1 != core) {
-    CHECK(OK == threadm_core_lock(thread_, core));
+    CHECK(OK == threadm_core_lock(m_thread, core));
   }
   return OK;
 

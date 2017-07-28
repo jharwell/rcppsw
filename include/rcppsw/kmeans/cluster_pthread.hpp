@@ -49,12 +49,12 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
                   std::size_t n_threads,
                   std::size_t dimension,
                   std::size_t n_points,
-                  const std::string& clusters_fname,
+                  const std::string& m_clustersfname,
                   const std::string& centroids_fname,
-                  er_server *const erf) :
+                  common::er_server *const erf) :
       cluster_algorithm<T>(n_iterations, n_clusters, n_threads, dimension,
-                           n_points, clusters_fname, centroids_fname, erf),
-      workers_() {
+                           n_points, m_clustersfname, centroids_fname, erf),
+    m_workers() {
     std::size_t data_chunk_size = n_points/n_threads;
     std::size_t centers_chunk_size = n_clusters/n_threads;
     std::size_t prev_centers_i = 0;
@@ -69,17 +69,17 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
       if (n_clusters % n_threads != 0 && i == n_threads -1) {
         centers_chunk_size = n_points - centers_chunk_start;
       }
-      ER_REPORT(er_lvl::NOM, "Worker %lu: %lu - %lu, %lu - %lu\n", i,
-                data_chunk_start,
-                data_chunk_start + data_chunk_size,
-                centers_chunk_start,
-                centers_chunk_start + centers_chunk_size);
+      ER_NOM("Worker %lu: %lu - %lu, %lu - %lu\n", i,
+             data_chunk_start,
+             data_chunk_start + data_chunk_size,
+             centers_chunk_start,
+             centers_chunk_start + centers_chunk_size);
 
-      workers_.emplace_back(pthread_worker<T>(i,
-                                              data_chunk_start, data_chunk_size,
-                                              centers_chunk_start, centers_chunk_size,
-                                              dimension,
-                                              cluster_algorithm<T>::clusters()));
+      m_workers.emplace_back(pthread_worker<T>(i,
+                                               data_chunk_start, data_chunk_size,
+                                               centers_chunk_start, centers_chunk_size,
+                                               dimension,
+                                               cluster_algorithm<T>::clusters()));
       data_chunk_start = prev_data_i + data_chunk_size;
       centers_chunk_start = prev_centers_i + centers_chunk_size;
       prev_centers_i += centers_chunk_size;
@@ -92,19 +92,19 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
    * @brief Perform first-touch memory/page allocation for all threads.
    */
   void first_touch_allocation(void) {
-  /*
-   * Perform first touch allocation for all threads
-   */
-  typename pthread_worker<T>::instruction_data instr = {
-    pthread_worker<T>::instruction::FIRST_TOUCH,
-    cluster_algorithm<T>::data(),
-    cluster_algorithm<T>::membership(),
-  };
+    /*
+     * Perform first touch allocation for all threads
+     */
+    typename pthread_worker<T>::instruction_data instr = {
+      pthread_worker<T>::instruction::FIRST_TOUCH,
+      cluster_algorithm<T>::data(),
+      cluster_algorithm<T>::membership(),
+    };
 
-  std::for_each(workers_.begin(), workers_.end(),
-                [&](pthread_worker<T>& w) { w.start(&instr); });
-  std::for_each(workers_.begin(), workers_.end(),
-                [&](pthread_worker<T>& w) { w.join(); });
+    std::for_each(m_workers.begin(), m_workers.end(),
+                  [&](pthread_worker<T>& w) { w.start(&instr); });
+    std::for_each(m_workers.begin(), m_workers.end(),
+                  [&](pthread_worker<T>& w) { w.join(); });
   }
 
   /**
@@ -123,12 +123,12 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
       cluster_algorithm<T>::membership()
     };
 
-    for (std::size_t i = 0; i < workers_.size(); ++i) {
-      workers_[i].start(&instr1);
+    for (std::size_t i = 0; i < m_workers.size(); ++i) {
+      m_workers[i].start(&instr1);
     } /* for(i..) */
 
-    for (std::size_t i = 0; i < workers_.size(); ++i) {
-      workers_[i].join();
+    for (std::size_t i = 0; i < m_workers.size(); ++i) {
+      m_workers[i].join();
     } /* for(i..) */
 
     /*
@@ -139,21 +139,21 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
       cluster_algorithm<T>::data(),
       cluster_algorithm<T>::membership(),
     };
-    for (std::size_t i = 0; i < workers_.size(); ++i) {
-      workers_[i].start(&instr2);
+    for (std::size_t i = 0; i < m_workers.size(); ++i) {
+      m_workers[i].start(&instr2);
     } /* for(i..) */
 
-    for (std::size_t i = 0; i < workers_.size(); ++i) {
-      workers_[i].join();
+    for (std::size_t i = 0; i < m_workers.size(); ++i) {
+      m_workers[i].join();
     } /* for(i..) */
 
     /* Finally, check for convergence */
     bool ret = true;
     for (std::size_t i = 0; i < cluster_algorithm<T>::n_clusters(); ++i) {
       if (cluster_algorithm<T>::clusters()->at(i)->convergence()) {
-        ER_REPORT(er_lvl::DIAG, "Cluster %lu reports convergence\n", i);
+        ER_DIAG( "Cluster %lu reports convergence\n", i);
       } else {
-        ER_REPORT(er_lvl::DIAG, "Cluster %lu reports no convergence\n", i);
+        ER_DIAG("Cluster %lu reports no convergence\n", i);
         ret = false;
       }
     } /* for(i..) */
@@ -161,7 +161,7 @@ template <typename T> class cluster_pthread : public cluster_algorithm<T> {
   } /* cluster_pthread::cluster_iterate() */
 
  private:
-  std::vector<pthread_worker<T>> workers_;
+  std::vector<pthread_worker<T>> m_workers;
 };
 
 NS_END(kmeans, rcppsw);

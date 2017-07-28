@@ -33,13 +33,13 @@ namespace fsm = rcppsw::patterns::state_machine;
  * Constructors/Destructor
  ******************************************************************************/
 fsm::base_fsm::base_fsm(uint8_t max_states, uint8_t initial_state) :
-    MAX_STATES_(max_states),
-    current_state_(initial_state),
-    new_state_(false),
-    event_generated_(false),
-    event_data_(NULL),
-    mutex_() {
-  assert(MAX_STATES_ < EVENT_IGNORED);
+    mc_max_states(max_states),
+    m_current_state(initial_state),
+    m_new_state(false),
+    m_event_generated(false),
+    m_event_data(NULL),
+    m_mutex() {
+  assert(mc_max_states < EVENT_IGNORED);
 }
 
 /*******************************************************************************
@@ -53,11 +53,11 @@ void fsm::base_fsm::external_event(uint8_t new_state,
       delete data;
     }
   }  else {
-    mutex_.lock();
+    m_mutex.lock();
     /* generate the event and execute the state engine */
     internal_event(new_state, data);
     state_engine();
-    mutex_.unlock();
+    m_mutex.unlock();
   }
 }
 
@@ -66,9 +66,9 @@ void fsm::base_fsm::internal_event(uint8_t new_state,
   if (data == NULL)
     data = new event_data();
 
-  event_data_ = data;
-  event_generated_ = true;
-  current_state_ = new_state;
+  m_event_data = data;
+  m_event_generated = true;
+  m_current_state = new_state;
 }
 
 
@@ -91,17 +91,17 @@ void fsm::base_fsm::state_engine(const state_map_row* const map) {
   const event_data* data_tmp = NULL;
 
   /* While events are being generated keep executing states */
-  while (event_generated_) {
+  while (m_event_generated) {
     /* verity new state is valid */
-    assert(new_state_ < MAX_STATES_);
+    assert(m_new_state < mc_max_states);
 
-    const state_base* state = map[new_state_].State;
-    data_tmp = event_data_;
-    event_data_ = NULL;
-    event_generated_ = FALSE;
+    const state_base* state = map[m_new_state].state;
+    data_tmp = m_event_data;
+    m_event_data = NULL;
+    m_event_generated = FALSE;
 
     /* ready to update to new state */
-    current_state(new_state_);
+    current_state(m_new_state);
 
     /* execute state action passing in event data */
     assert(state != NULL);
@@ -120,18 +120,18 @@ void fsm::base_fsm::state_engine(const state_map_ex_row* const map_ex) {
   /*
    * While events are being generated keep executing states.
    */
-  while (event_generated_) {
+  while (m_event_generated) {
     /* verify new state is valid */
-    assert(new_state_ < MAX_STATES_);
+    assert(m_new_state < mc_max_states);
 
-    const state_base* state = map_ex[new_state_].state;
-    const state_guard_base* guard = map_ex[new_state_].guard;
-    const state_entry_base* entry = map_ex[new_state_].entry;
-    const state_exit_base* exit = map_ex[current_state_].exit;
+    const state_base* state = map_ex[m_new_state].state;
+    const state_guard_base* guard = map_ex[m_new_state].guard;
+    const state_entry_base* entry = map_ex[m_new_state].entry;
+    const state_exit_base* exit = map_ex[m_current_state].exit;
 
-    data_tmp = event_data_;
-    event_data_ = NULL;
-    event_generated_ = FALSE;
+    data_tmp = m_event_data;
+    m_event_data = NULL;
+    m_event_generated = FALSE;
 
     /* execute guard condition */
     bool guard_res = true;
@@ -141,7 +141,7 @@ void fsm::base_fsm::state_engine(const state_map_ex_row* const map_ex) {
 
     if (guard_res == true) {
       /* transitioning to a new state? */
-      if (new_state_ != current_state_) {
+      if (m_new_state != m_current_state) {
         /* execute state exit action before switching to new state */
         if (NULL != exit) {
           exit->invoke_exit_action(this);
@@ -153,11 +153,11 @@ void fsm::base_fsm::state_engine(const state_map_ex_row* const map_ex) {
         }
 
         /* Ensure exit/entry actions didn't call interval_event() by accident */
-        assert(false == event_generated_);
+        assert(false == m_event_generated);
       }
 
       /* Now we're ready to switch to the new state */
-      current_state(new_state_);
+      current_state(m_new_state);
 
       /* execute the state action passing in event data */
       assert(NULL != state);

@@ -20,8 +20,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DBG_ER_SERVER_MOD_HPP_
-#define INCLUDE_RCPPSW_DBG_ER_SERVER_MOD_HPP_
+#ifndef INCLUDE_RCPPSW_COMMON_ER_SERVER_MOD_HPP_
+#define INCLUDE_RCPPSW_COMMON_ER_SERVER_MOD_HPP_
 
 /*******************************************************************************
  * Includes
@@ -86,15 +86,15 @@ class er_server_mod {
   void logmsg(const std::string& msg, const er_lvl::value& lvl,
               std::ofstream& file) const;
   bool operator==(const er_server_mod& rhs);
-  const boost::uuids::uuid& id(void) const {return id_; }
-  const std::string& name(void) const { return name_; }
+  const boost::uuids::uuid& id(void) const {return m_id; }
+  const std::string& name(void) const { return m_name; }
 
  private:
   /* data members */
-  boost::uuids::uuid id_;
-  std::string name_;
-  er_lvl::value loglvl_;
-  er_lvl::value dbglvl_;
+  boost::uuids::uuid m_id;
+  std::string        m_name;
+  er_lvl::value      m_loglvl;
+  er_lvl::value      m_dbglvl;
 };
 
 NS_END(common, rcppsw);
@@ -105,4 +105,4 @@ NS_END(common, rcppsw);
 std::ostream& operator<<(std::ostream& os,
                          const rcppsw::common::er_server_mod& mod);
 
-#endif /* INCLUDE_RCPPSW_DBG_ER_SERVER_MOD_HPP_ */
+#endif /* INCLUDE_RCPPSW_COMMON_ER_SERVER_MOD_HPP_ */

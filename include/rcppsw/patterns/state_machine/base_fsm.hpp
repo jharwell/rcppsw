@@ -44,7 +44,7 @@ NS_START(rcppsw, patterns, state_machine);
  * @brief A structure to hold a single row within the state map.
  */
 struct state_map_row {
-  const state_base* const State;
+  const state_base* const state;
 };
 
 /**
@@ -79,8 +79,8 @@ class base_fsm {
 
   virtual ~base_fsm() {}
 
-  uint8_t current_state() { return current_state_; }
-  uint8_t max_allowed_states() { return MAX_STATES_; }
+  uint8_t current_state() { return m_current_state; }
+  uint8_t max_allowed_states() { return mc_max_states; }
 
  protected:
   /**
@@ -126,7 +126,7 @@ class base_fsm {
    */
   virtual const state_map_ex_row* state_map_ex() { return NULL; }
 
-  void current_state(uint8_t new_state) { current_state_ = new_state; }
+  void current_state(uint8_t new_state) { m_current_state = new_state; }
 
   /*
    * @brief State machine engine that executes the external event and,
@@ -136,12 +136,12 @@ class base_fsm {
   void state_engine(const state_map_row* const state_map);
   void state_engine(const state_map_ex_row* const state_map_ex);
 
-  const uint8_t MAX_STATES_;  /// The maximum number of state machine states.
-  uint8_t current_state_;     /// The current state machine state.
-  uint8_t new_state_;         /// The new state (not transitioned to yet).
-  bool event_generated_;      /// Set to TRUE when an event is generated.
-  const event_data* event_data_;  /// The state event data pointer.
-  std::mutex mutex_;          /// Mutual exclusion lock for thread safety.
+  const uint8_t     mc_max_states;      /// The maximum # of fsm states.
+  uint8_t           m_current_state;    /// The current state machine state.
+  uint8_t           m_new_state;        /// The next state to transition to.
+  bool              m_event_generated;  /// Set to TRUE on event generation.
+  const event_data* m_event_data;       /// The state event data pointer.
+  std::mutex        m_mutex;            /// Lock for thread safety.
 };
 
 NS_END(state_machine, patterns, rcppsw);

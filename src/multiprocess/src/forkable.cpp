@@ -23,41 +23,42 @@
 #include <vector>
 #include "rcsw/multiprocess/procm.h"
 #include "rcsw/common/dbg.h"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw, multiprocess);
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 pid_t forkable::start(int core) {
-  proc_run_ = true;
-  pid_ = fork();
-  if (pid_ == 0) {
+  m_proc_run = true;
+  m_pid = fork();
+  if (m_pid == 0) {
     if (-1 != core) {
       procm_socket_lock(core);
     }
     entry_point(this);
   }
-  return pid_;
+  return m_pid;
 } /* forkable::start() */
 
 pid_t forkable::start(const std::string& new_wd, int core) {
-  proc_run_ = true;
-  pid_ = fork();
-  if (pid_ == 0) {
+  m_proc_run = true;
+  m_pid = fork();
+  if (m_pid == 0) {
     CHECK(0 == chdir(new_wd.c_str()));
     if (-1 != core) {
       procm_socket_lock(core);
     }
     entry_point(this);
   }
-  return pid_;
+  return m_pid;
 
 error:
   return -1;
 } /* forkable::start() */
 
-} /* namespace rcppsw */
+NS_END(multiprocess, rcppsw);

@@ -25,29 +25,29 @@ er_server_mod::er_server_mod(const boost::uuids::uuid& id,
                            const er_lvl::value& loglvl,
                            const er_lvl::value& dbglvl,
                            const std::string& name)
-    : id_(id), name_(name), loglvl_(loglvl), dbglvl_(dbglvl) {}
+    : m_id(id), m_name(name), m_loglvl(loglvl), m_dbglvl(dbglvl) {}
 
 er_server_mod::er_server_mod(const boost::uuids::uuid& id,
                              const std::string& name)
-    : id_(id),
-      name_(name),
-      loglvl_(er_lvl::NOM),
-      dbglvl_(er_lvl::NOM) {}
+    : m_id(id),
+      m_name(name),
+      m_loglvl(er_lvl::NOM),
+      m_dbglvl(er_lvl::NOM) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void er_server_mod::set_dbglvl(const er_lvl::value& lvl) {
-  dbglvl_ = lvl;
+  m_dbglvl = lvl;
 } /* er_server_mod::set_dbglvl() */
 
 void er_server_mod::set_loglvl(const er_lvl::value& lvl) {
-  loglvl_ = lvl;
+  m_loglvl = lvl;
 } /* er_server_mod::set_loglvl() */
 
 void er_server_mod::dbgmsg(const std::string& msg,
                           const er_lvl::value& lvl) const {
-  if (lvl <= dbglvl_) {
+  if (lvl <= m_dbglvl) {
     std::cout << msg;
     std::cout.flush();
   }
@@ -55,14 +55,14 @@ void er_server_mod::dbgmsg(const std::string& msg,
 
 void er_server_mod::logmsg(const std::string& msg, const er_lvl::value& lvl,
                           std::ofstream& file) const {
-  if (lvl <= loglvl_) {
+  if (lvl <= m_loglvl) {
     file << msg;
     file.flush();
   }
 } /* er_server_mod::logmsg() */
 
 bool er_server_mod::operator==(const er_server_mod& rhs) {
-  return (this->id_ == rhs.id_);
+  return (this->m_id == rhs.m_id);
 } /* operator==() */
 
 std::ostream& operator<<(std::ostream& os, const er_server_mod& mod) {
