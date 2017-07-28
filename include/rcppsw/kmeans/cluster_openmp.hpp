@@ -49,7 +49,7 @@ template <typename T> class cluster_openmp : public cluster_algorithm<T> {
                  std::size_t n_points,
                  const std::string& clusters_fname,
                  const std::string& centroids_fname,
-                 er_server *const erf) :
+                 common::er_server *const erf) :
       cluster_algorithm<T>(n_iterations, n_clusters, n_threads, dimension,
                            n_points, clusters_fname, centroids_fname, erf) {}
 

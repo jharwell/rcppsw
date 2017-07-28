@@ -10,15 +10,15 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/dbg/er_server.hpp"
+#include "rcppsw/common/er_server.hpp"
 #include <algorithm>
 #include <boost/filesystem.hpp>
-#include "rcppsw/dbg/er_client.hpp"
+#include "rcppsw/common/er_client.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw, common);
 
 /*******************************************************************************
  * Macros
@@ -29,9 +29,9 @@ namespace rcppsw {
     struct timespec _curr_time;                                          \
     clock_gettime(CLOCK_REALTIME, &_curr_time);                          \
     snprintf(_str, sizeof(_str), "[%s:%lu.%lu]:%s:%d:%s: " msg "\n",     \
-             hostname_, _curr_time.tv_sec, _curr_time.tv_nsec, __FILE__, \
+             m_hostname, _curr_time.tv_sec, _curr_time.tv_nsec, __FILE__, \
              __LINE__, __FUNCTION__, ##__VA_ARGS__);                     \
-    er_server::er_msg_int _msg(er_id_, lvl, std::string(_str));             \
+    er_server::er_msg_int _msg(m_er_id, lvl, std::string(_str));             \
     msg_report(_msg);                                                    \
   }
 
@@ -41,22 +41,22 @@ namespace rcppsw {
 er_server::er_server(const std::string& logfile_fname,
                      const er_lvl::value& dbglvl, const er_lvl::value& loglvl,
                      bool threaded)
-    : threaded_(threaded),
-      modules_(),
-      queue_(),
-      logfile_fname_(logfile_fname),
-      logfile_(),
-      loglvl_dflt_(loglvl),
-      dbglvl_dflt_(dbglvl),
-      gen_(),
-      er_id_(idgen()) {
+    : m_threaded(threaded),
+      m_modules(),
+      m_queue(),
+      m_logfile_fname(logfile_fname),
+      m_logfile(),
+      m_loglvl_dflt(loglvl),
+      m_dbglvl_dflt(dbglvl),
+      m_gen(),
+      m_er_id(idgen()) {
   /* get hostname */
-  gethostname(hostname_, 32);
+  gethostname(m_hostname, 32);
 
-  if (boost::filesystem::exists(logfile_fname_)) {
-    boost::filesystem::remove(logfile_fname_);
+  if (boost::filesystem::exists(m_logfile_fname)) {
+    boost::filesystem::remove(m_logfile_fname);
   }
-  logfile_.open(logfile_fname_.c_str());
+  m_logfile.open(m_logfile_fname.c_str());
 } /* er_server::er_server() */
 
 /*******************************************************************************
@@ -69,8 +69,8 @@ status_t er_server::insmod(const boost::uuids::uuid& mod_id,
   er_server_mod mod(mod_id, loglvl, dbglvl, mod_name);
 
   /* make sure module not already present */
-  CHECK(modules_.end() == std::find(modules_.begin(), modules_.end(), mod));
-  modules_.push_back(mod);
+  CHECK(m_modules.end() == std::find(m_modules.begin(), m_modules.end(), mod));
+  m_modules.push_back(mod);
   return OK;
 
 error:
@@ -81,16 +81,16 @@ error:
 
 status_t er_server::insmod(const boost::uuids::uuid& id,
                           const std::string& name) {
-  return insmod(id, loglvl_dflt_, dbglvl_dflt_, name);
+  return insmod(id, m_loglvl_dflt, m_dbglvl_dflt, name);
 } /* insmod() */
 
 void er_server::msg_report(const er_msg_int& msg) {
-  er_server_mod tmp(msg.id_, "tmp");
+  er_server_mod tmp(msg.m_id, "tmp");
   std::vector<er_server_mod>::const_iterator iter =
-      std::find(modules_.begin(), modules_.end(), tmp);
+      std::find(m_modules.begin(), m_modules.end(), tmp);
 
-  if (iter != modules_.end()) {
-    iter->logmsg(msg.str_, msg.lvl_, logfile_);
+  if (iter != m_modules.end()) {
+    iter->logmsg(msg.str_, msg.lvl_, m_logfile);
 
     /* If NDEBUG is defined, debug printing is disabled. */
 #ifndef NDEBUG
@@ -101,8 +101,8 @@ void er_server::msg_report(const er_msg_int& msg) {
 
 int er_server::flush(void) {
   int count = 0;
-  while (queue_.size() > 0) {
-    er_msg_int next = queue_.dequeue();
+  while (m_queue.size() > 0) {
+    er_msg_int next = m_queue.dequeue();
     er_server::msg_report(next);
     count++;
   } /* while() */
@@ -115,8 +115,8 @@ status_t er_server::mod_dbglvl(const boost::uuids::uuid& id,
 
   /* make sure module is already present */
   std::vector<er_server_mod>::iterator iter =
-      std::find(modules_.begin(), modules_.end(), mod);
-  CHECK(iter != modules_.end());
+      std::find(m_modules.begin(), m_modules.end(), mod);
+  CHECK(iter != m_modules.end());
   iter->set_dbglvl(lvl);
 
   REPORT_INTERNAL(er_lvl::VER, "Successfully updated dbglvl for module %s",
@@ -136,8 +136,8 @@ status_t er_server::mod_loglvl(const boost::uuids::uuid& id,
 
   /* make sure module is already present */
   std::vector<er_server_mod>::iterator iter =
-      std::find(modules_.begin(), modules_.end(), mod);
-  CHECK(iter != modules_.end());
+      std::find(m_modules.begin(), m_modules.end(), mod);
+  CHECK(iter != m_modules.end());
   iter->set_loglvl(lvl);
 
   REPORT_INTERNAL(er_lvl::VER, "Successfully updated loglvl for module %s",
@@ -154,18 +154,18 @@ error:
 void* er_server::thread_main(void* arg) {
   REPORT_INTERNAL(er_lvl::NOM, "Start");
   while (!terminated()) {
-    while (0 == queue_.size()) sleep(1);
-    er_msg_int msg = queue_.dequeue();
+    while (0 == m_queue.size()) sleep(1);
+    er_msg_int msg = m_queue.dequeue();
     msg_report(msg);
   } /* while() */
   REPORT_INTERNAL(er_lvl::NOM, "Exit");
 
   /* make sure all events remaining in queue are reported */
-  while (queue_.size()) {
-    er_msg_int msg = queue_.dequeue();
+  while (m_queue.size()) {
+    er_msg_int msg = m_queue.dequeue();
     msg_report(msg);
   } /* while() */
   return NULL;
 } /* er_server::thread_main() */
 
-} /* namespace rcppsw */
+NS_END(common, rcpppsw);

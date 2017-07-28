@@ -41,10 +41,9 @@ namespace rcppsw {
  ******************************************************************************/
 class forkable {
  public:
-  /* member functions */
-  forkable(void) : proc_run_(false), pid_(0) {}
+  forkable(void) : m_proc_run(false), m_pid(0) {}
   virtual ~forkable(void) {}
-  pid_t pid(void) { return pid_; }
+  pid_t pid(void) { return m_pid; }
 
   /**
    * @brief Start a process.
@@ -69,7 +68,7 @@ class forkable {
   /**
    * @brief Signal a process that it should terminate, from outside the process.
    */
-  virtual void term(void) { proc_run_ = false; }
+  virtual void term(void) { m_proc_run = false; }
 
   /**
    * @brief Entry point for the new process.
@@ -80,18 +79,16 @@ class forkable {
   /**
    * @brief Check if a process object has been told to terminate elsewhere.
    */
-  bool terminated(void) { return (false == proc_run_); }
+  bool terminated(void) { return (false == m_proc_run); }
 
  private:
-  /* data members */
-  bool proc_run_;
-  pid_t pid_;
-
-  /* non-member functions */
   static void entry_point(void* this_p) {
     forkable* pt = static_cast<forkable*>(this_p);
     pt->proc_main();
-  } /* entry_point() */
+  }
+
+  bool m_proc_run;
+  pid_t     m_pid;
 };
 
 } /* namespace rcppsw */

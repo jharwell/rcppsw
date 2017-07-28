@@ -27,19 +27,19 @@
 #include <pthread.h>
 #include <sys/types.h>
 #include <sys/syscall.h>
-#include "rcsw/common/common.h"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw, multithread);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 class threadable {
  public:
-  threadable(void) : thread_run_(false), thread_(), arg_(NULL) {}
+  threadable(void) : m_thread_run(false), m_thread(), m_arg(NULL) {}
   virtual ~threadable(void) {}
 
   /**
@@ -64,18 +64,18 @@ class threadable {
   /**
    * @brief Signal a thread that it should terminate, from outside the thread.
    */
-  virtual void term(void) { thread_run_ = false; }
+  virtual void term(void) { m_thread_run = false; }
 
   /**
    * @brief Join a thread (i.e. wait for it to finish)
    */
-  virtual void join(void) { pthread_join(thread_, NULL); }
+  virtual void join(void) { pthread_join(m_thread, NULL); }
 
  protected:
   /**
    * @brief Check if a thread object has been told to terminate elsewhere.
    */
-  bool terminated(void) { return (false == thread_run_); }
+  bool terminated(void) { return (false == m_thread_run); }
 
   /**
    * @brief Exit a thread from within the thread itself.
@@ -84,7 +84,7 @@ class threadable {
    * as it exits.
    */
   virtual void exit(void* ret = NULL) {
-    thread_run_ = false;
+    m_thread_run = false;
     if (!ret) {
       int ret2;
       pthread_exit(&ret2);
@@ -98,7 +98,7 @@ class threadable {
    *
    * @return The handle.
    */
-  pthread_t thread_handle(void) { return thread_; }
+  pthread_t thread_handle(void) { return m_thread; }
 
   /**
    * @brief Get the ID of the thread within the parent process.
@@ -107,28 +107,24 @@ class threadable {
    */
   int thread_id(void) { return syscall(__NR_gettid); }
 
-  threadable(const threadable&& other) : thread_run_(other.thread_run_),
-                                         thread_(other.thread_),
-                                         arg_(other.arg_) {}
+  threadable(const threadable&& other) : m_thread_run(other.m_thread_run),
+                                         m_thread(other.m_thread),
+                                         m_arg(other.m_arg) {}
 
  private:
   static void* entry_point(void* this_p) {
     threadable* pt = static_cast<threadable*>(this_p);
-    return pt->thread_main(pt->arg_);
+    return pt->thread_main(pt->m_arg);
   } /* entry_point() */
 
   const threadable& operator=(const threadable& rhs) = delete;
   threadable(const threadable& other) = delete;
 
-  bool thread_run_;
-  pthread_t thread_;
-  void *arg_;
+  bool      m_thread_run;
+  pthread_t m_thread;
+  void      *m_arg;
 };
 
-} /* namespace rcppsw */
-
-/*******************************************************************************
- * Operater Definitions
- ******************************************************************************/
+NS_END(multithread, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_MULTITHREAD_THREADABLE_HPP_ */

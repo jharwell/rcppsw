@@ -27,6 +27,12 @@
 #include <vector>
 #include <boost/thread.hpp>
 #include <boost/thread/locks.hpp>
+#include "rcppsw/common/common.hpp"
+
+/*******************************************************************************
+ * Namespaces
+ ******************************************************************************/
+NS_START(rcppsw, multithread);
 
 /*******************************************************************************
  * Class Definitions
@@ -39,30 +45,32 @@
 template <typename T>
 class mt_vector {
  public:
-  mt_vector(void) : v_(), mtx_() {}
+  mt_vector(void) : m_v(), m_mtx() {}
 
   /* type definitions */
   typedef typename std::vector<T>::const_iterator const_iterator;
   typename std::vector<T>::const_iterator begin(void) const {
-    return v_.begin();
+    return m_v.begin();
   }
-  typename std::vector<T>::const_iterator end(void) const { return v_.end(); }
+  typename std::vector<T>::const_iterator end(void) const { return m_v.end(); }
 
   // Add data to the queue and notify others
   void push_back(const T& data) {
     // Acquire lock on the queue
-    boost::unique_lock<boost::mutex> lock(mtx_);
+    boost::unique_lock<boost::mutex> lock(m_mtx);
 
-    v_.push_back(data);
+    m_v.push_back(data);
   }  // Lock is automatically released here
 
-  size_t size() const { return v_.size(); }
-  void clear(void) { v_.clear(); }
-  const T& operator[](std::size_t pos) const { return v_[pos]; }
+  size_t size() const { return m_v.size(); }
+  void clear(void) { m_v.clear(); }
+  const T& operator[](std::size_t pos) const { return m_v[pos]; }
 
  private:
-  std::vector<T> v_;
-  boost::mutex mtx_;
+  std::vector<T> m_v;
+  boost::mutex m_mtx;
 };
+
+NS_END(multithread, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_MULTITHREAD_MT_VECTOR_HPP_ */

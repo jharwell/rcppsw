@@ -28,30 +28,31 @@
 #include <pthread.h>
 #include <list>
 #include <limits>
+#include <vector>
 #include <boost/shared_ptr.hpp>
-#include "rcppsw/threadable.hpp"
+#include "rcppsw/common/common.hpp"
+#include "rcppsw/multithread/threadable.hpp"
 #include "rcppsw/kmeans/cluster.hpp"
 #include "rcsw/multithread/threadm.h"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
-namespace kmeans {
+NS_START(rcppsw, kmeans);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template <typename T> class pthread_worker: public threadable {
+template <typename T> class pthread_worker: public multithread::threadable {
  public:
   pthread_worker(std::size_t id, std::size_t points_start,
                  std::size_t points_size, std::size_t centers_start,
                  std::size_t centers_size, std::size_t dimension,
                  const boost::shared_ptr<std::vector<kmeans_cluster<T>*>>& clusters) :
-      threadable(), id_(id), points_start_(points_start),
-      points_size_(points_size), centers_start_(centers_start),
-      centers_size_(centers_size), dimension_(dimension),
-      clusters_(const_cast<boost::shared_ptr<std::vector<kmeans_cluster<T>*>>&>(clusters)) {
+      threadable(), m_id(id), m_points_start(points_start),
+      m_points_size(points_size), m_centers_start(centers_start),
+      m_centers_size(centers_size), m_dimension(dimension),
+      m_clusters(const_cast<boost::shared_ptr<std::vector<kmeans_cluster<T>*>>&>(clusters)) {
   }
 
   enum instruction {
@@ -67,52 +68,50 @@ template <typename T> class pthread_worker: public threadable {
 
 
   void* thread_main(void* arg) {
-    ER_REPORT(er_lvl::DIAG, "%lu: points %lu - %lu, centers %lu - %lu\n",id_,
-               points_start_, points_start_ + points_size_, centers_start_,
-               centers_start_ + centers_size_);
+    ER_REPORT("%lu: points %lu - %lu, centers %lu - %lu\n",m_id,
+               m_points_start, m_points_start + m_points_size, m_centers_start,
+               m_centers_start + m_centers_size);
     /*
      * Lock each new invocation to a core--don't want the OS moving threads
      * around.
      */
-    threadm_core_lock(thread_handle(), id_);
+    threadm_core_lock(thread_handle(), m_id);
     struct instruction_data* instr = (struct instruction_data*)arg;
 
     if (FIRST_TOUCH == instr->type) {
-      for (std::size_t i = points_start_; i < points_start_ + points_size_; ++i) {
-        for (std::size_t j = 0; j < dimension_; ++j) {
-          instr->data[i*dimension_+j] = 0;
+      for (std::size_t i = m_points_start; i < m_points_start + m_points_size; ++i) {
+        for (std::size_t j = 0; j < m_dimension; ++j) {
+          instr->data[i*m_dimension+j] = 0;
         } /* for(j..) */
         instr->membership[i] = -1;
       } /* for(i...) */
       return NULL;
     } else if (UPDATE_CENTER == instr->type) {
-
       /*
        * Each thread is responsible for update the centers of clusters that fall
        * within a range based on the id of the thread
        */
-      for (std::size_t i = centers_start_; i < centers_start_ + centers_size_; ++i) {
-        clusters_->at(i)->update_center();
+      for (std::size_t i = m_centers_start; i < m_centers_start + m_centers_size; ++i) {
+        m_clusters->at(i)->update_center();
       } /* for(i..) */
       return NULL;
     } else {
-
     /*
      * For each point in the data that is assigned to the current thread,
      * calculate its Euclidean distance from the center of each to the point,
      * and assign the point to the closest cluster.
      */
-      for (std::size_t i = points_start_; i < points_start_ + points_size_; ++i) {
+      for (std::size_t i = m_points_start; i < m_points_start + m_points_size; ++i) {
       int closest = -1;
       double min_dist = std::numeric_limits<float>::max();
-      for (std::size_t j = 0; j < clusters_->size(); ++j) {
-        double dist = clusters_->at(j)->dist_to_center(instr->data + i * dimension_);
+      for (std::size_t j = 0; j < m_clusters->size(); ++j) {
+        double dist = m_clusters->at(j)->dist_to_center(instr->data + i * m_dimension);
         if (dist < min_dist) {
           min_dist = dist;
           closest = j;
         }
       } /* for(j..) */
-      clusters_->at(closest)->add_point(i);
+      m_clusters->at(closest)->add_point(i);
     } /* for(i..) */
 
     return NULL;
@@ -120,27 +119,26 @@ template <typename T> class pthread_worker: public threadable {
   } /* kmeans_pthread_worker::thread_main() */
 
   pthread_worker(const pthread_worker& other) : threadable(),
-                                                id_(other.id_),
-                                                points_start_(other.points_start_),
-                                                points_size_(other.points_size_),
-                                                centers_start_(other.centers_start_),
-                                                centers_size_(other.centers_size_),
-                                                dimension_(other.dimension_),
-                                                clusters_(other.clusters_) {}
+                                                m_id(other.m_id),
+                                                m_points_start(other.m_points_start),
+                                                m_points_size(other.m_points_size),
+                                                m_centers_start(other.m_centers_start),
+                                                m_centers_size(other.m_centers_size),
+                                                m_dimension(other.m_dimension),
+                                                m_clusters(other.m_clusters) {}
 
  private:
   pthread_worker& operator=(pthread_worker&) = delete;
 
-  std::size_t id_;
-  std::size_t points_start_;
-  std::size_t points_size_;
-  std::size_t centers_start_;
-  std::size_t centers_size_;
-  std::size_t dimension_;
-  boost::shared_ptr<std::vector<kmeans_cluster<T>*>> clusters_;
+  std::size_t m_id;
+  std::size_t m_points_start;
+  std::size_t m_points_size;
+  std::size_t m_centers_start;
+  std::size_t m_centers_size;
+  std::size_t m_dimension;
+  boost::shared_ptr<std::vector<kmeans_cluster<T>*>> m_clusters;
 };
 
-} /* namespace kmeans */
-} /* namespace rcppsw */
+NS_END(kmeans, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_KMEANS_PTHREAD_WORKER_HPP_ */

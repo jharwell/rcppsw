@@ -1,5 +1,5 @@
 /**
- * @file cli_base.hpp
+ * @file base_cli.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,29 +18,29 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_UTILS_CLI_BASE_HPP_
-#define INCLUDE_RCPPSW_UTILS_CLI_BASE_HPP_
+#ifndef INCLUDE_RCPPSW_UTILS_BASE_CLI_HPP_
+#define INCLUDE_RCPPSW_UTILS_BASE_CLI_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <string>
 #include <boost/program_options.hpp>
-#include "rcsw/common/common.h"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 namespace bpo = boost::program_options;
-namespace rcppsw {
+NS_START(rcppsw);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class cli_base {
+class base_cli {
  public:
-  explicit cli_base(const std::string& mnemonic = "");
-  virtual ~cli_base() {}
+  explicit base_cli(const std::string& mnemonic = "");
+  virtual ~base_cli() {}
 
   /**
    * @brief Parse command line options.
@@ -70,29 +70,29 @@ class cli_base {
    *
    * @return The variables map handle.
    */
-  const bpo::variables_map& vm(void) { return vm_; }
+  const bpo::variables_map& vm(void) { return m_vm; }
 
   /**
    * @brief Get a handle on the options description.
    *
    * @return The variables map handle.
    */
-  bpo::options_description* desc(void) { return &desc_; }
+  bpo::options_description* desc(void) { return &m_desc; }
 
   /**
    * @brief Get the program name.
    *
    * @return The program name.
    */
-  const std::string& prog_name(void) { return prog_name_; }
+  const std::string& prog_name(void) { return m_prog_name; }
 
  private:
-  bpo::variables_map vm_;
-  bpo::options_description desc_;
-  std::string prog_name_;
-  std::string output_dir_base_;  /// The root directory for program outputs.
+  bpo::variables_map       m_vm;
+  bpo::options_description m_desc;
+  std::string              m_prog_name;
+  std::string              m_base_output_dir;  /// Root dir for program outputs.
 };
 
-} /* namespace rcppsw */
+NS_END(rcppsw);
 
-#endif /* INCLUDE_RCPPSW_UTILS_CLI_BASE_HPP_ */
+#endif /* INCLUDE_RCPPSW_UTILS_BASE_CLI_HPP_ */

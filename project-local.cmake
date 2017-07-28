@@ -17,7 +17,7 @@ include_directories("$ENV{rcsw}/include")
 ################################################################################
 # Submodules                                                                   #
 ################################################################################
-add_subdirectory(src/dbg)
+add_subdirectory(src/common)
 add_subdirectory(src/multithread)
 add_subdirectory(src/utils)
 if (WITH_MPI)
@@ -30,7 +30,7 @@ endif()
 get_filename_component(target ${CMAKE_CURRENT_LIST_DIR} NAME)
 
 add_library(${target} SHARED
-  $<TARGET_OBJECTS:dbg>
+  $<TARGET_OBJECTS:common>
   $<TARGET_OBJECTS:multithread>
   $<TARGET_OBJECTS:utils>
   )
