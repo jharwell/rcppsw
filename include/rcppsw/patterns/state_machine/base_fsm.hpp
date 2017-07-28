@@ -150,31 +150,31 @@ NS_END(state_machine, patterns, rcppsw);
  * Macros
  ******************************************************************************/
 #define EVENT_DECLARE(event_name, event_data)                       \
-  void ST_##event_name(const event_data*);
+  void ST_##event_name(__unused const event_data*);
 
 #define EVENT_DEFINE(sm, event_name, event_data)        \
-  void sm::EV_##event_name(const event_data* data)
+  void sm::EV_##event_name(__unused const event_data* data)
 
 #define STATE_DECLARE(sm, state_name, event_data)                       \
-  void ST_##state_name(const event_data*);                              \
+  void ST_##state_name(__unused const event_data*);                              \
   rcppsw::patterns::state_machine::state_action<sm, event_data, &sm::ST_##state_name> state_name;
 
 #define STATE_DEFINE(sm, state_name, event_data)        \
-  void sm::ST_##state_name(const event_data* data)
+  void sm::ST_##state_name(__unused const event_data* data)
 
 #define GUARD_DECLARE(sm, guardName, event_data)                        \
-  bool GD_##guardName(const event_data*);                               \
+  bool GD_##guardName(__unused const event_data*);                               \
   rcppsw::patterns::state_machine::state_guard_condition<sm, event_data, &sm::GD_##guardName> guardName;
 
 #define GUARD_DEFINE(sm, guardName, event_data)         \
-  bool sm::GD_##guardName(const event_data* data)
+  bool sm::GD_##guardName(__unused const event_data* data)
 
 #define ENTRY_DECLARE(sm, entryName, event_data)                        \
-  void EN_##entryName(const event_data*);                               \
+  void EN_##entryName(__unused const event_data*);                               \
   rcppsw::patterns::state_machine::state_entry_action<sm, event_data, &sm::EN_##entryName> entryName;
 
 #define ENTRY_DEFINE(sm, entryName, event_data)         \
-  void sm::EN_##entryName(const event_data* data)
+  void sm::EN_##entryName(__unused const event_data* data)
 
 #define EXIT_DECLARE(sm, exitName)                      \
   void EX_##exitName(void);                             \

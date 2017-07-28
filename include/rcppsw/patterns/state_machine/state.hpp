@@ -24,6 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <assert.h>
 #include "rcppsw/patterns/state_machine/event.hpp"
 #include "rcppsw/common/common.hpp"
 
@@ -87,7 +88,7 @@ class state_action : public state_base {
      * InternalEvent(ST_MY_STATE_FUNCTION, new Otherevent_data());
      */
     const Data* derived_data = dynamic_cast<const Data*>(data);
-    FPC_ASSERT(nullptr != derived_data);
+    assert(nullptr != derived_data);
 
     // Call the state function
     (derived_fsm->*Func)(derived_data);
@@ -98,8 +99,8 @@ class state_action : public state_base {
  * @brief Abstract guard base class that all guards classes inherit from.
  */
 class state_guard_base {
-  virtual ~state_guard_base() {}
  public:
+  virtual ~state_guard_base() {}
   /**
    * @brief Called by the state machine engine to execute a guard condition action. If guard
    * condition evaluates to TRUE the state action is executed. If FALSE, no state transition
@@ -129,7 +130,7 @@ class state_guard_condition : public state_guard_base {
                                       const event_data* data) const {
     SM* derived_fsm = static_cast<SM*>(sm);
     const Data* derived_data = dynamic_cast<const Data*>(data);
-    FPC_ASSERT(nullptr != derived_data);
+    assert(nullptr != derived_data);
     return (derived_fsm->*Func)(derived_data);
   }
 };
@@ -138,8 +139,9 @@ class state_guard_condition : public state_guard_base {
  * @brief Abstract entry base class that all entry classes inherit from.
  */
 class state_entry_base {
-  virtual ~state_entry_base() {}
  public:
+  virtual ~state_entry_base() {}
+
   /**
    * @brief Called by the state machine engine to execute a state entry
    * action (when entering a state).
@@ -161,11 +163,12 @@ class state_entry_base {
 template <class SM, class Data, void (SM::*Func)(const Data*)>
 class state_entry_action : public state_entry_base {
  public:
+  virtual ~state_entry_action(void) {}
   virtual void invoke_entry_action(base_fsm* sm,
                                    const event_data* data) const {
     SM* derived_fsm = static_cast<SM*>(sm);
     const Data* derived_data = dynamic_cast<const Data*>(data);
-    FPC_ASSERT(derived_data);
+    assert(derived_data);
 
     // Call the entry function
     (derived_fsm->*Func)(derived_data);
@@ -176,8 +179,8 @@ class state_entry_action : public state_entry_base {
  * @brief Abstract exit base class that all exit classes inherit from.
  */
 class state_exit_base {
-  virtual ~state_exit_base() {}
  public:
+  virtual ~state_exit_base() {}
   /**
    * @brief Called by the state machine engine to execute a state exit action. Called when
    * leaving a state.
@@ -196,11 +199,11 @@ class state_exit_base {
 template <class SM, void (SM::*Func)(void)>
 class state_exit_action : public state_exit_base {
  public:
+  virtual ~state_exit_action() {}
   virtual void invoke_exit_action(base_fsm* sm) const {
     SM* derivedSM = static_cast<SM*>(sm);
     (derivedSM->*Func)();
   }
-  virtual ~state_exit_action() {}
 };
 
 NS_END(state_machine, patterns, rcppsw);
