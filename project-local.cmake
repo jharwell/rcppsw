@@ -38,10 +38,6 @@ add_library(${target} $<TARGET_OBJECTS:common>
   $<TARGET_OBJECTS:utils>
   $<TARGET_OBJECTS:state_machine>)
 
-if (${${target}_ROOT_SRC})
-  add_library(${target} SHARED ${${target}_ROOT_SRC})
-endif()
-
 foreach(d ${${target}_SUBDIRS})
   add_subdirectory(${d})
 endforeach()
