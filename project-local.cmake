@@ -1,44 +1,49 @@
 ################################################################################
 # External Projects                                                            #
 ################################################################################
-ExternalProject_Add(rcsw
+ExternalProject_Add(project_rcsw
   SOURCE_DIR "$ENV{rcsw}"
   BINARY_DIR "$ENV{rcsw}/build"
   STEP_TARGETS build
   EXCLUDE_FROM_ALL TRUE
 )
-
+ExternalProject_Get_Property(project_rcsw binary_dir)
+ExternalProject_Get_Property(project_rcsw source_dir)
+add_library(rcsw SHARED IMPORTED)
+set_property(TARGET rcsw PROPERTY IMPORTED_LOCATION ${binary_dir}/lib/librcsw.so)
 
 ################################################################################
 # Includes                                                                     #
 ################################################################################
-include_directories("$ENV{rcsw}/include")
+include_directories(${source_dir}/include)
 
 ################################################################################
 # Submodules                                                                   #
 ################################################################################
-add_subdirectory(src/common)
-add_subdirectory(src/multithread)
-add_subdirectory(src/utils)
-add_subdirectory(src/patterns/state_machine)
+get_filename_component(target ${CMAKE_CURRENT_LIST_DIR} NAME)
+
+list(APPEND ${target}_SUBDIRS src/common)
+list(APPEND ${target}_SUBDIRS src/multithread)
+list(APPEND ${target}_SUBDIRS src/utils)
+list(APPEND ${target}_SUBDIRS src/patterns/state_machine)
 if (WITH_MPI)
-  add_subdirectory(src/multiprocess)
+  list(APPEND ${target}_SUBDIRS src/multiprocess)
 endif()
 
 ################################################################################
 # Libraries                                                                    #
 ################################################################################
-get_filename_component(target ${CMAKE_CURRENT_LIST_DIR} NAME)
-
-add_library(${target} SHARED
-  $<TARGET_OBJECTS:common>
+add_library(${target} $<TARGET_OBJECTS:common>
   $<TARGET_OBJECTS:multithread>
   $<TARGET_OBJECTS:utils>
-  )
+  $<TARGET_OBJECTS:state_machine>)
 
-if(WITH_MPI)
-add_library(${target} SHARED
-  $<TARGET_OBJECTS:multiprocess>)
+if (${${target}_ROOT_SRC})
+  add_library(${target} SHARED ${${target}_ROOT_SRC})
 endif()
 
-add_dependencies(${target} rcsw-build)
+foreach(d ${${target}_SUBDIRS})
+  add_subdirectory(${d})
+endforeach()
+
+target_link_libraries(${target} rcsw-build)

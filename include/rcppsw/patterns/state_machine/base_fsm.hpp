@@ -136,6 +136,9 @@ class base_fsm {
   void state_engine(const state_map_row* const state_map);
   void state_engine(const state_map_ex_row* const state_map_ex);
 
+  base_fsm(const base_fsm& fsm) = delete;
+  base_fsm& operator=(const base_fsm& fsm) = delete;
+
   const uint8_t     mc_max_states;      /// The maximum # of fsm states.
   uint8_t           m_current_state;    /// The current state machine state.
   uint8_t           m_new_state;        /// The next state to transition to.

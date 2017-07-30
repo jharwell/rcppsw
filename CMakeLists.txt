@@ -1,1 +1,1 @@
-/home/jharwell/devel/cmake/meta-project.cmake
+/home/jharwell/devel/cmake/project.cmake
