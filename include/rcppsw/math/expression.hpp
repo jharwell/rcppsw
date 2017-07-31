@@ -42,42 +42,18 @@ NS_START(rcppsw, math);
 template<typename T>
 class expression {
  public:
-  explicit expression(size_t n_vars) :
-      m_vars(n_vars) {}
+  /**
+   * @brief Get the last value calculated
+   */
+  T last_res(void) const { return m_last; }
 
   /**
    * @brief Get the last value calculated
    */
-  T last(void) { return m_last; }
-
-  /**
-   * @brief Calculate the result of the expression over the variables.
-   *
-   * @return The new result.
-   */
-  virtual T calculate(void) = 0;
-
-  /**
-   * @brief Update the variable values in the expression and calculate the new
-   * value over the updated variables.
-   *
-   * @param vars The new variables.
-   *
-   * @return \ref status_t.
-   */
-  status_t update(const std::vector<T>& vars) {
-    FPC_CHECK(ERROR, vars.size() == m_vars.size);
-    m_vars = vars;
-    m_last = calculate();
-    return OK;
-  }
-
- protected:
-  std::vector<T>& vars(void) const { return m_vars; }
+  void set_res(T val) const { m_last = val; }
 
  private:
                T m_last;
-  std::vector<T> m_vars;
 };
 
 NS_END(rcppsw, math);
