@@ -45,12 +45,12 @@ class expression {
   /**
    * @brief Get the last value calculated
    */
-  T last_res(void) const { return m_last; }
+  T last_result(void) const { return m_last; }
 
   /**
-   * @brief Get the last value calculated
+   * @brief Calculate a new value.
    */
-  void set_res(T val) const { m_last = val; }
+  T set_result(T val) { m_last = val; return m_last; }
 
  private:
                T m_last;
