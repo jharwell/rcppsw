@@ -40,7 +40,7 @@
  */
 #ifndef NDEBUG
 /* ---------- Explicit debug level statements (use these) ---------- */
-#define ER_ERROR(...) ER_REPORT(rcppsw::common::er_lvl::ERROR, __VA_ARGS__)
+#define ER_ERR(...) ER_REPORT(rcppsw::common::er_lvl::ERROR, __VA_ARGS__)
 #define ER_WARN(...) ER_REPORT(rcppsw::common::er_lvl::WARN, __VA_ARGS__)
 #define ER_NOM(...) ER_REPORT(rcppsw::common::er_lvl::NOM, __VA_ARGS__)
 #define ER_DIAG(...) ER_REPORT(rcppsw::common::er_lvl::DIAG, __VA_ARGS__)
@@ -59,7 +59,7 @@
 
 #else
 #define ER_REPORT(lvl, msg, ...)
-#define ER_ERROR(...)
+#define ER_ERR(...)
 #define ER_WARN(...)
 #define ER_NOM(...)
 #define ER_DIAG(...)
@@ -140,8 +140,9 @@ class er_client {
    * debugging/logging statements.
    * @return OK if successful, ERROR otherwise.
    */
-  status_t insmod(const er_lvl::value& loglvl, const er_lvl::value& dbglvl,
-                  const std::string& mod_name) {
+  status_t insmod(const std::string& mod_name,
+                  const er_lvl::value& loglvl = er_lvl::NOM,
+                  const er_lvl::value& dbglvl = er_lvl::NOM) {
     return m_server_handle->insmod(m_er_id, loglvl, dbglvl, mod_name); }
 
   /**
@@ -162,7 +163,7 @@ class er_client {
    *
    * @return A reference to the server handle.
    */
-  er_server * server_handle(void) { return m_server_handle; }
+  er_server* server_handle(void) { return m_server_handle.get(); }
 
   /**
    * @brief Get a reference to the UUID for the module. Should not be called
@@ -175,7 +176,7 @@ class er_client {
   virtual ~er_client(void) {}
 
  private:
-  er_server* const m_server_handle;
+  std::shared_ptr<er_server> m_server_handle;
   boost::uuids::uuid m_er_id;
   er_client* operator=(const er_client&) = delete;
   er_client(const er_client& other) = delete;

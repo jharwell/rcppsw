@@ -31,6 +31,7 @@
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/patterns/state_machine/event.hpp"
 #include "rcppsw/patterns/state_machine/state.hpp"
+#include "rcppsw/common/er_client.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -64,18 +65,19 @@ struct state_map_ex_row {
  * @brief base_fsm implements a software-based state machine.
  *
  */
-class base_fsm {
+class base_fsm: public common::er_client {
  public:
   enum {
     EVENT_IGNORED = 0xFE,
-    CANNOT_HAPPEN
+    CANNOT_HAPPEN = 0xFF
   };
 
   /**
    * @param max_states The maximum number of state machine states.
    * @param initial_state Initial state machine state.
    */
-  explicit base_fsm(uint8_t max_states, uint8_t initial_state = 0);
+  explicit base_fsm(common::er_server* const server, uint8_t max_states,
+                    uint8_t initial_state = 0);
 
   virtual ~base_fsm() {}
 
@@ -90,7 +92,7 @@ class base_fsm {
    * @param new_state The state machine state to transition to.
    * @param data The event data sent to the state.
    */
-  void external_event(uint8_t new_state, const event_data* data = NULL);
+  void external_event(uint8_t new_state, std::unique_ptr<event_data> &data);
 
   /**
    * @brief Generates an internal event. These events are generated while executing
@@ -98,7 +100,13 @@ class base_fsm {
    * @param new_state The state machine state to transition to.
    * @param data The event data sent to the state.
    */
-  void internal_event(uint8_t new_state, const event_data* data = NULL);
+  void internal_event(uint8_t new_state, std::unique_ptr<event_data>& data);
+
+  /*
+   * @brief State machine engine that executes the external event and,
+   * optionally, all internal events generated during state execution.
+   */
+  void state_engine(void);
 
  private:
   /**
@@ -128,11 +136,6 @@ class base_fsm {
 
   void current_state(uint8_t new_state) { m_current_state = new_state; }
 
-  /*
-   * @brief State machine engine that executes the external event and,
-   * optionally, all internal events generated during state execution.
-   */
-  void state_engine(void);
   void state_engine(const state_map_row* const state_map);
   void state_engine(const state_map_ex_row* const state_map_ex);
 
@@ -143,7 +146,7 @@ class base_fsm {
   uint8_t           m_current_state;    /// The current state machine state.
   uint8_t           m_new_state;        /// The next state to transition to.
   bool              m_event_generated;  /// Set to TRUE on event generation.
-  const event_data* m_event_data;       /// The state event data pointer.
+  std::unique_ptr<event_data> m_event_data;  /// The state event data pointer.
   std::mutex        m_mutex;            /// Lock for thread safety.
 };
 
@@ -159,29 +162,36 @@ NS_END(state_machine, patterns, rcppsw);
   void sm::EV_##event_name(__unused const event_data* data)
 
 #define STATE_DECLARE(sm, state_name, event_data)                       \
-  void ST_##state_name(__unused const event_data*);                              \
-  rcppsw::patterns::state_machine::state_action<sm, event_data, &sm::ST_##state_name> state_name;
+  void ST_##state_name(__unused const event_data*);              \
+  rcppsw::patterns::state_machine::state_action<sm, \
+                                                event_data, \
+                                                &sm::ST_##state_name> state_name;
 
 #define STATE_DEFINE(sm, state_name, event_data)        \
   void sm::ST_##state_name(__unused const event_data* data)
 
 #define GUARD_DECLARE(sm, guardName, event_data)                        \
   bool GD_##guardName(__unused const event_data*);                               \
-  rcppsw::patterns::state_machine::state_guard_condition<sm, event_data, &sm::GD_##guardName> guardName;
+  rcppsw::patterns::state_machine::state_guard_condition<sm, \
+                                                         event_data, \
+                                                         &sm::GD_##guardName> guardName;
 
 #define GUARD_DEFINE(sm, guardName, event_data)         \
   bool sm::GD_##guardName(__unused const event_data* data)
 
 #define ENTRY_DECLARE(sm, entryName, event_data)                        \
   void EN_##entryName(__unused const event_data*);                               \
-  rcppsw::patterns::state_machine::state_entry_action<sm, event_data, &sm::EN_##entryName> entryName;
+  rcppsw::patterns::state_machine::state_entry_action<sm,\
+                                                      event_data, \
+                                                      &sm::EN_##entryName> entryName;
 
 #define ENTRY_DEFINE(sm, entryName, event_data)         \
   void sm::EN_##entryName(__unused const event_data* data)
 
 #define EXIT_DECLARE(sm, exitName)                      \
   void EX_##exitName(void);                             \
-  rcppsw::patterns::state_machine::state_exit_action<sm, &sm::EX_##exitName> exitName;
+  rcppsw::patterns::state_machine::state_exit_action<sm,\
+                                                     &sm::EX_##exitName> exitName;
 
 #define EXIT_DEFINE(sm, exitName)               \
   void sm::EX_##exitName(void)

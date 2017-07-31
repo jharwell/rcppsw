@@ -23,21 +23,24 @@
  ******************************************************************************/
 #include <assert.h>
 #include "rcppsw/patterns/state_machine/base_fsm.hpp"
+#include "rcsw/common/fpc.h"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace fsm = rcppsw::patterns::state_machine;
+NS_START(rcppsw, patterns, state_machine);
 
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-fsm::base_fsm::base_fsm(uint8_t max_states, uint8_t initial_state) :
+base_fsm::base_fsm(common::er_server *const server, uint8_t max_states,
+                   uint8_t initial_state) :
+    er_client(server),
     mc_max_states(max_states),
     m_current_state(initial_state),
     m_new_state(false),
     m_event_generated(false),
-    m_event_data(NULL),
+    m_event_data(nullptr),
     m_mutex() {
   assert(mc_max_states < EVENT_IGNORED);
 }
@@ -45,13 +48,14 @@ fsm::base_fsm::base_fsm(uint8_t max_states, uint8_t initial_state) :
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void fsm::base_fsm::external_event(uint8_t new_state,
-                                    const event_data* data) {
+void base_fsm::external_event(uint8_t new_state,
+                              std::unique_ptr<event_data>& data) {
+  ER_NOM("Received external event: new_state=%d data=%p\n",
+         new_state, data.get());
+
   /* if we are supposed to ignore this event */
   if (new_state == EVENT_IGNORED) {
-    if (data) {
-      delete data;
-    }
+    data.reset();
   }  else {
     m_mutex.lock();
     /* generate the event and execute the state engine */
@@ -61,42 +65,41 @@ void fsm::base_fsm::external_event(uint8_t new_state,
   }
 }
 
-void fsm::base_fsm::internal_event(uint8_t new_state,
-                                    const event_data* data) {
-  if (data == NULL)
-    data = new event_data();
+void base_fsm::internal_event(uint8_t new_state,
+                              std::unique_ptr<event_data>& data) {
+  ER_NOM("Generated internal event: new_state=%d data=%p\n",
+         new_state, data.get());
 
-  m_event_data = data;
+  m_event_data = std::move(data);
   m_event_generated = true;
   m_current_state = new_state;
 }
 
 
-void fsm::base_fsm::state_engine(void) {
+void base_fsm::state_engine(void) {
   const state_map_row* map = state_map();
+  const state_map_ex_row* map_ex = state_map_ex();
+
+  ER_ASSERT(!(NULL == map && NULL == map_ex),
+            "FATAL: Both state maps are NULL!");
+
   if (map != NULL) {
     state_engine(map);
   } else {
-    const state_map_ex_row* map_ex = state_map_ex();
-    if (map_ex != NULL) {
       state_engine(map_ex);
-    }
-    else {
-      assert(0);
-    }
   }
-}
+} /* state_engine(0) */
 
-void fsm::base_fsm::state_engine(const state_map_row* const map) {
-  const event_data* data_tmp = NULL;
+void base_fsm::state_engine(const state_map_row* const map) {
+  FPC_CHECK(FPC_VOID, NULL != map);
 
   /* While events are being generated keep executing states */
   while (m_event_generated) {
     /* verity new state is valid */
-    assert(m_new_state < mc_max_states);
+    ER_ASSERT(m_new_state < mc_max_states,
+              "FATAL: new state is out of range");
 
     const state_base* state = map[m_new_state].state;
-    data_tmp = m_event_data;
     m_event_data = NULL;
     m_event_generated = FALSE;
 
@@ -104,69 +107,69 @@ void fsm::base_fsm::state_engine(const state_map_row* const map) {
     current_state(m_new_state);
 
     /* execute state action passing in event data */
-    assert(state != NULL);
-    state->invoke_state_action(this, data_tmp);
-
-    if (data_tmp) {
-      delete data_tmp;
-      data_tmp = NULL;
-    }
+    ER_ASSERT(NULL != state, "FATAL: null state?");
+    ER_DIAG("Invoking state action: state%d, data=%p\n", m_current_state,
+            m_event_data.get());
+    state->invoke_state_action(this, m_event_data.get());
   } /* while() */
 } /* state_engine() */
 
-void fsm::base_fsm::state_engine(const state_map_ex_row* const map_ex) {
-  const event_data* data_tmp = NULL;
+void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
+  FPC_CHECK(FPC_VOID, NULL != map_ex);
 
   /*
    * While events are being generated keep executing states.
    */
   while (m_event_generated) {
     /* verify new state is valid */
-    assert(m_new_state < mc_max_states);
+    ER_ASSERT(m_new_state < mc_max_states,
+              "FATAL: new state is out of range");
 
     const state_base* state = map_ex[m_new_state].state;
     const state_guard_base* guard = map_ex[m_new_state].guard;
     const state_entry_base* entry = map_ex[m_new_state].entry;
     const state_exit_base* exit = map_ex[m_current_state].exit;
 
-    data_tmp = m_event_data;
-    m_event_data = NULL;
-    m_event_generated = FALSE;
+    m_event_generated = false;
 
     /* execute guard condition */
     bool guard_res = true;
     if (NULL != guard) {
-      guard_res = guard->invoke_guard_condition(this, data_tmp);
+      ER_NOM("Executing guard condition for state %d\n", m_current_state);
+      guard_res = guard->invoke_guard_condition(this, m_event_data.get());
     }
 
-    if (guard_res == true) {
-      /* transitioning to a new state? */
-      if (m_new_state != m_current_state) {
-        /* execute state exit action before switching to new state */
-        if (NULL != exit) {
-          exit->invoke_exit_action(this);
-        }
-
-        /* execute state entry action on the new state */
-        if (NULL != entry) {
-          entry->invoke_entry_action(this, data_tmp);
-        }
-
-        /* Ensure exit/entry actions didn't call interval_event() by accident */
-        assert(false == m_event_generated);
+    if (guard_res == false) {
+      continue;
+    }
+    /* transitioning to a new state? */
+    if (m_new_state != m_current_state) {
+      /* execute state exit action before switching to new state */
+      if (NULL != exit) {
+        ER_NOM("Executing exit action for state %d\n", m_current_state);
+        exit->invoke_exit_action(this);
       }
 
-      /* Now we're ready to switch to the new state */
-      current_state(m_new_state);
+      /* execute state entry action on the new state */
+      if (NULL != entry) {
+        ER_NOM("Executing entry action for new state %d\n", m_new_state);
+        entry->invoke_entry_action(this, m_event_data.get());
+      }
 
-      /* execute the state action passing in event data */
-      assert(NULL != state);
-      state->invoke_state_action(this, data_tmp);
+      /* Ensure exit/entry actions didn't call interval_event() by accident */
+      ER_ASSERT(false == m_event_generated,
+                "FATAL: entry/exit actions called internal_event()!");
     }
 
-    if (data_tmp) {
-      delete data_tmp;
-      data_tmp = NULL;
-    }
+    /* Now we're ready to switch to the new state */
+    current_state(m_new_state);
+
+    /* execute the state action passing in event data */
+    ER_ASSERT(NULL != state, "FATAL: null state?");
+    ER_DIAG("Invoking state action: state%d, data=%p\n", m_current_state,
+            m_event_data.get());
+    state->invoke_state_action(this, m_event_data.get());
   } /* while(0) */
 } /* state_engine() */
+
+NS_END(state_machine, patterns, rcppssw);
