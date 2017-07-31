@@ -76,8 +76,9 @@ class base_fsm: public common::er_client {
    * @param max_states The maximum number of state machine states.
    * @param initial_state Initial state machine state.
    */
-  explicit base_fsm(common::er_server* const server, uint8_t max_states,
-                    uint8_t initial_state = 0);
+  base_fsm(std::shared_ptr<common::er_server> server,
+           uint8_t max_states,
+           uint8_t initial_state = 0);
 
   virtual ~base_fsm() {}
 
@@ -92,7 +93,7 @@ class base_fsm: public common::er_client {
    * @param new_state The state machine state to transition to.
    * @param data The event data sent to the state.
    */
-  void external_event(uint8_t new_state, std::unique_ptr<event_data> &data);
+  void external_event(uint8_t new_state, const event_data* data = NULL);
 
   /**
    * @brief Generates an internal event. These events are generated while executing
@@ -100,7 +101,7 @@ class base_fsm: public common::er_client {
    * @param new_state The state machine state to transition to.
    * @param data The event data sent to the state.
    */
-  void internal_event(uint8_t new_state, std::unique_ptr<event_data>& data);
+  void internal_event(uint8_t new_state, const event_data* data = NULL);
 
   /*
    * @brief State machine engine that executes the external event and,
@@ -146,7 +147,7 @@ class base_fsm: public common::er_client {
   uint8_t           m_current_state;    /// The current state machine state.
   uint8_t           m_new_state;        /// The next state to transition to.
   bool              m_event_generated;  /// Set to TRUE on event generation.
-  std::unique_ptr<event_data> m_event_data;  /// The state event data pointer.
+  std::unique_ptr<const event_data> m_event_data;  /// The state event data pointer.
   std::mutex        m_mutex;            /// Lock for thread safety.
 };
 

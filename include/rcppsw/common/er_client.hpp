@@ -128,8 +128,14 @@ NS_START(rcppsw, common);
  ******************************************************************************/
 class er_client {
  public:
-  explicit er_client(er_server* const server_handle)
+  er_client(void) : m_server_handle() {}
+  explicit er_client(std::shared_ptr<er_server> server_handle)
       : m_server_handle(server_handle), m_er_id(m_server_handle->idgen()) {}
+
+  void deferred_init(std::shared_ptr<er_server> server_handle) {
+    m_server_handle = server_handle;
+    m_er_id = m_server_handle->idgen();
+  }
 
   /**
    * @brief Add a module to the active list (long version).

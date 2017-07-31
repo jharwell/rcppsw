@@ -33,7 +33,8 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_fsm::base_fsm(common::er_server *const server, uint8_t max_states,
+base_fsm::base_fsm(std::shared_ptr<common::er_server> server,
+                   uint8_t max_states,
                    uint8_t initial_state) :
     er_client(server),
     mc_max_states(max_states),
@@ -48,15 +49,16 @@ base_fsm::base_fsm(common::er_server *const server, uint8_t max_states,
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void base_fsm::external_event(uint8_t new_state,
-                              std::unique_ptr<event_data>& data) {
+void base_fsm::external_event(uint8_t new_state, const event_data *data) {
   ER_NOM("Received external event: new_state=%d data=%p\n",
-         new_state, data.get());
+         new_state, data);
 
   /* if we are supposed to ignore this event */
   if (new_state == EVENT_IGNORED) {
-    data.reset();
-  }  else {
+    if (data) {
+      delete data;
+    }
+  } else {
     m_mutex.lock();
     /* generate the event and execute the state engine */
     internal_event(new_state, data);
@@ -65,12 +67,11 @@ void base_fsm::external_event(uint8_t new_state,
   }
 }
 
-void base_fsm::internal_event(uint8_t new_state,
-                              std::unique_ptr<event_data>& data) {
+void base_fsm::internal_event(uint8_t new_state, const event_data* data) {
   ER_NOM("Generated internal event: new_state=%d data=%p\n",
-         new_state, data.get());
+         new_state, data);
 
-  m_event_data = std::move(data);
+  m_event_data.reset(data);
   m_event_generated = true;
   m_current_state = new_state;
 }
@@ -100,8 +101,7 @@ void base_fsm::state_engine(const state_map_row* const map) {
               "FATAL: new state is out of range");
 
     const state_base* state = map[m_new_state].state;
-    m_event_data = NULL;
-    m_event_generated = FALSE;
+    m_event_generated = false;
 
     /* ready to update to new state */
     current_state(m_new_state);
