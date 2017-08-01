@@ -82,7 +82,6 @@ void base_fsm::internal_event(uint8_t new_state, const event_data* data) {
 
   m_event_data.reset(data);
   m_event_generated = true;
-  m_current_state = new_state;
 }
 
 
@@ -175,7 +174,7 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
 
     /* execute the state action passing in event data */
     ER_ASSERT(NULL != state, "FATAL: null state?");
-    ER_DIAG("Invoking state action: state%d, data=%p", m_current_state,
+    ER_DIAG("Invoking state action: state=%d, data=%p", m_current_state,
             m_event_data.get());
     state->invoke_state_action(this, m_event_data.get());
   } /* while(0) */
