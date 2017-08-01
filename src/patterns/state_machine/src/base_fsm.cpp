@@ -59,7 +59,7 @@ void base_fsm::reset(void) {
 } /* reset() */
 
 void base_fsm::external_event(uint8_t new_state, const event_data *data) {
-  ER_NOM("Received external event: new_state=%d data=%p\n",
+  ER_NOM("Received external event: new_state=%d data=%p",
          new_state, data);
 
   /* if we are supposed to ignore this event */
@@ -77,7 +77,7 @@ void base_fsm::external_event(uint8_t new_state, const event_data *data) {
 }
 
 void base_fsm::internal_event(uint8_t new_state, const event_data* data) {
-  ER_NOM("Generated internal event: new_state=%d data=%p\n",
+  ER_NOM("Generated internal event: new_state=%d data=%p",
          new_state, data);
 
   m_event_data.reset(data);
@@ -117,7 +117,7 @@ void base_fsm::state_engine(const state_map_row* const map) {
 
     /* execute state action passing in event data */
     ER_ASSERT(NULL != state, "FATAL: null state?");
-    ER_DIAG("Invoking state action: state%d, data=%p\n", m_current_state,
+    ER_DIAG("Invoking state action: state%d, data=%p", m_current_state,
             m_event_data.get());
     state->invoke_state_action(this, m_event_data.get());
   } /* while() */
@@ -144,7 +144,7 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
     /* execute guard condition */
     bool guard_res = true;
     if (NULL != guard) {
-      ER_NOM("Executing guard condition for state %d\n", m_current_state);
+      ER_NOM("Executing guard condition for state %d", m_current_state);
       guard_res = guard->invoke_guard_condition(this, m_event_data.get());
     }
 
@@ -155,13 +155,13 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
     if (m_new_state != m_current_state) {
       /* execute state exit action before switching to new state */
       if (NULL != exit) {
-        ER_NOM("Executing exit action for state %d\n", m_current_state);
+        ER_NOM("Executing exit action for state %d", m_current_state);
         exit->invoke_exit_action(this);
       }
 
       /* execute state entry action on the new state */
       if (NULL != entry) {
-        ER_NOM("Executing entry action for new state %d\n", m_new_state);
+        ER_NOM("Executing entry action for new state %d", m_new_state);
         entry->invoke_entry_action(this, m_event_data.get());
       }
 
@@ -175,7 +175,7 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
 
     /* execute the state action passing in event data */
     ER_ASSERT(NULL != state, "FATAL: null state?");
-    ER_DIAG("Invoking state action: state%d, data=%p\n", m_current_state,
+    ER_DIAG("Invoking state action: state%d, data=%p", m_current_state,
             m_event_data.get());
     state->invoke_state_action(this, m_event_data.get());
   } /* while(0) */

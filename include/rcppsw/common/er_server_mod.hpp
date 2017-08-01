@@ -68,6 +68,9 @@ class er_server_mod {
    */
   void set_loglvl(const er_lvl::value& lvl);
 
+  er_lvl::value dbglvl(void) { return m_dbglvl; }
+  er_lvl::value loglvl(void) { return m_loglvl; }
+
   /**
    * @brief Print a debug msg to stdout if the message level is high enough.
    *

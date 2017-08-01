@@ -131,6 +131,9 @@ class er_server : public multithread::threadable {
    */
   status_t mod_dbglvl(const boost::uuids::uuid& id, const er_lvl::value& lvl);
 
+  er_lvl::value mod_dbglvl(const boost::uuids::uuid& id);
+  er_lvl::value mod_loglvl(const boost::uuids::uuid& id);
+
   /**
    * @brief Set the logging level of a module.
    *

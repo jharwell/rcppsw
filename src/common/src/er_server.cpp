@@ -137,6 +137,31 @@ error:
   return ERROR;
 } /* mod_dbglvl() */
 
+er_lvl::value er_server::mod_dbglvl(const boost::uuids::uuid& id) {
+  er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
+
+  /* make sure module is already present */
+  std::vector<er_server_mod>::iterator iter =
+      std::find(m_modules.begin(), m_modules.end(), mod);
+  CHECK(iter != m_modules.end());
+  return iter->dbglvl();
+error:
+  return (er_lvl::value)-1;
+} /* dbglvl() */
+
+er_lvl::value er_server::mod_loglvl(const boost::uuids::uuid& id) {
+  er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
+
+  /* make sure module is already present */
+  std::vector<er_server_mod>::iterator iter =
+      std::find(m_modules.begin(), m_modules.end(), mod);
+  CHECK(iter != m_modules.end());
+  return iter->loglvl();
+
+error:
+  return (er_lvl::value)-1;
+} /* loglvl() */
+
 void er_server::change_logfile(const std::string& new_fname) {
   if (boost::filesystem::exists(new_fname)) {
     boost::filesystem::remove(new_fname);
