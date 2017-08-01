@@ -78,11 +78,9 @@ class er_server : public multithread::threadable {
   /* destructor */
   ~er_server(void) { join(); m_logfile.close(); }
 
-  /* member functions */
   /**
    * @brief Enable debugging for the ER server. For debugging purposes only.
    */
-
   void self_common_en(void) {
     insmod(m_er_id, "ER Server");
     mod_dbglvl(m_er_id, er_lvl::NOM);
@@ -148,6 +146,8 @@ class er_server : public multithread::threadable {
    * @return # of messages flushed.
    */
   int flush(void);
+
+  void change_logfile(const std::string& new_fname);
 
   /**
    * @brief Generate a UUID for a new module.

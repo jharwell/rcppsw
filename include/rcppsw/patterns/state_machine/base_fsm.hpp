@@ -82,8 +82,9 @@ class base_fsm: public common::er_client {
 
   virtual ~base_fsm() {}
 
-  uint8_t current_state() { return m_current_state; }
-  uint8_t max_allowed_states() { return mc_max_states; }
+  uint8_t current_state(void) { return m_current_state; }
+  uint8_t max_allowed_states(void) { return mc_max_states; }
+  virtual void reset(void);
 
  protected:
   /**
@@ -146,6 +147,7 @@ class base_fsm: public common::er_client {
   const uint8_t     mc_max_states;      /// The maximum # of fsm states.
   uint8_t           m_current_state;    /// The current state machine state.
   uint8_t           m_new_state;        /// The next state to transition to.
+  uint8_t           m_initial_state;
   bool              m_event_generated;  /// Set to TRUE on event generation.
   std::unique_ptr<const event_data> m_event_data;  /// The state event data pointer.
   std::mutex        m_mutex;            /// Lock for thread safety.

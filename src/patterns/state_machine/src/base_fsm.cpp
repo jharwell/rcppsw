@@ -39,7 +39,8 @@ base_fsm::base_fsm(std::shared_ptr<common::er_server> server,
     er_client(server),
     mc_max_states(max_states),
     m_current_state(initial_state),
-    m_new_state(false),
+    m_new_state(0),
+    m_initial_state(initial_state),
     m_event_generated(false),
     m_event_data(nullptr),
     m_mutex() {
@@ -49,6 +50,14 @@ base_fsm::base_fsm(std::shared_ptr<common::er_server> server,
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
+void base_fsm::reset(void) {
+  m_mutex.lock();
+  m_event_generated = false;
+  m_current_state = m_initial_state;
+  m_event_data.reset(nullptr);
+  m_mutex.unlock();
+} /* reset() */
+
 void base_fsm::external_event(uint8_t new_state, const event_data *data) {
   ER_NOM("Received external event: new_state=%d data=%p\n",
          new_state, data);

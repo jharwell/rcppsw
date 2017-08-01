@@ -61,13 +61,9 @@ er_server::er_server(const std::string& logfile_fname,
       m_dbglvl_dflt(dbglvl),
       m_gen(),
       m_er_id(idgen()) {
-  /* get hostname */
   gethostname(m_hostname, 32);
 
-  if (boost::filesystem::exists(m_logfile_fname)) {
-    boost::filesystem::remove(m_logfile_fname);
-  }
-  m_logfile.open(m_logfile_fname.c_str());
+  change_logfile(m_logfile_fname);
 } /* er_server::er_server() */
 
 /*******************************************************************************
@@ -139,7 +135,15 @@ error:
                   "Failed to update dbglvl for module %s: no such module",
                   iter->name().c_str());
   return ERROR;
-} /* er_server::mod_dbglvl() */
+} /* mod_dbglvl() */
+
+void er_server::change_logfile(const std::string& new_fname) {
+  if (boost::filesystem::exists(new_fname)) {
+    boost::filesystem::remove(new_fname);
+  }
+  m_logfile_fname = new_fname;
+  m_logfile.open(m_logfile_fname.c_str());
+} /* change_logfile() */
 
 status_t er_server::mod_loglvl(const boost::uuids::uuid& id,
                               const er_lvl::value& lvl) {

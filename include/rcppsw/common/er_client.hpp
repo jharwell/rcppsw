@@ -128,7 +128,7 @@ NS_START(rcppsw, common);
  ******************************************************************************/
 class er_client {
  public:
-  er_client(void) : m_server_handle() {}
+  er_client(void) : m_server_handle(), m_er_id() {}
   explicit er_client(std::shared_ptr<er_server> server_handle)
       : m_server_handle(server_handle), m_er_id(m_server_handle->idgen()) {}
 
@@ -150,19 +150,6 @@ class er_client {
                   const er_lvl::value& loglvl = er_lvl::NOM,
                   const er_lvl::value& dbglvl = er_lvl::NOM) {
     return m_server_handle->insmod(m_er_id, loglvl, dbglvl, mod_name); }
-
-  /**
-   * @brief Add a module to the active list (short version). The added module
-   * will get the default values for initial logging/debugging levels, according
-   * to the current defaults on the ER server.
-   *
-   * @param mod_name The name of the module, which will be predended to all
-   * debugging/logging statements.
-   *
-   * @return OK if successful, ERROR otherwise.
-   */
-  status_t insmod(const std::string& mod_name) {
-    return m_server_handle->insmod(m_er_id, mod_name); }
 
   /**
    * @brief Get a reference to the ER server.

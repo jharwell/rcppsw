@@ -1,7 +1,8 @@
 ################################################################################
 # External Projects                                                            #
 ################################################################################
-ExternalProject_Add(project_rcsw
+ExternalProject_Add(
+project_rcsw
   SOURCE_DIR "$ENV{rcsw}"
   BINARY_DIR "$ENV{rcsw}/build"
   STEP_TARGETS build

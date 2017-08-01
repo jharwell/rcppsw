@@ -71,6 +71,7 @@ class state_action : public state_base {
                                    const event_data* data) const {
     /* Downcast the state machine and event data to the correct derived type */
     SM* derived_fsm = static_cast<SM*>(sm);
+    const Data* derived_data = NULL;
 
     /*
      * If this check fails, there is a mismatch between the STATE_DECLARE event
@@ -87,8 +88,10 @@ class state_action : public state_base {
      *
      * InternalEvent(ST_MY_STATE_FUNCTION, new Otherevent_data());
      */
-    const Data* derived_data = dynamic_cast<const Data*>(data);
-    assert(nullptr != derived_data);
+    if (data) {
+      derived_data = dynamic_cast<const Data*>(data);
+      assert(derived_data);
+    }
 
     // Call the state function
     (derived_fsm->*Func)(derived_data);
@@ -129,8 +132,11 @@ class state_guard_condition : public state_guard_base {
   virtual bool invoke_guard_condition(base_fsm* sm,
                                       const event_data* data) const {
     SM* derived_fsm = static_cast<SM*>(sm);
-    const Data* derived_data = dynamic_cast<const Data*>(data);
-    assert(nullptr != derived_data);
+    const Data* derived_data = NULL;
+    if (data) {
+      derived_data = dynamic_cast<const Data*>(data);
+      assert(derived_data);
+    }
     return (derived_fsm->*Func)(derived_data);
   }
 };
@@ -167,8 +173,11 @@ class state_entry_action : public state_entry_base {
   virtual void invoke_entry_action(base_fsm* sm,
                                    const event_data* data) const {
     SM* derived_fsm = static_cast<SM*>(sm);
-    const Data* derived_data = dynamic_cast<const Data*>(data);
-    assert(derived_data);
+    const Data* derived_data = NULL;
+    if (data) {
+       derived_data = dynamic_cast<const Data*>(data);
+       assert(derived_data);
+    }
 
     // Call the entry function
     (derived_fsm->*Func)(derived_data);
