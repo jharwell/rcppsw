@@ -199,14 +199,15 @@ NS_END(state_machine, patterns, rcppsw);
 #define EXIT_DEFINE(sm, exitName)               \
   void sm::EX_##exitName(void)
 
-#define BEGIN_TRANSITION_MAP static const uint8_t TRANSITIONS[] = {
+#define DEFINE_TRANSITION_MAP(name) static const uint8_t name[] =
 #define TRANSITION_MAP_ENTRY(entry) entry,
 
-#define END_TRANSITION_MAP(data)                                        \
-    };                                                                  \
-  assert(current_state() < ST_MAX_STATES);                         \
-  ExternalEvent(TRANSITIONS[current_state()], data);                    \
-  STATIC_ASSERT((sizeof(TRANSITIONS)/sizeof(uint8_t)) == ST_MAX_STATES);
+#define VERIFY_TRANSITION_MAP(name)                                     \
+  assert(current_state() < ST_MAX_STATES);                              \
+  static_assert((sizeof(name)/sizeof(uint8_t)) == ST_MAX_STATES, \
+                "transition map does not cover all states");
+
+
 
 #define PARENT_TRANSITION(state)                \
   if (current_state() >= ST_MAX_STATES &&       \
@@ -214,24 +215,23 @@ NS_END(state_machine, patterns, rcppsw);
     ExternalEvent(state);                       \
     return; }
 
-#define BEGIN_STATE_MAP(type)                                           \
-  private:                                                              \
-  virtual const rcppsw::patterns::state_machine::JOIN(type, _row)* JOIN(type, )() { \
-    static const rcppsw::patterns::state_machine::JOIN(type, _row) kSTATE_MAP[] = {
+#define VERIFY_STATE_MAP(type, name)                                         \
+  static_assert((sizeof(name)/sizeof(struct fsm::JOIN(type, _row))) == ST_MAX_STATES, \
+                "state map does not cover all states");
+
+#define DEFINE_STATE_MAP_ACCESSOR(type) \
+  virtual const rcppsw::patterns::state_machine::JOIN(type, _row)* JOIN(type, )(void)
+
+#define DEFINE_STATE_MAP_EX(type, name) DEFINE_STATE_MAP(state_map_ex, name)
+#define DEFINE_STATE_MAP(type, name)                                           \
+  static const rcppsw::patterns::state_machine::JOIN(type, _row) name[] =
 
 #define STATE_MAP_ENTRY(state_name)             \
-      state_name,
+  {&state_name}
 
-#define END_STATE_MAP(type)                                             \
-  };                                                                    \
-    STATIC_ASSERT((sizeof(kSTATE_MAP)/sizeof(JOIN(type, _row)),         \
-                   state_map_does_not_cover_all_states) == ST_MAX_STATES); \
-    return &kSTATE_MAP[0]; }
+#define STATE_MAP_ENTRY_EX(state_name) { state_name, 0, 0, 0 }
 
-#define STATE_MAP_ENTRY_EX(state_name)          \
-          { state_name, 0, 0, 0 },
-
-#define STATE_MAP_ENTRY_ALL_EX(state_name, guard_name, entry_name, exit_name) \
-          { state_name, guard_name, entry_name, exit_name },
+#define STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name) \
+  { state_name, guard_name, entry_name, exit_name }
 
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_BASE_FSM_HPP_ */
