@@ -62,6 +62,8 @@ void base_fsm::external_event(uint8_t new_state, const event_data *data) {
   ER_NOM("Received external event: new_state=%d data=%p",
          new_state, data);
 
+  ER_ASSERT(CANNOT_HAPPEN != new_state, "CANNOT_HAPPEN event happened...");
+
   /* if we are supposed to ignore this event */
   if (new_state == EVENT_IGNORED) {
     if (data) {
