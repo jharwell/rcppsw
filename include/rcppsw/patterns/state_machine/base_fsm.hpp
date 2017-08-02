@@ -45,17 +45,19 @@ NS_START(rcppsw, patterns, state_machine);
  * @brief A structure to hold a single row within the state map.
  */
 struct state_map_row {
-  const state_base* const state;
+  const rcppsw::patterns::state_machine::state* const state;
+  const rcppsw::patterns::state_machine::state* const parent_state;
 };
 
 /**
  * @brief A structure to hold a single row within the extended state map.
  */
 struct state_map_ex_row {
-  const state_base* const state;
-  const state_guard_base* const guard;
-  const state_entry_base* const entry;
-  const state_exit_base* const exit;
+  const rcppsw::patterns::state_machine::state* const state;
+  const rcppsw::patterns::state_machine::state* const parent_state;
+  const state_guard* const guard;
+  const state_entry* const entry;
+  const state_exit* const exit;
 };
 
 /*******************************************************************************
@@ -63,15 +65,9 @@ struct state_map_ex_row {
  ******************************************************************************/
 /**
  * @brief base_fsm implements a software-based state machine.
- *
  */
 class base_fsm: public common::er_client {
  public:
-  enum {
-    EVENT_IGNORED = 0xFE,
-    CANNOT_HAPPEN = 0xFF
-  };
-
   /**
    * @param max_states The maximum number of state machine states.
    * @param initial_state Initial state machine state.
@@ -83,18 +79,18 @@ class base_fsm: public common::er_client {
   virtual ~base_fsm() {}
 
   uint8_t current_state(void) { return m_current_state; }
-  uint8_t max_allowed_states(void) { return mc_max_states; }
+  uint8_t max_states(void) { return mc_max_states; }
   virtual void reset(void);
 
  protected:
   /**
-   * @brief Generates an external event. called once per external event
-   * to start the state machine executing
+   * @brief Generates an external event. Called once per external event
+   * to start the state machine executing.
    *
    * @param new_state The state machine state to transition to.
    * @param data The event data sent to the state.
    */
-  void external_event(uint8_t new_state, const event_data* data = NULL);
+  virtual void external_event(uint8_t new_state, const event* data = NULL);
 
   /**
    * @brief Generates an internal event. These events are generated while executing
@@ -102,13 +98,23 @@ class base_fsm: public common::er_client {
    * @param new_state The state machine state to transition to.
    * @param data The event data sent to the state.
    */
-  void internal_event(uint8_t new_state, const event_data* data = NULL);
+  virtual void internal_event(uint8_t new_state, const event* data = NULL);
+
+  virtual void state_engine_step(const state_map_row* const map);
+  virtual void state_engine_step(const state_map_ex_row* const map_ex);
 
   /*
    * @brief State machine engine that executes the external event and,
    * optionally, all internal events generated during state execution.
    */
-  void state_engine(void);
+  virtual void state_engine(void);
+
+  void next_state(uint8_t next_state) { m_next_state = next_state; }
+  uint8_t next_state(void) { return m_next_state; }
+
+  std::unique_ptr<const event>& event_data(void) { return m_event_data; }
+  void generated_event(bool b) { m_event_generated = b; }
+  bool has_generated_event(void) { return m_event_generated; }
 
  private:
   /**
@@ -136,7 +142,7 @@ class base_fsm: public common::er_client {
    */
   virtual const state_map_ex_row* state_map_ex() { return NULL; }
 
-  void current_state(uint8_t new_state) { m_current_state = new_state; }
+  void update_state(uint8_t new_state) { m_current_state = new_state; }
 
   void state_engine(const state_map_row* const state_map);
   void state_engine(const state_map_ex_row* const state_map_ex);
@@ -146,10 +152,10 @@ class base_fsm: public common::er_client {
 
   const uint8_t     mc_max_states;      /// The maximum # of fsm states.
   uint8_t           m_current_state;    /// The current state machine state.
-  uint8_t           m_new_state;        /// The next state to transition to.
+  uint8_t           m_next_state;        /// The next state to transition to.
   uint8_t           m_initial_state;
   bool              m_event_generated;  /// Set to TRUE on event generation.
-  std::unique_ptr<const event_data> m_event_data;  /// The state event data pointer.
+  std::unique_ptr<const event> m_event_data;  /// The state event data pointer.
   std::mutex        m_mutex;            /// Lock for thread safety.
 };
 
@@ -158,12 +164,6 @@ NS_END(state_machine, patterns, rcppsw);
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#define EVENT_DECLARE(event_name, event_data)                       \
-  void ST_##event_name(__unused const event_data*);
-
-#define EVENT_DEFINE(sm, event_name, event_data)        \
-  void sm::EV_##event_name(__unused const event_data* data)
-
 #define STATE_DECLARE(sm, state_name, event_data)                       \
   void ST_##state_name(__unused const event_data*);              \
   rcppsw::patterns::state_machine::state_action<sm, \
@@ -227,11 +227,11 @@ NS_END(state_machine, patterns, rcppsw);
   static const rcppsw::patterns::state_machine::JOIN(type, _row) name[] =
 
 #define STATE_MAP_ENTRY(state_name)             \
-  {&state_name}
+  {&state_name, NULL}
 
-#define STATE_MAP_ENTRY_EX(state_name) { state_name, 0, 0, 0 }
+#define STATE_MAP_ENTRY_EX(state_name) { state_name, NULL, NULL, NULL, NULL}
 
 #define STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name) \
-  { state_name, guard_name, entry_name, exit_name }
+  { state_name, NULL, guard_name, entry_name, exit_name}
 
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_BASE_FSM_HPP_ */
