@@ -59,7 +59,7 @@ void base_fsm::reset(void) {
 } /* reset() */
 
 void base_fsm::external_event(uint8_t new_state, const event_data *data) {
-  ER_NOM("Received external event: new_state=%d data=%p",
+  ER_DIAG("Received external event: new_state=%d data=%p",
          new_state, data);
 
   ER_ASSERT(CANNOT_HAPPEN != new_state, "CANNOT_HAPPEN event happened...");
@@ -79,9 +79,9 @@ void base_fsm::external_event(uint8_t new_state, const event_data *data) {
 }
 
 void base_fsm::internal_event(uint8_t new_state, const event_data* data) {
-  ER_NOM("Generated internal event: new_state=%d data=%p",
+  ER_DIAG("Generated internal event: new_state=%d data=%p",
          new_state, data);
-
+  m_new_state = new_state;
   m_event_data.reset(data);
   m_event_generated = true;
 }
@@ -131,21 +131,19 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
    * While events are being generated keep executing states.
    */
   while (m_event_generated) {
+    m_event_generated = false;
     /* verify new state is valid */
     ER_ASSERT(m_new_state < mc_max_states,
               "FATAL: new state is out of range");
-
     const state_base* state = map_ex[m_new_state].state;
     const state_guard_base* guard = map_ex[m_new_state].guard;
     const state_entry_base* entry = map_ex[m_new_state].entry;
     const state_exit_base* exit = map_ex[m_current_state].exit;
 
-    m_event_generated = false;
-
     /* execute guard condition */
     bool guard_res = true;
     if (NULL != guard) {
-      ER_NOM("Executing guard condition for state %d", m_current_state);
+      ER_DIAG("Executing guard condition for state %d", m_current_state);
       guard_res = guard->invoke_guard_condition(this, m_event_data.get());
     }
 
@@ -156,13 +154,13 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
     if (m_new_state != m_current_state) {
       /* execute state exit action before switching to new state */
       if (NULL != exit) {
-        ER_NOM("Executing exit action for state %d", m_current_state);
+        ER_DIAG("Executing exit action for state %d", m_current_state);
         exit->invoke_exit_action(this);
       }
 
       /* execute state entry action on the new state */
       if (NULL != entry) {
-        ER_NOM("Executing entry action for new state %d", m_new_state);
+        ER_DIAG("Executing entry action for new state %d", m_new_state);
         entry->invoke_entry_action(this, m_event_data.get());
       }
 
