@@ -37,20 +37,13 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class hfsm;
-
 class hfsm_state: public state {
  public:
-  explicit hfsm_state(const hfsm_state* const parent) : m_parent(parent) {}
   virtual ~hfsm_state(void) {}
 
   virtual int invoke_state_action(
       base_fsm* sm,
       const event* event) const = 0;
-  const hfsm_state* parent(void) const { return m_parent; }
-
- private:
-  const hfsm_state* const m_parent;
 };
 
 /**
@@ -60,7 +53,8 @@ class hfsm_state: public state {
  * - A state function event data type (derived from event_data).
  * - A state machine member function pointer.
  */
-template <class SM, class Event, void (SM::*Func)(const Event*)>
+template <class SM, class parent_state,
+          class Event, void (SM::*Func)(const Event*)>
 class hfsm_state_action : public hfsm_state {
  public:
   virtual ~hfsm_state_action() {}
@@ -77,7 +71,6 @@ class hfsm_state_action : public hfsm_state {
      */
     derived_event = dynamic_cast<const Event*>(event);
     assert(derived_event);
-
     return (derived_fsm->*Func)(derived_event);
   }
 };

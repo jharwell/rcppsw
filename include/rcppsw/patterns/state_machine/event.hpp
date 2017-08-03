@@ -41,9 +41,15 @@ class event {
     EVENT_IGNORED = 0xFE,
     EVENT_FATAL   = 0xFF,
     EVENT_HANDLED = 0,
-    EVENT_UNHANDLED = 1
+    EVENT_UNHANDLED = 1,
   };
-  event(void) : m_signal(EVENT_IGNORED) {}
+  enum {
+    SIG_INIT = 0,
+    SIG_CONTINUE = 1,
+    SIG_USER = 2
+  };
+
+  event(void) : m_signal(SIG_INIT) {}
   virtual ~event() {}
   int signal(void) const { return m_signal; }
   void signal(int signal) { m_signal = signal; }

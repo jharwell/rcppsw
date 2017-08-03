@@ -34,28 +34,5 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void hfsm::state_engine_step(const state_map_row* const map) {
-  ER_ASSERT(NULL != map[next_state()].state, "FATAL: null state?");
-  ER_DIAG("Invoking state action: state%d, data=%p", current_state(),
-          event_data().get());
-  int rval = map[next_state()].state->invoke_state_action(this,
-                                               event_data().get());
-  if (event::EVENT_HANDLED != rval) {
-    map[next_state()].parent_state->invoke_state_action(this,
-                                                 event_data().get());
-  }
-} /* state_engine_step() */
-
-void hfsm::state_engine_step(const state_map_ex_row* const map_ex) {
-  ER_ASSERT(NULL != map_ex[next_state()].state, "FATAL: null state?");
-  ER_DIAG("Invoking state action: state%d, data=%p", current_state(),
-          event_data().get());
-  int rval = map_ex[next_state()].state->invoke_state_action(this,
-                                                  event_data().get());
-  if (event::EVENT_HANDLED != rval) {
-    map_ex[next_state()].parent_state->invoke_state_action(this,
-                                                        event_data().get());
-  }
-} /* state_engine_step() */
 
 NS_END(state_machine, patterns, rcppssw);

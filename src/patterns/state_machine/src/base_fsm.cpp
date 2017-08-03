@@ -33,30 +33,24 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_fsm::base_fsm(std::shared_ptr<common::er_server> server,
-                   uint8_t max_states,
-                   uint8_t initial_state) :
+base_fsm::base_fsm(std::shared_ptr<common::er_server> server) :
     er_client(server),
-    mc_max_states(max_states),
-    m_current_state(initial_state),
-    m_next_state(0),
-    m_initial_state(initial_state),
     m_event_generated(false),
     m_event_data(nullptr),
-    m_mutex() {
-  assert(mc_max_states < event::EVENT_IGNORED);
-}
+    m_mutex() {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void base_fsm::reset(void) {
+void base_fsm::init(void) {
   m_mutex.lock();
   m_event_generated = false;
-  m_current_state = m_initial_state;
+
+  update_state(initial_state());
+  next_state(initial_state());
   m_event_data.reset(nullptr);
   m_mutex.unlock();
-} /* reset() */
+} /* init() */
 
 void base_fsm::external_event(uint8_t new_state, const event *data) {
   ER_DIAG("Received external event: new_state=%d data=%p",
@@ -82,7 +76,7 @@ void base_fsm::external_event(uint8_t new_state, const event *data) {
 void base_fsm::internal_event(uint8_t new_state, const event* data) {
   ER_DIAG("Generated internal event: new_state=%d data=%p",
          new_state, data);
-  m_next_state = new_state;
+  next_state(new_state);
   m_event_data.reset(data);
   m_event_generated = true;
 }
@@ -108,12 +102,12 @@ void base_fsm::state_engine(const state_map_row* const map) {
   /* While events are being generated keep executing states */
   while (m_event_generated) {
     /* verity new state is valid */
-    ER_ASSERT(m_next_state < mc_max_states,
+    ER_ASSERT(next_state() < max_states(),
               "FATAL: new state is out of range");
 
     /* ready to update to new state */
     m_event_generated = false;
-    update_state(m_next_state);
+    update_state(next_state());
     state_engine_step(map);
   } /* while() */
 } /* state_engine() */
@@ -127,16 +121,16 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
   while (m_event_generated) {
     m_event_generated = false;
     /* verify new state is valid */
-    ER_ASSERT(m_next_state < mc_max_states,
+    ER_ASSERT(next_state() < max_states(),
               "FATAL: new state is out of range");
-    const state_guard* guard = map_ex[m_next_state].guard;
-    const state_entry* entry = map_ex[m_next_state].entry;
-    const state_exit* exit = map_ex[m_current_state].exit;
+    const state_guard* guard = map_ex[next_state()].guard;
+    const state_entry* entry = map_ex[next_state()].entry;
+    const state_exit* exit = map_ex[current_state()].exit;
 
     /* execute guard condition */
     bool guard_res = true;
     if (NULL != guard) {
-      ER_DIAG("Executing guard condition for state %d", m_current_state);
+      ER_DIAG("Executing guard condition for state %d", current_state());
       guard_res = guard->invoke_guard_condition(this, m_event_data.get());
     }
 
@@ -144,16 +138,16 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
       continue;
     }
     /* transitioning to a new state? */
-    if (m_next_state != m_current_state) {
+    if (next_state() != current_state()) {
       /* execute state exit action before switching to new state */
       if (NULL != exit) {
-        ER_DIAG("Executing exit action for state %d", m_current_state);
+        ER_DIAG("Executing exit action for state %d", current_state());
         exit->invoke_exit_action(this);
       }
 
       /* execute state entry action on the new state */
       if (NULL != entry) {
-        ER_DIAG("Executing entry action for new state %d", m_next_state);
+        ER_DIAG("Executing entry action for new state %d", next_state());
         entry->invoke_entry_action(this, m_event_data.get());
       }
 
@@ -163,26 +157,10 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
     }
 
     /* Now we're ready to switch to the new state */
-    update_state(m_next_state);
+    update_state(next_state());
 
     state_engine_step(map_ex);
   } /* while(0) */
 } /* state_engine() */
-
-void base_fsm::state_engine_step(const state_map_row* const map) {
-  ER_ASSERT(NULL != map[m_next_state].state, "FATAL: null state?");
-  ER_DIAG("Invoking state action: state%d, data=%p", m_current_state,
-          m_event_data.get());
-  map[m_next_state].state->invoke_state_action(this,
-                                                      m_event_data.get());
-} /* state_engine_step() */
-
-void base_fsm::state_engine_step(const state_map_ex_row* const map_ex) {
-  ER_ASSERT(NULL != map_ex[m_next_state].state, "FATAL: null state?");
-  ER_DIAG("Invoking state action: state%d, data=%p", m_current_state,
-          m_event_data.get());
-  map_ex[m_next_state].state->invoke_state_action(this,
-                                                      m_event_data.get());
-} /* state_engine_step() */
 
 NS_END(state_machine, patterns, rcppssw);

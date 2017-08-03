@@ -191,7 +191,7 @@ error:
   return ERROR;
 } /* er_server::mod_loglvl() */
 
-void* er_server::thread_main(void* arg) {
+void* er_server::thread_main(__unused void* arg) {
   REPORT_INTERNAL(er_lvl::NOM, "Start");
   while (!terminated()) {
     while (0 == m_queue.size()) sleep(1);

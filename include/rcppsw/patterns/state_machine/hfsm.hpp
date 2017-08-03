@@ -43,22 +43,25 @@ NS_START(rcppsw, patterns, state_machine);
  * @brief hfsm implements a software-based state machine.
  *
  */
+template <class C>
 class hfsm: public base_fsm {
  public:
   /**
    * @param max_states The maximum number of state machine states.
    * @param initial_state Initial state machine state.
    */
-  hfsm(std::shared_ptr<common::er_server> server,
-           uint8_t max_states,
-       uint8_t initial_state = 0) :
-      base_fsm(server, max_states, initial_state) {}
+  hfsm(std::shared_ptr<common::er_server> server) : base_fsm(server) {}
 
   virtual ~hfsm() {}
 
  protected:
-  virtual void state_engine_step(const state_map_row* const map);
-  virtual void state_engine_step(const state_map_ex_row* const map_ex);
+  virtual void state_engine_step(__unused const state_map_row* const map) {
+    ER_ASSERT(0, "FATAL: unhandled signal from call chain");
+  } /* state_engine_step() */
+
+  virtual void state_engine_step(__unused const state_map_ex_row* const map_ex) {
+    ER_ASSERT(0, "FATAL: unhandled signal from call chain");
+  } /* state_engine_step() */
 
  private:
   hfsm(const hfsm& fsm) = delete;
@@ -66,26 +69,4 @@ class hfsm: public base_fsm {
 };
 
 NS_END(state_machine, patterns, rcppsw);
-
-/*******************************************************************************
- * Macros
- ******************************************************************************/
-#define HFSM_STATE_DECLARE(sm, state_name, event)                \
-  void ST_##state_name(__unused const event*);              \
-  rcppsw::patterns::state_machine::state_action<sm, \
-                                                event, \
-                                                &sm::ST_##state_name> state_name;
-
-#define HFSM_STATE_DEFINE(sm, state_name, event)        \
-  void sm::ST_##state_name(__unused const event* data)
-
-#define HFSM_STATE_MAP_ENTRY(state_name, parent_state)            \
-  {&state_name, parent_state}
-
-#define HFSM_STATE_MAP_ENTRY_EX(state_name, parent_state) { \
-    state_name, parent_state, NULL, NULL, NULL}
-
-#define HFSM_STATE_MAP_ENTRY_EX_ALL(state_name, parent_state) \
-  { state_name, parent_state, guard_name, entry_name, exit_name }
-
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_HFSM_HPP_ */
