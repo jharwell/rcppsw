@@ -48,7 +48,7 @@ simple_fsm::simple_fsm(std::shared_ptr<common::er_server> server,
  * Member Functions
  ******************************************************************************/
 void simple_fsm::state_engine_step(const state_map_row* const map) {
-  ER_ASSERT(NULL != map[m_next_state].state, "FATAL: null state?");
+  ER_ASSERT(nullptr != map[m_next_state].state, "FATAL: null state?");
   ER_DIAG("Invoking state action: state%d, data=%p", m_current_state,
           event_data());
   map[m_next_state].state->invoke_state_action(this,
@@ -56,7 +56,7 @@ void simple_fsm::state_engine_step(const state_map_row* const map) {
 } /* state_engine_step() */
 
 void simple_fsm::state_engine_step(const state_map_ex_row* const map_ex) {
-  ER_ASSERT(NULL != map_ex[m_next_state].state, "FATAL: null state?");
+  ER_ASSERT(nullptr != map_ex[m_next_state].state, "FATAL: null state?");
   ER_DIAG("Invoking state action: state%d, data=%p", m_current_state,
           event_data());
   map_ex[m_next_state].state->invoke_state_action(this,

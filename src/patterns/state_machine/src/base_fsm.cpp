@@ -86,18 +86,17 @@ void base_fsm::state_engine(void) {
   const state_map_row* map = state_map();
   const state_map_ex_row* map_ex = state_map_ex();
 
-  ER_ASSERT(!(NULL == map && NULL == map_ex),
+  ER_ASSERT(!(nullptr == map && nullptr == map_ex),
             "FATAL: Both state maps are NULL!");
 
-  if (map != NULL) {
+  if (map != nullptr) {
     return state_engine(map);
-  } else {
-    return state_engine(map_ex);
   }
+  return state_engine(map_ex);
 } /* state_engine() */
 
 void base_fsm::state_engine(const state_map_row* const map) {
-  FPC_CHECK(FPC_VOID, NULL != map);
+  FPC_CHECK(FPC_VOID, nullptr != map);
 
   /* While events are being generated keep executing states */
   while (m_event_generated) {
@@ -113,7 +112,7 @@ void base_fsm::state_engine(const state_map_row* const map) {
 } /* state_engine() */
 
 void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
-  FPC_CHECK(FPC_VOID, NULL != map_ex);
+  FPC_CHECK(FPC_VOID, nullptr != map_ex);
 
   /*
    * While events are being generated keep executing states.
@@ -129,7 +128,7 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
 
     /* execute guard condition */
     bool guard_res = true;
-    if (NULL != guard) {
+    if (nullptr != guard) {
       ER_DIAG("Executing guard condition for state %d", current_state());
       guard_res = guard->invoke_guard_condition(this, m_event_data.get());
     }
@@ -140,13 +139,13 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
     /* transitioning to a new state? */
     if (next_state() != current_state()) {
       /* execute state exit action before switching to new state */
-      if (NULL != exit) {
+      if (nullptr != exit) {
         ER_DIAG("Executing exit action for state %d", current_state());
         exit->invoke_exit_action(this);
       }
 
       /* execute state entry action on the new state */
-      if (NULL != entry) {
+      if (nullptr != entry) {
         ER_DIAG("Executing entry action for new state %d", next_state());
         entry->invoke_entry_action(this, m_event_data.get());
       }
