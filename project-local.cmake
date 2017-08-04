@@ -10,8 +10,11 @@ project_rcsw
 )
 ExternalProject_Get_Property(project_rcsw binary_dir)
 ExternalProject_Get_Property(project_rcsw source_dir)
-add_library(rcsw SHARED IMPORTED)
-set_property(TARGET rcsw PROPERTY IMPORTED_LOCATION ${binary_dir}/lib/librcsw.so)
+add_library(rcsw STATIC IMPORTED)
+set_property(TARGET rcsw PROPERTY IMPORTED_LOCATION ${binary_dir}/lib/librcsw.a)
+message("${rcsw_LIBS}")
+set(Boost_USE_STATIC_LIBS OFF)
+find_package(Boost 1.58.0 COMPONENTS system filesystem thread)
 
 ################################################################################
 # Includes                                                                     #
@@ -43,4 +46,7 @@ foreach(d ${${target}_SUBDIRS})
   add_subdirectory(${d})
 endforeach()
 
-target_link_libraries(${target} rcsw-build)
+target_link_libraries(${target}
+  rcsw
+  ${Boost_LIBRARIES}
+  )

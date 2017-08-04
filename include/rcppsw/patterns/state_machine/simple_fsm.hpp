@@ -68,12 +68,6 @@ class simple_fsm: public base_fsm {
   virtual void state_engine_step(const state_map_row* const map);
   virtual void state_engine_step(const state_map_ex_row* const map_ex);
 
-  /*
-   * @brief State machine engine that executes the external event and,
-   * optionally, all internal events generated during state execution.
-   */
-  virtual void state_engine(void);
-
  private:
   const uint8_t     mc_max_states;      /// The maximum # of fsm states.
   uint8_t           m_current_state;    /// The current state machine state.

@@ -32,6 +32,23 @@
 #include "rcppsw/patterns/state_machine/base_fsm.hpp"
 
 /*******************************************************************************
+ * State Macros
+ ******************************************************************************/
+#define HFSM_STATE_DECLARE(fsm, parent_fsm, parent_handler, state_name, event) \
+  void ST_##state_name(__unused const event*);                          \
+  rcppsw::patterns::state_machine::hfsm_state_action<fsm,                                           \
+                                                     parent_fsm,        \
+                                                     event,             \
+                                                     &parent_fsm::ST_##parent_handler, \
+                                                     &fsm::ST_##state_name> state_name;
+
+#define HFSM_STATE_DEFINE(fsm, state_name, event) FSM_STATE_DEFINE(fsm, state_name, event)
+#define HFSM_STATE_MAP_ENTRY(state_name) FSM_STATE_MAP_ENTRY(state_name)
+#define HFSM_STATE_MAP_ENTRY_EX(state_name, parent_state) FSM_STATE_MAP_ENTRY_EX(state_name, parent_state)
+#define HFSM_STATE_MAP_ENTRY_EX_ALL(state_name, parent_state) FSM_STATE_MAP_ENTRY_EX_ALL(state_name, parent_state)
+
+
+/*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, patterns, state_machine);
@@ -52,7 +69,7 @@ class hfsm: public base_fsm {
 
   virtual ~hfsm() {}
 
-  int ST_base_state(const event* e) { return 0; }
+  int ST_base_state(__unused const event* e) { return event::EVENT_HANDLED; }
 
  private:
   hfsm(const hfsm& fsm) = delete;
@@ -60,21 +77,5 @@ class hfsm: public base_fsm {
 };
 
 NS_END(state_machine, patterns, rcppsw);
-
-/*******************************************************************************
- * State Macros
- ******************************************************************************/
-#define HFSM_STATE_DECLARE(fsm, parent_fsm, parent_handler, state_name, event) \
-  void ST_##state_name(__unused const event*);                          \
-  rcppsw::patterns::state_machine::hfsm_state_action<fsm,                                           \
-                                                     parent_fsm,        \
-                                                     event,             \
-                                                     &parent_fsm::ST_##parent_handler, \
-                                                     &fsm::ST_##state_name> state_name;
-
-#define HFSM_STATE_DEFINE(fsm, state_name, event) FSM_STATE_DEFINE(fsm, state_name, event)
-#define HFSM_STATE_MAP_ENTRY(state_name) FSM_STATE_MAP_ENTRY(state_name)
-#define HFSM_STATE_MAP_ENTRY_EX(state_name, parent_state) FSM_STATE_MAP_ENTRY_EX(state_name, parent_state)
-#define HFSM_STATE_MAP_ENTRY_EX_ALL(state_name, parent_state) FSM_STATE_MAP_ENTRY_EX_ALL(state_name, parent_state)
 
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_HFSM_HPP_ */

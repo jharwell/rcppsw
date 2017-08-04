@@ -65,7 +65,7 @@ class state {
  * - A state function event data type (derived from event_data).
  * - A state machine member function pointer.
  */
-template <class SM, class Event, void (SM::*Func)(const Event*)>
+template <class SM, class Event, int (SM::*Func)(const Event*)>
 class state_action : public state {
  public:
   virtual ~state_action() {}
@@ -84,7 +84,7 @@ class state_action : public state {
       assert(derived_event);
     }
 
-    (derived_fsm->*Func)(derived_event);
+    return (derived_fsm->*Func)(derived_event);
   }
 };
 
