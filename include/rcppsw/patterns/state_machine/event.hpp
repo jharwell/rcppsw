@@ -50,6 +50,7 @@ class event {
   };
 
   event(void) : m_signal(SIG_INIT) {}
+  explicit event(int signal) : m_signal(signal) {}
   virtual ~event() {}
   int signal(void) const { return m_signal; }
   void signal(int signal) { m_signal = signal; }

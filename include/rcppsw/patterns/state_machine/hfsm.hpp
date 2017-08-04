@@ -52,7 +52,14 @@ class hfsm: public base_fsm {
 
   virtual ~hfsm() {}
 
-  int ST_base_state(__unused const event* e) { return event::EVENT_HANDLED; }
+  /**
+   * @brief The topmost state in the hierarchy, of which all states are
+   * children. If an event gets all the way up to here, that's bad, because it
+   * should have been handled at a lower layer.
+   *
+   * @return Does not return.
+   */
+  int ST_top_state(__unused const event* e) { assert(0); }
   virtual void init(void) {
     assert(initial_state() < event::EVENT_IGNORED);
     base_fsm::init();
@@ -70,7 +77,7 @@ NS_END(state_machine, patterns, rcppsw);
  ******************************************************************************/
 #define HFSM_STATE_DECLARE(fsm, parent_fsm, parent_handler, state_name, event) \
   int ST_##state_name(__unused const event*);                          \
-  rcppsw::patterns::state_machine::hfsm_state_action<fsm,                                           \
+  rcppsw::patterns::state_machine::hfsm_state_action<fsm,               \
                                                      parent_fsm,        \
                                                      event,             \
                                                      &parent_fsm::ST_##parent_handler, \

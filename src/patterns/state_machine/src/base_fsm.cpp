@@ -52,33 +52,39 @@ void base_fsm::init(void) {
   m_mutex.unlock();
 } /* init() */
 
-void base_fsm::external_event(uint8_t new_state, const event *data) {
+void base_fsm::external_event(uint8_t new_state,
+                              std::unique_ptr<const event> data) {
   ER_DIAG("Received external event: new_state=%d data=%p",
-         new_state, data);
+          new_state, data.get());
 
   ER_ASSERT(event::EVENT_FATAL != new_state,
             "The impossible event happened...");
 
   /* if we are supposed to ignore this event */
   if (new_state == event::EVENT_IGNORED) {
-    if (data) {
-      delete data;
-    }
   } else {
     m_mutex.lock();
-    /* generate the event and execute the state engine */
-    internal_event(new_state, data);
+    /*
+     * Generate the event and execute the state engine. If data was passed in,
+     * pass that along to the handler function.
+     */
+    m_event_data = std::move(data);
+    internal_event(new_state, std::move(m_event_data));
     state_engine();
+    m_event_data.reset(nullptr);
     m_mutex.unlock();
   }
 }
 
-void base_fsm::internal_event(uint8_t new_state, const event* data) {
+void base_fsm::internal_event(uint8_t new_state,
+                              std::unique_ptr<const event> data) {
   ER_DIAG("Generated internal event: new_state=%d data=%p",
-         new_state, data);
+          new_state, data.get());
   next_state(new_state);
-  m_event_data.reset(data);
   m_event_generated = true;
+  if (m_event_data != data) {
+    m_event_data = std::move(data);
+  }
 }
 
 

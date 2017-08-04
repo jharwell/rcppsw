@@ -65,14 +65,14 @@ class  test_fsm : public fsm::hfsm {
   };
 
   explicit test_fsm(std::shared_ptr<er_server> server) :
-      hfsm(server) {}
+      hfsm(server), m_initial_state(0) {}
 
-  HFSM_STATE_DECLARE(test_fsm, hfsm, base_state, s1, fsm::no_event);
-  HFSM_STATE_DECLARE(test_fsm, hfsm, base_state, s2, fsm::no_event);
-  HFSM_STATE_DECLARE(test_fsm, hfsm, base_state, s3, fsm::no_event);
-  HFSM_STATE_DECLARE(test_fsm, hfsm, base_state, s4, fsm::no_event);
-  HFSM_STATE_DECLARE(test_fsm, hfsm, base_state, s5, fsm::no_event);
-  HFSM_STATE_DECLARE(test_fsm, hfsm, base_state, s6, fsm::no_event);
+  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s1, fsm::no_event);
+  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s2, fsm::no_event);
+  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s3, fsm::no_event);
+  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s4, fsm::no_event);
+  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s5, fsm::no_event);
+  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s6, fsm::no_event);
   void event1(void) {
     FSM_DEFINE_TRANSITION_MAP(kMAP) {
       STATE2,
@@ -82,7 +82,7 @@ class  test_fsm : public fsm::hfsm {
           fsm::event::EVENT_FATAL,
           fsm::event::EVENT_FATAL
           };
-    external_event(kMAP[current_state()], nullptr);
+    external_event(kMAP[current_state()], rcppsw::make_unique<fsm::event>(1));
   }
   void event2(void) {
     FSM_DEFINE_TRANSITION_MAP(kMAP) {
@@ -93,7 +93,7 @@ class  test_fsm : public fsm::hfsm {
           STATE4,
           STATE5
           };
-    external_event(kMAP[current_state()], nullptr);
+    external_event(kMAP[current_state()], rcppsw::make_unique<fsm::event>(2));
   }
 
   FSM_DEFINE_STATE_MAP_ACCESSOR(state_map) {
@@ -120,31 +120,31 @@ class  test_fsm : public fsm::hfsm {
   uint8_t m_next_state;
 };
 
-HFSM_STATE_DEFINE(test_fsm, s1, fsm::no_event) {
+HFSM_STATE_DEFINE(test_fsm, s1, fsm::event) {
   printf("Executing state1\n");
   return fsm::event::EVENT_HANDLED;
 }
-HFSM_STATE_DEFINE(test_fsm, s2, fsm::no_event) {
+HFSM_STATE_DEFINE(test_fsm, s2, fsm::event) {
   printf("Executing state2\n");
   return fsm::event::EVENT_HANDLED;
 }
 
-HFSM_STATE_DEFINE(test_fsm, s3, fsm::no_event) {
+HFSM_STATE_DEFINE(test_fsm, s3, fsm::event) {
   printf("Executing state3\n");
   return fsm::event::EVENT_HANDLED;
 }
 
-HFSM_STATE_DEFINE(test_fsm, s4, fsm::no_event) {
+HFSM_STATE_DEFINE(test_fsm, s4, fsm::event) {
   printf("Executing state4\n");
-  internal_event(STATE5);
+  internal_event(STATE5, rcppsw::make_unique<fsm::event>(4));
   return fsm::event::EVENT_HANDLED;
 }
-HFSM_STATE_DEFINE(test_fsm, s5, fsm::no_event) {
+HFSM_STATE_DEFINE(test_fsm, s5, fsm::event) {
   printf("Executing state5\n");
   return fsm::event::EVENT_HANDLED;
 }
 
-HFSM_STATE_DEFINE(test_fsm, s6, fsm::no_event) {
+HFSM_STATE_DEFINE(test_fsm, s6, fsm::event) {
   printf("Executing state6\n");
   return fsm::event::EVENT_HANDLED;
 }
@@ -164,13 +164,14 @@ CATCH_TEST_CASE("sanity-test", "[hfsm]") {
   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE1);
 }
 
-/* CATCH_TEST_CASE("event-test", "[hfsm]") { */
-/*   test_fsm fsm(std::make_shared<er_server>("logfile")); */
-/*   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE1); */
-/*   fsm.event2(); */
-/*   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE1); */
-/*   fsm.event1(); */
-/*   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE2); */
-/*   fsm.event2(); */
-/*   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE5); */
-/* } */
+CATCH_TEST_CASE("event-test", "[hfsm]") {
+  test_fsm fsm(std::make_shared<er_server>("logfile"));
+  fsm.init();
+  CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE1);
+  fsm.event2();
+  CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE1);
+  fsm.event1();
+  CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE2);
+  fsm.event2();
+  CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE5);
+}

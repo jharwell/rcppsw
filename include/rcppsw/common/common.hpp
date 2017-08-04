@@ -24,6 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <memory>
 #include "rcsw/common/common.h"
 
 /*******************************************************************************
@@ -33,5 +34,21 @@
 #define NS_END_(ns) }
 #define NS_START(...) XFOR_EACH1(NS_START_, __VA_ARGS__)
 #define NS_END(...) XFOR_EACH1(NS_END_, __VA_ARGS__)
+
+/*******************************************************************************
+ * Namespaces
+ ******************************************************************************/
+NS_START(rcppsw);
+
+/*******************************************************************************
+ * Templates
+ ******************************************************************************/
+/* C++11 does not have std::make_unique, so I have to create my own...  */
+template<typename T, typename... Args>
+std::unique_ptr<T> make_unique(Args&&... args) {
+  return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+}
+
+NS_END(rcppsw);
 
 #endif /* INCLUDE_RCPPSW_COMMON_COMMON_HPP_ */

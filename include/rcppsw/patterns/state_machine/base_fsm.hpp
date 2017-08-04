@@ -81,20 +81,32 @@ class base_fsm: public common::er_client {
 
   /**
    * @brief Generates an external event. Called once per external event
-   * to start the state machine executing.
+   * to start the state machine executing. The data is passed through the event
+   * chain without modification. The FSM owns the event data--states should try
+   * to delete it.
    *
    * @param new_state The state machine state to transition to.
    * @param data The event data sent to the state.
    */
-  void external_event(uint8_t new_state, const event* data = NULL);
-
+  void external_event(uint8_t new_state,
+                              std::unique_ptr<const event> data);
+  void external_event(uint8_t new_state) {
+    internal_event(new_state, std::move(nullptr));
+  }
   /**
    * @brief Generates an internal event. These events are generated while executing
-   * within a state machine state.
+   * within a state machine state. Internal states can pass their own data to
+   * other states without worrying about deleting the existing data--the FSM
+   * owns it and will handle it.
+   *
    * @param new_state The state machine state to transition to.
    * @param data The event data sent to the state.
    */
-  void internal_event(uint8_t new_state, const event* data = NULL);
+  void internal_event(uint8_t new_state,
+                              std::unique_ptr<const event> data);
+  void internal_event(uint8_t new_state) {
+    internal_event(new_state, nullptr);
+  }
 
   /*
    * @brief State machine engine that executes the external event and,
