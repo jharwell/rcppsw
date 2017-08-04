@@ -162,4 +162,21 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
   } /* while(0) */
 } /* state_engine() */
 
+void base_fsm::state_engine_step(const state_map_row* const map) {
+  ER_ASSERT(nullptr != map[next_state()].state, "FATAL: null state?");
+  ER_DIAG("Invoking state action: state%d, data=%p", current_state(),
+          event_data());
+  map[next_state()].state->invoke_state_action(this,
+                                               event_data());
+} /* state_engine_step() */
+
+void base_fsm::state_engine_step(const state_map_ex_row* const map_ex) {
+  ER_ASSERT(nullptr != map_ex[next_state()].state, "FATAL: null state?");
+  ER_DIAG("Invoking state action: state%d, data=%p", current_state(),
+          event_data());
+  map_ex[next_state()].state->invoke_state_action(this,
+                                                  event_data());
+} /* state_engine_step() */
+
+
 NS_END(state_machine, patterns, rcppssw);

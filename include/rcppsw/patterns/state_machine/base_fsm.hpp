@@ -100,9 +100,6 @@ class base_fsm: public common::er_client {
    */
   void internal_event(uint8_t new_state, const event* data = NULL);
 
-  virtual void state_engine_step(const state_map_row* const map) = 0;
-  virtual void state_engine_step(const state_map_ex_row* const map_ex) = 0;
-
   /*
    * @brief State machine engine that executes the external event and,
    * optionally, all internal events generated during state execution.
@@ -113,7 +110,6 @@ class base_fsm: public common::er_client {
   virtual void update_state(uint8_t new_state) = 0;
   virtual uint8_t next_state(void) const = 0;
   virtual uint8_t initial_state(void) const = 0;
-  
 
   /**
    * @brief Gets the state map as defined in the derived class.
@@ -141,6 +137,8 @@ class base_fsm: public common::er_client {
   virtual const state_map_ex_row* state_map_ex() { return NULL; }
 
  private:
+  void state_engine_step(const state_map_row* const map);
+  void state_engine_step(const state_map_ex_row* const map_ex);
   void state_engine(const state_map_row* const state_map);
   void state_engine(const state_map_ex_row* const state_map_ex);
 
@@ -157,40 +155,40 @@ NS_END(state_machine, patterns, rcppsw);
 /*******************************************************************************
  * State Macros
  ******************************************************************************/
-#define FSM_STATE_DECLARE(sm, state_name, event_data)                   \
+#define FSM_STATE_DECLARE(fsm, state_name, event_data)                   \
   void ST_##state_name(__unused const event_data*);                     \
-  rcppsw::patterns::state_machine::state_action<sm,                     \
+  rcppsw::patterns::state_machine::state_action<fsm,                     \
                                                 event_data,             \
-                                                &sm::ST_##state_name> state_name;
+                                                &fsm::ST_##state_name> state_name;
 
-#define FSM_STATE_DEFINE(sm, state_name, event_data)            \
-  void sm::ST_##state_name(__unused const event_data* data)
+#define FSM_STATE_DEFINE(fsm, state_name, event_data)            \
+  void fsm::ST_##state_name(__unused const event_data* data)
 
-#define FSM_GUARD_DECLARE(sm, guardName, event_data)                    \
+#define FSM_GUARD_DECLARE(fsm, guardName, event_data)                    \
   bool GD_##guardName(__unused const event_data*);                      \
-  rcppsw::patterns::state_machine::state_guard_condition<sm,            \
+  rcppsw::patterns::state_machine::state_guard_condition<fsm,            \
                                                          event_data,    \
-                                                         &sm::GD_##guardName> guardName;
+                                                         &fsm::GD_##guardName> guardName;
 
-#define FSM_GUARD_DEFINE(sm, guardName, event_data)             \
-  bool sm::GD_##guardName(__unused const event_data* data)
+#define FSM_GUARD_DEFINE(fsm, guardName, event_data)             \
+  bool fsm::GD_##guardName(__unused const event_data* data)
 
-#define FSM_ENTRY_DECLARE(sm, entryName, event_data)                    \
+#define FSM_ENTRY_DECLARE(fsm, entryName, event_data)                    \
   void EN_##entryName(__unused const event_data*);                      \
-  rcppsw::patterns::state_machine::state_entry_action<sm,               \
+  rcppsw::patterns::state_machine::state_entry_action<fsm,               \
                                                       event_data,       \
-                                                      &sm::EN_##entryName> entryName;
+                                                      &fsm::EN_##entryName> entryName;
 
-#define FSM_ENTRY_DEFINE(sm, entryName, event_data)             \
-  void sm::EN_##entryName(__unused const event_data* data)
+#define FSM_ENTRY_DEFINE(fsm, entryName, event_data)             \
+  void fsm::EN_##entryName(__unused const event_data* data)
 
-#define FSM_EXIT_DECLARE(sm, exitName)                                  \
+#define FSM_EXIT_DECLARE(fsm, exitName)                                  \
   void EX_##exitName(void);                                             \
-  rcppsw::patterns::state_machine::state_exit_action<sm,                \
-                                                     &sm::EX_##exitName> exitName;
+  rcppsw::patterns::state_machine::state_exit_action<fsm,                \
+                                                     &fsm::EX_##exitName> exitName;
 
-#define FSM_EXIT_DEFINE(sm, exitName)           \
-  void sm::EX_##exitName(void)
+#define FSM_EXIT_DEFINE(fsm, exitName)           \
+  void fsm::EX_##exitName(void)
 
 /*******************************************************************************
  * Transition Map Macros

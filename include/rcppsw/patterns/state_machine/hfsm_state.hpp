@@ -39,29 +39,36 @@ NS_START(rcppsw, patterns, state_machine);
  ******************************************************************************/
 class hfsm_state: public state {
  public:
-  virtual ~hfsm_state(void) {}
+  virtual ~hfsm_state() {}
 
   virtual int invoke_state_action(
-      base_fsm* sm,
-      const event* event) const = 0;
+      base_fsm* fsm,
+      const event* e) const = 0;
 };
 
 /**
- * @brief hfsm_state_action takes three template arguments:
+ * @brief hfsm_state_action takes four template arguments:
  *
- * - A state machine class.
- * - A state function event data type (derived from event_data).
+ * - The current state machine class.
+ * - The parent state machine class.
+ * - A state function event data type (derived from event).
+ * - The parent state handler (from within the parent class, as declared with
+ *   the appropriate macro).
  * - A state machine member function pointer.
  */
-template <class SM, class parent_state,
-          class Event, void (SM::*Func)(const Event*)>
+template <class FSM,
+          class PFSM,
+          class Event,
+          int(PFSM::*PHandler)(const Event*),
+          void (FSM::*Handler)(const Event*)>
 class hfsm_state_action : public hfsm_state {
  public:
+  hfsm_state_action(void) : hfsm_state() {}
   virtual ~hfsm_state_action() {}
-  virtual int invoke_state_action(base_fsm* sm,
+  virtual int invoke_state_action(base_fsm* fsm,
                                    const event* event) const {
     /* Downcast the state machine and event data to the correct derived type */
-    SM* derived_fsm = static_cast<SM*>(sm);
+    FSM* derived_fsm = static_cast<FSM*>(fsm);
     const Event* derived_event = NULL;
 
     assert(event);
@@ -71,10 +78,13 @@ class hfsm_state_action : public hfsm_state {
      */
     derived_event = dynamic_cast<const Event*>(event);
     assert(derived_event);
-    return (derived_fsm->*Func)(derived_event);
+
+    int rval = (derived_fsm->*Handler)(derived_event);
+    if (event::EVENT_HANDLED != rval) {
+      return PHandler(fsm, event);
+    }
   }
 };
-
 
 NS_END(state_machine, patterns, rcppsw);
 
