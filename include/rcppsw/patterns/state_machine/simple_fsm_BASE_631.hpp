@@ -56,8 +56,8 @@ class simple_fsm: public base_fsm {
 
   virtual ~simple_fsm(void) {}
 
-  virtual uint8_t current_state(void) const { return m_current_state; }
-  virtual uint8_t max_states(void) const { return mc_max_states; }
+  virtual uint8_t current_state(void) { return m_current_state; }
+  virtual uint8_t max_states(void) { return mc_max_states; }
 
  protected:
   virtual uint8_t next_state(void) const { return m_next_state; }
