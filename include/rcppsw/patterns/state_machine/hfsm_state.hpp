@@ -60,7 +60,7 @@ template <class FSM,
           class PFSM,
           class Event,
           int(PFSM::*PHandler)(const Event*),
-          void (FSM::*Handler)(const Event*)>
+          int (FSM::*Handler)(const Event*)>
 class hfsm_state_action : public hfsm_state {
  public:
   hfsm_state_action(void) : hfsm_state() {}
@@ -69,6 +69,7 @@ class hfsm_state_action : public hfsm_state {
                                    const event* event) const {
     /* Downcast the state machine and event data to the correct derived type */
     FSM* derived_fsm = static_cast<FSM*>(fsm);
+    PFSM* parent_fsm = static_cast<PFSM*>(fsm);
     const Event* derived_event = NULL;
 
     assert(event);
@@ -81,8 +82,9 @@ class hfsm_state_action : public hfsm_state {
 
     int rval = (derived_fsm->*Handler)(derived_event);
     if (event::EVENT_HANDLED != rval) {
-      return PHandler(fsm, event);
+      rval = (parent_fsm->*PHandler)(event);
     }
+    return rval;
   }
 };
 

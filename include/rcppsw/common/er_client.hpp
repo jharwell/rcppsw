@@ -96,7 +96,7 @@
 #define ER_ASSERT(cond, msg, ...)                       \
   if (!(cond)) {                                        \
     ER_REPORT(rcppsw::common::er_lvl::ERR, msg, ##__VA_ARGS__);         \
-    assert(0);                                          \
+    assert(cond);                                                       \
   }
 
 /*

@@ -66,16 +66,12 @@ struct state_map_ex_row {
  */
 class base_fsm: public common::er_client {
  public:
-  /**
-   * @param max_states The maximum number of state machine states.
-   * @param initial_state Initial state machine state.
-   */
-  base_fsm(std::shared_ptr<common::er_server> server);
+  explicit base_fsm(std::shared_ptr<common::er_server> server);
 
   virtual ~base_fsm() {}
 
-  virtual uint8_t current_state(void) = 0;
-  virtual uint8_t max_states(void) = 0;
+  virtual uint8_t current_state(void) const = 0;
+  virtual uint8_t max_states(void) const = 0;
   virtual void init(void);
 
  protected:
