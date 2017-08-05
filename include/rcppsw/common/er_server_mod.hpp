@@ -52,9 +52,10 @@ class er_lvl {
 class er_server_mod {
  public:
   /* member functions */
-  er_server_mod(const boost::uuids::uuid& id, const er_lvl::value& loglvl,
-                const er_lvl::value& dbglvl, const std::string& name);
-  er_server_mod(const boost::uuids::uuid& id, const std::string& name);
+  er_server_mod(boost::uuids::uuid id, er_lvl::value loglvl,
+                er_lvl::value dbglvl, std::string name);
+  er_server_mod(boost::uuids::uuid id, std::string name);
+
   /**
    * @brief Set the debug printing level for a module.
    *

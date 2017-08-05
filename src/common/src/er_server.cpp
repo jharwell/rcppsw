@@ -39,8 +39,8 @@ NS_START(rcppsw, common);
     char _str[6000];                                                     \
     struct timespec _curr_time;                                          \
     clock_gettime(CLOCK_REALTIME, &_curr_time);                          \
-    snprintf(_str, sizeof(_str), "[%s:%lu.%lu]:%s:%d:%s: " msg "\n",     \
-             m_hostname, _curr_time.tv_sec, _curr_time.tv_nsec, __FILE__, \
+    snprintf((char*)_str, sizeof(_str), "[%s:%lu.%lu]:%s:%d:%s: " msg "\n",  \
+             (char*)m_hostname, _curr_time.tv_sec, _curr_time.tv_nsec, __FILE__, \
              __LINE__, __FUNCTION__, ##__VA_ARGS__);                     \
     er_server::er_msg_int _msg(m_er_id, lvl, std::string(_str));             \
     msg_report(_msg);                                                    \
@@ -121,8 +121,7 @@ status_t er_server::mod_dbglvl(const boost::uuids::uuid& id,
   er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
-  std::vector<er_server_mod>::iterator iter =
-      std::find(m_modules.begin(), m_modules.end(), mod);
+  auto iter = std::find(m_modules.begin(), m_modules.end(), mod);
   CHECK(iter != m_modules.end());
   iter->set_dbglvl(lvl);
 
@@ -141,12 +140,12 @@ er_lvl::value er_server::mod_dbglvl(const boost::uuids::uuid& id) {
   er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
-  std::vector<er_server_mod>::iterator iter =
-      std::find(m_modules.begin(), m_modules.end(), mod);
+  auto iter = std::find(m_modules.begin(), m_modules.end(), mod);
   CHECK(iter != m_modules.end());
   return iter->dbglvl();
+
 error:
-  return (er_lvl::value)-1;
+  return static_cast<er_lvl::value>(-1);
 } /* dbglvl() */
 
 er_lvl::value er_server::mod_loglvl(const boost::uuids::uuid& id) {
@@ -159,7 +158,7 @@ er_lvl::value er_server::mod_loglvl(const boost::uuids::uuid& id) {
   return iter->loglvl();
 
 error:
-  return (er_lvl::value)-1;
+  return static_cast<er_lvl::value>(-1);
 } /* loglvl() */
 
 void er_server::change_logfile(const std::string& new_fname) {
@@ -175,8 +174,7 @@ status_t er_server::mod_loglvl(const boost::uuids::uuid& id,
   er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
-  std::vector<er_server_mod>::iterator iter =
-      std::find(m_modules.begin(), m_modules.end(), mod);
+  auto iter = std::find(m_modules.begin(), m_modules.end(), mod);
   CHECK(iter != m_modules.end());
   iter->set_loglvl(lvl);
 
@@ -191,7 +189,7 @@ error:
   return ERROR;
 } /* er_server::mod_loglvl() */
 
-void* er_server::thread_main(void* arg) {
+void* er_server::thread_main(__unused void* arg) {
   REPORT_INTERNAL(er_lvl::NOM, "Start");
   while (!terminated()) {
     while (0 == m_queue.size()) sleep(1);
@@ -205,7 +203,7 @@ void* er_server::thread_main(void* arg) {
     er_msg_int msg = m_queue.dequeue();
     msg_report(msg);
   } /* while() */
-  return NULL;
+  return nullptr;
 } /* er_server::thread_main() */
 
 NS_END(common, rcpppsw);

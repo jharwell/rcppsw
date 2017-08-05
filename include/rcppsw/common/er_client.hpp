@@ -50,7 +50,7 @@
 #define ER_REPORT(lvl, msg, ...)                                        \
   {                                                                     \
     char _str[1000];                                                    \
-    snprintf(_str, sizeof(_str), "%s:%d:%s: " msg "\n", __FILE__, __LINE__, \
+    snprintf((char*)_str, sizeof(_str), "%s:%d:%s: " msg "\n", __FILE__, __LINE__, \
              __FUNCTION__, ##__VA_ARGS__);                              \
     rcppsw::common::er_client::server_handle()->report(rcppsw::common::er_client::er_id(), \
                                                lvl,                     \
@@ -96,7 +96,7 @@
 #define ER_ASSERT(cond, msg, ...)                       \
   if (!(cond)) {                                        \
     ER_REPORT(rcppsw::common::er_lvl::ERR, msg, ##__VA_ARGS__);         \
-    assert(0);                                          \
+    assert(cond);                                                       \
   }
 
 /*
