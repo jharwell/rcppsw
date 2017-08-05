@@ -39,6 +39,7 @@ base_fsm::base_fsm(std::shared_ptr<common::er_server> server,
     er_client(server),
     mc_max_states(max_states),
     m_current_state(initial_state),
+    m_previous_state(initial_state),
     m_new_state(0),
     m_initial_state(initial_state),
     m_event_generated(false),
@@ -84,6 +85,7 @@ void base_fsm::internal_event(uint8_t new_state, const event_data* data) {
   m_new_state = new_state;
   m_event_data.reset(data);
   m_event_generated = true;
+  m_current_state = new_state;
 }
 
 
@@ -114,6 +116,7 @@ void base_fsm::state_engine(const state_map_row* const map) {
     m_event_generated = false;
 
     /* ready to update to new state */
+    m_previous_state = m_current_state;
     current_state(m_new_state);
 
     /* execute state action passing in event data */
@@ -135,6 +138,7 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
     /* verify new state is valid */
     ER_ASSERT(m_new_state < mc_max_states,
               "FATAL: new state is out of range");
+
     const state_base* state = map_ex[m_new_state].state;
     const state_guard_base* guard = map_ex[m_new_state].guard;
     const state_entry_base* entry = map_ex[m_new_state].entry;
@@ -170,6 +174,7 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
     }
 
     /* Now we're ready to switch to the new state */
+    m_previous_state = m_current_state;
     current_state(m_new_state);
 
     /* execute the state action passing in event data */
