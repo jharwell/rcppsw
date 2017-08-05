@@ -75,9 +75,12 @@ class er_server : public multithread::threadable {
             const er_lvl::value& loglvl = er_lvl::NOM,
             bool threaded = true);
 
-  /* destructor */
   ~er_server(void) { join(); m_logfile.close(); }
 
+  status_t change_id(const boost::uuids::uuid& old_id,
+                     boost::uuids::uuid new_id);
+  std::ofstream& log_stream(void) { return m_logfile; }
+  std::ostream& dbg_stream(void) { return std::cout; }
   /**
    * @brief Enable debugging for the ER server. For debugging purposes only.
    */

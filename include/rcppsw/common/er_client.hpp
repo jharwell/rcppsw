@@ -136,6 +136,9 @@ class er_client {
     m_server_handle = server_handle;
     m_er_id = m_server_handle->idgen();
   }
+  void change_id(boost::uuids::uuid old_id, boost::uuids::uuid new_id) {
+    m_server_handle->change_id(old_id, new_id);
+  }
 
   /**
    * @brief Add a module to the active list (long version).

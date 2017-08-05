@@ -50,27 +50,19 @@ er_server_mod::er_server_mod(const boost::uuids::uuid& id,
  ******************************************************************************/
 void er_server_mod::set_dbglvl(const er_lvl::value& lvl) {
   m_dbglvl = lvl;
-} /* er_server_mod::set_dbglvl() */
+} /* set_dbglvl() */
 
 void er_server_mod::set_loglvl(const er_lvl::value& lvl) {
   m_loglvl = lvl;
-} /* er_server_mod::set_loglvl() */
+} /* set_loglvl() */
 
-void er_server_mod::dbgmsg(const std::string& msg,
-                          const er_lvl::value& lvl) const {
-  if (lvl <= m_dbglvl) {
-    std::cout << msg;
-    std::cout.flush();
-  }
-} /* er_server_mod::dbgmsg() */
-
-void er_server_mod::logmsg(const std::string& msg, const er_lvl::value& lvl,
-                          std::ofstream& file) const {
-  if (lvl <= m_loglvl) {
-    file << msg;
-    file.flush();
-  }
-} /* er_server_mod::logmsg() */
+void er_server_mod::msg_report(const std::string& msg, er_lvl::value msg_lvl,
+                           er_lvl::value log_lvl, std::ostream& stream) const {
+    if (msg_lvl <= log_lvl) {
+      stream << name() << ": " << msg;
+      stream.flush();
+    }
+} /* er_server_mod::msg_report() */
 
 bool er_server_mod::operator==(const er_server_mod& rhs) {
   return (this->m_id == rhs.m_id);

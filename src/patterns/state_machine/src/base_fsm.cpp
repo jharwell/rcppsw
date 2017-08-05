@@ -60,8 +60,8 @@ void base_fsm::reset(void) {
 } /* reset() */
 
 void base_fsm::external_event(uint8_t new_state, const event_data *data) {
-  ER_DIAG("Received external event: new_state=%d data=%p",
-         new_state, data);
+  ER_DIAG("Received external event: current_state=%d new_state=%d data=%p",
+          m_current_state, new_state, data);
 
   ER_ASSERT(CANNOT_HAPPEN != new_state, "CANNOT_HAPPEN event happened...");
 
@@ -80,12 +80,11 @@ void base_fsm::external_event(uint8_t new_state, const event_data *data) {
 }
 
 void base_fsm::internal_event(uint8_t new_state, const event_data* data) {
-  ER_DIAG("Generated internal event: new_state=%d data=%p",
-         new_state, data);
+  ER_DIAG("Generated internal event: current_state=%d new_state=%d data=%p",
+          m_current_state, new_state, data);
   m_new_state = new_state;
   m_event_data.reset(data);
   m_event_generated = true;
-  m_current_state = new_state;
 }
 
 
@@ -116,7 +115,9 @@ void base_fsm::state_engine(const state_map_row* const map) {
     m_event_generated = false;
 
     /* ready to update to new state */
-    m_previous_state = m_current_state;
+    if (m_new_state != m_current_state) {
+      m_previous_state = m_current_state;
+    }
     current_state(m_new_state);
 
     /* execute state action passing in event data */
@@ -174,7 +175,9 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
     }
 
     /* Now we're ready to switch to the new state */
-    m_previous_state = m_current_state;
+    if (m_new_state != m_current_state) {
+      m_previous_state = m_current_state;
+    }
     current_state(m_new_state);
 
     /* execute the state action passing in event data */

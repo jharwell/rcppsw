@@ -93,15 +93,14 @@ status_t er_server::insmod(const boost::uuids::uuid& id,
 
 void er_server::msg_report(const er_msg_int& msg) {
   er_server_mod tmp(msg.m_id, "tmp");
-  std::vector<er_server_mod>::const_iterator iter =
-      std::find(m_modules.begin(), m_modules.end(), tmp);
+  auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
 
   if (iter != m_modules.end()) {
-    iter->logmsg(msg.str_, msg.lvl_, m_logfile);
+    iter->msg_report(msg.str_, msg.lvl_, iter->loglvl(), m_logfile);
 
     /* If NDEBUG is defined, debug printing is disabled. */
 #ifndef NDEBUG
-    iter->dbgmsg(msg.str_, msg.lvl_);
+    iter->msg_report(msg.str_, msg.lvl_, iter->dbglvl(), std::cout);
 #endif
   }
 } /* er_server::msg_report() */
@@ -121,8 +120,7 @@ status_t er_server::mod_dbglvl(const boost::uuids::uuid& id,
   er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
-  std::vector<er_server_mod>::iterator iter =
-      std::find(m_modules.begin(), m_modules.end(), mod);
+  auto iter = std::find(m_modules.begin(), m_modules.end(), mod);
   CHECK(iter != m_modules.end());
   iter->set_dbglvl(lvl);
 
@@ -141,8 +139,7 @@ er_lvl::value er_server::mod_dbglvl(const boost::uuids::uuid& id) {
   er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
-  std::vector<er_server_mod>::iterator iter =
-      std::find(m_modules.begin(), m_modules.end(), mod);
+  auto iter = std::find(m_modules.begin(), m_modules.end(), mod);
   CHECK(iter != m_modules.end());
   return iter->dbglvl();
 error:
@@ -153,8 +150,7 @@ er_lvl::value er_server::mod_loglvl(const boost::uuids::uuid& id) {
   er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
-  std::vector<er_server_mod>::iterator iter =
-      std::find(m_modules.begin(), m_modules.end(), mod);
+  auto iter = std::find(m_modules.begin(), m_modules.end(), mod);
   CHECK(iter != m_modules.end());
   return iter->loglvl();
 
@@ -163,6 +159,7 @@ error:
 } /* loglvl() */
 
 void er_server::change_logfile(const std::string& new_fname) {
+  m_logfile.close();
   if (boost::filesystem::exists(new_fname)) {
     boost::filesystem::remove(new_fname);
   }
@@ -170,13 +167,26 @@ void er_server::change_logfile(const std::string& new_fname) {
   m_logfile.open(m_logfile_fname.c_str());
 } /* change_logfile() */
 
+status_t er_server::change_id(const boost::uuids::uuid& old_id,
+                              boost::uuids::uuid new_id) {
+  er_server_mod mod(old_id, er_lvl::NOM, er_lvl::NOM, "tmp");
+
+  /* make sure module is already present */
+  auto iter = std::find(m_modules.begin(), m_modules.end(), mod);
+  CHECK(iter != m_modules.end());
+  iter->change_id(new_id);
+  return OK;
+
+error:
+  return ERROR;
+} /* change_id() */
+
 status_t er_server::mod_loglvl(const boost::uuids::uuid& id,
                               const er_lvl::value& lvl) {
   er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
-  std::vector<er_server_mod>::iterator iter =
-      std::find(m_modules.begin(), m_modules.end(), mod);
+  auto iter = std::find(m_modules.begin(), m_modules.end(), mod);
   CHECK(iter != m_modules.end());
   iter->set_loglvl(lvl);
 
@@ -191,7 +201,7 @@ error:
   return ERROR;
 } /* er_server::mod_loglvl() */
 
-void* er_server::thread_main(void* arg) {
+void* er_server::thread_main(__unused void* arg) {
   REPORT_INTERNAL(er_lvl::NOM, "Start");
   while (!terminated()) {
     while (0 == m_queue.size()) sleep(1);

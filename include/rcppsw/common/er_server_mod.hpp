@@ -72,24 +72,17 @@ class er_server_mod {
   er_lvl::value loglvl(void) { return m_loglvl; }
 
   /**
-   * @brief Print a debug msg to stdout if the message level is high enough.
-   *
-   * @param msg The message to print.
-   * @param lvl The level of the message.
-   */
-  void dbgmsg(const std::string& msg, const er_lvl::value& lvl) const;
-
-  /**
    * @brief Log a message to a file if the message level is high enough.
    *
    * @param msg The message to log.
    * @param lvl The level of the message.
    * @param file The file to log the message to.
    */
-  void logmsg(const std::string& msg, const er_lvl::value& lvl,
-              std::ofstream& file) const;
+  void msg_report(const std::string& msg, er_lvl::value msg_lvl,
+              er_lvl::value log_lvl, std::ostream& stream) const;
   bool operator==(const er_server_mod& rhs);
   const boost::uuids::uuid& id(void) const {return m_id; }
+  void change_id(boost::uuids::uuid id) { m_id = std::move(id); }
   const std::string& name(void) const { return m_name; }
 
  private:
