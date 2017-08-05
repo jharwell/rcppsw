@@ -39,6 +39,7 @@ base_fsm::base_fsm(std::shared_ptr<common::er_server> server,
     er_client(server),
     mc_max_states(max_states),
     m_current_state(initial_state),
+    m_previous_state(initial_state),
     m_new_state(false),
     m_event_generated(false),
     m_event_data(nullptr),
@@ -104,6 +105,7 @@ void base_fsm::state_engine(const state_map_row* const map) {
     m_event_generated = false;
 
     /* ready to update to new state */
+    m_previous_state = m_current_state;
     current_state(m_new_state);
 
     /* execute state action passing in event data */
@@ -162,6 +164,7 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
     }
 
     /* Now we're ready to switch to the new state */
+    m_previous_state = m_current_state;
     current_state(m_new_state);
 
     /* execute the state action passing in event data */
