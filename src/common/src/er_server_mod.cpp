@@ -32,16 +32,16 @@ NS_START(rcppsw, common);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-er_server_mod::er_server_mod(const boost::uuids::uuid& id,
-                           const er_lvl::value& loglvl,
-                           const er_lvl::value& dbglvl,
-                           const std::string& name)
-    : m_id(id), m_name(name), m_loglvl(loglvl), m_dbglvl(dbglvl) {}
+er_server_mod::er_server_mod(boost::uuids::uuid id,
+                           er_lvl::value loglvl,
+                           er_lvl::value dbglvl,
+                             std::string name)
+    : m_id(id), m_name(std::move(name)), m_loglvl(loglvl), m_dbglvl(dbglvl) {}
 
-er_server_mod::er_server_mod(const boost::uuids::uuid& id,
-                             const std::string& name)
+er_server_mod::er_server_mod(boost::uuids::uuid id,
+                             std::string name)
     : m_id(id),
-      m_name(name),
+      m_name(std::move(name)),
       m_loglvl(er_lvl::NOM),
       m_dbglvl(er_lvl::NOM) {}
 

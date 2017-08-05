@@ -35,12 +35,31 @@ NS_START(rcppsw, patterns, state_machine);
  * Class Definitions
  ******************************************************************************/
 /// @brief Unique state machine event data must inherit from this class.
-class event_data {
+class event {
  public:
-  virtual ~event_data() {}
+  enum {
+    EVENT_IGNORED = 0xFE,
+    EVENT_FATAL   = 0xFF,
+    EVENT_HANDLED = 0,
+    EVENT_UNHANDLED = 1,
+  };
+  enum {
+    SIG_INIT = 0,
+    SIG_CONTINUE = 1,
+    SIG_USER = 2
+  };
+
+  event(void) : m_signal(SIG_INIT) {}
+  explicit event(int signal) : m_signal(signal) {}
+  virtual ~event() {}
+  int signal(void) const { return m_signal; }
+  void signal(int signal) { m_signal = signal; }
+
+ private:
+  int m_signal;
 };
 
-typedef event_data no_event_data;
+typedef event no_event;
 
 NS_END(state_machine, patterns, rcppsw);
 

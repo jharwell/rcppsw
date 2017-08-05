@@ -1,5 +1,5 @@
 /**
- * @file common.hpp
+ * @file simple_fsm.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,37 +18,49 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_COMMON_COMMON_HPP_
-#define INCLUDE_RCPPSW_COMMON_COMMON_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <memory>
-#include "rcsw/common/common.h"
-
-/*******************************************************************************
- * Macros
- ******************************************************************************/
-#define NS_START_(ns) namespace ns {
-#define NS_END_(ns) }
-#define NS_START(...) XFOR_EACH1(NS_START_, __VA_ARGS__)
-#define NS_END(...) XFOR_EACH1(NS_END_, __VA_ARGS__)
+#include <assert.h>
+#include "rcppsw/patterns/state_machine/simple_fsm.hpp"
+#include "rcsw/common/fpc.h"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw);
+NS_START(rcppsw, patterns, state_machine);
 
 /*******************************************************************************
- * Templates
+ * Constructors/Destructor
  ******************************************************************************/
-/* C++11 does not have std::make_unique, so I have to create my own...  */
-template<typename T, typename... Args>
-std::unique_ptr<T> make_unique(Args&&... args) {
-  return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+simple_fsm::simple_fsm(std::shared_ptr<common::er_server> server,
+                   uint8_t max_states,
+                   uint8_t initial_state) :
+    base_fsm(server),
+    mc_max_states(max_states),
+    m_current_state(initial_state),
+    m_next_state(0),
+    m_initial_state(0) {
+  assert(mc_max_states < event::EVENT_IGNORED);
 }
 
-NS_END(rcppsw);
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+void simple_fsm::state_engine_step(const state_map_row* const map) {
+  ER_ASSERT(nullptr != map[m_next_state].state, "FATAL: null state?");
+  ER_DIAG("Invoking state action: state%d, data=%p", m_current_state,
+          event_data());
+  map[m_next_state].state->invoke_state_action(this,
+                                               event_data());
+} /* state_engine_step() */
 
-#endif /* INCLUDE_RCPPSW_COMMON_COMMON_HPP_ */
+void simple_fsm::state_engine_step(const state_map_ex_row* const map_ex) {
+  ER_ASSERT(nullptr != map_ex[m_next_state].state, "FATAL: null state?");
+  ER_DIAG("Invoking state action: state%d, data=%p", m_current_state,
+          event_data());
+  map_ex[m_next_state].state->invoke_state_action(this,
+                                                      event_data());
+} /* state_engine_step() */
+
+NS_END(state_machine, patterns, rcppssw);

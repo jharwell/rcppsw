@@ -33,20 +33,11 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_fsm::base_fsm(std::shared_ptr<common::er_server> server,
-                   uint8_t max_states,
-                   uint8_t initial_state) :
+base_fsm::base_fsm(std::shared_ptr<common::er_server> server) :
     er_client(server),
-    mc_max_states(max_states),
-    m_current_state(initial_state),
-    m_previous_state(initial_state),
-    m_new_state(0),
-    m_initial_state(initial_state),
     m_event_generated(false),
     m_event_data(nullptr),
-    m_mutex() {
-  assert(mc_max_states < EVENT_IGNORED);
-}
+    m_mutex() {}
 
 /*******************************************************************************
  * Member Functions
@@ -54,37 +45,46 @@ base_fsm::base_fsm(std::shared_ptr<common::er_server> server,
 void base_fsm::reset(void) {
   m_mutex.lock();
   m_event_generated = false;
-  m_current_state = m_initial_state;
+
+  update_state(initial_state());
+  next_state(initial_state());
   m_event_data.reset(nullptr);
   m_mutex.unlock();
-} /* reset() */
+} /* init() */
 
-void base_fsm::external_event(uint8_t new_state, const event_data *data) {
-  ER_DIAG("Received external event: current_state=%d new_state=%d data=%p",
-          m_current_state, new_state, data);
+void base_fsm::external_event(uint8_t new_state,
+                              std::unique_ptr<const event> data) {
+  ER_DIAG("Received external event: new_state=%d data=%p",
+          new_state, data.get());
 
-  ER_ASSERT(CANNOT_HAPPEN != new_state, "CANNOT_HAPPEN event happened...");
+  ER_ASSERT(event::EVENT_FATAL != new_state,
+            "The impossible event happened...");
 
   /* if we are supposed to ignore this event */
-  if (new_state == EVENT_IGNORED) {
-    if (data) {
-      delete data;
-    }
+  if (new_state == event::EVENT_IGNORED) {
   } else {
     m_mutex.lock();
-    /* generate the event and execute the state engine */
-    internal_event(new_state, data);
+    /*
+     * Generate the event and execute the state engine. If data was passed in,
+     * pass that along to the handler function.
+     */
+    m_event_data = std::move(data);
+    internal_event(new_state, std::move(m_event_data));
     state_engine();
+    m_event_data.reset(nullptr);
     m_mutex.unlock();
   }
 }
 
-void base_fsm::internal_event(uint8_t new_state, const event_data* data) {
-  ER_DIAG("Generated internal event: current_state=%d new_state=%d data=%p",
-          m_current_state, new_state, data);
-  m_new_state = new_state;
-  m_event_data.reset(data);
+void base_fsm::internal_event(uint8_t new_state,
+                              std::unique_ptr<const event> data) {
+  ER_DIAG("Generated internal event: new_state=%d data=%p",
+          new_state, data.get());
+  next_state(new_state);
   m_event_generated = true;
+  if (m_event_data != data) {
+    m_event_data = std::move(data);
+  }
 }
 
 
@@ -92,44 +92,33 @@ void base_fsm::state_engine(void) {
   const state_map_row* map = state_map();
   const state_map_ex_row* map_ex = state_map_ex();
 
-  ER_ASSERT(!(NULL == map && NULL == map_ex),
+  ER_ASSERT(!(nullptr == map && nullptr == map_ex),
             "FATAL: Both state maps are NULL!");
 
-  if (map != NULL) {
-    state_engine(map);
-  } else {
-      state_engine(map_ex);
+  if (map != nullptr) {
+    return state_engine(map);
   }
-} /* state_engine(0) */
+  return state_engine(map_ex);
+} /* state_engine() */
 
 void base_fsm::state_engine(const state_map_row* const map) {
-  FPC_CHECK(FPC_VOID, NULL != map);
+  FPC_CHECK(FPC_VOID, nullptr != map);
 
   /* While events are being generated keep executing states */
   while (m_event_generated) {
     /* verity new state is valid */
-    ER_ASSERT(m_new_state < mc_max_states,
+    ER_ASSERT(next_state() < max_states(),
               "FATAL: new state is out of range");
 
-    const state_base* state = map[m_new_state].state;
-    m_event_generated = false;
-
     /* ready to update to new state */
-    if (m_new_state != m_current_state) {
-      m_previous_state = m_current_state;
-    }
-    current_state(m_new_state);
-
-    /* execute state action passing in event data */
-    ER_ASSERT(NULL != state, "FATAL: null state?");
-    ER_DIAG("Invoking state action: state%d, data=%p", m_current_state,
-            m_event_data.get());
-    state->invoke_state_action(this, m_event_data.get());
+    m_event_generated = false;
+    update_state(next_state());
+    state_engine_step(map);
   } /* while() */
 } /* state_engine() */
 
 void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
-  FPC_CHECK(FPC_VOID, NULL != map_ex);
+  FPC_CHECK(FPC_VOID, nullptr != map_ex);
 
   /*
    * While events are being generated keep executing states.
@@ -137,18 +126,16 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
   while (m_event_generated) {
     m_event_generated = false;
     /* verify new state is valid */
-    ER_ASSERT(m_new_state < mc_max_states,
+    ER_ASSERT(next_state() < max_states(),
               "FATAL: new state is out of range");
-
-    const state_base* state = map_ex[m_new_state].state;
-    const state_guard_base* guard = map_ex[m_new_state].guard;
-    const state_entry_base* entry = map_ex[m_new_state].entry;
-    const state_exit_base* exit = map_ex[m_current_state].exit;
+    const state_guard* guard = map_ex[next_state()].guard;
+    const state_entry* entry = map_ex[next_state()].entry;
+    const state_exit* exit = map_ex[current_state()].exit;
 
     /* execute guard condition */
     bool guard_res = true;
-    if (NULL != guard) {
-      ER_DIAG("Executing guard condition for state %d", m_current_state);
+    if (nullptr != guard) {
+      ER_DIAG("Executing guard condition for state %d", current_state());
       guard_res = guard->invoke_guard_condition(this, m_event_data.get());
     }
 
@@ -156,16 +143,16 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
       continue;
     }
     /* transitioning to a new state? */
-    if (m_new_state != m_current_state) {
+    if (next_state() != current_state()) {
       /* execute state exit action before switching to new state */
-      if (NULL != exit) {
-        ER_DIAG("Executing exit action for state %d", m_current_state);
+      if (nullptr != exit) {
+        ER_DIAG("Executing exit action for state %d", current_state());
         exit->invoke_exit_action(this);
       }
 
       /* execute state entry action on the new state */
-      if (NULL != entry) {
-        ER_DIAG("Executing entry action for new state %d", m_new_state);
+      if (nullptr != entry) {
+        ER_DIAG("Executing entry action for new state %d", next_state());
         entry->invoke_entry_action(this, m_event_data.get());
       }
 
@@ -175,17 +162,27 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
     }
 
     /* Now we're ready to switch to the new state */
-    if (m_new_state != m_current_state) {
-      m_previous_state = m_current_state;
-    }
-    current_state(m_new_state);
+    update_state(next_state());
 
-    /* execute the state action passing in event data */
-    ER_ASSERT(NULL != state, "FATAL: null state?");
-    ER_DIAG("Invoking state action: state=%d, data=%p", m_current_state,
-            m_event_data.get());
-    state->invoke_state_action(this, m_event_data.get());
+    state_engine_step(map_ex);
   } /* while(0) */
 } /* state_engine() */
+
+void base_fsm::state_engine_step(const state_map_row* const map) {
+  ER_ASSERT(nullptr != map[next_state()].state, "FATAL: null state?");
+  ER_DIAG("Invoking state action: state%d, data=%p", current_state(),
+          event_data());
+  map[next_state()].state->invoke_state_action(this,
+                                               event_data());
+} /* state_engine_step() */
+
+void base_fsm::state_engine_step(const state_map_ex_row* const map_ex) {
+  ER_ASSERT(nullptr != map_ex[next_state()].state, "FATAL: null state?");
+  ER_DIAG("Invoking state action: state%d, data=%p", current_state(),
+          event_data());
+  map_ex[next_state()].state->invoke_state_action(this,
+                                                  event_data());
+} /* state_engine_step() */
+
 
 NS_END(state_machine, patterns, rcppssw);
