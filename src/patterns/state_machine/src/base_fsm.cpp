@@ -54,7 +54,7 @@ void base_fsm::init(void) {
 
 void base_fsm::external_event(uint8_t new_state,
                               std::unique_ptr<const event> data) {
-  ER_DIAG("Received external event: new_state=%d data=%p",
+  ER_VER("Received external event: new_state=%d data=%p",
           new_state, data.get());
 
   ER_ASSERT(event::EVENT_FATAL != new_state,
@@ -77,7 +77,7 @@ void base_fsm::external_event(uint8_t new_state,
 
 void base_fsm::internal_event(uint8_t new_state,
                               std::unique_ptr<const event> data) {
-  ER_DIAG("Generated internal event: current_state=%d new_state=%d data=%p",
+  ER_VER("Generated internal event: current_state=%d new_state=%d data=%p",
           current_state(), new_state, data.get());
   next_state(new_state);
   m_event_generated = true;
@@ -133,7 +133,7 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
     /* execute guard condition */
     bool guard_res = true;
     if (nullptr != guard) {
-      ER_DIAG("Executing guard condition for state %d", current_state());
+      ER_VER("Executing guard condition for state %d", current_state());
       guard_res = guard->invoke_guard_condition(this, m_event_data.get());
     }
 
@@ -145,13 +145,13 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
     if (next_state() != current_state()) {
       /* execute state exit action before switching to new state */
       if (nullptr != exit) {
-        ER_DIAG("Executing exit action for state %d", current_state());
+        ER_VER("Executing exit action for state %d", current_state());
         exit->invoke_exit_action(this);
       }
 
       /* execute state entry action on the new state */
       if (nullptr != entry) {
-        ER_DIAG("Executing entry action for new state %d", next_state());
+        ER_VER("Executing entry action for new state %d", next_state());
         entry->invoke_entry_action(this, m_event_data.get());
       }
 
@@ -168,7 +168,7 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
 
 void base_fsm::state_engine_step(const state_map_row* const map) {
   ER_ASSERT(nullptr != map[current_state()].state, "FATAL: null state?");
-  ER_DIAG("Invoking state action: state%d, data=%p", current_state(),
+  ER_VER("Invoking state action: state%d, data=%p", current_state(),
           event_data());
   map[current_state()].state->invoke_state_action(this,
                                                event_data());
@@ -176,7 +176,7 @@ void base_fsm::state_engine_step(const state_map_row* const map) {
 
 void base_fsm::state_engine_step(const state_map_ex_row* const map_ex) {
   ER_ASSERT(nullptr != map_ex[current_state()].state, "FATAL: null state?");
-  ER_DIAG("Invoking state action: state%d, data=%p", current_state(),
+  ER_VER("Invoking state action: state%d, data=%p", current_state(),
           event_data());
   map_ex[current_state()].state->invoke_state_action(this,
                                                   event_data());
