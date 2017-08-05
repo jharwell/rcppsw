@@ -40,27 +40,19 @@ simple_fsm::simple_fsm(std::shared_ptr<common::er_server> server,
     mc_max_states(max_states),
     m_current_state(initial_state),
     m_next_state(0),
-    m_initial_state(0) {
+    m_initial_state(0),
+    m_previous_state(0) {
   assert(mc_max_states < event::EVENT_IGNORED);
 }
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void simple_fsm::state_engine_step(const state_map_row* const map) {
-  ER_ASSERT(nullptr != map[m_next_state].state, "FATAL: null state?");
-  ER_DIAG("Invoking state action: state%d, data=%p", m_current_state,
-          event_data());
-  map[m_next_state].state->invoke_state_action(this,
-                                               event_data());
-} /* state_engine_step() */
-
-void simple_fsm::state_engine_step(const state_map_ex_row* const map_ex) {
-  ER_ASSERT(nullptr != map_ex[m_next_state].state, "FATAL: null state?");
-  ER_DIAG("Invoking state action: state%d, data=%p", m_current_state,
-          event_data());
-  map_ex[m_next_state].state->invoke_state_action(this,
-                                                      event_data());
-} /* state_engine_step() */
+void simple_fsm::update_state(uint8_t new_state) {
+  if (new_state != m_current_state) {
+    m_previous_state = m_current_state;
+  }
+  m_current_state = new_state;
+} /* update_state() */
 
 NS_END(state_machine, patterns, rcppssw);

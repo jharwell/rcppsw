@@ -45,7 +45,7 @@ NS_START(rcppsw, patterns, state_machine);
  * @brief A structure to hold a single row within the state map.
  */
 struct state_map_row {
-  const state_base* const state;
+  const rcppsw::patterns::state_machine::state* const state;
 };
 
 /**
@@ -145,9 +145,10 @@ class base_fsm: public common::er_client {
    */
   virtual const state_map_ex_row* state_map_ex() { return NULL; }
 
+  virtual void state_engine_step(const state_map_row* const map);
+  virtual void state_engine_step(const state_map_ex_row* const map_ex);
+
  private:
-  void state_engine_step(const state_map_row* const map);
-  void state_engine_step(const state_map_ex_row* const map_ex);
   void state_engine(const state_map_row* const state_map);
   void state_engine(const state_map_ex_row* const state_map_ex);
 
@@ -227,7 +228,7 @@ NS_END(state_machine, patterns, rcppsw);
   {state_name, guard_name, entry_name, exit_name}
 
 #define FSM_VERIFY_STATE_MAP(type, name)                                \
-  static_assert((sizeof(name)/sizeof(struct FSM::JOIN(type, _row))) == ST_MAX_STATES, \
+  static_assert((sizeof(name)/sizeof(struct rcppsw::patterns::state_machine::JOIN(type, _row))) == ST_MAX_STATES, \
                 "state map does not cover all states");
 
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_BASE_FSM_HPP_ */

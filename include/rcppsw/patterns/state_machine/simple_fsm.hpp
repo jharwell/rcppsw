@@ -58,21 +58,20 @@ class simple_fsm: public base_fsm {
 
   virtual uint8_t current_state(void) const { return m_current_state; }
   virtual uint8_t max_states(void) const { return mc_max_states; }
+  virtual uint8_t previous_state(void) const { return m_previous_state; }
 
  protected:
   virtual uint8_t next_state(void) const { return m_next_state; }
   virtual uint8_t initial_state(void) const { return m_initial_state; }
   virtual void next_state(uint8_t next_state) { m_next_state = next_state; }
-  virtual void update_state(uint8_t new_state) { m_current_state = new_state; }
-
-  virtual void state_engine_step(const state_map_row* const map);
-  virtual void state_engine_step(const state_map_ex_row* const map_ex);
+  virtual void update_state(uint8_t new_state);
 
  private:
   const uint8_t     mc_max_states;      /// The maximum # of fsm states.
   uint8_t           m_current_state;    /// The current state machine state.
   uint8_t           m_next_state;        /// The next state to transition to.
   uint8_t           m_initial_state;
+  uint8_t           m_previous_state;
 };
 
 NS_END(state_machine, patterns, rcppsw);
