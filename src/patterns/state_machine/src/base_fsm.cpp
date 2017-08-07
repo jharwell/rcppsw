@@ -78,7 +78,7 @@ void base_fsm::external_event(uint8_t new_state,
 void base_fsm::internal_event(uint8_t new_state,
                               std::unique_ptr<const event> data) {
   ER_VER("Generated internal event: current_state=%d new_state=%d data=%p",
-          current_state(), new_state, data.get());
+         current_state(), new_state, data.get());
   next_state(new_state);
   m_event_generated = true;
   if (m_event_data != data) {
@@ -111,8 +111,8 @@ void base_fsm::state_engine(const state_map_row* const map) {
 
     /* ready to update to new state */
     m_event_generated = false;
-    state_engine_step(map);
     update_state(next_state());
+    state_engine_step(map);
   } /* while() */
 } /* state_engine() */
 
@@ -159,7 +159,6 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
       ER_ASSERT(false == m_event_generated,
                 "FATAL: entry/exit actions called internal_event()!");
     }
-
     /* Now we're ready to switch to the new state */
     update_state(next_state());
     state_engine_step(map_ex);

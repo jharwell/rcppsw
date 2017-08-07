@@ -87,8 +87,8 @@ class  test_fsm : public fsm::simple_fsm {
   void event2(void) {
     FSM_DEFINE_TRANSITION_MAP(kMAP) {
           fsm::event::EVENT_IGNORED,
-              STATE4,
-              fsm::event::EVENT_FATAL,
+          STATE4,
+          fsm::event::EVENT_FATAL,
           STATE4,
           STATE4,
           STATE5
@@ -154,6 +154,7 @@ CATCH_TEST_CASE("sanity-test", "[simple_fsm]") {
 
 CATCH_TEST_CASE("event-test", "[simple_fsm]") {
   test_fsm fsm(std::make_shared<er_server>("logfile"));
+  fsm.init();
   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE1);
   fsm.event2();
   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE1);
