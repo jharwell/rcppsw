@@ -70,7 +70,7 @@ class state_action : public state {
  public:
   virtual ~state_action() {}
   virtual int invoke_state_action(base_fsm* sm,
-                                   const Event* data) const {
+                                  const event_data* data) const {
     /* Downcast the state machine and event data to the correct derived type */
     SM* derived_fsm = static_cast<SM*>(sm);
     const Event* derived_event = NULL;
