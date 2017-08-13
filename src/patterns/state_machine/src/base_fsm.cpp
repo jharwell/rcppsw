@@ -33,10 +33,16 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_fsm::base_fsm(std::shared_ptr<common::er_server> server) :
+base_fsm::base_fsm(const std::shared_ptr<common::er_server>& server) :
     er_client(server),
     m_event_generated(false),
     m_event_data(nullptr),
+    m_mutex() {}
+
+base_fsm::base_fsm(const base_fsm& fsm) :
+    er_client(fsm.server_ref()),
+    m_event_generated(fsm.m_event_generated),
+    m_event_data(),
     m_mutex() {}
 
 /*******************************************************************************

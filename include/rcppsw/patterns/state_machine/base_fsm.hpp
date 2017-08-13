@@ -67,7 +67,7 @@ struct state_map_ex_row {
  */
 class base_fsm: public common::er_client {
  public:
-  explicit base_fsm(std::shared_ptr<common::er_server> server);
+  explicit base_fsm(const std::shared_ptr<common::er_server>& server);
 
   virtual ~base_fsm() {}
 
@@ -90,7 +90,7 @@ class base_fsm: public common::er_client {
    * @param data The event data sent to the state.
    */
   void external_event(uint8_t new_state,
-                              std::unique_ptr<const event_data> data);
+                      std::unique_ptr<const event_data> data);
   void external_event(uint8_t new_state) {
     internal_event(new_state, std::move(nullptr));
   }
@@ -148,11 +148,11 @@ class base_fsm: public common::er_client {
   virtual void state_engine_step(const state_map_row* const map);
   virtual void state_engine_step(const state_map_ex_row* const map_ex);
 
+  base_fsm(const base_fsm& fsm);
+
  private:
   void state_engine(const state_map_row* const state_map);
   void state_engine(const state_map_ex_row* const state_map_ex);
-
-  base_fsm(const base_fsm& fsm) = delete;
   base_fsm& operator=(const base_fsm& fsm) = delete;
 
   bool              m_event_generated;  /// Set to TRUE on event generation.

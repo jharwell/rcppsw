@@ -159,7 +159,10 @@ class er_client {
    *
    * @return A reference to the server handle.
    */
-  er_server* server_handle(void) { return m_server_handle.get(); }
+  er_server* server_handle(void) const { return m_server_handle.get(); }
+
+ protected:
+  const std::shared_ptr<er_server>& server_ref(void) const { return m_server_handle; }
 
   /**
    * @brief Get a reference to the UUID for the module. Should not be called
@@ -167,15 +170,13 @@ class er_client {
    *
    * @return The UUID.
    */
-  boost::uuids::uuid er_id(void) {return m_er_id; }
+  boost::uuids::uuid er_id(void) const { return m_er_id; }
 
   virtual ~er_client(void) {}
 
  private:
   std::shared_ptr<er_server> m_server_handle;
   boost::uuids::uuid m_er_id;
-  er_client* operator=(const er_client&) = delete;
-  er_client(const er_client& other) = delete;
 };
 
 NS_END(rcppsw, common);
