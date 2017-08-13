@@ -76,7 +76,7 @@ class base_fsm: public common::er_client {
   virtual void init(void);
 
  protected:
-  const event* event_data(void) { return m_event_data.get(); }
+  const event_data* get_event_data(void) { return m_event_data.get(); }
   void generated_event(bool b) { m_event_generated = b; }
   bool has_generated_event(void) { return m_event_generated; }
 
@@ -90,7 +90,7 @@ class base_fsm: public common::er_client {
    * @param data The event data sent to the state.
    */
   void external_event(uint8_t new_state,
-                              std::unique_ptr<const event> data);
+                              std::unique_ptr<const event_data> data);
   void external_event(uint8_t new_state) {
     internal_event(new_state, std::move(nullptr));
   }
@@ -104,7 +104,7 @@ class base_fsm: public common::er_client {
    * @param data The event data sent to the state.
    */
   void internal_event(uint8_t new_state,
-                              std::unique_ptr<const event> data);
+                              std::unique_ptr<const event_data> data);
   void internal_event(uint8_t new_state) {
     internal_event(new_state, nullptr);
   }
@@ -156,7 +156,7 @@ class base_fsm: public common::er_client {
   base_fsm& operator=(const base_fsm& fsm) = delete;
 
   bool              m_event_generated;  /// Set to TRUE on event generation.
-  std::unique_ptr<const event> m_event_data;  /// The state event data pointer.
+  std::unique_ptr<const event_data> m_event_data;  /// The state event data pointer.
   std::mutex        m_mutex;            /// Lock for thread safety.
 };
 

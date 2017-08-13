@@ -59,9 +59,9 @@ class hfsm: public base_fsm {
    *
    * @return Does not return.
    */
-  int ST_top_state(__unused const event* e) { assert(0); }
+  int ST_top_state(__unused const event_data* e) { assert(0); }
   virtual void init(void) {
-    assert(initial_state() < event::EVENT_IGNORED);
+    assert(initial_state() < event_signal::IGNORED);
     base_fsm::init();
   }
 

@@ -43,7 +43,7 @@ class hfsm_state: public state {
 
   virtual int invoke_state_action(
       base_fsm* fsm,
-      const event* e) const = 0;
+      const event_data* e) const = 0;
 };
 
 /**
@@ -66,7 +66,7 @@ class hfsm_state_action : public hfsm_state {
   hfsm_state_action(void) : hfsm_state() {}
   virtual ~hfsm_state_action() {}
   virtual int invoke_state_action(base_fsm* fsm,
-                                   const event* event) const {
+                                   const event_data* event) const {
     /* Downcast the state machine and event data to the correct derived type */
     FSM* derived_fsm = static_cast<FSM*>(fsm);
     PFSM* parent_fsm = static_cast<PFSM*>(fsm);
@@ -81,7 +81,7 @@ class hfsm_state_action : public hfsm_state {
     assert(derived_event);
 
     int rval = (derived_fsm->*Handler)(derived_event);
-    if (event::EVENT_HANDLED != rval) {
+    if (event_signal::HANDLED != rval) {
       rval = (parent_fsm->*PHandler)(event);
     }
     return rval;

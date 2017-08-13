@@ -51,33 +51,33 @@ class  test_fsm : public fsm::hfsm {
   explicit test_fsm(std::shared_ptr<er_server> server) :
       hfsm(server), m_initial_state(0) {}
 
-  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s1, fsm::no_event);
-  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s2, fsm::no_event);
-  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s3, fsm::no_event);
-  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s4, fsm::no_event);
-  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s5, fsm::no_event);
-  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s6, fsm::no_event);
+  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s1, fsm::no_event_data);
+  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s2, fsm::no_event_data);
+  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s3, fsm::no_event_data);
+  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s4, fsm::no_event_data);
+  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s5, fsm::no_event_data);
+  HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s6, fsm::no_event_data);
   void event1(void) {
     FSM_DEFINE_TRANSITION_MAP(kMAP) {
       STATE2,
           STATE3,
           STATE1,
-          fsm::event::EVENT_FATAL,
-          fsm::event::EVENT_FATAL,
-          fsm::event::EVENT_FATAL
+          fsm::event_signal::FATAL,
+          fsm::event_signal::FATAL,
+          fsm::event_signal::FATAL
           };
-    external_event(kMAP[current_state()], rcppsw::make_unique<fsm::event>(1));
+    external_event(kMAP[current_state()], rcppsw::make_unique<fsm::event_data>(1));
   }
   void event2(void) {
     FSM_DEFINE_TRANSITION_MAP(kMAP) {
-          fsm::event::EVENT_IGNORED,
+          fsm::event_signal::IGNORED,
               STATE4,
-              fsm::event::EVENT_FATAL,
+              fsm::event_signal::FATAL,
           STATE4,
           STATE4,
           STATE5
           };
-    external_event(kMAP[current_state()], rcppsw::make_unique<fsm::event>(2));
+    external_event(kMAP[current_state()], rcppsw::make_unique<fsm::event_data>(2));
   }
 
   FSM_DEFINE_STATE_MAP_ACCESSOR(state_map) {
@@ -104,33 +104,33 @@ class  test_fsm : public fsm::hfsm {
   uint8_t m_next_state;
 };
 
-HFSM_STATE_DEFINE(test_fsm, s1, fsm::event) {
+HFSM_STATE_DEFINE(test_fsm, s1, fsm::event_data) {
   printf("Executing state1\n");
-  return fsm::event::EVENT_HANDLED;
+  return fsm::event_signal::HANDLED;
 }
-HFSM_STATE_DEFINE(test_fsm, s2, fsm::event) {
+HFSM_STATE_DEFINE(test_fsm, s2, fsm::event_data) {
   printf("Executing state2\n");
-  return fsm::event::EVENT_HANDLED;
+  return fsm::event_signal::HANDLED;
 }
 
-HFSM_STATE_DEFINE(test_fsm, s3, fsm::event) {
+HFSM_STATE_DEFINE(test_fsm, s3, fsm::event_data) {
   printf("Executing state3\n");
-  return fsm::event::EVENT_HANDLED;
+  return fsm::event_signal::HANDLED;
 }
 
-HFSM_STATE_DEFINE(test_fsm, s4, fsm::event) {
+HFSM_STATE_DEFINE(test_fsm, s4, fsm::event_data) {
   printf("Executing state4\n");
-  internal_event(STATE5, rcppsw::make_unique<fsm::event>(4));
-  return fsm::event::EVENT_HANDLED;
+  internal_event(STATE5, rcppsw::make_unique<fsm::event_data>(4));
+  return fsm::event_signal::HANDLED;
 }
-HFSM_STATE_DEFINE(test_fsm, s5, fsm::event) {
+HFSM_STATE_DEFINE(test_fsm, s5, fsm::event_data) {
   printf("Executing state5\n");
-  return fsm::event::EVENT_HANDLED;
+  return fsm::event_signal::HANDLED;
 }
 
-HFSM_STATE_DEFINE(test_fsm, s6, fsm::event) {
+HFSM_STATE_DEFINE(test_fsm, s6, fsm::event_data) {
   printf("Executing state6\n");
-  return fsm::event::EVENT_HANDLED;
+  return fsm::event_signal::HANDLED;
 }
 
 /*******************************************************************************

@@ -53,15 +53,15 @@ void base_fsm::init(void) {
 } /* init() */
 
 void base_fsm::external_event(uint8_t new_state,
-                              std::unique_ptr<const event> data) {
+                              std::unique_ptr<const event_data> data) {
   ER_VER("Received external event: new_state=%d data=%p",
           new_state, data.get());
 
-  ER_ASSERT(event::EVENT_FATAL != new_state,
+  ER_ASSERT(event_signal::FATAL != new_state,
             "The impossible event happened...");
 
   /* if we are not supposed to ignore this event */
-  if (new_state != event::EVENT_IGNORED) {
+  if (new_state != event_signal::IGNORED) {
     m_mutex.lock();
     /*
      * Generate the event and execute the state engine. If data was passed in,
@@ -76,7 +76,7 @@ void base_fsm::external_event(uint8_t new_state,
 }
 
 void base_fsm::internal_event(uint8_t new_state,
-                              std::unique_ptr<const event> data) {
+                              std::unique_ptr<const event_data> data) {
   ER_VER("Generated internal event: current_state=%d new_state=%d data=%p",
          current_state(), new_state, data.get());
   next_state(new_state);
@@ -168,17 +168,17 @@ void base_fsm::state_engine(const state_map_ex_row* const map_ex) {
 void base_fsm::state_engine_step(const state_map_row* const map) {
   ER_ASSERT(nullptr != map[current_state()].state, "FATAL: null state?");
   ER_VER("Invoking state action: state%d, data=%p", current_state(),
-          event_data());
+         get_event_data());
   map[current_state()].state->invoke_state_action(this,
-                                               event_data());
+                                               get_event_data());
 } /* state_engine_step() */
 
 void base_fsm::state_engine_step(const state_map_ex_row* const map_ex) {
   ER_ASSERT(nullptr != map_ex[current_state()].state, "FATAL: null state?");
   ER_VER("Invoking state action: state%d, data=%p", current_state(),
-          event_data());
+          get_event_data());
   map_ex[current_state()].state->invoke_state_action(this,
-                                                  event_data());
+                                                     get_event_data());
 } /* state_engine_step() */
 
 

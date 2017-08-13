@@ -55,7 +55,7 @@ class state {
    * @return integer indicating whether or not the event was handled.
    */
   virtual int invoke_state_action(base_fsm* sm,
-                                  const event* data) const = 0;
+                                  const event_data* data) const = 0;
 };
 
 /**
@@ -106,7 +106,7 @@ class state_guard {
    * to TRUE.
    */
   virtual bool invoke_guard_condition(base_fsm* sm,
-                                      const event* data) const = 0;
+                                      const event_data* data) const = 0;
 };
 
 /** @brief state_guard_condition takes three template arguments:
@@ -120,7 +120,7 @@ class state_guard_condition : public state_guard {
  public:
   virtual ~state_guard_condition() {}
   virtual bool invoke_guard_condition(base_fsm* sm,
-                                      const event* data) const {
+                                      const event_data* data) const {
     SM* derived_fsm = static_cast<SM*>(sm);
     const Event* derived_event = NULL;
     if (data) {
@@ -146,7 +146,7 @@ class state_entry {
    * @param data The event data.
    */
   virtual void invoke_entry_action(base_fsm* sm,
-                                   const event* data) const = 0;
+                                   const event_data* data) const = 0;
 };
 
 /**
@@ -161,7 +161,7 @@ class state_entry_action : public state_entry {
  public:
   virtual ~state_entry_action(void) {}
   virtual void invoke_entry_action(base_fsm* sm,
-                                   const event* data) const {
+                                   const event_data* data) const {
     SM* derived_fsm = static_cast<SM*>(sm);
     const Event* derived_event = NULL;
     if (data) {
