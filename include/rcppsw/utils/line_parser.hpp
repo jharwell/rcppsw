@@ -1,5 +1,5 @@
 /**
- * @file file_parser.hpp
+ * @file line_parser.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,21 +18,15 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_UTILS_FILE_PARSER_HPP_
-#define INCLUDE_RCPPSW_UTILS_FILE_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_UTILS_LINE_PARSER_HPP_
+#define INCLUDE_RCPPSW_UTILS_LINE_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <vector>
 #include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include <iterator>
-#include <algorithm>
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/utils/line_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -42,36 +36,18 @@ NS_START(rcppsw, utils);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/**
- * @brief File parsing class using template design pattern. Parses each line of
- * a file into a vector of whitespace delimited tokens, and returns a vector of
- * vectors (1 per line).
- */
-template <typename T> class file_parser {
+
+class line_parser {
  public:
-  explicit file_parser(const std::string& fname): m_fname(fname) {}
+  /* constructors */
+  explicit line_parser(char delim) : m_delim(delim) {}
 
-  /**
-   * @brief Parse a file into a vector of sets of tokens.
-   *
-   * @return A vector of the parse results.
-   */
-  std::vector<T>* parse_file(char delim) {
-    std::vector<T>* tokens_set = new std::vector<T>;
-    std::string line;
-    std::ifstream infile(m_fname);
-    line_parser parser(delim);
-    while (std::getline(infile, line)) {
-      tokens_set->push_back(parser.parse(line));
-    } /* while() */
-
-    return tokens_set;
-  } /* file_parser::parse_file() */
+  std::vector<std::string> parse(const std::string& line);
 
  private:
-  const std::string& m_fname;
+  char m_delim;
 };
 
 NS_END(utils, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_UTILS_FILE_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_UTILS_LINE_PARSER_HPP_ */
