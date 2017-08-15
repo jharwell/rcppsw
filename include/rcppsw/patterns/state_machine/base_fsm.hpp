@@ -106,7 +106,7 @@ class base_fsm: public common::er_client {
   void internal_event(uint8_t new_state,
                               std::unique_ptr<const event_data> data);
   void internal_event(uint8_t new_state) {
-    internal_event(new_state, nullptr);
+    internal_event(new_state, std::move(m_event_data));
   }
 
   /*

@@ -34,6 +34,7 @@
 #include "rcppsw/common/er_server_mod.hpp"
 #include "rcppsw/multithread/mt_queue.hpp"
 #include "rcppsw/multithread/threadable.hpp"
+#include "rcppsw/patterns/singleton.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -70,10 +71,10 @@ class er_server : public multithread::threadable {
    *                 messages will be handled inline in the calling thread
    *                 (asynchronously).
    */
-  er_server(const std::string& logfile_fname = "logfile",
+  er_server(const std::string& logfile_fname = "__no_file__",
             const er_lvl::value& dbglvl = er_lvl::NOM,
             const er_lvl::value& loglvl = er_lvl::NOM,
-            bool threaded = true);
+            bool threaded = false);
 
   ~er_server(void) { join(); m_logfile.close(); }
 
@@ -242,6 +243,14 @@ class er_server : public multithread::threadable {
   boost::uuids::random_generator m_gen;
   boost::uuids::uuid m_er_id;
 };
+
+class null_server: public patterns::singleton<er_server>, public er_server {
+};
+
+/*******************************************************************************
+ * Global Variables
+ ******************************************************************************/
+extern std::shared_ptr<null_server> g_null_server;
 
 NS_END(common, rcppsw);
 

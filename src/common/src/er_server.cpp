@@ -47,6 +47,11 @@ NS_START(rcppsw, common);
   }
 
 /*******************************************************************************
+ * Global Variables
+ ******************************************************************************/
+std::shared_ptr<null_server> g_null_server(std::make_shared<null_server>());
+
+/*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
 er_server::er_server(const std::string& logfile_fname,
@@ -165,7 +170,9 @@ void er_server::change_logfile(const std::string& new_fname) {
     boost::filesystem::remove(new_fname);
   }
   m_logfile_fname = new_fname;
-  m_logfile.open(m_logfile_fname.c_str());
+  if (m_logfile_fname != "__no_file__") {
+    m_logfile.open(m_logfile_fname.c_str());
+  }
 } /* change_logfile() */
 
 status_t er_server::change_id(const boost::uuids::uuid& old_id,

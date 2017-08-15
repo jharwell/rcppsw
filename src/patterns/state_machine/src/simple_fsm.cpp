@@ -40,7 +40,7 @@ simple_fsm::simple_fsm(std::shared_ptr<common::er_server> server,
     mc_max_states(max_states),
     m_current_state(initial_state),
     m_next_state(0),
-    m_initial_state(0),
+    m_initial_state(initial_state),
     m_previous_state(0) {
   assert(mc_max_states < event_signal::IGNORED);
 }
