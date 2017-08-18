@@ -27,7 +27,9 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <algorithm>
 #include "rcppsw/patterns/factory/base_factory.hpp"
+#include "rcsw/common/fpc.h"
 
 /*******************************************************************************
  * Namespaces
@@ -43,14 +45,16 @@ class retaining_factory : public base_factory<T> {
   retaining_factory(void) {}
   ~retaining_factory(void) {
     auto it = m_items.begin();
-    while (it != m_items.end()) { delete it; ++it; }
+    while (it != m_items.end()) { delete *it; ++it; }
   }
 
   template <typename TDerived>
-  void register_type(const std::string& name) {
+  status_t register_type(const std::string& name) {
     static_assert(std::is_base_of<T, TDerived>::value,
                   "retaining_factory::register_type doesn't accept this type because doesn't derive from base class");
+    FPC_CHECK(ERROR, m_retain_funcs.end() == m_retain_funcs.find(name));
     m_retain_funcs[name] = &do_create_retain<TDerived>;
+    return OK;
   }
 
   T& create(const std::string& name) {

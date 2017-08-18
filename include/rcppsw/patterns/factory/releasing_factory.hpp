@@ -27,6 +27,8 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <algorithm>
+#include "rcsw/common/fpc.h"
 #include "rcppsw/patterns/factory/base_factory.hpp"
 
 /*******************************************************************************
@@ -40,20 +42,22 @@ NS_START(rcppsw, patterns, factory);
 template <typename T>
 class releasing_factory : public base_factory<T> {
  public:
-  releasing_factory(void) {}
+  releasing_factory(void) : m_release_funcs() {}
 
  public:
   template <typename TDerived>
-  void register_type(const std::string& name) {
+  status_t register_type(const std::string& name) {
     static_assert(std::is_base_of<T, TDerived>::value,
                   "releasing_factory::register_type doesn't accept this type because doesn't derive from base class");
+    FPC_CHECK(ERROR, m_release_funcs.end() == m_release_funcs.find(name));
     m_release_funcs[name] = &do_create_release<TDerived>;
+    return OK;
   }
 
   T* create(const std::string& name) {
     auto it = m_release_funcs.find(name);
     if (it != m_release_funcs.end()) {
-      return it.value()();
+      return it->second();
     }
     return nullptr;
   }
