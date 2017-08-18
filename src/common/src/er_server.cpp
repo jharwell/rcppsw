@@ -97,7 +97,7 @@ status_t er_server::insmod(const boost::uuids::uuid& id,
 } /* insmod() */
 
 void er_server::msg_report(const er_msg_int& msg) {
-  er_server_mod tmp(msg.m_id, "tmp");
+  er_server_mod tmp(msg.m_id, er_lvl::NOM, er_lvl::NOM, "tmp");
   auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
 
   if (iter != m_modules.end()) {

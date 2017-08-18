@@ -129,10 +129,10 @@ NS_START(rcppsw, common);
 class er_client {
  public:
   er_client(void) : m_server_handle(), m_er_id() {}
-  explicit er_client(std::shared_ptr<er_server> server_handle)
+  explicit er_client(const std::shared_ptr<er_server>& server_handle)
       : m_server_handle(server_handle), m_er_id(m_server_handle->idgen()) {}
 
-  void deferred_init(std::shared_ptr<er_server> server_handle) {
+  void deferred_init(const std::shared_ptr<er_server>& server_handle) {
     m_server_handle = server_handle;
     m_er_id = m_server_handle->idgen();
   }

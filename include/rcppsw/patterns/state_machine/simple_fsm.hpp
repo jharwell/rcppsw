@@ -50,7 +50,7 @@ class simple_fsm: public base_fsm {
    * @param max_states The maximum number of state machine states.
    * @param initial_state Initial state machine state.
    */
-  simple_fsm(std::shared_ptr<common::er_server> server,
+  simple_fsm(const std::shared_ptr<common::er_server>& server,
              uint8_t max_states,
              uint8_t initial_state = 0);
 
