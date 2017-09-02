@@ -213,7 +213,6 @@ NS_END(state_machine, patterns, rcppsw);
 /*******************************************************************************
  * State Map Macros
  ******************************************************************************/
-#define FSM_DEFINE_STATE_MAP_EX(type, name) FSM_DEFINE_STATE_MAP(state_map_ex, name)
 #define FSM_DEFINE_STATE_MAP(type, name)                                \
     static const rcppsw::patterns::state_machine::JOIN(type, _row) name[] =
 

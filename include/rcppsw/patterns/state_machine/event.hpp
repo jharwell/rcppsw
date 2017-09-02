@@ -41,20 +41,35 @@ class event_signal {
     FATAL   = 0xFF,
     HANDLED = 0,
     UNHANDLED = 1,
+    EXTERNAL_SIGNALS,
+  };
+};
+
+class event_type {
+ public:
+  enum {
+    NORMAL = 0,
+    CHILD  = 1,
+    EXTERNAL_TYPES,
   };
 };
 
 /// @brief Unique state machine event data must inherit from this class.
 class event_data {
  public:
-  event_data(void) : m_signal(event_signal::IGNORED) {}
-  explicit event_data(int signal) : m_signal(signal) {}
+  event_data(void) : m_signal(event_signal::IGNORED),
+                     m_type(event_type::NORMAL) {}
+  explicit event_data(int signal, int type = event_type::NORMAL) :
+      m_signal(signal), m_type(type) {}
   virtual ~event_data() {}
   int signal(void) const { return m_signal; }
   void signal(int signal) { m_signal = signal; }
+  int type(void) const { return m_type; }
+  void type(int type) { m_type = type; }
 
  private:
   int m_signal;
+  int m_type;
 };
 
 typedef event_data no_event_data;

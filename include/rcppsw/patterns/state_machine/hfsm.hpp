@@ -75,17 +75,41 @@ NS_END(state_machine, patterns, rcppsw);
 /*******************************************************************************
  * State Macros
  ******************************************************************************/
-#define HFSM_STATE_DECLARE(fsm, parent_fsm, parent_handler, state_name, event) \
-  int ST_##state_name(__unused const event*);                          \
-  rcppsw::patterns::state_machine::hfsm_state_action<fsm,               \
+#define HFSM_STATE_DECLARE(FSM, parent_fsm, \
+                           parent_state, parent_state_data, \
+                           state_name, state_data)                      \
+  int ST_##state_name(__unused const state_data*);                      \
+  rcppsw::patterns::state_machine::hfsm_state_action<FSM,               \
                                                      parent_fsm,        \
-                                                     event,             \
-                                                     &parent_fsm::ST_##parent_handler, \
-                                                     &fsm::ST_##state_name> state_name;
+                                                     parent_state_data, \
+                                                     state_data, \
+                                                     &parent_fsm::ST_##parent_state, \
+                                                     &FSM::ST_##state_name> state_name;
 
-#define HFSM_STATE_DEFINE(fsm, state_name, event) FSM_STATE_DEFINE(fsm, state_name, event)
+#define HFSM_STATE_DEFINE(FSM, state_name, event) FSM_STATE_DEFINE(FSM, state_name, event)
+#define HFSM_GUARD_DECLARE(FSM, guardName, event_data) FSM_GUARD_DECLARE(FSM, guardName, event_data)
+#define HFSM_GUARD_DEFINE(FSM, guardName, event_data) FSM_GUARD_DEFINE(FSM, guardName, event_data)
+#define HFSM_ENTRY_DECLARE(FSM, entryName, event_data) FSM_ENTRY_DECLARE(FSM, entryName, event_data)
+#define HFSM_ENTRY_DEFINE(FSM, entryName, event_data)  FSM_ENTRY_DEFINE(FSM, entryName, event_data)
+#define HFSM_EXIT_DECLARE(FSM, exitName) FSM_EXIT_DECLARE(FSM, exitName)
+#define HFSM_EXIT_DEFINE(FSM, exitName) FSM_EXIT_DEFINE(FSM, exitName)
+
+/*******************************************************************************
+ * State Map Macros
+ ******************************************************************************/
+#define HFSM_DEFINE_STATE_MAP_ACCESSOR(type) FSM_DEFINE_STATE_MAP_ACCESSOR(type)
+#define HFSM_DEFINE_STATE_MAP(type, name) FSM_DEFINE_STATE_MAP(type, name)
 #define HFSM_STATE_MAP_ENTRY(state_name) FSM_STATE_MAP_ENTRY(state_name)
-#define HFSM_STATE_MAP_ENTRY_EX(state_name, parent_state) FSM_STATE_MAP_ENTRY_EX(state_name, parent_state)
-#define HFSM_STATE_MAP_ENTRY_EX_ALL(state_name, parent_state) FSM_STATE_MAP_ENTRY_EX_ALL(state_name, parent_state)
+#define HFSM_STATE_MAP_ENTRY_EX(state_name) FSM_STATE_MAP_ENTRY_EX(state_name)
+#define HFSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name) \
+  {state_name, guard_name, entry_name, exit_name}
+#define HFSM_VERIFY_STATE_MAP(type, name) FSM_VERIFY_STATE_MAP(type, name)
+
+/*******************************************************************************
+ * Transition Map Macros
+ ******************************************************************************/
+#define HFSM_DEFINE_TRANSITION_MAP(name) FSM_DEFINE_TRANSITION_MAP(name)
+#define HFSM_TRANSITION_MAP_ENTRY(entry) FSM_TRANSITION_MAP_ENTRY(entry)
+#define HFSM_VERIFY_TRANSITION_MAP(name) FSM_VERIFY_TRANSITION_MAP(name)
 
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_HFSM_HPP_ */
