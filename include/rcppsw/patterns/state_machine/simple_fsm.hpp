@@ -59,6 +59,7 @@ class simple_fsm: public base_fsm {
   virtual uint8_t current_state(void) const { return m_current_state; }
   virtual uint8_t max_states(void) const { return mc_max_states; }
   virtual uint8_t previous_state(void) const { return m_previous_state; }
+  virtual uint8_t last_state(void) const { return m_last_state; }
 
  protected:
   virtual uint8_t next_state(void) const { return m_next_state; }
@@ -72,6 +73,7 @@ class simple_fsm: public base_fsm {
   uint8_t           m_next_state;        /// The next state to transition to.
   uint8_t           m_initial_state;
   uint8_t           m_previous_state;
+  uint8_t           m_last_state;
 };
 
 NS_END(state_machine, patterns, rcppsw);
