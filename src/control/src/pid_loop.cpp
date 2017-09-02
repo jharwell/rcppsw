@@ -57,5 +57,4 @@ double pid_loop::calculate(double setpoint, double pv) {
   return output;
 } /* calculate() */
 
-
 NS_END(control, rcppsw);
