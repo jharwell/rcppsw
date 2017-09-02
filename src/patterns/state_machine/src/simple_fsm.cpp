@@ -41,7 +41,8 @@ simple_fsm::simple_fsm(std::shared_ptr<common::er_server> server,
     m_current_state(initial_state),
     m_next_state(0),
     m_initial_state(initial_state),
-    m_previous_state(0) {
+    m_previous_state(0),
+    m_last_state(0) {
   assert(mc_max_states < event_signal::IGNORED);
 }
 
@@ -52,6 +53,7 @@ void simple_fsm::update_state(uint8_t new_state) {
   if (new_state != m_current_state) {
     m_previous_state = m_current_state;
   }
+  m_last_state = m_current_state;
   m_current_state = new_state;
 } /* update_state() */
 
