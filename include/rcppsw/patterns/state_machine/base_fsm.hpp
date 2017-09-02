@@ -119,6 +119,8 @@ class base_fsm: public common::er_client {
   virtual void update_state(uint8_t new_state) = 0;
   virtual uint8_t next_state(void) const = 0;
   virtual uint8_t initial_state(void) const = 0;
+  virtual uint8_t previous_state(void) const  { return 0; }
+  virtual uint8_t last_state(void) const { return 0; }
 
   /**
    * @brief Gets the state map as defined in the derived class.

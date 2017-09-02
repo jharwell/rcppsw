@@ -42,6 +42,8 @@ NS_START(rcppsw, math);
 template<typename T>
 class expression {
  public:
+  expression(void) : m_last() {}
+
   /**
    * @brief Get the last value calculated
    */
