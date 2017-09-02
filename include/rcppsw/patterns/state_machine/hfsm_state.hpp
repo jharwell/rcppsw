@@ -47,10 +47,11 @@ class hfsm_state: public state {
 };
 
 /**
- * @brief hfsm_state_action takes four template arguments:
+ * @brief hfsm_state_action takes 5 template arguments:
  *
  * - The current state machine class.
  * - The parent state machine class.
+ * - A parent state function event data type (derived from event).
  * - A state function event data type (derived from event).
  * - The parent state handler (from within the parent class, as declared with
  *   the appropriate macro).
@@ -58,27 +59,29 @@ class hfsm_state: public state {
  */
 template <class FSM,
           class PFSM,
+          class ParentEvent,
           class Event,
-          int(PFSM::*PHandler)(const Event*),
+          int(PFSM::*PHandler)(const ParentEvent*),
           int (FSM::*Handler)(const Event*)>
 class hfsm_state_action : public hfsm_state {
  public:
   hfsm_state_action(void) : hfsm_state() {}
   virtual ~hfsm_state_action() {}
   virtual int invoke_state_action(base_fsm* fsm,
-                                   const event_data* event) const {
+                                  const event_data* event) const {
     /* Downcast the state machine and event data to the correct derived type */
     FSM* derived_fsm = static_cast<FSM*>(fsm);
     PFSM* parent_fsm = static_cast<PFSM*>(fsm);
     const Event* derived_event = NULL;
 
-    assert(event);
     /*
      * If this check fails, there is a mismatch between the STATE_DECLARE event
      * data type and the data type being sent to the state function.
      */
-    derived_event = dynamic_cast<const Event*>(event);
-    assert(derived_event);
+    if (event) {
+      derived_event = dynamic_cast<const Event*>(event);
+      assert(derived_event);
+    }
 
     int rval = (derived_fsm->*Handler)(derived_event);
     if (event_signal::HANDLED != rval) {
