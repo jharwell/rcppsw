@@ -67,6 +67,10 @@ class pid_loop {
    */
   double calculate(double setpoint, double pv);
 
+  void reset(void) { m_pre_error = 0.0; m_integral = 0.0; }
+  void reset_integral(void) { m_integral = 0.0; }
+  double integral(void) const { return m_integral; }
+
  private:
   double m_Kp;
   double m_Kd;
