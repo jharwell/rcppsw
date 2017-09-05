@@ -49,7 +49,7 @@ NS_START(rcppsw, common);
 /*******************************************************************************
  * Global Variables
  ******************************************************************************/
-std::shared_ptr<null_server> g_null_server(std::make_shared<null_server>());
+std::shared_ptr<global_server> g_server(std::make_shared<global_server>());
 
 /*******************************************************************************
  * Constructors/Destructors
