@@ -1,0 +1,61 @@
+/**
+ * @file time_estimate.hpp
+ *
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
+
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TIME_ESTIMATE_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_TIME_ESTIMATE_HPP_
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+#include "rcppsw/math/expression.hpp"
+
+/*******************************************************************************
+ * Namespaces
+ ******************************************************************************/
+NS_START(rcppsw, task_allocation);
+
+/*******************************************************************************
+ * Class Definitions
+ ******************************************************************************/
+/**
+ * @brief Calculates an estimate of how long a task will take.
+ *
+ * Depends on:
+ *
+ * - Alpha: How much weight to give the past estimate, and how much to give the
+ *   new measurement?
+ *
+ * - The last value of the time estimate.
+ */
+class time_estimate : public rcppsw::math::expression<double> {
+ public:
+  explicit time_estimate(double alpha) : m_alpha(alpha) {}
+
+  double calc(double last_measure) {
+    return set_result(1 - m_alpha * last_result() + m_alpha * last_measure);
+  }
+
+ private:
+  double m_alpha;
+};
+
+NS_END(task_allocation, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TIME_ESTIMATE_HPP_ */

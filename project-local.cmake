@@ -31,6 +31,7 @@ list(APPEND ${target}_SUBDIRS src/multithread)
 list(APPEND ${target}_SUBDIRS src/utils)
 list(APPEND ${target}_SUBDIRS src/patterns/state_machine)
 list(APPEND ${target}_SUBDIRS src/control)
+
 if (WITH_MPI)
   list(APPEND ${target}_SUBDIRS src/multiprocess)
 endif()
