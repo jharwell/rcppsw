@@ -154,6 +154,8 @@ class er_client {
                   const er_lvl::value& dbglvl = er_lvl::NOM) {
     return m_server_handle->insmod(m_er_id, loglvl, dbglvl, mod_name); }
 
+  status_t rmmod(void) { return m_server_handle->rmmod(m_er_id); }
+
   /**
    * @brief Get a reference to the ER server.
    *
