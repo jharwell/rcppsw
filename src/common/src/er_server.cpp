@@ -96,6 +96,13 @@ status_t er_server::insmod(const boost::uuids::uuid& id,
   return insmod(id, m_loglvl_dflt, m_dbglvl_dflt, name);
 } /* insmod() */
 
+status_t er_server::rmmod(const boost::uuids::uuid& id) {
+  er_server_mod tmp(id, er_lvl::NOM, er_lvl::NOM, "tmp");
+  auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
+  m_modules.erase(iter);
+  return OK;
+} /* rmmod() */
+
 void er_server::msg_report(const er_msg_int& msg) {
   er_server_mod tmp(msg.m_id, er_lvl::NOM, er_lvl::NOM, "tmp");
   auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
@@ -108,7 +115,7 @@ void er_server::msg_report(const er_msg_int& msg) {
     iter->msg_report(msg.str_, msg.lvl_, iter->dbglvl(), std::cout);
 #endif
   }
-} /* er_server::msg_report() */
+} /* msg_report() */
 
 int er_server::flush(void) {
   int count = 0;
@@ -118,7 +125,7 @@ int er_server::flush(void) {
     count++;
   } /* while() */
   return count;
-} /* er_server::flush() */
+} /* flush() */
 
 status_t er_server::mod_dbglvl(const boost::uuids::uuid& id,
                               const er_lvl::value& lvl) {
@@ -207,7 +214,7 @@ error:
                   "Failed to update loglvl for module %s: no such module",
                   iter->name().c_str());
   return ERROR;
-} /* er_server::mod_loglvl() */
+} /* mod_loglvl() */
 
 void* er_server::thread_main(__unused void* arg) {
   REPORT_INTERNAL(er_lvl::NOM, "Start");
@@ -224,6 +231,6 @@ void* er_server::thread_main(__unused void* arg) {
     msg_report(msg);
   } /* while() */
   return nullptr;
-} /* er_server::thread_main() */
+} /* thread_main() */
 
 NS_END(common, rcpppsw);

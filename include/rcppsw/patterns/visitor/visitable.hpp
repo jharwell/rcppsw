@@ -34,11 +34,19 @@ NS_START(rcppsw, patterns, visitor);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template<class C>
+/**
+ * P - The (possibly) parent class of the visitable class which will be passed
+ * to the visitor as a reference.
+ *
+ * T - The type of the visitor.
+ */
+template<class P>
 class visitable {
  public:
   template <typename T>
-  void accept(T &visitor) { visitor.visit(static_cast<C&>(*this)); }
+  void accept(T &visitor) { visitor.visit(static_cast<P&>(*this)); }
+
+  virtual ~visitable(void) {}
 };
 
 NS_END(rcppsw, patterns, visitor);
