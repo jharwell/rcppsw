@@ -39,28 +39,43 @@
 NS_START(rcppsw, patterns, state_machine);
 
 /*******************************************************************************
- * Structure Definitions
+ * Class Definitions
  ******************************************************************************/
 /**
  * @brief A structure to hold a single row within the state map.
  */
-struct state_map_row {
-  const rcppsw::patterns::state_machine::state* const state;
+class state_map_row {
+ public:
+  explicit state_map_row(rcppsw::patterns::state_machine::state* state) :
+      m_state(state) {}
+
+  rcppsw::patterns::state_machine::state* state(void) const { return m_state; }
+
+ private:
+  rcppsw::patterns::state_machine::state* m_state;
 };
 
 /**
  * @brief A structure to hold a single row within the extended state map.
  */
-struct state_map_ex_row {
-  const rcppsw::patterns::state_machine::state* const state;
-  const state_guard* const guard;
-  const state_entry* const entry;
-  const state_exit* const exit;
+class state_map_ex_row {
+ public:
+  state_map_ex_row(rcppsw::patterns::state_machine::state* state,
+                   state_guard* guard,
+                   state_entry* entry, state_exit* exit) :
+      m_state(state), m_guard(guard), m_entry(entry), m_exit(exit) {}
+  rcppsw::patterns::state_machine::state* state(void) const { return m_state; }
+  state_guard* guard(void) const { return m_guard; }
+  state_entry* entry(void) const { return m_entry; }
+  state_exit* exit(void) const { return m_exit; }
+
+ private:
+  rcppsw::patterns::state_machine::state* m_state;
+  state_guard* m_guard;
+  state_entry* m_entry;
+  state_exit* m_exit;
 };
 
-/*******************************************************************************
- * Class Definitions
- ******************************************************************************/
 /**
  * @brief base_fsm implements a software-based state machine.
  *
@@ -132,7 +147,7 @@ class base_fsm: public common::er_client {
    * @return An array of state_map_row pointers with the array size MAX_STATES
    *         or NULL if the state machine uses the state_map_ex().
    */
-  virtual const state_map_row* state_map() { return NULL; }
+  virtual const state_map_row* state_map(__unused size_t index) { return NULL; }
 
   /**
    * @brief Gets the extended state map as defined in the derived class.
@@ -145,16 +160,16 @@ class base_fsm: public common::er_client {
    * @return An array of state_map_ex_row pointers with the array size
    *         max_states or NULL if the state machine uses the state_map().
    */
-  virtual const state_map_ex_row* state_map_ex() { return NULL; }
+  virtual const state_map_ex_row* state_map_ex(__unused size_t index) { return NULL; }
 
-  virtual void state_engine_step(const state_map_row* const map);
-  virtual void state_engine_step(const state_map_ex_row* const map_ex);
+  virtual void state_engine_step(const state_map_row* const row);
+  virtual void state_engine_step(const state_map_ex_row* const row_ex);
 
   base_fsm(const base_fsm& fsm);
 
  private:
-  void state_engine(const state_map_row* const state_map);
-  void state_engine(const state_map_ex_row* const state_map_ex);
+  void state_engine_map(void);
+  void state_engine_map_ex(void);
   base_fsm& operator=(const base_fsm& fsm) = delete;
 
   bool              m_event_generated;  /// Set to TRUE on event generation.
@@ -218,18 +233,20 @@ NS_END(state_machine, patterns, rcppsw);
 #define FSM_DEFINE_STATE_MAP(type, name)                                \
     static const rcppsw::patterns::state_machine::JOIN(type, _row) name[] =
 
-#define FSM_DEFINE_STATE_MAP_ACCESSOR(type)                             \
-  virtual const rcppsw::patterns::state_machine::JOIN(type, _row)* JOIN(type, )(void)
+#define FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)                  \
+  const rcppsw::patterns::state_machine::JOIN(type, _row)* JOIN(type, )(size_t index_var)
 
 #define FSM_STATE_MAP_ENTRY(state_name)     \
-  {state_name}
+  rcppsw::patterns::state_machine::state_map_row(state_name)
 
-#define FSM_STATE_MAP_ENTRY_EX(state_name) { state_name, NULL, NULL, NULL}
+#define FSM_STATE_MAP_ENTRY_EX(state_name) \
+  rcppsw::patterns::state_machine::state_map_ex_row(state_name, NULL, NULL, NULL)
+
 #define FSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name) \
-  {state_name, guard_name, entry_name, exit_name}
+  rcppsw::patterns::state_machine::state_map_ex_row(state_name, guard_name, entry_name, exit_name)
 
 #define FSM_VERIFY_STATE_MAP(type, name)                                \
-  static_assert((sizeof(name)/sizeof(struct rcppsw::patterns::state_machine::JOIN(type, _row))) == ST_MAX_STATES, \
+  static_assert((sizeof(name)/sizeof(rcppsw::patterns::state_machine::JOIN(type, _row))) == ST_MAX_STATES, \
                 "state map does not cover all states");
 
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_BASE_FSM_HPP_ */
