@@ -39,39 +39,39 @@ NS_START(rcppsw, patterns, state_machine);
  ******************************************************************************/
 class hfsm_state: public state {
  public:
+  explicit hfsm_state(hfsm_state* parent) : state(), m_parent(parent) {}
   virtual ~hfsm_state() {}
 
   virtual int invoke_state_action(
       base_fsm* fsm,
       const event_data* e) const = 0;
+  hfsm_state* parent(void) const { return m_parent; }
+
+ private:
+  hfsm_state& operator=(const hfsm_state& fsm) = delete;
+  hfsm_state(const hfsm_state& fsm) = delete;
+
+  hfsm_state* m_parent;
 };
 
 /**
- * @brief hfsm_state_action takes 5 template arguments:
+ * @brief hfsm_state_action takes 3 template arguments:
  *
  * - The current state machine class.
- * - The parent state machine class.
- * - A parent state function event data type (derived from event).
  * - A state function event data type (derived from event).
- * - The parent state handler (from within the parent class, as declared with
- *   the appropriate macro).
  * - A state machine member function pointer.
  */
 template <class FSM,
-          class PFSM,
-          class ParentEvent,
           class Event,
-          int(PFSM::*PHandler)(const ParentEvent*),
           int (FSM::*Handler)(const Event*)>
 class hfsm_state_action : public hfsm_state {
  public:
-  hfsm_state_action(void) : hfsm_state() {}
+  explicit hfsm_state_action(hfsm_state* parent) : hfsm_state(parent) {}
   virtual ~hfsm_state_action() {}
   virtual int invoke_state_action(base_fsm* fsm,
                                   const event_data* event) const {
     /* Downcast the state machine and event data to the correct derived type */
     FSM* derived_fsm = static_cast<FSM*>(fsm);
-    PFSM* parent_fsm = static_cast<PFSM*>(fsm);
     const Event* derived_event = NULL;
 
     /*
@@ -83,11 +83,7 @@ class hfsm_state_action : public hfsm_state {
       assert(derived_event);
     }
 
-    int rval = (derived_fsm->*Handler)(derived_event);
-    if (event_signal::HANDLED != rval) {
-      rval = (parent_fsm->*PHandler)(event);
-    }
-    return rval;
+    return (derived_fsm->*Handler)(derived_event);
   }
 };
 
