@@ -34,23 +34,38 @@ NS_START(rcppsw, patterns, state_machine);
 void hfsm::state_engine_step(const state_map_row* const row) {
   ER_ASSERT(nullptr != row->state(), "FATAL: null state?");
   ER_VER("Invoking state action: state%d, data=%p", current_state(),
-         get_event_data());
+         event_data_get());
   const hfsm_state* state = static_cast<const hfsm_state*>(row->state());
-  while (event_signal::HANDLED !=
-         state->invoke_state_action(this, get_event_data())) {
+  int rval = event_signal::UNHANDLED;
+  while (rval != event_signal::HANDLED) {
+    rval = state->invoke_state_action(this, event_data_get());
+    if (event_signal::HANDLED == rval) {
+      break;
+    }
     state = state->parent();
+    const_cast<event_data*>(event_data_get())->type(event_type::CHILD);
   } /* while() */
 } /* state_engine_step() */
 
 void hfsm::state_engine_step(const state_map_ex_row* const row_ex) {
   ER_ASSERT(nullptr != row_ex->state(), "FATAL: null state?");
   ER_VER("Invoking state action: state%d, data=%p", current_state(),
-         get_event_data());
+         event_data_get());
   const hfsm_state* state = static_cast<const hfsm_state*>(row_ex->state());
-  while (event_signal::HANDLED !=
-         state->invoke_state_action(this, get_event_data())) {
+  int rval = event_signal::UNHANDLED;
+  while (rval != event_signal::HANDLED) {
+    rval = state->invoke_state_action(this, event_data_get());
+    if (event_signal::HANDLED == rval) {
+      break;
+    }
     state = state->parent();
+    const_cast<event_data*>(event_data_get())->type(event_type::CHILD);
   } /* while() */
 } /* state_engine_step() */
+
+void hfsm::inject_event(int signal, int type) {
+  external_event(current_state(),
+                 rcppsw::make_unique<const event_data>(signal, type));
+} /* inject event */
 
 NS_END(state_machine, patterns, rcppsw);
