@@ -191,31 +191,31 @@ NS_END(state_machine, patterns, rcppsw);
 #define FSM_STATE_DEFINE(FSM, state_name, event_data)            \
   int FSM::ST_##state_name(__unused const event_data* data)
 
-#define FSM_GUARD_DECLARE(FSM, guardName, event_data)                    \
-  bool GD_##guardName(__unused const event_data*);                      \
+#define FSM_GUARD_DECLARE(FSM, guard_name, event_data)                    \
+  bool GD_##guard_name(__unused const event_data*);                      \
   rcppsw::patterns::state_machine::state_guard_condition<FSM,            \
                                                          event_data,    \
-                                                         &FSM::GD_##guardName> guardName;
+                                                         &FSM::GD_##guard_name> guard_name;
 
-#define FSM_GUARD_DEFINE(FSM, guardName, event_data)             \
-  bool FSM::GD_##guardName(__unused const event_data* data)
+#define FSM_GUARD_DEFINE(FSM, guard_name, event_data)             \
+  bool FSM::GD_##guard_name(__unused const event_data* data)
 
-#define FSM_ENTRY_DECLARE(FSM, entryName, event_data)                    \
-  void EN_##entryName(__unused const event_data*);                      \
+#define FSM_ENTRY_DECLARE(FSM, entry_name, event_data)                    \
+  void EN_##entry_name(__unused const event_data*);                      \
   rcppsw::patterns::state_machine::state_entry_action<FSM,               \
                                                       event_data,       \
-                                                      &FSM::EN_##entryName> entryName;
+                                                      &FSM::EN_##entry_name> entry_name;
 
-#define FSM_ENTRY_DEFINE(FSM, entryName, event_data)             \
-  void FSM::EN_##entryName(__unused const event_data* data)
+#define FSM_ENTRY_DEFINE(FSM, entry_name, event_data)             \
+  void FSM::EN_##entry_name(__unused const event_data* data)
 
-#define FSM_EXIT_DECLARE(FSM, exitName)                                  \
-  void EX_##exitName(void);                                             \
+#define FSM_EXIT_DECLARE(FSM, exit_name)                                  \
+  void EX_##exit_name(void);                                             \
   rcppsw::patterns::state_machine::state_exit_action<FSM,                \
-                                                     &FSM::EX_##exitName> exitName;
+                                                     &FSM::EX_##exit_name> exit_name;
 
-#define FSM_EXIT_DEFINE(FSM, exitName)           \
-  void FSM::EX_##exitName(void)
+#define FSM_EXIT_DEFINE(FSM, exit_name)           \
+  void FSM::EX_##exit_name(void)
 
 /*******************************************************************************
  * Transition Map Macros

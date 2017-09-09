@@ -161,6 +161,8 @@ rcppsw::patterns::state_machine::state_entry_action<FSM,                \
   rcppsw::patterns::state_machine::state_entry_action<BASE_FSM,         \
                                                       event_data,       \
                                                       &BASE_FSM::EN_##inherited_name> inherited_name;
+#define HFSM_ENTRY_DEFINE(FSM, entry_name, event_data) \
+  FSM_ENTRY_DEFINE(FSM, entry_name, event_data)
 
 #define HFSM_EXIT_DECLARE(FSM, exit_name)                               \
   public:                                                               \
