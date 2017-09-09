@@ -96,6 +96,8 @@ class hfsm: public base_fsm {
     base_fsm::init();
   }
 
+  void inject_event(int signal, int type);
+
  protected:
   /**
    * @brief The topmost state in the hierarchy, of which all states are
@@ -180,6 +182,7 @@ rcppsw::patterns::state_machine::state_exit_action<FSM,                 \
 
 #define HFSM_CONSTRUCT_STATE(state_name, \
                              parent) state_name(static_cast<fsm::hfsm_state*>(parent))
+
 /*******************************************************************************
  * State Map Macros
  ******************************************************************************/

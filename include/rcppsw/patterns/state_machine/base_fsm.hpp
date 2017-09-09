@@ -91,7 +91,8 @@ class base_fsm: public common::er_client {
   virtual void init(void);
 
  protected:
-  const event_data* get_event_data(void) { return m_event_data.get(); }
+  const event_data* event_data_get(void) { return m_event_data.get(); }
+
   void generated_event(bool b) { m_event_generated = b; }
   bool has_generated_event(void) { return m_event_generated; }
 

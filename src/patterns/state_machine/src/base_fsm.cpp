@@ -173,15 +173,15 @@ void base_fsm::state_engine_map_ex(void) {
 void base_fsm::state_engine_step(const state_map_row* const row) {
   ER_ASSERT(nullptr != row->state(), "FATAL: null state?");
   ER_VER("Invoking state action: state%d, data=%p", current_state(),
-         get_event_data());
-  row->state()->invoke_state_action(this, get_event_data());
+         event_data_get());
+  row->state()->invoke_state_action(this, event_data_get());
 } /* state_engine_step() */
 
 void base_fsm::state_engine_step(const state_map_ex_row* const row_ex) {
   ER_ASSERT(nullptr != row_ex[current_state()].state(), "FATAL: null state?");
   ER_VER("Invoking state action: state%d, data=%p", current_state(),
-          get_event_data());
-  row_ex->state()->invoke_state_action(this, get_event_data());
+          event_data_get());
+  row_ex->state()->invoke_state_action(this, event_data_get());
 } /* state_engine_step() */
 
 
