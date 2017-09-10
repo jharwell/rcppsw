@@ -75,9 +75,9 @@ er_server::er_server(const std::string& logfile_fname,
  * Member Functions
  ******************************************************************************/
 status_t er_server::insmod(const boost::uuids::uuid& mod_id,
-                          const er_lvl::value& loglvl,
-                          const er_lvl::value& dbglvl,
-                          const std::string& mod_name) {
+                           const er_lvl::value& loglvl,
+                           const er_lvl::value& dbglvl,
+                           const std::string& mod_name) {
   er_server_mod mod(mod_id, loglvl, dbglvl, mod_name);
 
   /* make sure module not already present */
@@ -91,10 +91,16 @@ error:
   return ERROR;
 } /* insmod() */
 
-status_t er_server::insmod(const boost::uuids::uuid& id,
-                          const std::string& name) {
-  return insmod(id, m_loglvl_dflt, m_dbglvl_dflt, name);
-} /* insmod() */
+status_t er_server::findmod(const std::string& mod_name,
+                            boost::uuids::uuid& mod_id) {
+  for (auto mod : m_modules) {
+    if (mod.name() == mod_name) {
+      mod_id = mod.id();
+      return OK;
+    }
+  } /* for(mod..) */
+  return ERROR;
+} /* findmod() */
 
 status_t er_server::rmmod(const boost::uuids::uuid& id) {
   er_server_mod tmp(id, er_lvl::NOM, er_lvl::NOM, "tmp");

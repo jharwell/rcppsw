@@ -89,9 +89,23 @@ class er_server : public multithread::threadable {
     insmod(m_er_id, "ER Server");
     mod_dbglvl(m_er_id, er_lvl::NOM);
   }
+
   /**
-   * @brief Install a new module into the list of active debugging/logging
-   * modules.
+   * @brief Find an existing module already installed on the server. Modules are
+   * search/compared by name, rather than UUID, because if you knew the UUID of
+   * the module you wanted to attach as, you would just go ahead and use it,
+   * right?
+   *
+   * @param mod_name Name of the module.
+   * @param mod_id To be filled with the UUID of the module, if it exists.
+   *
+   * @return OK if the module was found, ERROR otherwise.
+   */
+  status_t findmod(const std::string& mod_name, boost::uuids::uuid& mod_id);
+
+  /**
+   * @brief Unconditionally install a new module into the list of active
+   * debugging/logging modules.
    *
    * @param mod_id The UUID of the module to install.
    * @param loglvl The initial logging level of the module.
@@ -105,16 +119,18 @@ class er_server : public multithread::threadable {
                   const er_lvl::value& loglvl, const er_lvl::value& dbglvl,
                   const std::string& mod_name);
   /**
-   * @brief Install a new module into the list of active debuging/logging
-   * modules, short version. Uses the default logging/debugging levels of the
-   * server when installing the new module.
+   * @brief Unconditionally install a new module into the list of active
+   * debuging/logging modules, short version. Uses the default logging/debugging
+   * levels of the server when installing the new module.
    *
    * @param mod_id The UUID of the module to install.
    * @param name The name of the module, which will be prepended to all
    *                 messages.
    * @return OK if successful, ERROR otherwise.
    */
-  status_t insmod(const boost::uuids::uuid& id, const std::string& name);
+  status_t insmod(const boost::uuids::uuid& id, const std::string& name) {
+    return insmod(id, m_loglvl_dflt, m_dbglvl_dflt, name);
+  }
 
   /**
    * @brief Remove a module from the list of active debugging/logging modules.

@@ -132,10 +132,16 @@ class er_client {
   explicit er_client(const std::shared_ptr<er_server>& server_handle)
       : m_server_handle(server_handle), m_er_id(m_server_handle->idgen()) {}
 
-  void deferred_init(const std::shared_ptr<er_server>& server_handle) {
-    m_server_handle = server_handle;
-    m_er_id = m_server_handle->idgen();
-  }
+  /**
+   * @brief Initialize the er_client in cases where it was not possible to due
+   * so in the initialization list in the class constructor. If the default
+   * constructor for er_client is used, things will segfault/go badly if any
+   * debugging statements are encountered in the client before this function is
+   * called.
+   *
+   * @param server_handle The er_server to attach to.
+   */
+  void deferred_init(const std::shared_ptr<er_server>& server_handle);
   void change_id(boost::uuids::uuid old_id, boost::uuids::uuid new_id) {
     m_server_handle->change_id(old_id, new_id);
   }
@@ -154,7 +160,24 @@ class er_client {
                   const er_lvl::value& dbglvl = er_lvl::NOM) {
     return m_server_handle->insmod(m_er_id, loglvl, dbglvl, mod_name); }
 
+  /**
+   * @brief Uninstall the module for this client. This function is called
+   * automatically in the destructor, but can be called explicitly as well.
+   *
+   * @return OK if the remove was successful, ERROR otherwise.
+   */
   status_t rmmod(void) { return m_server_handle->rmmod(m_er_id); }
+
+  /**
+   * @brief Attach to an EXISTING module within the server by name. If the
+   * module exists, the UUID for this client is set to the UUID of the
+   * module. If no module with the given name exists, no action is performed.
+   *
+   * @param mod_name Name of the module to attach to.
+   *
+   * @return OK if a module was attached to, ERROR otherwise.
+   */
+  status_t attmod(const std::string& mod_name);
 
   /**
    * @brief Get a reference to the ER server.
