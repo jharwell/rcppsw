@@ -178,7 +178,7 @@ void base_fsm::state_engine_step(const state_map_row* const row) {
 } /* state_engine_step() */
 
 void base_fsm::state_engine_step(const state_map_ex_row* const row_ex) {
-  ER_ASSERT(nullptr != row_ex[current_state()].state(), "FATAL: null state?");
+  ER_ASSERT(nullptr != row_ex->state(), "FATAL: null state?");
   ER_VER("Invoking state action: state%d, data=%p", current_state(),
           event_data_get());
   row_ex->state()->invoke_state_action(this, event_data_get());
