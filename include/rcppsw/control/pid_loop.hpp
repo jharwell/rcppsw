@@ -66,10 +66,19 @@ class pid_loop {
    * @return Correctional term (I think).
    */
   double calculate(double setpoint, double pv);
-
+  void min(double min) { m_min = min; }
+  void max(double max) { m_max = max; }
   void reset(void) { m_pre_error = 0.0; m_integral = 0.0; }
   void reset_integral(void) { m_integral = 0.0; }
   double integral(void) const { return m_integral; }
+  double dt(void) const { return m_dt; }
+  void dt(double dt) { m_dt = dt; }
+  double Kp(void) const { return m_Kp; }
+  void Kp(double Kp) { m_Kp = Kp; }
+  double Kd(void) const { return m_Kd; }
+  void Kd(double Kd) { m_Kd = Kd; }
+  double Ki(void) const { return m_Ki; }
+  void Ki(double Ki) { m_Ki = Ki; }
 
  private:
   double m_Kp;
