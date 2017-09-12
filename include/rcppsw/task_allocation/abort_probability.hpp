@@ -40,6 +40,13 @@ NS_START(rcppsw, task_allocation);
  * @brief Calculates the probability that a robot will abort the task it is
  * currently working on.
  *
+ * Implementats the equation:
+ *
+ * P_g = 1/(1 + e^(omega(delta, duration estimates )))
+ *
+ * Where omega = reactivity * (
+ *                    (execution time - whole_task_time)/
+ *                    (subtask1_time + subtask2 time) + offset)
  * Depends on:
  *
  * - The reactivity parameter: How sensitive should robots be to abrupt changes

@@ -1,5 +1,5 @@
 /**
- * @file time_estimate.hpp
+ * @file decomposable_task.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,13 +18,15 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TIME_ESTIMATE_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TIME_ESTIMATE_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_DECOMPOSABLE_TASK_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_DECOMPOSABLE_TASK_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/expression.hpp"
+#include <string>
+#include "rcppsw/task_allocation/base_task.hpp"
+#include "rcppsw/task_allocation/abort_probability.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -34,28 +36,29 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/**
- * @brief Calculates an estimate of how long a task will take.
- *
- * Depends on:
- *
- * - Alpha: How much weight to give the past estimate, and how much to give the
- *   new measurement?
- *
- * - The last value of the time estimate.
- */
-class time_estimate : public rcppsw::math::expression<double> {
+class decomposable_task : public base_task {
  public:
-  explicit time_estimate(double alpha) : m_alpha(alpha) {}
+  decomposable_task(const std::string& name,
+                    const base_task& subtask1, const base_task& subtask2,
+                    double alpha,
+                    double abort_reactivity, double abort_offset) :
+      base_task(name, alpha),
+      m_abort_prob(abort_reactivity, abort_offset),
+      m_subtask1(subtask1), m_subtask2(subtask2) {}
 
-  double calc(double current_measure) {
-    return set_result((1 - m_alpha) * last_result() + m_alpha * current_measure);
+  double abort_prob(void) {
+    return m_abort_prob.calc(this->exec_time(),
+                             this->estimate(),
+                             m_subtask1.estimate(),
+                             m_subtask2.estimate());
   }
 
  private:
-  double m_alpha;
+  abort_probability m_abort_prob;
+  const base_task& m_subtask1;
+  const base_task& m_subtask2;
 };
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TIME_ESTIMATE_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_DECOMPOSABLE_TASK_HPP_ */
