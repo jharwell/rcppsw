@@ -38,6 +38,17 @@ NS_START(rcppsw, task_allocation);
 /**
  * @brief Calculates the probability that a robot partitions its current task.
  *
+ * Implements the equation:
+ *
+ * If no_partition_est > (subtask1_est + subtask2_est):
+ *
+ * P_p = 1/(1+ e^(-reactivity(no_partition_est/
+ *                                            (subtask1_est subtask2_est) - 1)))
+ *
+ * If no_partition_est <= (subtask1_est + subtask2_est):
+ *
+ * P_p = 1/(1+ e^(-reactivity(1 - (subtask1_est subtask2_est)/no_partition_est)))
+ *
  * Depends on:
  *
  * - The robot's time estimates of how long it takes to complete each of the two

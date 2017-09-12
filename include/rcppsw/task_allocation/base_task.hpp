@@ -1,5 +1,5 @@
 /**
- * @file time_estimate.hpp
+ * @file base_task.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,13 +18,15 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TIME_ESTIMATE_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TIME_ESTIMATE_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_BASE_TASK_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_BASE_TASK_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/expression.hpp"
+#include <string>
+#include "rcppsw/common/common.hpp"
+#include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -34,28 +36,27 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/**
- * @brief Calculates an estimate of how long a task will take.
- *
- * Depends on:
- *
- * - Alpha: How much weight to give the past estimate, and how much to give the
- *   new measurement?
- *
- * - The last value of the time estimate.
- */
-class time_estimate : public rcppsw::math::expression<double> {
+class base_task {
  public:
-  explicit time_estimate(double alpha) : m_alpha(alpha) {}
-
-  double calc(double current_measure) {
-    return set_result((1 - m_alpha) * last_result() + m_alpha * current_measure);
-  }
+  explicit base_task(const std::string& name, double estimate_alpha):
+      m_exec_time(0.0), m_name(name), m_estimate(estimate_alpha) {}
+  const std::string& name(void) const { return m_name; }
+  const time_estimate& estimate(void) const { return m_estimate; }
+  void update_estimate(double last_measure) { m_estimate.calc(last_measure); }
+  double exec_time(void) const { return m_exec_time; }
+  void update_exec_time(double exec_time) { m_exec_time = exec_time; }
 
  private:
-  double m_alpha;
+  double m_exec_time;
+  std::string m_name;
+  time_estimate m_estimate;
 };
+
+/*******************************************************************************
+ * Type Definitions
+ ******************************************************************************/
+typedef base_task atomic_task;
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TIME_ESTIMATE_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_BASE_TASK_HPP_ */

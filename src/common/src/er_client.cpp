@@ -1,5 +1,5 @@
 /**
- * @file time_estimate.hpp
+ * @file er_client.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,44 +18,26 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TIME_ESTIMATE_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TIME_ESTIMATE_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/expression.hpp"
+#include "rcppsw/common/er_client.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, common);
 
 /*******************************************************************************
- * Class Definitions
+ * Member Functions
  ******************************************************************************/
-/**
- * @brief Calculates an estimate of how long a task will take.
- *
- * Depends on:
- *
- * - Alpha: How much weight to give the past estimate, and how much to give the
- *   new measurement?
- *
- * - The last value of the time estimate.
- */
-class time_estimate : public rcppsw::math::expression<double> {
- public:
-  explicit time_estimate(double alpha) : m_alpha(alpha) {}
+status_t er_client::attmod(const std::string& mod_name) {
+  return server_handle()->findmod(mod_name, m_er_id);
+} /* attmod() */
 
-  double calc(double current_measure) {
-    return set_result((1 - m_alpha) * last_result() + m_alpha * current_measure);
-  }
+void er_client::deferred_init(const std::shared_ptr<er_server>& server_handle) {
+  m_server_handle = server_handle;
+  m_er_id = m_server_handle->idgen();
+} /* deferred_init() */
 
- private:
-  double m_alpha;
-};
-
-NS_END(task_allocation, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TIME_ESTIMATE_HPP_ */
+NS_END(common, rcppsw);
