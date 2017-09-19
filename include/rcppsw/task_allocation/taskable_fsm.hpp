@@ -1,5 +1,5 @@
 /**
- * @file task_sequence.hpp
+ * @file taskable_fsm.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,14 +18,14 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_SEQUENCE_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_SEQUENCE_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_FSM_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_FSM_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <list>
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/task_allocation/taskable.hpp"
+#include "rcppsw/patterns/state_machine/base_fsm.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -35,24 +35,16 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class logical_task;
-class atomic_task;
-
-class task_sequence {
+class taskable_fsm : public taskable, public patterns::state_machine::base_fsm {
  public:
-  task_sequence(std::list<atomic_task*>& tasks, logical_task* const parent) :
-      m_parent(parent), m_current_task(tasks.begin()), m_tasks(tasks) {}
+  explicit taskable_fsm(const std::shared_ptr<common::er_server>& server) :
+      base_fsm(server) {}
+  virtual ~taskable_fsm(void) {}
 
-  const logical_task* parent(void) const { return m_parent; }
-  atomic_task* current_task(void) { return *m_current_task; }
-  void advance_task(void) { ++m_current_task; }
-
- private:
-  logical_task* const m_parent;
-  std::list<atomic_task*>::iterator m_current_task;
-  std::list<atomic_task*> m_tasks;
+  virtual void task_reset(void) { init(); }
+  virtual void task_start(void) { generated_event(true); state_engine(); }
 };
 
-NS_END(task_allocation, rcppsw);
+NS_END(rcppsw, task_allocation);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_SEQUENCE_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_FSM_HPP_ */

@@ -150,6 +150,7 @@ class base_fsm: public common::er_client {
    */
   virtual const state_map_row* state_map(__unused size_t index) { return NULL; }
 
+
   /**
    * @brief Gets the extended state map as defined in the derived class.
    *
