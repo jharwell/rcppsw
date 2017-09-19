@@ -1,5 +1,5 @@
 /**
- * @file decomposable_task.hpp
+ * @file atomic_task.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,16 +18,18 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_DECOMPOSABLE_TASK_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_DECOMPOSABLE_TASK_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_ATOMIC_TASK_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_ATOMIC_TASK_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <list>
 #include <string>
-#include "rcppsw/task_allocation/logical_task.hpp"
+
 #include "rcppsw/task_allocation/task_sequence.hpp"
-#include "rcppsw/task_allocation/abort_probability.hpp"
+#include "rcppsw/task_allocation/logical_task.hpp"
+#include "rcppsw/task_allocation/taskable_fsm.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -37,43 +39,25 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template<class T1, class T2>
-class decomposable_task : public logical_task {
+class atomic_task : public logical_task, public taskable {
  public:
-  decomposable_task(const std::string& name, logical_task* const parent,
-                    double alpha,
-                    double abort_reactivity, double abort_offset) :
-      logical_task(name, parent, alpha),
-      m_abort_prob(abort_reactivity, abort_offset) {
-  }
+  atomic_task(const std::string& name, logical_task* const parent,
+              double estimate_alpha, taskable_fsm& fsm) :
+      logical_task(name, parent, estimate_alpha), m_fsm(fsm) {}
 
-  double abort_prob(void) {
-    return m_abort_prob.calc(this->exec_time(), this->estimate(),
-                             m_subtask1->estimate(), m_subtask2->estimate());
-  }
-
-  /**
-   * @brief Get the task sequence for a decomposable task.
-   *
-   * @param parent The parent for the task sequence. If NULL, the current object
-   * is taken to be the parent of the task sequence.
-   *
-   * @return
-   */
   task_sequence sequence(logical_task* const parent) {
-    if (nullptr == parent) {
-      return m_subtask1->sequence(this) + m_subtask2->sequence(this);
-    } else {
-      return m_subtask1->sequence(parent) + m_subtask2->sequence(parent);
-    }
+    std::list<atomic_task*> tasks;
+    tasks.push_back(this);
+    return task_sequence(tasks, parent);
   }
+  void task_start(void) { m_fsm.task_start(); }
+  void task_reset(void) {m_fsm.task_reset(); }
+  bool task_finished(void) { return m_fsm.task_finished(); }
 
  private:
-  abort_probability m_abort_prob;
-  T1 *const m_subtask1;
-  T2 *const m_subtask2;
+  taskable_fsm& m_fsm;
 };
 
-NS_END(task_allocation, rcppsw);
+NS_END(task_al.location, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_DECOMPOSABLE_TASK_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_ATOMIC_TASK_HPP_ */

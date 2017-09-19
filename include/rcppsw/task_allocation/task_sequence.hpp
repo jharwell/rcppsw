@@ -1,5 +1,5 @@
 /**
- * @file base_task.hpp
+ * @file task_sequence.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,15 +18,14 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_BASE_TASK_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_BASE_TASK_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_SEQUENCE_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_SEQUENCE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
+#include <list>
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -36,27 +35,24 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class base_task {
+class logical_task;
+class atomic_task;
+
+class task_sequence {
  public:
-  explicit base_task(const std::string& name, double estimate_alpha):
-      m_exec_time(0.0), m_name(name), m_estimate(estimate_alpha) {}
-  const std::string& name(void) const { return m_name; }
-  const time_estimate& estimate(void) const { return m_estimate; }
-  void update_estimate(double last_measure) { m_estimate.calc(last_measure); }
-  double exec_time(void) const { return m_exec_time; }
-  void update_exec_time(double exec_time) { m_exec_time = exec_time; }
+  task_sequence(std::list<atomic_task*>& tasks, logical_task* const parent) :
+      m_parent(parent), m_current_task(tasks.begin()), m_tasks(tasks) {}
+
+  const logical_task* parent(void) const { return m_parent; }
+  atomic_task* current_task(void) { return *m_current_task; }
+  void advance_task(void) { ++m_current_task; }
 
  private:
-  double m_exec_time;
-  std::string m_name;
-  time_estimate m_estimate;
+  logical_task* const m_parent;
+  std::list<atomic_task*>::iterator m_current_task;
+  std::list<atomic_task*> m_tasks;
 };
-
-/*******************************************************************************
- * Type Definitions
- ******************************************************************************/
-typedef base_task atomic_task;
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_BASE_TASK_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_SEQUENCE_HPP_ */

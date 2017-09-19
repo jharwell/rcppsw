@@ -1,5 +1,5 @@
 /**
- * @file visitor.hpp
+ * @file taskable_fsm.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,47 +18,33 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITOR_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITOR_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_FSM_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_FSM_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/task_allocation/taskable.hpp"
+#include "rcppsw/patterns/state_machine/base_fsm.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, patterns, visitor);
+NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/**
- * @brief The base visitor class from which all other classes wishing to employ
- * the visit()/accept() paradigm inherit.
- */
-class visitor {
+class taskable_fsm : public taskable, public patterns::state_machine::base_fsm {
  public:
-  virtual ~visitor(void) {}
+  explicit taskable_fsm(const std::shared_ptr<common::er_server>& server) :
+      base_fsm(server) {}
+  virtual ~taskable_fsm(void) {}
+
+  virtual void task_reset(void) { init(); }
+  virtual void task_start(void) { generated_event(true); state_engine(); }
 };
 
-/**
- * @brief Visitor classes should also derive from can_visit<T> for each derived
- * visitable type they want to visit.
- *
- * Note that classes that derive from \ref visitor don't HAVE to also derive
- * from this class in order to be able to visit \ref visitable classes, if they
- * happen to define a function with this EXACT signature. Deriving from this
- * class is more self-documenting, and results in better compiler errors.
- */
-template<class T, typename R = int>
-class can_visit {
- public:
-  virtual R visit(T& visitee) = 0;
-  virtual ~can_visit(void) {}
-};
+NS_END(rcppsw, task_allocation);
 
-NS_END(rcppsw, patterns, visitor);
-
-#endif /* INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITOR_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_FSM_HPP_ */
