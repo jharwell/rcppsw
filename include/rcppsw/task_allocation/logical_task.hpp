@@ -26,8 +26,6 @@
  ******************************************************************************/
 #include <string>
 #include <list>
-
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
 #include "rcppsw/task_allocation/task_sequence.hpp"
 
@@ -43,7 +41,8 @@ class logical_task {
  public:
   explicit logical_task(const std::string& name, logical_task* const parent,
                         double estimate_alpha) :
-      m_exec_time(0.0), m_name(name), m_estimate(estimate_alpha) {}
+      m_exec_time(0.0), m_name(name), m_parent(parent),
+      m_estimate(estimate_alpha) {}
 
   const std::string& name(void) const { return m_name; }
 
@@ -52,13 +51,15 @@ class logical_task {
 
   double exec_time(void) const { return m_exec_time; }
   void update_exec_time(double exec_time) { m_exec_time = exec_time; }
+  logical_task* parent(void) const { return m_parent; }
+  void parent(logical_task* parent) { m_parent = parent; }
 
-  virtual task_sequence sequence(void) = 0;
+  virtual task_sequence sequence(logical_task* const parent) = 0;
 
  private:
   double m_exec_time;
   std::string m_name;
-  logical_task* parent;
+  logical_task* m_parent;
   time_estimate m_estimate;
 };
 
