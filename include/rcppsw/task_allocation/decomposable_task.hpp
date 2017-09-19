@@ -25,7 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/task_allocation/base_task.hpp"
+#include "rcppsw/task_allocation/logical_task.hpp"
+#include "rcppsw/task_allocation/task_sequence.hpp"
 #include "rcppsw/task_allocation/abort_probability.hpp"
 
 /*******************************************************************************
@@ -36,27 +37,27 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class decomposable_task : public base_task {
+template<class T1, class T2>
+class decomposable_task : public logical_task {
  public:
   decomposable_task(const std::string& name,
-                    const base_task& subtask1, const base_task& subtask2,
                     double alpha,
                     double abort_reactivity, double abort_offset) :
-      base_task(name, alpha),
-      m_abort_prob(abort_reactivity, abort_offset),
-      m_subtask1(subtask1), m_subtask2(subtask2) {}
+      logical_task(name, alpha),
+      m_abort_prob(abort_reactivity, abort_offset) {}
 
   double abort_prob(void) {
-    return m_abort_prob.calc(this->exec_time(),
-                             this->estimate(),
-                             m_subtask1.estimate(),
-                             m_subtask2.estimate());
+    return m_abort_prob.calc(this->exec_time(), this->estimate(),
+                             m_subtask1.estimate(), m_subtask2.estimate());
+  }
+  task_sequence sequence(void) {
+    return m_subtask1.sequence() + m_subtask2.sequence();
   }
 
  private:
   abort_probability m_abort_prob;
-  const base_task& m_subtask1;
-  const base_task& m_subtask2;
+  T1 m_subtask1;
+  T2 m_subtask2;
 };
 
 NS_END(task_allocation, rcppsw);
