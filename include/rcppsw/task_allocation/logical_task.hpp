@@ -1,5 +1,5 @@
 /**
- * @file visitor.hpp
+ * @file logical_task.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,47 +18,50 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITOR_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITOR_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+#include <list>
+
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/task_allocation/time_estimate.hpp"
+#include "rcppsw/task_allocation/task_sequence.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, patterns, visitor);
+NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/**
- * @brief The base visitor class from which all other classes wishing to employ
- * the visit()/accept() paradigm inherit.
- */
-class visitor {
+class logical_task {
  public:
-  virtual ~visitor(void) {}
+  explicit logical_task(const std::string& name, logical_task* const parent,
+                        double estimate_alpha) :
+      m_exec_time(0.0), m_name(name), m_estimate(estimate_alpha) {}
+
+  const std::string& name(void) const { return m_name; }
+
+  const time_estimate& estimate(void) const { return m_estimate; }
+  void update_estimate(double last_measure) { m_estimate.calc(last_measure); }
+
+  double exec_time(void) const { return m_exec_time; }
+  void update_exec_time(double exec_time) { m_exec_time = exec_time; }
+
+  virtual task_sequence sequence(void) = 0;
+
+ private:
+  double m_exec_time;
+  std::string m_name;
+  logical_task* parent;
+  time_estimate m_estimate;
 };
 
-/**
- * @brief Visitor classes should also derive from can_visit<T> for each derived
- * visitable type they want to visit.
- *
- * Note that classes that derive from \ref visitor don't HAVE to also derive
- * from this class in order to be able to visit \ref visitable classes, if they
- * happen to define a function with this EXACT signature. Deriving from this
- * class is more self-documenting, and results in better compiler errors.
- */
-template<class T, typename R = int>
-class can_visit {
- public:
-  virtual R visit(T& visitee) = 0;
-  virtual ~can_visit(void) {}
-};
+NS_END(task_allocation, rcppsw);
 
-NS_END(rcppsw, patterns, visitor);
-
-#endif /* INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITOR_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_ */
