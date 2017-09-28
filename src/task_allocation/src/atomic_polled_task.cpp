@@ -1,5 +1,5 @@
 /**
- * @file atomic_task.hpp
+ * @file atomic_polled_task.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,18 +18,10 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_ATOMIC_TASK_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_ATOMIC_TASK_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <list>
-#include <string>
-
-#include "rcppsw/task_allocation/task_sequence.hpp"
-#include "rcppsw/task_allocation/logical_task.hpp"
-#include "rcppsw/task_allocation/taskable_fsm.hpp"
+#include "rcppsw/task_allocation/atomic_polled_task.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -37,27 +29,13 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Class Definitions
+ * Member Functions
  ******************************************************************************/
-class atomic_task : public logical_task, public taskable {
- public:
-  atomic_task(const std::string& name, logical_task* const parent,
-              double estimate_alpha, taskable_fsm& fsm) :
-      logical_task(name, parent, estimate_alpha), m_fsm(fsm) {}
+task_sequence<atomic_polled_task*> atomic_polled_task::self_sequence(
+    logical_task* const parent) {
+  std::list<atomic_polled_task*> tasks;
+  tasks.push_back(this);
+  return task_sequence<atomic_polled_task*>(tasks, parent);
+} /* self_sequence */
 
-  task_sequence sequence(logical_task* const parent) {
-    std::list<atomic_task*> tasks;
-    tasks.push_back(this);
-    return task_sequence(tasks, parent);
-  }
-  void task_start(void) { m_fsm.task_start(); }
-  void task_reset(void) {m_fsm.task_reset(); }
-  bool task_finished(void) { return m_fsm.task_finished(); }
-
- private:
-  taskable_fsm& m_fsm;
-};
-
-NS_END(task_al.location, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_ATOMIC_TASK_HPP_ */
+NS_END(task_allocation, rcppsw);
