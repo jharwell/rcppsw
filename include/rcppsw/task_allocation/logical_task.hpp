@@ -103,7 +103,7 @@ class logical_task {
    * pointers to said instances). For \ref atomic_task instances, this should
    * always just return a sequence with a single entry: \ref this.
    */
-  virtual task_sequence<logical_task> self_sequence(
+  virtual task_sequence<logical_task*> self_sequence(
       logical_task* const parent) = 0;
 
   /**
