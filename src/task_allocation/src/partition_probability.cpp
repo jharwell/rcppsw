@@ -1,5 +1,5 @@
 /**
- * @file taskable_fsm.hpp
+ * @file partition_probability.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,14 +18,10 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_FSM_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_FSM_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/taskable.hpp"
-#include "rcppsw/patterns/state_machine/base_fsm.hpp"
+#include "rcppsw/task_allocation/partition_probability.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -33,18 +29,23 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Class Definitions
+ * Member Functions
  ******************************************************************************/
-class taskable_fsm : public taskable, public patterns::state_machine::base_fsm {
- public:
-  explicit taskable_fsm(const std::shared_ptr<common::er_server>& server) :
-      base_fsm(server) {}
-  virtual ~taskable_fsm(void) {}
+double partition_probability::calc(double task_estimate,
+                                   double subtask1_estimate,
+                                   double subtask2_estimate) {
+  if (task_estimate > subtask1_estimate + subtask2_estimate) {
+    double res = 1 + std::exp(-m_reactivity *
+                              ((task_estimate /
+                                (subtask1_estimate + subtask2_estimate)) - 1));
+    return set_result(1/res);
+  } else {
+    double res = 1 +
+                 std::exp(-m_reactivity * (1 -
+                                           ((subtask1_estimate + subtask2_estimate) /
+                                            task_estimate)));
+    return set_result(1/res);
+  }
+} /* calc() */
 
-  virtual void task_reset(void) { init(); }
-  virtual void task_start(void) { generated_event(true); state_engine(); }
-};
-
-NS_END(rcppsw, task_allocation);
-
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_FSM_HPP_ */
+NS_END(task_allocation, rcppsw);

@@ -1,5 +1,5 @@
 /**
- * @file taskable.hpp
+ * @file polled_simple_fsm.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,13 +18,15 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_SIMPLE_FSM_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_SIMPLE_FSM_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include <string>
+#include "rcppsw/task_allocation/taskable.hpp"
+#include "rcppsw/patterns/state_machine/simple_fsm.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -35,19 +37,25 @@ NS_START(rcppsw, task_allocation);
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief A class that all classes wishing to be used as the mechanism by which
- * \ref atomic_task instances execute themselves must inherit from.
+ * @brief An FSM that can be part of a \ref task_sequence of \ref polled_task
+ * instances.
+ *
+ * These FSMs are attached to \ref atomic_polled_task instances as their method
+ * of execution.
  */
-class taskable {
+class polled_simple_fsm : public taskable,
+                          public patterns::state_machine::simple_fsm {
  public:
-  taskable(void) {}
-  virtual ~taskable(void) {}
+  polled_simple_fsm(const std::shared_ptr<common::er_server>& server,
+                    uint8_t max_states) :
+      taskable(),
+      simple_fsm(server, max_states) {}
+  virtual ~polled_simple_fsm(void) {}
 
-  virtual void task_reset(void) {}
-  virtual void task_execute(void) = 0;
-  virtual bool task_finished(void) = 0;
+  virtual void task_reset(void) { init(); }
+  virtual void task_execute(void) { generated_event(true); state_engine(); }
 };
 
-NS_END(task_allocation, rcppsw);
+NS_END(rcppsw, task_allocation);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_SIMPLE_FSM_HPP_ */

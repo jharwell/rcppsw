@@ -49,7 +49,8 @@ class time_estimate : public rcppsw::math::expression<double> {
   explicit time_estimate(double alpha) : m_alpha(alpha) {}
 
   double calc(double current_measure) {
-    return set_result((1 - m_alpha) * last_result() + m_alpha * current_measure);
+    return set_result((1 - m_alpha) * last_result() +
+                      m_alpha * current_measure);
   }
 
  private:
