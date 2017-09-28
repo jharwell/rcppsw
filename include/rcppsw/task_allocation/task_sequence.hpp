@@ -26,7 +26,6 @@
  ******************************************************************************/
 #include <list>
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/task_allocation/logical_task.hpp"
 
 /*******************************************************************************
  * Namespaces

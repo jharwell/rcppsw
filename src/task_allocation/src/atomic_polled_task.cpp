@@ -31,11 +31,11 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-task_sequence<atomic_polled_task*> atomic_polled_task::self_sequence(
+task_sequence<logical_task*> atomic_polled_task::self_sequence(
     logical_task* const parent) {
-  std::list<atomic_polled_task*> tasks;
+  std::list<logical_task*> tasks;
   tasks.push_back(this);
-  return task_sequence<atomic_polled_task*>(tasks, parent);
+  return task_sequence<logical_task*>(tasks, parent);
 } /* self_sequence */
 
 NS_END(task_allocation, rcppsw);

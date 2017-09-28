@@ -56,7 +56,7 @@ class atomic_polled_task : public polled_task {
    *
    * @param parent The parent of the task (can be NULL).
    */
-  task_sequence<atomic_polled_task*> self_sequence(logical_task* const parent);
+  task_sequence<logical_task*> self_sequence(logical_task* const parent);
   void task_execute(void) { m_mechanism.task_execute(); }
   void task_reset(void) {m_mechanism.task_reset(); }
   bool task_finished(void) { return m_mechanism.task_finished(); }
