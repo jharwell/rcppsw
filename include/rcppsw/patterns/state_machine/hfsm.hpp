@@ -52,6 +52,7 @@ class hfsm_state_map_row : public state_map_row {
       state_map_row(state), m_parent(parent) {}
 
   rcppsw::patterns::state_machine::state* parent(void) const { return m_parent; }
+  void parent(rcppsw::patterns::state_machine::state* parent) { m_parent = parent; }
 
  private:
   rcppsw::patterns::state_machine::state* m_parent;
@@ -69,6 +70,7 @@ class hfsm_state_map_ex_row : public state_map_ex_row {
       state_map_ex_row(state, guard, entry, exit), m_parent(parent) {}
 
   rcppsw::patterns::state_machine::state* parent(void) const { return m_parent; }
+  void parent(rcppsw::patterns::state_machine::state* parent) { m_parent = parent; }
 
  private:
   rcppsw::patterns::state_machine::state* m_parent;
@@ -98,6 +100,9 @@ class hfsm: public base_fsm {
 
   void inject_event(int signal, int type);
 
+  void change_parent(uint state,
+                     rcppsw::patterns::state_machine::state* new_parent);
+
  protected:
   /**
    * @brief The topmost state in the hierarchy, of which all states are
@@ -126,6 +131,12 @@ class hfsm: public base_fsm {
 /*******************************************************************************
  * State Macros
  ******************************************************************************/
+/**
+ * @brief Declare a state in the current HFSM to be inherited from a parent
+ * HFSM.
+ *
+ * This can be private because it is just a member variable.
+ */
 #define HFSM_STATE_INHERIT(BASE_FSM, \
                            inherited_name, \
                            state_data)                                  \
@@ -133,13 +144,25 @@ class hfsm: public base_fsm {
   rcppsw::patterns::state_machine::hfsm_state_action<BASE_FSM,          \
                                                      state_data,        \
                                                      &BASE_FSM::ST_##inherited_name> inherited_name;
-#define HFSM_STATE_DECLARE(FSM, state_name, state_data)              \
-  public:                                                            \
+
+/**
+ * @brief Declare a state in the current HFSM.
+ *
+ * The state handler function MUST be public in order for \ref hfsm_state_action
+ * templating to work. Apparently when dealing with non-type template arguments,
+ * any argument passed that does not EXACTLY match the one in the template will
+ * cause a compilation error if the function is protected (i.e. accessible in
+ * derived classes). The solution: make it public. Not the best, because it
+ * exposes the inner workings of the state machine, but anyone who is using this
+ * class should only be manipulating it through the macros anyway.
+ */
+#define HFSM_STATE_DECLARE(FSM, state_name, state_data)                 \
+  public:                                                               \
   int ST_##state_name(__unused const state_data*);                      \
 private:                                                                \
 rcppsw::patterns::state_machine::hfsm_state_action<FSM,                 \
                                                    state_data,          \
-                                                   &FSM::ST_##state_name> state_name; \
+                                                   &FSM::ST_##state_name> state_name;
 
 
 #define HFSM_STATE_DEFINE(FSM, state_name, event) \
@@ -180,8 +203,16 @@ rcppsw::patterns::state_machine::state_exit_action<FSM,                 \
 
 #define HFSM_EXIT_DEFINE(FSM, exit_name) FSM_EXIT_DEFINE(FSM, exit_name)
 
-#define HFSM_CONSTRUCT_STATE(state_name, \
-                             parent) state_name(static_cast<fsm::hfsm_state*>(parent))
+/**
+ * @brief Construct a previously declared/inherited state.
+ *
+ * Should be called in the constructor, and passed the desired parent
+ * state. This cannot be done at state declaration (from the compiler's point of
+ * view), because of the way templating works.
+ */
+#define HFSM_CONSTRUCT_STATE(state_name,                                \
+                             parent)                                    \
+  state_name(static_cast<rcppsw::patterns::state_machine::hfsm_state*>(parent))
 
 /*******************************************************************************
  * State Map Macros
@@ -203,7 +234,8 @@ rcppsw::patterns::state_machine::state_exit_action<FSM,                 \
   rcppsw::patterns::state_machine::hfsm_state_map_ex_row(state_name, parent, \
                                                     guard_name, \
                                                     entry_name, exit_name)
-#define HFSM_VERIFY_STATE_MAP(type, name) FSM_VERIFY_STATE_MAP(JOIN(hfsm_, type), name)
+#define HFSM_VERIFY_STATE_MAP(type, name) \
+  FSM_VERIFY_STATE_MAP(JOIN(hfsm_, type), name)
 
 /*******************************************************************************
  * Transition Map Macros

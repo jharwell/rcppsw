@@ -45,7 +45,7 @@ class taskable {
 
   virtual void task_reset(void) {}
   virtual void task_execute(void) = 0;
-  virtual bool task_finished(void) = 0;
+  virtual bool task_finished(void) const = 0;
 };
 
 NS_END(task_allocation, rcppsw);

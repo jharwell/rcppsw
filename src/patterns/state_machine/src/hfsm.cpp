@@ -68,4 +68,20 @@ void hfsm::inject_event(int signal, int type) {
                  rcppsw::make_unique<const event_data>(signal, type));
 } /* inject event */
 
+void hfsm::change_parent(uint state,
+                   rcppsw::patterns::state_machine::state* new_parent) {
+  hfsm_state_map_row* map = const_cast<hfsm_state_map_row*>(
+      static_cast<const hfsm_state_map_row*>(state_map(state)));
+  hfsm_state_map_ex_row* map_ex = const_cast<hfsm_state_map_ex_row*>(
+      static_cast<const hfsm_state_map_ex_row*>(state_map_ex(state)));
+
+  ER_ASSERT(!(nullptr == map && nullptr == map_ex),
+            "FATAL: Both state maps are NULL!");
+
+  if (map != nullptr) {
+    map->parent(new_parent);
+  }
+  map_ex->parent(new_parent);
+} /* change_state() */
+
 NS_END(state_machine, patterns, rcppsw);
