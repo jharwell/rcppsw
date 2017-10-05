@@ -82,12 +82,16 @@ class state_map_ex_row {
  */
 class base_fsm: public common::er_client {
  public:
-  explicit base_fsm(const std::shared_ptr<common::er_server>& server);
+  base_fsm(const std::shared_ptr<common::er_server>& server,
+             uint8_t max_states,
+             uint8_t initial_state = 0);
 
   virtual ~base_fsm() {}
 
-  virtual uint8_t current_state(void) const = 0;
-  virtual uint8_t max_states(void) const = 0;
+  virtual uint8_t current_state(void) const { return m_current_state; }
+  virtual uint8_t max_states(void) const { return mc_max_states; }
+  virtual uint8_t previous_state(void) const { return m_previous_state; }
+  virtual uint8_t last_state(void) const { return m_last_state; }
   virtual void init(void);
 
  protected:
@@ -131,12 +135,10 @@ class base_fsm: public common::er_client {
    */
   void state_engine(void);
 
-  virtual void next_state(uint8_t next_state) = 0;
-  virtual void update_state(uint8_t new_state) = 0;
-  virtual uint8_t next_state(void) const = 0;
-  virtual uint8_t initial_state(void) const = 0;
-  virtual uint8_t previous_state(void) const  { return 0; }
-  virtual uint8_t last_state(void) const { return 0; }
+  virtual uint8_t next_state(void) const { return m_next_state; }
+  virtual uint8_t initial_state(void) const { return m_initial_state; }
+  virtual void next_state(uint8_t next_state) { m_next_state = next_state; }
+  virtual void update_state(uint8_t new_state);
 
   /**
    * @brief Gets the state map as defined in the derived class.
@@ -174,6 +176,12 @@ class base_fsm: public common::er_client {
   void state_engine_map_ex(void);
   base_fsm& operator=(const base_fsm& fsm) = delete;
 
+  const uint8_t     mc_max_states;      /// The maximum # of fsm states.
+  uint8_t           m_current_state;    /// The current state machine state.
+  uint8_t           m_next_state;        /// The next state to transition to.
+  uint8_t           m_initial_state;
+  uint8_t           m_previous_state;
+  uint8_t           m_last_state;
   bool              m_event_generated;  /// Set to TRUE on event generation.
   std::unique_ptr<const event_data> m_event_data;  /// The state event data pointer.
   std::mutex        m_mutex;            /// Lock for thread safety.
