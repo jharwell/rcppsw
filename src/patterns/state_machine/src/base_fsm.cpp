@@ -33,17 +33,21 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_fsm::base_fsm(const std::shared_ptr<common::er_server>& server) :
+base_fsm::base_fsm(const std::shared_ptr<common::er_server>& server,
+                       uint8_t max_states,
+                       uint8_t initial_state) :
     er_client(server),
+    mc_max_states(max_states),
+    m_current_state(initial_state),
+    m_next_state(0),
+    m_initial_state(initial_state),
+    m_previous_state(0),
+    m_last_state(0),
     m_event_generated(false),
     m_event_data(nullptr),
-    m_mutex() {}
-
-base_fsm::base_fsm(const base_fsm& fsm) :
-    er_client(fsm.server_ref()),
-    m_event_generated(fsm.m_event_generated),
-    m_event_data(),
-    m_mutex() {}
+    m_mutex() {
+  assert(mc_max_states < event_signal::IGNORED);
+}
 
 /*******************************************************************************
  * Member Functions
@@ -183,6 +187,14 @@ void base_fsm::state_engine_step(const state_map_ex_row* const row_ex) {
           event_data_get());
   row_ex->state()->invoke_state_action(this, event_data_get());
 } /* state_engine_step() */
+
+void base_fsm::update_state(uint8_t new_state) {
+  if (new_state != m_current_state) {
+    m_previous_state = m_current_state;
+  }
+  m_last_state = m_current_state;
+  m_current_state = new_state;
+} /* update_state() */
 
 
 NS_END(state_machine, patterns, rcppssw);
