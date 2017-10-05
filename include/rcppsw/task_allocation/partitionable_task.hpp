@@ -1,5 +1,5 @@
 /**
- * @file decomposable_task.hpp
+ * @file partitionable_task.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,15 +18,15 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_DECOMPOSABLE_TASK_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_DECOMPOSABLE_TASK_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITIONABLE_TASK_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITIONABLE_TASK_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <string>
+#include <list>
 #include "rcppsw/task_allocation/logical_task.hpp"
-#include "rcppsw/task_allocation/task_sequence.hpp"
 #include "rcppsw/task_allocation/abort_probability.hpp"
 
 /*******************************************************************************
@@ -37,43 +37,50 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @brief Represents a task that can be partitioned at runtime into two subtasks,
+ * which may or may not themselves be partitionable.
+ *
+ * The \ref task_sequence that represents this class is not a template or
+ * constructor argument, so that \ref partitionable_task instances can be
+ * constructed after their simpler, constituent subtasks.
+ */
 template<class T1, class T2>
-class decomposable_task : public logical_task {
+class partitionable_task : public logical_task {
+  static_assert(std::is_base_of<logical_task, T1>::value,
+                "FATAL: template argument must be a logical_task");
+  static_assert(std::is_base_of<logical_task, T2>::value,
+                "FATAL: template argument must be a logical_task");
+
  public:
-  decomposable_task(const std::string& name, logical_task* const parent,
+  partitionable_task(const std::string& name, logical_task* const parent,
                     double alpha,
                     double abort_reactivity, double abort_offset) :
       logical_task(name, parent, alpha),
-      m_abort_prob(abort_reactivity, abort_offset) {
-  }
+      m_abort_prob(abort_reactivity, abort_offset),
+      m_sequence() {}
 
   double abort_prob(void) {
     return m_abort_prob.calc(this->exec_time(), this->estimate(),
                              m_subtask1->estimate(), m_subtask2->estimate());
   }
-
-  /**
-   * @brief Get the task sequence for a decomposable task.
-   *
-   * @param parent The parent for the task sequence. If NULL, the current object
-   * is taken to be the parent of the task sequence.
-   *
-   * @return
-   */
-  task_sequence sequence(logical_task* const parent) {
-    if (nullptr == parent) {
-      return m_subtask1->sequence(this) + m_subtask2->sequence(this);
-    } else {
-      return m_subtask1->sequence(parent) + m_subtask2->sequence(parent);
-    }
+  const T1* subtask1(void) const { return m_subtask1; }
+  const T2* subtask2(void) const { return m_subtask2; }
+  void self_sequence(const std::list<logical_task>& tasks) {
+    m_sequence.set_tasks(tasks, this);
+  }
+  task_sequence<logical_task> self_sequence(
+      __unused logical_task* const parent) {
+    return m_sequence;
   }
 
  private:
   abort_probability m_abort_prob;
+  task_sequence<logical_task> m_sequence;
   T1 *const m_subtask1;
   T2 *const m_subtask2;
 };
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_DECOMPOSABLE_TASK_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITIONABLE_TASK_HPP_ */

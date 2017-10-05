@@ -37,24 +37,104 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @brief Represents the logical concept of a task, which encompasses:
+ *
+ * - A possibly updated estimate of the time it takes to do a task. If a task is
+ *   only made to be executed once, then this field is unused.
+ * - A method of decomposing this (possibly decomposable) task into a sequence
+ *   of simpler tasks. Each "simpler" task can have a parent.
+ */
+
 class logical_task {
  public:
   explicit logical_task(const std::string& name, logical_task* const parent,
                         double estimate_alpha) :
       m_exec_time(0.0), m_name(name), m_parent(parent),
       m_estimate(estimate_alpha) {}
+  virtual ~logical_task(void) {}
 
+  /**
+   * @brief Get the name of the task
+   */
   const std::string& name(void) const { return m_name; }
 
+  /**
+   * @brief Get the current estimate of the task's execution time.
+   *
+   * This is NOT updated at the end of the \ref task_execute() function, as it
+   * is possible that some logical tasks are only run once, and therefore the
+   * execution time is irrelevant, or that the user does not care how long a
+   * task takes, only that it finishes.
+   */
   const time_estimate& estimate(void) const { return m_estimate; }
+
+  /**
+   * @brief Update the current estimate of the task execution time by using a
+   * weighted sum of the previous estimate and the new value. See
+   * \ref time_estimate.
+   *
+   * @param last_measure The last measured execution time, in seconds.
+   */
   void update_estimate(double last_measure) { m_estimate.calc(last_measure); }
 
-  double exec_time(void) const { return m_exec_time; }
-  void update_exec_time(double exec_time) { m_exec_time = exec_time; }
-  logical_task* parent(void) const { return m_parent; }
-  void parent(logical_task* parent) { m_parent = parent; }
+  /**
+   * @brief The method that all tasks must define that specifies how to execute
+   * the task.
+   *
+   * Even though all the information needed to execute a task is contained in
+   * \ref self_sequence(), derived classes may also wish to insert additional
+   * logging, etc. in between executing the tasks that comprise this logical
+   * task. Thus, the need for this function.
+   */
+  virtual void task_execute(void) = 0;
 
-  virtual task_sequence sequence(logical_task* const parent) = 0;
+  /**
+   * @brief Compute the sequence of subtasks that, in essence, define this task.
+   *
+   * @param parent The parent task. For \ref partionable_task instances, this
+   * value will always be unused, as a \ref partitionable_task instance will
+   * always be the parent of the task sequence that comprises it. However, for
+   * \ref atomic_task instances, this CAN be used, if the \ref atomic_task is
+   * executed as part of a larger task sequence. If the \ref atomic_task is
+   * executed in a standalone fashion, then it is unused, as before.
+   *
+   * @return A \ref task_sequence of \ref logical_task instances (really
+   * pointers to said instances). For \ref atomic_task instances, this should
+   * always just return a sequence with a single entry: \ref this.
+   */
+  virtual task_sequence<logical_task*> self_sequence(
+      logical_task* const parent) = 0;
+
+  /**
+   * @brief Calculate the probability of aborting this task.
+   */
+  virtual double abort_prob(void);
+
+  /**
+   * @brief Get the last execution time of the task.
+   */
+  double exec_time(void) const { return m_exec_time; }
+
+  /**
+   * @brief Set the last execution time of the task. This is a public function,
+   * rather than being computed internally, because there are many different
+   * methods of estimating time, and the user should be able to use whatever
+   * method they prefer.
+   */
+  void update_exec_time(double exec_time) { m_exec_time = exec_time; }
+
+  /**
+   * @brief Get the parent of this task.
+   *
+   * @return The parent task, or NULL if no parent has been set.
+   */
+  logical_task* parent(void) const { return m_parent; }
+
+  /**
+   * @brief Set the parent for this task.
+   */
+  void parent(logical_task* parent) { m_parent = parent; }
 
  private:
   double m_exec_time;

@@ -63,20 +63,8 @@ class partition_probability: public rcppsw::math::expression<double> {
   explicit partition_probability(double reactivity) :
       m_reactivity(reactivity) {}
 
-  double calc(double task_time_estimate, double subtask1_time_estimate,
-              double subtask2_time_estimate) {
-    if (task_time_estimate > subtask1_time_estimate + subtask2_time_estimate) {
-      double res = 1 + std::exp(-m_reactivity *
-                                ((task_time_estimate /
-                                  (subtask1_time_estimate + subtask2_time_estimate)) - 1));
-      return set_result(1/res);
-    } else {
-      double res = 1 + std::exp(-m_reactivity * (1 -
-                                                 ((subtask1_time_estimate + subtask2_time_estimate) /
-                                                  task_time_estimate)));
-      return set_result(1/res);
-    }
-  }
+  double calc(double task_estimate, double subtask1_estimate,
+              double subtask2_estimate);
  private:
   double m_reactivity;
 };

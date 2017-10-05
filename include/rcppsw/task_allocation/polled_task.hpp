@@ -1,5 +1,5 @@
 /**
- * @file taskable.hpp
+ * @file polled_task.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,13 +18,15 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_TASK_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_TASK_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include <string>
+#include "rcppsw/task_allocation/logical_task.hpp"
+#include "rcppsw/task_allocation/taskable.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -34,40 +36,19 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class taskable_argument {
- public:
-  taskable_argument(void) {}
-  virtual ~taskable_argument(void) {}
-};
-
 /**
- * @brief A class that all classes wishing to be used as the mechanism by which
- * \ref atomic_task instances execute themselves must inherit from.
+ * @brief Represents a task whose execution can/should be monitored by the user
+ * to determine when it has finished.
  */
-class taskable {
+class polled_task : public logical_task, public taskable {
  public:
-  taskable(void) {}
-  virtual ~taskable(void) {}
+  polled_task(const std::string& name, polled_task* const parent,
+              double estimate_alpha) :
+      logical_task(name, parent, estimate_alpha) {}
 
-  /**
-   * @brief Execute the task.
-   */
-  virtual void task_execute(void) = 0;
-
-  /**
-   * @brief Determine if the task has finished yet.
-   *
-   * @return TRUE if the task has finished, and FALSE otherwise.
-   */
-  virtual bool task_finished(void) const = 0;
-
-  /**
-   * @brief Reset the task so that it is ready for execution again.
-   */
-  virtual void task_reset(void) {}
-  virtual void task_start(__unused const taskable_argument* const arg) {}
+  virtual ~polled_task(void) {}
 };
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_TASK_HPP_ */

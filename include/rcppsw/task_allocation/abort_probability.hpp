@@ -61,14 +61,8 @@ class abort_probability: public rcppsw::math::expression<double> {
   abort_probability(double reactivity, double offset) :
       m_reactivity(reactivity), m_offset(offset) {}
 
-  double calc(double exec_time,
-              const time_estimate& whole_task,
-              const time_estimate& subtask1,
-              const time_estimate& subtask2) {
-    double omega = m_reactivity * ((exec_time - whole_task.last_result())/
-                                    (subtask1.last_result() + subtask2.last_result()) + m_offset);
-    return set_result(1/(1 + std::exp(omega)));
-  }
+  double calc(double exec_time, const time_estimate& whole_task,
+              const time_estimate& subtask1, const time_estimate& subtask2);
 
  private:
   double m_reactivity;

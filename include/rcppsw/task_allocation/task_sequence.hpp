@@ -36,21 +36,47 @@ NS_START(rcppsw, task_allocation);
  * Class Definitions
  ******************************************************************************/
 class logical_task;
-class atomic_task;
 
+/**
+ * @brief A sequenc of tasks that represents how to execute another, higher
+ * level task.
+ */
+
+template<class TaskTypePtr>
 class task_sequence {
  public:
-  task_sequence(std::list<atomic_task*>& tasks, logical_task* const parent) :
+  task_sequence(void) :
+      m_parent(nullptr), m_current_task(nullptr), m_tasks() {}
+  explicit task_sequence(std::list<TaskTypePtr>& tasks) :
+      m_parent(nullptr), m_current_task(tasks.begin()), m_tasks(tasks) {}
+  task_sequence(std::list<TaskTypePtr>& tasks, logical_task* const parent) :
       m_parent(parent), m_current_task(tasks.begin()), m_tasks(tasks) {}
 
+  /**
+   * @brief Set the tasks and parent associated with the sequence.
+   */
+  void set_tasks(std::list<TaskTypePtr> tasks, logical_task* const parent) {
+    m_tasks = tasks; m_current_task(tasks.begin());
+    m_parent = parent;
+  }
+
+  void parent(logical_task* const parent) { m_parent = parent; }
   const logical_task* parent(void) const { return m_parent; }
-  atomic_task* current_task(void) { return *m_current_task; }
+
+  /**
+   * @brief Get a reference to the current task in the task sequence.
+   */
+  TaskTypePtr current_task(void) { return *m_current_task; }
+
+  /**
+   * @brief Advance the task sequence to the next task.
+   */
   void advance_task(void) { ++m_current_task; }
 
  private:
   logical_task* const m_parent;
-  std::list<atomic_task*>::iterator m_current_task;
-  std::list<atomic_task*> m_tasks;
+  typename std::list<TaskTypePtr>::iterator m_current_task;
+  typename std::list<TaskTypePtr> m_tasks;
 };
 
 NS_END(task_allocation, rcppsw);
