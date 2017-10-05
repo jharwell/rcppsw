@@ -1,5 +1,5 @@
 /**
- * @file taskable.hpp
+ * @file polled_hfsm.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,13 +18,15 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_HFSM_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_HFSM_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include <string>
+#include "rcppsw/task_allocation/taskable.hpp"
+#include "rcppsw/patterns/state_machine/hfsm.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -34,40 +36,24 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class taskable_argument {
- public:
-  taskable_argument(void) {}
-  virtual ~taskable_argument(void) {}
-};
-
 /**
- * @brief A class that all classes wishing to be used as the mechanism by which
- * \ref atomic_task instances execute themselves must inherit from.
+ * @brief An FSM that can be part of a \ref task_sequence of \ref polled_task
+ * instances.
+ *
+ * These FSMs are attached to \ref atomic_polled_task instances as their method
+ * of execution.
  */
-class taskable {
+class polled_hfsm : public taskable,
+                    public patterns::state_machine::hfsm {
  public:
-  taskable(void) {}
-  virtual ~taskable(void) {}
+  explicit polled_hfsm(const std::shared_ptr<common::er_server>& server) :
+      taskable(), hfsm(server) {}
+  virtual ~polled_hfsm(void) {}
 
-  /**
-   * @brief Execute the task.
-   */
-  virtual void task_execute(void) = 0;
-
-  /**
-   * @brief Determine if the task has finished yet.
-   *
-   * @return TRUE if the task has finished, and FALSE otherwise.
-   */
-  virtual bool task_finished(void) const = 0;
-
-  /**
-   * @brief Reset the task so that it is ready for execution again.
-   */
-  virtual void task_reset(void) {}
-  virtual void task_start(__unused const taskable_argument* const arg) {}
+  virtual void task_reset(void) { init(); }
+  virtual void task_execute(void) { generated_event(true); state_engine(); }
 };
 
-NS_END(task_allocation, rcppsw);
+NS_END(rcppsw, task_allocation);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_HFSM_HPP_ */

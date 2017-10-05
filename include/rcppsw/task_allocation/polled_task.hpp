@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <string>
 #include "rcppsw/task_allocation/logical_task.hpp"
+#include "rcppsw/task_allocation/taskable.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -39,31 +40,13 @@ NS_START(rcppsw, task_allocation);
  * @brief Represents a task whose execution can/should be monitored by the user
  * to determine when it has finished.
  */
-class polled_task : public logical_task {
+class polled_task : public logical_task, public taskable {
  public:
   polled_task(const std::string& name, polled_task* const parent,
               double estimate_alpha) :
       logical_task(name, parent, estimate_alpha) {}
 
   virtual ~polled_task(void) {}
-
-  /**
-   * @brief Reset the task so that it is ready for execution again.
-   */
-  virtual void task_reset(void) {}
-
-  /**
-   * @brief Execute the task.
-   *
-   */
-  virtual void task_execute(void) = 0;
-
-  /**
-   * @brief Determine if the task has finished yet.
-   *
-   * @return TRUE if the task has finished, and FALSE otherwise.
-   */
-  virtual bool task_finished(void) = 0;
 };
 
 NS_END(task_allocation, rcppsw);
