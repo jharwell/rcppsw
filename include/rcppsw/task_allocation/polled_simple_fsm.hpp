@@ -49,11 +49,13 @@ class polled_simple_fsm : public taskable,
   polled_simple_fsm(const std::shared_ptr<common::er_server>& server,
                     uint8_t max_states) :
       taskable(),
-      simple_fsm(server, max_states) {}
+      patterns::state_machine::simple_fsm(server, max_states) {}
   virtual ~polled_simple_fsm(void) {}
 
   virtual void task_reset(void) { init(); }
-  virtual void task_execute(void) { generated_event(true); state_engine(); }
+  virtual void task_execute(void) {
+    generated_event(true); state_engine();
+  }
 };
 
 NS_END(rcppsw, task_allocation);
