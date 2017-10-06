@@ -43,38 +43,35 @@ template <typename T>
 class retaining_factory : public base_factory<T> {
  public:
   retaining_factory(void) {}
-  ~retaining_factory(void) {
-    auto it = m_items.begin();
-    while (it != m_items.end()) { delete *it; ++it; }
-  }
+  virtual ~retaining_factory(void) {}
 
   template <typename TDerived>
   status_t register_type(const std::string& name) {
     static_assert(std::is_base_of<T, TDerived>::value,
-                  "retaining_factory::register_type doesn't accept this type because doesn't derive from base class");
+                  "retaining_factory::register_type only accepts types derived from the base");
     FPC_CHECK(ERROR, m_retain_funcs.end() == m_retain_funcs.find(name));
     m_retain_funcs[name] = &do_create_retain<TDerived>;
     return OK;
   }
 
-  T& create(const std::string& name) {
+  std::shared_ptr<T> create(const std::string& name) {
     auto it = m_retain_funcs.find(name);
     if (it != m_retain_funcs.end()) {
-      return it.value()();
+      return it->second();
     }
     return nullptr;
   }
 
  private:
   template <typename TDerived>
-  T& do_create_retain() {
-    m_items.push_back(new TDerived());
+  std::shared_ptr<TDerived> do_create_retain() {
+    m_items.push_back(std::make_shared<TDerived>());
     return m_items.back();
   }
 
   std::map<std::string,
            typename base_factory<T>::instance_create_func> m_retain_funcs;
-  std::vector<T*> m_items;
+  std::vector<std::shared_ptr<T>> m_items;
 };
 
 NS_END(factory, patterns, rcppsw);
