@@ -45,13 +45,18 @@ class logical_task;
 template<class TaskTypePtr>
 class task_sequence {
  public:
+  /* constructors */
   task_sequence(void) :
       m_parent(nullptr), m_current_task(nullptr), m_tasks() {}
   explicit task_sequence(std::list<TaskTypePtr>& tasks) :
       m_parent(nullptr), m_current_task(tasks.begin()), m_tasks(tasks) {}
   task_sequence(std::list<TaskTypePtr>& tasks, logical_task* const parent) :
       m_parent(parent), m_current_task(tasks.begin()), m_tasks(tasks) {}
+  task_sequence(const task_sequence& other) :
+      m_parent(other.m_parent), m_current_task(other.m_current_task),
+      m_tasks(other.m_tasks) {}
 
+  /* member functions */
   /**
    * @brief Set the tasks and parent associated with the sequence.
    */
@@ -74,6 +79,8 @@ class task_sequence {
   void advance_task(void) { ++m_current_task; }
 
  private:
+  task_sequence& operator=(const task_sequence& other) = delete;
+
   logical_task* const m_parent;
   typename std::list<TaskTypePtr>::iterator m_current_task;
   typename std::list<TaskTypePtr> m_tasks;

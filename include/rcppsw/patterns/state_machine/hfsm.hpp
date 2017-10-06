@@ -95,7 +95,7 @@ class hfsm: public base_fsm {
 
   virtual ~hfsm() {}
 
-  virtual void init(void) {
+  virtual void init(void) override {
     assert(initial_state() < event_signal::IGNORED);
     base_fsm::init();
   }
@@ -121,8 +121,8 @@ class hfsm: public base_fsm {
   }
 
  private:
-  void state_engine_step(const state_map_row* const map);
-  void state_engine_step(const state_map_ex_row* const map_ex);
+  void state_engine_step(const state_map_row* const map) override;
+  void state_engine_step(const state_map_ex_row* const map_ex) override;
 
   hfsm(const hfsm& fsm) = delete;
   hfsm& operator=(const hfsm& fsm) = delete;
