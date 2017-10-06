@@ -43,18 +43,19 @@ template <typename T>
 class releasing_factory : public base_factory<T> {
  public:
   releasing_factory(void) : m_release_funcs() {}
+  virtual ~releasing_factory(void) {}
 
  public:
   template <typename TDerived>
   status_t register_type(const std::string& name) {
     static_assert(std::is_base_of<T, TDerived>::value,
-                  "releasing_factory::register_type doesn't accept this type because doesn't derive from base class");
+                  "releasing_factory::register_type only accepts types derived from the base");
     FPC_CHECK(ERROR, m_release_funcs.end() == m_release_funcs.find(name));
     m_release_funcs[name] = &do_create_release<TDerived>;
     return OK;
   }
 
-  T* create(const std::string& name) {
+  std::unique_ptr<T> create(const std::string& name) {
     auto it = m_release_funcs.find(name);
     if (it != m_release_funcs.end()) {
       return it->second();
@@ -64,7 +65,9 @@ class releasing_factory : public base_factory<T> {
 
  private:
   template <typename TDerived>
-  static T* do_create_release() { return new TDerived(); }
+  static std::unique_ptr<TDerived> do_create_release() {
+    return rcppsw::make_unique<TDerived>();
+  }
 
   std::map<std::string,
            typename base_factory<T>::instance_create_func> m_release_funcs;

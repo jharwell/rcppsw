@@ -1,5 +1,5 @@
 /**
- * @file base_factory.hpp
+ * @file prototype_factory.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,35 +18,36 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_FACTORY_BASE_FACTORY_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_FACTORY_BASE_FACTORY_HPP_
+#ifndef INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_PROTOTYPE_FACTORY_HPP_
+#define INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_PROTOTYPE_FACTORY_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <string>
-#include <vector>
-#include <map>
-#include "rcppsw/common/common.hpp"
+
+#include "rcppsw/patterns/factory/retaining_factory.hpp"
+#include "rcppsw/patterns/prototype/clonable.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, patterns, factory);
+NS_START(rcppsw, patterns, prototype);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template <typename T>
-class base_factory {
+class prototype_factory : public factory::retaining_factory<clonable> {
  public:
-  base_factory(void) {}
-  virtual ~base_factory(void) {}
+  /* constructors */
+  prototype_factory(void) {}
+  virtual ~prototype_factory(void) {}
 
- protected:
-  typedef std::unique_ptr<T> (*instance_create_func)();
+  std::unique_ptr<clonable> create(const std::string& name) {
+    return retaining_factory::create(name)->clone();
+  }
 };
 
-NS_END(factory, patterns, rcppsw);
+NS_END(rcppsw, patterns, prototype);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_FACTORY_BASE_FACTORY_HPP_ */
+#endif /* INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_PROTOTYPE_FACTORY_HPP_ */

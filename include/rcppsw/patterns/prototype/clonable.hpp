@@ -1,5 +1,5 @@
 /**
- * @file base_factory.hpp
+ * @file clonable.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,35 +18,30 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_FACTORY_BASE_FACTORY_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_FACTORY_BASE_FACTORY_HPP_
+#ifndef INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_CLONABLE_HPP_
+#define INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_CLONABLE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include <vector>
-#include <map>
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, patterns, factory);
+NS_START(rcppsw, patterns, prototype);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template <typename T>
-class base_factory {
+class clonable {
  public:
-  base_factory(void) {}
-  virtual ~base_factory(void) {}
+  clonable(void) {}
+  virtual ~clonable(void) {}
 
- protected:
-  typedef std::unique_ptr<T> (*instance_create_func)();
+  virtual std::unique_ptr<clonable> clone(void) = 0;
 };
 
-NS_END(factory, patterns, rcppsw);
+NS_END(rcppsw, patterns, prototype);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_FACTORY_BASE_FACTORY_HPP_ */
+#endif /* INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_CLONABLE_HPP_ */
