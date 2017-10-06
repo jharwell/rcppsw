@@ -85,7 +85,7 @@
  */
 #define ER_SENTINEL(msg, ...)                   \
   {                                             \
-    REPORT(rcppsw::common::er_lvl::ERR, msg, ##__VA_ARGS__);   \
+    ER_REPORT(rcppsw::common::er_lvl::ERR, msg, ##__VA_ARGS__);    \
     goto error;                                 \
   }
 

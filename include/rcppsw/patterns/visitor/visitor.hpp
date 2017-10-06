@@ -52,7 +52,7 @@ class visitor {
  * happen to define a function with this EXACT signature. Deriving from this
  * class is more self-documenting, and results in better compiler errors.
  */
-template<class T, typename R = int>
+template<class T, typename R = void>
 class can_visit {
  public:
   virtual R visit(T& visitee) = 0;

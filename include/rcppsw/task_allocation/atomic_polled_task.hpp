@@ -56,10 +56,10 @@ class atomic_polled_task : public polled_task {
    *
    * @param parent The parent of the task (can be NULL).
    */
-  task_sequence<logical_task*> self_sequence(logical_task* const parent);
-  void task_execute() { m_mechanism.task_execute(); }
-  void task_reset(void) {m_mechanism.task_reset(); }
-  bool task_finished(void) const { return m_mechanism.task_finished(); }
+  task_sequence<logical_task*> self_sequence(logical_task* const parent) override;
+  void task_execute(void) override { m_mechanism.task_execute(); }
+  void task_reset(void) override { m_mechanism.task_reset(); }
+  bool task_finished(void) const override { return m_mechanism.task_finished(); }
 
  private:
   taskable& m_mechanism;

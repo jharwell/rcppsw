@@ -186,7 +186,7 @@ class er_server : public multithread::threadable {
    *
    * @return Unused.
    */
-  void* thread_main(void* arg);
+  void* thread_main(void* arg) override;
 
   /**
    * @brief Get the current logging level.

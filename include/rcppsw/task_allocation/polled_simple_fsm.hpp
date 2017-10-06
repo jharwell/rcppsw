@@ -52,8 +52,8 @@ class polled_simple_fsm : public taskable,
       patterns::state_machine::simple_fsm(server, max_states) {}
   virtual ~polled_simple_fsm(void) {}
 
-  virtual void task_reset(void) { init(); }
-  virtual void task_execute(void) {
+  void task_reset(void) override { init(); }
+  void task_execute(void) override {
     generated_event(true); state_engine();
   }
 };
