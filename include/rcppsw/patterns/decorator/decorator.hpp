@@ -43,6 +43,7 @@ template <class D>
 class decorator {
   template <typename... Args>
   decorator(Args&&... args) : m_decoratee(std::forward<Args>(args)...) {}
+  virtual ~decorator(void) {}
 
   /**
    * @brief Get a reference to the decorated type.
@@ -84,6 +85,7 @@ class ptr_decorator {
   template <typename... Args>
   ptr_decorator(Args&&... args) :
       m_decoratee(rcppsw::make_unique<D>(std::forward<Args>(args)...)) {}
+  virtual ~ptr_decorator(void) {}
 
   /**
    * @brief Replace the current instance of the decorated type with a new one
