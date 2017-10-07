@@ -51,12 +51,12 @@ class partitionable_polled_task : public polled_task {
                 "FATAL: template argument must be a polled task");
 
  public:
-  partitionable_polled_task(const std::string& name, polled_task* const parent,
-                    double alpha,
-                    double abort_reactivity, double abort_offset) :
-      polled_task(name, parent, alpha),
-      m_abort_prob(abort_reactivity, abort_offset),
-      m_sequence() {}
+  partitionable_polled_task(const std::string& name, double alpha,
+                            double abort_reactivity, double abort_offset,
+                            taskable* const mechanism,
+                            polled_task* const parent = nullptr) :
+      polled_task(name, alpha, mechanism, parent),
+      m_abort_prob(abort_reactivity, abort_offset) {}
 
   double abort_prob(void) {
     return m_abort_prob.calc(this->exec_time(), this->estimate(),
@@ -64,19 +64,13 @@ class partitionable_polled_task : public polled_task {
   }
   const T1* subtask1(void) const { return m_subtask1; }
   const T2* subtask2(void) const { return m_subtask2; }
-  void self_sequence(const std::list<polled_task>& tasks) {
-    m_sequence.set_tasks(tasks, this);
-  }
-  task_sequence<logical_task> self_sequence(
-      __unused logical_task* const parent) {
-    return m_sequence;
-  }
+  void subtask1(T1* subtask1) { m_subtask1 = subtask1; }
+  void subtask2(T2* subtask2) { m_subtask2 = subtask2; }
 
  private:
   abort_probability m_abort_prob;
-  task_sequence<polled_task> m_sequence;
-  T1 *const m_subtask1;
-  T2 *const m_subtask2;
+  T1 *m_subtask1;
+  T2 *m_subtask2;
 };
 
 NS_END(task_allocation, rcppsw);

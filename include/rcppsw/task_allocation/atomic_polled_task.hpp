@@ -44,25 +44,10 @@ NS_START(rcppsw, task_allocation);
  */
 class atomic_polled_task : public polled_task {
  public:
-  atomic_polled_task(const std::string& name, polled_task* const parent,
-              double estimate_alpha, taskable& mechanism) :
-      polled_task(name, parent, estimate_alpha), m_mechanism(mechanism) {}
-
-  /**
-   * @brief Get the task sequence representing an \ref atomic_task.
-   *
-   * Since atomic tasks cannot be decompsed any futher, all sequences returned
-   * from atomic tasks have exactly 1 element (this task).
-   *
-   * @param parent The parent of the task (can be NULL).
-   */
-  task_sequence<logical_task*> self_sequence(logical_task* const parent);
-  void task_execute() { m_mechanism.task_execute(); }
-  void task_reset(void) {m_mechanism.task_reset(); }
-  bool task_finished(void) const { return m_mechanism.task_finished(); }
-
- private:
-  taskable& m_mechanism;
+  atomic_polled_task(const std::string& name, double estimate_alpha,
+                     taskable * const mechanism,
+                     polled_task* const parent = nullptr) :
+      polled_task(name, estimate_alpha, mechanism, parent) {}
 };
 
 NS_END(task_allocation, rcppsw);

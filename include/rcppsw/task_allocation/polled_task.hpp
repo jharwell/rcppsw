@@ -42,11 +42,20 @@ NS_START(rcppsw, task_allocation);
  */
 class polled_task : public logical_task, public taskable {
  public:
-  polled_task(const std::string& name, polled_task* const parent,
-              double estimate_alpha) :
-      logical_task(name, parent, estimate_alpha) {}
-
+  polled_task(const std::string& name, double estimate_alpha,
+              taskable* const mechanism,
+              polled_task* const parent = nullptr) :
+      logical_task(name, estimate_alpha, parent), m_mechanism(mechanism) {}
   virtual ~polled_task(void) {}
+
+  taskable* mechanism(void) const { return m_mechanism; }
+
+  void task_execute(void) override { m_mechanism->task_execute(); }
+  void task_reset(void) override { m_mechanism->task_reset(); }
+  bool task_finished(void) const override { return m_mechanism->task_finished(); }
+
+ private:
+  taskable * const m_mechanism;
 };
 
 NS_END(task_allocation, rcppsw);
