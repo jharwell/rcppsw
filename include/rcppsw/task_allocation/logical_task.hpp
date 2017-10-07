@@ -48,8 +48,8 @@ NS_START(rcppsw, task_allocation);
 
 class logical_task {
  public:
-  explicit logical_task(const std::string& name, logical_task* const parent,
-                        double estimate_alpha) :
+  explicit logical_task(const std::string& name, double estimate_alpha,
+                        logical_task* const parent = nullptr) :
       m_exec_time(0.0), m_name(name), m_parent(parent),
       m_estimate(estimate_alpha) {}
   virtual ~logical_task(void) {}
@@ -88,23 +88,6 @@ class logical_task {
    * task. Thus, the need for this function.
    */
   virtual void task_execute(void) = 0;
-
-  /**
-   * @brief Compute the sequence of subtasks that, in essence, define this task.
-   *
-   * @param parent The parent task. For \ref partionable_task instances, this
-   * value will always be unused, as a \ref partitionable_task instance will
-   * always be the parent of the task sequence that comprises it. However, for
-   * \ref atomic_task instances, this CAN be used, if the \ref atomic_task is
-   * executed as part of a larger task sequence. If the \ref atomic_task is
-   * executed in a standalone fashion, then it is unused, as before.
-   *
-   * @return A \ref task_sequence of \ref logical_task instances (really
-   * pointers to said instances). For \ref atomic_task instances, this should
-   * always just return a sequence with a single entry: \ref this.
-   */
-  virtual task_sequence<logical_task*> self_sequence(
-      logical_task* const parent) = 0;
 
   /**
    * @brief Calculate the probability of aborting this task.
