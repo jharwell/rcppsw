@@ -40,7 +40,7 @@ NS_START(rcppsw, task_allocation);
  * @brief Calculates the probability that a robot will abort the task it is
  * currently working on.
  *
- * Implementats the equation:
+ * Implements the equation:
  *
  * P_g = 1/(1 + e^(omega(delta, duration estimates )))
  *

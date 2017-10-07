@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <cmath>
 #include "rcppsw/math/expression.hpp"
+#include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -63,8 +64,10 @@ class partition_probability: public rcppsw::math::expression<double> {
   explicit partition_probability(double reactivity) :
       m_reactivity(reactivity) {}
 
-  double calc(double task_estimate, double subtask1_estimate,
-              double subtask2_estimate);
+  double calc(const time_estimate& task_estimate,
+              const time_estimate& subtask1_estimate,
+              const time_estimate& subtask2_estimate);
+
  private:
   double m_reactivity;
 };

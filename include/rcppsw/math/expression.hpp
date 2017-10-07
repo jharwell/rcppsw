@@ -54,6 +54,16 @@ class expression {
    */
   T set_result(T val) { m_last = val; return m_last; }
 
+  bool operator==(const expression &other) const {
+    return this->last_result() == other.last_result();
+  }
+  bool operator>(const expression &other) const {
+    return this->last_result() > other.last_result();
+  }
+  bool operator<(const expression &other) const {
+    return this->last_result() < other.last_result();
+  }
+
  private:
                T m_last;
 };
