@@ -48,6 +48,21 @@ class atomic_polled_task : public polled_task {
                      taskable * const mechanism,
                      polled_task* const parent = nullptr) :
       polled_task(name, estimate_alpha, mechanism, parent) {}
+
+  /**
+   * @brief Get the probability of aborting an atomic task.
+   *
+   * If the atomic task has a parent, then it is part of a partitioning set, and
+   * so return the abort probability of that set. Otherwise, the probability of
+   * aborting an atomic task is 0 (DUH).
+   */
+  double abort_prob(void) override {
+    if (parent()) {
+      return parent()->abort_prob();
+    } else {
+      return 0.0;
+    }
+  }
 };
 
 NS_END(task_allocation, rcppsw);
