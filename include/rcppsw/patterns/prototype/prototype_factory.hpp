@@ -1,5 +1,5 @@
 /**
- * @file simple_fsm.cpp
+ * @file prototype_factory.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,43 +18,36 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_PROTOTYPE_FACTORY_HPP_
+#define INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_PROTOTYPE_FACTORY_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <assert.h>
-#include "rcppsw/patterns/state_machine/simple_fsm.hpp"
-#include "rcsw/common/fpc.h"
+#include <string>
+
+#include "rcppsw/patterns/factory/retaining_factory.hpp"
+#include "rcppsw/patterns/prototype/clonable.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, patterns, state_machine);
+NS_START(rcppsw, patterns, prototype);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Class Definitions
  ******************************************************************************/
-simple_fsm::simple_fsm(const std::shared_ptr<common::er_server>& server,
-                   uint8_t max_states,
-                   uint8_t initial_state) :
-    base_fsm(server),
-    mc_max_states(max_states),
-    m_current_state(initial_state),
-    m_next_state(0),
-    m_initial_state(initial_state),
-    m_previous_state(0),
-    m_last_state(0) {
-  assert(mc_max_states < event_signal::IGNORED);
-}
+class prototype_factory : public factory::retaining_factory<clonable> {
+ public:
+  /* constructors */
+  prototype_factory(void) {}
+  virtual ~prototype_factory(void) {}
 
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-void simple_fsm::update_state(uint8_t new_state) {
-  if (new_state != m_current_state) {
-    m_previous_state = m_current_state;
+  std::unique_ptr<clonable> create(const std::string& name) {
+    return retaining_factory::create(name)->clone();
   }
-  m_last_state = m_current_state;
-  m_current_state = new_state;
-} /* update_state() */
+};
 
-NS_END(state_machine, patterns, rcppssw);
+NS_END(rcppsw, patterns, prototype);
+
+#endif /* INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_PROTOTYPE_FACTORY_HPP_ */

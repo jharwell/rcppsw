@@ -42,9 +42,8 @@ class hfsm_state: public state {
   explicit hfsm_state(hfsm_state* parent) : state(), m_parent(parent) {}
   virtual ~hfsm_state() {}
 
-  virtual int invoke_state_action(
-      base_fsm* fsm,
-      const event_data* e) const = 0;
+  int invoke_state_action(base_fsm* fsm,
+                          const event_data* e) const override = 0;
   hfsm_state* parent(void) const { return m_parent; }
 
  private:
@@ -68,8 +67,8 @@ class hfsm_state_action : public hfsm_state {
  public:
   explicit hfsm_state_action(hfsm_state* parent) : hfsm_state(parent) {}
   virtual ~hfsm_state_action() {}
-  virtual int invoke_state_action(base_fsm* fsm,
-                                  const event_data* event) const {
+  int invoke_state_action(base_fsm* fsm,
+                          const event_data* event) const override {
     /* Downcast the state machine and event data to the correct derived type */
     FSM* derived_fsm = static_cast<FSM*>(fsm);
     const Event* derived_event = NULL;

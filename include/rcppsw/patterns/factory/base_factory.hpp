@@ -44,7 +44,7 @@ class base_factory {
   virtual ~base_factory(void) {}
 
  protected:
-  typedef T* (*instance_create_func)();
+  typedef std::unique_ptr<T> (*instance_create_func)();
 };
 
 NS_END(factory, patterns, rcppsw);

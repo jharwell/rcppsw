@@ -70,7 +70,7 @@ class state_action : public state {
  public:
   virtual ~state_action() {}
   virtual int invoke_state_action(base_fsm* sm,
-                                  const event_data* data) const {
+                                  const event_data* data) const override {
     /* Downcast the state machine and event data to the correct derived type */
     SM* derived_fsm = static_cast<SM*>(sm);
     const Event* derived_event = NULL;
@@ -119,8 +119,8 @@ template <class SM, class Event, bool (SM::*Func)(const Event*)>
 class state_guard_condition : public state_guard {
  public:
   virtual ~state_guard_condition() {}
-  virtual bool invoke_guard_condition(base_fsm* sm,
-                                      const event_data* data) const {
+  bool invoke_guard_condition(base_fsm* sm,
+                              const event_data* data) const override {
     SM* derived_fsm = static_cast<SM*>(sm);
     const Event* derived_event = NULL;
     if (data) {
@@ -160,8 +160,8 @@ template <class SM, class Event, void (SM::*Func)(const Event*)>
 class state_entry_action : public state_entry {
  public:
   virtual ~state_entry_action(void) {}
-  virtual void invoke_entry_action(base_fsm* sm,
-                                   const event_data* data) const {
+  void invoke_entry_action(base_fsm* sm,
+                           const event_data* data) const override {
     SM* derived_fsm = static_cast<SM*>(sm);
     const Event* derived_event = NULL;
     if (data) {
@@ -199,7 +199,7 @@ template <class SM, void (SM::*Func)(void)>
 class state_exit_action : public state_exit {
  public:
   virtual ~state_exit_action() {}
-  virtual void invoke_exit_action(base_fsm* sm) const {
+  virtual void invoke_exit_action(base_fsm* sm) const override {
     SM* derivedSM = static_cast<SM*>(sm);
     (derivedSM->*Func)();
   }

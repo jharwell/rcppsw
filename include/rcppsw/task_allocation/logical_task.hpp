@@ -52,6 +52,10 @@ class logical_task {
                         logical_task* const parent = nullptr) :
       m_exec_time(0.0), m_name(name), m_parent(parent),
       m_estimate(estimate_alpha) {}
+  logical_task(const logical_task& other) :
+      m_exec_time(other.m_exec_time), m_name(other.m_name),
+      m_parent(other.m_parent), m_estimate(other.m_estimate) {}
+
   virtual ~logical_task(void) {}
 
   /**
@@ -118,6 +122,8 @@ class logical_task {
    * @brief Set the parent for this task.
    */
   void parent(logical_task* parent) { m_parent = parent; }
+
+  logical_task& operator=(const logical_task& other) = delete;
 
  private:
   double m_exec_time;

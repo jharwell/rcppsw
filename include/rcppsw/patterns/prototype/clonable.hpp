@@ -1,5 +1,5 @@
 /**
- * @file polled_simple_fsm.hpp
+ * @file clonable.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,46 +18,30 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_SIMPLE_FSM_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_SIMPLE_FSM_HPP_
+#ifndef INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_CLONABLE_HPP_
+#define INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_CLONABLE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/task_allocation/taskable.hpp"
-#include "rcppsw/patterns/state_machine/simple_fsm.hpp"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, patterns, prototype);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/**
- * @brief An FSM that can be part of a \ref task_sequence of \ref polled_task
- * instances.
- *
- * These FSMs are attached to \ref atomic_polled_task instances as their method
- * of execution.
- */
-class polled_simple_fsm : public taskable,
-                          public patterns::state_machine::simple_fsm {
+class clonable {
  public:
-  polled_simple_fsm(const std::shared_ptr<common::er_server>& server,
-                    uint8_t max_states) :
-      taskable(),
-      patterns::state_machine::simple_fsm(server, max_states) {}
-  virtual ~polled_simple_fsm(void) {}
+  clonable(void) {}
+  virtual ~clonable(void) {}
 
-  void task_reset(void) override { init(); }
-  void task_execute(void) override {
-    generated_event(true); state_engine();
-  }
+  virtual std::unique_ptr<clonable> clone(void) = 0;
 };
 
-NS_END(rcppsw, task_allocation);
+NS_END(rcppsw, patterns, prototype);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_SIMPLE_FSM_HPP_ */
+#endif /* INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_CLONABLE_HPP_ */
