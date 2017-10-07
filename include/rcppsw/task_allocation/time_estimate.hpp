@@ -48,14 +48,18 @@ class time_estimate : public rcppsw::math::expression<double> {
  public:
   explicit time_estimate(double alpha) : m_alpha(alpha) {}
 
-  double calc(double current_measure) {
-    return set_result((1 - m_alpha) * last_result() +
-                      m_alpha * current_measure);
-  }
+  double calc(double current_measure);
+  time_estimate operator+(const time_estimate &other) const;
+  time_estimate operator/(const time_estimate &other) const;
+  friend time_estimate operator-(const time_estimate& lhs, double d);
+  friend time_estimate operator-(double d, const time_estimate& lhs);
+  friend time_estimate operator*(const time_estimate& lhs, double d);
+  friend time_estimate operator*(double d, const time_estimate& lhs);
 
  private:
   double m_alpha;
 };
+
 
 NS_END(task_allocation, rcppsw);
 
