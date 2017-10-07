@@ -42,15 +42,15 @@ class logical_task;
  * level task.
  */
 
-template<class TaskTypePtr>
+template<class T>
 class task_sequence {
  public:
   /* constructors */
   task_sequence(void) :
       m_parent(nullptr), m_current_task(nullptr), m_tasks() {}
-  explicit task_sequence(std::list<TaskTypePtr>& tasks) :
+  explicit task_sequence(std::list<T*>& tasks) :
       m_parent(nullptr), m_current_task(tasks.begin()), m_tasks(tasks) {}
-  task_sequence(std::list<TaskTypePtr>& tasks, logical_task* const parent) :
+  task_sequence(std::list<T*>& tasks, logical_task* const parent) :
       m_parent(parent), m_current_task(tasks.begin()), m_tasks(tasks) {}
   task_sequence(const task_sequence& other) :
       m_parent(other.m_parent), m_current_task(other.m_current_task),
@@ -60,7 +60,7 @@ class task_sequence {
   /**
    * @brief Set the tasks and parent associated with the sequence.
    */
-  void set_tasks(std::list<TaskTypePtr> tasks, logical_task* const parent) {
+  void set_tasks(std::list<T*> tasks, logical_task* const parent) {
     m_tasks = tasks; m_current_task(tasks.begin());
     m_parent = parent;
   }
@@ -71,7 +71,7 @@ class task_sequence {
   /**
    * @brief Get a reference to the current task in the task sequence.
    */
-  TaskTypePtr current_task(void) { return *m_current_task; }
+  T* current_task(void) { return *m_current_task; }
 
   /**
    * @brief Advance the task sequence to the next task.
@@ -82,8 +82,8 @@ class task_sequence {
   task_sequence& operator=(const task_sequence& other) = delete;
 
   logical_task* const m_parent;
-  typename std::list<TaskTypePtr>::iterator m_current_task;
-  typename std::list<TaskTypePtr> m_tasks;
+  typename std::list<T*>::iterator m_current_task;
+  typename std::list<T*> m_tasks;
 };
 
 NS_END(task_allocation, rcppsw);
