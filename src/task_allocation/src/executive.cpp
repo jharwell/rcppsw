@@ -1,5 +1,5 @@
 /**
- * @file expression.hpp
+ * @file executive.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,56 +18,52 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_EXPRESSION_HPP_
-#define INCLUDE_RCPPSW_MATH_EXPRESSION_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
-#include <cstddef>
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/task_allocation/executive.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, math);
+NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Class Definitions
+ * Member Functions
  ******************************************************************************/
-/**
- * @brief A base class for easy swapping/manipulating of mathematical expressions.
- */
-template<typename T>
-class expression {
- public:
-  expression(void) : m_last() {}
-
-  /**
-   * @brief Get the last value calculated
+executable_task* executive::get_next_task(executable_task* last_task) {
+  /*
+   * We are being run for the first time, so run the partitioning algorithm on
+   * the root of the tree.
    */
-  T last_result(void) const { return m_last; }
-
-  /**
-   * @brief Calculate a new value.
-   */
-  T set_result(T val) { m_last = val; return m_last; }
-
-  bool operator==(const expression &other) const {
-    return this->last_result() == other.last_result();
+  if (nullptr == last_task) {
+    /*
+     * The root was not partitionable, so we only have 1 choice for the next
+     * task.
+     */
+    if (m_root->is_atomic()) {
+      return m_root.get();
+    }
+    /*
+     * The root IS partitionable, so partition it and (possibly) return a
+     * subtask.
+     */
+    return m_root->partition();
   }
-  bool operator>(const expression &other) const {
-    return this->last_result() > other.last_result();
+  ER_ASSERT(m_root->parent(), "FATAL: All tasks must have a parent");
+  if (m_current_task->is_atomic()) {
+    return dynamic_cast<executable_task*>(m_current_task->parent())->partition();
+  } else {
+    return m_current_task->partition();
   }
-  bool operator<(const expression &other) const {
-    return this->last_result() < other.last_result();
+} /* get_next_task() */
+
+double executive::task_abort_prob(const executable_task* const task) {
+  if (task->is_atomic()) {
+    return 0.0;
+  } else {
+    return dynamic_cast<executable_task*>(task->parent())->abort_prob();
   }
+} /* task_abort_prob() */
 
- private:
-               T m_last;
-};
-
-NS_END(rcppsw, math);
-
-#endif /* INCLUDE_RCPPSW_MATH_EXPRESSION_HPP_ */
+NS_END(task_allocation, rcppsw);

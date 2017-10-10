@@ -31,19 +31,20 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-double partition_probability::calc(double task_estimate,
-                                   double subtask1_estimate,
-                                   double subtask2_estimate) {
+double partition_probability::calc(const time_estimate& task_estimate,
+                                   const time_estimate& subtask1_estimate,
+                                   const time_estimate& subtask2_estimate) {
   if (task_estimate > subtask1_estimate + subtask2_estimate) {
-    double res = 1 + std::exp(-m_reactivity *
-                              ((task_estimate /
-                                (subtask1_estimate + subtask2_estimate)) - 1));
+    double res = 1 + std::exp(
+        (-m_reactivity * ((task_estimate /
+                           (subtask1_estimate + subtask2_estimate)) - 1.0)).last_result());
     return set_result(1/res);
   } else {
     double res = 1 +
-                 std::exp(-m_reactivity * (1 -
-                                           ((subtask1_estimate + subtask2_estimate) /
-                                            task_estimate)));
+                 std::exp(
+                     (-m_reactivity * (1.0 -
+                                       ((subtask1_estimate + subtask2_estimate) /
+                                        task_estimate))).last_result());
     return set_result(1/res);
   }
 } /* calc() */

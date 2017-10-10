@@ -1,5 +1,5 @@
 /**
- * @file logical_task.hpp
+ * @file polled_executive.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,16 +18,11 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include <list>
-#include "rcppsw/task_allocation/time_estimate.hpp"
-#include "rcppsw/task_allocation/task_sequence.hpp"
+#include "rcppsw/task_allocation/polled_executive.hpp"
+#include "rcppsw/task_allocation/polled_task.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -35,45 +30,34 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Class Definitions
+ * Member Functions
  ******************************************************************************/
-/**
- * @brief Represents the logical concept of a task, @todo: which is...
- */
-class logical_task {
- public:
-  explicit logical_task(const std::string& name,
-                        logical_task* const parent = nullptr) :
-      m_name(name), m_parent(parent) {}
-  logical_task(const logical_task& other) :
-      m_name(other.m_name), m_parent(other.m_parent) {}
+void polled_executive::run(void) {
+  polled_task* current = dynamic_cast<polled_task*>(executive::current_task());
+  ER_ASSERT(current, "FATAL: polled_executive can only work with polled tasks");
 
-  virtual ~logical_task(void) {}
+  if (current->task_finished()) {
+    ER_NOM("Current task %s finished", current->name().c_str());
+    current = static_cast<polled_task*>(executive::get_next_task(current));
+    new_task_start(current);
+  } else {
+    double prob = executive::task_abort_prob(current);
+    ER_VER("Current task %s abort probability: %f", current->name().c_str(),
+           prob);
+    if (static_cast<double>(rand()) / (RAND_MAX) <= prob) {
+      ER_NOM("Current task %s aborted", current->name().c_str());
+      new_task_start(current);
+    } else {
+      current->task_execute();
+    }
+  }
+} /* run() */
 
-  /**
-   * @brief Get the name of the task
-   */
-  const std::string& name(void) const { return m_name; }
-
-  /**
-   * @brief Get the parent of this task.
-   *
-   * @return The parent task, or NULL if no parent has been set.
-   */
-  logical_task* parent(void) const { return m_parent; }
-
-  /**
-   * @brief Set the parent for this task.
-   */
-  void parent(logical_task* parent) { m_parent = parent; }
-
-  logical_task& operator=(const logical_task& other) = delete;
-
- private:
-  std::string m_name;
-  logical_task* m_parent;
-};
+void polled_executive::new_task_start(polled_task* const new_task) {
+  ER_NOM("New task is %s", new_task->name().c_str());
+  new_task->task_reset();
+  new_task->task_start(nullptr);
+  ER_NOM("Started new task %s", new_task->name().c_str());
+} /* new_task_start() */
 
 NS_END(task_allocation, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_ */

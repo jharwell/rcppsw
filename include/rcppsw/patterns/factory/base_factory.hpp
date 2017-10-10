@@ -37,14 +37,10 @@ NS_START(rcppsw, patterns, factory);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-template <typename T>
 class base_factory {
  public:
   base_factory(void) {}
   virtual ~base_factory(void) {}
-
- protected:
-  typedef std::unique_ptr<T> (*instance_create_func)();
 };
 
 NS_END(factory, patterns, rcppsw);

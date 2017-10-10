@@ -1,5 +1,5 @@
 /**
- * @file logical_task.hpp
+ * @file time_estimate.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,16 +18,10 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include <list>
 #include "rcppsw/task_allocation/time_estimate.hpp"
-#include "rcppsw/task_allocation/task_sequence.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -35,45 +29,47 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Class Definitions
+ * Member Functions
  ******************************************************************************/
-/**
- * @brief Represents the logical concept of a task, @todo: which is...
- */
-class logical_task {
- public:
-  explicit logical_task(const std::string& name,
-                        logical_task* const parent = nullptr) :
-      m_name(name), m_parent(parent) {}
-  logical_task(const logical_task& other) :
-      m_name(other.m_name), m_parent(other.m_parent) {}
+double time_estimate::calc(double current_measure) {
+  return set_result((1 - m_alpha) * last_result() +
+                    m_alpha * current_measure);
+} /* calc() */
 
-  virtual ~logical_task(void) {}
+time_estimate time_estimate::operator+(const time_estimate &other) const {
+  time_estimate r(this->m_alpha);
+  r.set_result(this->last_result() + other.last_result());
+  return r;
+}
 
-  /**
-   * @brief Get the name of the task
-   */
-  const std::string& name(void) const { return m_name; }
+time_estimate time_estimate::operator/(const time_estimate &other) const {
+  time_estimate r(this->m_alpha);
+  r.set_result(this->last_result() / other.last_result());
+  return r;
+}
 
-  /**
-   * @brief Get the parent of this task.
-   *
-   * @return The parent task, or NULL if no parent has been set.
-   */
-  logical_task* parent(void) const { return m_parent; }
+time_estimate operator-(const time_estimate& lhs, double d) {
+  time_estimate r(lhs.m_alpha);
+  r.set_result(lhs.last_result() - d);
+  return r;
+}
 
-  /**
-   * @brief Set the parent for this task.
-   */
-  void parent(logical_task* parent) { m_parent = parent; }
+time_estimate operator-(double d, const time_estimate& lhs) {
+  time_estimate r(lhs.m_alpha);
+  r.set_result(d - lhs.last_result());
+  return r;
+}
 
-  logical_task& operator=(const logical_task& other) = delete;
+time_estimate operator*(const time_estimate& lhs, double d) {
+  time_estimate r(lhs.m_alpha);
+  r.set_result(lhs.last_result() * d);
+  return r;
+}
 
- private:
-  std::string m_name;
-  logical_task* m_parent;
-};
+time_estimate operator*(double d, const time_estimate& lhs) {
+  time_estimate r(lhs.m_alpha);
+  r.set_result(d * lhs.last_result());
+  return r;
+}
 
 NS_END(task_allocation, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_ */

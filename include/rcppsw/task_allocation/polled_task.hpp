@@ -25,7 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/task_allocation/logical_task.hpp"
+#include "rcppsw/task_allocation/executable_task.hpp"
 #include "rcppsw/task_allocation/taskable.hpp"
 
 /*******************************************************************************
@@ -40,12 +40,12 @@ NS_START(rcppsw, task_allocation);
  * @brief Represents a task whose execution can/should be monitored by the user
  * to determine when it has finished.
  */
-class polled_task : public logical_task, public taskable {
+class polled_task : public executable_task, public taskable {
  public:
   polled_task(const std::string& name, double estimate_alpha,
               taskable* const mechanism,
               polled_task* const parent = nullptr) :
-      logical_task(name, estimate_alpha, parent), m_mechanism(mechanism) {}
+      executable_task(name, estimate_alpha, parent), m_mechanism(mechanism) {}
   virtual ~polled_task(void) {}
 
   taskable* mechanism(void) const { return m_mechanism; }
@@ -55,6 +55,9 @@ class polled_task : public logical_task, public taskable {
   bool task_finished(void) const override { return m_mechanism->task_finished(); }
 
  private:
+  polled_task& operator=(const polled_task& other) = delete;
+  polled_task(const polled_task& other) = delete;
+
   taskable * const m_mechanism;
 };
 

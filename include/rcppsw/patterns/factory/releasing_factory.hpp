@@ -40,12 +40,11 @@ NS_START(rcppsw, patterns, factory);
  * Class Definitions
  ******************************************************************************/
 template <typename T>
-class releasing_factory : public base_factory<T> {
+class releasing_factory : public base_factory {
  public:
   releasing_factory(void) : m_release_funcs() {}
   virtual ~releasing_factory(void) {}
 
- public:
   template <typename TDerived>
   status_t register_type(const std::string& name) {
     static_assert(std::is_base_of<T, TDerived>::value,
@@ -64,13 +63,14 @@ class releasing_factory : public base_factory<T> {
   }
 
  private:
+  typedef std::unique_ptr<T> (*instance_create_func)();
+
   template <typename TDerived>
-  static std::unique_ptr<TDerived> do_create_release() {
+  static std::unique_ptr<T> do_create_release() {
     return rcppsw::make_unique<TDerived>();
   }
 
-  std::map<std::string,
-           typename base_factory<T>::instance_create_func> m_release_funcs;
+  std::map<std::string, instance_create_func> m_release_funcs;
 };
 
 NS_END(factory, patterns, rcppsw);

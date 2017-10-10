@@ -25,11 +25,12 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include <list>
 
 #include "rcppsw/task_allocation/polled_task.hpp"
+#include "rcppsw/task_allocation/partitionable_task.hpp"
 #include "rcppsw/task_allocation/task_sequence.hpp"
 #include "rcppsw/task_allocation/abort_probability.hpp"
+#include "rcppsw/task_allocation/partition_probability.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -44,7 +45,8 @@ NS_START(rcppsw, task_allocation);
  * the user to see if it has finished yet.
  */
 template<class T1, class T2>
-class partitionable_polled_task : public polled_task {
+class partitionable_polled_task : public polled_task,
+                                  public partitionable_task<T1, T2> {
   static_assert(std::is_base_of<polled_task, T1>::value,
                 "FATAL: template argument must be a polled task");
   static_assert(std::is_base_of<polled_task, T2>::value,
@@ -52,25 +54,36 @@ class partitionable_polled_task : public polled_task {
 
  public:
   partitionable_polled_task(const std::string& name, double alpha,
-                            double abort_reactivity, double abort_offset,
+                            double reactivity, double abort_offset,
                             taskable* const mechanism,
                             polled_task* const parent = nullptr) :
-      polled_task(name, alpha, mechanism, parent),
-      m_abort_prob(abort_reactivity, abort_offset) {}
+      polled_task(mechanism),
+      partitionable_task<T1, T2>(),
+      m_abort_prob(reactivity, abort_offset),
+      m_partition_prob(reactivity) {}
 
-  double abort_prob(void) {
+  /**
+   * @brief Get the probability of aborting a partitionable task.
+   *
+   * If the atomic task has a parent, then it is part of a partitioning set, and
+   * so return the abort probability of that set. Otherwise, the probability of
+   * aborting an atomic task is 0 (DUH).
+   */
+  double abort_prob(void) override {
     return m_abort_prob.calc(this->exec_time(), this->estimate(),
-                             m_subtask1->estimate(), m_subtask2->estimate());
+                             this->partition1()->estimate(),
+                             this->partition2()->estimate());
   }
-  const T1* subtask1(void) const { return m_subtask1; }
-  const T2* subtask2(void) const { return m_subtask2; }
-  void subtask1(T1* subtask1) { m_subtask1 = subtask1; }
-  void subtask2(T2* subtask2) { m_subtask2 = subtask2; }
+  double partition_prob(void) override {
+    return m_partition_prob.calc(this->estimate(),
+                                 this->partition1()->estimate(),
+                                 this->partition2()->estimate());
+  }
+
 
  private:
   abort_probability m_abort_prob;
-  T1 *m_subtask1;
-  T2 *m_subtask2;
+  partition_probability m_partition_prob;
 };
 
 NS_END(task_allocation, rcppsw);
