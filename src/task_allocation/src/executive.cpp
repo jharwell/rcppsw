@@ -1,5 +1,5 @@
 /**
- * @file logical_task.hpp
+ * @file executive.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,16 +18,10 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include <list>
-#include "rcppsw/task_allocation/time_estimate.hpp"
-#include "rcppsw/task_allocation/task_sequence.hpp"
+#include "rcppsw/task_allocation/executive.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -35,45 +29,41 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Class Definitions
+ * Member Functions
  ******************************************************************************/
-/**
- * @brief Represents the logical concept of a task, @todo: which is...
- */
-class logical_task {
- public:
-  explicit logical_task(const std::string& name,
-                        logical_task* const parent = nullptr) :
-      m_name(name), m_parent(parent) {}
-  logical_task(const logical_task& other) :
-      m_name(other.m_name), m_parent(other.m_parent) {}
-
-  virtual ~logical_task(void) {}
-
-  /**
-   * @brief Get the name of the task
+executable_task* executive::get_next_task(executable_task* last_task) {
+  /*
+   * We are being run for the first time, so run the partitioning algorithm on
+   * the root of the tree.
    */
-  const std::string& name(void) const { return m_name; }
+  if (nullptr == last_task) {
+    /*
+     * The root was not partitionable, so we only have 1 choice for the next
+     * task.
+     */
+    if (m_root->is_atomic()) {
+      return m_root.get();
+    }
+    /*
+     * The root IS partitionable, so partition it and (possibly) return a
+     * subtask.
+     */
+    return m_root->partition();
+  }
+  ER_ASSERT(m_root->parent(), "FATAL: All tasks must have a parent");
+  if (m_current_task->is_atomic()) {
+    return dynamic_cast<executable_task*>(m_current_task->parent())->partition();
+  } else {
+    return m_current_task->partition();
+  }
+} /* get_next_task() */
 
-  /**
-   * @brief Get the parent of this task.
-   *
-   * @return The parent task, or NULL if no parent has been set.
-   */
-  logical_task* parent(void) const { return m_parent; }
-
-  /**
-   * @brief Set the parent for this task.
-   */
-  void parent(logical_task* parent) { m_parent = parent; }
-
-  logical_task& operator=(const logical_task& other) = delete;
-
- private:
-  std::string m_name;
-  logical_task* m_parent;
-};
+double executive::task_abort_prob(const executable_task* const task) {
+  if (task->is_atomic()) {
+    return 0.0;
+  } else {
+    return dynamic_cast<executable_task*>(task->parent())->abort_prob();
+  }
+} /* task_abort_prob() */
 
 NS_END(task_allocation, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_ */

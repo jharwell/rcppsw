@@ -1,5 +1,5 @@
 /**
- * @file atomic_polled_task.hpp
+ * @file polled_executive.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,17 +18,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_ATOMIC_POLLED_TASK_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_ATOMIC_POLLED_TASK_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_EXECUTIVE_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_EXECUTIVE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <list>
-#include <string>
-#include "rcppsw/task_allocation/task_sequence.hpp"
-#include "rcppsw/task_allocation/polled_task.hpp"
-#include "rcppsw/task_allocation/polled_simple_fsm.hpp"
+#include "rcppsw/task_allocation/executive.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -38,33 +34,18 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/**
- * @brief Represents a task that will be executed start to finish without
- * interruption, at least in the sense of being aborted.
- */
-class atomic_polled_task : public polled_task {
+class polled_executive : public executive {
  public:
-  atomic_polled_task(const std::string& name, double estimate_alpha,
-                     taskable * const mechanism,
-                     polled_task* const parent = nullptr) :
-      polled_task(name, estimate_alpha, mechanism, parent) {}
+  polled_executive(const std::shared_ptr<rcppsw::common::er_server>& server,
+                   std::unique_ptr<executable_task>& root) :
+      executive(server, root) {}
 
-  /**
-   * @brief Get the probability of aborting an atomic task.
-   *
-   * If the atomic task has a parent, then it is part of a partitioning set, and
-   * so return the abort probability of that set. Otherwise, the probability of
-   * aborting an atomic task is 0 (DUH).
-   */
-  double abort_prob(void) override {
-    if (parent()) {
-      return parent()->abort_prob();
-    } else {
-      return 0.0;
-    }
-  }
+  void run(void) override = 0;
+
+ private:
+  void new_task_start(class polled_task* const new_task);
 };
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_ATOMIC_POLLED_TASK_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_EXECUTIVE_HPP_ */
