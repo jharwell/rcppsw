@@ -33,6 +33,10 @@ NS_START(rcppsw, task_allocation);
  * Member Functions
  ******************************************************************************/
 void polled_executive::run(void) {
+  if (nullptr == executive::current_task()) {
+    new_task_start(nullptr);
+    return;
+  }
   polled_task* current = dynamic_cast<polled_task*>(executive::current_task());
   ER_ASSERT(current, "FATAL: polled_executive can only work with polled tasks");
 

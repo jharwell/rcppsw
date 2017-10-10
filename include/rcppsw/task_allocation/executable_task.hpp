@@ -48,7 +48,7 @@ NS_START(rcppsw, task_allocation);
 class executable_task : public logical_task {
  public:
   executable_task(const std::string& name, double estimate_alpha,
-               executable_task* const parent = nullptr) :
+                  executable_task* const parent = nullptr) :
       logical_task(name, parent),
       m_is_atomic(false), m_exec_time(0.0), m_estimate(estimate_alpha) {}
   executable_task(const executable_task& other) :
@@ -97,7 +97,7 @@ class executable_task : public logical_task {
    */
   double exec_time(void) const { return m_exec_time; }
 
-  virtual executable_task* partition(void) = 0;
+  virtual logical_task* partition(void) = 0;
   bool is_atomic(void) const { return m_is_atomic; }
   void set_atomic(void) { m_is_atomic = true; }
 
