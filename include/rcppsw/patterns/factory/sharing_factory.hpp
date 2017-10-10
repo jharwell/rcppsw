@@ -60,7 +60,7 @@ class sharing_factory : public base_factory<T> {
       return it->second();
     }
     return nullptr;
-  }
+    }
 
  private:
   template <typename TDerived>

@@ -1,5 +1,5 @@
 /**
- * @file logical_task.hpp
+ * @file executive.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,16 +18,14 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_EXECUTIVE_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_EXECUTIVE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include <list>
-#include "rcppsw/task_allocation/time_estimate.hpp"
-#include "rcppsw/task_allocation/task_sequence.hpp"
+#include "rcppsw/common/er_client.hpp"
+#include "rcppsw/task_allocation/executable_task.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -38,42 +36,34 @@ NS_START(rcppsw, task_allocation);
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief Represents the logical concept of a task, @todo: which is...
+ * @brief Abstract interface for runtime task executives.
  */
-class logical_task {
+class executive : public rcppsw::common::er_client {
  public:
-  explicit logical_task(const std::string& name,
-                        logical_task* const parent = nullptr) :
-      m_name(name), m_parent(parent) {}
-  logical_task(const logical_task& other) :
-      m_name(other.m_name), m_parent(other.m_parent) {}
+  executive(const std::shared_ptr<rcppsw::common::er_server>& server,
+            std::unique_ptr<executable_task>& root) :
+      er_client(server), m_current_task(nullptr), m_root(std::move(root)) {
+    er_client::insmod("task_executive",
+                      rcppsw::common::er_lvl::NOM,
+                      rcppsw::common::er_lvl::NOM);
+  }
 
-  virtual ~logical_task(void) {}
+  virtual void run(void) = 0;
 
-  /**
-   * @brief Get the name of the task
-   */
-  const std::string& name(void) const { return m_name; }
-
-  /**
-   * @brief Get the parent of this task.
-   *
-   * @return The parent task, or NULL if no parent has been set.
-   */
-  logical_task* parent(void) const { return m_parent; }
-
-  /**
-   * @brief Set the parent for this task.
-   */
-  void parent(logical_task* parent) { m_parent = parent; }
-
-  logical_task& operator=(const logical_task& other) = delete;
+ protected:
+  executable_task* current_task(void) const { return m_current_task; }
+  void current_task(executable_task* current_task) { m_current_task = current_task; }
+  executable_task* get_next_task(executable_task* last_task);
+  double task_abort_prob(const executable_task* const task);
 
  private:
-  std::string m_name;
-  logical_task* m_parent;
+  executive& operator=(const executive& other) = delete;
+  executive(const executive& other) = delete;
+
+  executable_task* m_current_task;
+  std::unique_ptr<executable_task> m_root;
 };
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_LOGICAL_TASK_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_EXECUTIVE_HPP_ */

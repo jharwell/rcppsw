@@ -65,7 +65,7 @@ class releasing_factory : public base_factory<T> {
 
  private:
   template <typename TDerived>
-  static std::unique_ptr<TDerived> do_create_release() {
+  static std::unique_ptr<T> do_create_release() {
     return rcppsw::make_unique<TDerived>();
   }
 

@@ -57,11 +57,18 @@ class partitionable_polled_task : public polled_task,
                             double reactivity, double abort_offset,
                             taskable* const mechanism,
                             polled_task* const parent = nullptr) :
-      polled_task(name, alpha, mechanism, parent),
+      polled_task(mechanism),
       partitionable_task<T1, T2>(),
       m_abort_prob(reactivity, abort_offset),
       m_partition_prob(reactivity) {}
 
+  /**
+   * @brief Get the probability of aborting a partitionable task.
+   *
+   * If the atomic task has a parent, then it is part of a partitioning set, and
+   * so return the abort probability of that set. Otherwise, the probability of
+   * aborting an atomic task is 0 (DUH).
+   */
   double abort_prob(void) override {
     return m_abort_prob.calc(this->exec_time(), this->estimate(),
                              this->partition1()->estimate(),
@@ -72,6 +79,7 @@ class partitionable_polled_task : public polled_task,
                                  this->partition1()->estimate(),
                                  this->partition2()->estimate());
   }
+
 
  private:
   abort_probability m_abort_prob;
