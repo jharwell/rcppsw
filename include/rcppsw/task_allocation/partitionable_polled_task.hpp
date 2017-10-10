@@ -25,15 +25,15 @@
  * Includes
  ******************************************************************************/
 #include <string>
-
 #include "rcppsw/task_allocation/polled_task.hpp"
 #include "rcppsw/task_allocation/partitionable_task.hpp"
 #include "rcppsw/task_allocation/task_sequence.hpp"
 #include "rcppsw/task_allocation/abort_probability.hpp"
 #include "rcppsw/task_allocation/partition_probability.hpp"
+#include "rcppsw/task_allocation/task_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespacesp
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 
@@ -53,14 +53,14 @@ class partitionable_polled_task : public polled_task,
                 "FATAL: template argument must be a polled task");
 
  public:
-  partitionable_polled_task(const std::string& name, double alpha,
-                            double reactivity, double abort_offset,
-                            taskable* const mechanism,
+  partitionable_polled_task(const std::string& name,
+                            const struct task_params* const params,
+                            std::unique_ptr<taskable>& mechanism,
                             polled_task* const parent = nullptr) :
-      polled_task(mechanism),
+      polled_task(name, params->estimation_alpha, mechanism, parent),
       partitionable_task<T1, T2>(),
-      m_abort_prob(reactivity, abort_offset),
-      m_partition_prob(reactivity) {}
+      m_abort_prob(params->reactivity, params->abort_offset),
+      m_partition_prob(params->reactivity) {}
 
   /**
    * @brief Get the probability of aborting a partitionable task.

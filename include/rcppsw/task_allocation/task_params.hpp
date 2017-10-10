@@ -1,5 +1,5 @@
 /**
- * @file polled_executive.cpp
+ * @file task_params.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,11 +18,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/polled_executive.hpp"
-#include "rcppsw/task_allocation/polled_task.hpp"
+#include "rcppsw/common/base_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -30,38 +32,15 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Member Functions
+ * Structure Definitions
  ******************************************************************************/
-void polled_executive::run(void) {
-  if (nullptr == executive::current_task()) {
-    new_task_start(nullptr);
-    return;
-  }
-  polled_task* current = dynamic_cast<polled_task*>(executive::current_task());
-  ER_ASSERT(current, "FATAL: polled_executive can only work with polled tasks");
-
-  if (current->task_finished()) {
-    ER_NOM("Current task %s finished", current->name().c_str());
-    current = static_cast<polled_task*>(executive::get_next_task(current));
-    new_task_start(current);
-  } else {
-    double prob = executive::task_abort_prob(current);
-    ER_VER("Current task %s abort probability: %f", current->name().c_str(),
-           prob);
-    if (static_cast<double>(rand()) / (RAND_MAX) <= prob) {
-      ER_NOM("Current task %s aborted", current->name().c_str());
-      new_task_start(current);
-    } else {
-      current->task_execute();
-    }
-  }
-} /* run() */
-
-void polled_executive::new_task_start(polled_task* const new_task) {
-  ER_NOM("New task is %s", new_task->name().c_str());
-  new_task->task_reset();
-  new_task->task_start(nullptr);
-  ER_NOM("Started new task %s", new_task->name().c_str());
-} /* new_task_start() */
+struct task_params : public common::base_params {
+  task_params(void) : estimation_alpha(), reactivity(), abort_offset() {}
+  double estimation_alpha;
+  double reactivity;
+  double abort_offset;
+};
 
 NS_END(task_allocation, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_ */

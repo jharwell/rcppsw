@@ -48,29 +48,20 @@ NS_START(rcppsw, task_allocation);
  * \ref logical_task.
  */
 template<class T1, class T2>
-class partitionable_task : public rcppsw::common::er_client {
+class partitionable_task {
   static_assert(std::is_base_of<logical_task, T1>::value,
                 "FATAL: template argument must be a logical task");
   static_assert(std::is_base_of<logical_task, T2>::value,
                 "FATAL: template argument must be a logical task");
-
  public:
-  explicit partitionable_task(
-      const std::shared_ptr<rcppsw::common::er_server>& server) :
-      er_client(server) {
-    er_client::insmod("partitionable_task",
-                      rcppsw::common::er_lvl::VER,
-                      rcppsw::common::er_lvl::NOM);
-  }
+  explicit partitionable_task(void) {}
   virtual ~partitionable_task(void) {}
 
   virtual double partition_prob(void) = 0;
 
   logical_task* partition(void) {
-    double prob = partition_prob();
-    ER_VER("Partition probability: %f", prob);
     /* we are going to partition, so pick one of the two subtasks randomly */
-    if (prob >= static_cast<double>(rand()) / RAND_MAX) {
+    if (partition_prob() >= static_cast<double>(rand()) / RAND_MAX) {
       if (rand() % 2) {
         return m_partition1;
       } else {
