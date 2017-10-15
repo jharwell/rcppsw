@@ -51,8 +51,8 @@ class er_server : public multithread::threadable {
    * message besides the text of the message itself.
    */
   struct er_msg_int {
-    explicit er_msg_int(const boost::uuids::uuid& id, const er_lvl::value& lvl,
-                     const std::string& str)
+    er_msg_int(const boost::uuids::uuid& id, const er_lvl::value& lvl,
+               const std::string& str)
         : m_id(id), lvl_(lvl), str_(str) {}
     boost::uuids::uuid m_id;
     er_lvl::value lvl_;
@@ -71,7 +71,7 @@ class er_server : public multithread::threadable {
    *                 messages will be handled inline in the calling thread
    *                 (asynchronously).
    */
-  er_server(const std::string& logfile_fname = "__no_file__",
+  explicit er_server(const std::string& logfile_fname = "__no_file__",
             const er_lvl::value& dbglvl = er_lvl::NOM,
             const er_lvl::value& loglvl = er_lvl::NOM,
             bool threaded = false);
@@ -123,7 +123,7 @@ class er_server : public multithread::threadable {
    * debuging/logging modules, short version. Uses the default logging/debugging
    * levels of the server when installing the new module.
    *
-   * @param mod_id The UUID of the module to install.
+   * @param id The UUID of the module to install.
    * @param name The name of the module, which will be prepended to all
    *                 messages.
    * @return OK if successful, ERROR otherwise.
@@ -261,6 +261,8 @@ class er_server : public multithread::threadable {
 };
 
 class global_server: public patterns::singleton<er_server>, public er_server {
+ public:
+  virtual ~global_server(void);
 };
 
 /*******************************************************************************

@@ -23,7 +23,6 @@
  ******************************************************************************/
 #include <assert.h>
 #include "rcppsw/patterns/state_machine/base_fsm.hpp"
-#include "rcsw/common/fpc.h"
 
 /*******************************************************************************
  * Namespaces
@@ -65,7 +64,7 @@ void base_fsm::init(void) {
 void base_fsm::external_event(uint8_t new_state,
                               std::unique_ptr<const event_data> data) {
   ER_VER("Received external event: new_state=%d data=%p",
-          new_state, data.get());
+         new_state, reinterpret_cast<const void*>(data.get()));
 
   ER_ASSERT(event_signal::FATAL != new_state,
             "The impossible event happened...");
@@ -88,7 +87,7 @@ void base_fsm::external_event(uint8_t new_state,
 void base_fsm::internal_event(uint8_t new_state,
                               std::unique_ptr<const event_data> data) {
   ER_VER("Generated internal event: current_state=%d new_state=%d data=%p",
-         current_state(), new_state, data.get());
+         current_state(), new_state, reinterpret_cast<const void*>(data.get()));
   next_state(new_state);
   m_event_generated = true;
   if (m_event_data != data) {
@@ -177,14 +176,14 @@ void base_fsm::state_engine_map_ex(void) {
 void base_fsm::state_engine_step(const state_map_row* const row) {
   ER_ASSERT(nullptr != row->state(), "FATAL: null state?");
   ER_VER("Invoking state action: state%d, data=%p", current_state(),
-         event_data_get());
+         reinterpret_cast<const void*>(m_event_data.get()));
   row->state()->invoke_state_action(this, event_data_get());
 } /* state_engine_step() */
 
 void base_fsm::state_engine_step(const state_map_ex_row* const row_ex) {
   ER_ASSERT(nullptr != row_ex->state(), "FATAL: null state?");
   ER_VER("Invoking state action: state%d, data=%p", current_state(),
-          event_data_get());
+         reinterpret_cast<const void*>(m_event_data.get()));
   row_ex->state()->invoke_state_action(this, event_data_get());
 } /* state_engine_step() */
 

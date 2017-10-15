@@ -47,7 +47,7 @@ class polled_task : public executable_task, public taskable {
               polled_task* const parent = nullptr) :
       executable_task(name, estimate_alpha, parent),
       m_mechanism(std::move(mechanism)) {}
-  virtual ~polled_task(void) {}
+  virtual ~polled_task(void);
 
   taskable* mechanism(void) const { return m_mechanism.get(); }
 

@@ -59,13 +59,13 @@ class er_server_mod {
   /**
    * @brief Set the debug printing level for a module.
    *
-   * @param The new level.
+   * @param lvl The new level.
    */
   void set_dbglvl(const er_lvl::value& lvl);
   /**
    * @brief Set the logging level for a module.
    *
-   * @param The new level.
+   * @param lvl The new level.
    */
   void set_loglvl(const er_lvl::value& lvl);
 
@@ -76,8 +76,9 @@ class er_server_mod {
    * @brief Log a message to a file if the message level is high enough.
    *
    * @param msg The message to log.
-   * @param lvl The level of the message.
-   * @param file The file to log the message to.
+   * @param msg_lvl The level of the message.
+   * @param log_lvl The level of the message.
+   * @param stream The stream to log the message to.
    */
   void msg_report(const std::string& msg, er_lvl::value msg_lvl,
               er_lvl::value log_lvl, std::ostream& stream) const;
@@ -94,12 +95,12 @@ class er_server_mod {
   er_lvl::value      m_dbglvl;
 };
 
-NS_END(common, rcppsw);
-
 /*******************************************************************************
  * Operator Definitions
  ******************************************************************************/
 std::ostream& operator<<(std::ostream& os,
                          const rcppsw::common::er_server_mod& mod);
+
+NS_END(common, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_COMMON_ER_SERVER_MOD_HPP_ */

@@ -47,7 +47,7 @@ class executive : public rcppsw::common::er_client {
                       rcppsw::common::er_lvl::NOM,
                       rcppsw::common::er_lvl::NOM);
   }
-
+  virtual ~executive(void);
   virtual void run(void) = 0;
 
  protected:
