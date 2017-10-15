@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <cmath>
+#include <algorithm>
 #include "rcppsw/math/expression.hpp"
 
 /*******************************************************************************
@@ -55,9 +55,10 @@ class pheromone_density: public rcppsw::math::expression<double> {
   void rho(double rho) { m_rho = rho; }
 
   double calc(void) {
-    double res = set_result((1.0 - m_rho) * last_result() + m_delta);
+    double res = std::max<double>((1.0 - m_rho) * last_result() + m_delta,
+                                  0.0);
     m_delta = 0;
-    return res;
+    return set_result(res);
   }
   void add_pheromone(double val) {
     m_delta += val;
