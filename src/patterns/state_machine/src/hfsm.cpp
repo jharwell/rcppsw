@@ -34,7 +34,7 @@ NS_START(rcppsw, patterns, state_machine);
 void hfsm::state_engine_step(const state_map_row* const row) {
   ER_ASSERT(nullptr != row->state(), "FATAL: null state?");
   ER_VER("Invoking state action: state%d, data=%p", current_state(),
-         event_data_get());
+         reinterpret_cast<const void*>(event_data_get()));
   const hfsm_state* state = static_cast<const hfsm_state*>(row->state());
   int rval = event_signal::UNHANDLED;
   while (rval != event_signal::HANDLED) {
@@ -50,7 +50,7 @@ void hfsm::state_engine_step(const state_map_row* const row) {
 void hfsm::state_engine_step(const state_map_ex_row* const row_ex) {
   ER_ASSERT(nullptr != row_ex->state(), "FATAL: null state?");
   ER_VER("Invoking state action: state%d, data=%p", current_state(),
-         event_data_get());
+         reinterpret_cast<const void*>(event_data_get()));
   const hfsm_state* state = static_cast<const hfsm_state*>(row_ex->state());
   int rval = event_signal::UNHANDLED;
   while (rval != event_signal::HANDLED) {

@@ -34,10 +34,7 @@
 NS_START(rcppsw, patterns, state_machine);
 
 /*******************************************************************************
- * Structure Definitions
- ******************************************************************************/
-/*******************************************************************************
- * Structure Definitions
+ * Class Definitions
  ******************************************************************************/
 /**
  * @brief A structure to hold a single row within the state map.
@@ -73,9 +70,6 @@ class hfsm_state_map_ex_row : public state_map_ex_row {
   rcppsw::patterns::state_machine::state* m_parent;
 };
 
-/*******************************************************************************
- * Class Definitions
- ******************************************************************************/
 /**
  * @brief hfsm implements a software-based state machine.
  */

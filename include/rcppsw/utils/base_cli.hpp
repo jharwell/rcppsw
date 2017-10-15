@@ -40,7 +40,7 @@ NS_START(rcppsw);
 class base_cli {
  public:
   explicit base_cli(const std::string& mnemonic = "");
-  virtual ~base_cli() {}
+  virtual ~base_cli(void);
 
   /**
    * @brief Parse command line options.

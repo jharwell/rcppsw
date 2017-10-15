@@ -32,14 +32,13 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
+ * Class Decls
+ ******************************************************************************/
+class taskable_argument;
+
+/*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class taskable_argument {
- public:
-  taskable_argument(void) {}
-  virtual ~taskable_argument(void) {}
-};
-
 /**
  * @brief A class that all classes wishing to be used as the mechanism by which
  * \ref atomic_task instances execute themselves must inherit from.
@@ -47,7 +46,7 @@ class taskable_argument {
 class taskable {
  public:
   taskable(void) {}
-  virtual ~taskable(void) {}
+  virtual ~taskable(void);
 
   /**
    * @brief Execute the task.
