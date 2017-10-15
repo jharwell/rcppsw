@@ -105,7 +105,7 @@ class threadable {
    *
    * @return The thread ID (guaranteed to be unique among threads in a process).
    */
-  int thread_id(void) { return syscall(__NR_gettid); }
+  int64_t thread_id(void) { return syscall(__NR_gettid); }
 
   threadable(const threadable&& other) : m_thread_run(other.m_thread_run),
                                          m_thread(other.m_thread),

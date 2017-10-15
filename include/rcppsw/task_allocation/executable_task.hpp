@@ -55,7 +55,7 @@ class executable_task : public logical_task {
       logical_task(other), m_is_atomic(false), m_exec_time(other.m_exec_time),
       m_estimate(other.m_estimate) {}
 
-  virtual ~executable_task(void) {}
+  virtual ~executable_task(void);
 
   /**
    * @brief Get the current estimate of the task's execution time.

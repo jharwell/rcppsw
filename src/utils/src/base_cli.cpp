@@ -62,6 +62,8 @@ base_cli::base_cli(const std::string &mnemonic)
           "verbose logging. Range=[0, 5]. Default=3.");
 } /* base_cli::base_cli() */
 
+base_cli::~base_cli(void) {}
+
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/

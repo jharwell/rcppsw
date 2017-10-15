@@ -76,7 +76,8 @@ class er_server_mod {
    * @brief Log a message to a file if the message level is high enough.
    *
    * @param msg The message to log.
-   * @param lvl The level of the message.
+   * @param msg_lvl The level of the message.
+   * @param log_lvl The level of the message.
    * @param stream The stream to log the message to.
    */
   void msg_report(const std::string& msg, er_lvl::value msg_lvl,
@@ -94,12 +95,12 @@ class er_server_mod {
   er_lvl::value      m_dbglvl;
 };
 
-NS_END(common, rcppsw);
-
 /*******************************************************************************
  * Operator Definitions
  ******************************************************************************/
 std::ostream& operator<<(std::ostream& os,
                          const rcppsw::common::er_server_mod& mod);
+
+NS_END(common, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_COMMON_ER_SERVER_MOD_HPP_ */

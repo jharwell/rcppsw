@@ -48,7 +48,7 @@ class logical_task {
   logical_task(const logical_task& other) :
       m_name(other.m_name), m_parent(other.m_parent) {}
 
-  virtual ~logical_task(void) {}
+  virtual ~logical_task(void);
 
   /**
    * @brief Get the name of the task
