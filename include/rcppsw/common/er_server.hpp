@@ -123,7 +123,7 @@ class er_server : public multithread::threadable {
    * debuging/logging modules, short version. Uses the default logging/debugging
    * levels of the server when installing the new module.
    *
-   * @param mod_id The UUID of the module to install.
+   * @param id The UUID of the module to install.
    * @param name The name of the module, which will be prepended to all
    *                 messages.
    * @return OK if successful, ERROR otherwise.

@@ -45,6 +45,7 @@ add_library(${target}
   $<TARGET_OBJECTS:multithread>
   $<TARGET_OBJECTS:utils>
   $<TARGET_OBJECTS:state_machine>
+  $<TARGET_OBJECTS:task_allocation>
   $<TARGET_OBJECTS:control>)
 
 foreach(d ${${target}_SUBDIRS})

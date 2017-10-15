@@ -46,12 +46,12 @@ NS_START(rcppsw, task_allocation);
 class polled_hfsm : public taskable,
                     public patterns::state_machine::hfsm {
  public:
-  explicit polled_hfsm(const std::shared_ptr<common::er_server>& server) :
-      taskable(), hfsm(server) {}
+  explicit polled_hfsm(const std::shared_ptr<common::er_server>& server,
+                       uint8_t max_states, uint8_t initial_state = 0) :
+      taskable(), hfsm(server, max_states, initial_state) {}
   virtual ~polled_hfsm(void) {}
 
-  virtual void task_reset(void) { init(); }
-  virtual void task_execute(void) { generated_event(true); state_engine(); }
+  void task_reset(void) override { init(); }
 };
 
 NS_END(rcppsw, task_allocation);

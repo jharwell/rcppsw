@@ -59,13 +59,13 @@ class er_server_mod {
   /**
    * @brief Set the debug printing level for a module.
    *
-   * @param The new level.
+   * @param lvl The new level.
    */
   void set_dbglvl(const er_lvl::value& lvl);
   /**
    * @brief Set the logging level for a module.
    *
-   * @param The new level.
+   * @param lvl The new level.
    */
   void set_loglvl(const er_lvl::value& lvl);
 
@@ -77,7 +77,7 @@ class er_server_mod {
    *
    * @param msg The message to log.
    * @param lvl The level of the message.
-   * @param file The file to log the message to.
+   * @param stream The stream to log the message to.
    */
   void msg_report(const std::string& msg, er_lvl::value msg_lvl,
               er_lvl::value log_lvl, std::ostream& stream) const;

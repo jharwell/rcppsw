@@ -48,13 +48,14 @@ executable_task* executive::get_next_task(executable_task* last_task) {
      * The root IS partitionable, so partition it and (possibly) return a
      * subtask.
      */
-    return m_root->partition();
+    return static_cast<executable_task*>(m_root->partition());
   }
   ER_ASSERT(m_root->parent(), "FATAL: All tasks must have a parent");
   if (m_current_task->is_atomic()) {
-    return dynamic_cast<executable_task*>(m_current_task->parent())->partition();
+    return static_cast<executable_task*>(
+        static_cast<executable_task*>(m_current_task->parent())->partition());
   } else {
-    return m_current_task->partition();
+    return static_cast<executable_task*>(m_current_task->partition());
   }
 } /* get_next_task() */
 
