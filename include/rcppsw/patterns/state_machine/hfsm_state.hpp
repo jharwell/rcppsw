@@ -44,13 +44,14 @@ class hfsm_state: public state {
 
   int invoke_state_action(base_fsm* fsm,
                           const event_data* e) const override = 0;
-  hfsm_state* parent(void) const { return m_parent; }
+  rcppsw::patterns::state_machine::state* parent(void) const { return m_parent; }
+  void parent(rcppsw::patterns::state_machine::state* parent) { m_parent = parent; }
 
  private:
   hfsm_state& operator=(const hfsm_state& fsm) = delete;
   hfsm_state(const hfsm_state& fsm) = delete;
 
-  hfsm_state* m_parent;
+  rcppsw::patterns::state_machine::state* m_parent;
 };
 
 /**

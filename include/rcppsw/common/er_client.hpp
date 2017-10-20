@@ -122,7 +122,7 @@
 /*******************************************************************************
  * Class Decls
  ******************************************************************************/
-namespace rcppsw { namespace common { class er_server; } }
+namespace rcppsw { namespace common { class er_server; class global_server;} }
 
 /*******************************************************************************
  * Namespaces
@@ -203,6 +203,18 @@ class er_client {
   std::shared_ptr<er_server> m_server_handle;
   boost::uuids::uuid m_er_id;
 };
+
+
+/*******************************************************************************
+ * Global Variables
+ ******************************************************************************/
+/**
+ * @brief A common, global server that all applications utilizing rcppsw have
+ * access to. Handy in cases where you don't want to pass the server handle down
+ * through unrelated constructors until you get to the class you actually want
+ * to enable debug printing/logging for.
+ */
+extern std::shared_ptr<global_server> g_server;
 
 /*******************************************************************************
  * Forward Declarations

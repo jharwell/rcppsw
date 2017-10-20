@@ -42,7 +42,7 @@ void hfsm::state_engine_step(const state_map_row* const row) {
     if (event_signal::HANDLED == rval) {
       break;
     }
-    state = state->parent();
+    state = static_cast<hfsm_state*>(state->parent());
     const_cast<event_data*>(event_data_get())->type(event_type::CHILD);
   } /* while() */
 } /* state_engine_step() */
@@ -58,7 +58,7 @@ void hfsm::state_engine_step(const state_map_ex_row* const row_ex) {
     if (event_signal::HANDLED == rval) {
       break;
     }
-    state = state->parent();
+    state = static_cast<hfsm_state*>(state->parent());
     const_cast<event_data*>(event_data_get())->type(event_type::CHILD);
   } /* while() */
 } /* state_engine_step() */
@@ -70,18 +70,22 @@ void hfsm::inject_event(int signal, int type) {
 
 void hfsm::change_parent(uint state,
                    rcppsw::patterns::state_machine::state* new_parent) {
-  hfsm_state_map_row* map = const_cast<hfsm_state_map_row*>(
+  hfsm_state_map_row* row = const_cast<hfsm_state_map_row*>(
       static_cast<const hfsm_state_map_row*>(state_map(state)));
-  hfsm_state_map_ex_row* map_ex = const_cast<hfsm_state_map_ex_row*>(
+  hfsm_state_map_ex_row* row_ex = const_cast<hfsm_state_map_ex_row*>(
       static_cast<const hfsm_state_map_ex_row*>(state_map_ex(state)));
 
-  ER_ASSERT(!(nullptr == map && nullptr == map_ex),
+  ER_ASSERT(!(nullptr == row && nullptr == row_ex),
             "FATAL: Both state maps are NULL!");
 
-  if (map != nullptr) {
-    map->parent(new_parent);
+  if (row != nullptr) {
+    hfsm_state* self = static_cast<hfsm_state*>(row->state());
+    self->parent(new_parent);
+    row->parent(new_parent);
   }
-  map_ex->parent(new_parent);
-} /* change_state() */
+  hfsm_state* self = static_cast<hfsm_state*>(row_ex->state());
+  self->parent(new_parent);
+  row_ex->parent(new_parent);
+} /* change_parent() */
 
 NS_END(state_machine, patterns, rcppsw);
