@@ -265,17 +265,6 @@ class global_server: public patterns::singleton<er_server>, public er_server {
   virtual ~global_server(void);
 };
 
-/*******************************************************************************
- * Global Variables
- ******************************************************************************/
-/**
- * @brief A common, global server that all applications utilizing rcppsw have
- * access to. Handy in cases where you don't want to pass the server handle down
- * through unrelated constructors until you get to the class you actually want
- * to enable debug printing/logging for.
- */
-extern std::shared_ptr<global_server> g_server;
-
 NS_END(common, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_COMMON_ER_SERVER_HPP_ */
