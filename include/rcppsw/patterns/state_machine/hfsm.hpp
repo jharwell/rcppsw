@@ -24,9 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <stdio.h>
-#include <typeinfo>
-#include <cstddef>
 #include <mutex>
 #include "rcppsw/patterns/state_machine/hfsm_state.hpp"
 #include "rcppsw/patterns/state_machine/base_fsm.hpp"
@@ -37,10 +34,7 @@
 NS_START(rcppsw, patterns, state_machine);
 
 /*******************************************************************************
- * Structure Definitions
- ******************************************************************************/
-/*******************************************************************************
- * Structure Definitions
+ * Class Definitions
  ******************************************************************************/
 /**
  * @brief A structure to hold a single row within the state map.
@@ -76,9 +70,6 @@ class hfsm_state_map_ex_row : public state_map_ex_row {
   rcppsw::patterns::state_machine::state* m_parent;
 };
 
-/*******************************************************************************
- * Class Definitions
- ******************************************************************************/
 /**
  * @brief hfsm implements a software-based state machine.
  */
@@ -89,7 +80,7 @@ class hfsm: public base_fsm {
    * @param initial_state Initial state machine state.
    */
   hfsm(const std::shared_ptr<common::er_server>& server,
-           uint8_t max_states,
+       uint8_t max_states,
        uint8_t initial_state = 0) :
       base_fsm(server, max_states, initial_state), m_top_state(nullptr) {}
 
@@ -145,7 +136,7 @@ class hfsm: public base_fsm {
   private:                                                              \
   rcppsw::patterns::state_machine::hfsm_state_action<BASE_FSM,          \
                                                      state_data,        \
-                                                     &BASE_FSM::ST_##inherited_name> inherited_name;
+                                                     &BASE_FSM::ST_##inherited_name> inherited_name
 
 /**
  * @brief Declare a state in the current HFSM.
@@ -164,7 +155,7 @@ class hfsm: public base_fsm {
 private:                                                                \
 rcppsw::patterns::state_machine::hfsm_state_action<FSM,                 \
                                                    state_data,          \
-                                                   &FSM::ST_##state_name> state_name;
+                                                   &FSM::ST_##state_name> state_name
 
 
 #define HFSM_STATE_DEFINE(FSM, state_name, event) \
@@ -181,13 +172,13 @@ rcppsw::patterns::state_machine::hfsm_state_action<FSM,                 \
 private:                                                                \
 rcppsw::patterns::state_machine::state_entry_action<FSM,                \
                                                     event_data,         \
-                                                    &FSM::EN_##entry_name> entry_name;
+                                                    &FSM::EN_##entry_name> entry_name
 
 #define HFSM_ENTRY_INHERIT(BASE_FSM, inherited_name, event_data)        \
   private:                                                              \
   rcppsw::patterns::state_machine::state_entry_action<BASE_FSM,         \
                                                       event_data,       \
-                                                      &BASE_FSM::EN_##inherited_name> inherited_name;
+                                                      &BASE_FSM::EN_##inherited_name> inherited_name
 #define HFSM_ENTRY_DEFINE(FSM, entry_name, event_data) \
   FSM_ENTRY_DEFINE(FSM, entry_name, event_data)
 
@@ -196,12 +187,12 @@ rcppsw::patterns::state_machine::state_entry_action<FSM,                \
   void EX_##exit_name(void);                                            \
 private:                                                                \
 rcppsw::patterns::state_machine::state_exit_action<FSM,                 \
-                                                   &FSM::EX_##exit_name> exit_name;
+                                                   &FSM::EX_##exit_name> exit_name
 
 #define HFSM_EXIT_INHERIT(BASE_FSM, inherited_name)                     \
   private:                                                              \
   rcppsw::patterns::state_machine::state_exit_action<BASE_FSM,          \
-                                                     &BASE_FSM::EX_##inherited_name> inherited_name;
+                                                     &BASE_FSM::EX_##inherited_name> inherited_name
 
 #define HFSM_EXIT_DEFINE(FSM, exit_name) FSM_EXIT_DEFINE(FSM, exit_name)
 

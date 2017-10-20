@@ -39,8 +39,8 @@ NS_START(rcppsw, common);
     char _str[6000];                                                     \
     struct timespec _curr_time;                                          \
     clock_gettime(CLOCK_REALTIME, &_curr_time);                          \
-    snprintf((char*)_str, sizeof(_str), "[%s:%lu.%lu]:%s:%d:%s: " msg "\n",  \
-             (char*)m_hostname, _curr_time.tv_sec, _curr_time.tv_nsec, __FILE__, \
+    snprintf(static_cast<char*>(_str), sizeof(_str), "[%s:%lu.%lu]:%s:%d:%s: " msg "\n", \
+             static_cast<char*>(m_hostname), _curr_time.tv_sec, _curr_time.tv_nsec, __FILE__, \
              __LINE__, __FUNCTION__, ##__VA_ARGS__);                     \
     er_server::er_msg_int _msg(m_er_id, lvl, std::string(_str));             \
     msg_report(_msg);                                                    \
@@ -49,7 +49,7 @@ NS_START(rcppsw, common);
 /*******************************************************************************
  * Global Variables
  ******************************************************************************/
-std::shared_ptr<global_server> g_server(std::make_shared<global_server>());
+std::shared_ptr<global_server>g_server(std::make_shared<global_server>());
 
 /*******************************************************************************
  * Constructors/Destructors
@@ -70,6 +70,8 @@ er_server::er_server(const std::string& logfile_fname,
 
   change_logfile(m_logfile_fname);
 } /* er_server::er_server() */
+
+global_server::~global_server(void) {}
 
 /*******************************************************************************
  * Member Functions

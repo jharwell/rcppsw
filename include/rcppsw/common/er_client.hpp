@@ -28,7 +28,7 @@
  ******************************************************************************/
 #include <string>
 #include <boost/uuid/uuid.hpp>
-#include "rcppsw/common/er_server.hpp"
+#include "rcppsw/common/er_server_mod.hpp"
 
 /*******************************************************************************
  * Macros
@@ -50,11 +50,12 @@
 #define ER_REPORT(lvl, msg, ...)                                        \
   {                                                                     \
     char _str[1000];                                                    \
-    snprintf((char*)_str, sizeof(_str), "%s:%d:%s: " msg "\n", __FILE__, __LINE__, \
+    snprintf(static_cast<char*>(_str), sizeof(_str), "%s:%d:%s: " msg "\n", __FILE__, __LINE__, \
              __FUNCTION__, ##__VA_ARGS__);                              \
-    rcppsw::common::er_client::server_handle()->report(rcppsw::common::er_client::er_id(), \
-                                               lvl,                     \
-                                               std::string(_str));      \
+    __er_report__(rcppsw::common::er_client::server_handle(),          \
+                   rcppsw::common::er_client::er_id(),                  \
+                   lvl,                                                 \
+                   std::string(_str));                                  \
   }
 
 #else
@@ -119,6 +120,11 @@
 #endif /* CHECK_PTR */
 
 /*******************************************************************************
+ * Class Decls
+ ******************************************************************************/
+namespace rcppsw { namespace common { class er_server; class global_server;} }
+
+/*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, common);
@@ -128,9 +134,9 @@ NS_START(rcppsw, common);
  ******************************************************************************/
 class er_client {
  public:
-  er_client(void) : m_server_handle(), m_er_id() {}
-  explicit er_client(const std::shared_ptr<er_server>& server_handle)
-      : m_server_handle(server_handle), m_er_id(m_server_handle->idgen()) {}
+  er_client(void);
+  explicit er_client(const std::shared_ptr<er_server>& server_handle);
+  virtual ~er_client(void);
 
   /**
    * @brief Initialize the er_client in cases where it was not possible to due
@@ -142,9 +148,7 @@ class er_client {
    * @param server_handle The er_server to attach to.
    */
   void deferred_init(const std::shared_ptr<er_server>& server_handle);
-  void change_id(boost::uuids::uuid old_id, boost::uuids::uuid new_id) {
-    m_server_handle->change_id(old_id, new_id);
-  }
+  void change_id(boost::uuids::uuid old_id, boost::uuids::uuid new_id);
 
   /**
    * @brief Add a module to the active list (long version).
@@ -157,16 +161,14 @@ class er_client {
    */
   status_t insmod(const std::string& mod_name,
                   const er_lvl::value& loglvl = er_lvl::NOM,
-                  const er_lvl::value& dbglvl = er_lvl::NOM) {
-    return m_server_handle->insmod(m_er_id, loglvl, dbglvl, mod_name); }
-
+                  const er_lvl::value& dbglvl = er_lvl::NOM);
   /**
    * @brief Uninstall the module for this client. This function is called
    * automatically in the destructor, but can be called explicitly as well.
    *
    * @return OK if the remove was successful, ERROR otherwise.
    */
-  status_t rmmod(void) { return m_server_handle->rmmod(m_er_id); }
+  status_t rmmod(void);
 
   /**
    * @brief Attach to an EXISTING module within the server by name. If the
@@ -197,13 +199,30 @@ class er_client {
    */
   boost::uuids::uuid er_id(void) const { return m_er_id; }
 
-  virtual ~er_client(void) {}
-
  private:
   std::shared_ptr<er_server> m_server_handle;
   boost::uuids::uuid m_er_id;
 };
 
+
+/*******************************************************************************
+ * Global Variables
+ ******************************************************************************/
+/**
+ * @brief A common, global server that all applications utilizing rcppsw have
+ * access to. Handy in cases where you don't want to pass the server handle down
+ * through unrelated constructors until you get to the class you actually want
+ * to enable debug printing/logging for.
+ */
+extern std::shared_ptr<global_server> g_server;
+
+/*******************************************************************************
+ * Forward Declarations
+ ******************************************************************************/
+void __er_report__(er_server* server,
+                   const boost::uuids::uuid& er_id, const er_lvl::value& lvl,
+                   const std::string& str);
 NS_END(rcppsw, common);
+
 
 #endif /* INCLUDE_RCPPSW_COMMON_ER_CLIENT_HPP_ */

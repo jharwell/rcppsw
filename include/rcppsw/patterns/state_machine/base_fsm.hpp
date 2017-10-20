@@ -25,7 +25,6 @@
  * Includes
  ******************************************************************************/
 #include <stdio.h>
-#include <typeinfo>
 #include <cstddef>
 #include <mutex>
 #include "rcppsw/common/common.hpp"
