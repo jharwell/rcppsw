@@ -66,6 +66,7 @@ class event_data {
   void signal(int signal) { m_signal = signal; }
   int type(void) const { return m_type; }
   void type(int type) { m_type = type; }
+  void reset(void) { signal(event_signal::IGNORED); type(event_type::NORMAL); }
 
  private:
   int m_signal;
