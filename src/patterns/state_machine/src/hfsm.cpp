@@ -39,11 +39,19 @@ void hfsm::state_engine_step(const state_map_row* const row) {
   int rval = event_signal::UNHANDLED;
   while (rval != event_signal::HANDLED) {
     rval = state->invoke_state_action(this, event_data_get());
+
+    /*
+     * It is possible that we have gotten the HANDLED signal from a parent state
+     * of a child that returned UNHANDLED. As such, we need to change both the
+     * event type and the signal of the event so execution can continue normally.
+     */
     if (event_signal::HANDLED == rval) {
+      const_cast<event_data*>(event_data_get())->reset();
       break;
     }
     state = static_cast<hfsm_state*>(state->parent());
     const_cast<event_data*>(event_data_get())->type(event_type::CHILD);
+    const_cast<event_data*>(event_data_get())->signal(rval);
   } /* while() */
 } /* state_engine_step() */
 
@@ -55,11 +63,19 @@ void hfsm::state_engine_step(const state_map_ex_row* const row_ex) {
   int rval = event_signal::UNHANDLED;
   while (rval != event_signal::HANDLED) {
     rval = state->invoke_state_action(this, event_data_get());
+
+    /*
+     * It is possible that we have gotten the HANDLED signal from a parent state
+     * of a child that returned UNHANDLED. As such, we need to change both the
+     * event type and the signal of the event so execution can continue normally.
+     */
     if (event_signal::HANDLED == rval) {
+      const_cast<event_data*>(event_data_get())->reset();
       break;
     }
     state = static_cast<hfsm_state*>(state->parent());
     const_cast<event_data*>(event_data_get())->type(event_type::CHILD);
+    const_cast<event_data*>(event_data_get())->signal(rval);
   } /* while() */
 } /* state_engine_step() */
 
