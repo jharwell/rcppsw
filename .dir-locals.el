@@ -3,7 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
-((nil .
+((c++-mode .
       ((eval  . (progn
                   (require 'rtags-init)
                   (require 'irony-mode-init)
