@@ -231,16 +231,22 @@ NS_END(state_machine, patterns, rcppsw);
  ******************************************************************************/
 #define FSM_DEFINE_TRANSITION_MAP(name) static const uint8_t name[] =
 #define FSM_TRANSITION_MAP_ENTRY(entry) entry,
-#define FSM_VERIFY_TRANSITION_MAP(name)                                 \
-  assert(current_state() < ST_MAX_STATES);                              \
-  static_assert((sizeof(name)/sizeof(uint8_t)) == ST_MAX_STATES,        \
+#define FSM_VERIFY_TRANSITION_MAP(name, n_entries)                      \
+  assert(current_state() < n_entries);                                  \
+  static_assert((sizeof(name)/sizeof(uint8_t)) == n_entries,        \
                 "transition map does not cover all states");
 
 /*******************************************************************************
  * State Map Macros
  ******************************************************************************/
-#define FSM_DEFINE_STATE_MAP(type, name)                                \
-    static const rcppsw::patterns::state_machine::JOIN(type, _row) name[] =
+/**
+ * @def FSM_DEFINE_STATE_MAP Define a state map for an FSM at GLOBAL scope. All
+ * instances of a class will share the same state map, which will not be a
+ * problem for basic states; it is only for HFSMs that you don't want to do
+ * this. \see HFSM_DECLARE_STATE_MAP.
+ */
+#define FSM_DEFINE_STATE_MAP(type, name)                     \
+  static const rcppsw::patterns::state_machine::JOIN(type, _row) name[]
 
 #define FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)                  \
   const rcppsw::patterns::state_machine::JOIN(type, _row)* JOIN(type, )(size_t index_var)
@@ -254,8 +260,8 @@ NS_END(state_machine, patterns, rcppsw);
 #define FSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name) \
   rcppsw::patterns::state_machine::state_map_ex_row(state_name, guard_name, entry_name, exit_name)
 
-#define FSM_VERIFY_STATE_MAP(type, name)                                \
-  static_assert((sizeof(name)/sizeof(rcppsw::patterns::state_machine::JOIN(type, _row))) == ST_MAX_STATES, \
+#define FSM_VERIFY_STATE_MAP(type, name, n_entries)                               \
+  static_assert((sizeof(name)/sizeof(rcppsw::patterns::state_machine::JOIN(type, _row))) == n_entries, \
                 "state map does not cover all states");
 
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_BASE_FSM_HPP_ */

@@ -24,7 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <mutex>
 #include "rcppsw/patterns/state_machine/hfsm_state.hpp"
 #include "rcppsw/patterns/state_machine/base_fsm.hpp"
 
@@ -37,41 +36,7 @@ NS_START(rcppsw, patterns, state_machine);
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief A structure to hold a single row within the state map.
- */
-class hfsm_state_map_row : public state_map_row {
- public:
-  hfsm_state_map_row(rcppsw::patterns::state_machine::state* state,
-                     rcppsw::patterns::state_machine::state* parent) :
-      state_map_row(state), m_parent(parent) {}
-
-  rcppsw::patterns::state_machine::state* parent(void) const { return m_parent; }
-  void parent(rcppsw::patterns::state_machine::state* parent) { m_parent = parent; }
-
- private:
-  rcppsw::patterns::state_machine::state* m_parent;
-};
-
-/**
- * @brief A structure to hold a single row within the extended state map.
- */
-class hfsm_state_map_ex_row : public state_map_ex_row {
- public:
-  hfsm_state_map_ex_row(rcppsw::patterns::state_machine::state* state,
-                        rcppsw::patterns::state_machine::state* parent,
-                        state_guard* guard,
-                        state_entry* entry, state_exit* exit) :
-      state_map_ex_row(state, guard, entry, exit), m_parent(parent) {}
-
-  rcppsw::patterns::state_machine::state* parent(void) const { return m_parent; }
-  void parent(rcppsw::patterns::state_machine::state* parent) { m_parent = parent; }
-
- private:
-  rcppsw::patterns::state_machine::state* m_parent;
-};
-
-/**
- * @brief hfsm implements a software-based state machine.
+ * @class hfsm Implements a software-based hierarchical state machine.
  */
 class hfsm: public base_fsm {
  public:
@@ -212,30 +177,23 @@ rcppsw::patterns::state_machine::state_exit_action<FSM,                 \
  ******************************************************************************/
 #define HFSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)   \
   FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)
-#define HFSM_DEFINE_STATE_MAP(type, name) \
-  static const rcppsw::patterns::state_machine::JOIN(JOIN(hfsm_, type), _row) name[] =
-#define HFSM_STATE_MAP_ENTRY_EX(state_name, parent) \
-  rcppsw::patterns::state_machine::hfsm_state_map_ex_row(state_name, parent, \
-                                                    NULL, \
-                                                    NULL, NULL)
 
-#define HFSM_STATE_MAP_ENTRY_EX_ALL(state_name,                 \
-                                    parent,                     \
-                                    guard_name,                 \
-                                    entry_name,                 \
-                                    exit_name)                  \
-  rcppsw::patterns::state_machine::hfsm_state_map_ex_row(state_name, parent, \
-                                                    guard_name, \
-                                                    entry_name, exit_name)
-#define HFSM_VERIFY_STATE_MAP(type, name) \
-  FSM_VERIFY_STATE_MAP(JOIN(hfsm_, type), name)
+/*
+ * @def HFSM_DECLARE_STATE_MAP Declare the state map for a state machine.
+ *
+ * This CANNOT be made a static variable inside a function, because if two or
+ * more instances of a state machine derived class have states that do not share
+ * the same parent, the global scope for the map will cause updates to the state
+ * map (such as changing the parent of a state).
+ */
+#define HFSM_DECLARE_STATE_MAP(type, name, n_entries) \
+  const rcppsw::patterns::state_machine::JOIN(type, _row) name[n_entries]
 
-/*******************************************************************************
- * Transition Map Macros
- ******************************************************************************/
-#define HFSM_DEFINE_TRANSITION_MAP(name) FSM_DEFINE_TRANSITION_MAP(name)
-#define HFSM_TRANSITION_MAP_ENTRY(entry) FSM_TRANSITION_MAP_ENTRY(entry)
-#define HFSM_VERIFY_TRANSITION_MAP(name) FSM_VERIFY_TRANSITION_MAP(name)
+#define HFSM_STATE_MAP_ENTRY_EX(state_name) FSM_STATE_MAP_ENTRY_EX(state_name)
+
+#define HFSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, \
+                                    exit_name)                          \
+  FSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name)
 
 NS_END(state_machine, patterns, rcppsw);
 

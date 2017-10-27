@@ -85,23 +85,20 @@ void hfsm::inject_event(int signal, int type) {
 } /* inject event */
 
 void hfsm::change_parent(uint state,
-                   rcppsw::patterns::state_machine::state* new_parent) {
-  hfsm_state_map_row* row = const_cast<hfsm_state_map_row*>(
-      static_cast<const hfsm_state_map_row*>(state_map(state)));
-  hfsm_state_map_ex_row* row_ex = const_cast<hfsm_state_map_ex_row*>(
-      static_cast<const hfsm_state_map_ex_row*>(state_map_ex(state)));
+                         rcppsw::patterns::state_machine::state* new_parent) {
+  state_map_row* row = const_cast<state_map_row*>(state_map(state));
+  state_map_ex_row* row_ex = const_cast<state_map_ex_row*>(state_map_ex(state));
 
   ER_ASSERT(!(nullptr == row && nullptr == row_ex),
             "FATAL: Both state maps are NULL!");
 
-  if (row != nullptr) {
+  if (nullptr != row) {
     hfsm_state* self = static_cast<hfsm_state*>(row->state());
     self->parent(new_parent);
-    row->parent(new_parent);
+  } else {
+    hfsm_state* self = static_cast<hfsm_state*>(row_ex->state());
+    self->parent(new_parent);
   }
-  hfsm_state* self = static_cast<hfsm_state*>(row_ex->state());
-  self->parent(new_parent);
-  row_ex->parent(new_parent);
 } /* change_parent() */
 
 NS_END(state_machine, patterns, rcppsw);
