@@ -49,8 +49,9 @@ class releasing_factory : public base_factory {
   status_t register_type(const std::string& name) {
     static_assert(std::is_base_of<T, TDerived>::value,
                   "releasing_factory::register_type only accepts types derived from the base");
-    FPC_CHECK(ERROR, m_release_funcs.end() == m_release_funcs.find(name));
-    m_release_funcs[name] = &do_create_release<TDerived>;
+    if (m_release_funcs.end() == m_release_funcs.find(name)) {
+        m_release_funcs[name] = &do_create_release<TDerived>;
+      }
     return OK;
   }
 

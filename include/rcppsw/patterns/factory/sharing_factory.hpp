@@ -49,8 +49,9 @@ class sharing_factory : public base_factory {
   status_t register_type(const std::string& name) {
     static_assert(std::is_base_of<T, TDerived>::value,
                   "sharing_factory::register_type only accepts types derived from the base");
-    FPC_CHECK(ERROR, m_retain_funcs.end() == m_retain_funcs.find(name));
-    m_retain_funcs[name] = &sharing_factory::template do_create_retain<TDerived>;
+    if (m_retain_funcs.end() == m_retain_funcs.find(name)) {
+      m_retain_funcs[name] = &sharing_factory::template do_create_retain<TDerived>;
+    }
     return OK;
   }
 
