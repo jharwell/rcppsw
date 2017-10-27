@@ -53,6 +53,7 @@ class polled_task : public executable_task, public taskable {
 
   void task_execute(void) override { m_mechanism->task_execute(); }
   void task_reset(void) override { m_mechanism->task_reset(); }
+  bool task_running(void) const override { return m_mechanism->task_running(); }
   bool task_finished(void) const override { return m_mechanism->task_finished(); }
 
  private:

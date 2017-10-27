@@ -60,6 +60,8 @@ class taskable {
    */
   virtual bool task_finished(void) const = 0;
 
+  virtual bool task_running(void) const = 0;
+
   /**
    * @brief Reset the task so that it is ready for execution again.
    */
