@@ -55,19 +55,38 @@ class hfsm_state: public state {
 };
 
 /**
+ * @brief hfsm_state_action takes 2 template arguments:
+ *
+ * - The current state machine class.
+ * - A state machine member function pointer that takes ZERO arguments.
+ */
+template <class FSM,
+          int (FSM::*Handler)(void)>
+class hfsm_state_action0 : public hfsm_state {
+ public:
+  explicit hfsm_state_action0(hfsm_state* parent) : hfsm_state(parent) {}
+  virtual ~hfsm_state_action0(void) {}
+  int invoke_state_action(base_fsm* fsm,
+                          const event_data*) const override {
+    FSM* derived_fsm = static_cast<FSM*>(fsm);
+    return (derived_fsm->*Handler)();
+  }
+};
+
+/**
  * @brief hfsm_state_action takes 3 template arguments:
  *
  * - The current state machine class.
  * - A state function event data type (derived from event).
- * - A state machine member function pointer.
+ * - A state machine member function pointer, that takes ONE argument.
  */
 template <class FSM,
           class Event,
           int (FSM::*Handler)(const Event*)>
-class hfsm_state_action : public hfsm_state {
+class hfsm_state_action1 : public hfsm_state {
  public:
-  explicit hfsm_state_action(hfsm_state* parent) : hfsm_state(parent) {}
-  virtual ~hfsm_state_action() {}
+  explicit hfsm_state_action1(hfsm_state* parent) : hfsm_state(parent) {}
+  virtual ~hfsm_state_action1() {}
   int invoke_state_action(base_fsm* fsm,
                           const event_data* event) const override {
     /* Downcast the state machine and event data to the correct derived type */

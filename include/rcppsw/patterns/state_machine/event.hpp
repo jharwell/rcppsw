@@ -73,7 +73,14 @@ class event_data {
   int m_type;
 };
 
-typedef event_data no_event_data;
+/**
+ * @class no_event_data
+ *
+ * @brief This class does NOT derived from \ref event_data so that compiler
+ * errors are generated if you attempt to use it outside of its intent to
+ * indicate that a state does not take any data as input.
+ */
+class no_event_data {};
 
 NS_END(state_machine, patterns, rcppsw);
 

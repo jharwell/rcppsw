@@ -43,6 +43,10 @@ NS_START(rcppsw, patterns, visitor);
 template<class P>
 class visitable {
  public:
+  visitable(void) {}
+  visitable(__unused const visitable& other) {}
+  visitable& operator=(__unused const visitable& other) { return *this; }
+
   template <typename T>
   void accept(T &visitor) { visitor.visit(static_cast<P&>(*this)); }
 
