@@ -45,8 +45,8 @@ class state {
  public:
   virtual ~state() {}
   /**
-   * @brief Called by the state machine engine to execute a state action. If a guard
-   * condition exists and it evaluates to false, the state action will not
+   * @brief Called by the state machine engine to execute a state action. If a
+   * guard condition exists and it evaluates to false, the state action will not
    * execute.
    *
    * @param sm A state machine instance.
@@ -59,18 +59,36 @@ class state {
 };
 
 /**
- * @brief state_action takes three template arguments:
+ * @class state_action0
+ * @brief Takes two template arguments:
+ *
+ * - A state machine class.
+ * - A state machine member function pointer, which takes ZERO arguments.
+ */
+template <class SM, int (SM::*Func)(void)>
+class state_action0 : public state {
+ public:
+  virtual ~state_action0(void) {}
+  int invoke_state_action(base_fsm* sm, const event_data*) const override {
+    /* Downcast the state machine and event data to the correct derived type */
+    SM* derived_fsm = static_cast<SM*>(sm);
+    return (derived_fsm->*Func)();
+  }
+};
+
+/**
+ * @class state_action1
+ * @brief Takes three template arguments:
  *
  * - A state machine class.
  * - A state function event data type (derived from event_data).
- * - A state machine member function pointer.
+ * - A state machine member function pointer, which takes ONE argument.
  */
 template <class SM, class Event, int (SM::*Func)(const Event*)>
-class state_action : public state {
+class state_action1 : public state {
  public:
-  virtual ~state_action() {}
-  virtual int invoke_state_action(base_fsm* sm,
-                                  const event_data* data) const override {
+  virtual ~state_action1(void) {}
+  int invoke_state_action(base_fsm* sm, const event_data* data) const override {
     /* Downcast the state machine and event data to the correct derived type */
     SM* derived_fsm = static_cast<SM*>(sm);
     const Event* derived_event = NULL;
@@ -95,30 +113,28 @@ class state_guard {
  public:
   virtual ~state_guard() {}
   /**
-   * @brief Called by the state machine engine to execute a guard condition action. If guard
-   * condition evaluates to TRUE the state action is executed. If FALSE, no state transition
-   * is performed.
+   * @brief Called by the state machine engine to execute a guard condition
+   * action. If guard condition evaluates to TRUE the state action is
+   * executed. If FALSE, no state transition is performed.
    *
    * @param sm A state machine instance.
-   * @param data The event data.
    *
    * @return Returns TRUE if no guard condition or the guard condition evaluates
    * to TRUE.
    */
-  virtual bool invoke_guard_condition(base_fsm* sm,
-                                      const event_data* data) const = 0;
+  virtual bool invoke_guard_condition(base_fsm* sm, const event_data*) const = 0;
 };
 
 /** @brief state_guard_condition takes three template arguments:
  *
  * - A state machine class.
  * - A state function event data type (derived from event_data).
- * - A state machine member function pointer.
+ * - A state machine member function pointer that takes ONE argument
  */
 template <class SM, class Event, bool (SM::*Func)(const Event*)>
-class state_guard_condition : public state_guard {
+class state_guard_condition1 : public state_guard {
  public:
-  virtual ~state_guard_condition() {}
+  virtual ~state_guard_condition1() {}
   bool invoke_guard_condition(base_fsm* sm,
                               const event_data* data) const override {
     SM* derived_fsm = static_cast<SM*>(sm);
@@ -128,6 +144,22 @@ class state_guard_condition : public state_guard {
       assert(derived_event);
     }
     return (derived_fsm->*Func)(derived_event);
+  }
+};
+
+/** @brief state_guard_condition takes three template arguments:
+ *
+ * - A state machine class.
+ * - A state machine member function pointer that takes ZERO arguments.
+ */
+template <class SM, bool (SM::*Func)(void)>
+class state_guard_condition0 : public state_guard {
+ public:
+  virtual ~state_guard_condition0() {}
+  bool invoke_guard_condition(base_fsm* sm,
+                              const event_data*) const override {
+    SM* derived_fsm = static_cast<SM*>(sm);
+    return (derived_fsm->*Func)();
   }
 };
 
@@ -150,26 +182,42 @@ class state_entry {
 };
 
 /**
+ * @brief state_entry_action takes two template arguments:
+ *
+ * - A state machine class
+ * - A state function event data type (derived from event_data).
+ * - A state machine  member function pointer that takes ZERO arguments.
+*/
+template <class SM, void (SM::*Func)(void)>
+class state_entry_action0 : public state_entry {
+ public:
+  virtual ~state_entry_action0(void) {}
+  void invoke_entry_action(base_fsm* sm,
+                           const event_data*) const override {
+    SM* derived_fsm = static_cast<SM*>(sm);
+    (derived_fsm->*Func)();
+  }
+};
+
+/**
  * @brief state_entry_action takes three template arguments:
  *
  * - A state machine class
  * - A state function event data type (derived from event_data).
- * - A state machine  member function pointer.
-*/
+ * - A state machine  member function pointer that takes ONE argument.
+ */
 template <class SM, class Event, void (SM::*Func)(const Event*)>
-class state_entry_action : public state_entry {
+class state_entry_action1: public state_entry {
  public:
-  virtual ~state_entry_action(void) {}
+  virtual ~state_entry_action1(void) {}
   void invoke_entry_action(base_fsm* sm,
                            const event_data* data) const override {
     SM* derived_fsm = static_cast<SM*>(sm);
     const Event* derived_event = NULL;
     if (data) {
-       derived_event = dynamic_cast<const Event*>(data);
-       assert(derived_event);
+      derived_event = dynamic_cast<const Event*>(data);
+      assert(derived_event);
     }
-
-    // Call the entry function
     (derived_fsm->*Func)(derived_event);
   }
 };
@@ -181,8 +229,8 @@ class state_exit {
  public:
   virtual ~state_exit() {}
   /**
-   * @brief Called by the state machine engine to execute a state exit action. Called when
-   * leaving a state.
+   * @brief Called by the state machine engine to execute a state exit
+   * action. Called when leaving a state.
    *
    * @param sm A state machine instance.
    */
@@ -199,7 +247,7 @@ template <class SM, void (SM::*Func)(void)>
 class state_exit_action : public state_exit {
  public:
   virtual ~state_exit_action() {}
-  virtual void invoke_exit_action(base_fsm* sm) const override {
+  void invoke_exit_action(base_fsm* sm) const override {
     SM* derivedSM = static_cast<SM*>(sm);
     (derivedSM->*Func)();
   }
