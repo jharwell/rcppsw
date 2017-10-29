@@ -1,5 +1,5 @@
 /**
- * @file visitable.hpp
+ * @file state_entry.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,41 +18,43 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITABLE_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITABLE_HPP_
+#ifndef INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_STATE_ENTRY_HPP_
+#define INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_STATE_ENTRY_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/patterns/visitor/visitor.hpp"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, patterns, visitor);
+NS_START(rcppsw, patterns, state_machine);
+
+class base_fsm;
+class event_data;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * P - The (possibly) parent class of the visitable class which will be passed
- * to the visitor as a reference.
- *
- * T - The type of the visitor.
+ * @brief Abstract entry base class that all entry classes inherit from.
  */
-template<class P>
-class visitable {
+class state_entry {
  public:
-  visitable(void) {}
-  visitable(__unused const visitable& other) {}
-  visitable& operator=(__unused const visitable& other) { return *this; }
+  virtual ~state_entry() {}
 
-  template <typename T>
-  void accept(T &visitor) { visitor.visit(static_cast<P&>(*this)); }
-
-  virtual ~visitable(void) {}
+  /**
+   * @brief Called by the state machine engine to execute a state entry
+   * action (when entering a state).
+   *
+   * @param sm A state machine instance.
+   * @param data The event data.
+   */
+  virtual void invoke_entry_action(base_fsm* sm,
+                                   const event_data* data) const = 0;
 };
 
-NS_END(rcppsw, patterns, visitor);
+NS_END(state_machine, patterns, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITABLE_HPP_ */
+#endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_STATE_ENTRY_HPP_ */

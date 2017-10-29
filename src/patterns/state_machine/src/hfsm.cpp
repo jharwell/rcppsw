@@ -84,7 +84,7 @@ void hfsm::inject_event(int signal, int type) {
                  rcppsw::make_unique<const event_data>(signal, type));
 } /* inject event */
 
-void hfsm::change_parent(uint state,
+void hfsm::change_parent(uint8_t state,
                          rcppsw::patterns::state_machine::state* new_parent) {
   state_map_row* row = const_cast<state_map_row*>(state_map(state));
   state_map_ex_row* row_ex = const_cast<state_map_ex_row*>(state_map_ex(state));
