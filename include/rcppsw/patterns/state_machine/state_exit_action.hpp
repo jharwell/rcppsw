@@ -1,5 +1,5 @@
 /**
- * @file state.hpp
+ * @file state_exit_action.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,45 +18,42 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_STATE_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_STATE_HPP_
+#ifndef INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_STATE_EXIT_ACTION_HPP_
+#define INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_STATE_EXIT_ACTION_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <assert.h>
+#include "rcppsw/patterns/state_machine/state_exit.hpp"
+#include "rcppsw/patterns/state_machine/event.hpp"
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, patterns, state_machine);
-
 class base_fsm;
-class event_data;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief Abstract state base class that all states inherit from.
+ * @brief state_exit_action takes two template arguments:
+ *
+ * - A state machine class.
+ * - A state machine member function pointer.
  */
-class state {
+template <class SM, void (SM::*Func)(void)>
+class state_exit_action : public state_exit {
  public:
-  virtual ~state() {}
-  /**
-   * @brief Called by the state machine engine to execute a state action. If a
-   * guard condition exists and it evaluates to false, the state action will not
-   * execute.
-   *
-   * @param sm A state machine instance.
-   * @param data The event data.
-   *
-   * @return integer indicating whether or not the event was handled.
-   */
-  virtual int invoke_state_action(base_fsm* sm,
-                                  const event_data* data) const = 0;
+  virtual ~state_exit_action() {}
+  void invoke_exit_action(base_fsm* sm) const override {
+    SM* derivedSM = static_cast<SM*>(sm);
+    (derivedSM->*Func)();
+  }
 };
 
 NS_END(state_machine, patterns, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_STATE_HPP_ */
+#endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_STATE_EXIT_ACTION_HPP_ */
