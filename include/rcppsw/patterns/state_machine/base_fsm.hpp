@@ -29,7 +29,10 @@
 #include <mutex>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/patterns/state_machine/event.hpp"
-#include "rcppsw/patterns/state_machine/state.hpp"
+#include "rcppsw/patterns/state_machine/state_action.hpp"
+#include "rcppsw/patterns/state_machine/state_guard_action.hpp"
+#include "rcppsw/patterns/state_machine/state_exit_action.hpp"
+#include "rcppsw/patterns/state_machine/state_entry_action.hpp"
 #include "rcppsw/common/er_client.hpp"
 
 /*******************************************************************************
