@@ -54,7 +54,7 @@ class partitionable_task {
   static_assert(std::is_base_of<logical_task, T2>::value,
                 "FATAL: template argument must be a logical task");
  public:
-  explicit partitionable_task(void) {}
+  partitionable_task(void) : m_partition1(nullptr), m_partition2(nullptr) {}
   virtual ~partitionable_task(void) {}
 
   virtual double partition_prob(void) = 0;
@@ -78,6 +78,9 @@ class partitionable_task {
   void partition2(T2* partition2) { m_partition2 = partition2; }
 
  private:
+  partitionable_task(const partitionable_task& other) = delete;
+  partitionable_task& operator=(const partitionable_task& other) = delete;
+
   T1 *m_partition1;
   T2 *m_partition2;
 };
