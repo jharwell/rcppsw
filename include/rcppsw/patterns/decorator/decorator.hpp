@@ -41,6 +41,7 @@ NS_START(rcppsw, patterns, decorator);
  */
 template <class D>
 class decorator {
+ public:
   template <typename... Args>
   decorator(Args&&... args) : m_decoratee(std::forward<Args>(args)...) {}
   virtual ~decorator(void) {}
@@ -50,7 +51,8 @@ class decorator {
    *
    * @return The reference.
    */
-  D& decoratee(void) const { return m_decoratee; }
+  D& decoratee(void) { return m_decoratee; }
+  const D& decoratee(void) const { return m_decoratee; }
 
   /**
    * @brief Replace the current instance of the decorated type with a new one
@@ -82,6 +84,7 @@ class decorator {
  */
 template <class D>
 class ptr_decorator {
+ public:
   template <typename... Args>
   ptr_decorator(Args&&... args) :
       m_decoratee(rcppsw::make_unique<D>(std::forward<Args>(args)...)) {}
