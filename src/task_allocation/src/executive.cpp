@@ -47,7 +47,7 @@ executable_task* executive::get_next_task(executable_task* last_task) {
      * task.
      */
     if (m_root->is_atomic()) {
-      return m_root.get();
+      return m_root;
     }
     /*
      * The root IS partitionable, so partition it and (possibly) return a

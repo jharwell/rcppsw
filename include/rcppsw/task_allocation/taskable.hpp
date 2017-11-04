@@ -66,9 +66,8 @@ class taskable {
    * @brief Reset the task so that it is ready for execution again.
    */
   virtual void task_reset(void) {}
-  virtual void task_start(__unused const taskable_argument* const arg) {}
+  virtual void task_start(__unused const taskable_argument* const arg) = 0;
 };
-
 NS_END(task_allocation, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_HPP_ */
