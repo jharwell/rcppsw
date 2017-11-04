@@ -34,7 +34,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 void polled_executive::run(void) {
   if (nullptr == executive::current_task()) {
-    new_task_start(nullptr);
+    new_task_start(static_cast<polled_task*>(executive::root()));
     return;
   }
   polled_task* current = dynamic_cast<polled_task*>(executive::current_task());
@@ -44,11 +44,13 @@ void polled_executive::run(void) {
     ER_NOM("Current task %s finished", current->name().c_str());
     current = static_cast<polled_task*>(executive::get_next_task(current));
     new_task_start(current);
+    current->task_execute();
   } else {
     double prob = executive::task_abort_prob(current);
     ER_VER("Current task %s abort probability: %f", current->name().c_str(),
            prob);
-    if (static_cast<double>(rand()) / (RAND_MAX) <= prob) {
+
+    if (static_cast<double>(rand()) / RAND_MAX <= prob) {
       ER_NOM("Current task %s aborted", current->name().c_str());
       new_task_start(current);
     } else {
@@ -58,9 +60,9 @@ void polled_executive::run(void) {
 } /* run() */
 
 void polled_executive::new_task_start(polled_task* const new_task) {
-  ER_NOM("New task is %s", new_task->name().c_str());
   new_task->task_reset();
   new_task->task_start(nullptr);
+  current_task(new_task);
   ER_NOM("Started new task %s", new_task->name().c_str());
 } /* new_task_start() */
 

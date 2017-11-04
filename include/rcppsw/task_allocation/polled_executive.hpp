@@ -37,10 +37,10 @@ NS_START(rcppsw, task_allocation);
 class polled_executive : public executive {
  public:
   polled_executive(const std::shared_ptr<rcppsw::common::er_server>& server,
-                   std::unique_ptr<executable_task>& root) :
+                   executable_task* const root) :
       executive(server, root) {}
 
-  void run(void) override = 0;
+  void run(void) override;
 
  private:
   void new_task_start(class polled_task* const new_task);

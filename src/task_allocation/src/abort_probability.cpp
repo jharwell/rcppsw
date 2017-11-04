@@ -35,9 +35,14 @@ double abort_probability::calc(double exec_time,
                                const time_estimate& whole_task,
                                const time_estimate& subtask1,
                                const time_estimate& subtask2) {
-  double omega = m_reactivity *
-                 ((exec_time - whole_task.last_result())/
-                  (subtask1.last_result() + subtask2.last_result()) + m_offset);
+  double omega;
+  if (!(subtask1.last_result() > 0 || subtask2.last_result() > 0)) {
+    omega = m_offset;
+  } else {
+    omega = m_reactivity *
+            ((exec_time - whole_task.last_result())/
+             (subtask1.last_result() + subtask2.last_result()) + m_offset);
+  }
   return set_result(1/(1 + std::exp(omega)));
 } /* calc() */
 
