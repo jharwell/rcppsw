@@ -41,17 +41,18 @@ NS_START(rcppsw, task_allocation);
 class executive : public rcppsw::common::er_client {
  public:
   executive(const std::shared_ptr<rcppsw::common::er_server>& server,
-            std::unique_ptr<executable_task>& root) :
-      er_client(server), m_current_task(nullptr), m_root(std::move(root)) {
+            executable_task *const root) :
+      er_client(server), m_current_task(nullptr), m_root(root) {
     er_client::insmod("task_executive",
-                      rcppsw::common::er_lvl::NOM,
+                      rcppsw::common::er_lvl::DIAG,
                       rcppsw::common::er_lvl::NOM);
   }
   virtual ~executive(void);
   virtual void run(void) = 0;
+  executable_task* current_task(void) const { return m_current_task; }
 
  protected:
-  executable_task* current_task(void) const { return m_current_task; }
+  executable_task* root(void) const { return m_root; }
   void current_task(executable_task* current_task) { m_current_task = current_task; }
   executable_task* get_next_task(executable_task* last_task);
   double task_abort_prob(const executable_task* const task);
@@ -61,7 +62,7 @@ class executive : public rcppsw::common::er_client {
   executive(const executive& other) = delete;
 
   executable_task* m_current_task;
-  std::unique_ptr<executable_task> m_root;
+  executable_task* const m_root;
 };
 
 NS_END(task_allocation, rcppsw);

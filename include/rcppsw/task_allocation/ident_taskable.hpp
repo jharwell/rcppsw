@@ -1,5 +1,5 @@
 /**
- * @file taskable.hpp
+ * @file ident_taskable.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,13 +18,14 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_IDENT_TASKABLE_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_IDENT_TASKABLE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/common/identifiable.hpp"
+#include "rcppsw/task_allocation/taskable.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -32,42 +33,14 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Class Decls
- ******************************************************************************/
-class taskable_argument;
-
-/*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/**
- * @brief A class that all classes wishing to be used as the mechanism by which
- * \ref atomic_task instances execute themselves must inherit from.
- */
-class taskable {
+class ident_taskable : public taskable, public common::identifiable {
  public:
-  taskable(void) {}
-  virtual ~taskable(void);
-
-  /**
-   * @brief Execute the task.
-   */
-  virtual void task_execute(void) = 0;
-
-  /**
-   * @brief Determine if the task has finished yet.
-   *
-   * @return TRUE if the task has finished, and FALSE otherwise.
-   */
-  virtual bool task_finished(void) const = 0;
-
-  virtual bool task_running(void) const = 0;
-
-  /**
-   * @brief Reset the task so that it is ready for execution again.
-   */
-  virtual void task_reset(void) {}
-  virtual void task_start(__unused const taskable_argument* const arg) = 0;
+  ident_taskable(void) {}
+  virtual ~ident_taskable(void);
 };
+
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_IDENT_TASKABLE_HPP_ */

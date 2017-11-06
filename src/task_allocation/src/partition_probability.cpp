@@ -40,12 +40,10 @@ double partition_probability::calc(const time_estimate& task_estimate,
                            (subtask1_estimate + subtask2_estimate)) - 1.0)).last_result());
     return set_result(1/res);
   } else {
-    double res = 1 +
-                 std::exp(
-                     (-m_reactivity * (1.0 -
-                                       ((subtask1_estimate + subtask2_estimate) /
-                                        task_estimate))).last_result());
-    return set_result(1/res);
+    double tmp = -m_reactivity * (1.0 -
+                                  ((subtask1_estimate + subtask2_estimate) /
+                                   (std::max(task_estimate.last_result(), 1.0)))).last_result();
+    return set_result(1.0/(1.0 + std::exp(tmp)));
   }
 } /* calc() */
 

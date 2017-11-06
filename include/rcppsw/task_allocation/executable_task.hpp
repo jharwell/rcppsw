@@ -37,6 +37,8 @@ NS_START(rcppsw, task_allocation);
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class executable_task
+ *
  * @brief Represents the executable concept of a task, which encompasses:
  *
  * - A possibly updated estimate of the time it takes to do a task. If a task is
@@ -44,13 +46,13 @@ NS_START(rcppsw, task_allocation);
  * - A method of decomposing this (possibly decomposable) task into a sequence
  *   of simpler tasks. Each "simpler" task can have a parent.
  */
-
 class executable_task : public logical_task {
  public:
   executable_task(const std::string& name, double estimate_alpha,
                   executable_task* const parent = nullptr) :
       logical_task(name, parent),
       m_is_atomic(false), m_exec_time(0.0), m_estimate(estimate_alpha) {}
+
   executable_task(const executable_task& other) :
       logical_task(other), m_is_atomic(false), m_exec_time(other.m_exec_time),
       m_estimate(other.m_estimate) {}
@@ -65,7 +67,7 @@ class executable_task : public logical_task {
    * execution time is irrelevant, or that the user does not care how long a
    * task takes, only that it finishes.
    */
-  const time_estimate& estimate(void) const { return m_estimate; }
+  const time_estimate& current_time_estimate(void) const { return m_estimate; }
 
   /**
    * @brief Update the current estimate of the task execution time by using a
@@ -74,16 +76,11 @@ class executable_task : public logical_task {
    *
    * @param last_measure The last measured execution time, in seconds.
    */
-  void update_estimate(double last_measure) { m_estimate.calc(last_measure); }
+  void update_time_estimate(double last_measure) { m_estimate.calc(last_measure); }
 
   /**
    * @brief The method that all tasks must define that specifies how to execute
    * the task.
-   *
-   * Even though all the information needed to execute a task is contained in
-   * \ref self_sequence(), derived classes may also wish to insert additional
-   * logging, etc. in between executing the tasks that comprise this executable
-   * task. Thus, the need for this function.
    */
   virtual void task_execute(void) = 0;
 
@@ -102,16 +99,28 @@ class executable_task : public logical_task {
   void set_atomic(void) { m_is_atomic = true; }
 
   /**
-   * @brief Set the last execution time of the task. This is a public function,
-   * rather than being computed internally, because there are many different
-   * methods of estimating time, and the user should be able to use whatever
-   * method they prefer.
+   * @brief Calculate how long a "step" of task execution took.
+   *
+   * This is a public function, rather than being computed internally, because
+   * there are many different methods of estimating time, and the user should be
+   * able to use whatever method they prefer.
+   *
+   * @param exec_time The current measure of execution time
    */
-  void update_exec_time(double exec_time) { m_exec_time = exec_time; }
+  virtual double calc_elapsed_time(double exec_time) const = 0;
 
-  executable_task& operator=(const executable_task& other) = delete;
+  /**
+   * @brief Update the calculated exec time for the task as a running sum.
+   *
+   * This is needed for accurate task abort calculations.
+   */
+  void update_exec_time(void) { m_exec_time += calc_elapsed_time(m_exec_time); }
+
+  void reset_exec_time(void) { m_exec_time = 0.0; }
 
  private:
+  executable_task& operator=(const executable_task& other) = delete;
+
   bool m_is_atomic;
   double m_exec_time;
   time_estimate m_estimate;

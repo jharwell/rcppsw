@@ -68,10 +68,9 @@ class partitionable_task {
         return m_partition2;
       }
     }
-    return nullptr;
+    return m_partition1->parent();
   }
 
- protected:
   const T1* partition1(void) const { return m_partition1; }
   const T2* partition2(void) const { return m_partition2; }
   void partition1(T1* partition1) { m_partition1 = partition1; }
