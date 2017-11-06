@@ -37,38 +37,53 @@ double time_estimate::calc(double current_measure) {
 } /* calc() */
 
 time_estimate time_estimate::operator+(const time_estimate &other) const {
-  time_estimate r(this->m_alpha);
+  time_estimate r(this->alpha());
   r.set_result(this->last_result() + other.last_result());
   return r;
 }
 
 time_estimate time_estimate::operator/(const time_estimate &other) const {
-  time_estimate r(this->m_alpha);
+  time_estimate r(this->alpha());
   r.set_result(this->last_result() / other.last_result());
   return r;
 }
 
+/*******************************************************************************
+ * Non-Member Functions
+ ******************************************************************************/
 time_estimate operator-(const time_estimate& lhs, double d) {
-  time_estimate r(lhs.m_alpha);
+  time_estimate r(lhs.alpha());
   r.set_result(lhs.last_result() - d);
   return r;
 }
 
-time_estimate operator-(double d, const time_estimate& lhs) {
-  time_estimate r(lhs.m_alpha);
-  r.set_result(d - lhs.last_result());
+time_estimate operator-(double d, const time_estimate& rhs) {
+  time_estimate r(rhs.alpha());
+  r.set_result(rhs.last_result() - d);
   return r;
 }
 
 time_estimate operator*(const time_estimate& lhs, double d) {
-  time_estimate r(lhs.m_alpha);
+  time_estimate r(lhs.alpha());
   r.set_result(lhs.last_result() * d);
   return r;
 }
 
-time_estimate operator*(double d, const time_estimate& lhs) {
-  time_estimate r(lhs.m_alpha);
-  r.set_result(d * lhs.last_result());
+time_estimate operator*(double d, const time_estimate& rhs) {
+  time_estimate r(rhs.alpha());
+  r.set_result(rhs.last_result() * d);
+  return r;
+}
+
+time_estimate operator/(double d, const time_estimate &rhs) {
+  time_estimate r(rhs.alpha());
+  r.set_result(rhs.last_result() / d);
+  return r;
+}
+
+time_estimate operator/(const time_estimate &lhs, double d) {
+  time_estimate r(lhs.alpha());
+  r.set_result(lhs.last_result() / d);
   return r;
 }
 

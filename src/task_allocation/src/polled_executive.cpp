@@ -42,19 +42,23 @@ void polled_executive::run(void) {
 
   if (current->task_finished()) {
     ER_NOM("Current task %s finished", current->name().c_str());
+    current->update_exec_time();
+    current->update_time_estimate(current->exec_time());
     current = static_cast<polled_task*>(executive::get_next_task(current));
     new_task_start(current);
     current->task_execute();
   } else {
     double prob = executive::task_abort_prob(current);
-    ER_VER("Current task %s abort probability: %f", current->name().c_str(),
+    ER_NOM("Current task %s abort probability: %.12f", current->name().c_str(),
            prob);
 
     if (static_cast<double>(rand()) / RAND_MAX <= prob) {
       ER_NOM("Current task %s aborted", current->name().c_str());
+      current = static_cast<polled_task*>(executive::get_next_task(current));
       new_task_start(current);
     } else {
       current->task_execute();
+      current->update_exec_time();
     }
   }
 } /* run() */
