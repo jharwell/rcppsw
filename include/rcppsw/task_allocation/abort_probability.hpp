@@ -64,6 +64,8 @@ class abort_probability: public rcppsw::math::expression<double> {
   double calc(double exec_time, const time_estimate& whole_task,
               const time_estimate& subtask1, const time_estimate& subtask2);
 
+  double calc(double exec_time, const time_estimate& whole_task);
+
  private:
   double m_reactivity;
   double m_offset;

@@ -64,20 +64,20 @@ class partitionable_polled_task : public polled_task,
 
   /**
    * @brief Get the probability of aborting a partitionable task.
-   *
-   * If the atomic task has a parent, then it is part of a partitioning set, and
-   * so return the abort probability of that set. Otherwise, the probability of
-   * aborting an atomic task is 0 (DUH).
    */
   double abort_prob(void) override {
-    return m_abort_prob.calc(this->exec_time(), this->estimate(),
-                             this->partition1()->estimate(),
-                             this->partition2()->estimate());
+    printf("this->exec_time: %f this->estimate: %f p1->estimate: %f p2->estimate: %f\n",
+           this->exec_time(), this->current_time_estimate().last_result(),
+           this->partition1()->current_time_estimate().last_result(),
+           this->partition2()->current_time_estimate().last_result());
+    return m_abort_prob.calc(this->exec_time(), this->current_time_estimate(),
+                             this->partition1()->current_time_estimate(),
+                             this->partition2()->current_time_estimate());
   }
   double partition_prob(void) override {
-    return m_partition_prob.calc(this->estimate(),
-                                 this->partition1()->estimate(),
-                                 this->partition2()->estimate());
+    return m_partition_prob.calc(this->current_time_estimate(),
+                                 this->partition1()->current_time_estimate(),
+                                 this->partition2()->current_time_estimate());
   }
 
 

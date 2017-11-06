@@ -68,7 +68,7 @@ class partitionable_task {
         return m_partition2;
       }
     }
-    return nullptr;
+    return m_partition1->parent();
   }
 
   const T1* partition1(void) const { return m_partition1; }

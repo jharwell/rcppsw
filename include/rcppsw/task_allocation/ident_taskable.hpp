@@ -1,5 +1,5 @@
 /**
- * @file polled_task.hpp
+ * @file ident_taskable.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,15 +18,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_TASK_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_TASK_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_IDENT_TASKABLE_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_IDENT_TASKABLE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/task_allocation/executable_task.hpp"
-#include "rcppsw/patterns/visitor/visitable.hpp"
+#include "rcppsw/common/identifiable.hpp"
 #include "rcppsw/task_allocation/taskable.hpp"
 
 /*******************************************************************************
@@ -37,33 +35,12 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/**
- * @brief Represents a task whose execution can/should be monitored by the user
- * to determine when it has finished.
- */
-class polled_task : public executable_task, public taskable {
+class ident_taskable : public taskable, public common::identifiable {
  public:
-  polled_task(const std::string& name, double estimate_alpha,
-              std::unique_ptr<taskable>& mechanism,
-              polled_task* const parent = nullptr) :
-      executable_task(name, estimate_alpha, parent),
-      m_mechanism(std::move(mechanism)) {}
-  virtual ~polled_task(void);
-
-  taskable* mechanism(void) const { return m_mechanism.get(); }
-
-  void task_execute(void) override { m_mechanism->task_execute(); }
-  void task_reset(void) override { m_mechanism->task_reset(); }
-  bool task_running(void) const override { return m_mechanism->task_running(); }
-  bool task_finished(void) const override { return m_mechanism->task_finished(); }
-
- private:
-  polled_task& operator=(const polled_task& other) = delete;
-  polled_task(const polled_task& other) = delete;
-
-  std::unique_ptr<taskable> const m_mechanism;
+  ident_taskable(void) {}
+  virtual ~ident_taskable(void);
 };
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_TASK_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_IDENT_TASKABLE_HPP_ */

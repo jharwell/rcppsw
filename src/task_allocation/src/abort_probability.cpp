@@ -46,4 +46,15 @@ double abort_probability::calc(double exec_time,
   return set_result(1/(1 + std::exp(omega)));
 } /* calc() */
 
+double abort_probability::calc(double exec_time,
+                               const time_estimate& whole_task) {
+  double omega;
+  if (!(whole_task.last_result() > 0)) {
+    omega = m_offset;
+  } else {
+    omega = m_reactivity * (exec_time - whole_task.last_result() + m_offset);
+  }
+  return set_result(1/(1 + std::exp(omega)));
+} /* calc() */
+
 NS_END(task_allocation, rcppsw);
