@@ -1,5 +1,5 @@
 /**
- * @file visitor.hpp
+ * @file polymorphic_visitable.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITOR_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITOR_HPP_
+#ifndef INCLUDE_RCPPSW_PATTERNS_VISITOR_POLYMORPHIC_VISITABLE_HPP_
+#define INCLUDE_RCPPSW_PATTERNS_VISITOR_POLYMORPHIC_VISITABLE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -35,70 +35,50 @@ NS_START(rcppsw, patterns, visitor);
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief The base visitor class from which all other classes wishing to employ
- * the visit()/accept() paradigm inherit.
- */
-class visitor {
- public:
-  virtual ~visitor(void) {}
-};
-
-/**
- * @brief Visitor classes should also derive from can_visit<T> for each derived
- * visitable type they want to visit.
- */
-template<class T, typename R = void>
-class can_visit {
- public:
-  virtual R visit(T& visitee) = 0;
-  virtual ~can_visit(void) {}
-};
-
-/**
- * @class visitor_set_helper
+ * @class polymorphic_visitable_helper
  *
- * @brief Helper class to provide actual implementation.
+ * @brief Helper class to provide the actual implementation of the visitor
+ * pattern, receiving end.
  */
-template <typename T>
-class visit_set_helper {
+template <typename V, typename T>
+class polymorphic_visitable_helper {
  public:
-  virtual void visit(T& visitee) = 0;
-  virtual ~visit_set_helper(void) {}
+  virtual void accept(T &visitor) = 0;
+  virtual ~polymorphic_visitable_helper(void) {}
 };
 
 /**
- * @class visit_set
+ * @class polymorphic_visitable<...>
  *
- * @brief General case for template expansion.
+ * @brief General case for recursive variadic template expansion.
  */
 template <typename... Ts>
-class visit_set {};
+class polymorphic_visitable {};
 
 /**
- * @class visit_set<T,R,..>
+ * @class polymorphic_visitable<V,T,...>
  *
- * @brief Middle recursive case for expansion.
+ * @brief Middle recursive call for template expansion.
  */
-template<typename T, typename... Ts>
-class visit_set<T, Ts...>: public visit_set_helper<T>,
-                             public visit_set<Ts...> {
+template<typename V, typename T, typename... Ts>
+class polymorphic_visitable<V, T, Ts...>: public polymorphic_visitable_helper<V, T>,
+                                          public polymorphic_visitable<V, Ts...> {
  public:
-  using visit_set_helper<T>::visit;
-  using visit_set<Ts...>::visit;
+  using polymorphic_visitable_helper<V, T>::accept;
+  using polymorphic_visitable<V, Ts...>::accept;
 };
 
 /**
- * @class visit_set<T>
+ * @class polymorphic_visitable<V,T>
  *
- * @brief Base case for expansion. Provides classes the ability to explicitly
- * control what types of visitors they will accept.
+ * @brief Base case for template expansion.
  */
-template<typename T>
-class visit_set<T>: public visit_set_helper<T> {
+template<typename V, typename T>
+class polymorphic_visitable<V, T>: public polymorphic_visitable_helper<V, T> {
  public:
-  using visit_set_helper<T>::visit;
+  using polymorphic_visitable_helper<V, T>::accept;
 };
 
 NS_END(rcppsw, patterns, visitor);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITOR_HPP_ */
+#endif /* INCLUDE_RCPPSW_PATTERNS_VISITOR_POLYMORPHIC_VISITABLE_HPP_ */
