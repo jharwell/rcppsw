@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/patterns/visitor/visitor.hpp"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -35,22 +35,83 @@ NS_START(rcppsw, patterns, visitor);
  * Class Definitions
  ******************************************************************************/
 /**
- * P - The (possibly) parent class of the visitable class which will be passed
- * to the visitor as a reference.
+ * @class visitable_any
  *
- * T - The type of the visitor.
+ * @brief A class that will accept any kind of visitor.
+ *
+ * This is suitable for general application of the visitor pattern that does not
+ * require polymorphism. The visitor must be derived from \ref visitor()/
+ * \ref can_visit() otherwise the static_cast will fail.
  */
-template<class P>
-class visitable {
+template<class V>
+class visitable_any {
  public:
-  visitable(void) {}
-  visitable(__unused const visitable& other) {}
-  visitable& operator=(__unused const visitable& other) { return *this; }
+  visitable_any(void) {}
 
   template <typename T>
-  void accept(T &visitor) { visitor.visit(static_cast<P&>(*this)); }
+  void accept(T &visitor) { visitor.visit(static_cast<V&>(*this)); }
+  virtual ~visitable_any(void) {}
+};
 
-  virtual ~visitable(void) {}
+/**
+ * @class will_accept
+ *
+ * @brief A class that will accept a specific kind of visitor.
+ */
+template <class V>
+class will_accept {
+ public:
+  will_accept(void) {}
+
+  template <class T>
+  void accept(const T &visitor) { visitor.visit(static_cast<V&>(*this)); }
+  virtual ~will_accept(void) {}
+};
+
+/**
+ * @class visitable_set_helper
+ *
+ * @brief Helper class to provide actual implementation.
+ */
+template <typename V, typename T>
+class visitable_set_helper {
+ public:
+  virtual ~visitable_set_helper(void) {}
+
+  void accept(T &visitor) { visitor.visit(static_cast<V&>(*this)); }
+};
+
+/**
+ * @class visitable_set
+ *
+ * @brief General case for template expansion.
+ */
+template <typename... Ts>
+class visitable_set {};
+
+/**
+ * @class visitable_set<V,T,..>
+ *
+ * @brief Middle recursive case for expansion.
+ */
+template<typename V, typename T, typename... Ts>
+class visitable_set<V, T, Ts...>: public visitable_set_helper<V, T>,
+                                   public visitable_set<V, Ts...> {
+ public:
+  using visitable_set_helper<V, T>::accept;
+  using visitable_set<V, Ts...>::accept;
+};
+
+/**
+ * @class visitable_set<V,T>
+ *
+ * @brief Base case for expansion. Provides classes the ability to explicitly
+ * control what types of visitors they will accept.
+ */
+template<typename V, typename T>
+class visitable_set<V, T>: public visitable_set_helper<V, T> {
+ public:
+  using visitable_set_helper<V, T>::accept;
 };
 
 NS_END(rcppsw, patterns, visitor);
