@@ -1,15 +1,25 @@
-/*******************************************************************************
- * Name            : forkable.hpp
- * Project         : rcppsw
- * Module          : multiprocess
- * Description     : Common fork()ing management routines.
- * Creation Date   : 07/18/15
- * Copyright       : Copyright 2015 John Harwell, All rights reserved
+/**
+ * @file forkable.hpp
  *
- ******************************************************************************/
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
 
-#ifndef INCLUDE_RCPPSW_FORKABLE_HPP_
-#define INCLUDE_RCPPSW_FORKABLE_HPP_
+#ifndef INCLUDE_RCPPSW_MULTIPROCESS_FORKABLE_HPP_
+#define INCLUDE_RCPPSW_MULTIPROCESS_FORKABLE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -19,22 +29,21 @@
 #include <string>
 #include <thread>
 #include <vector>
-#include "rcsw/common/common.h"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw, multiprocess);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 class forkable {
  public:
-  /* member functions */
-  forkable(void) : proc_run_(false), pid_(0) {}
+  forkable(void) : m_proc_run(false), m_pid(0) {}
   virtual ~forkable(void) {}
-  pid_t pid(void) { return pid_; }
+  pid_t pid(void) { return m_pid; }
 
   /**
    * @brief Start a process.
@@ -59,7 +68,7 @@ class forkable {
   /**
    * @brief Signal a process that it should terminate, from outside the process.
    */
-  virtual void term(void) { proc_run_ = false; }
+  virtual void term(void) { m_proc_run = false; }
 
   /**
    * @brief Entry point for the new process.
@@ -70,20 +79,18 @@ class forkable {
   /**
    * @brief Check if a process object has been told to terminate elsewhere.
    */
-  bool terminated(void) { return (false == proc_run_); }
+  bool terminated(void) { return (false == m_proc_run); }
 
  private:
-  /* data members */
-  bool proc_run_;
-  pid_t pid_;
-
-  /* non-member functions */
   static void entry_point(void* this_p) {
     forkable* pt = static_cast<forkable*>(this_p);
     pt->proc_main();
-  } /* entry_point() */
+  }
+
+  bool m_proc_run;
+  pid_t     m_pid;
 };
 
-} /* namespace rcppsw */
+NS_END(multiprocess, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_FORKABLE_HPP_ */
+#endif /* INCLUDE_RCPPSW_MULTIPROCESS_FORKABLE_HPP_ */

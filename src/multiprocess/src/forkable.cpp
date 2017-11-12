@@ -1,12 +1,22 @@
-/*******************************************************************************
- * Name            : forkable.cpp
- * Project         : rcppsw
- * Module          : multithread
- * Description     : Common fork()/exec() wrappers
- * Creation Date   : 08/16/15
- * Copyright       : Copyright 2015 John Harwell, All rights reserved
+/**
+ * @file forkable.cpp
  *
- ******************************************************************************/
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
 
 /*******************************************************************************
  * Includes
@@ -23,41 +33,42 @@
 #include <vector>
 #include "rcsw/multiprocess/procm.h"
 #include "rcsw/common/dbg.h"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
+NS_START(rcppsw, multiprocess);
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 pid_t forkable::start(int core) {
-  proc_run_ = true;
-  pid_ = fork();
-  if (pid_ == 0) {
+  m_proc_run = true;
+  m_pid = fork();
+  if (m_pid == 0) {
     if (-1 != core) {
       procm_socket_lock(core);
     }
     entry_point(this);
   }
-  return pid_;
+  return m_pid;
 } /* forkable::start() */
 
 pid_t forkable::start(const std::string& new_wd, int core) {
-  proc_run_ = true;
-  pid_ = fork();
-  if (pid_ == 0) {
+  m_proc_run = true;
+  m_pid = fork();
+  if (m_pid == 0) {
     CHECK(0 == chdir(new_wd.c_str()));
     if (-1 != core) {
       procm_socket_lock(core);
     }
     entry_point(this);
   }
-  return pid_;
+  return m_pid;
 
 error:
   return -1;
 } /* forkable::start() */
 
-} /* namespace rcppsw */
+NS_END(multiprocess, rcppsw);
