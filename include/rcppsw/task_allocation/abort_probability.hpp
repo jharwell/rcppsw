@@ -38,36 +38,34 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 /**
  * @brief Calculates the probability that a robot will abort the task it is
- * currently working on.
+ * currently working on using the negative exponential distribution.
  *
- * Implements the equation:
+ * Reactivity and offset are assumed to both be < 0.
  *
- * P_g = 1/(1 + e^(omega(delta, duration estimates )))
- *
- * Where omega = reactivity * (
- *                    (execution time - whole_task_time)/
- *                    (subtask1_time + subtask2 time) + offset)
  * Depends on:
  *
  * - The reactivity parameter: How sensitive should robots be to abrupt changes
  *   in task estimates/execution times.
- * - Time estimates of the unpartitioned and two partitioned tasks.
+ * - The proportionality parameter: What should the current_exec/prev_estimate
+ *   ratio be assumed to be when the robot does not any estimates of the task's
+ *   execution time (i.e. it is executing the task for the first time).
+ * - The offset parameter: How much the current_exec/prev_estimate ratio will be
+ *   allowed to grow before causing the probability to grow exponentially.
+ *
+ * - Time estimates for the task.
  * - How long the robot has spent executing the current task.
- * - The offset parameter: Another parameter whose purpose I'm not quite sure
- *   of.
  */
 class abort_probability: public rcppsw::math::expression<double> {
  public:
-  abort_probability(double reactivity, double offset) :
-      m_reactivity(reactivity), m_offset(offset) {}
-
-  double calc(double exec_time, const time_estimate& whole_task,
-              const time_estimate& subtask1, const time_estimate& subtask2);
+  abort_probability(double reactivity, double proportionality, double offset) :
+      m_reactivity(reactivity), m_proportionality(proportionality),
+      m_offset(offset) {}
 
   double calc(double exec_time, const time_estimate& whole_task);
 
  private:
   double m_reactivity;
+  double m_proportionality;
   double m_offset;
 };
 
