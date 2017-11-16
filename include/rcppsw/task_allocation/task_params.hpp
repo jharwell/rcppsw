@@ -35,10 +35,12 @@ NS_START(rcppsw, task_allocation);
  * Structure Definitions
  ******************************************************************************/
 struct task_params : public common::base_params {
-  task_params(void) : estimation_alpha(), reactivity(), abort_offset() {}
+  task_params(void) : estimation_alpha(), reactivity(), abort_offset(),
+                      proportionality_estimate() {}
   double estimation_alpha;
   double reactivity;
   double abort_offset;
+  double proportionality_estimate;
 };
 
 NS_END(task_allocation, rcppsw);

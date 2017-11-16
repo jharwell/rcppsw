@@ -34,8 +34,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 void polled_executive::run(void) {
   if (nullptr == executive::current_task()) {
-    new_task_start(static_cast<polled_task*>(executive::root()));
-    return;
+    new_task_start(static_cast<polled_task*>(executive::get_next_task(nullptr)));
   }
   polled_task* current = dynamic_cast<polled_task*>(executive::current_task());
   ER_ASSERT(current, "FATAL: polled_executive can only work with polled tasks");
@@ -49,7 +48,7 @@ void polled_executive::run(void) {
     current->task_execute();
   } else {
     double prob = executive::task_abort_prob(current);
-    ER_NOM("Current task %s abort probability: %.12f", current->name().c_str(),
+    ER_VER("Current task %s abort probability: %.12f", current->name().c_str(),
            prob);
 
     if (static_cast<double>(rand()) / RAND_MAX <= prob) {
@@ -66,7 +65,9 @@ void polled_executive::run(void) {
 void polled_executive::new_task_start(polled_task* const new_task) {
   new_task->task_reset();
   new_task->task_start(nullptr);
+  new_task->reset_exec_time();
   current_task(new_task);
+
   ER_NOM("Started new task %s", new_task->name().c_str());
 } /* new_task_start() */
 

@@ -34,16 +34,26 @@ NS_START(rcppsw, task_allocation);
 double partition_probability::calc(const time_estimate& task_estimate,
                                    const time_estimate& subtask1_estimate,
                                    const time_estimate& subtask2_estimate) {
+  /*
+   * If we do not have samples from the task(s) denominator for either case,
+   * then we artificially set that term to 0, which yields an exponent of 0, and
+   * hence a partition probility of 0.5 (Hence the 2.0).
+   */
+  double tmp = 2.0;
   if (task_estimate > subtask1_estimate + subtask2_estimate) {
-    double res = 1 + std::exp(
-        (-m_reactivity * ((task_estimate /
-                           (subtask1_estimate + subtask2_estimate)) - 1.0)).last_result());
-    return set_result(1/res);
+    if ((subtask1_estimate + subtask2_estimate).last_result() > 0) {
+      tmp = 1 + std::exp(
+          (-m_reactivity * ((task_estimate /
+                             (subtask1_estimate + subtask2_estimate)) - 1.0)).last_result());
+    }
+    return set_result(1/tmp);
   } else {
-    double tmp = -m_reactivity * (1.0 -
-                                  ((subtask1_estimate + subtask2_estimate) /
-                                   (std::max(task_estimate.last_result(), 1.0)))).last_result();
-    return set_result(1.0/(1.0 + std::exp(tmp)));
+    if (task_estimate.last_result() > 0) {
+    tmp = -m_reactivity * (1.0 -
+                           ((subtask1_estimate + subtask2_estimate) / task_estimate).last_result());
+    tmp = 1.0 + std::exp(tmp);
+    }
+    return set_result(1.0/tmp);
   }
 } /* calc() */
 

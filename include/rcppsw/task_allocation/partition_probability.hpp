@@ -37,18 +37,10 @@ NS_START(rcppsw, task_allocation);
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief Calculates the probability that a robot partitions its current task.
+ * @brief Calculates the probability that a robot partitions its current task
+ * using the negative exponential distribution.
  *
- * Implements the equation:
- *
- * If no_partition_est > (subtask1_est + subtask2_est):
- *
- * P_p = 1/(1+ e^(-reactivity(no_partition_est/
- *                                            (subtask1_est subtask2_est) - 1)))
- *
- * If no_partition_est <= (subtask1_est + subtask2_est):
- *
- * P_p = 1/(1+ e^(-reactivity(1 - (subtask1_est subtask2_est)/no_partition_est)))
+ * Reactivity is assumed to be < 0.
  *
  * Depends on:
  *
