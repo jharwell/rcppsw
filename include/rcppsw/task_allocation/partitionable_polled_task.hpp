@@ -59,20 +59,18 @@ class partitionable_polled_task : public polled_task,
                             polled_task* const parent = nullptr) :
       polled_task(name, params->estimation_alpha, mechanism, parent),
       partitionable_task<T1, T2>(),
-      m_abort_prob(params->reactivity, params->abort_offset),
+      m_abort_prob(params->reactivity,
+                   params->proportionality_estimate,
+                   params->abort_offset),
       m_partition_prob(params->reactivity) {}
 
   /**
    * @brief Get the probability of aborting a partitionable task.
    */
   double abort_prob(void) override {
-    printf("this->exec_time: %f this->estimate: %f p1->estimate: %f p2->estimate: %f\n",
-           this->exec_time(), this->current_time_estimate().last_result(),
-           this->partition1()->current_time_estimate().last_result(),
-           this->partition2()->current_time_estimate().last_result());
-    return m_abort_prob.calc(this->exec_time(), this->current_time_estimate(),
-                             this->partition1()->current_time_estimate(),
-                             this->partition2()->current_time_estimate());
+    printf("this->exec_time: %f this->estimate: %f\n",
+           this->exec_time(), this->current_time_estimate().last_result());
+    return m_abort_prob.calc(this->exec_time(), this->current_time_estimate());
   }
   double partition_prob(void) override {
     return m_partition_prob.calc(this->current_time_estimate(),

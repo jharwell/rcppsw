@@ -51,10 +51,12 @@ class executable_task : public logical_task {
   executable_task(const std::string& name, double estimate_alpha,
                   executable_task* const parent = nullptr) :
       logical_task(name, parent),
-      m_is_atomic(false), m_exec_time(0.0), m_estimate(estimate_alpha) {}
+      m_is_atomic(false), m_exec_time(0.0), m_start_time(),
+      m_estimate(estimate_alpha) {}
 
   executable_task(const executable_task& other) :
       logical_task(other), m_is_atomic(false), m_exec_time(other.m_exec_time),
+      m_start_time(other.m_start_time),
       m_estimate(other.m_estimate) {}
 
   virtual ~executable_task(void);
@@ -109,20 +111,23 @@ class executable_task : public logical_task {
    */
   virtual double calc_elapsed_time(double exec_time) const = 0;
 
+  virtual double calc_start_time(void) const = 0;
+
   /**
    * @brief Update the calculated exec time for the task as a running sum.
    *
    * This is needed for accurate task abort calculations.
    */
-  void update_exec_time(void) { m_exec_time += calc_elapsed_time(m_exec_time); }
+  void update_exec_time(void) { m_exec_time = calc_elapsed_time(m_start_time); }
 
-  void reset_exec_time(void) { m_exec_time = 0.0; }
+  void reset_exec_time(void) { m_start_time = calc_start_time(); }
 
  private:
   executable_task& operator=(const executable_task& other) = delete;
 
   bool m_is_atomic;
   double m_exec_time;
+  double m_start_time;
   time_estimate m_estimate;
 };
 
