@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/er_client.hpp"
+#include "rcppsw/er/client.hpp"
 #include "rcppsw/task_allocation/executable_task.hpp"
 
 /*******************************************************************************
@@ -38,14 +38,14 @@ NS_START(rcppsw, task_allocation);
 /**
  * @brief Abstract interface for runtime task executives.
  */
-class executive : public rcppsw::common::er_client {
+class executive : public rcppsw::er::client {
  public:
-  executive(const std::shared_ptr<rcppsw::common::er_server>& server,
+  executive(const std::shared_ptr<rcppsw::er::server>& server,
             executable_task *const root) :
-      er_client(server), m_current_task(nullptr), m_root(root) {
-    er_client::insmod("task_executive",
-                      rcppsw::common::er_lvl::DIAG,
-                      rcppsw::common::er_lvl::NOM);
+      client(server), m_current_task(nullptr), m_root(root) {
+    client::insmod("task_executive",
+                   rcppsw::er::er_lvl::DIAG,
+                   rcppsw::er::er_lvl::NOM);
   }
   virtual ~executive(void);
   virtual void run(void) = 0;

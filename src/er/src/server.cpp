@@ -1,5 +1,5 @@
 /**
- * @file er_server.cpp
+ * @file server.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -21,15 +21,15 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/er_server.hpp"
+#include "rcppsw/er/server.hpp"
 #include <algorithm>
 #include <boost/filesystem.hpp>
-#include "rcppsw/common/er_client.hpp"
+#include <boost/uuid/uuid_generators.hpp>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, common);
+NS_START(rcppsw, er);
 
 /*******************************************************************************
  * Macros
@@ -42,7 +42,7 @@ NS_START(rcppsw, common);
     snprintf(static_cast<char*>(_str), sizeof(_str), "[%s:%lu.%lu]:%s:%d:%s: " msg "\n", \
              static_cast<char*>(m_hostname), _curr_time.tv_sec, _curr_time.tv_nsec, __FILE__, \
              __LINE__, __FUNCTION__, ##__VA_ARGS__);                     \
-    er_server::er_msg_int _msg(m_er_id, lvl, std::string(_str));             \
+    server::msg_int _msg(m_er_id, lvl, std::string(_str));             \
     msg_report(_msg);                                                    \
   }
 
@@ -54,33 +54,29 @@ std::shared_ptr<global_server>g_server(std::make_shared<global_server>());
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-er_server::er_server(const std::string& logfile_fname,
-                     const er_lvl::value& dbglvl, const er_lvl::value& loglvl,
-                     bool threaded)
-    : m_threaded(threaded),
-      m_modules(),
-      m_queue(),
+server::server(const std::string& logfile_fname,
+               const er_lvl::value& dbglvl, const er_lvl::value& loglvl)
+    : m_modules(),
       m_logfile_fname(logfile_fname),
       m_logfile(),
       m_loglvl_dflt(loglvl),
       m_dbglvl_dflt(dbglvl),
-      m_gen(),
       m_er_id(idgen()) {
   gethostname(m_hostname, 32);
 
   change_logfile(m_logfile_fname);
-} /* er_server::er_server() */
+} /* server::server() */
 
 global_server::~global_server(void) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-status_t er_server::insmod(const boost::uuids::uuid& mod_id,
+status_t server::insmod(const boost::uuids::uuid& mod_id,
                            const er_lvl::value& loglvl,
                            const er_lvl::value& dbglvl,
                            const std::string& mod_name) {
-  er_server_mod mod(mod_id, loglvl, dbglvl, mod_name);
+  server_mod mod(mod_id, loglvl, dbglvl, mod_name);
 
   /* make sure module not already present */
   CHECK(m_modules.end() == std::find(m_modules.begin(), m_modules.end(), mod));
@@ -93,7 +89,7 @@ error:
   return ERROR;
 } /* insmod() */
 
-status_t er_server::findmod(const std::string& mod_name,
+status_t server::findmod(const std::string& mod_name,
                             boost::uuids::uuid& mod_id) {
   for (auto mod : m_modules) {
     if (mod.name() == mod_name) {
@@ -104,15 +100,15 @@ status_t er_server::findmod(const std::string& mod_name,
   return ERROR;
 } /* findmod() */
 
-status_t er_server::rmmod(const boost::uuids::uuid& id) {
-  er_server_mod tmp(id, er_lvl::NOM, er_lvl::NOM, "tmp");
+status_t server::rmmod(const boost::uuids::uuid& id) {
+  server_mod tmp(id, er_lvl::NOM, er_lvl::NOM, "tmp");
   auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
   m_modules.erase(iter);
   return OK;
 } /* rmmod() */
 
-void er_server::msg_report(const er_msg_int& msg) {
-  er_server_mod tmp(msg.m_id, er_lvl::NOM, er_lvl::NOM, "tmp");
+void server::msg_report(const msg_int& msg) {
+  server_mod tmp(msg.m_id, er_lvl::NOM, er_lvl::NOM, "tmp");
   auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
 
   if (iter != m_modules.end()) {
@@ -125,19 +121,14 @@ void er_server::msg_report(const er_msg_int& msg) {
   }
 } /* msg_report() */
 
-int er_server::flush(void) {
-  int count = 0;
-  while (m_queue.size() > 0) {
-    er_msg_int next = m_queue.dequeue();
-    er_server::msg_report(next);
-    count++;
-  } /* while() */
-  return count;
+void server::flush(void) {
+  std::fflush(NULL);
+  m_logfile.flush();
 } /* flush() */
 
-status_t er_server::mod_dbglvl(const boost::uuids::uuid& id,
+status_t server::mod_dbglvl(const boost::uuids::uuid& id,
                               const er_lvl::value& lvl) {
-  er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
+  server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
   auto iter = std::find(m_modules.begin(), m_modules.end(), mod);
@@ -155,8 +146,8 @@ error:
   return ERROR;
 } /* mod_dbglvl() */
 
-er_lvl::value er_server::mod_dbglvl(const boost::uuids::uuid& id) {
-  er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
+er_lvl::value server::mod_dbglvl(const boost::uuids::uuid& id) {
+  server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
   auto iter = std::find(m_modules.begin(), m_modules.end(), mod);
@@ -167,8 +158,8 @@ error:
   return static_cast<er_lvl::value>(-1);
 } /* dbglvl() */
 
-er_lvl::value er_server::mod_loglvl(const boost::uuids::uuid& id) {
-  er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
+er_lvl::value server::mod_loglvl(const boost::uuids::uuid& id) {
+  server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
   auto iter = std::find(m_modules.begin(), m_modules.end(), mod);
@@ -179,7 +170,7 @@ error:
   return static_cast<er_lvl::value>(-1);
 } /* loglvl() */
 
-void er_server::change_logfile(const std::string& new_fname) {
+void server::change_logfile(const std::string& new_fname) {
   m_logfile.close();
   if (boost::filesystem::exists(new_fname)) {
     boost::filesystem::remove(new_fname);
@@ -190,9 +181,9 @@ void er_server::change_logfile(const std::string& new_fname) {
   }
 } /* change_logfile() */
 
-status_t er_server::change_id(const boost::uuids::uuid& old_id,
+status_t server::change_id(const boost::uuids::uuid& old_id,
                               boost::uuids::uuid new_id) {
-  er_server_mod mod(old_id, er_lvl::NOM, er_lvl::NOM, "tmp");
+  server_mod mod(old_id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
   auto iter = std::find(m_modules.begin(), m_modules.end(), mod);
@@ -204,9 +195,9 @@ error:
   return ERROR;
 } /* change_id() */
 
-status_t er_server::mod_loglvl(const boost::uuids::uuid& id,
+status_t server::mod_loglvl(const boost::uuids::uuid& id,
                               const er_lvl::value& lvl) {
-  er_server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
+  server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
   auto iter = std::find(m_modules.begin(), m_modules.end(), mod);
@@ -224,21 +215,9 @@ error:
   return ERROR;
 } /* mod_loglvl() */
 
-void* er_server::thread_main(__unused void* arg) {
-  REPORT_INTERNAL(er_lvl::NOM, "Start");
-  while (!terminated()) {
-    while (0 == m_queue.size()) sleep(1);
-    er_msg_int msg = m_queue.dequeue();
-    msg_report(msg);
-  } /* while() */
-  REPORT_INTERNAL(er_lvl::NOM, "Exit");
+boost::uuids::uuid server::idgen(void) {
+  boost::uuids::random_generator g;
+  return g();
+} /* idgen() */
 
-  /* make sure all events remaining in queue are reported */
-  while (m_queue.size()) {
-    er_msg_int msg = m_queue.dequeue();
-    msg_report(msg);
-  } /* while() */
-  return nullptr;
-} /* thread_main() */
-
-NS_END(common, rcpppsw);
+NS_END(er, rcpppsw);

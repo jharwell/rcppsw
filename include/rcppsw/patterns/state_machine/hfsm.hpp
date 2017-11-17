@@ -44,7 +44,7 @@ class hfsm: public base_fsm {
    * @param max_states The maximum number of state machine states.
    * @param initial_state Initial state machine state.
    */
-  hfsm(const std::shared_ptr<common::er_server>& server,
+  hfsm(const std::shared_ptr<er::server>& server,
        uint8_t max_states,
        uint8_t initial_state = 0) :
       base_fsm(server, max_states, initial_state), m_top_state(nullptr) {}
