@@ -1,5 +1,5 @@
 /**
- * @file er_server_mod.cpp
+ * @file server_mod.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -21,24 +21,25 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/er_server_mod.hpp"
+#include "rcppsw/er/server_mod.hpp"
 #include <fstream>
+#include <boost/uuid/uuid_io.hpp>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, common);
+NS_START(rcppsw, er);
 
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-er_server_mod::er_server_mod(boost::uuids::uuid id,
+server_mod::server_mod(boost::uuids::uuid id,
                            er_lvl::value loglvl,
                            er_lvl::value dbglvl,
                              std::string name)
     : m_id(id), m_name(std::move(name)), m_loglvl(loglvl), m_dbglvl(dbglvl) {}
 
-er_server_mod::er_server_mod(boost::uuids::uuid id,
+server_mod::server_mod(boost::uuids::uuid id,
                              std::string name)
     : m_id(id),
       m_name(std::move(name)),
@@ -48,29 +49,29 @@ er_server_mod::er_server_mod(boost::uuids::uuid id,
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void er_server_mod::set_dbglvl(const er_lvl::value& lvl) {
+void server_mod::set_dbglvl(const er_lvl::value& lvl) {
   m_dbglvl = lvl;
 } /* set_dbglvl() */
 
-void er_server_mod::set_loglvl(const er_lvl::value& lvl) {
+void server_mod::set_loglvl(const er_lvl::value& lvl) {
   m_loglvl = lvl;
 } /* set_loglvl() */
 
-void er_server_mod::msg_report(const std::string& msg, er_lvl::value msg_lvl,
+void server_mod::msg_report(const std::string& msg, er_lvl::value msg_lvl,
                            er_lvl::value log_lvl, std::ostream& stream) const {
     if (msg_lvl <= log_lvl) {
       stream << name() << ": " << msg;
       stream.flush();
     }
-} /* er_server_mod::msg_report() */
+} /* server_mod::msg_report() */
 
-bool er_server_mod::operator==(const er_server_mod& rhs) {
+bool server_mod::operator==(const server_mod& rhs) {
   return (this->m_id == rhs.m_id);
 } /* operator==() */
 
-std::ostream& operator<<(std::ostream& os, const er_server_mod& mod) {
+std::ostream& operator<<(std::ostream& os, const server_mod& mod) {
   os << mod.id() << ": " << mod.name();
   return os;
 } /* operator<<() */
 
-NS_END(common, rcppsw);
+NS_END(er, rcppsw);

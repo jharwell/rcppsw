@@ -27,7 +27,7 @@
 #include <string>
 #include "rcppsw/task_allocation/logical_task.hpp"
 #include "rcppsw/task_allocation/partition_probability.hpp"
-#include "rcppsw/common/er_client.hpp"
+#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces

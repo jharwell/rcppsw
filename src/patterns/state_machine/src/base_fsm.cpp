@@ -32,10 +32,10 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_fsm::base_fsm(const std::shared_ptr<common::er_server>& server,
+base_fsm::base_fsm(const std::shared_ptr<er::server>& server,
                        uint8_t max_states,
                        uint8_t initial_state) :
-    er_client(server),
+    er::client(server),
     mc_max_states(max_states),
     m_current_state(initial_state),
     m_next_state(0),

@@ -36,7 +36,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 class polled_executive : public executive {
  public:
-  polled_executive(const std::shared_ptr<rcppsw::common::er_server>& server,
+  polled_executive(const std::shared_ptr<rcppsw::er::server>& server,
                    executable_task* const root) :
       executive(server, root) {}
 

@@ -35,7 +35,7 @@
 #include "rcppsw/patterns/state_machine/state_entry_action.hpp"
 #include "rcppsw/patterns/state_machine/state_map_row.hpp"
 #include "rcppsw/patterns/state_machine/state_map_ex_row.hpp"
-#include "rcppsw/common/er_client.hpp"
+#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -49,9 +49,9 @@ NS_START(rcppsw, patterns, state_machine);
  * @brief base_fsm implements a software-based state machine.
  *
  */
-class base_fsm: public common::er_client {
+class base_fsm: public er::client {
  public:
-  base_fsm(const std::shared_ptr<common::er_server>& server,
+  base_fsm(const std::shared_ptr<er::server>& server,
              uint8_t max_states,
              uint8_t initial_state = 0);
 

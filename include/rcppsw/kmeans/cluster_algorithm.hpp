@@ -33,7 +33,7 @@
 #include <boost/shared_ptr.hpp>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/kmeans/cluster.hpp"
-#include "rcppsw/common/er_client.hpp"
+#include "rcppsw/er/client.hpp"
 #include "rcsw/utils/time_utils.h"
 
 /*******************************************************************************
