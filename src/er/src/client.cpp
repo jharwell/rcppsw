@@ -1,5 +1,5 @@
 /**
- * @file er_client.cpp
+ * @file client.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -21,51 +21,49 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/er_client.hpp"
-#include "rcppsw/common/er_server.hpp"  // for er_server
+#include "rcppsw/er/client.hpp"
+#include "rcppsw/er/server.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, common);
+NS_START(rcppsw, er);
 
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-er_client::er_client(const std::shared_ptr<er_server>& server_handle)
+client::client(const std::shared_ptr<server>& server_handle)
     : m_server_handle(server_handle), m_er_id(m_server_handle->idgen()) {}
-er_client::er_client(void) : m_server_handle(), m_er_id() {}
-er_client::~er_client(void) {}
+client::client(void) : m_server_handle(), m_er_id() {}
+client::~client(void) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-status_t er_client::attmod(const std::string& mod_name) {
+status_t client::attmod(const std::string& mod_name) {
   return server_handle()->findmod(mod_name, m_er_id);
 } /* attmod() */
 
-void er_client::deferred_init(const std::shared_ptr<er_server>& server_handle) {
+void client::deferred_init(const std::shared_ptr<server>& server_handle) {
   m_server_handle = server_handle;
   m_er_id = m_server_handle->idgen();
 } /* deferred_init() */
 
-void er_client::change_id(boost::uuids::uuid old_id, boost::uuids::uuid new_id) {
+void client::change_id(boost::uuids::uuid old_id, boost::uuids::uuid new_id) {
   m_server_handle->change_id(old_id, new_id);
 } /* change_id() */
 
-status_t er_client::insmod(const std::string& mod_name,
+status_t client::insmod(const std::string& mod_name,
                            const er_lvl::value& loglvl,
                            const er_lvl::value& dbglvl) {
   return m_server_handle->insmod(m_er_id, loglvl, dbglvl, mod_name);
 } /* insmod */
 
-status_t er_client::rmmod(void) { return m_server_handle->rmmod(m_er_id); }
+status_t client::rmmod(void) { return m_server_handle->rmmod(m_er_id); }
 
-void __er_report__(er_server* server, const boost::uuids::uuid& er_id,
+void __er_report__(server* server, const boost::uuids::uuid& er_id,
                     const er_lvl::value& lvl, const std::string& str) {
   server->report(er_id, lvl, str);
 } /* __er_report__() */
 
-
-
-NS_END(common, rcppsw);
+NS_END(er, rcppsw);

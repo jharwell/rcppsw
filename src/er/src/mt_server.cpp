@@ -1,5 +1,5 @@
 /**
- * @file polled_simple_fsm.hpp
+ * @file mt_server.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,46 +18,49 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_SIMPLE_FSM_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_SIMPLE_FSM_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/task_allocation/taskable.hpp"
-#include "rcppsw/patterns/state_machine/simple_fsm.hpp"
+#include "rcppsw/er/mt_server.hpp"
+#include <algorithm>
+#include <boost/filesystem.hpp>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, er);
 
 /*******************************************************************************
- * Class Definitions
+ * Constructors/Destructors
  ******************************************************************************/
-/**
- * @brief An FSM that can be part of a \ref task_sequence of \ref polled_task
- * instances.
- *
- * These FSMs are attached to \ref atomic_polled_task instances as their method
- * of execution.
- */
-class polled_simple_fsm : public taskable,
-                          public patterns::state_machine::simple_fsm {
- public:
-  polled_simple_fsm(const std::shared_ptr<er::server>& server,
-                    uint8_t max_states) :
-      taskable(),
-      patterns::state_machine::simple_fsm(server, max_states) {}
-  virtual ~polled_simple_fsm(void) {}
+mt_server::mt_server(const std::string& logfile_fname,
+               const er_lvl::value& dbglvl, const er_lvl::value& loglvl)
+    : server(logfile_fname, dbglvl, loglvl),
+      m_queue() {}
 
-  void task_reset(void) override { init(); }
-  void task_execute(void) override {
-    generated_event(true); state_engine();
-  }
-};
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+void mt_server::flush(void) {
+  while (m_queue.size() > 0) {
+    msg_int next = m_queue.dequeue();
+    server::msg_report(next);
+  } /* while() */
+} /* flush() */
 
-NS_END(rcppsw, task_allocation);
+void* mt_server::thread_main(__unused void* arg) {
+  while (!terminated()) {
+    while (0 == m_queue.size()) sleep(1);
+    msg_int msg = m_queue.dequeue();
+    msg_report(msg);
+  } /* while() */
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_SIMPLE_FSM_HPP_ */
+  /* make sure all events remaining in queue are reported */
+  while (m_queue.size()) {
+    msg_int msg = m_queue.dequeue();
+    msg_report(msg);
+  } /* while() */
+  return nullptr;
+} /* thread_main() */
+
+NS_END(er, rcpppsw);
