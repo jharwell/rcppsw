@@ -54,22 +54,26 @@ class partitionable_task {
   static_assert(std::is_base_of<logical_task, T2>::value,
                 "FATAL: template argument must be a logical task");
  public:
-  partitionable_task(void) : m_partition1(nullptr), m_partition2(nullptr) {}
+  partitionable_task(void) : m_partition_prob(),
+                             m_partition1(nullptr), m_partition2(nullptr) {}
   virtual ~partitionable_task(void) {}
 
-  virtual double partition_prob(void) = 0;
+  virtual double calc_partition_prob(void) = 0;
 
+  void update_partition_prob(void) { m_partition_prob = calc_partition_prob(); }
   logical_task* partition(void) {
     /* we are going to partition, so pick one of the two subtasks randomly */
-    /* if (partition_prob() >= static_cast<double>(rand()) / RAND_MAX) { */
-      /* if (rand() % 2) { */
-        /* return m_partition1; */
-      /* } else { */
+    if (m_partition_prob >= static_cast<double>(rand()) / RAND_MAX) {
+      if (rand() % 2) {
+        return m_partition1;
+      } else {
         return m_partition2;
-      /* } */
-    /* } */
+      }
+    }
     return m_partition1->parent();
   }
+
+  double partition_prob(void) const { return m_partition_prob; }
 
   const T1* partition1(void) const { return m_partition1; }
   const T2* partition2(void) const { return m_partition2; }
@@ -80,6 +84,7 @@ class partitionable_task {
   partitionable_task(const partitionable_task& other) = delete;
   partitionable_task& operator=(const partitionable_task& other) = delete;
 
+  double m_partition_prob;
   T1 *m_partition1;
   T2 *m_partition2;
 };

@@ -23,6 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/task_allocation/polled_executive.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
+#include "rcppsw/task_allocation/partitionable_polled_task.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -40,19 +41,40 @@ void polled_executive::run(void) {
   ER_ASSERT(current, "FATAL: polled_executive can only work with polled tasks");
 
   if (current->task_finished()) {
-    ER_NOM("Current task %s finished", current->name().c_str());
+    ER_NOM("Task '%s' finished", current->name().c_str());
     current->update_exec_time();
     current->update_time_estimate(current->exec_time());
+
+    if (!current->is_atomic()) {
+      partitionable_task<polled_task, polled_task>* p =
+          dynamic_cast<partitionable_task<polled_task, polled_task>*>(current);
+      p->update_partition_prob();
+      ER_NOM("Partition probability of finished task '%s' (parent=%s): %f\n",
+             current->name().c_str(), current->parent()->name().c_str(),
+             p->partition_prob());
+    }
+
     current = static_cast<polled_task*>(executive::get_next_task(current));
+
     new_task_start(current);
     current->task_execute();
   } else {
     double prob = executive::task_abort_prob(current);
-    ER_VER("Current task %s abort probability: %.12f", current->name().c_str(),
+    ER_VER("Task '%s' abort probability: %f", current->name().c_str(),
            prob);
 
     if (static_cast<double>(rand()) / RAND_MAX <= prob) {
-      ER_NOM("Current task %s aborted", current->name().c_str());
+      ER_NOM("Task '%s' aborted", current->name().c_str());
+
+      if (!current->is_atomic()) {
+        partitionable_task<polled_task, polled_task>* p =
+            dynamic_cast<partitionable_task<polled_task, polled_task>*>(current);
+        p->update_partition_prob();
+        ER_NOM("Partition probability of finished task '%s' (parent='%s'): %f\n",
+               current->name().c_str(), current->parent()->name().c_str(),
+               p->partition_prob());
+      }
+
       current = static_cast<polled_task*>(executive::get_next_task(current));
       new_task_start(current);
     } else {
@@ -68,7 +90,7 @@ void polled_executive::new_task_start(polled_task* const new_task) {
   new_task->reset_exec_time();
   current_task(new_task);
 
-  ER_NOM("Started new task %s", new_task->name().c_str());
+  ER_NOM("Started new task '%s'", new_task->name().c_str());
 } /* new_task_start() */
 
 NS_END(task_allocation, rcppsw);
