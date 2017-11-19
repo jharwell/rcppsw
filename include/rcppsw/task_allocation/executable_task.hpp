@@ -89,7 +89,7 @@ class executable_task : public logical_task {
   /**
    * @brief Calculate the probability of aborting this task.
    */
-  virtual double abort_prob(void) = 0;
+  virtual double calc_abort_prob(void) = 0;
 
   /**
    * @brief Get the last execution time of the task.

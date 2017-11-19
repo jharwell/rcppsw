@@ -67,12 +67,10 @@ class partitionable_polled_task : public polled_task,
   /**
    * @brief Get the probability of aborting a partitionable task.
    */
-  double abort_prob(void) override {
-    printf("this->exec_time: %f this->estimate: %f\n",
-           this->exec_time(), this->current_time_estimate().last_result());
+  double calc_abort_prob(void) override {
     return m_abort_prob.calc(this->exec_time(), this->current_time_estimate());
   }
-  double partition_prob(void) override {
+  double calc_partition_prob(void) override {
     return m_partition_prob.calc(this->current_time_estimate(),
                                  this->partition1()->current_time_estimate(),
                                  this->partition2()->current_time_estimate());

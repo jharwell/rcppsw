@@ -68,7 +68,7 @@ double executive::task_abort_prob(const executable_task* const task) {
   if (task->is_atomic()) {
     return 0.0;
   } else {
-    return dynamic_cast<executable_task*>(task->parent())->abort_prob();
+    return static_cast<executable_task*>(task->parent())->calc_abort_prob();
   }
 } /* task_abort_prob() */
 
