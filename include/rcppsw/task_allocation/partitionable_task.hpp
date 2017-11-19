@@ -61,13 +61,13 @@ class partitionable_task {
 
   logical_task* partition(void) {
     /* we are going to partition, so pick one of the two subtasks randomly */
-    if (partition_prob() >= static_cast<double>(rand()) / RAND_MAX) {
-      if (rand() % 2) {
-        return m_partition1;
-      } else {
+    /* if (partition_prob() >= static_cast<double>(rand()) / RAND_MAX) { */
+      /* if (rand() % 2) { */
+        /* return m_partition1; */
+      /* } else { */
         return m_partition2;
-      }
-    }
+      /* } */
+    /* } */
     return m_partition1->parent();
   }
 
