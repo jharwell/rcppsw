@@ -23,8 +23,9 @@
  ******************************************************************************/
 #include "rcppsw/er/server.hpp"
 #include <algorithm>
+#include <fstream>
+#include <iostream>
 #include <boost/filesystem.hpp>
-#include <boost/uuid/uuid_generators.hpp>
 
 /*******************************************************************************
  * Namespaces
@@ -58,16 +59,20 @@ server::server(const std::string& logfile_fname,
                const er_lvl::value& dbglvl, const er_lvl::value& loglvl)
     : m_modules(),
       m_logfile_fname(logfile_fname),
-      m_logfile(),
+      m_logfile(new std::ofstream()),
       m_loglvl_dflt(loglvl),
       m_dbglvl_dflt(dbglvl),
-      m_er_id(idgen()) {
+      m_er_id(idgen()),
+      m_generator() {
   gethostname(m_hostname, 32);
 
   change_logfile(m_logfile_fname);
 } /* server::server() */
 
+server::~server(void) { m_logfile->close(); }
+
 global_server::~global_server(void) {}
+
 
 /*******************************************************************************
  * Member Functions
@@ -112,7 +117,7 @@ void server::msg_report(const msg_int& msg) {
   auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
 
   if (iter != m_modules.end()) {
-    iter->msg_report(msg.str_, msg.lvl_, iter->loglvl(), m_logfile);
+    iter->msg_report(msg.str_, msg.lvl_, iter->loglvl(), *m_logfile);
 
     /* If NDEBUG is defined, debug printing is disabled. */
 #ifndef NDEBUG
@@ -123,7 +128,7 @@ void server::msg_report(const msg_int& msg) {
 
 void server::flush(void) {
   std::fflush(NULL);
-  m_logfile.flush();
+  m_logfile->flush();
 } /* flush() */
 
 status_t server::mod_dbglvl(const boost::uuids::uuid& id,
@@ -171,13 +176,13 @@ error:
 } /* loglvl() */
 
 void server::change_logfile(const std::string& new_fname) {
-  m_logfile.close();
+  m_logfile->close();
   if (boost::filesystem::exists(new_fname)) {
     boost::filesystem::remove(new_fname);
   }
   m_logfile_fname = new_fname;
   if (m_logfile_fname != "__no_file__") {
-    m_logfile.open(m_logfile_fname.c_str());
+    m_logfile->open(m_logfile_fname.c_str());
   }
 } /* change_logfile() */
 
@@ -216,8 +221,9 @@ error:
 } /* mod_loglvl() */
 
 boost::uuids::uuid server::idgen(void) {
-  boost::uuids::random_generator g;
-  return g();
+  return m_generator();
 } /* idgen() */
+
+std::ostream& server::dbg_stream(void) { return std::cout; }
 
 NS_END(er, rcpppsw);

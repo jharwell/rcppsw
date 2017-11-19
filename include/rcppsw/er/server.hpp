@@ -27,12 +27,13 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <fstream>
+#include <iosfwd>
 #include <string>
 #include <vector>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/server_mod.hpp"
 #include "rcppsw/patterns/singleton.hpp"
+#include <boost/uuid/uuid_generators.hpp>
 
 /*******************************************************************************
  * Namespaces
@@ -69,12 +70,12 @@ class server {
             const er_lvl::value& dbglvl = er_lvl::NOM,
             const er_lvl::value& loglvl = er_lvl::NOM);
 
-  virtual ~server(void) { m_logfile.close(); }
+  virtual ~server(void);
 
   status_t change_id(const boost::uuids::uuid& old_id,
                      boost::uuids::uuid new_id);
-  std::ofstream& log_stream(void) { return m_logfile; }
-  std::ostream& dbg_stream(void) { return std::cout; }
+  std::ofstream& log_stream(void) { return *m_logfile.get(); }
+  std::ostream& dbg_stream(void);
   /**
    * @brief Enable debugging for the ER server. For debugging purposes only.
    */
@@ -197,7 +198,7 @@ class server {
    */
   char* hostname(void) { return m_hostname; }
 
-  /**
+    /**
    * @brief Report a message. Messages may or not actually be printed/logged,
    * depending on the current level settings in the server/module.
    *
@@ -225,7 +226,7 @@ class server {
 
   std::vector<server_mod>           m_modules;
   std::string                       m_logfile_fname;  /// File to log events to.
-  std::ofstream                     m_logfile;        /// Logfile handle.
+  std::unique_ptr<std::ofstream>    m_logfile;        /// Logfile handle.
 
   /** Default log level for new modules */
   er_lvl::value                     m_loglvl_dflt;
@@ -235,6 +236,7 @@ class server {
 
   /** Generator for universally unique identifiers for modules */
   boost::uuids::uuid m_er_id;
+  boost::uuids::random_generator m_generator;
 };
 
 class global_server: public patterns::singleton<server>, public server {

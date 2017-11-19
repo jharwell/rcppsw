@@ -26,7 +26,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <iostream>
+#include <iosfwd>
 #include <string>
 #include <boost/uuid/uuid.hpp>
 #include "rcppsw/common/common.hpp"
