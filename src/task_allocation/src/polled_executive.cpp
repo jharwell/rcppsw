@@ -74,7 +74,10 @@ void polled_executive::run(void) {
                current->name().c_str(), current->parent()->name().c_str(),
                p->partition_prob());
       }
-
+      if (executive::task_abort_cleanup()) {
+        executive::task_abort_cleanup()(current);
+      }
+      current->task_reset();
       current = static_cast<polled_task*>(executive::get_next_task(current));
       new_task_start(current);
     } else {
