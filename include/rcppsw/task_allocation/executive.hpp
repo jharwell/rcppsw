@@ -42,7 +42,8 @@ class executive : public rcppsw::er::client {
  public:
   executive(const std::shared_ptr<rcppsw::er::server>& server,
             executable_task *const root) :
-      client(server), m_current_task(nullptr), m_root(root) {
+      client(server), m_current_task(nullptr),
+      m_task_abort_cleanup(nullptr), m_root(root) {
     client::insmod("task_executive",
                    rcppsw::er::er_lvl::DIAG,
                    rcppsw::er::er_lvl::NOM);
@@ -50,6 +51,15 @@ class executive : public rcppsw::er::client {
   virtual ~executive(void);
   virtual void run(void) = 0;
   executable_task* current_task(void) const { return m_current_task; }
+
+  /**
+   * @brief Set an optional callback that will be run when a task is aborted.
+   *
+   * The callback will be passed the task that was aborted, so if task-specific
+   * abort callbacks are needed, they can be implemented that way.
+   */
+  void task_abort_cleanup(std::function<void(executable_task* const)> cb) { m_task_abort_cleanup = cb; }
+  std::function<void(executable_task*const)> task_abort_cleanup(void) const { return m_task_abort_cleanup; }
 
  protected:
   executable_task* root(void) const { return m_root; }
@@ -62,6 +72,7 @@ class executive : public rcppsw::er::client {
   executive(const executive& other) = delete;
 
   executable_task* m_current_task;
+  std::function<void(executable_task* const)> m_task_abort_cleanup;
   executable_task* const m_root;
 };
 
