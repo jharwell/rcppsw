@@ -43,10 +43,11 @@ NS_START(rcppsw, task_allocation);
  */
 class polled_task : public executable_task, public taskable {
  public:
-  polled_task(const std::string& name, double estimate_alpha,
+  polled_task(const std::string& name,
+              const struct task_params* const params,
               std::unique_ptr<taskable>& mechanism,
               polled_task* const parent = nullptr) :
-      executable_task(name, estimate_alpha, parent),
+      executable_task(name, params, parent),
       m_mechanism(std::move(mechanism)) {}
   virtual ~polled_task(void);
 

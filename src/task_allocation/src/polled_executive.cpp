@@ -66,14 +66,18 @@ void polled_executive::run(void) {
     if (static_cast<double>(rand()) / RAND_MAX <= prob) {
       ER_NOM("Task '%s' aborted", current->name().c_str());
 
-      if (!current->is_atomic()) {
-        partitionable_task<polled_task, polled_task>* p =
-            dynamic_cast<partitionable_task<polled_task, polled_task>*>(current);
-        p->update_partition_prob();
-        ER_NOM("Partition probability of finished task '%s' (parent='%s'): %f\n",
-               current->name().c_str(), current->parent()->name().c_str(),
-               p->partition_prob());
+      partitionable_task<polled_task, polled_task>* p = nullptr;
+      if (current->is_partitionable()) {
+        p = dynamic_cast<partitionable_task<polled_task, polled_task>*>(current);
+      } else {
+        p = dynamic_cast<partitionable_task<polled_task, polled_task>*>(current->parent());
       }
+      p->update_partition_prob();
+
+      ER_NOM("Partition probability of finished task '%s' (parent='%s'): %f\n",
+             current->name().c_str(), current->parent()->name().c_str(),
+             p->partition_prob());
+
       if (executive::task_abort_cleanup()) {
         executive::task_abort_cleanup()(current);
       }

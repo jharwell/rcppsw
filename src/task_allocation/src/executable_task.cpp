@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/executable_task.hpp"
+#include "rcppsw/task_allocation/task_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -31,6 +32,25 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
+executable_task::executable_task(const std::string& name,
+                                 const struct task_params* const params,
+                executable_task* const parent) :
+    logical_task(name, parent),
+    m_is_atomic(false),
+    m_is_partitionable(false),
+    m_exec_time(0.0), m_start_time(),
+    m_estimate(params->estimation_alpha),
+    m_abort_prob(params->reactivity,
+                 params->proportionality_estimate,
+                 params->abort_offset) {}
+
+executable_task::executable_task(const executable_task& other) :
+    logical_task(other), m_is_atomic(false), m_is_partitionable(false),
+    m_exec_time(other.m_exec_time),
+    m_start_time(other.m_start_time),
+    m_estimate(other.m_estimate),
+    m_abort_prob(other.m_abort_prob) {}
+
 executable_task::~executable_task(void) {}
 
 NS_END(task_allocation, rcppsw);

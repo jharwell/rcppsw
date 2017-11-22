@@ -28,7 +28,6 @@
 #include "rcppsw/task_allocation/polled_task.hpp"
 #include "rcppsw/task_allocation/partitionable_task.hpp"
 #include "rcppsw/task_allocation/task_sequence.hpp"
-#include "rcppsw/task_allocation/abort_probability.hpp"
 #include "rcppsw/task_allocation/partition_probability.hpp"
 #include "rcppsw/task_allocation/task_params.hpp"
 
@@ -57,19 +56,10 @@ class partitionable_polled_task : public polled_task,
                             const struct task_params* const params,
                             std::unique_ptr<taskable>& mechanism,
                             polled_task* const parent = nullptr) :
-      polled_task(name, params->estimation_alpha, mechanism, parent),
+      polled_task(name, params, mechanism, parent),
       partitionable_task<T1, T2>(),
-      m_abort_prob(params->reactivity,
-                   params->proportionality_estimate,
-                   params->abort_offset),
       m_partition_prob(params->reactivity) {}
 
-  /**
-   * @brief Get the probability of aborting a partitionable task.
-   */
-  double calc_abort_prob(void) override {
-    return m_abort_prob.calc(this->exec_time(), this->current_time_estimate());
-  }
   double calc_partition_prob(void) override {
     return m_partition_prob.calc(this->current_time_estimate(),
                                  this->partition1()->current_time_estimate(),
@@ -78,7 +68,6 @@ class partitionable_polled_task : public polled_task,
 
 
  private:
-  abort_probability m_abort_prob;
   partition_probability m_partition_prob;
 };
 
