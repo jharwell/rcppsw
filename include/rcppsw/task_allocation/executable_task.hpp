@@ -27,11 +27,13 @@
 #include <string>
 #include "rcppsw/task_allocation/time_estimate.hpp"
 #include "rcppsw/task_allocation/logical_task.hpp"
+#include "rcppsw/task_allocation/abort_probability.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
+struct task_params;
 
 /*******************************************************************************
  * Class Definitions
@@ -48,16 +50,10 @@ NS_START(rcppsw, task_allocation);
  */
 class executable_task : public logical_task {
  public:
-  executable_task(const std::string& name, double estimate_alpha,
-                  executable_task* const parent = nullptr) :
-      logical_task(name, parent),
-      m_is_atomic(false), m_exec_time(0.0), m_start_time(),
-      m_estimate(estimate_alpha) {}
-
-  executable_task(const executable_task& other) :
-      logical_task(other), m_is_atomic(false), m_exec_time(other.m_exec_time),
-      m_start_time(other.m_start_time),
-      m_estimate(other.m_estimate) {}
+  executable_task(const std::string& name,
+                  const struct task_params* const params,
+                  executable_task* const parent = nullptr);
+  executable_task(const executable_task& other);
 
   virtual ~executable_task(void);
 
@@ -87,18 +83,23 @@ class executable_task : public logical_task {
   virtual void task_execute(void) = 0;
 
   /**
-   * @brief Calculate the probability of aborting this task.
+   * @brief Get the probability of aborting an executable task.
    */
-  virtual double calc_abort_prob(void) = 0;
+  double calc_abort_prob(void) {
+    return m_abort_prob.calc(this->exec_time(),
+                             this->current_time_estimate());
+  }
 
   /**
    * @brief Get the last execution time of the task.
    */
   double exec_time(void) const { return m_exec_time; }
 
-  virtual logical_task* partition(void) = 0;
+  virtual logical_task* partition(void) { return nullptr; }
   bool is_atomic(void) const { return m_is_atomic; }
   void set_atomic(void) { m_is_atomic = true; }
+  bool is_partitionable(void) const { return m_is_partitionable; }
+  void set_partitionable(void) { m_is_partitionable = true; }
 
   /**
    * @brief Calculate how long a "step" of task execution took.
@@ -126,9 +127,11 @@ class executable_task : public logical_task {
   executable_task& operator=(const executable_task& other) = delete;
 
   bool m_is_atomic;
+  bool m_is_partitionable;
   double m_exec_time;
   double m_start_time;
   time_estimate m_estimate;
+  abort_probability m_abort_prob;
 };
 
 NS_END(task_allocation, rcppsw);
