@@ -53,8 +53,8 @@ class pid_loop {
       m_dt(dt),
       m_min(min),
       m_max(max),
-      m_pre_error(0),
-      m_integral(0) {}
+      m_istate(0),
+      m_prev_error(0.0) {}
   ~pid_loop() {}
 
   /**
@@ -68,9 +68,8 @@ class pid_loop {
   double calculate(double setpoint, double pv);
   void min(double min) { m_min = min; }
   void max(double max) { m_max = max; }
-  void reset(void) { m_pre_error = 0.0; m_integral = 0.0; }
-  void reset_integral(void) { m_integral = 0.0; }
-  double integral(void) const { return m_integral; }
+  void reset(void) { m_istate = 0.0; }
+  double integral(void) const { return m_istate; }
   double dt(void) const { return m_dt; }
   void dt(double dt) { m_dt = dt; }
   double Kp(void) const { return m_Kp; }
@@ -87,8 +86,8 @@ class pid_loop {
   double m_dt;
   double m_min;
   double m_max;
-  double m_pre_error;
-  double m_integral;
+  double m_istate;
+  double m_prev_error;
 };
 
 NS_END(control, rcppsw);
