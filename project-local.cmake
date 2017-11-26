@@ -32,6 +32,7 @@ list(APPEND ${target}_SUBDIRS src/utils)
 list(APPEND ${target}_SUBDIRS src/patterns/state_machine)
 list(APPEND ${target}_SUBDIRS src/control)
 list(APPEND ${target}_SUBDIRS src/task_allocation)
+list(APPEND ${target}_SUBDIRS src/common)
 
 if (WITH_MPI)
   list(APPEND ${target}_SUBDIRS src/multiprocess)
@@ -46,6 +47,7 @@ add_library(${target}
   $<TARGET_OBJECTS:utils>
   $<TARGET_OBJECTS:state_machine>
   $<TARGET_OBJECTS:task_allocation>
+  $<TARGET_OBJECTS:common>
   $<TARGET_OBJECTS:control>)
 
 foreach(d ${${target}_SUBDIRS})
