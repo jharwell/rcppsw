@@ -76,13 +76,14 @@ class grid2D_ptr: public base_grid2D<T> {
    */
   grid_view<T*> subcircle(size_t x, size_t y, size_t radius) {
     index_range::index lower_x = static_cast<index_range::index>(
-        std::max(0UL, x - radius));
+        std::max(0, static_cast<int>(x - radius)));
     index_range::index lower_y = static_cast<index_range::index>(
-        std::max(0UL, y - radius));
+        std::max(0, static_cast<int>(y - radius)));
     index_range::index upper_x = static_cast<index_range::index>(
         std::min(x + radius + 1, base_grid2D<T>::xsize() - 1));
     index_range::index upper_y = static_cast<index_range::index>(
         std::min(y  + radius + 1, base_grid2D<T>::ysize() - 1));
+
     if (lower_x > upper_x) {
       lower_x = upper_x - 1;
     }
@@ -90,8 +91,9 @@ class grid2D_ptr: public base_grid2D<T> {
       lower_y = upper_y - 1;
     }
     typename grid_type<T*>::index_gen indices;
-    return grid_view<T*>(m_cells[indices[index_range(lower_x, upper_x, 1)]
-                                 [index_range(lower_y, upper_y, 1)]]);
+    index_range x_range(lower_x, upper_x, 1);
+    index_range y_range(lower_y, upper_y, 1);
+    return grid_view<T*>(m_cells[indices[x_range][y_range]]);
   }
   T& access(size_t i, size_t j) override {
     return *m_cells[static_cast<index_range::index>(i)][static_cast<index_range::index>(j)];
