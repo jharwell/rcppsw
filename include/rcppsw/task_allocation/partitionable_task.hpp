@@ -53,6 +53,7 @@ class partitionable_task {
                 "FATAL: template argument must be a logical task");
   static_assert(std::is_base_of<logical_task, T2>::value,
                 "FATAL: template argument must be a logical task");
+
  public:
   partitionable_task(void) : m_partition_prob(),
                              m_partition1(nullptr), m_partition2(nullptr) {}

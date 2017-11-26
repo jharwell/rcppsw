@@ -25,7 +25,6 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include <list>
 #include "rcppsw/task_allocation/time_estimate.hpp"
 #include "rcppsw/task_allocation/task_sequence.hpp"
 

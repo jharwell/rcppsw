@@ -45,14 +45,17 @@ void polled_executive::run(void) {
     current->update_exec_time();
     current->update_time_estimate(current->exec_time());
 
-    if (!current->is_atomic()) {
-      partitionable_task<polled_task, polled_task>* p =
-          dynamic_cast<partitionable_task<polled_task, polled_task>*>(current);
-      p->update_partition_prob();
-      ER_NOM("Partition probability of finished task '%s' (parent=%s): %f\n",
-             current->name().c_str(), current->parent()->name().c_str(),
-             p->partition_prob());
+    partitionable_task<polled_task, polled_task>* p = nullptr;
+    if (current->is_partitionable()) {
+      p = dynamic_cast<partitionable_task<polled_task, polled_task>*>(current);
+    } else {
+      p = dynamic_cast<partitionable_task<polled_task,
+                                          polled_task>*>(current->parent());
     }
+    p->update_partition_prob();
+    ER_NOM("Partition probability of finished task '%s' (parent=%s): %f\n",
+           current->name().c_str(), current->parent()->name().c_str(),
+           p->partition_prob());
 
     current = static_cast<polled_task*>(executive::get_next_task(current));
 
@@ -92,12 +95,12 @@ void polled_executive::run(void) {
 } /* run() */
 
 void polled_executive::new_task_start(polled_task* const new_task) {
+  ER_NOM("Starting new task '%s'", new_task->name().c_str());
+
   new_task->task_reset();
   new_task->task_start(nullptr);
   new_task->reset_exec_time();
   current_task(new_task);
-
-  ER_NOM("Started new task '%s'", new_task->name().c_str());
 } /* new_task_start() */
 
 NS_END(task_allocation, rcppsw);
