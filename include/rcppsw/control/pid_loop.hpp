@@ -35,14 +35,16 @@ NS_START(rcppsw, control);
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class pid_loop
+ *
  * @brief A simple PID loop class.
  *
- *  Kp -  proportional gain
- *  Ki -  Integral gain
- *  Kd -  derivative gain
- *  dt -  loop interval time
- *  max - maximum value of manipulated variable
- *  min - minimum value of manipulated variable
+ *  Kp -  proportional gain.
+ *  Ki -  Integral gain.
+ *  Kd -  Derivative gain.
+ *  dt -  Loop interval time (linear interpolation used).
+ *  max - Maximum value of manipulated variable and integral term.
+ *  min - Minimum value of manipulated variable and integral term.
  */
 class pid_loop {
  public:
@@ -63,7 +65,7 @@ class pid_loop {
    * @param setpoint Desired value of the manipulated variable.
    * @param pv Current value of the variable.
    *
-   * @return Correctional term (I think).
+   * @return Correctional term .
    */
   double calculate(double setpoint, double pv);
   void min(double min) { m_min = min; }

@@ -34,6 +34,10 @@ NS_START(rcppsw, common);
 /*******************************************************************************
  * Structure Definitions
  ******************************************************************************/
+/**
+ * @brief A stub base class for any and all parameter types that may need
+ * polymorphism or covariance.
+ */
 struct base_params {};
 
 NS_END(params, common);

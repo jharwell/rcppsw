@@ -45,6 +45,8 @@ class er_lvl {
 };
 
 /**
+ * @class server_mod
+ *
  * @brief Representation of a module within the ER framework.
  */
 class server_mod {

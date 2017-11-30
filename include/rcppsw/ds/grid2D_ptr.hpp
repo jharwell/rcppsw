@@ -39,9 +39,6 @@ NS_START(rcppsw, ds);
  *
  * @brief A 2D logical grid that is overlayed over a continuous environment. It
  * discretizes the continuous arena into a grid of a specified resolution.
- *
- * Whatever the template type is must have a zero parameter constructor
- * available.
  */
 template<typename T, typename ...Args>
 class grid2D_ptr: public base_grid2D<T> {
@@ -75,24 +72,9 @@ class grid2D_ptr: public base_grid2D<T> {
    * @return The subcircle.
    */
   grid_view<T*> subcircle(size_t x, size_t y, size_t radius) {
-    index_range::index lower_x = static_cast<index_range::index>(
-        std::max(0, static_cast<int>(x - radius)));
-    index_range::index lower_y = static_cast<index_range::index>(
-        std::max(0, static_cast<int>(y - radius)));
-    index_range::index upper_x = static_cast<index_range::index>(
-        std::min(x + radius + 1, base_grid2D<T>::xsize() - 1));
-    index_range::index upper_y = static_cast<index_range::index>(
-        std::min(y  + radius + 1, base_grid2D<T>::ysize() - 1));
-
-    if (lower_x > upper_x) {
-      lower_x = upper_x - 1;
-    }
-    if (lower_y > upper_y) {
-      lower_y = upper_y - 1;
-    }
-    typename grid_type<T*>::index_gen indices;
-    index_range x_range(lower_x, upper_x, 1);
-    index_range y_range(lower_y, upper_y, 1);
+    auto x_range = base_grid2D<T>::xrange(x, radius);
+    auto y_range = base_grid2D<T>::yrange(y, radius);
+    typename grid_type<T>::index_gen indices;
     return grid_view<T*>(m_cells[indices[x_range][y_range]]);
   }
   T& access(size_t i, size_t j) override {
