@@ -75,7 +75,10 @@ class grid2D_ptr: public base_grid2D<T> {
     auto x_range = base_grid2D<T>::xrange(x, radius);
     auto y_range = base_grid2D<T>::yrange(y, radius);
     typename grid_type<T>::index_gen indices;
-    return grid_view<T*>(m_cells[indices[x_range][y_range]]);
+
+    index_range x1(x_range.first, x_range.second, 1);
+    index_range y1(y_range.first, y_range.second, 1);
+    return grid_view<T*>(m_cells[indices[x1][y1]]);
   }
   T& access(size_t i, size_t j) override {
     return *m_cells[static_cast<index_range::index>(i)][static_cast<index_range::index>(j)];
