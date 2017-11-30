@@ -23,6 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/task_allocation/partitionable_task.hpp"
 #include "rcppsw/task_allocation/task_params.hpp"
+#include "rcppsw/task_allocation/executable_task.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -34,10 +35,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 partitionable_task::partitionable_task(
     const std::shared_ptr<er::server>& server,
-    const std::string& name,
-    const struct partitionable_task_params* const params,
-    executable_task* const parent):
-    executable_task(name, params, parent),
+    const struct partitionable_task_params* const params):
     client(server),
     m_selection_method(params->subtask_selection_method),
     m_partition1(nullptr),
@@ -56,7 +54,8 @@ partitionable_task::partitionable_task(
  * Member Functions
  ******************************************************************************/
 executable_task* partitionable_task::partition(void) {
-  ER_NOM("Task '%s': partition_prob=%f, selection_method=%s", name().c_str(),
+  ER_NOM("Task '%s': partition_prob=%f, selection_method=%s",
+         m_partition1->parent()->name().c_str(),
          m_partition_prob.last_result(), m_selection_method.c_str());
   /* We chose not to employ partitioning on the next task allocation */
   if (m_partition_prob.last_result() <= static_cast<double>(rand()) / RAND_MAX) {
@@ -106,11 +105,5 @@ executable_task* partitionable_task::partition(void) {
   ER_NOM("Selected subtask '%s'", ret->name().c_str());
   return ret;
 } /* partition() */
-
-void partitionable_task::init_random(uint lb, uint ub) {
-  executable_task::update_time_estimate(rand() % (ub - lb + 1) + lb);
-  m_partition1->update_time_estimate(rand() % (ub - lb + 1) + lb);
-  m_partition2->update_time_estimate(rand() % (ub - lb + 1) + lb);
-} /* init_random() */
 
 NS_END(task_allocation, rcppsw);

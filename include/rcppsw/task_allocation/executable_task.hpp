@@ -95,7 +95,7 @@ class executable_task : public logical_task {
    */
   double exec_time(void) const { return m_exec_time; }
 
-  virtual logical_task* partition(void) { return nullptr; }
+  virtual executable_task* partition(void) { return nullptr; }
   bool is_atomic(void) const { return m_is_atomic; }
   void set_atomic(void) { m_is_atomic = true; }
   bool is_partitionable(void) const { return m_is_partitionable; }

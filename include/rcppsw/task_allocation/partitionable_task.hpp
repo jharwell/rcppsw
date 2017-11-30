@@ -25,7 +25,6 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/task_allocation/executable_task.hpp"
 #include "rcppsw/task_allocation/partition_probability.hpp"
 #include "rcppsw/task_allocation/subtask_selection_probability.hpp"
 #include "rcppsw/er/client.hpp"
@@ -35,6 +34,8 @@
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 
+class executable_task;
+
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
@@ -42,24 +43,22 @@ NS_START(rcppsw, task_allocation);
  * @brief A task that is capable of being partitioned into two subtasks that
  * when executed in sequence have the sum effect as the parent task.
  */
-class partitionable_task : public executable_task,
-                           public er::client {
+class partitionable_task : public er::client {
  public:
   partitionable_task(const std::shared_ptr<er::server>& server,
-                     const std::string& name,
-                     const struct partitionable_task_params* const params,
-                     executable_task* const parent);
+                     const struct partitionable_task_params* const params);
+
   virtual ~partitionable_task(void) {}
 
-  void init_random(uint lb, uint ub);
-  executable_task* partition(void) override;
+  executable_task* partition(void);
   double partition_prob(void) const { return m_partition_prob.last_result(); }
+  void last_partition(executable_task* last_partition) { m_last_partition = last_partition; }
 
-  const executable_task* partition1(void) const { return m_partition1; }
-  const executable_task* partition2(void) const { return m_partition2; }
+ protected:
+  executable_task* partition1(void) const { return m_partition1; }
+  executable_task* partition2(void) const { return m_partition2; }
   void partition1(executable_task* partition1) { m_partition1 = partition1; }
   void partition2(executable_task* partition2) { m_partition2 = partition2; }
-  void last_partition(executable_task* last_partition) { m_last_partition = last_partition; }
 
  private:
   partitionable_task(const partitionable_task& other) = delete;
