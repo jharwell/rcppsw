@@ -24,7 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <assert.h>
 #include "rcppsw/patterns/state_machine/state_exit.hpp"
 #include "rcppsw/patterns/state_machine/event.hpp"
 #include "rcppsw/common/common.hpp"
