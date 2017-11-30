@@ -131,6 +131,12 @@ class global_server;
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class client
+ *
+ * @brief A class that can connect to a \ref server for logging of important
+ * events.
+ */
 class client {
  public:
   client(void);
@@ -200,7 +206,7 @@ class client {
 
  private:
   std::shared_ptr<server> m_server_handle;
-  boost::uuids::uuid m_er_id;
+  boost::uuids::uuid      m_er_id;
 };
 
 

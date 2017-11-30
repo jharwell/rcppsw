@@ -39,6 +39,12 @@ NS_START(rcppsw, er);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class mt_server
+ *
+ * @brief A multithreaded version of the \ref server for logging/printing
+ * events.
+ */
 class mt_server : public server, public multithread::threadable {
  public:
   /**

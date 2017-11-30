@@ -43,6 +43,12 @@ NS_START(rcppsw, er);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class server
+ *
+ * @brief Logging server allowing for run-tim module installation/removal for
+ * fine-grained control over debugging output.
+ */
 class server {
  public:
   /**

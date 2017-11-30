@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <algorithm>
+#include <utility>
 #include <boost/multi_array.hpp>
 #include "rcppsw/common/common.hpp"
 
@@ -76,6 +77,31 @@ class base_grid2D {
    */
   size_t ysize(void) const {
     return static_cast<size_t>(std::ceil(m_y_max / m_resolution)); }
+
+  std::pair<index_range::index,
+            index_range::index> xrange(size_t x, size_t radius) {
+    index_range::index lower_x = static_cast<index_range::index>(
+        std::max(0UL, x - radius));
+    index_range::index upper_x = static_cast<index_range::index>(
+        std::min(x + radius + 1, xsize() - 1));
+    if (lower_x > upper_x) {
+      lower_x = upper_x - 1;
+    }
+    return std::pair<index_range::index, index_range::index>(lower_x,
+                                                             upper_x);
+  }
+  std::pair<index_range::index,
+            index_range::index> yrange(size_t y, size_t radius) {
+    index_range::index lower_y = static_cast<index_range::index>(
+        std::max(0UL, y - radius));
+    index_range::index upper_y = static_cast<index_range::index>(
+        std::min(y + radius + 1, ysize() - 1));
+    if (lower_y > upper_y) {
+      lower_y = upper_y - 1;
+    }
+    return std::pair<index_range::index, index_range::index>(lower_y,
+                                                             upper_y);
+  }
 
  private:
   double m_resolution;

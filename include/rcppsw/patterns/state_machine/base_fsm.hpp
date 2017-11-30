@@ -47,7 +47,6 @@ NS_START(rcppsw, patterns, state_machine);
  ******************************************************************************/
 /**
  * @brief base_fsm implements a software-based state machine.
- *
  */
 class base_fsm: public er::client {
  public:

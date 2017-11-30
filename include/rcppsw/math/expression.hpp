@@ -35,7 +35,10 @@ NS_START(rcppsw, math);
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief A base class for easy swapping/manipulating of mathematical expressions.
+ * @class expression
+ *
+ * @brief A base class for easy swapping/manipulating of mathematical
+ * expressions.
  */
 template<typename T>
 class expression {

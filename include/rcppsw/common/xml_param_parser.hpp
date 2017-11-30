@@ -38,13 +38,31 @@ struct base_params;
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class xml_param_parser
+ *
+ * @brief Interface specifying functionality for parsing XML into a
+ * \ref base_params parameter structure.
+ */
 class xml_param_parser {
  public:
   xml_param_parser(void) {}
   virtual ~xml_param_parser(void) {}
 
+  /**
+   * @brief Parser the provided XML node into an internal representation.
+   */
   virtual void parse(ticpp::Element&) = 0;
+
+  /**
+   * @brief Dump the parsed (or possibly unparsed, but that's kind of useless)
+   * parameters to the specified stream.
+   */
   virtual void show(std::ostream& stream) = 0;
+
+  /**
+   * @brief Get the results of an XML parameter parse.
+   */
   virtual const struct base_params* get_results(void) = 0;
 };
 
