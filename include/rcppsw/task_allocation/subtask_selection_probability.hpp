@@ -54,12 +54,14 @@ NS_START(rcppsw, task_allocation);
  *
  * - 0 < reactivity < 1.
  * - offset > 1.
+ * - 0 < gamma < 1.
  *
  */
 class subtask_selection_probability: public rcppsw::math::expression<double> {
  public:
-  explicit subtask_selection_probability(double reactivity, double offset) :
-      m_reactivity(reactivity), m_offset(offset) {}
+  explicit subtask_selection_probability(double reactivity, double offset,
+                                         double gamma) :
+      m_reactivity(reactivity), m_offset(offset), m_gamma(gamma) {}
 
   double calc(const time_estimate& subtask1,
               const time_estimate& subtask2);
@@ -67,6 +69,7 @@ class subtask_selection_probability: public rcppsw::math::expression<double> {
  private:
   double m_reactivity;
   double m_offset;
+  double m_gamma;
 };
 
 NS_END(task_allocation, rcppsw);
