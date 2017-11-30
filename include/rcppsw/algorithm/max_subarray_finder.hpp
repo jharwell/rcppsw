@@ -18,36 +18,36 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MAX_SUBARRAY_FINDER_HPP_
-#define INCLUDE_RCPPSW_MAX_SUBARRAY_FINDER_HPP_
+#ifndef INCLUDE_RCPPSW_ALGORITHM_MAX_SUBARRAY_FINDER_HPP_
+#define INCLUDE_RCPPSW_ALGORITHM_MAX_SUBARRAY_FINDER_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <algorithm>
 #include <vector>
-#include "rcppsw/include/al/altypes.h"
-#include "rcppsw/include/common/fpc.h"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace rcppsw {
-
-/*******************************************************************************
- * Structure Definitions
- ******************************************************************************/
+NS_START(rcppsw, algorithm);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class max_subarray_finder
+ *
+ * @brief Find the maximal subarray using Kadane's algorithm, which is O(n).
+ */
 template <typename T>
 class max_subarray_finder {
  public:
-  max_subarray_finder(const std::vector<T>& arr) : arr_(arr) {}
+  explicit max_subarray_finder(const std::vector<T>& arr) : arr_(arr) {}
 
   /**
-   * @brief Find the maximal subarray using Kadane's algorithm, which is O(n).
+   * @brief Find the maximal subarray.
    *
    * @param res The maximal subarray, to be filled.
    *
@@ -82,6 +82,6 @@ class max_subarray_finder {
   const std::vector<T>& arr_;
 };
 
-} /* namespace rcppsw */
+NS_END(algorithm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MAX_SUBARRAY_FINDER_HPP_ */
+#endif /* INCLUDE_RCPPSW_ALGORITHM_MAX_SUBARRAY_FINDER_HPP_ */

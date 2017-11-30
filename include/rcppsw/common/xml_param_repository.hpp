@@ -41,22 +41,42 @@ namespace factory = rcppsw::patterns::factory;
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class xml_param_repository
+ *
+ * @brief A repository for multiple \ref xml_param_parser and their parsed
+ * results.
+ *
+ * Utilizes factory pattern for parser creation. Does not create any parsers on
+ * its own--derived classes have to do that.
+ */
 class xml_param_repository {
  public:
   xml_param_repository(void) : m_parsers(), m_factory() {}
 
-  void parse_all(ticpp::Element&);
+  /**
+   * @brief Call the \ref xml_param_parser::parse_all() function on all parsers
+   * in the repository, passing all parsers the same XML node.
+   */
+  void parse_all(ticpp::Element& node);
+
+  /**
+   * @brief Get the parsed parameters associated with the named parser.
+   */
   const struct base_params* get_params(const std::string& name) {
     return m_parsers[name]->get_results();
   }
+
+  /**
+   * @brief Dump all parsed (or unparsed, but that would be useless) parameters
+   * to the specified stream.
+   */
   void show_all(std::ostream& stream);
 
- protected:
-  factory::sharing_factory<xml_param_parser>& factory(void) {
-    return m_factory;
-  }
-  std::map<std::string, xml_param_parser*>& parsers(void) {
-    return m_parsers;
+  template<typename T>
+  void register_parser(const std::string& name) {
+    m_factory.register_type<T>(name);
+    m_parsers[name] = m_factory.create(name).get();
   }
 
  private:

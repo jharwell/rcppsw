@@ -35,6 +35,8 @@ NS_START(rcppsw, patterns, decorator);
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class decorator
+ *
  * @brief The base class for the object decorator design pattern.
  *
  * D - The type of the decorated object.

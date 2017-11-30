@@ -41,7 +41,7 @@ double pid_loop::calculate(double setpoint, double pv) {
   // Integral state
   m_istate += error * m_dt;
 
-  // Restrict to integral max/min
+  // Restrict integral max/min
   m_istate = std::min(m_istate, m_max);
   m_istate = std::max(m_istate, m_min);
 
