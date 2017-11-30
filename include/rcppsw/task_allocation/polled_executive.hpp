@@ -45,6 +45,8 @@ class polled_executive : public executive {
  private:
   void new_task_start(class polled_task* const new_task);
   double task_partition_prob(const executable_task* const task);
+  void handle_task_abort(class polled_task* task);
+  void handle_task_finish(class polled_task* task);
 };
 
 NS_END(task_allocation, rcppsw);
