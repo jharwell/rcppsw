@@ -53,12 +53,12 @@ class partitionable_task : public er::client {
   executable_task* partition(void);
   double partition_prob(void) const { return m_partition_prob.last_result(); }
   void last_partition(executable_task* last_partition) { m_last_partition = last_partition; }
+  void partition1(executable_task* partition1) { m_partition1 = partition1; }
+  void partition2(executable_task* partition2) { m_partition2 = partition2; }
 
  protected:
   executable_task* partition1(void) const { return m_partition1; }
   executable_task* partition2(void) const { return m_partition2; }
-  void partition1(executable_task* partition1) { m_partition1 = partition1; }
-  void partition2(executable_task* partition2) { m_partition2 = partition2; }
 
  private:
   partitionable_task(const partitionable_task& other) = delete;
