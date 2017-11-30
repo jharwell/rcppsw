@@ -1,5 +1,5 @@
 /**
- * @file partition_probability.cpp
+ * @file subtask_selection_probability.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -21,7 +21,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/partition_probability.hpp"
+#include "rcppsw/task_allocation/subtask_selection_probability.hpp"
 #include <cmath>
 
 /*******************************************************************************
@@ -32,30 +32,29 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-double partition_probability::calc(const time_estimate& task,
-                                   const time_estimate& subtask1,
-                                   const time_estimate& subtask2) {
+double subtask_selection_probability::calc(const time_estimate& subtask1,
+                                           const time_estimate& subtask2) {
   /*
-   * If we do not have samples from the task(s) denominator for either case,
-   * then we artificially set that term to 0, which yields an exponent of 0, and
-   * hence a partition probility of 0.5 (Hence the 2.0).
+   * No information available--just pick randomly.
    */
-  double tmp = 2.0;
-  if (task > subtask1 + subtask2) {
-    if ((subtask1 + subtask2).last_result() > 0) {
-      tmp = 1 + std::exp(
-          (-m_reactivity * ((task /
-                             (subtask1 + subtask2)) - 1.0)).last_result());
-    }
-    return set_result(1/tmp);
-  } else {
-    if (task.last_result() > 0) {
-    tmp = -m_reactivity * (1.0 -
-                           ((subtask1 + subtask2) / task).last_result());
-    tmp = 1.0 + std::exp(tmp);
-    }
-    return set_result(1.0/tmp);
+  if (!(subtask1.last_result() > 0 &&
+        subtask2.last_result() > 0)) {
+    return 0.5;
+  } else if (!(subtask1.last_result() > 0)) { /* have info on subtask2 only */
+    return 0.0;
+  } else if (!(subtask2.last_result() > 0)) { /* have info on subtask1 only */
+    return 1.0;
   }
+
+  double r_ss = 0;
+  if (subtask1 > subtask2) {
+    r_ss = std::pow(subtask1.last_result(), 2) / subtask2.last_result();
+  } else {
+    r_ss = subtask1.last_result();
+  }
+
+  double tmp = m_reactivity * (subtask1.last_result()/r_ss - m_offset);
+  return 1.0/(1 + exp(-tmp));
 } /* calc() */
 
 NS_END(task_allocation, rcppsw);
