@@ -54,7 +54,7 @@ double subtask_selection_probability::calc(const time_estimate& subtask1,
   }
 
   double tmp = m_reactivity * (subtask1.last_result()/r_ss - m_offset);
-  return 1.0/(1 + exp(-tmp));
+  return 1.0/(1 + exp(-tmp)) * m_gamma;
 } /* calc() */
 
 NS_END(task_allocation, rcppsw);
