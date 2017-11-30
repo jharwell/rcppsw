@@ -219,7 +219,7 @@ class client {
  * through unrelated constructors until you get to the class you actually want
  * to enable debug printing/logging for.
  */
-extern std::shared_ptr<global_server> g_server;
+extern std::shared_ptr<rcppsw::er::global_server> g_server;
 
 /*******************************************************************************
  * Forward Declarations

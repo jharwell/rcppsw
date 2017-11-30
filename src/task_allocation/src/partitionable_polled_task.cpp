@@ -38,6 +38,12 @@ partitionable_polled_task::partitionable_polled_task(const std::shared_ptr<er::s
                                                      std::unique_ptr<taskable>& mechanism,
                                                      polled_task* const parent) :
     polled_task(name, params, mechanism, parent),
-    partitionable_task(server, name, params, parent) {}
+    partitionable_task(server, params) {}
+
+void partitionable_polled_task::init_random(uint lb, uint ub) {
+  executable_task::update_time_estimate(rand() % (ub - lb + 1) + lb);
+  partition1()->update_time_estimate(rand() % (ub - lb + 1) + lb);
+  partition2()->update_time_estimate(rand() % (ub - lb + 1) + lb);
+} /* init_random() */
 
 NS_END(task_allocation, rcppsw);
