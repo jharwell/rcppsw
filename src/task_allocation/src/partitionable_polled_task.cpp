@@ -1,5 +1,5 @@
 /**
- * @file partitionable_polled_task.hpp
+ * @file partitionable_polled_task.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,38 +18,26 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITIONABLE_POLLED_TASK_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITIONABLE_POLLED_TASK_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/task_allocation/polled_task.hpp"
-#include "rcppsw/task_allocation/partitionable_task.hpp"
+#include "rcppsw/task_allocation/partitionable_polled_task.hpp"
+#include "rcppsw/task_allocation/task_params.hpp"
 
 /*******************************************************************************
- * Namespacesp
+ * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Class Definitions
+ * Constructors/Destructor
  ******************************************************************************/
-/**
- * @brief A \ref partitionable_task whose execution is polled periodically by
- * the user to see if it has finished yet.
- */
-class partitionable_polled_task : public polled_task,
-                                  public partitionable_task {
- public:
-  partitionable_polled_task(const std::shared_ptr<er::server>& server,
-                            const std::string& name,
-                            const struct partitionable_task_params* const params,
-                            std::unique_ptr<taskable>& mechanism,
-                            polled_task* const parent);
-};
+partitionable_polled_task::partitionable_polled_task(const std::shared_ptr<er::server>& server,
+                                                     const std::string& name,
+                                                     const struct partitionable_task_params* const params,
+                                                     std::unique_ptr<taskable>& mechanism,
+                                                     polled_task* const parent) :
+    polled_task(name, params, mechanism, parent),
+    partitionable_task(server, name, params, parent) {}
 
 NS_END(task_allocation, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITIONABLE_POLLED_TASK_HPP_ */

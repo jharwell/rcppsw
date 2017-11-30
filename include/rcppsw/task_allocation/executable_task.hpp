@@ -52,7 +52,7 @@ class executable_task : public logical_task {
  public:
   executable_task(const std::string& name,
                   const struct task_params* const params,
-                  executable_task* const parent = nullptr);
+                  executable_task* const parent);
   executable_task(const executable_task& other);
 
   virtual ~executable_task(void);
