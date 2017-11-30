@@ -39,7 +39,7 @@ NS_START(rcppsw, task_allocation);
  * @brief Calculates the probability that a robot partitions its current task
  * using the negative exponential distribution.
  *
- * Reactivity is assumed to be < 0.
+ * Reactivity is assumed to be > 0.
  *
  * Depends on:
  *

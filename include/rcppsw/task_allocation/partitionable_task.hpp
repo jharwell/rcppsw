@@ -61,6 +61,8 @@ class partitionable_task {
 
   virtual double calc_partition_prob(void) = 0;
 
+  void init_random(uint lb, uint ub);
+
   void update_partition_prob(void) { m_partition_prob = calc_partition_prob(); }
   logical_task* partition(void) {
     /* we are going to partition, so pick one of the two subtasks randomly */

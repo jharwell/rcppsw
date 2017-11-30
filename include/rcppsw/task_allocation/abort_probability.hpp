@@ -44,7 +44,7 @@ NS_START(rcppsw, task_allocation);
  * Depends on:
  *
  * - The reactivity parameter: How sensitive should robots be to abrupt changes
- *   in task estimates/execution times.
+ *   in task estimates/execution times?
  * - The proportionality parameter: What should the current_exec/prev_estimate
  *   ratio be assumed to be when the robot does not any estimates of the task's
  *   execution time (i.e. it is executing the task for the first time).
