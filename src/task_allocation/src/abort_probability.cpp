@@ -38,10 +38,10 @@ double abort_probability::calc(double exec_time,
   if (!(whole_task.last_result() > 0)) {
     omega = -m_reactivity * m_proportionality;
   } else {
-    if (exec_time/whole_task.last_result() <= -m_offset) {
-      omega = -m_reactivity * (exec_time/whole_task.last_result() + m_offset);
+    if (exec_time/whole_task.last_result() <= m_offset) {
+      omega = -m_reactivity * (exec_time/whole_task.last_result() - m_offset);
     } else {
-      omega = -m_reactivity * (-m_offset - exec_time/whole_task.last_result());
+      omega = -m_reactivity * (m_offset - exec_time/whole_task.last_result());
     }
   }
   return set_result(1 - std::exp(-omega));

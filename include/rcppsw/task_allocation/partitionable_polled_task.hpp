@@ -58,7 +58,8 @@ class partitionable_polled_task : public polled_task,
                             polled_task* const parent = nullptr) :
       polled_task(name, params, mechanism, parent),
       partitionable_task<T1, T2>(),
-      m_partition_prob(params->reactivity) {}
+      m_partition_prob(params->reactivity) {
+  }
 
   double calc_partition_prob(void) override {
     return m_partition_prob.calc(this->current_time_estimate(),
@@ -66,6 +67,11 @@ class partitionable_polled_task : public polled_task,
                                  this->partition2()->current_time_estimate());
   }
 
+  void init_random(uint lb, uint ub) {
+    this->current_time_estimate.set_result(rand() % (ub - lb + 1) + lb);
+    this->partition1.current_time_estimate.set_result(rand() % (ub - lb + 1) + lb);
+    this->partition1.current_time_estimate.set_result(rand() % (ub - lb + 1) + lb);
+  }
 
  private:
   partition_probability m_partition_prob;
