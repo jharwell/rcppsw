@@ -1,5 +1,5 @@
 /**
- * @file partition_probability.hpp
+ * @file subtask_selection_probability.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITION_PROBABILITY_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITION_PROBABILITY_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_PROBABILITY_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_PROBABILITY_HPP_
 
 /*******************************************************************************
  * Includes
@@ -36,33 +36,39 @@ NS_START(rcppsw, task_allocation);
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief Calculates the probability that a robot partitions its current task
- * using the negative exponential distribution.
+ * @brief Calculates the probability that a robot selects subtask 2 when it has
+ * most recently executed subtask 1 (assuming partitioning is employed).
  *
- * Reactivity is assumed to be > 0.
+ * Taken/adapted from Brutschy2014.
  *
  * Depends on:
  *
  * - The robot's time estimates of how long it takes to complete each of the two
- *   subtasks, as well as an estimate of how long it takes to complete the
- *   unpartitioned task.
+ *   subtasks
  *
- * - The reactivity parameter: how sensitive should robots be to abrupt changes
- *   in the estimates?
+ * - The reactivity parameter: how quickly should the increase in selection
+ *   probability be for an increasing difference between subtask time estimates.
+ *
+ * - The offset parameter: how quickly should robots react to an increasing
+ *   difference between subtask time estimates?
+ *
+ * - 0 < reactivity < 1.
+ * - offset > 1.
+ *
  */
-class partition_probability: public rcppsw::math::expression<double> {
+class subtask_selection_probability: public rcppsw::math::expression<double> {
  public:
-  explicit partition_probability(double reactivity) :
-      m_reactivity(reactivity) {}
+  explicit subtask_selection_probability(double reactivity, double offset) :
+      m_reactivity(reactivity), m_offset(offset) {}
 
-  double calc(const time_estimate& task,
-              const time_estimate& subtask1,
+  double calc(const time_estimate& subtask1,
               const time_estimate& subtask2);
 
  private:
   double m_reactivity;
+  double m_offset;
 };
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITION_PROBABILITY_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_PROBABILITY_HPP_ */
