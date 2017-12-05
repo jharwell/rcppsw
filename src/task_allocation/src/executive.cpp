@@ -69,11 +69,11 @@ executable_task* executive::get_next_task(executable_task* last_task) {
   }
 } /* get_next_task() */
 
-double executive::task_abort_prob(const executable_task* const task) {
+double executive::task_abort_prob(executable_task* const task) {
   if (task->is_atomic()) {
     return 0.0;
   } else {
-    return static_cast<executable_task*>(task->parent())->calc_abort_prob();
+    return task->calc_abort_prob();
   }
 } /* task_abort_prob() */
 

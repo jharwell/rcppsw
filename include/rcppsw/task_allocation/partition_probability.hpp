@@ -24,6 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+
 #include "rcppsw/math/expression.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
 
@@ -52,14 +54,22 @@ NS_START(rcppsw, task_allocation);
  */
 class partition_probability: public rcppsw::math::expression<double> {
  public:
-  explicit partition_probability(double reactivity) :
-      m_reactivity(reactivity) {}
+  explicit partition_probability(const std::string& method,
+                                 double reactivity) :
+      mc_method(method), m_reactivity(reactivity) {}
 
   double calc(const time_estimate& task,
               const time_estimate& subtask1,
               const time_estimate& subtask2);
 
+  const std::string& method(void) const { return mc_method; }
+
  private:
+  double calc_pini2011(const time_estimate& task,
+                       const time_estimate& subtask1,
+                       const time_estimate& subtask2);
+
+  const std::string mc_method;
   double m_reactivity;
 };
 
