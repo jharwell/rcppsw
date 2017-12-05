@@ -35,7 +35,20 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 void polled_executive::run(void) {
   if (nullptr == executive::current_task()) {
-    new_task_start(static_cast<polled_task*>(executive::get_next_task(nullptr)));
+    /*
+     * When starting a partitionable task for the first time, we need to update
+     * its partition probability so that if the task (or any of its children)
+     * have not been executed before, we get a partition probability of 0.5,
+     * rather than the 0 we get if we do not do this.
+     */
+    if (executive::root()->is_partitionable()) {
+      partitionable_polled_task* p = dynamic_cast<partitionable_polled_task*>(executive::root());
+      p->update_partition_prob(p->exec_estimate(),
+                               p->partition1()->exec_estimate(),
+                               p->partition1()->exec_estimate());
+    }
+
+    handle_task_start(static_cast<polled_task*>(executive::get_next_task(nullptr)));
   }
   polled_task* current = dynamic_cast<polled_task*>(executive::current_task());
   ER_ASSERT(current, "FATAL: polled_executive can only work with polled tasks");
@@ -54,46 +67,70 @@ void polled_executive::run(void) {
     } else {
       current->task_execute();
       current->update_exec_time();
+      current->update_interface_time();
     }
   }
 } /* run() */
 
 void polled_executive::handle_task_abort(polled_task* task) {
+  task->update_exec_time();
+  task->update_exec_estimate(task->exec_time());
+  task->reset_exec_time();
+  task->update_exec_time();
+  task->reset_interface_time();
+  task->update_interface_time();
+
+  partitionable_polled_task* p = nullptr;
   if (!task->is_partitionable()) {
-    partitionable_task* p  = dynamic_cast<partitionable_task*>(task->parent());
+    p = dynamic_cast<partitionable_polled_task*>(task->parent());
     p->last_partition(task);
+  } else {
+    p = dynamic_cast<partitionable_polled_task*>(task);
   }
+  p->update_partition_prob(p->exec_estimate(),
+                           p->partition1()->exec_estimate(),
+                           p->partition2()->exec_estimate());
 
   if (executive::task_abort_cleanup()) {
     executive::task_abort_cleanup()(task);
   }
   task->task_reset();
   task = static_cast<polled_task*>(executive::get_next_task(task));
-  new_task_start(task);
+  handle_task_start(task);
 } /* handle_task_abort() */
 
 void polled_executive::handle_task_finish(polled_task* task) {
   task->update_exec_time();
-  task->update_time_estimate(task->exec_time());
+  task->update_exec_estimate(task->exec_time());
+  task->reset_exec_time();
+  task->update_exec_time();
+  task->reset_interface_time();
+  task->update_interface_time();
 
+  partitionable_polled_task* p = nullptr;
   if (!task->is_partitionable()) {
-    partitionable_task* p = dynamic_cast<partitionable_task*>(task->parent());
+    p = dynamic_cast<partitionable_polled_task*>(task->parent());
     p->last_partition(task);
+  } else {
+    p = dynamic_cast<partitionable_polled_task*>(task);
   }
+  p->update_partition_prob(p->exec_estimate(),
+                           p->partition1()->exec_estimate(),
+                           p->partition2()->exec_estimate());
 
   task = static_cast<polled_task*>(executive::get_next_task(task));
 
-  new_task_start(task);
+  handle_task_start(task);
   task->task_execute();
 } /* handle_task_finish() */
 
-void polled_executive::new_task_start(polled_task* const new_task) {
+void polled_executive::handle_task_start(polled_task* const new_task) {
   ER_NOM("Starting new task '%s'", new_task->name().c_str());
 
   new_task->task_reset();
   new_task->task_start(nullptr);
   new_task->reset_exec_time();
   current_task(new_task);
-} /* new_task_start() */
+} /* handle_task_start() */
 
 NS_END(task_allocation, rcppsw);

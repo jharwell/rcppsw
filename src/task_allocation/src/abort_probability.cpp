@@ -34,17 +34,18 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 double abort_probability::calc(double exec_time,
                                const time_estimate& whole_task) {
-  double omega;
+  double omega_ta;
   if (!(whole_task.last_result() > 0)) {
-    omega = -m_reactivity * m_proportionality;
-  } else {
-    if (exec_time/whole_task.last_result() <= m_offset) {
-      omega = -m_reactivity * (exec_time/whole_task.last_result() - m_offset);
-    } else {
-      omega = -m_reactivity * (m_offset - exec_time/whole_task.last_result());
-    }
+    return set_result(0.001);
   }
-  return set_result(1 - std::exp(-omega));
+
+  if (exec_time/whole_task.last_result() <= m_offset) {
+    omega_ta = m_reactivity * (m_offset - exec_time/whole_task.last_result());
+    return set_result(1.0 - 1.0/(1 + std::exp(-omega_ta)));
+  } else {
+    omega_ta = m_reactivity * (exec_time/whole_task.last_result() - m_offset);
+    return set_result(1.0/(1 + std::exp(-omega_ta)));
+  }
 } /* calc() */
 
 NS_END(task_allocation, rcppsw);

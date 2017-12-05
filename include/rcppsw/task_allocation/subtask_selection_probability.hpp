@@ -24,6 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+
 #include "rcppsw/math/expression.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
 
@@ -59,14 +61,21 @@ NS_START(rcppsw, task_allocation);
  */
 class subtask_selection_probability: public rcppsw::math::expression<double> {
  public:
-  explicit subtask_selection_probability(double reactivity, double offset,
-                                         double gamma) :
-      m_reactivity(reactivity), m_offset(offset), m_gamma(gamma) {}
+  subtask_selection_probability(const std::string& method) :
+      mc_method(method), m_reactivity(0), m_offset(0), m_gamma(0) {}
 
+  void init_brutschy2014(double reactivity, double offset, double gamma);
   double calc(const time_estimate& subtask1,
               const time_estimate& subtask2);
 
+  const std::string& method(void) const { return mc_method; }
+
  private:
+  double calc_random(void);
+  double calc_brutschy2014(const time_estimate& subtask1,
+                           const time_estimate& subtask2);
+
+  const std::string mc_method;
   double m_reactivity;
   double m_offset;
   double m_gamma;

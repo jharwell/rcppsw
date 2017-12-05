@@ -65,7 +65,7 @@ class executive : public rcppsw::er::client {
   executable_task* root(void) const { return m_root; }
   void current_task(executable_task* current_task) { m_current_task = current_task; }
   executable_task* get_next_task(executable_task* last_task);
-  double task_abort_prob(const executable_task* const task);
+  double task_abort_prob(executable_task* const task);
 
  private:
   executive& operator=(const executive& other) = delete;
