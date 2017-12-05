@@ -58,6 +58,10 @@ class polled_task : public executable_task, public taskable {
   bool task_running(void) const override { return m_mechanism->task_running(); }
   bool task_finished(void) const override { return m_mechanism->task_finished(); }
 
+  void init_random(uint lb, uint ub) {
+    executable_task::update_exec_estimate(rand() % (ub - lb + 1) + lb);
+  }
+
  private:
   polled_task& operator=(const polled_task& other) = delete;
   polled_task(const polled_task& other) = delete;

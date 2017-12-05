@@ -37,26 +37,35 @@ partitionable_task::partitionable_task(
     const std::shared_ptr<er::server>& server,
     const struct partitionable_task_params* const params):
     client(server),
-    m_selection_method(params->subtask_selection_method),
     m_partition1(nullptr),
     m_partition2(nullptr),
     m_last_partition(nullptr),
-    m_selection_prob(1.0, 1/8, 0.01),
-    m_partition_prob(params->reactivity) {
+    m_selection_prob(params->subtask_selection_method),
+    m_partition_prob(params->partition_method, params->partition_reactivity) {
   if (ERROR == client::attmod("partitionable_task")) {
     client::insmod("partitionable_task",
                    rcppsw::er::er_lvl::DIAG,
                    rcppsw::er::er_lvl::NOM);
+  }
+  if ("brutschy2014" == params->subtask_selection_method) {
+    m_selection_prob.init_brutschy2014(1.0, 8, 0.01);
   }
 }
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
+void partitionable_task::update_partition_prob(const time_estimate& task,
+                                               const time_estimate& subtask1,
+                                               const time_estimate& subtask2) {
+  m_partition_prob.calc(task, subtask1, subtask2);
+}
+
 executable_task* partitionable_task::partition(void) {
-  ER_NOM("Task '%s': partition_prob=%f, selection_method=%s",
+  ER_NOM("Task '%s': partition_method=%s partition_prob=%f",
          m_partition1->parent()->name().c_str(),
-         m_partition_prob.last_result(), m_selection_method.c_str());
+         m_partition_prob.method().c_str(), m_partition_prob.last_result());
+
   /* We chose not to employ partitioning on the next task allocation */
   if (m_partition_prob.last_result() <= static_cast<double>(rand()) / RAND_MAX) {
     ER_NOM("Not employing partitioning");
@@ -65,13 +74,17 @@ executable_task* partitionable_task::partition(void) {
   executable_task* ret = nullptr;
 
   /* We have chosen to employ partitioning */
-  if ("brutschy2014" == m_selection_method) {
-    double prob_12 = m_selection_prob.calc(m_partition1->current_time_estimate(),
-                                           m_partition2->current_time_estimate());
-    double prob_21 = m_selection_prob.calc(m_partition2->current_time_estimate(),
-                                           m_partition1->current_time_estimate());
-    ER_NOM("subtask1->subtask2 prob=%f, subtask2->subtask1 prob=%f",
-           prob_12, prob_21);
+  double prob_12 = m_selection_prob.calc(m_partition1->exec_estimate(),
+                                         m_partition2->exec_estimate());
+  double prob_21 = m_selection_prob.calc(m_partition2->exec_estimate(),
+                                         m_partition1->exec_estimate());
+
+  ER_NOM("Task '%s': selection_method=%s subtask1->subtask2 prob=%f, subtask2->subtask1 prob=%f",
+         m_partition1->parent()->name().c_str(),
+         m_selection_prob.method().c_str(),
+         prob_12, prob_21);
+
+  if ("brutschy2014" == m_selection_prob.method()) {
     /*
      * If we last executed subtask1, we calculate the probability of switching
      * to subtask2, based on time estimates.
@@ -93,10 +106,11 @@ executable_task* partitionable_task::partition(void) {
         ret = m_partition2;
       }
     }
-  /* We either have not executed either subtask yet, or have just chosen random */
-  /* pick one of the two subtasks randomly */
-  if ("random" == m_selection_method || nullptr == m_last_partition) {
-    if (rand() % 2) {
+  /*
+   * We either have not executed either subtask yet, or have just chosen random
+   */
+  if ("random" == m_selection_prob.method() || nullptr == m_last_partition) {
+    if (prob_12 <= 0.5) {
       ret = m_partition1;
     } else {
       ret = m_partition2;

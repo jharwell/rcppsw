@@ -23,6 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/task_allocation/subtask_selection_probability.hpp"
 #include <cmath>
+#include <assert.h>
 
 /*******************************************************************************
  * Namespaces
@@ -32,8 +33,32 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
+void subtask_selection_probability::init_brutschy2014(double reactivity,
+                                                      double offset,
+                                                      double gamma) {
+  m_reactivity = reactivity;
+  m_offset = offset;
+  m_gamma = gamma;
+} /* init_() */
+
 double subtask_selection_probability::calc(const time_estimate& subtask1,
                                            const time_estimate& subtask2) {
+  if ("brutschy2014" == mc_method) {
+    return calc_brutschy2014(subtask1, subtask2);
+  } else if ("random" == mc_method) {
+    return calc_random();
+  } else {
+    assert(0);
+  }
+} /* calc() */
+
+double subtask_selection_probability::calc_random(void) {
+  return 0.5;
+} /* calc_random() */
+
+double subtask_selection_probability::calc_brutschy2014(
+    const time_estimate& subtask1,
+    const time_estimate& subtask2) {
   /*
    * No information available--just pick randomly.
    */
@@ -53,8 +78,8 @@ double subtask_selection_probability::calc(const time_estimate& subtask1,
     r_ss = subtask1.last_result();
   }
 
-  double tmp = m_reactivity * (subtask1.last_result()/r_ss - m_offset);
+  double tmp = 1.0/m_reactivity * (subtask1.last_result()/r_ss - m_offset);
   return 1.0/(1 + exp(-tmp)) * m_gamma;
-} /* calc() */
+} /* calc_brutschy2014() */
 
 NS_END(task_allocation, rcppsw);

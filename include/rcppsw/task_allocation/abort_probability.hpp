@@ -45,9 +45,6 @@ NS_START(rcppsw, task_allocation);
  *
  * - The reactivity parameter: How sensitive should robots be to abrupt changes
  *   in task estimates/execution times?
- * - The proportionality parameter: What should the current_exec/prev_estimate
- *   ratio be assumed to be when the robot does not any estimates of the task's
- *   execution time (i.e. it is executing the task for the first time).
  * - The offset parameter: How much the current_exec/prev_estimate ratio will be
  *   allowed to grow before causing the probability to grow exponentially.
  *
@@ -56,15 +53,13 @@ NS_START(rcppsw, task_allocation);
  */
 class abort_probability: public rcppsw::math::expression<double> {
  public:
-  abort_probability(double reactivity, double proportionality, double offset) :
-      m_reactivity(reactivity), m_proportionality(proportionality),
-      m_offset(offset) {}
+  abort_probability(double reactivity, double offset) :
+      m_reactivity(reactivity), m_offset(offset) {}
 
   double calc(double exec_time, const time_estimate& whole_task);
 
  private:
   double m_reactivity;
-  double m_proportionality;
   double m_offset;
 };
 

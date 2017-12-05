@@ -81,7 +81,7 @@ class base_grid2D {
   std::pair<index_range::index,
             index_range::index> xrange(size_t x, size_t radius) {
     index_range::index lower_x = static_cast<index_range::index>(
-        std::max(0UL, x - radius));
+        std::max<int>(0, (int)x - (int)radius));
     index_range::index upper_x = static_cast<index_range::index>(
         std::min(x + radius + 1, xsize() - 1));
     if (lower_x > upper_x) {
@@ -93,7 +93,7 @@ class base_grid2D {
   std::pair<index_range::index,
             index_range::index> yrange(size_t y, size_t radius) {
     index_range::index lower_y = static_cast<index_range::index>(
-        std::max(0UL, y - radius));
+        std::max<int>((int)0, (int)y - (int)radius));
     index_range::index upper_y = static_cast<index_range::index>(
         std::min(y + radius + 1, ysize() - 1));
     if (lower_y > upper_y) {
