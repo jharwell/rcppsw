@@ -110,7 +110,7 @@ executable_task* partitionable_task::partition(void) {
    * We either have not executed either subtask yet, or have just chosen random
    */
   if ("random" == m_selection_prob.method() || nullptr == m_last_partition) {
-    if (prob_12 <= 0.5) {
+    if (prob_12 >= static_cast<double>(rand()) / RAND_MAX) {
       ret = m_partition1;
     } else {
       ret = m_partition2;
