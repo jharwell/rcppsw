@@ -39,7 +39,7 @@ class clonable {
   clonable(void) {}
   virtual ~clonable(void) {}
 
-  virtual std::unique_ptr<clonable> clone(void) = 0;
+  virtual std::unique_ptr<clonable> clone(void) const = 0;
 };
 
 NS_END(rcppsw, patterns, prototype);

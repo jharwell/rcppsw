@@ -36,6 +36,14 @@ executive::~executive(void) {}
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
+void executive::task_abort_cleanup(std::function<void(executable_task* const)> cb) {
+  m_task_abort_cleanup = cb;
+} /* task_abort_cleanup() */
+
+const std::function<void(executable_task*const)>& executive::task_abort_cleanup(void) const {
+  return m_task_abort_cleanup;
+} /* task_abort_cleanup() */
+
 executable_task* executive::get_next_task(executable_task* last_task) {
   /*
    * We are being run for the first time, so run the partitioning algorithm on

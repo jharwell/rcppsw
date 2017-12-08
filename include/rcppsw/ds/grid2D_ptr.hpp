@@ -83,8 +83,8 @@ class grid2D_ptr: public base_grid2D<T> {
   T& access(size_t i, size_t j) override {
     return *m_cells[static_cast<index_range::index>(i)][static_cast<index_range::index>(j)];
   }
-  const T& access(size_t i, size_t j) const override {
-    return *m_cells[static_cast<index_range::index>(i)][static_cast<index_range::index>(j)];
+  const T& access(size_t i, size_t j) const {
+    return base_grid2D<T>::access(i, j);
   }
 
  private:

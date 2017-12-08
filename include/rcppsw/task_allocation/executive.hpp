@@ -58,8 +58,8 @@ class executive : public rcppsw::er::client {
    * The callback will be passed the task that was aborted, so if task-specific
    * abort callbacks are needed, they can be implemented that way.
    */
-  void task_abort_cleanup(std::function<void(executable_task* const)> cb) { m_task_abort_cleanup = cb; }
-  std::function<void(executable_task*const)> task_abort_cleanup(void) const { return m_task_abort_cleanup; }
+  void task_abort_cleanup(std::function<void(executable_task* const)> cb);
+  const std::function<void(executable_task*const)>& task_abort_cleanup(void) const;
 
  protected:
   executable_task* root(void) const { return m_root; }
