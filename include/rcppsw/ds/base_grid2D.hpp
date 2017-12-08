@@ -59,9 +59,8 @@ class base_grid2D {
       m_y_max(y_max) {}
   virtual ~base_grid2D(void) {}
 
-  virtual const T& access(size_t i, size_t j) const = 0;
+  const T& access(size_t i, size_t j) const { return const_cast<base_grid2D*>(this)->access(i, j); }
   virtual T& access(size_t i, size_t j) = 0;
-
   double resolution(void) const { return m_resolution; }
 
   /**
