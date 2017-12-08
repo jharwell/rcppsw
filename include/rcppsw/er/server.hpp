@@ -82,13 +82,27 @@ class server {
                      boost::uuids::uuid new_id);
   std::ofstream& log_stream(void) { return *m_logfile.get(); }
   std::ostream& dbg_stream(void);
+
   /**
-   * @brief Enable debugging for the ER server. For debugging purposes only.
+   * @brief Install a callback to calculate a timestamp to be prepended to every
+   * message that is sent to stdout.
+   *
+   * This is useful when working with frameworks that do not provide such a
+   * timestamp, or that provide it for only logged messages.
    */
-  void self_er_en(void) {
-    insmod(m_er_id, "ER Server");
-    mod_dbglvl(m_er_id, er_lvl::NOM);
-  }
+  void dbg_ts_calculator(std::function<std::string(void)> cb);
+  const std::function<std::string(void)>& dbg_ts_calculator(void) const;
+
+
+  /**
+   * @brief Install a callback to calculate a timestamp to be prepended to every
+   * message that is sent to a logfile.
+   *
+   * This is useful when working with frameworks that do not provide such a
+   * timestamp, or that provide it for only messages sent to stdout.
+   */
+  void log_ts_calculator(std::function<std::string(void)> cb);
+  const std::function<std::string(void)>& log_ts_calculator(void) const;
 
   /**
    * @brief Find an existing module already installed on the server. Modules are
@@ -101,7 +115,8 @@ class server {
    *
    * @return OK if the module was found, ERROR otherwise.
    */
-  status_t findmod(const std::string& mod_name, boost::uuids::uuid& mod_id);
+  status_t findmod(const std::string& mod_name,
+                   boost::uuids::uuid& mod_id);
 
   /**
    * @brief Unconditionally install a new module into the list of active
@@ -204,7 +219,12 @@ class server {
    */
   char* hostname(void) { return m_hostname; }
 
-    /**
+  /**
+   * @brief Enable debugging for the ER server. For debugging purposes only.
+   */
+  void self_er_en(void);
+
+  /**
    * @brief Report a message. Messages may or not actually be printed/logged,
    * depending on the current level settings in the server/module.
    *
@@ -224,7 +244,7 @@ class server {
   virtual void flush(void);
 
  protected:
-  void msg_report(const msg_int& msg);
+  void msg_report(msg_int& msg);
 
  private:
   /* data members */
@@ -239,6 +259,9 @@ class server {
 
   /** Default debug printing level for new modules. */
   er_lvl::value                     m_dbglvl_dflt;
+
+  std::function<std::string(void)>  m_dbg_ts_calculator;
+  std::function<std::string(void)>  m_log_ts_calculator;
 
   /** Generator for universally unique identifiers for modules */
   boost::uuids::uuid m_er_id;

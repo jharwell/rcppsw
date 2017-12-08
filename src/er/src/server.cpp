@@ -62,6 +62,8 @@ server::server(const std::string& logfile_fname,
       m_logfile(new std::ofstream()),
       m_loglvl_dflt(loglvl),
       m_dbglvl_dflt(dbglvl),
+      m_dbg_ts_calculator(nullptr),
+      m_log_ts_calculator(nullptr),
       m_er_id(idgen()),
       m_generator() {
   gethostname(m_hostname, 32);
@@ -77,6 +79,27 @@ global_server::~global_server(void) {}
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
+void server::dbg_ts_calculator(std::function<std::string(void)> cb) {
+  m_dbg_ts_calculator = cb;
+} /* dbg_ts_calculator() */
+
+const std::function<std::string(void)>& server::dbg_ts_calculator(void) const {
+  return m_dbg_ts_calculator;
+} /* dbg_ts_calculator() */
+
+void server::log_ts_calculator(std::function<std::string(void)> cb) {
+  m_log_ts_calculator = cb;
+} /* log_ts_calculator() */
+
+const std::function<std::string(void)>& server::log_ts_calculator(void) const {
+  return m_log_ts_calculator;
+} /* log_ts_calculator() */
+
+void server::self_er_en(void) {
+  insmod(m_er_id, "ER Server");
+  mod_dbglvl(m_er_id, er_lvl::NOM);
+} /* self_er_en() */
+
 status_t server::insmod(const boost::uuids::uuid& mod_id,
                            const er_lvl::value& loglvl,
                            const er_lvl::value& dbglvl,
@@ -95,7 +118,7 @@ error:
 } /* insmod() */
 
 status_t server::findmod(const std::string& mod_name,
-                            boost::uuids::uuid& mod_id) {
+                         boost::uuids::uuid& mod_id) {
   for (auto mod : m_modules) {
     if (mod.name() == mod_name) {
       mod_id = mod.id();
@@ -112,16 +135,24 @@ status_t server::rmmod(const boost::uuids::uuid& id) {
   return OK;
 } /* rmmod() */
 
-void server::msg_report(const msg_int& msg) {
+void server::msg_report(msg_int& msg) {
   server_mod tmp(msg.m_id, er_lvl::NOM, er_lvl::NOM, "tmp");
   auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
 
   if (iter != m_modules.end()) {
-    iter->msg_report(msg.str_, msg.lvl_, iter->loglvl(), *m_logfile);
+    std::string s1 = msg.str_;
+    if (m_log_ts_calculator) {
+      s1 += m_log_ts_calculator();
+    }
+    iter->msg_report(s1, msg.lvl_, iter->loglvl(), *m_logfile);
 
     /* If NDEBUG is defined, debug printing is disabled. */
 #ifndef NDEBUG
-    iter->msg_report(msg.str_, msg.lvl_, iter->dbglvl(), std::cout);
+    std::string s2 = msg.str_;
+    if (m_dbg_ts_calculator) {
+      s2 += m_dbg_ts_calculator();
+    }
+    iter->msg_report(s2, msg.lvl_, iter->dbglvl(), std::cout);
 #endif
   }
 } /* msg_report() */
