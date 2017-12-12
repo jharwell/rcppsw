@@ -38,15 +38,13 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 struct task_params : public common::base_params {
   task_params(void) : estimation_alpha(), abort_reactivity(), abort_offset(),
-                      partition_reactivity(), partition_offset(),
-                      proportionality_estimate() {}
+                      partition_reactivity(), partition_offset() {}
 
   double estimation_alpha;
   double abort_reactivity;
   double abort_offset;
   double partition_reactivity;
   double partition_offset;
-  double proportionality_estimate;
 };
 
 struct partitionable_task_params : public task_params {
