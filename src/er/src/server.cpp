@@ -64,8 +64,8 @@ server::server(const std::string& logfile_fname,
       m_dbglvl_dflt(dbglvl),
       m_dbg_ts_calculator(nullptr),
       m_log_ts_calculator(nullptr),
-      m_er_id(idgen()),
-      m_generator() {
+      m_generator(),
+      m_er_id(idgen()) {
   gethostname(m_hostname, 32);
 
   change_logfile(m_logfile_fname);
