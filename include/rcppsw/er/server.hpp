@@ -264,8 +264,8 @@ class server {
   std::function<std::string(void)>  m_log_ts_calculator;
 
   /** Generator for universally unique identifiers for modules */
-  boost::uuids::uuid m_er_id;
   boost::uuids::random_generator m_generator;
+  boost::uuids::uuid m_er_id;
 };
 
 class global_server: public patterns::singleton<server>, public server {

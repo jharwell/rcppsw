@@ -54,6 +54,7 @@ class pheromone_density: public rcppsw::math::expression<double> {
 
   void rho(double rho) { m_rho = rho; }
 
+  void reset(void) { set_result(0.0); m_delta = 0.0; }
   double calc(void) {
     double res = std::max<double>((1.0 - m_rho) * last_result() + m_delta,
                                   0.0);
