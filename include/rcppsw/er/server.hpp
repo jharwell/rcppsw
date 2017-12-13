@@ -82,6 +82,7 @@ class server {
                      boost::uuids::uuid new_id);
   std::ofstream& log_stream(void) { return *m_logfile.get(); }
   std::ostream& dbg_stream(void);
+  const std::string& logfile_fname(void) const { return m_logfile_fname; }
 
   /**
    * @brief Install a callback to calculate a timestamp to be prepended to every

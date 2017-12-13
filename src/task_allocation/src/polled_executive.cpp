@@ -114,10 +114,11 @@ void polled_executive::handle_task_finish(polled_task* task) {
   } else {
     p = dynamic_cast<partitionable_polled_task*>(task);
   }
-  p->update_partition_prob(p->exec_estimate(),
-                           p->partition1()->exec_estimate(),
-                           p->partition2()->exec_estimate());
-
+  if (!p->is_atomic()) {
+    p->update_partition_prob(p->exec_estimate(),
+                             p->partition1()->exec_estimate(),
+                             p->partition2()->exec_estimate());
+  }
   task = static_cast<polled_task*>(executive::get_next_task(task));
 
   handle_task_start(task);
