@@ -139,20 +139,22 @@ void server::msg_report(msg_int& msg) {
   server_mod tmp(msg.m_id, er_lvl::NOM, er_lvl::NOM, "tmp");
   auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
 
+  std::string header;
   if (iter != m_modules.end()) {
-    std::string s1 = msg.str_;
     if (m_log_ts_calculator) {
-      s1 += m_log_ts_calculator();
+      header = m_log_ts_calculator();
     }
-    iter->msg_report(s1, msg.lvl_, iter->loglvl(), *m_logfile);
+    iter->msg_report(header, msg.str_,
+                     msg.lvl_, iter->loglvl(), *m_logfile);
 
     /* If NDEBUG is defined, debug printing is disabled. */
 #ifndef NDEBUG
-    std::string s2 = msg.str_;
+    header = "";
     if (m_dbg_ts_calculator) {
-      s2 += m_dbg_ts_calculator();
+      header = m_dbg_ts_calculator();
     }
-    iter->msg_report(s2, msg.lvl_, iter->dbglvl(), std::cout);
+    iter->msg_report(header, msg.str_,
+                     msg.lvl_, iter->dbglvl(), std::cout);
 #endif
   }
 } /* msg_report() */
