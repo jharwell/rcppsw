@@ -37,6 +37,8 @@ partitionable_task::partitionable_task(
     const std::shared_ptr<er::server>& server,
     const struct partitionable_task_params* const params):
     client(server),
+    m_always_partition(false),
+    m_never_partition(false),
     m_partition1(nullptr),
     m_partition2(nullptr),
     m_last_partition(nullptr),
@@ -48,6 +50,7 @@ partitionable_task::partitionable_task(
                    rcppsw::er::er_lvl::NOM);
   }
   if ("brutschy2014" == params->subtask_selection_method) {
+    /* values taken directly from paper */
     m_selection_prob.init_brutschy2014(1.0, 8, 0.01);
   }
 }
@@ -62,13 +65,26 @@ void partitionable_task::update_partition_prob(const time_estimate& task,
 }
 
 executable_task* partitionable_task::partition(void) {
+  ER_ASSERT(!(m_always_partition && m_never_partition),
+            "FATAL: cannot ALWAYS and NEVER partition");
+
+  double partition_prob;
+  if (m_always_partition) {
+    partition_prob = 1;
+  } else if (m_never_partition) {
+    partition_prob = 0;
+  } else {
+    partition_prob = m_partition_prob.last_result();
+  }
+
   ER_NOM("Task '%s': partition_method=%s partition_prob=%f",
          m_partition1->parent()->name().c_str(),
-         m_partition_prob.method().c_str(), m_partition_prob.last_result());
+         m_partition_prob.method().c_str(), partition_prob);
 
   /* We chose not to employ partitioning on the next task allocation */
-  if (m_partition_prob.last_result() <= static_cast<double>(rand()) / RAND_MAX) {
-    ER_NOM("Not employing partitioning");
+  if (partition_prob <= static_cast<double>(rand()) / RAND_MAX) {
+    ER_NOM("Not employing partitioning: Return task '%s'",
+           m_partition1->parent()->name().c_str());
     return static_cast<executable_task*>(m_partition1->parent());
   }
   executable_task* ret = nullptr;
