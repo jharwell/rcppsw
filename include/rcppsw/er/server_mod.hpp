@@ -75,13 +75,15 @@ class server_mod {
   /**
    * @brief Log a message to a file if the message level is high enough.
    *
+   * @param header The header for the msg (timestamp, etc.). Can be empty.
    * @param msg The message to log.
    * @param msg_lvl The level of the message.
    * @param log_lvl The level of the message.
    * @param stream The stream to log the message to.
    */
-  void msg_report(const std::string& msg, er_lvl::value msg_lvl,
-              er_lvl::value log_lvl, std::ostream& stream) const;
+  void msg_report(const std::string& header, const std::string& msg,
+                  er_lvl::value msg_lvl, er_lvl::value log_lvl,
+                  std::ostream& stream) const;
   bool operator==(const server_mod& rhs);
   const boost::uuids::uuid& id(void) const {return m_id; }
   void change_id(boost::uuids::uuid id) { m_id = std::move(id); }
