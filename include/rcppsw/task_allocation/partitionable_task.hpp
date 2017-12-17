@@ -67,6 +67,8 @@ class partitionable_task : public er::client {
   partitionable_task(const partitionable_task& other) = delete;
   partitionable_task& operator=(const partitionable_task& other) = delete;
 
+  bool m_always_partition;
+  bool m_never_partition;
   executable_task *m_partition1;
   executable_task *m_partition2;
   executable_task *m_last_partition;
