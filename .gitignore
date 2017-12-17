@@ -44,9 +44,9 @@ GPATH
 GRTAGS
 GTAGS
 .clang_complete
-compile_commands.json
+compile_options.json
 
 # Build process
 build
-doc/html
-doc/latex
+docs/html
+docs/latex
