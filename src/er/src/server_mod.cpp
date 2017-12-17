@@ -57,10 +57,11 @@ void server_mod::set_loglvl(const er_lvl::value& lvl) {
   m_loglvl = lvl;
 } /* set_loglvl() */
 
-void server_mod::msg_report(const std::string& msg, er_lvl::value msg_lvl,
-                           er_lvl::value log_lvl, std::ostream& stream) const {
+void server_mod::msg_report(const std::string& header, const std::string& msg,
+                            er_lvl::value msg_lvl, er_lvl::value log_lvl,
+                            std::ostream& stream) const {
     if (msg_lvl <= log_lvl) {
-      stream << name() << ": " << msg;
+      stream << header << " " << name() << ": " << msg;
       stream.flush();
     }
 } /* server_mod::msg_report() */
