@@ -40,21 +40,24 @@ NS_START(rcppsw, ds);
  * @brief A 2D logical grid that is overlayed over a continuous environment. It
  * discretizes the continuous arena into a grid of a specified resolution.
  */
-template<typename T, typename ...Args>
-class grid2D_ptr: public base_grid2D<T> {
+template <typename T, typename... Args>
+class grid2D_ptr : public base_grid2D<T> {
  public:
-  grid2D_ptr(double resolution, size_t x_max, size_t y_max, Args&&... args) :
-      base_grid2D<T>(resolution, x_max, y_max),
-      m_cells(boost::extents[base_grid2D<T>::xsize()][base_grid2D<T>::ysize()]) {
+  grid2D_ptr(double resolution, size_t x_max, size_t y_max, Args&&... args)
+      : base_grid2D<T>(resolution, x_max, y_max),
+        m_cells(
+            boost::extents[base_grid2D<T>::xsize()][base_grid2D<T>::ysize()]) {
     for (auto i = m_cells.origin();
-         i < m_cells.origin() + m_cells.num_elements(); ++i) {
+         i < m_cells.origin() + m_cells.num_elements();
+         ++i) {
       *i = new T(std::forward<Args>(args)...);
     } /* for(i..) */
   }
 
   ~grid2D_ptr(void) {
     for (auto i = m_cells.origin();
-         i < m_cells.origin() + m_cells.num_elements(); ++i) {
+         i < m_cells.origin() + m_cells.num_elements();
+         ++i) {
       delete *i;
     } /* for(i..) */
   }
@@ -81,7 +84,8 @@ class grid2D_ptr: public base_grid2D<T> {
     return grid_view<T*>(m_cells[indices[x1][y1]]);
   }
   T& access(size_t i, size_t j) override {
-    return *m_cells[static_cast<index_range::index>(i)][static_cast<index_range::index>(j)];
+    return *m_cells[static_cast<index_range::index>(i)]
+                   [static_cast<index_range::index>(j)];
   }
   const T& access(size_t i, size_t j) const {
     return base_grid2D<T>::access(i, j);

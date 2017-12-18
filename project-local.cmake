@@ -27,6 +27,7 @@ include_directories(${source_dir}/include)
 get_filename_component(target ${CMAKE_CURRENT_LIST_DIR} NAME)
 
 list(APPEND ${target}_SUBDIRS src/er)
+list(APPEND ${target}_SUBDIRS src/ds)
 list(APPEND ${target}_SUBDIRS src/multithread)
 list(APPEND ${target}_SUBDIRS src/utils)
 list(APPEND ${target}_SUBDIRS src/patterns/state_machine)
@@ -44,6 +45,7 @@ endif()
 set(${target}_HAS_RECURSIVE_DIRS YES)
 add_library(${target}
   $<TARGET_OBJECTS:er>
+  $<TARGET_OBJECTS:ds>
   $<TARGET_OBJECTS:multithread>
   $<TARGET_OBJECTS:utils>
   $<TARGET_OBJECTS:state_machine>
