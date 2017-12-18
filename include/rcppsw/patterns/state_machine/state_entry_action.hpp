@@ -66,8 +66,7 @@ template <class SM, class Event, void (SM::*Func)(const Event*)>
 class state_entry_action1 : public state_entry {
  public:
   virtual ~state_entry_action1(void) {}
-  void invoke_entry_action(base_fsm* sm,
-                           const event_data* data) const override {
+  void invoke_entry_action(base_fsm* sm, const event_data* data) const override {
     SM* derived_fsm = static_cast<SM*>(sm);
     const Event* derived_event = NULL;
     if (data) {

@@ -54,15 +54,13 @@ double partition_probability::calc_pini2011(const time_estimate& task,
   double tmp = 2.0;
   if (task > subtask1 + subtask2) {
     if ((subtask1 + subtask2).last_result() > 0) {
-      tmp =
-          1 + std::exp((-m_reactivity * ((task / (subtask1 + subtask2)) - 1.0))
-                           .last_result());
+      tmp = 1 + std::exp((-m_reactivity * ((task / (subtask1 + subtask2)) - 1.0))
+                             .last_result());
     }
     return set_result(1 / tmp);
   } else {
     if (task.last_result() > 0) {
-      tmp =
-          -m_reactivity * (1.0 - ((subtask1 + subtask2) / task).last_result());
+      tmp = -m_reactivity * (1.0 - ((subtask1 + subtask2) / task).last_result());
       tmp = 1.0 + std::exp(tmp);
     }
     return set_result(1.0 / tmp);
