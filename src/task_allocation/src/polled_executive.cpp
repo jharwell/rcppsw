@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/polled_executive.hpp"
-#include "rcppsw/task_allocation/polled_task.hpp"
 #include "rcppsw/task_allocation/partitionable_polled_task.hpp"
+#include "rcppsw/task_allocation/polled_task.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -42,13 +42,15 @@ void polled_executive::run(void) {
      * rather than the 0 we get if we do not do this.
      */
     if (executive::root()->is_partitionable()) {
-      partitionable_polled_task* p = dynamic_cast<partitionable_polled_task*>(executive::root());
+      partitionable_polled_task* p =
+          dynamic_cast<partitionable_polled_task*>(executive::root());
       p->update_partition_prob(p->exec_estimate(),
                                p->partition1()->exec_estimate(),
                                p->partition1()->exec_estimate());
     }
 
-    handle_task_start(static_cast<polled_task*>(executive::get_next_task(nullptr)));
+    handle_task_start(
+        static_cast<polled_task*>(executive::get_next_task(nullptr)));
   }
   polled_task* current = dynamic_cast<polled_task*>(executive::current_task());
   ER_ASSERT(current, "FATAL: polled_executive can only work with polled tasks");
@@ -58,8 +60,7 @@ void polled_executive::run(void) {
     handle_task_finish(current);
   } else {
     double prob = executive::task_abort_prob(current);
-    ER_VER("Task '%s' abort probability: %f", current->name().c_str(),
-           prob);
+    ER_VER("Task '%s' abort probability: %f", current->name().c_str(), prob);
 
     if (static_cast<double>(rand()) / RAND_MAX <= prob) {
       ER_NOM("Task '%s' aborted", current->name().c_str());

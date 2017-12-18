@@ -54,15 +54,17 @@ void client::change_id(boost::uuids::uuid old_id, boost::uuids::uuid new_id) {
 } /* change_id() */
 
 status_t client::insmod(const std::string& mod_name,
-                           const er_lvl::value& loglvl,
-                           const er_lvl::value& dbglvl) {
+                        const er_lvl::value& loglvl,
+                        const er_lvl::value& dbglvl) {
   return m_server_handle->insmod(m_er_id, loglvl, dbglvl, mod_name);
 } /* insmod */
 
 status_t client::rmmod(void) { return m_server_handle->rmmod(m_er_id); }
 
-void __er_report__(server* server, const boost::uuids::uuid& er_id,
-                    const er_lvl::value& lvl, const std::string& str) {
+void __er_report__(server* server,
+                   const boost::uuids::uuid& er_id,
+                   const er_lvl::value& lvl,
+                   const std::string& str) {
   server->report(er_id, lvl, str);
 } /* __er_report__() */
 

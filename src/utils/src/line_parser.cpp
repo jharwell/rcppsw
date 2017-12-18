@@ -21,8 +21,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <sstream>
 #include "rcppsw/utils/line_parser.hpp"
+#include <sstream>
 
 /*******************************************************************************
  * Namespaces
@@ -42,6 +42,5 @@ std::vector<std::string> line_parser::parse(const std::string& line) {
   } /* while() */
   return res;
 } /* parse() */
-
 
 NS_END(utils, rcppsw);

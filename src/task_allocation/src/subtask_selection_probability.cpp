@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/subtask_selection_probability.hpp"
-#include <cmath>
 #include <assert.h>
+#include <cmath>
 
 /*******************************************************************************
  * Namespaces
@@ -62,8 +62,7 @@ double subtask_selection_probability::calc_brutschy2014(
   /*
    * No information available--just pick randomly.
    */
-  if (!(subtask1.last_result() > 0 &&
-        subtask2.last_result() > 0)) {
+  if (!(subtask1.last_result() > 0 && subtask2.last_result() > 0)) {
     return 0.5;
   } else if (!(subtask1.last_result() > 0)) { /* have info on subtask2 only */
     return 0.0;
@@ -78,8 +77,8 @@ double subtask_selection_probability::calc_brutschy2014(
     r_ss = subtask1.last_result();
   }
 
-  double tmp = 1.0/m_reactivity * (subtask1.last_result()/r_ss - m_offset);
-  return 1.0/(1 + exp(-tmp)) * m_gamma;
+  double tmp = 1.0 / m_reactivity * (subtask1.last_result() / r_ss - m_offset);
+  return 1.0 / (1 + exp(-tmp)) * m_gamma;
 } /* calc_brutschy2014() */
 
 NS_END(task_allocation, rcppsw);

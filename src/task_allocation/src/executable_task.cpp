@@ -34,25 +34,27 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 executable_task::executable_task(const std::string& name,
                                  const struct task_params* const params,
-                executable_task* const parent) :
-    logical_task(name, parent),
-    m_is_atomic(false),
-    m_is_partitionable(false),
-    m_interface_time(0.0),
-    m_interface_start_time(0.0),
-    m_exec_time(0.0),
-    m_exec_start_time(0.0),
-    m_interface_estimate(params->estimation_alpha),
-    m_exec_estimate(params->estimation_alpha) {}
+                                 executable_task* const parent)
+    : logical_task(name, parent),
+      m_is_atomic(false),
+      m_is_partitionable(false),
+      m_interface_time(0.0),
+      m_interface_start_time(0.0),
+      m_exec_time(0.0),
+      m_exec_start_time(0.0),
+      m_interface_estimate(params->estimation_alpha),
+      m_exec_estimate(params->estimation_alpha) {}
 
-executable_task::executable_task(const executable_task& other) :
-    logical_task(other), m_is_atomic(false), m_is_partitionable(false),
-    m_interface_time(other.m_interface_time),
-    m_interface_start_time(other.m_interface_start_time),
-    m_exec_time(other.m_exec_time),
-    m_exec_start_time(other.m_exec_start_time),
-    m_interface_estimate(other.m_interface_estimate),
-    m_exec_estimate(other.m_exec_estimate) {}
+executable_task::executable_task(const executable_task& other)
+    : logical_task(other),
+      m_is_atomic(false),
+      m_is_partitionable(false),
+      m_interface_time(other.m_interface_time),
+      m_interface_start_time(other.m_interface_start_time),
+      m_exec_time(other.m_exec_time),
+      m_exec_start_time(other.m_exec_start_time),
+      m_interface_estimate(other.m_interface_estimate),
+      m_exec_estimate(other.m_exec_estimate) {}
 
 executable_task::~executable_task(void) {}
 
