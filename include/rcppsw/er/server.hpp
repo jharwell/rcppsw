@@ -27,13 +27,13 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <boost/uuid/uuid_generators.hpp>
 #include <iosfwd>
 #include <string>
 #include <vector>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/server_mod.hpp"
 #include "rcppsw/patterns/singleton.hpp"
-#include <boost/uuid/uuid_generators.hpp>
 
 /*******************************************************************************
  * Namespaces
@@ -56,8 +56,9 @@ class server {
    * message besides the text of the message itself.
    */
   struct msg_int {
-    msg_int(const boost::uuids::uuid& id, const er_lvl::value& lvl,
-               const std::string& str)
+    msg_int(const boost::uuids::uuid& id,
+            const er_lvl::value& lvl,
+            const std::string& str)
         : m_id(id), lvl_(lvl), str_(str) {}
     boost::uuids::uuid m_id;
     er_lvl::value lvl_;
@@ -73,8 +74,8 @@ class server {
    * @param loglvl The initial logging level.
    */
   server(const std::string& logfile_fname = "__no_file__",
-            const er_lvl::value& dbglvl = er_lvl::NOM,
-            const er_lvl::value& loglvl = er_lvl::NOM);
+         const er_lvl::value& dbglvl = er_lvl::NOM,
+         const er_lvl::value& loglvl = er_lvl::NOM);
 
   virtual ~server(void);
 
@@ -93,7 +94,6 @@ class server {
    */
   void dbg_ts_calculator(std::function<std::string(void)> cb);
   const std::function<std::string(void)>& dbg_ts_calculator(void) const;
-
 
   /**
    * @brief Install a callback to calculate a timestamp to be prepended to every
@@ -116,8 +116,7 @@ class server {
    *
    * @return OK if the module was found, ERROR otherwise.
    */
-  status_t findmod(const std::string& mod_name,
-                   boost::uuids::uuid& mod_id);
+  status_t findmod(const std::string& mod_name, boost::uuids::uuid& mod_id);
 
   /**
    * @brief Unconditionally install a new module into the list of active
@@ -132,7 +131,8 @@ class server {
    * @return OK if successful, ERROR otherwise.
    */
   status_t insmod(const boost::uuids::uuid& mod_id,
-                  const er_lvl::value& loglvl, const er_lvl::value& dbglvl,
+                  const er_lvl::value& loglvl,
+                  const er_lvl::value& dbglvl,
                   const std::string& mod_name);
   /**
    * @brief Unconditionally install a new module into the list of active
@@ -233,7 +233,8 @@ class server {
    * @param lvl The level of the message.
    * @param str The message.
    */
-  virtual void report(const boost::uuids::uuid& er_id, const er_lvl::value& lvl,
+  virtual void report(const boost::uuids::uuid& er_id,
+                      const er_lvl::value& lvl,
                       const std::string& str) {
     msg_int msg(er_id, lvl, str);
     msg_report(msg);
@@ -249,27 +250,27 @@ class server {
 
  private:
   /* data members */
-  char                              m_hostname[32];
+  char m_hostname[32];
 
-  std::vector<server_mod>           m_modules;
-  std::string                       m_logfile_fname;  /// File to log events to.
-  std::unique_ptr<std::ofstream>    m_logfile;        /// Logfile handle.
+  std::vector<server_mod> m_modules;
+  std::string m_logfile_fname;              /// File to log events to.
+  std::unique_ptr<std::ofstream> m_logfile; /// Logfile handle.
 
   /** Default log level for new modules */
-  er_lvl::value                     m_loglvl_dflt;
+  er_lvl::value m_loglvl_dflt;
 
   /** Default debug printing level for new modules. */
-  er_lvl::value                     m_dbglvl_dflt;
+  er_lvl::value m_dbglvl_dflt;
 
-  std::function<std::string(void)>  m_dbg_ts_calculator;
-  std::function<std::string(void)>  m_log_ts_calculator;
+  std::function<std::string(void)> m_dbg_ts_calculator;
+  std::function<std::string(void)> m_log_ts_calculator;
 
   /** Generator for universally unique identifiers for modules */
   boost::uuids::random_generator m_generator;
   boost::uuids::uuid m_er_id;
 };
 
-class global_server: public patterns::singleton<server>, public server {
+class global_server : public patterns::singleton<server>, public server {
  public:
   virtual ~global_server(void);
 };

@@ -24,9 +24,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <deque>
 #include <boost/thread.hpp>
 #include <boost/thread/locks.hpp>
+#include <deque>
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
@@ -46,8 +46,12 @@ class mt_queue {
   mt_queue(void) : m_queue(), m_mtx(), m_cv() {}
   /* type definitions */
   typedef typename std::deque<T>::const_iterator const_iterator;
-  typename std::deque<T>::const_iterator begin(void) const { return m_queue.begin(); }
-  typename std::deque<T>::const_iterator end(void) const { return m_queue.end(); }
+  typename std::deque<T>::const_iterator begin(void) const {
+    return m_queue.begin();
+  }
+  typename std::deque<T>::const_iterator end(void) const {
+    return m_queue.end();
+  }
 
   // Add data to the queue and notify others
   void enqueue(const T& data) {
@@ -59,7 +63,7 @@ class mt_queue {
 
     // Notify others that data is ready
     m_cv.notify_one();
-  }  // Lock is automatically released here
+  } // Lock is automatically released here
 
   // Get data from the queue. Wait for data if not available
   T dequeue() {
@@ -75,7 +79,7 @@ class mt_queue {
     T result = static_cast<T>(m_queue.front());
     m_queue.pop_front();
     return result;
-  }  // Lock is automatically released here
+  } // Lock is automatically released here
 
   // get the size of the queue
   size_t size() const { return m_queue.size(); }
@@ -84,9 +88,9 @@ class mt_queue {
   const T& operator[](std::size_t pos) const { return m_queue[pos]; }
 
  private:
-  std::deque<T>             m_queue;  /// Use STL queue to store data
-  boost::mutex              m_mtx;    /// The mutex to synchronise on
-  boost::condition_variable m_cv;     /// The condition to wait for
+  std::deque<T> m_queue;          /// Use STL queue to store data
+  boost::mutex m_mtx;             /// The mutex to synchronise on
+  boost::condition_variable m_cv; /// The condition to wait for
 };
 
 NS_END(multithread, rcppsw);

@@ -25,8 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/task_allocation/time_estimate.hpp"
 #include "rcppsw/task_allocation/task_sequence.hpp"
+#include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -42,10 +42,10 @@ NS_START(rcppsw, task_allocation);
 class logical_task {
  public:
   explicit logical_task(const std::string& name,
-                        logical_task* const parent = nullptr) :
-      m_name(name), m_parent(parent) {}
-  logical_task(const logical_task& other) :
-      m_name(other.m_name), m_parent(other.m_parent) {}
+                        logical_task* const parent = nullptr)
+      : m_name(name), m_parent(parent) {}
+  logical_task(const logical_task& other)
+      : m_name(other.m_name), m_parent(other.m_parent) {}
 
   virtual ~logical_task(void);
 

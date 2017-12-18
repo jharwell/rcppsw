@@ -30,7 +30,9 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace ticpp { class Element; }
+namespace ticpp {
+class Element;
+}
 
 NS_START(rcppsw, common);
 struct base_params;

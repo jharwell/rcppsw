@@ -24,9 +24,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include "rcppsw/er/client.hpp"
 #include "rcppsw/task_allocation/partition_probability.hpp"
 #include "rcppsw/task_allocation/subtask_selection_probability.hpp"
-#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -56,7 +56,9 @@ class partitionable_task : public er::client {
                              const time_estimate& subtask2);
 
   double partition_prob(void) const { return m_partition_prob.last_result(); }
-  void last_partition(executable_task* last_partition) { m_last_partition = last_partition; }
+  void last_partition(executable_task* last_partition) {
+    m_last_partition = last_partition;
+  }
   void partition1(executable_task* partition1) { m_partition1 = partition1; }
   void partition2(executable_task* partition2) { m_partition2 = partition2; }
 
@@ -69,9 +71,9 @@ class partitionable_task : public er::client {
 
   bool m_always_partition;
   bool m_never_partition;
-  executable_task *m_partition1;
-  executable_task *m_partition2;
-  executable_task *m_last_partition;
+  executable_task* m_partition1;
+  executable_task* m_partition2;
+  executable_task* m_last_partition;
   subtask_selection_probability m_selection_prob;
   partition_probability m_partition_prob;
 };

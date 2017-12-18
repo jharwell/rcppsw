@@ -44,7 +44,7 @@ NS_START(rcppsw);
  * Templates
  ******************************************************************************/
 /* C++11 does not have std::make_unique, so I have to create my own...  */
-template<typename T, typename... Args>
+template <typename T, typename... Args>
 std::unique_ptr<T> make_unique(Args&&... args) {
   return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
 }

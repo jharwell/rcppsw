@@ -40,8 +40,8 @@ NS_START(rcppsw, patterns, state_machine);
  */
 class state_map_row {
  public:
-  explicit state_map_row(rcppsw::patterns::state_machine::state* state) :
-      m_state(state) {}
+  explicit state_map_row(rcppsw::patterns::state_machine::state* state)
+      : m_state(state) {}
 
   rcppsw::patterns::state_machine::state* state(void) const { return m_state; }
 

@@ -26,8 +26,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include <map>
+#include <string>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/common/xml_param_parser.hpp"
 #include "rcppsw/patterns/factory/sharing_factory.hpp"
@@ -73,7 +73,7 @@ class xml_param_repository {
    */
   void show_all(std::ostream& stream);
 
-  template<typename T>
+  template <typename T>
   void register_parser(const std::string& name) {
     m_factory.register_type<T>(name);
     m_parsers[name] = m_factory.create(name).get();

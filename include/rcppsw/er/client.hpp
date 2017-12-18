@@ -26,9 +26,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include <boost/uuid/uuid.hpp>
 #include <assert.h>
+#include <boost/uuid/uuid.hpp>
+#include <string>
 #include "rcppsw/er/server_mod.hpp"
 
 /*******************************************************************************
@@ -48,15 +48,20 @@
 #define ER_VER(...) ER_REPORT(rcppsw::er::er_lvl::VER, __VA_ARGS__)
 
 /* -------- Debug statements with level parameter (Don't use these) -------- */
-#define ER_REPORT(lvl, msg, ...)                                        \
-  {                                                                     \
-    char _str[1000];                                                    \
-    snprintf(static_cast<char*>(_str), sizeof(_str), "%s:%d:%s: " msg "\n", __FILE__, __LINE__, \
-             __FUNCTION__, ##__VA_ARGS__);                              \
-    __er_report__(rcppsw::er::client::server_handle(),          \
-                   rcppsw::er::client::er_id(),                  \
-                   lvl,                                                 \
-                   std::string(_str));                                  \
+#define ER_REPORT(lvl, msg, ...)                       \
+  {                                                    \
+    char _str[1000];                                   \
+    snprintf(static_cast<char*>(_str),                 \
+             sizeof(_str),                             \
+             "%s:%d:%s: " msg "\n",                    \
+             __FILE__,                                 \
+             __LINE__,                                 \
+             __FUNCTION__,                             \
+             ##__VA_ARGS__);                           \
+    __er_report__(rcppsw::er::client::server_handle(), \
+                  rcppsw::er::client::er_id(),         \
+                  lvl,                                 \
+                  std::string(_str));                  \
   }
 
 #else
@@ -73,50 +78,50 @@
  * error/bailout section for function (you must have a label called "error" in
  * your function).
  */
-#define ER_CHECK(cond, msg, ...)                \
-  {                                             \
-    if (!(cond)) {                              \
+#define ER_CHECK(cond, msg, ...)                           \
+  {                                                        \
+    if (!(cond)) {                                         \
       REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__); \
-      goto error;                               \
-    }                                           \
+      goto error;                                          \
+    }                                                      \
   }
 
 /**
  * @brief Mark a place in the code as being universally bad. If execution ever
  * reaches this spot, report a message and error out.
  */
-#define ER_SENTINEL(msg, ...)                   \
-  {                                             \
-    ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__);    \
-    goto error;                                 \
+#define ER_SENTINEL(msg, ...)                               \
+  {                                                         \
+    ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__); \
+    goto error;                                             \
   }
 
 /**
  * @brief Check a condition in a function, halting the program if the condition
  * is not true. Like assert(), but allows for an additional custom message.
  */
-#define ER_ASSERT(cond, msg, ...)                       \
-  if (!(cond)) {                                        \
-    ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__);         \
-    assert(cond);                                                       \
+#define ER_ASSERT(cond, msg, ...)                           \
+  if (!(cond)) {                                            \
+    ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__); \
+    assert(cond);                                           \
   }
 
 /*
  * Define debug macros also in rcsw to eliminate dependencies.
  */
 #ifndef CHECK
-#define CHECK(cond)                             \
-  {                                             \
-    if (!(cond)) {                              \
-      goto error;                               \
-    }                                           \
+#define CHECK(cond) \
+  {                 \
+    if (!(cond)) {  \
+      goto error;   \
+    }               \
   }
 #endif /* CHECK */
 
 #ifndef CHECK_PTR
-#define CHECK_PTR(ptr)                          \
-  if (nullptr == (ptr)) {                       \
-    goto error;                                 \
+#define CHECK_PTR(ptr)    \
+  if (nullptr == (ptr)) { \
+    goto error;           \
   }
 #endif /* CHECK_PTR */
 
@@ -194,7 +199,9 @@ class client {
   server* server_handle(void) const { return m_server_handle.get(); }
 
  protected:
-  const std::shared_ptr<server>& server_ref(void) const { return m_server_handle; }
+  const std::shared_ptr<server>& server_ref(void) const {
+    return m_server_handle;
+  }
 
   /**
    * @brief Get a reference to the UUID for the module. Should not be called
@@ -206,9 +213,8 @@ class client {
 
  private:
   std::shared_ptr<server> m_server_handle;
-  boost::uuids::uuid      m_er_id;
+  boost::uuids::uuid m_er_id;
 };
-
 
 /*******************************************************************************
  * Global Variables
@@ -225,9 +231,9 @@ extern std::shared_ptr<rcppsw::er::global_server> g_server;
  * Forward Declarations
  ******************************************************************************/
 void __er_report__(server* server,
-                   const boost::uuids::uuid& er_id, const er_lvl::value& lvl,
+                   const boost::uuids::uuid& er_id,
+                   const er_lvl::value& lvl,
                    const std::string& str);
 NS_END(rcppsw, er);
-
 
 #endif /* INCLUDE_RCPPSW_ER_CLIENT_HPP_ */
