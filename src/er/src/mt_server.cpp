@@ -33,9 +33,9 @@ NS_START(rcppsw, er);
  * Constructors/Destructors
  ******************************************************************************/
 mt_server::mt_server(const std::string& logfile_fname,
-               const er_lvl::value& dbglvl, const er_lvl::value& loglvl)
-    : server(logfile_fname, dbglvl, loglvl),
-      m_queue() {}
+                     const er_lvl::value& dbglvl,
+                     const er_lvl::value& loglvl)
+    : server(logfile_fname, dbglvl, loglvl), m_queue() {}
 
 /*******************************************************************************
  * Member Functions

@@ -21,8 +21,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <assert.h>
 #include "rcppsw/patterns/state_machine/base_fsm.hpp"
+#include <assert.h>
 
 /*******************************************************************************
  * Namespaces
@@ -33,18 +33,18 @@ NS_START(rcppsw, patterns, state_machine);
  * Constructors/Destructor
  ******************************************************************************/
 base_fsm::base_fsm(const std::shared_ptr<er::server>& server,
-                       uint8_t max_states,
-                       uint8_t initial_state) :
-    er::client(server),
-    mc_max_states(max_states),
-    m_current_state(initial_state),
-    m_next_state(0),
-    m_initial_state(initial_state),
-    m_previous_state(0),
-    m_last_state(0),
-    m_event_generated(false),
-    m_event_data(nullptr),
-    m_mutex() {
+                   uint8_t max_states,
+                   uint8_t initial_state)
+    : er::client(server),
+      mc_max_states(max_states),
+      m_current_state(initial_state),
+      m_next_state(0),
+      m_initial_state(initial_state),
+      m_previous_state(0),
+      m_last_state(0),
+      m_event_generated(false),
+      m_event_data(nullptr),
+      m_mutex() {
   assert(mc_max_states < event_signal::IGNORED);
 }
 
@@ -64,7 +64,8 @@ void base_fsm::init(void) {
 void base_fsm::external_event(uint8_t new_state,
                               std::unique_ptr<const event_data> data) {
   ER_VER("Received external event: new_state=%d data=%p",
-         new_state, reinterpret_cast<const void*>(data.get()));
+         new_state,
+         reinterpret_cast<const void*>(data.get()));
 
   ER_ASSERT(event_signal::FATAL != new_state,
             "The impossible event happened...");
@@ -87,14 +88,15 @@ void base_fsm::external_event(uint8_t new_state,
 void base_fsm::internal_event(uint8_t new_state,
                               std::unique_ptr<const event_data> data) {
   ER_VER("Generated internal event: current_state=%d new_state=%d data=%p",
-         current_state(), new_state, reinterpret_cast<const void*>(data.get()));
+         current_state(),
+         new_state,
+         reinterpret_cast<const void*>(data.get()));
   next_state(new_state);
   m_event_generated = true;
   if (m_event_data != data) {
     m_event_data = std::move(data);
   }
 }
-
 
 void base_fsm::state_engine(void) {
   const state_map_row* map = state_map(0);
@@ -113,8 +115,7 @@ void base_fsm::state_engine_map(void) {
   /* While events are being generated keep executing states */
   while (m_event_generated) {
     /* verity new state is valid */
-    ER_ASSERT(next_state() < max_states(),
-              "FATAL: new state is out of range");
+    ER_ASSERT(next_state() < max_states(), "FATAL: new state is out of range");
 
     /* ready to update to new state */
     m_event_generated = false;
@@ -131,8 +132,7 @@ void base_fsm::state_engine_map_ex(void) {
   while (m_event_generated) {
     m_event_generated = false;
     /* verify new state is valid */
-    ER_ASSERT(next_state() < max_states(),
-              "FATAL: new state is out of range");
+    ER_ASSERT(next_state() < max_states(), "FATAL: new state is out of range");
     const state_guard* guard = state_map_ex(next_state())->guard();
     const state_entry* entry = state_map_ex(next_state())->entry();
     const state_exit* exit = state_map_ex(current_state())->exit();
@@ -175,14 +175,16 @@ void base_fsm::state_engine_map_ex(void) {
 
 void base_fsm::state_engine_step(const state_map_row* const row) {
   ER_ASSERT(nullptr != row->state(), "FATAL: null state?");
-  ER_VER("Invoking state action: state%d, data=%p", current_state(),
+  ER_VER("Invoking state action: state%d, data=%p",
+         current_state(),
          reinterpret_cast<const void*>(m_event_data.get()));
   row->state()->invoke_state_action(this, event_data_get());
 } /* state_engine_step() */
 
 void base_fsm::state_engine_step(const state_map_ex_row* const row_ex) {
   ER_ASSERT(nullptr != row_ex->state(), "FATAL: null state?");
-  ER_VER("Invoking state action: state%d, data=%p", current_state(),
+  ER_VER("Invoking state action: state%d, data=%p",
+         current_state(),
          reinterpret_cast<const void*>(m_event_data.get()));
   row_ex->state()->invoke_state_action(this, event_data_get());
 } /* state_engine_step() */
@@ -194,6 +196,5 @@ void base_fsm::update_state(uint8_t new_state) {
   m_last_state = m_current_state;
   m_current_state = new_state;
 } /* update_state() */
-
 
 NS_END(state_machine, patterns, rcppssw);

@@ -41,6 +41,7 @@ endif()
 ################################################################################
 # Libraries                                                                    #
 ################################################################################
+set(${target}_HAS_RECURSIVE_DIRS YES)
 add_library(${target}
   $<TARGET_OBJECTS:er>
   $<TARGET_OBJECTS:multithread>
