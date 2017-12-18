@@ -161,12 +161,11 @@ NS_END(state_machine, patterns, rcppsw);
 /*******************************************************************************
  * State Macros With Data
  ******************************************************************************/
-#define FSM_STATE_DECLARE(FSM, state_name, event_data)                  \
-  int ST_##state_name(const event_data*);                               \
-  rcppsw::patterns::state_machine::state_action1<FSM,                   \
-                                                 event_data,            \
-                                                 &FSM::ST_##state_name> \
-      state_name
+#define FSM_STATE_DECLARE(FSM, state_name, event_data)      \
+  int ST_##state_name(const event_data*);                   \
+  rcppsw::patterns::state_machine::                         \
+      state_action1<FSM, event_data, &FSM::ST_##state_name> \
+          state_name
 
 #define FSM_STATE_DEFINE(FSM, state_name, event_data) \
   int FSM::ST_##state_name(const event_data* data)
@@ -180,12 +179,11 @@ NS_END(state_machine, patterns, rcppsw);
 #define FSM_GUARD_DEFINE(FSM, guard_name, event_data) \
   bool FSM::GD_##guard_name(const event_data* data)
 
-#define FSM_ENTRY_DECLARE(FSM, entry_name, event_data)                        \
-  void EN_##entry_name(const event_data*);                                    \
-  rcppsw::patterns::state_machine::state_entry_action1<FSM,                   \
-                                                       event_data,            \
-                                                       &FSM::EN_##entry_name> \
-      entry_name
+#define FSM_ENTRY_DECLARE(FSM, entry_name, event_data)            \
+  void EN_##entry_name(const event_data*);                        \
+  rcppsw::patterns::state_machine::                               \
+      state_entry_action1<FSM, event_data, &FSM::EN_##entry_name> \
+          entry_name
 
 #define FSM_ENTRY_DEFINE(FSM, entry_name, event_data) \
   void FSM::EN_##entry_name(const event_data* data)
