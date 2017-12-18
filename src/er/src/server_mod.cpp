@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/er/server_mod.hpp"
-#include <fstream>
 #include <boost/uuid/uuid_io.hpp>
+#include <fstream>
 
 /*******************************************************************************
  * Namespaces
@@ -34,13 +34,12 @@ NS_START(rcppsw, er);
  * Constructors/Destructors
  ******************************************************************************/
 server_mod::server_mod(boost::uuids::uuid id,
-                           er_lvl::value loglvl,
-                           er_lvl::value dbglvl,
-                             std::string name)
+                       er_lvl::value loglvl,
+                       er_lvl::value dbglvl,
+                       std::string name)
     : m_id(id), m_name(std::move(name)), m_loglvl(loglvl), m_dbglvl(dbglvl) {}
 
-server_mod::server_mod(boost::uuids::uuid id,
-                             std::string name)
+server_mod::server_mod(boost::uuids::uuid id, std::string name)
     : m_id(id),
       m_name(std::move(name)),
       m_loglvl(er_lvl::NOM),
@@ -57,13 +56,15 @@ void server_mod::set_loglvl(const er_lvl::value& lvl) {
   m_loglvl = lvl;
 } /* set_loglvl() */
 
-void server_mod::msg_report(const std::string& header, const std::string& msg,
-                            er_lvl::value msg_lvl, er_lvl::value log_lvl,
+void server_mod::msg_report(const std::string& header,
+                            const std::string& msg,
+                            er_lvl::value msg_lvl,
+                            er_lvl::value log_lvl,
                             std::ostream& stream) const {
-    if (msg_lvl <= log_lvl) {
-      stream << header << " " << name() << ": " << msg;
-      stream.flush();
-    }
+  if (msg_lvl <= log_lvl) {
+    stream << header << " " << name() << ": " << msg;
+    stream.flush();
+  }
 } /* server_mod::msg_report() */
 
 bool server_mod::operator==(const server_mod& rhs) {

@@ -33,7 +33,8 @@ NS_START(rcppsw, patterns, state_machine);
  ******************************************************************************/
 void hfsm::state_engine_step(const state_map_row* const row) {
   ER_ASSERT(nullptr != row->state(), "FATAL: null state?");
-  ER_VER("Invoking state action: state%d, data=%p", current_state(),
+  ER_VER("Invoking state action: state%d, data=%p",
+         current_state(),
          reinterpret_cast<const void*>(event_data_get()));
   const hfsm_state* state = static_cast<const hfsm_state*>(row->state());
   int rval = event_signal::UNHANDLED;
@@ -43,7 +44,8 @@ void hfsm::state_engine_step(const state_map_row* const row) {
     /*
      * It is possible that we have gotten the HANDLED signal from a parent state
      * of a child that returned UNHANDLED. As such, we need to change both the
-     * event type and the signal of the event so execution can continue normally.
+     * event type and the signal of the event so execution can continue
+     * normally.
      */
     if (event_signal::HANDLED == rval) {
       const_cast<event_data*>(event_data_get())->reset();
@@ -57,7 +59,8 @@ void hfsm::state_engine_step(const state_map_row* const row) {
 
 void hfsm::state_engine_step(const state_map_ex_row* const row_ex) {
   ER_ASSERT(nullptr != row_ex->state(), "FATAL: null state?");
-  ER_VER("Invoking state action: state%d, data=%p", current_state(),
+  ER_VER("Invoking state action: state%d, data=%p",
+         current_state(),
          reinterpret_cast<const void*>(event_data_get()));
   const hfsm_state* state = static_cast<const hfsm_state*>(row_ex->state());
   int rval = event_signal::UNHANDLED;
@@ -67,7 +70,8 @@ void hfsm::state_engine_step(const state_map_ex_row* const row_ex) {
     /*
      * It is possible that we have gotten the HANDLED signal from a parent state
      * of a child that returned UNHANDLED. As such, we need to change both the
-     * event type and the signal of the event so execution can continue normally.
+     * event type and the signal of the event so execution can continue
+     * normally.
      */
     if (event_signal::HANDLED == rval) {
       const_cast<event_data*>(event_data_get())->reset();

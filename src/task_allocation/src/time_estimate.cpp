@@ -32,17 +32,16 @@ NS_START(rcppsw, task_allocation);
  * Member Functions
  ******************************************************************************/
 double time_estimate::calc(double current_measure) {
-  return set_result((1 - m_alpha) * last_result() +
-                    m_alpha * current_measure);
+  return set_result((1 - m_alpha) * last_result() + m_alpha * current_measure);
 } /* calc() */
 
-time_estimate time_estimate::operator+(const time_estimate &other) const {
+time_estimate time_estimate::operator+(const time_estimate& other) const {
   time_estimate r(this->alpha());
   r.set_result(this->last_result() + other.last_result());
   return r;
 }
 
-time_estimate time_estimate::operator/(const time_estimate &other) const {
+time_estimate time_estimate::operator/(const time_estimate& other) const {
   time_estimate r(this->alpha());
   r.set_result(this->last_result() / other.last_result());
   return r;
@@ -75,13 +74,13 @@ time_estimate operator*(double d, const time_estimate& rhs) {
   return r;
 }
 
-time_estimate operator/(double d, const time_estimate &rhs) {
+time_estimate operator/(double d, const time_estimate& rhs) {
   time_estimate r(rhs.alpha());
   r.set_result(rhs.last_result() / d);
   return r;
 }
 
-time_estimate operator/(const time_estimate &lhs, double d) {
+time_estimate operator/(const time_estimate& lhs, double d) {
   time_estimate r(lhs.alpha());
   r.set_result(lhs.last_result() / d);
   return r;

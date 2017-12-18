@@ -52,12 +52,15 @@ base_cli::base_cli(const std::string &mnemonic)
   m_desc.add_options()
 
       /* Add options for configuring logging */
-      ("logfile", bpo::value<std::string>()->default_value(logfile),
+      ("logfile",
+       bpo::value<std::string>()->default_value(logfile),
        ("Specify the file where stuff will be logged to. Default=" + logfile)
-           .c_str())("dbglvl", bpo::value<int>()->default_value(3),
+           .c_str())("dbglvl",
+                     bpo::value<int>()->default_value(3),
                      "Set the initial debug printing level. Higher numbers = "
                      "more verbose output. Range=[0, 5]. Default=3.")(
-          "loglvl", bpo::value<int>()->default_value(3),
+          "loglvl",
+          bpo::value<int>()->default_value(3),
           "Set the initial logging printing level. Higher numbers = more "
           "verbose logging. Range=[0, 5]. Default=3.");
 } /* base_cli::base_cli() */
@@ -132,13 +135,14 @@ void base_cli::print(void) {
         std::cout << "true"
                   << " ";
       }
-    } else {  // Assumes that the only remainder is vector<string>
+    } else { // Assumes that the only remainder is vector<string>
       try {
         std::vector<std::string> vect =
             m_vm[it->first].as<std::vector<std::string> >();
         uint i = 0;
         for (std::vector<std::string>::iterator oit = vect.begin();
-             oit != vect.end(); ++oit, ++i) {
+             oit != vect.end();
+             ++oit, ++i) {
           std::cout << "\r> " << it->first << "[" << i << "]=" << (*oit)
                     << std::endl;
         }
