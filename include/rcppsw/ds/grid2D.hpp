@@ -43,12 +43,13 @@ NS_START(rcppsw, ds);
  * Whatever the template type is must have a zero parameter constructor
  * available or it won't compile.
  */
-template<typename T>
-class grid2D: public base_grid2D<T> {
+template <typename T>
+class grid2D : public base_grid2D<T> {
  public:
-  grid2D(double resolution, size_t x_max, size_t y_max) :
-      base_grid2D<T>(resolution, x_max, y_max),
-      m_cells(boost::extents[base_grid2D<T>::xsize()][base_grid2D<T>::ysize()]) {}
+  grid2D(double resolution, size_t x_max, size_t y_max)
+      : base_grid2D<T>(resolution, x_max, y_max),
+        m_cells(
+            boost::extents[base_grid2D<T>::xsize()][base_grid2D<T>::ysize()]) {}
 
   /**
    * @brief Create a subgrid (really an array view) from a grid. The grid is
@@ -72,7 +73,8 @@ class grid2D: public base_grid2D<T> {
     return grid_view<T>(m_cells[indices[x1][y1]]);
   }
   T& access(size_t i, size_t j) override {
-    return m_cells[static_cast<index_range::index>(i)][static_cast<index_range::index>(j)];
+    return m_cells[static_cast<index_range::index>(i)]
+                  [static_cast<index_range::index>(j)];
   }
 
  private:

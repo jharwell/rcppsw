@@ -64,7 +64,6 @@ class forkable {
    */
   virtual pid_t start(const std::string& new_wd, int core = -1);
 
-
   /**
    * @brief Signal a process that it should terminate, from outside the process.
    */
@@ -88,7 +87,7 @@ class forkable {
   }
 
   bool m_proc_run;
-  pid_t     m_pid;
+  pid_t m_pid;
 };
 
 NS_END(multiprocess, rcppsw);

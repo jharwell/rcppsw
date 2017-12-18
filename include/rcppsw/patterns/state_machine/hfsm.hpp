@@ -113,15 +113,14 @@ class hfsm : public base_fsm {
  * exposes the inner workings of the state machine, but anyone who is using this
  * class should only be manipulating it through the macros anyway.
  */
-#define HFSM_STATE_DECLARE(FSM, state_name, event_data)                      \
- public:                                                                     \
-  int ST_##state_name(const event_data*);                                    \
-                                                                             \
- private:                                                                    \
-  rcppsw::patterns::state_machine::hfsm_state_action1<FSM,                   \
-                                                      event_data,            \
-                                                      &FSM::ST_##state_name> \
-      state_name
+#define HFSM_STATE_DECLARE(FSM, state_name, event_data)          \
+ public:                                                         \
+  int ST_##state_name(const event_data*);                        \
+                                                                 \
+ private:                                                        \
+  rcppsw::patterns::state_machine::                              \
+      hfsm_state_action1<FSM, event_data, &FSM::ST_##state_name> \
+          state_name
 
 #define HFSM_STATE_DEFINE(FSM, state_name, event) \
   FSM_STATE_DEFINE(FSM, state_name, event)
@@ -131,15 +130,14 @@ class hfsm : public base_fsm {
 #define HFSM_GUARD_DEFINE(FSM, guard_name, event_data) \
   FSM_GUARD_DEFINE(FSM, guard_name, event_data)
 
-#define HFSM_ENTRY_DECLARE(FSM, entry_name, event_data)                       \
- public:                                                                      \
-  void EN_##entry_name(const event_data*);                                    \
-                                                                              \
- private:                                                                     \
-  rcppsw::patterns::state_machine::state_entry_action1<FSM,                   \
-                                                       event_data,            \
-                                                       &FSM::EN_##entry_name> \
-      entry_name
+#define HFSM_ENTRY_DECLARE(FSM, entry_name, event_data)           \
+ public:                                                          \
+  void EN_##entry_name(const event_data*);                        \
+                                                                  \
+ private:                                                         \
+  rcppsw::patterns::state_machine::                               \
+      state_entry_action1<FSM, event_data, &FSM::EN_##entry_name> \
+          entry_name
 
 #define HFSM_ENTRY_INHERIT(BASE_FSM, inherited_name, event_data)                \
  private:                                                                       \

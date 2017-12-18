@@ -97,8 +97,8 @@ executable_task* partitionable_task::partition(void) {
                                          m_partition1->exec_estimate());
 
   ER_NOM(
-      "Task '%s': selection_method=%s subtask1->subtask2 prob=%f, "
-      "subtask2->subtask1 prob=%f",
+      "Task '%s': selection_method=%s subtask1->subtask2 "
+      "prob=%f,subtask2->subtask1 prob=%f",
       m_partition1->parent()->name().c_str(),
       m_selection_prob.method().c_str(),
       prob_12,
@@ -112,8 +112,9 @@ executable_task* partitionable_task::partition(void) {
     if (m_last_partition == m_partition1) {
       if (prob_12 >= static_cast<double>(rand()) / RAND_MAX) {
         ret = m_partition2;
+      } else {
+        ret = m_partition1;
       }
-      ret = m_partition1;
     }
     /*
      * If we last executed subtask2, we calculate the probability of switching
@@ -122,8 +123,9 @@ executable_task* partitionable_task::partition(void) {
     else if (m_last_partition == m_partition2) {
       if (prob_21 >= static_cast<double>(rand()) / RAND_MAX) {
         ret = m_partition1;
+      } else {
+        ret = m_partition2;
       }
-      ret = m_partition2;
     }
   }
   /*
@@ -136,6 +138,7 @@ executable_task* partitionable_task::partition(void) {
       ret = m_partition2;
     }
   }
+  ER_ASSERT(nullptr != ret, "FATAL: no task selected");
   ER_NOM("Selected subtask '%s'", ret->name().c_str());
   return ret;
 } /* partition() */

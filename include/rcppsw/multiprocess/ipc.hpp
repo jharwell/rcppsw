@@ -26,13 +26,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <functional>
-#include <list>
-#include <map>
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
 #include <boost/interprocess/allocators/allocator.hpp>
 #include <boost/interprocess/containers/deque.hpp>
 #include <boost/interprocess/containers/list.hpp>
@@ -44,6 +37,13 @@
 #include <boost/interprocess/sync/interprocess_mutex.hpp>
 #include <boost/interprocess/sync/interprocess_semaphore.hpp>
 #include <boost/interprocess/sync/named_mutex.hpp>
+#include <functional>
+#include <list>
+#include <map>
+#include <memory>
+#include <string>
+#include <utility>
+#include <vector>
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
@@ -66,8 +66,8 @@ template <typename T>
 using ipc_list = bip::list<T, ipc_allocator<T>>;
 
 template <typename key, typename value>
-using ipc_map = bip::map<key, value, std::less<key>,
-                         ipc_allocator<std::pair<const key, value>>>;
+using ipc_map =
+    bip::map<key, value, std::less<key>, ipc_allocator<std::pair<const key, value>>>;
 
 /*******************************************************************************
  * Type Definitions

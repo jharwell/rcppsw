@@ -25,15 +25,15 @@
  ******************************************************************************/
 #include <time.h>
 #include <algorithm>
-#include <list>
-#include <iostream>
+#include <boost/shared_ptr.hpp>
 #include <fstream>
+#include <iostream>
+#include <list>
 #include <string>
 #include <vector>
-#include <boost/shared_ptr.hpp>
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/kmeans/cluster.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/kmeans/cluster.hpp"
 #include "rcsw/utils/time_utils.h"
 
 /*******************************************************************************
@@ -47,7 +47,8 @@ NS_START(rcppsw, kmeans);
 /**
  * @brief Base class implementation of k-means clustering algorithm.
  */
-template <typename T> class cluster_algorithm: public common::er_client {
+template <typename T>
+class cluster_algorithm : public common::er_client {
  public:
   cluster_algorithm(std::size_t n_iterations,
                     std::size_t n_clusters,
@@ -56,24 +57,28 @@ template <typename T> class cluster_algorithm: public common::er_client {
                     std::size_t n_points,
                     const std::string& clusters_fname,
                     const std::string& centroids_fname,
-                    common::er_server *const erf) :
-      common::er_client(erf),
-      m_n_iterations(n_iterations), m_n_clusters(n_clusters),
-      m_n_threads(n_threads),
-      m_dimension(dimension), m_n_points(n_points),
-      m_data(NULL),
-      m_membership(NULL),
-      m_clusters_fname(clusters_fname),
-      m_centroids_fname(centroids_fname),
-      m_clusters(new std::vector<kmeans_cluster<T>*>()) {
+                    common::er_server* const erf)
+      : common::er_client(erf),
+        m_n_iterations(n_iterations),
+        m_n_clusters(n_clusters),
+        m_n_threads(n_threads),
+        m_dimension(dimension),
+        m_n_points(n_points),
+        m_data(NULL),
+        m_membership(NULL),
+        m_clusters_fname(clusters_fname),
+        m_centroids_fname(centroids_fname),
+        m_clusters(new std::vector<kmeans_cluster<T>*>()) {
     server_handle()->insmod(er_id(), "KMEANS");
     ER_NOM("n_points=%lu, n_clusters=%lu, n_iterations=%lu\n",
-              m_n_points, m_n_clusters, m_n_iterations);
+           m_n_points,
+           m_n_clusters,
+           m_n_iterations);
   }
 
   virtual ~cluster_algorithm(void) {
     for (std::size_t i = 0; i < m_n_clusters; ++i) {
-      delete(m_clusters->at(i));
+      delete (m_clusters->at(i));
     } /* for(i..) */
     free(m_membership);
   }
@@ -99,10 +104,9 @@ template <typename T> class cluster_algorithm: public common::er_client {
   virtual void report_centroids(void) {
     std::ofstream ofile(m_centroids_fname);
     ofile << m_clusters->size() << " " << m_dimension << std::endl;
-    std::for_each(m_clusters->begin(), m_clusters->end(),
-                  [&](const kmeans_cluster<T>* c) {
-                    c->report_center(ofile);
-                  });
+    std::for_each(m_clusters->begin(),
+                  m_clusters->end(),
+                  [&](const kmeans_cluster<T>* c) { c->report_center(ofile); });
   }
   void cluster(void) {
     ER_NOM("Begin clustering\n");
@@ -117,16 +121,16 @@ template <typename T> class cluster_algorithm: public common::er_client {
       } else {
         end = time_monotonic_sec();
       }
-      ER_DIAG("Iteration %lu time: %.8fms\n", i, (end - iter_start)*1000);
+      ER_DIAG("Iteration %lu time: %.8fms\n", i, (end - iter_start) * 1000);
     } /* for(i..) */
 
-    ER_NOM("k-means clustering time: %0.04fs\n", end-start);
+    ER_NOM("k-means clustering time: %0.04fs\n", end - start);
   } /* cluster_algorithm::cluster() */
 
-  virtual void initialize(std::vector<multidim_point<T>>* data_in)  {
+  virtual void initialize(std::vector<multidim_point<T>>* data_in) {
     /* allocate contiguous memory */
-    std::size_t* data_block = (std::size_t*)malloc(sizeof(T) * m_n_points * m_dimension
-                                                   + sizeof(std::size_t) * m_n_points);
+    std::size_t* data_block = (std::size_t*)malloc(
+        sizeof(T) * m_n_points * m_dimension + sizeof(std::size_t) * m_n_points);
     assert(NULL != data_block);
     m_data = reinterpret_cast<T*>(data_block + m_n_points);
     m_membership = data_block;
@@ -135,7 +139,8 @@ template <typename T> class cluster_algorithm: public common::er_client {
 
     /* Copy data into contiguous chunk */
     for (std::size_t i = 0; i < m_n_points; ++i) {
-      std::copy(data_in->at(i).begin(), data_in->at(i).end(),
+      std::copy(data_in->at(i).begin(),
+                data_in->at(i).end(),
                 m_data + (i * m_dimension));
     } /* for(i..) */
 
@@ -143,8 +148,8 @@ template <typename T> class cluster_algorithm: public common::er_client {
      * Initialize all clusters, including centers
      */
     for (std::size_t i = 0; i < m_n_clusters; ++i) {
-      m_clusters->emplace_back(new kmeans_cluster<T>(i, m_dimension, m_n_points,
-                                                    m_data, m_membership));
+      m_clusters->emplace_back(new kmeans_cluster<T>(
+          i, m_dimension, m_n_points, m_data, m_membership));
     } /* for(i..) */
   }
   virtual void first_touch_allocation(void) {}

@@ -23,10 +23,10 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <iomanip>
-#include <fstream>
-#include <vector>
 #include <cmath>
+#include <fstream>
+#include <iomanip>
+#include <vector>
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
@@ -48,21 +48,24 @@ using multidim_point = std::vector<T>;
  *        of the clustering algorithm.
  */
 
-template <typename T> class kmeans_cluster {
+template <typename T>
+class kmeans_cluster {
  public:
- kmeans_cluster(std::size_t id, std::size_t dimension, std::size_t n_points,
-                 const T* const data, std::size_t * const membership) :
-      m_id(id),
-      m_dimension(dimension),
-      m_n_points(n_points),
-      m_data(data),
-      m_membership(membership),
-      m_center(dimension),
-      m_prev_center(dimension) {
-
+  kmeans_cluster(std::size_t id,
+                 std::size_t dimension,
+                 std::size_t n_points,
+                 const T* const data,
+                 std::size_t* const membership)
+      : m_id(id),
+        m_dimension(dimension),
+        m_n_points(n_points),
+        m_data(data),
+        m_membership(membership),
+        m_center(dimension),
+        m_prev_center(dimension) {
     /* initialize center */
     for (std::size_t i = 0; i < m_dimension; ++i) {
-      m_center[i] = m_data[m_id*m_dimension + i];
+      m_center[i] = m_data[m_id * m_dimension + i];
     } /* for(i..) */
   }
 
@@ -71,7 +74,7 @@ template <typename T> class kmeans_cluster {
   double dist_to_center(const T* const point) {
     T sum = 0;
     for (std::size_t i = 0; i < m_dimension; ++i) {
-      sum += std::pow(point[i] - m_center[i],2);
+      sum += std::pow(point[i] - m_center[i], 2);
     } /* for(i..) */
 
     return sum;
@@ -79,7 +82,7 @@ template <typename T> class kmeans_cluster {
   /* Each cluster knows how to report its own center to a file */
   void report_center(std::ofstream& stream) const {
     for (std::size_t i = 0; i < (m_dimension); ++i) {
-      stream << std::fixed << std::setprecision(3) << m_center[i]  << " ";
+      stream << std::fixed << std::setprecision(3) << m_center[i] << " ";
     } /* for(i..) */
     stream << std::endl;
   } /* report_center() */
@@ -109,7 +112,7 @@ template <typename T> class kmeans_cluster {
     for (std::size_t i = 0; i < m_n_points; ++i) {
       if (m_membership[i] == m_id) {
         for (std::size_t j = 0; j < m_dimension; ++j) {
-          accum[j] += m_data[i*m_dimension + j];
+          accum[j] += m_data[i * m_dimension + j];
         } /* for(j..) */
         ++cluster_points;
       }
@@ -128,13 +131,13 @@ template <typename T> class kmeans_cluster {
   kmeans_cluster& operator=(const kmeans_cluster&) = delete;
   kmeans_cluster(const kmeans_cluster&) = delete;
 
-  std::size_t        m_id;
-  std::size_t        m_dimension;
-  std::size_t        m_n_points;
-  const T* const     m_data;
+  std::size_t m_id;
+  std::size_t m_dimension;
+  std::size_t m_n_points;
+  const T* const m_data;
   std::size_t* const m_membership;
-  std::vector<T>     m_center;
-  std::vector<T>     m_prev_center;
+  std::vector<T> m_center;
+  std::vector<T> m_prev_center;
 };
 
 NS_END(kmeans, rcppsw);
