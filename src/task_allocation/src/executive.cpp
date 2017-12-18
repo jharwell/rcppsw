@@ -36,13 +36,12 @@ executive::~executive(void) {}
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void executive::task_abort_cleanup(
-    std::function<void(executable_task* const)> cb) {
+void executive::task_abort_cleanup(std::function<void(executable_task* const)> cb) {
   m_task_abort_cleanup = cb;
 } /* task_abort_cleanup() */
 
-const std::function<void(executable_task* const)>&
-executive::task_abort_cleanup(void) const {
+const std::function<void(executable_task* const)>& executive::task_abort_cleanup(
+    void) const {
   return m_task_abort_cleanup;
 } /* task_abort_cleanup() */
 
@@ -72,8 +71,7 @@ executable_task* executive::get_next_task(executable_task* last_task) {
                     ->is_partitionable(),
                 "FATAL: Non-partitionable tasks must have a partitionable "
                 "parent");
-      return static_cast<executable_task*>(m_current_task->parent())
-          ->partition();
+      return static_cast<executable_task*>(m_current_task->parent())->partition();
     } else { /* single atomic task in hierarchy */
       return static_cast<executable_task*>(m_current_task);
     }

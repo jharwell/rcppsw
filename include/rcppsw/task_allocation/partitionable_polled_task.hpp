@@ -40,8 +40,7 @@ NS_START(rcppsw, task_allocation);
  * @brief A \ref partitionable_task whose execution is polled periodically by
  * the user to see if it has finished yet.
  */
-class partitionable_polled_task : public polled_task,
-                                  public partitionable_task {
+class partitionable_polled_task : public polled_task, public partitionable_task {
  public:
   partitionable_polled_task(const std::shared_ptr<er::server>& server,
                             const std::string& name,

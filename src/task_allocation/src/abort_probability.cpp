@@ -32,8 +32,7 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-double abort_probability::calc(double exec_time,
-                               const time_estimate& whole_task) {
+double abort_probability::calc(double exec_time, const time_estimate& whole_task) {
   double omega_ta;
   if (!(whole_task.last_result() > 0)) {
     return set_result(0.001);

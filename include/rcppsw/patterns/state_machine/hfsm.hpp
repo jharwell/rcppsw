@@ -113,14 +113,12 @@ class hfsm : public base_fsm {
  * exposes the inner workings of the state machine, but anyone who is using this
  * class should only be manipulating it through the macros anyway.
  */
-#define HFSM_STATE_DECLARE(FSM, state_name, event_data)                      \
- public:                                                                     \
-  int ST_##state_name(const event_data*);                                    \
-                                                                             \
- private:                                                                    \
-  rcppsw::patterns::state_machine::hfsm_state_action1<FSM,                   \
-                                                      event_data,            \
-                                                      &FSM::ST_##state_name> \
+#define HFSM_STATE_DECLARE(FSM, state_name, event_data)                                       \
+ public:                                                                                      \
+  int ST_##state_name(const event_data*);                                                     \
+                                                                                              \
+ private:                                                                                     \
+  rcppsw::patterns::state_machine::hfsm_state_action1<FSM, event_data, &FSM::ST_##state_name> \
       state_name
 
 #define HFSM_STATE_DEFINE(FSM, state_name, event) \
@@ -131,14 +129,12 @@ class hfsm : public base_fsm {
 #define HFSM_GUARD_DEFINE(FSM, guard_name, event_data) \
   FSM_GUARD_DEFINE(FSM, guard_name, event_data)
 
-#define HFSM_ENTRY_DECLARE(FSM, entry_name, event_data)                       \
- public:                                                                      \
-  void EN_##entry_name(const event_data*);                                    \
-                                                                              \
- private:                                                                     \
-  rcppsw::patterns::state_machine::state_entry_action1<FSM,                   \
-                                                       event_data,            \
-                                                       &FSM::EN_##entry_name> \
+#define HFSM_ENTRY_DECLARE(FSM, entry_name, event_data)                                        \
+ public:                                                                                       \
+  void EN_##entry_name(const event_data*);                                                     \
+                                                                                               \
+ private:                                                                                      \
+  rcppsw::patterns::state_machine::state_entry_action1<FSM, event_data, &FSM::EN_##entry_name> \
       entry_name
 
 #define HFSM_ENTRY_INHERIT(BASE_FSM, inherited_name, event_data)                \
@@ -149,19 +145,17 @@ class hfsm : public base_fsm {
 #define HFSM_ENTRY_DEFINE(FSM, entry_name, event_data) \
   FSM_ENTRY_DEFINE(FSM, entry_name, event_data)
 
-#define HFSM_EXIT_DECLARE(FSM, exit_name)                                       \
- public:                                                                        \
-  void EX_##exit_name(void);                                                    \
-                                                                                \
- private:                                                                       \
-  rcppsw::patterns::state_machine::state_exit_action<FSM, &FSM::EX_##exit_name> \
-      exit_name
+#define HFSM_EXIT_DECLARE(FSM, exit_name) \
+ public:                                  \
+  void EX_##exit_name(void);              \
+                                          \
+ private:                                 \
+  rcppsw::patterns::state_machine::state_exit_action<FSM, &FSM::EX_##exit_name> exit_name
 
-#define HFSM_EXIT_INHERIT(BASE_FSM, inherited_name)               \
- private:                                                         \
-  rcppsw::patterns::state_machine::                               \
-      state_exit_action<BASE_FSM, &BASE_FSM::EX_##inherited_name> \
-          inherited_name
+#define HFSM_EXIT_INHERIT(BASE_FSM, inherited_name)                                            \
+ private:                                                                                      \
+  rcppsw::patterns::state_machine::state_exit_action<BASE_FSM, &BASE_FSM::EX_##inherited_name> \
+      inherited_name
 
 #define HFSM_EXIT_DEFINE(FSM, exit_name) FSM_EXIT_DEFINE(FSM, exit_name)
 
@@ -178,20 +172,17 @@ class hfsm : public base_fsm {
 /*******************************************************************************
  * State Macros Without Data
  ******************************************************************************/
-#define HFSM_STATE_INHERIT_ND(BASE_FSM, inherited_name)            \
- private:                                                          \
-  rcppsw::patterns::state_machine::                                \
-      hfsm_state_action0<BASE_FSM, &BASE_FSM::ST_##inherited_name> \
-          inherited_name
+#define HFSM_STATE_INHERIT_ND(BASE_FSM, inherited_name)                                         \
+ private:                                                                                       \
+  rcppsw::patterns::state_machine::hfsm_state_action0<BASE_FSM, &BASE_FSM::ST_##inherited_name> \
+      inherited_name
 
-#define HFSM_STATE_DECLARE_ND(FSM, state_name)                               \
- public:                                                                     \
-  int ST_##state_name(void);                                                 \
-                                                                             \
- private:                                                                    \
-  rcppsw::patterns::state_machine::hfsm_state_action0<FSM,                   \
-                                                      &FSM::ST_##state_name> \
-      state_name
+#define HFSM_STATE_DECLARE_ND(FSM, state_name) \
+ public:                                       \
+  int ST_##state_name(void);                   \
+                                               \
+ private:                                      \
+  rcppsw::patterns::state_machine::hfsm_state_action0<FSM, &FSM::ST_##state_name> state_name
 
 #define HFSM_STATE_DEFINE_ND(FSM, state_name) \
   FSM_STATE_DEFINE_ND(FSM, state_name)
@@ -201,20 +192,18 @@ class hfsm : public base_fsm {
 #define HFSM_GUARD_DEFINE_ND(FSM, guard_name) \
   FSM_GUARD_DEFINE_ND(FSM, guard_name)
 
-#define HFSM_ENTRY_DECLARE_ND(FSM, entry_name)                                \
- public:                                                                      \
-  void EN_##entry_name(void);                                                 \
-                                                                              \
- private:                                                                     \
-  rcppsw::patterns::state_machine::state_entry_action0<FSM,                   \
-                                                       &FSM::EN_##entry_name> \
-      entry_name
+#define HFSM_ENTRY_DECLARE_ND(FSM, entry_name) \
+ public:                                       \
+  void EN_##entry_name(void);                  \
+                                               \
+ private:                                      \
+  rcppsw::patterns::state_machine::state_entry_action0<FSM, &FSM::EN_##entry_name> entry_name
 
-#define HFSM_ENTRY_INHERIT_ND(BASE_FSM, inherited_name)             \
- private:                                                           \
-  rcppsw::patterns::state_machine::                                 \
-      state_entry_action0<BASE_FSM, &BASE_FSM::EN_##inherited_name> \
-          inherited_name
+#define HFSM_ENTRY_INHERIT_ND(BASE_FSM, inherited_name)                                \
+ private:                                                                              \
+  rcppsw::patterns::state_machine::state_entry_action0<BASE_FSM,                       \
+                                                       &BASE_FSM::EN_##inherited_name> \
+      inherited_name
 #define HFSM_ENTRY_DEFINE_ND(FSM, entry_name) \
   FSM_ENTRY_DEFINE_ND(FSM, entry_name)
 
