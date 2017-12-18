@@ -51,7 +51,8 @@ class state_entry {
    * @param sm A state machine instance.
    * @param data The event data.
    */
-  virtual void invoke_entry_action(base_fsm* sm, const event_data* data) const = 0;
+  virtual void invoke_entry_action(base_fsm* sm,
+                                   const event_data* data) const = 0;
 };
 
 NS_END(state_machine, patterns, rcppsw);

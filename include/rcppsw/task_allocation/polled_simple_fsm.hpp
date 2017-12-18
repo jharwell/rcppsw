@@ -46,7 +46,8 @@ NS_START(rcppsw, task_allocation);
 class polled_simple_fsm : public taskable,
                           public patterns::state_machine::simple_fsm {
  public:
-  polled_simple_fsm(const std::shared_ptr<er::server>& server, uint8_t max_states)
+  polled_simple_fsm(const std::shared_ptr<er::server>& server,
+                    uint8_t max_states)
       : taskable(), patterns::state_machine::simple_fsm(server, max_states) {}
   virtual ~polled_simple_fsm(void) {}
 

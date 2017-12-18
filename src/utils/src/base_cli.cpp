@@ -36,12 +36,12 @@ NS_START(rcppsw);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_cli::base_cli(const std::string &mnemonic)
+base_cli::base_cli(const std::string& mnemonic)
     : m_vm(), m_desc("Program options"), m_prog_name(), m_base_output_dir() {
   time_t rawtime;
   char buffer[80];
   time(&rawtime);
-  struct tm *timeinfo = localtime(&rawtime);
+  struct tm* timeinfo = localtime(&rawtime);
   strftime(buffer, 80, "%Y-%m-%d", timeinfo);
 
   m_base_output_dir = "outputs/" + mnemonic + "/" + std::string(buffer) + "/";
@@ -70,7 +70,7 @@ base_cli::~base_cli(void) {}
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-status_t base_cli::parse(int argc, char **argv) {
+status_t base_cli::parse(int argc, char** argv) {
   m_prog_name = std::string(argv[0]);
   try {
     bpo::store(bpo::parse_command_line(argc, argv, m_desc), m_vm);
@@ -79,7 +79,7 @@ status_t base_cli::parse(int argc, char **argv) {
       return ERROR;
     }
     bpo::notify(m_vm);
-  } catch (bpo::error &e) {
+  } catch (bpo::error& e) {
     std::cerr << "ERROR: " << e.what() << "\n\n";
     std::cerr << m_desc << "\n";
     return ERROR;
@@ -101,16 +101,16 @@ void base_cli::print(void) {
 
     bool is_char;
     try {
-      boost::any_cast<const char *>(it->second.value());
+      boost::any_cast<const char*>(it->second.value());
       is_char = true;
-    } catch (const boost::bad_any_cast &) {
+    } catch (const boost::bad_any_cast&) {
       is_char = false;
     }
     bool is_str;
     try {
       boost::any_cast<std::string>(it->second.value());
       is_str = true;
-    } catch (const boost::bad_any_cast &) {
+    } catch (const boost::bad_any_cast&) {
       is_str = false;
     }
 
@@ -126,7 +126,7 @@ void base_cli::print(void) {
                typeid(float)) {
       std::cout << m_vm[it->first].as<float>() << " ";
     } else if (is_char) {
-      std::cout << m_vm[it->first].as<const char *>() << " ";
+      std::cout << m_vm[it->first].as<const char*>() << " ";
     } else if (is_str) {
       std::string temp = m_vm[it->first].as<std::string>();
       if (temp.size()) {
@@ -146,7 +146,7 @@ void base_cli::print(void) {
           std::cout << "\r> " << it->first << "[" << i << "]=" << (*oit)
                     << std::endl;
         }
-      } catch (const boost::bad_any_cast &) {
+      } catch (const boost::bad_any_cast&) {
         std::cout << "UnknownType("
                   << (static_cast<boost::any>(it->second.value()).type()).name()
                   << ")" << std::endl;

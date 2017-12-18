@@ -61,7 +61,8 @@ class executive : public rcppsw::er::client {
    * abort callbacks are needed, they can be implemented that way.
    */
   void task_abort_cleanup(std::function<void(executable_task* const)> cb);
-  const std::function<void(executable_task* const)>& task_abort_cleanup(void) const;
+  const std::function<void(executable_task* const)>& task_abort_cleanup(
+      void) const;
 
  protected:
   executable_task* root(void) const { return m_root; }
