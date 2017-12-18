@@ -161,55 +161,64 @@ NS_END(state_machine, patterns, rcppsw);
 /*******************************************************************************
  * State Macros With Data
  ******************************************************************************/
-#define FSM_STATE_DECLARE(FSM, state_name, event_data) \
-  int ST_##state_name(const event_data*);              \
-  rcppsw::patterns::state_machine::state_action1<FSM, event_data, &FSM::ST_##state_name> state_name
+#define FSM_STATE_DECLARE(FSM, state_name, event_data)                  \
+  int ST_##state_name(const event_data*);                               \
+  rcppsw::patterns::state_machine::state_action1<FSM,                   \
+                                                 event_data,            \
+                                                 &FSM::ST_##state_name> \
+      state_name
 
 #define FSM_STATE_DEFINE(FSM, state_name, event_data) \
   int FSM::ST_##state_name(const event_data* data)
 
-#define FSM_GUARD_DECLARE(FSM, guard_name, event_data)                           \
-  bool GD_##guard_name(const event_data*);                                       \
-  rcppsw::patterns::state_machine::state_guard_condition1<FSM,                   \
-                                                          event_data,            \
-                                                          &FSM::GD_##guard_name> \
-      guard_name
+#define FSM_GUARD_DECLARE(FSM, guard_name, event_data)               \
+  bool GD_##guard_name(const event_data*);                           \
+  rcppsw::patterns::state_machine::                                  \
+      state_guard_condition1<FSM, event_data, &FSM::GD_##guard_name> \
+          guard_name
 
 #define FSM_GUARD_DEFINE(FSM, guard_name, event_data) \
   bool FSM::GD_##guard_name(const event_data* data)
 
-#define FSM_ENTRY_DECLARE(FSM, entry_name, event_data)                                         \
-  void EN_##entry_name(const event_data*);                                                     \
-  rcppsw::patterns::state_machine::state_entry_action1<FSM, event_data, &FSM::EN_##entry_name> \
+#define FSM_ENTRY_DECLARE(FSM, entry_name, event_data)                        \
+  void EN_##entry_name(const event_data*);                                    \
+  rcppsw::patterns::state_machine::state_entry_action1<FSM,                   \
+                                                       event_data,            \
+                                                       &FSM::EN_##entry_name> \
       entry_name
 
 #define FSM_ENTRY_DEFINE(FSM, entry_name, event_data) \
   void FSM::EN_##entry_name(const event_data* data)
 
-#define FSM_EXIT_DECLARE(FSM, exit_name) \
-  void EX_##exit_name(void);             \
-  rcppsw::patterns::state_machine::state_exit_action<FSM, &FSM::EX_##exit_name> exit_name
+#define FSM_EXIT_DECLARE(FSM, exit_name)                                        \
+  void EX_##exit_name(void);                                                    \
+  rcppsw::patterns::state_machine::state_exit_action<FSM, &FSM::EX_##exit_name> \
+      exit_name
 
 #define FSM_EXIT_DEFINE(FSM, exit_name) void FSM::EX_##exit_name(void)
 
 /*******************************************************************************
 * State Macros Without Data
 ******************************************************************************/
-#define FSM_STATE_DECLARE_ND(FSM, state_name) \
-  int ST_##state_name(void);                  \
-  rcppsw::patterns::state_machine::state_action0<FSM, &FSM::ST_##state_name> state_name
+#define FSM_STATE_DECLARE_ND(FSM, state_name)                                \
+  int ST_##state_name(void);                                                 \
+  rcppsw::patterns::state_machine::state_action0<FSM, &FSM::ST_##state_name> \
+      state_name
 
 #define FSM_STATE_DEFINE_ND(FSM, state_name) int FSM::ST_##state_name(void)
 
-#define FSM_GUARD_DECLARE_ND(FSM, guard_name) \
-  bool GD_##guard_name(void);                 \
-  rcppsw::patterns::state_machine::state_guard_condition0<FSM, &FSM::GD_##guard_name> guard_name
+#define FSM_GUARD_DECLARE_ND(FSM, guard_name)                                    \
+  bool GD_##guard_name(void);                                                    \
+  rcppsw::patterns::state_machine::state_guard_condition0<FSM,                   \
+                                                          &FSM::GD_##guard_name> \
+      guard_name
 
 #define FSM_GUARD_DEFINE_ND(FSM, guard_name) bool FSM::GD_##guard_name(void)
 
-#define FSM_ENTRY_DECLARE_ND(FSM, entry_name) \
-  void EN_##entry_name(void);                 \
-  rcppsw::patterns::state_machine::state_entry_action0<FSM, &FSM::EN_##entry_name> entry_name
+#define FSM_ENTRY_DECLARE_ND(FSM, entry_name)                                      \
+  void EN_##entry_name(void);                                                      \
+  rcppsw::patterns::state_machine::state_entry_action0<FSM, &FSM::EN_##entry_name> \
+      entry_name
 
 #define FSM_ENTRY_DEFINE_ND(FSM, entry_name) void FSM::EN_##entry_name(void)
 
@@ -242,11 +251,13 @@ NS_END(state_machine, patterns, rcppsw);
 #define FSM_STATE_MAP_ENTRY(state_name) \
   rcppsw::patterns::state_machine::state_map_row(state_name)
 
-#define FSM_STATE_MAP_ENTRY_EX(state_name) \
-  rcppsw::patterns::state_machine::state_map_ex_row(state_name, NULL, NULL, NULL)
+#define FSM_STATE_MAP_ENTRY_EX(state_name)           \
+  rcppsw::patterns::state_machine::state_map_ex_row( \
+      state_name, NULL, NULL, NULL)
 
-#define FSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name) \
-  rcppsw::patterns::state_machine::state_map_ex_row(                              \
+#define FSM_STATE_MAP_ENTRY_EX_ALL(                  \
+    state_name, guard_name, entry_name, exit_name)   \
+  rcppsw::patterns::state_machine::state_map_ex_row( \
       state_name, guard_name, entry_name, exit_name)
 
 #define FSM_VERIFY_STATE_MAP(type, name, n_entries)                            \

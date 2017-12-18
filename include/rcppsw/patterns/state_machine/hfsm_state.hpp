@@ -86,7 +86,8 @@ class hfsm_state_action1 : public hfsm_state {
  public:
   explicit hfsm_state_action1(hfsm_state* parent) : hfsm_state(parent) {}
   virtual ~hfsm_state_action1() {}
-  int invoke_state_action(base_fsm* fsm, const event_data* event) const override {
+  int invoke_state_action(base_fsm* fsm,
+                          const event_data* event) const override {
     /* Downcast the state machine and event data to the correct derived type */
     FSM* derived_fsm = static_cast<FSM*>(fsm);
     const Event* derived_event = NULL;

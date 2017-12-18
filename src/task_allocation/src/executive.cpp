@@ -36,7 +36,8 @@ executive::~executive(void) {}
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void executive::task_abort_cleanup(std::function<void(executable_task* const)> cb) {
+void executive::task_abort_cleanup(
+    std::function<void(executable_task* const)> cb) {
   m_task_abort_cleanup = cb;
 } /* task_abort_cleanup() */
 
