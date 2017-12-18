@@ -25,8 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/task_allocation/time_estimate.hpp"
 #include "rcppsw/task_allocation/logical_task.hpp"
+#include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -59,7 +59,9 @@ class executable_task : public logical_task {
   /**
    * @brief Get the current estimate of the task's interface time.
    */
-  const time_estimate& interface_estimate(void) const { return m_interface_estimate; }
+  const time_estimate& interface_estimate(void) const {
+    return m_interface_estimate;
+  }
   const time_estimate& exec_estimate(void) const { return m_exec_estimate; }
 
   /**
@@ -69,8 +71,12 @@ class executable_task : public logical_task {
    *
    * @param last_measure The last measured time.
    */
-  void update_interface_estimate(double last_measure) { m_interface_estimate.calc(last_measure); }
-  void update_exec_estimate(double last_measure) { m_exec_estimate.calc(last_measure); }
+  void update_interface_estimate(double last_measure) {
+    m_interface_estimate.calc(last_measure);
+  }
+  void update_exec_estimate(double last_measure) {
+    m_exec_estimate.calc(last_measure);
+  }
 
   /**
    * @brief The method that all tasks must define that specifies how to execute
@@ -107,9 +113,13 @@ class executable_task : public logical_task {
    *
    * This is needed for accurate task abort calculations.
    */
-  void update_interface_time(void) { m_interface_time = calc_interface_time(m_interface_start_time); }
+  void update_interface_time(void) {
+    m_interface_time = calc_interface_time(m_interface_start_time);
+  }
   void reset_interface_time(void) { m_interface_start_time = current_time(); }
-  void update_exec_time(void) { m_exec_time = current_time() - m_exec_start_time; }
+  void update_exec_time(void) {
+    m_exec_time = current_time() - m_exec_start_time;
+  }
   void reset_exec_time(void) { m_exec_start_time = current_time(); }
 
  private:

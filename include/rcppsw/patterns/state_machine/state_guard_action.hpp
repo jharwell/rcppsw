@@ -68,13 +68,11 @@ template <class SM, bool (SM::*Func)(void)>
 class state_guard_condition0 : public state_guard {
  public:
   virtual ~state_guard_condition0() {}
-  bool invoke_guard_condition(base_fsm* sm,
-                              const event_data*) const override {
+  bool invoke_guard_condition(base_fsm* sm, const event_data*) const override {
     SM* derived_fsm = static_cast<SM*>(sm);
     return (derived_fsm->*Func)();
   }
 };
-
 
 NS_END(state_machine, patterns, rcppsw);
 

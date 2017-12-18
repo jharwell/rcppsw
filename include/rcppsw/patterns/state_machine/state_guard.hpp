@@ -53,7 +53,8 @@ class state_guard {
    * @return Returns TRUE if no guard condition or the guard condition evaluates
    * to TRUE.
    */
-  virtual bool invoke_guard_condition(base_fsm* sm, const event_data*) const = 0;
+  virtual bool invoke_guard_condition(base_fsm* sm,
+                                      const event_data*) const = 0;
 };
 
 NS_END(state_machine, patterns, rcppsw);

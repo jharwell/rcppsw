@@ -26,9 +26,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <boost/uuid/uuid.hpp>
 #include <iosfwd>
 #include <string>
-#include <boost/uuid/uuid.hpp>
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
@@ -52,8 +52,10 @@ class er_lvl {
 class server_mod {
  public:
   /* member functions */
-  server_mod(boost::uuids::uuid id, er_lvl::value loglvl,
-                er_lvl::value dbglvl, std::string name);
+  server_mod(boost::uuids::uuid id,
+             er_lvl::value loglvl,
+             er_lvl::value dbglvl,
+             std::string name);
   server_mod(boost::uuids::uuid id, std::string name);
 
   /**
@@ -81,27 +83,28 @@ class server_mod {
    * @param log_lvl The level of the message.
    * @param stream The stream to log the message to.
    */
-  void msg_report(const std::string& header, const std::string& msg,
-                  er_lvl::value msg_lvl, er_lvl::value log_lvl,
+  void msg_report(const std::string& header,
+                  const std::string& msg,
+                  er_lvl::value msg_lvl,
+                  er_lvl::value log_lvl,
                   std::ostream& stream) const;
   bool operator==(const server_mod& rhs);
-  const boost::uuids::uuid& id(void) const {return m_id; }
+  const boost::uuids::uuid& id(void) const { return m_id; }
   void change_id(boost::uuids::uuid id) { m_id = std::move(id); }
   const std::string& name(void) const { return m_name; }
 
  private:
   /* data members */
   boost::uuids::uuid m_id;
-  std::string        m_name;
-  er_lvl::value      m_loglvl;
-  er_lvl::value      m_dbglvl;
+  std::string m_name;
+  er_lvl::value m_loglvl;
+  er_lvl::value m_dbglvl;
 };
 
 /*******************************************************************************
  * Operator Definitions
  ******************************************************************************/
-std::ostream& operator<<(std::ostream& os,
-                         const rcppsw::er::server_mod& mod);
+std::ostream& operator<<(std::ostream& os, const rcppsw::er::server_mod& mod);
 
 NS_END(er, rcppsw);
 

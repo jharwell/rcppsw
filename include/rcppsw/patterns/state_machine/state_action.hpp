@@ -25,9 +25,9 @@
  * Includes
  ******************************************************************************/
 #include <assert.h>
+#include "rcppsw/common/common.hpp"
 #include "rcppsw/patterns/state_machine/event.hpp"
 #include "rcppsw/patterns/state_machine/state.hpp"
-#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -84,7 +84,6 @@ class state_action1 : public state {
     return (derived_fsm->*Func)(derived_event);
   }
 };
-
 
 NS_END(state_machine, patterns, rcppsw);
 

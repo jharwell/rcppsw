@@ -41,9 +41,11 @@ NS_START(rcppsw, task_allocation);
 class executive : public rcppsw::er::client {
  public:
   executive(const std::shared_ptr<rcppsw::er::server>& server,
-            executable_task *const root) :
-      client(server), m_current_task(nullptr),
-      m_task_abort_cleanup(nullptr), m_root(root) {
+            executable_task* const root)
+      : client(server),
+        m_current_task(nullptr),
+        m_task_abort_cleanup(nullptr),
+        m_root(root) {
     client::insmod("task_executive",
                    rcppsw::er::er_lvl::DIAG,
                    rcppsw::er::er_lvl::NOM);
@@ -59,11 +61,14 @@ class executive : public rcppsw::er::client {
    * abort callbacks are needed, they can be implemented that way.
    */
   void task_abort_cleanup(std::function<void(executable_task* const)> cb);
-  const std::function<void(executable_task*const)>& task_abort_cleanup(void) const;
+  const std::function<void(executable_task* const)>& task_abort_cleanup(
+      void) const;
 
  protected:
   executable_task* root(void) const { return m_root; }
-  void current_task(executable_task* current_task) { m_current_task = current_task; }
+  void current_task(executable_task* current_task) {
+    m_current_task = current_task;
+  }
   executable_task* get_next_task(executable_task* last_task);
   double task_abort_prob(executable_task* const task);
 

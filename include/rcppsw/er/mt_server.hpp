@@ -87,11 +87,12 @@ class mt_server : public server, public multithread::threadable {
    * @param lvl The level of the message.
    * @param str The message.
    */
-  void report(const boost::uuids::uuid& er_id, const er_lvl::value& lvl,
+  void report(const boost::uuids::uuid& er_id,
+              const er_lvl::value& lvl,
               const std::string& str) override {
     msg_int msg(er_id, lvl, str);
     msg_report(msg);
-      m_queue.enqueue(msg);
+    m_queue.enqueue(msg);
   }
 
  private:

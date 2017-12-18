@@ -48,15 +48,15 @@ NS_START(rcppsw, control);
  */
 class pid_loop {
  public:
-  pid_loop(double Kp, double Kd, double Ki, double dt, double min, double max) :
-      m_Kp(Kp),
-      m_Kd(Kd),
-      m_Ki(Ki),
-      m_dt(dt),
-      m_min(min),
-      m_max(max),
-      m_istate(0),
-      m_prev_error(0.0) {}
+  pid_loop(double Kp, double Kd, double Ki, double dt, double min, double max)
+      : m_Kp(Kp),
+        m_Kd(Kd),
+        m_Ki(Ki),
+        m_dt(dt),
+        m_min(min),
+        m_max(max),
+        m_istate(0),
+        m_prev_error(0.0) {}
   ~pid_loop() {}
 
   /**
