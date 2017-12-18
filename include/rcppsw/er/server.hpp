@@ -79,7 +79,8 @@ class server {
 
   virtual ~server(void);
 
-  status_t change_id(const boost::uuids::uuid& old_id, boost::uuids::uuid new_id);
+  status_t change_id(const boost::uuids::uuid& old_id,
+                     boost::uuids::uuid new_id);
   std::ofstream& log_stream(void) { return *m_logfile.get(); }
   std::ostream& dbg_stream(void);
   const std::string& logfile_fname(void) const { return m_logfile_fname; }

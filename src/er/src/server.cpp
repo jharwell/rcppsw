@@ -125,7 +125,8 @@ error:
   return ERROR;
 } /* insmod() */
 
-status_t server::findmod(const std::string& mod_name, boost::uuids::uuid& mod_id) {
+status_t server::findmod(const std::string& mod_name,
+                         boost::uuids::uuid& mod_id) {
   for (auto mod : m_modules) {
     if (mod.name() == mod_name) {
       mod_id = mod.id();
