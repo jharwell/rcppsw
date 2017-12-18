@@ -25,8 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <pthread.h>
-#include <sys/types.h>
 #include <sys/syscall.h>
+#include <sys/types.h>
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
@@ -59,7 +59,6 @@ class threadable {
    * @return status_t - OK if successful, ERROR otherwise
    */
   virtual status_t start(void* arg, int core = -1);
-
 
   /**
    * @brief Signal a thread that it should terminate, from outside the thread.
@@ -107,9 +106,10 @@ class threadable {
    */
   int64_t thread_id(void) { return syscall(__NR_gettid); }
 
-  threadable(const threadable&& other) : m_thread_run(other.m_thread_run),
-                                         m_thread(other.m_thread),
-                                         m_arg(other.m_arg) {}
+  threadable(const threadable&& other)
+      : m_thread_run(other.m_thread_run),
+        m_thread(other.m_thread),
+        m_arg(other.m_arg) {}
 
  private:
   static void* entry_point(void* this_p) {
@@ -120,9 +120,9 @@ class threadable {
   const threadable& operator=(const threadable& rhs) = delete;
   threadable(const threadable& other) = delete;
 
-  bool      m_thread_run;
+  bool m_thread_run;
   pthread_t m_thread;
-  void      *m_arg;
+  void* m_arg;
 };
 
 NS_END(multithread, rcppsw);

@@ -25,9 +25,9 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/patterns/state_machine/state.hpp"
-#include "rcppsw/patterns/state_machine/state_guard.hpp"
-#include "rcppsw/patterns/state_machine/state_exit.hpp"
 #include "rcppsw/patterns/state_machine/state_entry.hpp"
+#include "rcppsw/patterns/state_machine/state_exit.hpp"
+#include "rcppsw/patterns/state_machine/state_guard.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -44,8 +44,9 @@ class state_map_ex_row {
  public:
   state_map_ex_row(rcppsw::patterns::state_machine::state* state,
                    state_guard* guard,
-                   state_entry* entry, state_exit* exit) :
-      m_state(state), m_guard(guard), m_entry(entry), m_exit(exit) {}
+                   state_entry* entry,
+                   state_exit* exit)
+      : m_state(state), m_guard(guard), m_entry(entry), m_exit(exit) {}
   rcppsw::patterns::state_machine::state* state(void) const { return m_state; }
   state_guard* guard(void) const { return m_guard; }
   state_entry* entry(void) const { return m_entry; }

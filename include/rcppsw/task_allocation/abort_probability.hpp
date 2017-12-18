@@ -51,10 +51,10 @@ NS_START(rcppsw, task_allocation);
  * - Time estimates for the task.
  * - How long the robot has spent executing the current task.
  */
-class abort_probability: public rcppsw::math::expression<double> {
+class abort_probability : public rcppsw::math::expression<double> {
  public:
-  abort_probability(double reactivity, double offset) :
-      m_reactivity(reactivity), m_offset(offset) {}
+  abort_probability(double reactivity, double offset)
+      : m_reactivity(reactivity), m_offset(offset) {}
 
   double calc(double exec_time, const time_estimate& whole_task);
 
@@ -62,7 +62,6 @@ class abort_probability: public rcppsw::math::expression<double> {
   double m_reactivity;
   double m_offset;
 };
-
 
 NS_END(task_allocation, rcppsw);
 

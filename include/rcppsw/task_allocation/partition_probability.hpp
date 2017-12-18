@@ -52,11 +52,10 @@ NS_START(rcppsw, task_allocation);
  * - The reactivity parameter: how sensitive should robots be to abrupt changes
  *   in the estimates?
  */
-class partition_probability: public rcppsw::math::expression<double> {
+class partition_probability : public rcppsw::math::expression<double> {
  public:
-  explicit partition_probability(const std::string& method,
-                                 double reactivity) :
-      mc_method(method), m_reactivity(reactivity) {}
+  explicit partition_probability(const std::string& method, double reactivity)
+      : mc_method(method), m_reactivity(reactivity) {}
 
   double calc(const time_estimate& task,
               const time_estimate& subtask1,

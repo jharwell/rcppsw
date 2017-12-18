@@ -24,13 +24,13 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
-#include <string>
+#include <algorithm>
 #include <fstream>
-#include <sstream>
 #include <iostream>
 #include <iterator>
-#include <algorithm>
+#include <sstream>
+#include <string>
+#include <vector>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/utils/line_parser.hpp"
 
@@ -47,9 +47,10 @@ NS_START(rcppsw, utils);
  * a file into a vector of whitespace delimited tokens, and returns a vector of
  * vectors (1 per line).
  */
-template <typename T> class file_parser {
+template <typename T>
+class file_parser {
  public:
-  explicit file_parser(const std::string& fname): m_fname(fname) {}
+  explicit file_parser(const std::string& fname) : m_fname(fname) {}
 
   /**
    * @brief Parse a file into a vector of sets of tokens.

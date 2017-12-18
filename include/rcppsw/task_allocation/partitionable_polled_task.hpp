@@ -25,8 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/task_allocation/polled_task.hpp"
 #include "rcppsw/task_allocation/partitionable_task.hpp"
+#include "rcppsw/task_allocation/polled_task.hpp"
 
 /*******************************************************************************
  * Namespacesp

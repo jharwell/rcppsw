@@ -25,9 +25,9 @@
  * Includes
  ******************************************************************************/
 #include <assert.h>
+#include "rcppsw/common/common.hpp"
 #include "rcppsw/patterns/state_machine/event.hpp"
 #include "rcppsw/patterns/state_machine/state.hpp"
-#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -37,15 +37,19 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class hfsm_state: public state {
+class hfsm_state : public state {
  public:
   explicit hfsm_state(hfsm_state* parent) : state(), m_parent(parent) {}
   virtual ~hfsm_state() {}
 
   int invoke_state_action(base_fsm* fsm,
                           const event_data* e) const override = 0;
-  rcppsw::patterns::state_machine::state* parent(void) const { return m_parent; }
-  void parent(rcppsw::patterns::state_machine::state* parent) { m_parent = parent; }
+  rcppsw::patterns::state_machine::state* parent(void) const {
+    return m_parent;
+  }
+  void parent(rcppsw::patterns::state_machine::state* parent) {
+    m_parent = parent;
+  }
 
  private:
   hfsm_state& operator=(const hfsm_state& fsm) = delete;
@@ -60,14 +64,12 @@ class hfsm_state: public state {
  * - The current state machine class.
  * - A state machine member function pointer that takes ZERO arguments.
  */
-template <class FSM,
-          int (FSM::*Handler)(void)>
+template <class FSM, int (FSM::*Handler)(void)>
 class hfsm_state_action0 : public hfsm_state {
  public:
   explicit hfsm_state_action0(hfsm_state* parent) : hfsm_state(parent) {}
   virtual ~hfsm_state_action0(void) {}
-  int invoke_state_action(base_fsm* fsm,
-                          const event_data*) const override {
+  int invoke_state_action(base_fsm* fsm, const event_data*) const override {
     FSM* derived_fsm = static_cast<FSM*>(fsm);
     return (derived_fsm->*Handler)();
   }
@@ -80,9 +82,7 @@ class hfsm_state_action0 : public hfsm_state {
  * - A state function event data type (derived from event).
  * - A state machine member function pointer, that takes ONE argument.
  */
-template <class FSM,
-          class Event,
-          int (FSM::*Handler)(const Event*)>
+template <class FSM, class Event, int (FSM::*Handler)(const Event*)>
 class hfsm_state_action1 : public hfsm_state {
  public:
   explicit hfsm_state_action1(hfsm_state* parent) : hfsm_state(parent) {}

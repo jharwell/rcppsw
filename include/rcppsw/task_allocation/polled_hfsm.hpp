@@ -25,8 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/task_allocation/taskable.hpp"
 #include "rcppsw/patterns/state_machine/hfsm.hpp"
+#include "rcppsw/task_allocation/taskable.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -43,12 +43,12 @@ NS_START(rcppsw, task_allocation);
  * These FSMs are attached to \ref atomic_polled_task instances as their method
  * of execution.
  */
-class polled_hfsm : public taskable,
-                    public patterns::state_machine::hfsm {
+class polled_hfsm : public taskable, public patterns::state_machine::hfsm {
  public:
   explicit polled_hfsm(const std::shared_ptr<common::er_server>& server,
-                       uint8_t max_states, uint8_t initial_state = 0) :
-      taskable(), hfsm(server, max_states, initial_state) {}
+                       uint8_t max_states,
+                       uint8_t initial_state = 0)
+      : taskable(), hfsm(server, max_states, initial_state) {}
   virtual ~polled_hfsm(void) {}
 
   void task_reset(void) override { init(); }

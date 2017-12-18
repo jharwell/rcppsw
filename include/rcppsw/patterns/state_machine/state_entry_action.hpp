@@ -25,9 +25,9 @@
  * Includes
  ******************************************************************************/
 #include <assert.h>
+#include "rcppsw/common/common.hpp"
 #include "rcppsw/patterns/state_machine/event.hpp"
 #include "rcppsw/patterns/state_machine/state_entry.hpp"
-#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -49,8 +49,7 @@ template <class SM, void (SM::*Func)(void)>
 class state_entry_action0 : public state_entry {
  public:
   virtual ~state_entry_action0(void) {}
-  void invoke_entry_action(base_fsm* sm,
-                           const event_data*) const override {
+  void invoke_entry_action(base_fsm* sm, const event_data*) const override {
     SM* derived_fsm = static_cast<SM*>(sm);
     (derived_fsm->*Func)();
   }
@@ -64,7 +63,7 @@ class state_entry_action0 : public state_entry {
  * - A state machine  member function pointer that takes ONE argument.
  */
 template <class SM, class Event, void (SM::*Func)(const Event*)>
-class state_entry_action1: public state_entry {
+class state_entry_action1 : public state_entry {
  public:
   virtual ~state_entry_action1(void) {}
   void invoke_entry_action(base_fsm* sm,
