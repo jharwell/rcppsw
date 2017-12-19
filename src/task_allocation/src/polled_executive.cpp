@@ -42,8 +42,7 @@ void polled_executive::run(void) {
      * rather than the 0 we get if we do not do this.
      */
     if (executive::root()->is_partitionable()) {
-      partitionable_polled_task* p =
-          dynamic_cast<partitionable_polled_task*>(executive::root());
+      auto* p = dynamic_cast<partitionable_polled_task*>(executive::root());
       p->update_partition_prob(p->exec_estimate(),
                                p->partition1()->exec_estimate(),
                                p->partition1()->exec_estimate());
@@ -52,7 +51,7 @@ void polled_executive::run(void) {
     handle_task_start(
         static_cast<polled_task*>(executive::get_next_task(nullptr)));
   }
-  polled_task* current = dynamic_cast<polled_task*>(executive::current_task());
+  auto* current = dynamic_cast<polled_task*>(executive::current_task());
   ER_ASSERT(current, "FATAL: polled_executive can only work with polled tasks");
 
   if (current->task_finished()) {
@@ -126,7 +125,7 @@ void polled_executive::handle_task_finish(polled_task* task) {
   task->task_execute();
 } /* handle_task_finish() */
 
-void polled_executive::handle_task_start(polled_task* const new_task) {
+void polled_executive::handle_task_start(polled_task* new_task) {
   ER_NOM("Starting new task '%s'", new_task->name().c_str());
 
   new_task->task_reset();

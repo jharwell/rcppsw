@@ -26,9 +26,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <assert.h>
-#include <boost/uuid/uuid.hpp>
+#include <cassert>
 #include <string>
+#include <boost/uuid/uuid.hpp>
 #include "rcppsw/er/server_mod.hpp"
 
 /*******************************************************************************
@@ -56,12 +56,12 @@
              "%s:%d:%s: " msg "\n",                    \
              __FILE__,                                 \
              __LINE__,                                 \
-             __FUNCTION__,                             \
+             reinterpret_cast<const char*>(__FUNCTION__),       \
              ##__VA_ARGS__);                           \
     __er_report__(rcppsw::er::client::server_handle(), \
                   rcppsw::er::client::er_id(),         \
                   lvl,                                 \
-                  std::string(_str));                  \
+                  std::string(reinterpret_cast<char*>(_str)));  \
   }
 
 #else
@@ -106,6 +106,16 @@
     assert(cond);                                           \
   }
 
+/**
+ * @brief Mark a place in the code as being universally bad. If execution ever
+ * reaches this spot stop the program.
+ */
+#define ER_FATAL_SENTINEL(msg, ...)                             \
+  {                                                             \
+    ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__);     \
+    assert(false);                                                  \
+  }
+
 /*
  * Define debug macros also in rcsw to eliminate dependencies.
  */
@@ -145,7 +155,7 @@ class global_server;
 class client {
  public:
   client(void);
-  explicit client(const std::shared_ptr<server>& server_handle);
+  explicit client(std::shared_ptr<server> server_handle);
   virtual ~client(void);
 
   /**
@@ -157,7 +167,7 @@ class client {
    *
    * @param server_handle The server to attach to.
    */
-  void deferred_init(const std::shared_ptr<server>& server_handle);
+  void deferred_init(std::shared_ptr<server> server_handle);
   void change_id(boost::uuids::uuid old_id, boost::uuids::uuid new_id);
 
   /**

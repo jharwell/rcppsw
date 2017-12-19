@@ -44,8 +44,9 @@ template <typename T>
 class mt_queue {
  public:
   mt_queue(void) : m_queue(), m_mtx(), m_cv() {}
-  /* type definitions */
-  typedef typename std::deque<T>::const_iterator const_iterator;
+
+  using const_iterator = typename std::deque<T>::const_iterator;
+
   typename std::deque<T>::const_iterator begin(void) const {
     return m_queue.begin();
   }
@@ -73,10 +74,10 @@ class mt_queue {
     // When there is no data, wait till someone fills it.
     // Lock is automatically released in the wait and obtained
     // again after the wait
-    while (m_queue.size() == 0) m_cv.wait(lock);
+    while (m_queue.empty()) { m_cv.wait(lock); }
 
     // Retrieve the data from the queue
-    T result = static_cast<T>(m_queue.front());
+    auto result = static_cast<T>(m_queue.front());
     m_queue.pop_front();
     return result;
   } // Lock is automatically released here

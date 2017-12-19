@@ -43,7 +43,7 @@ template <typename T>
 class sharing_factory : public base_factory {
  public:
   sharing_factory(void) : m_items(), m_retain_funcs() {}
-  virtual ~sharing_factory(void) {}
+   ~sharing_factory(void) override = default;
 
   template <typename TDerived>
   status_t register_type(const std::string& name) {
@@ -64,7 +64,7 @@ class sharing_factory : public base_factory {
     }
 
  private:
-  typedef std::shared_ptr<T> (sharing_factory<T>::*instance_create_func)();
+  using instance_create_func = std::shared_ptr<T> (sharing_factory<T>::*)();
 
   template <typename TDerived>
   std::shared_ptr<T> do_create_retain() {

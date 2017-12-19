@@ -61,8 +61,8 @@ NS_START(rcppsw, task_allocation);
  */
 class subtask_selection_probability : public rcppsw::math::expression<double> {
  public:
-  subtask_selection_probability(const std::string& method)
-      : mc_method(method), m_reactivity(0), m_offset(0), m_gamma(0) {}
+  explicit subtask_selection_probability(std::string method)
+      : mc_method(std::move(method)), m_reactivity(0), m_offset(0), m_gamma(0) {}
 
   void init_brutschy2014(double reactivity, double offset, double gamma);
   double calc(const time_estimate& subtask1, const time_estimate& subtask2);

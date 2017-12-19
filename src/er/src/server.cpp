@@ -37,20 +37,15 @@ NS_START(rcppsw, er);
  ******************************************************************************/
 #define REPORT_INTERNAL(lvl, msg, ...)                     \
   {                                                        \
-    char _str[6000];                                       \
-    struct timespec _curr_time;                            \
-    clock_gettime(CLOCK_REALTIME, &_curr_time);            \
+    char _str[1000];                                       \
     snprintf(static_cast<char*>(_str),                     \
              sizeof(_str),                                 \
-             "[%s:%lu.%lu]:%s:%d:%s: " msg "\n",           \
-             static_cast<char*>(m_hostname),               \
-             _curr_time.tv_sec,                            \
-             _curr_time.tv_nsec,                           \
+             "%s:%d:%s: " msg "\n",                        \
              __FILE__,                                     \
              __LINE__,                                     \
-             __FUNCTION__,                                 \
+             reinterpret_cast<const char*>(__FUNCTION__),  \
              ##__VA_ARGS__);                               \
-    server::msg_int _msg(m_er_id, lvl, std::string(_str)); \
+    server::msg_int _msg(m_er_id, lvl, std::string(reinterpret_cast<char*>(_str))); \
     msg_report(_msg);                                      \
   }
 
@@ -62,11 +57,11 @@ std::shared_ptr<global_server> g_server(std::make_shared<global_server>());
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-server::server(const std::string& logfile_fname,
+server::server(std::string logfile_fname,
                const er_lvl::value& dbglvl,
                const er_lvl::value& loglvl)
     : m_modules(),
-      m_logfile_fname(logfile_fname),
+      m_logfile_fname(std::move(logfile_fname)),
       m_logfile(new std::ofstream()),
       m_loglvl_dflt(loglvl),
       m_dbglvl_dflt(dbglvl),
@@ -74,20 +69,20 @@ server::server(const std::string& logfile_fname,
       m_log_ts_calculator(nullptr),
       m_generator(),
       m_er_id(idgen()) {
-  gethostname(m_hostname, 32);
+  gethostname(reinterpret_cast<char*>(m_hostname), 32);
 
   change_logfile(m_logfile_fname);
-} /* server::server() */
+}
 
 server::~server(void) { m_logfile->close(); }
 
-global_server::~global_server(void) {}
+global_server::~global_server(void) = default;
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void server::dbg_ts_calculator(std::function<std::string(void)> cb) {
-  m_dbg_ts_calculator = cb;
+  m_dbg_ts_calculator = std::move(cb);
 } /* dbg_ts_calculator() */
 
 const std::function<std::string(void)>& server::dbg_ts_calculator(void) const {
@@ -95,7 +90,7 @@ const std::function<std::string(void)>& server::dbg_ts_calculator(void) const {
 } /* dbg_ts_calculator() */
 
 void server::log_ts_calculator(std::function<std::string(void)> cb) {
-  m_log_ts_calculator = cb;
+  m_log_ts_calculator = std::move(cb);
 } /* log_ts_calculator() */
 
 const std::function<std::string(void)>& server::log_ts_calculator(void) const {
@@ -127,7 +122,7 @@ error:
 
 status_t server::findmod(const std::string& mod_name,
                          boost::uuids::uuid& mod_id) {
-  for (auto mod : m_modules) {
+  for (auto& mod : m_modules) {
     if (mod.name() == mod_name) {
       mod_id = mod.id();
       return OK;
@@ -143,8 +138,8 @@ status_t server::rmmod(const boost::uuids::uuid& id) {
   return OK;
 } /* rmmod() */
 
-void server::msg_report(msg_int& msg) {
-  server_mod tmp(msg.m_id, er_lvl::NOM, er_lvl::NOM, "tmp");
+void server::msg_report(const msg_int& msg) {
+  server_mod tmp(msg.id, er_lvl::NOM, er_lvl::NOM, "tmp");
   auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
 
   std::string header;
@@ -152,7 +147,7 @@ void server::msg_report(msg_int& msg) {
     if (m_log_ts_calculator) {
       header = m_log_ts_calculator();
     }
-    iter->msg_report(header, msg.str_, msg.lvl_, iter->loglvl(), *m_logfile);
+    iter->msg_report(header, msg.str, msg.lvl, iter->loglvl(), *m_logfile);
 
 /* If NDEBUG is defined, debug printing is disabled. */
 #ifndef NDEBUG
@@ -160,13 +155,13 @@ void server::msg_report(msg_int& msg) {
     if (m_dbg_ts_calculator) {
       header = m_dbg_ts_calculator();
     }
-    iter->msg_report(header, msg.str_, msg.lvl_, iter->dbglvl(), std::cout);
+    iter->msg_report(header, msg.str, msg.lvl, iter->dbglvl(), std::cout);
 #endif
   }
 } /* msg_report() */
 
 void server::flush(void) {
-  std::fflush(NULL);
+  std::fflush(nullptr);
   m_logfile->flush();
 } /* flush() */
 

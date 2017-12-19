@@ -31,14 +31,25 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-executive::~executive(void) {}
+executive::executive(const std::shared_ptr<rcppsw::er::server>& server,
+                     executable_task* root)
+    : client(server),
+      m_current_task(nullptr),
+      m_task_abort_cleanup(nullptr),
+      mc_root(root) {
+  client::insmod("task_executive",
+                 rcppsw::er::er_lvl::DIAG,
+                 rcppsw::er::er_lvl::NOM);
+      }
+
+executive::~executive(void) = default;
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void executive::task_abort_cleanup(
     std::function<void(executable_task* const)> cb) {
-  m_task_abort_cleanup = cb;
+  m_task_abort_cleanup = std::move(cb);
 } /* task_abort_cleanup() */
 
 const std::function<void(executable_task* const)>& executive::task_abort_cleanup(
@@ -56,14 +67,14 @@ executable_task* executive::get_next_task(executable_task* last_task) {
      * The root was not partitionable, so we only have 1 choice for the next
      * task.
      */
-    if (m_root->is_atomic()) {
-      return m_root;
+    if (mc_root->is_atomic()) {
+      return mc_root;
     }
     /*
      * The root IS partitionable, so partition it and (possibly) return a
      * subtask.
      */
-    return m_root->partition();
+    return mc_root->partition();
   }
   ER_ASSERT(m_current_task->parent(), "FATAL: All tasks must have a parent");
   if (!m_current_task->is_partitionable()) {
@@ -73,20 +84,19 @@ executable_task* executive::get_next_task(executable_task* last_task) {
                 "FATAL: Non-partitionable tasks must have a partitionable "
                 "parent");
       return static_cast<executable_task*>(m_current_task->parent())->partition();
-    } else { /* single atomic task in hierarchy */
-      return static_cast<executable_task*>(m_current_task);
     }
+    /* single atomic task in hierarchy */
+    return static_cast<executable_task*>(m_current_task);
   } else {
     return m_current_task->partition();
   }
 } /* get_next_task() */
 
-double executive::task_abort_prob(executable_task* const task) {
+double executive::task_abort_prob(executable_task* task) {
   if (task->is_atomic()) {
     return 0.0;
-  } else {
-    return task->calc_abort_prob();
   }
+  return task->calc_abort_prob();
 } /* task_abort_prob() */
 
 NS_END(task_allocation, rcppsw);

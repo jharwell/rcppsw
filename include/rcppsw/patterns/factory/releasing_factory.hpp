@@ -43,7 +43,7 @@ template <typename T>
 class releasing_factory : public base_factory {
  public:
   releasing_factory(void) : m_release_funcs() {}
-  virtual ~releasing_factory(void) {}
+  ~releasing_factory(void) override = default;
 
   template <typename TDerived>
   status_t register_type(const std::string& name) {

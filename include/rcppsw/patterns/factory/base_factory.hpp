@@ -36,8 +36,8 @@ NS_START(rcppsw, patterns, factory);
  ******************************************************************************/
 class base_factory {
  public:
-  base_factory(void) {}
-  virtual ~base_factory(void) {}
+  base_factory(void) = default;
+  virtual ~base_factory(void) = default;
 };
 
 NS_END(factory, patterns, rcppsw);

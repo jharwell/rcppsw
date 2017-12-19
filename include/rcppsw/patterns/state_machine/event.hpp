@@ -106,11 +106,11 @@ class event_type {
  */
 class event_data {
  public:
-  event_data(void)
-      : m_signal(event_signal::IGNORED), m_type(event_type::NORMAL) {}
+  event_data(void) = default;
   explicit event_data(int signal, int type = event_type::NORMAL)
       : m_signal(signal), m_type(type) {}
-  virtual ~event_data() {}
+  virtual ~event_data(void) = default;
+
   int signal(void) const { return m_signal; }
   void signal(int signal) { m_signal = signal; }
   int type(void) const { return m_type; }
@@ -121,8 +121,8 @@ class event_data {
   }
 
  private:
-  int m_signal;
-  int m_type;
+  int m_signal{event_signal::IGNORED};
+  int m_type{event_type::NORMAL};
 };
 
 /**

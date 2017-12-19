@@ -42,7 +42,8 @@ class event_data;
  */
 class state_guard {
  public:
-  virtual ~state_guard() {}
+  virtual ~state_guard(void) = default;
+
   /**
    * @brief Called by the state machine engine to execute a guard condition
    * action. If guard condition evaluates to TRUE the state action is

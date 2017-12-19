@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <stdio.h>
+#include <cstdio>
 #include <cstddef>
 #include <mutex>
 #include "rcppsw/common/common.hpp"
@@ -54,7 +54,7 @@ class base_fsm : public er::client {
            uint8_t max_states,
            uint8_t initial_state = 0);
 
-  virtual ~base_fsm() {}
+  virtual ~base_fsm() = default;
 
   virtual uint8_t current_state(void) const { return m_current_state; }
   virtual uint8_t max_states(void) const { return mc_max_states; }
@@ -63,7 +63,8 @@ class base_fsm : public er::client {
   virtual void init(void);
 
  protected:
-  const event_data* event_data_get(void) { return m_event_data.get(); }
+  const event_data* event_data_get(void) const { return m_event_data.get(); }
+  event_data* event_data_get(void) { return const_cast<event_data*>(m_event_data.get()); }
 
   void generated_event(bool b) { m_event_generated = b; }
   bool has_generated_event(void) { return m_event_generated; }
@@ -79,8 +80,9 @@ class base_fsm : public er::client {
    */
   void external_event(uint8_t new_state, std::unique_ptr<const event_data> data);
   void external_event(uint8_t new_state) {
-    internal_event(new_state, std::move(nullptr));
+    internal_event(new_state, nullptr);
   }
+
   /**
    * @brief Generates an internal event. These events are generated while
    * executing
@@ -117,7 +119,7 @@ class base_fsm : public er::client {
    * @return An array of state_map_row pointers with the array size MAX_STATES
    *         or NULL if the state machine uses the state_map_ex().
    */
-  virtual const state_map_row* state_map(__unused size_t index) { return NULL; }
+  virtual const state_map_row* state_map(__unused size_t) { return nullptr; }
 
   /**
    * @brief Gets the extended state map as defined in the derived class.
@@ -130,19 +132,16 @@ class base_fsm : public er::client {
    * @return An array of state_map_ex_row pointers with the array size
    *         max_states or NULL if the state machine uses the state_map().
    */
-  virtual const state_map_ex_row* state_map_ex(__unused size_t index) {
-    return NULL;
+  virtual const state_map_ex_row* state_map_ex(__unused size_t) {
+    return nullptr;
   }
 
-  virtual void state_engine_step(const state_map_row* const row);
-  virtual void state_engine_step(const state_map_ex_row* const row_ex);
-
-  base_fsm(const base_fsm& fsm);
+  virtual void state_engine_step(const state_map_row* c_row);
+  virtual void state_engine_step(const state_map_ex_row* c_row_ex);
 
  private:
   void state_engine_map(void);
   void state_engine_map_ex(void);
-  base_fsm& operator=(const base_fsm& fsm) = delete;
 
   const uint8_t mc_max_states; /// The maximum # of fsm states.
   uint8_t m_current_state;     /// The current state machine state.
@@ -226,8 +225,8 @@ NS_END(state_machine, patterns, rcppsw);
 #define FSM_DEFINE_TRANSITION_MAP(name) static const uint8_t name[] =
 #define FSM_TRANSITION_MAP_ENTRY(entry) entry,
 #define FSM_VERIFY_TRANSITION_MAP(name, n_entries)             \
-  assert(current_state() < n_entries);                         \
-  static_assert((sizeof(name) / sizeof(uint8_t)) == n_entries, \
+  assert(current_state() < (n_entries));                       \
+  static_assert((sizeof(name) / sizeof(uint8_t)) == (n_entries),        \
                 "transition map does not cover all states");
 
 /*******************************************************************************
@@ -240,7 +239,7 @@ NS_END(state_machine, patterns, rcppsw);
  * this. \see HFSM_DECLARE_STATE_MAP.
  */
 #define FSM_DEFINE_STATE_MAP(type, name) \
-  static const rcppsw::patterns::state_machine::JOIN(type, _row) name[]
+  static const rcppsw::patterns::state_machine::JOIN(type, _row) (name)[]
 
 #define FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)      \
   const rcppsw::patterns::state_machine::JOIN(type, _row) * \
@@ -261,7 +260,7 @@ NS_END(state_machine, patterns, rcppsw);
 #define FSM_VERIFY_STATE_MAP(type, name, n_entries)                            \
   static_assert((sizeof(name) /                                                \
                  sizeof(rcppsw::patterns::state_machine::JOIN(type, _row))) == \
-                    n_entries,                                                 \
+                (n_entries),                                            \
                 "state map does not cover all states");
 
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_BASE_FSM_HPP_ */

@@ -42,7 +42,7 @@ class event_data;
  */
 class state_entry {
  public:
-  virtual ~state_entry() {}
+  virtual ~state_entry(void) = default;
 
   /**
    * @brief Called by the state machine engine to execute a state entry
