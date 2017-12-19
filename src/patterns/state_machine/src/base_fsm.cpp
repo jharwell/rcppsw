@@ -22,7 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/patterns/state_machine/base_fsm.hpp"
-#include <assert.h>
+#include <cassert>
 
 /*******************************************************************************
  * Namespaces
@@ -45,7 +45,7 @@ base_fsm::base_fsm(const std::shared_ptr<er::server>& server,
       m_event_generated(false),
       m_event_data(nullptr),
       m_mutex() {
-  assert(mc_max_states < event_signal::IGNORED);
+  ER_ASSERT(mc_max_states < event_signal::IGNORED, "FATAL: Too many states");
 }
 
 /*******************************************************************************
@@ -144,7 +144,7 @@ void base_fsm::state_engine_map_ex(void) {
       guard_res = guard->invoke_guard_condition(this, m_event_data.get());
     }
 
-    if (guard_res == false) {
+    if (!guard_res) {
       continue;
     }
 
@@ -163,7 +163,7 @@ void base_fsm::state_engine_map_ex(void) {
       }
 
       /* Ensure exit/entry actions didn't call interval_event() by accident */
-      ER_ASSERT(false == m_event_generated,
+      ER_ASSERT(!m_event_generated,
                 "FATAL: entry/exit actions called internal_event()!");
     }
     /* Now we're ready to switch to the new state */
@@ -173,20 +173,20 @@ void base_fsm::state_engine_map_ex(void) {
   } /* while() */
 } /* state_engine_map_ex() */
 
-void base_fsm::state_engine_step(const state_map_row* const row) {
-  ER_ASSERT(nullptr != row->state(), "FATAL: null state?");
+void base_fsm::state_engine_step(const state_map_row* const c_row) {
+  ER_ASSERT(nullptr != c_row->state(), "FATAL: null state?");
   ER_VER("Invoking state action: state%d, data=%p",
          current_state(),
          reinterpret_cast<const void*>(m_event_data.get()));
-  row->state()->invoke_state_action(this, event_data_get());
+  c_row->state()->invoke_state_action(this, event_data_get());
 } /* state_engine_step() */
 
-void base_fsm::state_engine_step(const state_map_ex_row* const row_ex) {
-  ER_ASSERT(nullptr != row_ex->state(), "FATAL: null state?");
+void base_fsm::state_engine_step(const state_map_ex_row* const c_row_ex) {
+  ER_ASSERT(nullptr != c_row_ex->state(), "FATAL: null state?");
   ER_VER("Invoking state action: state%d, data=%p",
          current_state(),
          reinterpret_cast<const void*>(m_event_data.get()));
-  row_ex->state()->invoke_state_action(this, event_data_get());
+  c_row_ex->state()->invoke_state_action(this, event_data_get());
 } /* state_engine_step() */
 
 void base_fsm::update_state(uint8_t new_state) {

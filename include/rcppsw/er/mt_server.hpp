@@ -48,22 +48,18 @@ NS_START(rcppsw, er);
 class mt_server : public server, public multithread::threadable {
  public:
   /**
-   * @brief Initialize an Event Reporting Server.
+   * @brief Initialize a multithreaded ER server.
    *
    * @param logfile_fname The name of the file to log events to. If the file
    *                      already exists, it is deleted.
    * @param dbglvl The initial debug printing level.
    * @param loglvl The initial logging level.
-   * @param threaded Whether or not messages will be enqueued into a queue and
-   *                 handled synchronously by a dedicated thread, or if
-   *                 messages will be handled inline in the calling thread
-   *                 (asynchronously).
    */
-  mt_server(const std::string& logfile_fname = "__no_file__",
-            const er_lvl::value& dbglvl = er_lvl::NOM,
-            const er_lvl::value& loglvl = er_lvl::NOM);
+  explicit mt_server(const std::string& logfile_fname = "__no_file__",
+                     const er_lvl::value& dbglvl = er_lvl::NOM,
+                     const er_lvl::value& loglvl = er_lvl::NOM);
 
-  ~mt_server(void) { join(); }
+  ~mt_server(void) override { join(); }
 
   /**
    * @brief Flush all remaining entries in the queue to stdout/the log file.

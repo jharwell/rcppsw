@@ -32,10 +32,11 @@ NS_START(rcppsw, er);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-client::client(const std::shared_ptr<server>& server_handle)
-    : m_server_handle(server_handle), m_er_id(m_server_handle->idgen()) {}
+client::client(std::shared_ptr<server> server_handle)
+    : m_server_handle(std::move(server_handle)),
+      m_er_id(m_server_handle->idgen()) {}
 client::client(void) : m_server_handle(), m_er_id() {}
-client::~client(void) {}
+client::~client(void) = default;
 
 /*******************************************************************************
  * Member Functions
@@ -44,8 +45,8 @@ status_t client::attmod(const std::string& mod_name) {
   return server_handle()->findmod(mod_name, m_er_id);
 } /* attmod() */
 
-void client::deferred_init(const std::shared_ptr<server>& server_handle) {
-  m_server_handle = server_handle;
+void client::deferred_init(std::shared_ptr<server> server_handle) {
+  m_server_handle = std::move(server_handle);
   m_er_id = m_server_handle->idgen();
 } /* deferred_init() */
 

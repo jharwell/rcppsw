@@ -35,21 +35,21 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 partitionable_task::partitionable_task(
     const std::shared_ptr<er::server>& server,
-    const struct partitionable_task_params* const params)
+    const struct partitionable_task_params* c_params)
     : client(server),
       m_always_partition(false),
       m_never_partition(false),
       m_partition1(nullptr),
       m_partition2(nullptr),
       m_last_partition(nullptr),
-      m_selection_prob(params->subtask_selection_method),
-      m_partition_prob(params->partition_method, params->partition_reactivity) {
+      m_selection_prob(c_params->subtask_selection_method),
+      m_partition_prob(c_params->partition_method, c_params->partition_reactivity) {
   if (ERROR == client::attmod("partitionable_task")) {
     client::insmod("partitionable_task",
                    rcppsw::er::er_lvl::DIAG,
                    rcppsw::er::er_lvl::NOM);
   }
-  if ("brutschy2014" == params->subtask_selection_method) {
+  if ("brutschy2014" == c_params->subtask_selection_method) {
     /* values taken directly from paper */
     m_selection_prob.init_brutschy2014(1.0, 8, 0.01);
   }

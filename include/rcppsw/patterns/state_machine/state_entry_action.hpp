@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <assert.h>
+#include <cassert>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/patterns/state_machine/event.hpp"
 #include "rcppsw/patterns/state_machine/state_entry.hpp"
@@ -48,9 +48,10 @@ class base_fsm;
 template <class SM, void (SM::*Func)(void)>
 class state_entry_action0 : public state_entry {
  public:
-  virtual ~state_entry_action0(void) {}
-  void invoke_entry_action(base_fsm* sm, const event_data*) const override {
-    SM* derived_fsm = static_cast<SM*>(sm);
+  ~state_entry_action0(void) override = default;
+  void invoke_entry_action(base_fsm* sm,
+                           __unused const event_data*) const override {
+    auto* derived_fsm = static_cast<SM*>(sm);
     (derived_fsm->*Func)();
   }
 };
@@ -65,11 +66,12 @@ class state_entry_action0 : public state_entry {
 template <class SM, class Event, void (SM::*Func)(const Event*)>
 class state_entry_action1 : public state_entry {
  public:
-  virtual ~state_entry_action1(void) {}
+  ~state_entry_action1(void) override = default;
+
   void invoke_entry_action(base_fsm* sm, const event_data* data) const override {
-    SM* derived_fsm = static_cast<SM*>(sm);
+    auto* derived_fsm = static_cast<SM*>(sm);
     const Event* derived_event = NULL;
-    if (data) {
+    if (nullptr != data) {
       derived_event = dynamic_cast<const Event*>(data);
       assert(derived_event);
     }

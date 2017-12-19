@@ -50,11 +50,11 @@ struct task_params;
 class executable_task : public logical_task {
  public:
   executable_task(const std::string& name,
-                  const struct task_params* const params,
-                  executable_task* const parent);
+                  const struct task_params* c_params,
+                  executable_task* parent);
   executable_task(const executable_task& other);
 
-  virtual ~executable_task(void);
+  ~executable_task(void) override;
 
   /**
    * @brief Get the current estimate of the task's interface time.
@@ -123,8 +123,6 @@ class executable_task : public logical_task {
   void reset_exec_time(void) { m_exec_start_time = current_time(); }
 
  private:
-  executable_task& operator=(const executable_task& other) = delete;
-
   bool m_is_atomic;
   bool m_is_partitionable;
   double m_interface_time;

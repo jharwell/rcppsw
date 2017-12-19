@@ -49,10 +49,11 @@ class hfsm : public base_fsm {
        uint8_t initial_state = 0)
       : base_fsm(server, max_states, initial_state), m_top_state(nullptr) {}
 
-  virtual ~hfsm() {}
+  ~hfsm() override = default;
 
-  virtual void init(void) override {
-    assert(initial_state() < event_signal::IGNORED);
+  void init(void) override {
+    ER_ASSERT(initial_state() < event_signal::IGNORED,
+                     "FATAL: Bad initial state");
     base_fsm::init();
   }
 
@@ -70,7 +71,7 @@ class hfsm : public base_fsm {
    * @return Does not return.
    */
   int ST_top_state(void) {
-    assert(0);
+    ER_FATAL_SENTINEL("FATAL: Top state in HFSM");
     return 0;
   }
   hfsm_state_action0<hfsm, &hfsm::ST_top_state>* top_state(void) {
@@ -78,11 +79,8 @@ class hfsm : public base_fsm {
   }
 
  private:
-  void state_engine_step(const state_map_row* const map) override;
-  void state_engine_step(const state_map_ex_row* const map_ex) override;
-
-  hfsm(const hfsm& fsm) = delete;
-  hfsm& operator=(const hfsm& fsm) = delete;
+  void state_engine_step(const state_map_row* c_row) override;
+  void state_engine_step(const state_map_ex_row* c_row_ex) override;
 
   hfsm_state_action0<hfsm, &hfsm::ST_top_state> m_top_state;
 };
@@ -229,7 +227,7 @@ class hfsm : public base_fsm {
  * map (such as changing the parent of a state).
  */
 #define HFSM_DECLARE_STATE_MAP(type, name, n_entries) \
-  const rcppsw::patterns::state_machine::JOIN(type, _row) name[n_entries]
+    const rcppsw::patterns::state_machine::JOIN(type, _row) (name)[n_entries]
 
 #define HFSM_STATE_MAP_ENTRY_EX(state_name) FSM_STATE_MAP_ENTRY_EX(state_name)
 

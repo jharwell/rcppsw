@@ -46,11 +46,11 @@ NS_START(rcppsw, patterns, visitor);
 template<class V>
 class visitable_any {
  public:
-  visitable_any(void) {}
+  visitable_any(void) = default;
 
   template <typename T>
   void accept(T &visitor) { visitor.visit(static_cast<V&>(*this)); }
-  virtual ~visitable_any(void) {}
+  virtual ~visitable_any(void) = default;
 };
 
 /**
@@ -61,11 +61,11 @@ class visitable_any {
 template <class V>
 class will_accept {
  public:
-  will_accept(void) {}
+  will_accept(void) = default;
 
   template <class T>
   void accept(const T &visitor) { visitor.visit(static_cast<V&>(*this)); }
-  virtual ~will_accept(void) {}
+  virtual ~will_accept(void) = default;
 };
 
 /**
@@ -76,7 +76,7 @@ class will_accept {
 template <typename V, typename T>
 class visitable_set_helper {
  public:
-  virtual ~visitable_set_helper(void) {}
+  virtual ~visitable_set_helper(void) = default;
 
   void accept(T &visitor) { visitor.visit(static_cast<V&>(*this)); }
 };
