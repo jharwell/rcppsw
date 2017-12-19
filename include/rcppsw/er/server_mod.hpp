@@ -90,7 +90,7 @@ class server_mod {
                   std::ostream& stream) const;
   bool operator==(const server_mod& rhs);
   const boost::uuids::uuid& id(void) const { return m_id; }
-  void change_id(boost::uuids::uuid id) { m_id = std::move(id); }
+  void change_id(boost::uuids::uuid id) { m_id = id; }
   const std::string& name(void) const { return m_name; }
 
  private:

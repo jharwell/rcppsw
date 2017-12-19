@@ -40,7 +40,8 @@ class base_fsm;
  */
 class state_exit {
  public:
-  virtual ~state_exit() {}
+  virtual ~state_exit(void) = default;
+
   /**
    * @brief Called by the state machine engine to execute a state exit
    * action. Called when leaving a state.

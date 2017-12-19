@@ -45,9 +45,12 @@ class executable_task;
 class partitionable_task : public er::client {
  public:
   partitionable_task(const std::shared_ptr<er::server>& server,
-                     const struct partitionable_task_params* const params);
+                     const struct partitionable_task_params* c_params);
 
-  virtual ~partitionable_task(void) {}
+  virtual ~partitionable_task(void) = default;
+
+  partitionable_task(const partitionable_task& other) = delete;
+  partitionable_task& operator=(const partitionable_task& other) = delete;
 
   executable_task* partition(void);
 
@@ -66,9 +69,6 @@ class partitionable_task : public er::client {
   executable_task* partition2(void) const { return m_partition2; }
 
  private:
-  partitionable_task(const partitionable_task& other) = delete;
-  partitionable_task& operator=(const partitionable_task& other) = delete;
-
   bool m_always_partition;
   bool m_never_partition;
   executable_task* m_partition1;

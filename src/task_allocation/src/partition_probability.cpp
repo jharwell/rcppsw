@@ -22,7 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/partition_probability.hpp"
-#include <assert.h>
+#include <cassert>
 #include <cmath>
 
 /*******************************************************************************
@@ -38,9 +38,8 @@ double partition_probability::calc(const time_estimate& task,
                                    const time_estimate& subtask2) {
   if ("pini2011" == mc_method) {
     return calc_pini2011(task, subtask1, subtask2);
-  } else {
-    assert(0);
   }
+  assert(false);
 } /* calc() */
 
 double partition_probability::calc_pini2011(const time_estimate& task,

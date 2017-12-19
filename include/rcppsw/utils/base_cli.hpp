@@ -58,7 +58,7 @@ class base_cli {
    * @return TRUE if the condition is met, and FALSE otherwise.
    */
 
-  virtual bool validate(void) { return OK; }
+  virtual bool validate(void) { return true; }
 
   /**
    * @brief Print all options and their help to stdout.

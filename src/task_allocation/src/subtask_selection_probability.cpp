@@ -47,9 +47,8 @@ double subtask_selection_probability::calc(const time_estimate& subtask1,
     return calc_brutschy2014(subtask1, subtask2);
   } else if ("random" == mc_method) {
     return calc_random();
-  } else {
-    assert(0);
   }
+  assert(false);
 } /* calc() */
 
 double subtask_selection_probability::calc_random(void) {

@@ -48,8 +48,13 @@ struct base_params;
  */
 class xml_param_parser {
  public:
-  xml_param_parser(void) {}
-  virtual ~xml_param_parser(void) {}
+  xml_param_parser(void) = default;
+  virtual ~xml_param_parser(void) = default;
+
+  xml_param_parser(const xml_param_parser& other) = default;
+  xml_param_parser& operator=(const xml_param_parser& other) = default;
+  xml_param_parser(xml_param_parser&& other) noexcept(true) = default;
+  xml_param_parser& operator=(xml_param_parser&& other) noexcept(true) = default;
 
   /**
    * @brief Parser the provided XML node into an internal representation.

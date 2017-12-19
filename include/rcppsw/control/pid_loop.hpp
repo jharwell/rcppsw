@@ -57,7 +57,6 @@ class pid_loop {
         m_max(max),
         m_istate(0),
         m_prev_error(0.0) {}
-  ~pid_loop() {}
 
   /**
    * @brief Calculate a new value for the manipulated variable.

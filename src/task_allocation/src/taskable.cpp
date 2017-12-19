@@ -31,6 +31,6 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-taskable::~taskable(void) {}
+taskable::~taskable(void) = default;
 
 NS_END(task_allocation, rcppsw);

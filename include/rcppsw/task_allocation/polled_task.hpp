@@ -44,12 +44,15 @@ NS_START(rcppsw, task_allocation);
 class polled_task : public executable_task, public taskable {
  public:
   polled_task(const std::string& name,
-              const struct task_params* const params,
+              const struct task_params* const c_params,
               std::unique_ptr<taskable>& mechanism,
-              polled_task* const parent = nullptr)
-      : executable_task(name, params, parent),
+              polled_task* parent = nullptr)
+      : executable_task(name, c_params, parent),
         m_mechanism(std::move(mechanism)) {}
   virtual ~polled_task(void);
+
+  polled_task& operator=(const polled_task& other) = delete;
+  polled_task(const polled_task& other) = delete;
 
   taskable* mechanism(void) const { return m_mechanism.get(); }
 
@@ -65,10 +68,7 @@ class polled_task : public executable_task, public taskable {
   }
 
  private:
-  polled_task& operator=(const polled_task& other) = delete;
-  polled_task(const polled_task& other) = delete;
-
-  std::unique_ptr<taskable> const m_mechanism;
+  std::unique_ptr<taskable> m_mechanism;
 };
 
 NS_END(task_allocation, rcppsw);

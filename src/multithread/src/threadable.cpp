@@ -37,7 +37,7 @@ status_t threadable::start(void* arg, int core) {
   m_thread_run = true;
 
   m_arg = arg;
-  CHECK(0 == pthread_create(&m_thread, NULL, &threadable::entry_point, this));
+  CHECK(0 == pthread_create(&m_thread, nullptr, &threadable::entry_point, this));
   if (-1 != core) {
     CHECK(OK == threadm_core_lock(m_thread, core));
   }

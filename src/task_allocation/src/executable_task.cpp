@@ -33,8 +33,8 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 executable_task::executable_task(const std::string& name,
-                                 const struct task_params* const params,
-                                 executable_task* const parent)
+                                 const struct task_params* c_params,
+                                 executable_task* parent)
     : logical_task(name, parent),
       m_is_atomic(false),
       m_is_partitionable(false),
@@ -42,8 +42,8 @@ executable_task::executable_task(const std::string& name,
       m_interface_start_time(0.0),
       m_exec_time(0.0),
       m_exec_start_time(0.0),
-      m_interface_estimate(params->estimation_alpha),
-      m_exec_estimate(params->estimation_alpha) {}
+      m_interface_estimate(c_params->estimation_alpha),
+      m_exec_estimate(c_params->estimation_alpha) {}
 
 executable_task::executable_task(const executable_task& other)
     : logical_task(other),
@@ -56,6 +56,6 @@ executable_task::executable_task(const executable_task& other)
       m_interface_estimate(other.m_interface_estimate),
       m_exec_estimate(other.m_exec_estimate) {}
 
-executable_task::~executable_task(void) {}
+executable_task::~executable_task(void) = default;
 
 NS_END(task_allocation, rcppsw);
