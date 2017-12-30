@@ -41,10 +41,10 @@ void subtask_selection_probability::init_brutschy2014(double reactivity,
   m_gamma = gamma;
 } /* init_() */
 
-double subtask_selection_probability::calc(const time_estimate& subtask1,
-                                           const time_estimate& subtask2) {
+double subtask_selection_probability::calc(const time_estimate* subtask1,
+                                           const time_estimate* subtask2) {
   if ("brutschy2014" == mc_method) {
-    return calc_brutschy2014(subtask1, subtask2);
+    return calc_brutschy2014(*subtask1, *subtask2);
   } else if ("random" == mc_method) {
     return calc_random();
   }
