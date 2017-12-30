@@ -43,6 +43,7 @@ partitionable_polled_task::partitionable_polled_task(
 
 void partitionable_polled_task::init_random(uint lb, uint ub) {
   executable_task::update_exec_estimate(rand() % (ub - lb + 1) + lb);
+  last_partition(rand() % 2 ? partition1(): partition2());
   partition1()->update_exec_estimate(rand() % (ub - lb + 1) + lb);
   partition2()->update_exec_estimate(rand() % (ub - lb + 1) + lb);
 } /* init_random() */

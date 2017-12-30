@@ -65,7 +65,7 @@ class subtask_selection_probability : public rcppsw::math::expression<double> {
       : mc_method(std::move(method)), m_reactivity(0), m_offset(0), m_gamma(0) {}
 
   void init_brutschy2014(double reactivity, double offset, double gamma);
-  double calc(const time_estimate& subtask1, const time_estimate& subtask2);
+  double calc(const time_estimate* subtask1, const time_estimate* subtask2);
 
   const std::string& method(void) const { return mc_method; }
 
