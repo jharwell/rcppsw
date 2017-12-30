@@ -24,10 +24,10 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <assert.h>
+#include <cassert>
+#include "rcppsw/common/common.hpp"
 #include "rcppsw/patterns/state_machine/event.hpp"
 #include "rcppsw/patterns/state_machine/state.hpp"
-#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -47,10 +47,12 @@ NS_START(rcppsw, patterns, state_machine);
 template <class SM, int (SM::*Func)(void)>
 class state_action0 : public state {
  public:
-  virtual ~state_action0(void) {}
-  int invoke_state_action(base_fsm* sm, const event_data*) const override {
+  ~state_action0(void) override = default;
+
+  int invoke_state_action(base_fsm* sm,
+                          __unused const event_data*) const override {
     /* Downcast the state machine and event data to the correct derived type */
-    SM* derived_fsm = static_cast<SM*>(sm);
+    auto* derived_fsm = static_cast<SM*>(sm);
     return (derived_fsm->*Func)();
   }
 };
@@ -66,17 +68,18 @@ class state_action0 : public state {
 template <class SM, class Event, int (SM::*Func)(const Event*)>
 class state_action1 : public state {
  public:
-  virtual ~state_action1(void) {}
+  ~state_action1(void) override = default;
+
   int invoke_state_action(base_fsm* sm, const event_data* data) const override {
     /* Downcast the state machine and event data to the correct derived type */
-    SM* derived_fsm = static_cast<SM*>(sm);
+    auto* derived_fsm = static_cast<SM*>(sm);
     const Event* derived_event = NULL;
 
     /*
      * If this check fails, there is a mismatch between the STATE_DECLARE event
      * data type and the data type being sent to the state function.
      */
-    if (data) {
+    if (nullptr != data) {
       derived_event = dynamic_cast<const Event*>(data);
       assert(derived_event);
     }
@@ -84,7 +87,6 @@ class state_action1 : public state {
     return (derived_fsm->*Func)(derived_event);
   }
 };
-
 
 NS_END(state_machine, patterns, rcppsw);
 

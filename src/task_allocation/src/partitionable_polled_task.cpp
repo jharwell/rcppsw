@@ -1,5 +1,5 @@
 /**
- * @file identifiable.hpp
+ * @file partitionable_polled_task.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,30 +18,34 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_COMMON_IDENTIFIABLE_HPP_
-#define INCLUDE_RCPPSW_COMMON_IDENTIFIABLE_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/task_allocation/partitionable_polled_task.hpp"
+#include "rcppsw/task_allocation/task_params.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, common);
+NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Class Definitions
+ * Constructors/Destructor
  ******************************************************************************/
-class identifiable {
- public:
-  identifiable(void) {}
-  virtual ~identifiable(void) {}
+partitionable_polled_task::partitionable_polled_task(
+    const std::shared_ptr<er::server>& server,
+    const std::string& name,
+    const struct partitionable_task_params* c_params,
+    std::unique_ptr<taskable>& mechanism,
+    polled_task* parent)
+    : polled_task(name, c_params, mechanism, parent),
+      partitionable_task(server, c_params) {}
 
-  virtual identifiable* identify(void) = 0;
-};
+void partitionable_polled_task::init_random(uint lb, uint ub) {
+  executable_task::update_exec_estimate(rand() % (ub - lb + 1) + lb);
+  last_partition(rand() % 2 ? partition1(): partition2());
+  partition1()->update_exec_estimate(rand() % (ub - lb + 1) + lb);
+  partition2()->update_exec_estimate(rand() % (ub - lb + 1) + lb);
+} /* init_random() */
 
-NS_END(common, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_COMMON_IDENTIFIABLE_HPP_ */
+NS_END(task_allocation, rcppsw);

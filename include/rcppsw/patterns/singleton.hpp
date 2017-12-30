@@ -41,14 +41,14 @@ class singleton {
     return inst;
   }
 
- protected:
-  singleton(void) {}
-
-  ~singleton(void) {}
-
- private:
   singleton(singleton const&) = delete;
   singleton& operator=(singleton const&) = delete;
+  singleton(singleton&& other) = delete;
+  singleton& operator=(singleton&& other) = delete;
+
+ protected:
+  singleton(void) = default;
+  ~singleton(void) = default;
 };
 
 NS_END(patterns, rcppsw);

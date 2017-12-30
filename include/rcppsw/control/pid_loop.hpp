@@ -35,27 +35,28 @@ NS_START(rcppsw, control);
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class pid_loop
+ *
  * @brief A simple PID loop class.
  *
- *  Kp -  proportional gain
- *  Ki -  Integral gain
- *  Kd -  derivative gain
- *  dt -  loop interval time
- *  max - maximum value of manipulated variable
- *  min - minimum value of manipulated variable
+ *  Kp -  proportional gain.
+ *  Ki -  Integral gain.
+ *  Kd -  Derivative gain.
+ *  dt -  Loop interval time (linear interpolation used).
+ *  max - Maximum value of manipulated variable and integral term.
+ *  min - Minimum value of manipulated variable and integral term.
  */
 class pid_loop {
  public:
-  pid_loop(double Kp, double Kd, double Ki, double dt, double min, double max) :
-      m_Kp(Kp),
-      m_Kd(Kd),
-      m_Ki(Ki),
-      m_dt(dt),
-      m_min(min),
-      m_max(max),
-      m_pre_error(0),
-      m_integral(0) {}
-  ~pid_loop() {}
+  pid_loop(double Kp, double Kd, double Ki, double dt, double min, double max)
+      : m_Kp(Kp),
+        m_Kd(Kd),
+        m_Ki(Ki),
+        m_dt(dt),
+        m_min(min),
+        m_max(max),
+        m_istate(0),
+        m_prev_error(0.0) {}
 
   /**
    * @brief Calculate a new value for the manipulated variable.
@@ -63,14 +64,13 @@ class pid_loop {
    * @param setpoint Desired value of the manipulated variable.
    * @param pv Current value of the variable.
    *
-   * @return Correctional term (I think).
+   * @return Correctional term .
    */
   double calculate(double setpoint, double pv);
   void min(double min) { m_min = min; }
   void max(double max) { m_max = max; }
-  void reset(void) { m_pre_error = 0.0; m_integral = 0.0; }
-  void reset_integral(void) { m_integral = 0.0; }
-  double integral(void) const { return m_integral; }
+  void reset(void) { m_istate = 0.0; }
+  double integral(void) const { return m_istate; }
   double dt(void) const { return m_dt; }
   void dt(double dt) { m_dt = dt; }
   double Kp(void) const { return m_Kp; }
@@ -87,8 +87,8 @@ class pid_loop {
   double m_dt;
   double m_min;
   double m_max;
-  double m_pre_error;
-  double m_integral;
+  double m_istate;
+  double m_prev_error;
 };
 
 NS_END(control, rcppsw);

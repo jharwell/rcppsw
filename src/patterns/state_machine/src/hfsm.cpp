@@ -31,11 +31,12 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void hfsm::state_engine_step(const state_map_row* const row) {
-  ER_ASSERT(nullptr != row->state(), "FATAL: null state?");
-  ER_VER("Invoking state action: state%d, data=%p", current_state(),
+void hfsm::state_engine_step(const state_map_row* const c_row) {
+  ER_ASSERT(nullptr != c_row->state(), "FATAL: null state?");
+  ER_VER("Invoking state action: state%d, data=%p",
+         current_state(),
          reinterpret_cast<const void*>(event_data_get()));
-  const hfsm_state* state = static_cast<const hfsm_state*>(row->state());
+  auto* state = static_cast<const hfsm_state*>(c_row->state());
   int rval = event_signal::UNHANDLED;
   while (rval != event_signal::HANDLED) {
     rval = state->invoke_state_action(this, event_data_get());
@@ -43,23 +44,25 @@ void hfsm::state_engine_step(const state_map_row* const row) {
     /*
      * It is possible that we have gotten the HANDLED signal from a parent state
      * of a child that returned UNHANDLED. As such, we need to change both the
-     * event type and the signal of the event so execution can continue normally.
+     * event type and the signal of the event so execution can continue
+     * normally.
      */
     if (event_signal::HANDLED == rval) {
-      const_cast<event_data*>(event_data_get())->reset();
+      event_data_get()->reset();
       break;
     }
     state = static_cast<hfsm_state*>(state->parent());
-    const_cast<event_data*>(event_data_get())->type(event_type::CHILD);
-    const_cast<event_data*>(event_data_get())->signal(rval);
+    event_data_get()->type(event_type::CHILD);
+    event_data_get()->signal(rval);
   } /* while() */
 } /* state_engine_step() */
 
-void hfsm::state_engine_step(const state_map_ex_row* const row_ex) {
-  ER_ASSERT(nullptr != row_ex->state(), "FATAL: null state?");
-  ER_VER("Invoking state action: state%d, data=%p", current_state(),
+void hfsm::state_engine_step(const state_map_ex_row* const c_row_ex) {
+  ER_ASSERT(nullptr != c_row_ex->state(), "FATAL: null state?");
+  ER_VER("Invoking state action: state%d, data=%p",
+         current_state(),
          reinterpret_cast<const void*>(event_data_get()));
-  const hfsm_state* state = static_cast<const hfsm_state*>(row_ex->state());
+  auto* state = static_cast<const hfsm_state*>(c_row_ex->state());
   int rval = event_signal::UNHANDLED;
   while (rval != event_signal::HANDLED) {
     rval = state->invoke_state_action(this, event_data_get());
@@ -67,15 +70,16 @@ void hfsm::state_engine_step(const state_map_ex_row* const row_ex) {
     /*
      * It is possible that we have gotten the HANDLED signal from a parent state
      * of a child that returned UNHANDLED. As such, we need to change both the
-     * event type and the signal of the event so execution can continue normally.
+     * event type and the signal of the event so execution can continue
+     * normally.
      */
     if (event_signal::HANDLED == rval) {
-      const_cast<event_data*>(event_data_get())->reset();
+      event_data_get()->reset();
       break;
     }
     state = static_cast<hfsm_state*>(state->parent());
-    const_cast<event_data*>(event_data_get())->type(event_type::CHILD);
-    const_cast<event_data*>(event_data_get())->signal(rval);
+    event_data_get()->type(event_type::CHILD);
+    event_data_get()->signal(rval);
   } /* while() */
 } /* state_engine_step() */
 
@@ -86,17 +90,17 @@ void hfsm::inject_event(int signal, int type) {
 
 void hfsm::change_parent(uint8_t state,
                          rcppsw::patterns::state_machine::state* new_parent) {
-  state_map_row* row = const_cast<state_map_row*>(state_map(state));
-  state_map_ex_row* row_ex = const_cast<state_map_ex_row*>(state_map_ex(state));
+  auto* row = const_cast<state_map_row*>(state_map(state));
+  auto* row_ex = const_cast<state_map_ex_row*>(state_map_ex(state));
 
   ER_ASSERT(!(nullptr == row && nullptr == row_ex),
             "FATAL: Both state maps are NULL!");
 
   if (nullptr != row) {
-    hfsm_state* self = static_cast<hfsm_state*>(row->state());
+    auto* self = static_cast<hfsm_state*>(row->state());
     self->parent(new_parent);
   } else {
-    hfsm_state* self = static_cast<hfsm_state*>(row_ex->state());
+    auto* self = static_cast<hfsm_state*>(row_ex->state());
     self->parent(new_parent);
   }
 } /* change_parent() */

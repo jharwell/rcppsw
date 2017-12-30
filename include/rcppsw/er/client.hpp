@@ -1,5 +1,5 @@
 /**
- * @file er_client.hpp
+ * @file client.hpp
  *
  * Interface for classes that want to be able to use the ER Server.
  *
@@ -20,42 +20,48 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_COMMON_ER_CLIENT_HPP_
-#define INCLUDE_RCPPSW_COMMON_ER_CLIENT_HPP_
+#ifndef INCLUDE_RCPPSW_ER_CLIENT_HPP_
+#define INCLUDE_RCPPSW_ER_CLIENT_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <cassert>
 #include <string>
 #include <boost/uuid/uuid.hpp>
-#include "rcppsw/common/er_server_mod.hpp"
+#include "rcppsw/er/server_mod.hpp"
 
 /*******************************************************************************
  * Macros
  ******************************************************************************/
 /**
  * @brief Event reporting macros. Use of these macros requires the class you are
- * using it in derives from er_client. You cannot use these macros in a
+ * using it in derives from client. You cannot use these macros in a
  * non-class context.
  */
 #ifndef NDEBUG
 /* ---------- Explicit debug level statements (use these) ---------- */
-#define ER_ERR(...) ER_REPORT(rcppsw::common::er_lvl::ERROR, __VA_ARGS__)
-#define ER_WARN(...) ER_REPORT(rcppsw::common::er_lvl::WARN, __VA_ARGS__)
-#define ER_NOM(...) ER_REPORT(rcppsw::common::er_lvl::NOM, __VA_ARGS__)
-#define ER_DIAG(...) ER_REPORT(rcppsw::common::er_lvl::DIAG, __VA_ARGS__)
-#define ER_VER(...) ER_REPORT(rcppsw::common::er_lvl::VER, __VA_ARGS__)
+#define ER_ERR(...) ER_REPORT(rcppsw::er::er_lvl::ERROR, __VA_ARGS__)
+#define ER_WARN(...) ER_REPORT(rcppsw::er::er_lvl::WARN, __VA_ARGS__)
+#define ER_NOM(...) ER_REPORT(rcppsw::er::er_lvl::NOM, __VA_ARGS__)
+#define ER_DIAG(...) ER_REPORT(rcppsw::er::er_lvl::DIAG, __VA_ARGS__)
+#define ER_VER(...) ER_REPORT(rcppsw::er::er_lvl::VER, __VA_ARGS__)
 
 /* -------- Debug statements with level parameter (Don't use these) -------- */
-#define ER_REPORT(lvl, msg, ...)                                        \
-  {                                                                     \
-    char _str[1000];                                                    \
-    snprintf(static_cast<char*>(_str), sizeof(_str), "%s:%d:%s: " msg "\n", __FILE__, __LINE__, \
-             __FUNCTION__, ##__VA_ARGS__);                              \
-    __er_report__(rcppsw::common::er_client::server_handle(),          \
-                   rcppsw::common::er_client::er_id(),                  \
-                   lvl,                                                 \
-                   std::string(_str));                                  \
+#define ER_REPORT(lvl, msg, ...)                       \
+  {                                                    \
+    char _str[1000];                                   \
+    snprintf(static_cast<char*>(_str),                 \
+             sizeof(_str),                             \
+             "%s:%d:%s: " msg "\n",                    \
+             __FILE__,                                 \
+             __LINE__,                                 \
+             reinterpret_cast<const char*>(__FUNCTION__),       \
+             ##__VA_ARGS__);                           \
+    __er_report__(rcppsw::er::client::server_handle(), \
+                  rcppsw::er::client::er_id(),         \
+                  lvl,                                 \
+                  std::string(reinterpret_cast<char*>(_str)));  \
   }
 
 #else
@@ -72,82 +78,96 @@
  * error/bailout section for function (you must have a label called "error" in
  * your function).
  */
-#define ER_CHECK(cond, msg, ...)                \
-  {                                             \
-    if (!(cond)) {                              \
-      REPORT(rcppsw::common::er_lvl::ERR, msg, ##__VA_ARGS__); \
-      goto error;                               \
-    }                                           \
+#define ER_CHECK(cond, msg, ...)                           \
+  {                                                        \
+    if (!(cond)) {                                         \
+      REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__); \
+      goto error;                                          \
+    }                                                      \
   }
 
 /**
  * @brief Mark a place in the code as being universally bad. If execution ever
  * reaches this spot, report a message and error out.
  */
-#define ER_SENTINEL(msg, ...)                   \
-  {                                             \
-    ER_REPORT(rcppsw::common::er_lvl::ERR, msg, ##__VA_ARGS__);    \
-    goto error;                                 \
+#define ER_SENTINEL(msg, ...)                               \
+  {                                                         \
+    ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__); \
+    goto error;                                             \
   }
 
 /**
  * @brief Check a condition in a function, halting the program if the condition
  * is not true. Like assert(), but allows for an additional custom message.
  */
-#define ER_ASSERT(cond, msg, ...)                       \
-  if (!(cond)) {                                        \
-    ER_REPORT(rcppsw::common::er_lvl::ERR, msg, ##__VA_ARGS__);         \
-    assert(cond);                                                       \
+#define ER_ASSERT(cond, msg, ...)                           \
+  if (!(cond)) {                                            \
+    ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__); \
+    assert(cond);                                           \
+  }
+
+/**
+ * @brief Mark a place in the code as being universally bad. If execution ever
+ * reaches this spot stop the program.
+ */
+#define ER_FATAL_SENTINEL(msg, ...)                             \
+  {                                                             \
+    ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__);     \
+    assert(false);                                                  \
   }
 
 /*
  * Define debug macros also in rcsw to eliminate dependencies.
  */
 #ifndef CHECK
-#define CHECK(cond)                             \
-  {                                             \
-    if (!(cond)) {                              \
-      goto error;                               \
-    }                                           \
+#define CHECK(cond) \
+  {                 \
+    if (!(cond)) {  \
+      goto error;   \
+    }               \
   }
 #endif /* CHECK */
 
 #ifndef CHECK_PTR
-#define CHECK_PTR(ptr)                          \
-  if (nullptr == (ptr)) {                       \
-    goto error;                                 \
+#define CHECK_PTR(ptr)    \
+  if (nullptr == (ptr)) { \
+    goto error;           \
   }
 #endif /* CHECK_PTR */
 
 /*******************************************************************************
- * Class Decls
- ******************************************************************************/
-namespace rcppsw { namespace common { class er_server; class global_server;} }
-
-/*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, common);
+NS_START(rcppsw, er);
+
+class server;
+class global_server;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class er_client {
+/**
+ * @class client
+ *
+ * @brief A class that can connect to a \ref server for logging of important
+ * events.
+ */
+class client {
  public:
-  er_client(void);
-  explicit er_client(const std::shared_ptr<er_server>& server_handle);
-  virtual ~er_client(void);
+  client(void);
+  explicit client(std::shared_ptr<server> server_handle);
+  virtual ~client(void);
 
   /**
-   * @brief Initialize the er_client in cases where it was not possible to due
+   * @brief Initialize the client in cases where it was not possible to due
    * so in the initialization list in the class constructor. If the default
-   * constructor for er_client is used, things will segfault/go badly if any
+   * constructor for client is used, things will segfault/go badly if any
    * debugging statements are encountered in the client before this function is
    * called.
    *
-   * @param server_handle The er_server to attach to.
+   * @param server_handle The server to attach to.
    */
-  void deferred_init(const std::shared_ptr<er_server>& server_handle);
+  void deferred_init(std::shared_ptr<server> server_handle);
   void change_id(boost::uuids::uuid old_id, boost::uuids::uuid new_id);
 
   /**
@@ -186,10 +206,12 @@ class er_client {
    *
    * @return A reference to the server handle.
    */
-  er_server* server_handle(void) const { return m_server_handle.get(); }
+  server* server_handle(void) const { return m_server_handle.get(); }
 
  protected:
-  const std::shared_ptr<er_server>& server_ref(void) const { return m_server_handle; }
+  const std::shared_ptr<server>& server_ref(void) const {
+    return m_server_handle;
+  }
 
   /**
    * @brief Get a reference to the UUID for the module. Should not be called
@@ -200,10 +222,9 @@ class er_client {
   boost::uuids::uuid er_id(void) const { return m_er_id; }
 
  private:
-  std::shared_ptr<er_server> m_server_handle;
+  std::shared_ptr<server> m_server_handle;
   boost::uuids::uuid m_er_id;
 };
-
 
 /*******************************************************************************
  * Global Variables
@@ -214,15 +235,15 @@ class er_client {
  * through unrelated constructors until you get to the class you actually want
  * to enable debug printing/logging for.
  */
-extern std::shared_ptr<global_server> g_server;
+extern std::shared_ptr<rcppsw::er::global_server> g_server;
 
 /*******************************************************************************
  * Forward Declarations
  ******************************************************************************/
-void __er_report__(er_server* server,
-                   const boost::uuids::uuid& er_id, const er_lvl::value& lvl,
+void __er_report__(server* server,
+                   const boost::uuids::uuid& er_id,
+                   const er_lvl::value& lvl,
                    const std::string& str);
-NS_END(rcppsw, common);
+NS_END(rcppsw, er);
 
-
-#endif /* INCLUDE_RCPPSW_COMMON_ER_CLIENT_HPP_ */
+#endif /* INCLUDE_RCPPSW_ER_CLIENT_HPP_ */

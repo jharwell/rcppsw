@@ -25,8 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <pthread.h>
-#include <sys/types.h>
 #include <sys/syscall.h>
+#include <sys/types.h>
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
@@ -39,8 +39,13 @@ NS_START(rcppsw, multithread);
  ******************************************************************************/
 class threadable {
  public:
-  threadable(void) : m_thread_run(false), m_thread(), m_arg(NULL) {}
-  virtual ~threadable(void) {}
+  threadable(void) = default;
+  virtual ~threadable(void) = default;
+
+  threadable(const threadable& other) = delete;
+  threadable& operator=(const threadable& other) = delete;
+  threadable(threadable&& other) noexcept(true) = default;
+  threadable& operator=(threadable&& other) noexcept(true) = default;
 
   /**
    * @brief The entry point for a thread.
@@ -58,8 +63,7 @@ class threadable {
    *             unbound.
    * @return status_t - OK if successful, ERROR otherwise
    */
-  virtual status_t start(void* arg, int core = -1);
-
+  status_t start(void* arg, int core = -1);
 
   /**
    * @brief Signal a thread that it should terminate, from outside the thread.
@@ -69,7 +73,7 @@ class threadable {
   /**
    * @brief Join a thread (i.e. wait for it to finish)
    */
-  virtual void join(void) { pthread_join(m_thread, NULL); }
+  void join(void) { pthread_join(m_thread, nullptr); }
 
  protected:
   /**
@@ -83,9 +87,9 @@ class threadable {
    * @param ret If non-NULL, will be filled with the return value of the thread
    * as it exits.
    */
-  virtual void exit(void* ret = NULL) {
+  void exit(void* ret = nullptr) {
     m_thread_run = false;
-    if (!ret) {
+    if (nullptr == ret) {
       int ret2;
       pthread_exit(&ret2);
     } else {
@@ -107,22 +111,15 @@ class threadable {
    */
   int64_t thread_id(void) { return syscall(__NR_gettid); }
 
-  threadable(const threadable&& other) : m_thread_run(other.m_thread_run),
-                                         m_thread(other.m_thread),
-                                         m_arg(other.m_arg) {}
-
  private:
   static void* entry_point(void* this_p) {
-    threadable* pt = static_cast<threadable*>(this_p);
+    auto* pt = static_cast<threadable*>(this_p);
     return pt->thread_main(pt->m_arg);
   } /* entry_point() */
 
-  const threadable& operator=(const threadable& rhs) = delete;
-  threadable(const threadable& other) = delete;
-
-  bool      m_thread_run;
-  pthread_t m_thread;
-  void      *m_arg;
+  bool m_thread_run{false};
+  pthread_t m_thread{};
+  void* m_arg{nullptr};
 };
 
 NS_END(multithread, rcppsw);

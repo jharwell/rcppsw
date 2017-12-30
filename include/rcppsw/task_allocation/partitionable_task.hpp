@@ -24,15 +24,16 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/task_allocation/logical_task.hpp"
+#include "rcppsw/er/client.hpp"
 #include "rcppsw/task_allocation/partition_probability.hpp"
-#include "rcppsw/common/er_client.hpp"
+#include "rcppsw/task_allocation/subtask_selection_probability.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
+
+class executable_task;
 
 /*******************************************************************************
  * Class Definitions
@@ -40,48 +41,41 @@ NS_START(rcppsw, task_allocation);
 /**
  * @brief A task that is capable of being partitioned into two subtasks that
  * when executed in sequence have the sum effect as the parent task.
- *
- * If, during task execution, the task is aborted, then one of the subtasks is
- * chosen randomly to be the new task.
- *
- * Any class that inherits from this class must also inherit from
- * \ref logical_task.
  */
-template<class T1, class T2>
-class partitionable_task {
-  static_assert(std::is_base_of<logical_task, T1>::value,
-                "FATAL: template argument must be a logical task");
-  static_assert(std::is_base_of<logical_task, T2>::value,
-                "FATAL: template argument must be a logical task");
+class partitionable_task : public er::client {
  public:
-  partitionable_task(void) : m_partition1(nullptr), m_partition2(nullptr) {}
-  virtual ~partitionable_task(void) {}
+  partitionable_task(const std::shared_ptr<er::server>& server,
+                     const struct partitionable_task_params* c_params);
 
-  virtual double partition_prob(void) = 0;
+  virtual ~partitionable_task(void) = default;
 
-  logical_task* partition(void) {
-    /* we are going to partition, so pick one of the two subtasks randomly */
-    if (partition_prob() >= static_cast<double>(rand()) / RAND_MAX) {
-      if (rand() % 2) {
-        return m_partition1;
-      } else {
-        return m_partition2;
-      }
-    }
-    return m_partition1->parent();
-  }
-
-  const T1* partition1(void) const { return m_partition1; }
-  const T2* partition2(void) const { return m_partition2; }
-  void partition1(T1* partition1) { m_partition1 = partition1; }
-  void partition2(T2* partition2) { m_partition2 = partition2; }
-
- private:
   partitionable_task(const partitionable_task& other) = delete;
   partitionable_task& operator=(const partitionable_task& other) = delete;
 
-  T1 *m_partition1;
-  T2 *m_partition2;
+  executable_task* partition(void);
+
+  void update_partition_prob(const time_estimate& task,
+                             const time_estimate& subtask1,
+                             const time_estimate& subtask2);
+
+  double partition_prob(void) const { return m_partition_prob.last_result(); }
+  void last_partition(executable_task* last_partition) {
+    m_last_partition = last_partition;
+  }
+  void partition1(executable_task* partition1) { m_partition1 = partition1; }
+  void partition2(executable_task* partition2) { m_partition2 = partition2; }
+
+  executable_task* partition1(void) const { return m_partition1; }
+  executable_task* partition2(void) const { return m_partition2; }
+
+ private:
+  bool m_always_partition;
+  bool m_never_partition;
+  executable_task* m_partition1;
+  executable_task* m_partition2;
+  executable_task* m_last_partition;
+  subtask_selection_probability m_selection_prob;
+  partition_probability m_partition_prob;
 };
 
 NS_END(task_allocation, rcppsw);

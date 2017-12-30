@@ -43,12 +43,12 @@ NS_START(rcppsw, patterns, state_machine);
 class event_signal {
  public:
   enum {
-    IGNORED = 0xFE,  /// A signal that can be ignored
-    /**
-     * @brief A signal indicating that something VERY BAD has
-     * happened. Will cause the parent FSM to halt the program.
-     */
-    FATAL   = 0xFF,
+    IGNORED = 0xFE, /// A signal that can be ignored
+                    /**
+                     * @brief A signal indicating that something VERY BAD has
+                     * happened. Will cause the parent FSM to halt the program.
+                     */
+    FATAL = 0xFF,
 
     /**
      * @brief A signal indicating that all signals input into a given state have
@@ -82,14 +82,14 @@ class event_signal {
 class event_type {
  public:
   enum {
-    NORMAL = 0,  /// A normal, external state machine event
+    NORMAL = 0, /// A normal, external state machine event
 
     /**
      * @brief A signal from a child state, conveying something that it couldn't
      * handle or that something important happened that it felt a parent FSM
      * should know about.
      */
-    CHILD  = 1,
+    CHILD = 1,
 
     /**
      * @brief Applications wishing to defined their own event types
@@ -106,20 +106,23 @@ class event_type {
  */
 class event_data {
  public:
-  event_data(void) : m_signal(event_signal::IGNORED),
-                     m_type(event_type::NORMAL) {}
-  explicit event_data(int signal, int type = event_type::NORMAL) :
-      m_signal(signal), m_type(type) {}
-  virtual ~event_data() {}
+  event_data(void) = default;
+  explicit event_data(int signal, int type = event_type::NORMAL)
+      : m_signal(signal), m_type(type) {}
+  virtual ~event_data(void) = default;
+
   int signal(void) const { return m_signal; }
   void signal(int signal) { m_signal = signal; }
   int type(void) const { return m_type; }
   void type(int type) { m_type = type; }
-  void reset(void) { signal(event_signal::IGNORED); type(event_type::NORMAL); }
+  void reset(void) {
+    signal(event_signal::IGNORED);
+    type(event_type::NORMAL);
+  }
 
  private:
-  int m_signal;
-  int m_type;
+  int m_signal{event_signal::IGNORED};
+  int m_type{event_type::NORMAL};
 };
 
 /**

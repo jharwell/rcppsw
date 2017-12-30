@@ -1,5 +1,5 @@
 /**
- * @file er_server_mod.cpp
+ * @file mt_server.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -21,56 +21,45 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/er_server_mod.hpp"
-#include <fstream>
+#include "rcppsw/er/mt_server.hpp"
+#include <algorithm>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, common);
+NS_START(rcppsw, er);
 
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-er_server_mod::er_server_mod(boost::uuids::uuid id,
-                           er_lvl::value loglvl,
-                           er_lvl::value dbglvl,
-                             std::string name)
-    : m_id(id), m_name(std::move(name)), m_loglvl(loglvl), m_dbglvl(dbglvl) {}
-
-er_server_mod::er_server_mod(boost::uuids::uuid id,
-                             std::string name)
-    : m_id(id),
-      m_name(std::move(name)),
-      m_loglvl(er_lvl::NOM),
-      m_dbglvl(er_lvl::NOM) {}
+mt_server::mt_server(const std::string& logfile_fname,
+                     const er_lvl::value& dbglvl,
+                     const er_lvl::value& loglvl)
+    : server(logfile_fname, dbglvl, loglvl), m_queue() {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void er_server_mod::set_dbglvl(const er_lvl::value& lvl) {
-  m_dbglvl = lvl;
-} /* set_dbglvl() */
+void mt_server::flush(void) {
+  while (m_queue.size() > 0) {
+    msg_int next = m_queue.dequeue();
+    server::msg_report(next);
+  } /* while() */
+} /* flush() */
 
-void er_server_mod::set_loglvl(const er_lvl::value& lvl) {
-  m_loglvl = lvl;
-} /* set_loglvl() */
+void* mt_server::thread_main(__unused void* arg) {
+  while (!terminated()) {
+    while (0 == m_queue.size()) { sleep(1); }
+    msg_int msg = m_queue.dequeue();
+    msg_report(msg);
+  } /* while() */
 
-void er_server_mod::msg_report(const std::string& msg, er_lvl::value msg_lvl,
-                           er_lvl::value log_lvl, std::ostream& stream) const {
-    if (msg_lvl <= log_lvl) {
-      stream << name() << ": " << msg;
-      stream.flush();
-    }
-} /* er_server_mod::msg_report() */
+  /* make sure all events remaining in queue are reported */
+  while (m_queue.size() > 0) {
+    msg_int msg = m_queue.dequeue();
+    msg_report(msg);
+  } /* while() */
+  return nullptr;
+} /* thread_main() */
 
-bool er_server_mod::operator==(const er_server_mod& rhs) {
-  return (this->m_id == rhs.m_id);
-} /* operator==() */
-
-std::ostream& operator<<(std::ostream& os, const er_server_mod& mod) {
-  os << mod.id() << ": " << mod.name();
-  return os;
-} /* operator<<() */
-
-NS_END(common, rcppsw);
+NS_END(er, rcpppsw);

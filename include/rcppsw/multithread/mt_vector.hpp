@@ -24,9 +24,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
 #include <boost/thread.hpp>
 #include <boost/thread/locks.hpp>
+#include <vector>
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
@@ -60,7 +60,7 @@ class mt_vector {
     boost::unique_lock<boost::mutex> lock(m_mtx);
 
     m_v.push_back(data);
-  }  // Lock is automatically released here
+  } // Lock is automatically released here
 
   size_t size() const { return m_v.size(); }
   void clear(void) { m_v.clear(); }

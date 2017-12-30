@@ -24,11 +24,11 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <boost/thread/thread_time.hpp>
 #include <deque>
 #include <memory>
-#include <boost/thread/thread_time.hpp>
-#include "rcppsw/multiprocess/ipc.hpp"
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/multiprocess/ipc.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -95,7 +95,7 @@ class ipc_queue {
    *
    * @return TRUE if the front element was removed, FALSE otherwise.
    */
-  bool pop_try(T *const element) {
+  bool pop_try(T* const element) {
     bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
 
     if (m_queue.empty()) {
@@ -114,7 +114,7 @@ class ipc_queue {
    *
    * @param element To be filled with the front item in the queue.
    */
-  void pop_wait(T *const element) {
+  void pop_wait(T* const element) {
     bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
 
     while (m_queue.empty()) {
@@ -134,8 +134,8 @@ class ipc_queue {
    *
    * @return TRUE if an item was removed from the queue, FALSE otherwise.
    */
-    bool pop_timed_wait(T * const element, int to_sec) {
-      bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
+  bool pop_timed_wait(T* const element, int to_sec) {
+    bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
     boost::system_time to =
         boost::get_system_time() + boost::posix_time::seconds(to_sec);
     m_wait_condition.timed_wait(lock, to);
@@ -163,15 +163,12 @@ class ipc_queue {
    *
    * @return The current # elements in the queue.
    */
-  size_t size() const {
-    return m_queue.size();
-  }
+  size_t size() const { return m_queue.size(); }
 
  private:
-  bip::deque<T, allocator_type>       m_queue;
-  mutable bip::interprocess_mutex     m_io_mutex;
+  bip::deque<T, allocator_type> m_queue;
+  mutable bip::interprocess_mutex m_io_mutex;
   mutable bip::interprocess_condition m_wait_condition;
-
 };
 
 NS_END(multiprocess, rcppsw);

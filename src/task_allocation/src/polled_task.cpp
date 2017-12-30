@@ -31,6 +31,6 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-polled_task::~polled_task(void) {}
+polled_task::~polled_task(void) = default;
 
 NS_END(task_allocation, rcppsw);

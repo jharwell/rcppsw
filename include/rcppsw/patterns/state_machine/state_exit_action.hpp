@@ -24,10 +24,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <assert.h>
-#include "rcppsw/patterns/state_machine/state_exit.hpp"
-#include "rcppsw/patterns/state_machine/event.hpp"
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/patterns/state_machine/event.hpp"
+#include "rcppsw/patterns/state_machine/state_exit.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -47,10 +46,11 @@ class base_fsm;
 template <class SM, void (SM::*Func)(void)>
 class state_exit_action : public state_exit {
  public:
-  virtual ~state_exit_action() {}
+  ~state_exit_action(void) override = default;
+
   void invoke_exit_action(base_fsm* sm) const override {
-    SM* derivedSM = static_cast<SM*>(sm);
-    (derivedSM->*Func)();
+    auto* derived = static_cast<SM*>(sm);
+    (derived->*Func)();
   }
 };
 

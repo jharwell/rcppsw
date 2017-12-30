@@ -46,12 +46,14 @@ class base_fsm;
 template <class SM, class Event, bool (SM::*Func)(const Event*)>
 class state_guard_condition1 : public state_guard {
  public:
-  virtual ~state_guard_condition1() {}
+  ~state_guard_condition1(void) override = default;
+
   bool invoke_guard_condition(base_fsm* sm,
                               const event_data* data) const override {
-    SM* derived_fsm = static_cast<SM*>(sm);
+    auto* derived_fsm = static_cast<SM*>(sm);
     const Event* derived_event = NULL;
-    if (data) {
+
+    if (nullptr != data) {
       derived_event = dynamic_cast<const Event*>(data);
       assert(derived_event);
     }
@@ -67,14 +69,14 @@ class state_guard_condition1 : public state_guard {
 template <class SM, bool (SM::*Func)(void)>
 class state_guard_condition0 : public state_guard {
  public:
-  virtual ~state_guard_condition0() {}
+  ~state_guard_condition0(void) override = default;
+
   bool invoke_guard_condition(base_fsm* sm,
-                              const event_data*) const override {
-    SM* derived_fsm = static_cast<SM*>(sm);
+                              __unused const event_data*) const override {
+    auto* derived_fsm = static_cast<SM*>(sm);
     return (derived_fsm->*Func)();
   }
 };
-
 
 NS_END(state_machine, patterns, rcppsw);
 

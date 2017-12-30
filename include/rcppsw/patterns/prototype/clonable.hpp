@@ -34,12 +34,13 @@ NS_START(rcppsw, patterns, prototype);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+template<typename T>
 class clonable {
  public:
   clonable(void) {}
   virtual ~clonable(void) {}
 
-  virtual std::unique_ptr<clonable> clone(void) = 0;
+  virtual std::unique_ptr<T> clone(void) const = 0;
 };
 
 NS_END(rcppsw, patterns, prototype);

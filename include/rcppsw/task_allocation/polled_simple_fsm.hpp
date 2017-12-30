@@ -25,8 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/task_allocation/taskable.hpp"
 #include "rcppsw/patterns/state_machine/simple_fsm.hpp"
+#include "rcppsw/task_allocation/taskable.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -46,15 +46,15 @@ NS_START(rcppsw, task_allocation);
 class polled_simple_fsm : public taskable,
                           public patterns::state_machine::simple_fsm {
  public:
-  polled_simple_fsm(const std::shared_ptr<common::er_server>& server,
-                    uint8_t max_states) :
-      taskable(),
-      patterns::state_machine::simple_fsm(server, max_states) {}
+  polled_simple_fsm(const std::shared_ptr<er::server>& server,
+                    uint8_t max_states)
+      : taskable(), patterns::state_machine::simple_fsm(server, max_states) {}
   virtual ~polled_simple_fsm(void) {}
 
   void task_reset(void) override { init(); }
   void task_execute(void) override {
-    generated_event(true); state_engine();
+    generated_event(true);
+    state_engine();
   }
 };
 

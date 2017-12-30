@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/er_client.hpp"
+#include "rcppsw/er/client.hpp"
 #include "rcppsw/task_allocation/executable_task.hpp"
 
 /*******************************************************************************
@@ -38,31 +38,40 @@ NS_START(rcppsw, task_allocation);
 /**
  * @brief Abstract interface for runtime task executives.
  */
-class executive : public rcppsw::common::er_client {
+class executive : public rcppsw::er::client {
  public:
-  executive(const std::shared_ptr<rcppsw::common::er_server>& server,
-            executable_task *const root) :
-      er_client(server), m_current_task(nullptr), m_root(root) {
-    er_client::insmod("task_executive",
-                      rcppsw::common::er_lvl::DIAG,
-                      rcppsw::common::er_lvl::NOM);
-  }
-  virtual ~executive(void);
-  virtual void run(void) = 0;
-  executable_task* current_task(void) const { return m_current_task; }
+  executive(const std::shared_ptr<rcppsw::er::server>& server,
+            executable_task* root);
+  ~executive(void) override;
 
- protected:
-  executable_task* root(void) const { return m_root; }
-  void current_task(executable_task* current_task) { m_current_task = current_task; }
-  executable_task* get_next_task(executable_task* last_task);
-  double task_abort_prob(const executable_task* const task);
-
- private:
   executive& operator=(const executive& other) = delete;
   executive(const executive& other) = delete;
 
+  virtual void run(void) = 0;
+  executable_task* current_task(void) const { return m_current_task; }
+
+  /**
+   * @brief Set an optional callback that will be run when a task is aborted.
+   *
+   * The callback will be passed the task that was aborted, so if task-specific
+   * abort callbacks are needed, they can be implemented that way.
+   */
+  void task_abort_cleanup(std::function<void(executable_task* const)> cb);
+  const std::function<void(executable_task* const)>& task_abort_cleanup(
+      void) const;
+
+ protected:
+  executable_task* root(void) const { return mc_root; }
+  void current_task(executable_task* current_task) {
+    m_current_task = current_task;
+  }
+  executable_task* get_next_task(executable_task* last_task);
+  double task_abort_prob(executable_task* task);
+
+ private:
   executable_task* m_current_task;
-  executable_task* const m_root;
+  std::function<void(executable_task* const)> m_task_abort_cleanup;
+  executable_task* const mc_root;
 };
 
 NS_END(task_allocation, rcppsw);

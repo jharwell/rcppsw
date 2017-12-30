@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include <boost/program_options.hpp>
+#include <string>
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
@@ -58,7 +58,7 @@ class base_cli {
    * @return TRUE if the condition is met, and FALSE otherwise.
    */
 
-  virtual bool validate(void) { return OK; }
+  virtual bool validate(void) { return true; }
 
   /**
    * @brief Print all options and their help to stdout.
@@ -87,10 +87,10 @@ class base_cli {
   const std::string& prog_name(void) { return m_prog_name; }
 
  private:
-  bpo::variables_map       m_vm;
+  bpo::variables_map m_vm;
   bpo::options_description m_desc;
-  std::string              m_prog_name;
-  std::string              m_base_output_dir;  /// Root dir for program outputs.
+  std::string m_prog_name;
+  std::string m_base_output_dir; /// Root dir for program outputs.
 };
 
 NS_END(rcppsw);

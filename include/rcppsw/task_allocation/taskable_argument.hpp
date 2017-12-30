@@ -36,7 +36,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 class taskable_argument {
  public:
-  taskable_argument(void) {}
+  taskable_argument(void) = default;
   virtual ~taskable_argument(void);
 };
 NS_END(task_allocation, rcppsw);

@@ -24,10 +24,10 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <assert.h>
+#include <cassert>
+#include "rcppsw/common/common.hpp"
 #include "rcppsw/patterns/state_machine/event.hpp"
 #include "rcppsw/patterns/state_machine/state.hpp"
-#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -37,20 +37,22 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class hfsm_state: public state {
+class hfsm_state : public state {
  public:
   explicit hfsm_state(hfsm_state* parent) : state(), m_parent(parent) {}
-  virtual ~hfsm_state() {}
+  ~hfsm_state() override = default;
 
-  int invoke_state_action(base_fsm* fsm,
-                          const event_data* e) const override = 0;
-  rcppsw::patterns::state_machine::state* parent(void) const { return m_parent; }
-  void parent(rcppsw::patterns::state_machine::state* parent) { m_parent = parent; }
+  rcppsw::patterns::state_machine::state* parent(void) const {
+    return m_parent;
+  }
+  void parent(rcppsw::patterns::state_machine::state* parent) {
+    m_parent = parent;
+  }
+
+  hfsm_state(const hfsm_state& other) = delete;
+  hfsm_state& operator=(const hfsm_state& other) = delete;
 
  private:
-  hfsm_state& operator=(const hfsm_state& fsm) = delete;
-  hfsm_state(const hfsm_state& fsm) = delete;
-
   rcppsw::patterns::state_machine::state* m_parent;
 };
 
@@ -60,15 +62,15 @@ class hfsm_state: public state {
  * - The current state machine class.
  * - A state machine member function pointer that takes ZERO arguments.
  */
-template <class FSM,
-          int (FSM::*Handler)(void)>
+template <class FSM, int (FSM::*Handler)(void)>
 class hfsm_state_action0 : public hfsm_state {
  public:
   explicit hfsm_state_action0(hfsm_state* parent) : hfsm_state(parent) {}
-  virtual ~hfsm_state_action0(void) {}
+  ~hfsm_state_action0(void) override = default;
+
   int invoke_state_action(base_fsm* fsm,
-                          const event_data*) const override {
-    FSM* derived_fsm = static_cast<FSM*>(fsm);
+                          __unused const event_data*) const override {
+    auto* derived_fsm = static_cast<FSM*>(fsm);
     return (derived_fsm->*Handler)();
   }
 };
@@ -80,24 +82,22 @@ class hfsm_state_action0 : public hfsm_state {
  * - A state function event data type (derived from event).
  * - A state machine member function pointer, that takes ONE argument.
  */
-template <class FSM,
-          class Event,
-          int (FSM::*Handler)(const Event*)>
+template <class FSM, class Event, int (FSM::*Handler)(const Event*)>
 class hfsm_state_action1 : public hfsm_state {
  public:
   explicit hfsm_state_action1(hfsm_state* parent) : hfsm_state(parent) {}
-  virtual ~hfsm_state_action1() {}
+  ~hfsm_state_action1() override = default;
   int invoke_state_action(base_fsm* fsm,
                           const event_data* event) const override {
     /* Downcast the state machine and event data to the correct derived type */
-    FSM* derived_fsm = static_cast<FSM*>(fsm);
+    auto* derived_fsm = static_cast<FSM*>(fsm);
     const Event* derived_event = NULL;
 
     /*
      * If this check fails, there is a mismatch between the STATE_DECLARE event
      * data type and the data type being sent to the state function.
      */
-    if (event) {
+    if (nullptr != event) {
       derived_event = dynamic_cast<const Event*>(event);
       assert(derived_event);
     }

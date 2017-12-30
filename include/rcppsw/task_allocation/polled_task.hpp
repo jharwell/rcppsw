@@ -25,8 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/task_allocation/executable_task.hpp"
 #include "rcppsw/patterns/visitor/visitable.hpp"
+#include "rcppsw/task_allocation/executable_task.hpp"
 #include "rcppsw/task_allocation/taskable.hpp"
 
 /*******************************************************************************
@@ -43,25 +43,32 @@ NS_START(rcppsw, task_allocation);
  */
 class polled_task : public executable_task, public taskable {
  public:
-  polled_task(const std::string& name, double estimate_alpha,
+  polled_task(const std::string& name,
+              const struct task_params* const c_params,
               std::unique_ptr<taskable>& mechanism,
-              polled_task* const parent = nullptr) :
-      executable_task(name, estimate_alpha, parent),
-      m_mechanism(std::move(mechanism)) {}
+              polled_task* parent = nullptr)
+      : executable_task(name, c_params, parent),
+        m_mechanism(std::move(mechanism)) {}
   virtual ~polled_task(void);
+
+  polled_task& operator=(const polled_task& other) = delete;
+  polled_task(const polled_task& other) = delete;
 
   taskable* mechanism(void) const { return m_mechanism.get(); }
 
   void task_execute(void) override { m_mechanism->task_execute(); }
   void task_reset(void) override { m_mechanism->task_reset(); }
   bool task_running(void) const override { return m_mechanism->task_running(); }
-  bool task_finished(void) const override { return m_mechanism->task_finished(); }
+  bool task_finished(void) const override {
+    return m_mechanism->task_finished();
+  }
+
+  void init_random(uint lb, uint ub) {
+    executable_task::update_exec_estimate(rand() % (ub - lb + 1) + lb);
+  }
 
  private:
-  polled_task& operator=(const polled_task& other) = delete;
-  polled_task(const polled_task& other) = delete;
-
-  std::unique_ptr<taskable> const m_mechanism;
+  std::unique_ptr<taskable> m_mechanism;
 };
 
 NS_END(task_allocation, rcppsw);

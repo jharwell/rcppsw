@@ -1,5 +1,5 @@
 /**
- * @file er_server.hpp
+ * @file server.hpp
  *
  * Event Reporting Server, used for level and & module based debug printing and
  * logging.
@@ -21,42 +21,48 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_COMMON_ER_SERVER_HPP_
-#define INCLUDE_RCPPSW_COMMON_ER_SERVER_HPP_
+#ifndef INCLUDE_RCPPSW_ER_SERVER_HPP_
+#define INCLUDE_RCPPSW_ER_SERVER_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <fstream>
+#include <boost/uuid/uuid_generators.hpp>
+#include <iosfwd>
 #include <string>
 #include <vector>
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/common/er_server_mod.hpp"
-#include "rcppsw/multithread/mt_queue.hpp"
-#include "rcppsw/multithread/threadable.hpp"
+#include "rcppsw/er/server_mod.hpp"
 #include "rcppsw/patterns/singleton.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, common);
+NS_START(rcppsw, er);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class er_server : public multithread::threadable {
+/**
+ * @class server
+ *
+ * @brief Logging server allowing for run-tim module installation/removal for
+ * fine-grained control over debugging output.
+ */
+class server {
  public:
   /**
    * @brief Internal class wrapping all the information needed to processing a
    * message besides the text of the message itself.
    */
-  struct er_msg_int {
-    er_msg_int(const boost::uuids::uuid& id, const er_lvl::value& lvl,
-               const std::string& str)
-        : m_id(id), lvl_(lvl), str_(str) {}
-    boost::uuids::uuid m_id;
-    er_lvl::value lvl_;
-    std::string str_;
+  struct msg_int {
+    msg_int(const boost::uuids::uuid& id_,
+            const er_lvl::value& lvl_,
+            std::string str_)
+        : id(id_), lvl(lvl_), str(std::move(str_)) {}
+    boost::uuids::uuid id;
+    er_lvl::value lvl;
+    std::string str;
   };
 
   /**
@@ -66,29 +72,40 @@ class er_server : public multithread::threadable {
    *                      already exists, it is deleted.
    * @param dbglvl The initial debug printing level.
    * @param loglvl The initial logging level.
-   * @param threaded Whether or not messages will be enqueued into a queue and
-   *                 handled synchronously by a dedicated thread, or if
-   *                 messages will be handled inline in the calling thread
-   *                 (asynchronously).
    */
-  explicit er_server(const std::string& logfile_fname = "__no_file__",
-            const er_lvl::value& dbglvl = er_lvl::NOM,
-            const er_lvl::value& loglvl = er_lvl::NOM,
-            bool threaded = false);
+  server(std::string logfile_fname,
+         const er_lvl::value& dbglvl,
+         const er_lvl::value& loglvl);
 
-  ~er_server(void) { join(); m_logfile.close(); }
+  server(void): server("__no_file__", er_lvl::NOM, er_lvl::NOM) {}
+
+  virtual ~server(void);
 
   status_t change_id(const boost::uuids::uuid& old_id,
                      boost::uuids::uuid new_id);
-  std::ofstream& log_stream(void) { return m_logfile; }
-  std::ostream& dbg_stream(void) { return std::cout; }
+  std::ofstream& log_stream(void) { return *m_logfile; }
+  std::ostream& dbg_stream(void);
+  const std::string& logfile_fname(void) const { return m_logfile_fname; }
+
   /**
-   * @brief Enable debugging for the ER server. For debugging purposes only.
+   * @brief Install a callback to calculate a timestamp to be prepended to every
+   * message that is sent to stdout.
+   *
+   * This is useful when working with frameworks that do not provide such a
+   * timestamp, or that provide it for only logged messages.
    */
-  void self_common_en(void) {
-    insmod(m_er_id, "ER Server");
-    mod_dbglvl(m_er_id, er_lvl::NOM);
-  }
+  void dbg_ts_calculator(std::function<std::string(void)> cb);
+  const std::function<std::string(void)>& dbg_ts_calculator(void) const;
+
+  /**
+   * @brief Install a callback to calculate a timestamp to be prepended to every
+   * message that is sent to a logfile.
+   *
+   * This is useful when working with frameworks that do not provide such a
+   * timestamp, or that provide it for only messages sent to stdout.
+   */
+  void log_ts_calculator(std::function<std::string(void)> cb);
+  const std::function<std::string(void)>& log_ts_calculator(void) const;
 
   /**
    * @brief Find an existing module already installed on the server. Modules are
@@ -116,7 +133,8 @@ class er_server : public multithread::threadable {
    * @return OK if successful, ERROR otherwise.
    */
   status_t insmod(const boost::uuids::uuid& mod_id,
-                  const er_lvl::value& loglvl, const er_lvl::value& dbglvl,
+                  const er_lvl::value& loglvl,
+                  const er_lvl::value& dbglvl,
                   const std::string& mod_name);
   /**
    * @brief Unconditionally install a new module into the list of active
@@ -163,12 +181,6 @@ class er_server : public multithread::threadable {
    * @return OK if successful, ERROR otherwise.
    */
   status_t mod_loglvl(const boost::uuids::uuid& id, const er_lvl::value& lvl);
-  /**
-   * @brief Flush all remaining entries in the queue to stdout/the log file.
-   *
-   * @return # of messages flushed.
-   */
-  int flush(void);
 
   void change_logfile(const std::string& new_fname);
 
@@ -177,16 +189,7 @@ class er_server : public multithread::threadable {
    *
    * @return The UUID.
    */
-  boost::uuids::uuid idgen(void) { return m_gen(); }
-
-  /**
-   * @brief The entry point of the er_server thread.
-   *
-   * @param arg Unused.
-   *
-   * @return Unused.
-   */
-  void* thread_main(void* arg) override;
+  boost::uuids::uuid idgen(void);
 
   /**
    * @brief Get the current logging level.
@@ -217,7 +220,12 @@ class er_server : public multithread::threadable {
    *
    * @return The hostname.
    */
-  char* hostname(void) { return m_hostname; }
+  char* hostname(void) { return reinterpret_cast<char*>(m_hostname); }
+
+  /**
+   * @brief Enable debugging for the ER server. For debugging purposes only.
+   */
+  void self_er_en(void);
 
   /**
    * @brief Report a message. Messages may or not actually be printed/logged,
@@ -227,44 +235,54 @@ class er_server : public multithread::threadable {
    * @param lvl The level of the message.
    * @param str The message.
    */
-  void report(const boost::uuids::uuid& er_id, const er_lvl::value& lvl,
-              const std::string& str) {
-    er_msg_int msg(er_id, lvl, str);
+  virtual void report(const boost::uuids::uuid& er_id,
+                      const er_lvl::value& lvl,
+                      const std::string& str) {
+    msg_int msg(er_id, lvl, str);
     msg_report(msg);
-    if (m_threaded) {
-      m_queue.enqueue(msg);
-    }
   }
 
+  /**
+   * @brief Flush all pending messages to stdout/the log file.
+   */
+  virtual void flush(void);
+
+ protected:
+  void msg_report(const msg_int& msg);
+
  private:
-  void msg_report(const er_msg_int& msg);
-
   /* data members */
-  char                              m_hostname[32];
+  char m_hostname[32];
 
-  /** If true. the server is handling events synchronously. */
-  bool                              m_threaded;
-  std::vector<er_server_mod>        m_modules;
-  multithread::mt_queue<er_msg_int> m_queue;
-  std::string                       m_logfile_fname;  /// File to log events to.
-  std::ofstream                     m_logfile;        /// Logfile handle.
+  std::vector<server_mod> m_modules;
+  std::string m_logfile_fname;              /// File to log events to.
+  std::unique_ptr<std::ofstream> m_logfile; /// Logfile handle.
 
   /** Default log level for new modules */
-  er_lvl::value                     m_loglvl_dflt;
+  er_lvl::value m_loglvl_dflt;
 
   /** Default debug printing level for new modules. */
-  er_lvl::value                     m_dbglvl_dflt;
+  er_lvl::value m_dbglvl_dflt;
+
+  std::function<std::string(void)> m_dbg_ts_calculator;
+  std::function<std::string(void)> m_log_ts_calculator;
 
   /** Generator for universally unique identifiers for modules */
-  boost::uuids::random_generator m_gen;
+  boost::uuids::random_generator m_generator;
   boost::uuids::uuid m_er_id;
 };
 
-class global_server: public patterns::singleton<er_server>, public er_server {
+class global_server : public patterns::singleton<server>, public server {
  public:
-  virtual ~global_server(void);
+  global_server(void) : server() {}
+  ~global_server(void) override;
+
+  global_server(const global_server& other) = delete;
+  global_server& operator=(const global_server& other) = delete;
+  global_server(global_server&& other) = delete;
+  global_server& operator=(global_server&& other) = delete;
 };
 
-NS_END(common, rcppsw);
+NS_END(er, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_COMMON_ER_SERVER_HPP_ */
+#endif /* INCLUDE_RCPPSW_ER_SERVER_HPP_ */

@@ -24,7 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <cmath>
 #include "rcppsw/math/expression.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
 
@@ -38,31 +37,24 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 /**
  * @brief Calculates the probability that a robot will abort the task it is
- * currently working on.
+ * currently working on using the negative exponential distribution.
  *
- * Implements the equation:
+ * Reactivity and offset are assumed to both be < 0.
  *
- * P_g = 1/(1 + e^(omega(delta, duration estimates )))
- *
- * Where omega = reactivity * (
- *                    (execution time - whole_task_time)/
- *                    (subtask1_time + subtask2 time) + offset)
  * Depends on:
  *
  * - The reactivity parameter: How sensitive should robots be to abrupt changes
- *   in task estimates/execution times.
- * - Time estimates of the unpartitioned and two partitioned tasks.
+ *   in task estimates/execution times?
+ * - The offset parameter: How much the current_exec/prev_estimate ratio will be
+ *   allowed to grow before causing the probability to grow exponentially.
+ *
+ * - Time estimates for the task.
  * - How long the robot has spent executing the current task.
- * - The offset parameter: Another parameter whose purpose I'm not quite sure
- *   of.
  */
-class abort_probability: public rcppsw::math::expression<double> {
+class abort_probability : public rcppsw::math::expression<double> {
  public:
-  abort_probability(double reactivity, double offset) :
-      m_reactivity(reactivity), m_offset(offset) {}
-
-  double calc(double exec_time, const time_estimate& whole_task,
-              const time_estimate& subtask1, const time_estimate& subtask2);
+  abort_probability(double reactivity, double offset)
+      : m_reactivity(reactivity), m_offset(offset) {}
 
   double calc(double exec_time, const time_estimate& whole_task);
 
@@ -70,7 +62,6 @@ class abort_probability: public rcppsw::math::expression<double> {
   double m_reactivity;
   double m_offset;
 };
-
 
 NS_END(task_allocation, rcppsw);
 

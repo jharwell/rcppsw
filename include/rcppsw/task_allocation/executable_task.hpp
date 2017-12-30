@@ -25,13 +25,14 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/task_allocation/time_estimate.hpp"
 #include "rcppsw/task_allocation/logical_task.hpp"
+#include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
+struct task_params;
 
 /*******************************************************************************
  * Class Definitions
@@ -48,35 +49,34 @@ NS_START(rcppsw, task_allocation);
  */
 class executable_task : public logical_task {
  public:
-  executable_task(const std::string& name, double estimate_alpha,
-                  executable_task* const parent = nullptr) :
-      logical_task(name, parent),
-      m_is_atomic(false), m_exec_time(0.0), m_estimate(estimate_alpha) {}
+  executable_task(const std::string& name,
+                  const struct task_params* c_params,
+                  executable_task* parent);
+  executable_task(const executable_task& other);
 
-  executable_task(const executable_task& other) :
-      logical_task(other), m_is_atomic(false), m_exec_time(other.m_exec_time),
-      m_estimate(other.m_estimate) {}
-
-  virtual ~executable_task(void);
+  ~executable_task(void) override;
 
   /**
-   * @brief Get the current estimate of the task's execution time.
-   *
-   * This is NOT updated at the end of the \ref task_execute() function, as it
-   * is possible that some executable tasks are only run once, and therefore the
-   * execution time is irrelevant, or that the user does not care how long a
-   * task takes, only that it finishes.
+   * @brief Get the current estimate of the task's interface time.
    */
-  const time_estimate& current_time_estimate(void) const { return m_estimate; }
+  const time_estimate& interface_estimate(void) const {
+    return m_interface_estimate;
+  }
+  const time_estimate& exec_estimate(void) const { return m_exec_estimate; }
 
   /**
-   * @brief Update the current estimate of the task execution time by using a
+   * @brief Update the current estimate of the task interface time by using a
    * weighted sum of the previous estimate and the new value. See
    * \ref time_estimate.
    *
-   * @param last_measure The last measured execution time, in seconds.
+   * @param last_measure The last measured time.
    */
-  void update_time_estimate(double last_measure) { m_estimate.calc(last_measure); }
+  void update_interface_estimate(double last_measure) {
+    m_interface_estimate.calc(last_measure);
+  }
+  void update_exec_estimate(double last_measure) {
+    m_exec_estimate.calc(last_measure);
+  }
 
   /**
    * @brief The method that all tasks must define that specifies how to execute
@@ -85,45 +85,52 @@ class executable_task : public logical_task {
   virtual void task_execute(void) = 0;
 
   /**
-   * @brief Calculate the probability of aborting this task.
-   */
-  virtual double abort_prob(void) = 0;
-
-  /**
    * @brief Get the last execution time of the task.
    */
+  double interface_time(void) const { return m_interface_time; }
   double exec_time(void) const { return m_exec_time; }
 
-  virtual logical_task* partition(void) = 0;
+  virtual executable_task* partition(void) { return nullptr; }
   bool is_atomic(void) const { return m_is_atomic; }
   void set_atomic(void) { m_is_atomic = true; }
+  bool is_partitionable(void) const { return m_is_partitionable; }
+  void set_partitionable(void) { m_is_partitionable = true; }
 
   /**
-   * @brief Calculate how long a "step" of task execution took.
-   *
-   * This is a public function, rather than being computed internally, because
-   * there are many different methods of estimating time, and the user should be
-   * able to use whatever method they prefer.
-   *
-   * @param exec_time The current measure of execution time
+   * @brief Get the probability of aborting an executable task.
    */
-  virtual double calc_elapsed_time(double exec_time) const = 0;
+  virtual double calc_abort_prob(void) = 0;
+
+  virtual double calc_interface_time(double start_time) = 0;
 
   /**
-   * @brief Update the calculated exec time for the task as a running sum.
+   * @brief Get the current time
+   */
+  virtual double current_time(void) const = 0;
+
+  /**
+   * @brief Update the calculated interface time for the task
    *
    * This is needed for accurate task abort calculations.
    */
-  void update_exec_time(void) { m_exec_time += calc_elapsed_time(m_exec_time); }
-
-  void reset_exec_time(void) { m_exec_time = 0.0; }
+  void update_interface_time(void) {
+    m_interface_time = calc_interface_time(m_interface_start_time);
+  }
+  void reset_interface_time(void) { m_interface_start_time = current_time(); }
+  void update_exec_time(void) {
+    m_exec_time = current_time() - m_exec_start_time;
+  }
+  void reset_exec_time(void) { m_exec_start_time = current_time(); }
 
  private:
-  executable_task& operator=(const executable_task& other) = delete;
-
   bool m_is_atomic;
+  bool m_is_partitionable;
+  double m_interface_time;
+  double m_interface_start_time;
   double m_exec_time;
-  time_estimate m_estimate;
+  double m_exec_start_time;
+  time_estimate m_interface_estimate;
+  time_estimate m_exec_estimate;
 };
 
 NS_END(task_allocation, rcppsw);

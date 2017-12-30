@@ -24,7 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <cmath>
+#include <string>
+
 #include "rcppsw/math/expression.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
 
@@ -37,18 +38,10 @@ NS_START(rcppsw, task_allocation);
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief Calculates the probability that a robot partitions its current task.
+ * @brief Calculates the probability that a robot partitions its current task
+ * using the negative exponential distribution.
  *
- * Implements the equation:
- *
- * If no_partition_est > (subtask1_est + subtask2_est):
- *
- * P_p = 1/(1+ e^(-reactivity(no_partition_est/
- *                                            (subtask1_est subtask2_est) - 1)))
- *
- * If no_partition_est <= (subtask1_est + subtask2_est):
- *
- * P_p = 1/(1+ e^(-reactivity(1 - (subtask1_est subtask2_est)/no_partition_est)))
+ * Reactivity is assumed to be > 0.
  *
  * Depends on:
  *
@@ -59,16 +52,23 @@ NS_START(rcppsw, task_allocation);
  * - The reactivity parameter: how sensitive should robots be to abrupt changes
  *   in the estimates?
  */
-class partition_probability: public rcppsw::math::expression<double> {
+class partition_probability : public rcppsw::math::expression<double> {
  public:
-  explicit partition_probability(double reactivity) :
-      m_reactivity(reactivity) {}
+  explicit partition_probability(std::string method, double reactivity)
+      : mc_method(std::move(method)), m_reactivity(reactivity) {}
 
-  double calc(const time_estimate& task_estimate,
-              const time_estimate& subtask1_estimate,
-              const time_estimate& subtask2_estimate);
+  double calc(const time_estimate& task,
+              const time_estimate& subtask1,
+              const time_estimate& subtask2);
+
+  const std::string& method(void) const { return mc_method; }
 
  private:
+  double calc_pini2011(const time_estimate& task,
+                       const time_estimate& subtask1,
+                       const time_estimate& subtask2);
+
+  const std::string mc_method;
   double m_reactivity;
 };
 

@@ -31,6 +31,6 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-logical_task::~logical_task(void) {}
+logical_task::~logical_task(void) = default;
 
 NS_END(task_allocation, rcppsw);

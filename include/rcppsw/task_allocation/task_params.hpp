@@ -24,6 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+
 #include "rcppsw/common/base_params.hpp"
 
 /*******************************************************************************
@@ -35,10 +37,32 @@ NS_START(rcppsw, task_allocation);
  * Structure Definitions
  ******************************************************************************/
 struct task_params : public common::base_params {
-  task_params(void) : estimation_alpha(), reactivity(), abort_offset() {}
+  task_params(void)
+      : estimation_alpha(),
+        abort_reactivity(),
+        abort_offset(),
+        partition_reactivity(),
+        partition_offset() {}
+
   double estimation_alpha;
-  double reactivity;
+  double abort_reactivity;
   double abort_offset;
+  double partition_reactivity;
+  double partition_offset;
+};
+
+struct partitionable_task_params : public task_params {
+  partitionable_task_params(void)
+      : task_params(),
+        subtask_selection_method(),
+        partition_method(),
+        always_partition(false),
+        never_partition(false) {}
+
+  std::string subtask_selection_method;
+  std::string partition_method;
+  bool always_partition;
+  bool never_partition;
 };
 
 NS_END(task_allocation, rcppsw);

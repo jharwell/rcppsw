@@ -46,23 +46,24 @@ NS_START(rcppsw, swarm);
  * - The pheromone decay parameter.
  * - The previous value of the pheromone density.
  */
-class pheromone_density: public rcppsw::math::expression<double> {
+class pheromone_density : public rcppsw::math::expression<double> {
  public:
   pheromone_density(void) : pheromone_density(0.0) {}
-  explicit pheromone_density(double rho) :
-      expression(), m_delta(0), m_rho(rho) {}
+  explicit pheromone_density(double rho)
+      : expression(), m_delta(0), m_rho(rho) {}
 
   void rho(double rho) { m_rho = rho; }
 
+  void reset(void) {
+    set_result(0.0);
+    m_delta = 0.0;
+  }
   double calc(void) {
-    double res = std::max<double>((1.0 - m_rho) * last_result() + m_delta,
-                                  0.0);
+    double res = std::max<double>((1.0 - m_rho) * last_result() + m_delta, 0.0);
     m_delta = 0;
     return set_result(res);
   }
-  void add_pheromone(double val) {
-    m_delta += val;
-  }
+  void pheromone_add(double val) { m_delta += val; }
 
  private:
   double m_delta;
