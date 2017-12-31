@@ -60,6 +60,8 @@ class xml_param_repository {
    */
   void parse_all(ticpp::Element& node);
 
+  bool validate_all(void);
+
   /**
    * @brief Get the parsed parameters associated with the named parser.
    */

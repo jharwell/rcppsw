@@ -51,11 +51,6 @@ class xml_param_parser {
   xml_param_parser(void) = default;
   virtual ~xml_param_parser(void) = default;
 
-  xml_param_parser(const xml_param_parser& other) = default;
-  xml_param_parser& operator=(const xml_param_parser& other) = default;
-  xml_param_parser(xml_param_parser&& other) noexcept(true) = default;
-  xml_param_parser& operator=(xml_param_parser&& other) noexcept(true) = default;
-
   /**
    * @brief Parser the provided XML node into an internal representation.
    */
@@ -68,7 +63,13 @@ class xml_param_parser {
   virtual void show(std::ostream& stream) = 0;
 
   /**
-   * @brief Get the results of an XML parameter parse.
+   * @brief Validate the range, value, etc. of all parsed parameters. As such,
+   * don't call this unless the parameters have already been parsed.
+   */
+  virtual bool validate(void) { return true; }
+
+  /**
+   * @brief Get the results of parameter parse.
    */
   virtual const struct base_params* get_results(void) = 0;
 };

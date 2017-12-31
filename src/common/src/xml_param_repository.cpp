@@ -32,6 +32,16 @@ NS_START(rcppsw, common);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
+bool xml_param_repository::validate_all(void) {
+  for (auto& pair : m_parsers) {
+    if (!pair.second->validate()) {
+      return false;
+    }
+  } /* for(pair..) */
+
+  return true;
+} /* validate_all() */
+
 void xml_param_repository::parse_all(ticpp::Element& node) {
   std::for_each(m_parsers.begin(),
                 m_parsers.end(),
