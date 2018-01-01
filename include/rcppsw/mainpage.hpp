@@ -1,5 +1,5 @@
 /**
- * @file mainpage.hpp
+ * @mainpage RCPPSW
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -17,42 +17,50 @@
  * You should have received a copy of the GNU General Public License along with
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  *
- * @defgroup common
+ * @defgroup common common
  * Common definitions/things that need a home in rcppsw.
  *
- * @defgroup control
+ * @defgroup control control
  * Control theory algorithms, constructs, etc.
  *
- * @defgroup er
+ * @defgroup er er
  * Event Reporting
  *
- * @defgroup math
+ * @defgroup math math
  * Math algorithms, equations, etc.
  *
- * @defgroup multiprocess
+ * @defgroup multiprocess multiprocess
  * Things related to multiprocessing, such as forking, core locking, etc.
  *
- * @defgroup multithread
+ * @defgroup multithread multithread
  * Things related to multithreading, such as forking, core locking, etc.
  *
- * @defgroup patterns
+ * @defgroup patterns patterns
  * Implementation of common design patterns.
  * @{
  *
- * @defgroup decorator
+ * @defgroup decorator decorator
  * Wrap an existing class/expand functionality.
  *
- * @defgroup factory
+ * @defgroup factory factory
  * Abstract details of object creation away. Releasing/sharing ownership
  * versions.
  *
- * @defgroup prototype
+ * @defgroup prototype prototype
  * A cloning factory really.
  *
- * @defgroup state_machine
+ * @defgroup state_machine state_machine
  * Simple and hierarchical versions.
 
- * @defgroup visitor
+ * @defgroup visitor visitor
  * Dynamic/double dispatch.
+ *
  * @}
+ *
+ * @defgroup swarm swarm
+ * Various swarm specific algorithms/ideas.
+ *
+ * @defgroup task_allocation task_allocation
+ * Algorithms and framework for task allocation research, specifically in
+ * robotics.
  */

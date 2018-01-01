@@ -1,5 +1,6 @@
 /**
  * @file polled_executive.hpp
+ * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -34,6 +35,12 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class polled_executive
+ *
+ * @brief A task executive which tasks are run one step at a time and polled to
+ * see if they are finished yet.
+ */
 class polled_executive : public executive {
  public:
   polled_executive(const std::shared_ptr<rcppsw::er::server>& server,

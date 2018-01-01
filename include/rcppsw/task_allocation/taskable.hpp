@@ -1,5 +1,6 @@
 /**
  * @file taskable.hpp
+ * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -41,7 +42,7 @@ class taskable_argument;
  ******************************************************************************/
 /**
  * @brief A class that all classes wishing to be used as the mechanism by which
- * \ref atomic_task instances execute themselves must inherit from.
+ * \ref executable_task objects execute themselves must inherit from.
  */
 class taskable {
  public:
@@ -56,18 +57,29 @@ class taskable {
   /**
    * @brief Determine if the task has finished yet.
    *
-   * @return TRUE if the task has finished, and FALSE otherwise.
+   * @return \c TRUE if the task has finished, and \c FALSE otherwise.
    */
   virtual bool task_finished(void) const = 0;
 
+  /**
+   * @brief Determine if the task has is still running yet.
+   *
+   * @return \c TRUE if the task is still running, and \c FALSE otherwise.
+   */
   virtual bool task_running(void) const = 0;
 
   /**
-   * @brief Reset the task so that it is ready for execution again.
+   * @brief Reset the task so that it is ready for execution again. Does nothing
+   * by default.
    */
   virtual void task_reset(void) {}
+
+  /**
+   * @brief Start the task with the specified argument.
+   */
   virtual void task_start(__unused const taskable_argument* c_arg) = 0;
 };
+
 NS_END(task_allocation, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASKABLE_HPP_ */

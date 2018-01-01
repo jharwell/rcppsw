@@ -1,5 +1,6 @@
 /**
  * @file abort_probability.hpp
+ * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *

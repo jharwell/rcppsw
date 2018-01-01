@@ -1,5 +1,6 @@
 /**
  * @file polled_task.hpp
+ * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -38,6 +39,8 @@ NS_START(rcppsw, task_allocation);
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class polled_task
+ *
  * @brief Represents a task whose execution can/should be monitored by the user
  * to determine when it has finished.
  */
@@ -63,6 +66,10 @@ class polled_task : public executable_task, public taskable {
     return m_mechanism->task_finished();
   }
 
+  /**
+   * @brief Initialize the execution time estimates of the task randomly within
+   * the specified range.
+   */
   void init_random(uint lb, uint ub) {
     executable_task::update_exec_estimate(rand() % (ub - lb + 1) + lb);
   }

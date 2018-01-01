@@ -43,7 +43,6 @@ NS_START(rcppsw, control);
 class pid_loop {
  public:
   /**
-   *
    * @param Kp proportional gain.
    * @param Ki Integral gain.
    * @param Kd Derivative gain.

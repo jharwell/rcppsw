@@ -1,5 +1,6 @@
 /**
  * @file partitionable_task.hpp
+ * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -39,6 +40,8 @@ class executable_task;
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class partitionable_task
+ *
  * @brief A task that is capable of being partitioned into two subtasks that
  * when executed in sequence have the sum effect as the parent task.
  */
@@ -52,13 +55,32 @@ class partitionable_task : public er::client {
   partitionable_task(const partitionable_task& other) = delete;
   partitionable_task& operator=(const partitionable_task& other) = delete;
 
+  /**
+   * @brief Partition the task according to the configured method, and return a
+   * new task to execute.
+   */
   executable_task* partition(void);
 
+  /**
+   * @brief Update the partition probalitity of the current task.
+   *
+   * @param task The estimate of execution time for unpartitioned task.
+   * @param subtask1 The estimate of execution time for partition 1.
+   * @param subtask2 The estimate of execution time for partition 2.
+   */
   void update_partition_prob(const time_estimate& task,
                              const time_estimate& subtask1,
                              const time_estimate& subtask2);
 
+  /**
+   * @brief Get the current partition probability.
+   */
   double partition_prob(void) const { return m_partition_prob.last_result(); }
+
+  /**
+   * @brief Set subtask that was most recently selected to run when partitioning
+   * was employed. Needed for some subtask selection methods.
+   */
   void last_partition(executable_task* last_partition) {
     m_last_partition = last_partition;
   }

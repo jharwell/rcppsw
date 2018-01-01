@@ -1,5 +1,6 @@
 /**
  * @file polymorphic_visitable.hpp
+ * @ingroup patterns visitor
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *

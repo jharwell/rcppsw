@@ -83,8 +83,7 @@
  */
 #define ER_VER(...) ER_REPORT(rcppsw::er::er_lvl::VER, __VA_ARGS__)
 
-/**
- * @internal
+/*
  * -------- Debug statements with level parameter (Don't use these) --------
  */
 
@@ -119,10 +118,6 @@
 #define ER_DIAG(...)
 #define ER_VER(...)
 #endif /* NDEBUG */
-
-/**
- * @endinternal
- */
 
 /**
  * @def ER_CHECK(cond, msg, ...)

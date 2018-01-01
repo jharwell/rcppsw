@@ -1,5 +1,6 @@
 /**
  * @file state_exit_action.hpp
+ * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -40,8 +41,8 @@ class base_fsm;
 /**
  * @brief state_exit_action takes two template arguments:
  *
- * - A state machine class.
- * - A state machine member function pointer.
+ * @tparam SM A state machine class.
+ * @tparam Func A state machine member function pointer.
  */
 template <class SM, void (SM::*Func)(void)>
 class state_exit_action : public state_exit {

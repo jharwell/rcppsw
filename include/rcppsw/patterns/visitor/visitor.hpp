@@ -1,5 +1,6 @@
 /**
  * @file visitor.hpp
+ * @ingroup patterns visitor
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -35,6 +36,8 @@ NS_START(rcppsw, patterns, visitor);
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class visitor
+ *
  * @brief The base visitor class from which all other classes wishing to employ
  * the visit()/accept() paradigm inherit.
  */
@@ -44,6 +47,8 @@ class visitor {
 };
 
 /**
+ * @class can_visit
+ *
  * @brief Visitor classes should also derive from can_visit<T> for each derived
  * visitable type they want to visit.
  */
@@ -91,7 +96,7 @@ class visit_set<T, Ts...>: public visit_set_helper<T>,
  * @class visit_set<T>
  *
  * @brief Base case for expansion. Provides classes the ability to explicitly
- * control what types of visitors they will accept.
+ * control what types of classes they can visit.
  */
 template<typename T>
 class visit_set<T>: public visit_set_helper<T> {

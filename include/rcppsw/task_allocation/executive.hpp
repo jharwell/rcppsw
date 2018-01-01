@@ -1,5 +1,6 @@
 /**
  * @file executive.hpp
+ * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -36,7 +37,9 @@ NS_START(rcppsw, task_allocation);
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief Abstract interface for runtime task executives.
+ * @class executive
+ *
+ * @brief Base class/interface for runtime task executives.
  */
 class executive : public rcppsw::er::client {
  public:
@@ -47,7 +50,14 @@ class executive : public rcppsw::er::client {
   executive& operator=(const executive& other) = delete;
   executive(const executive& other) = delete;
 
+  /**
+   * @brief The means by which the task executive will run one timestep/task/etc.
+   */
   virtual void run(void) = 0;
+
+  /**
+   * @brief Get the task currently being run.
+   */
   executable_task* current_task(void) const { return m_current_task; }
 
   /**
@@ -65,7 +75,15 @@ class executive : public rcppsw::er::client {
   void current_task(executable_task* current_task) {
     m_current_task = current_task;
   }
+  /**
+   * @brief After the current task is aborted or finished, figured what the next
+   * task to run should be and return it.
+   */
   executable_task* get_next_task(executable_task* last_task);
+
+  /**
+   * @brief Get the probability of aborting the specified task.
+   */
   double task_abort_prob(executable_task* task);
 
  private:

@@ -1,5 +1,6 @@
 /**
  * @file state_guard.hpp
+ * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -38,6 +39,8 @@ class event_data;
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class state_guard
+ *
  * @brief Abstract guard base class that all guards classes inherit from.
  */
 class state_guard {

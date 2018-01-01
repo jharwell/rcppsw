@@ -1,6 +1,6 @@
 /**
  * @file base_fsm.hpp
- * @ingroup state_machine
+ * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -246,7 +246,7 @@ NS_END(state_machine, patterns, rcppsw);
           guard_name
 
 /**
- * @def FSM_FUARD_DEFINE(FSM, guard_name, event_data) Define a guard
+ * @def FSM_GUARD_DEFINE(FSM, guard_name, event_data) Define a guard
  * \c guard_name for a class  \c FSM, which requires the input
  * signal of \c event_data each time the guard is executed.
  */
@@ -394,28 +394,65 @@ NS_END(state_machine, patterns, rcppsw);
  * you really really don't want to do this. Use \ref HFSM_DECLARE_STATE_MAP()
  * instead.
  *
- * \c type must be either "state_map" or "state_map_ex". \c name can be
- * anything.
+ * \c type must be either "state_map" or "state_map_ex", corresponding to which
+ * type of states the state machine is comprised of. \c name can be anything.
  */
 #define FSM_DEFINE_STATE_MAP(type, name) \
   static const rcppsw::patterns::state_machine::JOIN(type, _row) (name)[]
+
+/**
+ * @def FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)
+ *
+ * Define the function that will be used by all \ref simple_fsm state machines
+ * to process events (i.e. given that a machine is in state X and event Y
+ * occurs, what state should it transition to next).
+ *
+ * \c type must be either "state_map" or "state_map_ex", corresponding to which
+ * type of states the state machine is comprised of. \c index_var can be
+ * anything, and will have the value of the current state.
+ */
 
 #define FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)      \
   const rcppsw::patterns::state_machine::JOIN(type, _row) * \
       JOIN(type, )(size_t index_var)
 
+/**
+ * @def FSM_STATE_MAP_ENTRY(state_name)
+ *
+ * Define a state map entry for state \c state_name.
+ */
 #define FSM_STATE_MAP_ENTRY(state_name) \
   rcppsw::patterns::state_machine::state_map_row(state_name)
 
+/**
+ * @def FSM_STATE_MAP_ENTRY_EX(state_name)
+ *
+ * Define an extended state map entry for state \c state_name, where the state
+ * does not use any of the entry/exit/guard callbacks. Useful for reducing code
+ * clutter.
+ */
 #define FSM_STATE_MAP_ENTRY_EX(state_name)           \
   rcppsw::patterns::state_machine::state_map_ex_row( \
       state_name, NULL, NULL, NULL)
 
+/**
+ * @def FSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name)
+ *
+ * Define an extended state map entry for state \c state_name, along will all
+ * callbacks. If entry/exit/guard callbacks are not used for the state,
+ * \c nullptr should be passed.
+ */
 #define FSM_STATE_MAP_ENTRY_EX_ALL(                  \
     state_name, guard_name, entry_name, exit_name)   \
   rcppsw::patterns::state_machine::state_map_ex_row( \
       state_name, guard_name, entry_name, exit_name)
 
+/**
+ * @def FSM_VERIFY_STATE_MAP(type, name n_entries)
+ *
+ * Verifies that the state map \c name of type \c type (must be "state_map" or
+ * "state_map_ex") contains \c n_entries using a static assert.
+ */
 #define FSM_VERIFY_STATE_MAP(type, name, n_entries)                            \
   static_assert((sizeof(name) /                                                \
                  sizeof(rcppsw::patterns::state_machine::JOIN(type, _row))) == \

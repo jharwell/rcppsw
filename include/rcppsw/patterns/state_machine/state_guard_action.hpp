@@ -1,5 +1,6 @@
 /**
  * @file state_guard_action.hpp
+ * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,11 +38,11 @@ class base_fsm;
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/** @brief state_guard_condition takes three template arguments:
+/** @class state_guard_condition
  *
- * - A state machine class.
- * - A state function event data type (derived from event_data).
- * - A state machine member function pointer that takes ONE argument
+ * @tparam SM A state machine class.
+ * @tparam Event A state function event data type.
+ * @tparam Func A state machine member function pointer that takes ONE argument
  */
 template <class SM, class Event, bool (SM::*Func)(const Event*)>
 class state_guard_condition1 : public state_guard {
@@ -61,10 +62,11 @@ class state_guard_condition1 : public state_guard {
   }
 };
 
-/** @brief state_guard_condition takes three template arguments:
+/** @class state_guard_condition
  *
- * - A state machine class.
- * - A state machine member function pointer that takes ZERO arguments.
+ * @tparam SM A state machine class.
+ * @tparam Func A state machine member function pointer that takes ZERO
+ * arguments.
  */
 template <class SM, bool (SM::*Func)(void)>
 class state_guard_condition0 : public state_guard {

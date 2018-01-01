@@ -1,5 +1,6 @@
 /**
  * @file state_action.hpp
+ * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -39,10 +40,10 @@ NS_START(rcppsw, patterns, state_machine);
  ******************************************************************************/
 /**
  * @class state_action0
- * @brief Takes two template arguments:
  *
- * - A state machine class.
- * - A state machine member function pointer, which takes ZERO arguments.
+ * @tparam SM A state machine class.
+ * @tparam Func A state machine member function pointer, which takes ZERO
+ * arguments.
  */
 template <class SM, int (SM::*Func)(void)>
 class state_action0 : public state {
@@ -59,11 +60,11 @@ class state_action0 : public state {
 
 /**
  * @class state_action1
- * @brief Takes three template arguments:
  *
- * - A state machine class.
- * - A state function event data type (derived from event_data).
- * - A state machine member function pointer, which takes ONE argument.
+ * @tparam SM A state machine class.
+ * @tparam Event A state function event data type (derived from event_data).
+ * @tparam Func A state machine member function pointer, which takes ONE
+ * argument.
  */
 template <class SM, class Event, int (SM::*Func)(const Event*)>
 class state_action1 : public state {

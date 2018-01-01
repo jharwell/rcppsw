@@ -1,5 +1,6 @@
 /**
  * @file state_map_ex_row.hpp
+ * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -38,6 +39,8 @@ NS_START(rcppsw, patterns, state_machine);
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class state_map_ex_row
+ *
  * @brief A structure to hold a single row within the extended state map.
  */
 class state_map_ex_row {
@@ -47,6 +50,7 @@ class state_map_ex_row {
                    state_entry* entry,
                    state_exit* exit)
       : m_state(state), m_guard(guard), m_entry(entry), m_exit(exit) {}
+
   rcppsw::patterns::state_machine::state* state(void) const { return m_state; }
   state_guard* guard(void) const { return m_guard; }
   state_entry* entry(void) const { return m_entry; }

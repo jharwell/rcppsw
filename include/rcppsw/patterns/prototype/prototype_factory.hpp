@@ -41,7 +41,7 @@ NS_START(rcppsw, patterns, prototype);
 /**
  * @class prototype_factory
  *
- * @brief A \ref retaining_factory of \ref clonable objects.
+ * @brief A \ref sharing_factory of \ref clonable objects.
  */
 class prototype_factory : public factory::retaining_factory<clonable> {
  public:

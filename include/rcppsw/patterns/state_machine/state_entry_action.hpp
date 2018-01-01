@@ -1,5 +1,6 @@
 /**
  * @file state_entry_action.hpp
+ * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -39,12 +40,12 @@ class base_fsm;
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief state_entry_action takes two template arguments:
+ * @class state_entry_action
  *
- * - A state machine class
- * - A state function event data type (derived from event_data).
- * - A state machine  member function pointer that takes ZERO arguments.
-*/
+ * @tparam SM A state machine class
+ * @tparam Func A state machine  member function pointer that takes ZERO
+ * arguments.
+ */
 template <class SM, void (SM::*Func)(void)>
 class state_entry_action0 : public state_entry {
  public:
@@ -57,11 +58,12 @@ class state_entry_action0 : public state_entry {
 };
 
 /**
- * @brief state_entry_action takes three template arguments:
+ * @class state_entry_action
  *
- * - A state machine class
- * - A state function event data type (derived from event_data).
- * - A state machine  member function pointer that takes ONE argument.
+ * @tparam SM A state machine class
+ * @tparam Event A state function event data type (derived from event_data).
+ * @tparam Func A state machine  member function pointer that takes ONE
+ * argument.
  */
 template <class SM, class Event, void (SM::*Func)(const Event*)>
 class state_entry_action1 : public state_entry {

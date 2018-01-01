@@ -1,5 +1,6 @@
 /**
  * @file event.hpp
+ * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -43,11 +44,11 @@ NS_START(rcppsw, patterns, state_machine);
 class event_signal {
  public:
   enum {
-    IGNORED = 0xFE, /// A signal that can be ignored
-                    /**
-                     * @brief A signal indicating that something VERY BAD has
-                     * happened. Will cause the parent FSM to halt the program.
-                     */
+    IGNORED = 0xFE,  /// A signal that can be ignored
+    /**
+     * @brief A signal indicating that something VERY BAD has happened. Will
+     * cause the parent FSM to halt the program.
+     */
     FATAL = 0xFF,
 
     /**
@@ -76,13 +77,13 @@ class event_signal {
 /**
  * @class event_type
  *
- * @brief A class representing the types of signals that can be passed between
- * states in an FSM, and/or between FSMs.
+ * @brief A class representing the types of \ref event_signal that are passed as
+ * part of \ref event_data to states.
  */
 class event_type {
  public:
   enum {
-    NORMAL = 0, /// A normal, external state machine event
+    NORMAL = 0,  /// A normal, external state machine event
 
     /**
      * @brief A signal from a child state, conveying something that it couldn't
@@ -102,7 +103,9 @@ class event_type {
 /**
  * @class event_data
  *
- * @brief Unique state machine event data must inherit from this class.
+ * @brief Base class for all data that will be passed to state machine states
+ * upon execution of their callback functions. Custom application event data
+ * classes must derive from here, or things will not compile.
  */
 class event_data {
  public:
@@ -115,6 +118,10 @@ class event_data {
   void signal(int signal) { m_signal = signal; }
   int type(void) const { return m_type; }
   void type(int type) { m_type = type; }
+
+  /**
+   * @brief Reset the event data type and signal to nominal/normal values.
+   */
   void reset(void) {
     signal(event_signal::IGNORED);
     type(event_type::NORMAL);

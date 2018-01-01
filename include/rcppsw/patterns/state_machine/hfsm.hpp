@@ -1,5 +1,6 @@
 /**
  * @file hfsm.hpp
+ * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -36,11 +37,14 @@ NS_START(rcppsw, patterns, state_machine);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class hfsm Implements a software-based hierarchical state machine.
+ * @class hfsm
+ *
+ * @brief Implements a software-based hierarchical state machine.
  */
 class hfsm : public base_fsm {
  public:
   /**
+   * @param server The event reporting server for the state machine.
    * @param max_states The maximum number of state machine states.
    * @param initial_state Initial state machine state.
    */
@@ -57,8 +61,20 @@ class hfsm : public base_fsm {
     base_fsm::init();
   }
 
+  /**
+   * @brief Injects a signal of the specified type into the state machine,
+   * causing the state machine to execute and process the signal. This is the
+   * main means of running a \ref hfsm.
+   *
+   */
   void inject_event(int signal, int type);
 
+  /**
+   * @brief Change the parent state of the specified state to a new state.
+   *
+   * @param state The state within THIS state machine to change the parent of.
+   * @param new_parent A new parent state, which can be from ANOTHER \ref hfsm.
+   */
   void change_parent(uint8_t state,
                      rcppsw::patterns::state_machine::state* new_parent);
 
@@ -89,8 +105,9 @@ class hfsm : public base_fsm {
  * State Macros With Data
  ******************************************************************************/
 /**
- * @brief Declare a state in the current HFSM to be inherited from a parent
- * HFSM.
+ * @def HFSM_STATE_INHERIT(BASE_FSM, inherited_name, event_data)
+ *
+ * Declare a state in the current HFSM to be inherited from a parent HFSM.
  *
  * This can be private because it is just a member variable.
  */
@@ -101,9 +118,11 @@ class hfsm : public base_fsm {
           inherited_name
 
 /**
- * @brief Declare a state in the current HFSM.
+ * @def HFSM_STATE_DECLARE(FSM, state_name, event_data)
  *
- * The state handler function MUST be public in order for \ref hfsm_state_action
+ * Declare a state in the current HFSM.
+ *
+ * The state handler function MUST be public in order for \ref hfsm_state_action1
  * templating to work. Apparently when dealing with non-type template arguments,
  * any argument passed that does not EXACTLY match the one in the template will
  * cause a compilation error if the function is protected (i.e. accessible in
@@ -128,6 +147,19 @@ class hfsm : public base_fsm {
 #define HFSM_GUARD_DEFINE(FSM, guard_name, event_data) \
   FSM_GUARD_DEFINE(FSM, guard_name, event_data)
 
+/**
+ * @def HFSM_ENTRY_DECLARE(FSM, entry_name, event_data)
+ *
+ * Declare a state in the current HFSM.
+ *
+ * The entry handler function MUST be public in order for \ref hfsm_entry_action
+ * templating to work. Apparently when dealing with non-type template arguments,
+ * any argument passed that does not EXACTLY match the one in the template will
+ * cause a compilation error if the function is protected (i.e. accessible in
+ * derived classes). The solution: make it public. Not the best, because it
+ * exposes the inner workings of the state machine, but anyone who is using this
+ * class should only be manipulating it through the macros anyway.
+ */
 #define HFSM_ENTRY_DECLARE(FSM, entry_name, event_data)           \
  public:                                                          \
   void EN_##entry_name(const event_data*);                        \
@@ -137,6 +169,14 @@ class hfsm : public base_fsm {
       state_entry_action1<FSM, event_data, &FSM::EN_##entry_name> \
           entry_name
 
+/**
+ * @def HFSM_ENTRY_INHERIT(BASE_FSM, inherited_name, event_data)
+ *
+ * Declare a entry callback in the current HFSM to be inherited from a parent
+ * HFSM.
+ *
+ * This can be private because it is just a member variable.
+ */
 #define HFSM_ENTRY_INHERIT(BASE_FSM, inherited_name, event_data)                \
  private:                                                                       \
   rcppsw::patterns::state_machine::                                             \
@@ -145,6 +185,11 @@ class hfsm : public base_fsm {
 #define HFSM_ENTRY_DEFINE(FSM, entry_name, event_data) \
   FSM_ENTRY_DEFINE(FSM, entry_name, event_data)
 
+/**
+ * @def HFSM_EXIT_DECLARE(FSM, exit_name)
+ *
+ * Declare an exit callback in the current HFSM.
+ */
 #define HFSM_EXIT_DECLARE(FSM, exit_name)                                       \
  public:                                                                        \
   void EX_##exit_name(void);                                                    \
@@ -153,6 +198,14 @@ class hfsm : public base_fsm {
   rcppsw::patterns::state_machine::state_exit_action<FSM, &FSM::EX_##exit_name> \
       exit_name
 
+/**
+ * @def HFSM_EXIT_INHERIT(BASE_FSM, inherited_name, event_data)
+ *
+ * Declare an exit callback in the current HFSM to be inherited from a parent
+ * HFSM.
+ *
+ * This can be private because it is just a member variable.
+ */
 #define HFSM_EXIT_INHERIT(BASE_FSM, inherited_name)               \
  private:                                                         \
   rcppsw::patterns::state_machine::                               \
@@ -166,27 +219,37 @@ class hfsm : public base_fsm {
  *
  * Should be called in the constructor, and passed the desired parent
  * state. This cannot be done at state declaration (from the compiler's point of
- * view), because of the way templating works.
+ * view), because of the way templating works (I think).
  */
-#define HFSM_CONSTRUCT_STATE(state_name, parent) \
+#define HFSM_CONSTRUCT_STATE(state_name, parent)                        \
   state_name(static_cast<rcppsw::patterns::state_machine::hfsm_state*>(parent))
 
 /*******************************************************************************
  * State Macros Without Data
  ******************************************************************************/
+/**
+ * @def HFSM_STATE_INHERIT_ND(FSM, inherited_name)
+ *
+ * Same as \ref HFSM_STATE_INHERIT(), but with no data.
+ */
 #define HFSM_STATE_INHERIT_ND(BASE_FSM, inherited_name)            \
  private:                                                          \
   rcppsw::patterns::state_machine::                                \
       hfsm_state_action0<BASE_FSM, &BASE_FSM::ST_##inherited_name> \
           inherited_name
 
-#define HFSM_STATE_DECLARE_ND(FSM, state_name)                                    \
- public:                                                                          \
-  int ST_##state_name(void);                                                      \
-                                                                                  \
- private:                                                                         \
-  rcppsw::patterns::state_machine::hfsm_state_action0<FSM, &FSM::ST_##state_name> \
-      state_name
+/**
+ * @def HFSM_STATE_DECLARE_ND(FSM, state_name)
+ *
+ * Same as \ref HFSM_STATE_DECLARE(), but with no data.
+ */
+#define HFSM_STATE_DECLARE_ND(FSM, state_name)                          \
+  public:                                                               \
+  int ST_##state_name(void);                                            \
+                                                                        \
+private:                                                                \
+rcppsw::patterns::state_machine::hfsm_state_action0<FSM, &FSM::ST_##state_name> \
+state_name
 
 #define HFSM_STATE_DEFINE_ND(FSM, state_name) \
   FSM_STATE_DEFINE_ND(FSM, state_name)
@@ -196,14 +259,24 @@ class hfsm : public base_fsm {
 #define HFSM_GUARD_DEFINE_ND(FSM, guard_name) \
   FSM_GUARD_DEFINE_ND(FSM, guard_name)
 
-#define HFSM_ENTRY_DECLARE_ND(FSM, entry_name)                                     \
- public:                                                                           \
-  void EN_##entry_name(void);                                                      \
-                                                                                   \
- private:                                                                          \
-  rcppsw::patterns::state_machine::state_entry_action0<FSM, &FSM::EN_##entry_name> \
-      entry_name
+/**
+ * @def HFSM_ENTRY_DECLARE(FSM, entry_name)
+ *
+ * Same as \ref HFSM_ENTRY_DECLARE(), but with no data.
+ */
+#define HFSM_ENTRY_DECLARE_ND(FSM, entry_name)                          \
+  public:                                                               \
+  void EN_##entry_name(void);                                           \
+                                                                        \
+private:                                                                \
+rcppsw::patterns::state_machine::state_entry_action0<FSM, &FSM::EN_##entry_name> \
+entry_name
 
+/**
+ * @def HFSM_ENTRY_INHERIT_ND(FSM, inherited_name)
+ *
+ * Same as \ref HFSM_ENTRY_INHERIT(), but with no data.
+ */
 #define HFSM_ENTRY_INHERIT_ND(BASE_FSM, inherited_name)             \
  private:                                                           \
   rcppsw::patterns::state_machine::                                 \
@@ -219,7 +292,9 @@ class hfsm : public base_fsm {
   FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)
 
 /*
- * @def HFSM_DECLARE_STATE_MAP Declare the state map for a state machine.
+ * @def HFSM_DECLARE_STATE_MAP(type, name, n_entries)
+ *
+ * Declare the state map for a state machine.
  *
  * This CANNOT be made a static variable inside a function, because if two or
  * more instances of a state machine derived class have states that do not share

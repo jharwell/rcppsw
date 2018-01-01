@@ -1,6 +1,6 @@
 /**
  * @file singleton.hpp
- * @defgroup patterns
+ * @ingroup patterns
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
