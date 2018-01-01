@@ -1,5 +1,6 @@
 /**
  * @file base_grid2D.hpp
+ * @ingroup ds
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -33,6 +34,7 @@
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, ds);
+
 template <typename T>
 using grid_type = typename boost::multi_array<T, 2>;
 template <typename T>
@@ -49,6 +51,8 @@ using index_range = boost::multi_array_types::index_range;
  *
  * @brief A 2D logical grid that is overlayed over a continuous environment. It
  * discretizes the continuous arena into a grid of a specified resolution.
+ *
+ * The objects used to represent the grid should be cells of some kind.
  */
 template <typename T, typename... Args>
 class base_grid2D {
@@ -57,10 +61,21 @@ class base_grid2D {
       : m_resolution(resolution), m_x_max(x_max), m_y_max(y_max) {}
   virtual ~base_grid2D(void) {}
 
+  /**
+   * @brief Return a reference to the element at position (i, j) in the grid.
+   *
+   * This is provided in the base class so that the pointer/object variants of
+   * the grid (\ref grid2D, \ref grid2D_ptr) can reduce code duplication.
+   */
+  virtual T& access(size_t i, size_t j) = 0;
+
   const T& access(size_t i, size_t j) const {
     return const_cast<base_grid2D*>(this)->access(i, j);
   }
-  virtual T& access(size_t i, size_t j) = 0;
+
+  /**
+   * @brief Return the resolution of the grid.
+   */
   double resolution(void) const { return m_resolution; }
 
   /**
@@ -79,8 +94,19 @@ class base_grid2D {
     return static_cast<size_t>(std::ceil(m_y_max / m_resolution));
   }
 
-  std::pair<index_range::index, index_range::index> xrange(size_t x,
-                                                           size_t radius) {
+  /**
+   * @brief Get the range in the X direction resulting from applying a circle
+   * with the specified radius at the specified X coordinate, accounting for
+   * edge conditions on the grid.
+   *
+   * @param x The X coordinate of the point.
+   * @param radius The radius of the circle to apply.
+   *
+   * @return A pair containing the upper/lower X coordinates of the circle when
+   * applied to the specified X coordinate.
+   */
+  std::pair<index_range::index, index_range::index> circle_xrange_at_point(
+      size_t x, size_t radius) {
     index_range::index lower_x =
         static_cast<index_range::index>(std::max<int>(0, (int)x - (int)radius));
     index_range::index upper_x =
@@ -90,8 +116,20 @@ class base_grid2D {
     }
     return std::pair<index_range::index, index_range::index>(lower_x, upper_x);
   }
-  std::pair<index_range::index, index_range::index> yrange(size_t y,
-                                                           size_t radius) {
+
+  /**
+   * @brief Get the range in the Y direction resulting from applying a circle
+   * with the specified radius at the specified Y coordinate, accounting for
+   * edge conditions on the grid.
+   *
+   * @param y The Y coordinate of the point.
+   * @param radius The radius of the circle to apply.
+   *
+   * @return A pair containing the upper/lower Y coordinates of the circle when
+   * applied to the specified Y coordinate.
+   */
+  std::pair<index_range::index, index_range::index> circle_yrange_at_point(
+      size_t y, size_t radius) {
     index_range::index lower_y = static_cast<index_range::index>(
         std::max<int>((int)0, (int)y - (int)radius));
     index_range::index upper_y =

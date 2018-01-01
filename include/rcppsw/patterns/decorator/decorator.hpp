@@ -1,5 +1,6 @@
 /**
  * @file decorator.hpp
+ * @ingroup patterns decorator
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *

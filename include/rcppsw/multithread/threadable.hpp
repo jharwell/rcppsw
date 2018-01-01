@@ -1,5 +1,6 @@
 /**
  * @file threadable.hpp
+ * @ingroup multithread
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,15 +38,16 @@ NS_START(rcppsw, multithread);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class threadable
+ *
+ * @brief Derived classes will have the ability to spawn a new thread and run
+ * inside the specified main loop.
+ */
 class threadable {
  public:
   threadable(void) = default;
   virtual ~threadable(void) = default;
-
-  threadable(const threadable& other) = delete;
-  threadable& operator=(const threadable& other) = delete;
-  threadable(threadable&& other) noexcept(true) = default;
-  threadable& operator=(threadable&& other) noexcept(true) = default;
 
   /**
    * @brief The entry point for a thread.
@@ -71,7 +73,7 @@ class threadable {
   virtual void term(void) { m_thread_run = false; }
 
   /**
-   * @brief Join a thread (i.e. wait for it to finish)
+   * @brief Join a thread (i.e. wait for it to finish).
    */
   void join(void) { pthread_join(m_thread, nullptr); }
 

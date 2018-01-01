@@ -1,5 +1,6 @@
 /**
  * @file pid_loop.hpp
+ * @ingroup control
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -38,16 +39,18 @@ NS_START(rcppsw, control);
  * @class pid_loop
  *
  * @brief A simple PID loop class.
- *
- *  Kp -  proportional gain.
- *  Ki -  Integral gain.
- *  Kd -  Derivative gain.
- *  dt -  Loop interval time (linear interpolation used).
- *  max - Maximum value of manipulated variable and integral term.
- *  min - Minimum value of manipulated variable and integral term.
  */
 class pid_loop {
  public:
+  /**
+   *
+   * @param Kp proportional gain.
+   * @param Ki Integral gain.
+   * @param Kd Derivative gain.
+   * @param dt Loop interval time (linear interpolation used).
+   * @param max Maximum value of manipulated variable and integral term.
+   * @param min Minimum value of manipulated variable and integral term.
+   */
   pid_loop(double Kp, double Kd, double Ki, double dt, double min, double max)
       : m_Kp(Kp),
         m_Kd(Kd),
@@ -64,21 +67,19 @@ class pid_loop {
    * @param setpoint Desired value of the manipulated variable.
    * @param pv Current value of the variable.
    *
-   * @return Correctional term .
+   * @return Correctional term.
    */
   double calculate(double setpoint, double pv);
+
+  /**
+   * @brief Get the minimal value of manipulated variable/integral term.
+   */
   void min(double min) { m_min = min; }
+
+  /**
+   * @brief Get the max value of manipulated variable/integral term.
+   */
   void max(double max) { m_max = max; }
-  void reset(void) { m_istate = 0.0; }
-  double integral(void) const { return m_istate; }
-  double dt(void) const { return m_dt; }
-  void dt(double dt) { m_dt = dt; }
-  double Kp(void) const { return m_Kp; }
-  void Kp(double Kp) { m_Kp = Kp; }
-  double Kd(void) const { return m_Kd; }
-  void Kd(double Kd) { m_Kd = Kd; }
-  double Ki(void) const { return m_Ki; }
-  void Ki(double Ki) { m_Ki = Ki; }
 
  private:
   double m_Kp;

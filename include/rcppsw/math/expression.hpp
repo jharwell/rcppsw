@@ -1,5 +1,6 @@
 /**
  * @file expression.hpp
+ * @ingroup math
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -46,7 +47,7 @@ class expression {
   expression(void) : m_last() {}
 
   /**
-   * @brief Get the last value calculated
+   * @brief Get the last value calculated.
    */
   T last_result(void) const { return m_last; }
 

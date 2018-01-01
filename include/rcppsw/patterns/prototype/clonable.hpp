@@ -1,5 +1,6 @@
 /**
  * @file clonable.hpp
+ * @ingroup patterns prototype
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -34,12 +35,21 @@ NS_START(rcppsw, patterns, prototype);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class clonable
+ *
+ * @brief Define a class as being capable of being cloned (i.e. a deep copy).
+ */
 template<typename T>
 class clonable {
  public:
   clonable(void) {}
   virtual ~clonable(void) {}
 
+  /**
+   * @brief Clone the calling object, transfering ownership of the copy
+   * explicitly to the calling context.
+   */
   virtual std::unique_ptr<T> clone(void) const = 0;
 };
 

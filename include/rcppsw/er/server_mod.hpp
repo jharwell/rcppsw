@@ -1,5 +1,6 @@
 /**
  * @file server_mod.hpp
+ * @ingroup er
  *
  * Interface for classes that want to be able to use the ER Server.
  *
@@ -39,6 +40,33 @@ NS_START(rcppsw, er);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class er_lvl
+ *
+ * @brief The different levels of reportable events.
+ *
+ * OFF: Used when you want to turn debugging OFF for all modules.
+ *
+ * ERR: Used to print things regarding errors, as in something bad happened
+ *      in your program.
+ *
+ * WARN: Used to print warning things, as in something happened athat is
+ *       somewhat alarming/sub-optimal, but not in of itself
+ *       catastrophic/fatal.
+ *
+ * NOM: Normal/nominative printing. Use this for things that you want your
+ *      program to print when everything is going smoothly. According to UNIX
+ *      philosophy, if your program has nothing interesting to say, it should
+ *      say nothing if this is the debugging level.
+ *
+ * DIAG: Used to print diagnostic information, as in additional info that
+ *       a developer can use to help debug a problem.
+ *
+ * VER: Used to print verbose information, for use on tough problems when you
+ *      want the use to get as much information from your program as
+ *      possible.
+ */
+
 class er_lvl {
  public:
   enum value { OFF, ERR, WARN, NOM, DIAG, VER };
@@ -64,6 +92,7 @@ class server_mod {
    * @param lvl The new level.
    */
   void set_dbglvl(const er_lvl::value& lvl);
+
   /**
    * @brief Set the logging level for a module.
    *

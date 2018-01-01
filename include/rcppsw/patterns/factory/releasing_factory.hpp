@@ -1,5 +1,6 @@
 /**
  * @file releasing_factory.hpp
+ * @ingroup patterns factory
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -39,12 +40,29 @@ NS_START(rcppsw, patterns, factory);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class releasing_factory
+ *
+ * @brief A factory that releases ownership of the created objects to the
+ * class/context that requests object creation.
+ *
+ * The template parameter restricts the creation of objects to those derived
+ * from this type.
+ *
+ */
 template <typename T>
 class releasing_factory : public base_factory {
  public:
   releasing_factory(void) : m_release_funcs() {}
   ~releasing_factory(void) override = default;
 
+  /**
+   * @brief Register a type with the factory, and associate it with the
+   * specified name.
+   *
+   * The type to register must have a zero parameter constructor available, as
+   * well as be derived from the factory base class.
+   */
   template <typename TDerived>
   status_t register_type(const std::string& name) {
     static_assert(std::is_base_of<T, TDerived>::value,
@@ -55,6 +73,10 @@ class releasing_factory : public base_factory {
     return OK;
   }
 
+  /**
+   * @brief Create the requested object, and release ownership to the calling
+   * context/application.
+   */
   std::unique_ptr<T> create(const std::string& name) {
     auto it = m_release_funcs.find(name);
     if (it != m_release_funcs.end()) {

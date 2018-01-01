@@ -44,25 +44,25 @@ NS_START(rcppsw, algorithm);
 template <typename T>
 class max_subarray_finder {
  public:
-  explicit max_subarray_finder(const std::vector<T>& arr) : arr_(arr) {}
+  explicit max_subarray_finder(const std::vector<T>& arr) : m_arr(arr) {}
 
   /**
    * @brief Find the maximal subarray.
    *
    * @param res The maximal subarray, to be filled.
    *
-   * @return OK if successful, ERROR otherwise.
+   * @return \c OK if successful, \c ERROR otherwise.
    */
   status_t find(std::vector<int>* const res) {
-    FPC_CHECK(ERROR, arr_.size() > 0);
-    T max_sum = arr_[0];
-    T current_sum = arr_[0];
+    FPC_CHECK(ERROR, m_arr.size() > 0);
+    T max_sum = m_arr[0];
+    T current_sum = m_arr[0];
     int start_index = 0;
     int end_index = 0;
 
     /* Kadane's algorithm - O(n) */
-    for (int i = 0; i < arr_.size(); ++i) {
-      current_sum += arr_[i];
+    for (int i = 0; i < m_arr.size(); ++i) {
+      current_sum += m_arr[i];
       if (current_sum > max_sum) {
         max_sum = current_sum;
         end_index = i;
@@ -79,7 +79,7 @@ class max_subarray_finder {
   } /* find() */
 
  private:
-  const std::vector<T>& arr_;
+  const std::vector<T>& m_arr;
 };
 
 NS_END(algorithm, rcppsw);

@@ -1,7 +1,6 @@
 /**
  * @file ipc.hpp
- *
- * Interprocess communication definitions.
+ * @ingroup interprocess
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *

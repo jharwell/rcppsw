@@ -1,7 +1,6 @@
 /**
  * @file xml_param_repository.hpp
- *
- * Handles parsing of all XML parameters at runtime.
+ * @ingroup common
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -48,17 +47,26 @@ namespace factory = rcppsw::patterns::factory;
  * results.
  *
  * Utilizes factory pattern for parser creation. Does not create any parsers on
- * its own--derived classes have to do that.
+ * its own (how could it know which ones to create?).
  */
 class xml_param_repository {
  public:
   xml_param_repository(void) : m_parsers(), m_factory() {}
 
   /**
-   * @brief Call the \ref xml_param_parser::parse_all() function on all parsers
+   * @brief Call the \ref xml_param_parser::parse() function on all parsers
    * in the repository, passing all parsers the same XML node.
    */
-  void parse_all(ticpp::Element& node);
+  void parse_all(const ticpp::Element& node);
+
+  /**
+   * @brief Call the \ref xml_param_parser::validate() function on all parsers
+   * in the repository, and return whether or not \a ALL parsers report valid
+   * parameters.
+   *
+   * @return \c TRUE iff ALL parsers report valid parameters, and \c FALSE
+   * otherwise.
+   */
 
   bool validate_all(void);
 
@@ -75,6 +83,10 @@ class xml_param_repository {
    */
   void show_all(std::ostream& stream);
 
+  /**
+   * @brief Register a parser of a given type (must be derived from \ref
+   * xml_param_parser) and associate it with the specified name.
+   */
   template <typename T>
   void register_parser(const std::string& name) {
     m_factory.register_type<T>(name);

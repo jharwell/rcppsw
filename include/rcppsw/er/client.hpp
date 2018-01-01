@@ -1,5 +1,6 @@
 /**
  * @file client.hpp
+ * @ingroup er
  *
  * Interface for classes that want to be able to use the ER Server.
  *
@@ -36,18 +37,64 @@
  ******************************************************************************/
 /**
  * @brief Event reporting macros. Use of these macros requires the class you are
- * using it in derives from client. You cannot use these macros in a
+ * using it in derives from \ref client. You cannot use these macros in a
  * non-class context.
  */
 #ifndef NDEBUG
 /* ---------- Explicit debug level statements (use these) ---------- */
+
+/**
+ * @def ER_ERR(...)
+ *
+ * Define a statement reporting the occurence of an \ref er_lvl::ERR
+ * event. Works just like printf() from a syntax point of view.
+ */
 #define ER_ERR(...) ER_REPORT(rcppsw::er::er_lvl::ERROR, __VA_ARGS__)
+
+/**
+ * @def ER_WARN(...)
+ *
+ * Define a statement reporting the occurence of an \ref er_lvl::WARN
+ * event. Works just like printf() from a syntax point of view.
+ */
 #define ER_WARN(...) ER_REPORT(rcppsw::er::er_lvl::WARN, __VA_ARGS__)
+
+/**
+ * @def ER_NOM(...)
+ *
+ * Define a statement reporting the occurence of an \ref er_lvl::NOM
+ * event. Works just like printf() from a syntax point of view.
+ */
 #define ER_NOM(...) ER_REPORT(rcppsw::er::er_lvl::NOM, __VA_ARGS__)
+
+/**
+ * @def ER_DIAG(...)
+ *
+ * Define a statement reporting the occurence of an \ref er_lvl::DIAG
+ * event. Works just like printf() from a syntax point of view.
+ */
 #define ER_DIAG(...) ER_REPORT(rcppsw::er::er_lvl::DIAG, __VA_ARGS__)
+
+/**
+ * @def ER_VER(...)
+ *
+ * Define a statement reporting the occurence of an \ref er_lvl::VER
+ * event. Works just like printf() from a syntax point of view.
+ */
 #define ER_VER(...) ER_REPORT(rcppsw::er::er_lvl::VER, __VA_ARGS__)
 
-/* -------- Debug statements with level parameter (Don't use these) -------- */
+/**
+ * @internal
+ * -------- Debug statements with level parameter (Don't use these) --------
+ */
+
+/**
+ * @def ER_REPORT(lvl, msg, ...)
+ *
+ * Define a statement reporting the occurrence of an event with the specified
+ * level. \a msg is the format string, and \a ... is the variadic argument list
+ * (just like printf()).
+ */
 #define ER_REPORT(lvl, msg, ...)                       \
   {                                                    \
     char _str[1000];                                   \
@@ -74,21 +121,36 @@
 #endif /* NDEBUG */
 
 /**
- * @brief Check a condition in a function. If condition is not true, go to the
- * error/bailout section for function (you must have a label called "error" in
- * your function).
+ * @endinternal
+ */
+
+/**
+ * @def ER_CHECK(cond, msg, ...)
+ *
+ * Check a boolean condition \a cond in a function. If condition is not true, go
+ * to the error/bailout section for function (you must have a label called \c
+ * error in your function) after reporting the event.
+ *
+ * You cannot use this macro in non-class contexts, and all classes using it
+ * must derive from \ref client.
  */
 #define ER_CHECK(cond, msg, ...)                           \
   {                                                        \
     if (!(cond)) {                                         \
-      REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__); \
+      ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__); \
       goto error;                                          \
     }                                                      \
   }
 
 /**
- * @brief Mark a place in the code as being universally bad. If execution ever
- * reaches this spot, report a message and error out.
+ * @def ER_SENTINEL(msg,...)
+ *
+ * Mark a place in the code as being universally bad. If execution ever reaches
+ * this spot, report the event and error out (you must have a label called \c
+ * error in your function).
+ *
+ * You cannot use this macro in non-class contexts, and all classes using it
+ * must derive from \ref client.
  */
 #define ER_SENTINEL(msg, ...)                               \
   {                                                         \
@@ -97,8 +159,14 @@
   }
 
 /**
- * @brief Check a condition in a function, halting the program if the condition
- * is not true. Like assert(), but allows for an additional custom message.
+ * @def ER_ASSERT(cond, msg, ...)
+ *
+ * Check a boolean condition \a cond in a function, halting the program if the
+ * condition is not true. Like assert(), but allows for an additional custom to
+ * be reported to the \ref server.
+ *
+ * You cannot use this macro in non-class contexts, and all classes using it
+ * must derive from \ref client.
  */
 #define ER_ASSERT(cond, msg, ...)                           \
   if (!(cond)) {                                            \
@@ -107,33 +175,20 @@
   }
 
 /**
- * @brief Mark a place in the code as being universally bad. If execution ever
- * reaches this spot stop the program.
+ * @def ER_FATAL_SENTINEL(msg,...)
+ *
+ * Mark a place in the code as being universally bad, like really really
+ * bad. Fatally bad. If execution ever reaches this spot stop the program after
+ * reporting the specified message.
+ *
+ * You cannot use this macro in non-class contexts, and all classes using it
+ * must derive from \ref client.
  */
 #define ER_FATAL_SENTINEL(msg, ...)                             \
   {                                                             \
     ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__);     \
     assert(false);                                                  \
   }
-
-/*
- * Define debug macros also in rcsw to eliminate dependencies.
- */
-#ifndef CHECK
-#define CHECK(cond) \
-  {                 \
-    if (!(cond)) {  \
-      goto error;   \
-    }               \
-  }
-#endif /* CHECK */
-
-#ifndef CHECK_PTR
-#define CHECK_PTR(ptr)    \
-  if (nullptr == (ptr)) { \
-    goto error;           \
-  }
-#endif /* CHECK_PTR */
 
 /*******************************************************************************
  * Namespaces
@@ -151,6 +206,10 @@ class global_server;
  *
  * @brief A class that can connect to a \ref server for logging of important
  * events.
+ *
+ * In addition to deriving from this class, the automatically defined module for
+ * the derived class must also be installed via \ref attmod() or \ref
+ * server::insmod in order to enable reporting for messages from the class.
  */
 class client {
  public:
@@ -159,16 +218,16 @@ class client {
   virtual ~client(void);
 
   /**
-   * @brief Initialize the client in cases where it was not possible to due
-   * so in the initialization list in the class constructor. If the default
-   * constructor for client is used, things will segfault/go badly if any
-   * debugging statements are encountered in the client before this function is
-   * called.
+   * @brief Initialize the client in cases where it was not possible to do
+   * so in the initialization list in the class constructor.
+   *
+   * If the default constructor for client is used (and this function is
+   * therefore needed), things will segfault/go badly if any reporting
+   * statements are encountered in the client before this function is called.
    *
    * @param server_handle The server to attach to.
    */
   void deferred_init(std::shared_ptr<server> server_handle);
-  void change_id(boost::uuids::uuid old_id, boost::uuids::uuid new_id);
 
   /**
    * @brief Add a module to the active list (long version).
@@ -186,18 +245,19 @@ class client {
    * @brief Uninstall the module for this client. This function is called
    * automatically in the destructor, but can be called explicitly as well.
    *
-   * @return OK if the remove was successful, ERROR otherwise.
+   * @return \ref status_t.
    */
   status_t rmmod(void);
 
   /**
-   * @brief Attach to an EXISTING module within the server by name. If the
-   * module exists, the UUID for this client is set to the UUID of the
+   * @brief Attach to an EXISTING module within the server by name.
+   *
+   * If the module exists, the UUID for this client is set to the UUID of the
    * module. If no module with the given name exists, no action is performed.
    *
    * @param mod_name Name of the module to attach to.
    *
-   * @return OK if a module was attached to, ERROR otherwise.
+   * @return \ref status_t.
    */
   status_t attmod(const std::string& mod_name);
 
@@ -233,13 +293,26 @@ class client {
  * @brief A common, global server that all applications utilizing rcppsw have
  * access to. Handy in cases where you don't want to pass the server handle down
  * through unrelated constructors until you get to the class you actually want
- * to enable debug printing/logging for.
+ * to enable reporting for.
  */
 extern std::shared_ptr<rcppsw::er::global_server> g_server;
 
 /*******************************************************************************
  * Forward Declarations
  ******************************************************************************/
+/**
+ * @internal
+ * @brief The single, global entry point for all event reporting.
+ *
+ * This should never be called directly.
+ *
+ * @param server The server to report the event to.
+ * @param er_id ID of the module reporting the event.
+ * @param lvl The level of the event.
+ * @param str The event message.
+ *
+ * @endinternal
+ */
 void __er_report__(server* server,
                    const boost::uuids::uuid& er_id,
                    const er_lvl::value& lvl,

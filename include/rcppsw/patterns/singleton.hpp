@@ -1,5 +1,6 @@
 /**
  * @file singleton.hpp
+ * @defgroup patterns
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -33,6 +34,12 @@ NS_START(rcppsw, patterns);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class singleton
+ *
+ * @brief Define a class as in capable of being moved, copied, etc., and that
+ * their can only ever be one of them.
+ */
 template <class T>
 class singleton {
  public:

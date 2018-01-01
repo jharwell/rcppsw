@@ -50,10 +50,6 @@ void client::deferred_init(std::shared_ptr<server> server_handle) {
   m_er_id = m_server_handle->idgen();
 } /* deferred_init() */
 
-void client::change_id(boost::uuids::uuid old_id, boost::uuids::uuid new_id) {
-  m_server_handle->change_id(old_id, new_id);
-} /* change_id() */
-
 status_t client::insmod(const std::string& mod_name,
                         const er_lvl::value& loglvl,
                         const er_lvl::value& dbglvl) {

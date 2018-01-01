@@ -1,5 +1,6 @@
 /**
  * @file xml_param_parser.hpp
+ * @ingroup common
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -30,9 +31,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace ticpp {
-class Element;
-}
+namespace ticpp { class Element; }
 
 NS_START(rcppsw, common);
 struct base_params;
@@ -44,7 +43,7 @@ struct base_params;
  * @class xml_param_parser
  *
  * @brief Interface specifying functionality for parsing XML into a
- * \ref base_params parameter structure.
+ * \ref base_params derived parameter structure.
  */
 class xml_param_parser {
  public:
@@ -52,19 +51,22 @@ class xml_param_parser {
   virtual ~xml_param_parser(void) = default;
 
   /**
-   * @brief Parser the provided XML node into an internal representation.
+   * @brief Parse the provided XML node into an internal representation (should
+   * be a class/struct derived from \ref base_params).
    */
-  virtual void parse(ticpp::Element&) = 0;
+  virtual void parse(const ticpp::Element& node) = 0;
 
   /**
    * @brief Dump the parsed (or possibly unparsed, but that's kind of useless)
    * parameters to the specified stream.
    */
-  virtual void show(std::ostream& stream) = 0;
+  virtual void show(__unused std::ostream& stream) {}
 
   /**
    * @brief Validate the range, value, etc. of all parsed parameters. As such,
    * don't call this unless the parameters have already been parsed.
+   *
+   * @return \c TRUE if all parameters are valid, \c FALSE otherwise.
    */
   virtual bool validate(void) { return true; }
 

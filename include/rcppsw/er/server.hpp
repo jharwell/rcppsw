@@ -1,8 +1,6 @@
 /**
  * @file server.hpp
- *
- * Event Reporting Server, used for level and & module based debug printing and
- * logging.
+ * @ingroup er
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -46,14 +44,26 @@ NS_START(rcppsw, er);
 /**
  * @class server
  *
- * @brief Logging server allowing for run-tim module installation/removal for
- * fine-grained control over debugging output.
+ * @brief Logging server for events.
+ *
+ * Each event can be reported on any combination of the following streams:
+ * [stdout, file]. Each reported event must be reported from a class derived
+ * from \ref client.
+ *
+ * Modules corresponding to classes derived from \ref client are run-time
+ * installable/removable, and can independently have their logging (writing to a
+ * file) and debugging (writing to stdout) levels set.
  */
 class server {
  public:
   /**
+   * @internal
+   * @struct msg_int
+   *
    * @brief Internal class wrapping all the information needed to processing a
    * message besides the text of the message itself.
+   *
+   * @endinternal
    */
   struct msg_int {
     msg_int(const boost::uuids::uuid& id_,
@@ -69,7 +79,10 @@ class server {
    * @brief Initialize an Event Reporting Server.
    *
    * @param logfile_fname The name of the file to log events to. If the file
-   *                      already exists, it is deleted.
+   *                      already exists, it is deleted. If the special value
+   *                      \c __no_file__ is passed, then the logging part of the
+   *                      server will be disabled.
+   *
    * @param dbglvl The initial debug printing level.
    * @param loglvl The initial logging level.
    */
@@ -77,14 +90,24 @@ class server {
          const er_lvl::value& dbglvl,
          const er_lvl::value& loglvl);
 
+  /**
+   * @brief Initialize and Event Reporting Server with defaults logfile names
+   * and initial logging/debugging levels.
+   */
   server(void): server("__no_file__", er_lvl::NOM, er_lvl::NOM) {}
 
   virtual ~server(void);
 
-  status_t change_id(const boost::uuids::uuid& old_id,
-                     boost::uuids::uuid new_id);
-  std::ofstream& log_stream(void) { return *m_logfile; }
+  /**
+   * @brief Get a reference to the logging stream.
+   */
+  std::ofstream& log_stream(void);
+
+  /**
+   * @brief Get a reference to the debugging stream.
+   */
   std::ostream& dbg_stream(void);
+
   const std::string& logfile_fname(void) const { return m_logfile_fname; }
 
   /**
@@ -116,7 +139,7 @@ class server {
    * @param mod_name Name of the module.
    * @param mod_id To be filled with the UUID of the module, if it exists.
    *
-   * @return OK if the module was found, ERROR otherwise.
+   * @return \ref status_t.
    */
   status_t findmod(const std::string& mod_name, boost::uuids::uuid& mod_id);
 
@@ -130,7 +153,7 @@ class server {
    * @param mod_name The name of the module, which will be prepended to all
    *                 messages.
    *
-   * @return OK if successful, ERROR otherwise.
+   * @return \ref status_t.
    */
   status_t insmod(const boost::uuids::uuid& mod_id,
                   const er_lvl::value& loglvl,
@@ -144,7 +167,8 @@ class server {
    * @param id The UUID of the module to install.
    * @param name The name of the module, which will be prepended to all
    *                 messages.
-   * @return OK if successful, ERROR otherwise.
+   *
+   * @return \ref status_t.
    */
   status_t insmod(const boost::uuids::uuid& id, const std::string& name) {
     return insmod(id, m_loglvl_dflt, m_dbglvl_dflt, name);
@@ -155,7 +179,7 @@ class server {
    *
    * @param id The UUID of the module to remove.
    *
-   * @return OK if successful, ERROR otherwise.
+   * @return \ref status_t.
    */
   status_t rmmod(const boost::uuids::uuid& id);
 
@@ -165,11 +189,24 @@ class server {
    * @param id The UUID of the module.
    * @param lvl The new level.
    *
-   * @return OK if successful, ERROR otherwise.
+   * @return \ref status_t.
    */
   status_t mod_dbglvl(const boost::uuids::uuid& id, const er_lvl::value& lvl);
 
+  /**
+   * @brief Get the current debugging level for the module.
+   *
+   * @return The debugging level for the module, or -1 if no such module is
+   * currently installed.
+   */
   er_lvl::value mod_dbglvl(const boost::uuids::uuid& id);
+
+  /**
+   * @brief Get the current logging level for the module.
+   *
+   * @return The logging level for the module, or -1 if no such module is
+   * currently installed.
+   */
   er_lvl::value mod_loglvl(const boost::uuids::uuid& id);
 
   /**
@@ -178,10 +215,13 @@ class server {
    * @param id The UUID of the module.
    * @param lvl The new level.
    *
-   * @return OK if successful, ERROR otherwise.
+   * @return \ref status_t.
    */
   status_t mod_loglvl(const boost::uuids::uuid& id, const er_lvl::value& lvl);
 
+  /**
+   * @brief Change the logfile that the server will report events to.
+   */
   void change_logfile(const std::string& new_fname);
 
   /**
@@ -192,26 +232,26 @@ class server {
   boost::uuids::uuid idgen(void);
 
   /**
-   * @brief Get the current logging level.
+   * @brief Get the current default logging level.
    *
-   * @return The current logging level.
+   * @return The current default logging level.
    */
   er_lvl::value loglvl(void) { return m_loglvl_dflt; }
 
   /**
-   * @brief Get the current debug printing level.
+   * @brief Get the current default debug printing level.
    *
-   * @return The current debug printing level.
+   * @return The current default debug printing level.
    */
   er_lvl::value dbglvl(void) { return m_dbglvl_dflt; }
 
   /**
-   * @brief Set the logging level.
+   * @brief Set the default logging level.
    */
   void loglvl(const er_lvl::value& lvl) { m_loglvl_dflt = lvl; }
 
   /**
-   * @brief Set the debug printing level.
+   * @brief Set the default debug printing level.
    */
   void dbglvl(const er_lvl::value& lvl) { m_dbglvl_dflt = lvl; }
 
@@ -223,7 +263,11 @@ class server {
   char* hostname(void) { return reinterpret_cast<char*>(m_hostname); }
 
   /**
+   * @internal
+   *
    * @brief Enable debugging for the ER server. For debugging purposes only.
+   *
+   * @endinternal
    */
   void self_er_en(void);
 
@@ -272,6 +316,12 @@ class server {
   boost::uuids::uuid m_er_id;
 };
 
+/**
+ * @class global_server
+ *
+ * @brief A singleton, global event reporting server provided by rcppsw that all
+ * applications can use.
+ */
 class global_server : public patterns::singleton<server>, public server {
  public:
   global_server(void) : server() {}

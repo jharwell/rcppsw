@@ -1,5 +1,6 @@
 /**
  * @file prototype_factory.hpp
+ * @ingroup patterns prototype
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,9 +38,13 @@ NS_START(rcppsw, patterns, prototype);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class prototype_factory
+ *
+ * @brief A \ref retaining_factory of \ref clonable objects.
+ */
 class prototype_factory : public factory::retaining_factory<clonable> {
  public:
-  /* constructors */
   prototype_factory(void) {}
   virtual ~prototype_factory(void) {}
 
