@@ -1,20 +1,25 @@
 ################################################################################
 # External Projects                                                            #
 ################################################################################
+if (NOT "$ENV{rcsw}" EQUAL "")
 ExternalProject_Add(
 project_rcsw
   SOURCE_DIR "$ENV{rcsw}"
   BINARY_DIR "$ENV{rcsw}/build"
   STEP_TARGETS build
   EXCLUDE_FROM_ALL TRUE
-)
+  )
 ExternalProject_Get_Property(project_rcsw binary_dir)
 ExternalProject_Get_Property(project_rcsw source_dir)
 add_library(rcsw STATIC IMPORTED)
 set_property(TARGET rcsw PROPERTY IMPORTED_LOCATION ${binary_dir}/lib/librcsw.a)
-message("${rcsw_LIBS}")
-set(Boost_USE_STATIC_LIBS OFF)
+else()
+  message("FATAL: rcsw environment variable not defined!")
+  return()
+endif()
+
 find_package(Boost 1.58.0 COMPONENTS system filesystem thread)
+set(Boost_USE_STATIC_LIBS OFF)
 
 ################################################################################
 # Includes                                                                     #

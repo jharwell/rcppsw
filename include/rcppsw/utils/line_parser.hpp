@@ -1,5 +1,6 @@
 /**
  * @file line_parser.hpp
+ * @ingroup utils
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -36,12 +37,19 @@ NS_START(rcppsw, utils);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-
+/**
+ * @class line_parser
+ *
+ * @brief Parses a single line into a vector of tokens broken on the specified
+ * delimiter.
+ */
 class line_parser {
  public:
-  /* constructors */
   explicit line_parser(char delim) : m_delim(delim) {}
 
+  /**
+   * @brief Parse a line into a vector of tokens, split on delimiter.
+   */
   std::vector<std::string> parse(const std::string& line);
 
  private:

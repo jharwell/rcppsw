@@ -33,7 +33,7 @@
  * Things related to multiprocessing, such as forking, core locking, etc.
  *
  * @defgroup multithread multithread
- * Things related to multithreading, such as forking, core locking, etc.
+ * Things related to multithreading, such spawning/joining, core locking, etc.
  *
  * @defgroup patterns patterns
  * Implementation of common design patterns.
@@ -63,4 +63,8 @@
  * @defgroup task_allocation task_allocation
  * Algorithms and framework for task allocation research, specifically in
  * robotics.
+ *
+ * @defgroup utils utils
+ * Miscellaneous random things that need a home, such as CLI, file/line
+ * parsing.
  */

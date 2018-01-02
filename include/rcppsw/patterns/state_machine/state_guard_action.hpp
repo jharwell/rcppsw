@@ -40,6 +40,8 @@ class base_fsm;
  ******************************************************************************/
 /** @class state_guard_condition
  *
+ * @brief Condition to determine if a state's main action should be executed.
+ *
  * @tparam SM A state machine class.
  * @tparam Event A state function event data type.
  * @tparam Func A state machine member function pointer that takes ONE argument

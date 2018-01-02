@@ -42,6 +42,8 @@ class base_fsm;
 /**
  * @class state_entry_action
  *
+ * @brief Action to perform upon transition to a state.
+ *
  * @tparam SM A state machine class
  * @tparam Func A state machine  member function pointer that takes ZERO
  * arguments.

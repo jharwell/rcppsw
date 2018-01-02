@@ -1,5 +1,6 @@
 /**
  * @file file_parser.hpp
+ * @ingroup utils
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -43,9 +44,13 @@ NS_START(rcppsw, utils);
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class file_parser
+ *
  * @brief File parsing class using template design pattern. Parses each line of
  * a file into a vector of whitespace delimited tokens, and returns a vector of
  * vectors (1 per line).
+ *
+ * @tparam T The type of tokens the file contains.
  */
 template <typename T>
 class file_parser {
@@ -67,7 +72,7 @@ class file_parser {
     } /* while() */
 
     return tokens_set;
-  } /* file_parser::parse_file() */
+  }
 
  private:
   const std::string& m_fname;

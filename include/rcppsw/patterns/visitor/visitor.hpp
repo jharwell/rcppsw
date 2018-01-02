@@ -51,10 +51,20 @@ class visitor {
  *
  * @brief Visitor classes should also derive from can_visit<T> for each derived
  * visitable type they want to visit.
+ *
+ * @tparam T The type of the object to visit.
+ * @tparam R The return value of the visit function.
  */
 template<class T, typename R = void>
 class can_visit {
  public:
+  /**
+   * @brief Specifies that an object can visit another object.
+   *
+   * @param visitee The object to visit.
+   *
+   * @return The value to return, if any.
+   */
   virtual R visit(T& visitee) = 0;
   virtual ~can_visit(void) {}
 };
@@ -74,7 +84,8 @@ class visit_set_helper {
 /**
  * @class visit_set
  *
- * @brief General case for template expansion.
+ * @brief General case for template expansion. Provides classes the ability to
+ * explicitly control what types of classes they can visit.
  */
 template <typename... Ts>
 class visit_set {};
@@ -95,8 +106,7 @@ class visit_set<T, Ts...>: public visit_set_helper<T>,
 /**
  * @class visit_set<T>
  *
- * @brief Base case for expansion. Provides classes the ability to explicitly
- * control what types of classes they can visit.
+ * @brief Base case for expansion.
  */
 template<typename T>
 class visit_set<T>: public visit_set_helper<T> {
