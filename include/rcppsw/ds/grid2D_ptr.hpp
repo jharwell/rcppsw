@@ -76,8 +76,8 @@ class grid2D_ptr : public base_grid2D<T> {
    * @return The subcircle.
    */
   grid_view<T*> subcircle(size_t x, size_t y, size_t radius) {
-    auto x_range = base_grid2D<T>::xrange(x, radius);
-    auto y_range = base_grid2D<T>::yrange(y, radius);
+    auto x_range = base_grid2D<T>::circle_xrange_at_point(x, radius);
+    auto y_range = base_grid2D<T>::circle_yrange_at_point(y, radius);
     typename grid_type<T>::index_gen indices;
 
     index_range x1(x_range.first, x_range.second, 1);
