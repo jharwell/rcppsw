@@ -1,5 +1,6 @@
 /**
  * @file grid2D_ptr.hpp
+ * @ingroup ds
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *

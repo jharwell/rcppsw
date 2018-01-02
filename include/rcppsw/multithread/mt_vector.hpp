@@ -1,5 +1,6 @@
 /**
  * @file mt_vector.hpp
+ * @ingroup multithread
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -38,9 +39,10 @@ NS_START(rcppsw, multithread);
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class mt_vector
+ *
  * @brief A thread-safe vector implementation. Use when you need fast access to
  *        a large contiguous chunk of memory.
- *
  */
 template <typename T>
 class mt_vector {
@@ -54,13 +56,10 @@ class mt_vector {
   }
   typename std::vector<T>::const_iterator end(void) const { return m_v.end(); }
 
-  // Add data to the queue and notify others
   void push_back(const T& data) {
-    // Acquire lock on the queue
     boost::unique_lock<boost::mutex> lock(m_mtx);
-
     m_v.push_back(data);
-  } // Lock is automatically released here
+  }
 
   size_t size() const { return m_v.size(); }
   void clear(void) { m_v.clear(); }

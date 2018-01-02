@@ -1,5 +1,6 @@
 /**
  * @file polymorphic_visitable.hpp
+ * @ingroup patterns visitor
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -50,7 +51,8 @@ class polymorphic_visitable_helper {
 /**
  * @class polymorphic_visitable<...>
  *
- * @brief General case for recursive variadic template expansion.
+ * @brief Allows polymorphic classes (those with a pure virtual member in a base
+ * class) to accept visitors of specific types.
  */
 template <typename... Ts>
 class polymorphic_visitable {};

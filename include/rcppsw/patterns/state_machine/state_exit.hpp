@@ -1,5 +1,6 @@
 /**
  * @file state_exit.hpp
+ * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -36,6 +37,8 @@ class base_fsm;
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class state_exit
+ *
  * @brief Abstract exit base class that all exit classes inherit from.
  */
 class state_exit {

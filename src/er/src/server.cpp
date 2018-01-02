@@ -221,20 +221,6 @@ void server::change_logfile(const std::string& new_fname) {
   }
 } /* change_logfile() */
 
-status_t server::change_id(const boost::uuids::uuid& old_id,
-                           boost::uuids::uuid new_id) {
-  server_mod mod(old_id, er_lvl::NOM, er_lvl::NOM, "tmp");
-
-  /* make sure module is already present */
-  auto iter = std::find(m_modules.begin(), m_modules.end(), mod);
-  CHECK(iter != m_modules.end());
-  iter->change_id(new_id);
-  return OK;
-
-error:
-  return ERROR;
-} /* change_id() */
-
 status_t server::mod_loglvl(const boost::uuids::uuid& id,
                             const er_lvl::value& lvl) {
   server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
@@ -259,5 +245,6 @@ error:
 boost::uuids::uuid server::idgen(void) { return m_generator(); } /* idgen() */
 
 std::ostream& server::dbg_stream(void) { return std::cout; }
+std::ofstream& server::log_stream(void) { return *m_logfile; }
 
 NS_END(er, rcpppsw);

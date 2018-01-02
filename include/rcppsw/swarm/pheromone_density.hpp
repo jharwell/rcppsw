@@ -1,5 +1,6 @@
 /**
  * @file pheromone_density.hpp
+ * @ingroup swarm
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -36,6 +37,8 @@ NS_START(rcppsw, swarm);
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class pheromone_density
+ *
  * @brief Calculates the pheromone density associated with something,
  * which decays over time on its, but can be reinforced by additional entities
  * other than the current one reporting the same thing and reinforcing the

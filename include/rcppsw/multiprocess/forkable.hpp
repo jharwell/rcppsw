@@ -1,5 +1,6 @@
 /**
  * @file forkable.hpp
+ * @ingroup multiprocess
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -39,6 +40,12 @@ NS_START(rcppsw, multiprocess);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class forkable
+ *
+ * @brief Class derived from hear will be capable of being fork()ed and having
+ * each new process jump into the main loop defined for the class.
+ */
 class forkable {
  public:
   forkable(void) : m_proc_run(false), m_pid(0) {}
@@ -51,18 +58,20 @@ class forkable {
    * @param core The core to bind the process (and any threads it might spawn)
    * to. By default, no binding.
    *
-   * @return PID of child process in parent
+   * @return PID of child process in parent.
    */
-  virtual pid_t start(int core = -1);
+  pid_t start(int core = -1);
 
   /**
    * @brief Start a process in a new directory.
+   *
    * @param core The core to bind the process (and any threads it might spawn)
    *             to. By default, no binding.
+   * @param new_wd The new working directory to start the process in.
    *
-   * @return PID of child process in parent
+   * @return PID of child process in parent.
    */
-  virtual pid_t start(const std::string& new_wd, int core = -1);
+  pid_t start(const std::string& new_wd, int core = -1);
 
   /**
    * @brief Signal a process that it should terminate, from outside the process.

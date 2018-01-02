@@ -1,5 +1,6 @@
 /**
  * @file ipc_queue.hpp
+ * @ingroup interprocess
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -39,7 +40,10 @@ NS_START(rcppsw, multiprocess);
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief Interprocess synchronized queue.
+ * @class ipc_queue
+ *
+ * @brief Interprocess synchronized queue (like \ref mt_queue, but for
+ * processes).
  */
 template <class T>
 class ipc_queue {
@@ -67,7 +71,7 @@ class ipc_queue {
    * out of date, so don't depend on this value among multiple processes without
    * additional synchronization.
    *
-   * @return TRUE if the condition is met, FALSE otherwise.
+   * @return \c TRUE if the condition is met, \c FALSE otherwise.
    */
   bool is_empty() const {
     bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
@@ -93,7 +97,7 @@ class ipc_queue {
    *
    * @param element To be filled with the front item in the queue if it exists.
    *
-   * @return TRUE if the front element was removed, FALSE otherwise.
+   * @return \c TRUE if the front element was removed, \c FALSE otherwise.
    */
   bool pop_try(T* const element) {
     bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
@@ -132,7 +136,7 @@ class ipc_queue {
    * @param element To be filled with the front item in the queue.
    * @param to_sec # of seconds for timeout.
    *
-   * @return TRUE if an item was removed from the queue, FALSE otherwise.
+   * @return \c TRUE if an item was removed from the queue, \c FALSE otherwise.
    */
   bool pop_timed_wait(T* const element, int to_sec) {
     bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);

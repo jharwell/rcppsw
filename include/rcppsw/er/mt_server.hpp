@@ -1,5 +1,6 @@
 /**
  * @file mt_server.hpp
+ * @ingroup er
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -42,8 +43,7 @@ NS_START(rcppsw, er);
 /**
  * @class mt_server
  *
- * @brief A multithreaded version of the \ref server for logging/printing
- * events.
+ * @brief A multithreaded version of the \ref server for reporting events.
  */
 class mt_server : public server, public multithread::threadable {
  public:
@@ -55,9 +55,14 @@ class mt_server : public server, public multithread::threadable {
    * @param dbglvl The initial debug printing level.
    * @param loglvl The initial logging level.
    */
-  explicit mt_server(const std::string& logfile_fname = "__no_file__",
-                     const er_lvl::value& dbglvl = er_lvl::NOM,
-                     const er_lvl::value& loglvl = er_lvl::NOM);
+  mt_server(const std::string& logfile_fname,
+                     const er_lvl::value& dbglvl,
+                     const er_lvl::value& loglvl);
+
+  /**
+   * @brief Initialize a multithreaded ER server with default values.
+   */
+  mt_server(void): mt_server("__no_file__", er_lvl::NOM, er_lvl::NOM) {}
 
   ~mt_server(void) override { join(); }
 
@@ -73,7 +78,7 @@ class mt_server : public server, public multithread::threadable {
    *
    * @return Unused.
    */
-  void* thread_main(void* arg) override;
+  void* thread_main(__unused void* arg) override;
 
   /**
    * @brief Report a message. Messages may or not actually be printed/logged,

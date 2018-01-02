@@ -1,5 +1,6 @@
 /**
  * @file polled_simple_fsm.hpp
+ * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -36,13 +37,6 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/**
- * @brief An FSM that can be part of a \ref task_sequence of \ref polled_task
- * instances.
- *
- * These FSMs are attached to \ref atomic_polled_task instances as their method
- * of execution.
- */
 class polled_simple_fsm : public taskable,
                           public patterns::state_machine::simple_fsm {
  public:

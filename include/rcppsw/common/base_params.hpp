@@ -1,5 +1,6 @@
 /**
  * @file base_params.hpp
+ * @ingroup common
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -35,6 +36,8 @@ NS_START(rcppsw, common);
  * Structure Definitions
  ******************************************************************************/
 /**
+ * @struct base_params
+ *
  * @brief A stub base class for any and all parameter types that may need
  * polymorphism or covariance.
  */

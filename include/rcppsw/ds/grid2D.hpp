@@ -1,5 +1,6 @@
 /**
  * @file grid2D.hpp
+ * @ingroup ds
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,10 +38,10 @@ NS_START(rcppsw, ds);
 /**
  * @class grid2D
  *
- * @brief A 2D logical grid that is overlayed over a continuous environment. It
- * discretizes the continuous arena into a grid of a specified resolution.
+ * @brief A 2D logical grid overlayed over a continuous environment using a
+ * \a contiguous array of the template parameter type.
  *
- * Whatever the template type is must have a zero parameter constructor
+ * As such, the template type must have must have a zero parameter constructor
  * available or it won't compile.
  */
 template <typename T>
@@ -52,10 +53,12 @@ class grid2D : public base_grid2D<T> {
             boost::extents[base_grid2D<T>::xsize()][base_grid2D<T>::ysize()]) {}
 
   /**
-   * @brief Create a subgrid (really an array view) from a grid. The grid is
-   * clamped to the maximum boundaries of the parent grid, so rather than
-   * getting a 2 x 2 subgrid centered at 0 with the out-of-bounds elements
-   * zeroed, you will get a 1 x 2 subgrid.
+   * @brief Get a subcircle gridview from a grid. The subcircle extent is
+   * cropped to the maximum boundaries of the parent grid.
+   *
+   * This means that rather than getting a 2 x 2 subgrid centered at 0 with the
+   * out-of-bounds elements zeroed if you request a subcircle on the boundary of
+   * the overall grid, you will get a 1 x 2 subgrid (a lopsided circle).
    *
    * @param x X coord of center of subgrid.
    * @param y Y coord of center of subgrid.
@@ -64,14 +67,15 @@ class grid2D : public base_grid2D<T> {
    * @return The subcircle.
    */
   grid_view<T> subcircle(size_t x, size_t y, size_t radius) {
-    auto x_range = base_grid2D<T>::xrange(x, radius);
-    auto y_range = base_grid2D<T>::yrange(y, radius);
+    auto x_range = base_grid2D<T>::circle_xrange_at_point(x, radius);
+    auto y_range = base_grid2D<T>::circle_yrange_at_point(y, radius);
     typename grid_type<T>::index_gen indices;
 
     index_range x1(x_range.first, x_range.second, 1);
     index_range y1(y_range.first, y_range.second, 1);
     return grid_view<T>(m_cells[indices[x1][y1]]);
   }
+
   T& access(size_t i, size_t j) override {
     return m_cells[static_cast<index_range::index>(i)]
                   [static_cast<index_range::index>(j)];

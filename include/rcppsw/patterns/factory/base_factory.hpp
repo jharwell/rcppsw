@@ -1,5 +1,6 @@
 /**
  * @file base_factory.hpp
+ * @ingroup patterns factory
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -34,6 +35,12 @@ NS_START(rcppsw, patterns, factory);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class base_factory
+ *
+ * @brief Base class that all factory pattern specializations can and should use
+ * for polymorphic/covariance purposes.
+ */
 class base_factory {
  public:
   base_factory(void) = default;

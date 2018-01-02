@@ -1,5 +1,6 @@
 /**
  * @file base_cli.hpp
+ * @ingroup utils
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,6 +38,12 @@ NS_START(rcppsw);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class base_cli
+ *
+ * @brief Base class for command line interfaces. Uses boost to do the actual
+ * parsing.
+ */
 class base_cli {
  public:
   explicit base_cli(const std::string& mnemonic = "");
@@ -48,14 +55,14 @@ class base_cli {
    * @param argc The argc from main().
    * @param argv The argv from main().
    *
-   * @return OK if successful, ERROR otherwise.
+   * @return \ref status_t.
    */
   status_t parse(int argc, char** argv);
 
   /**
    * @brief Determine if parameters passed are valid, by some criterion.
    *
-   * @return TRUE if the condition is met, and FALSE otherwise.
+   * @return \c TRUE if the condition is met, and \c FALSE otherwise.
    */
 
   virtual bool validate(void) { return true; }
@@ -90,7 +97,7 @@ class base_cli {
   bpo::variables_map m_vm;
   bpo::options_description m_desc;
   std::string m_prog_name;
-  std::string m_base_output_dir; /// Root dir for program outputs.
+  std::string m_base_output_dir;
 };
 
 NS_END(rcppsw);

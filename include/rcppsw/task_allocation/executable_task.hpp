@@ -1,5 +1,6 @@
 /**
  * @file executable_task.hpp
+ * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -62,18 +63,29 @@ class executable_task : public logical_task {
   const time_estimate& interface_estimate(void) const {
     return m_interface_estimate;
   }
+
+  /**
+   * @brief Get the current estimate of the task's execution time (which
+   * includes its interface time).
+   */
   const time_estimate& exec_estimate(void) const { return m_exec_estimate; }
 
   /**
    * @brief Update the current estimate of the task interface time by using a
-   * weighted sum of the previous estimate and the new value. See
-   * \ref time_estimate.
+   * weighted sum of the previous \ref time_estimate and the new value.
    *
    * @param last_measure The last measured time.
    */
   void update_interface_estimate(double last_measure) {
     m_interface_estimate.calc(last_measure);
   }
+
+  /**
+   * @brief Update the current estimate of the task execution time by using a
+   * weighted sum of the previous \ref time_estimate and the new value.
+   *
+   * @param last_measure The last measured time.
+   */
   void update_exec_estimate(double last_measure) {
     m_exec_estimate.calc(last_measure);
   }
@@ -85,22 +97,52 @@ class executable_task : public logical_task {
   virtual void task_execute(void) = 0;
 
   /**
-   * @brief Get the last execution time of the task.
+   * @brief Get the last interface time of the task.
    */
   double interface_time(void) const { return m_interface_time; }
+
+  /**
+   * @brief Get the last execution time of the task.
+   */
   double exec_time(void) const { return m_exec_time; }
 
+  /**
+   * @brief Define how to partition the task. Does nothing by default.
+   */
   virtual executable_task* partition(void) { return nullptr; }
+
+  /**
+   * @brief Get if a task is currently atomic (i.e. not abortable).
+   */
   bool is_atomic(void) const { return m_is_atomic; }
+
+  /**
+   * @brief Set a task as atomic, meaning that once executed, it cannot be
+   * aborted.
+   */
   void set_atomic(void) { m_is_atomic = true; }
+
+  /**
+   * @brief Get if a task is partitionable. This can be done with reflection,
+   * but this is way cleaner.
+   */
   bool is_partitionable(void) const { return m_is_partitionable; }
-  void set_partitionable(void) { m_is_partitionable = true; }
+
+  /**
+   * @brief Set a task as partitionable. Should only be set on
+   * \ref partitionable_task objects, otherwise bad things will happen.
+   */
+   void set_partitionable(void) { m_is_partitionable = true; }
 
   /**
    * @brief Get the probability of aborting an executable task.
    */
   virtual double calc_abort_prob(void) = 0;
 
+  /**
+   * @brief Calculate the interface time of the current task for use in abort
+   * calculations.
+   */
   virtual double calc_interface_time(double start_time) = 0;
 
   /**
@@ -116,10 +158,26 @@ class executable_task : public logical_task {
   void update_interface_time(void) {
     m_interface_time = calc_interface_time(m_interface_start_time);
   }
+
+  /**
+   * @brief Because tasks can have multiple interfaces, they need a way to reset
+   * their interface time upon leaving/entering an interface.
+   */
   void reset_interface_time(void) { m_interface_start_time = current_time(); }
+
+  /**
+   * @brief Update the calculated execution time for the task
+   *
+   * This is needed for accurate task abort calculations.
+   */
   void update_exec_time(void) {
     m_exec_time = current_time() - m_exec_start_time;
   }
+
+  /**
+   * @brief Reset the execution time for the task. Should never be called
+   * directly!
+   */
   void reset_exec_time(void) { m_exec_start_time = current_time(); }
 
  private:

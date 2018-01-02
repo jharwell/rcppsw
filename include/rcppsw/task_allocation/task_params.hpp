@@ -1,5 +1,6 @@
 /**
  * @file task_params.hpp
+ * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -25,7 +26,6 @@
  * Includes
  ******************************************************************************/
 #include <string>
-
 #include "rcppsw/common/base_params.hpp"
 
 /*******************************************************************************
@@ -36,33 +36,32 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Structure Definitions
  ******************************************************************************/
+/**
+ * @struct task_params
+ *
+ * @brief Parameters used by \ref executable_task tasks.
+ */
 struct task_params : public common::base_params {
-  task_params(void)
-      : estimation_alpha(),
-        abort_reactivity(),
-        abort_offset(),
-        partition_reactivity(),
-        partition_offset() {}
-
-  double estimation_alpha;
-  double abort_reactivity;
-  double abort_offset;
-  double partition_reactivity;
-  double partition_offset;
+  double estimation_alpha{0.0};
+  double abort_reactivity{0.0};
+  double abort_offset{0.0};
+  double partition_reactivity{0.0};
+  double partition_offset{0.0};
 };
 
+/**
+ * @struct partitionable_task_params
+ *
+ * @brief Parameters used by \ref partitionable_task tasks.
+ */
 struct partitionable_task_params : public task_params {
   partitionable_task_params(void)
-      : task_params(),
-        subtask_selection_method(),
-        partition_method(),
-        always_partition(false),
-        never_partition(false) {}
+      : task_params() {}
 
-  std::string subtask_selection_method;
-  std::string partition_method;
-  bool always_partition;
-  bool never_partition;
+  std::string subtask_selection_method{""};
+  std::string partition_method{""};
+  bool always_partition{false};
+  bool never_partition{false};
 };
 
 NS_END(task_allocation, rcppsw);

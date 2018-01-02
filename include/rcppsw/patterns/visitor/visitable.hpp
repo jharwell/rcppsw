@@ -1,5 +1,6 @@
 /**
  * @file visitable.hpp
+ * @ingroup patterns visitor
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -84,7 +85,8 @@ class visitable_set_helper {
 /**
  * @class visitable_set
  *
- * @brief General case for template expansion.
+ * @brief General case for template expansion. Provides classes the ability to
+ * explicitly control what types of visitors they will accept.
  */
 template <typename... Ts>
 class visitable_set {};
@@ -105,8 +107,7 @@ class visitable_set<V, T, Ts...>: public visitable_set_helper<V, T>,
 /**
  * @class visitable_set<V,T>
  *
- * @brief Base case for expansion. Provides classes the ability to explicitly
- * control what types of visitors they will accept.
+ * @brief Base case for expansion
  */
 template<typename V, typename T>
 class visitable_set<V, T>: public visitable_set_helper<V, T> {
