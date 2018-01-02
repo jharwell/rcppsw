@@ -57,7 +57,7 @@ class xml_param_repository {
    * @brief Call the \ref xml_param_parser::parse() function on all parsers
    * in the repository, passing all parsers the same XML node.
    */
-  void parse_all(const ticpp::Element& node);
+  void parse_all(ticpp::Element& node);
 
   /**
    * @brief Call the \ref xml_param_parser::validate() function on all parsers

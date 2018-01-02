@@ -54,7 +54,7 @@ class xml_param_parser {
    * @brief Parse the provided XML node into an internal representation (should
    * be a class/struct derived from \ref base_params).
    */
-  virtual void parse(const ticpp::Element& node) = 0;
+  virtual void parse(ticpp::Element& node) = 0;
 
   /**
    * @brief Dump the parsed (or possibly unparsed, but that's kind of useless)
