@@ -38,6 +38,7 @@ NS_START(rcppsw, algorithm);
  ******************************************************************************/
 /**
  * @class max_subarray_finder
+ * @ingroup algorithm
  *
  * @brief Find the maximal subarray using Kadane's algorithm, which is O(n).
  */

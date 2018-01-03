@@ -1,6 +1,5 @@
 /**
  * @file singleton.hpp
- * @ingroup patterns
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -36,6 +35,7 @@ NS_START(rcppsw, patterns);
  ******************************************************************************/
 /**
  * @class singleton
+ * @ingroup patterns
  *
  * @brief Define a class as in capable of being moved, copied, etc., and that
  * their can only ever be one of them.

@@ -1,6 +1,5 @@
 /**
  * @file ipc.hpp
- * @ingroup interprocess
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -58,12 +57,21 @@ template <typename T>
 using ipc_allocator =
     bip::allocator<T, bip::managed_shared_memory::segment_manager>;
 
+/**
+ * @brief A std::vector capable of being shared across processes.
+ */
 template <typename T>
 using ipc_vector = std::vector<T, ipc_allocator<T>>;
 
+/**
+ * @brief A std::list capable of being shared across processes.
+ */
 template <typename T>
 using ipc_list = bip::list<T, ipc_allocator<T>>;
 
+/**
+ * @brief A std::map capable of being shared across processes.
+ */
 template <typename key, typename value>
 using ipc_map =
     bip::map<key, value, std::less<key>, ipc_allocator<std::pair<const key, value>>>;
@@ -71,6 +79,9 @@ using ipc_map =
 /*******************************************************************************
  * Type Definitions
  ******************************************************************************/
+/**
+ * @brief A string capable of being shared across processes.
+ */
 typedef bip::basic_string<char, std::char_traits<char>, ipc_allocator<char>>
     ipc_string;
 

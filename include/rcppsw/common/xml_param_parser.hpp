@@ -1,6 +1,5 @@
 /**
  * @file xml_param_parser.hpp
- * @ingroup common
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -41,6 +40,7 @@ struct base_params;
  ******************************************************************************/
 /**
  * @class xml_param_parser
+ * @ingroup common
  *
  * @brief Interface specifying functionality for parsing XML into a
  * \ref base_params derived parameter structure.

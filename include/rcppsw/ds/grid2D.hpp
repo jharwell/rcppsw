@@ -1,6 +1,5 @@
 /**
  * @file grid2D.hpp
- * @ingroup ds
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,6 +36,7 @@ NS_START(rcppsw, ds);
  ******************************************************************************/
 /**
  * @class grid2D
+ * @ingroup ds
  *
  * @brief A 2D logical grid overlayed over a continuous environment using a
  * \a contiguous array of the template parameter type.

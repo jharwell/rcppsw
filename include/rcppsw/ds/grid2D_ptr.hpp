@@ -1,6 +1,5 @@
 /**
  * @file grid2D_ptr.hpp
- * @ingroup ds
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,6 +36,7 @@ NS_START(rcppsw, ds);
  ******************************************************************************/
 /**
  * @class grid2D_ptr
+ * @ingroup ds
  *
  * @brief A 2D logical grid that is overlayed over a continuous environment. It
  * discretizes the continuous arena into a grid of a specified resolution.

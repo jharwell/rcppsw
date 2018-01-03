@@ -1,6 +1,5 @@
 /**
  * @file taskable_argument.hpp
- * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,6 +36,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 /**
  * @class taskable_argument
+ * @ingroup task_allocation
  *
  * @brief Base classthat any application specific data that should be passed to
  * tasks upon task start must derive from.

@@ -1,6 +1,5 @@
 /**
  * @file state_entry_action.hpp
- * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -41,6 +40,7 @@ class base_fsm;
  ******************************************************************************/
 /**
  * @class state_entry_action
+ * @ingroup patterns state_machine
  *
  * @brief Action to perform upon transition to a state.
  *
@@ -61,6 +61,7 @@ class state_entry_action0 : public state_entry {
 
 /**
  * @class state_entry_action
+ * @ingroup patterns state_machine
  *
  * @tparam SM A state machine class
  * @tparam Event A state function event data type (derived from event_data).

@@ -1,6 +1,5 @@
 /**
  * @file ipc_queue.hpp
- * @ingroup interprocess
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -41,6 +40,7 @@ NS_START(rcppsw, multiprocess);
  ******************************************************************************/
 /**
  * @class ipc_queue
+ * @ingroup interprocess
  *
  * @brief Interprocess synchronized queue (like \ref mt_queue, but for
  * processes).

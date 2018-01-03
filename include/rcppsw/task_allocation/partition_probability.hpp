@@ -1,6 +1,5 @@
 /**
  * @file partition_probability.hpp
- * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -40,6 +39,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 /**
  * @class partition_probability
+ * @ingroup task_allocation
  *
  * @brief Calculates the probability that a robot partitions its current task
  * using the negative exponential distribution.

@@ -1,6 +1,5 @@
 /**
  * @file logical_task.hpp
- * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -38,6 +37,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 /**
  * @class logical_task
+ * @ingroup task_allocation
  *
  * @brief Represents the logical concept of a task, which only contains a name
  * and a parent task.

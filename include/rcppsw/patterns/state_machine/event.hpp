@@ -1,6 +1,5 @@
 /**
  * @file event.hpp
- * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,6 +36,7 @@ NS_START(rcppsw, patterns, state_machine);
  ******************************************************************************/
 /**
  * @class event_signal
+ * @ingroup patterns state_machine
  *
  * @brief A class representing the different signals that can be passed between
  * states in an FSM, and/or between FSMs.

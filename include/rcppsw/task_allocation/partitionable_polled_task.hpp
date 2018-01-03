@@ -1,6 +1,5 @@
 /**
  * @file partitionable_polled_task.hpp
- * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -39,6 +38,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 /**
  * @class partitionable_polled_task
+ * @ingroup task_allocation
  *
  * @brief A \ref partitionable_task whose execution is polled periodically by
  * the user/executive to see if it has finished yet.

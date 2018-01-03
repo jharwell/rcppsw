@@ -1,6 +1,5 @@
 /**
  * @file partitionable_task.hpp
- * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -41,6 +40,7 @@ class executable_task;
  ******************************************************************************/
 /**
  * @class partitionable_task
+ * @ingroup task_allocation
  *
  * @brief A task that is capable of being partitioned into two subtasks that
  * when executed in sequence have the sum effect as the parent task.

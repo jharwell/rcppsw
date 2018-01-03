@@ -1,6 +1,5 @@
 /**
  * @file base_fsm.hpp
- * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -48,6 +47,7 @@ NS_START(rcppsw, patterns, state_machine);
  ******************************************************************************/
 /**
  * @class base_fsm
+ * @ingroup patterns state_machine
  *
  * @brief Implements a software-based state machine.
  */

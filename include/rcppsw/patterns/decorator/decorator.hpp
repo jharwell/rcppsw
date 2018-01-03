@@ -1,6 +1,5 @@
 /**
  * @file decorator.hpp
- * @ingroup patterns decorator
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,10 +36,11 @@ NS_START(rcppsw, patterns, decorator);
  ******************************************************************************/
 /**
  * @class decorator
+ * @ingroup patterns decorator
  *
  * @brief The base class for the object decorator design pattern.
  *
- * D - The type of the decorated object.
+ * @tparam D The type of the decorated object.
  */
 template <class D>
 class decorator {
@@ -81,9 +81,12 @@ class decorator {
 };
 
 /**
+ * @class ptr_decorator
+ * @ingroup patterns decorator
+ *
  * @brief The base class for the ptr-to-object decorator design pattern.
  *
- * D - The type of the decorated object.
+ * @tparam D The type of the decorated object.
  */
 template <class D>
 class ptr_decorator {

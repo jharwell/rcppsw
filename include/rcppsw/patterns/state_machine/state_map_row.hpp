@@ -1,6 +1,5 @@
 /**
  * @file state_map_row.hpp
- * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -38,6 +37,7 @@ NS_START(rcppsw, patterns, state_machine);
  ******************************************************************************/
 /**
  * @class state_map_row
+ * @ingroup patterns state_machine
  *
  * @brief A structure to hold a single row within the state map.
  */

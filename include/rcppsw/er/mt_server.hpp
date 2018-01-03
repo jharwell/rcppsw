@@ -1,6 +1,5 @@
 /**
  * @file mt_server.hpp
- * @ingroup er
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -42,6 +41,7 @@ NS_START(rcppsw, er);
  ******************************************************************************/
 /**
  * @class mt_server
+ * @ingroup er
  *
  * @brief A multithreaded version of the \ref server for reporting events.
  */

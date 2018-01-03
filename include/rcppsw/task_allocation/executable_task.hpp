@@ -1,6 +1,5 @@
 /**
  * @file executable_task.hpp
- * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -40,6 +39,7 @@ struct task_params;
  ******************************************************************************/
 /**
  * @class executable_task
+ * @ingroup task_allocation
  *
  * @brief Represents the executable concept of a task, which encompasses:
  *

@@ -1,6 +1,5 @@
 /**
  * @file client.hpp
- * @ingroup er
  *
  * Interface for classes that want to be able to use the ER Server.
  *
@@ -35,11 +34,6 @@
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-/**
- * @brief Event reporting macros. Use of these macros requires the class you are
- * using it in derives from \ref client. You cannot use these macros in a
- * non-class context.
- */
 #ifndef NDEBUG
 /* ---------- Explicit debug level statements (use these) ---------- */
 
@@ -198,6 +192,7 @@ class global_server;
  ******************************************************************************/
 /**
  * @class client
+ * @ingroup er
  *
  * @brief A class that can connect to a \ref server for logging of important
  * events.

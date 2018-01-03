@@ -1,6 +1,5 @@
 /**
  * @file releasing_factory.hpp
- * @ingroup patterns factory
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -42,13 +41,13 @@ NS_START(rcppsw, patterns, factory);
  ******************************************************************************/
 /**
  * @class releasing_factory
+ * @ingroup patterns factory
  *
  * @brief A factory that releases ownership of the created objects to the
  * class/context that requests object creation.
  *
- * The template parameter restricts the creation of objects to those derived
- * from this type.
- *
+ * @tparam T Type of objects capable of creation from this factory (restricted
+ * to this type and its derived types).
  */
 template <typename T>
 class releasing_factory : public base_factory {

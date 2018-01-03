@@ -1,6 +1,5 @@
 /**
  * @file base_grid2D.hpp
- * @ingroup ds
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -48,6 +47,7 @@ using index_range = boost::multi_array_types::index_range;
  ******************************************************************************/
 /**
  * @class base_grid2D
+ * @ingroup ds
  *
  * @brief A 2D logical grid that is overlayed over a continuous environment. It
  * discretizes the continuous arena into a grid of a specified resolution.

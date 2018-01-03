@@ -1,6 +1,5 @@
 /**
  * @file server.hpp
- * @ingroup er
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -43,6 +42,7 @@ NS_START(rcppsw, er);
  ******************************************************************************/
 /**
  * @class server
+ * @ingroup er
  *
  * @brief Logging server for events.
  *

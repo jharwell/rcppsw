@@ -1,6 +1,5 @@
 /**
  * @file executive.hpp
- * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -38,6 +37,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 /**
  * @class executive
+ * @ingroup task_allocation
  *
  * @brief Base class/interface for runtime task executives.
  */

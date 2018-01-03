@@ -1,6 +1,5 @@
 /**
  * @file hfsm_state.hpp
- * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -40,6 +39,7 @@ NS_START(rcppsw, patterns, state_machine);
  ******************************************************************************/
 /**
  * @class hfsm_state
+ * @ingroup patterns state_machine
  *
  * @brief Base class representing a state within a HFSM.
  */

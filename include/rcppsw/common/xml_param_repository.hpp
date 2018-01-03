@@ -1,6 +1,5 @@
 /**
  * @file xml_param_repository.hpp
- * @ingroup common
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -42,6 +41,7 @@ namespace factory = rcppsw::patterns::factory;
  ******************************************************************************/
 /**
  * @class xml_param_repository
+ * @ingroup common
  *
  * @brief A repository for multiple \ref xml_param_parser and their parsed
  * results.

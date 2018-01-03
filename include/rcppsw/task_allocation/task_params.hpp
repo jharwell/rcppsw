@@ -1,6 +1,5 @@
 /**
  * @file task_params.hpp
- * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -38,6 +37,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 /**
  * @struct task_params
+ * @ingroup task_allocation
  *
  * @brief Parameters used by \ref executable_task tasks.
  */

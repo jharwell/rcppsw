@@ -1,6 +1,5 @@
 /**
  * @file pid_loop.hpp
- * @ingroup control
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,6 +36,7 @@ NS_START(rcppsw, control);
  ******************************************************************************/
 /**
  * @class pid_loop
+ * @ingroup control
  *
  * @brief A simple PID loop class.
  */
