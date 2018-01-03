@@ -1,6 +1,5 @@
 /**
  * @file line_parser.hpp
- * @ingroup utils
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -39,6 +38,7 @@ NS_START(rcppsw, utils);
  ******************************************************************************/
 /**
  * @class line_parser
+ * @ingroup utils
  *
  * @brief Parses a single line into a vector of tokens broken on the specified
  * delimiter.

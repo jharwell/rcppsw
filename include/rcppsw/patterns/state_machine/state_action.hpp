@@ -1,6 +1,5 @@
 /**
  * @file state_action.hpp
- * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -40,6 +39,7 @@ NS_START(rcppsw, patterns, state_machine);
  ******************************************************************************/
 /**
  * @class state_action0
+ * @ingroup patterns state_machine
  *
  * @tparam SM A state machine class.
  * @tparam Func A state machine member function pointer, which takes ZERO
@@ -60,6 +60,7 @@ class state_action0 : public state {
 
 /**
  * @class state_action1
+ * @ingroup patterns state_machine
  *
  * @tparam SM A state machine class.
  * @tparam Event A state function event data type (derived from event_data).

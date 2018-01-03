@@ -1,6 +1,5 @@
 /**
  * @file prototype_factory.hpp
- * @ingroup patterns prototype
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -40,6 +39,7 @@ NS_START(rcppsw, patterns, prototype);
  ******************************************************************************/
 /**
  * @class prototype_factory
+ * @ingroup patterns prototype
  *
  * @brief A \ref sharing_factory of \ref clonable objects.
  */

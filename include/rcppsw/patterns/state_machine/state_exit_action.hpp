@@ -1,6 +1,5 @@
 /**
  * @file state_exit_action.hpp
- * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -39,6 +38,9 @@ class base_fsm;
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class state_exit_action
+ * @ingroup patterns state_machine
+ *
  * @brief state_exit_action takes two template arguments:
  *
  * @tparam SM A state machine class.

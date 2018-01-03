@@ -1,6 +1,5 @@
 /**
  * @file mt_vector.hpp
- * @ingroup multithread
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -40,6 +39,7 @@ NS_START(rcppsw, multithread);
  ******************************************************************************/
 /**
  * @class mt_vector
+ * @ingroup multithread
  *
  * @brief A thread-safe vector implementation. Use when you need fast access to
  *        a large contiguous chunk of memory.

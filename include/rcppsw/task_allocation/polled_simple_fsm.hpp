@@ -1,6 +1,5 @@
 /**
  * @file polled_simple_fsm.hpp
- * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *

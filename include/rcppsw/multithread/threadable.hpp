@@ -1,6 +1,5 @@
 /**
  * @file threadable.hpp
- * @ingroup multithread
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -40,6 +39,7 @@ NS_START(rcppsw, multithread);
  ******************************************************************************/
 /**
  * @class threadable
+ * @ingroup multithread
  *
  * @brief Derived classes will have the ability to spawn a new thread and run
  * inside the specified main loop.

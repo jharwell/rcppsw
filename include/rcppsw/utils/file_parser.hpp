@@ -1,6 +1,5 @@
 /**
  * @file file_parser.hpp
- * @ingroup utils
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -45,6 +44,7 @@ NS_START(rcppsw, utils);
  ******************************************************************************/
 /**
  * @class file_parser
+ * @ingroup utils
  *
  * @brief File parsing class using template design pattern. Parses each line of
  * a file into a vector of whitespace delimited tokens, and returns a vector of

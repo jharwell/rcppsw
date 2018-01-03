@@ -1,6 +1,5 @@
 /**
  * @file expression.hpp
- * @ingroup math
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,6 +36,7 @@ NS_START(rcppsw, math);
  ******************************************************************************/
 /**
  * @class expression
+ * @ingroup math
  *
  * @brief A base class for easy swapping/manipulating of mathematical
  * expressions.

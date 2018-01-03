@@ -1,6 +1,5 @@
 /**
  * @file simple_fsm.hpp
- * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *

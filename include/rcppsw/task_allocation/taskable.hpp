@@ -1,6 +1,5 @@
 /**
  * @file taskable.hpp
- * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -41,6 +40,9 @@ class taskable_argument;
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class taskable
+ * @ingroup task_allocation
+ *
  * @brief A class that all classes wishing to be used as the mechanism by which
  * \ref executable_task objects execute themselves must inherit from.
  */

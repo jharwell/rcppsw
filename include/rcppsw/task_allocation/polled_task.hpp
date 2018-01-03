@@ -1,6 +1,5 @@
 /**
  * @file polled_task.hpp
- * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -40,6 +39,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 /**
  * @class polled_task
+ * @ingroup task_allocation
  *
  * @brief Represents a task whose execution can/should be monitored by the user
  * to determine when it has finished.

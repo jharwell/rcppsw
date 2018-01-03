@@ -114,10 +114,13 @@ this project. In particular:
   the source/header files for classes can be found in.
 
 - All classes have a doxygen brief, as do all non-getter/non-setter member
-  functions. Tricky/nuanced issues with member variables should be documented,
-  though in general the namespace name + class name + member variable name +
-  member variable type should be enough documentation. If its not, chances are
-  you are naming things somewhat obfuscatingly.
+  functions, UNLESS those functions are overrides/inherited from a parent class,
+  in which case they should be left blank (usually) and their documentation be
+  in the class in which they are initially declared. Tricky/nuanced issues with
+  member variables should be documented, though in general the namespace name +
+  class name + member variable name + member variable type should be enough
+  documentation. If its not, chances are you are naming things somewhat
+  obfuscatingly.
 
   This may seem like overkill, but I have learned over the years that `If it is
   hard to document, it is probably wrong, and if it is hard to test, it is
@@ -283,7 +286,11 @@ should be named/link to github issues by browsing the repo.
 
    There should only be ONE semantic versioning tag for each issue/task you are
    working on, so you should add it on the last commit on your branch before you
-   merge to devel.
+   merge to devel. The "main" commit should also have a form like this:
+
+        <TYPE>(#issue_number): Subject
+
+   Where TYPE is one of the types listed above.
 
 5. Run static analysis on the code:
 

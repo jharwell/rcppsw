@@ -1,6 +1,5 @@
 /**
  * @file mt_queue.hpp
- * @ingroup multithread
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -39,6 +38,9 @@ NS_START(rcppsw, multithread);
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class mt_queue
+ * @ingroup multithread
+ *
  * @brief A simple multiple-producer/consumer queue with locking.
  */
 template <typename T>

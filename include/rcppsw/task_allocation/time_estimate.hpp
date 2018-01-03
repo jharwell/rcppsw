@@ -1,6 +1,5 @@
 /**
  * @file time_estimate.hpp
- * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,6 +36,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 /**
  * @class time_estimate
+ * @ingroup task_allocation
  *
  * @brief Calculates an estimate of how long a task will take.
  *

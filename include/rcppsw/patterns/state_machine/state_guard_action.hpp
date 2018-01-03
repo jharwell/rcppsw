@@ -1,6 +1,5 @@
 /**
  * @file state_guard_action.hpp
- * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -38,7 +37,9 @@ class base_fsm;
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/** @class state_guard_condition
+/**
+ * @class state_guard_condition
+ * @ingroup patterns state_machine
  *
  * @brief Condition to determine if a state's main action should be executed.
  *

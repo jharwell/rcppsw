@@ -1,6 +1,5 @@
 /**
  * @file subtask_selection_probability.hpp
- * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -40,6 +39,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 /**
  * @class subtask_selection_probability
+ * @ingroup task_allocation
  *
  * @brief Calculates the probability that a robot selects subtask 2 when it has
  * most recently executed subtask 1 (assuming partitioning is employed).

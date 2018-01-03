@@ -1,6 +1,5 @@
 /**
  * @file clonable.hpp
- * @ingroup patterns prototype
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,6 +36,7 @@ NS_START(rcppsw, patterns, prototype);
  ******************************************************************************/
 /**
  * @class clonable
+ * @ingroup patterns prototype
  *
  * @brief Define a class as being capable of being cloned (i.e. a deep copy).
  */

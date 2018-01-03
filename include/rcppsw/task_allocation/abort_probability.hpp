@@ -1,6 +1,5 @@
 /**
  * @file abort_probability.hpp
- * @ingroup task_allocation
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -37,6 +36,9 @@ NS_START(rcppsw, task_allocation);
  * Class Definitions
  ******************************************************************************/
 /**
+ * @class abort_probability
+ * @ingroup task_allocation
+ *
  * @brief Calculates the probability that a robot will abort the task it is
  * currently working on using the negative exponential distribution.
  *

@@ -1,6 +1,5 @@
 /**
  * @file base_cli.hpp
- * @ingroup utils
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -40,6 +39,7 @@ NS_START(rcppsw);
  ******************************************************************************/
 /**
  * @class base_cli
+ * @ingroup utils
  *
  * @brief Base class for command line interfaces. Uses boost to do the actual
  * parsing.

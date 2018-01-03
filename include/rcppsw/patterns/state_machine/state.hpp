@@ -1,6 +1,5 @@
 /**
  * @file state.hpp
- * @ingroup patterns state_machine
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -40,6 +39,7 @@ class event_data;
  ******************************************************************************/
 /**
  * @class state
+ * @ingroup patterns state_machine
  *
  * @brief Abstract state base class that all states inherit from.
  */
