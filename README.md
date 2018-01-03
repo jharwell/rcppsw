@@ -63,7 +63,7 @@ Before starting, you will need a recent version of the following programs:
 
    `<rcppsw root>/CMakeLists.txt` -> `<develroot>/cmake/project.cmake`
 
-2. Verify you can build `rcsw`, `rcppsw` (in that order), by
+3. Verify you can build `rcsw`, `rcppsw` (in that order), by
    doing:
 
         cd /path/to/repo
@@ -72,6 +72,10 @@ Before starting, you will need a recent version of the following programs:
         make
 
 ## Development Guide
+
+In addition to reading this README, you should also build the documentation for
+the project and look through it to try to get a sense of how things are
+organized via `make documentation`.
 
 ### Development Setup
 
@@ -86,7 +90,7 @@ following programs:
 Adjust a few more symlinks:
 
    `<rcppsw root>/.clang-format` -> `<develroot>/templates/.clang-format`
-   
+
    `<rcppsw root>/.clang-tidy` -> `<develroot>/templates/.clang-tidy`
 
 ### Development C++ Style Guide
