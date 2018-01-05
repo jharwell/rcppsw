@@ -48,10 +48,12 @@ template<class V>
 class visitable_any {
  public:
   visitable_any(void) = default;
+  virtual ~visitable_any(void) = default;
+  visitable_any(const visitable_any&) = default;
+  visitable_any& operator=(const visitable_any&) = default;
 
   template <typename T>
   void accept(T &visitor) { visitor.visit(static_cast<V&>(*this)); }
-  virtual ~visitable_any(void) = default;
 };
 
 /**

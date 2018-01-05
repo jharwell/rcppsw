@@ -34,7 +34,7 @@
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#ifndef NDEBUG
+#ifndef RCPPSW_ER_NO_REPORT
 /* ---------- Explicit debug level statements (use these) ---------- */
 
 /**
@@ -111,7 +111,7 @@
 #define ER_NOM(...)
 #define ER_DIAG(...)
 #define ER_VER(...)
-#endif /* NDEBUG */
+#endif /* RCPPSW_ER_NO_REPORT */
 
 /**
  * @def ER_CHECK(cond, msg, ...)

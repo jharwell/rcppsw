@@ -57,7 +57,7 @@ class base_fsm : public er::client {
            uint8_t max_states,
            uint8_t initial_state = 0);
 
-  virtual ~base_fsm() = default;
+  ~base_fsm(void) override = default;
 
   /**
    * @brief Get the current state of the state machine.
@@ -147,25 +147,22 @@ class base_fsm : public er::client {
   /**
    * @brief Gets the state map as defined in the derived class.
    *
-   * The BEGIN_STATE_MAP, STATE_MAP_ENTRY and END_STATE_MAP macros are used to
-   * assist in creating the map. A state machine only needs to return a state
-   * map using either state_map() or state_map_ex() but not both.
+   * A state machine only needs to return a state map using either
+   * \ref state_map() or \ref state_map_ex() but not both.
    *
-   * @return An array of state_map_row pointers with the array size MAX_STATES
-   *         or NULL if the state machine uses the state_map_ex().
+   * @return The row corresponding to the passed in state in the state map.
    */
-  virtual const state_map_row* state_map(__unused size_t) { return nullptr; }
+  virtual const state_map_row* state_map(__unused size_t) {
+    return nullptr;
+  }
 
   /**
    * @brief Gets the extended state map as defined in the derived class.
    *
-   * The BEGIN_STATE_MAP_EX, STATE_MAP_ENTRY_EX, STATE_MAP_ENTRY_ALL_EX, and
-   * END_STATE_MAP_EX macros are used to assist in creating the map. A state
-   * machine only needs to return a state map using either state_map() or
-   * state_map_ex() but not both.
+   * A state machine only needs to return a state map using either
+   * \ref state_map() or \ref state_map_ex() but not both.
    *
-   * @return An array of state_map_ex_row pointers with the array size
-   *         max_states or NULL if the state machine uses the state_map().
+   * @return The row corresponding to the passed in state in the state map.
    */
   virtual const state_map_ex_row* state_map_ex(__unused size_t) {
     return nullptr;

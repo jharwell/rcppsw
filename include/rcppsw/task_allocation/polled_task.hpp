@@ -52,7 +52,7 @@ class polled_task : public executable_task, public taskable {
               polled_task* parent = nullptr)
       : executable_task(name, c_params, parent),
         m_mechanism(std::move(mechanism)) {}
-  virtual ~polled_task(void);
+  ~polled_task(void) override;
 
   polled_task& operator=(const polled_task& other) = delete;
   polled_task(const polled_task& other) = delete;
@@ -70,8 +70,8 @@ class polled_task : public executable_task, public taskable {
    * @brief Initialize the execution time estimates of the task randomly within
    * the specified range.
    */
-  void init_random(uint lb, uint ub) {
-    executable_task::update_exec_estimate(rand() % (ub - lb + 1) + lb);
+  void init_random(int lb, int ub) {
+    executable_task::update_exec_estimate(random() % (ub - lb + 1) + lb);
   }
 
  private:

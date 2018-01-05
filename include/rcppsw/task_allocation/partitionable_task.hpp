@@ -50,7 +50,7 @@ class partitionable_task : public er::client {
   partitionable_task(const std::shared_ptr<er::server>& server,
                      const struct partitionable_task_params* c_params);
 
-  virtual ~partitionable_task(void) = default;
+  ~partitionable_task(void) override = default;
 
   partitionable_task(const partitionable_task& other) = delete;
   partitionable_task& operator=(const partitionable_task& other) = delete;

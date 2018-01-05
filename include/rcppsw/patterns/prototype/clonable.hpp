@@ -43,8 +43,10 @@ NS_START(rcppsw, patterns, prototype);
 template<typename T>
 class clonable {
  public:
-  clonable(void) {}
-  virtual ~clonable(void) {}
+  clonable(void) = default;
+  virtual ~clonable(void) = default;
+  clonable(const clonable&) = default;
+  clonable& operator=(const clonable&) = default;
 
   /**
    * @brief Clone the calling object, transfering ownership of the copy

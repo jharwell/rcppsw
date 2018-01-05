@@ -22,7 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/subtask_selection_probability.hpp"
-#include <assert.h>
+#include <cassert>
 #include <cmath>
 
 /*******************************************************************************
