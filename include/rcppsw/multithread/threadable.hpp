@@ -92,7 +92,7 @@ class threadable {
    * @param ret If non-NULL, will be filled with the return value of the thread
    * as it exits.
    */
-  void exit(void* ret = nullptr) {
+  __noreturn void exit(void* ret = nullptr) {
     m_thread_run = false;
     if (nullptr == ret) {
       int ret2;

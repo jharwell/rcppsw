@@ -41,11 +41,11 @@ partitionable_polled_task::partitionable_polled_task(
     : polled_task(name, c_params, mechanism, parent),
       partitionable_task(server, c_params) {}
 
-void partitionable_polled_task::init_random(uint lb, uint ub) {
-  executable_task::update_exec_estimate(rand() % (ub - lb + 1) + lb);
-  last_partition(rand() % 2 ? partition1(): partition2());
-  partition1()->update_exec_estimate(rand() % (ub - lb + 1) + lb);
-  partition2()->update_exec_estimate(rand() % (ub - lb + 1) + lb);
+void partitionable_polled_task::init_random(int lb, int ub) {
+  executable_task::update_exec_estimate(random() % (ub - lb + 1) + lb);
+  last_partition(random() % 2 ? partition1(): partition2());
+  partition1()->update_exec_estimate(random() % (ub - lb + 1) + lb);
+  partition2()->update_exec_estimate(random() % (ub - lb + 1) + lb);
 } /* init_random() */
 
 NS_END(task_allocation, rcppsw);

@@ -108,7 +108,9 @@ class base_grid2D {
   std::pair<index_range::index, index_range::index> circle_xrange_at_point(
       size_t x, size_t radius) {
     index_range::index lower_x =
-        static_cast<index_range::index>(std::max<int>(0, (int)x - (int)radius));
+        static_cast<index_range::index>(std::max<int>(0,
+                                                      static_cast<int>(x) -
+                                                      static_cast<int>(radius)));
     index_range::index upper_x =
         static_cast<index_range::index>(std::min(x + radius + 1, xsize() - 1));
     if (lower_x > upper_x) {
@@ -131,7 +133,8 @@ class base_grid2D {
   std::pair<index_range::index, index_range::index> circle_yrange_at_point(
       size_t y, size_t radius) {
     index_range::index lower_y = static_cast<index_range::index>(
-        std::max<int>((int)0, (int)y - (int)radius));
+        std::max<int>(static_cast<int>(0),
+                      static_cast<int>(y) - static_cast<int>(radius)));
     index_range::index upper_y =
         static_cast<index_range::index>(std::min(y + radius + 1, ysize() - 1));
     if (lower_y > upper_y) {

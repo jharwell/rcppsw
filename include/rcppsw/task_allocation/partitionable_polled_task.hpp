@@ -51,7 +51,7 @@ class partitionable_polled_task : public polled_task, public partitionable_task 
                             std::unique_ptr<taskable>& mechanism,
                             polled_task* parent = nullptr);
 
-  void init_random(uint lb, uint ub);
+  void init_random(int lb, int ub);
 };
 
 NS_END(task_allocation, rcppsw);

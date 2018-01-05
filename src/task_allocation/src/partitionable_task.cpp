@@ -83,7 +83,7 @@ executable_task* partitionable_task::partition(void) {
          partition_prob);
 
   /* We chose not to employ partitioning on the next task allocation */
-  if (partition_prob <= static_cast<double>(rand()) / RAND_MAX) {
+  if (partition_prob <= static_cast<double>(random()) / RAND_MAX) {
     ER_NOM("Not employing partitioning: Return task '%s'",
            m_partition1->parent()->name().c_str());
     return static_cast<executable_task*>(m_partition1->parent());
@@ -110,7 +110,7 @@ executable_task* partitionable_task::partition(void) {
      * to subtask2, based on time estimates.
      */
     if (m_last_partition == m_partition1 || nullptr == m_last_partition) {
-      if (prob_12 >= static_cast<double>(rand()) / RAND_MAX) {
+      if (prob_12 >= static_cast<double>(random()) / RAND_MAX) {
         ret = m_partition2;
       } else {
         ret = m_partition1;
@@ -121,14 +121,14 @@ executable_task* partitionable_task::partition(void) {
      * to subtask1, based on time estimates
      */
     else if (m_last_partition == m_partition2) {
-      if (prob_21 >= static_cast<double>(rand()) / RAND_MAX) {
+      if (prob_21 >= static_cast<double>(random()) / RAND_MAX) {
         ret = m_partition1;
       } else {
         ret = m_partition2;
       }
     }
   } else if ("random" == m_selection_prob.method()) {
-    if (prob_12 >= static_cast<double>(rand()) / RAND_MAX) {
+    if (prob_12 >= static_cast<double>(random()) / RAND_MAX) {
       ret = m_partition1;
     } else {
       ret = m_partition2;

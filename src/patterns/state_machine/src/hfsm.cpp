@@ -90,8 +90,8 @@ void hfsm::inject_event(int signal, int type) {
 
 void hfsm::change_parent(uint8_t state,
                          rcppsw::patterns::state_machine::state* new_parent) {
-  auto* row = const_cast<state_map_row*>(state_map(state));
-  auto* row_ex = const_cast<state_map_ex_row*>(state_map_ex(state));
+  auto* row = state_map(state);
+  auto* row_ex = state_map_ex(state);
 
   ER_ASSERT(!(nullptr == row && nullptr == row_ex),
             "FATAL: Both state maps are NULL!");
