@@ -49,13 +49,10 @@ Before starting, you will need a recent version of the following programs:
 1. After cloning this repo, you will also need to clone the following repos in
    order to be able to build/use RCPPSW:
 
-  - https://github.com/jharwell/rcsw (Reusable C software)
   - https://github.com/jharwell/devel (dotfiles, project config, templates)
 
   Before you can build anything, you will need to define some environment
   variables:
-
-  - `rcsw` - Set to the path to wherever you cloned the `rcsw` repo.
 
   - `develroot` - Set to the path to wherever you cloned the `devel` repo.
 
@@ -63,8 +60,7 @@ Before starting, you will need a recent version of the following programs:
 
    `<rcppsw root>/CMakeLists.txt` -> `<develroot>/cmake/project.cmake`
 
-3. Verify you can build `rcsw`, `rcppsw` (in that order), by
-   doing:
+3. Verify you can build `rcppsw`, by doing:
 
         cd /path/to/repo
         mkdir build && cd build
@@ -86,6 +82,12 @@ following programs:
 - clang-check3.8 (syntax checking/static analysis )
 - clang-format-4.0 (automatic code formatting)
 - clang-tidy-4.0 (static analysis/automated checking of naming conventions)
+
+You will also want to clone `rcsw` somewhere and link it into `ext/rcsw`
+rather than having cmake clone it, so that if you make changes to it they will
+be reflected in the code you are building.
+
+  - https://github.com/jharwell/rcsw (Reusable C software)
 
 Adjust a few more symlinks:
 
