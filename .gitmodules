@@ -1,3 +1,6 @@
+[submodule "cmake"]
+	path = cmake
+	url = git@github.com:jharwell/cmake-config
 [submodule "ext/rcsw"]
 	path = ext/rcsw
 	url = git@github.com:jharwell/rcsw
