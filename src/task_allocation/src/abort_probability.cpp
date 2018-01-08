@@ -35,8 +35,9 @@ NS_START(rcppsw, task_allocation);
 double abort_probability::calc(double exec_time,
                                const time_estimate& whole_task) {
   double omega_ta;
+
   if (!(whole_task.last_result() > 0)) {
-    return set_result(0.001);
+    return set_result(kNO_EST_ABORT_PROB);
   }
 
   if (exec_time / whole_task.last_result() <= m_offset) {

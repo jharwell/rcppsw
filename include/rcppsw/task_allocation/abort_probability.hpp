@@ -42,17 +42,18 @@ NS_START(rcppsw, task_allocation);
  * @brief Calculates the probability that a robot will abort the task it is
  * currently working on using the negative exponential distribution.
  *
- * Reactivity and offset are assumed to both be < 0.
+ * Reactivity and offset are assumed to both be > 0.
  *
  * Depends on:
  *
  * - The reactivity parameter: How sensitive should robots be to abrupt changes
  *   in task estimates/execution times?
+ *
  * - The offset parameter: How much the current_exec/prev_estimate ratio will be
  *   allowed to grow before causing the probability to grow exponentially.
  *
- * - Time estimates for the task.
- * - How long the robot has spent executing the current task.
+ * - A time estimate for the task (can execution time thus far, interface time
+ *   thus far, etc.).
  */
 class abort_probability : public rcppsw::math::expression<double> {
  public:
@@ -60,6 +61,12 @@ class abort_probability : public rcppsw::math::expression<double> {
       : m_reactivity(reactivity), m_offset(offset) {}
 
   double calc(double exec_time, const time_estimate& whole_task);
+
+  /*
+   * @brief If we don't have any time estimate for the task, then we just set a
+   * small static abort probability.
+   */
+  static double constexpr kNO_EST_ABORT_PROB = 0.001;
 
  private:
   double m_reactivity;
