@@ -44,34 +44,25 @@ Before starting, you will need a recent version of the following programs:
 
 - cmake
 - make
-- g++
+- gcc
+- g++ (A version that supports C++11 is required)
 
-1. After cloning this repo, you will also need to clone the following repos in
-   order to be able to build/use RCPPSW:
+After cloning this repo, you will need to:
 
-  - https://github.com/jharwell/devel (dotfiles, project config, templates)
+1. Pull in the cmake config:
 
-  Before you can build anything, you will need to define some environment
-  variables:
+        git submodule update --init --recursive
 
-  - `develroot` - Set to the path to wherever you cloned the `devel` repo.
+2. Clone `rcsw` https://github.com/jharwell/rcsw (Reusable C software) somewhere
+   and link it into `ext/rcsw`.
 
-2. Adjust symlinks in the cloned rcppsw repo to point into the devel repo:
+Then you can build via:
 
-   `<rcppsw root>/CMakeLists.txt` -> `<develroot>/cmake/project.cmake`
-
-3. Verify you can build `rcppsw`, by doing:
-
-        cd /path/to/repo
-        mkdir build && cd build
-        cmake ..
-        make
+    mkdir build && cd build
+    cmake ..
+    make
 
 ## Development Guide
-
-In addition to reading this README, you should also build the documentation for
-the project and look through it to try to get a sense of how things are
-organized via `make documentation`.
 
 ### Development Setup
 
@@ -83,17 +74,34 @@ following programs:
 - clang-format-4.0 (automatic code formatting)
 - clang-tidy-4.0 (static analysis/automated checking of naming conventions)
 
-You will also want to clone `rcsw` somewhere and link it into `ext/rcsw`
-rather than having cmake clone it, so that if you make changes to it they will
-be reflected in the code you are building.
+You will also need to:
 
-  - https://github.com/jharwell/rcsw (Reusable C software)
-
-Adjust a few more symlinks:
+1. clone https://github.com/jharwell/devel somewhere, and adjust a few more
+   symlinks:
 
    `<rcppsw root>/.clang-format` -> `<develroot>/templates/.clang-format`
 
    `<rcppsw root>/.clang-tidy` -> `<develroot>/templates/.clang-tidy`
+
+Some additional cmake config options that may be of interest:
+
+- SHARED_LIBS - Build shared instead of static libraries [Default=YES].
+
+- WITH_CHECKS - Build in run-time checking of code [Default=NO].
+
+- BUILD_TESTS - Build tests. [Default=NO].
+
+- WITH_OPENMP - Enable OpenMP code [Default=YES].
+
+- WITH_MPI - Enable MPI code[Defaut=NO].
+
+- WITH_FPC - FPC_RETURN or FPC_ABORT [Default=`FPC_ABORT`]. This controls the
+             behavior a Function PreCondition (FPC) fails: Either return a
+             specified error or halt the program.
+
+The cmake config supports the following compilers: `g++, clang++, icpc`; any one
+can be selected as the `CMAKE_CXX_COMPILER`, and the correct compile options
+will be populated.
 
 ### Development C++ Style Guide
 
@@ -264,7 +272,8 @@ should be named/link to github issues by browsing the repo.
 2. Mark said task as `Status: In Progress` so no one else starts working on it
    too, and assign it to yourself if it is not already assigned to you.
 
-3. Branch off of the devel branch with a branch with the same name as the issue.
+3. Branch off of the `devel` branch with a branch with the *SAME* name as the
+   issue.
 
 4. Work on the issue/task, committing as needed. You should push your changes
    regularly, so people can see that the issue is being actively worked on. Your
@@ -300,16 +309,23 @@ should be named/link to github issues by browsing the repo.
         make cppcheck-all
 
    Pay special attention to files that you have changed. Fix anything the
-   statica analyzer flags.
+   static analyzers flag.
 
-6. Run the clang formatter on the code to fix any formatting things you may have
+6. Run the style checker on the code:
+
+        make tidy-check-all
+
+   Not everything flagged should/can be fixed, so only pay attention to things
+   that it flags in code YOU have changed. If you aren't sure, ask someone.
+
+7. Run the clang formatter on the code to fix any formatting things you may have
    inadverdently missed.
 
         make format-all
 
-7. Change status to `Status: Needs Review` and open a pull request.
+8. Change status to `Status: Needs Review` and open a pull request.
 
-8. Once the task has been reviewed and given the green light, merge it into
+9. Once the task has been reviewed and given the green light, merge it into
    devel, and marked the issue as `Status: Completed`. Don't close the issue.
 
-9. Repeat as necessary.
+10. Repeat as necessary.
