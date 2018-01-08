@@ -2,10 +2,6 @@
 # External Projects                                                            #
 ################################################################################
 # RCSW
-if (NOT EXISTS ext/rcsw)
-  execute_process(COMMAND git submodule update --init ext/rcsw
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-endif()
 add_subdirectory(ext/rcsw)
 include_directories(${rcsw_INCLUDE_DIRS})
 
