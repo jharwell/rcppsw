@@ -53,7 +53,7 @@ After cloning this repo, you will need to:
 
         git submodule update --init --recursive
 
-2. Clone `rcsw` https://github.com/jharwell/rcsw (Reusable C software) somewhere
+2. Clone `rcsw` https://github.com/swarm-robotics/rcsw (Reusable C software) somewhere
    and link it into `ext/rcsw`.
 
 Then you can build via:
@@ -331,7 +331,7 @@ should be named/link to github issues by browsing the repo.
 10. Repeat as necessary.
 
 # License
-This project is licensed under GPL 2.0. See [LICENSE](LICENSE.md).
+This project is licensed under GPL 2.0. See [LICENSE](LICENSE).
 
 # Donate
 If you've found this project helpful, please consider donating somewhere between
