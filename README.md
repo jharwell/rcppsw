@@ -332,3 +332,9 @@ should be named/link to github issues by browsing the repo.
 
 # License
 This project is licensed under GPL 2.0. See [LICENSE](LICENSE.md).
+
+# Donate
+If you've found this project helpful, please consider donating somewhere between
+a cup of coffe and a nice meal:
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/jharwell1406)
