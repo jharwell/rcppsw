@@ -40,7 +40,7 @@ executive::executive(const std::shared_ptr<rcppsw::er::server>& server,
   client::insmod("task_executive",
                  rcppsw::er::er_lvl::DIAG,
                  rcppsw::er::er_lvl::NOM);
-      }
+}
 
 executive::~executive(void) = default;
 

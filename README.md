@@ -95,7 +95,7 @@ Some additional cmake config options that may be of interest:
 
 - WITH_MPI - Enable MPI code[Defaut=NO].
 
-- WITH_FPC - FPC_RETURN or FPC_ABORT [Default=`FPC_ABORT`]. This controls the
+- WITH\_FPC - FPC\_RETURN or FPC\_ABORT [Default=`FPC_ABORT`]. This controls the
              behavior a Function PreCondition (FPC) fails: Either return a
              specified error or halt the program.
 
@@ -305,7 +305,7 @@ should be named/link to github issues by browsing the repo.
 
 5. Run static analysis on the code:
 
-        make clang-check-all
+        make static-check-all
         make cppcheck-all
 
    Pay special attention to files that you have changed. Fix anything the
@@ -329,3 +329,6 @@ should be named/link to github issues by browsing the repo.
    devel, and marked the issue as `Status: Completed`. Don't close the issue.
 
 10. Repeat as necessary.
+
+# License
+This project is licensed under GPL 2.0. See [LICENSE](LICENSE.md).
