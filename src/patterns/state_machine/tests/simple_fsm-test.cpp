@@ -52,20 +52,12 @@ namespace fsm = rcppsw::patterns::state_machine;
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-class  test_fsm : public fsm::simple_fsm {
+class test_fsm : public fsm::simple_fsm {
  public:
-  enum states {
-    STATE1,
-    STATE2,
-    STATE3,
-    STATE4,
-    STATE5,
-    STATE6,
-    ST_MAX_STATES
-  };
+  enum states { STATE1, STATE2, STATE3, STATE4, STATE5, STATE6, ST_MAX_STATES };
 
-  explicit test_fsm(std::shared_ptr<er_server> server) :
-      simple_fsm(server, ST_MAX_STATES) {}
+  explicit test_fsm(std::shared_ptr<er_server> server)
+      : simple_fsm(server, ST_MAX_STATES) {}
 
   FSM_STATE_DECLARE(test_fsm, s1, fsm::no_event);
   FSM_STATE_DECLARE(test_fsm, s2, fsm::no_event);
@@ -74,37 +66,31 @@ class  test_fsm : public fsm::simple_fsm {
   FSM_STATE_DECLARE(test_fsm, s5, fsm::no_event);
   FSM_STATE_DECLARE(test_fsm, s6, fsm::no_event);
   void event1(void) {
-    FSM_DEFINE_TRANSITION_MAP(kMAP) {
-      STATE2,
-          STATE3,
-          STATE1,
-          fsm::event::EVENT_FATAL,
-          fsm::event::EVENT_FATAL,
-          fsm::event::EVENT_FATAL
-          };
+    FSM_DEFINE_TRANSITION_MAP(kMAP){STATE2,
+                                    STATE3,
+                                    STATE1,
+                                    fsm::event::EVENT_FATAL,
+                                    fsm::event::EVENT_FATAL,
+                                    fsm::event::EVENT_FATAL};
     external_event(kMAP[current_state()], nullptr);
   }
   void event2(void) {
-    FSM_DEFINE_TRANSITION_MAP(kMAP) {
-          fsm::event::EVENT_IGNORED,
-          STATE4,
-          fsm::event::EVENT_FATAL,
-          STATE4,
-          STATE4,
-          STATE5
-          };
+    FSM_DEFINE_TRANSITION_MAP(kMAP){fsm::event::EVENT_IGNORED,
+                                    STATE4,
+                                    fsm::event::EVENT_FATAL,
+                                    STATE4,
+                                    STATE4,
+                                    STATE5};
     external_event(kMAP[current_state()], nullptr);
   }
 
   FSM_DEFINE_STATE_MAP_ACCESSOR(state_map) {
-    FSM_DEFINE_STATE_MAP(state_map, kMAP) {
-      FSM_STATE_MAP_ENTRY(&s1),
-          FSM_STATE_MAP_ENTRY(&s2),
-          FSM_STATE_MAP_ENTRY(&s3),
-          FSM_STATE_MAP_ENTRY(&s4),
-          FSM_STATE_MAP_ENTRY(&s5),
-          FSM_STATE_MAP_ENTRY(&s6)
-          };
+    FSM_DEFINE_STATE_MAP(state_map, kMAP){FSM_STATE_MAP_ENTRY(&s1),
+                                          FSM_STATE_MAP_ENTRY(&s2),
+                                          FSM_STATE_MAP_ENTRY(&s3),
+                                          FSM_STATE_MAP_ENTRY(&s4),
+                                          FSM_STATE_MAP_ENTRY(&s5),
+                                          FSM_STATE_MAP_ENTRY(&s6)};
     return &kMAP[0];
   }
 };

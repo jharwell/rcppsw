@@ -36,20 +36,12 @@ namespace fsm = rcppsw::patterns::state_machine;
 /*******************************************************************************
  * Test Classes
  ******************************************************************************/
-class  test_fsm : public fsm::hfsm {
+class test_fsm : public fsm::hfsm {
  public:
-  enum states {
-    STATE1,
-    STATE2,
-    STATE3,
-    STATE4,
-    STATE5,
-    STATE6,
-    ST_MAX_STATES
-  };
+  enum states { STATE1, STATE2, STATE3, STATE4, STATE5, STATE6, ST_MAX_STATES };
 
-  explicit test_fsm(std::shared_ptr<er_server> server) :
-      hfsm(server), m_initial_state(0) {}
+  explicit test_fsm(std::shared_ptr<er_server> server)
+      : hfsm(server), m_initial_state(0) {}
 
   HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s1, fsm::no_event_data);
   HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s2, fsm::no_event_data);
@@ -58,37 +50,33 @@ class  test_fsm : public fsm::hfsm {
   HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s5, fsm::no_event_data);
   HFSM_STATE_DECLARE(test_fsm, hfsm, top_state, s6, fsm::no_event_data);
   void event1(void) {
-    FSM_DEFINE_TRANSITION_MAP(kMAP) {
-      STATE2,
-          STATE3,
-          STATE1,
-          fsm::event_signal::FATAL,
-          fsm::event_signal::FATAL,
-          fsm::event_signal::FATAL
-          };
-    external_event(kMAP[current_state()], rcppsw::make_unique<fsm::event_data>(1));
+    FSM_DEFINE_TRANSITION_MAP(kMAP){STATE2,
+                                    STATE3,
+                                    STATE1,
+                                    fsm::event_signal::FATAL,
+                                    fsm::event_signal::FATAL,
+                                    fsm::event_signal::FATAL};
+    external_event(kMAP[current_state()],
+                   rcppsw::make_unique<fsm::event_data>(1));
   }
   void event2(void) {
-    FSM_DEFINE_TRANSITION_MAP(kMAP) {
-          fsm::event_signal::IGNORED,
-              STATE4,
-              fsm::event_signal::FATAL,
-          STATE4,
-          STATE4,
-          STATE5
-          };
-    external_event(kMAP[current_state()], rcppsw::make_unique<fsm::event_data>(2));
+    FSM_DEFINE_TRANSITION_MAP(kMAP){fsm::event_signal::IGNORED,
+                                    STATE4,
+                                    fsm::event_signal::FATAL,
+                                    STATE4,
+                                    STATE4,
+                                    STATE5};
+    external_event(kMAP[current_state()],
+                   rcppsw::make_unique<fsm::event_data>(2));
   }
 
   FSM_DEFINE_STATE_MAP_ACCESSOR(state_map) {
-    FSM_DEFINE_STATE_MAP(state_map, kMAP) {
-      FSM_STATE_MAP_ENTRY(&s1),
-          FSM_STATE_MAP_ENTRY(&s2),
-          FSM_STATE_MAP_ENTRY(&s3),
-          FSM_STATE_MAP_ENTRY(&s4),
-          FSM_STATE_MAP_ENTRY(&s5),
-          FSM_STATE_MAP_ENTRY(&s6)
-          };
+    FSM_DEFINE_STATE_MAP(state_map, kMAP){FSM_STATE_MAP_ENTRY(&s1),
+                                          FSM_STATE_MAP_ENTRY(&s2),
+                                          FSM_STATE_MAP_ENTRY(&s3),
+                                          FSM_STATE_MAP_ENTRY(&s4),
+                                          FSM_STATE_MAP_ENTRY(&s5),
+                                          FSM_STATE_MAP_ENTRY(&s6)};
     return &kMAP[0];
   }
   uint8_t current_state(void) const { return m_current_state; }

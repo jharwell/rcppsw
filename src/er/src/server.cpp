@@ -35,18 +35,20 @@ NS_START(rcppsw, er);
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#define REPORT_INTERNAL(lvl, msg, ...)                     \
-  {                                                        \
-    char _str[1000];                                       \
-    snprintf(static_cast<char*>(_str),                     \
-             sizeof(_str),                                 \
-             "%s:%d:%s: " msg "\n",                        \
-             __FILE__,                                     \
-             __LINE__,                                     \
-             reinterpret_cast<const char*>(__FUNCTION__),  \
-             ##__VA_ARGS__);                               \
-    server::msg_int _msg(m_er_id, lvl, std::string(reinterpret_cast<char*>(_str))); \
-    msg_report(_msg);                                      \
+#define REPORT_INTERNAL(lvl, msg, ...)                                \
+  {                                                                   \
+    char _str[1000];                                                  \
+    snprintf(static_cast<char*>(_str),                                \
+             sizeof(_str),                                            \
+             "%s:%d:%s: " msg "\n",                                   \
+             __FILE__,                                                \
+             __LINE__,                                                \
+             reinterpret_cast<const char*>(__FUNCTION__),             \
+             ##__VA_ARGS__);                                          \
+    server::msg_int _msg(m_er_id,                                     \
+                         lvl,                                         \
+                         std::string(reinterpret_cast<char*>(_str))); \
+    msg_report(_msg);                                                 \
   }
 
 /*******************************************************************************

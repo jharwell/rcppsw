@@ -11,15 +11,15 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "include/max_subarray_finder.hpp"
 #include <vector>
+#include "include/max_subarray_finder.hpp"
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
 /*******************************************************************************
  * Test Cases
  ******************************************************************************/
-TEST_CASE("Maximum Subarray Finder","[algorithm]") {
+TEST_CASE("Maximum Subarray Finder", "[algorithm]") {
   std::vector<int> data = {0, 1, 2, 3, 4, 5, 6, 0, 0, 0};
   rcppsw::max_subarray_finder<int> finder(data);
   std::vector<int> res;

@@ -90,7 +90,7 @@ status_t base_cli::parse(int argc, char** argv) {
 
 void base_cli::print(void) {
   std::cout << m_prog_name << " invoked with: ";
-  for (auto&it : m_vm) {
+  for (auto& it : m_vm) {
     std::cout << it.first;
     if ((static_cast<boost::any>(it.second.value())).empty()) {
       std::cout << "(empty)";

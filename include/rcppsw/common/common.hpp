@@ -79,6 +79,10 @@ NS_START(rcppsw);
  * Templates
  ******************************************************************************/
 #if __cplusplus == 201402L
+/**
+ * @typedef Implementation of std::make_unique which exists in C++14, but not
+ * C++11, so if compiling for that standard I have to roll my own.
+ */
 typedef std::make_unique make_unique;
 
 #elif __cplusplus == 201103L
