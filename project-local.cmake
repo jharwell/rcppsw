@@ -1,6 +1,9 @@
 ################################################################################
 # External Projects                                                            #
 ################################################################################
+set(${target}_CHECK_LANGUAGE "CXX")
+set(${target}_HAS_RECURSIVE_DIRS YES)
+
 # RCSW
 add_subdirectory(ext/rcsw)
 include_directories(${rcsw_INCLUDE_DIRS})
@@ -42,7 +45,6 @@ endforeach()
 ################################################################################
 # Libraries                                                                    #
 ################################################################################
-set(${target}_HAS_RECURSIVE_DIRS YES)
 set(${target}_LIBS
   rcsw
   ${Boost_LIBRARIES}

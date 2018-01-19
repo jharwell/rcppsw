@@ -31,9 +31,9 @@
 #include <sys/types.h>
 #include <string>
 #include <vector>
-#include "rcsw/multiprocess/procm.h"
-#include "rcsw/common/dbg.h"
 #include "rcppsw/common/common.hpp"
+#include "rcsw/common/dbg.h"
+#include "rcsw/multiprocess/procm.h"
 
 /*******************************************************************************
  * Namespaces
