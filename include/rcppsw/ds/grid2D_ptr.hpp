@@ -47,8 +47,8 @@ class grid2D_ptr : public base_grid2D<T> {
   grid2D_ptr(double resolution, size_t x_max, size_t y_max, Args&&... args)
       : base_grid2D<T>(resolution, x_max, y_max),
         m_cells(
-            boost::extents[static_cast<index_range::index>(base_grid2D<T>::xsize())]
-            [static_cast<index_range::index>(base_grid2D<T>::ysize())]) {
+            boost::extents[static_cast<index_range::index>(base_grid2D<T>::xdsize())]
+            [static_cast<index_range::index>(base_grid2D<T>::ydsize())]) {
     for (auto i = m_cells.origin();
          i < m_cells.origin() + m_cells.num_elements();
          ++i) {
