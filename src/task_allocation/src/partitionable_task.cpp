@@ -50,8 +50,14 @@ partitionable_task::partitionable_task(
                    rcppsw::er::er_lvl::DIAG,
                    rcppsw::er::er_lvl::NOM);
   }
-  if ("brutschy2014" == c_params->subtask_selection_method) {
-    m_selection_prob.init_brutschy2014(1.0, 2, 1);
+  /*
+   * Even though Brutschy2014 using reactivity=1.0, offset=8.0, gamma=0.01,
+   * those parameter values did not give good results, but the ones I use below
+   * seem to do so, at least for what I'm doing.
+   */
+  if ("brutschy2014" == c_params->subtask_selection_method ||
+      "harwell2018" == c_params->subtask_selection_method) {
+    m_selection_prob.init_sigmoid(1.0, 2.0, 1.0);
   }
 }
 
@@ -91,10 +97,18 @@ executable_task* partitionable_task::partition(void) {
   executable_task* ret = nullptr;
 
   /* We have chosen to employ partitioning */
-  double prob_12 = m_selection_prob.calc(&m_partition1->exec_estimate(),
-                                         &m_partition2->exec_estimate());
-  double prob_21 = m_selection_prob.calc(&m_partition2->exec_estimate(),
-                                         &m_partition1->exec_estimate());
+  double prob_12, prob_21;
+  if (subtask_selection_probability::kHarwell2018 == m_selection_prob.method()) {
+    prob_12 = m_selection_prob.calc(&m_partition1->exec_estimate(),
+                                    &m_partition2->exec_estimate());
+    prob_21 = m_selection_prob.calc(&m_partition2->exec_estimate(),
+                                    &m_partition1->exec_estimate());
+  } else {
+    prob_12 = m_selection_prob.calc(&m_partition1->interface_estimate(),
+                                    &m_partition2->interface_estimate());
+    prob_21 = m_selection_prob.calc(&m_partition2->interface_estimate(),
+                                    &m_partition1->interface_estimate());
+  }
 
   ER_NOM(
       "Task '%s': selection_method=%s subtask1->subtask2 "
@@ -104,7 +118,9 @@ executable_task* partitionable_task::partition(void) {
       prob_12,
       prob_21);
 
-  if ("brutschy2014" == m_selection_prob.method()) {
+  if (subtask_selection_probability::kHarwell2018 == m_selection_prob.method() ||
+      subtask_selection_probability::kBrutschy2014 == m_selection_prob.method()) {
+
     /*
      * If we last executed subtask1, we calculate the probability of switching
      * to subtask2, based on time estimates.
@@ -118,7 +134,7 @@ executable_task* partitionable_task::partition(void) {
     }
     /*
      * If we last executed subtask2, we calculate the probability of switching
-     * to subtask1, based on time estimates
+     * to subtask1, based on time estimates.
      */
     else if (m_last_partition == m_partition2) {
       if (prob_21 >= static_cast<double>(random()) / RAND_MAX) {
