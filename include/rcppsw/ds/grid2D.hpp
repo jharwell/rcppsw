@@ -50,7 +50,7 @@ class grid2D : public base_grid2D<T> {
   grid2D(double resolution, size_t x_max, size_t y_max)
       : base_grid2D<T>(resolution, x_max, y_max),
         m_cells(
-            boost::extents[base_grid2D<T>::xsize()][base_grid2D<T>::ysize()]) {}
+            boost::extents[base_grid2D<T>::xdsize()][base_grid2D<T>::ydsize()]) {}
 
   /**
    * @brief Get a subcircle gridview from a grid. The subcircle extent is

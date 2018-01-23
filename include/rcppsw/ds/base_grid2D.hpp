@@ -82,15 +82,18 @@ class base_grid2D {
    * @brief Get the size of the X dimension of the discretized subgrid, at
    * whatever the resolution specified during object construction was.
    */
-  size_t xsize(void) const {
+  size_t xdsize(void) const {
     return static_cast<size_t>(std::ceil(m_x_max / m_resolution));
   }
+  size_t xrsize(void) const { return m_x_max; }
+
+  size_t yrsize(void) const { return m_y_max; }
 
   /**
    * @brief Get the size of the Y dimension of the discretized subgrid, at
    * whatever the resolution specified during object construction was.
    */
-  size_t ysize(void) const {
+  size_t ydsize(void) const {
     return static_cast<size_t>(std::ceil(m_y_max / m_resolution));
   }
 
@@ -112,11 +115,11 @@ class base_grid2D {
                                                       static_cast<int>(x) -
                                                       static_cast<int>(radius)));
     index_range::index upper_x =
-        static_cast<index_range::index>(std::min(x + radius + 1, xsize() - 1));
+        static_cast<index_range::index>(std::min(x + radius + 1, xdsize() - 1));
     if (lower_x > upper_x) {
       lower_x = upper_x - 1;
     }
-    return std::pair<index_range::index, index_range::index>(lower_x, upper_x);
+    return std::make_pair(lower_x, upper_x);
   }
 
   /**
@@ -136,11 +139,11 @@ class base_grid2D {
         std::max<int>(static_cast<int>(0),
                       static_cast<int>(y) - static_cast<int>(radius)));
     index_range::index upper_y =
-        static_cast<index_range::index>(std::min(y + radius + 1, ysize() - 1));
+        static_cast<index_range::index>(std::min(y + radius + 1, ydsize() - 1));
     if (lower_y > upper_y) {
       lower_y = upper_y - 1;
     }
-    return std::pair<index_range::index, index_range::index>(lower_y, upper_y);
+    return std::make_pair(lower_y, upper_y);
   }
 
  private:

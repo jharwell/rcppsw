@@ -40,6 +40,7 @@ double partition_probability::calc(const time_estimate& task,
     return calc_pini2011(task, subtask1, subtask2);
   }
   assert(false);
+  return 0.0;
 } /* calc() */
 
 double partition_probability::calc_pini2011(const time_estimate& task,
