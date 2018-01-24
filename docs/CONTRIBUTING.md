@@ -5,10 +5,12 @@
 If you are going to be doing any development in RCPPSW, you will also need the
 following programs, as running them is part of the development workflow:
 
-- cppcheck (static analysis)
-- clang-check3.8 (syntax checking/static analysis )
-- clang-format-4.0 (automatic code formatting)
-- clang-tidy-4.0 (static analysis/automated checking of naming conventions)
+- cppcheck (static analysis).
+- clang-check-3.8 (syntax checking/static analysis). 3.8 is the minimum; 4.0
+  recommended (better warnings).
+- clang-format-4.0 (automatic code formatting).
+- clang-tidy-4.0 (static analysis/automated checking of naming conventions). 3.8
+  is the minimum; 4.0 is recommended (better warnings).
 
 You will also need to:
 
@@ -28,7 +30,7 @@ Some additional cmake config options that may be of interest:
 
 - BUILD_TESTS - Build tests. [Default=NO].
 
-- WITH_OPENMP - Enable OpenMP code [Default=YES].
+- WITH_OPENMP - Enable OpenMP code [Default=NO].
 
 - WITH_MPI - Enable MPI code[Defaut=NO].
 
@@ -144,14 +146,13 @@ things somewhat obfuscatingly.
 
   - :art: `:art:` when improving the format/structure of the code
   - :racehorse: `:racehorse:` when improving performance
-  - :non-potable_water: `:non-potable_water:` when plugging memory leaks
-  - :memo: `:memo:` when writing docs
   - :penguin: `:penguin:` when fixing something on Linux
   - :apple: `:apple:` when fixing something on macOS
-  - :checkered_flag: `:checkered_flag:` when fixing something on Windows
+
+  - :non-potable_water: `:non-potable_water:` when plugging memory leaks
+  - :memo: `:memo:` when writing docs
   - :bug: `:bug:` when fixing a bug
   - :fire: `:fire:` when removing code or files
-  - :green_heart: `:green_heart:` when fixing the CI build
   - :white_check_mark: `:white_check_mark:` when adding tests
   - :lock: `:lock:` when dealing with security
   - :arrow_up: `:arrow_up:` when upgrading dependencies
