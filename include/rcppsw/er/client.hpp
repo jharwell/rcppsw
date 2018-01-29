@@ -157,11 +157,15 @@
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
+#ifndef NDEBUG
 #define ER_ASSERT(cond, msg, ...)                           \
   if (!(cond)) {                                            \
     ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__); \
     assert(cond);                                           \
   }
+#else
+#define ER_ASSERT(cond, msg, ...)
+#endif
 
 /**
  * @def ER_FATAL_SENTINEL(msg,...)
@@ -173,11 +177,15 @@
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
+#ifndef NDEBUG
 #define ER_FATAL_SENTINEL(msg, ...)                             \
   {                                                             \
     ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__);     \
     assert(false);                                                  \
   }
+#else
+#define ER_FATAL_SENTINEL(msg, ...)
+#endif
 
 /*******************************************************************************
  * Namespaces

@@ -47,6 +47,10 @@ Before starting, you will need a recent version of the following programs:
 - gcc
 - g++ (A version that supports C++11 is required)
 
+You will also need recent versions of the following libraries:
+
+- boost (1.58 is known to work; older versions may also work)
+
 After cloning this repo, you will need to:
 
 1. Pull in the cmake config:
