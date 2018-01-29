@@ -11,6 +11,7 @@ following programs, as running them is part of the development workflow:
 - clang-format-4.0 (automatic code formatting).
 - clang-tidy-4.0 (static analysis/automated checking of naming conventions). 3.8
   is the minimum; 4.0 is recommended (better warnings).
+- gcov (for viewing test/code coverage)
 
 You will also need to:
 
@@ -309,19 +310,16 @@ should be named/link to github issues by browsing the repo.
 
         make format-all
 
-8. Change status to `Status: Needs Review` and open a pull request (if working
+9. If you are creating a new class, and unit tests can be created for that
+   class, then create unit tests for it under the corresponding `tests`
+   directory.
+
+10. Change status to `Status: Needs Review` and open a pull request (if working
    from a forked repo), or mention the project's main author in the correspond
    issue to bring it to their attention (if working from a cloned repo). In the
-   latter case, they will review the commits.
+   latter case, they will review the commits. If you created unit tests, attach
+   a log/run showing they all pass, as well as the code coverage report from
+   gcov.
 
-9. Once the task has been reviewed and given the green light, merge it into
-   devel, and marked the issue as `Status: Completed`, and close the issue.
-
-# License
-This project is licensed under GPL 2.0. See [LICENSE](LICENSE.md).
-
-# Donate
-If you've found this project helpful, please consider donating somewhere between
-a cup of coffe and a nice meal:
-
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/jharwell1406)
+11. Once the task has been reviewed and given the green light, merge it into
+    devel, and marked the issue as `Status: Completed`, and close the issue.
