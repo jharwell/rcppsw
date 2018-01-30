@@ -11,7 +11,7 @@ following programs, as running them is part of the development workflow:
 - clang-format-4.0 (automatic code formatting).
 - clang-tidy-4.0 (static analysis/automated checking of naming conventions). 3.8
   is the minimum; 4.0 is recommended (better warnings).
-- gcov (for viewing test/code coverage)
+- gcov (for viewing code coverage).
 
 You will also need to:
 
@@ -25,19 +25,22 @@ You will also need to:
 
 Some additional cmake config options that may be of interest:
 
-- SHARED_LIBS - Build shared instead of static libraries [Default=YES].
+- `BUILD_SHARED_LIBS` - Build shared instead of static libraries [Default=YES].
 
-- WITH_CHECKS - Build in run-time checking of code [Default=NO].
+- `WITH_CHECKS` - Build in run-time checking of code [Default=NO].
 
-- BUILD_TESTS - Build tests. [Default=NO].
+- `BUILD_TESTS` - Build tests. [Default=NO].
 
-- WITH_OPENMP - Enable OpenMP code [Default=NO].
+- `WITH_OPENMP` - Enable OpenMP code [Default=NO].
 
-- WITH_MPI - Enable MPI code[Defaut=NO].
+- `WITH_MPI` - Enable MPI code [Defaut=NO].
 
-- WITH\_FPC - FPC\_RETURN or FPC\_ABORT [Default=`FPC_ABORT`]. This controls the
+- `WITH_FPC` - `FPC_RETURN` or `FPC_ABORT` [Default=`FPC_ABORT`]. This controls the
              behavior a Function PreCondition (FPC) fails: Either return a
              specified error or halt the program.
+
+- `ER_NDEBUG` - Disable printing of assertion failures when `NDEBUG` is defined
+  (as for optimized builds). [Default=1].
 
 The cmake config supports the following compilers: `g++, clang++, icpc`; any one
 can be selected as the `CMAKE_CXX_COMPILER`, and the correct compile options
@@ -65,7 +68,6 @@ will be populated.
   - `patch` corresponds to fixing bugs/documentation updates/etc.
 
   You should never modify this file directly.
-
 
 ## Development Guides
 ### C++ Style Guide
@@ -229,7 +231,14 @@ Types:
 ### Testing
 
 All submitted *new* classes should have associated unit tests, one for each
-major function that the class provides, at a minimum.
+major public function that the class provides. For any *existing* classes that
+have *new* public functions added, a new unit test should also be added. It is
+not possible to create unit tests for all classes, as some can only be tested in
+an integrated manner, but there many that can and should be tested in a stand
+alone fashion.
+
+As part of each issue addressal, a `gcov`/`gcovr` report showing full
+code coverage in the new class/new functions should be attached.
 
 ## Working from a clone, rather than a forked repo
 If you fork the repo rather than cloning it, you can use whatever style of
@@ -286,7 +295,11 @@ should be named/link to github issues by browsing the repo.
 
    Where TYPE is one of the types listed above.
 
-5. Run static analysis on the code:
+5. If you create any new functions/classes that can be unit tested, then define
+   appropriate unit tests for them, and prepare a report documenting code
+   coverage, as described above.
+
+6. Run static analysis on the code:
 
         make static-check-all
 
@@ -298,28 +311,24 @@ should be named/link to github issues by browsing the repo.
 
         make cppcheck-all
 
-6. Run the style checker on the code:
+7. Run the style checker on the code:
 
         make tidy-check-all
 
    Not everything flagged should/can be fixed, so only pay attention to things
    that it flags in code YOU have changed. If you aren't sure, ask someone.
 
-7. Run the clang formatter on the code to fix any formatting things you may have
+8. Run the clang formatter on the code to fix any formatting things you may have
    inadverdently missed.
 
         make format-all
 
-9. If you are creating a new class, and unit tests can be created for that
-   class, then create unit tests for it under the corresponding `tests`
-   directory.
-
-10. Change status to `Status: Needs Review` and open a pull request (if working
+9. Change status to `Status: Needs Review` and open a pull request (if working
    from a forked repo), or mention the project's main author in the correspond
    issue to bring it to their attention (if working from a cloned repo). In the
    latter case, they will review the commits. If you created unit tests, attach
    a log/run showing they all pass, as well as the code coverage report from
    gcov.
 
-11. Once the task has been reviewed and given the green light, merge it into
+10. Once the task has been reviewed and given the green light, merge it into
     devel, and marked the issue as `Status: Completed`, and close the issue.

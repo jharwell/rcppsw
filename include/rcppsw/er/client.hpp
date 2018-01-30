@@ -157,7 +157,7 @@
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
-#ifndef NDEBUG
+#ifndef ER_NDEBUG
 #define ER_ASSERT(cond, msg, ...)                           \
   if (!(cond)) {                                            \
     ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__); \
@@ -177,7 +177,7 @@
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
-#ifndef NDEBUG
+#ifndef ER_NDEBUG
 #define ER_FATAL_SENTINEL(msg, ...)                             \
   {                                                             \
     ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__);     \
