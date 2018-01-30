@@ -50,8 +50,14 @@ set(${target}_LIBS
   ${Boost_LIBRARIES}
   )
 
+if (BUILD_SHARED_LIBS)
+  set(LIB_TYPE SHARED)
+else()
+  set(LIB_TYPE STATIC)
+endif()
+
 if (NOT TARGET${target})
-  add_library(${target}
+  add_library(${target} ${LIB_TYPE}
     $<TARGET_OBJECTS:${target}-er>
     $<TARGET_OBJECTS:${target}-multithread>
     $<TARGET_OBJECTS:${target}-utils>

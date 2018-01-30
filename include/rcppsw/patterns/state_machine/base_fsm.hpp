@@ -57,6 +57,9 @@ class base_fsm : public er::client {
            uint8_t max_states,
            uint8_t initial_state = 0);
 
+  base_fsm(uint8_t max_states,
+           uint8_t initial_state = 0);
+
   ~base_fsm(void) override = default;
 
   /**
@@ -186,12 +189,12 @@ virtual void state_engine_step(const state_map_ex_row* c_row_ex);
 
   const uint8_t mc_max_states; /// The maximum # of fsm states.
   uint8_t m_current_state;     /// The current state machine state.
-  uint8_t m_next_state;        /// The next state to transition to.
+  uint8_t m_next_state{0};        /// The next state to transition to.
   uint8_t m_initial_state;
-  uint8_t m_previous_state;
-  uint8_t m_last_state;
-  bool m_event_generated; /// Set to TRUE on event generation.
-  std::unique_ptr<const event_data> m_event_data;
+  uint8_t m_previous_state{0};
+  uint8_t m_last_state{0};
+  bool m_event_generated{false}; /// Set to TRUE on event generation.
+  std::unique_ptr<const event_data> m_event_data{nullptr};
   std::mutex m_mutex;
 };
 

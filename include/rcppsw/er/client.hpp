@@ -225,7 +225,7 @@ class client {
    *
    * @param server_handle The server to attach to.
    */
-  void deferred_init(std::shared_ptr<server> server_handle);
+  virtual void deferred_client_init(std::shared_ptr<server> server_handle);
 
   /**
    * @brief Add a module to the active list (long version).

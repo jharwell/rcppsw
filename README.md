@@ -39,7 +39,7 @@ Before starting, you will need a recent version of the following programs:
 - cmake
 - make
 - gcc
-- g++ (A version that supports C++11 is required)
+- g++ - A version that supports C++11 is required.
 
 You will also need recent versions of the following libraries:
 

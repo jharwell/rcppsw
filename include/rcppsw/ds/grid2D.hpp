@@ -81,6 +81,10 @@ class grid2D : public base_grid2D<T> {
                   [static_cast<index_range::index>(j)];
   }
 
+  const T& access(size_t i, size_t j) const {
+    return base_grid2D<T>::access(i, j);
+  }
+
  private:
   grid_type<T> m_cells;
 };
