@@ -32,12 +32,6 @@ exist in Boost, or that build on what boost provides. Includes such things as:
  - Miscellaneous other things as kmeans clustering,
    multithreading/multiprocessing management tools.
 
-For full details, clone the repo and build the documentation via:
-
-    make documentation
-
-from your build directory.
-
 ## Basic Setup
 
 Before starting, you will need a recent version of the following programs:
