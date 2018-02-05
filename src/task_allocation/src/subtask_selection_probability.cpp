@@ -60,7 +60,7 @@ double subtask_selection_probability::calc(const time_estimate* subtask1,
   return 0.0;
 } /* calc() */
 
-double subtask_selection_probability::calc_random(void) {
+__const double subtask_selection_probability::calc_random(void) {
   return 0.5;
 } /* calc_random() */
 

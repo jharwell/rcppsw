@@ -50,8 +50,8 @@ set(${target}_LIBS
   ${Boost_LIBRARIES}
   )
 
-if (NOT TARGET${target})
-  add_library(${target}
+if (NOT TARGET ${target})
+  add_library(${target} STATIC
     $<TARGET_OBJECTS:${target}-er>
     $<TARGET_OBJECTS:${target}-multithread>
     $<TARGET_OBJECTS:${target}-utils>

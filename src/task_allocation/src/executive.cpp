@@ -52,7 +52,7 @@ void executive::task_abort_cleanup(
   m_task_abort_cleanup = std::move(cb);
 } /* task_abort_cleanup() */
 
-const std::function<void(executable_task* const)>& executive::task_abort_cleanup(
+__const const std::function<void(executable_task* const)>& executive::task_abort_cleanup(
     void) const {
   return m_task_abort_cleanup;
 } /* task_abort_cleanup() */

@@ -45,10 +45,10 @@ status_t client::attmod(const std::string& mod_name) {
   return server_handle()->findmod(mod_name, m_er_id);
 } /* attmod() */
 
-void client::deferred_init(std::shared_ptr<server> server_handle) {
+void client::deferred_client_init(std::shared_ptr<server> server_handle) {
   m_server_handle = std::move(server_handle);
   m_er_id = m_server_handle->idgen();
-} /* deferred_init() */
+} /* deferred_client_init() */
 
 status_t client::insmod(const std::string& mod_name,
                         const er_lvl::value& loglvl,
@@ -58,11 +58,20 @@ status_t client::insmod(const std::string& mod_name,
 
 status_t client::rmmod(void) { return m_server_handle->rmmod(m_er_id); }
 
+/*******************************************************************************
+ * Non-Member Functions
+ ******************************************************************************/
 void __er_report__(server* server,
-                   const boost::uuids::uuid& er_id,
-                   const er_lvl::value& lvl,
-                   const std::string& str) {
-  server->report(er_id, lvl, str);
+                   const er_msg& msg) {
+  server->report(msg);
 } /* __er_report__() */
+
+__pure bool __er_will_report__(const server* const server,
+                        const boost::uuids::uuid& er_id,
+                        const er_lvl::value& lvl) {
+  er_msg m(er_id, lvl, "");
+  return server->will_report(m);
+} /* __er_report__() */
+
 
 NS_END(er, rcppsw);

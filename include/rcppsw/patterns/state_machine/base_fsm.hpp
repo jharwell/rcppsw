@@ -57,7 +57,13 @@ class base_fsm : public er::client {
            uint8_t max_states,
            uint8_t initial_state = 0);
 
+  base_fsm(uint8_t max_states,
+           uint8_t initial_state = 0);
+
   ~base_fsm(void) override = default;
+  base_fsm(const base_fsm& other)
+      : base_fsm(other.mc_max_states, other.m_initial_state) {}
+  base_fsm& operator=(const base_fsm& other) = delete;
 
   /**
    * @brief Get the current state of the state machine.
@@ -113,9 +119,10 @@ class base_fsm : public er::client {
    * @param new_state The state machine state to transition to.
    * @param data The event data sent to the state.
    */
-  void external_event(uint8_t new_state, std::unique_ptr<const event_data> data);
+  virtual void external_event(uint8_t new_state,
+                              std::unique_ptr<const event_data> data);
   void external_event(uint8_t new_state) {
-    internal_event(new_state, nullptr);
+    external_event(new_state, nullptr);
   }
 
   /**
@@ -178,21 +185,23 @@ class base_fsm : public er::client {
    * @brief Execute one step of the state machine using the extended state
    * definitions.
    */
-virtual void state_engine_step(const state_map_ex_row* c_row_ex);
+  virtual void state_engine_step(const state_map_ex_row* c_row_ex);
 
  private:
   void state_engine_map(void);
   void state_engine_map_ex(void);
+  void event_data_set(std::unique_ptr<const event_data>& event_data) {
+    m_event_data = std::move(event_data);
+  }
 
   const uint8_t mc_max_states; /// The maximum # of fsm states.
   uint8_t m_current_state;     /// The current state machine state.
-  uint8_t m_next_state;        /// The next state to transition to.
+  uint8_t m_next_state{0};        /// The next state to transition to.
   uint8_t m_initial_state;
-  uint8_t m_previous_state;
-  uint8_t m_last_state;
-  bool m_event_generated; /// Set to TRUE on event generation.
-  std::unique_ptr<const event_data> m_event_data;
-  std::mutex m_mutex;
+  uint8_t m_previous_state{0};
+  uint8_t m_last_state{0};
+  bool m_event_generated{false}; /// Set to TRUE on event generation.
+  std::unique_ptr<const event_data> m_event_data{nullptr};
 };
 
 NS_END(state_machine, patterns, rcppsw);

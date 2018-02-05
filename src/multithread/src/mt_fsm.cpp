@@ -1,5 +1,5 @@
 /**
- * @file mt_server.cpp
+ * @file mt_fsm.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -21,47 +21,27 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/er/mt_server.hpp"
-#include <algorithm>
+#include "rcppsw/multithread/mt_fsm.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, er);
-
-/*******************************************************************************
- * Constructors/Destructors
- ******************************************************************************/
-mt_server::mt_server(const std::string& logfile_fname,
-                     const er_lvl::value& dbglvl,
-                     const er_lvl::value& loglvl)
-    : server(logfile_fname, dbglvl, loglvl), m_queue() {}
+NS_START(rcppsw, multithread);
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void mt_server::flush(void) {
-  while (m_queue.size() > 0) {
-    er_msg next = m_queue.dequeue();
-    server::report(next);
-  } /* while() */
-} /* flush() */
+void mt_fsm::external_event(uint8_t new_state,
+                            std::unique_ptr<const sm::event_data> data) {
+    m_mutex.lock();
+    base_fsm::external_event(new_state, std::move(data));
+    m_mutex.unlock();
+} /* external_event() */
 
-void* mt_server::thread_main(__unused void* arg) {
-  while (!terminated()) {
-    while (0 == m_queue.size()) {
-      sleep(1);
-    }
-    er_msg msg = m_queue.dequeue();
-    server::report(msg);
-  } /* while() */
+void mt_fsm::init(void) {
+  m_mutex.lock();
+  base_fsm::init();
+  m_mutex.unlock();
+} /* init() */
 
-  /* make sure all events remaining in queue are reported */
-  while (m_queue.size() > 0) {
-    er_msg msg = m_queue.dequeue();
-    server::report(msg);
-  } /* while() */
-  return nullptr;
-} /* thread_main() */
-
-NS_END(er, rcpppsw);
+NS_END(multithread, rcppsw);
