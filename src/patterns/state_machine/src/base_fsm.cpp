@@ -38,8 +38,7 @@ base_fsm::base_fsm(const std::shared_ptr<er::server>& server,
     : er::client(server),
       mc_max_states(max_states),
       m_current_state(initial_state),
-      m_initial_state(initial_state),
-      m_mutex() {
+      m_initial_state(initial_state) {
   ER_ASSERT(mc_max_states < event_signal::IGNORED, "FATAL: Too many states");
 }
 
@@ -48,8 +47,7 @@ base_fsm::base_fsm(uint8_t max_states,
     : er::client(),
       mc_max_states(max_states),
       m_current_state(initial_state),
-      m_initial_state(initial_state),
-      m_mutex() {
+      m_initial_state(initial_state) {
   ER_ASSERT(mc_max_states < event_signal::IGNORED, "FATAL: Too many states");
 }
 
@@ -57,13 +55,10 @@ base_fsm::base_fsm(uint8_t max_states,
  * Member Functions
  ******************************************************************************/
 void base_fsm::init(void) {
-  m_mutex.lock();
   m_event_generated = false;
-
   update_state(initial_state());
   next_state(initial_state());
   m_event_data.reset(nullptr);
-  m_mutex.unlock();
 } /* init() */
 
 void base_fsm::external_event(uint8_t new_state,
@@ -77,16 +72,13 @@ void base_fsm::external_event(uint8_t new_state,
 
   /* if we are not supposed to ignore this event */
   if (new_state != event_signal::IGNORED) {
-    m_mutex.lock();
     /*
      * Generate the event and execute the state engine. If data was passed in,
      * pass that along to the handler function.
      */
-    m_event_data = std::move(data);
-    internal_event(new_state, std::move(m_event_data));
+    internal_event(new_state, std::move(data));
     state_engine();
     m_event_data.reset(nullptr);
-    m_mutex.unlock();
   }
 }
 
@@ -99,7 +91,7 @@ void base_fsm::internal_event(uint8_t new_state,
   next_state(new_state);
   m_event_generated = true;
   if (m_event_data != data) {
-    m_event_data = std::move(data);
+    event_data_set(data);
   }
 }
 

@@ -24,6 +24,7 @@
 #include "rcppsw/er/server_mod.hpp"
 #include <boost/uuid/uuid_io.hpp>
 #include <fstream>
+#include "rcppsw/er/er_msg.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -48,28 +49,18 @@ server_mod::server_mod(boost::uuids::uuid id, std::string name)
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void server_mod::set_dbglvl(const er_lvl::value& lvl) {
-  m_dbglvl = lvl;
-} /* set_dbglvl() */
-
-void server_mod::set_loglvl(const er_lvl::value& lvl) {
-  m_loglvl = lvl;
-} /* set_loglvl() */
-
 void server_mod::msg_report(const std::string& header,
-                            const std::string& msg,
-                            er_lvl::value msg_lvl,
-                            er_lvl::value log_lvl,
+                            const er_msg& msg,
+                            er_lvl::value lvl,
                             std::ostream& stream) const {
-  if (msg_lvl <= log_lvl) {
-    stream << header << " " << name() << ": " << msg;
-    stream.flush();
+  if (msg.lvl <= lvl) {
+    stream << header << " " << name() << ": " << msg.str;
   }
 } /* server_mod::msg_report() */
 
-bool server_mod::operator==(const server_mod& rhs) {
-  return (this->m_id == rhs.m_id);
-} /* operator==() */
+__pure bool server_mod::will_report(const er_msg& msg, er_lvl::value lvl) const {
+  return (msg.lvl <= lvl);
+} /* will_report() */
 
 std::ostream& operator<<(std::ostream& os, const server_mod& mod) {
   os << mod.id() << ": " << mod.name();

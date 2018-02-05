@@ -66,6 +66,14 @@ To build the extensive documentation, do:
 
 For contributing to `rcppsw`, see [CONTRIBUTING](docs/CONTRIBUTING.md)
 
+# Troubleshooting
+
+- If you are having trouble building, try updating the cmake submodule:
+
+        git submodule update
+
+  If the problem perists, open an issue.
+
 # License
 This project is licensed under GPL 2.0. See [LICENSE](LICENSE.md).
 

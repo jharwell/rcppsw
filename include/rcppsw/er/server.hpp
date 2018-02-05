@@ -30,6 +30,7 @@
 #include <vector>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/server_mod.hpp"
+#include "rcppsw/er/er_msg.hpp"
 #include "rcppsw/patterns/singleton.hpp"
 
 /*******************************************************************************
@@ -56,25 +57,6 @@ NS_START(rcppsw, er);
  */
 class server {
  public:
-  /**
-   * @internal
-   * @struct msg_int
-   *
-   * @brief Internal class wrapping all the information needed to processing a
-   * message besides the text of the message itself.
-   *
-   * @endinternal
-   */
-  struct msg_int {
-    msg_int(const boost::uuids::uuid& id_,
-            const er_lvl::value& lvl_,
-            std::string str_)
-        : id(id_), lvl(lvl_), str(std::move(str_)) {}
-    boost::uuids::uuid id;
-    er_lvl::value lvl;
-    std::string str;
-  };
-
   /**
    * @brief Initialize an Event Reporting Server.
    *
@@ -272,27 +254,29 @@ class server {
   void self_er_en(void);
 
   /**
-   * @brief Report a message. Messages may or not actually be printed/logged,
-   * depending on the current level settings in the server/module.
-   *
-   * @param er_id The module reporting the message.
-   * @param lvl The level of the message.
-   * @param str The message.
-   */
-  virtual void report(const boost::uuids::uuid& er_id,
-                      const er_lvl::value& lvl,
-                      const std::string& str) {
-    msg_int msg(er_id, lvl, str);
-    msg_report(msg);
-  }
-
-  /**
    * @brief Flush all pending messages to stdout/the log file.
    */
   virtual void flush(void);
 
- protected:
-  void msg_report(const msg_int& msg);
+  /**
+   * @brief Report a message. Messages may or not actually be printed/logged,
+   * depending on the current level settings in the server/module.
+   *
+   * @param er_id Message to report.
+   */
+  virtual void report(const er_msg& msg);
+
+  /**
+   * @brief Determine if the specified message will be reported.
+   *
+   * Used to short circuit potentially expensive message construction for
+   * messages that will never be reported.
+   *
+   * @param msg Message to check.
+   *
+   * @return \c TRUE if the message will be reported, \c FALSE otherwise.
+   */
+  bool will_report(const er_msg& msg) const;
 
  private:
   /* data members */

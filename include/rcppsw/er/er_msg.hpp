@@ -1,7 +1,7 @@
 /**
- * @file mt_server.cpp
+ * @file er_msg.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,11 +18,17 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_ER_ER_MSG_HPP_
+#define INCLUDE_RCPPSW_ER_ER_MSG_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/er/mt_server.hpp"
-#include <algorithm>
+#include <boost/uuid/uuid_generators.hpp>
+#include <string>
+
+#include "rcppsw/common/common.hpp"
+#include "rcppsw/er/er_lvl.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -30,38 +36,28 @@
 NS_START(rcppsw, er);
 
 /*******************************************************************************
- * Constructors/Destructors
+ * Struct Definitions
  ******************************************************************************/
-mt_server::mt_server(const std::string& logfile_fname,
-                     const er_lvl::value& dbglvl,
-                     const er_lvl::value& loglvl)
-    : server(logfile_fname, dbglvl, loglvl), m_queue() {}
+/**
+ * @internal
+ * @struct er_msg
+ *
+ * @brief Internal class wrapping all the information needed to processing a
+ * message besides the text of the message itself.
+ *
+ * @endinternal
+ */
+struct er_msg {
+  er_msg(const boost::uuids::uuid& id_,
+         const er_lvl::value& lvl_,
+         std::string str_)
+      : id(id_), lvl(lvl_), str(std::move(str_)) {}
 
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-void mt_server::flush(void) {
-  while (m_queue.size() > 0) {
-    er_msg next = m_queue.dequeue();
-    server::report(next);
-  } /* while() */
-} /* flush() */
+  boost::uuids::uuid id;
+  er_lvl::value lvl;
+  std::string str;
+};
 
-void* mt_server::thread_main(__unused void* arg) {
-  while (!terminated()) {
-    while (0 == m_queue.size()) {
-      sleep(1);
-    }
-    er_msg msg = m_queue.dequeue();
-    server::report(msg);
-  } /* while() */
+NS_END(er, rcppsw);
 
-  /* make sure all events remaining in queue are reported */
-  while (m_queue.size() > 0) {
-    er_msg msg = m_queue.dequeue();
-    server::report(msg);
-  } /* while() */
-  return nullptr;
-} /* thread_main() */
-
-NS_END(er, rcpppsw);
+#endif /* INCLUDE_RCPPSW_ER_ER_MSG_HPP_ */

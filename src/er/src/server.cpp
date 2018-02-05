@@ -45,10 +45,10 @@ NS_START(rcppsw, er);
              __LINE__,                                                \
              reinterpret_cast<const char*>(__FUNCTION__),             \
              ##__VA_ARGS__);                                          \
-    server::msg_int _msg(m_er_id,                                     \
-                         lvl,                                         \
-                         std::string(reinterpret_cast<char*>(_str))); \
-    msg_report(_msg);                                                 \
+    er_msg _msg(m_er_id,                                              \
+                lvl,                                                  \
+                std::string(reinterpret_cast<char*>(_str)));          \
+    report(_msg);                                                     \
   }
 
 /*******************************************************************************
@@ -140,7 +140,7 @@ status_t server::rmmod(const boost::uuids::uuid& id) {
   return OK;
 } /* rmmod() */
 
-void server::msg_report(const msg_int& msg) {
+void server::report(const er_msg& msg) {
   server_mod tmp(msg.id, er_lvl::NOM, er_lvl::NOM, "tmp");
   auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
 
@@ -149,18 +149,28 @@ void server::msg_report(const msg_int& msg) {
     if (m_log_ts_calculator) {
       header = m_log_ts_calculator();
     }
-    iter->msg_report(header, msg.str, msg.lvl, iter->loglvl(), *m_logfile);
+    iter->msg_report(header, msg, iter->loglvl(), *m_logfile);
 
-/* If NDEBUG is defined, debug printing is disabled. */
-#ifndef NDEBUG
+/* If NDEBUG or ER_NDEBUG is defined, debug printing is disabled. */
+#if !defined(NDEBUG) && !defined(ER_NDEBUG)
     header = "";
     if (m_dbg_ts_calculator) {
       header = m_dbg_ts_calculator();
     }
-    iter->msg_report(header, msg.str, msg.lvl, iter->dbglvl(), std::cout);
+    iter->msg_report(header, msg, iter->dbglvl(), std::cout);
 #endif
   }
 } /* msg_report() */
+
+bool server::will_report(const er_msg& msg) const {
+  server_mod tmp(msg.id, er_lvl::NOM, er_lvl::NOM, "tmp");
+  auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
+  if (iter != m_modules.end()) {
+    return iter->will_report(msg, iter->loglvl()) ||
+        iter->will_report(msg, iter->dbglvl());
+  }
+  return false;
+} /* will_report() */
 
 void server::flush(void) {
   std::fflush(nullptr);

@@ -84,20 +84,14 @@ class mt_server : public server, public multithread::threadable {
    * @brief Report a message. Messages may or not actually be printed/logged,
    * depending on the current level settings in the server/module.
    *
-   * @param er_id The module reporting the message.
-   * @param lvl The level of the message.
-   * @param str The message.
+   * @param msg The message to report.
    */
-  void report(const boost::uuids::uuid& er_id,
-              const er_lvl::value& lvl,
-              const std::string& str) override {
-    msg_int msg(er_id, lvl, str);
-    msg_report(msg);
+  void report(const er_msg& msg) override {
     m_queue.enqueue(msg);
   }
 
  private:
-  multithread::mt_queue<msg_int> m_queue;
+  multithread::mt_queue<er_msg> m_queue;
 };
 
 NS_END(er, rcppsw);
