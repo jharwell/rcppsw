@@ -21,20 +21,20 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/er/mt_server.hpp"
+#include "rcppsw/multithread/mt_server.hpp"
 #include <algorithm>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, er);
+NS_START(rcppsw, multithread);
 
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
 mt_server::mt_server(const std::string& logfile_fname,
-                     const er_lvl::value& dbglvl,
-                     const er_lvl::value& loglvl)
+                     const er::er_lvl::value& dbglvl,
+                     const er::er_lvl::value& loglvl)
     : server(logfile_fname, dbglvl, loglvl), m_queue() {}
 
 /*******************************************************************************
@@ -42,7 +42,7 @@ mt_server::mt_server(const std::string& logfile_fname,
  ******************************************************************************/
 void mt_server::flush(void) {
   while (m_queue.size() > 0) {
-    er_msg next = m_queue.dequeue();
+    er::er_msg next = m_queue.dequeue();
     server::report(next);
   } /* while() */
 } /* flush() */
@@ -52,16 +52,16 @@ void* mt_server::thread_main(__unused void* arg) {
     while (0 == m_queue.size()) {
       sleep(1);
     }
-    er_msg msg = m_queue.dequeue();
+    er::er_msg msg = m_queue.dequeue();
     server::report(msg);
   } /* while() */
 
   /* make sure all events remaining in queue are reported */
   while (m_queue.size() > 0) {
-    er_msg msg = m_queue.dequeue();
+    er::er_msg msg = m_queue.dequeue();
     server::report(msg);
   } /* while() */
   return nullptr;
 } /* thread_main() */
 
-NS_END(er, rcpppsw);
+NS_END(multithread, rcpppsw);
