@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ER_MT_SERVER_HPP_
-#define INCLUDE_RCPPSW_ER_MT_SERVER_HPP_
+#ifndef INCLUDE_RCPPSW_MULTITHREAD_MT_SERVER_HPP_
+#define INCLUDE_RCPPSW_MULTITHREAD_MT_SERVER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -34,18 +34,18 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, er);
+NS_START(rcppsw, multithread);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
  * @class mt_server
- * @ingroup er
+ * @ingroup multithread
  *
  * @brief A multithreaded version of the \ref server for reporting events.
  */
-class mt_server : public server, public multithread::threadable {
+class mt_server : public er::server, public multithread::threadable {
  public:
   /**
    * @brief Initialize a multithreaded ER server.
@@ -56,13 +56,13 @@ class mt_server : public server, public multithread::threadable {
    * @param loglvl The initial logging level.
    */
   mt_server(const std::string& logfile_fname,
-                     const er_lvl::value& dbglvl,
-                     const er_lvl::value& loglvl);
+            const er::er_lvl::value& dbglvl,
+            const er::er_lvl::value& loglvl);
 
   /**
    * @brief Initialize a multithreaded ER server with default values.
    */
-  mt_server(void): mt_server("__no_file__", er_lvl::NOM, er_lvl::NOM) {}
+  mt_server(void): mt_server("__no_file__", er::er_lvl::NOM, er::er_lvl::NOM) {}
 
   ~mt_server(void) override { join(); }
 
@@ -86,14 +86,14 @@ class mt_server : public server, public multithread::threadable {
    *
    * @param msg The message to report.
    */
-  void report(const er_msg& msg) override {
+  void report(const er::er_msg& msg) override {
     m_queue.enqueue(msg);
   }
 
  private:
-  multithread::mt_queue<er_msg> m_queue;
+  multithread::mt_queue<er::er_msg> m_queue;
 };
 
-NS_END(er, rcppsw);
+NS_END(multithread, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ER_SERVER_HPP_ */
+#endif /* INCLUDE_RCPPSW_MULTITHREAD_SERVER_HPP_ */

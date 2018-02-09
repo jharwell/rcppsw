@@ -36,12 +36,6 @@ executable_task::executable_task(const std::string& name,
                                  const struct task_params* c_params,
                                  executable_task* parent)
     : logical_task(name, parent),
-      m_is_atomic(false),
-      m_is_partitionable(false),
-      m_interface_time(0.0),
-      m_interface_start_time(0.0),
-      m_exec_time(0.0),
-      m_exec_start_time(0.0),
       m_interface_estimate(c_params->estimation_alpha),
       m_exec_estimate(c_params->estimation_alpha) {}
 
