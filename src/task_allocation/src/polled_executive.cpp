@@ -120,13 +120,16 @@ void polled_executive::handle_task_finish(polled_task* task) {
                              p->partition2()->exec_estimate());
   }
   task = static_cast<polled_task*>(executive::get_next_task(task));
-
   handle_task_start(task);
   task->task_execute();
 } /* handle_task_finish() */
 
 void polled_executive::handle_task_start(polled_task* new_task) {
   ER_NOM("Starting new task '%s'", new_task->name().c_str());
+
+  if (executive::task_alloc_notify()) {
+    executive::task_alloc_notify()(new_task);
+  }
 
   new_task->task_reset();
   new_task->task_start(nullptr);

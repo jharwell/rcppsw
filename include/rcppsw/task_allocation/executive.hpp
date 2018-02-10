@@ -70,6 +70,16 @@ class executive : public rcppsw::er::client {
   const std::function<void(executable_task* const)>& task_abort_cleanup(
       void) const;
 
+  /**
+   * @brief Set an optional callback that will be run when a new task allocation
+   * occurs.
+   *
+   * The callback will be passed a pointer to the task that was just allocated.
+   */
+  void task_alloc_notify(std::function<void(executable_task* const)> cb);
+  const std::function<void(executable_task* const)>& task_alloc_notify(
+      void) const;
+
  protected:
   executable_task* root(void) const { return mc_root; }
   void current_task(executable_task* current_task) {
@@ -87,8 +97,9 @@ class executive : public rcppsw::er::client {
   double task_abort_prob(executable_task* task);
 
  private:
-  executable_task* m_current_task;
-  std::function<void(executable_task* const)> m_task_abort_cleanup;
+  executable_task* m_current_task{nullptr};
+  std::function<void(executable_task* const)> m_task_abort_cleanup{nullptr};
+  std::function<void(executable_task* const)> m_task_alloc_notify{nullptr};
   executable_task* const mc_root;
 };
 
