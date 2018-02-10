@@ -39,9 +39,6 @@ partitionable_task::partitionable_task(
     : client(server),
       m_always_partition(c_params->always_partition),
       m_never_partition(c_params->never_partition),
-      m_partition1(nullptr),
-      m_partition2(nullptr),
-      m_last_partition(nullptr),
       m_selection_prob(c_params->subtask_selection_method),
       m_partition_prob(c_params->partition_method,
                        c_params->partition_reactivity) {
@@ -62,7 +59,18 @@ partitionable_task::partitionable_task(
 }
 
 /*******************************************************************************
- * Member Functions
+ * Allocation Metrics
+ ******************************************************************************/
+__pure bool partitionable_task::employed_partitioning(void) const {
+  return m_employed_partitioning;
+} /* employed_partitioning() */
+
+std::string partitionable_task::subtask_selection(void) const {
+  return m_last_partition->name();
+} /* subtask_selection() */
+
+/*******************************************************************************
+ * General Member Functions
  ******************************************************************************/
 void partitionable_task::update_partition_prob(const time_estimate& task,
                                                const time_estimate& subtask1,
@@ -92,8 +100,10 @@ executable_task* partitionable_task::partition(void) {
   if (partition_prob <= static_cast<double>(random()) / RAND_MAX) {
     ER_NOM("Not employing partitioning: Return task '%s'",
            m_partition1->parent()->name().c_str());
+    m_employed_partitioning = false;
     return static_cast<executable_task*>(m_partition1->parent());
   }
+  m_employed_partitioning = true;
   executable_task* ret = nullptr;
 
   /* We have chosen to employ partitioning */

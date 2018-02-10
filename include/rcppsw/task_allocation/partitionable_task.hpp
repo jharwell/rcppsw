@@ -27,6 +27,7 @@
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/task_allocation/partition_probability.hpp"
 #include "rcppsw/task_allocation/subtask_selection_probability.hpp"
+#include "rcppsw/metrics/tasks/allocation_metrics.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -45,7 +46,8 @@ class executable_task;
  * @brief A task that is capable of being partitioned into two subtasks that
  * when executed in sequence have the sum effect as the parent task.
  */
-class partitionable_task : public er::client {
+class partitionable_task : public er::client,
+                           public metrics::tasks::allocation_metrics {
  public:
   partitionable_task(const std::shared_ptr<er::server>& server,
                      const struct partitionable_task_params* c_params);
@@ -54,6 +56,10 @@ class partitionable_task : public er::client {
 
   partitionable_task(const partitionable_task& other) = delete;
   partitionable_task& operator=(const partitionable_task& other) = delete;
+
+  /* allocation metrics */
+  bool employed_partitioning(void) const override;
+  std::string subtask_selection(void) const override;
 
   /**
    * @brief Partition the task according to the configured method, and return a
@@ -93,9 +99,10 @@ class partitionable_task : public er::client {
  private:
   bool m_always_partition;
   bool m_never_partition;
-  executable_task* m_partition1;
-  executable_task* m_partition2;
-  executable_task* m_last_partition;
+  bool m_employed_partitioning{false};
+  executable_task* m_partition1{nullptr};
+  executable_task* m_partition2{nullptr};
+  executable_task* m_last_partition{nullptr};
   subtask_selection_probability m_selection_prob;
   partition_probability m_partition_prob;
 };

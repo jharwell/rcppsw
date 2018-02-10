@@ -193,6 +193,7 @@ class executable_task : public logical_task {
  private:
   bool m_is_atomic{false};
   bool m_is_partitionable{false};
+
   double m_interface_time{0.0};
   double m_last_interface_time{0.0};
   double m_interface_start_time{0.0};
