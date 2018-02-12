@@ -55,6 +55,13 @@ void server_mod::msg_report(const std::string& header,
                             std::ostream& stream) const {
   if (msg.lvl <= lvl) {
     stream << header << " " << name() << ": " << msg.str;
+    /*
+     * Unless we are doing an optimized build, flush the stream after every line
+     * printed, so that you get all relevant messages on a crash.
+     */
+#ifndef NDEBUG
+    stream.flush();
+#endif
   }
 } /* server_mod::msg_report() */
 

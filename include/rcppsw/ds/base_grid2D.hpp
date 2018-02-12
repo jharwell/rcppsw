@@ -54,9 +54,11 @@ using index_range = boost::multi_array_types::index_range;
  *
  * The objects used to represent the grid should be cells of some kind.
  */
-template <typename T, typename... Args>
+template <typename T>
 class base_grid2D {
  public:
+  using value_type = T;
+
   base_grid2D(double resolution, size_t x_max, size_t y_max)
       : m_resolution(resolution), m_x_max(x_max), m_y_max(y_max) {}
   virtual ~base_grid2D(void) {}
@@ -85,8 +87,15 @@ class base_grid2D {
   size_t xdsize(void) const {
     return static_cast<size_t>(std::ceil(m_x_max / m_resolution));
   }
+
+  /**
+   * @brief Get the size of the X dimension (non-discretized).
+   */
   size_t xrsize(void) const { return m_x_max; }
 
+  /**
+   * @brief Get the size of the Y dimension (non-discretized).
+   */
   size_t yrsize(void) const { return m_y_max; }
 
   /**
