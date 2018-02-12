@@ -26,6 +26,8 @@
  * Includes
  ******************************************************************************/
 #include <memory>
+#include <tuple>
+
 #include "rcsw/common/common.h"
 
 /*******************************************************************************
@@ -96,6 +98,12 @@ std::unique_ptr<T> make_unique(Args&&... args) {
 }
 
 #endif /* __cplusplus */
+
+template <class... Args>
+struct tuple_type_list {
+  template <std::size_t N>
+  using type = typename std::tuple_element<N, std::tuple<Args...>>::type;
+};
 
 NS_END(rcppsw);
 

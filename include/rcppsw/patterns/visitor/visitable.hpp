@@ -102,7 +102,7 @@ class visitable_set {};
  */
 template<typename V, typename T, typename... Ts>
 class visitable_set<V, T, Ts...>: public visitable_set_helper<V, T>,
-                                   public visitable_set<V, Ts...> {
+                                  public visitable_set<V, Ts...> {
  public:
   using visitable_set_helper<V, T>::accept;
   using visitable_set<V, Ts...>::accept;
