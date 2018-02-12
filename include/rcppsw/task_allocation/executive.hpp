@@ -80,6 +80,11 @@ class executive : public rcppsw::er::client {
   const std::function<void(executable_task* const)>& task_alloc_notify(
       void) const;
 
+  /**
+   * @brief Get the last task that was executed before the current one.
+   */
+  const executable_task* last_task(void) const { return m_last_task; }
+
  protected:
   executable_task* root(void) const { return mc_root; }
   void current_task(executable_task* current_task) {
@@ -101,6 +106,7 @@ class executive : public rcppsw::er::client {
   std::function<void(executable_task* const)> m_task_abort_cleanup{nullptr};
   std::function<void(executable_task* const)> m_task_alloc_notify{nullptr};
   executable_task* const mc_root;
+  executable_task* m_last_task{nullptr};
 };
 
 NS_END(task_allocation, rcppsw);

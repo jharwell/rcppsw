@@ -66,6 +66,7 @@ __const const std::function<void(executable_task* const)>& executive::task_alloc
 } /* task_alloc_notify() */
 
 executable_task* executive::get_next_task(executable_task* last_task) {
+  m_last_task = last_task;
   /*
    * We are being run for the first time, so run the partitioning algorithm on
    * the root of the tree.
