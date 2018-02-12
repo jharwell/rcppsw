@@ -52,12 +52,17 @@ class management_metrics : public allocation_metrics {
   ~management_metrics(void) override = default;
 
   /**
-   * @brief This function should return \c TRUE, if the robot has allocated
-   * itself a NEW task and has started executing it. After the first timestep
-   * executing this task, it should return \c FALSE until the next task
-   * allocation.
+   * @brief This function should return \c TRUE if the robot has allocated
+   * itself a NEW task and has started executing it.
    */
   virtual bool has_new_allocation(void) const = 0;
+
+  /**
+   * @brief This function should return \c TRUE if the task it is currently
+   * executing is different than the one that it executed last time (this is
+   * the definition of changing allocation).
+   */
+  virtual bool has_changed_allocation(void) const = 0;
 
   /**
    * @brief This function should return \c TRUE if the robot has just aborted
