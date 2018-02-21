@@ -50,7 +50,7 @@ class mt_fsm : patterns::state_machine::base_fsm {
       : base_fsm(server, max_states, initial_state),
         m_mutex() {}
 
-  mt_fsm(uint8_t max_states,
+  explicit mt_fsm(uint8_t max_states,
          uint8_t initial_state = 0)
     : base_fsm(max_states, initial_state),
     m_mutex() {}

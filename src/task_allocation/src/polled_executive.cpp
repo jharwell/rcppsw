@@ -102,6 +102,11 @@ void polled_executive::handle_task_abort(polled_task* task) {
 void polled_executive::handle_task_finish(polled_task* task) {
   task->update_exec_time();
   task->update_exec_estimate(task->exec_time());
+
+  if (executive::task_finish_notify()) {
+    executive::task_finish_notify()(task);
+  }
+
   task->reset_exec_time();
   task->update_exec_time();
   task->reset_interface_time();

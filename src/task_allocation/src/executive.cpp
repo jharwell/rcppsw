@@ -65,6 +65,17 @@ __const const std::function<void(executable_task* const)>& executive::task_alloc
   return m_task_alloc_notify;
 } /* task_alloc_notify() */
 
+void executive::task_finish_notify(
+    std::function<void(executable_task* const)> cb) {
+  m_task_finish_notify = std::move(cb);
+} /* task_alloc_notify() */
+
+__const const std::function<void(executable_task* const)>& executive::task_finish_notify(
+    void) const {
+  return m_task_finish_notify;
+} /* task_alloc_notify() */
+
+
 executable_task* executive::get_next_task(executable_task* last_task) {
   m_last_task = last_task;
   /*

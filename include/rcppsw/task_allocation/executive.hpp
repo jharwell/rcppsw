@@ -81,6 +81,16 @@ class executive : public rcppsw::er::client {
       void) const;
 
   /**
+   * @brief Set an optional callback that will be run when a task finishes.
+   *
+   * The callback will be passed a pointer to the task that was just finished,
+   * before the task is reset.
+   */
+  void task_finish_notify(std::function<void(executable_task* const)> cb);
+  const std::function<void(executable_task* const)>& task_finish_notify(
+      void) const;
+
+  /**
    * @brief Get the last task that was executed before the current one.
    */
   const executable_task* last_task(void) const { return m_last_task; }
@@ -105,6 +115,7 @@ class executive : public rcppsw::er::client {
   executable_task* m_current_task{nullptr};
   std::function<void(executable_task* const)> m_task_abort_cleanup{nullptr};
   std::function<void(executable_task* const)> m_task_alloc_notify{nullptr};
+  std::function<void(executable_task* const)> m_task_finish_notify{nullptr};
   executable_task* const mc_root;
   executable_task* m_last_task{nullptr};
 };
