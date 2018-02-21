@@ -57,8 +57,8 @@ class base_fsm : public er::client {
            uint8_t max_states,
            uint8_t initial_state = 0);
 
-  base_fsm(uint8_t max_states,
-           uint8_t initial_state = 0);
+  explicit base_fsm(uint8_t max_states,
+                    uint8_t initial_state = 0);
 
   ~base_fsm(void) override = default;
   base_fsm(const base_fsm& other)

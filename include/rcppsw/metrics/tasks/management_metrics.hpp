@@ -71,10 +71,23 @@ class management_metrics : public allocation_metrics {
   virtual bool has_aborted_task(void) const = 0;
 
   /**
-   * @brief Get the name of task name that is currently being executed by a
+   * @brief Get the name of task that is currently being executed by a
    * robot.
    */
   virtual std::string current_task_name(void) const = 0;
+
+
+  /**
+   * @brief This function should return \c TRUE when a robot has just finished
+   * its task (not aborting it).
+   */
+  virtual bool has_finished_task(void) const = 0;
+
+  /**
+   * @brief This function should return the execution time of the most recently
+   * finished task.
+   */
+  virtual double last_task_exec_time(void) const = 0;
 };
 
 NS_END(tasks, metrics, rcppsw);

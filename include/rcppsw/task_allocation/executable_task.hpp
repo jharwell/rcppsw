@@ -109,9 +109,14 @@ class executable_task : public logical_task {
   double last_interface_time(void) const { return m_last_interface_time; }
 
   /**
-   * @brief Get the last execution time of the task.
+   * @brief Get the current execution time of the task.
    */
   double exec_time(void) const { return m_exec_time; }
+
+  /**
+   * @brief Get the last execution time of the task.
+   */
+  double last_exec_time(void) const { return m_last_exec_time; }
 
   /**
    * @brief Define how to partition the task. Does nothing by default.
@@ -188,7 +193,10 @@ class executable_task : public logical_task {
    * @brief Reset the execution time for the task. Should never be called
    * directly!
    */
-  void reset_exec_time(void) { m_exec_start_time = current_time(); }
+  void reset_exec_time(void) {
+    m_last_exec_time = m_exec_time;
+    m_exec_start_time = current_time();
+  }
 
  private:
   bool m_is_atomic{false};
@@ -198,6 +206,7 @@ class executable_task : public logical_task {
   double m_last_interface_time{0.0};
   double m_interface_start_time{0.0};
   double m_exec_time{0.0};
+  double m_last_exec_time{0.0};
   double m_exec_start_time{0.0};
   time_estimate m_interface_estimate;
   time_estimate m_exec_estimate;
