@@ -106,6 +106,8 @@ class base_metrics_collector {
   void interval(int interval) { m_interval = interval; }
   int interval(void) const { return m_interval; }
 
+  virtual void collect(const rcppsw::metrics::base_metrics& metrics) = 0;
+
  protected:
   /**
    * @brief Reset some metrics (possibly).
@@ -142,8 +144,6 @@ class base_metrics_collector {
    * written out once an interesting event has occurred.
    */
   virtual bool csv_line_build(std::string& line) = 0;
-
-  virtual void collect(const rcppsw::metrics::base_metrics& metrics) = 0;
 
   /**
    * @brief Write out the default header, which only contains "clock;"
