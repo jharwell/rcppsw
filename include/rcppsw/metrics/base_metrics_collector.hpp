@@ -50,10 +50,16 @@ class base_metrics;
  */
 class base_metrics_collector {
  public:
-  base_metrics_collector(std::string ofname, bool collect_cum) :
-      m_collect_cum(collect_cum), m_use_interval(false), m_interval(-1),
-      m_timestep(0), m_ofname(std::move(ofname)), m_separator(";"),
-      m_ofile() {}
+  /**
+   * @param ofname Output file name.
+   * @param interval Collection interval.
+   */
+  base_metrics_collector(std::string ofname, uint interval)
+      : m_interval(interval),
+        m_timestep(0),
+        m_ofname(std::move(ofname)),
+        m_separator(";"),
+        m_ofile() {}
 
   virtual ~base_metrics_collector(void)  = default;
 
@@ -94,11 +100,6 @@ class base_metrics_collector {
    * @brief Finalize metrics and flush files.
    */
   void finalize(void) { m_ofile.close(); }
-
-  /**
-   * @brief Enable/disable interval usage for the current collector.
-   */
-  void use_interval(bool use_interval) { m_use_interval = use_interval; }
 
   /**
    * @brief Set the interval (# timesteps) for the current collector.
@@ -151,12 +152,9 @@ class base_metrics_collector {
   void csv_header_write(void);
 
   const std::string& separator(void) const { return m_separator; }
-  bool collect_cum(void) const { return m_collect_cum; }
 
  private:
   // clang-format off
-  bool          m_collect_cum;
-  bool          m_use_interval;
   int           m_interval;
   uint          m_timestep;
   std::string   m_ofname;

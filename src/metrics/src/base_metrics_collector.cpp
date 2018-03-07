@@ -57,7 +57,7 @@ void base_metrics_collector::reset(void) {
 } /* reset() */
 
 void base_metrics_collector::interval_reset(void) {
-  if (m_use_interval && (m_timestep % m_interval == 0)) {
+  if ((m_timestep % m_interval == 0)) {
     reset_after_interval();
   }
 } /* interval_reset() */
