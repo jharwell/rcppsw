@@ -65,7 +65,7 @@ class collector_group {
    * @param args 0 or more arguments to the collector constructor.
    */
   template <typename T, typename... Args>
-  void add_collector(const std::string& name, Args&&... args) {
+  void register_collector(const std::string& name, Args&&... args) {
       m_collectors[name] = rcppsw::make_unique<T>(args...);
   }
 

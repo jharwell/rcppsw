@@ -23,7 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/task_allocation/partitionable_task.hpp"
 #include "rcppsw/task_allocation/executable_task.hpp"
-#include "rcppsw/task_allocation/task_params.hpp"
+#include "rcppsw/task_allocation/partitionable_task_params.hpp"
 
 /*******************************************************************************
  * Namespaces
