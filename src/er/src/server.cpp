@@ -35,20 +35,18 @@ NS_START(rcppsw, er);
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#define REPORT_INTERNAL(lvl, msg, ...)                                \
-  {                                                                   \
-    char _str[1000];                                                  \
-    snprintf(static_cast<char*>(_str),                                \
-             sizeof(_str),                                            \
-             "%s:%d:%s: " msg "\n",                                   \
-             __FILE__,                                                \
-             __LINE__,                                                \
-             reinterpret_cast<const char*>(__FUNCTION__),             \
-             ##__VA_ARGS__);                                          \
-    er_msg _msg(m_er_id,                                              \
-                lvl,                                                  \
-                std::string(reinterpret_cast<char*>(_str)));          \
-    report(_msg);                                                     \
+#define REPORT_INTERNAL(lvl, msg, ...)                                     \
+  {                                                                        \
+    char _str[1000];                                                       \
+    snprintf(static_cast<char*>(_str),                                     \
+             sizeof(_str),                                                 \
+             "%s:%d:%s: " msg "\n",                                        \
+             __FILE__,                                                     \
+             __LINE__,                                                     \
+             reinterpret_cast<const char*>(__FUNCTION__),                  \
+             ##__VA_ARGS__);                                               \
+    er_msg _msg(m_er_id, lvl, std::string(reinterpret_cast<char*>(_str))); \
+    report(_msg);                                                          \
   }
 
 /*******************************************************************************
@@ -87,7 +85,8 @@ void server::dbg_ts_calculator(std::function<std::string(void)> cb) {
   m_dbg_ts_calculator = std::move(cb);
 } /* dbg_ts_calculator() */
 
-__const const std::function<std::string(void)>& server::dbg_ts_calculator(void) const {
+__const const std::function<std::string(void)>& server::dbg_ts_calculator(
+    void) const {
   return m_dbg_ts_calculator;
 } /* dbg_ts_calculator() */
 
@@ -95,7 +94,8 @@ void server::log_ts_calculator(std::function<std::string(void)> cb) {
   m_log_ts_calculator = std::move(cb);
 } /* log_ts_calculator() */
 
-__const const std::function<std::string(void)>& server::log_ts_calculator(void) const {
+__const const std::function<std::string(void)>& server::log_ts_calculator(
+    void) const {
   return m_log_ts_calculator;
 } /* log_ts_calculator() */
 
@@ -167,7 +167,7 @@ bool server::will_report(const er_msg& msg) const {
   auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
   if (iter != m_modules.end()) {
     return iter->will_report(msg, iter->loglvl()) ||
-        iter->will_report(msg, iter->dbglvl());
+           iter->will_report(msg, iter->dbglvl());
   }
   return false;
 } /* will_report() */

@@ -61,17 +61,15 @@ status_t client::rmmod(void) { return m_server_handle->rmmod(m_er_id); }
 /*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
-void __er_report__(server* server,
-                   const er_msg& msg) {
+void __er_report__(server* server, const er_msg& msg) {
   server->report(msg);
 } /* __er_report__() */
 
 __pure bool __er_will_report__(const server* const server,
-                        const boost::uuids::uuid& er_id,
-                        const er_lvl::value& lvl) {
+                               const boost::uuids::uuid& er_id,
+                               const er_lvl::value& lvl) {
   er_msg m(er_id, lvl, "");
   return server->will_report(m);
 } /* __er_report__() */
-
 
 NS_END(er, rcppsw);

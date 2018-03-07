@@ -42,8 +42,7 @@ base_fsm::base_fsm(const std::shared_ptr<er::server>& server,
   ER_ASSERT(mc_max_states < event_signal::IGNORED, "FATAL: Too many states");
 }
 
-base_fsm::base_fsm(uint8_t max_states,
-                   uint8_t initial_state)
+base_fsm::base_fsm(uint8_t max_states, uint8_t initial_state)
     : er::client(),
       mc_max_states(max_states),
       m_current_state(initial_state),

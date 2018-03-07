@@ -33,8 +33,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 executive::executive(const std::shared_ptr<rcppsw::er::server>& server,
                      executable_task* root)
-    : client(server),
-      mc_root(root) {
+    : client(server), mc_root(root) {
   client::insmod("task_executive",
                  rcppsw::er::er_lvl::DIAG,
                  rcppsw::er::er_lvl::NOM);
@@ -50,18 +49,17 @@ void executive::task_abort_cleanup(
   m_task_abort_cleanup = std::move(cb);
 } /* task_abort_cleanup() */
 
-__const const std::function<void(executable_task* const)>& executive::task_abort_cleanup(
-    void) const {
+__const const std::function<void(executable_task* const)>& executive::
+    task_abort_cleanup(void) const {
   return m_task_abort_cleanup;
 } /* task_abort_cleanup() */
 
-void executive::task_alloc_notify(
-    std::function<void(executable_task* const)> cb) {
+void executive::task_alloc_notify(std::function<void(executable_task* const)> cb) {
   m_task_alloc_notify = std::move(cb);
 } /* task_alloc_notify() */
 
-__const const std::function<void(executable_task* const)>& executive::task_alloc_notify(
-    void) const {
+__const const std::function<void(executable_task* const)>& executive::
+    task_alloc_notify(void) const {
   return m_task_alloc_notify;
 } /* task_alloc_notify() */
 
@@ -70,11 +68,10 @@ void executive::task_finish_notify(
   m_task_finish_notify = std::move(cb);
 } /* task_alloc_notify() */
 
-__const const std::function<void(executable_task* const)>& executive::task_finish_notify(
-    void) const {
+__const const std::function<void(executable_task* const)>& executive::
+    task_finish_notify(void) const {
   return m_task_finish_notify;
 } /* task_alloc_notify() */
-
 
 executable_task* executive::get_next_task(executable_task* last_task) {
   m_last_task = last_task;

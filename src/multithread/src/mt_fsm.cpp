@@ -33,9 +33,9 @@ NS_START(rcppsw, multithread);
  ******************************************************************************/
 void mt_fsm::external_event(uint8_t new_state,
                             std::unique_ptr<const sm::event_data> data) {
-    m_mutex.lock();
-    base_fsm::external_event(new_state, std::move(data));
-    m_mutex.unlock();
+  m_mutex.lock();
+  base_fsm::external_event(new_state, std::move(data));
+  m_mutex.unlock();
 } /* external_event() */
 
 void mt_fsm::init(void) {

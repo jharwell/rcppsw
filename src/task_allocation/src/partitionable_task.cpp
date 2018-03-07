@@ -130,7 +130,6 @@ executable_task* partitionable_task::partition(void) {
 
   if (subtask_selection_probability::kHarwell2018 == m_selection_prob.method() ||
       subtask_selection_probability::kBrutschy2014 == m_selection_prob.method()) {
-
     /*
      * If we last executed subtask1, we calculate the probability of switching
      * to subtask2, based on time estimates.
