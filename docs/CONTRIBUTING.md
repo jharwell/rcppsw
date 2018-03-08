@@ -35,8 +35,8 @@ Some additional cmake config options that may be of interest:
 
 - `WITH_MPI` - Enable MPI code [Defaut=NO].
 
-- `WITH_FPC` - `FPC_RETURN` or `FPC_ABORT` [Default=`FPC_ABORT`]. This controls the
-             behavior a Function PreCondition (FPC) fails: Either return a
+- `WITH_FPC` - `FPC_RETURN` or `FPC_ABORT` [Default=`FPC_ABORT`]. This controls
+             the behavior a Function PreCondition (FPC) fails: Either return a
              specified error or halt the program.
 
 - `ER_NDEBUG` - Disable printing of assertion failures when `NDEBUG` is defined
@@ -58,16 +58,8 @@ will be populated.
 
 - `VERSION` - A file in the root root that holds the current/next versions of
   the code. Versions are numbered as `major.minor.patch`, and is updated in
-  accordance with semantic versioning/GitFlow:
-
-  - `major` corresponds to releases/milestones in the code, and is only updated when `devel` is merged to
-    `master`.
-
-  - `minor` corresponds to the addition of new features/major refactorings.
-
-  - `patch` corresponds to fixing bugs/documentation updates/etc.
-
-  You should never modify this file directly.
+  accordance with semantic versioning/GitFlow. You should never modify this file
+  directly.
 
 ## Development Guides
 ### C++ Style Guide
@@ -118,26 +110,34 @@ this project. In particular:
 
 ### Documentation Style
 
-`If it is hard to document, it is probably wrong`,
+As I was told in my youth:
 
-as I was told in my youth, and to that end all contributions *must* be
-properly documented.
+`If it is hard to document, it is probably wrong`
+
+To that end all contributions *must* be properly documented.
 
 - All classes should have:
 
     - A doxygen brief
     - A group tag
 
-- All non-getter/non-setter member functions should be documentated with at least a
-  brief, UNLESS those functions are overrides/inherited from a parent class, in
-  which case they should be left blank (usually) and their documentation be in
-  the class in which they are initially declared. All parameters should be
-  documented.
+- All non-getter/non-setter member functions should be documentated with at
+  least a brief, UNLESS those functions are overrides/inherited from a parent
+  class, in which case they should be left blank (usually) and their
+  documentation be in the class in which they are initially declared. All
+  parameters should be documented.
 
 Tricky/nuanced issues with member variables should be documented, though in
 general the namespace name + class name + member variable name + member variable
 type should be enough documentation. If its not, chances are you are naming
 things somewhat obfuscatingly.
+
+As I was also told in my youth:
+
+`If it is hard to test, it is almost assuredly wrong`
+
+To that end, all NEW classes should have some basic unit tests associated with
+them, when possible.
 
 ### Git Commit Messages
 
@@ -228,6 +228,9 @@ Types:
   files, moving things around, mucking about with the build process are all good
   examples of things that should get a `Task` label.
 
+- `Research` - The task is open-ended, requiring paper reading and/or lots of
+  experiment running, analyzing, etc.
+
 ### Testing
 
 All submitted *new* classes should have associated unit tests, one for each
@@ -236,9 +239,6 @@ have *new* public functions added, a new unit test should also be added. It is
 not possible to create unit tests for all classes, as some can only be tested in
 an integrated manner, but there many that can and should be tested in a stand
 alone fashion.
-
-As part of each issue addressal, a `gcov`/`gcovr` report showing full
-code coverage in the new class/new functions should be attached.
 
 ## Working from a clone, rather than a forked repo
 If you fork the repo rather than cloning it, you can use whatever style of
