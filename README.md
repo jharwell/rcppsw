@@ -39,20 +39,25 @@ Before starting, you will need a recent version of the following programs:
 - cmake
 - make
 - gcc
-- g++ - A version that supports C++11 is required.
+- g++ - A version that supports C++14 is required.
 
 You will also need recent versions of the following libraries:
 
 - boost (1.58 is known to work; older versions may also work)
 
-After cloning this repo, you will need to:
+### Pre-cloning
+1. Set up an ssh key for password-less connection to github (this is for the
+   cmake config). Yes I know that it can be done without ssh, but I set it up
+   this way so I don't have to type my github password ever.
 
+### Post-cloning
 1. Pull in the cmake config:
 
         git submodule update --init --recursive
 
 2. Clone `rcsw` https://github.com/jharwell/rcsw (Reusable C software) somewhere
-   and link it into `ext/rcsw`.
+   and link it into `ext/rcsw`. Follow post-cloning instructions in the README
+   found in that repo.
 
 Then you can build via:
 
@@ -60,7 +65,7 @@ Then you can build via:
     cmake ..
     make
 
-To build the extensive documentation, do:
+To build the documentation, do the following from the build directory:
 
     make documentation
 

@@ -13,8 +13,7 @@ following programs, as running them is part of the development workflow:
   is the minimum; 4.0 is recommended (better warnings).
 - gcov (for viewing code coverage).
 
-You will also need to:
-
+### Additional cloning
 1. clone https://github.com/jharwell/devel somewhere, and adjust a few more
    symlinks (or just download these files and place them directly in wherever
    you cloned `rcppsw`):
@@ -22,6 +21,8 @@ You will also need to:
    `<rcppsw root>/.clang-format` -> `<develroot>/templates/.clang-format`
 
    `<rcppsw root>/.clang-tidy` -> `<develroot>/templates/.clang-tidy`
+
+### Build Process Configuration
 
 Some additional cmake config options that may be of interest:
 
