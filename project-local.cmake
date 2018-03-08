@@ -26,6 +26,7 @@ list(APPEND ${target}_SUBDIRS utils)
 list(APPEND ${target}_SUBDIRS control)
 list(APPEND ${target}_SUBDIRS task_allocation)
 list(APPEND ${target}_SUBDIRS common)
+list(APPEND ${target}_SUBDIRS metrics)
 
 if (WITH_MPI)
   list(APPEND ${target}_SUBDIRS multiprocess)
@@ -50,14 +51,15 @@ set(${target}_LIBS
   ${Boost_LIBRARIES}
   )
 
-if (NOT TARGET${target})
-  add_library(${target}
+if (NOT TARGET ${target})
+  add_library(${target} STATIC
     $<TARGET_OBJECTS:${target}-er>
     $<TARGET_OBJECTS:${target}-multithread>
     $<TARGET_OBJECTS:${target}-utils>
     $<TARGET_OBJECTS:${target}-state_machine>
     $<TARGET_OBJECTS:${target}-task_allocation>
     $<TARGET_OBJECTS:${target}-common>
+    $<TARGET_OBJECTS:${target}-metrics>
     $<TARGET_OBJECTS:${target}-control>)
   target_link_libraries(${target} "${${target}_LIBS}")
 endif()

@@ -26,6 +26,8 @@
  * Includes
  ******************************************************************************/
 #include <memory>
+#include <tuple>
+
 #include "rcsw/common/common.h"
 
 /*******************************************************************************
@@ -78,14 +80,7 @@ NS_START(rcppsw);
 /*******************************************************************************
  * Templates
  ******************************************************************************/
-#if __cplusplus == 201402L
-/**
- * @typedef Implementation of std::make_unique which exists in C++14, but not
- * C++11, so if compiling for that standard I have to roll my own.
- */
-typedef std::make_unique make_unique;
 
-#elif __cplusplus == 201103L
 /**
  * @brief Implementation of std::make_unique which exists in C++14, but not
  * C++11, so if compiling for that standard I have to roll my own.
@@ -95,7 +90,11 @@ std::unique_ptr<T> make_unique(Args&&... args) {
   return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
 }
 
-#endif /* __cplusplus */
+template <class... Args>
+struct tuple_type_list {
+  template <std::size_t N>
+  using type = typename std::tuple_element<N, std::tuple<Args...>>::type;
+};
 
 NS_END(rcppsw);
 

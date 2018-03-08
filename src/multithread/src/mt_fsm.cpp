@@ -1,5 +1,5 @@
 /**
- * @file task_params.hpp
+ * @file mt_fsm.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,37 +18,30 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/common/base_params.hpp"
+#include "rcppsw/multithread/mt_fsm.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, multithread);
 
 /*******************************************************************************
- * Structure Definitions
+ * Member Functions
  ******************************************************************************/
-/**
- * @struct task_params
- * @ingroup task_allocation
- *
- * @brief Parameters used by \ref executable_task tasks.
- */
-struct task_params : public common::base_params {
-  double estimation_alpha{0.0};
-  double abort_reactivity{0.0};
-  double abort_offset{0.0};
-  double partition_reactivity{0.0};
-  double partition_offset{0.0};
-};
+void mt_fsm::external_event(uint8_t new_state,
+                            std::unique_ptr<const sm::event_data> data) {
+  m_mutex.lock();
+  base_fsm::external_event(new_state, std::move(data));
+  m_mutex.unlock();
+} /* external_event() */
 
-NS_END(task_allocation, rcppsw);
+void mt_fsm::init(void) {
+  m_mutex.lock();
+  base_fsm::init();
+  m_mutex.unlock();
+} /* init() */
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_ */
+NS_END(multithread, rcppsw);

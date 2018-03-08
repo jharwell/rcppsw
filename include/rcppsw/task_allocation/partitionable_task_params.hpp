@@ -1,5 +1,5 @@
 /**
- * @file task_params.hpp
+ * @file partitionable_task_params.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,14 +18,14 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITIONABLE_TASK_PARAMS_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITIONABLE_TASK_PARAMS_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/common/base_params.hpp"
+#include "rcppsw/task_allocation/task_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -36,17 +36,18 @@ NS_START(rcppsw, task_allocation);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct task_params
- * @ingroup task_allocation
+ * @struct partitionable_task_params
  *
- * @brief Parameters used by \ref executable_task tasks.
+ * @brief Parameters used by \ref partitionable_task tasks.
  */
-struct task_params : public common::base_params {
-  double estimation_alpha{0.0};
-  double abort_reactivity{0.0};
-  double abort_offset{0.0};
-  double partition_reactivity{0.0};
-  double partition_offset{0.0};
+struct partitionable_task_params : public task_params {
+  partitionable_task_params(void)
+      : task_params() {}
+
+  std::string subtask_selection_method{""};
+  std::string partition_method{""};
+  bool always_partition{false};
+  bool never_partition{false};
 };
 
 NS_END(task_allocation, rcppsw);

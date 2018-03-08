@@ -43,8 +43,8 @@ namespace factory = rcppsw::patterns::factory;
  * @class xml_param_repository
  * @ingroup common
  *
- * @brief A repository for multiple \ref xml_param_parser and their parsed
- * results.
+ * @brief A repository for multiple \ref xml_param_parser objects and their
+ * parsed results; allows collective operations on multiple parsers.
  *
  * Utilizes factory pattern for parser creation. Does not create any parsers on
  * its own (how could it know which ones to create?).

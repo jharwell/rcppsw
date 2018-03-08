@@ -1,7 +1,7 @@
 /**
- * @file task_params.hpp
+ * @file execution_metrics.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,37 +18,43 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_TASKS_EXECUTION_METRICS_HPP_
+#define INCLUDE_RCPPSW_METRICS_TASKS_EXECUTION_METRICS_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/common/base_params.hpp"
+
+#include "rcppsw/common/common.hpp"
+#include "rcppsw/metrics/base_metrics.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, metrics, tasks);
 
 /*******************************************************************************
- * Structure Definitions
+ * Class Definitions
  ******************************************************************************/
 /**
- * @struct task_params
- * @ingroup task_allocation
+ * @class execution_metrics
+ * @ingroup metrics tasks
  *
- * @brief Parameters used by \ref executable_task tasks.
+ * @brief Interface defining metrics that can be collected on tasks as they are
+ * executed.
  */
-struct task_params : public common::base_params {
-  double estimation_alpha{0.0};
-  double abort_reactivity{0.0};
-  double abort_offset{0.0};
-  double partition_reactivity{0.0};
-  double partition_offset{0.0};
+class execution_metrics : public base_metrics {
+ public:
+  execution_metrics(void) = default;
+  ~execution_metrics(void) override = default;
+
+  /**
+   * @brief If \c TRUE, then the robot is currently at its task interface.
+   */
+  virtual bool at_interface(void) const = 0;
 };
 
-NS_END(task_allocation, rcppsw);
+NS_END(tasks, metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_ */
+#endif /* INCLUDE_RCPPSW_METRICS_TASKS_EXECUTION_METRICS_HPP_ */

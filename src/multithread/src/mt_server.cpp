@@ -1,5 +1,5 @@
 /**
- * @file task_params.hpp
+ * @file mt_server.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,37 +18,50 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/common/base_params.hpp"
+#include "rcppsw/multithread/mt_server.hpp"
+#include <algorithm>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, multithread);
 
 /*******************************************************************************
- * Structure Definitions
+ * Constructors/Destructors
  ******************************************************************************/
-/**
- * @struct task_params
- * @ingroup task_allocation
- *
- * @brief Parameters used by \ref executable_task tasks.
- */
-struct task_params : public common::base_params {
-  double estimation_alpha{0.0};
-  double abort_reactivity{0.0};
-  double abort_offset{0.0};
-  double partition_reactivity{0.0};
-  double partition_offset{0.0};
-};
+mt_server::mt_server(const std::string& logfile_fname,
+                     const er::er_lvl::value& dbglvl,
+                     const er::er_lvl::value& loglvl)
+    : server(logfile_fname, dbglvl, loglvl), m_queue() {}
 
-NS_END(task_allocation, rcppsw);
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+void mt_server::flush(void) {
+  while (m_queue.size() > 0) {
+    er::er_msg next = m_queue.dequeue();
+    server::report(next);
+  } /* while() */
+} /* flush() */
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_ */
+void* mt_server::thread_main(__unused void* arg) {
+  while (!terminated()) {
+    while (0 == m_queue.size()) {
+      sleep(1);
+    }
+    er::er_msg msg = m_queue.dequeue();
+    server::report(msg);
+  } /* while() */
+
+  /* make sure all events remaining in queue are reported */
+  while (m_queue.size() > 0) {
+    er::er_msg msg = m_queue.dequeue();
+    server::report(msg);
+  } /* while() */
+  return nullptr;
+} /* thread_main() */
+
+NS_END(multithread, rcpppsw);

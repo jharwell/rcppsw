@@ -35,6 +35,7 @@
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, er);
+struct er_msg;
 
 /*******************************************************************************
  * Class Definitions
@@ -47,51 +48,66 @@ NS_START(rcppsw, er);
  */
 class server_mod {
  public:
-  /* member functions */
   server_mod(boost::uuids::uuid id,
              er_lvl::value loglvl,
              er_lvl::value dbglvl,
              std::string name);
   server_mod(boost::uuids::uuid id, std::string name);
 
+  bool operator==(const server_mod& rhs) const {
+    return (this->m_id == rhs.m_id);
+  }
+
   /**
    * @brief Set the debug printing level for a module.
    *
    * @param lvl The new level.
    */
-  void set_dbglvl(const er_lvl::value& lvl);
+  void set_dbglvl(const er_lvl::value& lvl) { m_dbglvl = lvl; }
 
   /**
    * @brief Set the logging level for a module.
    *
    * @param lvl The new level.
    */
-  void set_loglvl(const er_lvl::value& lvl);
+  void set_loglvl(const er_lvl::value& lvl) { m_loglvl = lvl; }
 
-  er_lvl::value dbglvl(void) { return m_dbglvl; }
-  er_lvl::value loglvl(void) { return m_loglvl; }
-
-  /**
-   * @brief Log a message to a file if the message level is high enough.
-   *
-   * @param header The header for the msg (timestamp, etc.). Can be empty.
-   * @param msg The message to log.
-   * @param msg_lvl The level of the message.
-   * @param log_lvl The level of the message.
-   * @param stream The stream to log the message to.
-   */
-  void msg_report(const std::string& header,
-                  const std::string& msg,
-                  er_lvl::value msg_lvl,
-                  er_lvl::value log_lvl,
-                  std::ostream& stream) const;
-  bool operator==(const server_mod& rhs);
+  er_lvl::value dbglvl(void) const { return m_dbglvl; }
+  er_lvl::value loglvl(void) const { return m_loglvl; }
   const boost::uuids::uuid& id(void) const { return m_id; }
   void change_id(boost::uuids::uuid id) { m_id = id; }
   const std::string& name(void) const { return m_name; }
 
+
+  /**
+   * @brief Report the specified message if the level for it is high enough.
+   *
+   * @param header The header for the msg (timestamp, etc.). Can be empty.
+   * @param msg The message to log.
+   * @param msg_lvl The level of the message.
+   * @param lvl The level of the module for the stream.
+   * @param stream The stream to log the message to.
+   */
+  void msg_report(const std::string& header,
+                  const er_msg& msg,
+                  er_lvl::value lvl,
+                  std::ostream& stream) const;
+
+  /**
+   * @brief Determine if the specified message WOULD be reported if
+   * \ref msg_report was called.
+   *
+   * Used to short circuit potentially wasteful calls to constructing messages
+   * that will never be reported.
+   *
+   * @param msg The message to check.
+   * @param lvl The level of the module.
+   *
+   * @return \c TRUE if the message will be reported, \c FALSE otherwise.
+   */
+  bool will_report(const er_msg& msg, er_lvl::value lvl) const;
+
  private:
-  /* data members */
   boost::uuids::uuid m_id;
   std::string m_name;
   er_lvl::value m_loglvl;

@@ -5,10 +5,13 @@
 If you are going to be doing any development in RCPPSW, you will also need the
 following programs, as running them is part of the development workflow:
 
-- cppcheck (static analysis)
-- clang-check3.8 (syntax checking/static analysis )
-- clang-format-4.0 (automatic code formatting)
-- clang-tidy-4.0 (static analysis/automated checking of naming conventions)
+- cppcheck (static analysis).
+- clang-check-3.8 (syntax checking/static analysis). 3.8 is the minimum; 4.0
+  recommended (better warnings).
+- clang-format-4.0 (automatic code formatting).
+- clang-tidy-4.0 (static analysis/automated checking of naming conventions). 3.8
+  is the minimum; 4.0 is recommended (better warnings).
+- gcov (for viewing code coverage).
 
 You will also need to:
 
@@ -22,19 +25,22 @@ You will also need to:
 
 Some additional cmake config options that may be of interest:
 
-- SHARED_LIBS - Build shared instead of static libraries [Default=YES].
+- `BUILD_SHARED_LIBS` - Build shared instead of static libraries [Default=YES].
 
-- WITH_CHECKS - Build in run-time checking of code [Default=NO].
+- `WITH_CHECKS` - Build in run-time checking of code [Default=NO].
 
-- BUILD_TESTS - Build tests. [Default=NO].
+- `BUILD_TESTS` - Build tests. [Default=NO].
 
-- WITH_OPENMP - Enable OpenMP code [Default=YES].
+- `WITH_OPENMP` - Enable OpenMP code [Default=NO].
 
-- WITH_MPI - Enable MPI code[Defaut=NO].
+- `WITH_MPI` - Enable MPI code [Defaut=NO].
 
-- WITH\_FPC - FPC\_RETURN or FPC\_ABORT [Default=`FPC_ABORT`]. This controls the
-             behavior a Function PreCondition (FPC) fails: Either return a
+- `WITH_FPC` - `FPC_RETURN` or `FPC_ABORT` [Default=`FPC_ABORT`]. This controls
+             the behavior a Function PreCondition (FPC) fails: Either return a
              specified error or halt the program.
+
+- `ER_NDEBUG` - Disable printing of assertion failures when `NDEBUG` is defined
+  (as for optimized builds). [Default=1].
 
 The cmake config supports the following compilers: `g++, clang++, icpc`; any one
 can be selected as the `CMAKE_CXX_COMPILER`, and the correct compile options
@@ -52,17 +58,8 @@ will be populated.
 
 - `VERSION` - A file in the root root that holds the current/next versions of
   the code. Versions are numbered as `major.minor.patch`, and is updated in
-  accordance with semantic versioning/GitFlow:
-
-  - `major` corresponds to releases/milestones in the code, and is only updated when `devel` is merged to
-    `master`.
-
-  - `minor` corresponds to the addition of new features/major refactorings.
-
-  - `patch` corresponds to fixing bugs/documentation updates/etc.
-
-  You should never modify this file directly.
-
+  accordance with semantic versioning/GitFlow. You should never modify this file
+  directly.
 
 ## Development Guides
 ### C++ Style Guide
@@ -113,26 +110,34 @@ this project. In particular:
 
 ### Documentation Style
 
-`If it is hard to document, it is probably wrong`,
+As I was told in my youth:
 
-as I was told in my youth, and to that end all contributions *must* be
-properly documented.
+`If it is hard to document, it is probably wrong`
+
+To that end all contributions *must* be properly documented.
 
 - All classes should have:
 
     - A doxygen brief
     - A group tag
 
-- All non-getter/non-setter member functions should be documentated with at least a
-  brief, UNLESS those functions are overrides/inherited from a parent class, in
-  which case they should be left blank (usually) and their documentation be in
-  the class in which they are initially declared. All parameters should be
-  documented.
+- All non-getter/non-setter member functions should be documentated with at
+  least a brief, UNLESS those functions are overrides/inherited from a parent
+  class, in which case they should be left blank (usually) and their
+  documentation be in the class in which they are initially declared. All
+  parameters should be documented.
 
 Tricky/nuanced issues with member variables should be documented, though in
 general the namespace name + class name + member variable name + member variable
 type should be enough documentation. If its not, chances are you are naming
 things somewhat obfuscatingly.
+
+As I was also told in my youth:
+
+`If it is hard to test, it is almost assuredly wrong`
+
+To that end, all NEW classes should have some basic unit tests associated with
+them, when possible.
 
 ### Git Commit Messages
 
@@ -144,14 +149,13 @@ things somewhat obfuscatingly.
 
   - :art: `:art:` when improving the format/structure of the code
   - :racehorse: `:racehorse:` when improving performance
-  - :non-potable_water: `:non-potable_water:` when plugging memory leaks
-  - :memo: `:memo:` when writing docs
   - :penguin: `:penguin:` when fixing something on Linux
   - :apple: `:apple:` when fixing something on macOS
-  - :checkered_flag: `:checkered_flag:` when fixing something on Windows
+
+  - :non-potable_water: `:non-potable_water:` when plugging memory leaks
+  - :memo: `:memo:` when writing docs
   - :bug: `:bug:` when fixing a bug
   - :fire: `:fire:` when removing code or files
-  - :green_heart: `:green_heart:` when fixing the CI build
   - :white_check_mark: `:white_check_mark:` when adding tests
   - :lock: `:lock:` when dealing with security
   - :arrow_up: `:arrow_up:` when upgrading dependencies
@@ -224,10 +228,17 @@ Types:
   files, moving things around, mucking about with the build process are all good
   examples of things that should get a `Task` label.
 
+- `Research` - The task is open-ended, requiring paper reading and/or lots of
+  experiment running, analyzing, etc.
+
 ### Testing
 
 All submitted *new* classes should have associated unit tests, one for each
-major function that the class provides, at a minimum.
+major public function that the class provides. For any *existing* classes that
+have *new* public functions added, a new unit test should also be added. It is
+not possible to create unit tests for all classes, as some can only be tested in
+an integrated manner, but there many that can and should be tested in a stand
+alone fashion.
 
 ## Working from a clone, rather than a forked repo
 If you fork the repo rather than cloning it, you can use whatever style of
@@ -284,7 +295,11 @@ should be named/link to github issues by browsing the repo.
 
    Where TYPE is one of the types listed above.
 
-5. Run static analysis on the code:
+5. If you create any new functions/classes that can be unit tested, then define
+   appropriate unit tests for them, and prepare a report documenting code
+   coverage, as described above.
+
+6. Run static analysis on the code:
 
         make static-check-all
 
@@ -296,31 +311,24 @@ should be named/link to github issues by browsing the repo.
 
         make cppcheck-all
 
-6. Run the style checker on the code:
+7. Run the style checker on the code:
 
         make tidy-check-all
 
    Not everything flagged should/can be fixed, so only pay attention to things
    that it flags in code YOU have changed. If you aren't sure, ask someone.
 
-7. Run the clang formatter on the code to fix any formatting things you may have
+8. Run the clang formatter on the code to fix any formatting things you may have
    inadverdently missed.
 
         make format-all
 
-8. Change status to `Status: Needs Review` and open a pull request (if working
+9. Change status to `Status: Needs Review` and open a pull request (if working
    from a forked repo), or mention the project's main author in the correspond
    issue to bring it to their attention (if working from a cloned repo). In the
-   latter case, they will review the commits.
+   latter case, they will review the commits. If you created unit tests, attach
+   a log/run showing they all pass, as well as the code coverage report from
+   gcov.
 
-9. Once the task has been reviewed and given the green light, merge it into
-   devel, and marked the issue as `Status: Completed`, and close the issue.
-
-# License
-This project is licensed under GPL 2.0. See [LICENSE](LICENSE.md).
-
-# Donate
-If you've found this project helpful, please consider donating somewhere between
-a cup of coffe and a nice meal:
-
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/jharwell1406)
+10. Once the task has been reviewed and given the green light, merge it into
+    devel, and marked the issue as `Status: Completed`, and close the issue.

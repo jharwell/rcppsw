@@ -57,7 +57,7 @@ NS_START(rcppsw, task_allocation);
  */
 class partition_probability : public rcppsw::math::expression<double> {
  public:
-  explicit partition_probability(std::string method, double reactivity)
+  partition_probability(std::string method, double reactivity)
       : mc_method(std::move(method)), m_reactivity(reactivity) {}
 
   double calc(const time_estimate& task,

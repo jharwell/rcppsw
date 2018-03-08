@@ -67,6 +67,7 @@ class pheromone_density : public rcppsw::math::expression<double> {
     return set_result(res);
   }
   void pheromone_add(double val) { m_delta += val; }
+  void pheromone_set(double val) { set_result(val); }
 
  private:
   double m_delta;

@@ -30,11 +30,12 @@
 #include <string>
 #include <boost/uuid/uuid.hpp>
 #include "rcppsw/er/server_mod.hpp"
+#include "rcppsw/er/er_msg.hpp"
 
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#ifndef RCPPSW_ER_NO_REPORT
+#ifndef ER_NO_REPORT
 /* ---------- Explicit debug level statements (use these) ---------- */
 
 /**
@@ -90,18 +91,22 @@
  */
 #define ER_REPORT(lvl, msg, ...)                       \
   {                                                    \
-    char _str[1000];                                   \
-    snprintf(static_cast<char*>(_str),                 \
-             sizeof(_str),                             \
-             "%s:%d:%s: " msg "\n",                    \
-             __FILE__,                                 \
-             __LINE__,                                 \
-             reinterpret_cast<const char*>(__FUNCTION__),       \
-             ##__VA_ARGS__);                           \
-    __er_report__(rcppsw::er::client::server_handle(), \
-                  rcppsw::er::client::er_id(),         \
-                  lvl,                                 \
-                  std::string(reinterpret_cast<char*>(_str)));  \
+    if (__er_will_report__(rcppsw::er::client::server_handle(),   \
+                           rcppsw::er::client::er_id(),           \
+                           lvl)) {                                \
+      char _str[1000];                                 \
+      snprintf(static_cast<char*>(_str),               \
+               sizeof(_str),                           \
+               "%s:%d:%s: " msg "\n",                  \
+               __FILE__,                               \
+               __LINE__,                                        \
+               reinterpret_cast<const char*>(__FUNCTION__),     \
+               ##__VA_ARGS__);                                  \
+      rcppsw::er::er_msg _msg(rcppsw::er::client::er_id(),      \
+                              lvl,                              \
+                              std::string(reinterpret_cast<char*>(_str))); \
+      __er_report__(rcppsw::er::client::server_handle(), _msg);         \
+    }                                                                   \
   }
 
 #else
@@ -111,7 +116,7 @@
 #define ER_NOM(...)
 #define ER_DIAG(...)
 #define ER_VER(...)
-#endif /* RCPPSW_ER_NO_REPORT */
+#endif /* ER_NO_REPORT */
 
 /**
  * @def ER_CHECK(cond, msg, ...)
@@ -157,11 +162,15 @@
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
+#ifndef ER_NDEBUG
 #define ER_ASSERT(cond, msg, ...)                           \
   if (!(cond)) {                                            \
     ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__); \
     assert(cond);                                           \
   }
+#else
+#define ER_ASSERT(cond, msg, ...)
+#endif
 
 /**
  * @def ER_FATAL_SENTINEL(msg,...)
@@ -173,11 +182,15 @@
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
+#ifndef ER_NDEBUG
 #define ER_FATAL_SENTINEL(msg, ...)                             \
   {                                                             \
     ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__);     \
     assert(false);                                                  \
   }
+#else
+#define ER_FATAL_SENTINEL(msg, ...)
+#endif
 
 /*******************************************************************************
  * Namespaces
@@ -217,7 +230,7 @@ class client {
    *
    * @param server_handle The server to attach to.
    */
-  void deferred_init(std::shared_ptr<server> server_handle);
+  virtual void deferred_client_init(std::shared_ptr<server> server_handle);
 
   /**
    * @brief Add a module to the active list (long version).
@@ -297,16 +310,32 @@ extern std::shared_ptr<rcppsw::er::global_server> g_server;
  * This should never be called directly.
  *
  * @param server The server to report the event to.
- * @param er_id ID of the module reporting the event.
- * @param lvl The level of the event.
- * @param str The event message.
+ * @param msg The event message.
  *
  * @endinternal
  */
 void __er_report__(server* server,
-                   const boost::uuids::uuid& er_id,
-                   const er_lvl::value& lvl,
-                   const std::string& str);
+                   const er_msg& msg);
+
+/**
+ * @internal
+ * @brief Determine if the specified message will be reported on the specified
+ * server.
+ *
+ * Used to short circuit potentially expensive message construction for messages
+ * that will never be reported.
+ *
+ * @param server The server to check.
+ * @param er_id ER id for the module.
+ * @param lvl Level of the message.
+ *
+ * @return \c TRUE if the message will be reported, \c FALSE otherwise.
+ * @endinternal
+ */
+bool __er_will_report__(const server* const server,
+                        const boost::uuids::uuid& er_id,
+                        const er_lvl::value& lvl);
+
 NS_END(rcppsw, er);
 
 #endif /* INCLUDE_RCPPSW_ER_CLIENT_HPP_ */

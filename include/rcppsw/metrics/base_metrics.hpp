@@ -1,5 +1,5 @@
 /**
- * @file mt_server.cpp
+ * @file base_metrics.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,50 +18,36 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_METRICS_BASE_METRICS_HPP_
+#define INCLUDE_RCPPSW_METRICS_BASE_METRICS_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/er/mt_server.hpp"
-#include <algorithm>
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, er);
+NS_START(rcppsw, metrics);
 
 /*******************************************************************************
- * Constructors/Destructors
+ * Class Definitions
  ******************************************************************************/
-mt_server::mt_server(const std::string& logfile_fname,
-                     const er_lvl::value& dbglvl,
-                     const er_lvl::value& loglvl)
-    : server(logfile_fname, dbglvl, loglvl), m_queue() {}
+/**
+ * @class base_metrics
+ * @ingroup metrics
+ *
+ * @brief Base class for all collected metrics in RCPPSW.
+ */
+class base_metrics {
+ public:
+  base_metrics(void) = default;
+  virtual ~base_metrics(void) = default;
+  base_metrics(const base_metrics&) = default;
+  base_metrics& operator=(const base_metrics&) = default;
+};
 
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-void mt_server::flush(void) {
-  while (m_queue.size() > 0) {
-    msg_int next = m_queue.dequeue();
-    server::msg_report(next);
-  } /* while() */
-} /* flush() */
+NS_END(metrics, rcppsw);
 
-void* mt_server::thread_main(__unused void* arg) {
-  while (!terminated()) {
-    while (0 == m_queue.size()) {
-      sleep(1);
-    }
-    msg_int msg = m_queue.dequeue();
-    msg_report(msg);
-  } /* while() */
-
-  /* make sure all events remaining in queue are reported */
-  while (m_queue.size() > 0) {
-    msg_int msg = m_queue.dequeue();
-    msg_report(msg);
-  } /* while() */
-  return nullptr;
-} /* thread_main() */
-
-NS_END(er, rcpppsw);
+#endif /* INCLUDE_RCPPSW_METRICS_BASE_METRICS_HPP_ */

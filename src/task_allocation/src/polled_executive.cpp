@@ -102,6 +102,11 @@ void polled_executive::handle_task_abort(polled_task* task) {
 void polled_executive::handle_task_finish(polled_task* task) {
   task->update_exec_time();
   task->update_exec_estimate(task->exec_time());
+
+  if (executive::task_finish_notify()) {
+    executive::task_finish_notify()(task);
+  }
+
   task->reset_exec_time();
   task->update_exec_time();
   task->reset_interface_time();
@@ -120,13 +125,16 @@ void polled_executive::handle_task_finish(polled_task* task) {
                              p->partition2()->exec_estimate());
   }
   task = static_cast<polled_task*>(executive::get_next_task(task));
-
   handle_task_start(task);
   task->task_execute();
 } /* handle_task_finish() */
 
 void polled_executive::handle_task_start(polled_task* new_task) {
   ER_NOM("Starting new task '%s'", new_task->name().c_str());
+
+  if (executive::task_alloc_notify()) {
+    executive::task_alloc_notify()(new_task);
+  }
 
   new_task->task_reset();
   new_task->task_start(nullptr);

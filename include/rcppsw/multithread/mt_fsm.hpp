@@ -1,5 +1,5 @@
 /**
- * @file task_params.hpp
+ * @file mt_fsm.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,37 +18,54 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
+#ifndef INCLUDE_RCPPSW_MULTITHREAD_MT_FSM_HPP_
+#define INCLUDE_RCPPSW_MULTITHREAD_MT_FSM_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/common/base_params.hpp"
+#include "rcppsw/common/common.hpp"
+#include "rcppsw/patterns/state_machine/base_fsm.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, multithread);
+namespace sm = patterns::state_machine;
 
 /*******************************************************************************
- * Structure Definitions
+ * Class Definitions
  ******************************************************************************/
 /**
- * @struct task_params
- * @ingroup task_allocation
+ * @class mt_fsm
+ * @ingroup multithread
  *
- * @brief Parameters used by \ref executable_task tasks.
+ * @brief Extends \ref base_fsm to be threadsafe.
  */
-struct task_params : public common::base_params {
-  double estimation_alpha{0.0};
-  double abort_reactivity{0.0};
-  double abort_offset{0.0};
-  double partition_reactivity{0.0};
-  double partition_offset{0.0};
+class mt_fsm : patterns::state_machine::base_fsm {
+ public:
+  mt_fsm(const std::shared_ptr<er::server>& server,
+      uint8_t max_states,
+         uint8_t initial_state = 0)
+      : base_fsm(server, max_states, initial_state),
+        m_mutex() {}
+
+  explicit mt_fsm(uint8_t max_states,
+         uint8_t initial_state = 0)
+    : base_fsm(max_states, initial_state),
+    m_mutex() {}
+
+  ~mt_fsm(void) override = default;
+
+  void init(void) override;
+
+ protected:
+  void external_event(uint8_t new_state, std::unique_ptr<const sm::event_data> data) override;
+
+ private:
+  std::mutex m_mutex;
 };
 
-NS_END(task_allocation, rcppsw);
+NS_END(multithread, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_ */
+#endif /* INCLUDE_RCPPSW_MULTITHREAD_MT_FSM_HPP_ */

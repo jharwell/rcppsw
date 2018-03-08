@@ -52,7 +52,7 @@ double subtask_selection_probability::calc(const time_estimate* subtask1,
   if ("brutschy2014" == mc_method) {
     return calc_brutschy2014(*subtask1, *subtask2);
   } else if ("harwell2018" == mc_method) {
-      return calc_harwell2018(*subtask1, *subtask2);
+    return calc_harwell2018(*subtask1, *subtask2);
   } else if ("random" == mc_method) {
     return calc_random();
   }
@@ -60,7 +60,7 @@ double subtask_selection_probability::calc(const time_estimate* subtask1,
   return 0.0;
 } /* calc() */
 
-double subtask_selection_probability::calc_random(void) {
+__const double subtask_selection_probability::calc_random(void) {
   return 0.5;
 } /* calc_random() */
 
@@ -76,9 +76,8 @@ double subtask_selection_probability::calc_harwell2018(
   return calc_sigmoid(exec_est2, exec_est1);
 } /* calc_harwell2018() */
 
-double subtask_selection_probability::calc_sigmoid(
-    const time_estimate& est1,
-    const time_estimate& est2) {
+double subtask_selection_probability::calc_sigmoid(const time_estimate& est1,
+                                                   const time_estimate& est2) {
   /*
    * No information available--just pick randomly.
    */

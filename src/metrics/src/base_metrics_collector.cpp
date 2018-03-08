@@ -1,7 +1,7 @@
 /**
- * @file task_params.hpp
+ * @file base_metric_collector.cpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,37 +18,48 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/common/base_params.hpp"
+#include "rcppsw/metrics/base_metrics_collector.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, metrics);
 
 /*******************************************************************************
- * Structure Definitions
+ * Member Functions
  ******************************************************************************/
-/**
- * @struct task_params
- * @ingroup task_allocation
- *
- * @brief Parameters used by \ref executable_task tasks.
- */
-struct task_params : public common::base_params {
-  double estimation_alpha{0.0};
-  double abort_reactivity{0.0};
-  double abort_offset{0.0};
-  double partition_reactivity{0.0};
-  double partition_offset{0.0};
-};
+void base_metrics_collector::csv_line_write(uint timestep) {
+  std::string line;
+  if (csv_line_build(line)) {
+    m_ofile << std::to_string(timestep) + m_separator + line << std::endl;
+  }
+} /* csv_line_write() */
 
-NS_END(task_allocation, rcppsw);
+void base_metrics_collector::csv_header_write(void) {
+  std::string header = csv_header_build("");
+  m_ofile << header + "\n";
+} /* csv_header_write() */
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_ */
+std::string base_metrics_collector::csv_header_build(const std::string& header) {
+  return header + "clock" + m_separator;
+} /* csv_header_build() */
+
+void base_metrics_collector::reset(void) {
+  /* Open output file and truncate */
+  if (m_ofile.is_open()) {
+    m_ofile.close();
+  }
+  m_ofile.open(m_ofname.c_str(), std::ios_base::trunc | std::ios_base::out);
+  csv_header_write();
+} /* reset() */
+
+void base_metrics_collector::interval_reset(void) {
+  if ((m_timestep % m_interval == 0)) {
+    reset_after_interval();
+  }
+} /* interval_reset() */
+
+NS_END(metrics, rcppsw);

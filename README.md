@@ -32,12 +32,6 @@ exist in Boost, or that build on what boost provides. Includes such things as:
  - Miscellaneous other things as kmeans clustering,
    multithreading/multiprocessing management tools.
 
-For full details, clone the repo and build the documentation via:
-
-    make documentation
-
-from your build directory.
-
 ## Basic Setup
 
 Before starting, you will need a recent version of the following programs:
@@ -45,7 +39,11 @@ Before starting, you will need a recent version of the following programs:
 - cmake
 - make
 - gcc
-- g++ (A version that supports C++11 is required)
+- g++ - A version that supports C++11 is required.
+
+You will also need recent versions of the following libraries:
+
+- boost (1.58 is known to work; older versions may also work)
 
 After cloning this repo, you will need to:
 
@@ -67,6 +65,14 @@ To build the extensive documentation, do:
     make documentation
 
 For contributing to `rcppsw`, see [CONTRIBUTING](docs/CONTRIBUTING.md)
+
+# Troubleshooting
+
+- If you are having trouble building, try updating the cmake submodule:
+
+        git submodule update
+
+  If the problem perists, open an issue.
 
 # License
 This project is licensed under GPL 2.0. See [LICENSE](LICENSE).

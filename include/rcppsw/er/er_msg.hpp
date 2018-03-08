@@ -1,7 +1,7 @@
 /**
- * @file task_params.hpp
+ * @file er_msg.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,37 +18,46 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_
+#ifndef INCLUDE_RCPPSW_ER_ER_MSG_HPP_
+#define INCLUDE_RCPPSW_ER_ER_MSG_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <boost/uuid/uuid_generators.hpp>
 #include <string>
-#include "rcppsw/common/base_params.hpp"
+
+#include "rcppsw/common/common.hpp"
+#include "rcppsw/er/er_lvl.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, er);
 
 /*******************************************************************************
- * Structure Definitions
+ * Struct Definitions
  ******************************************************************************/
 /**
- * @struct task_params
- * @ingroup task_allocation
+ * @internal
+ * @struct er_msg
  *
- * @brief Parameters used by \ref executable_task tasks.
+ * @brief Internal class wrapping all the information needed to processing a
+ * message besides the text of the message itself.
+ *
+ * @endinternal
  */
-struct task_params : public common::base_params {
-  double estimation_alpha{0.0};
-  double abort_reactivity{0.0};
-  double abort_offset{0.0};
-  double partition_reactivity{0.0};
-  double partition_offset{0.0};
+struct er_msg {
+  er_msg(const boost::uuids::uuid& id_,
+         const er_lvl::value& lvl_,
+         std::string str_)
+      : id(id_), lvl(lvl_), str(std::move(str_)) {}
+
+  boost::uuids::uuid id;
+  er_lvl::value lvl;
+  std::string str;
 };
 
-NS_END(task_allocation, rcppsw);
+NS_END(er, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_ */
+#endif /* INCLUDE_RCPPSW_ER_ER_MSG_HPP_ */

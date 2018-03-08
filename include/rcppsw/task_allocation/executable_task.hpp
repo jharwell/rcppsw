@@ -97,14 +97,26 @@ class executable_task : public logical_task {
   virtual void task_execute(void) = 0;
 
   /**
-   * @brief Get the last interface time of the task.
+   * @brief Get the current interface time of the task.
    */
   double interface_time(void) const { return m_interface_time; }
 
   /**
-   * @brief Get the last execution time of the task.
+   * @brief Get the last interface time of the task. This may be needed if the
+   * interface time is needed for calculations on the timestep in which a task
+   * finishes, at which time the regular interface time has been reset.
+   */
+  double last_interface_time(void) const { return m_last_interface_time; }
+
+  /**
+   * @brief Get the current execution time of the task.
    */
   double exec_time(void) const { return m_exec_time; }
+
+  /**
+   * @brief Get the last execution time of the task.
+   */
+  double last_exec_time(void) const { return m_last_exec_time; }
 
   /**
    * @brief Define how to partition the task. Does nothing by default.
@@ -163,7 +175,10 @@ class executable_task : public logical_task {
    * @brief Because tasks can have multiple interfaces, they need a way to reset
    * their interface time upon leaving/entering an interface.
    */
-  void reset_interface_time(void) { m_interface_start_time = current_time(); }
+  void reset_interface_time(void) {
+    m_last_interface_time = m_interface_time;
+    m_interface_start_time = current_time();
+  }
 
   /**
    * @brief Update the calculated execution time for the task
@@ -178,15 +193,21 @@ class executable_task : public logical_task {
    * @brief Reset the execution time for the task. Should never be called
    * directly!
    */
-  void reset_exec_time(void) { m_exec_start_time = current_time(); }
+  void reset_exec_time(void) {
+    m_last_exec_time = m_exec_time;
+    m_exec_start_time = current_time();
+  }
 
  private:
-  bool m_is_atomic;
-  bool m_is_partitionable;
-  double m_interface_time;
-  double m_interface_start_time;
-  double m_exec_time;
-  double m_exec_start_time;
+  bool m_is_atomic{false};
+  bool m_is_partitionable{false};
+
+  double m_interface_time{0.0};
+  double m_last_interface_time{0.0};
+  double m_interface_start_time{0.0};
+  double m_exec_time{0.0};
+  double m_last_exec_time{0.0};
+  double m_exec_start_time{0.0};
   time_estimate m_interface_estimate;
   time_estimate m_exec_estimate;
 };
