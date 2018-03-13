@@ -41,7 +41,10 @@ Some additional cmake config options that may be of interest:
              specified error or halt the program.
 
 - `ER_NDEBUG` - Disable printing of assertion failures when `NDEBUG` is defined
-  (as for optimized builds). [Default=1].
+  (as for optimized builds). [Default=undefined].
+
+- `ER_NREPORT` - Disable reporting entirely (both debug printing and
+  logging). [Default=undefined]
 
 The cmake config supports the following compilers: `g++, clang++, icpc`; any one
 can be selected as the `CMAKE_CXX_COMPILER`, and the correct compile options
