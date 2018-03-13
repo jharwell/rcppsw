@@ -35,7 +35,7 @@
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#ifndef ER_NO_REPORT
+#ifndef ER_NREPORT
 /* ---------- Explicit debug level statements (use these) ---------- */
 
 /**
@@ -116,7 +116,7 @@
 #define ER_NOM(...)
 #define ER_DIAG(...)
 #define ER_VER(...)
-#endif /* ER_NO_REPORT */
+#endif /* ER_NREPORT */
 
 /**
  * @def ER_CHECK(cond, msg, ...)
