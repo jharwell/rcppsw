@@ -34,7 +34,7 @@ NS_START(rcppsw, control);
  ******************************************************************************/
 avoidance_force::avoidance_force(const struct avoidance_force_params* params)
     : m_lookahead(params->lookahead),
-      m_max_avoidance(params->max_avoidance) {}
+      m_max(params->max) {}
 
 /*******************************************************************************
  * Member Functions
@@ -45,7 +45,7 @@ argos::CVector2 avoidance_force::operator()(
     const argos::CVector2& closest_obstacle) {
   argos::CVector2 ahead = b.position() + b.velocity().Normalize() * m_lookahead;
   if (obs_threat) {
-    return (ahead - closest_obstacle).Normalize() * m_max_avoidance;
+    return (ahead - closest_obstacle).Normalize() * m_max;
   } else {
     return argos::CVector2(0, 0); /* no threatening obstacles = no avoidance */
   }

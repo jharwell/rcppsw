@@ -1,7 +1,7 @@
 /**
- * @file force_params.hpp
+ * @file steering_manager2D.cpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * @copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,14 +18,11 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_FORCE_PARAMS_HPP_
-#define INCLUDE_RCPPSW_CONTROL_FORCE_PARAMS_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <argos3/core/utility/math/angles.h>
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/control/steering_manager2D.hpp"
+#include "rcppsw/control/force_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -33,40 +30,31 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Class Definitions
+ * Constructors/Destructors
  ******************************************************************************/
-struct avoidance_force_params {
-  double lookahead{0};
-  double max{0};
-};
+steering_manager2D::steering_manager2D(boid& entity,
+                                       const struct force_params* params)
+    : m_entity(entity),
+      m_force(),
+      m_avoidance_force(&params->avoidance),
+      m_arrival_force(&params->arrival),
+      m_seek_force(),
+      m_wander_force(&params->wander),
+      m_polar_force(&params->polar) {}
 
-struct arrival_force_params {
-  /**
-   * The radius around the object inside which the entity should begin to slow
-   * down, so as to not overshoot the target.
-   */
-  double slowing_radius{0};
-};
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+void steering_manager2D::do_seek_through(const argos::CVector2& target) {
+  m_force += m_arrival_force(m_entity, target);
+} /* do_seek_through() */
 
-struct wander_force_params {
-  double circle_distance{0};
-  double circle_radius{0};
-  argos::CRadians angle;
-  double angle_delta{0};
-};
+void steering_manager2D::do_seek_to(const argos::CVector2& target) {
+  m_force += m_seek_force(m_entity, target);
+} /* do_seek_to() */
 
-struct polar_force_params {
-  double intensity{0};
-  double max;
-};
-
-struct force_params {
-  struct avoidance_force_params avoidance;
-  struct arrival_force_params arrival;
-  struct wander_force_params wander;
-  struct polar_force_params polar;
-};
+void steering_manager2D::do_wander(void) {
+  m_force += m_wander_force(m_entity);
+} /* do_wander() */
 
 NS_END(control, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_CONTROL_FORCE_PARAMS_HPP_ */

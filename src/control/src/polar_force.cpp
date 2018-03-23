@@ -1,7 +1,7 @@
 /**
- * @file force_params.hpp
+ * @file polar_force.cpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * @copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,14 +18,11 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_FORCE_PARAMS_HPP_
-#define INCLUDE_RCPPSW_CONTROL_FORCE_PARAMS_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <argos3/core/utility/math/angles.h>
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/control/polar_force.hpp"
+#include "rcppsw/control/force_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -33,40 +30,18 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Class Definitions
+ * Constructors/Destructor
  ******************************************************************************/
-struct avoidance_force_params {
-  double lookahead{0};
-  double max{0};
-};
+polar_force::polar_force(const struct polar_force_params* const params)
+    : m_intensity(params->intensity),
+      m_max(params->max) {}
 
-struct arrival_force_params {
-  /**
-   * The radius around the object inside which the entity should begin to slow
-   * down, so as to not overshoot the target.
-   */
-  double slowing_radius{0};
-};
-
-struct wander_force_params {
-  double circle_distance{0};
-  double circle_radius{0};
-  argos::CRadians angle;
-  double angle_delta{0};
-};
-
-struct polar_force_params {
-  double intensity{0};
-  double max;
-};
-
-struct force_params {
-  struct avoidance_force_params avoidance;
-  struct arrival_force_params arrival;
-  struct wander_force_params wander;
-  struct polar_force_params polar;
-};
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+argos::CVector2 polar_force::operator()(const boid& entity,
+                                       const argos::CVector2& source) {
+  return (entity.position() - source).Normalize() * m_max;
+} /* operator()() */
 
 NS_END(control, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_CONTROL_FORCE_PARAMS_HPP_ */

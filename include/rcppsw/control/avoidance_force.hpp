@@ -55,7 +55,7 @@ class avoidance_force {
  private:
   // clang-format off
   double          m_lookahead;
-  double          m_max_avoidance;
+  double          m_max;
   // clang-format on
 };
 

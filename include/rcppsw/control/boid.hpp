@@ -35,12 +35,35 @@ NS_START(rcppsw, control);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+
+/**
+ * @class boid
+ * @ingroup control
+ *
+ * @brief Interface representing an entity upon which kinematic forces can act
+ * (i.e. any class that wants to use the \ref steering_manager must conform to
+ * this interface).
+ */
 class boid {
  public:
   boid(void) = default;
+  virtual ~boid(void) = default;
 
+  /**
+   * @brief Should return the current velocity of the entity.
+   */
   virtual argos::CVector2 velocity(void) const = 0;
+
+  /**
+   * @brief Should return the maximum velocity of the entity. This can vary in
+   * time, if desired.
+   */
   virtual double max_velocity(void) const = 0;
+
+  /**
+   * @brief Return the current position of the entity. Hopefully, this DOES vary
+   * with time otherwise your entity is very uninteresting.
+   */
   virtual argos::CVector2 position(void) const = 0;
 };
 
