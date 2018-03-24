@@ -1,7 +1,7 @@
 /**
- * @file avoidance_force.cpp
+ * @file polar_force_params.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,37 +18,27 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_CONTROL_POLAR_FORCE_PARAMS_HPP_
+#define INCLUDE_RCPPSW_CONTROL_POLAR_FORCE_PARAMS_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/control/avoidance_force.hpp"
-#include "rcppsw/control/avoidance_force_params.hpp"
-
+#include "rcppsw/common/common.hpp"
+#include "rcppsw/params/base_params.hpp"
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Class Definitions
  ******************************************************************************/
-avoidance_force::avoidance_force(const struct avoidance_force_params* params)
-    : m_lookahead(params->lookahead),
-      m_max(params->max) {}
-
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-argos::CVector2 avoidance_force::operator()(
-    const boid& b,
-    bool obs_threat,
-    const argos::CVector2& closest_obstacle) {
-  argos::CVector2 ahead = b.position() + b.velocity().Normalize() * m_lookahead;
-  if (obs_threat) {
-    return (ahead - closest_obstacle).Normalize() * m_max;
-  } else {
-    return argos::CVector2(0, 0); /* no threatening obstacles = no avoidance */
-  }
-} /* operator()() */
+struct polar_force_params : public params::base_params {
+  double intensity{0};
+  double max{0};
+};
 
 NS_END(control, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_CONTROL_KINEMATICS2D_PARAMS_HPP_ */

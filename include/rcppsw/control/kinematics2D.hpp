@@ -1,5 +1,5 @@
 /**
- * @file steering_manager2D.hpp
+ * @file kinematics2D.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_STEERING_MANAGER2D_HPP_
-#define INCLUDE_RCPPSW_CONTROL_STEERING_MANAGER2D_HPP_
+#ifndef INCLUDE_RCPPSW_CONTROL_KINEMATICS2D_HPP_
+#define INCLUDE_RCPPSW_CONTROL_KINEMATICS2D_HPP_
 
 /*******************************************************************************
  * Includes
@@ -35,13 +35,14 @@
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, control);
+struct kinematics2D_params;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 
 /**
- * @class steering_manager2D
+ * @class kinematics2D
  * @ingroup control
  *
  * @brief Class encapsulating steering of entities through 2D space via summing
@@ -56,17 +57,17 @@ NS_START(rcppsw, control);
  * \ref kAvoidance
  * \ref kPolar
  */
-class steering_manager2D {
+class kinematics2D {
  public:
   enum behaviors {
-    kSeekThrough, /// Move to and drive through a target
-    kSeekTo,      /// Move to and stop at a target
+    kSeekThrough,  /// Move to and drive through a target
+    kSeekTo,       /// Move to and stop at a target
     /**
      * Wander randomly through the environment, changing direction
      * minutely each timestep
      */
     kWander,
-    kAvoidance, /// Obstacle avoidance
+    kAvoidance,  /// Obstacle avoidance
     /**
      * Apply a constant force radiating from a fixed point in space. Can be used
      * to generate arcing trajectories from linear ones under certain
@@ -76,7 +77,7 @@ class steering_manager2D {
     kPolar
   };
 
-  steering_manager2D(boid& entity, const struct force_params* params);
+  kinematics2D(boid& entity, const struct kinematics2D_params* params);
 
   /**
    * @brief Add the \ref kSeekThrough force to the sum forces for this timestep.
@@ -139,4 +140,4 @@ class steering_manager2D {
 
 NS_END(control, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_CONTROL_STEERING_MANAGER2D_HPP_ */
+#endif /* INCLUDE_RCPPSW_CONTROL_KINEMATICS2D_HPP_ */

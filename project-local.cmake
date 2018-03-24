@@ -25,7 +25,7 @@ list(APPEND ${target}_SUBDIRS multithread)
 list(APPEND ${target}_SUBDIRS utils)
 list(APPEND ${target}_SUBDIRS control)
 list(APPEND ${target}_SUBDIRS task_allocation)
-list(APPEND ${target}_SUBDIRS common)
+list(APPEND ${target}_SUBDIRS params)
 list(APPEND ${target}_SUBDIRS metrics)
 list(APPEND ${target}_SUBDIRS ds)
 
@@ -59,7 +59,7 @@ if (NOT TARGET ${target})
     $<TARGET_OBJECTS:${target}-utils>
     $<TARGET_OBJECTS:${target}-state_machine>
     $<TARGET_OBJECTS:${target}-task_allocation>
-    $<TARGET_OBJECTS:${target}-common>
+    $<TARGET_OBJECTS:${target}-params>
     $<TARGET_OBJECTS:${target}-metrics>
     $<TARGET_OBJECTS:${target}-control>)
   target_link_libraries(${target} "${${target}_LIBS}")

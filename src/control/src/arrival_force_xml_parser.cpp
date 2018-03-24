@@ -1,7 +1,7 @@
 /**
- * @file xml_param_repository.cpp
+ * @file arrival_force_xml_parser.cpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,41 +21,29 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/xml_param_repository.hpp"
-#include <algorithm>
+#include "rcppsw/control/arrival_force_xml_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, common);
+NS_START(rcppsw, control);
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-bool xml_param_repository::validate_all(void) {
-  for (auto& pair : m_parsers) {
-    if (!pair.second->validate()) {
-      return false;
-    }
-  } /* for(pair..) */
+void arrival_force_xml_parser::parse(const argos::TConfigurationNode& node) {
+  ticpp::Element anode = argos::GetNode(const_cast<ticpp::Element&>(node),
+                                        kXMLRoot);
+  XML_PARSE_PARAM(anode, m_params, slowing_radius);
+} /* parse() */
 
-  return true;
-} /* validate_all() */
+void arrival_force_xml_parser::show(std::ostream& stream) const {
+  stream << emit_header() <<
+      XML_PARAM_STR(m_params, slowing_radius) << std::endl;
+} /* show() */
 
-void xml_param_repository::parse_all(ticpp::Element& node) {
-  std::for_each(m_parsers.begin(),
-                m_parsers.end(),
-                [&](std::pair<const std::string, xml_param_parser*>& pair) {
-                  pair.second->parse(node);
-                });
-} /* parse_all() */
+__pure bool arrival_force_xml_parser::validate(void) const {
+  return m_params.slowing_radius > 0.0;
+} /* validate() */
 
-void xml_param_repository::show_all(std::ostream& stream) {
-  std::for_each(m_parsers.begin(),
-                m_parsers.end(),
-                [&](std::pair<const std::string, xml_param_parser*>& pair) {
-                  pair.second->show(stream);
-                });
-} /* show_all() */
-
-NS_END(common, rcppsw);
+NS_END(params, rcppsw);

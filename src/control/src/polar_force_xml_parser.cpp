@@ -1,7 +1,7 @@
 /**
- * @file steering_manager2D.cpp
+ * @file polar_force_xml_parser.cpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,8 +21,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/control/steering_manager2D.hpp"
-#include "rcppsw/control/force_params.hpp"
+#include "rcppsw/control/polar_force_xml_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -30,31 +29,23 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Constructors/Destructors
- ******************************************************************************/
-steering_manager2D::steering_manager2D(boid& entity,
-                                       const struct force_params* params)
-    : m_entity(entity),
-      m_force(),
-      m_avoidance_force(&params->avoidance),
-      m_arrival_force(&params->arrival),
-      m_seek_force(),
-      m_wander_force(&params->wander),
-      m_polar_force(&params->polar) {}
-
-/*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void steering_manager2D::do_seek_through(const argos::CVector2& target) {
-  m_force += m_arrival_force(m_entity, target);
-} /* do_seek_through() */
+void polar_force_xml_parser::parse(const argos::TConfigurationNode& node) {
+  ticpp::Element pnode = argos::GetNode(const_cast<ticpp::Element&>(node),
+                                        kXMLRoot);
+  XML_PARSE_PARAM(pnode, m_params, intensity);
+  XML_PARSE_PARAM(pnode, m_params, max);
+} /* parse() */
 
-void steering_manager2D::do_seek_to(const argos::CVector2& target) {
-  m_force += m_seek_force(m_entity, target);
-} /* do_seek_to() */
+void polar_force_xml_parser::show(std::ostream& stream) const {
+  stream << emit_header()
+         << XML_PARAM_STR(m_params, intensity) << std::endl
+         << XML_PARAM_STR(m_params, max) << std::endl;
+} /* show() */
 
-void steering_manager2D::do_wander(void) {
-  m_force += m_wander_force(m_entity);
-} /* do_wander() */
+__pure bool polar_force_xml_parser::validate(void) const {
+  return m_params.intensity > 0.0 && m_params.max > 0.0;
+} /* validate() */
 
-NS_END(control, rcppsw);
+NS_END(params, rcppsw);

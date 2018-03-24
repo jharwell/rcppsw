@@ -1,7 +1,7 @@
 /**
- * @file avoidance_force.cpp
+ * @file avoidance_force_xml_parser.cpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,8 +21,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/control/avoidance_force.hpp"
-#include "rcppsw/control/avoidance_force_params.hpp"
+#include "rcppsw/control/avoidance_force_xml_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -30,25 +29,23 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Constructors/Destructor
- ******************************************************************************/
-avoidance_force::avoidance_force(const struct avoidance_force_params* params)
-    : m_lookahead(params->lookahead),
-      m_max(params->max) {}
-
-/*******************************************************************************
  * Member Functions
  ******************************************************************************/
-argos::CVector2 avoidance_force::operator()(
-    const boid& b,
-    bool obs_threat,
-    const argos::CVector2& closest_obstacle) {
-  argos::CVector2 ahead = b.position() + b.velocity().Normalize() * m_lookahead;
-  if (obs_threat) {
-    return (ahead - closest_obstacle).Normalize() * m_max;
-  } else {
-    return argos::CVector2(0, 0); /* no threatening obstacles = no avoidance */
-  }
-} /* operator()() */
+void avoidance_force_xml_parser::parse(const argos::TConfigurationNode& node) {
+  ticpp::Element anode = argos::GetNode(const_cast<ticpp::Element&>(node),
+                                        kXMLRoot);
+  XML_PARSE_PARAM(anode, m_params, lookahead);
+  XML_PARSE_PARAM(anode, m_params, max);
+} /* parse() */
 
-NS_END(control, rcppsw);
+void avoidance_force_xml_parser::show(std::ostream& stream) const {
+  stream << emit_header()
+         << XML_PARAM_STR(m_params, lookahead) << std::endl
+         << XML_PARAM_STR(m_params, max) << std::endl;
+} /* show() */
+
+__pure bool avoidance_force_xml_parser::validate(void) const {
+  return m_params.lookahead > 0.0 && m_params.max > 0.0;
+} /* validate() */
+
+NS_END(params, rcppsw);

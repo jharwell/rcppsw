@@ -1,7 +1,7 @@
 /**
- * @file avoidance_force.cpp
+ * @file kinematics2D_xml_parser.cpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,8 +21,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/control/avoidance_force.hpp"
-#include "rcppsw/control/avoidance_force_params.hpp"
+#include "rcppsw/control/kinematics2D_xml_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -30,25 +29,34 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Constructors/Destructor
- ******************************************************************************/
-avoidance_force::avoidance_force(const struct avoidance_force_params* params)
-    : m_lookahead(params->lookahead),
-      m_max(params->max) {}
-
-/*******************************************************************************
  * Member Functions
  ******************************************************************************/
-argos::CVector2 avoidance_force::operator()(
-    const boid& b,
-    bool obs_threat,
-    const argos::CVector2& closest_obstacle) {
-  argos::CVector2 ahead = b.position() + b.velocity().Normalize() * m_lookahead;
-  if (obs_threat) {
-    return (ahead - closest_obstacle).Normalize() * m_max;
-  } else {
-    return argos::CVector2(0, 0); /* no threatening obstacles = no avoidance */
-  }
-} /* operator()() */
+void kinematics2D_xml_parser::parse(const argos::TConfigurationNode& node) {
+  ticpp::Element knode = argos::GetNode(const_cast<ticpp::Element&>(node),
+                                        kXMLRoot);
+  m_avoidance.parse(knode);
+  m_arrival.parse(knode);
+  m_wander.parse(knode);
+  m_polar.parse(knode);
+  m_params.avoidance = m_avoidance.parse_results();
+  m_params.arrival = m_arrival.parse_results();
+  m_params.wander = m_wander.parse_results();
+  m_params.polar = m_polar.parse_results();
+} /* parse() */
 
-NS_END(control, rcppsw);
+void kinematics2D_xml_parser::show(std::ostream& stream) const {
+  stream << emit_header()
+         << m_avoidance
+         << m_arrival
+         << m_wander
+         << m_polar
+         << std::endl;
+} /* show() */
+
+__pure bool kinematics2D_xml_parser::validate(void) const {
+  return m_avoidance.validate() && m_arrival.validate() &&
+      m_wander.validate() && m_polar.validate();
+  return true;
+} /* validate() */
+
+NS_END(params, rcppsw);

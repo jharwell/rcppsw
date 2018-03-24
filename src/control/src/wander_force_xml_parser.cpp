@@ -1,5 +1,5 @@
 /**
- * @file force_params.hpp
+ * @file wander_force_xml_parser.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,14 +18,10 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_FORCE_PARAMS_HPP_
-#define INCLUDE_RCPPSW_CONTROL_FORCE_PARAMS_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <argos3/core/utility/math/angles.h>
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/control/wander_force_xml_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -33,40 +29,29 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Class Definitions
+ * Member Functions
  ******************************************************************************/
-struct avoidance_force_params {
-  double lookahead{0};
-  double max{0};
-};
+void wander_force_xml_parser::parse(const argos::TConfigurationNode& node) {
+  ticpp::Element wnode = argos::GetNode(const_cast<ticpp::Element&>(node),
+                                        kXMLRoot);
+  XML_PARSE_PARAM(wnode, m_params, circle_distance);
+  XML_PARSE_PARAM(wnode, m_params, circle_radius);
+  XML_PARSE_PARAM(wnode, m_params, angle);
+  XML_PARSE_PARAM(wnode, m_params, angle_delta);
+} /* parse() */
 
-struct arrival_force_params {
-  /**
-   * The radius around the object inside which the entity should begin to slow
-   * down, so as to not overshoot the target.
-   */
-  double slowing_radius{0};
-};
+void wander_force_xml_parser::show(std::ostream& stream) const {
+  stream << emit_header()
+         << XML_PARAM_STR(m_params, circle_distance) << std::endl
+         << XML_PARAM_STR(m_params, circle_radius) << std::endl
+         << XML_PARAM_STR(m_params, angle) << std::endl
+         << XML_PARAM_STR(m_params, angle_delta) << std::endl;
+} /* show() */
 
-struct wander_force_params {
-  double circle_distance{0};
-  double circle_radius{0};
-  argos::CRadians angle;
-  double angle_delta{0};
-};
+__pure bool wander_force_xml_parser::validate(void) const {
+  return m_params.circle_distance > 0.0 && m_params.circle_radius > 0.0 &&
+      m_params.circle_distance > m_params.circle_radius &&
+      m_params.angle.GetValue() < 2*M_PI && m_params.angle_delta < 2*M_PI;
+} /* validate() */
 
-struct polar_force_params {
-  double intensity{0};
-  double max;
-};
-
-struct force_params {
-  struct avoidance_force_params avoidance;
-  struct arrival_force_params arrival;
-  struct wander_force_params wander;
-  struct polar_force_params polar;
-};
-
-NS_END(control, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_CONTROL_FORCE_PARAMS_HPP_ */
+NS_END(params, rcppsw);

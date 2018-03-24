@@ -25,7 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/common/base_params.hpp"
+#include "rcppsw/params/base_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -41,7 +41,7 @@ NS_START(rcppsw, task_allocation);
  *
  * @brief Parameters used by \ref executable_task tasks.
  */
-struct task_params : public common::base_params {
+struct task_params : public params::base_params {
   double estimation_alpha{0.0};
   double abort_reactivity{0.0};
   double abort_offset{0.0};

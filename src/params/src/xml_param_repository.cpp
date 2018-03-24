@@ -1,5 +1,5 @@
 /**
- * @file avoidance_force.cpp
+ * @file xml_param_repository.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -21,34 +21,44 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/control/avoidance_force.hpp"
-#include "rcppsw/control/avoidance_force_params.hpp"
+#include "rcppsw/params/xml_param_repository.hpp"
+#include <algorithm>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, control);
-
-/*******************************************************************************
- * Constructors/Destructor
- ******************************************************************************/
-avoidance_force::avoidance_force(const struct avoidance_force_params* params)
-    : m_lookahead(params->lookahead),
-      m_max(params->max) {}
+NS_START(rcppsw, params);
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-argos::CVector2 avoidance_force::operator()(
-    const boid& b,
-    bool obs_threat,
-    const argos::CVector2& closest_obstacle) {
-  argos::CVector2 ahead = b.position() + b.velocity().Normalize() * m_lookahead;
-  if (obs_threat) {
-    return (ahead - closest_obstacle).Normalize() * m_max;
-  } else {
-    return argos::CVector2(0, 0); /* no threatening obstacles = no avoidance */
-  }
-} /* operator()() */
+bool xml_param_repository::validate_all(void) {
+  for (auto& pair : m_parsers) {
+    if (!pair.second->validate()) {
+      return false;
+    }
+  } /* for(pair..) */
 
-NS_END(control, rcppsw);
+  return true;
+} /* validate_all() */
+
+void xml_param_repository::parse_all(ticpp::Element& node) {
+  std::for_each(m_parsers.begin(),
+                m_parsers.end(),
+                [&](std::pair<const std::string, xml_param_parser*>& pair) {
+                  pair.second->parse(node);
+                });
+} /* parse_all() */
+
+std::ostream& operator<<(std::ostream& stream,
+                         const xml_param_repository& repo) {
+  std::for_each(repo.m_parsers.begin(),
+                repo.m_parsers.end(),
+                [&](const std::pair<const std::string,
+                    xml_param_parser*>& pair) {
+                  stream << *pair.second;
+                });
+  return stream;
+} /* operator<<() */
+
+NS_END(params, rcppsw);

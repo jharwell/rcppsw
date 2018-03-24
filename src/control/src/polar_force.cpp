@@ -22,7 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/control/polar_force.hpp"
-#include "rcppsw/control/force_params.hpp"
+#include "rcppsw/control/polar_force_params.hpp"
 
 /*******************************************************************************
  * Namespaces

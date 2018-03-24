@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_COMMON_XML_PARAM_REPOSITORY_HPP_
-#define INCLUDE_RCPPSW_COMMON_XML_PARAM_REPOSITORY_HPP_
+#ifndef INCLUDE_RCPPSW_PARAMS_XML_PARAM_REPOSITORY_HPP_
+#define INCLUDE_RCPPSW_PARAMS_XML_PARAM_REPOSITORY_HPP_
 
 /*******************************************************************************
  * Includes
@@ -27,13 +27,13 @@
 #include <map>
 #include <string>
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/common/xml_param_parser.hpp"
+#include "rcppsw/params/xml_param_parser.hpp"
 #include "rcppsw/patterns/factory/sharing_factory.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, common);
+NS_START(rcppsw, params);
 namespace factory = rcppsw::patterns::factory;
 
 /*******************************************************************************
@@ -67,21 +67,15 @@ class xml_param_repository {
    * @return \c TRUE iff ALL parsers report valid parameters, and \c FALSE
    * otherwise.
    */
-
   bool validate_all(void);
 
   /**
    * @brief Get the parsed parameters associated with the named parser.
    */
-  const struct base_params* get_params(const std::string& name) {
-    return m_parsers[name]->get_results();
+  template<typename T>
+  T& parse_results(const std::string& name) {
+    return static_cast<T&>(m_parsers[name]->parse_results());
   }
-
-  /**
-   * @brief Dump all parsed (or unparsed, but that would be useless) parameters
-   * to the specified stream.
-   */
-  void show_all(std::ostream& stream);
 
   /**
    * @brief Register a parser of a given type (must be derived from \ref
@@ -93,11 +87,18 @@ class xml_param_repository {
     m_parsers[name] = m_factory.create(name).get();
   }
 
+  /**
+   * @brief Dump all parsed (or unparsed, but that would be useless) parameters
+   * to the specified stream.
+   */
+  friend std::ostream& operator<<(std::ostream& stream,
+                                  const xml_param_repository& repo);
+
  private:
   std::map<std::string, xml_param_parser*> m_parsers;
   factory::sharing_factory<xml_param_parser> m_factory;
 };
 
-NS_END(common, rcppsw);
+NS_END(params, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_COMMON_XML_PARAM_REPOSITORY_HPP_ */
+#endif /* INCLUDE_RCPPSW_PARAMS_XML_PARAM_REPOSITORY_HPP_ */

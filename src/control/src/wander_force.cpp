@@ -22,7 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/control/wander_force.hpp"
-#include "rcppsw/control/force_params.hpp"
+#include "rcppsw/control/wander_force_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -44,8 +44,9 @@ wander_force::wander_force(const struct wander_force_params* const params)
  ******************************************************************************/
 argos::CVector2 wander_force::operator()(const boid& entity) {
   /* calculate circle center */
-  argos::CVector2 circle_center = entity.position().Normalize().Scale(m_circle_distance,
-                                                                 m_circle_radius);
+  argos::CVector2 circle_center = entity.position().
+                                  Normalize().Scale(m_circle_distance,
+                                                    m_circle_radius);
 
   /* calculate displacement force */
   argos::CVector2 displacement(m_circle_radius, m_angle);

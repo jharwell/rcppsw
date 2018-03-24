@@ -1,5 +1,5 @@
 /**
- * @file avoidance_force.cpp
+ * @file wander_force_xml_parser.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,11 +18,18 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_CONTROL_WANDER_FORCE_XML_PARSER_HPP_
+#define INCLUDE_RCPPSW_CONTROL_WANDER_FORCE_XML_PARSER_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/control/avoidance_force.hpp"
-#include "rcppsw/control/avoidance_force_params.hpp"
+#include <string>
+#include <argos3/core/utility/configuration/argos_configuration.h>
+
+#include "rcppsw/common/common.hpp"
+#include "rcppsw/params/xml_param_parser.hpp"
+#include "rcppsw/control/wander_force_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -30,25 +37,36 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Class Definitions
  ******************************************************************************/
-avoidance_force::avoidance_force(const struct avoidance_force_params* params)
-    : m_lookahead(params->lookahead),
-      m_max(params->max) {}
 
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-argos::CVector2 avoidance_force::operator()(
-    const boid& b,
-    bool obs_threat,
-    const argos::CVector2& closest_obstacle) {
-  argos::CVector2 ahead = b.position() + b.velocity().Normalize() * m_lookahead;
-  if (obs_threat) {
-    return (ahead - closest_obstacle).Normalize() * m_max;
-  } else {
-    return argos::CVector2(0, 0); /* no threatening obstacles = no avoidance */
-  }
-} /* operator()() */
+/**
+ * @class wander_force_xml_parser
+ * @ingroup control
+ *
+ * @brief Parses XML parameters for \ref wander_force into
+ * \ref wander_force_params. Assumes it is handed an XML parent in which the
+ * child tag \ref kXMLRoot is found.
+ */
+class wander_force_xml_parser : public rcppsw::params::xml_param_parser {
+ public:
+  static constexpr char kXMLRoot[] = "wander_force";
+
+explicit wander_force_xml_parser(uint level)
+      : xml_param_parser(level),
+        m_params() {}
+
+  void parse(const ticpp::Element& node) override;
+  void show(std::ostream& stream) const override;
+  bool validate(void) const override;
+
+  std::string xml_root(void) const override { return kXMLRoot; }
+  const wander_force_params& parse_results(void) override { return m_params; }
+
+ private:
+  struct wander_force_params m_params;
+};
 
 NS_END(control, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_CONTROL_WANDER_FORCE_XML_PARSER_HPP_ */

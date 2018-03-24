@@ -1,5 +1,5 @@
 /**
- * @file avoidance_force.cpp
+ * @file kinematics2D.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -21,8 +21,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/control/avoidance_force.hpp"
-#include "rcppsw/control/avoidance_force_params.hpp"
+#include "rcppsw/control/kinematics2D.hpp"
+#include "rcppsw/control/kinematics2D_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -30,25 +30,31 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Constructors/Destructors
  ******************************************************************************/
-avoidance_force::avoidance_force(const struct avoidance_force_params* params)
-    : m_lookahead(params->lookahead),
-      m_max(params->max) {}
+kinematics2D::kinematics2D(boid& entity,
+                           const struct kinematics2D_params* params)
+    : m_entity(entity),
+      m_force(),
+      m_avoidance_force(&params->avoidance),
+      m_arrival_force(&params->arrival),
+      m_seek_force(),
+      m_wander_force(&params->wander),
+      m_polar_force(&params->polar) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-argos::CVector2 avoidance_force::operator()(
-    const boid& b,
-    bool obs_threat,
-    const argos::CVector2& closest_obstacle) {
-  argos::CVector2 ahead = b.position() + b.velocity().Normalize() * m_lookahead;
-  if (obs_threat) {
-    return (ahead - closest_obstacle).Normalize() * m_max;
-  } else {
-    return argos::CVector2(0, 0); /* no threatening obstacles = no avoidance */
-  }
-} /* operator()() */
+void kinematics2D::do_seek_through(const argos::CVector2& target) {
+  m_force += m_arrival_force(m_entity, target);
+} /* do_seek_through() */
+
+void kinematics2D::do_seek_to(const argos::CVector2& target) {
+  m_force += m_seek_force(m_entity, target);
+} /* do_seek_to() */
+
+void kinematics2D::do_wander(void) {
+  m_force += m_wander_force(m_entity);
+} /* do_wander() */
 
 NS_END(control, rcppsw);
