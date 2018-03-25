@@ -61,7 +61,7 @@ explicit wander_force_xml_parser(uint level)
   bool validate(void) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  const wander_force_params& parse_results(void) override { return m_params; }
+  const wander_force_params* parse_results(void) const override { return &m_params; }
 
  private:
   struct wander_force_params m_params;

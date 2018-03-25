@@ -42,7 +42,7 @@ bool xml_param_repository::validate_all(void) {
   return true;
 } /* validate_all() */
 
-void xml_param_repository::parse_all(ticpp::Element& node) {
+void xml_param_repository::parse_all(const ticpp::Element& node) {
   std::for_each(m_parsers.begin(),
                 m_parsers.end(),
                 [&](std::pair<const std::string, xml_param_parser*>& pair) {

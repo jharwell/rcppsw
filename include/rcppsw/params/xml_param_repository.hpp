@@ -57,7 +57,7 @@ class xml_param_repository {
    * @brief Call the \ref xml_param_parser::parse() function on all parsers
    * in the repository, passing all parsers the same XML node.
    */
-  void parse_all(ticpp::Element& node);
+  void parse_all(const ticpp::Element& node);
 
   /**
    * @brief Call the \ref xml_param_parser::validate() function on all parsers
@@ -73,8 +73,8 @@ class xml_param_repository {
    * @brief Get the parsed parameters associated with the named parser.
    */
   template<typename T>
-  T& parse_results(const std::string& name) {
-    return static_cast<T&>(m_parsers[name]->parse_results());
+  const T* parse_results(const std::string& name) {
+    return static_cast<const T*>(m_parsers[name]->parse_results());
   }
 
   /**
@@ -82,9 +82,9 @@ class xml_param_repository {
    * xml_param_parser) and associate it with the specified name.
    */
   template <typename T>
-  void register_parser(const std::string& name) {
-    m_factory.register_type<T>(name);
-    m_parsers[name] = m_factory.create(name).get();
+  void register_parser(const std::string& name, uint level_in) {
+    m_factory.register_type<T, decltype(level_in)>(name);
+    m_parsers[name] = m_factory.create(name, level_in).get();
   }
 
   /**
@@ -96,7 +96,7 @@ class xml_param_repository {
 
  private:
   std::map<std::string, xml_param_parser*> m_parsers;
-  factory::sharing_factory<xml_param_parser> m_factory;
+  factory::sharing_factory<xml_param_parser, uint> m_factory;
 };
 
 NS_END(params, rcppsw);

@@ -48,8 +48,15 @@ NS_START(rcppsw, patterns, factory);
  *
  * @tparam T Type of objects capable of creation from this factory (restricted
  * to this type and its derived types).
+ *
+ * @tparam TypeArgs List of constructor arguments for the types to be
+ * constructed. If this is non-empty then ALL derived types of the base type
+ * that you want to use with the same shared_factory instance will have to have
+ * the same construct signature available. If this is empty, then the only
+ * limitation on types the factor will accept is what is specified above.
+
  */
-template <typename T>
+template <typename T, typename... TypeArgs>
 class releasing_factory : public base_factory {
  public:
   releasing_factory(void) : m_release_funcs() {}
@@ -62,12 +69,12 @@ class releasing_factory : public base_factory {
    * The type to register must have a zero parameter constructor available, as
    * well as be derived from the factory base class.
    */
-  template <typename TDerived>
+  template <typename TDerived, typename... Args>
   status_t register_type(const std::string& name) {
     static_assert(std::is_base_of<T, TDerived>::value,
                   "releasing_factory::register_type only accepts types derived from the base");
     if (m_release_funcs.end() == m_release_funcs.find(name)) {
-        m_release_funcs[name] = &do_create_release<TDerived>;
+      m_release_funcs[name] = &do_create_release<TDerived, TypeArgs...>;
       }
     return OK;
   }
@@ -76,23 +83,24 @@ class releasing_factory : public base_factory {
    * @brief Create the requested object, and release ownership to the calling
    * context/application.
    */
-  std::unique_ptr<T> create(const std::string& name) {
+  template<typename... Args>
+  std::unique_ptr<T> create(const std::string& name, Args... args) {
     auto it = m_release_funcs.find(name);
     if (it != m_release_funcs.end()) {
-      return it->second();
+      return it->second(args...);
     }
     return nullptr;
   }
 
  private:
-  typedef std::unique_ptr<T> (*instance_create_func)();
+  using create_func_type = std::shared_ptr<T> (releasing_factory<T, TypeArgs...>::*)(TypeArgs...);
 
-  template <typename TDerived>
-  static std::unique_ptr<T> do_create_release() {
-    return rcppsw::make_unique<TDerived>();
+  template <typename TDerived, typename... Args>
+  static std::unique_ptr<T> do_create_release(TypeArgs... args) {
+    return rcppsw::make_unique<TDerived>(std::forward<Args>(args));
   }
 
-  std::map<std::string, instance_create_func> m_release_funcs;
+  std::map<std::string, create_func_type> m_release_funcs;
 };
 
 NS_END(factory, patterns, rcppsw);

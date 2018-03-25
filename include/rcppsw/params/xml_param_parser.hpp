@@ -59,6 +59,7 @@ struct base_params;
 class xml_param_parser {
  public:
   explicit xml_param_parser(uint level) : m_level(level) {}
+
   virtual ~xml_param_parser(void) = default;
 
   static constexpr uint kColumnWidth = 80;
@@ -107,7 +108,7 @@ class xml_param_parser {
   /**
    * @brief Get the results of parameter parse.
    */
-  virtual const struct base_params& parse_results(void) = 0;
+  virtual const struct base_params* parse_results(void) const = 0;
 
   friend std::ostream& operator<<(std::ostream& stream,
                                   const xml_param_parser& parser) {
@@ -116,6 +117,7 @@ class xml_param_parser {
   } /* operator<<() */
 
   uint level(void) const { return m_level; }
+  void level(uint level) { m_level = level; }
 
  private:
   /**

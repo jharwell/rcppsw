@@ -38,10 +38,10 @@ void kinematics2D_xml_parser::parse(const argos::TConfigurationNode& node) {
   m_arrival.parse(knode);
   m_wander.parse(knode);
   m_polar.parse(knode);
-  m_params.avoidance = m_avoidance.parse_results();
-  m_params.arrival = m_arrival.parse_results();
-  m_params.wander = m_wander.parse_results();
-  m_params.polar = m_polar.parse_results();
+  m_params.avoidance = *m_avoidance.parse_results();
+  m_params.arrival = *m_arrival.parse_results();
+  m_params.wander = *m_wander.parse_results();
+  m_params.polar = *m_polar.parse_results();
 } /* parse() */
 
 void kinematics2D_xml_parser::show(std::ostream& stream) const {

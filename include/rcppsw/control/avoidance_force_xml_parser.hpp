@@ -63,7 +63,7 @@ class avoidance_force_xml_parser : public rcppsw::params::xml_param_parser {
   bool validate(void) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  const avoidance_force_params& parse_results(void) override { return m_params; }
+  const avoidance_force_params* parse_results(void) const override { return &m_params; }
 
  private:
   struct avoidance_force_params m_params;
