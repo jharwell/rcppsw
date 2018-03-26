@@ -55,6 +55,7 @@ struct base_params;
  *
  * @brief Interface specifying functionality for parsing XML into a
  * \ref base_params derived parameter structure.
+ *
  */
 class xml_param_parser {
  public:
@@ -94,6 +95,9 @@ class xml_param_parser {
   /**
    * @brief Parse the provided XML node into an internal representation (should
    * be a class/struct derived from \ref base_params).
+   *
+   * @param node The XML tag that the root (i.e. the value returned by
+   * \ref xml_root()) for the parser can be found under.
    */
   virtual void parse(const ticpp::Element& node) = 0;
 

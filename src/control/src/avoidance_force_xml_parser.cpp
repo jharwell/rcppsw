@@ -32,15 +32,14 @@ NS_START(rcppsw, control);
  * Member Functions
  ******************************************************************************/
 void avoidance_force_xml_parser::parse(const argos::TConfigurationNode& node) {
-  ticpp::Element anode = argos::GetNode(const_cast<ticpp::Element&>(node),
-                                        kXMLRoot);
+  ticpp::Element anode =
+      argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
   XML_PARSE_PARAM(anode, m_params, lookahead);
   XML_PARSE_PARAM(anode, m_params, max);
 } /* parse() */
 
 void avoidance_force_xml_parser::show(std::ostream& stream) const {
-  stream << emit_header()
-         << XML_PARAM_STR(m_params, lookahead) << std::endl
+  stream << emit_header() << XML_PARAM_STR(m_params, lookahead) << std::endl
          << XML_PARAM_STR(m_params, max) << std::endl;
 } /* show() */
 

@@ -56,8 +56,8 @@ class wander_force {
   // clang-format off
   double          m_circle_distance;
   double          m_circle_radius;
-  argos::CRadians m_angle;
-  double          m_angle_delta;
+  argos::CRadians m_angle{};
+  double          m_max_angle_delta;
   // clang-format on
 };
 

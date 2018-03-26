@@ -33,14 +33,13 @@ NS_START(rcppsw, control);
  * Constructors/Destructor
  ******************************************************************************/
 polar_force::polar_force(const struct polar_force_params* const params)
-    : m_intensity(params->intensity),
-      m_max(params->max) {}
+    : m_max(params->max) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 argos::CVector2 polar_force::operator()(const boid& entity,
-                                       const argos::CVector2& source) {
+                                        const argos::CVector2& source) {
   return (entity.position() - source).Normalize() * m_max;
 } /* operator()() */
 

@@ -54,8 +54,7 @@ std::ostream& operator<<(std::ostream& stream,
                          const xml_param_repository& repo) {
   std::for_each(repo.m_parsers.begin(),
                 repo.m_parsers.end(),
-                [&](const std::pair<const std::string,
-                    xml_param_parser*>& pair) {
+                [&](const std::pair<const std::string, xml_param_parser*>& pair) {
                   stream << *pair.second;
                 });
   return stream;

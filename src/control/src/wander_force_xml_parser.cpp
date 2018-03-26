@@ -32,26 +32,24 @@ NS_START(rcppsw, control);
  * Member Functions
  ******************************************************************************/
 void wander_force_xml_parser::parse(const argos::TConfigurationNode& node) {
-  ticpp::Element wnode = argos::GetNode(const_cast<ticpp::Element&>(node),
-                                        kXMLRoot);
+  ticpp::Element wnode =
+      argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
   XML_PARSE_PARAM(wnode, m_params, circle_distance);
   XML_PARSE_PARAM(wnode, m_params, circle_radius);
-  XML_PARSE_PARAM(wnode, m_params, angle);
-  XML_PARSE_PARAM(wnode, m_params, angle_delta);
+  XML_PARSE_PARAM(wnode, m_params, max_angle_delta);
 } /* parse() */
 
 void wander_force_xml_parser::show(std::ostream& stream) const {
-  stream << emit_header()
-         << XML_PARAM_STR(m_params, circle_distance) << std::endl
+  stream << emit_header() << XML_PARAM_STR(m_params, circle_distance)
+         << std::endl
          << XML_PARAM_STR(m_params, circle_radius) << std::endl
-         << XML_PARAM_STR(m_params, angle) << std::endl
-         << XML_PARAM_STR(m_params, angle_delta) << std::endl;
+         << XML_PARAM_STR(m_params, max_angle_delta) << std::endl;
 } /* show() */
 
 __pure bool wander_force_xml_parser::validate(void) const {
   return m_params.circle_distance > 0.0 && m_params.circle_radius > 0.0 &&
-      m_params.circle_distance > m_params.circle_radius &&
-      m_params.angle.GetValue() < 2*M_PI && m_params.angle_delta < 2*M_PI;
+         m_params.circle_distance > m_params.circle_radius &&
+         m_params.max_angle_delta < 2 * M_PI;
 } /* validate() */
 
 NS_END(params, rcppsw);

@@ -76,8 +76,9 @@ __pure double subtask_selection_probability::calc_harwell2018(
   return calc_sigmoid(exec_est2, exec_est1);
 } /* calc_harwell2018() */
 
-__pure double subtask_selection_probability::calc_sigmoid(const time_estimate& est1,
-                                                          const time_estimate& est2) {
+__pure double subtask_selection_probability::calc_sigmoid(
+    const time_estimate& est1,
+    const time_estimate& est2) {
   /*
    * No information available--just pick randomly.
    */

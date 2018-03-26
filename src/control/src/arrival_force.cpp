@@ -45,8 +45,8 @@ argos::CVector2 arrival_force::operator()(const boid& entity,
 
   desired.Normalize();
   if (distance <= m_slowing_radius) {
-    desired.Scale(entity.max_velocity() * distance/m_slowing_radius,
-                  entity.max_velocity() * distance/m_slowing_radius);
+    desired.Scale(entity.max_velocity() * distance / m_slowing_radius,
+                  entity.max_velocity() * distance / m_slowing_radius);
   } else {
     desired.Scale(entity.max_velocity(), entity.max_velocity());
   }

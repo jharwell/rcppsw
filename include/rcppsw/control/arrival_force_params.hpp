@@ -33,8 +33,13 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Class Definitions
+ * Struct Definitions
  ******************************************************************************/
+
+/**
+ * @struct arrival_force_params
+ * @ingroup control
+ */
 struct arrival_force_params : params::base_params {
   /**
    * The radius around the object inside which the entity should begin to slow

@@ -97,7 +97,7 @@ class releasing_factory : public base_factory {
 
   template <typename TDerived, typename... Args>
   static std::unique_ptr<T> do_create_release(TypeArgs... args) {
-    return rcppsw::make_unique<TDerived>(std::forward<Args>(args));
+    return rcppsw::make_unique<TDerived>(std::forward<Args>(args)...);
   }
 
   std::map<std::string, create_func_type> m_release_funcs;

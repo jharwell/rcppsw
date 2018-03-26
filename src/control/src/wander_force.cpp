@@ -35,24 +35,22 @@ NS_START(rcppsw, control);
 wander_force::wander_force(const struct wander_force_params* const params)
     : m_circle_distance(params->circle_distance),
       m_circle_radius(params->circle_radius),
-      m_angle(params->angle),
-      m_angle_delta(params->angle_delta) {}
-
+      m_max_angle_delta(params->max_angle_delta) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 argos::CVector2 wander_force::operator()(const boid& entity) {
   /* calculate circle center */
-  argos::CVector2 circle_center = entity.position().
-                                  Normalize().Scale(m_circle_distance,
-                                                    m_circle_radius);
+  argos::CVector2 circle_center =
+      entity.position().Normalize().Scale(m_circle_distance, m_circle_radius);
 
   /* calculate displacement force */
   argos::CVector2 displacement(m_circle_radius, m_angle);
 
   /* update wander angle so it won't have the same value next time */
-  m_angle += argos::CRadians(random() * m_angle_delta - m_angle_delta * 0.5);
+  m_angle +=
+      argos::CRadians(random() * m_max_angle_delta - m_max_angle_delta * 0.5);
 
   return circle_center + displacement;
 } /* operator()() */

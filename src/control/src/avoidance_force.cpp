@@ -33,8 +33,7 @@ NS_START(rcppsw, control);
  * Constructors/Destructor
  ******************************************************************************/
 avoidance_force::avoidance_force(const struct avoidance_force_params* params)
-    : m_lookahead(params->lookahead),
-      m_max(params->max) {}
+    : m_lookahead(params->lookahead), m_max(params->max) {}
 
 /*******************************************************************************
  * Member Functions

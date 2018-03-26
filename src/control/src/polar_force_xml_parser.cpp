@@ -32,20 +32,17 @@ NS_START(rcppsw, control);
  * Member Functions
  ******************************************************************************/
 void polar_force_xml_parser::parse(const argos::TConfigurationNode& node) {
-  ticpp::Element pnode = argos::GetNode(const_cast<ticpp::Element&>(node),
-                                        kXMLRoot);
-  XML_PARSE_PARAM(pnode, m_params, intensity);
+  ticpp::Element pnode =
+      argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
   XML_PARSE_PARAM(pnode, m_params, max);
 } /* parse() */
 
 void polar_force_xml_parser::show(std::ostream& stream) const {
-  stream << emit_header()
-         << XML_PARAM_STR(m_params, intensity) << std::endl
-         << XML_PARAM_STR(m_params, max) << std::endl;
+  stream << emit_header() << XML_PARAM_STR(m_params, max) << std::endl;
 } /* show() */
 
 __pure bool polar_force_xml_parser::validate(void) const {
-  return m_params.intensity > 0.0 && m_params.max > 0.0;
+  return m_params.max > 0.0;
 } /* validate() */
 
 NS_END(params, rcppsw);

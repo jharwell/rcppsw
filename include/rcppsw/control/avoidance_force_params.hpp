@@ -35,8 +35,21 @@ NS_START(rcppsw, control);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+
+/**
+ * @struct arrival_force_params
+ * @ingroup control
+ */
 struct avoidance_force_params : public params::base_params {
+  /**
+   * How far ahead of the entity's current position to
+   * look when considering threatening obstacles to avoid.
+   */
   double lookahead{0};
+
+  /**
+   * The upper limit for avoidance force magnitude.
+   */
   double max{0};
 };
 

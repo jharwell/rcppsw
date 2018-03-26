@@ -52,7 +52,6 @@ class polar_force {
   argos::CVector2 operator()(const boid& entity, const argos::CVector2& source);
 
  private:
-  double m_intensity;
   double m_max;
 };
 

@@ -36,11 +36,32 @@ NS_START(rcppsw, control);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+
+/**
+ * @struct wander_force_params
+ * @ingroup control
+ */
 struct wander_force_params : public params::base_params {
+  /**
+   * Distance of the center of the circle used to calculate the wander force
+   * from the entity. Larger value = higher magnitude of wander force vector.
+   */
   double circle_distance{0};
+
+  /**
+   * Radius of the center of the circle used to calculate the wander
+   * force. Large value = higher magnitude of wander force vector.
+   *
+   */
   double circle_radius{0};
-  argos::CRadians angle{};
-  double angle_delta{0};
+
+  /**
+   * Defines the range [0, value] from which a random value will be sampled
+   * uniformly each timestep in order to determine how much +/- angle deviation
+   * from a straight line trajectory should be applied. High value = higher
+   * average per-timestep deviation/more visibly random wandering.y
+   */
+  double max_angle_delta{0};
 };
 
 NS_END(control, rcppsw);

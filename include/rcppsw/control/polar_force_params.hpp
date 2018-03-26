@@ -34,8 +34,15 @@ NS_START(rcppsw, control);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+
+/**
+ * @struct polar_force_params
+ * @ingroup control
+ */
 struct polar_force_params : public params::base_params {
-  double intensity{0};
+  /**
+   * The upper limit for polar force magnitude.
+   */
   double max{0};
 };
 

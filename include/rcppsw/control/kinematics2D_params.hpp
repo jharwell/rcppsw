@@ -39,6 +39,11 @@ NS_START(rcppsw, control);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+
+/**
+ * @struct kinematics2D_params
+ * @ingroup control
+ */
 struct kinematics2D_params : public params::base_params {
   struct avoidance_force_params avoidance{};
   struct arrival_force_params arrival{};

@@ -32,8 +32,8 @@ NS_START(rcppsw, control);
  * Member Functions
  ******************************************************************************/
 void kinematics2D_xml_parser::parse(const argos::TConfigurationNode& node) {
-  ticpp::Element knode = argos::GetNode(const_cast<ticpp::Element&>(node),
-                                        kXMLRoot);
+  ticpp::Element knode =
+      argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
   m_avoidance.parse(knode);
   m_arrival.parse(knode);
   m_wander.parse(knode);
@@ -45,17 +45,13 @@ void kinematics2D_xml_parser::parse(const argos::TConfigurationNode& node) {
 } /* parse() */
 
 void kinematics2D_xml_parser::show(std::ostream& stream) const {
-  stream << emit_header()
-         << m_avoidance
-         << m_arrival
-         << m_wander
-         << m_polar
+  stream << emit_header() << m_avoidance << m_arrival << m_wander << m_polar
          << std::endl;
 } /* show() */
 
 __pure bool kinematics2D_xml_parser::validate(void) const {
   return m_avoidance.validate() && m_arrival.validate() &&
-      m_wander.validate() && m_polar.validate();
+         m_wander.validate() && m_polar.validate();
   return true;
 } /* validate() */
 
