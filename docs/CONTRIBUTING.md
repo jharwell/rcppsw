@@ -13,6 +13,11 @@ following programs, as running them is part of the development workflow:
   is the minimum; 4.0 is recommended (better warnings).
 - gcov (for viewing code coverage).
 
+You will also need the following development packages, which can usually be
+found in linux software repositories:
+
+- catch (A unit testing framework that some unit tests use).
+
 ### Additional cloning
 1. clone https://github.com/jharwell/devel somewhere, and adjust a few more
    symlinks (or just download these files and place them directly in wherever
@@ -30,7 +35,9 @@ Some additional cmake config options that may be of interest:
 
 - `WITH_CHECKS` - Build in run-time checking of code [Default=NO].
 
-- `BUILD_TESTS` - Build tests. [Default=NO].
+- `BUILD_TESTS` - Build tests. [Default=NO]. This enab/les the target
+  `unit_tests`, which will build all unit tests found under
+  `src/<module_name>/tests`.
 
 - `WITH_OPENMP` - Enable OpenMP code [Default=NO].
 
@@ -46,10 +53,57 @@ Some additional cmake config options that may be of interest:
 - `ER_NREPORT` - Disable reporting entirely (both debug printing and
   logging). [Default=undefined]
 
+Some additional make targets that may be of interest:
+
+- `format-all` - Run the clang formatter on the repository, using the linking
+  `.clang-format` in the root of the repo.
+
+- `check-all` - Run ALL enabled static checkers on the repository. If the
+      repository using modules/cmake subprojects, you can also run it on a
+      per-module basis. This runs the following sub-targets, which can also be
+      run individually:
+
+    - `cppcheck-all` - Runs cppcheck on the repository.
+
+    - `cppcheck-<module_name>` - Runs cppcheck on the specified module within
+      the repository, if applicable.
+
+    - `static-check-all` - Runs the clang static checker on the repository.
+
+    - `static-check-<module_name>` - Runs the clang static checker on the
+      specified module within the repository, if applicable.
+
+    - `tidy-check-all` - Runs the clang-tidy checker on the repository.
+
+    - `tidy-check-<module>` - Runs the clang-tidy checker on the specified
+      module with the repository.
+
 The cmake config supports the following compilers: `g++, clang++, icpc`; any one
 can be selected as the `CMAKE_CXX_COMPILER`, and the correct compile options
 will be populated.
 
+The `project-local.cmake` file that each repository uses has all
+project-specific bits in it, so that the rest of the cmake framework can be
+reused as is. Within it, the following variables can be set to affect
+configuration:
+
+- `set(${target}_CHECK_LANGUAGE "value")`
+
+  This should be specified BEFORE any subdirectories, external projects,
+  etc. are specified. `${target}` is a variable handed to the project local file
+  specifying the name of the executable/library to create.
+
+  - `"value"` can be either "C" or "C++", and defines the language that the
+    different checkers will use for checking the project.
+
+  - `set(${target}_HAS_RECURSIVE_DIRS VALUE)`
+
+    Controls whether or not the project has smaller modules/sub projects within
+    it, that each have their own CMakeLists.txt and can be compiled/checked/etc
+    independently of each other and the main project.
+
+    - `VALUE` can be either YES or NO.
+    
 ## Directory layout
 
 - `src/` - All `.cpp` files live under here.
