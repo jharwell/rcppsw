@@ -29,6 +29,11 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
+ * Class Constants
+ ******************************************************************************/
+constexpr char arrival_force_xml_parser::kXMLRoot[];
+
+/*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void arrival_force_xml_parser::parse(const argos::TConfigurationNode& node) {
@@ -38,8 +43,9 @@ void arrival_force_xml_parser::parse(const argos::TConfigurationNode& node) {
 } /* parse() */
 
 void arrival_force_xml_parser::show(std::ostream& stream) const {
-  stream << emit_header() << XML_PARAM_STR(m_params, slowing_radius)
-         << std::endl;
+  stream << build_header()
+         << XML_PARAM_STR(m_params, slowing_radius) << std::endl
+         << build_footer();
 } /* show() */
 
 __pure bool arrival_force_xml_parser::validate(void) const {

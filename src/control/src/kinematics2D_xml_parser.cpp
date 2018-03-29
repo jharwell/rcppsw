@@ -29,6 +29,11 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
+ * Class Constants
+ ******************************************************************************/
+constexpr char kinematics2D_xml_parser::kXMLRoot[];
+
+/*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void kinematics2D_xml_parser::parse(const argos::TConfigurationNode& node) {
@@ -45,8 +50,9 @@ void kinematics2D_xml_parser::parse(const argos::TConfigurationNode& node) {
 } /* parse() */
 
 void kinematics2D_xml_parser::show(std::ostream& stream) const {
-  stream << emit_header() << m_avoidance << m_arrival << m_wander << m_polar
-         << std::endl;
+  stream << build_header() << m_avoidance << m_arrival << m_wander << m_polar
+         << std::endl
+         << build_footer();
 } /* show() */
 
 __pure bool kinematics2D_xml_parser::validate(void) const {

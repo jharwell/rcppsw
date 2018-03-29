@@ -29,6 +29,11 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
+ * Class Constants
+ ******************************************************************************/
+constexpr char wander_force_xml_parser::kXMLRoot[];
+
+/*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void wander_force_xml_parser::parse(const argos::TConfigurationNode& node) {
@@ -40,10 +45,11 @@ void wander_force_xml_parser::parse(const argos::TConfigurationNode& node) {
 } /* parse() */
 
 void wander_force_xml_parser::show(std::ostream& stream) const {
-  stream << emit_header() << XML_PARAM_STR(m_params, circle_distance)
-         << std::endl
+  stream << build_header()
+         << XML_PARAM_STR(m_params, circle_distance) << std::endl
          << XML_PARAM_STR(m_params, circle_radius) << std::endl
-         << XML_PARAM_STR(m_params, max_angle_delta) << std::endl;
+         << XML_PARAM_STR(m_params, max_angle_delta) << std::endl
+         << build_footer();
 } /* show() */
 
 __pure bool wander_force_xml_parser::validate(void) const {
