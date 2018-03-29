@@ -27,6 +27,7 @@ list(APPEND ${target}_SUBDIRS control)
 list(APPEND ${target}_SUBDIRS task_allocation)
 list(APPEND ${target}_SUBDIRS common)
 list(APPEND ${target}_SUBDIRS metrics)
+list(APPEND ${target}_SUBDIRS ds)
 
 if (WITH_MPI)
   list(APPEND ${target}_SUBDIRS multiprocess)
