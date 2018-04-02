@@ -1,5 +1,5 @@
 /**
- * @file kinematics2D.hpp
+ * @file steering_force2D.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,66 +18,61 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_KINEMATICS2D_HPP_
-#define INCLUDE_RCPPSW_CONTROL_KINEMATICS2D_HPP_
+#ifndef INCLUDE_RCPPSW_CONTROL_STEERING_FORCE2D_HPP_
+#define INCLUDE_RCPPSW_CONTROL_STEERING_FORCE2D_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <assert.h>
+
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/control/avoidance_force.hpp"
 #include "rcppsw/control/arrival_force.hpp"
 #include "rcppsw/control/seek_force.hpp"
 #include "rcppsw/control/wander_force.hpp"
 #include "rcppsw/control/polar_force.hpp"
+#include "rcppsw/control/steering_force_type.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, control);
-struct kinematics2D_params;
+struct steering_force2D_params;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 
 /**
- * @class kinematics2D
+ * @class steering_force2d
  * @ingroup control
  *
  * @brief Class encapsulating steering of entities through 2D space via summing
  * selectable forces that act on the entity each timestep. To use this class,
  * entities must conform to the \ref boid interface.
  *
- * Once conformant, available behaviors/forces for application are:
- *
- * \ref kSeekThrough
- * \ref kSeekTo
- * \ref kWander
- * \ref kAvoidance
- * \ref kPolar
+ * Once conformant, see \ref steering_force_type for available force types.
  */
-class kinematics2D {
+class steering_force2D {
  public:
-  enum behaviors {
-    kSeekThrough,  /// Move to and drive through a target
-    kSeekTo,       /// Move to and stop at a target
-    /**
-     * Wander randomly through the environment, changing direction
-     * minutely each timestep
-     */
-    kWander,
-    kAvoidance,  /// Obstacle avoidance
-    /**
-     * Apply a constant force radiating from a fixed point in space. Can be used
-     * to generate arcing trajectories from linear ones under certain
-     * conditions, such as starting from a stopped entities and using one of the
-     * seek forces.
-     */
-    kPolar
-  };
+  steering_force2D(boid& entity, const struct steering_force2D_params* params);
 
-  kinematics2D(boid& entity, const struct kinematics2D_params* params);
+  /**
+   * @brief Calculate the steering force for the entity, returning the
+   * cumulative sum of all forces chosen to act on the entity this timestep.
+   */
+  argos::CVector2 calculate(void) { return m_force = m_force_accum; }
+
+  /**
+   * @brief Return the current steering force.
+   */
+  argos::CVector2 value(void) { return m_force; }
+
+  /**
+   * @brief Reset the sum of forces acting on the entity.
+   */
+  void reset(void) { m_force.SetX(0); m_force. SetY(0); }
 
   /**
    * @brief Add the \ref kSeekThrough force to the sum forces for this timestep.
@@ -109,26 +104,13 @@ class kinematics2D {
   void avoidance(bool obs_threat,
                  const argos::CVector2& closest_obstacle);
 
-  /**
-   * @brief Get the steering force the entity, returning the cumulative sum
-   * of all forces chosen to act on the entity this timestep.
-   *
-   * The sum is reset after calling this function.
-   */
-  argos::CVector2 steering_force(void) { return m_force; }
-
-  /**
-   * @brief Reset the sum of forces acting on the entity.
-   */
-  void reset(void) { m_force.SetX(0); m_force. SetY(0); }
+ protected:
+  void accum_force(const argos::CVector2& force) { m_force_accum += force; }
 
  private:
-  void do_seek_through(const argos::CVector2& target);
-  void do_seek_to(const argos::CVector2& target);
-  void do_wander(void);
-
   // clang-format off
   boid&           m_entity;
+  argos::CVector2 m_force_accum;
   argos::CVector2 m_force;
   avoidance_force m_avoidance_force;
   arrival_force   m_arrival_force;
@@ -140,4 +122,4 @@ class kinematics2D {
 
 NS_END(control, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_CONTROL_KINEMATICS2D_HPP_ */
+#endif /* INCLUDE_RCPPSW_CONTROL_STEERING_FORCE2D_HPP_ */

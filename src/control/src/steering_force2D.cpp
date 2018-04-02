@@ -1,7 +1,7 @@
 /**
- * @file kinematics2D_xml_parser.cpp
+ * @file steering_force2D.cpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * @copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,7 +21,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/control/kinematics2D_xml_parser.hpp"
+#include "rcppsw/control/steering_force2D.hpp"
+#include "rcppsw/control/steering_force2D_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -29,36 +30,37 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Class Constants
+ * Constructors/Destructors
  ******************************************************************************/
-constexpr char kinematics2D_xml_parser::kXMLRoot[];
+steering_force2D::steering_force2D(boid& entity,
+                           const struct steering_force2D_params* params)
+    : m_entity(entity),
+      m_force_accum(),
+      m_force(),
+      m_avoidance_force(&params->avoidance),
+      m_arrival_force(&params->arrival),
+      m_seek_force(),
+      m_wander_force(&params->wander),
+      m_polar_force(&params->polar) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void kinematics2D_xml_parser::parse(const argos::TConfigurationNode& node) {
-  ticpp::Element knode =
-      argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
-  m_avoidance.parse(knode);
-  m_arrival.parse(knode);
-  m_wander.parse(knode);
-  m_polar.parse(knode);
-  m_params.avoidance = *m_avoidance.parse_results();
-  m_params.arrival = *m_arrival.parse_results();
-  m_params.wander = *m_wander.parse_results();
-  m_params.polar = *m_polar.parse_results();
-} /* parse() */
+void steering_force2D::seek_through(const argos::CVector2& target) {
+  accum_force(m_arrival_force(m_entity, target));
+} /* seek_through() */
 
-void kinematics2D_xml_parser::show(std::ostream& stream) const {
-  stream << build_header() << m_avoidance << m_arrival << m_wander << m_polar
-         << std::endl
-         << build_footer();
-} /* show() */
+void steering_force2D::seek_to(const argos::CVector2& target) {
+  accum_force(m_seek_force(m_entity, target));
+} /* seek_to() */
 
-__pure bool kinematics2D_xml_parser::validate(void) const {
-  return m_avoidance.validate() && m_arrival.validate() &&
-         m_wander.validate() && m_polar.validate();
-  return true;
-} /* validate() */
+void steering_force2D::wander(void) {
+  accum_force(m_wander_force(m_entity));
+} /* wander() */
 
-NS_END(params, rcppsw);
+void steering_force2D::avoidance(bool obs_threat,
+                                 const argos::CVector2& closest_obstacle) {
+  accum_force(m_avoidance_force(m_entity, obs_threat, closest_obstacle));
+} /* avoidance() */
+
+NS_END(control, rcppsw);

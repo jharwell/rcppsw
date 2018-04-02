@@ -1,5 +1,5 @@
 /**
- * @file kinematics2D_params.hpp
+ * @file steering_force2D_params.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_KINEMATICS2D_PARAMS_HPP_
-#define INCLUDE_RCPPSW_CONTROL_KINEMATICS2D_PARAMS_HPP_
+#ifndef INCLUDE_RCPPSW_CONTROL_STEERING_FORCE2D_PARAMS_HPP_
+#define INCLUDE_RCPPSW_CONTROL_STEERING_FORCE2D_PARAMS_HPP_
 
 /*******************************************************************************
  * Includes
@@ -41,10 +41,10 @@ NS_START(rcppsw, control);
  ******************************************************************************/
 
 /**
- * @struct kinematics2D_params
+ * @struct steering_force2D_params
  * @ingroup control
  */
-struct kinematics2D_params : public params::base_params {
+struct steering_force2D_params : public params::base_params {
   struct avoidance_force_params avoidance{};
   struct arrival_force_params arrival{};
   struct wander_force_params wander{};
@@ -53,4 +53,4 @@ struct kinematics2D_params : public params::base_params {
 
 NS_END(control, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_CONTROL_KINEMATICS2D_PARAMS_HPP_ */
+#endif /* INCLUDE_RCPPSW_CONTROL_STEERING_FORCE2D_PARAMS_HPP_ */

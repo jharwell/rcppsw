@@ -1,5 +1,5 @@
 /**
- * @file kinematics2D_xml_parser.hpp
+ * @file steering_force2D_xml_parser.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_KINEMATICS2D_XML_PARSER_HPP_
-#define INCLUDE_RCPPSW_CONTROL_KINEMATICS2D_XML_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_CONTROL_STEERING_FORCE2D_XML_PARSER_HPP_
+#define INCLUDE_RCPPSW_CONTROL_STEERING_FORCE2D_XML_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -29,7 +29,7 @@
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
-#include "rcppsw/control/kinematics2D_params.hpp"
+#include "rcppsw/control/steering_force2D_params.hpp"
 #include "rcppsw/control/avoidance_force_xml_parser.hpp"
 #include "rcppsw/control/arrival_force_xml_parser.hpp"
 #include "rcppsw/control/wander_force_xml_parser.hpp"
@@ -45,18 +45,18 @@ NS_START(rcppsw, control);
  ******************************************************************************/
 
 /**
- * @class kinematics2D_xml_parser
+ * @class steering_force2D_xml_parser
  * @ingroup control
  *
- * @brief Parses XML parameters for \ref kinematics2D into
- * \ref kinematics2D_params. Assumes it is handed an XML parent in which the
+ * @brief Parses XML parameters for \ref steering_force2D into
+ * \ref steering_force2D_params. Assumes it is handed an XML parent in which the
  * child tag \ref kXMLRoot is found.
  */
-class kinematics2D_xml_parser : public rcppsw::params::xml_param_parser {
+class steering_force2D_xml_parser : public rcppsw::params::xml_param_parser {
  public:
-  static constexpr char kXMLRoot[] = "kinematics2D";
+  static constexpr char kXMLRoot[] = "steering_force2D";
 
-  explicit kinematics2D_xml_parser(uint level)
+  explicit steering_force2D_xml_parser(uint level)
       : xml_param_parser(level),
         m_params(),
         m_avoidance(level + 1),
@@ -69,18 +69,18 @@ class kinematics2D_xml_parser : public rcppsw::params::xml_param_parser {
   bool validate(void) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  const kinematics2D_params* parse_results(void) const override { return &m_params; }
+  const steering_force2D_params* parse_results(void) const override { return &m_params; }
 
  private:
   // clang-format off
-  struct kinematics2D_params m_params;
-  avoidance_force_xml_parser m_avoidance;
-  arrival_force_xml_parser   m_arrival;
-  wander_force_xml_parser    m_wander;
-  polar_force_xml_parser     m_polar;
+  struct steering_force2D_params m_params;
+  avoidance_force_xml_parser     m_avoidance;
+  arrival_force_xml_parser       m_arrival;
+  wander_force_xml_parser        m_wander;
+  polar_force_xml_parser         m_polar;
   // clang-format on
 };
 
 NS_END(control, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_CONTROL_KINEMATICS2D_XML_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_CONTROL_STEERING_FORCE2D_XML_PARSER_HPP_ */

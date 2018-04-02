@@ -1,7 +1,7 @@
 /**
- * @file kinematics2D.cpp
+ * @file steering_force_type.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,11 +18,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_CONTROL_STEERING_FORCE_TYPE_HPP_
+#define INCLUDE_RCPPSW_CONTROL_STEERING_FORCE_TYPE_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/control/kinematics2D.hpp"
-#include "rcppsw/control/kinematics2D_params.hpp"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -30,31 +32,33 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Constructors/Destructors
+ * Class Definitions
  ******************************************************************************/
-kinematics2D::kinematics2D(boid& entity,
-                           const struct kinematics2D_params* params)
-    : m_entity(entity),
-      m_force(),
-      m_avoidance_force(&params->avoidance),
-      m_arrival_force(&params->arrival),
-      m_seek_force(),
-      m_wander_force(&params->wander),
-      m_polar_force(&params->polar) {}
-
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-void kinematics2D::do_seek_through(const argos::CVector2& target) {
-  m_force += m_arrival_force(m_entity, target);
-} /* do_seek_through() */
-
-void kinematics2D::do_seek_to(const argos::CVector2& target) {
-  m_force += m_seek_force(m_entity, target);
-} /* do_seek_to() */
-
-void kinematics2D::do_wander(void) {
-  m_force += m_wander_force(m_entity);
-} /* do_wander() */
+/**
+ * @brief List of steering forces available within the class
+ */
+class steering_force_type {
+ public:
+  enum {
+  kSeekThrough,  /// Move to and drive through a target
+  kSeekTo,       /// Move to and stop at a target
+  /**
+   * Wander randomly through the environment, changing direction
+   * minutely each timestep
+   */
+  kWander,
+  kAvoidance,  /// Obstacle avoidance
+  /**
+   * Apply a constant force radiating from a fixed point in space. Can be used
+   * to generate arcing trajectories from linear ones under certain
+   * conditions, such as starting from a stopped entities and using one of the
+   * seek forces.
+   */
+  kPolar,
+  kExternalForces  /// Application defined forces start here
+  };
+};
 
 NS_END(control, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_CONTROL_STEERING_FORCE_TYPE_HPP_ */
