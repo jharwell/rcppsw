@@ -2,16 +2,10 @@
 
 ## Development Setup
 
-If you are going to be doing any development in RCPPSW, you will also need the
-following programs, as running them is part of the development workflow:
-
-- cppcheck (static analysis).
-- clang-check-3.8 (syntax checking/static analysis). 3.8 is the minimum; 4.0
-  recommended (better warnings).
-- clang-format-4.0 (automatic code formatting).
-- clang-tidy-4.0 (static analysis/automated checking of naming conventions). 3.8
-  is the minimum; 4.0 is recommended (better warnings).
-- gcov (for viewing code coverage).
+This project uses the build scaffolding provided by
+[cmake-config](https://github.com/jharwell/cmake-config). Please look
+at the platform requirements for that project and install any needed
+packages/libraries.
 
 You will also need the following development packages, which can usually be
 found in linux software repositories:
@@ -27,83 +21,6 @@ found in linux software repositories:
 
    `<rcppsw root>/.clang-tidy` -> `<develroot>/templates/.clang-tidy`
 
-### Build Process Configuration
-
-Some additional cmake config options that may be of interest:
-
-- `BUILD_SHARED_LIBS` - Build shared instead of static libraries [Default=YES].
-
-- `WITH_CHECKS` - Build in run-time checking of code [Default=NO].
-
-- `BUILD_TESTS` - Build tests. [Default=NO]. This enab/les the target
-  `unit_tests`, which will build all unit tests found under
-  `src/<module_name>/tests`.
-
-- `WITH_OPENMP` - Enable OpenMP code [Default=NO].
-
-- `WITH_MPI` - Enable MPI code [Defaut=NO].
-
-- `WITH_FPC` - `FPC_RETURN` or `FPC_ABORT` [Default=`FPC_ABORT`]. This controls
-             the behavior a Function PreCondition (FPC) fails: Either return a
-             specified error or halt the program.
-
-- `ER_NDEBUG` - Disable printing of assertion failures when `NDEBUG` is defined
-  (as for optimized builds). [Default=undefined].
-
-- `ER_NREPORT` - Disable reporting entirely (both debug printing and
-  logging). [Default=undefined]
-
-Some additional make targets that may be of interest:
-
-- `format-all` - Run the clang formatter on the repository, using the linking
-  `.clang-format` in the root of the repo.
-
-- `check-all` - Run ALL enabled static checkers on the repository. If the
-      repository using modules/cmake subprojects, you can also run it on a
-      per-module basis. This runs the following sub-targets, which can also be
-      run individually:
-
-    - `cppcheck-all` - Runs cppcheck on the repository.
-
-    - `cppcheck-<module_name>` - Runs cppcheck on the specified module within
-      the repository, if applicable.
-
-    - `static-check-all` - Runs the clang static checker on the repository.
-
-    - `static-check-<module_name>` - Runs the clang static checker on the
-      specified module within the repository, if applicable.
-
-    - `tidy-check-all` - Runs the clang-tidy checker on the repository.
-
-    - `tidy-check-<module>` - Runs the clang-tidy checker on the specified
-      module with the repository.
-
-The cmake config supports the following compilers: `g++, clang++, icpc`; any one
-can be selected as the `CMAKE_CXX_COMPILER`, and the correct compile options
-will be populated.
-
-The `project-local.cmake` file that each repository uses has all
-project-specific bits in it, so that the rest of the cmake framework can be
-reused as is. Within it, the following variables can be set to affect
-configuration:
-
-- `set(${target}_CHECK_LANGUAGE "value")`
-
-  This should be specified BEFORE any subdirectories, external projects,
-  etc. are specified. `${target}` is a variable handed to the project local file
-  specifying the name of the executable/library to create.
-
-  - `"value"` can be either "C" or "C++", and defines the language that the
-    different checkers will use for checking the project.
-
-  - `set(${target}_HAS_RECURSIVE_DIRS VALUE)`
-
-    Controls whether or not the project has smaller modules/sub projects within
-    it, that each have their own CMakeLists.txt and can be compiled/checked/etc
-    independently of each other and the main project.
-
-    - `VALUE` can be either YES or NO.
-    
 ## Directory layout
 
 - `src/` - All `.cpp` files live under here.
@@ -120,201 +37,14 @@ configuration:
   directly.
 
 ## Development Guides
-### C++ Style Guide
 
-Generally speaking, I follow the "do as the standard library does" mantra for
-this project. In particular:
+The following development guides should be followed:
 
-- All source files have the `.cpp` extension, and all header files have the
-  `.hpp` extension.
+- [C++ Development Guide](CXX_DEV_GUIDE.md)
+- [Git Commit Guide](GIT_COMMIT_GUIDE.md)
+- [Issue Usage Guide](ISSUE_GUIDE.md)
 
-- All file, class, variable, enum, namespace, etc. names are
-  `specified_like_this`, NOT `specifiedLikeThis` or
-  `SpecifiedLikeThis`. Rationale: Most of the time you shouldnot really need to
-  know whether the thing in between `::` is a class, namespace, enum, etc. You
-  really only need to know what operations it has.
-
-- Exactly one class/struct definition per .cpp/.hpp file, unless there is a very
-  good reason to do otherwise.
-
-- The namespace hierarchy exactly corresponds to the directory hierarchy that
-  the source/header files for classes can be found in.
-
-- Code should pass the google C++ linter, ignoring the following items. For
-  everything else, the linter warnings should be addressed.
-
-  - Use of non-const references--I do this all the time.
-
-  - Header ordering (whatever the auto-formatter does is fine, but should
-    generally be google style).
-
-  - rand_r() instead of rand() (I use random(), which it does not flag).
-
-  - Line length >= 80 ONLY if it is only 1-2 chars too long, and breaking the
-    line would decrease readability. The formatter generally takes care of this
-    too.
-
-- Code should pass the clang-tidy linter, which checks for style elements like:
-
-  - All members prefixed with `m_`
-
-  - All constant members prefixed with `mc_`.
-
-  - All global variables prefixed with `g_`.
-
-  - All functions less than 100 lines, with no more than 5 parameters/10
-    branches. If you have something longer than this, 9/10 times it can and
-    should be split up.
-
-### Documentation Style
-
-As I was told in my youth:
-
-`If it is hard to document, it is probably wrong`
-
-To that end all contributions *must* be properly documented.
-
-- All classes should have:
-
-    - A doxygen brief
-    - A group tag
-
-- All non-getter/non-setter member functions should be documentated with at
-  least a brief, UNLESS those functions are overrides/inherited from a parent
-  class, in which case they should be left blank (usually) and their
-  documentation be in the class in which they are initially declared. All
-  parameters should be documented.
-
-Tricky/nuanced issues with member variables should be documented, though in
-general the namespace name + class name + member variable name + member variable
-type should be enough documentation. If its not, chances are you are naming
-things somewhat obfuscatingly.
-
-As I was also told in my youth:
-
-`If it is hard to test, it is almost assuredly wrong`
-
-To that end, all NEW classes should have some basic unit tests associated with
-them, when possible.
-
-### Git Commit Messages
-
-- Use the present tense ("Add feature" not "Added feature")
-- Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
-- Limit the first line to 72 characters or less
-- Reference issues and pull requests liberally after the first line
-- Consider starting the commit message with an applicable emoji:
-
-  - :art: `:art:` when improving the format/structure of the code
-  - :racehorse: `:racehorse:` when improving performance
-  - :penguin: `:penguin:` when fixing something on Linux
-  - :apple: `:apple:` when fixing something on macOS
-
-  - :non-potable_water: `:non-potable_water:` when plugging memory leaks
-  - :memo: `:memo:` when writing docs
-  - :bug: `:bug:` when fixing a bug
-  - :fire: `:fire:` when removing code or files
-  - :white_check_mark: `:white_check_mark:` when adding tests
-  - :lock: `:lock:` when dealing with security
-  - :arrow_up: `:arrow_up:` when upgrading dependencies
-  - :arrow_down: `:arrow_down:` when downgrading dependencies
-  - :shirt: `:shirt:` when removing linter warnings
-
-### Issues Labelling
-
-All issues that are entered into github should have a `Priority`, a `Status`,
-and a `Type` associated with them. Well usually. Sometimes it doesn't make
-sense (Question for example) to have all three. Furthermore, they should all
-follow the [docs/ISSUE_TEMPLATE.md](ISSUE_TEMPLATE).
-
-Priorities:
-
-- `Critical` - Things that are main features/super important, or are
-  segmentation-fault level bugs, as in "this must be fixed/addressed now before
-  we can move forward".
-
-- `Major` - Things that support/are main project features, but are not blocking
-  other tasks.
-
-- `Minor` - Things that would be nice to have (think enhancements), but that are
-  not required at the moment, but will be needed at some point in the near-ish
-  future.
-
-- `Low` - Things that are not blocking any other tasks, can be implemented
-  anytime without compromising the project in any way. A "wishlist" of things
-  that would be nice to add, as it were.
-
-Statuses:
-
-- `Available` - The task is available to be worked on.
-
-- `Blocked` - The task is blocked waiting for the completion of another task.
-
-- `Completed` - The task has been completed. All tasks should be in this state
-  before the issue is closed.
-
-- `Future` - It is not possible to work on the task at the moment, because too
-  much development needs to happen to make it accessible, or that it is
-  something worth considering adding in the future, when the project is more
-  mature.
-
-- `In Progress` - The task is currently being worked on.
-
-- `Review Needed` - The task has been completed, but needs to be reviewed (this
-  should be tied to a pull request) before it can be moved to the completed
-  state.
-
-Types:
-
-- `Bugfix` - This is a task to address a bug in the code.
-
-- `Docs` - This is a task related to creating/updating documentation.
-
-- `Enhancement` - This is a task that extends the functionality of an existing
-  part of the code, but not so far that it is considered a new feature.
-
-- `Feature` - This is a task that adds new functionality to the code.
-
-- `Question` - This is not a task per-se, but a question whose resolution will
-  lead to the creation of enhancements/features/refactors.
-
-- `Refactor` - This is a task to refactor the code, not changing functionality
-  but modifying the interface, changing data structures, etc. This should be
-  accompanied by unit tests if applicable.
-
-- `Task` - This is a task that relates to "chore" work for the project. Renaming
-  files, moving things around, mucking about with the build process are all good
-  examples of things that should get a `Task` label.
-
-- `Research` - The task is open-ended, requiring paper reading and/or lots of
-  experiment running, analyzing, etc.
-
-### Testing
-
-All submitted *new* classes should have associated unit tests, one for each
-major public function that the class provides. For any *existing* classes that
-have *new* public functions added, a new unit test should also be added. It is
-not possible to create unit tests for all classes, as some can only be tested in
-an integrated manner, but there many that can and should be tested in a stand
-alone fashion.
-
-## Working from a clone, rather than a forked repo
-If you fork the repo rather than cloning it, you can use whatever style of
-development (issues, branches, etc.) that you prefer, and you only need to worry
-about conforming to the documentation, C++, and git commit style guides . If you
-clone it and are pushing directly to this repo, rather than submitting pull
-requests, then the following additional guidelines apply.
-
-### Branches
-
-All branches should have a corresponding issue on github, and the issue should
-be named the *same* thing as the branch. This may seem pedantic, but when you
-have hundreds or thousands of issues and branches, any little thing you can do
-to increase the self-documenting nature of the development process is worth
-doing. I don't generally delete branches, so you should be able to see how they
-should be named/link to github issues by browsing the repo.
-
-### General Workflow
+## General Workflow
 
 1. Find an issue on github to work on that looks interesting/doable, possibly
    discussing it with the project's main author(s).
