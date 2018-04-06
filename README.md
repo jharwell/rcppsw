@@ -32,42 +32,48 @@ exist in Boost, or that build on what boost provides. Includes such things as:
  - Miscellaneous other things as kmeans clustering,
    multithreading/multiprocessing management tools.
 
-## Basic Setup
+## Pre-cloning Setup
 
-Before starting, you will need a recent version of the following programs:
+1. This project uses the build scaffolding provided by
+   [cmake-config](https://github.com/jharwell/cmake-config). Please
+   look at the platform requirements for that project and install any
+   needed packages/libraries.
 
-- cmake
-- make
-- gcc
-- g++ - A version that supports C++14 is required.
+2. Install the following libraries:
 
-You will also need recent versions of the following libraries:
+   - boost (1.58 is known to work; older versions may also work).
 
-- boost (1.58 is known to work; older versions may also work)
+     On Ubuntu this is: `sudo apt-get install libboost-all-dev`
 
-### Pre-cloning
-1. Set up an ssh key for password-less connection to github (this is for the
-   cmake config). Yes I know that it can be done without ssh, but I set it up
-   this way so I don't have to type my github password ever.
+3. Set up an ssh key for password-less connection to github (this is
+   for the [cmake config](https://github.com/jharwell/cmake-config)
+   submodule). Yes I know that it can be done without ssh, but I set
+   it up this way so I don't have to type my github password ever.
 
-### Post-cloning
-1. Pull in the cmake config:
+## Post-cloning
+
+1. Pull in the cmake project scaffolding:
 
         git submodule update --init --recursive
 
-2. Clone `rcsw` https://github.com/jharwell/rcsw (Reusable C software) somewhere
-   and link it into `ext/rcsw`. Follow post-cloning instructions in the README
-   found in that repo.
+2. Clone `rcsw` https://github.com/jharwell/rcsw (Reusable C software)
+   somewhere, following the pre/post cloning instructions found in
+   that repo. Once finished, link the cloned `rcsw` repo into `ext/rcsw`.
 
-Then you can build via:
+3. Build via:
 
-    mkdir build && cd build
-    cmake ..
-    make
+        mkdir build && cd build
+        cmake ..
+        make
+
+For additional build configuration options, please see the README in
+the [cmake config](https://github.com/jharwell/cmake-config) repo.
 
 To build the documentation, do the following from the build directory:
 
     make documentation
+
+# Contributing
 
 For contributing to `rcppsw`, see [CONTRIBUTING](docs/CONTRIBUTING.md)
 

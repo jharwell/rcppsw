@@ -50,3 +50,5 @@ compile_options.json
 build
 docs/html
 docs/latex
+.clang-format
+.clang-tidy
