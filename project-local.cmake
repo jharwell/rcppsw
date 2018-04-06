@@ -39,8 +39,15 @@ foreach(d ${${target}_SUBDIRS})
 endforeach()
 
 list(APPEND ${target}_pattern_SUBDIRS state_machine)
+
 foreach(d ${${target}_pattern_SUBDIRS})
   add_subdirectory(src/patterns/${d})
+  target_include_directories(${target}-${d} PUBLIC "${${target}_INCLUDE_DIRS}")
+endforeach()
+
+list(APPEND ${target}_robotics_SUBDIRS steering2D)
+foreach(d ${${target}_robotics_SUBDIRS})
+  add_subdirectory(src/robotics/${d})
   target_include_directories(${target}-${d} PUBLIC "${${target}_INCLUDE_DIRS}")
 endforeach()
 

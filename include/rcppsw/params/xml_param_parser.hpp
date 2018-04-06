@@ -63,7 +63,7 @@ class xml_param_parser {
 
   virtual ~xml_param_parser(void) = default;
 
-  static constexpr uint kColumnWidth = 80;
+  static constexpr uint kColumnWidth = 100;
   static constexpr uint kHeader1 = 1;
   static constexpr uint kHeader2 = 2;
   static constexpr uint kHeader3 = 3;
@@ -86,7 +86,7 @@ class xml_param_parser {
    * @return The constructed header.
    */
   std::string build_header(void) const {
-    FPC_CHECK("", level() > 0);
+    FPC_CHECK("", level() > 0, level() <= kHeader4);
     int width = kColumnWidth  - level() * 20;
     std::string prettiness(width, '=');
     std::string spaces(width/2 - xml_root().size()/2 - 1, ' ');
@@ -106,7 +106,7 @@ class xml_param_parser {
    * @return The constructed footer.
    */
   std::string build_footer(void) const {
-    FPC_CHECK("", level() > 0);
+    FPC_CHECK("", level() > 0, level() <= kHeader4);
     int width = kColumnWidth - level() * 20;
     std::string prettiness(width, '=');
     std::string spaces(width/2 - xml_root().size()/2 - 1, ' ');
