@@ -1,21 +1,24 @@
-# Contributing/Development Guide
+# Contributing to RCPPSW
 
-## Development Setup
-
-This project uses the build scaffolding provided by
-[cmake-config](https://github.com/jharwell/cmake-config). Please look
-at the platform requirements for that project and install any needed
-packages/libraries.
+## Pre-cloning Setup
 
 You will also need the following development packages, which can usually be
 found in linux software repositories:
 
 - catch (A unit testing framework that some unit tests use).
 
-### Additional cloning
-1. clone https://github.com/jharwell/devel somewhere, and adjust a few more
-   symlinks (or just download these files and place them directly in wherever
-   you cloned `rcppsw`):
+In addition, you way also want to install these programs for development:
+
+- ccache (will make compiling a lot faster).
+- icpc (additional syntax checking comes from Intel Parallel Studio, which is
+  ~14GB).
+- ctags/gtags/rtags/cscope (moving around in a large C/C++ code base).
+
+## Post-cloning Setup
+
+1. Clone https://github.com/jharwell/devel somewhere, and either symlink the
+   below files into the repository, or just copy them directly (they are ignored
+   by git).
 
    `<rcppsw root>/.clang-format` -> `<develroot>/templates/.clang-format`
 
@@ -23,13 +26,12 @@ found in linux software repositories:
 
 ## Directory layout
 
-- `src/` - All `.cpp` files live under here.
+- `src/` - All `.cpp` files live under here, in their respective modules.
 
 - `include/` - All `.hpp` files live under here.
 
-- `tests` - All test code lives under here.
-
-- `docs/` - All documentation besides this README lives under here.
+- `docs/` - All documentation besides this README lives under here,
+  including all development/style guides.
 
 - `VERSION` - A file in the root root that holds the current/next versions of
   the code. Versions are numbered as `major.minor.patch`, and is updated in
