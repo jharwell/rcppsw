@@ -1,5 +1,5 @@
 /**
- * @file boid.hpp
+ * @file model.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,60 +18,58 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ROBOTICS_STEERING2D_BOID_HPP_
-#define INCLUDE_RCPPSW_ROBOTICS_STEERING2D_BOID_HPP_
+#ifndef INCLUDE_RCPPSW_ROBOTICS_KINEMATICS2D_MODEL_HPP_
+#define INCLUDE_RCPPSW_ROBOTICS_KINEMATICS2D_MODEL_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <argos3/core/utility/math/vector2.h>
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/robotics/kinematics/twist.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, robotics, steering2D);
+NS_START(rcppsw, robotics, kinematics2D);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 
 /**
- * @class boid
- * @ingroup robotics steering2D
+ * @class model
+ * @ingroup robotics kinematics2D
  *
- * @brief Interface representing an entity upon which kinematic forces can act
- * (i.e. any class that wants to use the \ref force_calculator must conform to
- * this interface).
+ * @brief Interface that all 2D kinematics models need to fulfill in order to be
+ * used in other components of this module.
  */
-class boid {
+class model {
  public:
-  boid(void) = default;
-  virtual ~boid(void) = default;
+  model(void) = default;
+  virtual ~model(void) = default;
 
   /**
-   * @brief Should return the current linear velocity of the entity.
+   * @brief Given a calculated twist acting on the robot, perform actuation
+   * (i.e. make the robot move).
+   *
+   * @param twist The calculated twist.
+   *
+   * @return \ref status_t.
    */
-  virtual argos::CVector2 linear_velocity(void) const = 0;
+  virtual status_t actuate(const kinematics::twist& twist) = 0;
 
   /**
-   * @brief Should return the current angular velocity of the entity.
+   * @brief Stop the robot.
    */
-  virtual double angular_velocity(void) const = 0;
+  virtual void stop(void) = 0;
 
   /**
-   * @brief Should return the maximum speed of the entity. This can vary in
-   * time, if desired.
+   * @brief Get the maximum linear speed of the robot.
    */
   virtual double max_speed(void) const = 0;
-
-  /**
-   * @brief Return the current position of the entity. Hopefully, this DOES vary
-   * with time otherwise your entity is very uninteresting.
-   */
-  virtual argos::CVector2 position(void) const = 0;
 };
 
-NS_END(steering2D, robotics, rcppsw);
+NS_END(kinematics2D, robotics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ROBOTICS_STEERING2D_BOID_HPP_ */
+#endif /* INCLUDE_RCPPSW_ROBOTICS_KINEMATICS2D_MODEL_HPP_ */

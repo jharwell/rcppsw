@@ -44,10 +44,10 @@ wander_force::wander_force(const struct wander_force_params* const params)
 argos::CVector2 wander_force::operator()(const boid& entity) {
   /* calculate circle center */
     argos::CVector2 velocity;
-  if (entity.velocity().Length() <= 0) {
+  if (entity.linear_velocity().Length() <= 0) {
     velocity = argos::CVector2(1, 0);
   } else {
-    velocity = entity.velocity();
+    velocity = entity.linear_velocity();
   }
   std::cout << "velocity: "<< velocity << std::endl;
   std::cout << "angle: " << m_angle << std::endl;

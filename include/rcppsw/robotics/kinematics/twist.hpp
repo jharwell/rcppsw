@@ -1,7 +1,7 @@
 /**
- * @file arrival_force.cpp
+ * @file twist.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,39 +18,44 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_ROBOTICS_KINEMATICS_TWIST_HPP_
+#define INCLUDE_RCPPSW_ROBOTICS_KINEMATICS_TWIST_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/robotics/steering2D/arrival_force.hpp"
-#include "rcppsw/robotics/steering2D/arrival_force_params.hpp"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, robotics, steering2D);
+NS_START(rcppsw, robotics, kinematics);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Struct Definitions
  ******************************************************************************/
-arrival_force::arrival_force(const struct arrival_force_params* const params)
-    : m_slowing_radius(params->slowing_radius) {}
 
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-argos::CVector2 arrival_force::operator()(const boid& entity,
-                                          const argos::CVector2& target) {
-  argos::CVector2 desired = target - entity.position();
-  double distance = desired.Length();
+/**
+ * @struct twist
+ * @ingroup robotics kinematics
+ *
+ * @brief Representation of the twist of a  robot. ROS already has this, but
+ * does not work with all robotic simulators (such as ARGoS)/models, hence the
+ * need for me to implement this.
+ */
+struct twist {
+  struct {
+    double x{};
+    double y{};
+    double z{};
+  } linear{};
+  struct {
+    double x{};
+    double y{};
+    double z{};
+  } angular{};
+};
 
-  desired.Normalize();
-  if (distance <= m_slowing_radius) {
-    desired.Scale(entity.max_speed() * distance / m_slowing_radius,
-                  entity.max_speed() * distance / m_slowing_radius);
-  } else {
-    desired.Scale(entity.max_speed(), entity.max_speed());
-  }
-  return desired - entity.linear_velocity();
-} /* operator()() */
+NS_END(kinematics, robotics, rcppsw);
 
-NS_END(steering2D, robotics, rcppsw);
+#endif /* INCLUDE_RCPPSW_ROBOTICS_KINEMATICS_TWIST_HPP_ */

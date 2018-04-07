@@ -32,6 +32,7 @@
 #include "rcppsw/robotics/steering2D/polar_force.hpp"
 #include "rcppsw/robotics/steering2D/force_type.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/robotics/kinematics/twist.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -60,9 +61,15 @@ class force_calculator : public er::client {
                    const struct force_calculator_params* params);
 
   /**
-   * @brief Return the current steering force.
+   * @brief Return the current steering force as a velocity vector.
    */
-  argos::CVector2 value(void) { return m_force_accum; }
+  argos::CVector2 value(void) const { return m_force_accum; }
+
+  /**
+   * @brief Return the current steering force as twist acting on the managed
+   * entity.
+   */
+  kinematics::twist value_as_twist(void) const;
 
   /**
    * @brief Reset the sum of forces acting on the entity.

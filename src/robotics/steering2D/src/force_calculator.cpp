@@ -51,6 +51,15 @@ force_calculator::force_calculator(const std::shared_ptr<er::server>& server,
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
+kinematics::twist force_calculator::value_as_twist(void) const {
+  kinematics::twist twist;
+  twist.linear.x = m_force_accum.Length();
+  twist.angular.z = (m_force_accum - m_entity.linear_velocity()).Length() *
+                    std::sin((m_force_accum - m_entity.linear_velocity()).Angle().GetValue()) /
+                    m_entity.linear_velocity().Length();
+  return twist;
+} /* value_as_twist() */
+
 void force_calculator::seek_through(const argos::CVector2& target) {
   argos::CVector2 force = m_arrival_force(m_entity, target);
   ER_DIAG("Arrival force: (%f, %f)", force.GetX(), force.GetY());

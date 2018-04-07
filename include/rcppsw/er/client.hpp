@@ -44,7 +44,7 @@
  * Define a statement reporting the occurence of an \ref er_lvl::ERR
  * event. Works just like printf() from a syntax point of view.
  */
-#define ER_ERR(...) ER_REPORT(rcppsw::er::er_lvl::ERROR, __VA_ARGS__)
+#define ER_ERR(...) ER_REPORT(rcppsw::er::er_lvl::ERR, __VA_ARGS__)
 
 /**
  * @def ER_WARN(...)
