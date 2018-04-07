@@ -50,15 +50,21 @@ exist in Boost, or that build on what boost provides. Includes such things as:
    submodule). Yes I know that it can be done without ssh, but I set
    it up this way so I don't have to type my github password ever.
 
+4. Clone `rcsw` https://github.com/swarm-robotics/rcsw (Reusable C software)
+   somewhere and create a symbolic to it in the repo as
+   `<repo_root>/ext/rcsw`. Follow all pre/post-cloning instructions found in
+   README in that repo.
+
 ## Post-cloning
 
-1. Pull in the cmake project scaffolding:
+1. Check out the development branch, as that has not only the latest semi-stable
+   release, but also the most up-to-date documentation, including this README.
+
+        git checkout devel
+
+2. Pull in the cmake project scaffolding:
 
         git submodule update --init --recursive
-
-2. Clone `rcsw` https://github.com/jharwell/rcsw (Reusable C software)
-   somewhere, following the pre/post cloning instructions found in
-   that repo. Once finished, link the cloned `rcsw` repo into `ext/rcsw`.
 
 3. Build via:
 

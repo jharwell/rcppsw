@@ -30,9 +30,9 @@ In addition, you way also want to install these programs for development:
 
 - `include/` - All `.hpp` files live under here.
 
-- `docs/` - All documentation besides this README lives under here,
+- `docs/` - All documentation besides the main README lives under here,
   including all development/style guides.
-
+this
 - `VERSION` - A file in the root root that holds the current/next versions of
   the code. Versions are numbered as `major.minor.patch`, and is updated in
   accordance with semantic versioning/GitFlow. You should never modify this file
