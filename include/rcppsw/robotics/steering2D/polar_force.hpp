@@ -49,7 +49,8 @@ class polar_force {
  public:
   explicit polar_force(const struct polar_force_params* params);
 
-  argos::CVector2 operator()(const boid& entity, const argos::CVector2& source);
+  argos::CVector2 operator()(const boid& entity,
+                             const argos::CVector2& source) const;
 
  private:
   double m_max;

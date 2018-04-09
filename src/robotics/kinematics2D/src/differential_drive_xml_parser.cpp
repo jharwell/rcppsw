@@ -1,5 +1,5 @@
 /**
- * @file wander_force_xml_parser.cpp
+ * @file differential_drive_xml_parser.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -21,46 +21,43 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/robotics/steering2D/wander_force_xml_parser.hpp"
+#include "rcppsw/robotics/kinematics2D/differential_drive_xml_parser.hpp"
+#include <argos3/core/utility/configuration/argos_configuration.h>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, robotics, steering2D);
+NS_START(rcppsw, robotics, kinematics2D);
 
 /*******************************************************************************
- * Class Constants
+ * Global Variables
  ******************************************************************************/
-constexpr char wander_force_xml_parser::kXMLRoot[];
+constexpr char differential_drive_xml_parser::kXMLRoot[];
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void wander_force_xml_parser::parse(const argos::TConfigurationNode& node) {
+void differential_drive_xml_parser::parse(const ticpp::Element& node) {
   ticpp::Element wnode =
       argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
-  XML_PARSE_PARAM(wnode, m_params, interval);
-  XML_PARSE_PARAM(wnode, m_params, max);
-  XML_PARSE_PARAM(wnode, m_params, circle_distance);
-  XML_PARSE_PARAM(wnode, m_params, circle_radius);
-  XML_PARSE_PARAM(wnode, m_params, max_angle_delta);
+
+  XML_PARSE_PARAM(wnode, m_params, max_speed);
+  XML_PARSE_PARAM(wnode, m_params, soft_turn_max);
+
+  argos::CDegrees angle;
+  argos::GetNodeAttribute(wnode, "soft_turn_max", angle);
+  m_params.soft_turn_max = argos::ToRadians(angle);
 } /* parse() */
 
-void wander_force_xml_parser::show(std::ostream& stream) const {
+void differential_drive_xml_parser::show(std::ostream& stream) const {
   stream << build_header()
-         << XML_PARAM_STR(m_params, interval) << std::endl
-         << XML_PARAM_STR(m_params, max) << std::endl
-         << XML_PARAM_STR(m_params, circle_distance) << std::endl
-         << XML_PARAM_STR(m_params, circle_radius) << std::endl
-         << XML_PARAM_STR(m_params, max_angle_delta) << std::endl
+         << XML_PARAM_STR(m_params, soft_turn_max) << std::endl
+         << XML_PARAM_STR(m_params, max_speed) << std::endl
          << build_footer();
 } /* show() */
 
-__pure bool wander_force_xml_parser::validate(void) const {
-  return m_params.circle_distance > 0.0 &&
-      m_params.circle_radius > 0.0 &&
-      m_params.max_angle_delta < 360 &&
-                                 m_params.interval > 0;
+__pure bool differential_drive_xml_parser::validate(void) const {
+  return m_params.soft_turn_max.GetValue() > 0;
 } /* validate() */
 
-NS_END(steering2D, robotics, rcppsw);
+NS_END(kinematics2D, robotics, rcppsw);

@@ -43,6 +43,20 @@ NS_START(rcppsw, robotics, steering2D);
  */
 struct wander_force_params : public params::base_params {
   /**
+   * How often to apply the wander force. 1 = apply every time it is asked. > 1
+   * only apply every nth time it is asked. Depending on the kinematics of the
+   * entity in question, applying the wander force every time may not produce
+   * the desired level of exploration, because +/- random perturbations to the
+   * velocity vector will, by definition, add up to 0 in the long run.
+   */
+  uint interval{0};
+
+  /**
+   * Maximum value of the wander force.
+   */
+  double max{0.0};
+
+  /**
    * Distance of the center of the circle used to calculate the wander force
    * from the entity. Larger value = higher magnitude of wander force vector.
    */

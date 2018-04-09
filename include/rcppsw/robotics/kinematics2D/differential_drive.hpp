@@ -27,6 +27,7 @@
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/robotics/kinematics2D/model.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/robotics/kinematics2D/differential_drive_fsm.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -46,12 +47,14 @@ NS_START(rcppsw, robotics, kinematics2D);
  *
  * \ref kTankDrive
  * \ref kCurvatureDrive
+ * \ref kFSMDrive
  */
 class differential_drive : public kinematics2D::model, public er::client {
  public:
   enum drive_type {
     kTankDrive,  /// Controls like those of a tank
-    kCurvatureDrive  /// Control via curving path rather than heading changes
+    kCurvatureDrive,  /// Control via curving path rather than heading changes
+    kFSMDrive  /// Control via soft/hard turn FSM
   };
 
   /**
@@ -59,25 +62,56 @@ class differential_drive : public kinematics2D::model, public er::client {
    *
    * @param type The drive type; see \ref drive_type
    * @param wheel_radius Radius of robot wheels.
-   * @param axle_length Lateral distance between wheels
-   * @param max_output Maximum output of wheels (i.e. max wheel speed).
+   * @param axle_length Lateral distance between wheels.
+   * @param max_speed Maximum output of wheels (i.e. max wheel speed).
+   * @param soft_turn_max Maximum angle difference between current and new
+   *                      heading that will not trigger a hard (in place)
+   *                      turn. Only used by \ref kFSMDrive.
    */
   differential_drive(const std::shared_ptr<er::server>& server,
                      drive_type type,
                      double wheel_radius,
                      double axle_length,
-                     double max_output);
+                     double max_speed,
+                     argos::CRadians soft_turn_max);
+
+  differential_drive(const std::shared_ptr<er::server>& server,
+                     drive_type type,
+                     double wheel_radius,
+                     double axle_length,
+                     double max_speed);
 
   /* kinematics model interface */
   status_t actuate(const kinematics::twist& twist) override;
-  void stop(void) override { set_linear_velocity(0, 0); }
-  double max_speed(void) const override { return m_max_output * m_wheel_radius; }
+  void stop(void) override { set_wheel_speeds(0, 0); }
+  double max_speed(void) const override { return m_max_speed; }
 
+  status_t actuate(const kinematics::twist& twist, bool hard_turn) {
+    m_hard_turn = hard_turn;
+    return actuate(twist);
+  }
+
+  /*
+   * @brief Gets a new speed/heading angle and transforms it into wheel commands
+   * via an FSM.
+   *
+   * @param speed The new linear speed of the robot.
+   * @param angle The difference from the robot's CURRENT heading (i.e."change
+   *              this much from the direction you are currently going in").
+   *
+   * @param force_hard_turn Whether or not a hard turn should be performed,
+   *                        regardless of the angle difference. if \c false, a
+   *                        parameterized threshold is used instead.
+   */
+
+  void fsm_drive(double speed,
+                 const argos::CRadians& angle,
+                 bool force_hard_turn = false);
   /**
    * @brief Hook for derived classes to actually call into low level drivers to
    * do actuation. Note that this is LINEAR velocity, NOT WHEEL velocity.
    */
-  virtual void set_linear_velocity(double left, double right) = 0;
+  virtual void set_wheel_speeds(double left, double right) = 0;
 
   double current_speed(void) const {
     return (m_left_linspeed + m_right_linspeed) / 2;
@@ -130,12 +164,16 @@ class differential_drive : public kinematics2D::model, public er::client {
    */
   double limit(double value) const;
 
-  enum drive_type m_drive_type;
-  double m_wheel_radius;
-  double m_axle_length;
-  double m_max_output;
-  double m_left_linspeed{0.0};
-  double m_right_linspeed{0.0};
+  // clang-format off
+  bool                   m_hard_turn{false};
+  enum drive_type        m_drive_type;
+  double                 m_wheel_radius;
+  double                 m_axle_length;
+  double                 m_max_speed;
+  double                 m_left_linspeed{0.0};
+  double                 m_right_linspeed{0.0};
+  differential_drive_fsm m_fsm;
+  // clang-format on
 };
 
 NS_END(kinematics2D, robotics, rcppsw);

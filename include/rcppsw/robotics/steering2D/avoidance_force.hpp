@@ -49,8 +49,7 @@ class avoidance_force {
   explicit avoidance_force(const struct avoidance_force_params* params);
 
   argos::CVector2 operator()(const boid& b,
-                             bool obs_threat,
-                             const argos::CVector2& closest_obstacle);
+                             const argos::CVector2& closest_obstacle) const;
 
  private:
   // clang-format off

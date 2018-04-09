@@ -63,13 +63,16 @@ class force_calculator : public er::client {
   /**
    * @brief Return the current steering force as a velocity vector.
    */
-  argos::CVector2 value(void) const { return m_force_accum; }
+  const argos::CVector2& value(void) const { return m_force_accum; }
+  argos::CVector2& value(void) { return m_force_accum; }
 
   /**
    * @brief Return the current steering force as twist acting on the managed
    * entity.
    */
-  kinematics::twist value_as_twist(void) const;
+  kinematics::twist value_as_twist(void) const { return to_twist(m_force_accum); }
+
+  kinematics::twist to_twist(const argos::CVector2& force) const;
 
   /**
    * @brief Reset the sum of forces acting on the entity.
@@ -100,14 +103,14 @@ class force_calculator : public er::client {
    *
    * If no threatening obstacle exists, this force is 0.
    *
-   * @param obs_threat Does a threatening obstacle currently exist?
-   * @param closest_obstacle If so, where is it.
+   * @param closest_obstacle Where is the closest obstacle, relative to robot's
+   * current position AND heading.
    */
-  void avoidance(bool obs_threat,
-                 const argos::CVector2& closest_obstacle);
+  void avoidance(const argos::CVector2& closest_obstacle);
 
  protected:
   void accum_force(const argos::CVector2& force) { m_force_accum += force; }
+  const boid& entity(void) const { return m_entity; }
 
  private:
   // clang-format off

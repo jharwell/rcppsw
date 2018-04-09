@@ -44,7 +44,7 @@ struct wander_force_params;
  * @ingroup control
  *
  * @brief A small random perturbation that can be added to a robot's current
- * velocity in order to make it move randomly throughout the environment
+ * velocity in order to make it move randomly throughout the environment.
  */
 class wander_force {
  public:
@@ -54,10 +54,13 @@ class wander_force {
 
  private:
   // clang-format off
+  uint            m_interval;
+  int             m_count{-1};
+  double          m_max;
   double          m_circle_distance;
   double          m_circle_radius;
-  argos::CRadians m_angle;
   double          m_max_angle_delta;
+  argos::CRadians m_angle;
   // clang-format on
 };
 

@@ -44,46 +44,64 @@ force_calculator::force_calculator(const std::shared_ptr<er::server>& server,
   if (ERROR == client::attmod("force_calculator")) {
     client::insmod("force_calculator",
                    rcppsw::er::er_lvl::DIAG,
-                   rcppsw::er::er_lvl::DIAG);
+                   rcppsw::er::er_lvl::NOM);
   }
 }
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-kinematics::twist force_calculator::value_as_twist(void) const {
+kinematics::twist force_calculator::to_twist(const argos::CVector2& force) const {
   kinematics::twist twist;
-  twist.linear.x = m_force_accum.Length();
-  twist.angular.z = (m_force_accum - m_entity.linear_velocity()).Length() *
-                    std::sin((m_force_accum - m_entity.linear_velocity()).Angle().GetValue()) /
-                    m_entity.linear_velocity().Length();
+  twist.linear.x = force.Length();
+  twist.angular.z = (force - m_entity.linear_velocity()).Length() *
+                    std::sin((force - m_entity.linear_velocity()).Angle().GetValue());
+  if (m_entity.linear_velocity().Length() > 0) {
+    twist.angular.z /= m_entity.linear_velocity().Length();
+  } else {
+    twist.angular.z = 0;
+  }
   return twist;
-} /* value_as_twist() */
+} /* to_twist() */
 
 void force_calculator::seek_through(const argos::CVector2& target) {
   argos::CVector2 force = m_arrival_force(m_entity, target);
-  ER_DIAG("Arrival force: (%f, %f)", force.GetX(), force.GetY());
+  ER_DIAG("Seek force: (%f, %f)@%f [%f]",
+          force.GetX(),
+          force.GetY(),
+          force.Angle().GetValue(),
+          force.Length());
   accum_force(force);
 } /* seek_through() */
 
 void force_calculator::seek_to(const argos::CVector2& target) {
   argos::CVector2 force = m_seek_force(m_entity, target);
-  ER_DIAG("Seek force: (%f, %f)", force.GetX(), force.GetY());
-  accum_force(force);
+  ER_DIAG("Arrival force: (%f, %f)@%f [%f]",
+          force.GetX(),
+          force.GetY(),
+          force.Angle().GetValue(),
+          force.Length());
+    accum_force(force);
 } /* seek_to() */
 
 void force_calculator::wander(void) {
   argos::CVector2 force = m_wander_force(m_entity);
-  ER_DIAG("Wander force: (%f, %f)", force.GetX(), force.GetY());
+  ER_DIAG("Wander force: (%f, %f)@%f [%f]",
+          force.GetX(),
+          force.GetY(),
+          force.Angle().GetValue(),
+          force.Length());
   accum_force(force);
 } /* wander() */
 
-void force_calculator::avoidance(bool obs_threat,
-                                 const argos::CVector2& closest_obstacle) {
+void force_calculator::avoidance(const argos::CVector2& closest_obstacle) {
   argos::CVector2 force = m_avoidance_force(m_entity,
-                                            obs_threat,
                                             closest_obstacle);
-  ER_DIAG("Avoidance force: (%f, %f)", force.GetX(), force.GetY());
+  ER_DIAG("Avoidance force: (%f, %f)@%f [%f]",
+          force.GetX(),
+          force.GetY(),
+          force.Angle().GetValue(),
+          force.Length());
   accum_force(force);
 } /* avoidance() */
 

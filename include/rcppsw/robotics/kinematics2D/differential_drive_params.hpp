@@ -1,7 +1,7 @@
 /**
- * @file seek_force.cpp
+ * @file differential_drive_params.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,22 +18,32 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_ROBOTICS_KINEMATICS2D_DIFFERENTIAL_DRIVE_PARAMS_HPP_
+#define INCLUDE_RCPPSW_ROBOTICS_KINEMATICS2D_DIFFERENTIAL_DRIVE_PARAMS_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/robotics/steering2D/seek_force.hpp"
+#include <argos3/core/utility/math/angles.h>
+#include "rcppsw/params/base_params.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, robotics, steering2D);
+NS_START(rcppsw, robotics, kinematics2D);
 
 /*******************************************************************************
- * Member Functions
+ * Structure Definitions
  ******************************************************************************/
-argos::CVector2 seek_force::operator()(const boid& entity,
-                                       const argos::CVector2& target) const {
-  return (target - entity.position()).Normalize() * entity.max_speed();
-} /* operator()() */
+/**
+ * @struct differential_drive_params
+ * @ingroup robotics kinematics2D
+ */
+struct differential_drive_params : public rcppsw::params::base_params {
+  argos::CRadians soft_turn_max{};
+  double max_speed{0.0};
+};
 
-NS_END(steering2D, robotics, rcppsw);
+NS_END(kinematics2D, robotics, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_ROBOTICS_KINEMATICS2D_DIFFERENTIAL_DRIVE_PARAMS_HPP_ */
