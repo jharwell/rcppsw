@@ -47,14 +47,14 @@ differential_drive_fsm::differential_drive_fsm(
  ******************************************************************************/
 void differential_drive_fsm::change_velocity(double speed,
                                              const argos::CRadians& angle,
-                                             bool force_hard_turn) {
+                                             const std::pair<bool, bool>& force) {
   FSM_DEFINE_TRANSITION_MAP(kTRANSITIONS){
       ST_SOFT_TURN, /* slow turn */
       ST_HARD_TURN, /* hard turn */
   };
   FSM_VERIFY_TRANSITION_MAP(kTRANSITIONS, ST_MAX_STATES);
   external_event(kTRANSITIONS[current_state()],
-                 rcppsw::make_unique<turn_data>(force_hard_turn, speed, angle));
+                 rcppsw::make_unique<turn_data>(force, speed, angle));
 } /* set_rel_heading() */
 
 /*******************************************************************************
@@ -66,7 +66,7 @@ FSM_STATE_DEFINE(differential_drive_fsm, soft_turn, turn_data) {
                                        mc_soft_turn_max);
   argos::CRadians angle = data->angle;
   bool within_range = range.WithinMinBoundIncludedMaxBoundIncluded(angle.SignedNormalize());
-  if (data->force_hard || !within_range) {
+  if (data->force.second || (!within_range && !data->force.first)) {
     internal_event(ST_HARD_TURN);
     return state_machine::event_signal::HANDLED;
   }
@@ -87,7 +87,7 @@ FSM_STATE_DEFINE(differential_drive_fsm, hard_turn, turn_data) {
                                        mc_soft_turn_max);
   argos::CRadians angle = data->angle;
   bool within_range = range.WithinMinBoundIncludedMaxBoundIncluded(angle.SignedNormalize());
-  if (!data->force_hard && within_range) {
+  if ((!data->force.second && within_range) || data->force.first) {
     internal_event(ST_SOFT_TURN);
     return state_machine::event_signal::HANDLED;
   }

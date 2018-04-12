@@ -99,20 +99,32 @@ class differential_drive : public kinematics2D::model, public er::client {
    * @param angle The difference from the robot's CURRENT heading (i.e."change
    *              this much from the direction you are currently going in").
    *
-   * @param force_hard_turn Whether or not a hard turn should be performed,
-   *                        regardless of the angle difference. if \c false, a
-   *                        parameterized threshold is used instead.
+   * @param force First argument: Whether or not a soft turn should be performed,
+   *                              regardless of the angle difference.
+   *              Second arguent: Whether or not a hard turn should be
+   *                              performed, regardless of angle difference.
+   *              If \c {false,false} the parameterized threshold is used
+   *              instead.
+   *
+   *              This parameter is useful for PID-loop like things where you do
+   *              NOT want the robot to execute in place turns.
+   *
+   * @return \ref status_t.
    */
-
-  void fsm_drive(double speed,
-                 const argos::CRadians& angle,
-                 bool force_hard_turn = false);
+  status_t fsm_drive(double speed,
+                     const argos::CRadians& angle,
+                     const std::pair<bool, bool>& force = std::make_pair(false,
+                                                                         false));
   /**
    * @brief Hook for derived classes to actually call into low level drivers to
    * do actuation. Note that this is LINEAR velocity, NOT WHEEL velocity.
    */
   virtual void set_wheel_speeds(double left, double right) = 0;
 
+  /**
+   * @brief Return the current speed of the robot (average of the 2 wheel
+   * speeds).
+   */
   double current_speed(void) const {
     return (m_left_linspeed + m_right_linspeed) / 2;
   }

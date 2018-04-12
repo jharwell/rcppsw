@@ -78,14 +78,20 @@ status_t differential_drive::actuate(const kinematics::twist& twist) {
   } /* switch() */
 } /* actuate() */
 
-void differential_drive::fsm_drive(double speed,
+status_t differential_drive::fsm_drive(double speed,
                                    const argos::CRadians& angle,
-                                   bool force_hard_turn) {
-  m_fsm.change_velocity(speed, angle, force_hard_turn);
+                                   const std::pair<bool, bool>& force) {
   std::pair<double, double> speeds = m_fsm.wheel_speeds();
+  ER_CHECK(kFSMDrive == m_drive_type,
+           "Cannot actuate: not in FSM drive mode");
+  m_fsm.change_velocity(speed, angle, force);
   m_left_linspeed = speeds.first;
   m_right_linspeed = speeds.second;
   set_wheel_speeds(m_left_linspeed, m_right_linspeed);
+  return OK;
+
+error:
+  return ERROR;
 } /* fsm_drive() */
 
 status_t differential_drive::tank_drive(double left_speed,

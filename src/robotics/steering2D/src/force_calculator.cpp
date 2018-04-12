@@ -65,7 +65,7 @@ kinematics::twist force_calculator::to_twist(const argos::CVector2& force) const
 } /* to_twist() */
 
 void force_calculator::seek_through(const argos::CVector2& target) {
-  argos::CVector2 force = m_arrival_force(m_entity, target);
+  argos::CVector2 force = m_seek_force(m_entity, target);
   ER_DIAG("Seek force: (%f, %f)@%f [%f]",
           force.GetX(),
           force.GetY(),
@@ -75,7 +75,7 @@ void force_calculator::seek_through(const argos::CVector2& target) {
 } /* seek_through() */
 
 void force_calculator::seek_to(const argos::CVector2& target) {
-  argos::CVector2 force = m_seek_force(m_entity, target);
+  argos::CVector2 force = m_arrival_force(m_entity, target);
   ER_DIAG("Arrival force: (%f, %f)@%f [%f]",
           force.GetX(),
           force.GetY(),

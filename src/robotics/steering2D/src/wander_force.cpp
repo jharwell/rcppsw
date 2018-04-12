@@ -80,7 +80,6 @@ argos::CVector2 wander_force::operator()(const boid& entity) {
                2 * m_max_angle_delta * (static_cast<double>(random()) / RAND_MAX);
   m_angle.FromValueInDegrees(std::fmod(argos::ToDegrees(m_angle).GetValue() + val,
                                        m_max_angle_delta));
-  assert(std::fabs(argos::ToDegrees(m_angle).GetValue()) <= m_max_angle_delta);
 
   /*
    * Wandering is a combination of the current velocity, projected outward a

@@ -39,12 +39,16 @@ constexpr char arrival_force_xml_parser::kXMLRoot[];
 void arrival_force_xml_parser::parse(const argos::TConfigurationNode& node) {
   ticpp::Element anode =
       argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
+  XML_PARSE_PARAM(anode, m_params, max);
   XML_PARSE_PARAM(anode, m_params, slowing_radius);
+  XML_PARSE_PARAM(anode, m_params, slowing_speed_min);
 } /* parse() */
 
 void arrival_force_xml_parser::show(std::ostream& stream) const {
   stream << build_header()
+         << XML_PARAM_STR(m_params, max) << std::endl
          << XML_PARAM_STR(m_params, slowing_radius) << std::endl
+         << XML_PARAM_STR(m_params, slowing_speed_min) << std::endl
          << build_footer();
 } /* show() */
 

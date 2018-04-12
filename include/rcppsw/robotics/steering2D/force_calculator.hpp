@@ -64,7 +64,7 @@ class force_calculator : public er::client {
    * @brief Return the current steering force as a velocity vector.
    */
   const argos::CVector2& value(void) const { return m_force_accum; }
-  argos::CVector2& value(void) { return m_force_accum; }
+  void value(const argos::CVector2& val) { m_force_accum = val; }
 
   /**
    * @brief Return the current steering force as twist acting on the managed
@@ -93,6 +93,9 @@ class force_calculator : public er::client {
    */
   void seek_to(const argos::CVector2& target);
 
+  bool within_slowing_radius(void) const {
+    return m_arrival_force.within_slowing_radius();
+  }
   /**
    * @brief Add the \ref kWander force to the sum forces for this timestep.
    */

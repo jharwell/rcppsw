@@ -42,6 +42,17 @@ NS_START(rcppsw, robotics, steering2D);
  */
 struct arrival_force_params : params::base_params {
   /**
+   * Maximum value for the force.
+   */
+  double max{0};
+
+  /**
+   * The speed that entities entering the slowing radius will slow down to
+   * (linear ramp down).
+   */
+  double slowing_speed_min{0};
+
+  /**
    * The radius around the object inside which the entity should begin to slow
    * down, so as to not overshoot the target.
    */
