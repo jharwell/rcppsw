@@ -26,6 +26,8 @@
  ******************************************************************************/
 #include <map>
 #include <string>
+#include <typeindex>
+
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
 #include "rcppsw/patterns/factory/sharing_factory.hpp"
@@ -54,7 +56,7 @@ namespace factory = rcppsw::patterns::factory;
  */
 class xml_param_repository {
  public:
-  xml_param_repository(void) : m_parsers(), m_factory() {}
+  xml_param_repository(void) : m_parsers(), m_param_types(), m_factory() {}
 
   /**
    * @brief Call the \ref xml_param_parser::parse() function on all parsers
@@ -73,16 +75,49 @@ class xml_param_repository {
   bool validate_all(void);
 
   /**
-   * @brief Get the parsed parameters associated with the named parser.
+   * @brief Get the parsed parameters associated with the parser of the
+   * specified type (note that the name that the parser was registered with is
+   * not needed in this formulation).
+   */
+  template<typename T>
+  const T* parse_results(void) {
+    std::type_index i(typeid(T));
+    return static_cast<const T*>(m_parsers[m_param_types[i]]->parse_results());
+  }
+
+  /**
+   * @brief Get the parsed parameters associated with the parser of the
+   * specified name, and cast them to the specified type.
    */
   template<typename T>
   const T* parse_results(const std::string& name) {
+    std::type_index i(typeid(T));
     return static_cast<const T*>(m_parsers[name]->parse_results());
   }
 
   /**
    * @brief Register a parser of a given type (must be derived from \ref
    * xml_param_parser) and associate it with the specified name.
+   *
+   * @tparam T The parser type.
+   * @tparam S The type of the parameter struct that the parser produces.
+   */
+  template <typename T, typename S>
+  void register_parser(const std::string& name, uint level_in) {
+    m_factory.register_type<T, decltype(level_in)>(name);
+    m_parsers[name] = m_factory.create(name, level_in).get();
+    std::type_index i(typeid(S));
+    m_param_types[i] = name;
+  }
+
+  /**
+   * @brief Register a parser of a given type (must be derived from
+   * \ref xml_param_parser) and associate it with the specified name.
+   *
+   * If you use this function, then you will have to refer to the parse results
+   * by type + name, rather than just by type.
+   *
+   * @tparam T The parser type.
    */
   template <typename T>
   void register_parser(const std::string& name, uint level_in) {
@@ -98,8 +133,11 @@ class xml_param_repository {
                                   const xml_param_repository& repo);
 
  private:
-  std::map<std::string, xml_param_parser*> m_parsers;
+  // clang-format off
+  std::map<std::string, xml_param_parser*>         m_parsers;
+  std::map<std::type_index, std::string>           m_param_types;
   factory::sharing_factory<xml_param_parser, uint> m_factory;
+  // clang-format on
 };
 
 NS_END(params, rcppsw);

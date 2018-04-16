@@ -76,6 +76,7 @@ status_t differential_drive::actuate(const kinematics::twist& twist) {
     default:
       ER_FATAL_SENTINEL("Bad drive type: %d", m_drive_type);
   } /* switch() */
+    return ERROR;
 } /* actuate() */
 
 status_t differential_drive::fsm_drive(double speed,
@@ -152,7 +153,7 @@ error:
   return ERROR;
 } /* curvature_drive() */
 
-double differential_drive::limit(double value) const {
+__pure double differential_drive::limit(double value) const {
   return std::max(std::min(value, m_max_speed), -m_max_speed);
 } /* limit() */
 
