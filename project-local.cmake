@@ -46,6 +46,8 @@ foreach(d ${${target}_pattern_SUBDIRS})
 endforeach()
 
 list(APPEND ${target}_robotics_SUBDIRS steering2D)
+list(APPEND ${target}_robotics_SUBDIRS kinematics2D)
+
 foreach(d ${${target}_robotics_SUBDIRS})
   add_subdirectory(src/robotics/${d})
   target_include_directories(${target}-${d} PUBLIC "${${target}_INCLUDE_DIRS}")
@@ -65,6 +67,8 @@ if (NOT TARGET ${target})
     $<TARGET_OBJECTS:${target}-multithread>
     $<TARGET_OBJECTS:${target}-utils>
     $<TARGET_OBJECTS:${target}-state_machine>
+    $<TARGET_OBJECTS:${target}-steering2D>
+    $<TARGET_OBJECTS:${target}-kinematics2D>
     $<TARGET_OBJECTS:${target}-task_allocation>
     $<TARGET_OBJECTS:${target}-params>
     $<TARGET_OBJECTS:${target}-metrics>

@@ -50,9 +50,14 @@ class boid {
   virtual ~boid(void) = default;
 
   /**
-   * @brief Should return the current velocity of the entity.
+   * @brief Should return the current linear velocity of the entity.
    */
-  virtual argos::CVector2 velocity(void) const = 0;
+  virtual argos::CVector2 linear_velocity(void) const = 0;
+
+  /**
+   * @brief Should return the current angular velocity of the entity.
+   */
+  virtual double angular_velocity(void) const = 0;
 
   /**
    * @brief Should return the maximum speed of the entity. This can vary in

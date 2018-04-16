@@ -49,8 +49,12 @@ class arrival_force {
   explicit arrival_force(const struct arrival_force_params* params);
 
   argos::CVector2 operator()(const boid& entity, const argos::CVector2& target);
+  bool within_slowing_radius(void) const { return m_within_slowing_radius; }
 
  private:
+  bool   m_within_slowing_radius{false};
+  double m_max;
+  double m_slowing_speed_min;
   double m_slowing_radius;
 };
 

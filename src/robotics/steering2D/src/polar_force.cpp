@@ -39,7 +39,7 @@ polar_force::polar_force(const struct polar_force_params* const params)
  * Member Functions
  ******************************************************************************/
 argos::CVector2 polar_force::operator()(const boid& entity,
-                                        const argos::CVector2& source) {
+                                        const argos::CVector2& source) const {
   return (entity.position() - source).Normalize() * m_max;
 } /* operator()() */
 

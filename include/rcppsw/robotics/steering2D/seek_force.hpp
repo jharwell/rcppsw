@@ -47,7 +47,8 @@ class seek_force {
  public:
   seek_force(void) = default;
 
-  argos::CVector2 operator()(const boid& entity, const argos::CVector2& target);
+  argos::CVector2 operator()(const boid& entity,
+                             const argos::CVector2& target) const;
 };
 
 NS_END(steering2D, robotics, rcppsw);

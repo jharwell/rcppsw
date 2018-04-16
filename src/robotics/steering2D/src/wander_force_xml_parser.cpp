@@ -39,6 +39,8 @@ constexpr char wander_force_xml_parser::kXMLRoot[];
 void wander_force_xml_parser::parse(const argos::TConfigurationNode& node) {
   ticpp::Element wnode =
       argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
+  XML_PARSE_PARAM(wnode, m_params, interval);
+  XML_PARSE_PARAM(wnode, m_params, max);
   XML_PARSE_PARAM(wnode, m_params, circle_distance);
   XML_PARSE_PARAM(wnode, m_params, circle_radius);
   XML_PARSE_PARAM(wnode, m_params, max_angle_delta);
@@ -46,6 +48,8 @@ void wander_force_xml_parser::parse(const argos::TConfigurationNode& node) {
 
 void wander_force_xml_parser::show(std::ostream& stream) const {
   stream << build_header()
+         << XML_PARAM_STR(m_params, interval) << std::endl
+         << XML_PARAM_STR(m_params, max) << std::endl
          << XML_PARAM_STR(m_params, circle_distance) << std::endl
          << XML_PARAM_STR(m_params, circle_radius) << std::endl
          << XML_PARAM_STR(m_params, max_angle_delta) << std::endl
@@ -53,9 +57,10 @@ void wander_force_xml_parser::show(std::ostream& stream) const {
 } /* show() */
 
 __pure bool wander_force_xml_parser::validate(void) const {
-  return m_params.circle_distance > 0.0 && m_params.circle_radius > 0.0 &&
-         m_params.circle_distance >= m_params.circle_radius &&
-         m_params.max_angle_delta < 360;
+  return m_params.circle_distance > 0.0 &&
+      m_params.circle_radius > 0.0 &&
+      m_params.max_angle_delta < 360 &&
+                                 m_params.interval > 0;
 } /* validate() */
 
 NS_END(steering2D, robotics, rcppsw);

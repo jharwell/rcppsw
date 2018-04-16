@@ -18,17 +18,17 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_FORCE_CALCULATOR_PARAMS_HPP_
-#define INCLUDE_RCPPSW_CONTROL_FORCE_CALCULATOR_PARAMS_HPP_
+#ifndef INCLUDE_RCPPSW_ROBOTICS_STEERING2D_FORCE_CALCULATOR_PARAMS_HPP_
+#define INCLUDE_RCPPSW_ROBOTICS_STEERING2D_FORCE_CALCULATOR_PARAMS_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include "rcppsw/common/common.hpp"
-#include "rcppsw//robotics/steering2D/avoidance_force_params.hpp"
-#include "rcppsw//robotics/steering2D/arrival_force_params.hpp"
-#include "rcppsw//robotics/steering2D/wander_force_params.hpp"
-#include "rcppsw//robotics/steering2D/polar_force_params.hpp"
+#include "rcppsw/robotics/steering2D/avoidance_force_params.hpp"
+#include "rcppsw/robotics/steering2D/arrival_force_params.hpp"
+#include "rcppsw/robotics/steering2D/wander_force_params.hpp"
+#include "rcppsw/robotics/steering2D/polar_force_params.hpp"
 #include "rcppsw/params/base_params.hpp"
 
 /*******************************************************************************
@@ -53,4 +53,4 @@ struct force_calculator_params : public params::base_params {
 
 NS_END(steering2D, robotics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_CONTROL_FORCE_CALCULATOR_PARAMS_HPP_ */
+#endif /* INCLUDE_RCPPSW_ROBOTICS_STEERING2D_FORCE_CALCULATOR_PARAMS_HPP_ */

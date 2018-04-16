@@ -1,5 +1,5 @@
 /**
- * @file avoidance_force.hpp
+ * @file model.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,46 +18,58 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ROBOTICS_STEERING2D_AVOIDANCE_FORCE_HPP_
-#define INCLUDE_RCPPSW_ROBOTICS_STEERING2D_AVOIDANCE_FORCE_HPP_
+#ifndef INCLUDE_RCPPSW_ROBOTICS_KINEMATICS2D_MODEL_HPP_
+#define INCLUDE_RCPPSW_ROBOTICS_KINEMATICS2D_MODEL_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <argos3/core/utility/math/vector2.h>
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/robotics/steering2D/boid.hpp"
+#include "rcppsw/robotics/kinematics/twist.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, robotics, steering2D);
-struct avoidance_force_params;
+NS_START(rcppsw, robotics, kinematics2D);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 
 /**
- * @class avoidance_force
- * @ingroup robotics steering2D
+ * @class model
+ * @ingroup robotics kinematics2D
  *
- * @brief A force pushing the robot away from perceived obstacles. Only active
- * when threatening obstacles are detected.
+ * @brief Interface that all 2D kinematics models need to fulfill in order to be
+ * used in other components of this module.
  */
-class avoidance_force {
+class model {
  public:
-  explicit avoidance_force(const struct avoidance_force_params* params);
+  model(void) = default;
+  virtual ~model(void) = default;
 
-  argos::CVector2 operator()(const boid& b,
-                             const argos::CVector2& closest_obstacle) const;
+  /**
+   * @brief Given a calculated twist acting on the robot, perform actuation
+   * (i.e. make the robot move).
+   *
+   * @param twist The calculated twist.
+   *
+   * @return \ref status_t.
+   */
+  virtual status_t actuate(const kinematics::twist& twist) = 0;
 
- private:
-  // clang-format off
-  double          m_lookahead;
-  double          m_max;
-  // clang-format on
+  /**
+   * @brief Stop the robot.
+   */
+  virtual void stop(void) = 0;
+
+  /**
+   * @brief Get the maximum linear speed of the robot.
+   */
+  virtual double max_speed(void) const = 0;
 };
 
-NS_END(steering2D, robotics, rcppsw);
+NS_END(kinematics2D, robotics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ROBOTICS_STEERING2D_AVOIDANCE_FORCE_HPP_ */
+#endif /* INCLUDE_RCPPSW_ROBOTICS_KINEMATICS2D_MODEL_HPP_ */

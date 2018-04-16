@@ -1,7 +1,7 @@
 /**
- * @file avoidance_force.cpp
+ * @file differential_drive_xml_parser.cpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,32 +21,43 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/robotics/steering2D/avoidance_force.hpp"
-#include "rcppsw/robotics/steering2D/avoidance_force_params.hpp"
+#include "rcppsw/robotics/kinematics2D/differential_drive_xml_parser.hpp"
+#include <argos3/core/utility/configuration/argos_configuration.h>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, robotics, steering2D);
+NS_START(rcppsw, robotics, kinematics2D);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Global Variables
  ******************************************************************************/
-avoidance_force::avoidance_force(const struct avoidance_force_params* params)
-    : m_lookahead(params->lookahead), m_max(params->max) {}
+constexpr char differential_drive_xml_parser::kXMLRoot[];
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-argos::CVector2 avoidance_force::operator()(
-    __unused const boid& b,
-    const argos::CVector2& closest_obstacle) const {
-  if (closest_obstacle.Length() > 0) {
-    argos::CVector2 avoidance = -closest_obstacle;
-    return avoidance.Normalize() * m_max;
-  } else {
-    return argos::CVector2(0, 0); /* no threatening obstacles = no avoidance */
-  }
-} /* operator()() */
+void differential_drive_xml_parser::parse(const ticpp::Element& node) {
+  ticpp::Element wnode =
+      argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
 
-NS_END(steering2D, robotics, rcppsw);
+  XML_PARSE_PARAM(wnode, m_params, max_speed);
+  XML_PARSE_PARAM(wnode, m_params, soft_turn_max);
+
+  argos::CDegrees angle;
+  argos::GetNodeAttribute(wnode, "soft_turn_max", angle);
+  m_params.soft_turn_max = argos::ToRadians(angle);
+} /* parse() */
+
+void differential_drive_xml_parser::show(std::ostream& stream) const {
+  stream << build_header()
+         << XML_PARAM_STR(m_params, soft_turn_max) << std::endl
+         << XML_PARAM_STR(m_params, max_speed) << std::endl
+         << build_footer();
+} /* show() */
+
+__pure bool differential_drive_xml_parser::validate(void) const {
+  return m_params.soft_turn_max.GetValue() > 0;
+} /* validate() */
+
+NS_END(kinematics2D, robotics, rcppsw);

@@ -1,7 +1,7 @@
 /**
- * @file seek_force.cpp
+ * @file twist.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,22 +18,44 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_ROBOTICS_KINEMATICS_TWIST_HPP_
+#define INCLUDE_RCPPSW_ROBOTICS_KINEMATICS_TWIST_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/robotics/steering2D/seek_force.hpp"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, robotics, steering2D);
+NS_START(rcppsw, robotics, kinematics);
 
 /*******************************************************************************
- * Member Functions
+ * Struct Definitions
  ******************************************************************************/
-argos::CVector2 seek_force::operator()(const boid& entity,
-                                       const argos::CVector2& target) const {
-  return (target - entity.position()).Normalize() * entity.max_speed();
-} /* operator()() */
 
-NS_END(steering2D, robotics, rcppsw);
+/**
+ * @struct twist
+ * @ingroup robotics kinematics
+ *
+ * @brief Representation of the twist of a  robot. ROS already has this, but
+ * does not work with all robotic simulators (such as ARGoS)/models, hence the
+ * need for me to implement this.
+ */
+struct twist {
+  struct {
+    double x{};
+    double y{};
+    double z{};
+  } linear{};
+  struct {
+    double x{};
+    double y{};
+    double z{};
+  } angular{};
+};
+
+NS_END(kinematics, robotics, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_ROBOTICS_KINEMATICS_TWIST_HPP_ */

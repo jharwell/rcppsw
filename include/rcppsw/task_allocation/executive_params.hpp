@@ -1,7 +1,7 @@
 /**
- * @file seek_force.cpp
+ * @file executive_params.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,22 +18,24 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_EXECUTIVE_PARAMS_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_EXECUTIVE_PARAMS_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/robotics/steering2D/seek_force.hpp"
+#include "rcppsw/task_allocation/partitionable_task_params.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, robotics, steering2D);
+NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Member Functions
+ * Type Definitions
  ******************************************************************************/
-argos::CVector2 seek_force::operator()(const boid& entity,
-                                       const argos::CVector2& target) const {
-  return (target - entity.position()).Normalize() * entity.max_speed();
-} /* operator()() */
+using executive_params = partitionable_task_params;
 
-NS_END(steering2D, robotics, rcppsw);
+NS_END(task_allocation, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_EXECUTIVE_PARAMS_HPP_ */

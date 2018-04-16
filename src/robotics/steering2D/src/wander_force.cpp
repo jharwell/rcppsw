@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/robotics/steering2D/wander_force.hpp"
+#include <assert.h>
 #include "rcppsw/robotics/steering2D/wander_force_params.hpp"
 
 /*******************************************************************************
@@ -33,42 +34,71 @@ NS_START(rcppsw, robotics, steering2D);
  * Constructors/Destructor
  ******************************************************************************/
 wander_force::wander_force(const struct wander_force_params* const params)
-    : m_circle_distance(params->circle_distance),
+    : m_interval(params->interval),
+      m_max(params->max),
+      m_circle_distance(params->circle_distance),
       m_circle_radius(params->circle_radius),
-      m_angle(0),
-      m_max_angle_delta(params->max_angle_delta) {}
+      m_max_angle_delta(params->max_angle_delta),
+      m_angle(0) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 argos::CVector2 wander_force::operator()(const boid& entity) {
+  /*
+   * Only actually apply the wander force at the specified cadence. Otherwise
+   * random perturbations between [-n, n] will sum to 0 (no net wandering) over
+   * time if the perturbations are applied every timestep.
+   */
+  ++m_count;
+  if (m_count % m_interval != 0) {
+    return argos::CVector2(0, 0);
+  }
+
   /* calculate circle center */
     argos::CVector2 velocity;
-  if (entity.velocity().Length() <= 0) {
+  if (entity.linear_velocity().Length() <= 0) {
     velocity = argos::CVector2(1, 0);
   } else {
-    velocity = entity.velocity();
+    velocity = entity.linear_velocity();
   }
-  std::cout << "velocity: "<< velocity << std::endl;
-  std::cout << "angle: " << m_angle << std::endl;
+
   argos::CVector2 circle_center =
       (velocity).Normalize().Scale(m_circle_distance, m_circle_distance);
 
-  /* calculate displacement force */
-  argos::CVector2 displacement(0, m_circle_radius);
-  double angle_tmp = std::atan2(std::cos(m_angle.GetValue()),
-                                std::sin(m_angle.GetValue()));
-  displacement.SetX(displacement.Length() * std::cos(angle_tmp));
-  displacement.SetY(displacement.Length() * std::sin(angle_tmp));
+  /* calculate displacement force (the actual wandering) */
+  argos::CVector2 displacement(m_circle_radius *
+                               std::cos((m_angle + velocity.Angle()).GetValue()),
+                               m_circle_radius *
+                               std::sin((m_angle + velocity.Angle()).GetValue()));
 
-  /* update wander angle so it won't have the same value next time */
-  double val = -m_max_angle_delta + (random() / (RAND_MAX / (2 * m_max_angle_delta)));
-  std::cout << "displacement: "<< displacement << std::endl;
-  std::cout << "circle_center: "<< circle_center << std::endl;
-  argos::CRadians update(val * M_PI/180);
+  /*
+   * Update wander angle so it won't have the same value next time with a
+   * random pertubation in the range [-max delta, max_delta].
+   */
+  double val = -m_max_angle_delta +
+               2 * m_max_angle_delta * (static_cast<double>(random()) / RAND_MAX);
+  m_angle.FromValueInDegrees(std::fmod(argos::ToDegrees(m_angle).GetValue() + val,
+                                       m_max_angle_delta));
 
-  m_angle += update;
-  return (circle_center + displacement);
+  /*
+   * Wandering is a combination of the current velocity, projected outward a
+   * certain distance, and a displacement calculated at that point.
+   *
+   * There can be discontinuous jumps from a small positive angle for the wander
+   * force to a large negative angle between timesteps and vice versa which play
+   * havoc with robots' ability to compensate.
+   *
+   * So, compute the angle indirectly using sine and cosine in order to account
+   * for sign differences and ensure continuity.
+   */
+  double angle = std::atan2(displacement.GetY() - circle_center.GetY(),
+                            displacement.GetX() - circle_center.GetX());
+  double angle_diff = angle - circle_center.Angle().GetValue();
+  angle_diff = std::atan2(std::sin(angle_diff), std::cos(angle_diff));
+  argos::CVector2 wander((circle_center + displacement).Length(),
+                         argos::CRadians(angle_diff));
+  return wander.Normalize() * m_max;
 } /* operator()() */
 
 NS_END(steering2D, robotics, rcppsw);
