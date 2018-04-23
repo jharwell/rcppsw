@@ -57,8 +57,31 @@ NS_START(rcppsw, task_allocation);
  */
 class partition_probability : public rcppsw::math::expression<double> {
  public:
-  partition_probability(std::string method, double reactivity)
-      : mc_method(std::move(method)), m_reactivity(reactivity) {}
+  /*
+   * A default reactivity value determined experimentally to work well.
+   */
+  static constexpr double kDEFAULT_REACTIVITY = 1.5;
+
+  /*
+   * A default reactivity value that does *not* induce singularities in the
+   * overall equation. Choose not to employ it at your own risk...
+   */
+  static constexpr double kDEFAULT_OFFSET = 1.0;
+
+  /**
+   * @brief Initialize partitioning probability with default values based on
+   * whatever the selected method is.
+   */
+  explicit partition_probability(std::string method) :
+      partition_probability(std::move(method),
+                            kDEFAULT_REACTIVITY,
+                            kDEFAULT_OFFSET) {}
+
+  /**
+   * @brief Initialize partitioning probability explicity with method +
+   * parameter values.
+   */
+  explicit partition_probability(const struct partitioning_params* params);
 
   double calc(const time_estimate& task,
               const time_estimate& subtask1,
@@ -67,12 +90,18 @@ class partition_probability : public rcppsw::math::expression<double> {
   const std::string& method(void) const { return mc_method; }
 
  private:
+  partition_probability(std::string method, double reactivity, double offset)
+      : mc_method(std::move(method)),
+        m_reactivity(reactivity),
+        m_offset(offset) {}
+
   double calc_pini2011(const time_estimate& task,
                        const time_estimate& subtask1,
                        const time_estimate& subtask2);
 
   const std::string mc_method;
   double m_reactivity;
+  double m_offset;
 };
 
 NS_END(task_allocation, rcppsw);

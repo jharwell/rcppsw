@@ -45,7 +45,7 @@ argos::CVector2 avoidance_force::operator()(
     argos::CVector2 avoidance = -closest_obstacle;
     return avoidance.Normalize() * m_max;
   } else {
-    return argos::CVector2(0, 0); /* no threatening obstacles = no avoidance */
+    return {0, 0}; /* no threatening obstacles = no avoidance */
   }
 } /* operator()() */
 

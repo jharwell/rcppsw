@@ -82,8 +82,7 @@ class abort_probability : public rcppsw::math::expression<double> {
   /**
    * @brief Initialize abort probability calculation with user-specified values.
    */
-  abort_probability(double reactivity, double offset)
-      : m_reactivity(reactivity), m_offset(offset) {}
+  explicit abort_probability(const struct abort_params * params);
 
   /**
    * @brief Calculate the current abort probability, based on the most recent
@@ -103,6 +102,9 @@ class abort_probability : public rcppsw::math::expression<double> {
   double calc(double exec_time, const time_estimate& whole_task);
 
  private:
+  abort_probability(double reactivity, double offset)
+  : m_reactivity(reactivity), m_offset(offset) {}
+
   double m_reactivity;
   double m_offset;
 };

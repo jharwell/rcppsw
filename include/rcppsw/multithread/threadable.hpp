@@ -84,7 +84,7 @@ class threadable {
   /**
    * @brief Check if a thread object has been told to terminate elsewhere.
    */
-  bool terminated(void) { return (false == m_thread_run); }
+  bool terminated(void) { return m_thread_run; }
 
   /**
    * @brief Exit a thread from within the thread itself.

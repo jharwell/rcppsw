@@ -37,24 +37,14 @@ partitionable_task::partitionable_task(
     const std::shared_ptr<er::server>& server,
     const struct partitionable_task_params* c_params)
     : client(server),
-      m_always_partition(c_params->always_partition),
-      m_never_partition(c_params->never_partition),
-      m_selection_prob(c_params->subtask_selection_method),
-      m_partition_prob(c_params->partition_method,
-                       c_params->partition_reactivity) {
+      m_always_partition(c_params->partitioning.always_partition),
+      m_never_partition(c_params->partitioning.never_partition),
+      m_selection_prob(&c_params->subtask_selection),
+      m_partition_prob(&c_params->partitioning) {
   if (ERROR == client::attmod("partitionable_task")) {
     client::insmod("partitionable_task",
                    rcppsw::er::er_lvl::DIAG,
                    rcppsw::er::er_lvl::NOM);
-  }
-  /*
-   * Even though Brutschy2014 using reactivity=1.0, offset=8.0, gamma=0.01,
-   * those parameter values did not give good results, but the ones I use below
-   * seem to do so, at least for what I'm doing.
-   */
-  if ("brutschy2014" == c_params->subtask_selection_method ||
-      "harwell2018" == c_params->subtask_selection_method) {
-    m_selection_prob.init_sigmoid(1.0, 2.0, 1.0);
   }
 }
 
@@ -108,7 +98,8 @@ executable_task* partitionable_task::partition(void) {
 
   /* We have chosen to employ partitioning */
   double prob_12, prob_21;
-  if (subtask_selection_probability::kHarwell2018 == m_selection_prob.method()) {
+  if (subtask_selection_probability::kMethodHarwell2018 ==
+      m_selection_prob.method()) {
     prob_12 = m_selection_prob.calc(&m_partition1->exec_estimate(),
                                     &m_partition2->exec_estimate());
     prob_21 = m_selection_prob.calc(&m_partition2->exec_estimate(),
@@ -128,8 +119,10 @@ executable_task* partitionable_task::partition(void) {
       prob_12,
       prob_21);
 
-  if (subtask_selection_probability::kHarwell2018 == m_selection_prob.method() ||
-      subtask_selection_probability::kBrutschy2014 == m_selection_prob.method()) {
+  if (subtask_selection_probability::kMethodHarwell2018 ==
+          m_selection_prob.method() ||
+      subtask_selection_probability::kMethodBrutschy2014 ==
+          m_selection_prob.method()) {
     /*
      * If we last executed subtask1, we calculate the probability of switching
      * to subtask2, based on time estimates.

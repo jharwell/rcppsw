@@ -58,7 +58,6 @@ void force_calculator_xml_parser::show(std::ostream& stream) const {
 __pure bool force_calculator_xml_parser::validate(void) const {
   return m_avoidance.validate() && m_arrival.validate() &&
          m_wander.validate() && m_polar.validate();
-  return true;
 } /* validate() */
 
 NS_END(steering2D, robotics, rcppsw);

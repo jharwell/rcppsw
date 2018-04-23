@@ -23,11 +23,18 @@
  ******************************************************************************/
 #include "rcppsw/task_allocation/abort_probability.hpp"
 #include <cmath>
+#include "rcppsw/task_allocation/abort_params.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
+
+/*******************************************************************************
+ * Constructors/Destructor
+ ******************************************************************************/
+abort_probability::abort_probability(const struct abort_params* const params)
+    : abort_probability(params->reactivity, params->offset) {}
 
 /*******************************************************************************
  * Member Functions
@@ -38,8 +45,8 @@ double abort_probability::calc(double exec_time,
     return set_result(kNO_EST_ABORT_PROB);
   }
 
-  double theta = m_reactivity * (m_offset - exec_time /
-                                 whole_task.last_result());
+  double theta =
+      m_reactivity * (m_offset - exec_time / whole_task.last_result());
   return set_result(1.0 / (1 + std::exp(theta)));
 } /* calc() */
 

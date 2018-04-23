@@ -105,7 +105,9 @@ class base_fsm : public er::client {
    * @brief Get the data associated with an event injected into the state machine.
    */
   const event_data* event_data_get(void) const { return m_event_data.get(); }
-  event_data* event_data_get(void) { return const_cast<event_data*>(m_event_data.get()); }
+  event_data* event_data_get(void) {
+    return const_cast<event_data*>(m_event_data.get());
+  }
 
   void generated_event(bool b) { m_event_generated = b; }
   bool has_generated_event(void) { return m_event_generated; }

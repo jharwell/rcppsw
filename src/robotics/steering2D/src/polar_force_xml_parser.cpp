@@ -37,14 +37,13 @@ constexpr char polar_force_xml_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void polar_force_xml_parser::parse(const argos::TConfigurationNode& node) {
-  ticpp::Element pnode = argos::GetNode(const_cast<ticpp::Element&>(node),
-                                        kXMLRoot);
+  ticpp::Element pnode =
+      argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
   XML_PARSE_PARAM(pnode, m_params, max);
 } /* parse() */
 
 void polar_force_xml_parser::show(std::ostream& stream) const {
-  stream << build_header()
-         << XML_PARAM_STR(m_params, max) << std::endl
+  stream << build_header() << XML_PARAM_STR(m_params, max) << std::endl
          << build_footer();
 } /* show() */
 

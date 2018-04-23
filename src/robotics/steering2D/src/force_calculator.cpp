@@ -54,8 +54,9 @@ force_calculator::force_calculator(const std::shared_ptr<er::server>& server,
 kinematics::twist force_calculator::to_twist(const argos::CVector2& force) const {
   kinematics::twist twist;
   twist.linear.x = force.Length();
-  twist.angular.z = (force - m_entity.linear_velocity()).Length() *
-                    std::sin((force - m_entity.linear_velocity()).Angle().GetValue());
+  twist.angular.z =
+      (force - m_entity.linear_velocity()).Length() *
+      std::sin((force - m_entity.linear_velocity()).Angle().GetValue());
   if (m_entity.linear_velocity().Length() > 0) {
     twist.angular.z /= m_entity.linear_velocity().Length();
   } else {
@@ -81,7 +82,7 @@ void force_calculator::seek_to(const argos::CVector2& target) {
           force.GetY(),
           force.Angle().GetValue(),
           force.Length());
-    accum_force(force);
+  accum_force(force);
 } /* seek_to() */
 
 void force_calculator::wander(void) {
@@ -95,8 +96,7 @@ void force_calculator::wander(void) {
 } /* wander() */
 
 void force_calculator::avoidance(const argos::CVector2& closest_obstacle) {
-  argos::CVector2 force = m_avoidance_force(m_entity,
-                                            closest_obstacle);
+  argos::CVector2 force = m_avoidance_force(m_entity, closest_obstacle);
   ER_DIAG("Avoidance force: (%f, %f)@%f [%f]",
           force.GetX(),
           force.GetY(),

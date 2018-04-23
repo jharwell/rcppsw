@@ -24,6 +24,7 @@
 #include "rcppsw/task_allocation/subtask_selection_probability.hpp"
 #include <cassert>
 #include <cmath>
+#include "rcppsw/task_allocation/subtask_selection_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -33,8 +34,32 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constants
  ******************************************************************************/
-constexpr char subtask_selection_probability::kBrutschy2014[];
-constexpr char subtask_selection_probability::kHarwell2018[];
+constexpr char subtask_selection_probability::kMethodBrutschy2014[];
+constexpr char subtask_selection_probability::kMethodHarwell2018[];
+constexpr char subtask_selection_probability::kMethodRandom[];
+
+/*******************************************************************************
+ * Constructors/Destructor
+ ******************************************************************************/
+subtask_selection_probability::subtask_selection_probability(std::string method)
+    : mc_method(std::move(method)) {
+  if (subtask_selection_probability::kMethodHarwell2018 == method) {
+    init_sigmoid(subtask_selection_probability::kHARWELL2018_REACTIVITY,
+                 subtask_selection_probability::kHARWELL2018_OFFSET,
+                 subtask_selection_probability::kHARWELL2018_GAMMA);
+  } else if (subtask_selection_probability::kMethodBrutschy2014 == method) {
+    init_sigmoid(subtask_selection_probability::kBRUTSCHY2014_REACTIVITY,
+                 subtask_selection_probability::kBRUTSCHY2014_OFFSET,
+                 subtask_selection_probability::kBRUTSCHY2014_GAMMA);
+  }
+}
+
+subtask_selection_probability::subtask_selection_probability(
+    const struct subtask_selection_params* const params)
+    : mc_method(params->method),
+      m_reactivity(params->reactivity),
+      m_offset(params->offset),
+      m_gamma(params->gamma) {}
 
 /*******************************************************************************
  * Member Functions
@@ -49,11 +74,11 @@ void subtask_selection_probability::init_sigmoid(double reactivity,
 
 double subtask_selection_probability::calc(const time_estimate* subtask1,
                                            const time_estimate* subtask2) {
-  if ("brutschy2014" == mc_method) {
+  if (kMethodBrutschy2014 == mc_method) {
     return calc_brutschy2014(*subtask1, *subtask2);
-  } else if ("harwell2018" == mc_method) {
+  } else if (kMethodHarwell2018 == mc_method) {
     return calc_harwell2018(*subtask1, *subtask2);
-  } else if ("random" == mc_method) {
+  } else if (kMethodRandom == mc_method) {
     return calc_random();
   }
   assert(false);
@@ -97,8 +122,13 @@ __pure double subtask_selection_probability::calc_sigmoid(
     r_ss = est1.last_result();
   }
 
-  double tmp = 1.0 / m_reactivity * (est1.last_result() / r_ss - m_offset);
-  return 1.0 / (1 + exp(-tmp)) * m_gamma;
+  double o_ss = m_reactivity * (est1.last_result() / r_ss - m_offset);
+  return 1.0 / (1 + exp(-o_ss)) * m_gamma;
 } /* calc_sigmoid() */
+
+double subtask_selection_probability::operator()(const time_estimate* subtask1,
+                                                 const time_estimate* subtask2) {
+  return calc(subtask1, subtask2);
+} /* operator() */
 
 NS_END(task_allocation, rcppsw);

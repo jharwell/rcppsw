@@ -41,8 +41,6 @@ executable_task::executable_task(const std::string& name,
 
 executable_task::executable_task(const executable_task& other)
     : logical_task(other),
-      m_is_atomic(false),
-      m_is_partitionable(false),
       m_interface_time(other.m_interface_time),
       m_interface_start_time(other.m_interface_start_time),
       m_exec_time(other.m_exec_time),

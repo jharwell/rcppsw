@@ -22,7 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/robotics/steering2D/wander_force.hpp"
-#include <assert.h>
+#include <cassert>
 #include "rcppsw/robotics/steering2D/wander_force_params.hpp"
 
 /*******************************************************************************
@@ -52,11 +52,11 @@ argos::CVector2 wander_force::operator()(const boid& entity) {
    */
   ++m_count;
   if (m_count % m_interval != 0) {
-    return argos::CVector2(0, 0);
+    return {0, 0};
   }
 
   /* calculate circle center */
-    argos::CVector2 velocity;
+  argos::CVector2 velocity;
   if (entity.linear_velocity().Length() <= 0) {
     velocity = argos::CVector2(1, 0);
   } else {
@@ -67,19 +67,19 @@ argos::CVector2 wander_force::operator()(const boid& entity) {
       (velocity).Normalize().Scale(m_circle_distance, m_circle_distance);
 
   /* calculate displacement force (the actual wandering) */
-  argos::CVector2 displacement(m_circle_radius *
-                               std::cos((m_angle + velocity.Angle()).GetValue()),
-                               m_circle_radius *
-                               std::sin((m_angle + velocity.Angle()).GetValue()));
+  argos::CVector2 displacement(
+      m_circle_radius * std::cos((m_angle + velocity.Angle()).GetValue()),
+      m_circle_radius * std::sin((m_angle + velocity.Angle()).GetValue()));
 
   /*
    * Update wander angle so it won't have the same value next time with a
    * random pertubation in the range [-max delta, max_delta].
    */
-  double val = -m_max_angle_delta +
-               2 * m_max_angle_delta * (static_cast<double>(random()) / RAND_MAX);
-  m_angle.FromValueInDegrees(std::fmod(argos::ToDegrees(m_angle).GetValue() + val,
-                                       m_max_angle_delta));
+  double val =
+      -m_max_angle_delta +
+      2 * m_max_angle_delta * (static_cast<double>(random()) / RAND_MAX);
+  m_angle.FromValueInDegrees(
+      std::fmod(argos::ToDegrees(m_angle).GetValue() + val, m_max_angle_delta));
 
   /*
    * Wandering is a combination of the current velocity, projected outward a

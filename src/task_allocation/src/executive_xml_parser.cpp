@@ -21,8 +21,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <argos3/core/utility/configuration/argos_configuration.h>
 #include "rcppsw/task_allocation/executive_xml_parser.hpp"
+#include <argos3/core/utility/configuration/argos_configuration.h>
 #include "rcppsw/utils/line_parser.hpp"
 
 /*******************************************************************************
@@ -42,36 +42,53 @@ void executive_xml_parser::parse(const ticpp::Element& node) {
   ticpp::Element enode =
       argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
 
-  XML_PARSE_PARAM(enode, m_params, estimation_alpha);
-  XML_PARSE_PARAM(enode, m_params, abort_reactivity);
-  XML_PARSE_PARAM(enode, m_params, abort_offset);
-  XML_PARSE_PARAM(enode, m_params, partition_reactivity);
-  XML_PARSE_PARAM(enode, m_params, partition_offset);
-  XML_PARSE_PARAM(enode, m_params, subtask_selection_method);
-  XML_PARSE_PARAM(enode, m_params, partition_method);
-  XML_PARSE_PARAM(enode, m_params, always_partition);
-  XML_PARSE_PARAM(enode, m_params, never_partition);
+  ticpp::Element anode =
+      argos::GetNode(const_cast<ticpp::Element&>(enode), "aborting");
+  XML_PARSE_PARAM(anode, m_params.abort, reactivity);
+  XML_PARSE_PARAM(anode, m_params.abort, offset);
+
+  ticpp::Element tnode =
+      argos::GetNode(const_cast<ticpp::Element&>(enode), "tasks");
+  XML_PARSE_PARAM(tnode, m_params, estimation_alpha);
+
+  ticpp::Element pnode =
+      argos::GetNode(const_cast<ticpp::Element&>(enode), "partitioning");
+  XML_PARSE_PARAM(pnode, m_params.partitioning, reactivity);
+  XML_PARSE_PARAM(pnode, m_params.partitioning, offset);
+  XML_PARSE_PARAM(pnode, m_params.partitioning, method);
+  XML_PARSE_PARAM(pnode, m_params.partitioning, always_partition);
+  XML_PARSE_PARAM(pnode, m_params.partitioning, never_partition);
+
+  ticpp::Element snode =
+      argos::GetNode(const_cast<ticpp::Element&>(enode), "subtask_selection");
+  XML_PARSE_PARAM(snode, m_params.subtask_selection, reactivity);
+  XML_PARSE_PARAM(snode, m_params.subtask_selection, offset);
+  XML_PARSE_PARAM(snode, m_params.subtask_selection, method);
+  XML_PARSE_PARAM(snode, m_params.subtask_selection, gamma);
 } /* parse() */
 
 void executive_xml_parser::show(std::ostream& stream) const {
-  stream << build_header()
-         << XML_PARAM_STR(m_params, estimation_alpha) << std::endl
-         << XML_PARAM_STR(m_params, abort_reactivity) << std::endl
-         << XML_PARAM_STR(m_params, abort_offset) << std::endl
-         << XML_PARAM_STR(m_params, partition_reactivity) << std::endl
-         << XML_PARAM_STR(m_params, partition_offset) << std::endl
-         << XML_PARAM_STR(m_params, subtask_selection_method) << std::endl
-         << XML_PARAM_STR(m_params, partition_method) << std::endl
-         << XML_PARAM_STR(m_params, always_partition) << std::endl
-         << XML_PARAM_STR(m_params, never_partition) << std::endl
+  stream << build_header() << XML_PARAM_STR(m_params, estimation_alpha)
+         << std::endl
+         << XML_PARAM_STR(m_params, abort.reactivity) << std::endl
+         << XML_PARAM_STR(m_params, abort.offset) << std::endl
+         << XML_PARAM_STR(m_params, partitioning.reactivity) << std::endl
+         << XML_PARAM_STR(m_params, partitioning.offset) << std::endl
+         << XML_PARAM_STR(m_params, partitioning.method) << std::endl
+         << XML_PARAM_STR(m_params, partitioning.always_partition) << std::endl
+         << XML_PARAM_STR(m_params, partitioning.never_partition) << std::endl
+         << XML_PARAM_STR(m_params, subtask_selection.reactivity) << std::endl
+         << XML_PARAM_STR(m_params, subtask_selection.offset) << std::endl
+         << XML_PARAM_STR(m_params, subtask_selection.method) << std::endl
+         << XML_PARAM_STR(m_params, subtask_selection.gamma) << std::endl
          << build_footer();
 } /* show() */
 
 __pure bool executive_xml_parser::validate(void) const {
   return !(m_params.estimation_alpha <= 0.0 ||
-           m_params.abort_reactivity <= 0.0 || m_params.abort_offset <= 0.0 ||
-           m_params.partition_reactivity <= 0.0 ||
-           m_params.partition_offset <= 0.0);
+           m_params.abort.reactivity <= 0.0 || m_params.abort.offset <= 0.0 ||
+           m_params.partitioning.reactivity <= 0.0 ||
+           m_params.partitioning.offset <= 0.0);
 } /* validate() */
 
 NS_END(task_allocation, rcppsw);

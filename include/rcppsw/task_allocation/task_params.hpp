@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/params/base_params.hpp"
+#include "rcppsw/task_allocation/abort_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -42,10 +43,7 @@ NS_START(rcppsw, task_allocation);
  */
 struct task_params : public params::base_params {
   double estimation_alpha{0.0};
-  double abort_reactivity{0.0};
-  double abort_offset{0.0};
-  double partition_reactivity{0.0};
-  double partition_offset{0.0};
+  struct abort_params abort{};
 };
 
 NS_END(task_allocation, rcppsw);

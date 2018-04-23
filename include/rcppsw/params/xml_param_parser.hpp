@@ -40,11 +40,11 @@ struct base_params;
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#define XML_PARAM_STR(container, name) std::string(#name) << "=" << container.name
+#define XML_PARAM_STR(container, name) std::string(#name) << "=" << (container).name
 #define XML_PARSE_PARAM(node, container, name)                          \
-  argos::GetNodeAttribute(node,                                         \
-                          #name,                                        \
-                          container.name)
+  argos::GetNodeAttribute((node),                                       \
+                          #name,                                      \
+                          (container).name)
 
 /*******************************************************************************
  * Class Definitions
@@ -79,15 +79,11 @@ class xml_param_parser {
    * @brief Build a header suitable for inclusion in dumping parsed parameters
    * to a stream.
    *
-   * @param level The level of the header to build. Root level headers (level=1)
-   * will get headers of width \ref kColumnWidth. For all other values > 0, the
-   * width of the header emitted is \ref kColumnWidth/level.
-   *
    * @return The constructed header.
    */
   std::string build_header(void) const {
     FPC_CHECK("", level() > 0, level() <= kHeader4);
-    int width = kColumnWidth  - level() * 20;
+    uint width = kColumnWidth  - level() * 20;
     std::string prettiness(width, '=');
     std::string spaces(width/2 - xml_root().size()/2 - 1, ' ');
     return prettiness + "\n"
@@ -99,15 +95,11 @@ class xml_param_parser {
    * @brief Build a footer suitable for inclusion in dumping parsed parameters
    * to a stream.
    *
-   * @param level The level of the footer to build. Root level footer (level=1)
-   * will get footer of width \ref kColumnWidth. For all other values > 0, the
-   * width of the footer emitted is \ref kColumnWidth/level.
-   *
    * @return The constructed footer.
    */
   std::string build_footer(void) const {
     FPC_CHECK("", level() > 0, level() <= kHeader4);
-    int width = kColumnWidth - level() * 20;
+    uint width = kColumnWidth - level() * 20;
     std::string prettiness(width, '=');
     std::string spaces(width/2 - xml_root().size()/2 - 1, ' ');
     return prettiness + "\n"

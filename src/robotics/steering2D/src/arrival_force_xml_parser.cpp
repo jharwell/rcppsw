@@ -45,8 +45,7 @@ void arrival_force_xml_parser::parse(const argos::TConfigurationNode& node) {
 } /* parse() */
 
 void arrival_force_xml_parser::show(std::ostream& stream) const {
-  stream << build_header()
-         << XML_PARAM_STR(m_params, max) << std::endl
+  stream << build_header() << XML_PARAM_STR(m_params, max) << std::endl
          << XML_PARAM_STR(m_params, slowing_radius) << std::endl
          << XML_PARAM_STR(m_params, slowing_speed_min) << std::endl
          << build_footer();

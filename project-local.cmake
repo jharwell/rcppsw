@@ -6,7 +6,6 @@ set(${target}_HAS_RECURSIVE_DIRS YES)
 
 # RCSW
 add_subdirectory(ext/rcsw)
-include_directories(${rcsw_INCLUDE_DIRS})
 
 # Boost
 find_package(Boost 1.58.0 COMPONENTS system filesystem thread)
@@ -15,7 +14,10 @@ set(Boost_USE_STATIC_LIBS OFF)
 ################################################################################
 # Includes                                                                     #
 ################################################################################
-set(${target}_INCLUDE_DIRS "${${target}_INC_PATH}")
+if (NOT IS_ROOT_PROJECT)
+  set(${target}_INCLUDE_DIRS "${${target}_INC_PATH}" ${rcsw_INCLUDE_DIRS} PARENT_SCOPE)
+endif()
+set(${target}_INCLUDE_DIRS "${${target}_INC_PATH}" ${rcsw_INCLUDE_DIRS})
 
 ################################################################################
 # Submodules                                                                   #
@@ -74,6 +76,7 @@ if (NOT TARGET ${target})
     $<TARGET_OBJECTS:${target}-metrics>
     $<TARGET_OBJECTS:${target}-control>)
   target_link_libraries(${target} "${${target}_LIBS}")
+  target_include_directories(${target} PUBLIC "${${target}_INCLUDE_DIRS}")
 endif()
 
 ################################################################################

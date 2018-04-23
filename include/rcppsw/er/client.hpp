@@ -332,7 +332,7 @@ void __er_report__(server* server,
  * @return \c TRUE if the message will be reported, \c FALSE otherwise.
  * @endinternal
  */
-bool __er_will_report__(const server* const server,
+bool __er_will_report__(const server* server,
                         const boost::uuids::uuid& er_id,
                         const er_lvl::value& lvl);
 

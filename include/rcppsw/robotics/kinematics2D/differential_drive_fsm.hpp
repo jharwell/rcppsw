@@ -117,10 +117,10 @@ class differential_drive_fsm : public state_machine::simple_fsm {
    * desired heading change into wheel speeds.
    */
   struct turn_data : public state_machine::event_data {
-    turn_data(const std::pair<bool, bool>& force_,
+    turn_data(std::pair<bool, bool> force_,
               double speed_,
               argos::CRadians angle_)
-        : force(force_), speed(speed_), angle(angle_) {}
+        : force(std::move(force_)), speed(speed_), angle(angle_) {}
 
     std::pair<bool, bool> force;
     double speed;

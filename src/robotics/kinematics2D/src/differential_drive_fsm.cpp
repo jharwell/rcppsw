@@ -32,15 +32,14 @@ NS_START(rcppsw, robotics, kinematics2D);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-differential_drive_fsm::differential_drive_fsm(
-    double max_speed,
-    argos::CRadians soft_turn_max)
+differential_drive_fsm::differential_drive_fsm(double max_speed,
+                                               argos::CRadians soft_turn_max)
     : state_machine::simple_fsm(rcppsw::er::g_server, ST_MAX_STATES),
       soft_turn(),
       hard_turn(),
-    mc_max_speed(max_speed),
-    mc_soft_turn_max(soft_turn_max),
-    m_wheel_speeds() {}
+      mc_max_speed(max_speed),
+      mc_soft_turn_max(soft_turn_max),
+      m_wheel_speeds() {}
 
 /*******************************************************************************
  * Events
@@ -62,10 +61,10 @@ void differential_drive_fsm::change_velocity(double speed,
  ******************************************************************************/
 
 FSM_STATE_DEFINE(differential_drive_fsm, soft_turn, turn_data) {
-  argos::CRange<argos::CRadians> range(-mc_soft_turn_max,
-                                       mc_soft_turn_max);
+  argos::CRange<argos::CRadians> range(-mc_soft_turn_max, mc_soft_turn_max);
   argos::CRadians angle = data->angle;
-  bool within_range = range.WithinMinBoundIncludedMaxBoundIncluded(angle.SignedNormalize());
+  bool within_range =
+      range.WithinMinBoundIncludedMaxBoundIncluded(angle.SignedNormalize());
   if (data->force.second || (!within_range && !data->force.first)) {
     internal_event(ST_HARD_TURN);
     return state_machine::event_signal::HANDLED;
@@ -73,20 +72,17 @@ FSM_STATE_DEFINE(differential_drive_fsm, soft_turn, turn_data) {
 
   /* Both wheels go straight, but one is faster than the other */
   double speed_factor =
-      (mc_soft_turn_max - argos::Abs(data->angle)) /
-      mc_soft_turn_max;
-  double speed1 =
-      data->speed - data->speed * (1.0 - speed_factor);
-  double speed2 =
-      data->speed + data->speed * (1.0 - speed_factor);
+      (mc_soft_turn_max - argos::Abs(data->angle)) / mc_soft_turn_max;
+  double speed1 = data->speed - data->speed * (1.0 - speed_factor);
+  double speed2 = data->speed + data->speed * (1.0 - speed_factor);
   set_wheel_speeds(speed1, speed2, data->angle);
   return state_machine::event_signal::HANDLED;
 }
 FSM_STATE_DEFINE(differential_drive_fsm, hard_turn, turn_data) {
-  argos::CRange<argos::CRadians> range(-mc_soft_turn_max,
-                                       mc_soft_turn_max);
+  argos::CRange<argos::CRadians> range(-mc_soft_turn_max, mc_soft_turn_max);
   argos::CRadians angle = data->angle;
-  bool within_range = range.WithinMinBoundIncludedMaxBoundIncluded(angle.SignedNormalize());
+  bool within_range =
+      range.WithinMinBoundIncludedMaxBoundIncluded(angle.SignedNormalize());
   if ((!data->force.second && within_range) || data->force.first) {
     internal_event(ST_SOFT_TURN);
     return state_machine::event_signal::HANDLED;
