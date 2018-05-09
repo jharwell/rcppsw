@@ -32,18 +32,21 @@ NS_START(rcppsw, robotics, kinematics2D);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-differential_drive::differential_drive(const std::shared_ptr<er::server>& server,
-                                       drive_type type,
-                                       double wheel_radius,
-                                       double axle_length,
-                                       double max_speed,
-                                       argos::CRadians soft_turn_max)
+differential_drive::differential_drive(
+    const std::shared_ptr<er::server>& server,
+    const hal::actuators::differential_drive_actuator& actuator,
+    drive_type type,
+    double wheel_radius,
+    double axle_length,
+    double max_speed,
+    argos::CRadians soft_turn_max)
     : er::client(server),
       m_drive_type(type),
       m_wheel_radius(wheel_radius),
       m_axle_length(axle_length),
       m_max_speed(max_speed),
-      m_fsm(max_speed, soft_turn_max) {
+      m_fsm(max_speed, soft_turn_max),
+      m_actuator(actuator) {
   if (ERROR == client::attmod("differential_drive")) {
     client::insmod("differential_drive",
                    rcppsw::er::er_lvl::DIAG,
@@ -51,12 +54,15 @@ differential_drive::differential_drive(const std::shared_ptr<er::server>& server
   }
 }
 
-differential_drive::differential_drive(const std::shared_ptr<er::server>& server,
-                                       drive_type type,
-                                       double wheel_radius,
-                                       double axle_length,
-                                       double max_speed)
+differential_drive::differential_drive(
+    const std::shared_ptr<er::server>& server,
+    const hal::actuators::differential_drive_actuator& actuator,
+    drive_type type,
+    double wheel_radius,
+    double axle_length,
+    double max_speed)
     : differential_drive{server,
+                         actuator,
                          type,
                          wheel_radius,
                          axle_length,
@@ -89,7 +95,7 @@ status_t differential_drive::fsm_drive(double speed,
   m_fsm.change_velocity(speed, angle, force);
   m_left_linspeed = speeds.first;
   m_right_linspeed = speeds.second;
-  set_wheel_speeds(m_left_linspeed, m_right_linspeed);
+  m_actuator.set_wheel_speeds(m_left_linspeed, m_right_linspeed);
   return OK;
 
 error:
@@ -114,7 +120,7 @@ status_t differential_drive::tank_drive(double left_speed,
   ER_VER("Normalized linear wheel speeds: (%f, %f)",
          m_left_linspeed,
          m_right_linspeed);
-  set_wheel_speeds(m_left_linspeed, m_right_linspeed);
+  m_actuator.set_wheel_speeds(m_left_linspeed, m_right_linspeed);
   return OK;
 
 error:
@@ -150,7 +156,7 @@ status_t differential_drive::curvature_drive(const kinematics::twist& twist,
 
   m_left_linspeed = outputs.first;
   m_right_linspeed = outputs.second;
-  set_wheel_speeds(m_left_linspeed, m_right_linspeed);
+  m_actuator.set_wheel_speeds(m_left_linspeed, m_right_linspeed);
   m_hard_turn = false;
   return OK;
 

@@ -53,6 +53,10 @@ list(APPEND ${target}_robotics_SUBDIRS kinematics2D)
 foreach(d ${${target}_robotics_SUBDIRS})
   add_subdirectory(src/robotics/${d})
   target_include_directories(${target}-${d} PUBLIC "${${target}_INCLUDE_DIRS}")
+  if ("${WITH_HAL_CONFIG}" MATCHES "argos-footbot")
+    target_compile_definitions(${target}-${d} PUBLIC HAL_CONFIG=HAL_CONFIG_ARGOS_FOOTBOT)
+    target_include_directories(${target}-${d} PUBLIC /usr/include/lua5.2)
+  endif()
 endforeach()
 
 ################################################################################
@@ -66,6 +70,7 @@ set(${target}_LIBS
 if (NOT TARGET ${target})
   add_library(${target} STATIC
     $<TARGET_OBJECTS:${target}-er>
+    $<TARGET_OBJECTS:${target}-ds>
     $<TARGET_OBJECTS:${target}-multithread>
     $<TARGET_OBJECTS:${target}-utils>
     $<TARGET_OBJECTS:${target}-state_machine>
@@ -77,6 +82,7 @@ if (NOT TARGET ${target})
     $<TARGET_OBJECTS:${target}-control>)
   target_link_libraries(${target} "${${target}_LIBS}")
   target_include_directories(${target} PUBLIC "${${target}_INCLUDE_DIRS}")
+
 endif()
 
 ################################################################################

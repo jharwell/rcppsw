@@ -28,6 +28,7 @@
 #include "rcppsw/robotics/kinematics2D/model.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/robotics/kinematics2D/differential_drive_fsm.hpp"
+#include "rcppsw/robotics/hal/actuators/differential_drive_actuator.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -61,6 +62,7 @@ class differential_drive : public kinematics2D::model, public er::client {
    * @brief Initialize differential drive kinematics model.
    *
    * @param type The drive type; see \ref drive_type
+   * @param actuator The underlying differential drive actuator via HAL.
    * @param wheel_radius Radius of robot wheels.
    * @param axle_length Lateral distance between wheels.
    * @param max_speed Maximum output of wheels (i.e. max wheel speed).
@@ -69,6 +71,7 @@ class differential_drive : public kinematics2D::model, public er::client {
    *                      turn. Only used by \ref kFSMDrive.
    */
   differential_drive(const std::shared_ptr<er::server>& server,
+                     const hal::actuators::differential_drive_actuator& actuator,
                      drive_type type,
                      double wheel_radius,
                      double axle_length,
@@ -76,6 +79,7 @@ class differential_drive : public kinematics2D::model, public er::client {
                      argos::CRadians soft_turn_max);
 
   differential_drive(const std::shared_ptr<er::server>& server,
+                     const hal::actuators::differential_drive_actuator& actuator,
                      drive_type type,
                      double wheel_radius,
                      double axle_length,
@@ -83,12 +87,20 @@ class differential_drive : public kinematics2D::model, public er::client {
 
   /* kinematics model interface */
   status_t actuate(const kinematics::twist& twist) override;
-  void stop(void) override { set_wheel_speeds(0, 0); }
+  void stop(void) override { m_actuator.stop_wheels(); }
   double max_speed(void) const override { return m_max_speed; }
 
   status_t actuate(const kinematics::twist& twist, bool hard_turn) {
     m_hard_turn = hard_turn;
     return actuate(twist);
+  }
+
+  /**
+  * @brief Call into low level drivers to do actuation. Note that this is LINEAR
+  * velocity, NOT WHEEL velocity.
+  */
+  void set_wheel_speeds(double left, double right) {
+    m_actuator.set_wheel_speeds(left, right);
   }
 
   /*
@@ -115,12 +127,6 @@ class differential_drive : public kinematics2D::model, public er::client {
                      const argos::CRadians& angle,
                      const std::pair<bool, bool>& force = std::make_pair(false,
                                                                          false));
-  /**
-   * @brief Hook for derived classes to actually call into low level drivers to
-   * do actuation. Note that this is LINEAR velocity, NOT WHEEL velocity.
-   */
-  virtual void set_wheel_speeds(double left, double right) = 0;
-
   /**
    * @brief Return the current speed of the robot (average of the 2 wheel
    * speeds).
@@ -177,14 +183,15 @@ class differential_drive : public kinematics2D::model, public er::client {
   double limit(double value) const;
 
   // clang-format off
-  bool                   m_hard_turn{false};
-  enum drive_type        m_drive_type;
-  double                 m_wheel_radius;
-  double                 m_axle_length;
-  double                 m_max_speed;
-  double                 m_left_linspeed{0.0};
-  double                 m_right_linspeed{0.0};
-  differential_drive_fsm m_fsm;
+  bool                                        m_hard_turn{false};
+  enum drive_type                             m_drive_type;
+  double                                      m_wheel_radius;
+  double                                      m_axle_length;
+  double                                      m_max_speed;
+  double                                      m_left_linspeed{0.0};
+  double                                      m_right_linspeed{0.0};
+  differential_drive_fsm                      m_fsm;
+  hal::actuators::differential_drive_actuator m_actuator;
   // clang-format on
 };
 
