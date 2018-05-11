@@ -72,8 +72,16 @@ exist in Boost, or that build on what boost provides. Includes such things as:
         cmake ..
         make
 
-For additional build configuration options, please see the README in
-the [cmake config](https://github.com/jharwell/cmake-config) repo.
+    There are a number of configuration options that can be passed to cmake that
+    are specific to fordyca. For other, additional configuration options, please
+    see the README in the [cmake config](https://github.com/jharwell/cmake-config)
+    repo:
+
+   | Option            | Meaning                                                       | Options                                                                    | Default            |
+   |-------------------|---------------------------------------------------------------|----------------------------------------------------------------------------|--------------------|
+   | `WITH_HAL_CONFIG` | Specify which hardware configuration to enable. At most *ONE* | `"argos-footbot"`: Build for the footbot robot within the argos simulator. | `"argos-footbot""` |
+   |                   | configuration can be enabled at a time.                       |                                                                            |                    |
+
 
 To build the documentation, do the following from the build directory:
 
