@@ -35,25 +35,18 @@ exist in Boost, or that build on what boost provides. Includes such things as:
 ## Pre-cloning Setup
 
 1. This project uses the build scaffolding provided by
-   [cmake-config](https://github.com/jharwell/cmake-config). Please
-   look at the platform requirements for that project and install any
-   needed packages/libraries.
+   [cmake-config](https://github.com/jharwell/cmake-config). Please look at the
+   platform requirements for that project and install any needed
+   packages/libraries.
 
 2. Install the following libraries:
 
-   - boost (1.58 is known to work; older versions may also work).
+   - boost 1.58
 
-     On Ubuntu this is: `sudo apt-get install libboost-all-dev`
-
-3. Set up an ssh key for password-less connection to github (this is
-   for the [cmake config](https://github.com/jharwell/cmake-config)
-   submodule). Yes I know that it can be done without ssh, but I set
-   it up this way so I don't have to type my github password ever.
-
-4. Clone `rcsw` https://github.com/swarm-robotics/rcsw (Reusable C software)
-   somewhere and create a symbolic to it in the repo as
-   `<repo_root>/ext/rcsw`. Follow all pre/post-cloning instructions found in
-   README in that repo.
+3. Set up an ssh key for password-less connection to github (this is for the
+   [cmake config](https://github.com/jharwell/cmake-config) submodule). Yes I
+   know that it can be done without ssh, but I set it up this way so I don't
+   have to type my github password ever.
 
 ## Post-cloning
 
@@ -64,7 +57,7 @@ exist in Boost, or that build on what boost provides. Includes such things as:
 
 2. Pull in the cmake project scaffolding:
 
-        git submodule update --init --recursive
+        git submodule update --init --recursive  --remote
 
 3. Build via:
 
@@ -72,10 +65,14 @@ exist in Boost, or that build on what boost provides. Includes such things as:
         cmake ..
         make
 
+    This will build for the default HAL configuration (see below). to build for
+    a different configuration, pass the desired flag to cmake via `-D`.
+
     There are a number of configuration options that can be passed to cmake that
-    are specific to fordyca. For other, additional configuration options, please
-    see the README in the [cmake config](https://github.com/jharwell/cmake-config)
-    repo:
+    are specific to rcppsw, which are shown in the table below. For other,
+    additional configuration options, please see the README in the [cmake
+    config](https://github.com/jharwell/cmake-config) repo:
+
 
    | Option            | Meaning                                                       | Options                                                                    | Default            |
    |-------------------|---------------------------------------------------------------|----------------------------------------------------------------------------|--------------------|
@@ -93,7 +90,9 @@ For contributing to `rcppsw`, see [CONTRIBUTING](docs/CONTRIBUTING.md)
 
 # Troubleshooting
 
-- If you are having trouble building, try updating the cmake submodule:
+- If you are having trouble building:
+
+  1. Try updating the cmake submodule:
 
         git submodule update
 
