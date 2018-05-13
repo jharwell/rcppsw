@@ -1,9 +1,18 @@
 ################################################################################
-# External Projects                                                            #
+# Configuration Options                                                        #
 ################################################################################
+set(WITH_HAL_CONFIG "argos-footbot" CACHE STRING "Specify the Hardware Abstraction Layer (HAL) target")
+define_property(
+  CACHED_VARIABLE PROPERTY "WITH_HAL_CONFIG"
+		BRIEF_DOCS "Specify the Hardware Abstraction Layer (HAL) target"
+		FULL_DOCS "Must be exactly one of: [argos-footbot]"
+	        )
 set(${target}_CHECK_LANGUAGE "CXX")
 set(${target}_HAS_RECURSIVE_DIRS YES)
 
+################################################################################
+# External Projects                                                            #
+################################################################################
 # RCSW
 add_subdirectory(ext/rcsw)
 
@@ -11,12 +20,10 @@ add_subdirectory(ext/rcsw)
 find_package(Boost 1.58.0 COMPONENTS system filesystem thread)
 set(Boost_USE_STATIC_LIBS OFF)
 
+
 ################################################################################
 # Includes                                                                     #
 ################################################################################
-if (NOT IS_ROOT_PROJECT)
-  set(${target}_INCLUDE_DIRS "${${target}_INC_PATH}" ${rcsw_INCLUDE_DIRS} PARENT_SCOPE)
-endif()
 set(${target}_INCLUDE_DIRS "${${target}_INC_PATH}" ${rcsw_INCLUDE_DIRS})
 
 ################################################################################
@@ -82,13 +89,12 @@ if (NOT TARGET ${target})
     $<TARGET_OBJECTS:${target}-control>)
   target_link_libraries(${target} "${${target}_LIBS}")
   target_include_directories(${target} PUBLIC "${${target}_INCLUDE_DIRS}")
-
 endif()
 
 ################################################################################
 # Exports                                                                      #
 ################################################################################
 if (NOT IS_ROOT_PROJECT)
-  set(${target}_INCLUDE_DIRS "${${target}_INCLUDE_DIRS}" ${rcsw_INCLUDE_DIRS} PARENT_SCOPE)
+  set(${target}_INCLUDE_DIRS "${${target}_INC_PATH}" ${rcsw_INCLUDE_DIRS} PARENT_SCOPE)
   set(${target}_LIBS "${${target}_LIBS}" PARENT_SCOPE)
 endif()
