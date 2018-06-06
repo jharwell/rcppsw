@@ -1,7 +1,7 @@
 /**
- * @file er_server-test.cpp
+ * @file server-test.cpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -24,25 +24,25 @@
 #define CATCH_CONFIG_PREFIX_ALL
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
-#include "rcppsw/common/er_client.hpp"
-#include "rcppsw/common/er_server.hpp"
+#include "rcppsw/er/client.hpp"
+#include "rcppsw/er/server.hpp"
 
 /*******************************************************************************
  * Test Classes
  ******************************************************************************/
-class test_client : public rcppsw::common::er_client {
+class test_client : public rcppsw::er::client {
  public:
-  test_client(std::shared_ptr<rcppsw::common::er_server> handle)
-      : er_client(handle) {
+  test_client(std::shared_ptr<rcppsw::er::server> handle)
+      : client(handle) {
     server_handle()->insmod(er_id(), "test_module");
-    server_handle()->mod_dbglvl(er_id(), rcppsw::common::er_lvl::NOM);
+    server_handle()->mod_dbglvl(er_id(), rcppsw::er::er_lvl::NOM);
 
     /* Test if you get anything */
-    ER_REPORT(rcppsw::common::er_lvl::ERR, "This is an error");
-    ER_REPORT(rcppsw::common::er_lvl::WARN, "This is a warning");
-    ER_REPORT(rcppsw::common::er_lvl::NOM, "This is nominal");
-    ER_REPORT(rcppsw::common::er_lvl::DIAG, "This is a diagnostic");
-    ER_REPORT(rcppsw::common::er_lvl::VER, "This is verbose");
+    ER_REPORT(rcppsw::er::er_lvl::ERR, "This is an error");
+    ER_REPORT(rcppsw::er::er_lvl::WARN, "This is a warning");
+    ER_REPORT(rcppsw::er::er_lvl::NOM, "This is nominal");
+    ER_REPORT(rcppsw::er::er_lvl::DIAG, "This is a diagnostic");
+    ER_REPORT(rcppsw::er::er_lvl::VER, "This is verbose");
   }
 };
 
@@ -50,7 +50,7 @@ class test_client : public rcppsw::common::er_client {
  * Test Cases
  ******************************************************************************/
 CATCH_TEST_CASE("ER Test", "[ER]") {
-  rcppsw::common::er_server handle;
-  test_client client(std::make_shared<rcppsw::common::er_server>());
+  rcppsw::er::server handle;
+  test_client client(std::make_shared<rcppsw::er::server>());
   CATCH_REQUIRE(1);
 }
