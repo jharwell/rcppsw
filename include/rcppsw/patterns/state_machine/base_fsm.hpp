@@ -467,4 +467,17 @@ NS_END(state_machine, patterns, rcppsw);
                 (n_entries),                                            \
                 "state map does not cover all states");
 
+/*******************************************************************************
+ * Othr Macros
+ ******************************************************************************/
+#define FSM_WRAPPER_DECLARE(ret, func)          \
+  ret func(void) const override;
+#define FSM_WRAPPER_DEFINE(ret, class, func, handle)            \
+  ret class::func(void) const { return (handle).func(); }
+#define FSM_WRAPPER_DEFINE_PTR(ret, class, func, handle)        \
+  ret class::func(void) const { if (nullptr != (handle)) {      \
+      return (handle)->func(); }                                \
+    return static_cast<ret>(0);                                 \
+  }
+
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_BASE_FSM_HPP_ */

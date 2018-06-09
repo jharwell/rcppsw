@@ -35,51 +35,54 @@ NS_START(rcppsw, patterns, visitor);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class polymorphic_visitable_helper
+ * @class polymorphic_accept_set_helper
  *
  * @brief Helper class to provide the actual implementation of the visitor
  * pattern, receiving end.
  */
-template <typename V, typename T>
-class polymorphic_visitable_helper {
+template <typename T>
+class polymorphic_accept_set_helper {
  public:
   virtual void accept(T &visitor) = 0;
-  virtual ~polymorphic_visitable_helper(void) {}
+  virtual ~polymorphic_accept_set_helper(void) {}
 };
 
 /**
- * @class polymorphic_visitable<...>
+ * @class polymorphic_accept_set<...>
  * @ingroup patterns visitor
  *
  * @brief Allows polymorphic classes (those with a pure virtual member in a base
  * class) to accept visitors of specific types.
  */
 template <typename... Ts>
-class polymorphic_visitable {};
+class polymorphic_accept_set {};
 
 /**
- * @class polymorphic_visitable<V,T,...>
+ * @class polymorphic_accept_set<T,...>
  *
  * @brief Middle recursive call for template expansion.
  */
-template<typename V, typename T, typename... Ts>
-class polymorphic_visitable<V, T, Ts...>: public polymorphic_visitable_helper<V, T>,
-                                          public polymorphic_visitable<V, Ts...> {
+template<typename T, typename... Ts>
+class polymorphic_accept_set<T, Ts...>: public polymorphic_accept_set_helper<T>,
+                                          public polymorphic_accept_set<Ts...> {
  public:
-  using polymorphic_visitable_helper<V, T>::accept;
-  using polymorphic_visitable<V, Ts...>::accept;
+  using polymorphic_accept_set_helper<T>::accept;
+  using polymorphic_accept_set<Ts...>::accept;
 };
 
 /**
- * @class polymorphic_visitable<V,T>
+ * @class polymorphic_accept_set<T>
  *
  * @brief Base case for template expansion.
  */
-template<typename V, typename T>
-class polymorphic_visitable<V, T>: public polymorphic_visitable_helper<V, T> {
+template<typename T>
+class polymorphic_accept_set<T>: public polymorphic_accept_set_helper<T> {
  public:
-  using polymorphic_visitable_helper<V, T>::accept;
+  using polymorphic_accept_set_helper<T>::accept;
 };
+
+template<typename T>
+using polymorphic_will_accept = polymorphic_accept_set_helper<T>;
 
 NS_END(rcppsw, patterns, visitor);
 
