@@ -16,10 +16,15 @@ set(${target}_HAS_RECURSIVE_DIRS YES)
 # RCSW
 add_subdirectory(ext/rcsw)
 
-# Boost
-find_package(Boost 1.58.0 COMPONENTS system filesystem thread)
-set(Boost_USE_STATIC_LIBS OFF)
+# TICPP, which emits hundreds of compiler warnings if I compile with my usual
+# robust set of warnings.
+add_subdirectory(ext/ticpp)
+target_compile_options(ticpp PUBLIC -Wno-old-style-cast -Wno-suggest-override
+  -Wno-effc++ -Wno-overloaded-virtual)
 
+# Boost
+find_package(Boost 1.58.0 COMPONENTS system filesystem thread graph)
+set(Boost_USE_STATIC_LIBS OFF)
 
 ################################################################################
 # Includes                                                                     #
@@ -71,6 +76,7 @@ endforeach()
 ################################################################################
 set(${target}_LIBS
   rcsw
+  ticpp
   ${Boost_LIBRARIES}
   )
 

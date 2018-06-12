@@ -92,9 +92,9 @@ For contributing to `rcppsw`, see [CONTRIBUTING](docs/CONTRIBUTING.md)
 
 - If you are having trouble building:
 
-  1. Try updating the cmake submodule:
+  1. Make sure you are on the `devel` branch.
 
-        git submodule update
+  2. Update the cmake submodule via `git submodule update`
 
   If the problem perists, open an issue.
 

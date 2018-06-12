@@ -48,8 +48,7 @@ class partitionable_polled_task : public polled_task, public partitionable_task 
   partitionable_polled_task(const std::shared_ptr<er::server>& server,
                             const std::string& name,
                             const struct partitionable_task_params* c_params,
-                            std::unique_ptr<taskable>& mechanism,
-                            polled_task* parent = nullptr);
+                            std::unique_ptr<taskable>& mechanism);
 
   void init_random(int lb, int ub);
 };

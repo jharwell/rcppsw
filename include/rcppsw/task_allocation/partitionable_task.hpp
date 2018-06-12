@@ -28,6 +28,7 @@
 #include "rcppsw/task_allocation/partition_probability.hpp"
 #include "rcppsw/task_allocation/subtask_selection_probability.hpp"
 #include "rcppsw/metrics/tasks/allocation_metrics.hpp"
+#include "rcppsw/task_allocation/task_graph_vertex.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -45,8 +46,12 @@ class executable_task;
  *
  * @brief A task that is capable of being partitioned into two subtasks that
  * when executed in sequence have the sum effect as the parent task.
+ *
+ * This class MUST be instantiated inside of \ref task_graph_vertex, and be
+ * manipulated through shared_ptr.
  */
 class partitionable_task : public er::client,
+                           public std::enable_shared_from_this<executable_task>,
                            public metrics::tasks::allocation_metrics {
  public:
   partitionable_task(const std::shared_ptr<er::server>& server,
@@ -65,7 +70,7 @@ class partitionable_task : public er::client,
    * @brief Partition the task according to the configured method, and return a
    * new task to execute.
    */
-  executable_task* partition(void);
+  task_graph_vertex partition(void);
 
   /**
    * @brief Update the partition probalitity of the current task.
@@ -87,24 +92,26 @@ class partitionable_task : public er::client,
    * @brief Set subtask that was most recently selected to run when partitioning
    * was employed. Needed for some subtask selection methods.
    */
-  void last_partition(executable_task* last_partition) {
+  void last_partition(const task_graph_vertex& last_partition) {
     m_last_partition = last_partition;
   }
-  void partition1(executable_task* partition1) { m_partition1 = partition1; }
-  void partition2(executable_task* partition2) { m_partition2 = partition2; }
+  void partition1(const task_graph_vertex& partition1) { m_partition1 = partition1; }
+  void partition2(const task_graph_vertex& partition2) { m_partition2 = partition2; }
 
-  executable_task* partition1(void) const { return m_partition1; }
-  executable_task* partition2(void) const { return m_partition2; }
+  const task_graph_vertex& partition1(void) const { return m_partition1; }
+  const task_graph_vertex& partition2(void) const { return m_partition2; }
 
  private:
-  bool m_always_partition;
-  bool m_never_partition;
-  bool m_employed_partitioning{false};
-  executable_task* m_partition1{nullptr};
-  executable_task* m_partition2{nullptr};
-  executable_task* m_last_partition{nullptr};
+  // clang-format off
+  bool                          m_always_partition;
+  bool                          m_never_partition;
+  bool                          m_employed_partitioning{false};
+  task_graph_vertex               m_partition1{nullptr};
+  task_graph_vertex               m_partition2{nullptr};
+  task_graph_vertex               m_last_partition{nullptr};
   subtask_selection_probability m_selection_prob;
-  partition_probability m_partition_prob;
+  partition_probability         m_partition_prob;
+  // clang-format on
 };
 
 NS_END(task_allocation, rcppsw);

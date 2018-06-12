@@ -36,9 +36,8 @@ partitionable_polled_task::partitionable_polled_task(
     const std::shared_ptr<er::server>& server,
     const std::string& name,
     const struct partitionable_task_params* c_params,
-    std::unique_ptr<taskable>& mechanism,
-    polled_task* parent)
-    : polled_task(name, c_params, mechanism, parent),
+    std::unique_ptr<taskable>& mechanism)
+    : polled_task(name, c_params, mechanism),
       partitionable_task(server, c_params) {}
 
 void partitionable_polled_task::init_random(int lb, int ub) {

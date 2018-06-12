@@ -27,6 +27,7 @@
 #include <string>
 #include "rcppsw/task_allocation/logical_task.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
+#include "rcppsw/task_allocation/task_graph_vertex.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -47,12 +48,14 @@ struct task_params;
  *   only made to be executed once, then this field is unused.
  * - A method of decomposing this (possibly decomposable) task into a sequence
  *   of simpler tasks. Each "simpler" task can have a parent.
+ *
+ * This class is MUST be instantiated inside of \ref task_graph_vertex, and be
+ * manipulated through shared_ptr.
  */
 class executable_task : public logical_task {
  public:
   executable_task(const std::string& name,
-                  const struct task_params* c_params,
-                  executable_task* parent);
+                  const struct task_params* c_params);
   executable_task(const executable_task& other);
 
   ~executable_task(void) override;
@@ -117,11 +120,6 @@ class executable_task : public logical_task {
    * @brief Get the last execution time of the task.
    */
   double last_exec_time(void) const { return m_last_exec_time; }
-
-  /**
-   * @brief Define how to partition the task. Does nothing by default.
-   */
-  virtual executable_task* partition(void) { return nullptr; }
 
   /**
    * @brief Get if a task is currently atomic (i.e. not abortable).

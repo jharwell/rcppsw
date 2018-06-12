@@ -68,7 +68,7 @@ void partitionable_task::update_partition_prob(const time_estimate& task,
   m_partition_prob.calc(task, subtask1, subtask2);
 }
 
-executable_task* partitionable_task::partition(void) {
+task_graph_vertex partitionable_task::partition(void) {
   ER_ASSERT(!(m_always_partition && m_never_partition),
             "FATAL: cannot ALWAYS and NEVER partition");
 
@@ -80,21 +80,21 @@ executable_task* partitionable_task::partition(void) {
   } else {
     partition_prob = m_partition_prob.last_result();
   }
+  std::string name = dynamic_cast<executable_task*>(this)->name();
 
   ER_NOM("Task '%s': partition_method=%s partition_prob=%f",
-         m_partition1->parent()->name().c_str(),
+         name.c_str(),
          m_partition_prob.method().c_str(),
          partition_prob);
 
   /* We chose not to employ partitioning on the next task allocation */
   if (partition_prob <= static_cast<double>(random()) / RAND_MAX) {
-    ER_NOM("Not employing partitioning: Return task '%s'",
-           m_partition1->parent()->name().c_str());
+    ER_NOM("Not employing partitioning: Return task '%s'", name.c_str());
     m_employed_partitioning = false;
-    return static_cast<executable_task*>(m_partition1->parent());
+    return shared_from_this();
   }
   m_employed_partitioning = true;
-  executable_task* ret = nullptr;
+  task_graph_vertex ret = nullptr;
 
   /* We have chosen to employ partitioning */
   double prob_12, prob_21;
@@ -114,7 +114,7 @@ executable_task* partitionable_task::partition(void) {
   ER_NOM(
       "Task '%s': selection_method=%s subtask1->subtask2 "
       "prob=%f,subtask2->subtask1 prob=%f",
-      m_partition1->parent()->name().c_str(),
+      name.c_str(),
       m_selection_prob.method().c_str(),
       prob_12,
       prob_21);

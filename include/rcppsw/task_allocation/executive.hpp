@@ -31,6 +31,7 @@
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
+class task_decomposition_graph;
 
 /*******************************************************************************
  * Class Definitions
@@ -43,8 +44,10 @@ NS_START(rcppsw, task_allocation);
  */
 class executive : public rcppsw::er::client {
  public:
+  using event_cb = std::function<void(const task_graph_vertex&)>;
+
   executive(const std::shared_ptr<rcppsw::er::server>& server,
-            executable_task* root);
+            const std::shared_ptr<task_decomposition_graph>& graph);
   ~executive(void) override;
 
   executive& operator=(const executive& other) = delete;
@@ -58,7 +61,7 @@ class executive : public rcppsw::er::client {
   /**
    * @brief Get the task currently being run.
    */
-  executable_task* current_task(void) const { return m_current_task; }
+  const task_graph_vertex& current_task(void) const { return m_current_task; }
 
   /**
    * @brief Set an optional callback that will be run when a task is aborted.
@@ -66,9 +69,8 @@ class executive : public rcppsw::er::client {
    * The callback will be passed the task that was aborted, so if task-specific
    * abort callbacks are needed, they can be implemented that way.
    */
-  void task_abort_cleanup(std::function<void(executable_task* const)> cb);
-  const std::function<void(executable_task* const)>& task_abort_cleanup(
-      void) const;
+  void task_abort_cleanup(event_cb cb) { m_task_abort_cleanup = cb; }
+  const event_cb& task_abort_cleanup(void) const { return m_task_abort_cleanup; }
 
   /**
    * @brief Set an optional callback that will be run when a new task allocation
@@ -76,9 +78,8 @@ class executive : public rcppsw::er::client {
    *
    * The callback will be passed a pointer to the task that was just allocated.
    */
-  void task_alloc_notify(std::function<void(executable_task* const)> cb);
-  const std::function<void(executable_task* const)>& task_alloc_notify(
-      void) const;
+  void task_alloc_notify(event_cb cb) { m_task_alloc_notify = cb; }
+  const event_cb& task_alloc_notify(void) const { return m_task_alloc_notify; }
 
   /**
    * @brief Set an optional callback that will be run when a task finishes.
@@ -86,38 +87,50 @@ class executive : public rcppsw::er::client {
    * The callback will be passed a pointer to the task that was just finished,
    * before the task is reset.
    */
-  void task_finish_notify(std::function<void(executable_task* const)> cb);
-  const std::function<void(executable_task* const)>& task_finish_notify(
-      void) const;
+  void task_finish_notify(event_cb cb) { m_task_finish_notify = cb; }
+  const event_cb& task_finish_notify(void) const { return m_task_finish_notify; }
 
   /**
    * @brief Get the last task that was executed before the current one.
    */
-  const executable_task* last_task(void) const { return m_last_task; }
+  const task_graph_vertex& last_task(void) const { return m_last_task; }
+
+  /**
+   * @brief Get the parent task of the specified one.
+   */
+  const task_graph_vertex& parent_task(const task_graph_vertex& task);
 
  protected:
-  executable_task* root(void) const { return mc_root; }
-  void current_task(executable_task* current_task) {
+  const task_graph_vertex& root_task(void) const;
+  void current_task(const task_graph_vertex& current_task) {
     m_current_task = current_task;
   }
   /**
    * @brief After the current task is aborted or finished, figured what the next
    * task to run should be and return it.
+   *
+   * Note that it is only safe to return a reference to a node within the task
+   * graph because the executive only works with static graphs (i.e. those that
+   * do not change during runtime).
    */
-  executable_task* get_next_task(executable_task* last_task);
+  task_graph_vertex get_next_task(const task_graph_vertex& last_task);
 
   /**
    * @brief Get the probability of aborting the specified task.
    */
-  double task_abort_prob(executable_task* task);
+  double task_abort_prob(const task_graph_vertex& task);
+
+  std::shared_ptr<task_decomposition_graph> graph(void) const { return m_graph; }
 
  private:
-  executable_task* m_current_task{nullptr};
-  std::function<void(executable_task* const)> m_task_abort_cleanup{nullptr};
-  std::function<void(executable_task* const)> m_task_alloc_notify{nullptr};
-  std::function<void(executable_task* const)> m_task_finish_notify{nullptr};
-  executable_task* const mc_root;
-  executable_task* m_last_task{nullptr};
+  // clang-format off
+  task_graph_vertex                         m_current_task{nullptr};
+  task_graph_vertex                         m_last_task{nullptr};
+  event_cb                                  m_task_abort_cleanup{nullptr};
+  event_cb                                  m_task_alloc_notify{nullptr};
+  event_cb                                  m_task_finish_notify{nullptr};
+  std::shared_ptr<task_decomposition_graph> m_graph;
+  // clang-format on
 };
 
 NS_END(task_allocation, rcppsw);

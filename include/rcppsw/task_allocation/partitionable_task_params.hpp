@@ -24,7 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include "rcppsw/task_allocation/task_params.hpp"
 #include "rcppsw/task_allocation/subtask_selection_params.hpp"
 #include "rcppsw/task_allocation/partitioning_params.hpp"

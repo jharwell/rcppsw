@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/executive.hpp"
+#include "rcppsw/task_allocation/task_graph_vertex.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -34,6 +35,7 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+
 /**
  * @class polled_executive
  * @ingroup task_allocation
@@ -44,15 +46,15 @@ NS_START(rcppsw, task_allocation);
 class polled_executive : public executive {
  public:
   polled_executive(const std::shared_ptr<rcppsw::er::server>& server,
-                   executable_task* root)
-      : executive(server, root) {}
+                   const std::shared_ptr<task_decomposition_graph>& graph)
+      : executive(server, graph) {}
 
   void run(void) override;
 
  private:
-  void handle_task_start(class polled_task* new_task);
-  void handle_task_abort(class polled_task* task);
-  void handle_task_finish(class polled_task* task);
+  void handle_task_start(task_graph_vertex new_task);
+  void handle_task_abort(task_graph_vertex task);
+  void handle_task_finish(task_graph_vertex task);
 };
 
 NS_END(task_allocation, rcppsw);

@@ -22,6 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/executive.hpp"
+#include "rcppsw/task_allocation/partitionable_task.hpp"
+#include "rcppsw/task_allocation/task_decomposition_graph.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -32,8 +34,8 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 executive::executive(const std::shared_ptr<rcppsw::er::server>& server,
-                     executable_task* root)
-    : client(server), mc_root(root) {
+                     const std::shared_ptr<task_decomposition_graph>& graph)
+    : client(server), m_graph(graph) {
   client::insmod("task_executive",
                  rcppsw::er::er_lvl::DIAG,
                  rcppsw::er::er_lvl::NOM);
@@ -44,36 +46,7 @@ executive::~executive(void) = default;
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void executive::task_abort_cleanup(
-    std::function<void(executable_task* const)> cb) {
-  m_task_abort_cleanup = std::move(cb);
-} /* task_abort_cleanup() */
-
-__const const std::function<void(executable_task* const)>& executive::
-    task_abort_cleanup(void) const {
-  return m_task_abort_cleanup;
-} /* task_abort_cleanup() */
-
-void executive::task_alloc_notify(std::function<void(executable_task* const)> cb) {
-  m_task_alloc_notify = std::move(cb);
-} /* task_alloc_notify() */
-
-__const const std::function<void(executable_task* const)>& executive::
-    task_alloc_notify(void) const {
-  return m_task_alloc_notify;
-} /* task_alloc_notify() */
-
-void executive::task_finish_notify(
-    std::function<void(executable_task* const)> cb) {
-  m_task_finish_notify = std::move(cb);
-} /* task_alloc_notify() */
-
-__const const std::function<void(executable_task* const)>& executive::
-    task_finish_notify(void) const {
-  return m_task_finish_notify;
-} /* task_alloc_notify() */
-
-executable_task* executive::get_next_task(executable_task* last_task) {
+task_graph_vertex executive::get_next_task(const task_graph_vertex& last_task) {
   m_last_task = last_task;
   /*
    * We are being run for the first time, so run the partitioning algorithm on
@@ -84,36 +57,50 @@ executable_task* executive::get_next_task(executable_task* last_task) {
      * The root was not partitionable, so we only have 1 choice for the next
      * task.
      */
-    if (mc_root->is_atomic()) {
-      return mc_root;
+    if (m_graph->root()->is_atomic()) {
+      return m_graph->root();
     }
     /*
      * The root IS partitionable, so partition it and (possibly) return a
      * subtask.
      */
-    return mc_root->partition();
+    return std::dynamic_pointer_cast<partitionable_task>(
+        m_graph->root())->partition();
   }
-  ER_ASSERT(m_current_task->parent(), "FATAL: All tasks must have a parent");
+  ER_ASSERT(task_decomposition_graph::vertex_parent(*m_graph, m_current_task),
+            "FATAL: All tasks must have a parent");
   if (!m_current_task->is_partitionable()) {
-    if (m_current_task->parent() != m_current_task) {
-      ER_ASSERT(static_cast<executable_task*>(m_current_task->parent())
+    if (task_decomposition_graph::vertex_parent(*m_graph,
+                                                m_current_task) != m_current_task) {
+      ER_ASSERT(task_decomposition_graph::vertex_parent(*m_graph, m_current_task)
                     ->is_partitionable(),
                 "FATAL: Non-partitionable tasks must have a partitionable "
                 "parent");
-      return static_cast<executable_task*>(m_current_task->parent())->partition();
+      return std::dynamic_pointer_cast<partitionable_task>(
+          task_decomposition_graph::vertex_parent(*m_graph,
+                                                  m_current_task))->partition();
     }
     /* single atomic task in hierarchy */
-    return static_cast<executable_task*>(m_current_task);
+    return m_current_task;
   } else {
-    return m_current_task->partition();
+    return std::dynamic_pointer_cast<partitionable_task>(
+        m_current_task)->partition();
   }
 } /* get_next_task() */
 
-double executive::task_abort_prob(executable_task* task) {
+double executive::task_abort_prob(const task_graph_vertex& task) {
   if (task->is_atomic()) {
     return 0.0;
   }
   return task->calc_abort_prob();
 } /* task_abort_prob() */
+
+const task_graph_vertex& executive::root_task(void) const {
+  return m_graph->root();
+} /* root_task() */
+
+const task_graph_vertex& executive::parent_task(const task_graph_vertex& v) {
+  return task_decomposition_graph::vertex_parent(m_graph, v);
+} /* parent_task() */
 
 NS_END(task_allocation, rcppsw);

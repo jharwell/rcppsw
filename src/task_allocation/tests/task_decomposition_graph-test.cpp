@@ -1,5 +1,5 @@
 /**
- * @file executable_task.cpp
+ * @file task_decomposition_graph-test.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -21,32 +21,21 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/executable_task.hpp"
-#include "rcppsw/task_allocation/task_params.hpp"
+#define CATCH_CONFIG_MAIN
+#define CATCH_CONFIG_PREFIX_ALL
+#include <catch.hpp>
+#include "rcppsw/task_allocation/task_decomposition_graph.hpp"
+#include "rcppsw/er/server.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+namespace ta = rcppsw::task_allocation;
+namespace er = rcppsw::er;
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Test Functions
  ******************************************************************************/
-executable_task::executable_task(const std::string& name,
-                                 const struct task_params* c_params)
-    : logical_task(name),
-      m_interface_estimate(c_params->estimation_alpha),
-      m_exec_estimate(c_params->estimation_alpha) {}
-
-executable_task::executable_task(const executable_task& other)
-    : logical_task(other),
-      m_interface_time(other.m_interface_time),
-      m_interface_start_time(other.m_interface_start_time),
-      m_exec_time(other.m_exec_time),
-      m_exec_start_time(other.m_exec_start_time),
-      m_interface_estimate(other.m_interface_estimate),
-      m_exec_estimate(other.m_exec_estimate) {}
-
-executable_task::~executable_task(void) = default;
-
-NS_END(task_allocation, rcppsw);
+CATCH_TEST_CASE("sanity-test", "[task_decomposition_graph]") {
+  ta::task_decomposition_graph g(er::g_server);
+}
