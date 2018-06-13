@@ -34,9 +34,18 @@ NS_START(rcppsw, utils);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class color
+ * @ingroup utils
+ *
+ * @brief A simple RGBA class representing colors as 4 8-bit numbers.
+ *
+ * Should be used to make color usage agnostic across projects, and not tied to
+ * a particular platform, simulator, etc.
+ */
 class color {
  public:
-  color(void) {}
+  color(void) = default;
 
   static color kBLACK;
   static color kWHITE;
