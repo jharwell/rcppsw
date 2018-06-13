@@ -78,13 +78,13 @@ class _led_actuator {
   set_color(int id, utils::color color) {
     if (-1 == id) {
       m_leds->SetAllColors(argos::CColor(color.red(),
-                                         color.blue(),
                                          color.green(),
+                                         color.blue(),
                                          color.alpha()));
     } else {
       m_leds->SetSingleColor(id, argos::CColor(color.red(),
-                                               color.blue(),
                                                color.green(),
+                                               color.blue(),
                                                color.alpha()));
     }
     return OK;
