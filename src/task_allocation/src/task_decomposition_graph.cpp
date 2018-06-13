@@ -35,7 +35,7 @@ NS_START(rcppsw, task_allocation);
 task_decomposition_graph::task_decomposition_graph(
     const std::shared_ptr<er::server>& server) :
     client(server), m_root(), m_graph() {
-  insmod("task_decomposition_graph", er::er_lvl::DIAG, er::er_lvl::NOM);
+  insmod("tdg", er::er_lvl::DIAG, er::er_lvl::VER);
 }
 
 /*******************************************************************************
@@ -44,27 +44,7 @@ task_decomposition_graph::task_decomposition_graph(
 const task_graph_vertex& task_decomposition_graph::vertex_parent(
     const task_decomposition_graph& graph,
     const task_graph_vertex& vertex) {
-
-  /*
-   * First, find the vertex descriptor for the vertex, which is what we need to
-   * interact with the graph.
-   */
-  vertex_iterator v_i, v_end;
-  boost::tie(v_i, v_end) = boost::vertices(graph.m_graph);
-  auto found = std::find_if(v_i,
-                             v_end,
-                             [&](const task_decomposition_graph::vertex& v) {
-                               return vertex == graph.m_graph[v]; });
-  assert(found != v_end);
-
-  /*
-   * Now, we can just look in the incident edges for the vertex and return the
-   * one we find (if there is more than 1, that's an error).
-   */
-  in_edge_iterator ie, ie_end;
-  boost::tie(ie, ie_end) = boost::in_edges(*found, graph.m_graph);
-  assert(1 == ie_end - ie);
-  return graph.m_graph[boost::source(*ie, graph.m_graph)];
+  return graph.vertex_parent(vertex);
 } /* vertex_parent() */
 
 const task_graph_vertex& task_decomposition_graph::vertex_parent(
@@ -76,9 +56,36 @@ const task_graph_vertex& task_decomposition_graph::vertex_parent(
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
+const task_graph_vertex& task_decomposition_graph::vertex_parent(
+    const task_graph_vertex& vertex) const {
+
+  /*
+   * First, find the vertex descriptor for the vertex, which is what we need to
+   * interact with the graph.
+   */
+  vertex_iterator v_i, v_end;
+  boost::tie(v_i, v_end) = boost::vertices(m_graph);
+  auto found = std::find_if(v_i,
+                            v_end,
+                            [&](const task_decomposition_graph::vertex& v) {
+                              return vertex == m_graph[v]; });
+  ER_ASSERT(found != v_end, "FATAL: No such vertex %s found in graph",
+            vertex->name().c_str());
+
+  /*
+   * Now, we can just look in the incident edges for the vertex and return the
+   * one we find (if there is more than 1, that's an error).
+   */
+  in_edge_iterator ie, ie_end;
+  boost::tie(ie, ie_end) = boost::in_edges(*found, m_graph);
+  ER_ASSERT(1 == ie_end - ie, "FATAL: Vertex %s has more than 1 parent",
+            vertex->name().c_str());
+  return m_graph[boost::source(*ie, m_graph)];
+} /* vertex_parent() */
+
 status_t task_decomposition_graph::set_root(const task_graph_vertex& v) {
   vertex added;
-  ER_CHECK(boost::num_edges(m_graph) >= 1, "ERROR: Root already set for graph!");
+  ER_CHECK(0 == boost::num_edges(m_graph), "ERROR: Root already set for graph!");
   added = boost::add_vertex(v, m_graph);
   m_root = v;
   boost::add_edge(added, added, m_graph);
@@ -101,13 +108,18 @@ status_t task_decomposition_graph::set_children(const std::string& parent,
                          });
   ER_CHECK(it != v_end, "ERROR: No such vertex %s in graph", parent.c_str());
 
-  ER_CHECK(0 == boost::out_degree(*it, m_graph),
-           "ERROR: Graph vertex %s already has children",
-           m_graph[*it]->name().c_str());
+  /* The root always has "children", in the sense it points to itself */
+  if (m_graph[*it] != m_root) {
+    ER_CHECK(0 == boost::out_degree(*it, m_graph),
+             "ERROR: Graph vertex %s already has children",
+             m_graph[*it]->name().c_str());
+  }
 
   for (auto& c : children) {
     vertex new_v = boost::add_vertex(c, m_graph);
-    boost::add_edge(*v_i, new_v, m_graph);
+    ER_VER("Add edge %s -> %s", m_graph[*it]->name().c_str(),
+           m_graph[new_v]->name().c_str());
+    boost::add_edge(*it, new_v, m_graph);
   } /* for(c..) */
   return OK;
 

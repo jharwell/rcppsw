@@ -48,7 +48,6 @@ compile_options.json
 
 # Build process
 build
-docs/html
-docs/latex
 .clang-format
 .clang-tidy
+.gdb_history

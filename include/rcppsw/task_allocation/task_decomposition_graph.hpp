@@ -73,7 +73,9 @@ class task_decomposition_graph : public er::client {
                                                 const task_graph_vertex& node);
   static const task_graph_vertex& vertex_parent(
       const std::shared_ptr<task_decomposition_graph>& graph,
-      const task_graph_vertex& nodee);
+      const task_graph_vertex& vertex);
+  const task_graph_vertex& vertex_parent(
+      const task_graph_vertex& vertex) const;
 
   explicit task_decomposition_graph(const std::shared_ptr<er::server>& server);
 
