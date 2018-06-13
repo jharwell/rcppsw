@@ -68,6 +68,12 @@ foreach(d ${${target}_robotics_SUBDIRS})
   if ("${WITH_HAL_CONFIG}" MATCHES "argos-footbot")
     target_compile_definitions(${target}-${d} PUBLIC HAL_CONFIG=HAL_CONFIG_ARGOS_FOOTBOT)
     target_include_directories(${target}-${d} PUBLIC /usr/include/lua5.2)
+
+    if (BUILD_ON_MSI)
+      target_include_directories(${target}-${d} PUBLIC ${MSI_ARGOS_INSTALL_PREFIX}/include)
+      target_compile_options(${target}-${d} PUBLIC -Wno-missing-include-dirs)
+      link_directories(${MSI_ARGOS_INSTALL_PREFIX}/lib/argos3)
+    endif()
   endif()
 endforeach()
 

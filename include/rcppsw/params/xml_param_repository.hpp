@@ -91,7 +91,6 @@ class xml_param_repository {
    */
   template<typename T>
   const T* parse_results(const std::string& name) {
-    std::type_index i(typeid(T));
     return static_cast<const T*>(m_parsers[name]->parse_results());
   }
 

@@ -43,11 +43,6 @@ exist in Boost, or that build on what boost provides. Includes such things as:
 
    - boost 1.58
 
-3. Set up an ssh key for password-less connection to github (this is for the
-   [cmake config](https://github.com/jharwell/cmake-config) submodule). Yes I
-   know that it can be done without ssh, but I set it up this way so I don't
-   have to type my github password ever.
-
 ## Post-cloning
 
 1. Check out the development branch, as that has not only the latest semi-stable
@@ -55,7 +50,7 @@ exist in Boost, or that build on what boost provides. Includes such things as:
 
         git checkout devel
 
-2. Pull in the cmake project scaffolding:
+2. Pull in the cmake project scaffolding and other submodules:
 
         git submodule update --init --recursive  --remote
 
