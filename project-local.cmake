@@ -42,6 +42,7 @@ list(APPEND ${target}_SUBDIRS task_allocation)
 list(APPEND ${target}_SUBDIRS params)
 list(APPEND ${target}_SUBDIRS metrics)
 list(APPEND ${target}_SUBDIRS ds)
+list(APPEND ${target}_SUBDIRS math)
 
 if (WITH_MPI)
   list(APPEND ${target}_SUBDIRS multiprocess)
@@ -97,6 +98,7 @@ if (NOT TARGET ${target})
     $<TARGET_OBJECTS:${target}-kinematics2D>
     $<TARGET_OBJECTS:${target}-task_allocation>
     $<TARGET_OBJECTS:${target}-params>
+    $<TARGET_OBJECTS:${target}-math>
     $<TARGET_OBJECTS:${target}-metrics>
     $<TARGET_OBJECTS:${target}-control>)
   target_link_libraries(${target} "${${target}_LIBS}")
