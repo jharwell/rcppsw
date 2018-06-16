@@ -26,8 +26,9 @@
  ******************************************************************************/
 #include <iosfwd>
 #include <string>
-#include "rcsw/common/fpc.h"
+#include <ext/ticpp/ticpp.h>
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -42,9 +43,9 @@ struct base_params;
  ******************************************************************************/
 #define XML_PARAM_STR(container, name) std::string(#name) << "=" << (container).name
 #define XML_PARSE_PARAM(node, container, name)                          \
-  argos::GetNodeAttribute((node),                                       \
-                          #name,                                      \
-                          (container).name)
+  this->get_node_attribute((node),                                       \
+                           #name,                                       \
+                           (container).name)
 
 /*******************************************************************************
  * Class Definitions
@@ -57,10 +58,9 @@ struct base_params;
  * \ref base_params derived parameter structure.
  *
  */
-class xml_param_parser {
+class xml_param_parser : public er::client {
  public:
-  explicit xml_param_parser(uint level) : m_level(level) {}
-
+  xml_param_parser(const std::shared_ptr<er::server>& server, uint level);
   virtual ~xml_param_parser(void) = default;
 
   static constexpr uint kColumnWidth = 100;
@@ -81,15 +81,7 @@ class xml_param_parser {
    *
    * @return The constructed header.
    */
-  std::string build_header(void) const {
-    FPC_CHECK("", level() > 0, level() <= kHeader4);
-    uint width = kColumnWidth  - level() * 20;
-    std::string prettiness(width, '=');
-    std::string spaces(width/2 - xml_root().size()/2 - 1, ' ');
-    return prettiness + "\n"
-        + spaces + "<" + xml_root() + ">" +
-        "\n" + prettiness + "\n";
-  }
+  std::string build_header(void) const;
 
   /**
    * @brief Build a footer suitable for inclusion in dumping parsed parameters
@@ -97,15 +89,7 @@ class xml_param_parser {
    *
    * @return The constructed footer.
    */
-  std::string build_footer(void) const {
-    FPC_CHECK("", level() > 0, level() <= kHeader4);
-    uint width = kColumnWidth - level() * 20;
-    std::string prettiness(width, '=');
-    std::string spaces(width/2 - xml_root().size()/2 - 1, ' ');
-    return prettiness + "\n"
-        + spaces + "</" + xml_root() + ">" +
-        "\n" + prettiness + "\n";
-  }
+  std::string build_footer(void) const;
 
   /**
    * @brief Parse the provided XML node into an internal representation (should
@@ -137,6 +121,12 @@ class xml_param_parser {
 
   uint level(void) const { return m_level; }
   void level(uint level) { m_level = level; }
+
+  ticpp::Element& get_node(ticpp::Element& node, const std::string& tag);
+  template<typename T>
+  void get_node_attribute(ticpp::Element& node, const std::string attr, T& buf) {
+    node.GetAttribute(attr, &buf, true);
+  }
 
  private:
   /**

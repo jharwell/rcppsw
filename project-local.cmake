@@ -31,6 +31,10 @@ set(Boost_USE_STATIC_LIBS OFF)
 ################################################################################
 set(${target}_INCLUDE_DIRS "${${target}_INC_PATH}" ${rcsw_INCLUDE_DIRS})
 
+# Only for external projects under ext/ which we don't have control over, so
+# we want to suppress their warnings.
+set(${target}_SYS_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR})
+
 ################################################################################
 # Submodules                                                                   #
 ################################################################################
@@ -51,6 +55,7 @@ endif()
 foreach(d ${${target}_SUBDIRS})
   add_subdirectory(src/${d})
   target_include_directories(${target}-${d} PUBLIC "${${target}_INCLUDE_DIRS}")
+  target_include_directories(${target}-${d} SYSTEM PUBLIC "${${target}_SYS_INCLUDE_DIRS}")
 endforeach()
 
 list(APPEND ${target}_pattern_SUBDIRS state_machine)
@@ -58,6 +63,7 @@ list(APPEND ${target}_pattern_SUBDIRS state_machine)
 foreach(d ${${target}_pattern_SUBDIRS})
   add_subdirectory(src/patterns/${d})
   target_include_directories(${target}-${d} PUBLIC "${${target}_INCLUDE_DIRS}")
+  target_include_directories(${target}-${d} SYSTEM PUBLIC "${${target}_SYS_INCLUDE_DIRS}")
 endforeach()
 
 list(APPEND ${target}_robotics_SUBDIRS steering2D)
@@ -66,12 +72,13 @@ list(APPEND ${target}_robotics_SUBDIRS kinematics2D)
 foreach(d ${${target}_robotics_SUBDIRS})
   add_subdirectory(src/robotics/${d})
   target_include_directories(${target}-${d} PUBLIC "${${target}_INCLUDE_DIRS}")
+  target_include_directories(${target}-${d} SYSTEM PUBLIC "${${target}_SYS_INCLUDE_DIRS}")
   if ("${WITH_HAL_CONFIG}" MATCHES "argos-footbot")
     target_compile_definitions(${target}-${d} PUBLIC HAL_CONFIG=HAL_CONFIG_ARGOS_FOOTBOT)
     target_include_directories(${target}-${d} PUBLIC /usr/include/lua5.2)
 
     if (BUILD_ON_MSI)
-      target_include_directories(${target}-${d} PUBLIC ${MSI_ARGOS_INSTALL_PREFIX}/include)
+      target_include_directories(${target}-${d} SYSTEM PUBLIC ${MSI_ARGOS_INSTALL_PREFIX}/include)
       target_compile_options(${target}-${d} PUBLIC -Wno-missing-include-dirs)
       link_directories(${MSI_ARGOS_INSTALL_PREFIX}/lib/argos3)
     endif()
