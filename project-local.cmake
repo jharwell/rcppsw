@@ -33,7 +33,7 @@ set(${target}_INCLUDE_DIRS "${${target}_INC_PATH}" ${rcsw_INCLUDE_DIRS})
 
 # Only for external projects under ext/ which we don't have control over, so
 # we want to suppress their warnings.
-set(${target}_SYS_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR})
+set(${target}_SYS_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR})
 
 ################################################################################
 # Submodules                                                                   #
@@ -117,7 +117,5 @@ endif()
 ################################################################################
 if (NOT IS_ROOT_PROJECT)
   set(${target}_INCLUDE_DIRS "${${target}_INC_PATH}" ${rcsw_INCLUDE_DIRS} PARENT_SCOPE)
-  set(${target}_SYS_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR} PARENT_SCOPE)
   set(${target}_LIBS "${${target}_LIBS}" PARENT_SCOPE)
-  message("rcppsw dirs: ${rcppsw_SYS_INCLUDE_DIRS}")
 endif()
