@@ -55,7 +55,7 @@ class executive_xml_parser: public rcppsw::params::xml_param_parser {
    * @brief The root tag that all task executive parameters should lie under in
    * the XML tree.
    */
-  static constexpr char kXMLRoot[] = "executive";
+  static constexpr char kXMLRoot[] = "task_executive";
 
   void show(std::ostream& stream) const override;
   bool validate(void) const override;

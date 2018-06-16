@@ -122,11 +122,36 @@ class xml_param_parser : public er::client {
   uint level(void) const { return m_level; }
   void level(uint level) { m_level = level; }
 
+  /**
+   * @brief Get the node that is inside the specified one, designated by the
+   * specified tag.
+   *
+   * If no such node exists, an assertion halts the program.
+   */
   ticpp::Element& get_node(ticpp::Element& node, const std::string& tag);
+
+  /**
+   * @brief Get an attribute inside a node.
+   *
+   * @param node The node to search.
+   * @param attr The attribute name.
+   * @param buf  The result buffer.
+   */
   template<typename T>
-  void get_node_attribute(ticpp::Element& node, const std::string attr, T& buf) {
+  void get_node_attribute(ticpp::Element& node,
+                          const std::string& attr,
+                          T& buf) {
     node.GetAttribute(attr, &buf, true);
   }
+
+  /**
+   * @brief Get a boolean attribute inside a node (bools have to be handed
+   * specially, or at least I can't figure out how to make them also work the
+   * template version).
+   */
+  void get_node_attribute(ticpp::Element& node,
+                          const std::string& attr,
+                          bool& buf);
 
  private:
   /**
