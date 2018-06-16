@@ -22,6 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/params/xml_param_parser.hpp"
+#include <string>
+
 #include "rcsw/common/fpc.h"
 
 /*******************************************************************************
@@ -71,5 +73,21 @@ ticpp::Element& xml_param_parser::get_node(ticpp::Element& node,
             node.Value().c_str());
   return *it;
 } /* get_node() */
+
+void xml_param_parser::get_node_attribute(ticpp::Element &node,
+                                          const std::string& attr,
+                                          bool &buf) {
+  std::string tmp;
+  node.GetAttribute(attr, &tmp, true);
+  if ("true" == tmp) {
+    buf = true;
+  } else if ("false" == tmp) {
+    buf = false;
+  } else {
+    ER_FATAL_SENTINEL("Cannot convert %s into a bool. Accepted values are ['true', 'false']",
+                      tmp.c_str());
+  }
+} /* get_node_attribute() */
+
 
 NS_END(params, rcppsw);
