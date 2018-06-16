@@ -39,7 +39,7 @@ avoidance_force::avoidance_force(const struct avoidance_force_params* params)
  * Member Functions
  ******************************************************************************/
 argos::CVector2 avoidance_force::operator()(
-    __unused const boid& b,
+    __rcsw_unused const boid& b,
     const argos::CVector2& closest_obstacle) const {
   if (closest_obstacle.Length() > 0) {
     argos::CVector2 avoidance = -closest_obstacle;

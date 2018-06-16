@@ -85,7 +85,7 @@ class grid2D_ptr : public base_grid2D<T> {
     index_range y1(y_range.first, y_range.second, 1);
     return grid_view<T*>(m_cells[indices[x1][y1]]);
   }
-  __pure T& access(size_t i, size_t j) override {
+  __rcsw_pure T& access(size_t i, size_t j) override {
     return *m_cells[static_cast<index_range::index>(i)]
                    [static_cast<index_range::index>(j)];
   }

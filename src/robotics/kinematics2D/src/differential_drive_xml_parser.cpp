@@ -56,7 +56,7 @@ void differential_drive_xml_parser::show(std::ostream& stream) const {
          << build_footer();
 } /* show() */
 
-__pure bool differential_drive_xml_parser::validate(void) const {
+__rcsw_pure bool differential_drive_xml_parser::validate(void) const {
   return m_params.soft_turn_max.GetValue() > 0;
 } /* validate() */
 

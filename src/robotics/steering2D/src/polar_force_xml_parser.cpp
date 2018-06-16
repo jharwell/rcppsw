@@ -47,7 +47,7 @@ void polar_force_xml_parser::show(std::ostream& stream) const {
          << build_footer();
 } /* show() */
 
-__pure bool polar_force_xml_parser::validate(void) const {
+__rcsw_pure bool polar_force_xml_parser::validate(void) const {
   return m_params.max > 0.0;
 } /* validate() */
 

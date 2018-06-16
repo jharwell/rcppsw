@@ -51,7 +51,7 @@ void arrival_force_xml_parser::show(std::ostream& stream) const {
          << build_footer();
 } /* show() */
 
-__pure bool arrival_force_xml_parser::validate(void) const {
+__rcsw_pure bool arrival_force_xml_parser::validate(void) const {
   return m_params.slowing_radius > 0.0 && m_params.slowing_speed_min > 0.0;
 } /* validate() */
 
