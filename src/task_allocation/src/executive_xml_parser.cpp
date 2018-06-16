@@ -22,7 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/executive_xml_parser.hpp"
-#include <argos3/core/utility/configuration/argos_configuration.h>
+#include <ext/ticpp/ticpp.h>
+
 #include "rcppsw/utils/line_parser.hpp"
 
 /*******************************************************************************
@@ -40,19 +41,19 @@ constexpr char executive_xml_parser::kXMLRoot[];
  ******************************************************************************/
 void executive_xml_parser::parse(const ticpp::Element& node) {
   ticpp::Element enode =
-      argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
+      get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
 
   ticpp::Element anode =
-      argos::GetNode(const_cast<ticpp::Element&>(enode), "aborting");
+      get_node(const_cast<ticpp::Element&>(enode), "aborting");
   XML_PARSE_PARAM(anode, m_params.abort, reactivity);
   XML_PARSE_PARAM(anode, m_params.abort, offset);
 
   ticpp::Element tnode =
-      argos::GetNode(const_cast<ticpp::Element&>(enode), "tasks");
+      get_node(const_cast<ticpp::Element&>(enode), "tasks");
   XML_PARSE_PARAM(tnode, m_params, estimation_alpha);
 
   ticpp::Element pnode =
-      argos::GetNode(const_cast<ticpp::Element&>(enode), "partitioning");
+      get_node(const_cast<ticpp::Element&>(enode), "partitioning");
   XML_PARSE_PARAM(pnode, m_params.partitioning, reactivity);
   XML_PARSE_PARAM(pnode, m_params.partitioning, offset);
   XML_PARSE_PARAM(pnode, m_params.partitioning, method);
@@ -60,7 +61,7 @@ void executive_xml_parser::parse(const ticpp::Element& node) {
   XML_PARSE_PARAM(pnode, m_params.partitioning, never_partition);
 
   ticpp::Element snode =
-      argos::GetNode(const_cast<ticpp::Element&>(enode), "subtask_selection");
+      get_node(const_cast<ticpp::Element&>(enode), "subtask_selection");
   XML_PARSE_PARAM(snode, m_params.subtask_selection, reactivity);
   XML_PARSE_PARAM(snode, m_params.subtask_selection, offset);
   XML_PARSE_PARAM(snode, m_params.subtask_selection, method);

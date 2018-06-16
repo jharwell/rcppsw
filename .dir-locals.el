@@ -15,6 +15,9 @@
                     (add-to-list 'flycheck-clang-args "-fPIC")
                     (add-to-list 'flycheck-clang-definitions "HAL_CONFIG=HAL_CONFIG_ARGOS_FOOTBOT")
                     (add-to-list 'flycheck-clang-args "-std=c++14")
+                    (add-to-list 'flycheck-clang-args (concat "-isystem" (substitute-in-file-name
+                                                                          "$rcppsw")))
+
                     (setq flycheck-gcc-include-path includes-list)
                     (add-to-list 'flycheck-gcc-args "-fPIC")
                     (add-to-list 'flycheck-gcc-args "-std=c++14")
