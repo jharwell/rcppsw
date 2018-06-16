@@ -55,7 +55,7 @@ void force_calculator_xml_parser::show(std::ostream& stream) const {
          << build_footer();
 } /* show() */
 
-__pure bool force_calculator_xml_parser::validate(void) const {
+__rcsw_pure bool force_calculator_xml_parser::validate(void) const {
   return m_avoidance.validate() && m_arrival.validate() &&
          m_wander.validate() && m_polar.validate();
 } /* validate() */

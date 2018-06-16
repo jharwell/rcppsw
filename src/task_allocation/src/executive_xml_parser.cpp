@@ -84,7 +84,7 @@ void executive_xml_parser::show(std::ostream& stream) const {
          << build_footer();
 } /* show() */
 
-__pure bool executive_xml_parser::validate(void) const {
+__rcsw_pure bool executive_xml_parser::validate(void) const {
   return !(m_params.estimation_alpha <= 0.0 ||
            m_params.abort.reactivity <= 0.0 || m_params.abort.offset <= 0.0 ||
            m_params.partitioning.reactivity <= 0.0 ||

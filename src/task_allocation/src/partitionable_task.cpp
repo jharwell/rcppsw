@@ -51,7 +51,7 @@ partitionable_task::partitionable_task(
 /*******************************************************************************
  * Allocation Metrics
  ******************************************************************************/
-__pure bool partitionable_task::employed_partitioning(void) const {
+__rcsw_pure bool partitionable_task::employed_partitioning(void) const {
   return m_employed_partitioning;
 } /* employed_partitioning() */
 

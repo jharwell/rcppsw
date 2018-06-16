@@ -65,7 +65,7 @@ void server_mod::msg_report(const std::string& header,
   }
 } /* server_mod::msg_report() */
 
-__pure bool server_mod::will_report(const er_msg& msg, er_lvl::value lvl) const {
+__rcsw_pure bool server_mod::will_report(const er_msg& msg, er_lvl::value lvl) const {
   return (msg.lvl <= lvl);
 } /* will_report() */
 

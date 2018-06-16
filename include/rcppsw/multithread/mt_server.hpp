@@ -78,7 +78,7 @@ class mt_server : public er::server, public multithread::threadable {
    *
    * @return Unused.
    */
-  void* thread_main(__unused void* arg) override;
+  void* thread_main(__rcsw_unused void* arg) override;
 
   /**
    * @brief Report a message. Messages may or not actually be printed/logged,

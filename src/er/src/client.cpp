@@ -65,7 +65,7 @@ void __er_report__(server* server, const er_msg& msg) {
   server->report(msg);
 } /* __er_report__() */
 
-__pure bool __er_will_report__(const server* const server,
+__rcsw_pure bool __er_will_report__(const server* const server,
                                const boost::uuids::uuid& er_id,
                                const er_lvl::value& lvl) {
   er_msg m(er_id, lvl, "");

@@ -85,23 +85,23 @@ double subtask_selection_probability::calc(const time_estimate* subtask1,
   return 0.0;
 } /* calc() */
 
-__const double subtask_selection_probability::calc_random(void) {
+__rcsw_const double subtask_selection_probability::calc_random(void) {
   return 0.5;
 } /* calc_random() */
 
-__pure double subtask_selection_probability::calc_brutschy2014(
+__rcsw_pure double subtask_selection_probability::calc_brutschy2014(
     const time_estimate& int_est1,
     const time_estimate& int_est2) {
   return calc_sigmoid(int_est1, int_est2);
 } /* calc_brutschy2014() */
 
-__pure double subtask_selection_probability::calc_harwell2018(
+__rcsw_pure double subtask_selection_probability::calc_harwell2018(
     const time_estimate& exec_est1,
     const time_estimate& exec_est2) {
   return calc_sigmoid(exec_est2, exec_est1);
 } /* calc_harwell2018() */
 
-__pure double subtask_selection_probability::calc_sigmoid(
+__rcsw_pure double subtask_selection_probability::calc_sigmoid(
     const time_estimate& est1,
     const time_estimate& est2) {
   /*

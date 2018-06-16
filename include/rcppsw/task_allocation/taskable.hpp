@@ -79,7 +79,7 @@ class taskable {
   /**
    * @brief Start the task with the specified argument.
    */
-  virtual void task_start(__unused const taskable_argument* c_arg) = 0;
+  virtual void task_start(__rcsw_unused const taskable_argument* c_arg) = 0;
 };
 
 NS_END(task_allocation, rcppsw);

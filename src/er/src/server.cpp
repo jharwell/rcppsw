@@ -85,7 +85,7 @@ void server::dbg_ts_calculator(std::function<std::string(void)> cb) {
   m_dbg_ts_calculator = std::move(cb);
 } /* dbg_ts_calculator() */
 
-__const const std::function<std::string(void)>& server::dbg_ts_calculator(
+__rcsw_const const std::function<std::string(void)>& server::dbg_ts_calculator(
     void) const {
   return m_dbg_ts_calculator;
 } /* dbg_ts_calculator() */
@@ -94,7 +94,7 @@ void server::log_ts_calculator(std::function<std::string(void)> cb) {
   m_log_ts_calculator = std::move(cb);
 } /* log_ts_calculator() */
 
-__const const std::function<std::string(void)>& server::log_ts_calculator(
+__rcsw_const const std::function<std::string(void)>& server::log_ts_calculator(
     void) const {
   return m_log_ts_calculator;
 } /* log_ts_calculator() */
@@ -256,7 +256,7 @@ error:
 
 boost::uuids::uuid server::idgen(void) { return m_generator(); } /* idgen() */
 
-__const std::ostream& server::dbg_stream(void) { return std::cout; }
-__pure std::ofstream& server::log_stream(void) { return *m_logfile; }
+__rcsw_const std::ostream& server::dbg_stream(void) { return std::cout; }
+__rcsw_pure std::ofstream& server::log_stream(void) { return *m_logfile; }
 
 NS_END(er, rcpppsw);

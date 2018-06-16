@@ -51,7 +51,7 @@ class state_action0 : public state {
   ~state_action0(void) override = default;
 
   int invoke_state_action(base_fsm* sm,
-                          __unused const event_data*) const override {
+                          __rcsw_unused const event_data*) const override {
     /* Downcast the state machine and event data to the correct derived type */
     auto* derived_fsm = static_cast<SM*>(sm);
     return (derived_fsm->*Func)();

@@ -47,7 +47,7 @@ void mt_server::flush(void) {
   } /* while() */
 } /* flush() */
 
-void* mt_server::thread_main(__unused void* arg) {
+void* mt_server::thread_main(__rcsw_unused void* arg) {
   while (!terminated()) {
     while (0 == m_queue.size()) {
       sleep(1);

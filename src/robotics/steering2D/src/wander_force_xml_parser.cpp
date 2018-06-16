@@ -55,7 +55,7 @@ void wander_force_xml_parser::show(std::ostream& stream) const {
          << build_footer();
 } /* show() */
 
-__pure bool wander_force_xml_parser::validate(void) const {
+__rcsw_pure bool wander_force_xml_parser::validate(void) const {
   return m_params.circle_distance > 0.0 && m_params.circle_radius > 0.0 &&
          m_params.max_angle_delta < 360 && m_params.interval > 0;
 } /* validate() */
