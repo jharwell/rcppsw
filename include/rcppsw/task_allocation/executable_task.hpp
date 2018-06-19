@@ -61,6 +61,14 @@ class executable_task : public logical_task {
   ~executable_task(void) override;
 
   /**
+   * @brief Initialize the task with a random execution time estimate within the
+   * specified bounds.
+   */
+  void init_random(int lb, int ub) {
+    update_exec_estimate(random() % (ub - lb + 1) + lb);
+  }
+
+  /**
    * @brief Get the current estimate of the task's interface time.
    */
   const time_estimate& interface_estimate(void) const {

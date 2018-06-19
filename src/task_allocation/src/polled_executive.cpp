@@ -45,9 +45,10 @@ void polled_executive::run(void) {
     if (executive::root_task()->is_partitionable()) {
       auto p = std::static_pointer_cast<partitionable_polled_task>(
           executive::root_task());
+      std::vector<task_graph_vertex> kids = graph()->children(p);
       p->update_partition_prob(p->exec_estimate(),
-                               p->partition1()->exec_estimate(),
-                               p->partition1()->exec_estimate());
+                               kids[0]->exec_estimate(),
+                               kids[1]->exec_estimate());
     }
 
     handle_task_start(executive::get_next_task(nullptr));
@@ -88,9 +89,10 @@ void polled_executive::handle_task_abort(task_graph_vertex task) {
         task_decomposition_graph::vertex_parent(graph(), task));
     partitionable->last_partition(task);
   }
+  std::vector<task_graph_vertex> kids = graph()->children(partitionable);
   partitionable->update_partition_prob(partitionable->exec_estimate(),
-                                       partitionable->partition1()->exec_estimate(),
-                                       partitionable->partition2()->exec_estimate());
+                                       kids[0]->exec_estimate(),
+                                       kids[1]->exec_estimate());
 
   if (executive::task_abort_cleanup()) {
     executive::task_abort_cleanup()(task);
@@ -121,9 +123,10 @@ void polled_executive::handle_task_finish(task_graph_vertex task) {
         task_decomposition_graph::vertex_parent(graph(), task));
     partitionable->last_partition(task);
   }
+  std::vector<task_graph_vertex> kids = graph()->children(partitionable);
   partitionable->update_partition_prob(partitionable->exec_estimate(),
-                                       partitionable->partition1()->exec_estimate(),
-                                       partitionable->partition2()->exec_estimate());
+                                       kids[0]->exec_estimate(),
+                                       kids[1]->exec_estimate());
 
   task = executive::get_next_task(task);
   handle_task_start(task);
