@@ -69,8 +69,17 @@ class partitionable_task : public er::client,
   /**
    * @brief Partition the task according to the configured method, and return a
    * new task to execute.
+   *
+   * @param partition1 The first of the two subtasks the partitionable task was
+   * initialized with.
+   * @param partition2 The first of the two subtasks the partitionable task was
+   * initialized with.
+   *
+   * @return The new task to execute.
    */
-  task_graph_vertex partition(void);
+  task_graph_vertex partition(
+      const task_graph_vertex& partition1,
+      const task_graph_vertex& partition2);
 
   /**
    * @brief Update the partition probalitity of the current task.
@@ -95,20 +104,13 @@ class partitionable_task : public er::client,
   void last_partition(const task_graph_vertex& last_partition) {
     m_last_partition = last_partition;
   }
-  void partition1(const task_graph_vertex& partition1) { m_partition1 = partition1; }
-  void partition2(const task_graph_vertex& partition2) { m_partition2 = partition2; }
-
-  const task_graph_vertex& partition1(void) const { return m_partition1; }
-  const task_graph_vertex& partition2(void) const { return m_partition2; }
 
  private:
   // clang-format off
   bool                          m_always_partition;
   bool                          m_never_partition;
   bool                          m_employed_partitioning{false};
-  task_graph_vertex               m_partition1{nullptr};
-  task_graph_vertex               m_partition2{nullptr};
-  task_graph_vertex               m_last_partition{nullptr};
+  task_graph_vertex             m_last_partition{nullptr};
   subtask_selection_probability m_selection_prob;
   partition_probability         m_partition_prob;
   // clang-format on
