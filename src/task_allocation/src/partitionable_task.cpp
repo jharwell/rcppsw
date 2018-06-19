@@ -68,7 +68,9 @@ void partitionable_task::update_partition_prob(const time_estimate& task,
   m_partition_prob.calc(task, subtask1, subtask2);
 }
 
-task_graph_vertex partitionable_task::partition(void) {
+task_graph_vertex partitionable_task::partition(
+    const task_graph_vertex& partition1,
+    const task_graph_vertex& partition2) {
   ER_ASSERT(!(m_always_partition && m_never_partition),
             "FATAL: cannot ALWAYS and NEVER partition");
 
@@ -100,15 +102,15 @@ task_graph_vertex partitionable_task::partition(void) {
   double prob_12, prob_21;
   if (subtask_selection_probability::kMethodHarwell2018 ==
       m_selection_prob.method()) {
-    prob_12 = m_selection_prob.calc(&m_partition1->exec_estimate(),
-                                    &m_partition2->exec_estimate());
-    prob_21 = m_selection_prob.calc(&m_partition2->exec_estimate(),
-                                    &m_partition1->exec_estimate());
+    prob_12 = m_selection_prob.calc(&partition1->exec_estimate(),
+                                    &partition2->exec_estimate());
+    prob_21 = m_selection_prob.calc(&partition2->exec_estimate(),
+                                    &partition1->exec_estimate());
   } else {
-    prob_12 = m_selection_prob.calc(&m_partition1->interface_estimate(),
-                                    &m_partition2->interface_estimate());
-    prob_21 = m_selection_prob.calc(&m_partition2->interface_estimate(),
-                                    &m_partition1->interface_estimate());
+    prob_12 = m_selection_prob.calc(&partition1->interface_estimate(),
+                                    &partition2->interface_estimate());
+    prob_21 = m_selection_prob.calc(&partition2->interface_estimate(),
+                                    &partition1->interface_estimate());
   }
 
   ER_NOM(
@@ -127,32 +129,33 @@ task_graph_vertex partitionable_task::partition(void) {
      * If we last executed subtask1, we calculate the probability of switching
      * to subtask2, based on time estimates.
      */
-    if (m_last_partition == m_partition1 || nullptr == m_last_partition) {
+    if (m_last_partition == partition1 || nullptr == m_last_partition) {
       if (prob_12 >= static_cast<double>(random()) / RAND_MAX) {
-        ret = m_partition2;
+        ret = partition2;
       } else {
-        ret = m_partition1;
+        ret = partition1;
       }
     }
     /*
      * If we last executed subtask2, we calculate the probability of switching
      * to subtask1, based on time estimates.
      */
-    else if (m_last_partition == m_partition2) {
+    else if (m_last_partition == partition2) {
       if (prob_21 >= static_cast<double>(random()) / RAND_MAX) {
-        ret = m_partition1;
+        ret = partition1;
       } else {
-        ret = m_partition2;
+        ret = partition2;
       }
     }
-  } else if ("random" == m_selection_prob.method()) {
+  } else if (subtask_selection_probability::kMethodRandom ==
+             m_selection_prob.method()) {
     if (prob_12 >= static_cast<double>(random()) / RAND_MAX) {
-      ret = m_partition1;
+      ret = partition1;
     } else {
-      ret = m_partition2;
+      ret = partition2;
     }
   }
-  ER_ASSERT(nullptr != ret, "FATAL: no task selected");
+  ER_ASSERT(nullptr != ret, "FATAL: no task selected?");
   ER_NOM("Selected subtask '%s'", ret->name().c_str());
   return ret;
 } /* partition() */

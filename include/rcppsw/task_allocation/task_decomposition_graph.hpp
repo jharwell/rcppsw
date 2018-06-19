@@ -100,10 +100,30 @@ class task_decomposition_graph : public er::client {
    *
    * @return \ref status_t.
    */
+  status_t set_children(const task_graph_vertex& parent,
+                        std::list<task_graph_vertex> children);
   status_t set_children(const std::string& parent,
                         std::list<task_graph_vertex> children);
 
+  /**
+   * @brief Return the children of the specified task
+   *
+   * @param parent The parent task.
+   *
+   * @return The children. Will ALWAYS be of length 2, unless the root task is
+   * passed in, in which case it will have length 3, and the self-reference to
+   * the root task will be at index 0.
+   */
+  std::vector<task_graph_vertex> children(const task_graph_vertex& parent) const;
+
  private:
+  /**
+   * @brief Find the vertex descriptor for the vertex, which is what we need to
+   * interact with the graph efficiently.
+   */
+  vertex_iterator find_vertex(const task_graph_vertex& v) const;
+  vertex_iterator find_vertex(const std::string& v) const;
+
   // clang-format off
   task_graph_vertex m_root;
   graph_impl        m_graph;

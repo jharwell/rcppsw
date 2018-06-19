@@ -100,6 +100,21 @@ class executive : public rcppsw::er::client {
    */
   const task_graph_vertex& parent_task(const task_graph_vertex& task);
 
+  /**
+   * @brief Initialize the execution time estimate of the specified task within
+   * the specified range (non-partitionable tasks).
+   */
+  void task_init_random(const task_graph_vertex& task, int lb, int ub);
+
+  /**
+   * @brief Initialize the execution time estimate of the specified task within
+   * the specified range (partitionable tasks).
+   */
+  void task_init_random(const task_graph_vertex& task,
+                        const task_graph_vertex& partition,
+                        int lb,
+                        int ub);
+
  protected:
   const task_graph_vertex& root_task(void) const;
   void current_task(const task_graph_vertex& current_task) {
@@ -123,6 +138,10 @@ class executive : public rcppsw::er::client {
   std::shared_ptr<task_decomposition_graph> graph(void) const { return m_graph; }
 
  private:
+  task_graph_vertex get_first_task(void);
+  task_graph_vertex get_task_from_partitionable(const task_graph_vertex& task);
+  task_graph_vertex get_task_from_non_partitionable(const task_graph_vertex& task);
+
   // clang-format off
   task_graph_vertex                         m_current_task{nullptr};
   task_graph_vertex                         m_last_task{nullptr};
