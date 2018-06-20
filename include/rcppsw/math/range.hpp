@@ -37,6 +37,14 @@ NS_START(rcppsw, math);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class range
+ * @ingroup math
+ *
+ * @brief Convenience class holding a [min, max] range. Makes comparisons like
+ * "is this number in this range" much more intuitive and easy to debug.
+ */
+
 template<typename T>
 class range {
  public:
@@ -80,7 +88,7 @@ class range {
    *
    * @param value The value to test.
    */
-  bool is_within(const T& value) const {
+  bool value_within(const T& value) const {
     return value >= m_min && value <= m_max;
   }
 
@@ -94,6 +102,12 @@ class range {
        << c_range.m_max;
     return stream;
   }
+  /**
+   * @brief Expand/create a range around the specified value.
+   *
+   * @return A new range.
+   */
+  range expand(const T& value) { return range(m_min - value, m_max + value); }
 
  private:
   T m_min;

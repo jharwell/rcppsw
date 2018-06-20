@@ -19,7 +19,7 @@ add_subdirectory(ext/rcsw)
 # TICPP, which emits hundreds of compiler warnings if I compile with my usual
 # robust set of warnings.
 add_subdirectory(ext/ticpp)
-target_compile_options(ticpp PUBLIC -Wno-old-style-cast -Wno-suggest-override
+target_compile_options(ticpp PRIVATE -Wno-old-style-cast -Wno-suggest-override
   -Wno-effc++ -Wno-overloaded-virtual)
 
 # Boost
@@ -30,10 +30,7 @@ set(Boost_USE_STATIC_LIBS OFF)
 # Includes                                                                     #
 ################################################################################
 set(${target}_INCLUDE_DIRS "${${target}_INC_PATH}" ${rcsw_INCLUDE_DIRS})
-
-# Only for external projects under ext/ which we don't have control over, so
-# we want to suppress their warnings.
-set(${target}_SYS_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR})
+set(${target}_SYS_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} ${Boost_INCLUDE_DIRS})
 
 ################################################################################
 # Submodules                                                                   #
@@ -71,28 +68,33 @@ list(APPEND ${target}_robotics_SUBDIRS kinematics2D)
 
 foreach(d ${${target}_robotics_SUBDIRS})
   add_subdirectory(src/robotics/${d})
+
   target_include_directories(${target}-${d} PUBLIC "${${target}_INCLUDE_DIRS}")
   target_include_directories(${target}-${d} SYSTEM PRIVATE "${${target}_SYS_INCLUDE_DIRS}")
+
   if ("${WITH_HAL_CONFIG}" MATCHES "argos-footbot")
     target_compile_definitions(${target}-${d} PUBLIC HAL_CONFIG=HAL_CONFIG_ARGOS_FOOTBOT)
     target_include_directories(${target}-${d} PUBLIC /usr/include/lua5.2)
-
-    if (BUILD_ON_MSI)
-      target_include_directories(${target}-${d} SYSTEM PUBLIC ${MSI_ARGOS_INSTALL_PREFIX}/include)
-      target_compile_options(${target}-${d} PUBLIC -Wno-missing-include-dirs)
-      link_directories(${MSI_ARGOS_INSTALL_PREFIX}/lib/argos3)
-    endif()
+  endif()
+  if (BUILD_ON_MSI)
+    target_include_directories(${target}-${d} SYSTEM PUBLIC ${MSI_ARGOS_INSTALL_PREFIX}/include)
+    target_compile_options(${target}-${d} PUBLIC -Wno-missing-include-dirs)
   endif()
 endforeach()
 
 ################################################################################
 # Libraries                                                                    #
 ################################################################################
-set(${target}_LIBS
+set(${target}_LIBRARIES
   rcsw
   ticpp
   ${Boost_LIBRARIES}
   )
+set(${target_LIBRARY_DIRS} ${rcsw_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS})
+
+if (BUILD_ON_MSI)
+  set(${target}_LIBRARY_DIRS ${${target}_LIBRARY_DIRS} ${MSI_ARGOS_INSTALL_PREFIX}/lib/argos3)
+endif()
 
 if (NOT TARGET ${target})
   add_library(${target} STATIC
@@ -108,14 +110,16 @@ if (NOT TARGET ${target})
     $<TARGET_OBJECTS:${target}-math>
     $<TARGET_OBJECTS:${target}-metrics>
     $<TARGET_OBJECTS:${target}-control>)
-  target_link_libraries(${target} "${${target}_LIBS}")
-  target_include_directories(${target} PUBLIC "${${target}_INCLUDE_DIRS}")
+  target_link_libraries(${target} ${${target}_LIBRARIES})
+  target_include_directories(${target} PUBLIC ${${target}_INCLUDE_DIRS})
 endif()
 
 ################################################################################
 # Exports                                                                      #
 ################################################################################
 if (NOT IS_ROOT_PROJECT)
-  set(${target}_INCLUDE_DIRS "${${target}_INC_PATH}" ${rcsw_INCLUDE_DIRS} PARENT_SCOPE)
-  set(${target}_LIBS "${${target}_LIBS}" PARENT_SCOPE)
+  set(${target}_INCLUDE_DIRS "${${target}_INCLUDE_DIRS}" PARENT_SCOPE)
+  set(${target}_SYS_INCLUDE_DIRS "${${target}_SYS_INCLUDE_DIRS}" PARENT_SCOPE)
+  set(${target}_LIBRARIES "${${target}_LIBRARIES}" PARENT_SCOPE)
+  set(${target}_LIBRARY_DIRS "${${target}_LIBRARY_DIRS}" PARENT_SCOPE)
 endif()
