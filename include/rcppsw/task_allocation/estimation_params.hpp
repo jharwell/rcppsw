@@ -1,5 +1,5 @@
 /**
- * @file partitionable_task_params.hpp
+ * @file estimation_params.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,13 +18,12 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_PARAMS_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_PARAMS_HPP_
+#ifndef INCLUDE_RCPPSW_ESTIMATION_ALLOCATION_ESTIMATION_PARAMS_HPP_
+#define INCLUDE_RCPPSW_ESTIMATION_ALLOCATION_ESTIMATION_PARAMS_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include "rcppsw/params/base_params.hpp"
 
 /*******************************************************************************
@@ -36,16 +35,15 @@ NS_START(rcppsw, task_allocation);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct subtask_selection_params
+ * @struct estimation_params
  * @ingroup params task_allocation
+ *
+ * @brief Parameters used to estimate properties of tasks
  */
-struct subtask_selection_params : public params::base_params {
-  std::string method{""};
-  double reactivity{0.0};
-  double offset{0.0};
-  double gamma{0.0};
+struct estimation_params : public params::base_params {
+  double alpha{0.0};
 };
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_ */
+#endif /* INCLUDE_RCPPSW_ESTIMATION_ALLOCATION_ESTIMATION_PARAMS_HPP_ */

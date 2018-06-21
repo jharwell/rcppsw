@@ -1,5 +1,5 @@
 /**
- * @file partitionable_task_params.hpp
+ * @file task_estimation_parser.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,14 +18,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_PARAMS_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_PARAMS_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/params/base_params.hpp"
+#include "rcppsw/task_allocation/task_estimation_xml_parser.hpp"
+#include <ext/ticpp/ticpp.h>
+
+#include "rcppsw/utils/line_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -33,19 +32,35 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Structure Definitions
+ * Global Variables
  ******************************************************************************/
-/**
- * @struct subtask_selection_params
- * @ingroup params task_allocation
- */
-struct subtask_selection_params : public params::base_params {
-  std::string method{""};
-  double reactivity{0.0};
-  double offset{0.0};
-  double gamma{0.0};
-};
+constexpr char task_estimation_xml_parser::kXMLRoot[];
+
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+void task_estimation_xml_parser::parse(const ticpp::Element& node) {
+  m_params =
+      std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
+  ticpp::Element enode =
+      get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+  XML_PARSE_PARAM(enode, m_params, alpha);
+} /* parse() */
+
+void task_estimation_xml_parser::show(std::ostream& stream) const {
+  stream << build_header()
+         << XML_PARAM_STR(m_params, alpha) << std::endl
+         << build_footer();
+} /* show() */
+
+__rcsw_pure bool task_estimation_xml_parser::validate(void) const {
+  if (m_parsed) {
+    CHECK(m_params->alpha > 0.0);
+  }
+  return true;
+
+error:
+  return false;
+} /* validate() */
 
 NS_END(task_allocation, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_ */

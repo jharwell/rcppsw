@@ -38,6 +38,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 /**
  * @struct partitionable_task_params
+ * @ingroup params task_allocation
  *
  * @brief Parameters used by \ref partitionable_task tasks.
  */

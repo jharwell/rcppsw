@@ -35,8 +35,8 @@ NS_START(rcppsw, task_allocation);
 executable_task::executable_task(const std::string& name,
                                  const struct task_params* c_params)
     : logical_task(name),
-      m_interface_estimate(c_params->estimation_alpha),
-      m_exec_estimate(c_params->estimation_alpha) {}
+      m_interface_estimate(c_params->estimation.alpha),
+      m_exec_estimate(c_params->estimation.alpha) {}
 
 executable_task::executable_task(const executable_task& other)
     : logical_task(other),

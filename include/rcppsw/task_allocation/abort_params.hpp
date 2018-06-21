@@ -34,7 +34,11 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Structure Definitions
  ******************************************************************************/
-struct abort_params {
+/**
+ * @struct abort_params
+ * @ingroup params task_allocation
+ */
+struct abort_params : public params::base_params {
   double reactivity{0.0};
   double offset{0.0};
 };
