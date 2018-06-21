@@ -63,12 +63,18 @@ class differential_drive_xml_parser : public rcppsw::params::xml_param_parser {
   bool validate(void) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  const struct differential_drive_params* parse_results(void) const override {
-    return &m_params;
+
+  std::shared_ptr<differential_drive_params> parse_results(void) const {
+    return m_params;
   }
 
  private:
-  struct differential_drive_params m_params{};
+  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(void) const override {
+    return m_params;
+  }
+
+ private:
+  std::shared_ptr<differential_drive_params> m_params{nullptr};
 };
 
 NS_END(kinematics2D, robotics, rcppsw);

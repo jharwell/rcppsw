@@ -56,18 +56,28 @@ class avoidance_force_xml_parser : public rcppsw::params::xml_param_parser {
 
   explicit avoidance_force_xml_parser(const std::shared_ptr<er::server>& server,
                                       uint level)
-      : xml_param_parser(server, level),
-        m_params() {}
+      : xml_param_parser(server, level) {}
 
   void parse(const ticpp::Element& node) override;
   void show(std::ostream& stream) const override;
   bool validate(void) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  const avoidance_force_params* parse_results(void) const override { return &m_params; }
+  bool parsed(void) const override { return m_parsed; }
+
+  std::shared_ptr<avoidance_force_params> parse_results(void) const {
+    return m_params;
+  }
 
  private:
-  struct avoidance_force_params m_params;
+  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(void) const override {
+    return m_params;
+  }
+
+  // clang-format off
+  bool                                    m_parsed{false};
+  std::shared_ptr<avoidance_force_params> m_params{nullptr};
+  // clang-format on
 };
 
 NS_END(steering2D, robotics, rcppsw);

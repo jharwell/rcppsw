@@ -1,5 +1,5 @@
 /**
- * @file executive_parser.hpp
+ * @file subtask_selection_parser.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * FORDYCA.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_EXECUTIVE_XML_PARSER_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_EXECUTIVE_XML_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_XML_PARSER_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_XML_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -28,11 +28,7 @@
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
-#include "rcppsw/task_allocation/executive_params.hpp"
-#include "rcppsw/task_allocation/task_abort_xml_parser.hpp"
-#include "rcppsw/task_allocation/task_partition_xml_parser.hpp"
-#include "rcppsw/task_allocation/subtask_selection_xml_parser.hpp"
-#include "rcppsw/task_allocation/task_estimation_xml_parser.hpp"
+#include "rcppsw/task_allocation/subtask_selection_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -43,36 +39,30 @@ NS_START(rcppsw, task_allocation);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class executive_xml_parser
+ * @class subtask_selection_xml_parser
  * @ingroup task_allocation
  *
- * @brief Parses XML parameters for relating to the task executive and the tasks
- * it runs.
+ * @brief Parses XML parameters for relating to the subtask selection.
  */
-class executive_xml_parser: public rcppsw::params::xml_param_parser {
+class subtask_selection_xml_parser: public rcppsw::params::xml_param_parser {
  public:
-  explicit executive_xml_parser(const std::shared_ptr<er::server>& server,
+  explicit subtask_selection_xml_parser(const std::shared_ptr<er::server>& server,
                                 uint level)
-      : xml_param_parser(server, level),
-        m_abort(server, level + 1),
-        m_partition(server, level + 1),
-        m_estimation(server, level + 1),
-        m_subtask(server, level  + 1) {}
+      : xml_param_parser(server, level) {}
 
   /**
-   * @brief The root tag that all task executive parameters should lie under in
-   * the XML tree.
+   * @brief The root tag that all task subtask_selection parameters should lie
+   * under in the XML tree.
    */
-  static constexpr char kXMLRoot[] = "task_executive";
+  static constexpr char kXMLRoot[] = "subtask_selection";
 
   void show(std::ostream& stream) const override;
-  bool validate(void) const override;
   void parse(const ticpp::Element& node) override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
   bool parsed(void) const override { return m_parsed; }
 
-  std::shared_ptr<executive_params> parse_results(void) const {
+  std::shared_ptr<subtask_selection_params> parse_results(void) const {
     return m_params;
   }
 
@@ -82,15 +72,11 @@ class executive_xml_parser: public rcppsw::params::xml_param_parser {
   }
 
   // clang-format off
-  bool                              m_parsed{false};
-  std::shared_ptr<executive_params> m_params{nullptr};
-  task_abort_xml_parser             m_abort;
-  task_partition_xml_parser         m_partition;
-  task_estimation_xml_parser        m_estimation;
-  subtask_selection_xml_parser      m_subtask;
+  bool                                      m_parsed{false};
+  std::shared_ptr<subtask_selection_params> m_params{nullptr};
   // clang-format on
 };
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_EXECUTIVE_XML_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_XML_PARSER_HPP_ */

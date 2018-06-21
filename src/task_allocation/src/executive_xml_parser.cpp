@@ -40,56 +40,47 @@ constexpr char executive_xml_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void executive_xml_parser::parse(const ticpp::Element& node) {
-  ticpp::Element enode =
-      get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+  if (nullptr != node.FirstChild(kXMLRoot, false)) {
+    m_params =
+        std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
+    ticpp::Element enode =
+        get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+    m_abort.parse(enode);
+    m_partition.parse(enode);
+    m_subtask.parse(enode);
+    m_estimation.parse(enode);
 
-  ticpp::Element anode =
-      get_node(const_cast<ticpp::Element&>(enode), "aborting");
-  XML_PARSE_PARAM(anode, m_params.abort, reactivity);
-  XML_PARSE_PARAM(anode, m_params.abort, offset);
-
-  ticpp::Element tnode =
-      get_node(const_cast<ticpp::Element&>(enode), "tasks");
-  XML_PARSE_PARAM(tnode, m_params, estimation_alpha);
-
-  ticpp::Element pnode =
-      get_node(const_cast<ticpp::Element&>(enode), "partitioning");
-  XML_PARSE_PARAM(pnode, m_params.partitioning, reactivity);
-  XML_PARSE_PARAM(pnode, m_params.partitioning, offset);
-  XML_PARSE_PARAM(pnode, m_params.partitioning, method);
-  XML_PARSE_PARAM(pnode, m_params.partitioning, always_partition);
-  XML_PARSE_PARAM(pnode, m_params.partitioning, never_partition);
-
-  ticpp::Element snode =
-      get_node(const_cast<ticpp::Element&>(enode), "subtask_selection");
-  XML_PARSE_PARAM(snode, m_params.subtask_selection, reactivity);
-  XML_PARSE_PARAM(snode, m_params.subtask_selection, offset);
-  XML_PARSE_PARAM(snode, m_params.subtask_selection, method);
-  XML_PARSE_PARAM(snode, m_params.subtask_selection, gamma);
+    m_params->abort = *m_abort.parse_results();
+    m_params->partitioning = *m_partition.parse_results();
+    m_params->estimation = *m_estimation.parse_results();
+    m_params->subtask_selection = *m_subtask.parse_results();
+    m_parsed = true;
+  }
 } /* parse() */
 
 void executive_xml_parser::show(std::ostream& stream) const {
-  stream << build_header() << XML_PARAM_STR(m_params, estimation_alpha)
-         << std::endl
-         << XML_PARAM_STR(m_params, abort.reactivity) << std::endl
-         << XML_PARAM_STR(m_params, abort.offset) << std::endl
-         << XML_PARAM_STR(m_params, partitioning.reactivity) << std::endl
-         << XML_PARAM_STR(m_params, partitioning.offset) << std::endl
-         << XML_PARAM_STR(m_params, partitioning.method) << std::endl
-         << XML_PARAM_STR(m_params, partitioning.always_partition) << std::endl
-         << XML_PARAM_STR(m_params, partitioning.never_partition) << std::endl
-         << XML_PARAM_STR(m_params, subtask_selection.reactivity) << std::endl
-         << XML_PARAM_STR(m_params, subtask_selection.offset) << std::endl
-         << XML_PARAM_STR(m_params, subtask_selection.method) << std::endl
-         << XML_PARAM_STR(m_params, subtask_selection.gamma) << std::endl
+      if (!m_parsed) {
+    stream << build_header()
+           << "<< Not Parsed >>"
+           << std::endl
+           << build_footer();
+    return;
+  }
+
+  stream << build_header()
+         << m_abort
+         << m_partition
+         << m_subtask
+         << m_estimation
          << build_footer();
 } /* show() */
 
 __rcsw_pure bool executive_xml_parser::validate(void) const {
-  return !(m_params.estimation_alpha <= 0.0 ||
-           m_params.abort.reactivity <= 0.0 || m_params.abort.offset <= 0.0 ||
-           m_params.partitioning.reactivity <= 0.0 ||
-           m_params.partitioning.offset <= 0.0);
+  if (m_parsed) {
+    return m_abort.validate() && m_partition.validate() &&
+        m_subtask.validate() && m_estimation.validate();
+  }
+  return true;
 } /* validate() */
 
 NS_END(task_allocation, rcppsw);

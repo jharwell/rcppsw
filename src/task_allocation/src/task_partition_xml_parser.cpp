@@ -1,5 +1,5 @@
 /**
- * @file avoidance_force_xml_parser.cpp
+ * @file task_partition_parser.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -21,52 +21,55 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/robotics/steering2D/avoidance_force_xml_parser.hpp"
+#include "rcppsw/task_allocation/task_partition_xml_parser.hpp"
+#include <ext/ticpp/ticpp.h>
+
+#include "rcppsw/utils/line_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, robotics, steering2D);
+NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Class Constants
+ * Global Variables
  ******************************************************************************/
-constexpr char avoidance_force_xml_parser::kXMLRoot[];
+constexpr char task_partition_xml_parser::kXMLRoot[];
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void avoidance_force_xml_parser::parse(const argos::TConfigurationNode& node) {
-  if (nullptr != node.FirstChild(kXMLRoot, false)) {
-    ticpp::Element anode =
-        argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
-    m_params =
-        std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
-    XML_PARSE_PARAM(anode, m_params, lookahead);
-    XML_PARSE_PARAM(anode, m_params, max);
-    m_parsed = true;
-  }
+void task_partition_xml_parser::parse(const ticpp::Element& node) {
+  m_params =
+      std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
+  ticpp::Element pnode =
+      get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+  XML_PARSE_PARAM(pnode, m_params, reactivity);
+  XML_PARSE_PARAM(pnode, m_params, offset);
+  XML_PARSE_PARAM(pnode, m_params, method);
+  XML_PARSE_PARAM(pnode, m_params, always_partition);
+  XML_PARSE_PARAM(pnode, m_params, never_partition);
 } /* parse() */
 
-void avoidance_force_xml_parser::show(std::ostream& stream) const {
-    if (!m_parsed) {
-    stream << build_header()
-           << "<< Not Parsed >>"
-           << std::endl
-           << build_footer();
-    return;
-  }
-
-  stream << build_header() << XML_PARAM_STR(m_params, lookahead) << std::endl
-         << XML_PARAM_STR(m_params, max) << std::endl
+void task_partition_xml_parser::show(std::ostream& stream) const {
+  stream << build_header()
+         << XML_PARAM_STR(m_params, reactivity) << std::endl
+         << XML_PARAM_STR(m_params, offset) << std::endl
+         << XML_PARAM_STR(m_params, method) << std::endl
+         << XML_PARAM_STR(m_params, always_partition) << std::endl
+         << XML_PARAM_STR(m_params, never_partition) << std::endl
          << build_footer();
 } /* show() */
 
-__rcsw_pure bool avoidance_force_xml_parser::validate(void) const {
+__rcsw_pure bool task_partition_xml_parser::validate(void) const {
   if (m_parsed) {
-    return m_params->lookahead > 0.0 && m_params->max > 0.0;
+    CHECK(m_params->reactivity > 0.0);
+    CHECK(m_params->offset > 0.0);
   }
   return true;
+
+error:
+  return false;
 } /* validate() */
 
-NS_END(steering2D, robotics, rcppsw);
+NS_END(task_allocation, rcppsw);

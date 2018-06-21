@@ -1,5 +1,5 @@
 /**
- * @file partitionable_task_params.hpp
+ * @file subtask_selection_parser.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,14 +18,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_PARAMS_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_PARAMS_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/params/base_params.hpp"
+#include "rcppsw/task_allocation/subtask_selection_xml_parser.hpp"
+#include <ext/ticpp/ticpp.h>
+
+#include "rcppsw/utils/line_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -33,19 +32,31 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Structure Definitions
+ * Global Variables
  ******************************************************************************/
-/**
- * @struct subtask_selection_params
- * @ingroup params task_allocation
- */
-struct subtask_selection_params : public params::base_params {
-  std::string method{""};
-  double reactivity{0.0};
-  double offset{0.0};
-  double gamma{0.0};
-};
+constexpr char subtask_selection_xml_parser::kXMLRoot[];
+
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+void subtask_selection_xml_parser::parse(const ticpp::Element& node) {
+  ticpp::Element snode = get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+  m_params =
+      std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
+
+  XML_PARSE_PARAM(snode, m_params, reactivity);
+  XML_PARSE_PARAM(snode, m_params, offset);
+  XML_PARSE_PARAM(snode, m_params, method);
+  XML_PARSE_PARAM(snode, m_params, gamma);
+} /* parse() */
+
+void subtask_selection_xml_parser::show(std::ostream& stream) const {
+  stream << build_header()
+         << XML_PARAM_STR(m_params, reactivity) << std::endl
+         << XML_PARAM_STR(m_params, offset) << std::endl
+         << XML_PARAM_STR(m_params, method) << std::endl
+         << XML_PARAM_STR(m_params, gamma) << std::endl
+         << build_footer();
+} /* show() */
 
 NS_END(task_allocation, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_ */
