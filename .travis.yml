@@ -1,0 +1,29 @@
+os:
+  - linux
+  - osx
+
+language: cpp
+dist: trusty
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-7
+      - g++-7
+      - qt5base-dev
+
+branches:
+  only:
+    - master
+    - devel
+    
+script:
+  - export CC=gcc-7;
+  - export CXX=g++-7;
+  - cmake --version
+  - mkdir -p build && cd build
+  - cmake -DWITH_TESTS=yes ..
+  - make unit_tests
+  - make tests
