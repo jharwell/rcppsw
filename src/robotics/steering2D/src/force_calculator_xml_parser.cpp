@@ -39,14 +39,24 @@ constexpr char force_calculator_xml_parser::kXMLRoot[];
 void force_calculator_xml_parser::parse(const argos::TConfigurationNode& node) {
   ticpp::Element knode =
       argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
+  m_params = std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
   m_avoidance.parse(knode);
   m_arrival.parse(knode);
   m_wander.parse(knode);
   m_polar.parse(knode);
-  m_params.avoidance = *m_avoidance.parse_results();
-  m_params.arrival = *m_arrival.parse_results();
-  m_params.wander = *m_wander.parse_results();
-  m_params.polar = *m_polar.parse_results();
+
+  if (m_avoidance.parsed()) {
+    m_params->avoidance = *m_avoidance.parse_results();
+  }
+  if (m_arrival.parsed()) {
+    m_params->arrival = *m_arrival.parse_results();
+  }
+  if (m_wander.parsed()) {
+    m_params->wander = *m_wander.parse_results();
+  }
+  if (m_polar.parsed()) {
+    m_params->polar = *m_polar.parse_results();
+  }
 } /* parse() */
 
 void force_calculator_xml_parser::show(std::ostream& stream) const {
@@ -56,8 +66,11 @@ void force_calculator_xml_parser::show(std::ostream& stream) const {
 } /* show() */
 
 __rcsw_pure bool force_calculator_xml_parser::validate(void) const {
-  return m_avoidance.validate() && m_arrival.validate() &&
-         m_wander.validate() && m_polar.validate();
+  CHECK(m_avoidance.parsed());
+  return m_arrival.validate() && m_wander.validate() && m_polar.validate();
+
+error:
+  return false;
 } /* validate() */
 
 NS_END(steering2D, robotics, rcppsw);

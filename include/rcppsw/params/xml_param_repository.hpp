@@ -79,20 +79,24 @@ class xml_param_repository {
    * @brief Get the parsed parameters associated with the parser of the
    * specified type (note that the name that the parser was registered with is
    * not needed in this formulation).
+   *
+   * @return The parsed parameters (non-owning).
    */
   template<typename T>
   const T* parse_results(void) {
     std::type_index i(typeid(T));
-    return static_cast<const T*>(m_parsers[m_param_types[i]]->parse_results());
+    return m_parsers[m_param_types[i]]->parse_results<T>().get();
   }
 
   /**
    * @brief Get the parsed parameters associated with the parser of the
-   * specified name, and cast them to the specified type.
+   * specified name.
+   *
+   * @return The parsed parameters (non-owning).
    */
   template<typename T>
   const T* parse_results(const std::string& name) {
-    return static_cast<const T*>(m_parsers[name]->parse_results());
+    return m_parsers[name]->parse_results<T>().get();
   }
 
   /**

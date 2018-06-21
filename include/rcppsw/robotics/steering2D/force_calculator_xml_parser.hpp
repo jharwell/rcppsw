@@ -70,15 +70,21 @@ class force_calculator_xml_parser : public rcppsw::params::xml_param_parser {
   bool validate(void) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  const force_calculator_params* parse_results(void) const override { return &m_params; }
+  std::shared_ptr<force_calculator_params> parse_results(void) const {
+    return m_params;
+  }
 
  private:
+  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(void) const override {
+    return m_params;
+  }
+
   // clang-format off
-  struct force_calculator_params m_params;
-  avoidance_force_xml_parser     m_avoidance;
-  arrival_force_xml_parser       m_arrival;
-  wander_force_xml_parser        m_wander;
-  polar_force_xml_parser         m_polar;
+  std::shared_ptr<force_calculator_params> m_params{nullptr};
+  avoidance_force_xml_parser               m_avoidance;
+  arrival_force_xml_parser                 m_arrival;
+  wander_force_xml_parser                  m_wander;
+  polar_force_xml_parser                   m_polar;
   // clang-format on
 };
 
