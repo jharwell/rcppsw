@@ -56,7 +56,7 @@ namespace factory = rcppsw::patterns::factory;
  */
 class xml_param_repository {
  public:
-  xml_param_repository(const std::shared_ptr<er::server>& server)
+  explicit xml_param_repository(std::shared_ptr<er::server> server)
       : m_server(server), m_parsers(), m_param_types(), m_factory() {}
 
   /**

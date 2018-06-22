@@ -45,6 +45,7 @@ NS_START(rcppsw, task_allocation);
  * using the negative exponential distribution.
  *
  * Reactivity is assumed to be > 0.
+ * Offset is assumed to be > 0.
  *
  * Depends on:
  *

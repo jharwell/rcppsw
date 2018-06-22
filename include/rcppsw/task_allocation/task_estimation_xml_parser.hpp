@@ -62,7 +62,6 @@ class task_estimation_xml_parser: public rcppsw::params::xml_param_parser {
   void parse(const ticpp::Element& node) override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  bool parsed(void) const override { return m_parsed; }
 
   std::shared_ptr<estimation_params> parse_results(void) const {
     return m_params;
@@ -74,7 +73,6 @@ class task_estimation_xml_parser: public rcppsw::params::xml_param_parser {
   }
 
   // clang-format off
-  bool                              m_parsed{false};
   std::shared_ptr<estimation_params> m_params{nullptr};
   // clang-format on
 };

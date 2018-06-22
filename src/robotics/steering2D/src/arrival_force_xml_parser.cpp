@@ -66,10 +66,14 @@ void arrival_force_xml_parser::show(std::ostream& stream) const {
 
 __rcsw_pure bool arrival_force_xml_parser::validate(void) const {
   if (m_parsed) {
-    return m_params->slowing_radius > 0.0 &&
-        m_params->slowing_speed_min > 0.0;
+    CHECK(m_params->slowing_radius > 0.0);
+    CHECK(m_params->slowing_speed_min > 0.0);
+    CHECK(m_params->max > 0.0 && m_params->max > m_params->slowing_speed_min);
   }
   return true;
+
+error:
+  return false;
 } /* validate() */
 
 NS_END(steering2D, robotics, rcppsw);

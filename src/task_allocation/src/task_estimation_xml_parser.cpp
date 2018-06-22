@@ -54,9 +54,7 @@ void task_estimation_xml_parser::show(std::ostream& stream) const {
 } /* show() */
 
 __rcsw_pure bool task_estimation_xml_parser::validate(void) const {
-  if (m_parsed) {
-    CHECK(m_params->alpha > 0.0);
-  }
+  CHECK(m_params->alpha > 0.0);
   return true;
 
 error:

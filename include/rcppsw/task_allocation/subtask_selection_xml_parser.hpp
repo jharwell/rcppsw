@@ -58,9 +58,8 @@ class subtask_selection_xml_parser: public rcppsw::params::xml_param_parser {
 
   void show(std::ostream& stream) const override;
   void parse(const ticpp::Element& node) override;
-
+  bool validate(void) const override;
   std::string xml_root(void) const override { return kXMLRoot; }
-  bool parsed(void) const override { return m_parsed; }
 
   std::shared_ptr<subtask_selection_params> parse_results(void) const {
     return m_params;
@@ -72,7 +71,6 @@ class subtask_selection_xml_parser: public rcppsw::params::xml_param_parser {
   }
 
   // clang-format off
-  bool                                      m_parsed{false};
   std::shared_ptr<subtask_selection_params> m_params{nullptr};
   // clang-format on
 };
