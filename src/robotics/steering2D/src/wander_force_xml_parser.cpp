@@ -59,7 +59,8 @@ void wander_force_xml_parser::show(std::ostream& stream) const {
     return;
   }
 
-  stream << build_header() << XML_PARAM_STR(m_params, interval) << std::endl
+  stream << build_header()
+         << XML_PARAM_STR(m_params, interval) << std::endl
          << XML_PARAM_STR(m_params, max) << std::endl
          << XML_PARAM_STR(m_params, circle_distance) << std::endl
          << XML_PARAM_STR(m_params, circle_radius) << std::endl
@@ -69,10 +70,16 @@ void wander_force_xml_parser::show(std::ostream& stream) const {
 
 __rcsw_pure bool wander_force_xml_parser::validate(void) const {
   if (m_parsed) {
-    return m_params->circle_distance > 0.0 && m_params->circle_radius > 0.0 &&
-        m_params->max_angle_delta < 360 && m_params->interval > 0;
+    CHECK(m_params->circle_distance > 0.0);
+    CHECK(m_params->circle_radius > 0.0);
+    CHECK(m_params->max_angle_delta < 360);
+    CHECK(m_params->interval > 0);
+    CHECK(m_params->max > 0);
   }
   return true;
+
+error:
+  return false;
 } /* validate() */
 
 NS_END(steering2D, robotics, rcppsw);

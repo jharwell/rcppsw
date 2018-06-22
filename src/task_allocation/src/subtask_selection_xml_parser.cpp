@@ -59,4 +59,15 @@ void subtask_selection_xml_parser::show(std::ostream& stream) const {
          << build_footer();
 } /* show() */
 
+bool subtask_selection_xml_parser::validate(void) const {
+  CHECK(m_params->reactivity > 0.0);
+  CHECK(m_params->offset > 1.0);
+  CHECK(IS_BETWEEN(m_params->gamma, 0.0, 1.0));
+  CHECK("" != m_params->method);
+  return true;
+
+error:
+  return false;
+} /* validate() */
+
 NS_END(task_allocation, rcppsw);
