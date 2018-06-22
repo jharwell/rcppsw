@@ -41,10 +41,7 @@ void differential_drive_xml_parser::parse(const ticpp::Element& node) {
   ticpp::Element wnode =
       argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
 
-  m_params =
-      std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
   XML_PARSE_PARAM(wnode, m_params, max_speed);
-  XML_PARSE_PARAM(wnode, m_params, soft_turn_max);
 
   argos::CDegrees angle;
   argos::GetNodeAttribute(wnode, "soft_turn_max", angle);
@@ -52,14 +49,20 @@ void differential_drive_xml_parser::parse(const ticpp::Element& node) {
 } /* parse() */
 
 void differential_drive_xml_parser::show(std::ostream& stream) const {
-  stream << build_header() << XML_PARAM_STR(m_params, soft_turn_max)
+  stream << build_header()
+         << XML_PARAM_STR(m_params, soft_turn_max)
          << std::endl
          << XML_PARAM_STR(m_params, max_speed) << std::endl
          << build_footer();
 } /* show() */
 
 __rcsw_pure bool differential_drive_xml_parser::validate(void) const {
-  return m_params->soft_turn_max.GetValue() > 0;
+  CHECK(m_params->soft_turn_max.GetValue() > 0.0);
+  CHECK(m_params->max_speed > 0.0);
+  return true;
+
+error:
+  return false;
 } /* validate() */
 
 NS_END(kinematics2D, robotics, rcppsw);

@@ -114,6 +114,11 @@ if (NOT TARGET ${target})
   target_include_directories(${target} PUBLIC ${${target}_INCLUDE_DIRS})
 endif()
 
+# Fix so we can build rcsw unit tests from this repo as well
+if (WITH_TESTS)
+  target_include_directories(rcsw-tests PUBLIC ${${target}_INCLUDE_DIRS})
+endif()
+
 ################################################################################
 # Exports                                                                      #
 ################################################################################
