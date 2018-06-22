@@ -62,13 +62,13 @@ class management_metrics : public allocation_metrics {
    * executing is different than the one that it executed last time (this is
    * the definition of changing allocation).
    */
-  virtual bool has_changed_allocation(void) const = 0;
+  virtual bool allocation_changed(void) const = 0;
 
   /**
    * @brief This function should return \c TRUE if the robot has just aborted
    * its current task.
    */
-  virtual bool has_aborted_task(void) const = 0;
+  virtual bool task_aborted(void) const = 0;
 
   /**
    * @brief Get the name of task that is currently being executed by a
@@ -81,13 +81,13 @@ class management_metrics : public allocation_metrics {
    * @brief This function should return \c TRUE when a robot has just finished
    * its task (not aborting it).
    */
-  virtual bool has_finished_task(void) const = 0;
+  virtual bool task_finished(void) const = 0;
 
   /**
    * @brief This function should return the execution time of the most recently
    * finished task.
    */
-  virtual double last_task_exec_time(void) const = 0;
+  virtual double task_last_exec_time(void) const = 0;
 };
 
 NS_END(tasks, metrics, rcppsw);

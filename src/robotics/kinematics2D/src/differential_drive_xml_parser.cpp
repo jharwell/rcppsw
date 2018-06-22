@@ -40,9 +40,9 @@ constexpr char differential_drive_xml_parser::kXMLRoot[];
 void differential_drive_xml_parser::parse(const ticpp::Element& node) {
   ticpp::Element wnode =
       argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
-
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
+
   XML_PARSE_PARAM(wnode, m_params, max_speed);
 
   argos::CDegrees angle;

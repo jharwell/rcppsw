@@ -1,5 +1,8 @@
 # RCPPSW (Reusable C++ Software)
 
+[![Build Status](https://travis-ci.org/swarm-robotics/rcppsw.svg?branch=devel)](https://travis-ci.org/swarm-robotics/rcppsw.svg?branch=devel) (Devel)
+[![Build Status](https://travis-ci.org/swarm-robotics/rcppsw.svg?branch=devel)](https://travis-ci.org/swarm-robotics/rcppsw.svg?branch=devel) (Master)
+
 This is a collection of various useful algorithms/data structures/etc. that I
 have found useful for multi-agent robots research, and that do not currently
 exist in Boost, or that build on what boost provides. Includes such things as:
