@@ -54,6 +54,7 @@ class collector_group {
   using mapped_type = std::unique_ptr<base_metrics_collector>;
 
   collector_group(void) : m_collectors() {}
+  virtual ~collector_group(void) = default;
 
   /**
    * @brief Add a collector to the group by constructing it in place.

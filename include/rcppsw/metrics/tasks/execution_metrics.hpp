@@ -42,7 +42,7 @@ NS_START(rcppsw, metrics, tasks);
  * @brief Interface defining metrics that can be collected on tasks as they are
  * executed.
  */
-class execution_metrics : public base_metrics {
+class execution_metrics : public virtual base_metrics {
  public:
   execution_metrics(void) = default;
   ~execution_metrics(void) override = default;
