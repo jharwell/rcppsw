@@ -50,6 +50,8 @@ class executable_task;
  * This class MUST be instantiated inside of \ref task_graph_vertex, and be
  * manipulated through shared_ptr.
  */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wnon-virtual-dtor"
 class partitionable_task : public er::client,
                            public std::enable_shared_from_this<executable_task>,
                            public metrics::tasks::allocation_metrics {
@@ -115,7 +117,7 @@ class partitionable_task : public er::client,
   partition_probability         m_partition_prob;
   // clang-format on
 };
-
+#pragma GCC diagnostic pop
 NS_END(task_allocation, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITIONABLE_TASK_TASK_HPP_ */

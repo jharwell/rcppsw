@@ -44,7 +44,7 @@ NS_START(rcppsw, metrics, tasks);
  * @brief Interface defining metrics that can be collected on tasks during
  * allocation.
  */
-class allocation_metrics : public base_metrics {
+class allocation_metrics : public virtual base_metrics {
  public:
   allocation_metrics(void) = default;
   ~allocation_metrics(void) override = default;

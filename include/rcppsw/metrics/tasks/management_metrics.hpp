@@ -46,7 +46,7 @@ NS_START(rcppsw, metrics, tasks);
  * - When a task is aborted.
  * - When a new task is allocated.
  */
-class management_metrics : public allocation_metrics {
+class management_metrics : public virtual allocation_metrics {
  public:
   management_metrics(void) = default;
   ~management_metrics(void) override = default;
