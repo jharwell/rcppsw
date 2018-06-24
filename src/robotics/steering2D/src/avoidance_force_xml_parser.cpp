@@ -36,10 +36,10 @@ constexpr char avoidance_force_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void avoidance_force_xml_parser::parse(const argos::TConfigurationNode& node) {
+void avoidance_force_xml_parser::parse(const argos::TConfigurationNode &node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
     ticpp::Element anode =
-        argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
+        argos::GetNode(const_cast<ticpp::Element &>(node), kXMLRoot);
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
     XML_PARSE_PARAM(anode, m_params, lookahead);
@@ -48,11 +48,9 @@ void avoidance_force_xml_parser::parse(const argos::TConfigurationNode& node) {
   }
 } /* parse() */
 
-void avoidance_force_xml_parser::show(std::ostream& stream) const {
-    if (!m_parsed) {
-    stream << build_header()
-           << "<< Not Parsed >>"
-           << std::endl
+void avoidance_force_xml_parser::show(std::ostream &stream) const {
+  if (!m_parsed) {
+    stream << build_header() << "<< Not Parsed >>" << std::endl
            << build_footer();
     return;
   }

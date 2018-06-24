@@ -33,63 +33,48 @@ NS_START(rcppsw, robotics, kinematics2D);
  * Constructors/Destructor
  ******************************************************************************/
 differential_drive::differential_drive(
-    const std::shared_ptr<er::server>& server,
-    const hal::actuators::differential_drive_actuator& actuator,
-    drive_type type,
-    double wheel_radius,
-    double axle_length,
-    double max_speed,
+    const std::shared_ptr<er::server> &server,
+    const hal::actuators::differential_drive_actuator &actuator,
+    drive_type type, double wheel_radius, double axle_length, double max_speed,
     argos::CRadians soft_turn_max)
-    : er::client(server),
-      m_drive_type(type),
-      m_wheel_radius(wheel_radius),
-      m_axle_length(axle_length),
-      m_max_speed(max_speed),
-      m_fsm(max_speed, soft_turn_max),
-      m_actuator(actuator) {
+    : er::client(server), m_drive_type(type), m_wheel_radius(wheel_radius),
+      m_axle_length(axle_length), m_max_speed(max_speed),
+      m_fsm(max_speed, soft_turn_max), m_actuator(actuator) {
   if (ERROR == client::attmod("differential_drive")) {
-    client::insmod("differential_drive",
-                   rcppsw::er::er_lvl::DIAG,
+    client::insmod("differential_drive", rcppsw::er::er_lvl::DIAG,
                    rcppsw::er::er_lvl::NOM);
   }
 }
 
 differential_drive::differential_drive(
-    const std::shared_ptr<er::server>& server,
-    const hal::actuators::differential_drive_actuator& actuator,
-    drive_type type,
-    double wheel_radius,
-    double axle_length,
-    double max_speed)
-    : differential_drive{server,
-                         actuator,
-                         type,
-                         wheel_radius,
-                         axle_length,
-                         max_speed,
+    const std::shared_ptr<er::server> &server,
+    const hal::actuators::differential_drive_actuator &actuator,
+    drive_type type, double wheel_radius, double axle_length, double max_speed)
+    : differential_drive{server,           actuator,    type,
+                         wheel_radius,     axle_length, max_speed,
                          argos::CRadians()} {
   assert(kFSMDrive != type);
 }
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-status_t differential_drive::actuate(const kinematics::twist& twist) {
+status_t differential_drive::actuate(const kinematics::twist &twist) {
   switch (m_drive_type) {
-    case kTankDrive:
-    case kFSMDrive:
-      ER_ERR("Cannot actuate: Not in curvature drive mode");
-      return ERROR;
-      break;
-    case kCurvatureDrive:
-      return curvature_drive(twist, m_hard_turn);
+  case kTankDrive:
+  case kFSMDrive:
+    ER_ERR("Cannot actuate: Not in curvature drive mode");
+    return ERROR;
+    break;
+  case kCurvatureDrive:
+    return curvature_drive(twist, m_hard_turn);
   } /* switch() */
   ER_FATAL_SENTINEL("Bad drive type: %d", m_drive_type);
   return ERROR;
 } /* actuate() */
 
 status_t differential_drive::fsm_drive(double speed,
-                                       const argos::CRadians& angle,
-                                       const std::pair<bool, bool>& force) {
+                                       const argos::CRadians &angle,
+                                       const std::pair<bool, bool> &force) {
   std::pair<double, double> speeds = m_fsm.wheel_speeds();
   ER_CHECK(kFSMDrive == m_drive_type, "Cannot actuate: not in FSM drive mode");
   m_fsm.change_velocity(speed, angle, force);
@@ -102,10 +87,10 @@ error:
   return ERROR;
 } /* fsm_drive() */
 
-status_t differential_drive::tank_drive(double left_speed,
-                                        double right_speed,
+status_t differential_drive::tank_drive(double left_speed, double right_speed,
                                         bool square_inputs) {
-  ER_CHECK(kTankDrive == m_drive_type, "Cannot actuate: not in tank drive mode");
+  ER_CHECK(kTankDrive == m_drive_type,
+           "Cannot actuate: not in tank drive mode");
 
   m_left_linspeed = limit(left_speed);
   m_right_linspeed = limit(right_speed);
@@ -117,8 +102,7 @@ status_t differential_drive::tank_drive(double left_speed,
         std::copysign(std::pow(m_right_linspeed, 2), m_right_linspeed);
   }
 
-  ER_VER("Normalized linear wheel speeds: (%f, %f)",
-         m_left_linspeed,
+  ER_VER("Normalized linear wheel speeds: (%f, %f)", m_left_linspeed,
          m_right_linspeed);
   m_actuator.set_wheel_speeds(m_left_linspeed, m_right_linspeed);
   return OK;
@@ -127,7 +111,7 @@ error:
   return ERROR;
 } /* tank_drive() */
 
-status_t differential_drive::curvature_drive(const kinematics::twist& twist,
+status_t differential_drive::curvature_drive(const kinematics::twist &twist,
                                              bool hard_turn) {
   double w = twist.angular.z;
   double v = twist.linear.x;
@@ -136,8 +120,7 @@ status_t differential_drive::curvature_drive(const kinematics::twist& twist,
 
   ER_CHECK(kCurvatureDrive == m_drive_type,
            "Cannot actuate: not in curvature drive mode");
-  ER_VER("Twist.linear.x: %f twist.angular.z: %f",
-         twist.linear.x,
+  ER_VER("Twist.linear.x: %f twist.angular.z: %f", twist.linear.x,
          twist.angular.z);
 
   if (hard_turn) {
@@ -150,8 +133,7 @@ status_t differential_drive::curvature_drive(const kinematics::twist& twist,
     outputs = normalize_outputs(std::make_pair((v - w * m_axle_length / 2),
                                                (v + w * m_axle_length / 2)));
   }
-  ER_VER("Normalized linear wheel speeds: (%f, %f)",
-         outputs.first,
+  ER_VER("Normalized linear wheel speeds: (%f, %f)", outputs.first,
          outputs.second);
 
   m_left_linspeed = outputs.first;
@@ -169,7 +151,7 @@ __rcsw_pure double differential_drive::limit(double value) const {
 } /* limit() */
 
 std::pair<double, double> differential_drive::normalize_outputs(
-    const std::pair<double, double>& outputs) const {
+    const std::pair<double, double> &outputs) const {
   return std::make_pair(limit(outputs.first), limit(outputs.second));
 } /* normalize_outputs() */
 

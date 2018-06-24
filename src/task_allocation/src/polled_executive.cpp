@@ -46,14 +46,14 @@ void polled_executive::run(void) {
       auto p = std::static_pointer_cast<partitionable_polled_task>(
           executive::root_task());
       std::vector<task_graph_vertex> kids = graph()->children(p);
-      p->update_partition_prob(p->exec_estimate(),
-                               kids[0]->exec_estimate(),
+      p->update_partition_prob(p->exec_estimate(), kids[0]->exec_estimate(),
                                kids[1]->exec_estimate());
     }
 
     handle_task_start(executive::get_next_task(nullptr));
   }
-  auto current = std::static_pointer_cast<polled_task>(executive::current_task());
+  auto current =
+      std::static_pointer_cast<polled_task>(executive::current_task());
   ER_ASSERT(current, "FATAL: polled_executive can only work with polled tasks");
 
   if (current->task_finished()) {
@@ -83,7 +83,8 @@ void polled_executive::handle_task_abort(task_graph_vertex task) {
   task->update_interface_time();
 
   task_graph_vertex update = nullptr;
-  auto partitionable = std::static_pointer_cast<partitionable_polled_task>(task);
+  auto partitionable =
+      std::static_pointer_cast<partitionable_polled_task>(task);
   if (!task->is_partitionable()) {
     partitionable = std::static_pointer_cast<partitionable_polled_task>(
         task_decomposition_graph::vertex_parent(graph(), task));
@@ -117,7 +118,8 @@ void polled_executive::handle_task_finish(task_graph_vertex task) {
   task->update_interface_time();
 
   task_graph_vertex update = nullptr;
-  auto partitionable = std::static_pointer_cast<partitionable_polled_task>(task);
+  auto partitionable =
+      std::static_pointer_cast<partitionable_polled_task>(task);
   if (!task->is_partitionable()) {
     partitionable = std::static_pointer_cast<partitionable_polled_task>(
         task_decomposition_graph::vertex_parent(graph(), task));

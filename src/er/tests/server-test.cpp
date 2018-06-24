@@ -31,9 +31,8 @@
  * Test Classes
  ******************************************************************************/
 class test_client : public rcppsw::er::client {
- public:
-  test_client(std::shared_ptr<rcppsw::er::server> handle)
-      : client(handle) {
+public:
+  test_client(std::shared_ptr<rcppsw::er::server> handle) : client(handle) {
     server_handle()->insmod(er_id(), "test_module");
     server_handle()->mod_dbglvl(er_id(), rcppsw::er::er_lvl::NOM);
 

@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/abort_probability.hpp"
-#include <cmath>
 #include "rcppsw/task_allocation/abort_params.hpp"
+#include <cmath>
 
 /*******************************************************************************
  * Namespaces
@@ -33,14 +33,14 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-abort_probability::abort_probability(const struct abort_params* const params)
+abort_probability::abort_probability(const struct abort_params *const params)
     : abort_probability(params->reactivity, params->offset) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 double abort_probability::calc(double exec_time,
-                               const time_estimate& whole_task) {
+                               const time_estimate &whole_task) {
   if (!(whole_task.last_result() > 0)) {
     return set_result(kNO_EST_ABORT_PROB);
   }
@@ -51,7 +51,7 @@ double abort_probability::calc(double exec_time,
 } /* calc() */
 
 double abort_probability::operator()(double exec_time,
-                                     const time_estimate& whole_task) {
+                                     const time_estimate &whole_task) {
   return calc(exec_time, whole_task);
 } /* operator() */
 

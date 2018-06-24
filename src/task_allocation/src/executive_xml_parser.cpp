@@ -39,12 +39,12 @@ constexpr char executive_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void executive_xml_parser::parse(const ticpp::Element& node) {
+void executive_xml_parser::parse(const ticpp::Element &node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
     ticpp::Element enode =
-        get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+        get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
     m_abort.parse(enode);
     m_partition.parse(enode);
     m_subtask.parse(enode);
@@ -58,27 +58,21 @@ void executive_xml_parser::parse(const ticpp::Element& node) {
   }
 } /* parse() */
 
-void executive_xml_parser::show(std::ostream& stream) const {
-      if (!m_parsed) {
-    stream << build_header()
-           << "<< Not Parsed >>"
-           << std::endl
+void executive_xml_parser::show(std::ostream &stream) const {
+  if (!m_parsed) {
+    stream << build_header() << "<< Not Parsed >>" << std::endl
            << build_footer();
     return;
   }
 
-  stream << build_header()
-         << m_abort
-         << m_partition
-         << m_subtask
-         << m_estimation
-         << build_footer();
+  stream << build_header() << m_abort << m_partition << m_subtask
+         << m_estimation << build_footer();
 } /* show() */
 
 __rcsw_pure bool executive_xml_parser::validate(void) const {
   if (m_parsed) {
     return m_abort.validate() && m_partition.validate() &&
-        m_subtask.validate() && m_estimation.validate();
+           m_subtask.validate() && m_estimation.validate();
   }
   return true;
 } /* validate() */

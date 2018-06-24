@@ -21,9 +21,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <iostream>
 #include "rcppsw/math/degrees.hpp"
 #include "rcppsw/math/angles.hpp"
+#include <iostream>
 
 /*******************************************************************************
  * Namespaces
@@ -40,12 +40,12 @@ const float degrees::kDEGREES_TO_RADIANS(radians::kPI.value() / 180.0);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-degrees::degrees(const radians& r) : m_value(to_degrees(r).value()) {}
+degrees::degrees(const radians &r) : m_value(to_degrees(r).value()) {}
 
 /*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
-std::ostream& operator<<(std::ostream& stream, const degrees& d) {
+std::ostream &operator<<(std::ostream &stream, const degrees &d) {
   stream << "degrees(" << d.value() << ")";
   return stream;
 } /* operator<<() */

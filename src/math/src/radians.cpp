@@ -21,9 +21,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <iostream>
 #include "rcppsw/math/radians.hpp"
 #include "rcppsw/math/angles.hpp"
+#include <iostream>
 
 /*******************************************************************************
  * Namespaces
@@ -39,24 +39,21 @@ const radians radians::kPI_OVER_THREE(M_PI / 3.0);
 const radians radians::kPI_OVER_FOUR(M_PI / 4.0);
 const radians radians::kZERO(0.0);
 
-const float  radians::kRADIANS_TO_DEGREES(180.0 / radians::kPI.value());
+const float radians::kRADIANS_TO_DEGREES(180.0 / radians::kPI.value());
 const range<radians> radians::kSignedRange(-radians::kPI, radians::kPI);
 const range<radians> radians::kUnsignedRange(radians(), radians::kTWO_PI);
 
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-radians::radians(const degrees& r) : m_value(to_radians(r).value()) {}
+radians::radians(const degrees &r) : m_value(to_radians(r).value()) {}
 
 /*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
-std::ostream& operator<<(std::ostream& stream, const radians& r) {
-  stream << "radians("
-         << r.value()
-         << " -> "
-         << r.value() * radians::kRADIANS_TO_DEGREES
-         << " degrees"
+std::ostream &operator<<(std::ostream &stream, const radians &r) {
+  stream << "radians(" << r.value() << " -> "
+         << r.value() * radians::kRADIANS_TO_DEGREES << " degrees"
          << ")";
   return stream;
 } /* operator<<() */

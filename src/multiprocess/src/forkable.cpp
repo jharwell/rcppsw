@@ -22,18 +22,18 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/multiprocess/forkable.hpp"
+#include "rcppsw/common/common.hpp"
+#include "rcsw/common/dbg.h"
+#include "rcsw/multiprocess/procm.h"
 #include <assert.h>
 #include <fcntl.h>
 #include <limits.h>
 #include <stdlib.h>
 #include <string.h>
+#include <string>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <string>
 #include <vector>
-#include "rcppsw/common/common.hpp"
-#include "rcsw/common/dbg.h"
-#include "rcsw/multiprocess/procm.h"
 
 /*******************************************************************************
  * Namespaces
@@ -55,7 +55,7 @@ pid_t forkable::start(int core) {
   return m_pid;
 } /* forkable::start() */
 
-pid_t forkable::start(const std::string& new_wd, int core) {
+pid_t forkable::start(const std::string &new_wd, int core) {
   m_proc_run = true;
   m_pid = fork();
   if (m_pid == 0) {

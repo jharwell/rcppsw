@@ -37,9 +37,9 @@ constexpr char differential_drive_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void differential_drive_xml_parser::parse(const ticpp::Element& node) {
+void differential_drive_xml_parser::parse(const ticpp::Element &node) {
   ticpp::Element wnode =
-      argos::GetNode(const_cast<ticpp::Element&>(node), kXMLRoot);
+      argos::GetNode(const_cast<ticpp::Element &>(node), kXMLRoot);
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 
@@ -50,9 +50,8 @@ void differential_drive_xml_parser::parse(const ticpp::Element& node) {
   m_params->soft_turn_max = argos::ToRadians(angle);
 } /* parse() */
 
-void differential_drive_xml_parser::show(std::ostream& stream) const {
-  stream << build_header()
-         << XML_PARAM_STR(m_params, soft_turn_max)
+void differential_drive_xml_parser::show(std::ostream &stream) const {
+  stream << build_header() << XML_PARAM_STR(m_params, soft_turn_max)
          << std::endl
          << XML_PARAM_STR(m_params, max_speed) << std::endl
          << build_footer();

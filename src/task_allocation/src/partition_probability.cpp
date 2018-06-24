@@ -22,9 +22,9 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/partition_probability.hpp"
+#include "rcppsw/task_allocation/partitioning_params.hpp"
 #include <cassert>
 #include <cmath>
-#include "rcppsw/task_allocation/partitioning_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -35,16 +35,16 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 partition_probability::partition_probability(
-    const struct partitioning_params* params)
-    : partition_probability(params->method, params->reactivity, params->offset) {
-}
+    const struct partitioning_params *params)
+    : partition_probability(params->method, params->reactivity,
+                            params->offset) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-double partition_probability::calc(const time_estimate& task,
-                                   const time_estimate& subtask1,
-                                   const time_estimate& subtask2) {
+double partition_probability::calc(const time_estimate &task,
+                                   const time_estimate &subtask1,
+                                   const time_estimate &subtask2) {
   if ("pini2011" == mc_method) {
     return calc_pini2011(task, subtask1, subtask2);
   }
@@ -52,9 +52,9 @@ double partition_probability::calc(const time_estimate& task,
   return 0.0;
 } /* calc() */
 
-double partition_probability::calc_pini2011(const time_estimate& task,
-                                            const time_estimate& subtask1,
-                                            const time_estimate& subtask2) {
+double partition_probability::calc_pini2011(const time_estimate &task,
+                                            const time_estimate &subtask1,
+                                            const time_estimate &subtask2) {
   /*
    * If we do not have samples from the task(s) denominator for either case,
    * then we artificially set that term to 0, which yields an exponent of 0, and

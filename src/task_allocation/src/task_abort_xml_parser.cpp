@@ -39,19 +39,17 @@ constexpr char task_abort_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void task_abort_xml_parser::parse(const ticpp::Element& node) {
+void task_abort_xml_parser::parse(const ticpp::Element &node) {
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 
-  ticpp::Element anode =
-      get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+  ticpp::Element anode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
   XML_PARSE_PARAM(anode, m_params, reactivity);
   XML_PARSE_PARAM(anode, m_params, offset);
 } /* parse() */
 
-void task_abort_xml_parser::show(std::ostream& stream) const {
-  stream << build_header()
-         << XML_PARAM_STR(m_params, reactivity) << std::endl
+void task_abort_xml_parser::show(std::ostream &stream) const {
+  stream << build_header() << XML_PARAM_STR(m_params, reactivity) << std::endl
          << XML_PARAM_STR(m_params, offset) << std::endl
          << build_footer();
 } /* show() */

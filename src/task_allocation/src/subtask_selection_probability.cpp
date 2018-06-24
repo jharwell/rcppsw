@@ -22,9 +22,9 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/subtask_selection_probability.hpp"
+#include "rcppsw/task_allocation/subtask_selection_params.hpp"
 #include <cassert>
 #include <cmath>
-#include "rcppsw/task_allocation/subtask_selection_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -55,25 +55,22 @@ subtask_selection_probability::subtask_selection_probability(std::string method)
 }
 
 subtask_selection_probability::subtask_selection_probability(
-    const struct subtask_selection_params* const params)
-    : mc_method(params->method),
-      m_reactivity(params->reactivity),
-      m_offset(params->offset),
-      m_gamma(params->gamma) {}
+    const struct subtask_selection_params *const params)
+    : mc_method(params->method), m_reactivity(params->reactivity),
+      m_offset(params->offset), m_gamma(params->gamma) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void subtask_selection_probability::init_sigmoid(double reactivity,
-                                                 double offset,
-                                                 double gamma) {
+                                                 double offset, double gamma) {
   m_reactivity = reactivity;
   m_offset = offset;
   m_gamma = gamma;
 } /* init_sigmoid() */
 
-double subtask_selection_probability::calc(const time_estimate* subtask1,
-                                           const time_estimate* subtask2) {
+double subtask_selection_probability::calc(const time_estimate *subtask1,
+                                           const time_estimate *subtask2) {
   if (kMethodBrutschy2014 == mc_method) {
     return calc_brutschy2014(*subtask1, *subtask2);
   } else if (kMethodHarwell2018 == mc_method) {
@@ -90,20 +87,18 @@ __rcsw_const double subtask_selection_probability::calc_random(void) {
 } /* calc_random() */
 
 __rcsw_pure double subtask_selection_probability::calc_brutschy2014(
-    const time_estimate& int_est1,
-    const time_estimate& int_est2) {
+    const time_estimate &int_est1, const time_estimate &int_est2) {
   return calc_sigmoid(int_est1, int_est2);
 } /* calc_brutschy2014() */
 
 __rcsw_pure double subtask_selection_probability::calc_harwell2018(
-    const time_estimate& exec_est1,
-    const time_estimate& exec_est2) {
+    const time_estimate &exec_est1, const time_estimate &exec_est2) {
   return calc_sigmoid(exec_est2, exec_est1);
 } /* calc_harwell2018() */
 
-__rcsw_pure double subtask_selection_probability::calc_sigmoid(
-    const time_estimate& est1,
-    const time_estimate& est2) {
+__rcsw_pure double
+subtask_selection_probability::calc_sigmoid(const time_estimate &est1,
+                                            const time_estimate &est2) {
   /*
    * No information available--just pick randomly.
    */
@@ -126,8 +121,8 @@ __rcsw_pure double subtask_selection_probability::calc_sigmoid(
   return 1.0 / (1 + exp(-o_ss)) * m_gamma;
 } /* calc_sigmoid() */
 
-double subtask_selection_probability::operator()(const time_estimate* subtask1,
-                                                 const time_estimate* subtask2) {
+double subtask_selection_probability::
+operator()(const time_estimate *subtask1, const time_estimate *subtask2) {
   return calc(subtask1, subtask2);
 } /* operator() */
 
