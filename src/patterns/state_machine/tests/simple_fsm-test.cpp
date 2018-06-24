@@ -23,11 +23,11 @@
  ******************************************************************************/
 #define CATCH_CONFIG_MAIN
 #define CATCH_CONFIG_PREFIX_ALL
+#include "rcppsw/er/server.hpp"
+#include "rcppsw/patterns/state_machine/event.hpp"
+#include "rcppsw/patterns/state_machine/simple_fsm.hpp"
 #include <catch.hpp>
 #include <memory>
-#include "rcppsw/patterns/state_machine/simple_fsm.hpp"
-#include "rcppsw/patterns/state_machine/event.hpp"
-#include "rcppsw/er/server.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -39,10 +39,10 @@ namespace er = rcppsw::er;
  * Constructors/Destructors
  ******************************************************************************/
 class test_fsm : public fsm::simple_fsm {
- public:
+public:
   enum states { STATE1, STATE2, STATE3, STATE4, STATE5, STATE6, ST_MAX_STATES };
 
-  explicit test_fsm(const std::shared_ptr<rcppsw::er::server>& server)
+  explicit test_fsm(const std::shared_ptr<rcppsw::er::server> &server)
       : fsm::simple_fsm(server, ST_MAX_STATES) {}
 
   FSM_STATE_DECLARE_ND(test_fsm, s1);
@@ -72,13 +72,9 @@ class test_fsm : public fsm::simple_fsm {
 
   FSM_DEFINE_STATE_MAP_ACCESSOR(state_map, index) {
     FSM_DEFINE_STATE_MAP(state_map, kMAP){
-      FSM_STATE_MAP_ENTRY(&s1),
-          FSM_STATE_MAP_ENTRY(&s2),
-          FSM_STATE_MAP_ENTRY(&s3),
-          FSM_STATE_MAP_ENTRY(&s4),
-          FSM_STATE_MAP_ENTRY(&s5),
-          FSM_STATE_MAP_ENTRY(&s6)
-          };
+        FSM_STATE_MAP_ENTRY(&s1), FSM_STATE_MAP_ENTRY(&s2),
+        FSM_STATE_MAP_ENTRY(&s3), FSM_STATE_MAP_ENTRY(&s4),
+        FSM_STATE_MAP_ENTRY(&s5), FSM_STATE_MAP_ENTRY(&s6)};
     return &kMAP[index];
   }
 };

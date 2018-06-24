@@ -33,58 +33,57 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructors
  ******************************************************************************/
 task_decomposition_graph::task_decomposition_graph(
-    const std::shared_ptr<er::server>& server) :
-    client(server), m_root(), m_graph() {
+    const std::shared_ptr<er::server> &server)
+    : client(server), m_root(), m_graph() {
   insmod("tdg", er::er_lvl::DIAG, er::er_lvl::VER);
 }
 
 /*******************************************************************************
  * Static Member Functions
  ******************************************************************************/
-const task_graph_vertex& task_decomposition_graph::vertex_parent(
-    const task_decomposition_graph& graph,
-    const task_graph_vertex& vertex) {
+const task_graph_vertex &
+task_decomposition_graph::vertex_parent(const task_decomposition_graph &graph,
+                                        const task_graph_vertex &vertex) {
   return graph.vertex_parent(vertex);
 } /* vertex_parent() */
 
-const task_graph_vertex& task_decomposition_graph::vertex_parent(
-    const std::shared_ptr<task_decomposition_graph>& graph,
-    const task_graph_vertex& vertex) {
+const task_graph_vertex &task_decomposition_graph::vertex_parent(
+    const std::shared_ptr<task_decomposition_graph> &graph,
+    const task_graph_vertex &vertex) {
   return vertex_parent(*graph, vertex);
 } /* vertex_parent */
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-task_decomposition_graph::vertex_iterator task_decomposition_graph::find_vertex(
-    const task_graph_vertex& v) const {
-    vertex_iterator v_i, v_end;
-  boost::tie(v_i, v_end) = boost::vertices(m_graph);
-  auto it =  std::find_if(v_i,
-                          v_end,
-                          [&](const task_decomposition_graph::vertex& tmp) {
-                            return v == m_graph[tmp]; });
-  return it;
-} /* find_vertex() */
-
-task_decomposition_graph::vertex_iterator task_decomposition_graph::find_vertex(
-    const std::string& v) const {
+task_decomposition_graph::vertex_iterator
+task_decomposition_graph::find_vertex(const task_graph_vertex &v) const {
   vertex_iterator v_i, v_end;
   boost::tie(v_i, v_end) = boost::vertices(m_graph);
-  auto it =  std::find_if(v_i,
-                          v_end,
-                          [&](const task_decomposition_graph::vertex& tmp) {
-                            return v == m_graph[tmp]->name(); });
+  auto it = std::find_if(v_i, v_end,
+                         [&](const task_decomposition_graph::vertex &tmp) {
+                           return v == m_graph[tmp];
+                         });
   return it;
 } /* find_vertex() */
 
-const task_graph_vertex& task_decomposition_graph::vertex_parent(
-    const task_graph_vertex& vertex) const {
+task_decomposition_graph::vertex_iterator
+task_decomposition_graph::find_vertex(const std::string &v) const {
+  vertex_iterator v_i, v_end;
+  boost::tie(v_i, v_end) = boost::vertices(m_graph);
+  auto it = std::find_if(v_i, v_end,
+                         [&](const task_decomposition_graph::vertex &tmp) {
+                           return v == m_graph[tmp]->name();
+                         });
+  return it;
+} /* find_vertex() */
+
+const task_graph_vertex &
+task_decomposition_graph::vertex_parent(const task_graph_vertex &vertex) const {
 
   auto found = find_vertex(vertex);
   ER_ASSERT(found != boost::vertices(m_graph).second,
-            "FATAL: No such vertex %s found in graph",
-            vertex->name().c_str());
+            "FATAL: No such vertex %s found in graph", vertex->name().c_str());
 
   /*
    * Now, we can just look in the incident edges for the vertex and return the
@@ -97,9 +96,10 @@ const task_graph_vertex& task_decomposition_graph::vertex_parent(
   return m_graph[boost::source(*ie, m_graph)];
 } /* vertex_parent() */
 
-status_t task_decomposition_graph::set_root(const task_graph_vertex& v) {
+status_t task_decomposition_graph::set_root(const task_graph_vertex &v) {
   vertex added;
-  ER_CHECK(0 == boost::num_edges(m_graph), "ERROR: Root already set for graph!");
+  ER_CHECK(0 == boost::num_edges(m_graph),
+           "ERROR: Root already set for graph!");
   added = boost::add_vertex(v, m_graph);
   m_root = v;
   boost::add_edge(added, added, m_graph);
@@ -109,12 +109,11 @@ error:
   return ERROR;
 } /* set_root() */
 
-std::vector<task_graph_vertex> task_decomposition_graph::children(
-    const task_graph_vertex& parent) const {
+std::vector<task_graph_vertex>
+task_decomposition_graph::children(const task_graph_vertex &parent) const {
   auto it = find_vertex(parent);
   ER_ASSERT(it != boost::vertices(m_graph).second,
-            "FATAL: No such vertex %s found in graph",
-            parent->name().c_str());
+            "FATAL: No such vertex %s found in graph", parent->name().c_str());
   std::vector<task_graph_vertex> kids;
   out_edge_iterator oe, oe_end;
 
@@ -127,13 +126,15 @@ std::vector<task_graph_vertex> task_decomposition_graph::children(
   return kids;
 } /* children() */
 
-status_t task_decomposition_graph::set_children(const std::string& parent,
-                                                std::list<task_graph_vertex> children) {
+status_t
+task_decomposition_graph::set_children(const std::string &parent,
+                                       std::list<task_graph_vertex> children) {
   return set_children(m_graph[*find_vertex(parent)], children);
 } /* set_children() */
 
-status_t task_decomposition_graph::set_children(const task_graph_vertex& parent,
-                                                std::list<task_graph_vertex> children) {
+status_t
+task_decomposition_graph::set_children(const task_graph_vertex &parent,
+                                       std::list<task_graph_vertex> children) {
   out_edge_iterator oe_start, oe_end;
   auto vertex_d = find_vertex(parent);
   ER_CHECK(vertex_d != boost::vertices(m_graph).second,
@@ -146,7 +147,7 @@ status_t task_decomposition_graph::set_children(const task_graph_vertex& parent,
              m_graph[*vertex_d]->name().c_str());
   }
 
-  for (auto& c : children) {
+  for (auto &c : children) {
     vertex new_v = boost::add_vertex(c, m_graph);
     ER_VER("Add edge %s -> %s", m_graph[*vertex_d]->name().c_str(),
            m_graph[new_v]->name().c_str());

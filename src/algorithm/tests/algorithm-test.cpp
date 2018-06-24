@@ -11,8 +11,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
 #include "include/max_subarray_finder.hpp"
+#include <vector>
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 

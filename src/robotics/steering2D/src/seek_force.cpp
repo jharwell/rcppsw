@@ -31,8 +31,8 @@ NS_START(rcppsw, robotics, steering2D);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-argos::CVector2 seek_force::operator()(const boid& entity,
-                                       const argos::CVector2& target) const {
+argos::CVector2 seek_force::operator()(const boid &entity,
+                                       const argos::CVector2 &target) const {
   return (target - entity.position()).Normalize() * entity.max_speed();
 } /* operator()() */
 

@@ -32,16 +32,15 @@ NS_START(rcppsw, robotics, steering2D);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-arrival_force::arrival_force(const struct arrival_force_params* const params)
-    : m_max(params->max),
-      m_slowing_speed_min(params->slowing_speed_min),
+arrival_force::arrival_force(const struct arrival_force_params *const params)
+    : m_max(params->max), m_slowing_speed_min(params->slowing_speed_min),
       m_slowing_radius(params->slowing_radius) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-argos::CVector2 arrival_force::operator()(const boid& entity,
-                                          const argos::CVector2& target) {
+argos::CVector2 arrival_force::operator()(const boid &entity,
+                                          const argos::CVector2 &target) {
   argos::CVector2 desired = target - entity.position();
   double distance = desired.Length();
 

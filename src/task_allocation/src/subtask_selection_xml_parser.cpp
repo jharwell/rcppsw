@@ -39,8 +39,8 @@ constexpr char subtask_selection_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void subtask_selection_xml_parser::parse(const ticpp::Element& node) {
-  ticpp::Element snode = get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+void subtask_selection_xml_parser::parse(const ticpp::Element &node) {
+  ticpp::Element snode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 
@@ -50,9 +50,8 @@ void subtask_selection_xml_parser::parse(const ticpp::Element& node) {
   XML_PARSE_PARAM(snode, m_params, gamma);
 } /* parse() */
 
-void subtask_selection_xml_parser::show(std::ostream& stream) const {
-  stream << build_header()
-         << XML_PARAM_STR(m_params, reactivity) << std::endl
+void subtask_selection_xml_parser::show(std::ostream &stream) const {
+  stream << build_header() << XML_PARAM_STR(m_params, reactivity) << std::endl
          << XML_PARAM_STR(m_params, offset) << std::endl
          << XML_PARAM_STR(m_params, method) << std::endl
          << XML_PARAM_STR(m_params, gamma) << std::endl
