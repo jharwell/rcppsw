@@ -91,7 +91,7 @@
  */
 #define ER_REPORT(lvl, msg, ...)                       \
   {                                                    \
-    if (__er_will_report__(rcppsw::er::client::server_handle(),   \
+    if (__er_will_report__(rcppsw::er::client::server_ptr(),   \
                            rcppsw::er::client::er_id(),           \
                            lvl)) {                                \
       char _str[1000];                                 \
@@ -105,7 +105,7 @@
       rcppsw::er::er_msg _msg(rcppsw::er::client::er_id(),      \
                               lvl,                              \
                               std::string(reinterpret_cast<char*>(_str))); \
-      __er_report__(rcppsw::er::client::server_handle(), _msg);         \
+      __er_report__(rcppsw::er::client::server_ptr(), _msg);         \
     }                                                                   \
   }
 
@@ -269,12 +269,13 @@ class client {
    *
    * @return A reference to the server handle.
    */
-  server* server_handle(void) const { return m_server_handle.get(); }
+  server* server_ptr(void) const { return m_server_handle.get(); }
 
  protected:
   const std::shared_ptr<server>& server_ref(void) const {
     return m_server_handle;
   }
+  std::shared_ptr<server>& server_ref(void) { return m_server_handle; }
 
   /**
    * @brief Get a reference to the UUID for the module. Should not be called

@@ -142,7 +142,7 @@ class xml_param_repository {
   std::map<std::string, xml_param_parser*>         m_parsers;
   std::map<std::type_index, std::string>           m_param_types;
   factory::sharing_factory<xml_param_parser,
-                           const std::shared_ptr<er::server>&,
+                           std::shared_ptr<er::server>&,
                            uint>                   m_factory;
   // clang-format on
 };

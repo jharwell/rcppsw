@@ -23,6 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/robotics/kinematics2D/differential_drive.hpp"
 #include "rcsw/common/fpc.h"
+#include "rcppsw/robotics/hal/sensors/rab_wifi_sensor.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -62,7 +63,7 @@ status_t differential_drive::actuate(const kinematics::twist &twist) {
   switch (m_drive_type) {
   case kTankDrive:
   case kFSMDrive:
-    ER_ERR("Cannot actuate: Not in curvature drive mode");
+    ER_ERR("Cannot actuate: Ngot in curvature drive mode");
     return ERROR;
     break;
   case kCurvatureDrive:

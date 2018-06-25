@@ -57,33 +57,14 @@ The following development guides should be followed:
 3. Branch off of the `devel` branch with a branch with the *SAME* name as the
    issue.
 
-4. Work on the issue/task, committing as needed. You should push your changes
-   regularly, so people can see that the issue is being actively worked on. Your
-   commit messages don't have to be an essay, but they should all reference the
-   issue # of the task so that in-progress commits show up in github, and
-   describe what was done and why in reasonable detail. Don't do things like "in
-   progress", or "misc updates", or if you do such things, rebase/collapse your
-   history into a single detailed commit when you are done BEFORE merging to
-   devel. Be sure you know what you are doing if you go this route...
+4. Work on the issue/task, committing as needed. You should:
 
-   *DO NOT REBASE/REWRITE HISTORY ON* `devel` *OR* `master` *BRANCHES.*
+   - Push your changes regularly, so people can see that the issue is being
+     actively worked on. Commit messages should follow the [Git Commit
+     Guide](GIT_COMMIT_GUIDE.md).
 
-   In addition, you may need to put an appropriate tag for semantic versioning
-   somewhere in your message (I usually put it at the bottom), depending on if
-   you are working on something whose TYPE matches one of the ones listed below:
-
-        +semver: feature
-        +semver: bugfix
-        +semver: docs
-        +semver: enh
-
-   There should only be ONE semantic versioning tag for each issue/task you are
-   working on, so you should add it on the last commit on your branch before you
-   merge to devel. The "main" commit should also have a form like this:
-
-        <TYPE>(#issue_number): Subject
-
-   Where TYPE is one of the types listed above.
+   - Merge in the `devel` branch into your branch periodicaly so that merge
+     conflicts/headaches are minimized.
 
 5. If you create any new functions/classes that can be unit tested, then define
    appropriate unit tests for them, and prepare a report documenting code

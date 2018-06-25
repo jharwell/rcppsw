@@ -42,7 +42,7 @@ client::~client(void) = default;
  * Member Functions
  ******************************************************************************/
 status_t client::attmod(const std::string &mod_name) {
-  return server_handle()->findmod(mod_name, m_er_id);
+  return server_ptr()->findmod(mod_name, m_er_id);
 } /* attmod() */
 
 void client::deferred_client_init(std::shared_ptr<server> server_handle) {
