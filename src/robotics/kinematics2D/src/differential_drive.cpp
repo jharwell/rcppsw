@@ -23,6 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/robotics/kinematics2D/differential_drive.hpp"
 #include "rcsw/common/fpc.h"
+#include "rcppsw/robotics/hal/sensors/rab_wifi_sensor.hpp"
 
 /*******************************************************************************
  * Namespaces
