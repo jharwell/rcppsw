@@ -110,9 +110,26 @@ partitionable_task::partition(const task_graph_vertex &partition1,
                                     &partition1->interface_estimate());
   }
 
-  ER_NOM("Task '%s': selection_method=%s subtask1->subtask2 "
-         "prob=%f,subtask2->subtask1 prob=%f",
-         name.c_str(), m_selection_prob.method().c_str(), prob_12, prob_21);
+  ER_NOM("Task '%s': selection_method=%s, last_partition=%s",
+         name.c_str(),
+         m_selection_prob.method().c_str(),
+         (nullptr != m_last_partition)? m_last_partition->name().c_str(): "None");
+
+  ER_NOM("%s exec_est=%f/int_est=%f, %s exec_est=%f/int_est=%f",
+         partition1->name().c_str(),
+         partition1->exec_estimate().last_result(),
+         partition1->interface_estimate().last_result(),
+         partition2->name().c_str(),
+         partition2->exec_estimate().last_result(),
+         partition2->interface_estimate().last_result());
+
+  ER_NOM("%s -> %s prob=%f, %s -> %s prob=%f",
+         partition1->name().c_str(),
+         partition2->name().c_str(),
+         prob_12,
+         partition2->name().c_str(),
+         partition1->name().c_str(),
+         prob_21);
 
   if (subtask_selection_probability::kMethodHarwell2018 ==
           m_selection_prob.method() ||
