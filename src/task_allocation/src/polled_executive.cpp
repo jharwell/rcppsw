@@ -42,10 +42,14 @@ void polled_executive::run(void) {
      * have not been executed before, we get a partition probability of 0.5,
      * rather than the 0 we get if we do not do this.
      */
-    if (executive::root_task()->is_partitionable()) {
+    if (executive::root_task()->is_partitionable() &&
+        !executive::root_task()->is_atomic()) {
       auto p = std::static_pointer_cast<partitionable_polled_task>(
           executive::root_task());
       std::vector<task_graph_vertex> kids = graph()->children(p);
+      ER_ASSERT(2 == kids.size(),
+                "FATAL: Non-atomic partitionable task has %zu kids (expected %d)",
+                kids.size(), 2);
       p->update_partition_prob(p->exec_estimate(), kids[0]->exec_estimate(),
                                kids[1]->exec_estimate());
     }
@@ -143,6 +147,9 @@ void polled_executive::handle_task_start(task_graph_vertex new_task) {
   }
 
   auto polled = std::dynamic_pointer_cast<polled_task>(new_task);
+  ER_ASSERT(!(polled->is_atomic() && polled->is_partitionable()),
+            "FATAL: Task %s cannot be both atomic and partitionable",
+            polled->name().c_str());
   polled->task_reset();
   polled->task_start(nullptr);
   polled->reset_exec_time();
