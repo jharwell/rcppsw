@@ -27,7 +27,6 @@
 #include <string>
 #include "rcppsw/task_allocation/logical_task.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
-#include "rcppsw/task_allocation/task_graph_vertex.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -203,10 +202,13 @@ class executable_task : public logical_task {
     m_last_exec_time = m_exec_time;
     m_exec_start_time = current_time();
   }
+  bool task_aborted(void) const { return m_task_aborted; }
+  void task_aborted(bool task_aborted) { m_task_aborted = task_aborted; }
 
  private:
   bool m_is_atomic{false};
   bool m_is_partitionable{false};
+  bool m_task_aborted{false};
 
   double m_interface_time{0.0};
   double m_last_interface_time{0.0};

@@ -39,7 +39,7 @@ partitionable_polled_task::partitionable_polled_task(
     : polled_task(name, c_params, std::move(mechanism)),
       partitionable_task(server, c_params) {}
 
-void partitionable_polled_task::init_random(const task_graph_vertex &partition,
+void partitionable_polled_task::init_random(const polled_task *partition,
                                             int lb, int ub) {
   executable_task::update_exec_estimate(random() % (ub - lb + 1) + lb);
   last_partition(partition);
