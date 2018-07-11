@@ -29,8 +29,15 @@ set(Boost_USE_STATIC_LIBS OFF)
 ################################################################################
 # Includes                                                                     #
 ################################################################################
+if (BUILD_ON_MSI)
+  set(ARGOS_INSTALL_PREFIX /home/gini/shared/swarm)
+else()
+  set(ARGOS_INSTALL_PREFIX /opt/data/local)
+endif()
+
 set(${target}_INCLUDE_DIRS "${${target}_INC_PATH}" ${rcsw_INCLUDE_DIRS})
-set(${target}_SYS_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} ${Boost_INCLUDE_DIRS})
+set(${target}_SYS_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
+  ${Boost_INCLUDE_DIRS} ${ARGOS_INSTALL_PREFIX}/include)
 
 ################################################################################
 # Submodules                                                                   #
@@ -63,6 +70,14 @@ foreach(d ${${target}_pattern_SUBDIRS})
   target_include_directories(${target}-${d} SYSTEM PRIVATE "${${target}_SYS_INCLUDE_DIRS}")
 endforeach()
 
+list(APPEND ${target}_metrics_SUBDIRS tasks)
+
+foreach(d ${${target}_metrics_SUBDIRS})
+  add_subdirectory(src/metrics/${d})
+  target_include_directories(${target}-${d} PUBLIC "${${target}_INCLUDE_DIRS}")
+  target_include_directories(${target}-${d} SYSTEM PRIVATE "${${target}_SYS_INCLUDE_DIRS}")
+endforeach()
+
 list(APPEND ${target}_robotics_SUBDIRS steering2D)
 list(APPEND ${target}_robotics_SUBDIRS kinematics2D)
 
@@ -71,14 +86,10 @@ foreach(d ${${target}_robotics_SUBDIRS})
 
   target_include_directories(${target}-${d} PUBLIC "${${target}_INCLUDE_DIRS}")
   target_include_directories(${target}-${d} SYSTEM PRIVATE "${${target}_SYS_INCLUDE_DIRS}")
+  target_include_directories(${target}-${d} PUBLIC /usr/include/lua5.2)
 
   if ("${WITH_HAL_CONFIG}" MATCHES "argos-footbot")
     target_compile_definitions(${target}-${d} PUBLIC HAL_CONFIG=HAL_CONFIG_ARGOS_FOOTBOT)
-    target_include_directories(${target}-${d} PUBLIC /usr/include/lua5.2)
-  endif()
-  if (BUILD_ON_MSI)
-    target_include_directories(${target}-${d} SYSTEM PUBLIC ${MSI_ARGOS_INSTALL_PREFIX}/include)
-    target_compile_options(${target}-${d} PUBLIC -Wno-missing-include-dirs)
   endif()
 endforeach()
 
@@ -93,7 +104,7 @@ set(${target}_LIBRARIES
 set(${target_LIBRARY_DIRS} ${rcsw_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS})
 
 if (BUILD_ON_MSI)
-  set(${target}_LIBRARY_DIRS ${${target}_LIBRARY_DIRS} ${MSI_ARGOS_INSTALL_PREFIX}/lib/argos3)
+  set(${target}_LIBRARY_DIRS ${${target}_LIBRARY_DIRS} ${ARGOS_INSTALL_PREFIX}/lib/argos3)
 endif()
 
 if (NOT TARGET ${target})
@@ -107,6 +118,7 @@ if (NOT TARGET ${target})
     $<TARGET_OBJECTS:${target}-kinematics2D>
     $<TARGET_OBJECTS:${target}-task_allocation>
     $<TARGET_OBJECTS:${target}-params>
+    $<TARGET_OBJECTS:${target}-tasks>
     $<TARGET_OBJECTS:${target}-math>
     $<TARGET_OBJECTS:${target}-metrics>
     $<TARGET_OBJECTS:${target}-control>)

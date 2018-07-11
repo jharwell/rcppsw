@@ -1,7 +1,7 @@
 /**
- * @file polled_executive.hpp
+ * @file bifurcating_tdgraph_executive.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,45 +18,52 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_EXECUTIVE_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_EXECUTIVE_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_BIFURCATING_TDGRAPH_EXECUTIVE_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_BIFURCATING_TDGRAPH_EXECUTIVE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/executive.hpp"
-#include "rcppsw/task_allocation/task_graph_vertex.hpp"
+#include "rcppsw/task_allocation/base_executive.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
+class bifurcating_tab;
+class bifurcating_tdgraph;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-
 /**
- * @class polled_executive
+ * @class bifurcating_tdgraph_executive
  * @ingroup task_allocation
  *
- * @brief A task executive which tasks are run one step at a time and polled to
- * see if they are finished yet.
+ * @brief A task executive which tasks are run one step at a time and polled
+ * until they are finished. Operates on \ref bifurcating_tdgraph.
  */
-class polled_executive : public executive {
+class bifurcating_tdgraph_executive : public base_executive {
  public:
-  polled_executive(const std::shared_ptr<rcppsw::er::server>& server,
-                   const std::shared_ptr<task_decomposition_graph>& graph)
-      : executive(server, graph) {}
+  bifurcating_tdgraph_executive(std::shared_ptr<rcppsw::er::server>& server,
+                                bifurcating_tdgraph* graph);
 
   void run(void) override;
 
+  /**
+   * @brief Get the TAB corresponding to the currently active task.
+   */
+  const bifurcating_tab* active_tab(void) const;
+
  private:
-  void handle_task_start(task_graph_vertex new_task);
-  void handle_task_abort(task_graph_vertex task);
-  void handle_task_finish(task_graph_vertex task);
+  polled_task* do_get_next_task(void) override;
+  polled_task* next_task_from_partitionable(const polled_task* task);
+  void handle_task_start(polled_task* new_task);
+  void handle_task_abort(polled_task* task);
+  void handle_task_finish(polled_task* task);
+  void update_task_partition_prob(polled_task* task);
 };
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_POLLED_EXECUTIVE_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_BIFURCATING_TDGRAPH_EXECUTIVE_HPP_ */
