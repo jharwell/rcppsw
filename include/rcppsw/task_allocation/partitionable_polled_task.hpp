@@ -61,7 +61,7 @@ class partitionable_polled_task : public polled_task, public partitionable_task 
    * @param lb Lower bound for exec estimate.
    * @param ub Upper bound for exec estimate.
    */
-  void init_random(const task_graph_vertex& partition,
+  void init_random(const polled_task* partition,
                    int lb, int ub);
 };
 

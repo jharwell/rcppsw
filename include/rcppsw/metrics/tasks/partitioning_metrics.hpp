@@ -1,5 +1,5 @@
 /**
- * @file task_graph_vertex.hpp
+ * @file partitioning_metrics.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,30 +18,52 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_GRAPH_VERTEX_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_GRAPH_VERTEX_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_TASKS_PARTITIONING_METRICS_HPP_
+#define INCLUDE_RCPPSW_METRICS_TASKS_PARTITIONING_METRICS_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/metrics/base_metrics.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, metrics, tasks);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-class executable_task;
-using task_graph_vertex = std::shared_ptr<executable_task>;
+/**
+ * @class partitioning_metrics
+ * @ingroup metrics
+ *
+ * @brief Interface defining metrics that can be collected on tasks during
+ * partitioning.
+ */
+class partitioning_metrics : public virtual base_metrics {
+ public:
+  partitioning_metrics(void) = default;
+  ~partitioning_metrics(void) override = default;
 
-template <typename T, typename ...Args>
-task_graph_vertex make_task_graph_vertex(Args&&... args) {
-  return std::make_shared<T>(args...);
-}
+  /**
+   * @brief This function should return \c TRUE, if a robot has chosen to employ
+   * task partitioning when allocating itself its next task.
+   */
+  virtual bool employed_partitioning(void) const = 0;
 
-NS_END(task_allocation, rcppsw);
+  /**
+   * @brief If a robot has chosen to employ task partitioning, this this
+   * function should return the name of the subtask that was selected.
+   *
+   * It should only be called if \ref employed_partitioning() returns \c TRUE.
+   */
+  virtual std::string subtask_selection(void) const = 0;
+};
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_GRAPH_VERTEX_HPP_ */
+NS_END(tasks, metrics, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_METRICS_TASKS_PARTITIONING_METRICS_HPP_ */

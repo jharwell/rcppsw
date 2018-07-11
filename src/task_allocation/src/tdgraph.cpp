@@ -1,5 +1,5 @@
 /**
- * @file task_decomposition_graph.cpp
+ * @file tdgraph.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -21,8 +21,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/task_decomposition_graph.hpp"
-#include "rcppsw/task_allocation/executable_task.hpp"
+#include "rcppsw/task_allocation/tdgraph.hpp"
+#include "rcppsw/task_allocation/polled_task.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -32,58 +32,62 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-task_decomposition_graph::task_decomposition_graph(
-    const std::shared_ptr<er::server> &server)
+tdgraph::tdgraph(std::shared_ptr<er::server> server)
     : client(server), m_root(), m_graph() {
   insmod("tdg", er::er_lvl::DIAG, er::er_lvl::VER);
+}
+
+tdgraph::~tdgraph(void) {
+  vertex_iterator v_i, v_end;
+  boost::tie(v_i, v_end) = boost::vertices(m_graph);
+  while (v_i != v_end) {
+    delete m_graph[*v_i];
+    v_i++;
+  } /* while() */
 }
 
 /*******************************************************************************
  * Static Member Functions
  ******************************************************************************/
-const task_graph_vertex &
-task_decomposition_graph::vertex_parent(const task_decomposition_graph &graph,
-                                        const task_graph_vertex &vertex) {
+polled_task* tdgraph::vertex_parent(const tdgraph &graph,
+                                    const polled_task* const vertex) {
   return graph.vertex_parent(vertex);
 } /* vertex_parent() */
-
-const task_graph_vertex &task_decomposition_graph::vertex_parent(
-    const std::shared_ptr<task_decomposition_graph> &graph,
-    const task_graph_vertex &vertex) {
-  return vertex_parent(*graph, vertex);
-} /* vertex_parent */
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-task_decomposition_graph::vertex_iterator
-task_decomposition_graph::find_vertex(const task_graph_vertex &v) const {
+const polled_task* tdgraph::root(void) const { return m_root; }
+polled_task* tdgraph::root(void) { return m_root; }
+
+tdgraph::vertex_iterator
+tdgraph::find_vertex(const polled_task * const v) const {
   vertex_iterator v_i, v_end;
   boost::tie(v_i, v_end) = boost::vertices(m_graph);
   auto it = std::find_if(v_i, v_end,
-                         [&](const task_decomposition_graph::vertex &tmp) {
+                         [&](const tdgraph::vertex &tmp) {
                            return v == m_graph[tmp];
                          });
   return it;
 } /* find_vertex() */
 
-task_decomposition_graph::vertex_iterator
-task_decomposition_graph::find_vertex(const std::string &v) const {
+tdgraph::vertex_iterator
+tdgraph::find_vertex(const std::string &v) const {
   vertex_iterator v_i, v_end;
   boost::tie(v_i, v_end) = boost::vertices(m_graph);
   auto it = std::find_if(v_i, v_end,
-                         [&](const task_decomposition_graph::vertex &tmp) {
+                         [&](const tdgraph::vertex &tmp) {
                            return v == m_graph[tmp]->name();
                          });
   return it;
 } /* find_vertex() */
 
-const task_graph_vertex &
-task_decomposition_graph::vertex_parent(const task_graph_vertex &vertex) const {
-
+polled_task* tdgraph::vertex_parent(const polled_task *const vertex) const {
   auto found = find_vertex(vertex);
-  ER_ASSERT(found != boost::vertices(m_graph).second,
-            "FATAL: No such vertex %s found in graph", vertex->name().c_str());
+  if (found == boost::vertices(m_graph).second) {
+    return nullptr;
+    ER_WARN("WARNING: No such vertex %s found in graph", vertex->name().c_str());
+  }
 
   /*
    * Now, we can just look in the incident edges for the vertex and return the
@@ -96,25 +100,23 @@ task_decomposition_graph::vertex_parent(const task_graph_vertex &vertex) const {
   return m_graph[boost::source(*ie, m_graph)];
 } /* vertex_parent() */
 
-status_t task_decomposition_graph::set_root(const task_graph_vertex &v) {
-  vertex added;
-  ER_CHECK(0 == boost::num_edges(m_graph),
-           "ERROR: Root already set for graph!");
-  added = boost::add_vertex(v, m_graph);
+status_t tdgraph::set_root(polled_task* const v) {
+  vertex new_v;
+  ER_CHECK(0 == boost::num_edges(m_graph), "ERROR: Root already set for graph!");
+  new_v = boost::add_vertex(v, m_graph);
   m_root = v;
-  boost::add_edge(added, added, m_graph);
+  boost::add_edge(new_v, new_v, m_graph); /* parent of root is root */
   return OK;
 
 error:
   return ERROR;
 } /* set_root() */
 
-std::vector<task_graph_vertex>
-task_decomposition_graph::children(const task_graph_vertex &parent) const {
+std::vector<polled_task*> tdgraph::children(const polled_task* const parent) const {
   auto it = find_vertex(parent);
   ER_ASSERT(it != boost::vertices(m_graph).second,
             "FATAL: No such vertex %s found in graph", parent->name().c_str());
-  std::vector<task_graph_vertex> kids;
+  std::vector<polled_task*> kids;
   out_edge_iterator oe, oe_end;
 
   boost::tie(oe, oe_end) = boost::out_edges(*it, m_graph);
@@ -126,15 +128,13 @@ task_decomposition_graph::children(const task_graph_vertex &parent) const {
   return kids;
 } /* children() */
 
-status_t
-task_decomposition_graph::set_children(const std::string &parent,
-                                       std::list<task_graph_vertex> children) {
+status_t tdgraph::set_children(const std::string &parent,
+                               const std::vector<polled_task*>& children) {
   return set_children(m_graph[*find_vertex(parent)], children);
 } /* set_children() */
 
-status_t
-task_decomposition_graph::set_children(const task_graph_vertex &parent,
-                                       std::list<task_graph_vertex> children) {
+status_t tdgraph::set_children(const polled_task *parent,
+                               const std::vector<polled_task*>& children) {
   out_edge_iterator oe_start, oe_end;
   auto vertex_d = find_vertex(parent);
   ER_CHECK(vertex_d != boost::vertices(m_graph).second,

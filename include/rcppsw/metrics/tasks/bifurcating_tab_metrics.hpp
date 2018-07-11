@@ -1,5 +1,5 @@
 /**
- * @file allocation_metrics.hpp
+ * @file bifurcating_tab_metrics.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,14 +18,12 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_TASKS_ALLOCATION_METRICS_HPP_
-#define INCLUDE_RCPPSW_METRICS_TASKS_ALLOCATION_METRICS_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_TASKS_BIFURCATING_TAB_METRICS_HPP_
+#define INCLUDE_RCPPSW_METRICS_TASKS_BIFURCATING_TAB_METRICS_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/metrics/base_metrics.hpp"
 
@@ -38,32 +36,59 @@ NS_START(rcppsw, metrics, tasks);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class allocation_metrics
- * @ingroup metrics
+ * @class bifurcating_tab_metrics
+ * @ingroup metrics tasks
  *
- * @brief Interface defining metrics that can be collected on tasks during
- * allocation.
+ * @brief Interface defining metrics that can be collected on tasks as they are
+ * executed.
  */
-class allocation_metrics : public virtual base_metrics {
+class bifurcating_tab_metrics : public virtual base_metrics {
  public:
-  allocation_metrics(void) = default;
-  ~allocation_metrics(void) override = default;
+  bifurcating_tab_metrics(void) = default;
+  ~bifurcating_tab_metrics(void) override = default;
+
+  /**
+   * @brief This function should return if subtask1 is currently the active
+   * task.
+   *
+   * @return Valid at any time.
+   */
+  virtual bool subtask1_active(void) const = 0;
+
+  /**
+   * @brief This function should return if subtask2 is currently the active
+   * task.
+   *
+   * @return Valid at any time.
+   */
+  virtual bool subtask2_active(void) const = 0;
+
+  /**
+   * @brief This function should return if the root is currently the active
+   * task.
+   *
+   * @return Valid at any time.
+   */
+  virtual bool root_active(void) const = 0;
 
   /**
    * @brief This function should return \c TRUE, if a robot has chosen to employ
    * task partitioning when allocating itself its next task.
+   *
+   * @return Valid only when \ref has_new_allocation() returns \c TRUE.
    */
   virtual bool employed_partitioning(void) const = 0;
 
   /**
-   * @brief If a robot has chosen to employ task partitioning, this this
-   * function should return the name of the subtask that was selected.
+   * @brief This function should return \c TRUE if the task it is currently
+   * executing is different than the one that it executed last time (this is
+   * the definition of changing allocation).
    *
-   * It should only be called if \ref employed_partitioning() returns \c TRUE.
+   * @return Undefined unless \ref has_new_allocation() returns \c TRUE.
    */
-  virtual std::string subtask_selection(void) const = 0;
+  virtual bool task_changed(void) const = 0;
 };
 
 NS_END(tasks, metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_TASKS_ALLOCATION_METRICS_HPP_ */
+#endif /* INCLUDE_RCPPSW_METRICS_TASKS_BIFURCATING_TAB_METRICS_HPP_ */

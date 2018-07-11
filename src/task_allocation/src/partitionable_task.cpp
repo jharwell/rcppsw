@@ -22,7 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/partitionable_task.hpp"
-#include "rcppsw/task_allocation/executable_task.hpp"
+#include "rcppsw/task_allocation/polled_task.hpp"
 #include "rcppsw/task_allocation/partitionable_task_params.hpp"
 
 /*******************************************************************************
@@ -34,7 +34,7 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 partitionable_task::partitionable_task(
-    const std::shared_ptr<er::server> &server,
+    std::shared_ptr<er::server> server,
     const struct partitionable_task_params *c_params)
     : client(server),
       m_always_partition(c_params->partitioning.always_partition),
@@ -67,9 +67,8 @@ void partitionable_task::update_partition_prob(const time_estimate &task,
   m_partition_prob.calc(task, subtask1, subtask2);
 }
 
-task_graph_vertex
-partitionable_task::partition(const task_graph_vertex &partition1,
-                              const task_graph_vertex &partition2) {
+polled_task* partitionable_task::partition(const polled_task* const partition1,
+                                           const polled_task* const partition2) {
   ER_ASSERT(!(m_always_partition && m_never_partition),
             "FATAL: cannot ALWAYS and NEVER partition");
 
@@ -90,10 +89,12 @@ partitionable_task::partition(const task_graph_vertex &partition1,
   if (partition_prob <= static_cast<double>(random()) / RAND_MAX) {
     ER_NOM("Not employing partitioning: Return task '%s'", name.c_str());
     m_employed_partitioning = false;
-    return shared_from_this();
+    auto ret = dynamic_cast<polled_task*>(this);
+    ER_ASSERT(nullptr != ret, "FATAL: Partitionable task is not pollable")
+    return ret;
   }
   m_employed_partitioning = true;
-  task_graph_vertex ret = nullptr;
+  const polled_task* ret = nullptr;
 
   /* We have chosen to employ partitioning */
   double prob_12, prob_21;
@@ -167,7 +168,7 @@ partitionable_task::partition(const task_graph_vertex &partition1,
   }
   ER_ASSERT(nullptr != ret, "FATAL: no task selected?");
   ER_NOM("Selected subtask '%s'", ret->name().c_str());
-  return ret;
+  return const_cast<polled_task*>(ret);
 } /* partition() */
 
 NS_END(task_allocation, rcppsw);
