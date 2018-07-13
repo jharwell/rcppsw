@@ -91,6 +91,10 @@ class range {
   bool value_within(const T& value) const {
     return value >= m_min && value <= m_max;
   }
+  bool overlaps_with(const range<T>& other) const {
+    return this->value_within(other.m_min) ||
+        this->value_within(other.m_max);
+  }
 
   void wrap_value(T& value) const {
     while (value > m_max) { value -= m_span; }
