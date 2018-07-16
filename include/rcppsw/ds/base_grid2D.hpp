@@ -118,7 +118,7 @@ class base_grid2D {
    * applied to the specified X coordinate.
    */
   std::pair<index_range::index, index_range::index> circle_xrange_at_point(
-      size_t x, size_t radius) {
+      size_t x, size_t radius) const {
     index_range::index lower_x =
         static_cast<index_range::index>(std::max<int>(0,
                                                       static_cast<int>(x) -
@@ -143,7 +143,7 @@ class base_grid2D {
    * applied to the specified Y coordinate.
    */
   std::pair<index_range::index, index_range::index> circle_yrange_at_point(
-      size_t y, size_t radius) {
+      size_t y, size_t radius) const {
     index_range::index lower_y = static_cast<index_range::index>(
         std::max<int>(static_cast<int>(0),
                       static_cast<int>(y) - static_cast<int>(radius)));

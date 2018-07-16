@@ -85,6 +85,37 @@ class grid2D_ptr : public base_grid2D<T> {
     index_range y1(y_range.first, y_range.second, 1);
     return grid_view<T*>(m_cells[indices[x1][y1]]);
   }
+
+  grid_view<T*> subcircle(size_t x, size_t y, size_t radius) const {
+    return const_cast<grid2D_ptr<T>*>(this)->subcircle(x, y, radius);
+  }
+
+  /**
+   * @brief Create a subgrid (really an array view) from a grid. The grid is
+   * clamped to the maximum boundaries of the parent grid, so rather than
+   * getting a 2 x 2 subgrid centered at 0 with the out-of-bounds elements
+   * zeroed, you will get a 1 x 2 subgrid.
+   *
+   * @return The grid.
+   */
+  grid_view<T*> subgrid(size_t x_min,
+                        size_t y_min,
+                        size_t x_max,
+                        size_t y_max) {
+    typename grid_type<T>::index_gen indices;
+
+    index_range x(x_min, x_max, 1);
+    index_range y(y_min, y_max, 1);
+    return grid_view<T*>(m_cells[indices[x][y]]);
+  }
+
+  grid_view<T*> subgrid(size_t x_min,
+                        size_t y_min,
+                        size_t x_max,
+                        size_t y_max) const {
+    return const_cast<grid2D_ptr<T>*>(this)->subgrid(x_min, y_min,
+                                                     x_max, y_max);
+  }
   __rcsw_pure T& access(size_t i, size_t j) override {
     return *m_cells[static_cast<index_range::index>(i)]
                    [static_cast<index_range::index>(j)];

@@ -284,6 +284,7 @@ class client {
    * @return The UUID.
    */
   boost::uuids::uuid er_id(void) const { return m_er_id; }
+  void er_id(const boost::uuids::uuid& id) { m_er_id = id; }
 
  private:
   std::shared_ptr<server> m_server_handle;

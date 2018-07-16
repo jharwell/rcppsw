@@ -37,7 +37,9 @@ NS_START(rcppsw, params);
 xml_param_parser::xml_param_parser(const std::shared_ptr<er::server> &server,
                                    uint level)
     : client(server), m_level(level) {
-  insmod("xml_param_parser", er::er_lvl::NOM, er::er_lvl::NOM);
+  if (ERROR == client::attmod("xml_param_parser")) {
+    insmod("xml_param_parser", er::er_lvl::NOM, er::er_lvl::NOM);
+  }
 }
 
 /*******************************************************************************
