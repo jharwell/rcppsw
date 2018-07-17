@@ -1,5 +1,5 @@
 /**
- * @file powerlaw_distribution.hpp
+ * @file binned_powerlaw_distribution.hpp
  * @ingroup math
  *
  * @copyright 2018 John Harwell, All rights reserved.
@@ -19,15 +19,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_POWERLAW_DISTRIBUTION_HPP_
-#define INCLUDE_RCPPSW_MATH_POWERLAW_DISTRIBUTION_HPP_
+#ifndef INCLUDE_RCPPSW_MATH_BINNED_POWERLAW_DISTRIBUTION_HPP_
+#define INCLUDE_RCPPSW_MATH_BINNED_POWERLAW_DISTRIBUTION_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <random>
-
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/math/powerlaw_distribution.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -38,13 +36,14 @@ NS_START(rcppsw, math);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class powerlaw_distribution
+ * @class binned_powerlaw_distribution
  * @ingroup math
  *
- * @brief Represents a power law distribution (duh) of x^pwr where x is in [lb,
- * ub]. Constructed from a uniform distribution on [0, 1].
+ * @brief A power law distribution (duh) of x^pwr where x is in [lb,
+ * ub], where the outputs are rounded to the nearest power of pwr. For example,
+ * instead of sampling and getting 3.78, with pwr=2 you would get 4.
  */
-class powerlaw_distribution {
+class binned_powerlaw_distribution : public powerlaw_distribution {
  public:
   /**
    * @brief Initialize distribution.
@@ -53,31 +52,15 @@ class powerlaw_distribution {
    * @param ub Upper bound for distribution. Assumed to be a multiple of pwr.
    * @param pwr Power for distribution.
    */
-  powerlaw_distribution(uint lb, uint ub, uint pwr) :
-      m_lb(lb),
-      m_ub(ub),
-      m_pwr(pwr),
-      m_uniform(0, 1) {}
-  virtual ~powerlaw_distribution(void) = default;
+  binned_powerlaw_distribution(uint lb, uint ub, uint pwr) :
+      powerlaw_distribution(lb, ub, pwr) {}
 
   double operator()(std::default_random_engine& rng) {
-    double y = m_uniform(rng);
-    double tmp = (std::pow(m_ub, m_pwr+1) - std::pow(m_lb, m_pwr+1))*y +
-               std::pow(m_lb, m_pwr+1);
-    return std::pow(tmp, 1.0/(m_pwr+1));
+    uint sample = powerlaw_distribution::operator()(rng);
+    return std::pow(pwr(), std::ceil(std::log(sample) / std::log(pwr())));
   }
-  uint pwr(void) const { return m_pwr; }
-  uint lb(void) const { return m_lb; }
-  uint ub(void) const { return m_ub; }
-
- private:
-  // clang-format off
-  uint                                   m_lb;
-  uint                                   m_ub;
-  uint                                   m_pwr;
-  std::uniform_real_distribution<double> m_uniform;
-  // clang-format on
 };
+
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_POWERLAW_DISTRIBUTION_HPP_ */
+#endif /* INCLUDE_RCPPSW_MATH_BINNED_POWERLAW_DISTRIBUTION_HPP_ */
