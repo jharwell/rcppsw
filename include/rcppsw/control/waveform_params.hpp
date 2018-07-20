@@ -1,8 +1,7 @@
 /**
- * @file dcoord.hpp
- * @ingroup math
+ * @file waveform_params.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell/Anthony Chen, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -19,25 +18,35 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_DCOORD_HPP_
-#define INCLUDE_RCPPSW_MATH_DCOORD_HPP_
+#ifndef INCLUDE_RCPPSW_CONTROL_WAVEFORM_PARAMS_HPP_
+#define INCLUDE_RCPPSW_CONTROL_WAVEFORM_PARAMS_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <utility>
-#include "rcppsw/common/common.hpp"
+#include <string>
+#include "rcppsw/params/base_params.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, math);
+NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Class Definitions
+ * Structure Definitions
  ******************************************************************************/
-using dcoord2 = std::pair<uint, uint>;
+/**
+ * @struct waveform_params
+ * @ingroup control
+ */
+struct waveform_params : public rcppsw::params::base_params {
+  std::string type{""};
+  uint frequency{0};
+  uint phase{0};  /// Not applicable for all wave types.
+  uint amplitude{0};
+  uint offset{0};
+};
 
-NS_END(math, rcppsw);
+NS_END(control, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_DCOORD_HPP_ */
+#endif // INCLUDE_RCPPSW_CONTROL_WAVEFORM_PARAMS_HPP_

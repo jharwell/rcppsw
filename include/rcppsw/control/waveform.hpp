@@ -1,8 +1,7 @@
 /**
- * @file dcoord.hpp
- * @ingroup math
+ * @file waveform.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell.
  *
  * This file is part of RCPPSW.
  *
@@ -19,25 +18,58 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_DCOORD_HPP_
-#define INCLUDE_RCPPSW_MATH_DCOORD_HPP_
+#ifndef INCLUDE_RCPPSW_CONTROL_WAVEFORM_HPP_
+#define INCLUDE_RCPPSW_CONTROL_WAVEFORM_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <utility>
+#include <cmath>
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/control/waveform_params.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, math);
+NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Class Definitions
+ * Classes
  ******************************************************************************/
-using dcoord2 = std::pair<uint, uint>;
+/**
+ * @class waveform
+ * @ingroup control
+ *
+ * @brief Base class for all types of waveforms (in the control theory sense).
+ */
+class waveform {
+ public:
+  explicit waveform(const struct waveform_params* const params)
+        : m_frequency(params->frequency),
+          m_phase(params->phase),
+          m_amplitude(params->amplitude),
+          m_offset(params->offset) {}
 
-NS_END(math, rcppsw);
+  virtual ~waveform(void) = default;
 
-#endif /* INCLUDE_RCPPSW_MATH_DCOORD_HPP_ */
+  /**
+   * @brief Get the current value of the variance function, given the current
+   * time as input.
+   */
+  virtual double value(double time) = 0;
+
+  double frequency(void) const { return m_frequency; }
+  double phase(void) const { return m_phase; }
+  double amplitude(void) const { return m_amplitude; }
+  double offset(void) const { return m_offset; }
+
+ private:
+  double m_frequency;
+  double m_phase;
+  double m_amplitude;
+  double m_offset;
+};
+
+NS_END(control, rcppsw);
+
+#endif  // INCLUDE_RCPPSW_CONTROL_WAVEFORM_HPP_

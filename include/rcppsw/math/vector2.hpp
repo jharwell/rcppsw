@@ -93,7 +93,7 @@ class vector2 {
    * @param length The vector length.
    * @param angle The vector angle.
    */
-  vector2(T length, const radiansf& angle) :
+  vector2(T length, const radians& angle) :
       m_x(std::cos(angle.value()) * length),
       m_y(std::sin(angle.value()) * length) {
   }
@@ -120,7 +120,7 @@ class vector2 {
    * @param length The length of the vector.
    * @param angle The angle of the vector (range [0,2pi)
    */
-  void set_from_polar(T length, const radiansf& angle) {
+  void set_from_polar(T length, const radians& angle) {
     m_x = std::cos(angle.value()) * length;
     m_y = std::sin(angle.value()) * length;
   }
@@ -154,7 +154,7 @@ class vector2 {
   /**
    * @brief Return the angle of this vector.
    */
-  radiansf angle(void) const { std::atan2(m_y, m_x); }
+  radians angle(void) const { return std::atan2(m_y, m_x); }
 
   /**
    * @brief Rotate this vector by the specified angle.
@@ -167,7 +167,7 @@ class vector2 {
    */
   template<typename U = T>
   typename std::enable_if_t<std::is_same<U, float>::value || std::is_same<U, double>::value,
-                            vector2& > rotate(const radiansf& angle) {
+                            vector2& > rotate(const radians& angle) {
     T sin_val = std::sin(angle.value());
     T cos_val = std::cos(angle.value());
     m_x = m_x * cos_val - m_y * sin_val;

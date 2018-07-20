@@ -57,8 +57,8 @@ polled_task* tdgraph::vertex_parent(const tdgraph &graph,
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-const polled_task* tdgraph::root(void) const { return m_root; }
-polled_task* tdgraph::root(void) { return m_root; }
+__rcsw_pure const polled_task* tdgraph::root(void) const { return m_root; }
+__rcsw_pure polled_task* tdgraph::root(void) { return m_root; }
 
 tdgraph::vertex_iterator
 tdgraph::find_vertex(const polled_task * const v) const {

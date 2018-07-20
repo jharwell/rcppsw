@@ -1,8 +1,7 @@
 /**
- * @file dcoord.hpp
- * @ingroup math
+ * @file aperiodic_waveform.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell.
  *
  * This file is part of RCPPSW.
  *
@@ -19,25 +18,40 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_DCOORD_HPP_
-#define INCLUDE_RCPPSW_MATH_DCOORD_HPP_
+#ifndef INCLUDE_RCPPSW_CONTROL_APERIODIC_WAVEFORM_HPP_
+#define INCLUDE_RCPPSW_CONTROL_APERIODIC_WAVEFORM_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <utility>
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/control/waveform.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, math);
+NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Class Definitions
+ * Classes
  ******************************************************************************/
-using dcoord2 = std::pair<uint, uint>;
+class constant_waveform : public waveform {
+ public:
+  explicit constant_waveform(const struct waveform_params* const params)
+      : waveform(params) {}
 
-NS_END(math, rcppsw);
+  double value(double) override {
+    return amplitude();
+  }
+};
 
-#endif /* INCLUDE_RCPPSW_MATH_DCOORD_HPP_ */
+class null_waveform : public waveform {
+ public:
+  explicit null_waveform(const struct waveform_params* const params)
+      : waveform(params) {}
+
+  double value(double) override { return 0.0; }
+};
+
+NS_END(control, rcppsw);
+
+#endif  // INCLUDE_RCPPSW_CONTROL_APERIODIC_WAVEFORM_HPP_
