@@ -42,7 +42,7 @@ bifurcating_tdgraph_executive::bifurcating_tdgraph_executive(
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-const bifurcating_tab* bifurcating_tdgraph_executive::active_tab(void) const {
+__rcsw_pure const bifurcating_tab* bifurcating_tdgraph_executive::active_tab(void) const {
   auto bigraph = static_cast<const bifurcating_tdgraph*>(graph());
   return bigraph->active_tab();
 } /* active_tab() */
@@ -182,7 +182,8 @@ polled_task* bifurcating_tdgraph_executive::do_get_next_task(void) {
     return next_task_from_partitionable(tdgraph::vertex_parent(*graph(),
                                                                current_task()));
   }
-  ER_FATAL_SENTINEL("FATAL: Task is neither leaf nor child of TAB?")
+  ER_FATAL_SENTINEL("FATAL: Task is neither leaf nor child of TAB?");
+  return nullptr;
 } /* do_get_next_task() */
 
 polled_task* bifurcating_tdgraph_executive::next_task_from_partitionable(

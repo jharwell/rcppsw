@@ -103,7 +103,7 @@ double base_executive::task_abort_prob(polled_task* const task) {
   return task->calc_abort_prob();
 } /* task_abort_prob() */
 
-const polled_task* base_executive::root_task(void) const {
+__rcsw_pure const polled_task* base_executive::root_task(void) const {
   return m_graph->root();
 } /* root_task() */
 
