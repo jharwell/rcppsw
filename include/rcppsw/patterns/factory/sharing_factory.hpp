@@ -66,8 +66,7 @@ class sharing_factory : public base_factory {
    * @brief Register a type with the factory, and associate it with the
    * specified name.
    *
-   * The type to register must have a zero parameter constructor available, as
-   * well as be derived from the factory base class.
+   * The type to register must be derived from the factory base class.
    */
   template <typename TDerived, typename... Args>
   status_t register_type(const std::string& name) {
