@@ -36,7 +36,7 @@ NS_START(rcppsw, math);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-using dcoord2 = std::pair<size_t, size_t>;
+using dcoord2 = std::pair<uint, uint>;
 
 NS_END(math, rcppsw);
 

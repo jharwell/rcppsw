@@ -29,7 +29,6 @@
 #include <map>
 #include <algorithm>
 #include "rcppsw/patterns/factory/base_factory.hpp"
-#include "rcsw/common/fpc.h"
 
 /*******************************************************************************
  * Namespaces
@@ -44,8 +43,7 @@ NS_START(rcppsw, patterns, factory);
  * @ingroup patterns factory
  *
  * @brief A factory that maintains ownership of the created objects, but shares
- * them with the creation context. Objects are destroyed when the factory is
- * destructed so be careful about scoping issues!
+ * them with the creation context.
  *
  * @tparam T Type of objects capable of creation from this factory (restricted
  * to this type and its derived types).

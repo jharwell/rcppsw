@@ -28,7 +28,6 @@
 #include <vector>
 #include <map>
 #include <algorithm>
-#include "rcsw/common/fpc.h"
 #include "rcppsw/patterns/factory/base_factory.hpp"
 
 /*******************************************************************************
