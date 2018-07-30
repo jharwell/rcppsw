@@ -42,6 +42,7 @@ class sine_waveform : public waveform {
   double value(double time) override {
     double t = frequency() * time + phase();
     double v = std::sin(2*M_PI * t);
+    printf("value: %f v: %f amp: %f\n", amplitude()*v, v, amplitude());
     return amplitude() * v + offset();
   }
 };

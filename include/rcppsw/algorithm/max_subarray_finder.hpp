@@ -27,6 +27,7 @@
 #include <algorithm>
 #include <vector>
 #include "rcppsw/common/common.hpp"
+#include "rcsw/common/fpc.h"
 
 /*******************************************************************************
  * Namespaces
@@ -62,7 +63,7 @@ class max_subarray_finder {
     int end_index = 0;
 
     /* Kadane's algorithm - O(n) */
-    for (int i = 0; i < m_arr.size(); ++i) {
+    for (size_t i = 0; i < m_arr.size(); ++i) {
       current_sum += m_arr[i];
       if (current_sum > max_sum) {
         max_sum = current_sum;

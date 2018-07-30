@@ -40,11 +40,23 @@ NS_START(rcppsw, control);
  * @ingroup control
  */
 struct waveform_params : public rcppsw::params::base_params {
+  waveform_params(const std::string& type_,
+                  double freq_,
+                  double phase_,
+                  double amp_,
+                  double offset_)
+      : type(type_),
+        frequency(freq_),
+        phase(phase_),
+        amplitude(amp_),
+        offset(offset_) {}
+  waveform_params(void) {}
+
   std::string type{""};
-  uint frequency{0};
-  uint phase{0};  /// Not applicable for all wave types.
-  uint amplitude{0};
-  uint offset{0};
+  double frequency{0};
+  double phase{0};  /// Not applicable for all wave types.
+  double amplitude{0};
+  double offset{0};
 };
 
 NS_END(control, rcppsw);

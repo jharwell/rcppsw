@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PARAMS_WAVEFORM_XML_PARSER_HPP_
-#define INCLUDE_RCPPSW_PARAMS_WAVEFORM_XML_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_CONTROL_WAVEFORM_XML_PARSER_HPP_
+#define INCLUDE_RCPPSW_CONTROL_WAVEFORM_XML_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -76,4 +76,4 @@ class waveform_xml_parser : public rcppsw::params::xml_param_parser {
 
 NS_END(control, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_PARAMS_WAVEFORM_XML_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_CONTROL_WAVEFORM_XML_PARSER_HPP_ */
