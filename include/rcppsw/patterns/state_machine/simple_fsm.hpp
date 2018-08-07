@@ -34,7 +34,7 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Type Definitions
  ******************************************************************************/
-typedef base_fsm simple_fsm;
+using simple_fsm = base_fsm;
 
 NS_END(state_machine, patterns, rcppsw);
 

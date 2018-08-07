@@ -23,112 +23,96 @@
  ******************************************************************************/
 #define CATCH_CONFIG_MAIN
 #define CATCH_CONFIG_PREFIX_ALL
+#include "rcppsw/er/server.hpp"
+#include "rcppsw/patterns/state_machine/event.hpp"
+#include "rcppsw/patterns/state_machine/simple_fsm.hpp"
 #include <catch.hpp>
 #include <memory>
-#include "rcppsw/patterns/state_machine/simple_fsm.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-using namespace rcppsw::common;
 namespace fsm = rcppsw::patterns::state_machine;
-
-/*******************************************************************************
- * Constant Definitions
- ******************************************************************************/
-
-/*******************************************************************************
- * Structure Definitions
- ******************************************************************************/
-
-/*******************************************************************************
- * Global Variables
- ******************************************************************************/
-
-/*******************************************************************************
- * Forward Declarations
- ******************************************************************************/
+namespace er = rcppsw::er;
 
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
 class test_fsm : public fsm::simple_fsm {
- public:
+public:
   enum states { STATE1, STATE2, STATE3, STATE4, STATE5, STATE6, ST_MAX_STATES };
 
-  explicit test_fsm(std::shared_ptr<er_server> server)
-      : simple_fsm(server, ST_MAX_STATES) {}
+  explicit test_fsm(const std::shared_ptr<rcppsw::er::server> &server)
+      : fsm::simple_fsm(server, ST_MAX_STATES) {}
 
-  FSM_STATE_DECLARE(test_fsm, s1, fsm::no_event);
-  FSM_STATE_DECLARE(test_fsm, s2, fsm::no_event);
-  FSM_STATE_DECLARE(test_fsm, s3, fsm::no_event);
-  FSM_STATE_DECLARE(test_fsm, s4, fsm::no_event);
-  FSM_STATE_DECLARE(test_fsm, s5, fsm::no_event);
-  FSM_STATE_DECLARE(test_fsm, s6, fsm::no_event);
+  FSM_STATE_DECLARE_ND(test_fsm, s1);
+  FSM_STATE_DECLARE_ND(test_fsm, s2);
+  FSM_STATE_DECLARE_ND(test_fsm, s3);
+  FSM_STATE_DECLARE_ND(test_fsm, s4);
+  FSM_STATE_DECLARE_ND(test_fsm, s5);
+  FSM_STATE_DECLARE_ND(test_fsm, s6);
   void event1(void) {
     FSM_DEFINE_TRANSITION_MAP(kMAP){STATE2,
                                     STATE3,
                                     STATE1,
-                                    fsm::event::EVENT_FATAL,
-                                    fsm::event::EVENT_FATAL,
-                                    fsm::event::EVENT_FATAL};
+                                    fsm::event_signal::FATAL,
+                                    fsm::event_signal::FATAL,
+                                    fsm::event_signal::FATAL};
     external_event(kMAP[current_state()], nullptr);
   }
   void event2(void) {
-    FSM_DEFINE_TRANSITION_MAP(kMAP){fsm::event::EVENT_IGNORED,
+    FSM_DEFINE_TRANSITION_MAP(kMAP){fsm::event_signal::IGNORED,
                                     STATE4,
-                                    fsm::event::EVENT_FATAL,
+                                    fsm::event_signal::FATAL,
                                     STATE4,
                                     STATE4,
                                     STATE5};
     external_event(kMAP[current_state()], nullptr);
   }
 
-  FSM_DEFINE_STATE_MAP_ACCESSOR(state_map) {
-    FSM_DEFINE_STATE_MAP(state_map, kMAP){FSM_STATE_MAP_ENTRY(&s1),
-                                          FSM_STATE_MAP_ENTRY(&s2),
-                                          FSM_STATE_MAP_ENTRY(&s3),
-                                          FSM_STATE_MAP_ENTRY(&s4),
-                                          FSM_STATE_MAP_ENTRY(&s5),
-                                          FSM_STATE_MAP_ENTRY(&s6)};
-    return &kMAP[0];
+  FSM_DEFINE_STATE_MAP_ACCESSOR(state_map, index) {
+    FSM_DEFINE_STATE_MAP(state_map, kMAP){
+        FSM_STATE_MAP_ENTRY(&s1), FSM_STATE_MAP_ENTRY(&s2),
+        FSM_STATE_MAP_ENTRY(&s3), FSM_STATE_MAP_ENTRY(&s4),
+        FSM_STATE_MAP_ENTRY(&s5), FSM_STATE_MAP_ENTRY(&s6)};
+    return &kMAP[index];
   }
 };
 
-FSM_STATE_DEFINE(test_fsm, s1, fsm::no_event) {
+FSM_STATE_DEFINE_ND(test_fsm, s1) {
   printf("Executing state1\n");
-  return fsm::event::EVENT_HANDLED;
+  return fsm::event_signal::HANDLED;
 }
-FSM_STATE_DEFINE(test_fsm, s2, fsm::no_event) {
+FSM_STATE_DEFINE_ND(test_fsm, s2) {
   printf("Executing state2\n");
-  return fsm::event::EVENT_HANDLED;
+  return fsm::event_signal::HANDLED;
 }
 
-FSM_STATE_DEFINE(test_fsm, s3, fsm::no_event) {
+FSM_STATE_DEFINE_ND(test_fsm, s3) {
   printf("Executing state3\n");
-  return fsm::event::EVENT_HANDLED;
+  return fsm::event_signal::HANDLED;
 }
 
-FSM_STATE_DEFINE(test_fsm, s4, fsm::no_event) {
+FSM_STATE_DEFINE_ND(test_fsm, s4) {
   printf("Executing state4\n");
   internal_event(STATE5);
-  return fsm::event::EVENT_HANDLED;
+  return fsm::event_signal::HANDLED;
 }
-FSM_STATE_DEFINE(test_fsm, s5, fsm::no_event) {
+FSM_STATE_DEFINE_ND(test_fsm, s5) {
   printf("Executing state5\n");
-  return fsm::event::EVENT_HANDLED;
+  return fsm::event_signal::HANDLED;
 }
 
-FSM_STATE_DEFINE(test_fsm, s6, fsm::no_event) {
+FSM_STATE_DEFINE_ND(test_fsm, s6) {
   printf("Executing state6\n");
-  return fsm::event::EVENT_HANDLED;
+  return fsm::event_signal::HANDLED;
 }
-
 /*******************************************************************************
  * Test Functions
  ******************************************************************************/
 CATCH_TEST_CASE("sanity-test", "[simple_fsm]") {
-  test_fsm fsm(std::make_shared<er_server>("logfile"));
+  test_fsm fsm(er::g_server);
+
   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE1);
   fsm.event1();
   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE2);
@@ -139,7 +123,7 @@ CATCH_TEST_CASE("sanity-test", "[simple_fsm]") {
 }
 
 CATCH_TEST_CASE("event-test", "[simple_fsm]") {
-  test_fsm fsm(std::make_shared<er_server>("logfile"));
+  test_fsm fsm(er::g_server);
   fsm.init();
   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE1);
   fsm.event2();

@@ -24,8 +24,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/common/base_params.hpp"
+#include "rcppsw/params/base_params.hpp"
+#include "rcppsw/task_allocation/abort_params.hpp"
+#include "rcppsw/task_allocation/estimation_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -37,16 +38,13 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 /**
  * @struct task_params
- * @ingroup task_allocation
+ * @ingroup params task_allocation
  *
  * @brief Parameters used by \ref executable_task tasks.
  */
-struct task_params : public common::base_params {
-  double estimation_alpha{0.0};
-  double abort_reactivity{0.0};
-  double abort_offset{0.0};
-  double partition_reactivity{0.0};
-  double partition_offset{0.0};
+struct task_params : public params::base_params {
+  struct estimation_params estimation{};
+  struct abort_params abort{};
 };
 
 NS_END(task_allocation, rcppsw);

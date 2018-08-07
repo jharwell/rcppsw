@@ -262,7 +262,7 @@ class server {
    * @brief Report a message. Messages may or not actually be printed/logged,
    * depending on the current level settings in the server/module.
    *
-   * @param er_id Message to report.
+   * @param msg Message to report.
    */
   virtual void report(const er_msg& msg);
 

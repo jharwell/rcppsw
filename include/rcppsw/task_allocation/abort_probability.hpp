@@ -57,10 +57,15 @@ NS_START(rcppsw, task_allocation);
  */
 class abort_probability : public rcppsw::math::expression<double> {
  public:
-  abort_probability(double reactivity, double offset)
-      : m_reactivity(reactivity), m_offset(offset) {}
+  /*
+   * A default reactivity value found experimentally to work well.
+   */
+  static constexpr double kDEFAULT_REACTIVITY = 8.0;
 
-  double calc(double exec_time, const time_estimate& whole_task);
+  /*
+   * A default offset value found experimentally to work well.
+   */
+  static constexpr double kDEFAULT_OFFSET = 3.0;
 
   /*
    * @brief If we don't have any time estimate for the task, then we just set a
@@ -68,7 +73,38 @@ class abort_probability : public rcppsw::math::expression<double> {
    */
   static double constexpr kNO_EST_ABORT_PROB = 0.001;
 
+  /**
+   * @brief Initialize an abort probability calculation with default values.
+   */
+  abort_probability(void) : abort_probability(kDEFAULT_REACTIVITY,
+                                              kDEFAULT_OFFSET) {}
+
+  /**
+   * @brief Initialize abort probability calculation with user-specified values.
+   */
+  explicit abort_probability(const struct abort_params * params);
+
+  /**
+   * @brief Calculate the current abort probability, based on the most recent
+   * estimate of task execution time and the currently elapsed time spent on the
+   * the task.
+   *
+   * @param exec_time Current execution time.
+   * @param whole_task Most recent task estimate.
+   *
+   * @return The abort probability.
+   */
+  double operator()(double exec_time, const time_estimate& whole_task);
+
+  /**
+   * @brief See \ref operator().
+   */
+  double calc(double exec_time, const time_estimate& whole_task);
+
  private:
+  abort_probability(double reactivity, double offset)
+  : m_reactivity(reactivity), m_offset(offset) {}
+
   double m_reactivity;
   double m_offset;
 };

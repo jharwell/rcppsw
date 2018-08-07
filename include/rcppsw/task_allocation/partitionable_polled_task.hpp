@@ -48,10 +48,21 @@ class partitionable_polled_task : public polled_task, public partitionable_task 
   partitionable_polled_task(const std::shared_ptr<er::server>& server,
                             const std::string& name,
                             const struct partitionable_task_params* c_params,
-                            std::unique_ptr<taskable>& mechanism,
-                            polled_task* parent = nullptr);
+                            std::unique_ptr<taskable> mechanism);
 
-  void init_random(int lb, int ub);
+
+  /**
+   * @brief Initialize the task with the specified last partition and a random
+   * exec time estimate within the bounds specified
+   *
+   * @param partition The last subtask executed. This has to be passed in, and
+   * not computed internally, because the task does not have pointers/references
+   * to its children.
+   * @param lb Lower bound for exec estimate.
+   * @param ub Upper bound for exec estimate.
+   */
+  void init_random(const polled_task* partition,
+                   int lb, int ub);
 };
 
 NS_END(task_allocation, rcppsw);

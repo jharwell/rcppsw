@@ -51,9 +51,10 @@ NS_START(rcppsw, metrics);
 class collector_group {
  public:
   using key_type = std::string;
-  using mapped_type = std::unique_ptr<rcppsw::metrics::base_metrics_collector>;
+  using mapped_type = std::unique_ptr<base_metrics_collector>;
 
   collector_group(void) : m_collectors() {}
+  virtual ~collector_group(void) = default;
 
   /**
    * @brief Add a collector to the group by constructing it in place.
@@ -72,11 +73,41 @@ class collector_group {
   /**
    * @brief Collect metrics from the specified collector, passing it the
    * specified metrics set.
+   *
+   * @param name The registered name of the collector.
+   * @param metrics The metrics to collect from.
    */
-  void collect_from(const std::string& name,
-                    const rcppsw::metrics::base_metrics &metrics) {
+  void collect(const std::string& name,
+               const base_metrics &metrics) {
     m_collectors[name]->collect(metrics);
   }
+
+  /**
+   * @brief Collect metrics from the specified collector, passing it the
+   * specified metrics set, but only if the specified condition is met by the
+   * metrics.
+   *
+   * Useful if you have a "polymorphic" set of metrics that are very similar,
+   * but need to be captured in different files, and you don't want to have to
+   * derive nearly identical classes to handle it.
+   *
+   * @param metrics The metrics to collect from.
+   * @param predicate The predicate used to determine if the specified collector
+   * should actually be invoked.
+   *
+   * @return \c TRUE if metrics were collected, \c FALSE otherwise.
+   */
+  bool collect_if(const std::string& name,
+                  const base_metrics &metrics,
+                  std::function<bool(const base_metrics&)> predicate) {
+    if (predicate) {
+      m_collectors[name]->collect(metrics);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   /**
    * @brief Get a reference to a collector by name.
    *

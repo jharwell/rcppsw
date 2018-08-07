@@ -105,7 +105,9 @@ class base_fsm : public er::client {
    * @brief Get the data associated with an event injected into the state machine.
    */
   const event_data* event_data_get(void) const { return m_event_data.get(); }
-  event_data* event_data_get(void) { return const_cast<event_data*>(m_event_data.get()); }
+  event_data* event_data_get(void) {
+    return const_cast<event_data*>(m_event_data.get());
+  }
 
   void generated_event(bool b) { m_event_generated = b; }
   bool has_generated_event(void) { return m_event_generated; }
@@ -159,7 +161,7 @@ class base_fsm : public er::client {
    *
    * @return The row corresponding to the passed in state in the state map.
    */
-  virtual const state_map_row* state_map(__unused size_t) {
+  virtual const state_map_row* state_map(__rcsw_unused size_t) {
     return nullptr;
   }
 
@@ -171,7 +173,7 @@ class base_fsm : public er::client {
    *
    * @return The row corresponding to the passed in state in the state map.
    */
-  virtual const state_map_ex_row* state_map_ex(__unused size_t) {
+  virtual const state_map_ex_row* state_map_ex(__rcsw_unused size_t) {
     return nullptr;
   }
 
@@ -464,5 +466,18 @@ NS_END(state_machine, patterns, rcppsw);
                  sizeof(rcppsw::patterns::state_machine::JOIN(type, _row))) == \
                 (n_entries),                                            \
                 "state map does not cover all states");
+
+/*******************************************************************************
+ * Othr Macros
+ ******************************************************************************/
+#define FSM_WRAPPER_DECLARE(ret, func)          \
+  ret func(void) const override;
+#define FSM_WRAPPER_DEFINE(ret, class, func, handle)            \
+  ret class::func(void) const { return (handle).func(); }
+#define FSM_WRAPPER_DEFINE_PTR(ret, class, func, handle)        \
+  ret class::func(void) const { if (nullptr != (handle)) {      \
+      return (handle)->func(); }                                \
+    return static_cast<ret>(0);                                 \
+  }
 
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_BASE_FSM_HPP_ */

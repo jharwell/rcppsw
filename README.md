@@ -32,50 +32,69 @@ exist in Boost, or that build on what boost provides. Includes such things as:
  - Miscellaneous other things as kmeans clustering,
    multithreading/multiprocessing management tools.
 
-## Basic Setup
+## Pre-cloning Setup
 
-Before starting, you will need a recent version of the following programs:
+1. This project uses the build scaffolding provided by
+   [cmake-config](https://github.com/jharwell/cmake-config). Please look at the
+   platform requirements for that project and install any needed
+   packages/libraries.
 
-- cmake
-- make
-- gcc
-- g++ - A version that supports C++11 is required.
+2. Install the following libraries:
 
-You will also need recent versions of the following libraries:
+   - boost 1.58
 
-- boost (1.58 is known to work; older versions may also work)
+## Post-cloning
 
-After cloning this repo, you will need to:
+1. Check out the development branch, as that has not only the latest semi-stable
+   release, but also the most up-to-date documentation, including this README.
 
-1. Pull in the cmake config:
+        git checkout devel
 
-        git submodule update --init --recursive
+2. Pull in the cmake project scaffolding and other submodules:
 
-2. Clone `rcsw` https://github.com/swarm-robotics/rcsw (Reusable C software) somewhere
-   and link it into `ext/rcsw`.
+        git submodule update --init --recursive  --remote
 
-Then you can build via:
+3. Build via:
 
-    mkdir build && cd build
-    cmake ..
-    make
+        mkdir build && cd build
+        cmake ..
+        make
 
-To build the extensive documentation, do:
+    This will build for the default HAL configuration (see below). to build for
+    a different configuration, pass the desired flag to cmake via `-D`.
+
+    There are a number of configuration options that can be passed to cmake that
+    are specific to rcppsw, which are shown in the table below. For other,
+    additional configuration options, please see the README in the [cmake
+    config](https://github.com/jharwell/cmake-config) repo:
+
+
+   | Option            | Meaning                                                       | Options                                                                    | Default            |
+   |-------------------|---------------------------------------------------------------|----------------------------------------------------------------------------|--------------------|
+   | `WITH_HAL_CONFIG` | Specify which hardware configuration to enable. At most *ONE* | `"argos-footbot"`: Build for the footbot robot within the argos simulator. | `"argos-footbot""` |
+   |                   | configuration can be enabled at a time.                       |                                                                            |                    |
+
+
+To build the documentation, do the following from the build directory:
 
     make documentation
+
+# Contributing
 
 For contributing to `rcppsw`, see [CONTRIBUTING](docs/CONTRIBUTING.md)
 
 # Troubleshooting
 
-- If you are having trouble building, try updating the cmake submodule:
+- If you are having trouble building:
 
-        git submodule update
+  1. Make sure you are on the `devel` branch.
+
+  2. Update the cmake submodule via `git submodule update`
 
   If the problem perists, open an issue.
 
 # License
-This project is licensed under GPL 2.0. See [LICENSE](LICENSE).
+This project is licensed under GPL 2.0. See [LICENSE](LICENSE.md).
 
 # Donate
 If you've found this project helpful, please consider donating somewhere between

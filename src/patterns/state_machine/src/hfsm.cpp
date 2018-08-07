@@ -31,12 +31,11 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void hfsm::state_engine_step(const state_map_row* const c_row) {
+void hfsm::state_engine_step(const state_map_row *const c_row) {
   ER_ASSERT(nullptr != c_row->state(), "FATAL: null state?");
-  ER_VER("Invoking state action: state%d, data=%p",
-         current_state(),
-         reinterpret_cast<const void*>(event_data_get()));
-  auto* state = static_cast<const hfsm_state*>(c_row->state());
+  ER_VER("Invoking state action: state%d, data=%p", current_state(),
+         reinterpret_cast<const void *>(event_data_get()));
+  auto *state = static_cast<const hfsm_state *>(c_row->state());
   int rval = event_signal::UNHANDLED;
   while (rval != event_signal::HANDLED) {
     rval = state->invoke_state_action(this, event_data_get());
@@ -51,18 +50,17 @@ void hfsm::state_engine_step(const state_map_row* const c_row) {
       event_data_get()->reset();
       break;
     }
-    state = static_cast<hfsm_state*>(state->parent());
+    state = static_cast<hfsm_state *>(state->parent());
     event_data_get()->type(event_type::CHILD);
     event_data_get()->signal(rval);
   } /* while() */
 } /* state_engine_step() */
 
-void hfsm::state_engine_step(const state_map_ex_row* const c_row_ex) {
+void hfsm::state_engine_step(const state_map_ex_row *const c_row_ex) {
   ER_ASSERT(nullptr != c_row_ex->state(), "FATAL: null state?");
-  ER_VER("Invoking state action: state%d, data=%p",
-         current_state(),
-         reinterpret_cast<const void*>(event_data_get()));
-  auto* state = static_cast<const hfsm_state*>(c_row_ex->state());
+  ER_VER("Invoking state action: state%d, data=%p", current_state(),
+         reinterpret_cast<const void *>(event_data_get()));
+  auto *state = static_cast<const hfsm_state *>(c_row_ex->state());
   int rval = event_signal::UNHANDLED;
   while (rval != event_signal::HANDLED) {
     rval = state->invoke_state_action(this, event_data_get());
@@ -77,7 +75,7 @@ void hfsm::state_engine_step(const state_map_ex_row* const c_row_ex) {
       event_data_get()->reset();
       break;
     }
-    state = static_cast<hfsm_state*>(state->parent());
+    state = static_cast<hfsm_state *>(state->parent());
     event_data_get()->type(event_type::CHILD);
     event_data_get()->signal(rval);
   } /* while() */
@@ -89,18 +87,18 @@ void hfsm::inject_event(int signal, int type) {
 } /* inject event */
 
 void hfsm::change_parent(uint8_t state,
-                         rcppsw::patterns::state_machine::state* new_parent) {
-  auto* row = state_map(state);
-  auto* row_ex = state_map_ex(state);
+                         rcppsw::patterns::state_machine::state *new_parent) {
+  auto *row = state_map(state);
+  auto *row_ex = state_map_ex(state);
 
   ER_ASSERT(!(nullptr == row && nullptr == row_ex),
             "FATAL: Both state maps are NULL!");
 
   if (nullptr != row) {
-    auto* self = static_cast<hfsm_state*>(row->state());
+    auto *self = static_cast<hfsm_state *>(row->state());
     self->parent(new_parent);
   } else {
-    auto* self = static_cast<hfsm_state*>(row_ex->state());
+    auto *self = static_cast<hfsm_state *>(row_ex->state());
     self->parent(new_parent);
   }
 } /* change_parent() */

@@ -35,7 +35,7 @@
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#ifndef ER_NO_REPORT
+#ifndef ER_NREPORT
 /* ---------- Explicit debug level statements (use these) ---------- */
 
 /**
@@ -44,7 +44,7 @@
  * Define a statement reporting the occurence of an \ref er_lvl::ERR
  * event. Works just like printf() from a syntax point of view.
  */
-#define ER_ERR(...) ER_REPORT(rcppsw::er::er_lvl::ERROR, __VA_ARGS__)
+#define ER_ERR(...) ER_REPORT(rcppsw::er::er_lvl::ERR, __VA_ARGS__)
 
 /**
  * @def ER_WARN(...)
@@ -91,7 +91,7 @@
  */
 #define ER_REPORT(lvl, msg, ...)                       \
   {                                                    \
-    if (__er_will_report__(rcppsw::er::client::server_handle(),   \
+    if (__er_will_report__(rcppsw::er::client::server_ptr(),   \
                            rcppsw::er::client::er_id(),           \
                            lvl)) {                                \
       char _str[1000];                                 \
@@ -105,7 +105,7 @@
       rcppsw::er::er_msg _msg(rcppsw::er::client::er_id(),      \
                               lvl,                              \
                               std::string(reinterpret_cast<char*>(_str))); \
-      __er_report__(rcppsw::er::client::server_handle(), _msg);         \
+      __er_report__(rcppsw::er::client::server_ptr(), _msg);         \
     }                                                                   \
   }
 
@@ -116,7 +116,7 @@
 #define ER_NOM(...)
 #define ER_DIAG(...)
 #define ER_VER(...)
-#endif /* ER_NO_REPORT */
+#endif /* ER_NREPORT */
 
 /**
  * @def ER_CHECK(cond, msg, ...)
@@ -269,12 +269,13 @@ class client {
    *
    * @return A reference to the server handle.
    */
-  server* server_handle(void) const { return m_server_handle.get(); }
+  server* server_ptr(void) const { return m_server_handle.get(); }
 
  protected:
   const std::shared_ptr<server>& server_ref(void) const {
     return m_server_handle;
   }
+  std::shared_ptr<server>& server_ref(void) { return m_server_handle; }
 
   /**
    * @brief Get a reference to the UUID for the module. Should not be called
@@ -283,6 +284,7 @@ class client {
    * @return The UUID.
    */
   boost::uuids::uuid er_id(void) const { return m_er_id; }
+  void er_id(const boost::uuids::uuid& id) { m_er_id = id; }
 
  private:
   std::shared_ptr<server> m_server_handle;
@@ -332,7 +334,7 @@ void __er_report__(server* server,
  * @return \c TRUE if the message will be reported, \c FALSE otherwise.
  * @endinternal
  */
-bool __er_will_report__(const server* const server,
+bool __er_will_report__(const server* server,
                         const boost::uuids::uuid& er_id,
                         const er_lvl::value& lvl);
 

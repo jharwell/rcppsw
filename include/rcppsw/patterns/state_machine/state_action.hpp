@@ -51,7 +51,7 @@ class state_action0 : public state {
   ~state_action0(void) override = default;
 
   int invoke_state_action(base_fsm* sm,
-                          __unused const event_data*) const override {
+                          __rcsw_unused const event_data*) const override {
     /* Downcast the state machine and event data to the correct derived type */
     auto* derived_fsm = static_cast<SM*>(sm);
     return (derived_fsm->*Func)();
@@ -75,7 +75,7 @@ class state_action1 : public state {
   int invoke_state_action(base_fsm* sm, const event_data* data) const override {
     /* Downcast the state machine and event data to the correct derived type */
     auto* derived_fsm = static_cast<SM*>(sm);
-    const Event* derived_event = NULL;
+    const Event* derived_event = nullptr;
 
     /*
      * If this check fails, there is a mismatch between the STATE_DECLARE event

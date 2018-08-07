@@ -42,7 +42,7 @@ NS_START(rcppsw, patterns, visitor);
  *
  * This is suitable for general application of the visitor pattern that does not
  * require polymorphism. The visitor must be derived from \ref visitor()/
- * \ref can_visit() otherwise the static_cast will fail.
+ * \ref visit_set() otherwise the static_cast will fail.
  */
 template<class V>
 class visitable_any {
@@ -57,66 +57,59 @@ class visitable_any {
 };
 
 /**
- * @class will_accept
- * @ingroup patterns visitor
- *
- * @brief A class that will accept a specific kind of visitor.
- */
-template <class V>
-class will_accept {
- public:
-  will_accept(void) = default;
-
-  template <class T>
-  void accept(const T &visitor) { visitor.visit(static_cast<V&>(*this)); }
-  virtual ~will_accept(void) = default;
-};
-
-/**
- * @class visitable_set_helper
+ * @class accept_set_helper
  *
  * @brief Helper class to provide actual implementation.
+ *
  */
 template <typename V, typename T>
-class visitable_set_helper {
+class accept_set_helper {
  public:
-  virtual ~visitable_set_helper(void) = default;
+  virtual ~accept_set_helper(void) = default;
 
-  void accept(T &visitor) { visitor.visit(static_cast<V&>(*this)); }
+  /**
+   * @brief Accept a visitor of the specified type.
+   *
+   * @tparam U. Forwarded template type parameter that is 100% necessary to get
+   * this design pattern to work.
+   */
+  template<typename U = T>
+  void accept(std::enable_if_t<std::is_same<U, T>::value, T>& visitor) {
+    visitor.visit(static_cast<V&>(*this)); }
 };
 
 /**
- * @class visitable_set
+ * @class accept_set
  * @ingroup patterns visitor
  *
  * @brief General case for template expansion. Provides classes the ability to
  * explicitly control what types of visitors they will accept.
  */
 template <typename... Ts>
-class visitable_set {};
+class accept_set {};
 
 /**
- * @class visitable_set<V,T,..>
+ * @class accept_set<V,T,..>
  *
  * @brief Middle recursive case for expansion.
  */
 template<typename V, typename T, typename... Ts>
-class visitable_set<V, T, Ts...>: public visitable_set_helper<V, T>,
-                                  public visitable_set<V, Ts...> {
+class accept_set<V, T, Ts...>: public accept_set_helper<V, T>,
+                               public accept_set<V, Ts...> {
  public:
-  using visitable_set_helper<V, T>::accept;
-  using visitable_set<V, Ts...>::accept;
+  using accept_set_helper<V, T>::accept;
+  using accept_set<V, Ts...>::accept;
 };
 
 /**
- * @class visitable_set<V,T>
+ * @class accept_set<V,T>
  *
  * @brief Base case for expansion
  */
 template<typename V, typename T>
-class visitable_set<V, T>: public visitable_set_helper<V, T> {
+class accept_set<V, T>: public accept_set_helper<V, T> {
  public:
-  using visitable_set_helper<V, T>::accept;
+  using accept_set_helper<V, T>::accept;
 };
 
 NS_END(rcppsw, patterns, visitor);

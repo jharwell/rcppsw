@@ -48,6 +48,6 @@ compile_options.json
 
 # Build process
 build
-docs/html
-docs/latex
-ext/rcsw
+.clang-format
+.clang-tidy
+.gdb_history

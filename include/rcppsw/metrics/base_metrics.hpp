@@ -46,6 +46,11 @@ class base_metrics {
   virtual ~base_metrics(void) = default;
   base_metrics(const base_metrics&) = default;
   base_metrics& operator=(const base_metrics&) = default;
+
+  /**
+   * @brief Reset gathered metrics to their initial state.
+   */
+  virtual void reset_metrics(void) {}
 };
 
 NS_END(metrics, rcppsw);

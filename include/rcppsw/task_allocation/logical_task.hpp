@@ -28,6 +28,19 @@
 #include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
+ * Macro Definitions
+ ******************************************************************************/
+#define TASK_WRAPPER_DECLARE(ret, func)         \
+  ret func(void) const override;
+#define TASK_WRAPPER_DEFINE(ret, class, func, handle)           \
+  ret class::func(void) const { return (handle).func(); }
+#define TASK_WRAPPER_DEFINE_PTR(ret, class, func, handle)       \
+  ret class::func(void) const { if (nullptr != (handle)) {      \
+      return (handle)->func(); }                                \
+    return static_cast<ret>(0);                                 \
+  }
+
+/*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
@@ -40,13 +53,11 @@ NS_START(rcppsw, task_allocation);
  * @ingroup task_allocation
  *
  * @brief Represents the logical concept of a task, which only contains a name
- * and a parent task.
+ * right now.
  */
 class logical_task {
  public:
-  explicit logical_task(std::string name,
-                        logical_task* parent = nullptr)
-      : m_name(std::move(name)), m_parent(parent) {}
+  explicit logical_task(std::string name) : m_name(std::move(name)) {}
 
   virtual ~logical_task(void);
 
@@ -57,23 +68,13 @@ class logical_task {
    */
   const std::string& name(void) const { return m_name; }
 
-  /**
-   * @brief Get the parent of this task.
-   *
-   * @return The parent task, or NULL if no parent has been set.
-   */
-  logical_task* parent(void) const { return m_parent; }
-
-  /**
-   * @brief Set the parent for this task.
-   */
-  void parent(logical_task* parent) { m_parent = parent; }
-
   logical_task& operator=(const logical_task& other) = delete;
+  bool operator==(const logical_task & other) const {
+    return this->m_name == other.name();
+  }
 
  private:
   std::string m_name;
-  logical_task* m_parent;
 };
 
 NS_END(task_allocation, rcppsw);

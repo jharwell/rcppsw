@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/partition_probability.hpp"
+#include "rcppsw/task_allocation/partitioning_params.hpp"
 #include <cassert>
 #include <cmath>
 
@@ -31,11 +32,19 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
+ * Constructors/Destructor
+ ******************************************************************************/
+partition_probability::partition_probability(
+    const struct partitioning_params *params)
+    : partition_probability(params->method, params->reactivity,
+                            params->offset) {}
+
+/*******************************************************************************
  * Member Functions
  ******************************************************************************/
-double partition_probability::calc(const time_estimate& task,
-                                   const time_estimate& subtask1,
-                                   const time_estimate& subtask2) {
+double partition_probability::calc(const time_estimate &task,
+                                   const time_estimate &subtask1,
+                                   const time_estimate &subtask2) {
   if ("pini2011" == mc_method) {
     return calc_pini2011(task, subtask1, subtask2);
   }
@@ -43,28 +52,27 @@ double partition_probability::calc(const time_estimate& task,
   return 0.0;
 } /* calc() */
 
-double partition_probability::calc_pini2011(const time_estimate& task,
-                                            const time_estimate& subtask1,
-                                            const time_estimate& subtask2) {
+double partition_probability::calc_pini2011(const time_estimate &task,
+                                            const time_estimate &subtask1,
+                                            const time_estimate &subtask2) {
   /*
    * If we do not have samples from the task(s) denominator for either case,
    * then we artificially set that term to 0, which yields an exponent of 0, and
-   * hence a partition probility of 0.5 (Hence the 2.0).
+   * hence a partition probility of 0.5.
    */
-  double tmp = 2.0;
+  double theta = 0.0;
   if (task > subtask1 + subtask2) {
     if ((subtask1 + subtask2).last_result() > 0) {
-      tmp = 1 + std::exp((-m_reactivity * ((task / (subtask1 + subtask2)) - 1.0))
-                             .last_result());
+      theta = m_reactivity *
+              ((task / (subtask1 + subtask2)) - m_offset).last_result();
     }
-    return set_result(1 / tmp);
   } else {
     if (task.last_result() > 0) {
-      tmp = -m_reactivity * (1.0 - ((subtask1 + subtask2) / task).last_result());
-      tmp = 1.0 + std::exp(tmp);
+      theta = m_reactivity *
+              (m_offset - ((subtask1 + subtask2) / task).last_result());
     }
-    return set_result(1.0 / tmp);
   }
+  return 1.0 / (1.0 + std::exp(-theta));
 } /* calc() */
 
 NS_END(task_allocation, rcppsw);

@@ -60,25 +60,62 @@ NS_START(rcppsw, task_allocation);
  * - The offset parameter: how quickly should robots react to an increasing
  *   difference between subtask time estimates?
  *
- * - 0 < reactivity < 1.
+ * - reactivity > 0.
  * - offset > 1.
  * - 0 < gamma < 1.
  *
  */
 class subtask_selection_probability : public rcppsw::math::expression<double> {
  public:
-  explicit subtask_selection_probability(std::string method)
-      : mc_method(std::move(method)), m_reactivity(0), m_offset(0), m_gamma(0) {}
+  static constexpr double kHARWELL2018_REACTIVITY = 8.0;
+  static constexpr double kHARWELL2018_OFFSET = 1.25;
+  static constexpr double kHARWELL2018_GAMMA = 1.0;
 
-  static constexpr char kBrutschy2014[] = "brutschy2014";
-  static constexpr char kHarwell2018[] = "harwell2018";
+  static constexpr double kBRUTSCHY2014_REACTIVITY = 1.0;
+  static constexpr double kBRUTSCHY2014_OFFSET = 8.0;
+  static constexpr double kBRUTSCHY2014_GAMMA = 0.01;
 
-  void init_sigmoid(double reactivity, double offset, double gamma);
-  double calc(const time_estimate* subtask1, const time_estimate* subtask2);
+  static constexpr char kMethodBrutschy2014[] = "brutschy2014";
+  static constexpr char kMethodHarwell2018[] = "harwell2018";
+  static constexpr char kMethodRandom[] = "random";
+
+  /**
+   * @brief Initialize subtask selection probability with default values, based
+   * on whatever the selected method is.
+   */
+  explicit subtask_selection_probability(std::string method);
+
+  /**
+   * @brief Initialize subtask selection probability with method + parameter
+   * values.
+   */
+  explicit subtask_selection_probability(
+      const struct subtask_selection_params* params);
 
   const std::string& method(void) const { return mc_method; }
 
+  /**
+   * @brief After construction initialization of parameters (may be needed in
+   * some situations).
+   */
+  void init_sigmoid(double reactivity, double offset, double gamma);
+
+  /**
+   * @brief Calculate the selection probability based on the configured method,
+   * using the most recent time estimates of each subtask.
+   */
+  double operator()(const time_estimate* subtask1,
+                    const time_estimate* subtask2);
+
+  /**
+   * @brief See \ref operator().
+   */
+  double calc(const time_estimate* subtask1, const time_estimate* subtask2);
+
  private:
+  /**
+   * @brief Random subtask selection, regardless of time estimates.
+   */
   double calc_random(void);
 
   /**
@@ -95,10 +132,10 @@ class subtask_selection_probability : public rcppsw::math::expression<double> {
 
   /**
    * @brief Calculate the probability of switching from subtask 1 to subtask 2
-   * using the piecewise method described in Brutschy2014.
+   * using the piecewise method described in Harwell2018.
    *
-   * @param int_est1 Estimate of \a exec time for subtask1.
-   * @param int_est2 Estimate of \a exec time for subtask2.
+   * @param exec_est1 Estimate of \a exec time for subtask1.
+   * @param exec_est2 Estimate of \a exec time for subtask2.
    *
    * @return Probability of switching.
    */
@@ -118,9 +155,9 @@ class subtask_selection_probability : public rcppsw::math::expression<double> {
 
   // clang-format off
   const std::string mc_method;
-  double            m_reactivity;
-  double            m_offset;
-  double            m_gamma;
+  double            m_reactivity{0.0};
+  double            m_offset{0.0};
+  double            m_gamma{0.0};
   // clang-format on
 };
 

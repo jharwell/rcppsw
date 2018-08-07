@@ -29,7 +29,6 @@
 #include <map>
 #include <algorithm>
 #include "rcppsw/patterns/factory/base_factory.hpp"
-#include "rcsw/common/fpc.h"
 
 /*******************************************************************************
  * Namespaces
@@ -44,14 +43,18 @@ NS_START(rcppsw, patterns, factory);
  * @ingroup patterns factory
  *
  * @brief A factory that maintains ownership of the created objects, but shares
- * them with the creation context. Objects are destroyed when the factory is
- * destructed so be careful about scoping issues!
+ * them with the creation context.
  *
  * @tparam T Type of objects capable of creation from this factory (restricted
  * to this type and its derived types).
+ *
+ * @tparam TypeArgs List of constructor arguments for the types to be
+ * constructed. If this is non-empty then ALL derived types of the base type
+ * that you want to use with the same shared_factory instance will have to have
+ * the same construct signature available. If this is empty, then the only
+ * limitation on types the factor will accept is what is specified above.
  */
-
-template <typename T>
+template <typename T, typename... TypeArgs>
 class sharing_factory : public base_factory {
  public:
   sharing_factory(void) : m_items(), m_retain_funcs() {}
@@ -61,15 +64,14 @@ class sharing_factory : public base_factory {
    * @brief Register a type with the factory, and associate it with the
    * specified name.
    *
-   * The type to register must have a zero parameter constructor available, as
-   * well as be derived from the factory base class.
+   * The type to register must be derived from the factory base class.
    */
-  template <typename TDerived>
+  template <typename TDerived, typename... Args>
   status_t register_type(const std::string& name) {
     static_assert(std::is_base_of<T, TDerived>::value,
                   "sharing_factory::register_type only accepts types derived from the base");
     if (m_retain_funcs.end() == m_retain_funcs.find(name)) {
-      m_retain_funcs[name] = &sharing_factory::template do_create_retain<TDerived>;
+      m_retain_funcs[name] = &sharing_factory::template do_create_retain<TDerived, TypeArgs...>;
     }
     return OK;
   }
@@ -77,25 +79,25 @@ class sharing_factory : public base_factory {
   /**
    * @brief Create the specified object, and return a shared reference to it.
    */
-  std::shared_ptr<T> create(const std::string& name) {
+  template<typename... Args>
+  std::shared_ptr<T> create(const std::string& name, Args... args) {
     auto it = m_retain_funcs.find(name);
     if (it != m_retain_funcs.end()) {
-      return (this->*(it->second))();
+      return (this->*(it->second))(args...);
     }
     return nullptr;
     }
 
  private:
-  using instance_create_func = std::shared_ptr<T> (sharing_factory<T>::*)();
-
-  template <typename TDerived>
-  std::shared_ptr<T> do_create_retain() {
-    m_items.push_back(std::make_shared<TDerived>());
+  using create_func_type = std::shared_ptr<T> (sharing_factory<T, TypeArgs...>::*)(TypeArgs...);
+  template <typename TDerived, typename... Args>
+  std::shared_ptr<T> do_create_retain(TypeArgs... args) {
+    m_items.push_back(std::make_shared<TDerived>(std::forward<Args>(args)...));
     return m_items.back();
   }
 
   std::vector<std::shared_ptr<T>> m_items;
-  std::map<std::string, instance_create_func> m_retain_funcs;
+  std::map<std::string, create_func_type> m_retain_funcs;
 };
 
 NS_END(factory, patterns, rcppsw);

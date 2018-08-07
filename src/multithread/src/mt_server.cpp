@@ -32,9 +32,9 @@ NS_START(rcppsw, multithread);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-mt_server::mt_server(const std::string& logfile_fname,
-                     const er::er_lvl::value& dbglvl,
-                     const er::er_lvl::value& loglvl)
+mt_server::mt_server(const std::string &logfile_fname,
+                     const er::er_lvl::value &dbglvl,
+                     const er::er_lvl::value &loglvl)
     : server(logfile_fname, dbglvl, loglvl), m_queue() {}
 
 /*******************************************************************************
@@ -47,7 +47,7 @@ void mt_server::flush(void) {
   } /* while() */
 } /* flush() */
 
-void* mt_server::thread_main(__unused void* arg) {
+void *mt_server::thread_main(__rcsw_unused void *arg) {
   while (!terminated()) {
     while (0 == m_queue.size()) {
       sleep(1);

@@ -33,19 +33,16 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 partitionable_polled_task::partitionable_polled_task(
-    const std::shared_ptr<er::server>& server,
-    const std::string& name,
-    const struct partitionable_task_params* c_params,
-    std::unique_ptr<taskable>& mechanism,
-    polled_task* parent)
-    : polled_task(name, c_params, mechanism, parent),
+    const std::shared_ptr<er::server> &server, const std::string &name,
+    const struct partitionable_task_params *c_params,
+    std::unique_ptr<taskable> mechanism)
+    : polled_task(name, c_params, std::move(mechanism)),
       partitionable_task(server, c_params) {}
 
-void partitionable_polled_task::init_random(int lb, int ub) {
+void partitionable_polled_task::init_random(const polled_task *partition,
+                                            int lb, int ub) {
   executable_task::update_exec_estimate(random() % (ub - lb + 1) + lb);
-  last_partition((random() % 2) ? partition1() : partition2());
-  partition1()->update_exec_estimate(random() % (ub - lb + 1) + lb);
-  partition2()->update_exec_estimate(random() % (ub - lb + 1) + lb);
+  last_partition(partition);
 } /* init_random() */
 
 NS_END(task_allocation, rcppsw);

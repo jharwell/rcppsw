@@ -84,8 +84,7 @@ class server_mod {
    *
    * @param header The header for the msg (timestamp, etc.). Can be empty.
    * @param msg The message to log.
-   * @param msg_lvl The level of the message.
-   * @param lvl The level of the module for the stream.
+   * @param lvl The level of the message.
    * @param stream The stream to log the message to.
    */
   void msg_report(const std::string& header,

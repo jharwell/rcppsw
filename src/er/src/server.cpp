@@ -35,18 +35,14 @@ NS_START(rcppsw, er);
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#define REPORT_INTERNAL(lvl, msg, ...)                                     \
-  {                                                                        \
-    char _str[1000];                                                       \
-    snprintf(static_cast<char*>(_str),                                     \
-             sizeof(_str),                                                 \
-             "%s:%d:%s: " msg "\n",                                        \
-             __FILE__,                                                     \
-             __LINE__,                                                     \
-             reinterpret_cast<const char*>(__FUNCTION__),                  \
-             ##__VA_ARGS__);                                               \
-    er_msg _msg(m_er_id, lvl, std::string(reinterpret_cast<char*>(_str))); \
-    report(_msg);                                                          \
+#define REPORT_INTERNAL(lvl, msg, ...)                                         \
+  {                                                                            \
+    char _str[1000];                                                           \
+    snprintf(static_cast<char *>(_str), sizeof(_str), "%s:%d:%s: " msg "\n",   \
+             __FILE__, __LINE__, reinterpret_cast<const char *>(__FUNCTION__), \
+             ##__VA_ARGS__);                                                   \
+    er_msg _msg(m_er_id, lvl, std::string(reinterpret_cast<char *>(_str)));    \
+    report(_msg);                                                              \
   }
 
 /*******************************************************************************
@@ -57,19 +53,13 @@ std::shared_ptr<global_server> g_server(std::make_shared<global_server>());
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-server::server(std::string logfile_fname,
-               const er_lvl::value& dbglvl,
-               const er_lvl::value& loglvl)
-    : m_modules(),
-      m_logfile_fname(std::move(logfile_fname)),
-      m_logfile(new std::ofstream()),
-      m_loglvl_dflt(loglvl),
-      m_dbglvl_dflt(dbglvl),
-      m_dbg_ts_calculator(nullptr),
-      m_log_ts_calculator(nullptr),
-      m_generator(),
-      m_er_id(idgen()) {
-  gethostname(reinterpret_cast<char*>(m_hostname), 32);
+server::server(std::string logfile_fname, const er_lvl::value &dbglvl,
+               const er_lvl::value &loglvl)
+    : m_modules(), m_logfile_fname(std::move(logfile_fname)),
+      m_logfile(new std::ofstream()), m_loglvl_dflt(loglvl),
+      m_dbglvl_dflt(dbglvl), m_dbg_ts_calculator(nullptr),
+      m_log_ts_calculator(nullptr), m_generator(), m_er_id(idgen()) {
+  gethostname(reinterpret_cast<char *>(m_hostname), 32);
 
   change_logfile(m_logfile_fname);
 }
@@ -85,8 +75,8 @@ void server::dbg_ts_calculator(std::function<std::string(void)> cb) {
   m_dbg_ts_calculator = std::move(cb);
 } /* dbg_ts_calculator() */
 
-__const const std::function<std::string(void)>& server::dbg_ts_calculator(
-    void) const {
+__rcsw_const const std::function<std::string(void)> &
+server::dbg_ts_calculator(void) const {
   return m_dbg_ts_calculator;
 } /* dbg_ts_calculator() */
 
@@ -94,8 +84,8 @@ void server::log_ts_calculator(std::function<std::string(void)> cb) {
   m_log_ts_calculator = std::move(cb);
 } /* log_ts_calculator() */
 
-__const const std::function<std::string(void)>& server::log_ts_calculator(
-    void) const {
+__rcsw_const const std::function<std::string(void)> &
+server::log_ts_calculator(void) const {
   return m_log_ts_calculator;
 } /* log_ts_calculator() */
 
@@ -104,10 +94,10 @@ void server::self_er_en(void) {
   mod_dbglvl(m_er_id, er_lvl::NOM);
 } /* self_er_en() */
 
-status_t server::insmod(const boost::uuids::uuid& mod_id,
-                        const er_lvl::value& loglvl,
-                        const er_lvl::value& dbglvl,
-                        const std::string& mod_name) {
+status_t server::insmod(const boost::uuids::uuid &mod_id,
+                        const er_lvl::value &loglvl,
+                        const er_lvl::value &dbglvl,
+                        const std::string &mod_name) {
   server_mod mod(mod_id, loglvl, dbglvl, mod_name);
 
   /* make sure module not already present */
@@ -116,15 +106,14 @@ status_t server::insmod(const boost::uuids::uuid& mod_id,
   return OK;
 
 error:
-  REPORT_INTERNAL(er_lvl::ERR,
-                  "Failed to install module %s: module exists",
+  REPORT_INTERNAL(er_lvl::ERR, "Failed to install module %s: module exists",
                   mod_name.c_str());
   return ERROR;
 } /* insmod() */
 
-status_t server::findmod(const std::string& mod_name,
-                         boost::uuids::uuid& mod_id) {
-  for (auto& mod : m_modules) {
+status_t server::findmod(const std::string &mod_name,
+                         boost::uuids::uuid &mod_id) {
+  for (auto &mod : m_modules) {
     if (mod.name() == mod_name) {
       mod_id = mod.id();
       return OK;
@@ -133,14 +122,14 @@ status_t server::findmod(const std::string& mod_name,
   return ERROR;
 } /* findmod() */
 
-status_t server::rmmod(const boost::uuids::uuid& id) {
+status_t server::rmmod(const boost::uuids::uuid &id) {
   server_mod tmp(id, er_lvl::NOM, er_lvl::NOM, "tmp");
   auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
   m_modules.erase(iter);
   return OK;
 } /* rmmod() */
 
-void server::report(const er_msg& msg) {
+void server::report(const er_msg &msg) {
   server_mod tmp(msg.id, er_lvl::NOM, er_lvl::NOM, "tmp");
   auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
 
@@ -162,7 +151,7 @@ void server::report(const er_msg& msg) {
   }
 } /* msg_report() */
 
-bool server::will_report(const er_msg& msg) const {
+bool server::will_report(const er_msg &msg) const {
   server_mod tmp(msg.id, er_lvl::NOM, er_lvl::NOM, "tmp");
   auto iter = std::find(m_modules.begin(), m_modules.end(), tmp);
   if (iter != m_modules.end()) {
@@ -177,8 +166,8 @@ void server::flush(void) {
   m_logfile->flush();
 } /* flush() */
 
-status_t server::mod_dbglvl(const boost::uuids::uuid& id,
-                            const er_lvl::value& lvl) {
+status_t server::mod_dbglvl(const boost::uuids::uuid &id,
+                            const er_lvl::value &lvl) {
   server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
@@ -186,8 +175,7 @@ status_t server::mod_dbglvl(const boost::uuids::uuid& id,
   CHECK(iter != m_modules.end());
   iter->set_dbglvl(lvl);
 
-  REPORT_INTERNAL(er_lvl::VER,
-                  "Successfully updated dbglvl for module %s",
+  REPORT_INTERNAL(er_lvl::VER, "Successfully updated dbglvl for module %s",
                   iter->name().c_str());
   return OK;
 
@@ -198,7 +186,7 @@ error:
   return ERROR;
 } /* mod_dbglvl() */
 
-er_lvl::value server::mod_dbglvl(const boost::uuids::uuid& id) {
+er_lvl::value server::mod_dbglvl(const boost::uuids::uuid &id) {
   server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
@@ -210,7 +198,7 @@ error:
   return static_cast<er_lvl::value>(-1);
 } /* dbglvl() */
 
-er_lvl::value server::mod_loglvl(const boost::uuids::uuid& id) {
+er_lvl::value server::mod_loglvl(const boost::uuids::uuid &id) {
   server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
@@ -222,7 +210,7 @@ error:
   return static_cast<er_lvl::value>(-1);
 } /* loglvl() */
 
-void server::change_logfile(const std::string& new_fname) {
+void server::change_logfile(const std::string &new_fname) {
   m_logfile->close();
   if (boost::filesystem::exists(new_fname)) {
     boost::filesystem::remove(new_fname);
@@ -233,8 +221,8 @@ void server::change_logfile(const std::string& new_fname) {
   }
 } /* change_logfile() */
 
-status_t server::mod_loglvl(const boost::uuids::uuid& id,
-                            const er_lvl::value& lvl) {
+status_t server::mod_loglvl(const boost::uuids::uuid &id,
+                            const er_lvl::value &lvl) {
   server_mod mod(id, er_lvl::NOM, er_lvl::NOM, "tmp");
 
   /* make sure module is already present */
@@ -242,8 +230,7 @@ status_t server::mod_loglvl(const boost::uuids::uuid& id,
   CHECK(iter != m_modules.end());
   iter->set_loglvl(lvl);
 
-  REPORT_INTERNAL(er_lvl::VER,
-                  "Successfully updated loglvl for module %s",
+  REPORT_INTERNAL(er_lvl::VER, "Successfully updated loglvl for module %s",
                   iter->name().c_str());
   return OK;
 
@@ -256,7 +243,7 @@ error:
 
 boost::uuids::uuid server::idgen(void) { return m_generator(); } /* idgen() */
 
-__const std::ostream& server::dbg_stream(void) { return std::cout; }
-__pure std::ofstream& server::log_stream(void) { return *m_logfile; }
+__rcsw_const std::ostream &server::dbg_stream(void) { return std::cout; }
+__rcsw_pure std::ofstream &server::log_stream(void) { return *m_logfile; }
 
 NS_END(er, rcpppsw);

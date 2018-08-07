@@ -24,8 +24,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include "rcppsw/task_allocation/task_params.hpp"
+#include "rcppsw/task_allocation/subtask_selection_params.hpp"
+#include "rcppsw/task_allocation/partitioning_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -37,6 +38,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 /**
  * @struct partitionable_task_params
+ * @ingroup params task_allocation
  *
  * @brief Parameters used by \ref partitionable_task tasks.
  */
@@ -44,10 +46,8 @@ struct partitionable_task_params : public task_params {
   partitionable_task_params(void)
       : task_params() {}
 
-  std::string subtask_selection_method{""};
-  std::string partition_method{""};
-  bool always_partition{false};
-  bool never_partition{false};
+  struct subtask_selection_params subtask_selection{};
+  struct partitioning_params partitioning{};
 };
 
 NS_END(task_allocation, rcppsw);
