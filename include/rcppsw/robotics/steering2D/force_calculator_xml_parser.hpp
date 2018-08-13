@@ -18,14 +18,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_FORCE_CALCULATOR_XML_PARSER_HPP_
-#define INCLUDE_RCPPSW_CONTROL_FORCE_CALCULATOR_XML_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_ROBOTICS_STEERING2D_FORCE_CALCULATOR_XML_PARSER_HPP_
+#define INCLUDE_RCPPSW_ROBOTICS_STEERING2D_FORCE_CALCULATOR_XML_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <string>
-#include <argos3/core/utility/configuration/argos_configuration.h>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/robotics/steering2D/force_calculator_xml_parser.hpp"
@@ -90,4 +89,4 @@ class force_calculator_xml_parser : public rcppsw::params::xml_param_parser {
 
 NS_END(steering2D, robotics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_CONTROL_FORCE_CALCULATOR_XML_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_ROBOTICS_STEERING2D_FORCE_CALCULATOR_XML_PARSER_HPP_ */

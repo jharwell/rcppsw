@@ -36,10 +36,9 @@ constexpr char arrival_force_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void arrival_force_xml_parser::parse(const argos::TConfigurationNode &node) {
+void arrival_force_xml_parser::parse(const ticpp::Element &node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
-    ticpp::Element anode =
-        argos::GetNode(const_cast<ticpp::Element &>(node), kXMLRoot);
+    ticpp::Element anode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
     XML_PARSE_PARAM(anode, m_params, max);
