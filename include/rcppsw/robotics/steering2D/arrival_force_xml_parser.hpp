@@ -25,7 +25,6 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include <argos3/core/utility/configuration/argos_configuration.h>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
 #include "rcppsw/robotics/steering2D/arrival_force_params.hpp"
