@@ -30,8 +30,6 @@ this project. In particular:
   - Header ordering (whatever the auto-formatter does is fine, but should
     generally be google style).
 
-  - rand_r() instead of rand() (I use random(), which it does not flag).
-
   - Line length >= 80 ONLY if it is only 1-2 chars too long, and breaking the
     line would decrease readability. The formatter generally takes care of this
     too.

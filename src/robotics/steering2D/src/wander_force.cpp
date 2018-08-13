@@ -75,7 +75,7 @@ argos::CVector2 wander_force::operator()(const boid &entity) {
    */
   double val =
       -m_max_angle_delta +
-      2 * m_max_angle_delta * (static_cast<double>(random()) / RAND_MAX);
+      2 * m_max_angle_delta * (static_cast<double>(std::rand()) / RAND_MAX);
   m_angle.FromValueInDegrees(
       std::fmod(argos::ToDegrees(m_angle).GetValue() + val, m_max_angle_delta));
 
