@@ -64,7 +64,7 @@ class executable_task : public logical_task {
    * specified bounds.
    */
   void init_random(int lb, int ub) {
-    update_exec_estimate(random() % (ub - lb + 1) + lb);
+    update_exec_estimate(std::rand() % (ub - lb + 1) + lb);
   }
 
   /**

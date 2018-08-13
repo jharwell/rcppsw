@@ -41,7 +41,7 @@ partitionable_polled_task::partitionable_polled_task(
 
 void partitionable_polled_task::init_random(const polled_task *partition,
                                             int lb, int ub) {
-  executable_task::update_exec_estimate(random() % (ub - lb + 1) + lb);
+  executable_task::update_exec_estimate(std::rand() % (ub - lb + 1) + lb);
   last_partition(partition);
 } /* init_random() */
 

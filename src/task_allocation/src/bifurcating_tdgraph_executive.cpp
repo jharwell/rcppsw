@@ -76,7 +76,7 @@ void bifurcating_tdgraph_executive::run(void) {
     double prob = task_abort_prob(current_task());
     ER_VER("Task '%s' abort probability: %f", current_task()->name().c_str(), prob);
 
-    if (static_cast<double>(random()) / RAND_MAX <= prob) {
+    if (static_cast<double>(std::rand()) / RAND_MAX <= prob) {
       ER_NOM("Task '%s' aborted", current_task()->name().c_str());
       handle_task_abort(current_task());
     } else {

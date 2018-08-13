@@ -86,7 +86,7 @@ polled_task* partitionable_task::partition(const polled_task* const partition1,
          m_partition_prob.method().c_str(), partition_prob);
 
   /* We chose not to employ partitioning on the next task allocation */
-  if (partition_prob <= static_cast<double>(random()) / RAND_MAX) {
+  if (partition_prob <= static_cast<double>(std::rand()) / RAND_MAX) {
     ER_NOM("Not employing partitioning: Return task '%s'", name.c_str());
     m_employed_partitioning = false;
     auto ret = dynamic_cast<polled_task*>(this);
@@ -141,7 +141,7 @@ polled_task* partitionable_task::partition(const polled_task* const partition1,
      * to subtask2, based on time estimates.
      */
     if (m_last_partition == partition1 || nullptr == m_last_partition) {
-      if (prob_12 >= static_cast<double>(random()) / RAND_MAX) {
+      if (prob_12 >= static_cast<double>(std::rand()) / RAND_MAX) {
         ret = partition2;
       } else {
         ret = partition1;
@@ -152,7 +152,7 @@ polled_task* partitionable_task::partition(const polled_task* const partition1,
      * to subtask1, based on time estimates.
      */
     else if (m_last_partition == partition2) {
-      if (prob_21 >= static_cast<double>(random()) / RAND_MAX) {
+      if (prob_21 >= static_cast<double>(std::rand()) / RAND_MAX) {
         ret = partition1;
       } else {
         ret = partition2;
@@ -160,7 +160,7 @@ polled_task* partitionable_task::partition(const polled_task* const partition1,
     }
   } else if (subtask_selection_probability::kMethodRandom ==
              m_selection_prob.method()) {
-    if (prob_12 >= static_cast<double>(random()) / RAND_MAX) {
+    if (prob_12 >= static_cast<double>(std::rand()) / RAND_MAX) {
       ret = partition1;
     } else {
       ret = partition2;
