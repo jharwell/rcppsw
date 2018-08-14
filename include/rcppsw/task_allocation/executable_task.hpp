@@ -137,7 +137,7 @@ class executable_task : public logical_task {
    * @brief Set a task as atomic, meaning that once executed, it cannot be
    * aborted.
    */
-  void set_atomic(void) { m_is_atomic = true; }
+  void set_atomic(bool b) { m_is_atomic = b; }
 
   /**
    * @brief Get if a task is partitionable. This can be done with reflection,
@@ -149,7 +149,7 @@ class executable_task : public logical_task {
    * @brief Set a task as partitionable. Should only be set on
    * \ref partitionable_task objects, otherwise bad things will happen.
    */
-   void set_partitionable(void) { m_is_partitionable = true; }
+  void set_partitionable(bool b) { m_is_partitionable = b; }
 
   /**
    * @brief Get the probability of aborting an executable task.

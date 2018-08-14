@@ -59,29 +59,29 @@ class execution_metrics_collector : public base_metrics_collector {
  private:
   struct execution_stats {
     /**
-     * @brief Name of task.
-     */
-    std::string name{""};
-
-    /**
      * @brief # Times the task has been completed within an interval.
      */
-    uint        complete_count{0};
+    uint        int_complete_count{0};
 
 
     /**
      * @brief # Times the task has been aborted within an interval.
      */
-    uint        abort_count{0};
+    uint        int_abort_count{0};
 
     /**
      * @brief Cumulative execution time of the task within an interval.
      */
-    double      cum_exec_time{0.0};
+    double      int_exec_time{0.0};
 
     /**
      * @brief Cumulative interface time of the task within an interval.
      */
+    double      int_interface_time{0.0};
+
+    uint        cum_complete_count{0};
+    uint        cum_abort_count{0};
+    double      cum_exec_time{0.0};
     double      cum_interface_time{0.0};
   };
 

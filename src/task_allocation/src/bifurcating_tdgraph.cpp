@@ -24,6 +24,7 @@
 #include "rcppsw/task_allocation/bifurcating_tdgraph.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
 #include "rcppsw/task_allocation/partitionable_task.hpp"
+#include "rcppsw/task_allocation/bifurcating_tdgraph_executive.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -39,6 +40,15 @@ bifurcating_tdgraph::bifurcating_tdgraph(std::shared_ptr<er::server> &server)
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
+void bifurcating_tdgraph::install_cb(bifurcating_tdgraph_executive* const e) {
+  e->task_alloc_notify(std::bind(&bifurcating_tdgraph::task_alloc_cb,
+                                 this,
+                                 std::placeholders::_1));
+  e->task_abort_notify(std::bind(&bifurcating_tdgraph::task_abort_cb,
+                                 this,
+                                 std::placeholders::_1));
+} /* install_cb() */
+
 status_t bifurcating_tdgraph::set_children(const std::string &parent,
                              const std::vector<polled_task*>& children) {
   return tdgraph::set_children(parent, children);

@@ -38,7 +38,7 @@ base_executive::base_executive(
     std::shared_ptr<rcppsw::er::server> server,
     tdgraph* const graph)
     : client(server), m_graph(graph) {
-  client::insmod("task_base_executive", rcppsw::er::er_lvl::DIAG,
+  client::insmod("base_executive", rcppsw::er::er_lvl::DIAG,
                  rcppsw::er::er_lvl::NOM);
 }
 
