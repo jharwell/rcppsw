@@ -80,8 +80,8 @@ class base_executive : public rcppsw::er::client {
    * The callback will be passed the task that was aborted, so if task-specific
    * abort callbacks are needed, they can be implemented that way.
    */
-  void task_abort_cleanup(event_cb cb) { m_task_abort_cleanup.push_back(cb); }
-  const std::list<event_cb>& task_abort_cleanup(void) const { return m_task_abort_cleanup; }
+  void task_abort_notify(event_cb cb) { m_task_abort_notify.push_back(cb); }
+  const std::list<event_cb>& task_abort_notify(void) const { return m_task_abort_notify; }
 
   /**
    * @brief Set an optional callback that will be run when a new task allocation
@@ -164,7 +164,7 @@ class base_executive : public rcppsw::er::client {
   // clang-format off
   polled_task*             m_current_task{nullptr};
   const polled_task*       m_last_task{nullptr};
-  std::list<event_cb>      m_task_abort_cleanup{};
+  std::list<event_cb>      m_task_abort_notify{};
   std::list<event_cb>      m_task_alloc_notify{};
   std::list<event_cb>      m_task_finish_notify{};
   std::unique_ptr<tdgraph> m_graph;

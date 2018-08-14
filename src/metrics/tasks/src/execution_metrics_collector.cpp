@@ -1,5 +1,5 @@
 /**
- * @file management_metrics_collector.cpp
+ * @file execution_metrics_collector.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -49,13 +49,15 @@ execution_metrics_collector::execution_metrics_collector(
 std::string execution_metrics_collector::csv_header_build(
     const std::string& header) {
   // clang-format off
-  std::string line = base_metrics_collector::csv_header_build(header);
-  return line + m_stats.name + "_" + CSV_COLNAME(child1.complete_count) +
-      separator() +
-      m_stats.name + "_" + CSV_COLNAME(child1.abort_count) +
-      separator() +
-      m_stats.name + "_" + CSV_COLNAME(child1.avg_exec_time) +
-      separator();
+  return base_metrics_collector::csv_header_build(header) +
+      "int_avg_exec_time" + separator() +
+      "cum_avg_exec_time" + separator() +
+      "int_avg_interface_time" + separator() +
+      "cum_avg_interface_time" + separator() +
+      "int_avg_abort_count" + separator() +
+      "cum_avg_abort_count" + separator() +
+      "int_avg_complete_count" + separator() +
+      "cum_avg_complete_count" + separator();
   // clang-format on
 } /* csv_header_build() */
 
@@ -67,17 +69,20 @@ void execution_metrics_collector::reset(void) {
 void execution_metrics_collector::collect(
     const rcppsw::metrics::base_metrics& metrics) {
   auto& m = dynamic_cast<const execution_metrics&>(metrics);
-  m_stats.abort_count += static_cast<uint>(m.task_aborted());
-  m_stats.complete_count += static_cast<uint>(m.task_completed());
-
   /*
-   * Task finish stats. current_task_name() is still valid because the task
-   * has not been reset yet/new task has not been allocated.
+   * Task finish stats are still valid because the current task in the executive
+   * has not been updated.
    */
   if (m.task_completed()) {
-    m_stats.cum_exec_time += m.task_last_exec_time();
+    m_stats.int_interface_time += m.task_last_interface_time();
     m_stats.cum_interface_time += m.task_last_interface_time();
+    m_stats.int_exec_time += m.task_last_exec_time();
+    m_stats.cum_exec_time += m.task_last_exec_time();
   }
+  m_stats.int_abort_count += static_cast<uint>(m.task_aborted());
+  m_stats.cum_abort_count += static_cast<uint>(m.task_aborted());
+  m_stats.int_complete_count += static_cast<uint>(m.task_completed());
+  m_stats.cum_complete_count += static_cast<uint>(m.task_completed());
 } /* collect() */
 
 bool execution_metrics_collector::csv_line_build(std::string& line) {
@@ -85,24 +90,41 @@ bool execution_metrics_collector::csv_line_build(std::string& line) {
     return false;
   }
 
-  line = std::to_string(m_stats.complete_count) + separator() +
-         std::to_string(m_stats.abort_count) + separator();
+  line += (m_stats.int_complete_count > 0) ?
+          std::to_string(m_stats.int_exec_time /
+                         static_cast<double>(m_stats.int_complete_count)) :"0";
+  line += separator();
+  line += (m_stats.cum_complete_count > 0) ?
+          std::to_string(m_stats.cum_exec_time /
+                         static_cast<double>(m_stats.cum_complete_count)) :"0";
+  line += separator();
 
-  double avg_exec = (m_stats.complete_count > 0)
-                    ? m_stats.cum_exec_time /
-                         m_stats.complete_count
-                   : 0;
-  double avg_int = (m_stats.complete_count > 0)
-                    ? m_stats.cum_interface_time /
-                    m_stats.complete_count
-                    : 0;
-  line += std::to_string(avg_exec) + separator();
-  line += std::to_string(avg_int) + separator();
+  line += (m_stats.int_complete_count > 0) ?
+          std::to_string(m_stats.int_interface_time /
+                         static_cast<double>(m_stats.int_complete_count)) :"0";
+  line += separator();
+  line += (m_stats.cum_complete_count > 0) ?
+          std::to_string(m_stats.cum_interface_time /
+                         static_cast<double>(m_stats.cum_complete_count)) :"0";
+  line += separator();
+
+  line += std::to_string(m_stats.int_abort_count /
+                         static_cast<double>(interval())) + separator();
+  line += std::to_string(m_stats.cum_abort_count /
+                         static_cast<double>(timestep() + 1)) + separator();
+  line += std::to_string(m_stats.int_complete_count /
+                         static_cast<double>(interval())) + separator();
+  line += std::to_string(m_stats.cum_complete_count /
+                         static_cast<double>(timestep() + 1)) + separator();
+
   return true;
 } /* store_foraging_stats() */
 
 void execution_metrics_collector::reset_after_interval(void) {
-  m_stats = {0, 0, 0, 0, 0};
+  m_stats.int_complete_count = 0;
+  m_stats.int_abort_count = 0;
+  m_stats.int_exec_time = 0;
+  m_stats.int_interface_time = 0;
 } /* reset_after_interval() */
 
 NS_END(metrics, rcppsw, tasks);

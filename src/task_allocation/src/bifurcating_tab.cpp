@@ -36,8 +36,8 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructors
  ******************************************************************************/
 bifurcating_tab::bifurcating_tab(const polled_task* const root,
-                                         const polled_task* const child1,
-                                         const polled_task* const child2)
+                                 const polled_task* const child1,
+                                 const polled_task* const child2)
     : m_root(root), m_child1(child1), m_child2(child2) {
   assert(m_root->is_partitionable());
 }

@@ -36,7 +36,10 @@ NS_START(rcppsw, task_allocation);
 bifurcating_tdgraph_executive::bifurcating_tdgraph_executive(
     std::shared_ptr<rcppsw::er::server>& server,
     bifurcating_tdgraph* const graph)
-    : base_executive(server, graph) {}
+    : base_executive(server, graph) {
+  auto bigraph = static_cast<bifurcating_tdgraph*>(base_executive::graph());
+  bigraph->install_cb(this);
+}
 
 
 /*******************************************************************************
@@ -59,11 +62,11 @@ void bifurcating_tdgraph_executive::run(void) {
         !root_task()->is_atomic()) {
       auto p = static_cast<partitionable_polled_task*>(root_task());
       auto kids = graph()->children(p);
-      ER_ASSERT(2 == kids.size(),
+      ER_ASSERT(3 == kids.size(),
                 "FATAL: Non-atomic partitionable task has %zu kids (expected %d)",
-                kids.size(), 2);
-      p->update_partition_prob(p->exec_estimate(), kids[0]->exec_estimate(),
-                               kids[1]->exec_estimate());
+                kids.size(), 3);
+      p->update_partition_prob(p->exec_estimate(), kids[1]->exec_estimate(),
+                               kids[2]->exec_estimate());
     }
 
     handle_task_start(get_next_task(nullptr));
@@ -104,7 +107,7 @@ void bifurcating_tdgraph_executive::handle_task_abort(polled_task* task) {
    * Among other things: handle the setting of the last partition of whatever
    * partitionable task the aborted one was a child of.
    */
-  for (auto cb : task_abort_cleanup()) {
+  for (auto cb : task_abort_notify()) {
     cb(task);
   } /* for(cb..) */
 

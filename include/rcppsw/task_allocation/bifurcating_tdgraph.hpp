@@ -36,6 +36,8 @@
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 
+class bifurcating_tdgraph_executive;
+
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
@@ -73,6 +75,15 @@ class bifurcating_tdgraph : public tdgraph {
    * @brief Get the active TAB for the graph.
    */
   const bifurcating_tab* active_tab(void) const { return m_active_tab; }
+
+  /**
+   * @brief Install task abort and alloc callbacks. Can't be done during
+   * construction, as a graph is part of the executive, and so a reference to a
+   * constructed executive object is not yet available.
+   *
+   * @param e The executive.
+   */
+  void install_cb(bifurcating_tdgraph_executive* e);
 
  private:
   /**
