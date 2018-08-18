@@ -185,6 +185,9 @@ polled_task* bifurcating_tdgraph_executive::do_get_next_task(void) {
     return next_task_from_partitionable(tdgraph::vertex_parent(*graph(),
                                                                current_task()));
   }
+  if (bigraph->active_tab()->task_is_root(current_task())) {
+    return next_task_from_partitionable(current_task());
+  }
   ER_FATAL_SENTINEL("FATAL: Task is neither leaf nor child of TAB?");
   return nullptr;
 } /* do_get_next_task() */
