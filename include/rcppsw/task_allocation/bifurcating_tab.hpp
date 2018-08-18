@@ -54,10 +54,29 @@ class bifurcating_tab : public metrics::tasks::bifurcating_tab_metrics {
   bifurcating_tab& operator=(const bifurcating_tab& other) = delete;
   bifurcating_tab(const bifurcating_tab& other) = delete;
 
+  /**
+   * @brief Set the active task to the passed in task.
+   */
   void change_active_task(const polled_task* active_task);
-  bool contains_task(const polled_task* active_task) const;
+
+  /**
+   * @brief Returns \c TRUE iff the argument is one of the 3 tasks in the TAB.
+   */
+  bool contains_task(const polled_task* task) const;
+
+  /**
+   * @brief Returns \c TRUE iff the argument is the root task in the TAB.
+   */
   bool task_is_root(const polled_task* task) const;
+
+  /**
+   * @brief Returns \c TRUE iff the argument is one of the child tasks in the TAB.
+   */
   bool task_is_child(const polled_task* task) const;
+
+  const polled_task* root(void) const { return m_root; }
+  const polled_task* child1(void) const { return m_child1; }
+  const polled_task* child2(void) const { return m_child2; }
 
   /* bifurcating TAB metrics */
   bool subtask1_active(void) const override { return m_active_task == m_child1; }

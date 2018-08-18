@@ -46,7 +46,8 @@ NS_START(rcppsw, task_allocation);
  */
 class base_executive : public rcppsw::er::client {
  public:
-  using event_cb = std::function<void(polled_task*)>;
+  using abort_notify_cb = std::function<void(const polled_task*)>;
+  using finish_notify_cb = std::function<void(const polled_task*)>;
 
   /**
    * @brief Creates the base executive.
@@ -80,17 +81,8 @@ class base_executive : public rcppsw::er::client {
    * The callback will be passed the task that was aborted, so if task-specific
    * abort callbacks are needed, they can be implemented that way.
    */
-  void task_abort_notify(event_cb cb) { m_task_abort_notify.push_back(cb); }
-  const std::list<event_cb>& task_abort_notify(void) const { return m_task_abort_notify; }
-
-  /**
-   * @brief Set an optional callback that will be run when a new task allocation
-   * occurs.
-   *
-   * The callback will be passed a pointer to the task that was just allocated.
-   */
-  void task_alloc_notify(event_cb cb) { m_task_alloc_notify.push_back(cb); }
-  const std::list<event_cb>& task_alloc_notify(void) const { return m_task_alloc_notify; }
+  void task_abort_notify(abort_notify_cb cb) { m_task_abort_notify.push_back(cb); }
+  const std::list<abort_notify_cb>& task_abort_notify(void) const { return m_task_abort_notify; }
 
   /**
    * @brief Set an optional callback that will be run when a task finishes.
@@ -98,8 +90,8 @@ class base_executive : public rcppsw::er::client {
    * The callback will be passed a pointer to the task that was just finished,
    * before the task is reset.
    */
-  void task_finish_notify(event_cb cb) { m_task_finish_notify.push_back(cb); }
-  const std::list<event_cb>& task_finish_notify(void) const { return m_task_finish_notify; }
+  void task_finish_notify(finish_notify_cb cb) { m_task_finish_notify.push_back(cb); }
+  const std::list<finish_notify_cb>& task_finish_notify(void) const { return m_task_finish_notify; }
 
   /**
    * @brief Get the last task that was executed before the current one.
@@ -162,12 +154,11 @@ class base_executive : public rcppsw::er::client {
   polled_task* get_first_task(void);
 
   // clang-format off
-  polled_task*             m_current_task{nullptr};
-  const polled_task*       m_last_task{nullptr};
-  std::list<event_cb>      m_task_abort_notify{};
-  std::list<event_cb>      m_task_alloc_notify{};
-  std::list<event_cb>      m_task_finish_notify{};
-  std::unique_ptr<tdgraph> m_graph;
+  polled_task*                m_current_task{nullptr};
+  const polled_task*          m_last_task{nullptr};
+  std::list<abort_notify_cb>  m_task_abort_notify{};
+  std::list<finish_notify_cb> m_task_finish_notify{};
+  std::unique_ptr<tdgraph>    m_graph;
   // clang-format on
 };
 

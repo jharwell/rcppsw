@@ -45,6 +45,8 @@ class bifurcating_tdgraph;
  */
 class bifurcating_tdgraph_executive : public base_executive {
  public:
+  using alloc_notify_cb = std::function<void(const polled_task*, const bifurcating_tab*)>;
+
   bifurcating_tdgraph_executive(std::shared_ptr<rcppsw::er::server>& server,
                                 bifurcating_tdgraph* graph);
 
@@ -55,13 +57,30 @@ class bifurcating_tdgraph_executive : public base_executive {
    */
   const bifurcating_tab* active_tab(void) const;
 
+  /**
+   * @brief Set an optional callback that will be run when a new task allocation
+   * occurs.
+   *
+   * The callback will be passed a pointer to the task that was just allocated.
+   */
+  void task_alloc_notify(alloc_notify_cb cb) { m_task_alloc_notify.push_back(cb); }
+
  private:
   polled_task* do_get_next_task(void) override;
+
+  /**
+   * @brief Get the next task to execute, if the most recently executed
+   * one was partitionable (easy case).
+   */
   polled_task* next_task_from_partitionable(const polled_task* task);
+
   void handle_task_start(polled_task* new_task);
   void handle_task_abort(polled_task* task);
   void handle_task_finish(polled_task* task);
   void update_task_partition_prob(polled_task* task);
+
+  std::list<alloc_notify_cb>  m_task_alloc_notify{};
+
 };
 
 NS_END(task_allocation, rcppsw);
