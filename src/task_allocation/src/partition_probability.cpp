@@ -72,7 +72,7 @@ double partition_probability::calc_pini2011(const time_estimate &task,
               (m_offset - ((subtask1 + subtask2) / task).last_result());
     }
   }
-  return 1.0 / (1.0 + std::exp(-theta));
+  return set_result(1.0 / (1.0 + std::exp(-theta)));
 } /* calc() */
 
 NS_END(task_allocation, rcppsw);
