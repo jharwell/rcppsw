@@ -52,10 +52,12 @@ class arrival_force {
   bool within_slowing_radius(void) const { return m_within_slowing_radius; }
 
  private:
-  bool   m_within_slowing_radius{false};
-  double m_max;
-  double m_slowing_speed_min;
-  double m_slowing_radius;
+  const double mc_max;
+  const double mc_slowing_speed_min;
+  const double mc_slowing_radius;
+
+  bool         m_within_slowing_radius{false};
+  double       m_last_angle{0.0};
 };
 
 NS_END(steering2D, robotics, rcppsw);

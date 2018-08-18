@@ -280,24 +280,24 @@ class server {
 
  private:
   /* data members */
-  char m_hostname[32];
+  char                           m_hostname[32];
 
-  std::vector<server_mod> m_modules;
-  std::string m_logfile_fname;              /// File to log events to.
+  std::vector<server_mod>        m_modules;
+  std::string                    m_logfile_fname; /// File to log events to.
   std::unique_ptr<std::ofstream> m_logfile; /// Logfile handle.
 
   /** Default log level for new modules */
-  er_lvl::value m_loglvl_dflt;
+  er_lvl::value                  m_loglvl_dflt;
 
   /** Default debug printing level for new modules. */
-  er_lvl::value m_dbglvl_dflt;
+  er_lvl::value                  m_dbglvl_dflt;
 
   std::function<std::string(void)> m_dbg_ts_calculator;
   std::function<std::string(void)> m_log_ts_calculator;
 
   /** Generator for universally unique identifiers for modules */
   boost::uuids::random_generator m_generator;
-  boost::uuids::uuid m_er_id;
+  boost::uuids::uuid             m_er_id;
 };
 
 /**

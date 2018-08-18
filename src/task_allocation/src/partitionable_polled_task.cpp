@@ -34,12 +34,12 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 partitionable_polled_task::partitionable_polled_task(
     const std::shared_ptr<er::server> &server, const std::string &name,
-    const struct partitionable_task_params *c_params,
+    const struct partitionable_task_params *const c_params,
     std::unique_ptr<taskable> mechanism)
     : polled_task(name, c_params, std::move(mechanism)),
       partitionable_task(server, c_params) {}
 
-void partitionable_polled_task::init_random(const polled_task *partition,
+void partitionable_polled_task::init_random(const polled_task *const partition,
                                             int lb, int ub) {
   executable_task::update_exec_estimate(std::rand() % (ub - lb + 1) + lb);
   last_partition(partition);

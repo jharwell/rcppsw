@@ -53,28 +53,34 @@ class bifurcating_tab_metrics_collector : public base_metrics_collector {
     /**
      * @brief # Times subtask 1 was chosen if partitioning was employed.
      */
-    uint subtask1_count;
+    uint int_subtask1_count;
 
     /**
      * @brief # Times subtask 2 was chosen if partitioning was employed.
      */
-    uint subtask2_count;
+    uint int_subtask2_count;
 
     /**
      * @brief # Times partitioning was employed when allocating a task.
      */
-    uint partition_count;
+    uint int_partition_count;
 
     /**
      * @brief # Times partitioning was not employed when allocating a task.
      */
-    uint no_partition_count;
+    uint int_no_partition_count;
 
     /**
      * @brief # Times when task allocation resulted in a different task being
      * executed than previous.
      */
-    uint task_sw_count;
+    uint int_task_sw_count;
+
+    uint cum_subtask1_count;
+    uint cum_subtask2_count;
+    uint cum_partition_count;
+    uint cum_no_partition_count;
+    uint cum_task_sw_count;
   };
 
   /**

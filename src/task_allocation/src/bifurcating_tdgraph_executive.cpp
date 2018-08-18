@@ -142,8 +142,8 @@ void bifurcating_tdgraph_executive::handle_task_finish(polled_task* task) {
 void bifurcating_tdgraph_executive::handle_task_start(polled_task* new_task) {
   ER_NOM("Starting new task '%s'", new_task->name().c_str());
 
-  for (auto cb : task_alloc_notify()) {
-    cb(new_task);
+  for (auto cb : m_task_alloc_notify) {
+    cb(new_task, active_tab());
   } /* for(cb..) */
 
   ER_ASSERT(!(new_task->is_atomic() && new_task->is_partitionable()),
