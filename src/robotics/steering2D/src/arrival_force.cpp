@@ -33,8 +33,9 @@ NS_START(rcppsw, robotics, steering2D);
  * Constructors/Destructor
  ******************************************************************************/
 arrival_force::arrival_force(const struct arrival_force_params *const params)
-    : m_max(params->max), m_slowing_speed_min(params->slowing_speed_min),
-      m_slowing_radius(params->slowing_radius) {}
+    : mc_max(params->max),
+      mc_slowing_speed_min(params->slowing_speed_min),
+      mc_slowing_radius(params->slowing_radius) {}
 
 /*******************************************************************************
  * Member Functions
@@ -45,14 +46,14 @@ argos::CVector2 arrival_force::operator()(const boid &entity,
   double distance = desired.Length();
 
   desired.Normalize();
-  if (distance <= m_slowing_radius) {
+  if (distance <= mc_slowing_radius) {
     m_within_slowing_radius = true;
     desired.Scale(
-        std::max(m_slowing_speed_min, m_max * distance / m_slowing_radius),
-        std::max(m_slowing_speed_min, m_max * distance / m_slowing_radius));
+        std::max(mc_slowing_speed_min, mc_max * distance / mc_slowing_radius),
+        std::max(mc_slowing_speed_min, mc_max * distance / mc_slowing_radius));
   } else {
     m_within_slowing_radius = false;
-    desired.Scale(m_max, m_max);
+    desired.Scale(mc_max, mc_max);
   }
   /*
    * Handle atan2() being discontinuous at angles ~pi.
@@ -62,7 +63,12 @@ argos::CVector2 arrival_force::operator()(const boid &entity,
   double angle_diff =
       angle_to_target - entity.linear_velocity().Angle().GetValue();
   angle_diff = std::atan2(std::sin(angle_diff), std::cos(angle_diff));
-  argos::CVector2 arrival(desired.Length(), argos::CRadians(angle_diff));
+
+  if (std::fabs(angle_diff - m_last_angle) > M_PI) {
+    angle_diff -= std::copysign(2*M_PI, angle_diff);
+  }
+  m_last_angle = angle_diff;
+  argos::CVector2 arrival(desired.Length(), angle_diff);
   return arrival;
 } /* operator()() */
 
