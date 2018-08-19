@@ -61,10 +61,16 @@ server::server(std::string logfile_fname, const er_lvl::value &dbglvl,
       m_log_ts_calculator(nullptr), m_generator(), m_er_id(idgen()) {
   gethostname(reinterpret_cast<char *>(m_hostname), 32);
 
+#ifndef ER_NREPORT
   change_logfile(m_logfile_fname);
+#endif
 }
 
-server::~server(void) { m_logfile->close(); }
+server::~server(void) {
+#ifndef ER_NREPORT
+  m_logfile->close();
+#endif
+}
 
 global_server::~global_server(void) = default;
 
@@ -210,6 +216,7 @@ error:
   return static_cast<er_lvl::value>(-1);
 } /* loglvl() */
 
+#ifndef ER_NREPORT
 void server::change_logfile(const std::string &new_fname) {
   m_logfile->close();
   if (boost::filesystem::exists(new_fname)) {
@@ -220,6 +227,7 @@ void server::change_logfile(const std::string &new_fname) {
     m_logfile->open(m_logfile_fname.c_str());
   }
 } /* change_logfile() */
+#endif
 
 status_t server::mod_loglvl(const boost::uuids::uuid &id,
                             const er_lvl::value &lvl) {
@@ -243,7 +251,8 @@ error:
 
 boost::uuids::uuid server::idgen(void) { return m_generator(); } /* idgen() */
 
+#ifndef ER_NREPORT
 __rcsw_const std::ostream &server::dbg_stream(void) { return std::cout; }
 __rcsw_pure std::ofstream &server::log_stream(void) { return *m_logfile; }
-
+#endif
 NS_END(er, rcpppsw);

@@ -80,6 +80,7 @@ class server {
 
   virtual ~server(void);
 
+#ifndef ER_NREPORT
   /**
    * @brief Get a reference to the logging stream.
    */
@@ -89,6 +90,7 @@ class server {
    * @brief Get a reference to the debugging stream.
    */
   std::ostream& dbg_stream(void);
+#endif
 
   const std::string& logfile_fname(void) const { return m_logfile_fname; }
 
@@ -202,9 +204,13 @@ class server {
   status_t mod_loglvl(const boost::uuids::uuid& id, const er_lvl::value& lvl);
 
   /**
-   * @brief Change the logfile that the server will report events to.
+   * @brief Change the logfile that the server will report events to. If
+   * ER_NREPORT is defined, then this function is not available, as it doesn't
+   * make sense for it to be if no reporting is going to happen anyway.
    */
+#ifndef ER_NREPORT
   void change_logfile(const std::string& new_fname);
+#endif
 
   /**
    * @brief Generate a UUID for a new module.
