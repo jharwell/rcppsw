@@ -80,6 +80,7 @@ class server {
 
   virtual ~server(void);
 
+#ifndef ER_NREPORT
   /**
    * @brief Get a reference to the logging stream.
    */
@@ -89,6 +90,7 @@ class server {
    * @brief Get a reference to the debugging stream.
    */
   std::ostream& dbg_stream(void);
+#endif
 
   const std::string& logfile_fname(void) const { return m_logfile_fname; }
 
@@ -202,9 +204,13 @@ class server {
   status_t mod_loglvl(const boost::uuids::uuid& id, const er_lvl::value& lvl);
 
   /**
-   * @brief Change the logfile that the server will report events to.
+   * @brief Change the logfile that the server will report events to. If
+   * ER_NREPORT is defined, then this function is not available, as it doesn't
+   * make sense for it to be if no reporting is going to happen anyway.
    */
+#ifndef ER_NREPORT
   void change_logfile(const std::string& new_fname);
+#endif
 
   /**
    * @brief Generate a UUID for a new module.
@@ -280,24 +286,24 @@ class server {
 
  private:
   /* data members */
-  char m_hostname[32];
+  char                           m_hostname[32];
 
-  std::vector<server_mod> m_modules;
-  std::string m_logfile_fname;              /// File to log events to.
+  std::vector<server_mod>        m_modules;
+  std::string                    m_logfile_fname; /// File to log events to.
   std::unique_ptr<std::ofstream> m_logfile; /// Logfile handle.
 
   /** Default log level for new modules */
-  er_lvl::value m_loglvl_dflt;
+  er_lvl::value                  m_loglvl_dflt;
 
   /** Default debug printing level for new modules. */
-  er_lvl::value m_dbglvl_dflt;
+  er_lvl::value                  m_dbglvl_dflt;
 
   std::function<std::string(void)> m_dbg_ts_calculator;
   std::function<std::string(void)> m_log_ts_calculator;
 
   /** Generator for universally unique identifiers for modules */
   boost::uuids::random_generator m_generator;
-  boost::uuids::uuid m_er_id;
+  boost::uuids::uuid             m_er_id;
 };
 
 /**

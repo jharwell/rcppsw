@@ -24,18 +24,19 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/task_allocation/partition_probability.hpp"
 #include "rcppsw/task_allocation/subtask_selection_probability.hpp"
-#include "rcppsw/metrics/tasks/allocation_metrics.hpp"
-#include "rcppsw/task_allocation/task_graph_vertex.hpp"
+#include "rcppsw/metrics/tasks/partitioning_metrics.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 
-class executable_task;
+class polled_task;
 
 /*******************************************************************************
  * Class Definitions
@@ -46,15 +47,11 @@ class executable_task;
  *
  * @brief A task that is capable of being partitioned into two subtasks that
  * when executed in sequence have the sum effect as the parent task.
- *
- * This class MUST be instantiated inside of \ref task_graph_vertex, and be
- * manipulated through shared_ptr.
  */
 class partitionable_task : public er::client,
-                           public std::enable_shared_from_this<executable_task>,
-                           public metrics::tasks::allocation_metrics {
+                           public metrics::tasks::partitioning_metrics {
  public:
-  partitionable_task(const std::shared_ptr<er::server>& server,
+  partitionable_task(std::shared_ptr<er::server> server,
                      const struct partitionable_task_params* c_params);
 
   ~partitionable_task(void) override = default;
@@ -62,7 +59,7 @@ class partitionable_task : public er::client,
   partitionable_task(const partitionable_task& other) = delete;
   partitionable_task& operator=(const partitionable_task& other) = delete;
 
-  /* allocation metrics */
+  /* partitioning metrics */
   bool employed_partitioning(void) const override;
   std::string subtask_selection(void) const override;
 
@@ -77,9 +74,8 @@ class partitionable_task : public er::client,
    *
    * @return The new task to execute.
    */
-  task_graph_vertex partition(
-      const task_graph_vertex& partition1,
-      const task_graph_vertex& partition2);
+  polled_task* partition(const polled_task* partition1,
+                         const polled_task* partition2);
 
   /**
    * @brief Update the partition probalitity of the current task.
@@ -101,7 +97,7 @@ class partitionable_task : public er::client,
    * @brief Set subtask that was most recently selected to run when partitioning
    * was employed. Needed for some subtask selection methods.
    */
-  void last_partition(const task_graph_vertex& last_partition) {
+  void last_partition(const polled_task* last_partition) {
     m_last_partition = last_partition;
   }
 
@@ -110,7 +106,7 @@ class partitionable_task : public er::client,
   bool                          m_always_partition;
   bool                          m_never_partition;
   bool                          m_employed_partitioning{false};
-  task_graph_vertex             m_last_partition{nullptr};
+  const polled_task*            m_last_partition{nullptr};
   subtask_selection_probability m_selection_prob;
   partition_probability         m_partition_prob;
   // clang-format on

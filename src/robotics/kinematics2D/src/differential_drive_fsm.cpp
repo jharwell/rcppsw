@@ -35,18 +35,15 @@ NS_START(rcppsw, robotics, kinematics2D);
 differential_drive_fsm::differential_drive_fsm(double max_speed,
                                                argos::CRadians soft_turn_max)
     : state_machine::simple_fsm(rcppsw::er::g_server, ST_MAX_STATES),
-      soft_turn(),
-      hard_turn(),
-      mc_max_speed(max_speed),
-      mc_soft_turn_max(soft_turn_max),
-      m_wheel_speeds() {}
+      soft_turn(), hard_turn(), mc_max_speed(max_speed),
+      mc_soft_turn_max(soft_turn_max), m_wheel_speeds() {}
 
 /*******************************************************************************
  * Events
  ******************************************************************************/
-void differential_drive_fsm::change_velocity(double speed,
-                                             const argos::CRadians& angle,
-                                             const std::pair<bool, bool>& force) {
+void differential_drive_fsm::change_velocity(
+    double speed, const argos::CRadians &angle,
+    const std::pair<bool, bool> &force) {
   FSM_DEFINE_TRANSITION_MAP(kTRANSITIONS){
       ST_SOFT_TURN, /* slow turn */
       ST_HARD_TURN, /* hard turn */
@@ -94,8 +91,7 @@ FSM_STATE_DEFINE(differential_drive_fsm, hard_turn, turn_data) {
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void differential_drive_fsm::set_wheel_speeds(double speed1,
-                                              double speed2,
+void differential_drive_fsm::set_wheel_speeds(double speed1, double speed2,
                                               argos::CRadians heading) {
   if (heading > argos::CRadians::ZERO) {
     /* Turn Left */

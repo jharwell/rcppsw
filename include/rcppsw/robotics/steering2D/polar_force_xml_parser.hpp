@@ -25,7 +25,6 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include <argos3/core/utility/configuration/argos_configuration.h>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
@@ -62,10 +61,22 @@ class polar_force_xml_parser : public rcppsw::params::xml_param_parser {
   bool validate(void) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  const polar_force_params* parse_results(void) const override { return &m_params; }
+  bool parsed(void) const override { return m_parsed; }
+
+  std::shared_ptr<polar_force_params> parse_results(void) const {
+    return m_params;
+  }
 
  private:
-  struct polar_force_params m_params;
+  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(void) const override {
+    return m_params;
+  }
+
+ private:
+  // clang-format off
+  bool                                m_parsed{false};
+  std::shared_ptr<polar_force_params> m_params;
+  // clang-format on
 };
 
 NS_END(steering2D, robotics, rcppsw);

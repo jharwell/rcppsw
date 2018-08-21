@@ -48,7 +48,7 @@ class polled_task : public executable_task, public taskable {
  public:
   polled_task(const std::string& name,
               const struct task_params* const c_params,
-              std::unique_ptr<taskable>& mechanism)
+              std::unique_ptr<taskable> mechanism)
       : executable_task(name, c_params),
         m_mechanism(std::move(mechanism)) {}
   ~polled_task(void) override;
@@ -70,7 +70,7 @@ class polled_task : public executable_task, public taskable {
    * the specified range.
    */
   void init_random(int lb, int ub) {
-    executable_task::update_exec_estimate(random() % (ub - lb + 1) + lb);
+    executable_task::update_exec_estimate(std::rand() % (ub - lb + 1) + lb);
   }
 
  private:

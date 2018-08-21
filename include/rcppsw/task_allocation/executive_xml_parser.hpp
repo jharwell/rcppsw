@@ -29,6 +29,10 @@
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
 #include "rcppsw/task_allocation/executive_params.hpp"
+#include "rcppsw/task_allocation/task_abort_xml_parser.hpp"
+#include "rcppsw/task_allocation/task_partition_xml_parser.hpp"
+#include "rcppsw/task_allocation/subtask_selection_xml_parser.hpp"
+#include "rcppsw/task_allocation/task_estimation_xml_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -49,7 +53,11 @@ class executive_xml_parser: public rcppsw::params::xml_param_parser {
  public:
   explicit executive_xml_parser(const std::shared_ptr<er::server>& server,
                                 uint level)
-      : xml_param_parser(server, level) {}
+      : xml_param_parser(server, level),
+        m_abort(server, level + 1),
+        m_partition(server, level + 1),
+        m_estimation(server, level + 1),
+        m_subtask(server, level  + 1) {}
 
   /**
    * @brief The root tag that all task executive parameters should lie under in
@@ -62,12 +70,25 @@ class executive_xml_parser: public rcppsw::params::xml_param_parser {
   void parse(const ticpp::Element& node) override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  const executive_params* parse_results(void) const override {
-    return &m_params;
+  bool parsed(void) const override { return m_parsed; }
+
+  std::shared_ptr<executive_params> parse_results(void) const {
+    return m_params;
   }
 
  private:
-  executive_params m_params{};
+  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(void) const override {
+    return m_params;
+  }
+
+  // clang-format off
+  bool                              m_parsed{false};
+  std::shared_ptr<executive_params> m_params{nullptr};
+  task_abort_xml_parser             m_abort;
+  task_partition_xml_parser         m_partition;
+  task_estimation_xml_parser        m_estimation;
+  subtask_selection_xml_parser      m_subtask;
+  // clang-format on
 };
 
 NS_END(task_allocation, rcppsw);

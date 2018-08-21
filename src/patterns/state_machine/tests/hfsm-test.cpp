@@ -23,10 +23,10 @@
  ******************************************************************************/
 #define CATCH_CONFIG_MAIN
 #define CATCH_CONFIG_PREFIX_ALL
+#include "rcppsw/er/server.hpp"
+#include "rcppsw/patterns/state_machine/hfsm.hpp"
 #include <catch.hpp>
 #include <memory>
-#include "rcppsw/patterns/state_machine/hfsm.hpp"
-#include "rcppsw/er/server.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -38,17 +38,13 @@ namespace er = rcppsw::er;
  * Test Classes
  ******************************************************************************/
 class test_fsm : public fsm::hfsm {
- public:
+public:
   enum states { STATE1, STATE2, STATE3, STATE4, STATE5, STATE6, ST_MAX_STATES };
 
-  explicit test_fsm(const std::shared_ptr<er::server>& server)
+  explicit test_fsm(const std::shared_ptr<er::server> &server)
       : fsm::hfsm(server, ST_MAX_STATES), m_initial_state(0),
-        s1(hfsm::top_state()),
-        s2(hfsm::top_state()),
-        s3(hfsm::top_state()),
-        s4(hfsm::top_state()),
-        s5(hfsm::top_state()),
-        s6(hfsm::top_state()) {}
+        s1(hfsm::top_state()), s2(hfsm::top_state()), s3(hfsm::top_state()),
+        s4(hfsm::top_state()), s5(hfsm::top_state()), s6(hfsm::top_state()) {}
 
   void event1(void) {
     FSM_DEFINE_TRANSITION_MAP(kMAP){STATE2,
@@ -78,7 +74,7 @@ class test_fsm : public fsm::hfsm {
   void update_state(uint8_t new_state) { m_current_state = new_state; }
   uint8_t initial_state(void) const { return m_initial_state; }
 
- private:
+private:
   HFSM_STATE_DECLARE_ND(test_fsm, s1);
   HFSM_STATE_DECLARE_ND(test_fsm, s2);
   HFSM_STATE_DECLARE_ND(test_fsm, s3);
@@ -87,12 +83,10 @@ class test_fsm : public fsm::hfsm {
   HFSM_STATE_DECLARE_ND(test_fsm, s6);
 
   FSM_DEFINE_STATE_MAP_ACCESSOR(state_map, index) {
-    FSM_DEFINE_STATE_MAP(state_map, kMAP){FSM_STATE_MAP_ENTRY(&s1),
-          FSM_STATE_MAP_ENTRY(&s2),
-          FSM_STATE_MAP_ENTRY(&s3),
-          FSM_STATE_MAP_ENTRY(&s4),
-          FSM_STATE_MAP_ENTRY(&s5),
-          FSM_STATE_MAP_ENTRY(&s6)};
+    FSM_DEFINE_STATE_MAP(state_map, kMAP){
+        FSM_STATE_MAP_ENTRY(&s1), FSM_STATE_MAP_ENTRY(&s2),
+        FSM_STATE_MAP_ENTRY(&s3), FSM_STATE_MAP_ENTRY(&s4),
+        FSM_STATE_MAP_ENTRY(&s5), FSM_STATE_MAP_ENTRY(&s6)};
     return &kMAP[index];
   }
 

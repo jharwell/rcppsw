@@ -48,7 +48,7 @@ class partitionable_polled_task : public polled_task, public partitionable_task 
   partitionable_polled_task(const std::shared_ptr<er::server>& server,
                             const std::string& name,
                             const struct partitionable_task_params* c_params,
-                            std::unique_ptr<taskable>& mechanism);
+                            std::unique_ptr<taskable> mechanism);
 
 
   /**
@@ -61,7 +61,7 @@ class partitionable_polled_task : public polled_task, public partitionable_task 
    * @param lb Lower bound for exec estimate.
    * @param ub Upper bound for exec estimate.
    */
-  void init_random(const task_graph_vertex& partition,
+  void init_random(const polled_task* partition,
                    int lb, int ub);
 };
 

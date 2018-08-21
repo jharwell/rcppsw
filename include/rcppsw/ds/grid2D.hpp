@@ -81,10 +81,12 @@ class grid2D : public base_grid2D<T> {
                   [static_cast<index_range::index>(j)];
   }
 
-  const T& access(size_t i, size_t j) const {
-    return base_grid2D<T>::access(i, j);
+  __rcsw_pure T& access(const math::dcoord2& c) override {
+    return m_cells[static_cast<index_range::index>(c.first)]
+        [static_cast<index_range::index>(c.second)];
   }
 
+  using base_grid2D<T>::access;
  private:
   grid_type<T> m_cells;
 };

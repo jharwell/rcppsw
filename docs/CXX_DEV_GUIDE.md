@@ -23,16 +23,45 @@ this project. In particular:
 - Code should pass the google C++ linter, ignoring the following items. For
   everything else, the linter warnings should be addressed.
 
-  - Use of non-const references--I do this all the time.
+  - Use of non-const references--I do this occasionally. When possibly, const
+    references should be used, but sometimes it is more convenient to use a
+    non-const reference. Case by case.
 
   - Header ordering (whatever the auto-formatter does is fine, but should
     generally be google style).
 
-  - rand_r() instead of rand() (I use random(), which it does not flag).
-
   - Line length >= 80 ONLY if it is only 1-2 chars too long, and breaking the
     line would decrease readability. The formatter generally takes care of this
     too.
+
+- Function Parameters (most of these from Herb Sutter's excellent C++ guidelines
+  on smart pointers
+  [here](https://herbsutter.com/2013/05/29/gotw-89-solution-smart-pointers/)). 
+
+  - `std::shared_ptr` should be passed by VALUE to a function when the function
+    is going to take a copy and share ownership, and ONLY then.
+
+  - Function inputs should use `const` to indicate that the parameter is
+    input-only (`&` or `*`).
+
+  - Pass `std::shared_ptr` by `&` if the function is itself not going to take
+    ownership, but a function/object that it calls will. This will avoid the
+    copy on calls that don't need it.
+
+  - `const std::shared_ptr<T>&` should be not be used--use `const T*` to
+      indicate non-owning access to the managed object.
+
+  - `std::unique_ptr` should be passed by VALUE to a "consuming" function
+    (i.e. whatever function is ultimately going to claim ownership of the
+    object).
+
+  - `std::unique_ptr` should NOT be passed by reference, unless the function
+    needs to replace/update/etc the object contained in the unique_ptr. It
+    should never be passed by constant reference.
+
+  - Raw pointers should be used to express the idea that the pointed to object
+    is going to outlive the function call and the function is just going to
+    observe/modify it.
 
 - Code should pass the clang-tidy linter, which checks for style elements like:
 

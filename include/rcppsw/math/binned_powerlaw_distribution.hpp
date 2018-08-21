@@ -1,5 +1,6 @@
 /**
- * @file allocation_metrics.hpp
+ * @file binned_powerlaw_distribution.hpp
+ * @ingroup math
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,52 +19,48 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_TASKS_ALLOCATION_METRICS_HPP_
-#define INCLUDE_RCPPSW_METRICS_TASKS_ALLOCATION_METRICS_HPP_
+#ifndef INCLUDE_RCPPSW_MATH_BINNED_POWERLAW_DISTRIBUTION_HPP_
+#define INCLUDE_RCPPSW_MATH_BINNED_POWERLAW_DISTRIBUTION_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-
-#include "rcppsw/common/common.hpp"
-#include "rcppsw/metrics/base_metrics.hpp"
+#include "rcppsw/math/powerlaw_distribution.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics, tasks);
+NS_START(rcppsw, math);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * @class allocation_metrics
- * @ingroup metrics
+ * @class binned_powerlaw_distribution
+ * @ingroup math
  *
- * @brief Interface defining metrics that can be collected on tasks during
- * allocation.
+ * @brief A power law distribution (duh) of x^pwr where x is in [lb,
+ * ub], where the outputs are rounded to the nearest power of pwr. For example,
+ * instead of sampling and getting 3.78, with pwr=2 you would get 4.
  */
-class allocation_metrics : public base_metrics {
+class binned_powerlaw_distribution : public powerlaw_distribution {
  public:
-  allocation_metrics(void) = default;
-  ~allocation_metrics(void) override = default;
-
   /**
-   * @brief This function should return \c TRUE, if a robot has chosen to employ
-   * task partitioning when allocating itself its next task.
-   */
-  virtual bool employed_partitioning(void) const = 0;
-
-  /**
-   * @brief If a robot has chosen to employ task partitioning, this this
-   * function should return the name of the subtask that was selected.
+   * @brief Initialize distribution.
    *
-   * It should only be called if \ref employed_partitioning() returns \c TRUE.
+   * @param lb Lower bound for distribution. Assumed to be a multiple of pwr.
+   * @param ub Upper bound for distribution. Assumed to be a multiple of pwr.
+   * @param pwr Power for distribution.
    */
-  virtual std::string subtask_selection(void) const = 0;
+  binned_powerlaw_distribution(uint lb, uint ub, uint pwr) :
+      powerlaw_distribution(lb, ub, pwr) {}
+
+  double operator()(std::default_random_engine& rng) {
+    uint sample = powerlaw_distribution::operator()(rng);
+    return std::pow(pwr(), std::ceil(std::log(sample) / std::log(pwr())));
+  }
 };
 
-NS_END(tasks, metrics, rcppsw);
+NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_TASKS_ALLOCATION_METRICS_HPP_ */
+#endif /* INCLUDE_RCPPSW_MATH_BINNED_POWERLAW_DISTRIBUTION_HPP_ */

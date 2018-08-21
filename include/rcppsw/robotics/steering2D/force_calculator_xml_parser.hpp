@@ -18,14 +18,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_FORCE_CALCULATOR_XML_PARSER_HPP_
-#define INCLUDE_RCPPSW_CONTROL_FORCE_CALCULATOR_XML_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_ROBOTICS_STEERING2D_FORCE_CALCULATOR_XML_PARSER_HPP_
+#define INCLUDE_RCPPSW_ROBOTICS_STEERING2D_FORCE_CALCULATOR_XML_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <string>
-#include <argos3/core/utility/configuration/argos_configuration.h>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/robotics/steering2D/force_calculator_xml_parser.hpp"
@@ -70,18 +69,24 @@ class force_calculator_xml_parser : public rcppsw::params::xml_param_parser {
   bool validate(void) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  const force_calculator_params* parse_results(void) const override { return &m_params; }
+  std::shared_ptr<force_calculator_params> parse_results(void) const {
+    return m_params;
+  }
 
  private:
+  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(void) const override {
+    return m_params;
+  }
+
   // clang-format off
-  struct force_calculator_params m_params;
-  avoidance_force_xml_parser     m_avoidance;
-  arrival_force_xml_parser       m_arrival;
-  wander_force_xml_parser        m_wander;
-  polar_force_xml_parser         m_polar;
+  std::shared_ptr<force_calculator_params> m_params{nullptr};
+  avoidance_force_xml_parser               m_avoidance;
+  arrival_force_xml_parser                 m_arrival;
+  wander_force_xml_parser                  m_wander;
+  polar_force_xml_parser                   m_polar;
   // clang-format on
 };
 
 NS_END(steering2D, robotics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_CONTROL_FORCE_CALCULATOR_XML_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_ROBOTICS_STEERING2D_FORCE_CALCULATOR_XML_PARSER_HPP_ */

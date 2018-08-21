@@ -25,7 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/params/base_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -35,7 +35,11 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Structure Definitions
  ******************************************************************************/
-struct partitioning_params {
+/**
+ * @struct partitioning_params
+* @ingroup params task_allocation
+ */
+struct partitioning_params : public params::base_params {
   std::string method{""};
   double reactivity{0.0};
   double offset{0.0};

@@ -41,11 +41,11 @@ struct base_params;
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#define XML_PARAM_STR(container, name) std::string(#name) << "=" << (container).name
+#define XML_PARAM_STR(container, name) std::string(#name) << "=" << (container)->name
 #define XML_PARSE_PARAM(node, container, name)                          \
   this->get_node_attribute((node),                                       \
                            #name,                                       \
-                           (container).name)
+                           (container)->name)
 
 /*******************************************************************************
  * Class Definitions
@@ -109,9 +109,16 @@ class xml_param_parser : public er::client {
   virtual bool validate(void) const { return true; }
 
   /**
-   * @brief Get the results of parameter parse.
+   * @brief Get the results of parameter parse. This is the front end of the
+   * non-virtual interface to getting the results of a parameter parse, so that
+   * covariance with smart pointer return types will work.
    */
-  virtual const struct base_params* parse_results(void) const = 0;
+  template<typename T>
+  std::shared_ptr<T> parse_results(void) const {
+    static_assert(std::is_base_of<base_params, T>::value,
+                  "Parameters must be derived from base_params!");
+    return std::static_pointer_cast<T>(parse_results_impl());
+  }
 
   friend std::ostream& operator<<(std::ostream& stream,
                                   const xml_param_parser& parser) {
@@ -152,8 +159,17 @@ class xml_param_parser : public er::client {
   void get_node_attribute(ticpp::Element& node,
                           const std::string& attr,
                           bool& buf);
+  virtual bool parsed(void) const { return true; }
 
  private:
+  /**
+   * @brief Implementation (back end) of how to get the results of a parameter
+   * parse using covariance. This is to make parameter parsing easy when you
+   * only have a handle on THIS class, even if the object is actually a derived
+   * class parameter parser.
+   */
+  virtual std::shared_ptr<base_params> parse_results_impl(void) const = 0;
+
   /**
    * @brief Dump the parsed (or possibly unparsed, but that's kind of useless)
    * parameters to the specified stream.

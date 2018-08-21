@@ -33,7 +33,7 @@ NS_START(rcppsw, params);
  * Member Functions
  ******************************************************************************/
 bool xml_param_repository::validate_all(void) {
-  for (auto& pair : m_parsers) {
+  for (auto &pair : m_parsers) {
     if (!pair.second->validate()) {
       return false;
     }
@@ -42,21 +42,20 @@ bool xml_param_repository::validate_all(void) {
   return true;
 } /* validate_all() */
 
-void xml_param_repository::parse_all(const ticpp::Element& node) {
-  std::for_each(m_parsers.begin(),
-                m_parsers.end(),
-                [&](std::pair<const std::string, xml_param_parser*>& pair) {
+void xml_param_repository::parse_all(const ticpp::Element &node) {
+  std::for_each(m_parsers.begin(), m_parsers.end(),
+                [&](std::pair<const std::string, xml_param_parser *> &pair) {
                   pair.second->parse(node);
                 });
 } /* parse_all() */
 
-std::ostream& operator<<(std::ostream& stream,
-                         const xml_param_repository& repo) {
-  std::for_each(repo.m_parsers.begin(),
-                repo.m_parsers.end(),
-                [&](const std::pair<const std::string, xml_param_parser*>& pair) {
-                  stream << *pair.second;
-                });
+std::ostream &operator<<(std::ostream &stream,
+                         const xml_param_repository &repo) {
+  std::for_each(
+      repo.m_parsers.begin(), repo.m_parsers.end(),
+      [&](const std::pair<const std::string, xml_param_parser *> &pair) {
+        stream << *pair.second;
+      });
   return stream;
 } /* operator<<() */
 

@@ -34,39 +34,37 @@ NS_START(rcppsw, params);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-xml_param_parser::xml_param_parser(const std::shared_ptr<er::server>& server,
+xml_param_parser::xml_param_parser(const std::shared_ptr<er::server> &server,
                                    uint level)
-    : client(server),
-      m_level(level) {
-  insmod("xml_param_parser", er::er_lvl::NOM, er::er_lvl::NOM);
-      }
-
+    : client(server), m_level(level) {
+  if (ERROR == client::attmod("xml_param_parser")) {
+    insmod("xml_param_parser", er::er_lvl::NOM, er::er_lvl::NOM);
+  }
+}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 std::string xml_param_parser::build_header(void) const {
   FPC_CHECK("", level() > 0, level() <= kHeader4);
-  uint width = kColumnWidth  - level() * 20;
+  uint width = kColumnWidth - level() * 20;
   std::string prettiness(width, '=');
-  std::string spaces(width/2 - xml_root().size()/2 - 1, ' ');
-  return prettiness + "\n"
-      + spaces + "<" + xml_root() + ">" +
-      "\n" + prettiness + "\n";
+  std::string spaces(width / 2 - xml_root().size() / 2 - 1, ' ');
+  return prettiness + "\n" + spaces + "<" + xml_root() + ">" + "\n" +
+         prettiness + "\n";
 } /* build_header() */
 
 std::string xml_param_parser::build_footer(void) const {
   FPC_CHECK("", level() > 0, level() <= kHeader4);
   uint width = kColumnWidth - level() * 20;
   std::string prettiness(width, '=');
-  std::string spaces(width/2 - xml_root().size()/2 - 1, ' ');
-  return prettiness + "\n"
-      + spaces + "</" + xml_root() + ">" +
-      "\n" + prettiness + "\n";
+  std::string spaces(width / 2 - xml_root().size() / 2 - 1, ' ');
+  return prettiness + "\n" + spaces + "</" + xml_root() + ">" + "\n" +
+         prettiness + "\n";
 } /* build_footer() */
 
-ticpp::Element& xml_param_parser::get_node(ticpp::Element& node,
-                                           const std::string& tag) {
+ticpp::Element &xml_param_parser::get_node(ticpp::Element &node,
+                                           const std::string &tag) {
   ticpp::Iterator<ticpp::Element> it(tag);
   it = it.begin(&node);
   ER_ASSERT(it != nullptr, "FATAL: no tag %s found in node %s", tag.c_str(),
@@ -75,8 +73,7 @@ ticpp::Element& xml_param_parser::get_node(ticpp::Element& node,
 } /* get_node() */
 
 void xml_param_parser::get_node_attribute(ticpp::Element &node,
-                                          const std::string& attr,
-                                          bool &buf) {
+                                          const std::string &attr, bool &buf) {
   std::string tmp;
   node.GetAttribute(attr, &tmp, true);
   if ("true" == tmp) {
@@ -84,10 +81,10 @@ void xml_param_parser::get_node_attribute(ticpp::Element &node,
   } else if ("false" == tmp) {
     buf = false;
   } else {
-    ER_FATAL_SENTINEL("Cannot convert %s into a bool. Accepted values are ['true', 'false']",
-                      tmp.c_str());
+    ER_FATAL_SENTINEL(
+        "Cannot convert %s into a bool. Accepted values are ['true', 'false']",
+        tmp.c_str());
   }
 } /* get_node_attribute() */
-
 
 NS_END(params, rcppsw);

@@ -22,7 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/partitionable_task.hpp"
-#include "rcppsw/task_allocation/executable_task.hpp"
+#include "rcppsw/task_allocation/polled_task.hpp"
 #include "rcppsw/task_allocation/partitionable_task_params.hpp"
 
 /*******************************************************************************
@@ -34,16 +34,15 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 partitionable_task::partitionable_task(
-    const std::shared_ptr<er::server>& server,
-    const struct partitionable_task_params* c_params)
+    std::shared_ptr<er::server> server,
+    const struct partitionable_task_params *c_params)
     : client(server),
       m_always_partition(c_params->partitioning.always_partition),
       m_never_partition(c_params->partitioning.never_partition),
       m_selection_prob(&c_params->subtask_selection),
       m_partition_prob(&c_params->partitioning) {
   if (ERROR == client::attmod("partitionable_task")) {
-    client::insmod("partitionable_task",
-                   rcppsw::er::er_lvl::DIAG,
+    client::insmod("partitionable_task", rcppsw::er::er_lvl::DIAG,
                    rcppsw::er::er_lvl::NOM);
   }
 }
@@ -62,15 +61,14 @@ std::string partitionable_task::subtask_selection(void) const {
 /*******************************************************************************
  * General Member Functions
  ******************************************************************************/
-void partitionable_task::update_partition_prob(const time_estimate& task,
-                                               const time_estimate& subtask1,
-                                               const time_estimate& subtask2) {
+void partitionable_task::update_partition_prob(const time_estimate &task,
+                                               const time_estimate &subtask1,
+                                               const time_estimate &subtask2) {
   m_partition_prob.calc(task, subtask1, subtask2);
 }
 
-task_graph_vertex partitionable_task::partition(
-    const task_graph_vertex& partition1,
-    const task_graph_vertex& partition2) {
+polled_task* partitionable_task::partition(const polled_task* const partition1,
+                                           const polled_task* const partition2) {
   ER_ASSERT(!(m_always_partition && m_never_partition),
             "FATAL: cannot ALWAYS and NEVER partition");
 
@@ -82,21 +80,21 @@ task_graph_vertex partitionable_task::partition(
   } else {
     partition_prob = m_partition_prob.last_result();
   }
-  std::string name = dynamic_cast<executable_task*>(this)->name();
+  std::string name = dynamic_cast<executable_task *>(this)->name();
 
-  ER_NOM("Task '%s': partition_method=%s partition_prob=%f",
-         name.c_str(),
-         m_partition_prob.method().c_str(),
-         partition_prob);
+  ER_NOM("Task '%s': partition_method=%s partition_prob=%f", name.c_str(),
+         m_partition_prob.method().c_str(), partition_prob);
 
   /* We chose not to employ partitioning on the next task allocation */
-  if (partition_prob <= static_cast<double>(random()) / RAND_MAX) {
+  if (partition_prob <= static_cast<double>(std::rand()) / RAND_MAX) {
     ER_NOM("Not employing partitioning: Return task '%s'", name.c_str());
     m_employed_partitioning = false;
-    return shared_from_this();
+    auto ret = dynamic_cast<polled_task*>(this);
+    ER_ASSERT(nullptr != ret, "FATAL: Partitionable task is not pollable")
+    return ret;
   }
   m_employed_partitioning = true;
-  task_graph_vertex ret = nullptr;
+  const polled_task* ret = nullptr;
 
   /* We have chosen to employ partitioning */
   double prob_12, prob_21;
@@ -113,13 +111,26 @@ task_graph_vertex partitionable_task::partition(
                                     &partition1->interface_estimate());
   }
 
-  ER_NOM(
-      "Task '%s': selection_method=%s subtask1->subtask2 "
-      "prob=%f,subtask2->subtask1 prob=%f",
-      name.c_str(),
-      m_selection_prob.method().c_str(),
-      prob_12,
-      prob_21);
+  ER_NOM("Task '%s': selection_method=%s, last_partition=%s",
+         name.c_str(),
+         m_selection_prob.method().c_str(),
+         (nullptr != m_last_partition)? m_last_partition->name().c_str(): "None");
+
+  ER_NOM("%s exec_est=%f/int_est=%f, %s exec_est=%f/int_est=%f",
+         partition1->name().c_str(),
+         partition1->exec_estimate().last_result(),
+         partition1->interface_estimate().last_result(),
+         partition2->name().c_str(),
+         partition2->exec_estimate().last_result(),
+         partition2->interface_estimate().last_result());
+
+  ER_NOM("%s -> %s prob=%f, %s -> %s prob=%f",
+         partition1->name().c_str(),
+         partition2->name().c_str(),
+         prob_12,
+         partition2->name().c_str(),
+         partition1->name().c_str(),
+         prob_21);
 
   if (subtask_selection_probability::kMethodHarwell2018 ==
           m_selection_prob.method() ||
@@ -130,7 +141,7 @@ task_graph_vertex partitionable_task::partition(
      * to subtask2, based on time estimates.
      */
     if (m_last_partition == partition1 || nullptr == m_last_partition) {
-      if (prob_12 >= static_cast<double>(random()) / RAND_MAX) {
+      if (prob_12 >= static_cast<double>(std::rand()) / RAND_MAX) {
         ret = partition2;
       } else {
         ret = partition1;
@@ -141,7 +152,7 @@ task_graph_vertex partitionable_task::partition(
      * to subtask1, based on time estimates.
      */
     else if (m_last_partition == partition2) {
-      if (prob_21 >= static_cast<double>(random()) / RAND_MAX) {
+      if (prob_21 >= static_cast<double>(std::rand()) / RAND_MAX) {
         ret = partition1;
       } else {
         ret = partition2;
@@ -149,7 +160,7 @@ task_graph_vertex partitionable_task::partition(
     }
   } else if (subtask_selection_probability::kMethodRandom ==
              m_selection_prob.method()) {
-    if (prob_12 >= static_cast<double>(random()) / RAND_MAX) {
+    if (prob_12 >= static_cast<double>(std::rand()) / RAND_MAX) {
       ret = partition1;
     } else {
       ret = partition2;
@@ -157,7 +168,7 @@ task_graph_vertex partitionable_task::partition(
   }
   ER_ASSERT(nullptr != ret, "FATAL: no task selected?");
   ER_NOM("Selected subtask '%s'", ret->name().c_str());
-  return ret;
+  return const_cast<polled_task*>(ret);
 } /* partition() */
 
 NS_END(task_allocation, rcppsw);

@@ -27,7 +27,6 @@
 #include <string>
 #include "rcppsw/task_allocation/logical_task.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
-#include "rcppsw/task_allocation/task_graph_vertex.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -65,7 +64,7 @@ class executable_task : public logical_task {
    * specified bounds.
    */
   void init_random(int lb, int ub) {
-    update_exec_estimate(random() % (ub - lb + 1) + lb);
+    update_exec_estimate(std::rand() % (ub - lb + 1) + lb);
   }
 
   /**
@@ -138,7 +137,7 @@ class executable_task : public logical_task {
    * @brief Set a task as atomic, meaning that once executed, it cannot be
    * aborted.
    */
-  void set_atomic(void) { m_is_atomic = true; }
+  void set_atomic(bool b) { m_is_atomic = b; }
 
   /**
    * @brief Get if a task is partitionable. This can be done with reflection,
@@ -150,7 +149,7 @@ class executable_task : public logical_task {
    * @brief Set a task as partitionable. Should only be set on
    * \ref partitionable_task objects, otherwise bad things will happen.
    */
-   void set_partitionable(void) { m_is_partitionable = true; }
+  void set_partitionable(bool b) { m_is_partitionable = b; }
 
   /**
    * @brief Get the probability of aborting an executable task.
@@ -203,10 +202,13 @@ class executable_task : public logical_task {
     m_last_exec_time = m_exec_time;
     m_exec_start_time = current_time();
   }
+  bool task_aborted(void) const { return m_task_aborted; }
+  void task_aborted(bool task_aborted) { m_task_aborted = task_aborted; }
 
  private:
   bool m_is_atomic{false};
   bool m_is_partitionable{false};
+  bool m_task_aborted{false};
 
   double m_interface_time{0.0};
   double m_last_interface_time{0.0};

@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/robotics/steering2D/wander_force.hpp"
-#include <cassert>
 #include "rcppsw/robotics/steering2D/wander_force_params.hpp"
+#include <cassert>
 
 /*******************************************************************************
  * Namespaces
@@ -33,18 +33,16 @@ NS_START(rcppsw, robotics, steering2D);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-wander_force::wander_force(const struct wander_force_params* const params)
-    : m_interval(params->interval),
-      m_max(params->max),
+wander_force::wander_force(const struct wander_force_params *const params)
+    : m_interval(params->interval), m_max(params->max),
       m_circle_distance(params->circle_distance),
       m_circle_radius(params->circle_radius),
-      m_max_angle_delta(params->max_angle_delta),
-      m_angle(0) {}
+      m_max_angle_delta(params->max_angle_delta), m_angle(0) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-argos::CVector2 wander_force::operator()(const boid& entity) {
+argos::CVector2 wander_force::operator()(const boid &entity) {
   /*
    * Only actually apply the wander force at the specified cadence. Otherwise
    * random perturbations between [-n, n] will sum to 0 (no net wandering) over
@@ -77,7 +75,7 @@ argos::CVector2 wander_force::operator()(const boid& entity) {
    */
   double val =
       -m_max_angle_delta +
-      2 * m_max_angle_delta * (static_cast<double>(random()) / RAND_MAX);
+      2 * m_max_angle_delta * (static_cast<double>(std::rand()) / RAND_MAX);
   m_angle.FromValueInDegrees(
       std::fmod(argos::ToDegrees(m_angle).GetValue() + val, m_max_angle_delta));
 

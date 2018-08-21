@@ -60,7 +60,7 @@ NS_START(rcppsw, task_allocation);
  * - The offset parameter: how quickly should robots react to an increasing
  *   difference between subtask time estimates?
  *
- * - 0 < reactivity < 1.
+ * - reactivity > 0.
  * - offset > 1.
  * - 0 < gamma < 1.
  *

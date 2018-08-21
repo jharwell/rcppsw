@@ -42,15 +42,40 @@ NS_START(rcppsw, metrics, tasks);
  * @brief Interface defining metrics that can be collected on tasks as they are
  * executed.
  */
-class execution_metrics : public base_metrics {
+class execution_metrics : public virtual base_metrics {
  public:
   execution_metrics(void) = default;
   ~execution_metrics(void) override = default;
 
   /**
-   * @brief If \c TRUE, then the robot is currently at its task interface.
+   * @brief If \c TRUE, then the robot is currently at the task interface for
+   * this task.
    */
-  virtual bool at_interface(void) const = 0;
+  virtual bool task_at_interface(void) const = 0;
+
+  /**
+   * @brief This function should return the execution time of the most recent
+   * execution of this task.
+   */
+  virtual double task_last_exec_time(void) const = 0;
+
+  /**
+   * @brief This function should return the interface time of the most recent
+   * execution of task.
+   */
+  virtual double task_last_interface_time(void) const = 0;
+
+  /**
+   * @brief This function should return \c TRUE when the task has been completed
+   * (not aborted).
+   */
+  virtual bool task_completed(void) const = 0;
+
+  /**
+   * @brief This function should return \c TRUE if the task has been aborted
+   * (not completed).
+   */
+  virtual bool task_aborted(void) const = 0;
 };
 
 NS_END(tasks, metrics, rcppsw);

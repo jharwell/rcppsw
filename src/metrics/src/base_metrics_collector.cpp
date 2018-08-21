@@ -43,7 +43,8 @@ void base_metrics_collector::csv_header_write(void) {
   m_ofile << header + "\n";
 } /* csv_header_write() */
 
-std::string base_metrics_collector::csv_header_build(const std::string& header) {
+std::string
+base_metrics_collector::csv_header_build(const std::string &header) {
   return header + "clock" + m_separator;
 } /* csv_header_build() */
 

@@ -1,0 +1,39 @@
+os:
+  - linux
+
+language: cpp
+dist: xenial
+
+addons:
+  apt:
+    packages:
+      - gcc-5
+      - g++-5
+      - libboost-all-dev
+      - catch
+      - cmake
+      - qtbase5-dev
+      - libfreeimageplus-dev
+      - doxygen
+      - cppcheck
+
+branches:
+  only:
+    - master
+    - devel
+
+before_script:
+  - wget http://iridia.ulb.ac.be/~cpinciroli/extra/h-414/argos3_simulator-3.0.0-x86_64-beta52.deb
+  - sudo dpkg -i argos3_simulator-3.0.0-x86_64-beta52.deb || true
+  - sudo apt install -f
+  - sudo dpkg -i argos3_simulator-3.0.0-x86_64-beta52.deb
+
+script:
+
+  - export CC=gcc-5;
+  - export CXX=g++-5;
+  - cmake --version
+  - mkdir -p build && cd build
+  - cmake -DWITH_TESTS=yes ..
+  - make unit_tests -j 4
+  - make test
