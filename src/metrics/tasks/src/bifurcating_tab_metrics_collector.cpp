@@ -58,7 +58,7 @@ std::string bifurcating_tab_metrics_collector::csv_header_build(
       "int_no_partition_count" + separator() +
       "cum_avg_no_partition_count" + separator() +
       "int_task_sw_count" + separator() +
-      "cum_avg_task_sw_count" + separator();
+      "cum_task_sw_count" + separator();
   // clang-format on
 } /* csv_header_build() */
 
