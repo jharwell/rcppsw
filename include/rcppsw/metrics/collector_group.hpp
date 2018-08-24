@@ -27,6 +27,7 @@
 #include <map>
 #include <algorithm>
 #include <utility>
+#include <functional>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/metrics/base_metrics_collector.hpp"
@@ -100,7 +101,7 @@ class collector_group {
   bool collect_if(const std::string& name,
                   const base_metrics &metrics,
                   std::function<bool(const base_metrics&)> predicate) {
-    if (predicate) {
+    if (predicate(metrics)) {
       m_collectors[name]->collect(metrics);
       return true;
     } else {

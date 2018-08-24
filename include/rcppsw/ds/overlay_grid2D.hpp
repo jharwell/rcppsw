@@ -1,7 +1,7 @@
 /**
- * @file grid2D_ptr.hpp
+ * @file overlay_grid2D.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,13 +18,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_GRID2D_PTR_HPP_
-#define INCLUDE_RCPPSW_DS_GRID2D_PTR_HPP_
+#ifndef INCLUDE_RCPPSW_DS_OVERLAY_GRID2D_HPP_
+#define INCLUDE_RCPPSW_DS_OVERLAY_GRID2D_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ds/base_grid2D.hpp"
+#include "rcppsw/ds/base_overlay_grid2D.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -35,40 +35,31 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class grid2D_ptr
+ * @class overlay_grid2D
  * @ingroup ds
  *
- * @brief A 2D logical grid that is overlayed over a continuous environment. It
- * discretizes the continuous arena into a grid of a specified resolution.
+ * @brief A 2D logical grid overlayed over a continuous environment using a
+ * \a contiguous array of the template parameter type.
+ *
+ * As such, the template type must have must have a zero parameter constructor
+ * available or it won't compile.
  */
-template <typename T, typename... Args>
-class grid2D_ptr : public base_grid2D<T> {
+template <typename T>
+class overlay_grid2D : public base_overlay_grid2D<T> {
  public:
-  grid2D_ptr(double resolution, size_t x_max, size_t y_max, Args&&... args)
-      : base_grid2D<T>(resolution, x_max, y_max),
-        m_cells(
-            boost::extents[static_cast<index_range::index>(base_grid2D<T>::xdsize())]
-            [static_cast<index_range::index>(base_grid2D<T>::ydsize())]) {
-    for (auto i = m_cells.origin();
-         i < m_cells.origin() + m_cells.num_elements();
-         ++i) {
-      *i = new T(std::forward<Args>(args)...);
-    } /* for(i..) */
-  }
-
-  ~grid2D_ptr(void) {
-    for (auto i = m_cells.origin();
-         i < m_cells.origin() + m_cells.num_elements();
-         ++i) {
-      delete *i;
-    } /* for(i..) */
-  }
+  using base_overlay_grid2D<T>::xdsize;
+  using base_overlay_grid2D<T>::ydsize;
+  overlay_grid2D(double resolution, size_t x_max, size_t y_max)
+      : base_overlay_grid2D<T>(resolution, x_max, y_max),
+      m_cells(boost::extents[xdsize()][ydsize()]) {}
 
   /**
-   * @brief Create a subgrid (really an array view) from a grid. The grid is
-   * clamped to the maximum boundaries of the parent grid, so rather than
-   * getting a 2 x 2 subgrid centered at 0 with the out-of-bounds elements
-   * zeroed, you will get a 1 x 2 subgrid.
+   * @brief Get a subcircle gridview from a grid. The subcircle extent is
+   * cropped to the maximum boundaries of the parent grid.
+   *
+   * This means that rather than getting a 2 x 2 subgrid centered at 0 with the
+   * out-of-bounds elements zeroed if you request a subcircle on the boundary of
+   * the overall grid, you will get a 1 x 2 subgrid (a lopsided circle).
    *
    * @param x X coord of center of subgrid.
    * @param y Y coord of center of subgrid.
@@ -76,18 +67,14 @@ class grid2D_ptr : public base_grid2D<T> {
    *
    * @return The subcircle.
    */
-  grid_view<T*> subcircle(size_t x, size_t y, size_t radius) {
-    auto x_range = base_grid2D<T>::circle_xrange_at_point(x, radius);
-    auto y_range = base_grid2D<T>::circle_yrange_at_point(y, radius);
+  grid_view<T> subcircle(size_t x, size_t y, size_t radius) {
+    auto x_range = base_overlay_grid2D<T>::circle_xrange_at_point(x, radius);
+    auto y_range = base_overlay_grid2D<T>::circle_yrange_at_point(y, radius);
     typename grid_type<T>::index_gen indices;
 
     index_range x1(x_range.first, x_range.second, 1);
     index_range y1(y_range.first, y_range.second, 1);
-    return grid_view<T*>(m_cells[indices[x1][y1]]);
-  }
-
-  grid_view<T*> subcircle(size_t x, size_t y, size_t radius) const {
-    return const_cast<grid2D_ptr<T>*>(this)->subcircle(x, y, radius);
+    return grid_view<T>(m_cells[indices[x1][y1]]);
   }
 
   /**
@@ -98,7 +85,7 @@ class grid2D_ptr : public base_grid2D<T> {
    *
    * @return The grid.
    */
-  grid_view<T*> subgrid(size_t x_min,
+  grid_view<T> subgrid(size_t x_min,
                         size_t y_min,
                         size_t x_max,
                         size_t y_max) {
@@ -106,30 +93,32 @@ class grid2D_ptr : public base_grid2D<T> {
 
     index_range x(x_min, x_max, 1);
     index_range y(y_min, y_max, 1);
-    return grid_view<T*>(m_cells[indices[x][y]]);
+    return grid_view<T>(m_cells[indices[x][y]]);
   }
 
-  grid_view<T*> subgrid(size_t x_min,
+  grid_view<T> subgrid(size_t x_min,
                         size_t y_min,
                         size_t x_max,
                         size_t y_max) const {
-    return const_cast<grid2D_ptr<T>*>(this)->subgrid(x_min, y_min,
-                                                     x_max, y_max);
+    return const_cast<overlay_grid2D<T>*>(this)->subgrid(x_min, y_min,
+                                                         x_max, y_max);
+  }
+  T& access(size_t i, size_t j) override {
+    return m_cells[static_cast<index_range::index>(i)]
+                  [static_cast<index_range::index>(j)];
   }
 
-  __rcsw_pure T& access(size_t i, size_t j) override {
-    return *m_cells[static_cast<index_range::index>(i)]
-                   [static_cast<index_range::index>(j)];
-  }
   __rcsw_pure T& access(const math::dcoord2& c) override {
-    return *m_cells[static_cast<index_range::index>(c.first)]
+    return m_cells[static_cast<index_range::index>(c.first)]
         [static_cast<index_range::index>(c.second)];
   }
 
+  using base_overlay_grid2D<T>::access;
+
  private:
-  grid_type<T*> m_cells;
+  grid_type<T> m_cells;
 };
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_GRID2D_PTR_HPP_ */
+#endif /* INCLUDE_RCPPSW_DS_OVERLAY_GRID2D_HPP_ */
