@@ -1,7 +1,7 @@
 /**
  * @file grid2D.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -38,48 +38,21 @@ NS_START(rcppsw, ds);
  * @class grid2D
  * @ingroup ds
  *
- * @brief A 2D logical grid overlayed over a continuous environment using a
- * \a contiguous array of the template parameter type.
- *
- * As such, the template type must have must have a zero parameter constructor
- * available or it won't compile.
+ * @brief A 2D grid of SOMETHING. Mainly a convenience wrapper around boost.
  */
 template <typename T>
 class grid2D : public base_grid2D<T> {
  public:
-  grid2D(double resolution, size_t x_max, size_t y_max)
-      : base_grid2D<T>(resolution, x_max, y_max),
-        m_cells(
-            boost::extents[base_grid2D<T>::xdsize()][base_grid2D<T>::ydsize()]) {}
-
-  /**
-   * @brief Get a subcircle gridview from a grid. The subcircle extent is
-   * cropped to the maximum boundaries of the parent grid.
-   *
-   * This means that rather than getting a 2 x 2 subgrid centered at 0 with the
-   * out-of-bounds elements zeroed if you request a subcircle on the boundary of
-   * the overall grid, you will get a 1 x 2 subgrid (a lopsided circle).
-   *
-   * @param x X coord of center of subgrid.
-   * @param y Y coord of center of subgrid.
-   * @param radius Radius of subgrid.
-   *
-   * @return The subcircle.
-   */
-  grid_view<T> subcircle(size_t x, size_t y, size_t radius) {
-    auto x_range = base_grid2D<T>::circle_xrange_at_point(x, radius);
-    auto y_range = base_grid2D<T>::circle_yrange_at_point(y, radius);
-    typename grid_type<T>::index_gen indices;
-
-    index_range x1(x_range.first, x_range.second, 1);
-    index_range y1(y_range.first, y_range.second, 1);
-    return grid_view<T>(m_cells[indices[x1][y1]]);
-  }
+  grid2D(size_t x_max, size_t y_max)
+      : base_grid2D<T>(),
+        m_cells(boost::extents[x_max][y_max]) {}
 
   T& access(size_t i, size_t j) override {
     return m_cells[static_cast<index_range::index>(i)]
                   [static_cast<index_range::index>(j)];
   }
+  size_t xsize(void) const { return m_cells.shape()[0]; }
+  size_t ysize(void) const { return m_cells.shape()[1]; }
 
   __rcsw_pure T& access(const math::dcoord2& c) override {
     return m_cells[static_cast<index_range::index>(c.first)]

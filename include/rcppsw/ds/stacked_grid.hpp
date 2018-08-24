@@ -27,7 +27,7 @@
 #include <vector>
 #include <tuple>
 
-#include "rcppsw/ds/grid2D.hpp"
+#include "rcppsw/ds/overlay_grid2D.hpp"
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/dcoord.hpp"
 
@@ -40,10 +40,10 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class stacked_grid2
+ * @class stacked_grid
  * @ingroup ds
  *
- * @brief A sandwich of 2 2D grids of the same size (x,y) dimensions, which can
+ * @brief A sandwich of N 2D grids of the same size (x,y) dimensions, which can
  * contain different kinds of objects. The objects in each layer of the grid are
  * stored contiguously, but the grids themselves are not necessarily
  * contiguous. The layers are 0 indexed.
@@ -52,34 +52,32 @@ NS_START(rcppsw, ds);
  * graphs/grids of the same object type.
  */
 template<typename TupleTypes>
-class stacked_grid2 {
+class stacked_grid {
  public:
-  stacked_grid2(double resolution, size_t x_max, size_t y_max)
-      : m_layers() {
-    add_layer<value_type<0>>(resolution, x_max, y_max);
-    add_layer<value_type<1>>(resolution, x_max, y_max);
-  }
-  virtual ~stacked_grid2(void) {
-    delete reinterpret_cast<const layer_type<0>*>(m_layers[0]);
-    delete reinterpret_cast<const layer_type<1>*>(m_layers[1]);
+  stacked_grid(double resolution, size_t x_max, size_t y_max)
+      : m_layers(kStackSize) {
+    add_layers<kStackSize - 1>(resolution, x_max, y_max);
   }
 
-  template <class T>
-  using layer = rcppsw::ds::grid2D<T>;
+  virtual ~stacked_grid(void) {
+    rm_layers<kStackSize - 1>();
+  }
+
 
   /**
-   * @brief The type of the objects stored in a particular layer.
-   * @tparam The index of the layer.
-   */
+  * @brief The type of the objects stored in a particular layer.
+  * @tparam Index The index of the layer.
+  */
   template<uint Index>
   using value_type = typename std::tuple_element<Index, TupleTypes>::type;
 
   /**
    * @brief The type of a particular layer.
-   * @tparam The index of the layer.
+   * @tparam Index The index of the layer.
    */
   template<uint Index>
-  using layer_type = rcppsw::ds::grid2D<value_type<Index>>;
+  using layer_value_type = rcppsw::ds::overlay_grid2D<value_type<Index>>;
+
 
   /**
    * @brief Get a reference to an object at a particular (layer,i,j) location
@@ -91,13 +89,13 @@ class stacked_grid2 {
    * @return The object at the specified location.
    */
   template<uint Index>
-  typename layer_type<Index>::value_type& access(size_t i, size_t j) {
-    return reinterpret_cast<layer_type<Index>*>(m_layers[Index])->access(i, j);
+  typename layer_value_type<Index>::value_type& access(size_t i, size_t j) {
+    return reinterpret_cast<layer_value_type<Index>*>(m_layers[Index])->access(i, j);
   }
 
   template<uint Index>
-  const typename layer_type<Index>::value_type& access(size_t i, size_t j) const {
-    return reinterpret_cast<const layer_type<Index>*>(m_layers[Index])->access(i, j);
+  const typename layer_value_type<Index>::value_type& access(size_t i, size_t j) const {
+    return reinterpret_cast<const layer_value_type<Index>*>(m_layers[Index])->access(i, j);
   }
 
   /**
@@ -109,54 +107,94 @@ class stacked_grid2 {
    * @return The object at the specified location.
    */
   template <int Index>
-  typename layer_type<Index>::value_type& access(const math::dcoord2& d) {
+  typename layer_value_type<Index>::value_type& access(const math::dcoord2& d) {
     return access<Index>(d.first, d.second);
   }
   template <int Index>
-  const typename layer_type<Index>::value_type& access(const math::dcoord2& d) const {
+  const typename layer_value_type<Index>::value_type& access(const math::dcoord2& d) const {
     return access<Index>(d.first, d.second);
   }
 
+  template <int Index>
+  layer_value_type<Index>* layer(void) {
+    return reinterpret_cast<layer_value_type<Index>*>(m_layers[Index]);
+  }
+  template <int Index>
+  const layer_value_type<Index>* layer(void) const {
+    return reinterpret_cast<const layer_value_type<Index>*>(m_layers[Index]);
+  }
+
   /**
-   * @see \ref base_grid2D::xdsize().
+   * @see \ref base_overlay_grid2D::xdsize().
    */
   size_t xdsize(void) const {
-    return (reinterpret_cast<const layer_type<0>*>(m_layers[0]))->xdsize();
+    return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xdsize();
   }
 
   /**
-   * @see \ref base_grid2D::xrsize().
+   * @see \ref base_overlay_grid2D::xrsize().
    */
   size_t xrsize(void) const {
-    return (reinterpret_cast<const layer_type<0>*>(m_layers[0]))->xrsize();
+    return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xrsize();
   }
 
   /**
-   * @see \ref base_grid2D::ydsize().
+   * @see \ref base_overlay_grid2D::ydsize().
    */
   size_t ydsize(void) const {
-    return (reinterpret_cast<const layer_type<0>*>(m_layers[0]))->ydsize();
+    return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->ydsize();
   }
 
   /**
-   * @see \ref base_grid2D::yrsize().
+   * @see \ref base_overlay_grid2D::yrsize().
    */
   size_t yrsize(void) const {
-    return (reinterpret_cast<const layer_type<0>*>(m_layers[0]))->yrsize();
+    return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->yrsize();
   }
 
   /**
-   * @see \ref base_grid2D::resolution().
+   * @see \ref base_overlay_grid2D::resolution().
    */
   double resolution(void) const {
-    return (reinterpret_cast<const layer_type<0>*>(m_layers[0]))->resolution();
+    return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->resolution();
   }
 
  private:
-  template<typename LayerType, typename... Args>
-  void add_layer(Args&&... args) {
-    m_layers.emplace_back(new layer<LayerType>(std::forward<Args>(args)...));
+  static uint constexpr kStackSize = std::tuple_size<TupleTypes>::value;
+
+  template<int Index, typename ...Args>
+  void add_layers(Args && ...args) {
+    add_layer<Index, Args...>(std::forward<Args>(args)...);
+    add_layer<Index - 1, Args...>(std::forward<Args>(args)...);
   }
+
+  /**
+   * @brief Add a layer to the stacked grid.
+   *
+   * Note the reversal of indices! Because of the way recursive instantiation
+   * works, we can only start at an index > 0, and go DOWN, but the user
+   * specified the order of layers going FORWARD/UP.
+   */
+  template <int Index, typename... Args>
+  void add_layer(Args&&... args) {
+    m_layers[kStackSize - Index - 1] = new layer_value_type<kStackSize - Index - 1>(std::forward<Args>(args)...);
+  }
+
+
+  template<int Index>
+  void rm_layers(void) {
+    rm_layer<Index>();
+  }
+
+  /**
+   * @brief Delete a layer from the stacked grid. Indice reversal is not really
+   * necessary here, but doing it for reasons of Principle of Least Surprise.
+   */
+  template <int Index>
+  void rm_layer(void) {
+    delete reinterpret_cast<const layer_value_type<1>*>(m_layers[kStackSize - Index - 1]);
+  }
+
   std::vector<void*> m_layers;
 };
 
