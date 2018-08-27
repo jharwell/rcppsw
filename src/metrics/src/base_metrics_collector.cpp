@@ -22,11 +22,13 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/metrics/base_metrics_collector.hpp"
+#include <experimental/filesystem>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, metrics);
+namespace fs = std::experimental::filesystem;
 
 /*******************************************************************************
  * Member Functions
@@ -34,13 +36,21 @@ NS_START(rcppsw, metrics);
 void base_metrics_collector::csv_line_write(uint timestep) {
   std::string line;
   if (csv_line_build(line)) {
-    m_ofile << std::to_string(timestep) + m_separator + line << std::endl;
+    if (!m_cum_only) {
+      m_ofile << std::to_string(timestep) + m_separator + line << std::endl;
+    } else {
+      fs::resize_file(m_ofname, 0);
+      m_ofile.seekp(0);
+      m_ofile << line << std::endl;
+    }
   }
 } /* csv_line_write() */
 
 void base_metrics_collector::csv_header_write(void) {
-  std::string header = csv_header_build("");
-  m_ofile << header + "\n";
+  if (!m_cum_only) {
+    std::string header = csv_header_build("");
+    m_ofile << header + "\n";
+  }
 } /* csv_header_write() */
 
 std::string
