@@ -53,10 +53,16 @@ class base_metrics_collector {
   /**
    * @param ofname Output file name.
    * @param interval Collection interval.
+   * @param cum_only The metrics to be collected are cumulative only. This means
+   * that (1) no header will be written, (2) the output file will be truncated
+   * each time \ref csv_line_build() returns true.. Default = \c false;
    */
-  base_metrics_collector(std::string ofname, uint interval)
+  base_metrics_collector(std::string ofname,
+                         uint interval,
+                         bool cum_only = false)
       : m_interval(interval),
         m_timestep(0),
+        m_cum_only(cum_only),
         m_ofname(std::move(ofname)),
         m_separator(";"),
         m_ofile() {}
@@ -157,6 +163,7 @@ class base_metrics_collector {
   // clang-format off
   int           m_interval;
   uint          m_timestep;
+  bool          m_cum_only;
   std::string   m_ofname;
   std::string   m_separator;
   std::ofstream m_ofile;
