@@ -101,6 +101,16 @@ class executable_task : public logical_task {
   }
 
   /**
+   * @brief Initialize the execution time estimate for the task. This ignores
+   * the value of the alpha parameter for updating estimates.
+   *
+   * @param init_measure Initial execution estimate.
+   */
+  void init_exec_estimate(double init_measure) {
+    m_exec_estimate.set_result(init_measure);
+  }
+
+  /**
    * @brief The method that all tasks must define that specifies how to execute
    * the task.
    */
