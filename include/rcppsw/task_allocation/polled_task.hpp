@@ -70,7 +70,7 @@ class polled_task : public executable_task, public taskable {
    * the specified range.
    */
   void init_random(int lb, int ub) {
-    executable_task::set_exec_estimate(std::rand() % (ub - lb + 1) + lb);
+    executable_task::init_exec_estimate(std::rand() % (ub - lb + 1) + lb);
   }
 
  private:
