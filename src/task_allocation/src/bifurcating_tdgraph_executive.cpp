@@ -160,10 +160,18 @@ void bifurcating_tdgraph_executive::update_task_partition_prob(
   ER_ASSERT(task->is_partitionable(),
             "FATAL: Cannot update partition probability of non-partitionable task");
   std::vector<polled_task*> kids = graph()->children(task);
-  static_cast<partitionable_polled_task*>(task)->update_partition_prob(
-      task->exec_estimate(),
-      kids[0]->exec_estimate(),
-      kids[1]->exec_estimate());
+
+  if (task == graph()->root()) {
+    static_cast<partitionable_polled_task*>(task)->update_partition_prob(
+        task->exec_estimate(),
+        kids[1]->exec_estimate(),
+        kids[2]->exec_estimate());
+  } else {
+    static_cast<partitionable_polled_task*>(task)->update_partition_prob(
+        task->exec_estimate(),
+        kids[0]->exec_estimate(),
+        kids[1]->exec_estimate());
+  }
 } /* update_task_partition_prob() */
 
 polled_task* bifurcating_tdgraph_executive::do_get_next_task(void) {
