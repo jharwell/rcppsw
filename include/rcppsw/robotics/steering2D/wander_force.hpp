@@ -24,6 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <random>
+
 #include <argos3/core/utility/math/angles.h>
 
 #include "rcppsw/common/common.hpp"
@@ -54,13 +56,17 @@ class wander_force {
 
  private:
   // clang-format off
-  uint            m_interval;
-  int             m_count{-1};
-  double          m_max;
-  double          m_circle_distance;
-  double          m_circle_radius;
-  double          m_max_angle_delta;
-  argos::CRadians m_angle;
+  uint                             m_interval;
+  int                              m_count{-1};
+  bool                             m_use_normal;
+  double                           m_max;
+  double                           m_circle_distance;
+  double                           m_circle_radius;
+  double                           m_max_angle_delta;
+  double                           m_last_angle{0.0};
+  argos::CRadians                  m_angle;
+  std::random_device               m_rng{};
+  std::normal_distribution<double> m_normal_dist;
   // clang-format on
 };
 

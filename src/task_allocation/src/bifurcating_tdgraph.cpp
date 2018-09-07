@@ -77,8 +77,16 @@ void bifurcating_tdgraph::task_alloc_cb(const polled_task* const v) {
 } /* task_alloc_cb() */
 
 void bifurcating_tdgraph::task_abort_cb(const polled_task* const v) {
-  auto parent = dynamic_cast<partitionable_task*>(vertex_parent(v));
-  parent->last_partition(v);
+  /*
+   * If our parent is ourself, then the task that has just been aborted is the
+   * root task and we don't want to set the last partition to ourself, because
+   * the root task is, by definition, incapable of being executed as the
+   * resulting of task partitioning during allocation.
+   */
+  if (vertex_parent(v) != v) {
+    auto parent = dynamic_cast<partitionable_task*>(vertex_parent(v));
+    parent->last_partition(v);
+  }
 } /* task_abort_cb() */
 
 NS_END(rcppsw, task_allocation);
