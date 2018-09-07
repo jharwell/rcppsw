@@ -94,12 +94,10 @@ The following development guides should be followed:
 
         make format-all
 
-9. Change status to `Status: Needs Review` and open a pull request (if working
-   from a forked repo), or mention the project's main author in the correspond
-   issue to bring it to their attention (if working from a cloned repo). In the
-   latter case, they will review the commits. If you created unit tests, attach
-   a log/run showing they all pass, as well as the code coverage report from
-   gcov.
+9. Change status to `Status: Needs Review` and open a pull request, and someone
+   will review the commits. If you created unit tests, attach a log/run showing
+   they all pass, as well as the code coverage report from gcov.
 
-10. Once the task has been reviewed and given the green light, merge it into
-    devel, and marked the issue as `Status: Completed`, and close the issue.
+10. Once the task has been reviewed and given the green light, it will be merged
+    into devel and marked as `Status: Completed`, and closed (you generally
+    don't need to do this).
