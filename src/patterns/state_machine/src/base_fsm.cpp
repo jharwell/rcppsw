@@ -32,15 +32,11 @@ NS_START(rcppsw, patterns, state_machine);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_fsm::base_fsm(const std::shared_ptr<er::server> &server,
+base_fsm::base_fsm(const std::string& er_parent,
                    uint8_t max_states, uint8_t initial_state)
-    : er::client(server), mc_max_states(max_states),
-      m_current_state(initial_state), m_initial_state(initial_state) {
-  ER_ASSERT(mc_max_states < event_signal::IGNORED, "FATAL: Too many states");
-}
-
-base_fsm::base_fsm(uint8_t max_states, uint8_t initial_state)
-    : er::client(), mc_max_states(max_states), m_current_state(initial_state),
+    : ER_CLIENT_INIT(er_parent),
+      mc_max_states(max_states),
+      m_current_state(initial_state),
       m_initial_state(initial_state) {
   ER_ASSERT(mc_max_states < event_signal::IGNORED, "FATAL: Too many states");
 }
@@ -57,7 +53,7 @@ void base_fsm::init(void) {
 
 void base_fsm::external_event(uint8_t new_state,
                               std::unique_ptr<const event_data> data) {
-  ER_VER("Received external event: new_state=%d data=%p", new_state,
+  ER_TRACE("Received external event: new_state=%d data=%p", new_state,
          reinterpret_cast<const void *>(data.get()));
 
   ER_ASSERT(event_signal::FATAL != new_state,
@@ -77,7 +73,7 @@ void base_fsm::external_event(uint8_t new_state,
 
 void base_fsm::internal_event(uint8_t new_state,
                               std::unique_ptr<const event_data> data) {
-  ER_VER("Generated internal event: current_state=%d new_state=%d data=%p",
+  ER_TRACE("Generated internal event: current_state=%d new_state=%d data=%p",
          current_state(), new_state,
          reinterpret_cast<const void *>(data.get()));
   next_state(new_state);
@@ -129,7 +125,7 @@ void base_fsm::state_engine_map_ex(void) {
     /* execute guard condition */
     bool guard_res = true;
     if (nullptr != guard) {
-      ER_VER("Executing guard condition for state %d", current_state());
+      ER_TRACE("Executing guard condition for state %d", current_state());
       guard_res = guard->invoke_guard_condition(this, m_event_data.get());
     }
 
@@ -141,13 +137,13 @@ void base_fsm::state_engine_map_ex(void) {
     if (next_state() != current_state()) {
       /* execute state exit action before switching to new state */
       if (nullptr != exit) {
-        ER_VER("Executing exit action for state %d", current_state());
+        ER_TRACE("Executing exit action for state %d", current_state());
         exit->invoke_exit_action(this);
       }
 
       /* execute state entry action on the new state */
       if (nullptr != entry) {
-        ER_VER("Executing entry action for new state %d", next_state());
+        ER_TRACE("Executing entry action for new state %d", next_state());
         entry->invoke_entry_action(this, m_event_data.get());
       }
 
@@ -164,14 +160,14 @@ void base_fsm::state_engine_map_ex(void) {
 
 void base_fsm::state_engine_step(const state_map_row *const c_row) {
   ER_ASSERT(nullptr != c_row->state(), "FATAL: null state?");
-  ER_VER("Invoking state action: state%d, data=%p", current_state(),
+  ER_TRACE("Invoking state action: state%d, data=%p", current_state(),
          reinterpret_cast<const void *>(m_event_data.get()));
   c_row->state()->invoke_state_action(this, event_data_get());
 } /* state_engine_step() */
 
 void base_fsm::state_engine_step(const state_map_ex_row *const c_row_ex) {
   ER_ASSERT(nullptr != c_row_ex->state(), "FATAL: null state?");
-  ER_VER("Invoking state action: state%d, data=%p", current_state(),
+  ER_TRACE("Invoking state action: state%d, data=%p", current_state(),
          reinterpret_cast<const void *>(m_event_data.get()));
   c_row_ex->state()->invoke_state_action(this, event_data_get());
 } /* state_engine_step() */

@@ -56,7 +56,7 @@ class bifurcatable_task : public er::client,
                            public std::enable_shared_from_this<executable_task>,
                            public metrics::tasks::allocation_metrics {
  public:
-  bifurcatable_task(const std::shared_ptr<er::server>& server,
+  bifurcatable_task(const std::string& er_parent,
                      const struct bifurcatable_task_params* c_params);
 
   ~bifurcatable_task(void) override = default;

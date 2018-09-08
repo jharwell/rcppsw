@@ -34,26 +34,27 @@ NS_START(rcppsw, robotics, kinematics2D);
  * Constructors/Destructor
  ******************************************************************************/
 differential_drive::differential_drive(
-    const std::shared_ptr<er::server> &server,
+    const std::string& er_parent,
     const hal::actuators::differential_drive_actuator &actuator,
     drive_type type, double wheel_radius, double axle_length, double max_speed,
     argos::CRadians soft_turn_max)
-    : er::client(server), m_drive_type(type), m_wheel_radius(wheel_radius),
-      m_axle_length(axle_length), m_max_speed(max_speed),
-      m_fsm(max_speed, soft_turn_max), m_actuator(actuator) {
-  if (ERROR == client::attmod("differential_drive")) {
-    client::insmod("differential_drive", rcppsw::er::er_lvl::DIAG,
-                   rcppsw::er::er_lvl::NOM);
-  }
-}
+    : ER_CLIENT_INIT(er_parent),
+    m_drive_type(type),
+    m_wheel_radius(wheel_radius),
+    m_axle_length(axle_length), m_max_speed(max_speed),
+    m_fsm(er_parent, max_speed, soft_turn_max),
+    m_actuator(actuator) {}
 
 differential_drive::differential_drive(
-    const std::shared_ptr<er::server> &server,
+    const std::string& er_parent,
     const hal::actuators::differential_drive_actuator &actuator,
     drive_type type, double wheel_radius, double axle_length, double max_speed)
-    : differential_drive{server,           actuator,    type,
-                         wheel_radius,     axle_length, max_speed,
-                         argos::CRadians()} {
+    : differential_drive{er_parent,
+      actuator,
+      type,
+      wheel_radius,
+      axle_length, max_speed,
+      argos::CRadians()} {
   assert(kFSMDrive != type);
 }
 /*******************************************************************************
@@ -63,7 +64,7 @@ status_t differential_drive::actuate(const kinematics::twist &twist) {
   switch (m_drive_type) {
   case kTankDrive:
   case kFSMDrive:
-    ER_ERR("Cannot actuate: Ngot in curvature drive mode");
+    ER_ERR("Cannot actuate: Not in curvature drive mode");
     return ERROR;
     break;
   case kCurvatureDrive:
@@ -104,7 +105,7 @@ status_t differential_drive::tank_drive(double left_speed, double right_speed,
         std::copysign(std::pow(m_right_linspeed, 2), m_right_linspeed);
   }
 
-  ER_VER("Normalized linear wheel speeds: (%f, %f)", m_left_linspeed,
+  ER_TRACE("Normalized linear wheel speeds: (%f, %f)", m_left_linspeed,
          m_right_linspeed);
   m_actuator.set_wheel_speeds(m_left_linspeed, m_right_linspeed);
   return OK;
@@ -122,7 +123,7 @@ status_t differential_drive::curvature_drive(const kinematics::twist &twist,
 
   ER_CHECK(kCurvatureDrive == m_drive_type,
            "Cannot actuate: not in curvature drive mode");
-  ER_VER("Twist.linear.x: %f twist.angular.z: %f", twist.linear.x,
+  ER_TRACE("Twist.linear.x: %f twist.angular.z: %f", twist.linear.x,
          twist.angular.z);
 
   if (hard_turn) {
@@ -135,7 +136,7 @@ status_t differential_drive::curvature_drive(const kinematics::twist &twist,
     outputs = normalize_outputs(std::make_pair((v - w * m_axle_length / 2),
                                                (v + w * m_axle_length / 2)));
   }
-  ER_VER("Normalized linear wheel speeds: (%f, %f)", outputs.first,
+  ER_TRACE("Normalized linear wheel speeds: (%f, %f)", outputs.first,
          outputs.second);
 
   m_left_linspeed = outputs.first;

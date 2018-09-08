@@ -44,11 +44,13 @@ NS_START(rcppsw, task_allocation);
  *
  * @brief Parses XML parameters for relating to the subtask selection.
  */
-class subtask_selection_xml_parser: public rcppsw::params::xml_param_parser {
+class subtask_selection_xml_parser: public rcppsw::params::xml_param_parser,
+                                    er::client<subtask_selection_xml_parser> {
  public:
-  explicit subtask_selection_xml_parser(const std::shared_ptr<er::server>& server,
+  subtask_selection_xml_parser(const std::string& er_parent,
                                 uint level)
-      : xml_param_parser(server, level) {}
+      : xml_param_parser(er_parent, level),
+        ER_CLIENT_INIT(er_parent) {}
 
   /**
    * @brief The root tag that all task subtask_selection parameters should lie

@@ -25,6 +25,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/patterns/state_machine/base_fsm.hpp"
+#include <string>
+
 #include "rcppsw/patterns/state_machine/hfsm_state.hpp"
 
 /*******************************************************************************
@@ -41,17 +43,19 @@ NS_START(rcppsw, patterns, state_machine);
  *
  * @brief Implements a software-based hierarchical state machine.
  */
-class hfsm : public base_fsm {
+class hfsm : public base_fsm, public er::client<hfsm> {
  public:
   /**
-   * @param server The event reporting server for the state machine.
+   * @param er_parent Parent logger for instance.
    * @param max_states The maximum number of state machine states.
    * @param initial_state Initial state machine state.
    */
-  hfsm(const std::shared_ptr<er::server>& server,
+  hfsm(const std::string& er_parent,
        uint8_t max_states,
        uint8_t initial_state = 0)
-      : base_fsm(server, max_states, initial_state), m_top_state(nullptr) {}
+      : base_fsm(er_parent, max_states, initial_state),
+        ER_CLIENT_INIT(er_parent),
+        m_top_state(nullptr) {}
 
   ~hfsm() override = default;
 

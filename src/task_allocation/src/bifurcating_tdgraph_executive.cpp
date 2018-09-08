@@ -34,9 +34,10 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 bifurcating_tdgraph_executive::bifurcating_tdgraph_executive(
-    std::shared_ptr<rcppsw::er::server>& server,
+    const std::string& er_parent,
     bifurcating_tdgraph* const graph)
-    : base_executive(server, graph) {
+    : base_executive(er_parent, graph),
+      ER_CLIENT_INIT(er_parent) {
   auto bigraph = static_cast<bifurcating_tdgraph*>(base_executive::graph());
   bigraph->install_cb(this);
 }
@@ -73,14 +74,16 @@ void bifurcating_tdgraph_executive::run(void) {
   }
 
   if (current_task()->task_finished()) {
-    ER_NOM("Task '%s' finished", current_task()->name().c_str());
+    ER_INFO("Task '%s' finished", current_task()->name().c_str());
     handle_task_finish(current_task());
   } else {
     double prob = task_abort_prob(current_task());
-    ER_VER("Task '%s' abort probability: %f", current_task()->name().c_str(), prob);
+    ER_TRACE("Task '%s' abort probability: %f",
+             current_task()->name().c_str(),
+             prob);
 
     if (static_cast<double>(std::rand()) / RAND_MAX <= prob) {
-      ER_NOM("Task '%s' aborted", current_task()->name().c_str());
+      ER_INFO("Task '%s' aborted", current_task()->name().c_str());
       handle_task_abort(current_task());
     } else {
       current_task()->task_execute();
@@ -140,7 +143,7 @@ void bifurcating_tdgraph_executive::handle_task_finish(polled_task* task) {
 } /* handle_task_finish() */
 
 void bifurcating_tdgraph_executive::handle_task_start(polled_task* new_task) {
-  ER_NOM("Starting new task '%s'", new_task->name().c_str());
+  ER_INFO("Starting new task '%s'", new_task->name().c_str());
 
   for (auto cb : m_task_alloc_notify) {
     cb(new_task, active_tab());

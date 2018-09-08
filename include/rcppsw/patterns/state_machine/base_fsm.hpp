@@ -27,6 +27,7 @@
 #include <cstdio>
 #include <cstddef>
 #include <mutex>
+#include <string>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/patterns/state_machine/event.hpp"
@@ -51,18 +52,13 @@ NS_START(rcppsw, patterns, state_machine);
  *
  * @brief Implements a software-based state machine.
  */
-class base_fsm : public er::client {
+class base_fsm : public er::client<base_fsm> {
  public:
-  base_fsm(const std::shared_ptr<er::server>& server,
+  base_fsm(const std::string& er_parent,
            uint8_t max_states,
            uint8_t initial_state = 0);
 
-  explicit base_fsm(uint8_t max_states,
-                    uint8_t initial_state = 0);
-
   ~base_fsm(void) override = default;
-  base_fsm(const base_fsm& other)
-      : base_fsm(other.mc_max_states, other.m_initial_state) {}
   base_fsm& operator=(const base_fsm& other) = delete;
 
   /**

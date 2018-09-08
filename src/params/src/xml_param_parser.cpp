@@ -34,13 +34,9 @@ NS_START(rcppsw, params);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-xml_param_parser::xml_param_parser(const std::shared_ptr<er::server> &server,
+xml_param_parser::xml_param_parser(const std::string& er_parent,
                                    uint level)
-    : client(server), m_level(level) {
-  if (ERROR == client::attmod("xml_param_parser")) {
-    insmod("xml_param_parser", er::er_lvl::NOM, er::er_lvl::NOM);
-  }
-}
+    : ER_CLIENT_INIT(er_parent), m_level(level) {}
 
 /*******************************************************************************
  * Member Functions

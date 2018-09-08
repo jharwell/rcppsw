@@ -32,10 +32,8 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-tdgraph::tdgraph(std::shared_ptr<er::server> server)
-    : client(server), m_root(), m_graph() {
-  insmod("tdg", er::er_lvl::DIAG, er::er_lvl::VER);
-}
+tdgraph::tdgraph(const std::string& er_parent)
+    : ER_CLIENT_INIT(er_parent), m_root(), m_graph() {}
 
 tdgraph::~tdgraph(void) {
   vertex_iterator v_i, v_end;
@@ -88,7 +86,6 @@ polled_task* tdgraph::vertex_parent(const polled_task *const vertex) const {
     return nullptr;
     ER_WARN("WARNING: No such vertex %s found in graph", vertex->name().c_str());
   }
-
   /*
    * Now, we can just look in the incident edges for the vertex and return the
    * one we find (if there is more than 1, that's an error).
@@ -149,7 +146,7 @@ status_t tdgraph::set_children(const polled_task *parent,
 
   for (auto &c : children) {
     vertex new_v = boost::add_vertex(c, m_graph);
-    ER_VER("Add edge %s -> %s", m_graph[*vertex_d]->name().c_str(),
+    ER_TRACE("Add edge %s -> %s", m_graph[*vertex_d]->name().c_str(),
            m_graph[new_v]->name().c_str());
     boost::add_edge(*vertex_d, new_v, m_graph);
   } /* for(c..) */

@@ -22,7 +22,6 @@
  * Includesp
  ******************************************************************************/
 #include "rcppsw/robotics/kinematics2D/differential_drive_fsm.hpp"
-#include "rcppsw/er/server.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -32,9 +31,11 @@ NS_START(rcppsw, robotics, kinematics2D);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-differential_drive_fsm::differential_drive_fsm(double max_speed,
+differential_drive_fsm::differential_drive_fsm(const std::string& er_parent,
+                                               double max_speed,
                                                argos::CRadians soft_turn_max)
-    : state_machine::simple_fsm(rcppsw::er::g_server, ST_MAX_STATES),
+    : state_machine::simple_fsm(er_parent + "." + typeid(*this).name(),
+                                ST_MAX_STATES),
       soft_turn(), hard_turn(), mc_max_speed(max_speed),
       mc_soft_turn_max(soft_turn_max), m_wheel_speeds() {}
 

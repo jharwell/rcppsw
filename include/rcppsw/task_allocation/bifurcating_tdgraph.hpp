@@ -49,9 +49,10 @@ class bifurcating_tdgraph_executive;
  * representing the task decomposition of the root task at different
  * granularities (i.e. tasks of different levels of complexity).
  */
-class bifurcating_tdgraph : public tdgraph {
+class bifurcating_tdgraph : public tdgraph,
+                            public er::client<bifurcating_tdgraph> {
  public:
-  explicit bifurcating_tdgraph(std::shared_ptr<er::server>& server);
+  explicit bifurcating_tdgraph(const std::string& er_parent);
 
   bifurcating_tdgraph(const bifurcating_tdgraph& other) = delete;
   bifurcating_tdgraph& operator=(const bifurcating_tdgraph& other) = delete;

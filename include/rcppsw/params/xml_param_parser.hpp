@@ -58,9 +58,9 @@ struct base_params;
  * \ref base_params derived parameter structure.
  *
  */
-class xml_param_parser : public er::client {
+class xml_param_parser : public er::client<xml_param_parser> {
  public:
-  xml_param_parser(const std::shared_ptr<er::server>& server, uint level);
+  xml_param_parser(const std::string& er_parent, uint level);
   virtual ~xml_param_parser(void) = default;
 
   static constexpr uint kColumnWidth = 100;

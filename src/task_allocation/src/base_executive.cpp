@@ -34,13 +34,9 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_executive::base_executive(
-    std::shared_ptr<rcppsw::er::server> server,
-    tdgraph* const graph)
-    : client(server), m_graph(graph) {
-  client::insmod("base_executive", rcppsw::er::er_lvl::DIAG,
-                 rcppsw::er::er_lvl::NOM);
-}
+base_executive::base_executive(const std::string& er_parent,
+                               tdgraph* const graph)
+    : ER_CLIENT_INIT(er_parent), m_graph(graph) {}
 
 base_executive::~base_executive(void) = default;
 

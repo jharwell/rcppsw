@@ -50,7 +50,8 @@ NS_START(rcppsw, robotics, kinematics2D);
  * \ref kCurvatureDrive
  * \ref kFSMDrive
  */
-class differential_drive : public kinematics2D::model, public er::client {
+class differential_drive : public kinematics2D::model,
+                           public er::client<differential_drive> {
  public:
   enum drive_type {
     kTankDrive,  /// Controls like those of a tank
@@ -70,7 +71,7 @@ class differential_drive : public kinematics2D::model, public er::client {
    *                      heading that will not trigger a hard (in place)
    *                      turn. Only used by \ref kFSMDrive.
    */
-  differential_drive(const std::shared_ptr<er::server>& server,
+  differential_drive(const std::string& er_parent,
                      const hal::actuators::differential_drive_actuator& actuator,
                      drive_type type,
                      double wheel_radius,
@@ -78,7 +79,7 @@ class differential_drive : public kinematics2D::model, public er::client {
                      double max_speed,
                      argos::CRadians soft_turn_max);
 
-  differential_drive(const std::shared_ptr<er::server>& server,
+  differential_drive(const std::string& er_parent,
                      const hal::actuators::differential_drive_actuator& actuator,
                      drive_type type,
                      double wheel_radius,

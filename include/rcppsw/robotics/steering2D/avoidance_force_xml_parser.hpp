@@ -53,9 +53,8 @@ class avoidance_force_xml_parser : public rcppsw::params::xml_param_parser {
  public:
   static constexpr char kXMLRoot[] = "avoidance_force";
 
-  explicit avoidance_force_xml_parser(const std::shared_ptr<er::server>& server,
-                                      uint level)
-      : xml_param_parser(server, level) {}
+  avoidance_force_xml_parser(const std::string& er_parent, uint level)
+      : xml_param_parser(er_parent, level) {}
 
   void parse(const ticpp::Element& node) override;
   void show(std::ostream& stream) const override;

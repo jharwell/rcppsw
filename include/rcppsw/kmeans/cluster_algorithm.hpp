@@ -48,17 +48,17 @@ NS_START(rcppsw, kmeans);
  * @brief Base class implementation of k-means clustering algorithm.
  */
 template <typename T>
-class cluster_algorithm : public common::er_client {
+class cluster_algorithm : public er::client<cluster_algorithm<T>> {
  public:
-  cluster_algorithm(std::size_t n_iterations,
+  cluster_algorithm(const std::string& er_parent,
+                    std::size_t n_iterations,
                     std::size_t n_clusters,
                     std::size_t n_threads,
                     std::size_t dimension,
                     std::size_t n_points,
                     const std::string& clusters_fname,
-                    const std::string& centroids_fname,
-                    common::er_server* const erf)
-      : common::er_client(erf),
+                    const std::string& centroids_fname)
+      : ER_CLIENT_INIT(er_parent),
         m_n_iterations(n_iterations),
         m_n_clusters(n_clusters),
         m_n_threads(n_threads),
@@ -68,13 +68,7 @@ class cluster_algorithm : public common::er_client {
         m_membership(NULL),
         m_clusters_fname(clusters_fname),
         m_centroids_fname(centroids_fname),
-        m_clusters(new std::vector<kmeans_cluster<T>*>()) {
-    server_handle()->insmod(er_id(), "KMEANS");
-    ER_NOM("n_points=%lu, n_clusters=%lu, n_iterations=%lu\n",
-           m_n_points,
-           m_n_clusters,
-           m_n_iterations);
-  }
+        m_clusters(new std::vector<kmeans_cluster<T>*>()) {}
 
   virtual ~cluster_algorithm(void) {
     for (std::size_t i = 0; i < m_n_clusters; ++i) {

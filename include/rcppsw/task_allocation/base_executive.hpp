@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <list>
+#include <string>
 
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
@@ -44,7 +45,7 @@ NS_START(rcppsw, task_allocation);
  *
  * @brief Base class for runtime task task executives.
  */
-class base_executive : public rcppsw::er::client {
+class base_executive : public rcppsw::er::client<base_executive> {
  public:
   using abort_notify_cb = std::function<void(const polled_task*)>;
   using finish_notify_cb = std::function<void(const polled_task*)>;
@@ -52,12 +53,12 @@ class base_executive : public rcppsw::er::client {
   /**
    * @brief Creates the base executive.
    *
-   * @param server Handle to logging server.
+   * @param er_parent Name of parent logger.
    * @param graph Graph to manage. Takes ownership of the object (can't use the
    *              language to communicate that with unique_ptr because of
    *              casting reasons).
    */
-  base_executive(std::shared_ptr<rcppsw::er::server> server,
+  base_executive(const std::string& er_parent,
                  tdgraph* graph);
   ~base_executive(void) override;
 

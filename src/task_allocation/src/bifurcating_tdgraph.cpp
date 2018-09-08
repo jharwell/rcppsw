@@ -34,8 +34,9 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-bifurcating_tdgraph::bifurcating_tdgraph(std::shared_ptr<er::server> &server)
-    : tdgraph(server) {}
+bifurcating_tdgraph::bifurcating_tdgraph(const std::string& er_parent)
+    : tdgraph(er_parent),
+      ER_CLIENT_INIT(er_parent) {}
 
 /*******************************************************************************
  * Member Functions
@@ -51,6 +52,7 @@ void bifurcating_tdgraph::install_cb(bifurcating_tdgraph_executive* const e) {
 
 status_t bifurcating_tdgraph::set_children(const std::string &parent,
                              const std::vector<polled_task*>& children) {
+  LOG4CXX_WARN(rcppsw::er::client<std::remove_reference<decltype(*this)>::type>::logger(),"FAT");
   return tdgraph::set_children(parent, children);
 } /* set_children() */
 

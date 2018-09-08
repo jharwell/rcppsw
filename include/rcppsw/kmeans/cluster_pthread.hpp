@@ -43,24 +43,25 @@ NS_START(rcppsw, kmeans);
  *
  */
 template <typename T>
-class cluster_pthread : public cluster_algorithm<T> {
+class cluster_pthread : public cluster_algorithm<T>,
+                        public er::client<cluster_pthread<T>> {
  public:
-  cluster_pthread(std::size_t n_iterations,
+  cluster_pthread(const std::string& er_parent,
+                  std::size_t n_iterations,
                   std::size_t n_clusters,
                   std::size_t n_threads,
                   std::size_t dimension,
                   std::size_t n_points,
                   const std::string& m_clustersfname,
-                  const std::string& centroids_fname,
-                  common::er_server* const erf)
-      : cluster_algorithm<T>(n_iterations,
+                  const std::string& centroids_fname)
+      : cluster_algorithm<T>(er_parent, n_iterations,
                              n_clusters,
                              n_threads,
                              dimension,
                              n_points,
                              m_clustersfname,
-                             centroids_fname,
-                             erf),
+                             centroids_fname),
+    ER_CLIENT_INIT(er_parent),
         m_workers() {
     std::size_t data_chunk_size = n_points / n_threads;
     std::size_t centers_chunk_size = n_clusters / n_threads;
@@ -76,7 +77,7 @@ class cluster_pthread : public cluster_algorithm<T> {
       if (n_clusters % n_threads != 0 && i == n_threads - 1) {
         centers_chunk_size = n_points - centers_chunk_start;
       }
-      ER_NOM("Worker %lu: %lu - %lu, %lu - %lu\n",
+      ER_INFO("Worker %lu: %lu - %lu, %lu - %lu\n",
              i,
              data_chunk_start,
              data_chunk_start + data_chunk_size,
@@ -162,9 +163,9 @@ class cluster_pthread : public cluster_algorithm<T> {
     bool ret = true;
     for (std::size_t i = 0; i < cluster_algorithm<T>::n_clusters(); ++i) {
       if (cluster_algorithm<T>::clusters()->at(i)->convergence()) {
-        ER_DIAG("Cluster %lu reports convergence\n", i);
+        ER_DEBUG("Cluster %lu reports convergence\n", i);
       } else {
-        ER_DIAG("Cluster %lu reports no convergence\n", i);
+        ER_DEBUG("Cluster %lu reports no convergence\n", i);
         ret = false;
       }
     } /* for(i..) */
