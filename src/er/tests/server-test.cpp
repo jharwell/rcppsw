@@ -32,7 +32,8 @@
  ******************************************************************************/
 class test_client : public rcppsw::er::client<test_client> {
 public:
-  explicit test_client(const std::string& er_parent) : ER_CLIENT_INIT(er_parent) {
+  explicit test_client(const std::string &er_parent)
+      : ER_CLIENT_INIT(er_parent) {
 
     /* Test if you get anything */
     ER_FATAL("This is fatal");

@@ -50,15 +50,14 @@ NS_START(rcppsw, kmeans);
 template <typename T>
 class cluster_algorithm : public er::client<cluster_algorithm<T>> {
  public:
-  cluster_algorithm(const std::string& er_parent,
-                    std::size_t n_iterations,
+  cluster_algorithm(std::size_t n_iterations,
                     std::size_t n_clusters,
                     std::size_t n_threads,
                     std::size_t dimension,
                     std::size_t n_points,
                     const std::string& clusters_fname,
                     const std::string& centroids_fname)
-      : ER_CLIENT_INIT(er_parent),
+      : ER_CLIENT_INIT("rcppsw.kmeans.cluster_algorithm"),
         m_n_iterations(n_iterations),
         m_n_clusters(n_clusters),
         m_n_threads(n_threads),

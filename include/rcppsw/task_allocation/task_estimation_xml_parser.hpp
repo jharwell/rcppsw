@@ -45,12 +45,10 @@ NS_START(rcppsw, task_allocation);
  * @brief Parses XML parameters for relating to task estimation (duration,
  * etc.).
  */
-class task_estimation_xml_parser: public rcppsw::params::xml_param_parser,
-                                  public er::client<task_estimation_xml_parser> {
+class task_estimation_xml_parser: public rcppsw::params::xml_param_parser {
  public:
-  task_estimation_xml_parser(const std::string& er_parent, uint level)
-      : xml_param_parser(er_parent, level),
-        ER_CLIENT_INIT(er_parent) {}
+  explicit task_estimation_xml_parser(uint level)
+      : xml_param_parser(level) {}
 
   /**
    * @brief The root tag that all task task_estimation parameters should lie

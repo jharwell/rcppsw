@@ -56,8 +56,8 @@ namespace factory = rcppsw::patterns::factory;
  */
 class xml_param_repository {
  public:
-  explicit xml_param_repository(const std::string& er_parser_parent)
-      : mc_er_parser_parent(er_parser_parent), m_parsers(), m_param_types(), m_factory() {}
+  xml_param_repository(void)
+      : m_parsers(), m_param_types(), m_factory() {}
 
   /**
    * @brief Call the \ref xml_param_parser::parse() function on all parsers
@@ -109,7 +109,7 @@ class xml_param_repository {
   template <typename T, typename S>
   void register_parser(const std::string& name, uint level_in) {
     m_factory.register_type<T, decltype(level_in)>(name);
-    m_parsers[name] = m_factory.create(name, mc_er_parser_parent, level_in).get();
+    m_parsers[name] = m_factory.create(name, level_in).get();
     std::type_index i(typeid(S));
     m_param_types[i] = name;
   }
@@ -126,7 +126,7 @@ class xml_param_repository {
   template <typename T>
   void register_parser(const std::string& name, uint level_in) {
     m_factory.register_type<T, decltype(level_in)>(name);
-    m_parsers[name] = m_factory.create(name, mc_er_parser_parent, level_in).get();
+    m_parsers[name] = m_factory.create(name, level_in).get();
   }
 
   /**
@@ -138,11 +138,9 @@ class xml_param_repository {
 
  private:
   // clang-format off
-  const std::string                                mc_er_parser_parent;
   std::map<std::string, xml_param_parser*>         m_parsers;
   std::map<std::type_index, std::string>           m_param_types;
   factory::sharing_factory<xml_param_parser,
-                           const std::string&,
                            uint>                   m_factory;
   // clang-format on
 };

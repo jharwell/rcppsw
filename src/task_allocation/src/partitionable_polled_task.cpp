@@ -33,12 +33,11 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 partitionable_polled_task::partitionable_polled_task(
-    const std::string& er_parent,
     const std::string &name,
     const struct partitionable_task_params *const c_params,
     std::unique_ptr<taskable> mechanism)
     : polled_task(name, c_params, std::move(mechanism)),
-      partitionable_task(er_parent, c_params) {}
+      partitionable_task(c_params) {}
 
 void partitionable_polled_task::init_random(const polled_task *const partition,
                                             int lb, int ub) {

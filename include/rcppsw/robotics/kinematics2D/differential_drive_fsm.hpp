@@ -58,8 +58,7 @@ class differential_drive_fsm : public state_machine::simple_fsm {
    *                      heading that will not trigger a hard (in place) turn.
    * @param list List of handles to actuator devices.
    */
-  differential_drive_fsm(const std::string& er_parent,
-                         double max_speed,
+  differential_drive_fsm(double max_speed,
                          argos::CRadians soft_turn_max);
 
   /*

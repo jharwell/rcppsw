@@ -34,9 +34,8 @@ NS_START(rcppsw, params);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-xml_param_parser::xml_param_parser(const std::string& er_parent,
-                                   uint level)
-    : ER_CLIENT_INIT(er_parent), m_level(level) {}
+xml_param_parser::xml_param_parser(uint level)
+    : ER_CLIENT_INIT("rcppsw.params"), m_level(level) {}
 
 /*******************************************************************************
  * Member Functions
@@ -63,7 +62,7 @@ ticpp::Element &xml_param_parser::get_node(ticpp::Element &node,
                                            const std::string &tag) {
   ticpp::Iterator<ticpp::Element> it(tag);
   it = it.begin(&node);
-  ER_ASSERT(it != nullptr, "FATAL: no tag %s found in node %s", tag.c_str(),
+  ER_ASSERT(it != nullptr, "no tag %s found in node %s", tag.c_str(),
             node.Value().c_str());
   return *it;
 } /* get_node() */

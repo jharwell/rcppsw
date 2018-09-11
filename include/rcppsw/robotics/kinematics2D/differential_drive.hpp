@@ -71,16 +71,14 @@ class differential_drive : public kinematics2D::model,
    *                      heading that will not trigger a hard (in place)
    *                      turn. Only used by \ref kFSMDrive.
    */
-  differential_drive(const std::string& er_parent,
-                     const hal::actuators::differential_drive_actuator& actuator,
+  differential_drive(const hal::actuators::differential_drive_actuator& actuator,
                      drive_type type,
                      double wheel_radius,
                      double axle_length,
                      double max_speed,
                      argos::CRadians soft_turn_max);
 
-  differential_drive(const std::string& er_parent,
-                     const hal::actuators::differential_drive_actuator& actuator,
+  differential_drive(const hal::actuators::differential_drive_actuator& actuator,
                      drive_type type,
                      double wheel_radius,
                      double axle_length,

@@ -45,8 +45,7 @@ NS_START(rcppsw, task_allocation);
  */
 class partitionable_polled_task : public polled_task, public partitionable_task {
  public:
-  partitionable_polled_task(const std::string& er_parent,
-                            const std::string& name,
+  partitionable_polled_task(const std::string& name,
                             const struct partitionable_task_params* c_params,
                             std::unique_ptr<taskable> mechanism);
 

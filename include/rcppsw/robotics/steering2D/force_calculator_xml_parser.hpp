@@ -55,14 +55,13 @@ class force_calculator_xml_parser : public rcppsw::params::xml_param_parser {
  public:
   static constexpr char kXMLRoot[] = "steering2D";
 
-  force_calculator_xml_parser(const std::string& er_parent,
-                              uint level)
-      : xml_param_parser(er_parent, level),
+  explicit force_calculator_xml_parser(uint level)
+      : xml_param_parser(level),
         m_params(),
-        m_avoidance(er_parent, level + 1),
-        m_arrival(er_parent, level + 1),
-        m_wander(er_parent, level + 1),
-        m_polar(er_parent, level + 1) {}
+        m_avoidance(level + 1),
+        m_arrival(level + 1),
+        m_wander(level + 1),
+        m_polar(level + 1) {}
 
   void parse(const ticpp::Element& node) override;
   void show(std::ostream& stream) const override;

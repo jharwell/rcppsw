@@ -36,16 +36,14 @@ NS_START(rcppsw, metrics, tasks);
  * Constructors/Destructor
  ******************************************************************************/
 bifurcating_tab_metrics_collector::bifurcating_tab_metrics_collector(
-    const std::string& ofname,
-    uint interval)
-    : base_metrics_collector(ofname, interval),
-      m_stats() {}
+    const std::string &ofname, uint interval)
+    : base_metrics_collector(ofname, interval), m_stats() {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-std::string bifurcating_tab_metrics_collector::csv_header_build(
-    const std::string& header) {
+std::string
+bifurcating_tab_metrics_collector::csv_header_build(const std::string &header) {
   // clang-format off
   std::string line = base_metrics_collector::csv_header_build(header);
   return line +
@@ -68,8 +66,8 @@ void bifurcating_tab_metrics_collector::reset(void) {
 } /* reset() */
 
 void bifurcating_tab_metrics_collector::collect(
-    const rcppsw::metrics::base_metrics& metrics) {
-  auto& m = dynamic_cast<const bifurcating_tab_metrics&>(metrics);
+    const rcppsw::metrics::base_metrics &metrics) {
+  auto &m = dynamic_cast<const bifurcating_tab_metrics &>(metrics);
   if (m.employed_partitioning()) {
     ++m_stats.int_partition_count;
     ++m_stats.cum_partition_count;
@@ -86,26 +84,31 @@ void bifurcating_tab_metrics_collector::collect(
   m_stats.cum_task_sw_count += static_cast<uint>(m.task_changed());
 } /* collect() */
 
-bool bifurcating_tab_metrics_collector::csv_line_build(std::string& line) {
+bool bifurcating_tab_metrics_collector::csv_line_build(std::string &line) {
   if (!((timestep() + 1) % interval() == 0)) {
     return false;
   }
 
-  line += std::to_string(m_stats.int_subtask1_count) +  separator();
+  line += std::to_string(m_stats.int_subtask1_count) + separator();
   line += std::to_string(m_stats.cum_subtask1_count /
-                         static_cast<double>(timestep() + 1)) +  separator();
-  line += std::to_string(m_stats.int_subtask2_count) +  separator();
+                         static_cast<double>(timestep() + 1)) +
+          separator();
+  line += std::to_string(m_stats.int_subtask2_count) + separator();
   line += std::to_string(m_stats.cum_subtask2_count /
-                         static_cast<double>(timestep() + 1)) +  separator();
-  line += std::to_string(m_stats.int_partition_count) +  separator();
+                         static_cast<double>(timestep() + 1)) +
+          separator();
+  line += std::to_string(m_stats.int_partition_count) + separator();
   line += std::to_string(m_stats.cum_partition_count /
-                         static_cast<double>(timestep() + 1)) +  separator();
-  line += std::to_string(m_stats.int_no_partition_count) +  separator();
+                         static_cast<double>(timestep() + 1)) +
+          separator();
+  line += std::to_string(m_stats.int_no_partition_count) + separator();
   line += std::to_string(m_stats.cum_no_partition_count /
-                         static_cast<double>(timestep() + 1)) +  separator();
-  line += std::to_string(m_stats.int_task_sw_count) +  separator();
+                         static_cast<double>(timestep() + 1)) +
+          separator();
+  line += std::to_string(m_stats.int_task_sw_count) + separator();
   line += std::to_string(m_stats.cum_task_sw_count /
-                         static_cast<double>(timestep() + 1)) +  separator();
+                         static_cast<double>(timestep() + 1)) +
+          separator();
   return true;
 } /* store_foraging_stats() */
 

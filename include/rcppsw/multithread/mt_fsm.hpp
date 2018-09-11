@@ -46,10 +46,9 @@ namespace sm = patterns::state_machine;
  */
 class mt_fsm : patterns::state_machine::base_fsm {
  public:
-  mt_fsm(const std::string& er_parent,
-         uint8_t max_states,
+  mt_fsm(uint8_t max_states,
          uint8_t initial_state = 0)
-      : base_fsm(er_parent, max_states, initial_state),
+      : base_fsm(max_states, initial_state),
         m_mutex() {}
 
   ~mt_fsm(void) override = default;

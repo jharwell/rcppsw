@@ -81,7 +81,7 @@ class tdgraph : public er::client<tdgraph> {
   static polled_task* vertex_parent(const tdgraph& graph,
                                     const polled_task* node);
 
-  explicit tdgraph(const std::string& er_parent);
+  tdgraph(void);
   virtual ~tdgraph(void);
   tdgraph(const tdgraph& other) = delete;
   tdgraph& operator=(const tdgraph& other) = delete;

@@ -52,7 +52,7 @@ class bifurcating_tdgraph_executive;
 class bifurcating_tdgraph : public tdgraph,
                             public er::client<bifurcating_tdgraph> {
  public:
-  explicit bifurcating_tdgraph(const std::string& er_parent);
+  bifurcating_tdgraph(void);
 
   bifurcating_tdgraph(const bifurcating_tdgraph& other) = delete;
   bifurcating_tdgraph& operator=(const bifurcating_tdgraph& other) = delete;

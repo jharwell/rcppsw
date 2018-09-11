@@ -40,16 +40,14 @@ NS_START(rcppsw, metrics, tasks);
  * Constructors/Destructor
  ******************************************************************************/
 execution_metrics_collector::execution_metrics_collector(
-    const std::string& ofname,
-    uint interval)
-    : base_metrics_collector(ofname, interval),
-      m_stats() {}
+    const std::string &ofname, uint interval)
+    : base_metrics_collector(ofname, interval), m_stats() {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-std::string execution_metrics_collector::csv_header_build(
-    const std::string& header) {
+std::string
+execution_metrics_collector::csv_header_build(const std::string &header) {
   // clang-format off
   return base_metrics_collector::csv_header_build(header) +
       "int_avg_exec_time" + separator() +
@@ -69,8 +67,8 @@ void execution_metrics_collector::reset(void) {
 } /* reset() */
 
 void execution_metrics_collector::collect(
-    const rcppsw::metrics::base_metrics& metrics) {
-  auto& m = dynamic_cast<const execution_metrics&>(metrics);
+    const rcppsw::metrics::base_metrics &metrics) {
+  auto &m = dynamic_cast<const execution_metrics &>(metrics);
   assert(m.task_completed() || m.task_aborted());
   assert(!(m.task_completed() && m.task_aborted()));
 
@@ -95,39 +93,45 @@ void execution_metrics_collector::collect(
   m_stats.cum_exec_time += m.task_last_exec_time();
 } /* collect() */
 
-bool execution_metrics_collector::csv_line_build(std::string& line) {
+bool execution_metrics_collector::csv_line_build(std::string &line) {
   if (!((timestep() + 1) % interval() == 0)) {
     return false;
   }
 
-  line += (m_stats.int_complete_count + m_stats.int_abort_count > 0) ?
-          std::to_string(m_stats.int_exec_time /
-                         static_cast<double>(m_stats.int_complete_count +
-                                             m_stats.int_abort_count)) :"0";
+  line += (m_stats.int_complete_count + m_stats.int_abort_count > 0)
+              ? std::to_string(m_stats.int_exec_time /
+                               static_cast<double>(m_stats.int_complete_count +
+                                                   m_stats.int_abort_count))
+              : "0";
   line += separator();
-  line += (m_stats.cum_complete_count + m_stats.cum_abort_count > 0) ?
-          std::to_string(m_stats.cum_exec_time /
-                         static_cast<double>(m_stats.cum_complete_count +
-                                             m_stats.cum_abort_count)) :"0";
+  line += (m_stats.cum_complete_count + m_stats.cum_abort_count > 0)
+              ? std::to_string(m_stats.cum_exec_time /
+                               static_cast<double>(m_stats.cum_complete_count +
+                                                   m_stats.cum_abort_count))
+              : "0";
   line += separator();
 
-  line += (m_stats.int_complete_count + m_stats.int_abort_count > 0) ?
-          std::to_string(m_stats.int_interface_time /
-                         static_cast<double>(m_stats.int_complete_count +
-                                             m_stats.int_abort_count)) :"0";
+  line += (m_stats.int_complete_count + m_stats.int_abort_count > 0)
+              ? std::to_string(m_stats.int_interface_time /
+                               static_cast<double>(m_stats.int_complete_count +
+                                                   m_stats.int_abort_count))
+              : "0";
   line += separator();
-  line += (m_stats.cum_complete_count + m_stats.cum_abort_count > 0) ?
-          std::to_string(m_stats.cum_interface_time /
-                         static_cast<double>(m_stats.cum_complete_count +
-                                             m_stats.cum_abort_count)) :"0";
+  line += (m_stats.cum_complete_count + m_stats.cum_abort_count > 0)
+              ? std::to_string(m_stats.cum_interface_time /
+                               static_cast<double>(m_stats.cum_complete_count +
+                                                   m_stats.cum_abort_count))
+              : "0";
   line += separator();
 
   line += std::to_string(m_stats.int_abort_count) + separator();
   line += std::to_string(m_stats.cum_abort_count /
-                         static_cast<double>(timestep() + 1)) + separator();
+                         static_cast<double>(timestep() + 1)) +
+          separator();
   line += std::to_string(m_stats.int_complete_count) + separator();
   line += std::to_string(m_stats.cum_complete_count /
-                         static_cast<double>(timestep() + 1)) + separator();
+                         static_cast<double>(timestep() + 1)) +
+          separator();
 
   return true;
 } /* store_foraging_stats() */

@@ -53,13 +53,11 @@ class base_executive : public rcppsw::er::client<base_executive> {
   /**
    * @brief Creates the base executive.
    *
-   * @param er_parent Name of parent logger.
    * @param graph Graph to manage. Takes ownership of the object (can't use the
    *              language to communicate that with unique_ptr because of
    *              casting reasons).
    */
-  base_executive(const std::string& er_parent,
-                 tdgraph* graph);
+  base_executive(tdgraph* graph);
   ~base_executive(void) override;
 
   base_executive& operator=(const base_executive& other) = delete;

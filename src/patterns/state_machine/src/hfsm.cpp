@@ -32,9 +32,9 @@ NS_START(rcppsw, patterns, state_machine);
  * Member Functions
  ******************************************************************************/
 void hfsm::state_engine_step(const state_map_row *const c_row) {
-  ER_ASSERT(nullptr != c_row->state(), "FATAL: null state?");
+  ER_ASSERT(nullptr != c_row->state(), "null state?");
   ER_TRACE("Invoking state action: state%d, data=%p", current_state(),
-         reinterpret_cast<const void *>(event_data_get()));
+           reinterpret_cast<const void *>(event_data_get()));
   auto *state = static_cast<const hfsm_state *>(c_row->state());
   int rval = event_signal::UNHANDLED;
   while (rval != event_signal::HANDLED) {
@@ -57,9 +57,9 @@ void hfsm::state_engine_step(const state_map_row *const c_row) {
 } /* state_engine_step() */
 
 void hfsm::state_engine_step(const state_map_ex_row *const c_row_ex) {
-  ER_ASSERT(nullptr != c_row_ex->state(), "FATAL: null state?");
+  ER_ASSERT(nullptr != c_row_ex->state(), "null state?");
   ER_TRACE("Invoking state action: state%d, data=%p", current_state(),
-         reinterpret_cast<const void *>(event_data_get()));
+           reinterpret_cast<const void *>(event_data_get()));
   auto *state = static_cast<const hfsm_state *>(c_row_ex->state());
   int rval = event_signal::UNHANDLED;
   while (rval != event_signal::HANDLED) {
@@ -92,7 +92,7 @@ void hfsm::change_parent(uint8_t state,
   auto *row_ex = state_map_ex(state);
 
   ER_ASSERT(!(nullptr == row && nullptr == row_ex),
-            "FATAL: Both state maps are NULL!");
+            "Both state maps are NULL!");
 
   if (nullptr != row) {
     auto *self = static_cast<hfsm_state *>(row->state());

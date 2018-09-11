@@ -58,8 +58,7 @@ struct force_calculator_params;
  */
 class force_calculator : public er::client<force_calculator> {
  public:
-  force_calculator(const std::string& er_parent,
-                   boid& entity,
+  force_calculator(boid& entity,
                    const struct force_calculator_params* params);
 
   /**

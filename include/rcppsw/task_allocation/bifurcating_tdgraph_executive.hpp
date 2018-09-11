@@ -51,8 +51,7 @@ class bifurcating_tdgraph_executive : public base_executive,
   using alloc_notify_cb = std::function<void(const polled_task*,
                                              const bifurcating_tab*)>;
 
-  bifurcating_tdgraph_executive(const std::string& er_parent,
-                                bifurcating_tdgraph* graph);
+  bifurcating_tdgraph_executive(bifurcating_tdgraph* graph);
 
   void run(void) override;
 

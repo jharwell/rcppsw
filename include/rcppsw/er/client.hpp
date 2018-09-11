@@ -30,6 +30,10 @@
 #include <log4cxx/logger.h>
 #include <log4cxx/patternlayout.h>
 #include <log4cxx/fileappender.h>
+#include <log4cxx/consoleappender.h>
+#include <log4cxx/xml/domconfigurator.h>
+#include <log4cxx/ndc.h>
+
 #include <cassert>
 #include <string>
 #include "rcppsw/common/common.hpp"
@@ -183,8 +187,30 @@
 #define ER_FATAL_SENTINEL(msg, ...)
 #endif
 
-#define ER_CLIENT_INIT(parent) \
-  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>(parent)
+/**
+ * @def ER_CLIENT_INIT(name)
+ *
+ * Initialize a logging client with the specified name (easier to do a macro
+ * than to have to try do the casting every single type).
+ */
+#define ER_CLIENT_INIT(name)                                         \
+  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>(name)
+
+/**
+ * @def ER_NDC_PUSH(s)
+ *
+ * Push the specified NDC context (prepended to every message).
+ */
+#define ER_NDC_PUSH(s) \
+  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>::push_ndc(s)
+
+/**
+ * @def ER_NDC_POP()
+ *
+ * Pop the last pushed NDC context.
+ */
+#define ER_NDC_POP(...)                                                  \
+  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>::pop_ndc()
 
 /*******************************************************************************
  * Namespaces
@@ -199,22 +225,65 @@ NS_START(rcppsw, er);
  * @ingroup er
  *
  * @brief A class that can connect to a logging server for logging of important
- * events.
+ * events. Basically a thin wrapper around log4cxx.
  */
-template<class T>
+template<typename T>
 class client {
  public:
-  explicit client(const std::string& parent) :
-      m_logger(log4cxx::Logger::getLogger(parent + "." +
-                                          abi::__cxa_demangle(typeid(T).name(),
-                                                              nullptr,
-                                                              nullptr,
-                                                              nullptr))) {}
-  void change_logfile(const std::string& name) {
+  /**
+   * @brief Initialize logging by specifying the path to the log4cxx
+   * configuration file.
+   */
+  static void init_logging(const std::string& fpath) {
+    log4cxx::xml::DOMConfigurator::configure(fpath);
+  }
+
+  /**
+   * @brief Set the log file for the specified logger. Not idempotent.
+   */
+  static void set_logfile(log4cxx::LoggerPtr logger, const std::string& name) {
+    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout("%x [%-5p] %c %l - %m%n");
+    log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout, name);
+    logger->addAppender(appender);
+  }
+
+  /**
+   * @param name Name of client/new logger.
+   */
+  explicit client(const std::string& name)
+      : m_logger(log4cxx::Logger::getLogger(name)) {}
+
+  /**
+   * @brief Set the logfile of the current logger. Not idempotent.
+   */
+  void set_logfile(const std::string& name) {
     log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(mc_layout);
     log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout, name);
     logger()->addAppender(appender);
   }
+
+  /**
+   * @brief Get current logger name.
+   */
+  std::string logger_name(void) const {
+    std::string name;
+    m_logger->getName(name);
+    return name;
+  }
+
+
+  /**
+   * @brief Push a log4cxx NDC context.
+   *
+   * @param s The context.
+   */
+  void push_ndc(const std::string& s) { log4cxx::NDC::push(s); }
+
+  /**
+   * @brief Pop the top of the log4cxx NDC stack.
+   */
+  void pop_ndc() { log4cxx::NDC::pop(); }
+
   virtual ~client(void) = default;
 
   /**
@@ -224,8 +293,8 @@ class client {
 
  private:
   // clang-format off
-  const std::string mc_layout{"%r [%-5p] %c{10} %l - %m%n"};
-  log4cxx::LoggerPtr m_logger;
+  const std::string mc_layout{"%x [%-5p] %c %l - %m%n"};
+log4cxx::LoggerPtr m_logger{};
   // clang-format on
 };
 

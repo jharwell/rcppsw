@@ -46,22 +46,21 @@ template <typename T>
 class cluster_pthread : public cluster_algorithm<T>,
                         public er::client<cluster_pthread<T>> {
  public:
-  cluster_pthread(const std::string& er_parent,
-                  std::size_t n_iterations,
+  cluster_pthread(std::size_t n_iterations,
                   std::size_t n_clusters,
                   std::size_t n_threads,
                   std::size_t dimension,
                   std::size_t n_points,
                   const std::string& m_clustersfname,
                   const std::string& centroids_fname)
-      : cluster_algorithm<T>(er_parent, n_iterations,
+      : cluster_algorithm<T>(n_iterations,
                              n_clusters,
                              n_threads,
                              dimension,
                              n_points,
                              m_clustersfname,
                              centroids_fname),
-    ER_CLIENT_INIT(er_parent),
+    ER_CLIENT_INIT("rcppsw.kmeans.cluster_pthread"),
         m_workers() {
     std::size_t data_chunk_size = n_points / n_threads;
     std::size_t centers_chunk_size = n_clusters / n_threads;

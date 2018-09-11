@@ -46,9 +46,8 @@ NS_START(rcppsw, task_allocation);
  */
 class task_partition_xml_parser: public rcppsw::params::xml_param_parser {
  public:
-  explicit task_partition_xml_parser(const std::string& er_parent,
-                                     uint level)
-      : xml_param_parser(er_parent + "." + typeid(*this).name(), level) {}
+  explicit task_partition_xml_parser(uint level)
+      : xml_param_parser(level) {}
 
   /**
    * @brief The root tag that all task task_partition parameters should lie

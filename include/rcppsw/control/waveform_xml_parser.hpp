@@ -45,8 +45,8 @@ NS_START(rcppsw, control);
  */
 class waveform_xml_parser : public rcppsw::params::xml_param_parser {
  public:
-  waveform_xml_parser(const std::string& er_parent, uint level)
-      : xml_param_parser(er_parent, level),
+  explicit waveform_xml_parser(uint level)
+      : xml_param_parser(level),
         m_params() {}
 
   /**

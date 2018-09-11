@@ -32,13 +32,12 @@ NS_START(rcppsw, robotics, steering2D);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-force_calculator::force_calculator(const std::string& er_parent,
-                                   boid &entity,
+force_calculator::force_calculator(boid &entity,
                                    const struct force_calculator_params *params)
-    : ER_CLIENT_INIT(er_parent),
-      m_entity(entity),
-      m_avoidance_force(&params->avoidance), m_arrival_force(&params->arrival),
-      m_wander_force(&params->wander), m_polar_force(&params->polar) {}
+    : ER_CLIENT_INIT("rcppsw.robotics.steering2D.force_calculate"),
+      m_entity(entity), m_avoidance_force(&params->avoidance),
+      m_arrival_force(&params->arrival), m_wander_force(&params->wander),
+      m_polar_force(&params->polar) {}
 
 /*******************************************************************************
  * Member Functions
@@ -61,28 +60,28 @@ force_calculator::to_twist(const argos::CVector2 &force) const {
 void force_calculator::seek_through(const argos::CVector2 &target) {
   argos::CVector2 force = m_seek_force(m_entity, target);
   ER_DEBUG("Seek force: (%f, %f)@%f [%f]", force.GetX(), force.GetY(),
-          force.Angle().GetValue(), force.Length());
+           force.Angle().GetValue(), force.Length());
   accum_force(force);
 } /* seek_through() */
 
 void force_calculator::seek_to(const argos::CVector2 &target) {
   argos::CVector2 force = m_arrival_force(m_entity, target);
   ER_DEBUG("Arrival force: (%f, %f)@%f [%f]", force.GetX(), force.GetY(),
-          force.Angle().GetValue(), force.Length());
+           force.Angle().GetValue(), force.Length());
   accum_force(force);
 } /* seek_to() */
 
 void force_calculator::wander(void) {
   argos::CVector2 force = m_wander_force(m_entity);
   ER_DEBUG("Wander force: (%f, %f)@%f [%f]", force.GetX(), force.GetY(),
-          force.Angle().GetValue(), force.Length());
+           force.Angle().GetValue(), force.Length());
   accum_force(force);
 } /* wander() */
 
 void force_calculator::avoidance(const argos::CVector2 &closest_obstacle) {
   argos::CVector2 force = m_avoidance_force(m_entity, closest_obstacle);
   ER_DEBUG("Avoidance force: (%f, %f)@%f [%f]", force.GetX(), force.GetY(),
-          force.Angle().GetValue(), force.Length());
+           force.Angle().GetValue(), force.Length());
   accum_force(force);
 } /* avoidance() */
 

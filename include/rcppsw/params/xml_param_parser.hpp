@@ -60,7 +60,7 @@ struct base_params;
  */
 class xml_param_parser : public er::client<xml_param_parser> {
  public:
-  xml_param_parser(const std::string& er_parent, uint level);
+  explicit xml_param_parser(uint level);
   virtual ~xml_param_parser(void) = default;
 
   static constexpr uint kColumnWidth = 100;

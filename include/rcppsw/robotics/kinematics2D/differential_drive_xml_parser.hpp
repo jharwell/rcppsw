@@ -54,10 +54,8 @@ class differential_drive_xml_parser : public rcppsw::params::xml_param_parser {
    */
   static constexpr char kXMLRoot[] = "differential_drive";
 
-  explicit differential_drive_xml_parser(const std::string& er_parent,
-                                         uint level)
-      : xml_param_parser(er_parent + "." + typeid(*this).name(),
-                         level) {}
+  explicit differential_drive_xml_parser(uint level)
+      : xml_param_parser(level) {}
 
   void parse(const ticpp::Element& node) override;
   void show(std::ostream& stream) const override;

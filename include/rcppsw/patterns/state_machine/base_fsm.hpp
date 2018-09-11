@@ -54,11 +54,11 @@ NS_START(rcppsw, patterns, state_machine);
  */
 class base_fsm : public er::client<base_fsm> {
  public:
-  base_fsm(const std::string& er_parent,
-           uint8_t max_states,
+  base_fsm(uint8_t max_states,
            uint8_t initial_state = 0);
-
+  base_fsm(const base_fsm& other);
   ~base_fsm(void) override = default;
+
   base_fsm& operator=(const base_fsm& other) = delete;
 
   /**
@@ -188,7 +188,7 @@ class base_fsm : public er::client<base_fsm> {
  private:
   void state_engine_map(void);
   void state_engine_map_ex(void);
-  void event_data_set(std::unique_ptr<const event_data>& event_data) {
+  void event_data_set(std::unique_ptr<const event_data> event_data) {
     m_event_data = std::move(event_data);
   }
 
