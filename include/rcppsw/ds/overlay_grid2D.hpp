@@ -41,15 +41,28 @@ NS_START(rcppsw, ds);
  * @brief A 2D logical grid overlayed over a continuous environment using a
  * \a contiguous array of the template parameter type.
  *
- * As such, the template type must have must have a zero parameter constructor
- * available or it won't compile.
+ * @tparam T The type of the grid element (probably a cell of some kind). Must
+ * have must have a zero parameter constructor available or it won't compile
+ * (this is a limitation of the boost underneath). Furthermore, T must also have
+ * a copy constructor available, as move semantics are not supported with the
+ * underlying library.
  */
 template <typename T>
 class overlay_grid2D : public base_overlay_grid2D<T> {
  public:
   using base_overlay_grid2D<T>::xdsize;
   using base_overlay_grid2D<T>::ydsize;
-  overlay_grid2D(double resolution, size_t x_max, size_t y_max)
+
+  /**
+   * @param resolution The discretization unit for the grid.
+   * @param x_max The real size in X, which will be discretized into
+   * X/resolution discrete elements along the X dimension.
+   * @param y_max The real size in Y, which will be discretized into
+   * Y/resolution discrete elements along the X dimension.
+   *
+   * @return
+   */
+  overlay_grid2D(double resolution, double x_max, double y_max)
       : base_overlay_grid2D<T>(resolution, x_max, y_max),
       m_cells(boost::extents[xdsize()][ydsize()]) {}
 
@@ -83,12 +96,12 @@ class overlay_grid2D : public base_overlay_grid2D<T> {
    * getting a 2 x 2 subgrid centered at 0 with the out-of-bounds elements
    * zeroed, you will get a 1 x 2 subgrid.
    *
-   * @return The grid.
+   * The 4 parameters specify the 4 corners of the subgrid in terms of the
+   * indices of the grid the subgrid is being drawn from.
+   *
+   * @return The subgrid.
    */
-  grid_view<T> subgrid(size_t x_min,
-                        size_t y_min,
-                        size_t x_max,
-                        size_t y_max) {
+  grid_view<T> subgrid(size_t x_min, size_t y_min, size_t x_max, size_t y_max) {
     typename grid_type<T>::index_gen indices;
 
     index_range x(x_min, x_max, 1);
@@ -97,12 +110,18 @@ class overlay_grid2D : public base_overlay_grid2D<T> {
   }
 
   grid_view<T> subgrid(size_t x_min,
-                        size_t y_min,
-                        size_t x_max,
-                        size_t y_max) const {
+                       size_t y_min,
+                       size_t x_max,
+                       size_t y_max) const {
     return const_cast<overlay_grid2D<T>*>(this)->subgrid(x_min, y_min,
                                                          x_max, y_max);
   }
+
+  /**
+   * @brief Get a reference to a the cell within the grid at coordinates (i, j)
+   *
+   * @return Reference to the cell, of type T.
+   */
   T& access(size_t i, size_t j) override {
     return m_cells[static_cast<index_range::index>(i)]
                   [static_cast<index_range::index>(j)];

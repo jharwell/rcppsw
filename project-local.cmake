@@ -99,6 +99,7 @@ endforeach()
 set(${target}_LIBRARIES
   rcsw
   ticpp
+  log4cxx
   ${Boost_LIBRARIES}
   )
 set(${target_LIBRARY_DIRS} ${rcsw_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS})

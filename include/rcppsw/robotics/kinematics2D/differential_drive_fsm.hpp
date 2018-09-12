@@ -26,6 +26,8 @@
  ******************************************************************************/
 #include <argos3/core/utility/math/vector2.h>
 #include <utility>
+#include <string>
+
 #include "rcppsw/patterns/state_machine/simple_fsm.hpp"
 
 /*******************************************************************************

@@ -49,12 +49,15 @@ NS_START(rcppsw, ds);
  * contiguous. The layers are 0 indexed.
  *
  * This was implemented because the BGL only appears to support layered
- * graphs/grids of the same object type.
+ * graphs/grids of the same object type. Although in hindsight I could have done
+ * this with grid_graph and boost::variant (was not aware of this when I
+ * implemented this class). Might not have been as highly performing in that
+ * case though.
  */
 template<typename TupleTypes>
 class stacked_grid {
  public:
-  stacked_grid(double resolution, size_t x_max, size_t y_max)
+  stacked_grid(double resolution, double x_max, double y_max)
       : m_layers(kStackSize) {
     add_layers<kStackSize - 1>(resolution, x_max, y_max);
   }
@@ -134,7 +137,7 @@ class stacked_grid {
   /**
    * @see \ref base_overlay_grid2D::xrsize().
    */
-  size_t xrsize(void) const {
+  double xrsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xrsize();
   }
 
@@ -148,7 +151,7 @@ class stacked_grid {
   /**
    * @see \ref base_overlay_grid2D::yrsize().
    */
-  size_t yrsize(void) const {
+  double yrsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->yrsize();
   }
 

@@ -41,7 +41,10 @@ exist in Boost, or that build on what boost provides. Includes such things as:
 
 2. Install the following libraries:
 
-   - boost 1.58
+   - boost >= 1.58 (`libboost-all-dev` on ubuntu)
+   - log4cxx (`liblog4cxx-dev` on ubuntu)
+   - catch (`catch` on ubuntu)
+   - graphviz (`graphviz` on ubuntu)
 
 ## Post-cloning
 

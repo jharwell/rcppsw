@@ -33,8 +33,7 @@ NS_START(rcppsw, robotics, steering2D);
  * Constructors/Destructor
  ******************************************************************************/
 arrival_force::arrival_force(const struct arrival_force_params *const params)
-    : mc_max(params->max),
-      mc_slowing_speed_min(params->slowing_speed_min),
+    : mc_max(params->max), mc_slowing_speed_min(params->slowing_speed_min),
       mc_slowing_radius(params->slowing_radius) {}
 
 /*******************************************************************************
@@ -65,7 +64,7 @@ argos::CVector2 arrival_force::operator()(const boid &entity,
   angle_diff = std::atan2(std::sin(angle_diff), std::cos(angle_diff));
 
   if (std::fabs(angle_diff - m_last_angle) > M_PI) {
-    angle_diff -= std::copysign(2*M_PI, angle_diff);
+    angle_diff -= std::copysign(2 * M_PI, angle_diff);
   }
   m_last_angle = angle_diff;
   argos::CVector2 arrival(desired.Length(), angle_diff);

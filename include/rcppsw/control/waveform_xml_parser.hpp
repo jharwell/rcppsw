@@ -45,9 +45,9 @@ NS_START(rcppsw, control);
  */
 class waveform_xml_parser : public rcppsw::params::xml_param_parser {
  public:
-  waveform_xml_parser(std::shared_ptr<rcppsw::er::server> server,
-                      uint level)
-      : xml_param_parser(server, level), m_params() {}
+  explicit waveform_xml_parser(uint level)
+      : xml_param_parser(level),
+        m_params() {}
 
   /**
    * @brief The XML tag that all parameters should appear under.

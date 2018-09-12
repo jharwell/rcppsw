@@ -25,23 +25,23 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 #include "rcppsw/er/client.hpp"
-#include "rcppsw/er/server.hpp"
+#include <log4cxx/basicconfigurator.h>
 
 /*******************************************************************************
  * Test Classes
  ******************************************************************************/
-class test_client : public rcppsw::er::client {
+class test_client : public rcppsw::er::client<test_client> {
 public:
-  test_client(std::shared_ptr<rcppsw::er::server> handle) : client(handle) {
-    server_handle()->insmod(er_id(), "test_module");
-    server_handle()->mod_dbglvl(er_id(), rcppsw::er::er_lvl::NOM);
+  explicit test_client(const std::string &er_parent)
+      : ER_CLIENT_INIT(er_parent) {
 
     /* Test if you get anything */
-    ER_REPORT(rcppsw::er::er_lvl::ERR, "This is an error");
-    ER_REPORT(rcppsw::er::er_lvl::WARN, "This is a warning");
-    ER_REPORT(rcppsw::er::er_lvl::NOM, "This is nominal");
-    ER_REPORT(rcppsw::er::er_lvl::DIAG, "This is a diagnostic");
-    ER_REPORT(rcppsw::er::er_lvl::VER, "This is verbose");
+    ER_FATAL("This is fatal");
+    ER_ERR("This is an error");
+    ER_WARN("This is a warning");
+    ER_INFO("This is nominal");
+    ER_DEBUG("This is a diagnostic");
+    ER_TRACE("This is verbose");
   }
 };
 
@@ -49,7 +49,8 @@ public:
  * Test Cases
  ******************************************************************************/
 CATCH_TEST_CASE("ER Test", "[ER]") {
-  rcppsw::er::server handle;
-  test_client client(std::make_shared<rcppsw::er::server>());
+  test_client client("foobar");
+  client.change_logfile("mine.log");
+  test_client client2("foobar.test_client");
   CATCH_REQUIRE(1);
 }

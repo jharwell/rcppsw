@@ -53,9 +53,8 @@ class arrival_force_xml_parser : public rcppsw::params::xml_param_parser {
  public:
   static constexpr char kXMLRoot[] = "arrival_force";
 
-  explicit arrival_force_xml_parser(const std::shared_ptr<er::server>& server,
-                                    uint level)
-      : xml_param_parser(server, level),
+  explicit arrival_force_xml_parser(uint level)
+      : xml_param_parser(level),
         m_params() {}
 
   void parse(const ticpp::Element& node) override;

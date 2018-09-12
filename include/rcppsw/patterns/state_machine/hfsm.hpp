@@ -25,6 +25,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/patterns/state_machine/base_fsm.hpp"
+#include <string>
+
 #include "rcppsw/patterns/state_machine/hfsm_state.hpp"
 
 /*******************************************************************************
@@ -41,23 +43,23 @@ NS_START(rcppsw, patterns, state_machine);
  *
  * @brief Implements a software-based hierarchical state machine.
  */
-class hfsm : public base_fsm {
+class hfsm : public base_fsm, public er::client<hfsm> {
  public:
   /**
-   * @param server The event reporting server for the state machine.
    * @param max_states The maximum number of state machine states.
    * @param initial_state Initial state machine state.
    */
-  hfsm(const std::shared_ptr<er::server>& server,
-       uint8_t max_states,
+  hfsm(uint8_t max_states,
        uint8_t initial_state = 0)
-      : base_fsm(server, max_states, initial_state), m_top_state(nullptr) {}
+      : base_fsm(max_states, initial_state),
+        ER_CLIENT_INIT("rcppsw.patterns.state_machine.hfsm"),
+        m_top_state(nullptr) {}
 
   ~hfsm() override = default;
 
   void init(void) override {
     ER_ASSERT(initial_state() < event_signal::IGNORED,
-                     "FATAL: Bad initial state");
+                     "Bad initial state");
     base_fsm::init();
   }
 
@@ -87,7 +89,7 @@ class hfsm : public base_fsm {
    * @return Does not return.
    */
   int ST_top_state(void) {
-    ER_FATAL_SENTINEL("FATAL: Top state in HFSM");
+    ER_FATAL_SENTINEL("Top state in HFSM");
     return 0;
   }
   hfsm_state_action0<hfsm, &hfsm::ST_top_state>* top_state(void) {

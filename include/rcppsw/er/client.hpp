@@ -26,61 +26,75 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <cxxabi.h>
+#include <log4cxx/logger.h>
+#include <log4cxx/patternlayout.h>
+#include <log4cxx/fileappender.h>
+#include <log4cxx/consoleappender.h>
+#include <log4cxx/xml/domconfigurator.h>
+#include <log4cxx/ndc.h>
+
 #include <cassert>
 #include <string>
-#include <boost/uuid/uuid.hpp>
-#include "rcppsw/er/server_mod.hpp"
-#include "rcppsw/er/er_msg.hpp"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Macros
  ******************************************************************************/
 #ifndef ER_NREPORT
-/* ---------- Explicit debug level statements (use these) ---------- */
+#define ER_FATAL(...)                                   \
+  {                                                                     \
+   auto logger = rcppsw::er::client<typename std::remove_cv<typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
+   if (logger->isFatalEnabled()) {                                      \
+     ER_REPORT(FATAL, logger, __VA_ARGS__)                              \
+         }                                                              \
+  }
+#define ER_ERR(...)                                   \
+  {                                                                     \
+    auto logger = rcppsw::er::client<typename std::remove_cv<typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
+    if (logger->isErrorEnabled()) {                                      \
+      ER_REPORT(ERROR, logger, __VA_ARGS__)                              \
+          }                                                             \
+  }
 
-/**
- * @def ER_ERR(...)
- *
- * Define a statement reporting the occurence of an \ref er_lvl::ERR
- * event. Works just like printf() from a syntax point of view.
- */
-#define ER_ERR(...) ER_REPORT(rcppsw::er::er_lvl::ERR, __VA_ARGS__)
+#define ER_WARN(...)                                   \
+  {                                                                     \
+   auto logger = rcppsw::er::client<typename std::remove_cv<typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
+   if (logger->isWarnEnabled()) {                                      \
+     ER_REPORT(WARN, logger, __VA_ARGS__)                              \
+         }                                                              \
+  }
+#define ER_INFO(...)                                   \
+  {                                                                     \
+    auto logger = rcppsw::er::client<typename std::remove_cv<typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
+    if (logger->isInfoEnabled()) {                                      \
+      ER_REPORT(INFO, logger, __VA_ARGS__)                              \
+          }                                                             \
+  }
+#define ER_DEBUG(...)                                   \
+  {                                                                     \
+    auto logger = rcppsw::er::client<typename std::remove_cv<typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
+    if (logger->isDebugEnabled()) {                                     \
+      ER_REPORT(DEBUG, logger, __VA_ARGS__)                             \
+          }                                                             \
+  }
+#define ER_TRACE(...)                                   \
+  {                                                                     \
+  auto logger = rcppsw::er::client<typename std::remove_cv<typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
+  if (logger->isTraceEnabled()) {                                       \
+    ER_REPORT(TRACE, logger, __VA_ARGS__)                               \
+        }                                                               \
+  }
+#else
 
-/**
- * @def ER_WARN(...)
- *
- * Define a statement reporting the occurence of an \ref er_lvl::WARN
- * event. Works just like printf() from a syntax point of view.
- */
-#define ER_WARN(...) ER_REPORT(rcppsw::er::er_lvl::WARN, __VA_ARGS__)
+#define ER_FATAL(...)
+#define ER_ERR(...)
+#define ER_WARN(...)
+#define ER_INFO(...)
+#define ER_DEBUG(...)
+#define ER_TRACE(...)
 
-/**
- * @def ER_NOM(...)
- *
- * Define a statement reporting the occurence of an \ref er_lvl::NOM
- * event. Works just like printf() from a syntax point of view.
- */
-#define ER_NOM(...) ER_REPORT(rcppsw::er::er_lvl::NOM, __VA_ARGS__)
-
-/**
- * @def ER_DIAG(...)
- *
- * Define a statement reporting the occurence of an \ref er_lvl::DIAG
- * event. Works just like printf() from a syntax point of view.
- */
-#define ER_DIAG(...) ER_REPORT(rcppsw::er::er_lvl::DIAG, __VA_ARGS__)
-
-/**
- * @def ER_VER(...)
- *
- * Define a statement reporting the occurence of an \ref er_lvl::VER
- * event. Works just like printf() from a syntax point of view.
- */
-#define ER_VER(...) ER_REPORT(rcppsw::er::er_lvl::VER, __VA_ARGS__)
-
-/*
- * -------- Debug statements with level parameter (Don't use these) --------
- */
+#endif /* ER_NREPORT */
 
 /**
  * @def ER_REPORT(lvl, msg, ...)
@@ -89,34 +103,15 @@
  * level. \a msg is the format string, and \a ... is the variadic argument list
  * (just like printf()).
  */
-#define ER_REPORT(lvl, msg, ...)                       \
-  {                                                    \
-    if (__er_will_report__(rcppsw::er::client::server_ptr(),   \
-                           rcppsw::er::client::er_id(),           \
-                           lvl)) {                                \
-      char _str[1000];                                 \
-      snprintf(static_cast<char*>(_str),               \
-               sizeof(_str),                           \
-               "%s:%d:%s: " msg "\n",                  \
-               __FILE__,                               \
-               __LINE__,                                        \
-               reinterpret_cast<const char*>(__FUNCTION__),     \
+#define ER_REPORT(lvl, logger, msg, ...)                         \
+    {                                                           \
+      char _str[1000];                                          \
+      snprintf(static_cast<char*>(_str),                        \
+               sizeof(_str),                                    \
+               msg,                                             \
                ##__VA_ARGS__);                                  \
-      rcppsw::er::er_msg _msg(rcppsw::er::client::er_id(),      \
-                              lvl,                              \
-                              std::string(reinterpret_cast<char*>(_str))); \
-      __er_report__(rcppsw::er::client::server_ptr(), _msg);         \
-    }                                                                   \
-  }
-
-#else
-#define ER_REPORT(lvl, msg, ...)
-#define ER_ERR(...)
-#define ER_WARN(...)
-#define ER_NOM(...)
-#define ER_DIAG(...)
-#define ER_VER(...)
-#endif /* ER_NREPORT */
+      LOG4CXX_##lvl(logger, _str); \
+    }
 
 /**
  * @def ER_CHECK(cond, msg, ...)
@@ -131,7 +126,7 @@
 #define ER_CHECK(cond, msg, ...)                           \
   {                                                        \
     if (!(cond)) {                                         \
-      ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__); \
+      ER_ERR(msg, ##__VA_ARGS__);                          \
       goto error;                                          \
     }                                                      \
   }
@@ -148,7 +143,7 @@
  */
 #define ER_SENTINEL(msg, ...)                               \
   {                                                         \
-    ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__); \
+    ER_ERR(msg, ##__VA_ARGS__);                             \
     goto error;                                             \
   }
 
@@ -156,17 +151,17 @@
  * @def ER_ASSERT(cond, msg, ...)
  *
  * Check a boolean condition \a cond in a function, halting the program if the
- * condition is not true. Like assert(), but allows for an additional custom to
- * be reported to the \ref server.
+ * condition is not true. Like assert(), but allows for an additional custom
+ * msgto be logged.
  *
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
 #ifndef ER_NDEBUG
-#define ER_ASSERT(cond, msg, ...)                           \
-  if (!(cond)) {                                            \
-    ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__); \
-    assert(cond);                                           \
+#define ER_ASSERT(cond, msg, ...)               \
+  if (!(cond)) {                                \
+    ER_FATAL(msg, ##__VA_ARGS__);               \
+    assert(cond);                               \
   }
 #else
 #define ER_ASSERT(cond, msg, ...)
@@ -183,22 +178,44 @@
  * must derive from \ref client.
  */
 #ifndef ER_NDEBUG
-#define ER_FATAL_SENTINEL(msg, ...)                             \
-  {                                                             \
-    ER_REPORT(rcppsw::er::er_lvl::ERR, msg, ##__VA_ARGS__);     \
+#define ER_FATAL_SENTINEL(msg, ...)                                 \
+  {                                                                 \
+    ER_FATAL(msg, ##__VA_ARGS__);                                   \
     assert(false);                                                  \
   }
 #else
 #define ER_FATAL_SENTINEL(msg, ...)
 #endif
 
+/**
+ * @def ER_CLIENT_INIT(name)
+ *
+ * Initialize a logging client with the specified name (easier to do a macro
+ * than to have to try do the casting every single type).
+ */
+#define ER_CLIENT_INIT(name)                                         \
+  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>(name)
+
+/**
+ * @def ER_NDC_PUSH(s)
+ *
+ * Push the specified NDC context (prepended to every message).
+ */
+#define ER_NDC_PUSH(s) \
+  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>::push_ndc(s)
+
+/**
+ * @def ER_NDC_POP()
+ *
+ * Pop the last pushed NDC context.
+ */
+#define ER_NDC_POP(...)                                                  \
+  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>::pop_ndc()
+
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, er);
-
-class server;
-class global_server;
 
 /*******************************************************************************
  * Class Definitions
@@ -207,136 +224,79 @@ class global_server;
  * @class client
  * @ingroup er
  *
- * @brief A class that can connect to a \ref server for logging of important
- * events.
- *
- * In addition to deriving from this class, the automatically defined module for
- * the derived class must also be installed via \ref attmod() or \ref
- * server::insmod in order to enable reporting for messages from the class.
+ * @brief A class that can connect to a logging server for logging of important
+ * events. Basically a thin wrapper around log4cxx.
  */
+template<typename T>
 class client {
  public:
-  client(void);
-  explicit client(std::shared_ptr<server> server_handle);
-  virtual ~client(void);
-
   /**
-   * @brief Initialize the client in cases where it was not possible to do
-   * so in the initialization list in the class constructor.
-   *
-   * If the default constructor for client is used (and this function is
-   * therefore needed), things will segfault/go badly if any reporting
-   * statements are encountered in the client before this function is called.
-   *
-   * @param server_handle The server to attach to.
+   * @brief Initialize logging by specifying the path to the log4cxx
+   * configuration file.
    */
-  virtual void deferred_client_init(std::shared_ptr<server> server_handle);
-
-  /**
-   * @brief Add a module to the active list (long version).
-   *
-   * @param loglvl The initial logging level for the module.
-   * @param dbglvl The initial debug printing level for the module.
-   * @param mod_name The name of the module, which will be prepended to all
-   * debugging/logging statements.
-   * @return OK if successful, ERROR otherwise.
-   */
-  status_t insmod(const std::string& mod_name,
-                  const er_lvl::value& loglvl = er_lvl::NOM,
-                  const er_lvl::value& dbglvl = er_lvl::NOM);
-  /**
-   * @brief Uninstall the module for this client. This function is called
-   * automatically in the destructor, but can be called explicitly as well.
-   *
-   * @return \ref status_t.
-   */
-  status_t rmmod(void);
-
-  /**
-   * @brief Attach to an EXISTING module within the server by name.
-   *
-   * If the module exists, the UUID for this client is set to the UUID of the
-   * module. If no module with the given name exists, no action is performed.
-   *
-   * @param mod_name Name of the module to attach to.
-   *
-   * @return \ref status_t.
-   */
-  status_t attmod(const std::string& mod_name);
-
-  /**
-   * @brief Get a reference to the ER server.
-   *
-   * @return A reference to the server handle.
-   */
-  server* server_ptr(void) const { return m_server_handle.get(); }
-
- protected:
-  const std::shared_ptr<server>& server_ref(void) const {
-    return m_server_handle;
+  static void init_logging(const std::string& fpath) {
+    log4cxx::xml::DOMConfigurator::configure(fpath);
   }
-  std::shared_ptr<server>& server_ref(void) { return m_server_handle; }
 
   /**
-   * @brief Get a reference to the UUID for the module. Should not be called
-   * directly by the application (why would you even need this?).
-   *
-   * @return The UUID.
+   * @brief Set the log file for the specified logger. Not idempotent.
    */
-  boost::uuids::uuid er_id(void) const { return m_er_id; }
-  void er_id(const boost::uuids::uuid& id) { m_er_id = id; }
+  static void set_logfile(log4cxx::LoggerPtr logger, const std::string& name) {
+    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout("%x [%-5p] %c %l - %m%n");
+    log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout, name);
+    logger->addAppender(appender);
+  }
+
+  /**
+   * @param name Name of client/new logger.
+   */
+  explicit client(const std::string& name)
+      : m_logger(log4cxx::Logger::getLogger(name)) {}
+
+  /**
+   * @brief Set the logfile of the current logger. Not idempotent.
+   */
+  void set_logfile(const std::string& name) {
+    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(mc_layout);
+    log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout, name);
+    logger()->addAppender(appender);
+  }
+
+  /**
+   * @brief Get current logger name.
+   */
+  std::string logger_name(void) const {
+    std::string name;
+    m_logger->getName(name);
+    return name;
+  }
+
+
+  /**
+   * @brief Push a log4cxx NDC context.
+   *
+   * @param s The context.
+   */
+  void push_ndc(const std::string& s) { log4cxx::NDC::push(s); }
+
+  /**
+   * @brief Pop the top of the log4cxx NDC stack.
+   */
+  void pop_ndc() { log4cxx::NDC::pop(); }
+
+  virtual ~client(void) = default;
+
+  /**
+   * @brief Get a reference to the ER logger.
+   */
+  log4cxx::LoggerPtr logger(void) const { return m_logger; }
 
  private:
-  std::shared_ptr<server> m_server_handle;
-  boost::uuids::uuid m_er_id;
+  // clang-format off
+  const std::string mc_layout{"%x [%-5p] %c %l - %m%n"};
+log4cxx::LoggerPtr m_logger{};
+  // clang-format on
 };
-
-/*******************************************************************************
- * Global Variables
- ******************************************************************************/
-/**
- * @brief A common, global server that all applications utilizing rcppsw have
- * access to. Handy in cases where you don't want to pass the server handle down
- * through unrelated constructors until you get to the class you actually want
- * to enable reporting for.
- */
-extern std::shared_ptr<rcppsw::er::global_server> g_server;
-
-/*******************************************************************************
- * Forward Declarations
- ******************************************************************************/
-/**
- * @internal
- * @brief The single, global entry point for all event reporting.
- *
- * This should never be called directly.
- *
- * @param server The server to report the event to.
- * @param msg The event message.
- *
- * @endinternal
- */
-void __er_report__(server* server,
-                   const er_msg& msg);
-
-/**
- * @internal
- * @brief Determine if the specified message will be reported on the specified
- * server.
- *
- * Used to short circuit potentially expensive message construction for messages
- * that will never be reported.
- *
- * @param server The server to check.
- * @param er_id ER id for the module.
- * @param lvl Level of the message.
- *
- * @return \c TRUE if the message will be reported, \c FALSE otherwise.
- * @endinternal
- */
-bool __er_will_report__(const server* server,
-                        const boost::uuids::uuid& er_id,
-                        const er_lvl::value& lvl);
 
 NS_END(rcppsw, er);
 

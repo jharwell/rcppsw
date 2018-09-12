@@ -30,16 +30,14 @@ class cluster_openmp : public cluster_algorithm<T> {
                  std::size_t dimension,
                  std::size_t n_points,
                  const std::string& clusters_fname,
-                 const std::string& centroids_fname,
-                 common::er_server* const erf)
+                 const std::string& centroids_fname)
       : cluster_algorithm<T>(n_iterations,
                              n_clusters,
                              n_threads,
                              dimension,
                              n_points,
                              clusters_fname,
-                             centroids_fname,
-                             erf) {}
+                             centroids_fname) {}
 
   void first_touch_allocation(void) {
 #pragma omp parallel for num_threads(cluster_algorithm < T > ::n_threads())

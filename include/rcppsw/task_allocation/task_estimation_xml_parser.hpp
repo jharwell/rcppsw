@@ -47,9 +47,8 @@ NS_START(rcppsw, task_allocation);
  */
 class task_estimation_xml_parser: public rcppsw::params::xml_param_parser {
  public:
-  explicit task_estimation_xml_parser(const std::shared_ptr<er::server>& server,
-                                uint level)
-      : xml_param_parser(server, level) {}
+  explicit task_estimation_xml_parser(uint level)
+      : xml_param_parser(level) {}
 
   /**
    * @brief The root tag that all task task_estimation parameters should lie

@@ -39,14 +39,14 @@ NS_START(rcppsw, ds);
  * @ingroup ds
  *
  * @brief A 2D logical grid that is overlayed over a continuous environment. It
- * discretizes the continuous arena into a grid of a specified resolution.
- *
- * The objects used to represent the grid should be cells of some kind.
+ * discretizes the continuous arena into a grid of a specified resolution
+ * (e.g. it takes a continuous 10.0 x 5.0 space and discretizes it into a 50 x 25
+ * grid of cells with a resolution of 0.2).
  */
 template <typename T>
 class base_overlay_grid2D : public base_grid2D<T> {
  public:
-  base_overlay_grid2D(double resolution, size_t x_max, size_t y_max)
+  base_overlay_grid2D(double resolution, double x_max, double y_max)
       : base_grid2D<T>(),
       m_resolution(resolution),
       m_x_max(x_max),
@@ -66,17 +66,6 @@ class base_overlay_grid2D : public base_grid2D<T> {
   size_t xdsize(void) const {
     return static_cast<size_t>(std::ceil(m_x_max / m_resolution));
   }
-
-  /**
-   * @brief Get the size of the X dimension (non-discretized).
-   */
-  size_t xrsize(void) const { return m_x_max; }
-
-  /**
-   * @brief Get the size of the Y dimension (non-discretized).
-   */
-  size_t yrsize(void) const { return m_y_max; }
-
   /**
    * @brief Get the size of the Y dimension of the discretized subgrid, at
    * whatever the resolution specified during object construction was.
@@ -84,6 +73,16 @@ class base_overlay_grid2D : public base_grid2D<T> {
   size_t ydsize(void) const {
     return static_cast<size_t>(std::ceil(m_y_max / m_resolution));
   }
+
+  /**
+   * @brief Get the size of the X dimension (non-discretized).
+   */
+  double xrsize(void) const { return m_x_max; }
+
+  /**
+   * @brief Get the size of the Y dimension (non-discretized).
+   */
+  double yrsize(void) const { return m_y_max; }
 
   /**
    * @brief Get the range in the X direction resulting from applying a circle
@@ -136,8 +135,8 @@ class base_overlay_grid2D : public base_grid2D<T> {
 
  private:
   double m_resolution;
-  size_t m_x_max;
-  size_t m_y_max;
+  double m_x_max;
+  double m_y_max;
 };
 
 NS_END(ds, rcppsw);
