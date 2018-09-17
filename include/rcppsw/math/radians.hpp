@@ -53,25 +53,25 @@ class radians {
   static const radians kPI_OVER_THREE;
   static const radians kPI_OVER_FOUR;
   static const radians kZERO;
-  static const float kRADIANS_TO_DEGREES;
+  static const double kRADIANS_TO_DEGREES;
 
   radians(void) : m_value(0.0) {}
 
-  explicit radians(float value) : m_value(value) {}
+  explicit radians(double value) : m_value(value) {}
   explicit radians(const degrees& d);
 
   /**
    * @brief Sets the value in radians.
    */
-  void set(float value) { m_value = value; }
+  void set(double value) { m_value = value; }
 
   /**
    * @brief Sets the value from a value in degrees.
    */
-  void set_from_deg(float value) { m_value = value / kRADIANS_TO_DEGREES; }
+  void set_from_deg(double value) { m_value = value / kRADIANS_TO_DEGREES; }
 
-  float value(void) const { return m_value; }
-  float abs_value(void) const { return std::abs(m_value); }
+  double value(void) const { return m_value; }
+  double abs_value(void) const { return std::abs(m_value); }
 
   /**
    * @brief Normalizes the value in the range [-pi, pi].
@@ -107,12 +107,12 @@ class radians {
     return *this;
   }
 
-  radians& operator*=(float value) {
+  radians& operator*=(double value) {
     m_value *= value;
     return *this;
   }
 
-  radians& operator/=(float value) {
+  radians& operator/=(double value) {
     m_value /= value;
     return *this;
   }
@@ -129,17 +129,17 @@ class radians {
     return res;
   }
 
-  radians operator*(float value) const {
+  radians operator*(double value) const {
     radians res(*this);
     res *= value;
     return res;
   }
 
-  float operator/(const radians& other) const {
+  double operator/(const radians& other) const {
     return m_value / other.m_value;
   }
 
-  radians operator/(float value) const {
+  radians operator/(double value) const {
     radians res(*this);
     res /= value;
     return res;
@@ -162,7 +162,7 @@ class radians {
   }
 
   bool operator==(const radians& other) const {
-    return std::fabs(m_value - other.m_value) < std::numeric_limits<float>::epsilon();
+    return std::fabs(m_value - other.m_value) < std::numeric_limits<double>::epsilon();
   }
 
   bool operator!=(const radians& other) const {
@@ -180,7 +180,7 @@ class radians {
    */
   static const range<radians> kUnsignedRange;
 
-  float m_value;
+  double m_value;
 };
 
 /*******************************************************************************

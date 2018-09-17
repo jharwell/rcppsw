@@ -63,15 +63,15 @@ class base_overlay_grid2D : public base_grid2D<T> {
    * @brief Get the size of the X dimension of the discretized subgrid, at
    * whatever the resolution specified during object construction was.
    */
-  size_t xdsize(void) const {
-    return static_cast<size_t>(std::ceil(m_x_max / m_resolution));
+  uint xdsize(void) const {
+    return static_cast<uint>(std::ceil(m_x_max / m_resolution));
   }
   /**
    * @brief Get the size of the Y dimension of the discretized subgrid, at
    * whatever the resolution specified during object construction was.
    */
-  size_t ydsize(void) const {
-    return static_cast<size_t>(std::ceil(m_y_max / m_resolution));
+  uint ydsize(void) const {
+    return static_cast<uint>(std::ceil(m_y_max / m_resolution));
   }
 
   /**
@@ -96,7 +96,7 @@ class base_overlay_grid2D : public base_grid2D<T> {
    * applied to the specified X coordinate.
    */
   std::pair<index_range::index, index_range::index> circle_xrange_at_point(
-      size_t x, size_t radius) const {
+      uint x, uint radius) const {
     index_range::index lower_x =
         static_cast<index_range::index>(std::max<int>(0,
                                                       static_cast<int>(x) -
@@ -121,7 +121,7 @@ class base_overlay_grid2D : public base_grid2D<T> {
    * applied to the specified Y coordinate.
    */
   std::pair<index_range::index, index_range::index> circle_yrange_at_point(
-      size_t y, size_t radius) const {
+      uint y, uint radius) const {
     index_range::index lower_y = static_cast<index_range::index>(
         std::max<int>(static_cast<int>(0),
                       static_cast<int>(y) - static_cast<int>(radius)));

@@ -56,7 +56,6 @@ class differential_drive_fsm : public state_machine::simple_fsm {
    * @param max_speed Maximum wheel velocity.
    * @param soft_turn_max Maximum angle difference between current and new
    *                      heading that will not trigger a hard (in place) turn.
-   * @param list List of handles to actuator devices.
    */
   differential_drive_fsm(double max_speed,
                          argos::CRadians soft_turn_max);

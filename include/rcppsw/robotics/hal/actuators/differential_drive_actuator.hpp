@@ -54,9 +54,9 @@ template <typename T>
 class _differential_drive_actuator {
  public:
   template<typename U = T>
-  _differential_drive_actuator(typename std::enable_if_t<std::is_same<U,
-                      argos::CCI_DifferentialSteeringActuator>::value,
-                      argos::CCI_DifferentialSteeringActuator> * wheels)
+  explicit _differential_drive_actuator(typename std::enable_if_t<std::is_same<U,
+                                        argos::CCI_DifferentialSteeringActuator>::value,
+                                        argos::CCI_DifferentialSteeringActuator> * wheels)
       : m_wheels(wheels) {}
 
   /**

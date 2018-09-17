@@ -55,9 +55,9 @@ radians normalized_diff(const radians &angle1, const radians &angle2) {
 
 degrees normalized_diff(const degrees &angle1, const degrees &angle2) {
   degrees res;
-  res.set(std::fmod(angle1.value() - angle2.value() + 180.0f, 360.0f));
+  res.set(std::fmod(angle1.value() - angle2.value() + 180.0, 360.0));
 
-  if (res.value() < 0.0f) {
+  if (res.value() < 0.0) {
     res += 360.0;
   }
   res -= 180.0;

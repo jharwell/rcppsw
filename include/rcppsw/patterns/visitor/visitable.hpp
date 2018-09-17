@@ -70,7 +70,7 @@ class accept_set_helper {
   /**
    * @brief Accept a visitor of the specified type.
    *
-   * @tparam U. Forwarded template type parameter that is 100% necessary to get
+   * @tparam U Forwarded template type parameter that is 100% necessary to get
    * this design pattern to work.
    */
   template<typename U = T>

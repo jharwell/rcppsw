@@ -68,9 +68,9 @@ class _light_sensor {
   };
 
   template<typename U = T>
-  _light_sensor(typename std::enable_if_t<std::is_same<U,
-                      argos::CCI_FootBotLightSensor>::value,
-                      argos::CCI_FootBotLightSensor> * sensor)
+  explicit _light_sensor(typename std::enable_if_t<std::is_same<U,
+                         argos::CCI_FootBotLightSensor>::value,
+                         argos::CCI_FootBotLightSensor> * sensor)
       : m_sensor(sensor) {}
 
   /**

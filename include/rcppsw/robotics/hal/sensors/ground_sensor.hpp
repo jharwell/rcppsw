@@ -71,9 +71,9 @@ class _ground_sensor {
   };
 
   template<typename U = T>
-  _ground_sensor(typename std::enable_if_t<std::is_same<U,
-                      argos::CCI_FootBotMotorGroundSensor>::value,
-                      argos::CCI_FootBotMotorGroundSensor> * sensor)
+  explicit _ground_sensor(typename std::enable_if_t<std::is_same<U,
+                          argos::CCI_FootBotMotorGroundSensor>::value,
+                          argos::CCI_FootBotMotorGroundSensor> * sensor)
       : m_sensor(sensor) {}
 
   /**

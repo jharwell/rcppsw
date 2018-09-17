@@ -70,8 +70,8 @@ class _proximity_sensor {
   };
 
   template<typename U = T>
-  _proximity_sensor(typename std::enable_if_t<std::is_same<U,
-                      argos::CCI_FootBotProximitySensor>::value,
+  explicit _proximity_sensor(typename std::enable_if_t<std::is_same<U,
+                             argos::CCI_FootBotProximitySensor>::value,
                       argos::CCI_FootBotProximitySensor> * sensor)
       : m_sensor(sensor) {}
 

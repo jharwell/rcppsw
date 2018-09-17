@@ -46,7 +46,7 @@ NS_START(rcppsw, task_allocation);
  */
 class task_abort_xml_parser: public rcppsw::params::xml_param_parser {
  public:
-  task_abort_xml_parser(uint level)
+  explicit task_abort_xml_parser(uint level)
       : xml_param_parser(level) {}
 
   /**

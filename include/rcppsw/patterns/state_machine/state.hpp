@@ -45,7 +45,9 @@ class event_data;
  */
 class state {
  public:
-  virtual ~state() = default;
+  state(void) = default;
+  state(const state&) = default;
+  virtual ~state(void) = default;
 
   /**
    * @brief Called by the state machine engine to execute a state action. If a

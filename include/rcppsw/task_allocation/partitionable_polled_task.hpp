@@ -61,7 +61,7 @@ class partitionable_polled_task : public polled_task, public partitionable_task 
    * @param ub Upper bound for exec estimate.
    */
   void init_random(const polled_task* partition,
-                   int lb, int ub);
+                   uint lb, uint ub);
 };
 
 NS_END(task_allocation, rcppsw);

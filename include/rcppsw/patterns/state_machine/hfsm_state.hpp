@@ -95,7 +95,7 @@ class hfsm_state_action1 : public hfsm_state {
                           const event_data* event) const override {
     /* Downcast the state machine and event data to the correct derived type */
     auto* derived_fsm = static_cast<FSM*>(fsm);
-    const Event* derived_event = NULL;
+    const Event* derived_event = nullptr;
 
     /*
      * If this check fails, there is a mismatch between the STATE_DECLARE event
