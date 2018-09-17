@@ -33,14 +33,13 @@ NS_START(rcppsw, robotics, steering2D);
  * Constructors/Destructor
  ******************************************************************************/
 avoidance_force::avoidance_force(const struct avoidance_force_params *params)
-    : m_lookahead(params->lookahead), m_max(params->max) {}
+    : m_max(params->max) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 argos::CVector2 avoidance_force::
-operator()(__rcsw_unused const boid &b,
-           const argos::CVector2 &closest_obstacle) const {
+operator()(const boid &, const argos::CVector2 &closest_obstacle) const {
   if (closest_obstacle.Length() > 0) {
     argos::CVector2 avoidance = -closest_obstacle;
     return avoidance.Normalize() * m_max;

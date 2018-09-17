@@ -76,14 +76,14 @@ polled_task *base_executive::get_first_task(void) {
   return partitionable->partition(kids[1], kids[2]);
 } /* get_first_task() */
 
-void base_executive::task_init_random(polled_task *task, int lb, int ub) {
+void base_executive::task_init_random(polled_task *task, uint lb, uint ub) {
   ER_ASSERT(!task->is_partitionable(), "Task is partitionable");
   task->init_random(lb, ub);
 } /* task_init_random() */
 
 void base_executive::task_init_random(polled_task *task,
-                                      const polled_task *partition, int lb,
-                                      int ub) {
+                                      const polled_task *partition, uint lb,
+                                      uint ub) {
   ER_ASSERT(task->is_partitionable(),
             "Cannot initialize non-partitionable task last partition");
   auto partitionable = dynamic_cast<partitionable_polled_task *>(task);

@@ -54,8 +54,8 @@ NS_START(rcppsw, patterns, state_machine);
  */
 class base_fsm : public er::client<base_fsm> {
  public:
-  base_fsm(uint8_t max_states,
-           uint8_t initial_state = 0);
+  explicit base_fsm(uint8_t max_states,
+                    uint8_t initial_state = 0);
   base_fsm(const base_fsm& other);
   ~base_fsm(void) override = default;
 
@@ -467,7 +467,7 @@ NS_END(state_machine, patterns, rcppsw);
  * Othr Macros
  ******************************************************************************/
 #define FSM_WRAPPER_DECLARE(ret, func)          \
-  ret func(void) const override;
+  ret func(void) const override
 #define FSM_WRAPPER_DEFINE(ret, class, func, handle)            \
   ret class::func(void) const { return (handle).func(); }
 #define FSM_WRAPPER_DEFINE_PTR(ret, class, func, handle)        \

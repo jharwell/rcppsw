@@ -51,7 +51,7 @@ class polled_task;
 class partitionable_task : public er::client<partitionable_task>,
                            public metrics::tasks::partitioning_metrics {
  public:
-  partitionable_task(const struct partitionable_task_params* c_params);
+  explicit partitionable_task(const struct partitionable_task_params* c_params);
 
   ~partitionable_task(void) override = default;
 

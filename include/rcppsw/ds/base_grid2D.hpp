@@ -64,13 +64,13 @@ class base_grid2D {
    * This is provided in the base class so that the pointer/object variants of
    * the grid (\ref grid2D, \ref grid2D_ptr) can reduce code duplication.
    */
-  virtual T& access(size_t i, size_t j) = 0;
+  virtual T& access(uint i, uint j) = 0;
   virtual T& access(const math::dcoord2& c) = 0;
 
   const T& access(const math::dcoord2& c) const {
     return const_cast<base_grid2D*>(this)->access(c);
   }
-  const T& access(size_t i, size_t j) const {
+  const T& access(uint i, uint j) const {
     return const_cast<base_grid2D*>(this)->access(i, j);
   }
 };

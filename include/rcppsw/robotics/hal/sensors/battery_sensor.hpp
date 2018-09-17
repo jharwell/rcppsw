@@ -69,9 +69,9 @@ public:
    }reading;
 
    template<typename U = T>
-   _battery_sensor(typename std::enable_if_t<std::is_same<U,
-                       argos::CCI_BatterySensor>::value,
-                       argos::CCI_BatterySensor> * sensor)
+   explicit _battery_sensor(typename std::enable_if_t<std::is_same<U,
+                            argos::CCI_BatterySensor>::value,
+                            argos::CCI_BatterySensor> * sensor)
        : m_sensor(sensor) {}
 
     /**

@@ -85,29 +85,25 @@ class stacked_grid {
   /**
    * @brief Get a reference to an object at a particular (layer,i,j) location
    *
-   * @tparam The index of the layer.
+   * @tparam Index Theindex of the layer.
    * @param i The x coordinate.
    * @param j The y coordinate.
-   *
-   * @return The object at the specified location.
    */
   template<uint Index>
-  typename layer_value_type<Index>::value_type& access(size_t i, size_t j) {
+  typename layer_value_type<Index>::value_type& access(uint i, uint j) {
     return reinterpret_cast<layer_value_type<Index>*>(m_layers[Index])->access(i, j);
   }
 
   template<uint Index>
-  const typename layer_value_type<Index>::value_type& access(size_t i, size_t j) const {
+  const typename layer_value_type<Index>::value_type& access(uint i, uint j) const {
     return reinterpret_cast<const layer_value_type<Index>*>(m_layers[Index])->access(i, j);
   }
 
   /**
    * @brief Get a reference to an object at a particular (layer,i,j) location
    *
-   * @tparam The index of the layer.
+   * @tparam Index The index of the layer.
    * @param d The discrete coordinate pair.
-   *
-   * @return The object at the specified location.
    */
   template <int Index>
   typename layer_value_type<Index>::value_type& access(const math::dcoord2& d) {
@@ -130,7 +126,7 @@ class stacked_grid {
   /**
    * @see \ref base_overlay_grid2D::xdsize().
    */
-  size_t xdsize(void) const {
+  uint xdsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xdsize();
   }
 
@@ -144,7 +140,7 @@ class stacked_grid {
   /**
    * @see \ref base_overlay_grid2D::ydsize().
    */
-  size_t ydsize(void) const {
+  uint ydsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->ydsize();
   }
 

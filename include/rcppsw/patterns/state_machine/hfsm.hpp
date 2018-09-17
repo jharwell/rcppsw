@@ -49,8 +49,8 @@ class hfsm : public base_fsm, public er::client<hfsm> {
    * @param max_states The maximum number of state machine states.
    * @param initial_state Initial state machine state.
    */
-  hfsm(uint8_t max_states,
-       uint8_t initial_state = 0)
+  explicit hfsm(uint8_t max_states,
+                uint8_t initial_state = 0)
       : base_fsm(max_states, initial_state),
         ER_CLIENT_INIT("rcppsw.patterns.state_machine.hfsm"),
         m_top_state(nullptr) {}

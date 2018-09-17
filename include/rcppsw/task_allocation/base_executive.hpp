@@ -57,7 +57,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
    *              language to communicate that with unique_ptr because of
    *              casting reasons).
    */
-  base_executive(tdgraph* graph);
+  explicit base_executive(tdgraph* graph);
   ~base_executive(void) override;
 
   base_executive& operator=(const base_executive& other) = delete;
@@ -106,7 +106,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
    * @brief Initialize the execution time estimate of the specified task within
    * the specified range (non-partitionable tasks).
    */
-  void task_init_random(polled_task* task, int lb, int ub);
+  void task_init_random(polled_task* task, uint lb, uint ub);
 
   /**
    * @brief Initialize the execution time estimate of the specified task within
@@ -114,8 +114,8 @@ class base_executive : public rcppsw::er::client<base_executive> {
    */
   void task_init_random(polled_task* task,
                         const polled_task* partition,
-                        int lb,
-                        int ub);
+                        uint lb,
+                        uint ub);
 
  protected:
   const polled_task* root_task(void) const;

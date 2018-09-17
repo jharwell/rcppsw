@@ -59,13 +59,7 @@ class base_metrics_collector {
    */
   base_metrics_collector(std::string ofname,
                          uint interval,
-                         bool cum_only = false)
-      : m_interval(interval),
-        m_timestep(0),
-        m_cum_only(cum_only),
-        m_ofname(std::move(ofname)),
-        m_separator(";"),
-        m_ofile() {}
+                         bool cum_only = false);
 
   virtual ~base_metrics_collector(void)  = default;
 

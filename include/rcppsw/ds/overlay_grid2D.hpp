@@ -59,12 +59,10 @@ class overlay_grid2D : public base_overlay_grid2D<T> {
    * X/resolution discrete elements along the X dimension.
    * @param y_max The real size in Y, which will be discretized into
    * Y/resolution discrete elements along the X dimension.
-   *
-   * @return
    */
   overlay_grid2D(double resolution, double x_max, double y_max)
       : base_overlay_grid2D<T>(resolution, x_max, y_max),
-      m_cells(boost::extents[xdsize()][ydsize()]) {}
+      m_cells(boost::extents[static_cast<index_range::index>(xdsize())][index_range::index(ydsize())]) {}
 
   /**
    * @brief Get a subcircle gridview from a grid. The subcircle extent is
@@ -80,7 +78,7 @@ class overlay_grid2D : public base_overlay_grid2D<T> {
    *
    * @return The subcircle.
    */
-  grid_view<T> subcircle(size_t x, size_t y, size_t radius) {
+  grid_view<T> subcircle(uint x, uint y, uint radius) {
     auto x_range = base_overlay_grid2D<T>::circle_xrange_at_point(x, radius);
     auto y_range = base_overlay_grid2D<T>::circle_yrange_at_point(y, radius);
     typename grid_type<T>::index_gen indices;
@@ -101,18 +99,20 @@ class overlay_grid2D : public base_overlay_grid2D<T> {
    *
    * @return The subgrid.
    */
-  grid_view<T> subgrid(size_t x_min, size_t y_min, size_t x_max, size_t y_max) {
+  grid_view<T> subgrid(uint x_min, uint y_min, uint x_max, uint y_max) {
     typename grid_type<T>::index_gen indices;
 
-    index_range x(x_min, x_max, 1);
-    index_range y(y_min, y_max, 1);
+    index_range x(static_cast<index_range::index>(x_min),
+                  static_cast<index_range::index>(x_max), 1);
+    index_range y(static_cast<index_range::index>(y_min),
+                  static_cast<index_range::index>(y_max), 1);
     return grid_view<T>(m_cells[indices[x][y]]);
   }
 
-  grid_view<T> subgrid(size_t x_min,
-                       size_t y_min,
-                       size_t x_max,
-                       size_t y_max) const {
+  grid_view<T> subgrid(uint x_min,
+                       uint y_min,
+                       uint x_max,
+                       uint y_max) const {
     return const_cast<overlay_grid2D<T>*>(this)->subgrid(x_min, y_min,
                                                          x_max, y_max);
   }
@@ -122,7 +122,7 @@ class overlay_grid2D : public base_overlay_grid2D<T> {
    *
    * @return Reference to the cell, of type T.
    */
-  T& access(size_t i, size_t j) override {
+  T& access(uint i, uint j) override {
     return m_cells[static_cast<index_range::index>(i)]
                   [static_cast<index_range::index>(j)];
   }

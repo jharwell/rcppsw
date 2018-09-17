@@ -83,14 +83,14 @@ class color {
   uint8_t alpha() const { return m_channels[3]; }
   void alpha(uint8_t alpha) { m_channels[3] = alpha; }
 
-  bool operator==(const color& c_color2) const throw() {
+  bool operator==(const color& c_color2) const {
     return m_channels[0] == c_color2.m_channels[0] &&
         m_channels[1] == c_color2.m_channels[1] &&
         m_channels[2] == c_color2.m_channels[2] &&
         m_channels[3] == c_color2.m_channels[3];
   }
 
-  bool operator!=(const color& c_color2) const throw() {
+  bool operator!=(const color& c_color2) const {
     return m_channels != c_color2.m_channels;
   }
 
