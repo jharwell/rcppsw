@@ -152,20 +152,16 @@
  *
  * Check a boolean condition \a cond in a function, halting the program if the
  * condition is not true. Like assert(), but allows for an additional custom
- * msgto be logged.
+ * msg to be logged.
  *
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
-#ifndef ER_NDEBUG
 #define ER_ASSERT(cond, msg, ...)               \
   if (!(cond)) {                                \
     ER_FATAL(msg, ##__VA_ARGS__);               \
     assert(cond);                               \
   }
-#else
-#define ER_ASSERT(cond, msg, ...)
-#endif
 
 /**
  * @def ER_FATAL_SENTINEL(msg,...)
@@ -177,15 +173,11 @@
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
-#ifndef ER_NDEBUG
 #define ER_FATAL_SENTINEL(msg, ...)                                 \
   {                                                                 \
     ER_FATAL(msg, ##__VA_ARGS__);                                   \
     assert(false);                                                  \
   }
-#else
-#define ER_FATAL_SENTINEL(msg, ...)
-#endif
 
 /**
  * @def ER_CLIENT_INIT(name)
@@ -195,6 +187,15 @@
  */
 #define ER_CLIENT_INIT(name)                                         \
   rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>(name)
+
+/**
+ * @def ER_SET_LOGFILE(logger, fname)
+ *
+ * Set the logfile for the specified logger. Idempotent.
+ */
+#define ER_SET_LOGFILE(logger, fname) \
+  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>::set_logfile(logger,\
+                                                                                         fname)
 
 /**
  * @def ER_NDC_PUSH(s)
@@ -235,15 +236,32 @@ class client {
    * configuration file.
    */
   static void init_logging(const std::string& fpath) {
-    log4cxx::xml::DOMConfigurator::configure(fpath);
+    /*
+     * Multiple initializations will cause duplicate messages to show up in
+     * logfiles.
+     */
+    if (!m_initialized) {
+      log4cxx::xml::DOMConfigurator::configure(fpath);
+      m_initialized = true;
+    }
   }
 
   /**
-   * @brief Set the log file for the specified logger. Not idempotent.
+   * @brief Set the log file for the specified logger. Idempotent.
+   *
+   * Logfile is an appender, which is given the same name as the logfile
+   * itself.
    */
   static void set_logfile(log4cxx::LoggerPtr logger, const std::string& name) {
-    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout("%x [%-5p] %c %l - %m%n");
+    for (auto &a : logger->getAllAppenders()) {
+      if (a->getName() == name) {
+        return;
+      }
+    } /* for(&a..) */
+
+    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(mc_file_layout);
     log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout, name);
+    appender->setName(name);
     logger->addAppender(appender);
   }
 
@@ -257,7 +275,7 @@ class client {
    * @brief Set the logfile of the current logger. Not idempotent.
    */
   void set_logfile(const std::string& name) {
-    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(mc_layout);
+    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(mc_file_layout);
     log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout, name);
     logger()->addAppender(appender);
   }
@@ -271,7 +289,6 @@ class client {
     return name;
   }
 
-
   /**
    * @brief Push a log4cxx NDC context.
    *
@@ -282,7 +299,7 @@ class client {
   /**
    * @brief Pop the top of the log4cxx NDC stack.
    */
-  void pop_ndc() { log4cxx::NDC::pop(); }
+  void pop_ndc(void) { log4cxx::NDC::pop(); }
 
   virtual ~client(void) = default;
 
@@ -293,10 +310,19 @@ class client {
 
  private:
   // clang-format off
-  const std::string mc_layout{"%x [%-5p] %c %l - %m%n"};
-log4cxx::LoggerPtr m_logger{};
+  static const char         mc_console_layout[];
+  static const char         mc_file_layout[];
+  static bool               m_initialized;
+  log4cxx::LoggerPtr        m_logger{};
   // clang-format on
 };
+
+template<typename T>
+bool client<T>::m_initialized = false;
+template<typename T>
+const char client<T>::mc_console_layout[] = "%x [%-5p] %c - %m%n";
+template<typename T>
+const char client<T>::mc_file_layout[] = "%x [%-5p] %c %l - %m%n";
 
 NS_END(rcppsw, er);
 
