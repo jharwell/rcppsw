@@ -109,7 +109,7 @@ partitionable_task::partition(const polled_task *const partition1,
   ER_INFO("Task '%s': selection_method=%s, last_partition=%s", name.c_str(),
           m_selection_prob.method().c_str(),
           (nullptr != m_last_partition) ? m_last_partition->name().c_str()
-                                        : "None");
+          : "None");
 
   ER_INFO("%s exec_est=%f/int_est=%f, %s exec_est=%f/int_est=%f",
           partition1->name().c_str(), partition1->exec_estimate().last_result(),
