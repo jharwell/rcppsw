@@ -31,10 +31,9 @@
  * Test Classes
  ******************************************************************************/
 class test_client : public rcppsw::er::client<test_client> {
-public:
+ public:
   explicit test_client(const std::string &er_parent)
       : ER_CLIENT_INIT(er_parent) {
-
     /* Test if you get anything */
     ER_FATAL("This is fatal");
     ER_ERR("This is an error");
@@ -50,7 +49,7 @@ public:
  ******************************************************************************/
 CATCH_TEST_CASE("ER Test", "[ER]") {
   test_client client("foobar");
-  client.change_logfile("mine.log");
+  client.set_logfile("mine.log");
   test_client client2("foobar.test_client");
   CATCH_REQUIRE(1);
 }
