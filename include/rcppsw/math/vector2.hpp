@@ -25,6 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <cmath>
+#include <limits>
+
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/radians.hpp"
 
@@ -49,19 +51,18 @@ NS_START(rcppsw, math);
 template<typename T>
 class vector2 {
  public:
-
   /**
    * @brief Computes the square distance between the passed vectors.
    */
   static T square_distance(const vector2& v1, const vector2& v2) {
-    return (v1 - v2).SquareLength();
+    return (v1 - v2).square_length();
   }
 
   /**
    * @brief Computes the distance between the passed vectors.
    */
   static T distance(const vector2& v1, const vector2& v2) {
-    return (v1 - v2).Length();
+    return (v1 - v2).length();
   }
 
   /**
@@ -96,6 +97,23 @@ class vector2 {
   vector2(T length, const radians& angle) :
       m_x(std::cos(angle.value()) * length),
       m_y(std::sin(angle.value()) * length) {
+  }
+
+  /**
+   * @brief Initializes the vector coordinates from polar coordinates.
+   *
+   * @param length The vector length.
+   * @param angle The vector angle.
+   */
+  /**
+   * @brief Returns if this vector and the argument are considered equal,
+   * determined by coordinate comparison.
+   *
+   * Should generally not be called if the template parameter type is not an
+   * integer, as floating point comparisions in general are unsafe.
+   */
+  bool operator==(const vector2& other) const {
+    return (m_x == other.m_x && m_y == other.m_y);
   }
 
   T x(void) const { return m_x; }
@@ -199,17 +217,6 @@ class vector2 {
   vector2& scale(T factor) { return scale(factor, factor); }
 
   /**
-   * @brief Returns if this vector and the argument are considered equal,
-   * determined by coordinate comparison.
-   *
-   * Should generally not be called if the template parameter type is not an
-   * integer, as floating point comparisions in general are unsafe.
-   */
-  bool operator==(const vector2& other) const {
-    return (m_x == other.m_x && m_y == other.m_y);
-  }
-
-  /**
    * @brief Returns if this vector and the passed one are not equal by checking
    * coordinates for equality.
    *
@@ -287,7 +294,19 @@ class vector2 {
   T m_y;
 };
 
-using vector2d = vector2<double>;
+class vector2d : public vector2<double> {
+ public:
+  using vector2<double>::vector2;
+  /**
+   * @brief Returns if this vector and the argument are considered equal,
+   * determined by coordinate comparison.
+   */
+  bool operator==(const vector2& other) const {
+    return (std::fabs(x() - other.x()) <= std::numeric_limits<double>::epsilon() &&
+            (std::fabs(y() - other.y()) <= std::numeric_limits<double>::epsilon()));
+  }
+};
+
 using vector2f = vector2<float>;
 using vector2i = vector2<int>;
 
