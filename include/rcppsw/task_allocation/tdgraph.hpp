@@ -59,7 +59,7 @@ class polled_task;
  * currently work with the boost libraries, and shared_ptr<T> is not right
  * either, because the graph owns the tasks, so raw pointers are used instead.
  */
-class tdgraph : public er::client {
+class tdgraph : public er::client<tdgraph> {
  public:
   using graph_impl = boost::adjacency_list<boost::vecS,
                                            boost::vecS,
@@ -81,7 +81,7 @@ class tdgraph : public er::client {
   static polled_task* vertex_parent(const tdgraph& graph,
                                     const polled_task* node);
 
-  explicit tdgraph(std::shared_ptr<er::server> server);
+  tdgraph(void);
   virtual ~tdgraph(void);
   tdgraph(const tdgraph& other) = delete;
   tdgraph& operator=(const tdgraph& other) = delete;

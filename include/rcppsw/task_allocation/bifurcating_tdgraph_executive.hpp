@@ -24,6 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+
 #include "rcppsw/task_allocation/base_executive.hpp"
 
 /*******************************************************************************
@@ -43,12 +45,13 @@ class bifurcating_tdgraph;
  * @brief A task executive which tasks are run one step at a time and polled
  * until they are finished. Operates on \ref bifurcating_tdgraph.
  */
-class bifurcating_tdgraph_executive : public base_executive {
+class bifurcating_tdgraph_executive : public base_executive,
+                                      public er::client<bifurcating_tdgraph_executive> {
  public:
-  using alloc_notify_cb = std::function<void(const polled_task*, const bifurcating_tab*)>;
+  using alloc_notify_cb = std::function<void(const polled_task*,
+                                             const bifurcating_tab*)>;
 
-  bifurcating_tdgraph_executive(std::shared_ptr<rcppsw::er::server>& server,
-                                bifurcating_tdgraph* graph);
+  explicit bifurcating_tdgraph_executive(bifurcating_tdgraph* graph);
 
   void run(void) override;
 

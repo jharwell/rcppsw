@@ -48,11 +48,10 @@ class polled_task;
  * @brief A task that is capable of being partitioned into two subtasks that
  * when executed in sequence have the sum effect as the parent task.
  */
-class partitionable_task : public er::client,
+class partitionable_task : public er::client<partitionable_task>,
                            public metrics::tasks::partitioning_metrics {
  public:
-  partitionable_task(std::shared_ptr<er::server> server,
-                     const struct partitionable_task_params* c_params);
+  explicit partitionable_task(const struct partitionable_task_params* c_params);
 
   ~partitionable_task(void) override = default;
 

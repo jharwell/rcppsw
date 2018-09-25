@@ -45,8 +45,7 @@ NS_START(rcppsw, task_allocation);
  */
 class partitionable_polled_task : public polled_task, public partitionable_task {
  public:
-  partitionable_polled_task(const std::shared_ptr<er::server>& server,
-                            const std::string& name,
+  partitionable_polled_task(const std::string& name,
                             const struct partitionable_task_params* c_params,
                             std::unique_ptr<taskable> mechanism);
 
@@ -62,7 +61,7 @@ class partitionable_polled_task : public polled_task, public partitionable_task 
    * @param ub Upper bound for exec estimate.
    */
   void init_random(const polled_task* partition,
-                   int lb, int ub);
+                   uint lb, uint ub);
 };
 
 NS_END(task_allocation, rcppsw);

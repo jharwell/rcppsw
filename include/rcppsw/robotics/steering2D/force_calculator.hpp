@@ -24,6 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/robotics/steering2D/avoidance_force.hpp"
 #include "rcppsw/robotics/steering2D/arrival_force.hpp"
@@ -54,10 +56,9 @@ struct force_calculator_params;
  *
  * Once conformant, see \ref force_type for available force types.
  */
-class force_calculator : public er::client {
+class force_calculator : public er::client<force_calculator> {
  public:
-  force_calculator(const std::shared_ptr<er::server>& server,
-                   boid& entity,
+  force_calculator(boid& entity,
                    const struct force_calculator_params* params);
 
   /**

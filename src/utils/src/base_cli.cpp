@@ -78,7 +78,7 @@ status_t base_cli::parse(int argc, char **argv) {
     }
     bpo::notify(m_vm);
   } catch (bpo::error &e) {
-    std::cerr << "ERROR: " << e.what() << "\n\n";
+    std::cerr << "" << e.what() << "\n\n";
     std::cerr << m_desc << "\n";
     return ERROR;
   }

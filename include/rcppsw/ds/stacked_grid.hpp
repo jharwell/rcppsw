@@ -49,12 +49,15 @@ NS_START(rcppsw, ds);
  * contiguous. The layers are 0 indexed.
  *
  * This was implemented because the BGL only appears to support layered
- * graphs/grids of the same object type.
+ * graphs/grids of the same object type. Although in hindsight I could have done
+ * this with grid_graph and boost::variant (was not aware of this when I
+ * implemented this class). Might not have been as highly performing in that
+ * case though.
  */
 template<typename TupleTypes>
 class stacked_grid {
  public:
-  stacked_grid(double resolution, size_t x_max, size_t y_max)
+  stacked_grid(double resolution, double x_max, double y_max)
       : m_layers(kStackSize) {
     add_layers<kStackSize - 1>(resolution, x_max, y_max);
   }
@@ -82,29 +85,25 @@ class stacked_grid {
   /**
    * @brief Get a reference to an object at a particular (layer,i,j) location
    *
-   * @tparam The index of the layer.
+   * @tparam Index Theindex of the layer.
    * @param i The x coordinate.
    * @param j The y coordinate.
-   *
-   * @return The object at the specified location.
    */
   template<uint Index>
-  typename layer_value_type<Index>::value_type& access(size_t i, size_t j) {
+  typename layer_value_type<Index>::value_type& access(uint i, uint j) {
     return reinterpret_cast<layer_value_type<Index>*>(m_layers[Index])->access(i, j);
   }
 
   template<uint Index>
-  const typename layer_value_type<Index>::value_type& access(size_t i, size_t j) const {
+  const typename layer_value_type<Index>::value_type& access(uint i, uint j) const {
     return reinterpret_cast<const layer_value_type<Index>*>(m_layers[Index])->access(i, j);
   }
 
   /**
    * @brief Get a reference to an object at a particular (layer,i,j) location
    *
-   * @tparam The index of the layer.
+   * @tparam Index The index of the layer.
    * @param d The discrete coordinate pair.
-   *
-   * @return The object at the specified location.
    */
   template <int Index>
   typename layer_value_type<Index>::value_type& access(const math::dcoord2& d) {
@@ -127,28 +126,28 @@ class stacked_grid {
   /**
    * @see \ref base_overlay_grid2D::xdsize().
    */
-  size_t xdsize(void) const {
+  uint xdsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xdsize();
   }
 
   /**
    * @see \ref base_overlay_grid2D::xrsize().
    */
-  size_t xrsize(void) const {
+  double xrsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xrsize();
   }
 
   /**
    * @see \ref base_overlay_grid2D::ydsize().
    */
-  size_t ydsize(void) const {
+  uint ydsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->ydsize();
   }
 
   /**
    * @see \ref base_overlay_grid2D::yrsize().
    */
-  size_t yrsize(void) const {
+  double yrsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->yrsize();
   }
 

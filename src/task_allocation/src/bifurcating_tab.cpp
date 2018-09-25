@@ -35,9 +35,9 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-bifurcating_tab::bifurcating_tab(const polled_task* const root,
-                                 const polled_task* const child1,
-                                 const polled_task* const child2)
+bifurcating_tab::bifurcating_tab(const polled_task *const root,
+                                 const polled_task *const child1,
+                                 const polled_task *const child2)
     : m_root(root), m_child1(child1), m_child2(child2) {
   assert(m_root->is_partitionable());
 }
@@ -46,10 +46,11 @@ bifurcating_tab::bifurcating_tab(const polled_task* const root,
  * Member Functions
  ******************************************************************************/
 bool bifurcating_tab::employed_partitioning(void) const {
-  return dynamic_cast<const partitionable_task*>(m_root)->employed_partitioning();
+  return dynamic_cast<const partitionable_task *>(m_root)
+      ->employed_partitioning();
 } /* employed_partitioning() */
 
-void bifurcating_tab::change_active_task(const polled_task* const active_task) {
+void bifurcating_tab::change_active_task(const polled_task *const active_task) {
   if (nullptr != active_task) {
     assert(this->contains_task(active_task));
   }
@@ -57,15 +58,18 @@ void bifurcating_tab::change_active_task(const polled_task* const active_task) {
   m_active_task = active_task;
 } /* change_active_task() */
 
-bool bifurcating_tab::contains_task(const polled_task *const task) const {
+__rcsw_pure bool
+bifurcating_tab::contains_task(const polled_task *const task) const {
   return task == m_root || task == m_child1 || task == m_child2;
 } /* contains_task() */
 
-bool bifurcating_tab::task_is_root(const polled_task* const task) const {
+__rcsw_pure bool
+bifurcating_tab::task_is_root(const polled_task *const task) const {
   return task == m_root;
 } /* task_is_root() */
 
-bool bifurcating_tab::task_is_child(const polled_task* const task) const {
+__rcsw_pure bool
+bifurcating_tab::task_is_child(const polled_task *const task) const {
   return task == m_child1 || task == m_child2;
 } /* task_is_child() */
 

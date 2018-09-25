@@ -65,13 +65,15 @@ public:
      double availible_charge;
      double time_left;
 
-     reading(double _availible_charge, double _time_left) : availible_charge(_availible_charge), time_left(_time_left) {}
-   }reading;
+     reading(double _availible_charge, double _time_left)
+         : availible_charge(_availible_charge),
+           time_left(_time_left) {}
+   } reading;
 
    template<typename U = T>
-   _battery_sensor(typename std::enable_if_t<std::is_same<U,
-                       argos::CCI_BatterySensor>::value,
-                       argos::CCI_BatterySensor> * sensor)
+   explicit _battery_sensor(typename std::enable_if_t<std::is_same<U,
+                            argos::CCI_BatterySensor>::value,
+                            argos::CCI_BatterySensor> * sensor)
        : m_sensor(sensor) {}
 
     /**
@@ -81,7 +83,6 @@ public:
     */
     template <typename U = T>
     typename std::enable_if_t<std::is_same<U, argos::CCI_BatterySensor>::value, reading>
-
     readings(void) const {
       argos::CCI_BatterySensor::SReading temp = m_sensor->GetReading();
       reading ret(temp.AvailableCharge, temp.TimeLeft);

@@ -70,7 +70,7 @@ class accept_set_helper {
   /**
    * @brief Accept a visitor of the specified type.
    *
-   * @tparam U. Forwarded template type parameter that is 100% necessary to get
+   * @tparam U Forwarded template type parameter that is 100% necessary to get
    * this design pattern to work.
    */
   template<typename U = T>
@@ -111,6 +111,9 @@ class accept_set<V, T>: public accept_set_helper<V, T> {
  public:
   using accept_set_helper<V, T>::accept;
 };
+
+template<typename V, typename T>
+using will_accept = accept_set_helper<V, T>;
 
 NS_END(rcppsw, patterns, visitor);
 

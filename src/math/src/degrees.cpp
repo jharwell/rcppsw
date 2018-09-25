@@ -33,9 +33,12 @@ NS_START(rcppsw, math);
 /*******************************************************************************
  * Class Constants
  ******************************************************************************/
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wglobal-constructors"
 const range<degrees> degrees::kSignedRange(degrees(-180.0), degrees(180.0));
 const range<degrees> degrees::kUnsignedRange(degrees(0.0), degrees(360.0));
-const float degrees::kDEGREES_TO_RADIANS(radians::kPI.value() / 180.0);
+const double degrees::kDEGREES_TO_RADIANS(radians::kPI.value() / 180.0);
+#pragma clang diagnostic pop
 
 /*******************************************************************************
  * Constructors/Destructors

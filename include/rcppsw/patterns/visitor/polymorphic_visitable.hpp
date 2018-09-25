@@ -44,7 +44,7 @@ template <typename T>
 class polymorphic_accept_set_helper {
  public:
   virtual void accept(T &visitor) = 0;
-  virtual ~polymorphic_accept_set_helper(void) {}
+  virtual ~polymorphic_accept_set_helper(void) = default;
 };
 
 /**
@@ -64,7 +64,7 @@ class polymorphic_accept_set {};
  */
 template<typename T, typename... Ts>
 class polymorphic_accept_set<T, Ts...>: public polymorphic_accept_set_helper<T>,
-                                          public polymorphic_accept_set<Ts...> {
+                                        public polymorphic_accept_set<Ts...> {
  public:
   using polymorphic_accept_set_helper<T>::accept;
   using polymorphic_accept_set<Ts...>::accept;

@@ -48,6 +48,8 @@ NS_START(rcppsw, patterns, state_machine);
 template <class SM, int (SM::*Func)(void)>
 class state_action0 : public state {
  public:
+  state_action0(void) = default;
+  state_action0(const state_action0&) = default;
   ~state_action0(void) override = default;
 
   int invoke_state_action(base_fsm* sm,
@@ -70,7 +72,9 @@ class state_action0 : public state {
 template <class SM, class Event, int (SM::*Func)(const Event*)>
 class state_action1 : public state {
  public:
+  state_action1(void) = default;
   ~state_action1(void) override = default;
+  state_action1(const state_action1&) = default;
 
   int invoke_state_action(base_fsm* sm, const event_data* data) const override {
     /* Downcast the state machine and event data to the correct derived type */

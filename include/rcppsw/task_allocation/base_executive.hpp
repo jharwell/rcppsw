@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <list>
+#include <string>
 
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
@@ -44,7 +45,7 @@ NS_START(rcppsw, task_allocation);
  *
  * @brief Base class for runtime task task executives.
  */
-class base_executive : public rcppsw::er::client {
+class base_executive : public rcppsw::er::client<base_executive> {
  public:
   using abort_notify_cb = std::function<void(const polled_task*)>;
   using finish_notify_cb = std::function<void(const polled_task*)>;
@@ -52,13 +53,11 @@ class base_executive : public rcppsw::er::client {
   /**
    * @brief Creates the base executive.
    *
-   * @param server Handle to logging server.
    * @param graph Graph to manage. Takes ownership of the object (can't use the
    *              language to communicate that with unique_ptr because of
    *              casting reasons).
    */
-  base_executive(std::shared_ptr<rcppsw::er::server> server,
-                 tdgraph* graph);
+  explicit base_executive(tdgraph* graph);
   ~base_executive(void) override;
 
   base_executive& operator=(const base_executive& other) = delete;
@@ -107,7 +106,7 @@ class base_executive : public rcppsw::er::client {
    * @brief Initialize the execution time estimate of the specified task within
    * the specified range (non-partitionable tasks).
    */
-  void task_init_random(polled_task* task, int lb, int ub);
+  void task_init_random(polled_task* task, uint lb, uint ub);
 
   /**
    * @brief Initialize the execution time estimate of the specified task within
@@ -115,8 +114,8 @@ class base_executive : public rcppsw::er::client {
    */
   void task_init_random(polled_task* task,
                         const polled_task* partition,
-                        int lb,
-                        int ub);
+                        uint lb,
+                        uint ub);
 
  protected:
   const polled_task* root_task(void) const;

@@ -48,13 +48,12 @@ class avoidance_force {
  public:
   explicit avoidance_force(const struct avoidance_force_params* params);
 
-  argos::CVector2 operator()(const boid& b,
+  argos::CVector2 operator()(const boid&,
                              const argos::CVector2& closest_obstacle) const;
 
  private:
   // clang-format off
-  double          m_lookahead;
-  double          m_max;
+  double m_max;
   // clang-format on
 };
 

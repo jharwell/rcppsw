@@ -51,13 +51,12 @@ NS_START(rcppsw, task_allocation);
  */
 class executive_xml_parser: public rcppsw::params::xml_param_parser {
  public:
-  explicit executive_xml_parser(const std::shared_ptr<er::server>& server,
-                                uint level)
-      : xml_param_parser(server, level),
-        m_abort(server, level + 1),
-        m_partition(server, level + 1),
-        m_estimation(server, level + 1),
-        m_subtask(server, level  + 1) {}
+  explicit executive_xml_parser(uint level)
+      : xml_param_parser(level),
+        m_abort(level + 1),
+        m_partition(level + 1),
+        m_estimation(level + 1),
+        m_subtask(level  + 1) {}
 
   /**
    * @brief The root tag that all task executive parameters should lie under in

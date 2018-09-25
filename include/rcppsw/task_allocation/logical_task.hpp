@@ -31,7 +31,7 @@
  * Macro Definitions
  ******************************************************************************/
 #define TASK_WRAPPER_DECLARE(ret, func)         \
-  ret func(void) const override;
+  ret func(void) const override
 #define TASK_WRAPPER_DEFINE(ret, class, func, handle)           \
   ret class::func(void) const { return (handle).func(); }
 #define TASK_WRAPPER_DEFINE_PTR(ret, class, func, handle)       \

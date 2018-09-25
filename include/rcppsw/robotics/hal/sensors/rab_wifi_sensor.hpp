@@ -79,9 +79,9 @@ class _rab_wifi_sensor  {
 
  public:
   template<typename U = T>
-  _rab_wifi_sensor(typename std::enable_if_t<std::is_same<U,
-                      argos::CCI_RangeAndBearingSensor>::value,
-                      argos::CCI_RangeAndBearingSensor> * sensor)
+  explicit _rab_wifi_sensor(typename std::enable_if_t<std::is_same<U,
+                            argos::CCI_RangeAndBearingSensor>::value,
+                            argos::CCI_RangeAndBearingSensor> * sensor)
       : m_sensor(sensor) {}
 
   /**

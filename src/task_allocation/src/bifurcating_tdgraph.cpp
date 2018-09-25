@@ -22,9 +22,9 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/bifurcating_tdgraph.hpp"
-#include "rcppsw/task_allocation/polled_task.hpp"
-#include "rcppsw/task_allocation/partitionable_task.hpp"
 #include "rcppsw/task_allocation/bifurcating_tdgraph_executive.hpp"
+#include "rcppsw/task_allocation/partitionable_task.hpp"
+#include "rcppsw/task_allocation/polled_task.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -34,38 +34,35 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-bifurcating_tdgraph::bifurcating_tdgraph(std::shared_ptr<er::server> &server)
-    : tdgraph(server) {}
+bifurcating_tdgraph::bifurcating_tdgraph(void)
+    : tdgraph(), ER_CLIENT_INIT("rcppsw.ta.bifurcating_tdgraph") {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void bifurcating_tdgraph::install_cb(bifurcating_tdgraph_executive* const e) {
-  e->task_alloc_notify(std::bind(&bifurcating_tdgraph::task_alloc_cb,
-                                 this,
+void bifurcating_tdgraph::install_cb(bifurcating_tdgraph_executive *const e) {
+  e->task_alloc_notify(std::bind(&bifurcating_tdgraph::task_alloc_cb, this,
                                  std::placeholders::_1));
-  e->task_abort_notify(std::bind(&bifurcating_tdgraph::task_abort_cb,
-                                 this,
+  e->task_abort_notify(std::bind(&bifurcating_tdgraph::task_abort_cb, this,
                                  std::placeholders::_1));
 } /* install_cb() */
 
-status_t bifurcating_tdgraph::set_children(const std::string &parent,
-                             const std::vector<polled_task*>& children) {
+status_t
+bifurcating_tdgraph::set_children(const std::string &parent,
+                                  const std::vector<polled_task *> &children) {
   return tdgraph::set_children(parent, children);
 } /* set_children() */
 
 status_t
-bifurcating_tdgraph::set_children(const polled_task* parent,
-                                  const std::vector<polled_task*>& children) {
+bifurcating_tdgraph::set_children(const polled_task *parent,
+                                  const std::vector<polled_task *> &children) {
   ER_ASSERT(2 == children.size(),
-            "FATAL: Bifurcating tdgraph cannot handle non-binary bifurcations");
-  m_tabs.emplace_back(parent,
-                      children[0],
-                      children[1]);
+            "Bifurcating tdgraph cannot handle non-binary bifurcations");
+  m_tabs.emplace_back(parent, children[0], children[1]);
   return tdgraph::set_children(parent, children);
 } /* set_children() */
 
-void bifurcating_tdgraph::task_alloc_cb(const polled_task* const v) {
+void bifurcating_tdgraph::task_alloc_cb(const polled_task *const v) {
   for (auto &t : m_tabs) {
     if (t.contains_task(v)) {
       t.change_active_task(v);
@@ -76,7 +73,7 @@ void bifurcating_tdgraph::task_alloc_cb(const polled_task* const v) {
   } /* for(&r..) */
 } /* task_alloc_cb() */
 
-void bifurcating_tdgraph::task_abort_cb(const polled_task* const v) {
+void bifurcating_tdgraph::task_abort_cb(const polled_task *const v) {
   /*
    * If our parent is ourself, then the task that has just been aborted is the
    * root task and we don't want to set the last partition to ourself, because
@@ -84,7 +81,7 @@ void bifurcating_tdgraph::task_abort_cb(const polled_task* const v) {
    * resulting of task partitioning during allocation.
    */
   if (vertex_parent(v) != v) {
-    auto parent = dynamic_cast<partitionable_task*>(vertex_parent(v));
+    auto parent = dynamic_cast<partitionable_task *>(vertex_parent(v));
     parent->last_partition(v);
   }
 } /* task_abort_cb() */

@@ -48,6 +48,7 @@ list(APPEND ${target}_SUBDIRS utils)
 list(APPEND ${target}_SUBDIRS control)
 list(APPEND ${target}_SUBDIRS task_allocation)
 list(APPEND ${target}_SUBDIRS params)
+list(APPEND ${target}_SUBDIRS algorithm)
 list(APPEND ${target}_SUBDIRS metrics)
 list(APPEND ${target}_SUBDIRS ds)
 list(APPEND ${target}_SUBDIRS math)
@@ -99,6 +100,7 @@ endforeach()
 set(${target}_LIBRARIES
   rcsw
   ticpp
+  log4cxx
   ${Boost_LIBRARIES}
   )
 set(${target_LIBRARY_DIRS} ${rcsw_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS})

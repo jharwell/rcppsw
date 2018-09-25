@@ -56,9 +56,9 @@ template<typename T>
 class _wifi_actuator {
  public:
   template<typename U = T>
-  _wifi_actuator(typename std::enable_if_t<std::is_same<U,
-               argos::CCI_RangeAndBearingActuator>::value,
-               argos::CCI_RangeAndBearingActuator> * wifi)
+  explicit _wifi_actuator(typename std::enable_if_t<std::is_same<U,
+                          argos::CCI_RangeAndBearingActuator>::value,
+                          argos::CCI_RangeAndBearingActuator> * wifi)
       : m_wifi(wifi) {}
 
 
