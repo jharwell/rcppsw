@@ -51,7 +51,7 @@ NS_START(rcppsw, swarm);
  */
 class pheromone_density : public rcppsw::math::expression<double> {
  public:
-  pheromone_density(void) : pheromone_density(0.0) {}
+  pheromone_density(void) : pheromone_density{0.0} {}
   explicit pheromone_density(double rho)
       : expression(), m_delta(0), m_rho(rho) {}
 

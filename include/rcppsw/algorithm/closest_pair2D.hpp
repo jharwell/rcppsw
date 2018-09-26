@@ -93,6 +93,9 @@ class closest_pair {
     } else {
       assert(false);
     }
+    // Should never be hit; here only to silence the compiler with asserts are
+    // compiled away.
+    return result_type2D<T>();
   }
 
   /**

@@ -38,6 +38,8 @@ using grid_type = typename boost::multi_array<T, 2>;
 template <typename T>
 using grid_view = typename grid_type<T>::template array_view<2>::type;
 template <typename T>
+using const_grid_view = typename grid_type<T>::template const_array_view<2>::type;
+template <typename T>
 using view_range = typename grid_type<T>::index_range;
 using index_range = boost::multi_array_types::index_range;
 
