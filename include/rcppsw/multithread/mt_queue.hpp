@@ -28,6 +28,7 @@
 #include <boost/thread/locks.hpp>
 #include <deque>
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/patterns/decorator/decorator.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -43,26 +44,23 @@ NS_START(rcppsw, multithread);
  *
  * @brief A simple multiple-producer/consumer queue with locking.
  */
+namespace decorator = rcppsw::patterns::decorator;
 template <typename T>
-class mt_queue {
+class mt_queue : public decorator::decorator<std::deque<T>> {
  public:
-  mt_queue(void) : m_queue(), m_mtx(), m_cv() {}
+  mt_queue(void) : m_mtx(), m_cv() {}
 
   using const_iterator = typename std::deque<T>::const_iterator;
 
-  typename std::deque<T>::const_iterator begin(void) const {
-    return m_queue.begin();
-  }
-  typename std::deque<T>::const_iterator end(void) const {
-    return m_queue.end();
-  }
+  DECORATE_FUNC_TEMPLATE(T, begin, const);
+  DECORATE_FUNC_TEMPLATE(T, end, const);
 
   /**
    * @brief Add data to the queue and notify others
    */
   void enqueue(const T& data) {
     boost::unique_lock<boost::mutex> lock(m_mtx);
-    m_queue.push_back(data);
+    decorator::decorator<std::deque<T>>::decoratee().push_back(data);
     m_cv.notify_one();
   }
 
@@ -75,20 +73,22 @@ class mt_queue {
     /* When there is no data, wait till someone fills it. Lock is automatically
      * released in the wait and obtained again after the wait.
      */
-    while (m_queue.empty()) { m_cv.wait(lock); }
+    while (decorator::decorator<std::deque<T>>::decoratee().empty()) {
+      m_cv.wait(lock);
+    } /* while() */
 
-    auto result = static_cast<T>(m_queue.front());
-    m_queue.pop_front();
+    auto result = static_cast<T>(
+        decorator::decorator<std::deque<T>>::decoratee().front());
+    decorator::decorator<std::deque<T>>::decoratee().pop_front();
     return result;
   }
 
-  size_t size() const { return m_queue.size(); }
-  T front(void) { return m_queue.front(); }
-  void clear(void) { m_queue.clear(); }
-  const T& operator[](std::size_t pos) const { return m_queue[pos]; }
+  DECORATE_FUNC_TEMPLATE(T, size, const);
+  DECORATE_FUNC_TEMPLATE(T, front, const);
+  DECORATE_FUNC_TEMPLATE(T, clear, const);
+  DECORATE_FUNC_TEMPLATE(T, operator[], const);
 
  private:
-  std::deque<T> m_queue;
   boost::mutex m_mtx;
   boost::condition_variable m_cv;
 };
