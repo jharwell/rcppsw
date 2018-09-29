@@ -1,5 +1,5 @@
 /**
- * @file partitioning_metrics.hpp
+ * @file distribution_metrics.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,14 +18,12 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_TASKS_PARTITIONING_METRICS_HPP_
-#define INCLUDE_RCPPSW_METRICS_TASKS_PARTITIONING_METRICS_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_TASKS_DISTRIBUTION_METRICS_HPP_
+#define INCLUDE_RCPPSW_METRICS_TASKS_DISTRIBUTION_METRICS_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/metrics/base_metrics.hpp"
 
@@ -38,24 +36,36 @@ NS_START(rcppsw, metrics, tasks);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class partitioning_metrics
- * @ingroup metrics
+ * @class distribution_metrics
+ * @ingroup metrics tasks
  *
- * @brief Interface defining metrics that can be collected on tasks during
- * partitioning.
+ * @brief Interface defining metrics that can be collected about the current
+ * task distribution of a \ref tdgraph.
+ *
  */
-class partitioning_metrics : public virtual base_metrics {
+class distribution_metrics : public virtual base_metrics {
  public:
-  partitioning_metrics(void) = default;
-  ~partitioning_metrics(void) override = default;
+  distribution_metrics(void) = default;
+  ~distribution_metrics(void) override = default;
 
   /**
-   * @brief This function should return \c TRUE, if a robot has chosen to employ
-   * task partitioning when allocating itself its next task.
+   * @brief Return the depth of the curent task within the task decomposition
+   * graph, or -1 if there is no current task.
    */
-  virtual bool employed_partitioning(void) const = 0;
+  virtual int current_task_depth(void) const = 0;
+
+  /**
+   * @brief Return a uuid for the current task, for use in calculating overall
+   * task distribution, or -1 if no current task.
+   */
+  virtual int current_task_id(void) const = 0;
+
+  /**
+   * @brief Return a uuid for the TAB that the current task belongs to.
+   */
+  virtual int current_task_tab(void) const = 0;
 };
 
 NS_END(tasks, metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_TASKS_PARTITIONING_METRICS_HPP_ */
+#endif /* INCLUDE_RCPPSW_METRICS_TASKS_DISTRIBUTION_METRICS_HPP_ */

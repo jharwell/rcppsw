@@ -24,9 +24,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <list>
 #include <string>
-#include <vector>
+#include <list>
+#include <algorithm>
 
 #include "rcppsw/task_allocation/tdgraph.hpp"
 #include "rcppsw/task_allocation/bifurcating_tab.hpp"
@@ -78,6 +78,18 @@ class bifurcating_tdgraph : public tdgraph,
   const bifurcating_tab* active_tab(void) const { return m_active_tab; }
 
   /**
+   * @brief Return a uuid for the active tab (really just an index in the vector
+   * of TABs).
+   */
+  __rcsw_pure int active_tab_id(void) const {
+    return std::distance(m_tabs.begin(),
+                         std::find_if(m_tabs.begin(),
+                                      m_tabs.end(),
+                                      [this](const auto & tab) {
+                                      return &tab == m_active_tab;
+                                      }));
+  }
+  /**
    * @brief Install task abort and alloc callbacks. Can't be done during
    * construction, as a graph is part of the executive, and so a reference to a
    * constructed executive object is not yet available.
@@ -105,8 +117,8 @@ class bifurcating_tdgraph : public tdgraph,
   void task_abort_cb(const polled_task* v);
 
   // clang-format off
-  std::list<bifurcating_tab> m_tabs{};
-  const bifurcating_tab *    m_active_tab{nullptr};
+  std::list<bifurcating_tab>   m_tabs{};
+  const bifurcating_tab *      m_active_tab{nullptr};
   // clang-format on
 };
 

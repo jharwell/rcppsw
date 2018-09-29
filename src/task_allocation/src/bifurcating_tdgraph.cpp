@@ -58,7 +58,7 @@ bifurcating_tdgraph::set_children(const polled_task *parent,
                                   const std::vector<polled_task *> &children) {
   ER_ASSERT(2 == children.size(),
             "Bifurcating tdgraph cannot handle non-binary bifurcations");
-  m_tabs.emplace_back(parent, children[0], children[1]);
+  m_tabs.emplace_back(this, parent, children[0], children[1]);
   return tdgraph::set_children(parent, children);
 } /* set_children() */
 

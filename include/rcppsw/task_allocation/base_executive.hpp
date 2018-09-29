@@ -117,6 +117,8 @@ class base_executive : public rcppsw::er::client<base_executive> {
                         uint lb,
                         uint ub);
 
+  const tdgraph* graph(void) const { return m_graph.get(); }
+
  protected:
   const polled_task* root_task(void) const;
   polled_task* root_task(void);
@@ -140,7 +142,6 @@ class base_executive : public rcppsw::er::client<base_executive> {
    */
   double task_abort_prob(polled_task* task);
 
-  const tdgraph* graph(void) const { return m_graph.get(); }
   tdgraph* graph(void) { return m_graph.get(); }
 
   virtual polled_task* do_get_next_task(void) = 0;
