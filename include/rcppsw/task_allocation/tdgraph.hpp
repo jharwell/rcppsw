@@ -133,6 +133,24 @@ class tdgraph : public er::client<tdgraph> {
    */
   std::vector<polled_task*> children(const polled_task* parent) const;
 
+  /**
+   * @brief Return the depth of the specified task in the graph, as measured
+   * from the root (the root is depth 0).
+   *
+   * @param v The vertex to obtain the depth of.
+   *
+   * @return The depth of the vertex from the root, or -1 if no such vertex
+   * exists in the graph.
+   */
+  int vertex_depth(const polled_task* v) const;
+
+  /**
+   * @brief Retrieve the numeric ID of the vertex.
+   *
+   * @return The vertex ID, or -1 if no such vertex in graph.
+   */
+  int vertex_id(const polled_task* v) const;
+
  private:
   /**
    * @brief Find the vertex descriptor for the vertex, which is what we need to
@@ -140,6 +158,15 @@ class tdgraph : public er::client<tdgraph> {
    */
   vertex_iterator find_vertex(const polled_task* v) const;
   vertex_iterator find_vertex(const std::string& v) const;
+
+  /**
+   * @brief Recursively calculate the depth of a vertex from the root in the
+   * graph.
+   *
+   * @param v The current node along trajectory from desired node up to root.
+   * @param depth The starting depth (should always be 0).
+   */
+  uint vertex_depth_impl(const polled_task*v, int depth) const;
 
   // clang-format off
   polled_task*       m_root;

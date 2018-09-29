@@ -24,7 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
 #include <string>
 
 #include "rcppsw/metrics/base_metrics_collector.hpp"
@@ -76,17 +75,23 @@ class bifurcating_tab_metrics_collector : public base_metrics_collector {
      */
     uint int_task_sw_count;
 
+    /**
+     * @brief # Times when task allocation resulted in a task of a different
+     * depth being executed than previous.
+     */
+    uint int_task_depth_sw_count;
+
     uint cum_subtask1_count;
     uint cum_subtask2_count;
     uint cum_partition_count;
     uint cum_no_partition_count;
     uint cum_task_sw_count;
+    uint cum_task_depth_sw_count;
   };
 
   /**
    * @param ofname Output file name.
    * @param interval Collection interval.
-   * @param subtask_names Vector of names of subtasks in the TAB.
    */
   bifurcating_tab_metrics_collector(const std::string& ofname,
                                     uint interval);

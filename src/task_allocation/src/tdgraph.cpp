@@ -58,6 +58,36 @@ polled_task *tdgraph::vertex_parent(const tdgraph &graph,
 __rcsw_pure const polled_task *tdgraph::root(void) const { return m_root; }
 __rcsw_pure polled_task *tdgraph::root(void) { return m_root; }
 
+int tdgraph::vertex_id(const polled_task* const v) const {
+  auto it = find_vertex(v);
+  if (it == boost::vertices(m_graph).second) {
+    ER_WARN("No such vertex %s found in graph", v->name().c_str());
+    return -1;
+  }
+  return *it;
+} /* vertex_id() */
+
+int tdgraph::vertex_depth(const polled_task* const v) const {
+  auto it = find_vertex(v);
+  if (it == boost::vertices(m_graph).second) {
+    ER_WARN("No such vertex %s found in graph", v->name().c_str());
+    return -1;
+  }
+  return vertex_depth_impl(v, 0);
+} /* vertex_depth() */
+
+uint tdgraph::vertex_depth_impl(const polled_task* const v,
+                                int depth) const {
+  /*
+   * Only the root's parent is equal to itself.
+   */
+  if (vertex_parent(v) == v) {
+    return depth;
+  } else {
+    return vertex_depth_impl(vertex_parent(v), depth + 1);
+  }
+} /* vertex_depth_impl() */
+
 tdgraph::vertex_iterator
 tdgraph::find_vertex(const polled_task *const v) const {
   vertex_iterator v_i, v_end;
@@ -80,8 +110,8 @@ tdgraph::vertex_iterator tdgraph::find_vertex(const std::string &v) const {
 polled_task *tdgraph::vertex_parent(const polled_task *const vertex) const {
   auto found = find_vertex(vertex);
   if (found == boost::vertices(m_graph).second) {
-    return nullptr;
     ER_WARN("No such vertex %s found in graph", vertex->name().c_str());
+    return nullptr;
   }
   /*
    * Now, we can just look in the incident edges for the vertex and return the

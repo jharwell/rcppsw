@@ -48,10 +48,6 @@ __rcsw_pure bool partitionable_task::employed_partitioning(void) const {
   return m_employed_partitioning;
 } /* employed_partitioning() */
 
-std::string partitionable_task::subtask_selection(void) const {
-  return m_last_partition->name();
-} /* subtask_selection() */
-
 /*******************************************************************************
  * General Member Functions
  ******************************************************************************/
@@ -65,7 +61,7 @@ polled_task *
 partitionable_task::partition(const polled_task *const partition1,
                               const polled_task *const partition2) {
   ER_ASSERT(!(m_always_partition && m_never_partition),
-            "cannot ALWAYS and NEVER partition");
+            "Cannot ALWAYS and NEVER partition");
 
   double partition_prob;
   if (m_always_partition) {

@@ -45,6 +45,7 @@ exist in Boost, or that build on what boost provides. Includes such things as:
    - log4cxx (`liblog4cxx-dev` on ubuntu)
    - catch (`catch` on ubuntu)
    - graphviz (`graphviz` on ubuntu)
+   - doxygen (`doxygen` on ubuntu)
 
 ## Post-cloning
 

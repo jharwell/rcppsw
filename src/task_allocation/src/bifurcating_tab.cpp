@@ -26,6 +26,7 @@
 
 #include "rcppsw/task_allocation/partitionable_task.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
+#include "rcppsw/task_allocation/bifurcating_tdgraph.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -35,24 +36,23 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-bifurcating_tab::bifurcating_tab(const polled_task *const root,
+bifurcating_tab::bifurcating_tab(const bifurcating_tdgraph* const graph,
+                                 const polled_task *const root,
                                  const polled_task *const child1,
                                  const polled_task *const child2)
-    : m_root(root), m_child1(child1), m_child2(child2) {
-  assert(m_root->is_partitionable());
+    : ER_CLIENT_INIT("rcppsw.ta.bifurcating_tab"),
+      mc_graph(graph), m_root(root), m_child1(child1), m_child2(child2) {
+  ER_ASSERT(m_root->is_partitionable(), "Root task not partitionable");
 }
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-bool bifurcating_tab::employed_partitioning(void) const {
-  return dynamic_cast<const partitionable_task *>(m_root)
-      ->employed_partitioning();
-} /* employed_partitioning() */
-
 void bifurcating_tab::change_active_task(const polled_task *const active_task) {
   if (nullptr != active_task) {
-    assert(this->contains_task(active_task));
+    ER_ASSERT(this->contains_task(active_task),
+              "New active task '%s' not in TAB",
+              active_task->name().c_str());
   }
   m_last_task = m_active_task;
   m_active_task = active_task;
@@ -72,5 +72,22 @@ __rcsw_pure bool
 bifurcating_tab::task_is_child(const polled_task *const task) const {
   return task == m_child1 || task == m_child2;
 } /* task_is_child() */
+
+/*******************************************************************************
+ * TAB Metrics
+ ******************************************************************************/
+bool bifurcating_tab::employed_partitioning(void) const {
+  return dynamic_cast<const partitionable_task *>(m_root)
+      ->employed_partitioning();
+} /* employed_partitioning() */
+
+bool bifurcating_tab::task_depth_changed(void) const {
+  if (nullptr == m_last_task) {
+    return true; /* first allocation */
+  }
+  return mc_graph->vertex_depth(m_active_task) !=
+      mc_graph->vertex_depth(m_last_task);
+} /* task_depth_changed() */
+
 
 NS_END(task_allocation, rcppsw);

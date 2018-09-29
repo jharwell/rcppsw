@@ -25,12 +25,14 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/metrics/tasks/bifurcating_tab_metrics.hpp"
+#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 class polled_task;
+class bifurcating_tdgraph;
 
 /*******************************************************************************
  * Class Definitions
@@ -39,15 +41,18 @@ class polled_task;
  * @class bifurcating_tab
  * @ingroup task_allocation
  *
- * @brief Represents Bifurcating Task Allocation Block (TAB) which consists of a root
- * task and two subtasks the root task decomposes into. The subtasks are atomic,
- * and cannot be decomposed further.
+ * @brief Represents Bifurcating Task Allocation Block (TAB) which consists of a
+ * root task and two subtasks the root task decomposes into. The subtasks are
+ * may or may not be capable of being further decomposed, and therefore the
+ * roots of additional TABs.
  */
-class bifurcating_tab : public metrics::tasks::bifurcating_tab_metrics {
+class bifurcating_tab : public metrics::tasks::bifurcating_tab_metrics,
+                        public er::client<bifurcating_tab> {
  public:
-  bifurcating_tab(const polled_task* root,
-                      const polled_task* child1,
-                      const polled_task* child2);
+  bifurcating_tab(const bifurcating_tdgraph* const graph,
+                  const polled_task* root,
+                  const polled_task* child1,
+                  const polled_task* child2);
 
   ~bifurcating_tab(void) override = default;
 
@@ -82,16 +87,18 @@ class bifurcating_tab : public metrics::tasks::bifurcating_tab_metrics {
   bool subtask1_active(void) const override { return m_active_task == m_child1; }
   bool subtask2_active(void) const override { return m_active_task == m_child2; }
   bool root_active(void) const override { return m_active_task == m_root; }
-  bool task_changed(void) const override { return m_active_task != m_last_task; }
   bool employed_partitioning(void) const override;
+  bool task_changed(void) const override { return m_active_task != m_last_task; }
+  bool task_depth_changed(void) const override;
 
  private:
   // clang-format off
-  const polled_task* m_last_task{nullptr};
-  const polled_task* m_active_task{nullptr};
-  const polled_task* const m_root;
-  const polled_task* const m_child1;
-  const polled_task* const m_child2;
+  const bifurcating_tdgraph* const mc_graph;
+  const polled_task*               m_last_task{nullptr};
+  const polled_task*               m_active_task{nullptr};
+  const polled_task* const         m_root;
+  const polled_task* const         m_child1;
+  const polled_task* const         m_child2;
   // clang-format on
 };
 

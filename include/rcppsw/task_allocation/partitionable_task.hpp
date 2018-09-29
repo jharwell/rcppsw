@@ -60,7 +60,6 @@ class partitionable_task : public er::client<partitionable_task>,
 
   /* partitioning metrics */
   bool employed_partitioning(void) const override;
-  std::string subtask_selection(void) const override;
 
   /**
    * @brief Partition the task according to the configured method, and return a
