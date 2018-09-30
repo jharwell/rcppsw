@@ -25,7 +25,6 @@
  * Includes
  ******************************************************************************/
 #include <random>
-
 #include <argos3/core/utility/math/angles.h>
 
 #include "rcppsw/common/common.hpp"

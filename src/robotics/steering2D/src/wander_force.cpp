@@ -60,18 +60,18 @@ argos::CVector2 wander_force::operator()(const boid &entity) {
   }
 
   /* calculate circle center */
-  argos::CVector2 velocity;
+  math::vector2d velocity;
   if (entity.linear_velocity().Length() <= 0) {
-    velocity = argos::CVector2(1, 0);
+    velocity = math::vector2d(1, 0);
   } else {
     velocity = entity.linear_velocity();
   }
 
-  argos::CVector2 circle_center =
+  math::vector2d circle_center =
       (velocity).Normalize().Scale(m_circle_distance, m_circle_distance);
 
   /* calculate displacement force (the actual wandering) */
-  argos::CVector2 displacement(
+  math::vector2d displacement(
       m_circle_radius * std::cos((m_angle + velocity.Angle()).GetValue()),
       m_circle_radius * std::sin((m_angle + velocity.Angle()).GetValue()));
 
@@ -111,7 +111,7 @@ argos::CVector2 wander_force::operator()(const boid &entity) {
   }
   m_last_angle = angle_diff;
 
-  argos::CVector2 wander((circle_center + displacement).Length(),
+  math::vector2d wander((circle_center + displacement).Length(),
                          argos::CRadians(angle_diff));
   return wander.Normalize() * m_max;
 } /* operator()() */

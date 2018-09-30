@@ -17,6 +17,9 @@
                     (add-to-list 'flycheck-clang-args "-std=c++14")
                     (add-to-list 'flycheck-clang-args (concat "-isystem" (substitute-in-file-name
                                                                           "$rcppsw")))
+                    (add-to-list 'flycheck-clang-args (concat "-isystem" (substitute-in-file-name
+                                                                          "$localroot/include")))
+
 
                     (setq flycheck-gcc-include-path includes-list)
                     (add-to-list 'flycheck-gcc-args "-fPIC")
