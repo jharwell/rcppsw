@@ -58,8 +58,12 @@ polled_task *tdgraph::vertex_parent(const tdgraph &graph,
 __rcsw_pure const polled_task *tdgraph::root(void) const { return m_root; }
 __rcsw_pure polled_task *tdgraph::root(void) { return m_root; }
 
+const polled_task* tdgraph::find_vertex(const std::string& task_name) const {
+  return m_graph[*find_vertex_impl(task_name)];
+} /* find_vertex() */
+
 int tdgraph::vertex_id(const polled_task* const v) const {
-  auto it = find_vertex(v);
+  auto it = find_vertex_impl(v);
   if (it == boost::vertices(m_graph).second) {
     ER_WARN("No such vertex %s found in graph", v->name().c_str());
     return -1;
@@ -68,13 +72,22 @@ int tdgraph::vertex_id(const polled_task* const v) const {
 } /* vertex_id() */
 
 int tdgraph::vertex_depth(const polled_task* const v) const {
-  auto it = find_vertex(v);
+  auto it = find_vertex_impl(v);
   if (it == boost::vertices(m_graph).second) {
     ER_WARN("No such vertex %s found in graph", v->name().c_str());
     return -1;
   }
   return vertex_depth_impl(v, 0);
 } /* vertex_depth() */
+
+void tdgraph::walk(const walk_cb& f) const {
+  vertex_iterator v_i, v_end;
+  boost::tie(v_i, v_end) = boost::vertices(m_graph);
+  while (v_i != v_end) {
+    f(m_graph[*v_i]);
+    ++v_i;
+  } /* while() */
+} /* walk() */
 
 uint tdgraph::vertex_depth_impl(const polled_task* const v,
                                 int depth) const {
@@ -89,26 +102,26 @@ uint tdgraph::vertex_depth_impl(const polled_task* const v,
 } /* vertex_depth_impl() */
 
 tdgraph::vertex_iterator
-tdgraph::find_vertex(const polled_task *const v) const {
+tdgraph::find_vertex_impl(const polled_task *const v) const {
   vertex_iterator v_i, v_end;
   boost::tie(v_i, v_end) = boost::vertices(m_graph);
   auto it = std::find_if(v_i, v_end, [&](const tdgraph::vertex &tmp) {
     return v == m_graph[tmp];
   });
   return it;
-} /* find_vertex() */
+} /* find_vertex_impl() */
 
-tdgraph::vertex_iterator tdgraph::find_vertex(const std::string &v) const {
+tdgraph::vertex_iterator tdgraph::find_vertex_impl(const std::string &v) const {
   vertex_iterator v_i, v_end;
   boost::tie(v_i, v_end) = boost::vertices(m_graph);
   auto it = std::find_if(v_i, v_end, [&](const tdgraph::vertex &tmp) {
     return v == m_graph[tmp]->name();
   });
   return it;
-} /* find_vertex() */
+} /* find_vertex_impl() */
 
 polled_task *tdgraph::vertex_parent(const polled_task *const vertex) const {
-  auto found = find_vertex(vertex);
+  auto found = find_vertex_impl(vertex);
   if (found == boost::vertices(m_graph).second) {
     ER_WARN("No such vertex %s found in graph", vertex->name().c_str());
     return nullptr;
@@ -138,7 +151,7 @@ error:
 
 std::vector<polled_task *>
 tdgraph::children(const polled_task *const parent) const {
-  auto it = find_vertex(parent);
+  auto it = find_vertex_impl(parent);
   ER_ASSERT(it != boost::vertices(m_graph).second,
             "No such vertex %s found in graph", parent->name().c_str());
   std::vector<polled_task *> kids;
@@ -155,13 +168,13 @@ tdgraph::children(const polled_task *const parent) const {
 
 status_t tdgraph::set_children(const std::string &parent,
                                const std::vector<polled_task *> &children) {
-  return set_children(m_graph[*find_vertex(parent)], children);
+  return set_children(m_graph[*find_vertex_impl(parent)], children);
 } /* set_children() */
 
 status_t tdgraph::set_children(const polled_task *parent,
                                const std::vector<polled_task *> &children) {
   out_edge_iterator oe_start, oe_end;
-  auto vertex_d = find_vertex(parent);
+  auto vertex_d = find_vertex_impl(parent);
   ER_CHECK(vertex_d != boost::vertices(m_graph).second,
            "No such vertex %s in graph", parent->name().c_str());
 

@@ -52,7 +52,26 @@ class time_estimate : public rcppsw::math::expression<double> {
   explicit time_estimate(double alpha) : m_alpha(alpha) {}
 
   double alpha(void) const { return m_alpha; }
+
+  /**
+   * @brief Calculate a new time estimate based on the current estimate and the
+   * new measure.
+   *
+   * @return The new estimate.
+   */
   double calc(double current_measure);
+
+  /**
+   * @brief Calculate a new time estimate based on a time estimate of the
+   * current measurement.
+   *
+   * @return The new estimate.
+   */
+  time_estimate& calc(const time_estimate& current_measure) {
+    this->calc(current_measure.last_result());
+    return *this;
+  }
+
   time_estimate operator+(const time_estimate& other) const;
   time_estimate operator/(const time_estimate& other) const;
 
@@ -66,6 +85,7 @@ time_estimate operator*(const time_estimate& lhs, double d);
 time_estimate operator*(double d, const time_estimate& rhs);
 time_estimate operator/(double d, const time_estimate& rhs);
 time_estimate operator/(const time_estimate& lhs, double d);
+
 NS_END(task_allocation, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TIME_ESTIMATE_HPP_ */

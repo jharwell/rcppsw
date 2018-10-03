@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <string>
+#include <list>
 
 #include "rcppsw/task_allocation/base_executive.hpp"
 
@@ -51,7 +52,8 @@ class bifurcating_tdgraph_executive : public base_executive,
   using alloc_notify_cb = std::function<void(const polled_task*,
                                              const bifurcating_tab*)>;
 
-  explicit bifurcating_tdgraph_executive(bifurcating_tdgraph* graph);
+  bifurcating_tdgraph_executive(bool update_exec_ests,
+                                bifurcating_tdgraph* graph);
 
   void run(void) override;
 
@@ -82,8 +84,9 @@ class bifurcating_tdgraph_executive : public base_executive,
   void handle_task_finish(polled_task* task);
   void update_task_partition_prob(polled_task* task);
 
+  // clang-format off
   std::list<alloc_notify_cb>  m_task_alloc_notify{};
-
+  // clang-format on
 };
 
 NS_END(task_allocation, rcppsw);

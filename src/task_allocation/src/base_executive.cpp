@@ -34,8 +34,10 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_executive::base_executive(tdgraph *const graph)
-    : ER_CLIENT_INIT("rcppsw.ta.executive.base"), m_graph(graph) {}
+base_executive::base_executive(bool update_exec_ests, tdgraph *const graph)
+    : ER_CLIENT_INIT("rcppsw.ta.executive.base"),
+      m_update_exec_ests(update_exec_ests),
+      m_graph(graph) {}
 
 base_executive::~base_executive(void) = default;
 
@@ -43,7 +45,6 @@ base_executive::~base_executive(void) = default;
  * Member Functions
  ******************************************************************************/
 polled_task *base_executive::get_next_task(const polled_task *last_task) {
-  m_last_task = last_task;
   /*
    * We are being run for the first time, so run the partitioning algorithm on
    * the root of the tree.
