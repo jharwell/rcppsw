@@ -27,6 +27,7 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <vector>
 #include <string>
+#include <functional>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
@@ -72,6 +73,7 @@ class tdgraph : public er::client<tdgraph> {
   using edge_iterator = boost::graph_traits<graph_impl>::edge_iterator;
   using out_edge_iterator = boost::graph_traits<graph_impl>::out_edge_iterator;
   using in_edge_iterator = boost::graph_traits<graph_impl>::in_edge_iterator;
+  using walk_cb = std::function<void(const polled_task*)>;
 
   /**
    * @brief Get the parent of a node in the graph, given the graph and node.
@@ -151,13 +153,27 @@ class tdgraph : public er::client<tdgraph> {
    */
   int vertex_id(const polled_task* v) const;
 
+  /**
+   * @brief Find the task vertex corresponding to the specified task name.
+   *
+   * @return The task vertex, or NULL if no such task.
+   */
+  const polled_task* find_vertex(const std::string& task_name) const;
+
+  /**
+   * @brief Run the callback on each node in the graph, in an arbitrary order.
+   *
+   * @param f The callback.
+   */
+  void walk(const walk_cb& f) const;
+
  private:
   /**
    * @brief Find the vertex descriptor for the vertex, which is what we need to
    * interact with the graph efficiently.
    */
-  vertex_iterator find_vertex(const polled_task* v) const;
-  vertex_iterator find_vertex(const std::string& v) const;
+  vertex_iterator find_vertex_impl(const polled_task* v) const;
+  vertex_iterator find_vertex_impl(const std::string& v) const;
 
   /**
    * @brief Recursively calculate the depth of a vertex from the root in the

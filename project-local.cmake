@@ -115,6 +115,7 @@ if (NOT TARGET ${target})
     $<TARGET_OBJECTS:${target}-ds>
     $<TARGET_OBJECTS:${target}-multithread>
     $<TARGET_OBJECTS:${target}-utils>
+    $<TARGET_OBJECTS:${target}-algorithm>
     $<TARGET_OBJECTS:${target}-state_machine>
     $<TARGET_OBJECTS:${target}-steering2D>
     $<TARGET_OBJECTS:${target}-kinematics2D>

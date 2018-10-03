@@ -47,24 +47,28 @@ NS_START(rcppsw, task_allocation);
  */
 class base_executive : public rcppsw::er::client<base_executive> {
  public:
-  using abort_notify_cb = std::function<void(const polled_task*)>;
-  using finish_notify_cb = std::function<void(const polled_task*)>;
+  using abort_notify_cb = std::function<void(polled_task*)>;
+  using finish_notify_cb = std::function<void(polled_task*)>;
 
   /**
    * @brief Creates the base executive.
    *
+   * @param update_exec_ests Should per-task estimates of execution time be
+   *                         updated automatically as the executive runs, or are
+   *                         they going to be updated externally somehow?
    * @param graph Graph to manage. Takes ownership of the object (can't use the
    *              language to communicate that with unique_ptr because of
    *              casting reasons).
    */
-  explicit base_executive(tdgraph* graph);
+  base_executive(bool update_exec_ests, tdgraph* graph);
   ~base_executive(void) override;
 
   base_executive& operator=(const base_executive& other) = delete;
   base_executive(const base_executive& other) = delete;
 
   /**
-   * @brief The means by which the task executive will run one timestep/task/etc.
+   * @brief The means by which the task executive will run one
+   * timestep.
    */
   virtual void run(void) = 0;
 
@@ -77,25 +81,30 @@ class base_executive : public rcppsw::er::client<base_executive> {
   /**
    * @brief Set an optional callback that will be run when a task is aborted.
    *
-   * The callback will be passed the task that was aborted, so if task-specific
-   * abort callbacks are needed, they can be implemented that way.
+   * The callback will be passed the task that was aborted, before the active
+   * task is reset or any time estimates have been updated on the aborted task
+   * (the task is marked as aborted before calling).
    */
-  void task_abort_notify(abort_notify_cb cb) { m_task_abort_notify.push_back(cb); }
-  const std::list<abort_notify_cb>& task_abort_notify(void) const { return m_task_abort_notify; }
+  void task_abort_notify(const abort_notify_cb& cb) {
+    m_task_abort_notify.push_back(cb);
+  }
+  const std::list<abort_notify_cb>& task_abort_notify(void) const {
+    return m_task_abort_notify;
+  }
 
   /**
    * @brief Set an optional callback that will be run when a task finishes.
    *
    * The callback will be passed a pointer to the task that was just finished,
-   * before the task is reset.
+   * before the task is reset or any time estimates are updated on the finished
+   * task.
    */
-  void task_finish_notify(finish_notify_cb cb) { m_task_finish_notify.push_back(cb); }
-  const std::list<finish_notify_cb>& task_finish_notify(void) const { return m_task_finish_notify; }
-
-  /**
-   * @brief Get the last task that was executed before the current one.
-   */
-  const polled_task* last_task(void) const { return m_last_task; }
+  void task_finish_notify(const finish_notify_cb& cb) {
+    m_task_finish_notify.push_back(cb);
+  }
+  const std::list<finish_notify_cb>& task_finish_notify(void) const {
+    return m_task_finish_notify;
+  }
 
   /**
    * @brief Get the parent task of the specified one.
@@ -118,6 +127,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
                         uint ub);
 
   const tdgraph* graph(void) const { return m_graph.get(); }
+  bool update_exec_ests(void) const { return m_update_exec_ests; }
 
  protected:
   const polled_task* root_task(void) const;
@@ -154,8 +164,8 @@ class base_executive : public rcppsw::er::client<base_executive> {
   polled_task* get_first_task(void);
 
   // clang-format off
+  bool                        m_update_exec_ests{true};
   polled_task*                m_current_task{nullptr};
-  const polled_task*          m_last_task{nullptr};
   std::list<abort_notify_cb>  m_task_abort_notify{};
   std::list<finish_notify_cb> m_task_finish_notify{};
   std::unique_ptr<tdgraph>    m_graph;

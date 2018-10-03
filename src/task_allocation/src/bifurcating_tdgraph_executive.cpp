@@ -34,8 +34,9 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 bifurcating_tdgraph_executive::bifurcating_tdgraph_executive(
+    bool update_exec_ests,
     bifurcating_tdgraph *const graph)
-    : base_executive(graph),
+    : base_executive(update_exec_ests, graph),
       ER_CLIENT_INIT("rcppsw.ta.executive.bifurcating_tdgraph") {
   auto bigraph = static_cast<bifurcating_tdgraph *>(base_executive::graph());
   bigraph->install_cb(this);
@@ -91,13 +92,19 @@ void bifurcating_tdgraph_executive::run(void) {
 } /* run() */
 
 void bifurcating_tdgraph_executive::handle_task_abort(polled_task *task) {
+  task->task_aborted(true);
+  for (auto cb : task_abort_notify()) {
+    cb(task);
+  } /* for(cb..) */
+
   task->update_exec_time();
-  task->update_exec_estimate(task->exec_time());
+  if (update_exec_ests()) {
+    task->update_exec_estimate(task->exec_time());
+  }
   task->reset_exec_time();
   task->update_exec_time();
   task->reset_interface_time();
   task->update_interface_time();
-  task->task_aborted(true);
 
   /* task partition probability still updated even on abort */
   update_task_partition_prob(
@@ -107,9 +114,6 @@ void bifurcating_tdgraph_executive::handle_task_abort(polled_task *task) {
    * Among other things: handle the setting of the last partition of whatever
    * partitionable task the aborted one was a child of.
    */
-  for (auto cb : task_abort_notify()) {
-    cb(task);
-  } /* for(cb..) */
 
   task->task_aborted(false); /* already been handled by callback */
 
@@ -119,12 +123,14 @@ void bifurcating_tdgraph_executive::handle_task_abort(polled_task *task) {
 } /* handle_task_abort() */
 
 void bifurcating_tdgraph_executive::handle_task_finish(polled_task *task) {
-  task->update_exec_time();
-  task->update_exec_estimate(task->exec_time());
-
   for (auto cb : task_finish_notify()) {
     cb(task);
   } /* for(cb..) */
+
+  task->update_exec_time();
+  if (update_exec_ests()) {
+    task->update_exec_estimate(task->exec_time());
+  }
 
   task->reset_exec_time();
   task->update_exec_time();
