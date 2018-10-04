@@ -65,8 +65,9 @@ void bifurcating_tdgraph_executive::run(void) {
       ER_ASSERT(3 == kids.size(),
                 "Non-atomic partitionable task has %zu kids (expected %d)",
                 kids.size(), 3);
-      p->update_partition_prob(p->exec_estimate(), kids[1]->exec_estimate(),
-                               kids[2]->exec_estimate());
+      p->update_partition_prob(p->task_exec_estimate(),
+                               kids[1]->task_exec_estimate(),
+                               kids[2]->task_exec_estimate());
     }
 
     handle_task_start(get_next_task(nullptr));
@@ -169,12 +170,14 @@ void bifurcating_tdgraph_executive::update_task_partition_prob(
 
   if (task == graph()->root()) {
     static_cast<partitionable_polled_task *>(task)->update_partition_prob(
-        task->exec_estimate(), kids[1]->exec_estimate(),
-        kids[2]->exec_estimate());
+        task->task_exec_estimate(),
+        kids[1]->task_exec_estimate(),
+        kids[2]->task_exec_estimate());
   } else {
     static_cast<partitionable_polled_task *>(task)->update_partition_prob(
-        task->exec_estimate(), kids[0]->exec_estimate(),
-        kids[1]->exec_estimate());
+        task->task_exec_estimate(),
+        kids[0]->task_exec_estimate(),
+        kids[1]->task_exec_estimate());
   }
 } /* update_task_partition_prob() */
 

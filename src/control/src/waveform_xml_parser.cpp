@@ -43,10 +43,10 @@ void waveform_xml_parser::parse(const ticpp::Element &node) {
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 
-    XML_PARSE_PARAM(vnode, m_params, type);
-    XML_PARSE_PARAM(vnode, m_params, frequency);
-    XML_PARSE_PARAM(vnode, m_params, amplitude);
-    XML_PARSE_PARAM(vnode, m_params, offset);
+    XML_PARSE_ATTR(vnode, m_params, type);
+    XML_PARSE_ATTR(vnode, m_params, frequency);
+    XML_PARSE_ATTR(vnode, m_params, amplitude);
+    XML_PARSE_ATTR(vnode, m_params, offset);
     m_parsed = true;
   }
 } /* parse() */
@@ -59,10 +59,10 @@ void waveform_xml_parser::show(std::ostream &stream) const {
   }
 
   stream << build_header() << std::endl
-         << XML_PARAM_STR(m_params, type) << std::endl
-         << XML_PARAM_STR(m_params, frequency) << std::endl
-         << XML_PARAM_STR(m_params, amplitude) << std::endl
-         << XML_PARAM_STR(m_params, offset) << std::endl
+         << XML_ATTR_STR(m_params, type) << std::endl
+         << XML_ATTR_STR(m_params, frequency) << std::endl
+         << XML_ATTR_STR(m_params, amplitude) << std::endl
+         << XML_ATTR_STR(m_params, offset) << std::endl
          << build_footer();
 } /* show() */
 

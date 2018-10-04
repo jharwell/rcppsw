@@ -34,16 +34,21 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 executable_task::executable_task(const std::string &name,
                                  const struct task_params *c_params)
-    : logical_task(name), m_interface_estimate(c_params->estimation.alpha),
-      m_exec_estimate(c_params->estimation.alpha) {}
+    : logical_task(name),
+      m_interface_estimate(c_params->estimation.alpha),
+      m_exec_estimate(c_params->estimation.alpha),
+      m_abort_prob(&c_params->abort) {}
 
 executable_task::executable_task(const executable_task &other)
-    : logical_task(other), m_interface_time(other.m_interface_time),
+    : base_metrics(),
+      logical_task(other),
+      m_interface_time(other.m_interface_time),
       m_interface_start_time(other.m_interface_start_time),
       m_exec_time(other.m_exec_time),
       m_exec_start_time(other.m_exec_start_time),
       m_interface_estimate(other.m_interface_estimate),
-      m_exec_estimate(other.m_exec_estimate) {}
+      m_exec_estimate(other.m_exec_estimate),
+      m_abort_prob(other.m_abort_prob) {}
 
 executable_task::~executable_task(void) = default;
 

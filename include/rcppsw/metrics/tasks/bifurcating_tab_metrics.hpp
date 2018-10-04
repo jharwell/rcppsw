@@ -97,6 +97,18 @@ class bifurcating_tab_metrics : public virtual base_metrics {
    * @return Undefined unless \ref task_changed() returns \c TRUE.
    */
   virtual bool task_depth_changed(void) const = 0;
+
+  /**
+   * @brief Return the current partitioning probability for the root task in the
+   * TAB.
+   */
+  virtual double root_partition_prob(void) const = 0;
+
+  /**
+   * @brief Return the current subtask selection probability for the root task
+   * in the TAB.
+   */
+  virtual double root_subtask_selection_prob(void) const = 0;
 };
 
 NS_END(tasks, metrics, rcppsw);

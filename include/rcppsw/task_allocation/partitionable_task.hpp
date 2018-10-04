@@ -92,6 +92,15 @@ class partitionable_task : public er::client<partitionable_task>,
   double partition_prob(void) const { return m_partition_prob.last_result(); }
 
   /**
+   * @brief Get the current subtask selection probability. Note that this is
+   * specific to what the last subtask executed was, so use this function with
+   * care.
+   */
+  double subtask_selection_prob(void) const {
+    return m_selection_prob.last_result();
+  }
+
+  /**
    * @brief Set subtask that was most recently selected to run when partitioning
    * was employed. Needed for some subtask selection methods.
    */

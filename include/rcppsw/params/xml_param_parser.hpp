@@ -41,8 +41,8 @@ struct base_params;
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#define XML_PARAM_STR(container, name) std::string(#name) << "=" << (container)->name
-#define XML_PARSE_PARAM(node, container, name)                          \
+#define XML_ATTR_STR(container, name) std::string(#name) << "=" << (container)->name
+#define XML_PARSE_ATTR(node, container, name)                          \
   this->get_node_attribute((node),                                       \
                            #name,                                       \
                            (container)->name)

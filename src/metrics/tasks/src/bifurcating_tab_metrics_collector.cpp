@@ -22,7 +22,6 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/metrics/tasks/bifurcating_tab_metrics_collector.hpp"
-#include <cassert>
 
 #include "rcppsw/metrics/tasks/bifurcating_tab_metrics.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
@@ -37,8 +36,7 @@ NS_START(rcppsw, metrics, tasks);
  ******************************************************************************/
 bifurcating_tab_metrics_collector::bifurcating_tab_metrics_collector(
     const std::string &ofname, uint interval)
-    : base_metrics_collector(ofname, interval),
-      m_stats() {}
+    : base_metrics_collector(ofname, interval) {}
 
 /*******************************************************************************
  * Member Functions
@@ -48,17 +46,19 @@ bifurcating_tab_metrics_collector::csv_header_build(const std::string &header) {
   // clang-format off
   std::string line = base_metrics_collector::csv_header_build(header);
   return line + "int_subtask1_count" + separator() +
-      "cum_avg_subtask1_count" + separator() +
+      "cum_subtask1_count" + separator() +
       "int_subtask2_count" + separator() +
-      "cum_avg_subtask2_count" + separator() +
+      "cum_subtask2_count" + separator() +
       "int_partition_count" + separator() +
-      "cum_avg_partition_count" + separator() +
+      "cum_partition_count" + separator() +
       "int_no_partition_count" + separator() +
-      "cum_avg_no_partition_count" + separator() +
+      "cum_no_partition_count" + separator() +
       "int_task_sw_count" + separator() +
       "cum_task_sw_count" + separator() +
-      "int_task_depth_sw_count" + separator() +
-      "cum_task_depth_sw_count" + separator();
+      "int_avg_root_partition_prob" + separator() +
+      "cum_avg_root_partition_prob" + separator() +
+      "int_avg_root_subtask_selection_prob" + separator() +
+      "cum_avg_root_subtask_selection_prob" + separator();
   // clang-format on
   return line;
 } /* csv_header_build() */
@@ -72,21 +72,23 @@ void bifurcating_tab_metrics_collector::collect(
     const rcppsw::metrics::base_metrics &metrics) {
   auto &m = dynamic_cast<const bifurcating_tab_metrics &>(metrics);
   if (m.employed_partitioning()) {
-    ++m_stats.int_partition_count;
-    ++m_stats.cum_partition_count;
-    m_stats.int_subtask1_count += static_cast<uint>(m.subtask1_active());
-    m_stats.cum_subtask1_count += static_cast<uint>(m.subtask1_active());
-    m_stats.int_subtask2_count += static_cast<uint>(m.subtask2_active());
-    m_stats.cum_subtask2_count += static_cast<uint>(m.subtask2_active());
+    ++m_int_partition_count;
+    ++m_cum_partition_count;
+    m_int_subtask1_count += static_cast<uint>(m.subtask1_active());
+    m_cum_subtask1_count += static_cast<uint>(m.subtask1_active());
+    m_int_subtask2_count += static_cast<uint>(m.subtask2_active());
+    m_cum_subtask2_count += static_cast<uint>(m.subtask2_active());
   } else {
-    ++m_stats.int_no_partition_count;
-    ++m_stats.cum_no_partition_count;
+    ++m_int_no_partition_count;
+    ++m_cum_no_partition_count;
   }
 
-  m_stats.int_task_sw_count += static_cast<uint>(m.task_changed());
-  m_stats.cum_task_sw_count += static_cast<uint>(m.task_changed());
-  m_stats.int_task_depth_sw_count += static_cast<uint>(m.task_depth_changed());
-  m_stats.cum_task_depth_sw_count += static_cast<uint>(m.task_depth_changed());
+  m_int_root_partition_prob += m.root_partition_prob();
+  m_int_root_subtask_selection_prob += m.root_subtask_selection_prob();
+  m_int_task_sw_count += static_cast<uint>(m.task_changed());
+  m_cum_task_sw_count += static_cast<uint>(m.task_changed());
+  m_int_task_depth_sw_count += static_cast<uint>(m.task_depth_changed());
+  m_cum_task_depth_sw_count += static_cast<uint>(m.task_depth_changed());
 } /* collect() */
 
 bool bifurcating_tab_metrics_collector::csv_line_build(std::string &line) {
@@ -94,40 +96,48 @@ bool bifurcating_tab_metrics_collector::csv_line_build(std::string &line) {
     return false;
   }
 
-  line += std::to_string(m_stats.int_subtask1_count) + separator();
-  line += std::to_string(m_stats.cum_subtask1_count /
-                         static_cast<double>(timestep() + 1)) +
+  line += std::to_string(m_int_subtask1_count) + separator();
+  line += std::to_string(m_cum_subtask1_count) + separator();
+  line += std::to_string(m_int_subtask2_count) + separator();
+  line += std::to_string(m_cum_subtask2_count) + separator();
+  line += std::to_string(m_int_partition_count) + separator();
+  line += std::to_string(m_cum_partition_count) + separator();
+  line += std::to_string(m_int_no_partition_count) + separator();
+  line += std::to_string(m_cum_no_partition_count) + separator();
+  line += std::to_string(m_int_task_sw_count) + separator();
+  line += std::to_string(m_cum_task_sw_count) + separator();
+  line += std::to_string(m_int_task_depth_sw_count) + separator();
+  line += std::to_string(m_cum_task_depth_sw_count) + separator();
+
+  /*
+   * We want to capture average probability per robot, not per
+   * timestep/interval, so we divide by the total # of task allocations
+   * performed (# partitions + # no partitions).
+   */
+  line += std::to_string(m_int_root_partition_prob /
+                         (m_int_partition_count + m_int_no_partition_count)) +
           separator();
-  line += std::to_string(m_stats.int_subtask2_count) + separator();
-  line += std::to_string(m_stats.cum_subtask2_count /
-                         static_cast<double>(timestep() + 1)) +
+  line += std::to_string(m_cum_root_partition_prob /
+                         (m_cum_partition_count + m_cum_no_partition_count)) +
           separator();
-  line += std::to_string(m_stats.int_partition_count) + separator();
-  line += std::to_string(m_stats.cum_partition_count /
-                         static_cast<double>(timestep() + 1)) +
+  line += std::to_string(m_int_root_subtask_selection_prob /
+                         (m_int_partition_count + m_int_no_partition_count)) +
           separator();
-  line += std::to_string(m_stats.int_no_partition_count) + separator();
-  line += std::to_string(m_stats.cum_no_partition_count /
-                         static_cast<double>(timestep() + 1)) +
-          separator();
-  line += std::to_string(m_stats.int_task_sw_count) + separator();
-  line += std::to_string(m_stats.cum_task_sw_count /
-                         static_cast<double>(timestep() + 1)) +
-          separator();
-  line += std::to_string(m_stats.int_task_depth_sw_count) + separator();
-  line += std::to_string(m_stats.cum_task_depth_sw_count /
-                         static_cast<double>(timestep() + 1)) +
+  line += std::to_string(m_cum_root_subtask_selection_prob /
+                         (m_cum_partition_count + m_cum_no_partition_count)) +
           separator();
   return true;
 } /* store_foraging_stats() */
 
 void bifurcating_tab_metrics_collector::reset_after_interval(void) {
-  m_stats.int_subtask1_count = 0;
-  m_stats.int_subtask2_count = 0;
-  m_stats.int_partition_count = 0;
-  m_stats.int_no_partition_count = 0;
-  m_stats.int_task_sw_count = 0;
-  m_stats.int_task_depth_sw_count = 0;
+  m_int_subtask1_count = 0;
+  m_int_subtask2_count = 0;
+  m_int_partition_count = 0;
+  m_int_no_partition_count = 0;
+  m_int_task_sw_count = 0;
+  m_int_task_depth_sw_count = 0;
+  m_int_root_partition_prob = 0.0;
+  m_int_root_subtask_selection_prob = 0.0;
 } /* reset_after_interval() */
 
 NS_END(metrics, rcppsw, tasks);

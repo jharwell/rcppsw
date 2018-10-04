@@ -26,11 +26,14 @@
  ******************************************************************************/
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/metrics/base_metrics.hpp"
+#include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, metrics, tasks);
+
+namespace ta = rcppsw::task_allocation;
 
 /*******************************************************************************
  * Class Definitions
@@ -55,13 +58,13 @@ class execution_metrics : public virtual base_metrics {
 
   /**
    * @brief This function should return the execution time of the most recent
-   * execution of this task.
+   * execution of this task. Execution time includes interface time.
    */
   virtual double task_last_exec_time(void) const = 0;
 
   /**
    * @brief This function should return the interface time of the most recent
-   * execution of task.
+   * interface time for the task.
    */
   virtual double task_last_interface_time(void) const = 0;
 
@@ -76,6 +79,17 @@ class execution_metrics : public virtual base_metrics {
    * (not completed).
    */
   virtual bool task_aborted(void) const = 0;
+
+  /**
+   * @brief Return the current execution time estimate for a task. Execution
+   * estimate should include interface time.
+   */
+  virtual const ta::time_estimate& task_exec_estimate(void) const = 0;
+
+  /**
+   * @brief Return the current interface time estimate for a task.
+   */
+  virtual const ta::time_estimate& task_interface_estimate(void) const = 0;
 };
 
 NS_END(tasks, metrics, rcppsw);

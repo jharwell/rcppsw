@@ -44,17 +44,17 @@ void subtask_selection_xml_parser::parse(const ticpp::Element &node) {
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 
-  XML_PARSE_PARAM(snode, m_params, reactivity);
-  XML_PARSE_PARAM(snode, m_params, offset);
-  XML_PARSE_PARAM(snode, m_params, method);
-  XML_PARSE_PARAM(snode, m_params, gamma);
+  XML_PARSE_ATTR(snode, m_params, reactivity);
+  XML_PARSE_ATTR(snode, m_params, offset);
+  XML_PARSE_ATTR(snode, m_params, method);
+  XML_PARSE_ATTR(snode, m_params, gamma);
 } /* parse() */
 
 void subtask_selection_xml_parser::show(std::ostream &stream) const {
-  stream << build_header() << XML_PARAM_STR(m_params, reactivity) << std::endl
-         << XML_PARAM_STR(m_params, offset) << std::endl
-         << XML_PARAM_STR(m_params, method) << std::endl
-         << XML_PARAM_STR(m_params, gamma) << std::endl
+  stream << build_header() << XML_ATTR_STR(m_params, reactivity) << std::endl
+         << XML_ATTR_STR(m_params, offset) << std::endl
+         << XML_ATTR_STR(m_params, method) << std::endl
+         << XML_ATTR_STR(m_params, gamma) << std::endl
          << build_footer();
 } /* show() */
 

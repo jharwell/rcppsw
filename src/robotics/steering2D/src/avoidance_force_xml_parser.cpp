@@ -42,7 +42,7 @@ void avoidance_force_xml_parser::parse(const ticpp::Element &node) {
         get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
-    XML_PARSE_PARAM(anode, m_params, max);
+    XML_PARSE_ATTR(anode, m_params, max);
     m_parsed = true;
   }
 } /* parse() */
@@ -55,7 +55,7 @@ void avoidance_force_xml_parser::show(std::ostream &stream) const {
   }
 
   stream << build_header() << std::endl
-         << XML_PARAM_STR(m_params, max) << std::endl
+         << XML_ATTR_STR(m_params, max) << std::endl
          << build_footer();
 } /* show() */
 

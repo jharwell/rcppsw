@@ -43,19 +43,19 @@ void task_partition_xml_parser::parse(const ticpp::Element &node) {
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
   ticpp::Element pnode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
-  XML_PARSE_PARAM(pnode, m_params, reactivity);
-  XML_PARSE_PARAM(pnode, m_params, offset);
-  XML_PARSE_PARAM(pnode, m_params, method);
-  XML_PARSE_PARAM(pnode, m_params, always_partition);
-  XML_PARSE_PARAM(pnode, m_params, never_partition);
+  XML_PARSE_ATTR(pnode, m_params, reactivity);
+  XML_PARSE_ATTR(pnode, m_params, offset);
+  XML_PARSE_ATTR(pnode, m_params, method);
+  XML_PARSE_ATTR(pnode, m_params, always_partition);
+  XML_PARSE_ATTR(pnode, m_params, never_partition);
 } /* parse() */
 
 void task_partition_xml_parser::show(std::ostream &stream) const {
-  stream << build_header() << XML_PARAM_STR(m_params, reactivity) << std::endl
-         << XML_PARAM_STR(m_params, offset) << std::endl
-         << XML_PARAM_STR(m_params, method) << std::endl
-         << XML_PARAM_STR(m_params, always_partition) << std::endl
-         << XML_PARAM_STR(m_params, never_partition) << std::endl
+  stream << build_header() << XML_ATTR_STR(m_params, reactivity) << std::endl
+         << XML_ATTR_STR(m_params, offset) << std::endl
+         << XML_ATTR_STR(m_params, method) << std::endl
+         << XML_ATTR_STR(m_params, always_partition) << std::endl
+         << XML_ATTR_STR(m_params, never_partition) << std::endl
          << build_footer();
 } /* show() */
 

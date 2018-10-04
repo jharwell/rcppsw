@@ -43,7 +43,7 @@ void differential_drive_xml_parser::parse(const ticpp::Element &node) {
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 
-  XML_PARSE_PARAM(wnode, m_params, max_speed);
+  XML_PARSE_ATTR(wnode, m_params, max_speed);
 
   argos::CDegrees angle;
   argos::GetNodeAttribute(wnode, "soft_turn_max", angle);
@@ -51,9 +51,9 @@ void differential_drive_xml_parser::parse(const ticpp::Element &node) {
 } /* parse() */
 
 void differential_drive_xml_parser::show(std::ostream &stream) const {
-  stream << build_header() << XML_PARAM_STR(m_params, soft_turn_max)
+  stream << build_header() << XML_ATTR_STR(m_params, soft_turn_max)
          << std::endl
-         << XML_PARAM_STR(m_params, max_speed) << std::endl
+         << XML_ATTR_STR(m_params, max_speed) << std::endl
          << build_footer();
 } /* show() */
 

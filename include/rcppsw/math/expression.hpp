@@ -58,6 +58,7 @@ class expression {
     m_last = val;
     return m_last;
   }
+  void reset(void) { m_last = T{0}; }
 
   bool operator==(const expression& other) const {
     return this->last_result() == other.last_result();

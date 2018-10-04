@@ -27,6 +27,8 @@
 #include <string>
 #include "rcppsw/task_allocation/logical_task.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
+#include "rcppsw/metrics/tasks/execution_metrics.hpp"
+#include "rcppsw/task_allocation/abort_probability.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -45,13 +47,17 @@ struct task_params;
  *
  * - A possibly updated estimate of the time it takes to do a task. If a task is
  *   only made to be executed once, then this field is unused.
+
+ * - A possibly updated estimate of the interface time for the task. If a task
+ *   is only made to be executed once, then this field is unused.
+ *
  * - A method of decomposing this (possibly decomposable) task into a sequence
  *   of simpler tasks. Each "simpler" task can have a parent.
  *
- * This class is MUST be instantiated inside of \ref task_graph_vertex, and be
- * manipulated through shared_ptr.
+ * - Metrics that can be collected on a task as it runs.
  */
-class executable_task : public logical_task {
+class executable_task : public logical_task,
+                        public metrics::tasks::execution_metrics {
  public:
   executable_task(const std::string& name,
                   const struct task_params* c_params);
@@ -67,18 +73,61 @@ class executable_task : public logical_task {
     update_exec_estimate(std::rand() % (ub - lb + 1) + lb);
   }
 
-  /**
-   * @brief Get the current estimate of the task's interface time.
-   */
-  const time_estimate& interface_estimate(void) const {
+  /* execution metrics */
+  double task_last_exec_time(void) const override { return m_last_exec_time; }
+  double task_last_interface_time(void) const override {
+    return m_last_interface_time;
+  }
+  bool task_aborted(void) const override { return m_task_aborted; }
+  const time_estimate& task_exec_estimate(void) const override {
+    return m_exec_estimate;
+  }
+  const time_estimate& task_interface_estimate(void) const override {
     return m_interface_estimate;
   }
 
   /**
-   * @brief Get the current estimate of the task's execution time (which
-   * includes its interface time).
+   * @brief Update the calculated abort probability for the task
    */
-  const time_estimate& exec_estimate(void) const { return m_exec_estimate; }
+  double update_abort_prob(void) {
+    return m_abort_prob.calc(m_interface_time, m_interface_estimate);
+  }
+
+  /**
+   * @brief Update the calculated interface time for the task
+   *
+   * This is needed for accurate task abort calculations.
+   */
+  double update_interface_time(void) {
+    return m_interface_time = calc_interface_time(m_interface_start_time);
+  }
+
+  /**
+   * @brief Because tasks can have multiple interfaces, they need a way to reset
+   * their interface time upon leaving/entering an interface.
+   */
+  void reset_interface_time(void) {
+    m_last_interface_time = m_interface_time;
+    m_interface_start_time = current_time();
+  }
+
+  /**
+   * @brief Update the calculated execution time for the task
+   *
+   * This is needed for accurate task abort calculations.
+   */
+  double update_exec_time(void) {
+    return m_exec_time = current_time() - m_exec_start_time;
+  }
+
+  /**
+   * @brief Reset the execution time for the task. Should never be called
+   * directly!
+   */
+  void reset_exec_time(void) {
+    m_last_exec_time = m_exec_time;
+    m_exec_start_time = current_time();
+  }
 
   /**
    * @brief Update the current estimate of the task interface time by using a
@@ -117,26 +166,34 @@ class executable_task : public logical_task {
   virtual void task_execute(void) = 0;
 
   /**
+   * @brief Calculate the interface time of the current task for use in abort
+   * calculations.
+   */
+  virtual double calc_interface_time(double start_time) = 0;
+
+  /**
+   * @brief Get the current time
+   */
+  virtual double current_time(void) const = 0;
+
+  /**
+   * @brief Get the probability of aborting an executable task. Even though this
+   * class also has public functions for updating the internally maintained
+   * abort probability, this function is still needed in order to provide
+   * "gated" abort probabilities (i.e. abort probabilities that are only active
+   * when certain conditions are met).
+   */
+  virtual double calc_abort_prob(void) { return update_abort_prob(); }
+
+  /**
    * @brief Get the current interface time of the task.
    */
   double interface_time(void) const { return m_interface_time; }
 
   /**
-   * @brief Get the last interface time of the task. This may be needed if the
-   * interface time is needed for calculations on the timestep in which a task
-   * finishes, at which time the regular interface time has been reset.
-   */
-  double last_interface_time(void) const { return m_last_interface_time; }
-
-  /**
    * @brief Get the current execution time of the task.
    */
   double exec_time(void) const { return m_exec_time; }
-
-  /**
-   * @brief Get the last execution time of the task.
-   */
-  double last_exec_time(void) const { return m_last_exec_time; }
 
   /**
    * @brief Get if a task is currently atomic (i.e. not abortable).
@@ -161,73 +218,24 @@ class executable_task : public logical_task {
    */
   void set_partitionable(bool b) { m_is_partitionable = b; }
 
-  /**
-   * @brief Get the probability of aborting an executable task.
-   */
-  virtual double calc_abort_prob(void) = 0;
-
-  /**
-   * @brief Calculate the interface time of the current task for use in abort
-   * calculations.
-   */
-  virtual double calc_interface_time(double start_time) = 0;
-
-  /**
-   * @brief Get the current time
-   */
-  virtual double current_time(void) const = 0;
-
-  /**
-   * @brief Update the calculated interface time for the task
-   *
-   * This is needed for accurate task abort calculations.
-   */
-  void update_interface_time(void) {
-    m_interface_time = calc_interface_time(m_interface_start_time);
-  }
-
-  /**
-   * @brief Because tasks can have multiple interfaces, they need a way to reset
-   * their interface time upon leaving/entering an interface.
-   */
-  void reset_interface_time(void) {
-    m_last_interface_time = m_interface_time;
-    m_interface_start_time = current_time();
-  }
-
-  /**
-   * @brief Update the calculated execution time for the task
-   *
-   * This is needed for accurate task abort calculations.
-   */
-  void update_exec_time(void) {
-    m_exec_time = current_time() - m_exec_start_time;
-  }
-
-  /**
-   * @brief Reset the execution time for the task. Should never be called
-   * directly!
-   */
-  void reset_exec_time(void) {
-    m_last_exec_time = m_exec_time;
-    m_exec_start_time = current_time();
-  }
-  bool task_aborted(void) const { return m_task_aborted; }
   void task_aborted(bool task_aborted) { m_task_aborted = task_aborted; }
 
  private:
-  bool m_is_atomic{false};
-  bool m_is_partitionable{false};
-  bool m_task_aborted{false};
+  // clang-format off
+  bool              m_is_atomic{false};
+  bool              m_is_partitionable{false};
+  bool              m_task_aborted{false};
 
-  double m_interface_time{0.0};
-  double m_last_interface_time{0.0};
-  double m_interface_start_time{0.0};
-  double m_exec_time{0.0};
-  double m_last_exec_time{0.0};
-  double m_exec_start_time{0.0};
-  time_estimate m_interface_estimate;
-  time_estimate m_exec_estimate;
+  double            m_interface_time{0.0};
+  double            m_last_interface_time{0.0};
+  double            m_interface_start_time{0.0};
+  double            m_exec_time{0.0};
+  double            m_last_exec_time{0.0};
+  double            m_exec_start_time{0.0};
+  time_estimate     m_interface_estimate;
+  time_estimate     m_exec_estimate;
+  abort_probability m_abort_prob;
+  // clang-format on
 };
 
 NS_END(task_allocation, rcppsw);
