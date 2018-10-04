@@ -89,5 +89,13 @@ bool bifurcating_tab::task_depth_changed(void) const {
       mc_graph->vertex_depth(m_last_task);
 } /* task_depth_changed() */
 
+double bifurcating_tab::root_partition_prob(void) const {
+  return dynamic_cast<const partitionable_task*>(m_root)->partition_prob();
+} /* root_partition_prob() */
+
+double bifurcating_tab::root_subtask_selection_prob(void) const {
+  return dynamic_cast<const partitionable_task*>(m_root)->subtask_selection_prob();
+} /* root_subtask_selection_prob() */
+
 
 NS_END(task_allocation, rcppsw);

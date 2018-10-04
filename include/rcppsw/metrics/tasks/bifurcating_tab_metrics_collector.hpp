@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <string>
+#include <vector>
 
 #include "rcppsw/metrics/base_metrics_collector.hpp"
 
@@ -48,47 +49,6 @@ NS_START(rcppsw, metrics, tasks);
  */
 class bifurcating_tab_metrics_collector : public base_metrics_collector {
  public:
-  struct bifurcating_tab_stats {
-    /**
-     * @brief # Times subtask 1 was chosen if partitioning was employed.
-     */
-    uint int_subtask1_count;
-
-    /**
-     * @brief # Times subtask 2 was chosen if partitioning was employed.
-     */
-    uint int_subtask2_count;
-
-    /**
-     * @brief # Times partitioning was employed when allocating a task.
-     */
-    uint int_partition_count;
-
-    /**
-     * @brief # Times partitioning was not employed when allocating a task.
-     */
-    uint int_no_partition_count;
-
-    /**
-     * @brief # Times when task allocation resulted in a different task being
-     * executed than previous.
-     */
-    uint int_task_sw_count;
-
-    /**
-     * @brief # Times when task allocation resulted in a task of a different
-     * depth being executed than previous.
-     */
-    uint int_task_depth_sw_count;
-
-    uint cum_subtask1_count;
-    uint cum_subtask2_count;
-    uint cum_partition_count;
-    uint cum_no_partition_count;
-    uint cum_task_sw_count;
-    uint cum_task_depth_sw_count;
-  };
-
   /**
    * @param ofname Output file name.
    * @param interval Collection interval.
@@ -102,11 +62,69 @@ class bifurcating_tab_metrics_collector : public base_metrics_collector {
 
   std::string csv_header_build(const std::string& header) override;
   bool csv_line_build(std::string& line) override;
-  bifurcating_tab_stats stats(void) const { return m_stats; }
+
+  uint int_subtask1_count(void) const { return m_int_subtask1_count; }
+  uint int_subtask2_count(void) const { return m_int_subtask2_count; }
 
  private:
   // clang-format off
-  struct bifurcating_tab_stats m_stats;
+  /*
+   * @brief All of these are vectors, rather than scalars, so that we can obtain
+   * per-robot averages in an interval (average in space), rather only averages
+   * in time which is all we can get from scalars.
+   */
+  /**
+   * @brief # Times subtask 1 was chosen if partitioning was employed.
+   */
+  uint   m_int_subtask1_count{0};
+
+  /**
+   * @brief # Times subtask 2 was chosen if partitioning was employed.
+   */
+  uint   m_int_subtask2_count{0};
+
+  /**
+   * @brief # Times partitioning was employed when allocating a task.
+   */
+  uint   m_int_partition_count{0};
+
+  /**
+   * @brief # Times partitioning was not employed when allocating a task.
+   */
+  uint   m_int_no_partition_count{0};
+
+  /**
+   * @brief # Times when task allocation resulted in a different task being
+   * executed than previous.
+   */
+  uint   m_int_task_sw_count{0};
+
+  /**
+   * @brief # Times when task allocation resulted in a task of a different
+   * depth being executed than previous.
+   */
+  uint   m_int_task_depth_sw_count{0};
+
+
+  /**
+   * @brief The average partitioning probability of the root task in the TAB.
+   */
+  double m_int_root_partition_prob{0.0};
+
+  /**
+   * @brief The average subtask selection probability of the root task in the
+   * TAB.
+   */
+  double m_int_root_subtask_selection_prob{0.0};
+
+  uint   m_cum_subtask1_count{0};
+  uint   m_cum_subtask2_count{0};
+  uint   m_cum_partition_count{0};
+  uint   m_cum_no_partition_count{0};
+  uint   m_cum_task_sw_count{0};
+  uint   m_cum_task_depth_sw_count{0};
+  double m_cum_root_partition_prob{0.0};
+  double m_cum_root_subtask_selection_prob{0.0};
   // clang-format on
 };
 

@@ -24,12 +24,18 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <vector>
+#include <string>
+
 #include "rcppsw/metrics/base_metrics_collector.hpp"
+#include "rcppsw/er/client.hpp"
+#include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, metrics, tasks);
+namespace ta = rcppsw::task_allocation;
 
 /*******************************************************************************
  * Class Definitions
@@ -41,7 +47,8 @@ NS_START(rcppsw, metrics, tasks);
  * @brief Collector for metrics for an executable task across executions of that
  * task.
  */
-class execution_metrics_collector : public base_metrics_collector {
+class execution_metrics_collector : public base_metrics_collector,
+                                    public er::client<execution_metrics_collector> {
  public:
   /**
    * @param ofname Output file name.
@@ -57,35 +64,35 @@ class execution_metrics_collector : public base_metrics_collector {
   bool csv_line_build(std::string& line) override;
 
  private:
-  struct execution_stats {
-    /**
-     * @brief # Times the task has been completed within an interval.
-     */
-    uint        int_complete_count{0};
+  /**
+   * @brief # Times the task has been completed within an interval.
+   */
+  uint              m_int_complete_count{0};
 
+  /**
+   * @brief # Times the task has been aborted within an interval.
+   */
+  uint              m_int_abort_count{0};
 
-    /**
-     * @brief # Times the task has been aborted within an interval.
-     */
-    uint        int_abort_count{0};
+  /**
+   * @brief Execution times of the task within an interval.
+   */
+  double            m_int_exec_time{};
 
-    /**
-     * @brief Cumulative execution time of the task within an interval.
-     */
-    double      int_exec_time{0.0};
+  /**
+   * @brief Interface time of the task within an interval.
+   */
+  double            m_int_interface_time{0.0};
 
-    /**
-     * @brief Cumulative interface time of the task within an interval.
-     */
-    double      int_interface_time{0.0};
+  ta::time_estimate m_int_exec_estimate{0};
+  ta::time_estimate m_int_interface_estimate{0};
 
-    uint        cum_complete_count{0};
-    uint        cum_abort_count{0};
-    double      cum_exec_time{0.0};
-    double      cum_interface_time{0.0};
-  };
-
-  struct execution_stats m_stats;
+  uint              m_cum_complete_count{0};
+  uint              m_cum_abort_count{0};
+  double            m_cum_exec_time{0.0};
+  double            m_cum_interface_time{0.0};
+  ta::time_estimate m_cum_exec_estimate{0};
+  ta::time_estimate m_cum_interface_estimate{0};
 };
 
 NS_END(tasks, metrics, rcppsw);

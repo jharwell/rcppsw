@@ -40,6 +40,10 @@ time_estimate time_estimate::operator+(const time_estimate &other) const {
   r.set_result(this->last_result() + other.last_result());
   return r;
 }
+time_estimate time_estimate::operator+=(const time_estimate &other) {
+  this->set_result(this->last_result() + other.last_result());
+  return *this;
+}
 
 time_estimate time_estimate::operator/(const time_estimate &other) const {
   time_estimate r(this->alpha());

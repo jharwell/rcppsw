@@ -73,6 +73,7 @@ class time_estimate : public rcppsw::math::expression<double> {
   }
 
   time_estimate operator+(const time_estimate& other) const;
+  time_estimate operator+=(const time_estimate& other);
   time_estimate operator/(const time_estimate& other) const;
 
  private:

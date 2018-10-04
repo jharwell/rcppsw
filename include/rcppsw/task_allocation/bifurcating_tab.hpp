@@ -90,6 +90,8 @@ class bifurcating_tab : public metrics::tasks::bifurcating_tab_metrics,
   bool employed_partitioning(void) const override;
   bool task_changed(void) const override { return m_active_task != m_last_task; }
   bool task_depth_changed(void) const override;
+  double root_partition_prob(void) const override;
+  double root_subtask_selection_prob(void) const override;
 
  private:
   // clang-format off

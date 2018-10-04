@@ -91,15 +91,15 @@ partitionable_task::partition(const polled_task *const partition1,
   double prob_12, prob_21;
   if (subtask_selection_probability::kMethodHarwell2018 ==
       m_selection_prob.method()) {
-    prob_12 = m_selection_prob.calc(&partition1->exec_estimate(),
-                                    &partition2->exec_estimate());
-    prob_21 = m_selection_prob.calc(&partition2->exec_estimate(),
-                                    &partition1->exec_estimate());
+    prob_12 = m_selection_prob.calc(&partition1->task_exec_estimate(),
+                                    &partition2->task_exec_estimate());
+    prob_21 = m_selection_prob.calc(&partition2->task_exec_estimate(),
+                                    &partition1->task_exec_estimate());
   } else {
-    prob_12 = m_selection_prob.calc(&partition1->interface_estimate(),
-                                    &partition2->interface_estimate());
-    prob_21 = m_selection_prob.calc(&partition2->interface_estimate(),
-                                    &partition1->interface_estimate());
+    prob_12 = m_selection_prob.calc(&partition1->task_interface_estimate(),
+                                    &partition2->task_interface_estimate());
+    prob_21 = m_selection_prob.calc(&partition2->task_interface_estimate(),
+                                    &partition1->task_interface_estimate());
   }
 
   ER_INFO("Task '%s': selection_method=%s, last_partition=%s", name.c_str(),
@@ -108,10 +108,12 @@ partitionable_task::partition(const polled_task *const partition1,
           : "None");
 
   ER_INFO("%s exec_est=%f/int_est=%f, %s exec_est=%f/int_est=%f",
-          partition1->name().c_str(), partition1->exec_estimate().last_result(),
-          partition1->interface_estimate().last_result(),
-          partition2->name().c_str(), partition2->exec_estimate().last_result(),
-          partition2->interface_estimate().last_result());
+          partition1->name().c_str(),
+          partition1->task_exec_estimate().last_result(),
+          partition1->task_interface_estimate().last_result(),
+          partition2->name().c_str(),
+          partition2->task_exec_estimate().last_result(),
+          partition2->task_interface_estimate().last_result());
 
   ER_INFO("%s -> %s prob=%f, %s -> %s prob=%f", partition1->name().c_str(),
           partition2->name().c_str(), prob_12, partition2->name().c_str(),
