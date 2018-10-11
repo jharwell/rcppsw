@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <string>
 #include "rcppsw/params/base_params.hpp"
+#include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -40,9 +41,7 @@ NS_START(rcppsw, task_allocation);
 * @ingroup params task_allocation
  */
 struct partitioning_params : public params::base_params {
-  std::string method{""};
-  double reactivity{0.0};
-  double offset{0.0};
+  sigmoid_selection_params sigmoid{};
   bool always_partition{false};
   bool never_partition{false};
 };

@@ -29,6 +29,7 @@
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
 #include "rcppsw/task_allocation/partitioning_params.hpp"
+#include "rcppsw/task_allocation/sigmoid_selection_xml_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -47,7 +48,8 @@ NS_START(rcppsw, task_allocation);
 class task_partition_xml_parser: public rcppsw::params::xml_param_parser {
  public:
   explicit task_partition_xml_parser(uint level)
-      : xml_param_parser(level) {}
+      : xml_param_parser(level),
+        m_sigmoid(level + 1) {}
 
   /**
    * @brief The root tag that all task task_partition parameters should lie
@@ -72,8 +74,9 @@ class task_partition_xml_parser: public rcppsw::params::xml_param_parser {
   }
 
   // clang-format off
-  bool                              m_parsed{false};
+  bool                                 m_parsed{false};
   std::shared_ptr<partitioning_params> m_params{nullptr};
+  sigmoid_selection_xml_parser         m_sigmoid;
   // clang-format on
 };
 

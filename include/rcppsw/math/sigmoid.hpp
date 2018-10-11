@@ -1,5 +1,5 @@
 /**
- * @file partitionable_task_params.hpp
+ * @file sigmoid.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,34 +18,56 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_PARAMS_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_PARAMS_HPP_
+#ifndef INCLUDE_RCPPSW_MATH_SIGMOID_HPP_
+#define INCLUDE_RCPPSW_MATH_SIGMOID_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/params/base_params.hpp"
+#include <cmath>
+
+#include "rcppsw/math/sigmoid_params.hpp"
+#include "rcppsw/math/expression.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, math);
+
 
 /*******************************************************************************
- * Structure Definitions
+ * Class Definitions
  ******************************************************************************/
-/**
- * @struct subtask_selection_params
- * @ingroup params task_allocation
- */
-struct subtask_selection_params : public params::base_params {
-  std::string method{""};
-  double reactivity{0.0};
-  double offset{0.0};
-  double gamma{0.0};
+class sigmoid : public expression<double> {
+ public:
+  sigmoid(void) = default;
+  explicit sigmoid(const sigmoid_params* const params) :
+      sigmoid{params->reactivity, params->offset, params->gamma} {}
+
+  sigmoid(double reactivity, double offset, double gamma) :
+      m_reactivity(reactivity),
+      m_offset(offset),
+      m_gamma(gamma) {}
+
+  void init(double reactivity, double offset, double gamma) {
+    m_reactivity = reactivity;
+    m_offset = offset;
+    m_gamma = gamma;
+  }
+
+  double operator()(double val) {
+    return set_result( 1.0 /
+                       (1 + std::exp(-m_reactivity * (val - m_offset))) * m_gamma);
+  }
+
+ private:
+  // clang-format off
+  double m_reactivity{0.0};
+  double m_offset{0.0};
+  double m_gamma{0.0};
+  // clang-format on
 };
 
-NS_END(task_allocation, rcppsw);
+NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_ */
+#endif /* INCLUDE_RCPPSW_MATH_SIGMOID_HPP_ */

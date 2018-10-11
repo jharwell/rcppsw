@@ -22,7 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/partitionable_polled_task.hpp"
-#include "rcppsw/task_allocation/partitionable_task_params.hpp"
+#include "rcppsw/task_allocation/task_allocation_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -34,16 +34,12 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 partitionable_polled_task::partitionable_polled_task(
     const std::string &name,
-    const struct partitionable_task_params *const c_params,
+    const struct task_allocation_params* params,
     std::unique_ptr<taskable> mechanism)
-    : polled_task(name, c_params, std::move(mechanism)),
-      partitionable_task(c_params) {}
-
-void partitionable_polled_task::init_random(const polled_task *const partition,
-                                            uint lb, uint ub) {
-  executable_task::init_exec_estimate(
-      static_cast<uint>(std::rand()) % (ub - lb + 1) + lb);
-  last_partition(partition);
-} /* init_random() */
+    : polled_task(name,
+                  &params->abort,
+                  &params->estimation,
+                  std::move(mechanism)),
+      partitionable_task(&params->partitioning, &params->subtask_selection) {}
 
 NS_END(task_allocation, rcppsw);

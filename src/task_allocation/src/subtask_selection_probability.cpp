@@ -22,9 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/subtask_selection_probability.hpp"
-#include "rcppsw/task_allocation/subtask_selection_params.hpp"
-#include <cassert>
-#include <cmath>
+#include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
+#include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -42,46 +41,30 @@ constexpr char subtask_selection_probability::kMethodRandom[];
  * Constructors/Destructor
  ******************************************************************************/
 subtask_selection_probability::subtask_selection_probability(std::string method)
-    : mc_method(std::move(method)) {
-  if (subtask_selection_probability::kMethodHarwell2018 == method) {
-    init_sigmoid(subtask_selection_probability::kHARWELL2018_REACTIVITY,
-                 subtask_selection_probability::kHARWELL2018_OFFSET,
-                 subtask_selection_probability::kHARWELL2018_GAMMA);
-  } else if (subtask_selection_probability::kMethodBrutschy2014 == method) {
-    init_sigmoid(subtask_selection_probability::kBRUTSCHY2014_REACTIVITY,
-                 subtask_selection_probability::kBRUTSCHY2014_OFFSET,
-                 subtask_selection_probability::kBRUTSCHY2014_GAMMA);
-  }
+    : ER_CLIENT_INIT("rcppsw.ta.subtask_sel_prob"),
+      sigmoid(),
+      mc_method(std::move(method)) {
+  if (kMethodHarwell2018 == method) {
+    sigmoid::init(kHARWELL2018_REACTIVITY,
+                   kHARWELL2018_OFFSET,
+                   kHARWELL2018_GAMMA);
+  } else if (kMethodBrutschy2014 == method) {
+    sigmoid::init(kBRUTSCHY2014_REACTIVITY,
+                   kBRUTSCHY2014_OFFSET,
+                   kBRUTSCHY2014_GAMMA);
+  } else if (kMethodRandom == method) {}
+  ER_FATAL_SENTINEL("Bad method '%s' selected", method.c_str());
 }
 
 subtask_selection_probability::subtask_selection_probability(
-    const struct subtask_selection_params *const params)
-    : mc_method(params->method), m_reactivity(params->reactivity),
-      m_offset(params->offset), m_gamma(params->gamma) {}
+    const struct sigmoid_selection_params *const params)
+    : ER_CLIENT_INIT("rcppsw.ta.subtask_sel_prob"),
+      sigmoid(&params->sigmoid),
+      mc_method(params->method) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void subtask_selection_probability::init_sigmoid(double reactivity,
-                                                 double offset, double gamma) {
-  m_reactivity = reactivity;
-  m_offset = offset;
-  m_gamma = gamma;
-} /* init_sigmoid() */
-
-double subtask_selection_probability::calc(const time_estimate *subtask1,
-                                           const time_estimate *subtask2) {
-  if (kMethodBrutschy2014 == mc_method) {
-    return calc_brutschy2014(*subtask1, *subtask2);
-  } else if (kMethodHarwell2018 == mc_method) {
-    return calc_harwell2018(*subtask1, *subtask2);
-  } else if (kMethodRandom == mc_method) {
-    return calc_random();
-  }
-  assert(false);
-  return 0.0;
-} /* calc() */
-
 __rcsw_const double subtask_selection_probability::calc_random(void) {
   return 0.5;
 } /* calc_random() */
@@ -117,13 +100,20 @@ subtask_selection_probability::calc_sigmoid(const time_estimate &est1,
     r_ss = est1.last_result();
   }
 
-  double o_ss = m_reactivity * (est1.last_result() / r_ss - m_offset);
-  return 1.0 / (1 + exp(-o_ss)) * m_gamma;
+  return set_result(m_sigmoid(est1.last_result() / r_ss));
 } /* calc_sigmoid() */
 
-double subtask_selection_probability::
-operator()(const time_estimate *subtask1, const time_estimate *subtask2) {
-  return calc(subtask1, subtask2);
+double subtask_selection_probability::operator()(const time_estimate *subtask1,
+                                                 const time_estimate *subtask2) {
+  if (kMethodBrutschy2014 == mc_method) {
+    return calc_brutschy2014(*subtask1, *subtask2);
+  } else if (kMethodHarwell2018 == mc_method) {
+    return calc_harwell2018(*subtask1, *subtask2);
+  } else if (kMethodRandom == mc_method) {
+    return calc_random();
+  }
+  ER_FATAL_SENTINEL("Bad method '%s' selected", mc_method.c_str());
+  return 0.0;
 } /* operator() */
 
 NS_END(task_allocation, rcppsw);

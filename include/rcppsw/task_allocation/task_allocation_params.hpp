@@ -1,5 +1,5 @@
 /**
- * @file task_abort_parser.cpp
+ * @file task_allocation_params.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,13 +18,17 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_ALLOCATION_PARAMS_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_ALLOCATION_PARAMS_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/task_abort_xml_parser.hpp"
-#include <ext/ticpp/ticpp.h>
-
-#include "rcppsw/utils/line_parser.hpp"
+#include "rcppsw/params/base_params.hpp"
+#include "rcppsw/math/ema_params.hpp"
+#include "rcppsw/math/sigmoid_params.hpp"
+#include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
+#include "rcppsw/task_allocation/partitioning_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -32,37 +36,20 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Global Variables
+ * Structure Definitions
  ******************************************************************************/
-constexpr char task_abort_xml_parser::kXMLRoot[];
-
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-void task_abort_xml_parser::parse(const ticpp::Element &node) {
-  m_params =
-      std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
-
-  ticpp::Element anode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
-  XML_PARSE_ATTR(anode, m_params, reactivity);
-  XML_PARSE_ATTR(anode, m_params, offset);
-} /* parse() */
-
-void task_abort_xml_parser::show(std::ostream &stream) const {
-  stream << build_header() << XML_ATTR_STR(m_params, reactivity) << std::endl
-         << XML_ATTR_STR(m_params, offset) << std::endl
-         << build_footer();
-} /* show() */
-
-__rcsw_pure bool task_abort_xml_parser::validate(void) const {
-  if (m_parsed) {
-    CHECK(m_params->reactivity > 0.0);
-    CHECK(m_params->offset > 0.0);
-  }
-  return true;
-
-error:
-  return false;
-} /* validate() */
+/**
+ * @struct task_allocation_params
+ * @ingroup task_allocation params
+ */
+struct task_allocation_params : public rcppsw::params::base_params {
+  rcppsw::math::ema_params     estimation{};
+  rcppsw::math::sigmoid_params abort{};
+  sigmoid_selection_params     subtask_selection{};
+  partitioning_params          partitioning{};
+  sigmoid_selection_params     tab_sw{};
+};
 
 NS_END(task_allocation, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_ALLOCATION_PARAMS_HPP_ */

@@ -26,7 +26,8 @@
  ******************************************************************************/
 #include <string>
 
-#include "rcppsw/math/expression.hpp"
+#include "rcppsw/er/client.hpp"
+#include "rcppsw/math/sigmoid.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
@@ -65,7 +66,8 @@ NS_START(rcppsw, task_allocation);
  * - 0 < gamma < 1.
  *
  */
-class subtask_selection_probability : public rcppsw::math::expression<double> {
+class subtask_selection_probability : public er::client<subtask_selection_probability>,
+                                      public math::sigmoid {
  public:
   static constexpr double kHARWELL2018_REACTIVITY = 8.0;
   static constexpr double kHARWELL2018_OFFSET = 1.25;
@@ -84,13 +86,14 @@ class subtask_selection_probability : public rcppsw::math::expression<double> {
    * on whatever the selected method is.
    */
   explicit subtask_selection_probability(std::string method);
+  ~subtask_selection_probability(void) override = default;
 
   /**
    * @brief Initialize subtask selection probability with method + parameter
    * values.
    */
   explicit subtask_selection_probability(
-      const struct subtask_selection_params* params);
+      const struct sigmoid_selection_params* params);
 
   const std::string& method(void) const { return mc_method; }
 
@@ -106,11 +109,6 @@ class subtask_selection_probability : public rcppsw::math::expression<double> {
    */
   double operator()(const time_estimate* subtask1,
                     const time_estimate* subtask2);
-
-  /**
-   * @brief See \ref operator().
-   */
-  double calc(const time_estimate* subtask1, const time_estimate* subtask2);
 
  private:
   /**
@@ -144,20 +142,15 @@ class subtask_selection_probability : public rcppsw::math::expression<double> {
 
   /**
    * @brief Calculate the sigmoid activation for a pair of time estimates using
-   * the equation from Brutschy2014.
+   * time estimates.
    *
    * @param est1 Exec/interface estimate 1.
    * @param est2 Exec/interface estimate 2.
-   *
-   * @return Sigmoid value.
    */
   double calc_sigmoid(const time_estimate& est1, const time_estimate& est2);
 
   // clang-format off
   const std::string mc_method;
-  double            m_reactivity{0.0};
-  double            m_offset{0.0};
-  double            m_gamma{0.0};
   // clang-format on
 };
 

@@ -47,11 +47,13 @@ NS_START(rcppsw, task_allocation);
 class polled_task : public executable_task, public taskable {
  public:
   polled_task(const std::string& name,
-              const struct task_params* const c_params,
+              const struct math::sigmoid_params* abort,
+              const struct math::ema_params* estimation,
               std::unique_ptr<taskable> mechanism)
-      : executable_task(name, c_params),
+      : executable_task(name, abort, estimation),
         m_mechanism(std::move(mechanism)) {}
   ~polled_task(void) override;
+
 
   polled_task& operator=(const polled_task& other) = delete;
   polled_task(const polled_task& other) = delete;
@@ -69,8 +71,9 @@ class polled_task : public executable_task, public taskable {
    * @brief Initialize the execution time estimates of the task randomly within
    * the specified range.
    */
-  void init_random(uint lb, uint ub) {
-    executable_task::init_exec_estimate(static_cast<uint>(std::rand()) % (ub - lb + 1) + lb);
+  void exec_est_bounds_init(uint lb, uint ub) {
+    executable_task::init_exec_estimate(
+        static_cast<uint>(std::rand()) % (ub - lb + 1) + lb);
   }
 
  private:

@@ -22,8 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/abort_probability.hpp"
-#include "rcppsw/task_allocation/abort_params.hpp"
-#include <cmath>
+#include "rcppsw/math/sigmoid_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -33,26 +32,19 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-abort_probability::abort_probability(const struct abort_params *const params)
-    : abort_probability(params->reactivity, params->offset) {}
+abort_probability::abort_probability(const math::sigmoid_params *const params)
+    : sigmoid(params->reactivity, params->offset, params->gamma) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-double abort_probability::calc(double exec_time,
-                               const time_estimate &whole_task) {
+double abort_probability::operator()(double exec_time,
+                                     const time_estimate &whole_task) {
   if (!(whole_task.last_result() > 0)) {
     return set_result(kNO_EST_ABORT_PROB);
   }
 
-  double theta =
-      m_reactivity * (m_offset - exec_time / whole_task.last_result());
-  return set_result(1.0 / (1 + std::exp(theta)));
-} /* calc() */
-
-double abort_probability::operator()(double exec_time,
-                                     const time_estimate &whole_task) {
-  return calc(exec_time, whole_task);
+  return sigmoid::operator()(exec_time / whole_task.last_result());
 } /* operator() */
 
 NS_END(task_allocation, rcppsw);

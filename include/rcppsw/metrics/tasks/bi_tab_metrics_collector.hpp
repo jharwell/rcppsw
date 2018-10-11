@@ -1,5 +1,5 @@
 /**
- * @file bifurcating_tab_metrics_collector.hpp
+ * @file bi_tab_metrics_collector.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_TASKS_BIFURCATING_TAB_METRICS_COLLECTOR_HPP_
-#define INCLUDE_RCPPSW_METRICS_TASKS_BIFURCATING_TAB_METRICS_COLLECTOR_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_TASKS_BI_TAB_METRICS_COLLECTOR_HPP_
+#define INCLUDE_RCPPSW_METRICS_TASKS_BI_TAB_METRICS_COLLECTOR_HPP_
 
 /*******************************************************************************
  * Includes
@@ -38,23 +38,22 @@ NS_START(rcppsw, metrics, tasks);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class bifurcating_tab_metrics_collector
+ * @class bi_tab_metrics_collector
  * @ingroup metrics tasks
  *
- * @brief Collector for metrics for a specific bifurcating Task Allocation Block
+ * @brief Collector for metrics for a specific bi Task Allocation Block
  * (TAB), which consists of a partitionable task and its two subtasks.
  *
  * Metrics should only be collected upon completion/abortion of a task. Metrics
  * are written out at the specified interval.
  */
-class bifurcating_tab_metrics_collector : public base_metrics_collector {
+class bi_tab_metrics_collector : public base_metrics_collector {
  public:
   /**
    * @param ofname Output file name.
    * @param interval Collection interval.
    */
-  bifurcating_tab_metrics_collector(const std::string& ofname,
-                                    uint interval);
+  bi_tab_metrics_collector(const std::string& ofname, uint interval);
 
   void reset(void) override;
   void collect(const rcppsw::metrics::base_metrics& metrics) override;
@@ -131,4 +130,4 @@ class bifurcating_tab_metrics_collector : public base_metrics_collector {
 NS_END(tasks, metrics, rcppsw);
 
 
-#endif /* INCLUDE_RCPPSW_METRICS_TASKS_BIFURCATING_TAB_METRICS_COLLECTOR_HPP_ */
+#endif /* INCLUDE_RCPPSW_METRICS_TASKS_BI_TAB_METRICS_COLLECTOR_HPP_ */

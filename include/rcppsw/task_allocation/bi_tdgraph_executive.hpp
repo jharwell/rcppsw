@@ -1,5 +1,5 @@
 /**
- * @file bifurcating_tdgraph_executive.hpp
+ * @file bi_tdgraph_executive.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_BIFURCATING_TDGRAPH_EXECUTIVE_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_BIFURCATING_TDGRAPH_EXECUTIVE_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TDGRAPH_EXECUTIVE_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TDGRAPH_EXECUTIVE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -33,34 +33,34 @@
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
-class bifurcating_tab;
-class bifurcating_tdgraph;
+class bi_tab;
+class bi_tdgraph;
+struct executive_params;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * @class bifurcating_tdgraph_executive
+ * @class bi_tdgraph_executive
  * @ingroup task_allocation
  *
  * @brief A task executive which tasks are run one step at a time and polled
- * until they are finished. Operates on \ref bifurcating_tdgraph.
+ * until they are finished. Operates on \ref bi_tdgraph.
  */
-class bifurcating_tdgraph_executive : public base_executive,
-                                      public er::client<bifurcating_tdgraph_executive> {
+class bi_tdgraph_executive : public base_executive,
+                             public er::client<bi_tdgraph_executive> {
  public:
   using alloc_notify_cb = std::function<void(const polled_task*,
-                                             const bifurcating_tab*)>;
+                                             const bi_tab*)>;
 
-  bifurcating_tdgraph_executive(bool update_exec_ests,
-                                bifurcating_tdgraph* graph);
+  bi_tdgraph_executive(bool update_exec_ests, bi_tdgraph* graph);
 
   void run(void) override;
 
   /**
    * @brief Get the TAB corresponding to the currently active task.
    */
-  const bifurcating_tab* active_tab(void) const;
+  const bi_tab* active_tab(void) const;
 
   /**
    * @brief Set an optional callback that will be run when a new task allocation
@@ -68,16 +68,19 @@ class bifurcating_tdgraph_executive : public base_executive,
    *
    * The callback will be passed a pointer to the task that was just allocated.
    */
-  void task_alloc_notify(alloc_notify_cb cb) { m_task_alloc_notify.push_back(cb); }
+  void task_alloc_notify(alloc_notify_cb cb) {
+    m_task_alloc_notify.push_back(cb);
+  }
 
  private:
   polled_task* do_get_next_task(void) override;
+  void active_tab_update(void);
 
   /**
    * @brief Get the next task to execute, if the most recently executed
    * one was partitionable (easy case).
    */
-  polled_task* next_task_from_partitionable(const polled_task* task);
+  polled_task* next_task_from_partitionable(polled_task* task);
 
   void handle_task_start(polled_task* new_task);
   void handle_task_abort(polled_task* task);
@@ -85,10 +88,10 @@ class bifurcating_tdgraph_executive : public base_executive,
   void update_task_partition_prob(polled_task* task);
 
   // clang-format off
-  std::list<alloc_notify_cb>  m_task_alloc_notify{};
+  std::list<alloc_notify_cb>   m_task_alloc_notify{};
   // clang-format on
 };
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_BIFURCATING_TDGRAPH_EXECUTIVE_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TDGRAPH_EXECUTIVE_HPP_ */

@@ -33,8 +33,9 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
-struct task_params;
+NS_START(rcppsw);
+namespace math { struct ema_params; }
+NS_START(task_allocation);
 
 /*******************************************************************************
  * Class Definitions
@@ -60,18 +61,11 @@ class executable_task : public logical_task,
                         public metrics::tasks::execution_metrics {
  public:
   executable_task(const std::string& name,
-                  const struct task_params* c_params);
+                  const struct math::sigmoid_params* abort,
+                  const struct math::ema_params* estimation);
   executable_task(const executable_task& other);
 
   ~executable_task(void) override;
-
-  /**
-   * @brief Initialize the task with a random execution time estimate within the
-   * specified bounds.
-   */
-  void init_random(int lb, int ub) {
-    update_exec_estimate(std::rand() % (ub - lb + 1) + lb);
-  }
 
   /* execution metrics */
   double task_last_exec_time(void) const override { return m_last_exec_time; }
@@ -90,7 +84,7 @@ class executable_task : public logical_task,
    * @brief Update the calculated abort probability for the task
    */
   double update_abort_prob(void) {
-    return m_abort_prob.calc(m_interface_time, m_interface_estimate);
+    return m_abort_prob(m_interface_time, m_interface_estimate);
   }
 
   /**
@@ -136,7 +130,7 @@ class executable_task : public logical_task,
    * @param last_measure The last measured time.
    */
   void update_interface_estimate(double last_measure) {
-    m_interface_estimate.calc(last_measure);
+    m_interface_estimate(last_measure);
   }
 
   /**
@@ -146,7 +140,7 @@ class executable_task : public logical_task,
    * @param last_measure The last measured time.
    */
   void update_exec_estimate(double last_measure) {
-    m_exec_estimate.calc(last_measure);
+    m_exec_estimate(last_measure);
   }
 
   /**

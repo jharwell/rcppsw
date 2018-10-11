@@ -1,5 +1,5 @@
 /**
- * @file task_abort_parser.hpp
+ * @file sigmoid_parser.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * FORDYCA.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_ABORT_XML_PARSER_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_ABORT_XML_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_MATH_SIGMOID_XML_PARSER_HPP_
+#define INCLUDE_RCPPSW_MATH_SIGMOID_XML_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -28,41 +28,39 @@
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
-#include "rcppsw/task_allocation/abort_params.hpp"
+#include "rcppsw/math/sigmoid_params.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, math);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * @class task_abort_xml_parser
- * @ingroup task_allocation
+ * @class sigmoid_xml_parser
+ * @ingroup math
  *
- * @brief Parses XML parameters for relating to the subtask selection.
+ * @brief Parses XML parameters to the sigmoids into \ref sigmoid_params.
  */
-class task_abort_xml_parser: public rcppsw::params::xml_param_parser {
+class sigmoid_xml_parser: public rcppsw::params::xml_param_parser {
  public:
-  explicit task_abort_xml_parser(uint level)
+  explicit sigmoid_xml_parser(uint level)
       : xml_param_parser(level) {}
 
   /**
-   * @brief The root tag that all task task_abort parameters should lie
+   * @brief The root tag that all task sigmoid parameters should lie
    * under in the XML tree.
    */
-  static constexpr char kXMLRoot[] = "task_abort";
+  static constexpr char kXMLRoot[] = "sigmoid";
 
   void show(std::ostream& stream) const override;
-  bool validate(void) const override;
   void parse(const ticpp::Element& node) override;
-
+  bool validate(void) const override;
   std::string xml_root(void) const override { return kXMLRoot; }
-  bool parsed(void) const override { return m_parsed; }
 
-  std::shared_ptr<abort_params> parse_results(void) const {
+  std::shared_ptr<sigmoid_params> parse_results(void) const {
     return m_params;
   }
 
@@ -72,11 +70,10 @@ class task_abort_xml_parser: public rcppsw::params::xml_param_parser {
   }
 
   // clang-format off
-  bool                          m_parsed{false};
-  std::shared_ptr<abort_params> m_params{nullptr};
+  std::shared_ptr<sigmoid_params> m_params{nullptr};
   // clang-format on
 };
 
-NS_END(task_allocation, rcppsw);
+NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_ABORT_XML_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_MATH_SIGMOID_XML_PARSER_HPP_ */
