@@ -28,6 +28,7 @@
 
 #include "rcppsw/math/expression.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
+#include "rcppsw/math/sigmoid.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -56,7 +57,7 @@ NS_START(rcppsw, task_allocation);
  * - The reactivity parameter: how sensitive should robots be to abrupt changes
  *   in the estimates?
  */
-class partition_probability : public rcppsw::math::expression<double> {
+class partition_probability : public math::sigmoid {
  public:
   /*
    * A default reactivity value determined experimentally to work well.
@@ -69,40 +70,44 @@ class partition_probability : public rcppsw::math::expression<double> {
    */
   static constexpr double kDEFAULT_OFFSET = 1.0;
 
+  /* A default gamma value because there needs to be one */
+  static constexpr double kDEFAULT_GAMMA = 1.0;
+
   /**
    * @brief Initialize partitioning probability with default values based on
    * whatever the selected method is.
    */
-  explicit partition_probability(std::string method) :
-      partition_probability(std::move(method),
-                            kDEFAULT_REACTIVITY,
-                            kDEFAULT_OFFSET) {}
+  explicit partition_probability(const std::string& method) :
+      sigmoid(kDEFAULT_REACTIVITY,
+              kDEFAULT_OFFSET,
+              kDEFAULT_GAMMA),
+      mc_method(method) {}
 
   /**
    * @brief Initialize partitioning probability explicity with method +
    * parameter values.
    */
-  explicit partition_probability(const struct partitioning_params* params);
+  explicit partition_probability(const struct sigmoid_selection_params* params);
+
+  double operator()(const time_estimate& task,
+                    const time_estimate& subtask1,
+                    const time_estimate& subtask2);
 
   double calc(const time_estimate& task,
               const time_estimate& subtask1,
-              const time_estimate& subtask2);
-
+              const time_estimate& subtask2) {
+    return operator()(task, subtask1, subtask2);
+  }
   const std::string& method(void) const { return mc_method; }
 
  private:
-  partition_probability(std::string method, double reactivity, double offset)
-      : mc_method(std::move(method)),
-        m_reactivity(reactivity),
-        m_offset(offset) {}
-
   double calc_pini2011(const time_estimate& task,
                        const time_estimate& subtask1,
                        const time_estimate& subtask2);
 
+  // clang-format off
   const std::string mc_method;
-  double m_reactivity;
-  double m_offset;
+  // clang-format on
 };
 
 NS_END(task_allocation, rcppsw);

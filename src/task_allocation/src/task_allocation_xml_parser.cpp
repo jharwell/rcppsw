@@ -1,5 +1,5 @@
 /**
- * @file subtask_selection_parser.cpp
+ * @file task_allocation_xml_parser.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -21,10 +21,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/subtask_selection_xml_parser.hpp"
-#include <ext/ticpp/ticpp.h>
-
-#include "rcppsw/utils/line_parser.hpp"
+#include "rcppsw/task_allocation/task_allocation_xml_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -34,39 +31,29 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Global Variables
  ******************************************************************************/
-constexpr char subtask_selection_xml_parser::kXMLRoot[];
+constexpr char task_allocation_xml_parser::kXMLRoot[];
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void subtask_selection_xml_parser::parse(const ticpp::Element &node) {
-  ticpp::Element snode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
-  m_params =
-      std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
+void task_allocation_xml_parser::parse(const ticpp::Element& node) {
+    ticpp::Element tnode = get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+    m_params =
+        std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
+    m_abort.parse(tnode);
+    m_subtask_sel.parse(tnode);
+    m_partitioning.parse(tnode);
+    m_estimation.parse(tnode);
 
-  XML_PARSE_ATTR(snode, m_params, reactivity);
-  XML_PARSE_ATTR(snode, m_params, offset);
-  XML_PARSE_ATTR(snode, m_params, method);
-  XML_PARSE_ATTR(snode, m_params, gamma);
+    m_params->abort = *m_abort.parse_results();
+    m_params->subtask_selection = *m_subtask_sel.parse_results();
+    m_params->partitioning = *m_partitioning.parse_results();
+    m_params->estimation = *m_estimation.parse_results();
 } /* parse() */
 
-void subtask_selection_xml_parser::show(std::ostream &stream) const {
-  stream << build_header() << XML_ATTR_STR(m_params, reactivity) << std::endl
-         << XML_ATTR_STR(m_params, offset) << std::endl
-         << XML_ATTR_STR(m_params, method) << std::endl
-         << XML_ATTR_STR(m_params, gamma) << std::endl
-         << build_footer();
+void task_allocation_xml_parser::show(std::ostream& stream) const {
+  stream << build_header() << m_abort << m_subtask_sel <<
+      m_partitioning << m_estimation << build_footer();
 } /* show() */
 
-bool subtask_selection_xml_parser::validate(void) const {
-  CHECK(m_params->reactivity > 0.0);
-  CHECK(m_params->offset > 1.0);
-  CHECK(IS_BETWEEN(m_params->gamma, 0.0, 1.0));
-  CHECK("" != m_params->method);
-  return true;
-
-error:
-  return false;
-} /* validate() */
-
-NS_END(task_allocation, rcppsw);
+NS_END(task_allocatio, rcppsw);

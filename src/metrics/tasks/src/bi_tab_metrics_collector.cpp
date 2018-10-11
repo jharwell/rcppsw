@@ -1,5 +1,5 @@
 /**
- * @file bifurcating_tab_metrics_collector.cpp
+ * @file bi_tab_metrics_collector.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -21,9 +21,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/tasks/bifurcating_tab_metrics_collector.hpp"
+#include "rcppsw/metrics/tasks/bi_tab_metrics_collector.hpp"
 
-#include "rcppsw/metrics/tasks/bifurcating_tab_metrics.hpp"
+#include "rcppsw/metrics/tasks/bi_tab_metrics.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
 
 /*******************************************************************************
@@ -34,7 +34,7 @@ NS_START(rcppsw, metrics, tasks);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-bifurcating_tab_metrics_collector::bifurcating_tab_metrics_collector(
+bi_tab_metrics_collector::bi_tab_metrics_collector(
     const std::string &ofname, uint interval)
     : base_metrics_collector(ofname, interval) {}
 
@@ -42,7 +42,7 @@ bifurcating_tab_metrics_collector::bifurcating_tab_metrics_collector(
  * Member Functions
  ******************************************************************************/
 std::string
-bifurcating_tab_metrics_collector::csv_header_build(const std::string &header) {
+bi_tab_metrics_collector::csv_header_build(const std::string &header) {
   // clang-format off
   std::string line = base_metrics_collector::csv_header_build(header);
   return line + "int_subtask1_count" + separator() +
@@ -63,14 +63,14 @@ bifurcating_tab_metrics_collector::csv_header_build(const std::string &header) {
   return line;
 } /* csv_header_build() */
 
-void bifurcating_tab_metrics_collector::reset(void) {
+void bi_tab_metrics_collector::reset(void) {
   base_metrics_collector::reset();
   reset_after_interval();
 } /* reset() */
 
-void bifurcating_tab_metrics_collector::collect(
+void bi_tab_metrics_collector::collect(
     const rcppsw::metrics::base_metrics &metrics) {
-  auto &m = dynamic_cast<const bifurcating_tab_metrics &>(metrics);
+  auto &m = dynamic_cast<const bi_tab_metrics &>(metrics);
   if (m.employed_partitioning()) {
     ++m_int_partition_count;
     ++m_cum_partition_count;
@@ -91,7 +91,7 @@ void bifurcating_tab_metrics_collector::collect(
   m_cum_task_depth_sw_count += static_cast<uint>(m.task_depth_changed());
 } /* collect() */
 
-bool bifurcating_tab_metrics_collector::csv_line_build(std::string &line) {
+bool bi_tab_metrics_collector::csv_line_build(std::string &line) {
   if (!((timestep() + 1) % interval() == 0)) {
     return false;
   }
@@ -129,7 +129,7 @@ bool bifurcating_tab_metrics_collector::csv_line_build(std::string &line) {
   return true;
 } /* store_foraging_stats() */
 
-void bifurcating_tab_metrics_collector::reset_after_interval(void) {
+void bi_tab_metrics_collector::reset_after_interval(void) {
   m_int_subtask1_count = 0;
   m_int_subtask2_count = 0;
   m_int_partition_count = 0;

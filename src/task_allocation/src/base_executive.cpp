@@ -34,7 +34,8 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_executive::base_executive(bool update_exec_ests, tdgraph *const graph)
+base_executive::base_executive(bool update_exec_ests,
+                               tdgraph *const graph)
     : ER_CLIENT_INIT("rcppsw.ta.executive.base"),
       m_update_exec_ests(update_exec_ests),
       m_graph(graph) {}
@@ -52,7 +53,7 @@ polled_task *base_executive::get_next_task(const polled_task *last_task) {
   if (nullptr == last_task) {
     return get_first_task();
   }
-  ER_ASSERT(tdgraph::vertex_parent(*m_graph, m_current_task),
+  ER_ASSERT(nullptr != tdgraph::vertex_parent(*m_graph, m_current_task),
             "All tasks must have a parent");
   return do_get_next_task();
 } /* get_next_task() */
@@ -74,22 +75,8 @@ polled_task *base_executive::get_first_task(void) {
 
   /* +1 for the self-reference */
   ER_ASSERT(3 == kids.size(), "Root node does not have 2 children");
-  return partitionable->partition(kids[1], kids[2]);
+  return partitionable->task_allocate(kids[1], kids[2]);
 } /* get_first_task() */
-
-void base_executive::task_init_random(polled_task *task, uint lb, uint ub) {
-  ER_ASSERT(!task->is_partitionable(), "Task is partitionable");
-  task->init_random(lb, ub);
-} /* task_init_random() */
-
-void base_executive::task_init_random(polled_task *task,
-                                      const polled_task *partition, uint lb,
-                                      uint ub) {
-  ER_ASSERT(task->is_partitionable(),
-            "Cannot initialize non-partitionable task last partition");
-  auto partitionable = dynamic_cast<partitionable_polled_task *>(task);
-  partitionable->init_random(partition, lb, ub);
-} /* task_init_random() */
 
 double base_executive::task_abort_prob(polled_task *const task) {
   if (task->is_atomic()) {

@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/partitionable_task.hpp"
-#include "rcppsw/task_allocation/partitionable_task_params.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
+#include "rcppsw/task_allocation/partitioning_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -34,12 +34,13 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 partitionable_task::partitionable_task(
-    const struct partitionable_task_params *c_params)
+    const struct partitioning_params* partitioning,
+    const struct sigmoid_selection_params* subtask_sel)
     : ER_CLIENT_INIT("rcppsw.ta.partitionable_task"),
-      m_always_partition(c_params->partitioning.always_partition),
-      m_never_partition(c_params->partitioning.never_partition),
-      m_selection_prob(&c_params->subtask_selection),
-      m_partition_prob(&c_params->partitioning) {}
+      m_always_partition(partitioning->always_partition),
+      m_never_partition(partitioning->never_partition),
+      m_selection_prob(subtask_sel),
+      m_partition_prob(&partitioning->sigmoid) {}
 
 /*******************************************************************************
  * Allocation Metrics
@@ -58,23 +59,23 @@ void partitionable_task::update_partition_prob(const time_estimate &task,
 }
 
 polled_task *
-partitionable_task::partition(const polled_task *const partition1,
-                              const polled_task *const partition2) {
+partitionable_task::task_allocate(const polled_task *const subtask1,
+                                  const polled_task *const subtask2) {
   ER_ASSERT(!(m_always_partition && m_never_partition),
             "Cannot ALWAYS and NEVER partition");
 
   double partition_prob;
+  std::string name = dynamic_cast<executable_task *>(this)->name();
+
   if (m_always_partition) {
     partition_prob = 1;
   } else if (m_never_partition) {
     partition_prob = 0;
   } else {
     partition_prob = m_partition_prob.last_result();
+    ER_INFO("Task '%s': partition_method=%s partition_prob=%f", name.c_str(),
+            m_partition_prob.method().c_str(), partition_prob);
   }
-  std::string name = dynamic_cast<executable_task *>(this)->name();
-
-  ER_INFO("Task '%s': partition_method=%s partition_prob=%f", name.c_str(),
-          m_partition_prob.method().c_str(), partition_prob);
 
   /* We chose not to employ partitioning on the next task allocation */
   if (partition_prob <= static_cast<double>(std::rand()) / RAND_MAX) {
@@ -84,41 +85,46 @@ partitionable_task::partition(const polled_task *const partition1,
     ER_ASSERT(nullptr != ret, "Partitionable task is not pollable")
     return ret;
   }
-  m_employed_partitioning = true;
-  const polled_task *ret = nullptr;
-
   /* We have chosen to employ partitioning */
-  double prob_12, prob_21;
-  if (subtask_selection_probability::kMethodHarwell2018 ==
-      m_selection_prob.method()) {
-    prob_12 = m_selection_prob.calc(&partition1->task_exec_estimate(),
-                                    &partition2->task_exec_estimate());
-    prob_21 = m_selection_prob.calc(&partition2->task_exec_estimate(),
-                                    &partition1->task_exec_estimate());
-  } else {
-    prob_12 = m_selection_prob.calc(&partition1->task_interface_estimate(),
-                                    &partition2->task_interface_estimate());
-    prob_21 = m_selection_prob.calc(&partition2->task_interface_estimate(),
-                                    &partition1->task_interface_estimate());
-  }
-
-  ER_INFO("Task '%s': selection_method=%s, last_partition=%s", name.c_str(),
+  m_employed_partitioning = true;
+  ER_INFO("Employing partitioning at task '%s': selection_method=%s, last_partition=%s", name.c_str(),
           m_selection_prob.method().c_str(),
           (nullptr != m_last_partition) ? m_last_partition->name().c_str()
           : "None");
 
+  return subtask_allocate(subtask1, subtask2);
+} /* task_allocate() */
+
+polled_task* partitionable_task::subtask_allocate(
+    const polled_task *const subtask1,
+    const polled_task *const subtask2) {
+  double prob_12, prob_21;
+  if (subtask_selection_probability::kMethodHarwell2018 ==
+      m_selection_prob.method()) {
+    prob_12 = m_selection_prob(&subtask1->task_exec_estimate(),
+                               &subtask2->task_exec_estimate());
+    prob_21 = m_selection_prob(&subtask2->task_exec_estimate(),
+                               &subtask1->task_exec_estimate());
+  } else {
+    prob_12 = m_selection_prob(&subtask1->task_interface_estimate(),
+                               &subtask2->task_interface_estimate());
+    prob_21 = m_selection_prob(&subtask2->task_interface_estimate(),
+                               &subtask1->task_interface_estimate());
+  }
+
   ER_INFO("%s exec_est=%f/int_est=%f, %s exec_est=%f/int_est=%f",
-          partition1->name().c_str(),
-          partition1->task_exec_estimate().last_result(),
-          partition1->task_interface_estimate().last_result(),
-          partition2->name().c_str(),
-          partition2->task_exec_estimate().last_result(),
-          partition2->task_interface_estimate().last_result());
+          subtask1->name().c_str(),
+          subtask1->task_exec_estimate().last_result(),
+          subtask1->task_interface_estimate().last_result(),
+          subtask2->name().c_str(),
+          subtask2->task_exec_estimate().last_result(),
+          subtask2->task_interface_estimate().last_result());
 
-  ER_INFO("%s -> %s prob=%f, %s -> %s prob=%f", partition1->name().c_str(),
-          partition2->name().c_str(), prob_12, partition2->name().c_str(),
-          partition1->name().c_str(), prob_21);
+  ER_INFO("%s -> %s prob=%f, %s -> %s prob=%f", subtask1->name().c_str(),
+          subtask2->name().c_str(), prob_12, subtask2->name().c_str(),
+          subtask1->name().c_str(), prob_21);
 
+  const polled_task *ret = nullptr;
   if (subtask_selection_probability::kMethodHarwell2018 ==
           m_selection_prob.method() ||
       subtask_selection_probability::kMethodBrutschy2014 ==
@@ -127,35 +133,35 @@ partitionable_task::partition(const polled_task *const partition1,
      * If we last executed subtask1, we calculate the probability of switching
      * to subtask2, based on time estimates.
      */
-    if (m_last_partition == partition1 || nullptr == m_last_partition) {
+    if (m_last_partition == subtask1 || nullptr == m_last_partition) {
       if (prob_12 >= static_cast<double>(std::rand()) / RAND_MAX) {
-        ret = partition2;
+        ret = subtask2;
       } else {
-        ret = partition1;
+        ret = subtask1;
       }
     }
     /*
      * If we last executed subtask2, we calculate the probability of switching
      * to subtask1, based on time estimates.
      */
-    else if (m_last_partition == partition2) {
+    else if (m_last_partition == subtask2) {
       if (prob_21 >= static_cast<double>(std::rand()) / RAND_MAX) {
-        ret = partition1;
+        ret = subtask1;
       } else {
-        ret = partition2;
+        ret = subtask2;
       }
     }
   } else if (subtask_selection_probability::kMethodRandom ==
              m_selection_prob.method()) {
     if (prob_12 >= static_cast<double>(std::rand()) / RAND_MAX) {
-      ret = partition1;
+      ret = subtask1;
     } else {
-      ret = partition2;
+      ret = subtask2;
     }
   }
-  ER_ASSERT(nullptr != ret, "no task selected?");
+  ER_ASSERT(nullptr != ret, "No subtask selected?");
   ER_INFO("Selected subtask '%s'", ret->name().c_str());
   return const_cast<polled_task *>(ret);
-} /* partition() */
+} /* subtask_allocate() */
 
 NS_END(task_allocation, rcppsw);

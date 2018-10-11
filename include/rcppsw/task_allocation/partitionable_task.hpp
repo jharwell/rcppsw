@@ -51,7 +51,8 @@ class polled_task;
 class partitionable_task : public er::client<partitionable_task>,
                            public metrics::tasks::partitioning_metrics {
  public:
-  explicit partitionable_task(const struct partitionable_task_params* c_params);
+  explicit partitionable_task(const struct partitioning_params* partitioning,
+                              const struct sigmoid_selection_params* subtask_sel);
 
   ~partitionable_task(void) override = default;
 
@@ -62,18 +63,13 @@ class partitionable_task : public er::client<partitionable_task>,
   bool employed_partitioning(void) const override;
 
   /**
-   * @brief Partition the task according to the configured method, and return a
-   * new task to execute.
-   *
-   * @param partition1 The first of the two subtasks the partitionable task was
-   * initialized with.
-   * @param partition2 The first of the two subtasks the partitionable task was
-   * initialized with.
+   * @brief Allocate a new task according to the configured method, choosing
+   * from the current object and its two subtasks.
    *
    * @return The new task to execute.
    */
-  polled_task* partition(const polled_task* partition1,
-                         const polled_task* partition2);
+  polled_task* task_allocate(const polled_task* subtask1,
+                             const polled_task* subtask2);
 
   /**
    * @brief Update the partition probalitity of the current task.
@@ -109,6 +105,8 @@ class partitionable_task : public er::client<partitionable_task>,
   }
 
  private:
+  polled_task* subtask_allocate(const polled_task* subtask1,
+                                const polled_task* subtask2);
   // clang-format off
   bool                          m_always_partition;
   bool                          m_never_partition;

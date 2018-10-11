@@ -1,5 +1,5 @@
 /**
- * @file bifurcating_tdgraph_executive.cpp
+ * @file bi_tdgraph_executive.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -21,8 +21,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/bifurcating_tdgraph_executive.hpp"
-#include "rcppsw/task_allocation/bifurcating_tdgraph.hpp"
+#include "rcppsw/task_allocation/bi_tdgraph_executive.hpp"
+#include "rcppsw/task_allocation/bi_tdgraph.hpp"
 #include "rcppsw/task_allocation/partitionable_polled_task.hpp"
 
 /*******************************************************************************
@@ -33,25 +33,25 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-bifurcating_tdgraph_executive::bifurcating_tdgraph_executive(
+bi_tdgraph_executive::bi_tdgraph_executive(
     bool update_exec_ests,
-    bifurcating_tdgraph *const graph)
+    bi_tdgraph *const graph)
     : base_executive(update_exec_ests, graph),
-      ER_CLIENT_INIT("rcppsw.ta.executive.bifurcating_tdgraph") {
-  auto bigraph = static_cast<bifurcating_tdgraph *>(base_executive::graph());
+      ER_CLIENT_INIT("rcppsw.ta.executive.bi_tdgraph") {
+  auto bigraph = static_cast<bi_tdgraph *>(base_executive::graph());
   bigraph->install_cb(this);
 }
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-__rcsw_pure const bifurcating_tab *
-bifurcating_tdgraph_executive::active_tab(void) const {
-  auto bigraph = static_cast<const bifurcating_tdgraph *>(graph());
+__rcsw_pure const bi_tab *
+bi_tdgraph_executive::active_tab(void) const {
+  auto bigraph = static_cast<const bi_tdgraph *>(graph());
   return bigraph->active_tab();
 } /* active_tab() */
 
-void bifurcating_tdgraph_executive::run(void) {
+void bi_tdgraph_executive::run(void) {
   if (nullptr == current_task()) {
     /*
      * When starting a partitionable task for the first time, we need to update
@@ -92,7 +92,7 @@ void bifurcating_tdgraph_executive::run(void) {
   }
 } /* run() */
 
-void bifurcating_tdgraph_executive::handle_task_abort(polled_task *task) {
+void bi_tdgraph_executive::handle_task_abort(polled_task *task) {
   task->task_aborted(true);
   for (auto cb : task_abort_notify()) {
     cb(task);
@@ -123,7 +123,7 @@ void bifurcating_tdgraph_executive::handle_task_abort(polled_task *task) {
   handle_task_start(task);
 } /* handle_task_abort() */
 
-void bifurcating_tdgraph_executive::handle_task_finish(polled_task *task) {
+void bi_tdgraph_executive::handle_task_finish(polled_task *task) {
   for (auto cb : task_finish_notify()) {
     cb(task);
   } /* for(cb..) */
@@ -146,7 +146,7 @@ void bifurcating_tdgraph_executive::handle_task_finish(polled_task *task) {
   task->task_execute();
 } /* handle_task_finish() */
 
-void bifurcating_tdgraph_executive::handle_task_start(polled_task *new_task) {
+void bi_tdgraph_executive::handle_task_start(polled_task *new_task) {
   ER_INFO("Starting new task '%s'", new_task->name().c_str());
 
   for (auto cb : m_task_alloc_notify) {
@@ -162,7 +162,7 @@ void bifurcating_tdgraph_executive::handle_task_start(polled_task *new_task) {
   current_task(new_task);
 } /* handle_task_start() */
 
-void bifurcating_tdgraph_executive::update_task_partition_prob(
+void bi_tdgraph_executive::update_task_partition_prob(
     polled_task *task) {
   ER_ASSERT(task->is_partitionable(),
             "Cannot update partition probability of non-partitionable task");
@@ -181,42 +181,25 @@ void bifurcating_tdgraph_executive::update_task_partition_prob(
   }
 } /* update_task_partition_prob() */
 
-polled_task *bifurcating_tdgraph_executive::do_get_next_task(void) {
-  /* leaf of tree--perform partitioning at the parent */
-  if (!current_task()->is_partitionable()) {
-    return next_task_from_partitionable(
-        tdgraph::vertex_parent(*graph(), current_task()));
-  }
 
+polled_task *bi_tdgraph_executive::do_get_next_task(void) {
   /*
-   * Current task not leaf of tree. If it is the root task of the active TAB,
-   * then perform partitioning with it. If it is a child task of the active TAB,
-   * then perform partitioning with its parent. This allows for tasks that have
-   * non-singular parents AND children to behave properly during execution in
-   * terms of allocation.
+   * Update our active TAB so that we perform partitioning from the correct
+   * place.
    */
-  auto bigraph = static_cast<bifurcating_tdgraph *>(graph());
-  if (bigraph->active_tab()->task_is_child(current_task())) {
-    return next_task_from_partitionable(
-        tdgraph::vertex_parent(*graph(), current_task()));
-  }
-  if (bigraph->active_tab()->task_is_root(current_task())) {
-    return next_task_from_partitionable(current_task());
-  }
-  ER_FATAL_SENTINEL("Task is neither leaf nor child of TAB?");
-  return nullptr;
-} /* do_get_next_task() */
-
-polled_task *bifurcating_tdgraph_executive::next_task_from_partitionable(
-    const polled_task *task) {
+  auto bigraph = static_cast<bi_tdgraph *>(graph());
+  bigraph->active_tab_update(current_task());
   auto partitionable = dynamic_cast<partitionable_task *>(
-      tdgraph::vertex_parent(*graph(), task));
-  std::vector<polled_task *> kids = graph()->children(task);
-  if (task == graph()->root()) {
-    return partitionable->partition(kids[1], kids[2]);
+      bigraph->active_tab()->root());
+  ER_ASSERT(nullptr != partitionable,
+            "Task %s not partitionable",
+            active_tab()->root()->name().c_str())
+      std::vector<polled_task *> kids = graph()->children(active_tab()->root());
+  if (active_tab()->root() == graph()->root()) {
+    return partitionable->task_allocate(kids[1], kids[2]);
   } else {
-    return partitionable->partition(kids[0], kids[1]);
+    return partitionable->task_allocate(kids[0], kids[1]);
   }
-} /* next_task_from_partitionable() */
+} /* do_get_next_task() */
 
 NS_END(task_allocation, rcppsw);

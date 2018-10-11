@@ -1,5 +1,5 @@
 /**
- * @file executive_parser.cpp
+ * @file sigmoid_parser.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -21,7 +21,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/executive_xml_parser.hpp"
+#include "rcppsw/math/sigmoid_xml_parser.hpp"
 #include <ext/ticpp/ticpp.h>
 
 #include "rcppsw/utils/line_parser.hpp"
@@ -29,52 +29,42 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, math);
 
 /*******************************************************************************
  * Global Variables
  ******************************************************************************/
-constexpr char executive_xml_parser::kXMLRoot[];
+constexpr char sigmoid_xml_parser::kXMLRoot[];
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void executive_xml_parser::parse(const ticpp::Element &node) {
-  if (nullptr != node.FirstChild(kXMLRoot, false)) {
-    m_params =
-        std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
-    ticpp::Element enode =
-        get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
-    m_abort.parse(enode);
-    m_partition.parse(enode);
-    m_subtask.parse(enode);
-    m_estimation.parse(enode);
+void sigmoid_xml_parser::parse(const ticpp::Element &node) {
+  ticpp::Element snode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
+  m_params =
+      std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 
-    m_params->abort = *m_abort.parse_results();
-    m_params->partitioning = *m_partition.parse_results();
-    m_params->estimation = *m_estimation.parse_results();
-    m_params->subtask_selection = *m_subtask.parse_results();
-    m_parsed = true;
-  }
+  XML_PARSE_ATTR(snode, m_params, reactivity);
+  XML_PARSE_ATTR(snode, m_params, offset);
+  XML_PARSE_ATTR(snode, m_params, gamma);
 } /* parse() */
 
-void executive_xml_parser::show(std::ostream &stream) const {
-  if (!m_parsed) {
-    stream << build_header() << "<< Not Parsed >>" << std::endl
-           << build_footer();
-    return;
-  }
-
-  stream << build_header() << m_abort << m_partition << m_subtask
-         << m_estimation << build_footer();
+void sigmoid_xml_parser::show(std::ostream &stream) const {
+  stream << build_header()
+         << XML_ATTR_STR(m_params, reactivity) << std::endl
+         << XML_ATTR_STR(m_params, offset) << std::endl
+         << XML_ATTR_STR(m_params, gamma) << std::endl
+         << build_footer();
 } /* show() */
 
-__rcsw_pure bool executive_xml_parser::validate(void) const {
-  if (m_parsed) {
-    return m_abort.validate() && m_partition.validate() &&
-           m_subtask.validate() && m_estimation.validate();
-  }
+bool sigmoid_xml_parser::validate(void) const {
+  CHECK(m_params->reactivity > 0.0);
+  CHECK(m_params->offset > 0.0);
+  CHECK(IS_BETWEEN(m_params->gamma, 0.0, 1.0));
   return true;
+
+error:
+  return false;
 } /* validate() */
 
-NS_END(task_allocation, rcppsw);
+NS_END(math, rcppsw);

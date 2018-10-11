@@ -22,7 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/partition_probability.hpp"
-#include "rcppsw/task_allocation/partitioning_params.hpp"
+#include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
 #include <cassert>
 #include <cmath>
 
@@ -35,22 +35,23 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 partition_probability::partition_probability(
-    const struct partitioning_params *params)
-    : partition_probability(params->method, params->reactivity,
-                            params->offset) {}
+    const struct sigmoid_selection_params *params)
+    : sigmoid(params->sigmoid.reactivity,
+              params->sigmoid.offset,
+              params->sigmoid.gamma) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-double partition_probability::calc(const time_estimate &task,
-                                   const time_estimate &subtask1,
-                                   const time_estimate &subtask2) {
+double partition_probability::operator()(const time_estimate &task,
+                                         const time_estimate &subtask1,
+                                         const time_estimate &subtask2) {
   if ("pini2011" == mc_method) {
     return calc_pini2011(task, subtask1, subtask2);
   }
   assert(false);
   return 0.0;
-} /* calc() */
+} /* operator()() */
 
 double partition_probability::calc_pini2011(const time_estimate &task,
                                             const time_estimate &subtask1,
@@ -63,16 +64,14 @@ double partition_probability::calc_pini2011(const time_estimate &task,
   double theta = 0.0;
   if (task > subtask1 + subtask2) {
     if ((subtask1 + subtask2).last_result() > 0) {
-      theta = m_reactivity *
-              ((task / (subtask1 + subtask2)) - m_offset).last_result();
+      theta = (task / (subtask1 + subtask2)).last_result();
     }
   } else {
     if (task.last_result() > 0) {
-      theta = m_reactivity *
-              (m_offset - ((subtask1 + subtask2) / task).last_result());
+      theta = ((subtask1 + subtask2) / task).last_result();
     }
   }
-  return set_result(1.0 / (1.0 + std::exp(-theta)));
+  return sigmoid::operator()(-theta);
 } /* calc() */
 
 NS_END(task_allocation, rcppsw);

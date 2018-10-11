@@ -1,5 +1,5 @@
 /**
- * @file bifurcating_tab_metrics.hpp
+ * @file bi_tab_metrics.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_TASKS_BIFURCATING_TAB_METRICS_HPP_
-#define INCLUDE_RCPPSW_METRICS_TASKS_BIFURCATING_TAB_METRICS_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_TASKS_BI_TAB_METRICS_HPP_
+#define INCLUDE_RCPPSW_METRICS_TASKS_BI_TAB_METRICS_HPP_
 
 /*******************************************************************************
  * Includes
@@ -36,17 +36,17 @@ NS_START(rcppsw, metrics, tasks);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class bifurcating_tab_metrics
+ * @class bi_tab_metrics
  * @ingroup metrics tasks
  *
  * @brief Interface defining metrics that can be collected about the task
  * allocation each robot performs.
  *
  */
-class bifurcating_tab_metrics : public virtual base_metrics {
+class bi_tab_metrics : public virtual base_metrics {
  public:
-  bifurcating_tab_metrics(void) = default;
-  ~bifurcating_tab_metrics(void) override = default;
+  bi_tab_metrics(void) = default;
+  ~bi_tab_metrics(void) override = default;
 
   /**
    * @brief This function should return if subtask1 is currently the active
@@ -113,4 +113,4 @@ class bifurcating_tab_metrics : public virtual base_metrics {
 
 NS_END(tasks, metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_TASKS_BIFURCATING_TAB_METRICS_HPP_ */
+#endif /* INCLUDE_RCPPSW_METRICS_TASKS_BI_TAB_METRICS_HPP_ */

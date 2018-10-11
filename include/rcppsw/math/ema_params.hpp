@@ -1,7 +1,7 @@
 /**
- * @file partitionable_task_params.hpp
+ * @file ema_params.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,38 +18,32 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITIONABLE_TASK_PARAMS_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITIONABLE_TASK_PARAMS_HPP_
+#ifndef INCLUDE_RCPPSW_MATH_EMA_PARAMS_HPP_
+#define INCLUDE_RCPPSW_MATH_EMA_PARAMS_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/task_params.hpp"
-#include "rcppsw/task_allocation/subtask_selection_params.hpp"
-#include "rcppsw/task_allocation/partitioning_params.hpp"
+#include "rcppsw/params/base_params.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, math);
 
 /*******************************************************************************
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct partitionable_task_params
- * @ingroup params task_allocation
+ * @struct ema_params
+ * @ingroup params math
  *
- * @brief Parameters used by \ref partitionable_task tasks.
+ * @brief Parameters for \ref ema objects.
  */
-struct partitionable_task_params : public task_params {
-  partitionable_task_params(void)
-      : task_params() {}
-
-  struct subtask_selection_params subtask_selection{};
-  struct partitioning_params partitioning{};
+struct ema_params : public params::base_params {
+  double alpha{0.0};
 };
 
-NS_END(task_allocation, rcppsw);
+NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_ */
+#endif /* INCLUDE_RCPPSW_MATH_EMA_PARAMS_HPP_ */

@@ -1,5 +1,5 @@
 /**
- * @file bifurcating_tab.hpp
+ * @file bi_tab.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,13 +18,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_BIFURCATING_TAB_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_BIFURCATING_TAB_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TAB_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TAB_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/tasks/bifurcating_tab_metrics.hpp"
+#include "rcppsw/metrics/tasks/bi_tab_metrics.hpp"
 #include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
@@ -32,32 +32,34 @@
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 class polled_task;
-class bifurcating_tdgraph;
+class bi_tdgraph;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * @class bifurcating_tab
+ * @class bi_tab
  * @ingroup task_allocation
  *
- * @brief Represents Bifurcating Task Allocation Block (TAB) which consists of a
+ * @brief Represents Bi Task Allocation Block (TAB) which consists of a
  * root task and two subtasks the root task decomposes into. The subtasks are
  * may or may not be capable of being further decomposed, and therefore the
  * roots of additional TABs.
  */
-class bifurcating_tab : public metrics::tasks::bifurcating_tab_metrics,
-                        public er::client<bifurcating_tab> {
+class bi_tab : public metrics::tasks::bi_tab_metrics,
+                        public er::client<bi_tab> {
  public:
-  bifurcating_tab(const bifurcating_tdgraph* const graph,
-                  const polled_task* root,
-                  const polled_task* child1,
-                  const polled_task* child2);
+  bi_tab(const bi_tdgraph* const graph,
+         polled_task* root,
+         const polled_task* child1,
+         const polled_task* child2);
 
-  ~bifurcating_tab(void) override = default;
+  ~bi_tab(void) override = default;
 
-  bifurcating_tab& operator=(const bifurcating_tab& other) = delete;
-  bifurcating_tab(const bifurcating_tab& other) = delete;
+  bi_tab& operator=(const bi_tab& other) = delete;
+  bi_tab(const bi_tab& other) = delete;
+
+  const polled_task* active_task(void) const { return m_active_task; }
 
   /**
    * @brief Set the active task to the passed in task.
@@ -80,10 +82,12 @@ class bifurcating_tab : public metrics::tasks::bifurcating_tab_metrics,
   bool task_is_child(const polled_task* task) const;
 
   const polled_task* root(void) const { return m_root; }
+  polled_task* root(void) { return m_root; }
   const polled_task* child1(void) const { return m_child1; }
   const polled_task* child2(void) const { return m_child2; }
+  const polled_task* last_task(void) const { return m_last_task; }
 
-  /* bifurcating TAB metrics */
+  /* bi TAB metrics */
   bool subtask1_active(void) const override { return m_active_task == m_child1; }
   bool subtask2_active(void) const override { return m_active_task == m_child2; }
   bool root_active(void) const override { return m_active_task == m_root; }
@@ -95,10 +99,10 @@ class bifurcating_tab : public metrics::tasks::bifurcating_tab_metrics,
 
  private:
   // clang-format off
-  const bifurcating_tdgraph* const mc_graph;
+  const bi_tdgraph* const mc_graph;
   const polled_task*               m_last_task{nullptr};
   const polled_task*               m_active_task{nullptr};
-  const polled_task* const         m_root;
+  polled_task* const               m_root;
   const polled_task* const         m_child1;
   const polled_task* const         m_child2;
   // clang-format on
@@ -106,4 +110,4 @@ class bifurcating_tab : public metrics::tasks::bifurcating_tab_metrics,
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_BIFURCATING_TAB_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TAB_HPP_ */

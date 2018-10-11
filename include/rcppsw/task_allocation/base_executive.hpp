@@ -53,9 +53,10 @@ class base_executive : public rcppsw::er::client<base_executive> {
   /**
    * @brief Creates the base executive.
    *
-   * @param update_exec_ests Should per-task estimates of execution time be
-   *                         updated automatically as the executive runs, or are
-   *                         they going to be updated externally somehow?
+   * @param update_exec_ests Should the executive automatically update execution
+   *                         estimates for tasks, or will that be handled in the
+   *                         application via callbacks?
+   *
    * @param graph Graph to manage. Takes ownership of the object (can't use the
    *              language to communicate that with unique_ptr because of
    *              casting reasons).
@@ -110,21 +111,6 @@ class base_executive : public rcppsw::er::client<base_executive> {
    * @brief Get the parent task of the specified one.
    */
   const polled_task* parent_task(const polled_task* task);
-
-  /**
-   * @brief Initialize the execution time estimate of the specified task within
-   * the specified range (non-partitionable tasks).
-   */
-  void task_init_random(polled_task* task, uint lb, uint ub);
-
-  /**
-   * @brief Initialize the execution time estimate of the specified task within
-   * the specified range (partitionable tasks).
-   */
-  void task_init_random(polled_task* task,
-                        const polled_task* partition,
-                        uint lb,
-                        uint ub);
 
   const tdgraph* graph(void) const { return m_graph.get(); }
   bool update_exec_ests(void) const { return m_update_exec_ests; }

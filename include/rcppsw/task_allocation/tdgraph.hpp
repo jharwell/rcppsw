@@ -159,6 +159,10 @@ class tdgraph : public er::client<tdgraph> {
    * @return The task vertex, or NULL if no such task.
    */
   const polled_task* find_vertex(const std::string& task_name) const;
+  polled_task* find_vertex(const std::string& task_name) {
+    return const_cast<polled_task*>(
+        const_cast<const tdgraph*>(this)->find_vertex(task_name));
+  }
 
   /**
    * @brief Run the callback on each node in the graph, in an arbitrary order.

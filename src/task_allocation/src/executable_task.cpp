@@ -22,7 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/executable_task.hpp"
-#include "rcppsw/task_allocation/task_params.hpp"
+#include "rcppsw/math/ema_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -33,11 +33,12 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 executable_task::executable_task(const std::string &name,
-                                 const struct task_params *c_params)
+                                 const struct math::sigmoid_params* abort,
+                                 const struct math::ema_params* estimation)
     : logical_task(name),
-      m_interface_estimate(c_params->estimation.alpha),
-      m_exec_estimate(c_params->estimation.alpha),
-      m_abort_prob(&c_params->abort) {}
+      m_interface_estimate(estimation->alpha),
+      m_exec_estimate(estimation->alpha),
+      m_abort_prob(abort) {}
 
 executable_task::executable_task(const executable_task &other)
     : base_metrics(),

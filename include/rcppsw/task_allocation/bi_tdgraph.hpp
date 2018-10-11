@@ -1,5 +1,5 @@
 /**
- * @file bifurcating_tdgraph.hpp
+ * @file bi_tdgraph.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_BIFURCATING_TDGRAPH_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_BIFURCATING_TDGRAPH_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TDGRAPH_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TDGRAPH_HPP_
 
 /*******************************************************************************
  * Includes
@@ -29,33 +29,34 @@
 #include <algorithm>
 
 #include "rcppsw/task_allocation/tdgraph.hpp"
-#include "rcppsw/task_allocation/bifurcating_tab.hpp"
+#include "rcppsw/task_allocation/bi_tab.hpp"
+#include "rcppsw/task_allocation/bi_tab_selection_probability.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 
-class bifurcating_tdgraph_executive;
+class bi_tdgraph_executive;
+struct sigmoid_selection_params;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * @class bifurcating_tdgraph
+ * @class bi_tdgraph
  * @ingroup task_allocation
  *
  * @brief Representation of an overall task (the root task) as a BINARY tree
  * representing the task decomposition of the root task at different
  * granularities (i.e. tasks of different levels of complexity).
  */
-class bifurcating_tdgraph : public tdgraph,
-                            public er::client<bifurcating_tdgraph> {
+class bi_tdgraph : public tdgraph, public er::client<bi_tdgraph> {
  public:
-  bifurcating_tdgraph(void);
+  explicit bi_tdgraph(const struct sigmoid_selection_params* params);
 
-  bifurcating_tdgraph(const bifurcating_tdgraph& other) = delete;
-  bifurcating_tdgraph& operator=(const bifurcating_tdgraph& other) = delete;
+  bi_tdgraph(const bi_tdgraph& other) = delete;
+  bi_tdgraph& operator=(const bi_tdgraph& other) = delete;
 
   /**
    * @brief Set the children for an existing node.
@@ -73,9 +74,18 @@ class bifurcating_tdgraph : public tdgraph,
 
 
   /**
+   * @brief Update the active TAB *BEFORE* task allocation is performed in the
+   * executive that owns this graph.
+   *
+   * @param current_task The current task that just finished/aborted/whatever.
+   */
+  void active_tab_update(const polled_task* const current_task);
+
+  /**
    * @brief Get the active TAB for the graph.
    */
-  const bifurcating_tab* active_tab(void) const { return m_active_tab; }
+  const bi_tab* active_tab(void) const { return m_active_tab; }
+  bi_tab* active_tab(void) { return m_active_tab; }
 
   /**
    * @brief Return a uuid for the active tab (really just an index in the vector
@@ -96,16 +106,23 @@ class bifurcating_tdgraph : public tdgraph,
    *
    * @param e The executive.
    */
-  void install_cb(bifurcating_tdgraph_executive* e);
+  void install_cb(bi_tdgraph_executive* e);
 
  private:
   /**
-   * @brief Callback install in \ref tdgraph to handle updating the TAB (if
-   * needed) each time there is a new task allocation.
-   *
-   * @param v The task that was just allocated.
+   * @brief Get the parent TAB for the argument (i.e. the TAB which has as a
+   * child the root of the TAB argument).
    */
-  void task_alloc_cb(const polled_task* v);
+  bi_tab* tab_parent(const bi_tab* tab) const;
+
+  /**
+   * @brief Get the child tab for the argument (i.e. the TAB whose root is the
+   * left/right child of the argument)
+   *
+   * @param tab The tab.
+   * @param current_task The current active task in the tab.
+   */
+  bi_tab* tab_child(const bi_tab* tab, const polled_task* current_task) const;
 
   /**
    * @brief Callback install in \ref tdgraph to handle updating a task's last
@@ -117,10 +134,11 @@ class bifurcating_tdgraph : public tdgraph,
   void task_abort_cb(const polled_task* v);
 
   // clang-format off
-  std::list<bifurcating_tab>   m_tabs{};
-  const bifurcating_tab *      m_active_tab{nullptr};
+  std::list<bi_tab>            m_tabs{};
+  bi_tab *                     m_active_tab{nullptr};
+  bi_tab_selection_probability m_tab_sw_prob;
   // clang-format on
 };
 
 NS_END(task_allocation, rcppsw);
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_BIFURCATING_TDGRAPH_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TDGRAPH_HPP_ */

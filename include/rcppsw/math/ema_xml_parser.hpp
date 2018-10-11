@@ -1,5 +1,5 @@
 /**
- * @file subtask_selection_parser.hpp
+ * @file ema_parser.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * FORDYCA.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_XML_PARSER_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_XML_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_MATH_EMA_XML_PARSER_HPP_
+#define INCLUDE_RCPPSW_MATH_EMA_XML_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -28,39 +28,40 @@
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
-#include "rcppsw/task_allocation/subtask_selection_params.hpp"
+#include "rcppsw/math/ema_params.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, math);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * @class subtask_selection_xml_parser
- * @ingroup task_allocation
+ * @class ema_xml_parser
+ * @ingroup math params
  *
- * @brief Parses XML parameters for relating to the subtask selection.
+ * @brief Parses XML parameters for relating to exponential moving averages
+ * (EMAs).
  */
-class subtask_selection_xml_parser: public rcppsw::params::xml_param_parser {
+class ema_xml_parser: public rcppsw::params::xml_param_parser {
  public:
-  explicit subtask_selection_xml_parser(uint level)
-      : xml_param_parser(level) {}
+  explicit ema_xml_parser(uint level) : xml_param_parser(level) {}
 
   /**
-   * @brief The root tag that all task subtask_selection parameters should lie
-   * under in the XML tree.
+   * @brief The root tag that all ema parameters should lie under in the XML
+   * tree.
    */
-  static constexpr char kXMLRoot[] = "subtask_selection";
+  static constexpr char kXMLRoot[] = "ema";
 
   void show(std::ostream& stream) const override;
-  void parse(const ticpp::Element& node) override;
   bool validate(void) const override;
+  void parse(const ticpp::Element& node) override;
+
   std::string xml_root(void) const override { return kXMLRoot; }
 
-  std::shared_ptr<subtask_selection_params> parse_results(void) const {
+  std::shared_ptr<ema_params> parse_results(void) const {
     return m_params;
   }
 
@@ -70,10 +71,10 @@ class subtask_selection_xml_parser: public rcppsw::params::xml_param_parser {
   }
 
   // clang-format off
-  std::shared_ptr<subtask_selection_params> m_params{nullptr};
+  std::shared_ptr<ema_params> m_params{nullptr};
   // clang-format on
 };
 
-NS_END(task_allocation, rcppsw);
+NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_XML_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_MATH_EMA_XML_PARSER_HPP_ */
