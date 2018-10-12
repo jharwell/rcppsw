@@ -73,7 +73,7 @@ class bi_tdgraph_executive : public base_executive,
   }
 
  private:
-  polled_task* do_get_next_task(void) override;
+  polled_task* get_next_task(void);
   void active_tab_update(void);
 
   /**
@@ -85,7 +85,6 @@ class bi_tdgraph_executive : public base_executive,
   void handle_task_start(polled_task* new_task);
   void handle_task_abort(polled_task* task);
   void handle_task_finish(polled_task* task);
-  void update_task_partition_prob(polled_task* task);
 
   // clang-format off
   std::list<alloc_notify_cb>   m_task_alloc_notify{};

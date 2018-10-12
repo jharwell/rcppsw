@@ -124,31 +124,14 @@ class base_executive : public rcppsw::er::client<base_executive> {
   }
 
   /**
-   * @brief After the current task is aborted or finished, figured what the next
-   * task to run should be and return it.
-   *
-   * Note that it is only safe to return a reference to a node within the task
-   * graph because the task executive only works with static graphs (i.e. those
-   * that do not change during runtime).
-   */
-  polled_task* get_next_task(const polled_task* last_task);
-
-  /**
    * @brief Get the probability of aborting the specified task.
    */
   double task_abort_prob(polled_task* task);
 
   tdgraph* graph(void) { return m_graph.get(); }
 
-  virtual polled_task* do_get_next_task(void) = 0;
 
  private:
-  /**
-   * @brief Get the first task to be executed, which requires some special logic
-   * to set up task pointers appropriately.
-   */
-  polled_task* get_first_task(void);
-
   // clang-format off
   bool                        m_update_exec_ests{true};
   polled_task*                m_current_task{nullptr};

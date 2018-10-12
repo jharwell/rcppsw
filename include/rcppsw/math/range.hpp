@@ -28,6 +28,7 @@
 #include <assert.h>
 
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/utils/string_utils.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -113,10 +114,22 @@ class range {
    */
   range expand(const T& value) { return range(m_min - value, m_max + value); }
 
+  /**
+   * @brief For parsing a range from a string in the form of <min>:<max>
+   */
+  friend std::istream& operator>>(std::istream& is, range& r) {
+    T values[2];
+    utils::parse_values<T> (is, 2, values, ':');
+    r.set(values[0], values[1]);
+    return is;
+  }
+
  private:
+  // clang-format off
   T m_min;
   T m_max;
   T m_span;
+  // clang-format on
 };
 
 NS_END(math, rcppsw);

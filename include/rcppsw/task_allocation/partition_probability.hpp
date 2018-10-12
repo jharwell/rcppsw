@@ -29,6 +29,7 @@
 #include "rcppsw/math/expression.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
 #include "rcppsw/math/sigmoid.hpp"
+#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -57,8 +58,11 @@ NS_START(rcppsw, task_allocation);
  * - The reactivity parameter: how sensitive should robots be to abrupt changes
  *   in the estimates?
  */
-class partition_probability : public math::sigmoid {
+class partition_probability : public math::sigmoid,
+                              er::client<partition_probability> {
  public:
+  static constexpr char kMethodPini2011[] = "pini2011";
+
   /*
    * A default reactivity value determined experimentally to work well.
    */
@@ -81,6 +85,7 @@ class partition_probability : public math::sigmoid {
       sigmoid(kDEFAULT_REACTIVITY,
               kDEFAULT_OFFSET,
               kDEFAULT_GAMMA),
+      ER_CLIENT_INIT("rcppsw.ta.partition_probability"),
       mc_method(method) {}
 
   /**

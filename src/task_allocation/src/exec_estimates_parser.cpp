@@ -1,5 +1,5 @@
 /**
- * @file base_executive.cpp
+ * @file exec_estimates_parser.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -21,9 +21,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/base_executive.hpp"
-#include "rcppsw/task_allocation/polled_task.hpp"
-#include "rcppsw/task_allocation/tdgraph.hpp"
+#include "rcppsw/task_allocation/exec_estimates_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -31,36 +29,46 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Global Variables
  ******************************************************************************/
-base_executive::base_executive(bool update_exec_ests,
-                               tdgraph *const graph)
-    : ER_CLIENT_INIT("rcppsw.ta.executive.base"),
-      m_update_exec_ests(update_exec_ests),
-      m_graph(graph) {}
-
-base_executive::~base_executive(void) = default;
+const char exec_estimates_parser::kXMLRoot[];
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-double base_executive::task_abort_prob(polled_task *const task) {
-  if (task->is_atomic()) {
-    return 0.0;
+void exec_estimates_parser::parse(const ticpp::Element& node) {
+  if (nullptr != node.FirstChild(kXMLRoot, false)) {
+    ticpp::Element enode = get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+    m_params =
+        std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
+    m_ema.parse(enode);
+    m_params->ema = *m_ema.parse_results();
+    XML_PARSE_ATTR(enode, m_params, seed_enabled);
+
+    if (m_task_names.empty()) {
+      ER_WARN("No tasks registered for parsing");
+    }
+    /*
+     * For each registered task we want to get exec estimates for, parse the
+     * estimate.
+     */
+    for (auto &s : m_task_names) {
+      math::range<uint> tmp{0, 0};
+      get_node_attribute(enode, s, tmp);
+      m_params->ranges.insert({s, tmp});
+    } /* for(&s..) */
   }
-  return task->calc_abort_prob();
-} /* task_abort_prob() */
+} /* parse() */
 
-__rcsw_pure const polled_task *base_executive::root_task(void) const {
-  return m_graph->root();
-} /* root_task() */
+void exec_estimates_parser::show(std::ostream& stream) const {
+  if (!parsed()) {
+    stream << build_header() << "<< Not Parsed >>" << std::endl
+           << build_footer();
+    return;
+  }
 
-polled_task *base_executive::root_task(void) {
-  return m_graph->root();
-} /* root_task() */
-
-const polled_task *base_executive::parent_task(const polled_task *v) {
-  return tdgraph::vertex_parent(*m_graph, v);
-} /* parent_task() */
+  stream << build_header() << XML_ATTR_STR(m_params, seed_enabled) << std::endl
+         << build_footer();
+} /* show() */
 
 NS_END(task_allocation, rcppsw);

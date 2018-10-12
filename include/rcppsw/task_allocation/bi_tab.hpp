@@ -26,6 +26,8 @@
  ******************************************************************************/
 #include "rcppsw/metrics/tasks/bi_tab_metrics.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/task_allocation/partition_probability.hpp"
+#include "rcppsw/task_allocation/subtask_selection_probability.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -47,17 +49,22 @@ class bi_tdgraph;
  * roots of additional TABs.
  */
 class bi_tab : public metrics::tasks::bi_tab_metrics,
-                        public er::client<bi_tab> {
+               public er::client<bi_tab> {
  public:
   bi_tab(const bi_tdgraph* const graph,
          polled_task* root,
          const polled_task* child1,
-         const polled_task* child2);
+         const polled_task* child2,
+         const struct partitioning_params* partitioning,
+         const struct sigmoid_selection_params* subtask_sel);
 
   ~bi_tab(void) override = default;
 
   bi_tab& operator=(const bi_tab& other) = delete;
   bi_tab(const bi_tab& other) = delete;
+
+  void partition_prob_update(void);
+  polled_task * task_allocate(void);
 
   const polled_task* active_task(void) const { return m_active_task; }
 
@@ -77,7 +84,8 @@ class bi_tab : public metrics::tasks::bi_tab_metrics,
   bool task_is_root(const polled_task* task) const;
 
   /**
-   * @brief Returns \c TRUE iff the argument is one of the child tasks in the TAB.
+   * @brief Returns \c TRUE iff the argument is one of the child tasks in the
+   * TAB.
    */
   bool task_is_child(const polled_task* task) const;
 
@@ -86,25 +94,42 @@ class bi_tab : public metrics::tasks::bi_tab_metrics,
   const polled_task* child1(void) const { return m_child1; }
   const polled_task* child2(void) const { return m_child2; }
   const polled_task* last_task(void) const { return m_last_task; }
+  void last_subtask(const polled_task* t) { m_last_subtask = t; }
 
   /* bi TAB metrics */
   bool subtask1_active(void) const override { return m_active_task == m_child1; }
   bool subtask2_active(void) const override { return m_active_task == m_child2; }
   bool root_active(void) const override { return m_active_task == m_root; }
-  bool employed_partitioning(void) const override;
+  bool employed_partitioning(void) const override {
+    return m_employed_partitioning;
+  }
   bool task_changed(void) const override { return m_active_task != m_last_task; }
   bool task_depth_changed(void) const override;
-  double root_partition_prob(void) const override;
-  double root_subtask_selection_prob(void) const override;
+  double partition_prob(void) const override {
+    return m_partition_prob.last_result();
+  }
+  double subtask_selection_prob(void) const override {
+    return m_selection_prob.last_result();
+  }
 
  private:
+  polled_task* subtask_allocate(void);
+
   // clang-format off
-  const bi_tdgraph* const mc_graph;
-  const polled_task*               m_last_task{nullptr};
-  const polled_task*               m_active_task{nullptr};
-  polled_task* const               m_root;
-  const polled_task* const         m_child1;
-  const polled_task* const         m_child2;
+  const bool                    mc_always_partition;
+  const bool                    mc_never_partition;
+  const bi_tdgraph* const       mc_graph;
+
+  bool                          m_employed_partitioning{false};
+  const polled_task*            m_last_task{nullptr};
+  const polled_task*            m_last_subtask{nullptr};
+  const polled_task*            m_active_task{nullptr};
+
+  polled_task* const            m_root;
+  const polled_task* const      m_child1;
+  const polled_task* const      m_child2;
+  subtask_selection_probability m_selection_prob;
+  partition_probability         m_partition_prob;
   // clang-format on
 };
 

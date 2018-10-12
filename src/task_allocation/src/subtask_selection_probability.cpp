@@ -100,7 +100,7 @@ subtask_selection_probability::calc_sigmoid(const time_estimate &est1,
     r_ss = est1.last_result();
   }
 
-  return set_result(m_sigmoid(est1.last_result() / r_ss));
+  return sigmoid::operator()(est1.last_result() / r_ss);
 } /* calc_sigmoid() */
 
 double subtask_selection_probability::operator()(const time_estimate *subtask1,

@@ -23,7 +23,6 @@
  ******************************************************************************/
 #include "rcppsw/task_allocation/partition_probability.hpp"
 #include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
-#include <cassert>
 #include <cmath>
 
 /*******************************************************************************
@@ -32,13 +31,20 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
+ * Global Variable
+ ******************************************************************************/
+constexpr char partition_probability::kMethodPini2011[];
+
+/*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
 partition_probability::partition_probability(
     const struct sigmoid_selection_params *params)
     : sigmoid(params->sigmoid.reactivity,
               params->sigmoid.offset,
-              params->sigmoid.gamma) {}
+              params->sigmoid.gamma),
+      ER_CLIENT_INIT("rcppsw.ta.partition_probability"),
+      mc_method(params->method) {}
 
 /*******************************************************************************
  * Member Functions
@@ -46,10 +52,10 @@ partition_probability::partition_probability(
 double partition_probability::operator()(const time_estimate &task,
                                          const time_estimate &subtask1,
                                          const time_estimate &subtask2) {
-  if ("pini2011" == mc_method) {
+  if (kMethodPini2011 == mc_method) {
     return calc_pini2011(task, subtask1, subtask2);
   }
-  assert(false);
+  ER_FATAL_SENTINEL("Bad method '%s", mc_method.c_str());
   return 0.0;
 } /* operator()() */
 
