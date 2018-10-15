@@ -43,8 +43,8 @@ bi_tdgraph::bi_tdgraph(const struct task_allocation_params* const params)
  ******************************************************************************/
 status_t
 bi_tdgraph::install_tab(const std::string &parent,
-                         const std::vector<polled_task *> &children) {
-  return tdgraph::set_children(parent, children);
+                        const std::vector<polled_task *> &children) {
+  return install_tab(find_vertex(parent), children);
 } /* install_tab() */
 
 status_t
@@ -58,6 +58,13 @@ bi_tdgraph::install_tab(const polled_task *parent,
                       children[1],
                       &mc_params.partitioning,
                       &mc_params.subtask_selection);
+  /*
+   * The first TAB to be installed is active by default/necessity, so that
+   * things don't segfault later.
+   */
+  if (1 == m_tabs.size()) {
+    m_active_tab = &m_tabs.front();
+  }
   return tdgraph::set_children(parent, children);
 } /* install_tab() */
 

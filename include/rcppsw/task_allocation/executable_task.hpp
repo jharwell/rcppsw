@@ -25,6 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <string>
+#include <vector>
+
 #include "rcppsw/task_allocation/logical_task.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
 #include "rcppsw/metrics/tasks/execution_metrics.hpp"
@@ -60,49 +62,72 @@ NS_START(task_allocation);
 class executable_task : public logical_task,
                         public metrics::tasks::execution_metrics {
  public:
+  /*
+   * For now...
+   */
+  static constexpr uint kMAX_INTERFACES = 1;
+
   executable_task(const std::string& name,
                   const struct math::sigmoid_params* abort,
                   const struct math::ema_params* estimation);
-  executable_task(const executable_task& other);
 
-  ~executable_task(void) override;
+  ~executable_task(void) override = default;
 
   /* execution metrics */
   double task_last_exec_time(void) const override { return m_last_exec_time; }
-  double task_last_interface_time(void) const override {
-    return m_last_interface_time;
+  double task_last_interface_time(uint i) const override {
+    return m_last_interface_times[i];
   }
   bool task_aborted(void) const override { return m_task_aborted; }
   const time_estimate& task_exec_estimate(void) const override {
     return m_exec_estimate;
   }
-  const time_estimate& task_interface_estimate(void) const override {
-    return m_interface_estimate;
+  const time_estimate& task_interface_estimate(uint i) const override {
+    return m_interface_estimates[i];
   }
+  bool task_at_interface(void) const override { return -1 != active_interface(); }
+
 
   /**
-   * @brief Update the calculated abort probability for the task
-   */
-  double update_abort_prob(void) {
-    return m_abort_prob(m_interface_time, m_interface_estimate);
-  }
-
-  /**
-   * @brief Update the calculated interface time for the task
+   * @brief Update the calculated interface time for the task if the current
+   * task has been marked as being at (one of) its task interface(s).
    *
    * This is needed for accurate task abort calculations.
-   */
-  double update_interface_time(void) {
-    return m_interface_time = calc_interface_time(m_interface_start_time);
+  */
+  void interface_time_update(void) {
+    if (-1 != active_interface()) {
+      m_interface_times[active_interface()] = interface_time_calc(active_interface(),
+                                                                  m_interface_start_times[active_interface()]);
+    }
   }
+
+  /**
+   * @brief Get the ID of the active interface.
+   *
+   * @return The ID, or -1 if there is not currently an active interface.
+   */
+  int active_interface(void) const;
 
   /**
    * @brief Because tasks can have multiple interfaces, they need a way to reset
    * their interface time upon leaving/entering an interface.
    */
-  void reset_interface_time(void) {
-    m_last_interface_time = m_interface_time;
-    m_interface_start_time = current_time();
+  void interface_time_reset(void) {
+    if (-1 != active_interface()) {
+      m_interface_times[active_interface()] = 0.0;
+    }
+  }
+
+  /**
+   * @brief Update the calculated abort probability for the task. This should be
+   * done every timestep, even if there are logical "gates" that will only
+   * result in a non-zero abort probability on some timesteps.
+   */
+  void abort_prob_update(void) {
+    if (-1 != active_interface()) {
+      m_abort_prob.calc(m_interface_times[active_interface()],
+                        m_interface_estimates[active_interface()]);
+    }
   }
 
   /**
@@ -110,7 +135,7 @@ class executable_task : public logical_task,
    *
    * This is needed for accurate task abort calculations.
    */
-  double update_exec_time(void) {
+  double exec_time_update(void) {
     return m_exec_time = current_time() - m_exec_start_time;
   }
 
@@ -118,7 +143,7 @@ class executable_task : public logical_task,
    * @brief Reset the execution time for the task. Should never be called
    * directly!
    */
-  void reset_exec_time(void) {
+  void exec_time_reset(void) {
     m_last_exec_time = m_exec_time;
     m_exec_start_time = current_time();
   }
@@ -129,8 +154,8 @@ class executable_task : public logical_task,
    *
    * @param last_measure The last measured time.
    */
-  void update_interface_estimate(double last_measure) {
-    m_interface_estimate(last_measure);
+  void interface_estimate_update(uint i, double last_measure) {
+    m_interface_estimates[i](last_measure);
   }
 
   /**
@@ -139,7 +164,7 @@ class executable_task : public logical_task,
    *
    * @param last_measure The last measured time.
    */
-  void update_exec_estimate(double last_measure) {
+  void exec_estimate_update(double last_measure) {
     m_exec_estimate(last_measure);
   }
 
@@ -149,7 +174,7 @@ class executable_task : public logical_task,
    *
    * @param init_measure Initial execution estimate.
    */
-  void init_exec_estimate(double init_measure) {
+  void exec_estimate_init(double init_measure) {
     m_exec_estimate.set_result(init_measure);
   }
 
@@ -160,29 +185,36 @@ class executable_task : public logical_task,
   virtual void task_execute(void) = 0;
 
   /**
-   * @brief Calculate the interface time of the current task for use in abort
-   * calculations.
+   * @brief Get the probability of aborting an executable task.
+   *
+   * Even though this class also has public functions for updating the
+   * internally maintained abort probability, this function is still needed in
+   * order to provide "gated" abort probabilities (i.e. abort probabilities that
+   * are only active when certain conditions are met).
    */
-  virtual double calc_interface_time(double start_time) = 0;
+  virtual double abort_prob_calc(void) = 0;
 
   /**
-   * @brief Get the current time
+   * @brief (Possibly) update/change which interface is currently active.
+   *
+   * @param i The currently active interface, -1 if none active.
    */
-  virtual double current_time(void) const = 0;
+  virtual void active_interface_update(int i) = 0;
 
   /**
-   * @brief Get the probability of aborting an executable task. Even though this
-   * class also has public functions for updating the internally maintained
-   * abort probability, this function is still needed in order to provide
-   * "gated" abort probabilities (i.e. abort probabilities that are only active
-   * when certain conditions are met).
+   * @brief Get the current interface time of the task for the specified
+   * interface.
+   *
+   * @param i The interface ID.
    */
-  virtual double calc_abort_prob(void) { return update_abort_prob(); }
+  double interface_time(uint i) const { return m_interface_times[i]; }
 
   /**
-   * @brief Get the current interface time of the task.
+   * @brief Get the current abort probability at the specified interface.
+   *
+   * @param i The interface ID.
    */
-  double interface_time(void) const { return m_interface_time; }
+  double abort_prob(void) const { return m_abort_prob.last_result(); }
 
   /**
    * @brief Get the current execution time of the task.
@@ -212,21 +244,50 @@ class executable_task : public logical_task,
 
   void task_aborted(bool task_aborted) { m_task_aborted = task_aborted; }
 
+ protected:
+  /**
+   * @brief Calculate the interface time of the current task for use in abort
+   * calculations.
+   *
+   * @param start_time The timestep upon which the task entered the interface.
+   */
+  virtual double interface_time_calc(uint i, double start_time) = 0;
+
+  /**
+   * @brief Get the current time
+   */
+  virtual double current_time(void) const = 0;
+
+  void interface_time_mark_finish(uint i) {
+    m_last_interface_times[i] = m_interface_times[i];
+  }
+
+  /**
+   * @brief Mark the current timestep as the begin of a task's interface.
+   */
+  void interface_time_mark_start(uint i) {
+    m_interface_start_times[i] = current_time();
+  }
+  bool interface_in_prog(uint i) const { return m_interface_in_prog[i]; }
+  void interface_enter(uint i) { m_interface_in_prog[i] = true; }
+  void interface_exit(uint i) { m_interface_in_prog[i] = false; }
+
  private:
   // clang-format off
-  bool              m_is_atomic{false};
-  bool              m_is_partitionable{false};
-  bool              m_task_aborted{false};
+  bool                       m_is_atomic{false};
+  bool                       m_is_partitionable{false};
+  bool                       m_task_aborted{false};
+  std::vector<bool>          m_interface_in_prog;
 
-  double            m_interface_time{0.0};
-  double            m_last_interface_time{0.0};
-  double            m_interface_start_time{0.0};
-  double            m_exec_time{0.0};
-  double            m_last_exec_time{0.0};
-  double            m_exec_start_time{0.0};
-  time_estimate     m_interface_estimate;
-  time_estimate     m_exec_estimate;
-  abort_probability m_abort_prob;
+  std::vector<double>        m_interface_times;
+  std::vector<double>        m_last_interface_times;
+  std::vector<double>        m_interface_start_times;
+  double                     m_exec_time{0.0};
+  double                     m_last_exec_time{0.0};
+  double                     m_exec_start_time{0.0};
+  std::vector<time_estimate> m_interface_estimates;
+  time_estimate              m_exec_estimate;
+  abort_probability          m_abort_prob;
   // clang-format on
 };
 

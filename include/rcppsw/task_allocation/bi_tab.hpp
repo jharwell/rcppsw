@@ -64,14 +64,44 @@ class bi_tab : public metrics::tasks::bi_tab_metrics,
   bi_tab(const bi_tab& other) = delete;
 
   void partition_prob_update(void);
+
+  /**
+   * @brief Performs the next task allocation:
+   *
+   * 1. Determines if partitioning should be employed at the root of TAB. If
+   *    not, the active task is set to the root of the TAB and returned.
+   * 2. If partitioning is employed, one of the two subtasks in the TAB is
+   *    selected, the active task is updated accordingly, and the selected
+   *    subtask is returned.
+   */
   polled_task * task_allocate(void);
 
   const polled_task* active_task(void) const { return m_active_task; }
 
   /**
-   * @brief Set the active task to the passed in task.
+   * @brief Updates the TAB after task abort.
+   *
+   * The active task is set to NULL, and the last task and last subtask fields
+   * are updated as applicable. Partitioning probability for the TAB is updated
+   * as well.
+   *
+   * @param aborted The task that was just aborted (which MUST be contained in
+   *                the current TAB, or an assertion will be triggered.)
    */
-  void change_active_task(const polled_task* active_task);
+  void task_abort_update(polled_task* aborted);
+
+  /**
+   * @brief Updates the TAB after task finsh.
+   *
+   * The active task is set to NULL, and the last task and last subtask fields
+   * are updated as applicable. Partitioning probability for the TAB is updated
+   * as well.
+   *
+   * @param finished The task that was just finished (which MUST be contained in
+   *                 the current TAB, or an assertion will be triggered.)
+   */
+
+  void task_finish_update(polled_task* finished);
 
   /**
    * @brief Returns \c TRUE iff the argument is one of the 3 tasks in the TAB.
@@ -94,6 +124,8 @@ class bi_tab : public metrics::tasks::bi_tab_metrics,
   const polled_task* child1(void) const { return m_child1; }
   const polled_task* child2(void) const { return m_child2; }
   const polled_task* last_task(void) const { return m_last_task; }
+  void last_task(polled_task* const last_task) { m_last_task = last_task; }
+
   void last_subtask(const polled_task* t) { m_last_subtask = t; }
 
   /* bi TAB metrics */

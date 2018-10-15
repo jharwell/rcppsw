@@ -67,15 +67,29 @@ bi_tab::bi_tab(const bi_tdgraph* const graph,
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void bi_tab::change_active_task(const polled_task *const active_task) {
-  if (nullptr != active_task) {
-    ER_ASSERT(this->contains_task(active_task),
-              "New active task '%s' not in TAB",
-              active_task->name().c_str());
+void bi_tab::task_abort_update(polled_task* const aborted) {
+  ER_ASSERT(contains_task(aborted),
+            "Aborted task '%s' not in TAB",
+            aborted->name().c_str());
+  partition_prob_update();
+  m_last_task = aborted;
+  if (subtask1_active() || subtask2_active()) {
+    m_last_subtask = aborted;
   }
-  m_last_task = m_active_task;
-  m_active_task = active_task;
-} /* change_active_task() */
+  m_active_task = nullptr;
+} /* task_abort_update() */
+
+void bi_tab::task_finish_update(polled_task* const finished) {
+  ER_ASSERT(contains_task(finished),
+            "Finished task '%s' not in TAB",
+            finished->name().c_str());
+  partition_prob_update();
+  m_last_task = finished;
+  if (subtask1_active() || subtask2_active()) {
+    m_last_subtask = finished;
+  }
+  m_active_task = nullptr;
+} /* task_finish_update() */
 
 __rcsw_pure bool
 bi_tab::contains_task(const polled_task *const task) const {
@@ -103,7 +117,6 @@ polled_task * bi_tab::task_allocate(void) {
             "Cannot ALWAYS and NEVER partition");
 
   double partition_prob;
-  std::string name = dynamic_cast<executable_task *>(m_root)->name();
 
   if (mc_always_partition) {
     partition_prob = 1;
@@ -111,17 +124,19 @@ polled_task * bi_tab::task_allocate(void) {
     partition_prob = 0;
   } else {
     partition_prob = m_partition_prob.last_result();
-    ER_INFO("TAB root='%s': partition_method=%s partition_prob=%f", name.c_str(),
-            m_partition_prob.method().c_str(), partition_prob);
+    ER_INFO("TAB root='%s': partition_method=%s partition_prob=%f",
+            m_root->name().c_str(),
+            m_partition_prob.method().c_str(),
+            partition_prob);
   }
 
   /* We chose not to employ partitioning on the next task allocation */
   if (partition_prob <= static_cast<double>(std::rand()) / RAND_MAX) {
-    ER_INFO("Not employing partitioning: Return task '%s'", name.c_str());
+    ER_INFO("Not employing partitioning: Return task '%s'",
+            m_root->name().c_str());
     m_employed_partitioning = false;
-    auto ret = dynamic_cast<polled_task *>(this);
-    ER_ASSERT(nullptr != ret, "Partitionable task is not pollable")
-    return ret;
+    m_active_task = m_root;
+    return m_root;
   }
   /* We have chosen to employ partitioning, so we must return a subtask */
   m_employed_partitioning = true;
@@ -147,19 +162,23 @@ polled_task* bi_tab::subtask_allocate(void) {
                                &m_child1->task_exec_estimate());
   } else if (subtask_selection_probability::kMethodBrutschy2014 ==
              m_selection_prob.method()) {
-    prob_12 = m_selection_prob(&m_child1->task_interface_estimate(),
-                               &m_child2->task_interface_estimate());
-    prob_21 = m_selection_prob(&m_child2->task_interface_estimate(),
-                               &m_child1->task_interface_estimate());
+    /*
+     * @todo: This will have to be updated if I ever want to use this method
+     * with task with more than 1 interface.
+     */
+    prob_12 = m_selection_prob(&m_child1->task_interface_estimate(0),
+                               &m_child2->task_interface_estimate(0));
+    prob_21 = m_selection_prob(&m_child2->task_interface_estimate(0),
+                               &m_child1->task_interface_estimate(0));
   }
 
   ER_INFO("%s exec_est=%f/int_est=%f, %s exec_est=%f/int_est=%f",
           m_child1->name().c_str(),
           m_child1->task_exec_estimate().last_result(),
-          m_child1->task_interface_estimate().last_result(),
+          m_child1->task_interface_estimate(0).last_result(),
           m_child2->name().c_str(),
           m_child2->task_exec_estimate().last_result(),
-          m_child2->task_interface_estimate().last_result());
+          m_child2->task_interface_estimate(0).last_result());
 
   ER_INFO("%s -> %s prob=%f, %s -> %s prob=%f", m_child1->name().c_str(),
           m_child2->name().c_str(), prob_12, m_child2->name().c_str(),
@@ -171,8 +190,8 @@ polled_task* bi_tab::subtask_allocate(void) {
       subtask_selection_probability::kMethodBrutschy2014 ==
           m_selection_prob.method()) {
     /*
-     * If we last executed m_child1, we calculate the probability of switching
-     * to m_child2, based on time estimates.
+     * If we last executed child1, we calculate the probability of switching
+     * to child2, based on time estimates.
      */
     if (m_last_subtask == m_child1 || nullptr == m_last_subtask) {
       if (prob_12 >= static_cast<double>(std::rand()) / RAND_MAX) {
@@ -202,6 +221,7 @@ polled_task* bi_tab::subtask_allocate(void) {
   }
   ER_ASSERT(nullptr != ret, "No subtask selected?");
   ER_INFO("Selected subtask '%s'", ret->name().c_str());
+  m_active_task = ret;
   return const_cast<polled_task *>(ret);
 } /* subtask_allocate() */
 

@@ -55,10 +55,10 @@ class sigmoid : public expression<double> {
     m_gamma = gamma;
   }
 
-  double operator()(double val) {
-    return set_result( 1.0 /
-                       (1 + std::exp(-m_reactivity * (val - m_offset))) * m_gamma);
-  }
+ protected:
+  double reactivity(void) const { return m_reactivity; }
+  double offset(void) const { return m_offset; }
+  double gamma(void) const { return m_gamma; }
 
  private:
   // clang-format off

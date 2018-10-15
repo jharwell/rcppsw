@@ -105,7 +105,7 @@ ema<T> operator-(const ema<T> &lhs, double d) {
 template<class T>
 ema<T> operator-(double d, const ema<T> &rhs) {
   ema<T> r(rhs.alpha());
-  r.set_result(rhs.last_result() - d);
+  r.set_result(d - rhs.last_result());
   return r;
 }
 

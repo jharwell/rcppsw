@@ -123,11 +123,6 @@ class base_executive : public rcppsw::er::client<base_executive> {
     m_current_task = current_task;
   }
 
-  /**
-   * @brief Get the probability of aborting the specified task.
-   */
-  double task_abort_prob(polled_task* task);
-
   tdgraph* graph(void) { return m_graph.get(); }
 
 

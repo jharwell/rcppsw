@@ -90,13 +90,13 @@ void execution_metrics_collector::collect(
   }
 
   m_int_exec_estimate += m.task_exec_estimate();
-  m_int_interface_estimate += m.task_interface_estimate();
-  m_int_interface_time += m.task_last_interface_time();
+  m_int_interface_estimate += m.task_interface_estimate(0);
+  m_int_interface_time += m.task_last_interface_time(0);
   m_int_exec_time += m.task_last_exec_time();
 
   m_cum_exec_estimate += m.task_exec_estimate();
-  m_cum_interface_estimate += m.task_interface_estimate();
-  m_cum_interface_time += m.task_last_interface_time();
+  m_cum_interface_estimate += m.task_interface_estimate(0);
+  m_cum_interface_time += m.task_last_interface_time(0);
   m_cum_exec_time += m.task_last_exec_time();
 } /* collect() */
 

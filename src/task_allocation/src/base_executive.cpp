@@ -44,13 +44,6 @@ base_executive::~base_executive(void) = default;
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-double base_executive::task_abort_prob(polled_task *const task) {
-  if (task->is_atomic()) {
-    return 0.0;
-  }
-  return task->calc_abort_prob();
-} /* task_abort_prob() */
-
 __rcsw_pure const polled_task *base_executive::root_task(void) const {
   return m_graph->root();
 } /* root_task() */

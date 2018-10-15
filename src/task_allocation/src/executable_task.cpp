@@ -23,6 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/task_allocation/executable_task.hpp"
 #include "rcppsw/math/ema_params.hpp"
+#include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -36,21 +37,26 @@ executable_task::executable_task(const std::string &name,
                                  const struct math::sigmoid_params* abort,
                                  const struct math::ema_params* estimation)
     : logical_task(name),
-      m_interface_estimate(estimation->alpha),
+      m_interface_in_prog(kMAX_INTERFACES, false),
+      m_interface_times(kMAX_INTERFACES, 0.0),
+      m_last_interface_times(kMAX_INTERFACES, 0.0),
+      m_interface_start_times(kMAX_INTERFACES, 0.0),
+      m_interface_estimates(kMAX_INTERFACES, time_estimate(estimation->alpha)),
       m_exec_estimate(estimation->alpha),
       m_abort_prob(abort) {}
 
-executable_task::executable_task(const executable_task &other)
-    : base_metrics(),
-      logical_task(other),
-      m_interface_time(other.m_interface_time),
-      m_interface_start_time(other.m_interface_start_time),
-      m_exec_time(other.m_exec_time),
-      m_exec_start_time(other.m_exec_start_time),
-      m_interface_estimate(other.m_interface_estimate),
-      m_exec_estimate(other.m_exec_estimate),
-      m_abort_prob(other.m_abort_prob) {}
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+int executable_task::active_interface(void) const {
+  for (size_t i = 0; i < m_interface_in_prog.size(); ++i) {
+    if (m_interface_in_prog[i]) {
+      return i;
+    }
+  } /* for(i..) */
 
-executable_task::~executable_task(void) = default;
+return -1;
+} /* active_interface() */
+
 
 NS_END(task_allocation, rcppsw);

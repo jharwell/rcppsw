@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/partition_probability.hpp"
-#include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
 #include <cmath>
+#include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -65,19 +65,19 @@ double partition_probability::calc_pini2011(const time_estimate &task,
   /*
    * If we do not have samples from the task(s) denominator for either case,
    * then we artificially set that term to 0, which yields an exponent of 0, and
-   * hence a partition probility of 0.5.
+   * hence a partition probability of 0.5.
    */
   double theta = 0.0;
   if (task > subtask1 + subtask2) {
     if ((subtask1 + subtask2).last_result() > 0) {
-      theta = (task / (subtask1 + subtask2)).last_result();
+      theta = reactivity() * (task / (subtask1 + subtask2) - offset()).last_result();
     }
   } else {
     if (task.last_result() > 0) {
-      theta = ((subtask1 + subtask2) / task).last_result();
+      theta = reactivity() * (offset() - (subtask1 + subtask2) / task).last_result();
     }
   }
-  return sigmoid::operator()(-theta);
+  return set_result(1.0 / (1 + std::exp(-theta)) * gamma());
 } /* calc() */
 
 NS_END(task_allocation, rcppsw);

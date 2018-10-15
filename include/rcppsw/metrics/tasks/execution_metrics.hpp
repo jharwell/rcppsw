@@ -66,7 +66,7 @@ class execution_metrics : public virtual base_metrics {
    * @brief This function should return the interface time of the most recent
    * interface time for the task.
    */
-  virtual double task_last_interface_time(void) const = 0;
+  virtual double task_last_interface_time(uint i) const = 0;
 
   /**
    * @brief This function should return \c TRUE when the task has been completed
@@ -89,7 +89,7 @@ class execution_metrics : public virtual base_metrics {
   /**
    * @brief Return the current interface time estimate for a task.
    */
-  virtual const ta::time_estimate& task_interface_estimate(void) const = 0;
+  virtual const ta::time_estimate& task_interface_estimate(uint i) const = 0;
 };
 
 NS_END(tasks, metrics, rcppsw);
