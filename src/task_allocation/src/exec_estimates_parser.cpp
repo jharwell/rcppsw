@@ -1,7 +1,7 @@
 /**
- * @file executable_task.cpp
+ * @file exec_estimates_parser.cpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,9 +21,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/executable_task.hpp"
-#include "rcppsw/math/ema_params.hpp"
-#include "rcppsw/task_allocation/time_estimate.hpp"
+#include "rcppsw/task_allocation/exec_estimates_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -31,32 +29,46 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Global Variables
  ******************************************************************************/
-executable_task::executable_task(const std::string &name,
-                                 const struct math::sigmoid_params* abort,
-                                 const struct math::ema_params* estimation)
-    : logical_task(name),
-      m_interface_in_prog(kMAX_INTERFACES, false),
-      m_interface_times(kMAX_INTERFACES, 0.0),
-      m_last_interface_times(kMAX_INTERFACES, 0.0),
-      m_interface_start_times(kMAX_INTERFACES, 0.0),
-      m_interface_estimates(kMAX_INTERFACES, time_estimate(estimation->alpha)),
-      m_exec_estimate(estimation->alpha),
-      m_abort_prob(abort) {}
+const char exec_estimates_parser::kXMLRoot[];
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-int executable_task::active_interface(void) const {
-  for (size_t i = 0; i < m_interface_in_prog.size(); ++i) {
-    if (m_interface_in_prog[i]) {
-      return i;
+void exec_estimates_parser::parse(const ticpp::Element& node) {
+  if (nullptr != node.FirstChild(kXMLRoot, false)) {
+    ticpp::Element enode = get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+    m_params =
+        std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
+    m_ema.parse(enode);
+    m_params->ema = *m_ema.parse_results();
+    XML_PARSE_ATTR(enode, m_params, seed_enabled);
+
+    if (m_task_names.empty()) {
+      ER_WARN("No tasks registered for parsing");
     }
-  } /* for(i..) */
+    /*
+     * For each registered task we want to get exec estimates for, parse the
+     * estimate.
+     */
+    for (auto &s : m_task_names) {
+      math::range<uint> tmp{0, 0};
+      get_node_attribute(enode, s, tmp);
+      m_params->ranges.insert({s, tmp});
+    } /* for(&s..) */
+  }
+} /* parse() */
 
-return -1;
-} /* active_interface() */
+void exec_estimates_parser::show(std::ostream& stream) const {
+  if (!parsed()) {
+    stream << build_header() << "<< Not Parsed >>" << std::endl
+           << build_footer();
+    return;
+  }
 
+  stream << build_header() << XML_ATTR_STR(m_params, seed_enabled) << std::endl
+         << build_footer();
+} /* show() */
 
 NS_END(task_allocation, rcppsw);

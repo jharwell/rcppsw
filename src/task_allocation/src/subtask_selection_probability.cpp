@@ -99,8 +99,8 @@ subtask_selection_probability::calc_sigmoid(const time_estimate &est1,
   } else {
     r_ss = est1.last_result();
   }
-
-  return set_result(m_sigmoid(est1.last_result() / r_ss));
+  double theta = reactivity() * (est1.last_result() / r_ss - offset());
+  return set_result(1.0 / (1 + std::exp(-theta)) * gamma());
 } /* calc_sigmoid() */
 
 double subtask_selection_probability::operator()(const time_estimate *subtask1,

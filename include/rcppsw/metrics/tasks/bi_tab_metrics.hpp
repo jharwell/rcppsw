@@ -102,13 +102,13 @@ class bi_tab_metrics : public virtual base_metrics {
    * @brief Return the current partitioning probability for the root task in the
    * TAB.
    */
-  virtual double root_partition_prob(void) const = 0;
+  virtual double partition_prob(void) const = 0;
 
   /**
    * @brief Return the current subtask selection probability for the root task
    * in the TAB.
    */
-  virtual double root_subtask_selection_prob(void) const = 0;
+  virtual double subtask_selection_prob(void) const = 0;
 };
 
 NS_END(tasks, metrics, rcppsw);

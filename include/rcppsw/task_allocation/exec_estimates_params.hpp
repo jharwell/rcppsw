@@ -1,5 +1,5 @@
 /**
- * @file partitioning_metrics.hpp
+ * @file exec_estimates_params.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,44 +18,46 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_TASKS_PARTITIONING_METRICS_HPP_
-#define INCLUDE_RCPPSW_METRICS_TASKS_PARTITIONING_METRICS_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_EXEC_ESTIMATES_PARAMS_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_EXEC_ESTIMATES_PARAMS_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <map>
 #include <string>
 
-#include "rcppsw/common/common.hpp"
-#include "rcppsw/metrics/base_metrics.hpp"
+#include "rcppsw/params/base_params.hpp"
+#include "rcppsw/math/range.hpp"
+#include "rcppsw/math/ema_params.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics, tasks);
+NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Class Definitions
+ * Structure Definitions
  ******************************************************************************/
 /**
- * @class partitioning_metrics
- * @ingroup metrics
+ * @struct exec_estimates_params
+ * @ingroup params depth0
  *
- * @brief Interface defining metrics that can be collected on tasks during
- * partitioning.
+ * @brief Parameters for execution time estimates of tasks involved in
+ * depth0. Not needed for depth0 controllers, but needed in depth > 1
+ * controllers to avoid premature abortion upon start due to estimates of 0.0
+ * for generalist task.
  */
-class partitioning_metrics : public virtual base_metrics {
- public:
-  partitioning_metrics(void) = default;
-  ~partitioning_metrics(void) override = default;
-
+struct exec_estimates_params : public rcppsw::params::base_params {
   /**
-   * @brief This function should return \c TRUE, if a robot has chosen to employ
-   * task partitioning when allocating itself its next task.
+   * @brief Should initial estimates of task execution times be used?
    */
-  virtual bool employed_partitioning(void) const = 0;
+  bool                                     seed_enabled{false};
+  math::ema_params                         ema{};
+
+  std::map<std::string, math::range<uint>> ranges{};
 };
 
-NS_END(tasks, metrics, rcppsw);
+NS_END(task_allocatio, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_TASKS_PARTITIONING_METRICS_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_EXEC_ESTIMATES_PARAMS_HPP_ */

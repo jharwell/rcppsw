@@ -88,6 +88,11 @@ class xml_param_repository {
     return m_parsers[m_param_types[i]]->parse_results<T>().get();
   }
 
+  template<typename T>
+  T* get_parser(const std::string& name) {
+    return static_cast<T*>(m_parsers[name]);
+  }
+
   /**
    * @brief Get the parsed parameters associated with the parser of the
    * specified name.
@@ -128,6 +133,7 @@ class xml_param_repository {
     m_factory.register_type<T, decltype(level_in)>(name);
     m_parsers[name] = m_factory.create(name, level_in).get();
   }
+
 
   /**
    * @brief Dump all parsed (or unparsed, but that would be useless) parameters

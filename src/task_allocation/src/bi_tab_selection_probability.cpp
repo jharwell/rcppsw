@@ -93,8 +93,8 @@ bi_tab_selection_probability::calc_sigmoid(double ratio1, double ratio2) {
   } else if (!(ratio2 > 0)) { /* have info on tab1 only */
     return 1.0;
   }
-
-  return sigmoid::operator()(ratio1 / ratio2);
+  double theta = reactivity() * (offset() - ratio1 / ratio2);
+  return set_result(1.0 / (1 + std::exp(-theta)) * gamma());
 } /* calc_sigmoid() */
 
 double bi_tab_selection_probability::operator()(const bi_tab* const tab1,

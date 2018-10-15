@@ -29,6 +29,7 @@
 #include "rcppsw/math/sigmoid_params.hpp"
 #include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
 #include "rcppsw/task_allocation/partitioning_params.hpp"
+#include "rcppsw/task_allocation/exec_estimates_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -43,11 +44,11 @@ NS_START(rcppsw, task_allocation);
  * @ingroup task_allocation params
  */
 struct task_allocation_params : public rcppsw::params::base_params {
-  rcppsw::math::ema_params     estimation{};
+  exec_estimates_params        exec_est{};
   rcppsw::math::sigmoid_params abort{};
   sigmoid_selection_params     subtask_selection{};
   partitioning_params          partitioning{};
-  sigmoid_selection_params     tab_sw{};
+  sigmoid_selection_params     tab_selection{};
 };
 
 NS_END(task_allocation, rcppsw);

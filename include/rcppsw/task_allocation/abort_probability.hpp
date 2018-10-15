@@ -73,10 +73,10 @@ class abort_probability : public math::sigmoid {
   static constexpr double kDEFAULT_GAMMA = 1.0;
 
   /*
-   * @brief If we don't have any time estimate for the task, then we just set a
-   * small static abort probability.
+   * @brief All tasks need to have a small abort probability, so that they don't
+   * get stuck indefinitely.
    */
-  static double constexpr kNO_EST_ABORT_PROB = 0.001;
+  static double constexpr kMIN_ABORT_PROB = 0.0001;
 
   /**
    * @brief Initialize an abort probability calculation with default values.
@@ -100,6 +100,9 @@ class abort_probability : public math::sigmoid {
    * @return The abort probability.
    */
   double operator()(double exec_time, const time_estimate& whole_task);
+  double calc(double exec_time, const time_estimate& whole_task) {
+    return operator()(exec_time, whole_task);
+  }
 };
 
 NS_END(task_allocation, rcppsw);

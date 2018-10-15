@@ -71,8 +71,8 @@ class polled_task : public executable_task, public taskable {
    * @brief Initialize the execution time estimates of the task randomly within
    * the specified range.
    */
-  void exec_est_bounds_init(uint lb, uint ub) {
-    executable_task::init_exec_estimate(
+  void exec_estimate_init(uint lb, uint ub) {
+    executable_task::exec_estimate_init(
         static_cast<uint>(std::rand()) % (ub - lb + 1) + lb);
   }
 

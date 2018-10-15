@@ -41,10 +41,16 @@ abort_probability::abort_probability(const math::sigmoid_params *const params)
 double abort_probability::operator()(double exec_time,
                                      const time_estimate &whole_task) {
   if (!(whole_task.last_result() > 0)) {
-    return set_result(kNO_EST_ABORT_PROB);
+    return set_result(kMIN_ABORT_PROB);
   }
-
-  return sigmoid::operator()(exec_time / whole_task.last_result());
+  double ratio = exec_time / whole_task.last_result();
+  double theta = 0.0;
+  if (ratio <= offset()) {
+    theta = reactivity() * (offset() - ratio);
+  } else {
+    theta = reactivity() * (ratio - offset());
+  }
+  return set_result(1.0 / (1 + std::exp(theta)) * gamma());
 } /* operator() */
 
 NS_END(task_allocation, rcppsw);

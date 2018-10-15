@@ -23,9 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/task_allocation/bi_tdgraph.hpp"
 #include "rcppsw/task_allocation/bi_tdgraph_executive.hpp"
-#include "rcppsw/task_allocation/partitionable_task.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
-#include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -35,35 +33,40 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-bi_tdgraph::bi_tdgraph(const struct sigmoid_selection_params* const params)
+bi_tdgraph::bi_tdgraph(const struct task_allocation_params* const params)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tdgraph"),
-      m_tab_sw_prob(params) {}
+      mc_params(*params),
+      m_tab_sw_prob(&mc_params.tab_selection) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void bi_tdgraph::install_cb(bi_tdgraph_executive *const e) {
-  e->task_abort_notify(std::bind(&bi_tdgraph::task_abort_cb, this,
-                                 std::placeholders::_1));
-} /* install_cb() */
+status_t
+bi_tdgraph::install_tab(const std::string &parent,
+                        const std::vector<polled_task *> &children) {
+  return install_tab(find_vertex(parent), children);
+} /* install_tab() */
 
 status_t
-bi_tdgraph::set_children(const std::string &parent,
-                                  const std::vector<polled_task *> &children) {
-  return tdgraph::set_children(parent, children);
-} /* set_children() */
-
-status_t
-bi_tdgraph::set_children(const polled_task *parent,
+bi_tdgraph::install_tab(const polled_task *parent,
                          const std::vector<polled_task *> &children) {
   ER_ASSERT(2 == children.size(),
             "Bi tdgraph cannot handle non-binary bifurcations");
   m_tabs.emplace_back(this,
                       const_cast<polled_task*>(parent),
                       children[0],
-                      children[1]);
+                      children[1],
+                      &mc_params.partitioning,
+                      &mc_params.subtask_selection);
+  /*
+   * The first TAB to be installed is active by default/necessity, so that
+   * things don't segfault later.
+   */
+  if (1 == m_tabs.size()) {
+    m_active_tab = &m_tabs.front();
+  }
   return tdgraph::set_children(parent, children);
-} /* set_children() */
+} /* install_tab() */
 
 
 void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
@@ -136,9 +139,21 @@ bi_tab* bi_tdgraph::tab_child(const bi_tab* const tab,
   return const_cast<bi_tab*>(ret);
 } /* tab_child() */
 
+bi_tab* bi_tdgraph::root_tab(void) const {
+  for (auto &t : m_tabs) {
+    if (vertex_parent(t.root()) == t.root()) { /* self */
+      return const_cast<bi_tab*>(&t);
+    }
+  } /* for(&tab..) */
+  return nullptr;
+} /* root_tab() */
+
 bi_tab* bi_tdgraph::tab_parent(const bi_tab* const tab) const {
   uint count = 0;
   const bi_tab* ret = nullptr;
+  if (tab == root_tab()) {
+    return const_cast<bi_tab*>(tab);
+  }
   for (auto &t : m_tabs) {
     if (tab == &t) { /* self */
       continue;
@@ -150,18 +165,5 @@ bi_tab* bi_tdgraph::tab_parent(const bi_tab* const tab) const {
   ER_ASSERT(count <= 1, "TAB has more than one parent?");
   return const_cast<bi_tab*>(ret);
 } /* tab_parent() */
-
-void bi_tdgraph::task_abort_cb(const polled_task *const v) {
-  /*
-   * If our parent is ourself, then the task that has just been aborted is the
-   * root task and we don't want to set the last partition to ourself, because
-   * the root task is, by definition, incapable of being executed as the
-   * resulting of task partitioning during allocation.
-   */
-  if (vertex_parent(v) != v) {
-    auto parent = dynamic_cast<partitionable_task *>(vertex_parent(v));
-    parent->last_partition(v);
-  }
-} /* task_abort_cb() */
 
 NS_END(rcppsw, task_allocation);
