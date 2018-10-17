@@ -97,8 +97,8 @@ class _rab_wifi_sensor  {
     std::vector<rab_wifi_packet> ret;
     for (auto &r : m_sensor->GetReadings()) {
       rab_wifi_packet d(r.Range,
-                r.HorizontalBearing,
-                r.VerticalBearing);
+                        r.HorizontalBearing,
+                        r.VerticalBearing);
       for (size_t i = 0; i < r.Data.Size(); ++i) {
         d.data.push_back(r.Data[i]);
       } /* for(i..) */

@@ -247,7 +247,8 @@ class client {
   }
 
   /**
-   * @brief Set the log file for the specified logger. Idempotent.
+   * @brief Set the log file for the specified logger. Idempotent. If the
+   * logfile currently exists, it will be truncated.
    *
    * Logfile is an appender, which is given the same name as the logfile
    * itself.
@@ -260,7 +261,9 @@ class client {
     } /* for(&a..) */
 
     log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(mc_file_layout);
-    log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout, name);
+    log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout,
+                                                              name,
+                                                              false);
     appender->setName(name);
     logger->addAppender(appender);
   }

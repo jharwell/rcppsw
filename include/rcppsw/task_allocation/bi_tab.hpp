@@ -69,7 +69,7 @@ class bi_tab : public metrics::tasks::bi_tab_metrics,
   ~bi_tab(void) override = default;
 
   bi_tab& operator=(const bi_tab& other) = delete;
-  bi_tab(const bi_tab& other) = delete;
+  bi_tab(const bi_tab& other) = default;
 
   void partition_prob_update(void);
 
