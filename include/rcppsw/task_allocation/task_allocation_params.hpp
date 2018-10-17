@@ -25,11 +25,9 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/params/base_params.hpp"
-#include "rcppsw/math/ema_params.hpp"
-#include "rcppsw/math/sigmoid_params.hpp"
-#include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
-#include "rcppsw/task_allocation/partitioning_params.hpp"
+#include "rcppsw/task_allocation/task_partition_params.hpp"
 #include "rcppsw/task_allocation/exec_estimates_params.hpp"
+#include "rcppsw/task_allocation/src_sigmoid_sel_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -44,11 +42,11 @@ NS_START(rcppsw, task_allocation);
  * @ingroup task_allocation params
  */
 struct task_allocation_params : public rcppsw::params::base_params {
-  exec_estimates_params        exec_est{};
-  rcppsw::math::sigmoid_params abort{};
-  sigmoid_selection_params     subtask_selection{};
-  partitioning_params          partitioning{};
-  sigmoid_selection_params     tab_selection{};
+  exec_estimates_params  exec_est{};
+  src_sigmoid_sel_params abort{};
+  src_sigmoid_sel_params subtask_sel{};
+  task_partition_params  partitioning{};
+  src_sigmoid_sel_params tab_sel{};
 };
 
 NS_END(task_allocation, rcppsw);

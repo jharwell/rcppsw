@@ -30,7 +30,7 @@
 #include "rcppsw/task_allocation/task_allocation_params.hpp"
 #include "rcppsw/task_allocation/exec_estimates_parser.hpp"
 #include "rcppsw/math/sigmoid_xml_parser.hpp"
-#include "rcppsw/task_allocation/sigmoid_selection_xml_parser.hpp"
+#include "rcppsw/task_allocation/src_sigmoid_sel_xml_parser.hpp"
 #include "rcppsw/task_allocation/task_partition_xml_parser.hpp"
 
 /*******************************************************************************
@@ -52,10 +52,10 @@ class task_allocation_xml_parser: public rcppsw::params::xml_param_parser {
  public:
   explicit task_allocation_xml_parser(uint level)
       : xml_param_parser(level),
+        m_estimation(level + 1),
         m_abort(level + 1),
         m_subtask_sel(level + 1),
         m_partitioning(level + 1),
-        m_estimation(level + 1),
         m_tab_sel(level + 1) {}
 
   /**
@@ -86,11 +86,11 @@ class task_allocation_xml_parser: public rcppsw::params::xml_param_parser {
   // clang-format off
   bool                                    m_parsed{false};
   std::shared_ptr<task_allocation_params> m_params{nullptr};
-  rcppsw::math::sigmoid_xml_parser        m_abort;
-  sigmoid_selection_xml_parser            m_subtask_sel;
-  task_partition_xml_parser               m_partitioning;
   exec_estimates_parser                   m_estimation;
-  sigmoid_selection_xml_parser            m_tab_sel;
+  src_sigmoid_sel_xml_parser              m_abort;
+  src_sigmoid_sel_xml_parser              m_subtask_sel;
+  task_partition_xml_parser               m_partitioning;
+  src_sigmoid_sel_xml_parser              m_tab_sel;
   // clang-format on
 };
 

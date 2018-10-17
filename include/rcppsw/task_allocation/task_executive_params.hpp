@@ -1,5 +1,5 @@
 /**
- * @file sigmoid_selection_parser.cpp
+ * @file task_executive_params.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,13 +18,14 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_EXECUTIVE_PARAMS_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_EXECUTIVE_PARAMS_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/sigmoid_selection_xml_parser.hpp"
-#include <ext/ticpp/ticpp.h>
-
-#include "rcppsw/utils/line_parser.hpp"
+#include <string>
+#include "rcppsw/params/base_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -32,36 +33,32 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Global Variables
+ * Structure Definitions
  ******************************************************************************/
-constexpr char sigmoid_selection_xml_parser::kXMLRoot[];
+/**
+ * @struct task_executive_params
+* @ingroup params task_allocation
+ */
+struct task_executive_params : public params::base_params {
+  /**
+   * @brief Should the executive automatically update execution time estimates
+   * for tasks, or will that be handled in the application via callbacks?
+   */
+  bool update_exec_ests;
 
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-void sigmoid_selection_xml_parser::parse(const ticpp::Element &node) {
-  ticpp::Element snode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
-  m_params =
-      std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
+  /**
+   * @brief Should the executive automatically update interface time estimates
+   * for tasks, or will that be handled in the application via callbacks?
+   */
+  bool update_interface_ests;
 
-  m_sigmoid.parse(snode);
-  m_params->sigmoid = *m_sigmoid.parse_results();
-  XML_PARSE_ATTR(snode, m_params, method);
-} /* parse() */
-
-void sigmoid_selection_xml_parser::show(std::ostream &stream) const {
-  stream << build_header() << m_sigmoid
-         << XML_ATTR_STR(m_params, method) << std::endl
-         << build_footer();
-} /* show() */
-
-bool sigmoid_selection_xml_parser::validate(void) const {
-  CHECK(true == m_sigmoid.validate());
-  CHECK("" != m_params->method);
-  return true;
-
-error:
-  return false;
-} /* validate() */
+  /**
+   * @brief Method for specifying the initially active TAB in the executive.
+   *
+   */
+  std::string tab_init_method{""};
+};
 
 NS_END(task_allocation, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_EXECUTIVE_PARAMS_HPP_ */

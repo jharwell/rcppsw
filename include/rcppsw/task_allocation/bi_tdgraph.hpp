@@ -30,7 +30,7 @@
 
 #include "rcppsw/task_allocation/tdgraph.hpp"
 #include "rcppsw/task_allocation/bi_tab.hpp"
-#include "rcppsw/task_allocation/bi_tab_selection_probability.hpp"
+#include "rcppsw/task_allocation/bi_tab_sel_probability.hpp"
 #include "rcppsw/task_allocation/task_allocation_params.hpp"
 
 /*******************************************************************************
@@ -123,7 +123,7 @@ class bi_tdgraph : public tdgraph, public er::client<bi_tdgraph> {
   const struct task_allocation_params mc_params;
   std::list<bi_tab>                   m_tabs{};
   bi_tab *                            m_active_tab{nullptr};
-  bi_tab_selection_probability        m_tab_sw_prob;
+  bi_tab_sel_probability              m_tab_sw_prob;
   // clang-format on
 };
 

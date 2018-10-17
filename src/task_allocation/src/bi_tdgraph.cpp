@@ -36,7 +36,7 @@ NS_START(rcppsw, task_allocation);
 bi_tdgraph::bi_tdgraph(const struct task_allocation_params* const params)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tdgraph"),
       mc_params(*params),
-      m_tab_sw_prob(&mc_params.tab_selection) {}
+      m_tab_sw_prob(&mc_params.tab_sel) {}
 
 /*******************************************************************************
  * Member Functions
@@ -57,7 +57,7 @@ bi_tdgraph::install_tab(const polled_task *parent,
                       children[0],
                       children[1],
                       &mc_params.partitioning,
-                      &mc_params.subtask_selection);
+                      &mc_params.subtask_sel);
   /*
    * The first TAB to be installed is active by default/necessity, so that
    * things don't segfault later.

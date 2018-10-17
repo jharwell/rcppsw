@@ -94,7 +94,7 @@ class partition_probability : public math::sigmoid,
    * @brief Initialize partitioning probability explicity with method +
    * parameter values.
    */
-  explicit partition_probability(const struct sigmoid_selection_params* params);
+  explicit partition_probability(const struct sigmoid_sel_params* params);
 
   double operator()(const time_estimate& task,
                     const time_estimate& subtask1,

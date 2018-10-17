@@ -1,5 +1,5 @@
 /**
- * @file task_partition_parser.cpp
+ * @file src_sigmoid_sel_xml_parser.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -21,7 +21,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/task_partition_xml_parser.hpp"
+#include "rcppsw/task_allocation/src_sigmoid_sel_xml_parser.hpp"
 #include <ext/ticpp/ticpp.h>
 
 #include "rcppsw/utils/line_parser.hpp"
@@ -34,29 +34,27 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Global Variables
  ******************************************************************************/
-constexpr char task_partition_xml_parser::kXMLRoot[];
+constexpr char src_sigmoid_sel_xml_parser::kXMLRoot[];
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void task_partition_xml_parser::parse(const ticpp::Element &node) {
+void src_sigmoid_sel_xml_parser::parse(const ticpp::Element &node) {
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
   ticpp::Element pnode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
   m_sigmoid.parse(pnode);
-  m_params->src_sigmoid = *m_sigmoid.parse_results();
-  XML_PARSE_ATTR(pnode, m_params, always_partition);
-  XML_PARSE_ATTR(pnode, m_params, never_partition);
+  m_params->sigmoid = *m_sigmoid.parse_results();
+  XML_PARSE_ATTR(pnode, m_params, input_src);
 } /* parse() */
 
-void task_partition_xml_parser::show(std::ostream &stream) const {
+void src_sigmoid_sel_xml_parser::show(std::ostream &stream) const {
   stream << build_header() << m_sigmoid
-         << XML_ATTR_STR(m_params, always_partition) << std::endl
-         << XML_ATTR_STR(m_params, never_partition) << std::endl
+         << XML_ATTR_STR(m_params, input_src) << std::endl
          << build_footer();
 } /* show() */
 
-__rcsw_pure bool task_partition_xml_parser::validate(void) const {
+__rcsw_pure bool src_sigmoid_sel_xml_parser::validate(void) const {
   return m_sigmoid.validate();
 } /* validate() */
 

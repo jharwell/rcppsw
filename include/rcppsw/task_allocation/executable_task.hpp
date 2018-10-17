@@ -31,6 +31,7 @@
 #include "rcppsw/task_allocation/time_estimate.hpp"
 #include "rcppsw/metrics/tasks/execution_metrics.hpp"
 #include "rcppsw/task_allocation/abort_probability.hpp"
+#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -60,15 +61,18 @@ NS_START(task_allocation);
  * - Metrics that can be collected on a task as it runs.
  */
 class executable_task : public logical_task,
-                        public metrics::tasks::execution_metrics {
+                        public metrics::tasks::execution_metrics,
+                        public er::client<executable_task> {
  public:
   /*
    * For now...
    */
   static constexpr uint kMAX_INTERFACES = 1;
+  static constexpr char kAbortSrcExec[] = "exec";
+  static constexpr char kAbortSrcInterface[] = "interface";
 
   executable_task(const std::string& name,
-                  const struct math::sigmoid_params* abort,
+                  const struct src_sigmoid_sel_params* abort,
                   const struct math::ema_params* estimation);
 
   ~executable_task(void) override = default;
@@ -86,7 +90,6 @@ class executable_task : public logical_task,
     return m_interface_estimates[i];
   }
   bool task_at_interface(void) const override { return -1 != active_interface(); }
-
 
   /**
    * @brief Update the calculated interface time for the task if the current
@@ -109,6 +112,13 @@ class executable_task : public logical_task,
   int active_interface(void) const;
 
   /**
+   * @brief Get the ID of the last active interface.
+   *
+   * @return The ID, or -1 if an interface has not yet been completed.
+   */
+  int task_last_active_interface(void) const override { return m_last_active_interface; }
+
+  /**
    * @brief Because tasks can have multiple interfaces, they need a way to reset
    * their interface time upon leaving/entering an interface.
    */
@@ -125,8 +135,15 @@ class executable_task : public logical_task,
    */
   void abort_prob_update(void) {
     if (-1 != active_interface()) {
-      m_abort_prob.calc(m_interface_times[active_interface()],
-                        m_interface_estimates[active_interface()]);
+      if (kAbortSrcExec == mc_abort_src) {
+        m_abort_prob.calc(m_exec_time, m_exec_estimate);
+        return;
+      } else if (kAbortSrcInterface == mc_abort_src) {
+        m_abort_prob.calc(m_interface_times[active_interface()],
+                          m_interface_estimates[active_interface()]);
+        return;
+      }
+      ER_FATAL_SENTINEL("Bad abort source '%s'", mc_abort_src.c_str());
     }
   }
 
@@ -269,15 +286,26 @@ class executable_task : public logical_task,
     m_interface_start_times[i] = current_time();
   }
   bool interface_in_prog(uint i) const { return m_interface_in_prog[i]; }
-  void interface_enter(uint i) { m_interface_in_prog[i] = true; }
-  void interface_exit(uint i) { m_interface_in_prog[i] = false; }
+  void interface_enter(uint i) {
+    m_interface_in_prog[i] = true;
+    last_active_interface_reset();
+  }
+  void interface_exit(uint i) {
+    m_interface_in_prog[i] = false;
+    m_last_active_interface = i;
+  }
 
  private:
+  void last_active_interface_reset(void) { m_last_active_interface = -1; }
+
   // clang-format off
+  const std::string          mc_abort_src;
+
   bool                       m_is_atomic{false};
   bool                       m_is_partitionable{false};
   bool                       m_task_aborted{false};
   std::vector<bool>          m_interface_in_prog;
+  int                        m_last_active_interface{-1};
 
   std::vector<double>        m_interface_times;
   std::vector<double>        m_last_interface_times;

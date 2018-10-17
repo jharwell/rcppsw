@@ -1,5 +1,5 @@
 /**
- * @file sigmoid_selection_parser.hpp
+ * @file sigmoid_sel_parser.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * FORDYCA.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_SIGMOID_SELECTION_XML_PARSER_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_SIGMOID_SELECTION_XML_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_SIGMOID_SEL_XML_PARSER_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_SIGMOID_SEL_XML_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -28,7 +28,7 @@
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
-#include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
+#include "rcppsw/task_allocation/sigmoid_sel_params.hpp"
 #include "rcppsw/math/sigmoid_xml_parser.hpp"
 
 /*******************************************************************************
@@ -40,29 +40,29 @@ NS_START(rcppsw, task_allocation);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class sigmoid_selection_xml_parser
+ * @class sigmoid_sel_xml_parser
  * @ingroup task_allocation
  *
- * @brief Parses XML parameters for relating to the sigmoid selection.
+ * @brief Parses XML parameters for relating to the sigmoid sel.
  */
-class sigmoid_selection_xml_parser: public rcppsw::params::xml_param_parser {
+class sigmoid_sel_xml_parser: public rcppsw::params::xml_param_parser {
  public:
-  explicit sigmoid_selection_xml_parser(uint level)
+  explicit sigmoid_sel_xml_parser(uint level)
       : xml_param_parser(level),
         m_sigmoid(level + 1) {}
 
   /**
-   * @brief The root tag that all task sigmoid_selection parameters should lie
+   * @brief The root tag that all task sigmoid_sel parameters should lie
    * under in the XML tree.
    */
-  static constexpr char kXMLRoot[] = "sigmoid_selection";
+  static constexpr char kXMLRoot[] = "sigmoid_sel";
 
   void show(std::ostream& stream) const override;
   void parse(const ticpp::Element& node) override;
   bool validate(void) const override;
   std::string xml_root(void) const override { return kXMLRoot; }
 
-  std::shared_ptr<sigmoid_selection_params> parse_results(void) const {
+  std::shared_ptr<sigmoid_sel_params> parse_results(void) const {
     return m_params;
   }
 
@@ -72,11 +72,11 @@ class sigmoid_selection_xml_parser: public rcppsw::params::xml_param_parser {
   }
 
   // clang-format off
-  std::shared_ptr<sigmoid_selection_params> m_params{nullptr};
-  math::sigmoid_xml_parser                  m_sigmoid;
+  std::shared_ptr<sigmoid_sel_params> m_params{nullptr};
+  math::sigmoid_xml_parser            m_sigmoid;
   // clang-format on
 };
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_SIGMOID_SELECTION_XML_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_SIGMOID_SEL_XML_PARSER_HPP_ */
