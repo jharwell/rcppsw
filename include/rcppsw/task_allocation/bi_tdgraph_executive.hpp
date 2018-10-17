@@ -53,7 +53,8 @@ class bi_tdgraph_executive : public base_executive,
   using alloc_notify_cb = std::function<void(const polled_task*,
                                              const bi_tab*)>;
 
-  bi_tdgraph_executive(bool update_exec_ests, bi_tdgraph* graph);
+  bi_tdgraph_executive(const struct task_executive_params* params,
+                       bi_tdgraph* graph);
 
   void run(void) override;
 

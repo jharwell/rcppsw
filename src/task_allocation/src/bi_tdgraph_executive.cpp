@@ -33,9 +33,9 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 bi_tdgraph_executive::bi_tdgraph_executive(
-    bool update_exec_ests,
+    const struct task_executive_params* const params,
     bi_tdgraph *const graph)
-    : base_executive(update_exec_ests, graph),
+    : base_executive(params, graph),
       ER_CLIENT_INIT("rcppsw.ta.executive.bi_tdgraph") {
   auto bigraph = static_cast<bi_tdgraph *>(base_executive::graph());
 
@@ -110,6 +110,8 @@ void bi_tdgraph_executive::handle_task_abort(polled_task *task) {
 
   if (update_exec_ests()) {
     task->exec_estimate_update(task->exec_time());
+  }
+  if (update_interface_ests()) {
     /*
      * Not unconditional/assert(), because it is possible to abort before we
      * even get to our task interface, and if this happens before we have
@@ -118,7 +120,7 @@ void bi_tdgraph_executive::handle_task_abort(polled_task *task) {
      */
     if (-1 != task->task_last_active_interface()) {
       task->interface_estimate_update(task->task_last_active_interface(),
-                                    task->interface_time(task->task_last_active_interface()));
+                                      task->interface_time(task->task_last_active_interface()));
     }
   }
   task->exec_time_reset();
@@ -154,6 +156,8 @@ void bi_tdgraph_executive::handle_task_finish(polled_task *task) {
             task->name().c_str());
   if (update_exec_ests()) {
     task->exec_estimate_update(task->exec_time());
+  }
+  if (update_interface_ests()) {
     task->interface_estimate_update(task->task_last_active_interface(),
                                     task->interface_time(task->task_last_active_interface()));
   }

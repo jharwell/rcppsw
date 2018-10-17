@@ -44,13 +44,13 @@ struct task_executive_params : public params::base_params {
    * @brief Should the executive automatically update execution time estimates
    * for tasks, or will that be handled in the application via callbacks?
    */
-  bool update_exec_ests;
+  bool update_exec_ests{true};
 
   /**
    * @brief Should the executive automatically update interface time estimates
    * for tasks, or will that be handled in the application via callbacks?
    */
-  bool update_interface_ests;
+  bool update_interface_ests{true};
 
   /**
    * @brief Method for specifying the initially active TAB in the executive.
