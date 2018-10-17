@@ -127,14 +127,22 @@ bool execution_metrics_collector::csv_line_build(std::string &line) {
           ? std::to_string(m_cum_interface_time / cum_n_allocs) : "0";
   line += separator();
 
-  line += std::to_string(m_int_exec_estimate.last_result() /
-                         (int_n_allocs)) + separator();
-  line += std::to_string(m_cum_exec_estimate.last_result() /
-                         (cum_n_allocs)) + separator();
-  line += std::to_string(m_int_interface_estimate.last_result() /
-                         (int_n_allocs)) + separator();
-  line += std::to_string(m_cum_interface_estimate.last_result() /
-                         (cum_n_allocs)) + separator();
+  line += (int_n_allocs > 0)
+          ? std::to_string(m_int_exec_estimate.last_result() /
+                           (int_n_allocs)) : "0";
+  line += separator();
+  line += (cum_n_allocs > 0)
+          ? std::to_string(m_cum_exec_estimate.last_result() /
+                           (cum_n_allocs)) : "0";
+  line += separator();
+  line += (int_n_allocs > 0)
+          ? std::to_string(m_int_interface_estimate.last_result() /
+                           (int_n_allocs))  : "0";
+  line += separator();
+  line += (cum_n_allocs > 0)
+          ? std::to_string(m_cum_interface_estimate.last_result() /
+                           (cum_n_allocs)) : "0";
+  line += separator();
   line += std::to_string(m_int_abort_count) + separator();
   line += std::to_string(m_cum_abort_count) + separator();
   line += std::to_string(m_int_complete_count) + separator();

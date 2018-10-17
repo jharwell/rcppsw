@@ -51,6 +51,10 @@ NS_START(rcppsw, task_allocation);
  */
 class bi_tdgraph : public tdgraph, public er::client<bi_tdgraph> {
  public:
+  static constexpr char kTABInitRoot[] = "root";
+  static constexpr char kTABInitRandom[] = "random";
+  static constexpr char kTABInitMaxDepth[] = "max_depth";
+
   explicit bi_tdgraph(const struct task_allocation_params* params);
 
   bi_tdgraph(const bi_tdgraph& other) = delete;
@@ -72,7 +76,6 @@ class bi_tdgraph : public tdgraph, public er::client<bi_tdgraph> {
                        const std::vector<polled_task*>& children);
   status_t install_tab(const std::string& parent,
                        const std::vector<polled_task*>& children);
-
 
   /**
    * @brief Update the active TAB *BEFORE* task allocation is performed in the
@@ -115,6 +118,8 @@ class bi_tdgraph : public tdgraph, public er::client<bi_tdgraph> {
    * @param current_task The current active task in the tab.
    */
   bi_tab* tab_child(const bi_tab* tab, const polled_task* current_task) const;
+
+  void active_tab_init(const std::string& method);
 
  private:
   using tdgraph::set_children;

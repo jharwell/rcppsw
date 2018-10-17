@@ -22,6 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/task_allocation/bi_tdgraph.hpp"
+#include <random>
+
 #include "rcppsw/task_allocation/bi_tdgraph_executive.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
 
@@ -29,6 +31,13 @@
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
+
+/*******************************************************************************
+ * Global Variables
+ ******************************************************************************/
+constexpr char bi_tdgraph::kTABInitRoot[];
+constexpr char bi_tdgraph::kTABInitRandom[];
+constexpr char bi_tdgraph::kTABInitMaxDepth[];
 
 /*******************************************************************************
  * Constructors/Destructors
@@ -41,15 +50,51 @@ bi_tdgraph::bi_tdgraph(const struct task_allocation_params* const params)
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-status_t
-bi_tdgraph::install_tab(const std::string &parent,
-                        const std::vector<polled_task *> &children) {
+void bi_tdgraph::active_tab_init(const std::string& method) {
+  if (kTABInitRoot == method) {
+    ER_INFO("Using graph root initial TAB");
+    for (auto &t : m_tabs) {
+      if (t.root() == tdgraph::root()) {
+        m_active_tab = &t;
+      }
+    } /* for(&t..) */
+
+
+  } else if (kTABInitRandom == method) {
+    ER_INFO("Using random initial TAB");
+    m_active_tab = &(*std::next(m_tabs.begin(), std::rand() % m_tabs.size()));
+  } else if (kTABInitMaxDepth == method) {
+    ER_INFO("Using max_depth initial TAB");
+    std::vector<bi_tab*> indices;
+    int max_depth = 0;
+    for (auto &t : m_tabs) {
+      int tab_depth = vertex_depth(t.root());
+      if (tab_depth > max_depth) {
+        max_depth = tab_depth;
+      }
+    } /* for(&t..) */
+    for (auto &t : m_tabs) {
+      if (vertex_depth(t.root()) == max_depth) {
+        indices.push_back(&t);
+      }
+    } /* for(&t..) */
+
+    ER_INFO("Found %zu TABs at depth %d", indices.size(), max_depth);
+    m_active_tab = indices[std::rand() % indices.size()];
+  } else {
+    ER_FATAL_SENTINEL("Bad TAB init method '%s'", method.c_str());
+  }
+  ER_INFO("Initial TAB rooted at '%s'",
+          m_active_tab->root()->name().c_str());
+} /* active_tab_init() */
+
+status_t bi_tdgraph::install_tab(const std::string &parent,
+                                 const std::vector<polled_task *> &children) {
   return install_tab(find_vertex(parent), children);
 } /* install_tab() */
 
-status_t
-bi_tdgraph::install_tab(const polled_task *parent,
-                         const std::vector<polled_task *> &children) {
+status_t bi_tdgraph::install_tab(const polled_task *parent,
+                                 const std::vector<polled_task *> &children) {
   ER_ASSERT(2 == children.size(),
             "Bi tdgraph cannot handle non-binary bifurcations");
   m_tabs.emplace_back(this,
@@ -59,12 +104,13 @@ bi_tdgraph::install_tab(const polled_task *parent,
                       &mc_params.partitioning,
                       &mc_params.subtask_sel);
   /*
-   * The first TAB to be installed is active by default/necessity, so that
-   * things don't segfault later.
+   * Not needed if a priori execution time estimates are used, but is needed
+   * if they are not and the root of the tdgraph is partitionable in order to
+   * avoid having a partition probability of 0. Doing this gives you an
+   * initial partition probability of 0.5 in that case.
    */
-  if (1 == m_tabs.size()) {
-    m_active_tab = &m_tabs.front();
-  }
+  m_tabs.back().partition_prob_update();
+
   return tdgraph::set_children(parent, children);
 } /* install_tab() */
 
