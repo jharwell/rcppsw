@@ -1,5 +1,5 @@
 /**
- * @file subtask_selection_probability.cpp
+ * @file subtask_sel_probability.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -21,8 +21,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/subtask_selection_probability.hpp"
-#include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
+#include "rcppsw/task_allocation/subtask_sel_probability.hpp"
+#include "rcppsw/task_allocation/sigmoid_sel_params.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
@@ -33,14 +33,14 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constants
  ******************************************************************************/
-constexpr char subtask_selection_probability::kMethodBrutschy2014[];
-constexpr char subtask_selection_probability::kMethodHarwell2018[];
-constexpr char subtask_selection_probability::kMethodRandom[];
+constexpr char subtask_sel_probability::kMethodBrutschy2014[];
+constexpr char subtask_sel_probability::kMethodHarwell2018[];
+constexpr char subtask_sel_probability::kMethodRandom[];
 
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-subtask_selection_probability::subtask_selection_probability(std::string method)
+subtask_sel_probability::subtask_sel_probability(std::string method)
     : ER_CLIENT_INIT("rcppsw.ta.subtask_sel_prob"),
       sigmoid(),
       mc_method(std::move(method)) {
@@ -56,8 +56,8 @@ subtask_selection_probability::subtask_selection_probability(std::string method)
   ER_FATAL_SENTINEL("Bad method '%s' selected", method.c_str());
 }
 
-subtask_selection_probability::subtask_selection_probability(
-    const struct sigmoid_selection_params *const params)
+subtask_sel_probability::subtask_sel_probability(
+    const struct sigmoid_sel_params *const params)
     : ER_CLIENT_INIT("rcppsw.ta.subtask_sel_prob"),
       sigmoid(&params->sigmoid),
       mc_method(params->method) {}
@@ -65,22 +65,22 @@ subtask_selection_probability::subtask_selection_probability(
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-__rcsw_const double subtask_selection_probability::calc_random(void) {
+__rcsw_const double subtask_sel_probability::calc_random(void) {
   return 0.5;
 } /* calc_random() */
 
-__rcsw_pure double subtask_selection_probability::calc_brutschy2014(
+__rcsw_pure double subtask_sel_probability::calc_brutschy2014(
     const time_estimate &int_est1, const time_estimate &int_est2) {
   return calc_sigmoid(int_est1, int_est2);
 } /* calc_brutschy2014() */
 
-__rcsw_pure double subtask_selection_probability::calc_harwell2018(
+__rcsw_pure double subtask_sel_probability::calc_harwell2018(
     const time_estimate &exec_est1, const time_estimate &exec_est2) {
   return calc_sigmoid(exec_est2, exec_est1);
 } /* calc_harwell2018() */
 
 __rcsw_pure double
-subtask_selection_probability::calc_sigmoid(const time_estimate &est1,
+subtask_sel_probability::calc_sigmoid(const time_estimate &est1,
                                             const time_estimate &est2) {
   /*
    * No information available--just pick randomly.
@@ -103,7 +103,7 @@ subtask_selection_probability::calc_sigmoid(const time_estimate &est1,
   return set_result(1.0 / (1 + std::exp(-theta)) * gamma());
 } /* calc_sigmoid() */
 
-double subtask_selection_probability::operator()(const time_estimate *subtask1,
+double subtask_sel_probability::operator()(const time_estimate *subtask1,
                                                  const time_estimate *subtask2) {
   if (kMethodBrutschy2014 == mc_method) {
     return calc_brutschy2014(*subtask1, *subtask2);

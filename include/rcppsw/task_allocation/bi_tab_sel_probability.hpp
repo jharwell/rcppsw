@@ -1,5 +1,5 @@
 /**
- * @file bi_tab_selection_probability.hpp
+ * @file bi_tab_sel_probability.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TAB_SELECTION_PROBABILITY_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TAB_SELECTION_PROBABILITY_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TAB_SEL_PROBABILITY_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TAB_SEL_PROBABILITY_HPP_
 
 /*******************************************************************************
  * Includes
@@ -38,7 +38,7 @@ class bi_tab;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class bi_tab_selection_probability
+ * @class bi_tab_sel_probability
  * @ingroup task_allocation
  *
  * @brief Calculates the probability that a robot selects the TAB rooted at
@@ -53,7 +53,7 @@ class bi_tab;
  * - The robot's time estimates of how long it takes to complete task in each
      TAB.
  *
- * - The reactivity parameter: How quickly should the increase in selection
+ * - The reactivity parameter: How quickly should the increase in sel
  *   probability be for an increasing difference between TAB balance ratios.
  *
  * - The offset parameter: What is the threshold beneath which differences in
@@ -64,8 +64,8 @@ class bi_tab;
  * - offset > 1.
  * - 0 < gamma < 1.
 */
-class bi_tab_selection_probability : public er::client<bi_tab_selection_probability>,
-                                     public math::sigmoid {
+class bi_tab_sel_probability : public er::client<bi_tab_sel_probability>,
+                               public math::sigmoid {
  public:
   static constexpr double kHARWELL2019_REACTIVITY = 8.0;
   static constexpr double kHARWELL2019_OFFSET = 1.25;
@@ -75,29 +75,28 @@ class bi_tab_selection_probability : public er::client<bi_tab_selection_probabil
   static constexpr char kMethodRandom[] = "random";
 
   /**
-   * @brief Initialize subtask selection probability with default values, based
+   * @brief Initialize subtask sel probability with default values, based
    * on whatever the selected method is.
    */
-  explicit bi_tab_selection_probability(std::string method);
+  explicit bi_tab_sel_probability(std::string method);
 
   /**
-   * @brief Initialize subtask selection probability with method + parameter
+   * @brief Initialize subtask sel probability with method + parameter
    * values.
    */
-  explicit bi_tab_selection_probability(
-      const struct sigmoid_selection_params* params);
+  explicit bi_tab_sel_probability(const struct src_sigmoid_sel_params* params);
 
   const std::string& method(void) const { return mc_method; }
 
   /**
-   * @brief Calculate the selection probability based on the configured method,
+   * @brief Calculate the sel probability based on the configured method,
    * using the most recent time estimates of tasks in each TAB.
    */
   double operator()(const bi_tab* tab1, const bi_tab* tab2);
 
  private:
   /**
-   * @brief Random TAB selection, regardless of time estimates.
+   * @brief Random TAB sel, regardless of time estimates.
    */
   double calc_random(void);
 
@@ -132,4 +131,4 @@ class bi_tab_selection_probability : public er::client<bi_tab_selection_probabil
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TAB_SELECTION_PROBABILITY_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_BI_TAB_SEL_PROBABILITY_HPP_ */

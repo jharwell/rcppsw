@@ -1,5 +1,5 @@
 /**
- * @file task_partition_parser.hpp
+ * @file src_sigmoid_sel_parser.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * FORDYCA.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARTITION_XML_PARSER_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARTITION_XML_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_SRC_SIGMOID_SEL_XML_PARSER_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_SRC_SIGMOID_SEL_XML_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -28,8 +28,8 @@
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
-#include "rcppsw/task_allocation/task_partition_params.hpp"
-#include "rcppsw/task_allocation/src_sigmoid_sel_xml_parser.hpp"
+#include "rcppsw/task_allocation/src_sigmoid_sel_params.hpp"
+#include "rcppsw/task_allocation/sigmoid_sel_xml_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -40,31 +40,30 @@ NS_START(rcppsw, task_allocation);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class task_partition_xml_parser
+ * @class src_sigmoid_sel_xml_parser
  * @ingroup task_allocation
  *
- * @brief Parses XML parameters for relating to task partitioning.
+ * @brief Parses XML parameters for relating to sourced sigmoid selection of
+ * stuff.
  */
-class task_partition_xml_parser: public rcppsw::params::xml_param_parser {
+class src_sigmoid_sel_xml_parser: public rcppsw::params::xml_param_parser {
  public:
-  explicit task_partition_xml_parser(uint level)
+  explicit src_sigmoid_sel_xml_parser(uint level)
       : xml_param_parser(level),
         m_sigmoid(level + 1) {}
 
   /**
-   * @brief The root tag that all task task_partition parameters should lie
+   * @brief The root tag that all task src_sigmoid_sel parameters should lie
    * under in the XML tree.
    */
-  static constexpr char kXMLRoot[] = "task_partition";
+  static constexpr char kXMLRoot[] = "src_sigmoid_sel";
 
   void show(std::ostream& stream) const override;
-  bool validate(void) const override;
   void parse(const ticpp::Element& node) override;
-
+  bool validate(void) const override;
   std::string xml_root(void) const override { return kXMLRoot; }
-  bool parsed(void) const override { return m_parsed; }
 
-  std::shared_ptr<task_partition_params> parse_results(void) const {
+  std::shared_ptr<src_sigmoid_sel_params> parse_results(void) const {
     return m_params;
   }
 
@@ -74,12 +73,11 @@ class task_partition_xml_parser: public rcppsw::params::xml_param_parser {
   }
 
   // clang-format off
-  bool                                   m_parsed{false};
-  std::shared_ptr<task_partition_params> m_params{nullptr};
-  src_sigmoid_sel_xml_parser             m_sigmoid;
+  std::shared_ptr<src_sigmoid_sel_params> m_params{nullptr};
+  sigmoid_sel_xml_parser                  m_sigmoid;
   // clang-format on
 };
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARTITION_XML_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_SRC_SIGMOID_SEL_XML_PARSER_HPP_ */

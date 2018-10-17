@@ -107,9 +107,19 @@ void bi_tdgraph_executive::handle_task_abort(polled_task *task) {
 
   task->exec_time_update();
   task->interface_time_update();
+
   if (update_exec_ests()) {
     task->exec_estimate_update(task->exec_time());
-    task->interface_estimate_update(0, task->interface_time(0));
+    /*
+     * Not unconditional/assert(), because it is possible to abort before we
+     * even get to our task interface, and if this happens before we have
+     * managed to complete the interface while executing a task, then we cannot
+     * update the interface estimate
+     */
+    if (-1 != task->task_last_active_interface()) {
+      task->interface_estimate_update(task->task_last_active_interface(),
+                                    task->interface_time(task->task_last_active_interface()));
+    }
   }
   task->exec_time_reset();
   task->exec_time_update();
@@ -133,15 +143,19 @@ void bi_tdgraph_executive::handle_task_abort(polled_task *task) {
 } /* handle_task_abort() */
 
 void bi_tdgraph_executive::handle_task_finish(polled_task *task) {
+  task->exec_time_update();
+  task->interface_time_update();
   for (auto cb : task_finish_notify()) {
     cb(task);
   } /* for(cb..) */
 
-  task->exec_time_update();
-  task->interface_time_update();
+  ER_ASSERT(-1 != task->task_last_active_interface(),
+            "Task '%s' completion without completing interface?",
+            task->name().c_str());
   if (update_exec_ests()) {
     task->exec_estimate_update(task->exec_time());
-    task->interface_estimate_update(0, task->interface_time(0));
+    task->interface_estimate_update(task->task_last_active_interface(),
+                                    task->interface_time(task->task_last_active_interface()));
   }
   task->exec_time_reset();
   task->exec_time_update();

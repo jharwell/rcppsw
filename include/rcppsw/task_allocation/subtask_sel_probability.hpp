@@ -1,5 +1,5 @@
 /**
- * @file subtask_selection_probability.hpp
+ * @file subtask_sel_probability.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_PROBABILITY_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_PROBABILITY_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SEL_PROBABILITY_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SEL_PROBABILITY_HPP_
 
 /*******************************************************************************
  * Includes
@@ -39,7 +39,7 @@ NS_START(rcppsw, task_allocation);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class subtask_selection_probability
+ * @class subtask_sel_probability
  * @ingroup task_allocation
  *
  * @brief Calculates the probability that a robot selects subtask 2 when it has
@@ -55,7 +55,7 @@ NS_START(rcppsw, task_allocation);
  * - The robot's time estimates of how long it takes to complete each of the two
  *   subtasks/estimates of interface time for each subtask.
  *
- * - The reactivity parameter: how quickly should the increase in selection
+ * - The reactivity parameter: how quickly should the increase in sel
  *   probability be for an increasing difference between subtask time estimates.
  *
  * - The offset parameter: how quickly should robots react to an increasing
@@ -66,8 +66,8 @@ NS_START(rcppsw, task_allocation);
  * - 0 < gamma < 1.
  *
  */
-class subtask_selection_probability : public er::client<subtask_selection_probability>,
-                                      public math::sigmoid {
+class subtask_sel_probability : public er::client<subtask_sel_probability>,
+                                public math::sigmoid {
  public:
   static constexpr double kHARWELL2018_REACTIVITY = 8.0;
   static constexpr double kHARWELL2018_OFFSET = 1.25;
@@ -82,18 +82,18 @@ class subtask_selection_probability : public er::client<subtask_selection_probab
   static constexpr char kMethodRandom[] = "random";
 
   /**
-   * @brief Initialize subtask selection probability with default values, based
+   * @brief Initialize subtask sel probability with default values, based
    * on whatever the selected method is.
    */
-  explicit subtask_selection_probability(std::string method);
-  ~subtask_selection_probability(void) override = default;
+  explicit subtask_sel_probability(std::string method);
+  ~subtask_sel_probability(void) override = default;
 
   /**
-   * @brief Initialize subtask selection probability with method + parameter
+   * @brief Initialize subtask sel probability with method + parameter
    * values.
    */
-  explicit subtask_selection_probability(
-      const struct sigmoid_selection_params* params);
+  explicit subtask_sel_probability(
+      const struct sigmoid_sel_params* params);
 
   const std::string& method(void) const { return mc_method; }
 
@@ -104,7 +104,7 @@ class subtask_selection_probability : public er::client<subtask_selection_probab
   void init_sigmoid(double reactivity, double offset, double gamma);
 
   /**
-   * @brief Calculate the selection probability based on the configured method,
+   * @brief Calculate the sel probability based on the configured method,
    * using the most recent time estimates of each subtask.
    */
   double operator()(const time_estimate* subtask1,
@@ -112,7 +112,7 @@ class subtask_selection_probability : public er::client<subtask_selection_probab
 
  private:
   /**
-   * @brief Random subtask selection, regardless of time estimates.
+   * @brief Random subtask sel, regardless of time estimates.
    */
   double calc_random(void);
 
@@ -156,4 +156,4 @@ class subtask_selection_probability : public er::client<subtask_selection_probab
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SELECTION_PROBABILITY_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_SUBTASK_SEL_PROBABILITY_HPP_ */

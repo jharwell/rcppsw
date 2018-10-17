@@ -98,7 +98,8 @@ class base_executive : public rcppsw::er::client<base_executive> {
    *
    * The callback will be passed a pointer to the task that was just finished,
    * before the task is reset or any time estimates are updated on the finished
-   * task.
+   * task. The task will have its execution and interface times updated (if
+   * applicable) prior to the call.
    */
   void task_finish_notify(const finish_notify_cb& cb) {
     m_task_finish_notify.push_back(cb);

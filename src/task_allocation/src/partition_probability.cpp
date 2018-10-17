@@ -23,7 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/task_allocation/partition_probability.hpp"
 #include <cmath>
-#include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
+#include "rcppsw/task_allocation/sigmoid_sel_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -39,7 +39,7 @@ constexpr char partition_probability::kMethodPini2011[];
  * Constructors/Destructor
  ******************************************************************************/
 partition_probability::partition_probability(
-    const struct sigmoid_selection_params *params)
+    const struct sigmoid_sel_params *params)
     : sigmoid(params->sigmoid.reactivity,
               params->sigmoid.offset,
               params->sigmoid.gamma),

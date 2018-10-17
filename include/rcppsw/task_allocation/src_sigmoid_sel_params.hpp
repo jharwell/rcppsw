@@ -1,5 +1,5 @@
 /**
- * @file task_partition_parser.cpp
+ * @file src_sigmoid_sel_params.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,13 +18,15 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_SRC_SIGMOID_SEL_PARAMS_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_SRC_SIGMOID_SEL_PARAMS_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/task_partition_xml_parser.hpp"
-#include <ext/ticpp/ticpp.h>
-
-#include "rcppsw/utils/line_parser.hpp"
+#include <string>
+#include "rcppsw/params/base_params.hpp"
+#include "rcppsw/task_allocation/sigmoid_sel_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -32,32 +34,22 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Global Variables
+ * Structure Definitions
  ******************************************************************************/
-constexpr char task_partition_xml_parser::kXMLRoot[];
-
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-void task_partition_xml_parser::parse(const ticpp::Element &node) {
-  m_params =
-      std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
-  ticpp::Element pnode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
-  m_sigmoid.parse(pnode);
-  m_params->src_sigmoid = *m_sigmoid.parse_results();
-  XML_PARSE_ATTR(pnode, m_params, always_partition);
-  XML_PARSE_ATTR(pnode, m_params, never_partition);
-} /* parse() */
-
-void task_partition_xml_parser::show(std::ostream &stream) const {
-  stream << build_header() << m_sigmoid
-         << XML_ATTR_STR(m_params, always_partition) << std::endl
-         << XML_ATTR_STR(m_params, never_partition) << std::endl
-         << build_footer();
-} /* show() */
-
-__rcsw_pure bool task_partition_xml_parser::validate(void) const {
-  return m_sigmoid.validate();
-} /* validate() */
+/**
+ * @struct src_sigmoid_sel_params
+* @ingroup params task_allocation
+ */
+struct src_sigmoid_sel_params : public params::base_params {
+  /**
+   * @brief What should the source of the input into abort probability
+   * calculations be? Valid values are: ["exec", "interface"], referring to
+   * execution time and interface time for a task.
+   */
+  std::string        input_src{""};
+  sigmoid_sel_params sigmoid{};
+};
 
 NS_END(task_allocation, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_SRC_SIGMOID_SEL_PARAMS_HPP_ */

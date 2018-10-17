@@ -91,12 +91,16 @@ void execution_metrics_collector::collect(
 
   m_int_exec_estimate += m.task_exec_estimate();
   m_int_interface_estimate += m.task_interface_estimate(0);
-  m_int_interface_time += m.task_last_interface_time(0);
-  m_int_exec_time += m.task_last_exec_time();
+  int interface = m.task_last_active_interface();
 
+  /* Can be -1 if we aborted before getting to our task interface */
+  if (-1 != interface) {
+    m_int_interface_time += m.task_last_interface_time(m.task_last_active_interface());
+    m_cum_interface_estimate += m.task_interface_estimate(m.task_last_active_interface());
+    m_cum_interface_time += m.task_last_interface_time(m.task_last_active_interface());
+  }
+  m_int_exec_time += m.task_last_exec_time();
   m_cum_exec_estimate += m.task_exec_estimate();
-  m_cum_interface_estimate += m.task_interface_estimate(0);
-  m_cum_interface_time += m.task_last_interface_time(0);
   m_cum_exec_time += m.task_last_exec_time();
 } /* collect() */
 

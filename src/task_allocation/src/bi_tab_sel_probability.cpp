@@ -1,5 +1,5 @@
 /**
- * @file bi_tab_selection_probability.cpp
+ * @file bi_tab_sel_probability.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -21,10 +21,10 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/bi_tab_selection_probability.hpp"
+#include "rcppsw/task_allocation/bi_tab_sel_probability.hpp"
 #include <cassert>
 #include <cmath>
-#include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
+#include "rcppsw/task_allocation/src_sigmoid_sel_params.hpp"
 #include "rcppsw/task_allocation/bi_tab.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
 
@@ -36,13 +36,13 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constants
  ******************************************************************************/
-constexpr char bi_tab_selection_probability::kMethodHarwell2019[];
-constexpr char bi_tab_selection_probability::kMethodRandom[];
+constexpr char bi_tab_sel_probability::kMethodHarwell2019[];
+constexpr char bi_tab_sel_probability::kMethodRandom[];
 
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-bi_tab_selection_probability::bi_tab_selection_probability(std::string method)
+bi_tab_sel_probability::bi_tab_sel_probability(std::string method)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tab_sel_prob"),
       sigmoid(),
       mc_method(std::move(method)) {
@@ -54,20 +54,20 @@ bi_tab_selection_probability::bi_tab_selection_probability(std::string method)
   ER_FATAL_SENTINEL("Bad method '%s' selected", method.c_str());
 }
 
-bi_tab_selection_probability::bi_tab_selection_probability(
-    const struct sigmoid_selection_params *const params)
+bi_tab_sel_probability::bi_tab_sel_probability(
+    const struct src_sigmoid_sel_params *const params)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tab_sel_prob"),
-      sigmoid(&params->sigmoid),
-      mc_method(params->method) {}
+      sigmoid(&params->sigmoid.sigmoid),
+      mc_method(params->sigmoid.method) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-__rcsw_const double bi_tab_selection_probability::calc_random(void) {
+__rcsw_const double bi_tab_sel_probability::calc_random(void) {
   return 0.5;
 } /* calc_random() */
 
-__rcsw_pure double bi_tab_selection_probability::calc_harwell2019(
+__rcsw_pure double bi_tab_sel_probability::calc_harwell2019(
     const bi_tab& tab1, const bi_tab& tab2) {
 
   double ratio1 = std::fabs(tab1.root()->task_exec_estimate().last_result() - (
@@ -82,7 +82,7 @@ __rcsw_pure double bi_tab_selection_probability::calc_harwell2019(
 } /* calc_harwell2019() */
 
 __rcsw_pure double
-bi_tab_selection_probability::calc_sigmoid(double ratio1, double ratio2) {
+bi_tab_sel_probability::calc_sigmoid(double ratio1, double ratio2) {
   /*
    * No information available--just pick randomly.
    */
@@ -97,7 +97,7 @@ bi_tab_selection_probability::calc_sigmoid(double ratio1, double ratio2) {
   return set_result(1.0 / (1 + std::exp(-theta)) * gamma());
 } /* calc_sigmoid() */
 
-double bi_tab_selection_probability::operator()(const bi_tab* const tab1,
+double bi_tab_sel_probability::operator()(const bi_tab* const tab1,
                                                 const bi_tab* const tab2) {
   if (kMethodHarwell2019 == mc_method) {
     return calc_harwell2019(*tab1, *tab2);

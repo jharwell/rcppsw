@@ -47,7 +47,7 @@ NS_START(rcppsw, task_allocation);
 class polled_task : public executable_task, public taskable {
  public:
   polled_task(const std::string& name,
-              const struct math::sigmoid_params* abort,
+              const struct src_sigmoid_sel_params* abort,
               const struct math::ema_params* estimation,
               std::unique_ptr<taskable> mechanism)
       : executable_task(name, abort, estimation),

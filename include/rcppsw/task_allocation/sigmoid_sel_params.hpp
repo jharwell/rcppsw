@@ -1,5 +1,5 @@
 /**
- * @file partitioning_params.hpp
+ * @file sigmoid_sel_params.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,15 +18,15 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITIONING_PARAMS_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_PARTITIONING_PARAMS_HPP_
+#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_SIGMOID_SEL_PARAMS_HPP_
+#define INCLUDE_RCPPSW_TASK_ALLOCATION_SIGMOID_SEL_PARAMS_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <string>
 #include "rcppsw/params/base_params.hpp"
-#include "rcppsw/task_allocation/sigmoid_selection_params.hpp"
+#include "rcppsw/math/sigmoid_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -37,15 +37,14 @@ NS_START(rcppsw, task_allocation);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct partitioning_params
-* @ingroup params task_allocation
+ * @struct sigmoid_sel_params
+ * @ingroup params task_allocation
  */
-struct partitioning_params : public params::base_params {
-  sigmoid_selection_params sigmoid{};
-  bool always_partition{false};
-  bool never_partition{false};
+struct sigmoid_sel_params : public params::base_params {
+  std::string          method{""};
+  math::sigmoid_params sigmoid{};
 };
 
 NS_END(task_allocation, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_PARAMS_HPP_ */
+#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_SIGMOID_SEL_PARAMS_HPP_ */
