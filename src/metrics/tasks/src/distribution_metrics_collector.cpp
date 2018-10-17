@@ -40,10 +40,10 @@ distribution_metrics_collector::distribution_metrics_collector(
     : base_metrics_collector(ofname, interval),
       m_int_depth_counts(decomposition_depth + 1, 0),
       m_int_task_counts(std::pow(2, decomposition_depth + 1) - 1, 0),
-      m_int_tab_counts(decomposition_depth, 0),
+      m_int_tab_counts(std::pow(2, decomposition_depth - 1) + 1, 0),
       m_cum_depth_counts(decomposition_depth + 1, 0),
       m_cum_task_counts(std::pow(2, decomposition_depth + 1) - 1, 0),
-      m_cum_tab_counts(decomposition_depth, 0) {}
+      m_cum_tab_counts(std::pow(2, decomposition_depth - 1) + 1, 0) {}
 
 /*******************************************************************************
  * Member Functions

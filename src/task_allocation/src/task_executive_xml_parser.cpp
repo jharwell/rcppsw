@@ -1,5 +1,5 @@
 /**
- * @file task_executive_params.hpp
+ * @file task_executive_xml_parser.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,14 +18,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_EXECUTIVE_PARAMS_HPP_
-#define INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_EXECUTIVE_PARAMS_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/params/base_params.hpp"
+#include "rcppsw/task_allocation/task_executive_xml_parser.hpp"
+#include <ext/ticpp/ticpp.h>
+
+#include "rcppsw/utils/line_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -33,32 +32,28 @@
 NS_START(rcppsw, task_allocation);
 
 /*******************************************************************************
- * Structure Definitions
+ * Global Variables
  ******************************************************************************/
-/**
- * @struct task_executive_params
-* @ingroup params task_allocation
- */
-struct task_executive_params : public params::base_params {
-  /**
-   * @brief Should the executive automatically update execution time estimates
-   * for tasks, or will that be handled in the application via callbacks?
-   */
-  bool update_exec_ests{true};
+constexpr char task_executive_xml_parser::kXMLRoot[];
 
-  /**
-   * @brief Should the executive automatically update interface time estimates
-   * for tasks, or will that be handled in the application via callbacks?
-   */
-  bool update_interface_ests{true};
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+void task_executive_xml_parser::parse(const ticpp::Element &node) {
+  m_params =
+      std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
+  ticpp::Element pnode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
+  XML_PARSE_ATTR(pnode, m_params, update_exec_ests);
+  XML_PARSE_ATTR(pnode, m_params, update_interface_ests);
+  XML_PARSE_ATTR(pnode, m_params, tab_init_method);
+} /* parse() */
 
-  /**
-   * @brief Method for specifying the initially active TAB in the
-   * executive. Valid values are: [root, random, max_depth].
-   */
-  std::string tab_init_method{""};
-};
+void task_executive_xml_parser::show(std::ostream &stream) const {
+  stream << build_header()
+         << XML_ATTR_STR(m_params, update_exec_ests) << std::endl
+         << XML_ATTR_STR(m_params, update_interface_ests) << std::endl
+         << XML_ATTR_STR(m_params, tab_init_method) << std::endl
+         << build_footer();
+} /* show() */
 
 NS_END(task_allocation, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TASK_EXECUTIVE_PARAMS_HPP_ */

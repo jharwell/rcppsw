@@ -23,6 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/task_allocation/bi_tdgraph_executive.hpp"
 #include "rcppsw/task_allocation/bi_tdgraph.hpp"
+#include "rcppsw/task_allocation/task_executive_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -36,21 +37,7 @@ bi_tdgraph_executive::bi_tdgraph_executive(
     const struct task_executive_params* const params,
     bi_tdgraph *const graph)
     : base_executive(params, graph),
-      ER_CLIENT_INIT("rcppsw.ta.executive.bi_tdgraph") {
-  auto bigraph = static_cast<bi_tdgraph *>(base_executive::graph());
-
-  if (nullptr != bigraph->active_tab()) {
-    /*
-     * Not needed if a priori execution time estimates are used, but is needed if
-     * they are not and the root of the tdgraph is partitionable in order to avoid
-     * having a partition probability of 0. Doing this gives you an initial
-     * partition probability of 0.5 in that case.
-     */
-    bigraph->active_tab()->partition_prob_update();
-    ER_INFO("Initial TAB rooted at '%s'",
-            bigraph->active_tab()->root()->name().c_str());
-  }
-}
+      ER_CLIENT_INIT("rcppsw.ta.executive.bi_tdgraph") {}
 
 /*******************************************************************************
  * Member Functions
