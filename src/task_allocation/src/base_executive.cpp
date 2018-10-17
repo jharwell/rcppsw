@@ -24,6 +24,7 @@
 #include "rcppsw/task_allocation/base_executive.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
 #include "rcppsw/task_allocation/tdgraph.hpp"
+#include "rcppsw/task_allocation/task_executive_params.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -33,10 +34,11 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_executive::base_executive(bool update_exec_ests,
+base_executive::base_executive(const struct task_executive_params* const params,
                                tdgraph *const graph)
     : ER_CLIENT_INIT("rcppsw.ta.executive.base"),
-      m_update_exec_ests(update_exec_ests),
+      m_update_exec_ests(params->update_exec_ests),
+      m_update_interface_ests(params->update_interface_ests),
       m_graph(graph) {}
 
 base_executive::~base_executive(void) = default;

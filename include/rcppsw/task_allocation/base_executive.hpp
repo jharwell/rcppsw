@@ -53,15 +53,13 @@ class base_executive : public rcppsw::er::client<base_executive> {
   /**
    * @brief Creates the base executive.
    *
-   * @param update_exec_ests Should the executive automatically update execution
-   *                         estimates for tasks, or will that be handled in the
-   *                         application via callbacks?
+   * @param params Initialization parameters/config.
    *
    * @param graph Graph to manage. Takes ownership of the object (can't use the
    *              language to communicate that with unique_ptr because of
    *              casting reasons).
    */
-  base_executive(bool update_exec_ests, tdgraph* graph);
+  base_executive(const struct task_executive_params* params, tdgraph* graph);
   ~base_executive(void) override;
 
   base_executive& operator=(const base_executive& other) = delete;
@@ -115,6 +113,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
 
   const tdgraph* graph(void) const { return m_graph.get(); }
   bool update_exec_ests(void) const { return m_update_exec_ests; }
+  bool update_interface_ests(void) const { return m_update_interface_ests; }
 
  protected:
   const polled_task* root_task(void) const;
@@ -126,10 +125,10 @@ class base_executive : public rcppsw::er::client<base_executive> {
 
   tdgraph* graph(void) { return m_graph.get(); }
 
-
  private:
   // clang-format off
-  bool                        m_update_exec_ests{true};
+  bool                        m_update_exec_ests;
+  bool                        m_update_interface_ests;
   polled_task*                m_current_task{nullptr};
   std::list<abort_notify_cb>  m_task_abort_notify{};
   std::list<finish_notify_cb> m_task_finish_notify{};
