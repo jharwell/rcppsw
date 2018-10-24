@@ -41,8 +41,7 @@ NS_START(rcppsw, metrics, tasks);
  * @class bi_tab_metrics_collector
  * @ingroup metrics tasks
  *
- * @brief Collector for metrics for a specific bi Task Allocation Block
- * (TAB), which consists of a partitionable task and its two subtasks.
+ * @brief Collector for metrics for \ref bi_tab_metrics about task allocation.
  *
  * Metrics should only be collected upon completion/abortion of a task. Metrics
  * are written out at the specified interval.
@@ -108,13 +107,13 @@ class bi_tab_metrics_collector : public base_metrics_collector {
   /**
    * @brief The average partitioning probability of the root task in the TAB.
    */
-  double m_int_root_partition_prob{0.0};
+  double m_int_partition_prob{0.0};
 
   /**
    * @brief The average subtask selection probability of the root task in the
    * TAB.
    */
-  double m_int_root_subtask_selection_prob{0.0};
+  double m_int_subtask_selection_prob{0.0};
 
   uint   m_cum_subtask1_count{0};
   uint   m_cum_subtask2_count{0};
@@ -122,8 +121,8 @@ class bi_tab_metrics_collector : public base_metrics_collector {
   uint   m_cum_no_partition_count{0};
   uint   m_cum_task_sw_count{0};
   uint   m_cum_task_depth_sw_count{0};
-  double m_cum_root_partition_prob{0.0};
-  double m_cum_root_subtask_selection_prob{0.0};
+  double m_cum_partition_prob{0.0};
+  double m_cum_subtask_selection_prob{0.0};
   // clang-format on
 };
 

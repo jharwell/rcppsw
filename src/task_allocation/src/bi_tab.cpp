@@ -180,17 +180,17 @@ std::pair<double, double> bi_tab::subtask_sw_calc(void) {
       m_sel_prob.method()) {
     if (kSubtaskSelSrcExec == mc_subtask_sel_input) {
       prob_12 = m_sel_prob(&m_child1->task_exec_estimate(),
-                                 &m_child2->task_exec_estimate());
+                           &m_child2->task_exec_estimate());
       prob_21 = m_sel_prob(&m_child2->task_exec_estimate(),
-                                 &m_child1->task_exec_estimate());
+                           &m_child1->task_exec_estimate());
     } else if (kSubtaskSelSrcInterface == mc_subtask_sel_input) {
       int child1_id = m_child1->task_last_active_interface();
       int child2_id = m_child2->task_last_active_interface();
       if (child1_id >= 0 && child2_id >= 0) {
         prob_12 = m_sel_prob(&m_child1->task_interface_estimate(child1_id),
-                                   &m_child2->task_interface_estimate(child2_id));
+                             &m_child2->task_interface_estimate(child2_id));
         prob_21 = m_sel_prob(&m_child2->task_interface_estimate(child2_id),
-                                   &m_child1->task_interface_estimate(child1_id));
+                             &m_child1->task_interface_estimate(child1_id));
 
       } else {
         ER_WARN("Cannot calc subtask sel prob for TAB rooted at '%s': >= 1 task has no last interface",
@@ -211,6 +211,9 @@ std::pair<double, double> bi_tab::subtask_sw_calc(void) {
                                &m_child2->task_interface_estimate(0));
     prob_21 = m_sel_prob(&m_child2->task_interface_estimate(0),
                                &m_child1->task_interface_estimate(0));
+  } else {
+    ER_FATAL_SENTINEL("Bad subtask selection method '%s'",
+                      m_sel_prob.method().c_str());
   }
   return std::make_pair(prob_12, prob_21);
 } /* subtask_sw_calc() */

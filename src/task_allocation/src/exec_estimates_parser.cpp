@@ -31,7 +31,7 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Global Variables
  ******************************************************************************/
-const char exec_estimates_parser::kXMLRoot[];
+constexpr char exec_estimates_parser::kXMLRoot[];
 
 /*******************************************************************************
  * Member Functions

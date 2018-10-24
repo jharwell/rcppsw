@@ -1,5 +1,5 @@
 /**
- * @file distribution_metrics_collector.hpp
+ * @file bi_tdgraph_metrics_collector.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_TASKS_DISTRIBUTION_METRICS_COLLECTOR_HPP_
-#define INCLUDE_RCPPSW_METRICS_TASKS_DISTRIBUTION_METRICS_COLLECTOR_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_TASKS_BI_TDGRAPH_METRICS_COLLECTOR_HPP_
+#define INCLUDE_RCPPSW_METRICS_TASKS_BI_TDGRAPH_METRICS_COLLECTOR_HPP_
 
 /*******************************************************************************
  * Includes
@@ -38,22 +38,22 @@ NS_START(rcppsw, metrics, tasks);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class distribution_metrics_collector
+ * @class bi_tdgraph_metrics_collector
  * @ingroup metrics tasks
  *
- * @brief Collector for metrics about the current distribution of tasks in a
- * collection of agents executing tasks. Metrics are written out at the
- * specified interval.
+ * @brief Collector for metrics about the current task_dist of tasks in
+ * a collection of agents executing tasks in a \ref bi_tdgraph. Metrics are
+ * written out at the specified interval.
  */
-class distribution_metrics_collector : public base_metrics_collector {
+class bi_tdgraph_metrics_collector : public base_metrics_collector {
  public:
   /**
    * @param ofname Output file name.
    * @param interval Collection interval.
    */
-  distribution_metrics_collector(const std::string& ofname,
-                                 uint interval,
-                                 uint decomposition_depth);
+  bi_tdgraph_metrics_collector(const std::string& ofname,
+                               uint interval,
+                               uint decomposition_depth);
 
   void reset(void) override;
   void collect(const rcppsw::metrics::base_metrics& metrics) override;
@@ -76,4 +76,4 @@ class distribution_metrics_collector : public base_metrics_collector {
 NS_END(tasks, metrics, rcppsw);
 
 
-#endif /* INCLUDE_RCPPSW_METRICS_TASKS_DISTRIBUTION_METRICS_COLLECTOR_HPP_ */
+#endif /* INCLUDE_RCPPSW_METRICS_TASKS_BI_TDGRAPH_METRICS_COLLECTOR_HPP_ */

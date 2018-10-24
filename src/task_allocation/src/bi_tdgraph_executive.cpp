@@ -98,6 +98,7 @@ void bi_tdgraph_executive::handle_task_abort(polled_task *task) {
   if (update_exec_ests()) {
     task->exec_estimate_update(task->exec_time());
   }
+
   if (update_interface_ests()) {
     /*
      * Not unconditional/assert(), because it is possible to abort before we
@@ -138,15 +139,13 @@ void bi_tdgraph_executive::handle_task_finish(polled_task *task) {
     cb(task);
   } /* for(cb..) */
 
-  ER_ASSERT(-1 != task->task_last_active_interface(),
-            "Task '%s' completion without completing interface?",
-            task->name().c_str());
-  if (update_exec_ests()) {
-    task->exec_estimate_update(task->exec_time());
-  }
-  if (update_interface_ests()) {
+  /* Not all tasks have interfaces, so this can't be an assert */
+  if (-1 != task->task_last_active_interface() && update_interface_ests()) {
     task->interface_estimate_update(task->task_last_active_interface(),
                                     task->interface_time(task->task_last_active_interface()));
+  }
+  if (update_exec_ests()) {
+    task->exec_estimate_update(task->exec_time());
   }
   task->exec_time_reset();
   task->exec_time_update();
