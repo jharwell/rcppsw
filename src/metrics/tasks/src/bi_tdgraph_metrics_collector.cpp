@@ -1,5 +1,5 @@
 /**
- * @file distribution_metrics_collector.cpp
+ * @file bi_tdgraph_metrics_collector.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -21,10 +21,10 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/tasks/distribution_metrics_collector.hpp"
+#include "rcppsw/metrics/tasks/bi_tdgraph_metrics_collector.hpp"
 #include <cmath>
 
-#include "rcppsw/metrics/tasks/distribution_metrics.hpp"
+#include "rcppsw/metrics/tasks/bi_tdgraph_metrics.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
 
 /*******************************************************************************
@@ -35,7 +35,7 @@ NS_START(rcppsw, metrics, tasks);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-distribution_metrics_collector::distribution_metrics_collector(
+bi_tdgraph_metrics_collector::bi_tdgraph_metrics_collector(
     const std::string &ofname, uint interval, uint decomposition_depth)
     : base_metrics_collector(ofname, interval),
       m_int_depth_counts(decomposition_depth + 1, 0),
@@ -49,7 +49,7 @@ distribution_metrics_collector::distribution_metrics_collector(
  * Member Functions
  ******************************************************************************/
 std::string
-distribution_metrics_collector::csv_header_build(const std::string &header) {
+bi_tdgraph_metrics_collector::csv_header_build(const std::string &header) {
   std::string line = base_metrics_collector::csv_header_build(header);
 
   for (size_t i = 0; i < m_int_depth_counts.size(); ++i) {
@@ -78,14 +78,14 @@ distribution_metrics_collector::csv_header_build(const std::string &header) {
   return line;
 } /* csv_header_build() */
 
-void distribution_metrics_collector::reset(void) {
+void bi_tdgraph_metrics_collector::reset(void) {
   base_metrics_collector::reset();
   reset_after_interval();
 } /* reset() */
 
-void distribution_metrics_collector::collect(
+void bi_tdgraph_metrics_collector::collect(
     const rcppsw::metrics::base_metrics &metrics) {
-  auto &m = dynamic_cast<const distribution_metrics &>(metrics);
+  auto &m = dynamic_cast<const bi_tdgraph_metrics &>(metrics);
   ++m_int_depth_counts[m.current_task_depth()];
   ++m_int_task_counts[m.current_task_id()];
   ++m_int_tab_counts[m.current_task_tab()];
@@ -95,7 +95,7 @@ void distribution_metrics_collector::collect(
   ++m_cum_tab_counts[m.current_task_tab()];
 } /* collect() */
 
-bool distribution_metrics_collector::csv_line_build(std::string &line) {
+bool bi_tdgraph_metrics_collector::csv_line_build(std::string &line) {
   if (!((timestep() + 1) % interval() == 0)) {
     return false;
   }
@@ -126,7 +126,7 @@ bool distribution_metrics_collector::csv_line_build(std::string &line) {
   return true;
 } /* store_foraging_stats() */
 
-void distribution_metrics_collector::reset_after_interval(void) {
+void bi_tdgraph_metrics_collector::reset_after_interval(void) {
   m_int_depth_counts.assign(m_int_depth_counts.size(), 0);
   m_int_task_counts.assign(m_int_task_counts.size(), 0);
   m_int_tab_counts.assign(m_int_tab_counts.size(), 0);

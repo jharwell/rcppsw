@@ -1,5 +1,5 @@
 /**
- * @file distribution_metrics.hpp
+ * @file bi_tdgraph_metrics.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_TASKS_DISTRIBUTION_METRICS_HPP_
-#define INCLUDE_RCPPSW_METRICS_TASKS_DISTRIBUTION_METRICS_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_TASKS_BI_TDGRAPH_METRICS_HPP_
+#define INCLUDE_RCPPSW_METRICS_TASKS_BI_TDGRAPH_METRICS_HPP_
 
 /*******************************************************************************
  * Includes
@@ -36,17 +36,17 @@ NS_START(rcppsw, metrics, tasks);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class distribution_metrics
+ * @class bi_tdgraph_metrics
  * @ingroup metrics tasks
  *
  * @brief Interface defining metrics that can be collected about the current
- * task distribution of a \ref tdgraph.
+ * task dist of a \ref bi_tdgraph.
  *
  */
-class distribution_metrics : public virtual base_metrics {
+class bi_tdgraph_metrics : public virtual base_metrics {
  public:
-  distribution_metrics(void) = default;
-  ~distribution_metrics(void) override = default;
+  bi_tdgraph_metrics(void) = default;
+  ~bi_tdgraph_metrics(void) override = default;
 
   /**
    * @brief Return the depth of the curent task within the task decomposition
@@ -56,7 +56,7 @@ class distribution_metrics : public virtual base_metrics {
 
   /**
    * @brief Return a uuid for the current task, for use in calculating overall
-   * task distribution, or -1 if no current task.
+   * task bi_tdgraph_dist, or -1 if no current task.
    */
   virtual int current_task_id(void) const = 0;
 
@@ -68,4 +68,4 @@ class distribution_metrics : public virtual base_metrics {
 
 NS_END(tasks, metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_TASKS_DISTRIBUTION_METRICS_HPP_ */
+#endif /* INCLUDE_RCPPSW_METRICS_TASKS_BI_TDGRAPH_METRICS_HPP_ */
