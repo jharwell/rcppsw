@@ -25,10 +25,10 @@
  * Includes
 ******************************************************************************/
 #include <iostream>
-#include <assert.h>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/utils/string_utils.hpp"
+#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -43,79 +43,113 @@ NS_START(rcppsw, math);
  * @ingroup math
  *
  * @brief Convenience class holding a [min, max] range. Makes comparisons like
- * "is this number in this range" much more intuitive and easy to debug.
+ * "is this number in this range" much more intuitive and easy to debug. All
+ * ranges must be non-empty sets, meaning that the min must not be equal to the
+ * max (if it is an assertion will trigger).
  */
-
 template<typename T>
-class range {
+class range : public er::client<range<T>> {
  public:
-  range(const T& min, const T& max)
-      : m_min(min),
-        m_max(max),
-        m_span(m_max - m_min) {
-    assert(min <= max);
+  static bool overlap(const range<T>& r1, const range<T>& r2) {
+    return r1.overlap(r2);
   }
 
-  T get_min(void) const { return m_min; }
-  T get_max(void) const { return m_max; }
-
-  void set_min(const T& min) {
-    assert(min <= m_max);
-    m_min = min;
-    m_span = m_max;
-    m_span -= m_min;
+  range(const T& lb, const T& ub)
+      : ER_CLIENT_INIT("rcppsw.math.range"),
+        m_lb(lb),
+        m_ub(ub),
+        m_span(m_ub - m_lb) {
+    ER_ASSERT(lb < ub, "Lower bound >= upper bound");
   }
 
-  void set_max(const T& max) {
-    assert(m_min <= max);
-    m_max = max;
-    m_span = m_max;
-    m_span -= m_min;
-  }
+  T lb(void) const { return m_lb; }
+  T ub(void) const { return m_ub; }
 
   T span(void) const { return m_span; }
 
-  void set(const T& min, const T& max) {
-    assert(min <= max);
-    m_min = min;
-    m_max = max;
-    m_span = m_max;
-    m_span -= m_min;
+  void lb(const T& lb) {
+    ER_ASSERT(lb < m_ub, "Lower bound >= upper bound");
+    m_lb = lb;
+    m_span = m_ub;
+    m_span -= m_lb;
+  }
+
+  void ub(const T& ub) {
+    ER_ASSERT(ub > m_ub, "Lower bound >= upper bound");
+
+    m_ub = ub;
+    m_span = m_ub;
+    m_span -= m_lb;
+  }
+
+  void set(const T& lb, const T& ub) {
+    ER_ASSERT(lb < m_ub, "Lower bound >= upper bound");
+    m_lb = lb;
+    m_ub = ub;
+    m_span = m_ub;
+    m_span -= m_lb;
   }
 
   /**
-   * @brief Determine if a value is within the range [min, max] (boundary points
+   * @brief Determine if a value is within the range [lb, ub] (boundary points
    * included).
    *
    * @param value The value to test.
    */
-  bool value_within(const T& value) const {
-    return value >= m_min && value <= m_max;
-  }
-  bool overlaps_with(const range<T>& other) const {
-    return this->value_within(other.m_min) ||
-        this->value_within(other.m_max);
+  bool contains(const T& value) const {
+    return value >= m_lb && value <= m_ub;
   }
 
-  void wrap_value(T& value) const {
-    while (value > m_max) { value -= m_span; }
-    while (value < m_min) { value += m_span; }
+  /**
+   * @brief Determine if one range completely contains another (boundary points
+   * are included with both ranges). Both ranges must be templated on the same
+   * type, or a compile time error will result (I think).
+   */
+  bool contains(const range<T>& other) const {
+    return this->contains(other.m_lb) && this->contains(other.m_ub);
+  }
+
+  /**
+   * @brief Determine if one range overlaps with another. Both ranges must be
+   * templated on the same type, or a compile time error will result (I think).
+   */
+  bool overlaps_with(const range<T>& other) const {
+    return this->contains(other.m_lb) || this->contains(other.m_ub);
+  }
+
+  /**
+   * @brief Wrap the specified value into the range using wrap-around
+   * addition/subtraction.
+   *
+   * @return The wrapped value.
+   */
+  T wrap_value(T& value) const {
+    while (value > m_ub) { value -= m_span; }
+    while (value < m_lb) { value += m_span; }
+    return value;
+  }
+
+  /**
+   * @brief Return a string representation of the range in the form of [lb,ub]
+   */
+  std::string to_str(void) const {
+    return "[" + std::to_string(m_lb) + ":" + std::to_string(m_ub) + "]";
   }
 
   friend std::ostream& operator<<(std::ostream& stream, const range& c_range) {
-    stream << c_range.m_min << ":"
-       << c_range.m_max;
+    stream << c_range.to_str();
     return stream;
   }
   /**
-   * @brief Expand/create a range around the specified value.
+   * @brief Translate the current range to the specified value, returning a new
+   * range centered at that value.
    *
-   * @return A new range.
+   * @return The new translated range.
    */
-  range expand(const T& value) { return range(m_min - value, m_max + value); }
+  range translate(const T& value) { return range(m_lb - value, m_ub + value); }
 
   /**
-   * @brief For parsing a range from a string in the form of <min>:<max>
+   * @brief For parsing a range from a string in the form of <lb>:<ub>
    */
   friend std::istream& operator>>(std::istream& is, range& r) {
     T values[2];
@@ -126,11 +160,16 @@ class range {
 
  private:
   // clang-format off
-  T m_min;
-  T m_max;
+  T m_lb;
+  T m_ub;
   T m_span;
   // clang-format on
 };
+
+using rangei = range<int>;
+using ranged = range<double>;
+using rangef = range<float>;
+using rangeui = range<uint>;
 
 NS_END(math, rcppsw);
 
