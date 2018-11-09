@@ -75,6 +75,11 @@ class execution_metrics_collector : public base_metrics_collector,
   uint              m_int_abort_count{0};
 
   /**
+   * @brief # Times at their interface during an interval.
+   */
+  uint              m_int_interface_count{0};
+
+  /**
    * @brief Execution times of the task within an interval.
    */
   double            m_int_exec_time{};
@@ -89,6 +94,7 @@ class execution_metrics_collector : public base_metrics_collector,
 
   uint              m_cum_complete_count{0};
   uint              m_cum_abort_count{0};
+  uint              m_cum_interface_count{0};
   double            m_cum_exec_time{0.0};
   double            m_cum_interface_time{0.0};
   ta::time_estimate m_cum_exec_estimate{0};

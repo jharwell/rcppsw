@@ -45,18 +45,19 @@ std::string
 bi_tab_metrics_collector::csv_header_build(const std::string &header) {
   // clang-format off
   std::string line = base_metrics_collector::csv_header_build(header);
-  return line + "int_subtask1_count" + separator() +
-      "cum_subtask1_count" + separator() +
-      "int_subtask2_count" + separator() +
-      "cum_subtask2_count" + separator() +
-      "int_partition_count" + separator() +
-      "cum_partition_count" + separator() +
-      "int_no_partition_count" + separator() +
-      "cum_no_partition_count" + separator() +
-      "int_task_sw_count" + separator() +
-      "cum_task_sw_count" + separator() +
-      "int_task_depth_sw_count" + separator() +
-      "cum_task_depth_sw_count" + separator() +
+  return line + \
+      "int_avg_subtask1_count" + separator() +
+      "cum_avg_subtask1_count" + separator() +
+      "int_avg_subtask2_count" + separator() +
+      "cum_avg_subtask2_count" + separator() +
+      "int_avg_partition_count" + separator() +
+      "cum_avg_partition_count" + separator() +
+      "int_avg_no_partition_count" + separator() +
+      "cum_avg_no_partition_count" + separator() +
+      "int_avg_task_sw_count" + separator() +
+      "cum_avg_task_sw_count" + separator() +
+      "int_avg_task_depth_sw_count" + separator() +
+      "cum_avg_task_depth_sw_count" + separator() +
       "int_avg_partition_prob" + separator() +
       "cum_avg_partition_prob" + separator() +
       "int_avg_subtask_selection_prob" + separator() +
@@ -99,27 +100,61 @@ bool bi_tab_metrics_collector::csv_line_build(std::string &line) {
   if (!((timestep() + 1) % interval() == 0)) {
     return false;
   }
-
-  line += std::to_string(m_int_subtask1_count) + separator();
-  line += std::to_string(m_cum_subtask1_count) + separator();
-  line += std::to_string(m_int_subtask2_count) + separator();
-  line += std::to_string(m_cum_subtask2_count) + separator();
-  line += std::to_string(m_int_partition_count) + separator();
-  line += std::to_string(m_cum_partition_count) + separator();
-  line += std::to_string(m_int_no_partition_count) + separator();
-  line += std::to_string(m_cum_no_partition_count) + separator();
-  line += std::to_string(m_int_task_sw_count) + separator();
-  line += std::to_string(m_cum_task_sw_count) + separator();
-  line += std::to_string(m_int_task_depth_sw_count) + separator();
-  line += std::to_string(m_cum_task_depth_sw_count) + separator();
-
   /*
    * We want to capture average probability per robot, not per
    * timestep/interval, so we divide by the total # of task allocations
    * performed (# partitions + # no partitions).
    */
-  int int_allocs = m_int_partition_count + m_int_no_partition_count;
-  int cum_allocs = m_cum_partition_count + m_cum_no_partition_count;
+  double int_allocs = m_int_partition_count + m_int_no_partition_count;
+  double cum_allocs = m_cum_partition_count + m_cum_no_partition_count;
+
+  line += (int_allocs > 0)
+          ? std::to_string(m_int_subtask1_count / int_allocs) : "0";
+  line += separator();
+
+  line += (cum_allocs > 0)
+          ? std::to_string(m_cum_subtask1_count / cum_allocs) : "0";
+  line += separator();
+
+  line += (int_allocs > 0)
+          ? std::to_string(m_int_subtask2_count / int_allocs) : "0";
+  line += separator();
+
+  line += (cum_allocs > 0)
+          ? std::to_string(m_cum_subtask2_count / cum_allocs) : "0";
+  line += separator();
+
+  line += (int_allocs > 0)
+          ? std::to_string(m_int_partition_count / int_allocs) : "0";
+  line += separator();
+
+  line += (cum_allocs > 0)
+          ? std::to_string(m_cum_partition_count / cum_allocs) : "0";
+  line += separator();
+
+  line += (int_allocs > 0)
+          ? std::to_string(m_int_no_partition_count / int_allocs) : "0";
+  line += separator();
+
+  line += (cum_allocs > 0)
+          ? std::to_string(m_cum_no_partition_count / cum_allocs) : "0";
+  line += separator();
+
+  line += (int_allocs > 0)
+          ? std::to_string(m_int_task_sw_count / int_allocs) : "0";
+  line += separator();
+
+  line += (cum_allocs > 0)
+          ? std::to_string(m_cum_task_sw_count / cum_allocs) : "0";
+  line += separator();
+
+  line += (int_allocs > 0)
+          ? std::to_string(m_int_task_depth_sw_count / int_allocs) : "0";
+  line += separator();
+
+  line += (cum_allocs > 0)
+          ? std::to_string(m_cum_task_depth_sw_count / cum_allocs) : "0";
+  line += separator();
 
   line += (int_allocs > 0)
           ? std::to_string(m_int_partition_prob / int_allocs): "0";
