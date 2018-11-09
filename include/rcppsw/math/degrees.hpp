@@ -178,7 +178,8 @@ class degrees {
   }
 
   bool operator==(const degrees& other) const {
-    return std::fabs(m_value - other.m_value) <= std::numeric_limits<double>::epsilon();
+    return std::fabs(m_value - other.m_value) <=
+        std::numeric_limits<double>::epsilon();
   }
 
   bool operator!=(const degrees& other) const {
@@ -190,6 +191,7 @@ class degrees {
    * @brief The signed normalization range [-180, 180]
    */
   static const range<degrees> kSignedRange;
+
   /**
    * @brief The unsigned normalization range [0, 360]
    */
