@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <cmath>
 #include <limits>
+#include <string>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/range.hpp"
@@ -56,9 +57,21 @@ class degrees {
    * @brief Initialize from the specified value in DEGREES.
    */
   explicit degrees(double value) : m_value(value) {}
+
+  /**
+   * @brief Initialize from the specified value in RADIANS.
+   */
   explicit degrees(const radians& r);
 
   double value(void) const { return m_value; }
+
+  double operator()(void) const { return value(); }
+
+  /**
+   * @brief Set the current value in degrees.
+   *
+   * @param value In DEGREES.
+   */
   void set(double value) { m_value = value; }
 
   double abs_value(void) const { return std::abs(m_value); }
@@ -72,11 +85,16 @@ class degrees {
   }
 
   /**
-   * @brief Normalizes the value in the range [0, 360]
+   * @brief Normalizes the value in the range [0, 360].
    */
   degrees& unsigned_normalize(void) {
     kUnsignedRange.wrap_value(*this);
     return (*this);
+  }
+
+  std::string to_str(void) const {
+    return "deg(" + std::to_string(m_value) + ") -> rad(" +
+        std::to_string(m_value * kDEGREES_TO_RADIANS / M_PI) + ")";
   }
 
   degrees& operator+(void) {
@@ -160,7 +178,7 @@ class degrees {
   }
 
   bool operator==(const degrees& other) const {
-    return std::fabs(m_value - other.m_value) < std::numeric_limits<double>::epsilon();
+    return std::fabs(m_value - other.m_value) <= std::numeric_limits<double>::epsilon();
   }
 
   bool operator!=(const degrees& other) const {

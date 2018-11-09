@@ -1,5 +1,5 @@
 /**
- * @file degrees.cpp
+ * @file degrees-test.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -21,36 +21,45 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#define CATCH_CONFIG_MAIN
+#define CATCH_CONFIG_PREFIX_ALL
+#include "catch.hpp"
 #include "rcppsw/math/degrees.hpp"
-#include <iostream>
+#include "rcppsw/math/radians.hpp"
 #include "rcppsw/math/angles.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace math = rcppsw::math;
 
 /*******************************************************************************
- * Class Constants
+ * Test Cases
  ******************************************************************************/
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wglobal-constructors"
-const range<degrees> degrees::kSignedRange(degrees(-180.0), degrees(180.0));
-const range<degrees> degrees::kUnsignedRange(degrees(0.0), degrees(360.0));
-const double degrees::kDEGREES_TO_RADIANS(M_PI / 180.0);
-#pragma clang diagnostic pop
+CATCH_TEST_CASE("Conversion test", "[degrees]") {
+  math::degrees t0(90);
+  math::degrees t1(180);
+  math::degrees t2(to_degrees(math::radians(M_PI/2)));
+  math::degrees t3(to_degrees(math::radians(M_PI)));
 
-/*******************************************************************************
- * Constructors/Destructors
- ******************************************************************************/
-degrees::degrees(const radians &r) : m_value(to_degrees(r).value()) {}
+  CATCH_REQUIRE(90 == t0());
+  CATCH_REQUIRE(M_PI/2 == to_radians(t0).value());
 
-/*******************************************************************************
- * Non-Member Functions
- ******************************************************************************/
-std::ostream &operator<<(std::ostream &stream, const degrees &d) {
-  stream << d.to_str();
-  return stream;
-} /* operator<<() */
+  CATCH_REQUIRE(M_PI/2 == to_radians(t2)());
+  CATCH_REQUIRE(M_PI == to_radians(t3)());
+}
 
-NS_END(math, rcppsw);
+CATCH_TEST_CASE("Math Test", "[degrees]") {
+  math::degrees t0(90);
+  math::degrees t1(180);
+  math::degrees t2(90);
+  math::degrees t3(180);
+
+  CATCH_REQUIRE(t1 - t0 == t0);
+  CATCH_REQUIRE(t3 - t2 == t2);
+  CATCH_REQUIRE(t1 + t0 == math::degrees(270));
+  CATCH_REQUIRE(t3 + t2 == math::degrees(270));
+
+  CATCH_REQUIRE((t0 += t0) == t3);
+  CATCH_REQUIRE((t1 -= t2) == t2);
+}

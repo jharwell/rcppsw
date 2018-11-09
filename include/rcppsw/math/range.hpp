@@ -25,6 +25,7 @@
  * Includes
 ******************************************************************************/
 #include <iostream>
+#include <string>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/utils/string_utils.hpp"
@@ -123,7 +124,7 @@ class range : public er::client<range<T>> {
    *
    * @return The wrapped value.
    */
-  T wrap_value(T& value) const {
+  T wrap_value(T value) const {
     while (value > m_ub) { value -= m_span; }
     while (value < m_lb) { value += m_span; }
     return value;
@@ -169,7 +170,7 @@ class range : public er::client<range<T>> {
 using rangei = range<int>;
 using ranged = range<double>;
 using rangef = range<float>;
-using rangeui = range<uint>;
+using rangeu = range<uint>;
 
 NS_END(math, rcppsw);
 

@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/math/radians.hpp"
-#include "rcppsw/math/angles.hpp"
 #include <iostream>
+#include "rcppsw/math/angles.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -42,9 +42,9 @@ const radians radians::kPI_OVER_THREE(M_PI / 3.0);
 const radians radians::kPI_OVER_FOUR(M_PI / 4.0);
 const radians radians::kZERO(0.0);
 
-const double radians::kRADIANS_TO_DEGREES(180.0 / radians::kPI.value());
-const range<radians> radians::kSignedRange(-radians::kPI, radians::kPI);
-const range<radians> radians::kUnsignedRange(radians(), radians::kTWO_PI);
+const double radians::kRADIANS_TO_DEGREES(180.0 / M_PI);
+const range<radians> radians::kSignedRange(-radians(M_PI), radians(M_PI));
+const range<radians> radians::kUnsignedRange(radians(0), radians(2*M_PI));
 #pragma clang diagnostic pop
 
 /*******************************************************************************

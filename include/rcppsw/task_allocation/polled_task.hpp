@@ -28,6 +28,7 @@
 #include "rcppsw/patterns/visitor/visitable.hpp"
 #include "rcppsw/task_allocation/executable_task.hpp"
 #include "rcppsw/task_allocation/taskable.hpp"
+#include "rcppsw/math/range.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -71,9 +72,9 @@ class polled_task : public executable_task, public taskable {
    * @brief Initialize the execution time estimates of the task randomly within
    * the specified range.
    */
-  void exec_estimate_init(uint lb, uint ub) {
-    executable_task::exec_estimate_init(
-        static_cast<uint>(std::rand()) % (ub - lb + 1) + lb);
+  void exec_estimate_init(const math::rangeu& bounds) {
+    executable_task::exec_estimate_init(std::rand() % (bounds.ub() - bounds.lb() + 1) +
+                                        bounds.lb());
   }
 
  private:

@@ -53,7 +53,7 @@ void exec_estimates_parser::parse(const ticpp::Element& node) {
      * estimate.
      */
     for (auto &s : m_task_names) {
-      math::rangeui tmp{0, 0};
+      math::rangeu tmp{0, 0};
       get_node_attribute(enode, s, tmp);
       m_params->ranges.insert({s, tmp});
     } /* for(&s..) */

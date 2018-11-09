@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <cmath>
 #include <limits>
+#include <string>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/range.hpp"
@@ -65,12 +66,8 @@ class radians {
    */
   void set(double value) { m_value = value; }
 
-  /**
-   * @brief Sets the value from a value in degrees.
-   */
-  void set_from_deg(double value) { m_value = value / kRADIANS_TO_DEGREES; }
-
   double value(void) const { return m_value; }
+  double operator()(void) const { return value(); }
   double abs_value(void) const { return std::abs(m_value); }
 
   /**
@@ -87,6 +84,12 @@ class radians {
   radians& unsigned_normalize(void) {
     kUnsignedRange.wrap_value(*this);
     return *this;
+  }
+
+  std::string to_str(void) const {
+    return "rad(" + std::to_string(m_value) + ") -> deg(" +
+        std::to_string(m_value * radians::kRADIANS_TO_DEGREES / kPI.value()) +
+        ")";
   }
 
   radians& operator+(void) {
@@ -162,7 +165,8 @@ class radians {
   }
 
   bool operator==(const radians& other) const {
-    return std::fabs(m_value - other.m_value) < std::numeric_limits<double>::epsilon();
+    return std::fabs(m_value - other.m_value) <
+      std::numeric_limits<double>::epsilon();
   }
 
   bool operator!=(const radians& other) const {
