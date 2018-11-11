@@ -80,16 +80,14 @@ class degrees {
    * @brief Normalizes the value in the range [-180, 180]
    */
   degrees& signed_normalize(void) {
-    kSignedRange.wrap_value(*this);
-    return (*this);
+    return *this = kSignedRange.wrap_value(*this);
   }
 
   /**
    * @brief Normalizes the value in the range [0, 360].
    */
   degrees& unsigned_normalize(void) {
-    kUnsignedRange.wrap_value(*this);
-    return (*this);
+    return *this = kUnsignedRange.wrap_value(*this);
   }
 
   std::string to_str(void) const {
@@ -184,6 +182,11 @@ class degrees {
 
   bool operator!=(const degrees& other) const {
     return !(*this == other);
+  }
+
+  friend std::istream& operator>>(std::istream& is, degrees& d) {
+    is >> d.m_value;
+    return is;
   }
 
  private:

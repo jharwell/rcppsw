@@ -25,6 +25,7 @@
 #define CATCH_CONFIG_PREFIX_ALL
 #include "catch.hpp"
 #include "rcppsw/math/vector2.hpp"
+#include "rcppsw/math/angles.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -70,6 +71,14 @@ CATCH_TEST_CASE("Scale test", "[vector2]") {
   t0.scale(0.5);
   CATCH_REQUIRE(1.5 == t0.x());
   CATCH_REQUIRE(2.0 == t0.y());
+}
+CATCH_TEST_CASE("Angle test", "[vector2]") {
+  math::vector2d t0(1, 1);
+  CATCH_REQUIRE(45 == to_degrees(t0.angle()).value());
+  math::vector2d t1(-1, -1);
+  CATCH_REQUIRE(225 == to_degrees(t1.angle()).unsigned_normalize().value());
+  math::vector2d t2(-1, 0);
+  CATCH_REQUIRE(180 == to_degrees(t2.angle()).unsigned_normalize().value());
 }
 
 CATCH_TEST_CASE("Operator test", "[vector2]") {

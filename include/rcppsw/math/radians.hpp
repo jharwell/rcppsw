@@ -56,6 +56,8 @@ class radians {
   static const radians kZERO;
   static const double kRADIANS_TO_DEGREES;
 
+  static radians abs(const radians& r) { return radians(r.abs_value()); }
+
   radians(void) : m_value(0.0) {}
 
   explicit radians(double value) : m_value(value) {}
@@ -70,26 +72,30 @@ class radians {
   double operator()(void) const { return value(); }
   double abs_value(void) const { return std::abs(m_value); }
 
+
   /**
    * @brief Normalizes the value in the range [-pi, pi].
    */
   radians& signed_normalize(void) {
-    kSignedRange.wrap_value(*this);
-    return *this;
+    return *this = kSignedRange.wrap_value(*this);
   }
 
   /**
    * @brief Normalizes the value in the range [0, 2pi]
    */
   radians& unsigned_normalize(void) {
-    kUnsignedRange.wrap_value(*this);
-    return *this;
+    return *this = kUnsignedRange.wrap_value(*this);
   }
 
   std::string to_str(void) const {
     return "rad(" + std::to_string(m_value) + ") -> deg(" +
         std::to_string(m_value * radians::kRADIANS_TO_DEGREES / kPI.value()) +
         ")";
+  }
+
+  friend std::istream& operator>>(std::istream& is, radians& r) {
+    is >> r.m_value;
+    return is;
   }
 
   radians& operator+(void) {

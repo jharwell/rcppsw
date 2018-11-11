@@ -24,11 +24,11 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <argos3/core/utility/math/vector2.h>
 #include <utility>
 #include <string>
 
 #include "rcppsw/patterns/state_machine/simple_fsm.hpp"
+#include "rcppsw/math/radians.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -58,7 +58,7 @@ class differential_drive_fsm : public state_machine::simple_fsm {
    *                      heading that will not trigger a hard (in place) turn.
    */
   differential_drive_fsm(double max_speed,
-                         argos::CRadians soft_turn_max);
+                         const math::radians& soft_turn_max);
 
   /*
    * @brief Gets a direction vector as input and transforms it into wheel
@@ -76,7 +76,7 @@ class differential_drive_fsm : public state_machine::simple_fsm {
    *              instead.
    */
   void change_velocity(double speed,
-                       const argos::CRadians& angle,
+                       const math::radians& angle,
                        const std::pair<bool, bool>& force = std::make_pair(false,
                                                                            false));
 
@@ -92,7 +92,7 @@ class differential_drive_fsm : public state_machine::simple_fsm {
    *                apply to which wheel, so that the proper turn direction is
    *                executed.
    */
-  void set_wheel_speeds(double speed1, double speed2, argos::CRadians heading);
+  void set_wheel_speeds(double speed1, double speed2, math::radians heading);
 
   /**
    * @brief Clamp the desired speed to a maximum (maximum will be either the
@@ -120,12 +120,12 @@ class differential_drive_fsm : public state_machine::simple_fsm {
   struct turn_data : public state_machine::event_data {
     turn_data(std::pair<bool, bool> force_,
               double speed_,
-              argos::CRadians angle_)
+              math::radians angle_)
         : force(std::move(force_)), speed(speed_), angle(angle_) {}
 
     std::pair<bool, bool> force;
     double speed;
-    argos::CRadians angle;
+    math::radians angle;
   };
 
   /**
@@ -151,9 +151,9 @@ class differential_drive_fsm : public state_machine::simple_fsm {
     return &kSTATE_MAP[index];
   }
   // clang-format off
-  const double                    mc_max_speed;
-  const argos::CRadians           mc_soft_turn_max;
-  std::pair<double, double>       m_wheel_speeds;
+  const double              mc_max_speed;
+  const math::radians       mc_soft_turn_max;
+  std::pair<double, double> m_wheel_speeds;
   // clang-format on
 };
 

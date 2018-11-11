@@ -24,7 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <argos3/core/utility/math/angles.h>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/base_params.hpp"
 

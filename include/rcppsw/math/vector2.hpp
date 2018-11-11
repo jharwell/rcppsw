@@ -87,7 +87,7 @@ class vector2 {
    * @param x The X coordinate.
    * @param y The Y coordinate.
    */
-  vector2(T x, T y) : m_x(x), m_y(y) {}
+  vector2(const T& x, const T& y) : m_x(x), m_y(y) {}
 
   /**
    * @brief Initializes the vector coordinates from polar coordinates.
@@ -102,8 +102,8 @@ class vector2 {
 
   T x(void) const { return m_x; }
   T y(void) const { return m_y; }
-  void x(T x) { m_x = x; }
-  void y(T y) { m_y = y; }
+  void x(const T& x) { m_x = x; }
+  void y(const T& y) { m_y = y; }
 
   /**
    * @brief Sets the vector contents from Cartesian coordinates.
@@ -111,7 +111,7 @@ class vector2 {
    * @param x The new X coordinate.
    * @param y The new Y coordinate.
    */
-  void set(T x, T y) {
+  void set(const T& x, const T& y) {
     m_x = x;
     m_y = y;
   }
@@ -122,7 +122,7 @@ class vector2 {
    * @param length The length of the vector.
    * @param angle The angle of the vector (range [0,2pi)
    */
-  void set_from_polar(T length, const radians& angle) {
+  void set_from_polar(const T& length, const radians& angle) {
     m_x = std::cos(angle.value()) * length;
     m_y = std::sin(angle.value()) * length;
   }
@@ -156,7 +156,7 @@ class vector2 {
   /**
    * @brief Return the angle of this vector.
    */
-  radians angle(void) const { return std::atan2(m_y, m_x); }
+  radians angle(void) const { return radians(std::atan2(m_y, m_x)); }
 
   /**
    * @brief Rotate this vector by the specified angle.
@@ -185,7 +185,7 @@ class vector2 {
    *
    * @return A reference to the scaled vector.
    */
-  vector2& scale(T scale_x, T scale_y) {
+  vector2& scale(const T& scale_x, const T& scale_y) {
     m_x *= scale_x;
     m_y *= scale_y;
     return *this;
@@ -198,7 +198,7 @@ class vector2 {
    *
    * @return A reference to the scaled vector.
    */
-  vector2& scale(T factor) { return scale(factor, factor); }
+  vector2& scale(const T& factor) { return scale(factor, factor); }
 
   /**
    * @brief Returns if this vector and the argument are considered equal,

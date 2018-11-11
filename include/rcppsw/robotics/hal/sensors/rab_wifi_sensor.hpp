@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <vector>
 #include "rcppsw/robotics/hal/wifi_packet.hpp"
+#include "rcppsw/math/radians.hpp"
 
 #if HAL_CONFIG == HAL_CONFIG_ARGOS_FOOTBOT
 #include <argos3/plugins/robots/generic/control_interface/ci_range_and_bearing_sensor.h>
@@ -61,16 +62,16 @@ class _rab_wifi_sensor  {
     /**
      * @brief Angle between source and receiver.
      */
-    argos::CRadians          hor_bearing;
+    math::radians          hor_bearing;
 
     /**
      * @brief Angle between robot XY plane and source.
      */
-    argos::CRadians          vert_bearing;
+    math::radians          vert_bearing;
 
     rab_wifi_packet(double _range,
-                    const argos::CRadians& _hor_bearing,
-                    const argos::CRadians& _vert_bearing) :
+                    const math::radians& _hor_bearing,
+                    const math::radians& _vert_bearing) :
         wifi_packet(),
         range(_range),
         hor_bearing(_hor_bearing),

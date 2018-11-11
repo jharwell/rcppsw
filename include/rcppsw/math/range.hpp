@@ -59,14 +59,12 @@ class range : public er::client<range<T>> {
       : ER_CLIENT_INIT("rcppsw.math.range"),
         m_lb(lb),
         m_ub(ub),
-        m_span(m_ub - m_lb) {
-    ER_ASSERT(lb < ub, "Lower bound >= upper bound");
-  }
+        m_span(m_ub - m_lb) {}
 
-  T lb(void) const { return m_lb; }
-  T ub(void) const { return m_ub; }
+  T lb(void) const __rcsw_check_return { return m_lb; }
+  T ub(void) const __rcsw_check_return { return m_ub; }
 
-  T span(void) const { return m_span; }
+  T span(void) const __rcsw_check_return { return m_span; }
 
   void lb(const T& lb) {
     ER_ASSERT(lb < m_ub, "Lower bound >= upper bound");
@@ -84,7 +82,7 @@ class range : public er::client<range<T>> {
   }
 
   void set(const T& lb, const T& ub) {
-    ER_ASSERT(lb < m_ub, "Lower bound >= upper bound");
+    ER_ASSERT(lb < ub, "Lower bound >= upper bound");
     m_lb = lb;
     m_ub = ub;
     m_span = m_ub;
@@ -124,7 +122,7 @@ class range : public er::client<range<T>> {
    *
    * @return The wrapped value.
    */
-  T wrap_value(T value) const {
+  T wrap_value(T value) const __rcsw_check_return {
     while (value > m_ub) { value -= m_span; }
     while (value < m_lb) { value += m_span; }
     return value;
@@ -134,7 +132,7 @@ class range : public er::client<range<T>> {
    * @brief Return a string representation of the range in the form of [lb,ub]
    */
   std::string to_str(void) const {
-    return "[" + std::to_string(m_lb) + ":" + std::to_string(m_ub) + "]";
+    return "[" + std::to_string(m_lb) + "-" + std::to_string(m_ub) + "]";
   }
 
   friend std::ostream& operator<<(std::ostream& stream, const range& c_range) {

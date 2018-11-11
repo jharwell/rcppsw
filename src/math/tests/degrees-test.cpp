@@ -54,6 +54,8 @@ CATCH_TEST_CASE("Math Test", "[degrees]") {
   math::degrees t1(180);
   math::degrees t2(90);
   math::degrees t3(180);
+  math::degrees t4(-60);
+  math::degrees t5(800);
 
   CATCH_REQUIRE(t1 - t0 == t0);
   CATCH_REQUIRE(t3 - t2 == t2);
@@ -62,4 +64,8 @@ CATCH_TEST_CASE("Math Test", "[degrees]") {
 
   CATCH_REQUIRE((t0 += t0) == t3);
   CATCH_REQUIRE((t1 -= t2) == t2);
+  CATCH_REQUIRE(300 == t4.unsigned_normalize().value());
+  CATCH_REQUIRE(-60 == t4.signed_normalize().value());
+  CATCH_REQUIRE(80 == t5.unsigned_normalize().value());
+  CATCH_REQUIRE(80 == t5.signed_normalize().value());
 }

@@ -48,12 +48,19 @@ class avoidance_force {
  public:
   explicit avoidance_force(const struct avoidance_force_params* params);
 
-  argos::CVector2 operator()(const boid&,
-                             const argos::CVector2& closest_obstacle) const;
+  /**
+   * @brief Calculate the avoidance force that should be applied to the
+   * robot. Avoidance force will point from the robot away from the cloest
+   * obstacle.
+   *
+   * @param closest The closest known obstacle to the robot.
+   */
+  math::vector2d operator()(const boid&,
+                             const math::vector2d& closest) const;
 
  private:
   // clang-format off
-  double m_max;
+  const double mc_max;
   // clang-format on
 };
 

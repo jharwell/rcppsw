@@ -36,7 +36,7 @@ NS_START(rcppsw, robotics, kinematics2D);
 differential_drive::differential_drive(
     const hal::actuators::differential_drive_actuator &actuator,
     drive_type type, double wheel_radius, double axle_length, double max_speed,
-    argos::CRadians soft_turn_max)
+    const math::radians& soft_turn_max)
     : ER_CLIENT_INIT("rcppsw.robotics.kinematics2D.differential_drive"),
       m_drive_type(type), m_wheel_radius(wheel_radius),
       m_axle_length(axle_length), m_max_speed(max_speed),
@@ -46,7 +46,7 @@ differential_drive::differential_drive(
     const hal::actuators::differential_drive_actuator &actuator,
     drive_type type, double wheel_radius, double axle_length, double max_speed)
     : differential_drive{actuator,    type,      wheel_radius,
-                         axle_length, max_speed, argos::CRadians()} {
+                         axle_length, max_speed, math::radians()} {
   assert(kFSMDrive != type);
 }
 /*******************************************************************************
@@ -67,7 +67,7 @@ status_t differential_drive::actuate(const kinematics::twist &twist) {
 } /* actuate() */
 
 status_t differential_drive::fsm_drive(double speed,
-                                       const argos::CRadians &angle,
+                                       const math::radians &angle,
                                        const std::pair<bool, bool> &force) {
   std::pair<double, double> speeds;
   ER_CHECK(kFSMDrive == m_drive_type, "Cannot actuate: not in FSM drive mode");
