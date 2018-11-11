@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <argos3/core/utility/math/angles.h>
 #include "rcppsw/params/base_params.hpp"
+#include "rcppsw/math/radians.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -40,8 +40,8 @@ NS_START(rcppsw, robotics, kinematics2D);
  * @ingroup robotics kinematics2D
  */
 struct differential_drive_params : public rcppsw::params::base_params {
-  argos::CRadians soft_turn_max{};
-  double max_speed{0.0};
+  math::radians soft_turn_max{};
+  double        max_speed{0.0};
 };
 
 NS_END(kinematics2D, robotics, rcppsw);

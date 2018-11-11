@@ -49,11 +49,11 @@ class polar_force {
  public:
   explicit polar_force(const struct polar_force_params* params);
 
-  argos::CVector2 operator()(const boid& entity,
-                             const argos::CVector2& source) const;
+  math::vector2d operator()(const boid& entity,
+                             const math::vector2d& source) const;
 
  private:
-  double m_max;
+  const double mc_max;
 };
 
 NS_END(steering2D, robotics, rcppsw);

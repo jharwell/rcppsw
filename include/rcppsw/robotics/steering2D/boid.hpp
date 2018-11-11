@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <argos3/core/utility/math/vector2.h>
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/math/vector2.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -52,7 +52,7 @@ class boid {
   /**
    * @brief Should return the current linear velocity of the entity.
    */
-  virtual argos::CVector2 linear_velocity(void) const = 0;
+  virtual math::vector2d linear_velocity(void) const = 0;
 
   /**
    * @brief Should return the current angular velocity of the entity.
@@ -69,7 +69,7 @@ class boid {
    * @brief Return the current position of the entity. Hopefully, this DOES vary
    * with time otherwise your entity is very uninteresting.
    */
-  virtual argos::CVector2 position(void) const = 0;
+  virtual math::vector2d position(void) const = 0;
 };
 
 NS_END(steering2D, robotics, rcppsw);

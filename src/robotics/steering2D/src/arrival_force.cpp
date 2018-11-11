@@ -39,35 +39,33 @@ arrival_force::arrival_force(const struct arrival_force_params *const params)
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-argos::CVector2 arrival_force::operator()(const boid &entity,
-                                          const argos::CVector2 &target) {
-  argos::CVector2 desired = target - entity.position();
-  double distance = desired.Length();
+math::vector2d arrival_force::operator()(const boid &entity,
+                                          const math::vector2d &target) {
+  math::vector2d desired = target - entity.position();
+  double distance = desired.length();
 
-  desired.Normalize();
+  desired.normalize();
   if (distance <= mc_slowing_radius) {
     m_within_slowing_radius = true;
-    desired.Scale(
-        std::max(mc_slowing_speed_min, mc_max * distance / mc_slowing_radius),
-        std::max(mc_slowing_speed_min, mc_max * distance / mc_slowing_radius));
+    desired.scale(std::max(mc_slowing_speed_min,
+                           mc_max * distance / mc_slowing_radius));
   } else {
     m_within_slowing_radius = false;
-    desired.Scale(mc_max, mc_max);
+    desired.scale(mc_max);
   }
   /*
    * Handle atan2() being discontinuous at angles ~pi.
    */
-  double angle_to_target = std::atan2(target.GetY() - entity.position().GetY(),
-                                      target.GetX() - entity.position().GetX());
-  double angle_diff =
-      angle_to_target - entity.linear_velocity().Angle().GetValue();
+  double angle_to_target = std::atan2(target.y() - entity.position().y(),
+                                      target.x() - entity.position().x());
+  double angle_diff = angle_to_target - entity.linear_velocity().angle().value();
   angle_diff = std::atan2(std::sin(angle_diff), std::cos(angle_diff));
 
   if (std::fabs(angle_diff - m_last_angle) > M_PI) {
     angle_diff -= std::copysign(2 * M_PI, angle_diff);
   }
   m_last_angle = angle_diff;
-  argos::CVector2 arrival(desired.Length(), angle_diff);
+  math::vector2d arrival(desired.length(), angle_diff);
   return arrival;
 } /* operator()() */
 

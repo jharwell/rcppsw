@@ -76,7 +76,7 @@ class differential_drive : public kinematics2D::model,
                      double wheel_radius,
                      double axle_length,
                      double max_speed,
-                     argos::CRadians soft_turn_max);
+                     const math::radians& soft_turn_max);
 
   differential_drive(const hal::actuators::differential_drive_actuator& actuator,
                      drive_type type,
@@ -123,7 +123,7 @@ class differential_drive : public kinematics2D::model,
    * @return \ref status_t.
    */
   status_t fsm_drive(double speed,
-                     const argos::CRadians& angle,
+                     const math::radians& angle,
                      const std::pair<bool, bool>& force = std::make_pair(false,
                                                                          false));
   /**

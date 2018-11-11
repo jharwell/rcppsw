@@ -1,7 +1,7 @@
 /**
- * @file avoidance_force.cpp
+ * @file vector2.cpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,31 +21,28 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/robotics/steering2D/avoidance_force.hpp"
-#include "rcppsw/robotics/steering2D/avoidance_force_params.hpp"
+#include "rcppsw/math/vector2.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, robotics, steering2D);
+NS_START(rcppsw, math);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Class Constants
  ******************************************************************************/
-avoidance_force::avoidance_force(const struct avoidance_force_params *params)
-    : mc_max(params->max) {}
+template<>
+const vector2d vector2d::X(1.0, 0);
+template<>
+const vector2f vector2f::X(1.0, 0);
+template<>
+const vector2i vector2i::X(1, 0);
 
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-math::vector2d avoidance_force::operator()(const boid &,
-                                           const math::vector2d &closest) const {
-  if (closest.length() > 0) {
-    math::vector2d avoidance = -closest;
-    return avoidance.normalize() * mc_max;
-  } else {
-    return {0, 0}; /* no threatening obstacles = no avoidance */
-  }
-} /* operator()() */
+template<>
+const vector2d vector2d::Y(0, 1.0);
+template<>
+const vector2f vector2f::Y(0, 1.0);
+template<>
+const vector2i vector2i::Y(0, 1);
 
-NS_END(steering2D, robotics, rcppsw);
+NS_END(math, rcppsw);
