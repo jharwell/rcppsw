@@ -30,12 +30,21 @@
 /*******************************************************************************
  * Macro Definitions
  ******************************************************************************/
-#define TASK_WRAPPER_DECLARE(ret, func)         \
+#define TASK_WRAPPER_DECLAREC(ret, func)         \
   ret func(void) const override
-#define TASK_WRAPPER_DEFINE(ret, class, func, handle)           \
+#define TASK_WRAPPER_DECLARE(ret, func)        \
+  ret func(void) override
+#define TASK_WRAPPER_DEFINEC(ret, class, func, handle)           \
   ret class::func(void) const { return (handle).func(); }
-#define TASK_WRAPPER_DEFINE_PTR(ret, class, func, handle)       \
+#define TASK_WRAPPER_DEFINE(ret, class, func, handle)           \
+  ret class::func(void) { return (handle).func(); }
+#define TASK_WRAPPER_DEFINEC_PTR(ret, class, func, handle)       \
   ret class::func(void) const { if (nullptr != (handle)) {      \
+      return (handle)->func(); }                                \
+    return static_cast<ret>(0);                                 \
+  }
+#define TASK_WRAPPER_DEFINE_PTR(ret, class, func, handle)       \
+  ret class::func(void) { if (nullptr != (handle)) {      \
       return (handle)->func(); }                                \
     return static_cast<ret>(0);                                 \
   }

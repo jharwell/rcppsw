@@ -57,7 +57,7 @@ executable_task::executable_task(const std::string &name,
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-int executable_task::active_interface(void) const {
+__rcsw_pure int executable_task::active_interface(void) const {
   for (size_t i = 0; i < m_interface_in_prog.size(); ++i) {
     if (m_interface_in_prog[i]) {
       return i;

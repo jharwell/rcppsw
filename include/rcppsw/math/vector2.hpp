@@ -305,9 +305,16 @@ class vector2 {
   T m_y;
 };
 
-using vector2f = vector2<float>;
-using vector2d = vector2<double>;
+static inline vector2<double> ivec2dvec(const vector2<int>& other) {
+  return vector2<double>(other.x(), other.y());
+}
+static inline vector2<double> ivec2dvec(const vector2<int>& other,
+                                        double scale) {
+  return vector2<double>(other.x() * scale, other.y() * scale);
+}
+
 using vector2i = vector2<int>;
+using vector2d = vector2<double>;
 
 NS_END(math, rcppsw);
 

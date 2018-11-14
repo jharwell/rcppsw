@@ -167,7 +167,7 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
   ER_INFO("New active TAB root='%s'", new_tab->root()->name().c_str());
 } /* active_tab_update() */
 
-bi_tab* bi_tdgraph::tab_child(const bi_tab* const tab,
+__rcsw_pure bi_tab* bi_tdgraph::tab_child(const bi_tab* const tab,
                               const polled_task* const current_task) const {
   ER_ASSERT(tab->child1() == current_task || tab->child2() == current_task,
             "Task '%s' not in TAB rooted at '%s'",

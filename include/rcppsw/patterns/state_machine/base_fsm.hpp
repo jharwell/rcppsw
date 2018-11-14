@@ -466,12 +466,21 @@ NS_END(state_machine, patterns, rcppsw);
 /*******************************************************************************
  * Othr Macros
  ******************************************************************************/
-#define FSM_WRAPPER_DECLARE(ret, func)          \
+#define FSM_WRAPPER_DECLAREC(ret, func)          \
   ret func(void) const override
-#define FSM_WRAPPER_DEFINE(ret, class, func, handle)            \
+#define FSM_WRAPPER_DECLARE(ret, func)          \
+  ret func(void) override
+#define FSM_WRAPPER_DEFINEC(ret, class, func, handle)            \
   ret class::func(void) const { return (handle).func(); }
-#define FSM_WRAPPER_DEFINE_PTR(ret, class, func, handle)        \
+#define FSM_WRAPPER_DEFINE(ret, class, func, handle)            \
+  ret class::func(void) { return (handle).func(); }
+#define FSM_WRAPPER_DEFINEC_PTR(ret, class, func, handle)        \
   ret class::func(void) const { if (nullptr != (handle)) {      \
+      return (handle)->func(); }                                \
+    return static_cast<ret>(0);                                 \
+  }
+#define FSM_WRAPPER_DEFINE_PTR(ret, class, func, handle)        \
+  ret class::func(void) { if (nullptr != (handle)) {            \
       return (handle)->func(); }                                \
     return static_cast<ret>(0);                                 \
   }

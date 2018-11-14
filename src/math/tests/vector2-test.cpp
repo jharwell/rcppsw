@@ -58,6 +58,7 @@ CATCH_TEST_CASE("Length test", "[vector2]") {
   CATCH_REQUIRE(32 == t1.square_length());
   CATCH_REQUIRE(8 == math::vector2d::square_distance(t0, t1));
   CATCH_REQUIRE(std::sqrt(8) == math::vector2d::distance(t0, t1));
+  CATCH_REQUIRE((t0 - t1).length() == std::sqrt(8));
 }
 
 CATCH_TEST_CASE("Normalize test", "[vector2]") {

@@ -34,14 +34,10 @@ NS_START(rcppsw, math);
 template<>
 const vector2d vector2d::X(1.0, 0);
 template<>
-const vector2f vector2f::X(1.0, 0);
-template<>
 const vector2i vector2i::X(1, 0);
 
 template<>
 const vector2d vector2d::Y(0, 1.0);
-template<>
-const vector2f vector2f::Y(0, 1.0);
 template<>
 const vector2i vector2i::Y(0, 1);
 
