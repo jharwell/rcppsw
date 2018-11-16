@@ -83,9 +83,11 @@ class xml_param_repository {
    * @return The parsed parameters (non-owning).
    */
   template<typename T>
-  const T* parse_results(void) {
+  const T* parse_results(void) const {
     std::type_index i(typeid(T));
-    return m_parsers[m_param_types[i]]->parse_results<T>().get();
+    return m_parsers.find(
+        m_param_types.find(
+            i)->second)->second->parse_results<T>().get();
   }
 
   template<typename T>
@@ -100,8 +102,8 @@ class xml_param_repository {
    * @return The parsed parameters (non-owning).
    */
   template<typename T>
-  const T* parse_results(const std::string& name) {
-    return m_parsers[name]->parse_results<T>().get();
+  const T* parse_results(const std::string& name) const {
+    return m_parsers.find(name)->second->parse_results<T>().get();
   }
 
   /**

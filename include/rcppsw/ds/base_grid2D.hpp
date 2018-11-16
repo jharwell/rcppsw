@@ -26,7 +26,7 @@
  ******************************************************************************/
 #include <boost/multi_array.hpp>
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/math/dcoord.hpp"
+#include "rcppsw/math/vector2.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -67,9 +67,9 @@ class base_grid2D {
    * the grid (\ref grid2D, \ref grid2D_ptr) can reduce code duplication.
    */
   virtual T& access(uint i, uint j) = 0;
-  virtual T& access(const math::dcoord2& c) = 0;
+  virtual T& access(const math::vector2u& c) = 0;
 
-  const T& access(const math::dcoord2& c) const {
+  const T& access(const math::vector2u& c) const {
     return const_cast<base_grid2D*>(this)->access(c);
   }
   const T& access(uint i, uint j) const {

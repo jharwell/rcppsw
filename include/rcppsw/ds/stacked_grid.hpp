@@ -28,8 +28,7 @@
 #include <tuple>
 
 #include "rcppsw/ds/overlay_grid2D.hpp"
-#include "rcppsw/common/common.hpp"
-#include "rcppsw/math/dcoord.hpp"
+#include "rcppsw/math/vector2.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -106,12 +105,12 @@ class stacked_grid {
    * @param d The discrete coordinate pair.
    */
   template <int Index>
-  typename layer_value_type<Index>::value_type& access(const math::dcoord2& d) {
-    return access<Index>(d.first, d.second);
+  typename layer_value_type<Index>::value_type& access(const math::vector2u& d) {
+    return access<Index>(d.x(), d.y());
   }
   template <int Index>
-  const typename layer_value_type<Index>::value_type& access(const math::dcoord2& d) const {
-    return access<Index>(d.first, d.second);
+  const typename layer_value_type<Index>::value_type& access(const math::vector2u& d) const {
+    return access<Index>(d.x(), d.y());
   }
 
   template <int Index>

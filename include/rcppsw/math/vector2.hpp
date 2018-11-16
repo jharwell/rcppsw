@@ -305,16 +305,39 @@ class vector2 {
   T m_y;
 };
 
-static inline vector2<double> ivec2dvec(const vector2<int>& other) {
-  return vector2<double>(other.x(), other.y());
-}
-static inline vector2<double> ivec2dvec(const vector2<int>& other,
-                                        double scale) {
-  return vector2<double>(other.x() * scale, other.y() * scale);
+using vector2i = vector2<int>;
+using vector2u = vector2<uint>;
+using vector2d = vector2<double>;
+
+/*******************************************************************************
+ * Macros
+ ******************************************************************************/
+#define DIRECT_CONV2D(prefix)                                           \
+  static inline vector2d prefix##vec2dvec(const vector2##prefix& other) { \
+    return vector2d(other.x(), other.y());                              \
+  }
+
+#define SCALED_CONV2D(prefix)                                           \
+  static inline vector2d prefix##vec2dvec(const vector2##prefix& other, \
+                                          double scale) {               \
+    return vector2d(other.x() * scale, other.y() * scale);              \
+  }
+
+#define CONV2U(prefix)                                                \
+static inline vector2u prefix##vec2uvec(const vector2##prefix& other, \
+                                        double scale) {                 \
+  return vector2u( static_cast<uint>(std::round(other.x() / scale)),    \
+                   static_cast<uint>(std::round(other.y() / scale)));   \
 }
 
-using vector2i = vector2<int>;
-using vector2d = vector2<double>;
+/*******************************************************************************
+ * Free Functions
+ ******************************************************************************/
+DIRECT_CONV2D(u);
+DIRECT_CONV2D(i);
+SCALED_CONV2D(u);
+SCALED_CONV2D(i);
+CONV2U(d);
 
 NS_END(math, rcppsw);
 

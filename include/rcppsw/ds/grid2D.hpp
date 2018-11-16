@@ -54,9 +54,9 @@ class grid2D : public base_grid2D<T> {
   uint xsize(void) const { return m_cells.shape()[0]; }
   uint ysize(void) const { return m_cells.shape()[1]; }
 
-  __rcsw_pure T& access(const math::dcoord2& c) override {
-    return m_cells[static_cast<index_range::index>(c.first)]
-        [static_cast<index_range::index>(c.second)];
+  __rcsw_pure T& access(const math::vector2u& c) override {
+    return m_cells[static_cast<index_range::index>(c.x())]
+        [static_cast<index_range::index>(c.y())];
   }
 
   using base_grid2D<T>::access;
