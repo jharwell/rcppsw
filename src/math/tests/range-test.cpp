@@ -56,11 +56,16 @@ CATCH_TEST_CASE("Sanity test", "[range]") {
 CATCH_TEST_CASE("overlap test", "[range]") {
   math::rangei t0(2, 3);
   math::rangei t1(3, 4);
+  math::rangei t2(0, 4);
 
   CATCH_REQUIRE(t0.contains(2));
   CATCH_REQUIRE(t0.contains(3));
   CATCH_REQUIRE(!t0.contains(4));
   CATCH_REQUIRE(!t0.contains(1));
+  CATCH_REQUIRE(t2.overlaps_with(t1));
+  CATCH_REQUIRE(t1.overlaps_with(t2));
+  CATCH_REQUIRE(t0.overlaps_with(t2));
+  CATCH_REQUIRE(t2.overlaps_with(t0));
 
   CATCH_REQUIRE(t0.overlaps_with(t1));
   CATCH_REQUIRE(t1.overlaps_with(t0));

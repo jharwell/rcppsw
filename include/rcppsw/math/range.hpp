@@ -109,11 +109,18 @@ class range : public er::client<range<T>> {
   }
 
   /**
-   * @brief Determine if one range overlaps with another. Both ranges must be
-   * templated on the same type, or a compile time error will result (I think).
+   * @brief Determine if one range overlaps with another.
+   *
+   * Overlap is a commutative calculation (i.e. overlap(A,B) <-> overlap(B,A)).
+   *
+   * To implement this, we need to check if either bound of the argument is
+   * contained in our range, AND if either of our bounds are contained in the
+   * argument's range. The second part is necessary if A is completely contained
+   * inside B in order for the calculate to be commutative.
    */
   bool overlaps_with(const range<T>& other) const {
-    return this->contains(other.m_lb) || this->contains(other.m_ub);
+    return this->contains(other.m_lb) || this->contains(other.m_ub) ||
+        other.contains(this->m_lb) || other.contains(this->m_ub);
   }
 
   /**
