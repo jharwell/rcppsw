@@ -14,6 +14,13 @@ this project. In particular:
   know whether the thing in between `::` is a class, namespace, enum, etc. You
   really only need to know what operations it has.
 
+- All structs that are "types" (i.e. convenientt wrappers around a boolean
+  status + possibly valid result of an operation) should have a `_t` postfix so
+  that it is clear when constructing them that they are types and it is not a
+  function being called (calls with `()` can seem ambiguous if you don't know
+  the code). Types are collections of data members that generally should be
+  treatable as POD, even if they are not (e.g. contain a std::vector).
+
 - Exactly one class/struct definition per .cpp/.hpp file, unless there is a very
   good reason to do otherwise.
 
@@ -36,13 +43,13 @@ this project. In particular:
 
 - Function Parameters (most of these from Herb Sutter's excellent C++ guidelines
   on smart pointers
-  [here](https://herbsutter.com/2013/05/29/gotw-89-solution-smart-pointers/)). 
-
-  - `std::shared_ptr` should be passed by VALUE to a function when the function
-    is going to take a copy and share ownership, and ONLY then.
+  [here](https://herbsutter.com/2013/05/29/gotw-89-solution-smart-pointers/)).
 
   - Function inputs should use `const` to indicate that the parameter is
     input-only (`&` or `*`).
+
+  - `std::shared_ptr` should be passed by VALUE to a function when the function
+    is going to take a copy and share ownership, and ONLY then.
 
   - Pass `std::shared_ptr` by `&` if the function is itself not going to take
     ownership, but a function/object that it calls will. This will avoid the

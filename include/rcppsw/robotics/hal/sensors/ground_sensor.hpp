@@ -24,6 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <vector>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/robotics/hal/hal.hpp"
 
@@ -59,15 +60,12 @@ class _ground_sensor {
    * number of sensors), and the second
    * argument is the distance from the sensor on the robot to the robot's center
    * (this may not be used, depending on the actual hardware mapped to).
-   *
-   * @todo: Make this use the new rcppsw math vector I am eventually going to
-   * implement.
    */
   struct reading {
+    reading(double v, double d) : value(v), distance(d) {}
+
     double value;
     double distance;
-
-    reading(double _value, double _distance) : value(_value), distance(_distance) {}
   };
 
   template<typename U = T>
@@ -88,10 +86,41 @@ class _ground_sensor {
   readings(void) const {
     std::vector<reading> ret;
     for (auto &r : m_sensor->GetReadings()) {
-      ret.push_back({r.Value, -1.0});
+      ret.emplace_back(r.Value, -1.0);
     } /* for(&r..) */
 
     return ret;
+  }
+
+  /**
+   * @brief Detect if a certain condition is met by examining footbot ground
+   * sensor readings
+   *
+   * @param target The target threshold value for the condition to detect.
+   * @param tol The tolerance from the target that is acceptable for a reading
+   *            to be counted as part of the consensus.
+   * @param consensus The # of sensors of the 4 on the footbot that have to
+   *                  agree for the condition to successfully be detected.
+   *
+   * @return \c TRUE iff the condition was detected by the specified # readings.
+   */
+  template <typename U = T>
+  typename std::enable_if_t<std::is_same<U,
+                                         argos::CCI_FootBotMotorGroundSensor>::value,
+                            bool>
+  detect(double target, double tol, uint consensus) const {
+    std::vector<reading> r = readings();
+
+    uint sum = 0;
+    sum += static_cast<uint>(r[0].value >= target - tol &&
+                             r[0].value <= target + tol);
+    sum += static_cast<uint>(r[1].value >= target - tol &&
+                             r[1].value <= target + tol);
+    sum += static_cast<uint>(r[2].value >= target - tol &&
+                             r[2].value <= target + tol);
+    sum += static_cast<uint>(r[3].value >= target - tol &&
+                             r[3].value <= target + tol);
+    return sum >= consensus;
   }
 
  private:

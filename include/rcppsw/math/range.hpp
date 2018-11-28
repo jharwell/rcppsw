@@ -124,7 +124,7 @@ class range : public er::client<range<T>> {
   }
 
   /**
-   * @brief Wrap the specified value into the range using wrap-around
+   * @brief Wrap the specified value into the range [min, max] using wrap around
    * addition/subtraction.
    *
    * @return The wrapped value.
