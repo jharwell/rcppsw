@@ -27,6 +27,7 @@
 #include <cstdio>
 #include <cstddef>
 #include <mutex>
+#include <string>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/patterns/state_machine/event.hpp"
@@ -51,18 +52,13 @@ NS_START(rcppsw, patterns, state_machine);
  *
  * @brief Implements a software-based state machine.
  */
-class base_fsm : public er::client {
+class base_fsm : public er::client<base_fsm> {
  public:
-  base_fsm(const std::shared_ptr<er::server>& server,
-           uint8_t max_states,
-           uint8_t initial_state = 0);
-
   explicit base_fsm(uint8_t max_states,
                     uint8_t initial_state = 0);
-
+  base_fsm(const base_fsm& other);
   ~base_fsm(void) override = default;
-  base_fsm(const base_fsm& other)
-      : base_fsm(other.mc_max_states, other.m_initial_state) {}
+
   base_fsm& operator=(const base_fsm& other) = delete;
 
   /**
@@ -192,7 +188,7 @@ class base_fsm : public er::client {
  private:
   void state_engine_map(void);
   void state_engine_map_ex(void);
-  void event_data_set(std::unique_ptr<const event_data>& event_data) {
+  void event_data_set(std::unique_ptr<const event_data> event_data) {
     m_event_data = std::move(event_data);
   }
 
@@ -470,12 +466,21 @@ NS_END(state_machine, patterns, rcppsw);
 /*******************************************************************************
  * Othr Macros
  ******************************************************************************/
+#define FSM_WRAPPER_DECLAREC(ret, func)          \
+  ret func(void) const override
 #define FSM_WRAPPER_DECLARE(ret, func)          \
-  ret func(void) const override;
-#define FSM_WRAPPER_DEFINE(ret, class, func, handle)            \
+  ret func(void) override
+#define FSM_WRAPPER_DEFINEC(ret, class, func, handle)            \
   ret class::func(void) const { return (handle).func(); }
-#define FSM_WRAPPER_DEFINE_PTR(ret, class, func, handle)        \
+#define FSM_WRAPPER_DEFINE(ret, class, func, handle)            \
+  ret class::func(void) { return (handle).func(); }
+#define FSM_WRAPPER_DEFINEC_PTR(ret, class, func, handle)        \
   ret class::func(void) const { if (nullptr != (handle)) {      \
+      return (handle)->func(); }                                \
+    return static_cast<ret>(0);                                 \
+  }
+#define FSM_WRAPPER_DEFINE_PTR(ret, class, func, handle)        \
+  ret class::func(void) { if (nullptr != (handle)) {            \
       return (handle)->func(); }                                \
     return static_cast<ret>(0);                                 \
   }

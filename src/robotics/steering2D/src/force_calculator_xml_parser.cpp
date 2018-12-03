@@ -36,9 +36,8 @@ constexpr char force_calculator_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void force_calculator_xml_parser::parse(const argos::TConfigurationNode &node) {
-  ticpp::Element knode =
-      argos::GetNode(const_cast<ticpp::Element &>(node), kXMLRoot);
+void force_calculator_xml_parser::parse(const ticpp::Element &node) {
+  ticpp::Element knode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
   m_avoidance.parse(knode);

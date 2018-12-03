@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/control/waveform_generator.hpp"
-#include "rcppsw/control/periodic_waveform.hpp"
 #include "rcppsw/control/aperiodic_waveform.hpp"
+#include "rcppsw/control/periodic_waveform.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -53,8 +53,8 @@ waveform_generator::waveform_generator(void) {
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-std::unique_ptr<waveform> waveform_generator::operator()(const std::string& name,
-                                                         const waveform_params* params) {
+std::unique_ptr<waveform> waveform_generator::
+operator()(const std::string &name, const waveform_params *params) {
   return create(name, params);
 } /* operator() */
 

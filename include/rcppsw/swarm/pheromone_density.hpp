@@ -51,7 +51,7 @@ NS_START(rcppsw, swarm);
  */
 class pheromone_density : public rcppsw::math::expression<double> {
  public:
-  pheromone_density(void) : pheromone_density(0.0) {}
+  pheromone_density(void) : pheromone_density{0.0} {}
   explicit pheromone_density(double rho)
       : expression(), m_delta(0), m_rho(rho) {}
 
@@ -61,13 +61,42 @@ class pheromone_density : public rcppsw::math::expression<double> {
     set_result(0.0);
     m_delta = 0.0;
   }
+  /**
+   * @brief Calculates the new pheromone density based on:
+   *
+   * - The current density
+   * - How many unit deposits have been made since the last calculation
+   * - The decay rate.
+   *
+   * @return The new density.
+   */
   double calc(void) {
     double res = std::max<double>((1.0 - m_rho) * last_result() + m_delta, 0.0);
     m_delta = 0;
     return set_result(res);
   }
+
+  /**
+   * @brief Add a deposit of pheromone. Does not update the current
+   * value--that must be done separately, so that multiple deposits are batched
+   * together for a single value update.
+   *
+   * @param val The amount of the pheromone deposit. Should pretty much always
+   * be 1.0, unless there is a good reason not to do so.
+   */
   void pheromone_add(double val) { m_delta += val; }
-  void pheromone_set(double val) { set_result(val); }
+
+  /**
+   * @brief Set the pheromone density to the specified value. This is useful
+   * when repeated pheromone deposits are not desired, but you want to have a
+   * way to reset the density of something to a maximum value (e.g. seeing the
+   * same block on subsequent timesteps).
+   *
+   * Also sets the batched/pending updates to 0.
+   *
+   * @param val The value to set.
+   */
+  void pheromone_set(double val) { set_result(val); m_delta = 0; }
 
  private:
   double m_delta;

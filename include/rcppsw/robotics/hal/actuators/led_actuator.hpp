@@ -54,9 +54,9 @@ template<typename T>
 class _led_actuator {
  public:
   template<typename U = T>
-  _led_actuator(typename std::enable_if_t<std::is_same<U,
-               argos::CCI_LEDsActuator>::value,
-               argos::CCI_LEDsActuator> * leds)
+  explicit _led_actuator(typename std::enable_if_t<std::is_same<U,
+                         argos::CCI_LEDsActuator>::value,
+                         argos::CCI_LEDsActuator> * leds)
       : m_leds(leds) {}
 
   /**

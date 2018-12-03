@@ -48,6 +48,7 @@ list(APPEND ${target}_SUBDIRS utils)
 list(APPEND ${target}_SUBDIRS control)
 list(APPEND ${target}_SUBDIRS task_allocation)
 list(APPEND ${target}_SUBDIRS params)
+list(APPEND ${target}_SUBDIRS algorithm)
 list(APPEND ${target}_SUBDIRS metrics)
 list(APPEND ${target}_SUBDIRS ds)
 list(APPEND ${target}_SUBDIRS math)
@@ -99,6 +100,7 @@ endforeach()
 set(${target}_LIBRARIES
   rcsw
   ticpp
+  log4cxx
   ${Boost_LIBRARIES}
   )
 set(${target_LIBRARY_DIRS} ${rcsw_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS})
@@ -113,6 +115,7 @@ if (NOT TARGET ${target})
     $<TARGET_OBJECTS:${target}-ds>
     $<TARGET_OBJECTS:${target}-multithread>
     $<TARGET_OBJECTS:${target}-utils>
+    $<TARGET_OBJECTS:${target}-algorithm>
     $<TARGET_OBJECTS:${target}-state_machine>
     $<TARGET_OBJECTS:${target}-steering2D>
     $<TARGET_OBJECTS:${target}-kinematics2D>

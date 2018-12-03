@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PARAMS_WAVEFORM_XML_PARSER_HPP_
-#define INCLUDE_RCPPSW_PARAMS_WAVEFORM_XML_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_CONTROL_WAVEFORM_XML_PARSER_HPP_
+#define INCLUDE_RCPPSW_CONTROL_WAVEFORM_XML_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -45,9 +45,9 @@ NS_START(rcppsw, control);
  */
 class waveform_xml_parser : public rcppsw::params::xml_param_parser {
  public:
-  waveform_xml_parser(std::shared_ptr<rcppsw::er::server> server,
-                      uint level)
-      : xml_param_parser(server, level), m_params() {}
+  explicit waveform_xml_parser(uint level)
+      : xml_param_parser(level),
+        m_params() {}
 
   /**
    * @brief The XML tag that all parameters should appear under.
@@ -76,4 +76,4 @@ class waveform_xml_parser : public rcppsw::params::xml_param_parser {
 
 NS_END(control, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_PARAMS_WAVEFORM_XML_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_CONTROL_WAVEFORM_XML_PARSER_HPP_ */

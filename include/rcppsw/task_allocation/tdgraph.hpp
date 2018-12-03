@@ -27,6 +27,7 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <vector>
 #include <string>
+#include <functional>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
@@ -59,7 +60,7 @@ class polled_task;
  * currently work with the boost libraries, and shared_ptr<T> is not right
  * either, because the graph owns the tasks, so raw pointers are used instead.
  */
-class tdgraph : public er::client {
+class tdgraph : public er::client<tdgraph> {
  public:
   using graph_impl = boost::adjacency_list<boost::vecS,
                                            boost::vecS,
@@ -72,6 +73,7 @@ class tdgraph : public er::client {
   using edge_iterator = boost::graph_traits<graph_impl>::edge_iterator;
   using out_edge_iterator = boost::graph_traits<graph_impl>::out_edge_iterator;
   using in_edge_iterator = boost::graph_traits<graph_impl>::in_edge_iterator;
+  using walk_cb = std::function<void(const polled_task*)>;
 
   /**
    * @brief Get the parent of a node in the graph, given the graph and node.
@@ -81,7 +83,7 @@ class tdgraph : public er::client {
   static polled_task* vertex_parent(const tdgraph& graph,
                                     const polled_task* node);
 
-  explicit tdgraph(std::shared_ptr<er::server> server);
+  tdgraph(void);
   virtual ~tdgraph(void);
   tdgraph(const tdgraph& other) = delete;
   tdgraph& operator=(const tdgraph& other) = delete;
@@ -133,13 +135,58 @@ class tdgraph : public er::client {
    */
   std::vector<polled_task*> children(const polled_task* parent) const;
 
+  /**
+   * @brief Return the depth of the specified task in the graph, as measured
+   * from the root (the root is depth 0).
+   *
+   * @param v The vertex to obtain the depth of.
+   *
+   * @return The depth of the vertex from the root, or -1 if no such vertex
+   * exists in the graph.
+   */
+  int vertex_depth(const polled_task* v) const;
+
+  /**
+   * @brief Retrieve the numeric ID of the vertex.
+   *
+   * @return The vertex ID, or -1 if no such vertex in graph.
+   */
+  int vertex_id(const polled_task* v) const;
+
+  /**
+   * @brief Find the task vertex corresponding to the specified task name.
+   *
+   * @return The task vertex, or NULL if no such task.
+   */
+  const polled_task* find_vertex(const std::string& task_name) const;
+  polled_task* find_vertex(const std::string& task_name) {
+    return const_cast<polled_task*>(
+        const_cast<const tdgraph*>(this)->find_vertex(task_name));
+  }
+
+  /**
+   * @brief Run the callback on each node in the graph, in an arbitrary order.
+   *
+   * @param f The callback.
+   */
+  void walk(const walk_cb& f) const;
+
  private:
   /**
    * @brief Find the vertex descriptor for the vertex, which is what we need to
    * interact with the graph efficiently.
    */
-  vertex_iterator find_vertex(const polled_task* v) const;
-  vertex_iterator find_vertex(const std::string& v) const;
+  vertex_iterator find_vertex_impl(const polled_task* v) const;
+  vertex_iterator find_vertex_impl(const std::string& v) const;
+
+  /**
+   * @brief Recursively calculate the depth of a vertex from the root in the
+   * graph.
+   *
+   * @param v The current node along trajectory from desired node up to root.
+   * @param depth The starting depth (should always be 0).
+   */
+  uint vertex_depth_impl(const polled_task*v, int depth) const;
 
   // clang-format off
   polled_task*       m_root;

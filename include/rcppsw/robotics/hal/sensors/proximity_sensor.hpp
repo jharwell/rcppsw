@@ -25,9 +25,13 @@
  * Includes
  ******************************************************************************/
 #include <vector>
+#include <limits>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/robotics/hal/hal.hpp"
+#include "rcppsw/math/range.hpp"
+#include "rcppsw/math/radians.hpp"
+#include "rcppsw/math/vector2.hpp"
 
 #if HAL_CONFIG == HAL_CONFIG_ARGOS_FOOTBOT
 #include <argos3/plugins/robots/foot-bot/control_interface/ci_footbot_proximity_sensor.h>
@@ -54,24 +58,9 @@ NS_START(rcppsw, robotics, hal, sensors);
 template <typename T>
 class _proximity_sensor {
  public:
-  /**
-   * @brief A proximity sensor reading (value, angle) pair.
-   *
-   * The first argument is the value of the sensor at an angle, and the second
-   * argument is the angle in radians. Note that the "value" in this case does
-   * NOT have to be distance, but could be something else like exponential [0,1]
-   * that is computed from the distance measured.
-   */
-  struct reading {
-    double value;
-    double angle;
-
-    reading(double _value, double _angle) : value(_value), angle(_angle) {}
-  };
-
   template<typename U = T>
-  _proximity_sensor(typename std::enable_if_t<std::is_same<U,
-                      argos::CCI_FootBotProximitySensor>::value,
+  explicit _proximity_sensor(typename std::enable_if_t<std::is_same<U,
+                             argos::CCI_FootBotProximitySensor>::value,
                       argos::CCI_FootBotProximitySensor> * sensor)
       : m_sensor(sensor) {}
 
@@ -83,17 +72,68 @@ class _proximity_sensor {
   template <typename U = T>
   typename std::enable_if_t<std::is_same<U,
                                          argos::CCI_FootBotProximitySensor>::value,
-                            std::vector<reading>>
+                            std::vector<math::vector2d>>
   readings(void) const {
-    std::vector<reading> ret;
+    std::vector<math::vector2d> ret;
     for (auto &r : m_sensor->GetReadings()) {
-      ret.push_back({r.Value, r.Angle.GetValue()});
+      ret.emplace_back(r.Value, math::radians(r.Angle.GetValue()));
     } /* for(&r..) */
 
     return ret;
   }
 
+  /**
+   * @brief Return the closest object within proximity, which is defined as a
+   * delta for the proximity sensor + FOV (i.e. prox objects are those within
+   * the specified distance to the robot, and those that fall within a specific
+   * angle range (e.g. objects behind the robot are ignored). )
+   *
+   * Should be used in conjunction with \ref prox_obj__exists().
+   */
+  template <typename U = T>
+  typename std::enable_if_t<std::is_same<U,
+                                         argos::CCI_FootBotProximitySensor>::value,
+                            math::vector2d>
+  closest_prox_obj(const math::vector2d& position,
+              double obj_delta,
+              const math::range<math::radians>& fov) const {
+    math::vector2d closest(0, 0);
+
+    for (auto& r : readings()) {
+      if (obj_within_prox(r, obj_delta, fov)) {
+        if ((position - r).length() < closest.length() ||
+            closest.length() <= std::numeric_limits<double>::epsilon()) {
+          closest = r;
+        }
+      }
+    } /* for(r..) */
+    return closest;
+  }
+
+  /**
+   * @brief Figure out if an object exists in the robot's proximity
+   *
+   * A proximity object is defined as one that is closer than the defined
+   * object delta to the robot. Note that the object delta is NOT a measure
+   * of distance, but a measure [0, 1] indicating how close an objec is which
+   * increases exponentially as the object nears.
+   *
+   * @return \c TRUE if an object is found meeting the stated criteria, \c FALSE
+   * otherwise.
+   */
+  bool prox_obj_exists(const math::vector2d& position,
+                            double obj_delta,
+                            const math::range<math::radians>& fov) const {
+    return closest_prox_obj(position, obj_delta, fov).length() > 0.0;
+  }
+
  private:
+  __rcsw_pure bool obj_within_prox(const math::vector2d& obj,
+                                   double obj_delta,
+                                   const math::range<math::radians>& fov) const {
+    return obj.length() >= obj_delta && fov.contains(obj.angle());
+  }
+
   T* m_sensor;
 };
 

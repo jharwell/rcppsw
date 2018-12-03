@@ -36,23 +36,23 @@ constexpr char arrival_force_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void arrival_force_xml_parser::parse(const argos::TConfigurationNode &node) {
+void arrival_force_xml_parser::parse(const ticpp::Element &node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
     ticpp::Element anode =
-        argos::GetNode(const_cast<ticpp::Element &>(node), kXMLRoot);
+        get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
-    XML_PARSE_PARAM(anode, m_params, max);
-    XML_PARSE_PARAM(anode, m_params, slowing_radius);
-    XML_PARSE_PARAM(anode, m_params, slowing_speed_min);
+    XML_PARSE_ATTR(anode, m_params, max);
+    XML_PARSE_ATTR(anode, m_params, slowing_radius);
+    XML_PARSE_ATTR(anode, m_params, slowing_speed_min);
     m_parsed = true;
   }
 } /* parse() */
 
 void arrival_force_xml_parser::show(std::ostream &stream) const {
-  stream << build_header() << XML_PARAM_STR(m_params, max) << std::endl
-         << XML_PARAM_STR(m_params, slowing_radius) << std::endl
-         << XML_PARAM_STR(m_params, slowing_speed_min) << std::endl
+  stream << build_header() << XML_ATTR_STR(m_params, max) << std::endl
+         << XML_ATTR_STR(m_params, slowing_radius) << std::endl
+         << XML_ATTR_STR(m_params, slowing_speed_min) << std::endl
          << build_footer();
 } /* show() */
 

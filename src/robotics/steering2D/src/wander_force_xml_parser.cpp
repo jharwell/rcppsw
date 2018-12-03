@@ -36,17 +36,18 @@ constexpr char wander_force_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void wander_force_xml_parser::parse(const argos::TConfigurationNode &node) {
+void wander_force_xml_parser::parse(const ticpp::Element &node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
     ticpp::Element wnode =
-        argos::GetNode(const_cast<ticpp::Element &>(node), kXMLRoot);
+        get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
-    XML_PARSE_PARAM(wnode, m_params, interval);
-    XML_PARSE_PARAM(wnode, m_params, max);
-    XML_PARSE_PARAM(wnode, m_params, circle_distance);
-    XML_PARSE_PARAM(wnode, m_params, circle_radius);
-    XML_PARSE_PARAM(wnode, m_params, max_angle_delta);
+    XML_PARSE_ATTR(wnode, m_params, interval);
+    XML_PARSE_ATTR(wnode, m_params, max);
+    XML_PARSE_ATTR(wnode, m_params, circle_distance);
+    XML_PARSE_ATTR(wnode, m_params, circle_radius);
+    XML_PARSE_ATTR(wnode, m_params, max_angle_delta);
+    XML_PARSE_ATTR(wnode, m_params, normal_dist);
     m_parsed = true;
   }
 } /* parse() */
@@ -58,11 +59,12 @@ void wander_force_xml_parser::show(std::ostream &stream) const {
     return;
   }
 
-  stream << build_header() << XML_PARAM_STR(m_params, interval) << std::endl
-         << XML_PARAM_STR(m_params, max) << std::endl
-         << XML_PARAM_STR(m_params, circle_distance) << std::endl
-         << XML_PARAM_STR(m_params, circle_radius) << std::endl
-         << XML_PARAM_STR(m_params, max_angle_delta) << std::endl
+  stream << build_header() << XML_ATTR_STR(m_params, interval) << std::endl
+         << XML_ATTR_STR(m_params, max) << std::endl
+         << XML_ATTR_STR(m_params, circle_distance) << std::endl
+         << XML_ATTR_STR(m_params, circle_radius) << std::endl
+         << XML_ATTR_STR(m_params, max_angle_delta) << std::endl
+         << XML_ATTR_STR(m_params, normal_dist) << std::endl
          << build_footer();
 } /* show() */
 

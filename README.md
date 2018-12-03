@@ -10,6 +10,9 @@ exist in Boost, or that build on what boost provides. Includes such things as:
 - Logical task hierarchy, including executives capable of executing a task
   decomposition graph.
 
+- Low-level robotic kinematics module containing force calculation components
+  for use in determining robotic motion.
+
 - Data structures involved in multi-agent robotics, such as logical occupancy
   grids. Multiprocessing/multithreading queues, vectors.
 
@@ -22,7 +25,7 @@ exist in Boost, or that build on what boost provides. Includes such things as:
   - prototype
   - singleton
 
-  Some of these DO exist elsewhere, but I found their implementations somewhat
+- Components that DO exist elsewhere, but I found their implementations somewhat
   hard to follow/poorly documented, and it was easier to roll my own.
 
  - Control theoretic bits such as PID loops
@@ -31,6 +34,8 @@ exist in Boost, or that build on what boost provides. Includes such things as:
 
  - Miscellaneous other things as kmeans clustering,
    multithreading/multiprocessing management tools.
+
+To see what's new, check out the [release notes](docs/release-notes.md).
 
 ## Pre-cloning Setup
 
@@ -41,7 +46,11 @@ exist in Boost, or that build on what boost provides. Includes such things as:
 
 2. Install the following libraries:
 
-   - boost 1.58
+   - boost >= 1.58 (`libboost-all-dev` on ubuntu)
+   - log4cxx (`liblog4cxx-dev` on ubuntu)
+   - catch (`catch` on ubuntu)
+   - graphviz (`graphviz` on ubuntu)
+   - doxygen (`doxygen` on ubuntu)
 
 ## Post-cloning
 

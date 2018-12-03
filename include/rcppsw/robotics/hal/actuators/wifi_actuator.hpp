@@ -56,9 +56,9 @@ template<typename T>
 class _wifi_actuator {
  public:
   template<typename U = T>
-  _wifi_actuator(typename std::enable_if_t<std::is_same<U,
-               argos::CCI_RangeAndBearingActuator>::value,
-               argos::CCI_RangeAndBearingActuator> * wifi)
+  explicit _wifi_actuator(typename std::enable_if_t<std::is_same<U,
+                          argos::CCI_RangeAndBearingActuator>::value,
+                          argos::CCI_RangeAndBearingActuator> * wifi)
       : m_wifi(wifi) {}
 
 
@@ -71,7 +71,7 @@ class _wifi_actuator {
                             void>
   broadcast_start(const struct wifi_packet& packet) {
     for (size_t i = 0; i < packet.data.size(); ++i) {
-      m_wifi->SetData(0, packet.data[i]);
+      m_wifi->SetData(i, packet.data[i]);
     } /* for(i..) */
   }
 

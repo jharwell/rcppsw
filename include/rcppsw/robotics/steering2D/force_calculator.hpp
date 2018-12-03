@@ -24,6 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/robotics/steering2D/avoidance_force.hpp"
 #include "rcppsw/robotics/steering2D/arrival_force.hpp"
@@ -54,17 +56,16 @@ struct force_calculator_params;
  *
  * Once conformant, see \ref force_type for available force types.
  */
-class force_calculator : public er::client {
+class force_calculator : public er::client<force_calculator> {
  public:
-  force_calculator(const std::shared_ptr<er::server>& server,
-                   boid& entity,
+  force_calculator(boid& entity,
                    const struct force_calculator_params* params);
 
   /**
    * @brief Return the current steering force as a velocity vector.
    */
-  const argos::CVector2& value(void) const { return m_force_accum; }
-  void value(const argos::CVector2& val) { m_force_accum = val; }
+  const math::vector2d& value(void) const { return m_force_accum; }
+  void value(const math::vector2d& val) { m_force_accum = val; }
 
   /**
    * @brief Return the current steering force as twist acting on the managed
@@ -72,26 +73,26 @@ class force_calculator : public er::client {
    */
   kinematics::twist value_as_twist(void) const { return to_twist(m_force_accum); }
 
-  kinematics::twist to_twist(const argos::CVector2& force) const;
+  kinematics::twist to_twist(const math::vector2d& force) const;
 
   /**
    * @brief Reset the sum of forces acting on the entity.
    */
-  void reset(void) { m_force_accum.SetX(0); m_force_accum.SetY(0); }
+  void reset(void) { m_force_accum.x(0); m_force_accum.y(0); }
 
   /**
    * @brief Add the \ref kSeekThrough force to the sum forces for this timestep.
    *
    * @param target The target to seek to.
    */
-  void seek_through(const argos::CVector2& target);
+  void seek_through(const math::vector2d& target);
 
   /**
    * @brief Add the \ref kSeekTo force to the sum forces for this timestep.
    *
    * @param target The target to seek to.
    */
-  void seek_to(const argos::CVector2& target);
+  void seek_to(const math::vector2d& target);
 
   bool within_slowing_radius(void) const {
     return m_arrival_force.within_slowing_radius();
@@ -109,16 +110,16 @@ class force_calculator : public er::client {
    * @param closest_obstacle Where is the closest obstacle, relative to robot's
    * current position AND heading.
    */
-  void avoidance(const argos::CVector2& closest_obstacle);
+  void avoidance(const math::vector2d& closest_obstacle);
 
  protected:
-  void accum_force(const argos::CVector2& force) { m_force_accum += force; }
+  void accum_force(const math::vector2d& force) { m_force_accum += force; }
   const boid& entity(void) const { return m_entity; }
 
  private:
   // clang-format off
   boid&           m_entity;
-  argos::CVector2 m_force_accum{};
+  math::vector2d  m_force_accum{};
   avoidance_force m_avoidance_force;
   arrival_force   m_arrival_force;
   seek_force      m_seek_force{};

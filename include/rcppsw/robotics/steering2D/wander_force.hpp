@@ -24,10 +24,10 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <argos3/core/utility/math/angles.h>
-
+#include <random>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/robotics/steering2D/boid.hpp"
+#include "rcppsw/math/radians.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -44,23 +44,28 @@ struct wander_force_params;
  * @ingroup control
  *
  * @brief A small random perturbation that can be added to a robot's current
- * velocity in order to make it move randomly throughout the environment.
+ * velocity in order to make it move randomly throughout the environment. This
+ * can be thought of as a directed random walk.
  */
 class wander_force {
  public:
   explicit wander_force(const struct wander_force_params* params);
 
-  argos::CVector2 operator()(const boid& entity);
+  math::vector2d operator()(const boid& entity);
 
  private:
   // clang-format off
-  uint            m_interval;
-  int             m_count{-1};
-  double          m_max;
-  double          m_circle_distance;
-  double          m_circle_radius;
-  double          m_max_angle_delta;
-  argos::CRadians m_angle;
+  uint                             m_interval;
+  int                              m_count{-1};
+  bool                             m_use_normal;
+  double                           m_max;
+  double                           m_circle_distance;
+  double                           m_circle_radius;
+  double                           m_max_angle_delta;
+  double                           m_last_angle{0.0};
+  math::radians                    m_angle;
+  std::random_device               m_rng{};
+  std::normal_distribution<double> m_normal_dist;
   // clang-format on
 };
 

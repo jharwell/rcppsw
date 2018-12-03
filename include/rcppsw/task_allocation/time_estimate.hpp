@@ -1,7 +1,7 @@
 /**
  * @file time_estimate.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/expression.hpp"
+#include "rcppsw/math/ema.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -34,38 +34,8 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/**
- * @class time_estimate
- * @ingroup task_allocation
- *
- * @brief Calculates an estimate of how long a task will take.
- *
- * Depends on:
- *
- * - Alpha: How much weight to give the past estimate, and how much to give the
- *   new measurement?
- *
- * - The last value of the time estimate.
- */
-class time_estimate : public rcppsw::math::expression<double> {
- public:
-  explicit time_estimate(double alpha) : m_alpha(alpha) {}
+using time_estimate = math::ema<double>;
 
-  double alpha(void) const { return m_alpha; }
-  double calc(double current_measure);
-  time_estimate operator+(const time_estimate& other) const;
-  time_estimate operator/(const time_estimate& other) const;
-
- private:
-  double m_alpha;
-};
-
-time_estimate operator-(const time_estimate& lhs, double d);
-time_estimate operator-(double d, const time_estimate& rhs);
-time_estimate operator*(const time_estimate& lhs, double d);
-time_estimate operator*(double d, const time_estimate& rhs);
-time_estimate operator/(double d, const time_estimate& rhs);
-time_estimate operator/(const time_estimate& lhs, double d);
 NS_END(task_allocation, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_TASK_ALLOCATION_TIME_ESTIMATE_HPP_ */

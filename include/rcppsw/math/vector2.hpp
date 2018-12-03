@@ -25,6 +25,9 @@
  * Includes
  ******************************************************************************/
 #include <cmath>
+#include <limits>
+#include <string>
+
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/radians.hpp"
 
@@ -49,19 +52,18 @@ NS_START(rcppsw, math);
 template<typename T>
 class vector2 {
  public:
-
   /**
    * @brief Computes the square distance between the passed vectors.
    */
   static T square_distance(const vector2& v1, const vector2& v2) {
-    return (v1 - v2).SquareLength();
+    return (v1 - v2).square_length();
   }
 
   /**
    * @brief Computes the distance between the passed vectors.
    */
   static T distance(const vector2& v1, const vector2& v2) {
-    return (v1 - v2).Length();
+    return (v1 - v2).length();
   }
 
   /**
@@ -85,7 +87,7 @@ class vector2 {
    * @param x The X coordinate.
    * @param y The Y coordinate.
    */
-  vector2(T x, T y) : m_x(x), m_y(y) {}
+  vector2(const T& x, const T& y) : m_x(x), m_y(y) {}
 
   /**
    * @brief Initializes the vector coordinates from polar coordinates.
@@ -98,10 +100,10 @@ class vector2 {
       m_y(std::sin(angle.value()) * length) {
   }
 
-  T x(void) const { return m_x; }
-  T y(void) const { return m_y; }
-  void x(T x) { m_x = x; }
-  void y(T y) { m_y = y; }
+  T x(void) const __rcsw_check_return { return m_x; }
+  T y(void) const __rcsw_check_return { return m_y; }
+  void x(const T& x) { m_x = x; }
+  void y(const T& y) { m_y = y; }
 
   /**
    * @brief Sets the vector contents from Cartesian coordinates.
@@ -109,7 +111,7 @@ class vector2 {
    * @param x The new X coordinate.
    * @param y The new Y coordinate.
    */
-  void set(T x, T y) {
+  void set(const T& x, const T& y) {
     m_x = x;
     m_y = y;
   }
@@ -120,7 +122,7 @@ class vector2 {
    * @param length The length of the vector.
    * @param angle The angle of the vector (range [0,2pi)
    */
-  void set_from_polar(T length, const radians& angle) {
+  void set_from_polar(const T& length, const radians& angle) {
     m_x = std::cos(angle.value()) * length;
     m_y = std::sin(angle.value()) * length;
   }
@@ -128,14 +130,14 @@ class vector2 {
   /**
    * @brief Returns the square length of this vector.
    */
-  T square_length(void) const {
+  T square_length(void) const __rcsw_check_return {
     return (m_x * m_x) + (m_y * m_y);
   }
 
   /**
    * Returns the length of this vector.
    */
-  T length(void) const { return std::sqrt(square_length()); }
+  T length(void) const __rcsw_check_return { return std::sqrt(square_length()); }
 
   /**
    * @brief Normalizes this vector.
@@ -154,7 +156,7 @@ class vector2 {
   /**
    * @brief Return the angle of this vector.
    */
-  radians angle(void) const { return std::atan2(m_y, m_x); }
+  radians angle(void) const { return radians(std::atan2(m_y, m_x)); }
 
   /**
    * @brief Rotate this vector by the specified angle.
@@ -183,7 +185,7 @@ class vector2 {
    *
    * @return A reference to the scaled vector.
    */
-  vector2& scale(T scale_x, T scale_y) {
+  vector2& scale(const T& scale_x, const T& scale_y) {
     m_x *= scale_x;
     m_y *= scale_y;
     return *this;
@@ -196,17 +198,33 @@ class vector2 {
    *
    * @return A reference to the scaled vector.
    */
-  vector2& scale(T factor) { return scale(factor, factor); }
+  vector2& scale(const T& factor) { return scale(factor, factor); }
 
   /**
    * @brief Returns if this vector and the argument are considered equal,
    * determined by coordinate comparison.
    *
-   * Should generally not be called if the template parameter type is not an
-   * integer, as floating point comparisions in general are unsafe.
+   * Only available if the template argument is not floating point.
    */
-  bool operator==(const vector2& other) const {
+  template<typename U = T>
+  typename std::enable_if_t<!std::is_same<U, float>::value &&
+                            !std::is_same<U, double>::value, bool>
+  operator==(const vector2& other) const {
     return (m_x == other.m_x && m_y == other.m_y);
+  }
+
+  /**
+   * @brief Returns if this vector and the argument are considered equal,
+   * determined by coordinate comparison.
+   *
+   * Only available if the template argument is floating point.
+   */
+  template<typename U = T>
+  typename std::enable_if_t<std::is_same<U, float>::value ||
+                            std::is_same<U, double>::value, bool>
+  operator==(const vector2& other) const {
+    return (std::fabs(x() - other.x()) <= std::numeric_limits<T>::epsilon() &&
+            (std::fabs(y() - other.y()) <= std::numeric_limits<T>::epsilon()));
   }
 
   /**
@@ -217,7 +235,7 @@ class vector2 {
    * integer, as floating point comparisons in general are unsafe.
    */
   bool operator!=(const vector2& other) const {
-    return !(this == other);
+    return !(*this == other);
   }
 
   vector2& operator+=(const vector2& other) {
@@ -250,8 +268,8 @@ class vector2 {
     return res;
   }
 
-  vector2 operator-(const vector2& other) const {
-    vector2 res(*this);
+  vector2<T> operator-(const vector2& other) const {
+    vector2<T> res(*this);
     res -= other;
     return res;
   }
@@ -268,18 +286,18 @@ class vector2 {
     return res;
   }
 
-  friend vector2 operator*(T val, const vector2& other) {
-    return other * val;
-  }
-
   vector2 operator-(void) const {
     return vector2(-m_x, -m_y);
   }
 
   friend std::ostream& operator<<(std::ostream& stream,
                                   const vector2& v) {
-    stream << v.m_x << "," << v.m_y;
+    stream << "(" << v.m_x << "," << v.m_y << ")";
     return stream;
+  }
+
+  std::string to_str(void) const {
+    return "(" + std::to_string(m_x) + "," + std::to_string(m_y) + ")";
   }
 
  private:
@@ -287,9 +305,39 @@ class vector2 {
   T m_y;
 };
 
-using vector2d = vector2<double>;
-using vector2f = vector2<float>;
 using vector2i = vector2<int>;
+using vector2u = vector2<uint>;
+using vector2d = vector2<double>;
+
+/*******************************************************************************
+ * Macros
+ ******************************************************************************/
+#define DIRECT_CONV2D(prefix)                                           \
+  static inline vector2d prefix##vec2dvec(const vector2##prefix& other) { \
+    return vector2d(other.x(), other.y());                              \
+  }
+
+#define SCALED_CONV2D(prefix)                                           \
+  static inline vector2d prefix##vec2dvec(const vector2##prefix& other, \
+                                          double scale) {               \
+    return vector2d(other.x() * scale, other.y() * scale);              \
+  }
+
+#define CONV2U(prefix)                                                \
+static inline vector2u prefix##vec2uvec(const vector2##prefix& other, \
+                                        double scale) {                 \
+  return vector2u( static_cast<uint>(std::round(other.x() / scale)),    \
+                   static_cast<uint>(std::round(other.y() / scale)));   \
+}
+
+/*******************************************************************************
+ * Free Functions
+ ******************************************************************************/
+DIRECT_CONV2D(u);
+DIRECT_CONV2D(i);
+SCALED_CONV2D(u);
+SCALED_CONV2D(i);
+CONV2U(d);
 
 NS_END(math, rcppsw);
 

@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/math/degrees.hpp"
-#include "rcppsw/math/angles.hpp"
 #include <iostream>
+#include "rcppsw/math/angles.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -33,9 +33,12 @@ NS_START(rcppsw, math);
 /*******************************************************************************
  * Class Constants
  ******************************************************************************/
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wglobal-constructors"
 const range<degrees> degrees::kSignedRange(degrees(-180.0), degrees(180.0));
 const range<degrees> degrees::kUnsignedRange(degrees(0.0), degrees(360.0));
-const float degrees::kDEGREES_TO_RADIANS(radians::kPI.value() / 180.0);
+const double degrees::kDEGREES_TO_RADIANS(M_PI / 180.0);
+#pragma clang diagnostic pop
 
 /*******************************************************************************
  * Constructors/Destructors
@@ -46,7 +49,7 @@ degrees::degrees(const radians &r) : m_value(to_degrees(r).value()) {}
  * Non-Member Functions
  ******************************************************************************/
 std::ostream &operator<<(std::ostream &stream, const degrees &d) {
-  stream << "degrees(" << d.value() << ")";
+  stream << d.to_str();
   return stream;
 } /* operator<<() */
 

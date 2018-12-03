@@ -34,13 +34,8 @@ NS_START(rcppsw, params);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-xml_param_parser::xml_param_parser(const std::shared_ptr<er::server> &server,
-                                   uint level)
-    : client(server), m_level(level) {
-  if (ERROR == client::attmod("xml_param_parser")) {
-    insmod("xml_param_parser", er::er_lvl::NOM, er::er_lvl::NOM);
-  }
-}
+xml_param_parser::xml_param_parser(uint level)
+    : ER_CLIENT_INIT("rcppsw.params"), m_level(level) {}
 
 /*******************************************************************************
  * Member Functions
@@ -67,7 +62,7 @@ ticpp::Element &xml_param_parser::get_node(ticpp::Element &node,
                                            const std::string &tag) {
   ticpp::Iterator<ticpp::Element> it(tag);
   it = it.begin(&node);
-  ER_ASSERT(it != nullptr, "FATAL: no tag %s found in node %s", tag.c_str(),
+  ER_ASSERT(it != nullptr, "No tag '%s' found in node '%s'", tag.c_str(),
             node.Value().c_str());
   return *it;
 } /* get_node() */
@@ -82,7 +77,7 @@ void xml_param_parser::get_node_attribute(ticpp::Element &node,
     buf = false;
   } else {
     ER_FATAL_SENTINEL(
-        "Cannot convert %s into a bool. Accepted values are ['true', 'false']",
+        "Cannot convert '%s' into a bool. Accepted values are ['true', 'false']",
         tmp.c_str());
   }
 } /* get_node_attribute() */

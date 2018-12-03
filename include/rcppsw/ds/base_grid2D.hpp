@@ -24,10 +24,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <algorithm>
 #include <boost/multi_array.hpp>
-#include <utility>
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/math/vector2.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -39,6 +38,8 @@ using grid_type = typename boost::multi_array<T, 2>;
 template <typename T>
 using grid_view = typename grid_type<T>::template array_view<2>::type;
 template <typename T>
+using const_grid_view = typename grid_type<T>::template const_array_view<2>::type;
+template <typename T>
 using view_range = typename grid_type<T>::index_range;
 using index_range = boost::multi_array_types::index_range;
 
@@ -49,19 +50,15 @@ using index_range = boost::multi_array_types::index_range;
  * @class base_grid2D
  * @ingroup ds
  *
- * @brief A 2D logical grid that is overlayed over a continuous environment. It
- * discretizes the continuous arena into a grid of a specified resolution.
- *
- * The objects used to represent the grid should be cells of some kind.
+ * @brief Base class containing functionality common to all types of 2D grids.
  */
 template <typename T>
 class base_grid2D {
  public:
   using value_type = T;
 
-  base_grid2D(double resolution, size_t x_max, size_t y_max)
-      : m_resolution(resolution), m_x_max(x_max), m_y_max(y_max) {}
-  virtual ~base_grid2D(void) {}
+  base_grid2D(void) = default;
+  virtual ~base_grid2D(void) = default;
 
   /**
    * @brief Return a reference to the element at position (i, j) in the grid.
@@ -69,96 +66,15 @@ class base_grid2D {
    * This is provided in the base class so that the pointer/object variants of
    * the grid (\ref grid2D, \ref grid2D_ptr) can reduce code duplication.
    */
-  virtual T& access(size_t i, size_t j) = 0;
+  virtual T& access(uint i, uint j) = 0;
+  virtual T& access(const math::vector2u& c) = 0;
 
-  const T& access(size_t i, size_t j) const {
+  const T& access(const math::vector2u& c) const {
+    return const_cast<base_grid2D*>(this)->access(c);
+  }
+  const T& access(uint i, uint j) const {
     return const_cast<base_grid2D*>(this)->access(i, j);
   }
-
-  /**
-   * @brief Return the resolution of the grid.
-   */
-  double resolution(void) const { return m_resolution; }
-
-  /**
-   * @brief Get the size of the X dimension of the discretized subgrid, at
-   * whatever the resolution specified during object construction was.
-   */
-  size_t xdsize(void) const {
-    return static_cast<size_t>(std::ceil(m_x_max / m_resolution));
-  }
-
-  /**
-   * @brief Get the size of the X dimension (non-discretized).
-   */
-  size_t xrsize(void) const { return m_x_max; }
-
-  /**
-   * @brief Get the size of the Y dimension (non-discretized).
-   */
-  size_t yrsize(void) const { return m_y_max; }
-
-  /**
-   * @brief Get the size of the Y dimension of the discretized subgrid, at
-   * whatever the resolution specified during object construction was.
-   */
-  size_t ydsize(void) const {
-    return static_cast<size_t>(std::ceil(m_y_max / m_resolution));
-  }
-
-  /**
-   * @brief Get the range in the X direction resulting from applying a circle
-   * with the specified radius at the specified X coordinate, accounting for
-   * edge conditions on the grid.
-   *
-   * @param x The X coordinate of the point.
-   * @param radius The radius of the circle to apply.
-   *
-   * @return A pair containing the upper/lower X coordinates of the circle when
-   * applied to the specified X coordinate.
-   */
-  std::pair<index_range::index, index_range::index> circle_xrange_at_point(
-      size_t x, size_t radius) const {
-    index_range::index lower_x =
-        static_cast<index_range::index>(std::max<int>(0,
-                                                      static_cast<int>(x) -
-                                                      static_cast<int>(radius)));
-    index_range::index upper_x =
-        static_cast<index_range::index>(std::min(x + radius + 1, xdsize() - 1));
-    if (lower_x > upper_x) {
-      lower_x = upper_x - 1;
-    }
-    return std::make_pair(lower_x, upper_x);
-  }
-
-  /**
-   * @brief Get the range in the Y direction resulting from applying a circle
-   * with the specified radius at the specified Y coordinate, accounting for
-   * edge conditions on the grid.
-   *
-   * @param y The Y coordinate of the point.
-   * @param radius The radius of the circle to apply.
-   *
-   * @return A pair containing the upper/lower Y coordinates of the circle when
-   * applied to the specified Y coordinate.
-   */
-  std::pair<index_range::index, index_range::index> circle_yrange_at_point(
-      size_t y, size_t radius) const {
-    index_range::index lower_y = static_cast<index_range::index>(
-        std::max<int>(static_cast<int>(0),
-                      static_cast<int>(y) - static_cast<int>(radius)));
-    index_range::index upper_y =
-        static_cast<index_range::index>(std::min(y + radius + 1, ydsize() - 1));
-    if (lower_y > upper_y) {
-      lower_y = upper_y - 1;
-    }
-    return std::make_pair(lower_y, upper_y);
-  }
-
- private:
-  double m_resolution;
-  size_t m_x_max;
-  size_t m_y_max;
 };
 
 NS_END(ds, rcppsw);

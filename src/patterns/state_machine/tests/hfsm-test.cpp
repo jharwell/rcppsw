@@ -23,7 +23,6 @@
  ******************************************************************************/
 #define CATCH_CONFIG_MAIN
 #define CATCH_CONFIG_PREFIX_ALL
-#include "rcppsw/er/server.hpp"
 #include "rcppsw/patterns/state_machine/hfsm.hpp"
 #include <catch.hpp>
 #include <memory>
@@ -41,8 +40,8 @@ class test_fsm : public fsm::hfsm {
 public:
   enum states { STATE1, STATE2, STATE3, STATE4, STATE5, STATE6, ST_MAX_STATES };
 
-  explicit test_fsm(const std::shared_ptr<er::server> &server)
-      : fsm::hfsm(server, ST_MAX_STATES), m_initial_state(0),
+  explicit test_fsm(void)
+      : fsm::hfsm(ST_MAX_STATES), m_initial_state(0),
         s1(hfsm::top_state()), s2(hfsm::top_state()), s3(hfsm::top_state()),
         s4(hfsm::top_state()), s5(hfsm::top_state()), s6(hfsm::top_state()) {}
 
@@ -128,7 +127,7 @@ HFSM_STATE_DEFINE_ND(test_fsm, s6) {
  * Test Functions
  ******************************************************************************/
 CATCH_TEST_CASE("sanity-test", "[hfsm]") {
-  test_fsm fsm(er::g_server);
+  test_fsm fsm;
   fsm.init();
   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE1);
   fsm.event1();
@@ -140,7 +139,7 @@ CATCH_TEST_CASE("sanity-test", "[hfsm]") {
 }
 
 CATCH_TEST_CASE("event-test", "[hfsm]") {
-  test_fsm fsm(er::g_server);
+  test_fsm fsm;
   fsm.init();
   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE1);
   fsm.event2();

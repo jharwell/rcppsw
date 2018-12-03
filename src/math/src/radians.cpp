@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/math/radians.hpp"
-#include "rcppsw/math/angles.hpp"
 #include <iostream>
+#include "rcppsw/math/angles.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -33,15 +33,19 @@ NS_START(rcppsw, math);
 /*******************************************************************************
  * Class Constants
  ******************************************************************************/
+/* These are just mathematical constants, so global constructors are OK */
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wglobal-constructors"
 const radians radians::kPI(M_PI);
 const radians radians::kTWO_PI(M_PI * 2.0);
 const radians radians::kPI_OVER_THREE(M_PI / 3.0);
 const radians radians::kPI_OVER_FOUR(M_PI / 4.0);
 const radians radians::kZERO(0.0);
 
-const float radians::kRADIANS_TO_DEGREES(180.0 / radians::kPI.value());
-const range<radians> radians::kSignedRange(-radians::kPI, radians::kPI);
-const range<radians> radians::kUnsignedRange(radians(), radians::kTWO_PI);
+const double radians::kRADIANS_TO_DEGREES(180.0 / M_PI);
+const range<radians> radians::kSignedRange(-radians(M_PI), radians(M_PI));
+const range<radians> radians::kUnsignedRange(radians(0), radians(2*M_PI));
+#pragma clang diagnostic pop
 
 /*******************************************************************************
  * Constructors/Destructors

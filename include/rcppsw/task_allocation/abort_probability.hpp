@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/expression.hpp"
+#include "rcppsw/math/sigmoid.hpp"
 #include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
@@ -55,7 +55,7 @@ NS_START(rcppsw, task_allocation);
  * - A time estimate for the task (can execution time thus far, interface time
  *   thus far, etc.).
  */
-class abort_probability : public rcppsw::math::expression<double> {
+class abort_probability : public math::sigmoid {
  public:
   /*
    * A default reactivity value found experimentally to work well.
@@ -68,21 +68,26 @@ class abort_probability : public rcppsw::math::expression<double> {
   static constexpr double kDEFAULT_OFFSET = 3.0;
 
   /*
-   * @brief If we don't have any time estimate for the task, then we just set a
-   * small static abort probability.
+   * A default gamma value because there needs to be one.
    */
-  static double constexpr kNO_EST_ABORT_PROB = 0.001;
+  static constexpr double kDEFAULT_GAMMA = 1.0;
+
+  /*
+   * @brief All tasks need to have a small abort probability, so that they don't
+   * get stuck indefinitely.
+   */
+  static double constexpr kMIN_ABORT_PROB = 0.0001;
 
   /**
    * @brief Initialize an abort probability calculation with default values.
    */
-  abort_probability(void) : abort_probability(kDEFAULT_REACTIVITY,
-                                              kDEFAULT_OFFSET) {}
+  abort_probability(void) : sigmoid(kDEFAULT_REACTIVITY,
+                                    kDEFAULT_OFFSET, kDEFAULT_GAMMA) {}
 
   /**
    * @brief Initialize abort probability calculation with user-specified values.
    */
-  explicit abort_probability(const struct abort_params * params);
+  explicit abort_probability(const math::sigmoid_params * params);
 
   /**
    * @brief Calculate the current abort probability, based on the most recent
@@ -95,18 +100,9 @@ class abort_probability : public rcppsw::math::expression<double> {
    * @return The abort probability.
    */
   double operator()(double exec_time, const time_estimate& whole_task);
-
-  /**
-   * @brief See \ref operator().
-   */
-  double calc(double exec_time, const time_estimate& whole_task);
-
- private:
-  abort_probability(double reactivity, double offset)
-  : m_reactivity(reactivity), m_offset(offset) {}
-
-  double m_reactivity;
-  double m_offset;
+  double calc(double exec_time, const time_estimate& whole_task) {
+    return operator()(exec_time, whole_task);
+  }
 };
 
 NS_END(task_allocation, rcppsw);

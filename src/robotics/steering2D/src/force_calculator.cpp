@@ -32,61 +32,56 @@ NS_START(rcppsw, robotics, steering2D);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-force_calculator::force_calculator(const std::shared_ptr<er::server> &server,
-                                   boid &entity,
+force_calculator::force_calculator(boid &entity,
                                    const struct force_calculator_params *params)
-    : er::client(server), m_entity(entity),
-      m_avoidance_force(&params->avoidance), m_arrival_force(&params->arrival),
-      m_wander_force(&params->wander), m_polar_force(&params->polar) {
-  if (ERROR == client::attmod("force_calculator")) {
-    client::insmod("force_calculator", rcppsw::er::er_lvl::DIAG,
-                   rcppsw::er::er_lvl::NOM);
-  }
-}
+    : ER_CLIENT_INIT("rcppsw.robotics.steering2D.force_calculate"),
+      m_entity(entity), m_avoidance_force(&params->avoidance),
+      m_arrival_force(&params->arrival), m_wander_force(&params->wander),
+      m_polar_force(&params->polar) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 kinematics::twist
-force_calculator::to_twist(const argos::CVector2 &force) const {
+force_calculator::to_twist(const math::vector2d &force) const {
   kinematics::twist twist;
-  twist.linear.x = force.Length();
+  twist.linear.x = force.length();
   twist.angular.z =
-      (force - m_entity.linear_velocity()).Length() *
-      std::sin((force - m_entity.linear_velocity()).Angle().GetValue());
-  if (m_entity.linear_velocity().Length() > 0) {
-    twist.angular.z /= m_entity.linear_velocity().Length();
+      (force - m_entity.linear_velocity()).length() *
+      std::sin((force - m_entity.linear_velocity()).angle().value());
+  if (m_entity.linear_velocity().length() > 0) {
+    twist.angular.z /= m_entity.linear_velocity().length();
   } else {
     twist.angular.z = 0;
   }
   return twist;
 } /* to_twist() */
 
-void force_calculator::seek_through(const argos::CVector2 &target) {
-  argos::CVector2 force = m_seek_force(m_entity, target);
-  ER_DIAG("Seek force: (%f, %f)@%f [%f]", force.GetX(), force.GetY(),
-          force.Angle().GetValue(), force.Length());
+void force_calculator::seek_through(const math::vector2d &target) {
+  math::vector2d force = m_seek_force(m_entity, target);
+  ER_DEBUG("Seek force: (%f, %f)@%f [%f]", force.x(), force.y(),
+           force.angle().value(), force.length());
   accum_force(force);
 } /* seek_through() */
 
-void force_calculator::seek_to(const argos::CVector2 &target) {
-  argos::CVector2 force = m_arrival_force(m_entity, target);
-  ER_DIAG("Arrival force: (%f, %f)@%f [%f]", force.GetX(), force.GetY(),
-          force.Angle().GetValue(), force.Length());
+void force_calculator::seek_to(const math::vector2d &target) {
+  math::vector2d force = m_arrival_force(m_entity, target);
+  ER_DEBUG("Arrival force: (%f, %f)@%f [%f]", force.x(), force.y(),
+           force.angle().value(), force.length());
   accum_force(force);
 } /* seek_to() */
 
 void force_calculator::wander(void) {
-  argos::CVector2 force = m_wander_force(m_entity);
-  ER_DIAG("Wander force: (%f, %f)@%f [%f]", force.GetX(), force.GetY(),
-          force.Angle().GetValue(), force.Length());
+  math::vector2d force = m_wander_force(m_entity);
+  ER_DEBUG("Wander force: (%f, %f)@%f [%f]", force.x(), force.y(),
+           force.angle().value(), force.length());
   accum_force(force);
 } /* wander() */
 
-void force_calculator::avoidance(const argos::CVector2 &closest_obstacle) {
-  argos::CVector2 force = m_avoidance_force(m_entity, closest_obstacle);
-  ER_DIAG("Avoidance force: (%f, %f)@%f [%f]", force.GetX(), force.GetY(),
-          force.Angle().GetValue(), force.Length());
+void force_calculator::avoidance(const math::vector2d &closest_obstacle) {
+  math::vector2d force = m_avoidance_force(m_entity, closest_obstacle);
+  ER_DEBUG("Avoidance force: (%f, %f)@%f [%f]", force.x(), force.y(),
+           force.angle().value(), force.length());
   accum_force(force);
 } /* avoidance() */
 

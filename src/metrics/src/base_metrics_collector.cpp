@@ -22,11 +22,21 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/metrics/base_metrics_collector.hpp"
+#include <experimental/filesystem>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, metrics);
+namespace fs = std::experimental::filesystem;
+
+/*******************************************************************************
+ * Constructors/Destructor
+ ******************************************************************************/
+base_metrics_collector::base_metrics_collector(std::string ofname,
+                                               uint interval, bool cum_only)
+    : m_interval(interval), m_timestep(0), m_cum_only(cum_only),
+      m_ofname(std::move(ofname)), m_separator(";"), m_ofile() {}
 
 /*******************************************************************************
  * Member Functions
@@ -34,7 +44,14 @@ NS_START(rcppsw, metrics);
 void base_metrics_collector::csv_line_write(uint timestep) {
   std::string line;
   if (csv_line_build(line)) {
-    m_ofile << std::to_string(timestep) + m_separator + line << std::endl;
+    if (!m_cum_only) {
+      m_ofile << std::to_string(timestep) + m_separator + line << std::endl;
+    } else {
+      fs::resize_file(m_ofname, 0);
+      m_ofile.seekp(0);
+      csv_header_write();
+      m_ofile << line << std::endl;
+    }
   }
 } /* csv_line_write() */
 
@@ -58,7 +75,7 @@ void base_metrics_collector::reset(void) {
 } /* reset() */
 
 void base_metrics_collector::interval_reset(void) {
-  if ((m_timestep % m_interval == 0)) {
+  if (m_timestep > 0 && (m_timestep % m_interval == 0)) {
     reset_after_interval();
   }
 } /* interval_reset() */

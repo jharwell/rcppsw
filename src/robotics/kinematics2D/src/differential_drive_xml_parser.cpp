@@ -22,7 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/robotics/kinematics2D/differential_drive_xml_parser.hpp"
-#include <argos3/core/utility/configuration/argos_configuration.h>
+#include "rcppsw/math/degrees.hpp"
+#include "rcppsw/math/angles.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -38,27 +39,25 @@ constexpr char differential_drive_xml_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void differential_drive_xml_parser::parse(const ticpp::Element &node) {
-  ticpp::Element wnode =
-      argos::GetNode(const_cast<ticpp::Element &>(node), kXMLRoot);
-  m_params =
-      std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
+  ticpp::Element wnode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
+  m_params = std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 
-  XML_PARSE_PARAM(wnode, m_params, max_speed);
+  XML_PARSE_ATTR(wnode, m_params, max_speed);
 
-  argos::CDegrees angle;
-  argos::GetNodeAttribute(wnode, "soft_turn_max", angle);
-  m_params->soft_turn_max = argos::ToRadians(angle);
+  math::degrees angle;
+  get_node_attribute(wnode, "soft_turn_max", angle);
+  m_params->soft_turn_max = math::to_radians(angle);
 } /* parse() */
 
 void differential_drive_xml_parser::show(std::ostream &stream) const {
-  stream << build_header() << XML_PARAM_STR(m_params, soft_turn_max)
+  stream << build_header() << XML_ATTR_STR(m_params, soft_turn_max)
          << std::endl
-         << XML_PARAM_STR(m_params, max_speed) << std::endl
+         << XML_ATTR_STR(m_params, max_speed) << std::endl
          << build_footer();
 } /* show() */
 
 __rcsw_pure bool differential_drive_xml_parser::validate(void) const {
-  CHECK(m_params->soft_turn_max.GetValue() > 0.0);
+  CHECK(m_params->soft_turn_max.value() > 0.0);
   CHECK(m_params->max_speed > 0.0);
   return true;
 

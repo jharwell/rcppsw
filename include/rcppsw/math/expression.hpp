@@ -41,10 +41,12 @@ NS_START(rcppsw, math);
  * @brief A base class for easy swapping/manipulating of mathematical
  * expressions.
  */
-template <typename T>
+template <class T>
 class expression {
  public:
   expression(void) : m_last() {}
+  explicit expression(T last) : m_last(last) {}
+  virtual ~expression(void) = default;
 
   /**
    * @brief Get the last value calculated.
@@ -58,6 +60,7 @@ class expression {
     m_last = val;
     return m_last;
   }
+  void reset(void) { m_last = T{0}; }
 
   bool operator==(const expression& other) const {
     return this->last_result() == other.last_result();

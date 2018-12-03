@@ -28,6 +28,7 @@
 #include "rcppsw/patterns/visitor/visitable.hpp"
 #include "rcppsw/task_allocation/executable_task.hpp"
 #include "rcppsw/task_allocation/taskable.hpp"
+#include "rcppsw/math/range.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -47,11 +48,13 @@ NS_START(rcppsw, task_allocation);
 class polled_task : public executable_task, public taskable {
  public:
   polled_task(const std::string& name,
-              const struct task_params* const c_params,
+              const struct src_sigmoid_sel_params* abort,
+              const struct math::ema_params* estimation,
               std::unique_ptr<taskable> mechanism)
-      : executable_task(name, c_params),
+      : executable_task(name, abort, estimation),
         m_mechanism(std::move(mechanism)) {}
   ~polled_task(void) override;
+
 
   polled_task& operator=(const polled_task& other) = delete;
   polled_task(const polled_task& other) = delete;
@@ -69,8 +72,9 @@ class polled_task : public executable_task, public taskable {
    * @brief Initialize the execution time estimates of the task randomly within
    * the specified range.
    */
-  void init_random(int lb, int ub) {
-    executable_task::update_exec_estimate(random() % (ub - lb + 1) + lb);
+  void exec_estimate_init(const math::rangeu& bounds) {
+    executable_task::exec_estimate_init(std::rand() % (bounds.ub() - bounds.lb() + 1) +
+                                        bounds.lb());
   }
 
  private:

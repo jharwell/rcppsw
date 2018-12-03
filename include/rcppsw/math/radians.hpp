@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <cmath>
 #include <limits>
+#include <string>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/range.hpp"
@@ -53,40 +54,48 @@ class radians {
   static const radians kPI_OVER_THREE;
   static const radians kPI_OVER_FOUR;
   static const radians kZERO;
-  static const float kRADIANS_TO_DEGREES;
+  static const double kRADIANS_TO_DEGREES;
+
+  static radians abs(const radians& r) { return radians(r.abs_value()); }
 
   radians(void) : m_value(0.0) {}
 
-  explicit radians(float value) : m_value(value) {}
+  explicit radians(double value) : m_value(value) {}
   explicit radians(const degrees& d);
 
   /**
    * @brief Sets the value in radians.
    */
-  void set(float value) { m_value = value; }
+  void set(double value) { m_value = value; }
 
-  /**
-   * @brief Sets the value from a value in degrees.
-   */
-  void set_from_deg(float value) { m_value = value / kRADIANS_TO_DEGREES; }
+  double value(void) const { return m_value; }
+  double operator()(void) const { return value(); }
+  double abs_value(void) const { return std::abs(m_value); }
 
-  float value(void) const { return m_value; }
-  float abs_value(void) const { return std::abs(m_value); }
 
   /**
    * @brief Normalizes the value in the range [-pi, pi].
    */
   radians& signed_normalize(void) {
-    kSignedRange.wrap_value(*this);
-    return *this;
+    return *this = kSignedRange.wrap_value(*this);
   }
 
   /**
    * @brief Normalizes the value in the range [0, 2pi]
    */
   radians& unsigned_normalize(void) {
-    kUnsignedRange.wrap_value(*this);
-    return *this;
+    return *this = kUnsignedRange.wrap_value(*this);
+  }
+
+  std::string to_str(void) const {
+    return "rad(" + std::to_string(m_value) + ") -> deg(" +
+        std::to_string(m_value * radians::kRADIANS_TO_DEGREES / kPI.value()) +
+        ")";
+  }
+
+  friend std::istream& operator>>(std::istream& is, radians& r) {
+    is >> r.m_value;
+    return is;
   }
 
   radians& operator+(void) {
@@ -107,12 +116,12 @@ class radians {
     return *this;
   }
 
-  radians& operator*=(float value) {
+  radians& operator*=(double value) {
     m_value *= value;
     return *this;
   }
 
-  radians& operator/=(float value) {
+  radians& operator/=(double value) {
     m_value /= value;
     return *this;
   }
@@ -129,17 +138,17 @@ class radians {
     return res;
   }
 
-  radians operator*(float value) const {
+  radians operator*(double value) const {
     radians res(*this);
     res *= value;
     return res;
   }
 
-  float operator/(const radians& other) const {
+  double operator/(const radians& other) const {
     return m_value / other.m_value;
   }
 
-  radians operator/(float value) const {
+  radians operator/(double value) const {
     radians res(*this);
     res /= value;
     return res;
@@ -162,7 +171,8 @@ class radians {
   }
 
   bool operator==(const radians& other) const {
-    return std::fabs(m_value - other.m_value) < std::numeric_limits<float>::epsilon();
+    return std::fabs(m_value - other.m_value) <
+      std::numeric_limits<double>::epsilon();
   }
 
   bool operator!=(const radians& other) const {
@@ -180,7 +190,7 @@ class radians {
    */
   static const range<radians> kUnsignedRange;
 
-  float m_value;
+  double m_value;
 };
 
 /*******************************************************************************

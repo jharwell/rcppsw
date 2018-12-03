@@ -18,14 +18,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_FORCE_CALCULATOR_XML_PARSER_HPP_
-#define INCLUDE_RCPPSW_CONTROL_FORCE_CALCULATOR_XML_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_ROBOTICS_STEERING2D_FORCE_CALCULATOR_XML_PARSER_HPP_
+#define INCLUDE_RCPPSW_ROBOTICS_STEERING2D_FORCE_CALCULATOR_XML_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <string>
-#include <argos3/core/utility/configuration/argos_configuration.h>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/robotics/steering2D/force_calculator_xml_parser.hpp"
@@ -56,14 +55,13 @@ class force_calculator_xml_parser : public rcppsw::params::xml_param_parser {
  public:
   static constexpr char kXMLRoot[] = "steering2D";
 
-  explicit force_calculator_xml_parser(const std::shared_ptr<er::server>& server,
-                                       uint level)
-      : xml_param_parser(server, level),
+  explicit force_calculator_xml_parser(uint level)
+      : xml_param_parser(level),
         m_params(),
-        m_avoidance(server, level + 1),
-        m_arrival(server, level + 1),
-        m_wander(server, level + 1),
-        m_polar(server, level + 1) {}
+        m_avoidance(level + 1),
+        m_arrival(level + 1),
+        m_wander(level + 1),
+        m_polar(level + 1) {}
 
   void parse(const ticpp::Element& node) override;
   void show(std::ostream& stream) const override;
@@ -90,4 +88,4 @@ class force_calculator_xml_parser : public rcppsw::params::xml_param_parser {
 
 NS_END(steering2D, robotics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_CONTROL_FORCE_CALCULATOR_XML_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_ROBOTICS_STEERING2D_FORCE_CALCULATOR_XML_PARSER_HPP_ */

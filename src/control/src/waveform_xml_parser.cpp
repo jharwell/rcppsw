@@ -36,22 +36,22 @@ constexpr char waveform_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void waveform_xml_parser::parse(const ticpp::Element& node) {
+void waveform_xml_parser::parse(const ticpp::Element &node) {
   if (nullptr != node.FirstChild(xml_root(), false)) {
     ticpp::Element vnode =
-        get_node(const_cast<ticpp::Element&>(node), xml_root());
+        get_node(const_cast<ticpp::Element &>(node), xml_root());
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 
-    XML_PARSE_PARAM(vnode, m_params, type);
-    XML_PARSE_PARAM(vnode, m_params, frequency);
-    XML_PARSE_PARAM(vnode, m_params, amplitude);
-    XML_PARSE_PARAM(vnode, m_params, offset);
+    XML_PARSE_ATTR(vnode, m_params, type);
+    XML_PARSE_ATTR(vnode, m_params, frequency);
+    XML_PARSE_ATTR(vnode, m_params, amplitude);
+    XML_PARSE_ATTR(vnode, m_params, offset);
     m_parsed = true;
   }
 } /* parse() */
 
-void waveform_xml_parser::show(std::ostream& stream) const {
+void waveform_xml_parser::show(std::ostream &stream) const {
   if (!m_parsed) {
     stream << build_header() << "<< Not Parsed >>" << std::endl
            << build_footer();
@@ -59,10 +59,10 @@ void waveform_xml_parser::show(std::ostream& stream) const {
   }
 
   stream << build_header() << std::endl
-         << XML_PARAM_STR(m_params, type) << std::endl
-         << XML_PARAM_STR(m_params, frequency) << std::endl
-         << XML_PARAM_STR(m_params, amplitude) << std::endl
-         << XML_PARAM_STR(m_params, offset) << std::endl
+         << XML_ATTR_STR(m_params, type) << std::endl
+         << XML_ATTR_STR(m_params, frequency) << std::endl
+         << XML_ATTR_STR(m_params, amplitude) << std::endl
+         << XML_ATTR_STR(m_params, offset) << std::endl
          << build_footer();
 } /* show() */
 

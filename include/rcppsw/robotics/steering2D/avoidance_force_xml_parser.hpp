@@ -25,7 +25,6 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include <argos3/core/utility/configuration/argos_configuration.h>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
 #include "rcppsw/robotics/steering2D/avoidance_force_params.hpp"
@@ -54,9 +53,8 @@ class avoidance_force_xml_parser : public rcppsw::params::xml_param_parser {
  public:
   static constexpr char kXMLRoot[] = "avoidance_force";
 
-  explicit avoidance_force_xml_parser(const std::shared_ptr<er::server>& server,
-                                      uint level)
-      : xml_param_parser(server, level) {}
+  explicit avoidance_force_xml_parser(uint level)
+      : xml_param_parser(level) {}
 
   void parse(const ticpp::Element& node) override;
   void show(std::ostream& stream) const override;

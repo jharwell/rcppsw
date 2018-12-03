@@ -32,6 +32,64 @@
 NS_START(rcppsw, patterns, decorator);
 
 /*******************************************************************************
+ * Macros
+ ******************************************************************************/
+/**
+ * @def DECORATE_FUNC(Func)
+ *
+ * Wraps the declaration/implementation of the decoratee (non-pointer version).
+ *
+ * Does not work for templated member functions in decorated class.
+ */
+#define DECORATE_FUNC(Func, ...)                                   \
+  template<typename... Args>                                            \
+  auto Func(Args&&... args) __VA_ARGS__ ->                              \
+      decltype(std::declval<decltype(decoratee())>().Func(args...)) { \
+    return decoratee().Func( std::forward<Args>(args)...); \
+  }
+
+/**
+ * @def DECORATE_FUNC_TEMPLATE(Type, Func)
+ *
+ * Wraps the declaration/implementation of the decoratee (non-pointer
+ * version). For decoratee types that are themselves templated types.
+ */
+#define DECORATE_FUNC_TEMPLATE(Type, Func, ...)                                   \
+  template<typename... Args>                                            \
+  auto Func(Args&&... args) __VA_ARGS__ ->                             \
+      decltype(std::declval<decltype(decorator::decorator<Type>::decoratee())>().Func(args...)) { \
+    return decorator::decorator<Type>::decoratee().Func( std::forward<Args>(args)...); \
+  }
+
+/**
+ * @def DECORATE_FUNC_PTR(Func)
+ *
+ * Wraps the declaration/implementation of the decoratee (pointer version).
+ *
+ * Does not work for templated member functions in decorated class.
+ */
+#define DECORATE_FUNC_PTR(Func, ...)                                        \
+  template<typename... Args>                                            \
+  auto Func(Args&&... args) __VA_ARGS__ ->                              \
+      decltype(std::declval<decltype(*decoratee())>()->Func(args...)) {  \
+    return decoratee()->Func( std::forward<Args>(args)...);              \
+  }
+
+/**
+ * @def DECORATE_FUNC_TEMPLATE(Type, Func)
+ *
+ * Wraps the declaration/implementation of the decoratee (pointer version).
+ *
+ * For decoratee types that are themselves templated types.
+ */
+#define DECORATE_FUNC_PTR_TEMPLATE(Type, Func, ...)                         \
+  template<typename... Args>                                            \
+  auto Func(Args&&... args) __VA_ARGS__ ->                              \
+      decltype(std::declval<decltype(decorator::decorator<Type>::decoratee())>()->Func(args...)) { \
+    return decorator::decorator<Type>::decoratee()->Func( std::forward<Args>(args)...); \
+  }
+
+/*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
@@ -45,8 +103,8 @@ NS_START(rcppsw, patterns, decorator);
 template <class D>
 class decorator {
  public:
-  template <typename... Args>
-  decorator(Args&&... args) : m_decoratee(std::forward<Args>(args)...) {}
+  template <typename... CArgs>
+  explicit decorator(CArgs&&... args) : m_decoratee(std::forward<CArgs>(args)...) {}
   virtual ~decorator(void) {}
 
   /**
@@ -63,9 +121,9 @@ class decorator {
    *
    * @param args The arguments to a decoratee constructor.
    */
-  template <typename... Args>
-  void redecorate(Args&&... args) {
-    m_decoratee = D(std::forward<Args>(args)...);
+  template <typename... CArgs>
+  void redecorate(CArgs&&... args) {
+    m_decoratee = D(std::forward<CArgs>(args)...);
   }
 
   /**
@@ -92,7 +150,7 @@ template <class D>
 class ptr_decorator {
  public:
   template <typename... Args>
-  ptr_decorator(Args&&... args) :
+  explicit ptr_decorator(Args&&... args) :
       m_decoratee(rcppsw::make_unique<D>(std::forward<Args>(args)...)) {}
   virtual ~ptr_decorator(void) {}
 

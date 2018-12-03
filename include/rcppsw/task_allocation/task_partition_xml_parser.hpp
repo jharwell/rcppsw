@@ -28,7 +28,8 @@
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
-#include "rcppsw/task_allocation/partitioning_params.hpp"
+#include "rcppsw/task_allocation/task_partition_params.hpp"
+#include "rcppsw/task_allocation/src_sigmoid_sel_xml_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -46,9 +47,9 @@ NS_START(rcppsw, task_allocation);
  */
 class task_partition_xml_parser: public rcppsw::params::xml_param_parser {
  public:
-  explicit task_partition_xml_parser(const std::shared_ptr<er::server>& server,
-                                uint level)
-      : xml_param_parser(server, level) {}
+  explicit task_partition_xml_parser(uint level)
+      : xml_param_parser(level),
+        m_sigmoid(level + 1) {}
 
   /**
    * @brief The root tag that all task task_partition parameters should lie
@@ -63,7 +64,7 @@ class task_partition_xml_parser: public rcppsw::params::xml_param_parser {
   std::string xml_root(void) const override { return kXMLRoot; }
   bool parsed(void) const override { return m_parsed; }
 
-  std::shared_ptr<partitioning_params> parse_results(void) const {
+  std::shared_ptr<task_partition_params> parse_results(void) const {
     return m_params;
   }
 
@@ -73,8 +74,9 @@ class task_partition_xml_parser: public rcppsw::params::xml_param_parser {
   }
 
   // clang-format off
-  bool                              m_parsed{false};
-  std::shared_ptr<partitioning_params> m_params{nullptr};
+  bool                                   m_parsed{false};
+  std::shared_ptr<task_partition_params> m_params{nullptr};
+  src_sigmoid_sel_xml_parser             m_sigmoid;
   // clang-format on
 };
 

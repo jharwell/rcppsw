@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <cmath>
 #include <limits>
+#include <string>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/range.hpp"
@@ -48,35 +49,50 @@ class radians;
  */
 class degrees {
  public:
-  static const float kDEGREES_TO_RADIANS;
+  static const double kDEGREES_TO_RADIANS;
 
   degrees(void) : m_value(0.0) {}
 
   /**
    * @brief Initialize from the specified value in DEGREES.
    */
-  explicit degrees(float value) : m_value(value) {}
+  explicit degrees(double value) : m_value(value) {}
+
+  /**
+   * @brief Initialize from the specified value in RADIANS.
+   */
   explicit degrees(const radians& r);
 
-  float value(void) const { return m_value; }
-  void set(float value) { m_value = value; }
+  double value(void) const { return m_value; }
 
-  float abs_value(void) const { return std::abs(m_value); }
+  double operator()(void) const { return value(); }
+
+  /**
+   * @brief Set the current value in degrees.
+   *
+   * @param value In DEGREES.
+   */
+  void set(double value) { m_value = value; }
+
+  double abs_value(void) const { return std::abs(m_value); }
 
   /**
    * @brief Normalizes the value in the range [-180, 180]
    */
   degrees& signed_normalize(void) {
-    kSignedRange.wrap_value(*this);
-    return (*this);
+    return *this = kSignedRange.wrap_value(*this);
   }
 
   /**
-   * @brief Normalizes the value in the range [0, 360]
+   * @brief Normalizes the value in the range [0, 360].
    */
   degrees& unsigned_normalize(void) {
-    kUnsignedRange.wrap_value(*this);
-    return (*this);
+    return *this = kUnsignedRange.wrap_value(*this);
+  }
+
+  std::string to_str(void) const {
+    return "deg(" + std::to_string(m_value) + ") -> rad(" +
+        std::to_string(m_value * kDEGREES_TO_RADIANS / M_PI) + ")";
   }
 
   degrees& operator+(void) {
@@ -92,7 +108,7 @@ class degrees {
     return *this;
   }
 
-  degrees& operator+=(float value) {
+  degrees& operator+=(double value) {
     m_value += value;
     return *this;
   }
@@ -101,16 +117,16 @@ class degrees {
     m_value -= other.m_value;
     return *this;
   }
-  degrees& operator-=(float value) {
+  degrees& operator-=(double value) {
     m_value -= value;
     return *this;
   }
-  degrees& operator*=(float value) {
+  degrees& operator*=(double value) {
     m_value *= value;
     return *this;
   }
 
-  degrees& operator/=(float value) {
+  degrees& operator/=(double value) {
     m_value /= value;
     return *this;
   }
@@ -127,17 +143,17 @@ class degrees {
     return res;
   }
 
-  degrees operator*(float value) const {
+  degrees operator*(double value) const {
     degrees res(*this);
     res *= value;
     return res;
   }
 
-  float operator/(const degrees& other) const {
+  double operator/(const degrees& other) const {
     return m_value / other.m_value;
   }
 
-  degrees operator/(float value) const {
+  degrees operator/(double value) const {
     degrees res(*this);
     res /= value;
     return res;
@@ -160,11 +176,17 @@ class degrees {
   }
 
   bool operator==(const degrees& other) const {
-    return std::fabs(m_value - other.m_value) < std::numeric_limits<float>::epsilon();
+    return std::fabs(m_value - other.m_value) <=
+        std::numeric_limits<double>::epsilon();
   }
 
   bool operator!=(const degrees& other) const {
     return !(*this == other);
+  }
+
+  friend std::istream& operator>>(std::istream& is, degrees& d) {
+    is >> d.m_value;
+    return is;
   }
 
  private:
@@ -172,12 +194,13 @@ class degrees {
    * @brief The signed normalization range [-180, 180]
    */
   static const range<degrees> kSignedRange;
+
   /**
    * @brief The unsigned normalization range [0, 360]
    */
   static const range<degrees> kUnsignedRange;
 
-  float m_value;
+  double m_value;
 };
 
 /*******************************************************************************
