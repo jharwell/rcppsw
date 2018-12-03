@@ -1,5 +1,5 @@
 /**
- * @file base_executive.cpp
+ * @file sigmoid_parser.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -21,41 +21,50 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/task_allocation/base_executive.hpp"
-#include "rcppsw/task_allocation/polled_task.hpp"
-#include "rcppsw/task_allocation/tdgraph.hpp"
-#include "rcppsw/task_allocation/task_executive_params.hpp"
+#include "rcppsw/math/sigmoid_xml_parser.hpp"
+#include <ext/ticpp/ticpp.h>
+
+#include "rcppsw/utils/line_parser.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, task_allocation);
+NS_START(rcppsw, math);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Global Variables
  ******************************************************************************/
-base_executive::base_executive(const struct task_executive_params* const params,
-                               tdgraph *const graph)
-    : ER_CLIENT_INIT("rcppsw.ta.executive.base"),
-      m_update_exec_ests(params->update_exec_ests),
-      m_update_interface_ests(params->update_interface_ests),
-      m_graph(graph) {}
-
-base_executive::~base_executive(void) = default;
+constexpr char sigmoid_xml_parser::kXMLRoot[];
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-__rcsw_pure const polled_task *base_executive::root_task(void) const {
-  return m_graph->root();
-} /* root_task() */
+void sigmoid_xml_parser::parse(const ticpp::Element &node) {
+  ticpp::Element snode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
+  m_params =
+      std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 
-polled_task *base_executive::root_task(void) {
-  return m_graph->root();
-} /* root_task() */
+  XML_PARSE_ATTR(snode, m_params, reactivity);
+  XML_PARSE_ATTR(snode, m_params, offset);
+  XML_PARSE_ATTR(snode, m_params, gamma);
+} /* parse() */
 
-const polled_task *base_executive::parent_task(const polled_task *v) {
-  return tdgraph::vertex_parent(*m_graph, v);
-} /* parent_task() */
+void sigmoid_xml_parser::show(std::ostream &stream) const {
+  stream << build_header()
+         << XML_ATTR_STR(m_params, reactivity) << std::endl
+         << XML_ATTR_STR(m_params, offset) << std::endl
+         << XML_ATTR_STR(m_params, gamma) << std::endl
+         << build_footer();
+} /* show() */
 
-NS_END(task_allocation, rcppsw);
+__rcsw_pure bool sigmoid_xml_parser::validate(void) const {
+  CHECK(m_params->reactivity > 0.0);
+  CHECK(m_params->offset > 0.0);
+  CHECK(IS_BETWEEN(m_params->gamma, 0.0, 1.0));
+  return true;
+
+error:
+  return false;
+} /* validate() */
+
+NS_END(math, rcppsw);

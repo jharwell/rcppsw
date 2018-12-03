@@ -46,6 +46,7 @@ NS_START(rcppsw, swarm);
  * @brief Calculates the degree of interaction of the swarm, given a list of
  * robot nearest neighbor distances from a swarm for a given instant. From
  * Szabo2014.
+ *
  */
 class interactivity {
  public:
@@ -56,12 +57,13 @@ class interactivity {
    * swarm. It is assumed (but not checked!) that the swarm does not change size
    * over time.
    */
-  double raw_degree(const std::vector<double>& dists) {
-    double raw = std::accumulate(dists.begin(), dists.end(), 0.0);
-    m_d_min = std::min(m_d_min, raw);
-    m_d_max = std::max(m_d_max, raw);
-    return raw;
+  double calc_raw(const std::vector<double>& dists) {
+    m_raw = std::accumulate(dists.begin(), dists.end(), 0.0);
+    m_d_min = std::min(m_d_min, m_raw);
+    m_d_max = std::max(m_d_max, m_raw);
+    return m_raw;
   }
+
   /**
    * @brief Return the normalized interaction degree from Szabo2014.
    *
@@ -69,11 +71,8 @@ class interactivity {
    * swarm. It is assumed (but not checked!) that the swarm does not change size
    * over time.
    */
-  double normed_degree(const std::vector<double>& dists) {
-    double raw = raw_degree(dists);
-
-    m_d_min = std::min(m_d_min, raw);
-    m_d_max = std::max(m_d_max, raw);
+  double calc_norm(const std::vector<double>& dists) {
+    double raw = calc_raw(dists);
 
     /*
      * If the max and min measurements are the same (happens on the first
@@ -83,13 +82,18 @@ class interactivity {
      * interactive we have yet seen it, and so should receive a value of 0.
      */
     if (m_d_max - m_d_min <= std::numeric_limits<double>::epsilon()) {
-      return 0.5;
+      return m_norm = 0.5;
     } else {
-      return 1.0 - (raw - m_d_min) / (m_d_max - m_d_min);
+      return m_norm = 1.0 - (raw - m_d_min) / (m_d_max - m_d_min);
     }
   }
 
+  double raw(void) const { return m_raw; }
+  double norm(void) const { return m_norm; }
+
   void reset(void) {
+    m_raw = 0.0;
+    m_norm = 0.0;
     m_d_min = std::numeric_limits<double>::max();
     m_d_max = std::numeric_limits<double>::min();
   }
@@ -98,6 +102,8 @@ class interactivity {
   // clang-format off
   double m_d_min{std::numeric_limits<double>::max()};
   double m_d_max{std::numeric_limits<double>::min()};
+  double m_raw{0.0};
+  double m_norm{0.0};
   // clang-format on
 };
 

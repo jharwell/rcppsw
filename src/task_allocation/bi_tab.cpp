@@ -175,7 +175,8 @@ polled_task * bi_tab::task_allocate(void) {
 } /* task_allocate() */
 
 std::pair<double, double> bi_tab::subtask_sw_calc(void) {
-  double prob_12, prob_21;
+  double prob_12 = 0.0;
+  double prob_21 = 0.0;
   if (subtask_sel_probability::kMethodHarwell2018 ==
       m_sel_prob.method()) {
     if (kSubtaskSelSrcExec == mc_subtask_sel_input) {

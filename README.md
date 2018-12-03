@@ -103,7 +103,7 @@ For contributing to `rcppsw`, see [CONTRIBUTING](docs/CONTRIBUTING.md)
   If the problem perists, open an issue.
 
 # License
-This project is licensed under GPL 2.0. See [LICENSE](LICENSE.md).
+This project is licensed under GPL 3.0. See [LICENSE](LICENSE.md).
 
 # Donate
 If you've found this project helpful, please consider donating somewhere between
