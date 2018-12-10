@@ -1,5 +1,5 @@
 /**
- * @file angular_order.hpp
+ * @file normalize.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,56 +18,39 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_
-#define INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_
+#ifndef INCLUDE_RCPPSW_MATH_NORMALIZE_HPP_
+#define INCLUDE_RCPPSW_MATH_NORMALIZE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
-#include <algorithm>
 #include <limits>
 
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/math/radians.hpp"
-#include "rcppsw/math/expression.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, swarm);
+NS_START(rcppsw, math);
+
 
 /*******************************************************************************
- * Class Definitions
+ * Free Functions
  ******************************************************************************/
-/**
- * @class angular_order
- * @ingroup swarm
+/*
+ * @brief Normalize a value in the range [min, max] to [0, 1].
  *
- * @brief Calculates the angular order within a swarm for a given instant. From
- * Turgut2008.
+ * If the max and min measurements are the same, then the normalized value is
+ * 0.5.
  */
-class angular_order : math::expression<double> {
- public:
-  double operator()(const std::vector<math::radians>& headings) {
-    double y = 0.0;
-    std::for_each(headings.begin(),
-                  headings.end(),
-                  [&](const auto& r) {
-                    y += std::sin(r.value());
-                  });
+static inline double normalize(double min, double max, double val) {
+    if (max - min <= std::numeric_limits<double>::epsilon()) {
+      return 0.5;
+    } else {
+      return (val - min) / (max - min);
+    }
+} /* normalize() */
 
-    double x = 0.0;
-    std::for_each(headings.begin(),
-                  headings.end(),
-                  [&](const auto& r) {
-                    x += std::cos(r.value());
-                  });
+NS_END(math, rcppsw);
 
-    return set_result(std::fabs(std::atan2(y, x)) / headings.size());
-  }
-};
-
-NS_END(swarm, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_ */
+#endif /* INCLUDE_RCPPSW_MATH_NORMALIZE_HPP_ */

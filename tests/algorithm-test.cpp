@@ -32,11 +32,16 @@
 #include "rcppsw/algorithm/max_subarray_finder.hpp"
 #include "rcppsw/algorithm/closest_pair2D.hpp"
 #include "rcppsw/math/vector2.hpp"
+#include "rcppsw/algorithm/clustering/entropy.hpp"
+#include "rcppsw/algorithm/clustering/kmeans.hpp"
+#include "rcppsw/swarm/positional_entropy.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 namespace math = rcppsw::math;
+namespace clustering = rcppsw::algorithm::clustering;
+namespace swarm = rcppsw::swarm;
 
 /*******************************************************************************
  * Test Cases
@@ -75,4 +80,45 @@ CATCH_TEST_CASE("Closest Pair", "[algorithm]") {
   CATCH_REQUIRE((res.p1 == math::vector2i(0, 2) || res.p1 == math::vector2i(0, 1)));
   CATCH_REQUIRE((res.p2 == math::vector2i(0, 2) || res.p2 == math::vector2i(0, 1)));
   CATCH_REQUIRE(res.dist == 1.0);
+}
+
+CATCH_TEST_CASE("Kmeans", "[clustering]") {
+  std::vector<double> data = {1.0, 2.0, 2.3, 1.8, 0.5, 9.8, 7.6, 8.4, 9.1, 6.4};
+  /* std::vector<double> data; */
+  /* for (size_t i = 0; i < 100000000; ++i) { */
+  /*   data.push_back(i % 10); */
+  /* } /\* for(i..) *\/ */
+
+  auto impl = std::make_unique<clustering::kmeans_impl<double>>(4);
+  clustering::kmeans<double> alg(data,
+                                 std::move(impl),
+                                 2,
+                                 10);
+  auto res = alg.run([](double a, double b) { return std::fabs(a - b); });
+  CATCH_REQUIRE(10 == res.size());
+
+  for (size_t i = 0; i < res.size(); ++i) {
+    if (i < 5) {
+      CATCH_REQUIRE(res[i] == 0);
+    } else {
+      CATCH_REQUIRE(res[i] == 1);
+    }
+  } /* for(i..) */
+}
+
+CATCH_TEST_CASE("entropy", "[clustering]") {
+  std::vector<double> data = {0, 1.0, 2.0, 3.0};
+  /* std::vector<double> data; */
+  /* for (size_t i = 0; i < 10000; ++i) { */
+  /*   data.push_back(i % 10); */
+  /* } /\* for(i..) *\/ */
+
+  auto impl = std::make_unique<clustering::entropy_impl<double>>(4);
+  clustering::entropy_balch2000<double> alg(data,
+                                            std::move(impl),
+                                            math::ranged(1.0, 2.0),
+                                            1.0);
+  double res = alg.run([](double a, double b) { return std::fabs(a - b); });
+
+  CATCH_REQUIRE(static_cast<int>((res * 100.0)) / 100.0 == 2.24);
 }

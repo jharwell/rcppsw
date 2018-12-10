@@ -1,5 +1,5 @@
 /**
- * @file angular_order.hpp
+ * @file membership_policy.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,56 +18,62 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_
-#define INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_
+#ifndef INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_MEMBERSHIP_POLICY_HPP_
+#define INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_MEMBERSHIP_POLICY_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <vector>
-#include <algorithm>
-#include <limits>
+#include <unordered_set>
 
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/math/radians.hpp"
-#include "rcppsw/math/expression.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, swarm);
+NS_START(rcppsw, algorithm, clustering);
 
 /*******************************************************************************
- * Class Definitions
+ * Template Helpers
  ******************************************************************************/
-/**
- * @class angular_order
- * @ingroup swarm
- *
- * @brief Calculates the angular order within a swarm for a given instant. From
- * Turgut2008.
- */
-class angular_order : math::expression<double> {
- public:
-  double operator()(const std::vector<math::radians>& headings) {
-    double y = 0.0;
-    std::for_each(headings.begin(),
-                  headings.end(),
-                  [&](const auto& r) {
-                    y += std::sin(r.value());
-                  });
+namespace policy {
+  class NC {};
+  class EH {};
 
-    double x = 0.0;
-    std::for_each(headings.begin(),
-                  headings.end(),
-                  [&](const auto& r) {
-                    x += std::cos(r.value());
-                  });
+template<typename Policy>
+using is_nc_ = std::is_same<Policy, NC>;
 
-    return set_result(std::fabs(std::atan2(y, x)) / headings.size());
-  }
+template<typename Policy>
+using is_eh_ = std::is_same<Policy, EH>;
+
+template<typename Policy>
+using is_nc = typename std::enable_if_t<is_nc_<Policy>::value>;
+
+template<typename Policy>
+using is_eh = typename std::enable_if_t<is_eh_<Policy>::value>;
+
+}  // namespace policy
+
+namespace membership {
+template<typename Policy, typename Enable = void>
+struct mapping;
+
+template<typename Policy>
+struct mapping<Policy, policy::is_nc<Policy>> {
+  using type = std::vector<size_t>;
 };
 
-NS_END(swarm, rcppsw);
+template<typename Policy>
+struct mapping<Policy, policy::is_eh<Policy>> {
+  using type = std::vector<std::unordered_set<size_t>>;
+};
+}  // namespace membership
 
-#endif /* INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_ */
+template<typename Policy>
+using membership_type = typename membership::mapping<Policy>::type;
+
+NS_END(clustering, algorithm, rcppsw);
+
+
+#endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_TYPENAME MEMBERSHIPPOLICY_HPP_ */

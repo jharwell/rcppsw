@@ -30,6 +30,7 @@
 #include <limits>
 
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/math/normalize.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -72,20 +73,12 @@ class interactivity {
    * over time.
    */
   double calc_norm(const std::vector<double>& dists) {
-    double raw = calc_raw(dists);
-
     /*
-     * If the max and min measurements are the same (happens on the first
-     * invocation), then the normalized value is 0, 0.5 (halfway between the min
-     * of 0.0 and max of 1.0). The 1.0 - factor is because if the raw degree is
-     * HIGHER than any we have yet seen, that means that the swarm the LEAST
-     * interactive we have yet seen it, and so should receive a value of 0.
+     * The 1.0 - factor is because if the raw degree is HIGHER than any we have
+     * yet seen, that means that the swarm the LEAST interactive we have yet
+     * seen it, and so should receive a value of 0.
      */
-    if (m_d_max - m_d_min <= std::numeric_limits<double>::epsilon()) {
-      return m_norm = 0.5;
-    } else {
-      return m_norm = 1.0 - (raw - m_d_min) / (m_d_max - m_d_min);
-    }
+    return m_norm = 1.0 - math::normalize(m_d_min, m_d_max, calc_raw(dists));
   }
 
   double raw(void) const { return m_raw; }

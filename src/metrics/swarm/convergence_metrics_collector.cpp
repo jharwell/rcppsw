@@ -22,21 +22,32 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/metrics/swarm/convergence_metrics_collector.hpp"
+#include <thread>
+
 #include "rcppsw/metrics/swarm/convergence_metrics.hpp"
 #include "rcppsw/swarm/angular_order.hpp"
+#include "rcppsw/swarm/positional_entropy.hpp"
+#include "rcppsw/algorithm/clustering/entropy.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, metrics, swarm);
+namespace rcluster = rcppsw::algorithm::clustering;
 
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
 convergence_metrics_collector::convergence_metrics_collector(
     const std::string& ofname,
-    uint interval)
-    : base_metrics_collector(ofname, interval) {}
+    uint interval,
+    bool pos_ent_enable,
+    const rmath::ranged& pos_ent_horizon,
+    double pos_ent_hdelta)
+    : base_metrics_collector(ofname, interval),
+      mc_pos_ent_enable(pos_ent_enable),
+      mc_pos_ent_hdelta(pos_ent_hdelta),
+      mc_pos_ent_horizon(pos_ent_horizon) {}
 
 /*******************************************************************************
  * Member Functions
@@ -50,7 +61,9 @@ std::string convergence_metrics_collector::csv_header_build(
       "int_avg_interact_deg_norm" + separator() +
       "int_avg_interact_deg_norm_dt" + separator() +
       "int_avg_ang_order" + separator() +
-      "int_avg_ang_order_dt" + separator();
+      "int_avg_ang_order_dt" + separator() +
+      "int_avg_pos_entropy" + separator() +
+      "int_avg_pos_entropy_dt" + separator();
   // clang-format on
 } /* csv_header_build() */
 
@@ -67,8 +80,8 @@ bool convergence_metrics_collector::csv_line_build(std::string& line) {
   double interact_raw = m_interact_stats.raw / interval();
   line += std::to_string(interact_raw) + separator();
 
-  double raw_dt = (interact_raw - m_interact_stats.start_raw);
-  line += std::to_string(raw_dt) + separator();
+  double dt = (interact_raw - m_interact_stats.start_raw);
+  line += std::to_string(dt) + separator();
 
   double interact_norm = m_interact_stats.norm / interval();
   line += std::to_string(interact_norm) + separator();
@@ -80,8 +93,14 @@ bool convergence_metrics_collector::csv_line_build(std::string& line) {
   double order = m_order_stats.order / interval();
   line += std::to_string(order) + separator();
 
-  raw_dt = (order - m_order_stats.start_order);
-  line += std::to_string(raw_dt) + separator();
+  dt = (order - m_order_stats.start_order);
+  line += std::to_string(dt) + separator();
+
+  /* output positional entropy metrics */
+  double entropy = m_pos_ent_stats.entropy / interval();
+  line += std::to_string(entropy) + separator();
+  dt = (entropy - m_pos_ent_stats.start_entropy);
+  line += std::to_string(dt) + separator();
 
   return true;
 } /* csv_line_build() */
@@ -105,7 +124,19 @@ void convergence_metrics_collector::collect(
 
   /* collect angular order metrics */
   auto headings = m.robot_headings();
-  m_order_stats.order += m_order(headings);
+  m_order_stats.order += iswarm::angular_order()(headings);
+
+  /* collect positional entropy metrics */
+  if (mc_pos_ent_enable) {
+    auto robot_positions = m.robot_positions();
+    auto clusterer = std::make_unique<rcluster::entropy_impl<rmath::vector2d>>(
+        std::thread::hardware_concurrency());
+    auto alg = iswarm::positional_entropy(robot_positions,
+                                          std::move(clusterer),
+                                          mc_pos_ent_horizon,
+                                          mc_pos_ent_hdelta);
+    m_pos_ent_stats.entropy += alg();
+  }
 } /* collect() */
 
 void convergence_metrics_collector::reset(void) {
@@ -121,6 +152,9 @@ void convergence_metrics_collector::reset_after_interval(void) {
 
   m_order_stats.start_order = m_order_stats.order / interval();
   m_order_stats.order = 0.0;
+
+  m_pos_ent_stats.start_entropy = m_pos_ent_stats.entropy / interval();
+  m_pos_ent_stats.start_entropy = 0.0;
 } /* reset_after_interval() */
 
 NS_END(swarm, metrics, rcppsw);

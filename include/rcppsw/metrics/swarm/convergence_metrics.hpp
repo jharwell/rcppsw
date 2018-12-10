@@ -27,6 +27,7 @@
 #include <vector>
 #include "rcppsw/metrics/base_metrics.hpp"
 #include "rcppsw/math/radians.hpp"
+#include "rcppsw/math/vector2.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -46,6 +47,7 @@ NS_START(rcppsw, metrics, swarm);
  *
  * - Szabo2014 (robot interaction degree)
  * - Turgut2008 (angular order)
+ * - Turgut2008/Balch2000 (positional entropy)
  *
  * Metrics are collected every timestep.
  */
@@ -64,6 +66,12 @@ class convergence_metrics : public virtual rcppsw::metrics::base_metrics {
    * orientation in 2D space.
    */
   virtual std::vector<math::radians> robot_headings(void) const = 0;
+
+  /**
+   * @brief Return a vector of 2D coordinates (one per robot), that is each
+   * robots position in 2D space.
+   */
+  virtual std::vector<math::vector2d> robot_positions(void) const = 0;
 };
 
 NS_END(swarm, metrics, rcppsw);

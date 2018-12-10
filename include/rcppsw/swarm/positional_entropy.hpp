@@ -1,5 +1,5 @@
 /**
- * @file angular_order.hpp
+ * @file positional_entropy.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,19 +18,20 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_
-#define INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_
+#ifndef INCLUDE_RCPPSW_SWARM_POSITIONAL_ENTROPY_HPP_
+#define INCLUDE_RCPPSW_SWARM_POSITIONAL_ENTROPY_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <vector>
 #include <algorithm>
-#include <limits>
 
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/math/radians.hpp"
+#include "rcppsw/algorithm/clustering/entropy.hpp"
+#include "rcppsw/math/vector2.hpp"
 #include "rcppsw/math/expression.hpp"
+#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -41,33 +42,29 @@ NS_START(rcppsw, swarm);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class angular_order
+ * @class positional_entropy
  * @ingroup swarm
  *
- * @brief Calculates the angular order within a swarm for a given instant. From
- * Turgut2008.
+ * @brief Calculate the positional entropy of the swarm, using the methods
+ * outlined in Balch2000 and Turgut2008.
  */
-class angular_order : math::expression<double> {
+class positional_entropy : public math::expression<double>,
+                           public algorithm::clustering::entropy_balch2000<math::vector2d> {
  public:
-  double operator()(const std::vector<math::radians>& headings) {
-    double y = 0.0;
-    std::for_each(headings.begin(),
-                  headings.end(),
-                  [&](const auto& r) {
-                    y += std::sin(r.value());
-                  });
+  using entropy_balch2000::entropy_balch2000;
 
-    double x = 0.0;
-    std::for_each(headings.begin(),
-                  headings.end(),
-                  [&](const auto& r) {
-                    x += std::cos(r.value());
-                  });
-
-    return set_result(std::fabs(std::atan2(y, x)) / headings.size());
+  /**
+   * @brief Calculate the positional entropy in 2D space of a swarm.
+   */
+  double operator()(void) {
+    return set_result(run([](const math::vector2d& v1,
+                             const math::vector2d& v2) {
+                            return (v1 - v2).length();
+                          }));
   }
 };
 
 NS_END(swarm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_ */
+
+#endif /* INCLUDE_RCPPSW_SWARM_POSITIONAL_ENTROPY_HPP_ */

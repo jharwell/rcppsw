@@ -1,5 +1,5 @@
 /**
- * @file angular_order.hpp
+ * @file entropy.ihpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_
-#define INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_
+#ifndef INCLUDE_RCPPSW_MATH_IENTROPY_HPP_
+#define INCLUDE_RCPPSW_MATH_IENTROPY_HPP_
 
 /*******************************************************************************
  * Includes
@@ -27,6 +27,7 @@
 #include <vector>
 #include <algorithm>
 #include <limits>
+#include <cmath>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/radians.hpp"
@@ -35,39 +36,42 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, swarm);
+NS_START(rcppsw, math);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * @class angular_order
- * @ingroup swarm
+ * @class ientropy
+ * @ingroup math
  *
- * @brief Calculates the angular order within a swarm for a given instant. From
- * Turgut2008.
+ * @brief Calculates the informational entropy of a cluster (Shannon's
+ * definition).
+ *
+ * Uses the formula:
+ *
+ * H(S) = - SUM( p_i * log2(p_i)) over all i in m.
  */
-class angular_order : math::expression<double> {
+class ientropy : math::expression<double> {
  public:
-  double operator()(const std::vector<math::radians>& headings) {
-    double y = 0.0;
-    std::for_each(headings.begin(),
-                  headings.end(),
-                  [&](const auto& r) {
-                    y += std::sin(r.value());
+  /**
+   * @brief Calculate the informational entropy.
+   *
+   * @param groups A vector of the proportional representation of each group
+   *               within the cluster. Should sum to 1, though this is not
+   *               checked.
+   */
+  double operator()(const std::vector<double>& groups) {
+    double entropy = 0.0;
+    std::for_each(groups.begin(),
+                  groups.end(),
+                  [&](const auto& prop) {
+                    entropy += prop * std::log2(prop);
                   });
-
-    double x = 0.0;
-    std::for_each(headings.begin(),
-                  headings.end(),
-                  [&](const auto& r) {
-                    x += std::cos(r.value());
-                  });
-
-    return set_result(std::fabs(std::atan2(y, x)) / headings.size());
+    return set_result(-entropy);
   }
 };
 
-NS_END(swarm, rcppsw);
+NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_ */
+#endif /* INCLUDE_RCPPSW_MATH_IENTROPY_HPP_ */

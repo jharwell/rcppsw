@@ -30,7 +30,7 @@
 #include "rcppsw/metrics/base_metrics_collector.hpp"
 #include "rcppsw/patterns/visitor/visitable.hpp"
 #include "rcppsw/swarm/interactivity.hpp"
-#include "rcppsw/swarm/angular_order.hpp"
+#include "rcppsw/math/range.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -38,6 +38,7 @@
 NS_START(rcppsw, metrics, swarm);
 
 namespace iswarm = rcppsw::swarm;
+namespace rmath = rcppsw::math;
 
 /*******************************************************************************
  * Class Definitions
@@ -58,7 +59,11 @@ class convergence_metrics_collector
    * @param ofname The output file name.
    * @param interval Collection interval.
    */
-  convergence_metrics_collector(const std::string& ofname, uint interval);
+  convergence_metrics_collector(const std::string& ofname,
+                                uint interval,
+                                bool pos_ent_enable,
+                                const rmath::ranged& pos_ent_horizon,
+                                double pos_ent_hdelta);
 
   void reset(void) override;
   void collect(const metrics::base_metrics& metrics) override;
@@ -76,16 +81,24 @@ class convergence_metrics_collector
     double start_order{0.0};
   };
 
+  struct pos_entropy_stats {
+    double entropy{0.0};
+    double start_entropy{0.0};
+  };
+
   std::string csv_header_build(const std::string& header) override;
   bool csv_line_build(std::string& line) override;
   void reset_after_interval(void) override;
 
   // clang-format off
-  iswarm::interactivity m_interact{};
-  iswarm::angular_order m_order{};
+  const bool                 mc_pos_ent_enable;
+  const double               mc_pos_ent_hdelta;
+  const rmath::ranged        mc_pos_ent_horizon;
+  iswarm::interactivity      m_interact{};
 
-  struct interact_stats m_interact_stats{};
-  struct order_stats    m_order_stats{};
+  struct interact_stats      m_interact_stats{};
+  struct order_stats         m_order_stats{};
+  struct pos_entropy_stats   m_pos_ent_stats{};
   // clang-format on
 };
 
