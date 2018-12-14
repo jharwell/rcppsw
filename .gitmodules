@@ -4,7 +4,7 @@
 	branch = devel
 [submodule "cmake"]
         path = cmake
-        url = https://github.com/jharwell/cmake-config.git
+        url = https://github.com/swarm-robotics/libra.git
 [submodule "ext/ticpp"]
 	path = ext/ticpp
 	url = https://github.com/wxFormBuilder/ticpp.git

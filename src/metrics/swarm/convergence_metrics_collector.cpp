@@ -22,11 +22,10 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/metrics/swarm/convergence_metrics_collector.hpp"
-#include <thread>
 
 #include "rcppsw/metrics/swarm/convergence_metrics.hpp"
-#include "rcppsw/swarm/angular_order.hpp"
-#include "rcppsw/swarm/positional_entropy.hpp"
+#include "rcppsw/swarm/convergence/angular_order.hpp"
+#include "rcppsw/swarm/convergence/positional_entropy.hpp"
 #include "rcppsw/algorithm/clustering/entropy.hpp"
 
 /*******************************************************************************
@@ -41,13 +40,9 @@ namespace rcluster = rcppsw::algorithm::clustering;
 convergence_metrics_collector::convergence_metrics_collector(
     const std::string& ofname,
     uint interval,
-    bool pos_ent_enable,
-    const rmath::ranged& pos_ent_horizon,
-    double pos_ent_hdelta)
+    const swc::convergence_params * const params)
     : base_metrics_collector(ofname, interval),
-      mc_pos_ent_enable(pos_ent_enable),
-      mc_pos_ent_hdelta(pos_ent_hdelta),
-      mc_pos_ent_horizon(pos_ent_horizon) {}
+      mc_params(*params) {}
 
 /*******************************************************************************
  * Member Functions
@@ -117,24 +112,27 @@ void convergence_metrics_collector::collect(
    * collect metrics, so it doesn't really matter that you are not doing
    * strictly piecewise addition.
    */
-  auto neighbors = m.robot_nearest_neighbors();
-
-  m_interact_stats.raw += m_interact.calc_raw(neighbors);
-  m_interact_stats.norm += m_interact.calc_norm(neighbors);
+  if (mc_params.interactivity.enable) {
+    auto neighbors = m.robot_nearest_neighbors();
+    m_interact_stats.raw += m_interact.calc_raw(neighbors);
+    m_interact_stats.norm += m_interact.calc_norm(neighbors);
+  }
 
   /* collect angular order metrics */
-  auto headings = m.robot_headings();
-  m_order_stats.order += iswarm::angular_order()(headings);
+  if (mc_params.ang_order.enable) {
+    auto headings = m.robot_headings();
+    m_order_stats.order += swc::angular_order()(headings, mc_params.n_threads);
+  }
 
   /* collect positional entropy metrics */
-  if (mc_pos_ent_enable) {
+  if (mc_params.pos_entropy.enable) {
     auto robot_positions = m.robot_positions();
     auto clusterer = std::make_unique<rcluster::entropy_impl<rmath::vector2d>>(
-        std::thread::hardware_concurrency());
-    auto alg = iswarm::positional_entropy(robot_positions,
-                                          std::move(clusterer),
-                                          mc_pos_ent_horizon,
-                                          mc_pos_ent_hdelta);
+        mc_params.n_threads);
+    auto alg = swc::positional_entropy(robot_positions,
+                                       std::move(clusterer),
+                                       mc_params.pos_entropy.horizon,
+                                       mc_params.pos_entropy.horizon_delta);
     m_pos_ent_stats.entropy += alg();
   }
 } /* collect() */

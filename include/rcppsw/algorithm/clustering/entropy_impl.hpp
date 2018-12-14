@@ -51,19 +51,22 @@ class entropy_impl : public clustering_impl<T, policy::EH> {
   using typename clustering_impl<T, policy::EH>::cluster_vector;
   using typename clustering_impl<T, policy::EH>::dist_calc_ftype;
 
-  explicit entropy_impl(uint n_threads) : m_n_threads(n_threads) {}
+  explicit entropy_impl(uint n_threads) : mc_n_threads(n_threads) {}
 
-  uint n_threads(void) const { return m_n_threads; }
+  uint n_threads(void) const { return mc_n_threads; }
 
-  void initialize(std::vector<T>* const,
-                  membership_type<policy::EH>* const) override {
-    /* first_touch_allocation(data, membership); */
+
+  void initialize(std::vector<T>* const data,
+                  membership_type<policy::EH>* const membership) override {
+    for (size_t i = 0; i < membership->size(); ++i) {
+      (*membership)[i].reserve(data->size());
+    } /* for(i..) */
   }
 
   void iterate(const std::vector<T>& data,
                const dist_calc_ftype& dist_func,
                cluster_vector* const clusters) override {
-    #pragma omp parallel for num_threads(m_n_threads)
+    #pragma omp parallel for num_threads(mc_n_threads)
     for (size_t i = 0; i < data.size(); ++i) {
       for (size_t j = 0; j < data.size(); ++j) {
         if (dist_func(data[i], data[j]) <= m_horizon) {
@@ -79,18 +82,10 @@ class entropy_impl : public clustering_impl<T, policy::EH> {
   void horizon(double horizon) { m_horizon = horizon; }
 
  private:
-  void first_touch_allocation(std::vector<T>* const data,
-                              membership_type<policy::EH>* const membership) {
-    for (size_t i = 0; i < membership->size(); ++i) {
-      (*data)[i] = T();
-      (*membership)[i].reserve(data->size());
-    } /* for(i...) */
-  }
-
-  // clang-format off
-  uint   m_n_threads;
-  double m_horizon{-1};
-  // clang-format on
+  /* clang-format off */
+  const uint mc_n_threads;
+  double     m_horizon{-1};
+  /* clang-format on */
 };
 
 NS_END(clustering, algorithm, rcppsw);

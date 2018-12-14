@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_SWARM_INTERACTIVITY_HPP_
-#define INCLUDE_RCPPSW_SWARM_INTERACTIVITY_HPP_
+#ifndef INCLUDE_RCPPSW_SWARM_CONVERGENCE_INTERACTIVITY_HPP_
+#define INCLUDE_RCPPSW_SWARM_CONVERGENCE_INTERACTIVITY_HPP_
 
 /*******************************************************************************
  * Includes
@@ -35,7 +35,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, swarm);
+NS_START(rcppsw, swarm, convergence);
 
 /*******************************************************************************
  * Class Definitions
@@ -100,6 +100,6 @@ class interactivity {
   // clang-format on
 };
 
-NS_END(swarm, rcppsw);
+NS_END(convergence, swarm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_SWARM_INTERACTIVITY_HPP_ */
+#endif /* INCLUDE_RCPPSW_SWARM_CONVERGENCE_INTERACTIVITY_HPP_ */

@@ -1,5 +1,5 @@
 /**
- * @file positional_entropy.hpp
+ * @file angular_order_params.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,37 +18,30 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_SWARM_POSITIONAL_ENTROPY_HPP_
-#define INCLUDE_RCPPSW_SWARM_POSITIONAL_ENTROPY_HPP_
+#ifndef INCLUDE_RCPPSW_SWARM_CONVERGENCE_ANGULAR_ORDER_PARAMS_HPP_
+#define INCLUDE_RCPPSW_SWARM_CONVERGENCE_ANGULAR_ORDER_PARAMS_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
-#include <algorithm>
+#include "rcppsw/params/base_params.hpp"
 
-#include "rcppsw/common/common.hpp"
-#include "rcppsw/algorithm/clustering/entropy.hpp"
-#include "rcppsw/math/vector2.hpp"
-#include "rcppsw/math/expression.hpp"
-#include "rcppsw/er/client.hpp"
+/*******************************************************************************
+ * Namespaces
+ ******************************************************************************/
+NS_START(rcppsw, swarm, convergence);
 
-                     const math::ranged& horizon,
-                     double horizon_delta)
-  using entropy_balch2000::entropy_balch2000;
-
-  /**
-   * @brief Calculate the positional entropy in 2D space of a swarm.
-   */
-  double operator()(void) {
-    return set_result(run([](const math::vector2d& v1,
-                             const math::vector2d& v2) {
-                            return (v1 - v2).length();
-                          }));
-  }
+/*******************************************************************************
+ * Structure Definitions
+ ******************************************************************************/
+/**
+ * @struct angular_order_params
+ * @ingroup params
+ */
+struct angular_order_params : public rcppsw::params::base_params {
+  bool enable{false};
 };
 
-NS_END(swarm, rcppsw);
+NS_END(convergence, swarm, rcppsw);
 
-
-#endif /* INCLUDE_RCPPSW_SWARM_POSITIONAL_ENTROPY_HPP_ */
+#endif /* INCLUDE_RCPPSW_SWARM_CONVERGENCE_ANGULAR_ORDER_PARAMS_HPP_ */

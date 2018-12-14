@@ -1,5 +1,5 @@
 /**
- * @file angular_order.hpp
+ * @file interactivity_params.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,56 +18,30 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_
-#define INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_
+#ifndef INCLUDE_RCPPSW_SWARM_CONVERGENCE_INTERACTIVITY_PARAMS_HPP_
+#define INCLUDE_RCPPSW_SWARM_CONVERGENCE_INTERACTIVITY_PARAMS_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
-#include <algorithm>
-#include <limits>
-
-#include "rcppsw/common/common.hpp"
-#include "rcppsw/math/radians.hpp"
-#include "rcppsw/math/expression.hpp"
+#include "rcppsw/params/base_params.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, swarm);
+NS_START(rcppsw, swarm, convergence);
 
 /*******************************************************************************
- * Class Definitions
+ * Structure Definitions
  ******************************************************************************/
 /**
- * @class angular_order
- * @ingroup swarm
- *
- * @brief Calculates the angular order within a swarm for a given instant. From
- * Turgut2008.
+ * @struct interactivity_params
+ * @ingroup params
  */
-class angular_order : math::expression<double> {
- public:
-  double operator()(const std::vector<math::radians>& headings) {
-    double y = 0.0;
-    std::for_each(headings.begin(),
-                  headings.end(),
-                  [&](const auto& r) {
-                    y += std::sin(r.value());
-                  });
-
-    double x = 0.0;
-    std::for_each(headings.begin(),
-                  headings.end(),
-                  [&](const auto& r) {
-                    x += std::cos(r.value());
-                  });
-
-    return set_result(std::fabs(std::atan2(y, x)) / headings.size());
-  }
+struct interactivity_params : public rcppsw::params::base_params {
+  bool enable{false};
 };
 
-NS_END(swarm, rcppsw);
+NS_END(convergence, swarm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_SWARM_ANGULAR_ORDER_HPP_ */
+#endif /* INCLUDE_RCPPSW_SWARM_CONVERGENCE_INTERACTIVITY_PARAMS_HPP_ */

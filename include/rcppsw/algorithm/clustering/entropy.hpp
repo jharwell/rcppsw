@@ -90,6 +90,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
         mc_horizon_delta(horizon_delta),
         m_data(data),
         m_membership(m_data.size()),
+        m_membership_cp(m_data.size()),
         m_clusters(),
         m_impl(std::move(impl)) {}
 
@@ -163,13 +164,17 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
      * Make a copy to prevent permanently deleting clusters that may be
      * duplicates for THIS horizon, but may not for a future horizon value.
      */
-    membership_type<policy::EH> tmp = m_membership;
-    balch2000_rm_dup_clusters(&tmp);
-    std::vector<double> proportions;
-    for (size_t i = 0; i < tmp.size(); ++i) {
-      double prop = static_cast<double>(tmp[i].size()) / m_data.size();
-      ER_TRACE("cluster@%zu size=%zu, prop=%f", i, tmp[i].size(), prop);
-      proportions.push_back(prop);
+    m_membership_cp = m_membership;
+    balch2000_rm_dup_clusters(&m_membership_cp);
+    std::vector<double> proportions(m_membership_cp.size());
+    for (size_t i = 0; i < proportions.size(); ++i) {
+      double prop = static_cast<double>(m_membership_cp[i].size()) /
+                    m_data.size();
+      ER_TRACE("cluster@%zu size=%zu, prop=%f",
+               i,
+               m_membership_cp[i].size(),
+               prop);
+      proportions[i] = prop;
     } /* for(i..) */
     return math::ientropy()(proportions);
   }
@@ -200,6 +205,13 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
 
   std::vector<T>                   m_data;
   membership_type<policy::EH>      m_membership;
+
+  /**
+   * @brief This is a member variable, rather than a local variable in
+   * \ref balch2000_iter, in order to reduce dynamic memory management overhead.
+   */
+
+  membership_type<policy::EH>      m_membership_cp;
   cluster_vector                   m_clusters;
   std::unique_ptr<entropy_impl<T>> m_impl;
   // clang-format on

@@ -52,7 +52,7 @@ class ema : public expression<T> {
   using expression<T>::set_result;
 
   explicit ema(T alpha) : m_alpha(alpha) {}
-  explicit ema(T alpha, T result) : expression<T>(result), m_alpha(alpha) {}
+  ema(T alpha, T result) : expression<T>(result), m_alpha(alpha) {}
 
   double alpha(void) const { return m_alpha; }
 

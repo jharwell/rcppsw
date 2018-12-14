@@ -29,15 +29,16 @@
 
 #include "rcppsw/metrics/base_metrics_collector.hpp"
 #include "rcppsw/patterns/visitor/visitable.hpp"
-#include "rcppsw/swarm/interactivity.hpp"
+#include "rcppsw/swarm/convergence/interactivity.hpp"
 #include "rcppsw/math/range.hpp"
+#include "rcppsw/swarm/convergence/convergence_params.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, metrics, swarm);
 
-namespace iswarm = rcppsw::swarm;
+namespace swc = rcppsw::swarm::convergence;
 namespace rmath = rcppsw::math;
 
 /*******************************************************************************
@@ -61,9 +62,7 @@ class convergence_metrics_collector
    */
   convergence_metrics_collector(const std::string& ofname,
                                 uint interval,
-                                bool pos_ent_enable,
-                                const rmath::ranged& pos_ent_horizon,
-                                double pos_ent_hdelta);
+                                const swc::convergence_params * params);
 
   void reset(void) override;
   void collect(const metrics::base_metrics& metrics) override;
@@ -91,14 +90,12 @@ class convergence_metrics_collector
   void reset_after_interval(void) override;
 
   // clang-format off
-  const bool                 mc_pos_ent_enable;
-  const double               mc_pos_ent_hdelta;
-  const rmath::ranged        mc_pos_ent_horizon;
-  iswarm::interactivity      m_interact{};
+  const swc::convergence_params mc_params;
+  swc::interactivity            m_interact{};
 
-  struct interact_stats      m_interact_stats{};
-  struct order_stats         m_order_stats{};
-  struct pos_entropy_stats   m_pos_ent_stats{};
+  struct interact_stats         m_interact_stats{};
+  struct order_stats            m_order_stats{};
+  struct pos_entropy_stats      m_pos_ent_stats{};
   // clang-format on
 };
 
