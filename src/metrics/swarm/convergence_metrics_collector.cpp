@@ -152,7 +152,6 @@ void convergence_metrics_collector::reset_after_interval(void) {
   m_order_stats.order = 0.0;
 
   m_pos_ent_stats.start_entropy = m_pos_ent_stats.entropy / interval();
-  m_pos_ent_stats.start_entropy = 0.0;
 } /* reset_after_interval() */
 
 NS_END(swarm, metrics, rcppsw);

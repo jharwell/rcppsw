@@ -40,8 +40,8 @@ class sine_waveform : public waveform {
       : waveform(params) {}
 
   double value(double time) override {
-    double t = frequency() * time + phase();
-    double v = std::sin(2*M_PI * t);
+    double t = frequency() * time;
+    double v = std::sin(2*M_PI * t + phase());
     return amplitude() * v + offset();
   }
 };
@@ -52,8 +52,9 @@ class square_waveform : public waveform {
       : waveform(params) {}
 
   double value(double time) override {
-    double t = frequency() * time + phase();
-    return amplitude() * std::copysign(1.0, std::sin(2*M_PI * t))+ offset();
+    double t = frequency() * time;
+    return amplitude() * std::copysign(1.0,
+                                       std::sin(2*M_PI * t + phase())) + offset();
   }
 };
 
@@ -62,9 +63,9 @@ class sawtooth_waveform : public waveform {
   explicit sawtooth_waveform(const struct waveform_params* const params)
       : waveform(params) {}
 
-    double value(double time) override {
-    double t = frequency() * time + phase();
-    double v = 2.0 * (t - std::floor(t + 0.5));
+  double value(double time) override {
+    double t = frequency() * time;
+    double v = 2.0 * (t - std::floor(t + 0.5) + phase());
     return amplitude() * v + offset();
   }
 };

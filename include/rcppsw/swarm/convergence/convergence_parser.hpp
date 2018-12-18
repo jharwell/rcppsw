@@ -78,7 +78,6 @@ class convergence_parser : public rcppsw::params::xml_param_parser {
   }
 
   // clang-format off
-  bool                                m_parsed{false};
   std::shared_ptr<convergence_params> m_params;
   positional_entropy_parser           m_pos_entropy;
   interactivity_parser                m_interactivity;

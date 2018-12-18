@@ -39,6 +39,7 @@ constexpr char convergence_parser::kXMLRoot[];
 void convergence_parser::parse(const ticpp::Element& node) {
   ticpp::Element cnode = get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
 
+  XML_PARSE_ATTR(cnode, m_params, n_threads);
   m_pos_entropy.parse(cnode);
   m_params->pos_entropy = *m_pos_entropy.parse_results();
   m_interactivity.parse(cnode);
@@ -48,9 +49,14 @@ void convergence_parser::parse(const ticpp::Element& node) {
 } /* parse() */
 
 __rcsw_const bool convergence_parser::validate(void) const {
-  return m_pos_entropy.validate() &&
-      m_interactivity.validate() &&
-      m_ang_order.validate();
+  CHECK(m_params->n_threads > 0);
+  CHECK(m_pos_entropy.validate());
+  CHECK(m_interactivity.validate());
+  CHECK(m_ang_order.validate());
+  return true;
+
+error:
+  return false;
 } /* validate() */
 
 NS_END(convergence, swarm, rcppsw);

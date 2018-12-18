@@ -47,6 +47,7 @@ void waveform_xml_parser::parse(const ticpp::Element &node) {
     XML_PARSE_ATTR(vnode, m_params, frequency);
     XML_PARSE_ATTR(vnode, m_params, amplitude);
     XML_PARSE_ATTR(vnode, m_params, offset);
+    XML_PARSE_ATTR(vnode, m_params, phase);
     m_parsed = true;
   }
 } /* parse() */
@@ -63,6 +64,7 @@ void waveform_xml_parser::show(std::ostream &stream) const {
          << XML_ATTR_STR(m_params, frequency) << std::endl
          << XML_ATTR_STR(m_params, amplitude) << std::endl
          << XML_ATTR_STR(m_params, offset) << std::endl
+         << XML_ATTR_STR(m_params, phase) << std::endl
          << build_footer();
 } /* show() */
 
