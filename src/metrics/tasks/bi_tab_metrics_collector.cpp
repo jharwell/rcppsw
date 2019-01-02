@@ -43,7 +43,7 @@ bi_tab_metrics_collector::bi_tab_metrics_collector(
  ******************************************************************************/
 std::string
 bi_tab_metrics_collector::csv_header_build(const std::string &header) {
-  // clang-format off
+  /* clang-format off */
   std::string line = base_metrics_collector::csv_header_build(header);
   return line + \
       "int_avg_subtask1_count" + separator() +
@@ -62,7 +62,7 @@ bi_tab_metrics_collector::csv_header_build(const std::string &header) {
       "cum_avg_partition_prob" + separator() +
       "int_avg_subtask_selection_prob" + separator() +
       "cum_avg_subtask_selection_prob" + separator();
-  // clang-format on
+  /* clang-format on */
   return line;
 } /* csv_header_build() */
 

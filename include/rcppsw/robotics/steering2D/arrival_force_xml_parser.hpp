@@ -74,10 +74,10 @@ class arrival_force_xml_parser : public rcppsw::params::xml_param_parser {
   }
 
  private:
-  // clang-format off
+  /* clang-format off */
   bool                                  m_parsed{false};
   std::shared_ptr<arrival_force_params> m_params{nullptr};
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(steering2D, robotics, rcppsw);

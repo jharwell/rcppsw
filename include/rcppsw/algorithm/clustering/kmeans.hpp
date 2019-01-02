@@ -148,7 +148,7 @@ class kmeans : public er::client<kmeans<T>> {
     return clusters;
   }
 
-  // clang-format off
+  /* clang-format off */
   const uint                                  mc_max_iter;
   const uint                                  mc_k;
 
@@ -157,7 +157,7 @@ class kmeans : public er::client<kmeans<T>> {
   detail::membership_type<detail::policy::NC> m_membership;
   cluster_vector                              m_clusters;
   std::unique_ptr<detail::kmeans_impl<T>>     m_impl;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(clustering, algorithm, rcppsw);

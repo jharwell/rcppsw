@@ -329,12 +329,12 @@ class client {
 
 
  private:
-  // clang-format off
+  /* clang-format off */
   static const char         mc_console_layout[];
   static const char         mc_file_layout[];
   static bool               m_initialized;
   log4cxx::LoggerPtr        m_logger{};
-  // clang-format on
+  /* clang-format on */
 };
 
 template<typename T>

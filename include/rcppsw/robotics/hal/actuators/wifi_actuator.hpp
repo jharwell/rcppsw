@@ -38,7 +38,15 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, robotics, hal, actuators);
+NS_START(rcppsw, robotics, hal, actuators, detail);
+
+/*******************************************************************************
+ * Templates
+ ******************************************************************************/
+template<typename Actuator>
+using is_argos_rab_actuator = std::is_same<Actuator,
+                                           argos::CCI_RangeAndBearingActuator>;
+NS_END(detail);
 
 /*******************************************************************************
  * Class Definitions
@@ -55,21 +63,16 @@ NS_START(rcppsw, robotics, hal, actuators);
 template<typename T>
 class _wifi_actuator {
  public:
-  template<typename U = T>
-  explicit _wifi_actuator(typename std::enable_if_t<std::is_same<U,
-                          argos::CCI_RangeAndBearingActuator>::value,
-                          argos::CCI_RangeAndBearingActuator> * wifi)
-      : m_wifi(wifi) {}
+
+  explicit _wifi_actuator(T* const wifi) : m_wifi(wifi) {}
 
 
   /**
    * @brief Start broadcasting the specified data to all footbots within range.
    */
-  template <typename U = T>
-  typename std::enable_if_t<std::is_same<U,
-                                         argos::CCI_RangeAndBearingActuator>::value,
-                            void>
-  broadcast_start(const struct wifi_packet& packet) {
+  template <typename U = T,
+            RCPPSW_SFINAE_REQUIRE(detail::is_argos_rab_actuator<U>::value)>
+  void broadcast_start(const struct wifi_packet& packet) {
     for (size_t i = 0; i < packet.data.size(); ++i) {
       m_wifi->SetData(i, packet.data[i]);
     } /* for(i..) */
@@ -79,27 +82,23 @@ class _wifi_actuator {
    * @brief Stop broadcasting the previously specified data to all footbots
    * within range.
    */
-  template <typename U = T>
-  typename std::enable_if_t<std::is_same<U,
-                                         argos::CCI_RangeAndBearingActuator>::value,
-                            void>
-  broadcast_stop(void) {
+  template <typename U = T,
+            RCPPSW_SFINAE_REQUIRE(detail::is_argos_rab_actuator<U>::value)>
+  void broadcast_stop(void) {
     m_wifi->ClearData();
   }
 
   /**
    * @brief Reset the wifi device.
    */
-  template <typename U = T>
-  typename std::enable_if_t<std::is_same<U,
-                                         argos::CCI_RangeAndBearingActuator>::value,
-                            void>
-  reset(void) {
+  template <typename U = T,
+            RCPPSW_SFINAE_REQUIRE(detail::is_argos_rab_actuator<U>::value)>
+  void reset(void) {
     m_wifi->ClearData();
   }
 
  private:
-  T* m_wifi;
+  T* const m_wifi;
 };
 
 #if HAL_CONFIG == HAL_CONFIG_ARGOS_FOOTBOT

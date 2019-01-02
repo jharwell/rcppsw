@@ -69,9 +69,9 @@ class interactivity_parser : public rcppsw::params::xml_param_parser {
     return m_params;
   }
 
-  // clang-format off
+  /* clang-format off */
   std::shared_ptr<interactivity_params> m_params;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(convergence, swarm, rcppsw);

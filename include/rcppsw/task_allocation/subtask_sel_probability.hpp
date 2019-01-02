@@ -149,9 +149,9 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
    */
   double calc_sigmoid(const time_estimate& est1, const time_estimate& est2);
 
-  // clang-format off
+  /* clang-format off */
   const std::string mc_method;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(task_allocation, rcppsw);

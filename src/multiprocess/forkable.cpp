@@ -22,18 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/multiprocess/forkable.hpp"
-#include "rcppsw/common/common.hpp"
-#include "rcsw/common/dbg.h"
 #include "rcsw/multiprocess/procm.h"
-#include <assert.h>
-#include <fcntl.h>
-#include <limits.h>
-#include <stdlib.h>
-#include <string.h>
-#include <string>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <vector>
 
 /*******************************************************************************
  * Namespaces

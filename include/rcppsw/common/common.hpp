@@ -83,10 +83,30 @@
  */
 #define RCPPSW_WRAP_MEMFUNC(Func, Member, ...)            \
   template<typename... Args >                                           \
-  auto Func(Args&&... args) __VA_ARGS__ ->                         \
+  auto Func(Args&&... args) __VA_ARGS__ ->                              \
       decltype(std::declval<decltype(Member)>().Func(args...)) {        \
     return Member.Func(std::forward<Args>(args)...);                    \
   }
+
+/**
+ * @def SFINAE_REQUIRE(...)
+ *
+ * Specify the condition to enable a function for SFINAE.
+ *
+ * It turns out that in C++14, a default template type parameter (e.g. typename
+ * = std::enable_if<...>::value)is NOT considered part of a function's signature
+ * for the purposes of SFINAE, so functions with 100% identical signatures
+ * except for such a parameter will cause a compilation error.
+ *
+ * However, a non-template type parameter (e.g. a template parameter that is an
+ * integer) that are defaulted (i.e. have a default value specified) ARE
+ * considered part of a function's signature for the purposes of SFINAE, so two
+ * functions that differ only in the value of the defaulted non-type parameter
+ * in their template argument lists will be considered distinct and trigger
+ * SFINAE as expected.
+ */
+#define RCPPSW_SFINAE_REQUIRE(...) typename std::enable_if<__VA_ARGS__, \
+                                                           int>::type = 0
 
 /*******************************************************************************
  * Namespaces
@@ -110,10 +130,6 @@ template<class T>
 struct has_to_str<T,
                      void_t<decltype(std::declval<T>().to_str())>
                      > : std::true_type {};
-
-template<class unused, class = void_t<> >
-struct can_stringify : std::false_type {};
-
 }  // namespace detail
 
 template<typename T, typename = std::enable_if_t<detail::has_to_str<T>::value>>

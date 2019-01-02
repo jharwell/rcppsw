@@ -59,9 +59,9 @@ class avoidance_force {
                              const math::vector2d& closest) const;
 
  private:
-  // clang-format off
+  /* clang-format off */
   const double mc_max;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(steering2D, robotics, rcppsw);

@@ -126,14 +126,14 @@ class base_executive : public rcppsw::er::client<base_executive> {
   tdgraph* graph(void) { return m_graph.get(); }
 
  private:
-  // clang-format off
+  /* clang-format off */
   bool                        m_update_exec_ests;
   bool                        m_update_interface_ests;
   polled_task*                m_current_task{nullptr};
   std::list<abort_notify_cb>  m_task_abort_notify{};
   std::list<finish_notify_cb> m_task_finish_notify{};
   std::unique_ptr<tdgraph>    m_graph;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(task_allocation, rcppsw);

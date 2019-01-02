@@ -50,7 +50,7 @@ convergence_metrics_collector::convergence_metrics_collector(
 std::string convergence_metrics_collector::csv_header_build(
     const std::string& header) {
   return base_metrics_collector::csv_header_build(header) +
-      // clang-format off
+      /* clang-format off */
       "int_avg_interact_deg_raw" + separator() +
       "int_avg_interact_deg_raw_dt" + separator() +
       "int_avg_interact_deg_norm" + separator() +
@@ -59,7 +59,7 @@ std::string convergence_metrics_collector::csv_header_build(
       "int_avg_ang_order_dt" + separator() +
       "int_avg_pos_entropy" + separator() +
       "int_avg_pos_entropy_dt" + separator();
-  // clang-format on
+  /* clang-format on */
 } /* csv_header_build() */
 
 bool convergence_metrics_collector::csv_line_build(std::string& line) {

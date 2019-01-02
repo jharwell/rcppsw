@@ -89,14 +89,14 @@ class convergence_metrics_collector
   bool csv_line_build(std::string& line) override;
   void reset_after_interval(void) override;
 
-  // clang-format off
+  /* clang-format off */
   const swc::convergence_params mc_params;
   swc::interactivity            m_interact{};
 
   struct interact_stats         m_interact_stats{};
   struct order_stats            m_order_stats{};
   struct pos_entropy_stats      m_pos_ent_stats{};
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(swarm, metrics, rcppsw);

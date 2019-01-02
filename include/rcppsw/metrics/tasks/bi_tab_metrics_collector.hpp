@@ -61,57 +61,54 @@ class bi_tab_metrics_collector : public base_metrics_collector {
   std::string csv_header_build(const std::string& header) override;
   bool csv_line_build(std::string& line) override;
 
-  uint int_subtask1_count(void) const { return m_int_subtask1_count; }
-  uint int_subtask2_count(void) const { return m_int_subtask2_count; }
-
  private:
-  // clang-format off
-  /*
-   * @brief All of these are vectors, rather than scalars, so that we can obtain
-   * per-robot averages in an interval (average in space), rather only averages
-   * in time which is all we can get from scalars.
-   */
+  /* clang-format off */
   /**
-   * @brief # Times subtask 1 was chosen if partitioning was employed.
+   * @brief # Times subtask 1 was chosen if partitioning was employed within an
+   * interval.
    */
   uint   m_int_subtask1_count{0};
 
   /**
-   * @brief # Times subtask 2 was chosen if partitioning was employed.
+   * @brief # Times subtask 2 was chosen if partitioning was employed within an
+   * interval.
    */
   uint   m_int_subtask2_count{0};
 
   /**
-   * @brief # Times partitioning was employed when allocating a task.
+   * @brief # Times partitioning was employed when allocating a task within an
+   * interval.
    */
   uint   m_int_partition_count{0};
 
   /**
-   * @brief # Times partitioning was not employed when allocating a task.
+   * @brief # Times partitioning was not employed when allocating a task within
+   * an interval.
    */
   uint   m_int_no_partition_count{0};
 
   /**
    * @brief # Times when task allocation resulted in a different task being
-   * executed than previous.
+   * executed than previous within an interval.
    */
   uint   m_int_task_sw_count{0};
 
   /**
    * @brief # Times when task allocation resulted in a task of a different
-   * depth being executed than previous.
+   * depth being executed than previous within an interval.
    */
   uint   m_int_task_depth_sw_count{0};
 
 
   /**
-   * @brief The average partitioning probability of the root task in the TAB.
+   * @brief The average partitioning probability of the root task in the TAB
+   * within an interval
    */
   double m_int_partition_prob{0.0};
 
   /**
    * @brief The average subtask selection probability of the root task in the
-   * TAB.
+   * TAB within an interval.
    */
   double m_int_subtask_selection_prob{0.0};
 
@@ -123,7 +120,7 @@ class bi_tab_metrics_collector : public base_metrics_collector {
   uint   m_cum_task_depth_sw_count{0};
   double m_cum_partition_prob{0.0};
   double m_cum_subtask_selection_prob{0.0};
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(tasks, metrics, rcppsw);

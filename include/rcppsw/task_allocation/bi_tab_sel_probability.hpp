@@ -124,9 +124,9 @@ class bi_tab_sel_probability : public er::client<bi_tab_sel_probability>,
    */
   double calc_sigmoid(double balance_ratio1, double balance_ratio2);
 
-  // clang-format off
+  /* clang-format off */
   const std::string mc_method;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(task_allocation, rcppsw);

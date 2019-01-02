@@ -92,12 +92,12 @@ class interactivity {
   }
 
  private:
-  // clang-format off
+  /* clang-format off */
   double m_d_min{std::numeric_limits<double>::max()};
   double m_d_max{std::numeric_limits<double>::min()};
   double m_raw{0.0};
   double m_norm{0.0};
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(convergence, swarm, rcppsw);

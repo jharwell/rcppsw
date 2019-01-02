@@ -81,12 +81,12 @@ class exec_estimates_parser: public params::xml_param_parser,
     return m_params;
   }
 
-  // clang-format off
+  /* clang-format off */
   bool                                   m_parsed{false};
   std::shared_ptr<exec_estimates_params> m_params{nullptr};
   math::ema_xml_parser                   m_ema;
   std::list<std::string>                 m_task_names;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(task_allocation, rcppsw);

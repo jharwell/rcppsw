@@ -37,7 +37,16 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, robotics, hal, actuators);
+NS_START(rcppsw, robotics, hal, actuators, detail);
+
+/*******************************************************************************
+ * Templates
+ ******************************************************************************/
+template<typename Actuator>
+using is_argos_led_actuator = std::is_same<Actuator,
+                                           argos::CCI_LEDsActuator>;
+
+NS_END(detail);
 
 /*******************************************************************************
  * Class Definitions
@@ -53,11 +62,7 @@ NS_START(rcppsw, robotics, hal, actuators);
 template<typename T>
 class _led_actuator {
  public:
-  template<typename U = T>
-  explicit _led_actuator(typename std::enable_if_t<std::is_same<U,
-                         argos::CCI_LEDsActuator>::value,
-                         argos::CCI_LEDsActuator> * leds)
-      : m_leds(leds) {}
+  explicit _led_actuator(T* const leds) : m_leds(leds) {}
 
   /**
    * @brief Set a single LED on the footbot robot to a specific color (or set
@@ -71,11 +76,9 @@ class _led_actuator {
    *
    * @return \ref status_t.
    */
-  template <typename U = T>
-  typename std::enable_if_t<std::is_same<U,
-                                         argos::CCI_LEDsActuator>::value,
-                            status_t>
-  set_color(int id, utils::color color) {
+  template <typename U = T,
+            RCPPSW_SFINAE_REQUIRE(detail::is_argos_led_actuator<U>::value)>
+  status_t set_color(int id, utils::color color) {
     if (-1 == id) {
       m_leds->SetAllColors(argos::CColor(color.red(),
                                          color.green(),
@@ -103,11 +106,9 @@ class _led_actuator {
    *
    * @return \ref status_t.
    */
-  template <typename U = T>
-  typename std::enable_if_t<std::is_same<U,
-                                         argos::CCI_LEDsActuator>::value,
-                            status_t>
-  set_intensity(int id, uint8_t intensity) {
+  template <typename U = T,
+            RCPPSW_SFINAE_REQUIRE(detail::is_argos_led_actuator<U>::value)>
+  status_t set_intensity(int id, uint8_t intensity) {
     if (-1 == id) {
       m_leds->SetAllIntensities(intensity);
     } else {

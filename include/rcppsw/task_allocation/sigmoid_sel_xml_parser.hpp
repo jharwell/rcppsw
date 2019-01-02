@@ -71,10 +71,10 @@ class sigmoid_sel_xml_parser: public rcppsw::params::xml_param_parser {
     return m_params;
   }
 
-  // clang-format off
+  /* clang-format off */
   std::shared_ptr<sigmoid_sel_params> m_params{nullptr};
   math::sigmoid_xml_parser            m_sigmoid;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(task_allocation, rcppsw);

@@ -77,13 +77,13 @@ class force_calculator_xml_parser : public rcppsw::params::xml_param_parser {
     return m_params;
   }
 
-  // clang-format off
+  /* clang-format off */
   std::shared_ptr<force_calculator_params> m_params{nullptr};
   avoidance_force_xml_parser               m_avoidance;
   arrival_force_xml_parser                 m_arrival;
   wander_force_xml_parser                  m_wander;
   polar_force_xml_parser                   m_polar;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(steering2D, robotics, rcppsw);

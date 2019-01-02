@@ -188,10 +188,10 @@ class tdgraph : public er::client<tdgraph> {
    */
   uint vertex_depth_impl(const polled_task*v, int depth) const;
 
-  // clang-format off
+  /* clang-format off */
   polled_task*       m_root;
   graph_impl         m_graph;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(task_allocation, rcppsw);

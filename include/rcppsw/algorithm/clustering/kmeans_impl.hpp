@@ -103,9 +103,9 @@ class kmeans_impl : public clustering_impl<T, policy::NC> {
     } /* for(i...) */
   }
 
-  // clang-format off
+  /* clang-format off */
   uint m_n_threads;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(detail, clustering, algorithm, rcppsw);

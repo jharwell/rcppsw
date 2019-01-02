@@ -165,11 +165,11 @@ class range : public er::client<range<T>> {
   }
 
  private:
-  // clang-format off
+  /* clang-format off */
   T m_lb;
   T m_ub;
   T m_span;
-  // clang-format on
+  /* clang-format on */
 };
 
 using rangei = range<int>;

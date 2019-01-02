@@ -77,12 +77,12 @@ class convergence_parser : public rcppsw::params::xml_param_parser {
     return m_params;
   }
 
-  // clang-format off
+  /* clang-format off */
   std::shared_ptr<convergence_params> m_params;
   positional_entropy_parser           m_pos_entropy;
   interactivity_parser                m_interactivity;
   angular_order_parser                m_ang_order;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(convergence, swarm, rcppsw);

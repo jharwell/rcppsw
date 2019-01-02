@@ -61,11 +61,11 @@ class sigmoid : public expression<double> {
   double gamma(void) const { return m_gamma; }
 
  private:
-  // clang-format off
+  /* clang-format off */
   double m_reactivity{0.0};
   double m_offset{0.0};
   double m_gamma{0.0};
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(math, rcppsw);

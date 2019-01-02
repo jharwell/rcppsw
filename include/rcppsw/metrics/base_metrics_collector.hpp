@@ -154,14 +154,14 @@ class base_metrics_collector {
   const std::string& separator(void) const { return m_separator; }
 
  private:
-  // clang-format off
+  /* clang-format off */
   int           m_interval;
   uint          m_timestep;
   bool          m_cum_only;
   std::string   m_ofname;
   std::string   m_separator;
   std::ofstream m_ofile;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(metrics, rcppsw);

@@ -109,7 +109,7 @@ class overlay_grid2D : public base_overlay_grid2D<T> {
     return grid_view<T>(m_cells[indices[x][y]]);
   }
 
-  grid_view<T> subgrid(uint x_min, uint y_min, uint x_max, uint y_max) const {
+  const_grid_view<T> subgrid(uint x_min, uint y_min, uint x_max, uint y_max) const {
     typename grid_type<T>::index_gen indices;
 
     index_range x(static_cast<index_range::index>(x_min),

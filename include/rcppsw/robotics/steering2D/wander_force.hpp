@@ -54,7 +54,7 @@ class wander_force {
   math::vector2d operator()(const boid& entity);
 
  private:
-  // clang-format off
+  /* clang-format off */
   uint                             m_interval;
   int                              m_count{-1};
   bool                             m_use_normal;
@@ -66,7 +66,7 @@ class wander_force {
   math::radians                    m_angle;
   std::random_device               m_rng{};
   std::normal_distribution<double> m_normal_dist;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(steering2D, robotics, rcppsw);

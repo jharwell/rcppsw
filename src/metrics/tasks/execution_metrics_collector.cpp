@@ -43,7 +43,7 @@ execution_metrics_collector::execution_metrics_collector(
  ******************************************************************************/
 std::string
 execution_metrics_collector::csv_header_build(const std::string &header) {
-  // clang-format off
+  /* clang-format off */
   return base_metrics_collector::csv_header_build(header) +
       "int_avg_exec_time" + separator() +
       "cum_avg_exec_time" + separator() +
@@ -59,7 +59,7 @@ execution_metrics_collector::csv_header_build(const std::string &header) {
       "cum_avg_complete_count" + separator() +
       "int_avg_interface_count" + separator() +
       "cum_avg_interface_count" + separator();
-  // clang-format on
+  /* clang-format on */
 } /* csv_header_build() */
 
 void execution_metrics_collector::reset(void) {

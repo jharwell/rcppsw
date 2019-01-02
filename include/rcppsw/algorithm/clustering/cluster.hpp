@@ -98,14 +98,14 @@ class nc_cluster {
   const T& center(void) const { return m_center; }
 
  private:
-  // clang-format off
+  /* clang-format off */
   const std::vector<T>&          mc_data;
 
   size_t                         m_id;
   membership_type<Policy>* const m_membership;
   T                              m_center;
   T                              m_prev_center{};
-  // clang-format on
+  /* clang-format on */
 };
 
 /**
@@ -147,14 +147,14 @@ class eh_cluster {
   const T& center(void) const { return m_center; }
 
  private:
-  // clang-format off
+  /* clang-format off */
   const std::vector<T>&          mc_data;
 
   size_t                         m_id;
   membership_type<Policy>* const m_membership;
   T                              m_center;
   size_t                         m_prev_size{0};
-  // clang-format on
+  /* clang-format on */
 };
 
 /*******************************************************************************

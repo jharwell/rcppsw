@@ -181,7 +181,7 @@ class differential_drive : public kinematics2D::model,
    */
   double limit(double value) const;
 
-  // clang-format off
+  /* clang-format off */
   bool                                        m_hard_turn{false};
   enum drive_type                             m_drive_type;
   double                                      m_wheel_radius;
@@ -191,7 +191,7 @@ class differential_drive : public kinematics2D::model,
   double                                      m_right_linspeed{0.0};
   differential_drive_fsm                      m_fsm;
   hal::actuators::differential_drive_actuator m_actuator;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(kinematics2D, robotics, rcppsw);

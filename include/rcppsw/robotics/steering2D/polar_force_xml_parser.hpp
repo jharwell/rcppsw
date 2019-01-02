@@ -72,10 +72,10 @@ class polar_force_xml_parser : public rcppsw::params::xml_param_parser {
   }
 
  private:
-  // clang-format off
+  /* clang-format off */
   bool                                m_parsed{false};
   std::shared_ptr<polar_force_params> m_params;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(steering2D, robotics, rcppsw);

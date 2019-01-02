@@ -156,7 +156,7 @@ class bi_tab : public metrics::tasks::bi_tab_metrics,
   polled_task* subtask_allocate(void);
   std::pair<double, double> subtask_sw_calc(void);
 
-  // clang-format off
+  /* clang-format off */
   const bool                mc_always_partition;
   const bool                mc_never_partition;
   const std::string         mc_partition_input;
@@ -173,7 +173,7 @@ class bi_tab : public metrics::tasks::bi_tab_metrics,
   const polled_task* const  m_child2;
   subtask_sel_probability   m_sel_prob;
   partition_probability     m_partition_prob;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(task_allocation, rcppsw);

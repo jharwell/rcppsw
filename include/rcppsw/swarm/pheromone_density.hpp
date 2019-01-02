@@ -51,6 +51,11 @@ NS_START(rcppsw, swarm);
  */
 class pheromone_density : public math::expression<double> {
  public:
+  /**
+   * @brief Convenience constant for use it adding pheromones to a density.
+   */
+  static constexpr double kUNIT_QUANTITY = 1.0;
+
   pheromone_density(void) : pheromone_density{0.0} {}
   explicit pheromone_density(double rho)
       : expression(), m_delta(0), m_rho(rho) {}
@@ -71,7 +76,7 @@ class pheromone_density : public math::expression<double> {
    *
    * @return The new density.
    */
-  double calc(void) {
+  double update(void) {
     double res = std::max<double>((1.0 - m_rho) * last_result() + m_delta, 0.0);
     m_delta = 0;
     return set_result(res);
@@ -99,9 +104,30 @@ class pheromone_density : public math::expression<double> {
    */
   void pheromone_set(double val) { set_result(val); m_delta = 0; }
 
+  /**
+   * @brief Subtract two pheromone density objects. Only subtracts the current
+   * values, ignoring the current deltas for each object.
+   */
+  pheromone_density operator-(const pheromone_density& other) const {
+    pheromone_density res(*this);
+    res -= other;
+    return res;
+  }
+
+  /**
+   * @brief Subtract one pheromone density object from another. Only subtracts
+   * the the current values, ignored the current deltas for each object.
+   */
+  pheromone_density& operator-=(const pheromone_density& other) {
+    this->set_result(this->last_result() - other.last_result());
+    return *this;
+  }
+
  private:
+  /* clang-format off */
   double m_delta;
   double m_rho;
+  /* clang-format on */
 };
 
 NS_END(swarm, rcppsw);

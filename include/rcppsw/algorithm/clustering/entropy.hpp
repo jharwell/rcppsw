@@ -206,7 +206,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
     } /* for(i..) */
   }
 
-  // clang-format off
+  /* clang-format off */
   const math::ranged                          mc_horizon;
   const double                                mc_horizon_delta;
 
@@ -221,7 +221,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
   detail::membership_type<detail::policy::EH> m_membership_cp;
   cluster_vector                              m_clusters;
   std::unique_ptr<detail::entropy_impl<T>>    m_impl;
-  // clang-format                             on
+  /* clang-format on */
 };
 
 NS_END(clustering, algorithm, rcppsw);
