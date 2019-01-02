@@ -34,7 +34,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, algorithm, clustering);
+NS_START(rcppsw, algorithm, clustering, detail);
 
 /*******************************************************************************
  * Class Definitions
@@ -76,6 +76,6 @@ class clustering_impl {
                           membership_type<Policy>* const membership) = 0;
 };
 
-NS_END(clustering, algorithm, rcppsw);
+NS_END(detail, clustering, algorithm, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_CLUSTERING_IMPL_HPP_ */

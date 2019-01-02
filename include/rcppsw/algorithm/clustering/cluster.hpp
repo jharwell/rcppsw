@@ -34,7 +34,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, algorithm, clustering);
+NS_START(rcppsw, algorithm, clustering, detail);
 
 /*******************************************************************************
  * Class Definitions
@@ -176,6 +176,6 @@ struct mapping<T, Policy, policy::is_eh<Policy>> {
 };
 }  // namespace cluster
 
-NS_END(clustering, algorithm, rcppsw);
+NS_END(detail, clustering, algorithm, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_CLUSTER_HPP_ */

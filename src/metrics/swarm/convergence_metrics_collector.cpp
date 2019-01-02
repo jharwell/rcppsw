@@ -127,7 +127,7 @@ void convergence_metrics_collector::collect(
   /* collect positional entropy metrics */
   if (mc_params.pos_entropy.enable) {
     auto robot_positions = m.robot_positions();
-    auto clusterer = std::make_unique<rcluster::entropy_impl<rmath::vector2d>>(
+    auto clusterer = std::make_unique<rcluster::detail::entropy_impl<rmath::vector2d>>(
         mc_params.n_threads);
     auto alg = swc::positional_entropy(robot_positions,
                                        std::move(clusterer),
@@ -152,6 +152,7 @@ void convergence_metrics_collector::reset_after_interval(void) {
   m_order_stats.order = 0.0;
 
   m_pos_ent_stats.start_entropy = m_pos_ent_stats.entropy / interval();
+  m_pos_ent_stats.entropy = 0.0;
 } /* reset_after_interval() */
 
 NS_END(swarm, metrics, rcppsw);

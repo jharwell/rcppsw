@@ -33,7 +33,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, algorithm, clustering);
+NS_START(rcppsw, algorithm, clustering, detail);
 
 /*******************************************************************************
  * Class Definitions
@@ -88,6 +88,6 @@ class entropy_impl : public clustering_impl<T, policy::EH> {
   /* clang-format on */
 };
 
-NS_END(clustering, algorithm, rcppsw);
+NS_END(detail, clustering, algorithm, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_ENTROPY_IMPL_HPP_ */

@@ -32,9 +32,37 @@
 #include "rcppsw/math/vector2.hpp"
 #include "rcppsw/math/expression.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/swarm/convergence/positional_entropy_params.hpp"
 
+/*******************************************************************************
+ * Namespaces
+ ******************************************************************************/
+NS_START(rcppsw, swarm);
+namespace ralg = algorithm;
+namespace rclustering = ralg::clustering;
+
+/*******************************************************************************
+ * Class Definitions
+ ******************************************************************************/
+/**
+ * @class positional_entropy
+ * @ingroup swarm
+ *
+ * @brief Calculate the positional entropy of the swarm, using the methods
+ * outlined in Balch2000 and Turgut2008.
+ */
+class positional_entropy : public math::expression<double>,
+                           public rclustering::entropy_balch2000<math::vector2d> {
+ public:
+  positional_entropy(const std::vector<math::vector2d>& data,
+                     std::unique_ptr<rclustering::detail::entropy_impl<math::vector2d>> impl,
                      const math::ranged& horizon,
                      double horizon_delta)
+      : entropy_balch2000<math::vector2d>(data,
+                                          std::move(impl),
+                                          horizon,
+                                          horizon_delta) {}
+
   using entropy_balch2000::entropy_balch2000;
 
   /**

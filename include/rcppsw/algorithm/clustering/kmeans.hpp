@@ -54,8 +54,12 @@ NS_START(rcppsw, algorithm, clustering);
 template <typename T>
 class kmeans : public er::client<kmeans<T>> {
  public:
-  using cluster_vector = typename clustering_impl<T, policy::NC>::cluster_vector;
-  using dist_calc_ftype = typename clustering_impl<T, policy::NC>::dist_calc_ftype;
+  using cluster_vector = typename detail::clustering_impl<
+   T,
+   policy::NC>::cluster_vector;
+  using dist_calc_ftype = typename detail::clustering_impl<
+    T,
+    policy::NC>::dist_calc_ftype;
 
   /**
    * @param data_in Vector of data to cluster.
@@ -82,13 +86,14 @@ class kmeans : public er::client<kmeans<T>> {
    * following is true:
    *
    * - The maximum # of iterations has been reached.
-   * - \ref cluster_impl::converged() returns \c TRUE (checked after each iteration).
+   * - \ref cluster_impl::converged() returns \c TRUE (checked after each
+   *   iteration).
    *
    * @return A vector where the index corresponds to the index of the data point
    * in the input data, and the value corresponds to the cluster to which the
    * data point belongs.
    */
-  membership_type<policy::NC> run(const dist_calc_ftype& dist_func) {
+  membership_type<detail::policy::NC> run(const dist_calc_ftype& dist_func) {
     ER_INFO("Initialize");
     /*
      * First, initialize the buffer that each OpenMP thread will be using. This
@@ -127,7 +132,9 @@ class kmeans : public er::client<kmeans<T>> {
   } /* run() */
 
  private:
-  using cluster_type = typename clustering_impl<T, policy::NC>::cluster_type;
+  using cluster_type = typename detail::clustering_impl<
+   T,
+   detail::policy::NC>::cluster_type;
   /**
    * @brief Method for derived classes to use to initialize centroids in
    * whatever way they choose, and perform first-touch allocation if they want
@@ -142,14 +149,14 @@ class kmeans : public er::client<kmeans<T>> {
   }
 
   // clang-format off
-  const uint                      mc_max_iter;
-  const uint                      mc_k;
+  const uint                                  mc_max_iter;
+  const uint                                  mc_k;
 
-  std::vector<T>                  m_data_in;
-  std::vector<T>                  m_data;
-  membership_type<policy::NC>     m_membership;
-  cluster_vector                  m_clusters;
-  std::unique_ptr<kmeans_impl<T>> m_impl;
+  std::vector<T>                              m_data_in;
+  std::vector<T>                              m_data;
+  detail::membership_type<detail::policy::NC> m_membership;
+  cluster_vector                              m_clusters;
+  std::unique_ptr<detail::kmeans_impl<T>>     m_impl;
   // clang-format on
 };
 

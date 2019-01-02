@@ -54,7 +54,7 @@ class positional_entropy : public math::expression<double>,
                            public algclust::entropy_balch2000<math::vector2d> {
  public:
   positional_entropy(const std::vector<math::vector2d>& data,
-                     std::unique_ptr<algclust::entropy_impl<math::vector2d>> impl,
+                     std::unique_ptr<algclust::detail::entropy_impl<math::vector2d>> impl,
                      const struct positional_entropy_params* const params)
       : entropy_balch2000(data,
                           std::move(impl),
