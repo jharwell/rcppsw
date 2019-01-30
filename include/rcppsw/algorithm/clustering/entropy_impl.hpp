@@ -31,7 +31,7 @@
 #include "rcppsw/algorithm/clustering/clustering_impl.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, algorithm, clustering, detail);
 

@@ -35,7 +35,7 @@
 #include "rcppsw/algorithm/clustering/kmeans_impl.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, algorithm, clustering);
 
@@ -56,10 +56,10 @@ class kmeans : public er::client<kmeans<T>> {
  public:
   using cluster_vector = typename detail::clustering_impl<
    T,
-   policy::NC>::cluster_vector;
+   detail::policy::NC>::cluster_vector;
   using dist_calc_ftype = typename detail::clustering_impl<
     T,
-    policy::NC>::dist_calc_ftype;
+    detail::policy::NC>::dist_calc_ftype;
 
   /**
    * @param data_in Vector of data to cluster.
@@ -68,7 +68,7 @@ class kmeans : public er::client<kmeans<T>> {
    * @param max_iter Maximum # of iterations to perform.
    */
   kmeans(const std::vector<T>& data_in,
-         std::unique_ptr<kmeans_impl<T>> impl,
+         std::unique_ptr<detail::kmeans_impl<T>> impl,
          uint k,
          uint max_iter)
       : ER_CLIENT_INIT("rcppsw.algorithm.clustering.kmeans"),
@@ -93,7 +93,7 @@ class kmeans : public er::client<kmeans<T>> {
    * in the input data, and the value corresponds to the cluster to which the
    * data point belongs.
    */
-  membership_type<detail::policy::NC> run(const dist_calc_ftype& dist_func) {
+  detail::membership_type<detail::policy::NC> run(const dist_calc_ftype& dist_func) {
     ER_INFO("Initialize");
     /*
      * First, initialize the buffer that each OpenMP thread will be using. This

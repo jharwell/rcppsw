@@ -27,13 +27,24 @@
 #include "rcppsw/control/waveform.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, control);
 
 /*******************************************************************************
  * Classes
  ******************************************************************************/
+
+/**
+ * @class sine_waveform
+ * @ingroup control
+ *
+ * Given the current time, outputs the current value of a sine wave according to
+ * configured parameters:
+ *
+ * value = amplitude * ( sin(2pi* frequency * time + phase)) + offset.
+ *
+ */
 class sine_waveform : public waveform {
  public:
   explicit sine_waveform(const struct waveform_params* const params)
@@ -46,6 +57,18 @@ class sine_waveform : public waveform {
   }
 };
 
+/**
+ * @class square_waveform
+ * @ingroup control
+ *
+ * Given the current time, outputs the current value of a square wave according
+ * to configured parameters:
+ *
+ * value = amplitude * signof(sin(2pi* frequency * time + phase)) + offset.
+ *
+ * Can be used to create step functions as well.
+ *
+ */
 class square_waveform : public waveform {
  public:
   explicit square_waveform(const struct waveform_params* const params)
@@ -58,6 +81,15 @@ class square_waveform : public waveform {
   }
 };
 
+/**
+ * @class sawtooth_waveform
+ * @ingroup control
+ *
+ * Given the current time, outputs the current value of a sawtooth wave
+ * according to configured parameters:
+ *
+ * value = amplitude * ( 2 * (t - floor(time + 0.5) + phase)) + offset.
+ */
 class sawtooth_waveform : public waveform {
  public:
   explicit sawtooth_waveform(const struct waveform_params* const params)

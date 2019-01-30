@@ -31,7 +31,7 @@
 #include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 namespace ticpp { class Element; }
 
@@ -42,10 +42,16 @@ struct base_params;
  * Macros
  ******************************************************************************/
 #define XML_ATTR_STR(container, name) std::string(#name) << "=" << (container)->name
-#define XML_PARSE_ATTR(node, container, name)                          \
-  this->get_node_attribute((node),                                       \
-                           #name,                                       \
-                           (container)->name)
+#define XML_PARSE_ATTR(node, container, name)   \
+  this->node_attr_get((node),                   \
+                      #name,                    \
+                      (container)->name)
+
+#define XML_PARSE_ATTR_DFLT(node, container, name,dflt) \
+  this->node_attr_get((node),                           \
+                      #name,                            \
+                      (container)->name,                \
+                      dflt)
 
 /*******************************************************************************
  * Class Definitions
@@ -135,7 +141,7 @@ class xml_param_parser : public er::client<xml_param_parser> {
    *
    * If no such node exists, an assertion halts the program.
    */
-  ticpp::Element& get_node(ticpp::Element& node, const std::string& tag);
+  ticpp::Element& node_get(ticpp::Element& node, const std::string& tag);
 
   /**
    * @brief Get an attribute inside a node.
@@ -145,9 +151,9 @@ class xml_param_parser : public er::client<xml_param_parser> {
    * @param buf  The result buffer.
    */
   template<typename T>
-  void get_node_attribute(ticpp::Element& node,
-                          const std::string& attr,
-                          T& buf) {
+  void node_attr_get(ticpp::Element& node,
+                     const std::string& attr,
+                     T& buf) {
     node.GetAttribute(attr, &buf, true);
   }
 
@@ -156,9 +162,27 @@ class xml_param_parser : public er::client<xml_param_parser> {
    * specially, or at least I can't figure out how to make them also work the
    * template version).
    */
-  void get_node_attribute(ticpp::Element& node,
-                          const std::string& attr,
-                          bool& buf);
+  void node_attr_get(ticpp::Element& node,
+                     const std::string& attr,
+                     bool& buf);
+
+
+  /**
+   * @brief Get an attribute inside a node, or substitute a default value if the
+   * attribute does not exist.
+   *
+   * @param node The node to search.
+   * @param attr The attribute name.
+   * @param buf  The result buffer.
+   */
+  template<typename T>
+  void node_attr_get(ticpp::Element& node,
+                     const std::string& attr,
+                     T& buf,
+                     const T& dflt) {
+    node.GetAttributeOrDefault(attr, &buf, dflt);
+  }
+
   virtual bool parsed(void) const { return true; }
 
  private:

@@ -32,7 +32,7 @@
 #include "rcppsw/algorithm/clustering/membership_policy.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, algorithm, clustering, detail);
 

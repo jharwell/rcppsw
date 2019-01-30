@@ -26,7 +26,7 @@
 #include "rcppsw/math/angles.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, kinematics2D);
 
@@ -39,13 +39,13 @@ constexpr char differential_drive_xml_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void differential_drive_xml_parser::parse(const ticpp::Element &node) {
-  ticpp::Element wnode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
+  ticpp::Element wnode = node_get(const_cast<ticpp::Element &>(node), kXMLRoot);
   m_params = std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 
   XML_PARSE_ATTR(wnode, m_params, max_speed);
 
   math::degrees angle;
-  get_node_attribute(wnode, "soft_turn_max", angle);
+  node_attr_get(wnode, "soft_turn_max", angle);
   m_params->soft_turn_max = math::to_radians(angle);
 } /* parse() */
 

@@ -24,7 +24,7 @@
 #include "rcppsw/robotics/steering2D/polar_force_xml_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, steering2D);
 
@@ -39,7 +39,7 @@ constexpr char polar_force_xml_parser::kXMLRoot[];
 void polar_force_xml_parser::parse(const ticpp::Element &node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
     ticpp::Element pnode =
-        get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
+        node_get(const_cast<ticpp::Element &>(node), kXMLRoot);
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
     XML_PARSE_ATTR(pnode, m_params, max);

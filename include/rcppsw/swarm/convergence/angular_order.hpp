@@ -33,7 +33,7 @@
 #include "rcppsw/math/expression.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, swarm, convergence);
 

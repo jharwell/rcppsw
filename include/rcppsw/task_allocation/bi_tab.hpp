@@ -33,7 +33,7 @@
 #include "rcppsw/task_allocation/subtask_sel_probability.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 class polled_task;

@@ -183,7 +183,7 @@
  * @def ER_CLIENT_INIT(name)
  *
  * Initialize a logging client with the specified name (easier to do a macro
- * than to have to try do the casting every single type).
+ * than to have to try do the casting every single time).
  */
 #ifndef RCPPSW_ER_NREPORT
 #define ER_CLIENT_INIT(name)                                         \
@@ -219,7 +219,7 @@ rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>()
   rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>::pop_ndc()
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, er);
 
@@ -231,7 +231,9 @@ NS_START(rcppsw, er);
  * @ingroup er
  *
  * @brief A class that can connect to a logging server for logging of important
- * events. Basically a thin wrapper around log4cxx.
+ * events. Basically a thin wrapper around log4cxx. If ER_NDEBUG is defined,
+ * then this class will mostly compile away to nothing, and most member
+ * functions will not be defined.
  */
 template<typename T>
 class client {

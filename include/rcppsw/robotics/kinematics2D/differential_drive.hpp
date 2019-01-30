@@ -31,7 +31,7 @@
 #include "rcppsw/robotics/hal/actuators/differential_drive_actuator.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, kinematics2D);
 

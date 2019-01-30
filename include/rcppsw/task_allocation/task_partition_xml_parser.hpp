@@ -32,7 +32,7 @@
 #include "rcppsw/task_allocation/src_sigmoid_sel_xml_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 

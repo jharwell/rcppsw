@@ -35,7 +35,7 @@
 #include "rcppsw/robotics/steering2D/polar_force_xml_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, steering2D);
 

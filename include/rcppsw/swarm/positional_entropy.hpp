@@ -35,7 +35,7 @@
 #include "rcppsw/swarm/convergence/positional_entropy_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, swarm);
 namespace ralg = algorithm;

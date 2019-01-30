@@ -28,7 +28,7 @@
 #include "rcppsw/metrics/base_metrics.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, metrics, tasks);
 

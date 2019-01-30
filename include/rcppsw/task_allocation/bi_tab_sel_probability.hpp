@@ -29,7 +29,7 @@
 #include "rcppsw/math/sigmoid.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 class bi_tab;
@@ -78,7 +78,7 @@ class bi_tab_sel_probability : public er::client<bi_tab_sel_probability>,
    * @brief Initialize subtask sel probability with default values, based
    * on whatever the selected method is.
    */
-  explicit bi_tab_sel_probability(std::string method);
+  explicit bi_tab_sel_probability(const std::string& method);
 
   /**
    * @brief Initialize subtask sel probability with method + parameter

@@ -34,7 +34,7 @@
 #include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw);
 namespace math { struct ema_params; }

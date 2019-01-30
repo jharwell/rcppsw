@@ -30,7 +30,7 @@
 #include "rcppsw/math/radians.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, steering2D);
 struct wander_force_params;

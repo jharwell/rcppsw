@@ -28,7 +28,7 @@
 #include "rcppsw/params/base_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, control);
 
@@ -38,6 +38,8 @@ NS_START(rcppsw, control);
 /**
  * @struct waveform_params
  * @ingroup control
+ *
+ * Not all parameters are applicable to all waveform types.
  */
 struct waveform_params : public rcppsw::params::base_params {
   waveform_params(const std::string& type_,
@@ -54,7 +56,7 @@ struct waveform_params : public rcppsw::params::base_params {
 
   std::string type{""};
   double frequency{0};
-  double phase{0};  /// Not applicable for all wave types.
+  double phase{0};
   double amplitude{0};
   double offset{0};
 };

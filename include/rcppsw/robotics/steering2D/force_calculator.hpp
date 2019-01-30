@@ -37,7 +37,7 @@
 #include "rcppsw/robotics/kinematics/twist.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, steering2D);
 struct force_calculator_params;

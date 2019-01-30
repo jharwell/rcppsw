@@ -27,7 +27,7 @@
 #include "rcppsw/ds/base_overlay_grid2D.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, ds);
 
@@ -46,15 +46,21 @@ NS_START(rcppsw, ds);
 template <typename T, typename... Args>
 class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
  public:
-  using base_overlay_grid2D<T>::xdsize;
-  using base_overlay_grid2D<T>::ydsize;
+  using typename base_grid2D<T*>::index_range;
+  using grid_view = typename base_grid2D<T*>::grid_view;
+  using const_grid_view = typename base_grid2D<T*>::const_grid_view;
+  using typename base_grid2D<T*>::grid_type;
+
+  using base_overlay_grid2D<T*>::xdsize;
+  using base_overlay_grid2D<T*>::ydsize;
+
   overlay_grid2D_ptr(double resolution,
                      uint x_max,
                      uint y_max,
                      Args&&... args)
       : base_overlay_grid2D<T>(resolution, x_max, y_max),
-        m_cells(boost::extents[static_cast<index_range::index>(xdsize())]
-                [static_cast<index_range::index>(ydsize())]) {
+        m_cells(boost::extents[static_cast<typename index_range::index>(xdsize())]
+                [static_cast<typename index_range::index>(ydsize())]) {
     for (auto i = m_cells.origin();
          i < m_cells.origin() + m_cells.num_elements();
          ++i) {
@@ -82,17 +88,17 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
    *
    * @return The subcircle.
    */
-  grid_view<T*> subcircle(uint x, uint y, uint radius) {
+  grid_view subcircle(uint x, uint y, uint radius) {
     auto x_range = base_overlay_grid2D<T>::circle_xrange_at_point(x, radius);
     auto y_range = base_overlay_grid2D<T>::circle_yrange_at_point(y, radius);
-    typename grid_type<T>::index_gen indices;
+    typename grid_type::index_gen indices;
 
     index_range x1(x_range.first, x_range.second, 1);
     index_range y1(y_range.first, y_range.second, 1);
-    return grid_view<T*>(m_cells[indices[x1][y1]]);
+    return grid_view(m_cells[indices[x1][y1]]);
   }
 
-  grid_view<T*> subcircle(uint x, uint y, uint radius) const {
+  grid_view subcircle(uint x, uint y, uint radius) const {
     return const_cast<overlay_grid2D_ptr<T>*>(this)->subcircle(x, y, radius);
   }
 
@@ -104,18 +110,18 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
    *
    * @return The grid.
    */
-  grid_view<T*> subgrid(uint x_min,
-                        uint y_min,
-                        uint x_max,
-                        uint y_max) {
-    typename grid_type<T>::index_gen indices;
+  grid_view subgrid(uint x_min,
+                    uint y_min,
+                    uint x_max,
+                    uint y_max) {
+    typename grid_type::index_gen indices;
 
     index_range x(x_min, x_max, 1);
     index_range y(y_min, y_max, 1);
-    return grid_view<T*>(m_cells[indices[x][y]]);
+    return grid_view(m_cells[indices[x][y]]);
   }
 
-  grid_view<T*> subgrid(uint x_min,
+  grid_view subgrid(uint x_min,
                         uint y_min,
                         uint x_max,
                         uint y_max) const {
@@ -124,16 +130,18 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
   }
 
   __rcsw_pure T& access(uint i, uint j) override {
-    return *m_cells[static_cast<index_range::index>(i)]
-                   [static_cast<index_range::index>(j)];
+    return *m_cells[static_cast<typename index_range::index>(i)]
+                   [static_cast<typename index_range::index>(j)];
   }
   __rcsw_pure T& access(const math::vector2u& c) override {
-    return *m_cells[static_cast<index_range::index>(c.x())]
-        [static_cast<index_range::index>(c.y())];
+    return *m_cells[static_cast<typename index_range::index>(c.x())]
+        [static_cast<typename index_range::index>(c.y())];
   }
 
  private:
-  grid_type<T*> m_cells;
+  /* clang-format off */
+  grid_type m_cells;
+  /* clang-format on */
 };
 
 NS_END(ds, rcppsw);

@@ -30,7 +30,7 @@
 #include "rcppsw/swarm/convergence/angular_order_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, swarm, convergence);
 

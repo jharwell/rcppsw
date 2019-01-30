@@ -30,7 +30,7 @@
 #include "rcppsw/task_allocation/base_executive.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 class bi_tab;

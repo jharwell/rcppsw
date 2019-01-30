@@ -28,7 +28,7 @@
 #include "rcppsw/patterns/factory/releasing_factory.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, control);
 class waveform;
@@ -41,7 +41,14 @@ struct waveform_params;
  * @class waveform_generator
  * @ingroup control
  *
- * @brief Factory to create waveforms of different types.
+ * @brief Factory to create waveforms of different types given the name of a
+ * waveform. Valid names are:
+ *
+ * - Sine (periodic)
+ * - Square (periodic)
+ * - Sawtooth (periodic)
+ * - Constant (aperiodic)
+ * - Null (aperiodic)
  */
 class waveform_generator : public patterns::factory::releasing_factory<waveform,
                                                                        const waveform_params*> {
@@ -53,6 +60,7 @@ class waveform_generator : public patterns::factory::releasing_factory<waveform,
   static constexpr char kNull[] = "Null";
 
   waveform_generator(void);
+
   std::unique_ptr<waveform> operator()(const std::string& name,
                                        const waveform_params* params);
 };

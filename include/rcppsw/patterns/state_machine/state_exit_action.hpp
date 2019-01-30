@@ -29,7 +29,7 @@
 #include "rcppsw/patterns/state_machine/state_exit.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, patterns, state_machine);
 class base_fsm;

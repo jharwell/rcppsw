@@ -34,7 +34,7 @@
 #include "rcppsw/task_allocation/task_partition_xml_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 

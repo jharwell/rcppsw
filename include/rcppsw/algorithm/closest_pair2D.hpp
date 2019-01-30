@@ -36,7 +36,7 @@
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, algorithm);
 
@@ -61,7 +61,7 @@ struct result_type2D {
  * @class closest_pair2D
  * @ingroup algorithm
  *
- * @brief Calculate the closest two points from a set of points in O(NLogN).
+ * @brief Calculate the closest two points from a set of 2D points in O(NLogN).
  *
  * Also has a brute force (O(N^3)) algorithm that can be used for comparision.
  *
@@ -79,6 +79,17 @@ class closest_pair {
  public:
   using dist_func_type = double(const T&, const T&);
 
+  /**
+   * @brief Run the calculation algorithm.
+   *
+   * @param method The method to use.
+   * @param points A vector of points through which to search.
+   * @param dist_func A function that can be used to calculate the distance
+   *                  between two points.
+   *
+   *
+   * @return
+   */
   result_type2D<T> operator()(const std::string& method,
                               std::vector<T> points,
                               const std::function<dist_func_type>& dist_func) {

@@ -26,7 +26,7 @@
 #include "rcppsw/control/periodic_waveform.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, control);
 

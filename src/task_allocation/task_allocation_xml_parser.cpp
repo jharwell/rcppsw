@@ -24,7 +24,7 @@
 #include "rcppsw/task_allocation/task_allocation_xml_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 
@@ -37,15 +37,15 @@ constexpr char task_allocation_xml_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void task_allocation_xml_parser::parse(const ticpp::Element& node) {
-    ticpp::Element tnode = get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+    ticpp::Element tnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
     m_estimation.parse(tnode);
-    m_abort.parse(get_node(const_cast<ticpp::Element&>(tnode), "task_abort"));
-    m_subtask_sel.parse(get_node(const_cast<ticpp::Element&>(tnode),
+    m_abort.parse(node_get(const_cast<ticpp::Element&>(tnode), "task_abort"));
+    m_subtask_sel.parse(node_get(const_cast<ticpp::Element&>(tnode),
                                  "subtask_sel"));
     m_partitioning.parse(tnode);
-    m_tab_sel.parse(get_node(const_cast<ticpp::Element&>(tnode), "tab_sel"));
+    m_tab_sel.parse(node_get(const_cast<ticpp::Element&>(tnode), "tab_sel"));
 
     m_params->exec_est = *m_estimation.parse_results();
     m_params->abort = *m_abort.parse_results();

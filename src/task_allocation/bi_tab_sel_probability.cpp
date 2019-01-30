@@ -29,7 +29,7 @@
 #include "rcppsw/task_allocation/polled_task.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 
@@ -42,7 +42,7 @@ constexpr char bi_tab_sel_probability::kMethodRandom[];
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-bi_tab_sel_probability::bi_tab_sel_probability(std::string method)
+bi_tab_sel_probability::bi_tab_sel_probability(const std::string& method)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tab_sel_prob"),
       sigmoid(),
       mc_method(std::move(method)) {

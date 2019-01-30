@@ -39,7 +39,7 @@
 #include "rcppsw/patterns/state_machine/state_map_row.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, patterns, state_machine);
 

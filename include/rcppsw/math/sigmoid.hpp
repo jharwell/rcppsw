@@ -30,7 +30,7 @@
 #include "rcppsw/math/expression.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, math);
 
@@ -38,17 +38,42 @@ NS_START(rcppsw, math);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+
+/**
+ * @class sigmoid
+ * @ingroup math
+ *
+ * @brief Encapsulates base aspects common to all sigmoid functions; does not
+ * calculate anything itself, as derived sigmoids each have different input
+ * parameter requirements to calculate the value of the function at a point in
+ * space.
+ */
+
 class sigmoid : public expression<double> {
  public:
   sigmoid(void) = default;
+
+  /**
+   * @brief Construct the sigmoid using parameters.
+   */
   explicit sigmoid(const sigmoid_params* const params) :
       sigmoid{params->reactivity, params->offset, params->gamma} {}
 
+
+  /**
+   * @brief Construct the sigmoid by passing each parameter explicitly. Note
+   * that they are all of the same type, and therefore ordering is important.
+   */
   sigmoid(double reactivity, double offset, double gamma) :
       m_reactivity(reactivity),
       m_offset(offset),
       m_gamma(gamma) {}
 
+  /**
+   * @brief Initialize the sigmoid after construction. Needed if the sigmoid is
+   * just one of many functions a class may use during its internal operations,
+   * and the selection must be performed after construction of the enclosing class.
+   */
   void init(double reactivity, double offset, double gamma) {
     m_reactivity = reactivity;
     m_offset = offset;

@@ -24,7 +24,7 @@
 #include "rcppsw/robotics/steering2D/force_calculator_xml_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, steering2D);
 
@@ -37,7 +37,7 @@ constexpr char force_calculator_xml_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void force_calculator_xml_parser::parse(const ticpp::Element &node) {
-  ticpp::Element knode = get_node(const_cast<ticpp::Element &>(node), kXMLRoot);
+  ticpp::Element knode = node_get(const_cast<ticpp::Element &>(node), kXMLRoot);
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
   m_avoidance.parse(knode);

@@ -99,7 +99,7 @@
  * except for such a parameter will cause a compilation error.
  *
  * However, a non-template type parameter (e.g. a template parameter that is an
- * integer) that are defaulted (i.e. have a default value specified) ARE
+ * integer) that is defaulted (i.e. have a default value specified) ARE
  * considered part of a function's signature for the purposes of SFINAE, so two
  * functions that differ only in the value of the defaulted non-type parameter
  * in their template argument lists will be considered distinct and trigger
@@ -109,7 +109,7 @@
                                                            int>::type = 0
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw);
 
@@ -148,12 +148,6 @@ template <typename T, typename... Args>
 std::unique_ptr<T> make_unique(Args&&... args) {
   return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
 }
-
-template <class... Args>
-struct tuple_type_list {
-  template <std::size_t N>
-  using type = typename std::tuple_element<N, std::tuple<Args...>>::type;
-};
 
 NS_END(rcppsw);
 

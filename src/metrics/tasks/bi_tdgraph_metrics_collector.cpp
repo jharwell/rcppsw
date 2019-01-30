@@ -28,7 +28,7 @@
 #include "rcppsw/task_allocation/polled_task.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, metrics, tasks);
 

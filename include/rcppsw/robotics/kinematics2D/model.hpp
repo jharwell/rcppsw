@@ -28,7 +28,7 @@
 #include "rcppsw/robotics/kinematics/twist.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, kinematics2D);
 

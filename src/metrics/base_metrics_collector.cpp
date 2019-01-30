@@ -25,7 +25,7 @@
 #include <experimental/filesystem>
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, metrics);
 namespace fs = std::experimental::filesystem;

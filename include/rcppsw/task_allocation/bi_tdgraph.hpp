@@ -34,7 +34,7 @@
 #include "rcppsw/task_allocation/task_allocation_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 

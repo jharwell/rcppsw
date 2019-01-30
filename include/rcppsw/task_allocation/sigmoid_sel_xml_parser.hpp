@@ -32,7 +32,7 @@
 #include "rcppsw/math/sigmoid_xml_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 

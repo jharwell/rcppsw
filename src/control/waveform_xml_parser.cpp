@@ -24,7 +24,7 @@
 #include "rcppsw/control/waveform_xml_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, control);
 
@@ -37,35 +37,24 @@ constexpr char waveform_xml_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void waveform_xml_parser::parse(const ticpp::Element &node) {
-  if (nullptr != node.FirstChild(xml_root(), false)) {
-    ticpp::Element vnode =
-        get_node(const_cast<ticpp::Element &>(node), xml_root());
-    m_params =
-        std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
-
-    XML_PARSE_ATTR(vnode, m_params, type);
-    XML_PARSE_ATTR(vnode, m_params, frequency);
-    XML_PARSE_ATTR(vnode, m_params, amplitude);
-    XML_PARSE_ATTR(vnode, m_params, offset);
-    XML_PARSE_ATTR(vnode, m_params, phase);
-    m_parsed = true;
-  }
-} /* parse() */
-
-void waveform_xml_parser::show(std::ostream &stream) const {
-  if (!m_parsed) {
-    stream << build_header() << "<< Not Parsed >>" << std::endl
-           << build_footer();
+  /* waveforms are usually optional */
+  if (nullptr == node.FirstChild(xml_root(), false)) {
     return;
   }
+  ticpp::Element vnode =
+      node_get(const_cast<ticpp::Element &>(node), xml_root());
+  m_params =
+      std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 
-  stream << build_header() << std::endl
-         << XML_ATTR_STR(m_params, type) << std::endl
-         << XML_ATTR_STR(m_params, frequency) << std::endl
-         << XML_ATTR_STR(m_params, amplitude) << std::endl
-         << XML_ATTR_STR(m_params, offset) << std::endl
-         << XML_ATTR_STR(m_params, phase) << std::endl
-         << build_footer();
-} /* show() */
+  /*
+   * type is the only required parameter if the waveform itself is present in
+   * the XML file.
+   */
+  XML_PARSE_ATTR(vnode, m_params, type);
+  XML_PARSE_ATTR_DFLT(vnode, m_params, frequency, -1.0);
+  XML_PARSE_ATTR_DFLT(vnode, m_params, amplitude, -1.0);
+  XML_PARSE_ATTR_DFLT(vnode, m_params, offset, -1.0);
+  XML_PARSE_ATTR_DFLT(vnode, m_params, phase, -1.0);
+} /* parse() */
 
 NS_END(control, rcppsw);

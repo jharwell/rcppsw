@@ -33,7 +33,7 @@
 #include "rcppsw/patterns/factory/sharing_factory.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, params);
 namespace factory = rcppsw::patterns::factory;

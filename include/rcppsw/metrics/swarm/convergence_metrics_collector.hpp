@@ -34,7 +34,7 @@
 #include "rcppsw/swarm/convergence/convergence_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, metrics, swarm);
 

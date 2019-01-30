@@ -24,7 +24,7 @@
 #include "rcppsw/task_allocation/exec_estimates_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 
@@ -38,7 +38,7 @@ constexpr char exec_estimates_parser::kXMLRoot[];
  ******************************************************************************/
 void exec_estimates_parser::parse(const ticpp::Element& node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
-    ticpp::Element enode = get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+    ticpp::Element enode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
     m_ema.parse(enode);
@@ -54,7 +54,7 @@ void exec_estimates_parser::parse(const ticpp::Element& node) {
      */
     for (auto &s : m_task_names) {
       math::rangeu tmp{0, 0};
-      get_node_attribute(enode, s, tmp);
+      node_attr_get(enode, s, tmp);
       m_params->ranges.insert({s, tmp});
     } /* for(&s..) */
   }

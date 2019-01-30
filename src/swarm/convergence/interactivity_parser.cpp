@@ -24,7 +24,7 @@
 #include "rcppsw/swarm/convergence/interactivity_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, swarm, convergence);
 
@@ -37,7 +37,7 @@ constexpr char interactivity_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void interactivity_parser::parse(const ticpp::Element& node) {
-    ticpp::Element mnode = get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+    ticpp::Element mnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
     XML_PARSE_ATTR(mnode, m_params, enable);
 } /* parse() */
 

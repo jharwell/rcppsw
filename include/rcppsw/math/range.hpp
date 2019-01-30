@@ -32,7 +32,7 @@
 #include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, math);
 
@@ -51,10 +51,6 @@ NS_START(rcppsw, math);
 template<typename T>
 class range : public er::client<range<T>> {
  public:
-  static bool overlap(const range<T>& r1, const range<T>& r2) {
-    return r1.overlap(r2);
-  }
-
   range(const T& lb, const T& ub)
       : ER_CLIENT_INIT("rcppsw.math.range"),
         m_lb(lb),
@@ -101,8 +97,7 @@ class range : public er::client<range<T>> {
 
   /**
    * @brief Determine if one range completely contains another (boundary points
-   * are included with both ranges). Both ranges must be templated on the same
-   * type, or a compile time error will result (I think).
+   * are included with both ranges).
    */
   bool contains(const range<T>& other) const {
     return this->contains(other.m_lb) && this->contains(other.m_ub);
@@ -116,7 +111,7 @@ class range : public er::client<range<T>> {
    * To implement this, we need to check if either bound of the argument is
    * contained in our range, AND if either of our bounds are contained in the
    * argument's range. The second part is necessary if A is completely contained
-   * inside B in order for the calculate to be commutative.
+   * inside B in order for the calculation to be commutative.
    */
   bool overlaps_with(const range<T>& other) const {
     return this->contains(other.m_lb) || this->contains(other.m_ub) ||

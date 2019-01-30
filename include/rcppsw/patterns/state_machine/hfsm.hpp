@@ -24,13 +24,12 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/patterns/state_machine/base_fsm.hpp"
 #include <string>
-
+#include "rcppsw/patterns/state_machine/base_fsm.hpp"
 #include "rcppsw/patterns/state_machine/hfsm_state.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, patterns, state_machine);
 
@@ -67,7 +66,6 @@ class hfsm : public base_fsm, public er::client<hfsm> {
    * @brief Injects a signal of the specified type into the state machine,
    * causing the state machine to execute and process the signal. This is the
    * main means of running a \ref hfsm.
-   *
    */
   void inject_event(int signal, int type);
 

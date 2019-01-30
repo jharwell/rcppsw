@@ -32,7 +32,7 @@
 #include "rcppsw/algorithm/clustering/membership_policy.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, algorithm, clustering, detail);
 
@@ -66,11 +66,11 @@ class nc_cluster {
    * cluster has changed.
    */
   template<typename U = T,
-           typename = typename std::enable_if<!std::is_floating_point<U>::value>::type>
+           RCPPSW_SFINAE_REQUIRE(!std::is_floating_point<U>::value)>
   __rcsw_pure bool converged(void) const { return (m_prev_center == m_center); }
 
   template<typename U = T,
-           typename = typename std::enable_if<std::is_floating_point<U>::value>::type>
+           RCPPSW_SFINAE_REQUIRE(std::is_floating_point<U>::value)>
   __rcsw_pure bool converged(int = 0) const {
     return std::fabs(m_prev_center - m_center) <= std::numeric_limits<U>::epsilon();
   }
@@ -133,8 +133,8 @@ class eh_cluster {
   }
 
   /*
-   * Determine if the cluster has converged, by checking if the center of the
-   * cluster has changed.
+   * @brief Determine if the cluster has converged, by checking if the center of
+   * the cluster has changed.
    */
   bool converged(void) const { return m_prev_size == size(); }
   size_t size(void) const { return m_membership->size(); }

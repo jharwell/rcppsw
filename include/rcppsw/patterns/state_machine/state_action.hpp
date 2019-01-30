@@ -30,7 +30,7 @@
 #include "rcppsw/patterns/state_machine/state.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, patterns, state_machine);
 

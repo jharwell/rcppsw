@@ -24,7 +24,7 @@
 #include "rcppsw/task_allocation/taskable_argument.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 

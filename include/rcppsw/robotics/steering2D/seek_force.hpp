@@ -28,7 +28,7 @@
 #include "rcppsw/robotics/steering2D/boid.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, steering2D);
 

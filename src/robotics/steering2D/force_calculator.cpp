@@ -25,7 +25,7 @@
 #include "rcppsw/robotics/steering2D/force_calculator_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, steering2D);
 

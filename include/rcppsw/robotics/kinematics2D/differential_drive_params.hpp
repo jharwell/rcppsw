@@ -28,7 +28,7 @@
 #include "rcppsw/math/radians.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, kinematics2D);
 

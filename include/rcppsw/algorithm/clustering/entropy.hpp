@@ -35,7 +35,7 @@
 #include "rcppsw/math/ientropy.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, algorithm, clustering);
 

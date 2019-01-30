@@ -30,7 +30,7 @@
 #include "rcppsw/patterns/state_machine/state_guard.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, patterns, state_machine);
 
@@ -57,10 +57,12 @@ class state_map_ex_row {
   state_exit* exit(void) const { return m_exit; }
 
  private:
+  /* clang-format off */
   rcppsw::patterns::state_machine::state* m_state;
-  state_guard* m_guard;
-  state_entry* m_entry;
-  state_exit* m_exit;
+  state_guard*                            m_guard;
+  state_entry*                            m_entry;
+  state_exit*                             m_exit;
+  /* clang-format on */
 };
 
 NS_END(state_machine, patterns, rcppsw);

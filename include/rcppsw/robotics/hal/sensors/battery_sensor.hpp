@@ -34,7 +34,7 @@
 #endif /* HAL_CONFIG */
 
 /******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, hal, sensors, detail);
 
@@ -62,12 +62,13 @@ template <typename T>
 class _battery_sensor {
  public:
   /**
-   * @brief A battery sensor reading (value, angle) pair.
+   * @brief A battery sensor reading.
    *
-   * The first argument is the amount of battery left (1 meaning 100% and 0
-   * being 0%), and the second argument is the amount of time left for the robot
-   * (there is an "infinite" time option to essentially diable the battery for
-   * the simulation).
+   * The first argument is the amount of battery left as a percent between 0 and
+   * 1, and the second argument is the amount of time left for the robot.
+   *
+   * Note that these are different representations of the same essential
+   * information: how much energy the robot current has left.
    */
   struct reading {
     double availible_charge;
@@ -78,12 +79,10 @@ class _battery_sensor {
           time_left(_time_left) {}
   };
 
-  template<typename U = T>
   explicit _battery_sensor(T * const sensor) : m_sensor(sensor) {}
 
   /**
-   * @brief Get the current battery sensor readings for
-   * the footbot robot.
+   * @brief Get the current battery sensor readings for the footbot robot.
    * @return A vector of \ref reading.
    */
   template <typename U = T,

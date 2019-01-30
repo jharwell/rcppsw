@@ -29,7 +29,7 @@
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 namespace bpo = boost::program_options;
 NS_START(rcppsw);

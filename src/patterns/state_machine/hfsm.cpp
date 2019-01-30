@@ -24,7 +24,7 @@
 #include "rcppsw/patterns/state_machine/hfsm.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, patterns, state_machine);
 

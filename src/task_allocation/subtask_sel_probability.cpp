@@ -26,7 +26,7 @@
 #include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 

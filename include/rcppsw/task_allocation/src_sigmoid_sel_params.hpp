@@ -29,7 +29,7 @@
 #include "rcppsw/task_allocation/sigmoid_sel_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 

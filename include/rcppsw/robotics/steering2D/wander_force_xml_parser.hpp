@@ -31,7 +31,7 @@
 #include "rcppsw/robotics/steering2D/wander_force_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, steering2D);
 

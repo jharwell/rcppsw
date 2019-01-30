@@ -32,7 +32,7 @@
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
- * Namespaces/Decls
+ * Namespaces/Decls/Decls
  ******************************************************************************/
 NS_START(rcppsw, ds);
 
@@ -44,9 +44,9 @@ NS_START(rcppsw, ds);
  * @ingroup ds
  * @brief A map of a set of (possibly incomplete) types, keyed by
  * std::type_index, with the value being a boost variant. Extremely useful to
- * emulate reflection in C++.
+ * emulate reflection in C++ (e.g. to map a type to a variant containing actions
+ * to take depending on what the type is).
  */
-
 template<typename ...Types>
 class type_map : public boost::container::map<std::type_index,
                                               boost::variant<Types...>> {

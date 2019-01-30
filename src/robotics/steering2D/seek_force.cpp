@@ -24,7 +24,7 @@
 #include "rcppsw/robotics/steering2D/seek_force.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, steering2D);
 

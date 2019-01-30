@@ -32,7 +32,7 @@
 #include "rcppsw/task_allocation/tdgraph.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 

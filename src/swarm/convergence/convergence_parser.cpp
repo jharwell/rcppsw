@@ -24,7 +24,7 @@
 #include "rcppsw/swarm/convergence/convergence_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, swarm, convergence);
 
@@ -37,7 +37,7 @@ constexpr char convergence_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void convergence_parser::parse(const ticpp::Element& node) {
-  ticpp::Element cnode = get_node(const_cast<ticpp::Element&>(node), kXMLRoot);
+  ticpp::Element cnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
 
   XML_PARSE_ATTR(cnode, m_params, n_threads);
   m_pos_entropy.parse(cnode);

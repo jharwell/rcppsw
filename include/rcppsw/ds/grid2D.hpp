@@ -27,7 +27,7 @@
 #include "rcppsw/ds/base_grid2D.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, ds);
 
@@ -38,30 +38,38 @@ NS_START(rcppsw, ds);
  * @class grid2D
  * @ingroup ds
  *
- * @brief A 2D grid of SOMETHING. Mainly a convenience wrapper around boost.
+ * @brief A 2D grid of SOMETHING. Mainly a convenience wrapper around
+ * boost::multi_array.
  */
 template <typename T>
 class grid2D : public base_grid2D<T> {
  public:
+  using typename base_grid2D<T>::index_range;
+
+
+  using base_grid2D<T>::access;
+
   grid2D(uint x_max, uint y_max)
       : base_grid2D<T>(),
         m_cells(boost::extents[x_max][y_max]) {}
 
   T& access(uint i, uint j) override {
-    return m_cells[static_cast<index_range::index>(i)]
-                  [static_cast<index_range::index>(j)];
+    return m_cells[static_cast<typename index_range::index>(i)]
+                  [static_cast<typename index_range::index>(j)];
   }
   uint xsize(void) const { return m_cells.shape()[0]; }
   uint ysize(void) const { return m_cells.shape()[1]; }
 
   __rcsw_pure T& access(const math::vector2u& c) override {
-    return m_cells[static_cast<index_range::index>(c.x())]
-        [static_cast<index_range::index>(c.y())];
+    return m_cells[static_cast<typename index_range::index>(c.x())]
+        [static_cast<typename index_range::index>(c.y())];
   }
 
-  using base_grid2D<T>::access;
+
  private:
-  grid_type<T> m_cells;
+  /* clang-format off */
+  typename base_grid2D<T>::grid_type m_cells;
+  /* clang-format on */
 };
 
 NS_END(ds, rcppsw);
