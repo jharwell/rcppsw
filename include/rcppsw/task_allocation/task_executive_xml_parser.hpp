@@ -31,7 +31,7 @@
 #include "rcppsw/task_allocation/task_executive_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 
@@ -69,9 +69,9 @@ class task_executive_xml_parser: public rcppsw::params::xml_param_parser {
     return m_params;
   }
 
-  // clang-format off
+  /* clang-format off */
   std::shared_ptr<task_executive_params> m_params{nullptr};
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(task_allocation, rcppsw);

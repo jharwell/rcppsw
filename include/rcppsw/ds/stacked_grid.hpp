@@ -31,7 +31,7 @@
 #include "rcppsw/math/vector2.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, ds);
 
@@ -84,7 +84,7 @@ class stacked_grid {
   /**
    * @brief Get a reference to an object at a particular (layer,i,j) location
    *
-   * @tparam Index Theindex of the layer.
+   * @tparam Index The index of the layer.
    * @param i The x coordinate.
    * @param j The y coordinate.
    */
@@ -193,7 +193,9 @@ class stacked_grid {
     delete reinterpret_cast<const layer_value_type<1>*>(m_layers[kStackSize - Index - 1]);
   }
 
+  /* clang-format off */
   std::vector<void*> m_layers;
+  /* clang-format on */
 };
 
 NS_END(ds, rcppsw);

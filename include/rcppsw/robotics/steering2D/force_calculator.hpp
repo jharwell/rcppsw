@@ -37,7 +37,7 @@
 #include "rcppsw/robotics/kinematics/twist.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, steering2D);
 struct force_calculator_params;
@@ -117,7 +117,7 @@ class force_calculator : public er::client<force_calculator> {
   const boid& entity(void) const { return m_entity; }
 
  private:
-  // clang-format off
+  /* clang-format off */
   boid&           m_entity;
   math::vector2d  m_force_accum{};
   avoidance_force m_avoidance_force;
@@ -125,7 +125,7 @@ class force_calculator : public er::client<force_calculator> {
   seek_force      m_seek_force{};
   wander_force    m_wander_force;
   polar_force     m_polar_force;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(steering2D, robotics, rcppsw);

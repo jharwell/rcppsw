@@ -32,7 +32,7 @@
 #include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 
@@ -112,9 +112,9 @@ class partition_probability : public math::sigmoid,
                        const time_estimate& subtask1,
                        const time_estimate& subtask2);
 
-  // clang-format off
+  /* clang-format off */
   const std::string mc_method;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(task_allocation, rcppsw);

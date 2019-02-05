@@ -45,7 +45,7 @@
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, multiprocess);
 namespace bip = boost::interprocess;

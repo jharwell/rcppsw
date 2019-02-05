@@ -35,9 +35,18 @@
 #endif /* HAL_CONFIG */
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, robotics, hal, sensors);
+NS_START(rcppsw, robotics, hal, sensors, detail);
+
+/*******************************************************************************
+ * Templates
+ ******************************************************************************/
+template<typename Sensor>
+using is_argos_rab_sensor = std::is_same<Sensor,
+                                         argos::CCI_RangeAndBearingSensor>;
+
+NS_END(detail);
 
 /*******************************************************************************
  * Class Definitions
@@ -79,27 +88,21 @@ class _rab_wifi_sensor  {
   };
 
  public:
-  template<typename U = T>
-  explicit _rab_wifi_sensor(typename std::enable_if_t<std::is_same<U,
-                            argos::CCI_RangeAndBearingSensor>::value,
-                            argos::CCI_RangeAndBearingSensor> * sensor)
-      : m_sensor(sensor) {}
+  explicit _rab_wifi_sensor(T * const sensor) : m_sensor(sensor) {}
 
   /**
    * @brief Get the current rab wifi sensor readings for the footbot robot.
    *
    * @return A vector of \ref rab_wifi_packet.
    */
-  template <typename U = T>
-  typename std::enable_if_t<std::is_same<U,
-                                         argos::CCI_RangeAndBearingSensor>::value,
-                            std::vector<rab_wifi_packet>>
-  readings(void) const {
+  template <typename U = T,
+            RCPPSW_SFINAE_REQUIRE(detail::is_argos_rab_sensor<U>::value)>
+  std::vector<rab_wifi_packet> readings(void) const {
     std::vector<rab_wifi_packet> ret;
     for (auto &r : m_sensor->GetReadings()) {
       rab_wifi_packet d(r.Range,
-                        r.HorizontalBearing,
-                        r.VerticalBearing);
+                        math::radians(r.HorizontalBearing.GetValue()),
+                        math::radians(r.VerticalBearing.GetValue()));
       for (size_t i = 0; i < r.Data.Size(); ++i) {
         d.data.push_back(r.Data[i]);
       } /* for(i..) */

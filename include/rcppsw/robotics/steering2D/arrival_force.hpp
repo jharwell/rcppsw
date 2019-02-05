@@ -28,7 +28,7 @@
 #include "rcppsw/robotics/steering2D/boid.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, steering2D);
 struct arrival_force_params;
@@ -54,14 +54,14 @@ class arrival_force {
   bool within_slowing_radius(void) const { return m_within_slowing_radius; }
 
  private:
-  // clang-format off
+  /* clang-format off */
   const double mc_max;
   const double mc_slowing_speed_min;
   const double mc_slowing_radius;
 
   bool         m_within_slowing_radius{false};
   double       m_last_angle{0.0};
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(steering2D, robotics, rcppsw);

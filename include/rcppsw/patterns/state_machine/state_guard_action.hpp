@@ -28,7 +28,7 @@
 #include "rcppsw/patterns/state_machine/state_guard.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, patterns, state_machine);
 

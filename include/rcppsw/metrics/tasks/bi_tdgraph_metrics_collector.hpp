@@ -30,7 +30,7 @@
 #include "rcppsw/metrics/base_metrics_collector.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, metrics, tasks);
 
@@ -62,15 +62,19 @@ class bi_tdgraph_metrics_collector : public base_metrics_collector {
   std::string csv_header_build(const std::string& header) override;
   bool csv_line_build(std::string& line) override;
 
+  const std::vector<uint>& int_task_counts(void) const {
+    return m_int_task_counts;
+  }
+
  private:
-  // clang-format off
+  /* clang-format off */
   std::vector<uint> m_int_depth_counts;
   std::vector<uint> m_int_task_counts;
   std::vector<uint> m_int_tab_counts;
   std::vector<uint> m_cum_depth_counts;
   std::vector<uint> m_cum_task_counts;
   std::vector<uint> m_cum_tab_counts;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(tasks, metrics, rcppsw);

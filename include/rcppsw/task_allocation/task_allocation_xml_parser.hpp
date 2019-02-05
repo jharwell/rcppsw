@@ -34,7 +34,7 @@
 #include "rcppsw/task_allocation/task_partition_xml_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 
@@ -83,7 +83,7 @@ class task_allocation_xml_parser: public rcppsw::params::xml_param_parser {
     return m_params;
   }
 
-  // clang-format off
+  /* clang-format off */
   bool                                    m_parsed{false};
   std::shared_ptr<task_allocation_params> m_params{nullptr};
   exec_estimates_parser                   m_estimation;
@@ -91,7 +91,7 @@ class task_allocation_xml_parser: public rcppsw::params::xml_param_parser {
   src_sigmoid_sel_xml_parser              m_subtask_sel;
   task_partition_xml_parser               m_partitioning;
   src_sigmoid_sel_xml_parser              m_tab_sel;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(task_allocation, rcppsw);

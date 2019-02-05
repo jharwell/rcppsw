@@ -32,7 +32,7 @@
 #include "rcppsw/task_allocation/sigmoid_sel_xml_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 
@@ -72,10 +72,10 @@ class src_sigmoid_sel_xml_parser: public rcppsw::params::xml_param_parser {
     return m_params;
   }
 
-  // clang-format off
+  /* clang-format off */
   std::shared_ptr<src_sigmoid_sel_params> m_params{nullptr};
   sigmoid_sel_xml_parser                  m_sigmoid;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(task_allocation, rcppsw);

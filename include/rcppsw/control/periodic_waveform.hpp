@@ -27,44 +27,77 @@
 #include "rcppsw/control/waveform.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, control);
 
 /*******************************************************************************
  * Classes
  ******************************************************************************/
+
+/**
+ * @class sine_waveform
+ * @ingroup control
+ *
+ * Given the current time, outputs the current value of a sine wave according to
+ * configured parameters:
+ *
+ * value = amplitude * ( sin(2pi* frequency * time + phase)) + offset.
+ *
+ */
 class sine_waveform : public waveform {
  public:
   explicit sine_waveform(const struct waveform_params* const params)
       : waveform(params) {}
 
   double value(double time) override {
-    double t = frequency() * time + phase();
-    double v = std::sin(2*M_PI * t);
+    double t = frequency() * time;
+    double v = std::sin(2*M_PI * t + phase());
     return amplitude() * v + offset();
   }
 };
 
+/**
+ * @class square_waveform
+ * @ingroup control
+ *
+ * Given the current time, outputs the current value of a square wave according
+ * to configured parameters:
+ *
+ * value = amplitude * signof(sin(2pi* frequency * time + phase)) + offset.
+ *
+ * Can be used to create step functions as well.
+ *
+ */
 class square_waveform : public waveform {
  public:
   explicit square_waveform(const struct waveform_params* const params)
       : waveform(params) {}
 
   double value(double time) override {
-    double t = frequency() * time + phase();
-    return amplitude() * std::copysign(1.0, std::sin(2*M_PI * t))+ offset();
+    double t = frequency() * time;
+    return amplitude() * std::copysign(1.0,
+                                       std::sin(2*M_PI * t + phase())) + offset();
   }
 };
 
+/**
+ * @class sawtooth_waveform
+ * @ingroup control
+ *
+ * Given the current time, outputs the current value of a sawtooth wave
+ * according to configured parameters:
+ *
+ * value = amplitude * ( 2 * (t - floor(time + 0.5) + phase)) + offset.
+ */
 class sawtooth_waveform : public waveform {
  public:
   explicit sawtooth_waveform(const struct waveform_params* const params)
       : waveform(params) {}
 
-    double value(double time) override {
-    double t = frequency() * time + phase();
-    double v = 2.0 * (t - std::floor(t + 0.5));
+  double value(double time) override {
+    double t = frequency() * time;
+    double v = 2.0 * (t - std::floor(t + 0.5) + phase());
     return amplitude() * v + offset();
   }
 };

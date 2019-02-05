@@ -33,7 +33,7 @@
 #include "rcppsw/metrics/base_metrics_collector.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, metrics);
 

@@ -34,7 +34,7 @@
 #include "rcppsw/task_allocation/task_allocation_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, task_allocation);
 
@@ -124,12 +124,12 @@ class bi_tdgraph : public tdgraph, public er::client<bi_tdgraph> {
  private:
   using tdgraph::set_children;
 
-  // clang-format off
+  /* clang-format off */
   const struct task_allocation_params mc_params;
   std::list<bi_tab>                   m_tabs{};
   bi_tab *                            m_active_tab{nullptr};
   bi_tab_sel_probability              m_tab_sw_prob;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(task_allocation, rcppsw);

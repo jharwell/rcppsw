@@ -28,7 +28,7 @@
 #include "rcppsw/robotics/steering2D/boid.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, steering2D);
 struct avoidance_force_params;
@@ -59,9 +59,9 @@ class avoidance_force {
                              const math::vector2d& closest) const;
 
  private:
-  // clang-format off
+  /* clang-format off */
   const double mc_max;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(steering2D, robotics, rcppsw);

@@ -31,7 +31,7 @@
 #include "rcppsw/robotics/steering2D/wander_force_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, steering2D);
 
@@ -71,10 +71,10 @@ class wander_force_xml_parser : public rcppsw::params::xml_param_parser {
     return m_params;
   }
 
-  // clang-format off
+  /* clang-format off */
   bool                                 m_parsed{false};
   std::shared_ptr<wander_force_params> m_params;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(steering2D, robotics, rcppsw);

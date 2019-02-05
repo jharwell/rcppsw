@@ -24,10 +24,25 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <boost/variant/static_visitor.hpp>
+#include <boost/mpl/vector.hpp>
+#include <boost/mpl/contains.hpp>
+#include <boost/utility/enable_if.hpp>
 #include "rcppsw/common/common.hpp"
 
+
 /*******************************************************************************
- * Namespaces
+ * Macros
+ ******************************************************************************/
+#define RCPPSW_SFINAE_TYPELIST_REQUIRE(Typelist, T)                     \
+  typename boost::enable_if<typename boost::mpl::contains<TypeList,     \
+                                                          T>::type>::type * = nullptr
+#define RCPPSW_SFINAE_TYPELIST_REJECT(Typelist, T)                      \
+  typename boost::disable_if<typename boost::mpl::contains<TypeList,    \
+                                                           T>::type>::type * = nullptr
+
+/*******************************************************************************
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, patterns, visitor);
 
@@ -114,6 +129,30 @@ class accept_set<V, T>: public accept_set_helper<V, T> {
 
 template<typename V, typename T>
 using will_accept = accept_set_helper<V, T>;
+
+/**
+ * @class variant_accept_set
+ * @ingroup patterns visitor
+ *
+ * @brief General case for template expansion. Provides classes the ability to
+ * explicitly control what types of visitors they will accept. A
+ */
+template <typename VisitorBase, typename TypeList>
+class variant_accept_set : public boost::static_visitor<void>,
+                   public VisitorBase {
+  using VisitorBase::VisitorBase;
+
+  template<typename T,
+           RCPPSW_SFINAE_TYPELIST_REQUIRE(Typelist, T)>
+  void operator()(T& visitor) {
+    VisitorBase::operator()(visitor);
+  }
+
+  template<typename T,
+           RCPPSW_SFINAE_TYPELIST_REJECT(Typelist, T)>
+  void operator()(T&) {}
+};
+
 
 NS_END(rcppsw, patterns, visitor);
 

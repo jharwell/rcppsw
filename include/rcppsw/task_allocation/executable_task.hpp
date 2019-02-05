@@ -34,7 +34,7 @@
 #include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw);
 namespace math { struct ema_params; }
@@ -298,7 +298,7 @@ class executable_task : public logical_task,
  private:
   void last_active_interface_reset(void) { m_last_active_interface = -1; }
 
-  // clang-format off
+  /* clang-format off */
   const std::string          mc_abort_src;
 
   bool                       m_is_atomic{false};
@@ -316,7 +316,7 @@ class executable_task : public logical_task,
   std::vector<time_estimate> m_interface_estimates;
   time_estimate              m_exec_estimate;
   abort_probability          m_abort_prob;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(task_allocation, rcppsw);

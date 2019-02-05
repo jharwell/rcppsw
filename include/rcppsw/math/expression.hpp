@@ -27,7 +27,7 @@
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, math);
 
@@ -45,7 +45,7 @@ template <class T>
 class expression {
  public:
   expression(void) : m_last() {}
-  explicit expression(T last) : m_last(last) {}
+  explicit expression(const T& last) : m_last(last) {}
   virtual ~expression(void) = default;
 
   /**
@@ -56,7 +56,7 @@ class expression {
   /**
    * @brief Calculate a new value.
    */
-  T set_result(T val) {
+  T set_result(const T& val) {
     m_last = val;
     return m_last;
   }
@@ -73,7 +73,9 @@ class expression {
   }
 
  private:
+  /* clang-format off */
   T m_last;
+  /* clang-format on */
 };
 
 NS_END(rcppsw, math);

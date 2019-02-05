@@ -40,9 +40,18 @@
 #endif /* HAL_CONFIG */
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, robotics, hal, sensors);
+NS_START(rcppsw, robotics, hal, sensors, detail);
+
+/*******************************************************************************
+ * Templates
+ ******************************************************************************/
+template<typename Sensor>
+using is_argos_proximity_sensor = std::is_same<Sensor,
+                                               argos::CCI_FootBotProximitySensor>;
+
+NS_END(detail);
 
 /*******************************************************************************
  * Class Definitions
@@ -58,10 +67,7 @@ NS_START(rcppsw, robotics, hal, sensors);
 template <typename T>
 class _proximity_sensor {
  public:
-  template<typename U = T>
-  explicit _proximity_sensor(typename std::enable_if_t<std::is_same<U,
-                             argos::CCI_FootBotProximitySensor>::value,
-                      argos::CCI_FootBotProximitySensor> * sensor)
+  explicit _proximity_sensor(T * const sensor)
       : m_sensor(sensor) {}
 
   /**
@@ -69,11 +75,9 @@ class _proximity_sensor {
    *
    * @return A vector of \ref reading.
    */
-  template <typename U = T>
-  typename std::enable_if_t<std::is_same<U,
-                                         argos::CCI_FootBotProximitySensor>::value,
-                            std::vector<math::vector2d>>
-  readings(void) const {
+  template <typename U = T,
+            RCPPSW_SFINAE_REQUIRE(detail::is_argos_proximity_sensor<U>::value)>
+  std::vector<math::vector2d> readings(void) const {
     std::vector<math::vector2d> ret;
     for (auto &r : m_sensor->GetReadings()) {
       ret.emplace_back(r.Value, math::radians(r.Angle.GetValue()));
@@ -90,11 +94,9 @@ class _proximity_sensor {
    *
    * Should be used in conjunction with \ref prox_obj__exists().
    */
-  template <typename U = T>
-  typename std::enable_if_t<std::is_same<U,
-                                         argos::CCI_FootBotProximitySensor>::value,
-                            math::vector2d>
-  closest_prox_obj(const math::vector2d& position,
+  template <typename U = T,
+            RCPPSW_SFINAE_REQUIRE(detail::is_argos_proximity_sensor<U>::value)>
+  math::vector2d closest_prox_obj(const math::vector2d& position,
               double obj_delta,
               const math::range<math::radians>& fov) const {
     math::vector2d closest(0, 0);
@@ -134,7 +136,7 @@ class _proximity_sensor {
     return obj.length() >= obj_delta && fov.contains(obj.angle());
   }
 
-  T* m_sensor;
+  T* const m_sensor;
 };
 
 #if HAL_CONFIG == HAL_CONFIG_ARGOS_FOOTBOT

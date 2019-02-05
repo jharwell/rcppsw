@@ -31,7 +31,7 @@
 #include "rcppsw/math/sigmoid_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, math);
 
@@ -69,9 +69,9 @@ class sigmoid_xml_parser: public rcppsw::params::xml_param_parser {
     return m_params;
   }
 
-  // clang-format off
+  /* clang-format off */
   std::shared_ptr<sigmoid_params> m_params{nullptr};
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(math, rcppsw);

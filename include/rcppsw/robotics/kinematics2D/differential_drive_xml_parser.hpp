@@ -31,7 +31,7 @@
 #include "rcppsw/params/xml_param_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, kinematics2D);
 

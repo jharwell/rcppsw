@@ -39,7 +39,7 @@
 #include "rcppsw/patterns/state_machine/state_map_row.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, patterns, state_machine);
 
@@ -466,23 +466,10 @@ NS_END(state_machine, patterns, rcppsw);
 /*******************************************************************************
  * Othr Macros
  ******************************************************************************/
-#define FSM_WRAPPER_DECLAREC(ret, func)          \
-  ret func(void) const override
-#define FSM_WRAPPER_DECLARE(ret, func)          \
-  ret func(void) override
-#define FSM_WRAPPER_DEFINEC(ret, class, func, handle)            \
-  ret class::func(void) const { return (handle).func(); }
-#define FSM_WRAPPER_DEFINE(ret, class, func, handle)            \
-  ret class::func(void) { return (handle).func(); }
-#define FSM_WRAPPER_DEFINEC_PTR(ret, class, func, handle)        \
-  ret class::func(void) const { if (nullptr != (handle)) {      \
-      return (handle)->func(); }                                \
-    return static_cast<ret>(0);                                 \
-  }
-#define FSM_WRAPPER_DEFINE_PTR(ret, class, func, handle)        \
-  ret class::func(void) { if (nullptr != (handle)) {            \
-      return (handle)->func(); }                                \
-    return static_cast<ret>(0);                                 \
-  }
+#define FSM_OVERRIDE_DECL(RetType, Func, ...)     \
+  RetType Func(void) __VA_ARGS__ override
+
+#define FSM_OVERRIDE_DEF(RetType, Class, Func, Handle, ...)         \
+  RetType Class::Func(void) __VA_ARGS__ { return (Handle).Func(); }
 
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_BASE_FSM_HPP_ */

@@ -31,7 +31,7 @@
 #include "rcppsw/patterns/factory/base_factory.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, patterns, factory);
 

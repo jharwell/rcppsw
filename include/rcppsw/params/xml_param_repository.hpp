@@ -33,7 +33,7 @@
 #include "rcppsw/patterns/factory/sharing_factory.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, params);
 namespace factory = rcppsw::patterns::factory;
@@ -145,12 +145,12 @@ class xml_param_repository {
                                   const xml_param_repository& repo);
 
  private:
-  // clang-format off
+  /* clang-format off */
   std::map<std::string, xml_param_parser*>         m_parsers;
   std::map<std::type_index, std::string>           m_param_types;
   factory::sharing_factory<xml_param_parser,
                            uint>                   m_factory;
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(params, rcppsw);

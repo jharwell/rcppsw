@@ -30,7 +30,7 @@
 #include "rcppsw/patterns/state_machine/base_fsm.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, multithread);
 namespace sm = patterns::state_machine;

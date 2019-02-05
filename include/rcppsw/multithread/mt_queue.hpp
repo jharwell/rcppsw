@@ -31,7 +31,7 @@
 #include "rcppsw/patterns/decorator/decorator.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, multithread);
 

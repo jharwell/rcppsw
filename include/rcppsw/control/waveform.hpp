@@ -29,7 +29,7 @@
 #include "rcppsw/control/waveform_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, control);
 
@@ -40,7 +40,8 @@ NS_START(rcppsw, control);
  * @class waveform
  * @ingroup control
  *
- * @brief Base class for all types of waveforms (in the control theory sense).
+ * @brief Base class for all types of waveforms (in the control theory
+ * sense). All waveforms have [frequency, phase, amplitude, offset] components.
  */
 class waveform {
  public:
@@ -64,10 +65,12 @@ class waveform {
   double offset(void) const { return m_offset; }
 
  private:
+  /* clang-format off */
   double m_frequency;
   double m_phase;
   double m_amplitude;
   double m_offset;
+  /* clang-format on */
 };
 
 NS_END(control, rcppsw);

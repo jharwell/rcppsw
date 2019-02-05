@@ -34,9 +34,18 @@
 #endif /* HAL_CONFIG */
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, robotics, hal, actuators);
+NS_START(rcppsw, robotics, hal, actuators, detail);
+
+/*******************************************************************************
+ * Templates
+ ******************************************************************************/
+template<typename T>
+using is_argos_ds_actuator = std::is_same<T,
+                                          argos::CCI_DifferentialSteeringActuator>;
+
+NS_END(detail);
 
 /*******************************************************************************
  * Class Definitions
@@ -53,11 +62,7 @@ NS_START(rcppsw, robotics, hal, actuators);
 template <typename T>
 class _differential_drive_actuator {
  public:
-  template<typename U = T>
-  explicit _differential_drive_actuator(typename std::enable_if_t<std::is_same<U,
-                                        argos::CCI_DifferentialSteeringActuator>::value,
-                                        argos::CCI_DifferentialSteeringActuator> * wheels)
-      : m_wheels(wheels) {}
+  explicit _differential_drive_actuator(T* const wheels) : m_wheels(wheels) {}
 
   /**
    * @brief Set the wheel speeds for the current timestep for a footbot
@@ -65,11 +70,9 @@ class _differential_drive_actuator {
    *
    * @return \ref status_t.
    */
-  template <typename U = T>
-  typename std::enable_if_t<std::is_same<U,
-                                         argos::CCI_DifferentialSteeringActuator>::value,
-                            status_t>
-  set_wheel_speeds(double left,
+  template <typename U = T,
+            RCPPSW_SFINAE_REQUIRE(detail::is_argos_ds_actuator<U>::value)>
+  status_t set_wheel_speeds(double left,
                             double right) {
     m_wheels->SetLinearVelocity(left, right);
     return OK;
@@ -81,17 +84,14 @@ class _differential_drive_actuator {
    *
    * @return \ref status_t.
    */
-  template <typename U = T>
-  typename std::enable_if_t<std::is_same<U,
-                                         argos::CCI_DifferentialSteeringActuator>::value,
-                            status_t>
-
-  stop_wheels(void) {
+  template <typename U = T,
+            RCPPSW_SFINAE_REQUIRE(detail::is_argos_ds_actuator<U>::value)>
+  status_t stop_wheels(void) {
     return set_wheel_speeds(0.0, 0.0);
   }
 
  private:
-  T* m_wheels;
+  T* const m_wheels;
 };
 
 #if HAL_CONFIG == HAL_CONFIG_ARGOS_FOOTBOT

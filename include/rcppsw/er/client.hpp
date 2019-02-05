@@ -41,7 +41,7 @@
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#ifndef ER_NREPORT
+#ifndef RCPPSW_ER_NREPORT
 #define ER_FATAL(...)                                   \
   {                                                                     \
    auto logger = rcppsw::er::client<typename std::remove_cv<typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
@@ -94,7 +94,7 @@
 #define ER_DEBUG(...)
 #define ER_TRACE(...)
 
-#endif /* ER_NREPORT */
+#endif /* RCPPSW_ER_NREPORT */
 
 /**
  * @def ER_REPORT(lvl, msg, ...)
@@ -183,10 +183,15 @@
  * @def ER_CLIENT_INIT(name)
  *
  * Initialize a logging client with the specified name (easier to do a macro
- * than to have to try do the casting every single type).
+ * than to have to try do the casting every single time).
  */
+#ifndef RCPPSW_ER_NREPORT
 #define ER_CLIENT_INIT(name)                                         \
   rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>(name)
+#else
+#define ER_CLIENT_INIT(name)                                            \
+rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>()
+#endif
 
 /**
  * @def ER_SET_LOGFILE(logger, fname)
@@ -214,7 +219,7 @@
   rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>::pop_ndc()
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, er);
 
@@ -226,7 +231,9 @@ NS_START(rcppsw, er);
  * @ingroup er
  *
  * @brief A class that can connect to a logging server for logging of important
- * events. Basically a thin wrapper around log4cxx.
+ * events. Basically a thin wrapper around log4cxx. If ER_NDEBUG is defined,
+ * then this class will mostly compile away to nothing, and most member
+ * functions will not be defined.
  */
 template<typename T>
 class client {
@@ -268,12 +275,12 @@ class client {
     logger->addAppender(appender);
   }
 
+#ifndef RCPPSW_ER_NREPORT
   /**
    * @param name Name of client/new logger.
    */
   explicit client(const std::string& name)
       : m_logger(log4cxx::Logger::getLogger(name)) {}
-
   /**
    * @brief Set the logfile of the current logger. Not idempotent.
    */
@@ -304,20 +311,32 @@ class client {
    */
   void pop_ndc(void) { log4cxx::NDC::pop(); }
 
-  virtual ~client(void) = default;
 
   /**
    * @brief Get a reference to the ER logger.
    */
   log4cxx::LoggerPtr logger(void) const { return m_logger; }
 
+#else
+  client(void) : m_logger(nullptr) {}
+  void set_logfile(const std::string&) {}
+
+  std::string logger_name(void) const { return ""; }
+  void push_ndc(const std::string&) {}
+  void pop_ndc(void) {}
+  log4cxx::LoggerPtr logger(void) const { return nullptr; }
+
+#endif /* RCPPSW_ER_NREPORT */
+  virtual ~client(void) = default;
+
+
  private:
-  // clang-format off
+  /* clang-format off */
   static const char         mc_console_layout[];
   static const char         mc_file_layout[];
   static bool               m_initialized;
   log4cxx::LoggerPtr        m_logger{};
-  // clang-format on
+  /* clang-format on */
 };
 
 template<typename T>

@@ -35,9 +35,18 @@
 #endif /* HAL_CONFIG */
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, robotics, hal, sensors);
+NS_START(rcppsw, robotics, hal, sensors, detail);
+
+/*******************************************************************************
+ * Templates
+ ******************************************************************************/
+template<typename Sensor>
+using is_argos_light_sensor = std::is_same<Sensor,
+                                           argos::CCI_FootBotLightSensor>;
+
+NS_END(detail);
 
 /*******************************************************************************
  * Class Definitions
@@ -67,22 +76,16 @@ class _light_sensor {
     reading(double _value, double _angle) : value(_value), angle(_angle) {}
   };
 
-  template<typename U = T>
-  explicit _light_sensor(typename std::enable_if_t<std::is_same<U,
-                         argos::CCI_FootBotLightSensor>::value,
-                         argos::CCI_FootBotLightSensor> * sensor)
-      : m_sensor(sensor) {}
+  explicit _light_sensor(T * const sensor) : m_sensor(sensor) {}
 
   /**
    * @brief Get the current light sensor readings for the footbot robot.
    *
    * @return A vector of \ref reading.
    */
-  template <typename U = T>
-  typename std::enable_if_t<std::is_same<U,
-                                         argos::CCI_FootBotLightSensor>::value,
-                            std::vector<reading>>
-  readings(void) const {
+  template <typename U = T,
+            RCPPSW_SFINAE_REQUIRE(detail::is_argos_light_sensor<U>::value)>
+  std::vector<reading>  readings(void) const {
     std::vector<reading> ret;
     for (auto &r : m_sensor->GetReadings()) {
       ret.push_back({r.Value, r.Angle.GetValue()});
@@ -92,7 +95,7 @@ class _light_sensor {
   }
 
  private:
-  T* m_sensor;
+  T* const m_sensor;
 };
 
 #if HAL_CONFIG == HAL_CONFIG_ARGOS_FOOTBOT

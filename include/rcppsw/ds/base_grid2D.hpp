@@ -29,19 +29,9 @@
 #include "rcppsw/math/vector2.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, ds);
-
-template <typename T>
-using grid_type = typename boost::multi_array<T, 2>;
-template <typename T>
-using grid_view = typename grid_type<T>::template array_view<2>::type;
-template <typename T>
-using const_grid_view = typename grid_type<T>::template const_array_view<2>::type;
-template <typename T>
-using view_range = typename grid_type<T>::index_range;
-using index_range = boost::multi_array_types::index_range;
 
 /*******************************************************************************
  * Class Definitions
@@ -56,6 +46,12 @@ template <typename T>
 class base_grid2D {
  public:
   using value_type = T;
+
+  using grid_type = typename boost::multi_array<T, 2>;
+  using grid_view = typename grid_type::template array_view<2>::type;
+  using const_grid_view = typename grid_type::template const_array_view<2>::type;
+  using view_range = typename grid_type::index_range;
+  using index_range = boost::multi_array_types::index_range;
 
   base_grid2D(void) = default;
   virtual ~base_grid2D(void) = default;

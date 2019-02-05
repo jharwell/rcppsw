@@ -30,7 +30,7 @@
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, math);
 
@@ -71,12 +71,12 @@ class powerlaw_distribution {
   uint ub(void) const { return m_ub; }
 
  private:
-  // clang-format off
+  /* clang-format off */
   uint                                   m_lb;
   uint                                   m_ub;
   uint                                   m_pwr;
   std::uniform_real_distribution<double> m_uniform;
-  // clang-format on
+  /* clang-format on */
 };
 NS_END(math, rcppsw);
 

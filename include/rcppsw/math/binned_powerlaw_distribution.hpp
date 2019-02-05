@@ -28,7 +28,7 @@
 #include "rcppsw/math/powerlaw_distribution.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, math);
 

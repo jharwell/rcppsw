@@ -29,7 +29,7 @@
 #include "rcppsw/params/xml_param_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, control);
 
@@ -42,6 +42,9 @@ NS_START(rcppsw, control);
  *
  * @brief Parses XML parameters related to temporal waveform generation into
  * \ref waveform_params.
+ *
+ * Any parameters not present under the \ref kXMLRoot will be given a value of
+ * -1.0.
  */
 class waveform_xml_parser : public rcppsw::params::xml_param_parser {
  public:
@@ -55,10 +58,8 @@ class waveform_xml_parser : public rcppsw::params::xml_param_parser {
 
   static constexpr char kXMLRoot[] = "waveform";
   void parse(const ticpp::Element& node) override;
-  void show(std::ostream& stream) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  bool parsed(void) const override { return m_parsed; }
   std::shared_ptr<waveform_params> parse_results(void) const {
     return m_params;
   }
@@ -68,10 +69,9 @@ class waveform_xml_parser : public rcppsw::params::xml_param_parser {
     return m_params;
   }
 
-  // clang-format off
-  bool                             m_parsed{false};
+  /* clang-format off */
   std::shared_ptr<waveform_params> m_params{nullptr};
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(control, rcppsw);

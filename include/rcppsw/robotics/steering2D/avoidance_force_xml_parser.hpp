@@ -30,7 +30,7 @@
 #include "rcppsw/robotics/steering2D/avoidance_force_params.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, robotics, steering2D);
 
@@ -72,10 +72,10 @@ class avoidance_force_xml_parser : public rcppsw::params::xml_param_parser {
     return m_params;
   }
 
-  // clang-format off
+  /* clang-format off */
   bool                                    m_parsed{false};
   std::shared_ptr<avoidance_force_params> m_params{nullptr};
-  // clang-format on
+  /* clang-format on */
 };
 
 NS_END(steering2D, robotics, rcppsw);

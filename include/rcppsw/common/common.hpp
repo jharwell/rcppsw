@@ -27,6 +27,7 @@
  ******************************************************************************/
 #include <memory>
 #include <tuple>
+#include <string>
 
 #include "rcsw/common/common.h"
 
@@ -72,15 +73,73 @@
  */
 #define NS_END(...) XFOR_EACH1(NS_END_, __VA_ARGS__)
 
+/*
+ * @def RCPPSW_WRAP_FUNC(Class, Func, member,...)
+ *
+ * Wrap a public function from a member variable (or even another member
+ * function that returns an object that contains the function you want to
+ * wrap). The variable argument list is to allow specification of 'const' as
+ * part of the function definition.
+ */
+#define RCPPSW_WRAP_MEMFUNC(Func, Member, ...)            \
+  template<typename... Args >                                           \
+  auto Func(Args&&... args) __VA_ARGS__ ->                              \
+      decltype(std::declval<decltype(Member)>().Func(args...)) {        \
+    return Member.Func(std::forward<Args>(args)...);                    \
+  }
+
+/**
+ * @def SFINAE_REQUIRE(...)
+ *
+ * Specify the condition to enable a function for SFINAE.
+ *
+ * It turns out that in C++14, a default template type parameter (e.g. typename
+ * = std::enable_if<...>::value)is NOT considered part of a function's signature
+ * for the purposes of SFINAE, so functions with 100% identical signatures
+ * except for such a parameter will cause a compilation error.
+ *
+ * However, a non-template type parameter (e.g. a template parameter that is an
+ * integer) that is defaulted (i.e. have a default value specified) ARE
+ * considered part of a function's signature for the purposes of SFINAE, so two
+ * functions that differ only in the value of the defaulted non-type parameter
+ * in their template argument lists will be considered distinct and trigger
+ * SFINAE as expected.
+ */
+#define RCPPSW_SFINAE_REQUIRE(...) typename std::enable_if<__VA_ARGS__, \
+                                                           int>::type = 0
+
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw);
 
 /*******************************************************************************
- * Templates
+ * Debugging Templates
  ******************************************************************************/
+#if __cplusplus < 201703L
+template<class...>
+using void_t = void;
+#endif
 
+
+namespace detail {
+template<class unused, class = void_t<> >
+struct has_to_str : std::false_type {};
+
+template<class T>
+struct has_to_str<T,
+                     void_t<decltype(std::declval<T>().to_str())>
+                     > : std::true_type {};
+}  // namespace detail
+
+template<typename T, typename = std::enable_if_t<detail::has_to_str<T>::value>>
+std::string to_string(const T& obj) {
+  return obj.to_str();
+}
+
+/*******************************************************************************
+ * Misc. Templates
+ ******************************************************************************/
 /**
  * @brief Implementation of std::make_unique which exists in C++14, but not
  * C++11, so if compiling for that standard I have to roll my own.
@@ -89,12 +148,6 @@ template <typename T, typename... Args>
 std::unique_ptr<T> make_unique(Args&&... args) {
   return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
 }
-
-template <class... Args>
-struct tuple_type_list {
-  template <std::size_t N>
-  using type = typename std::tuple_element<N, std::tuple<Args...>>::type;
-};
 
 NS_END(rcppsw);
 

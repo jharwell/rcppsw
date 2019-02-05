@@ -27,13 +27,22 @@
 #include "rcppsw/control/waveform.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, control);
 
 /*******************************************************************************
  * Classes
  ******************************************************************************/
+
+/**
+ * @class constant_waveform
+ * @ingroup control
+ *
+ * @brief A special waveform that always returns a constant value: the amplitude
+ * of the waveform params it was passed during construction. All other
+ * parameters are ignored.
+ */
 class constant_waveform : public waveform {
  public:
   explicit constant_waveform(const struct waveform_params* const params)
@@ -44,6 +53,14 @@ class constant_waveform : public waveform {
   }
 };
 
+
+/**
+ * @class null_waveform
+ * @ingroup control
+ *
+ * @brief A special waveform that always returns 0.0, indicating that there is
+ * no waveform/nothing. All parameters are ignored during initialization.
+ */
 class null_waveform : public waveform {
  public:
   explicit null_waveform(const struct waveform_params* const params)
