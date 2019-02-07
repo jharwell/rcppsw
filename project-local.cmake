@@ -44,10 +44,15 @@ set(${target}_SYS_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
 set(${target}_LIBRARIES
   rcsw
   ticpp
-  log4cxx
   ${Boost_LIBRARIES}
   )
+
 set(${target}_LIBRARY_DIRS ${rcsw_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS})
+
+# No need to link with this--it has been compiled out
+if (NOT WITH_ER_NREPORT)
+  set(${target}_LIBRARIES ${${target}_LIBRARIES} log4cxx)
+endif()
 
 if (BUILD_ON_MSI)
   set(${target}_LIBRARY_DIRS ${${target}_LIBRARY_DIRS} ${ARGOS_INSTALL_PREFIX}/lib/argos3)

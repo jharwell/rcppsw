@@ -25,6 +25,7 @@
  ******************************************************************************/
 #include <vector>
 #include <limits>
+#include <map>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"

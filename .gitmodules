@@ -5,6 +5,7 @@
 [submodule "cmake"]
         path = cmake
         url = https://github.com/swarm-robotics/libra.git
+	branch = master
 [submodule "ext/ticpp"]
 	path = ext/ticpp
 	url = https://github.com/wxFormBuilder/ticpp.git

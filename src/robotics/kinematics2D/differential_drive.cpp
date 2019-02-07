@@ -73,6 +73,7 @@ status_t differential_drive::fsm_drive(double speed,
   ER_CHECK(kFSMDrive == m_drive_type, "Cannot actuate: not in FSM drive mode");
   m_fsm.change_velocity(speed, angle, force);
   speeds = m_fsm.wheel_speeds();
+  speeds = normalize_outputs(speeds);
   m_left_linspeed = speeds.first;
   m_right_linspeed = speeds.second;
   m_actuator.set_wheel_speeds(m_left_linspeed, m_right_linspeed);

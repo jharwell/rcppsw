@@ -26,13 +26,14 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <cxxabi.h>
+#ifndef RCPPSW_ER_NREPORT
 #include <log4cxx/logger.h>
 #include <log4cxx/patternlayout.h>
 #include <log4cxx/fileappender.h>
 #include <log4cxx/consoleappender.h>
 #include <log4cxx/xml/domconfigurator.h>
 #include <log4cxx/ndc.h>
+#endif
 
 #include <cassert>
 #include <string>
@@ -238,6 +239,7 @@ NS_START(rcppsw, er);
 template<typename T>
 class client {
  public:
+#ifndef RCPPSW_ER_NREPORT
   /**
    * @brief Initialize logging by specifying the path to the log4cxx
    * configuration file.
@@ -267,6 +269,7 @@ class client {
       }
     } /* for(&a..) */
 
+
     log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(mc_file_layout);
     log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout,
                                                               name,
@@ -275,12 +278,12 @@ class client {
     logger->addAppender(appender);
   }
 
-#ifndef RCPPSW_ER_NREPORT
   /**
    * @param name Name of client/new logger.
    */
   explicit client(const std::string& name)
       : m_logger(log4cxx::Logger::getLogger(name)) {}
+
   /**
    * @brief Set the logfile of the current logger. Not idempotent.
    */
@@ -318,24 +321,25 @@ class client {
   log4cxx::LoggerPtr logger(void) const { return m_logger; }
 
 #else
-  client(void) : m_logger(nullptr) {}
+  client(void) = default;
   void set_logfile(const std::string&) {}
 
   std::string logger_name(void) const { return ""; }
   void push_ndc(const std::string&) {}
   void pop_ndc(void) {}
-  log4cxx::LoggerPtr logger(void) const { return nullptr; }
-
 #endif /* RCPPSW_ER_NREPORT */
-  virtual ~client(void) = default;
 
+  virtual ~client(void) = default;
 
  private:
   /* clang-format off */
   static const char         mc_console_layout[];
   static const char         mc_file_layout[];
   static bool               m_initialized;
+
+#ifndef RCPPSW_ER_NREPORT
   log4cxx::LoggerPtr        m_logger{};
+#endif
   /* clang-format on */
 };
 
