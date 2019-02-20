@@ -39,17 +39,17 @@ constexpr char task_partition_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void task_partition_xml_parser::parse(const ticpp::Element &node) {
+void task_partition_xml_parser::parse(const ticpp::Element& node) {
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
-  ticpp::Element pnode = node_get(const_cast<ticpp::Element &>(node), kXMLRoot);
+  ticpp::Element pnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
   m_sigmoid.parse(pnode);
   m_params->src_sigmoid = *m_sigmoid.parse_results();
   XML_PARSE_ATTR(pnode, m_params, always_partition);
   XML_PARSE_ATTR(pnode, m_params, never_partition);
 } /* parse() */
 
-void task_partition_xml_parser::show(std::ostream &stream) const {
+void task_partition_xml_parser::show(std::ostream& stream) const {
   stream << build_header() << m_sigmoid
          << XML_ATTR_STR(m_params, always_partition) << std::endl
          << XML_ATTR_STR(m_params, never_partition) << std::endl

@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include <list>
+#include <string>
 
 #include "rcppsw/task_allocation/base_executive.hpp"
 
@@ -50,9 +50,7 @@ struct executive_params;
 class bi_tdgraph_executive : public base_executive,
                              public er::client<bi_tdgraph_executive> {
  public:
-  using alloc_notify_cb = std::function<void(const polled_task*,
-                                             const bi_tab*)>;
-
+  using alloc_notify_cb = std::function<void(const polled_task*, const bi_tab*)>;
 
   bi_tdgraph_executive(const struct task_executive_params* params,
                        bi_tdgraph* graph);

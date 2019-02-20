@@ -27,8 +27,8 @@
 #include <string>
 #include <utility>
 
-#include "rcppsw/metrics/tasks/bi_tab_metrics.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/metrics/tasks/bi_tab_metrics.hpp"
 #include "rcppsw/task_allocation/partition_probability.hpp"
 #include "rcppsw/task_allocation/subtask_sel_probability.hpp"
 
@@ -51,8 +51,7 @@ class bi_tdgraph;
  * may or may not be capable of being further decomposed, and therefore the
  * roots of additional TABs.
  */
-class bi_tab : public metrics::tasks::bi_tab_metrics,
-               public er::client<bi_tab> {
+class bi_tab : public metrics::tasks::bi_tab_metrics, public er::client<bi_tab> {
  public:
   static constexpr char kPartitionSrcExec[] = "exec";
   static constexpr char kPartitionSrcInterface[] = "interface";
@@ -82,7 +81,7 @@ class bi_tab : public metrics::tasks::bi_tab_metrics,
    *    selected, the active task is updated accordingly, and the selected
    *    subtask is returned.
    */
-  polled_task * task_allocate(void);
+  polled_task* task_allocate(void);
 
   const polled_task* active_task(void) const { return m_active_task; }
 
@@ -137,13 +136,19 @@ class bi_tab : public metrics::tasks::bi_tab_metrics,
   void last_subtask(const polled_task* t) { m_last_subtask = t; }
 
   /* bi TAB metrics */
-  bool subtask1_active(void) const override { return m_active_task == m_child1; }
-  bool subtask2_active(void) const override { return m_active_task == m_child2; }
+  bool subtask1_active(void) const override {
+    return m_active_task == m_child1;
+  }
+  bool subtask2_active(void) const override {
+    return m_active_task == m_child2;
+  }
   bool root_active(void) const override { return m_active_task == m_root; }
   bool employed_partitioning(void) const override {
     return m_employed_partitioning;
   }
-  bool task_changed(void) const override { return m_active_task != m_last_task; }
+  bool task_changed(void) const override {
+    return m_active_task != m_last_task;
+  }
   bool task_depth_changed(void) const override;
   double partition_prob(void) const override {
     return m_partition_prob.last_result();

@@ -27,9 +27,9 @@
 #include <map>
 #include <string>
 
-#include "rcppsw/params/base_params.hpp"
-#include "rcppsw/math/range.hpp"
 #include "rcppsw/math/ema_params.hpp"
+#include "rcppsw/math/range.hpp"
+#include "rcppsw/params/base_params.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -52,8 +52,8 @@ struct exec_estimates_params : public rcppsw::params::base_params {
   /**
    * @brief Should initial estimates of task execution times be used?
    */
-  bool                                     seed_enabled{false};
-  math::ema_params                         ema{};
+  bool seed_enabled{false};
+  math::ema_params ema{};
 
   std::map<std::string, math::range<uint>> ranges{};
 };

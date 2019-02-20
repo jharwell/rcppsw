@@ -32,7 +32,7 @@ NS_START(rcppsw, utils);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-std::vector<std::string> line_parser::parse(const std::string &line) {
+std::vector<std::string> line_parser::parse(const std::string& line) {
   std::stringstream ss(line);
   std::vector<std::string> res;
   while (ss.good()) {

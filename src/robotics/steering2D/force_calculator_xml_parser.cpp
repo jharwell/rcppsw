@@ -36,8 +36,8 @@ constexpr char force_calculator_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void force_calculator_xml_parser::parse(const ticpp::Element &node) {
-  ticpp::Element knode = node_get(const_cast<ticpp::Element &>(node), kXMLRoot);
+void force_calculator_xml_parser::parse(const ticpp::Element& node) {
+  ticpp::Element knode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
   m_avoidance.parse(knode);
@@ -59,7 +59,7 @@ void force_calculator_xml_parser::parse(const ticpp::Element &node) {
   }
 } /* parse() */
 
-void force_calculator_xml_parser::show(std::ostream &stream) const {
+void force_calculator_xml_parser::show(std::ostream& stream) const {
   stream << build_header() << m_avoidance << m_arrival << m_wander << m_polar
          << std::endl
          << build_footer();

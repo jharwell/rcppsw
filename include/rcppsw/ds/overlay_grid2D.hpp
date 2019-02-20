@@ -68,7 +68,8 @@ class overlay_grid2D : public base_overlay_grid2D<T> {
    */
   overlay_grid2D(double resolution, double x_max, double y_max)
       : base_overlay_grid2D<T>(resolution, x_max, y_max),
-      m_cells(boost::extents[static_cast<typename index_range::index>(xdsize())][typename index_range::index(ydsize())]) {}
+        m_cells(boost::extents[static_cast<typename index_range::index>(
+            xdsize())][typename index_range::index(ydsize())]) {}
 
   /**
    * @brief Get a subcircle gridview from a grid. The subcircle extent is
@@ -109,9 +110,11 @@ class overlay_grid2D : public base_overlay_grid2D<T> {
     typename grid_type::index_gen indices;
 
     index_range x(static_cast<typename index_range::index>(x_min),
-                  static_cast<typename index_range::index>(x_max), 1);
+                  static_cast<typename index_range::index>(x_max),
+                  1);
     index_range y(static_cast<typename index_range::index>(y_min),
-                  static_cast<typename index_range::index>(y_max), 1);
+                  static_cast<typename index_range::index>(y_max),
+                  1);
     return grid_view(m_cells[indices[x][y]]);
   }
 
@@ -119,9 +122,11 @@ class overlay_grid2D : public base_overlay_grid2D<T> {
     typename grid_type::index_gen indices;
 
     index_range x(static_cast<typename index_range::index>(x_min),
-                  static_cast<typename index_range::index>(x_max), 1);
+                  static_cast<typename index_range::index>(x_max),
+                  1);
     index_range y(static_cast<typename index_range::index>(y_min),
-                  static_cast<typename index_range::index>(y_max), 1);
+                  static_cast<typename index_range::index>(y_max),
+                  1);
     return const_grid_view(m_cells[indices[x][y]]);
   }
 
@@ -137,9 +142,8 @@ class overlay_grid2D : public base_overlay_grid2D<T> {
 
   __rcsw_pure T& access(const math::vector2u& c) override {
     return m_cells[static_cast<typename index_range::index>(c.x())]
-        [static_cast<typename index_range::index>(c.y())];
+                  [static_cast<typename index_range::index>(c.y())];
   }
-
 
  private:
   /* clang-format off */

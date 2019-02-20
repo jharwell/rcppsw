@@ -81,13 +81,13 @@ class abort_probability : public math::sigmoid {
   /**
    * @brief Initialize an abort probability calculation with default values.
    */
-  abort_probability(void) : sigmoid(kDEFAULT_REACTIVITY,
-                                    kDEFAULT_OFFSET, kDEFAULT_GAMMA) {}
+  abort_probability(void)
+      : sigmoid(kDEFAULT_REACTIVITY, kDEFAULT_OFFSET, kDEFAULT_GAMMA) {}
 
   /**
    * @brief Initialize abort probability calculation with user-specified values.
    */
-  explicit abort_probability(const math::sigmoid_params * params);
+  explicit abort_probability(const math::sigmoid_params* params);
 
   /**
    * @brief Calculate the current abort probability, based on the most recent

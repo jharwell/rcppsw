@@ -53,12 +53,11 @@ bi_tdgraph::bi_tdgraph(const struct task_allocation_params* const params)
 void bi_tdgraph::active_tab_init(const std::string& method) {
   if (kTABInitRoot == method) {
     ER_INFO("Using graph root initial TAB");
-    for (auto &t : m_tabs) {
+    for (auto& t : m_tabs) {
       if (t.root() == tdgraph::root()) {
         m_active_tab = &t;
       }
     } /* for(&t..) */
-
 
   } else if (kTABInitRandom == method) {
     ER_INFO("Using random initial TAB");
@@ -67,13 +66,13 @@ void bi_tdgraph::active_tab_init(const std::string& method) {
     ER_INFO("Using max_depth initial TAB");
     std::vector<bi_tab*> indices;
     int max_depth = 0;
-    for (auto &t : m_tabs) {
+    for (auto& t : m_tabs) {
       int tab_depth = vertex_depth(t.root());
       if (tab_depth > max_depth) {
         max_depth = tab_depth;
       }
     } /* for(&t..) */
-    for (auto &t : m_tabs) {
+    for (auto& t : m_tabs) {
       if (vertex_depth(t.root()) == max_depth) {
         indices.push_back(&t);
       }
@@ -84,17 +83,16 @@ void bi_tdgraph::active_tab_init(const std::string& method) {
   } else {
     ER_FATAL_SENTINEL("Bad TAB init method '%s'", method.c_str());
   }
-  ER_INFO("Initial TAB rooted at '%s'",
-          m_active_tab->root()->name().c_str());
+  ER_INFO("Initial TAB rooted at '%s'", m_active_tab->root()->name().c_str());
 } /* active_tab_init() */
 
-status_t bi_tdgraph::install_tab(const std::string &parent,
-                                 const std::vector<polled_task *> &children) {
+status_t bi_tdgraph::install_tab(const std::string& parent,
+                                 const std::vector<polled_task*>& children) {
   return install_tab(find_vertex(parent), children);
 } /* install_tab() */
 
-status_t bi_tdgraph::install_tab(const polled_task *parent,
-                                 const std::vector<polled_task *> &children) {
+status_t bi_tdgraph::install_tab(const polled_task* parent,
+                                 const std::vector<polled_task*>& children) {
   ER_ASSERT(2 == children.size(),
             "Bi tdgraph cannot handle non-binary bifurcations");
   m_tabs.emplace_back(this,
@@ -114,7 +112,6 @@ status_t bi_tdgraph::install_tab(const polled_task *parent,
   return tdgraph::set_children(parent, children);
 } /* install_tab() */
 
-
 void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
   /*
    * We know that the active tab cannot change if any of the following are true:
@@ -126,7 +123,8 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
    *   partitionable (task is a leaf of decomposition graph with no children).
    */
   bool is_tdgraph_root = (active_tab()->last_task() == active_tab()->root() &&
-                          vertex_parent(*this, active_tab()->last_task()) == active_tab()->last_task());
+                          vertex_parent(*this, active_tab()->last_task()) ==
+                              active_tab()->last_task());
   bool is_tdgraph_leaf = (active_tab()->last_task() == active_tab()->child1() ||
                           active_tab()->last_task() == active_tab()->child2()) &&
                          !active_tab()->last_task()->is_partitionable();
@@ -167,15 +165,16 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
   ER_INFO("New active TAB root='%s'", new_tab->root()->name().c_str());
 } /* active_tab_update() */
 
-__rcsw_pure bi_tab* bi_tdgraph::tab_child(const bi_tab* const tab,
-                              const polled_task* const current_task) const {
+__rcsw_pure bi_tab* bi_tdgraph::tab_child(
+    const bi_tab* const tab,
+    const polled_task* const current_task) const {
   ER_ASSERT(tab->child1() == current_task || tab->child2() == current_task,
             "Task '%s' not in TAB rooted at '%s'",
             current_task->name().c_str(),
             tab->root()->name().c_str());
 
   const bi_tab* ret = nullptr;
-  for (auto &t : m_tabs) {
+  for (auto& t : m_tabs) {
     if (t.root() == current_task &&
         (tab->child1() == t.root() || tab->child2() == t.root())) {
       return const_cast<bi_tab*>(&t);
@@ -186,7 +185,7 @@ __rcsw_pure bi_tab* bi_tdgraph::tab_child(const bi_tab* const tab,
 } /* tab_child() */
 
 bi_tab* bi_tdgraph::root_tab(void) const {
-  for (auto &t : m_tabs) {
+  for (auto& t : m_tabs) {
     if (vertex_parent(t.root()) == t.root()) { /* self */
       return const_cast<bi_tab*>(&t);
     }
@@ -200,7 +199,7 @@ bi_tab* bi_tdgraph::tab_parent(const bi_tab* const tab) const {
   if (tab == root_tab()) {
     return const_cast<bi_tab*>(tab);
   }
-  for (auto &t : m_tabs) {
+  for (auto& t : m_tabs) {
     if (tab == &t) { /* self */
       continue;
     } else if (t.child1() == tab->root() || t.child2() == tab->root()) {

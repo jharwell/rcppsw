@@ -36,13 +36,12 @@ constexpr char waveform_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void waveform_xml_parser::parse(const ticpp::Element &node) {
+void waveform_xml_parser::parse(const ticpp::Element& node) {
   /* waveforms are usually optional */
   if (nullptr == node.FirstChild(xml_root(), false)) {
     return;
   }
-  ticpp::Element vnode =
-      node_get(const_cast<ticpp::Element &>(node), xml_root());
+  ticpp::Element vnode = node_get(const_cast<ticpp::Element&>(node), xml_root());
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 

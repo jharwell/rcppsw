@@ -92,16 +92,12 @@ class degrees {
 
   std::string to_str(void) const {
     return "deg(" + std::to_string(m_value) + ") -> rad(" +
-        std::to_string(m_value * kDEGREES_TO_RADIANS / M_PI) + ")";
+           std::to_string(m_value * kDEGREES_TO_RADIANS / M_PI) + ")";
   }
 
-  degrees& operator+(void) {
-    return *this;
-  }
+  degrees& operator+(void) { return *this; }
 
-  degrees operator-(void) const {
-    return degrees(-m_value);
-  }
+  degrees operator-(void) const { return degrees(-m_value); }
 
   degrees& operator+=(const degrees& other) {
     m_value += other.m_value;
@@ -159,17 +155,13 @@ class degrees {
     return res;
   }
 
-  bool operator<(const degrees& other) const {
-    return m_value < other.m_value;
-  }
+  bool operator<(const degrees& other) const { return m_value < other.m_value; }
 
   bool operator<=(const degrees& other) const {
     return m_value <= other.m_value;
   }
 
-  bool operator>(const degrees& other) const {
-    return m_value > other.m_value;
-  }
+  bool operator>(const degrees& other) const { return m_value > other.m_value; }
 
   bool operator>=(const degrees& other) const {
     return m_value >= other.m_value;
@@ -177,12 +169,10 @@ class degrees {
 
   bool operator==(const degrees& other) const {
     return std::fabs(m_value - other.m_value) <=
-        std::numeric_limits<double>::epsilon();
+           std::numeric_limits<double>::epsilon();
   }
 
-  bool operator!=(const degrees& other) const {
-    return !(*this == other);
-  }
+  bool operator!=(const degrees& other) const { return !(*this == other); }
 
   friend std::istream& operator>>(std::istream& is, degrees& d) {
     is >> d.m_value;

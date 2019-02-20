@@ -77,8 +77,8 @@ class mt_queue : public decorator::decorator<std::deque<T>> {
       m_cv.wait(lock);
     } /* while() */
 
-    auto result = static_cast<T>(
-        decorator::decorator<std::deque<T>>::decoratee().front());
+    auto result =
+        static_cast<T>(decorator::decorator<std::deque<T>>::decoratee().front());
     decorator::decorator<std::deque<T>>::decoratee().pop_front();
     return result;
   }

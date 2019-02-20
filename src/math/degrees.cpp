@@ -43,12 +43,12 @@ const double degrees::kDEGREES_TO_RADIANS(M_PI / 180.0);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-degrees::degrees(const radians &r) : m_value(to_degrees(r).value()) {}
+degrees::degrees(const radians& r) : m_value(to_degrees(r).value()) {}
 
 /*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
-std::ostream &operator<<(std::ostream &stream, const degrees &d) {
+std::ostream& operator<<(std::ostream& stream, const degrees& d) {
   stream << d.to_str();
   return stream;
 } /* operator<<() */

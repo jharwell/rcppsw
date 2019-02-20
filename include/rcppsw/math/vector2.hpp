@@ -49,7 +49,7 @@ NS_START(rcppsw, math);
  * All operations are performed in whatever the template parameter is, so take
  * care if you are trying to do scaling, trigonometric things with integers...
  */
-template<typename T>
+template <typename T>
 class vector2 {
  public:
   /**
@@ -95,10 +95,9 @@ class vector2 {
    * @param length The vector length.
    * @param angle The vector angle.
    */
-  vector2(T length, const radians& angle) :
-      m_x(std::cos(angle.value()) * length),
-      m_y(std::sin(angle.value()) * length) {
-  }
+  vector2(T length, const radians& angle)
+      : m_x(std::cos(angle.value()) * length),
+        m_y(std::sin(angle.value()) * length) {}
 
   T x(void) const __rcsw_check_return { return m_x; }
   T y(void) const __rcsw_check_return { return m_y; }
@@ -137,7 +136,9 @@ class vector2 {
   /**
    * Returns the length of this vector.
    */
-  T length(void) const __rcsw_check_return { return std::sqrt(square_length()); }
+  T length(void) const __rcsw_check_return {
+    return std::sqrt(square_length());
+  }
 
   /**
    * @brief Normalizes this vector.
@@ -167,8 +168,7 @@ class vector2 {
    *p
    * @return A reference to the rotated vector.
    */
-  template<typename U = T,
-           RCPPSW_SFINAE_REQUIRE(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_REQUIRE(std::is_floating_point<U>::value)>
   vector2& rotate(const radians& angle) {
     T sin_val = std::sin(angle.value());
     T cos_val = std::cos(angle.value());
@@ -206,8 +206,8 @@ class vector2 {
    *
    * Only available if the template argument is not floating point.
    */
-  template<typename U = T,
-           RCPPSW_SFINAE_REQUIRE(!std::is_floating_point<U>::value)>
+  template <typename U = T,
+            RCPPSW_SFINAE_REQUIRE(!std::is_floating_point<U>::value)>
   bool operator==(const vector2& other) const {
     return (m_x == other.m_x && m_y == other.m_y);
   }
@@ -218,8 +218,7 @@ class vector2 {
    *
    * Only available if the template argument is floating point.
    */
-  template<typename U = T,
-           RCPPSW_SFINAE_REQUIRE(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_REQUIRE(std::is_floating_point<U>::value)>
   bool operator==(const vector2& other) const {
     return (std::fabs(x() - other.x()) <= std::numeric_limits<T>::epsilon() &&
             (std::fabs(y() - other.y()) <= std::numeric_limits<T>::epsilon()));
@@ -238,9 +237,7 @@ class vector2 {
    * Should generally not be called if the template parameter type is not an
    * integer, as floating point comparisons in general are unsafe.
    */
-  bool operator!=(const vector2& other) const {
-    return !(*this == other);
-  }
+  bool operator!=(const vector2& other) const { return !(*this == other); }
 
   vector2& operator+=(const vector2& other) {
     m_x += other.m_x;
@@ -290,12 +287,9 @@ class vector2 {
     return res;
   }
 
-  vector2 operator-(void) const {
-    return vector2(-m_x, -m_y);
-  }
+  vector2 operator-(void) const { return vector2(-m_x, -m_y); }
 
-  friend std::ostream& operator<<(std::ostream& stream,
-                                  const vector2& v) {
+  friend std::ostream& operator<<(std::ostream& stream, const vector2& v) {
     stream << "(" << v.m_x << "," << v.m_y << ")";
     return stream;
   }
@@ -316,9 +310,9 @@ using vector2d = vector2<double>;
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#define DIRECT_CONV2D(prefix)                                           \
+#define DIRECT_CONV2D(prefix)                                             \
   static inline vector2d prefix##vec2dvec(const vector2##prefix& other) { \
-    return vector2d(other.x(), other.y());                              \
+    return vector2d(other.x(), other.y());                                \
   }
 
 #define SCALED_CONV2D(prefix)                                           \
@@ -327,12 +321,12 @@ using vector2d = vector2<double>;
     return vector2d(other.x() * scale, other.y() * scale);              \
   }
 
-#define CONV2U(prefix)                                                \
-static inline vector2u prefix##vec2uvec(const vector2##prefix& other, \
-                                        double scale) {                 \
-  return vector2u( static_cast<uint>(std::round(other.x() / scale)),    \
-                   static_cast<uint>(std::round(other.y() / scale)));   \
-}
+#define CONV2U(prefix)                                                  \
+  static inline vector2u prefix##vec2uvec(const vector2##prefix& other, \
+                                          double scale) {               \
+    return vector2u(static_cast<uint>(std::round(other.x() / scale)),   \
+                    static_cast<uint>(std::round(other.y() / scale)));  \
+  }
 
 /*******************************************************************************
  * Free Functions

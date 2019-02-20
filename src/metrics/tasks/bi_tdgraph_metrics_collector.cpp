@@ -36,7 +36,9 @@ NS_START(rcppsw, metrics, tasks);
  * Constructors/Destructor
  ******************************************************************************/
 bi_tdgraph_metrics_collector::bi_tdgraph_metrics_collector(
-    const std::string &ofname, uint interval, uint decomposition_depth)
+    const std::string& ofname,
+    uint interval,
+    uint decomposition_depth)
     : base_metrics_collector(ofname, interval),
       m_int_depth_counts(decomposition_depth + 1, 0),
       m_int_task_counts(std::pow(2, decomposition_depth + 1) - 1, 0),
@@ -48,8 +50,8 @@ bi_tdgraph_metrics_collector::bi_tdgraph_metrics_collector(
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-std::string
-bi_tdgraph_metrics_collector::csv_header_build(const std::string &header) {
+std::string bi_tdgraph_metrics_collector::csv_header_build(
+    const std::string& header) {
   std::string line = base_metrics_collector::csv_header_build(header);
 
   for (size_t i = 0; i < m_int_depth_counts.size(); ++i) {
@@ -84,8 +86,8 @@ void bi_tdgraph_metrics_collector::reset(void) {
 } /* reset() */
 
 void bi_tdgraph_metrics_collector::collect(
-    const rcppsw::metrics::base_metrics &metrics) {
-  auto &m = dynamic_cast<const bi_tdgraph_metrics &>(metrics);
+    const rcppsw::metrics::base_metrics& metrics) {
+  auto& m = dynamic_cast<const bi_tdgraph_metrics&>(metrics);
   ++m_int_depth_counts[m.current_task_depth()];
   ++m_int_task_counts[m.current_task_id()];
   ++m_int_tab_counts[m.current_task_tab()];
@@ -95,36 +97,42 @@ void bi_tdgraph_metrics_collector::collect(
   ++m_cum_tab_counts[m.current_task_tab()];
 } /* collect() */
 
-bool bi_tdgraph_metrics_collector::csv_line_build(std::string &line) {
+bool bi_tdgraph_metrics_collector::csv_line_build(std::string& line) {
   if (!((timestep() + 1) % interval() == 0)) {
     return false;
   }
 
   for (size_t i = 0; i < m_int_depth_counts.size(); ++i) {
-    line += std::to_string(static_cast<double>(m_int_depth_counts[i]) /
-                           interval()) + separator();
+    line +=
+        std::to_string(static_cast<double>(m_int_depth_counts[i]) / interval()) +
+        separator();
   } /* for(i..) */
   for (size_t i = 0; i < m_cum_depth_counts.size(); ++i) {
     line += std::to_string(static_cast<double>(m_cum_depth_counts[i]) /
-                           (timestep() + 1)) + separator();
+                           (timestep() + 1)) +
+            separator();
   } /* for(i..) */
 
   for (size_t i = 0; i < m_int_task_counts.size(); ++i) {
-    line += std::to_string(static_cast<double>(m_int_task_counts[i]) /
-                           interval()) + separator();
+    line +=
+        std::to_string(static_cast<double>(m_int_task_counts[i]) / interval()) +
+        separator();
   } /* for(i..) */
   for (size_t i = 0; i < m_cum_task_counts.size(); ++i) {
     line += std::to_string(static_cast<double>(m_cum_task_counts[i]) /
-                           (timestep() + 1)) + separator();
+                           (timestep() + 1)) +
+            separator();
   } /* for(i..) */
 
   for (size_t i = 0; i < m_int_tab_counts.size(); ++i) {
-    line += std::to_string(static_cast<double>(m_int_tab_counts[i]) /
-                           interval()) + separator();
+    line +=
+        std::to_string(static_cast<double>(m_int_tab_counts[i]) / interval()) +
+        separator();
   } /* for(i..) */
   for (size_t i = 0; i < m_cum_tab_counts.size(); ++i) {
     line += std::to_string(static_cast<double>(m_cum_tab_counts[i]) /
-                           (timestep() + 1)) + separator();
+                           (timestep() + 1)) +
+            separator();
   } /* for(i..) */
   return true;
 } /* store_foraging_stats() */

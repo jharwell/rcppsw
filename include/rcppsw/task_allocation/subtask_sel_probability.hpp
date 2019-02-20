@@ -92,8 +92,7 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
    * @brief Initialize subtask sel probability with method + parameter
    * values.
    */
-  explicit subtask_sel_probability(
-      const struct sigmoid_sel_params* params);
+  explicit subtask_sel_probability(const struct sigmoid_sel_params* params);
 
   const std::string& method(void) const { return mc_method; }
 

@@ -25,9 +25,9 @@
  * Includes
  ******************************************************************************/
 #include <boost/graph/adjacency_list.hpp>
-#include <vector>
-#include <string>
 #include <functional>
+#include <string>
+#include <vector>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
@@ -87,7 +87,6 @@ class tdgraph : public er::client<tdgraph> {
   virtual ~tdgraph(void);
   tdgraph(const tdgraph& other) = delete;
   tdgraph& operator=(const tdgraph& other) = delete;
-
 
   /**
    * @brief Get the parent of a node in the graph, given a node in the graph.
@@ -186,7 +185,7 @@ class tdgraph : public er::client<tdgraph> {
    * @param v The current node along trajectory from desired node up to root.
    * @param depth The starting depth (should always be 0).
    */
-  uint vertex_depth_impl(const polled_task*v, int depth) const;
+  uint vertex_depth_impl(const polled_task* v, int depth) const;
 
   /* clang-format off */
   polled_task*       m_root;

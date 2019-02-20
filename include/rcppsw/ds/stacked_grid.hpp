@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
 #include <tuple>
+#include <vector>
 
 #include "rcppsw/ds/overlay_grid2D.hpp"
 #include "rcppsw/math/vector2.hpp"
@@ -53,7 +53,7 @@ NS_START(rcppsw, ds);
  * implemented this class). Might not have been as highly performing in that
  * case though.
  */
-template<typename TupleTypes>
+template <typename TupleTypes>
 class stacked_grid {
  public:
   stacked_grid(double resolution, double x_max, double y_max)
@@ -61,25 +61,21 @@ class stacked_grid {
     add_layers<kStackSize - 1>(resolution, x_max, y_max);
   }
 
-  virtual ~stacked_grid(void) {
-    rm_layers<kStackSize - 1>();
-  }
-
+  virtual ~stacked_grid(void) { rm_layers<kStackSize - 1>(); }
 
   /**
   * @brief The type of the objects stored in a particular layer.
   * @tparam Index The index of the layer.
   */
-  template<uint Index>
+  template <uint Index>
   using value_type = typename std::tuple_element<Index, TupleTypes>::type;
 
   /**
    * @brief The type of a particular layer.
    * @tparam Index The index of the layer.
    */
-  template<uint Index>
+  template <uint Index>
   using layer_value_type = rcppsw::ds::overlay_grid2D<value_type<Index>>;
-
 
   /**
    * @brief Get a reference to an object at a particular (layer,i,j) location
@@ -88,14 +84,17 @@ class stacked_grid {
    * @param i The x coordinate.
    * @param j The y coordinate.
    */
-  template<uint Index>
+  template <uint Index>
   typename layer_value_type<Index>::value_type& access(uint i, uint j) {
-    return reinterpret_cast<layer_value_type<Index>*>(m_layers[Index])->access(i, j);
+    return reinterpret_cast<layer_value_type<Index>*>(m_layers[Index])
+        ->access(i, j);
   }
 
-  template<uint Index>
-  const typename layer_value_type<Index>::value_type& access(uint i, uint j) const {
-    return reinterpret_cast<const layer_value_type<Index>*>(m_layers[Index])->access(i, j);
+  template <uint Index>
+  const typename layer_value_type<Index>::value_type& access(uint i,
+                                                             uint j) const {
+    return reinterpret_cast<const layer_value_type<Index>*>(m_layers[Index])
+        ->access(i, j);
   }
 
   /**
@@ -109,7 +108,8 @@ class stacked_grid {
     return access<Index>(d.x(), d.y());
   }
   template <int Index>
-  const typename layer_value_type<Index>::value_type& access(const math::vector2u& d) const {
+  const typename layer_value_type<Index>::value_type& access(
+      const math::vector2u& d) const {
     return access<Index>(d.x(), d.y());
   }
 
@@ -154,14 +154,15 @@ class stacked_grid {
    * @see \ref base_overlay_grid2D::resolution().
    */
   double resolution(void) const {
-    return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->resolution();
+    return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))
+        ->resolution();
   }
 
  private:
   static uint constexpr kStackSize = std::tuple_size<TupleTypes>::value;
 
-  template<int Index, typename ...Args>
-  void add_layers(Args && ...args) {
+  template <int Index, typename... Args>
+  void add_layers(Args&&... args) {
     add_layer<Index, Args...>(std::forward<Args>(args)...);
     add_layer<Index - 1, Args...>(std::forward<Args>(args)...);
   }
@@ -175,11 +176,12 @@ class stacked_grid {
    */
   template <int Index, typename... Args>
   void add_layer(Args&&... args) {
-    m_layers[kStackSize - Index - 1] = new layer_value_type<kStackSize - Index - 1>(std::forward<Args>(args)...);
+    m_layers[kStackSize - Index - 1] =
+        new layer_value_type<kStackSize - Index - 1>(
+            std::forward<Args>(args)...);
   }
 
-
-  template<int Index>
+  template <int Index>
   void rm_layers(void) {
     rm_layer<Index>();
   }
@@ -190,7 +192,8 @@ class stacked_grid {
    */
   template <int Index>
   void rm_layer(void) {
-    delete reinterpret_cast<const layer_value_type<1>*>(m_layers[kStackSize - Index - 1]);
+    delete reinterpret_cast<const layer_value_type<1>*>(
+        m_layers[kStackSize - Index - 1]);
   }
 
   /* clang-format off */

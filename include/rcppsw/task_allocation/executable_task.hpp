@@ -27,17 +27,19 @@
 #include <string>
 #include <vector>
 
-#include "rcppsw/task_allocation/logical_task.hpp"
-#include "rcppsw/task_allocation/time_estimate.hpp"
+#include "rcppsw/er/client.hpp"
 #include "rcppsw/metrics/tasks/execution_metrics.hpp"
 #include "rcppsw/task_allocation/abort_probability.hpp"
-#include "rcppsw/er/client.hpp"
+#include "rcppsw/task_allocation/logical_task.hpp"
+#include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw);
-namespace math { struct ema_params; }
+namespace math {
+struct ema_params;
+}
 NS_START(task_allocation);
 
 /*******************************************************************************
@@ -89,7 +91,9 @@ class executable_task : public logical_task,
   const time_estimate& task_interface_estimate(uint i) const override {
     return m_interface_estimates[i];
   }
-  bool task_at_interface(void) const override { return -1 != active_interface(); }
+  bool task_at_interface(void) const override {
+    return -1 != active_interface();
+  }
 
   /**
    * @brief Update the calculated interface time for the task if the current
@@ -99,8 +103,9 @@ class executable_task : public logical_task,
   */
   void interface_time_update(void) {
     if (-1 != active_interface()) {
-      m_interface_times[active_interface()] = interface_time_calc(active_interface(),
-                                                                  m_interface_start_times[active_interface()]);
+      m_interface_times[active_interface()] =
+          interface_time_calc(active_interface(),
+                              m_interface_start_times[active_interface()]);
     }
   }
 
@@ -116,7 +121,9 @@ class executable_task : public logical_task,
    *
    * @return The ID, or -1 if an interface has not yet been completed.
    */
-  int task_last_active_interface(void) const override { return m_last_active_interface; }
+  int task_last_active_interface(void) const override {
+    return m_last_active_interface;
+  }
 
   /**
    * @brief Because tasks can have multiple interfaces, they need a way to reset

@@ -34,16 +34,19 @@ NS_START(rcppsw, robotics, kinematics2D);
  ******************************************************************************/
 differential_drive_fsm::differential_drive_fsm(double max_speed,
                                                const math::radians& soft_turn_max)
-    : state_machine::simple_fsm(ST_MAX_STATES), soft_turn(), hard_turn(),
-      mc_max_speed(max_speed), mc_soft_turn_max(soft_turn_max),
+    : state_machine::simple_fsm(ST_MAX_STATES),
+      soft_turn(),
+      hard_turn(),
+      mc_max_speed(max_speed),
+      mc_soft_turn_max(soft_turn_max),
       m_wheel_speeds() {}
 
 /*******************************************************************************
  * Events
  ******************************************************************************/
-void differential_drive_fsm::change_velocity(
-    double speed, const math::radians &angle,
-    const std::pair<bool, bool> &force) {
+void differential_drive_fsm::change_velocity(double speed,
+                                             const math::radians& angle,
+                                             const std::pair<bool, bool>& force) {
   FSM_DEFINE_TRANSITION_MAP(kTRANSITIONS){
       ST_SOFT_TURN, /* slow turn */
       ST_HARD_TURN, /* hard turn */
@@ -67,8 +70,8 @@ FSM_STATE_DEFINE(differential_drive_fsm, soft_turn, turn_data) {
   }
 
   /* Both wheels go straight, but one is faster than the other */
-  double speed_factor = (mc_soft_turn_max -
-                         math::radians::abs(data->angle)) / mc_soft_turn_max;
+  double speed_factor =
+      (mc_soft_turn_max - math::radians::abs(data->angle)) / mc_soft_turn_max;
   double speed1 = data->speed - data->speed * (1.0 - speed_factor);
   double speed2 = data->speed + data->speed * (1.0 - speed_factor);
   set_wheel_speeds(speed1, speed2, data->angle);
@@ -89,7 +92,8 @@ FSM_STATE_DEFINE(differential_drive_fsm, hard_turn, turn_data) {
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void differential_drive_fsm::set_wheel_speeds(double speed1, double speed2,
+void differential_drive_fsm::set_wheel_speeds(double speed1,
+                                              double speed2,
                                               math::radians heading) {
   if (heading > math::radians::kZERO) {
     /* Turn Left */

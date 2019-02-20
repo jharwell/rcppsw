@@ -45,7 +45,7 @@ NS_START(rcppsw, math);
  * - Alpha: How much weight to give the past estimate, and how much to give the
  *   new measurement?
  */
-template<class T>
+template <class T>
 class ema : public expression<T> {
  public:
   using expression<T>::last_result;
@@ -72,17 +72,17 @@ class ema : public expression<T> {
     return *this;
   }
 
-  ema operator+(const ema &other) const {
+  ema operator+(const ema& other) const {
     ema r(this->alpha());
     r.set_result(this->last_result() + other.last_result());
     return r;
   }
-  ema operator+=(const ema &other) {
+  ema operator+=(const ema& other) {
     this->set_result(this->last_result() + other.last_result());
     return *this;
   }
 
-  ema operator/(const ema &other) const {
+  ema operator/(const ema& other) const {
     ema r(this->alpha());
     r.set_result(this->last_result() / other.last_result());
     return r;
@@ -95,43 +95,43 @@ class ema : public expression<T> {
 /*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
-template<class T>
-ema<T> operator-(const ema<T> &lhs, double d) {
+template <class T>
+ema<T> operator-(const ema<T>& lhs, double d) {
   ema<T> r(lhs.alpha());
   r.set_result(lhs.last_result() - d);
   return r;
 }
 
-template<class T>
-ema<T> operator-(double d, const ema<T> &rhs) {
+template <class T>
+ema<T> operator-(double d, const ema<T>& rhs) {
   ema<T> r(rhs.alpha());
   r.set_result(d - rhs.last_result());
   return r;
 }
 
-template<class T>
-ema<T> operator*(const ema<T> &lhs, double d) {
+template <class T>
+ema<T> operator*(const ema<T>& lhs, double d) {
   ema<T> r(lhs.alpha());
   r.set_result(lhs.last_result() * d);
   return r;
 }
 
-template<class T>
-ema<T> operator*(double d, const ema<T> &rhs) {
+template <class T>
+ema<T> operator*(double d, const ema<T>& rhs) {
   ema<T> r(rhs.alpha());
   r.set_result(rhs.last_result() * d);
   return r;
 }
 
-template<class T>
-ema<T> operator/(double d, const ema<T> &rhs) {
+template <class T>
+ema<T> operator/(double d, const ema<T>& rhs) {
   ema<T> r(rhs.alpha());
   r.set_result(rhs.last_result() / d);
   return r;
 }
 
-template<class T>
-ema<T> operator/(const ema<T> &lhs, double d) {
+template <class T>
+ema<T> operator/(const ema<T>& lhs, double d) {
   ema<T> r(lhs.alpha());
   r.set_result(lhs.last_result() / d);
   return r;

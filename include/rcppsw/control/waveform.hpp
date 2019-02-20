@@ -46,10 +46,10 @@ NS_START(rcppsw, control);
 class waveform {
  public:
   explicit waveform(const struct waveform_params* const params)
-        : m_frequency(params->frequency),
-          m_phase(params->phase),
-          m_amplitude(params->amplitude),
-          m_offset(params->offset) {}
+      : m_frequency(params->frequency),
+        m_phase(params->phase),
+        m_amplitude(params->amplitude),
+        m_offset(params->offset) {}
 
   virtual ~waveform(void) = default;
 
@@ -75,4 +75,4 @@ class waveform {
 
 NS_END(control, rcppsw);
 
-#endif  // INCLUDE_RCPPSW_CONTROL_WAVEFORM_HPP_
+#endif // INCLUDE_RCPPSW_CONTROL_WAVEFORM_HPP_

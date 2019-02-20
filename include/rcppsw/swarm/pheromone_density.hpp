@@ -102,7 +102,10 @@ class pheromone_density : public math::expression<double> {
    *
    * @param val The value to set.
    */
-  void pheromone_set(double val) { set_result(val); m_delta = 0; }
+  void pheromone_set(double val) {
+    set_result(val);
+    m_delta = 0;
+  }
 
   /**
    * @brief Subtract two pheromone density objects. Only subtracts the current

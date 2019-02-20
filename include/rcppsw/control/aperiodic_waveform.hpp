@@ -48,11 +48,8 @@ class constant_waveform : public waveform {
   explicit constant_waveform(const struct waveform_params* const params)
       : waveform(params) {}
 
-  double value(double) override {
-    return amplitude();
-  }
+  double value(double) override { return amplitude(); }
 };
-
 
 /**
  * @class null_waveform
@@ -71,4 +68,4 @@ class null_waveform : public waveform {
 
 NS_END(control, rcppsw);
 
-#endif  // INCLUDE_RCPPSW_CONTROL_APERIODIC_WAVEFORM_HPP_
+#endif // INCLUDE_RCPPSW_CONTROL_APERIODIC_WAVEFORM_HPP_

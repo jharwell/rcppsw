@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
 #include <string>
+#include "rcppsw/common/common.hpp"
 
 #include "rcppsw/patterns/state_machine/base_fsm.hpp"
 
@@ -46,17 +46,16 @@ namespace sm = patterns::state_machine;
  */
 class mt_fsm : patterns::state_machine::base_fsm {
  public:
-  explicit mt_fsm(uint8_t max_states,
-         uint8_t initial_state = 0)
-      : base_fsm(max_states, initial_state),
-        m_mutex() {}
+  explicit mt_fsm(uint8_t max_states, uint8_t initial_state = 0)
+      : base_fsm(max_states, initial_state), m_mutex() {}
 
   ~mt_fsm(void) override = default;
 
   void init(void) override;
 
  protected:
-  void external_event(uint8_t new_state, std::unique_ptr<const sm::event_data> data) override;
+  void external_event(uint8_t new_state,
+                      std::unique_ptr<const sm::event_data> data) override;
 
  private:
   std::mutex m_mutex;

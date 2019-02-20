@@ -70,7 +70,9 @@ class pid_loop {
    */
   double calculate(double setpoint, double pv);
 
-  void reset(void) { m_istate = 0.0; m_prev_error = 0.0;
+  void reset(void) {
+    m_istate = 0.0;
+    m_prev_error = 0.0;
   }
   /**
    * @brief Get the minimal value of manipulated variable/integral term.

@@ -44,7 +44,7 @@ pid_t forkable::start(int core) {
   return m_pid;
 } /* forkable::start() */
 
-pid_t forkable::start(const std::string &new_wd, int core) {
+pid_t forkable::start(const std::string& new_wd, int core) {
   m_proc_run = true;
   m_pid = fork();
   if (m_pid == 0) {

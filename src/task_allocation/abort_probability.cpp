@@ -32,14 +32,14 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-abort_probability::abort_probability(const math::sigmoid_params *const params)
+abort_probability::abort_probability(const math::sigmoid_params* const params)
     : sigmoid(params->reactivity, params->offset, params->gamma) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 double abort_probability::operator()(double exec_time,
-                                     const time_estimate &whole_task) {
+                                     const time_estimate& whole_task) {
   if (!(whole_task.last_result() > 0)) {
     /*
      * Necessary to turn the lvalue into rvalue in C++14/gcc 5/7 in order to

@@ -24,10 +24,10 @@
 #include "rcppsw/task_allocation/bi_tab.hpp"
 #include <cassert>
 
-#include "rcppsw/task_allocation/polled_task.hpp"
 #include "rcppsw/task_allocation/bi_tdgraph.hpp"
-#include "rcppsw/task_allocation/task_partition_params.hpp"
+#include "rcppsw/task_allocation/polled_task.hpp"
 #include "rcppsw/task_allocation/src_sigmoid_sel_params.hpp"
+#include "rcppsw/task_allocation/task_partition_params.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -46,9 +46,9 @@ constexpr char bi_tab::kSubtaskSelSrcInterface[];
  * Constructors/Destructors
  ******************************************************************************/
 bi_tab::bi_tab(const bi_tdgraph* const graph,
-               polled_task *const root,
-               const polled_task *const child1,
-               const polled_task *const child2,
+               polled_task* const root,
+               const polled_task* const child1,
+               const polled_task* const child2,
                const struct task_partition_params* const partitioning,
                const struct src_sigmoid_sel_params* const subtask_sel)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tab"),
@@ -62,7 +62,8 @@ bi_tab::bi_tab(const bi_tdgraph* const graph,
       m_child2(child2),
       m_sel_prob(&subtask_sel->sigmoid),
       m_partition_prob(&partitioning->src_sigmoid.sigmoid) {
-  ER_ASSERT(m_root->is_partitionable(), "Root task '%s' not partitionable",
+  ER_ASSERT(m_root->is_partitionable(),
+            "Root task '%s' not partitionable",
             m_root->name().c_str());
   ER_ASSERT(!(m_root->is_atomic() && m_root->is_partitionable()),
             "Root task '%s' cannot be both atomic and partitionable",
@@ -102,18 +103,15 @@ void bi_tab::task_finish_update(polled_task* const finished) {
   m_active_task = nullptr;
 } /* task_finish_update() */
 
-__rcsw_pure bool
-bi_tab::contains_task(const polled_task *const task) const {
+__rcsw_pure bool bi_tab::contains_task(const polled_task* const task) const {
   return task == m_root || task == m_child1 || task == m_child2;
 } /* contains_task() */
 
-__rcsw_pure bool
-bi_tab::task_is_root(const polled_task *const task) const {
+__rcsw_pure bool bi_tab::task_is_root(const polled_task* const task) const {
   return task == m_root;
 } /* task_is_root() */
 
-__rcsw_pure bool
-bi_tab::task_is_child(const polled_task *const task) const {
+__rcsw_pure bool bi_tab::task_is_child(const polled_task* const task) const {
   return task == m_child1 || task == m_child2;
 } /* task_is_child() */
 
@@ -127,13 +125,15 @@ void bi_tab::partition_prob_update(void) {
     int child1_id = m_child1->task_last_active_interface();
     int child2_id = m_child2->task_last_active_interface();
     if (root_id >= 0 && child1_id >= 0 && child2_id >= 0) {
-    m_partition_prob.calc(m_root->task_interface_estimate(root_id),
-                          m_child1->task_interface_estimate(child1_id),
-                          m_child2->task_interface_estimate(child2_id));
+      m_partition_prob.calc(m_root->task_interface_estimate(root_id),
+                            m_child1->task_interface_estimate(child1_id),
+                            m_child2->task_interface_estimate(child2_id));
 
     } else {
-      ER_WARN("Cannot update partition prob for TAB rooted at '%s': >= 1 task has no last interface",
-              m_root->name().c_str());
+      ER_WARN(
+          "Cannot update partition prob for TAB rooted at '%s': >= 1 task has "
+          "no last interface",
+          m_root->name().c_str());
     }
   } else {
     ER_FATAL_SENTINEL("Bad partition input src '%s'",
@@ -141,7 +141,7 @@ void bi_tab::partition_prob_update(void) {
   }
 } /* partition_prob_update() */
 
-polled_task * bi_tab::task_allocate(void) {
+polled_task* bi_tab::task_allocate(void) {
   ER_ASSERT(!(mc_always_partition && mc_never_partition),
             "Cannot ALWAYS and NEVER partition");
 
@@ -177,8 +177,7 @@ polled_task * bi_tab::task_allocate(void) {
 std::pair<double, double> bi_tab::subtask_sw_calc(void) {
   double prob_12 = 0.0;
   double prob_21 = 0.0;
-  if (subtask_sel_probability::kMethodHarwell2018 ==
-      m_sel_prob.method()) {
+  if (subtask_sel_probability::kMethodHarwell2018 == m_sel_prob.method()) {
     if (kSubtaskSelSrcExec == mc_subtask_sel_input) {
       prob_12 = m_sel_prob(&m_child1->task_exec_estimate(),
                            &m_child2->task_exec_estimate());
@@ -194,8 +193,10 @@ std::pair<double, double> bi_tab::subtask_sw_calc(void) {
                              &m_child1->task_interface_estimate(child1_id));
 
       } else {
-        ER_WARN("Cannot calc subtask sel prob for TAB rooted at '%s': >= 1 task has no last interface",
-                m_root->name().c_str());
+        ER_WARN(
+            "Cannot calc subtask sel prob for TAB rooted at '%s': >= 1 task "
+            "has no last interface",
+            m_root->name().c_str());
         prob_12 = 0.5;
         prob_21 = 0.5;
       }
@@ -209,9 +210,9 @@ std::pair<double, double> bi_tab::subtask_sw_calc(void) {
      * with 1 interface, so its OK for now.
      */
     prob_12 = m_sel_prob(&m_child1->task_interface_estimate(0),
-                               &m_child2->task_interface_estimate(0));
+                         &m_child2->task_interface_estimate(0));
     prob_21 = m_sel_prob(&m_child2->task_interface_estimate(0),
-                               &m_child1->task_interface_estimate(0));
+                         &m_child1->task_interface_estimate(0));
   } else {
     ER_FATAL_SENTINEL("Bad subtask selection method '%s'",
                       m_sel_prob.method().c_str());
@@ -223,8 +224,7 @@ polled_task* bi_tab::subtask_allocate(void) {
   ER_INFO("Employing partitioning at task '%s': sel_method=%s, last_subtask=%s",
           m_root->name().c_str(),
           m_sel_prob.method().c_str(),
-          (nullptr != m_last_subtask) ? m_last_subtask->name().c_str()
-          : "None");
+          (nullptr != m_last_subtask) ? m_last_subtask->name().c_str() : "None");
 
   auto probs = subtask_sw_calc();
   double prob_12 = probs.first;
@@ -237,15 +237,17 @@ polled_task* bi_tab::subtask_allocate(void) {
           m_child2->task_exec_estimate().last_result(),
           m_child2->task_interface_estimate(0).last_result());
 
-  ER_INFO("%s -> %s prob=%f, %s -> %s prob=%f", m_child1->name().c_str(),
-          m_child2->name().c_str(), prob_12, m_child2->name().c_str(),
-          m_child1->name().c_str(), prob_21);
+  ER_INFO("%s -> %s prob=%f, %s -> %s prob=%f",
+          m_child1->name().c_str(),
+          m_child2->name().c_str(),
+          prob_12,
+          m_child2->name().c_str(),
+          m_child1->name().c_str(),
+          prob_21);
 
-  const polled_task *ret = nullptr;
-  if (subtask_sel_probability::kMethodHarwell2018 ==
-          m_sel_prob.method() ||
-      subtask_sel_probability::kMethodBrutschy2014 ==
-          m_sel_prob.method()) {
+  const polled_task* ret = nullptr;
+  if (subtask_sel_probability::kMethodHarwell2018 == m_sel_prob.method() ||
+      subtask_sel_probability::kMethodBrutschy2014 == m_sel_prob.method()) {
     /*
      * If we last executed child1, we calculate the probability of switching
      * to child2, based on time estimates.
@@ -278,7 +280,7 @@ polled_task* bi_tab::subtask_allocate(void) {
   ER_ASSERT(nullptr != ret, "No subtask selected?");
   ER_INFO("Selected subtask '%s'", ret->name().c_str());
   m_active_task = ret;
-  return const_cast<polled_task *>(ret);
+  return const_cast<polled_task*>(ret);
 } /* subtask_allocate() */
 
 /*******************************************************************************
@@ -289,7 +291,7 @@ bool bi_tab::task_depth_changed(void) const {
     return true; /* first allocation */
   }
   return mc_graph->vertex_depth(m_active_task) !=
-      mc_graph->vertex_depth(m_last_task);
+         mc_graph->vertex_depth(m_last_task);
 } /* task_depth_changed() */
 
 NS_END(task_allocation, rcppsw);

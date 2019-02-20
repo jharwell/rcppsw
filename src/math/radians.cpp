@@ -44,18 +44,18 @@ const radians radians::kZERO(0.0);
 
 const double radians::kRADIANS_TO_DEGREES(180.0 / M_PI);
 const range<radians> radians::kSignedRange(-radians(M_PI), radians(M_PI));
-const range<radians> radians::kUnsignedRange(radians(0), radians(2*M_PI));
+const range<radians> radians::kUnsignedRange(radians(0), radians(2 * M_PI));
 #pragma clang diagnostic pop
 
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-radians::radians(const degrees &r) : m_value(to_radians(r).value()) {}
+radians::radians(const degrees& r) : m_value(to_radians(r).value()) {}
 
 /*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
-std::ostream &operator<<(std::ostream &stream, const radians &r) {
+std::ostream& operator<<(std::ostream& stream, const radians& r) {
   stream << "radians(" << r.value() << " -> "
          << r.value() * radians::kRADIANS_TO_DEGREES << " degrees"
          << ")";

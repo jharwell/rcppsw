@@ -32,14 +32,14 @@ NS_START(rcppsw, robotics, steering2D);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-polar_force::polar_force(const struct polar_force_params *const params)
+polar_force::polar_force(const struct polar_force_params* const params)
     : mc_max(params->max) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-math::vector2d polar_force::operator()(const boid &entity,
-                                        const math::vector2d &source) const {
+math::vector2d polar_force::operator()(const boid& entity,
+                                       const math::vector2d& source) const {
   return (entity.position() - source).normalize() * mc_max;
 } /* operator()() */
 

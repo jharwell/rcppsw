@@ -46,12 +46,10 @@ class grid2D : public base_grid2D<T> {
  public:
   using typename base_grid2D<T>::index_range;
 
-
   using base_grid2D<T>::access;
 
   grid2D(uint x_max, uint y_max)
-      : base_grid2D<T>(),
-        m_cells(boost::extents[x_max][y_max]) {}
+      : base_grid2D<T>(), m_cells(boost::extents[x_max][y_max]) {}
 
   T& access(uint i, uint j) override {
     return m_cells[static_cast<typename index_range::index>(i)]
@@ -62,9 +60,8 @@ class grid2D : public base_grid2D<T> {
 
   __rcsw_pure T& access(const math::vector2u& c) override {
     return m_cells[static_cast<typename index_range::index>(c.x())]
-        [static_cast<typename index_range::index>(c.y())];
+                  [static_cast<typename index_range::index>(c.y())];
   }
-
 
  private:
   /* clang-format off */

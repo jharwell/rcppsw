@@ -28,8 +28,8 @@
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
-#include "rcppsw/task_allocation/task_partition_params.hpp"
 #include "rcppsw/task_allocation/src_sigmoid_sel_xml_parser.hpp"
+#include "rcppsw/task_allocation/task_partition_params.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -45,11 +45,10 @@ NS_START(rcppsw, task_allocation);
  *
  * @brief Parses XML parameters for relating to task partitioning.
  */
-class task_partition_xml_parser: public rcppsw::params::xml_param_parser {
+class task_partition_xml_parser : public rcppsw::params::xml_param_parser {
  public:
   explicit task_partition_xml_parser(uint level)
-      : xml_param_parser(level),
-        m_sigmoid(level + 1) {}
+      : xml_param_parser(level), m_sigmoid(level + 1) {}
 
   /**
    * @brief The root tag that all task task_partition parameters should lie
@@ -69,7 +68,8 @@ class task_partition_xml_parser: public rcppsw::params::xml_param_parser {
   }
 
  private:
-  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(void) const override {
+  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(
+      void) const override {
     return m_params;
   }
 

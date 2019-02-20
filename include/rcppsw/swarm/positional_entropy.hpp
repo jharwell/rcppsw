@@ -24,14 +24,14 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
 #include <algorithm>
+#include <vector>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/algorithm/clustering/entropy.hpp"
-#include "rcppsw/math/vector2.hpp"
-#include "rcppsw/math/expression.hpp"
+#include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/math/expression.hpp"
+#include "rcppsw/math/vector2.hpp"
 #include "rcppsw/swarm/convergence/positional_entropy_params.hpp"
 
 /*******************************************************************************
@@ -51,13 +51,15 @@ namespace rclustering = ralg::clustering;
  * @brief Calculate the positional entropy of the swarm, using the methods
  * outlined in Balch2000 and Turgut2008.
  */
-class positional_entropy : public math::expression<double>,
-                           public rclustering::entropy_balch2000<math::vector2d> {
+class positional_entropy
+    : public math::expression<double>,
+      public rclustering::entropy_balch2000<math::vector2d> {
  public:
-  positional_entropy(const std::vector<math::vector2d>& data,
-                     std::unique_ptr<rclustering::detail::entropy_impl<math::vector2d>> impl,
-                     const math::ranged& horizon,
-                     double horizon_delta)
+  positional_entropy(
+      const std::vector<math::vector2d>& data,
+      std::unique_ptr<rclustering::detail::entropy_impl<math::vector2d>> impl,
+      const math::ranged& horizon,
+      double horizon_delta)
       : entropy_balch2000<math::vector2d>(data,
                                           std::move(impl),
                                           horizon,
@@ -69,14 +71,12 @@ class positional_entropy : public math::expression<double>,
    * @brief Calculate the positional entropy in 2D space of a swarm.
    */
   double operator()(void) {
-    return set_result(run([](const math::vector2d& v1,
-                             const math::vector2d& v2) {
-                            return (v1 - v2).length();
-                          }));
+    return set_result(run([](const math::vector2d& v1, const math::vector2d& v2) {
+      return (v1 - v2).length();
+    }));
   }
 };
 
 NS_END(swarm, rcppsw);
-
 
 #endif /* INCLUDE_RCPPSW_SWARM_POSITIONAL_ENTROPY_HPP_ */

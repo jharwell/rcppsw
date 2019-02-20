@@ -27,8 +27,8 @@
 #include <string>
 
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/params/xml_param_parser.hpp"
 #include "rcppsw/math/ema_params.hpp"
+#include "rcppsw/params/xml_param_parser.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -45,7 +45,7 @@ NS_START(rcppsw, math);
  * @brief Parses XML parameters for relating to exponential moving averages
  * (EMAs).
  */
-class ema_xml_parser: public rcppsw::params::xml_param_parser {
+class ema_xml_parser : public rcppsw::params::xml_param_parser {
  public:
   explicit ema_xml_parser(uint level) : xml_param_parser(level) {}
 
@@ -61,12 +61,11 @@ class ema_xml_parser: public rcppsw::params::xml_param_parser {
 
   std::string xml_root(void) const override { return kXMLRoot; }
 
-  std::shared_ptr<ema_params> parse_results(void) const {
-    return m_params;
-  }
+  std::shared_ptr<ema_params> parse_results(void) const { return m_params; }
 
  private:
-  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(void) const override {
+  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(
+      void) const override {
     return m_params;
   }
 

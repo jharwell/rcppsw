@@ -34,13 +34,15 @@ NS_START(rcppsw, patterns, state_machine);
  ******************************************************************************/
 base_fsm::base_fsm(uint8_t max_states, uint8_t initial_state)
     : ER_CLIENT_INIT("rcppsw.patterns.state_machine.fsm"),
-      mc_max_states(max_states), m_current_state(initial_state),
+      mc_max_states(max_states),
+      m_current_state(initial_state),
       m_initial_state(initial_state) {
   ER_ASSERT(mc_max_states < event_signal::IGNORED, "Too many states");
 }
 
-base_fsm::base_fsm(const base_fsm &other)
-    : ER_CLIENT_INIT(other.logger_name()), mc_max_states(other.mc_max_states),
+base_fsm::base_fsm(const base_fsm& other)
+    : ER_CLIENT_INIT(other.logger_name()),
+      mc_max_states(other.mc_max_states),
       m_current_state(other.current_state()),
       m_initial_state(other.current_state()) {
   ER_ASSERT(mc_max_states < event_signal::IGNORED, "Too many states");
@@ -58,8 +60,9 @@ void base_fsm::init(void) {
 
 void base_fsm::external_event(uint8_t new_state,
                               std::unique_ptr<const event_data> data) {
-  ER_TRACE("Received external event: new_state=%d data=%p", new_state,
-           reinterpret_cast<const void *>(data.get()));
+  ER_TRACE("Received external event: new_state=%d data=%p",
+           new_state,
+           reinterpret_cast<const void*>(data.get()));
 
   ER_ASSERT(event_signal::FATAL != new_state,
             "The impossible event happened...");
@@ -79,8 +82,9 @@ void base_fsm::external_event(uint8_t new_state,
 void base_fsm::internal_event(uint8_t new_state,
                               std::unique_ptr<const event_data> data) {
   ER_TRACE("Generated internal event: current_state=%d new_state=%d data=%p",
-           current_state(), new_state,
-           reinterpret_cast<const void *>(data.get()));
+           current_state(),
+           new_state,
+           reinterpret_cast<const void*>(data.get()));
   next_state(new_state);
   m_event_generated = true;
   if (m_event_data != data) {
@@ -89,11 +93,10 @@ void base_fsm::internal_event(uint8_t new_state,
 }
 
 void base_fsm::state_engine(void) {
-  const state_map_row *map = state_map(0);
-  const state_map_ex_row *map_ex = state_map_ex(0);
+  const state_map_row* map = state_map(0);
+  const state_map_ex_row* map_ex = state_map_ex(0);
 
-  ER_ASSERT(!(nullptr == map && nullptr == map_ex),
-            "Both state maps are NULL!");
+  ER_ASSERT(!(nullptr == map && nullptr == map_ex), "Both state maps are NULL!");
 
   if (map != nullptr) {
     state_engine_map();
@@ -110,7 +113,7 @@ void base_fsm::state_engine_map(void) {
     /* ready to update to new state */
     m_event_generated = false;
     update_state(next_state());
-    const state_map_row *row = state_map(current_state());
+    const state_map_row* row = state_map(current_state());
     state_engine_step(row);
   } /* while() */
 } /* state_engine_map() */
@@ -123,9 +126,9 @@ void base_fsm::state_engine_map_ex(void) {
     m_event_generated = false;
     /* verify new state is valid */
     ER_ASSERT(next_state() < max_states(), "new state is out of range");
-    const state_guard *guard = state_map_ex(next_state())->guard();
-    const state_entry *entry = state_map_ex(next_state())->entry();
-    const state_exit *exit = state_map_ex(current_state())->exit();
+    const state_guard* guard = state_map_ex(next_state())->guard();
+    const state_entry* entry = state_map_ex(next_state())->entry();
+    const state_exit* exit = state_map_ex(current_state())->exit();
 
     /* execute guard condition */
     bool guard_res = true;
@@ -158,22 +161,24 @@ void base_fsm::state_engine_map_ex(void) {
     }
     /* Now we're ready to switch to the new state */
     update_state(next_state());
-    const state_map_ex_row *row = state_map_ex(current_state());
+    const state_map_ex_row* row = state_map_ex(current_state());
     state_engine_step(row);
   } /* while() */
 } /* state_engine_map_ex() */
 
-void base_fsm::state_engine_step(const state_map_row *const c_row) {
+void base_fsm::state_engine_step(const state_map_row* const c_row) {
   ER_ASSERT(nullptr != c_row->state(), "null state?");
-  ER_TRACE("Invoking state action: state%d, data=%p", current_state(),
-           reinterpret_cast<const void *>(m_event_data.get()));
+  ER_TRACE("Invoking state action: state%d, data=%p",
+           current_state(),
+           reinterpret_cast<const void*>(m_event_data.get()));
   c_row->state()->invoke_state_action(this, event_data_get());
 } /* state_engine_step() */
 
-void base_fsm::state_engine_step(const state_map_ex_row *const c_row_ex) {
+void base_fsm::state_engine_step(const state_map_ex_row* const c_row_ex) {
   ER_ASSERT(nullptr != c_row_ex->state(), "null state?");
-  ER_TRACE("Invoking state action: state%d, data=%p", current_state(),
-           reinterpret_cast<const void *>(m_event_data.get()));
+  ER_TRACE("Invoking state action: state%d, data=%p",
+           current_state(),
+           reinterpret_cast<const void*>(m_event_data.get()));
   c_row_ex->state()->invoke_state_action(this, event_data_get());
 } /* state_engine_step() */
 

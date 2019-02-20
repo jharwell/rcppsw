@@ -52,8 +52,8 @@ class binned_powerlaw_distribution : public powerlaw_distribution {
    * @param ub Upper bound for distribution. Assumed to be a multiple of pwr.
    * @param pwr Power for distribution.
    */
-  binned_powerlaw_distribution(uint lb, uint ub, uint pwr) :
-      powerlaw_distribution(lb, ub, pwr) {}
+  binned_powerlaw_distribution(uint lb, uint ub, uint pwr)
+      : powerlaw_distribution(lb, ub, pwr) {}
 
   double operator()(std::default_random_engine& rng) {
     uint sample = powerlaw_distribution::operator()(rng);

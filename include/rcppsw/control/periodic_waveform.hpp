@@ -52,7 +52,7 @@ class sine_waveform : public waveform {
 
   double value(double time) override {
     double t = frequency() * time;
-    double v = std::sin(2*M_PI * t + phase());
+    double v = std::sin(2 * M_PI * t + phase());
     return amplitude() * v + offset();
   }
 };
@@ -76,8 +76,8 @@ class square_waveform : public waveform {
 
   double value(double time) override {
     double t = frequency() * time;
-    return amplitude() * std::copysign(1.0,
-                                       std::sin(2*M_PI * t + phase())) + offset();
+    return amplitude() * std::copysign(1.0, std::sin(2 * M_PI * t + phase())) +
+           offset();
   }
 };
 
@@ -104,4 +104,4 @@ class sawtooth_waveform : public waveform {
 
 NS_END(control, rcppsw);
 
-#endif  // INCLUDE_RCPPSW_CONTROL_PERIODIC_WAVEFORM_HPP_
+#endif // INCLUDE_RCPPSW_CONTROL_PERIODIC_WAVEFORM_HPP_

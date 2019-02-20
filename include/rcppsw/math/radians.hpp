@@ -72,7 +72,6 @@ class radians {
   double operator()(void) const { return value(); }
   double abs_value(void) const { return std::abs(m_value); }
 
-
   /**
    * @brief Normalizes the value in the range [-pi, pi].
    */
@@ -89,8 +88,8 @@ class radians {
 
   std::string to_str(void) const {
     return "rad(" + std::to_string(m_value) + ") -> deg(" +
-        std::to_string(m_value * radians::kRADIANS_TO_DEGREES / kPI.value()) +
-        ")";
+           std::to_string(m_value * radians::kRADIANS_TO_DEGREES / kPI.value()) +
+           ")";
   }
 
   friend std::istream& operator>>(std::istream& is, radians& r) {
@@ -98,13 +97,9 @@ class radians {
     return is;
   }
 
-  radians& operator+(void) {
-    return *this;
-  }
+  radians& operator+(void) { return *this; }
 
-  radians operator-(void) const {
-    return radians(-m_value);
-  }
+  radians operator-(void) const { return radians(-m_value); }
 
   radians& operator+=(const radians& other) {
     m_value += other.m_value;
@@ -154,17 +149,13 @@ class radians {
     return res;
   }
 
-  bool operator<(const radians& other) const {
-    return m_value < other.m_value;
-  }
+  bool operator<(const radians& other) const { return m_value < other.m_value; }
 
   bool operator<=(const radians& other) const {
     return m_value <= other.m_value;
   }
 
-  bool operator>(const radians& other) const {
-    return m_value > other.m_value;
-  }
+  bool operator>(const radians& other) const { return m_value > other.m_value; }
 
   bool operator>=(const radians& other) const {
     return m_value >= other.m_value;
@@ -172,12 +163,10 @@ class radians {
 
   bool operator==(const radians& other) const {
     return std::fabs(m_value - other.m_value) <
-      std::numeric_limits<double>::epsilon();
+           std::numeric_limits<double>::epsilon();
   }
 
-  bool operator!=(const radians& other) const {
-    return !(*this == other);
-  }
+  bool operator!=(const radians& other) const { return !(*this == other); }
 
  private:
   /**

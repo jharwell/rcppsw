@@ -35,20 +35,20 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 bi_tdgraph_executive::bi_tdgraph_executive(
     const struct task_executive_params* const params,
-    bi_tdgraph *const graph)
+    bi_tdgraph* const graph)
     : base_executive(params, graph),
       ER_CLIENT_INIT("rcppsw.ta.executive.bi_tdgraph") {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-__rcsw_pure const bi_tab * bi_tdgraph_executive::active_tab(void) const {
-  auto bigraph = static_cast<const bi_tdgraph *>(graph());
+__rcsw_pure const bi_tab* bi_tdgraph_executive::active_tab(void) const {
+  auto bigraph = static_cast<const bi_tdgraph*>(graph());
   return bigraph->active_tab();
 } /* active_tab() */
 
 void bi_tdgraph_executive::run(void) {
-  auto bigraph = static_cast<bi_tdgraph *>(graph());
+  auto bigraph = static_cast<bi_tdgraph*>(graph());
   /*
    * First timestep of execution/allocation
    */
@@ -72,8 +72,9 @@ void bi_tdgraph_executive::run(void) {
   }
 
   double prob = current_task()->abort_prob();
-  ER_DEBUG("Task '%s' abort probability: %f", current_task()->name().c_str(),
-             prob);
+  ER_DEBUG("Task '%s' abort probability: %f",
+           current_task()->name().c_str(),
+           prob);
   if (static_cast<double>(std::rand()) / RAND_MAX <= prob) {
     ER_INFO("Task '%s' aborted, prob=%f", current_task()->name().c_str(), prob);
     handle_task_abort(current_task());
@@ -86,7 +87,7 @@ void bi_tdgraph_executive::run(void) {
   current_task()->active_interface_update(0);
 } /* run() */
 
-void bi_tdgraph_executive::handle_task_abort(polled_task *task) {
+void bi_tdgraph_executive::handle_task_abort(polled_task* task) {
   task->task_aborted(true);
   for (auto cb : task_abort_notify()) {
     cb(task);
@@ -108,7 +109,8 @@ void bi_tdgraph_executive::handle_task_abort(polled_task *task) {
      */
     if (-1 != task->task_last_active_interface()) {
       task->interface_estimate_update(task->task_last_active_interface(),
-                                      task->interface_time(task->task_last_active_interface()));
+                                      task->interface_time(
+                                          task->task_last_active_interface()));
     }
   }
   task->exec_time_reset();
@@ -120,8 +122,8 @@ void bi_tdgraph_executive::handle_task_abort(polled_task *task) {
    * If the root was atomic then there is no active TAB that needs to be
    * updated.
    */
-    if (nullptr != active_tab()) {
-    auto bigraph = static_cast<bi_tdgraph *>(graph());
+  if (nullptr != active_tab()) {
+    auto bigraph = static_cast<bi_tdgraph*>(graph());
     bigraph->active_tab()->task_abort_update(task);
   }
 
@@ -132,7 +134,7 @@ void bi_tdgraph_executive::handle_task_abort(polled_task *task) {
   handle_task_start(task);
 } /* handle_task_abort() */
 
-void bi_tdgraph_executive::handle_task_finish(polled_task *task) {
+void bi_tdgraph_executive::handle_task_finish(polled_task* task) {
   task->exec_time_update();
   task->interface_time_update();
   for (auto cb : task_finish_notify()) {
@@ -142,7 +144,8 @@ void bi_tdgraph_executive::handle_task_finish(polled_task *task) {
   /* Not all tasks have interfaces, so this can't be an assert */
   if (-1 != task->task_last_active_interface() && update_interface_ests()) {
     task->interface_estimate_update(task->task_last_active_interface(),
-                                    task->interface_time(task->task_last_active_interface()));
+                                    task->interface_time(
+                                        task->task_last_active_interface()));
   }
   if (update_exec_ests()) {
     task->exec_estimate_update(task->exec_time());
@@ -157,7 +160,7 @@ void bi_tdgraph_executive::handle_task_finish(polled_task *task) {
    * updated.
    */
   if (nullptr != active_tab()) {
-    auto bigraph = static_cast<bi_tdgraph *>(graph());
+    auto bigraph = static_cast<bi_tdgraph*>(graph());
     bigraph->active_tab()->task_finish_update(task);
   }
 
@@ -166,7 +169,7 @@ void bi_tdgraph_executive::handle_task_finish(polled_task *task) {
   task->task_execute();
 } /* handle_task_finish() */
 
-void bi_tdgraph_executive::handle_task_start(polled_task *new_task) {
+void bi_tdgraph_executive::handle_task_start(polled_task* new_task) {
   ER_INFO("Starting new task '%s'", new_task->name().c_str());
 
   for (auto cb : m_task_alloc_notify) {
@@ -178,14 +181,14 @@ void bi_tdgraph_executive::handle_task_start(polled_task *new_task) {
   current_task(new_task);
 } /* handle_task_start() */
 
-polled_task *bi_tdgraph_executive::get_next_task(void) {
+polled_task* bi_tdgraph_executive::get_next_task(void) {
   /*
    * Update our active TAB so that we perform partitioning from the correct
    * place. We have to pass in the current_task(), because the TAB's active task
    * has already been updated to be NULL after the task finish/abort that
    * brought us to this function.
    */
-  auto bigraph = static_cast<bi_tdgraph *>(graph());
+  auto bigraph = static_cast<bi_tdgraph*>(graph());
   bigraph->active_tab_update(current_task());
   return bigraph->active_tab()->task_allocate();
 } /* get_next_task() */

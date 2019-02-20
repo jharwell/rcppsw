@@ -24,14 +24,14 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include <list>
 #include <algorithm>
+#include <list>
+#include <string>
 
-#include "rcppsw/task_allocation/tdgraph.hpp"
 #include "rcppsw/task_allocation/bi_tab.hpp"
 #include "rcppsw/task_allocation/bi_tab_sel_probability.hpp"
 #include "rcppsw/task_allocation/task_allocation_params.hpp"
+#include "rcppsw/task_allocation/tdgraph.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -97,12 +97,11 @@ class bi_tdgraph : public tdgraph, public er::client<bi_tdgraph> {
    * of TABs).
    */
   __rcsw_pure int active_tab_id(void) const {
-    return std::distance(m_tabs.begin(),
-                         std::find_if(m_tabs.begin(),
-                                      m_tabs.end(),
-                                      [this](const auto & tab) {
-                                      return &tab == m_active_tab;
-                                      }));
+    return std::distance(
+        m_tabs.begin(),
+        std::find_if(m_tabs.begin(), m_tabs.end(), [this](const auto& tab) {
+          return &tab == m_active_tab;
+        }));
   }
   /**
    * @brief Get the parent TAB for the argument (i.e. the TAB which has as a

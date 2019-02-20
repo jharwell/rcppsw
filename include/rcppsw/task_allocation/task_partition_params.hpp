@@ -42,8 +42,8 @@ NS_START(rcppsw, task_allocation);
  */
 struct task_partition_params : public params::base_params {
   src_sigmoid_sel_params src_sigmoid{};
-  bool                   always_partition{false};
-  bool                   never_partition{false};
+  bool always_partition{false};
+  bool never_partition{false};
 };
 
 NS_END(task_allocation, rcppsw);

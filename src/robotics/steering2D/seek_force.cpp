@@ -31,8 +31,8 @@ NS_START(rcppsw, robotics, steering2D);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-math::vector2d seek_force::operator()(const boid &entity,
-                                       const math::vector2d &target) const {
+math::vector2d seek_force::operator()(const boid& entity,
+                                      const math::vector2d& target) const {
   return (target - entity.position()).normalize() * entity.max_speed();
 } /* operator()() */
 

@@ -39,7 +39,7 @@ constexpr char partition_probability::kMethodPini2011[];
  * Constructors/Destructor
  ******************************************************************************/
 partition_probability::partition_probability(
-    const struct sigmoid_sel_params *params)
+    const struct sigmoid_sel_params* params)
     : sigmoid(params->sigmoid.reactivity,
               params->sigmoid.offset,
               params->sigmoid.gamma),
@@ -49,9 +49,9 @@ partition_probability::partition_probability(
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-double partition_probability::operator()(const time_estimate &task,
-                                         const time_estimate &subtask1,
-                                         const time_estimate &subtask2) {
+double partition_probability::operator()(const time_estimate& task,
+                                         const time_estimate& subtask1,
+                                         const time_estimate& subtask2) {
   if (kMethodPini2011 == mc_method) {
     return calc_pini2011(task, subtask1, subtask2);
   }
@@ -59,9 +59,9 @@ double partition_probability::operator()(const time_estimate &task,
   return 0.0;
 } /* operator()() */
 
-double partition_probability::calc_pini2011(const time_estimate &task,
-                                            const time_estimate &subtask1,
-                                            const time_estimate &subtask2) {
+double partition_probability::calc_pini2011(const time_estimate& task,
+                                            const time_estimate& subtask1,
+                                            const time_estimate& subtask2) {
   /*
    * If we do not have samples from the task(s) denominator for either case,
    * then we artificially set that term to 0, which yields an exponent of 0, and
@@ -70,11 +70,13 @@ double partition_probability::calc_pini2011(const time_estimate &task,
   double theta = 0.0;
   if (task > subtask1 + subtask2) {
     if ((subtask1 + subtask2).last_result() > 0) {
-      theta = reactivity() * (task / (subtask1 + subtask2) - offset()).last_result();
+      theta = reactivity() *
+              (task / (subtask1 + subtask2) - offset()).last_result();
     }
   } else {
     if (task.last_result() > 0) {
-      theta = reactivity() * (offset() - (subtask1 + subtask2) / task).last_result();
+      theta = reactivity() *
+              (offset() - (subtask1 + subtask2) / task).last_result();
     }
   }
   return set_result(1.0 / (1 + std::exp(-theta)) * gamma());

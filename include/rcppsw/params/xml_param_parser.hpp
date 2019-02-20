@@ -24,16 +24,18 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <ext/ticpp/ticpp.h>
 #include <iosfwd>
 #include <string>
-#include <ext/ticpp/ticpp.h>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-namespace ticpp { class Element; }
+namespace ticpp {
+class Element;
+}
 
 NS_START(rcppsw, params);
 struct base_params;
@@ -41,17 +43,13 @@ struct base_params;
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#define XML_ATTR_STR(container, name) std::string(#name) << "=" << (container)->name
-#define XML_PARSE_ATTR(node, container, name)   \
-  this->node_attr_get((node),                   \
-                      #name,                    \
-                      (container)->name)
+#define XML_ATTR_STR(container, name) \
+  std::string(#name) << "=" << (container)->name
+#define XML_PARSE_ATTR(node, container, name) \
+  this->node_attr_get((node), #name, (container)->name)
 
-#define XML_PARSE_ATTR_DFLT(node, container, name,dflt) \
-  this->node_attr_get((node),                           \
-                      #name,                            \
-                      (container)->name,                \
-                      dflt)
+#define XML_PARSE_ATTR_DFLT(node, container, name, dflt) \
+  this->node_attr_get((node), #name, (container)->name, dflt)
 
 /*******************************************************************************
  * Class Definitions
@@ -119,7 +117,7 @@ class xml_param_parser : public er::client<xml_param_parser> {
    * non-virtual interface to getting the results of a parameter parse, so that
    * covariance with smart pointer return types will work.
    */
-  template<typename T>
+  template <typename T>
   std::shared_ptr<T> parse_results(void) const {
     static_assert(std::is_base_of<base_params, T>::value,
                   "Parameters must be derived from base_params!");
@@ -150,10 +148,8 @@ class xml_param_parser : public er::client<xml_param_parser> {
    * @param attr The attribute name.
    * @param buf  The result buffer.
    */
-  template<typename T>
-  void node_attr_get(ticpp::Element& node,
-                     const std::string& attr,
-                     T& buf) {
+  template <typename T>
+  void node_attr_get(ticpp::Element& node, const std::string& attr, T& buf) {
     node.GetAttribute(attr, &buf, true);
   }
 
@@ -162,10 +158,7 @@ class xml_param_parser : public er::client<xml_param_parser> {
    * specially, or at least I can't figure out how to make them also work the
    * template version).
    */
-  void node_attr_get(ticpp::Element& node,
-                     const std::string& attr,
-                     bool& buf);
-
+  void node_attr_get(ticpp::Element& node, const std::string& attr, bool& buf);
 
   /**
    * @brief Get an attribute inside a node, or substitute a default value if the
@@ -175,7 +168,7 @@ class xml_param_parser : public er::client<xml_param_parser> {
    * @param attr The attribute name.
    * @param buf  The result buffer.
    */
-  template<typename T>
+  template <typename T>
   void node_attr_get(ticpp::Element& node,
                      const std::string& attr,
                      T& buf,

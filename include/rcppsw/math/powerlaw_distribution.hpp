@@ -53,18 +53,15 @@ class powerlaw_distribution {
    * @param ub Upper bound for distribution. Assumed to be a multiple of pwr.
    * @param pwr Power for distribution.
    */
-  powerlaw_distribution(uint lb, uint ub, uint pwr) :
-      m_lb(lb),
-      m_ub(ub),
-      m_pwr(pwr),
-      m_uniform(0, 1) {}
+  powerlaw_distribution(uint lb, uint ub, uint pwr)
+      : m_lb(lb), m_ub(ub), m_pwr(pwr), m_uniform(0, 1) {}
   virtual ~powerlaw_distribution(void) = default;
 
   double operator()(std::default_random_engine& rng) {
     double y = m_uniform(rng);
-    double tmp = (std::pow(m_ub, m_pwr+1) - std::pow(m_lb, m_pwr+1))*y +
-               std::pow(m_lb, m_pwr+1);
-    return std::pow(tmp, 1.0/(m_pwr+1));
+    double tmp = (std::pow(m_ub, m_pwr + 1) - std::pow(m_lb, m_pwr + 1)) * y +
+                 std::pow(m_lb, m_pwr + 1);
+    return std::pow(tmp, 1.0 / (m_pwr + 1));
   }
   uint pwr(void) const { return m_pwr; }
   uint lb(void) const { return m_lb; }

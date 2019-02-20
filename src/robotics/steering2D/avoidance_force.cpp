@@ -32,14 +32,14 @@ NS_START(rcppsw, robotics, steering2D);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-avoidance_force::avoidance_force(const struct avoidance_force_params *params)
+avoidance_force::avoidance_force(const struct avoidance_force_params* params)
     : mc_max(params->max) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-math::vector2d avoidance_force::operator()(const boid &,
-                                           const math::vector2d &closest) const {
+math::vector2d avoidance_force::operator()(const boid&,
+                                           const math::vector2d& closest) const {
   if (closest.length() > 0) {
     math::vector2d avoidance = -closest;
     return avoidance.normalize() * mc_max;

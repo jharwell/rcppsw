@@ -50,8 +50,9 @@ struct waveform_params;
  * - Constant (aperiodic)
  * - Null (aperiodic)
  */
-class waveform_generator : public patterns::factory::releasing_factory<waveform,
-                                                                       const waveform_params*> {
+class waveform_generator
+    : public patterns::factory::releasing_factory<waveform,
+                                                  const waveform_params*> {
  public:
   static constexpr char kSine[] = "Sine";
   static constexpr char kSquare[] = "Square";
@@ -67,4 +68,4 @@ class waveform_generator : public patterns::factory::releasing_factory<waveform,
 
 NS_END(control, rcppsw);
 
-#endif  // INCLUDE_RCPPSW_CONTROL_WAVEFORM_GENERATOR_HPP_
+#endif // INCLUDE_RCPPSW_CONTROL_WAVEFORM_GENERATOR_HPP_

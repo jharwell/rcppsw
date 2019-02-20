@@ -45,10 +45,9 @@ NS_START(rcppsw, task_allocation);
  * @brief Parses XML parameters for relating to sourced sigmoid selection of
  * stuff.
  */
-class task_executive_xml_parser: public rcppsw::params::xml_param_parser {
+class task_executive_xml_parser : public rcppsw::params::xml_param_parser {
  public:
-  explicit task_executive_xml_parser(uint level)
-      : xml_param_parser(level) {}
+  explicit task_executive_xml_parser(uint level) : xml_param_parser(level) {}
 
   /**
    * @brief The root tag that all task task_executive parameters should lie
@@ -65,7 +64,8 @@ class task_executive_xml_parser: public rcppsw::params::xml_param_parser {
   }
 
  private:
-  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(void) const override {
+  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(
+      void) const override {
     return m_params;
   }
 

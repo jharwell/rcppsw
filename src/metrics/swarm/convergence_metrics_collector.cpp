@@ -23,10 +23,10 @@
  ******************************************************************************/
 #include "rcppsw/metrics/swarm/convergence_metrics_collector.hpp"
 
+#include "rcppsw/algorithm/clustering/entropy.hpp"
 #include "rcppsw/metrics/swarm/convergence_metrics.hpp"
 #include "rcppsw/swarm/convergence/angular_order.hpp"
 #include "rcppsw/swarm/convergence/positional_entropy.hpp"
-#include "rcppsw/algorithm/clustering/entropy.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -40,9 +40,8 @@ namespace rcluster = rcppsw::algorithm::clustering;
 convergence_metrics_collector::convergence_metrics_collector(
     const std::string& ofname,
     uint interval,
-    const swc::convergence_params * const params)
-    : base_metrics_collector(ofname, interval),
-      mc_params(*params) {}
+    const swc::convergence_params* const params)
+    : base_metrics_collector(ofname, interval), mc_params(*params) {}
 
 /*******************************************************************************
  * Member Functions
@@ -50,7 +49,7 @@ convergence_metrics_collector::convergence_metrics_collector(
 std::string convergence_metrics_collector::csv_header_build(
     const std::string& header) {
   return base_metrics_collector::csv_header_build(header) +
-      /* clang-format off */
+         /* clang-format off */
       "int_avg_interact_deg_raw" + separator() +
       "int_avg_interact_deg_raw_dt" + separator() +
       "int_avg_interact_deg_norm" + separator() +
@@ -100,8 +99,7 @@ bool convergence_metrics_collector::csv_line_build(std::string& line) {
   return true;
 } /* csv_line_build() */
 
-void convergence_metrics_collector::collect(
-    const metrics::base_metrics& metrics) {
+void convergence_metrics_collector::collect(const metrics::base_metrics& metrics) {
   auto& m = dynamic_cast<const convergence_metrics&>(metrics);
 
   /* Collect interaction degree metrics.
@@ -127,8 +125,9 @@ void convergence_metrics_collector::collect(
   /* collect positional entropy metrics */
   if (mc_params.pos_entropy.enable) {
     auto robot_positions = m.robot_positions();
-    auto clusterer = std::make_unique<rcluster::detail::entropy_impl<rmath::vector2d>>(
-        mc_params.n_threads);
+    auto clusterer =
+        std::make_unique<rcluster::detail::entropy_impl<rmath::vector2d>>(
+            mc_params.n_threads);
     auto alg = swc::positional_entropy(robot_positions,
                                        std::move(clusterer),
                                        mc_params.pos_entropy.horizon,

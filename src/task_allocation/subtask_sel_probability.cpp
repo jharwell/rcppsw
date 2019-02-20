@@ -46,18 +46,19 @@ subtask_sel_probability::subtask_sel_probability(std::string method)
       mc_method(std::move(method)) {
   if (kMethodHarwell2018 == method) {
     sigmoid::init(kHARWELL2018_REACTIVITY,
-                   kHARWELL2018_OFFSET,
-                   kHARWELL2018_GAMMA);
+                  kHARWELL2018_OFFSET,
+                  kHARWELL2018_GAMMA);
   } else if (kMethodBrutschy2014 == method) {
     sigmoid::init(kBRUTSCHY2014_REACTIVITY,
-                   kBRUTSCHY2014_OFFSET,
-                   kBRUTSCHY2014_GAMMA);
-  } else if (kMethodRandom == method) {}
+                  kBRUTSCHY2014_OFFSET,
+                  kBRUTSCHY2014_GAMMA);
+  } else if (kMethodRandom == method) {
+  }
   ER_FATAL_SENTINEL("Bad method '%s' selected", method.c_str());
 }
 
 subtask_sel_probability::subtask_sel_probability(
-    const struct sigmoid_sel_params *const params)
+    const struct sigmoid_sel_params* const params)
     : ER_CLIENT_INIT("rcppsw.ta.subtask_sel_prob"),
       sigmoid(&params->sigmoid),
       mc_method(params->method) {}
@@ -70,18 +71,20 @@ __rcsw_const double subtask_sel_probability::calc_random(void) {
 } /* calc_random() */
 
 __rcsw_pure double subtask_sel_probability::calc_brutschy2014(
-    const time_estimate &int_est1, const time_estimate &int_est2) {
+    const time_estimate& int_est1,
+    const time_estimate& int_est2) {
   return calc_sigmoid(int_est1, int_est2);
 } /* calc_brutschy2014() */
 
 __rcsw_pure double subtask_sel_probability::calc_harwell2018(
-    const time_estimate &exec_est1, const time_estimate &exec_est2) {
+    const time_estimate& exec_est1,
+    const time_estimate& exec_est2) {
   return calc_sigmoid(exec_est2, exec_est1);
 } /* calc_harwell2018() */
 
-__rcsw_pure double
-subtask_sel_probability::calc_sigmoid(const time_estimate &est1,
-                                            const time_estimate &est2) {
+__rcsw_pure double subtask_sel_probability::calc_sigmoid(
+    const time_estimate& est1,
+    const time_estimate& est2) {
   /*
    * No information available--just pick randomly.
    */
@@ -103,8 +106,8 @@ subtask_sel_probability::calc_sigmoid(const time_estimate &est1,
   return set_result(1.0 / (1 + std::exp(-theta)) * gamma());
 } /* calc_sigmoid() */
 
-double subtask_sel_probability::operator()(const time_estimate *subtask1,
-                                                 const time_estimate *subtask2) {
+double subtask_sel_probability::operator()(const time_estimate* subtask1,
+                                           const time_estimate* subtask2) {
   if (kMethodBrutschy2014 == mc_method) {
     return calc_brutschy2014(*subtask1, *subtask2);
   } else if (kMethodHarwell2018 == mc_method) {

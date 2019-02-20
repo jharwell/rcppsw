@@ -23,8 +23,8 @@
  ******************************************************************************/
 #include "rcppsw/task_allocation/base_executive.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
-#include "rcppsw/task_allocation/tdgraph.hpp"
 #include "rcppsw/task_allocation/task_executive_params.hpp"
+#include "rcppsw/task_allocation/tdgraph.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -35,7 +35,7 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 base_executive::base_executive(const struct task_executive_params* const params,
-                               tdgraph *const graph)
+                               tdgraph* const graph)
     : ER_CLIENT_INIT("rcppsw.ta.executive.base"),
       m_update_exec_ests(params->update_exec_ests),
       m_update_interface_ests(params->update_interface_ests),
@@ -46,15 +46,15 @@ base_executive::~base_executive(void) = default;
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-__rcsw_pure const polled_task *base_executive::root_task(void) const {
+__rcsw_pure const polled_task* base_executive::root_task(void) const {
   return m_graph->root();
 } /* root_task() */
 
-__rcsw_pure polled_task *base_executive::root_task(void) {
+__rcsw_pure polled_task* base_executive::root_task(void) {
   return m_graph->root();
 } /* root_task() */
 
-const polled_task *base_executive::parent_task(const polled_task *v) {
+const polled_task* base_executive::parent_task(const polled_task* v) {
   return tdgraph::vertex_parent(*m_graph, v);
 } /* parent_task() */
 

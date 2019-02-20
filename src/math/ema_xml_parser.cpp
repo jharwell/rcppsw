@@ -39,14 +39,14 @@ constexpr char ema_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void ema_xml_parser::parse(const ticpp::Element &node) {
+void ema_xml_parser::parse(const ticpp::Element& node) {
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
-  ticpp::Element enode = node_get(const_cast<ticpp::Element &>(node), kXMLRoot);
+  ticpp::Element enode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
   XML_PARSE_ATTR(enode, m_params, alpha);
 } /* parse() */
 
-void ema_xml_parser::show(std::ostream &stream) const {
+void ema_xml_parser::show(std::ostream& stream) const {
   stream << build_header() << XML_ATTR_STR(m_params, alpha) << std::endl
          << build_footer();
 } /* show() */

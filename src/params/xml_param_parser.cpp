@@ -54,18 +54,20 @@ std::string xml_param_parser::build_footer(void) const {
          prettiness + "\n";
 } /* build_footer() */
 
-ticpp::Element &xml_param_parser::node_get(ticpp::Element &node,
-                                           const std::string &tag) {
+ticpp::Element& xml_param_parser::node_get(ticpp::Element& node,
+                                           const std::string& tag) {
   ticpp::Iterator<ticpp::Element> it(tag);
   it = it.begin(&node);
-  ER_ASSERT(it != nullptr, "No tag '%s' found in node '%s'", tag.c_str(),
+  ER_ASSERT(it != nullptr,
+            "No tag '%s' found in node '%s'",
+            tag.c_str(),
             node.Value().c_str());
   return *it;
 } /* node_get() */
 
-void xml_param_parser::node_attr_get(ticpp::Element &node,
-                                     const std::string &attr,
-                                     bool &buf) {
+void xml_param_parser::node_attr_get(ticpp::Element& node,
+                                     const std::string& attr,
+                                     bool& buf) {
   std::string tmp;
   node.GetAttribute(attr, &tmp, true);
   if ("true" == tmp) {
@@ -74,7 +76,8 @@ void xml_param_parser::node_attr_get(ticpp::Element &node,
     buf = false;
   } else {
     ER_FATAL_SENTINEL(
-        "Cannot convert '%s' into a bool. Accepted values are ['true', 'false']",
+        "Cannot convert '%s' into a bool. Accepted values are ['true', "
+        "'false']",
         tmp.c_str());
   }
 } /* node_attr_get() */

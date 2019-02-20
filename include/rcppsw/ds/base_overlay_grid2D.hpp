@@ -52,14 +52,14 @@ class base_overlay_grid2D : public base_grid2D<T> {
   /* @brief Contains the upper/lower X/Y coordinates of the circle when
    * applied to the specified X/Y coordinate.
    */
-  using circle_range_ret_type = std::pair<typename index_range::index,
-                                          typename index_range::index>;
+  using circle_range_ret_type =
+      std::pair<typename index_range::index, typename index_range::index>;
 
   base_overlay_grid2D(double resolution, double x_max, double y_max)
       : base_grid2D<T>(),
-      m_resolution(resolution),
-      m_x_max(x_max),
-      m_y_max(y_max) {}
+        m_resolution(resolution),
+        m_x_max(x_max),
+        m_y_max(y_max) {}
 
   virtual ~base_overlay_grid2D(void) = default;
 
@@ -106,12 +106,11 @@ class base_overlay_grid2D : public base_grid2D<T> {
    */
   circle_range_ret_type circle_xrange_at_point(uint x, uint radius) const {
     typename index_range::index lower_x =
-        static_cast<typename index_range::index>(std::max<int>(0,
-                                                      static_cast<int>(x) -
-                                                      static_cast<int>(radius)));
+        static_cast<typename index_range::index>(
+            std::max<int>(0, static_cast<int>(x) - static_cast<int>(radius)));
     typename index_range::index upper_x =
-        static_cast<typename index_range::index>(std::min(x + radius + 1,
-                                                           xdsize() - 1));
+        static_cast<typename index_range::index>(
+            std::min(x + radius + 1, xdsize() - 1));
     if (lower_x > upper_x) {
       lower_x = upper_x - 1;
     }
@@ -130,12 +129,13 @@ class base_overlay_grid2D : public base_grid2D<T> {
    * applied to the specified Y coordinate.
    */
   circle_range_ret_type circle_yrange_at_point(uint y, uint radius) const {
-    typename index_range::index lower_y = static_cast<typename index_range::index>(
-        std::max<int>(static_cast<int>(0),
-                      static_cast<int>(y) - static_cast<int>(radius)));
+    typename index_range::index lower_y =
+        static_cast<typename index_range::index>(
+            std::max<int>(static_cast<int>(0),
+                          static_cast<int>(y) - static_cast<int>(radius)));
     typename index_range::index upper_y =
-        static_cast<typename index_range::index>(std::min(y + radius + 1,
-                                                          ydsize() - 1));
+        static_cast<typename index_range::index>(
+            std::min(y + radius + 1, ydsize() - 1));
     if (lower_y > upper_y) {
       lower_y = upper_y - 1;
     }

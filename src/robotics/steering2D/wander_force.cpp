@@ -22,9 +22,9 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/robotics/steering2D/wander_force.hpp"
-#include "rcppsw/robotics/steering2D/wander_force_params.hpp"
-#include "rcppsw/math/vector2.hpp"
 #include "rcppsw/math/angles.hpp"
+#include "rcppsw/math/vector2.hpp"
+#include "rcppsw/robotics/steering2D/wander_force_params.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -34,11 +34,14 @@ NS_START(rcppsw, robotics, steering2D);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-wander_force::wander_force(const struct wander_force_params *const params)
-    : m_interval(params->interval), m_use_normal(params->normal_dist),
-      m_max(params->max), m_circle_distance(params->circle_distance),
+wander_force::wander_force(const struct wander_force_params* const params)
+    : m_interval(params->interval),
+      m_use_normal(params->normal_dist),
+      m_max(params->max),
+      m_circle_distance(params->circle_distance),
       m_circle_radius(params->circle_radius),
-      m_max_angle_delta(params->max_angle_delta), m_angle(0),
+      m_max_angle_delta(params->max_angle_delta),
+      m_angle(0),
       /*
        * Both min and max are 3 std deviations away from the mean of 0, so it is
        * very unlikely that we will get a value outside the max deviation. If we
@@ -49,7 +52,7 @@ wander_force::wander_force(const struct wander_force_params *const params)
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-math::vector2d wander_force::operator()(const boid &entity) {
+math::vector2d wander_force::operator()(const boid& entity) {
   /*
    * Only actually apply the wander force at the specified cadence. Otherwise
    * random perturbations between [-n, n] will sum to 0 (no net wandering) over
@@ -87,8 +90,8 @@ math::vector2d wander_force::operator()(const boid &entity) {
     val = -m_max_angle_delta +
           2 * m_max_angle_delta * (static_cast<double>(std::rand()) / RAND_MAX);
   }
-  math::degrees perturbation(std::fmod(math::to_degrees(m_angle).value() + val,
-                                       m_max_angle_delta));
+  math::degrees perturbation(
+      std::fmod(math::to_degrees(m_angle).value() + val, m_max_angle_delta));
   m_angle = math::to_radians(perturbation);
 
   /*
@@ -113,7 +116,7 @@ math::vector2d wander_force::operator()(const boid &entity) {
   m_last_angle = angle_diff;
 
   math::vector2d wander((circle_center + displacement).length(),
-                         math::radians(angle_diff));
+                        math::radians(angle_diff));
   return wander.normalize() * m_max;
 } /* operator()() */
 

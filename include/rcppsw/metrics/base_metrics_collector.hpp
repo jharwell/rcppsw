@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include <fstream>
+#include <string>
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
@@ -61,7 +61,7 @@ class base_metrics_collector {
                          uint interval,
                          bool cum_only = false);
 
-  virtual ~base_metrics_collector(void)  = default;
+  virtual ~base_metrics_collector(void) = default;
 
   /**
    * @brief Reset the metrics completely, as if none have yet been collected.

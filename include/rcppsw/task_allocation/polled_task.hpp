@@ -25,10 +25,10 @@
  * Includes
  ******************************************************************************/
 #include <string>
+#include "rcppsw/math/range.hpp"
 #include "rcppsw/patterns/visitor/visitable.hpp"
 #include "rcppsw/task_allocation/executable_task.hpp"
 #include "rcppsw/task_allocation/taskable.hpp"
-#include "rcppsw/math/range.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -55,7 +55,6 @@ class polled_task : public executable_task, public taskable {
         m_mechanism(std::move(mechanism)) {}
   ~polled_task(void) override;
 
-
   polled_task& operator=(const polled_task& other) = delete;
   polled_task(const polled_task& other) = delete;
 
@@ -73,8 +72,8 @@ class polled_task : public executable_task, public taskable {
    * the specified range.
    */
   void exec_estimate_init(const math::rangeu& bounds) {
-    executable_task::exec_estimate_init(std::rand() % (bounds.ub() - bounds.lb() + 1) +
-                                        bounds.lb());
+    executable_task::exec_estimate_init(
+        std::rand() % (bounds.ub() - bounds.lb() + 1) + bounds.lb());
   }
 
  private:

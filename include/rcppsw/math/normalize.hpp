@@ -33,7 +33,6 @@
  ******************************************************************************/
 NS_START(rcppsw, math);
 
-
 /*******************************************************************************
  * Free Functions
  ******************************************************************************/
@@ -44,11 +43,11 @@ NS_START(rcppsw, math);
  * 0.5.
  */
 static inline double normalize(double min, double max, double val) {
-    if (max - min <= std::numeric_limits<double>::epsilon()) {
-      return 0.5;
-    } else {
-      return (val - min) / (max - min);
-    }
+  if (max - min <= std::numeric_limits<double>::epsilon()) {
+    return 0.5;
+  } else {
+    return (val - min) / (max - min);
+  }
 } /* normalize() */
 
 NS_END(math, rcppsw);

@@ -33,16 +33,16 @@ NS_START(rcppsw, metrics, tasks);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-execution_metrics_collector::execution_metrics_collector(
-    const std::string &ofname, uint interval)
+execution_metrics_collector::execution_metrics_collector(const std::string& ofname,
+                                                         uint interval)
     : base_metrics_collector(ofname, interval),
       ER_CLIENT_INIT("rcppsw.metrics.tasks.execution_metrics_collector") {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-std::string
-execution_metrics_collector::csv_header_build(const std::string &header) {
+std::string execution_metrics_collector::csv_header_build(
+    const std::string& header) {
   /* clang-format off */
   return base_metrics_collector::csv_header_build(header) +
       "int_avg_exec_time" + separator() +
@@ -68,8 +68,8 @@ void execution_metrics_collector::reset(void) {
 } /* reset() */
 
 void execution_metrics_collector::collect(
-    const rcppsw::metrics::base_metrics &metrics) {
-  auto &m = dynamic_cast<const execution_metrics &>(metrics);
+    const rcppsw::metrics::base_metrics& metrics) {
+  auto& m = dynamic_cast<const execution_metrics&>(metrics);
   ER_ASSERT(m.task_completed() || m.task_aborted(),
             "No task complete or task abort?");
   ER_ASSERT(!(m.task_completed() && m.task_aborted()),
@@ -102,58 +102,79 @@ void execution_metrics_collector::collect(
   /* Can be -1 if we aborted before getting to our task interface */
   int interface = m.task_last_active_interface();
   if (-1 != interface) {
-    m_int_interface_time += m.task_last_interface_time(m.task_last_active_interface());
-    m_cum_interface_time += m.task_last_interface_time(m.task_last_active_interface());
-    m_int_interface_estimate += m.task_interface_estimate(m.task_last_active_interface());
-    m_cum_interface_estimate += m.task_interface_estimate(m.task_last_active_interface());
+    m_int_interface_time +=
+        m.task_last_interface_time(m.task_last_active_interface());
+    m_cum_interface_time +=
+        m.task_last_interface_time(m.task_last_active_interface());
+    m_int_interface_estimate +=
+        m.task_interface_estimate(m.task_last_active_interface());
+    m_cum_interface_estimate +=
+        m.task_interface_estimate(m.task_last_active_interface());
   }
 } /* collect() */
 
-bool execution_metrics_collector::csv_line_build(std::string &line) {
+bool execution_metrics_collector::csv_line_build(std::string& line) {
   if (!((timestep() + 1) % interval() == 0)) {
     return false;
   }
   uint int_n_allocs = m_int_complete_count + m_int_abort_count;
   uint cum_n_allocs = m_cum_complete_count + m_cum_abort_count;
 
-  line += (int_n_allocs > 0)
-          ? std::to_string(m_int_exec_time / int_n_allocs) : "0";
+  line +=
+      (int_n_allocs > 0) ? std::to_string(m_int_exec_time / int_n_allocs) : "0";
   line += separator();
 
-  line += (cum_n_allocs > 0)
-          ? std::to_string(m_cum_exec_time / cum_n_allocs) : "0";
-  line += separator();
-
-  line += (int_n_allocs > 0)
-          ? std::to_string(m_int_interface_time / int_n_allocs) : "0";
-  line += separator();
-
-  line += (cum_n_allocs > 0)
-          ? std::to_string(m_cum_interface_time / cum_n_allocs) : "0";
+  line +=
+      (cum_n_allocs > 0) ? std::to_string(m_cum_exec_time / cum_n_allocs) : "0";
   line += separator();
 
   line += (int_n_allocs > 0)
-          ? std::to_string(m_int_exec_estimate.last_result() /
-                           (int_n_allocs)) : "0";
+              ? std::to_string(m_int_interface_time / int_n_allocs)
+              : "0";
   line += separator();
+
   line += (cum_n_allocs > 0)
-          ? std::to_string(m_cum_exec_estimate.last_result() /
-                           (cum_n_allocs)) : "0";
+              ? std::to_string(m_cum_interface_time / cum_n_allocs)
+              : "0";
+  line += separator();
+
+  line +=
+      (int_n_allocs > 0)
+          ? std::to_string(m_int_exec_estimate.last_result() / (int_n_allocs))
+          : "0";
+  line += separator();
+  line +=
+      (cum_n_allocs > 0)
+          ? std::to_string(m_cum_exec_estimate.last_result() / (cum_n_allocs))
+          : "0";
   line += separator();
   line += (int_n_allocs > 0)
-          ? std::to_string(m_int_interface_estimate.last_result() /
-                           (int_n_allocs))  : "0";
+              ? std::to_string(m_int_interface_estimate.last_result() /
+                               (int_n_allocs))
+              : "0";
   line += separator();
   line += (cum_n_allocs > 0)
-          ? std::to_string(m_cum_interface_estimate.last_result() /
-                           (cum_n_allocs)) : "0";
+              ? std::to_string(m_cum_interface_estimate.last_result() /
+                               (cum_n_allocs))
+              : "0";
   line += separator();
-  line += std::to_string(static_cast<double>(m_int_abort_count) / interval()) + separator();
-  line += std::to_string(static_cast<double>(m_cum_abort_count) / (timestep() + 1)) + separator();
-  line += std::to_string(static_cast<double>(m_int_complete_count) / interval()) + separator();
-  line += std::to_string(static_cast<double>(m_cum_complete_count) / (timestep() + 1)) + separator();
-  line += std::to_string(static_cast<double>(m_int_interface_count) / interval()) + separator();
-  line += std::to_string(static_cast<double>(m_cum_interface_count) / (timestep() + 1)) + separator();
+  line += std::to_string(static_cast<double>(m_int_abort_count) / interval()) +
+          separator();
+  line +=
+      std::to_string(static_cast<double>(m_cum_abort_count) / (timestep() + 1)) +
+      separator();
+  line +=
+      std::to_string(static_cast<double>(m_int_complete_count) / interval()) +
+      separator();
+  line += std::to_string(static_cast<double>(m_cum_complete_count) /
+                         (timestep() + 1)) +
+          separator();
+  line +=
+      std::to_string(static_cast<double>(m_int_interface_count) / interval()) +
+      separator();
+  line += std::to_string(static_cast<double>(m_cum_interface_count) /
+                         (timestep() + 1)) +
+          separator();
 
   return true;
 } /* store_foraging_stats() */

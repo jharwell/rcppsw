@@ -27,12 +27,12 @@
  * Includes
  ******************************************************************************/
 #ifndef RCPPSW_ER_NREPORT
-#include <log4cxx/logger.h>
-#include <log4cxx/patternlayout.h>
-#include <log4cxx/fileappender.h>
 #include <log4cxx/consoleappender.h>
-#include <log4cxx/xml/domconfigurator.h>
+#include <log4cxx/fileappender.h>
+#include <log4cxx/logger.h>
 #include <log4cxx/ndc.h>
+#include <log4cxx/patternlayout.h>
+#include <log4cxx/xml/domconfigurator.h>
 #endif
 
 #include <cassert>
@@ -43,48 +43,54 @@
  * Macros
  ******************************************************************************/
 #ifndef RCPPSW_ER_NREPORT
-#define ER_FATAL(...)                                   \
-  {                                                                     \
-   auto logger = rcppsw::er::client<typename std::remove_cv<typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
-   if (logger->isFatalEnabled()) {                                      \
-     ER_REPORT(FATAL, logger, __VA_ARGS__)                              \
-         }                                                              \
+#define ER_FATAL(...)                                                            \
+  {                                                                              \
+    auto logger = rcppsw::er::client<typename std::remove_cv<                    \
+        typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
+    if (logger->isFatalEnabled()) {                                              \
+      ER_REPORT(FATAL, logger, __VA_ARGS__)                                      \
+    }                                                                            \
   }
-#define ER_ERR(...)                                   \
-  {                                                                     \
-    auto logger = rcppsw::er::client<typename std::remove_cv<typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
-    if (logger->isErrorEnabled()) {                                      \
-      ER_REPORT(ERROR, logger, __VA_ARGS__)                              \
-          }                                                             \
+#define ER_ERR(...)                                                              \
+  {                                                                              \
+    auto logger = rcppsw::er::client<typename std::remove_cv<                    \
+        typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
+    if (logger->isErrorEnabled()) {                                              \
+      ER_REPORT(ERROR, logger, __VA_ARGS__)                                      \
+    }                                                                            \
   }
 
-#define ER_WARN(...)                                   \
-  {                                                                     \
-   auto logger = rcppsw::er::client<typename std::remove_cv<typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
-   if (logger->isWarnEnabled()) {                                      \
-     ER_REPORT(WARN, logger, __VA_ARGS__)                              \
-         }                                                              \
+#define ER_WARN(...)                                                             \
+  {                                                                              \
+    auto logger = rcppsw::er::client<typename std::remove_cv<                    \
+        typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
+    if (logger->isWarnEnabled()) {                                               \
+      ER_REPORT(WARN, logger, __VA_ARGS__)                                       \
+    }                                                                            \
   }
-#define ER_INFO(...)                                   \
-  {                                                                     \
-    auto logger = rcppsw::er::client<typename std::remove_cv<typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
-    if (logger->isInfoEnabled()) {                                      \
-      ER_REPORT(INFO, logger, __VA_ARGS__)                              \
-          }                                                             \
+#define ER_INFO(...)                                                             \
+  {                                                                              \
+    auto logger = rcppsw::er::client<typename std::remove_cv<                    \
+        typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
+    if (logger->isInfoEnabled()) {                                               \
+      ER_REPORT(INFO, logger, __VA_ARGS__)                                       \
+    }                                                                            \
   }
-#define ER_DEBUG(...)                                   \
-  {                                                                     \
-    auto logger = rcppsw::er::client<typename std::remove_cv<typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
-    if (logger->isDebugEnabled()) {                                     \
-      ER_REPORT(DEBUG, logger, __VA_ARGS__)                             \
-          }                                                             \
+#define ER_DEBUG(...)                                                            \
+  {                                                                              \
+    auto logger = rcppsw::er::client<typename std::remove_cv<                    \
+        typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
+    if (logger->isDebugEnabled()) {                                              \
+      ER_REPORT(DEBUG, logger, __VA_ARGS__)                                      \
+    }                                                                            \
   }
-#define ER_TRACE(...)                                   \
-  {                                                                     \
-  auto logger = rcppsw::er::client<typename std::remove_cv<typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
-  if (logger->isTraceEnabled()) {                                       \
-    ER_REPORT(TRACE, logger, __VA_ARGS__)                               \
-        }                                                               \
+#define ER_TRACE(...)                                                            \
+  {                                                                              \
+    auto logger = rcppsw::er::client<typename std::remove_cv<                    \
+        typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
+    if (logger->isTraceEnabled()) {                                              \
+      ER_REPORT(TRACE, logger, __VA_ARGS__)                                      \
+    }                                                                            \
   }
 #else
 
@@ -104,15 +110,12 @@
  * level. \a msg is the format string, and \a ... is the variadic argument list
  * (just like printf()).
  */
-#define ER_REPORT(lvl, logger, msg, ...)                         \
-    {                                                           \
-      char _str[1000];                                          \
-      snprintf(static_cast<char*>(_str),                        \
-               sizeof(_str),                                    \
-               msg,                                             \
-               ##__VA_ARGS__);                                  \
-      LOG4CXX_##lvl(logger, _str); \
-    }
+#define ER_REPORT(lvl, logger, msg, ...)                                  \
+  {                                                                       \
+    char _str[1000];                                                      \
+    snprintf(static_cast<char*>(_str), sizeof(_str), msg, ##__VA_ARGS__); \
+    LOG4CXX_##lvl(logger, _str);                                          \
+  }
 
 /**
  * @def ER_CHECK(cond, msg, ...)
@@ -124,12 +127,12 @@
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
-#define ER_CHECK(cond, msg, ...)                           \
-  {                                                        \
-    if (!(cond)) {                                         \
-      ER_ERR(msg, ##__VA_ARGS__);                          \
-      goto error;                                          \
-    }                                                      \
+#define ER_CHECK(cond, msg, ...)  \
+  {                               \
+    if (!(cond)) {                \
+      ER_ERR(msg, ##__VA_ARGS__); \
+      goto error;                 \
+    }                             \
   }
 
 /**
@@ -142,10 +145,10 @@
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
-#define ER_SENTINEL(msg, ...)                               \
-  {                                                         \
-    ER_ERR(msg, ##__VA_ARGS__);                             \
-    goto error;                                             \
+#define ER_SENTINEL(msg, ...)   \
+  {                             \
+    ER_ERR(msg, ##__VA_ARGS__); \
+    goto error;                 \
   }
 
 /**
@@ -158,10 +161,10 @@
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
-#define ER_ASSERT(cond, msg, ...)               \
-  if (!(cond)) {                                \
-    ER_FATAL(msg, ##__VA_ARGS__);               \
-    assert(cond);                               \
+#define ER_ASSERT(cond, msg, ...) \
+  if (!(cond)) {                  \
+    ER_FATAL(msg, ##__VA_ARGS__); \
+    assert(cond);                 \
   }
 
 /**
@@ -174,10 +177,10 @@
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
-#define ER_FATAL_SENTINEL(msg, ...)                                 \
-  {                                                                 \
-    ER_FATAL(msg, ##__VA_ARGS__);                                   \
-    assert(false);                                                  \
+#define ER_FATAL_SENTINEL(msg, ...) \
+  {                                 \
+    ER_FATAL(msg, ##__VA_ARGS__);   \
+    assert(false);                  \
   }
 
 /**
@@ -187,11 +190,12 @@
  * than to have to try do the casting every single time).
  */
 #ifndef RCPPSW_ER_NREPORT
-#define ER_CLIENT_INIT(name)                                         \
-  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>(name)
+#define ER_CLIENT_INIT(name)                                                 \
+  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>( \
+      name)
 #else
-#define ER_CLIENT_INIT(name)                                            \
-rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>()
+#define ER_CLIENT_INIT(name) \
+  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>()
 #endif
 
 /**
@@ -199,9 +203,9 @@ rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>()
  *
  * Set the logfile for the specified logger. Idempotent.
  */
-#define ER_SET_LOGFILE(logger, fname) \
-  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>::set_logfile(logger,\
-                                                                                         fname)
+#define ER_SET_LOGFILE(logger, fname)                                         \
+  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>:: \
+      set_logfile(logger, fname)
 
 /**
  * @def ER_NDC_PUSH(s)
@@ -209,15 +213,17 @@ rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>()
  * Push the specified NDC context (prepended to every message).
  */
 #define ER_NDC_PUSH(s) \
-  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>::push_ndc(s)
+  rcppsw::er::client<  \
+      typename std::remove_reference<decltype(*this)>::type>::push_ndc(s)
 
 /**
  * @def ER_NDC_POP()
  *
  * Pop the last pushed NDC context.
  */
-#define ER_NDC_POP(...)                                                  \
-  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>::pop_ndc()
+#define ER_NDC_POP(...) \
+  rcppsw::er::client<   \
+      typename std::remove_reference<decltype(*this)>::type>::pop_ndc()
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -236,7 +242,7 @@ NS_START(rcppsw, er);
  * then this class will mostly compile away to nothing, and most member
  * functions will not be defined.
  */
-template<typename T>
+template <typename T>
 class client {
  public:
 #ifndef RCPPSW_ER_NREPORT
@@ -263,17 +269,15 @@ class client {
    * itself.
    */
   static void set_logfile(log4cxx::LoggerPtr logger, const std::string& name) {
-    for (auto &a : logger->getAllAppenders()) {
+    for (auto& a : logger->getAllAppenders()) {
       if (a->getName() == name) {
         return;
       }
     } /* for(&a..) */
 
-
     log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(mc_file_layout);
-    log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout,
-                                                              name,
-                                                              false);
+    log4cxx::AppenderPtr appender =
+        new log4cxx::FileAppender(layout, name, false);
     appender->setName(name);
     logger->addAppender(appender);
   }
@@ -314,7 +318,6 @@ class client {
    */
   void pop_ndc(void) { log4cxx::NDC::pop(); }
 
-
   /**
    * @brief Get a reference to the ER logger.
    */
@@ -343,11 +346,11 @@ class client {
   /* clang-format on */
 };
 
-template<typename T>
+template <typename T>
 bool client<T>::m_initialized = false;
-template<typename T>
+template <typename T>
 const char client<T>::mc_console_layout[] = "%x [%-5p] %c - %m%n";
-template<typename T>
+template <typename T>
 const char client<T>::mc_file_layout[] = "%x [%-5p] %c %l - %m%n";
 
 NS_END(rcppsw, er);

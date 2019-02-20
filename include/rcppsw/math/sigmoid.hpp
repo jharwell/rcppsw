@@ -26,14 +26,13 @@
  ******************************************************************************/
 #include <cmath>
 
-#include "rcppsw/math/sigmoid_params.hpp"
 #include "rcppsw/math/expression.hpp"
+#include "rcppsw/math/sigmoid_params.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, math);
-
 
 /*******************************************************************************
  * Class Definitions
@@ -56,18 +55,15 @@ class sigmoid : public expression<double> {
   /**
    * @brief Construct the sigmoid using parameters.
    */
-  explicit sigmoid(const sigmoid_params* const params) :
-      sigmoid{params->reactivity, params->offset, params->gamma} {}
-
+  explicit sigmoid(const sigmoid_params* const params)
+      : sigmoid{params->reactivity, params->offset, params->gamma} {}
 
   /**
    * @brief Construct the sigmoid by passing each parameter explicitly. Note
    * that they are all of the same type, and therefore ordering is important.
    */
-  sigmoid(double reactivity, double offset, double gamma) :
-      m_reactivity(reactivity),
-      m_offset(offset),
-      m_gamma(gamma) {}
+  sigmoid(double reactivity, double offset, double gamma)
+      : m_reactivity(reactivity), m_offset(offset), m_gamma(gamma) {}
 
   /**
    * @brief Initialize the sigmoid after construction. Needed if the sigmoid is

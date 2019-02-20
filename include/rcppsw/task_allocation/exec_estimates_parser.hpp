@@ -24,12 +24,12 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include <list>
+#include <string>
 
+#include "rcppsw/math/ema_xml_parser.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
 #include "rcppsw/task_allocation/exec_estimates_params.hpp"
-#include "rcppsw/math/ema_xml_parser.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -46,11 +46,12 @@ NS_START(rcppsw, task_allocation);
  * @brief Parses XML parameters used for estimation of task execution
  * times at the start of simulation.
  */
-class exec_estimates_parser: public params::xml_param_parser,
-                             public er::client<exec_estimates_parser> {
+class exec_estimates_parser : public params::xml_param_parser,
+                              public er::client<exec_estimates_parser> {
  public:
-  explicit exec_estimates_parser(uint level,
-                                 const std::list<std::string>& task_names = std::list<std::string>())
+  explicit exec_estimates_parser(
+      uint level,
+      const std::list<std::string>& task_names = std::list<std::string>())
       : xml_param_parser(level),
         ER_CLIENT_INIT("rcppsw.ta.exec_estimates_parser"),
         m_ema(level + 1),
@@ -77,7 +78,8 @@ class exec_estimates_parser: public params::xml_param_parser,
   void parsed(bool parsed) { m_parsed = parsed; }
 
  private:
-  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(void) const override {
+  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(
+      void) const override {
     return m_params;
   }
 

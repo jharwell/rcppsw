@@ -37,8 +37,8 @@ constexpr char angular_order_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void angular_order_parser::parse(const ticpp::Element& node) {
-    ticpp::Element mnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
-    XML_PARSE_ATTR(mnode, m_params, enable);
+  ticpp::Element mnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
+  XML_PARSE_ATTR(mnode, m_params, enable);
 } /* parse() */
 
 NS_END(convergence, swarm, rcppsw);

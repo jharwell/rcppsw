@@ -64,7 +64,7 @@ class wander_force {
   double                           m_max_angle_delta;
   double                           m_last_angle{0.0};
   math::radians                    m_angle;
-  std::random_device               m_rng{};
+  std::default_random_engine       m_rng{};
   std::normal_distribution<double> m_normal_dist;
   /* clang-format on */
 };

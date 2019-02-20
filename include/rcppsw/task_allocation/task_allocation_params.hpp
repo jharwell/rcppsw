@@ -25,9 +25,9 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/params/base_params.hpp"
-#include "rcppsw/task_allocation/task_partition_params.hpp"
 #include "rcppsw/task_allocation/exec_estimates_params.hpp"
 #include "rcppsw/task_allocation/src_sigmoid_sel_params.hpp"
+#include "rcppsw/task_allocation/task_partition_params.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -42,10 +42,10 @@ NS_START(rcppsw, task_allocation);
  * @ingroup task_allocation params
  */
 struct task_allocation_params : public rcppsw::params::base_params {
-  exec_estimates_params  exec_est{};
+  exec_estimates_params exec_est{};
   src_sigmoid_sel_params abort{};
   src_sigmoid_sel_params subtask_sel{};
-  task_partition_params  partitioning{};
+  task_partition_params partitioning{};
   src_sigmoid_sel_params tab_sel{};
 };
 

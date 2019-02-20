@@ -36,10 +36,9 @@ constexpr char polar_force_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void polar_force_xml_parser::parse(const ticpp::Element &node) {
+void polar_force_xml_parser::parse(const ticpp::Element& node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
-    ticpp::Element pnode =
-        node_get(const_cast<ticpp::Element &>(node), kXMLRoot);
+    ticpp::Element pnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
     XML_PARSE_ATTR(pnode, m_params, max);
@@ -47,7 +46,7 @@ void polar_force_xml_parser::parse(const ticpp::Element &node) {
   }
 } /* parse() */
 
-void polar_force_xml_parser::show(std::ostream &stream) const {
+void polar_force_xml_parser::show(std::ostream& stream) const {
   if (!m_parsed) {
     stream << build_header() << "<< Not Parsed >>" << std::endl
            << build_footer();

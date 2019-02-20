@@ -24,9 +24,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <sstream>
 #include <string>
 #include <vector>
-#include <sstream>
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
@@ -48,7 +48,7 @@ NS_START(rcppsw, utils);
  * @return \c TRUE if n_fields tokens were parsed from the stream, and \c FALSE
  * otherwise.
  */
-template<typename T>
+template <typename T>
 bool parse_values(std::istream& is, uint n_fields, T* buf, char delim = '\n') {
   std::vector<std::string> s(n_fields);
   uint i = 0;

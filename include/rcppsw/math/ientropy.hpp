@@ -24,14 +24,14 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
 #include <algorithm>
-#include <limits>
 #include <cmath>
+#include <limits>
+#include <vector>
 
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/math/radians.hpp"
 #include "rcppsw/math/expression.hpp"
+#include "rcppsw/math/radians.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -63,11 +63,9 @@ class ientropy : math::expression<double> {
    */
   double operator()(const std::vector<double>& groups) {
     double entropy = 0.0;
-    std::for_each(groups.begin(),
-                  groups.end(),
-                  [&](const auto& prop) {
-                    entropy += prop * std::log2(prop);
-                  });
+    std::for_each(groups.begin(), groups.end(), [&](const auto& prop) {
+      entropy += prop * std::log2(prop);
+    });
     return set_result(-entropy);
   }
 };

@@ -26,8 +26,8 @@
  * Includes
  ******************************************************************************/
 #include <memory>
-#include <tuple>
 #include <string>
+#include <tuple>
 
 #include "rcsw/common/common.h"
 
@@ -43,7 +43,6 @@
  * pasting. \c ns is the namespace to paste.
  */
 #define NS_START_(ns) namespace ns {
-
 /*
  * @def NS_START(ns)
  *
@@ -81,11 +80,11 @@
  * wrap). The variable argument list is to allow specification of 'const' as
  * part of the function definition.
  */
-#define RCPPSW_WRAP_MEMFUNC(Func, Member, ...)            \
-  template<typename... Args >                                           \
-  auto Func(Args&&... args) __VA_ARGS__ ->                              \
-      decltype(std::declval<decltype(Member)>().Func(args...)) {        \
-    return Member.Func(std::forward<Args>(args)...);                    \
+#define RCPPSW_WRAP_MEMFUNC(Func, Member, ...)                                \
+  template <typename... Args>                                                 \
+  auto Func(Args&&... args)                                                   \
+      __VA_ARGS__->decltype(std::declval<decltype(Member)>().Func(args...)) { \
+    return Member.Func(std::forward<Args>(args)...);                          \
   }
 
 /**
@@ -105,8 +104,8 @@
  * in their template argument lists will be considered distinct and trigger
  * SFINAE as expected.
  */
-#define RCPPSW_SFINAE_REQUIRE(...) typename std::enable_if<__VA_ARGS__, \
-                                                           int>::type = 0
+#define RCPPSW_SFINAE_REQUIRE(...) \
+  typename std::enable_if<__VA_ARGS__, int>::type = 0
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -117,22 +116,20 @@ NS_START(rcppsw);
  * Debugging Templates
  ******************************************************************************/
 #if __cplusplus < 201703L
-template<class...>
+template <class...>
 using void_t = void;
 #endif
 
-
 namespace detail {
-template<class unused, class = void_t<> >
+template <class unused, class = void_t<>>
 struct has_to_str : std::false_type {};
 
-template<class T>
-struct has_to_str<T,
-                     void_t<decltype(std::declval<T>().to_str())>
-                     > : std::true_type {};
-}  // namespace detail
+template <class T>
+struct has_to_str<T, void_t<decltype(std::declval<T>().to_str())>>
+    : std::true_type {};
+} // namespace detail
 
-template<typename T, typename = std::enable_if_t<detail::has_to_str<T>::value>>
+template <typename T, typename = std::enable_if_t<detail::has_to_str<T>::value>>
 std::string to_string(const T& obj) {
   return obj.to_str();
 }

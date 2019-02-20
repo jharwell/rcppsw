@@ -32,23 +32,24 @@ NS_START(rcppsw, robotics, steering2D);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-arrival_force::arrival_force(const struct arrival_force_params *const params)
-    : mc_max(params->max), mc_slowing_speed_min(params->slowing_speed_min),
+arrival_force::arrival_force(const struct arrival_force_params* const params)
+    : mc_max(params->max),
+      mc_slowing_speed_min(params->slowing_speed_min),
       mc_slowing_radius(params->slowing_radius) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-math::vector2d arrival_force::operator()(const boid &entity,
-                                          const math::vector2d &target) {
+math::vector2d arrival_force::operator()(const boid& entity,
+                                         const math::vector2d& target) {
   math::vector2d desired = target - entity.position();
   double distance = desired.length();
 
   desired.normalize();
   if (distance <= mc_slowing_radius) {
     m_within_slowing_radius = true;
-    desired.scale(std::max(mc_slowing_speed_min,
-                           mc_max * distance / mc_slowing_radius));
+    desired.scale(
+        std::max(mc_slowing_speed_min, mc_max * distance / mc_slowing_radius));
   } else {
     m_within_slowing_radius = false;
     desired.scale(mc_max);

@@ -39,8 +39,8 @@ constexpr char sigmoid_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void sigmoid_xml_parser::parse(const ticpp::Element &node) {
-  ticpp::Element snode = node_get(const_cast<ticpp::Element &>(node), kXMLRoot);
+void sigmoid_xml_parser::parse(const ticpp::Element& node) {
+  ticpp::Element snode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 
@@ -49,9 +49,8 @@ void sigmoid_xml_parser::parse(const ticpp::Element &node) {
   XML_PARSE_ATTR(snode, m_params, gamma);
 } /* parse() */
 
-void sigmoid_xml_parser::show(std::ostream &stream) const {
-  stream << build_header()
-         << XML_ATTR_STR(m_params, reactivity) << std::endl
+void sigmoid_xml_parser::show(std::ostream& stream) const {
+  stream << build_header() << XML_ATTR_STR(m_params, reactivity) << std::endl
          << XML_ATTR_STR(m_params, offset) << std::endl
          << XML_ATTR_STR(m_params, gamma) << std::endl
          << build_footer();

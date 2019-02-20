@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <boost/variant.hpp>
 #include <boost/container/map.hpp>
+#include <boost/variant.hpp>
 #include <typeindex>
 #include <utility>
 
@@ -47,9 +47,9 @@ NS_START(rcppsw, ds);
  * emulate reflection in C++ (e.g. to map a type to a variant containing actions
  * to take depending on what the type is).
  */
-template<typename ...Types>
-class type_map : public boost::container::map<std::type_index,
-                                              boost::variant<Types...>> {
+template <typename... Types>
+class type_map
+    : public boost::container::map<std::type_index, boost::variant<Types...>> {
  public:
   using value_type = boost::variant<Types...>;
   using key_type = std::type_index;

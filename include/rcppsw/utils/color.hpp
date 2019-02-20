@@ -68,8 +68,8 @@ class color {
   static color kGRAY80;
   static color kGRAY90;
 
-  color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255) :
-      m_channels{red, green, blue, alpha} {}
+  color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255)
+      : m_channels{red, green, blue, alpha} {}
 
   uint8_t red() const { return m_channels[0]; }
   void red(uint8_t red) { m_channels[0] = red; }
@@ -85,9 +85,9 @@ class color {
 
   bool operator==(const color& c_color2) const {
     return m_channels[0] == c_color2.m_channels[0] &&
-        m_channels[1] == c_color2.m_channels[1] &&
-        m_channels[2] == c_color2.m_channels[2] &&
-        m_channels[3] == c_color2.m_channels[3];
+           m_channels[1] == c_color2.m_channels[1] &&
+           m_channels[2] == c_color2.m_channels[2] &&
+           m_channels[3] == c_color2.m_channels[3];
   }
 
   bool operator!=(const color& c_color2) const {

@@ -24,10 +24,10 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <map>
 #include <algorithm>
-#include <utility>
 #include <functional>
+#include <map>
+#include <utility>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/metrics/base_metrics_collector.hpp"
@@ -68,7 +68,7 @@ class collector_group {
    */
   template <typename T, typename... Args>
   void register_collector(const std::string& name, Args&&... args) {
-      m_collectors[name] = rcppsw::make_unique<T>(args...);
+    m_collectors[name] = rcppsw::make_unique<T>(args...);
   }
 
   /**
@@ -78,8 +78,7 @@ class collector_group {
    * @param name The registered name of the collector.
    * @param metrics The metrics to collect from.
    */
-  void collect(const std::string& name,
-               const base_metrics &metrics) {
+  void collect(const std::string& name, const base_metrics& metrics) {
     m_collectors[name]->collect(metrics);
   }
 
@@ -99,7 +98,7 @@ class collector_group {
    * @return \c TRUE if metrics were collected, \c FALSE otherwise.
    */
   bool collect_if(const std::string& name,
-                  const base_metrics &metrics,
+                  const base_metrics& metrics,
                   std::function<bool(const base_metrics&)> predicate) {
     if (predicate(metrics)) {
       m_collectors[name]->collect(metrics);

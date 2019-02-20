@@ -26,11 +26,11 @@
  ******************************************************************************/
 #include <string>
 
-#include "rcppsw/params/xml_param_parser.hpp"
-#include "rcppsw/task_allocation/task_allocation_params.hpp"
-#include "rcppsw/task_allocation/exec_estimates_parser.hpp"
 #include "rcppsw/math/sigmoid_xml_parser.hpp"
+#include "rcppsw/params/xml_param_parser.hpp"
+#include "rcppsw/task_allocation/exec_estimates_parser.hpp"
 #include "rcppsw/task_allocation/src_sigmoid_sel_xml_parser.hpp"
+#include "rcppsw/task_allocation/task_allocation_params.hpp"
 #include "rcppsw/task_allocation/task_partition_xml_parser.hpp"
 
 /*******************************************************************************
@@ -48,7 +48,7 @@ NS_START(rcppsw, task_allocation);
  * @brief Parses XML parameters used for task allocation at the start of
  * simulation.
  */
-class task_allocation_xml_parser: public rcppsw::params::xml_param_parser {
+class task_allocation_xml_parser : public rcppsw::params::xml_param_parser {
  public:
   explicit task_allocation_xml_parser(uint level)
       : xml_param_parser(level),
@@ -73,13 +73,16 @@ class task_allocation_xml_parser: public rcppsw::params::xml_param_parser {
   }
 
   bool parsed(void) const override { return m_parsed; }
-  void exec_est_task_add(const std::string& task) { m_estimation.task_add(task); }
+  void exec_est_task_add(const std::string& task) {
+    m_estimation.task_add(task);
+  }
 
  protected:
   void parsed(bool parsed) { m_parsed = parsed; }
 
  private:
-  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(void) const override {
+  std::shared_ptr<rcppsw::params::base_params> parse_results_impl(
+      void) const override {
     return m_params;
   }
 

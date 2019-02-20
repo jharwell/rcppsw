@@ -54,13 +54,10 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
   using base_overlay_grid2D<T*>::xdsize;
   using base_overlay_grid2D<T*>::ydsize;
 
-  overlay_grid2D_ptr(double resolution,
-                     uint x_max,
-                     uint y_max,
-                     Args&&... args)
+  overlay_grid2D_ptr(double resolution, uint x_max, uint y_max, Args&&... args)
       : base_overlay_grid2D<T>(resolution, x_max, y_max),
-        m_cells(boost::extents[static_cast<typename index_range::index>(xdsize())]
-                [static_cast<typename index_range::index>(ydsize())]) {
+        m_cells(boost::extents[static_cast<typename index_range::index>(
+            xdsize())][static_cast<typename index_range::index>(ydsize())]) {
     for (auto i = m_cells.origin();
          i < m_cells.origin() + m_cells.num_elements();
          ++i) {
@@ -110,10 +107,7 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
    *
    * @return The grid.
    */
-  grid_view subgrid(uint x_min,
-                    uint y_min,
-                    uint x_max,
-                    uint y_max) {
+  grid_view subgrid(uint x_min, uint y_min, uint x_max, uint y_max) {
     typename grid_type::index_gen indices;
 
     index_range x(x_min, x_max, 1);
@@ -121,12 +115,9 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
     return grid_view(m_cells[indices[x][y]]);
   }
 
-  grid_view subgrid(uint x_min,
-                        uint y_min,
-                        uint x_max,
-                        uint y_max) const {
-    return const_cast<overlay_grid2D_ptr<T>*>(this)->subgrid(x_min, y_min,
-                                                     x_max, y_max);
+  grid_view subgrid(uint x_min, uint y_min, uint x_max, uint y_max) const {
+    return const_cast<overlay_grid2D_ptr<T>*>(this)->subgrid(
+        x_min, y_min, x_max, y_max);
   }
 
   __rcsw_pure T& access(uint i, uint j) override {
@@ -135,7 +126,7 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
   }
   __rcsw_pure T& access(const math::vector2u& c) override {
     return *m_cells[static_cast<typename index_range::index>(c.x())]
-        [static_cast<typename index_range::index>(c.y())];
+                   [static_cast<typename index_range::index>(c.y())];
   }
 
  private:

@@ -24,14 +24,14 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
-#include <limits>
 #include <algorithm>
-#include <functional>
-#include <string>
 #include <cassert>
 #include <cmath>
+#include <functional>
 #include <iostream>
+#include <limits>
+#include <string>
+#include <vector>
 
 #include "rcppsw/common/common.hpp"
 
@@ -43,7 +43,7 @@ NS_START(rcppsw, algorithm);
 /*******************************************************************************
  * Structure Definitions
  ******************************************************************************/
-template<typename T>
+template <typename T>
 struct result_type2D {
   T p1{};
   T p2{};
@@ -74,7 +74,7 @@ struct result_type2D {
  * - y()
  * - operator==()
  */
-template<typename T>
+template <typename T>
 class closest_pair {
  public:
   using dist_func_type = double(const T&, const T&);
@@ -96,9 +96,9 @@ class closest_pair {
     if ("brute_force" == method) {
       return brute_force(points, dist_func);
     } else if ("recursive" == method) {
-      std::sort(points.begin(),
-                points.end(),
-                [](const T& a, const T&b) { return a.x() < b.x();});
+      std::sort(points.begin(), points.end(), [](const T& a, const T& b) {
+        return a.x() < b.x();
+      });
       std::vector<T> strip;
       return recursive(points, strip, dist_func);
     } else {
@@ -118,19 +118,19 @@ class closest_pair {
    * @return The two closest points, along with the distance between them.
    */
   result_type2D<T> brute_force(const std::vector<T>& points,
-                             const std::function<dist_func_type>& dist_func) {
+                               const std::function<dist_func_type>& dist_func) {
     result_type2D<T> r;
     r.dist = std::numeric_limits<double>::max();
 
     for (size_t i = 0; i < points.size(); ++i) {
-      for (size_t j = i+1; j < points.size(); ++j) {
+      for (size_t j = i + 1; j < points.size(); ++j) {
         if (dist_func(points[i], points[j]) < r.dist) {
           r.dist = dist_func(points[i], points[j]);
           r.p1 = points[i];
           r.p2 = points[j];
         }
       } /* for(j..) */
-    } /* for(i..) */
+    }   /* for(i..) */
     return r;
   }
 
@@ -144,8 +144,8 @@ class closest_pair {
    * @return The two closest points, along with the distance between them.
    */
   result_type2D<T> recursive(const std::vector<T>& points,
-                           std::vector<T>& strip,
-                           const std::function<dist_func_type>& dist_func) {
+                             std::vector<T>& strip,
+                             const std::function<dist_func_type>& dist_func) {
     /* base case */
     if (points.size() <= 3) {
       return brute_force(points, dist_func);
@@ -160,14 +160,10 @@ class closest_pair {
      * dl: left of mid point
      * dr: right side of the mid point
      */
-    result_type2D<T> dl = recursive(std::vector<T>(points.begin(),
-                                                 points.begin() + mid),
-                                  strip,
-                                  dist_func);
-    result_type2D<T> dr = recursive(std::vector<T>(points.begin() + mid,
-                                                 points.end()),
-                                  strip,
-                                  dist_func);
+    result_type2D<T> dl = recursive(
+        std::vector<T>(points.begin(), points.begin() + mid), strip, dist_func);
+    result_type2D<T> dr = recursive(
+        std::vector<T>(points.begin() + mid, points.end()), strip, dist_func);
     result_type2D<T> dmin = std::min(dl, dr);
 
     for (size_t i = 0; i < points.size(); ++i) {
@@ -180,7 +176,6 @@ class closest_pair {
     return res;
   }
 
-
  private:
   /**
    * @brief Utility function to find the distance beween the closest points of
@@ -191,27 +186,30 @@ class closest_pair {
    * Note that this method seems to be a O(n^2) method, but it's a O(n) method
    * as the inner loop runs at most 6 times.
    */
-  result_type2D<T> strip_points(std::vector<T> strip, const result_type2D<T>& dmin,
+  result_type2D<T> strip_points(std::vector<T> strip,
+                                const result_type2D<T>& dmin,
                                 const std::function<dist_func_type>& dist_func) {
     result_type2D<T> min = dmin;
 
-    std::sort(strip.begin(),
-              strip.end(),
-              [](const T& a, const T&b) { return a.y() < b.y();});
+    std::sort(strip.begin(), strip.end(), [](const T& a, const T& b) {
+      return a.y() < b.y();
+    });
 
     /*
      * Pick all points one by one and try the next points till the difference
      * between y's is smaller than d.
      */
     for (size_t i = 0; i < strip.size(); ++i) {
-      for (size_t j = i+1; j < strip.size() && (strip[j].y() - strip[i].y()) < min.dist; ++j) {
+      for (size_t j = i + 1;
+           j < strip.size() && (strip[j].y() - strip[i].y()) < min.dist;
+           ++j) {
         if (dist_func(strip[i], strip[j]) < min.dist) {
           min.dist = dist_func(strip[i], strip[j]);
           min.p1 = strip[i];
           min.p2 = strip[j];
         }
       } /* for(i..) */
-    } /* for(j..) */
+    }   /* for(j..) */
     return min;
   }
 };

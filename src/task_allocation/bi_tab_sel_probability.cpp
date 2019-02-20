@@ -24,9 +24,9 @@
 #include "rcppsw/task_allocation/bi_tab_sel_probability.hpp"
 #include <cassert>
 #include <cmath>
-#include "rcppsw/task_allocation/src_sigmoid_sel_params.hpp"
 #include "rcppsw/task_allocation/bi_tab.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
+#include "rcppsw/task_allocation/src_sigmoid_sel_params.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -48,14 +48,15 @@ bi_tab_sel_probability::bi_tab_sel_probability(const std::string& method)
       mc_method(std::move(method)) {
   if (kMethodHarwell2019 == method) {
     sigmoid::init(kHARWELL2019_REACTIVITY,
-                   kHARWELL2019_OFFSET,
-                   kHARWELL2019_GAMMA);
-  } else if (kMethodRandom == method) {}
+                  kHARWELL2019_OFFSET,
+                  kHARWELL2019_GAMMA);
+  } else if (kMethodRandom == method) {
+  }
   ER_FATAL_SENTINEL("Bad method '%s' selected", method.c_str());
 }
 
 bi_tab_sel_probability::bi_tab_sel_probability(
-    const struct src_sigmoid_sel_params *const params)
+    const struct src_sigmoid_sel_params* const params)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tab_sel_prob"),
       sigmoid(&params->sigmoid.sigmoid),
       mc_method(params->sigmoid.method) {}
@@ -67,22 +68,23 @@ __rcsw_const double bi_tab_sel_probability::calc_random(void) {
   return 0.5;
 } /* calc_random() */
 
-__rcsw_pure double bi_tab_sel_probability::calc_harwell2019(
-    const bi_tab& tab1, const bi_tab& tab2) {
-
-  double ratio1 = std::fabs(tab1.root()->task_exec_estimate().last_result() - (
-      tab1.child1()->task_exec_estimate().last_result() +
-      tab1.child2()->task_exec_estimate().last_result())) /
-                  tab1.root()->task_exec_estimate().last_result();
-  double ratio2 = std::fabs(tab2.root()->task_exec_estimate().last_result() - (
-      tab2.child1()->task_exec_estimate().last_result() +
-      tab2.child2()->task_exec_estimate().last_result())) /
-                  tab2.root()->task_exec_estimate().last_result();
+__rcsw_pure double bi_tab_sel_probability::calc_harwell2019(const bi_tab& tab1,
+                                                            const bi_tab& tab2) {
+  double ratio1 =
+      std::fabs(tab1.root()->task_exec_estimate().last_result() -
+                (tab1.child1()->task_exec_estimate().last_result() +
+                 tab1.child2()->task_exec_estimate().last_result())) /
+      tab1.root()->task_exec_estimate().last_result();
+  double ratio2 =
+      std::fabs(tab2.root()->task_exec_estimate().last_result() -
+                (tab2.child1()->task_exec_estimate().last_result() +
+                 tab2.child2()->task_exec_estimate().last_result())) /
+      tab2.root()->task_exec_estimate().last_result();
   return calc_sigmoid(ratio1, ratio2);
 } /* calc_harwell2019() */
 
-__rcsw_pure double
-bi_tab_sel_probability::calc_sigmoid(double ratio1, double ratio2) {
+__rcsw_pure double bi_tab_sel_probability::calc_sigmoid(double ratio1,
+                                                        double ratio2) {
   /*
    * No information available--just pick randomly.
    */
@@ -98,7 +100,7 @@ bi_tab_sel_probability::calc_sigmoid(double ratio1, double ratio2) {
 } /* calc_sigmoid() */
 
 double bi_tab_sel_probability::operator()(const bi_tab* const tab1,
-                                                const bi_tab* const tab2) {
+                                          const bi_tab* const tab2) {
   if (kMethodHarwell2019 == mc_method) {
     return calc_harwell2019(*tab1, *tab2);
   } else if (kMethodRandom == mc_method) {

@@ -34,15 +34,14 @@ NS_START(rcppsw, metrics, tasks);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-bi_tab_metrics_collector::bi_tab_metrics_collector(
-    const std::string &ofname, uint interval)
+bi_tab_metrics_collector::bi_tab_metrics_collector(const std::string& ofname,
+                                                   uint interval)
     : base_metrics_collector(ofname, interval) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-std::string
-bi_tab_metrics_collector::csv_header_build(const std::string &header) {
+std::string bi_tab_metrics_collector::csv_header_build(const std::string& header) {
   /* clang-format off */
   std::string line = base_metrics_collector::csv_header_build(header);
   return line + \
@@ -72,8 +71,8 @@ void bi_tab_metrics_collector::reset(void) {
 } /* reset() */
 
 void bi_tab_metrics_collector::collect(
-    const rcppsw::metrics::base_metrics &metrics) {
-  auto &m = dynamic_cast<const bi_tab_metrics &>(metrics);
+    const rcppsw::metrics::base_metrics& metrics) {
+  auto& m = dynamic_cast<const bi_tab_metrics&>(metrics);
   if (m.employed_partitioning()) {
     ++m_int_partition_count;
     ++m_cum_partition_count;
@@ -96,7 +95,7 @@ void bi_tab_metrics_collector::collect(
   m_cum_task_depth_sw_count += static_cast<uint>(m.task_depth_changed());
 } /* collect() */
 
-bool bi_tab_metrics_collector::csv_line_build(std::string &line) {
+bool bi_tab_metrics_collector::csv_line_build(std::string& line) {
   if (!((timestep() + 1) % interval() == 0)) {
     return false;
   }
@@ -108,68 +107,74 @@ bool bi_tab_metrics_collector::csv_line_build(std::string &line) {
   double int_allocs = m_int_partition_count + m_int_no_partition_count;
   double cum_allocs = m_cum_partition_count + m_cum_no_partition_count;
 
-  line += (int_allocs > 0)
-          ? std::to_string(m_int_subtask1_count / int_allocs) : "0";
+  line += (int_allocs > 0) ? std::to_string(m_int_subtask1_count / int_allocs)
+                           : "0";
   line += separator();
 
-  line += (cum_allocs > 0)
-          ? std::to_string(m_cum_subtask1_count / cum_allocs) : "0";
+  line += (cum_allocs > 0) ? std::to_string(m_cum_subtask1_count / cum_allocs)
+                           : "0";
   line += separator();
 
-  line += (int_allocs > 0)
-          ? std::to_string(m_int_subtask2_count / int_allocs) : "0";
+  line += (int_allocs > 0) ? std::to_string(m_int_subtask2_count / int_allocs)
+                           : "0";
   line += separator();
 
-  line += (cum_allocs > 0)
-          ? std::to_string(m_cum_subtask2_count / cum_allocs) : "0";
+  line += (cum_allocs > 0) ? std::to_string(m_cum_subtask2_count / cum_allocs)
+                           : "0";
   line += separator();
 
-  line += (int_allocs > 0)
-          ? std::to_string(m_int_partition_count / int_allocs) : "0";
+  line += (int_allocs > 0) ? std::to_string(m_int_partition_count / int_allocs)
+                           : "0";
   line += separator();
 
-  line += (cum_allocs > 0)
-          ? std::to_string(m_cum_partition_count / cum_allocs) : "0";
-  line += separator();
-
-  line += (int_allocs > 0)
-          ? std::to_string(m_int_no_partition_count / int_allocs) : "0";
-  line += separator();
-
-  line += (cum_allocs > 0)
-          ? std::to_string(m_cum_no_partition_count / cum_allocs) : "0";
+  line += (cum_allocs > 0) ? std::to_string(m_cum_partition_count / cum_allocs)
+                           : "0";
   line += separator();
 
   line += (int_allocs > 0)
-          ? std::to_string(m_int_task_sw_count / int_allocs) : "0";
+              ? std::to_string(m_int_no_partition_count / int_allocs)
+              : "0";
   line += separator();
 
   line += (cum_allocs > 0)
-          ? std::to_string(m_cum_task_sw_count / cum_allocs) : "0";
+              ? std::to_string(m_cum_no_partition_count / cum_allocs)
+              : "0";
+  line += separator();
+
+  line +=
+      (int_allocs > 0) ? std::to_string(m_int_task_sw_count / int_allocs) : "0";
+  line += separator();
+
+  line +=
+      (cum_allocs > 0) ? std::to_string(m_cum_task_sw_count / cum_allocs) : "0";
   line += separator();
 
   line += (int_allocs > 0)
-          ? std::to_string(m_int_task_depth_sw_count / int_allocs) : "0";
+              ? std::to_string(m_int_task_depth_sw_count / int_allocs)
+              : "0";
   line += separator();
 
   line += (cum_allocs > 0)
-          ? std::to_string(m_cum_task_depth_sw_count / cum_allocs) : "0";
+              ? std::to_string(m_cum_task_depth_sw_count / cum_allocs)
+              : "0";
+  line += separator();
+
+  line += (int_allocs > 0) ? std::to_string(m_int_partition_prob / int_allocs)
+                           : "0";
+  line += separator();
+
+  line += (cum_allocs > 0) ? std::to_string(m_cum_partition_prob / cum_allocs)
+                           : "0";
   line += separator();
 
   line += (int_allocs > 0)
-          ? std::to_string(m_int_partition_prob / int_allocs): "0";
+              ? std::to_string(m_int_subtask_selection_prob / int_allocs)
+              : "0";
   line += separator();
 
   line += (cum_allocs > 0)
-          ? std::to_string(m_cum_partition_prob / cum_allocs) : "0";
-  line += separator();
-
-  line += (int_allocs > 0)
-          ? std::to_string(m_int_subtask_selection_prob / int_allocs) : "0";
-  line += separator();
-
-  line += (cum_allocs > 0)
-          ? std::to_string(m_cum_subtask_selection_prob / cum_allocs) : "0";
+              ? std::to_string(m_cum_subtask_selection_prob / cum_allocs)
+              : "0";
   line += separator();
   return true;
 } /* store_foraging_stats() */

@@ -23,8 +23,8 @@
  ******************************************************************************/
 #include "rcppsw/task_allocation/executable_task.hpp"
 #include "rcppsw/math/ema_params.hpp"
-#include "rcppsw/task_allocation/time_estimate.hpp"
 #include "rcppsw/task_allocation/src_sigmoid_sel_params.hpp"
+#include "rcppsw/task_allocation/time_estimate.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -40,7 +40,7 @@ constexpr char executable_task::kAbortSrcInterface[];
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-executable_task::executable_task(const std::string &name,
+executable_task::executable_task(const std::string& name,
                                  const struct src_sigmoid_sel_params* abort,
                                  const struct math::ema_params* estimation)
     : logical_task(name),

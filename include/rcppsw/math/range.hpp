@@ -28,8 +28,8 @@
 #include <string>
 
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/utils/string_utils.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/utils/string_utils.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -48,7 +48,7 @@ NS_START(rcppsw, math);
  * ranges must be non-empty sets, meaning that the min must not be equal to the
  * max (if it is an assertion will trigger).
  */
-template<typename T>
+template <typename T>
 class range : public er::client<range<T>> {
  public:
   range(const T& lb, const T& ub)
@@ -91,9 +91,7 @@ class range : public er::client<range<T>> {
    *
    * @param value The value to test.
    */
-  bool contains(const T& value) const {
-    return value >= m_lb && value <= m_ub;
-  }
+  bool contains(const T& value) const { return value >= m_lb && value <= m_ub; }
 
   /**
    * @brief Determine if one range completely contains another (boundary points
@@ -115,7 +113,7 @@ class range : public er::client<range<T>> {
    */
   bool overlaps_with(const range<T>& other) const {
     return this->contains(other.m_lb) || this->contains(other.m_ub) ||
-        other.contains(this->m_lb) || other.contains(this->m_ub);
+           other.contains(this->m_lb) || other.contains(this->m_ub);
   }
 
   /**
@@ -125,8 +123,12 @@ class range : public er::client<range<T>> {
    * @return The wrapped value.
    */
   T wrap_value(T value) const __rcsw_check_return {
-    while (value > m_ub) { value -= m_span; }
-    while (value < m_lb) { value += m_span; }
+    while (value > m_ub) {
+      value -= m_span;
+    }
+    while (value < m_lb) {
+      value += m_span;
+    }
     return value;
   }
 
@@ -154,7 +156,7 @@ class range : public er::client<range<T>> {
    */
   friend std::istream& operator>>(std::istream& is, range& r) {
     T values[2];
-    utils::parse_values<T> (is, 2, values, ':');
+    utils::parse_values<T>(is, 2, values, ':');
     r.set(values[0], values[1]);
     return is;
   }

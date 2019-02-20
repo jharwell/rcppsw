@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/robotics/kinematics2D/differential_drive_xml_parser.hpp"
-#include "rcppsw/math/degrees.hpp"
 #include "rcppsw/math/angles.hpp"
+#include "rcppsw/math/degrees.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -38,9 +38,10 @@ constexpr char differential_drive_xml_parser::kXMLRoot[];
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void differential_drive_xml_parser::parse(const ticpp::Element &node) {
-  ticpp::Element wnode = node_get(const_cast<ticpp::Element &>(node), kXMLRoot);
-  m_params = std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
+void differential_drive_xml_parser::parse(const ticpp::Element& node) {
+  ticpp::Element wnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
+  m_params =
+      std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 
   XML_PARSE_ATTR(wnode, m_params, max_speed);
 
@@ -49,9 +50,8 @@ void differential_drive_xml_parser::parse(const ticpp::Element &node) {
   m_params->soft_turn_max = math::to_radians(angle);
 } /* parse() */
 
-void differential_drive_xml_parser::show(std::ostream &stream) const {
-  stream << build_header() << XML_ATTR_STR(m_params, soft_turn_max)
-         << std::endl
+void differential_drive_xml_parser::show(std::ostream& stream) const {
+  stream << build_header() << XML_ATTR_STR(m_params, soft_turn_max) << std::endl
          << XML_ATTR_STR(m_params, max_speed) << std::endl
          << build_footer();
 } /* show() */

@@ -52,7 +52,7 @@ void exec_estimates_parser::parse(const ticpp::Element& node) {
      * For each registered task we want to get exec estimates for, parse the
      * estimate.
      */
-    for (auto &s : m_task_names) {
+    for (auto& s : m_task_names) {
       math::rangeu tmp{0, 0};
       node_attr_get(enode, s, tmp);
       m_params->ranges.insert({s, tmp});
