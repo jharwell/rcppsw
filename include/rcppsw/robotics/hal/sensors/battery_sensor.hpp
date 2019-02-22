@@ -71,11 +71,11 @@ class _battery_sensor {
    * information: how much energy the robot current has left.
    */
   struct reading {
-    double availible_charge;
+    double available_charge;
     double time_left;
 
-    reading(double _availible_charge, double _time_left)
-        : availible_charge(_availible_charge),
+    reading(double _available_charge, double _time_left)
+        : available_charge(_available_charge),
           time_left(_time_left) {}
   };
 
@@ -96,7 +96,7 @@ class _battery_sensor {
   template <typename U = T,
             RCPPSW_SFINAE_REQUIRE(detail::is_argos_battery_sensor<U>::value)>
   void setCharge(double newEnergyLevel) {
-    SetAvailableCharge(newEnergyLevel);
+    m_sensor->SetAvailableCharge(newEnergyLevel);
   }
 
  private:

@@ -76,7 +76,7 @@ class abort_probability : public math::sigmoid {
    * @brief All tasks need to have a small abort probability, so that they don't
    * get stuck indefinitely.
    */
-  static double constexpr kMIN_ABORT_PROB = 0.0001;
+  static double  kMIN_ABORT_PROB;
 
   /**
    * @brief Initialize an abort probability calculation with default values.

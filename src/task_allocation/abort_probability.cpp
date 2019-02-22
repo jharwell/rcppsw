@@ -34,7 +34,7 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 abort_probability::abort_probability(const math::sigmoid_params *const params)
     : sigmoid(params->reactivity, params->offset, params->gamma) {}
-
+double abort_probability::kMIN_ABORT_PROB = 0.0001;
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
