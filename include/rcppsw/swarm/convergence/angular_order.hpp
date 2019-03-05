@@ -25,12 +25,11 @@
  * Includes
  ******************************************************************************/
 #include <vector>
-#include <algorithm>
 #include <limits>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/radians.hpp"
-#include "rcppsw/math/expression.hpp"
+#include "rcppsw/swarm/convergence/convergence_measure.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -42,15 +41,26 @@ NS_START(rcppsw, swarm, convergence);
  ******************************************************************************/
 /**
  * @class angular_order
- * @ingroup swarm
+ * @ingroup swarm convergence
  *
  * @brief Calculates the angular order within a swarm for a given instant. From
  * Turgut2008.
  */
-class angular_order : math::expression<double> {
+class angular_order : public convergence_measure {
  public:
-  double operator()(const std::vector<math::radians>& headings,
-                    uint n_threads) {
+  angular_order(double epsilon, double epsilon_delta)
+      : convergence_measure(epsilon, epsilon_delta) {}
+
+  /**
+   * @brief Calculates the raw and normalized angular order for the swarm (from
+   * Turgut2008).
+   *
+   * @return \c TRUE iff convergence has been achieved according to configured
+   * parameters and the current state of the swarm.
+   */
+  bool operator()(double time,
+                  const std::vector<math::radians>& headings,
+                  __rcsw_unused uint n_threads) {
     double y = 0.0;
     double x = 0.0;
 
@@ -59,7 +69,9 @@ class angular_order : math::expression<double> {
       y += std::sin((*it).value());
       x += std::cos((*it).value());
     } /* for(it..) */
-    return set_result(std::fabs(std::atan2(y, x)) / headings.size());
+    update_raw(std::fabs(std::atan2(y, x)) / headings.size());
+    set_norm(math::normalize(raw_min(), raw_max(), raw()));
+    return update_convergence_state(time);
   }
 };
 

@@ -24,10 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <vector>
+#include <utility>
 #include "rcppsw/metrics/base_metrics.hpp"
-#include "rcppsw/math/radians.hpp"
-#include "rcppsw/math/vector2.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -43,7 +41,7 @@ NS_START(rcppsw, metrics, swarm);
  * @ingroup metrics swarm
  *
  * @brief Defines the metrics to be collected at the ensemble level in order
- * to calculate the swarm's convergence. Measures adapted from:
+ * to calculate the swarm's convergence in various ways. Measures adapted from:
  *
  * - Szabo2014 (robot interaction degree)
  * - Turgut2008 (angular order)
@@ -56,22 +54,22 @@ class convergence_metrics : public virtual rcppsw::metrics::base_metrics {
   convergence_metrics(void) = default;
 
   /**
-   * @brief Return a vector of distances (one per robot), to each robot's
-   * closest neighbor. Used to calculate swarm interaction degree
+   * @brief Return the (raw, normalized) interaction degree of the swarm. See
+   * \ref interactivity for the calculation/input variables.
    */
-  virtual std::vector<double> robot_nearest_neighbors(void) const = 0;
+  virtual std::pair<double, double> swarm_interactivity(void) const = 0;
 
   /**
-   * @brief Return a vector of radians (one per robot), that is each robot's
-   * orientation in 2D space.
+   * @brief Return the (raw, normalized) angular order of the swarm. See \ref
+   * angular_order for the calculation/input variables.
    */
-  virtual std::vector<math::radians> robot_headings(void) const = 0;
+  virtual std::pair<double, double> swarm_angular_order(void) const = 0;
 
   /**
-   * @brief Return a vector of 2D coordinates (one per robot), that is each
-   * robots position in 2D space.
+   * @brief Return the (raw, normalized) positional entropy of the swarm. See
+   * \ref positional_entropy for the calculation/input variables.
    */
-  virtual std::vector<math::vector2d> robot_positions(void) const = 0;
+  virtual std::pair<double, double> swarm_positional_entropy(void) const = 0;
 };
 
 NS_END(swarm, metrics, rcppsw);

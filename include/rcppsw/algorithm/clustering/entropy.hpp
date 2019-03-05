@@ -80,32 +80,38 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
   using membership_vector = std::vector<detail::membership_type<detail::policy::EH>>;
 
   /**
-   * @param data_in Vector of data to cluster.
    * @param impl The method and policy for clustering.
    * @param horizon The min and maximum bounds of distances to use when
    *                computing clusters.
    * @param horizon_delta The step size for moving between the min and max
    *                      distance bounds; defines # of overall iterations.
    */
-  entropy_balch2000(std::vector<T> data,
-                    std::unique_ptr<detail::entropy_impl<T>> impl,
-                    math::ranged horizon,
+  entropy_balch2000(std::unique_ptr<detail::entropy_impl<T>> impl,
+                    const math::ranged& horizon,
                     double horizon_delta)
       : ER_CLIENT_INIT("rcppsw.algorithm.clustering.entropy_balch2000"),
         mc_horizon(std::move(horizon)),
         mc_horizon_delta(horizon_delta),
-        m_data(std::move(data)),
-        m_membership(m_data.size()),
-        m_membership_cp(m_data.size()),
-        m_clusters(),
         m_impl(std::move(impl)) {}
 
   /**
    * @brief Perform entropy based clustering, returning the accumulated entropy
    * across all horizons.
    */
-  double run(const dist_calc_ftype& dist_func) {
+  double run(const std::vector<T>& data, const dist_calc_ftype& dist_func) {
     ER_INFO("Initialize");
+    m_data = data;
+
+    /*
+     * You can't use reserve() here, as that just allocates data without
+     * initialization, which is needed to mimic initializing membership arrays
+     * in the constructor.
+     */
+    m_membership.assign(m_data.size(),
+                        typename decltype(m_membership)::value_type());
+    m_membership_cp.assign(m_data.size(),
+                           typename decltype(m_membership_cp)::value_type());
+
     m_impl->initialize(&m_data, &m_membership);
     m_clusters = clusters_init();
 
@@ -211,16 +217,16 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
   const math::ranged                          mc_horizon;
   const double                                mc_horizon_delta;
 
-  std::vector<T>                              m_data;
-  detail::membership_type<detail::policy::EH> m_membership;
+  std::vector<T>                              m_data{};
+  detail::membership_type<detail::policy::EH> m_membership{};
 
   /**
    * @brief This is a member variable, rather than a local variable in
    * \ref balch2000_iter, in order to reduce dynamic memory management overhead.
    */
 
-  detail::membership_type<detail::policy::EH> m_membership_cp;
-  cluster_vector                              m_clusters;
+detail::membership_type<detail::policy::EH>   m_membership_cp{};
+cluster_vector                                m_clusters{};
   std::unique_ptr<detail::entropy_impl<T>>    m_impl;
   /* clang-format on */
 };

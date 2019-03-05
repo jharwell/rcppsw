@@ -28,18 +28,11 @@
 #include <vector>
 
 #include "rcppsw/metrics/base_metrics_collector.hpp"
-#include "rcppsw/patterns/visitor/visitable.hpp"
-#include "rcppsw/swarm/convergence/interactivity.hpp"
-#include "rcppsw/math/range.hpp"
-#include "rcppsw/swarm/convergence/convergence_params.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, metrics, swarm);
-
-namespace swc = rcppsw::swarm::convergence;
-namespace rmath = rcppsw::math;
 
 /*******************************************************************************
  * Class Definitions
@@ -52,17 +45,14 @@ namespace rmath = rcppsw::math;
  *
  * Metrics are written out each timestep.
  */
-class convergence_metrics_collector
-    : public metrics::base_metrics_collector,
-      public patterns::visitor::visitable_any<convergence_metrics_collector> {
+class convergence_metrics_collector : public metrics::base_metrics_collector {
  public:
   /**
    * @param ofname The output file name.
    * @param interval Collection interval.
    */
   convergence_metrics_collector(const std::string& ofname,
-                                uint interval,
-                                const swc::convergence_params * params);
+                                uint interval);
 
   void reset(void) override;
   void collect(const metrics::base_metrics& metrics) override;
@@ -76,13 +66,17 @@ class convergence_metrics_collector
   };
 
   struct order_stats {
-    double order{0.0};
-    double start_order{0.0};
+    double raw{0.0};
+    double start_raw{0.0};
+    double norm{0.0};
+    double start_norm{0.0};
   };
 
   struct pos_entropy_stats {
-    double entropy{0.0};
-    double start_entropy{0.0};
+    double raw{0.0};
+    double start_raw{0.0};
+    double norm{0.0};
+    double start_norm{0.0};
   };
 
   std::string csv_header_build(const std::string& header) override;
@@ -90,9 +84,6 @@ class convergence_metrics_collector
   void reset_after_interval(void) override;
 
   /* clang-format off */
-  const swc::convergence_params mc_params;
-  swc::interactivity            m_interact{};
-
   struct interact_stats         m_interact_stats{};
   struct order_stats            m_order_stats{};
   struct pos_entropy_stats      m_pos_ent_stats{};

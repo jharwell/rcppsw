@@ -43,6 +43,9 @@ NS_START(rcppsw, swarm, convergence);
  */
 struct convergence_params : public rcppsw::params::base_params {
   uint                             n_threads{0};
+  double                           epsilon{0};
+  uint                             epsilon_delta{0};
+
   struct positional_entropy_params pos_entropy{};
   struct interactivity_params      interactivity{};
   struct angular_order_params      ang_order{};

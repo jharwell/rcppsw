@@ -30,7 +30,7 @@
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/algorithm/clustering/entropy.hpp"
 #include "rcppsw/math/vector2.hpp"
-#include "rcppsw/math/expression.hpp"
+#include "rcppsw/swarm/convergence/convergence_measure.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/swarm/convergence/positional_entropy_params.hpp"
 
@@ -50,14 +50,15 @@ namespace algclust = algorithm::clustering;
  * @brief Calculate the positional entropy of the swarm, using the methods
  * outlined in Balch2000 and Turgut2008.
  */
-class positional_entropy : public math::expression<double>,
+class positional_entropy : public convergence_measure,
                            public algclust::entropy_balch2000<math::vector2d> {
  public:
-  positional_entropy(const std::vector<math::vector2d>& data,
+  positional_entropy(double epsilon,
+                     double epsilon_delta,
                      std::unique_ptr<algclust::detail::entropy_impl<math::vector2d>> impl,
                      const struct positional_entropy_params* const params)
-      : entropy_balch2000(data,
-                          std::move(impl),
+      : convergence_measure(epsilon, epsilon_delta),
+        entropy_balch2000(std::move(impl),
                           params->horizon,
                           params->horizon_delta) {}
 
@@ -66,11 +67,15 @@ class positional_entropy : public math::expression<double>,
   /**
    * @brief Calculate the positional entropy in 2D space of a swarm.
    */
-  double operator()(void) {
-    return set_result(run([](const math::vector2d& v1,
-                             const math::vector2d& v2) {
-                            return (v1 - v2).length();
-                          }));
+  double operator()(double time,
+                    const std::vector<math::vector2d>& data) {
+    auto dist_func = [](const math::vector2d& v1,
+                        const math::vector2d& v2) {
+      return (v1 - v2).length();
+    };
+    update_raw(run(data, dist_func));
+    set_norm(math::normalize(raw_min(), raw_max(), raw()));
+    return update_convergence_state(time);
   }
 };
 
