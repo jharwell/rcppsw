@@ -76,15 +76,15 @@ class tdgraph : public er::client<tdgraph> {
   using walk_cb = std::function<void(const polled_task*)>;
 
   /**
-   * @brief Get the parent of a node in the graph, given the graph and node.
+   * @brief Get the parent of a vertex in the graph, given the graph and vertex.
    *
    * @return The parent of the vertex, or NULL if vertex not in graph.
    */
   static polled_task* vertex_parent(const tdgraph& graph,
-                                    const polled_task* node);
+                                    const polled_task* vertex);
 
   tdgraph(void);
-  virtual ~tdgraph(void);
+  ~tdgraph(void) override;
   tdgraph(const tdgraph& other) = delete;
   tdgraph& operator=(const tdgraph& other) = delete;
 
@@ -188,8 +188,8 @@ class tdgraph : public er::client<tdgraph> {
   uint vertex_depth_impl(const polled_task* v, int depth) const;
 
   /* clang-format off */
-  polled_task*       m_root;
-  graph_impl         m_graph;
+  polled_task*       m_root{nullptr};
+  graph_impl         m_graph{};
   /* clang-format on */
 };
 

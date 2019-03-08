@@ -61,19 +61,19 @@ class clustering_impl {
    */
   virtual void iterate(const std::vector<T>& data,
                        const dist_calc_ftype& dist_func,
-                       cluster_vector* const clusters) = 0;
+                       cluster_vector* clusters) = 0;
 
   /*
    * @brief Update clusters (in some algorithm-specific way) after an iteration.
    */
-  virtual void post_iter_update(cluster_vector* const clusters) = 0;
+  virtual void post_iter_update(cluster_vector* clusters) = 0;
 
   /**
    * @brief Perform algorithm-specific clustering initialization (memory
    * localization, etc.).
    */
-  virtual void initialize(std::vector<T>* const data,
-                          membership_type<Policy>* const membership) = 0;
+  virtual void initialize(std::vector<T>* data,
+                          membership_type<Policy>* membership) = 0;
 };
 
 NS_END(detail, clustering, algorithm, rcppsw);

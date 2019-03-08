@@ -58,7 +58,7 @@ class radians {
 
   static radians abs(const radians& r) { return radians(r.abs_value()); }
 
-  radians(void) : m_value(0.0) {}
+  radians(void) = default;
 
   explicit radians(double value) : m_value(value) {}
   explicit radians(const degrees& d);
@@ -179,7 +179,7 @@ class radians {
    */
   static const range<radians> kUnsignedRange;
 
-  double m_value;
+  double m_value{0.0};
 };
 
 /*******************************************************************************

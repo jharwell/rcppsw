@@ -58,9 +58,9 @@ class entropy_impl : public clustering_impl<T, policy::EH> {
 
   void initialize(std::vector<T>* const data,
                   membership_type<policy::EH>* const membership) override {
-    for (size_t i = 0; i < membership->size(); ++i) {
-      (*membership)[i].reserve(data->size());
-    } /* for(i..) */
+    for (auto &m : *membership) {
+      m.reserve(data->size());
+    } /* for(&m..) */
   }
 
   void iterate(const std::vector<T>& data,

@@ -51,11 +51,11 @@ class exec_estimates_parser : public params::xml_param_parser,
  public:
   explicit exec_estimates_parser(
       uint level,
-      const std::list<std::string>& task_names = std::list<std::string>())
+      std::list<std::string> task_names = std::list<std::string>())
       : xml_param_parser(level),
         ER_CLIENT_INIT("rcppsw.ta.exec_estimates_parser"),
         m_ema(level + 1),
-        m_task_names(task_names) {}
+        m_task_names(std::move(task_names)) {}
 
   /**
    * @brief The root tag that all cache parameters should lie under in the

@@ -91,8 +91,8 @@ void execution_metrics_collector::collect(
     ++m_cum_abort_count;
   }
 
-  m_int_interface_count += m.task_at_interface();
-  m_cum_interface_count += m.task_at_interface();
+  m_int_interface_count += static_cast<uint>(m.task_at_interface());
+  m_cum_interface_count += static_cast<uint>(m.task_at_interface());
 
   m_int_exec_estimate += m.task_exec_estimate();
   m_cum_exec_estimate += m.task_exec_estimate();

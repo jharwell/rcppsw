@@ -48,8 +48,8 @@ NS_START(rcppsw, multiprocess);
  */
 class forkable {
  public:
-  forkable(void) : m_proc_run(false), m_pid(0) {}
-  virtual ~forkable(void) {}
+  forkable(void) = default;
+  virtual ~forkable(void) = default;
   pid_t pid(void) { return m_pid; }
 
   /**
@@ -87,16 +87,16 @@ class forkable {
   /**
    * @brief Check if a process object has been told to terminate elsewhere.
    */
-  bool terminated(void) { return (false == m_proc_run); }
+  bool terminated(void) { return !m_proc_run; }
 
  private:
   static void entry_point(void* this_p) {
-    forkable* pt = static_cast<forkable*>(this_p);
+    auto pt = static_cast<forkable*>(this_p);
     pt->proc_main();
   }
 
-  bool m_proc_run;
-  pid_t m_pid;
+  bool m_proc_run{false};
+  pid_t m_pid{0};
 };
 
 NS_END(multiprocess, rcppsw);

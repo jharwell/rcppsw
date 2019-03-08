@@ -42,17 +42,17 @@ NS_START(rcppsw, control);
  * Not all parameters are applicable to all waveform types.
  */
 struct waveform_params : public rcppsw::params::base_params {
-  waveform_params(const std::string& type_,
+  waveform_params(std::string type_,
                   double freq_,
                   double phase_,
                   double amp_,
                   double offset_)
-      : type(type_),
+      : type(std::move(type_)),
         frequency(freq_),
         phase(phase_),
         amplitude(amp_),
         offset(offset_) {}
-  waveform_params(void) {}
+  waveform_params(void) = default;
 
   std::string type{""};
   double frequency{0};

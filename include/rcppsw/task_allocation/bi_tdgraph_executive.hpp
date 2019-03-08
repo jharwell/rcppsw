@@ -68,7 +68,7 @@ class bi_tdgraph_executive : public base_executive,
    *
    * The callback will be passed a pointer to the task that was just allocated.
    */
-  void task_alloc_notify(alloc_notify_cb cb) {
+  void task_alloc_notify(const alloc_notify_cb& cb) {
     m_task_alloc_notify.push_back(cb);
   }
 

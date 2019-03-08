@@ -87,14 +87,14 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
    * @param horizon_delta The step size for moving between the min and max
    *                      distance bounds; defines # of overall iterations.
    */
-  entropy_balch2000(const std::vector<T>& data,
+  entropy_balch2000(std::vector<T> data,
                     std::unique_ptr<detail::entropy_impl<T>> impl,
-                    const math::ranged& horizon,
+                    math::ranged horizon,
                     double horizon_delta)
       : ER_CLIENT_INIT("rcppsw.algorithm.clustering.entropy_balch2000"),
-        mc_horizon(horizon),
+        mc_horizon(std::move(horizon)),
         mc_horizon_delta(horizon_delta),
-        m_data(data),
+        m_data(std::move(data)),
         m_membership(m_data.size()),
         m_membership_cp(m_data.size()),
         m_clusters(),

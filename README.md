@@ -74,8 +74,7 @@ To see what's new, check out the [release notes](docs/release-notes.md).
 
     There are a number of configuration options that can be passed to cmake that
     are specific to rcppsw, which are shown in the table below. For other,
-    additional configuration options, please see the README in the [cmake
-    config](https://github.com/jharwell/cmake-config) repo:
+    additional configuration options, please see the README in [libra](https://github.com/swarm-robotics/libra) repo:
 
 
    | Option            | Meaning                                                       | Options                                                                    | Default            |

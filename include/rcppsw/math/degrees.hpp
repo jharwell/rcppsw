@@ -51,7 +51,7 @@ class degrees {
  public:
   static const double kDEGREES_TO_RADIANS;
 
-  degrees(void) : m_value(0.0) {}
+  degrees(void) = default;
 
   /**
    * @brief Initialize from the specified value in DEGREES.
@@ -190,7 +190,7 @@ class degrees {
    */
   static const range<degrees> kUnsignedRange;
 
-  double m_value;
+  double m_value{0.0};
 };
 
 /*******************************************************************************

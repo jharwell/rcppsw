@@ -268,7 +268,8 @@ class client {
    * Logfile is an appender, which is given the same name as the logfile
    * itself.
    */
-  static void set_logfile(log4cxx::LoggerPtr logger, const std::string& name) {
+  static void set_logfile(const log4cxx::LoggerPtr& logger,
+                          const std::string& name) {
     for (auto& a : logger->getAllAppenders()) {
       if (a->getName() == name) {
         return;

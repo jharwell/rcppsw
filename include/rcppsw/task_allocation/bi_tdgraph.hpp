@@ -83,7 +83,7 @@ class bi_tdgraph : public tdgraph, public er::client<bi_tdgraph> {
    *
    * @param current_task The current task that just finished/aborted/whatever.
    */
-  void active_tab_update(const polled_task* const current_task);
+  void active_tab_update(const polled_task* current_task);
 
   /**
    * @brief Get the active TAB for the graph.

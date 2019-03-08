@@ -58,7 +58,7 @@ class bi_tab : public metrics::tasks::bi_tab_metrics, public er::client<bi_tab> 
   static constexpr char kSubtaskSelSrcExec[] = "exec";
   static constexpr char kSubtaskSelSrcInterface[] = "interface";
 
-  bi_tab(const bi_tdgraph* const graph,
+  bi_tab(const bi_tdgraph* graph,
          polled_task* root,
          const polled_task* child1,
          const polled_task* child2,

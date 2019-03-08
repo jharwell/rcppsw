@@ -50,7 +50,7 @@ const range<radians> radians::kUnsignedRange(radians(0), radians(2 * M_PI));
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-radians::radians(const degrees& r) : m_value(to_radians(r).value()) {}
+radians::radians(const degrees& d) : m_value(to_radians(d).value()) {}
 
 /*******************************************************************************
  * Non-Member Functions

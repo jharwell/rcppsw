@@ -57,7 +57,7 @@ void sigmoid_sel_xml_parser::show(std::ostream& stream) const {
 
 bool sigmoid_sel_xml_parser::validate(void) const {
   CHECK(true == m_sigmoid.validate());
-  CHECK("" != m_params->method);
+  CHECK(!m_params->method.empty());
   return true;
 
 error:

@@ -48,6 +48,4 @@ compile_options.json
 
 # Build process
 build
-.clang-format
-.clang-tidy
 .gdb_history

@@ -33,7 +33,7 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructors
  ******************************************************************************/
 tdgraph::tdgraph(void)
-    : ER_CLIENT_INIT("rcppsw.ta.tdgraph"), m_root(), m_graph() {}
+    : ER_CLIENT_INIT("rcppsw.ta.tdgraph") {}
 
 tdgraph::~tdgraph(void) {
   vertex_iterator v_i, v_end;

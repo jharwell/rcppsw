@@ -2,27 +2,12 @@
 
 ## Pre-cloning Setup
 
-You will also need the following development packages, which can usually be
-found in linux software repositories:
-
-- catch (A unit testing framework that some unit tests use).
-
-In addition, you way also want to install these programs for development:
+You may want to install these programs for development:
 
 - ccache (will make compiling a lot faster).
 - icpc (additional syntax checking comes from Intel Parallel Studio, which is
   ~14GB).
 - ctags/gtags/rtags/cscope (moving around in a large C/C++ code base).
-
-## Post-cloning Setup
-
-1. Clone https://github.com/jharwell/devel somewhere, and either symlink the
-   below files into the repository, or just copy them directly (they are ignored
-   by git).
-
-   `<rcppsw root>/.clang-format` -> `<develroot>/templates/.clang-format`
-
-   `<rcppsw root>/.clang-tidy` -> `<develroot>/templates/.clang-tidy`
 
 ## Directory layout
 
@@ -31,8 +16,8 @@ In addition, you way also want to install these programs for development:
 - `include/` - All `.hpp` files live under here.
 
 - `docs/` - All documentation besides the main README lives under here,
-  including all development/style guides.
-this
+            including all development/style guides.
+
 - `VERSION` - A file in the root root that holds the current/next versions of
   the code. Versions are numbered as `major.minor.patch`, and is updated in
   accordance with semantic versioning/GitFlow. You should never modify this file

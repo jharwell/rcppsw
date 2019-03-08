@@ -83,10 +83,10 @@ class partition_probability : public math::sigmoid,
    * @brief Initialize partitioning probability with default values based on
    * whatever the selected method is.
    */
-  explicit partition_probability(const std::string& method)
+  explicit partition_probability(std::string method)
       : sigmoid(kDEFAULT_REACTIVITY, kDEFAULT_OFFSET, kDEFAULT_GAMMA),
         ER_CLIENT_INIT("rcppsw.ta.partition_probability"),
-        mc_method(method) {}
+        mc_method(std::move(method)) {}
 
   /**
    * @brief Initialize partitioning probability explicity with method +
