@@ -44,7 +44,7 @@ NS_START(rcppsw, math);
  * @ingroup math
  *
  * @brief Base template class encapsulating mathematical actions on a pair of
- * numbers. Is specialized by \ref vector2d, \ref vector2i, \ref vector2f.
+ * numbers. Is specialized by \ref vector2u, \ref vector2i, \ref vector2d.
  *
  * All operations are performed in whatever the template parameter is, so take
  * care if you are trying to do scaling, trigonometric things with integers...

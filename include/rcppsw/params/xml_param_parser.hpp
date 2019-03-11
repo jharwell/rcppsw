@@ -167,6 +167,7 @@ class xml_param_parser : public er::client<xml_param_parser> {
    * @param node The node to search.
    * @param attr The attribute name.
    * @param buf  The result buffer.
+   * @param dflt The default value to use if the attribute does not exist.
    */
   template <typename T>
   void node_attr_get(ticpp::Element& node,

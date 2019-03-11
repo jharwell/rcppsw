@@ -66,7 +66,7 @@ class bi_tdgraph : public tdgraph, public er::client<bi_tdgraph> {
    * Do not call \ref tdgraph::set_children() directly, or your bi_tdgraph will
    * not work properly.
    *
-   * @param parent The parent node, which MUST be a \ref partitionable_task.
+   * @param parent The parent node, which MUST be partitionable.
    * @param children The list of children (must be exactly 2) to associate with
    * the parent.
    *

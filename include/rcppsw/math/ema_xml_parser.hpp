@@ -1,5 +1,5 @@
 /**
- * @file ema_parser.hpp
+ * @file ema_xml_parser.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *

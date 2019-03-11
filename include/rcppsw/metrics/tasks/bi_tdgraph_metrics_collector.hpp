@@ -50,6 +50,7 @@ class bi_tdgraph_metrics_collector : public base_metrics_collector {
   /**
    * @param ofname Output file name.
    * @param interval Collection interval.
+   * @param decomposition_depth The maximum depth of the \ref bi_tdgraph.
    */
   bi_tdgraph_metrics_collector(const std::string& ofname,
                                uint interval,

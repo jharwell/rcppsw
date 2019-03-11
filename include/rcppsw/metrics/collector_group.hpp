@@ -1,5 +1,5 @@
 /**
- * @file stateless_metric_harvester.hpp
+ * @file collector_group.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -91,7 +91,8 @@ class collector_group {
    * but need to be captured in different files, and you don't want to have to
    * derive nearly identical classes to handle it.
    *
-   * @param metrics The metrics to collect from.
+   * @param name The name of the collector to collect with.
+   * @param metrics The metrics to collect.
    * @param predicate The predicate used to determine if the specified collector
    * should actually be invoked.
    *

@@ -44,7 +44,7 @@ NS_START(rcppsw, robotics, kinematics2D);
  * @ingroup robotics kinematics2D
  *
  * @brief Parses XML parameters relating to the \ref differential_drive into
- * \ref differential_drive_xml_params.
+ * \ref differential_drive_params.
  */
 class differential_drive_xml_parser : public rcppsw::params::xml_param_parser {
  public:

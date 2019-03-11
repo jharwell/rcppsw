@@ -93,7 +93,7 @@ class _rab_wifi_sensor  {
   /**
    * @brief Get the current rab wifi sensor readings for the footbot robot.
    *
-   * @return A vector of \ref rab_wifi_packet.
+   * @return A vector of \ref wifi_packet.
    */
   template <typename U = T,
             RCPPSW_SFINAE_REQUIRE(detail::is_argos_rab_sensor<U>::value)>

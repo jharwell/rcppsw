@@ -1,5 +1,5 @@
 /**
- * @file entropy.ihpp
+ * @file ientropy.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *

@@ -88,7 +88,7 @@
   }
 
 /**
- * @def SFINAE_REQUIRE(...)
+ * @def RCPPSW_SFINAE_REQUIRE(...)
  *
  * Specify the condition to enable a function for SFINAE.
  *

@@ -50,8 +50,8 @@ class polled_task;
  * representing the task decomposition of the root task at different
  * granularities (i.e. tasks of different levels of complexity).
  *
- * This is the main input into the task \ref executive, and does not do much on
- * its own. Tasks can have any number of children.
+ * This is the main input into the task \ref bi_tdgraph_executive, and does not
+ * do much on its own. Tasks can have any number of children.
  *
  * Once you set the root node or the children of a specific node, you cannot
  * change them. Uses boost::graph bidirectional graph, adjacency list flavor.
@@ -112,7 +112,7 @@ class tdgraph : public er::client<tdgraph> {
   /**
    * @brief Set the children for an existing node.
    *
-   * @param parent The parent node, which MUST be a \ref partitionable_task.
+   * @param parent The parent node, which MUST be a partitionable task.
    * @param children The list of children (any #) to associate with the
    * parent.
    *

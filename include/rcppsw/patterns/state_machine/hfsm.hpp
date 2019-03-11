@@ -152,13 +152,13 @@ class hfsm : public base_fsm, public er::client<hfsm> {
  *
  * Declare a state in the current HFSM.
  *
- * The entry handler function MUST be public in order for \ref hfsm_entry_action
- * templating to work. Apparently when dealing with non-type template arguments,
- * any argument passed that does not EXACTLY match the one in the template will
- * cause a compilation error if the function is protected (i.e. accessible in
- * derived classes). The solution: make it public. Not the best, because it
- * exposes the inner workings of the state machine, but anyone who is using this
- * class should only be manipulating it through the macros anyway.
+ * The entry handler function MUST be public in order for templating to
+ * work. Apparently when dealing with non-type template arguments, any argument
+ * passed that does not EXACTLY match the one in the template will cause a
+ * compilation error if the function is protected (i.e. accessible in derived
+ * classes). The solution: make it public. Not the best, because it exposes the
+ * inner workings of the state machine, but anyone who is using this class
+ * should only be manipulating it through the macros anyway.
  */
 #define HFSM_ENTRY_DECLARE(FSM, entry_name, event_data)           \
  public:                                                          \

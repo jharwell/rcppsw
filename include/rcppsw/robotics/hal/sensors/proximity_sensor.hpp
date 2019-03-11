@@ -73,7 +73,8 @@ class _proximity_sensor {
   /**
    * @brief Get the current proximity sensor readings for the footbot robot.
    *
-   * @return A vector of \ref reading.
+   * @return A vector of (X,Y) pairs of sensor readings corresponding to
+   * object distances.
    */
   template <typename U = T,
             RCPPSW_SFINAE_REQUIRE(detail::is_argos_proximity_sensor<U>::value)>
@@ -92,7 +93,7 @@ class _proximity_sensor {
    * the specified distance to the robot, and those that fall within a specific
    * angle range (e.g. objects behind the robot are ignored). )
    *
-   * Should be used in conjunction with \ref prox_obj__exists().
+   * Should be used in conjunction with \ref prox_obj_exists().
    */
   template <typename U = T,
             RCPPSW_SFINAE_REQUIRE(detail::is_argos_proximity_sensor<U>::value)>

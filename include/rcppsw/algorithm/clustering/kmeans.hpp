@@ -81,9 +81,9 @@ class kmeans : public er::client<kmeans<T>> {
         m_impl(std::move(impl)) {}
 
   /**
-   * @brief Perform clustering. First the \ref cluster_impl::initialize() method
-   * is called. Then, the clustering algorithm is iterated until one of the
-   * following is true:
+   * @brief Perform clustering. First the \ref clustering_impl::initialize()
+   * method is called. Then, the clustering algorithm is iterated until one of
+   * the following is true:
    *
    * - The maximum # of iterations has been reached.
    * - \ref cluster_impl::converged() returns \c TRUE (checked after each

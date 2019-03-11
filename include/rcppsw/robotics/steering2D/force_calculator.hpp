@@ -81,14 +81,14 @@ class force_calculator : public er::client<force_calculator> {
   void reset(void) { m_force_accum.x(0); m_force_accum.y(0); }
 
   /**
-   * @brief Add the \ref kSeekThrough force to the sum forces for this timestep.
+   * @brief Add the \ref arrival_force to the sum forces for this timestep.
    *
    * @param target The target to seek to.
    */
   void seek_through(const math::vector2d& target);
 
   /**
-   * @brief Add the \ref kSeekTo force to the sum forces for this timestep.
+   * @brief Add the \ref seek_force to the sum forces for this timestep.
    *
    * @param target The target to seek to.
    */
@@ -98,12 +98,12 @@ class force_calculator : public er::client<force_calculator> {
     return m_arrival_force.within_slowing_radius();
   }
   /**
-   * @brief Add the \ref kWander force to the sum forces for this timestep.
+   * @brief Add the \ref wander_force to the sum forces for this timestep.
    */
   void wander(void);
 
   /**
-   * @brief Add the \ref kAvoidance forec to the sum forces for this timestep.
+   * @brief Add the \ref avoidance_force to the sum forces for this timestep.
    *
    * If no threatening obstacle exists, this force is 0.
    *

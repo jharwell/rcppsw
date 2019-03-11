@@ -1,5 +1,5 @@
 /**
- * @file sigmoid_parser.hpp
+ * @file sigmoid_xml_parser.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *

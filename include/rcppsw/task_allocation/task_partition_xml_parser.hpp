@@ -1,5 +1,5 @@
 /**
- * @file task_partition_parser.hpp
+ * @file task_partition_xml_parser.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *

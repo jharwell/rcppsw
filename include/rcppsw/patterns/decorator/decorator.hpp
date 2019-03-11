@@ -46,7 +46,7 @@ NS_START(rcppsw, patterns, decorator);
                                                          __VA_ARGS__)
 
 /**
- * @def DECORATE_FUNC_TEMPLATE(Type, Func)
+ * @def RCPPSW_DECORATE_FUNC_TEMPLATE(Type, Func)
  *
  * Wraps the declaration/implementation of the decoratee (non-pointer
  * version). For decoratee types that are themselves templated types.

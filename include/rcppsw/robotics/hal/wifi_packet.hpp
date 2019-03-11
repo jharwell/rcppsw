@@ -1,5 +1,5 @@
 /**
- * @file base_wifi_sensor.hpp
+ * @file wifi_packet.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ROBOTICS_HAL_SENSORS_BASE_WIFI_SENSOR_HPP_
-#define INCLUDE_RCPPSW_ROBOTICS_HAL_SENSORS_BASE_WIFI_SENSOR_HPP_
+#ifndef INCLUDE_RCPPSW_ROBOTICS_HAL_WIFI_PACKET_HPP_
+#define INCLUDE_RCPPSW_ROBOTICS_HAL_WIFI_PACKET_HPP_
 
 /*******************************************************************************
  * Includes
@@ -46,4 +46,4 @@ struct wifi_packet {
 
 NS_END(hal, robotics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ROBOTICS_HAL_SENSORS_BASE_WIFI_SENSOR_HPP_ */
+#endif /* INCLUDE_RCPPSW_ROBOTICS_HAL_WIFI_PACKET_HPP_ */

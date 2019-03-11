@@ -49,8 +49,6 @@ To see what's new, check out the [release notes](docs/release-notes.md).
    - boost >= 1.58 (`libboost-all-dev` on ubuntu)
    - log4cxx (`liblog4cxx-dev` on ubuntu)
    - catch (`catch` on ubuntu)
-   - graphviz (`graphviz` on ubuntu)
-   - doxygen (`doxygen` on ubuntu)
 
 ## Post-cloning
 

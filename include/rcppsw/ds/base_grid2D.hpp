@@ -60,7 +60,7 @@ class base_grid2D {
    * @brief Return a reference to the element at position (i, j) in the grid.
    *
    * This is provided in the base class so that the pointer/object variants of
-   * the grid (\ref grid2D, \ref grid2D_ptr) can reduce code duplication.
+   * the grid (\ref grid2D, \ref overlay_grid2D) can reduce code duplication.
    */
   virtual T& access(uint i, uint j) = 0;
   virtual T& access(const math::vector2u& c) = 0;

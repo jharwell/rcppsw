@@ -176,6 +176,7 @@ class executable_task : public logical_task,
    * @brief Update the current estimate of the task interface time by using a
    * weighted sum of the previous \ref time_estimate and the new value.
    *
+   * @param i The interface ID.
    * @param last_measure The last measured time.
    */
   void interface_estimate_update(uint i, double last_measure) {
@@ -236,7 +237,6 @@ class executable_task : public logical_task,
   /**
    * @brief Get the current abort probability at the specified interface.
    *
-   * @param i The interface ID.
    */
   double abort_prob(void) const { return m_abort_prob.last_result(); }
 
@@ -273,6 +273,7 @@ class executable_task : public logical_task,
    * @brief Calculate the interface time of the current task for use in abort
    * calculations.
    *
+   * @param i The interface ID.
    * @param start_time The timestep upon which the task entered the interface.
    */
   virtual double interface_time_calc(uint i, double start_time) = 0;
