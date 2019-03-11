@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <string>
+#include <random>
 
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/math/sigmoid.hpp"
@@ -107,13 +108,14 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
    * using the most recent time estimates of each subtask.
    */
   double operator()(const time_estimate* subtask1,
-                    const time_estimate* subtask2);
+                    const time_estimate* subtask2,
+                    std::default_random_engine& rng);
 
  private:
   /**
    * @brief Random subtask sel, regardless of time estimates.
    */
-  double calc_random(void);
+  double calc_random(std::default_random_engine& rng);
 
   /**
    * @brief Calculate the probability of switching from subtask 1 to subtask 2
@@ -125,7 +127,8 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
    * @return Probability of switching.
    */
   double calc_brutschy2014(const time_estimate& int_est1,
-                           const time_estimate& int_est2);
+                           const time_estimate& int_est2,
+                           std::default_random_engine& rng);
 
   /**
    * @brief Calculate the probability of switching from subtask 1 to subtask 2
@@ -137,7 +140,8 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
    * @return Probability of switching.
    */
   double calc_harwell2018(const time_estimate& exec_est1,
-                          const time_estimate& exec_est2);
+                          const time_estimate& exec_est2,
+                          std::default_random_engine& rng);
 
   /**
    * @brief Calculate the sigmoid activation for a pair of time estimates using
@@ -146,7 +150,9 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
    * @param est1 Exec/interface estimate 1.
    * @param est2 Exec/interface estimate 2.
    */
-  double calc_sigmoid(const time_estimate& est1, const time_estimate& est2);
+  double calc_sigmoid(const time_estimate& est1,
+                      const time_estimate& est2,
+                      std::default_random_engine& rng);
 
   /* clang-format off */
   const std::string mc_method;

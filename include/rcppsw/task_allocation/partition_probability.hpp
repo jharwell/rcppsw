@@ -77,8 +77,6 @@ class partition_probability : public math::sigmoid,
   /* A default gamma value because there needs to be one */
   static constexpr double kDEFAULT_GAMMA = 1.0;
 
-  static constexpr double kNO_EST_PARTITION_PROB = 0.5;
-
   /**
    * @brief Initialize partitioning probability with default values based on
    * whatever the selected method is.

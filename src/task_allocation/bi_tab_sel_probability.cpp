@@ -64,12 +64,14 @@ bi_tab_sel_probability::bi_tab_sel_probability(
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-__rcsw_const double bi_tab_sel_probability::calc_random(void) {
-  return 0.5;
+double bi_tab_sel_probability::calc_random(std::default_random_engine& rng) {
+  std::uniform_real_distribution<> dist(0.0, 1.0);
+  return dist(rng);
 } /* calc_random() */
 
-__rcsw_pure double bi_tab_sel_probability::calc_harwell2019(const bi_tab& tab1,
-                                                            const bi_tab& tab2) {
+double bi_tab_sel_probability::calc_harwell2019(const bi_tab& tab1,
+                                                const bi_tab& tab2,
+                                                std::default_random_engine& rng) {
   double ratio1 =
       std::fabs(tab1.root()->task_exec_estimate().last_result() -
                 (tab1.child1()->task_exec_estimate().last_result() +
@@ -80,16 +82,18 @@ __rcsw_pure double bi_tab_sel_probability::calc_harwell2019(const bi_tab& tab1,
                 (tab2.child1()->task_exec_estimate().last_result() +
                  tab2.child2()->task_exec_estimate().last_result())) /
       tab2.root()->task_exec_estimate().last_result();
-  return calc_sigmoid(ratio1, ratio2);
+  return calc_sigmoid(ratio1, ratio2, rng);
 } /* calc_harwell2019() */
 
-__rcsw_pure double bi_tab_sel_probability::calc_sigmoid(double ratio1,
-                                                        double ratio2) {
+double bi_tab_sel_probability::calc_sigmoid(double ratio1,
+                                            double ratio2,
+                                            std::default_random_engine& rng) {
   /*
    * No information available--just pick randomly.
    */
   if (!(ratio1 > 0 && ratio2 > 0)) {
-    return 0.5;
+    std::uniform_real_distribution<> dist(0.0, 1.0);
+    return dist(rng);
   } else if (!(ratio1 > 0)) { /* have info on tab2 only */
     return 0.0;
   } else if (!(ratio2 > 0)) { /* have info on tab1 only */
@@ -100,11 +104,12 @@ __rcsw_pure double bi_tab_sel_probability::calc_sigmoid(double ratio1,
 } /* calc_sigmoid() */
 
 double bi_tab_sel_probability::operator()(const bi_tab* const tab1,
-                                          const bi_tab* const tab2) {
+                                          const bi_tab* const tab2,
+                                          std::default_random_engine& rng) {
   if (kMethodHarwell2019 == mc_method) {
-    return calc_harwell2019(*tab1, *tab2);
+    return calc_harwell2019(*tab1, *tab2, rng);
   } else if (kMethodRandom == mc_method) {
-    return calc_random();
+    return calc_random(rng);
   }
   ER_FATAL_SENTINEL("Bad method '%s' selected", mc_method.c_str());
   return 0.0;

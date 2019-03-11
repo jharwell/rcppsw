@@ -66,30 +66,32 @@ subtask_sel_probability::subtask_sel_probability(
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-__rcsw_const double subtask_sel_probability::calc_random(void) {
-  return 0.5;
+double subtask_sel_probability::calc_random(std::default_random_engine& rng) {
+  std::uniform_real_distribution<> dist(0.0, 1.0);
+  return dist(rng);
 } /* calc_random() */
 
-__rcsw_pure double subtask_sel_probability::calc_brutschy2014(
-    const time_estimate& int_est1,
-    const time_estimate& int_est2) {
-  return calc_sigmoid(int_est1, int_est2);
+double subtask_sel_probability::calc_brutschy2014(const time_estimate& int_est1,
+                                                  const time_estimate& int_est2,
+                                                  std::default_random_engine& rng) {
+  return calc_sigmoid(int_est1, int_est2, rng);
 } /* calc_brutschy2014() */
 
-__rcsw_pure double subtask_sel_probability::calc_harwell2018(
-    const time_estimate& exec_est1,
-    const time_estimate& exec_est2) {
-  return calc_sigmoid(exec_est2, exec_est1);
+double subtask_sel_probability::calc_harwell2018(const time_estimate& exec_est1,
+                                                 const time_estimate& exec_est2,
+                                                 std::default_random_engine& rng) {
+  return calc_sigmoid(exec_est2, exec_est1, rng);
 } /* calc_harwell2018() */
 
-__rcsw_pure double subtask_sel_probability::calc_sigmoid(
-    const time_estimate& est1,
-    const time_estimate& est2) {
+double subtask_sel_probability::calc_sigmoid(const time_estimate& est1,
+                                             const time_estimate& est2,
+                                             std::default_random_engine& rng) {
   /*
    * No information available--just pick randomly.
    */
   if (!(est1.last_result() > 0 && est2.last_result() > 0)) {
-    return 0.5;
+    std::uniform_real_distribution<> dist(0.0, 1.0);
+    return dist(rng);
   } else if (!(est1.last_result() > 0)) { /* have info on est2 only */
     return 0.0;
   } else if (!(est2.last_result() > 0)) { /* have info on est1 only */
@@ -107,13 +109,14 @@ __rcsw_pure double subtask_sel_probability::calc_sigmoid(
 } /* calc_sigmoid() */
 
 double subtask_sel_probability::operator()(const time_estimate* subtask1,
-                                           const time_estimate* subtask2) {
+                                           const time_estimate* subtask2,
+                                           std::default_random_engine& rng) {
   if (kMethodBrutschy2014 == mc_method) {
-    return calc_brutschy2014(*subtask1, *subtask2);
+    return calc_brutschy2014(*subtask1, *subtask2, rng);
   } else if (kMethodHarwell2018 == mc_method) {
-    return calc_harwell2018(*subtask1, *subtask2);
+    return calc_harwell2018(*subtask1, *subtask2, rng);
   } else if (kMethodRandom == mc_method) {
-    return calc_random();
+    return calc_random(rng);
   }
   ER_FATAL_SENTINEL("Bad method '%s' selected", mc_method.c_str());
   return 0.0;
