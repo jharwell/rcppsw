@@ -66,6 +66,7 @@ class wander_force {
   math::radians                    m_angle;
   std::default_random_engine       m_rng{};
   std::normal_distribution<double> m_normal_dist;
+  std::uniform_real_distribution<> m_uniform_dist;
   /* clang-format on */
 };
 

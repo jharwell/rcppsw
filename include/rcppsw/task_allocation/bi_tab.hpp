@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <string>
 #include <utility>
+#include <random>
 
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/metrics/tasks/bi_tab_metrics.hpp"
@@ -162,22 +163,23 @@ class bi_tab : public metrics::tasks::bi_tab_metrics, public er::client<bi_tab> 
   std::pair<double, double> subtask_sw_calc(void);
 
   /* clang-format off */
-  const bool                mc_always_partition;
-  const bool                mc_never_partition;
-  const std::string         mc_partition_input;
-  const std::string         mc_subtask_sel_input;
-  const bi_tdgraph* const   mc_graph;
+  const bool                 mc_always_partition;
+  const bool                 mc_never_partition;
+  const std::string          mc_partition_input;
+  const std::string          mc_subtask_sel_input;
+  const bi_tdgraph* const    mc_graph;
 
-  bool                      m_employed_partitioning{false};
-  const polled_task*        m_last_task{nullptr};
-  const polled_task*        m_last_subtask{nullptr};
-  const polled_task*        m_active_task{nullptr};
+  bool                       m_employed_partitioning{false};
+  const polled_task*         m_last_task{nullptr};
+  const polled_task*         m_last_subtask{nullptr};
+  const polled_task*         m_active_task{nullptr};
 
-  polled_task* const        m_root;
-  const polled_task* const  m_child1;
-  const polled_task* const  m_child2;
-  subtask_sel_probability   m_sel_prob;
-  partition_probability     m_partition_prob;
+  polled_task* const         m_root;
+  const polled_task* const   m_child1;
+  const polled_task* const   m_child2;
+  subtask_sel_probability    m_sel_prob;
+  partition_probability      m_partition_prob;
+  std::default_random_engine m_rng{};
   /* clang-format on */
 };
 

@@ -75,7 +75,8 @@ void bi_tdgraph_executive::run(void) {
   ER_DEBUG("Task '%s' abort probability: %f",
            current_task()->name().c_str(),
            prob);
-  if (static_cast<double>(std::rand()) / RAND_MAX <= prob) {
+  std::uniform_real_distribution<> dist(0.0, 1.0);
+  if (prob >= dist(m_rng)) {
     ER_INFO("Task '%s' aborted, prob=%f", current_task()->name().c_str(), prob);
     handle_task_abort(current_task());
     return;

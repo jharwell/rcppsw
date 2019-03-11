@@ -47,7 +47,8 @@ wander_force::wander_force(const struct wander_force_params* const params)
        * very unlikely that we will get a value outside the max deviation. If we
        * do, just shrink the max angle in the input parameters.
        */
-      m_normal_dist(0, 2 * m_max_angle_delta / 6.0) {}
+      m_normal_dist(0, 2 * m_max_angle_delta / 6.0),
+      m_uniform_dist(0.0, 1.0) {}
 
 /*******************************************************************************
  * Member Functions
@@ -88,7 +89,7 @@ math::vector2d wander_force::operator()(const boid& entity) {
     val = m_normal_dist(m_rng);
   } else {
     val = -m_max_angle_delta +
-          2 * m_max_angle_delta * (static_cast<double>(std::rand()) / RAND_MAX);
+          2 * m_max_angle_delta * m_uniform_dist(m_rng);
   }
   math::degrees perturbation(
       std::fmod(math::to_degrees(m_angle).value() + val, m_max_angle_delta));

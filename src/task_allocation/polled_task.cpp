@@ -21,6 +21,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <random>
+
 #include "rcppsw/task_allocation/polled_task.hpp"
 
 /*******************************************************************************
@@ -32,5 +34,14 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 polled_task::~polled_task(void) = default;
+
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+void polled_task::exec_estimate_init(const math::rangeu& bounds) {
+  std::default_random_engine rng;
+  std::uniform_int_distribution<> dist(bounds.lb(), bounds.ub());
+  executable_task::exec_estimate_init(dist(rng));
+} /* exec_estimate_init() */
 
 NS_END(task_allocation, rcppsw);

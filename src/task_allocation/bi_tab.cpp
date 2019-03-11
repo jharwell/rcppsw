@@ -160,7 +160,8 @@ polled_task* bi_tab::task_allocate(void) {
   }
 
   /* We chose not to employ partitioning on the next task allocation */
-  if (partition_prob <= static_cast<double>(std::rand()) / RAND_MAX) {
+  std::uniform_real_distribution<> dist(0.0, 1.0);
+  if (partition_prob <= dist(m_rng)) {
     ER_INFO("Not employing partitioning: Return task '%s'",
             m_root->name().c_str());
     m_employed_partitioning = false;
@@ -246,6 +247,7 @@ polled_task* bi_tab::subtask_allocate(void) {
           prob_21);
 
   const polled_task* ret = nullptr;
+  std::uniform_real_distribution<> dist(0.0, 1.0);
   if (subtask_sel_probability::kMethodHarwell2018 == m_sel_prob.method() ||
       subtask_sel_probability::kMethodBrutschy2014 == m_sel_prob.method()) {
     /*
@@ -253,7 +255,7 @@ polled_task* bi_tab::subtask_allocate(void) {
      * to child2, based on time estimates.
      */
     if (m_last_subtask == m_child1 || nullptr == m_last_subtask) {
-      if (prob_12 >= static_cast<double>(std::rand()) / RAND_MAX) {
+      if (prob_12 >= dist(m_rng)) {
         ret = m_child2;
       } else {
         ret = m_child1;
@@ -264,14 +266,14 @@ polled_task* bi_tab::subtask_allocate(void) {
      * to m_child1, based on time estimates.
      */
     else if (m_last_subtask == m_child2) {
-      if (prob_21 >= static_cast<double>(std::rand()) / RAND_MAX) {
+      if (prob_21 >= dist(m_rng)) {
         ret = m_child1;
       } else {
         ret = m_child2;
       }
     }
   } else if (subtask_sel_probability::kMethodRandom == m_sel_prob.method()) {
-    if (prob_12 >= static_cast<double>(std::rand()) / RAND_MAX) {
+    if (prob_12 >= dist(m_rng)) {
       ret = m_child1;
     } else {
       ret = m_child2;

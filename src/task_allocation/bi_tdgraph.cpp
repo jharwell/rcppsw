@@ -61,7 +61,8 @@ void bi_tdgraph::active_tab_init(const std::string& method) {
 
   } else if (kTABInitRandom == method) {
     ER_INFO("Using random initial TAB");
-    m_active_tab = &(*std::next(m_tabs.begin(), std::rand() % m_tabs.size()));
+    std::uniform_int_distribution<> dist(0, m_tabs.size());
+    m_active_tab = &(*std::next(m_tabs.begin(), dist(m_rng)));
   } else if (kTABInitMaxDepth == method) {
     ER_INFO("Using max_depth initial TAB");
     std::vector<bi_tab*> indices;
@@ -79,7 +80,8 @@ void bi_tdgraph::active_tab_init(const std::string& method) {
     } /* for(&t..) */
 
     ER_INFO("Found %zu TABs at depth %d", indices.size(), max_depth);
-    m_active_tab = indices[std::rand() % indices.size()];
+    std::uniform_int_distribution<> dist(0, indices.size());
+    m_active_tab = indices[dist(m_rng)];
   } else {
     ER_FATAL_SENTINEL("Bad TAB init method '%s'", method.c_str());
   }
@@ -152,12 +154,13 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
    * is not as specialized. If it is not the root of the active TAB, then we are
    * considering going "down" a TAB level to one that is more specialized.
    */
+  std::uniform_real_distribution<> dist(0.0, 1.0);
   if (current_task == active_tab()->root()) {
-    if (prob_up <= static_cast<double>(std::rand()) / RAND_MAX) {
+    if (prob_up <= dist(m_rng)) {
       new_tab = tab_parent(active_tab());
     }
   } else {
-    if (prob_down <= static_cast<double>(std::rand()) / RAND_MAX) {
+    if (prob_down <= dist(m_rng)) {
       new_tab = tab_child(active_tab(), current_task);
     }
   }

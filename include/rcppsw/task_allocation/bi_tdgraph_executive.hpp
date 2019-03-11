@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <list>
 #include <string>
+#include <random>
 
 #include "rcppsw/task_allocation/base_executive.hpp"
 
@@ -87,7 +88,8 @@ class bi_tdgraph_executive : public base_executive,
   void handle_task_finish(polled_task* task);
 
   /* clang-format off */
-  std::list<alloc_notify_cb>   m_task_alloc_notify{};
+  std::list<alloc_notify_cb> m_task_alloc_notify{};
+  std::default_random_engine m_rng{};
   /* clang-format on */
 };
 
