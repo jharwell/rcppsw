@@ -60,7 +60,7 @@ void differential_drive_fsm::change_velocity(double speed,
  * States
  ******************************************************************************/
 
-FSM_STATE_DEFINE(differential_drive_fsm, soft_turn, turn_data) {
+FSM_STATE_DEFINE(differential_drive_fsm, soft_turn, turn_data* data) {
   math::range<math::radians> range(-mc_soft_turn_max, mc_soft_turn_max);
   math::radians angle = data->angle;
   bool within_range = range.contains(angle.signed_normalize());
@@ -77,7 +77,7 @@ FSM_STATE_DEFINE(differential_drive_fsm, soft_turn, turn_data) {
   set_wheel_speeds(speed1, speed2, data->angle);
   return state_machine::event_signal::HANDLED;
 }
-FSM_STATE_DEFINE(differential_drive_fsm, hard_turn, turn_data) {
+FSM_STATE_DEFINE(differential_drive_fsm, hard_turn, turn_data* data) {
   math::range<math::radians> range(-mc_soft_turn_max, mc_soft_turn_max);
   math::radians angle = data->angle;
   bool within_range = range.contains(angle.signed_normalize());

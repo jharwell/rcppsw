@@ -229,8 +229,8 @@ NS_END(state_machine, patterns, rcppsw);
  * Define a state \c state_name for a class \c FSM, which requires the input
  * signal of \c event_data each time the state is executed.
  */
-#define FSM_STATE_DEFINE(FSM, state_name, event_data)   \
-  int FSM::ST_##state_name(const event_data* data)
+#define FSM_STATE_DEFINE(FSM, state_name, event_data)     \
+  int FSM::ST_##state_name(const event_data)
 
 /**
  * @def FSM_GUARD_DECLARE(FSM, guard_name, event_data)
@@ -254,8 +254,8 @@ NS_END(state_machine, patterns, rcppsw);
  * \c guard_name for a class  \c FSM, which requires the input
  * signal of \c event_data each time the guard is executed.
  */
-#define FSM_GUARD_DEFINE(FSM, guard_name, event_data) \
-  bool FSM::GD_##guard_name(const event_data* data)
+#define FSM_GUARD_DEFINE(FSM, guard_name, event_data)     \
+  bool FSM::GD_##guard_name(const event_data)
 
 
 /**
@@ -281,8 +281,8 @@ NS_END(state_machine, patterns, rcppsw);
  * Declare an entry \c entry_name for a class \c FSM, which requires the input
  * signal of \c event_data each time the entry is executed.
  */
-#define FSM_ENTRY_DEFINE(FSM, entry_name, event_data) \
-  void FSM::EN_##entry_name(const event_data* data)
+#define FSM_ENTRY_DEFINE(FSM, entry_name, event_data)  \
+  void FSM::EN_##entry_name(const event_data)
 
 /**
  * @def FSM_EXIT_DECLARE(FSM, exit_name)

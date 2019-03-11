@@ -139,12 +139,12 @@ class hfsm : public base_fsm, public er::client<hfsm> {
       hfsm_state_action1<FSM, event_data, &FSM::ST_##state_name> \
           state_name
 
-#define HFSM_STATE_DEFINE(FSM, state_name, event) \
-  FSM_STATE_DEFINE(FSM, state_name, event)
+#define HFSM_STATE_DEFINE(FSM, state_name, event_data)    \
+  FSM_STATE_DEFINE(FSM, state_name, event_data)
 
 #define HFSM_GUARD_DECLARE(FSM, guard_name, event_data) \
   FSM_GUARD_DECLARE(FSM, guard_name, event_data)
-#define HFSM_GUARD_DEFINE(FSM, guard_name, event_data) \
+#define HFSM_GUARD_DEFINE(FSM, guard_name, event_data)    \
   FSM_GUARD_DEFINE(FSM, guard_name, event_data)
 
 /**
@@ -182,7 +182,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
   rcppsw::patterns::state_machine::                                             \
       state_entry_action1<BASE_FSM, event_data, &BASE_FSM::EN_##inherited_name> \
           inherited_name
-#define HFSM_ENTRY_DEFINE(FSM, entry_name, event_data) \
+#define HFSM_ENTRY_DEFINE(FSM, entry_name, event_data)    \
   FSM_ENTRY_DEFINE(FSM, entry_name, event_data)
 
 /**
