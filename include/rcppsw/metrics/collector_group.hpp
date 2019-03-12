@@ -165,15 +165,18 @@ class collector_group {
   }
 
   /**
-   * @brief Call the \ref base_metrics_collector::csv_line_write() function on all
-   * collectors in the group.
+   * @brief Call the \ref base_metrics_collector::csv_line_write() function on
+   * all collectors in the group.
+   *
+   * @return \c TRUE iff ALL collectors in the group wrote out metrics this
+   * timestep.
    */
-  void metrics_write_all(uint timestep) {
-    std::for_each(m_collectors.begin(),
-                  m_collectors.end(),
-                  [&](const std::pair<const std::string, mapped_type>& pair) {
-                    pair.second->csv_line_write(timestep);
-                  });
+  bool metrics_write_all(uint timestep) {
+    return std::all_of(m_collectors.begin(),
+                       m_collectors.end(),
+                       [&](const std::pair<const std::string, mapped_type>& pair) {
+                         return pair.second->csv_line_write(timestep);
+                       });
   }
 
   /**

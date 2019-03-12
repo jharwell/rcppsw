@@ -25,7 +25,7 @@
 #define CATCH_CONFIG_PREFIX_ALL
 #include "rcppsw/task_allocation/polled_task.hpp"
 #include "rcppsw/task_allocation/tdgraph.hpp"
-#include "rcppsw/task_allocation/task_params.hpp"
+#include "rcppsw/task_allocation/task_allocation_params.hpp"
 #include <catch.hpp>
 
 /*******************************************************************************
@@ -39,14 +39,18 @@ namespace er = rcppsw::er;
  ******************************************************************************/
 class test_task : public ta::polled_task {
  public:
-  test_task(const std::string &name, const struct ta::task_params *c_params)
-      : polled_task(name, c_params, nullptr) {}
+  test_task(const std::string &name,
+            const struct ta::task_allocation_params *c_params)
+      : polled_task(name, &c_params->abort, &c_params->exec_est.ema, nullptr) {}
 
-  double calc_abort_prob(void) override { return 0.0; }
-  double calc_interface_time(double start_time) override { return 0.0; }
   double current_time(void) const override { return 0.0; }
   void task_execute(void) override {}
   void task_start(const ta::taskable_argument*) override {}
+  bool task_completed(void) const override { return false; }
+  double abort_prob_calc(void) override { return 0.0; }
+  double interface_time_calc(uint, double) override { return 0.0; }
+  void active_interface_update(int) override {}
+
 };
 
 /*******************************************************************************
@@ -57,7 +61,7 @@ CATCH_TEST_CASE("sanity-test", "[tdgraph]") {
 }
 CATCH_TEST_CASE("build-test", "[tdgraph]") {
   ta::tdgraph g;
-  ta::task_params params;
+  ta::task_allocation_params params;
   CATCH_REQUIRE(OK == g.set_root(new test_task("root_task", &params)));
   CATCH_REQUIRE(g.root()->name() == "root_task");
 

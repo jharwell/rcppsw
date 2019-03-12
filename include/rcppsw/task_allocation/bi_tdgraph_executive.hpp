@@ -25,8 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <list>
-#include <string>
 #include <random>
+#include <string>
 
 #include "rcppsw/task_allocation/base_executive.hpp"
 

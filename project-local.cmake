@@ -28,15 +28,21 @@ set(Boost_USE_STATIC_LIBS OFF)
 ################################################################################
 # Includes                                                                     #
 ################################################################################
-if (BUILD_ON_MSI)
+if (BUILD_FOR_MSI)
   set(ARGOS_INSTALL_PREFIX /home/gini/shared/swarm)
+elseif(BUILD_FOR_TRAVIS)
+  set(ARGOS_INSTALL_PREFIX /usr/local)
 else()
   set(ARGOS_INSTALL_PREFIX /opt/data/local)
 endif()
 
-set(${target}_INCLUDE_DIRS "${${target}_INC_PATH}" ${rcsw_INCLUDE_DIRS})
-set(${target}_SYS_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
-  ${Boost_INCLUDE_DIRS} ${ARGOS_INSTALL_PREFIX}/include)
+set(${target}_INCLUDE_DIRS
+  "${${target}_INC_PATH}"
+  ${rcsw_INCLUDE_DIRS})
+set(${target}_SYS_INCLUDE_DIRS
+  ${Boost_INCLUDE_DIRS}
+  ${ARGOS_INSTALL_PREFIX}/include
+  ${CMAKE_CURRENT_SOURCE_DIR})
 
 ################################################################################
 # Libraries                                                                    #
@@ -54,7 +60,7 @@ if (NOT WITH_ER_NREPORT)
   set(${target}_LIBRARIES ${${target}_LIBRARIES} log4cxx)
 endif()
 
-if (BUILD_ON_MSI)
+if (BUILD_FOR_MSI)
   set(${target}_LIBRARY_DIRS ${${target}_LIBRARY_DIRS} ${ARGOS_INSTALL_PREFIX}/lib/argos3)
 endif()
 

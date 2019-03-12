@@ -51,7 +51,7 @@ NS_START(rcppsw, math);
 template <typename T>
 class range : public er::client<range<T>> {
  public:
-  range(const T& lb, const T& ub)
+  range(const T& lb, const T& ub) noexcept
       : ER_CLIENT_INIT("rcppsw.math.range"),
         m_lb(lb),
         m_ub(ub),
@@ -155,7 +155,7 @@ class range : public er::client<range<T>> {
    * @brief For parsing a range from a string in the form of <lb>:<ub>
    */
   friend std::istream& operator>>(std::istream& is, range& r) {
-    T values[2];
+    T values[2] = {T(), T()};
     utils::parse_values<T>(is, 2, values, ':');
     r.set(values[0], values[1]);
     return is;

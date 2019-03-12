@@ -26,8 +26,8 @@
  ******************************************************************************/
 #include <algorithm>
 #include <list>
-#include <string>
 #include <random>
+#include <string>
 
 #include "rcppsw/task_allocation/bi_tab.hpp"
 #include "rcppsw/task_allocation/bi_tab_sel_probability.hpp"

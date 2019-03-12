@@ -1,5 +1,8 @@
 # RCPPSW (Reusable C++ Software)
 
+[![Coverity Scan](https://scan.coverity.com/projects/15203/badge.svg)](https://scan.coverity.com/projects/15203/badge.svg)
+[![Build Status](https://travis-ci.org/swarm-robotics/rcppsw.svg?branch=devel)](https://travis-ci.org/swarm-robotics/rcppsw.svg?branch=devel)
+
 This is a collection of various useful algorithms/data structures/etc. that I
 have found useful for multi-agent robots research, and that do not currently
 exist in Boost, or that build on what boost provides. Includes such things as:
@@ -21,7 +24,7 @@ exist in Boost, or that build on what boost provides. Includes such things as:
   - polled FSM, Hierarchical FSM
   - decorator
   - visitor
-  - factory (releasing and sharing variants)
+  - factory (releasing/sharing variants)
   - prototype
   - singleton
 

@@ -45,7 +45,7 @@ namespace algclust = algorithm::clustering;
  ******************************************************************************/
 /**
  * @class positional_entropy
- * @ingroup swarm
+ * @ingroup swarm convergence
  *
  * @brief Calculate the positional entropy of the swarm, using the methods
  * outlined in Balch2000 and Turgut2008.
@@ -54,10 +54,9 @@ class positional_entropy : public convergence_measure,
                            public algclust::entropy_balch2000<math::vector2d> {
  public:
   positional_entropy(double epsilon,
-                     double epsilon_delta,
                      std::unique_ptr<algclust::detail::entropy_impl<math::vector2d>> impl,
                      const struct positional_entropy_params* const params)
-      : convergence_measure(epsilon, epsilon_delta),
+      : convergence_measure(epsilon),
         entropy_balch2000(std::move(impl),
                           params->horizon,
                           params->horizon_delta) {}
@@ -67,15 +66,14 @@ class positional_entropy : public convergence_measure,
   /**
    * @brief Calculate the positional entropy in 2D space of a swarm.
    */
-  double operator()(double time,
-                    const std::vector<math::vector2d>& data) {
+  bool operator()(const std::vector<math::vector2d>& data) {
     auto dist_func = [](const math::vector2d& v1,
                         const math::vector2d& v2) {
       return (v1 - v2).length();
     };
     update_raw(run(data, dist_func));
     set_norm(math::normalize(raw_min(), raw_max(), raw()));
-    return update_convergence_state(time);
+    return update_convergence_state();
   }
 };
 

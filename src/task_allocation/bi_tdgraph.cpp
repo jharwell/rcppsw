@@ -142,12 +142,9 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
   /*
    * The active TAB can change, so compute the probability of it doing so.
    */
-  double prob_up = m_tab_sw_prob(active_tab(),
-                                 tab_parent(active_tab()),
-                                 m_rng);
-  double prob_down = m_tab_sw_prob(tab_parent(active_tab()),
-                                   active_tab(),
-                                   m_rng);
+  double prob_up = m_tab_sw_prob(active_tab(), tab_parent(active_tab()), m_rng);
+  double prob_down =
+      m_tab_sw_prob(tab_parent(active_tab()), active_tab(), m_rng);
   ER_INFO("TAB w/root='%s' up prob=%f, down prob=%f",
           active_tab()->root()->name().c_str(),
           prob_up,

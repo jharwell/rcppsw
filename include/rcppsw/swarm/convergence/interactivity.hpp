@@ -51,8 +51,7 @@ NS_START(rcppsw, swarm, convergence);
  */
 class interactivity : public convergence_measure {
  public:
-  interactivity(double epsilon, double epsilon_delta)
-      : convergence_measure(epsilon, epsilon_delta) {}
+  explicit interactivity(double epsilon) : convergence_measure(epsilon) {}
 
   /*
    * @brief Compute the interaction degree.
@@ -64,8 +63,7 @@ class interactivity : public convergence_measure {
    * strictly piecewise addition.
    */
 
-  bool operator()(double time,
-                  const std::vector<double>& dists) {
+  bool operator()(const std::vector<double>& dists) {
     update_raw(std::accumulate(dists.begin(), dists.end(), 0.0));
 
     /*
@@ -74,7 +72,7 @@ class interactivity : public convergence_measure {
      * seen it, and so should receive a value of 0.
      */
     set_norm(1.0 - math::normalize(raw_min(), raw_max(), raw()));
-    return update_convergence_state(time);
+    return update_convergence_state();
   }
 };
 

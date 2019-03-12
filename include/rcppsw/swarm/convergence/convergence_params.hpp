@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/params/base_params.hpp"
+#include "rcppsw/swarm/convergence/task_dist_entropy_params.hpp"
 #include "rcppsw/swarm/convergence/positional_entropy_params.hpp"
 #include "rcppsw/swarm/convergence/interactivity_params.hpp"
 #include "rcppsw/swarm/convergence/angular_order_params.hpp"
@@ -44,8 +45,8 @@ NS_START(rcppsw, swarm, convergence);
 struct convergence_params : public rcppsw::params::base_params {
   uint                             n_threads{0};
   double                           epsilon{0};
-  uint                             epsilon_delta{0};
 
+  struct task_dist_entropy_params  task_dist_entropy{};
   struct positional_entropy_params pos_entropy{};
   struct interactivity_params      interactivity{};
   struct angular_order_params      ang_order{};

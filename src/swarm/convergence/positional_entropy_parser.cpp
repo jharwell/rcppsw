@@ -37,11 +37,13 @@ constexpr char positional_entropy_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void positional_entropy_parser::parse(const ticpp::Element& node) {
-  ticpp::Element mnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
-  XML_PARSE_ATTR(mnode, m_params, enable);
-  if (m_params->enable) {
-    XML_PARSE_ATTR(mnode, m_params, horizon);
-    XML_PARSE_ATTR(mnode, m_params, horizon_delta);
+  if (nullptr != node.FirstChild(kXMLRoot, false)) {
+    ticpp::Element mnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
+    XML_PARSE_ATTR(mnode, m_params, enable);
+    if (m_params->enable) {
+      XML_PARSE_ATTR(mnode, m_params, horizon);
+      XML_PARSE_ATTR(mnode, m_params, horizon_delta);
+    }
   }
 } /* parse() */
 

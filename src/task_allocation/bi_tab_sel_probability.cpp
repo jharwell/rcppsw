@@ -43,9 +43,7 @@ constexpr char bi_tab_sel_probability::kMethodRandom[];
  * Constructors/Destructor
  ******************************************************************************/
 bi_tab_sel_probability::bi_tab_sel_probability(const std::string& method)
-    : ER_CLIENT_INIT("rcppsw.ta.bi_tab_sel_prob"),
-      sigmoid(),
-      mc_method(method) {
+    : ER_CLIENT_INIT("rcppsw.ta.bi_tab_sel_prob"), sigmoid(), mc_method(method) {
   if (kMethodHarwell2019 == method) {
     sigmoid::init(kHARWELL2019_REACTIVITY,
                   kHARWELL2019_OFFSET,

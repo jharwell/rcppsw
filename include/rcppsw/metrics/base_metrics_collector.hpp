@@ -93,8 +93,10 @@ class base_metrics_collector {
    * @brief Write out the gathered metrics.
    *
    * @param timestep The current timestep.
+   *
+   * @return \c TRUE if a line was written, \c FALSE otherwise.
    */
-  void csv_line_write(uint timestep);
+  bool csv_line_write(uint timestep);
 
   /**
    * @brief Finalize metrics and flush files.

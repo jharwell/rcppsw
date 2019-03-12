@@ -25,6 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <utility>
+#include <tuple>
+
 #include "rcppsw/metrics/base_metrics.hpp"
 
 /*******************************************************************************
@@ -52,24 +54,45 @@ NS_START(rcppsw, metrics, swarm);
 class convergence_metrics : public virtual rcppsw::metrics::base_metrics {
  public:
   convergence_metrics(void) = default;
+  /**
+   * @brief Status returned by each convergence measure. Positions:
+   *
+   * 0 - Raw value of convergence measure, for sanity checks.
+   * 1 - Normalized value of convergence measure.
+   * 2 - Does the measure currently indicate convergence?
+   */
+
+  using conv_status_t = std::tuple<double, double, bool>;
+  /**
+   * @brief Return the current convergence epsilon (threshold) for the swarm
+   * (can be static or vary in time). Captured here to make graph generation
+   * much easier in SIERRA.
+   */
+  virtual double swarm_conv_epsilon(void) const = 0;
 
   /**
-   * @brief Return the (raw, normalized) interaction degree of the swarm. See
-   * \ref interactivity for the calculation/input variables.
+   * @brief Return the \ref conv_status_t for the interaction degree of the
+   * swarm. See \ref interactivity for the calculation/input variables.
    */
-  virtual std::pair<double, double> swarm_interactivity(void) const = 0;
+  virtual conv_status_t swarm_interactivity(void) const = 0;
 
   /**
-   * @brief Return the (raw, normalized) angular order of the swarm. See \ref
-   * angular_order for the calculation/input variables.
+   * @brief Return the \ref conv_status_t for the angular order of the
+   * swarm. See \ref angular_order for the calculation/input variables.
    */
-  virtual std::pair<double, double> swarm_angular_order(void) const = 0;
+  virtual conv_status_t swarm_angular_order(void) const = 0;
 
   /**
-   * @brief Return the (raw, normalized) positional entropy of the swarm. See
-   * \ref positional_entropy for the calculation/input variables.
+   * @brief Return the \ref conv_status_t for the positional entropy of the
+   * swarm. See \ref positional_entropy for the calculation/input variables.
    */
-  virtual std::pair<double, double> swarm_positional_entropy(void) const = 0;
+  virtual conv_status_t swarm_positional_entropy(void) const = 0;
+
+  /**
+   * @brief Return the \ref conv_status_t for the task distribution entropy of
+   * the swarm. See \ref task_dist_entropy for the calculation/input variables.
+   */
+  virtual conv_status_t swarm_task_dist_entropy(void) const = 0;
 };
 
 NS_END(swarm, metrics, rcppsw);

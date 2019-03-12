@@ -62,7 +62,6 @@ std::string bi_tab_metrics_collector::csv_header_build(const std::string& header
       "int_avg_subtask_selection_prob" + separator() +
       "cum_avg_subtask_selection_prob" + separator();
   /* clang-format on */
-  return line;
 } /* csv_header_build() */
 
 void bi_tab_metrics_collector::reset(void) {

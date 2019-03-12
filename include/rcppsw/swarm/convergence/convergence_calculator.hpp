@@ -32,6 +32,7 @@
 #include "rcppsw/swarm/convergence/interactivity.hpp"
 #include "rcppsw/swarm/convergence/angular_order.hpp"
 #include "rcppsw/swarm/convergence/positional_entropy.hpp"
+#include "rcppsw/swarm/convergence/task_dist_entropy.hpp"
 #include "rcppsw/metrics/swarm/convergence_metrics.hpp"
 #include "rcppsw/ds/type_map.hpp"
 #include "rcppsw/er/client.hpp"
@@ -86,15 +87,34 @@ class convergence_calculator : public metrics::swarm::convergence_metrics,
    */
   using swarm_pos_calc_ftype = std::function<std::vector<math::vector2d>(uint)>;
 
+  /**
+   * @brief Callback function that returns a vector of robot tasks (as unique
+   * non-negative numbers, 1 per robot). Used to calculate swarm task
+   * distribution entropy.
+   *
+   * Tasks a single integer argument specifying the # OpenMP threads to be used,
+   * per configuration.
+   */
+  using swarm_tasks_calc_ftype = std::function<std::vector<int>(uint)>;
+
   explicit convergence_calculator(const convergence_params* params,
-                                  const swarm_headings_calc_ftype& headings_calc,
-                                  const swarm_nn_calc_ftype& nn_calc,
-                                  const swarm_pos_calc_ftype& pos_calc);
+                                  swarm_headings_calc_ftype headings_calc,
+                                  swarm_nn_calc_ftype nn_calc,
+                                  swarm_pos_calc_ftype pos_calc);
+
+  /**
+   * @brief Not included in the constructor arguments because not all swarms use
+   * tasks.
+   */
+  void task_dist_init(const swarm_tasks_calc_ftype& tasks_calc);
 
   /* convergence metrics */
-  std::pair<double, double> swarm_interactivity(void) const override;
-  std::pair<double, double> swarm_angular_order(void) const override;
-  std::pair<double, double> swarm_positional_entropy(void) const override;
+  conv_status_t swarm_interactivity(void) const override;
+  conv_status_t swarm_angular_order(void) const override;
+  conv_status_t swarm_positional_entropy(void) const override;
+  conv_status_t swarm_task_dist_entropy(void) const override;
+  double swarm_conv_epsilon(void) const override { return mc_params.epsilon; }
+  void reset_metrics(void) override;
 
   /**
    * @brief Return swarm convergence status in an OR fashion (i.e. if ANY of the
@@ -103,21 +123,21 @@ class convergence_calculator : public metrics::swarm::convergence_metrics,
   bool converged(void) const;
 
   /**
-   * @brief Update convergence calculations.
-   *
-   * @param time Current time.
+   * @brief Update convergence calculations for the current timestep
    */
-  void update(double time);
+  void update(void);
 
  private:
   /* clang-format off */
   const convergence_params    mc_params;
   ds::type_map<positional_entropy,
+               task_dist_entropy,
                angular_order,
                interactivity> m_measures{};
   swarm_headings_calc_ftype   m_swarm_headings_calc;
   swarm_nn_calc_ftype         m_swarm_nn_calc;
   swarm_pos_calc_ftype        m_swarm_pos_calc;
+  swarm_tasks_calc_ftype      m_swarm_tasks_calc{nullptr};
   /* clang-format on */
 };
 

@@ -46,7 +46,7 @@ struct src_sigmoid_sel_params : public params::base_params {
    * calculations be? Valid values are: ["exec", "interface"], referring to
    * execution time and interface time for a task.
    */
-  std::string input_src{""};
+  std::string input_src{};
   sigmoid_sel_params sigmoid{};
 };
 

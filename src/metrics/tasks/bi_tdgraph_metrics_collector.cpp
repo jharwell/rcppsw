@@ -103,32 +103,31 @@ bool bi_tdgraph_metrics_collector::csv_line_build(std::string& line) {
   }
 
   for (auto& count : m_int_depth_counts) {
-    line += std::to_string(static_cast<double>(count) / interval()) +
-            separator();
+    line +=
+        std::to_string(static_cast<double>(count) / interval()) + separator();
   } /* for(count..) */
 
-  for (auto &count : m_cum_depth_counts) {
+  for (auto& count : m_cum_depth_counts) {
     line += std::to_string(static_cast<double>(count) / (timestep() + 1)) +
             separator();
   } /* for(&count..) */
 
-  for (auto &count : m_int_task_counts) {
-    line += std::to_string(static_cast<double>(count) / interval()) +
-        separator();
-  } /* for(&count..) */
-
-  for (auto &count : m_cum_task_counts) {
-    line += std::to_string(static_cast<double>(count) / (timestep() + 1)) +
-            separator();
-  } /* for(&count..) */
-
-  for (auto &count : m_int_tab_counts) {
+  for (auto& count : m_int_task_counts) {
     line +=
-        std::to_string(static_cast<double>(count) / interval()) +
-        separator();
+        std::to_string(static_cast<double>(count) / interval()) + separator();
   } /* for(&count..) */
 
-  for (auto &count : m_cum_tab_counts) {
+  for (auto& count : m_cum_task_counts) {
+    line += std::to_string(static_cast<double>(count) / (timestep() + 1)) +
+            separator();
+  } /* for(&count..) */
+
+  for (auto& count : m_int_tab_counts) {
+    line +=
+        std::to_string(static_cast<double>(count) / interval()) + separator();
+  } /* for(&count..) */
+
+  for (auto& count : m_cum_tab_counts) {
     line += std::to_string(static_cast<double>(count) / (timestep() + 1)) +
             separator();
   } /* for(&count..) */

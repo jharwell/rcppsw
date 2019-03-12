@@ -41,7 +41,6 @@ NS_START(rcppsw, metrics, tasks);
  *
  * @brief Interface defining metrics that can be collected about the current
  * task dist of a \ref bi_tdgraph.
- *
  */
 class bi_tdgraph_metrics : public virtual base_metrics {
  public:
