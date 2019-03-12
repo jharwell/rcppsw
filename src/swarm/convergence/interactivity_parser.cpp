@@ -37,8 +37,10 @@ constexpr char interactivity_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void interactivity_parser::parse(const ticpp::Element& node) {
-  ticpp::Element mnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
-  XML_PARSE_ATTR(mnode, m_params, enable);
+  if (nullptr != node.FirstChild(kXMLRoot, false)) {
+    ticpp::Element mnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
+    XML_PARSE_ATTR(mnode, m_params, enable);
+  }
 } /* parse() */
 
 NS_END(convergence, swarm, rcppsw);

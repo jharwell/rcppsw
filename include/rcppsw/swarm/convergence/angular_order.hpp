@@ -48,8 +48,7 @@ NS_START(rcppsw, swarm, convergence);
  */
 class angular_order : public convergence_measure {
  public:
-  angular_order(double epsilon, double epsilon_delta)
-      : convergence_measure(epsilon, epsilon_delta) {}
+  explicit angular_order(double epsilon) : convergence_measure(epsilon) {}
 
   /**
    * @brief Calculates the raw and normalized angular order for the swarm (from
@@ -58,8 +57,7 @@ class angular_order : public convergence_measure {
    * @return \c TRUE iff convergence has been achieved according to configured
    * parameters and the current state of the swarm.
    */
-  bool operator()(double time,
-                  const std::vector<math::radians>& headings,
+  bool operator()(const std::vector<math::radians>& headings,
                   __rcsw_unused uint n_threads) {
     double y = 0.0;
     double x = 0.0;
@@ -71,7 +69,7 @@ class angular_order : public convergence_measure {
     } /* for(it..) */
     update_raw(std::fabs(std::atan2(y, x)) / headings.size());
     set_norm(math::normalize(raw_min(), raw_max(), raw()));
-    return update_convergence_state(time);
+    return update_convergence_state();
   }
 };
 

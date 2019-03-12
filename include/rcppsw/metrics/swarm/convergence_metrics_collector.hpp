@@ -58,35 +58,27 @@ class convergence_metrics_collector : public metrics::base_metrics_collector {
   void collect(const metrics::base_metrics& metrics) override;
 
  private:
-  struct interact_stats {
+  struct convergence_measure_stats {
     double raw{0.0};
-    double start_raw{0.0};
     double norm{0.0};
-    double start_norm{0.0};
-  };
-
-  struct order_stats {
-    double raw{0.0};
-    double start_raw{0.0};
-    double norm{0.0};
-    double start_norm{0.0};
-  };
-
-  struct pos_entropy_stats {
-    double raw{0.0};
-    double start_raw{0.0};
-    double norm{0.0};
-    double start_norm{0.0};
+    uint   converged{0};
   };
 
   std::string csv_header_build(const std::string& header) override;
   bool csv_line_build(std::string& line) override;
   void reset_after_interval(void) override;
 
+  void build_interact(std::string& line);
+  void build_ang_order(std::string& line);
+  void build_pos_entropy(std::string& line);
+  void build_tdist_entropy(std::string& line);
+
   /* clang-format off */
-  struct interact_stats         m_interact_stats{};
-  struct order_stats            m_order_stats{};
-  struct pos_entropy_stats      m_pos_ent_stats{};
+  double                           m_conv_epsilon{0.0};
+  struct convergence_measure_stats m_interact_stats{};
+  struct convergence_measure_stats m_order_stats{};
+  struct convergence_measure_stats m_pos_ent_stats{};
+  struct convergence_measure_stats m_tdist_ent_stats{};
   /* clang-format on */
 };
 

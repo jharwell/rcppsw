@@ -34,7 +34,7 @@
 #include "rcppsw/math/vector2.hpp"
 #include "rcppsw/algorithm/clustering/entropy.hpp"
 #include "rcppsw/algorithm/clustering/kmeans.hpp"
-#include "rcppsw/swarm/positional_entropy.hpp"
+#include "rcppsw/swarm/convergence/positional_entropy.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -89,7 +89,7 @@ CATCH_TEST_CASE("Kmeans", "[clustering]") {
   /*   data.push_back(i % 10); */
   /* } /\* for(i..) *\/ */
 
-  auto impl = std::make_unique<clustering::kmeans_impl<double>>(4);
+  auto impl = std::make_unique<clustering::detail::kmeans_impl<double>>(4);
   clustering::kmeans<double> alg(data,
                                  std::move(impl),
                                  2,
@@ -113,12 +113,12 @@ CATCH_TEST_CASE("entropy", "[clustering]") {
   /*   data.push_back(i % 10); */
   /* } /\* for(i..) *\/ */
 
-  auto impl = std::make_unique<clustering::entropy_impl<double>>(4);
-  clustering::entropy_balch2000<double> alg(data,
-                                            std::move(impl),
+  auto impl = std::make_unique<clustering::detail::entropy_impl<double>>(4);
+  clustering::entropy_balch2000<double> alg(std::move(impl),
                                             math::ranged(1.0, 2.0),
                                             1.0);
-  double res = alg.run([](double a, double b) { return std::fabs(a - b); });
+  double res = alg.run(data,
+                       [](double a, double b) { return std::fabs(a - b); });
 
   CATCH_REQUIRE(static_cast<int>((res * 100.0)) / 100.0 == 2.24);
 }

@@ -74,8 +74,9 @@ status_t differential_drive::actuate(const kinematics::twist& twist) {
       break;
     case kCurvatureDrive:
       return curvature_drive(twist, m_hard_turn);
+    default:
+      ER_FATAL_SENTINEL("Bad drive type: %d", m_drive_type);
   } /* switch() */
-  ER_FATAL_SENTINEL("Bad drive type: %d", m_drive_type);
   return ERROR;
 } /* actuate() */
 

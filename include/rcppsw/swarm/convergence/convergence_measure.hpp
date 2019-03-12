@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <limits>
 #include <algorithm>
+#include <cmath>
 
 #include "rcppsw/math/expression.hpp"
 #include "rcppsw/math/normalize.hpp"
@@ -48,10 +49,7 @@ NS_START(rcppsw, swarm, convergence);
  */
 class convergence_measure : public math::expression<double> {
  public:
-  convergence_measure(double epsilon, double epsilon_delta)
-      : mc_epsilon(epsilon),
-        mc_epsilon_delta(epsilon_delta) {}
-
+  explicit convergence_measure(double epsilon) : mc_epsilon(epsilon) {}
 
   /**
    * @brief Set the raw value of the measure, computed at a given time.
@@ -68,7 +66,6 @@ class convergence_measure : public math::expression<double> {
   double raw_min(void) const { return m_raw_min; }
   double raw_max(void) const { return m_raw_max; }
 
-
   /**
    * @brief Set the normalized value of the measure, computed at a given
    * time. Any normalization calculation should be performed prior to calling
@@ -82,6 +79,8 @@ class convergence_measure : public math::expression<double> {
     m_raw = 0.0;
     m_raw_min = std::numeric_limits<double>::max();
     m_raw_max = std::numeric_limits<double>::min();
+    m_converged = false;
+    m_norm_prev = 0.0;
   }
 
   /**
@@ -92,20 +91,9 @@ class convergence_measure : public math::expression<double> {
    * @return \c TRUE iff convergence has been achieved according to configured
    * parameters and the current state of the swarm.
    */
-  bool update_convergence_state(double time) {
-    if (last_result() >= mc_epsilon) {
-      if (!m_converged_prog) {
-        m_time_start = time;
-        m_converged_prog = true;
-      }
-      if (time - m_time_start >= mc_epsilon_delta) {
-        m_converged = true;
-        m_converged_prog = false;
-      }
-    } else {
-      m_converged_prog = false;
-    }
-    return m_converged;
+  bool update_convergence_state(void) {
+    return m_converged = (std::fabs(last_result() - m_norm_prev) <= mc_epsilon);
+    m_norm_prev = last_result();
   }
 
   /**
@@ -117,15 +105,13 @@ class convergence_measure : public math::expression<double> {
  private:
   /* clang-format off */
   const double mc_epsilon{0.0};
-  const double mc_epsilon_delta{0.0};
 
+  double m_norm_prev{0.0};
   bool   m_converged{false};
-  bool   m_converged_prog{false};
-  double m_time_start{0.0};
 
   double m_raw{0.0};
-  double m_raw_min{0.0};
-  double m_raw_max{0.0};
+  double m_raw_min{std::numeric_limits<double>::max()};
+  double m_raw_max{std::numeric_limits<double>::min()};
   /* clang-format on */
 };
 

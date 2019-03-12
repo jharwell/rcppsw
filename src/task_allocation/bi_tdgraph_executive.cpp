@@ -138,7 +138,7 @@ void bi_tdgraph_executive::handle_task_abort(polled_task* task) {
 void bi_tdgraph_executive::handle_task_finish(polled_task* task) {
   task->exec_time_update();
   task->interface_time_update();
-  for (auto &cb : task_finish_notify()) {
+  for (auto& cb : task_finish_notify()) {
     cb(task);
   } /* for(cb..) */
 
@@ -173,7 +173,7 @@ void bi_tdgraph_executive::handle_task_finish(polled_task* task) {
 void bi_tdgraph_executive::handle_task_start(polled_task* new_task) {
   ER_INFO("Starting new task '%s'", new_task->name().c_str());
 
-  for (auto &cb : m_task_alloc_notify) {
+  for (auto& cb : m_task_alloc_notify) {
     cb(new_task, active_tab());
   } /* for(cb..) */
 

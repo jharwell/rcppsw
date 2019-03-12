@@ -88,8 +88,7 @@ math::vector2d wander_force::operator()(const boid& entity) {
   if (m_use_normal) {
     val = m_normal_dist(m_rng);
   } else {
-    val = -m_max_angle_delta +
-          2 * m_max_angle_delta * m_uniform_dist(m_rng);
+    val = -m_max_angle_delta + 2 * m_max_angle_delta * m_uniform_dist(m_rng);
   }
   math::degrees perturbation(
       std::fmod(math::to_degrees(m_angle).value() + val, m_max_angle_delta));

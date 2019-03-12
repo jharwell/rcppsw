@@ -1,7 +1,7 @@
 /**
- * @file angular_order_parser.cpp
+ * @file task_dist_entropy_params.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * @copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,10 +18,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_SWARM_CONVERGENCE_TASK_DIST_ENTROPY_PARAMS_HPP_
+#define INCLUDE_RCPPSW_SWARM_CONVERGENCE_TASK_DIST_ENTROPY_PARAMS_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/swarm/convergence/angular_order_parser.hpp"
+#include "rcppsw/params/base_params.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -29,18 +32,16 @@
 NS_START(rcppsw, swarm, convergence);
 
 /*******************************************************************************
- * Global Variables
+ * Structure Definitions
  ******************************************************************************/
-constexpr char angular_order_parser::kXMLRoot[];
-
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-void angular_order_parser::parse(const ticpp::Element& node) {
-  if (nullptr != node.FirstChild(kXMLRoot, false)) {
-    ticpp::Element mnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
-    XML_PARSE_ATTR(mnode, m_params, enable);
-  }
-} /* parse() */
+/**
+ * @struct task_dist_entropy_params
+ * @ingroup params
+ */
+struct task_dist_entropy_params : public rcppsw::params::base_params {
+  bool enable{false};
+};
 
 NS_END(convergence, swarm, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_SWARM_CONVERGENCE_TASK_DIST_ENTROPY_PARAMS_HPP_ */

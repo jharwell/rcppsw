@@ -40,6 +40,8 @@ NS_START(rcppsw, swarm, convergence);
  * @ingroup params
  */
 struct positional_entropy_params : public rcppsw::params::base_params {
+  positional_entropy_params(void) noexcept = default;
+
   bool enable{false};
   math::ranged horizon{-1, 0};
   double horizon_delta{-1};

@@ -36,7 +36,7 @@ NS_START(rcppsw, params);
  ******************************************************************************/
 /**
  * @struct base_params
- * @ingroup common
+ * @ingroup params
  *
  * @brief A stub base class for any and all parameter types that may need
  * polymorphism or covariance.

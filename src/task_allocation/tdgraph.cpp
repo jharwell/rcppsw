@@ -32,8 +32,7 @@ NS_START(rcppsw, task_allocation);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-tdgraph::tdgraph(void)
-    : ER_CLIENT_INIT("rcppsw.ta.tdgraph") {}
+tdgraph::tdgraph(void) : ER_CLIENT_INIT("rcppsw.ta.tdgraph") {}
 
 tdgraph::~tdgraph(void) {
   vertex_iterator v_i, v_end;
@@ -48,8 +47,8 @@ tdgraph::~tdgraph(void) {
  * Static Member Functions
  ******************************************************************************/
 polled_task* tdgraph::vertex_parent(const tdgraph& graph,
-                                    const polled_task* const vertex) {
-  return graph.vertex_parent(vertex);
+                                    const polled_task* const v) {
+  return graph.vertex_parent(v);
 } /* vertex_parent() */
 
 /*******************************************************************************
@@ -119,10 +118,10 @@ tdgraph::vertex_iterator tdgraph::find_vertex_impl(const std::string& v) const {
   return it;
 } /* find_vertex_impl() */
 
-polled_task* tdgraph::vertex_parent(const polled_task* const vertex) const {
-  auto found = find_vertex_impl(vertex);
+polled_task* tdgraph::vertex_parent(const polled_task* const v) const {
+  auto found = find_vertex_impl(v);
   if (found == boost::vertices(m_graph).second) {
-    ER_WARN("No such vertex %s found in graph", vertex->name().c_str());
+    ER_WARN("No such vertex %s found in graph", v->name().c_str());
     return nullptr;
   }
   /*
@@ -133,7 +132,7 @@ polled_task* tdgraph::vertex_parent(const polled_task* const vertex) const {
   boost::tie(ie, ie_end) = boost::in_edges(*found, m_graph);
   ER_ASSERT(1 == ie_end - ie,
             "Vertex %s has more than 1 parent",
-            vertex->name().c_str());
+            v->name().c_str());
   return m_graph[boost::source(*ie, m_graph)];
 } /* vertex_parent() */
 

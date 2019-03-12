@@ -71,9 +71,10 @@ double subtask_sel_probability::calc_random(std::default_random_engine& rng) {
   return dist(rng);
 } /* calc_random() */
 
-double subtask_sel_probability::calc_brutschy2014(const time_estimate& int_est1,
-                                                  const time_estimate& int_est2,
-                                                  std::default_random_engine& rng) {
+double subtask_sel_probability::calc_brutschy2014(
+    const time_estimate& int_est1,
+    const time_estimate& int_est2,
+    std::default_random_engine& rng) {
   return calc_sigmoid(int_est1, int_est2, rng);
 } /* calc_brutschy2014() */
 

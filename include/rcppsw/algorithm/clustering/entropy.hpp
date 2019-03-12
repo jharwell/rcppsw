@@ -90,7 +90,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
                     const math::ranged& horizon,
                     double horizon_delta)
       : ER_CLIENT_INIT("rcppsw.algorithm.clustering.entropy_balch2000"),
-        mc_horizon(std::move(horizon)),
+        mc_horizon(horizon),
         mc_horizon_delta(horizon_delta),
         m_impl(std::move(impl)) {}
 

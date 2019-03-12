@@ -79,7 +79,7 @@ class vector2 {
   /**
    * @brief Initializes vector to (0,0)
    */
-  vector2(void) : m_x(0), m_y(0) {}
+  vector2(void) noexcept = default;
 
   /**
    * @brief Initializes the vector from Cartesian coordinates.
@@ -299,8 +299,10 @@ class vector2 {
   }
 
  private:
-  T m_x;
-  T m_y;
+  /* clang-format off */
+  T m_x{0};
+  T m_y{0};
+  /* clang-format on */
 };
 
 using vector2i = vector2<int>;

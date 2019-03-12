@@ -41,7 +41,7 @@ NS_START(rcppsw, task_allocation);
  * @ingroup params task_allocation
  */
 struct sigmoid_sel_params : public params::base_params {
-  std::string method{""};
+  std::string method{};
   math::sigmoid_params sigmoid{};
 };
 

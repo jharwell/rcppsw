@@ -1,5 +1,10 @@
 # RCPPSW (Reusable C++ Software)
 
+<a href="https://scan.coverity.com/projects/swarm-robotics-rcppsw">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/15203/badge.svg"/>
+</a>
+
 This is a collection of various useful algorithms/data structures/etc. that I
 have found useful for multi-agent robots research, and that do not currently
 exist in Boost, or that build on what boost provides. Includes such things as:

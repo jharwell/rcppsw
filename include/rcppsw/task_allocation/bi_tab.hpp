@@ -24,9 +24,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <random>
 #include <string>
 #include <utility>
-#include <random>
 
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/metrics/tasks/bi_tab_metrics.hpp"

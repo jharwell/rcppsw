@@ -46,7 +46,7 @@ base_metrics_collector::base_metrics_collector(std::string ofname,
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void base_metrics_collector::csv_line_write(uint timestep) {
+bool base_metrics_collector::csv_line_write(uint timestep) {
   std::string line;
   if (csv_line_build(line)) {
     if (!m_cum_only) {
@@ -57,7 +57,9 @@ void base_metrics_collector::csv_line_write(uint timestep) {
       csv_header_write();
       m_ofile << line << std::endl;
     }
+    return true;
   }
+  return false;
 } /* csv_line_write() */
 
 void base_metrics_collector::csv_header_write(void) {
