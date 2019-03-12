@@ -35,8 +35,6 @@ exist in Boost, or that build on what boost provides. Includes such things as:
  - Miscellaneous other things as kmeans clustering,
    multithreading/multiprocessing management tools.
 
-To see what's new, check out the [release notes](docs/release-notes.md).
-
 ## Pre-cloning Setup
 
 1. This project uses the build scaffolding provided by

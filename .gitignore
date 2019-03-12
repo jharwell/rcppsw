@@ -43,9 +43,9 @@ Thumbs.db
 GPATH
 GRTAGS
 GTAGS
-.clang_complete
 compile_options.json
 
 # Build process
 build
 .gdb_history
+node_modules

@@ -27,9 +27,9 @@ You may want to install these programs for development:
 
 The following development guides should be followed:
 
-- [C++ Development Guide](CXX_DEV_GUIDE.md)
-- [Git Commit Guide](GIT_COMMIT_GUIDE.md)
-- [Issue Usage Guide](ISSUE_GUIDE.md)
+- [LIBRA C++ Development Guide](https://github.com/swarm-robotics/libra/tree/devel/cxx-dev-guide.md)
+- [LIBRA Git Commit Guide](https://github.com/swarm-robotics/libra/tree/devel/git-commit-guide.md)
+- [LIBRA Issue Usage Guide](https://github.com/swarm-robotics/libra/tree/devel/git-issue-guide.md)
 
 ## General Workflow
 
@@ -46,7 +46,7 @@ The following development guides should be followed:
 
    - Push your changes regularly, so people can see that the issue is being
      actively worked on. Commit messages should follow the [Git Commit
-     Guide](GIT_COMMIT_GUIDE.md).
+     Guide](https://github.com/swarm-robotics/libra/tree/devel/git-commit-guide.md).
 
    - Merge in the `devel` branch into your branch periodicaly so that merge
      conflicts/headaches are minimized.
