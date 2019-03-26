@@ -23,6 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/task_allocation/bi_tab.hpp"
 #include <cassert>
+#include <chrono>
 
 #include "rcppsw/task_allocation/bi_tdgraph.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
@@ -61,7 +62,8 @@ bi_tab::bi_tab(const bi_tdgraph* const graph,
       m_child1(child1),
       m_child2(child2),
       m_sel_prob(&subtask_sel->sigmoid),
-      m_partition_prob(&partitioning->src_sigmoid.sigmoid) {
+      m_partition_prob(&partitioning->src_sigmoid.sigmoid),
+      m_rng(std::chrono::system_clock::now().time_since_epoch().count()) {
   ER_ASSERT(m_root->is_partitionable(),
             "Root task '%s' not partitionable",
             m_root->name().c_str());

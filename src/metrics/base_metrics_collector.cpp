@@ -65,6 +65,7 @@ bool base_metrics_collector::csv_line_write(uint timestep) {
 void base_metrics_collector::csv_header_write(void) {
   std::string header = csv_header_build("");
   m_ofile << header + "\n";
+  m_ofile.flush();
 } /* csv_header_write() */
 
 std::string base_metrics_collector::csv_header_build(const std::string& header) {

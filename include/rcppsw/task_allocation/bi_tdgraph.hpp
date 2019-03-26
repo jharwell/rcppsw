@@ -129,7 +129,7 @@ class bi_tdgraph : public tdgraph, public er::client<bi_tdgraph> {
   std::list<bi_tab>                   m_tabs{};
   bi_tab *                            m_active_tab{nullptr};
   bi_tab_sel_probability              m_tab_sw_prob;
-  std::default_random_engine          m_rng{};
+  std::default_random_engine          m_rng;
   /* clang-format on */
 };
 

@@ -23,6 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/task_allocation/bi_tdgraph.hpp"
 #include <random>
+#include <chrono>
 
 #include "rcppsw/task_allocation/bi_tdgraph_executive.hpp"
 #include "rcppsw/task_allocation/polled_task.hpp"
@@ -45,7 +46,8 @@ constexpr char bi_tdgraph::kTABInitMaxDepth[];
 bi_tdgraph::bi_tdgraph(const struct task_allocation_params* const params)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tdgraph"),
       mc_params(*params),
-      m_tab_sw_prob(&mc_params.tab_sel) {}
+      m_tab_sw_prob(&mc_params.tab_sel),
+      m_rng(std::chrono::system_clock::now().time_since_epoch().count()) {}
 
 /*******************************************************************************
  * Member Functions
@@ -80,7 +82,7 @@ void bi_tdgraph::active_tab_init(const std::string& method) {
     } /* for(&t..) */
 
     ER_INFO("Found %zu TABs at depth %d", indices.size(), max_depth);
-    std::uniform_int_distribution<> dist(0, indices.size());
+    std::uniform_int_distribution<> dist(0, indices.size() - 1);
     m_active_tab = indices[dist(m_rng)];
   } else {
     ER_FATAL_SENTINEL("Bad TAB init method '%s'", method.c_str());

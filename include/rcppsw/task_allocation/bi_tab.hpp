@@ -47,10 +47,10 @@ class bi_tdgraph;
  * @class bi_tab
  * @ingroup task_allocation
  *
- * @brief Represents Bi Task Allocation Block (TAB) which consists of a
- * root task and two subtasks the root task decomposes into. The subtasks are
- * may or may not be capable of being further decomposed, and therefore the
- * roots of additional TABs.
+ * @brief Represents Bi Task Allocation Block (TAB) which consists of a root
+ * task and two subtasks the root task decomposes into. The subtasks may or may
+ * not be capable of being further decomposed, and therefore the roots of
+ * additional TABs.
  */
 class bi_tab : public metrics::tasks::bi_tab_metrics, public er::client<bi_tab> {
  public:
@@ -74,7 +74,7 @@ class bi_tab : public metrics::tasks::bi_tab_metrics, public er::client<bi_tab> 
   void partition_prob_update(void);
 
   /**
-   * @brief Performs the next task allocation:
+   * @brief Performs the next task allocation.
    *
    * 1. Determines if partitioning should be employed at the root of TAB. If
    *    not, the active task is set to the root of the TAB and returned.
@@ -179,7 +179,7 @@ class bi_tab : public metrics::tasks::bi_tab_metrics, public er::client<bi_tab> 
   const polled_task* const   m_child2;
   subtask_sel_probability    m_sel_prob;
   partition_probability      m_partition_prob;
-  std::default_random_engine m_rng{};
+  std::default_random_engine m_rng;
   /* clang-format on */
 };
 
