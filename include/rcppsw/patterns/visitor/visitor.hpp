@@ -25,6 +25,13 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/common/common.hpp"
+#include <boost/variant/static_visitor.hpp>
+#include <boost/mpl/vector.hpp>
+#include <boost/mpl/contains.hpp>
+#include <boost/utility/enable_if.hpp>
+#include <boost/mpl/back_inserter.hpp>
+#include <boost/mpl/copy.hpp>
+#include <boost/mpl/joint_view.hpp>
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -32,44 +39,15 @@
 NS_START(rcppsw, patterns, visitor);
 
 /*******************************************************************************
+ * Macros
+ ******************************************************************************/
+#define RCPPSW_SFINAE_TYPELIST_REQUIRE(Typelist, T)                     \
+  typename boost::enable_if<typename boost::mpl::contains<TypeList,     \
+                                                          T>::type>::type * = nullptr
+
+/*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/**
- * @class visitor
- * @ingroup patterns visitor
- *
- * @brief The base visitor class from which all other classes wishing to employ
- * the visit()/accept() paradigm inherit.
- */
-class visitor {
- public:
-  virtual ~visitor(void) {}
-};
-
-/**
- * @class can_visit
- * @ingroup patterns visitor
- *
- * @brief Visitor classes should also derive from can_visit<T> for each derived
- * visitable type they want to visit.
- *
- * @tparam T The type of the object to visit.
- * @tparam R The return value of the visit function.
- */
-template<class T, typename R = void>
-class can_visit {
- public:
-  /**
-   * @brief Specifies that an object can visit another object.
-   *
-   * @param visitee The object to visit.
-   *
-   * @return The value to return, if any.
-   */
-  virtual R visit(T& visitee) = 0;
-  virtual ~can_visit(void) {}
-};
-
 /**
  * @class visitor_set_helper
  *
@@ -87,7 +65,8 @@ class visit_set_helper {
  * @ingroup patterns visitor
  *
  * @brief General case for template expansion. Provides classes the ability to
- * explicitly control what types of classes they can visit.
+ * explicitly control what types of classes they can visit (limited to the
+ * specified types AND their parent classes).
  */
 template <typename... Ts>
 class visit_set {};
@@ -99,7 +78,7 @@ class visit_set {};
  */
 template<typename T, typename... Ts>
 class visit_set<T, Ts...>: public visit_set_helper<T>,
-                             public visit_set<Ts...> {
+                           public visit_set<Ts...> {
  public:
   using visit_set_helper<T>::visit;
   using visit_set<Ts...>::visit;
@@ -114,6 +93,46 @@ template<typename T>
 class visit_set<T>: public visit_set_helper<T> {
  public:
   using visit_set_helper<T>::visit;
+};
+
+/**
+ * @brief List of types specifying the set of visitors that a \ref
+ * precise_visitor will be able to visit.
+ */
+template<typename ...Args>
+using precise_visit_set = boost::mpl::vector<Args...>;
+
+/**
+ * @brief Visitor that will only visit precisely with types that exactly match
+ * one of the types in its type list (i.e. no implicit upcasting is
+ * allowed). SFINAE FTW!
+ *
+ * @tparam VisitorImpl The name of the class containing the actual
+ *                     implementation of the visit functions.
+ * @tparam TypeList List of types that the class will be able to visit. Must be
+ * a \ref precise_visit_set.
+ *
+ * For each visitee type you want to be able to visit, you must (1) include it
+ * in the type list for the list, (2) define a function with the following exact
+ * signature:
+ *
+ * void visit(<vistee_type>&)
+ *
+ * If these conditions are not meant, then trying to call visit() will result in
+ * a compiler error.
+ */
+template <typename VisitorImpl, typename TypeList>
+struct precise_visitor : public VisitorImpl,
+                         public boost::static_visitor<void> {
+  using VisitorImpl::VisitorImpl;
+  template <typename... Args>
+  precise_visitor(Args&&... args)
+      : VisitorImpl(std::forward<Args>(args)...) {}
+
+  template <typename T, RCPPSW_SFINAE_TYPELIST_REQUIRE(TypeList, T)>
+  void visit(T& visitee) {
+    VisitorImpl::visit(visitee);
+  }
 };
 
 NS_END(rcppsw, patterns, visitor);

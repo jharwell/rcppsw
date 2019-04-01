@@ -152,18 +152,19 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
           prob_up,
           prob_down);
   /*
-   * If the current task (which is the just finished/abort task) is the root of
-   * the active TAB, then we are considering going "up" a TAB level to one that
-   * is not as specialized. If it is not the root of the active TAB, then we are
-   * considering going "down" a TAB level to one that is more specialized.
+   * If the current task (which is the just finished/aborted task) is the root
+   * of the active TAB, then we are considering going "up" a TAB level to one
+   * that is not as specialized. If it is not the root of the active TAB, then
+   * we are considering going "down" a TAB level to one that is more
+   * specialized.
    */
   std::uniform_real_distribution<> dist(0.0, 1.0);
   if (current_task == active_tab()->root()) {
-    if (prob_up <= dist(m_rng)) {
+    if (prob_up >= dist(m_rng)) {
       new_tab = tab_parent(active_tab());
     }
   } else {
-    if (prob_down <= dist(m_rng)) {
+    if (prob_down >= dist(m_rng)) {
       new_tab = tab_child(active_tab(), current_task);
     }
   }

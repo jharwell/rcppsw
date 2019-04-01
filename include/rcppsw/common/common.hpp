@@ -82,8 +82,8 @@
  */
 #define RCPPSW_WRAP_MEMFUNC(Func, Member, ...)                                \
   template <typename... Args>                                                 \
-  auto Func(Args&&... args)                                                   \
-      __VA_ARGS__->decltype(std::declval<decltype(Member)>().Func(args...)) { \
+  auto Func(Args&&... args)                                             \
+      __VA_ARGS__-> decltype(std::declval<decltype(Member)>().Func(args...)) { \
     return Member.Func(std::forward<Args>(args)...);                          \
   }
 
@@ -118,6 +118,9 @@ NS_START(rcppsw);
 #if __cplusplus < 201703L
 template <class...>
 using void_t = void;
+#else
+template<typename... Args>
+using void_t = std::void_t<Args...>;
 #endif
 
 namespace detail {

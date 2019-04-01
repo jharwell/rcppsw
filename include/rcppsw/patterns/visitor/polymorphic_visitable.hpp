@@ -52,7 +52,16 @@ class polymorphic_accept_set_helper {
  * @ingroup patterns visitor
  *
  * @brief Allows polymorphic classes (those with a pure virtual member in a base
- * class) to accept visitors of specific types.
+ * class) to accept visitors of specific types. Allows implicit conversion to
+ * base classes if both base/derived types are present in the set.
+ *
+ * This is more "single dispatch" than "double dispatch", and so is not
+ * precisely the visitor pattern, as classes deriving from this class need to
+ * implement the second part of the dispatch themselves. However, for situations
+ * where you have disparate classes that all share a common interface this is a
+ * far more elegant solution than a brittle series of if-else to determine the
+ * proper type of the object via dynamic_cast<> before calling a chained visit()
+ * function.
  */
 template <typename... Ts>
 class polymorphic_accept_set {};
@@ -80,9 +89,6 @@ class polymorphic_accept_set<T>: public polymorphic_accept_set_helper<T> {
  public:
   using polymorphic_accept_set_helper<T>::accept;
 };
-
-template<typename T>
-using polymorphic_will_accept = polymorphic_accept_set_helper<T>;
 
 NS_END(rcppsw, patterns, visitor);
 

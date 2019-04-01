@@ -26,7 +26,6 @@
  ******************************************************************************/
 #include <string>
 #include "rcppsw/math/range.hpp"
-#include "rcppsw/patterns/visitor/visitable.hpp"
 #include "rcppsw/task_allocation/executable_task.hpp"
 #include "rcppsw/task_allocation/taskable.hpp"
 
