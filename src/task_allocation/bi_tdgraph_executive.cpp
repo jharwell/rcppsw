@@ -138,9 +138,6 @@ void bi_tdgraph_executive::handle_task_abort(polled_task* task) {
 void bi_tdgraph_executive::handle_task_finish(polled_task* task) {
   task->exec_time_update();
   task->interface_time_update();
-  for (auto& cb : task_finish_notify()) {
-    cb(task);
-  } /* for(cb..) */
 
   /* Not all tasks have interfaces, so this can't be an assert */
   if (-1 != task->task_last_active_interface() && update_interface_ests()) {
@@ -151,6 +148,11 @@ void bi_tdgraph_executive::handle_task_finish(polled_task* task) {
   if (update_exec_ests()) {
     task->exec_estimate_update(task->exec_time());
   }
+
+  for (auto& cb : task_finish_notify()) {
+    cb(task);
+  } /* for(cb..) */
+
   task->exec_time_reset();
   task->exec_time_update();
   task->interface_time_reset();
