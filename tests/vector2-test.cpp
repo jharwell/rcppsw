@@ -96,4 +96,7 @@ CATCH_TEST_CASE("Operator test", "[vector2]") {
   CATCH_REQUIRE(t2 + t1 == math::vector2d(1, 2.5));
   CATCH_REQUIRE(t0 * 3 == t0);
   CATCH_REQUIRE(t2 / 2 == math::vector2d(0.5, 0.5));
+  CATCH_REQUIRE(t0 < t1);
+  CATCH_REQUIRE(!(t1 < t0));
+  CATCH_REQUIRE(t1 < t2);
 }

@@ -228,8 +228,10 @@ class vector2 {
    * @brief Needed for using vectors as keys in a map.
    */
   bool operator<(const vector2& other) const {
-    return m_x < other.m_x && m_y < other.m_y;
+    return (m_x < other.m_x) ||
+        ((m_x == other.m_x) && (m_y < other.m_y));
   }
+
   /**
    * @brief Returns if this vector and the passed one are not equal by checking
    * coordinates for equality.
