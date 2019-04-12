@@ -26,6 +26,8 @@
  ******************************************************************************/
 #include <fstream>
 #include <string>
+#include <list>
+
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
@@ -70,6 +72,8 @@ class base_metrics_collector {
    */
   virtual void reset(void);
 
+  virtual void collect(const rcppsw::metrics::base_metrics& metrics) = 0;
+
   /**
    * @brief Reset metrics at the end of an interval.
    *
@@ -78,9 +82,8 @@ class base_metrics_collector {
    * reset after the specified number of timesteps in the interval has elapsed.
   */
   void interval_reset(void);
-
-  void timestep_inc(void) { ++m_timestep; }
   uint timestep(void) const { return m_timestep; }
+  void timestep_inc(void) { ++m_timestep; }
 
   /**
    * @brief Reset metrics at the end of a timestep.
@@ -109,8 +112,6 @@ class base_metrics_collector {
   void interval(int interval) { m_interval = interval; }
   int interval(void) const { return m_interval; }
 
-  virtual void collect(const rcppsw::metrics::base_metrics& metrics) = 0;
-
  protected:
   /**
    * @brief Reset some metrics (possibly).
@@ -127,15 +128,10 @@ class base_metrics_collector {
   virtual void reset_after_timestep(void) {}
 
   /**
-   * @brief Build the header line for a particular collector.
-   *
-   * The default one only contains a single column: the current timestep.
-   *
-   * @param header The current header.
-   *
-   * @return The built header.
+   * @brief Return a list of additional columns that should be in the emitted
+   * .csv file for the collector.
    */
-  virtual std::string csv_header_build(const std::string& header);
+  virtual std::list<std::string> csv_header_cols(void) const = 0;
 
   /**
    * @brief Build the next line of metrics
@@ -149,13 +145,61 @@ class base_metrics_collector {
   virtual bool csv_line_build(std::string& line) = 0;
 
   /**
-   * @brief Write out the default header, which only contains "clock;"
+   * @brief Return a list of default columns that should be include in (almost)
+   * all emitted .csv files for the collector.
+   */
+  std::list<std::string> dflt_csv_header_cols(void) const {
+    return {"clock"};
+  }
+
+  /**
+   * @brief Write out constructed header.
    */
   void csv_header_write(void);
 
   const std::string& separator(void) const { return m_separator; }
 
+  /**
+   * @brief Return a string of the average value of a sum of SOMETHING over an
+   * interval + separator.
+   */
+  template<class T>
+  std::string csv_entry_intavg(T sum) const {
+    return std::to_string(static_cast<double>(sum) / interval()) + separator();
+  }
+
+  /**
+   * @brief Return a string of the average value of a sum of SOMETHING over the
+   * elapsed simulation time so far + separator.
+   */
+  template<class T>
+  std::string csv_entry_tsavg(T sum) const {
+    return std::to_string(static_cast<double>(sum) / (timestep() + 1)) +
+        separator();
+  }
+
+  /**
+   * @brief Return a string of the average value of a sum of SOMETHING divided
+   * by a COUNT + separator. If the count is 0, then "0" + separator is
+   * returned.
+   */
+  template<class T, class U>
+  std::string csv_entry_domavg(T sum, U count) const {
+    return (count > 0) ?
+        std::to_string(static_cast<double>(sum) /
+                       static_cast<double>(count)) + separator() :
+        "0" + separator();
+  }
+
  private:
+  /**
+   * @brief Build the header line for a particular collector using \ref
+   * csv_header_cols().
+   *
+   * @return The built header.
+   */
+  std::string csv_header_build(void) const;
+
   /* clang-format off */
   int           m_interval;
   uint          m_timestep;

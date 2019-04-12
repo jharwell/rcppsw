@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <algorithm>
 #include "rcppsw/math/expression.hpp"
+#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -49,16 +50,20 @@ NS_START(rcppsw, swarm);
  * - The pheromone decay parameter.
  * - The previous value of the pheromone density.
  */
-class pheromone_density : public math::expression<double> {
+class pheromone_density : public math::expression<double>,
+                          public er::client<pheromone_density> {
  public:
   /**
    * @brief Convenience constant for use it adding pheromones to a density.
    */
   static constexpr double kUNIT_QUANTITY = 1.0;
 
-  pheromone_density(void) : pheromone_density{0.0} {}
+  pheromone_density(void) : pheromone_density{-1.0} {}
+
   explicit pheromone_density(double rho)
-      : expression(), m_delta(0), m_rho(rho) {}
+      : ER_CLIENT_INIT("rcppsw.swarm.pheromone"),
+        m_delta(0),
+        m_rho(rho) {}
 
   void rho(double rho) { m_rho = rho; }
 
@@ -77,6 +82,7 @@ class pheromone_density : public math::expression<double> {
    * @return The new density.
    */
   double update(void) {
+    ER_ASSERT(m_rho > 0, "Bad rho: %f", m_rho);
     double res = std::max<double>((1.0 - m_rho) * last_result() + m_delta, 0.0);
     m_delta = 0;
     return set_result(res);
@@ -119,11 +125,39 @@ class pheromone_density : public math::expression<double> {
 
   /**
    * @brief Subtract one pheromone density object from another. Only subtracts
-   * the the current values, ignored the current deltas for each object.
+   * the the current values, ignoring the current deltas for each object.
    */
   pheromone_density& operator-=(const pheromone_density& other) {
     this->set_result(this->last_result() - other.last_result());
     return *this;
+  }
+
+  /**
+   * @brief Add two pheromone density objects. Only adds the current values,
+   * ignoring the current deltas for each object.
+   */
+  pheromone_density operator+(const pheromone_density& other) const {
+    pheromone_density res(*this);
+    res += other;
+    return res;
+  }
+
+  /**
+   * @brief Add one pheromone density to another. Only adds the the current
+   * values, ignoring the current deltas for each object.
+   */
+  pheromone_density& operator+=(const pheromone_density& other) {
+    this->set_result(this->last_result() + other.last_result());
+    return *this;
+  }
+  /**
+   * @brief Divides a density by a constant factor, ignoring current deltas for
+   * the object.
+   */
+  pheromone_density operator/(double div) const {
+    pheromone_density res(*this);
+    res.set_result(this->last_result() / div);
+    return res;
   }
 
  private:

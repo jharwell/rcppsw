@@ -40,25 +40,28 @@ convergence_metrics_collector::convergence_metrics_collector(
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-std::string convergence_metrics_collector::csv_header_build(
-    const std::string& header) {
-  return base_metrics_collector::csv_header_build(header) +
-      /* clang-format off */
-      "conv_epsilon" + separator() +
-      "int_avg_interact_deg_raw" + separator() +
-      "int_avg_interact_deg_norm" + separator() +
-      "int_avg_interact_deg_converged" + separator() +
-      "int_avg_ang_order_raw" + separator() +
-      "int_avg_ang_order_norm" + separator() +
-      "int_avg_ang_order_converged" + separator() +
-      "int_avg_pos_entropy_raw" + separator() +
-      "int_avg_pos_entropy_norm" + separator() +
-      "int_avg_pos_entropy_converged" + separator() +
-      "int_avg_task_dist_entropy_raw" + separator() +
-      "int_avg_task_dist_entropy_norm" + separator() +
-      "int_avg_task_dist_entropy_converged" + separator();
-  /* clang-format on */
-} /* csv_header_build() */
+std::list<std::string> convergence_metrics_collector::csv_header_cols(void) const {
+  auto merged = dflt_csv_header_cols();
+  auto cols = std::list<std::string>{
+    /* clang-format off */
+    "conv_epsilon",
+    "int_avg_interact_deg_raw",
+    "int_avg_interact_deg_norm",
+    "int_avg_interact_deg_converged",
+    "int_avg_ang_order_raw",
+    "int_avg_ang_order_norm",
+    "int_avg_ang_order_converged",
+    "int_avg_pos_entropy_raw",
+    "int_avg_pos_entropy_norm",
+    "int_avg_pos_entropy_converged",
+    "int_avg_task_dist_entropy_raw",
+    "int_avg_task_dist_entropy_norm",
+    "int_avg_task_dist_entropy_converged"
+    /* clang-format on */
+  };
+  merged.splice(merged.end(), cols);
+  return merged;
+} /* csv_header_cols() */
 
 bool convergence_metrics_collector::csv_line_build(std::string& line) {
   if (!((timestep() + 1) % interval() == 0)) {
@@ -72,40 +75,20 @@ bool convergence_metrics_collector::csv_line_build(std::string& line) {
    * are almost the same thing, and much more useful when calculating
    * convergence.
    */
-  build_interact(line);
-  build_ang_order(line);
-  build_pos_entropy(line);
-  build_tdist_entropy(line);
+  line += csv_entry_intavg(m_tdist_ent_stats.raw);
+  line += csv_entry_intavg(m_tdist_ent_stats.norm);
+  line += csv_entry_intavg(m_tdist_ent_stats.converged);
+
+  line += csv_entry_intavg(m_pos_ent_stats.raw);
+  line += csv_entry_intavg(m_pos_ent_stats.norm);
+  line += csv_entry_intavg(m_pos_ent_stats.converged);
+
+  line += csv_entry_intavg(m_order_stats.raw);
+  line += csv_entry_intavg(m_order_stats.norm);
+  line += csv_entry_intavg(m_order_stats.converged);
+
   return true;
 } /* csv_line_build() */
-
-void convergence_metrics_collector::build_tdist_entropy(std::string& line) {
-  line += std::to_string(m_tdist_ent_stats.raw / interval()) + separator();
-  line += std::to_string(m_tdist_ent_stats.norm / interval()) + separator();
-  line += std::to_string(static_cast<double>(m_tdist_ent_stats.converged) /
-                         interval()) + separator();
-} /* build_tdist_entropy() */
-
-void convergence_metrics_collector::build_pos_entropy(std::string& line) {
-  line += std::to_string(m_pos_ent_stats.raw / interval()) + separator();
-  line += std::to_string(m_pos_ent_stats.norm / interval()) + separator();
-  line += std::to_string(static_cast<double>(m_pos_ent_stats.converged) /
-                         interval()) + separator();
-} /* build_pos_entropy() */
-
-void convergence_metrics_collector::build_interact(std::string& line) {
-  line += std::to_string(m_interact_stats.raw / interval()) + separator();
-  line += std::to_string(m_interact_stats.norm / interval()) + separator();
-  line += std::to_string(static_cast<double>(m_interact_stats.converged) /
-                         interval()) + separator();
-} /* build_interact() */
-
-void convergence_metrics_collector::build_ang_order(std::string& line) {
-  line += std::to_string(m_order_stats.raw / interval()) + separator();
-  line += std::to_string(m_order_stats.norm / interval()) + separator();
-  line += std::to_string(static_cast<double>(m_order_stats.converged)
-                         / interval()) + separator();
-} /* build_ang_order() */
 
 void convergence_metrics_collector::collect(const metrics::base_metrics& metrics) {
   auto& m = dynamic_cast<const convergence_metrics&>(metrics);

@@ -41,26 +41,29 @@ execution_metrics_collector::execution_metrics_collector(const std::string& ofna
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-std::string execution_metrics_collector::csv_header_build(
-    const std::string& header) {
-  /* clang-format off */
-  return base_metrics_collector::csv_header_build(header) +
-      "int_avg_exec_time" + separator() +
-      "cum_avg_exec_time" + separator() +
-      "int_avg_interface_time" + separator() +
-      "cum_avg_interface_time" + separator() +
-      "int_avg_exec_estimate" + separator() +
-      "cum_avg_exec_estimate" + separator() +
-      "int_avg_interface_estimate" + separator() +
-      "cum_avg_interface_estimate" + separator() +
-      "int_avg_abort_count" + separator() +
-      "cum_avg_abort_count" + separator() +
-      "int_avg_complete_count" + separator() +
-      "cum_avg_complete_count" + separator() +
-      "int_avg_interface_count" + separator() +
-      "cum_avg_interface_count" + separator();
-  /* clang-format on */
-} /* csv_header_build() */
+std::list<std::string> execution_metrics_collector::csv_header_cols(void) const {
+  auto merged = dflt_csv_header_cols();
+  auto cols = std::list<std::string>{
+    /* clang-format off */
+    "int_avg_exec_time",
+    "cum_avg_exec_time",
+    "int_avg_interface_time",
+    "cum_avg_interface_time",
+    "int_avg_exec_estimate",
+    "cum_avg_exec_estimate",
+    "int_avg_interface_estimate",
+    "cum_avg_interface_estimate",
+    "int_avg_abort_count",
+    "cum_avg_abort_count",
+    "int_avg_complete_count",
+    "cum_avg_complete_count",
+    "int_avg_interface_count",
+    "cum_avg_interface_count"
+    /* clang-format on */
+  };
+  merged.splice(merged.end(), cols);
+  return merged;
+} /* csv_header_cols() */
 
 void execution_metrics_collector::reset(void) {
   base_metrics_collector::reset();
@@ -120,62 +123,22 @@ bool execution_metrics_collector::csv_line_build(std::string& line) {
   uint int_n_allocs = m_int_complete_count + m_int_abort_count;
   uint cum_n_allocs = m_cum_complete_count + m_cum_abort_count;
 
-  line +=
-      (int_n_allocs > 0) ? std::to_string(m_int_exec_time / int_n_allocs) : "0";
-  line += separator();
+  line += csv_entry_domavg(m_int_exec_time, int_n_allocs);
+  line += csv_entry_domavg(m_cum_exec_time, cum_n_allocs);
+  line += csv_entry_domavg(m_int_interface_time, int_n_allocs);
+  line += csv_entry_domavg(m_cum_interface_time, cum_n_allocs);
+  line += csv_entry_domavg(m_int_exec_estimate.last_result(), int_n_allocs);
+  line += csv_entry_domavg(m_cum_exec_estimate.last_result(), cum_n_allocs);
 
-  line +=
-      (cum_n_allocs > 0) ? std::to_string(m_cum_exec_time / cum_n_allocs) : "0";
-  line += separator();
+  line += csv_entry_domavg(m_int_interface_estimate.last_result(), int_n_allocs);
+  line += csv_entry_domavg(m_cum_interface_estimate.last_result(), cum_n_allocs);
 
-  line += (int_n_allocs > 0)
-              ? std::to_string(m_int_interface_time / int_n_allocs)
-              : "0";
-  line += separator();
-
-  line += (cum_n_allocs > 0)
-              ? std::to_string(m_cum_interface_time / cum_n_allocs)
-              : "0";
-  line += separator();
-
-  line +=
-      (int_n_allocs > 0)
-          ? std::to_string(m_int_exec_estimate.last_result() / (int_n_allocs))
-          : "0";
-  line += separator();
-  line +=
-      (cum_n_allocs > 0)
-          ? std::to_string(m_cum_exec_estimate.last_result() / (cum_n_allocs))
-          : "0";
-  line += separator();
-  line += (int_n_allocs > 0)
-              ? std::to_string(m_int_interface_estimate.last_result() /
-                               (int_n_allocs))
-              : "0";
-  line += separator();
-  line += (cum_n_allocs > 0)
-              ? std::to_string(m_cum_interface_estimate.last_result() /
-                               (cum_n_allocs))
-              : "0";
-  line += separator();
-  line += std::to_string(static_cast<double>(m_int_abort_count) / interval()) +
-          separator();
-  line +=
-      std::to_string(static_cast<double>(m_cum_abort_count) / (timestep() + 1)) +
-      separator();
-  line +=
-      std::to_string(static_cast<double>(m_int_complete_count) / interval()) +
-      separator();
-  line += std::to_string(static_cast<double>(m_cum_complete_count) /
-                         (timestep() + 1)) +
-          separator();
-  line +=
-      std::to_string(static_cast<double>(m_int_interface_count) / interval()) +
-      separator();
-  line += std::to_string(static_cast<double>(m_cum_interface_count) /
-                         (timestep() + 1)) +
-          separator();
-
+  line += csv_entry_intavg(m_int_abort_count);
+  line += csv_entry_tsavg(m_cum_abort_count);
+  line += csv_entry_intavg(m_int_complete_count);
+  line += csv_entry_tsavg(m_cum_complete_count);
+  line += csv_entry_intavg(m_int_interface_count);
+  line += csv_entry_tsavg(m_cum_interface_count);
   return true;
 } /* store_foraging_stats() */
 

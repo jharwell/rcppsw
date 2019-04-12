@@ -23,6 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/metrics/base_metrics_collector.hpp"
 #include <experimental/filesystem>
+#include <numeric>
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -63,14 +64,16 @@ bool base_metrics_collector::csv_line_write(uint timestep) {
 } /* csv_line_write() */
 
 void base_metrics_collector::csv_header_write(void) {
-  std::string header = csv_header_build("");
+  auto cols = csv_header_cols();
+  std::string header = std::accumulate(cols.begin(),
+                                       cols.end(),
+                                       std::string(),
+                                       [&](const auto& sum, const auto& col) {
+                                         return sum + col + separator();
+                                       });
   m_ofile << header + "\n";
   m_ofile.flush();
 } /* csv_header_write() */
-
-std::string base_metrics_collector::csv_header_build(const std::string& header) {
-  return header + "clock" + m_separator;
-} /* csv_header_build() */
 
 void base_metrics_collector::reset(void) {
   /* Open output file and truncate */

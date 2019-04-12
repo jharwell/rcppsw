@@ -50,35 +50,34 @@ bi_tdgraph_metrics_collector::bi_tdgraph_metrics_collector(
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-std::string bi_tdgraph_metrics_collector::csv_header_build(
-    const std::string& header) {
-  std::string line = base_metrics_collector::csv_header_build(header);
+std::list<std::string> bi_tdgraph_metrics_collector::csv_header_cols(void) const {
+  std::list<std::string> cols = dflt_csv_header_cols();
 
   for (size_t i = 0; i < m_int_depth_counts.size(); ++i) {
-    line += "int_avg_depth" + std::to_string(i) + "_count" + separator();
+    cols.push_back("int_avg_depth" + std::to_string(i) + "_count");
   } /* for(i..) */
 
   for (size_t i = 0; i < m_cum_depth_counts.size(); ++i) {
-    line += "cum_avg_depth" + std::to_string(i) + "_count" + separator();
+    cols.push_back("cum_avg_depth" + std::to_string(i) + "_count");
   } /* for(i..) */
 
   for (size_t i = 0; i < m_int_task_counts.size(); ++i) {
-    line += "int_avg_task" + std::to_string(i) + "_count" + separator();
+    cols.push_back("int_avg_task" + std::to_string(i) + "_count");
   } /* for(i..) */
 
   for (size_t i = 0; i < m_cum_task_counts.size(); ++i) {
-    line += "cum_avg_task" + std::to_string(i) + "_count" + separator();
+    cols.push_back("cum_avg_task" + std::to_string(i) + "_count");
   } /* for(i..) */
 
   for (size_t i = 0; i < m_int_tab_counts.size(); ++i) {
-    line += "int_avg_tab" + std::to_string(i) + "_count" + separator();
+    cols.push_back("int_avg_tab" + std::to_string(i) + "_count");
   } /* for(i..) */
 
   for (size_t i = 0; i < m_cum_tab_counts.size(); ++i) {
-    line += "cum_avg_tab" + std::to_string(i) + "_count" + separator();
+    cols.push_back("cum_avg_tab" + std::to_string(i) + "_count");
   } /* for(i..) */
-  return line;
-} /* csv_header_build() */
+  return cols;
+} /* csv_header_cols() */
 
 void bi_tdgraph_metrics_collector::reset(void) {
   base_metrics_collector::reset();
@@ -103,33 +102,27 @@ bool bi_tdgraph_metrics_collector::csv_line_build(std::string& line) {
   }
 
   for (auto& count : m_int_depth_counts) {
-    line +=
-        std::to_string(static_cast<double>(count) / interval()) + separator();
+    line += csv_entry_intavg(count);
   } /* for(count..) */
 
   for (auto& count : m_cum_depth_counts) {
-    line += std::to_string(static_cast<double>(count) / (timestep() + 1)) +
-            separator();
+    line += csv_entry_tsavg(count);
   } /* for(&count..) */
 
   for (auto& count : m_int_task_counts) {
-    line +=
-        std::to_string(static_cast<double>(count) / interval()) + separator();
+    line += csv_entry_intavg(count);
   } /* for(&count..) */
 
   for (auto& count : m_cum_task_counts) {
-    line += std::to_string(static_cast<double>(count) / (timestep() + 1)) +
-            separator();
+    line += csv_entry_tsavg(count);
   } /* for(&count..) */
 
   for (auto& count : m_int_tab_counts) {
-    line +=
-        std::to_string(static_cast<double>(count) / interval()) + separator();
+    line += csv_entry_intavg(count);
   } /* for(&count..) */
 
   for (auto& count : m_cum_tab_counts) {
-    line += std::to_string(static_cast<double>(count) / (timestep() + 1)) +
-            separator();
+    line += csv_entry_tsavg(count);
   } /* for(&count..) */
 
   return true;

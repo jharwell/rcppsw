@@ -25,7 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include <vector>
+#include <list>
 
 #include "rcppsw/metrics/base_metrics_collector.hpp"
 
@@ -58,7 +58,7 @@ class bi_tab_metrics_collector : public base_metrics_collector {
   void collect(const rcppsw::metrics::base_metrics& metrics) override;
   void reset_after_interval(void) override;
 
-  std::string csv_header_build(const std::string& header) override;
+  std::list<std::string> csv_header_cols(void) const override;
   bool csv_line_build(std::string& line) override;
 
  private:

@@ -41,28 +41,31 @@ bi_tab_metrics_collector::bi_tab_metrics_collector(const std::string& ofname,
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-std::string bi_tab_metrics_collector::csv_header_build(const std::string& header) {
-  /* clang-format off */
-  std::string line = base_metrics_collector::csv_header_build(header);
-  return line + \
-      "int_avg_subtask1_count" + separator() +
-      "cum_avg_subtask1_count" + separator() +
-      "int_avg_subtask2_count" + separator() +
-      "cum_avg_subtask2_count" + separator() +
-      "int_avg_partition_count" + separator() +
-      "cum_avg_partition_count" + separator() +
-      "int_avg_no_partition_count" + separator() +
-      "cum_avg_no_partition_count" + separator() +
-      "int_avg_task_sw_count" + separator() +
-      "cum_avg_task_sw_count" + separator() +
-      "int_avg_task_depth_sw_count" + separator() +
-      "cum_avg_task_depth_sw_count" + separator() +
-      "int_avg_partition_prob" + separator() +
-      "cum_avg_partition_prob" + separator() +
-      "int_avg_subtask_selection_prob" + separator() +
-      "cum_avg_subtask_selection_prob" + separator();
-  /* clang-format on */
-} /* csv_header_build() */
+std::list<std::string> bi_tab_metrics_collector::csv_header_cols(void) const {
+  auto merged = dflt_csv_header_cols();
+  auto cols = std::list<std::string>{
+    /* clang-format off */
+      "int_avg_subtask1_count",
+      "cum_avg_subtask1_count",
+      "int_avg_subtask2_count",
+      "cum_avg_subtask2_count",
+      "int_avg_partition_count",
+      "cum_avg_partition_count",
+      "int_avg_no_partition_count",
+      "cum_avg_no_partition_count",
+      "int_avg_task_sw_count",
+      "cum_avg_task_sw_count",
+      "int_avg_task_depth_sw_count",
+      "cum_avg_task_depth_sw_count",
+      "int_avg_partition_prob",
+      "cum_avg_partition_prob",
+      "int_avg_subtask_selection_prob",
+      "cum_avg_subtask_selection_prob"
+      /* clang-format on */
+  };
+  merged.splice(merged.end(), cols);
+  return merged;
+} /* csv_header_cols() */
 
 void bi_tab_metrics_collector::reset(void) {
   base_metrics_collector::reset();
@@ -106,75 +109,29 @@ bool bi_tab_metrics_collector::csv_line_build(std::string& line) {
   double int_allocs = m_int_partition_count + m_int_no_partition_count;
   double cum_allocs = m_cum_partition_count + m_cum_no_partition_count;
 
-  line += (int_allocs > 0) ? std::to_string(m_int_subtask1_count / int_allocs)
-                           : "0";
-  line += separator();
+  line += csv_entry_domavg(m_int_subtask1_count, int_allocs);
+  line += csv_entry_domavg(m_cum_subtask1_count, cum_allocs);
 
-  line += (cum_allocs > 0) ? std::to_string(m_cum_subtask1_count / cum_allocs)
-                           : "0";
-  line += separator();
+  line += csv_entry_domavg(m_int_subtask2_count, int_allocs);
+  line += csv_entry_domavg(m_cum_subtask2_count, cum_allocs);
 
-  line += (int_allocs > 0) ? std::to_string(m_int_subtask2_count / int_allocs)
-                           : "0";
-  line += separator();
+  line += csv_entry_domavg(m_int_partition_count, int_allocs);
+  line += csv_entry_domavg(m_cum_partition_count, cum_allocs);
 
-  line += (cum_allocs > 0) ? std::to_string(m_cum_subtask2_count / cum_allocs)
-                           : "0";
-  line += separator();
+  line += csv_entry_domavg(m_int_no_partition_count, int_allocs);
+  line += csv_entry_domavg(m_cum_no_partition_count, cum_allocs);
 
-  line += (int_allocs > 0) ? std::to_string(m_int_partition_count / int_allocs)
-                           : "0";
-  line += separator();
+  line += csv_entry_domavg(m_int_task_sw_count, int_allocs);
+  line += csv_entry_domavg(m_cum_task_sw_count, cum_allocs);
 
-  line += (cum_allocs > 0) ? std::to_string(m_cum_partition_count / cum_allocs)
-                           : "0";
-  line += separator();
+  line += csv_entry_domavg(m_int_task_depth_sw_count, int_allocs);
+  line += csv_entry_domavg(m_cum_task_depth_sw_count, cum_allocs);
 
-  line += (int_allocs > 0)
-              ? std::to_string(m_int_no_partition_count / int_allocs)
-              : "0";
-  line += separator();
+  line += csv_entry_domavg(m_int_partition_prob, int_allocs);
+  line += csv_entry_domavg(m_cum_partition_prob, cum_allocs);
 
-  line += (cum_allocs > 0)
-              ? std::to_string(m_cum_no_partition_count / cum_allocs)
-              : "0";
-  line += separator();
-
-  line +=
-      (int_allocs > 0) ? std::to_string(m_int_task_sw_count / int_allocs) : "0";
-  line += separator();
-
-  line +=
-      (cum_allocs > 0) ? std::to_string(m_cum_task_sw_count / cum_allocs) : "0";
-  line += separator();
-
-  line += (int_allocs > 0)
-              ? std::to_string(m_int_task_depth_sw_count / int_allocs)
-              : "0";
-  line += separator();
-
-  line += (cum_allocs > 0)
-              ? std::to_string(m_cum_task_depth_sw_count / cum_allocs)
-              : "0";
-  line += separator();
-
-  line += (int_allocs > 0) ? std::to_string(m_int_partition_prob / int_allocs)
-                           : "0";
-  line += separator();
-
-  line += (cum_allocs > 0) ? std::to_string(m_cum_partition_prob / cum_allocs)
-                           : "0";
-  line += separator();
-
-  line += (int_allocs > 0)
-              ? std::to_string(m_int_subtask_selection_prob / int_allocs)
-              : "0";
-  line += separator();
-
-  line += (cum_allocs > 0)
-              ? std::to_string(m_cum_subtask_selection_prob / cum_allocs)
-              : "0";
-  line += separator();
+  line += csv_entry_domavg(m_int_subtask_selection_prob, int_allocs);
+  line += csv_entry_domavg(m_cum_subtask_selection_prob, cum_allocs);
   return true;
 } /* store_foraging_stats() */
 
