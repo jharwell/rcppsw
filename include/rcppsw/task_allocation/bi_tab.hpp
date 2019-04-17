@@ -59,10 +59,13 @@ class bi_tab : public metrics::tasks::bi_tab_metrics, public er::client<bi_tab> 
   static constexpr char kSubtaskSelSrcExec[] = "exec";
   static constexpr char kSubtaskSelSrcInterface[] = "interface";
 
-  bi_tab(const bi_tdgraph* graph,
-         polled_task* root,
-         const polled_task* child1,
-         const polled_task* child2,
+  struct elements {
+    const bi_tdgraph* graph;
+    polled_task*      root;
+    polled_task*      child1;
+    polled_task*      child2;
+  };
+  bi_tab(const struct elements* elts,
          const struct task_partition_params* partitioning,
          const struct src_sigmoid_sel_params* subtask_sel);
 
@@ -128,7 +131,6 @@ class bi_tab : public metrics::tasks::bi_tab_metrics, public er::client<bi_tab> 
   bool task_is_child(const polled_task* task) const;
 
   const polled_task* root(void) const { return m_root; }
-  polled_task* root(void) { return m_root; }
   const polled_task* child1(void) const { return m_child1; }
   const polled_task* child2(void) const { return m_child2; }
   const polled_task* last_task(void) const { return m_last_task; }
@@ -168,15 +170,15 @@ class bi_tab : public metrics::tasks::bi_tab_metrics, public er::client<bi_tab> 
   const std::string          mc_partition_input;
   const std::string          mc_subtask_sel_input;
   const bi_tdgraph* const    mc_graph;
+  polled_task* const         m_root;
+  polled_task* const         m_child1;
+  polled_task* const         m_child2;
 
   bool                       m_employed_partitioning{false};
   const polled_task*         m_last_task{nullptr};
   const polled_task*         m_last_subtask{nullptr};
   const polled_task*         m_active_task{nullptr};
 
-  polled_task* const         m_root;
-  const polled_task* const   m_child1;
-  const polled_task* const   m_child2;
   subtask_sel_probability    m_sel_prob;
   partition_probability      m_partition_prob;
   std::default_random_engine m_rng;

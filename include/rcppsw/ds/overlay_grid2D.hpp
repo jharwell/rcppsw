@@ -94,6 +94,15 @@ class overlay_grid2D : public base_overlay_grid2D<T> {
     index_range y1(y_range.first, y_range.second, 1);
     return grid_view(m_cells[indices[x1][y1]]);
   }
+  const_grid_view subcircle(uint x, uint y, uint radius) const {
+    auto x_range = base_overlay_grid2D<T>::circle_xrange_at_point(x, radius);
+    auto y_range = base_overlay_grid2D<T>::circle_yrange_at_point(y, radius);
+    typename grid_type::index_gen indices;
+
+    index_range x1(x_range.first, x_range.second, 1);
+    index_range y1(y_range.first, y_range.second, 1);
+    return const_grid_view(m_cells[indices[x1][y1]]);
+  }
 
   /**
    * @brief Create a subgrid (really an array view) from a grid. The grid is

@@ -41,7 +41,7 @@ void waveform_xml_parser::parse(const ticpp::Element& node) {
   if (nullptr == node.FirstChild(xml_root(), false)) {
     return;
   }
-  ticpp::Element vnode = node_get(const_cast<ticpp::Element&>(node), xml_root());
+  ticpp::Element vnode = node_get(node, xml_root());
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
 

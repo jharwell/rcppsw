@@ -56,7 +56,7 @@ namespace factory = rcppsw::patterns::factory;
  */
 class xml_param_repository {
  public:
-  xml_param_repository(void) : m_parsers(), m_param_types(), m_factory() {}
+  xml_param_repository(void) = default;
 
   /**
    * @brief Call the \ref xml_param_parser::parse() function on all parsers
@@ -144,10 +144,10 @@ class xml_param_repository {
 
  private:
   /* clang-format off */
-  std::map<std::string, xml_param_parser*>         m_parsers;
-  std::map<std::type_index, std::string>           m_param_types;
+  std::map<std::string, xml_param_parser*>         m_parsers{};
+  std::map<std::type_index, std::string>           m_param_types{};
   factory::sharing_factory<xml_param_parser,
-                           uint>                   m_factory;
+                           uint>                   m_factory{};
   /* clang-format on */
 };
 

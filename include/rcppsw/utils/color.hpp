@@ -47,26 +47,26 @@ class color {
  public:
   color(void) = default;
 
-  static color kBLACK;
-  static color kWHITE;
-  static color kRED;
-  static color kGREEN;
-  static color kBLUE;
-  static color kMAGENTA;
-  static color kCYAN;
-  static color kYELLOW;
-  static color kORANGE;
-  static color kBROWN;
-  static color kPURPLE;
-  static color kGRAY10;
-  static color kGRAY20;
-  static color kGRAY30;
-  static color kGRAY40;
-  static color kGRAY50;
-  static color kGRAY60;
-  static color kGRAY70;
-  static color kGRAY80;
-  static color kGRAY90;
+  static const color kBLACK;
+  static const color kWHITE;
+  static const color kRED;
+  static const color kGREEN;
+  static const color kBLUE;
+  static const color kMAGENTA;
+  static const color kCYAN;
+  static const color kYELLOW;
+  static const color kORANGE;
+  static const color kBROWN;
+  static const color kPURPLE;
+  static const color kGRAY10;
+  static const color kGRAY20;
+  static const color kGRAY30;
+  static const color kGRAY40;
+  static const color kGRAY50;
+  static const color kGRAY60;
+  static const color kGRAY70;
+  static const color kGRAY80;
+  static const color kGRAY90;
 
   color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255)
       : m_channels{red, green, blue, alpha} {}

@@ -42,7 +42,7 @@ constexpr char src_sigmoid_sel_xml_parser::kXMLRoot[];
 void src_sigmoid_sel_xml_parser::parse(const ticpp::Element& node) {
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
-  ticpp::Element pnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
+  ticpp::Element pnode = node_get(node, kXMLRoot);
   m_sigmoid.parse(pnode);
   m_params->sigmoid = *m_sigmoid.parse_results();
   XML_PARSE_ATTR(pnode, m_params, input_src);

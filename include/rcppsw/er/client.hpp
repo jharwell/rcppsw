@@ -276,7 +276,7 @@ class client {
       }
     } /* for(&a..) */
 
-    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(mc_file_layout);
+    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(kFileLayout);
     log4cxx::AppenderPtr appender =
         new log4cxx::FileAppender(layout, name, false);
     appender->setName(name);
@@ -293,7 +293,7 @@ class client {
    * @brief Set the logfile of the current logger. Not idempotent.
    */
   void set_logfile(const std::string& name) {
-    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(mc_file_layout);
+    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(kFileLayout);
     log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout, name);
     logger()->addAppender(appender);
   }
@@ -337,8 +337,9 @@ class client {
 
  private:
   /* clang-format off */
-  static const char         mc_console_layout[];
-  static const char         mc_file_layout[];
+  static const char         kConsoleLayout[];
+  static const char         kFileLayout[];
+
   static bool               m_initialized;
 
 #ifndef RCPPSW_ER_NREPORT
@@ -350,9 +351,9 @@ class client {
 template <typename T>
 bool client<T>::m_initialized = false;
 template <typename T>
-const char client<T>::mc_console_layout[] = "%x [%-5p] %c - %m%n";
+const char client<T>::kConsoleLayout[] = "%x [%-5p] %c - %m%n";
 template <typename T>
-const char client<T>::mc_file_layout[] = "%x [%-5p] %c %l - %m%n";
+const char client<T>::kFileLayout[] = "%x [%-5p] %c %l - %m%n";
 
 NS_END(rcppsw, er);
 

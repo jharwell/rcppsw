@@ -35,11 +35,11 @@ NS_START(rcppsw, task_allocation);
  * Constructors/Destructor
  ******************************************************************************/
 base_executive::base_executive(const struct task_executive_params* const params,
-                               tdgraph* const graph)
+                               std::unique_ptr<tdgraph> graph)
     : ER_CLIENT_INIT("rcppsw.ta.executive.base"),
       m_update_exec_ests(params->update_exec_ests),
       m_update_interface_ests(params->update_interface_ests),
-      m_graph(graph) {}
+      m_graph(std::move(graph)) {}
 
 base_executive::~base_executive(void) = default;
 

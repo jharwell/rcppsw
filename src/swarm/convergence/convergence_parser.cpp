@@ -37,7 +37,7 @@ constexpr char convergence_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void convergence_parser::parse(const ticpp::Element& node) {
-  ticpp::Element cnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
+  ticpp::Element cnode = node_get(node, kXMLRoot);
 
   XML_PARSE_ATTR(cnode, m_params, n_threads);
   XML_PARSE_ATTR(cnode, m_params, epsilon);

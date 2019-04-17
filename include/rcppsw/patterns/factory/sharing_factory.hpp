@@ -57,7 +57,7 @@ NS_START(rcppsw, patterns, factory);
 template <typename T, typename... TypeArgs>
 class sharing_factory : public base_factory {
  public:
-  sharing_factory(void) : m_items(), m_retain_funcs() {}
+  sharing_factory(void) noexcept = default;
   ~sharing_factory(void) override = default;
 
   /**
@@ -96,8 +96,10 @@ class sharing_factory : public base_factory {
     return m_items.back();
   }
 
-  std::vector<std::shared_ptr<T>> m_items;
-  std::map<std::string, create_func_type> m_retain_funcs;
+  /* clang-format off */
+  std::vector<std::shared_ptr<T>>         m_items{};
+  std::map<std::string, create_func_type> m_retain_funcs{};
+  /* clang-format on */
 };
 
 NS_END(factory, patterns, rcppsw);

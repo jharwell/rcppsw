@@ -78,13 +78,13 @@ class _rab_wifi_sensor  {
      */
     math::radians          vert_bearing;
 
-    rab_wifi_packet(double _range,
-                    const math::radians& _hor_bearing,
-                    const math::radians& _vert_bearing) :
+    rab_wifi_packet(double range_in,
+                    const math::radians& hor_bearing_in,
+                    const math::radians& vert_bearing_in) :
         wifi_packet(),
-        range(_range),
-        hor_bearing(_hor_bearing),
-        vert_bearing(_vert_bearing) {}
+        range(range_in),
+        hor_bearing(hor_bearing_in),
+        vert_bearing(vert_bearing_in) {}
   };
 
  public:

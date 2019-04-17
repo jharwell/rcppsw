@@ -42,7 +42,6 @@ constexpr char subtask_sel_probability::kMethodRandom[];
  ******************************************************************************/
 subtask_sel_probability::subtask_sel_probability(std::string method)
     : ER_CLIENT_INIT("rcppsw.ta.subtask_sel_prob"),
-      sigmoid(),
       mc_method(std::move(method)) {
   if (kMethodHarwell2018 == method) {
     sigmoid::init(kHARWELL2018_REACTIVITY,

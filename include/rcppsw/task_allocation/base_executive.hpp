@@ -59,7 +59,8 @@ class base_executive : public rcppsw::er::client<base_executive> {
    *              language to communicate that with unique_ptr because of
    *              casting reasons).
    */
-  base_executive(const struct task_executive_params* params, tdgraph* graph);
+  base_executive(const struct task_executive_params* params,
+                 std::unique_ptr<tdgraph> graph);
   ~base_executive(void) override;
 
   base_executive& operator=(const base_executive& other) = delete;
@@ -109,7 +110,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
   /**
    * @brief Get the parent task of the specified one.
    */
-  const polled_task* parent_task(const polled_task* task);
+  const polled_task* parent_task(const polled_task* v);
 
   const tdgraph* graph(void) const { return m_graph.get(); }
   bool update_exec_ests(void) const { return m_update_exec_ests; }

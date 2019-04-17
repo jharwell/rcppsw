@@ -41,8 +41,7 @@ base_metrics_collector::base_metrics_collector(std::string ofname,
       m_timestep(0),
       m_cum_only(cum_only),
       m_ofname(std::move(ofname)),
-      m_separator(";"),
-      m_ofile() {}
+      m_separator(";") {}
 
 /*******************************************************************************
  * Member Functions

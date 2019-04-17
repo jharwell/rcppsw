@@ -43,17 +43,17 @@ NS_START(rcppsw, control);
 class pid_loop {
  public:
   /**
-   * @param Kp proportional gain.
-   * @param Ki Integral gain.
-   * @param Kd Derivative gain.
+   * @param kp proportional gain.
+   * @param ki Integral gain.
+   * @param kd Derivative gain.
    * @param dt Loop interval time (linear interpolation used).
    * @param max Maximum value of manipulated variable and integral term.
    * @param min Minimum value of manipulated variable and integral term.
    */
-  pid_loop(double Kp, double Kd, double Ki, double dt, double min, double max)
-      : m_Kp(Kp),
-        m_Kd(Kd),
-        m_Ki(Ki),
+  pid_loop(double kp, double kd, double ki, double dt, double min, double max)
+      : m_kp(kp),
+        m_kd(kd),
+        m_ki(ki),
         m_dt(dt),
         m_min(min),
         m_max(max),
@@ -85,9 +85,9 @@ class pid_loop {
   void max(double max) { m_max = max; }
 
  private:
-  double m_Kp;
-  double m_Kd;
-  double m_Ki;
+  double m_kp;
+  double m_kd;
+  double m_ki;
   double m_dt;
   double m_min;
   double m_max;

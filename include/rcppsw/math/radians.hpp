@@ -49,12 +49,16 @@ class degrees;
  */
 class radians {
  public:
-  static const radians kPI;
-  static const radians kTWO_PI;
-  static const radians kPI_OVER_THREE;
-  static const radians kPI_OVER_FOUR;
-  static const radians kZERO;
-  static const double kRADIANS_TO_DEGREES;
+  /*
+   * These are MATHEMATICAL constants, so they get UPPER_CASE naming convention
+   * to emphasize that fact.
+   */
+  static const radians kPI;                 // NOLINT
+  static const radians kTWO_PI;             // NOLINT
+  static const radians kPI_OVER_THREE;      // NOLINT
+  static const radians kPI_OVER_FOUR;       // NOLINT
+  static const radians kZERO;               // NOLINT
+  static const double  kRADIANS_TO_DEGREES; // NOLINT
 
   static radians abs(const radians& r) { return radians(r.abs_value()); }
 

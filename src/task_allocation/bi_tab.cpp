@@ -46,10 +46,7 @@ constexpr char bi_tab::kSubtaskSelSrcInterface[];
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-bi_tab::bi_tab(const bi_tdgraph* const graph,
-               polled_task* const root,
-               const polled_task* const child1,
-               const polled_task* const child2,
+bi_tab::bi_tab(const struct elements* elts,
                const struct task_partition_params* const partitioning,
                const struct src_sigmoid_sel_params* const subtask_sel)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tab"),
@@ -57,10 +54,10 @@ bi_tab::bi_tab(const bi_tdgraph* const graph,
       mc_never_partition(partitioning->never_partition),
       mc_partition_input(partitioning->src_sigmoid.input_src),
       mc_subtask_sel_input(subtask_sel->input_src),
-      mc_graph(graph),
-      m_root(root),
-      m_child1(child1),
-      m_child2(child2),
+      mc_graph(elts->graph),
+      m_root(elts->root),
+      m_child1(elts->child1),
+      m_child2(elts->child2),
       m_sel_prob(&subtask_sel->sigmoid),
       m_partition_prob(&partitioning->src_sigmoid.sigmoid),
       m_rng(std::chrono::system_clock::now().time_since_epoch().count()) {
@@ -255,7 +252,7 @@ polled_task* bi_tab::subtask_allocate(void) {
           m_child1->name().c_str(),
           prob_21);
 
-  const polled_task* ret = nullptr;
+  polled_task* ret = nullptr;
   std::uniform_real_distribution<> dist(0.0, 1.0);
   if (subtask_sel_probability::kMethodHarwell2018 == m_sel_prob.method() ||
       subtask_sel_probability::kMethodBrutschy2014 == m_sel_prob.method()) {
@@ -291,7 +288,7 @@ polled_task* bi_tab::subtask_allocate(void) {
   ER_ASSERT(nullptr != ret, "No subtask selected?");
   ER_INFO("Selected subtask '%s'", ret->name().c_str());
   m_active_task = ret;
-  return const_cast<polled_task*>(ret);
+  return ret;
 } /* subtask_allocate() */
 
 /*******************************************************************************

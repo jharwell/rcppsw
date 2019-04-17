@@ -108,9 +108,9 @@ class differential_drive_fsm : public state_machine::simple_fsm {
    * @enum The robot can be in three different turning states.
    */
   enum fsm_states {
-    ST_SOFT_TURN,  /// Both wheels rotating forward at slightly different speeds
-    ST_HARD_TURN,  /// Wheels are turning with opposite & max speeds
-    ST_MAX_STATES
+    kST_SOFT_TURN,  /// Both wheels rotating forward at slightly different speeds
+    kST_HARD_TURN,  /// Wheels are turning with opposite & max speeds
+    kST_MAX_STATES
   };
 
   /**
@@ -118,10 +118,10 @@ class differential_drive_fsm : public state_machine::simple_fsm {
    * desired heading change into wheel speeds.
    */
   struct turn_data : public state_machine::event_data {
-    turn_data(std::pair<bool, bool> force_,
-              double speed_,
-              math::radians angle_)
-        : force(std::move(force_)), speed(speed_), angle(angle_) {}
+    turn_data(std::pair<bool, bool> force_in,
+              double speed_in,
+              math::radians angle_in)
+        : force(std::move(force_in)), speed(speed_in), angle(angle_in) {}
 
     std::pair<bool, bool> force;
     double speed;
@@ -147,7 +147,7 @@ class differential_drive_fsm : public state_machine::simple_fsm {
         FSM_STATE_MAP_ENTRY(&soft_turn),
         FSM_STATE_MAP_ENTRY(&hard_turn),
     };
-    FSM_VERIFY_STATE_MAP(state_map, kSTATE_MAP, ST_MAX_STATES);
+    FSM_VERIFY_STATE_MAP(state_map, kSTATE_MAP, kST_MAX_STATES);
     return &kSTATE_MAP[index];
   }
   /* clang-format off */

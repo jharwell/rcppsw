@@ -52,8 +52,7 @@ class polar_force_xml_parser : public rcppsw::params::xml_param_parser {
   static constexpr char kXMLRoot[] = "polar_force";
 
   explicit polar_force_xml_parser(uint level)
-      : xml_param_parser(level),
-        m_params() {}
+      : xml_param_parser(level) {}
 
   void parse(const ticpp::Element& node) override;
   void show(std::ostream& stream) const override;
@@ -74,7 +73,7 @@ class polar_force_xml_parser : public rcppsw::params::xml_param_parser {
  private:
   /* clang-format off */
   bool                                m_parsed{false};
-  std::shared_ptr<polar_force_params> m_params;
+  std::shared_ptr<polar_force_params> m_params{nullptr};
   /* clang-format on */
 };
 

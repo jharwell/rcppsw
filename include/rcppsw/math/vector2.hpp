@@ -69,12 +69,12 @@ class vector2 {
   /**
    * @brief The positive X axis.
    */
-  static const vector2 X;
+  static const vector2 X; // NOLINT
 
   /**
    * @brief The positive Y axis.
    */
-  static const vector2 Y;
+  static const vector2 Y; // NOLINT
 
   /**
    * @brief Initializes vector to (0,0)

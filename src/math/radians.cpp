@@ -36,15 +36,16 @@ NS_START(rcppsw, math);
 /* These are just mathematical constants, so global constructors are OK */
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wglobal-constructors"
-const radians radians::kPI(M_PI);
-const radians radians::kTWO_PI(M_PI * 2.0);
-const radians radians::kPI_OVER_THREE(M_PI / 3.0);
-const radians radians::kPI_OVER_FOUR(M_PI / 4.0);
-const radians radians::kZERO(0.0);
 
-const double radians::kRADIANS_TO_DEGREES(180.0 / M_PI);
-const range<radians> radians::kSignedRange(-radians(M_PI), radians(M_PI));
-const range<radians> radians::kUnsignedRange(radians(0), radians(2 * M_PI));
+const radians radians::kPI(M_PI);                  // NOLINT
+const radians radians::kTWO_PI(M_PI * 2.0);        // NOLINT
+const radians radians::kPI_OVER_THREE(M_PI / 3.0); // NOLINT
+const radians radians::kPI_OVER_FOUR(M_PI / 4.0);  // NOLINT
+const radians radians::kZERO(0.0);                 // NOLINT
+
+const double radians::kRADIANS_TO_DEGREES(180.0 / M_PI); // NOLINT
+const range<radians> radians::kSignedRange(-radians(M_PI), radians(M_PI)); // NOLINT
+const range<radians> radians::kUnsignedRange(radians(0), radians(2 * M_PI)); // NOLINT
 #pragma clang diagnostic pop
 
 /*******************************************************************************

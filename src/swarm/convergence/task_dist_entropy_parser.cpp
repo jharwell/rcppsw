@@ -38,7 +38,7 @@ constexpr char task_dist_entropy_parser::kXMLRoot[];
  ******************************************************************************/
 void task_dist_entropy_parser::parse(const ticpp::Element& node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
-    ticpp::Element mnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
+    ticpp::Element mnode = node_get(node, kXMLRoot);
     XML_PARSE_ATTR(mnode, m_params, enable);
   }
 } /* parse() */

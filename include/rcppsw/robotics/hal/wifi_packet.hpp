@@ -41,7 +41,7 @@ NS_START(rcppsw, robotics, hal);
 struct wifi_packet {
   std::vector<uint8_t> data;
 
-  wifi_packet(void) : data() {}
+  wifi_packet(void)  = default;
 };
 
 NS_END(hal, robotics, rcppsw);

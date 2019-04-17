@@ -57,7 +57,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
   ~hfsm() override = default;
 
   void init(void) override {
-    ER_ASSERT(initial_state() < event_signal::IGNORED,
+    ER_ASSERT(initial_state() < event_signal::kIGNORED,
                      "Bad initial state");
     base_fsm::init();
   }
@@ -196,7 +196,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
                                                                                 \
  private:                                                                       \
   rcppsw::patterns::state_machine::state_exit_action<FSM, &FSM::EX_##exit_name> \
-      exit_name
+  exit_name{}
 
 /**
  * @def HFSM_EXIT_INHERIT(BASE_FSM, inherited_name, event_data)
@@ -210,7 +210,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
  private:                                                         \
   rcppsw::patterns::state_machine::                               \
       state_exit_action<BASE_FSM, &BASE_FSM::EX_##inherited_name> \
-          inherited_name
+ inherited_name{}
 
 #define HFSM_EXIT_DEFINE(FSM, exit_name) FSM_EXIT_DEFINE(FSM, exit_name)
 
@@ -270,7 +270,7 @@ state_name
                                                                         \
 private:                                                                \
 rcppsw::patterns::state_machine::state_entry_action0<FSM, &FSM::EN_##entry_name> \
-entry_name
+entry_name{}
 
 /**
  * @def HFSM_ENTRY_INHERIT_ND(FSM, inherited_name)
@@ -281,7 +281,7 @@ entry_name
  private:                                                           \
   rcppsw::patterns::state_machine::                                 \
       state_entry_action0<BASE_FSM, &BASE_FSM::EN_##inherited_name> \
-          inherited_name
+ inherited_name{}
 #define HFSM_ENTRY_DEFINE_ND(FSM, entry_name) \
   FSM_ENTRY_DEFINE_ND(FSM, entry_name)
 

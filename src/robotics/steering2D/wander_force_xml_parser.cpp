@@ -38,7 +38,7 @@ constexpr char wander_force_xml_parser::kXMLRoot[];
  ******************************************************************************/
 void wander_force_xml_parser::parse(const ticpp::Element& node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
-    ticpp::Element wnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
+    ticpp::Element wnode = node_get(node, kXMLRoot);
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
     XML_PARSE_ATTR(wnode, m_params, interval);

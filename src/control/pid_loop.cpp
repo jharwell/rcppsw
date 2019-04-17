@@ -36,7 +36,7 @@ double pid_loop::calculate(double setpoint, double pv) {
   double error = setpoint - pv;
 
   // Proportional term
-  double Pout = m_Kp * error;
+  double p_out = m_kp * error;
 
   // Integral state
   m_istate += error * m_dt;
@@ -46,13 +46,13 @@ double pid_loop::calculate(double setpoint, double pv) {
   m_istate = std::max(m_istate, m_min);
 
   // Integral term
-  double Iout = m_Ki * m_istate;
+  double i_out = m_ki * m_istate;
 
   // Derivative term
-  double Dout = m_Kd * (error - m_prev_error) / m_dt;
+  double d_out = m_kd * (error - m_prev_error) / m_dt;
 
   m_prev_error = error;
-  double output = Pout + Iout + Dout;
+  double output = p_out + i_out + d_out;
   output = std::min(output, m_max);
   output = std::max(output, m_min);
   return output;

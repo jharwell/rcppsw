@@ -37,7 +37,7 @@ NS_START(rcppsw);
  * Constructors/Destructor
  ******************************************************************************/
 base_cli::base_cli(const std::string& mnemonic)
-    : m_vm(), m_desc("Program options"), m_prog_name(), m_base_output_dir() {
+    : m_desc("Program options") {
   time_t rawtime;
   char buffer[80];
   time(&rawtime);
@@ -65,8 +65,6 @@ base_cli::base_cli(const std::string& mnemonic)
           "Set the initial logging printing level. Higher numbers = more "
           "verbose logging. Range=[0, 5]. Default=3.");
 } /* base_cli::base_cli() */
-
-base_cli::~base_cli(void) = default;
 
 /*******************************************************************************
  * Member Functions

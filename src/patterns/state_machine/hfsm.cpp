@@ -37,8 +37,8 @@ void hfsm::state_engine_step(const state_map_row* const c_row) {
            current_state(),
            reinterpret_cast<const void*>(event_data_get()));
   auto* state = static_cast<const hfsm_state*>(c_row->state());
-  int rval = event_signal::UNHANDLED;
-  while (rval != event_signal::HANDLED) {
+  int rval = event_signal::kUNHANDLED;
+  while (rval != event_signal::kHANDLED) {
     rval = state->invoke_state_action(this, event_data_get());
 
     /*
@@ -47,12 +47,12 @@ void hfsm::state_engine_step(const state_map_row* const c_row) {
      * event type and the signal of the event so execution can continue
      * normally.
      */
-    if (event_signal::HANDLED == rval) {
+    if (event_signal::kHANDLED == rval) {
       event_data_get()->reset();
       break;
     }
     state = static_cast<hfsm_state*>(state->parent());
-    event_data_get()->type(event_type::CHILD);
+    event_data_get()->type(event_type::kCHILD);
     event_data_get()->signal(rval);
   } /* while() */
 } /* state_engine_step() */
@@ -63,8 +63,8 @@ void hfsm::state_engine_step(const state_map_ex_row* const c_row_ex) {
            current_state(),
            reinterpret_cast<const void*>(event_data_get()));
   auto* state = static_cast<const hfsm_state*>(c_row_ex->state());
-  int rval = event_signal::UNHANDLED;
-  while (rval != event_signal::HANDLED) {
+  int rval = event_signal::kUNHANDLED;
+  while (rval != event_signal::kHANDLED) {
     rval = state->invoke_state_action(this, event_data_get());
 
     /*
@@ -73,19 +73,19 @@ void hfsm::state_engine_step(const state_map_ex_row* const c_row_ex) {
      * event type and the signal of the event so execution can continue
      * normally.
      */
-    if (event_signal::HANDLED == rval) {
+    if (event_signal::kHANDLED == rval) {
       event_data_get()->reset();
       break;
     }
     state = static_cast<hfsm_state*>(state->parent());
-    event_data_get()->type(event_type::CHILD);
+    event_data_get()->type(event_type::kCHILD);
     event_data_get()->signal(rval);
   } /* while() */
 } /* state_engine_step() */
 
 void hfsm::inject_event(int signal, int type) {
   external_event(current_state(),
-                 rcppsw::make_unique<const event_data>(signal, type));
+                 rcppsw::make_unique<event_data>(signal, type));
 } /* inject event */
 
 void hfsm::change_parent(uint8_t state,

@@ -41,14 +41,14 @@
     if (nullptr != (handle)) {                             \
       return (handle)->func();                             \
     }                                                      \
-    return static_cast<ret>(0);                            \
+    return {};                                             \
   }
 #define TASK_WRAPPER_DEFINE_PTR(ret, class, func, handle) \
   ret class ::func(void) {                                \
     if (nullptr != (handle)) {                            \
       return (handle)->func();                            \
     }                                                     \
-    return static_cast<ret>(0);                           \
+    return {};                                            \
   }
 
 /*******************************************************************************

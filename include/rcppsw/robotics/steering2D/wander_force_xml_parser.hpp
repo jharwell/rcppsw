@@ -52,8 +52,7 @@ class wander_force_xml_parser : public rcppsw::params::xml_param_parser {
   static constexpr char kXMLRoot[] = "wander_force";
 
   explicit wander_force_xml_parser(uint level)
-      : xml_param_parser(level),
-        m_params() {}
+      : xml_param_parser(level) {}
 
   void parse(const ticpp::Element& node) override;
   void show(std::ostream& stream) const override;
@@ -73,7 +72,7 @@ class wander_force_xml_parser : public rcppsw::params::xml_param_parser {
 
   /* clang-format off */
   bool                                 m_parsed{false};
-  std::shared_ptr<wander_force_params> m_params;
+  std::shared_ptr<wander_force_params> m_params{nullptr};
   /* clang-format on */
 };
 

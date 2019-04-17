@@ -57,7 +57,6 @@ class force_calculator_xml_parser : public rcppsw::params::xml_param_parser {
 
   explicit force_calculator_xml_parser(uint level)
       : xml_param_parser(level),
-        m_params(),
         m_avoidance(level + 1),
         m_arrival(level + 1),
         m_wander(level + 1),

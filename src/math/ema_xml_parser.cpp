@@ -42,7 +42,7 @@ constexpr char ema_xml_parser::kXMLRoot[];
 void ema_xml_parser::parse(const ticpp::Element& node) {
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
-  ticpp::Element enode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
+  ticpp::Element enode = node_get(node, kXMLRoot);
   XML_PARSE_ATTR(enode, m_params, alpha);
 } /* parse() */
 

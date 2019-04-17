@@ -55,54 +55,68 @@ bi_tdgraph::bi_tdgraph(const struct task_allocation_params* const params)
 void bi_tdgraph::active_tab_init(const std::string& method) {
   if (kTABInitRoot == method) {
     ER_INFO("Using graph root initial TAB");
-    for (auto& t : m_tabs) {
-      if (t.root() == tdgraph::root()) {
-        m_active_tab = &t;
-      }
-    } /* for(&t..) */
-
+    active_tab_init_root();
   } else if (kTABInitRandom == method) {
     ER_INFO("Using random initial TAB");
-    std::uniform_int_distribution<> dist(0, m_tabs.size());
-    m_active_tab = &(*std::next(m_tabs.begin(), dist(m_rng)));
+    active_tab_init_random();
   } else if (kTABInitMaxDepth == method) {
     ER_INFO("Using max_depth initial TAB");
-    std::vector<bi_tab*> indices;
-    int max_depth = 0;
-    for (auto& t : m_tabs) {
-      int tab_depth = vertex_depth(t.root());
-      if (tab_depth > max_depth) {
-        max_depth = tab_depth;
-      }
-    } /* for(&t..) */
-    for (auto& t : m_tabs) {
-      if (vertex_depth(t.root()) == max_depth) {
-        indices.push_back(&t);
-      }
-    } /* for(&t..) */
-
-    ER_INFO("Found %zu TABs at depth %d", indices.size(), max_depth);
-    std::uniform_int_distribution<> dist(0, indices.size() - 1);
-    m_active_tab = indices[dist(m_rng)];
+    active_tab_init_max_depth();
   } else {
     ER_FATAL_SENTINEL("Bad TAB init method '%s'", method.c_str());
   }
   ER_INFO("Initial TAB rooted at '%s'", m_active_tab->root()->name().c_str());
 } /* active_tab_init() */
 
+void bi_tdgraph::active_tab_init_root(void) {
+  for (auto& t : m_tabs) {
+    if (t.root() == tdgraph::root()) {
+      m_active_tab = &t;
+    }
+  } /* for(&t..) */
+} /* active_tab_init_root() */
+
+void bi_tdgraph::active_tab_init_max_depth(void) {
+  std::vector<bi_tab*> indices;
+  int max_depth = 0;
+  for (auto& t : m_tabs) {
+    int tab_depth = vertex_depth(t.root());
+    if (tab_depth > max_depth) {
+      max_depth = tab_depth;
+    }
+  } /* for(&t..) */
+  for (auto& t : m_tabs) {
+    if (vertex_depth(t.root()) == max_depth) {
+      indices.push_back(&t);
+    }
+  } /* for(&t..) */
+
+  ER_INFO("Found %zu TABs at depth %d", indices.size(), max_depth);
+  std::uniform_int_distribution<> dist(0, indices.size() - 1);
+  m_active_tab = indices[dist(m_rng)];
+} /* active_tab_init_max_depth() */
+
+void bi_tdgraph::active_tab_init_random(void) {
+  std::uniform_int_distribution<> dist(0, m_tabs.size());
+  m_active_tab = &(*std::next(m_tabs.begin(), dist(m_rng)));
+} /* active_tab_init_random() */
+
 status_t bi_tdgraph::install_tab(const std::string& parent,
-                                 const std::vector<polled_task*>& children) {
-  return install_tab(find_vertex(parent), children);
+                                 tdgraph::vertex_vector children) {
+  return install_tab(find_vertex(parent), std::move(children));
 } /* install_tab() */
 
-status_t bi_tdgraph::install_tab(const polled_task* parent,
-                                 const std::vector<polled_task*>& children) {
+status_t bi_tdgraph::install_tab(polled_task* parent,
+                                 tdgraph::vertex_vector children) {
   ER_ASSERT(2 == children.size(),
             "Bi tdgraph cannot handle non-binary bifurcations");
-  m_tabs.emplace_back(this,
-                      const_cast<polled_task*>(parent),
-                      children[0],
-                      children[1],
+  bi_tab::elements elts = {
+    .graph = this,
+    .root = parent,
+    .child1 = children[0].get(),
+    .child2 = children[1].get()
+  };
+  m_tabs.emplace_back(&elts,
                       &mc_params.partitioning,
                       &mc_params.subtask_sel);
   /*
@@ -113,7 +127,7 @@ status_t bi_tdgraph::install_tab(const polled_task* parent,
    */
   m_tabs.back().partition_prob_update();
 
-  return tdgraph::set_children(parent, children);
+  return tdgraph::set_children(parent, std::move(children));
 } /* install_tab() */
 
 void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
@@ -174,48 +188,70 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
 
 __rcsw_pure bi_tab* bi_tdgraph::tab_child(
     const bi_tab* const tab,
-    const polled_task* const current_task) const {
+    const polled_task* const current_task) {
   ER_ASSERT(tab->child1() == current_task || tab->child2() == current_task,
             "Task '%s' not in TAB rooted at '%s'",
             current_task->name().c_str(),
             tab->root()->name().c_str());
 
-  const bi_tab* ret = nullptr;
   for (auto& t : m_tabs) {
     if (t.root() == current_task &&
         (tab->child1() == t.root() || tab->child2() == t.root())) {
-      return const_cast<bi_tab*>(&t);
+      return &t;
     }
   } /* for(&tab..) */
   ER_FATAL_SENTINEL("TAB has no children?");
-  return const_cast<bi_tab*>(ret);
+  return nullptr;
 } /* tab_child() */
 
-bi_tab* bi_tdgraph::root_tab(void) const {
-  for (auto& t : m_tabs) {
-    if (vertex_parent(t.root()) == t.root()) { /* self */
-      return const_cast<bi_tab*>(&t);
-    }
-  } /* for(&tab..) */
-  return nullptr;
+bi_tab* bi_tdgraph::root_tab(void) {
+  auto it = std::find_if(m_tabs.begin(),
+                         m_tabs.end(),
+                         [&](const auto& t) {
+                           return vertex_parent(t.root()) == t.root();
+                         });
+  return (it != m_tabs.end()) ? &(*it) : nullptr;
 } /* root_tab() */
 
-bi_tab* bi_tdgraph::tab_parent(const bi_tab* const tab) const {
-  uint count = 0;
-  const bi_tab* ret = nullptr;
-  if (tab == root_tab()) {
-    return const_cast<bi_tab*>(tab);
-  }
+const bi_tab* bi_tdgraph::root_tab(void) const {
+  auto it = std::find_if(m_tabs.begin(),
+                         m_tabs.end(),
+                         [&](const auto& t) {
+                           return vertex_parent(t.root()) == t.root();
+                         });
+  return (it != m_tabs.end()) ? &(*it) : nullptr;
+} /* root_tab() */
+
+bi_tab* bi_tdgraph::tab_parent(const bi_tab* const tab) {
+  ER_ASSERT(tab_parent_verify(tab), "TAB has more than one parent?");
+
+  auto it = std::find_if(m_tabs.begin(),
+                         m_tabs.end(),
+                         [&](const auto&t) {
+                           if (tab != &t && /* self */
+                               (t.child1() == tab->root() ||
+                                t.child2() == tab->root())) {
+                             return true;
+                           }
+                           return false;
+                         });
+  return (it != m_tabs.end()) ? &(*it) : nullptr;
+} /* tab_parent() */
+
+const bi_tab* bi_tdgraph::tab_parent(const bi_tab* const tab) const {
+  return const_cast<bi_tdgraph*>(this)->tab_parent(tab);
+} /* tab_parent() */
+
+bool bi_tdgraph::tab_parent_verify(const bi_tab* const tab) const {
+      uint count = 0;
   for (auto& t : m_tabs) {
     if (tab == &t) { /* self */
       continue;
     } else if (t.child1() == tab->root() || t.child2() == tab->root()) {
       ++count;
-      ret = &t;
     }
   } /* for(&tab..) */
-  ER_ASSERT(count <= 1, "TAB has more than one parent?");
-  return const_cast<bi_tab*>(ret);
+  return count <= 1;
 } /* tab_parent() */
 
 NS_END(rcppsw, task_allocation);

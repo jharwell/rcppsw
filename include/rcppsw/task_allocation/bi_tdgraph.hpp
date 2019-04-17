@@ -73,10 +73,10 @@ class bi_tdgraph : public tdgraph, public er::client<bi_tdgraph> {
    *
    * @return \ref status_t.
    */
-  status_t install_tab(const polled_task* parent,
-                       const std::vector<polled_task*>& children);
+  status_t install_tab(polled_task* parent,
+                       tdgraph::vertex_vector children);
   status_t install_tab(const std::string& parent,
-                       const std::vector<polled_task*>& children);
+                       tdgraph::vertex_vector children);
 
   /**
    * @brief Update the active TAB *BEFORE* task allocation is performed in the
@@ -108,8 +108,10 @@ class bi_tdgraph : public tdgraph, public er::client<bi_tdgraph> {
    * @brief Get the parent TAB for the argument (i.e. the TAB which has as a
    * child the root of the TAB argument).
    */
-  bi_tab* tab_parent(const bi_tab* tab) const;
-  bi_tab* root_tab(void) const;
+  const bi_tab* tab_parent(const bi_tab* tab) const;
+  const bi_tab* root_tab(void) const;
+  bi_tab* root_tab(void);
+
   /**
    * @brief Get the child tab for the argument (i.e. the TAB whose root is the
    * left/right child of the argument)
@@ -117,12 +119,18 @@ class bi_tdgraph : public tdgraph, public er::client<bi_tdgraph> {
    * @param tab The tab.
    * @param current_task The current active task in the tab.
    */
-  bi_tab* tab_child(const bi_tab* tab, const polled_task* current_task) const;
+  bi_tab* tab_child(const bi_tab* tab, const polled_task* current_task);
 
   void active_tab_init(const std::string& method);
 
  private:
   using tdgraph::set_children;
+
+  void active_tab_init_root(void);
+  void active_tab_init_random(void);
+  void active_tab_init_max_depth(void);
+  bi_tab* tab_parent(const bi_tab* tab);
+  bool tab_parent_verify(const bi_tab* tab) const;
 
   /* clang-format off */
   const struct task_allocation_params mc_params;

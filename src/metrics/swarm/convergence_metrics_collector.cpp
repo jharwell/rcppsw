@@ -101,22 +101,22 @@ void convergence_metrics_collector::collect(const metrics::base_metrics& metrics
   auto status = m.swarm_interactivity();
   m_interact_stats.raw += std::get<0>(status);
   m_interact_stats.norm += std::get<1>(status);
-  m_interact_stats.converged += std::get<2>(status);
+  m_interact_stats.converged += static_cast<uint>(std::get<2>(status));
 
   status = m.swarm_angular_order();
   m_order_stats.raw += std::get<0>(status);
   m_order_stats.norm += std::get<1>(status);
-  m_order_stats.converged += std::get<2>(status);
+  m_order_stats.converged += static_cast<uint>(std::get<2>(status));
 
   status = m.swarm_positional_entropy();
   m_pos_ent_stats.raw += std::get<0>(status);
   m_pos_ent_stats.norm += std::get<1>(status);
-  m_pos_ent_stats.converged += std::get<2>(status);
+  m_pos_ent_stats.converged += static_cast<uint>(std::get<2>(status));
 
   status = m.swarm_task_dist_entropy();
   m_tdist_ent_stats.raw += std::get<0>(status);
   m_tdist_ent_stats.norm += std::get<1>(status);
-  m_tdist_ent_stats.converged += std::get<2>(status);
+  m_tdist_ent_stats.converged += static_cast<uint>(std::get<2>(status));
 } /* collect() */
 
 void convergence_metrics_collector::reset(void) {
@@ -125,10 +125,10 @@ void convergence_metrics_collector::reset(void) {
 } /* reset() */
 
 void convergence_metrics_collector::reset_after_interval(void) {
-  m_interact_stats = {0.0, 0.0, false};
-  m_order_stats = {0.0, 0.0, false};
-  m_pos_ent_stats = {0.0, 0.0, false};
-  m_tdist_ent_stats = {0.0, 0.0, false};
+  m_interact_stats = {0.0, 0.0, 0};
+  m_order_stats = {0.0, 0.0, 0};
+  m_pos_ent_stats = {0.0, 0.0, 0};
+  m_tdist_ent_stats = {0.0, 0.0, 0};
 } /* reset_after_interval() */
 
 NS_END(swarm, metrics, rcppsw);

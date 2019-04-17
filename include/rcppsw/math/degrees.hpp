@@ -49,7 +49,11 @@ class radians;
  */
 class degrees {
  public:
-  static const double kDEGREES_TO_RADIANS;
+  /*
+   * These are MATHEMATICAL constants, so they get UPPER_CASE naming convention
+   * to emphasize that fact.
+   */
+  static const double kDEGREES_TO_RADIANS; // NOLINT
 
   degrees(void) = default;
 

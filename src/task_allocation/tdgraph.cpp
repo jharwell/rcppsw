@@ -34,15 +34,6 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 tdgraph::tdgraph(void) : ER_CLIENT_INIT("rcppsw.ta.tdgraph") {}
 
-tdgraph::~tdgraph(void) {
-  vertex_iterator v_i, v_end;
-  boost::tie(v_i, v_end) = boost::vertices(m_graph);
-  while (v_i != v_end) {
-    delete m_graph[*v_i];
-    v_i++;
-  } /* while() */
-}
-
 /*******************************************************************************
  * Static Member Functions
  ******************************************************************************/
@@ -58,7 +49,11 @@ __rcsw_pure const polled_task* tdgraph::root(void) const { return m_root; }
 __rcsw_pure polled_task* tdgraph::root(void) { return m_root; }
 
 const polled_task* tdgraph::find_vertex(const std::string& task_name) const {
-  return m_graph[*find_vertex_impl(task_name)];
+  return m_graph[*find_vertex_impl(task_name)].get();
+} /* find_vertex() */
+
+polled_task* tdgraph::find_vertex(const std::string& task_name) {
+  return m_graph[*find_vertex_impl(task_name)].get();
 } /* find_vertex() */
 
 int tdgraph::vertex_id(const polled_task* const v) const {
@@ -83,7 +78,7 @@ void tdgraph::walk(const walk_cb& f) const {
   vertex_iterator v_i, v_end;
   boost::tie(v_i, v_end) = boost::vertices(m_graph);
   while (v_i != v_end) {
-    f(m_graph[*v_i]);
+    f(m_graph[*v_i].get());
     ++v_i;
   } /* while() */
 } /* walk() */
@@ -103,8 +98,8 @@ tdgraph::vertex_iterator tdgraph::find_vertex_impl(
     const polled_task* const v) const {
   vertex_iterator v_i, v_end;
   boost::tie(v_i, v_end) = boost::vertices(m_graph);
-  auto it = std::find_if(v_i, v_end, [&](const tdgraph::vertex& tmp) {
-    return v == m_graph[tmp];
+  auto it = std::find_if(v_i, v_end, [&](const tdgraph::vertex_desc& tmp) {
+      return v == m_graph[tmp].get();
   });
   return it;
 } /* find_vertex_impl() */
@@ -112,7 +107,7 @@ tdgraph::vertex_iterator tdgraph::find_vertex_impl(
 tdgraph::vertex_iterator tdgraph::find_vertex_impl(const std::string& v) const {
   vertex_iterator v_i, v_end;
   boost::tie(v_i, v_end) = boost::vertices(m_graph);
-  auto it = std::find_if(v_i, v_end, [&](const tdgraph::vertex& tmp) {
+  auto it = std::find_if(v_i, v_end, [&](const tdgraph::vertex_desc& tmp) {
     return v == m_graph[tmp]->name();
   });
   return it;
@@ -133,14 +128,15 @@ polled_task* tdgraph::vertex_parent(const polled_task* const v) const {
   ER_ASSERT(1 == ie_end - ie,
             "Vertex %s has more than 1 parent",
             v->name().c_str());
-  return m_graph[boost::source(*ie, m_graph)];
+  return m_graph[boost::source(*ie, m_graph)].get();
 } /* vertex_parent() */
 
-status_t tdgraph::set_root(polled_task* const v) {
-  vertex new_v;
+status_t tdgraph::set_root(vertex_type v) {
+  vertex_desc new_v;
   ER_CHECK(0 == boost::num_edges(m_graph), "Root already set for graph!");
-  new_v = boost::add_vertex(v, m_graph);
-  m_root = v;
+  m_root = v.get();
+  new_v = boost::add_vertex(std::shared_ptr<polled_task>(std::move(v)),
+                            m_graph);
   boost::add_edge(new_v, new_v, m_graph); /* parent of root is root */
   return OK;
 
@@ -159,7 +155,7 @@ std::vector<polled_task*> tdgraph::children(
 
   boost::tie(oe, oe_end) = boost::out_edges(*it, m_graph);
   while (oe != oe_end) {
-    kids.push_back(m_graph[boost::target(*oe, m_graph)]);
+    kids.push_back(m_graph[boost::target(*oe, m_graph)].get());
     ++oe;
   } /* while() */
 
@@ -167,12 +163,13 @@ std::vector<polled_task*> tdgraph::children(
 } /* children() */
 
 status_t tdgraph::set_children(const std::string& parent,
-                               const std::vector<polled_task*>& children) {
-  return set_children(m_graph[*find_vertex_impl(parent)], children);
+                               vertex_vector children) {
+  return set_children(m_graph[*find_vertex_impl(parent)].get(),
+                      std::move(children));
 } /* set_children() */
 
 status_t tdgraph::set_children(const polled_task* parent,
-                               const std::vector<polled_task*>& children) {
+                               vertex_vector children) {
   out_edge_iterator oe_start, oe_end;
   auto vertex_d = find_vertex_impl(parent);
   ER_CHECK(vertex_d != boost::vertices(m_graph).second,
@@ -180,14 +177,15 @@ status_t tdgraph::set_children(const polled_task* parent,
            parent->name().c_str());
 
   /* The root always has "children", in the sense it points to itself */
-  if (m_graph[*vertex_d] != m_root) {
+  if (m_graph[*vertex_d].get() != m_root) {
     ER_CHECK(0 == boost::out_degree(*vertex_d, m_graph),
              "Graph vertex %s already has children",
              m_graph[*vertex_d]->name().c_str());
   }
 
   for (auto& c : children) {
-    vertex new_v = boost::add_vertex(c, m_graph);
+    vertex_desc new_v = boost::add_vertex(std::shared_ptr<polled_task>(std::move(c)),
+                                          m_graph);
     ER_TRACE("Add edge %s -> %s",
              m_graph[*vertex_d]->name().c_str(),
              m_graph[new_v]->name().c_str());

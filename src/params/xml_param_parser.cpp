@@ -54,8 +54,8 @@ std::string xml_param_parser::build_footer(void) const {
          prettiness + "\n";
 } /* build_footer() */
 
-ticpp::Element& xml_param_parser::node_get(ticpp::Element& node,
-                                           const std::string& tag) {
+ticpp::Element& xml_param_parser::node_get(const ticpp::Element& node,
+                                           const std::string& tag) const {
   ticpp::Iterator<ticpp::Element> it(tag);
   it = it.begin(&node);
   ER_ASSERT(it != nullptr,
@@ -65,9 +65,9 @@ ticpp::Element& xml_param_parser::node_get(ticpp::Element& node,
   return *it;
 } /* node_get() */
 
-void xml_param_parser::node_attr_get(ticpp::Element& node,
+void xml_param_parser::node_attr_get(const ticpp::Element& node,
                                      const std::string& attr,
-                                     bool& buf) {
+                                     bool& buf) const {
   std::string tmp;
   node.GetAttribute(attr, &tmp, true);
   if ("true" == tmp) {

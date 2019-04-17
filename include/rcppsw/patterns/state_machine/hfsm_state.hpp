@@ -45,7 +45,7 @@ NS_START(rcppsw, patterns, state_machine);
  */
 class hfsm_state : public state {
  public:
-  explicit hfsm_state(hfsm_state* parent) : state(), m_parent(parent) {}
+  explicit hfsm_state(hfsm_state* parent) : m_parent(parent) {}
   ~hfsm_state() override = default;
 
   rcppsw::patterns::state_machine::state* parent(void) const {

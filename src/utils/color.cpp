@@ -33,26 +33,26 @@ NS_START(rcppsw, utils);
  ******************************************************************************/
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wglobal-constructors"
-color color::kBLACK(0, 0, 0);
-color color::kWHITE(255, 255, 255);
-color color::kRED(255, 0, 0);
-color color::kGREEN(0, 255, 0);
-color color::kBLUE(0, 0, 255);
-color color::kMAGENTA(255, 0, 255);
-color color::kCYAN(0, 255, 255);
-color color::kYELLOW(255, 255, 0);
-color color::kORANGE(255, 140, 0);
-color color::kBROWN(165, 42, 42);
-color color::kPURPLE(160, 32, 240);
-color color::kGRAY10(26, 26, 26);
-color color::kGRAY20(51, 51, 51);
-color color::kGRAY30(77, 77, 77);
-color color::kGRAY40(102, 102, 102);
-color color::kGRAY50(127, 127, 127);
-color color::kGRAY60(153, 153, 153);
-color color::kGRAY70(179, 179, 179);
-color color::kGRAY80(204, 204, 204);
-color color::kGRAY90(229, 229, 229);
+const color color::kBLACK(0, 0, 0);
+const color color::kWHITE(255, 255, 255);
+const color color::kRED(255, 0, 0);
+const color color::kGREEN(0, 255, 0);
+const color color::kBLUE(0, 0, 255);
+const color color::kMAGENTA(255, 0, 255);
+const color color::kCYAN(0, 255, 255);
+const color color::kYELLOW(255, 255, 0);
+const color color::kORANGE(255, 140, 0);
+const color color::kBROWN(165, 42, 42);
+const color color::kPURPLE(160, 32, 240);
+const color color::kGRAY10(26, 26, 26);
+const color color::kGRAY20(51, 51, 51);
+const color color::kGRAY30(77, 77, 77);
+const color color::kGRAY40(102, 102, 102);
+const color color::kGRAY50(127, 127, 127);
+const color color::kGRAY60(153, 153, 153);
+const color color::kGRAY70(179, 179, 179);
+const color color::kGRAY80(204, 204, 204);
+const color color::kGRAY90(229, 229, 229);
 #pragma clang diagnostic pop
 
 NS_END(utils, rcppsw);

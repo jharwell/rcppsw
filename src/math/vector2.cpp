@@ -32,13 +32,13 @@ NS_START(rcppsw, math);
  * Class Constants
  ******************************************************************************/
 template <>
-const vector2d vector2d::X(1.0, 0);
+const vector2d vector2d::X(1.0, 0); // NOLINT
 template <>
-const vector2i vector2i::X(1, 0);
+const vector2i vector2i::X(1, 0);   // NOLINT
 
 template <>
-const vector2d vector2d::Y(0, 1.0);
+const vector2d vector2d::Y(0, 1.0); // NOLINT
 template <>
-const vector2i vector2i::Y(0, 1);
+const vector2i vector2i::Y(0, 1);   // NOLINT
 
 NS_END(math, rcppsw);

@@ -47,7 +47,7 @@ NS_START(rcppsw);
 class base_cli {
  public:
   explicit base_cli(const std::string& mnemonic = "");
-  virtual ~base_cli(void);
+  virtual ~base_cli(void) = default;
 
   /**
    * @brief Parse command line options.
@@ -94,10 +94,12 @@ class base_cli {
   const std::string& prog_name(void) { return m_prog_name; }
 
  private:
-  bpo::variables_map m_vm;
+  /* clang-format off */
+  bpo::variables_map       m_vm{};
   bpo::options_description m_desc;
-  std::string m_prog_name;
-  std::string m_base_output_dir;
+  std::string              m_prog_name{};
+  std::string              m_base_output_dir{};
+  /* clang-format on */
 };
 
 NS_END(rcppsw);

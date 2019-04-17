@@ -206,7 +206,7 @@ class base_metrics_collector {
   bool          m_cum_only;
   std::string   m_ofname;
   std::string   m_separator;
-  std::ofstream m_ofile;
+  std::ofstream m_ofile{};
   /* clang-format on */
 };
 

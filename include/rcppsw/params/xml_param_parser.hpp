@@ -139,7 +139,8 @@ class xml_param_parser : public er::client<xml_param_parser> {
    *
    * If no such node exists, an assertion halts the program.
    */
-  ticpp::Element& node_get(ticpp::Element& node, const std::string& tag);
+  ticpp::Element& node_get(const ticpp::Element& node,
+                           const std::string& tag) const;
 
   /**
    * @brief Get an attribute inside a node.
@@ -149,7 +150,9 @@ class xml_param_parser : public er::client<xml_param_parser> {
    * @param buf  The result buffer.
    */
   template <typename T>
-  void node_attr_get(ticpp::Element& node, const std::string& attr, T& buf) {
+  void node_attr_get(const ticpp::Element& node,
+                     const std::string& attr,
+                     T& buf) const {
     node.GetAttribute(attr, &buf, true);
   }
 
@@ -158,7 +161,9 @@ class xml_param_parser : public er::client<xml_param_parser> {
    * specially, or at least I can't figure out how to make them also work the
    * template version).
    */
-  void node_attr_get(ticpp::Element& node, const std::string& attr, bool& buf);
+  void node_attr_get(const ticpp::Element& node,
+                     const std::string& attr,
+                     bool& buf) const;
 
   /**
    * @brief Get an attribute inside a node, or substitute a default value if the
@@ -170,10 +175,10 @@ class xml_param_parser : public er::client<xml_param_parser> {
    * @param dflt The default value to use if the attribute does not exist.
    */
   template <typename T>
-  void node_attr_get(ticpp::Element& node,
+  void node_attr_get(const ticpp::Element& node,
                      const std::string& attr,
                      T& buf,
-                     const T& dflt) {
+                     const T& dflt) const {
     node.GetAttributeOrDefault(attr, &buf, dflt);
   }
 

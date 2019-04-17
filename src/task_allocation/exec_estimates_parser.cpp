@@ -38,7 +38,7 @@ constexpr char exec_estimates_parser::kXMLRoot[];
  ******************************************************************************/
 void exec_estimates_parser::parse(const ticpp::Element& node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
-    ticpp::Element enode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
+    ticpp::Element enode = node_get(node, kXMLRoot);
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
     m_ema.parse(enode);

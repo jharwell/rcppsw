@@ -35,8 +35,8 @@ NS_START(rcppsw, task_allocation);
  ******************************************************************************/
 bi_tdgraph_executive::bi_tdgraph_executive(
     const struct task_executive_params* const params,
-    bi_tdgraph* const graph)
-    : base_executive(params, graph),
+    std::unique_ptr<bi_tdgraph> graph)
+    : base_executive(params, std::move(graph)),
       ER_CLIENT_INIT("rcppsw.ta.executive.bi_tdgraph") {}
 
 /*******************************************************************************
@@ -172,7 +172,7 @@ void bi_tdgraph_executive::handle_task_finish(polled_task* task) {
   task->task_execute();
 } /* handle_task_finish() */
 
-void bi_tdgraph_executive::handle_task_start(polled_task* new_task) {
+void bi_tdgraph_executive::handle_task_start(polled_task* const new_task) {
   ER_INFO("Starting new task '%s'", new_task->name().c_str());
 
   for (auto& cb : m_task_alloc_notify) {

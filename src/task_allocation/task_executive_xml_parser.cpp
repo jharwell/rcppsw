@@ -42,7 +42,7 @@ constexpr char task_executive_xml_parser::kXMLRoot[];
 void task_executive_xml_parser::parse(const ticpp::Element& node) {
   m_params =
       std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
-  ticpp::Element pnode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
+  ticpp::Element pnode = node_get(node, kXMLRoot);
   XML_PARSE_ATTR(pnode, m_params, update_exec_ests);
   XML_PARSE_ATTR(pnode, m_params, update_interface_ests);
   XML_PARSE_ATTR(pnode, m_params, tab_init_method);

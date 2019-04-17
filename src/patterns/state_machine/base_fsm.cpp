@@ -37,7 +37,7 @@ base_fsm::base_fsm(uint8_t max_states, uint8_t initial_state)
       mc_max_states(max_states),
       m_current_state(initial_state),
       m_initial_state(initial_state) {
-  ER_ASSERT(mc_max_states < event_signal::IGNORED, "Too many states");
+  ER_ASSERT(mc_max_states < event_signal::kIGNORED, "Too many states");
 }
 
 base_fsm::base_fsm(const base_fsm& other)
@@ -45,7 +45,7 @@ base_fsm::base_fsm(const base_fsm& other)
       mc_max_states(other.mc_max_states),
       m_current_state(other.current_state()),
       m_initial_state(other.current_state()) {
-  ER_ASSERT(mc_max_states < event_signal::IGNORED, "Too many states");
+  ER_ASSERT(mc_max_states < event_signal::kIGNORED, "Too many states");
 }
 
 /*******************************************************************************
@@ -59,16 +59,16 @@ void base_fsm::init(void) {
 } /* init() */
 
 void base_fsm::external_event(uint8_t new_state,
-                              std::unique_ptr<const event_data> data) {
+                              std::unique_ptr<event_data> data) {
   ER_TRACE("Received external event: new_state=%d data=%p",
            new_state,
            reinterpret_cast<const void*>(data.get()));
 
-  ER_ASSERT(event_signal::FATAL != new_state,
+  ER_ASSERT(event_signal::kFATAL != new_state,
             "The impossible event happened...");
 
   /* if we are not supposed to ignore this event */
-  if (new_state != event_signal::IGNORED) {
+  if (new_state != event_signal::kIGNORED) {
     /*
      * Generate the event and execute the state engine. If data was passed in,
      * pass that along to the handler function.
@@ -80,7 +80,7 @@ void base_fsm::external_event(uint8_t new_state,
 }
 
 void base_fsm::internal_event(uint8_t new_state,
-                              std::unique_ptr<const event_data> data) {
+                              std::unique_ptr<event_data> data) {
   ER_TRACE("Generated internal event: current_state=%d new_state=%d data=%p",
            current_state(),
            new_state,

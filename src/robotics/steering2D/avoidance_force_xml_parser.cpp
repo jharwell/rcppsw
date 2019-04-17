@@ -38,7 +38,7 @@ constexpr char avoidance_force_xml_parser::kXMLRoot[];
  ******************************************************************************/
 void avoidance_force_xml_parser::parse(const ticpp::Element& node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
-    ticpp::Element anode = node_get(const_cast<ticpp::Element&>(node), kXMLRoot);
+    ticpp::Element anode = node_get(node, kXMLRoot);
     m_params =
         std::make_shared<std::remove_reference<decltype(*m_params)>::type>();
     XML_PARSE_ATTR(anode, m_params, max);

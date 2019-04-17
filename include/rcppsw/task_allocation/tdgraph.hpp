@@ -62,18 +62,16 @@ class polled_task;
  */
 class tdgraph : public er::client<tdgraph> {
  public:
-  using graph_impl = boost::adjacency_list<boost::vecS,
-                                           boost::vecS,
-                                           boost::bidirectionalS,
-                                           polled_task*>;
-  using vertex = boost::graph_traits<graph_impl>::vertex_descriptor;
-  using edge = boost::graph_traits<graph_impl>::edge_descriptor;
-
-  using vertex_iterator = boost::graph_traits<graph_impl>::vertex_iterator;
-  using edge_iterator = boost::graph_traits<graph_impl>::edge_iterator;
-  using out_edge_iterator = boost::graph_traits<graph_impl>::out_edge_iterator;
-  using in_edge_iterator = boost::graph_traits<graph_impl>::in_edge_iterator;
+  /**
+   * @brief We want to convey that the graph owns the vertices in it, which we
+   * do by requiring the application to pass unique_ptrs to set up the
+   * graph. HOWEVER, boost::add_vertex does not allow for move-construction only
+   * types (apparently), and so unique_ptr does not work as the underlying
+   * vertice type in the graph, and we have to use shared ptr.
+   */
+  using vertex_type = std::unique_ptr<polled_task>;
   using walk_cb = std::function<void(const polled_task*)>;
+  using vertex_vector = std::vector<vertex_type>;
 
   /**
    * @brief Get the parent of a vertex in the graph, given the graph and vertex.
@@ -81,10 +79,10 @@ class tdgraph : public er::client<tdgraph> {
    * @return The parent of the vertex, or NULL if vertex not in graph.
    */
   static polled_task* vertex_parent(const tdgraph& graph,
-                                    const polled_task* vertex);
+                                    const polled_task* v);
 
   tdgraph(void);
-  ~tdgraph(void) override;
+  ~tdgraph(void) override = default;
   tdgraph(const tdgraph& other) = delete;
   tdgraph& operator=(const tdgraph& other) = delete;
 
@@ -93,7 +91,7 @@ class tdgraph : public er::client<tdgraph> {
    *
    * @return The parent of the vertex, or NULL if vertex not in graph.
    */
-  polled_task* vertex_parent(const polled_task* vertex) const;
+  polled_task* vertex_parent(const polled_task* v) const;
 
   /**
    * @brief Set the root of the graph/tree.
@@ -104,7 +102,7 @@ class tdgraph : public er::client<tdgraph> {
    *
    * @return \ref status_t.
    */
-  status_t set_root(polled_task* v);
+  status_t set_root(std::unique_ptr<polled_task> v);
 
   const polled_task* root(void) const;
   polled_task* root(void);
@@ -119,9 +117,9 @@ class tdgraph : public er::client<tdgraph> {
    * @return \ref status_t.
    */
   virtual status_t set_children(const polled_task* parent,
-                                const std::vector<polled_task*>& children);
+                                vertex_vector children);
   virtual status_t set_children(const std::string& parent,
-                                const std::vector<polled_task*>& children);
+                                vertex_vector children);
 
   /**
    * @brief Return the children of the specified task
@@ -158,10 +156,7 @@ class tdgraph : public er::client<tdgraph> {
    * @return The task vertex, or NULL if no such task.
    */
   const polled_task* find_vertex(const std::string& task_name) const;
-  polled_task* find_vertex(const std::string& task_name) {
-    return const_cast<polled_task*>(
-        const_cast<const tdgraph*>(this)->find_vertex(task_name));
-  }
+  polled_task* find_vertex(const std::string& task_name);
 
   /**
    * @brief Run the callback on each node in the graph, in an arbitrary order.
@@ -171,6 +166,19 @@ class tdgraph : public er::client<tdgraph> {
   void walk(const walk_cb& f) const;
 
  private:
+  using vertex_type_impl = std::shared_ptr<polled_task>;
+  using graph_impl = boost::adjacency_list<boost::vecS,
+                                           boost::vecS,
+                                           boost::bidirectionalS,
+                                           vertex_type_impl>;
+  using vertex_desc = boost::graph_traits<graph_impl>::vertex_descriptor;
+  using edge_desc = boost::graph_traits<graph_impl>::edge_descriptor;
+
+  using vertex_iterator = boost::graph_traits<graph_impl>::vertex_iterator;
+  using edge_iterator = boost::graph_traits<graph_impl>::edge_iterator;
+  using out_edge_iterator = boost::graph_traits<graph_impl>::out_edge_iterator;
+  using in_edge_iterator = boost::graph_traits<graph_impl>::in_edge_iterator;
+
   /**
    * @brief Find the vertex descriptor for the vertex, which is what we need to
    * interact with the graph efficiently.
