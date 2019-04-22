@@ -29,13 +29,13 @@
 
 #include "rcppsw/metrics/base_metrics_collector.hpp"
 #include "rcppsw/er/client.hpp"
-#include "rcppsw/task_allocation/time_estimate.hpp"
+#include "rcppsw/ta/time_estimate.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, metrics, tasks);
-namespace ta = rcppsw::task_allocation;
+namespace ta = rcppsw::ta;
 
 /*******************************************************************************
  * Class Definitions

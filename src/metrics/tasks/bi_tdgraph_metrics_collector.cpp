@@ -25,7 +25,7 @@
 #include <cmath>
 
 #include "rcppsw/metrics/tasks/bi_tdgraph_metrics.hpp"
-#include "rcppsw/task_allocation/polled_task.hpp"
+#include "rcppsw/ta/polled_task.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls

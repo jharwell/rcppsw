@@ -32,7 +32,6 @@
 #include "rcppsw/robotics/steering2D/seek_force.hpp"
 #include "rcppsw/robotics/steering2D/wander_force.hpp"
 #include "rcppsw/robotics/steering2D/polar_force.hpp"
-#include "rcppsw/robotics/steering2D/force_type.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/robotics/kinematics/twist.hpp"
 
