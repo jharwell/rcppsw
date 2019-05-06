@@ -36,6 +36,7 @@
 #include "rcppsw/metrics/swarm/convergence_metrics.hpp"
 #include "rcppsw/ds/type_map.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/mpl/typelist.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -130,10 +131,10 @@ class convergence_calculator : public metrics::swarm::convergence_metrics,
  private:
   /* clang-format off */
   const convergence_params    mc_params;
-  ds::type_map<positional_entropy,
-               task_dist_entropy,
-               angular_order,
-               interactivity> m_measures{};
+  ds::type_map<mpl::typelist<positional_entropy,
+                             task_dist_entropy,
+                             angular_order,
+                             interactivity>> m_measures{};
   swarm_headings_calc_ftype   m_swarm_headings_calc;
   swarm_nn_calc_ftype         m_swarm_nn_calc;
   swarm_pos_calc_ftype        m_swarm_pos_calc;

@@ -123,14 +123,14 @@ template<typename... Args>
 using void_t = std::void_t<Args...>;
 #endif
 
-namespace detail {
+NS_START(detail);
 template <class unused, class = void_t<>>
 struct has_to_str : std::false_type {};
 
 template <class T>
 struct has_to_str<T, void_t<decltype(std::declval<T>().to_str())>>
     : std::true_type {};
-} // namespace detail
+NS_END(detail);
 
 template <typename T, typename = std::enable_if_t<detail::has_to_str<T>::value>>
 std::string to_string(const T& obj) {
@@ -147,6 +147,19 @@ std::string to_string(const T& obj) {
 template <typename T, typename... Args>
 std::unique_ptr<T> make_unique(Args&&... args) {
   return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+}
+
+NS_START(detail);
+
+template<typename T, typename Functor, std::size_t... Is>
+void tuple_for_each(T&& t, const Functor& f, std::index_sequence<Is...>) {
+  __attribute__((unused)) auto dummy = { (f(std::get<Is>(t)), 0)... };
+}
+NS_END(detail);
+
+template<typename... Ts, typename Functor>
+void tuple_apply(const std::tuple<Ts...>& t, const Functor& functor) {
+  detail::tuple_for_each(t, functor, std::index_sequence_for<Ts...>{});
 }
 
 NS_END(rcppsw);

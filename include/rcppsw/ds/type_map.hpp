@@ -1,5 +1,5 @@
 /**
- * @file type_map.hpp
+ * @file functor_map.hpp
  *
  * @copyright 2019 John Harwell, All rights reserved.
  *
@@ -47,11 +47,11 @@ NS_START(rcppsw, ds);
  * emulate reflection in C++ (e.g. to map a type to a variant containing actions
  * to take depending on what the type is).
  */
-template <typename... Types>
-class type_map
-    : public boost::container::map<std::type_index, boost::variant<Types...>> {
+template <typename Typelist>
+class type_map : public boost::container::map<std::type_index,
+                                              typename boost::make_variant_over<Typelist>::type> {
  public:
-  using value_type = boost::variant<Types...>;
+  using value_type = typename boost::make_variant_over<Typelist>::type;
   using key_type = std::type_index;
   using map_type = boost::container::map<key_type, value_type>;
   using typename map_type::map;

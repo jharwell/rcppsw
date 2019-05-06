@@ -25,10 +25,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/mpl/typelist.hpp"
 #include <boost/variant/static_visitor.hpp>
-#include <boost/mpl/vector.hpp>
-#include <boost/mpl/contains.hpp>
-#include <boost/utility/enable_if.hpp>
 #include <boost/mpl/back_inserter.hpp>
 #include <boost/mpl/copy.hpp>
 #include <boost/mpl/joint_view.hpp>
@@ -39,17 +37,10 @@
 NS_START(rcppsw, patterns, visitor);
 
 /*******************************************************************************
- * Macros
- ******************************************************************************/
-#define RCPPSW_SFINAE_TYPELIST_REQUIRE(Typelist, T)                     \
-  typename boost::enable_if<typename boost::mpl::contains<TypeList,     \
-                                                          T>::type>::type * = nullptr
-
-/*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * @class visitor_set_helper
+ * @class visit_set_helper
  *
  * @brief Helper class to provide actual implementation.
  */
@@ -57,7 +48,7 @@ template <typename T>
 class visit_set_helper {
  public:
   virtual void visit(T& visitee) = 0;
-  virtual ~visit_set_helper(void) {}
+  virtual ~visit_set_helper(void) = default;
 };
 
 /**
@@ -100,7 +91,7 @@ class visit_set<T>: public visit_set_helper<T> {
  * precise_visitor will be able to visit.
  */
 template<typename ...Args>
-using precise_visit_set = boost::mpl::vector<Args...>;
+using precise_visit_set = mpl::typelist<Args...>;
 
 /**
  * @brief Visitor that will only visit precisely with types that exactly match
