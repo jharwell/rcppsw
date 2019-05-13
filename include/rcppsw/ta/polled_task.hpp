@@ -25,6 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <string>
+#include <utility>
+
 #include "rcppsw/math/range.hpp"
 #include "rcppsw/ta/executable_task.hpp"
 #include "rcppsw/ta/taskable.hpp"

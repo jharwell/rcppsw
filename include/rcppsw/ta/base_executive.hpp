@@ -82,8 +82,8 @@ class base_executive : public rcppsw::er::client<base_executive> {
    * @brief Set an optional callback that will be run when a task is aborted.
    *
    * The callback will be passed the task that was aborted, before the active
-   * task is reset or any time estimates have been updated on the aborted task
-   * (the task is marked as aborted before calling).
+   * task is reset and after any time estimates have been updated on the aborted
+   * task (the task is marked as aborted before calling).
    */
   void task_abort_notify(const abort_notify_cb& cb) {
     m_task_abort_notify.push_back(cb);

@@ -89,11 +89,6 @@ void bi_tdgraph_executive::run(void) {
 } /* run() */
 
 void bi_tdgraph_executive::handle_task_abort(polled_task* task) {
-  task->task_aborted(true);
-  for (auto& cb : task_abort_notify()) {
-    cb(task);
-  } /* for(cb..) */
-
   task->exec_time_update();
   task->interface_time_update();
 
@@ -119,6 +114,11 @@ void bi_tdgraph_executive::handle_task_abort(polled_task* task) {
   task->interface_time_reset();
   task->interface_time_update();
 
+  task->task_aborted(true);
+  for (auto& cb : task_abort_notify()) {
+    cb(task);
+  } /* for(cb..) */
+
   /*
    * If the root was atomic then there is no active TAB that needs to be
    * updated.
@@ -129,7 +129,6 @@ void bi_tdgraph_executive::handle_task_abort(polled_task* task) {
   }
 
   task->task_aborted(false); /* already been handled in callback */
-
   task->task_reset();
   task = get_next_task();
   handle_task_start(task);
@@ -149,14 +148,14 @@ void bi_tdgraph_executive::handle_task_finish(polled_task* task) {
     task->exec_estimate_update(task->exec_time());
   }
 
-  for (auto& cb : task_finish_notify()) {
-    cb(task);
-  } /* for(cb..) */
-
   task->exec_time_reset();
   task->exec_time_update();
   task->interface_time_reset();
   task->interface_time_update();
+
+  for (auto& cb : task_finish_notify()) {
+    cb(task);
+  } /* for(cb..) */
 
   /*
    * If the root was atomic then there is no active TAB that needs to be
@@ -167,9 +166,9 @@ void bi_tdgraph_executive::handle_task_finish(polled_task* task) {
     bigraph->active_tab()->task_finish_update(task);
   }
 
+  task->task_reset();
   task = get_next_task();
   handle_task_start(task);
-  task->task_execute();
 } /* handle_task_finish() */
 
 void bi_tdgraph_executive::handle_task_start(polled_task* const new_task) {
