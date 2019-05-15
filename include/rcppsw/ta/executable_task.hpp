@@ -84,11 +84,11 @@ class executable_task : public logical_task,
   double task_last_interface_time(uint i) const override {
     return m_last_interface_times[i];
   }
-  bool task_aborted(void) const override { return m_task_aborted; }
-  const time_estimate& task_exec_estimate(void) const override {
+  bool task_aborted(void) const override final { return m_task_aborted; }
+  const time_estimate& task_exec_estimate(void) const override final {
     return m_exec_estimate;
   }
-  const time_estimate& task_interface_estimate(uint i) const override {
+  const time_estimate& task_interface_estimate(uint i) const override final {
     return m_interface_estimates[i];
   }
   bool task_at_interface(void) const override {
@@ -121,7 +121,7 @@ class executable_task : public logical_task,
    *
    * @return The ID, or -1 if an interface has not yet been completed.
    */
-  int task_last_active_interface(void) const override {
+  int task_last_active_interface(void) const override final {
     return m_last_active_interface;
   }
 

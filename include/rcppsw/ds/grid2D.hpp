@@ -48,15 +48,15 @@ class grid2D : public base_grid2D<T> {
 
   using base_grid2D<T>::access;
 
-  grid2D(uint x_max, uint y_max)
+  grid2D(size_t x_max, size_t y_max)
       : base_grid2D<T>(), m_cells(boost::extents[x_max][y_max]) {}
 
-  T& access(uint i, uint j) override {
+  T& access(size_t i, size_t j) override {
     return m_cells[static_cast<typename index_range::index>(i)]
                   [static_cast<typename index_range::index>(j)];
   }
-  uint xsize(void) const { return m_cells.shape()[0]; }
-  uint ysize(void) const { return m_cells.shape()[1]; }
+  size_t xsize(void) const { return m_cells.shape()[0]; }
+  size_t ysize(void) const { return m_cells.shape()[1]; }
 
   __rcsw_pure T& access(const math::vector2u& c) override {
     return m_cells[static_cast<typename index_range::index>(c.x())]

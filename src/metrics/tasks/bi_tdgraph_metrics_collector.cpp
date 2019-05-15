@@ -41,11 +41,15 @@ bi_tdgraph_metrics_collector::bi_tdgraph_metrics_collector(
     uint decomposition_depth)
     : base_metrics_collector(ofname, interval),
       m_int_depth_counts(decomposition_depth + 1, 0),
-      m_int_task_counts(std::pow(2, decomposition_depth + 1) - 1, 0),
-      m_int_tab_counts(std::pow(2, decomposition_depth - 1) + 1, 0),
+      m_int_task_counts(static_cast<uint>(std::pow(2, decomposition_depth + 1) - 1),
+                        0),
+      m_int_tab_counts(static_cast<uint>(std::pow(2, decomposition_depth - 1) + 1),
+                       0),
       m_cum_depth_counts(decomposition_depth + 1, 0),
-      m_cum_task_counts(std::pow(2, decomposition_depth + 1) - 1, 0),
-      m_cum_tab_counts(std::pow(2, decomposition_depth - 1) + 1, 0) {}
+      m_cum_task_counts(static_cast<uint>(std::pow(2, decomposition_depth + 1) - 1),
+                        0),
+      m_cum_tab_counts(static_cast<uint>(std::pow(2, decomposition_depth - 1) + 1),
+                       0) {}
 
 /*******************************************************************************
  * Member Functions

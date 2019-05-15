@@ -58,7 +58,7 @@ NS_START(rcppsw, swarm, convergence);
  * convergence calculation is enabled, then you obviously need to pass a valid
  * callback to calculate the necessary input data).
  */
-class convergence_calculator : public metrics::swarm::convergence_metrics,
+class convergence_calculator final : public metrics::swarm::convergence_metrics,
                                public er::client<convergence_calculator> {
  public:
   /**

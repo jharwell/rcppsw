@@ -50,7 +50,7 @@ NS_START(rcppsw, ta);
  * representing the task decomposition of the root task at different
  * granularities (i.e. tasks of different levels of complexity).
  */
-class bi_tdgraph : public tdgraph, public er::client<bi_tdgraph> {
+class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
  public:
   static constexpr char kTABInitRoot[] = "root";
   static constexpr char kTABInitRandom[] = "random";

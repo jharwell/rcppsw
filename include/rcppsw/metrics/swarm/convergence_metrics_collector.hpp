@@ -45,7 +45,7 @@ NS_START(rcppsw, metrics, swarm);
  *
  * Metrics are written out each timestep.
  */
-class convergence_metrics_collector : public metrics::base_metrics_collector {
+class convergence_metrics_collector final : public metrics::base_metrics_collector {
  public:
   /**
    * @param ofname The output file name.

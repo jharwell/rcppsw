@@ -46,7 +46,7 @@ NS_START(rcppsw, swarm, convergence);
  * @brief Calculates the angular order within a swarm for a given instant. From
  * Turgut2008.
  */
-class angular_order : public convergence_measure {
+class angular_order final : public convergence_measure {
  public:
   explicit angular_order(double epsilon) : convergence_measure(epsilon) {}
 

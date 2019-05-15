@@ -46,7 +46,7 @@ NS_START(rcppsw, control);
  * Any parameters not present under the \ref kXMLRoot will be given a value of
  * -1.0.
  */
-class waveform_xml_parser : public rcppsw::params::xml_param_parser {
+class waveform_xml_parser final : public rcppsw::params::xml_param_parser {
  public:
   explicit waveform_xml_parser(uint level)
       : xml_param_parser(level) {}

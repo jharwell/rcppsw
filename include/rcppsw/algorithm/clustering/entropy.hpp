@@ -118,7 +118,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
     double t_accum = 0.0;
     double e_accum = 0.0;
     double entropy_h_1 = 0.0;
-    uint n_iter = (mc_horizon.span() / mc_horizon_delta) + 1;
+    uint n_iter = static_cast<uint>((mc_horizon.span() / mc_horizon_delta)) + 1;
 
     ER_INFO("Begin n_datapoints=%zu,horizon=%s,delta=%f,n_iter=%u,n_threads=%u",
             m_clusters.size(),

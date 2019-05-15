@@ -54,7 +54,7 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
   using base_overlay_grid2D<T*>::xdsize;
   using base_overlay_grid2D<T*>::ydsize;
 
-  overlay_grid2D_ptr(double resolution, uint x_max, uint y_max, Args&&... args)
+  overlay_grid2D_ptr(double resolution, size_t x_max, size_t y_max, Args&&... args)
       : base_overlay_grid2D<T>(resolution, x_max, y_max),
         m_cells(boost::extents[static_cast<typename index_range::index>(
             xdsize())][static_cast<typename index_range::index>(ydsize())]) {
@@ -85,7 +85,7 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
    *
    * @return The subcircle.
    */
-  grid_view subcircle(uint x, uint y, uint radius) {
+  grid_view subcircle(size_t x, size_t y, uint radius) {
     auto x_range = base_overlay_grid2D<T>::circle_xrange_at_point(x, radius);
     auto y_range = base_overlay_grid2D<T>::circle_yrange_at_point(y, radius);
     typename grid_type::index_gen indices;
@@ -95,7 +95,7 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
     return grid_view(m_cells[indices[x1][y1]]);
   }
 
-  grid_view subcircle(uint x, uint y, uint radius) const {
+  grid_view subcircle(size_t x, size_t y, uint radius) const {
     return const_cast<overlay_grid2D_ptr<T>*>(this)->subcircle(x, y, radius);
   }
 
@@ -107,7 +107,7 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
    *
    * @return The grid.
    */
-  grid_view subgrid(uint x_min, uint y_min, uint x_max, uint y_max) {
+  grid_view subgrid(size_t x_min, size_t y_min, size_t x_max, size_t y_max) {
     typename grid_type::index_gen indices;
 
     index_range x(x_min, x_max, 1);
@@ -115,12 +115,12 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
     return grid_view(m_cells[indices[x][y]]);
   }
 
-  grid_view subgrid(uint x_min, uint y_min, uint x_max, uint y_max) const {
+  grid_view subgrid(size_t x_min, size_t y_min, size_t x_max, size_t y_max) const {
     return const_cast<overlay_grid2D_ptr<T>*>(this)->subgrid(
         x_min, y_min, x_max, y_max);
   }
 
-  __rcsw_pure T& access(uint i, uint j) override {
+  __rcsw_pure T& access(size_t i, size_t j) override {
     return *m_cells[static_cast<typename index_range::index>(i)]
                    [static_cast<typename index_range::index>(j)];
   }

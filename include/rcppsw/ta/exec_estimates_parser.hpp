@@ -46,7 +46,7 @@ NS_START(rcppsw, ta);
  * @brief Parses XML parameters used for estimation of task execution
  * times at the start of simulation.
  */
-class exec_estimates_parser : public params::xml_param_parser,
+class exec_estimates_parser final : public params::xml_param_parser,
                               public er::client<exec_estimates_parser> {
  public:
   explicit exec_estimates_parser(

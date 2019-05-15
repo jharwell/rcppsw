@@ -116,11 +116,8 @@ class tdgraph : public er::client<tdgraph> {
    *
    * @return \ref status_t.
    */
-  virtual status_t set_children(const polled_task* parent,
-                                vertex_vector children);
-  virtual status_t set_children(const std::string& parent,
-                                vertex_vector children);
-
+  status_t set_children(const polled_task* parent, vertex_vector children);
+  status_t set_children(const std::string& parent, vertex_vector children);
   /**
    * @brief Return the children of the specified task
    *

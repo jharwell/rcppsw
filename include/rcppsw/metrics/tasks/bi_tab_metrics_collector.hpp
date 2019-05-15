@@ -46,7 +46,7 @@ NS_START(rcppsw, metrics, tasks);
  * Metrics should only be collected upon completion/abortion of a task. Metrics
  * are written out at the specified interval.
  */
-class bi_tab_metrics_collector : public base_metrics_collector {
+class bi_tab_metrics_collector final : public base_metrics_collector {
  public:
   /**
    * @param ofname Output file name.

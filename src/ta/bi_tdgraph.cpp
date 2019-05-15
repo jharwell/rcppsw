@@ -241,7 +241,7 @@ const bi_tab* bi_tdgraph::tab_parent(const bi_tab* const tab) const {
   return const_cast<bi_tdgraph*>(this)->tab_parent(tab);
 } /* tab_parent() */
 
-bool bi_tdgraph::tab_parent_verify(const bi_tab* const tab) const {
+__rcsw_pure bool bi_tdgraph::tab_parent_verify(const bi_tab* const tab) const {
       uint count = 0;
   for (auto& t : m_tabs) {
     if (tab == &t) { /* self */

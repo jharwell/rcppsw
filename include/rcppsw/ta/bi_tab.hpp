@@ -52,7 +52,7 @@ class bi_tdgraph;
  * not be capable of being further decomposed, and therefore the roots of
  * additional TABs.
  */
-class bi_tab : public metrics::tasks::bi_tab_metrics, public er::client<bi_tab> {
+class bi_tab final : public metrics::tasks::bi_tab_metrics, public er::client<bi_tab> {
  public:
   static constexpr char kPartitionSrcExec[] = "exec";
   static constexpr char kPartitionSrcInterface[] = "interface";

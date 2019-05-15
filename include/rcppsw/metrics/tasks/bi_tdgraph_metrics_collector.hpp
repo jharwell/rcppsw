@@ -46,7 +46,7 @@ NS_START(rcppsw, metrics, tasks);
  * a collection of agents executing tasks in a \ref bi_tdgraph. Metrics are
  * written out at the specified interval.
  */
-class bi_tdgraph_metrics_collector : public base_metrics_collector {
+class bi_tdgraph_metrics_collector final : public base_metrics_collector {
  public:
   /**
    * @param ofname Output file name.

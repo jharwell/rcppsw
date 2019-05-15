@@ -47,7 +47,7 @@ namespace ta = rcppsw::ta;
  * @brief Collector for metrics for an executable task across executions of that
  * task.
  */
-class execution_metrics_collector : public base_metrics_collector,
+class execution_metrics_collector final : public base_metrics_collector,
                                     public er::client<execution_metrics_collector> {
  public:
   /**

@@ -46,7 +46,7 @@ NS_START(rcppsw, swarm, convergence);
  * @brief Calculate the task_dist entropy of the swarm, using the methods
  * outlined in Balch2000 and Turgut2008.
  */
-class task_dist_entropy : public convergence_measure {
+class task_dist_entropy final : public convergence_measure {
  public:
   explicit task_dist_entropy(double epsilon) : convergence_measure(epsilon) {}
 

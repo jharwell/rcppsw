@@ -67,14 +67,14 @@ class stacked_grid {
   * @brief The type of the objects stored in a particular layer.
   * @tparam Index The index of the layer.
   */
-  template <uint Index>
+  template <size_t Index>
   using value_type = typename std::tuple_element<Index, TupleTypes>::type;
 
   /**
    * @brief The type of a particular layer.
    * @tparam Index The index of the layer.
    */
-  template <uint Index>
+  template <size_t Index>
   using layer_value_type = rcppsw::ds::overlay_grid2D<value_type<Index>>;
 
   /**
@@ -84,15 +84,15 @@ class stacked_grid {
    * @param i The x coordinate.
    * @param j The y coordinate.
    */
-  template <uint Index>
-  typename layer_value_type<Index>::value_type& access(uint i, uint j) {
+  template <size_t Index>
+  typename layer_value_type<Index>::value_type& access(size_t i, size_t j) {
     return reinterpret_cast<layer_value_type<Index>*>(m_layers[Index])
         ->access(i, j);
   }
 
-  template <uint Index>
-  const typename layer_value_type<Index>::value_type& access(uint i,
-                                                             uint j) const {
+  template <size_t Index>
+  const typename layer_value_type<Index>::value_type& access(size_t i,
+                                                             size_t j) const {
     return reinterpret_cast<const layer_value_type<Index>*>(m_layers[Index])
         ->access(i, j);
   }
@@ -103,21 +103,21 @@ class stacked_grid {
    * @tparam Index The index of the layer.
    * @param d The discrete coordinate pair.
    */
-  template <int Index>
+  template <size_t Index>
   typename layer_value_type<Index>::value_type& access(const math::vector2u& d) {
     return access<Index>(d.x(), d.y());
   }
-  template <int Index>
+  template <size_t Index>
   const typename layer_value_type<Index>::value_type& access(
       const math::vector2u& d) const {
     return access<Index>(d.x(), d.y());
   }
 
-  template <int Index>
+  template <size_t Index>
   layer_value_type<Index>* layer(void) {
     return reinterpret_cast<layer_value_type<Index>*>(m_layers[Index]);
   }
-  template <int Index>
+  template <size_t Index>
   const layer_value_type<Index>* layer(void) const {
     return reinterpret_cast<const layer_value_type<Index>*>(m_layers[Index]);
   }
@@ -125,7 +125,7 @@ class stacked_grid {
   /**
    * @see \ref base_overlay_grid2D::xdsize().
    */
-  uint xdsize(void) const {
+  size_t xdsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xdsize();
   }
 
@@ -139,7 +139,7 @@ class stacked_grid {
   /**
    * @see \ref base_overlay_grid2D::ydsize().
    */
-  uint ydsize(void) const {
+  size_t ydsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->ydsize();
   }
 
@@ -159,9 +159,9 @@ class stacked_grid {
   }
 
  private:
-  static uint constexpr kStackSize = std::tuple_size<TupleTypes>::value;
+  static size_t constexpr kStackSize = std::tuple_size<TupleTypes>::value;
 
-  template <int Index, typename... Args>
+  template <size_t Index, typename... Args>
   void add_layers(Args&&... args) {
     add_layer<Index, Args...>(std::forward<Args>(args)...);
     add_layer<Index - 1, Args...>(std::forward<Args>(args)...);
@@ -174,14 +174,14 @@ class stacked_grid {
    * works, we can only start at an index > 0, and go DOWN, but the user
    * specified the order of layers going FORWARD/UP.
    */
-  template <int Index, typename... Args>
+  template <size_t Index, typename... Args>
   void add_layer(Args&&... args) {
     m_layers[kStackSize - Index - 1] =
         new layer_value_type<kStackSize - Index - 1>(
             std::forward<Args>(args)...);
   }
 
-  template <int Index>
+  template <size_t Index>
   void rm_layers(void) {
     rm_layer<Index>();
   }
@@ -190,7 +190,7 @@ class stacked_grid {
    * @brief Delete a layer from the stacked grid. Indice reversal is not really
    * necessary here, but doing it for reasons of Principle of Least Surprise.
    */
-  template <int Index>
+  template <size_t Index>
   void rm_layer(void) {
     delete reinterpret_cast<const layer_value_type<1>*>(
         m_layers[kStackSize - Index - 1]);

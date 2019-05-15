@@ -49,7 +49,7 @@ NS_START(rcppsw, swarm, convergence);
  * @brief Parses XML parameters related to calculating swarm convergence into
  * \ref convergence_params.
  */
-class convergence_parser : public rcppsw::params::xml_param_parser {
+class convergence_parser final : public rcppsw::params::xml_param_parser {
  public:
   explicit convergence_parser(uint level)
       : xml_param_parser(level),

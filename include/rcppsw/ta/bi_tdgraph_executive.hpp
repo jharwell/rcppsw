@@ -48,7 +48,7 @@ struct executive_params;
  * @brief A task executive which tasks are run one step at a time and polled
  * until they are finished. Operates on \ref bi_tdgraph.
  */
-class bi_tdgraph_executive : public base_executive,
+class bi_tdgraph_executive final : public base_executive,
                              public er::client<bi_tdgraph_executive> {
  public:
   using alloc_notify_cb = std::function<void(const polled_task*, const bi_tab*)>;

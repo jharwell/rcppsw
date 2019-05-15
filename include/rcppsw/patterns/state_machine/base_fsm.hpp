@@ -64,12 +64,12 @@ class base_fsm : public er::client<base_fsm> {
   /**
    * @brief Get the current state of the state machine.
    */
-  virtual uint8_t current_state(void) const { return m_current_state; }
+  uint8_t current_state(void) const { return m_current_state; }
 
   /**
    * @brief Get the maximum number of states for the state machine.
    */
-  virtual uint8_t max_states(void) const { return mc_max_states; }
+  uint8_t max_states(void) const { return mc_max_states; }
 
   /**
    * @brief Get the previous state the the state machine was in that is
@@ -142,10 +142,10 @@ class base_fsm : public er::client<base_fsm> {
    */
   void state_engine(void);
 
-  virtual uint8_t next_state(void) const { return m_next_state; }
-  virtual uint8_t initial_state(void) const { return m_initial_state; }
-  virtual void next_state(uint8_t next_state) { m_next_state = next_state; }
-  virtual void update_state(uint8_t new_state);
+  uint8_t next_state(void) const { return m_next_state; }
+  uint8_t initial_state(void) const { return m_initial_state; }
+  void next_state(uint8_t next_state) { m_next_state = next_state; }
+  void update_state(uint8_t new_state);
 
   /**
    * @brief Gets the state map as defined in the derived class.
@@ -465,9 +465,9 @@ NS_END(state_machine, patterns, rcppsw);
  * Othr Macros
  ******************************************************************************/
 #define FSM_OVERRIDE_DECL(RetType, Func, ...)     \
-  RetType Func(void) __VA_ARGS__ override
+  RetType Func(void) __VA_ARGS__ override __rcsw_pure
 
 #define FSM_OVERRIDE_DEF(RetType, Class, Func, Handle, ...)         \
-  RetType Class::Func(void) __VA_ARGS__ { return (Handle).Func(); }
+  __rcsw_pure RetType Class::Func(void) __VA_ARGS__ { return (Handle).Func(); }
 
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_BASE_FSM_HPP_ */

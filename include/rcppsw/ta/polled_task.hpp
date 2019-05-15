@@ -61,10 +61,10 @@ class polled_task : public executable_task, public taskable {
 
   taskable* mechanism(void) const { return m_mechanism.get(); }
 
-  void task_execute(void) override { m_mechanism->task_execute(); }
-  void task_reset(void) override { m_mechanism->task_reset(); }
+  void task_execute(void) override final { m_mechanism->task_execute(); }
+  void task_reset(void) override final { m_mechanism->task_reset(); }
   bool task_running(void) const override { return m_mechanism->task_running(); }
-  bool task_finished(void) const override {
+  bool task_finished(void) const override final {
     return m_mechanism->task_finished();
   }
 

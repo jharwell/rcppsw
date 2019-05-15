@@ -50,7 +50,7 @@ namespace algclust = algorithm::clustering;
  * @brief Calculate the positional entropy of the swarm, using the methods
  * outlined in Balch2000 and Turgut2008.
  */
-class positional_entropy : public convergence_measure,
+class positional_entropy final : public convergence_measure,
                            public algclust::entropy_balch2000<math::vector2d> {
  public:
   positional_entropy(double epsilon,

@@ -86,8 +86,8 @@ class differential_drive : public kinematics2D::model,
 
   /* kinematics model interface */
   status_t actuate(const kinematics::twist& twist) override;
-  void stop(void) override { m_actuator.stop_wheels(); }
-  double max_speed(void) const override { return m_max_speed; }
+  void stop(void) override final { m_actuator.stop_wheels(); }
+  double max_speed(void) const override final { return m_max_speed; }
 
   status_t actuate(const kinematics::twist& twist, bool hard_turn) {
     m_hard_turn = hard_turn;

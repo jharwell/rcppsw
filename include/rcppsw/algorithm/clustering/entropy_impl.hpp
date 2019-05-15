@@ -46,7 +46,7 @@ NS_START(rcppsw, algorithm, clustering, detail);
  * policy. Suitable for information entropy calculations.
  */
 template <typename T>
-class entropy_impl : public clustering_impl<T, policy::EH> {
+class entropy_impl final : public clustering_impl<T, policy::EH> {
  public:
   using typename clustering_impl<T, policy::EH>::cluster_vector;
   using typename clustering_impl<T, policy::EH>::dist_calc_ftype;

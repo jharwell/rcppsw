@@ -50,7 +50,7 @@ NS_START(rcppsw, swarm);
  * - The pheromone decay parameter.
  * - The previous value of the pheromone density.
  */
-class pheromone_density : public math::expression<double>,
+class pheromone_density final : public math::expression<double>,
                           public er::client<pheromone_density> {
  public:
   /**

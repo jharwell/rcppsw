@@ -45,7 +45,7 @@ NS_START(rcppsw, ta);
  * @brief Parses XML parameters for relating to sourced sigmoid selection of
  * stuff.
  */
-class task_executive_xml_parser : public rcppsw::params::xml_param_parser {
+class task_executive_xml_parser final : public rcppsw::params::xml_param_parser {
  public:
   explicit task_executive_xml_parser(uint level) : xml_param_parser(level) {}
 

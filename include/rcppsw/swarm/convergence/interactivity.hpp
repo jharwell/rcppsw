@@ -49,7 +49,7 @@ NS_START(rcppsw, swarm, convergence);
  * Szabo2014.
  *
  */
-class interactivity : public convergence_measure {
+class interactivity final : public convergence_measure {
  public:
   explicit interactivity(double epsilon) : convergence_measure(epsilon) {}
 

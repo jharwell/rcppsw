@@ -48,7 +48,7 @@ namespace state_machine = rcppsw::patterns::state_machine;
  * of how quickly/how much to change wheel speeds. Does NOT actually change the
  * wheel speeds.
  */
-class differential_drive_fsm : public state_machine::simple_fsm {
+class differential_drive_fsm final : public state_machine::simple_fsm {
  public:
   /**
    * @brief Initialize the FSM.

@@ -56,7 +56,7 @@ class binned_powerlaw_distribution : public powerlaw_distribution {
       : powerlaw_distribution(lb, ub, pwr) {}
 
   double operator()(std::default_random_engine& rng) {
-    uint sample = powerlaw_distribution::operator()(rng);
+    uint sample = static_cast<uint>(powerlaw_distribution::operator()(rng));
     return std::pow(pwr(), std::ceil(std::log(sample) / std::log(pwr())));
   }
 };

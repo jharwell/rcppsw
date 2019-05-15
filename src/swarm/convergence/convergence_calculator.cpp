@@ -171,7 +171,7 @@ void convergence_calculator::update(void) {
   } /* for(&m..) */
 } /* update() */
 
-bool convergence_calculator::converged(void) const {
+__rcsw_pure bool convergence_calculator::converged(void) const {
   bool ret = false;
   for (const auto& m : m_measures) {
     ret |= boost::apply_visitor(convergence_status_collator(), m.second);

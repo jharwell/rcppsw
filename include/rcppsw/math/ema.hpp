@@ -46,7 +46,7 @@ NS_START(rcppsw, math);
  *   new measurement?
  */
 template <class T>
-class ema : public expression<T> {
+class ema final : public expression<T> {
  public:
   using expression<T>::last_result;
   using expression<T>::set_result;

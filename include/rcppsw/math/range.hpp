@@ -49,7 +49,7 @@ NS_START(rcppsw, math);
  * max (if it is an assertion will trigger).
  */
 template <typename T>
-class range : public er::client<range<T>> {
+class range final : public er::client<range<T>> {
  public:
   range(const T& lb, const T& ub) noexcept
       : ER_CLIENT_INIT("rcppsw.math.range"),
@@ -122,7 +122,7 @@ class range : public er::client<range<T>> {
    *
    * @return The wrapped value.
    */
-  T wrap_value(T value) const __rcsw_check_return {
+  __rcsw_pure T wrap_value(T value) const __rcsw_check_return {
     while (value > m_ub) {
       value -= m_span;
     }
