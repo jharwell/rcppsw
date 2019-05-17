@@ -30,13 +30,12 @@
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/params/xml_param_parser.hpp"
-#include "rcppsw/patterns/factory/sharing_factory.hpp"
+#include "rcppsw/patterns/factory/factory.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, params);
-namespace factory = rcppsw::patterns::factory;
 
 /*******************************************************************************
  * Class Definitions
@@ -114,7 +113,7 @@ class xml_param_repository {
    */
   template <typename T, typename S>
   void register_parser(const std::string& name, uint level_in) {
-    m_factory.register_type<T, decltype(level_in)>(name);
+    m_factory.register_type<T>(name);
     m_parsers[name] = m_factory.create(name, level_in).get();
     std::type_index i(typeid(S));
     m_param_types[i] = name;
@@ -131,7 +130,7 @@ class xml_param_repository {
    */
   template <typename T>
   void register_parser(const std::string& name, uint level_in) {
-    m_factory.register_type<T, decltype(level_in)>(name);
+    m_factory.register_type<T>(name);
     m_parsers[name] = m_factory.create(name, level_in).get();
   }
 
@@ -146,8 +145,8 @@ class xml_param_repository {
   /* clang-format off */
   std::map<std::string, xml_param_parser*>         m_parsers{};
   std::map<std::type_index, std::string>           m_param_types{};
-  factory::sharing_factory<xml_param_parser,
-                           uint>                   m_factory{};
+  patterns::factory::retaining_factory<xml_param_parser,
+                                       uint>       m_factory{};
   /* clang-format on */
 };
 

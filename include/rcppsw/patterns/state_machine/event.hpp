@@ -44,19 +44,19 @@ NS_START(rcppsw, patterns, state_machine);
 class event_signal {
  public:
   enum {
-    kIGNORED = 0xFE,  /// A signal that can be ignored
+    ekIGNORED = 0xFE,  /// A signal that can be ignored
     /**
      * @brief A signal indicating that something VERY BAD has happened. Will
      * cause the parent FSM to halt the program.
      */
-    kFATAL = 0xFF,
+    ekFATAL = 0xFF,
 
     /**
      * @brief A signal indicating that all signals input into a given state have
      * been handled successfully. All states should return this signal in the
      * nomitive case.
      */
-    kHANDLED = 0,
+    ekHANDLED = 0,
 
     /**
      * @brief A signal from a lower/child state that could not be handled
@@ -64,13 +64,13 @@ class event_signal {
      * indicate that it encountered a situation that it does not
      * know how to handle in the normal turn of events.
      */
-    kUNHANDLED = 1,
+    ekUNHANDLED = 1,
 
     /**
      * @brief Applications wishing to defined their own event signals
      * should start here.
      */
-    kEXTERNAL_SIGNALS,
+    ekEXTERNAL_SIGNALS,
   };
 };
 
@@ -83,20 +83,20 @@ class event_signal {
 class event_type {
  public:
   enum {
-    kNORMAL = 0,  /// A normal, external state machine event
+    ekNORMAL = 0,  /// A normal, external state machine event
 
     /**
      * @brief A signal from a child state, conveying something that it couldn't
      * handle or that something important happened that it felt a parent FSM
      * should know about.
      */
-    kCHILD = 1,
+    ekCHILD = 1,
 
     /**
      * @brief Applications wishing to defined their own event types
      * should start here.
      */
-    kEXTERNAL_TYPES,
+    ekEXTERNAL_TYPES,
   };
 };
 
@@ -110,7 +110,7 @@ class event_type {
 class event_data {
  public:
   event_data(void) = default;
-  explicit event_data(int signal, int type = event_type::kNORMAL)
+  explicit event_data(int signal, int type = event_type::ekNORMAL)
       : m_signal(signal), m_type(type) {}
   virtual ~event_data(void) = default;
 
@@ -123,13 +123,13 @@ class event_data {
    * @brief Reset the event data type and signal to nominal/normal values.
    */
   void reset(void) {
-    signal(event_signal::kIGNORED);
-    type(event_type::kNORMAL);
+    signal(event_signal::ekIGNORED);
+    type(event_type::ekNORMAL);
   }
 
  private:
-  int m_signal{event_signal::kIGNORED};
-  int m_type{event_type::kNORMAL};
+  int m_signal{event_signal::ekIGNORED};
+  int m_type{event_type::ekNORMAL};
 };
 
 /**

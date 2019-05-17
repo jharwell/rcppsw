@@ -64,7 +64,7 @@ FSM_STATE_DEFINE(differential_drive_fsm, soft_turn, turn_data* data) {
   bool within_range = range.contains(angle.signed_normalize());
   if (data->force.second || (!within_range && !data->force.first)) {
     internal_event(kST_HARD_TURN);
-    return state_machine::event_signal::kHANDLED;
+    return state_machine::event_signal::ekHANDLED;
   }
 
   /* Both wheels go straight, but one is faster than the other */
@@ -73,7 +73,7 @@ FSM_STATE_DEFINE(differential_drive_fsm, soft_turn, turn_data* data) {
   double speed1 = data->speed - data->speed * (1.0 - speed_factor);
   double speed2 = data->speed + data->speed * (1.0 - speed_factor);
   set_wheel_speeds(speed1, speed2, data->angle);
-  return state_machine::event_signal::kHANDLED;
+  return state_machine::event_signal::ekHANDLED;
 }
 FSM_STATE_DEFINE(differential_drive_fsm, hard_turn, turn_data* data) {
   math::range<math::radians> range(-mc_soft_turn_max, mc_soft_turn_max);
@@ -81,10 +81,10 @@ FSM_STATE_DEFINE(differential_drive_fsm, hard_turn, turn_data* data) {
   bool within_range = range.contains(angle.signed_normalize());
   if ((!data->force.second && within_range) || data->force.first) {
     internal_event(kST_SOFT_TURN);
-    return state_machine::event_signal::kHANDLED;
+    return state_machine::event_signal::ekHANDLED;
   }
   set_wheel_speeds(-mc_max_speed, mc_max_speed, data->angle);
-  return state_machine::event_signal::kHANDLED;
+  return state_machine::event_signal::ekHANDLED;
 }
 
 /*******************************************************************************

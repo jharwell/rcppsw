@@ -25,7 +25,9 @@
  * Includes
  ******************************************************************************/
 #include <string>
-#include "rcppsw/patterns/factory/releasing_factory.hpp"
+#include <memory>
+
+#include "rcppsw/patterns/factory/factory.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls

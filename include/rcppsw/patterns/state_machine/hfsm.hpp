@@ -57,7 +57,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
   ~hfsm() override = default;
 
   void init(void) override {
-    ER_ASSERT(initial_state() < event_signal::kIGNORED,
+    ER_ASSERT(initial_state() < event_signal::ekIGNORED,
                      "Bad initial state");
     base_fsm::init();
   }
