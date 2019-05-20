@@ -39,7 +39,7 @@ NS_START(rcppsw, metrics, tasks);
  ******************************************************************************/
 /**
  * @class bi_tab_metrics_collector
- * @ingroup metrics tasks
+ * @ingroup rcppsw metrics tasks
  *
  * @brief Collector for metrics for \ref bi_tab_metrics about task allocation.
  *

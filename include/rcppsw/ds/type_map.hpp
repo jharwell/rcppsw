@@ -41,7 +41,7 @@ NS_START(rcppsw, ds);
  ******************************************************************************/
 /**
  * @class type_map
- * @ingroup ds
+ * @ingroup rcppsw ds
  * @brief A map of a set of (possibly incomplete) types, keyed by
  * std::type_index, with the value being a boost variant. Extremely useful to
  * emulate reflection in C++ (e.g. to map a type to a variant containing actions

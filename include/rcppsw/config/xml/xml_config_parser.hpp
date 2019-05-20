@@ -1,0 +1,210 @@
+/**
+ * @file xml_config_parser.hpp
+ *
+ * @copyright 2017 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
+
+#ifndef INCLUDE_RCPPSW_CONFIG_XML_XML_CONFIG_PARSER_HPP_
+#define INCLUDE_RCPPSW_CONFIG_XML_XML_CONFIG_PARSER_HPP_
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+#include <ext/ticpp/ticpp.h>
+#include <iosfwd>
+#include <string>
+#include <memory>
+
+#include "rcppsw/common/common.hpp"
+#include "rcppsw/er/client.hpp"
+
+/*******************************************************************************
+ * Namespaces/Decls
+ ******************************************************************************/
+NS_START(rcppsw, config);
+struct base_config;
+
+NS_START(xml);
+
+/*******************************************************************************
+ * Macros
+ ******************************************************************************/
+#define XML_ATTR_STR(container, name) \
+  std::string(#name) << "=" << (container)->name
+#define XML_PARSE_ATTR(node, container, name) \
+  this->node_attr_get((node), #name, (container)->name)
+
+#define XML_PARSE_ATTR_DFLT(node, container, name, dflt) \
+  this->node_attr_get((node), #name, (container)->name, dflt)
+
+/*******************************************************************************
+ * Class Definitions
+ ******************************************************************************/
+/**
+ * @class xml_config_parser
+ * @ingroup rcppsw config xml
+ *
+ * @brief Interface specifying functionality for parsing XML into a \ref
+ * base_config derived parameter structure.
+ *
+ */
+class xml_config_parser : public er::client<xml_config_parser> {
+ public:
+  explicit xml_config_parser(uint level);
+  ~xml_config_parser(void) override = default;
+
+  static constexpr uint kColumnWidth = 100;
+  static constexpr uint kHeader1 = 1;
+  static constexpr uint kHeader2 = 2;
+  static constexpr uint kHeader3 = 3;
+  static constexpr uint kHeader4 = 4;
+
+  /**
+   * @brief Return the root XML tag that all parameters for the specified parser
+   * should be found/placed under.
+   */
+  virtual std::string xml_root(void) const = 0;
+
+  /**
+   * @brief Build a header suitable for inclusion in dumping parsed parameters
+   * to a stream.
+   *
+   * @return The constructed header.
+   */
+  std::string build_header(void) const;
+
+  /**
+   * @brief Build a footer suitable for inclusion in dumping parsed parameters
+   * to a stream.
+   *
+   * @return The constructed footer.
+   */
+  std::string build_footer(void) const;
+
+  /**
+   * @brief Parse the provided XML node into an internal representation (should
+   * be a class/struct derived from \ref base_config).
+   *
+   * @param node The XML tag that the root (i.e. the value returned by
+   * \ref xml_root()) for the parser can be found under.
+   */
+  virtual void parse(const ticpp::Element& node) = 0;
+
+  /**
+   * @brief Validate the range, value, etc. of all parsed parameters. As such,
+   * don't call this unless the parameters have already been parsed.
+   *
+   * @return \c TRUE if all parameters are valid, \c FALSE otherwise.
+   */
+  virtual bool validate(void) const { return true; }
+
+  /**
+   * @brief Get the results of parameter parse. This is the front end of the
+   * non-virtual interface to getting the results of a parameter parse, so that
+   * covariance with smart pointer return types will work.
+   */
+  template <typename T>
+  std::shared_ptr<T> config_get(void) const {
+    static_assert(std::is_base_of<base_config, T>::value,
+                  "Parameters must be derived from base_config!");
+    return std::static_pointer_cast<T>(config_get_impl());
+  }
+
+  friend std::ostream& operator<<(std::ostream& stream,
+                                  const xml_config_parser& parser) {
+    parser.show(stream);
+    return stream;
+  } /* operator<<() */
+
+  uint level(void) const { return m_level; }
+  void level(uint level) { m_level = level; }
+
+  /**
+   * @brief Get the node that is inside the specified one, designated by the
+   * specified tag.
+   *
+   * If no such node exists, an assertion halts the program.
+   */
+  ticpp::Element& node_get(const ticpp::Element& node,
+                           const std::string& tag) const;
+
+  /**
+   * @brief Get an attribute inside a node.
+   *
+   * @param node The node to search.
+   * @param attr The attribute name.
+   * @param buf  The result buffer.
+   */
+  template <typename T>
+  void node_attr_get(const ticpp::Element& node,
+                     const std::string& attr,
+                     T& buf) const {
+    node.GetAttribute(attr, &buf, true);
+  }
+
+  /**
+   * @brief Get a boolean attribute inside a node (bools have to be handed
+   * specially, or at least I can't figure out how to make them also work the
+   * template version).
+   */
+  void node_attr_get(const ticpp::Element& node,
+                     const std::string& attr,
+                     bool& buf) const;
+
+  /**
+   * @brief Get an attribute inside a node, or substitute a default value if the
+   * attribute does not exist.
+   *
+   * @param node The node to search.
+   * @param attr The attribute name.
+   * @param buf  The result buffer.
+   * @param dflt The default value to use if the attribute does not exist.
+   */
+  template <typename T>
+  void node_attr_get(const ticpp::Element& node,
+                     const std::string& attr,
+                     T& buf,
+                     const T& dflt) const {
+    node.GetAttributeOrDefault(attr, &buf, dflt);
+  }
+
+  virtual bool parsed(void) const { return true; }
+
+ protected:
+  /**
+   * @brief Implementation (back end) of how to get the results of a parameter
+   * parse using covariance. This is to make parameter parsing easy when you
+   * only have a handle on THIS class, even if the object is actually a derived
+   * class parameter parser.
+   */
+  virtual std::shared_ptr<base_config> config_get_impl(void) const = 0;
+
+  /**
+   * @brief Dump the parsed (or possibly unparsed, but that's kind of useless)
+   * parameters to the specified stream.
+   */
+  virtual void show(std::ostream&) const {}
+
+ private:
+  /* clang-format off */
+  uint m_level;
+  /* clang-format on */
+};
+
+NS_END(xml, config, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_CONFIG_XML_XML_CONFIG_PARSER_HPP_ */

@@ -35,13 +35,16 @@
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, ta);
+namespace config {
+class task_executive_config;
+} /* namespace config */
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
  * @class base_executive
- * @ingroup ta
+ * @ingroup rcppsw ta
  *
  * @brief Base class for runtime task task executives.
  */
@@ -53,13 +56,13 @@ class base_executive : public rcppsw::er::client<base_executive> {
   /**
    * @brief Creates the base executive.
    *
-   * @param params Initialization parameters/config.
+   * @param config Initialization parameters/config.
    *
    * @param graph Graph to manage. Takes ownership of the object (can't use the
    *              language to communicate that with unique_ptr because of
    *              casting reasons).
    */
-  base_executive(const struct task_executive_params* params,
+  base_executive(const config::task_executive_config* config,
                  std::unique_ptr<tdgraph> graph);
   ~base_executive(void) override;
 

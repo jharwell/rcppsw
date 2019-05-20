@@ -41,7 +41,7 @@ NS_START(rcppsw, swarm, convergence);
  ******************************************************************************/
 /**
  * @class convergence_measure
- * @ingroup swarm convergence
+ * @ingroup rcppsw swarm convergence
  *
  * @brief Base class for all convergence measurements that can be computed on
  * swarms. Provides common functionality needed by all derived classes (cannot

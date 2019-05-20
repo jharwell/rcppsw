@@ -40,7 +40,7 @@ NS_START(rcppsw, metrics, tasks);
  ******************************************************************************/
 /**
  * @class bi_tdgraph_metrics_collector
- * @ingroup metrics tasks
+ * @ingroup rcppsw metrics tasks
  *
  * @brief Collector for metrics about the current task_dist of tasks in
  * a collection of agents executing tasks in a \ref bi_tdgraph. Metrics are

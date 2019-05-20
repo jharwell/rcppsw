@@ -36,7 +36,7 @@ NS_START(rcppsw, math);
  ******************************************************************************/
 /**
  * @class expression
- * @ingroup math
+ * @ingroup rcppsw math
  *
  * @brief A base class for easy swapping/manipulating of mathematical
  * expressions.
@@ -47,6 +47,8 @@ class expression {
   expression(void) : m_last() {}
   explicit expression(const T& last) : m_last(last) {}
   virtual ~expression(void) = default;
+  expression(const expression&) = default;
+  expression& operator=(const expression&) = default;
 
   /**
    * @brief Get the last value calculated.

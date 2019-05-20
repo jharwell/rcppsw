@@ -36,12 +36,16 @@
 NS_START(rcppsw, ta);
 class bi_tab;
 
+namespace config {
+struct src_sigmoid_sel_config;
+} /* namespace config */
+
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
  * @class bi_tab_sel_probability
- * @ingroup ta
+ * @ingroup rcppsw ta
  *
  * @brief Calculates the probability that a robot selects the TAB rooted at
  * depth i-1 its current TAB is rooted at depth i as a function of how
@@ -86,7 +90,7 @@ class bi_tab_sel_probability : public er::client<bi_tab_sel_probability>,
    * @brief Initialize subtask sel probability with method + parameter
    * values.
    */
-  explicit bi_tab_sel_probability(const struct src_sigmoid_sel_params* params);
+  explicit bi_tab_sel_probability(const config::src_sigmoid_sel_config* config);
 
   const std::string& method(void) const { return mc_method; }
 

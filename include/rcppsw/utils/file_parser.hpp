@@ -44,7 +44,7 @@ NS_START(rcppsw, utils);
  ******************************************************************************/
 /**
  * @class file_parser
- * @ingroup utils
+ * @ingroup rcppsw utils
  *
  * @brief File parsing class using template design pattern. Parses each line of
  * a file into a vector of whitespace delimited tokens, and returns a vector of

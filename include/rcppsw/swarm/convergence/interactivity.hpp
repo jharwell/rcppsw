@@ -42,7 +42,7 @@ NS_START(rcppsw, swarm, convergence);
  ******************************************************************************/
 /**
  * @class interactivity
- * @ingroup swarm
+ * @ingroup rcppsw swarm
  *
  * @brief Calculates the degree of interaction of the swarm, given a list of
  * robot nearest neighbor distances from a swarm for a given instant. From

@@ -37,7 +37,7 @@ NS_START(rcppsw, control);
 
 /**
  * @class sine_waveform
- * @ingroup control
+ * @ingroup rcppsw control
  *
  * Given the current time, outputs the current value of a sine wave according to
  * configured parameters:
@@ -47,8 +47,8 @@ NS_START(rcppsw, control);
  */
 class sine_waveform : public waveform {
  public:
-  explicit sine_waveform(const struct waveform_params* const params)
-      : waveform(params) {}
+  explicit sine_waveform(const struct config::waveform_config* const config)
+      : waveform(config) {}
 
   double value(double time) override {
     double t = frequency() * time;
@@ -59,7 +59,7 @@ class sine_waveform : public waveform {
 
 /**
  * @class square_waveform
- * @ingroup control
+ * @ingroup rcppsw control
  *
  * Given the current time, outputs the current value of a square wave according
  * to configured parameters:
@@ -71,8 +71,8 @@ class sine_waveform : public waveform {
  */
 class square_waveform : public waveform {
  public:
-  explicit square_waveform(const struct waveform_params* const params)
-      : waveform(params) {}
+  explicit square_waveform(const struct config::waveform_config* const config)
+      : waveform(config) {}
 
   double value(double time) override {
     double t = frequency() * time;
@@ -83,7 +83,7 @@ class square_waveform : public waveform {
 
 /**
  * @class sawtooth_waveform
- * @ingroup control
+ * @ingroup rcppsw control
  *
  * Given the current time, outputs the current value of a sawtooth wave
  * according to configured parameters:
@@ -92,8 +92,8 @@ class square_waveform : public waveform {
  */
 class sawtooth_waveform : public waveform {
  public:
-  explicit sawtooth_waveform(const struct waveform_params* const params)
-      : waveform(params) {}
+  explicit sawtooth_waveform(const struct config::waveform_config* const config)
+      : waveform(config) {}
 
   double value(double time) override {
     double t = frequency() * time;

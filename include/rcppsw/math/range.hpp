@@ -41,7 +41,7 @@ NS_START(rcppsw, math);
  ******************************************************************************/
 /**
  * @class range
- * @ingroup math
+ * @ingroup rcppsw math
  *
  * @brief Convenience class holding a [min, max] range. Makes comparisons like
  * "is this number in this range" much more intuitive and easy to debug. All

@@ -37,7 +37,7 @@ NS_START(rcppsw, metrics, tasks);
  ******************************************************************************/
 /**
  * @class bi_tab_metrics
- * @ingroup metrics tasks
+ * @ingroup rcppsw metrics tasks
  *
  * @brief Interface defining metrics that can be collected about the task
  * allocation each robot performs.

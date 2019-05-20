@@ -41,7 +41,7 @@ class base_metrics;
  ******************************************************************************/
 /**
  * @class base_metrics_collector
- * @ingroup metrics
+ * @ingroup rcppsw metrics
  *
  * @brief Base class that uses the template design pattern to provide hooks for
  * derived classes so that the process of writing out metrics is centralized in

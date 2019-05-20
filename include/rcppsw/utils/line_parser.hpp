@@ -38,7 +38,7 @@ NS_START(rcppsw, utils);
  ******************************************************************************/
 /**
  * @class line_parser
- * @ingroup utils
+ * @ingroup rcppsw utils
  *
  * @brief Parses a single line into a vector of tokens broken on the specified
  * delimiter.

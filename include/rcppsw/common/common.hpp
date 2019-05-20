@@ -1,6 +1,6 @@
 /**
  * @file common.hpp
- * @ingroup common
+ * @ingroup rcppsw common
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *

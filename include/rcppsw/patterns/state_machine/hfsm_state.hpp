@@ -39,7 +39,7 @@ NS_START(rcppsw, patterns, state_machine);
  ******************************************************************************/
 /**
  * @class hfsm_state
- * @ingroup patterns state_machine
+ * @ingroup rcppsw patterns state_machine
  *
  * @brief Base class representing a state within a HFSM.
  */

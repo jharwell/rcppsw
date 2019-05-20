@@ -37,7 +37,7 @@ NS_START(rcppsw, ta);
  ******************************************************************************/
 /**
  * @class abort_probability
- * @ingroup ta
+ * @ingroup rcppsw ta
  *
  * @brief Calculates the probability that a robot will abort the task it is
  * currently working on using the negative exponential distribution.
@@ -87,7 +87,7 @@ class abort_probability : public math::sigmoid {
   /**
    * @brief Initialize abort probability calculation with user-specified values.
    */
-  explicit abort_probability(const math::sigmoid_params* params);
+  explicit abort_probability(const math::config::sigmoid_config* config);
 
   /**
    * @brief Calculate the current abort probability, based on the most recent

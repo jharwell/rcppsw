@@ -59,7 +59,7 @@ struct result_type2D {
  ******************************************************************************/
 /**
  * @class closest_pair2D
- * @ingroup algorithm
+ * @ingroup rcppsw algorithm
  *
  * @brief Calculate the closest two points from a set of 2D points in O(NLogN).
  *

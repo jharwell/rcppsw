@@ -45,7 +45,7 @@ NS_START(rcppsw, algorithm, clustering);
  ******************************************************************************/
 /**
  * @class entropy_balch2000
- * @ingroup algorithm clustering
+ * @ingroup rcppsw algorithm clustering
  *
  * @brief Wrapper class for performing clustering using the event horizon model
  * in which all points within a specified distance (horizon) to a point i are

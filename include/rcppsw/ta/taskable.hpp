@@ -41,7 +41,7 @@ class taskable_argument;
  ******************************************************************************/
 /**
  * @class taskable
- * @ingroup ta
+ * @ingroup rcppsw ta
  *
  * @brief A class that all classes wishing to be used as the mechanism by which
  * \ref executable_task objects execute themselves must inherit from.

@@ -41,7 +41,7 @@ NS_START(rcppsw, multiprocess);
  ******************************************************************************/
 /**
  * @class forkable
- * @ingroup multiprocess
+ * @ingroup rcppsw multiprocess
  *
  * @brief Class derived from hear will be capable of being fork()ed and having
  * each new process jump into the main loop defined for the class.

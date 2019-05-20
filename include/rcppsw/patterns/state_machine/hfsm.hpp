@@ -38,7 +38,7 @@ NS_START(rcppsw, patterns, state_machine);
  ******************************************************************************/
 /**
  * @class hfsm
- * @ingroup patterns state_machine
+ * @ingroup rcppsw patterns state_machine
  *
  * @brief Implements a software-based hierarchical state machine.
  */

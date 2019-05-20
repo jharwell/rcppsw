@@ -52,7 +52,7 @@ NS_END(detail);
  ******************************************************************************/
 /**
  * @class differential_drive_actuator
- * @ingroup robotics hal
+ * @ingroup rcppsw robotics hal
  *
  * @brief Differential drive actuator wrapper for the following supported
  * robots:

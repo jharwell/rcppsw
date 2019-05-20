@@ -37,7 +37,7 @@ NS_START(rcppsw, ds);
  ******************************************************************************/
 /**
  * @class base_overlay_grid2D
- * @ingroup ds
+ * @ingroup rcppsw ds
  *
  * @brief A 2D logical grid that is overlayed over a continuous environment. It
  * discretizes the continuous arena into a grid of a specified resolution

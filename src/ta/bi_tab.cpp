@@ -27,8 +27,8 @@
 
 #include "rcppsw/ta/bi_tdgraph.hpp"
 #include "rcppsw/ta/polled_task.hpp"
-#include "rcppsw/ta/src_sigmoid_sel_params.hpp"
-#include "rcppsw/ta/task_partition_params.hpp"
+#include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
+#include "rcppsw/ta/config/task_partition_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -47,8 +47,8 @@ constexpr char bi_tab::kSubtaskSelSrcInterface[];
  * Constructors/Destructors
  ******************************************************************************/
 bi_tab::bi_tab(const struct elements* elts,
-               const struct task_partition_params* const partitioning,
-               const struct src_sigmoid_sel_params* const subtask_sel)
+               const config::task_partition_config* const partitioning,
+               const config::src_sigmoid_sel_config* const subtask_sel)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tab"),
       mc_always_partition(partitioning->always_partition),
       mc_never_partition(partitioning->never_partition),

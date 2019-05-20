@@ -36,7 +36,7 @@ NS_START(rcppsw, math);
  ******************************************************************************/
 /**
  * @class ema
- * @ingroup math
+ * @ingroup rcppsw math
  *
  * @brief Calculates an Exponential Moving Average of SOMETHING.
  *

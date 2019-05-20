@@ -34,14 +34,16 @@
  ******************************************************************************/
 NS_START(rcppsw, control);
 class waveform;
-struct waveform_params;
+namespace config {
+struct waveform_config;
+} /* namespace config */
 
 /*******************************************************************************
  * Classes
  ******************************************************************************/
 /**
  * @class waveform_generator
- * @ingroup control
+ * @ingroup rcppsw control
  *
  * @brief Factory to create waveforms of different types given the name of a
  * waveform. Valid names are:
@@ -54,7 +56,7 @@ struct waveform_params;
  */
 class waveform_generator
     : public patterns::factory::releasing_factory<waveform,
-                                                  const waveform_params*> {
+                                                  const config::waveform_config*> {
  public:
   static constexpr char kSine[] = "Sine";
   static constexpr char kSquare[] = "Square";
@@ -65,7 +67,7 @@ class waveform_generator
   waveform_generator(void);
 
   std::unique_ptr<waveform> operator()(const std::string& name,
-                                       const waveform_params* params);
+                                       const config::waveform_config* config);
 };
 
 NS_END(control, rcppsw);

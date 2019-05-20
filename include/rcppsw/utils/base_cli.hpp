@@ -39,7 +39,7 @@ NS_START(rcppsw);
  ******************************************************************************/
 /**
  * @class base_cli
- * @ingroup utils
+ * @ingroup rcppsw utils
  *
  * @brief Base class for command line interfaces. Uses boost to do the actual
  * parsing.

@@ -53,7 +53,7 @@ class visit_set_helper {
 
 /**
  * @class visit_set
- * @ingroup patterns visitor
+ * @ingroup rcppsw patterns visitor
  *
  * @brief General case for template expansion. Provides classes the ability to
  * explicitly control what types of classes they can visit (limited to the

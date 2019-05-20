@@ -35,6 +35,7 @@ NS_START(rcppsw, math);
  ******************************************************************************/
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wglobal-constructors"
+#pragma clang diagnostic ignored "-Wexit-time-destructors"
 const range<degrees> degrees::kSignedRange(degrees(-180.0), degrees(180.0));
 const range<degrees> degrees::kUnsignedRange(degrees(0.0), degrees(360.0));
 const double degrees::kDEGREES_TO_RADIANS(M_PI / 180.0); // NOLINT

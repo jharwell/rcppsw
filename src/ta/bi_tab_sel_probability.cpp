@@ -26,7 +26,7 @@
 #include <cmath>
 #include "rcppsw/ta/bi_tab.hpp"
 #include "rcppsw/ta/polled_task.hpp"
-#include "rcppsw/ta/src_sigmoid_sel_params.hpp"
+#include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -54,10 +54,10 @@ bi_tab_sel_probability::bi_tab_sel_probability(const std::string& method)
 }
 
 bi_tab_sel_probability::bi_tab_sel_probability(
-    const struct src_sigmoid_sel_params* const params)
+    const config::src_sigmoid_sel_config* const config)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tab_sel_prob"),
-      sigmoid(&params->sigmoid.sigmoid),
-      mc_method(params->sigmoid.method) {}
+      sigmoid(&config->sigmoid.sigmoid),
+      mc_method(config->sigmoid.method) {}
 
 /*******************************************************************************
  * Member Functions

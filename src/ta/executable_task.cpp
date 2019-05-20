@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/executable_task.hpp"
-#include "rcppsw/math/ema_params.hpp"
-#include "rcppsw/ta/src_sigmoid_sel_params.hpp"
+#include "rcppsw/math/config/ema_config.hpp"
+#include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
 #include "rcppsw/ta/time_estimate.hpp"
 
 /*******************************************************************************
@@ -41,8 +41,8 @@ constexpr char executable_task::kAbortSrcInterface[];
  * Constructors/Destructor
  ******************************************************************************/
 executable_task::executable_task(const std::string& name,
-                                 const struct src_sigmoid_sel_params* abort,
-                                 const struct math::ema_params* estimation)
+                                 const config::src_sigmoid_sel_config* abort,
+                                 const math::config::ema_config* estimation)
     : logical_task(name),
       ER_CLIENT_INIT("rcppsw.ta.executable_task"),
       mc_abort_src(abort->input_src),

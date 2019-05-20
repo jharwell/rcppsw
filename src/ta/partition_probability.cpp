@@ -23,7 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/ta/partition_probability.hpp"
 #include <cmath>
-#include "rcppsw/ta/sigmoid_sel_params.hpp"
+#include "rcppsw/ta/config/sigmoid_sel_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -39,12 +39,12 @@ constexpr char partition_probability::kMethodPini2011[];
  * Constructors/Destructor
  ******************************************************************************/
 partition_probability::partition_probability(
-    const struct sigmoid_sel_params* params)
-    : sigmoid(params->sigmoid.reactivity,
-              params->sigmoid.offset,
-              params->sigmoid.gamma),
+    const config::sigmoid_sel_config* config)
+    : sigmoid(config->sigmoid.reactivity,
+              config->sigmoid.offset,
+              config->sigmoid.gamma),
       ER_CLIENT_INIT("rcppsw.ta.partition_probability"),
-      mc_method(params->method) {}
+      mc_method(config->method) {}
 
 /*******************************************************************************
  * Member Functions

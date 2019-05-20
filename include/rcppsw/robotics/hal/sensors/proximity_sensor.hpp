@@ -58,7 +58,7 @@ NS_END(detail);
  ******************************************************************************/
 /**
  * @class proximity_sensor
- * @ingroup robotics hal
+ * @ingroup rcppsw robotics hal
  *
  * @brief Proxmity sensor wrapper for the following supported robots:
  *

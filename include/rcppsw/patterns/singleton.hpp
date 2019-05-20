@@ -35,7 +35,7 @@ NS_START(rcppsw, patterns);
  ******************************************************************************/
 /**
  * @class singleton
- * @ingroup patterns
+ * @ingroup rcppsw patterns
  *
  * @brief Define a class as in capable of being moved, copied, etc., and that
  * their can only ever be one of them.

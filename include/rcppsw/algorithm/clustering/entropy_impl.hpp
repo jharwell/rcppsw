@@ -40,7 +40,7 @@ NS_START(rcppsw, algorithm, clustering, detail);
  ******************************************************************************/
 /**
  * @class entropy_impl
- * @ingroup algorithm clustering
+ * @ingroup rcppsw algorithm clustering
  *
  * @brief Sequential clustering using the Event Horizon (EH) membership
  * policy. Suitable for information entropy calculations.

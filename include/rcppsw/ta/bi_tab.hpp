@@ -40,12 +40,17 @@ NS_START(rcppsw, ta);
 class polled_task;
 class bi_tdgraph;
 
+namespace config {
+struct task_partition_config;
+struct src_sigmoid_sel_config;
+} /* namespace config */
+
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
  * @class bi_tab
- * @ingroup ta
+ * @ingroup rcppsw ta
  *
  * @brief Represents Bi Task Allocation Block (TAB) which consists of a root
  * task and two subtasks the root task decomposes into. The subtasks may or may
@@ -66,8 +71,8 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics, public er::client<bi
     polled_task*      child2;
   };
   bi_tab(const struct elements* elts,
-         const struct task_partition_params* partitioning,
-         const struct src_sigmoid_sel_params* subtask_sel);
+         const config::task_partition_config* partitioning,
+         const config::src_sigmoid_sel_config* subtask_sel);
 
   ~bi_tab(void) override = default;
 

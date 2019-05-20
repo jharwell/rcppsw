@@ -36,12 +36,16 @@
  ******************************************************************************/
 NS_START(rcppsw, ta);
 
+namespace config {
+struct sigmoid_sel_config;
+} /* namespace config */
+
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
  * @class partition_probability
- * @ingroup ta
+ * @ingroup rcppsw ta
  *
  * @brief Calculates the probability that a robot partitions its current task
  * using the negative exponential distribution.
@@ -90,7 +94,7 @@ class partition_probability : public math::sigmoid,
    * @brief Initialize partitioning probability explicity with method +
    * parameter values.
    */
-  explicit partition_probability(const struct sigmoid_sel_params* params);
+  explicit partition_probability(const config::sigmoid_sel_config* config);
 
   double operator()(const time_estimate& task,
                     const time_estimate& subtask1,

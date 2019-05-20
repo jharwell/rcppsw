@@ -53,7 +53,7 @@ NS_END(detail);
  ******************************************************************************/
 /**
  * @class wifi_actuator_
- * @ingroup robotics hal
+ * @ingroup rcppsw robotics hal
  *
  * @brief WIFI actuator wrapper for the following supported robots:
  *

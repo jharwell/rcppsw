@@ -39,7 +39,7 @@ class event_data;
  ******************************************************************************/
 /**
  * @class state
- * @ingroup patterns state_machine
+ * @ingroup rcppsw patterns state_machine
  *
  * @brief Abstract state base class that all states inherit from.
  */

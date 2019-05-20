@@ -43,10 +43,10 @@ constexpr char bi_tdgraph::kTABInitMaxDepth[];
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-bi_tdgraph::bi_tdgraph(const struct task_alloc_params* const params)
+bi_tdgraph::bi_tdgraph(const config::task_alloc_config* const config)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tdgraph"),
-      mc_params(*params),
-      m_tab_sw_prob(&mc_params.tab_sel),
+      mc_config(*config),
+      m_tab_sw_prob(&mc_config.tab_sel),
       m_rng(std::chrono::system_clock::now().time_since_epoch().count()) {}
 
 /*******************************************************************************
@@ -117,8 +117,8 @@ status_t bi_tdgraph::install_tab(polled_task* parent,
     .child2 = children[1].get()
   };
   m_tabs.emplace_back(&elts,
-                      &mc_params.partitioning,
-                      &mc_params.subtask_sel);
+                      &mc_config.partitioning,
+                      &mc_config.subtask_sel);
   /*
    * Not needed if a priori execution time estimates are used, but is needed
    * if they are not and the root of the tdgraph is partitionable in order to

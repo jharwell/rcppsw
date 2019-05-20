@@ -44,7 +44,7 @@ class polled_task;
  ******************************************************************************/
 /**
  * @class tdgraph
- * @ingroup ta
+ * @ingroup rcppsw ta
  *
  * @brief Representation of an overall task (the root task) as a tree
  * representing the task decomposition of the root task at different

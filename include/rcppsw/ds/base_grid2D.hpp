@@ -38,7 +38,7 @@ NS_START(rcppsw, ds);
  ******************************************************************************/
 /**
  * @class base_grid2D
- * @ingroup ds
+ * @ingroup rcppsw ds
  *
  * @brief Base class containing functionality common to all types of 2D grids.
  */

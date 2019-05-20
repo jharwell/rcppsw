@@ -53,7 +53,7 @@ NS_END(detail);
  ******************************************************************************/
 /**
  * @class light_sensor
- * @ingroup robotics hal
+ * @ingroup rcppsw robotics hal
  *
  * @brief Light sensor wrapper for the following supported robots:
  *

@@ -40,7 +40,7 @@ NS_START(rcppsw, metrics, swarm);
 
 /**
  * @class convergence_metrics
- * @ingroup metrics swarm
+ * @ingroup rcppsw metrics swarm
  *
  * @brief Defines the metrics to be collected at the ensemble level in order
  * to calculate the swarm's convergence in various ways. Measures adapted from:

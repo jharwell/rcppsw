@@ -39,7 +39,7 @@ class base_fsm;
  ******************************************************************************/
 /**
  * @class state_guard_condition
- * @ingroup patterns state_machine
+ * @ingroup rcppsw patterns state_machine
  *
  * @brief Condition to determine if a state's main action should be executed.
  *

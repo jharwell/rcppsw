@@ -48,7 +48,7 @@ NS_START(rcppsw, patterns, state_machine);
  ******************************************************************************/
 /**
  * @class base_fsm
- * @ingroup patterns state_machine
+ * @ingroup rcppsw patterns state_machine
  *
  * @brief Implements a software-based state machine.
  */

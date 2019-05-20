@@ -55,8 +55,8 @@ waveform_generator::waveform_generator(void) {
  ******************************************************************************/
 std::unique_ptr<waveform> waveform_generator::operator()(
     const std::string& name,
-    const waveform_params* params) {
-  return create(name, params);
+    const config::waveform_config* config) {
+  return create(name, config);
 } /* operator() */
 
 NS_END(control, rcppsw);

@@ -40,7 +40,7 @@ namespace sm = patterns::state_machine;
  ******************************************************************************/
 /**
  * @class mt_fsm
- * @ingroup multithread
+ * @ingroup rcppsw multithread
  *
  * @brief Extends \ref base_fsm to be threadsafe.
  */

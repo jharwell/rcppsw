@@ -49,7 +49,7 @@ class polymorphic_accept_set_helper {
 
 /**
  * @class polymorphic_accept_set<...>
- * @ingroup patterns visitor
+ * @ingroup rcppsw patterns visitor
  *
  * @brief Allows polymorphic classes (those with a pure virtual member in a base
  * class) to accept visitors of specific types. Allows implicit conversion to

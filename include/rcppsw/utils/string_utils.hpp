@@ -43,7 +43,7 @@ NS_START(rcppsw, utils);
  * @param is The input stream.
  * @param n_fields The # of fields that should exist in the stream.
  * @param buf The buffer to put the tokens into.
- * @param delim The delimiter separating the tokens (\n by default).
+ * @param delim The delimiter separating the tokens (\\n by default).
  *
  * @return \c TRUE if n_fields tokens were parsed from the stream, and \c FALSE
  * otherwise.

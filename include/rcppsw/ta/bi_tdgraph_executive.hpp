@@ -27,6 +27,7 @@
 #include <list>
 #include <random>
 #include <string>
+#include <memory>
 
 #include "rcppsw/ta/base_executive.hpp"
 
@@ -36,24 +37,24 @@
 NS_START(rcppsw, ta);
 class bi_tab;
 class bi_tdgraph;
-struct executive_params;
+struct executive_config;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
  * @class bi_tdgraph_executive
- * @ingroup ta
+ * @ingroup rcppsw ta
  *
  * @brief A task executive which tasks are run one step at a time and polled
  * until they are finished. Operates on \ref bi_tdgraph.
  */
 class bi_tdgraph_executive final : public base_executive,
-                             public er::client<bi_tdgraph_executive> {
+                                   public er::client<bi_tdgraph_executive> {
  public:
   using alloc_notify_cb = std::function<void(const polled_task*, const bi_tab*)>;
 
-  bi_tdgraph_executive(const struct task_executive_params* params,
+  bi_tdgraph_executive(const config::task_executive_config* config,
                        std::unique_ptr<bi_tdgraph> graph);
 
   void run(void) override;

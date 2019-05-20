@@ -41,7 +41,7 @@ namespace rcluster = algorithm::clustering;
  ******************************************************************************/
 /**
  * @struct convergence_measure_updater
- * @ingroup swarm convergence
+ * @ingroup rcppsw swarm convergence
  *
  * @brief Visitor class for mapping a given convergence measure to the actions
  * necessary to update it. Needed because not all convergence measures take the
@@ -89,7 +89,7 @@ struct convergence_measure_updater : boost::static_visitor<void> {
 
 /**
  * @struct convergence_status_updater
- * @ingroup swarm convergence
+ * @ingroup rcppsw swarm convergence
  *
  * @brief Visitor class for gather the convergence status of each enabled type
  * of convergence calculation.
@@ -109,37 +109,37 @@ struct convergence_status_collator : boost::static_visitor<bool> {
  * Constructors/Destructors
  ******************************************************************************/
 convergence_calculator::convergence_calculator(
-    const convergence_params* const params,
+    const config::convergence_config* const config,
     swarm_headings_calc_ftype headings_calc,
     swarm_nn_calc_ftype nn_calc,
     swarm_pos_calc_ftype pos_calc)
     : ER_CLIENT_INIT("rcppsw.swarm.convergence.calculator"),
-      mc_params(*params),
+      mc_config(*config),
       m_swarm_headings_calc(std::move(headings_calc)),
       m_swarm_nn_calc(std::move(nn_calc)),
       m_swarm_pos_calc(std::move(pos_calc)) {
-  if (params->interactivity.enable) {
+  if (config->interactivity.enable) {
     ER_ASSERT(nullptr != m_swarm_nn_calc,
               "NULL swarm nn cb with interactivity convergence enabled");
-    m_measures.emplace(typeid(interactivity), interactivity(params->epsilon));
+    m_measures.emplace(typeid(interactivity), interactivity(config->epsilon));
   }
-  if (params->ang_order.enable) {
+  if (config->ang_order.enable) {
     ER_ASSERT(nullptr != m_swarm_headings_calc,
               "NULL swarm headings cb with angular order convergence enabled");
-    m_measures.emplace(typeid(angular_order), angular_order(params->epsilon));
+    m_measures.emplace(typeid(angular_order), angular_order(config->epsilon));
   }
 
-  if (params->pos_entropy.enable) {
+  if (config->pos_entropy.enable) {
     ER_ASSERT(
         nullptr != m_swarm_pos_calc,
         "NULL swarm positions cb with positional entropy convergence enabled");
     m_measures.emplace(
         typeid(positional_entropy),
         positional_entropy(
-            params->epsilon,
+            config->epsilon,
             std::make_unique<rcluster::detail::entropy_impl<math::vector2d>>(
-                mc_params.n_threads),
-            &mc_params.pos_entropy));
+                mc_config.n_threads),
+            &mc_config.pos_entropy));
   }
 }
 
@@ -149,19 +149,18 @@ convergence_calculator::convergence_calculator(
 void convergence_calculator::task_dist_init(
     const swarm_tasks_calc_ftype& tasks_calc) {
   m_swarm_tasks_calc = tasks_calc;
-  if (mc_params.task_dist_entropy.enable) {
+  if (mc_config.task_dist_entropy.enable) {
     ER_ASSERT(nullptr != m_swarm_tasks_calc,
               "NULL swarm tasks cb with task distribution entropy convergence "
               "enabled");
     m_measures.emplace(typeid(task_dist_entropy),
-                       task_dist_entropy(mc_params.epsilon));
+                       task_dist_entropy(mc_config.epsilon));
   }
-
 } /* task_dist_init() */
 
 void convergence_calculator::update(void) {
   convergence_measure_updater u{
-    mc_params.n_threads,
+    mc_config.n_threads,
         m_swarm_headings_calc,
         m_swarm_nn_calc,
         m_swarm_pos_calc,
@@ -180,7 +179,7 @@ __rcsw_pure bool convergence_calculator::converged(void) const {
 } /* converged() */
 
 convergence_calculator::conv_status_t convergence_calculator::swarm_interactivity(void) const {
-  if (!mc_params.interactivity.enable) {
+  if (!mc_config.interactivity.enable) {
     return std::make_tuple(0.0, 0.0, false);
   }
   auto& tmp = boost::get<interactivity>(m_measures.at(typeid(interactivity)));
@@ -190,7 +189,7 @@ convergence_calculator::conv_status_t convergence_calculator::swarm_interactivit
 } /* swarm_interactivity() */
 
 convergence_calculator::conv_status_t convergence_calculator::swarm_angular_order(void) const {
-  if (!mc_params.ang_order.enable) {
+  if (!mc_config.ang_order.enable) {
     return std::make_tuple(0.0, 0.0, false);
   }
   auto& tmp = boost::get<angular_order>(m_measures.at(typeid(angular_order)));
@@ -201,7 +200,7 @@ convergence_calculator::conv_status_t convergence_calculator::swarm_angular_orde
 
 convergence_calculator::conv_status_t convergence_calculator::swarm_positional_entropy(
     void) const {
-  if (!mc_params.pos_entropy.enable) {
+  if (!mc_config.pos_entropy.enable) {
     return std::make_tuple(0.0, 0.0, false);
   }
   auto& tmp =
@@ -213,7 +212,7 @@ convergence_calculator::conv_status_t convergence_calculator::swarm_positional_e
 
 convergence_calculator::conv_status_t convergence_calculator::swarm_task_dist_entropy(
     void) const {
-  if (!mc_params.task_dist_entropy.enable) {
+  if (!mc_config.task_dist_entropy.enable) {
     return std::make_tuple(0.0, 0.0, false);
   }
   auto& tmp =
@@ -224,16 +223,16 @@ convergence_calculator::conv_status_t convergence_calculator::swarm_task_dist_en
 } /* swarm_task_dist_entropy() */
 
 void convergence_calculator::reset_metrics(void) {
-  if (mc_params.interactivity.enable) {
+  if (mc_config.interactivity.enable) {
     boost::get<interactivity>(m_measures.at(typeid(interactivity))).reset();
   }
-  if (mc_params.ang_order.enable) {
+  if (mc_config.ang_order.enable) {
     boost::get<angular_order>(m_measures.at(typeid(angular_order))).reset();
   }
-  if (mc_params.pos_entropy.enable) {
+  if (mc_config.pos_entropy.enable) {
     boost::get<positional_entropy>(m_measures.at(typeid(positional_entropy))).reset();
   }
-  if (mc_params.task_dist_entropy.enable) {
+  if (mc_config.task_dist_entropy.enable) {
     boost::get<task_dist_entropy>(m_measures.at(typeid(task_dist_entropy))).reset();
   }
 } /* reset_metrics() */

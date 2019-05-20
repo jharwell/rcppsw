@@ -26,7 +26,7 @@
  ******************************************************************************/
 #include <cmath>
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/control/waveform_params.hpp"
+#include "rcppsw/control/config/waveform_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -38,18 +38,18 @@ NS_START(rcppsw, control);
  ******************************************************************************/
 /**
  * @class waveform
- * @ingroup control
+ * @ingroup rcppsw control
  *
  * @brief Base class for all types of waveforms (in the control theory
  * sense). All waveforms have [frequency, phase, amplitude, offset] components.
  */
 class waveform {
  public:
-  explicit waveform(const struct waveform_params* const params)
-      : m_frequency(params->frequency),
-        m_phase(params->phase),
-        m_amplitude(params->amplitude),
-        m_offset(params->offset) {}
+  explicit waveform(const struct config::waveform_config* const config)
+      : m_frequency(config->frequency),
+        m_phase(config->phase),
+        m_amplitude(config->amplitude),
+        m_offset(config->offset) {}
 
   virtual ~waveform(void) = default;
 

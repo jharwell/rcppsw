@@ -1,6 +1,6 @@
 /**
  * @file powerlaw_distribution.hpp
- * @ingroup math
+ * @ingroup rcppsw math
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -39,7 +39,7 @@ NS_START(rcppsw, math);
  ******************************************************************************/
 /**
  * @class powerlaw_distribution
- * @ingroup math
+ * @ingroup rcppsw math
  *
  * @brief Represents a power law distribution (duh) of x^pwr where x is in [lb,
  * ub]. Constructed from a uniform distribution on [0, 1].

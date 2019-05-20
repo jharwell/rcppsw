@@ -1,6 +1,6 @@
 /**
  * @file binned_powerlaw_distribution.hpp
- * @ingroup math
+ * @ingroup rcppsw math
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -37,7 +37,7 @@ NS_START(rcppsw, math);
  ******************************************************************************/
 /**
  * @class binned_powerlaw_distribution
- * @ingroup math
+ * @ingroup rcppsw math
  *
  * @brief A power law distribution (duh) of x^pwr where x is in [lb,
  * ub], where the outputs are rounded to the nearest power of pwr. For example,

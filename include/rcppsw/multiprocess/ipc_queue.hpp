@@ -40,7 +40,7 @@ NS_START(rcppsw, multiprocess);
  ******************************************************************************/
 /**
  * @class ipc_queue
- * @ingroup interprocess
+ * @ingroup rcppsw interprocess
  *
  * @brief Interprocess synchronized queue (like \ref mt_queue, but for
  * processes).

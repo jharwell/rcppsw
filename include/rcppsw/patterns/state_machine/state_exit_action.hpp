@@ -39,7 +39,7 @@ class base_fsm;
  ******************************************************************************/
 /**
  * @class state_exit_action
- * @ingroup patterns state_machine
+ * @ingroup rcppsw patterns state_machine
  *
  * @brief state_exit_action takes two template arguments:
  *

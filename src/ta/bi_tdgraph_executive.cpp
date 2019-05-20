@@ -23,7 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/ta/bi_tdgraph_executive.hpp"
 #include "rcppsw/ta/bi_tdgraph.hpp"
-#include "rcppsw/ta/task_executive_params.hpp"
+#include "rcppsw/ta/config/task_executive_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -34,9 +34,9 @@ NS_START(rcppsw, ta);
  * Constructors/Destructor
  ******************************************************************************/
 bi_tdgraph_executive::bi_tdgraph_executive(
-    const struct task_executive_params* const params,
+    const config::task_executive_config* const config,
     std::unique_ptr<bi_tdgraph> graph)
-    : base_executive(params, std::move(graph)),
+    : base_executive(config, std::move(graph)),
       ER_CLIENT_INIT("rcppsw.ta.executive.bi_tdgraph") {}
 
 /*******************************************************************************

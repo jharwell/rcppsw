@@ -39,7 +39,7 @@ class event_data;
  ******************************************************************************/
 /**
  * @class state_guard
- * @ingroup patterns state_machine
+ * @ingroup rcppsw patterns state_machine
  *
  * @brief Abstract guard base class that all guards classes inherit from.
  */

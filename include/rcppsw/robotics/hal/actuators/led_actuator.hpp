@@ -53,7 +53,7 @@ NS_END(detail);
  ******************************************************************************/
 /**
  * @class led_actuator_
- * @ingroup robotics hal
+ * @ingroup rcppsw robotics hal
  *
  * @brief LED actuator wrapper for the following supported robots:
  *

@@ -28,7 +28,7 @@
 #include <utility>
 #include <vector>
 
-#include "rcppsw/swarm/convergence/convergence_params.hpp"
+#include "rcppsw/swarm/convergence/config/convergence_config.hpp"
 #include "rcppsw/swarm/convergence/interactivity.hpp"
 #include "rcppsw/swarm/convergence/angular_order.hpp"
 #include "rcppsw/swarm/convergence/positional_entropy.hpp"
@@ -48,7 +48,7 @@ NS_START(rcppsw, swarm, convergence);
  ******************************************************************************/
 /**
  * @class convergence_calculator
- * @ingroup swarm convergence
+ * @ingroup rcppsw swarm convergence
  *
  * @brief Convenience class for managing calculation of swarm convergence using
  * any enabled methods.
@@ -98,7 +98,7 @@ class convergence_calculator final : public metrics::swarm::convergence_metrics,
    */
   using swarm_tasks_calc_ftype = std::function<std::vector<int>(uint)>;
 
-  explicit convergence_calculator(const convergence_params* params,
+  explicit convergence_calculator(const config::convergence_config* config,
                                   swarm_headings_calc_ftype headings_calc,
                                   swarm_nn_calc_ftype nn_calc,
                                   swarm_pos_calc_ftype pos_calc);
@@ -114,7 +114,7 @@ class convergence_calculator final : public metrics::swarm::convergence_metrics,
   conv_status_t swarm_angular_order(void) const override;
   conv_status_t swarm_positional_entropy(void) const override;
   conv_status_t swarm_task_dist_entropy(void) const override;
-  double swarm_conv_epsilon(void) const override { return mc_params.epsilon; }
+  double swarm_conv_epsilon(void) const override { return mc_config.epsilon; }
   void reset_metrics(void) override;
 
   /**
@@ -130,15 +130,15 @@ class convergence_calculator final : public metrics::swarm::convergence_metrics,
 
  private:
   /* clang-format off */
-  const convergence_params    mc_params;
+  const config::convergence_config           mc_config;
   ds::type_map<mpl::typelist<positional_entropy,
                              task_dist_entropy,
                              angular_order,
                              interactivity>> m_measures{};
-  swarm_headings_calc_ftype   m_swarm_headings_calc;
-  swarm_nn_calc_ftype         m_swarm_nn_calc;
-  swarm_pos_calc_ftype        m_swarm_pos_calc;
-  swarm_tasks_calc_ftype      m_swarm_tasks_calc{nullptr};
+  swarm_headings_calc_ftype                  m_swarm_headings_calc;
+  swarm_nn_calc_ftype                        m_swarm_nn_calc;
+  swarm_pos_calc_ftype                       m_swarm_pos_calc;
+  swarm_tasks_calc_ftype                     m_swarm_tasks_calc{nullptr};
   /* clang-format on */
 };
 

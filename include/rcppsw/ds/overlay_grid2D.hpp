@@ -36,7 +36,7 @@ NS_START(rcppsw, ds);
  ******************************************************************************/
 /**
  * @class overlay_grid2D
- * @ingroup ds
+ * @ingroup rcppsw ds
  *
  * @brief A 2D logical grid overlayed over a continuous environment using a
  * \a contiguous array of the template parameter type.

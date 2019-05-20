@@ -235,7 +235,7 @@ NS_START(rcppsw, er);
  ******************************************************************************/
 /**
  * @class client
- * @ingroup er
+ * @ingroup rcppsw er
  *
  * @brief A class that can connect to a logging server for logging of important
  * events. Basically a thin wrapper around log4cxx. If ER_NDEBUG is defined,
@@ -334,6 +334,8 @@ class client {
 #endif /* RCPPSW_ER_NREPORT */
 
   virtual ~client(void) = default;
+  client(const client&) = default;
+  client& operator=(const client&) = default;
 
  private:
   /* clang-format off */

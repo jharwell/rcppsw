@@ -23,7 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/ta/base_executive.hpp"
 #include "rcppsw/ta/polled_task.hpp"
-#include "rcppsw/ta/task_executive_params.hpp"
+#include "rcppsw/ta/config/task_executive_config.hpp"
 #include "rcppsw/ta/tdgraph.hpp"
 
 /*******************************************************************************
@@ -34,11 +34,11 @@ NS_START(rcppsw, ta);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_executive::base_executive(const struct task_executive_params* const params,
+base_executive::base_executive(const config::task_executive_config* const config,
                                std::unique_ptr<tdgraph> graph)
     : ER_CLIENT_INIT("rcppsw.ta.executive.base"),
-      m_update_exec_ests(params->update_exec_ests),
-      m_update_interface_ests(params->update_interface_ests),
+      m_update_exec_ests(config->update_exec_ests),
+      m_update_interface_ests(config->update_interface_ests),
       m_graph(std::move(graph)) {}
 
 base_executive::~base_executive(void) = default;

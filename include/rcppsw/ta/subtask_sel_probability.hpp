@@ -36,12 +36,16 @@
  ******************************************************************************/
 NS_START(rcppsw, ta);
 
+namespace config {
+struct sigmoid_sel_config;
+} /* namespace config */
+
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
  * @class subtask_sel_probability
- * @ingroup ta
+ * @ingroup rcppsw ta
  *
  * @brief Calculates the probability that a robot selects subtask 2 when it has
  * most recently executed subtask 1 (assuming partitioning is employed).
@@ -93,7 +97,7 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
    * @brief Initialize subtask sel probability with method + parameter
    * values.
    */
-  explicit subtask_sel_probability(const struct sigmoid_sel_params* params);
+  explicit subtask_sel_probability(const config::sigmoid_sel_config* config);
 
   const std::string& method(void) const { return mc_method; }
 

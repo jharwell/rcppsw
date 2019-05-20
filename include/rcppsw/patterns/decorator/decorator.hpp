@@ -63,7 +63,7 @@ NS_START(rcppsw, patterns, decorator);
  ******************************************************************************/
 /**
  * @class decorator
- * @ingroup patterns decorator
+ * @ingroup rcppsw patterns decorator
  *
  * @brief The base class for the object decorator design pattern.
  *
@@ -109,7 +109,7 @@ class decorator {
 
 /**
  * @class ptr_decorator
- * @ingroup patterns decorator
+ * @ingroup rcppsw patterns decorator
  *
  * @brief The base class for the ptr-to-object decorator design pattern.
  *

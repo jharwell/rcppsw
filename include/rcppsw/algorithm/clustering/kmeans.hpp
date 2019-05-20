@@ -44,7 +44,7 @@ NS_START(rcppsw, algorithm, clustering);
  ******************************************************************************/
 /**
  * @class kmeans
- * @ingroup algorithm clustering
+ * @ingroup rcppsw algorithm clustering
  *
  * @brief Wrapper class for performing kmeans clustering.
  *

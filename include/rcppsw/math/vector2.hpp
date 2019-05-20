@@ -41,7 +41,7 @@ NS_START(rcppsw, math);
  ******************************************************************************/
 /**
  * @class vector2
- * @ingroup math
+ * @ingroup rcppsw math
  *
  * @brief Base template class encapsulating mathematical actions on a pair of
  * numbers. Is specialized by \ref vector2u, \ref vector2i, \ref vector2d.

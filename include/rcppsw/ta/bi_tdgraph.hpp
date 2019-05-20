@@ -31,7 +31,7 @@
 
 #include "rcppsw/ta/bi_tab.hpp"
 #include "rcppsw/ta/bi_tab_sel_probability.hpp"
-#include "rcppsw/ta/task_alloc_params.hpp"
+#include "rcppsw/ta/config/task_alloc_config.hpp"
 #include "rcppsw/ta/tdgraph.hpp"
 
 /*******************************************************************************
@@ -44,7 +44,7 @@ NS_START(rcppsw, ta);
  ******************************************************************************/
 /**
  * @class bi_tdgraph
- * @ingroup ta
+ * @ingroup rcppsw ta
  *
  * @brief Representation of an overall task (the root task) as a BINARY tree
  * representing the task decomposition of the root task at different
@@ -56,7 +56,7 @@ class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
   static constexpr char kTABInitRandom[] = "random";
   static constexpr char kTABInitMaxDepth[] = "max_depth";
 
-  explicit bi_tdgraph(const struct task_alloc_params* params);
+  explicit bi_tdgraph(const config::task_alloc_config* config);
 
   bi_tdgraph(const bi_tdgraph& other) = delete;
   bi_tdgraph& operator=(const bi_tdgraph& other) = delete;
@@ -133,11 +133,11 @@ class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
   bool tab_parent_verify(const bi_tab* tab) const;
 
   /* clang-format off */
-  const struct task_alloc_params mc_params;
-  std::list<bi_tab>              m_tabs{};
-  bi_tab *                       m_active_tab{nullptr};
-  bi_tab_sel_probability         m_tab_sw_prob;
-  std::default_random_engine     m_rng;
+  const config::task_alloc_config mc_config;
+  std::list<bi_tab>               m_tabs{};
+  bi_tab *                        m_active_tab{nullptr};
+  bi_tab_sel_probability          m_tab_sw_prob;
+  std::default_random_engine      m_rng;
   /* clang-format on */
 };
 

@@ -41,7 +41,7 @@ NS_START(rcppsw, ta);
  ******************************************************************************/
 /**
  * @class polled_task
- * @ingroup ta
+ * @ingroup rcppsw ta
  *
  * @brief Represents a task whose execution can/should be monitored by the user
  * to determine when it has finished.
@@ -49,8 +49,8 @@ NS_START(rcppsw, ta);
 class polled_task : public executable_task, public taskable {
  public:
   polled_task(const std::string& name,
-              const struct src_sigmoid_sel_params* abort,
-              const struct math::ema_params* estimation,
+              const config::src_sigmoid_sel_config* abort,
+              const math::config::ema_config* estimation,
               std::unique_ptr<taskable> mechanism)
       : executable_task(name, abort, estimation),
         m_mechanism(std::move(mechanism)) {}

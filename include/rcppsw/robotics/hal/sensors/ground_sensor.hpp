@@ -53,7 +53,7 @@ NS_END(detail);
  ******************************************************************************/
 /**
  * @class ground_sensor
- * @ingroup robotics hal
+ * @ingroup rcppsw robotics hal
  *
  * @brief Ground sensor wrapper for the following supported robots:
  *

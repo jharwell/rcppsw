@@ -22,7 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/subtask_sel_probability.hpp"
-#include "rcppsw/ta/sigmoid_sel_params.hpp"
+#include "rcppsw/ta/config/sigmoid_sel_config.hpp"
 #include "rcppsw/ta/time_estimate.hpp"
 
 /*******************************************************************************
@@ -57,10 +57,10 @@ subtask_sel_probability::subtask_sel_probability(std::string method)
 }
 
 subtask_sel_probability::subtask_sel_probability(
-    const struct sigmoid_sel_params* const params)
+    const config::sigmoid_sel_config* const config)
     : ER_CLIENT_INIT("rcppsw.ta.subtask_sel_prob"),
-      sigmoid(&params->sigmoid),
-      mc_method(params->method) {}
+      sigmoid(&config->sigmoid),
+      mc_method(config->method) {}
 
 /*******************************************************************************
  * Member Functions

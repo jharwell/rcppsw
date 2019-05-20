@@ -40,7 +40,7 @@ NS_START(rcppsw, ds);
  ******************************************************************************/
 /**
  * @class stacked_grid
- * @ingroup ds
+ * @ingroup rcppsw ds
  *
  * @brief A sandwich of N 2D grids of the same size (x,y) dimensions, which can
  * contain different kinds of objects. The objects in each layer of the grid are

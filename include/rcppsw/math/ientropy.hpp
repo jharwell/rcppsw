@@ -43,7 +43,7 @@ NS_START(rcppsw, math);
  ******************************************************************************/
 /**
  * @class ientropy
- * @ingroup math
+ * @ingroup rcppsw math
  *
  * @brief Calculates the informational entropy of a cluster (Shannon's
  * definition).

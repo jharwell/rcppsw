@@ -27,7 +27,7 @@
 #include <cmath>
 
 #include "rcppsw/math/expression.hpp"
-#include "rcppsw/math/sigmoid_params.hpp"
+#include "rcppsw/math/config/sigmoid_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -40,7 +40,7 @@ NS_START(rcppsw, math);
 
 /**
  * @class sigmoid
- * @ingroup math
+ * @ingroup rcppsw math
  *
  * @brief Encapsulates base aspects common to all sigmoid functions; does not
  * calculate anything itself, as derived sigmoids each have different input
@@ -55,8 +55,8 @@ class sigmoid : public expression<double> {
   /**
    * @brief Construct the sigmoid using parameters.
    */
-  explicit sigmoid(const sigmoid_params* const params)
-      : sigmoid{params->reactivity, params->offset, params->gamma} {}
+  explicit sigmoid(const config::sigmoid_config* const config)
+      : sigmoid{config->reactivity, config->offset, config->gamma} {}
 
   /**
    * @brief Construct the sigmoid by passing each parameter explicitly. Note

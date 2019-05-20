@@ -43,7 +43,7 @@ class degrees;
  ******************************************************************************/
 /**
  * @class radians
- * @ingroup math
+ * @ingroup rcppsw math
  *
  * @brief Used to store an angle value in radians (duh).
  */

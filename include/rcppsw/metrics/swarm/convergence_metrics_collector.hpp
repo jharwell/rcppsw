@@ -39,7 +39,7 @@ NS_START(rcppsw, metrics, swarm);
  ******************************************************************************/
 /**
  * @class convergence_metrics_collector
- * @ingroup metrics swarm
+ * @ingroup rcppsw metrics swarm
  *
  * @brief Collector for \ref convergence_metrics.
  *

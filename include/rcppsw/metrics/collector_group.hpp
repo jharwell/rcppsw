@@ -43,7 +43,7 @@ NS_START(rcppsw, metrics);
 
 /**
  * @class collector_group
- * @ingroup metrics
+ * @ingroup rcppsw metrics
  *
  * @brief A group of N collectors, mapped by name, on which collective
  * operations can be performed, in addition to individual collection; used to

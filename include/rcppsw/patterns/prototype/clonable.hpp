@@ -36,7 +36,7 @@ NS_START(rcppsw, patterns, prototype);
  ******************************************************************************/
 /**
  * @class clonable
- * @ingroup patterns prototype
+ * @ingroup rcppsw patterns prototype
  *
  * @brief Define a class as being capable of being cloned (i.e. a deep copy).
  */

@@ -38,16 +38,22 @@
  ******************************************************************************/
 NS_START(rcppsw);
 namespace math {
-struct ema_params;
-}
+namespace config {
+struct ema_config;
+}} /* namespace math::config */
+
 NS_START(ta);
+
+namespace config {
+struct src_sigmoid_sel_config;
+} /* namespace config */
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
  * @class executable_task
- * @ingroup ta
+ * @ingroup rcppsw ta
  *
  * @brief Represents the executable concept of a task, which encompasses:
  *
@@ -74,8 +80,8 @@ class executable_task : public logical_task,
   static constexpr char kAbortSrcInterface[] = "interface";
 
   executable_task(const std::string& name,
-                  const struct src_sigmoid_sel_params* abort,
-                  const struct math::ema_params* estimation);
+                  const config::src_sigmoid_sel_config* abort,
+                  const math::config::ema_config* estimation);
 
   ~executable_task(void) override = default;
 
@@ -141,15 +147,16 @@ class executable_task : public logical_task,
    * result in a non-zero abort probability on some timesteps.
    */
   void abort_prob_update(void) {
-    if (-1 != active_interface()) {
-      if (kAbortSrcExec == mc_abort_src) {
-        m_abort_prob.calc(m_exec_time, m_exec_estimate);
-        return;
-      } else if (kAbortSrcInterface == mc_abort_src) {
+    if (kAbortSrcExec == mc_abort_src) {
+      m_abort_prob.calc(m_exec_time, m_exec_estimate);
+      return;
+    } else if (kAbortSrcInterface == mc_abort_src) {
+      if (-1 != active_interface()) {
         m_abort_prob.calc(m_interface_times[active_interface()],
                           m_interface_estimates[active_interface()]);
         return;
       }
+    } else {
       ER_FATAL_SENTINEL("Bad abort source '%s'", mc_abort_src.c_str());
     }
   }
