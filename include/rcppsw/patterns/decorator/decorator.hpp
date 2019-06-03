@@ -24,6 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <memory>
+
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
@@ -41,9 +43,9 @@ NS_START(rcppsw, patterns, decorator);
  *
  * Does not work for templated member functions in decorated class.
  */
-#define RCPPSW_DECORATE_FUNC(Func, ...) RCPPSW_WRAP_MEMFUNC(Func,          \
-                                                         decoratee(),   \
-                                                         __VA_ARGS__)
+#define RCPPSW_DECORATE_FUNC(Func, ...) RCPPSW_DECLDEF_WRAP(Func,          \
+                                                            decoratee(), \
+                                                            __VA_ARGS__)
 
 /**
  * @def RCPPSW_DECORATE_FUNC_TEMPLATE(Type, Func)
@@ -51,9 +53,9 @@ NS_START(rcppsw, patterns, decorator);
  * Wraps the declaration/implementation of the decoratee (non-pointer
  * version). For decoratee types that are themselves templated types.
  */
-#define RCPPSW_DECORATE_FUNC_TEMPLATE(Type, Func, ...)                                   \
+#define RCPPSW_DECORATE_FUNC_TEMPLATE(Type, Func, ...)                  \
   template<typename... Args>                                            \
-  auto Func(Args&&... args) __VA_ARGS__ ->                             \
+  auto Func(Args&&... args) __VA_ARGS__ ->                              \
       decltype(std::declval<decltype(decorator::decorator<Type>::decoratee())>().Func(args...)) { \
     return decorator::decorator<Type>::decoratee().Func( std::forward<Args>(args)...); \
   }
@@ -67,22 +69,25 @@ NS_START(rcppsw, patterns, decorator);
  *
  * @brief The base class for the object decorator design pattern.
  *
- * @tparam D The type of the decorated object.
+ * @tparam TDecoratee The type of the decorated object.
  */
-template <class D>
+template <class TDecoratee>
 class decorator {
  public:
-  template <typename... CArgs>
-  explicit decorator(CArgs&&... args) : m_decoratee(std::forward<CArgs>(args)...) {}
-  virtual ~decorator(void) {}
+  template <typename... TArgs>
+  explicit decorator(TArgs&&... args)
+      : m_decoratee(std::forward<TArgs>(args)...) {}
+  virtual ~decorator(void) = default;
+  decorator(const decorator&) = default;
+  decorator& operator=(const decorator&) = default;
 
   /**
    * @brief Get a reference to the decorated type.
    *
    * @return The reference.
    */
-  D& decoratee(void) { return m_decoratee; }
-  const D& decoratee(void) const { return m_decoratee; }
+  TDecoratee& decoratee(void) { return m_decoratee; }
+  const TDecoratee& decoratee(void) const { return m_decoratee; }
 
   /**
    * @brief Replace the current instance of the decorated type with a new one
@@ -90,9 +95,9 @@ class decorator {
    *
    * @param args The arguments to a decoratee constructor.
    */
-  template <typename... CArgs>
-  void redecorate(CArgs&&... args) {
-    m_decoratee = D(std::forward<CArgs>(args)...);
+  template <typename... TArgs>
+  void redecorate(TArgs&&... args) {
+    m_decoratee = TDecoratee(std::forward<TArgs>(args)...);
   }
 
   /**
@@ -101,10 +106,10 @@ class decorator {
    *
    * @param d The new decoratee.
    */
-  void change_decoratee(const D& d) { m_decoratee = d; }
+  void change_decoratee(const TDecoratee& d) { m_decoratee = d; }
 
  private:
-  D m_decoratee;
+  TDecoratee m_decoratee;
 };
 
 /**
@@ -113,14 +118,14 @@ class decorator {
  *
  * @brief The base class for the ptr-to-object decorator design pattern.
  *
- * @tparam D The type of the decorated object.
+ * @tparam TDecoratee The type of the decorated object.
  */
-template <class D>
+template <class TDecoratee>
 class ptr_decorator {
  public:
   template <typename... Args>
   explicit ptr_decorator(Args&&... args) :
-      m_decoratee(rcppsw::make_unique<D>(std::forward<Args>(args)...)) {}
+      m_decoratee(rcppsw::make_unique<TDecoratee>(std::forward<Args>(args)...)) {}
   virtual ~ptr_decorator(void) {}
 
   /**
@@ -131,7 +136,7 @@ class ptr_decorator {
    */
   template <typename... Args>
   void redecorate(Args&&... args) {
-    m_decoratee = rcppsw::make_unique<D>(std::move(m_decoratee),
+    m_decoratee = rcppsw::make_unique<TDecoratee>(std::move(m_decoratee),
                                          std::forward<Args>(args)...);
   }
 
@@ -141,17 +146,17 @@ class ptr_decorator {
    *
    * @param d The new decoratee.
    */
-  void change_decoratee(D * const d) { m_decoratee.reset(d); }
+  void change_decoratee(TDecoratee * const d) { m_decoratee.reset(d); }
 
   /**
    * @brief Get a reference to the decorated type.
    *
    * @return The reference.
    */
-  D* decoratee(void) const { return m_decoratee.get(); }
+  TDecoratee* decoratee(void) const { return m_decoratee.get(); }
 
  private:
-  std::unique_ptr<D> m_decoratee;
+  std::unique_ptr<TDecoratee> m_decoratee;
 };
 
 NS_END(rcppsw, patterns, decorator);

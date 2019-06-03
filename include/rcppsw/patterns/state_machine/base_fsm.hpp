@@ -461,13 +461,4 @@ NS_END(state_machine, patterns, rcppsw);
                 (n_entries),                                            \
                 "state map does not cover all states");
 
-/*******************************************************************************
- * Othr Macros
- ******************************************************************************/
-#define FSM_OVERRIDE_DECL(RetType, Func, ...)     \
-  RetType Func(void) __VA_ARGS__ override __rcsw_pure
-
-#define FSM_OVERRIDE_DEF(RetType, Class, Func, Handle, ...)         \
-  __rcsw_pure RetType Class::Func(void) __VA_ARGS__ { return (Handle).Func(); }
-
 #endif /* INCLUDE_RCPPSW_PATTERNS_STATE_MACHINE_BASE_FSM_HPP_ */

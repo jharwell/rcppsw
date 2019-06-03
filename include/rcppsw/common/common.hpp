@@ -44,7 +44,8 @@
  * pasting. \c ns is the namespace to paste.
  */
 #define NS_START_(ns) namespace ns {
-/*
+
+/**
  * @def NS_START(ns)
  *
  * Callback macro for recursive macro expansion for nested namespace end
@@ -56,7 +57,7 @@
  */
 #define NS_END_(ns) }
 
-/*
+/**
  * @def NS_START(...)
  *
  * Declare a nested namespace, with each successive token in the comma-separated
@@ -64,7 +65,7 @@
  */
 #define NS_START(...) XFOR_EACH1(NS_START_, __VA_ARGS__)
 
-/*
+/**
  * @def NS_END(...)
  *
  * Close a previously declared nested namespace. Tokens should be passed to this
@@ -73,20 +74,85 @@
  */
 #define NS_END(...) XFOR_EACH1(NS_END_, __VA_ARGS__)
 
-/*
- * @def RCPPSW_WRAP_FUNC(Class, Func, member,...)
+/**
+ * @def RCPPSW_DECLDEF_WRAP(Func, member,...)
  *
  * Wrap a public function from a member variable (or even another member
  * function that returns an object that contains the function you want to
  * wrap). The variable argument list is to allow specification of 'const' as
- * part of the function definition.
+ * part of the function definition. Wrapped functions can take any number of
+ * arguments of any type.
+ *
+ * Cannot be used to wrap overriden functions.
  */
-#define RCPPSW_WRAP_MEMFUNC(Func, Member, ...)                                \
+#define RCPPSW_DECLDEF_WRAP(Func, Member, ...)                                \
   template <typename... Args>                                                 \
   auto Func(Args&&... args)                                             \
       __VA_ARGS__-> decltype(std::declval<decltype(Member)>().Func(args...)) { \
     return Member.Func(std::forward<Args>(args)...);                          \
   }
+
+/**
+ * @def RCPPSW_DECLDEF_OVERRIDE(Func, member,...)
+ *
+ * Wrap a public function from a member variable (or even another member
+ * function that returns an object that contains the function you want to
+ * wrap). The variable argument list is to allow specification of 'const' as
+ * part of the function definition. Wrapped functions must take 0 arguments
+ * (can't do anything other than that for a general macro that works with
+ * virtual functions).
+ *
+ * Should be used to wrap overriden functions in the current class (e.g the
+ * enclosing class implements the same interface as a member variable).
+ */
+
+#define RCPPSW_DECLDEF_OVERRIDE_WRAP(Func, Member,...)             \
+  auto Func(void)                                                       \
+      __VA_ARGS__-> decltype(std::declval<decltype(Member)>().Func()) override { \
+    return Member.Func();                                               \
+  }
+
+#define RCPPSW_WRAP_DECL(Ret, Func, ...) Ret Func(void) __VA_ARGS__ h
+
+#define RCPPSW_WRAP_DEF(Class, Func, Handle, ...)              \
+  auto Class::Func(void) __VA_ARGS__                   \
+      -> decltype(std::declval<decltype(Handle)>().Func()) {        \
+    return (Handle).Func();                                         \
+  }
+
+#define RCPPSW_WRAP_DEFP(Class, Func, Handle, NullRet, ...)      \
+  auto Class::Func(void) __VA_ARGS__                            \
+      -> decltype(std::declval<decltype(*Handle)>().Func()) {    \
+    if (nullptr == Handle) {                                    \
+    return NullRet;                                             \
+  }                                                             \
+  return (Handle)->Func();                                      \
+  }
+
+/**
+ * @def RCPPSW_WRAP_OVERRIDE_DECL(Ret, Func, ...)
+ *
+ * Declare a "simple" overrnide of an inherited function with the __pure_
+ * attribute. Should be *NOT* be used if the override is complex to implement
+ * (i.e. for every instance of this macro in a header file there should be an
+ * instance of \ref RCPPSW_WRAP_OVERRIDE_DEF() in the corresponding source file
+ * for a class).
+ */
+#define RCPPSW_WRAP_OVERRIDE_DECL(Ret, Func, ...)            \
+  Ret Func(void) __VA_ARGS__ override __rcsw_pure
+
+/**
+ * @def RCPPSW_WRAP_OVERRIDE_DEF(Ret, Func, ...)
+ *
+ * Define a "simple" override of an inherited function with the __pure__
+ * attribute in which the corresponding function on the handle is called and the
+ * result returned.
+ */
+#define RCPPSW_WRAP_OVERRIDE_DEF(Class, Func, Handle, ...)           \
+  __rcsw_pure RCPPSW_WRAP_DEF(Class, Func, Handle, __VA_ARGS__)
+
+#define RCPPSW_WRAP_OVERRIDE_DEFP(Class, Func, Handle, NullRet, ...)     \
+  __rcsw_pure RCPPSW_WRAP_DEFP(Class, Func, Handle, NullRet, __VA_ARGS__)
 
 /**
  * @def RCPPSW_SFINAE_REQUIRE(...)
@@ -133,7 +199,7 @@ struct has_to_str<T, void_t<decltype(std::declval<T>().to_str())>>
     : std::true_type {};
 NS_END(detail);
 
-template <typename T, typename = std::enable_if_t<detail::has_to_str<T>::value>>
+template <typename T, RCPPSW_SFINAE_REQUIRE(detail::has_to_str<T>::value)>
 std::string to_string(const T& obj) {
   return obj.to_str();
 }
@@ -162,6 +228,15 @@ template<typename... Ts, typename Functor>
 void tuple_apply(const std::tuple<Ts...>& t, const Functor& functor) {
   detail::tuple_for_each(t, functor, std::index_sequence_for<Ts...>{});
 }
+
+template <typename T>
+T& maybe_deref(T& x) { return x; }
+
+template <typename T>
+T& maybe_deref(T* x) { return *x; }
+
+template <typename T>
+const T& maybe_deref(const T* x) { return *x; }
 
 NS_END(rcppsw);
 

@@ -28,20 +28,6 @@
 #include "rcppsw/ta/time_estimate.hpp"
 
 /*******************************************************************************
- * Macro Definitions
- ******************************************************************************/
-#define TASK_WRAPPER_DECLARE(ret, func, ...) ret func(void) __VA_ARGS__ __rcsw_pure
-#define TASK_WRAPPER_DEFINE(ret, class, func, handle, ...)                  \
-  __rcsw_pure ret class ::func(void) __VA_ARGS__ { return (handle).func(); }
-#define TASK_WRAPPER_DEFINE_PTR(ret, class, func, handle, ...)           \
-  __rcsw_pure ret class ::func(void) __VA_ARGS__ {                           \
-    if (nullptr != (handle)) {                             \
-      return (handle)->func();                             \
-    }                                                      \
-    return {};                                             \
-  }
-
-/*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, ta);

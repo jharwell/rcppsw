@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <tuple>
 #include <vector>
+#include <utility>
 
 #include "rcppsw/ds/overlay_grid2D.hpp"
 #include "rcppsw/math/vector2.hpp"
@@ -161,10 +162,25 @@ class stacked_grid {
  private:
   static size_t constexpr kStackSize = std::tuple_size<TupleTypes>::value;
 
-  template <size_t Index, typename... Args>
+  /**
+   * @brief Add layers when you have at least 2 layers to add. SFINAE is needed
+   * to prevent negative indices in the degenerate case where the stacked grid
+   * only has 1 layer.
+   */
+  template <size_t Index, RCPPSW_SFINAE_REQUIRE((Index > 0)), typename... Args>
   void add_layers(Args&&... args) {
     add_layer<Index, Args...>(std::forward<Args>(args)...);
     add_layer<Index - 1, Args...>(std::forward<Args>(args)...);
+  }
+
+  /**
+   * @brief Add layers when you only have 1 layer to add. SFINAE is needed to
+   * prevent negative indices in the degenerate case where the stacked grid only
+   * has 1 layer.
+   */
+  template <size_t Index, RCPPSW_SFINAE_REQUIRE((Index == 0)), typename... Args>
+  void add_layers(Args&&... args) {
+    add_layer<Index, Args...>(std::forward<Args>(args)...);
   }
 
   /**
@@ -177,8 +193,7 @@ class stacked_grid {
   template <size_t Index, typename... Args>
   void add_layer(Args&&... args) {
     m_layers[kStackSize - Index - 1] =
-        new layer_value_type<kStackSize - Index - 1>(
-            std::forward<Args>(args)...);
+        new layer_value_type<kStackSize - Index - 1>(std::forward<Args>(args)...);
   }
 
   template <size_t Index>
@@ -187,13 +202,22 @@ class stacked_grid {
   }
 
   /**
-   * @brief Delete a layer from the stacked grid. Indice reversal is not really
-   * necessary here, but doing it for reasons of Principle of Least Surprise.
+   * @brief Delete a layer from the stacked grid when there are at least 2
+   * layers. Indice reversal is not really necessary here, but doing it for
+   * reasons of Principle of Least Surprise.
    */
-  template <size_t Index>
+  template <size_t Index, RCPPSW_SFINAE_REQUIRE((Index > 0))>
   void rm_layer(void) {
-    delete reinterpret_cast<const layer_value_type<1>*>(
+    delete reinterpret_cast<const layer_value_type<Index>*>(
         m_layers[kStackSize - Index - 1]);
+  }
+
+  /**
+   * @brief Remove a layer from the stacked grid when you only have 1 layer.
+   */
+  template <size_t Index, RCPPSW_SFINAE_REQUIRE((Index == 0))>
+  void rm_layer(void) {
+    delete reinterpret_cast<const layer_value_type<0>*>(m_layers[0]);
   }
 
   /* clang-format off */
