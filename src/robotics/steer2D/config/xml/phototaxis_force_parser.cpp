@@ -1,5 +1,5 @@
 /**
- * @file force_calculator_parser.cpp
+ * @file phototaxis_force_parser.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -21,54 +21,37 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/robotics/steer2D/config/xml/force_calculator_parser.hpp"
+#include "rcppsw/robotics/steer2D/config/xml/phototaxis_force_parser.hpp"
+#include "rcppsw/utils/line_parser.hpp"
 
 /*******************************************************************************
- * Namespaces/Decls
+ * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, robotics, steer2D, config, xml);
 
 /*******************************************************************************
- * Class Constants
+ * Global Variables
  ******************************************************************************/
-constexpr char force_calculator_parser::kXMLRoot[];
+constexpr char phototaxis_force_parser::kXMLRoot[];
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void force_calculator_parser::parse(const ticpp::Element& node) {
-  ticpp::Element knode = node_get(node, kXMLRoot);
-  m_config =
-      std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
-  m_avoidance.parse(knode);
-  m_arrival.parse(knode);
-  m_wander.parse(knode);
-  m_polar.parse(knode);
-  m_phototaxis.parse(knode);
-
-  if (m_avoidance.parsed()) {
-    m_config->avoidance = *m_avoidance.config_get();
-  }
-  if (m_arrival.parsed()) {
-    m_config->arrival = *m_arrival.config_get();
-  }
-  if (m_wander.parsed()) {
-    m_config->wander = *m_wander.config_get();
-  }
-  if (m_polar.parsed()) {
-    m_config->polar = *m_polar.config_get();
-  }
-  if (m_phototaxis.parsed()) {
-    m_config->phototaxis = *m_phototaxis.config_get();
+void phototaxis_force_parser::parse(const ticpp::Element& node) {
+  if (nullptr != node.FirstChild(kXMLRoot, false)) {
+    ticpp::Element pnode = node_get(node, kXMLRoot);
+    m_config =
+        std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
+    XML_PARSE_ATTR(pnode, m_config, max);
+    m_parsed = true;
   }
 } /* parse() */
 
-__rcsw_pure bool force_calculator_parser::validate(void) const {
-  CHECK(m_avoidance.parsed());
-  return m_arrival.validate() && m_wander.validate() && m_polar.validate();
-
-error:
-  return false;
+__rcsw_pure bool phototaxis_force_parser::validate(void) const {
+  if (m_parsed) {
+    return m_config->max >= 0;
+  }
+  return true;
 } /* validate() */
 
 NS_END(xml, config, steer2D, robotics, rcppsw);

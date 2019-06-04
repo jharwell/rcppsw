@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <string>
+#include <mutex>
 #include "rcppsw/common/common.hpp"
 
 #include "rcppsw/patterns/state_machine/base_fsm.hpp"

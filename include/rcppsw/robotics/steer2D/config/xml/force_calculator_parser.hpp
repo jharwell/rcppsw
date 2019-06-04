@@ -34,6 +34,7 @@
 #include "rcppsw/robotics/steer2D/config/xml/arrival_force_parser.hpp"
 #include "rcppsw/robotics/steer2D/config/xml/wander_force_parser.hpp"
 #include "rcppsw/robotics/steer2D/config/xml/polar_force_parser.hpp"
+#include "rcppsw/robotics/steer2D/config/xml/phototaxis_force_parser.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -61,10 +62,10 @@ class force_calculator_parser : public rcppsw::config::xml::xml_config_parser {
         m_avoidance(level + 1),
         m_arrival(level + 1),
         m_wander(level + 1),
-        m_polar(level + 1) {}
+        m_polar(level + 1),
+        m_phototaxis(level + 1) {}
 
   void parse(const ticpp::Element& node) override;
-  void show(std::ostream& stream) const override;
   bool validate(void) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
@@ -83,6 +84,7 @@ class force_calculator_parser : public rcppsw::config::xml::xml_config_parser {
   arrival_force_parser                     m_arrival;
   wander_force_parser                      m_wander;
   polar_force_parser                       m_polar;
+  phototaxis_force_parser                  m_phototaxis;
   /* clang-format on */
 };
 

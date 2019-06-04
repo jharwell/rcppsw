@@ -35,12 +35,12 @@ namespace ct = rcppsw::control;
  * Test Cases
  ******************************************************************************/
 TEST_CASE("Sine Waveform", "[periodic]") {
-  ct::waveform_params params{.type = "unused",
+  ct::config::waveform_config config{.type = "unused",
                              .frequency = 0.01,
                              .phase = 0,
                              .amplitude = 10,
                              .offset = 0};
-  ct::sine_waveform s1(&params);
+  ct::sine_waveform s1(&config);
   std::vector<double> values;
   for (size_t i = 0; i < 1000; ++i) {
     values.push_back(s1.value(i));
@@ -54,12 +54,12 @@ TEST_CASE("Sine Waveform", "[periodic]") {
 }
 
 TEST_CASE("Square Waveform", "[periodic]") {
-  ct::waveform_params params{.type = "unused",
+  ct::config::waveform_config config{.type = "unused",
                              .frequency = 0.01,
                              .phase = 0,
                              .amplitude = 10,
                              .offset = 0};
-  ct::square_waveform s1(&params);
+  ct::square_waveform s1(&config);
   std::vector<double> values;
   for (size_t i = 0; i < 1000; ++i) {
     values.push_back(s1.value(i));
@@ -72,12 +72,12 @@ TEST_CASE("Square Waveform", "[periodic]") {
   } /* for(i..) */
 }
 TEST_CASE("Sawtooth Waveform", "[periodic]") {
-  ct::waveform_params params{.type = "unused",
+  ct::config::waveform_config config{.type = "unused",
                              .frequency = 0.01,
                              .phase = 0,
                              .amplitude = 10,
                              .offset = 0};
-  ct::sawtooth_waveform s1(&params);
+  ct::sawtooth_waveform s1(&config);
   std::vector<double> values;
   for (size_t i = 0; i < 1000; ++i) {
     values.push_back(s1.value(i));

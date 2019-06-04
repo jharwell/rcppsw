@@ -7,7 +7,9 @@
       ((eval  . (progn
                   (let ((includes-list (list
                                         (substitute-in-file-name "$rcsw/include")
-                                        (concat (projectile-project-root) "include")
+                                        (concat (projectile-project-root)
+                                                "include")
+                                        "/usr/include/lua5.2"
                                         )))
                     (setq flycheck-clang-include-path includes-list)
                     (add-to-list 'flycheck-clang-args "-fPIC")

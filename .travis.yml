@@ -5,9 +5,9 @@ language: cpp
 dist: xenial
 
 before_install:
-  - sudo add-apt-repository ppa:jonathonf/gcc-7.1 -y
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update
-  - sudo apt-get install -y gcc-7 g++-7
+  - sudo apt-get install -y gcc-8 g++-8
 
 addons:
   apt:
@@ -39,9 +39,7 @@ before_script:
 
 script:
   - mkdir -p build && cd build
-  - cmake -DCMAKE_C_COMPILER=gcc-7 -DCMAKE_CXX_COMPILER=g++-7 -DBUILD_FOR_TRAVIS=YES ..
-  - export CC=gcc-7;
-  - export CXX=g++-7;
-  - cmake -DWITH_TESTS=yes .. && make -j 2
-  - make unit_tests
+  - cmake -DCMAKE_C_COMPILER=gcc-8 -DCMAKE_CXX_COMPILER=g++-8 -DBUILD_FOR_TRAVIS=YES -DLIBRA_TESTS=yes ..
+  - make -j 4
+  - make unit-tests
   - make test

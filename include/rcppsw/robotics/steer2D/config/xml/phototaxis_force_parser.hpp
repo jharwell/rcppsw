@@ -1,7 +1,7 @@
 /**
- * @file arrival_force_parser.hpp
+ * @file phototaxis_force_parser.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ROBOTICS_STEER2D_CONFIG_XML_ARRIVAL_FORCE_PARSER_HPP_
-#define INCLUDE_RCPPSW_ROBOTICS_STEER2D_CONFIG_XML_ARRIVAL_FORCE_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_ROBOTICS_STEER2D_CONFIG_XML_PHOTOTAXIS_FORCE_PARSER_HPP_
+#define INCLUDE_RCPPSW_ROBOTICS_STEER2D_CONFIG_XML_PHOTOTAXIS_FORCE_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -27,35 +27,33 @@
 #include <string>
 #include <memory>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/robotics/steer2D/config/phototaxis_force_config.hpp"
 #include "rcppsw/config/xml/xml_config_parser.hpp"
-#include "rcppsw/robotics/steer2D/config/arrival_force_config.hpp"
 
 /*******************************************************************************
- * Namespaces/Decls
+ * Namespaces
  ******************************************************************************/
 NS_START(rcppsw, robotics, steer2D, config, xml);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-
 /**
- * @class arrival_force_parser
+ * @class phototaxis_force_parser
  * @ingroup rcppsw robotics steer2D config xml
  *
- * @brief Parses XML configuration for \ref arrival_force into \ref
- * arrival_force_config. Assumes it is handed an XML parent in which the child
- * tag \ref kXMLRoot is found.
- *
- * Parameter tags under the XML root are expected to exactly match the names of
- * the fields in the \ref arrival_force_config struct.
+ * @brief Parses XML parameters for related to \ref phototaxis_force objects
+ * into \ref phototaxis_force_config.
  */
-class arrival_force_parser : public rcppsw::config::xml::xml_config_parser {
+class phototaxis_force_parser : public rcppsw::config::xml::xml_config_parser {
  public:
-  static constexpr char kXMLRoot[] = "arrival_force";
+  explicit phototaxis_force_parser(uint level) : xml_config_parser(level) {}
 
-  explicit arrival_force_parser(uint level) : xml_config_parser(level) {}
+  /**
+   * @brief The root tag that all phototaxis_force parameters should lie under
+   * in the XML tree.
+   */
+  static constexpr char kXMLRoot[] = "phototaxis_force";
 
   void parse(const ticpp::Element& node) override;
   bool validate(void) const override;
@@ -63,7 +61,7 @@ class arrival_force_parser : public rcppsw::config::xml::xml_config_parser {
   std::string xml_root(void) const override { return kXMLRoot; }
   bool parsed(void) const override { return m_parsed; }
 
-  std::shared_ptr<arrival_force_config> config_get(void) const {
+  std::shared_ptr<phototaxis_force_config> config_get(void) const {
     return m_config;
   }
 
@@ -72,13 +70,12 @@ class arrival_force_parser : public rcppsw::config::xml::xml_config_parser {
     return m_config;
   }
 
- private:
-  /* clang-format off */
-  bool                                  m_parsed{false};
-  std::shared_ptr<arrival_force_config> m_config{nullptr};
   /* clang-format on */
+  bool m_parsed{false};
+  std::shared_ptr<phototaxis_force_config> m_config{nullptr};
+  /* clang-format off */
 };
 
-NS_END(xml, config, psteer2D, robotics, rcppsw);
+NS_END(xml, config, steer2D, robotics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ROBOTICS_STEER2D_CONFIG_XML_ARRIVAL_FORCE_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_ROBOTICS_STEER2D_CONFIG_XML_PHOTOTAXIS_FORCE_PARSER_HPP_ */

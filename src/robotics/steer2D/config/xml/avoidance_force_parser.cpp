@@ -46,18 +46,6 @@ void avoidance_force_parser::parse(const ticpp::Element& node) {
   }
 } /* parse() */
 
-void avoidance_force_parser::show(std::ostream& stream) const {
-  if (!m_parsed) {
-    stream << build_header() << "<< Not Parsed >>" << std::endl
-           << build_footer();
-    return;
-  }
-
-  stream << build_header() << std::endl
-         << XML_ATTR_STR(m_config, max) << std::endl
-         << build_footer();
-} /* show() */
-
 __rcsw_pure bool avoidance_force_parser::validate(void) const {
   if (m_parsed) {
     CHECK(m_config->max > 0.0);

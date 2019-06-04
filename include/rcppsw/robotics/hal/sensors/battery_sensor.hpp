@@ -41,8 +41,8 @@ NS_START(rcppsw, robotics, hal, sensors, detail);
 /*******************************************************************************
  * Templates
  ******************************************************************************/
-template<typename Sensor>
-using is_argos_battery_sensor = std::is_same<Sensor,
+template<typename TSensor>
+using is_argos_battery_sensor = std::is_same<TSensor,
                                              argos::CCI_BatterySensor>;
 
 NS_END(detail);
@@ -58,7 +58,7 @@ NS_END(detail);
  *
  * - ARGoS footbot
  */
-template <typename T>
+template <typename TSensor>
 class _battery_sensor {
  public:
   /**
@@ -79,13 +79,13 @@ class _battery_sensor {
           time_left(_time_left) {}
   };
 
-  explicit _battery_sensor(T * const sensor) : m_sensor(sensor) {}
+  explicit _battery_sensor(TSensor * const sensor) : m_sensor(sensor) {}
 
   /**
    * @brief Get the current battery sensor readings for the footbot robot.
    * @return A vector of \ref reading.
    */
-  template <typename U = T,
+  template <typename U = TSensor,
             RCPPSW_SFINAE_REQUIRE(detail::is_argos_battery_sensor<U>::value)>
   struct reading readings(void) const {
     argos::CCI_BatterySensor::SReading temp = m_sensor->GetReading();
@@ -94,7 +94,7 @@ class _battery_sensor {
   }
 
  private:
-  T* const m_sensor;
+  TSensor* const m_sensor;
 };
 
 #if HAL_CONFIG == HAL_CONFIG_ARGOS_FOOTBOT

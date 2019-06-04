@@ -1,5 +1,5 @@
 /**
- * @file polar_force_parser.cpp
+ * @file phototaxis_force_config.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,39 +18,30 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_ROBOTICS_STEER2D_CONFIG_PHOTOTAXIS_FORCE_CONFIG_HPP_
+#define INCLUDE_RCPPSW_ROBOTICS_STEER2D_CONFIG_PHOTOTAXIS_FORCE_CONFIG_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/robotics/steer2D/config/xml/polar_force_parser.hpp"
+#include "rcppsw/config/base_config.hpp"
 
 /*******************************************************************************
- * Namespaces/Decls
+ * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, robotics, steer2D, config, xml);
+NS_START(rcppsw, robotics, steer2D, config);
 
 /*******************************************************************************
- * Class Constants
+ * Structure Definitions
  ******************************************************************************/
-constexpr char polar_force_parser::kXMLRoot[];
+/**
+ * @struct phototaxis_force_config
+ * @ingroup rcppsw robotics steer2D config
+ */
+struct phototaxis_force_config : public rcppsw::config::base_config {
+  double max;
+};
 
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-void polar_force_parser::parse(const ticpp::Element& node) {
-  if (nullptr != node.FirstChild(kXMLRoot, false)) {
-    ticpp::Element pnode = node_get(node, kXMLRoot);
-    m_config =
-        std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
-    XML_PARSE_ATTR(pnode, m_config, max);
-    m_parsed = true;
-  }
-} /* parse() */
+NS_END(config, steer2D, robotics, rcppsw);
 
-__rcsw_pure bool polar_force_parser::validate(void) const {
-  if (m_parsed) {
-    return m_config->max > 0.0;
-  }
-  return true;
-} /* validate() */
-
-NS_END(xml, config, steer2D, robotics, rcppsw);
+#endif /* INCLUDE_RCPPSW_ROBOTICS_STEER2D_CONFIG_PHOTOTAXIS_FORCE_CONFIG_HPP_ */

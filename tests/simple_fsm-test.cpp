@@ -54,15 +54,15 @@ public:
     FSM_DEFINE_TRANSITION_MAP(kMAP){STATE2,
                                     STATE3,
                                     STATE1,
-                                    fsm::event_signal::FATAL,
-                                    fsm::event_signal::FATAL,
-                                    fsm::event_signal::FATAL};
+                                    fsm::event_signal::ekFATAL,
+                                    fsm::event_signal::ekFATAL,
+                                    fsm::event_signal::ekFATAL};
     external_event(kMAP[current_state()], nullptr);
   }
   void event2(void) {
-    FSM_DEFINE_TRANSITION_MAP(kMAP){fsm::event_signal::IGNORED,
+    FSM_DEFINE_TRANSITION_MAP(kMAP){fsm::event_signal::ekIGNORED,
                                     STATE4,
-                                    fsm::event_signal::FATAL,
+                                    fsm::event_signal::ekFATAL,
                                     STATE4,
                                     STATE4,
                                     STATE5};
@@ -80,31 +80,31 @@ public:
 
 FSM_STATE_DEFINE_ND(test_fsm, s1) {
   printf("Executing state1\n");
-  return fsm::event_signal::HANDLED;
+  return fsm::event_signal::ekHANDLED;
 }
 FSM_STATE_DEFINE_ND(test_fsm, s2) {
   printf("Executing state2\n");
-  return fsm::event_signal::HANDLED;
+  return fsm::event_signal::ekHANDLED;
 }
 
 FSM_STATE_DEFINE_ND(test_fsm, s3) {
   printf("Executing state3\n");
-  return fsm::event_signal::HANDLED;
+  return fsm::event_signal::ekHANDLED;
 }
 
 FSM_STATE_DEFINE_ND(test_fsm, s4) {
   printf("Executing state4\n");
   internal_event(STATE5);
-  return fsm::event_signal::HANDLED;
+  return fsm::event_signal::ekHANDLED;
 }
 FSM_STATE_DEFINE_ND(test_fsm, s5) {
   printf("Executing state5\n");
-  return fsm::event_signal::HANDLED;
+  return fsm::event_signal::ekHANDLED;
 }
 
 FSM_STATE_DEFINE_ND(test_fsm, s6) {
   printf("Executing state6\n");
-  return fsm::event_signal::HANDLED;
+  return fsm::event_signal::ekHANDLED;
 }
 /*******************************************************************************
  * Test Functions

@@ -1,5 +1,5 @@
 /**
- * @file light_sensor.hpp
+ * @file colored_blob_camera_sensor.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ROBOTICS_HAL_SENSORS_LIGHT_SENSOR_HPP_
-#define INCLUDE_RCPPSW_ROBOTICS_HAL_SENSORS_LIGHT_SENSOR_HPP_
+#ifndef INCLUDE_RCPPSW_ROBOTICS_HAL_SENSORS_COLORED_BLOB_CAMERA_SENSOR_HPP_
+#define INCLUDE_RCPPSW_ROBOTICS_HAL_SENSORS_COLORED_BLOB_CAMERA_SENSOR_HPP_
 
 /*******************************************************************************
  * Includes
@@ -27,11 +27,13 @@
 #include <vector>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/robotics/hal/hal.hpp"
+#include "rcppsw/utils/color.hpp"
+#include "rcppsw/math/vector2.hpp"
 
 #if HAL_CONFIG == HAL_CONFIG_ARGOS_FOOTBOT
-#include <argos3/plugins/robots/foot-bot/control_interface/ci_footbot_light_sensor.h>
+#include <argos3/plugins/robots/generic/control_interface/ci_colored_blob_omnidirectional_camera_sensor.h>
 #else
-#error "Selected hardware has no light sensor!"
+#error "Selected hardware has no blob camera sensor!"
 #endif /* HAL_CONFIG */
 
 /*******************************************************************************
@@ -43,8 +45,9 @@ NS_START(rcppsw, robotics, hal, sensors, detail);
  * Templates
  ******************************************************************************/
 template<typename TSensor>
-using is_argos_light_sensor = std::is_same<TSensor,
-                                           argos::CCI_FootBotLightSensor>;
+using is_argos_blob_camera_sensor = std::is_same<
+  TSensor,
+  argos::CCI_ColoredBlobOmnidirectionalCameraSensor>;
 
 NS_END(detail);
 
@@ -52,43 +55,48 @@ NS_END(detail);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class light_sensor
+ * @class colored_blob_camera_sensor
  * @ingroup rcppsw robotics hal
  *
- * @brief Light sensor wrapper for the following supported robots:
+ * @brief Omnidirectional colored blob camera sensor wrapper for the following
+ * supported robots:
  *
  * - ARGoS footbot
  */
 template <typename TSensor>
-class _light_sensor {
+class _colored_blob_camera_sensor {
  public:
   /**
-   * @brief A light sensor reading (value, angle) pair.
-   *
-   * The first argument is the value of the sensor (distance to light), and the
-   * second argument is the angle of the sensor on the robot in relation to the
-   * positive x axis.
+   * @brief A camera sensor reading (color, distance, angle) tuple.
    */
   struct reading {
-    double value;
-    double angle;
-
-    reading(double _value, double _angle) : value(_value), angle(_angle) {}
+    math::vector2d vec;
+    utils::color color;
   };
 
-  explicit _light_sensor(TSensor * const sensor) : m_sensor(sensor) {}
+  template <typename U = TSensor,
+            RCPPSW_SFINAE_REQUIRE(detail::is_argos_blob_camera_sensor<U>::value)>
+  explicit _colored_blob_camera_sensor(U * const sensor) : m_sensor(sensor) {
+    sensor->Enable();
+  }
 
   /**
-   * @brief Get the current light sensor readings for the footbot robot.
+   * @brief Get the sensor readings for the footbot robot.
    *
    * @return A vector of \ref reading.
    */
   template <typename U = TSensor,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_light_sensor<U>::value)>
+            RCPPSW_SFINAE_REQUIRE(detail::is_argos_blob_camera_sensor<U>::value)>
   std::vector<reading>  readings(void) const {
     std::vector<reading> ret;
-    for (auto &r : m_sensor->GetReadings()) {
-      ret.push_back({r.Value, r.Angle.GetValue()});
+    for (auto &r : m_sensor->GetReadings().BlobList) {
+      struct reading s = {
+        .vec = {r->Distance, math::radians(r->Angle.GetValue())},
+        .color = utils::color(r->Color.GetRed(),
+                              r->Color.GetGreen(),
+                              r->Color.GetBlue())
+      };
+      ret.push_back(s);
     } /* for(&r..) */
 
     return ret;
@@ -99,9 +107,10 @@ class _light_sensor {
 };
 
 #if HAL_CONFIG == HAL_CONFIG_ARGOS_FOOTBOT
-using light_sensor = _light_sensor<argos::CCI_FootBotLightSensor>;
+using colored_blob_camera_sensor =
+    _colored_blob_camera_sensor<argos::CCI_ColoredBlobOmnidirectionalCameraSensor>;
 #endif /* HAL_CONFIG */
 
 NS_END(sensors, hal, robotics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ROBOTICS_HAL_SENSORS_LIGHT_SENSOR_HPP_ */
+#endif /* INCLUDE_RCPPSW_ROBOTICS_HAL_SENSORS_BLOB_CAMERA_SENSOR_HPP_ */

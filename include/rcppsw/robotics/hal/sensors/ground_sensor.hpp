@@ -42,8 +42,8 @@ NS_START(rcppsw, robotics, hal, sensors, detail);
 /*******************************************************************************
  * Templates
  ******************************************************************************/
-template<typename Sensor>
-using is_argos_ground_sensor = std::is_same<Sensor,
+template<typename TSensor>
+using is_argos_ground_sensor = std::is_same<TSensor,
                                             argos::CCI_FootBotMotorGroundSensor>;
 
 NS_END(detail);
@@ -59,7 +59,7 @@ NS_END(detail);
  *
  * - ARGoS footbot
  */
-template <typename T>
+template <typename TSensor>
 class _ground_sensor {
  public:
   /**
@@ -77,14 +77,14 @@ class _ground_sensor {
     double distance;
   };
 
-  explicit _ground_sensor(T * const sensor) : m_sensor(sensor) {}
+  explicit _ground_sensor(TSensor * const sensor) : m_sensor(sensor) {}
 
   /**
    * @brief Get the current ground sensor readings for the footbot robot.
    *
    * @return A vector of \ref reading.
    */
-  template <typename U = T,
+  template <typename U = TSensor,
             RCPPSW_SFINAE_REQUIRE(detail::is_argos_ground_sensor<U>::value)>
   std::vector<reading> readings(void) const {
     std::vector<reading> ret;
@@ -106,7 +106,7 @@ class _ground_sensor {
    *
    * @return \c TRUE iff the condition was detected by the specified # readings.
    */
-  template <typename U = T,
+  template <typename U = TSensor,
             RCPPSW_SFINAE_REQUIRE(detail::is_argos_ground_sensor<U>::value)>
   bool detect(double target, double tol, uint consensus) const {
     std::vector<reading> r = readings();
@@ -124,7 +124,7 @@ class _ground_sensor {
   }
 
  private:
-  T* const m_sensor;
+  TSensor* const m_sensor;
 };
 
 #if HAL_CONFIG == HAL_CONFIG_ARGOS_FOOTBOT

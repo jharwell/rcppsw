@@ -40,7 +40,7 @@ NS_START(rcppsw, robotics, kin2D);
  * @class model
  * @ingroup rcppsw robotics kin2D
  *
- * @brief Interface that all 2D kin models need to fulfill in order to be
+ * @brief Interface that all 2D kinematic models need to fulfill in order to be
  * used in other components of this module.
  */
 class model {

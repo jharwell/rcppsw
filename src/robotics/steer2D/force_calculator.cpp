@@ -36,10 +36,11 @@ force_calculator::force_calculator(boid& entity,
                                    const config::force_calculator_config* config)
     : ER_CLIENT_INIT("rcppsw.robotics.steer2D.force_calculate"),
       m_entity(entity),
-      m_avoidance_force(&config->avoidance),
-      m_arrival_force(&config->arrival),
-      m_wander_force(&config->wander),
-      m_polar_force(&config->polar) {}
+      m_avoidance(&config->avoidance),
+      m_arrival(&config->arrival),
+      m_wander(&config->wander),
+      m_polar(&config->polar),
+      m_phototaxis(&config->phototaxis){}
 
 /*******************************************************************************
  * Member Functions
@@ -59,7 +60,7 @@ kin::twist force_calculator::to_twist(const math::vector2d& force) const {
 } /* to_twist() */
 
 void force_calculator::seek_through(const math::vector2d& target) {
-  math::vector2d force = m_seek_force(m_entity, target);
+  math::vector2d force = m_seek(m_entity, target);
   ER_DEBUG("Seek force: (%f, %f)@%f [%f]",
            force.x(),
            force.y(),
@@ -69,7 +70,7 @@ void force_calculator::seek_through(const math::vector2d& target) {
 } /* seek_through() */
 
 void force_calculator::seek_to(const math::vector2d& target) {
-  math::vector2d force = m_arrival_force(m_entity, target);
+  math::vector2d force = m_arrival(m_entity, target);
   ER_DEBUG("Arrival force: (%f, %f)@%f [%f]",
            force.x(),
            force.y(),
@@ -79,7 +80,7 @@ void force_calculator::seek_to(const math::vector2d& target) {
 } /* seek_to() */
 
 void force_calculator::wander(void) {
-  math::vector2d force = m_wander_force(m_entity);
+  math::vector2d force = m_wander(m_entity);
   ER_DEBUG("Wander force: (%f, %f)@%f [%f]",
            force.x(),
            force.y(),
@@ -89,7 +90,7 @@ void force_calculator::wander(void) {
 } /* wander() */
 
 void force_calculator::avoidance(const math::vector2d& closest_obstacle) {
-  math::vector2d force = m_avoidance_force(m_entity, closest_obstacle);
+  math::vector2d force = m_avoidance(m_entity, closest_obstacle);
   ER_DEBUG("Avoidance force: (%f, %f)@%f [%f]",
            force.x(),
            force.y(),
@@ -97,5 +98,51 @@ void force_calculator::avoidance(const math::vector2d& closest_obstacle) {
            force.length());
   accum_force(force);
 } /* avoidance() */
+
+void force_calculator::phototaxis(
+    const phototaxis_force::light_sensor_readings& readings) {
+  math::vector2d force = m_phototaxis(readings);
+  ER_DEBUG("Phototaxis force: (%f, %f)@%f [%f]",
+           force.x(),
+           force.y(),
+           force.angle().value(),
+           force.length());
+  accum_force(force);
+} /* phototaxis() */
+
+void force_calculator::phototaxis(
+    const phototaxis_force::camera_sensor_readings& readings,
+    const utils::color& color) {
+  math::vector2d force = m_phototaxis(readings, color);
+  ER_DEBUG("Phototaxis force: (%f, %f)@%f [%f]",
+           force.x(),
+           force.y(),
+           force.angle().value(),
+           force.length());
+  accum_force(force);
+} /* phototaxis() */
+
+void force_calculator::anti_phototaxis(
+    const phototaxis_force::light_sensor_readings& readings) {
+  math::vector2d force = -m_phototaxis(readings);
+  ER_DEBUG("Anti-phototaxis force: (%f, %f)@%f [%f]",
+           force.x(),
+           force.y(),
+           force.angle().value(),
+           force.length());
+  accum_force(force);
+} /* anti_phototaxis() */
+
+void force_calculator::anti_phototaxis(
+    const phototaxis_force::camera_sensor_readings& readings,
+    const utils::color& color) {
+  math::vector2d force = -m_phototaxis(readings, color);
+  ER_DEBUG("Anti-phototaxis force: (%f, %f)@%f [%f]",
+           force.x(),
+           force.y(),
+           force.angle().value(),
+           force.length());
+  accum_force(force);
+} /* anti_phototaxis() */
 
 NS_END(steer2D, robotics, rcppsw);

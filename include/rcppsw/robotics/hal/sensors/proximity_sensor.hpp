@@ -47,8 +47,8 @@ NS_START(rcppsw, robotics, hal, sensors, detail);
 /*******************************************************************************
  * Templates
  ******************************************************************************/
-template<typename Sensor>
-using is_argos_proximity_sensor = std::is_same<Sensor,
+template<typename TSensor>
+using is_argos_proximity_sensor = std::is_same<TSensor,
                                                argos::CCI_FootBotProximitySensor>;
 
 NS_END(detail);
@@ -64,10 +64,10 @@ NS_END(detail);
  *
  * - ARGoS footbot
  */
-template <typename T>
+template <typename TSensor>
 class _proximity_sensor {
  public:
-  explicit _proximity_sensor(T * const sensor)
+  explicit _proximity_sensor(TSensor * const sensor)
       : m_sensor(sensor) {}
 
   /**
@@ -76,7 +76,7 @@ class _proximity_sensor {
    * @return A vector of (X,Y) pairs of sensor readings corresponding to
    * object distances.
    */
-  template <typename U = T,
+  template <typename U = TSensor,
             RCPPSW_SFINAE_REQUIRE(detail::is_argos_proximity_sensor<U>::value)>
   std::vector<math::vector2d> readings(void) const {
     std::vector<math::vector2d> ret;
@@ -95,7 +95,7 @@ class _proximity_sensor {
    *
    * Should be used in conjunction with \ref prox_obj_exists().
    */
-  template <typename U = T,
+  template <typename U = TSensor,
             RCPPSW_SFINAE_REQUIRE(detail::is_argos_proximity_sensor<U>::value)>
   math::vector2d closest_prox_obj(const math::vector2d& position,
               double obj_delta,
@@ -137,7 +137,7 @@ class _proximity_sensor {
     return obj.length() >= obj_delta && fov.contains(obj.angle());
   }
 
-  T* const m_sensor;
+  TSensor* const m_sensor;
 };
 
 #if HAL_CONFIG == HAL_CONFIG_ARGOS_FOOTBOT

@@ -29,6 +29,7 @@
 #include "rcppsw/robotics/steer2D/config/arrival_force_config.hpp"
 #include "rcppsw/robotics/steer2D/config/wander_force_config.hpp"
 #include "rcppsw/robotics/steer2D/config/polar_force_config.hpp"
+#include "rcppsw/robotics/steer2D/config/phototaxis_force_config.hpp"
 #include "rcppsw/config/base_config.hpp"
 
 /*******************************************************************************
@@ -49,6 +50,7 @@ struct force_calculator_config : public rcppsw::config::base_config {
   struct arrival_force_config arrival{};
   struct wander_force_config wander{};
   struct polar_force_config polar{};
+  struct phototaxis_force_config phototaxis{};
 };
 
 NS_END(config, steer2D, robotics, rcppsw);

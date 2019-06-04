@@ -26,8 +26,10 @@
  ******************************************************************************/
 #include <cstdio>
 #include <cstddef>
-#include <mutex>
 #include <string>
+#include <memory>
+#include <utility>
+
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/patterns/state_machine/event.hpp"
@@ -79,7 +81,7 @@ class base_fsm : public er::client<base_fsm> {
    * state \c B before that, and the current state is \c A, then this function
    * will return \c B.
    */
-  virtual uint8_t previous_state(void) const { return m_previous_state; }
+  uint8_t previous_state(void) const { return m_previous_state; }
 
   /**
    * @brief Get the state the the state machine was in the last time the state
@@ -89,7 +91,7 @@ class base_fsm : public er::client<base_fsm> {
    * state \c B before that, and the current state is \c A, then this function
    * will return \c A.
    */
-  virtual uint8_t last_state(void) const { return m_last_state; }
+  uint8_t last_state(void) const { return m_last_state; }
 
   /**
    * @brief Initialize/reset the state machine.
@@ -116,7 +118,7 @@ class base_fsm : public er::client<base_fsm> {
    * @param data The event data sent to the state.
    */
   virtual void external_event(uint8_t new_state,
-                              std::unique_ptr<event_data> data);
+                      std::unique_ptr<event_data> data);
   void external_event(uint8_t new_state) {
     external_event(new_state, nullptr);
   }

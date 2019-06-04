@@ -32,6 +32,7 @@
 #include "rcppsw/robotics/steer2D/seek_force.hpp"
 #include "rcppsw/robotics/steer2D/wander_force.hpp"
 #include "rcppsw/robotics/steer2D/polar_force.hpp"
+#include "rcppsw/robotics/steer2D/phototaxis_force.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/robotics/kin/twist.hpp"
 
@@ -96,7 +97,7 @@ class force_calculator : public er::client<force_calculator> {
   void seek_to(const math::vector2d& target);
 
   bool within_slowing_radius(void) const {
-    return m_arrival_force.within_slowing_radius();
+    return m_arrival.within_slowing_radius();
   }
   /**
    * @brief Add the \ref wander_force to the sum forces for this timestep.
@@ -113,19 +114,51 @@ class force_calculator : public er::client<force_calculator> {
    */
   void avoidance(const math::vector2d& closest_obstacle);
 
- protected:
+  /**
+   * @brief Add the \ref phototaxis_force to the sum forces for this timestep.
+   *
+   * @param readings The current light sensor readings.
+   */
+  void phototaxis(const phototaxis_force::light_sensor_readings& readings);
+
+  /**
+   * @brief Add the \ref phototaxis_force to the sum forces for this timestep.
+   *
+   * @param readings The current camera sensor readings.
+   */
+  void phototaxis(const phototaxis_force::camera_sensor_readings& readings,
+                  const utils::color& color);
+
+  /**
+   * @brief Add the negative of the \ref phototaxis_force to the sum forces for
+   * this timestep.
+   *
+   * @param readings The current light sensor readings.
+   */
+  void anti_phototaxis(
+      const phototaxis_force::light_sensor_readings& readings);
+
+  /**
+   * @brief Add the negative of the \ref phototaxis_force to the sum forces for
+   * this timestep.
+   *
+   * @param readings The current camera sensor readings.
+   */
+  void anti_phototaxis(const phototaxis_force::camera_sensor_readings& readings,
+                       const utils::color& color);
+ private:
   void accum_force(const math::vector2d& force) { m_force_accum += force; }
   const boid& entity(void) const { return m_entity; }
 
- private:
   /* clang-format off */
-  boid&           m_entity;
-  math::vector2d  m_force_accum{};
-  avoidance_force m_avoidance_force;
-  arrival_force   m_arrival_force;
-  seek_force      m_seek_force{};
-  wander_force    m_wander_force;
-  polar_force     m_polar_force;
+  boid&            m_entity;
+  math::vector2d   m_force_accum{};
+  avoidance_force  m_avoidance;
+  arrival_force    m_arrival;
+  seek_force       m_seek{};
+  wander_force     m_wander;
+  polar_force      m_polar;
+  phototaxis_force m_phototaxis;
   /* clang-format on */
 };
 

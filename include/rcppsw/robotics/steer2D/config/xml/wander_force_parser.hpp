@@ -56,7 +56,6 @@ class wander_force_parser : public rcppsw::config::xml::xml_config_parser {
       : xml_config_parser(level) {}
 
   void parse(const ticpp::Element& node) override;
-  void show(std::ostream& stream) const override;
   bool validate(void) const override;
   bool parsed(void) const override { return m_parsed; }
 

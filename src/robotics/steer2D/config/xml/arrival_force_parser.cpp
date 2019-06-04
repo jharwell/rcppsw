@@ -48,13 +48,6 @@ void arrival_force_parser::parse(const ticpp::Element& node) {
   }
 } /* parse() */
 
-void arrival_force_parser::show(std::ostream& stream) const {
-  stream << build_header() << XML_ATTR_STR(m_config, max) << std::endl
-         << XML_ATTR_STR(m_config, slowing_radius) << std::endl
-         << XML_ATTR_STR(m_config, slowing_speed_min) << std::endl
-         << build_footer();
-} /* show() */
-
 __rcsw_pure bool arrival_force_parser::validate(void) const {
   if (m_parsed) {
     CHECK(m_config->slowing_radius > 0.0);
