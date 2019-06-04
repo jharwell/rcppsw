@@ -42,8 +42,8 @@ NS_START(rcppsw, robotics, hal, sensors, detail);
 /*******************************************************************************
  * Templates
  ******************************************************************************/
-template<typename Sensor>
-using is_argos_rab_sensor = std::is_same<Sensor,
+template<typename TSensor>
+using is_argos_rab_sensor = std::is_same<TSensor,
                                          argos::CCI_RangeAndBearingSensor>;
 
 NS_END(detail);
@@ -60,7 +60,7 @@ NS_END(detail);
  *
  * - ARGoS footbot
  */
-template <typename T>
+template <typename TSensor>
 class _rab_wifi_sensor  {
   struct rab_wifi_packet : public wifi_packet {
     /**
@@ -88,14 +88,14 @@ class _rab_wifi_sensor  {
   };
 
  public:
-  explicit _rab_wifi_sensor(T * const sensor) : m_sensor(sensor) {}
+  explicit _rab_wifi_sensor(TSensor * const sensor) : m_sensor(sensor) {}
 
   /**
    * @brief Get the current rab wifi sensor readings for the footbot robot.
    *
    * @return A vector of \ref wifi_packet.
    */
-  template <typename U = T,
+  template <typename U = TSensor,
             RCPPSW_SFINAE_REQUIRE(detail::is_argos_rab_sensor<U>::value)>
   std::vector<rab_wifi_packet> readings(void) const {
     std::vector<rab_wifi_packet> ret;
@@ -112,7 +112,7 @@ class _rab_wifi_sensor  {
   }
 
  private:
-  T* m_sensor;
+  TSensor* m_sensor;
 };
 
 #if HAL_CONFIG == HAL_CONFIG_ARGOS_FOOTBOT
