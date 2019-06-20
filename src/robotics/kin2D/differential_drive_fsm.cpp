@@ -45,7 +45,7 @@ differential_drive_fsm::differential_drive_fsm(double max_speed,
 void differential_drive_fsm::change_velocity(double speed,
                                              const math::radians& angle,
                                              const std::pair<bool, bool>& force) {
-  FSM_DEFINE_TRANSITION_MAP(kTRANSITIONS) {
+  FSM_DEFINE_TRANSITION_MAP(kTRANSITIONS){
       kST_SOFT_TURN, /* slow turn */
       kST_HARD_TURN, /* hard turn */
   };

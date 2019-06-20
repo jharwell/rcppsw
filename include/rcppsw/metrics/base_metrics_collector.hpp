@@ -25,8 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <fstream>
-#include <string>
 #include <list>
+#include <string>
 
 #include "rcppsw/common/common.hpp"
 
@@ -57,9 +57,9 @@ class base_metrics_collector {
    * @param interval Collection interval.
    * @param cum_only The metrics to be collected are cumulative only. This means
    * that (1) no header will be written, (2) the output file will be truncated
-   * each time \ref csv_line_build() returns true.. Default = \c false;
+   * each time \ref csv_line_build() returns true. Default = \c false;
    */
-  base_metrics_collector(std::string ofname,
+  base_metrics_collector(const std::string& ofname,
                          uint interval,
                          bool cum_only = false);
 
@@ -148,9 +148,7 @@ class base_metrics_collector {
    * @brief Return a list of default columns that should be include in (almost)
    * all emitted .csv files for the collector.
    */
-  std::list<std::string> dflt_csv_header_cols(void) const {
-    return {"clock"};
-  }
+  std::list<std::string> dflt_csv_header_cols(void) const { return {"clock"}; }
 
   /**
    * @brief Write out constructed header.
@@ -163,7 +161,7 @@ class base_metrics_collector {
    * @brief Return a string of the average value of a sum of SOMETHING over an
    * interval + separator.
    */
-  template<class T>
+  template <class T>
   std::string csv_entry_intavg(T sum) const {
     return std::to_string(static_cast<double>(sum) / interval()) + separator();
   }
@@ -172,10 +170,10 @@ class base_metrics_collector {
    * @brief Return a string of the average value of a sum of SOMETHING over the
    * elapsed simulation time so far + separator.
    */
-  template<class T>
+  template <class T>
   std::string csv_entry_tsavg(T sum) const {
     return std::to_string(static_cast<double>(sum) / (timestep() + 1)) +
-        separator();
+           separator();
   }
 
   /**
@@ -183,12 +181,12 @@ class base_metrics_collector {
    * by a COUNT + separator. If the count is 0, then "0" + separator is
    * returned.
    */
-  template<class T, class U>
+  template <class T, class U>
   std::string csv_entry_domavg(T sum, U count) const {
-    return (count > 0) ?
-        std::to_string(static_cast<double>(sum) /
-                       static_cast<double>(count)) + separator() :
-        "0" + separator();
+    return (count > 0) ? std::to_string(static_cast<double>(sum) /
+                                        static_cast<double>(count)) +
+                             separator()
+                       : "0" + separator();
   }
 
  private:
@@ -202,7 +200,7 @@ class base_metrics_collector {
 
   /* clang-format off */
   int           m_interval;
-  uint          m_timestep;
+  uint          m_timestep{0};
   bool          m_cum_only;
   std::string   m_ofname;
   std::string   m_separator;

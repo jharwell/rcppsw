@@ -40,16 +40,10 @@ constexpr char ema_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void ema_parser::parse(const ticpp::Element& node) {
-  m_config =
-      std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
+  m_config = std::make_unique<config_type>();
   ticpp::Element enode = node_get(node, kXMLRoot);
   XML_PARSE_ATTR(enode, m_config, alpha);
 } /* parse() */
-
-void ema_parser::show(std::ostream& stream) const {
-  stream << build_header() << XML_ATTR_STR(m_config, alpha) << std::endl
-         << build_footer();
-} /* show() */
 
 __rcsw_pure bool ema_parser::validate(void) const {
   CHECK(m_config->alpha > 0.0);

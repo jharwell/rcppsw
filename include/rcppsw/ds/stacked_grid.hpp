@@ -25,8 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <tuple>
-#include <vector>
 #include <utility>
+#include <vector>
 
 #include "rcppsw/ds/overlay_grid2D.hpp"
 #include "rcppsw/math/vector2.hpp"
@@ -193,7 +193,8 @@ class stacked_grid {
   template <size_t Index, typename... Args>
   void add_layer(Args&&... args) {
     m_layers[kStackSize - Index - 1] =
-        new layer_value_type<kStackSize - Index - 1>(std::forward<Args>(args)...);
+        new layer_value_type<kStackSize - Index - 1>(
+            std::forward<Args>(args)...);
   }
 
   template <size_t Index>

@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <ext/ticpp/ticpp.h>
+#include <boost/optional.hpp>
 #include <iosfwd>
 #include <string>
 #include <memory>
@@ -64,36 +65,14 @@ NS_START(xml);
  */
 class xml_config_parser : public er::client<xml_config_parser> {
  public:
-  explicit xml_config_parser(uint level);
+  xml_config_parser(void);
   ~xml_config_parser(void) override = default;
-
-  static constexpr uint kColumnWidth = 100;
-  static constexpr uint kHeader1 = 1;
-  static constexpr uint kHeader2 = 2;
-  static constexpr uint kHeader3 = 3;
-  static constexpr uint kHeader4 = 4;
 
   /**
    * @brief Return the root XML tag that all parameters for the specified parser
    * should be found/placed under.
    */
   virtual std::string xml_root(void) const = 0;
-
-  /**
-   * @brief Build a header suitable for inclusion in dumping parsed parameters
-   * to a stream.
-   *
-   * @return The constructed header.
-   */
-  std::string build_header(void) const;
-
-  /**
-   * @brief Build a footer suitable for inclusion in dumping parsed parameters
-   * to a stream.
-   *
-   * @return The constructed footer.
-   */
-  std::string build_footer(void) const;
 
   /**
    * @brief Parse the provided XML node into an internal representation (should
@@ -118,20 +97,11 @@ class xml_config_parser : public er::client<xml_config_parser> {
    * covariance with smart pointer return types will work.
    */
   template <typename T>
-  std::shared_ptr<T> config_get(void) const {
+  const T* config_get(void) const {
     static_assert(std::is_base_of<base_config, T>::value,
-                  "Parameters must be derived from base_config!");
-    return std::static_pointer_cast<T>(config_get_impl());
+                  "Config type to get must be derived from base_config!");
+    return static_cast<const T*>(config_get_impl());
   }
-
-  friend std::ostream& operator<<(std::ostream& stream,
-                                  const xml_config_parser& parser) {
-    parser.show(stream);
-    return stream;
-  } /* operator<<() */
-
-  uint level(void) const { return m_level; }
-  void level(uint level) { m_level = level; }
 
   /**
    * @brief Get the node that is inside the specified one, designated by the
@@ -174,7 +144,9 @@ class xml_config_parser : public er::client<xml_config_parser> {
    * @param buf  The result buffer.
    * @param dflt The default value to use if the attribute does not exist.
    */
-  template <typename T>
+  template <typename T,
+            typename U = T,
+            RCPPSW_SFINAE_REQUIRE(!std::is_same<T, bool>::value)>
   void node_attr_get(const ticpp::Element& node,
                      const std::string& attr,
                      T& buf,
@@ -182,7 +154,27 @@ class xml_config_parser : public er::client<xml_config_parser> {
     node.GetAttributeOrDefault(attr, &buf, dflt);
   }
 
-  virtual bool parsed(void) const { return true; }
+  /**
+   * @brief Get a boolean attribute inside a node (bools have to be handed
+   * specially, or at least I can't figure out how to make them also work in the
+   * template version).
+   */
+  template <typename T,
+            typename U = T,
+            RCPPSW_SFINAE_REQUIRE(std::is_same<U, bool>::value)>
+  void node_attr_get(const ticpp::Element& node,
+                     const std::string& attr,
+                     T& buf,
+                     const T& dflt) const {
+    if (!node.HasAttribute(attr)) {
+      buf = dflt;
+      return;
+    }
+    node_attr_get(node, attr, buf);
+  }
+
+
+  bool is_parsed(void) const { return config_get_impl() ? true : false; }
 
  protected:
   /**
@@ -191,18 +183,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
    * only have a handle on THIS class, even if the object is actually a derived
    * class parameter parser.
    */
-  virtual std::shared_ptr<base_config> config_get_impl(void) const = 0;
-
-  /**
-   * @brief Dump the parsed (or possibly unparsed, but that's kind of useless)
-   * parameters to the specified stream.
-   */
-  virtual void show(std::ostream&) const {}
-
- private:
-  /* clang-format off */
-  uint m_level;
-  /* clang-format on */
+  virtual const base_config* config_get_impl(void) const = 0;
 };
 
 NS_END(xml, config, rcppsw);

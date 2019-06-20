@@ -41,20 +41,12 @@ constexpr char sigmoid_parser::kXMLRoot[];
  ******************************************************************************/
 void sigmoid_parser::parse(const ticpp::Element& node) {
   ticpp::Element snode = node_get(node, kXMLRoot);
-  m_config =
-      std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
+  m_config = std::make_unique<config_type>();
 
   XML_PARSE_ATTR(snode, m_config, reactivity);
   XML_PARSE_ATTR(snode, m_config, offset);
   XML_PARSE_ATTR(snode, m_config, gamma);
 } /* parse() */
-
-void sigmoid_parser::show(std::ostream& stream) const {
-  stream << build_header() << XML_ATTR_STR(m_config, reactivity) << std::endl
-         << XML_ATTR_STR(m_config, offset) << std::endl
-         << XML_ATTR_STR(m_config, gamma) << std::endl
-         << build_footer();
-} /* show() */
 
 __rcsw_pure bool sigmoid_parser::validate(void) const {
   CHECK(m_config->reactivity > 0.0);

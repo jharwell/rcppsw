@@ -26,7 +26,6 @@
  ******************************************************************************/
 #include <string>
 #include <map>
-#include <typeindex>
 #include <memory>
 #include <utility>
 #include <vector>

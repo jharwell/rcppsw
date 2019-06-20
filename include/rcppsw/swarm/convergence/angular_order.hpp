@@ -25,7 +25,6 @@
  * Includes
  ******************************************************************************/
 #include <vector>
-#include <limits>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/radians.hpp"

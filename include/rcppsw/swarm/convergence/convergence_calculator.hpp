@@ -25,7 +25,6 @@
  * Includes
  ******************************************************************************/
 #include <boost/variant.hpp>
-#include <utility>
 #include <vector>
 
 #include "rcppsw/swarm/convergence/config/convergence_config.hpp"

@@ -40,7 +40,7 @@ NS_START(rcppsw, robotics, steer2D, config);
  * @struct arrival_force_config
  * @ingroup rcppsw robotics steer2D config
  */
-struct arrival_force_config : rcppsw::config::base_config {
+struct arrival_force_config final : rcppsw::config::base_config {
   /**
    * Maximum value for the force.
    */

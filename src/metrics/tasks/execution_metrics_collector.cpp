@@ -44,7 +44,7 @@ execution_metrics_collector::execution_metrics_collector(const std::string& ofna
 std::list<std::string> execution_metrics_collector::csv_header_cols(void) const {
   auto merged = dflt_csv_header_cols();
   auto cols = std::list<std::string>{
-    /* clang-format off */
+      /* clang-format off */
     "int_avg_exec_time",
     "cum_avg_exec_time",
     "int_avg_interface_time",
@@ -59,7 +59,7 @@ std::list<std::string> execution_metrics_collector::csv_header_cols(void) const 
     "cum_avg_complete_count",
     "int_avg_interface_count",
     "cum_avg_interface_count"
-    /* clang-format on */
+      /* clang-format on */
   };
   merged.splice(merged.end(), cols);
   return merged;

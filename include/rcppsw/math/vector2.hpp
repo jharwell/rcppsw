@@ -105,6 +105,11 @@ class vector2 {
   void y(const T& y) { m_y = y; }
 
   /**
+   * @brief Is the vector is positive definite?
+   */
+  bool is_pd(void) const { return m_x > 0 && m_y > 0; }
+
+  /**
    * @brief Sets the vector contents from Cartesian coordinates.
    *
    * @param x The new X coordinate.
@@ -228,8 +233,7 @@ class vector2 {
    * @brief Needed for using vectors as keys in a map.
    */
   bool operator<(const vector2& other) const {
-    return (m_x < other.m_x) ||
-        ((m_x == other.m_x) && (m_y < other.m_y));
+    return (m_x < other.m_x) || ((m_x == other.m_x) && (m_y < other.m_y));
   }
 
   /**

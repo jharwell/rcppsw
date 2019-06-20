@@ -39,17 +39,16 @@ constexpr char arrival_force_parser::kXMLRoot[];
 void arrival_force_parser::parse(const ticpp::Element& node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
     ticpp::Element anode = node_get(node, kXMLRoot);
-    m_config =
-        std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
+    m_config = std::make_unique<config_type>();
+
     XML_PARSE_ATTR(anode, m_config, max);
     XML_PARSE_ATTR(anode, m_config, slowing_radius);
     XML_PARSE_ATTR(anode, m_config, slowing_speed_min);
-    m_parsed = true;
   }
 } /* parse() */
 
 __rcsw_pure bool arrival_force_parser::validate(void) const {
-  if (m_parsed) {
+  if (is_parsed()) {
     CHECK(m_config->slowing_radius > 0.0);
     CHECK(m_config->slowing_speed_min > 0.0);
     CHECK(m_config->max > 0.0 && m_config->max > m_config->slowing_speed_min);

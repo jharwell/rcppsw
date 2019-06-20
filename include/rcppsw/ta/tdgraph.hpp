@@ -78,8 +78,7 @@ class tdgraph : public er::client<tdgraph> {
    *
    * @return The parent of the vertex, or NULL if vertex not in graph.
    */
-  static polled_task* vertex_parent(const tdgraph& graph,
-                                    const polled_task* v);
+  static polled_task* vertex_parent(const tdgraph& graph, const polled_task* v);
 
   tdgraph(void);
   ~tdgraph(void) override = default;

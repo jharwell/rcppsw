@@ -48,7 +48,7 @@ NS_START(rcppsw, math, config, xml);
  */
 class ema_parser : public rcppsw::config::xml::xml_config_parser {
  public:
-  explicit ema_parser(uint level) : xml_config_parser(level) {}
+  using config_type = ema_config;
 
   /**
    * @brief The root tag that all ema configuration values should lie under in
@@ -56,22 +56,18 @@ class ema_parser : public rcppsw::config::xml::xml_config_parser {
    */
   static constexpr char kXMLRoot[] = "ema";
 
-  void show(std::ostream& stream) const override;
   bool validate(void) const override;
   void parse(const ticpp::Element& node) override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
 
-  std::shared_ptr<ema_config> config_get(void) const { return m_config; }
-
  private:
-  std::shared_ptr<rcppsw::config::base_config> config_get_impl(
-      void) const override {
-    return m_config;
+  rcppsw::config::base_config* config_get_impl(void) const override {
+    return m_config.get();
   }
 
   /* clang-format off */
-  std::shared_ptr<ema_config> m_config{nullptr};
+  std::unique_ptr<ema_config> m_config{nullptr};
   /* clang-format on */
 };
 

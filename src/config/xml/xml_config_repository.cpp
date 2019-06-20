@@ -35,6 +35,7 @@ NS_START(rcppsw, config, xml);
 bool xml_config_repository::validate_all(void) {
   for (auto& pair : m_parsers) {
     if (!pair.second->validate()) {
+      ER_ERR("Parser '%s' failed validation", pair.first.c_str());
       return false;
     }
   } /* for(pair..) */
@@ -49,15 +50,5 @@ void xml_config_repository::parse_all(const ticpp::Element& node) {
                   pair.second->parse(node);
                 });
 } /* parse_all() */
-
-std::ostream& operator<<(std::ostream& stream,
-                         const xml_config_repository& repo) {
-  std::for_each(repo.m_parsers.begin(),
-                repo.m_parsers.end(),
-                [&](const std::pair<const std::string, xml_config_parser*>& pair) {
-                  stream << *pair.second;
-                });
-  return stream;
-} /* operator<<() */
 
 NS_END(xml, config, rcppsw);

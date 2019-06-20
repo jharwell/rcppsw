@@ -41,7 +41,7 @@ NS_START(rcppsw, control, config);
  *
  * Not all parameters are applicable to all waveform types.
  */
-struct waveform_config : public rcppsw::config::base_config {
+struct waveform_config final : public rcppsw::config::base_config {
   waveform_config(const std::string& type_in,
                   double freq_in,
                   double phase_in,
@@ -54,7 +54,7 @@ struct waveform_config : public rcppsw::config::base_config {
         offset(offset_in) {}
   waveform_config(void) = default;
 
-  std::string type{""};
+  std::string type{};
   double frequency{0};
   double phase{0};
   double amplitude{0};

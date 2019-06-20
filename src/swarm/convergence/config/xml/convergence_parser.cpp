@@ -37,22 +37,44 @@ constexpr char convergence_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void convergence_parser::parse(const ticpp::Element& node) {
+  if (nullptr == node.FirstChild(kXMLRoot, false)) {
+    return;
+  }
+
   ticpp::Element cnode = node_get(node, kXMLRoot);
+  m_config = std::make_unique<config_type>();
 
   XML_PARSE_ATTR(cnode, m_config, n_threads);
   XML_PARSE_ATTR(cnode, m_config, epsilon);
 
   m_pos_entropy.parse(cnode);
-  m_config->pos_entropy = *m_pos_entropy.config_get();
+  if (m_pos_entropy.is_parsed()) {
+    m_config->pos_entropy =
+        *m_pos_entropy.config_get<positional_entropy_parser::config_type>();
+  }
   m_task_entropy.parse(cnode);
-  m_config->task_dist_entropy = *m_task_entropy.config_get();
+  if (m_task_entropy.is_parsed()) {
+    m_config->task_dist_entropy =
+        *m_task_entropy.config_get<task_dist_entropy_parser::config_type>();
+  }
+
   m_interactivity.parse(cnode);
-  m_config->interactivity = *m_interactivity.config_get();
+  if (m_interactivity.is_parsed()) {
+    m_config->interactivity =
+        *m_interactivity.config_get<interactivity_parser::config_type>();
+  }
+
   m_ang_order.parse(cnode);
-  m_config->ang_order = *m_ang_order.config_get();
+  if (m_ang_order.is_parsed()) {
+    m_config->ang_order =
+        *m_ang_order.config_get<angular_order_parser::config_type>();
+  }
 } /* parse() */
 
 __rcsw_const bool convergence_parser::validate(void) const {
+  if (!is_parsed()) {
+    return true;
+  }
   CHECK(m_config->n_threads > 0);
   CHECK(IS_BETWEEN(m_config->epsilon, 0.0, 1.0));
   CHECK(m_pos_entropy.validate());

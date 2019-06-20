@@ -30,6 +30,7 @@
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, ta, config, xml);
+namespace mxml = math::config::xml;
 
 /*******************************************************************************
  * Global Variables
@@ -41,22 +42,15 @@ constexpr char sigmoid_sel_parser::kXMLRoot[];
  ******************************************************************************/
 void sigmoid_sel_parser::parse(const ticpp::Element& node) {
   ticpp::Element snode = node_get(node, kXMLRoot);
-  m_config =
-      std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
+  m_config = std::make_unique<config_type>();
 
   m_sigmoid.parse(snode);
-  m_config->sigmoid = *m_sigmoid.config_get();
+  m_config->sigmoid = *m_sigmoid.config_get<mxml::sigmoid_parser::config_type>();
   XML_PARSE_ATTR(snode, m_config, method);
 } /* parse() */
 
-void sigmoid_sel_parser::show(std::ostream& stream) const {
-  stream << build_header() << m_sigmoid << XML_ATTR_STR(m_config, method)
-         << std::endl
-         << build_footer();
-} /* show() */
-
 __rcsw_pure bool sigmoid_sel_parser::validate(void) const {
-  CHECK(true == m_sigmoid.validate());
+  CHECK(m_sigmoid.validate());
   CHECK(!m_config->method.empty());
   return true;
 

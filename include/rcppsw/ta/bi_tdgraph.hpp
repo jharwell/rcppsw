@@ -73,8 +73,7 @@ class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
    *
    * @return \ref status_t.
    */
-  status_t install_tab(polled_task* parent,
-                       tdgraph::vertex_vector children);
+  status_t install_tab(polled_task* parent, tdgraph::vertex_vector children);
   status_t install_tab(const std::string& parent,
                        tdgraph::vertex_vector children);
 

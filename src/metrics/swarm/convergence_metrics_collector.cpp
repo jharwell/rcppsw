@@ -43,7 +43,7 @@ convergence_metrics_collector::convergence_metrics_collector(
 std::list<std::string> convergence_metrics_collector::csv_header_cols(void) const {
   auto merged = dflt_csv_header_cols();
   auto cols = std::list<std::string>{
-    /* clang-format off */
+      /* clang-format off */
     "conv_epsilon",
     "int_avg_interact_deg_raw",
     "int_avg_interact_deg_norm",
@@ -57,7 +57,7 @@ std::list<std::string> convergence_metrics_collector::csv_header_cols(void) cons
     "int_avg_task_dist_entropy_raw",
     "int_avg_task_dist_entropy_norm",
     "int_avg_task_dist_entropy_converged"
-    /* clang-format on */
+      /* clang-format on */
   };
   merged.splice(merged.end(), cols);
   return merged;

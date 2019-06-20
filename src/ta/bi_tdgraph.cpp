@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/bi_tdgraph.hpp"
-#include <random>
 #include <chrono>
+#include <random>
 
 #include "rcppsw/ta/bi_tdgraph_executive.hpp"
 #include "rcppsw/ta/polled_task.hpp"
@@ -110,15 +110,11 @@ status_t bi_tdgraph::install_tab(polled_task* parent,
                                  tdgraph::vertex_vector children) {
   ER_ASSERT(2 == children.size(),
             "Bi tdgraph cannot handle non-binary bifurcations");
-  bi_tab::elements elts = {
-    .graph = this,
-    .root = parent,
-    .child1 = children[0].get(),
-    .child2 = children[1].get()
-  };
-  m_tabs.emplace_back(&elts,
-                      &mc_config.partitioning,
-                      &mc_config.subtask_sel);
+  bi_tab::elements elts = {.graph = this,
+                           .root = parent,
+                           .child1 = children[0].get(),
+                           .child2 = children[1].get()};
+  m_tabs.emplace_back(&elts, &mc_config.partitioning, &mc_config.subtask_sel);
   /*
    * Not needed if a priori execution time estimates are used, but is needed
    * if they are not and the root of the tdgraph is partitionable in order to
@@ -186,9 +182,8 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
   ER_INFO("New active TAB root='%s'", new_tab->root()->name().c_str());
 } /* active_tab_update() */
 
-__rcsw_pure bi_tab* bi_tdgraph::tab_child(
-    const bi_tab* const tab,
-    const polled_task* const current_task) {
+__rcsw_pure bi_tab* bi_tdgraph::tab_child(const bi_tab* const tab,
+                                          const polled_task* const current_task) {
   ER_ASSERT(tab->child1() == current_task || tab->child2() == current_task,
             "Task '%s' not in TAB rooted at '%s'",
             current_task->name().c_str(),
@@ -205,20 +200,16 @@ __rcsw_pure bi_tab* bi_tdgraph::tab_child(
 } /* tab_child() */
 
 bi_tab* bi_tdgraph::root_tab(void) {
-  auto it = std::find_if(m_tabs.begin(),
-                         m_tabs.end(),
-                         [&](const auto& t) {
-                           return vertex_parent(t.root()) == t.root();
-                         });
+  auto it = std::find_if(m_tabs.begin(), m_tabs.end(), [&](const auto& t) {
+    return vertex_parent(t.root()) == t.root();
+  });
   return (it != m_tabs.end()) ? &(*it) : nullptr;
 } /* root_tab() */
 
 const bi_tab* bi_tdgraph::root_tab(void) const {
-  auto it = std::find_if(m_tabs.begin(),
-                         m_tabs.end(),
-                         [&](const auto& t) {
-                           return vertex_parent(t.root()) == t.root();
-                         });
+  auto it = std::find_if(m_tabs.begin(), m_tabs.end(), [&](const auto& t) {
+    return vertex_parent(t.root()) == t.root();
+  });
   return (it != m_tabs.end()) ? &(*it) : nullptr;
 } /* root_tab() */
 
@@ -227,13 +218,10 @@ bi_tab* bi_tdgraph::tab_parent(const bi_tab* const tab) {
   if (tab == root_tab()) {
     return root_tab();
   }
-  auto it = std::find_if(m_tabs.begin(),
-                         m_tabs.end(),
-                         [&](const auto&t) {
-                           return (tab != &t && /* self */
-                                   (t.child1() == tab->root() ||
-                                    t.child2() == tab->root()));
-                         });
+  auto it = std::find_if(m_tabs.begin(), m_tabs.end(), [&](const auto& t) {
+    return (tab != &t && /* self */
+            (t.child1() == tab->root() || t.child2() == tab->root()));
+  });
   return (it != m_tabs.end()) ? &(*it) : nullptr;
 } /* tab_parent() */
 
@@ -242,7 +230,7 @@ const bi_tab* bi_tdgraph::tab_parent(const bi_tab* const tab) const {
 } /* tab_parent() */
 
 __rcsw_pure bool bi_tdgraph::tab_parent_verify(const bi_tab* const tab) const {
-      uint count = 0;
+  uint count = 0;
   for (auto& t : m_tabs) {
     if (tab == &t) { /* self */
       continue;

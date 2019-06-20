@@ -48,31 +48,24 @@ NS_START(rcppsw, robotics, steer2D, config, xml);
  * \ref wander_force_config. Assumes it is handed an XML parent in which the
  * child tag \ref kXMLRoot is found.
  */
-class wander_force_parser : public rcppsw::config::xml::xml_config_parser {
+class wander_force_parser final : public rcppsw::config::xml::xml_config_parser {
  public:
-  static constexpr char kXMLRoot[] = "wander_force";
+  using config_type = wander_force_config;
 
-  explicit wander_force_parser(uint level)
-      : xml_config_parser(level) {}
+  static constexpr char kXMLRoot[] = "wander_force";
 
   void parse(const ticpp::Element& node) override;
   bool validate(void) const override;
-  bool parsed(void) const override { return m_parsed; }
 
   std::string xml_root(void) const override { return kXMLRoot; }
 
-  std::shared_ptr<wander_force_config> config_get(void) const {
-    return m_config;
-  }
-
  private:
-  std::shared_ptr<rcppsw::config::base_config> config_get_impl(void) const override {
-    return m_config;
+  const rcppsw::config::base_config* config_get_impl(void) const override {
+    return m_config.get();
   }
 
   /* clang-format off */
-  bool                                 m_parsed{false};
-  std::shared_ptr<wander_force_config> m_config{nullptr};
+  std::unique_ptr<config_type> m_config{nullptr};
   /* clang-format on */
 };
 

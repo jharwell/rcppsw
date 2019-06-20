@@ -27,7 +27,6 @@
 #include <boost/container/map.hpp>
 #include <boost/variant.hpp>
 #include <typeindex>
-#include <utility>
 
 #include "rcppsw/common/common.hpp"
 
@@ -48,8 +47,9 @@ NS_START(rcppsw, ds);
  * to take depending on what the type is).
  */
 template <typename Typelist>
-class type_map : public boost::container::map<std::type_index,
-                                              typename boost::make_variant_over<Typelist>::type> {
+class type_map : public boost::container::map<
+                     std::type_index,
+                     typename boost::make_variant_over<Typelist>::type> {
  public:
   using value_type = typename boost::make_variant_over<Typelist>::type;
   using key_type = std::type_index;

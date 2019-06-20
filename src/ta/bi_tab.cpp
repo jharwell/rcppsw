@@ -26,9 +26,9 @@
 #include <chrono>
 
 #include "rcppsw/ta/bi_tdgraph.hpp"
-#include "rcppsw/ta/polled_task.hpp"
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
 #include "rcppsw/ta/config/task_partition_config.hpp"
+#include "rcppsw/ta/polled_task.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls

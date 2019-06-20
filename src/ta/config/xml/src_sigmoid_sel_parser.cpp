@@ -40,19 +40,14 @@ constexpr char src_sigmoid_sel_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void src_sigmoid_sel_parser::parse(const ticpp::Element& node) {
-  m_config =
-      std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
   ticpp::Element pnode = node_get(node, kXMLRoot);
+  m_config = std::make_unique<config_type>();
+
   m_sigmoid.parse(pnode);
-  m_config->sigmoid = *m_sigmoid.config_get();
+  m_config->sigmoid = *m_sigmoid.config_get<sigmoid_sel_parser::config_type>();
+
   XML_PARSE_ATTR(pnode, m_config, input_src);
 } /* parse() */
-
-void src_sigmoid_sel_parser::show(std::ostream& stream) const {
-  stream << build_header() << m_sigmoid << XML_ATTR_STR(m_config, input_src)
-         << std::endl
-         << build_footer();
-} /* show() */
 
 __rcsw_pure bool src_sigmoid_sel_parser::validate(void) const {
   return m_sigmoid.validate();

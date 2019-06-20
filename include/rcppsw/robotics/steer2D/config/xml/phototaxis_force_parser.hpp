@@ -45,9 +45,9 @@ NS_START(rcppsw, robotics, steer2D, config, xml);
  * @brief Parses XML parameters for related to \ref phototaxis_force objects
  * into \ref phototaxis_force_config.
  */
-class phototaxis_force_parser : public rcppsw::config::xml::xml_config_parser {
+class phototaxis_force_parser final : public rcppsw::config::xml::xml_config_parser {
  public:
-  explicit phototaxis_force_parser(uint level) : xml_config_parser(level) {}
+  using config_type = phototaxis_force_config;
 
   /**
    * @brief The root tag that all phototaxis_force parameters should lie under
@@ -59,20 +59,14 @@ class phototaxis_force_parser : public rcppsw::config::xml::xml_config_parser {
   bool validate(void) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  bool parsed(void) const override { return m_parsed; }
-
-  std::shared_ptr<phototaxis_force_config> config_get(void) const {
-    return m_config;
-  }
 
  private:
-  std::shared_ptr<rcppsw::config::base_config> config_get_impl(void) const override {
-    return m_config;
+  const rcppsw::config::base_config* config_get_impl(void) const override {
+    return m_config.get();
   }
 
   /* clang-format on */
-  bool m_parsed{false};
-  std::shared_ptr<phototaxis_force_config> m_config{nullptr};
+  std::unique_ptr<config_type> m_config{nullptr};
   /* clang-format off */
 };
 

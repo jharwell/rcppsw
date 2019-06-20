@@ -32,30 +32,13 @@ NS_START(rcppsw, config, xml);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-xml_config_parser::xml_config_parser(uint level)
-    : ER_CLIENT_INIT("rcppsw.config"), m_level(level) {}
+xml_config_parser::xml_config_parser(void) : ER_CLIENT_INIT("rcppsw.config") {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-std::string xml_config_parser::build_header(void) const {
-  uint width = kColumnWidth - level() * 20;
-  std::string prettiness(width, '=');
-  std::string spaces(width / 2 - xml_root().size() / 2 - 1, ' ');
-  return prettiness + "\n" + spaces + "<" + xml_root() + ">" + "\n" +
-         prettiness + "\n";
-} /* build_header() */
-
-std::string xml_config_parser::build_footer(void) const {
-  uint width = kColumnWidth - level() * 20;
-  std::string prettiness(width, '=');
-  std::string spaces(width / 2 - xml_root().size() / 2 - 1, ' ');
-  return prettiness + "\n" + spaces + "</" + xml_root() + ">" + "\n" +
-         prettiness + "\n";
-} /* build_footer() */
-
 ticpp::Element& xml_config_parser::node_get(const ticpp::Element& node,
-                                           const std::string& tag) const {
+                                            const std::string& tag) const {
   ticpp::Iterator<ticpp::Element> it(tag);
   it = it.begin(&node);
   ER_ASSERT(it != nullptr,
@@ -66,8 +49,8 @@ ticpp::Element& xml_config_parser::node_get(const ticpp::Element& node,
 } /* node_get() */
 
 void xml_config_parser::node_attr_get(const ticpp::Element& node,
-                                     const std::string& attr,
-                                     bool& buf) const {
+                                      const std::string& attr,
+                                      bool& buf) const {
   std::string tmp;
   node.GetAttribute(attr, &tmp, true);
   if ("true" == tmp) {

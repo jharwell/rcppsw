@@ -39,15 +39,14 @@ constexpr char avoidance_force_parser::kXMLRoot[];
 void avoidance_force_parser::parse(const ticpp::Element& node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
     ticpp::Element anode = node_get(node, kXMLRoot);
-    m_config =
-        std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
+    m_config = std::make_unique<config_type>();
+
     XML_PARSE_ATTR(anode, m_config, max);
-    m_parsed = true;
   }
 } /* parse() */
 
 __rcsw_pure bool avoidance_force_parser::validate(void) const {
-  if (m_parsed) {
+  if (is_parsed()) {
     CHECK(m_config->max > 0.0);
   }
   return true;

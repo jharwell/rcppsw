@@ -40,20 +40,16 @@ constexpr char task_executive_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void task_executive_parser::parse(const ticpp::Element& node) {
-  m_config =
-      std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
-  ticpp::Element pnode = node_get(node, kXMLRoot);
-  XML_PARSE_ATTR(pnode, m_config, update_exec_ests);
-  XML_PARSE_ATTR(pnode, m_config, update_interface_ests);
-  XML_PARSE_ATTR(pnode, m_config, tab_init_method);
-} /* parse() */
+  /* executive not used */
+  if (nullptr == node.FirstChild(kXMLRoot, false)) {
+    return;
+  }
+  m_config = std::make_unique<config_type>();
 
-void task_executive_parser::show(std::ostream& stream) const {
-  stream << build_header() << XML_ATTR_STR(m_config, update_exec_ests)
-         << std::endl
-         << XML_ATTR_STR(m_config, update_interface_ests) << std::endl
-         << XML_ATTR_STR(m_config, tab_init_method) << std::endl
-         << build_footer();
-} /* show() */
+  ticpp::Element pnode = node_get(node, kXMLRoot);
+  XML_PARSE_ATTR_DFLT(pnode, m_config, update_exec_ests, false);
+  XML_PARSE_ATTR_DFLT(pnode, m_config, update_interface_ests, false);
+  XML_PARSE_ATTR_DFLT(pnode, m_config, tab_init_method, std::string("root"));
+} /* parse() */
 
 NS_END(xml, config, ta, rcppsw);

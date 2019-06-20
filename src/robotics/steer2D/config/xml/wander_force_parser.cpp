@@ -39,20 +39,19 @@ constexpr char wander_force_parser::kXMLRoot[];
 void wander_force_parser::parse(const ticpp::Element& node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
     ticpp::Element wnode = node_get(node, kXMLRoot);
-    m_config =
-        std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
+    m_config = std::make_unique<config_type>();
+
     XML_PARSE_ATTR(wnode, m_config, interval);
     XML_PARSE_ATTR(wnode, m_config, max);
     XML_PARSE_ATTR(wnode, m_config, circle_distance);
     XML_PARSE_ATTR(wnode, m_config, circle_radius);
     XML_PARSE_ATTR(wnode, m_config, max_angle_delta);
     XML_PARSE_ATTR(wnode, m_config, normal_dist);
-    m_parsed = true;
   }
 } /* parse() */
 
 __rcsw_pure bool wander_force_parser::validate(void) const {
-  if (m_parsed) {
+  if (is_parsed()) {
     CHECK(m_config->circle_distance > 0.0);
     CHECK(m_config->circle_radius > 0.0);
     CHECK(m_config->max_angle_delta < 360);

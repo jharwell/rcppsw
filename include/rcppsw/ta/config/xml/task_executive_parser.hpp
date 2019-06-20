@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <string>
+#include <memory>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/config/xml/xml_config_parser.hpp"
@@ -47,7 +48,7 @@ NS_START(rcppsw, ta, config, xml);
  */
 class task_executive_parser final : public rcppsw::config::xml::xml_config_parser {
  public:
-  explicit task_executive_parser(uint level) : xml_config_parser(level) {}
+  using config_type = task_executive_config;
 
   /**
    * @brief The root tag that all task task_executive parameters should lie
@@ -55,22 +56,16 @@ class task_executive_parser final : public rcppsw::config::xml::xml_config_parse
    */
   static constexpr char kXMLRoot[] = "task_executive";
 
-  void show(std::ostream& stream) const override;
   void parse(const ticpp::Element& node) override;
   std::string xml_root(void) const override { return kXMLRoot; }
 
-  std::shared_ptr<task_executive_config> config_get(void) const {
-    return m_config;
-  }
-
  private:
-  std::shared_ptr<rcppsw::config::base_config> config_get_impl(
-      void) const override {
-    return m_config;
+  rcppsw::config::base_config* config_get_impl(void) const override {
+    return m_config.get();
   }
 
   /* clang-format off */
-  std::shared_ptr<task_executive_config> m_config{nullptr};
+  std::unique_ptr<config_type> m_config{nullptr};
   /* clang-format on */
 };
 

@@ -25,8 +25,6 @@
  * Includes
  ******************************************************************************/
 #include <algorithm>
-#include <cmath>
-#include <limits>
 #include <vector>
 
 #include "rcppsw/common/common.hpp"

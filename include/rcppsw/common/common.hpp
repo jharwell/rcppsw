@@ -44,7 +44,6 @@
  * pasting. \c ns is the namespace to paste.
  */
 #define NS_START_(ns) namespace ns {
-
 /**
  * @def NS_START(ns)
  *
@@ -87,8 +86,8 @@
  */
 #define RCPPSW_DECLDEF_WRAP(Func, Member, ...)                                \
   template <typename... Args>                                                 \
-  auto Func(Args&&... args)                                             \
-      __VA_ARGS__-> decltype(std::declval<decltype(Member)>().Func(args...)) { \
+  auto Func(Args&&... args)                                                   \
+      __VA_ARGS__->decltype(std::declval<decltype(Member)>().Func(args...)) { \
     return Member.Func(std::forward<Args>(args)...);                          \
   }
 
@@ -106,27 +105,27 @@
  * enclosing class implements the same interface as a member variable).
  */
 
-#define RCPPSW_DECLDEF_OVERRIDE_WRAP(Func, Member,...)             \
-  auto Func(void)                                                       \
-      __VA_ARGS__-> decltype(std::declval<decltype(Member)>().Func()) override { \
-    return Member.Func();                                               \
+#define RCPPSW_DECLDEF_OVERRIDE_WRAP(Func, Member, ...)                         \
+  auto Func(void)                                                               \
+      __VA_ARGS__->decltype(std::declval<decltype(Member)>().Func()) override { \
+    return Member.Func();                                                       \
   }
 
 #define RCPPSW_WRAP_DECL(Ret, Func, ...) Ret Func(void) __VA_ARGS__ h
 
-#define RCPPSW_WRAP_DEF(Class, Func, Handle, ...)              \
-  auto Class::Func(void) __VA_ARGS__                   \
-      -> decltype(std::declval<decltype(Handle)>().Func()) {        \
-    return (Handle).Func();                                         \
+#define RCPPSW_WRAP_DEF(Class, Func, Handle, ...)                      \
+  auto Class::Func(void)                                               \
+      __VA_ARGS__->decltype(std::declval<decltype(Handle)>().Func()) { \
+    return (Handle).Func();                                            \
   }
 
-#define RCPPSW_WRAP_DEFP(Class, Func, Handle, NullRet, ...)      \
-  auto Class::Func(void) __VA_ARGS__                            \
-      -> decltype(std::declval<decltype(*Handle)>().Func()) {    \
-    if (nullptr == Handle) {                                    \
-    return NullRet;                                             \
-  }                                                             \
-  return (Handle)->Func();                                      \
+#define RCPPSW_WRAP_DEFP(Class, Func, Handle, NullRet, ...)             \
+  auto Class::Func(void)                                                \
+      __VA_ARGS__->decltype(std::declval<decltype(*Handle)>().Func()) { \
+    if (nullptr == Handle) {                                            \
+      return NullRet;                                                   \
+    }                                                                   \
+    return (Handle)->Func();                                            \
   }
 
 /**
@@ -138,7 +137,7 @@
  * instance of \ref RCPPSW_WRAP_OVERRIDE_DEF() in the corresponding source file
  * for a class).
  */
-#define RCPPSW_WRAP_OVERRIDE_DECL(Ret, Func, ...)            \
+#define RCPPSW_WRAP_OVERRIDE_DECL(Ret, Func, ...) \
   Ret Func(void) __VA_ARGS__ override __rcsw_pure
 
 /**
@@ -148,10 +147,10 @@
  * attribute in which the corresponding function on the handle is called and the
  * result returned.
  */
-#define RCPPSW_WRAP_OVERRIDE_DEF(Class, Func, Handle, ...)           \
+#define RCPPSW_WRAP_OVERRIDE_DEF(Class, Func, Handle, ...) \
   __rcsw_pure RCPPSW_WRAP_DEF(Class, Func, Handle, __VA_ARGS__)
 
-#define RCPPSW_WRAP_OVERRIDE_DEFP(Class, Func, Handle, NullRet, ...)     \
+#define RCPPSW_WRAP_OVERRIDE_DEFP(Class, Func, Handle, NullRet, ...) \
   __rcsw_pure RCPPSW_WRAP_DEFP(Class, Func, Handle, NullRet, __VA_ARGS__)
 
 /**
@@ -186,7 +185,7 @@ NS_START(rcppsw);
 template <class...>
 using void_t = void;
 #else
-template<typename... Args>
+template <typename... Args>
 using void_t = std::void_t<Args...>;
 #endif
 
@@ -218,25 +217,31 @@ std::unique_ptr<T> make_unique(Args&&... args) {
 
 NS_START(detail);
 
-template<typename T, typename Functor, std::size_t... Is>
+template <typename T, typename Functor, std::size_t... Is>
 void tuple_for_each(T&& t, const Functor& f, std::index_sequence<Is...>) {
-  __attribute__((unused)) auto dummy = { (f(std::get<Is>(t)), 0)... };
+  __attribute__((unused)) auto dummy = {(f(std::get<Is>(t)), 0)...};
 }
 NS_END(detail);
 
-template<typename... Ts, typename Functor>
+template <typename... Ts, typename Functor>
 void tuple_apply(const std::tuple<Ts...>& t, const Functor& functor) {
   detail::tuple_for_each(t, functor, std::index_sequence_for<Ts...>{});
 }
 
 template <typename T>
-T& maybe_deref(T& x) { return x; }
+T& maybe_deref(T& x) {
+  return x;
+}
 
 template <typename T>
-T& maybe_deref(T* x) { return *x; }
+T& maybe_deref(T* x) {
+  return *x;
+}
 
 template <typename T>
-const T& maybe_deref(const T* x) { return *x; }
+const T& maybe_deref(const T* x) {
+  return *x;
+}
 
 NS_END(rcppsw);
 

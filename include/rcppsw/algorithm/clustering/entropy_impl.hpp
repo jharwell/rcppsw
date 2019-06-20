@@ -25,7 +25,6 @@
  ******************************************************************************/
 #include <omp.h>
 #include <vector>
-#include <limits>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/algorithm/clustering/clustering_impl.hpp"

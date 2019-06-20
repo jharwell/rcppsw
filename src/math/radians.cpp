@@ -44,8 +44,10 @@ const radians radians::kPI_OVER_FOUR(M_PI / 4.0);  // NOLINT
 const radians radians::kZERO(0.0);                 // NOLINT
 
 const double radians::kRADIANS_TO_DEGREES(180.0 / M_PI); // NOLINT
-const range<radians> radians::kSignedRange(-radians(M_PI), radians(M_PI)); // NOLINT
-const range<radians> radians::kUnsignedRange(radians(0), radians(2 * M_PI)); // NOLINT
+const range<radians> radians::kSignedRange(-radians(M_PI),
+                                           radians(M_PI)); // NOLINT
+const range<radians> radians::kUnsignedRange(radians(0),
+                                             radians(2 * M_PI)); // NOLINT
 #pragma clang diagnostic pop
 
 /*******************************************************************************

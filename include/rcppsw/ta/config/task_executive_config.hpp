@@ -56,7 +56,7 @@ struct task_executive_config : public rcppsw::config::base_config {
    * @brief Method for specifying the initially active TAB in the
    * executive. Valid values are: [root, random, max_depth].
    */
-  std::string tab_init_method{""};
+  std::string tab_init_method{"root"};
 };
 
 NS_END(config, ta, rcppsw);

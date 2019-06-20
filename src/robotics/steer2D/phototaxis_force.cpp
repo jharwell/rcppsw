@@ -34,8 +34,7 @@ NS_START(rcppsw, robotics, steer2D);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-phototaxis_force::phototaxis_force(
-    const config::phototaxis_force_config* config)
+phototaxis_force::phototaxis_force(const config::phototaxis_force_config* config)
     : mc_max(config->max) {}
 
 /*******************************************************************************
@@ -43,29 +42,25 @@ phototaxis_force::phototaxis_force(
  ******************************************************************************/
 math::vector2d phototaxis_force::operator()(
     const light_sensor_readings& readings) const {
-
-  auto accum = std::accumulate(readings.begin(),
-                               readings.end(),
-                               math::vector2d(),
-                               [&](const math::vector2d& v,
-                                   const auto& r){
-                                 return v + math::vector2d(r.value,
-                                                           math::radians(r.angle));
-                               });
+  auto accum =
+      std::accumulate(readings.begin(),
+                      readings.end(),
+                      math::vector2d(),
+                      [&](const math::vector2d& v, const auto& r) {
+                        return v +
+                               math::vector2d(r.value, math::radians(r.angle));
+                      });
 
   return math::vector2d(1.0, accum.angle()) * mc_max;
 } /* operator()() */
 
-math::vector2d phototaxis_force::operator()(
-    const camera_sensor_readings& readings,
-    const utils::color& color) const {
-
+math::vector2d phototaxis_force::operator()(const camera_sensor_readings& readings,
+                                            const utils::color& color) const {
   auto accum = std::accumulate(readings.begin(),
                                readings.end(),
                                math::vector2d(),
-                               [&](const math::vector2d& v,
-                                   const auto& r){
-                                 return (r.color == color) ? v + r.vec: v;
+                               [&](const math::vector2d& v, const auto& r) {
+                                 return (r.color == color) ? v + r.vec : v;
                                });
 
   return math::vector2d(1.0, accum.angle()) * mc_max;

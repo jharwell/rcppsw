@@ -65,16 +65,12 @@ struct convergence_measure_updater : boost::static_visitor<void> {
         swarm_nn_calc(std::move(nn_calc)),
         swarm_pos_calc(std::move(pos_calc)),
         swarm_tasks_calc(std::move(tasks_calc)) {}
-  void operator()(interactivity& i) {
-    i(swarm_nn_calc(n_threads));
-  }
+  void operator()(interactivity& i) { i(swarm_nn_calc(n_threads)); }
   void operator()(angular_order& ang) {
     ang(swarm_headings_calc(n_threads), n_threads);
   }
 
-  void operator()(positional_entropy& pos) {
-    pos(swarm_pos_calc(n_threads));
-  }
+  void operator()(positional_entropy& pos) { pos(swarm_pos_calc(n_threads)); }
 
   void operator()(task_dist_entropy& tdist) {
     tdist(swarm_tasks_calc(n_threads));
@@ -159,12 +155,11 @@ void convergence_calculator::task_dist_init(
 } /* task_dist_init() */
 
 void convergence_calculator::update(void) {
-  convergence_measure_updater u{
-    mc_config.n_threads,
-        m_swarm_headings_calc,
-        m_swarm_nn_calc,
-        m_swarm_pos_calc,
-        m_swarm_tasks_calc};
+  convergence_measure_updater u{mc_config.n_threads,
+                                m_swarm_headings_calc,
+                                m_swarm_nn_calc,
+                                m_swarm_pos_calc,
+                                m_swarm_tasks_calc};
   for (auto& m : m_measures) {
     boost::apply_visitor(u, m.second);
   } /* for(&m..) */
@@ -178,36 +173,32 @@ __rcsw_pure bool convergence_calculator::converged(void) const {
   return ret;
 } /* converged() */
 
-convergence_calculator::conv_status_t convergence_calculator::swarm_interactivity(void) const {
+convergence_calculator::conv_status_t convergence_calculator::swarm_interactivity(
+    void) const {
   if (!mc_config.interactivity.enable) {
     return std::make_tuple(0.0, 0.0, false);
   }
   auto& tmp = boost::get<interactivity>(m_measures.at(typeid(interactivity)));
-  return std::make_tuple(tmp.raw(),
-                         tmp.last_result(),
-                         tmp.converged());
+  return std::make_tuple(tmp.raw(), tmp.last_result(), tmp.converged());
 } /* swarm_interactivity() */
 
-convergence_calculator::conv_status_t convergence_calculator::swarm_angular_order(void) const {
+convergence_calculator::conv_status_t convergence_calculator::swarm_angular_order(
+    void) const {
   if (!mc_config.ang_order.enable) {
     return std::make_tuple(0.0, 0.0, false);
   }
   auto& tmp = boost::get<angular_order>(m_measures.at(typeid(angular_order)));
-  return std::make_tuple(tmp.raw(),
-                         tmp.last_result(),
-                         tmp.converged());
+  return std::make_tuple(tmp.raw(), tmp.last_result(), tmp.converged());
 } /* swarm_angular_order() */
 
-convergence_calculator::conv_status_t convergence_calculator::swarm_positional_entropy(
-    void) const {
+convergence_calculator::conv_status_t convergence_calculator::
+    swarm_positional_entropy(void) const {
   if (!mc_config.pos_entropy.enable) {
     return std::make_tuple(0.0, 0.0, false);
   }
   auto& tmp =
       boost::get<positional_entropy>(m_measures.at(typeid(positional_entropy)));
-  return std::make_tuple(tmp.raw(),
-                         tmp.last_result(),
-                         tmp.converged());
+  return std::make_tuple(tmp.raw(), tmp.last_result(), tmp.converged());
 } /* swarm_positional_entropy() */
 
 convergence_calculator::conv_status_t convergence_calculator::swarm_task_dist_entropy(
@@ -217,9 +208,7 @@ convergence_calculator::conv_status_t convergence_calculator::swarm_task_dist_en
   }
   auto& tmp =
       boost::get<task_dist_entropy>(m_measures.at(typeid(task_dist_entropy)));
-  return std::make_tuple(tmp.raw(),
-                         tmp.last_result(),
-                         tmp.converged());
+  return std::make_tuple(tmp.raw(), tmp.last_result(), tmp.converged());
 } /* swarm_task_dist_entropy() */
 
 void convergence_calculator::reset_metrics(void) {
@@ -230,10 +219,12 @@ void convergence_calculator::reset_metrics(void) {
     boost::get<angular_order>(m_measures.at(typeid(angular_order))).reset();
   }
   if (mc_config.pos_entropy.enable) {
-    boost::get<positional_entropy>(m_measures.at(typeid(positional_entropy))).reset();
+    boost::get<positional_entropy>(m_measures.at(typeid(positional_entropy)))
+        .reset();
   }
   if (mc_config.task_dist_entropy.enable) {
-    boost::get<task_dist_entropy>(m_measures.at(typeid(task_dist_entropy))).reset();
+    boost::get<task_dist_entropy>(m_measures.at(typeid(task_dist_entropy)))
+        .reset();
   }
 } /* reset_metrics() */
 

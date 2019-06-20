@@ -55,36 +55,27 @@ NS_START(rcppsw, robotics, steer2D, config, xml);
  */
 class force_calculator_parser : public rcppsw::config::xml::xml_config_parser {
  public:
-  static constexpr char kXMLRoot[] = "steering2D";
+  using config_type = force_calculator_config;
 
-  explicit force_calculator_parser(uint level)
-      : xml_config_parser(level),
-        m_avoidance(level + 1),
-        m_arrival(level + 1),
-        m_wander(level + 1),
-        m_polar(level + 1),
-        m_phototaxis(level + 1) {}
+  static constexpr char kXMLRoot[] = "steering2D";
 
   void parse(const ticpp::Element& node) override;
   bool validate(void) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  std::shared_ptr<force_calculator_config> config_get(void) const {
-    return m_config;
-  }
 
  private:
-  std::shared_ptr<rcppsw::config::base_config> config_get_impl(void) const override {
-    return m_config;
+  const rcppsw::config::base_config* config_get_impl(void) const override {
+    return m_config.get();
   }
 
   /* clang-format off */
-  std::shared_ptr<force_calculator_config> m_config{nullptr};
-  avoidance_force_parser                   m_avoidance;
-  arrival_force_parser                     m_arrival;
-  wander_force_parser                      m_wander;
-  polar_force_parser                       m_polar;
-  phototaxis_force_parser                  m_phototaxis;
+  std::unique_ptr<config_type> m_config{nullptr};
+  avoidance_force_parser       m_avoidance{};
+  arrival_force_parser         m_arrival{};
+  wander_force_parser          m_wander{};
+  polar_force_parser           m_polar{};
+  phototaxis_force_parser      m_phototaxis{};
   /* clang-format on */
 };
 

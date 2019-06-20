@@ -40,24 +40,22 @@ constexpr char task_partition_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void task_partition_parser::parse(const ticpp::Element& node) {
-  m_config =
-      std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
   ticpp::Element pnode = node_get(node, kXMLRoot);
+  m_config = std::make_unique<config_type>();
+
   m_sigmoid.parse(pnode);
-  m_config->src_sigmoid = *m_sigmoid.config_get();
-  XML_PARSE_ATTR(pnode, m_config, always_partition);
-  XML_PARSE_ATTR(pnode, m_config, never_partition);
+  m_config->src_sigmoid =
+      *m_sigmoid.config_get<src_sigmoid_sel_parser::config_type>();
+
+  XML_PARSE_ATTR_DFLT(pnode, m_config, always_partition, false);
+  XML_PARSE_ATTR_DFLT(pnode, m_config, never_partition, false);
 } /* parse() */
 
-void task_partition_parser::show(std::ostream& stream) const {
-  stream << build_header() << m_sigmoid
-         << XML_ATTR_STR(m_config, always_partition) << std::endl
-         << XML_ATTR_STR(m_config, never_partition) << std::endl
-         << build_footer();
-} /* show() */
-
 __rcsw_pure bool task_partition_parser::validate(void) const {
-  return m_sigmoid.validate();
+  if (is_parsed()) {
+    return m_sigmoid.validate();
+  }
+  return true;
 } /* validate() */
 
 NS_END(xml, config, ta, rcppsw);

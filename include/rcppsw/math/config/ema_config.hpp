@@ -40,7 +40,7 @@ NS_START(rcppsw, math, config);
  *
  * @brief Parameters for \ref ema objects.
  */
-struct ema_config : public rcppsw::config::base_config {
+struct ema_config final : public rcppsw::config::base_config {
   double alpha{0.0};
 };
 

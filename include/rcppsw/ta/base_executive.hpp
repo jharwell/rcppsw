@@ -25,7 +25,6 @@
  * Includes
  ******************************************************************************/
 #include <list>
-#include <string>
 
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/ta/polled_task.hpp"
@@ -36,7 +35,7 @@
  ******************************************************************************/
 NS_START(rcppsw, ta);
 namespace config {
-class task_executive_config;
+struct task_executive_config;
 } /* namespace config */
 
 /*******************************************************************************

@@ -40,8 +40,7 @@ constexpr char differential_drive_parser::kXMLRoot[];
  ******************************************************************************/
 void differential_drive_parser::parse(const ticpp::Element& node) {
   ticpp::Element wnode = node_get(node, kXMLRoot);
-  m_config =
-      std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
+  m_config = std::make_unique<config_type>();
 
   XML_PARSE_ATTR(wnode, m_config, max_speed);
 
@@ -49,12 +48,6 @@ void differential_drive_parser::parse(const ticpp::Element& node) {
   node_attr_get(wnode, "soft_turn_max", angle);
   m_config->soft_turn_max = math::to_radians(angle);
 } /* parse() */
-
-void differential_drive_parser::show(std::ostream& stream) const {
-  stream << build_header() << XML_ATTR_STR(m_config, soft_turn_max) << std::endl
-         << XML_ATTR_STR(m_config, max_speed) << std::endl
-         << build_footer();
-} /* show() */
 
 __rcsw_pure bool differential_drive_parser::validate(void) const {
   CHECK(m_config->soft_turn_max.value() > 0.0);

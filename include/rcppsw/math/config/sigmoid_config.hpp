@@ -24,7 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include "rcppsw/config/base_config.hpp"
 
 /*******************************************************************************
@@ -41,7 +40,7 @@ NS_START(rcppsw, math, config);
  *
  * @brief Parameters for probabilistic exponentials (aka sigmoids).
  */
-struct sigmoid_config : public rcppsw::config::base_config {
+struct sigmoid_config final : public rcppsw::config::base_config {
   double reactivity{0.0};
   double offset{0.0};
   double gamma{0.0};

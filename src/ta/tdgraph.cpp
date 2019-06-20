@@ -99,7 +99,7 @@ tdgraph::vertex_iterator tdgraph::find_vertex_impl(
   vertex_iterator v_i, v_end;
   boost::tie(v_i, v_end) = boost::vertices(m_graph);
   auto it = std::find_if(v_i, v_end, [&](const tdgraph::vertex_desc& tmp) {
-      return v == m_graph[tmp].get();
+    return v == m_graph[tmp].get();
   });
   return it;
 } /* find_vertex_impl() */
@@ -135,8 +135,7 @@ status_t tdgraph::set_root(vertex_type v) {
   vertex_desc new_v;
   ER_CHECK(0 == boost::num_edges(m_graph), "Root already set for graph!");
   m_root = v.get();
-  new_v = boost::add_vertex(std::shared_ptr<polled_task>(std::move(v)),
-                            m_graph);
+  new_v = boost::add_vertex(std::shared_ptr<polled_task>(std::move(v)), m_graph);
   boost::add_edge(new_v, new_v, m_graph); /* parent of root is root */
   return OK;
 
@@ -184,8 +183,8 @@ status_t tdgraph::set_children(const polled_task* parent,
   }
 
   for (auto& c : children) {
-    vertex_desc new_v = boost::add_vertex(std::shared_ptr<polled_task>(std::move(c)),
-                                          m_graph);
+    vertex_desc new_v =
+        boost::add_vertex(std::shared_ptr<polled_task>(std::move(c)), m_graph);
     ER_TRACE("Add edge %s -> %s",
              m_graph[*vertex_d]->name().c_str(),
              m_graph[new_v]->name().c_str());

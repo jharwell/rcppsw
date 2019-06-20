@@ -25,8 +25,8 @@
 #include <cassert>
 #include <cmath>
 #include "rcppsw/ta/bi_tab.hpp"
-#include "rcppsw/ta/polled_task.hpp"
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
+#include "rcppsw/ta/polled_task.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls

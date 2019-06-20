@@ -52,13 +52,8 @@ NS_START(rcppsw, swarm, convergence, config, xml);
  */
 class convergence_parser final : public rcppsw::config::xml::xml_config_parser {
  public:
-  explicit convergence_parser(uint level)
-      : xml_config_parser(level),
-        m_config(std::make_shared<std::remove_reference<decltype(*m_config)>::type>()),
-        m_pos_entropy(level + 1),
-        m_task_entropy(level + 1),
-        m_interactivity(level + 1),
-        m_ang_order(level + 1) {}
+  using config_type = convergence_config;
+
   ~convergence_parser(void) override = default;
 
   /**
@@ -72,20 +67,17 @@ class convergence_parser final : public rcppsw::config::xml::xml_config_parser {
 
   std::string xml_root(void) const override { return kXMLRoot; }
 
-  std::shared_ptr<convergence_config> config_get(void) const { return m_config; }
-
  private:
-  std::shared_ptr<rcppsw::config::base_config> config_get_impl(
-      void) const override {
-    return m_config;
+  const rcppsw::config::base_config* config_get_impl(void) const override {
+    return m_config.get();
   }
 
   /* clang-format off */
-  std::shared_ptr<convergence_config> m_config;
-  positional_entropy_parser           m_pos_entropy;
-  task_dist_entropy_parser            m_task_entropy;
-  interactivity_parser                m_interactivity;
-  angular_order_parser                m_ang_order;
+  std::unique_ptr<config_type> m_config{nullptr};
+  positional_entropy_parser    m_pos_entropy{};
+  task_dist_entropy_parser     m_task_entropy{};
+  interactivity_parser         m_interactivity{};
+  angular_order_parser         m_ang_order{};
   /* clang-format on */
 };
 

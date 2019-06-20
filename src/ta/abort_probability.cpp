@@ -22,6 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/abort_probability.hpp"
+#include <cmath>
+
 #include "rcppsw/math/config/sigmoid_config.hpp"
 
 /*******************************************************************************
@@ -32,7 +34,8 @@ NS_START(rcppsw, ta);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-abort_probability::abort_probability(const math::config::sigmoid_config* const config)
+abort_probability::abort_probability(
+    const math::config::sigmoid_config* const config)
     : sigmoid(config->reactivity, config->offset, config->gamma) {}
 
 /*******************************************************************************

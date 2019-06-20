@@ -25,9 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <vector>
-#include <algorithm>
 #include <numeric>
-#include <limits>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/swarm/convergence/convergence_measure.hpp"

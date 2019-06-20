@@ -34,13 +34,12 @@ namespace fs = std::experimental::filesystem;
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_metrics_collector::base_metrics_collector(std::string ofname,
+base_metrics_collector::base_metrics_collector(const std::string& ofname,
                                                uint interval,
                                                bool cum_only)
     : m_interval(interval),
-      m_timestep(0),
       m_cum_only(cum_only),
-      m_ofname(std::move(ofname)),
+      m_ofname(ofname),
       m_separator(";") {}
 
 /*******************************************************************************

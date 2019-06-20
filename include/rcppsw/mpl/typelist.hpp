@@ -24,12 +24,12 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
-#include <boost/mpl/vector.hpp>
 #include <boost/mpl/contains.hpp>
 #include <boost/mpl/joint_view.hpp>
-#include <boost/utility/enable_if.hpp>
 #include <boost/mpl/transform.hpp>
+#include <boost/mpl/vector.hpp>
+#include <boost/utility/enable_if.hpp>
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Macros
@@ -39,18 +39,18 @@
  * attached to if the specified type is found in the typelist, which must be a
  * \ref typelist compile-time object.
  */
-#define RCPPSW_SFINAE_TYPELIST_REQUIRE(Typelist, T)                     \
-  typename boost::enable_if<typename boost::mpl::contains<Typelist,     \
-                                                          T>::type>::type * = nullptr
+#define RCPPSW_SFINAE_TYPELIST_REQUIRE(Typelist, T) \
+  typename boost::enable_if<                        \
+      typename boost::mpl::contains<Typelist, T>::type>::type* = nullptr
 
 /**
  * @def RCPPSW_SFINAE_TYPELIST_REJECT() Disable the function that this macro is
  * attached to if the specified type is found in the Typelist, which must be a
  * \ref typelist compile-time object.
  */
-#define RCPPSW_SFINAE_TYPELIST_REJECT(Typelist, T)                     \
-  typename boost::disable_if<typename boost::mpl::contains<Typelist,     \
-                                                           T>::type>::type * = nullptr
+#define RCPPSW_SFINAE_TYPELIST_REJECT(Typelist, T) \
+  typename boost::disable_if<                      \
+      typename boost::mpl::contains<Typelist, T>::type>::type* = nullptr
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -61,7 +61,7 @@ NS_START(rcppsw, mpl);
  * @brief A list of types using boost::mpl::vectors, which enables all sorts of
  * nice operations from the boost MPL library.
  */
-template<typename ...Ts>
+template <typename... Ts>
 using typelist = boost::mpl::vector<Ts...>;
 
 /**
@@ -74,8 +74,8 @@ using typelist = boost::mpl::vector<Ts...>;
  *
  * @tparam WrapperTypeArgs Additional template paramaters for the WrapperType.
  */
-template<template<class WrappedType, class ...> class WrapperType,
-         class ...WrapperTypeArgs>
+template <template <class WrappedType, class...> class WrapperType,
+          class... WrapperTypeArgs>
 struct typelist_wrap_into {
   /**
    * @brief Perform the wrap.
@@ -85,7 +85,7 @@ struct typelist_wrap_into {
    * pack (which may be empty); making it a normal template argument throws
    * errors on WrapperTypes that only take a single argument.
    */
-  template<class ...ApplyArgs>
+  template <class... ApplyArgs>
   struct apply {
     using type = WrapperType<ApplyArgs..., WrapperTypeArgs...>;
   };
@@ -95,13 +95,12 @@ struct typelist_wrap_into {
  * @brief Apply a functor to each type in the \ref typelist. The functor can
  * itself take as many template parameters as needed.
  */
-template<typename Typelist,
-         template<class WrappedType, class ...> class WrapperType,
-         class ...Args>
+template <typename Typelist,
+          template <class WrappedType, class...> class WrapperType,
+          class... Args>
 using typelist_wrap_apply =
     typename boost::mpl::transform<Typelist,
-                                   typelist_wrap_into<WrapperType, Args...>
-                                   >;
+                                   typelist_wrap_into<WrapperType, Args...> >;
 NS_END(mpl, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_INCLUDE_MPL_TYPELIST_HPP_ */

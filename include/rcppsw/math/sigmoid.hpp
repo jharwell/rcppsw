@@ -24,10 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <cmath>
-
-#include "rcppsw/math/expression.hpp"
 #include "rcppsw/math/config/sigmoid_config.hpp"
+#include "rcppsw/math/expression.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls

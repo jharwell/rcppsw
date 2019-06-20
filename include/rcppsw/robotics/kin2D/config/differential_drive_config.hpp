@@ -39,7 +39,7 @@ NS_START(rcppsw, robotics, kin2D, config);
  * @struct differential_drive_config
  * @ingroup rcppsw robotics kin2D config
  */
-struct differential_drive_config : public rcppsw::config::base_config {
+struct differential_drive_config final : public rcppsw::config::base_config {
   math::radians soft_turn_max{};
   double        max_speed{0.0};
 };

@@ -50,8 +50,7 @@ NS_START(rcppsw, control, config, xml);
  */
 class waveform_parser final : public rcppsw::config::xml::xml_config_parser {
  public:
-  explicit waveform_parser(uint level)
-      : xml_config_parser(level) {}
+  using config_type = waveform_config;
 
   /**
    * @brief The XML tag that all configration values should appear under.
@@ -60,18 +59,14 @@ class waveform_parser final : public rcppsw::config::xml::xml_config_parser {
   void parse(const ticpp::Element& node) override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  std::shared_ptr<waveform_config> config_get(void) const {
-    return m_config;
-  }
 
  private:
-  std::shared_ptr<rcppsw::config::base_config> config_get_impl(
-      void) const override {
-    return m_config;
+  rcppsw::config::base_config* config_get_impl(void) const override {
+    return m_config.get();
   }
 
   /* clang-format off */
-  std::shared_ptr<waveform_config> m_config{nullptr};
+  std::unique_ptr<config_type> m_config{nullptr};
   /* clang-format on */
 };
 

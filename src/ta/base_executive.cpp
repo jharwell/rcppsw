@@ -22,8 +22,8 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/base_executive.hpp"
-#include "rcppsw/ta/polled_task.hpp"
 #include "rcppsw/ta/config/task_executive_config.hpp"
+#include "rcppsw/ta/polled_task.hpp"
 #include "rcppsw/ta/tdgraph.hpp"
 
 /*******************************************************************************

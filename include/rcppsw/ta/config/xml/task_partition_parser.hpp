@@ -47,10 +47,9 @@ NS_START(rcppsw, ta, config, xml);
  * @brief Parses XML configuration for relating to task partitioning into \ref
  * task_partition_config.
  */
-class task_partition_parser : public rcppsw::config::xml::xml_config_parser {
+class task_partition_parser final : public rcppsw::config::xml::xml_config_parser {
  public:
-  explicit task_partition_parser(uint level)
-      : xml_config_parser(level), m_sigmoid(level + 1) {}
+  using config_type = task_partition_config;
 
   /**
    * @brief The root tag that all task task_partition parameters should lie
@@ -58,27 +57,19 @@ class task_partition_parser : public rcppsw::config::xml::xml_config_parser {
    */
   static constexpr char kXMLRoot[] = "task_partition";
 
-  void show(std::ostream& stream) const override;
   bool validate(void) const override;
   void parse(const ticpp::Element& node) override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  bool parsed(void) const override { return m_parsed; }
-
-  std::shared_ptr<task_partition_config> config_get(void) const {
-    return m_config;
-  }
 
  private:
-  std::shared_ptr<rcppsw::config::base_config> config_get_impl(
-      void) const override {
-    return m_config;
+  rcppsw::config::base_config* config_get_impl(void) const override {
+    return m_config.get();
   }
 
   /* clang-format off */
-  bool                                   m_parsed{false};
-  std::shared_ptr<task_partition_config> m_config{nullptr};
-  src_sigmoid_sel_parser                 m_sigmoid;
+  std::unique_ptr<config_type> m_config{nullptr};
+  src_sigmoid_sel_parser       m_sigmoid{};
   /* clang-format on */
 };
 

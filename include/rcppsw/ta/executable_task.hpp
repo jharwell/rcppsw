@@ -37,8 +37,7 @@
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw);
-namespace math {
-namespace config {
+namespace math { namespace config {
 struct ema_config;
 }} /* namespace math::config */
 

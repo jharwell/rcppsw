@@ -49,8 +49,7 @@ NS_START(rcppsw, ta, config, xml);
  */
 class sigmoid_sel_parser : public rcppsw::config::xml::xml_config_parser {
  public:
-  explicit sigmoid_sel_parser(uint level)
-      : xml_config_parser(level), m_sigmoid(level + 1) {}
+  using config_type = sigmoid_sel_config;
 
   /**
    * @brief The root tag that all XML configuration for \ref
@@ -58,24 +57,18 @@ class sigmoid_sel_parser : public rcppsw::config::xml::xml_config_parser {
    */
   static constexpr char kXMLRoot[] = "sigmoid_sel";
 
-  void show(std::ostream& stream) const override;
   void parse(const ticpp::Element& node) override;
   bool validate(void) const override;
   std::string xml_root(void) const override { return kXMLRoot; }
 
-  std::shared_ptr<sigmoid_sel_config> config_get(void) const {
-    return m_config;
-  }
-
  private:
-  std::shared_ptr<rcppsw::config::base_config> config_get_impl(
-      void) const override {
-    return m_config;
+  rcppsw::config::base_config* config_get_impl(void) const override {
+    return m_config.get();
   }
 
   /* clang-format off */
-  std::shared_ptr<sigmoid_sel_config> m_config{nullptr};
-  math::config::xml::sigmoid_parser   m_sigmoid;
+  std::unique_ptr<config_type>      m_config{nullptr};
+  math::config::xml::sigmoid_parser m_sigmoid{};
   /* clang-format on */
 };
 

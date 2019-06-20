@@ -36,8 +36,7 @@ NS_START(rcppsw);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_cli::base_cli(const std::string& mnemonic)
-    : m_desc("Program options") {
+base_cli::base_cli(const std::string& mnemonic) : m_desc("Program options") {
   time_t rawtime;
   char buffer[80];
   time(&rawtime);

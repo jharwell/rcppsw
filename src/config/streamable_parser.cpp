@@ -1,7 +1,7 @@
 /**
- * @file waveform_parser.cpp
+ * @file streamable_parser.cpp
  *
- * @copyright 2018 John Harwell/Anthony Chen, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,38 +21,31 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/control/config/xml/waveform_parser.hpp"
+#include "rcppsw/config/streamable_parser.hpp"
+#include <string>
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, control, config, xml);
-
-/*******************************************************************************
- * Class Constants
- ******************************************************************************/
-constexpr char waveform_parser::kXMLRoot[];
+NS_START(rcppsw, config);
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void waveform_parser::parse(const ticpp::Element& node) {
-  /* waveforms are usually optional */
-  if (nullptr == node.FirstChild(xml_root(), false)) {
-    return;
-  }
-  ticpp::Element vnode = node_get(node, xml_root());
-  m_config = std::make_unique<config_type>();
+std::string streamable_parser::header_build(const std::string& xml_root) const {
+  uint width = kColumnWidth - level() * 20;
+  std::string prettiness(width, '=');
+  std::string spaces(width / 2 - xml_root.size() / 2 - 1, ' ');
+  return prettiness + "\n" + spaces + "<" + xml_root + ">" + "\n" + prettiness +
+         "\n";
+} /* header_build() */
 
-  /*
-   * type is the only required parameter if the waveform itself is present in
-   * the XML file.
-   */
-  XML_PARSE_ATTR(vnode, m_config, type);
-  XML_PARSE_ATTR_DFLT(vnode, m_config, frequency, -1.0);
-  XML_PARSE_ATTR_DFLT(vnode, m_config, amplitude, -1.0);
-  XML_PARSE_ATTR_DFLT(vnode, m_config, offset, -1.0);
-  XML_PARSE_ATTR_DFLT(vnode, m_config, phase, -1.0);
-} /* parse() */
+std::string streamable_parser::footer_build(const std::string& xml_root) const {
+  uint width = kColumnWidth - level() * 20;
+  std::string prettiness(width, '=');
+  std::string spaces(width / 2 - xml_root.size() / 2 - 1, ' ');
+  return prettiness + "\n" + spaces + "</" + xml_root + ">" + "\n" +
+         prettiness + "\n";
+} /* footer_build() */
 
-NS_END(xml, config, control, rcppsw);
+NS_END(config, rcppsw);

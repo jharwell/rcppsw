@@ -28,6 +28,8 @@
 #include <functional>
 #include <map>
 #include <utility>
+#include <memory>
+#include <string>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/metrics/base_metrics_collector.hpp"
@@ -61,14 +63,30 @@ class collector_group {
    * @brief Add a collector to the group by constructing it in place.
    *
    * @tparam T The type of the collector
+   *
    * @param name The key for the collector in the group. Should be unique,
-   * though it is not a requirement. If it is not unique then the older
-   * collector that was mapped to that name will be overwritten.
+   *             though it is not a requirement. If it is not unique then the
+   *             older collector that was mapped to that name will be
+   *             overwritten.
+   *
    * @param args 0 or more arguments to the collector constructor.
    */
   template <typename T, typename... Args>
-  void register_collector(const std::string& name, Args&&... args) {
-    m_collectors[name] = rcppsw::make_unique<T>(args...);
+  bool collector_register(const std::string& name, Args&&... args) {
+    auto it = m_collectors.find(name);
+    if (it == m_collectors.end()) {
+      m_collectors[name] = std::make_unique<T>(args...);
+      return true;
+    }
+    return false;
+  }
+  bool collector_remove(const std::string& name) {
+    auto it = m_collectors.find(name);
+    if (it != m_collectors.end()) {
+      m_collectors.erase(name);
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -77,9 +95,17 @@ class collector_group {
    *
    * @param name The registered name of the collector.
    * @param metrics The metrics to collect from.
+   *
+   * @return \c TRUE if the specified collector is registered and collection was
+   * successful, \c FALSE otherwise.
    */
-  void collect(const std::string& name, const base_metrics& metrics) {
-    m_collectors[name]->collect(metrics);
+  bool collect(const std::string& name, const base_metrics& metrics) {
+    auto it = m_collectors.find(name);
+    if (it != m_collectors.end()) {
+      it->second->collect(metrics);
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -102,11 +128,13 @@ class collector_group {
                   const base_metrics& metrics,
                   std::function<bool(const base_metrics&)> predicate) {
     if (predicate(metrics)) {
-      m_collectors[name]->collect(metrics);
+      auto it = m_collectors.find(name);
+      if (it != m_collectors.end()) {
+        it->second->collect(metrics);
+      }
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 
   /**
@@ -172,11 +200,12 @@ class collector_group {
    * timestep.
    */
   bool metrics_write_all(uint timestep) {
-    return std::all_of(m_collectors.begin(),
-                       m_collectors.end(),
-                       [&](const std::pair<const std::string, mapped_type>& pair) {
-                         return pair.second->csv_line_write(timestep);
-                       });
+    return std::all_of(
+        m_collectors.begin(),
+        m_collectors.end(),
+        [&](const std::pair<const std::string, mapped_type>& pair) {
+          return pair.second->csv_line_write(timestep);
+        });
   }
 
   /**
@@ -192,7 +221,9 @@ class collector_group {
   }
 
  private:
+  /* clang-format off */
   std::map<key_type, mapped_type> m_collectors;
+  /* clang-format on */
 };
 
 NS_END(metrics, rcppsw);

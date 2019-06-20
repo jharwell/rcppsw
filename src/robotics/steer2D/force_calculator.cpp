@@ -40,7 +40,7 @@ force_calculator::force_calculator(boid& entity,
       m_arrival(&config->arrival),
       m_wander(&config->wander),
       m_polar(&config->polar),
-      m_phototaxis(&config->phototaxis){}
+      m_phototaxis(&config->phototaxis) {}
 
 /*******************************************************************************
  * Member Functions

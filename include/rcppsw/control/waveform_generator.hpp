@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include <memory>
+#include <string>
 
 #include "rcppsw/patterns/factory/factory.hpp"
 

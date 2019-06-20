@@ -128,8 +128,10 @@ class event_data {
   }
 
  private:
+  /* clang-format off */
   int m_signal{event_signal::ekIGNORED};
   int m_type{event_type::ekNORMAL};
+  /* clang-format on */
 };
 
 /**

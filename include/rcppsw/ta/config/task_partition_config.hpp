@@ -24,7 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include "rcppsw/config/base_config.hpp"
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
 

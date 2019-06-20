@@ -37,25 +37,33 @@ constexpr char task_alloc_parser::kXMLRoot[];
  * Member Functions
  ******************************************************************************/
 void task_alloc_parser::parse(const ticpp::Element& node) {
+  /* executive not used */
+  if (nullptr == node.FirstChild(kXMLRoot, false)) {
+    return;
+  }
+
   ticpp::Element tnode = node_get(node, kXMLRoot);
-  m_config =
-      std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
+  m_config = std::make_unique<config_type>();
   m_estimation.parse(tnode);
   m_abort.parse(node_get(tnode, "task_abort"));
   m_subtask_sel.parse(node_get(tnode, "subtask_sel"));
   m_partitioning.parse(tnode);
   m_tab_sel.parse(node_get(tnode, "tab_sel"));
 
-  m_config->exec_est = *m_estimation.config_get();
-  m_config->abort = *m_abort.config_get();
-  m_config->subtask_sel = *m_subtask_sel.config_get();
-  m_config->partitioning = *m_partitioning.config_get();
-  m_config->tab_sel = *m_tab_sel.config_get();
+  m_config->exec_est =
+      *m_estimation.config_get<exec_estimates_parser::config_type>();
+  m_config->abort = *m_abort.config_get<src_sigmoid_sel_parser::config_type>();
+  m_config->subtask_sel =
+      *m_subtask_sel.config_get<src_sigmoid_sel_parser::config_type>();
+  m_config->partitioning =
+      *m_partitioning.config_get<task_partition_parser::config_type>();
+  m_config->tab_sel =
+      *m_tab_sel.config_get<src_sigmoid_sel_parser::config_type>();
 } /* parse() */
 
-void task_alloc_parser::show(std::ostream& stream) const {
-  stream << build_header() << m_abort << m_subtask_sel << m_partitioning
-         << m_estimation << m_tab_sel << build_footer();
-} /* show() */
-
+__rcsw_pure bool task_alloc_parser::validate(void) const {
+  return m_estimation.validate() && m_abort.validate() &&
+         m_subtask_sel.validate() && m_partitioning.validate() &&
+         m_tab_sel.validate();
+} /* validate() */
 NS_END(xml, config, ta, rcppsw);

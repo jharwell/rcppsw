@@ -51,13 +51,7 @@ NS_START(rcppsw, ta, config, xml);
  */
 class task_alloc_parser final : public rcppsw::config::xml::xml_config_parser {
  public:
-  explicit task_alloc_parser(uint level)
-      : xml_config_parser(level),
-        m_estimation(level + 1),
-        m_abort(level + 1),
-        m_subtask_sel(level + 1),
-        m_partitioning(level + 1),
-        m_tab_sel(level + 1) {}
+  using config_type = task_alloc_config;
 
   /**
    * @brief The root tag that all task allocation XML configuration should lie
@@ -66,35 +60,26 @@ class task_alloc_parser final : public rcppsw::config::xml::xml_config_parser {
   static constexpr char kXMLRoot[] = "task_alloc";
 
   void parse(const ticpp::Element& node) override;
-  void show(std::ostream& stream) const override;
+  bool validate(void) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  std::shared_ptr<task_alloc_config> config_get(void) const {
-    return m_config;
-  }
 
-  bool parsed(void) const override { return m_parsed; }
   void exec_est_task_add(const std::string& task) {
     m_estimation.task_add(task);
   }
 
- protected:
-  void parsed(bool parsed) { m_parsed = parsed; }
-
  private:
-  std::shared_ptr<rcppsw::config::base_config> config_get_impl(
-      void) const override {
-    return m_config;
+  rcppsw::config::base_config* config_get_impl(void) const override {
+    return m_config.get();
   }
 
   /* clang-format off */
-  bool                               m_parsed{false};
-  std::shared_ptr<task_alloc_config> m_config{nullptr};
-  exec_estimates_parser              m_estimation;
-  src_sigmoid_sel_parser         m_abort;
-  src_sigmoid_sel_parser         m_subtask_sel;
-  task_partition_parser          m_partitioning;
-  src_sigmoid_sel_parser         m_tab_sel;
+  std::unique_ptr<config_type> m_config{nullptr};
+  exec_estimates_parser        m_estimation{};
+  src_sigmoid_sel_parser       m_abort{};
+  src_sigmoid_sel_parser       m_subtask_sel{};
+  task_partition_parser        m_partitioning{};
+  src_sigmoid_sel_parser       m_tab_sel{};
   /* clang-format on */
 };
 

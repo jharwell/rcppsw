@@ -40,15 +40,14 @@ constexpr char phototaxis_force_parser::kXMLRoot[];
 void phototaxis_force_parser::parse(const ticpp::Element& node) {
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
     ticpp::Element pnode = node_get(node, kXMLRoot);
-    m_config =
-        std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
+    m_config = std::make_unique<config_type>();
+
     XML_PARSE_ATTR(pnode, m_config, max);
-    m_parsed = true;
   }
 } /* parse() */
 
 __rcsw_pure bool phototaxis_force_parser::validate(void) const {
-  if (m_parsed) {
+  if (is_parsed()) {
     return m_config->max >= 0;
   }
   return true;

@@ -24,7 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <cmath>
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/control/config/waveform_config.hpp"
 

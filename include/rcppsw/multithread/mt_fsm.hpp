@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include <mutex>
+#include <string>
 #include "rcppsw/common/common.hpp"
 
 #include "rcppsw/patterns/state_machine/base_fsm.hpp"

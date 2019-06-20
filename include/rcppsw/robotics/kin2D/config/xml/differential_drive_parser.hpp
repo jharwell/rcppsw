@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <string>
+#include <memory>
 
 #include "rcppsw/robotics/kin2D/config/differential_drive_config.hpp"
 #include "rcppsw/common/common.hpp"
@@ -48,32 +49,27 @@ NS_START(rcppsw, robotics, kin2D, config, xml);
  */
 class differential_drive_parser : public rcppsw::config::xml::xml_config_parser {
  public:
+  using config_type = differential_drive_config;
+
   /**
    * @brief The root tag that all differential drive configuration values
    * should lie under in the XML tree.
    */
   static constexpr char kXMLRoot[] = "differential_drive";
 
-  explicit differential_drive_parser(uint level)
-      : xml_config_parser(level) {}
-
   void parse(const ticpp::Element& node) override;
-  void show(std::ostream& stream) const override;
   bool validate(void) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
 
-  std::shared_ptr<differential_drive_config> config_get(void) const {
-    return m_config;
+ private:
+  rcppsw::config::base_config* config_get_impl(void) const override {
+    return m_config.get();
   }
 
- private:
-  std::shared_ptr<rcppsw::config::base_config> config_get_impl(void) const override {
-    return m_config;
-  }
-
- private:
-  std::shared_ptr<differential_drive_config> m_config{nullptr};
+  /* clang-format off */
+  std::unique_ptr<config_type> m_config{nullptr};
+  /* clang-format on */
 };
 
 NS_END(xml, config, kin2D, robotics, rcppsw);

@@ -25,8 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <algorithm>
-#include "rcppsw/math/expression.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/math/expression.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -51,7 +51,7 @@ NS_START(rcppsw, swarm);
  * - The previous value of the pheromone density.
  */
 class pheromone_density final : public math::expression<double>,
-                          public er::client<pheromone_density> {
+                                public er::client<pheromone_density> {
  public:
   /**
    * @brief Convenience constant for use it adding pheromones to a density.
@@ -61,9 +61,7 @@ class pheromone_density final : public math::expression<double>,
   pheromone_density(void) : pheromone_density{-1.0} {}
 
   explicit pheromone_density(double rho)
-      : ER_CLIENT_INIT("rcppsw.swarm.pheromone"),
-        m_delta(0),
-        m_rho(rho) {}
+      : ER_CLIENT_INIT("rcppsw.swarm.pheromone"), m_delta(0), m_rho(rho) {}
 
   void rho(double rho) { m_rho = rho; }
 

@@ -51,30 +51,24 @@ NS_START(rcppsw, robotics, steer2D, config, xml);
  * Parameter tags under the XML root are expected to exactly match the names of
  * the fields in the \ref avoidance_force_config struct.
  */
-class avoidance_force_parser : public rcppsw::config::xml::xml_config_parser {
+class avoidance_force_parser final : public rcppsw::config::xml::xml_config_parser {
  public:
-  static constexpr char kXMLRoot[] = "avoidance_force";
+  using config_type = avoidance_force_config;
 
-  explicit avoidance_force_parser(uint level) : xml_config_parser(level) {}
+  static constexpr char kXMLRoot[] = "avoidance_force";
 
   void parse(const ticpp::Element& node) override;
   bool validate(void) const override;
 
   std::string xml_root(void) const override { return kXMLRoot; }
-  bool parsed(void) const override { return m_parsed; }
-
-  std::shared_ptr<avoidance_force_config> config_get(void) const {
-    return m_config;
-  }
 
  private:
-  std::shared_ptr<rcppsw::config::base_config> config_get_impl(void) const override {
-    return m_config;
+  const rcppsw::config::base_config* config_get_impl(void) const override {
+    return m_config.get();
   }
 
   /* clang-format off */
-  bool                                    m_parsed{false};
-  std::shared_ptr<avoidance_force_config> m_config{nullptr};
+  std::unique_ptr<config_type> m_config{nullptr};
   /* clang-format on */
 };
 

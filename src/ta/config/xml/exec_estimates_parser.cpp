@@ -32,43 +32,46 @@ NS_START(rcppsw, ta, config, xml);
  * Global Variables
  ******************************************************************************/
 constexpr char exec_estimates_parser::kXMLRoot[];
+namespace mxml = math::config::xml;
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void exec_estimates_parser::parse(const ticpp::Element& node) {
-  if (nullptr != node.FirstChild(kXMLRoot, false)) {
-    ticpp::Element enode = node_get(node, kXMLRoot);
-    m_config =
-        std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
-    m_ema.parse(enode);
-    m_config->ema = *m_ema.config_get();
-    XML_PARSE_ATTR(enode, m_config, seed_enabled);
-
-    if (m_task_names.empty()) {
-      ER_WARN("No tasks registered for parsing");
-    }
-    /*
-     * For each registered task we want to get exec estimates for, parse the
-     * estimate.
-     */
-    for (auto& s : m_task_names) {
-      math::rangeu tmp{0, 0};
-      node_attr_get(enode, s, tmp);
-      m_config->ranges.insert({s, tmp});
-    } /* for(&s..) */
-  }
-} /* parse() */
-
-void exec_estimates_parser::show(std::ostream& stream) const {
-  if (!parsed()) {
-    stream << build_header() << "<< Not Parsed >>" << std::endl
-           << build_footer();
+  /* tag is optional in all cases */
+  if (nullptr == node.FirstChild(kXMLRoot, false)) {
     return;
   }
+  m_config = std::make_unique<config_type>();
+  ticpp::Element enode = node_get(node, kXMLRoot);
 
-  stream << build_header() << XML_ATTR_STR(m_config, seed_enabled) << std::endl
-         << build_footer();
-} /* show() */
+  XML_PARSE_ATTR_DFLT(enode, m_config, seed_enabled, false);
+
+  if (!m_config->seed_enabled) {
+    return;
+  }
+  m_ema.parse(enode);
+  m_config->ema = *m_ema.config_get<mxml::ema_parser::config_type>();
+
+  if (m_task_names.empty()) {
+    ER_WARN("No tasks registered for parsing");
+  }
+  /*
+   * For each registered task we want to get exec estimates for, parse the
+   * estimate.
+   */
+  for (auto& s : m_task_names) {
+    math::rangeu tmp{0, 0};
+    node_attr_get(enode, s, tmp);
+    m_config->ranges.insert({s, tmp});
+  } /* for(&s..) */
+} /* parse() */
+
+__rcsw_pure bool exec_estimates_parser::validate(void) const {
+  if (!is_parsed() || !m_config->seed_enabled) {
+    return true;
+  }
+  return m_ema.validate();
+} /* validate() */
 
 NS_END(xml, config, ta, rcppsw);

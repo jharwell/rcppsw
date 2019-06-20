@@ -24,8 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/robotics/steer2D/avoidance_force.hpp"
 #include "rcppsw/robotics/steer2D/arrival_force.hpp"

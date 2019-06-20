@@ -31,6 +31,7 @@
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/config/xml/xml_config_parser.hpp"
 #include "rcppsw/patterns/factory/factory.hpp"
+#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -53,9 +54,9 @@ NS_START(rcppsw, config, xml);
  * signature as the constructor for that class available, or cryptic compile
  * errors will result.
  */
-class xml_config_repository {
+class xml_config_repository : er::client<xml_config_repository> {
  public:
-  xml_config_repository(void) = default;
+  xml_config_repository(void) : ER_CLIENT_INIT("rcppsw.config.xml.repository") {}
 
   /**
    * @brief Call the \ref xml_config_parser::parse() function on all parsers
@@ -101,7 +102,7 @@ class xml_config_repository {
   const T* config_get(const std::string& name) const {
     auto it = m_parsers.find(name);
     if (m_parsers.end() != it) {
-      return it->second->config_get<T>().get();
+      return it->second->config_get<T>();
     }
     return nullptr;
   }
@@ -132,9 +133,9 @@ class xml_config_repository {
    *           parse() is called on it.
    */
   template <typename T, typename S>
-  void parser_register(const std::string& name, uint level_in) {
+  void parser_register(const std::string& name) {
     m_factory.register_type<T>(name);
-    m_parsers[name] = m_factory.create(name, level_in).get();
+    m_parsers[name] = m_factory.create(name).get();
     std::type_index i(typeid(S));
     m_config_types[i] = name;
   }
@@ -149,24 +150,16 @@ class xml_config_repository {
    * @tparam T The parser type.
    */
   template <typename T>
-  void register_parser(const std::string& name, uint level_in) {
+  void parser_register(const std::string& name) {
     m_factory.register_type<T>(name);
-    m_parsers[name] = m_factory.create(name, level_in).get();
+    m_parsers[name] = m_factory.create(name).get();
   }
-
-  /**
-   * @brief Dump all parsed (or unparsed, but that would be useless)
-   * configuration to the specified stream.
-   */
-  friend std::ostream& operator<<(std::ostream& stream,
-                                  const xml_config_repository& repo);
 
  private:
   /* clang-format off */
-  std::map<std::string, xml_config_parser*>  m_parsers{};
-  std::map<std::type_index, std::string>     m_config_types{};
-  patterns::factory::sharing_factory<xml_config_parser,
-                                     uint> m_factory{};
+  std::map<std::string, xml_config_parser*>             m_parsers{};
+  std::map<std::type_index, std::string>                m_config_types{};
+  patterns::factory::sharing_factory<xml_config_parser> m_factory{};
   /* clang-format on */
 };
 

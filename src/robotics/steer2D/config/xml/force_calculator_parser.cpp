@@ -38,37 +38,37 @@ constexpr char force_calculator_parser::kXMLRoot[];
  ******************************************************************************/
 void force_calculator_parser::parse(const ticpp::Element& node) {
   ticpp::Element knode = node_get(node, kXMLRoot);
-  m_config =
-      std::make_shared<std::remove_reference<decltype(*m_config)>::type>();
+  m_config = std::make_unique<config_type>();
+
   m_avoidance.parse(knode);
   m_arrival.parse(knode);
   m_wander.parse(knode);
   m_polar.parse(knode);
   m_phototaxis.parse(knode);
 
-  if (m_avoidance.parsed()) {
-    m_config->avoidance = *m_avoidance.config_get();
+  if (m_avoidance.is_parsed()) {
+    m_config->avoidance =
+        *m_avoidance.config_get<avoidance_force_parser::config_type>();
   }
-  if (m_arrival.parsed()) {
-    m_config->arrival = *m_arrival.config_get();
+  if (m_arrival.is_parsed()) {
+    m_config->arrival =
+        *m_arrival.config_get<arrival_force_parser::config_type>();
   }
-  if (m_wander.parsed()) {
-    m_config->wander = *m_wander.config_get();
+  if (m_wander.is_parsed()) {
+    m_config->wander = *m_wander.config_get<wander_force_parser::config_type>();
   }
-  if (m_polar.parsed()) {
-    m_config->polar = *m_polar.config_get();
+  if (m_polar.is_parsed()) {
+    m_config->polar = *m_polar.config_get<polar_force_parser::config_type>();
   }
-  if (m_phototaxis.parsed()) {
-    m_config->phototaxis = *m_phototaxis.config_get();
+  if (m_phototaxis.is_parsed()) {
+    m_config->phototaxis =
+        *m_phototaxis.config_get<phototaxis_force_parser::config_type>();
   }
 } /* parse() */
 
 __rcsw_pure bool force_calculator_parser::validate(void) const {
-  CHECK(m_avoidance.parsed());
-  return m_arrival.validate() && m_wander.validate() && m_polar.validate();
-
-error:
-  return false;
+  return m_avoidance.validate() && m_arrival.validate() &&
+         m_wander.validate() && m_polar.validate() && m_phototaxis.validate();
 } /* validate() */
 
 NS_END(xml, config, steer2D, robotics, rcppsw);

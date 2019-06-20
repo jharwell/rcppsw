@@ -48,9 +48,7 @@ NS_START(rcppsw, swarm, convergence, config, xml);
  */
 class angular_order_parser : public rcppsw::config::xml::xml_config_parser {
  public:
-  explicit angular_order_parser(uint level) :
-      xml_config_parser(level),
-      m_config(std::make_shared<std::remove_reference<decltype(*m_config)>::type>()) {}
+  using config_type = angular_order_config;
 
   /**
    * @brief The root tag that all XML configuration for angular order objects
@@ -62,16 +60,14 @@ class angular_order_parser : public rcppsw::config::xml::xml_config_parser {
 
   std::string xml_root(void) const override { return kXMLRoot; }
 
-  std::shared_ptr<angular_order_config> config_get(void) const { return m_config; }
 
  private:
-  std::shared_ptr<rcppsw::config::base_config> config_get_impl(
-      void) const override {
-    return m_config;
+  const rcppsw::config::base_config* config_get_impl(void) const override {
+    return m_config.get();
   }
 
   /* clang-format off */
-  std::shared_ptr<angular_order_config> m_config;
+  std::unique_ptr<config_type> m_config{nullptr};
   /* clang-format on */
 };
 

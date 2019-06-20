@@ -25,9 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <list>
-#include <random>
-#include <string>
 #include <memory>
+#include <random>
 
 #include "rcppsw/ta/base_executive.hpp"
 
