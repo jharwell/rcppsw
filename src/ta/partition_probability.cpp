@@ -35,6 +35,7 @@ NS_START(rcppsw, ta);
  * Global Variable
  ******************************************************************************/
 constexpr char partition_probability::kMethodPini2011[];
+constexpr char partition_probability::kMethodRandom[];
 
 /*******************************************************************************
  * Constructors/Destructor

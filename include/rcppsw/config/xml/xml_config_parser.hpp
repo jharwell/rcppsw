@@ -146,7 +146,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
    */
   template <typename T,
             typename U = T,
-            RCPPSW_SFINAE_REQUIRE(!std::is_same<T, bool>::value)>
+            RCPPSW_SFINAE_FUNC(!std::is_same<T, bool>::value)>
   void node_attr_get(const ticpp::Element& node,
                      const std::string& attr,
                      T& buf,
@@ -161,7 +161,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
    */
   template <typename T,
             typename U = T,
-            RCPPSW_SFINAE_REQUIRE(std::is_same<U, bool>::value)>
+            RCPPSW_SFINAE_FUNC(std::is_same<U, bool>::value)>
   void node_attr_get(const ticpp::Element& node,
                      const std::string& attr,
                      T& buf,

@@ -77,7 +77,7 @@ class _proximity_sensor {
    * object distances.
    */
   template <typename U = TSensor,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_proximity_sensor<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_proximity_sensor<U>::value)>
   std::vector<math::vector2d> readings(void) const {
     std::vector<math::vector2d> ret;
     for (auto &r : m_sensor->GetReadings()) {
@@ -96,7 +96,7 @@ class _proximity_sensor {
    * Should be used in conjunction with \ref prox_obj_exists().
    */
   template <typename U = TSensor,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_proximity_sensor<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_proximity_sensor<U>::value)>
   math::vector2d closest_prox_obj(const math::vector2d& position,
               double obj_delta,
               const math::range<math::radians>& fov) const {

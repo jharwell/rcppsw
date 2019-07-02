@@ -85,7 +85,7 @@ class _ground_sensor {
    * @return A vector of \ref reading.
    */
   template <typename U = TSensor,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_ground_sensor<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_ground_sensor<U>::value)>
   std::vector<reading> readings(void) const {
     std::vector<reading> ret;
     for (auto &r : m_sensor->GetReadings()) {
@@ -107,7 +107,7 @@ class _ground_sensor {
    * @return \c TRUE iff the condition was detected by the specified # readings.
    */
   template <typename U = TSensor,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_ground_sensor<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_ground_sensor<U>::value)>
   bool detect(double target, double tol, uint consensus) const {
     std::vector<reading> r = readings();
 

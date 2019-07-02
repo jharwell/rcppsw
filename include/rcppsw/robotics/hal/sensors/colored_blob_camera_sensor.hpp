@@ -75,7 +75,7 @@ class _colored_blob_camera_sensor {
   };
 
   template <typename U = TSensor,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_blob_camera_sensor<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_blob_camera_sensor<U>::value)>
   explicit _colored_blob_camera_sensor(U * const sensor) : m_sensor(sensor) {
     sensor->Enable();
   }
@@ -86,7 +86,7 @@ class _colored_blob_camera_sensor {
    * @return A vector of \ref reading.
    */
   template <typename U = TSensor,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_blob_camera_sensor<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_blob_camera_sensor<U>::value)>
   std::vector<reading>  readings(void) const {
     std::vector<reading> ret;
     for (auto &r : m_sensor->GetReadings().BlobList) {

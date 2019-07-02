@@ -77,7 +77,7 @@ class _led_actuator {
    * @return \ref status_t.
    */
   template <typename U = T,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_led_actuator<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_led_actuator<U>::value)>
   status_t set_color(int id, utils::color color) {
     if (-1 == id) {
       m_leds->SetAllColors(argos::CColor(color.red(),
@@ -107,7 +107,7 @@ class _led_actuator {
    * @return \ref status_t.
    */
   template <typename U = T,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_led_actuator<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_led_actuator<U>::value)>
   status_t set_intensity(int id, uint8_t intensity) {
     if (-1 == id) {
       m_leds->SetAllIntensities(intensity);

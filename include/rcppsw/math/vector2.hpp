@@ -173,7 +173,7 @@ class vector2 {
    *p
    * @return A reference to the rotated vector.
    */
-  template <typename U = T, RCPPSW_SFINAE_REQUIRE(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   vector2& rotate(const radians& angle) {
     T sin_val = std::sin(angle.value());
     T cos_val = std::cos(angle.value());
@@ -212,7 +212,7 @@ class vector2 {
    * Only available if the template argument is not floating point.
    */
   template <typename U = T,
-            RCPPSW_SFINAE_REQUIRE(!std::is_floating_point<U>::value)>
+            RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
   bool operator==(const vector2& other) const {
     return (m_x == other.m_x && m_y == other.m_y);
   }
@@ -223,7 +223,7 @@ class vector2 {
    *
    * Only available if the template argument is floating point.
    */
-  template <typename U = T, RCPPSW_SFINAE_REQUIRE(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   bool operator==(const vector2& other) const {
     return (std::fabs(x() - other.x()) <= std::numeric_limits<T>::epsilon() &&
             (std::fabs(y() - other.y()) <= std::numeric_limits<T>::epsilon()));

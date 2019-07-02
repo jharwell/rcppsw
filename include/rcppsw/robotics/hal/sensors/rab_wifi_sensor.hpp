@@ -96,7 +96,7 @@ class _rab_wifi_sensor  {
    * @return A vector of \ref wifi_packet.
    */
   template <typename U = TSensor,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_rab_sensor<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_rab_sensor<U>::value)>
   std::vector<rab_wifi_packet> readings(void) const {
     std::vector<rab_wifi_packet> ret;
     for (auto &r : m_sensor->GetReadings()) {

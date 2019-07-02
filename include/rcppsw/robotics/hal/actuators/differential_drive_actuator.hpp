@@ -71,7 +71,7 @@ class _differential_drive_actuator {
    * @return \ref status_t.
    */
   template <typename U = T,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_ds_actuator<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_ds_actuator<U>::value)>
   status_t set_wheel_speeds(double left,
                             double right) {
     m_wheels->SetLinearVelocity(left, right);
@@ -85,7 +85,7 @@ class _differential_drive_actuator {
    * @return \ref status_t.
    */
   template <typename U = T,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_ds_actuator<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_ds_actuator<U>::value)>
   status_t stop_wheels(void) {
     return set_wheel_speeds(0.0, 0.0);
   }

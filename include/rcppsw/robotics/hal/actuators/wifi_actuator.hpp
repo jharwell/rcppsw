@@ -71,7 +71,7 @@ class _wifi_actuator {
    * @brief Start broadcasting the specified data to all footbots within range.
    */
   template <typename U = T,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_rab_actuator<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_rab_actuator<U>::value)>
   void broadcast_start(const struct wifi_packet& packet) {
     for (size_t i = 0; i < packet.data.size(); ++i) {
       m_wifi->SetData(i, packet.data[i]);
@@ -83,7 +83,7 @@ class _wifi_actuator {
    * within range.
    */
   template <typename U = T,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_rab_actuator<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_rab_actuator<U>::value)>
   void broadcast_stop(void) {
     m_wifi->ClearData();
   }
@@ -92,7 +92,7 @@ class _wifi_actuator {
    * @brief Reset the wifi device.
    */
   template <typename U = T,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_rab_actuator<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_rab_actuator<U>::value)>
   void reset(void) {
     m_wifi->ClearData();
   }

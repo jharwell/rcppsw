@@ -154,7 +154,7 @@
   __rcsw_pure RCPPSW_WRAP_DEFP(Class, Func, Handle, NullRet, __VA_ARGS__)
 
 /**
- * @def RCPPSW_SFINAE_REQUIRE(...)
+ * @def RCPPSW_SFINAE_FUNC(...)
  *
  * Specify the condition to enable a function for SFINAE.
  *
@@ -170,8 +170,11 @@
  * in their template argument lists will be considered distinct and trigger
  * SFINAE as expected.
  */
-#define RCPPSW_SFINAE_REQUIRE(...) \
+#define RCPPSW_SFINAE_FUNC(...)                         \
   typename std::enable_if<__VA_ARGS__, int>::type = 0
+
+#define RCPPSW_SFINAE_TYPE(...)                         \
+  typename std::enable_if<__VA_ARGS__, bool>::type
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -198,7 +201,7 @@ struct has_to_str<T, void_t<decltype(std::declval<T>().to_str())>>
     : std::true_type {};
 NS_END(detail);
 
-template <typename T, RCPPSW_SFINAE_REQUIRE(detail::has_to_str<T>::value)>
+template <typename T, RCPPSW_SFINAE_FUNC(detail::has_to_str<T>::value)>
 std::string to_string(const T& obj) {
   return obj.to_str();
 }

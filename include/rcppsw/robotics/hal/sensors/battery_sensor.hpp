@@ -86,7 +86,7 @@ class _battery_sensor {
    * @return A vector of \ref reading.
    */
   template <typename U = TSensor,
-            RCPPSW_SFINAE_REQUIRE(detail::is_argos_battery_sensor<U>::value)>
+            RCPPSW_SFINAE_FUNC(detail::is_argos_battery_sensor<U>::value)>
   struct reading readings(void) const {
     argos::CCI_BatterySensor::SReading temp = m_sensor->GetReading();
     reading ret(temp.AvailableCharge, temp.TimeLeft);
