@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <string>
+#include <random>
 
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/math/expression.hpp"
@@ -66,6 +67,7 @@ class partition_probability : public math::sigmoid,
                               er::client<partition_probability> {
  public:
   static constexpr char kMethodPini2011[] = "pini2011";
+  static constexpr char kMethodRandom[] = "random";
 
   /*
    * A default reactivity value determined experimentally to work well.
@@ -85,10 +87,10 @@ class partition_probability : public math::sigmoid,
    * @brief Initialize partitioning probability with default values based on
    * whatever the selected method is.
    */
-  explicit partition_probability(std::string method)
+  explicit partition_probability(const std::string& method)
       : sigmoid(kDEFAULT_REACTIVITY, kDEFAULT_OFFSET, kDEFAULT_GAMMA),
         ER_CLIENT_INIT("rcppsw.ta.partition_probability"),
-        mc_method(std::move(method)) {}
+        mc_method(method) {}
 
   /**
    * @brief Initialize partitioning probability explicity with method +
@@ -98,19 +100,17 @@ class partition_probability : public math::sigmoid,
 
   double operator()(const time_estimate& task,
                     const time_estimate& subtask1,
-                    const time_estimate& subtask2);
+                    const time_estimate& subtask2,
+                    std::default_random_engine& rng);
 
-  double calc(const time_estimate& task,
-              const time_estimate& subtask1,
-              const time_estimate& subtask2) {
-    return operator()(task, subtask1, subtask2);
-  }
   const std::string& method(void) const { return mc_method; }
 
  private:
   double calc_pini2011(const time_estimate& task,
                        const time_estimate& subtask1,
                        const time_estimate& subtask2);
+
+  double calc_random(std::default_random_engine& rng);
 
   /* clang-format off */
   const std::string mc_method;

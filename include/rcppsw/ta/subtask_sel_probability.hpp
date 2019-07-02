@@ -117,7 +117,7 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
 
  private:
   /**
-   * @brief Random subtask sel, regardless of time estimates.
+   * @brief Random subtask selection, regardless of time estimates.
    */
   double calc_random(std::default_random_engine& rng);
 

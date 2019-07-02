@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/metrics/base_metrics.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -46,10 +47,10 @@ class taskable_argument;
  * @brief A class that all classes wishing to be used as the mechanism by which
  * \ref executable_task objects execute themselves must inherit from.
  */
-class taskable {
+class taskable : public virtual metrics::base_metrics {
  public:
   taskable(void) = default;
-  virtual ~taskable(void);
+  ~taskable(void) override;
 
   /**
    * @brief Execute the task.

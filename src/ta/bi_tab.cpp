@@ -116,17 +116,19 @@ __rcsw_pure bool bi_tab::task_is_child(const polled_task* const task) const {
 
 void bi_tab::partition_prob_update(void) {
   if (kPartitionSrcExec == mc_partition_input) {
-    m_partition_prob.calc(m_root->task_exec_estimate(),
-                          m_child1->task_exec_estimate(),
-                          m_child2->task_exec_estimate());
+    m_partition_prob(m_root->task_exec_estimate(),
+                     m_child1->task_exec_estimate(),
+                     m_child2->task_exec_estimate(),
+                     m_rng);
   } else if (kPartitionSrcInterface == mc_partition_input) {
     int root_id = m_root->task_last_active_interface();
     int child1_id = m_child1->task_last_active_interface();
     int child2_id = m_child2->task_last_active_interface();
     if (root_id >= 0 && child1_id >= 0 && child2_id >= 0) {
-      m_partition_prob.calc(m_root->task_interface_estimate(root_id),
-                            m_child1->task_interface_estimate(child1_id),
-                            m_child2->task_interface_estimate(child2_id));
+      m_partition_prob(m_root->task_interface_estimate(root_id),
+                       m_child1->task_interface_estimate(child1_id),
+                       m_child2->task_interface_estimate(child2_id),
+                       m_rng);
 
     } else {
       ER_WARN(
@@ -147,9 +149,9 @@ polled_task* bi_tab::task_allocate(void) {
   double partition_prob;
 
   if (mc_always_partition) {
-    partition_prob = 1;
+    partition_prob = 1.0;
   } else if (mc_never_partition) {
-    partition_prob = 0;
+    partition_prob = 0.0;
   } else {
     partition_prob = m_partition_prob.last_result();
     ER_INFO("TAB root='%s': partition_method=%s partition_prob=%f",
@@ -177,36 +179,27 @@ polled_task* bi_tab::task_allocate(void) {
 std::pair<double, double> bi_tab::subtask_sw_calc(void) {
   double prob_12 = 0.0;
   double prob_21 = 0.0;
+  const time_estimate* task1 = nullptr;
+  const time_estimate* task2 = nullptr;
+
   if (subtask_sel_probability::kMethodHarwell2018 == m_sel_prob.method()) {
     if (kSubtaskSelSrcExec == mc_subtask_sel_input) {
-      prob_12 = m_sel_prob(&m_child1->task_exec_estimate(),
-                           &m_child2->task_exec_estimate(),
-                           m_rng);
-      prob_21 = m_sel_prob(&m_child2->task_exec_estimate(),
-                           &m_child1->task_exec_estimate(),
-                           m_rng);
+      task1 = &m_child1->task_exec_estimate();
+      task2 = &m_child2->task_exec_estimate();
     } else if (kSubtaskSelSrcInterface == mc_subtask_sel_input) {
       int child1_id = m_child1->task_last_active_interface();
       int child2_id = m_child2->task_last_active_interface();
       if (child1_id >= 0 && child2_id >= 0) {
-        prob_12 = m_sel_prob(&m_child1->task_interface_estimate(child1_id),
-                             &m_child2->task_interface_estimate(child2_id),
-                             m_rng);
-        prob_21 = m_sel_prob(&m_child2->task_interface_estimate(child2_id),
-                             &m_child1->task_interface_estimate(child1_id),
-                             m_rng);
-
+        task1 = &m_child1->task_interface_estimate(child1_id);
+        task2 = &m_child2->task_interface_estimate(child1_id);
       } else {
+        /* fall through */
         ER_WARN(
             "Cannot calc subtask sel prob for TAB rooted at '%s': >= 1 task "
-            "has no last interface",
+            "has no last interface: using random selection",
             m_root->name().c_str());
-
-        prob_12 = 0.5;
-        prob_21 = 0.5;
       }
     }
-
   } else if (subtask_sel_probability::kMethodBrutschy2014 ==
              m_sel_prob.method()) {
     /*
@@ -214,16 +207,12 @@ std::pair<double, double> bi_tab::subtask_sw_calc(void) {
      * with task with more than 1 interface. Brutschy2014 only ever used tasks
      * with 1 interface, so its OK for now.
      */
-    prob_12 = m_sel_prob(&m_child1->task_interface_estimate(0),
-                         &m_child2->task_interface_estimate(0),
-                         m_rng);
-    prob_21 = m_sel_prob(&m_child2->task_interface_estimate(0),
-                         &m_child1->task_interface_estimate(0),
-                         m_rng);
-  } else {
-    ER_FATAL_SENTINEL("Bad subtask selection method '%s'",
-                      m_sel_prob.method().c_str());
+    task1 = &m_child1->task_interface_estimate(0);
+    task2 = &m_child2->task_interface_estimate(0);
+  } else { /* fall through (random) */
   }
+  prob_12 = m_sel_prob(task1, task2, m_rng);
+  prob_21 = m_sel_prob(task2, task1, m_rng);
   return std::make_pair(prob_12, prob_21);
 } /* subtask_sw_calc() */
 
@@ -254,38 +243,28 @@ polled_task* bi_tab::subtask_allocate(void) {
 
   polled_task* ret = nullptr;
   std::uniform_real_distribution<> dist(0.0, 1.0);
-  if (subtask_sel_probability::kMethodHarwell2018 == m_sel_prob.method() ||
-      subtask_sel_probability::kMethodBrutschy2014 == m_sel_prob.method()) {
-    /*
-     * If we last executed child1, we calculate the probability of switching
-     * to child2, based on time estimates.
-     */
-    if (m_last_subtask == m_child1 || nullptr == m_last_subtask) {
-      if (prob_12 >= dist(m_rng)) {
-        ret = m_child2;
-      } else {
-        ret = m_child1;
-      }
-    }
-    /*
-     * If we last executed m_child2, we calculate the probability of switching
-     * to m_child1, based on time estimates.
-     */
-    else if (m_last_subtask == m_child2) {
-      if (prob_21 >= dist(m_rng)) {
-        ret = m_child1;
-      } else {
-        ret = m_child2;
-      }
-    }
-  } else if (subtask_sel_probability::kMethodRandom == m_sel_prob.method()) {
+  /*
+   * If we last executed child1, we calculate the probability of switching
+   * to child2, based on time estimates.
+   */
+  if (m_last_subtask == m_child1 || nullptr == m_last_subtask) {
     if (prob_12 >= dist(m_rng)) {
+      ret = m_child2;
+    } else {
+      ret = m_child1;
+    }
+  }
+  /*
+   * If we last executed m_child2, we calculate the probability of switching
+   * to m_child1, based on time estimates.
+   */
+  else if (m_last_subtask == m_child2) {
+    if (prob_21 >= dist(m_rng)) {
       ret = m_child1;
     } else {
       ret = m_child2;
     }
   }
-  ER_ASSERT(nullptr != ret, "No subtask selected?");
   ER_INFO("Selected subtask '%s'", ret->name().c_str());
   m_active_task = ret;
   return ret;

@@ -71,7 +71,7 @@ void bi_tdgraph_executive::run(void) {
     return;
   }
 
-  double prob = current_task()->abort_prob();
+  double prob = current_task()->abort_prob_calc();
   ER_DEBUG("Task '%s' abort probability: %f",
            current_task()->name().c_str(),
            prob);

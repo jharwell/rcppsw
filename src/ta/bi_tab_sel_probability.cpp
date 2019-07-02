@@ -64,7 +64,7 @@ bi_tab_sel_probability::bi_tab_sel_probability(
  ******************************************************************************/
 double bi_tab_sel_probability::calc_random(std::default_random_engine& rng) {
   std::uniform_real_distribution<> dist(0.0, 1.0);
-  return dist(rng);
+  return set_result(dist(rng));
 } /* calc_random() */
 
 double bi_tab_sel_probability::calc_harwell2019(const bi_tab& tab1,
@@ -80,7 +80,7 @@ double bi_tab_sel_probability::calc_harwell2019(const bi_tab& tab1,
                 (tab2.child1()->task_exec_estimate().last_result() +
                  tab2.child2()->task_exec_estimate().last_result())) /
       tab2.root()->task_exec_estimate().last_result();
-  return calc_sigmoid(ratio1, ratio2, rng);
+  return set_result(calc_sigmoid(ratio1, ratio2, rng));
 } /* calc_harwell2019() */
 
 double bi_tab_sel_probability::calc_sigmoid(double ratio1,
@@ -90,15 +90,14 @@ double bi_tab_sel_probability::calc_sigmoid(double ratio1,
    * No information available--just pick randomly.
    */
   if (!(ratio1 > 0 && ratio2 > 0)) {
-    std::uniform_real_distribution<> dist(0.0, 1.0);
-    return dist(rng);
+    return calc_random(rng);
   } else if (!(ratio1 > 0)) { /* have info on tab2 only */
     return 0.0;
   } else if (!(ratio2 > 0)) { /* have info on tab1 only */
     return 1.0;
   }
   double theta = reactivity() * (offset() - ratio1 / ratio2);
-  return set_result(1.0 / (1 + std::exp(-theta)) * gamma());
+  return 1.0 / (1 + std::exp(-theta)) * gamma();
 } /* calc_sigmoid() */
 
 double bi_tab_sel_probability::operator()(const bi_tab* const tab1,

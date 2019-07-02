@@ -52,8 +52,9 @@ subtask_sel_probability::subtask_sel_probability(std::string method)
                   kBRUTSCHY2014_OFFSET,
                   kBRUTSCHY2014_GAMMA);
   } else if (kMethodRandom == method) {
+  } else {
+    ER_FATAL_SENTINEL("Bad method '%s' selected", method.c_str());
   }
-  ER_FATAL_SENTINEL("Bad method '%s' selected", method.c_str());
 }
 
 subtask_sel_probability::subtask_sel_probability(
@@ -67,20 +68,20 @@ subtask_sel_probability::subtask_sel_probability(
  ******************************************************************************/
 double subtask_sel_probability::calc_random(std::default_random_engine& rng) {
   std::uniform_real_distribution<> dist(0.0, 1.0);
-  return dist(rng);
+  return set_result(dist(rng));
 } /* calc_random() */
 
 double subtask_sel_probability::calc_brutschy2014(
     const time_estimate& int_est1,
     const time_estimate& int_est2,
     std::default_random_engine& rng) {
-  return calc_sigmoid(int_est1, int_est2, rng);
+  return set_result(calc_sigmoid(int_est1, int_est2, rng));
 } /* calc_brutschy2014() */
 
 double subtask_sel_probability::calc_harwell2018(const time_estimate& exec_est1,
                                                  const time_estimate& exec_est2,
                                                  std::default_random_engine& rng) {
-  return calc_sigmoid(exec_est2, exec_est1, rng);
+  return set_result(calc_sigmoid(exec_est2, exec_est1, rng));
 } /* calc_harwell2018() */
 
 double subtask_sel_probability::calc_sigmoid(const time_estimate& est1,
@@ -105,7 +106,7 @@ double subtask_sel_probability::calc_sigmoid(const time_estimate& est1,
     r_ss = est1.last_result();
   }
   double theta = reactivity() * (est1.last_result() / r_ss - offset());
-  return set_result(1.0 / (1 + std::exp(-theta)) * gamma());
+  return 1.0 / (1 + std::exp(-theta)) * gamma();
 } /* calc_sigmoid() */
 
 double subtask_sel_probability::operator()(const time_estimate* subtask1,

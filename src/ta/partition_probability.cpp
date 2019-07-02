@@ -23,6 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/ta/partition_probability.hpp"
 #include <cmath>
+
 #include "rcppsw/ta/config/sigmoid_sel_config.hpp"
 
 /*******************************************************************************
@@ -51,9 +52,12 @@ partition_probability::partition_probability(
  ******************************************************************************/
 double partition_probability::operator()(const time_estimate& task,
                                          const time_estimate& subtask1,
-                                         const time_estimate& subtask2) {
+                                         const time_estimate& subtask2,
+                                         std::default_random_engine& rng) {
   if (kMethodPini2011 == mc_method) {
     return calc_pini2011(task, subtask1, subtask2);
+  } else if (kMethodRandom == mc_method) {
+    return calc_random(rng);
   }
   ER_FATAL_SENTINEL("Bad method '%s", mc_method.c_str());
   return 0.0;
@@ -81,5 +85,10 @@ double partition_probability::calc_pini2011(const time_estimate& task,
   }
   return set_result(1.0 / (1 + std::exp(-theta)) * gamma());
 } /* calc() */
+
+double_t partition_probability::calc_random(std::default_random_engine& rng) {
+  std::uniform_real_distribution<> dist(0.0, 1.0);
+  return set_result(dist(rng));
+} /* calc_random() */
 
 NS_END(ta, rcppsw);
