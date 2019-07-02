@@ -82,15 +82,15 @@ void bi_tab_metrics_collector::collect(
     m_cum_subtask1_count += static_cast<uint>(m.subtask1_active());
     m_int_subtask2_count += static_cast<uint>(m.subtask2_active());
     m_cum_subtask2_count += static_cast<uint>(m.subtask2_active());
+    m_int_partition_prob += m.partition_prob();
+    m_int_subtask_selection_prob += m.subtask_selection_prob();
+    m_cum_partition_prob += m.partition_prob();
+    m_cum_subtask_selection_prob += m.subtask_selection_prob();
   } else {
     ++m_int_no_partition_count;
     ++m_cum_no_partition_count;
   }
 
-  m_int_partition_prob += m.partition_prob();
-  m_int_subtask_selection_prob += m.subtask_selection_prob();
-  m_cum_partition_prob += m.partition_prob();
-  m_cum_subtask_selection_prob += m.subtask_selection_prob();
   m_int_task_sw_count += static_cast<uint>(m.task_changed());
   m_cum_task_sw_count += static_cast<uint>(m.task_changed());
   m_int_task_depth_sw_count += static_cast<uint>(m.task_depth_changed());
