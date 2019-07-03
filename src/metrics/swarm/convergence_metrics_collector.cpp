@@ -85,7 +85,7 @@ bool convergence_metrics_collector::csv_line_build(std::string& line) {
 
   line += csv_entry_intavg(m_order_stats.raw);
   line += csv_entry_intavg(m_order_stats.norm);
-  line += csv_entry_intavg(m_order_stats.converged);
+  line += csv_entry_intavg(m_order_stats.converged, true);
 
   return true;
 } /* csv_line_build() */

@@ -63,11 +63,11 @@ bool base_metrics_collector::csv_line_write(uint timestep) {
 
 void base_metrics_collector::csv_header_write(void) {
   auto cols = csv_header_cols();
-  std::string header = std::accumulate(cols.begin(),
+  std::string header = std::accumulate(std::next(cols.begin()),
                                        cols.end(),
-                                       std::string(),
+                                       std::string(cols.front()),
                                        [&](const auto& sum, const auto& col) {
-                                         return sum + col + separator();
+                                         return sum + separator() + col;
                                        });
   m_ofile << header + "\n";
   m_ofile.flush();

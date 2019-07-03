@@ -159,34 +159,37 @@ class base_metrics_collector {
 
   /**
    * @brief Return a string of the average value of a sum of SOMETHING over an
-   * interval + separator.
+   * interval + separator (if the csv entry is not the last one in a line)
    */
   template <class T>
-  std::string csv_entry_intavg(T sum) const {
-    return std::to_string(static_cast<double>(sum) / interval()) + separator();
+  std::string csv_entry_intavg(T sum, bool last = false) const {
+    return std::to_string(static_cast<double>(sum) / interval()) +
+        ((last) ? "" : separator());
   }
 
   /**
    * @brief Return a string of the average value of a sum of SOMETHING over the
-   * elapsed simulation time so far + separator.
+   * elapsed simulation time so far + separator  (if the csv entry is not the
+   * last one in a line).
    */
   template <class T>
-  std::string csv_entry_tsavg(T sum) const {
+  std::string csv_entry_tsavg(T sum, bool last = false) const {
     return std::to_string(static_cast<double>(sum) / (timestep() + 1)) +
-           separator();
+        ((last) ? "" : separator());
   }
 
   /**
    * @brief Return a string of the average value of a sum of SOMETHING divided
-   * by a COUNT + separator. If the count is 0, then "0" + separator is
-   * returned.
+   * by a COUNT + separator (if the csv entry is not the last one in a line). If
+   * the count is 0, then "0" + separator (if the csv entry is not the last one
+   * in a line) is returned
    */
   template <class T, class U>
-  std::string csv_entry_domavg(T sum, U count) const {
+  std::string csv_entry_domavg(T sum, U count, bool last = false) const {
     return (count > 0) ? std::to_string(static_cast<double>(sum) /
                                         static_cast<double>(count)) +
-                             separator()
-                       : "0" + separator();
+        ((last) ? "" : separator())
+        : "0" + ((last) ? "" : separator());
   }
 
  private:

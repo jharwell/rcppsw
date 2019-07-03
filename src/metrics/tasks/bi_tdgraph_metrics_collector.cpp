@@ -129,10 +129,10 @@ bool bi_tdgraph_metrics_collector::csv_line_build(std::string& line) {
     line += csv_entry_intavg(count);
   } /* for(&count..) */
 
-  for (auto& count : m_cum_tab_counts) {
-    line += csv_entry_tsavg(count);
-  } /* for(&count..) */
-
+  for (size_t i = 0; i < m_cum_tab_counts.size() - 1; ++i) {
+    line += csv_entry_tsavg(m_cum_tab_counts[i]);
+  } /* for(i..) */
+  line += csv_entry_tsavg(m_cum_tab_counts[m_cum_tab_counts.size() - 1], true);
   return true;
 } /* store_foraging_stats() */
 

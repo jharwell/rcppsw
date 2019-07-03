@@ -131,7 +131,7 @@ bool bi_tab_metrics_collector::csv_line_build(std::string& line) {
   line += csv_entry_domavg(m_cum_partition_prob, cum_allocs);
 
   line += csv_entry_domavg(m_int_subtask_selection_prob, int_allocs);
-  line += csv_entry_domavg(m_cum_subtask_selection_prob, cum_allocs);
+  line += csv_entry_domavg(m_cum_subtask_selection_prob, cum_allocs, true);
   return true;
 } /* store_foraging_stats() */
 

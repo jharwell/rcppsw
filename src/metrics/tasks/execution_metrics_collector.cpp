@@ -138,7 +138,7 @@ bool execution_metrics_collector::csv_line_build(std::string& line) {
   line += csv_entry_intavg(m_int_complete_count);
   line += csv_entry_tsavg(m_cum_complete_count);
   line += csv_entry_intavg(m_int_interface_count);
-  line += csv_entry_tsavg(m_cum_interface_count);
+  line += csv_entry_tsavg(m_cum_interface_count, true);
   return true;
 } /* store_foraging_stats() */
 
