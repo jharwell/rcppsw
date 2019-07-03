@@ -26,7 +26,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#ifndef RCPPSW_ER_NREPORT
+#ifndef LIBRA_ER_NREPORT
 #include <log4cxx/consoleappender.h>
 #include <log4cxx/fileappender.h>
 #include <log4cxx/logger.h>
@@ -42,7 +42,7 @@
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#ifndef RCPPSW_ER_NREPORT
+#ifndef LIBRA_ER_NREPORT
 #define ER_FATAL(...)                                                            \
   {                                                                              \
     auto logger = rcppsw::er::client<typename std::remove_cv<                    \
@@ -101,7 +101,7 @@
 #define ER_DEBUG(...)
 #define ER_TRACE(...)
 
-#endif /* RCPPSW_ER_NREPORT */
+#endif /* LIBRA_ER_NREPORT */
 
 /**
  * @def ER_REPORT(lvl, msg, ...)
@@ -189,7 +189,7 @@
  * Initialize a logging client with the specified name (easier to do a macro
  * than to have to try do the casting every single time).
  */
-#ifndef RCPPSW_ER_NREPORT
+#ifndef LIBRA_ER_NREPORT
 #define ER_CLIENT_INIT(name)                                                 \
   rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>( \
       name)
@@ -245,7 +245,7 @@ NS_START(rcppsw, er);
 template <typename T>
 class client {
  public:
-#ifndef RCPPSW_ER_NREPORT
+#ifndef LIBRA_ER_NREPORT
   /**
    * @brief Initialize logging by specifying the path to the log4cxx
    * configuration file.
@@ -331,7 +331,7 @@ class client {
   std::string logger_name(void) const { return ""; }
   void push_ndc(const std::string&) {}
   void pop_ndc(void) {}
-#endif /* RCPPSW_ER_NREPORT */
+#endif /* LIBRA_ER_NREPORT */
 
   virtual ~client(void) = default;
   client(const client&) = default;
@@ -344,7 +344,7 @@ class client {
 
   static bool               m_initialized;
 
-#ifndef RCPPSW_ER_NREPORT
+#ifndef LIBRA_ER_NREPORT
   log4cxx::LoggerPtr        m_logger{};
 #endif
   /* clang-format on */

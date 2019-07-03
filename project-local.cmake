@@ -20,7 +20,9 @@ add_subdirectory(ext/rcsw)
 add_subdirectory(ext/ticpp)
 target_compile_options(ticpp PRIVATE -Wno-old-style-cast -Wno-suggest-override
   -Wno-effc++ -Wno-overloaded-virtual -Wno-missing-declarations
-  -Wno-suggest-attribute=const -Wno-suggest-attribute=pure)
+  -Wno-suggest-attribute=const -Wno-suggest-attribute=pure
+  -Wno-suggest-final-types -Wno-suggest-final-methods)
+
 # Boost
 find_package(Boost 1.58.0 COMPONENTS system filesystem thread graph)
 set(Boost_USE_STATIC_LIBS OFF)
@@ -29,7 +31,7 @@ set(Boost_USE_STATIC_LIBS OFF)
 # Includes                                                                     #
 ################################################################################
 if (BUILD_FOR_MSI)
-  set(ARGOS_INSTALL_PREFIX /home/gini/shared/swarm)
+  set(ARGOS_INSTALL_PREFIX /home/gini/shared/swarm/$ENV{MSICLUSTER})
 elseif(BUILD_FOR_TRAVIS)
   set(ARGOS_INSTALL_PREFIX /usr/local)
 else()
@@ -56,7 +58,7 @@ set(${target}_LIBRARIES
 set(${target}_LIBRARY_DIRS ${rcsw_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS})
 
 # No need to link with this--it has been compiled out
-if (NOT WITH_ER_NREPORT)
+if (NOT LIBRA_ER_NREPORT)
   set(${target}_LIBRARIES ${${target}_LIBRARIES} log4cxx)
 endif()
 
