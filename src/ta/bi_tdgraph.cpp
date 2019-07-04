@@ -34,13 +34,6 @@
 NS_START(rcppsw, ta);
 
 /*******************************************************************************
- * Global Variables
- ******************************************************************************/
-constexpr char bi_tdgraph::kTABInitRoot[];
-constexpr char bi_tdgraph::kTABInitRandom[];
-constexpr char bi_tdgraph::kTABInitMaxDepth[];
-
-/*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
 bi_tdgraph::bi_tdgraph(const config::task_alloc_config* const config)

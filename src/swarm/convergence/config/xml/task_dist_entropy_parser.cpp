@@ -29,11 +29,6 @@
 NS_START(rcppsw, swarm, convergence, config, xml);
 
 /*******************************************************************************
- * Global Variables
- ******************************************************************************/
-constexpr char task_dist_entropy_parser::kXMLRoot[];
-
-/*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void task_dist_entropy_parser::parse(const ticpp::Element& node) {

@@ -318,18 +318,29 @@ using vector2d = vector2<double>;
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#define DIRECT_CONV2D(prefix)                                             \
+/**
+ * @brief Convert vector2{i,u} -> vector2d directly, without applying any
+ * scaling.
+ */
+#define RCPPSW_MATH_VEC_DIRECT_CONV2D(prefix)                           \
   static inline vector2d prefix##vec2dvec(const vector2##prefix& other) { \
     return vector2d(other.x(), other.y());                                \
   }
 
-#define SCALED_CONV2D(prefix)                                           \
+/**
+ * @brief Convert vector2{i,u} -> vector2d, applying a multiplicative scaling
+ * factor.
+ */
+#define RCPPSW_MATH_VEC_SCALED_CONV2D(prefix)                           \
   static inline vector2d prefix##vec2dvec(const vector2##prefix& other, \
                                           double scale) {               \
     return vector2d(other.x() * scale, other.y() * scale);              \
   }
 
-#define CONV2U(prefix)                                                  \
+/**
+ * @brief Convert vector2d -> vector2u, applying a divisive scaling factor.
+ */
+#define RCPPSW_MATH_VEC_CONV2U(prefix)                                  \
   static inline vector2u prefix##vec2uvec(const vector2##prefix& other, \
                                           double scale) {               \
     return vector2u(static_cast<uint>(std::round(other.x() / scale)),   \
@@ -339,11 +350,11 @@ using vector2d = vector2<double>;
 /*******************************************************************************
  * Free Functions
  ******************************************************************************/
-DIRECT_CONV2D(u);
-DIRECT_CONV2D(i);
-SCALED_CONV2D(u);
-SCALED_CONV2D(i);
-CONV2U(d);
+RCPPSW_MATH_VEC_DIRECT_CONV2D(u);
+RCPPSW_MATH_VEC_DIRECT_CONV2D(i);
+RCPPSW_MATH_VEC_SCALED_CONV2D(u);
+RCPPSW_MATH_VEC_SCALED_CONV2D(i);
+RCPPSW_MATH_VEC_CONV2U(d);
 
 NS_END(math, rcppsw);
 

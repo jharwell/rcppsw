@@ -114,13 +114,13 @@
 #define RCPPSW_WRAP_DECL(Ret, Func, ...) Ret Func(void) __VA_ARGS__ h
 
 #define RCPPSW_WRAP_DEF(Class, Func, Handle, ...)                      \
-  auto Class::Func(void)                                               \
+  decltype(auto) Class::Func(void)                                     \
       __VA_ARGS__->decltype(std::declval<decltype(Handle)>().Func()) { \
     return (Handle).Func();                                            \
   }
 
 #define RCPPSW_WRAP_DEFP(Class, Func, Handle, NullRet, ...)             \
-  auto Class::Func(void)                                                \
+  decltype(auto) Class::Func(void)                                      \
       __VA_ARGS__->decltype(std::declval<decltype(*Handle)>().Func()) { \
     if (nullptr == Handle) {                                            \
       return NullRet;                                                   \

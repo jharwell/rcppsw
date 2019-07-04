@@ -44,14 +44,7 @@ abort_probability::abort_probability(
 double abort_probability::operator()(double exec_time,
                                      const time_estimate& whole_task) {
   if (!(whole_task.last_result() > 0)) {
-    /*
-     * Necessary to turn the lvalue into rvalue in C++14/gcc 5/7 in order to
-     * avoid linking error. Result of the static constexpr being odr-used. C++17
-     * obviates the need for this.
-     *
-     * @todo Revert this once I upgrade to C++17.
-     */
-    return set_result(static_cast<double>(kMIN_ABORT_PROB));
+    return set_result(kMIN_ABORT_PROB);
   }
   double ratio = exec_time / whole_task.last_result();
   double theta = 0.0;

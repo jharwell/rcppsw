@@ -29,11 +29,6 @@
 NS_START(rcppsw, robotics, steer2D, config, xml);
 
 /*******************************************************************************
- * Class Constants
- ******************************************************************************/
-constexpr char force_calculator_parser::kXMLRoot[];
-
-/*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void force_calculator_parser::parse(const ticpp::Element& node) {

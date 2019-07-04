@@ -31,13 +31,6 @@
 NS_START(rcppsw, ta);
 
 /*******************************************************************************
- * Constants
- ******************************************************************************/
-constexpr char subtask_sel_probability::kMethodBrutschy2014[];
-constexpr char subtask_sel_probability::kMethodHarwell2018[];
-constexpr char subtask_sel_probability::kMethodRandom[];
-
-/*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
 subtask_sel_probability::subtask_sel_probability(std::string method)

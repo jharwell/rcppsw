@@ -31,15 +31,6 @@
 NS_START(rcppsw, control);
 
 /*******************************************************************************
- * Class Constants
- ******************************************************************************/
-constexpr char waveform_generator::kSine[];
-constexpr char waveform_generator::kSquare[];
-constexpr char waveform_generator::kSawtooth[];
-constexpr char waveform_generator::kConstant[];
-constexpr char waveform_generator::kNull[];
-
-/*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
 waveform_generator::waveform_generator(void) {

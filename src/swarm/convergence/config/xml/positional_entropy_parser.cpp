@@ -29,11 +29,6 @@
 NS_START(rcppsw, swarm, convergence, config, xml);
 
 /*******************************************************************************
- * Global Variables
- ******************************************************************************/
-constexpr char positional_entropy_parser::kXMLRoot[];
-
-/*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void positional_entropy_parser::parse(const ticpp::Element& node) {

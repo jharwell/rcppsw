@@ -29,11 +29,6 @@
 NS_START(rcppsw, swarm, convergence, config, xml);
 
 /*******************************************************************************
- * Global Variables
- ******************************************************************************/
-constexpr char interactivity_parser::kXMLRoot[];
-
-/*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void interactivity_parser::parse(const ticpp::Element& node) {

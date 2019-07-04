@@ -31,11 +31,6 @@
 NS_START(rcppsw, robotics, kin2D, config, xml);
 
 /*******************************************************************************
- * Global Variables
- ******************************************************************************/
-constexpr char differential_drive_parser::kXMLRoot[];
-
-/*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void differential_drive_parser::parse(const ticpp::Element& node) {

@@ -26,6 +26,7 @@
 ******************************************************************************/
 #include <iostream>
 #include <string>
+#include <cmath>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
@@ -131,6 +132,7 @@ class range final : public er::client<range<T>> {
     }
     return value;
   }
+  T center(void) const { return (m_lb + m_ub)  / 2.0; }
 
   /**
    * @brief Return a string representation of the range in the form of [lb,ub]
@@ -149,7 +151,7 @@ class range final : public er::client<range<T>> {
    *
    * @return The new translated range.
    */
-  range translate(const T& value) { return range(m_lb - value, m_ub + value); }
+  range translate(const T& value) { return range(m_lb + value, m_ub + value); }
 
   /**
    * @brief For parsing a range from a string in the form of <lb>:<ub>
@@ -173,6 +175,47 @@ using rangei = range<int>;
 using ranged = range<double>;
 using rangef = range<float>;
 using rangeu = range<uint>;
+
+/*******************************************************************************
+ * Macros
+ ******************************************************************************/
+/**
+ * @brief Convert range{i,u} -> ranged directly, without applying any
+ * scaling.
+ */
+#define RCPPSW_MATH_RANGE_DIRECT_CONV2D(prefix)                           \
+  static inline ranged prefix##range2drange(const range##prefix& other) { \
+    return ranged(other.lb(), other.lb());                                \
+  }
+
+/**
+ * @brief Convert range{i,u} -> ranged, applying a multiplicative scaling
+ * factor.
+ */
+#define RCPPSW_MATH_RANGE_SCALED_CONV2D(prefix)                         \
+  static inline ranged prefix##range2drange(const range##prefix& other, \
+                                        double scale) {                 \
+    return ranged(other.lb() * scale, other.ub() * scale);              \
+  }
+
+/**
+ * @brief Convert ranged -> rangeu, applying a divisive scaling factor.
+ */
+#define RCPPSW_MATH_RANGE_CONV2U(prefix)                                \
+  static inline rangeu prefix##range2urange(const range##prefix& other, \
+                                          double scale) {               \
+    return rangeu(static_cast<uint>(std::round(other.lb() / scale)),   \
+                    static_cast<uint>(std::round(other.ub() / scale)));  \
+  }
+
+/*******************************************************************************
+ * Free Functions
+ ******************************************************************************/
+RCPPSW_MATH_RANGE_DIRECT_CONV2D(u);
+RCPPSW_MATH_RANGE_DIRECT_CONV2D(i);
+RCPPSW_MATH_RANGE_SCALED_CONV2D(u);
+RCPPSW_MATH_RANGE_SCALED_CONV2D(i);
+RCPPSW_MATH_RANGE_CONV2U(d);
 
 NS_END(math, rcppsw);
 

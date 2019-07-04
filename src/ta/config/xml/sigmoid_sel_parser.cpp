@@ -33,11 +33,6 @@ NS_START(rcppsw, ta, config, xml);
 namespace mxml = math::config::xml;
 
 /*******************************************************************************
- * Global Variables
- ******************************************************************************/
-constexpr char sigmoid_sel_parser::kXMLRoot[];
-
-/*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void sigmoid_sel_parser::parse(const ticpp::Element& node) {

@@ -36,14 +36,6 @@
 NS_START(rcppsw, ta);
 
 /*******************************************************************************
- * Global Variables
- ******************************************************************************/
-constexpr char bi_tab::kPartitionSrcExec[];
-constexpr char bi_tab::kPartitionSrcInterface[];
-constexpr char bi_tab::kSubtaskSelSrcExec[];
-constexpr char bi_tab::kSubtaskSelSrcInterface[];
-
-/*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
 bi_tab::bi_tab(const struct elements* elts,

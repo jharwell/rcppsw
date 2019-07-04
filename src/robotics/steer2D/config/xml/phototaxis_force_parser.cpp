@@ -30,11 +30,6 @@
 NS_START(rcppsw, robotics, steer2D, config, xml);
 
 /*******************************************************************************
- * Global Variables
- ******************************************************************************/
-constexpr char phototaxis_force_parser::kXMLRoot[];
-
-/*******************************************************************************
  * Member Functions
  ******************************************************************************/
 void phototaxis_force_parser::parse(const ticpp::Element& node) {

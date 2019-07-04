@@ -32,12 +32,6 @@
 NS_START(rcppsw, ta);
 
 /*******************************************************************************
- * Global Variables
- ******************************************************************************/
-constexpr char executable_task::kAbortSrcExec[];
-constexpr char executable_task::kAbortSrcInterface[];
-
-/*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
 executable_task::executable_task(const std::string& name,

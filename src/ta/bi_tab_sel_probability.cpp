@@ -34,12 +34,6 @@
 NS_START(rcppsw, ta);
 
 /*******************************************************************************
- * Constants
- ******************************************************************************/
-constexpr char bi_tab_sel_probability::kMethodHarwell2019[];
-constexpr char bi_tab_sel_probability::kMethodRandom[];
-
-/*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
 bi_tab_sel_probability::bi_tab_sel_probability(const std::string& method)
