@@ -29,6 +29,7 @@
 #include <string>
 
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/types/timestep.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -82,8 +83,8 @@ class base_metrics_collector {
    * reset after the specified number of timesteps in the interval has elapsed.
   */
   void interval_reset(void);
-  uint timestep(void) const { return m_timestep; }
-  void timestep_inc(void) { ++m_timestep; }
+  types::timestep timestep(void) const { return m_timestep; }
+  void timestep_inc(void) { m_timestep.set(m_timestep.v() + 1); }
 
   /**
    * @brief Reset metrics at the end of a timestep.
@@ -99,7 +100,7 @@ class base_metrics_collector {
    *
    * @return \c TRUE if a line was written, \c FALSE otherwise.
    */
-  bool csv_line_write(uint timestep);
+  bool csv_line_write(types::timestep t);
 
   /**
    * @brief Finalize metrics and flush files.
@@ -164,7 +165,7 @@ class base_metrics_collector {
   template <class T>
   std::string csv_entry_intavg(T sum, bool last = false) const {
     return std::to_string(static_cast<double>(sum) / interval()) +
-        ((last) ? "" : separator());
+           ((last) ? "" : separator());
   }
 
   /**
@@ -174,8 +175,8 @@ class base_metrics_collector {
    */
   template <class T>
   std::string csv_entry_tsavg(T sum, bool last = false) const {
-    return std::to_string(static_cast<double>(sum) / (timestep() + 1)) +
-        ((last) ? "" : separator());
+    return std::to_string(static_cast<double>(sum) / (timestep() + 1).v()) +
+           ((last) ? "" : separator());
   }
 
   /**
@@ -188,8 +189,8 @@ class base_metrics_collector {
   std::string csv_entry_domavg(T sum, U count, bool last = false) const {
     return (count > 0) ? std::to_string(static_cast<double>(sum) /
                                         static_cast<double>(count)) +
-        ((last) ? "" : separator())
-        : "0" + ((last) ? "" : separator());
+                             ((last) ? "" : separator())
+                       : "0" + ((last) ? "" : separator());
   }
 
  private:
@@ -202,12 +203,12 @@ class base_metrics_collector {
   std::string csv_header_build(void) const;
 
   /* clang-format off */
-  int           m_interval;
-  uint          m_timestep{0};
-  bool          m_cum_only;
-  std::string   m_ofname;
-  std::string   m_separator;
-  std::ofstream m_ofile{};
+  int             m_interval;
+  types::timestep m_timestep{0};
+  bool            m_cum_only;
+  std::string     m_ofname;
+  std::string     m_separator;
+  std::ofstream   m_ofile{};
   /* clang-format on */
 };
 

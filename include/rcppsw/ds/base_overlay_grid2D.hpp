@@ -24,8 +24,11 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <algorithm>
 #include <utility>
+
 #include "rcppsw/ds/base_grid2D.hpp"
+#include "rcppsw/types/discretize_ratio.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -41,8 +44,8 @@ NS_START(rcppsw, ds);
  *
  * @brief A 2D logical grid that is overlayed over a continuous environment. It
  * discretizes the continuous arena into a grid of a specified resolution
- * (e.g. it takes a continuous 10.0 x 5.0 space and discretizes it into a 50 x 25
- * grid of cells with a resolution of 0.2).
+ * (e.g. it takes a continuous 10.0 x 5.0 space and discretizes it into a 50 x
+ * 25 grid of cells with a resolution of 0.2).
  */
 template <typename T>
 class base_overlay_grid2D : public base_grid2D<T> {
@@ -55,7 +58,9 @@ class base_overlay_grid2D : public base_grid2D<T> {
   using circle_range_ret_type =
       std::pair<typename index_range::index, typename index_range::index>;
 
-  base_overlay_grid2D(double resolution, double x_max, double y_max)
+  base_overlay_grid2D(types::discretize_ratio resolution,
+                      double x_max,
+                      double y_max)
       : base_grid2D<T>(),
         m_resolution(resolution),
         m_x_max(x_max),
@@ -66,21 +71,21 @@ class base_overlay_grid2D : public base_grid2D<T> {
   /**
    * @brief Return the resolution of the grid.
    */
-  double resolution(void) const { return m_resolution; }
+  types::discretize_ratio resolution(void) const { return m_resolution; }
 
   /**
    * @brief Get the size of the X dimension of the discretized subgrid, at
    * whatever the resolution specified during object construction was.
    */
   size_t xdsize(void) const {
-    return static_cast<size_t>(std::ceil(m_x_max / m_resolution));
+    return static_cast<size_t>(std::ceil(m_x_max / m_resolution.v()));
   }
   /**
    * @brief Get the size of the Y dimension of the discretized subgrid, at
    * whatever the resolution specified during object construction was.
    */
   size_t ydsize(void) const {
-    return static_cast<size_t>(std::ceil(m_y_max / m_resolution));
+    return static_cast<size_t>(std::ceil(m_y_max / m_resolution.v()));
   }
 
   /**
@@ -144,9 +149,9 @@ class base_overlay_grid2D : public base_grid2D<T> {
 
  private:
   /* clang-format off */
-  double m_resolution;
-  double m_x_max;
-  double m_y_max;
+  types::discretize_ratio m_resolution;
+  double                  m_x_max;
+  double                  m_y_max;
   /* clang-format on */
 };
 

@@ -30,6 +30,7 @@
 
 #include "rcppsw/ds/overlay_grid2D.hpp"
 #include "rcppsw/math/vector2.hpp"
+#include "rcppsw/types/discretize_ratio.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -57,7 +58,7 @@ NS_START(rcppsw, ds);
 template <typename TupleTypes>
 class stacked_grid {
  public:
-  stacked_grid(double resolution, double x_max, double y_max)
+  stacked_grid(types::discretize_ratio resolution, double x_max, double y_max)
       : m_layers(kStackSize) {
     add_layers<kStackSize - 1>(resolution, x_max, y_max);
   }
@@ -154,7 +155,7 @@ class stacked_grid {
   /**
    * @see \ref base_overlay_grid2D::resolution().
    */
-  double resolution(void) const {
+  types::discretize_ratio resolution(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))
         ->resolution();
   }

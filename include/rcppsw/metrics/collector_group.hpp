@@ -27,9 +27,9 @@
 #include <algorithm>
 #include <functional>
 #include <map>
-#include <utility>
 #include <memory>
 #include <string>
+#include <utility>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/metrics/base_metrics_collector.hpp"
@@ -199,12 +199,12 @@ class collector_group {
    * @return \c TRUE iff ALL collectors in the group wrote out metrics this
    * timestep.
    */
-  bool metrics_write_all(uint timestep) {
+  bool metrics_write_all(types::timestep t) {
     return std::all_of(
         m_collectors.begin(),
         m_collectors.end(),
         [&](const std::pair<const std::string, mapped_type>& pair) {
-          return pair.second->csv_line_write(timestep);
+          return pair.second->csv_line_write(t);
         });
   }
 

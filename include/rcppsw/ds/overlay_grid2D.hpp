@@ -66,7 +66,7 @@ class overlay_grid2D final : public base_overlay_grid2D<T> {
    * @param y_max The real size in Y, which will be discretized into
    * Y/resolution discrete elements along the X dimension.
    */
-  overlay_grid2D(double resolution, double x_max, double y_max)
+  overlay_grid2D(types::discretize_ratio resolution, double x_max, double y_max)
       : base_overlay_grid2D<T>(resolution, x_max, y_max),
         m_cells(boost::extents[static_cast<typename index_range::index>(
             xdsize())][typename index_range::index(ydsize())]) {}

@@ -170,11 +170,10 @@
  * in their template argument lists will be considered distinct and trigger
  * SFINAE as expected.
  */
-#define RCPPSW_SFINAE_FUNC(...)                         \
+#define RCPPSW_SFINAE_FUNC(...) \
   typename std::enable_if<__VA_ARGS__, int>::type = 0
 
-#define RCPPSW_SFINAE_TYPE(...)                         \
-  typename std::enable_if<__VA_ARGS__, bool>::type
+#define RCPPSW_SFINAE_TYPE(...) typename std::enable_if<__VA_ARGS__, bool>::type
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -229,21 +228,6 @@ NS_END(detail);
 template <typename... Ts, typename Functor>
 void tuple_apply(const std::tuple<Ts...>& t, const Functor& functor) {
   detail::tuple_for_each(t, functor, std::index_sequence_for<Ts...>{});
-}
-
-template <typename T>
-T& maybe_deref(T& x) {
-  return x;
-}
-
-template <typename T>
-T& maybe_deref(T* x) {
-  return *x;
-}
-
-template <typename T>
-const T& maybe_deref(const T* x) {
-  return *x;
 }
 
 NS_END(rcppsw);

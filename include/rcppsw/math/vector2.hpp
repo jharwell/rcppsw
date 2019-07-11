@@ -30,6 +30,7 @@
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/radians.hpp"
+#include "rcppsw/types/discretize_ratio.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -211,8 +212,7 @@ class vector2 {
    *
    * Only available if the template argument is not floating point.
    */
-  template <typename U = T,
-            RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
   bool operator==(const vector2& other) const {
     return (m_x == other.m_x && m_y == other.m_y);
   }
@@ -322,7 +322,7 @@ using vector2d = vector2<double>;
  * @brief Convert vector2{i,u} -> vector2d directly, without applying any
  * scaling.
  */
-#define RCPPSW_MATH_VEC_DIRECT_CONV2D(prefix)                           \
+#define RCPPSW_MATH_VEC_DIRECT_CONV2D(prefix)                             \
   static inline vector2d prefix##vec2dvec(const vector2##prefix& other) { \
     return vector2d(other.x(), other.y());                                \
   }

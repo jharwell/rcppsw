@@ -24,9 +24,9 @@
 /*******************************************************************************
  * Includes
 ******************************************************************************/
-#include <iostream>
-#include <string>
 #include <cmath>
+#include <iosfwd>
+#include <string>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
@@ -132,7 +132,7 @@ class range final : public er::client<range<T>> {
     }
     return value;
   }
-  T center(void) const { return (m_lb + m_ub)  / 2.0; }
+  T center(void) const { return (m_lb + m_ub) / 2.0; }
 
   /**
    * @brief Return a string representation of the range in the form of [lb,ub]
@@ -194,7 +194,7 @@ using rangeu = range<uint>;
  */
 #define RCPPSW_MATH_RANGE_SCALED_CONV2D(prefix)                         \
   static inline ranged prefix##range2drange(const range##prefix& other, \
-                                        double scale) {                 \
+                                            double scale) {             \
     return ranged(other.lb() * scale, other.ub() * scale);              \
   }
 
@@ -203,9 +203,9 @@ using rangeu = range<uint>;
  */
 #define RCPPSW_MATH_RANGE_CONV2U(prefix)                                \
   static inline rangeu prefix##range2urange(const range##prefix& other, \
-                                          double scale) {               \
-    return rangeu(static_cast<uint>(std::round(other.lb() / scale)),   \
-                    static_cast<uint>(std::round(other.ub() / scale)));  \
+                                            double scale) {             \
+    return rangeu(static_cast<uint>(std::round(other.lb() / scale)),    \
+                  static_cast<uint>(std::round(other.ub() / scale)));   \
   }
 
 /*******************************************************************************

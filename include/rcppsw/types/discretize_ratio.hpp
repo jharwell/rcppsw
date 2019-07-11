@@ -1,5 +1,5 @@
 /**
- * @file maskable_enum.hpp
+ * @file discretize_ratio.hpp
  *
  * @copyright 2019 John Harwell, All rights reserved.
  *
@@ -18,33 +18,28 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_UTILS_MASKABLE_ENUM_HPP_
-#define INCLUDE_RCPPSW_UTILS_MASKABLE_ENUM_HPP_
+#ifndef INCLUDE_RCPPSW_TYPES_DISCRETIZE_RATIO_HPP_
+#define INCLUDE_RCPPSW_TYPES_DISCRETIZE_RATIO_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <type_traits>
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/types/named_type.hpp"
 
 /*******************************************************************************
- * Templates
+ * Namespaces/Decls
  ******************************************************************************/
-template <typename TEnum, RCPPSW_SFINAE_FUNC(std::is_enum<TEnum>::value)>
-__rcsw_pure TEnum operator|(const TEnum& lhs, const TEnum& rhs) {
-  using T = std::underlying_type_t<TEnum>;
-  return static_cast<TEnum>(static_cast<T>(lhs) | static_cast<T>(rhs));
-}
+NS_START(rcppsw, types);
 
-template <typename TEnum, RCPPSW_SFINAE_FUNC(std::is_enum<TEnum>::value)>
-__rcsw_pure bool operator&(const TEnum& lhs, const TEnum& rhs) {
-  using T = std::underlying_type_t<TEnum>;
-  return static_cast<T>(lhs) & static_cast<T>(rhs);
-}
+/*******************************************************************************
+ * Class Definitions
+ ******************************************************************************/
+/**
+ * @brief Specifies the ratio of discretized space to real space, and therefore
+ * should always be <= 1.0.
+ */
+using discretize_ratio = named_type<double, struct discretize_ratio_tag>;
 
-template <typename TEnum, RCPPSW_SFINAE_FUNC(std::is_enum<TEnum>::value)>
-TEnum operator|=(TEnum& lhs, const TEnum& rhs) {
-  return lhs = lhs | rhs;
-}
+NS_END(types, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_COMMON_MASKABLE_ENUM_HPP_ */
+#endif /* INCLUDE_RCPPSW_TYPES_DISCRETIZE_RATIO_HPP_ */

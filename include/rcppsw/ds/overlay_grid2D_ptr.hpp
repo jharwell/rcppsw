@@ -54,7 +54,7 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
   using base_overlay_grid2D<T*>::xdsize;
   using base_overlay_grid2D<T*>::ydsize;
 
-  overlay_grid2D_ptr(double resolution,
+  overlay_grid2D_ptr(types::discretize_ratio resolution,
                      size_t x_max,
                      size_t y_max,
                      Args&&... args)

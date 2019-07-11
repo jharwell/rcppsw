@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include <random>
+#include <string>
 
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/math/expression.hpp"
