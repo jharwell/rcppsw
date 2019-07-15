@@ -103,8 +103,8 @@ class tdgraph : public er::client<tdgraph> {
    */
   status_t set_root(std::unique_ptr<polled_task> v);
 
-  const polled_task* root(void) const;
-  polled_task* root(void);
+  const polled_task* root(void) const RCSW_PURE;
+  polled_task* root(void) RCSW_PURE;
 
   /**
    * @brief Set the children for an existing node.

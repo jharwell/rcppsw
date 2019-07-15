@@ -43,7 +43,7 @@ void sigmoid_parser::parse(const ticpp::Element& node) {
   XML_PARSE_ATTR(snode, m_config, gamma);
 } /* parse() */
 
-__rcsw_pure bool sigmoid_parser::validate(void) const {
+bool sigmoid_parser::validate(void) const {
   CHECK(m_config->reactivity > 0.0);
   CHECK(m_config->offset > 0.0);
   return true;

@@ -40,7 +40,7 @@ void ema_parser::parse(const ticpp::Element& node) {
   XML_PARSE_ATTR(enode, m_config, alpha);
 } /* parse() */
 
-__rcsw_pure bool ema_parser::validate(void) const {
+bool ema_parser::validate(void) const {
   CHECK(m_config->alpha > 0.0);
   return true;
 

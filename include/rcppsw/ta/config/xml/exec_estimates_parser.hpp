@@ -55,7 +55,7 @@ class exec_estimates_parser final : public rcppsw::config::xml::xml_config_parse
   using config_type = exec_estimates_config;
 
   explicit exec_estimates_parser(
-      std::list<std::string> task_names = std::list<std::string>())
+      std::list<std::string> task_names = std::list<std::string>()) noexcept
       : ER_CLIENT_INIT("rcppsw.ta.exec_estimates_parser"),
         m_task_names(std::move(task_names)) {}
 
@@ -65,15 +65,17 @@ class exec_estimates_parser final : public rcppsw::config::xml::xml_config_parse
    */
   static constexpr char kXMLRoot[] = "task_exec_estimates";
 
-  void parse(const ticpp::Element& node) override;
-  bool validate(void) const override;
+  void parse(const ticpp::Element& node) override RCSW_COLD;
+  bool validate(void) const override RCSW_ATTR(pure, cold);
 
-  std::string xml_root(void) const override { return kXMLRoot; }
+  RCSW_COLD std::string xml_root(void) const override { return kXMLRoot; }
 
-  void task_add(const std::string& task) { m_task_names.push_back(task); }
+  RCSW_COLD void task_add(const std::string& task) {
+    m_task_names.push_back(task);
+  }
 
  private:
-  rcppsw::config::base_config* config_get_impl(void) const override {
+  RCSW_COLD rcppsw::config::base_config* config_get_impl(void) const override {
     return m_config.get();
   }
 

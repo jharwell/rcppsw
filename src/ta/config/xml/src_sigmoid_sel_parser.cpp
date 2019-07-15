@@ -44,7 +44,7 @@ void src_sigmoid_sel_parser::parse(const ticpp::Element& node) {
   XML_PARSE_ATTR(pnode, m_config, input_src);
 } /* parse() */
 
-__rcsw_pure bool src_sigmoid_sel_parser::validate(void) const {
+ bool src_sigmoid_sel_parser::validate(void) const {
   return m_sigmoid.validate();
 } /* validate() */
 

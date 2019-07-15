@@ -56,9 +56,10 @@ void task_alloc_parser::parse(const ticpp::Element& node) {
       *m_tab_sel.config_get<src_sigmoid_sel_parser::config_type>();
 } /* parse() */
 
-__rcsw_pure bool task_alloc_parser::validate(void) const {
+bool task_alloc_parser::validate(void) const {
   return m_estimation.validate() && m_abort.validate() &&
          m_subtask_sel.validate() && m_partitioning.validate() &&
          m_tab_sel.validate();
 } /* validate() */
+
 NS_END(xml, config, ta, rcppsw);

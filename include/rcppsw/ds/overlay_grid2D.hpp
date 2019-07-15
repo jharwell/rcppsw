@@ -152,7 +152,7 @@ class overlay_grid2D final : public base_overlay_grid2D<T> {
                   [static_cast<typename index_range::index>(j)];
   }
 
-  __rcsw_pure T& access(const math::vector2u& c) override {
+  RCSW_PURE T& access(const math::vector2u& c) override {
     return m_cells[static_cast<typename index_range::index>(c.x())]
                   [static_cast<typename index_range::index>(c.y())];
   }

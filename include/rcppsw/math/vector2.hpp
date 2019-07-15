@@ -96,12 +96,12 @@ class vector2 {
    * @param length The vector length.
    * @param angle The vector angle.
    */
-  vector2(T length, const radians& angle)
+  vector2(T length, const radians& angle) noexcept
       : m_x(std::cos(angle.value()) * length),
         m_y(std::sin(angle.value()) * length) {}
 
-  T x(void) const __rcsw_check_return { return m_x; }
-  T y(void) const __rcsw_check_return { return m_y; }
+  T x(void) const RCSW_CHECK_RET { return m_x; }
+  T y(void) const RCSW_CHECK_RET { return m_y; }
   void x(const T& x) { m_x = x; }
   void y(const T& y) { m_y = y; }
 
@@ -135,14 +135,14 @@ class vector2 {
   /**
    * @brief Returns the square length of this vector.
    */
-  T square_length(void) const __rcsw_check_return {
+  T square_length(void) const RCSW_CHECK_RET {
     return (m_x * m_x) + (m_y * m_y);
   }
 
   /**
    * Returns the length of this vector.
    */
-  T length(void) const __rcsw_check_return {
+  T length(void) const RCSW_CHECK_RET {
     return std::sqrt(square_length());
   }
 

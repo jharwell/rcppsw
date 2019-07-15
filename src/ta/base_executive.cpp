@@ -46,11 +46,11 @@ base_executive::~base_executive(void) = default;
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-__rcsw_pure const polled_task* base_executive::root_task(void) const {
+ const polled_task* base_executive::root_task(void) const {
   return m_graph->root();
 } /* root_task() */
 
-__rcsw_pure polled_task* base_executive::root_task(void) {
+ polled_task* base_executive::root_task(void) {
   return m_graph->root();
 } /* root_task() */
 

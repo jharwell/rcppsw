@@ -77,7 +77,7 @@ class state_guard_condition0 : public state_guard {
   ~state_guard_condition0(void) override = default;
 
   bool invoke_guard_condition(base_fsm* sm,
-                              __rcsw_unused const event_data*) const override {
+                              RCSW_UNUSED const event_data*) const override {
     auto* derived_fsm = static_cast<SM*>(sm);
     return (derived_fsm->*Func)();
   }

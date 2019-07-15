@@ -87,13 +87,6 @@ class base_metrics_collector {
   void timestep_inc(void) { m_timestep.set(m_timestep.v() + 1); }
 
   /**
-   * @brief Reset metrics at the end of a timestep.
-   *
-   * Should be called every timestep (default implementation does nothing).
-   */
-  void timestep_reset(void) { reset_after_timestep(); }
-
-  /**
    * @brief Write out the gathered metrics.
    *
    * @param timestep The current timestep.

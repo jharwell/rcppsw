@@ -56,12 +56,13 @@ class waveform_parser final : public rcppsw::config::xml::xml_config_parser {
    * @brief The XML tag that all configration values should appear under.
    */
   static constexpr char kXMLRoot[] = "waveform";
-  void parse(const ticpp::Element& node) override;
 
-  std::string xml_root(void) const override { return kXMLRoot; }
+  void parse(const ticpp::Element& node) override RCSW_COLD;
+
+  RCSW_COLD std::string xml_root(void) const override { return kXMLRoot; }
 
  private:
-  rcppsw::config::base_config* config_get_impl(void) const override {
+  RCSW_COLD rcppsw::config::base_config* config_get_impl(void) const override {
     return m_config.get();
   }
 

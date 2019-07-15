@@ -120,7 +120,7 @@ class convergence_calculator final : public metrics::swarm::convergence_metrics,
    * @brief Return swarm convergence status in an OR fashion (i.e. if ANY of the
    * configured methods say convergence has occured, return \c TRUE).
    */
-  bool converged(void) const;
+  bool converged(void) const RCSW_PURE;
 
   /**
    * @brief Update convergence calculations for the current timestep

@@ -94,15 +94,15 @@ void bi_tab::task_finish_update(polled_task* const finished) {
   m_active_task = nullptr;
 } /* task_finish_update() */
 
-__rcsw_pure bool bi_tab::contains_task(const polled_task* const task) const {
+ bool bi_tab::contains_task(const polled_task* const task) const {
   return task == m_root || task == m_child1 || task == m_child2;
 } /* contains_task() */
 
-__rcsw_pure bool bi_tab::task_is_root(const polled_task* const task) const {
+ bool bi_tab::task_is_root(const polled_task* const task) const {
   return task == m_root;
 } /* task_is_root() */
 
-__rcsw_pure bool bi_tab::task_is_child(const polled_task* const task) const {
+ bool bi_tab::task_is_child(const polled_task* const task) const {
   return task == m_child1 || task == m_child2;
 } /* task_is_child() */
 

@@ -57,12 +57,12 @@ class sigmoid_sel_parser : public rcppsw::config::xml::xml_config_parser {
    */
   static constexpr char kXMLRoot[] = "sigmoid_sel";
 
-  void parse(const ticpp::Element& node) override;
-  bool validate(void) const override;
-  std::string xml_root(void) const override { return kXMLRoot; }
+  void parse(const ticpp::Element& node) override RCSW_COLD;
+  bool validate(void) const override RCSW_ATTR(pure, cold);
+  RCSW_COLD std::string xml_root(void) const override { return kXMLRoot; }
 
  private:
-  rcppsw::config::base_config* config_get_impl(void) const override {
+  RCSW_COLD rcppsw::config::base_config* config_get_impl(void) const override {
     return m_config.get();
   }
 

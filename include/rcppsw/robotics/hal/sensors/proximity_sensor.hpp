@@ -131,7 +131,7 @@ class _proximity_sensor {
   }
 
  private:
-  __rcsw_pure bool obj_within_prox(const math::vector2d& obj,
+  RCSW_PURE bool obj_within_prox(const math::vector2d& obj,
                                    double obj_delta,
                                    const math::range<math::radians>& fov) const {
     return obj.length() >= obj_delta && fov.contains(obj.angle());

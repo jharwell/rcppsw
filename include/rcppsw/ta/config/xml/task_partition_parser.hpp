@@ -57,13 +57,13 @@ class task_partition_parser final : public rcppsw::config::xml::xml_config_parse
    */
   static constexpr char kXMLRoot[] = "task_partition";
 
-  bool validate(void) const override;
-  void parse(const ticpp::Element& node) override;
+  bool validate(void) const override RCSW_COLD;
+  void parse(const ticpp::Element& node) override RCSW_COLD;
 
-  std::string xml_root(void) const override { return kXMLRoot; }
+  RCSW_COLD std::string xml_root(void) const override { return kXMLRoot; }
 
  private:
-  rcppsw::config::base_config* config_get_impl(void) const override {
+  RCSW_COLD rcppsw::config::base_config* config_get_impl(void) const override {
     return m_config.get();
   }
 

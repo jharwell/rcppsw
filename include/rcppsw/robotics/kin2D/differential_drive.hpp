@@ -179,7 +179,7 @@ class differential_drive : public kin2D::model,
   /**
    * @brief Limit the value to [-1, 1].
    */
-  double limit(double value) const;
+  double limit(double value) const RCSW_PURE;
 
   /* clang-format off */
   bool                                        m_hard_turn{false};

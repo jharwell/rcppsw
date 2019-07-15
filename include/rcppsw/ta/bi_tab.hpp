@@ -123,18 +123,18 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
   /**
    * @brief Returns \c TRUE iff the argument is one of the 3 tasks in the TAB.
    */
-  bool contains_task(const polled_task* task) const;
+  bool contains_task(const polled_task* task) const RCSW_PURE;
 
   /**
    * @brief Returns \c TRUE iff the argument is the root task in the TAB.
    */
-  bool task_is_root(const polled_task* task) const;
+  bool task_is_root(const polled_task* task) const RCSW_PURE;
 
   /**
    * @brief Returns \c TRUE iff the argument is one of the child tasks in the
    * TAB.
    */
-  bool task_is_child(const polled_task* task) const;
+  bool task_is_child(const polled_task* task) const RCSW_PURE;
 
   const polled_task* root(void) const { return m_root; }
   const polled_task* child1(void) const { return m_child1; }

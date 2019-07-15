@@ -46,7 +46,7 @@ void task_partition_parser::parse(const ticpp::Element& node) {
   XML_PARSE_ATTR_DFLT(pnode, m_config, never_partition, false);
 } /* parse() */
 
-__rcsw_pure bool task_partition_parser::validate(void) const {
+bool task_partition_parser::validate(void) const {
   if (is_parsed()) {
     return m_sigmoid.validate();
   }

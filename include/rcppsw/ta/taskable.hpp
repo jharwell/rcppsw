@@ -80,7 +80,7 @@ class taskable : public virtual metrics::base_metrics {
   /**
    * @brief Start the task with the specified argument.
    */
-  virtual void task_start(__rcsw_unused const taskable_argument* c_arg) = 0;
+  virtual void task_start(RCSW_UNUSED const taskable_argument* c_arg) = 0;
 };
 
 NS_END(ta, rcppsw);

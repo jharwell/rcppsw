@@ -42,14 +42,16 @@ class timestep : public named_type<uint, struct timestep_tag> {
  public:
   using named_type<uint, timestep_tag>::named_type;
 
-  timestep operator+(const timestep& other) const {
-    timestep res(*this);
-    return res += other;
-  }
+  timestep(const timestep&) = default;
   timestep& operator=(const timestep& other) {
     set(other.v());
     return *this;
   }
+  timestep operator+(const timestep& other) const {
+    timestep res(*this);
+    return res += other;
+  }
+
   timestep operator+(uint n) const {
     timestep res(v() + n);
     return res;

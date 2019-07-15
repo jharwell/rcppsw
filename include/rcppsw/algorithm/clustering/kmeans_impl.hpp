@@ -59,7 +59,7 @@ class kmeans_impl : public clustering_impl<T, policy::NC> {
     first_touch_allocation(data, membership);
   }
 
-  __rcsw_pure bool converged(const cluster_vector& clusters) const override {
+  RCSW_PURE bool converged(const cluster_vector& clusters) const override {
     std::size_t sum = 0;
 #pragma omp parallel for num_threads(m_n_threads) reduction(+ : sum)
     for (size_t i = 0; i < clusters.size(); ++i) {

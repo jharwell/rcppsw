@@ -57,7 +57,7 @@ class angular_order final : public convergence_measure {
    * parameters and the current state of the swarm.
    */
   bool operator()(const std::vector<math::radians>& headings,
-                  __rcsw_unused uint n_threads) {
+                  RCSW_UNUSED uint n_threads) {
     double y = 0.0;
     double x = 0.0;
 

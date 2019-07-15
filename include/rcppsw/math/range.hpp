@@ -58,10 +58,10 @@ class range final : public er::client<range<T>> {
         m_ub(ub),
         m_span(m_ub - m_lb) {}
 
-  T lb(void) const __rcsw_check_return { return m_lb; }
-  T ub(void) const __rcsw_check_return { return m_ub; }
+  T lb(void) const RCSW_CHECK_RET { return m_lb; }
+  T ub(void) const RCSW_CHECK_RET { return m_ub; }
 
-  T span(void) const __rcsw_check_return { return m_span; }
+  T span(void) const RCSW_CHECK_RET { return m_span; }
 
   void lb(const T& lb) {
     ER_ASSERT(lb < m_ub, "Lower bound >= upper bound");
@@ -123,7 +123,7 @@ class range final : public er::client<range<T>> {
    *
    * @return The wrapped value.
    */
-  __rcsw_pure T wrap_value(T value) const __rcsw_check_return {
+  RCSW_PURE T wrap_value(T value) const RCSW_CHECK_RET {
     while (value > m_ub) {
       value -= m_span;
     }

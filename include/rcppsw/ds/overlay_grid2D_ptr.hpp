@@ -123,11 +123,11 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
         x_min, y_min, x_max, y_max);
   }
 
-  __rcsw_pure T& access(size_t i, size_t j) override {
+  RCSW_PURE T& access(size_t i, size_t j) override {
     return *m_cells[static_cast<typename index_range::index>(i)]
                    [static_cast<typename index_range::index>(j)];
   }
-  __rcsw_pure T& access(const math::vector2u& c) override {
+  RCSW_PURE T& access(const math::vector2u& c) override {
     return *m_cells[static_cast<typename index_range::index>(c.x())]
                    [static_cast<typename index_range::index>(c.y())];
   }

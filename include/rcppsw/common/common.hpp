@@ -114,13 +114,13 @@
 #define RCPPSW_WRAP_DECL(Ret, Func, ...) Ret Func(void) __VA_ARGS__ h
 
 #define RCPPSW_WRAP_DEF(Class, Func, Handle, ...)                      \
-  decltype(auto) Class::Func(void)                                     \
+  auto Class::Func(void)                                               \
       __VA_ARGS__->decltype(std::declval<decltype(Handle)>().Func()) { \
     return (Handle).Func();                                            \
   }
 
 #define RCPPSW_WRAP_DEFP(Class, Func, Handle, NullRet, ...)             \
-  decltype(auto) Class::Func(void)                                      \
+  auto Class::Func(void)                                                \
       __VA_ARGS__->decltype(std::declval<decltype(*Handle)>().Func()) { \
     if (nullptr == Handle) {                                            \
       return NullRet;                                                   \
@@ -138,7 +138,7 @@
  * for a class).
  */
 #define RCPPSW_WRAP_OVERRIDE_DECL(Ret, Func, ...) \
-  Ret Func(void) __VA_ARGS__ override __rcsw_pure
+  Ret Func(void) __VA_ARGS__ override RCSW_PURE
 
 /**
  * @def RCPPSW_WRAP_OVERRIDE_DEF(Ret, Func, ...)
@@ -148,10 +148,10 @@
  * result returned.
  */
 #define RCPPSW_WRAP_OVERRIDE_DEF(Class, Func, Handle, ...) \
-  __rcsw_pure RCPPSW_WRAP_DEF(Class, Func, Handle, __VA_ARGS__)
+  RCSW_PURE RCPPSW_WRAP_DEF(Class, Func, Handle, __VA_ARGS__)
 
 #define RCPPSW_WRAP_OVERRIDE_DEFP(Class, Func, Handle, NullRet, ...) \
-  __rcsw_pure RCPPSW_WRAP_DEFP(Class, Func, Handle, NullRet, __VA_ARGS__)
+  RCSW_PURE RCPPSW_WRAP_DEFP(Class, Func, Handle, NullRet, __VA_ARGS__)
 
 /**
  * @def RCPPSW_SFINAE_FUNC(...)

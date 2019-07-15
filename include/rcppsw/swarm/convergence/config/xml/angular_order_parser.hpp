@@ -56,13 +56,13 @@ class angular_order_parser : public rcppsw::config::xml::xml_config_parser {
    */
   static constexpr char kXMLRoot[] = "angular_order";
 
-  void parse(const ticpp::Element& node) override;
+  void parse(const ticpp::Element& node) override RCSW_COLD;
 
-  std::string xml_root(void) const override { return kXMLRoot; }
+  RCSW_COLD std::string xml_root(void) const override { return kXMLRoot; }
 
 
  private:
-  const rcppsw::config::base_config* config_get_impl(void) const override {
+  RCSW_COLD const rcppsw::config::base_config* config_get_impl(void) const override {
     return m_config.get();
   }
 

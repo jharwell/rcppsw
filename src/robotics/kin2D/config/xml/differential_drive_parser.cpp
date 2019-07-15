@@ -44,7 +44,7 @@ void differential_drive_parser::parse(const ticpp::Element& node) {
   m_config->soft_turn_max = math::to_radians(angle);
 } /* parse() */
 
-__rcsw_pure bool differential_drive_parser::validate(void) const {
+bool differential_drive_parser::validate(void) const {
   CHECK(m_config->soft_turn_max.value() > 0.0);
   CHECK(m_config->max_speed > 0.0);
   return true;

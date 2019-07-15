@@ -59,17 +59,17 @@ class task_alloc_parser final : public rcppsw::config::xml::xml_config_parser {
    */
   static constexpr char kXMLRoot[] = "task_alloc";
 
-  void parse(const ticpp::Element& node) override;
-  bool validate(void) const override;
+  void parse(const ticpp::Element& node) override RCSW_COLD;
+  bool validate(void) const override RCSW_ATTR(pure, cold);
 
-  std::string xml_root(void) const override { return kXMLRoot; }
+  RCSW_COLD std::string xml_root(void) const override { return kXMLRoot; }
 
-  void exec_est_task_add(const std::string& task) {
+  RCSW_COLD void exec_est_task_add(const std::string& task) {
     m_estimation.task_add(task);
   }
 
  private:
-  rcppsw::config::base_config* config_get_impl(void) const override {
+  RCSW_COLD rcppsw::config::base_config* config_get_impl(void) const override {
     return m_config.get();
   }
 

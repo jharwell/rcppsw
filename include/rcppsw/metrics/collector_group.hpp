@@ -169,18 +169,6 @@ class collector_group {
   }
 
   /**
-   * @brief Call the \ref base_metrics_collector::timestep_reset() function on
-   * all collectors in the group.
-   */
-  void timestep_reset_all(void) {
-    std::for_each(m_collectors.begin(),
-                  m_collectors.end(),
-                  [&](const std::pair<const std::string, mapped_type>& pair) {
-                    pair.second->timestep_reset();
-                  });
-  }
-
-  /**
    * @brief Call the \ref base_metrics_collector::timestep_inc() function on all
    * collectors in the group.
    */

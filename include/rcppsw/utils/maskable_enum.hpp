@@ -31,13 +31,13 @@
  * Templates
  ******************************************************************************/
 template <typename TEnum, RCPPSW_SFINAE_FUNC(std::is_enum<TEnum>::value)>
-__rcsw_pure TEnum operator|(const TEnum& lhs, const TEnum& rhs) {
+RCSW_PURE TEnum operator|(const TEnum& lhs, const TEnum& rhs) {
   using T = std::underlying_type_t<TEnum>;
   return static_cast<TEnum>(static_cast<T>(lhs) | static_cast<T>(rhs));
 }
 
 template <typename TEnum, RCPPSW_SFINAE_FUNC(std::is_enum<TEnum>::value)>
-__rcsw_pure bool operator&(const TEnum& lhs, const TEnum& rhs) {
+RCSW_PURE bool operator&(const TEnum& lhs, const TEnum& rhs) {
   using T = std::underlying_type_t<TEnum>;
   return static_cast<T>(lhs) & static_cast<T>(rhs);
 }

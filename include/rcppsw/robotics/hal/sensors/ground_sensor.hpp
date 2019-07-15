@@ -71,7 +71,7 @@ class _ground_sensor {
    * (this may not be used, depending on the actual hardware mapped to).
    */
   struct reading {
-    reading(double v, double d) : value(v), distance(d) {}
+    reading(double v, double d) noexcept : value(v), distance(d) {}
 
     double value;
     double distance;

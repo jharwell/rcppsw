@@ -42,7 +42,7 @@ bi_tdgraph_executive::bi_tdgraph_executive(
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-__rcsw_pure const bi_tab* bi_tdgraph_executive::active_tab(void) const {
+ const bi_tab* bi_tdgraph_executive::active_tab(void) const {
   auto bigraph = static_cast<const bi_tdgraph*>(graph());
   return bigraph->active_tab();
 } /* active_tab() */

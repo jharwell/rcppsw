@@ -41,12 +41,13 @@ class spatial_dist : public named_type<double, struct spatial_dist_tag> {
  public:
   using named_type<double, spatial_dist_tag>::named_type;
 
-  spatial_dist& operator+=(const spatial_dist& other) {
-    set(v() + other.v());
-    return *this;
-  }
+  spatial_dist(const spatial_dist&) = default;
   spatial_dist& operator=(const spatial_dist& other) {
     set(other.v());
+    return *this;
+  }
+  spatial_dist& operator+=(const spatial_dist& other) {
+    set(v() + other.v());
     return *this;
   }
   bool operator<(const spatial_dist& other) const {

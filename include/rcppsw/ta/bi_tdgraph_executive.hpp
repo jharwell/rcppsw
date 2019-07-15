@@ -61,7 +61,7 @@ class bi_tdgraph_executive final : public base_executive,
   /**
    * @brief Get the TAB corresponding to the currently active task.
    */
-  const bi_tab* active_tab(void) const;
+  const bi_tab* active_tab(void) const RCSW_PURE;
 
   /**
    * @brief Set an optional callback that will be run when a new task allocation

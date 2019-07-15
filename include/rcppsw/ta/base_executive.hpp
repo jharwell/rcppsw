@@ -119,8 +119,8 @@ class base_executive : public rcppsw::er::client<base_executive> {
   bool update_interface_ests(void) const { return m_update_interface_ests; }
 
  protected:
-  const polled_task* root_task(void) const;
-  polled_task* root_task(void);
+  const polled_task* root_task(void) const RCSW_PURE;
+  polled_task* root_task(void) RCSW_PURE;
 
   void current_task(polled_task* current_task) {
     m_current_task = current_task;

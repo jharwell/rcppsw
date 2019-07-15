@@ -55,13 +55,13 @@ class phototaxis_force_parser final : public rcppsw::config::xml::xml_config_par
    */
   static constexpr char kXMLRoot[] = "phototaxis_force";
 
-  void parse(const ticpp::Element& node) override;
-  bool validate(void) const override;
+  void parse(const ticpp::Element& node) override RCSW_COLD;
+  bool validate(void) const override RCSW_ATTR(cold, pure);
 
-  std::string xml_root(void) const override { return kXMLRoot; }
+  RCSW_COLD std::string xml_root(void) const override { return kXMLRoot; }
 
  private:
-  const rcppsw::config::base_config* config_get_impl(void) const override {
+  RCSW_COLD const rcppsw::config::base_config* config_get_impl(void) const override {
     return m_config.get();
   }
 

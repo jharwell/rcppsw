@@ -61,7 +61,7 @@ void force_calculator_parser::parse(const ticpp::Element& node) {
   }
 } /* parse() */
 
-__rcsw_pure bool force_calculator_parser::validate(void) const {
+ bool force_calculator_parser::validate(void) const {
   return m_avoidance.validate() && m_arrival.validate() &&
          m_wander.validate() && m_polar.validate() && m_phototaxis.validate();
 } /* validate() */

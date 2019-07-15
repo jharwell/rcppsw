@@ -40,7 +40,7 @@ void avoidance_force_parser::parse(const ticpp::Element& node) {
   }
 } /* parse() */
 
-__rcsw_pure bool avoidance_force_parser::validate(void) const {
+bool avoidance_force_parser::validate(void) const {
   if (is_parsed()) {
     CHECK(m_config->max > 0.0);
   }
