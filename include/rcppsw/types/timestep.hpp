@@ -80,7 +80,7 @@ class timestep : public named_type<uint, struct timestep_tag> {
   bool operator>(const timestep& other) const { return v() > other.v(); }
   bool operator>(uint other) const { return v() > other; }
   bool operator>=(const timestep& other) const { return v() >= other.v(); }
-  bool operator<(uint other) const { return v() > other; }
+  bool operator<(uint other) const { return v() < other; }
 };
 
 NS_END(types, rcppsw);

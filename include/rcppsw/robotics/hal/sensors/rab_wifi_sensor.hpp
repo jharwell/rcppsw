@@ -53,7 +53,7 @@ NS_END(detail);
  ******************************************************************************/
 /**
  * @class rab_wifi_sensor
- * @ingroup rcppsw robotics hal
+ * @ingroup rcppsw robotics hal sensors
  *
  * @brief Wireless communication sensor with range and bearing information for
  * the following supported robots:

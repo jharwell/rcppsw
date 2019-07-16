@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <vector>
 #include <limits>
+#include <boost/optional.hpp>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/robotics/hal/hal.hpp"
@@ -58,7 +59,7 @@ NS_END(detail);
  ******************************************************************************/
 /**
  * @class proximity_sensor
- * @ingroup rcppsw robotics hal
+ * @ingroup rcppsw robotics hal sensors
  *
  * @brief Proxmity sensor wrapper for the following supported robots:
  *
@@ -67,9 +68,36 @@ NS_END(detail);
 template <typename TSensor>
 class _proximity_sensor {
  public:
-  explicit _proximity_sensor(TSensor * const sensor)
-      : m_sensor(sensor) {}
+  explicit _proximity_sensor(TSensor * const sensor) : m_sensor(sensor) {}
 
+  /**
+   * @brief Return the average object reading within proximity for the
+   * robot. Proximity is defined as:
+   *
+   * - Within the "go straight" angle range for the robot
+   *
+   * If there are not enough objects meeting this criteria that are close enough
+   * such that the average distance to them is > than the provided delta,
+   * nothing is returned
+   */
+  template <typename U = TSensor,
+            RCPPSW_SFINAE_FUNC(detail::is_argos_proximity_sensor<U>::value)>
+  boost::optional<math::vector2d> avg_prox_obj(
+      double obj_delta,
+      const math::range<math::radians>& go_straight_range) const {
+    math::vector2d accum;
+    for (auto& r : readings()) {
+      accum += r;
+    }
+    if (go_straight_range.contains(accum.angle()) &&
+        accum.length() <= obj_delta) {
+      return boost::optional<math::vector2d>();
+    } else {
+      return boost::make_optional(accum);
+    }
+  }
+
+ private:
   /**
    * @brief Get the current proximity sensor readings for the footbot robot.
    *
@@ -87,57 +115,9 @@ class _proximity_sensor {
     return ret;
   }
 
-  /**
-   * @brief Return the closest object within proximity, which is defined as a
-   * delta for the proximity sensor + FOV (i.e. prox objects are those within
-   * the specified distance to the robot, and those that fall within a specific
-   * angle range (e.g. objects behind the robot are ignored). )
-   *
-   * Should be used in conjunction with \ref prox_obj_exists().
-   */
-  template <typename U = TSensor,
-            RCPPSW_SFINAE_FUNC(detail::is_argos_proximity_sensor<U>::value)>
-  math::vector2d closest_prox_obj(const math::vector2d& position,
-              double obj_delta,
-              const math::range<math::radians>& fov) const {
-    math::vector2d closest(0, 0);
-
-    for (auto& r : readings()) {
-      if (obj_within_prox(r, obj_delta, fov)) {
-        if ((position - r).length() < closest.length() ||
-            closest.length() <= std::numeric_limits<double>::epsilon()) {
-          closest = r;
-        }
-      }
-    } /* for(r..) */
-    return closest;
-  }
-
-  /**
-   * @brief Figure out if an object exists in the robot's proximity
-   *
-   * A proximity object is defined as one that is closer than the defined
-   * object delta to the robot. Note that the object delta is NOT a measure
-   * of distance, but a measure [0, 1] indicating how close an objec is which
-   * increases exponentially as the object nears.
-   *
-   * @return \c TRUE if an object is found meeting the stated criteria, \c FALSE
-   * otherwise.
-   */
-  bool prox_obj_exists(const math::vector2d& position,
-                            double obj_delta,
-                            const math::range<math::radians>& fov) const {
-    return closest_prox_obj(position, obj_delta, fov).length() > 0.0;
-  }
-
- private:
-  RCSW_PURE bool obj_within_prox(const math::vector2d& obj,
-                                   double obj_delta,
-                                   const math::range<math::radians>& fov) const {
-    return obj.length() >= obj_delta && fov.contains(obj.angle());
-  }
-
+  /* clang-format off */
   TSensor* const m_sensor;
+  /* clang-format on */
 };
 
 #if HAL_CONFIG == HAL_CONFIG_ARGOS_FOOTBOT

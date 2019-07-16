@@ -79,13 +79,13 @@ status_t differential_drive::actuate(const kin::twist& twist) {
 } /* actuate() */
 
 status_t differential_drive::fsm_drive(double speed,
-                                       const math::radians& angle,
-                                       const std::pair<bool, bool>& force) {
+                                       const math::radians& angle) {
   std::pair<double, double> speeds;
   ER_CHECK(kFSMDrive == m_drive_type, "Cannot actuate: not in FSM drive mode");
-  m_fsm.change_velocity(speed, angle, force);
+  m_fsm.change_velocity(speed, angle);
   speeds = m_fsm.wheel_speeds();
-  speeds = normalize_outputs(speeds);
+
+  /* don't need to normalize--done by fsm internally */
   m_left_linspeed = speeds.first;
   m_right_linspeed = speeds.second;
   m_actuator.set_wheel_speeds(m_left_linspeed, m_right_linspeed);

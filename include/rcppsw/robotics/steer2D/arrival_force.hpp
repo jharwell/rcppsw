@@ -62,7 +62,6 @@ class arrival_force {
   const double mc_slowing_radius;
 
   bool         m_within_slowing_radius{false};
-  double       m_last_angle{0.0};
   /* clang-format on */
 };
 

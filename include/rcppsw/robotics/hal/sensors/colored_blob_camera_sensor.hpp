@@ -56,7 +56,7 @@ NS_END(detail);
  ******************************************************************************/
 /**
  * @class colored_blob_camera_sensor
- * @ingroup rcppsw robotics hal
+ * @ingroup rcppsw robotics hal sensors
  *
  * @brief Omnidirectional colored blob camera sensor wrapper for the following
  * supported robots:

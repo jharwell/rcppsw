@@ -55,19 +55,15 @@ math::vector2d arrival_force::operator()(const boid& entity,
     desired.scale(mc_max);
   }
   /*
-   * Handle atan2() being discontinuous at angles ~pi.
+   * atan2() is discontinuous at angles ~pi! so we wrap the angle to target
+   * into [-pi,pi], and then take the absolute value in order to get something
+   * [0, pi].
+   *
+   * DO NOT TOUCH THIS. See #232 for why.
    */
-  double angle_to_target = std::atan2(target.y() - entity.position().y(),
-                                      target.x() - entity.position().x());
-  double angle_diff = angle_to_target - entity.linear_velocity().angle().value();
-  angle_diff = std::atan2(std::sin(angle_diff), std::cos(angle_diff));
-
-  if (std::fabs(angle_diff - m_last_angle) > M_PI) {
-    angle_diff -= std::copysign(2 * M_PI, angle_diff);
-  }
-  m_last_angle = angle_diff;
-  math::vector2d arrival(desired.length(), angle_diff);
-  return arrival;
+  auto angle = math::radians::abs((desired.angle() -
+                                   entity.linear_velocity().angle()).signed_normalize());
+  return {desired.length(), - angle};
 } /* operator()() */
 
 NS_END(steer2D, robotics, rcppsw);

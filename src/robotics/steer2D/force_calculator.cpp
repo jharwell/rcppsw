@@ -34,7 +34,7 @@ NS_START(rcppsw, robotics, steer2D);
  ******************************************************************************/
 force_calculator::force_calculator(boid& entity,
                                    const config::force_calculator_config* config)
-    : ER_CLIENT_INIT("rcppsw.robotics.steer2D.force_calculate"),
+    : ER_CLIENT_INIT("rcppsw.robotics.steer2D.force_calculator"),
       m_entity(entity),
       m_avoidance(&config->avoidance),
       m_arrival(&config->arrival),

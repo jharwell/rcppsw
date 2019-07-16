@@ -110,22 +110,10 @@ class differential_drive : public kin2D::model,
    * @param angle The difference from the robot's CURRENT heading (i.e."change
    *              this much from the direction you are currently going in").
    *
-   * @param force First argument: Whether or not a soft turn should be performed,
-   *                              regardless of the angle difference.
-   *              Second arguent: Whether or not a hard turn should be
-   *                              performed, regardless of angle difference.
-   *              If \c {false,false} the parameterized threshold is used
-   *              instead.
-   *
-   *              This parameter is useful for PID-loop like things where you do
-   *              NOT want the robot to execute in place turns.
-   *
    * @return \ref status_t.
    */
-  status_t fsm_drive(double speed,
-                     const math::radians& angle,
-                     const std::pair<bool, bool>& force = std::make_pair(false,
-                                                                         false));
+  status_t fsm_drive(double speed, const math::radians& angle);
+
   /**
    * @brief Return the current speed of the robot (average of the 2 wheel
    * speeds).

@@ -67,18 +67,8 @@ class differential_drive_fsm final : public state_machine::simple_fsm {
    * @param speed The new linear speed of the robot.
    * @param angle The difference from the robot's CURRENT heading (i.e."change
    *              this much from the direction you are currently going in").
-   *
-   * @param force First argument: Whether or not a soft turn should be performed,
-   *                              regardless of the angle difference.
-   *              Second arguent: Whether or not a hard turn should be
-   *                              performed, regardless of angle difference.
-   *              If \c {false,false} the parameterized threshold is used
-   *              instead.
    */
-  void change_velocity(double speed,
-                       const math::radians& angle,
-                       const std::pair<bool, bool>& force = std::make_pair(false,
-                                                                           false));
+  void change_velocity(double speed, const math::radians& angle);
 
   std::pair<double, double> wheel_speeds(void) const { return m_wheel_speeds; }
 
@@ -118,12 +108,10 @@ class differential_drive_fsm final : public state_machine::simple_fsm {
    * desired heading change into wheel speeds.
    */
   struct turn_data : public state_machine::event_data {
-    turn_data(std::pair<bool, bool> force_in,
-              double speed_in,
+    turn_data(double speed_in,
               math::radians angle_in)
-        : force(std::move(force_in)), speed(speed_in), angle(angle_in) {}
+        : speed(speed_in), angle(angle_in) {}
 
-    std::pair<bool, bool> force;
     double speed;
     math::radians angle;
   };

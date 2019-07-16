@@ -52,7 +52,7 @@ NS_END(detail);
  ******************************************************************************/
 /**
  * @class battery_sensor
- * @ingroup rcppsw robotics hal
+ * @ingroup rcppsw robotics hal sensors
  *
  * @brief Battery sensor wrapper for the following supported robots:
  *
