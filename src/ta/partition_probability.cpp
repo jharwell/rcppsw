@@ -68,22 +68,20 @@ double partition_probability::calc_pini2011(const time_estimate& task,
    */
   double theta = 0.0;
   if (task > subtask1 + subtask2) {
-    if ((subtask1 + subtask2).last_result() > 0) {
-      theta = reactivity() *
-              (task / (subtask1 + subtask2) - offset()).last_result();
+    if ((subtask1 + subtask2).v() > 0) {
+      theta = reactivity() * (task / (subtask1 + subtask2) - offset()).v();
     }
   } else {
-    if (task.last_result() > 0) {
-      theta = reactivity() *
-              (offset() - (subtask1 + subtask2) / task).last_result();
+    if (task.v() > 0) {
+      theta = reactivity() * (offset() - (subtask1 + subtask2) / task).v();
     }
   }
-  return set_result(1.0 / (1 + std::exp(-theta)) * gamma());
+  return eval(1.0 / (1 + std::exp(-theta)) * gamma());
 } /* calc() */
 
 double_t partition_probability::calc_random(std::default_random_engine& rng) {
   std::uniform_real_distribution<> dist(0.0, 1.0);
-  return set_result(dist(rng));
+  return eval(dist(rng));
 } /* calc_random() */
 
 NS_END(ta, rcppsw);

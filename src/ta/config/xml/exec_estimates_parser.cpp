@@ -63,7 +63,7 @@ void exec_estimates_parser::parse(const ticpp::Element& node) {
   } /* for(&s..) */
 } /* parse() */
 
- bool exec_estimates_parser::validate(void) const {
+bool exec_estimates_parser::validate(void) const {
   if (!is_parsed() || !m_config->seed_enabled) {
     return true;
   }

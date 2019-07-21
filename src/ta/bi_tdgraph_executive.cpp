@@ -42,7 +42,7 @@ bi_tdgraph_executive::bi_tdgraph_executive(
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
- const bi_tab* bi_tdgraph_executive::active_tab(void) const {
+const bi_tab* bi_tdgraph_executive::active_tab(void) const {
   auto bigraph = static_cast<const bi_tdgraph*>(graph());
   return bigraph->active_tab();
 } /* active_tab() */
@@ -192,6 +192,10 @@ polled_task* bi_tdgraph_executive::get_next_task(void) {
    */
   auto bigraph = static_cast<bi_tdgraph*>(graph());
   bigraph->active_tab_update(current_task());
-  return bigraph->active_tab()->task_allocate();
+  auto ret = bigraph->active_tab()->task_allocate();
+  ER_ASSERT(!ret->task_aborted(),
+            "Task '%s' marked as aborted during allocation",
+            ret->name().c_str());
+  return ret;
 } /* get_next_task() */
 NS_END(ta, rcppsw);

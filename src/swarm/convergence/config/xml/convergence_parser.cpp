@@ -66,7 +66,7 @@ void convergence_parser::parse(const ticpp::Element& node) {
   }
 } /* parse() */
 
- bool convergence_parser::validate(void) const {
+bool convergence_parser::validate(void) const {
   if (!is_parsed()) {
     return true;
   }

@@ -118,7 +118,8 @@ class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
    * @param tab The tab.
    * @param current_task The current active task in the tab.
    */
-  bi_tab* tab_child(const bi_tab* tab, const polled_task* current_task) RCSW_PURE;
+  bi_tab* tab_child(const bi_tab* tab,
+                    const polled_task* current_task) RCSW_PURE;
 
   void active_tab_init(const std::string& method);
 

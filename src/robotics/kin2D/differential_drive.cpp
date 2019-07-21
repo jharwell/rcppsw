@@ -157,7 +157,7 @@ error:
   return ERROR;
 } /* curvature_drive() */
 
- double differential_drive::limit(double value) const {
+double differential_drive::limit(double value) const {
   return std::max(std::min(value, m_max_speed), -m_max_speed);
 } /* limit() */
 

@@ -66,7 +66,7 @@ class pheromone_density final : public math::expression<double>,
   void rho(double rho) { m_rho = rho; }
 
   void reset(void) {
-    set_result(0.0);
+    eval(0.0);
     m_delta = 0.0;
   }
 
@@ -81,9 +81,9 @@ class pheromone_density final : public math::expression<double>,
    */
   double update(void) {
     ER_ASSERT(m_rho > 0, "Bad rho: %f", m_rho);
-    double res = std::max<double>((1.0 - m_rho) * last_result() + m_delta, 0.0);
+    double res = std::max<double>((1.0 - m_rho) * v() + m_delta, 0.0);
     m_delta = 0;
-    return set_result(res);
+    return eval(res);
   }
 
   /**
@@ -107,7 +107,7 @@ class pheromone_density final : public math::expression<double>,
    * @param val The value to set.
    */
   void pheromone_set(double val) {
-    set_result(val);
+    eval(val);
     m_delta = 0;
   }
 
@@ -126,7 +126,7 @@ class pheromone_density final : public math::expression<double>,
    * the the current values, ignoring the current deltas for each object.
    */
   pheromone_density& operator-=(const pheromone_density& other) {
-    this->set_result(this->last_result() - other.last_result());
+    this->eval(this->v() - other.v());
     return *this;
   }
 
@@ -145,7 +145,7 @@ class pheromone_density final : public math::expression<double>,
    * values, ignoring the current deltas for each object.
    */
   pheromone_density& operator+=(const pheromone_density& other) {
-    this->set_result(this->last_result() + other.last_result());
+    this->eval(this->v() + other.v());
     return *this;
   }
   /**
@@ -154,7 +154,7 @@ class pheromone_density final : public math::expression<double>,
    */
   pheromone_density operator/(double div) const {
     pheromone_density res(*this);
-    res.set_result(this->last_result() / div);
+    res.eval(this->v() / div);
     return res;
   }
 

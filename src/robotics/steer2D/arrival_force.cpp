@@ -61,9 +61,9 @@ math::vector2d arrival_force::operator()(const boid& entity,
    *
    * DO NOT TOUCH THIS. See #232 for why.
    */
-  auto angle = math::radians::abs((desired.angle() -
-                                   entity.linear_velocity().angle()).signed_normalize());
-  return {desired.length(), - angle};
+  auto angle = math::radians::abs(
+      (desired.angle() - entity.linear_velocity().angle()).signed_normalize());
+  return {desired.length(), -angle};
 } /* operator()() */
 
 NS_END(steer2D, robotics, rcppsw);

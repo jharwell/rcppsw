@@ -142,9 +142,7 @@ class vector2 {
   /**
    * Returns the length of this vector.
    */
-  T length(void) const RCSW_CHECK_RET {
-    return std::sqrt(square_length());
-  }
+  T length(void) const RCSW_CHECK_RET { return std::sqrt(square_length()); }
 
   /**
    * @brief Normalizes this vector.

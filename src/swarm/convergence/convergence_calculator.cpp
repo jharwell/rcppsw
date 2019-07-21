@@ -165,7 +165,7 @@ void convergence_calculator::update(void) {
   } /* for(&m..) */
 } /* update() */
 
- bool convergence_calculator::converged(void) const {
+bool convergence_calculator::converged(void) const {
   bool ret = false;
   for (const auto& m : m_measures) {
     ret |= boost::apply_visitor(convergence_status_collator(), m.second);
@@ -179,7 +179,7 @@ convergence_calculator::conv_status_t convergence_calculator::swarm_interactivit
     return std::make_tuple(0.0, 0.0, false);
   }
   auto& tmp = boost::get<interactivity>(m_measures.at(typeid(interactivity)));
-  return std::make_tuple(tmp.raw(), tmp.last_result(), tmp.converged());
+  return std::make_tuple(tmp.raw(), tmp.v(), tmp.converged());
 } /* swarm_interactivity() */
 
 convergence_calculator::conv_status_t convergence_calculator::swarm_angular_order(
@@ -188,7 +188,7 @@ convergence_calculator::conv_status_t convergence_calculator::swarm_angular_orde
     return std::make_tuple(0.0, 0.0, false);
   }
   auto& tmp = boost::get<angular_order>(m_measures.at(typeid(angular_order)));
-  return std::make_tuple(tmp.raw(), tmp.last_result(), tmp.converged());
+  return std::make_tuple(tmp.raw(), tmp.v(), tmp.converged());
 } /* swarm_angular_order() */
 
 convergence_calculator::conv_status_t convergence_calculator::
@@ -198,7 +198,7 @@ convergence_calculator::conv_status_t convergence_calculator::
   }
   auto& tmp =
       boost::get<positional_entropy>(m_measures.at(typeid(positional_entropy)));
-  return std::make_tuple(tmp.raw(), tmp.last_result(), tmp.converged());
+  return std::make_tuple(tmp.raw(), tmp.v(), tmp.converged());
 } /* swarm_positional_entropy() */
 
 convergence_calculator::conv_status_t convergence_calculator::swarm_task_dist_entropy(
@@ -208,7 +208,7 @@ convergence_calculator::conv_status_t convergence_calculator::swarm_task_dist_en
   }
   auto& tmp =
       boost::get<task_dist_entropy>(m_measures.at(typeid(task_dist_entropy)));
-  return std::make_tuple(tmp.raw(), tmp.last_result(), tmp.converged());
+  return std::make_tuple(tmp.raw(), tmp.v(), tmp.converged());
 } /* swarm_task_dist_entropy() */
 
 void convergence_calculator::reset_metrics(void) {

@@ -60,7 +60,7 @@ class radians {
   static const radians kZERO;              // NOLINT
   static const double kRADIANS_TO_DEGREES; // NOLINT
 
-  static radians abs(const radians& r) { return radians(r.abs_value()); }
+  static radians abs(const radians& r) { return radians(std::fabs(r.value())); }
 
   radians(void) = default;
 
@@ -74,7 +74,6 @@ class radians {
 
   double value(void) const { return m_value; }
   double operator()(void) const { return value(); }
-  double abs_value(void) const { return std::abs(m_value); }
 
   /**
    * @brief Normalizes the value in the range [-pi, pi].

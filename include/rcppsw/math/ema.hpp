@@ -24,6 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <cmath>
 #include "rcppsw/math/expression.hpp"
 
 /*******************************************************************************
@@ -48,9 +49,10 @@ NS_START(rcppsw, math);
 template <class T>
 class ema final : public expression<T> {
  public:
-  using expression<T>::last_result;
-  using expression<T>::set_result;
+  using expression<T>::v;
+  using expression<T>::eval;
 
+  static ema abs(const ema& e) { return ema(e.alpha(), std::fabs(e.v())); }
   explicit ema(T alpha) : m_alpha(alpha) {}
   ema(T alpha, T result) : expression<T>(result), m_alpha(alpha) {}
 
@@ -59,32 +61,36 @@ class ema final : public expression<T> {
   double calc(double measure) { return operator()(measure); }
 
   double operator()(double measure) {
-    return set_result((1 - m_alpha) * last_result() + m_alpha * measure);
+    return eval((1 - m_alpha) * v() + m_alpha * measure);
   }
 
   ema& calc(const ema& measure) {
-    this->calc(measure.last_result());
+    this->calc(measure.v());
     return *this;
   }
   ema& operator()(const ema& measure) {
-    return set_result((1 - m_alpha) * last_result() +
-                      m_alpha * measure.last_result());
+    return eval((1 - m_alpha) * v() + m_alpha * measure.v());
     return *this;
   }
 
   ema operator+(const ema& other) const {
     ema r(this->alpha());
-    r.set_result(this->last_result() + other.last_result());
+    r.eval(this->v() + other.v());
+    return r;
+  }
+  ema operator-(const ema& other) const {
+    ema r(this->alpha());
+    r.eval(this->v() - other.v());
     return r;
   }
   ema operator+=(const ema& other) {
-    this->set_result(this->last_result() + other.last_result());
+    this->eval(this->v() + other.v());
     return *this;
   }
 
   ema operator/(const ema& other) const {
     ema r(this->alpha());
-    r.set_result(this->last_result() / other.last_result());
+    r.eval(this->v() / other.v());
     return r;
   }
 
@@ -98,42 +104,42 @@ class ema final : public expression<T> {
 template <class T>
 ema<T> operator-(const ema<T>& lhs, double d) {
   ema<T> r(lhs.alpha());
-  r.set_result(lhs.last_result() - d);
+  r.eval(lhs.v() - d);
   return r;
 }
 
 template <class T>
 ema<T> operator-(double d, const ema<T>& rhs) {
   ema<T> r(rhs.alpha());
-  r.set_result(d - rhs.last_result());
+  r.eval(d - rhs.v());
   return r;
 }
 
 template <class T>
 ema<T> operator*(const ema<T>& lhs, double d) {
   ema<T> r(lhs.alpha());
-  r.set_result(lhs.last_result() * d);
+  r.eval(lhs.v() * d);
   return r;
 }
 
 template <class T>
 ema<T> operator*(double d, const ema<T>& rhs) {
   ema<T> r(rhs.alpha());
-  r.set_result(rhs.last_result() * d);
+  r.eval(rhs.v() * d);
   return r;
 }
 
 template <class T>
 ema<T> operator/(double d, const ema<T>& rhs) {
   ema<T> r(rhs.alpha());
-  r.set_result(rhs.last_result() / d);
+  r.eval(rhs.v() / d);
   return r;
 }
 
 template <class T>
 ema<T> operator/(const ema<T>& lhs, double d) {
   ema<T> r(lhs.alpha());
-  r.set_result(lhs.last_result() / d);
+  r.eval(lhs.v() / d);
   return r;
 }
 

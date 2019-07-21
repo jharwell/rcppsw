@@ -53,25 +53,23 @@ class expression {
   /**
    * @brief Get the last value calculated.
    */
-  T last_result(void) const { return m_last; }
+  T v(void) const { return m_last; }
 
   /**
-   * @brief Calculate a new value.
+   * @brief Evaluate a calculation and set a new value.
    */
-  T set_result(const T& val) {
-    m_last = val;
-    return m_last;
-  }
+  T eval(const T& val) { return m_last = val; }
+
   void reset(void) { m_last = T{0}; }
 
   bool operator==(const expression& other) const {
-    return this->last_result() == other.last_result();
+    return this->v() == other.v();
   }
   bool operator>(const expression& other) const {
-    return this->last_result() > other.last_result();
+    return this->v() > other.v();
   }
   bool operator<(const expression& other) const {
-    return this->last_result() < other.last_result();
+    return this->v() < other.v();
   }
 
  private:

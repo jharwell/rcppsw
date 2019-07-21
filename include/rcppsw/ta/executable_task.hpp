@@ -206,7 +206,7 @@ class executable_task : public logical_task,
    * @param init_measure Initial execution estimate.
    */
   void exec_estimate_init(double init_measure) {
-    m_exec_estimate.set_result(init_measure);
+    m_exec_estimate.eval(init_measure);
   }
 
   /**
@@ -244,7 +244,7 @@ class executable_task : public logical_task,
    * @brief Get the current abort probability at the specified interface.
    *
    */
-  double abort_prob(void) const { return m_abort_prob.last_result(); }
+  double abort_prob(void) const { return m_abort_prob.v(); }
 
   /**
    * @brief Get the current execution time of the task.

@@ -72,7 +72,7 @@ class convergence_measure : public math::expression<double> {
    * this function (i.e. this function does not perform normalization itself, so
    * you should not pass \ref raw()).
    */
-  void set_norm(double value) { set_result(value); }
+  void set_norm(double value) { eval(value); }
 
   void reset(void) {
     math::expression<double>::reset();
@@ -92,8 +92,8 @@ class convergence_measure : public math::expression<double> {
    * parameters and the current state of the swarm.
    */
   bool update_convergence_state(void) {
-    return m_converged = (std::fabs(last_result() - m_norm_prev) <= mc_epsilon);
-    m_norm_prev = last_result();
+    return m_converged = (std::fabs(v() - m_norm_prev) <= mc_epsilon);
+    m_norm_prev = v();
   }
 
   /**

@@ -61,20 +61,20 @@ subtask_sel_probability::subtask_sel_probability(
  ******************************************************************************/
 double subtask_sel_probability::calc_random(std::default_random_engine& rng) {
   std::uniform_real_distribution<> dist(0.0, 1.0);
-  return set_result(dist(rng));
+  return eval(dist(rng));
 } /* calc_random() */
 
 double subtask_sel_probability::calc_brutschy2014(
     const time_estimate& int_est1,
     const time_estimate& int_est2,
     std::default_random_engine& rng) {
-  return set_result(calc_sigmoid(int_est1, int_est2, rng));
+  return eval(calc_sigmoid(int_est1, int_est2, rng));
 } /* calc_brutschy2014() */
 
 double subtask_sel_probability::calc_harwell2018(const time_estimate& exec_est1,
                                                  const time_estimate& exec_est2,
                                                  std::default_random_engine& rng) {
-  return set_result(calc_sigmoid(exec_est2, exec_est1, rng));
+  return eval(calc_sigmoid(exec_est2, exec_est1, rng));
 } /* calc_harwell2018() */
 
 double subtask_sel_probability::calc_sigmoid(const time_estimate& est1,
@@ -83,22 +83,22 @@ double subtask_sel_probability::calc_sigmoid(const time_estimate& est1,
   /*
    * No information available--just pick randomly.
    */
-  if (!(est1.last_result() > 0 && est2.last_result() > 0)) {
+  if (!(est1.v() > 0 && est2.v() > 0)) {
     std::uniform_real_distribution<> dist(0.0, 1.0);
     return dist(rng);
-  } else if (!(est1.last_result() > 0)) { /* have info on est2 only */
+  } else if (!(est1.v() > 0)) { /* have info on est2 only */
     return 0.0;
-  } else if (!(est2.last_result() > 0)) { /* have info on est1 only */
+  } else if (!(est2.v() > 0)) { /* have info on est1 only */
     return 1.0;
   }
 
   double r_ss = 0;
   if (est1 > est2) {
-    r_ss = std::pow(est1.last_result(), 2) / est2.last_result();
+    r_ss = std::pow(est1.v(), 2) / est2.v();
   } else {
-    r_ss = est1.last_result();
+    r_ss = est1.v();
   }
-  double theta = reactivity() * (est1.last_result() / r_ss - offset());
+  double theta = reactivity() * (est1.v() / r_ss - offset());
   return 1.0 / (1 + std::exp(-theta)) * gamma();
 } /* calc_sigmoid() */
 

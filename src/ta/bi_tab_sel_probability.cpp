@@ -58,23 +58,21 @@ bi_tab_sel_probability::bi_tab_sel_probability(
  ******************************************************************************/
 double bi_tab_sel_probability::calc_random(std::default_random_engine& rng) {
   std::uniform_real_distribution<> dist(0.0, 1.0);
-  return set_result(dist(rng));
+  return eval(dist(rng));
 } /* calc_random() */
 
 double bi_tab_sel_probability::calc_harwell2019(const bi_tab& tab1,
                                                 const bi_tab& tab2,
                                                 std::default_random_engine& rng) {
-  double ratio1 =
-      std::fabs(tab1.root()->task_exec_estimate().last_result() -
-                (tab1.child1()->task_exec_estimate().last_result() +
-                 tab1.child2()->task_exec_estimate().last_result())) /
-      tab1.root()->task_exec_estimate().last_result();
-  double ratio2 =
-      std::fabs(tab2.root()->task_exec_estimate().last_result() -
-                (tab2.child1()->task_exec_estimate().last_result() +
-                 tab2.child2()->task_exec_estimate().last_result())) /
-      tab2.root()->task_exec_estimate().last_result();
-  return set_result(calc_sigmoid(ratio1, ratio2, rng));
+  auto ratio1 = time_estimate::abs(tab1.root()->task_exec_estimate() -
+                                   (tab1.child1()->task_exec_estimate() +
+                                    tab1.child2()->task_exec_estimate())) /
+                tab1.root()->task_exec_estimate();
+  auto ratio2 = time_estimate::abs(tab2.root()->task_exec_estimate() -
+                                   (tab2.child1()->task_exec_estimate() +
+                                    tab2.child2()->task_exec_estimate())) /
+                tab2.root()->task_exec_estimate();
+  return eval(calc_sigmoid(ratio1.v(), ratio2.v(), rng));
 } /* calc_harwell2019() */
 
 double bi_tab_sel_probability::calc_sigmoid(double ratio1,
@@ -90,7 +88,7 @@ double bi_tab_sel_probability::calc_sigmoid(double ratio1,
   } else if (!(ratio2 > 0)) { /* have info on tab1 only */
     return 1.0;
   }
-  double theta = reactivity() * (offset() - ratio1 / ratio2);
+  double theta = reactivity() * (ratio1 / ratio2 - offset());
   return 1.0 / (1 + std::exp(-theta)) * gamma();
 } /* calc_sigmoid() */
 

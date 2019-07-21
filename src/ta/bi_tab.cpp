@@ -94,15 +94,15 @@ void bi_tab::task_finish_update(polled_task* const finished) {
   m_active_task = nullptr;
 } /* task_finish_update() */
 
- bool bi_tab::contains_task(const polled_task* const task) const {
+bool bi_tab::contains_task(const polled_task* const task) const {
   return task == m_root || task == m_child1 || task == m_child2;
 } /* contains_task() */
 
- bool bi_tab::task_is_root(const polled_task* const task) const {
+bool bi_tab::task_is_root(const polled_task* const task) const {
   return task == m_root;
 } /* task_is_root() */
 
- bool bi_tab::task_is_child(const polled_task* const task) const {
+bool bi_tab::task_is_child(const polled_task* const task) const {
   return task == m_child1 || task == m_child2;
 } /* task_is_child() */
 
@@ -145,7 +145,7 @@ polled_task* bi_tab::task_allocate(void) {
   } else if (mc_never_partition) {
     partition_prob = 0.0;
   } else {
-    partition_prob = m_partition_prob.last_result();
+    partition_prob = m_partition_prob.v();
     ER_INFO("TAB root='%s': partition_method=%s partition_prob=%f",
             m_root->name().c_str(),
             m_partition_prob.method().c_str(),
@@ -219,11 +219,11 @@ polled_task* bi_tab::subtask_allocate(void) {
   double prob_21 = probs.second;
   ER_INFO("%s exec_est=%f/int_est=%f, %s exec_est=%f/int_est=%f",
           m_child1->name().c_str(),
-          m_child1->task_exec_estimate().last_result(),
-          m_child1->task_interface_estimate(0).last_result(),
+          m_child1->task_exec_estimate().v(),
+          m_child1->task_interface_estimate(0).v(),
           m_child2->name().c_str(),
-          m_child2->task_exec_estimate().last_result(),
-          m_child2->task_interface_estimate(0).last_result());
+          m_child2->task_exec_estimate().v(),
+          m_child2->task_interface_estimate(0).v());
 
   ER_INFO("%s -> %s prob=%f, %s -> %s prob=%f",
           m_child1->name().c_str(),

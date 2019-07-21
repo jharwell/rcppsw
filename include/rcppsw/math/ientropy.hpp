@@ -64,7 +64,7 @@ class ientropy : math::expression<double> {
     std::for_each(groups.begin(), groups.end(), [&](const auto& prop) {
       entropy += prop * std::log2(prop);
     });
-    return set_result(-entropy);
+    return eval(-entropy);
   }
 };
 

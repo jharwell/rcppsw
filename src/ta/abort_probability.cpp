@@ -43,17 +43,17 @@ abort_probability::abort_probability(
  ******************************************************************************/
 double abort_probability::operator()(double exec_time,
                                      const time_estimate& whole_task) {
-  if (!(whole_task.last_result() > 0)) {
-    return set_result(kMIN_ABORT_PROB);
+  if (!(whole_task.v() > 0)) {
+    return eval(kMIN_ABORT_PROB);
   }
-  double ratio = exec_time / whole_task.last_result();
+  double ratio = exec_time / whole_task.v();
   double theta = 0.0;
   if (ratio <= offset()) {
     theta = reactivity() * (offset() - ratio);
   } else {
     theta = reactivity() * (ratio - offset());
   }
-  return set_result(1.0 / (1 + std::exp(theta)) * gamma());
+  return eval(1.0 / (1 + std::exp(theta)) * gamma());
 } /* operator() */
 
 NS_END(ta, rcppsw);

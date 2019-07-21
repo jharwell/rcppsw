@@ -159,12 +159,8 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
     return m_active_task != m_last_task;
   }
   bool task_depth_changed(void) const override;
-  double partition_prob(void) const override {
-    return m_partition_prob.last_result();
-  }
-  double subtask_selection_prob(void) const override {
-    return m_sel_prob.last_result();
-  }
+  double partition_prob(void) const override { return m_partition_prob.v(); }
+  double subtask_selection_prob(void) const override { return m_sel_prob.v(); }
 
  private:
   polled_task* subtask_allocate(void);

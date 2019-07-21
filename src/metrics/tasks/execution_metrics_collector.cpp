@@ -127,11 +127,11 @@ bool execution_metrics_collector::csv_line_build(std::string& line) {
   line += csv_entry_domavg(m_cum_exec_time, cum_n_allocs);
   line += csv_entry_domavg(m_int_interface_time, int_n_allocs);
   line += csv_entry_domavg(m_cum_interface_time, cum_n_allocs);
-  line += csv_entry_domavg(m_int_exec_estimate.last_result(), int_n_allocs);
-  line += csv_entry_domavg(m_cum_exec_estimate.last_result(), cum_n_allocs);
+  line += csv_entry_domavg(m_int_exec_estimate.v(), int_n_allocs);
+  line += csv_entry_domavg(m_cum_exec_estimate.v(), cum_n_allocs);
 
-  line += csv_entry_domavg(m_int_interface_estimate.last_result(), int_n_allocs);
-  line += csv_entry_domavg(m_cum_interface_estimate.last_result(), cum_n_allocs);
+  line += csv_entry_domavg(m_int_interface_estimate.v(), int_n_allocs);
+  line += csv_entry_domavg(m_cum_interface_estimate.v(), cum_n_allocs);
 
   line += csv_entry_intavg(m_int_abort_count);
   line += csv_entry_tsavg(m_cum_abort_count);

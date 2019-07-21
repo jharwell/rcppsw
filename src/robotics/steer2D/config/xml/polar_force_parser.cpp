@@ -40,7 +40,7 @@ void polar_force_parser::parse(const ticpp::Element& node) {
   }
 } /* parse() */
 
- bool polar_force_parser::validate(void) const {
+bool polar_force_parser::validate(void) const {
   if (is_parsed()) {
     return m_config->max > 0.0;
   }

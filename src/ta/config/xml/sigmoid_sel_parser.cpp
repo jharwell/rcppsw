@@ -44,7 +44,7 @@ void sigmoid_sel_parser::parse(const ticpp::Element& node) {
   XML_PARSE_ATTR(snode, m_config, method);
 } /* parse() */
 
- bool sigmoid_sel_parser::validate(void) const {
+bool sigmoid_sel_parser::validate(void) const {
   CHECK(m_sigmoid.validate());
   CHECK(!m_config->method.empty());
   return true;

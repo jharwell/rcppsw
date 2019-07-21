@@ -50,27 +50,13 @@ class spatial_dist : public named_type<double, struct spatial_dist_tag> {
     set(v() + other.v());
     return *this;
   }
-  bool operator<(const spatial_dist& other) const {
-    return v() < other.v();
-  }
-  bool operator>(const spatial_dist& other) const {
-    return v() > other.v();
-  }
-  bool operator>=(const spatial_dist& other) const {
-    return v() >= other.v();
-  }
-  bool operator>=(double other) const {
-    return v() >= other;
-  }
-  bool operator<=(const spatial_dist& other) const {
-    return v() <= other.v();
-  }
-  bool operator<=(double other) const {
-    return v() <= other;
-  }
-  bool operator>(double other) const {
-    return v() > other;
-  }
+  bool operator<(const spatial_dist& other) const { return v() < other.v(); }
+  bool operator>(const spatial_dist& other) const { return v() > other.v(); }
+  bool operator>=(const spatial_dist& other) const { return v() >= other.v(); }
+  bool operator>=(double other) const { return v() >= other; }
+  bool operator<=(const spatial_dist& other) const { return v() <= other.v(); }
+  bool operator<=(double other) const { return v() <= other; }
+  bool operator>(double other) const { return v() > other; }
   spatial_dist operator*(double other) const {
     spatial_dist res(v());
     res.set(res.v() * other);

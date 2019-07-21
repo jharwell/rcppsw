@@ -145,29 +145,37 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
   }
 
   /*
-   * The active TAB can change, so compute the probability of it doing so.
-   */
-  double prob_up = m_tab_sw_prob(active_tab(), tab_parent(active_tab()), m_rng);
-  double prob_down =
-      m_tab_sw_prob(tab_parent(active_tab()), active_tab(), m_rng);
-  ER_INFO("TAB w/root='%s' up prob=%f, down prob=%f",
-          active_tab()->root()->name().c_str(),
-          prob_up,
-          prob_down);
-  /*
    * If the current task (which is the just finished/aborted task) is the root
    * of the active TAB, then we are considering going "up" a TAB level to one
-   * that is not as specialized. If it is not the root of the active TAB, then
-   * we are considering going "down" a TAB level to one that is more
-   * specialized.
+   * that is not as specialized (i.e. we are too specialized for current
+   * conditions).
+   *
+   * If it is not the root of the active TAB, then we are considering going
+   * "down" a TAB level to one that is more specialized (i.e. conditions seem
+   * good to specialize more).
    */
   std::uniform_real_distribution<> dist(0.0, 1.0);
   if (current_task == active_tab()->root()) {
-    if (prob_up >= dist(m_rng)) {
+    double prob = m_tab_sw_prob(active_tab(), tab_parent(active_tab()), m_rng);
+
+    ER_INFO("TAB switch up: active_tab root='%s',current_task='%s',prob=%f",
+            active_tab()->root()->name().c_str(),
+            current_task->name().c_str(),
+            prob);
+
+    if (prob >= dist(m_rng)) {
       new_tab = tab_parent(active_tab());
     }
   } else {
-    if (prob_down >= dist(m_rng)) {
+    double prob = m_tab_sw_prob(active_tab(),
+                                tab_child(active_tab(), current_task),
+                                m_rng);
+
+    ER_INFO("TAB switch down: active_tab root='%s',current_task='%s',prob=%f",
+            active_tab()->root()->name().c_str(),
+            current_task->name().c_str(),
+            prob);
+    if (prob >= dist(m_rng)) {
       new_tab = tab_child(active_tab(), current_task);
     }
   }
@@ -175,8 +183,8 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
   ER_INFO("New active TAB root='%s'", new_tab->root()->name().c_str());
 } /* active_tab_update() */
 
- bi_tab* bi_tdgraph::tab_child(const bi_tab* const tab,
-                                          const polled_task* const current_task) {
+bi_tab* bi_tdgraph::tab_child(const bi_tab* const tab,
+                              const polled_task* const current_task) {
   ER_ASSERT(tab->child1() == current_task || tab->child2() == current_task,
             "Task '%s' not in TAB rooted at '%s'",
             current_task->name().c_str(),
@@ -222,7 +230,7 @@ const bi_tab* bi_tdgraph::tab_parent(const bi_tab* const tab) const {
   return const_cast<bi_tdgraph*>(this)->tab_parent(tab);
 } /* tab_parent() */
 
- bool bi_tdgraph::tab_parent_verify(const bi_tab* const tab) const {
+bool bi_tdgraph::tab_parent_verify(const bi_tab* const tab) const {
   uint count = 0;
   for (auto& t : m_tabs) {
     if (tab == &t) { /* self */

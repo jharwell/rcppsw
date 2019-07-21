@@ -45,7 +45,7 @@ void wander_force_parser::parse(const ticpp::Element& node) {
   }
 } /* parse() */
 
- bool wander_force_parser::validate(void) const {
+bool wander_force_parser::validate(void) const {
   if (is_parsed()) {
     CHECK(m_config->circle_distance > 0.0);
     CHECK(m_config->circle_radius > 0.0);

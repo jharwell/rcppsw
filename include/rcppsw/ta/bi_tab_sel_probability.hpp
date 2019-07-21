@@ -47,12 +47,19 @@ struct src_sigmoid_sel_config;
  * @class bi_tab_sel_probability
  * @ingroup rcppsw ta
  *
- * @brief Calculates the probability that a robot selects the TAB rooted at
- * depth i-1 its current TAB is rooted at depth i as a function of how
- * unbalanced the execution time estimates of root vs (child1 + child2). If they
- * are approximately equal for TAB i, then there is probably a good distribution
- * of robots executing tasks from that TAB, and the execution estimates are
- * probably fairly reliable.
+ * @brief Calculates the probability that a robot selects a given TAB or its
+ * child/parent TAB (depending on whether the most recently finished/aborted
+ * task is a child or the root of the current TAB).
+ *
+ * Let the current TAB be TAB i, and the child/parent TAB be TAB j. We compute
+ * how balanced/unbalanced the execution time estimates of root vs (child1 +
+ * child2) for both TABs. If the resulting ratios are equal (or very close),
+ * then there is probably a good distribution of robots executing tasks from
+ * each TAB, and the execution estimates are probably fairly reliable, and you
+ * should not switch TABs.
+ *
+ * Assume the ratio for TAB j (the other TAB) is 1.0. Then, as the TAB i ratio
+ * goes to 0 or infinity, the probability of switching to TAB j goes to 1.0.
  *
  * Depends on:
  *
