@@ -27,6 +27,7 @@
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/metrics/base_metrics.hpp"
 #include "rcppsw/ta/time_estimate.hpp"
+#include "rcppsw/types/timestep.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -60,13 +61,13 @@ class execution_metrics : public virtual base_metrics {
    * @brief This function should return the execution time of the most recent
    * execution of this task. Execution time includes interface time.
    */
-  virtual double task_last_exec_time(void) const = 0;
+  virtual types::timestep task_last_exec_time(void) const = 0;
 
   /**
    * @brief This function should return the interface time of the most recent
    * interface time for the task.
    */
-  virtual double task_last_interface_time(uint i) const = 0;
+  virtual types::timestep task_last_interface_time(uint i) const = 0;
 
   /**
    * @brief This function should return \c TRUE iff when the task has been

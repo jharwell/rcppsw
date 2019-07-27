@@ -34,6 +34,14 @@
 NS_START(rcppsw, ta);
 
 /*******************************************************************************
+ * Non-Member Functions
+ ******************************************************************************/
+static inline time_estimate est_abs(const time_estimate& e) {
+  return time_estimate(e.alpha(), std::fabs(e.v()));
+}
+
+
+/*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
 bi_tab_sel_probability::bi_tab_sel_probability(const std::string& method)
@@ -64,11 +72,11 @@ double bi_tab_sel_probability::calc_random(std::default_random_engine& rng) {
 double bi_tab_sel_probability::calc_harwell2019(const bi_tab& tab1,
                                                 const bi_tab& tab2,
                                                 std::default_random_engine& rng) {
-  auto ratio1 = time_estimate::abs(tab1.root()->task_exec_estimate() -
+  auto ratio1 = est_abs(tab1.root()->task_exec_estimate() -
                                    (tab1.child1()->task_exec_estimate() +
                                     tab1.child2()->task_exec_estimate())) /
                 tab1.root()->task_exec_estimate();
-  auto ratio2 = time_estimate::abs(tab2.root()->task_exec_estimate() -
+  auto ratio2 = est_abs(tab2.root()->task_exec_estimate() -
                                    (tab2.child1()->task_exec_estimate() +
                                     tab2.child2()->task_exec_estimate())) /
                 tab2.root()->task_exec_estimate();

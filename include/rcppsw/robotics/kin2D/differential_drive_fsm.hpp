@@ -107,7 +107,7 @@ class differential_drive_fsm final : public state_machine::simple_fsm {
    * @brief Turning data for input into the state machine, to translate the
    * desired heading change into wheel speeds.
    */
-  struct turn_data : public state_machine::event_data {
+  struct turn_data final : public state_machine::event_data {
     turn_data(double speed_in,
               math::radians angle_in)
         : speed(speed_in), angle(angle_in) {}

@@ -76,25 +76,35 @@ void bi_tab_metrics_collector::collect(
     const rcppsw::metrics::base_metrics& metrics) {
   auto& m = dynamic_cast<const bi_tab_metrics&>(metrics);
   if (m.employed_partitioning()) {
-    ++m_int_partition_count;
-    ++m_cum_partition_count;
-    m_int_subtask1_count += static_cast<uint>(m.subtask1_active());
-    m_cum_subtask1_count += static_cast<uint>(m.subtask1_active());
-    m_int_subtask2_count += static_cast<uint>(m.subtask2_active());
-    m_cum_subtask2_count += static_cast<uint>(m.subtask2_active());
-    m_int_partition_prob += m.partition_prob();
-    m_int_subtask_selection_prob += m.subtask_selection_prob();
-    m_cum_partition_prob += m.partition_prob();
-    m_cum_subtask_selection_prob += m.subtask_selection_prob();
+    ++m_interval.partition_count;
+    ++m_cum.partition_count;
+    m_interval.subtask1_count += static_cast<uint>(m.subtask1_active());
+    m_cum.subtask1_count += static_cast<uint>(m.subtask1_active());
+    m_interval.subtask2_count += static_cast<uint>(m.subtask2_active());
+    m_cum.subtask2_count += static_cast<uint>(m.subtask2_active());
+
+    auto int_partition_prob = m_interval.partition_prob.load();
+    auto int_subtask_sel_prob = m_interval.subtask_sel_prob.load();
+    m_interval.partition_prob.compare_exchange_strong(int_partition_prob,
+                                                 int_partition_prob + m.partition_prob());
+    m_interval.subtask_sel_prob.compare_exchange_strong(int_subtask_sel_prob,
+                                                   int_subtask_sel_prob + m.subtask_selection_prob());
+
+    auto cum_partition_prob = m_cum.partition_prob.load();
+    auto cum_subtask_sel_prob = m_cum.subtask_sel_prob.load();
+    m_cum.partition_prob.compare_exchange_strong(cum_partition_prob,
+                                                 cum_partition_prob + m.partition_prob());
+    m_cum.subtask_sel_prob.compare_exchange_strong(cum_subtask_sel_prob,
+                                                   cum_subtask_sel_prob + m.subtask_selection_prob());
   } else {
-    ++m_int_no_partition_count;
-    ++m_cum_no_partition_count;
+    ++m_interval.no_partition_count;
+    ++m_cum.no_partition_count;
   }
 
-  m_int_task_sw_count += static_cast<uint>(m.task_changed());
-  m_cum_task_sw_count += static_cast<uint>(m.task_changed());
-  m_int_task_depth_sw_count += static_cast<uint>(m.task_depth_changed());
-  m_cum_task_depth_sw_count += static_cast<uint>(m.task_depth_changed());
+  m_interval.task_sw_count += static_cast<uint>(m.task_changed());
+  m_cum.task_sw_count += static_cast<uint>(m.task_changed());
+  m_interval.task_depth_sw_count += static_cast<uint>(m.task_depth_changed());
+  m_cum.task_depth_sw_count += static_cast<uint>(m.task_depth_changed());
 } /* collect() */
 
 bool bi_tab_metrics_collector::csv_line_build(std::string& line) {
@@ -106,44 +116,44 @@ bool bi_tab_metrics_collector::csv_line_build(std::string& line) {
    * timestep/interval, so we divide by the total # of task allocations
    * performed (# partitions + # no partitions).
    */
-  double int_allocs = m_int_partition_count + m_int_no_partition_count;
-  double cum_allocs = m_cum_partition_count + m_cum_no_partition_count;
+  double int_allocs = m_interval.partition_count + m_interval.no_partition_count;
+  double cum_allocs = m_cum.partition_count + m_cum.no_partition_count;
 
-  line += csv_entry_domavg(m_int_subtask1_count, int_allocs);
-  line += csv_entry_domavg(m_cum_subtask1_count, cum_allocs);
+  line += csv_entry_domavg(m_interval.subtask1_count, int_allocs);
+  line += csv_entry_domavg(m_cum.subtask1_count, cum_allocs);
 
-  line += csv_entry_domavg(m_int_subtask2_count, int_allocs);
-  line += csv_entry_domavg(m_cum_subtask2_count, cum_allocs);
+  line += csv_entry_domavg(m_interval.subtask2_count, int_allocs);
+  line += csv_entry_domavg(m_cum.subtask2_count, cum_allocs);
 
-  line += csv_entry_domavg(m_int_partition_count, int_allocs);
-  line += csv_entry_domavg(m_cum_partition_count, cum_allocs);
+  line += csv_entry_domavg(m_interval.partition_count, int_allocs);
+  line += csv_entry_domavg(m_cum.partition_count, cum_allocs);
 
-  line += csv_entry_domavg(m_int_no_partition_count, int_allocs);
-  line += csv_entry_domavg(m_cum_no_partition_count, cum_allocs);
+  line += csv_entry_domavg(m_interval.no_partition_count, int_allocs);
+  line += csv_entry_domavg(m_cum.no_partition_count, cum_allocs);
 
-  line += csv_entry_domavg(m_int_task_sw_count, int_allocs);
-  line += csv_entry_domavg(m_cum_task_sw_count, cum_allocs);
+  line += csv_entry_domavg(m_interval.task_sw_count, int_allocs);
+  line += csv_entry_domavg(m_cum.task_sw_count, cum_allocs);
 
-  line += csv_entry_domavg(m_int_task_depth_sw_count, int_allocs);
-  line += csv_entry_domavg(m_cum_task_depth_sw_count, cum_allocs);
+  line += csv_entry_domavg(m_interval.task_depth_sw_count, int_allocs);
+  line += csv_entry_domavg(m_cum.task_depth_sw_count, cum_allocs);
 
-  line += csv_entry_domavg(m_int_partition_prob, int_allocs);
-  line += csv_entry_domavg(m_cum_partition_prob, cum_allocs);
+  line += csv_entry_domavg(m_interval.partition_prob, int_allocs);
+  line += csv_entry_domavg(m_cum.partition_prob, cum_allocs);
 
-  line += csv_entry_domavg(m_int_subtask_selection_prob, int_allocs);
-  line += csv_entry_domavg(m_cum_subtask_selection_prob, cum_allocs, true);
+  line += csv_entry_domavg(m_interval.subtask_sel_prob, int_allocs);
+  line += csv_entry_domavg(m_cum.subtask_sel_prob, cum_allocs, true);
   return true;
 } /* store_foraging_stats() */
 
 void bi_tab_metrics_collector::reset_after_interval(void) {
-  m_int_subtask1_count = 0;
-  m_int_subtask2_count = 0;
-  m_int_partition_count = 0;
-  m_int_no_partition_count = 0;
-  m_int_task_sw_count = 0;
-  m_int_task_depth_sw_count = 0;
-  m_int_partition_prob = 0.0;
-  m_int_subtask_selection_prob = 0.0;
+  m_interval.subtask1_count = 0;
+  m_interval.subtask2_count = 0;
+  m_interval.partition_count = 0;
+  m_interval.no_partition_count = 0;
+  m_interval.task_sw_count = 0;
+  m_interval.task_depth_sw_count = 0;
+  m_interval.partition_prob = 0.0;
+  m_interval.subtask_sel_prob = 0.0;
 } /* reset_after_interval() */
 
 NS_END(metrics, rcppsw, tasks);

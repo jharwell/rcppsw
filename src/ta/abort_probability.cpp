@@ -41,12 +41,12 @@ abort_probability::abort_probability(
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-double abort_probability::operator()(double exec_time,
+double abort_probability::operator()(const types::timestep& exec_time,
                                      const time_estimate& whole_task) {
   if (!(whole_task.v() > 0)) {
     return eval(kMIN_ABORT_PROB);
   }
-  double ratio = exec_time / whole_task.v();
+  double ratio = exec_time.v() / whole_task.v();
   double theta = 0.0;
   if (ratio <= offset()) {
     theta = reactivity() * (offset() - ratio);

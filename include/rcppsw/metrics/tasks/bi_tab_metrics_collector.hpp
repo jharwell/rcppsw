@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <string>
 #include <list>
+#include <atomic>
 
 #include "rcppsw/metrics/base_metrics_collector.hpp"
 
@@ -62,64 +63,54 @@ class bi_tab_metrics_collector final : public base_metrics_collector {
   bool csv_line_build(std::string& line) override;
 
  private:
+  struct stats {
+    /**
+     * @brief # Times subtask 1 was chosen if partitioning was employed.
+     */
+    std::atomic_uint   subtask1_count{0};
+
+    /**
+     * @brief # Times subtask 2 was chosen if partitioning was employed.
+     */
+    std::atomic_uint   subtask2_count{0};
+
+    /**
+     * @brief # Times partitioning was employed when allocating a task,
+     */
+    std::atomic_uint   partition_count{0};
+
+    /**
+     * @brief # Times partitioning was not employed when allocating a task.
+     */
+    std::atomic_uint   no_partition_count{0};
+
+    /**
+     * @brief # Times when task allocation resulted in a different task being
+     * executed.
+     */
+    std::atomic_uint   task_sw_count{0};
+
+    /**
+     * @brief # Times when task allocation resulted in a task of a different
+     * depth being executed than previous.
+     */
+    std::atomic_uint   task_depth_sw_count{0};
+
+
+    /**
+     * @brief The average partitioning probability of the root task in the TAB.
+     */
+    std::atomic<double> partition_prob{0.0};
+
+    /**
+     * @brief The average subtask selection probability of the root task in the
+     * TAB.
+     */
+    std::atomic<double> subtask_sel_prob{0.0};
+  };
   /* clang-format off */
-  /**
-   * @brief # Times subtask 1 was chosen if partitioning was employed within an
-   * interval.
-   */
-  uint   m_int_subtask1_count{0};
-
-  /**
-   * @brief # Times subtask 2 was chosen if partitioning was employed within an
-   * interval.
-   */
-  uint   m_int_subtask2_count{0};
-
-  /**
-   * @brief # Times partitioning was employed when allocating a task within an
-   * interval.
-   */
-  uint   m_int_partition_count{0};
-
-  /**
-   * @brief # Times partitioning was not employed when allocating a task within
-   * an interval.
-   */
-  uint   m_int_no_partition_count{0};
-
-  /**
-   * @brief # Times when task allocation resulted in a different task being
-   * executed than previous within an interval.
-   */
-  uint   m_int_task_sw_count{0};
-
-  /**
-   * @brief # Times when task allocation resulted in a task of a different
-   * depth being executed than previous within an interval.
-   */
-  uint   m_int_task_depth_sw_count{0};
-
-
-  /**
-   * @brief The average partitioning probability of the root task in the TAB
-   * within an interval
-   */
-  double m_int_partition_prob{0.0};
-
-  /**
-   * @brief The average subtask selection probability of the root task in the
-   * TAB within an interval.
-   */
-  double m_int_subtask_selection_prob{0.0};
-
-  uint   m_cum_subtask1_count{0};
-  uint   m_cum_subtask2_count{0};
-  uint   m_cum_partition_count{0};
-  uint   m_cum_no_partition_count{0};
-  uint   m_cum_task_sw_count{0};
-  uint   m_cum_task_depth_sw_count{0};
-  double m_cum_partition_prob{0.0};
-  double m_cum_subtask_selection_prob{0.0};
+  struct stats m_interval{};
+  struct stats m_cum{};
   /* clang-format on */
 };
 

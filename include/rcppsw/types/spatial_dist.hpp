@@ -35,7 +35,7 @@ NS_START(rcppsw, types);
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief Specifies a distance in "real" spatail space.
+ * @brief Specifies a distance in "real" spatial space.
  */
 class spatial_dist : public named_type<double, struct spatial_dist_tag> {
  public:

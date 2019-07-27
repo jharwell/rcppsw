@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <list>
 #include <string>
+#include <atomic>
 
 #include "rcppsw/metrics/base_metrics_collector.hpp"
 #include "rcppsw/er/client.hpp"
@@ -64,41 +65,41 @@ class execution_metrics_collector final : public base_metrics_collector,
   bool csv_line_build(std::string& line) override;
 
  private:
-  /**
-   * @brief # Times the task has been completed within an interval.
-   */
-  uint              m_int_complete_count{0};
+  struct stats {
+    /**
+     * @brief # Times the task has been completed.
+     */
+    std::atomic_uint complete_count{0};
 
-  /**
-   * @brief # Times the task has been aborted within an interval.
-   */
-  uint              m_int_abort_count{0};
+    /**
+     * @brief # Times the task has been aborted.
+     */
+    std::atomic_uint abort_count{0};
 
-  /**
-   * @brief # Times at their interface during an interval.
-   */
-  uint              m_int_interface_count{0};
+    /**
+     * @brief # Times at their interface.
+     */
+    std::atomic_uint interface_count{0};
 
-  /**
-   * @brief Execution times of the task within an interval.
-   */
-  double            m_int_exec_time{};
+    /**
+     * @brief Execution times of the task.
+     */
+    std::atomic_uint exec_time{};
 
-  /**
-   * @brief Interface time of the task within an interval.
-   */
-  double            m_int_interface_time{0.0};
+    /**
+     * @brief Interface time of the task.
+     */
+    std::atomic_uint interface_time{0};
 
-  ta::time_estimate m_int_exec_estimate{0};
-  ta::time_estimate m_int_interface_estimate{0};
+    std::atomic_uint exec_estimate{0};
+    std::atomic_uint interface_estimate{0};
+  };
 
-  uint              m_cum_complete_count{0};
-  uint              m_cum_abort_count{0};
-  uint              m_cum_interface_count{0};
-  double            m_cum_exec_time{0.0};
-  double            m_cum_interface_time{0.0};
-  ta::time_estimate m_cum_exec_estimate{0};
-  ta::time_estimate m_cum_interface_estimate{0};
+  /* clang-format off */
+  struct stats m_interval{};
+  struct stats m_cum{};
+
+  /* clang-format on */
 };
 
 NS_END(tasks, metrics, rcppsw);

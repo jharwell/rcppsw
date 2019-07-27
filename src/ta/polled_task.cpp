@@ -41,7 +41,7 @@ polled_task::~polled_task(void) = default;
 void polled_task::exec_estimate_init(const math::rangeu& bounds) {
   std::default_random_engine rng;
   std::uniform_int_distribution<> dist(bounds.lb(), bounds.ub());
-  executable_task::exec_estimate_init(dist(rng));
+  executable_task::exec_estimate_init(types::timestep(dist(rng)));
 } /* exec_estimate_init() */
 
 NS_END(ta, rcppsw);

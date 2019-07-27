@@ -115,7 +115,10 @@ class collector_group {
    *
    * Useful if you have a "polymorphic" set of metrics that are very similar,
    * but need to be captured in different files, and you don't want to have to
-   * derive nearly identical classes to handle it.
+   * derive nearly identical classes to handle it. The predicate is evaluated
+   * *after* checking to see if the specified collector is enabled, because that
+   * check has to be done anyway, and predicate evaluation is potentially
+   * expensive.
    *
    * @param name The name of the collector to collect with.
    * @param metrics The metrics to collect.
@@ -127,12 +130,12 @@ class collector_group {
   bool collect_if(const std::string& name,
                   const base_metrics& metrics,
                   std::function<bool(const base_metrics&)> predicate) {
-    if (predicate(metrics)) {
-      auto it = m_collectors.find(name);
-      if (it != m_collectors.end()) {
+    auto it = m_collectors.find(name);
+    if (it != m_collectors.end()) {
+      if (predicate(metrics)) {
         it->second->collect(metrics);
+        return true;
       }
-      return true;
     }
     return false;
   }

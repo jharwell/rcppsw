@@ -27,6 +27,7 @@
 #include <vector>
 #include <list>
 #include <string>
+#include <atomic>
 
 #include "rcppsw/metrics/base_metrics_collector.hpp"
 
@@ -64,18 +65,23 @@ class bi_tdgraph_metrics_collector final : public base_metrics_collector {
   std::list<std::string> csv_header_cols(void) const override;
   bool csv_line_build(std::string& line) override;
 
-  const std::vector<uint>& int_task_counts(void) const {
+  const std::vector<std::atomic_uint>& int_task_counts(void) const {
     return m_int_task_counts;
   }
 
  private:
+  /*
+   * These are not in a struct because I need to be able to initialize the
+   * vectors directly with the constructor arguments (well I COULD do it another
+   * way, but that smells...).
+   */
   /* clang-format off */
-  std::vector<uint> m_int_depth_counts;
-  std::vector<uint> m_int_task_counts;
-  std::vector<uint> m_int_tab_counts;
-  std::vector<uint> m_cum_depth_counts;
-  std::vector<uint> m_cum_task_counts;
-  std::vector<uint> m_cum_tab_counts;
+  std::vector<std::atomic_uint> m_int_depth_counts;
+  std::vector<std::atomic_uint> m_int_task_counts;
+  std::vector<std::atomic_uint> m_int_tab_counts;
+  std::vector<std::atomic_uint> m_cum_depth_counts;
+  std::vector<std::atomic_uint> m_cum_task_counts;
+  std::vector<std::atomic_uint> m_cum_tab_counts;
   /* clang-format on */
 };
 

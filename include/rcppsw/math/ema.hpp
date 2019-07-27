@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <cmath>
+
 #include "rcppsw/math/expression.hpp"
 
 /*******************************************************************************
@@ -52,16 +53,15 @@ class ema final : public expression<T> {
   using expression<T>::v;
   using expression<T>::eval;
 
-  static ema abs(const ema& e) { return ema(e.alpha(), std::fabs(e.v())); }
-  explicit ema(T alpha) : m_alpha(alpha) {}
-  ema(T alpha, T result) : expression<T>(result), m_alpha(alpha) {}
+  explicit ema(double alpha) : m_alpha(alpha) {}
+  ema(double alpha, const T& result) : expression<T>(result), m_alpha(alpha) {}
 
   double alpha(void) const { return m_alpha; }
 
-  double calc(double measure) { return operator()(measure); }
+  double calc(const T& measure) { return operator()(measure); }
 
-  double operator()(double measure) {
-    return eval((1 - m_alpha) * v() + m_alpha * measure);
+  T operator()(const T& measure) {
+    return eval(static_cast<T>((1 - m_alpha) * v() + m_alpha * measure));
   }
 
   ema& calc(const ema& measure) {

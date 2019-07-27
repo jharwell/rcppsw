@@ -156,7 +156,7 @@ class base_metrics_collector {
    * interval + separator (if the csv entry is not the last one in a line)
    */
   template <class T>
-  std::string csv_entry_intavg(T sum, bool last = false) const {
+  std::string csv_entry_intavg(const T& sum, bool last = false) const {
     return std::to_string(static_cast<double>(sum) / interval()) +
            ((last) ? "" : separator());
   }
@@ -167,7 +167,7 @@ class base_metrics_collector {
    * last one in a line).
    */
   template <class T>
-  std::string csv_entry_tsavg(T sum, bool last = false) const {
+  std::string csv_entry_tsavg(const T& sum, bool last = false) const {
     return std::to_string(static_cast<double>(sum) / (timestep() + 1).v()) +
            ((last) ? "" : separator());
   }
@@ -179,7 +179,9 @@ class base_metrics_collector {
    * in a line) is returned
    */
   template <class T, class U>
-  std::string csv_entry_domavg(T sum, U count, bool last = false) const {
+  std::string csv_entry_domavg(const T& sum,
+                               const U& count,
+                               bool last = false) const {
     return (count > 0) ? std::to_string(static_cast<double>(sum) /
                                         static_cast<double>(count)) +
                              ((last) ? "" : separator())

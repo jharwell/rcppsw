@@ -57,7 +57,9 @@ NS_END(detail);
  *
  * @brief Light sensor wrapper for the following supported robots:
  *
- * - ARGoS footbot
+ * - ARGoS footbot. The simulated sensor is expensive to update each timestep,
+ *   so it is disabled upon creation, so robots can selectively enable/disable
+ *   it as needed for maximum speed.
  */
 template <typename TSensor>
 class _light_sensor {
@@ -93,6 +95,10 @@ class _light_sensor {
 
     return ret;
   }
+  template <typename U = TSensor,
+            RCPPSW_SFINAE_FUNC(detail::is_argos_light_sensor<U>::value)>
+  void enable(void) const { m_sensor->Enable(); }
+  void disable(void) const { m_sensor->Disable(); }
 
  private:
   TSensor* const m_sensor;

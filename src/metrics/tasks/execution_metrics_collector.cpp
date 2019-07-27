@@ -87,32 +87,32 @@ void execution_metrics_collector::collect(
    * be switched on/off.
    */
   if (m.task_completed()) {
-    ++m_int_complete_count;
-    ++m_cum_complete_count;
+    ++m_interval.complete_count;
+    ++m_cum.complete_count;
   } else if (m.task_aborted()) {
-    ++m_int_abort_count;
-    ++m_cum_abort_count;
+    ++m_interval.abort_count;
+    ++m_cum.abort_count;
   }
 
-  m_int_interface_count += static_cast<uint>(m.task_at_interface());
-  m_cum_interface_count += static_cast<uint>(m.task_at_interface());
+  m_interval.interface_count += static_cast<uint>(m.task_at_interface());
+  m_cum.interface_count += static_cast<uint>(m.task_at_interface());
 
-  m_int_exec_estimate += m.task_exec_estimate();
-  m_cum_exec_estimate += m.task_exec_estimate();
-  m_int_exec_time += m.task_last_exec_time();
-  m_cum_exec_time += m.task_last_exec_time();
+  m_interval.exec_estimate += static_cast<uint>(m.task_exec_estimate().v());
+  m_cum.exec_estimate += static_cast<uint>(m.task_exec_estimate().v());
+  m_interval.exec_time += static_cast<uint>(m.task_last_exec_time().v());
+  m_cum.exec_time += static_cast<uint>(m.task_last_exec_time().v());
 
   /* Can be -1 if we aborted before getting to our task interface */
   int interface = m.task_last_active_interface();
   if (-1 != interface) {
-    m_int_interface_time +=
-        m.task_last_interface_time(m.task_last_active_interface());
-    m_cum_interface_time +=
-        m.task_last_interface_time(m.task_last_active_interface());
-    m_int_interface_estimate +=
-        m.task_interface_estimate(m.task_last_active_interface());
-    m_cum_interface_estimate +=
-        m.task_interface_estimate(m.task_last_active_interface());
+    m_interval.interface_time +=
+        m.task_last_interface_time(m.task_last_active_interface()).v();
+    m_cum.interface_time +=
+        m.task_last_interface_time(m.task_last_active_interface()).v();
+    m_interval.interface_estimate +=
+        static_cast<uint>(m.task_interface_estimate(m.task_last_active_interface()).v());
+    m_cum.interface_estimate +=
+        static_cast<uint>(m.task_interface_estimate(m.task_last_active_interface()).v());
   }
 } /* collect() */
 
@@ -120,36 +120,36 @@ bool execution_metrics_collector::csv_line_build(std::string& line) {
   if (!((timestep() + 1) % interval() == 0)) {
     return false;
   }
-  uint int_n_allocs = m_int_complete_count + m_int_abort_count;
-  uint cum_n_allocs = m_cum_complete_count + m_cum_abort_count;
+  uint int_n_allocs = m_interval.complete_count + m_interval.abort_count;
+  uint cum_n_allocs = m_cum.complete_count + m_cum.abort_count;
 
-  line += csv_entry_domavg(m_int_exec_time, int_n_allocs);
-  line += csv_entry_domavg(m_cum_exec_time, cum_n_allocs);
-  line += csv_entry_domavg(m_int_interface_time, int_n_allocs);
-  line += csv_entry_domavg(m_cum_interface_time, cum_n_allocs);
-  line += csv_entry_domavg(m_int_exec_estimate.v(), int_n_allocs);
-  line += csv_entry_domavg(m_cum_exec_estimate.v(), cum_n_allocs);
+  line += csv_entry_domavg(m_interval.exec_time, int_n_allocs);
+  line += csv_entry_domavg(m_cum.exec_time, cum_n_allocs);
+  line += csv_entry_domavg(m_interval.interface_time, int_n_allocs);
+  line += csv_entry_domavg(m_cum.interface_time, cum_n_allocs);
+  line += csv_entry_domavg(m_interval.exec_estimate, int_n_allocs);
+  line += csv_entry_domavg(m_cum.exec_estimate, cum_n_allocs);
 
-  line += csv_entry_domavg(m_int_interface_estimate.v(), int_n_allocs);
-  line += csv_entry_domavg(m_cum_interface_estimate.v(), cum_n_allocs);
+  line += csv_entry_domavg(m_interval.interface_estimate, int_n_allocs);
+  line += csv_entry_domavg(m_cum.interface_estimate, cum_n_allocs);
 
-  line += csv_entry_intavg(m_int_abort_count);
-  line += csv_entry_tsavg(m_cum_abort_count);
-  line += csv_entry_intavg(m_int_complete_count);
-  line += csv_entry_tsavg(m_cum_complete_count);
-  line += csv_entry_intavg(m_int_interface_count);
-  line += csv_entry_tsavg(m_cum_interface_count, true);
+  line += csv_entry_intavg(m_interval.abort_count);
+  line += csv_entry_tsavg(m_cum.abort_count);
+  line += csv_entry_intavg(m_interval.complete_count);
+  line += csv_entry_tsavg(m_cum.complete_count);
+  line += csv_entry_intavg(m_interval.interface_count);
+  line += csv_entry_tsavg(m_cum.interface_count, true);
   return true;
 } /* store_foraging_stats() */
 
 void execution_metrics_collector::reset_after_interval(void) {
-  m_int_complete_count = 0;
-  m_int_abort_count = 0;
-  m_int_interface_count = 0;
-  m_int_exec_time = 0;
-  m_int_interface_time = 0;
-  m_int_exec_estimate.reset();
-  m_int_interface_estimate.reset();
+  m_interval.complete_count = 0;
+  m_interval.abort_count = 0;
+  m_interval.interface_count = 0;
+  m_interval.exec_time = 0;
+  m_interval.interface_time = 0;
+  m_interval.exec_estimate = 0;
+  m_interval.interface_estimate = 0;
 } /* reset_after_interval() */
 
 NS_END(metrics, rcppsw, tasks);

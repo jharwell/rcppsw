@@ -61,7 +61,9 @@ NS_END(detail);
  * @brief Omnidirectional colored blob camera sensor wrapper for the following
  * supported robots:
  *
- * - ARGoS footbot
+ * - ARGoS footbot. The simulated sensor is expensive to update each timestep,
+ *   so it is disabled upon creation, so robots can selectively enable/disable
+ *   it as needed for maximum speed.
  */
 template <typename TSensor>
 class _colored_blob_camera_sensor {
@@ -74,11 +76,7 @@ class _colored_blob_camera_sensor {
     utils::color color;
   };
 
-  template <typename U = TSensor,
-            RCPPSW_SFINAE_FUNC(detail::is_argos_blob_camera_sensor<U>::value)>
-  explicit _colored_blob_camera_sensor(U * const sensor) : m_sensor(sensor) {
-    sensor->Enable();
-  }
+  explicit _colored_blob_camera_sensor(TSensor * const sensor) : m_sensor(sensor) {}
 
   /**
    * @brief Get the sensor readings for the footbot robot.
@@ -101,6 +99,14 @@ class _colored_blob_camera_sensor {
 
     return ret;
   }
+
+  template <typename U = TSensor,
+            RCPPSW_SFINAE_FUNC(detail::is_argos_blob_camera_sensor<U>::value)>
+  void enable(void) const { m_sensor->Enable(); }
+
+  template <typename U = TSensor,
+            RCPPSW_SFINAE_FUNC(detail::is_argos_blob_camera_sensor<U>::value)>
+  void disable(void) const { m_sensor->Disable(); }
 
  private:
   TSensor* const m_sensor;

@@ -40,20 +40,16 @@ bi_tdgraph_metrics_collector::bi_tdgraph_metrics_collector(
     uint interval,
     uint decomposition_depth)
     : base_metrics_collector(ofname, interval),
-      m_int_depth_counts(decomposition_depth + 1, 0),
+      m_int_depth_counts(decomposition_depth + 1),
       m_int_task_counts(static_cast<uint>(std::pow(2, decomposition_depth + 1) -
-                                          1),
-                        0),
+                                          1)),
       m_int_tab_counts(static_cast<uint>(std::pow(2, decomposition_depth - 1) +
-                                         1),
-                       0),
-      m_cum_depth_counts(decomposition_depth + 1, 0),
+                                         1)),
+      m_cum_depth_counts(decomposition_depth + 1),
       m_cum_task_counts(static_cast<uint>(std::pow(2, decomposition_depth + 1) -
-                                          1),
-                        0),
+                                          1)),
       m_cum_tab_counts(static_cast<uint>(std::pow(2, decomposition_depth - 1) +
-                                         1),
-                       0) {}
+                                         1)) {}
 
 /*******************************************************************************
  * Member Functions
@@ -137,9 +133,17 @@ bool bi_tdgraph_metrics_collector::csv_line_build(std::string& line) {
 } /* store_foraging_stats() */
 
 void bi_tdgraph_metrics_collector::reset_after_interval(void) {
-  m_int_depth_counts.assign(m_int_depth_counts.size(), 0);
-  m_int_task_counts.assign(m_int_task_counts.size(), 0);
-  m_int_tab_counts.assign(m_int_tab_counts.size(), 0);
+  for (size_t i = 0; i < m_int_depth_counts.size(); ++i) {
+    std::atomic_init(&m_int_depth_counts[i], 0U);
+  } /* for(i..) */
+
+  for (size_t i = 0; i < m_int_task_counts.size(); ++i) {
+    std::atomic_init(&m_int_task_counts[i], 0U);
+  } /* for(i..) */
+
+  for (size_t i = 0; i < m_int_tab_counts.size(); ++i) {
+    std::atomic_init(&m_int_tab_counts[i], 0U);
+  } /* for(i..) */
 } /* reset_after_interval() */
 
 NS_END(metrics, rcppsw, tasks);

@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include "rcppsw/math/sigmoid.hpp"
 #include "rcppsw/ta/time_estimate.hpp"
+#include "rcppsw/types/timestep.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -99,8 +100,10 @@ class abort_probability : public math::sigmoid {
    *
    * @return The abort probability.
    */
-  double operator()(double exec_time, const time_estimate& whole_task);
-  double calc(double exec_time, const time_estimate& whole_task) {
+  double operator()(const types::timestep& exec_time,
+                    const time_estimate& whole_task);
+  double calc(const types::timestep& exec_time,
+              const time_estimate& whole_task) {
     return operator()(exec_time, whole_task);
   }
 };

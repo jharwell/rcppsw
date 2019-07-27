@@ -85,8 +85,8 @@ class executable_task : public logical_task,
   ~executable_task(void) override = default;
 
   /* execution metrics */
-  double task_last_exec_time(void) const override { return m_last_exec_time; }
-  double task_last_interface_time(uint i) const override {
+  types::timestep task_last_exec_time(void) const override { return m_last_exec_time; }
+  types::timestep task_last_interface_time(uint i) const override {
     return m_last_interface_times[i];
   }
   bool task_aborted(void) const override final { return m_task_aborted; }
@@ -136,7 +136,7 @@ class executable_task : public logical_task,
    */
   void interface_time_reset(void) {
     if (-1 != active_interface()) {
-      m_interface_times[active_interface()] = 0.0;
+      m_interface_times[active_interface()] = types::timestep(0);
     }
   }
 
@@ -165,7 +165,7 @@ class executable_task : public logical_task,
    *
    * This is needed for accurate task abort calculations.
    */
-  double exec_time_update(void) {
+  types::timestep exec_time_update(void) {
     return m_exec_time = current_time() - m_exec_start_time;
   }
 
@@ -185,8 +185,9 @@ class executable_task : public logical_task,
    * @param i The interface ID.
    * @param last_measure The last measured time.
    */
-  void interface_estimate_update(uint i, double last_measure) {
-    m_interface_estimates[i](last_measure);
+  void interface_estimate_update(uint i,
+                                 const types::timestep& last_measure) {
+    m_interface_estimates[i](last_measure.v());
   }
 
   /**
@@ -195,8 +196,8 @@ class executable_task : public logical_task,
    *
    * @param last_measure The last measured time.
    */
-  void exec_estimate_update(double last_measure) {
-    m_exec_estimate(last_measure);
+  void exec_estimate_update(const types::timestep& last_measure) {
+    m_exec_estimate(last_measure.v());
   }
 
   /**
@@ -205,8 +206,8 @@ class executable_task : public logical_task,
    *
    * @param init_measure Initial execution estimate.
    */
-  void exec_estimate_init(double init_measure) {
-    m_exec_estimate.eval(init_measure);
+  void exec_estimate_init(const types::timestep& init_measure) {
+    m_exec_estimate.eval(init_measure.v());
   }
 
   /**
@@ -238,7 +239,7 @@ class executable_task : public logical_task,
    *
    * @param i The interface ID.
    */
-  double interface_time(uint i) const { return m_interface_times[i]; }
+  types::timestep interface_time(uint i) const { return m_interface_times[i]; }
 
   /**
    * @brief Get the current abort probability at the specified interface.
@@ -249,7 +250,7 @@ class executable_task : public logical_task,
   /**
    * @brief Get the current execution time of the task.
    */
-  double exec_time(void) const { return m_exec_time; }
+  types::timestep exec_time(void) const { return m_exec_time; }
 
   /**
    * @brief Get if a task is currently atomic (i.e. not abortable).
@@ -282,12 +283,13 @@ class executable_task : public logical_task,
    * @param i The interface ID.
    * @param start_time The timestep upon which the task entered the interface.
    */
-  virtual double interface_time_calc(uint i, double start_time) = 0;
+  virtual types::timestep interface_time_calc(uint i,
+                                              const types::timestep& start_time) = 0;
 
   /**
    * @brief Get the current time
    */
-  virtual double current_time(void) const = 0;
+  virtual types::timestep current_time(void) const = 0;
 
   void interface_time_mark_finish(uint i) {
     m_last_interface_times[i] = m_interface_times[i];
@@ -313,23 +315,25 @@ class executable_task : public logical_task,
   void last_active_interface_reset(void) { m_last_active_interface = -1; }
 
   /* clang-format off */
-  const std::string          mc_abort_src;
+  const std::string            mc_abort_src;
 
-  bool                       m_is_atomic{false};
-  bool                       m_is_partitionable{false};
-  bool                       m_task_aborted{false};
-  std::vector<bool>          m_interface_in_prog;
-  int                        m_last_active_interface{-1};
+  bool                         m_is_atomic{false};
+  bool                         m_is_partitionable{false};
+  std::vector<bool>            m_interface_in_prog;
+  int                          m_last_active_interface{-1};
 
-  std::vector<double>        m_interface_times;
-  std::vector<double>        m_last_interface_times;
-  std::vector<double>        m_interface_start_times;
-  double                     m_exec_time{0.0};
-  double                     m_last_exec_time{0.0};
-  double                     m_exec_start_time{0.0};
-  std::vector<time_estimate> m_interface_estimates;
-  time_estimate              m_exec_estimate;
-  abort_probability          m_abort_prob;
+  std::vector<types::timestep> m_interface_times;
+  std::vector<types::timestep> m_last_interface_times;
+  std::vector<types::timestep> m_interface_start_times;
+  std::vector<time_estimate>   m_interface_estimates;
+
+  types::timestep              m_exec_time{0};
+  types::timestep              m_last_exec_time{0};
+  types::timestep              m_exec_start_time{0};
+  time_estimate                m_exec_estimate;
+
+  bool                         m_task_aborted{false};
+  abort_probability            m_abort_prob;
   /* clang-format on */
 };
 
