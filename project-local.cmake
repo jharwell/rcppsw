@@ -57,8 +57,7 @@ set(${target}_LIBRARIES
 
 set(${target}_LIBRARY_DIRS ${rcsw_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS})
 
-# No need to link with this--it has been compiled out
-if (NOT LIBRA_ER_NREPORT)
+if ("${LIBRA_ER}" MATCHES "ALL")
   set(${target}_LIBRARIES ${${target}_LIBRARIES} log4cxx)
 endif()
 

@@ -61,6 +61,10 @@ class timestep : public named_type<uint, struct timestep_tag> {
     set(v() + other.v());
     return *this;
   }
+  timestep& operator+=(uint n) {
+    set(v() + n);
+    return *this;
+  }
 
   timestep operator-(const timestep& other) const {
     timestep res(v() - other.v());
