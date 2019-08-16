@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/math/config/xml/sigmoid_parser.hpp"
+
 #include <ext/ticpp/ticpp.h>
 
 #include "rcppsw/utils/line_parser.hpp"
@@ -44,8 +45,8 @@ void sigmoid_parser::parse(const ticpp::Element& node) {
 } /* parse() */
 
 bool sigmoid_parser::validate(void) const {
-  CHECK(m_config->reactivity > 0.0);
-  CHECK(m_config->offset > 0.0);
+  RCSW_CHECK(m_config->reactivity > 0.0);
+  RCSW_CHECK(m_config->offset > 0.0);
   return true;
 
 error:

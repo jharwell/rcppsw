@@ -29,6 +29,7 @@
 #include <boost/mpl/transform.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/utility/enable_if.hpp>
+
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************

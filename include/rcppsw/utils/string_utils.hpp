@@ -27,6 +27,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************

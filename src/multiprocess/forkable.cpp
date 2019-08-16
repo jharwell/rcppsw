@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/multiprocess/forkable.hpp"
+
 #include "rcsw/multiprocess/procm.h"
 
 /*******************************************************************************
@@ -48,7 +49,7 @@ pid_t forkable::start(const std::string& new_wd, int core) {
   m_proc_run = true;
   m_pid = fork();
   if (m_pid == 0) {
-    CHECK(0 == chdir(new_wd.c_str()));
+    RCSW_CHECK(0 == chdir(new_wd.c_str()));
     if (-1 != core) {
       procm_socket_lock(core);
     }

@@ -22,8 +22,10 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/bi_tab_sel_probability.hpp"
+
 #include <cassert>
 #include <cmath>
+
 #include "rcppsw/ta/bi_tab.hpp"
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
 #include "rcppsw/ta/polled_task.hpp"
@@ -39,7 +41,6 @@ NS_START(rcppsw, ta);
 static inline time_estimate est_abs(const time_estimate& e) {
   return time_estimate(e.alpha(), std::fabs(e.v()));
 }
-
 
 /*******************************************************************************
  * Constructors/Destructor
@@ -73,12 +74,12 @@ double bi_tab_sel_probability::calc_harwell2019(const bi_tab& tab1,
                                                 const bi_tab& tab2,
                                                 std::default_random_engine& rng) {
   auto ratio1 = est_abs(tab1.root()->task_exec_estimate() -
-                                   (tab1.child1()->task_exec_estimate() +
-                                    tab1.child2()->task_exec_estimate())) /
+                        (tab1.child1()->task_exec_estimate() +
+                         tab1.child2()->task_exec_estimate())) /
                 tab1.root()->task_exec_estimate();
   auto ratio2 = est_abs(tab2.root()->task_exec_estimate() -
-                                   (tab2.child1()->task_exec_estimate() +
-                                    tab2.child2()->task_exec_estimate())) /
+                        (tab2.child1()->task_exec_estimate() +
+                         tab2.child2()->task_exec_estimate())) /
                 tab2.root()->task_exec_estimate();
   return eval(calc_sigmoid(ratio1.v(), ratio2.v(), rng));
 } /* calc_harwell2019() */

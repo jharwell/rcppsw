@@ -109,10 +109,10 @@ void execution_metrics_collector::collect(
         m.task_last_interface_time(m.task_last_active_interface()).v();
     m_cum.interface_time +=
         m.task_last_interface_time(m.task_last_active_interface()).v();
-    m_interval.interface_estimate +=
-        static_cast<uint>(m.task_interface_estimate(m.task_last_active_interface()).v());
-    m_cum.interface_estimate +=
-        static_cast<uint>(m.task_interface_estimate(m.task_last_active_interface()).v());
+    m_interval.interface_estimate += static_cast<uint>(
+        m.task_interface_estimate(m.task_last_active_interface()).v());
+    m_cum.interface_estimate += static_cast<uint>(
+        m.task_interface_estimate(m.task_last_active_interface()).v());
   }
 } /* collect() */
 

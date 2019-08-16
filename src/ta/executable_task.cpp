@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/executable_task.hpp"
+
 #include "rcppsw/math/config/ema_config.hpp"
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
 #include "rcppsw/ta/time_estimate.hpp"

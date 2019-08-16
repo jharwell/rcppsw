@@ -85,7 +85,7 @@ class base_factory {
     static_assert(std::is_base_of<TBase, TDerived>::value,
                   "register_type() only accepts types derived from the base");
     if (m_workers.end() == m_workers.find(name)) {
-      m_workers[name] = rcppsw::make_unique<
+      m_workers[name] = std::make_unique<
         factory_worker_impl<TDerived,
                             wrapper_is_shared<TPointerWrapper>::value>>();
     }

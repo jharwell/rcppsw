@@ -85,17 +85,17 @@ void bi_tab_metrics_collector::collect(
 
     auto int_partition_prob = m_interval.partition_prob.load();
     auto int_subtask_sel_prob = m_interval.subtask_sel_prob.load();
-    m_interval.partition_prob.compare_exchange_strong(int_partition_prob,
-                                                 int_partition_prob + m.partition_prob());
-    m_interval.subtask_sel_prob.compare_exchange_strong(int_subtask_sel_prob,
-                                                   int_subtask_sel_prob + m.subtask_selection_prob());
+    m_interval.partition_prob.compare_exchange_strong(
+        int_partition_prob, int_partition_prob + m.partition_prob());
+    m_interval.subtask_sel_prob.compare_exchange_strong(
+        int_subtask_sel_prob, int_subtask_sel_prob + m.subtask_selection_prob());
 
     auto cum_partition_prob = m_cum.partition_prob.load();
     auto cum_subtask_sel_prob = m_cum.subtask_sel_prob.load();
-    m_cum.partition_prob.compare_exchange_strong(cum_partition_prob,
-                                                 cum_partition_prob + m.partition_prob());
-    m_cum.subtask_sel_prob.compare_exchange_strong(cum_subtask_sel_prob,
-                                                   cum_subtask_sel_prob + m.subtask_selection_prob());
+    m_cum.partition_prob.compare_exchange_strong(
+        cum_partition_prob, cum_partition_prob + m.partition_prob());
+    m_cum.subtask_sel_prob.compare_exchange_strong(
+        cum_subtask_sel_prob, cum_subtask_sel_prob + m.subtask_selection_prob());
   } else {
     ++m_interval.no_partition_count;
     ++m_cum.no_partition_count;

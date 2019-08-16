@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/subtask_sel_probability.hpp"
+
 #include "rcppsw/ta/config/sigmoid_sel_config.hpp"
 #include "rcppsw/ta/time_estimate.hpp"
 

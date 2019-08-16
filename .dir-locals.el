@@ -14,7 +14,7 @@
                     (setq flycheck-clang-include-path includes-list)
                     (add-to-list 'flycheck-clang-args "-fPIC")
                     (add-to-list 'flycheck-clang-definitions "HAL_CONFIG=HAL_CONFIG_ARGOS_FOOTBOT")
-                    (add-to-list 'flycheck-clang-args "-std=c++14")
+                    (add-to-list 'flycheck-clang-args "-std=c++17")
                     (add-to-list 'flycheck-clang-args (concat "-isystem" (substitute-in-file-name
                                                                           "$rcppsw")))
                     (add-to-list 'flycheck-clang-args (concat "-isystem" (substitute-in-file-name
@@ -23,7 +23,7 @@
 
                     (setq flycheck-gcc-include-path includes-list)
                     (add-to-list 'flycheck-gcc-args "-fPIC")
-                    (add-to-list 'flycheck-gcc-args "-std=c++14")
+                    (add-to-list 'flycheck-gcc-args "-std=c++17")
                     (add-to-list 'flycheck-gcc-definitions "HAL_CONFIG=HAL_CONFIG_FOOTBOT")
                     (let ((cc-search-dirs (list (concat (projectile-project-root) "include/rcppsw/*/*")
                                                 (concat (projectile-project-root) "src/*/*")

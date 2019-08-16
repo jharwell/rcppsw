@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/bi_tdgraph.hpp"
+
 #include <chrono>
 #include <random>
 

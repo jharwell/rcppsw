@@ -26,8 +26,10 @@
  ******************************************************************************/
 #include <algorithm>
 #include <vector>
-#include "rcppsw/common/common.hpp"
+
 #include "rcsw/common/fpc.h"
+
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
