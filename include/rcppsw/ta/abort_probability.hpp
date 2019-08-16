@@ -47,7 +47,7 @@ NS_START(rcppsw, ta);
  *
  * Depends on:
  *
- * - The reactivity parameter: How sensitive should robots be to abrupt changes
+ * - The reactivity parameter: How sensitive should controller be to abrupt changes
  *   in task estimates/execution times?
  *
  * - The offset parameter: How much the current_exec/prev_estimate ratio will be

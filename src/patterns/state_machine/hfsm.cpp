@@ -21,12 +21,12 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/patterns/state_machine/hfsm.hpp"
+#include "rcppsw/patterns/fsm/hfsm.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, state_machine);
+NS_START(rcppsw, patterns, fsm);
 
 /*******************************************************************************
  * Member Functions
@@ -84,11 +84,11 @@ void hfsm::state_engine_step(const state_map_ex_row* const c_row_ex) {
 } /* state_engine_step() */
 
 void hfsm::inject_event(int signal, int type) {
-  external_event(current_state(), rcppsw::make_unique<event_data>(signal, type));
+  external_event(current_state(), std::make_unique<event_data>(signal, type));
 } /* inject event */
 
 void hfsm::change_parent(uint8_t state,
-                         rcppsw::patterns::state_machine::state* new_parent) {
+                         rcppsw::patterns::fsm::state* new_parent) {
   auto* row = state_map(state);
   auto* row_ex = state_map_ex(state);
 
@@ -103,4 +103,4 @@ void hfsm::change_parent(uint8_t state,
   }
 } /* change_parent() */
 
-NS_END(state_machine, patterns, rcppsw);
+NS_END(fsm, patterns, rcppsw);

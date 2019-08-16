@@ -54,7 +54,7 @@ struct src_sigmoid_sel_config;
  * Let the current TAB be TAB i, and the child/parent TAB be TAB j. We compute
  * how balanced/unbalanced the execution time estimates of root vs (child1 +
  * child2) for both TABs. If the resulting ratios are equal (or very close),
- * then there is probably a good distribution of robots executing tasks from
+ * then there is probably a good distribution of controller executing tasks from
  * each TAB, and the execution estimates are probably fairly reliable, and you
  * should not switch TABs.
  *
@@ -71,7 +71,7 @@ struct src_sigmoid_sel_config;
  *
  * - The offset parameter: What is the threshold beneath which differences in
  *   the TAB balance ratios are not considered consequential, and above which
- *   robots should prefer to switch TABs with quickly increasing probability.
+ *   controller should prefer to switch TABs with quickly increasing probability.
  *
  * - reactivity > 0.
  * - offset > 1.

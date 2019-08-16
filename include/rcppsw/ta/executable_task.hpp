@@ -85,7 +85,9 @@ class executable_task : public logical_task,
   ~executable_task(void) override = default;
 
   /* execution metrics */
-  types::timestep task_last_exec_time(void) const override { return m_last_exec_time; }
+  types::timestep task_last_exec_time(void) const override {
+    return m_last_exec_time;
+  }
   types::timestep task_last_interface_time(uint i) const override {
     return m_last_interface_times[i];
   }
@@ -185,8 +187,7 @@ class executable_task : public logical_task,
    * @param i The interface ID.
    * @param last_measure The last measured time.
    */
-  void interface_estimate_update(uint i,
-                                 const types::timestep& last_measure) {
+  void interface_estimate_update(uint i, const types::timestep& last_measure) {
     m_interface_estimates[i](last_measure.v());
   }
 
@@ -283,8 +284,9 @@ class executable_task : public logical_task,
    * @param i The interface ID.
    * @param start_time The timestep upon which the task entered the interface.
    */
-  virtual types::timestep interface_time_calc(uint i,
-                                              const types::timestep& start_time) = 0;
+  virtual types::timestep interface_time_calc(
+      uint i,
+      const types::timestep& start_time) = 0;
 
   /**
    * @brief Get the current time

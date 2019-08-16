@@ -42,6 +42,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************

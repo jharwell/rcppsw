@@ -26,9 +26,9 @@
 /*******************************************************************************
  * Constants
  ******************************************************************************/
-#define LIBRA_ER_NONE   0 /* No event reporting */
-#define LIBRA_ER_FATAL  1 /* Fatal events only */
-#define LIBRA_ER_ALL    2 /* All event reporting  */
+#define LIBRA_ER_NONE 0  /* No event reporting */
+#define LIBRA_ER_FATAL 1 /* Fatal events only */
+#define LIBRA_ER_ALL 2   /* All event reporting  */
 
 /*
  * Size of buffer put on stack for creating debug strings. This probably never
@@ -41,7 +41,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#if(LIBRA_ER >= LIBRA_ER_ALL)
+#if (LIBRA_ER >= LIBRA_ER_ALL)
 #include <log4cxx/consoleappender.h>
 #include <log4cxx/fileappender.h>
 #include <log4cxx/logger.h>
@@ -52,6 +52,7 @@
 
 #include <cassert>
 #include <string>
+
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
@@ -65,21 +66,20 @@
  * multithreaded contexts where the overhead of log4cxx will make possible race
  * conditions much less likely to occur.
  */
-#if(LIBRA_ER == LIBRA_ER_FATAL)
+#if (LIBRA_ER == LIBRA_ER_FATAL)
 
-#define ER_FATAL(...) { ER_REPORT(__VA_ARGS__); }
-#define ER_REPORT(msg, ...)                                \
-  {                                                                     \
-    printf(msg "\n", ##__VA_ARGS__); \
-  }
-#elif(LIBRA_ER == LIBRA_ER_NONE)
+#define ER_FATAL(...) \
+  { ER_REPORT(__VA_ARGS__); }
+#define ER_REPORT(msg, ...) \
+  { printf(msg "\n", ##__VA_ARGS__); }
+#elif (LIBRA_ER == LIBRA_ER_NONE)
 
 #define ER_REPORT(...)
 #define ER_FATAL(...)
 
-#endif  /* LIBRA_ER == LIBRA_ER_FATAL */
+#endif /* LIBRA_ER == LIBRA_ER_FATAL */
 
-#if(LIBRA_ER >= LIBRA_ER_ALL)
+#if (LIBRA_ER >= LIBRA_ER_ALL)
 
 /**
  * @def ER_REPORT(lvl, msg, ...)
@@ -90,23 +90,23 @@
  *
  * This macro is only available if event reporting is fully enabled.
  */
-#define ER_REPORT(lvl, logger, msg, ...)                                \
-  {                                                                     \
-    char _str[LIBRA_ER_MSGLEN_MAX];                                     \
+#define ER_REPORT(lvl, logger, msg, ...)                                  \
+  {                                                                       \
+    char _str[LIBRA_ER_MSGLEN_MAX];                                       \
     snprintf(static_cast<char*>(_str), sizeof(_str), msg, ##__VA_ARGS__); \
-    LOG4CXX_##lvl(logger, _str);                                        \
+    LOG4CXX_##lvl(logger, _str);                                          \
   }
 
-#define LIBRA_ER_FATAL(...)                                                   \
-  {                                                                     \
-    auto logger = rcppsw::er::client<typename std::remove_cv<           \
-    typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
-    if (logger->isFatalEnabled()) {                                     \
-      ER_REPORT(FATAL, logger, __VA_ARGS__)                             \
-          }                                                             \
+#define ER_FATAL(...)                                                            \
+  {                                                                              \
+    auto logger = rcppsw::er::client<typename std::remove_cv<                    \
+        typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
+    if (logger->isFatalEnabled()) {                                              \
+      ER_REPORT(FATAL, logger, __VA_ARGS__)                                      \
+    }                                                                            \
   }
 
-#define ER_ERR(...)                                                     \
+#define ER_ERR(...)                                                              \
   {                                                                              \
     auto logger = rcppsw::er::client<typename std::remove_cv<                    \
         typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
@@ -230,7 +230,7 @@
  * Initialize a logging client with the specified name (easier to do a macro
  * than to have to try do the casting every single time).
  */
-#if(LIBRA_ER >= LIBRA_ER_ALL)
+#if (LIBRA_ER >= LIBRA_ER_ALL)
 #define ER_CLIENT_INIT(name)                                                 \
   rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>( \
       name)
@@ -286,7 +286,7 @@ NS_START(rcppsw, er);
 template <typename T>
 class client {
  public:
-#if(LIBRA_ER >= LIBRA_ER_ALL)
+#if (LIBRA_ER >= LIBRA_ER_ALL)
   /**
    * @brief Initialize logging by specifying the path to the log4cxx
    * configuration file.

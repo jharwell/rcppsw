@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/abort_probability.hpp"
+
 #include <cmath>
 
 #include "rcppsw/math/config/sigmoid_config.hpp"

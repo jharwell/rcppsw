@@ -21,19 +21,20 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/patterns/state_machine/base_fsm.hpp"
+#include "rcppsw/patterns/fsm/base_fsm.hpp"
+
 #include <cassert>
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, state_machine);
+NS_START(rcppsw, patterns, fsm);
 
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
 base_fsm::base_fsm(uint8_t max_states, uint8_t initial_state)
-    : ER_CLIENT_INIT("rcppsw.patterns.state_machine.fsm"),
+    : ER_CLIENT_INIT("rcppsw.patterns.fsm.fsm"),
       mc_max_states(max_states),
       m_current_state(initial_state),
       m_initial_state(initial_state) {
@@ -190,4 +191,4 @@ void base_fsm::update_state(uint8_t new_state) {
   m_current_state = new_state;
 } /* update_state() */
 
-NS_END(state_machine, patterns, rcppssw);
+NS_END(fsm, patterns, rcppssw);

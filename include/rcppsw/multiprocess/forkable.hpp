@@ -26,9 +26,11 @@
  ******************************************************************************/
 #include <sys/wait.h>
 #include <unistd.h>
+
 #include <string>
 #include <thread>
 #include <vector>
+
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************

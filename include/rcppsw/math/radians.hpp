@@ -64,7 +64,7 @@ class radians {
 
   radians(void) = default;
 
-  explicit radians(double value) : m_value(value) {}
+  explicit radians(double value) noexcept : m_value(value) {}
   explicit radians(const degrees& d);
 
   /**

@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/bi_tab.hpp"
+
 #include <cassert>
 #include <chrono>
 

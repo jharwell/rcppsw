@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/partition_probability.hpp"
+
 #include <cmath>
 
 #include "rcppsw/ta/config/sigmoid_sel_config.hpp"

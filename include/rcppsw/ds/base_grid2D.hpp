@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <boost/multi_array.hpp>
+
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/vector2.hpp"
 

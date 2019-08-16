@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/math/config/xml/ema_parser.hpp"
+
 #include <ext/ticpp/ticpp.h>
 
 #include "rcppsw/utils/line_parser.hpp"
@@ -41,7 +42,7 @@ void ema_parser::parse(const ticpp::Element& node) {
 } /* parse() */
 
 bool ema_parser::validate(void) const {
-  CHECK(m_config->alpha > 0.0);
+  RCSW_CHECK(m_config->alpha > 0.0);
   return true;
 
 error:

@@ -1,11 +1,11 @@
-[submodule "ext/rcsw"]
-	path = ext/rcsw
-	url = https://github.com/swarm-robotics/rcsw.git
-	branch = devel
 [submodule "ext/ticpp"]
 	path = ext/ticpp
 	url = https://github.com/wxFormBuilder/ticpp.git
 [submodule "libra"]
 	path = libra
 	url = https://github.com/swarm-robotics/libra.git
+	branch = devel
+[submodule "ext/rcsw"]
+	path = ext/rcsw
+	url = https://github.com/swarm-robotics/rcsw.git
 	branch = devel

@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/metrics/tasks/bi_tdgraph_metrics_collector.hpp"
+
 #include <cmath>
 
 #include "rcppsw/metrics/tasks/bi_tdgraph_metrics.hpp"
@@ -41,15 +42,15 @@ bi_tdgraph_metrics_collector::bi_tdgraph_metrics_collector(
     uint decomposition_depth)
     : base_metrics_collector(ofname, interval),
       m_int_depth_counts(decomposition_depth + 1),
-      m_int_task_counts(static_cast<uint>(std::pow(2, decomposition_depth + 1) -
-                                          1)),
-      m_int_tab_counts(static_cast<uint>(std::pow(2, decomposition_depth - 1) +
-                                         1)),
+      m_int_task_counts(
+          static_cast<uint>(std::pow(2, decomposition_depth + 1) - 1)),
+      m_int_tab_counts(
+          static_cast<uint>(std::pow(2, decomposition_depth - 1) + 1)),
       m_cum_depth_counts(decomposition_depth + 1),
-      m_cum_task_counts(static_cast<uint>(std::pow(2, decomposition_depth + 1) -
-                                          1)),
-      m_cum_tab_counts(static_cast<uint>(std::pow(2, decomposition_depth - 1) +
-                                         1)) {}
+      m_cum_task_counts(
+          static_cast<uint>(std::pow(2, decomposition_depth + 1) - 1)),
+      m_cum_tab_counts(
+          static_cast<uint>(std::pow(2, decomposition_depth - 1) + 1)) {}
 
 /*******************************************************************************
  * Member Functions

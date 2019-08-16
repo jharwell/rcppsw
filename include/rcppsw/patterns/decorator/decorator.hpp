@@ -125,7 +125,7 @@ class ptr_decorator {
  public:
   template <typename... Args>
   explicit ptr_decorator(Args&&... args) :
-      m_decoratee(rcppsw::make_unique<TDecoratee>(std::forward<Args>(args)...)) {}
+      m_decoratee(std::make_unique<TDecoratee>(std::forward<Args>(args)...)) {}
   virtual ~ptr_decorator(void) {}
 
   /**
@@ -136,8 +136,8 @@ class ptr_decorator {
    */
   template <typename... Args>
   void redecorate(Args&&... args) {
-    m_decoratee = rcppsw::make_unique<TDecoratee>(std::move(m_decoratee),
-                                         std::forward<Args>(args)...);
+    m_decoratee = std::make_unique<TDecoratee>(std::move(m_decoratee),
+                                               std::forward<Args>(args)...);
   }
 
   /**

@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/metrics/base_metrics_collector.hpp"
+
 #include <experimental/filesystem>
 #include <numeric>
 

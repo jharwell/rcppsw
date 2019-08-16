@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/utils/base_cli.hpp"
+
 #include <ctime>
 #include <iomanip>
 #include <iostream>

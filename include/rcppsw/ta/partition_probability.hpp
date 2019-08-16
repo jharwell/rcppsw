@@ -60,7 +60,7 @@ struct sigmoid_sel_config;
  *   subtasks, as well as an estimate of how long it takes to complete the
  *   unpartitioned task.
  *
- * - The reactivity parameter: how sensitive should robots be to abrupt changes
+ * - The reactivity parameter: how sensitive should controller be to abrupt changes
  *   in the estimates?
  */
 class partition_probability : public math::sigmoid,

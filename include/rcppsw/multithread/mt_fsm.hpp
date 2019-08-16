@@ -26,15 +26,15 @@
  ******************************************************************************/
 #include <mutex>
 #include <string>
-#include "rcppsw/common/common.hpp"
 
-#include "rcppsw/patterns/state_machine/base_fsm.hpp"
+#include "rcppsw/common/common.hpp"
+#include "rcppsw/patterns/fsm/base_fsm.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, multithread);
-namespace sm = patterns::state_machine;
+namespace sm = patterns::fsm;
 
 /*******************************************************************************
  * Class Definitions
@@ -45,7 +45,7 @@ namespace sm = patterns::state_machine;
  *
  * @brief Extends \ref base_fsm to be threadsafe.
  */
-class mt_fsm : patterns::state_machine::base_fsm {
+class mt_fsm : patterns::fsm::base_fsm {
  public:
   explicit mt_fsm(uint8_t max_states, uint8_t initial_state = 0)
       : base_fsm(max_states, initial_state) {}

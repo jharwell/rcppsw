@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/config/xml/task_executive_parser.hpp"
+
 #include <ext/ticpp/ticpp.h>
 
 #include "rcppsw/utils/line_parser.hpp"

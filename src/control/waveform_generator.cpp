@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/control/waveform_generator.hpp"
+
 #include "rcppsw/control/aperiodic_waveform.hpp"
 #include "rcppsw/control/periodic_waveform.hpp"
 

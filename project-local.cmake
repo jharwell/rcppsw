@@ -1,12 +1,6 @@
 ################################################################################
 # Configuration Options                                                        #
 ################################################################################
-set(WITH_HAL_CONFIG "argos-footbot" CACHE STRING "Specify the Hardware Abstraction Layer (HAL) target")
-define_property(
-  CACHED_VARIABLE PROPERTY "WITH_HAL_CONFIG"
-		BRIEF_DOCS "Specify the Hardware Abstraction Layer (HAL) target"
-		FULL_DOCS "Must be exactly one of: [argos-footbot]"
-	        )
 set(${target}_CHECK_LANGUAGE "CXX")
 
 ################################################################################
@@ -17,11 +11,13 @@ add_subdirectory(ext/rcsw)
 
 # TICPP, which emits hundreds of compiler warnings if I compile with my usual
 # robust set of warnings.
-add_subdirectory(ext/ticpp)
-target_compile_options(ticpp PRIVATE -Wno-old-style-cast -Wno-suggest-override
-  -Wno-effc++ -Wno-overloaded-virtual -Wno-missing-declarations
-  -Wno-suggest-attribute=const -Wno-suggest-attribute=pure
-  -Wno-suggest-final-types -Wno-suggest-final-methods)
+if (NOT TARGET ticpp)
+  add_subdirectory(ext/ticpp)
+  target_compile_options(ticpp PRIVATE -Wno-old-style-cast -Wno-suggest-override
+    -Wno-effc++ -Wno-overloaded-virtual -Wno-missing-declarations
+    -Wno-suggest-attribute=const -Wno-suggest-attribute=pure
+    -Wno-suggest-final-types -Wno-suggest-final-methods)
+endif()
 
 # Boost
 find_package(Boost 1.58.0 COMPONENTS system filesystem thread graph)
@@ -30,20 +26,11 @@ set(Boost_USE_STATIC_LIBS OFF)
 ################################################################################
 # Includes                                                                     #
 ################################################################################
-if (BUILD_FOR_MSI)
-  set(ARGOS_INSTALL_PREFIX /home/gini/shared/swarm/$ENV{MSICLUSTER})
-elseif(BUILD_FOR_TRAVIS)
-  set(ARGOS_INSTALL_PREFIX /usr/local)
-else()
-  set(ARGOS_INSTALL_PREFIX /opt/data/local)
-endif()
-
 set(${target}_INCLUDE_DIRS
   "${${target}_INC_PATH}"
   ${rcsw_INCLUDE_DIRS})
 set(${target}_SYS_INCLUDE_DIRS
   ${Boost_INCLUDE_DIRS}
-  ${ARGOS_INSTALL_PREFIX}/include
   ${CMAKE_CURRENT_SOURCE_DIR})
 
 ################################################################################
@@ -62,7 +49,7 @@ if ("${LIBRA_ER}" MATCHES "ALL")
 endif()
 
 if (BUILD_FOR_MSI)
-  set(${target}_LIBRARY_DIRS ${${target}_LIBRARY_DIRS} ${ARGOS_INSTALL_PREFIX}/lib/argos3)
+  set(${target}_LIBRARY_DIRS ${${target}_LIBRARY_DIRS})
 endif()
 
 if (NOT TARGET ${target})
@@ -70,17 +57,11 @@ if (NOT TARGET ${target})
   target_link_libraries(${target} ${${target}_LIBRARIES})
   target_include_directories(${target} PUBLIC ${${target}_INCLUDE_DIRS})
   target_include_directories(${target} SYSTEM PRIVATE "${${target}_SYS_INCLUDE_DIRS}")
-
-  if ("${WITH_HAL_CONFIG}" MATCHES "argos-footbot")
-    target_include_directories(${target} SYSTEM PRIVATE /usr/include/lua5.2)
-
-    target_compile_definitions(${target} PUBLIC HAL_CONFIG=HAL_CONFIG_ARGOS_FOOTBOT)
-  endif()
 endif()
 
 
 # Fix so we can build rcsw unit tests from this repo as well
-if (WITH_TESTS)
+if (LIBRA_TESTS)
   target_include_directories(rcsw-tests PUBLIC ${${target}_INCLUDE_DIRS})
 endif()
 

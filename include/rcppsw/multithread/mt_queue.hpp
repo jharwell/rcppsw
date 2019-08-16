@@ -27,6 +27,7 @@
 #include <boost/thread.hpp>
 #include <boost/thread/locks.hpp>
 #include <deque>
+
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/patterns/decorator/decorator.hpp"
 

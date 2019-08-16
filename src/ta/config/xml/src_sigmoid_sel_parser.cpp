@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/config/xml/src_sigmoid_sel_parser.hpp"
+
 #include <ext/ticpp/ticpp.h>
 
 #include "rcppsw/utils/line_parser.hpp"

@@ -36,8 +36,6 @@
  * Macros
  ******************************************************************************/
 /**
- * @internal
- *
  * @def NS_START(ns)
  *
  * Callback macro for recursive macro expansion for nested namespace start
@@ -45,14 +43,12 @@
  */
 #define NS_START_(ns) namespace ns {
 /**
- * @def NS_START(ns)
+ * @def NS_END_(ns)
  *
  * Callback macro for recursive macro expansion for nested namespace end
  * pasting. \c ns is the namespace to paste. Note that it is not strictly
  * necessary to pass the namespace name to this macro, as it only pastes a
  * single bracket; it is more self documenting to do so, however.
- *
- * @endinternal
  */
 #define NS_END_(ns) }
 
@@ -62,7 +58,7 @@
  * Declare a nested namespace, with each successive token in the comma-separated
  * argument list being declared inside the namespace of the previous token.
  */
-#define NS_START(...) XFOR_EACH1(NS_START_, __VA_ARGS__)
+#define NS_START(...) RCSW_XFOR_EACH1(NS_START_, __VA_ARGS__)
 
 /**
  * @def NS_END(...)
@@ -71,7 +67,7 @@
  * macro in the reverse order they were declared in (not actually necessary for
  * valid code, but it is more self documentating to do so).
  */
-#define NS_END(...) XFOR_EACH1(NS_END_, __VA_ARGS__)
+#define NS_END(...) RCSW_XFOR_EACH1(NS_END_, __VA_ARGS__)
 
 /**
  * @def RCPPSW_DECLDEF_WRAP(Func, member,...)
@@ -176,6 +172,26 @@
 #define RCPPSW_SFINAE_TYPE(...) typename std::enable_if<__VA_ARGS__, bool>::type
 
 /*******************************************************************************
+ * Warning Disable Macros
+ ******************************************************************************/
+#define RCPPSW_WARNING_DISABLE_PUSH(...) RCSW_WARNING_DISABLE_PUSH(__VA_ARGS__)
+#define RCPPSW_WARNING_DISABLE_POP(...) RCSW_WARNING_DISABLE_POP(__VA_ARGS__)
+
+#if defined(__clang__)
+
+#define RCPPSW_WARNING_DISABLE_MISSING_VAR_DECL(...) \
+  RCSW_WARNING_DISABLE(-Wmissing - variable - declarations)
+#define RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...) \
+  RCSW_WARNING_DISABLE(-Wmissing - prototypes)
+#define RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...) \
+  RCSW_WARNING_DISABLE(-Wglobal - constructors)
+#elif defined(__GNUC__)
+#define RCPPSW_WARNING_DISABLE_MISSING_VAR_DECL(...)
+#define RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...)
+#define RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...)
+#endif /* __clang__ */
+
+/*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw);
@@ -183,20 +199,13 @@ NS_START(rcppsw);
 /*******************************************************************************
  * Debugging Templates
  ******************************************************************************/
-#if __cplusplus < 201703L
-template <class...>
-using void_t = void;
-#else
-template <typename... Args>
-using void_t = std::void_t<Args...>;
-#endif
-
 NS_START(detail);
-template <class unused, class = void_t<>>
+
+template <class unused, class = std::void_t<>>
 struct has_to_str : std::false_type {};
 
 template <class T>
-struct has_to_str<T, void_t<decltype(std::declval<T>().to_str())>>
+struct has_to_str<T, std::void_t<decltype(std::declval<T>().to_str())>>
     : std::true_type {};
 NS_END(detail);
 
@@ -208,15 +217,6 @@ std::string to_string(const T& obj) {
 /*******************************************************************************
  * Misc. Templates
  ******************************************************************************/
-/**
- * @brief Implementation of std::make_unique which exists in C++14, but not
- * C++11, so if compiling for that standard I have to roll my own.
- */
-template <typename T, typename... Args>
-std::unique_ptr<T> make_unique(Args&&... args) {
-  return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
-}
-
 NS_START(detail);
 
 template <typename T, typename Functor, std::size_t... Is>
@@ -228,6 +228,12 @@ NS_END(detail);
 template <typename... Ts, typename Functor>
 void tuple_apply(const std::tuple<Ts...>& t, const Functor& functor) {
   detail::tuple_for_each(t, functor, std::index_sequence_for<Ts...>{});
+}
+
+template <typename TEnum>
+constexpr typename std::underlying_type<TEnum>::type as_underlying(
+    const TEnum& e) noexcept {
+  return static_cast<typename std::underlying_type<TEnum>::type>(e);
 }
 
 NS_END(rcppsw);

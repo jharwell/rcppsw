@@ -63,7 +63,7 @@ struct sigmoid_sel_config;
  * - The reactivity parameter: how quickly should the increase in sel
  *   probability be for an increasing difference between subtask time estimates.
  *
- * - The offset parameter: how quickly should robots react to an increasing
+ * - The offset parameter: how quickly should controller react to an increasing
  *   difference between subtask time estimates?
  *
  * - reactivity > 0.

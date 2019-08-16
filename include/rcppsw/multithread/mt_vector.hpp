@@ -27,6 +27,7 @@
 #include <boost/thread.hpp>
 #include <boost/thread/locks.hpp>
 #include <vector>
+
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************

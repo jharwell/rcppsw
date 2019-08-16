@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/bi_tdgraph_executive.hpp"
+
 #include "rcppsw/ta/bi_tdgraph.hpp"
 #include "rcppsw/ta/config/task_executive_config.hpp"
 

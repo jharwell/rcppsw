@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/config/xml/sigmoid_sel_parser.hpp"
+
 #include <ext/ticpp/ticpp.h>
 
 #include "rcppsw/utils/line_parser.hpp"
@@ -45,8 +46,8 @@ void sigmoid_sel_parser::parse(const ticpp::Element& node) {
 } /* parse() */
 
 bool sigmoid_sel_parser::validate(void) const {
-  CHECK(m_sigmoid.validate());
-  CHECK(!m_config->method.empty());
+  RCSW_CHECK(m_sigmoid.validate());
+  RCSW_CHECK(!m_config->method.empty());
   return true;
 
 error:
