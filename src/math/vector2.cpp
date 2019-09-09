@@ -31,8 +31,9 @@ NS_START(rcppsw, math);
 /*******************************************************************************
  * Class Constants
  ******************************************************************************/
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wglobal-constructors"
+RCPPSW_WARNING_DISABLE_PUSH()
+RCPPSW_WARNING_DISABLE_GLOBAL_CTOR()
+
 template <>
 const vector2d vector2d::X(1.0, 0); // NOLINT
 template <>
@@ -42,6 +43,7 @@ template <>
 const vector2d vector2d::Y(0, 1.0); // NOLINT
 template <>
 const vector2i vector2i::Y(0, 1); // NOLINT
-#pragma clang diagnostic pop
+
+RCPPSW_WARNING_DISABLE_POP()
 
 NS_END(math, rcppsw);

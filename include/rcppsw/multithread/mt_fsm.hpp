@@ -45,7 +45,7 @@ namespace sm = patterns::fsm;
  *
  * @brief Extends \ref base_fsm to be threadsafe.
  */
-class mt_fsm : patterns::fsm::base_fsm {
+class mt_fsm : public patterns::fsm::base_fsm {
  public:
   explicit mt_fsm(uint8_t max_states, uint8_t initial_state = 0)
       : base_fsm(max_states, initial_state) {}

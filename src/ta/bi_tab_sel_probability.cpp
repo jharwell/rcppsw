@@ -26,7 +26,7 @@
 #include <cassert>
 #include <cmath>
 
-#include "rcppsw/ta/bi_tab.hpp"
+#include "rcppsw/ta/ds/bi_tab.hpp"
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
 #include "rcppsw/ta/polled_task.hpp"
 
@@ -65,13 +65,14 @@ bi_tab_sel_probability::bi_tab_sel_probability(
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
+
 double bi_tab_sel_probability::calc_random(std::default_random_engine& rng) {
   std::uniform_real_distribution<> dist(0.0, 1.0);
   return eval(dist(rng));
 } /* calc_random() */
 
-double bi_tab_sel_probability::calc_harwell2019(const bi_tab& tab1,
-                                                const bi_tab& tab2,
+double bi_tab_sel_probability::calc_harwell2019(const ds::bi_tab& tab1,
+                                                const ds::bi_tab& tab2,
                                                 std::default_random_engine& rng) {
   auto ratio1 = est_abs(tab1.root()->task_exec_estimate() -
                         (tab1.child1()->task_exec_estimate() +
@@ -101,8 +102,8 @@ double bi_tab_sel_probability::calc_sigmoid(double ratio1,
   return 1.0 / (1 + std::exp(-theta)) * gamma();
 } /* calc_sigmoid() */
 
-double bi_tab_sel_probability::operator()(const bi_tab* const tab1,
-                                          const bi_tab* const tab2,
+double bi_tab_sel_probability::operator()(const ds::bi_tab* const tab1,
+                                          const ds::bi_tab* const tab2,
                                           std::default_random_engine& rng) {
   if (kMethodHarwell2019 == mc_method) {
     return calc_harwell2019(*tab1, *tab2, rng);

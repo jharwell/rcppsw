@@ -21,12 +21,12 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ta/bi_tab.hpp"
+#include "rcppsw/ta/ds/bi_tab.hpp"
 
 #include <cassert>
 #include <chrono>
 
-#include "rcppsw/ta/bi_tdgraph.hpp"
+#include "rcppsw/ta/ds/bi_tdgraph.hpp"
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
 #include "rcppsw/ta/config/task_partition_config.hpp"
 #include "rcppsw/ta/polled_task.hpp"
@@ -34,7 +34,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta);
+NS_START(rcppsw, ta, ds);
 
 /*******************************************************************************
  * Constructors/Destructors
@@ -274,4 +274,4 @@ bool bi_tab::task_depth_changed(void) const {
          mc_graph->vertex_depth(m_last_task);
 } /* task_depth_changed() */
 
-NS_END(ta, rcppsw);
+NS_END(ds, ta, rcppsw);

@@ -117,7 +117,7 @@ struct precise_visitor : public VisitorImpl,
                          public boost::static_visitor<void> {
   using VisitorImpl::VisitorImpl;
   template <typename... Args>
-  precise_visitor(Args&&... args)
+  explicit precise_visitor(Args&&... args)
       : VisitorImpl(std::forward<Args>(args)...) {}
 
   template <typename T, RCPPSW_SFINAE_TYPELIST_REQUIRE(TypeList, T)>

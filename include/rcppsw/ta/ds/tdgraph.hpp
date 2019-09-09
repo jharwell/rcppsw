@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TA_TDGRAPH_HPP_
-#define INCLUDE_RCPPSW_TA_TDGRAPH_HPP_
+#ifndef INCLUDE_RCPPSW_TA_DS_TDGRAPH_HPP_
+#define INCLUDE_RCPPSW_TA_DS_TDGRAPH_HPP_
 
 /*******************************************************************************
  * Includes
@@ -29,7 +29,7 @@
 #include <string>
 #include <vector>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
@@ -38,6 +38,8 @@
 NS_START(rcppsw, ta);
 
 class polled_task;
+
+NS_START(ds);
 
 /*******************************************************************************
  * Class Definitions
@@ -82,8 +84,10 @@ class tdgraph : public er::client<tdgraph> {
 
   tdgraph(void);
   ~tdgraph(void) override = default;
-  tdgraph(const tdgraph& other) = delete;
-  tdgraph& operator=(const tdgraph& other) = delete;
+
+  /* Necessary for use in boost::variant */
+  tdgraph(const tdgraph&) = default;
+  tdgraph& operator=(const tdgraph&) = delete;
 
   /**
    * @brief Get the parent of a node in the graph, given a node in the graph.
@@ -117,6 +121,7 @@ class tdgraph : public er::client<tdgraph> {
    */
   status_t set_children(const polled_task* parent, vertex_vector children);
   status_t set_children(const std::string& parent, vertex_vector children);
+
   /**
    * @brief Return the children of the specified task
    *
@@ -153,6 +158,16 @@ class tdgraph : public er::client<tdgraph> {
    */
   const polled_task* find_vertex(const std::string& task_name) const;
   polled_task* find_vertex(const std::string& task_name);
+
+  size_t n_vertices(void) const { return boost::num_vertices(m_impl); }
+
+  /**
+   * @brief Find the task vertex corresponding to the specified vertex id.
+   *
+   * @return The task vertex, or NULL if no such vertex id
+   */
+  const polled_task* find_vertex(int id) const;
+  polled_task* find_vertex(int id);
 
   /**
    * @brief Run the callback on each node in the graph, in an arbitrary order.
@@ -193,9 +208,10 @@ class tdgraph : public er::client<tdgraph> {
 
   /* clang-format off */
   polled_task*       m_root{nullptr};
-  graph_impl         m_graph{};
+  graph_impl         m_impl{};
   /* clang-format on */
 };
 
-NS_END(ta, rcppsw);
-#endif /* INCLUDE_RCPPSW_TA_TDGRAPH_HPP_ */
+NS_END(ds, ta, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_TA_DS_TDGRAPH_HPP_ */

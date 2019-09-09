@@ -1,7 +1,7 @@
 /**
- * @file task_alloc_parser.cpp
+ * @file matroid_stoch_nbhd_parser.cpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * @copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,7 +21,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ta/config/xml/task_alloc_parser.hpp"
+#include "rcppsw/ta/config/xml/matroid_stoch_nbhd_parser.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -31,7 +31,7 @@ NS_START(rcppsw, ta, config, xml);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void task_alloc_parser::parse(const ticpp::Element& node) {
+void matroid_stoch_nbhd_parser::parse(const ticpp::Element& node) {
   /* executive not used */
   if (nullptr == node.FirstChild(kXMLRoot, false)) {
     return;
@@ -39,20 +39,21 @@ void task_alloc_parser::parse(const ticpp::Element& node) {
 
   ticpp::Element tnode = node_get(node, kXMLRoot);
   m_config = std::make_unique<config_type>();
-  m_estimation.parse(tnode);
-  m_abort.parse(node_get(tnode, "task_abort"));
-  m_msn.parse(tnode);
+  m_subtask_sel.parse(node_get(tnode, "subtask_sel"));
+  m_partitioning.parse(tnode);
+  m_tab_sel.parse(node_get(tnode, "tab_sel"));
 
-  m_config->exec_est =
-      *m_estimation.config_get<exec_estimates_parser::config_type>();
-  m_config->abort = *m_abort.config_get<src_sigmoid_sel_parser::config_type>();
-  m_config->matroid_stoch_nbhd =
-      *m_msn.config_get<matroid_stoch_nbhd_parser::config_type>();
+  m_config->subtask_sel =
+      *m_subtask_sel.config_get<src_sigmoid_sel_parser::config_type>();
+  m_config->partitioning =
+      *m_partitioning.config_get<task_partition_parser::config_type>();
+  m_config->tab_sel =
+      *m_tab_sel.config_get<src_sigmoid_sel_parser::config_type>();
 } /* parse() */
 
-bool task_alloc_parser::validate(void) const {
-  return m_estimation.validate() && m_abort.validate() &&
-      m_msn.validate();
+bool matroid_stoch_nbhd_parser::validate(void) const {
+  return m_subtask_sel.validate() && m_partitioning.validate() &&
+         m_tab_sel.validate();
 } /* validate() */
 
 NS_END(xml, config, ta, rcppsw);

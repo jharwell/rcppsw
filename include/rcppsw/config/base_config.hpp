@@ -41,7 +41,9 @@ NS_START(rcppsw, config);
  * @brief A stub base class for any and all derived configuration class types
  * that may need polymorphism or covariance.
  */
-struct base_config {};
+struct base_config {
+  virtual ~base_config(void) = default;
+};
 
 NS_END(config, config);
 

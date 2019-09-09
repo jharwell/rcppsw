@@ -31,8 +31,9 @@ NS_START(rcppsw, utils);
 /*******************************************************************************
  * Global Variables
  ******************************************************************************/
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wglobal-constructors"
+RCPPSW_WARNING_DISABLE_PUSH()
+RCPPSW_WARNING_DISABLE_GLOBAL_CTOR()
+
 const color color::kBLACK(0, 0, 0);
 const color color::kWHITE(255, 255, 255);
 const color color::kRED(255, 0, 0);
@@ -53,6 +54,7 @@ const color color::kGRAY60(153, 153, 153);
 const color color::kGRAY70(179, 179, 179);
 const color color::kGRAY80(204, 204, 204);
 const color color::kGRAY90(229, 229, 229);
-#pragma clang diagnostic pop
+
+RCPPSW_WARNING_DISABLE_POP()
 
 NS_END(utils, rcppsw);

@@ -64,7 +64,7 @@ struct sigmoid_sel_config;
  *   in the estimates?
  */
 class partition_probability : public math::sigmoid,
-                              er::client<partition_probability> {
+                              public er::client<partition_probability> {
  public:
   static constexpr char kMethodPini2011[] = "pini2011";
   static constexpr char kMethodRandom[] = "random";

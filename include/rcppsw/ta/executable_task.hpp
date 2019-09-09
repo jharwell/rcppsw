@@ -172,8 +172,7 @@ class executable_task : public logical_task,
   }
 
   /**
-   * @brief Reset the execution time for the task. Should never be called
-   * directly!
+   * @brief Reset the execution time for the task.
    */
   void exec_time_reset(void) {
     m_last_exec_time = m_exec_time;

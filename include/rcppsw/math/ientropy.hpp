@@ -50,7 +50,7 @@ NS_START(rcppsw, math);
  *
  * H(S) = - SUM( p_i * log2(p_i)) over all i in m.
  */
-class ientropy : math::expression<double> {
+class ientropy : public math::expression<double> {
  public:
   /**
    * @brief Calculate the informational entropy.

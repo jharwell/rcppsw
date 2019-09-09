@@ -1,7 +1,7 @@
 /**
- * @file task_alloc_parser.cpp
+ * @file task_allocator.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * @copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,41 +18,49 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_
+#define INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ta/config/xml/task_alloc_parser.hpp"
+#include <boost/variant/static_visitor.hpp>
+#include <string>
+
+#include "rcppsw/common/common.hpp"
+#include "rcppsw/ta/bi_tdgraph_allocator.hpp"
+#include "rcppsw/ta/ds/ds_variant.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta, config, xml);
+NS_START(rcppsw, ta);
 
 /*******************************************************************************
- * Member Functions
+ * Class Definitions
  ******************************************************************************/
-void task_alloc_parser::parse(const ticpp::Element& node) {
-  /* executive not used */
-  if (nullptr == node.FirstChild(kXMLRoot, false)) {
-    return;
+/**
+ * @struct task_allocator
+ * @ingroup rcppsw ta
+ *
+ * @brief Maps the task data structure to its variant, and then applies the
+ * corresponding allocation policy to the mapped variant to allocate a task.
+ */
+struct task_allocator : public boost::static_visitor<polled_task*> {
+  task_allocator(std::default_random_engine& rng_in,
+                 const std::string& policy_in)
+      : rng(rng_in), policy(policy_in) {}
+
+  polled_task* operator()(ds::bi_tdgraph& graph) const {
+    return bi_tdgraph_allocator(policy, &graph, rng)();
   }
 
-  ticpp::Element tnode = node_get(node, kXMLRoot);
-  m_config = std::make_unique<config_type>();
-  m_estimation.parse(tnode);
-  m_abort.parse(node_get(tnode, "task_abort"));
-  m_msn.parse(tnode);
+  /* clang-format off */
+  std::default_random_engine& rng;
+  std::string                 policy;
+  /* clang-format on */
+};
 
-  m_config->exec_est =
-      *m_estimation.config_get<exec_estimates_parser::config_type>();
-  m_config->abort = *m_abort.config_get<src_sigmoid_sel_parser::config_type>();
-  m_config->matroid_stoch_nbhd =
-      *m_msn.config_get<matroid_stoch_nbhd_parser::config_type>();
-} /* parse() */
+NS_END(ta, rcppsw);
 
-bool task_alloc_parser::validate(void) const {
-  return m_estimation.validate() && m_abort.validate() &&
-      m_msn.validate();
-} /* validate() */
-
-NS_END(xml, config, ta, rcppsw);
+#endif /* INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_ */

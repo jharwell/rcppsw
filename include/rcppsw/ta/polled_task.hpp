@@ -26,6 +26,7 @@
  ******************************************************************************/
 #include <string>
 #include <utility>
+#include <memory>
 
 #include "rcppsw/math/range.hpp"
 #include "rcppsw/ta/executable_task.hpp"

@@ -34,7 +34,9 @@
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, ta);
+namespace ds {
 class bi_tab;
+} /* namespace ds */
 
 namespace config {
 struct src_sigmoid_sel_config;
@@ -105,8 +107,8 @@ class bi_tab_sel_probability : public er::client<bi_tab_sel_probability>,
    * @brief Calculate the sel probability based on the configured method,
    * using the most recent time estimates of tasks in each TAB.
    */
-  double operator()(const bi_tab* tab1,
-                    const bi_tab* tab2,
+  double operator()(const ds::bi_tab* tab1,
+                    const ds::bi_tab* tab2,
                     std::default_random_engine& rng);
 
  private:
@@ -124,8 +126,8 @@ class bi_tab_sel_probability : public er::client<bi_tab_sel_probability>,
    *
    * @return Probability of switching.
    */
-  double calc_harwell2019(const bi_tab& tab1,
-                          const bi_tab& tab2,
+  double calc_harwell2019(const ds::bi_tab& tab1,
+                          const ds::bi_tab& tab2,
                           std::default_random_engine& rng);
 
   /**

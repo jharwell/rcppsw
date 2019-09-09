@@ -53,10 +53,16 @@ struct task_executive_config : public rcppsw::config::base_config {
   bool update_interface_ests{true};
 
   /**
-   * @brief Method for specifying the initially active TAB in the
-   * executive. Valid values are: [root, random, max_depth].
+   * @brief Policy for specifying how the initially active TAB in the executive
+   * will be chosen. Valid values are: [root, random, max_depth].
    */
-  std::string tab_init_method{"root"};
+  std::string tab_init_policy{"root"};
+
+  /**
+   * @brief Policy for specifying how tasks will be allocated in the executive
+   * from the data structure containing the tasks to run.
+   */
+  std::string alloc_policy{"random"};
 };
 
 NS_END(config, ta, rcppsw);

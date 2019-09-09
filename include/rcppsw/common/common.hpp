@@ -177,19 +177,29 @@
 #define RCPPSW_WARNING_DISABLE_PUSH(...) RCSW_WARNING_DISABLE_PUSH(__VA_ARGS__)
 #define RCPPSW_WARNING_DISABLE_POP(...) RCSW_WARNING_DISABLE_POP(__VA_ARGS__)
 
-#if defined(__clang__)
+#if defined(__INTEL_COMPILER)
+
+#define RCPPSW_WARNING_DISABLE_MISSING_VAR_DECL(...)
+#define RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...)   \
+  RCSW_WARNING_DISABLE(1418)
+#define RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...)
+
+#elif defined(__clang__)
 
 #define RCPPSW_WARNING_DISABLE_MISSING_VAR_DECL(...) \
-  RCSW_WARNING_DISABLE(-Wmissing - variable - declarations)
+  RCSW_WARNING_DISABLE(-Wmissing-variable-declarations)
 #define RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...) \
-  RCSW_WARNING_DISABLE(-Wmissing - prototypes)
+  RCSW_WARNING_DISABLE(-Wmissing-prototypes)
 #define RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...) \
-  RCSW_WARNING_DISABLE(-Wglobal - constructors)
+  RCSW_WARNING_DISABLE(-Wglobal-constructors)
+
 #elif defined(__GNUC__)
+
 #define RCPPSW_WARNING_DISABLE_MISSING_VAR_DECL(...)
 #define RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...)
 #define RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...)
-#endif /* __clang__ */
+
+#endif /* __INTEL_COMPILER__ */
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -202,11 +212,11 @@ NS_START(rcppsw);
 NS_START(detail);
 
 template <class unused, class = std::void_t<>>
-struct has_to_str : std::false_type {};
+struct has_to_str : public std::false_type {};
 
 template <class T>
 struct has_to_str<T, std::void_t<decltype(std::declval<T>().to_str())>>
-    : std::true_type {};
+    : public std::true_type {};
 NS_END(detail);
 
 template <typename T, RCPPSW_SFINAE_FUNC(detail::has_to_str<T>::value)>

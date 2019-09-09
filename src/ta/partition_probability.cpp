@@ -80,7 +80,7 @@ double partition_probability::calc_pini2011(const time_estimate& task,
   return eval(1.0 / (1 + std::exp(-theta)) * gamma());
 } /* calc() */
 
-double_t partition_probability::calc_random(std::default_random_engine& rng) {
+double partition_probability::calc_random(std::default_random_engine& rng) {
   std::uniform_real_distribution<> dist(0.0, 1.0);
   return eval(dist(rng));
 } /* calc_random() */

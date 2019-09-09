@@ -45,7 +45,8 @@ void task_executive_parser::parse(const ticpp::Element& node) {
   ticpp::Element pnode = node_get(node, kXMLRoot);
   XML_PARSE_ATTR_DFLT(pnode, m_config, update_exec_ests, false);
   XML_PARSE_ATTR_DFLT(pnode, m_config, update_interface_ests, false);
-  XML_PARSE_ATTR_DFLT(pnode, m_config, tab_init_method, std::string("root"));
+  XML_PARSE_ATTR_DFLT(pnode, m_config, tab_init_policy, std::string("root"));
+  XML_PARSE_ATTR_DFLT(pnode, m_config, alloc_policy, std::string("random"));
 } /* parse() */
 
 NS_END(xml, config, ta, rcppsw);

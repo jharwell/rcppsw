@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TA_BI_TDGRAPH_HPP_
-#define INCLUDE_RCPPSW_TA_BI_TDGRAPH_HPP_
+#ifndef INCLUDE_RCPPSW_TA_DS_BI_TDGRAPH_HPP_
+#define INCLUDE_RCPPSW_TA_DS_BI_TDGRAPH_HPP_
 
 /*******************************************************************************
  * Includes
@@ -29,22 +29,22 @@
 #include <random>
 #include <string>
 
-#include "rcppsw/ta/bi_tab.hpp"
+#include "rcppsw/ta/ds/bi_tab.hpp"
 #include "rcppsw/ta/bi_tab_sel_probability.hpp"
 #include "rcppsw/ta/config/task_alloc_config.hpp"
-#include "rcppsw/ta/tdgraph.hpp"
+#include "rcppsw/ta/ds/tdgraph.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta);
+NS_START(rcppsw, ta, ds);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
  * @class bi_tdgraph
- * @ingroup rcppsw ta
+ * @ingroup rcppsw ta ds
  *
  * @brief Representation of an overall task (the root task) as a BINARY tree
  * representing the task decomposition of the root task at different
@@ -58,8 +58,9 @@ class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
 
   explicit bi_tdgraph(const config::task_alloc_config* config);
 
-  bi_tdgraph(const bi_tdgraph& other) = delete;
-  bi_tdgraph& operator=(const bi_tdgraph& other) = delete;
+  /* Necessary for use in boost::variant */
+  bi_tdgraph(const bi_tdgraph&) = default;
+  bi_tdgraph& operator=(const bi_tdgraph&) = delete;
 
   /**
    * @brief Set the children for an existing node.
@@ -141,5 +142,6 @@ class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
   /* clang-format on */
 };
 
-NS_END(ta, rcppsw);
-#endif /* INCLUDE_RCPPSW_TA_BI_TDGRAPH_HPP_ */
+NS_END(ds, ta, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_TA_DS_BI_TDGRAPH_HPP_ */

@@ -26,7 +26,7 @@
  ******************************************************************************/
 #include <list>
 #include <memory>
-#include <random>
+#include <string>
 
 #include "rcppsw/ta/base_executive.hpp"
 
@@ -34,9 +34,12 @@
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, ta);
-class bi_tab;
 class bi_tdgraph;
 struct executive_config;
+
+namespace ds {
+class bi_tab;
+} /* namespace ds */
 
 /*******************************************************************************
  * Class Definitions
@@ -51,45 +54,50 @@ struct executive_config;
 class bi_tdgraph_executive final : public base_executive,
                                    public er::client<bi_tdgraph_executive> {
  public:
-  using alloc_notify_cb = std::function<void(const polled_task*, const bi_tab*)>;
+  using start_notify_cb = std::function<void(const polled_task*,
+                                             const ds::bi_tab*)>;
 
-  bi_tdgraph_executive(const config::task_executive_config* config,
-                       std::unique_ptr<bi_tdgraph> graph);
-
-  void run(void) override;
+  bi_tdgraph_executive(const config::task_executive_config* c_config,
+                       std::unique_ptr<ds::ds_variant> ds);
 
   /**
    * @brief Get the TAB corresponding to the currently active task.
    */
-  const bi_tab* active_tab(void) const RCSW_PURE;
+  const ds::bi_tab* active_tab(void) const RCSW_PURE;
 
   /**
-   * @brief Set an optional callback that will be run when a new task allocation
-   * occurs.
+   * @brief Set an optional callback that will be run when a new task is
+   * started.
    *
-   * The callback will be passed a pointer to the task that was just allocated.
+   * The callback will be passed a pointer to the task that was just started.
    */
-  void task_alloc_notify(const alloc_notify_cb& cb) {
-    m_task_alloc_notify.push_back(cb);
+  void task_start_notify(const start_notify_cb& cb) {
+    m_task_start_notify.push_back(cb);
   }
 
- private:
-  polled_task* get_next_task(void);
-  void active_tab_update(void);
+  const polled_task* root_task(void) const RCSW_PURE;
 
   /**
-   * @brief Get the next task to execute, if the most recently executed
-   * one was partitionable (easy case).
+   * @brief Get the parent task of the specified one.
    */
-  polled_task* next_task_from_partitionable(polled_task* task);
+  const polled_task* parent_task(const polled_task* v);
 
-  void handle_task_start(polled_task* new_task);
-  void handle_task_abort(polled_task* task);
-  void handle_task_finish(polled_task* task);
+  const ds::bi_tdgraph* graph(void) const;
+
+ protected:
+  polled_task* root_task(void) RCSW_PURE;
+  ds::bi_tdgraph* graph(void);
+
+ private:
+  polled_task* task_allocate(void);
+  void active_tab_update(void);
+
+  void task_start_handle(polled_task* new_task) override;
+  void task_abort_handle(polled_task* task) override;
+  void task_finish_handle(polled_task* task) override;
 
   /* clang-format off */
-  std::list<alloc_notify_cb> m_task_alloc_notify{};
-  std::default_random_engine m_rng{};
+  std::list<start_notify_cb> m_task_start_notify{};
   /* clang-format on */
 };
 

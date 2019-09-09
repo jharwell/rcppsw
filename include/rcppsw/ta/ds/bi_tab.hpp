@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TA_BI_TAB_HPP_
-#define INCLUDE_RCPPSW_TA_BI_TAB_HPP_
+#ifndef INCLUDE_RCPPSW_TA_DS_BI_TAB_HPP_
+#define INCLUDE_RCPPSW_TA_DS_BI_TAB_HPP_
 
 /*******************************************************************************
  * Includes
@@ -32,25 +32,26 @@
 #include "rcppsw/metrics/tasks/bi_tab_metrics.hpp"
 #include "rcppsw/ta/partition_probability.hpp"
 #include "rcppsw/ta/subtask_sel_probability.hpp"
+#include "rcppsw/ta/config/task_partition_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, ta);
 class polled_task;
-class bi_tdgraph;
 
-namespace config {
-struct task_partition_config;
-struct src_sigmoid_sel_config;
-} /* namespace config */
+namespace ds {
+class bi_tdgraph;
+} /* namespace ds */
+
+NS_START(ds);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
  * @class bi_tab
- * @ingroup rcppsw ta
+ * @ingroup rcppsw ta ds
  *
  * @brief Represents Bi Task Allocation Block (TAB) which consists of a root
  * task and two subtasks the root task decomposes into. The subtasks may or may
@@ -77,8 +78,9 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
 
   ~bi_tab(void) override = default;
 
-  bi_tab& operator=(const bi_tab& other) = delete;
+  /* Necessary for use in boost::variant */
   bi_tab(const bi_tab& other) = default;
+  bi_tab& operator=(const bi_tab& other) = delete;
 
   void partition_prob_update(void);
 
@@ -167,15 +169,15 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
   std::pair<double, double> subtask_sw_calc(void);
 
   /* clang-format off */
-  const bool                 mc_always_partition;
-  const bool                 mc_never_partition;
-  const std::string          mc_partition_input;
-  const std::string          mc_subtask_sel_input;
-  const bi_tdgraph* const    mc_graph;
+  const bool              mc_always_partition;
+  const bool              mc_never_partition;
+  const std::string       mc_partition_input;
+  const std::string       mc_subtask_sel_input;
+  const bi_tdgraph*       mc_graph;
+
   polled_task* const         m_root;
   polled_task* const         m_child1;
   polled_task* const         m_child2;
-
   bool                       m_employed_partitioning{false};
   const polled_task*         m_last_task{nullptr};
   const polled_task*         m_last_subtask{nullptr};
@@ -187,6 +189,6 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
   /* clang-format on */
 };
 
-NS_END(ta, rcppsw);
+NS_END(ds, ta, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TA_BI_TAB_HPP_ */
+#endif /* INCLUDE_RCPPSW_TA_DS_BI_TAB_HPP_ */

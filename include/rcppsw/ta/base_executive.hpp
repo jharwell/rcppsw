@@ -25,10 +25,14 @@
  * Includes
  ******************************************************************************/
 #include <list>
+#include <memory>
+#include <random>
+#include <functional>
+#include <string>
 
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/ta/polled_task.hpp"
-#include "rcppsw/ta/tdgraph.hpp"
+#include "rcppsw/ta/ds/ds_variant.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -45,24 +49,25 @@ struct task_executive_config;
  * @class base_executive
  * @ingroup rcppsw ta
  *
- * @brief Base class for runtime task task executives.
+ * @brief Base class for runtime task task executives. Supports specification of
+ * task allocation policy independent from the data structure storing
+ * relationships among the tasks to be allocated (invalid combinations result in
+ * compiler errors).
  */
 class base_executive : public rcppsw::er::client<base_executive> {
  public:
-  using abort_notify_cb = std::function<void(polled_task*)>;
-  using finish_notify_cb = std::function<void(polled_task*)>;
+  using abort_notify_cb = std::function<void(const polled_task*)>;
+  using finish_notify_cb = std::function<void(const polled_task*)>;
+  using start_notify_cb = std::function<void(const polled_task*)>;
 
   /**
    * @brief Creates the base executive.
    *
    * @param config Initialization parameters/config.
-   *
-   * @param graph Graph to manage. Takes ownership of the object (can't use the
-   *              language to communicate that with unique_ptr because of
-   *              casting reasons).
+   * @param ds Data structure containing tasks to manage/run.
    */
   base_executive(const config::task_executive_config* config,
-                 std::unique_ptr<tdgraph> graph);
+                 std::unique_ptr<ds::ds_variant> ds);
   ~base_executive(void) override;
 
   base_executive& operator=(const base_executive& other) = delete;
@@ -72,7 +77,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
    * @brief The means by which the task executive will run one
    * timestep.
    */
-  virtual void run(void) = 0;
+  void run(void);
 
   /**
    * @brief Get the task currently being run.
@@ -95,7 +100,8 @@ class base_executive : public rcppsw::er::client<base_executive> {
   }
 
   /**
-   * @brief Set an optional callback that will be run when a task finishes.
+   * @brief Set an optional callback that will be run when after a task is
+   * finished.
    *
    * The callback will be passed a pointer to the task that was just finished,
    * before the task is reset and after time estimates are updated on the
@@ -110,32 +116,96 @@ class base_executive : public rcppsw::er::client<base_executive> {
   }
 
   /**
-   * @brief Get the parent task of the specified one.
+   * @brief Set an optional callback that will be run when a task is started.
+   *
+   * The callback will be passed a pointer to the task that was just started,
+   * before the task is reset.
    */
-  const polled_task* parent_task(const polled_task* v);
+  void task_start_notify(const start_notify_cb& cb) {
+    m_task_start_notify.push_back(cb);
+  }
+  const std::list<start_notify_cb>& task_start_notify(void) const {
+    return m_task_start_notify;
+  }
 
-  const tdgraph* graph(void) const { return m_graph.get(); }
-  bool update_exec_ests(void) const { return m_update_exec_ests; }
-  bool update_interface_ests(void) const { return m_update_interface_ests; }
+  const ds::ds_variant* ds(void) const { return m_ds.get(); }
+  bool update_exec_ests(void) const { return mc_update_exec_ests; }
+  bool update_interface_ests(void) const { return mc_update_interface_ests; }
 
  protected:
-  const polled_task* root_task(void) const RCSW_PURE;
-  polled_task* root_task(void) RCSW_PURE;
+  /**
+   * @brief Low-level start start handling:
+   *
+   * - Reset the task.
+   * - Actually start the task.
+   * - Set the current task for the executive to the started task.
+   */
+  void do_task_start(polled_task* const task);
+
+  /**
+   * @brief Update execution and interface time estimates (if configured to do
+   * so) for the specified task.
+   */
+  void task_ests_update(polled_task* new_task);
+
+  /**
+   * @brief Update execution and interface times for the specified task.
+   */
+  void task_times_update(polled_task* new_task);
+
+  /**
+   * @brief Handler called when a task is aborted.
+   *
+   * The base implementation does the following, in order:
+   *
+   * - Update exec/interface times, time estimates.
+   * - Mark the task as aborted.
+   * - Call the task abort callbacks with the aborted task.
+   * - Mark the task as not aborted.
+   * - Start a new task via \ref task_start_handle().
+   */
+  virtual void task_abort_handle(polled_task* task);
+
+
+  /**
+   * @brief Handler called to start a new task.
+   *
+   * The base implementation does the following, in order:
+   *
+   * - Call the task start callbacks for the new task.
+   * - Call \ref do_task_start() for the new task.
+   */
+  virtual void task_start_handle(polled_task* task);
+
+  /**
+   * @brief Handler called when a task has been finished (not aborted).
+   *
+   * The base implementation does the following, in order:
+   *
+   * - Update task exec/interface times/estimates
+   * - Call the task finish callbacks for the finished task.
+   * - Start a new task via \ref task_start_handle().
+   */
+  virtual void task_finish_handle(polled_task* task);
 
   void current_task(polled_task* current_task) {
     m_current_task = current_task;
   }
 
-  tdgraph* graph(void) { return m_graph.get(); }
+  ds::ds_variant* ds(void) { return m_ds.get(); }
 
  private:
   /* clang-format off */
-  bool                        m_update_exec_ests;
-  bool                        m_update_interface_ests;
-  polled_task*                m_current_task{nullptr};
-  std::list<abort_notify_cb>  m_task_abort_notify{};
-  std::list<finish_notify_cb> m_task_finish_notify{};
-  std::unique_ptr<tdgraph>    m_graph;
+  const bool                      mc_update_exec_ests;
+  const bool                      mc_update_interface_ests;
+  const std::string               mc_policy;
+
+  polled_task*                    m_current_task{nullptr};
+  std::list<abort_notify_cb>      m_task_abort_notify{};
+  std::list<finish_notify_cb>     m_task_finish_notify{};
+  std::list<start_notify_cb>      m_task_start_notify{};
+  std::unique_ptr<ds::ds_variant> m_ds;
+  std::default_random_engine      m_rng{};
   /* clang-format on */
 };
 

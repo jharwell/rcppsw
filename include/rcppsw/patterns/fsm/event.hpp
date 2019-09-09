@@ -43,7 +43,7 @@ NS_START(rcppsw, patterns, fsm);
  */
 class event_signal {
  public:
-  enum {
+  enum type {
     ekIGNORED = 0xFE,  /// A signal that can be ignored
     /**
      * @brief A signal indicating that something VERY BAD has happened. Will
@@ -65,6 +65,11 @@ class event_signal {
      * know how to handle in the normal turn of events.
      */
     ekUNHANDLED = 1,
+
+    /**
+     * A signal indicating nominal run operation should occur upon injection.
+     */
+    ekRUN = 2,
 
     /**
      * @brief Applications wishing to defined their own event signals

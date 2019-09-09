@@ -54,7 +54,7 @@ NS_START(rcppsw, config, xml);
  * signature as the constructor for that class available, or cryptic compile
  * errors will result.
  */
-class xml_config_repository : er::client<xml_config_repository> {
+class xml_config_repository : public er::client<xml_config_repository> {
  public:
   xml_config_repository(void)
       : ER_CLIENT_INIT("rcppsw.config.xml.repository") {}

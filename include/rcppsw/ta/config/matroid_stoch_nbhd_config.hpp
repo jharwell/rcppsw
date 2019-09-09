@@ -1,5 +1,5 @@
 /**
- * @file task_alloc_parser.cpp
+ * @file matroid_stoch_nbhd_config.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,41 +18,34 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_TA_CONFIG_MATROID_STOCH_NBHD_CONFIG_HPP_
+#define INCLUDE_RCPPSW_TA_CONFIG_MATROID_STOCH_NBHD_CONFIG_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ta/config/xml/task_alloc_parser.hpp"
+#include "rcppsw/config/base_config.hpp"
+#include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
+#include "rcppsw/ta/config/task_partition_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta, config, xml);
+NS_START(rcppsw, ta, config);
 
 /*******************************************************************************
- * Member Functions
+ * Structure Definitions
  ******************************************************************************/
-void task_alloc_parser::parse(const ticpp::Element& node) {
-  /* executive not used */
-  if (nullptr == node.FirstChild(kXMLRoot, false)) {
-    return;
-  }
+/**
+ * @struct matroid_stoch_nbhd_config
+ * @ingroup rcppsw ta config
+ */
+struct matroid_stoch_nbhd_config : public rcppsw::config::base_config {
+  src_sigmoid_sel_config subtask_sel{};
+  task_partition_config partitioning{};
+  src_sigmoid_sel_config tab_sel{};
+};
 
-  ticpp::Element tnode = node_get(node, kXMLRoot);
-  m_config = std::make_unique<config_type>();
-  m_estimation.parse(tnode);
-  m_abort.parse(node_get(tnode, "task_abort"));
-  m_msn.parse(tnode);
+NS_END(config, ta, rcppsw);
 
-  m_config->exec_est =
-      *m_estimation.config_get<exec_estimates_parser::config_type>();
-  m_config->abort = *m_abort.config_get<src_sigmoid_sel_parser::config_type>();
-  m_config->matroid_stoch_nbhd =
-      *m_msn.config_get<matroid_stoch_nbhd_parser::config_type>();
-} /* parse() */
-
-bool task_alloc_parser::validate(void) const {
-  return m_estimation.validate() && m_abort.validate() &&
-      m_msn.validate();
-} /* validate() */
-
-NS_END(xml, config, ta, rcppsw);
+#endif /* INCLUDE_RCPPSW_TA_CONFIG_MATROID_STOCH_NBHD_CONFIG_HPP_ */

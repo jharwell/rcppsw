@@ -21,18 +21,17 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ta/bi_tdgraph.hpp"
+#include "rcppsw/ta/ds/bi_tdgraph.hpp"
 
 #include <chrono>
 #include <random>
 
-#include "rcppsw/ta/bi_tdgraph_executive.hpp"
 #include "rcppsw/ta/polled_task.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta);
+NS_START(rcppsw, ta, ds);
 
 /*******************************************************************************
  * Constructors/Destructors
@@ -40,7 +39,7 @@ NS_START(rcppsw, ta);
 bi_tdgraph::bi_tdgraph(const config::task_alloc_config* const config)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tdgraph"),
       mc_config(*config),
-      m_tab_sw_prob(&mc_config.tab_sel),
+      m_tab_sw_prob(&mc_config.matroid_stoch_nbhd.tab_sel),
       m_rng(std::chrono::system_clock::now().time_since_epoch().count()) {}
 
 /*******************************************************************************
@@ -108,7 +107,9 @@ status_t bi_tdgraph::install_tab(polled_task* parent,
                            .root = parent,
                            .child1 = children[0].get(),
                            .child2 = children[1].get()};
-  m_tabs.emplace_back(&elts, &mc_config.partitioning, &mc_config.subtask_sel);
+  m_tabs.emplace_back(&elts,
+                      &mc_config.matroid_stoch_nbhd.partitioning,
+                      &mc_config.matroid_stoch_nbhd.subtask_sel);
   /*
    * Not needed if a priori execution time estimates are used, but is needed
    * if they are not and the root of the tdgraph is partitionable in order to
@@ -138,7 +139,9 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
                          !active_tab()->last_task()->is_partitionable();
 
   bi_tab* new_tab = m_active_tab;
-  if (active_tab()->contains_task(current_task) &&
+  if (nullptr == current_task) {
+    return; /* first time running executive */
+  } else if (active_tab()->contains_task(current_task) &&
       (is_tdgraph_root || is_tdgraph_leaf)) {
     ER_DEBUG("Active TAB unchanged: last task '%s' was tdgraph root or leaf",
              active_tab()->last_task()->name().c_str());
@@ -243,4 +246,4 @@ bool bi_tdgraph::tab_parent_verify(const bi_tab* const tab) const {
   return count <= 1;
 } /* tab_parent() */
 
-NS_END(rcppsw, ta);
+NS_END(ds, ta, rcppsw);

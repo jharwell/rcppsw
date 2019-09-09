@@ -72,6 +72,7 @@ class base_factory {
                 "ERROR: TPointerWrapper must be std::unique_ptr or std::shared_ptr");
 
  public:
+  virtual ~base_factory(void) = default;
   TPointerWrapper<TBase> create(const std::string& name, Args... args) {
     auto it = m_workers.find(name);
     if (it != m_workers.end()) {
@@ -197,20 +198,32 @@ NS_END(detail);
 template<typename TBase, typename...Args>
 class releasing_factory : public detail::base_factory<std::unique_ptr,
                                                       TBase,
-                                                      Args...> {};
+                                                      Args...> {
+ public:
+  ~releasing_factory(void) override = default;
+};
 
 template<typename TBase, typename...Args>
 class sharing_factory : public detail::base_factory<std::shared_ptr,
                                                       TBase,
-                                                      Args...> {};
+                                                      Args...> {
+ public:
+  ~sharing_factory(void) override = default;
+};
 
 template<typename TBase, typename...Args>
 class releasing_multifactory : public detail::multifactory<std::unique_ptr,
-                                                           TBase> {};
+                                                           TBase> {
+ public:
+  ~releasing_multifactory(void) override = default;
+};
 
 template<typename TBase, typename...Args>
 class sharing_multifactory : public detail::multifactory<std::shared_ptr,
-                                                           TBase> {};
+                                                           TBase> {
+ public:
+  ~sharing_multifactory(void) override = default;
+};
 
 
 NS_END(factory, patterns, rcppsw);
