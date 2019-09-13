@@ -24,11 +24,11 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <random>
 #include <string>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -52,7 +52,7 @@ class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
  public:
   bi_tdgraph_allocator(const std::string& policy,
                        ds::bi_tdgraph* graph,
-                       std::default_random_engine& rng)
+                       math::rng* rng)
       : ER_CLIENT_INIT("rcppsw.ta.bi_tdgraph_allocator"),
         mc_policy(policy),
         m_graph(graph),
@@ -97,10 +97,10 @@ class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
   polled_task* alloc_random(void) const;
 
   /* clang-format off */
-  const std::string           mc_policy;
+  const std::string mc_policy;
 
-  ds::bi_tdgraph*             m_graph;
-  std::default_random_engine& m_rng;
+  ds::bi_tdgraph*   m_graph;
+  math::rng*        m_rng;
   /* clang-format on */
 };
 

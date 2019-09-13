@@ -1,7 +1,7 @@
 /**
- * @file polled_task.cpp
+ * @file rngm.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,27 +18,40 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_MATH_RNGM_HPP_
+#define INCLUDE_RCPPSW_MATH_RNGM_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ta/polled_task.hpp"
+#include <map>
+#include <string>
+#include <memory>
+
+#include "rcppsw/common/common.hpp"
+#include "rcppsw/patterns/prototype/caching_factory.hpp"
+#include "rcppsw/patterns/singleton/singleton.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta);
+NS_START(rcppsw, math);
+class rng;
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Class Definitions
  ******************************************************************************/
-polled_task::~polled_task(void) = default;
+/**
+ * @class rngm
+ * @ingroup rcppsw math
+ *
+ * @brief Random Number Generator (RNG) Manager. A caching factory that
+ * returns references to previously created objects rather than creating new
+ * objects each time like a regular factory.
+ */
+class rngm : public patterns::prototype::caching_factory<rng, uint>,
+             public patterns::singleton::singleton<rngm> {};
 
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-void polled_task::exec_estimate_init(const math::rangeu& bounds,
-                                     math::rng* rng) {
-  executable_task::exec_estimate_init(types::timestep(rng->uniform(bounds)));
-} /* exec_estimate_init() */
+NS_END(math, rcppsw);
 
-NS_END(ta, rcppsw);
+#endif /* INCLUDE_RCPPSW_MATH_RNGM_HPP_ */

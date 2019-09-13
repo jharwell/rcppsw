@@ -36,8 +36,9 @@ NS_START(rcppsw, ta);
  ******************************************************************************/
 bi_tdgraph_executive::bi_tdgraph_executive(
     const config::task_executive_config* const c_config,
-    std::unique_ptr<ds::ds_variant> ds)
-    : base_executive(c_config, std::move(ds)),
+    std::unique_ptr<ds::ds_variant> ds,
+    math::rng* rng)
+    : base_executive(c_config, std::move(ds), rng),
       ER_CLIENT_INIT("rcppsw.ta.executive.bi_tdgraph") {}
 
 /*******************************************************************************
@@ -69,7 +70,7 @@ void bi_tdgraph_executive::task_abort_handle(polled_task* task) {
    * updated.
    */
   if (nullptr != active_tab()) {
-    graph()->active_tab()->task_abort_update(task);
+    graph()->active_tab()->task_abort_update(task, rng());
   }
 
   task->task_aborted(false); /* already been handled in callback */
@@ -89,7 +90,7 @@ void bi_tdgraph_executive::task_finish_handle(polled_task* task) {
    * updated.
    */
   if (nullptr != active_tab()) {
-    graph()->active_tab()->task_finish_update(task);
+    graph()->active_tab()->task_finish_update(task, rng());
   }
   task_start_handle(task_allocate());
 } /* task_finish_handle() */
@@ -111,8 +112,8 @@ polled_task* bi_tdgraph_executive::task_allocate(void) {
    * has already been updated to be NULL after the task finish/abort that
    * brought us to this function.
    */
-  graph()->active_tab_update(current_task());
-  auto ret = graph()->active_tab()->task_allocate();
+  graph()->active_tab_update(current_task(), rng());
+  auto ret = graph()->active_tab()->task_allocate(rng());
   ER_ASSERT(!ret->task_aborted(),
             "Task '%s' marked as aborted during allocation",
             ret->name().c_str());

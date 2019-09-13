@@ -1,7 +1,7 @@
 /**
- * @file singleton.hpp
+ * @file rng_config.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -17,47 +17,37 @@
  * You should have received a copy of the GNU General Public License along with
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
-#ifndef INCLUDE_RCPPSW_PATTERNS_SINGLETON_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_SINGLETON_HPP_
+
+#ifndef INCLUDE_RCPPSW_MATH_CONFIG_RNG_CONFIG_HPP_
+#define INCLUDE_RCPPSW_MATH_CONFIG_RNG_CONFIG_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/config/base_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns);
+NS_START(rcppsw, math, config);
 
 /*******************************************************************************
- * Class Definitions
+ * Structure Definitions
  ******************************************************************************/
 /**
- * @class singleton
- * @ingroup rcppsw patterns
+ * @struct rng_config
+ * @ingroup rcppsw config math
  *
- * @brief Define a class as in capable of being moved, copied, etc., and that
- * their can only ever be one of them.
+ * @brief Parameters for \ref rng objects.
  */
-template <class T>
-class singleton {
- public:
-  static T& instance() {
-    static T inst;
-    return inst;
-  }
-
-  singleton(singleton const&) = delete;
-  singleton& operator=(singleton const&) = delete;
-  singleton(singleton&& other) = delete;
-  singleton& operator=(singleton&& other) = delete;
-
- protected:
-  singleton(void) = default;
-  ~singleton(void) = default;
+struct rng_config final : public rcppsw::config::base_config {
+  /**
+   * @brief The seed to use. If -1, then the current time should be used to seed
+   * RNG.
+   */
+  int seed{-1};
 };
 
-NS_END(patterns, rcppsw);
+NS_END(config, math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_SINGLETON_HPP_ */
+#endif /* INCLUDE_RCPPSW_MATH_CONFIG_RNG_CONFIG_HPP_ */

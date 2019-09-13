@@ -1,5 +1,5 @@
 /**
- * @file task_allocator.hpp
+ * @file rng.hpp
  *
  * @copyright 2019 John Harwell, All rights reserved.
  *
@@ -18,53 +18,61 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_
-#define INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_
+#ifndef INCLUDE_RCPPSW_MATH_RNG_HPP_
+#define INCLUDE_RCPPSW_MATH_RNG_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <boost/variant/static_visitor.hpp>
-#include <string>
-
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/ta/bi_tdgraph_allocator.hpp"
-#include "rcppsw/ta/ds/ds_variant.hpp"
-#include "rcppsw/math/rng.hpp"
+#include "rcppsw/math/range.hpp"
+#include "rcppsw/patterns/pimpl/impl_ptr.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta);
+NS_START(rcppsw, math);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * @struct task_allocator
- * @ingroup rcppsw ta
+ * @class rng
+ * @ingroup rcppsw math
  *
- * @brief Maps the task data structure to its variant, and then applies the
- * corresponding allocation policy to the mapped variant to allocate a task.
+ * @brief Random number generator class using the PIMPL pattern in order to not
+ * include <random> in the header file.
  */
-struct task_allocator : public boost::static_visitor<polled_task*> {
-  task_allocator(math::rng* rng_in,
-                 const std::string& policy_in)
-      : rng(rng_in), policy(policy_in) {}
+class rng : public patterns::pimpl::impl_ptr<rng>::unique {
+ public:
+  explicit rng(uint seed);
+  ~rng(void);
 
-  task_allocator& operator=(const task_allocator&) = delete;
-  task_allocator(const task_allocator&) = delete;
+  uint seed(void) const { return m_seed; }
+  void seed(uint seed) { m_seed = seed; }
 
-  polled_task* operator()(ds::bi_tdgraph& graph) const {
-    return bi_tdgraph_allocator(policy, &graph, rng)();
+  double uniform(double lb, double ub);
+  double uniform(const ranged& c_range) {
+    return uniform(c_range.lb(), c_range.ub());
   }
 
+  uint uniform(uint lb, uint ub);
+  uint uniform(const rangeu& c_range) {
+    return uniform(c_range.lb(), c_range.ub());
+  }
+
+  int uniform(int lb, int ub);
+  int uniform(const rangei& c_range) {
+    return uniform(c_range.lb(), c_range.ub());
+  }
+
+  double gaussian(double mean, double std_dev);
+
   /* clang-format off */
-  math::rng*  rng;
-  std::string policy;
+  uint m_seed;
   /* clang-format on */
 };
 
-NS_END(ta, rcppsw);
+NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_ */
+#endif /* INCLUDE_RCPPSW_MATH_RNG_HPP_ */

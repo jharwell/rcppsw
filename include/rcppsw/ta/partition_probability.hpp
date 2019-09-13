@@ -24,13 +24,13 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <random>
 #include <string>
 
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/math/expression.hpp"
 #include "rcppsw/math/sigmoid.hpp"
 #include "rcppsw/ta/time_estimate.hpp"
+#include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -101,7 +101,7 @@ class partition_probability : public math::sigmoid,
   double operator()(const time_estimate& task,
                     const time_estimate& subtask1,
                     const time_estimate& subtask2,
-                    std::default_random_engine& rng);
+                    math::rng* rng);
 
   const std::string& method(void) const { return mc_method; }
 
@@ -110,7 +110,7 @@ class partition_probability : public math::sigmoid,
                        const time_estimate& subtask1,
                        const time_estimate& subtask2);
 
-  double calc_random(std::default_random_engine& rng);
+  double calc_random(math::rng* rng);
 
   /* clang-format off */
   const std::string mc_method;

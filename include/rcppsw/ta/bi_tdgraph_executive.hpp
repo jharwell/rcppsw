@@ -58,7 +58,8 @@ class bi_tdgraph_executive final : public base_executive,
                                              const ds::bi_tab*)>;
 
   bi_tdgraph_executive(const config::task_executive_config* c_config,
-                       std::unique_ptr<ds::ds_variant> ds);
+                       std::unique_ptr<ds::ds_variant> ds,
+                       math::rng*rng);
 
   /**
    * @brief Get the TAB corresponding to the currently active task.

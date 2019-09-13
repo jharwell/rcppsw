@@ -60,33 +60,31 @@ subtask_sel_probability::subtask_sel_probability(
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-double subtask_sel_probability::calc_random(std::default_random_engine& rng) {
-  std::uniform_real_distribution<> dist(0.0, 1.0);
-  return eval(dist(rng));
+double subtask_sel_probability::calc_random(math::rng* rng) {
+  return eval(rng->uniform(0.0, 1.0));
 } /* calc_random() */
 
 double subtask_sel_probability::calc_brutschy2014(
     const time_estimate& int_est1,
     const time_estimate& int_est2,
-    std::default_random_engine& rng) {
+    math::rng* rng) {
   return eval(calc_sigmoid(int_est1, int_est2, rng));
 } /* calc_brutschy2014() */
 
 double subtask_sel_probability::calc_harwell2018(const time_estimate& exec_est1,
                                                  const time_estimate& exec_est2,
-                                                 std::default_random_engine& rng) {
+                                                 math::rng* rng) {
   return eval(calc_sigmoid(exec_est2, exec_est1, rng));
 } /* calc_harwell2018() */
 
 double subtask_sel_probability::calc_sigmoid(const time_estimate& est1,
                                              const time_estimate& est2,
-                                             std::default_random_engine& rng) {
+                                             math::rng* rng) {
   /*
    * No information available--just pick randomly.
    */
   if (!(est1.v() > 0 && est2.v() > 0)) {
-    std::uniform_real_distribution<> dist(0.0, 1.0);
-    return dist(rng);
+    return rng->uniform(0.0, 1.0);
   } else if (!(est1.v() > 0)) { /* have info on est2 only */
     return 0.0;
   } else if (!(est2.v() > 0)) { /* have info on est1 only */
@@ -105,7 +103,7 @@ double subtask_sel_probability::calc_sigmoid(const time_estimate& est1,
 
 double subtask_sel_probability::operator()(const time_estimate* subtask1,
                                            const time_estimate* subtask2,
-                                           std::default_random_engine& rng) {
+                                           math::rng* rng) {
   if (kMethodBrutschy2014 == mc_method) {
     return calc_brutschy2014(*subtask1, *subtask2, rng);
   } else if (kMethodHarwell2018 == mc_method) {

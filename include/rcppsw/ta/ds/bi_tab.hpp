@@ -24,7 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <random>
 #include <string>
 #include <utility>
 
@@ -33,6 +32,7 @@
 #include "rcppsw/ta/partition_probability.hpp"
 #include "rcppsw/ta/subtask_sel_probability.hpp"
 #include "rcppsw/ta/config/task_partition_config.hpp"
+#include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -82,7 +82,7 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
   bi_tab(const bi_tab& other) = default;
   bi_tab& operator=(const bi_tab& other) = delete;
 
-  void partition_prob_update(void);
+  void partition_prob_update(math::rng* rng);
 
   /**
    * @brief Performs the next task allocation.
@@ -93,7 +93,7 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
    *    selected, the active task is updated accordingly, and the selected
    *    subtask is returned.
    */
-  polled_task* task_allocate(void);
+  polled_task* task_allocate(math::rng* rng);
 
   const polled_task* active_task(void) const { return m_active_task; }
 
@@ -107,7 +107,7 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
    * @param aborted The task that was just aborted (which MUST be contained in
    *                the current TAB, or an assertion will be triggered.)
    */
-  void task_abort_update(polled_task* aborted);
+  void task_abort_update(polled_task* aborted, math::rng* rng);
 
   /**
    * @brief Updates the TAB after task finsh.
@@ -120,7 +120,7 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
    *                 the current TAB, or an assertion will be triggered.)
    */
 
-  void task_finish_update(polled_task* finished);
+  void task_finish_update(polled_task* finished, math::rng* rng);
 
   /**
    * @brief Returns \c TRUE iff the argument is one of the 3 tasks in the TAB.
@@ -165,8 +165,8 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
   double subtask_selection_prob(void) const override { return m_sel_prob.v(); }
 
  private:
-  polled_task* subtask_allocate(void);
-  std::pair<double, double> subtask_sw_calc(void);
+  polled_task* subtask_allocate(math::rng* rng);
+  std::pair<double, double> subtask_sw_calc(math::rng* rng);
 
   /* clang-format off */
   const bool              mc_always_partition;
@@ -185,7 +185,6 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
 
   subtask_sel_probability    m_sel_prob;
   partition_probability      m_partition_prob;
-  std::default_random_engine m_rng;
   /* clang-format on */
 };
 

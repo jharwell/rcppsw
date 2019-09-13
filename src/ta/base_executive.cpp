@@ -37,12 +37,14 @@ NS_START(rcppsw, ta);
  * Constructors/Destructor
  ******************************************************************************/
 base_executive::base_executive(const config::task_executive_config* const config,
-                               std::unique_ptr<ds::ds_variant> ds)
+                               std::unique_ptr<ds::ds_variant> ds,
+                               math::rng* rng)
     : ER_CLIENT_INIT("rcppsw.ta.base_executive"),
       mc_update_exec_ests(config->update_exec_ests),
       mc_update_interface_ests(config->update_interface_ests),
       mc_policy(config->alloc_policy),
-      m_ds(std::move(ds)) {}
+      m_ds(std::move(ds)),
+      m_rng(rng) {}
 
 base_executive::~base_executive(void) = default;
 
@@ -70,8 +72,7 @@ void base_executive::run(void) {
   ER_DEBUG("Task '%s' abort probability: %f",
            current_task()->name().c_str(),
            prob);
-  std::uniform_real_distribution<> dist(0.0, 1.0);
-  if (prob >= dist(m_rng)) {
+  if (prob >= m_rng->uniform(0.0, 1.0)) {
     ER_INFO("Task '%s' aborted, prob=%f", current_task()->name().c_str(), prob);
     task_abort_handle(current_task());
     return;

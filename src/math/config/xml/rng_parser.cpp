@@ -1,7 +1,7 @@
 /**
- * @file polled_task.cpp
+ * @file rng_parser.cpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,24 +21,24 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ta/polled_task.hpp"
+#include "rcppsw/math/config/xml/rng_parser.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta);
-
-/*******************************************************************************
- * Constructors/Destructor
- ******************************************************************************/
-polled_task::~polled_task(void) = default;
+NS_START(rcppsw, math, config, xml);
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void polled_task::exec_estimate_init(const math::rangeu& bounds,
-                                     math::rng* rng) {
-  executable_task::exec_estimate_init(types::timestep(rng->uniform(bounds)));
-} /* exec_estimate_init() */
+void rng_parser::parse(const ticpp::Element& node) {
+  m_config = std::make_unique<config_type>();
 
-NS_END(ta, rcppsw);
+  /* tag optional in all cases */
+  if (nullptr != node.FirstChild(kXMLRoot, false)) {
+    ticpp::Element enode = node_get(node, kXMLRoot);
+    XML_PARSE_ATTR(enode, m_config, seed);
+  }
+} /* parse() */
+
+NS_END(xml, config, math, rcppsw);

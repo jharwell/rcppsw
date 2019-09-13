@@ -49,7 +49,7 @@ partition_probability::partition_probability(
 double partition_probability::operator()(const time_estimate& task,
                                          const time_estimate& subtask1,
                                          const time_estimate& subtask2,
-                                         std::default_random_engine& rng) {
+                                         math::rng* rng) {
   if (kMethodPini2011 == mc_method) {
     return calc_pini2011(task, subtask1, subtask2);
   } else if (kMethodRandom == mc_method) {
@@ -80,9 +80,8 @@ double partition_probability::calc_pini2011(const time_estimate& task,
   return eval(1.0 / (1 + std::exp(-theta)) * gamma());
 } /* calc() */
 
-double partition_probability::calc_random(std::default_random_engine& rng) {
-  std::uniform_real_distribution<> dist(0.0, 1.0);
-  return eval(dist(rng));
+double partition_probability::calc_random(math::rng* rng) {
+  return eval(rng->uniform(0.0, 1.0));
 } /* calc_random() */
 
 NS_END(ta, rcppsw);

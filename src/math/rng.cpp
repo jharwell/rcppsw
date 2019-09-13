@@ -1,7 +1,7 @@
 /**
- * @file polled_task.cpp
+ * @file rng.cpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,24 +21,50 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ta/polled_task.hpp"
+#include "rcppsw/math/rng.hpp"
+#include <random>
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta);
+/* must be in global namespace */
+template<> struct rcppsw::patterns::pimpl::impl_ptr<rcppsw::math::rng>::implementation {
+  explicit implementation(uint seed) : engine(seed) {}
+  std::default_random_engine engine;
+};
+
+NS_START(rcppsw, math);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Constructors/Destructors
  ******************************************************************************/
-polled_task::~polled_task(void) = default;
+rng::rng(uint seed)
+    : impl_ptr_type(patterns::pimpl::in_place, seed),
+      m_seed(seed) {}
+
+rng::~rng(void) = default;
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void polled_task::exec_estimate_init(const math::rangeu& bounds,
-                                     math::rng* rng) {
-  executable_task::exec_estimate_init(types::timestep(rng->uniform(bounds)));
-} /* exec_estimate_init() */
+double rng::uniform(double lb, double ub) {
+  std::uniform_real_distribution<> dist(lb, ub);
+  return dist((*this)->engine);
+} /* uniform() */
 
-NS_END(ta, rcppsw);
+uint rng::uniform(uint lb, uint ub) {
+  std::uniform_int_distribution<> dist(lb, ub);
+  return dist((*this)->engine);
+} /* uniform() */
+
+int rng::uniform(int lb, int ub) {
+  std::uniform_int_distribution<> dist(lb, ub);
+  return dist((*this)->engine);
+} /* uniform() */
+
+double rng::gaussian(double mean, double std_dev) {
+  std::normal_distribution<double> dist(mean, std_dev);
+  return dist((*this)->engine);
+} /* guassian() */
+
+NS_END(math, rcppsw);

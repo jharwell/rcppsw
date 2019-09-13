@@ -46,7 +46,7 @@ polled_task* bi_tdgraph_allocator::alloc_matroid_stoch_nbhd(void) const {
     if (nullptr == m_graph->active_tab()) {
       return m_graph->root();
     } else {
-      return m_graph->active_tab()->task_allocate();
+      return m_graph->active_tab()->task_allocate(m_rng);
     }
 } /* alloc_matroid_stoch_nbhd() */
 
@@ -64,9 +64,8 @@ polled_task* bi_tdgraph_allocator::alloc_matroid_global(void) const {
   } /* alloc_matroid_global() */
 
 polled_task* bi_tdgraph_allocator::alloc_random(void) const {
-    std::uniform_int_distribution dist(0,
-                                       static_cast<int>(m_graph->n_vertices() - 1));
-    return m_graph->find_vertex(dist(m_rng));
+  uint id = m_rng->uniform(0, m_graph->n_vertices() -1);
+    return m_graph->find_vertex(id);
 } /* alloc_random() */
 
 NS_END(ta, rcppsw);

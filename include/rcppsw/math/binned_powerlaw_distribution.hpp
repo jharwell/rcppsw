@@ -26,6 +26,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/math/powerlaw_distribution.hpp"
+#include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -55,7 +56,7 @@ class binned_powerlaw_distribution : public powerlaw_distribution {
   binned_powerlaw_distribution(uint lb, uint ub, uint pwr)
       : powerlaw_distribution(lb, ub, pwr) {}
 
-  double operator()(std::default_random_engine& rng) {
+  double operator()(rng* rng) {
     uint sample = static_cast<uint>(powerlaw_distribution::operator()(rng));
     return std::pow(pwr(), std::ceil(std::log(sample) / std::log(pwr())));
   }

@@ -22,9 +22,6 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/math/config/xml/ema_parser.hpp"
-
-#include <ext/ticpp/ticpp.h>
-
 #include "rcppsw/utils/line_parser.hpp"
 
 /*******************************************************************************

@@ -24,12 +24,12 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <random>
 #include <string>
 
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/math/sigmoid.hpp"
 #include "rcppsw/ta/time_estimate.hpp"
+#include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -113,13 +113,13 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
    */
   double operator()(const time_estimate* subtask1,
                     const time_estimate* subtask2,
-                    std::default_random_engine& rng);
+                    math::rng* rng);
 
  private:
   /**
    * @brief Random subtask selection, regardless of time estimates.
    */
-  double calc_random(std::default_random_engine& rng);
+  double calc_random(math::rng* rng);
 
   /**
    * @brief Calculate the probability of switching from subtask 1 to subtask 2
@@ -132,7 +132,7 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
    */
   double calc_brutschy2014(const time_estimate& int_est1,
                            const time_estimate& int_est2,
-                           std::default_random_engine& rng);
+                           math::rng* rng);
 
   /**
    * @brief Calculate the probability of switching from subtask 1 to subtask 2
@@ -145,7 +145,7 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
    */
   double calc_harwell2018(const time_estimate& exec_est1,
                           const time_estimate& exec_est2,
-                          std::default_random_engine& rng);
+                          math::rng* rng);
 
   /**
    * @brief Calculate the sigmoid activation for a pair of time estimates using
@@ -156,7 +156,7 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
    */
   double calc_sigmoid(const time_estimate& est1,
                       const time_estimate& est2,
-                      std::default_random_engine& rng);
+                      math::rng* rng);
 
   /* clang-format off */
   const std::string mc_method;

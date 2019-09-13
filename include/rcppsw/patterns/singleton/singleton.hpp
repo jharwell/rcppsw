@@ -1,5 +1,5 @@
 /**
- * @file polled_task.cpp
+ * @file singleton.hpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -17,28 +17,47 @@
  * You should have received a copy of the GNU General Public License along with
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
+#ifndef INCLUDE_RCPPSW_PATTERNS_SINGLETON_SINGLETON_HPP_
+#define INCLUDE_RCPPSW_PATTERNS_SINGLETON_SINGLETON_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ta/polled_task.hpp"
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta);
+NS_START(rcppsw, patterns, singleton);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Class Definitions
  ******************************************************************************/
-polled_task::~polled_task(void) = default;
+/**
+ * @class singleton
+ * @ingroup rcppsw patterns singleton
+ *
+ * @brief Define a class as incapable of being moved, copied, etc., and that
+ * there can only ever be one of.
+ */
+template <class T>
+class singleton {
+ public:
+  static T& instance() {
+    static T inst;
+    return inst;
+  }
 
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-void polled_task::exec_estimate_init(const math::rangeu& bounds,
-                                     math::rng* rng) {
-  executable_task::exec_estimate_init(types::timestep(rng->uniform(bounds)));
-} /* exec_estimate_init() */
+  singleton(singleton const&) = delete;
+  singleton& operator=(singleton const&) = delete;
+  singleton(singleton&& other) = delete;
+  singleton& operator=(singleton&& other) = delete;
 
-NS_END(ta, rcppsw);
+ protected:
+  singleton(void) = default;
+  ~singleton(void) = default;
+};
+
+NS_END(singleton, patterns, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_PATTERNS_SINGLETON_SINGLETON_HPP_ */

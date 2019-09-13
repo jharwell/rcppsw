@@ -25,9 +25,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <random>
-
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -54,11 +53,11 @@ class powerlaw_distribution {
    * @param pwr Power for distribution.
    */
   powerlaw_distribution(uint lb, uint ub, uint pwr)
-      : m_lb(lb), m_ub(ub), m_pwr(pwr), m_uniform(0, 1) {}
+      : m_lb(lb), m_ub(ub), m_pwr(pwr) {}
   virtual ~powerlaw_distribution(void) = default;
 
-  double operator()(std::default_random_engine& rng) {
-    double y = m_uniform(rng);
+  double operator()(rng* rng) {
+    double y = rng->uniform(0.0, 1.0);
     double tmp = (std::pow(m_ub, m_pwr + 1) - std::pow(m_lb, m_pwr + 1)) * y +
                  std::pow(m_lb, m_pwr + 1);
     return std::pow(tmp, 1.0 / (m_pwr + 1));
@@ -69,10 +68,9 @@ class powerlaw_distribution {
 
  private:
   /* clang-format off */
-  uint                                   m_lb;
-  uint                                   m_ub;
-  uint                                   m_pwr;
-  std::uniform_real_distribution<double> m_uniform;
+  uint m_lb;
+  uint m_ub;
+  uint m_pwr;
   /* clang-format on */
 };
 NS_END(math, rcppsw);

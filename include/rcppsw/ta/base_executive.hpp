@@ -33,6 +33,7 @@
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/ta/polled_task.hpp"
 #include "rcppsw/ta/ds/ds_variant.hpp"
+#include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -65,9 +66,11 @@ class base_executive : public rcppsw::er::client<base_executive> {
    *
    * @param config Initialization parameters/config.
    * @param ds Data structure containing tasks to manage/run.
+   * @param rng Non-owning Random number generator reference.
    */
   base_executive(const config::task_executive_config* config,
-                 std::unique_ptr<ds::ds_variant> ds);
+                 std::unique_ptr<ds::ds_variant> ds,
+                 math::rng* rng);
   ~base_executive(void) override;
 
   base_executive& operator=(const base_executive& other) = delete;
@@ -194,6 +197,9 @@ class base_executive : public rcppsw::er::client<base_executive> {
 
   ds::ds_variant* ds(void) { return m_ds.get(); }
 
+  const math::rng* rng(void) const { return m_rng; }
+  math::rng* rng(void) { return m_rng; }
+
  private:
   /* clang-format off */
   const bool                      mc_update_exec_ests;
@@ -205,7 +211,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
   std::list<finish_notify_cb>     m_task_finish_notify{};
   std::list<start_notify_cb>      m_task_start_notify{};
   std::unique_ptr<ds::ds_variant> m_ds;
-  std::default_random_engine      m_rng{};
+  math::rng*                      m_rng;
   /* clang-format on */
 };
 

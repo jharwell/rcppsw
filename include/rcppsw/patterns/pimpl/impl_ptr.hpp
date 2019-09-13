@@ -1,7 +1,7 @@
 /**
- * @file polled_task.cpp
+ * @file impl_ptr.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * @copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,27 +18,37 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_PATTERNS_PIMPL_IMPL_PTR_HPP_
+#define INCLUDE_RCPPSW_PATTERNS_PIMPL_IMPL_PTR_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ta/polled_task.hpp"
+#include <ext/pimpl/include/impl_ptr.hpp>
+#include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta);
+NS_START(rcppsw, patterns, pimpl);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Class Definitions
  ******************************************************************************/
-polled_task::~polled_task(void) = default;
+using in_place_type = ::detail::in_place_type;
 
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-void polled_task::exec_estimate_init(const math::rangeu& bounds,
-                                     math::rng* rng) {
-  executable_task::exec_estimate_init(types::timestep(rng->uniform(bounds)));
-} /* exec_estimate_init() */
+/*
+ * Because this is not in boost yet (and might not ever be), it does some weird
+ * non-std:: global namespace things that I have to correct.
+ */
+static constexpr in_place_type in_place {};
 
-NS_END(ta, rcppsw);
+template<typename U,
+         template<typename,
+                  typename...> class P =::detail::no_policy,
+         typename... M>
+using impl_ptr = ::impl_ptr<U, P, M...>;
+
+NS_END(pimpl, patterns, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_PATTERNS_PIMPL_IMPL_PTR_HPP_ */

@@ -24,11 +24,11 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <random>
 #include <string>
 
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/math/sigmoid.hpp"
+#include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -109,13 +109,13 @@ class bi_tab_sel_probability : public er::client<bi_tab_sel_probability>,
    */
   double operator()(const ds::bi_tab* tab1,
                     const ds::bi_tab* tab2,
-                    std::default_random_engine& rng);
+                    math::rng* rng);
 
  private:
   /**
    * @brief Random TAB sel, regardless of time estimates.
    */
-  double calc_random(std::default_random_engine& rng);
+  double calc_random(math::rng* rng);
 
   /**
    * @brief Calculate the probability of switching from TAB 1 to TAB 2
@@ -128,7 +128,7 @@ class bi_tab_sel_probability : public er::client<bi_tab_sel_probability>,
    */
   double calc_harwell2019(const ds::bi_tab& tab1,
                           const ds::bi_tab& tab2,
-                          std::default_random_engine& rng);
+                          math::rng* rng);
 
   /**
    * @brief Calculate the sigmoid activation for a pair of time estimates using
@@ -141,9 +141,7 @@ class bi_tab_sel_probability : public er::client<bi_tab_sel_probability>,
    *
    * @return Sigmoid value.
    */
-  double calc_sigmoid(double ratio1,
-                      double ratio2,
-                      std::default_random_engine& rng);
+  double calc_sigmoid(double ratio1, double ratio2, math::rng* rng);
 
   /* clang-format off */
   const std::string mc_method;

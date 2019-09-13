@@ -24,7 +24,6 @@
 #include "rcppsw/ta/ds/bi_tab.hpp"
 
 #include <cassert>
-#include <chrono>
 
 #include "rcppsw/ta/ds/bi_tdgraph.hpp"
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
@@ -52,8 +51,7 @@ bi_tab::bi_tab(const struct elements* elts,
       m_child1(elts->child1),
       m_child2(elts->child2),
       m_sel_prob(&subtask_sel->sigmoid),
-      m_partition_prob(&partitioning->src_sigmoid.sigmoid),
-      m_rng(std::chrono::system_clock::now().time_since_epoch().count()) {
+      m_partition_prob(&partitioning->src_sigmoid.sigmoid) {
   ER_ASSERT(m_root->is_partitionable(),
             "Root task '%s' not partitionable",
             m_root->name().c_str());
@@ -71,11 +69,12 @@ bi_tab::bi_tab(const struct elements* elts,
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void bi_tab::task_abort_update(polled_task* const aborted) {
+void bi_tab::task_abort_update(polled_task* const aborted,
+                               math::rng* rng) {
   ER_ASSERT(contains_task(aborted),
             "Aborted task '%s' not in TAB",
             aborted->name().c_str());
-  partition_prob_update();
+  partition_prob_update(rng);
   m_last_task = aborted;
   if (subtask1_active() || subtask2_active()) {
     m_last_subtask = aborted;
@@ -83,11 +82,12 @@ void bi_tab::task_abort_update(polled_task* const aborted) {
   m_active_task = nullptr;
 } /* task_abort_update() */
 
-void bi_tab::task_finish_update(polled_task* const finished) {
+void bi_tab::task_finish_update(polled_task* const finished,
+                                math::rng* rng) {
   ER_ASSERT(contains_task(finished),
             "Finished task '%s' not in TAB",
             finished->name().c_str());
-  partition_prob_update();
+  partition_prob_update(rng);
   m_last_task = finished;
   if (subtask1_active() || subtask2_active()) {
     m_last_subtask = finished;
@@ -107,12 +107,12 @@ bool bi_tab::task_is_child(const polled_task* const task) const {
   return task == m_child1 || task == m_child2;
 } /* task_is_child() */
 
-void bi_tab::partition_prob_update(void) {
+void bi_tab::partition_prob_update(math::rng* rng) {
   if (kPartitionSrcExec == mc_partition_input) {
     m_partition_prob(m_root->task_exec_estimate(),
                      m_child1->task_exec_estimate(),
                      m_child2->task_exec_estimate(),
-                     m_rng);
+                     rng);
   } else if (kPartitionSrcInterface == mc_partition_input) {
     int root_id = m_root->task_last_active_interface();
     int child1_id = m_child1->task_last_active_interface();
@@ -121,7 +121,7 @@ void bi_tab::partition_prob_update(void) {
       m_partition_prob(m_root->task_interface_estimate(root_id),
                        m_child1->task_interface_estimate(child1_id),
                        m_child2->task_interface_estimate(child2_id),
-                       m_rng);
+                       rng);
 
     } else {
       ER_WARN(
@@ -135,7 +135,7 @@ void bi_tab::partition_prob_update(void) {
   }
 } /* partition_prob_update() */
 
-polled_task* bi_tab::task_allocate(void) {
+polled_task* bi_tab::task_allocate(math::rng* rng) {
   ER_ASSERT(!(mc_always_partition && mc_never_partition),
             "Cannot ALWAYS and NEVER partition");
 
@@ -154,8 +154,7 @@ polled_task* bi_tab::task_allocate(void) {
   }
 
   /* We chose not to employ partitioning on the next task allocation */
-  std::uniform_real_distribution<> dist(0.0, 1.0);
-  if (partition_prob <= dist(m_rng)) {
+  if (partition_prob <= rng->uniform(0.0, 1.0)) {
     ER_INFO("Not employing partitioning: Return task '%s'",
             m_root->name().c_str());
     m_employed_partitioning = false;
@@ -164,12 +163,12 @@ polled_task* bi_tab::task_allocate(void) {
   }
   /* We have chosen to employ partitioning, so we must return a subtask */
   m_employed_partitioning = true;
-  polled_task* ret = subtask_allocate();
+  polled_task* ret = subtask_allocate(rng);
   m_last_subtask = ret;
   return ret;
 } /* task_allocate() */
 
-std::pair<double, double> bi_tab::subtask_sw_calc(void) {
+std::pair<double, double> bi_tab::subtask_sw_calc(math::rng* rng) {
   double prob_12 = 0.0;
   double prob_21 = 0.0;
   const time_estimate* task1 = nullptr;
@@ -204,18 +203,18 @@ std::pair<double, double> bi_tab::subtask_sw_calc(void) {
     task2 = &m_child2->task_interface_estimate(0);
   } else { /* fall through (random) */
   }
-  prob_12 = m_sel_prob(task1, task2, m_rng);
-  prob_21 = m_sel_prob(task2, task1, m_rng);
+  prob_12 = m_sel_prob(task1, task2, rng);
+  prob_21 = m_sel_prob(task2, task1, rng);
   return std::make_pair(prob_12, prob_21);
 } /* subtask_sw_calc() */
 
-polled_task* bi_tab::subtask_allocate(void) {
+polled_task* bi_tab::subtask_allocate(math::rng* rng) {
   ER_INFO("Employing partitioning at task '%s': sel_method=%s, last_subtask=%s",
           m_root->name().c_str(),
           m_sel_prob.method().c_str(),
           (nullptr != m_last_subtask) ? m_last_subtask->name().c_str() : "None");
 
-  auto probs = subtask_sw_calc();
+  auto probs = subtask_sw_calc(rng);
   double prob_12 = probs.first;
   double prob_21 = probs.second;
   ER_INFO("%s exec_est=%f/int_est=%f, %s exec_est=%f/int_est=%f",
@@ -235,13 +234,12 @@ polled_task* bi_tab::subtask_allocate(void) {
           prob_21);
 
   polled_task* ret = nullptr;
-  std::uniform_real_distribution<> dist(0.0, 1.0);
   /*
    * If we last executed child1, we calculate the probability of switching
    * to child2, based on time estimates.
    */
   if (m_last_subtask == m_child1 || nullptr == m_last_subtask) {
-    if (prob_12 >= dist(m_rng)) {
+    if (prob_12 >= rng->uniform(0.0, 1.0)) {
       ret = m_child2;
     } else {
       ret = m_child1;
@@ -252,7 +250,7 @@ polled_task* bi_tab::subtask_allocate(void) {
    * to m_child1, based on time estimates.
    */
   else if (m_last_subtask == m_child2) {
-    if (prob_21 >= dist(m_rng)) {
+    if (prob_21 >= rng->uniform(0.0, 1.0)) {
       ret = m_child1;
     } else {
       ret = m_child2;

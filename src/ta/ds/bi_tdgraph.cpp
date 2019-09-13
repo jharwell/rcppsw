@@ -22,10 +22,6 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/ds/bi_tdgraph.hpp"
-
-#include <chrono>
-#include <random>
-
 #include "rcppsw/ta/polled_task.hpp"
 
 /*******************************************************************************
@@ -39,22 +35,22 @@ NS_START(rcppsw, ta, ds);
 bi_tdgraph::bi_tdgraph(const config::task_alloc_config* const config)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tdgraph"),
       mc_config(*config),
-      m_tab_sw_prob(&mc_config.matroid_stoch_nbhd.tab_sel),
-      m_rng(std::chrono::system_clock::now().time_since_epoch().count()) {}
+      m_tab_sw_prob(&mc_config.matroid_stoch_nbhd.tab_sel) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void bi_tdgraph::active_tab_init(const std::string& method) {
+void bi_tdgraph::active_tab_init(const std::string& method,
+                                 math::rng* rng) {
   if (kTABInitRoot == method) {
     ER_INFO("Using graph root initial TAB");
     active_tab_init_root();
   } else if (kTABInitRandom == method) {
     ER_INFO("Using random initial TAB");
-    active_tab_init_random();
+    active_tab_init_random(rng);
   } else if (kTABInitMaxDepth == method) {
     ER_INFO("Using max_depth initial TAB");
-    active_tab_init_max_depth();
+    active_tab_init_max_depth(rng);
   } else {
     ER_FATAL_SENTINEL("Bad TAB init method '%s'", method.c_str());
   }
@@ -69,7 +65,7 @@ void bi_tdgraph::active_tab_init_root(void) {
   } /* for(&t..) */
 } /* active_tab_init_root() */
 
-void bi_tdgraph::active_tab_init_max_depth(void) {
+void bi_tdgraph::active_tab_init_max_depth(math::rng* rng) {
   std::vector<bi_tab*> indices;
   int max_depth = 0;
   for (auto& t : m_tabs) {
@@ -85,22 +81,23 @@ void bi_tdgraph::active_tab_init_max_depth(void) {
   } /* for(&t..) */
 
   ER_INFO("Found %zu TABs at depth %d", indices.size(), max_depth);
-  std::uniform_int_distribution<> dist(0, indices.size() - 1);
-  m_active_tab = indices[dist(m_rng)];
+  m_active_tab = indices[rng->uniform(0, indices.size() - 1)];
 } /* active_tab_init_max_depth() */
 
-void bi_tdgraph::active_tab_init_random(void) {
-  std::uniform_int_distribution<> dist(0, m_tabs.size());
-  m_active_tab = &(*std::next(m_tabs.begin(), dist(m_rng)));
+void bi_tdgraph::active_tab_init_random(math::rng* rng) {
+  int index = rng->uniform(0, m_tabs.size());
+  m_active_tab = &(*std::next(m_tabs.begin(), index));
 } /* active_tab_init_random() */
 
 status_t bi_tdgraph::install_tab(const std::string& parent,
-                                 tdgraph::vertex_vector children) {
-  return install_tab(find_vertex(parent), std::move(children));
+                                 tdgraph::vertex_vector children,
+                                 math::rng* rng) {
+  return install_tab(find_vertex(parent), std::move(children), rng);
 } /* install_tab() */
 
 status_t bi_tdgraph::install_tab(polled_task* parent,
-                                 tdgraph::vertex_vector children) {
+                                 tdgraph::vertex_vector children,
+                                 math::rng* rng) {
   ER_ASSERT(2 == children.size(),
             "Bi tdgraph cannot handle non-binary bifurcations");
   bi_tab::elements elts = {.graph = this,
@@ -116,12 +113,13 @@ status_t bi_tdgraph::install_tab(polled_task* parent,
    * avoid having a partition probability of 0. Doing this gives you an
    * initial partition probability of 0.5 in that case.
    */
-  m_tabs.back().partition_prob_update();
+  m_tabs.back().partition_prob_update(rng);
 
   return tdgraph::set_children(parent, std::move(children));
 } /* install_tab() */
 
-void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
+void bi_tdgraph::active_tab_update(const polled_task* const current_task,
+                                   math::rng* rng) {
   /*
    * We know that the active tab cannot change if any of the following are true:
    *
@@ -158,28 +156,29 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task) {
    * "down" a TAB level to one that is more specialized (i.e. conditions seem
    * good to specialize more).
    */
-  std::uniform_real_distribution<> dist(0.0, 1.0);
   if (current_task == active_tab()->root()) {
-    double prob = m_tab_sw_prob(active_tab(), tab_parent(active_tab()), m_rng);
+    double prob = m_tab_sw_prob(active_tab(),
+                                tab_parent(active_tab()),
+                                rng);
 
     ER_INFO("TAB switch up: active_tab root='%s',current_task='%s',prob=%f",
             active_tab()->root()->name().c_str(),
             current_task->name().c_str(),
             prob);
 
-    if (prob >= dist(m_rng)) {
+    if (prob >= rng->uniform(0.0, 1.0)) {
       new_tab = tab_parent(active_tab());
     }
   } else {
     double prob = m_tab_sw_prob(active_tab(),
                                 tab_child(active_tab(), current_task),
-                                m_rng);
+                                rng);
 
     ER_INFO("TAB switch down: active_tab root='%s',current_task='%s',prob=%f",
             active_tab()->root()->name().c_str(),
             current_task->name().c_str(),
             prob);
-    if (prob >= dist(m_rng)) {
+    if (prob >= rng->uniform(0.0, 1.0)) {
       new_tab = tab_child(active_tab(), current_task);
     }
   }

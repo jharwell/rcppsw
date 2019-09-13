@@ -26,13 +26,13 @@
  ******************************************************************************/
 #include <algorithm>
 #include <list>
-#include <random>
 #include <string>
 
 #include "rcppsw/ta/ds/bi_tab.hpp"
 #include "rcppsw/ta/bi_tab_sel_probability.hpp"
 #include "rcppsw/ta/config/task_alloc_config.hpp"
 #include "rcppsw/ta/ds/tdgraph.hpp"
+#include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -74,17 +74,22 @@ class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
    *
    * @return \ref status_t.
    */
-  status_t install_tab(polled_task* parent, tdgraph::vertex_vector children);
+  status_t install_tab(polled_task* parent,
+                       tdgraph::vertex_vector children,
+                       math::rng* rng);
   status_t install_tab(const std::string& parent,
-                       tdgraph::vertex_vector children);
+                       tdgraph::vertex_vector children,
+                       math::rng* rng);
 
   /**
    * @brief Update the active TAB *BEFORE* task allocation is performed in the
    * executive that owns this graph.
    *
    * @param current_task The current task that just finished/aborted/whatever.
+   * @param rng A random number generator for use in update calculations.
    */
-  void active_tab_update(const polled_task* current_task);
+  void active_tab_update(const polled_task* current_task,
+                         math::rng* rng);
 
   /**
    * @brief Get the active TAB for the graph.
@@ -122,14 +127,15 @@ class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
   bi_tab* tab_child(const bi_tab* tab,
                     const polled_task* current_task) RCSW_PURE;
 
-  void active_tab_init(const std::string& method);
+  void active_tab_init(const std::string& method,
+                       math::rng* rng);
 
  private:
   using tdgraph::set_children;
 
   void active_tab_init_root(void);
-  void active_tab_init_random(void);
-  void active_tab_init_max_depth(void);
+  void active_tab_init_random(math::rng* rng);
+  void active_tab_init_max_depth(math::rng* rng);
   bi_tab* tab_parent(const bi_tab* tab);
   bool tab_parent_verify(const bi_tab* tab) const RCSW_PURE;
 
@@ -138,7 +144,6 @@ class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
   std::list<bi_tab>               m_tabs{};
   bi_tab *                        m_active_tab{nullptr};
   bi_tab_sel_probability          m_tab_sw_prob;
-  std::default_random_engine      m_rng;
   /* clang-format on */
 };
 
