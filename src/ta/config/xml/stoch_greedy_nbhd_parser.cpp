@@ -1,7 +1,7 @@
 /**
- * @file matroid_stoch_nbhd_config.hpp
+ * @file stoch_greedy_nbhd_parser.cpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * @copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,34 +18,42 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TA_CONFIG_MATROID_STOCH_NBHD_CONFIG_HPP_
-#define INCLUDE_RCPPSW_TA_CONFIG_MATROID_STOCH_NBHD_CONFIG_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/config/base_config.hpp"
-#include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
-#include "rcppsw/ta/config/task_partition_config.hpp"
+#include "rcppsw/ta/config/xml/stoch_greedy_nbhd_parser.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta, config);
+NS_START(rcppsw, ta, config, xml);
 
 /*******************************************************************************
- * Structure Definitions
+ * Member Functions
  ******************************************************************************/
-/**
- * @struct matroid_stoch_nbhd_config
- * @ingroup rcppsw ta config
- */
-struct matroid_stoch_nbhd_config : public rcppsw::config::base_config {
-  src_sigmoid_sel_config subtask_sel{};
-  task_partition_config partitioning{};
-  src_sigmoid_sel_config tab_sel{};
-};
+void stoch_greedy_nbhd_parser::parse(const ticpp::Element& node) {
+  /* executive not used */
+  if (nullptr == node.FirstChild(kXMLRoot, false)) {
+    return;
+  }
 
-NS_END(config, ta, rcppsw);
+  ticpp::Element tnode = node_get(node, kXMLRoot);
+  m_config = std::make_unique<config_type>();
+  m_subtask_sel.parse(node_get(tnode, "subtask_sel"));
+  m_partitioning.parse(tnode);
+  m_tab_sel.parse(node_get(tnode, "tab_sel"));
 
-#endif /* INCLUDE_RCPPSW_TA_CONFIG_MATROID_STOCH_NBHD_CONFIG_HPP_ */
+  m_config->subtask_sel =
+      *m_subtask_sel.config_get<src_sigmoid_sel_parser::config_type>();
+  m_config->partitioning =
+      *m_partitioning.config_get<task_partition_parser::config_type>();
+  m_config->tab_sel =
+      *m_tab_sel.config_get<src_sigmoid_sel_parser::config_type>();
+} /* parse() */
+
+bool stoch_greedy_nbhd_parser::validate(void) const {
+  return m_subtask_sel.validate() && m_partitioning.validate() &&
+         m_tab_sel.validate();
+} /* validate() */
+
+NS_END(xml, config, ta, rcppsw);

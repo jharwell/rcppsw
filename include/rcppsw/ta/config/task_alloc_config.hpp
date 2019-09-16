@@ -27,7 +27,7 @@
 #include "rcppsw/config/base_config.hpp"
 #include "rcppsw/ta/config/exec_estimates_config.hpp"
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
-#include "rcppsw/ta/config/matroid_stoch_nbhd_config.hpp"
+#include "rcppsw/ta/config/stoch_greedy_nbhd_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -38,13 +38,13 @@ NS_START(rcppsw, ta, config);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct
+ * @struct task_alloc_config
  * @ingroup rcppsw ta config
  */
 struct task_alloc_config : public rcppsw::config::base_config {
   exec_estimates_config exec_est{};
   src_sigmoid_sel_config abort{};
-  matroid_stoch_nbhd_config matroid_stoch_nbhd{};
+  stoch_greedy_nbhd_config stoch_greedy_nbhd{};
 };
 
 NS_END(config, ta, rcppsw);

@@ -38,7 +38,7 @@ NS_START(rcppsw, ta);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-polled_task* bi_tdgraph_allocator::alloc_matroid_stoch_nbhd(void) const {
+polled_task* bi_tdgraph_allocator::alloc_stoch_greedy_nbhd(void) const {
     /*
      * If there is no active TAB, then the root task is not partitionable, so
      * return it.
@@ -48,9 +48,9 @@ polled_task* bi_tdgraph_allocator::alloc_matroid_stoch_nbhd(void) const {
     } else {
       return m_graph->active_tab()->task_allocate(m_rng);
     }
-} /* alloc_matroid_stoch_nbhd() */
+} /* alloc_stoch_greedy_nbhd() */
 
-polled_task* bi_tdgraph_allocator::alloc_matroid_global(void) const {
+polled_task* bi_tdgraph_allocator::alloc_greedy_global(void) const {
     std::vector<const ta::time_estimate*> exec_ests(m_graph->n_vertices());
     m_graph->walk([&](const auto* task) {
         exec_ests[m_graph->vertex_id(task)] =
@@ -61,7 +61,7 @@ polled_task* bi_tdgraph_allocator::alloc_matroid_global(void) const {
                                        return t1 < t2;
                                      });
     return m_graph->find_vertex(std::distance(min_task, exec_ests.end()));
-  } /* alloc_matroid_global() */
+  } /* alloc_greedy_global() */
 
 polled_task* bi_tdgraph_allocator::alloc_random(void) const {
   uint id = m_rng->uniform(0, m_graph->n_vertices() -1);

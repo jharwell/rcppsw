@@ -35,7 +35,7 @@ NS_START(rcppsw, ta, ds);
 bi_tdgraph::bi_tdgraph(const config::task_alloc_config* const config)
     : ER_CLIENT_INIT("rcppsw.ta.bi_tdgraph"),
       mc_config(*config),
-      m_tab_sw_prob(&mc_config.matroid_stoch_nbhd.tab_sel) {}
+      m_tab_sw_prob(&mc_config.stoch_greedy_nbhd.tab_sel) {}
 
 /*******************************************************************************
  * Member Functions
@@ -105,8 +105,8 @@ status_t bi_tdgraph::install_tab(polled_task* parent,
                            .child1 = children[0].get(),
                            .child2 = children[1].get()};
   m_tabs.emplace_back(&elts,
-                      &mc_config.matroid_stoch_nbhd.partitioning,
-                      &mc_config.matroid_stoch_nbhd.subtask_sel);
+                      &mc_config.stoch_greedy_nbhd.partitioning,
+                      &mc_config.stoch_greedy_nbhd.subtask_sel);
   /*
    * Not needed if a priori execution time estimates are used, but is needed
    * if they are not and the root of the tdgraph is partitionable in order to

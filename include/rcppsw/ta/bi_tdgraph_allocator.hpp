@@ -50,6 +50,10 @@ class bi_tdgraph;
  */
 class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
  public:
+  static constexpr char kPolicyRandom[] = "random";
+  static constexpr char kPolicyGreedyGlobal[] = "greedy_global";
+  static constexpr char kPolicyStochGreedyNBHD[] = "stoch_greedy_nbhd";
+
   bi_tdgraph_allocator(const std::string& policy,
                        ds::bi_tdgraph* graph,
                        math::rng* rng)
@@ -62,12 +66,12 @@ class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
   bi_tdgraph_allocator& operator=(const bi_tdgraph_allocator&) = delete;
 
   polled_task* operator()(void) const {
-    if ("random" == mc_policy) {
+    if (kPolicyRandom == mc_policy) {
       return alloc_random();
-    } else if ("matroid_global" == mc_policy) {
-      return alloc_matroid_global();
-    } else if ("matroid_stoch_nbhd" == mc_policy) {
-      return alloc_matroid_stoch_nbhd();
+    } else if (kPolicyGreedyGlobal == mc_policy) {
+      return alloc_greedy_global();
+    } else if (kPolicyStochGreedyNBHD == mc_policy) {
+      return alloc_stoch_greedy_nbhd();
     }
     ER_FATAL_SENTINEL("Bad allocation policy '%s'", mc_policy.c_str());
     return nullptr;
@@ -82,13 +86,13 @@ class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
    * more robust/flexible. A neighborhood is defined as all tasks reachable from
    * the most recently executed task within some distance.
    */
-  polled_task* alloc_matroid_stoch_nbhd(void) const;
+  polled_task* alloc_stoch_greedy_nbhd(void) const;
 
   /**
    * @brief Allocate a task using a matroid optimization approach (strict
    * greedy). No stochasticity is applied.
    */
-  polled_task* alloc_matroid_global(void) const;
+  polled_task* alloc_greedy_global(void) const;
 
   /**
    * @brief Allocate a task by choosing a random vertex within the graph and

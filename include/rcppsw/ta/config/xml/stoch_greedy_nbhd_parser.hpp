@@ -1,5 +1,5 @@
 /**
- * @file matroid_stoch_nbhd_parser.hpp
+ * @file stoch_greedy_nbhd_parser.hpp
  *
  * @copyright 2019 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TA_CONFIG_XML_MATROID_STOCH_NBHD_PARSER_HPP_
-#define INCLUDE_RCPPSW_TA_CONFIG_XML_MATROID_STOCH_NBHD_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_TA_CONFIG_XML_STOCH_GREEDY_NBHD_PARSER_HPP_
+#define INCLUDE_RCPPSW_TA_CONFIG_XML_STOCH_GREEDY_NBHD_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -30,7 +30,7 @@
 #include "rcppsw/math/config/xml/sigmoid_parser.hpp"
 #include "rcppsw/config/xml/xml_config_parser.hpp"
 #include "rcppsw/ta/config/xml/src_sigmoid_sel_parser.hpp"
-#include "rcppsw/ta/config/matroid_stoch_nbhd_config.hpp"
+#include "rcppsw/ta/config/stoch_greedy_nbhd_config.hpp"
 #include "rcppsw/ta/config/xml/task_partition_parser.hpp"
 
 /*******************************************************************************
@@ -42,21 +42,21 @@ NS_START(rcppsw, ta, config, xml);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class matroid_stoch_nbhd_parser
+ * @class stoch_greedy_nbhd_parser
  * @ingroup rcppsw ta config xml
  *
  * @brief Parses XML configuration used for task allocation into \ref
- * matroid_stoch_nbhd_config.
+ * stoch_greedy_nbhd_config.
  */
-class matroid_stoch_nbhd_parser final : public rcppsw::config::xml::xml_config_parser {
+class stoch_greedy_nbhd_parser final : public rcppsw::config::xml::xml_config_parser {
  public:
-  using config_type = matroid_stoch_nbhd_config;
+  using config_type = stoch_greedy_nbhd_config;
 
   /**
    * @brief The root tag that all task allocation XML configuration should lie
    * under in the XML tree.
    */
-  static constexpr char kXMLRoot[] = "matroid_stoch_nbhd";
+  static constexpr char kXMLRoot[] = "stoch_greedy_nbhd";
 
   void parse(const ticpp::Element& node) override RCSW_COLD;
   bool validate(void) const override RCSW_ATTR(pure, cold);
@@ -78,4 +78,4 @@ class matroid_stoch_nbhd_parser final : public rcppsw::config::xml::xml_config_p
 
 NS_END(xml, config, ta, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TA_CONFIG_XML_MATROID_STOCH_NBHD_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_TA_CONFIG_XML_STOCH_GREEDY_NBHD_PARSER_HPP_ */
