@@ -65,13 +65,13 @@ class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
   bi_tdgraph_allocator(const bi_tdgraph_allocator&) = delete;
   bi_tdgraph_allocator& operator=(const bi_tdgraph_allocator&) = delete;
 
-  polled_task* operator()(void) const {
+  polled_task* operator()(const polled_task* current_task) const {
     if (kPolicyRandom == mc_policy) {
       return alloc_random();
     } else if (kPolicyGreedyGlobal == mc_policy) {
       return alloc_greedy_global();
     } else if (kPolicyStochGreedyNBHD == mc_policy) {
-      return alloc_stoch_greedy_nbhd();
+      return alloc_stoch_greedy_nbhd(current_task);
     }
     ER_FATAL_SENTINEL("Bad allocation policy '%s'", mc_policy.c_str());
     return nullptr;
@@ -86,7 +86,7 @@ class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
    * more robust/flexible. A neighborhood is defined as all tasks reachable from
    * the most recently executed task within some distance.
    */
-  polled_task* alloc_stoch_greedy_nbhd(void) const;
+  polled_task* alloc_stoch_greedy_nbhd(const polled_task* current_task) const;
 
   /**
    * @brief Allocate a task using a matroid optimization approach (strict

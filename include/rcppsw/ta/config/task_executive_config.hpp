@@ -39,7 +39,7 @@ NS_START(rcppsw, ta, config);
  * @struct task_executive_config
  * @ingroup rcppsw config ta
  */
-struct task_executive_config : public rcppsw::config::base_config {
+struct task_executive_config final : public rcppsw::config::base_config {
   /**
    * @brief Should the executive automatically update execution time estimates
    * for tasks, or will that be handled in the application via callbacks?

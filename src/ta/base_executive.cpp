@@ -26,7 +26,6 @@
 #include "rcppsw/ta/polled_task.hpp"
 #include "rcppsw/ta/ds/ds_variant.hpp"
 #include "rcppsw/ta/ds/bi_tdgraph.hpp"
-#include "rcppsw/ta/task_allocator.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -42,7 +41,7 @@ base_executive::base_executive(const config::task_executive_config* const config
     : ER_CLIENT_INIT("rcppsw.ta.base_executive"),
       mc_update_exec_ests(config->update_exec_ests),
       mc_update_interface_ests(config->update_interface_ests),
-      mc_policy(config->alloc_policy),
+      mc_alloc_policy(config->alloc_policy),
       m_ds(std::move(ds)),
       m_rng(rng) {}
 
@@ -52,13 +51,9 @@ base_executive::~base_executive(void) = default;
  * Member Functions
  ******************************************************************************/
 void base_executive::run(void) {
-  /*
-   * First timestep of execution/allocation
-   */
+  /* First timestep of execution/allocation */
   if (nullptr == current_task()) {
-    task_start_handle(boost::apply_visitor(task_allocator(m_rng,
-                                                          mc_policy),
-                                           *m_ds));
+    task_start_handle(task_allocate(nullptr));
     return;
   }
 
@@ -94,9 +89,7 @@ void base_executive::task_abort_handle(polled_task* task) {
   } /* for(cb..) */
 
   task->task_aborted(false); /* already been handled in callback */
-  task_start_handle(boost::apply_visitor(task_allocator(m_rng,
-                                                        mc_policy),
-                                         *m_ds));
+  task_start_handle(task_allocate(task));
 } /* task_abort_handle() */
 
 void base_executive::task_finish_handle(polled_task* task) {
@@ -107,9 +100,7 @@ void base_executive::task_finish_handle(polled_task* task) {
     cb(task);
   } /* for(cb..) */
 
-  task_start_handle(boost::apply_visitor(task_allocator(m_rng,
-                                                        mc_policy),
-                       *m_ds));
+  task_start_handle(task_allocate(task));
 } /* task_finish_handle() */
 
 void base_executive::task_start_handle(polled_task* const new_task) {

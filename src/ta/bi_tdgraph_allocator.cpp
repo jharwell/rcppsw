@@ -38,7 +38,9 @@ NS_START(rcppsw, ta);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-polled_task* bi_tdgraph_allocator::alloc_stoch_greedy_nbhd(void) const {
+polled_task* bi_tdgraph_allocator::alloc_stoch_greedy_nbhd(
+    const polled_task* current_task) const {
+
     /*
      * If there is no active TAB, then the root task is not partitionable, so
      * return it.
@@ -46,6 +48,14 @@ polled_task* bi_tdgraph_allocator::alloc_stoch_greedy_nbhd(void) const {
     if (nullptr == m_graph->active_tab()) {
       return m_graph->root();
     } else {
+      /*
+       * Update our active TAB so that we perform partitioning from the correct
+       * place. We have to pass in the current_task(), because the TAB's active
+       * task has already been updated to be NULL after the task finish/abort
+       * that brought us to this function.
+       */
+      m_graph->active_tab_update(current_task, m_rng);
+
       return m_graph->active_tab()->task_allocate(m_rng);
     }
 } /* alloc_stoch_greedy_nbhd() */
@@ -57,10 +67,10 @@ polled_task* bi_tdgraph_allocator::alloc_greedy_global(void) const {
             &static_cast<const executable_task*>(task)->task_exec_estimate();
       });
     auto min_task = std::min_element(exec_ests.begin(), exec_ests.end(),
-                                     [&](const auto& t1, const auto& t2) {
-                                       return t1 < t2;
+                                     [&](const auto* t1, const auto* t2) {
+                                       return *t1 < *t2;
                                      });
-    return m_graph->find_vertex(std::distance(min_task, exec_ests.end()));
+    return m_graph->find_vertex(std::distance(exec_ests.begin(), min_task));
   } /* alloc_greedy_global() */
 
 polled_task* bi_tdgraph_allocator::alloc_random(void) const {

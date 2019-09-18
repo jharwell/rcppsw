@@ -39,7 +39,7 @@ NS_START(rcppsw, ta, config);
  * @struct task_partition_config
 * @ingroup rcppsw config ta
  */
-struct task_partition_config : public rcppsw::config::base_config {
+struct task_partition_config final : public rcppsw::config::base_config {
   src_sigmoid_sel_config src_sigmoid{};
   bool always_partition{false};
   bool never_partition{false};

@@ -40,7 +40,7 @@ NS_START(rcppsw, ta, config);
  * @struct sigmoid_sel_config
  * @ingroup rcppsw config ta
  */
-struct sigmoid_sel_config : public rcppsw::config::base_config {
+struct sigmoid_sel_config final : public rcppsw::config::base_config {
   std::string method{};
   math::config::sigmoid_config sigmoid{};
 };

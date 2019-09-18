@@ -40,7 +40,7 @@ NS_START(rcppsw, ta, config);
  * @struct src_sigmoid_sel_config
 * @ingroup rcppsw config ta
  */
-struct src_sigmoid_sel_config : public rcppsw::config::base_config {
+struct src_sigmoid_sel_config final : public rcppsw::config::base_config {
   /**
    * @brief What should the source of the input into abort probability
    * calculations be? Valid values are: ["exec", "interface"], referring to

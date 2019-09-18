@@ -41,7 +41,7 @@ NS_START(rcppsw, ta, config);
  * @struct task_alloc_config
  * @ingroup rcppsw ta config
  */
-struct task_alloc_config : public rcppsw::config::base_config {
+struct task_alloc_config final : public rcppsw::config::base_config {
   exec_estimates_config exec_est{};
   src_sigmoid_sel_config abort{};
   stoch_greedy_nbhd_config stoch_greedy_nbhd{};

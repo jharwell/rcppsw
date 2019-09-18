@@ -82,6 +82,8 @@ class base_executive : public rcppsw::er::client<base_executive> {
    */
   void run(void);
 
+  const std::string& alloc_policy(void) const { return mc_alloc_policy; }
+
   /**
    * @brief Get the task currently being run.
    */
@@ -137,26 +139,6 @@ class base_executive : public rcppsw::er::client<base_executive> {
 
  protected:
   /**
-   * @brief Low-level start start handling:
-   *
-   * - Reset the task.
-   * - Actually start the task.
-   * - Set the current task for the executive to the started task.
-   */
-  void do_task_start(polled_task* const task);
-
-  /**
-   * @brief Update execution and interface time estimates (if configured to do
-   * so) for the specified task.
-   */
-  void task_ests_update(polled_task* new_task);
-
-  /**
-   * @brief Update execution and interface times for the specified task.
-   */
-  void task_times_update(polled_task* new_task);
-
-  /**
    * @brief Handler called when a task is aborted.
    *
    * The base implementation does the following, in order:
@@ -191,7 +173,32 @@ class base_executive : public rcppsw::er::client<base_executive> {
    */
   virtual void task_finish_handle(polled_task* task);
 
-  void current_task(polled_task* current_task) {
+  /**
+   * @brief Allocate a new task, given the most recently executed one.
+   */
+  virtual polled_task* task_allocate(const polled_task* task) = 0;
+
+  /**
+   * @brief Low-level start start handling:
+   *
+   * - Reset the task.
+   * - Actually start the task.
+   * - Set the current task for the executive to the started task.
+   */
+  void do_task_start(polled_task* const task);
+
+  /**
+   * @brief Update execution and interface time estimates (if configured to do
+   * so) for the specified task.
+   */
+  void task_ests_update(polled_task* new_task);
+
+  /**
+   * @brief Update execution and interface times for the specified task.
+   */
+  void task_times_update(polled_task* new_task);
+
+    void current_task(polled_task* current_task) {
     m_current_task = current_task;
   }
 
@@ -204,7 +211,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
   /* clang-format off */
   const bool                      mc_update_exec_ests;
   const bool                      mc_update_interface_ests;
-  const std::string               mc_policy;
+  const std::string               mc_alloc_policy;
 
   polled_task*                    m_current_task{nullptr};
   std::list<abort_notify_cb>      m_task_abort_notify{};

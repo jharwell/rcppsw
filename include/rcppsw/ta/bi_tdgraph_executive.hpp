@@ -90,13 +90,12 @@ class bi_tdgraph_executive final : public base_executive,
   ds::bi_tdgraph* graph(void);
 
  private:
-  polled_task* task_allocate(void);
-  void active_tab_update(void);
-
+  polled_task* task_allocate(const polled_task* last_task) override;
   void task_start_handle(polled_task* new_task) override;
   void task_abort_handle(polled_task* task) override;
   void task_finish_handle(polled_task* task) override;
 
+  void active_tab_update(void);
   /* clang-format off */
   std::list<start_notify_cb> m_task_start_notify{};
   /* clang-format on */

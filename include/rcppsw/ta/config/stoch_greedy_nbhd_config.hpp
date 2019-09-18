@@ -40,7 +40,7 @@ NS_START(rcppsw, ta, config);
  * @struct stoch_greedy_nbhd_config
  * @ingroup rcppsw ta config
  */
-struct stoch_greedy_nbhd_config : public rcppsw::config::base_config {
+struct stoch_greedy_nbhd_config final : public rcppsw::config::base_config {
   src_sigmoid_sel_config subtask_sel{};
   task_partition_config partitioning{};
   src_sigmoid_sel_config tab_sel{};

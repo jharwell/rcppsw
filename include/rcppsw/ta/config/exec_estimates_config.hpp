@@ -48,7 +48,7 @@ NS_START(rcppsw, ta, config);
  * controllers to avoid premature abortion upon start due to estimates of 0.0
  * for generalist task.
  */
-struct exec_estimates_config : public rcppsw::config::base_config {
+struct exec_estimates_config final : public rcppsw::config::base_config {
   /**
    * @brief Should initial estimates of task execution times be used?
    */

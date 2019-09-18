@@ -49,19 +49,21 @@ NS_START(rcppsw, ta);
  */
 struct task_allocator : public boost::static_visitor<polled_task*> {
   task_allocator(math::rng* rng_in,
-                 const std::string& policy_in)
-      : rng(rng_in), policy(policy_in) {}
+                 const std::string& policy_in,
+                 const polled_task* last_task_in)
+      : rng(rng_in), policy(policy_in), last_task(last_task_in) {}
 
   task_allocator& operator=(const task_allocator&) = delete;
   task_allocator(const task_allocator&) = delete;
 
   polled_task* operator()(ds::bi_tdgraph& graph) const {
-    return bi_tdgraph_allocator(policy, &graph, rng)();
+    return bi_tdgraph_allocator(policy, &graph, rng)(last_task);
   }
 
   /* clang-format off */
-  math::rng*  rng;
-  std::string policy;
+  math::rng*         rng;
+  std::string        policy;
+  const polled_task* last_task;
   /* clang-format on */
 };
 

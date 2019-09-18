@@ -45,7 +45,7 @@ NS_START(rcppsw, math, config, xml);
  *
  * @brief Parses XML configuration relating to RNG.
  */
-class rng_parser : public rcppsw::config::xml::xml_config_parser {
+class rng_parser final : public rcppsw::config::xml::xml_config_parser {
  public:
   using config_type = rng_config;
 

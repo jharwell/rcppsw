@@ -25,6 +25,7 @@
 
 #include "rcppsw/ta/ds/bi_tdgraph.hpp"
 #include "rcppsw/ta/config/task_executive_config.hpp"
+#include "rcppsw/ta/task_allocator.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -74,7 +75,7 @@ void bi_tdgraph_executive::task_abort_handle(polled_task* task) {
   }
 
   task->task_aborted(false); /* already been handled in callback */
-  task_start_handle(task_allocate());
+  task_start_handle(task_allocate(task));
 } /* task_abort_handle() */
 
 void bi_tdgraph_executive::task_finish_handle(polled_task* task) {
@@ -92,7 +93,7 @@ void bi_tdgraph_executive::task_finish_handle(polled_task* task) {
   if (nullptr != active_tab()) {
     graph()->active_tab()->task_finish_update(task, rng());
   }
-  task_start_handle(task_allocate());
+  task_start_handle(task_allocate(task));
 } /* task_finish_handle() */
 
 void bi_tdgraph_executive::task_start_handle(polled_task* const new_task) {
@@ -105,18 +106,17 @@ void bi_tdgraph_executive::task_start_handle(polled_task* const new_task) {
   do_task_start(new_task);
 } /* task_start_handle() */
 
-polled_task* bi_tdgraph_executive::task_allocate(void) {
-  /*
-   * Update our active TAB so that we perform partitioning from the correct
-   * place. We have to pass in the current_task(), because the TAB's active task
-   * has already been updated to be NULL after the task finish/abort that
-   * brought us to this function.
-   */
-  graph()->active_tab_update(current_task(), rng());
-  auto ret = graph()->active_tab()->task_allocate(rng());
+polled_task* bi_tdgraph_executive::task_allocate(
+    const polled_task* last_task) {
+  auto ret =  boost::apply_visitor(task_allocator(rng(),
+                                                  alloc_policy(),
+                                                  last_task),
+                                   *ds());
+
   ER_ASSERT(!ret->task_aborted(),
             "Task '%s' marked as aborted during allocation",
             ret->name().c_str());
+  ER_INFO("Allocated new task '%s'", ret->name().c_str());
   return ret;
 } /* task_allocate() */
 
