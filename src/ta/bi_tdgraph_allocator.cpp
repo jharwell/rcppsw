@@ -66,11 +66,24 @@ polled_task* bi_tdgraph_allocator::alloc_greedy_global(void) const {
         exec_ests[m_graph->vertex_id(task)] =
             &static_cast<const executable_task*>(task)->task_exec_estimate();
       });
-    auto min_task = std::min_element(exec_ests.begin(), exec_ests.end(),
-                                     [&](const auto* t1, const auto* t2) {
-                                       return *t1 < *t2;
-                                     });
-    return m_graph->find_vertex(std::distance(exec_ests.begin(), min_task));
+
+    /* Only tasks that have equivalent minimum cost are eligible for selection */
+    auto is_equiv_min = [&](const auto*e) {
+      auto min_task = std::min_element(exec_ests.begin(), exec_ests.end(),
+                                       [&](const auto* t1, const auto* t2) {
+                                         return *t1 < *t2;
+                                       });
+      return **min_task == *e;
+    };
+
+    std::vector<const ta::time_estimate*> min_ests;
+    std::copy_if(exec_ests.begin(),
+                 exec_ests.end(),
+                 std::back_inserter(min_ests),
+                 is_equiv_min);
+
+    ER_ASSERT(min_ests.size() >= 1, "No minimum cost task found?");
+    return m_graph->find_vertex(m_rng->uniform(0, min_ests.size() - 1));
   } /* alloc_greedy_global() */
 
 polled_task* bi_tdgraph_allocator::alloc_random(void) const {

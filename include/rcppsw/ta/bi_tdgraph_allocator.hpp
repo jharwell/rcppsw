@@ -46,7 +46,8 @@ class bi_tdgraph;
  * @class bi_tdgraph_allocator
  * @ingroup rcppsw ta
  *
- * @brief Allocate a task from a \ref bi_tdgraph according to a specified policy.
+ * @brief Allocate a task from a \ref bi_tdgraph according to a specified
+ * policy.
  */
 class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
  public:
