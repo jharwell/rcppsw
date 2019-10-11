@@ -24,8 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/math/rng.hpp"
@@ -38,6 +36,9 @@ class polled_task;
 namespace ds {
 class bi_tdgraph;
 } /* namespace ds */
+namespace config {
+struct task_alloc_config;
+} /* namespace config */
 
 /*******************************************************************************
  * Class Definitions
@@ -52,31 +53,26 @@ class bi_tdgraph;
 class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
  public:
   static constexpr char kPolicyRandom[] = "random";
-  static constexpr char kPolicyGreedyGlobal[] = "greedy_global";
+  static constexpr char kPolicyEplisonGreedy[] = "epsilon_greedy";
+  static constexpr char kPolicyStrictGreedy[] = "strict_greedy";
   static constexpr char kPolicyStochGreedyNBHD[] = "stoch_greedy_nbhd";
 
-  bi_tdgraph_allocator(const std::string& policy,
+  bi_tdgraph_allocator(const config::task_alloc_config* config,
                        ds::bi_tdgraph* graph,
                        math::rng* rng)
       : ER_CLIENT_INIT("rcppsw.ta.bi_tdgraph_allocator"),
-        mc_policy(policy),
+        mc_config(config),
         m_graph(graph),
         m_rng(rng) {}
 
   bi_tdgraph_allocator(const bi_tdgraph_allocator&) = delete;
   bi_tdgraph_allocator& operator=(const bi_tdgraph_allocator&) = delete;
 
-  polled_task* operator()(const polled_task* current_task) const {
-    if (kPolicyRandom == mc_policy) {
-      return alloc_random();
-    } else if (kPolicyGreedyGlobal == mc_policy) {
-      return alloc_greedy_global();
-    } else if (kPolicyStochGreedyNBHD == mc_policy) {
-      return alloc_stoch_greedy_nbhd(current_task);
-    }
-    ER_FATAL_SENTINEL("Bad allocation policy '%s'", mc_policy.c_str());
-    return nullptr;
-  }
+  /**
+   * @brief Allocate a task from a bi_tdgraph according to configuration, given
+   * the most recently executed task (just finished).
+   */
+  polled_task* operator()(const polled_task* current_task) const;
 
   /**
    * @brief Allocate a task using a matroid neighborhood approach, applying
@@ -93,7 +89,7 @@ class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
    * @brief Allocate a task using a matroid optimization approach (strict
    * greedy). No stochasticity is applied.
    */
-  polled_task* alloc_greedy_global(void) const;
+  polled_task* alloc_strict_greedy(void) const;
 
   /**
    * @brief Allocate a task by choosing a random vertex within the graph and
@@ -101,8 +97,14 @@ class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
    */
   polled_task* alloc_random(void) const;
 
+  /**
+   * @brief Allocate a task using the eplison-greedy method from Pini2012 (not
+   * invented by him)
+   */
+  polled_task* alloc_epsilon_greedy(void) const;
+
   /* clang-format off */
-  const std::string mc_policy;
+  const config::task_alloc_config* mc_config;
 
   ds::bi_tdgraph*   m_graph;
   math::rng*        m_rng;

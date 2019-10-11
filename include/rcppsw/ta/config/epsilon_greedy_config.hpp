@@ -1,5 +1,5 @@
 /**
- * @file rng.cpp
+ * @file epsilon_greedy_config.hpp
  *
  * @copyright 2019 John Harwell, All rights reserved.
  *
@@ -18,52 +18,32 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_TA_CONFIG_EPSILON_GREEDY_CONFIG_HPP_
+#define INCLUDE_RCPPSW_TA_CONFIG_EPSILON_GREEDY_CONFIG_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/rng.hpp"
-#include <random>
+#include "rcppsw/config/base_config.hpp"
+#include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
+#include "rcppsw/ta/config/task_partition_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math, detail);
+NS_START(rcppsw, ta, config);
 
-struct rng_impl {
-  explicit rng_impl(uint seed) : engine(seed) {}
-  std::default_random_engine engine;
+/*******************************************************************************
+ * Structure Definitions
+ ******************************************************************************/
+/**
+ * @struct epsilon_greedy_config
+ * @ingroup rcppsw ta config
+ */
+struct epsilon_greedy_config final : public rcppsw::config::base_config {
+  double epsilon{-1};
 };
 
-NS_END(detail);
+NS_END(config, ta, rcppsw);
 
-/*******************************************************************************
- * Constructors/Destructors
- ******************************************************************************/
-rng::rng(uint seed) : pimpl(seed), m_seed(seed) {}
-
-rng::~rng(void) = default;
-
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-double rng::uniform(double lb, double ub) {
-  std::uniform_real_distribution<> dist(lb, ub);
-  return dist(this->impl->engine);
-} /* uniform() */
-
-uint rng::uniform(uint lb, uint ub) {
-  std::uniform_int_distribution<> dist(lb, ub);
-  return dist(this->impl->engine);
-} /* uniform() */
-
-int rng::uniform(int lb, int ub) {
-  std::uniform_int_distribution<> dist(lb, ub);
-  return dist(this->impl->engine);
-} /* uniform() */
-
-double rng::gaussian(double mean, double std_dev) {
-  std::normal_distribution<double> dist(mean, std_dev);
-  return dist(this->impl->engine);
-} /* guassian() */
-
-NS_END(math, rcppsw);
+#endif /* INCLUDE_RCPPSW_TA_CONFIG_EPSILON_GREEDY_CONFIG_HPP_ */

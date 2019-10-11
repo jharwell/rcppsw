@@ -32,13 +32,17 @@ NS_START(rcppsw, ta, config, xml);
  * Member Functions
  ******************************************************************************/
 void stoch_greedy_nbhd_parser::parse(const ticpp::Element& node) {
-  /* executive not used */
+  m_config = std::make_unique<config_type>();
+
+  /* executive or policy not used */
   if (nullptr == node.FirstChild(kXMLRoot, false)) {
     return;
   }
 
   ticpp::Element tnode = node_get(node, kXMLRoot);
-  m_config = std::make_unique<config_type>();
+
+  XML_PARSE_ATTR(tnode, m_config, tab_init_policy);
+
   m_subtask_sel.parse(node_get(tnode, "subtask_sel"));
   m_partitioning.parse(tnode);
   m_tab_sel.parse(node_get(tnode, "tab_sel"));

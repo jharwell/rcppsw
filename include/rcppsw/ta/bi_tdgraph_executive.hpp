@@ -57,7 +57,8 @@ class bi_tdgraph_executive final : public base_executive,
   using start_notify_cb = std::function<void(const polled_task*,
                                              const ds::bi_tab*)>;
 
-  bi_tdgraph_executive(const config::task_executive_config* c_config,
+  bi_tdgraph_executive(const config::task_executive_config* exec_config,
+                       const config::task_alloc_config* const alloc_config,
                        std::unique_ptr<ds::ds_variant> ds,
                        math::rng*rng);
 

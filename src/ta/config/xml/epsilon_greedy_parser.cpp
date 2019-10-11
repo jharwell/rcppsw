@@ -1,5 +1,5 @@
 /**
- * @file rng.cpp
+ * @file epsilon_greedy_parser.cpp
  *
  * @copyright 2019 John Harwell, All rights reserved.
  *
@@ -21,49 +21,30 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/rng.hpp"
-#include <random>
+#include "rcppsw/ta/config/xml/epsilon_greedy_parser.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math, detail);
-
-struct rng_impl {
-  explicit rng_impl(uint seed) : engine(seed) {}
-  std::default_random_engine engine;
-};
-
-NS_END(detail);
-
-/*******************************************************************************
- * Constructors/Destructors
- ******************************************************************************/
-rng::rng(uint seed) : pimpl(seed), m_seed(seed) {}
-
-rng::~rng(void) = default;
+NS_START(rcppsw, ta, config, xml);
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-double rng::uniform(double lb, double ub) {
-  std::uniform_real_distribution<> dist(lb, ub);
-  return dist(this->impl->engine);
-} /* uniform() */
+void epsilon_greedy_parser::parse(const ticpp::Element& node) {
+  m_config = std::make_unique<config_type>();
 
-uint rng::uniform(uint lb, uint ub) {
-  std::uniform_int_distribution<> dist(lb, ub);
-  return dist(this->impl->engine);
-} /* uniform() */
+  /* executive or policy not used */
+  if (nullptr == node.FirstChild(kXMLRoot, false)) {
+    return;
+  }
 
-int rng::uniform(int lb, int ub) {
-  std::uniform_int_distribution<> dist(lb, ub);
-  return dist(this->impl->engine);
-} /* uniform() */
+  ticpp::Element tnode = node_get(node, kXMLRoot);
+  XML_PARSE_ATTR(tnode, m_config, epsilon);
+} /* parse() */
 
-double rng::gaussian(double mean, double std_dev) {
-  std::normal_distribution<double> dist(mean, std_dev);
-  return dist(this->impl->engine);
-} /* guassian() */
+bool epsilon_greedy_parser::validate(void) const {
+  return RCSW_IS_BETWEEN(m_config->epsilon, 0.0, 1.0);
+} /* validate() */
 
-NS_END(math, rcppsw);
+NS_END(xml, config, ta, rcppsw);

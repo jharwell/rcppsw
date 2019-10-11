@@ -24,10 +24,13 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+
 #include "rcppsw/config/base_config.hpp"
 #include "rcppsw/ta/config/exec_estimates_config.hpp"
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
 #include "rcppsw/ta/config/stoch_greedy_nbhd_config.hpp"
+#include "rcppsw/ta/config/epsilon_greedy_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -42,9 +45,16 @@ NS_START(rcppsw, ta, config);
  * @ingroup rcppsw ta config
  */
 struct task_alloc_config final : public rcppsw::config::base_config {
+  /**
+   * @brief Policy for specifying how tasks will be allocated in the executive
+   * from the data structure containing the tasks to run.
+   */
+  std::string policy{"random"};
+
   exec_estimates_config exec_est{};
   src_sigmoid_sel_config abort{};
   stoch_greedy_nbhd_config stoch_greedy_nbhd{};
+  epsilon_greedy_config epsilon_greedy{};
 };
 
 NS_END(config, ta, rcppsw);

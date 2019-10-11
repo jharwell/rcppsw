@@ -24,7 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include "rcppsw/config/base_config.hpp"
 
 /*******************************************************************************
@@ -51,18 +50,6 @@ struct task_executive_config final : public rcppsw::config::base_config {
    * for tasks, or will that be handled in the application via callbacks?
    */
   bool update_interface_ests{true};
-
-  /**
-   * @brief Policy for specifying how the initially active TAB in the executive
-   * will be chosen. Valid values are: [root, random, max_depth].
-   */
-  std::string tab_init_policy{"root"};
-
-  /**
-   * @brief Policy for specifying how tasks will be allocated in the executive
-   * from the data structure containing the tasks to run.
-   */
-  std::string alloc_policy{"random"};
 };
 
 NS_END(config, ta, rcppsw);

@@ -24,6 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+
 #include "rcppsw/config/base_config.hpp"
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
 #include "rcppsw/ta/config/task_partition_config.hpp"
@@ -41,6 +43,12 @@ NS_START(rcppsw, ta, config);
  * @ingroup rcppsw ta config
  */
 struct stoch_greedy_nbhd_config final : public rcppsw::config::base_config {
+  /**
+   * @brief Policy for specifying how the initially active TAB in the executive
+   * will be chosen. Valid values are: [root, random, max_depth].
+   */
+  std::string tab_init_policy{};
+
   src_sigmoid_sel_config subtask_sel{};
   task_partition_config partitioning{};
   src_sigmoid_sel_config tab_sel{};

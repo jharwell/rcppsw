@@ -26,12 +26,14 @@
  ******************************************************************************/
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/range.hpp"
-#include "rcppsw/patterns/pimpl/impl_ptr.hpp"
+#include "rcppsw/patterns/pimpl/pimpl.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+NS_START(rcppsw, math, detail);
+struct rng_impl;
+NS_END(detail);
 
 /*******************************************************************************
  * Class Definitions
@@ -43,11 +45,10 @@ NS_START(rcppsw, math);
  * @brief Random number generator class using the PIMPL pattern in order to not
  * include <random> in the header file.
  */
-class rng : public patterns::pimpl::impl_ptr<rng>::unique {
+class rng : public patterns::pimpl::pimpl<detail::rng_impl> {
  public:
   explicit rng(uint seed);
   ~rng(void);
-
   uint seed(void) const { return m_seed; }
   void seed(uint seed) { m_seed = seed; }
 
@@ -68,6 +69,7 @@ class rng : public patterns::pimpl::impl_ptr<rng>::unique {
 
   double gaussian(double mean, double std_dev);
 
+ private:
   /* clang-format off */
   uint m_seed;
   /* clang-format on */

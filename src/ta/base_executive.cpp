@@ -35,13 +35,14 @@ NS_START(rcppsw, ta);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_executive::base_executive(const config::task_executive_config* const config,
+base_executive::base_executive(const config::task_executive_config* const exec_config,
+                               const config::task_alloc_config* const alloc_config,
                                std::unique_ptr<ds::ds_variant> ds,
                                math::rng* rng)
     : ER_CLIENT_INIT("rcppsw.ta.base_executive"),
-      mc_update_exec_ests(config->update_exec_ests),
-      mc_update_interface_ests(config->update_interface_ests),
-      mc_alloc_policy(config->alloc_policy),
+      mc_update_exec_ests(exec_config->update_exec_ests),
+      mc_update_interface_ests(exec_config->update_interface_ests),
+      mc_alloc_config(*alloc_config),
       m_ds(std::move(ds)),
       m_rng(rng) {}
 

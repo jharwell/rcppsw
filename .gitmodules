@@ -9,6 +9,3 @@
 	path = ext/rcsw
 	url = https://github.com/swarm-robotics/rcsw.git
 	branch = devel
-[submodule "ext/pimpl"]
-	path = ext/pimpl
-	url = https://github.com/yet-another-user/pimpl.git

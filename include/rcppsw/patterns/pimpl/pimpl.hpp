@@ -1,5 +1,5 @@
 /**
- * @file impl_ptr.hpp
+ * @file pimpl.hpp
  *
  * @copyright 2019 John Harwell, All rights reserved.
  *
@@ -18,13 +18,15 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_PIMPL_IMPL_PTR_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_PIMPL_IMPL_PTR_HPP_
+#ifndef INCLUDE_RCPPSW_PATTERNS_PIMPL_PIMPL_HPP_
+#define INCLUDE_RCPPSW_PATTERNS_PIMPL_PIMPL_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <ext/pimpl/include/impl_ptr.hpp>
+#include <memory>
+#include <utility>
+
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
@@ -35,20 +37,22 @@ NS_START(rcppsw, patterns, pimpl);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-using in_place_type = ::detail::in_place_type;
-
-/*
- * Because this is not in boost yet (and might not ever be), it does some weird
- * non-std:: global namespace things that I have to correct.
+/**
+ * @class pimpl
+ * @ingroup rcppsw pimpl
+ *
+ * @brief Super-simple templated implementation of the PIMPL idiom. Does not
+ * exist in boost, and the boost candidate I found had subtle memory issues.
  */
-static constexpr in_place_type in_place {};
+template<typename TImpl>
+struct pimpl {
+  template<typename ...Args>
+  pimpl(Args... args) :
+      impl(std::make_unique<TImpl>(std::forward<Args>(args)...)) {}
 
-template<typename U,
-         template<typename,
-                  typename...> class P =::detail::no_policy,
-         typename... M>
-using impl_ptr = ::impl_ptr<U, P, M...>;
+  std::unique_ptr<TImpl> impl;
+};
 
 NS_END(pimpl, patterns, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_PIMPL_IMPL_PTR_HPP_ */
+#endif /* INCLUDE_RCPPSW_PATTERNS_PIMPL_PIMPL_HPP_ */

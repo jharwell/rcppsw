@@ -36,10 +36,11 @@ NS_START(rcppsw, ta);
  * Constructors/Destructor
  ******************************************************************************/
 bi_tdgraph_executive::bi_tdgraph_executive(
-    const config::task_executive_config* const c_config,
+    const config::task_executive_config* const exec_config,
+    const config::task_alloc_config* const alloc_config,
     std::unique_ptr<ds::ds_variant> ds,
     math::rng* rng)
-    : base_executive(c_config, std::move(ds), rng),
+    : base_executive(exec_config, alloc_config, std::move(ds), rng),
       ER_CLIENT_INIT("rcppsw.ta.executive.bi_tdgraph") {}
 
 /*******************************************************************************
@@ -108,8 +109,8 @@ void bi_tdgraph_executive::task_start_handle(polled_task* const new_task) {
 
 polled_task* bi_tdgraph_executive::task_allocate(
     const polled_task* last_task) {
-  auto ret =  boost::apply_visitor(task_allocator(rng(),
-                                                  alloc_policy(),
+  auto ret =  boost::apply_visitor(task_allocator(alloc_config(),
+                                                  rng(),
                                                   last_task),
                                    *ds());
 

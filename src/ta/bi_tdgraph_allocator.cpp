@@ -38,6 +38,20 @@ NS_START(rcppsw, ta);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
+polled_task* bi_tdgraph_allocator::operator()(const polled_task* current_task) const {
+  if (kPolicyRandom == mc_config->policy) {
+    return alloc_random();
+  } else if (kPolicyEplisonGreedy == mc_config->policy) {
+    return alloc_epsilon_greedy();
+  } else if (kPolicyStrictGreedy == mc_config->policy) {
+    return alloc_strict_greedy();
+  } else if (kPolicyStochGreedyNBHD == mc_config->policy) {
+    return alloc_stoch_greedy_nbhd(current_task);
+  }
+  ER_FATAL_SENTINEL("Bad allocation policy '%s'", mc_config->policy.c_str());
+  return nullptr;
+}
+
 polled_task* bi_tdgraph_allocator::alloc_stoch_greedy_nbhd(
     const polled_task* current_task) const {
 
@@ -60,7 +74,7 @@ polled_task* bi_tdgraph_allocator::alloc_stoch_greedy_nbhd(
     }
 } /* alloc_stoch_greedy_nbhd() */
 
-polled_task* bi_tdgraph_allocator::alloc_greedy_global(void) const {
+polled_task* bi_tdgraph_allocator::alloc_strict_greedy(void) const {
     std::vector<const ta::time_estimate*> exec_ests(m_graph->n_vertices());
     m_graph->walk([&](const auto* task) {
         exec_ests[m_graph->vertex_id(task)] =
@@ -84,7 +98,17 @@ polled_task* bi_tdgraph_allocator::alloc_greedy_global(void) const {
 
     ER_ASSERT(min_ests.size() >= 1, "No minimum cost task found?");
     return m_graph->find_vertex(m_rng->uniform(0, min_ests.size() - 1));
-  } /* alloc_greedy_global() */
+} /* alloc_strict_greedy() */
+
+polled_task* bi_tdgraph_allocator::alloc_epsilon_greedy(void) const {
+  /* Choose the greedy best task with probability 1.0 - epsilon */
+  if (m_rng->uniform(0.0, 1.0) <= 1.0 - mc_config->epsilon_greedy.epsilon) {
+    return alloc_strict_greedy();
+  }
+  /* otherwise choose a random task */
+  return m_graph->find_vertex(m_rng->uniform(0, m_graph->n_vertices() - 1));
+} /* alloc_epsilon_greedy() */
+
 
 polled_task* bi_tdgraph_allocator::alloc_random(void) const {
   uint id = m_rng->uniform(0, m_graph->n_vertices() -1);

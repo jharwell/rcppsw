@@ -54,30 +54,26 @@ NS_START(rcppsw, patterns, prototype);
 template<typename TBase, typename...Args>
 class caching_factory {
  public:
-  caching_factory(void) {
-  }
-
   template<typename TDerived>
   void register_type(const std::string& name) {
     m_factory.template register_type<TDerived>(name);
   }
 
-  TBase* create(const std::string& name,
-            Args... args) {
+  TBase* create(const std::string& name, Args... args) {
     auto it = m_objs.find(name);
     if (m_objs.end() == it) {
-      std::unique_ptr<TBase> created = m_factory.create(name,
+      std::shared_ptr<TBase> created = m_factory.create(name,
                                                         std::forward<Args>(args)...);
-      return m_objs.insert({name, std::move(created)}).first->second.get();
+      return m_objs.insert({name, created.get()}).first->second;
     } else {
-      return it->second.get();
+      return it->second;
     }
   }
 
  private:
   /* clang-format off */
-  patterns::factory::releasing_factory<TBase, Args...> m_factory{};
-  std::map<std::string, std::unique_ptr<TBase>>        m_objs{};
+  patterns::factory::sharing_factory<TBase, Args...>   m_factory{};
+  std::map<std::string, TBase*>                        m_objs{};
   /* clang-format on */
 };
 

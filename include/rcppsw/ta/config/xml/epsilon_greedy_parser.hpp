@@ -1,7 +1,7 @@
 /**
- * @file task_alloc_parser.hpp
+ * @file epsilon_greedy_parser.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * @copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TA_CONFIG_XML_TASK_ALLOC_PARSER_HPP_
-#define INCLUDE_RCPPSW_TA_CONFIG_XML_TASK_ALLOC_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_TA_CONFIG_XML_EPSILON_GREEDY_PARSER_HPP_
+#define INCLUDE_RCPPSW_TA_CONFIG_XML_EPSILON_GREEDY_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
@@ -28,12 +28,7 @@
 #include <memory>
 
 #include "rcppsw/math/config/xml/sigmoid_parser.hpp"
-#include "rcppsw/config/xml/xml_config_parser.hpp"
-#include "rcppsw/ta/config/xml/exec_estimates_parser.hpp"
-#include "rcppsw/ta/config/xml/src_sigmoid_sel_parser.hpp"
-#include "rcppsw/ta/config/task_alloc_config.hpp"
-#include "rcppsw/ta/config/xml/stoch_greedy_nbhd_parser.hpp"
-#include "rcppsw/ta/config/xml/epsilon_greedy_parser.hpp"
+#include "rcppsw/ta/config/epsilon_greedy_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -44,30 +39,26 @@ NS_START(rcppsw, ta, config, xml);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class task_alloc_parser
+ * @class epsilon_greedy_parser
  * @ingroup rcppsw ta config xml
  *
- * @brief Parses XML configuration used for task allocation into \ref
- * task_alloc_config.
+ * @brief Parses XML configuration used for epsilon greedy task allocation
+ * policy into \ref epsilon_greedy_config.
  */
-class task_alloc_parser final : public rcppsw::config::xml::xml_config_parser {
+class epsilon_greedy_parser final : public rcppsw::config::xml::xml_config_parser {
  public:
-  using config_type = task_alloc_config;
+  using config_type = epsilon_greedy_config;
 
   /**
    * @brief The root tag that all task allocation XML configuration should lie
    * under in the XML tree.
    */
-  static constexpr char kXMLRoot[] = "task_alloc";
+  static constexpr char kXMLRoot[] = "epsilon_greedy";
 
   void parse(const ticpp::Element& node) override RCSW_COLD;
   bool validate(void) const override RCSW_ATTR(pure, cold);
 
   RCSW_COLD std::string xml_root(void) const override { return kXMLRoot; }
-
-  RCSW_COLD void exec_est_task_add(const std::string& task) {
-    m_estimation.task_add(task);
-  }
 
  private:
   RCSW_COLD rcppsw::config::base_config* config_get_impl(void) const override {
@@ -76,13 +67,9 @@ class task_alloc_parser final : public rcppsw::config::xml::xml_config_parser {
 
   /* clang-format off */
   std::unique_ptr<config_type> m_config{nullptr};
-  exec_estimates_parser        m_estimation{};
-  src_sigmoid_sel_parser       m_abort{};
-  stoch_greedy_nbhd_parser     m_sgn{};
-  epsilon_greedy_parser        m_epsilon{};
   /* clang-format on */
 };
 
 NS_END(xml, config, ta, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TA_CONFIG_XML_TASK_ALLOC_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_TA_CONFIG_XML_EPSILON_GREEDY_PARSER_HPP_ */

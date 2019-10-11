@@ -34,6 +34,7 @@
 #include "rcppsw/ta/polled_task.hpp"
 #include "rcppsw/ta/ds/ds_variant.hpp"
 #include "rcppsw/math/rng.hpp"
+#include "rcppsw/ta/config/task_alloc_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -64,11 +65,13 @@ class base_executive : public rcppsw::er::client<base_executive> {
   /**
    * @brief Creates the base executive.
    *
-   * @param config Initialization parameters/config.
+   * @param exec_config Initialization config specific to executive.
+   * @param aloc_config Initialization config for task allocation.
    * @param ds Data structure containing tasks to manage/run.
    * @param rng Non-owning Random number generator reference.
    */
-  base_executive(const config::task_executive_config* config,
+  base_executive(const config::task_executive_config* exec_config,
+                 const config::task_alloc_config* alloc_config,
                  std::unique_ptr<ds::ds_variant> ds,
                  math::rng* rng);
   ~base_executive(void) override;
@@ -82,7 +85,9 @@ class base_executive : public rcppsw::er::client<base_executive> {
    */
   void run(void);
 
-  const std::string& alloc_policy(void) const { return mc_alloc_policy; }
+  const config::task_alloc_config* alloc_config(void) const {
+    return &mc_alloc_config;
+  }
 
   /**
    * @brief Get the task currently being run.
@@ -211,7 +216,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
   /* clang-format off */
   const bool                      mc_update_exec_ests;
   const bool                      mc_update_interface_ests;
-  const std::string               mc_alloc_policy;
+  const config::task_alloc_config mc_alloc_config;
 
   polled_task*                    m_current_task{nullptr};
   std::list<abort_notify_cb>      m_task_abort_notify{};
