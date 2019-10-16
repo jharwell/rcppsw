@@ -81,8 +81,13 @@ void base_executive::run(void) {
 } /* run() */
 
 void base_executive::task_abort_handle(polled_task* task) {
-  task_times_update(task);
+  /*
+   * Estimate updating must be BEFORE time updating, because time updating
+   * resets current execution time to 0, which results in estimates always
+   * being 0! See #246.
+   */
   task_ests_update(task);
+  task_times_update(task);
 
   task->task_aborted(true);
   for (auto& cb : task_abort_notify()) {
@@ -94,8 +99,13 @@ void base_executive::task_abort_handle(polled_task* task) {
 } /* task_abort_handle() */
 
 void base_executive::task_finish_handle(polled_task* task) {
-  task_times_update(task);
+  /*
+   * Estimate updating must be BEFORE time updating, because time updating
+   * resets current execution time to 0, which results in estimates always
+   * being 0! See #246.
+   */
   task_ests_update(task);
+  task_times_update(task);
 
   for (auto& cb : task_finish_notify()) {
     cb(task);

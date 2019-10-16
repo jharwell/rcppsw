@@ -58,18 +58,18 @@ class ema final : public expression<T> {
 
   double alpha(void) const { return m_alpha; }
 
-  double calc(const T& measure) { return operator()(measure); }
-
-  T operator()(const T& measure) {
-    return eval(static_cast<T>((1 - m_alpha) * v() + m_alpha * measure));
-  }
-
-  ema& calc(const ema& measure) {
-    this->calc(measure.v());
+  T calc(const T& measure) { return operator()(measure); }
+  ema& calc(const ema& other) {
+    this->calc(other.v());
     return *this;
   }
-  ema& operator()(const ema& measure) {
-    return eval((1 - m_alpha) * v() + m_alpha * measure.v());
+
+  T operator()(const T& measure) {
+    return eval((1 - m_alpha) * v() + m_alpha * measure);
+  }
+
+  ema& operator()(const ema& other) {
+    this->eval(other.v());
     return *this;
   }
 
