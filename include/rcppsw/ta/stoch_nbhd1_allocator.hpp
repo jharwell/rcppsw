@@ -1,5 +1,5 @@
 /**
- * @file task_allocator.hpp
+ * @file stoch_nbhd1_allocator.hpp
  *
  * @copyright 2019 John Harwell, All rights reserved.
  *
@@ -18,58 +18,57 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_
-#define INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_
+#ifndef INCLUDE_RCPPSW_TA_STOCH_NBHD1_ALLOCATOR_HPP_
+#define INCLUDE_RCPPSW_TA_STOCH_NBHD1_ALLOCATOR_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <boost/variant/static_visitor.hpp>
-#include <string>
-
+#include <vector>
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/ta/bi_tdgraph_allocator.hpp"
-#include "rcppsw/ta/ds/ds_variant.hpp"
 #include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, ta);
+class polled_task;
+
+namespace ds {
+class bi_tdgraph;
+} /* namespace ds */
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * @class task_allocator
+ * @class stoch_nbhd1_allocator
  * @ingroup rcppsw ta
  *
- * @brief Maps the task data structure to its variant, and then applies the
- * corresponding allocation policy to the mapped variant to allocate a task.
+ * @brief Allocates a task from a \ref bi_tdgraph using the STOCH-NBHD1 method
+ * from Harwell2020.
  */
-class task_allocator : public boost::static_visitor<polled_task*> {
+class stoch_nbhd1_allocator : er::client<stoch_nbhd1_allocator> {
  public:
-  task_allocator(const config::task_alloc_config* config,
-                 math::rng* rng)
-      : m_config(config), m_rng(rng) {}
+  explicit stoch_nbhd1_allocator(math::rng* rng,
+                                 ds::bi_tdgraph *graph)
+      : ER_CLIENT_INIT("rcppsw.ta.stoch_nbhd1_allocator"),
+        m_rng(rng),
+        m_graph(graph) {}
 
-  task_allocator& operator=(const task_allocator&) = delete;
-  task_allocator(const task_allocator&) = delete;
+  /* Not copy constructable/assignable by default */
+  stoch_nbhd1_allocator(const stoch_nbhd1_allocator& other) = delete;
+  const stoch_nbhd1_allocator& operator=(const stoch_nbhd1_allocator& other) = delete;
 
-  polled_task* operator()(ds::bi_tdgraph& graph,
-                          const polled_task* last_task,
-                          uint alloc_count) const {
-    return bi_tdgraph_allocator(m_config, &graph, m_rng)(last_task,
-                                                         alloc_count);
-  }
+  polled_task* operator()(const polled_task* current_task) const;
 
  private:
   /* clang-format off */
-  const config::task_alloc_config* m_config;
-  math::rng*                       m_rng;
+  math::rng*      m_rng;
+  ds::bi_tdgraph* m_graph;
   /* clang-format on */
 };
 
 NS_END(ta, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_ */
+#endif /* INCLUDE_RCPPSW_TA_STOCH_NBHD1_ALLOCATOR_HPP_ */

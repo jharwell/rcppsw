@@ -72,7 +72,8 @@ class tdgraph : public er::client<tdgraph> {
    * vertice type in the graph, and we have to use shared ptr.
    */
   using vertex_type = std::unique_ptr<polled_task>;
-  using walk_cb = std::function<void(const polled_task*)>;
+  using walk_cb = std::function<void(polled_task*)>;
+  using const_walk_cb = std::function<void(const polled_task*)>;
   using vertex_vector = std::vector<vertex_type>;
 
   /**
@@ -174,7 +175,8 @@ class tdgraph : public er::client<tdgraph> {
    *
    * @param f The callback.
    */
-  void walk(const walk_cb& f) const;
+  void walk(const walk_cb& f);
+  void walk(const const_walk_cb& f) const;
 
  private:
   using vertex_type_impl = std::shared_ptr<polled_task>;

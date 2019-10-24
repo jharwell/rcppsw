@@ -1,5 +1,5 @@
 /**
- * @file matroid_stoch_nbhd_config.hpp
+ * @file stoch_nbhd1_config.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TA_CONFIG_STOCH_GREEDY_NBHD_CONFIG_HPP_
-#define INCLUDE_RCPPSW_TA_CONFIG_STOCH_GREEDY_NBHD_CONFIG_HPP_
+#ifndef INCLUDE_RCPPSW_TA_CONFIG_STOCH_NBHD1_CONFIG_HPP_
+#define INCLUDE_RCPPSW_TA_CONFIG_STOCH_NBHD1_CONFIG_HPP_
 
 /*******************************************************************************
  * Includes
@@ -39,10 +39,10 @@ NS_START(rcppsw, ta, config);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct stoch_greedy_nbhd_config
+ * @struct stoch_nbhd1_config
  * @ingroup rcppsw ta config
  */
-struct stoch_greedy_nbhd_config final : public rcppsw::config::base_config {
+struct stoch_nbhd1_config final : public rcppsw::config::base_config {
   /**
    * @brief Policy for specifying how the initially active TAB in the executive
    * will be chosen. Valid values are: [root, random, max_depth].
@@ -56,4 +56,4 @@ struct stoch_greedy_nbhd_config final : public rcppsw::config::base_config {
 
 NS_END(config, ta, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TA_CONFIG_STOCH_GREEDY_NBHD_CONFIG_HPP_ */
+#endif /* INCLUDE_RCPPSW_TA_CONFIG_STOCH_NBHD1_CONFIG_HPP_ */

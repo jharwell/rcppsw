@@ -48,21 +48,21 @@ void task_alloc_parser::parse(const ticpp::Element& node) {
   m_abort.parse(node_get(tnode, "task_abort"));
 
   /* optional policies */
-  m_sgn.parse(tnode);
+  m_snbhd1.parse(tnode);
   m_epsilon.parse(tnode);
 
   m_config->exec_est =
       *m_estimation.config_get<exec_estimates_parser::config_type>();
   m_config->abort = *m_abort.config_get<src_sigmoid_sel_parser::config_type>();
-  m_config->stoch_greedy_nbhd =
-      *m_sgn.config_get<stoch_greedy_nbhd_parser::config_type>();
+  m_config->stoch_nbhd1 =
+      *m_snbhd1.config_get<stoch_nbhd1_parser::config_type>();
   m_config->epsilon_greedy =
       *m_epsilon.config_get<epsilon_greedy_parser::config_type>();
 } /* parse() */
 
 bool task_alloc_parser::validate(void) const {
   return m_estimation.validate() && m_abort.validate() &&
-      m_sgn.validate() && m_epsilon.validate();
+      m_snbhd1.validate() && m_epsilon.validate();
 } /* validate() */
 
 NS_END(xml, config, ta, rcppsw);

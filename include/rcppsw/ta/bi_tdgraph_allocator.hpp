@@ -52,10 +52,40 @@ struct task_alloc_config;
  */
 class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
  public:
+  /**
+   * @brief Allocate a task by choosing a random vertex within the graph and
+   * return it.
+   */
   static constexpr char kPolicyRandom[] = "random";
+
+  /**
+   * @brief Allocate a task using the eplison-greedy method from Pini2012,
+   * Auer2002.
+   */
   static constexpr char kPolicyEplisonGreedy[] = "epsilon_greedy";
+
+  /**
+   * @brief Allocate a task using a matroid optimization approach (strict
+   * greedy). No stochasticity is applied.
+   */
   static constexpr char kPolicyStrictGreedy[] = "strict_greedy";
-  static constexpr char kPolicyStochGreedyNBHD[] = "stoch_greedy_nbhd";
+
+  /**
+   * @brief Allocate a task using a stochastic neighborhood approach.
+   *
+   * Take the task with the minimum execution time within a neighborhood,
+   * applying stochasticity to the task allocation process to attempt to make it
+   * more robust/flexible. A neighborhood is defined as all tasks reachable from
+   * the most recently executed task within some distance. For this method, that
+   * distance is set to 1.
+   */
+  static constexpr char kPolicyStochNBHD1[] = "stoch_nbhd1";
+
+  /**
+   * @brief Allocate a task using the UCB1 policy from Auer2002,Pini2012.
+   */
+  static constexpr char kPolicyUCB1[] = "UCB1";
+
 
   bi_tdgraph_allocator(const config::task_alloc_config* config,
                        ds::bi_tdgraph* graph,
@@ -69,39 +99,13 @@ class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
   bi_tdgraph_allocator& operator=(const bi_tdgraph_allocator&) = delete;
 
   /**
-   * @brief Allocate a task from a bi_tdgraph according to configuration, given
-   * the most recently executed task (just finished).
-   */
-  polled_task* operator()(const polled_task* current_task) const;
-
-  /**
-   * @brief Allocate a task using a matroid neighborhood approach, applying
-   * stochasticity to the allocation process.
+   * @brief Allocate a task from a bi_tdgraph according to configuration
    *
-   * Take the task with the minimum execution time within a neighborhood,
-   * applying stochasticity to the task allocation process to attempt to make it
-   * more robust/flexible. A neighborhood is defined as all tasks reachable from
-   * the most recently executed task within some distance.
+   * @param current_task The most recently executed task (just finished).
+   * @param alloc_count The total # of task allocations so far.
    */
-  polled_task* alloc_stoch_greedy_nbhd(const polled_task* current_task) const;
-
-  /**
-   * @brief Allocate a task using a matroid optimization approach (strict
-   * greedy). No stochasticity is applied.
-   */
-  polled_task* alloc_strict_greedy(void) const;
-
-  /**
-   * @brief Allocate a task by choosing a random vertex within the graph and
-   * return it.
-   */
-  polled_task* alloc_random(void) const;
-
-  /**
-   * @brief Allocate a task using the eplison-greedy method from Pini2012 (not
-   * invented by him)
-   */
-  polled_task* alloc_epsilon_greedy(void) const;
+  polled_task* operator()(const polled_task* current_task,
+                          uint alloc_count) const;
 
   /* clang-format off */
   const config::task_alloc_config* mc_config;

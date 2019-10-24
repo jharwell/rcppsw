@@ -275,6 +275,15 @@ class executable_task : public logical_task,
 
   void task_aborted(bool task_aborted) { m_task_aborted = task_aborted; }
 
+  /**
+   * @brief Increment the count of the # of times the task has been
+   * executed. Execution may have terminated due to abort or completion, but
+   * that is tracked elsewhere.
+   */
+  void task_exec_count_inc(void) { ++m_exec_count; }
+
+  uint task_exec_count(void) const { return m_exec_count; }
+
  protected:
   /**
    * @brief Calculate the interface time of the current task for use in abort
@@ -302,11 +311,14 @@ class executable_task : public logical_task,
   void interface_time_mark_start(uint i) {
     m_interface_start_times[i] = current_time();
   }
+
   bool interface_in_prog(uint i) const { return m_interface_in_prog[i]; }
+
   void interface_enter(uint i) {
     m_interface_in_prog[i] = true;
     last_active_interface_reset();
   }
+
   void interface_exit(uint i) {
     m_interface_in_prog[i] = false;
     m_last_active_interface = i;
@@ -322,6 +334,7 @@ class executable_task : public logical_task,
   bool                         m_is_partitionable{false};
   std::vector<bool>            m_interface_in_prog;
   int                          m_last_active_interface{-1};
+  uint                         m_exec_count{0};
 
   std::vector<types::timestep> m_interface_times;
   std::vector<types::timestep> m_last_interface_times;

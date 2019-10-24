@@ -32,7 +32,7 @@
 #include "rcppsw/ta/config/xml/exec_estimates_parser.hpp"
 #include "rcppsw/ta/config/xml/src_sigmoid_sel_parser.hpp"
 #include "rcppsw/ta/config/task_alloc_config.hpp"
-#include "rcppsw/ta/config/xml/stoch_greedy_nbhd_parser.hpp"
+#include "rcppsw/ta/config/xml/stoch_nbhd1_parser.hpp"
 #include "rcppsw/ta/config/xml/epsilon_greedy_parser.hpp"
 
 /*******************************************************************************
@@ -78,7 +78,7 @@ class task_alloc_parser final : public rcppsw::config::xml::xml_config_parser {
   std::unique_ptr<config_type> m_config{nullptr};
   exec_estimates_parser        m_estimation{};
   src_sigmoid_sel_parser       m_abort{};
-  stoch_greedy_nbhd_parser     m_sgn{};
+  stoch_nbhd1_parser           m_snbhd1{};
   epsilon_greedy_parser        m_epsilon{};
   /* clang-format on */
 };

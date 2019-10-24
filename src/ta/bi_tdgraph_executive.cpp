@@ -68,6 +68,8 @@ void bi_tdgraph_executive::task_abort_handle(polled_task* task) {
   task_times_update(task);
 
   task->task_aborted(true);
+  task->task_exec_count_inc();
+
   for (auto& cb : task_abort_notify()) {
     cb(task);
   } /* for(cb..) */
@@ -92,6 +94,8 @@ void bi_tdgraph_executive::task_finish_handle(polled_task* task) {
    */
   task_ests_update(task);
   task_times_update(task);
+
+  task->task_exec_count_inc();
 
   for (auto& cb : task_finish_notify()) {
     cb(task);
@@ -119,10 +123,16 @@ void bi_tdgraph_executive::task_start_handle(polled_task* const new_task) {
 
 polled_task* bi_tdgraph_executive::task_allocate(
     const polled_task* last_task) {
-  auto ret =  boost::apply_visitor(task_allocator(alloc_config(),
-                                                  rng(),
-                                                  last_task),
-                                   *ds());
+
+  /* perfect forwarding from a lambda */
+  auto visitor = [&](auto&& v) {
+    return task_allocator(alloc_config(),
+                          rng())(std::forward<decltype(v)>(v),
+                                 last_task,
+                                 task_alloc_count());
+  };
+
+  auto ret = boost::apply_visitor(visitor, *ds());
 
   ER_ASSERT(!ret->task_aborted(),
             "Task '%s' marked as aborted during allocation",

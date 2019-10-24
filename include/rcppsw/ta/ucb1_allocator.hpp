@@ -1,5 +1,5 @@
 /**
- * @file task_allocator.hpp
+ * @file ucb1_allocator.hpp
  *
  * @copyright 2019 John Harwell, All rights reserved.
  *
@@ -18,58 +18,59 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_
-#define INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_
+#ifndef INCLUDE_RCPPSW_TA_UCB1_ALLOCATOR_HPP_
+#define INCLUDE_RCPPSW_TA_UCB1_ALLOCATOR_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <boost/variant/static_visitor.hpp>
-#include <string>
-
+#include <vector>
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/ta/bi_tdgraph_allocator.hpp"
-#include "rcppsw/ta/ds/ds_variant.hpp"
+#include "rcppsw/er/client.hpp"
 #include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, ta);
+class polled_task;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * @class task_allocator
+ * @class ucb1_allocator
  * @ingroup rcppsw ta
  *
- * @brief Maps the task data structure to its variant, and then applies the
- * corresponding allocation policy to the mapped variant to allocate a task.
+ * @brief Allocates a task from a given set of a tasks, using the UCB1 approach
+ * from Pini2012,Auer2002, treating the task allocation problem as a multi-armed
+ * bandit and achieving a logarithmic regret bound.
  */
-class task_allocator : public boost::static_visitor<polled_task*> {
+class ucb1_allocator : er::client<ucb1_allocator> {
  public:
-  task_allocator(const config::task_alloc_config* config,
-                 math::rng* rng)
-      : m_config(config), m_rng(rng) {}
+  explicit ucb1_allocator(math::rng* rng)
+      : ER_CLIENT_INIT("rcppsw.ta.ucb1_allocator"),
+        m_rng(rng) {}
 
-  task_allocator& operator=(const task_allocator&) = delete;
-  task_allocator(const task_allocator&) = delete;
+  /* Not copy constructable/assignable by default */
+  ucb1_allocator(const ucb1_allocator& other) = delete;
+  const ucb1_allocator& operator=(const ucb1_allocator& other) = delete;
 
-  polled_task* operator()(ds::bi_tdgraph& graph,
-                          const polled_task* last_task,
-                          uint alloc_count) const {
-    return bi_tdgraph_allocator(m_config, &graph, m_rng)(last_task,
-                                                         alloc_count);
-  }
+  /**
+   * @brief Perform task allocation.
+   *
+   * @param tasks The current set of tasks.
+   * @param alloc_count The total # of task allocations so far.
+   */
+  polled_task* operator()(const std::vector<polled_task*>& tasks,
+                          uint alloc_count) const;
 
  private:
   /* clang-format off */
-  const config::task_alloc_config* m_config;
-  math::rng*                       m_rng;
+  math::rng* m_rng;
   /* clang-format on */
 };
 
 NS_END(ta, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_ */
+#endif /* INCLUDE_RCPPSW_TA_UCB1_ALLOCATOR_HPP_ */

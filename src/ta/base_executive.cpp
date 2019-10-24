@@ -54,7 +54,9 @@ base_executive::~base_executive(void) = default;
 void base_executive::run(void) {
   /* First timestep of execution/allocation */
   if (nullptr == current_task()) {
-    task_start_handle(task_allocate(nullptr));
+    auto new_task = task_allocate(nullptr);
+    ++m_alloc_count;
+    task_start_handle(new_task);
     return;
   }
 
@@ -90,12 +92,16 @@ void base_executive::task_abort_handle(polled_task* task) {
   task_times_update(task);
 
   task->task_aborted(true);
+  task->task_exec_count_inc();
+
   for (auto& cb : task_abort_notify()) {
     cb(task);
   } /* for(cb..) */
 
   task->task_aborted(false); /* already been handled in callback */
-  task_start_handle(task_allocate(task));
+  auto new_task = task_allocate(task);
+  ++m_alloc_count;
+  task_start_handle(new_task);
 } /* task_abort_handle() */
 
 void base_executive::task_finish_handle(polled_task* task) {
@@ -106,12 +112,15 @@ void base_executive::task_finish_handle(polled_task* task) {
    */
   task_ests_update(task);
   task_times_update(task);
+  task->task_exec_count_inc();
 
   for (auto& cb : task_finish_notify()) {
     cb(task);
   } /* for(cb..) */
 
-  task_start_handle(task_allocate(task));
+  auto new_task = task_allocate(task);
+  ++m_alloc_count;
+  task_start_handle(new_task);
 } /* task_finish_handle() */
 
 void base_executive::task_start_handle(polled_task* const new_task) {

@@ -1,5 +1,5 @@
 /**
- * @file stoch_greedy_nbhd_parser.cpp
+ * @file random_allocator.hpp
  *
  * @copyright 2019 John Harwell, All rights reserved.
  *
@@ -18,46 +18,51 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_TA_RANDOM_ALLOCATOR_HPP_
+#define INCLUDE_RCPPSW_TA_RANDOM_ALLOCATOR_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ta/config/xml/stoch_greedy_nbhd_parser.hpp"
+#include <vector>
+#include "rcppsw/common/common.hpp"
+#include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta, config, xml);
+NS_START(rcppsw, ta);
+class polled_task;
 
 /*******************************************************************************
- * Member Functions
+ * Class Definitions
  ******************************************************************************/
-void stoch_greedy_nbhd_parser::parse(const ticpp::Element& node) {
-  m_config = std::make_unique<config_type>();
+/**
+ * @class random_allocator
+ * @ingroup rcppsw ta
+ *
+ * @brief Allocates a task from a given set of a tasks by choosing one randomly.
+ */
+class random_allocator : er::client<random_allocator> {
+ public:
+  explicit random_allocator(math::rng* rng)
+      : ER_CLIENT_INIT("rcppsw.ta.random_allocator"),
+        m_rng(rng) {}
 
-  /* executive or policy not used */
-  if (nullptr == node.FirstChild(kXMLRoot, false)) {
-    return;
+  /* Not copy constructable/assignable by default */
+  random_allocator(const random_allocator& other) = delete;
+  const random_allocator& operator=(const random_allocator& other) = delete;
+
+  polled_task* operator()(const std::vector<polled_task*>& tasks) const {
+    return tasks[m_rng->uniform(0, tasks.size() - 1)];
   }
 
-  ticpp::Element tnode = node_get(node, kXMLRoot);
+ private:
+  /* clang-format off */
+  math::rng* m_rng;
+  /* clang-format on */
+};
 
-  XML_PARSE_ATTR(tnode, m_config, tab_init_policy);
+NS_END(ta, rcppsw);
 
-  m_subtask_sel.parse(node_get(tnode, "subtask_sel"));
-  m_partitioning.parse(tnode);
-  m_tab_sel.parse(node_get(tnode, "tab_sel"));
-
-  m_config->subtask_sel =
-      *m_subtask_sel.config_get<src_sigmoid_sel_parser::config_type>();
-  m_config->partitioning =
-      *m_partitioning.config_get<task_partition_parser::config_type>();
-  m_config->tab_sel =
-      *m_tab_sel.config_get<src_sigmoid_sel_parser::config_type>();
-} /* parse() */
-
-bool stoch_greedy_nbhd_parser::validate(void) const {
-  return m_subtask_sel.validate() && m_partitioning.validate() &&
-         m_tab_sel.validate();
-} /* validate() */
-
-NS_END(xml, config, ta, rcppsw);
+#endif /* INCLUDE_RCPPSW_TA_RANDOM_ALLOCATOR_HPP_ */

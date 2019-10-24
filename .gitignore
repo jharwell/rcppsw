@@ -49,3 +49,6 @@ compile_options.json
 build
 .gdb_history
 node_modules
+
+# Sphinx
+docs/_build

@@ -1,5 +1,5 @@
 /**
- * @file bi_tdgraph_allocator.cpp
+ * @file epsilon_greedy_allocator.cpp
  *
  * @copyright 2019 John Harwell, All rights reserved.
  *
@@ -21,19 +21,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ta/bi_tdgraph_allocator.hpp"
-
-#include <vector>
-#include <algorithm>
-
-#include "rcppsw/ta/ds/bi_tdgraph.hpp"
-#include "rcppsw/ta/executable_task.hpp"
-#include "rcppsw/ta/polled_task.hpp"
 #include "rcppsw/ta/epsilon_greedy_allocator.hpp"
+#include <cmath>
 #include "rcppsw/ta/strict_greedy_allocator.hpp"
-#include "rcppsw/ta/random_allocator.hpp"
-#include "rcppsw/ta/stoch_nbhd1_allocator.hpp"
-#include "rcppsw/ta/ucb1_allocator.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -43,28 +33,38 @@ NS_START(rcppsw, ta);
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-polled_task* bi_tdgraph_allocator::operator()(const polled_task* current_task,
-                                              uint alloc_count) const {
-  std::vector<polled_task*> tasks(m_graph->n_vertices());
-  m_graph->walk([&](polled_task* task) {
-      tasks[m_graph->vertex_id(task)] = task;
-    });
+polled_task* epsilon_greedy_allocator::operator()(
+    const std::vector<polled_task*>& tasks,
+    uint alloc_count) const {
+  double epsilon = 0;
 
-  if (kPolicyRandom == mc_config->policy) {
-    return random_allocator(m_rng)(tasks);
-  } else if (kPolicyEplisonGreedy == mc_config->policy) {
-    return epsilon_greedy_allocator(&mc_config->epsilon_greedy,
-                                    m_rng)(tasks,
-                                           alloc_count);
-  } else if (kPolicyStrictGreedy == mc_config->policy) {
-    return strict_greedy_allocator(m_rng)(tasks);
-  } else if (kPolicyStochNBHD1 == mc_config->policy) {
-    return stoch_nbhd1_allocator(m_rng, m_graph)(current_task);
-  } else if (kPolicyUCB1 == mc_config->policy) {
-    return ucb1_allocator(m_rng)(tasks, alloc_count);
+  if (kRegretBoundLinear == mc_config->regret_bound) {
+    epsilon = mc_config->epsilon;
+    ER_INFO("Epsilon greedy: n_tasks=%zu, epsilon=%f",
+            tasks.size(), epsilon);
+  } else if (kRegretBoundLog == mc_config->regret_bound) {
+    double term1 = 1.0;
+    double term2 = (kC * tasks.size()) /
+                   (std::pow(mc_config->epsilon, 2) * alloc_count);
+    epsilon = std::min(term1, term2);
+    ER_INFO("Epsilon N-greedy: n_tasks=%zu,alloc_count=%u,epsilon=%f",
+            tasks.size(), alloc_count, epsilon);
+
+  } else {
+    ER_FATAL_SENTINEL("Bad epsilon greedy regret bound: %s",
+                      mc_config->regret_bound.c_str())
   }
-  ER_FATAL_SENTINEL("Bad allocation policy '%s'", mc_config->policy.c_str());
-  return nullptr;
-}
+
+  /*
+   * Choose the greedy best task with probability 1.0 - epsilon. If there are
+   * multiple best tasks, then a random one will be picked which will not
+   * affect our regret bound.
+   */
+  if (1.0 - epsilon >= m_rng->uniform(0.0, 1.0)) {
+    return strict_greedy_allocator(m_rng)(tasks);
+  }
+  /* otherwise, pick randomly */
+  return tasks[m_rng->uniform(0, tasks.size() - 1)];
+} /* operator()() */
 
 NS_END(ta, rcppsw);

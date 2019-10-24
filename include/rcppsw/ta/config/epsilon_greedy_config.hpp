@@ -24,6 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+
 #include "rcppsw/config/base_config.hpp"
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
 #include "rcppsw/ta/config/task_partition_config.hpp"
@@ -42,6 +44,7 @@ NS_START(rcppsw, ta, config);
  */
 struct epsilon_greedy_config final : public rcppsw::config::base_config {
   double epsilon{-1};
+  std::string regret_bound {};
 };
 
 NS_END(config, ta, rcppsw);

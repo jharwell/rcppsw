@@ -83,7 +83,16 @@ int tdgraph::vertex_depth(const polled_task* const v) const {
   return vertex_depth_impl(v, 0);
 } /* vertex_depth() */
 
-void tdgraph::walk(const walk_cb& f) const {
+void tdgraph::walk(const walk_cb& f) {
+  vertex_iterator v_i, v_end;
+  boost::tie(v_i, v_end) = boost::vertices(m_impl);
+  while (v_i != v_end) {
+    f(m_impl[*v_i].get());
+    ++v_i;
+  } /* while() */
+} /* walk() */
+
+void tdgraph::walk(const const_walk_cb& f) const {
   vertex_iterator v_i, v_end;
   boost::tie(v_i, v_end) = boost::vertices(m_impl);
   while (v_i != v_end) {

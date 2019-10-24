@@ -1,7 +1,7 @@
 /**
- * @file task_alloc_config.hpp
+ * @file stoch_nbhd1_allocator.cpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * @copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,45 +18,41 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TA_CONFIG_TASK_ALLOC_CONFIG_HPP_
-#define INCLUDE_RCPPSW_TA_CONFIG_TASK_ALLOC_CONFIG_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-
-#include "rcppsw/config/base_config.hpp"
-#include "rcppsw/ta/config/exec_estimates_config.hpp"
-#include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
-#include "rcppsw/ta/config/stoch_nbhd1_config.hpp"
-#include "rcppsw/ta/config/epsilon_greedy_config.hpp"
+#include "rcppsw/ta/stoch_nbhd1_allocator.hpp"
+#include <algorithm>
+#include "rcppsw/ta/polled_task.hpp"
+#include "rcppsw/ta/ds/bi_tdgraph.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta, config);
+NS_START(rcppsw, ta);
 
 /*******************************************************************************
- * Structure Definitions
+ * Member Functions
  ******************************************************************************/
-/**
- * @struct task_alloc_config
- * @ingroup rcppsw ta config
- */
-struct task_alloc_config final : public rcppsw::config::base_config {
-  /**
-   * @brief Policy for specifying how tasks will be allocated in the executive
-   * from the data structure containing the tasks to run.
+polled_task* stoch_nbhd1_allocator::operator()(
+    const polled_task* current_task) const {
+  /*
+   * If there is no active TAB, then the root task is not partitionable, so
+   * return it.
    */
-  std::string policy{"random"};
+  if (nullptr == m_graph->active_tab()) {
+    return m_graph->root();
+  } else {
+    /*
+     * Update our active TAB so that we perform partitioning from the correct
+     * place. We have to pass in the current_task(), because the TAB's active
+     * task has already been updated to be NULL after the task finish/abort
+     * that brought us to this function.
+     */
+    m_graph->active_tab_update(current_task, m_rng);
 
-  exec_estimates_config exec_est{};
-  src_sigmoid_sel_config abort{};
-  stoch_nbhd1_config stoch_nbhd1{};
-  epsilon_greedy_config epsilon_greedy{};
-};
+    return m_graph->active_tab()->task_allocate(m_rng);
+  }
+} /* alloc_stoch_nbhd1() */
 
-NS_END(config, ta, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_TA_CONFIG_TASK_ALLOC_CONFIG_HPP_ */
+NS_END(ta, rcppsw);

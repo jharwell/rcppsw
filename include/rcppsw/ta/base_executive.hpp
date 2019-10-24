@@ -179,7 +179,8 @@ class base_executive : public rcppsw::er::client<base_executive> {
   virtual void task_finish_handle(polled_task* task);
 
   /**
-   * @brief Allocate a new task, given the most recently executed one.
+   * @brief Allocate a new task, given the most recently executed
+   * one.
    */
   virtual polled_task* task_allocate(const polled_task* task) = 0;
 
@@ -203,7 +204,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
    */
   void task_times_update(polled_task* new_task);
 
-    void current_task(polled_task* current_task) {
+  void current_task(polled_task* current_task) {
     m_current_task = current_task;
   }
 
@@ -212,12 +213,15 @@ class base_executive : public rcppsw::er::client<base_executive> {
   const math::rng* rng(void) const { return m_rng; }
   math::rng* rng(void) { return m_rng; }
 
+  uint task_alloc_count(void) const { return m_alloc_count; }
+
  private:
   /* clang-format off */
   const bool                      mc_update_exec_ests;
   const bool                      mc_update_interface_ests;
   const config::task_alloc_config mc_alloc_config;
 
+  uint                            m_alloc_count{0};
   polled_task*                    m_current_task{nullptr};
   std::list<abort_notify_cb>      m_task_abort_notify{};
   std::list<finish_notify_cb>     m_task_finish_notify{};

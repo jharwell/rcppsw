@@ -41,6 +41,7 @@ void epsilon_greedy_parser::parse(const ticpp::Element& node) {
 
   ticpp::Element tnode = node_get(node, kXMLRoot);
   XML_PARSE_ATTR(tnode, m_config, epsilon);
+  XML_PARSE_ATTR(tnode, m_config, regret_bound);
 } /* parse() */
 
 bool epsilon_greedy_parser::validate(void) const {

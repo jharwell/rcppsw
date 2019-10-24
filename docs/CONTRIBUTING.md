@@ -1,28 +1,5 @@
 # Contributing to RCPPSW
 
-## Pre-cloning Setup
-
-You may want to install these programs for development:
-
-- ccache (will make compiling a lot faster).
-- icpc (additional syntax checking comes from Intel Parallel Studio, which is
-  ~14GB).
-- ctags/gtags/rtags/cscope (moving around in a large C/C++ code base).
-
-## Directory layout
-
-- `src/` - All `.cpp` files live under here, in their respective modules.
-
-- `include/` - All `.hpp` files live under here.
-
-- `docs/` - All documentation besides the main README lives under here,
-            including all development/style guides.
-
-- `VERSION` - A file in the root root that holds the current/next versions of
-  the code. Versions are numbered as `major.minor.patch`, and is updated in
-  accordance with semantic versioning/GitFlow. You should never modify this file
-  directly.
-
 ## Development Guides
 
 The following development guides should be followed:

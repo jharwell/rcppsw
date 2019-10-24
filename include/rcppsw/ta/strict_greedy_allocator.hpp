@@ -1,5 +1,5 @@
 /**
- * @file task_allocator.hpp
+ * @file strict_greedy_allocator.hpp
  *
  * @copyright 2019 John Harwell, All rights reserved.
  *
@@ -18,58 +18,58 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_
-#define INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_
+#ifndef INCLUDE_RCPPSW_TA_STRICT_GREEDY_ALLOCATOR_HPP_
+#define INCLUDE_RCPPSW_TA_STRICT_GREEDY_ALLOCATOR_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <boost/variant/static_visitor.hpp>
-#include <string>
-
+#include <vector>
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/ta/bi_tdgraph_allocator.hpp"
-#include "rcppsw/ta/ds/ds_variant.hpp"
+#include "rcppsw/er/client.hpp"
 #include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, ta);
+class polled_task;
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * @class task_allocator
+ * @class strict_greedy_allocator
  * @ingroup rcppsw ta
  *
- * @brief Maps the task data structure to its variant, and then applies the
- * corresponding allocation policy to the mapped variant to allocate a task.
+ * @brief Allocates a task from a given set of a tasks, using a strict greedy
+ * approach: always taking the task of minimum cost. Provably optimal task
+ * allocation policy if the task allocation space is a matroid, (probably)
+ * suboptimal otherwise.
  */
-class task_allocator : public boost::static_visitor<polled_task*> {
+class strict_greedy_allocator : er::client<strict_greedy_allocator> {
  public:
-  task_allocator(const config::task_alloc_config* config,
-                 math::rng* rng)
-      : m_config(config), m_rng(rng) {}
+  explicit strict_greedy_allocator(math::rng* rng)
+      : ER_CLIENT_INIT("rcppsw.ta.strict_greedy_allocator"),
+        m_rng(rng) {}
 
-  task_allocator& operator=(const task_allocator&) = delete;
-  task_allocator(const task_allocator&) = delete;
+  /* Not copy constructable/assignable by default */
+  strict_greedy_allocator(const strict_greedy_allocator& other) = delete;
+  const strict_greedy_allocator& operator=(const strict_greedy_allocator& other) = delete;
 
-  polled_task* operator()(ds::bi_tdgraph& graph,
-                          const polled_task* last_task,
-                          uint alloc_count) const {
-    return bi_tdgraph_allocator(m_config, &graph, m_rng)(last_task,
-                                                         alloc_count);
-  }
+  /**
+   * @brief Perform task allocation.
+   *
+   * @param tasks The current set of tasks.
+   */
+  polled_task* operator()(const std::vector<polled_task*>& tasks) const;
 
  private:
   /* clang-format off */
-  const config::task_alloc_config* m_config;
-  math::rng*                       m_rng;
+  math::rng* m_rng;
   /* clang-format on */
 };
 
 NS_END(ta, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TA_TASK_ALLOCATOR_HPP_ */
+#endif /* INCLUDE_RCPPSW_TA_STRICT_GREEDY_ALLOCATOR_HPP_ */
