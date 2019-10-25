@@ -22,7 +22,9 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/ucb1_allocator.hpp"
+
 #include <algorithm>
+
 #include "rcppsw/ta/polled_task.hpp"
 
 /*******************************************************************************
@@ -38,17 +40,19 @@ polled_task* ucb1_allocator::operator()(const std::vector<polled_task*>& tasks,
   ER_INFO("UCB1: n_tasks=%zu, n_allocs=%u", tasks.size(), alloc_count);
 
   auto min_cost = [&](const auto* t1, const auto* t2) {
-    ta::time_estimate cost1 = t1->task_exec_estimate() -
-    std::sqrt(2 * std::log(alloc_count) / t1->task_exec_count());
-    ta::time_estimate cost2 = t2->task_exec_estimate() -
-    std::sqrt(2 * std::log(alloc_count) / t2->task_exec_count());
+    ta::time_estimate cost1 =
+        t1->task_exec_estimate() -
+        std::sqrt(2 * std::log(alloc_count) / t1->task_exec_count());
+    ta::time_estimate cost2 =
+        t2->task_exec_estimate() -
+        std::sqrt(2 * std::log(alloc_count) / t2->task_exec_count());
     return cost1 < cost2;
   };
 
   auto min_task = std::min_element(tasks.begin(), tasks.end(), min_cost);
 
   /* Only tasks that have equivalent minimum cost are eligible for selection */
-  auto is_equiv_min = [&](const auto*e) {
+  auto is_equiv_min = [&](const auto* e) {
     return e->task_exec_estimate() == (*min_task)->task_exec_estimate();
   };
 

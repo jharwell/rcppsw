@@ -25,8 +25,8 @@
  * Includes
  ******************************************************************************/
 #include <map>
-#include <string>
 #include <memory>
+#include <string>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/patterns/prototype/caching_factory.hpp"

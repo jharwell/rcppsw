@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <vector>
+
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/rng.hpp"
 
@@ -46,8 +47,7 @@ class polled_task;
 class random_allocator : er::client<random_allocator> {
  public:
   explicit random_allocator(math::rng* rng)
-      : ER_CLIENT_INIT("rcppsw.ta.random_allocator"),
-        m_rng(rng) {}
+      : ER_CLIENT_INIT("rcppsw.ta.random_allocator"), m_rng(rng) {}
 
   /* Not copy constructable/assignable by default */
   random_allocator(const random_allocator& other) = delete;

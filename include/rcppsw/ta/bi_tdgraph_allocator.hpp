@@ -86,7 +86,6 @@ class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
    */
   static constexpr char kPolicyUCB1[] = "UCB1";
 
-
   bi_tdgraph_allocator(const config::task_alloc_config* config,
                        ds::bi_tdgraph* graph,
                        math::rng* rng)

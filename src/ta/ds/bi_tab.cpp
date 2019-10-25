@@ -25,9 +25,9 @@
 
 #include <cassert>
 
-#include "rcppsw/ta/ds/bi_tdgraph.hpp"
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
 #include "rcppsw/ta/config/task_partition_config.hpp"
+#include "rcppsw/ta/ds/bi_tdgraph.hpp"
 #include "rcppsw/ta/polled_task.hpp"
 
 /*******************************************************************************
@@ -69,8 +69,7 @@ bi_tab::bi_tab(const struct elements* elts,
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void bi_tab::task_abort_update(polled_task* const aborted,
-                               math::rng* rng) {
+void bi_tab::task_abort_update(polled_task* const aborted, math::rng* rng) {
   ER_ASSERT(contains_task(aborted),
             "Aborted task '%s' not in TAB",
             aborted->name().c_str());
@@ -82,8 +81,7 @@ void bi_tab::task_abort_update(polled_task* const aborted,
   m_active_task = nullptr;
 } /* task_abort_update() */
 
-void bi_tab::task_finish_update(polled_task* const finished,
-                                math::rng* rng) {
+void bi_tab::task_finish_update(polled_task* const finished, math::rng* rng) {
   ER_ASSERT(contains_task(finished),
             "Finished task '%s' not in TAB",
             finished->name().c_str());
@@ -217,7 +215,7 @@ polled_task* bi_tab::subtask_allocate(math::rng* rng) {
   auto probs = subtask_sw_calc(rng);
   double prob_12 = probs.first;
   double prob_21 = probs.second;
-  ER_INFO("%s exec_est=%f/int_est=%f, %s exec_est=%f/int_est=%f",
+  ER_INFO("%s exec_est=%d/int_est=%d, %s exec_est=%d/int_est=%d",
           m_child1->name().c_str(),
           m_child1->task_exec_estimate().v(),
           m_child1->task_interface_estimate(0).v(),

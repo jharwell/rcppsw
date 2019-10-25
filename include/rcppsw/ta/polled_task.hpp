@@ -24,14 +24,14 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <memory>
 #include <string>
 #include <utility>
-#include <memory>
 
 #include "rcppsw/math/range.hpp"
+#include "rcppsw/math/rng.hpp"
 #include "rcppsw/ta/executable_task.hpp"
 #include "rcppsw/ta/taskable.hpp"
-#include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -74,8 +74,7 @@ class polled_task : public executable_task, public taskable {
    * @brief Initialize the execution time estimates of the task randomly within
    * the specified range.
    */
-  void exec_estimate_init(const math::rangeu& bounds,
-                          math::rng* rng);
+  void exec_estimate_init(const math::rangeu& bounds, math::rng* rng);
 
  private:
   std::unique_ptr<taskable> m_mechanism;

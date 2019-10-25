@@ -22,9 +22,11 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/stoch_nbhd1_allocator.hpp"
+
 #include <algorithm>
-#include "rcppsw/ta/polled_task.hpp"
+
 #include "rcppsw/ta/ds/bi_tdgraph.hpp"
+#include "rcppsw/ta/polled_task.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls

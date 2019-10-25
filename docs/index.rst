@@ -42,17 +42,16 @@ exist in Boost, or that build on what boost provides. Includes such things as:
 Directory Layout
 ----------------
 
-- `src/` - All `.cpp` files live under here, in their respective modules.
+- ``src/`` - All ``.cpp`` files live under here, in their respective modules.
 
-- `include/` - All `.hpp` files live under here.
+- ``include/`` - All ``.hpp`` files live under here.
 
-- `docs/` - All documentation besides the main README lives under here,
-            including all development/style guides.
+- ``docs/`` - All documentation besides the main README lives under here,
+  including all development/style guides.
 
-- `VERSION` - A file in the root root that holds the current/next versions of
-  the code. Versions are numbered as `major.minor.patch`, and is updated in
-  accordance with semantic versioning/GitFlow. You should never modify this file
-  directly.
+- ``VERSION`` - A file in the root root that holds the current/next versions of
+  the code. Versions are numbered as ``major.minor.patch``, and is updated in
+  accordance with semantic versioning/GitFlow.
 
 Debug Build
 -----------
@@ -95,7 +94,6 @@ script makes it all the way through and you see a ``BOOTSTRAP SUCCESS!`` line at
 the end of the ``output.txt``, then you know everything worked. Otherwise look in
 the ``output.txt`` for the error and fix it and try running the script again (the
 script **should** be idempotent).
-pppp
 
 Other Projects (in descending probability of interest)
 ------------------------------------------------------

@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <vector>
+
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/rng.hpp"
 
@@ -50,15 +51,15 @@ class bi_tdgraph;
  */
 class stoch_nbhd1_allocator : er::client<stoch_nbhd1_allocator> {
  public:
-  explicit stoch_nbhd1_allocator(math::rng* rng,
-                                 ds::bi_tdgraph *graph)
+  explicit stoch_nbhd1_allocator(math::rng* rng, ds::bi_tdgraph* graph)
       : ER_CLIENT_INIT("rcppsw.ta.stoch_nbhd1_allocator"),
         m_rng(rng),
         m_graph(graph) {}
 
   /* Not copy constructable/assignable by default */
   stoch_nbhd1_allocator(const stoch_nbhd1_allocator& other) = delete;
-  const stoch_nbhd1_allocator& operator=(const stoch_nbhd1_allocator& other) = delete;
+  const stoch_nbhd1_allocator& operator=(const stoch_nbhd1_allocator& other) =
+      delete;
 
   polled_task* operator()(const polled_task* current_task) const;
 

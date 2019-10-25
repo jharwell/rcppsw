@@ -28,9 +28,9 @@
 #include <string>
 
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/math/rng.hpp"
 #include "rcppsw/ta/bi_tdgraph_allocator.hpp"
 #include "rcppsw/ta/ds/ds_variant.hpp"
-#include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -49,8 +49,7 @@ NS_START(rcppsw, ta);
  */
 class task_allocator : public boost::static_visitor<polled_task*> {
  public:
-  task_allocator(const config::task_alloc_config* config,
-                 math::rng* rng)
+  task_allocator(const config::task_alloc_config* config, math::rng* rng)
       : m_config(config), m_rng(rng) {}
 
   task_allocator& operator=(const task_allocator&) = delete;
@@ -59,8 +58,7 @@ class task_allocator : public boost::static_visitor<polled_task*> {
   polled_task* operator()(ds::bi_tdgraph& graph,
                           const polled_task* last_task,
                           uint alloc_count) const {
-    return bi_tdgraph_allocator(m_config, &graph, m_rng)(last_task,
-                                                         alloc_count);
+    return bi_tdgraph_allocator(m_config, &graph, m_rng)(last_task, alloc_count);
   }
 
  private:

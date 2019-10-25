@@ -22,10 +22,11 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/base_executive.hpp"
+
 #include "rcppsw/ta/config/task_executive_config.hpp"
-#include "rcppsw/ta/polled_task.hpp"
-#include "rcppsw/ta/ds/ds_variant.hpp"
 #include "rcppsw/ta/ds/bi_tdgraph.hpp"
+#include "rcppsw/ta/ds/ds_variant.hpp"
+#include "rcppsw/ta/polled_task.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -35,10 +36,11 @@ NS_START(rcppsw, ta);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_executive::base_executive(const config::task_executive_config* const exec_config,
-                               const config::task_alloc_config* const alloc_config,
-                               std::unique_ptr<ds::ds_variant> ds,
-                               math::rng* rng)
+base_executive::base_executive(
+    const config::task_executive_config* const exec_config,
+    const config::task_alloc_config* const alloc_config,
+    std::unique_ptr<ds::ds_variant> ds,
+    math::rng* rng)
     : ER_CLIENT_INIT("rcppsw.ta.base_executive"),
       mc_update_exec_ests(exec_config->update_exec_ests),
       mc_update_interface_ests(exec_config->update_interface_ests),

@@ -65,11 +65,20 @@ class ema final : public expression<T> {
   }
 
   T operator()(const T& measure) {
-    return eval((1 - m_alpha) * v() + m_alpha * measure);
+    /*
+     * Cast to T because depending on what the type is, we may get floating
+     * point -> integer conversion warnings, so be explicit
+     */
+    return eval(static_cast<T>((1 - m_alpha) * v() + m_alpha * measure));
   }
 
   ema& operator()(const ema& other) {
     this->eval(other.v());
+    return *this;
+  }
+
+  ema& operator+=(const ema& other) {
+    this->eval(this->v() + other.v());
     return *this;
   }
 
@@ -83,10 +92,6 @@ class ema final : public expression<T> {
     r.eval(this->v() - other.v());
     return r;
   }
-  ema operator+=(const ema& other) {
-    this->eval(this->v() + other.v());
-    return *this;
-  }
 
   ema operator/(const ema& other) const {
     ema r(this->alpha());
@@ -95,51 +100,54 @@ class ema final : public expression<T> {
   }
 
  private:
+  /* clang-formatt off */
   double m_alpha;
+  /* clang-formatt on */
 };
 
 /*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
-template <class T>
-ema<T> operator-(const ema<T>& lhs, double d) {
+template <class T, class U>
+ema<T> operator-(const ema<T>& lhs, const U& rhs) {
   ema<T> r(lhs.alpha());
-  r.eval(lhs.v() - d);
+  r.eval(static_cast<T>(lhs.v() - rhs));
   return r;
 }
 
-template <class T>
-ema<T> operator-(double d, const ema<T>& rhs) {
+template <class T, class U>
+ema<T> operator-(const U& lhs, const ema<T>& rhs) {
   ema<T> r(rhs.alpha());
-  r.eval(d - rhs.v());
+  r.eval(static_cast<T>(lhs - rhs.v()));
   return r;
 }
 
-template <class T>
-ema<T> operator*(const ema<T>& lhs, double d) {
+template <class T, class U>
+ema<T> operator*(const ema<T>& lhs, const U& rhs) {
   ema<T> r(lhs.alpha());
-  r.eval(lhs.v() * d);
+  r.eval(lhs.v() * rhs);
   return r;
 }
 
-template <class T>
-ema<T> operator*(double d, const ema<T>& rhs) {
+template <class T, class U>
+ema<T> operator*(const U& lhs, const ema<T>& rhs) {
   ema<T> r(rhs.alpha());
-  r.eval(rhs.v() * d);
+  r.eval(rhs.v() * lhs);
   return r;
 }
 
-template <class T>
-ema<T> operator/(double d, const ema<T>& rhs) {
+template <class T, class U>
+ema<T> operator/(const U& lhs, const ema<T>& rhs) {
   ema<T> r(rhs.alpha());
-  r.eval(rhs.v() / d);
+  r.eval(lhs.v() / rhs);
   return r;
 }
 
+/* Always want to make sure we do division with doubles */
 template <class T>
-ema<T> operator/(const ema<T>& lhs, double d) {
+ema<T> operator/(const ema<T>& lhs, const double& rhs) {
   ema<T> r(lhs.alpha());
-  r.eval(lhs.v() / d);
+  r.eval(lhs.v() / rhs);
   return r;
 }
 

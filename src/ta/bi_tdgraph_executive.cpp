@@ -23,8 +23,8 @@
  ******************************************************************************/
 #include "rcppsw/ta/bi_tdgraph_executive.hpp"
 
-#include "rcppsw/ta/ds/bi_tdgraph.hpp"
 #include "rcppsw/ta/config/task_executive_config.hpp"
+#include "rcppsw/ta/ds/bi_tdgraph.hpp"
 #include "rcppsw/ta/task_allocator.hpp"
 
 /*******************************************************************************
@@ -51,7 +51,8 @@ ds::bi_tdgraph* bi_tdgraph_executive::graph(void) {
 } /* graph() */
 
 const ds::bi_tdgraph* bi_tdgraph_executive::graph(void) const {
-  return static_cast<const ds::bi_tdgraph*>(boost::get<const ds::bi_tdgraph>(ds()));
+  return static_cast<const ds::bi_tdgraph*>(
+      boost::get<const ds::bi_tdgraph>(ds()));
 } /* graph() */
 
 const ds::bi_tab* bi_tdgraph_executive::active_tab(void) const {
@@ -121,15 +122,12 @@ void bi_tdgraph_executive::task_start_handle(polled_task* const new_task) {
   do_task_start(new_task);
 } /* task_start_handle() */
 
-polled_task* bi_tdgraph_executive::task_allocate(
-    const polled_task* last_task) {
-
+polled_task* bi_tdgraph_executive::task_allocate(const polled_task* last_task) {
   /* perfect forwarding from a lambda */
   auto visitor = [&](auto&& v) {
-    return task_allocator(alloc_config(),
-                          rng())(std::forward<decltype(v)>(v),
-                                 last_task,
-                                 task_alloc_count());
+    return task_allocator(alloc_config(), rng())(std::forward<decltype(v)>(v),
+                                                 last_task,
+                                                 task_alloc_count());
   };
 
   auto ret = boost::apply_visitor(visitor, *ds());

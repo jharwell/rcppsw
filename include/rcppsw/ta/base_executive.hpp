@@ -24,17 +24,17 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <functional>
 #include <list>
 #include <memory>
 #include <random>
-#include <functional>
 #include <string>
 
 #include "rcppsw/er/client.hpp"
-#include "rcppsw/ta/polled_task.hpp"
-#include "rcppsw/ta/ds/ds_variant.hpp"
 #include "rcppsw/math/rng.hpp"
 #include "rcppsw/ta/config/task_alloc_config.hpp"
+#include "rcppsw/ta/ds/ds_variant.hpp"
+#include "rcppsw/ta/polled_task.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -155,7 +155,6 @@ class base_executive : public rcppsw::er::client<base_executive> {
    * - Start a new task via \ref task_start_handle().
    */
   virtual void task_abort_handle(polled_task* task);
-
 
   /**
    * @brief Handler called to start a new task.

@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <vector>
+
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/math/rng.hpp"
@@ -49,8 +50,7 @@ class polled_task;
 class ucb1_allocator : er::client<ucb1_allocator> {
  public:
   explicit ucb1_allocator(math::rng* rng)
-      : ER_CLIENT_INIT("rcppsw.ta.ucb1_allocator"),
-        m_rng(rng) {}
+      : ER_CLIENT_INIT("rcppsw.ta.ucb1_allocator"), m_rng(rng) {}
 
   /* Not copy constructable/assignable by default */
   ucb1_allocator(const ucb1_allocator& other) = delete;

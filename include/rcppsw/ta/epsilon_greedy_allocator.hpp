@@ -25,10 +25,11 @@
  * Includes
  ******************************************************************************/
 #include <vector>
+
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/ta/config/epsilon_greedy_config.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/math/rng.hpp"
+#include "rcppsw/ta/config/epsilon_greedy_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -68,7 +69,8 @@ class epsilon_greedy_allocator : er::client<epsilon_greedy_allocator> {
 
   /* Not copy constructable/assignable by default */
   epsilon_greedy_allocator(const epsilon_greedy_allocator& other) = delete;
-  const epsilon_greedy_allocator& operator=(const epsilon_greedy_allocator& other) = delete;
+  const epsilon_greedy_allocator& operator=(
+      const epsilon_greedy_allocator& other) = delete;
 
   /**
    * @brief Perform task allocation.

@@ -28,9 +28,9 @@
 
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/math/expression.hpp"
+#include "rcppsw/math/rng.hpp"
 #include "rcppsw/math/sigmoid.hpp"
 #include "rcppsw/ta/time_estimate.hpp"
-#include "rcppsw/math/rng.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls

@@ -22,6 +22,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/ds/bi_tdgraph.hpp"
+
 #include "rcppsw/ta/polled_task.hpp"
 
 /*******************************************************************************
@@ -40,8 +41,7 @@ bi_tdgraph::bi_tdgraph(const config::task_alloc_config* const config)
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void bi_tdgraph::active_tab_init(const std::string& method,
-                                 math::rng* rng) {
+void bi_tdgraph::active_tab_init(const std::string& method, math::rng* rng) {
   if (kTABInitRoot == method) {
     ER_INFO("Using graph root initial TAB");
     active_tab_init_root();
@@ -140,7 +140,7 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task,
   if (nullptr == current_task) {
     return; /* first time running executive */
   } else if (active_tab()->contains_task(current_task) &&
-      (is_tdgraph_root || is_tdgraph_leaf)) {
+             (is_tdgraph_root || is_tdgraph_leaf)) {
     ER_DEBUG("Active TAB unchanged: last task '%s' was tdgraph root or leaf",
              active_tab()->last_task()->name().c_str());
     return;
@@ -157,9 +157,7 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task,
    * good to specialize more).
    */
   if (current_task == active_tab()->root()) {
-    double prob = m_tab_sw_prob(active_tab(),
-                                tab_parent(active_tab()),
-                                rng);
+    double prob = m_tab_sw_prob(active_tab(), tab_parent(active_tab()), rng);
 
     ER_INFO("TAB switch up: active_tab root='%s',current_task='%s',prob=%f",
             active_tab()->root()->name().c_str(),
@@ -170,9 +168,8 @@ void bi_tdgraph::active_tab_update(const polled_task* const current_task,
       new_tab = tab_parent(active_tab());
     }
   } else {
-    double prob = m_tab_sw_prob(active_tab(),
-                                tab_child(active_tab(), current_task),
-                                rng);
+    double prob =
+        m_tab_sw_prob(active_tab(), tab_child(active_tab(), current_task), rng);
 
     ER_INFO("TAB switch down: active_tab root='%s',current_task='%s',prob=%f",
             active_tab()->root()->name().c_str(),

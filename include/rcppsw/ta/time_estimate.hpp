@@ -34,7 +34,7 @@ NS_START(rcppsw, ta);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-using time_estimate = math::ema<double>;
+using time_estimate = math::ema<int>;
 
 NS_END(ta, rcppsw);
 

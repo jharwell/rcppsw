@@ -61,8 +61,8 @@ void task_alloc_parser::parse(const ticpp::Element& node) {
 } /* parse() */
 
 bool task_alloc_parser::validate(void) const {
-  return m_estimation.validate() && m_abort.validate() &&
-      m_snbhd1.validate() && m_epsilon.validate();
+  return m_estimation.validate() && m_abort.validate() && m_snbhd1.validate() &&
+         m_epsilon.validate();
 } /* validate() */
 
 NS_END(xml, config, ta, rcppsw);

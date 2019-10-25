@@ -22,7 +22,9 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/ta/epsilon_greedy_allocator.hpp"
+
 #include <cmath>
+
 #include "rcppsw/ta/strict_greedy_allocator.hpp"
 
 /*******************************************************************************
@@ -40,15 +42,16 @@ polled_task* epsilon_greedy_allocator::operator()(
 
   if (kRegretBoundLinear == mc_config->regret_bound) {
     epsilon = mc_config->epsilon;
-    ER_INFO("Epsilon greedy: n_tasks=%zu, epsilon=%f",
-            tasks.size(), epsilon);
+    ER_INFO("Epsilon greedy: n_tasks=%zu, epsilon=%f", tasks.size(), epsilon);
   } else if (kRegretBoundLog == mc_config->regret_bound) {
     double term1 = 1.0;
-    double term2 = (kC * tasks.size()) /
-                   (std::pow(mc_config->epsilon, 2) * alloc_count);
+    double term2 =
+        (kC * tasks.size()) / (std::pow(mc_config->epsilon, 2) * alloc_count);
     epsilon = std::min(term1, term2);
     ER_INFO("Epsilon N-greedy: n_tasks=%zu,alloc_count=%u,epsilon=%f",
-            tasks.size(), alloc_count, epsilon);
+            tasks.size(),
+            alloc_count,
+            epsilon);
 
   } else {
     ER_FATAL_SENTINEL("Bad epsilon greedy regret bound: %s",

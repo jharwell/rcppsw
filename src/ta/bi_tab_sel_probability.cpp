@@ -26,8 +26,8 @@
 #include <cassert>
 #include <cmath>
 
-#include "rcppsw/ta/ds/bi_tab.hpp"
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
+#include "rcppsw/ta/ds/bi_tab.hpp"
 #include "rcppsw/ta/polled_task.hpp"
 
 /*******************************************************************************
@@ -39,7 +39,7 @@ NS_START(rcppsw, ta);
  * Non-Member Functions
  ******************************************************************************/
 static inline time_estimate est_abs(const time_estimate& e) {
-  return time_estimate(e.alpha(), std::fabs(e.v()));
+  return time_estimate(e.alpha(), std::abs(e.v()));
 }
 
 /*******************************************************************************

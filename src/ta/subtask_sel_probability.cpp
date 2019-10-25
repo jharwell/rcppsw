@@ -64,10 +64,9 @@ double subtask_sel_probability::calc_random(math::rng* rng) {
   return eval(rng->uniform(0.0, 1.0));
 } /* calc_random() */
 
-double subtask_sel_probability::calc_brutschy2014(
-    const time_estimate& int_est1,
-    const time_estimate& int_est2,
-    math::rng* rng) {
+double subtask_sel_probability::calc_brutschy2014(const time_estimate& int_est1,
+                                                  const time_estimate& int_est2,
+                                                  math::rng* rng) {
   return eval(calc_sigmoid(int_est1, int_est2, rng));
 } /* calc_brutschy2014() */
 
