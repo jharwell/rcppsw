@@ -34,6 +34,7 @@
 #include "rcppsw/ta/config/task_alloc_config.hpp"
 #include "rcppsw/ta/config/xml/stoch_nbhd1_parser.hpp"
 #include "rcppsw/ta/config/xml/epsilon_greedy_parser.hpp"
+#include "rcppsw/ta/config/xml/ucb1_parser.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -80,6 +81,7 @@ class task_alloc_parser final : public rcppsw::config::xml::xml_config_parser {
   src_sigmoid_sel_parser       m_abort{};
   stoch_nbhd1_parser           m_snbhd1{};
   epsilon_greedy_parser        m_epsilon{};
+  ucb1_parser                  m_ucb1{};
   /* clang-format on */
 };
 

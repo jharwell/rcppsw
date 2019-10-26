@@ -31,6 +31,7 @@
 #include "rcppsw/ta/config/src_sigmoid_sel_config.hpp"
 #include "rcppsw/ta/config/stoch_nbhd1_config.hpp"
 #include "rcppsw/ta/config/epsilon_greedy_config.hpp"
+#include "rcppsw/ta/config/ucb1_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -55,6 +56,7 @@ struct task_alloc_config final : public rcppsw::config::base_config {
   src_sigmoid_sel_config abort{};
   stoch_nbhd1_config stoch_nbhd1{};
   epsilon_greedy_config epsilon_greedy{};
+  ucb1_config ucb1{};
 };
 
 NS_END(config, ta, rcppsw);

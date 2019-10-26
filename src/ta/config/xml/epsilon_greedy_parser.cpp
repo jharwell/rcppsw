@@ -32,12 +32,11 @@ NS_START(rcppsw, ta, config, xml);
  * Member Functions
  ******************************************************************************/
 void epsilon_greedy_parser::parse(const ticpp::Element& node) {
-  m_config = std::make_unique<config_type>();
-
   /* executive or policy not used */
   if (nullptr == node.FirstChild(kXMLRoot, false)) {
     return;
   }
+  m_config = std::make_unique<config_type>();
 
   ticpp::Element tnode = node_get(node, kXMLRoot);
   XML_PARSE_ATTR(tnode, m_config, epsilon);
@@ -45,7 +44,7 @@ void epsilon_greedy_parser::parse(const ticpp::Element& node) {
 } /* parse() */
 
 bool epsilon_greedy_parser::validate(void) const {
-  return RCSW_IS_BETWEEN(m_config->epsilon, 0.0, 1.0);
+  return !is_parsed() || RCSW_IS_BETWEEN(m_config->epsilon, 0.0, 1.0);
 } /* validate() */
 
 NS_END(xml, config, ta, rcppsw);

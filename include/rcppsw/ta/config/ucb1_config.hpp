@@ -1,5 +1,5 @@
 /**
- * @file stoch_nbhd1_parser.cpp
+ * @file ucb1_config.hpp
  *
  * @copyright 2019 John Harwell, All rights reserved.
  *
@@ -18,46 +18,32 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_TA_CONFIG_UCB1_CONFIG_HPP_
+#define INCLUDE_RCPPSW_TA_CONFIG_UCB1_CONFIG_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ta/config/xml/stoch_nbhd1_parser.hpp"
+#include <string>
+
+#include "rcppsw/config/base_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ta, config, xml);
+NS_START(rcppsw, ta, config);
 
 /*******************************************************************************
- * Member Functions
+ * Structure Definitions
  ******************************************************************************/
-void stoch_nbhd1_parser::parse(const ticpp::Element& node) {
-  /* executive or policy not used */
-  if (nullptr == node.FirstChild(kXMLRoot, false)) {
-    return;
-  }
-  m_config = std::make_unique<config_type>();
+/**
+ * @struct ucb1_config
+ * @ingroup rcppsw ta config
+ */
+struct ucb1_config final : public rcppsw::config::base_config {
+  double gamma{-1};
+};
 
-  ticpp::Element tnode = node_get(node, kXMLRoot);
+NS_END(config, ta, rcppsw);
 
-  XML_PARSE_ATTR(tnode, m_config, tab_init_policy);
-
-  m_subtask_sel.parse(node_get(tnode, "subtask_sel"));
-  m_partitioning.parse(tnode);
-  m_tab_sel.parse(node_get(tnode, "tab_sel"));
-
-  m_config->subtask_sel =
-      *m_subtask_sel.config_get<src_sigmoid_sel_parser::config_type>();
-  m_config->partitioning =
-      *m_partitioning.config_get<task_partition_parser::config_type>();
-  m_config->tab_sel =
-      *m_tab_sel.config_get<src_sigmoid_sel_parser::config_type>();
-} /* parse() */
-
-bool stoch_nbhd1_parser::validate(void) const {
-  return !is_parsed() || (m_subtask_sel.validate() &&
-                          m_partitioning.validate() &&
-                          m_tab_sel.validate());
-} /* validate() */
-
-NS_END(xml, config, ta, rcppsw);
+#endif /* INCLUDE_RCPPSW_TA_CONFIG_UCB1_CONFIG_HPP_ */
