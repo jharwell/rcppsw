@@ -69,7 +69,7 @@ double partition_probability::calc_pini2011(const time_estimate& task,
    */
   double theta = 0.0;
   if (task > subtask1 + subtask2) {
-    if ((subtask1 + subtask2).v() > 0) {
+    if ((subtask1 + subtask2).v() != 0) {
       theta = reactivity() * (task / (subtask1 + subtask2) - offset()).v();
     }
   } else {

@@ -65,38 +65,38 @@ double subtask_sel_probability::calc_random(math::rng* rng) {
 } /* calc_random() */
 
 double subtask_sel_probability::calc_brutschy2014(const time_estimate& int_est1,
-                                                  const time_estimate& int_est2,
-                                                  math::rng* rng) {
-  return eval(calc_sigmoid(int_est1, int_est2, rng));
+                                                  const time_estimate& int_est2) {
+  return eval(calc_sigmoid(int_est1, int_est2));
 } /* calc_brutschy2014() */
 
 double subtask_sel_probability::calc_harwell2018(const time_estimate& exec_est1,
-                                                 const time_estimate& exec_est2,
-                                                 math::rng* rng) {
-  return eval(calc_sigmoid(exec_est2, exec_est1, rng));
+                                                 const time_estimate& exec_est2) {
+  return eval(calc_sigmoid(exec_est2, exec_est1));
 } /* calc_harwell2018() */
 
 double subtask_sel_probability::calc_sigmoid(const time_estimate& est1,
-                                             const time_estimate& est2,
-                                             math::rng* rng) {
+                                             const time_estimate& est2) {
   /*
-   * No information available--just pick randomly.
+   * No information available: apply L'Hospital's rule to obtain new terms that
+   * ARE defined (the limit resolves to 1).
    */
-  if (!(est1.v() > 0 && est2.v() > 0)) {
-    return rng->uniform(0.0, 1.0);
-  } else if (!(est1.v() > 0)) { /* have info on est2 only */
-    return 0.0;
-  } else if (!(est2.v() > 0)) { /* have info on est1 only */
-    return 1.0;
+  double ratio;
+  if (0 == est1 && 0 == est2) {
+    ratio = 1.0;
+  } else if (0 == est1) { /* only est2 defined--math reduces to this */
+    ratio = 1.0;
+  } else if (0 == est2) { /* only est1 defined--explore! (math limit DNE) */
+    ratio = 1.0;
+  } else { /* general case: both estimates defined */
+    double r_ss = 0;
+    if (est1 > est2) {
+      r_ss = std::pow(est1.v(), 2) / est2.v();
+    } else {
+      r_ss = est1.v();
+    }
+    ratio = est1.v() / r_ss;
   }
-
-  double r_ss = 0;
-  if (est1 > est2) {
-    r_ss = std::pow(est1.v(), 2) / est2.v();
-  } else {
-    r_ss = est1.v();
-  }
-  double theta = reactivity() * (est1.v() / r_ss - offset());
+  double theta = reactivity() * (ratio - offset());
   return 1.0 / (1 + std::exp(-theta)) * gamma();
 } /* calc_sigmoid() */
 
@@ -104,9 +104,9 @@ double subtask_sel_probability::operator()(const time_estimate* subtask1,
                                            const time_estimate* subtask2,
                                            math::rng* rng) {
   if (kMethodBrutschy2014 == mc_method) {
-    return calc_brutschy2014(*subtask1, *subtask2, rng);
+    return calc_brutschy2014(*subtask1, *subtask2);
   } else if (kMethodHarwell2018 == mc_method) {
-    return calc_harwell2018(*subtask1, *subtask2, rng);
+    return calc_harwell2018(*subtask1, *subtask2);
   } else if (kMethodRandom == mc_method) {
     return calc_random(rng);
   }

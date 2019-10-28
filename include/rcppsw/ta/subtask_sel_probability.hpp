@@ -131,8 +131,7 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
    * @return Probability of switching.
    */
   double calc_brutschy2014(const time_estimate& int_est1,
-                           const time_estimate& int_est2,
-                           math::rng* rng);
+                           const time_estimate& int_est2);
 
   /**
    * @brief Calculate the probability of switching from subtask 1 to subtask 2
@@ -144,8 +143,7 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
    * @return Probability of switching.
    */
   double calc_harwell2018(const time_estimate& exec_est1,
-                          const time_estimate& exec_est2,
-                          math::rng* rng);
+                          const time_estimate& exec_est2);
 
   /**
    * @brief Calculate the sigmoid activation for a pair of time estimates using
@@ -155,8 +153,7 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
    * @param est2 Exec/interface estimate 2.
    */
   double calc_sigmoid(const time_estimate& est1,
-                      const time_estimate& est2,
-                      math::rng* rng);
+                      const time_estimate& est2) RCSW_PURE;
 
   /* clang-format off */
   const std::string mc_method;

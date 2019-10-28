@@ -99,6 +99,11 @@ class ema final : public expression<T> {
     return r;
   }
 
+  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<T>::value)>
+  bool operator==(const ema& other) const {
+    return this->v() == other.v();
+  }
+
  private:
   /* clang-formatt off */
   double m_alpha;
@@ -108,6 +113,11 @@ class ema final : public expression<T> {
 /*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
+template <typename T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<T>::value)>
+bool operator==(const T& v, const ema<T>& rhs) {
+  return v == rhs.v();
+}
+
 template <class T, class U>
 ema<T> operator-(const ema<T>& lhs, const U& rhs) {
   ema<T> r(lhs.alpha());

@@ -36,13 +36,6 @@
 NS_START(rcppsw, ta);
 
 /*******************************************************************************
- * Non-Member Functions
- ******************************************************************************/
-static inline time_estimate est_abs(const time_estimate& e) {
-  return time_estimate(e.alpha(), std::abs(e.v()));
-}
-
-/*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
 bi_tab_sel_probability::bi_tab_sel_probability(const std::string& method)
@@ -71,32 +64,35 @@ double bi_tab_sel_probability::calc_random(math::rng* rng) {
 } /* calc_random() */
 
 double bi_tab_sel_probability::calc_harwell2019(const ds::bi_tab& tab1,
-                                                const ds::bi_tab& tab2,
-                                                math::rng* rng) {
-  auto ratio1 = est_abs(tab1.root()->task_exec_estimate() -
-                        (tab1.child1()->task_exec_estimate() +
-                         tab1.child2()->task_exec_estimate())) /
-                tab1.root()->task_exec_estimate();
-  auto ratio2 = est_abs(tab2.root()->task_exec_estimate() -
-                        (tab2.child1()->task_exec_estimate() +
-                         tab2.child2()->task_exec_estimate())) /
-                tab2.root()->task_exec_estimate();
-  return eval(calc_sigmoid(ratio1.v(), ratio2.v(), rng));
+                                                const ds::bi_tab& tab2) {
+  auto t1r_est = tab1.root()->task_exec_estimate();
+  auto t1c1_est = tab1.child1()->task_exec_estimate();
+  auto t1c2_est = tab1.child2()->task_exec_estimate();
+
+  auto t2r_est = tab2.root()->task_exec_estimate();
+  auto t2c1_est = tab2.child1()->task_exec_estimate();
+  auto t2c2_est = tab2.child2()->task_exec_estimate();
+
+  /*
+   * No information available, apply L'Hospital's rule to obtain new ratio terms
+   * that ARE defined.
+   */
+  double ratio1, ratio2;
+  if (0 == t1r_est && 0 == t2r_est) {
+    ratio1 = (t1c1_est + t1c2_est).v();
+    ratio2 = (t2c1_est + t2c2_est).v();
+  } else if (0 == t1r_est || 0 == t2r_est) {
+    /* info on one tab root only--explore! */
+    return 1.0;
+  } else { /* general case--have info on both TAB roots */
+    ratio1 = std::abs(((t1r_est - (t1c1_est + t1c2_est)) / t1r_est).v());
+    ratio2 = std::abs(((t2r_est - (t2c1_est + t2c2_est)) / t2r_est).v());
+  }
+
+  return eval(calc_sigmoid(ratio1, ratio2));
 } /* calc_harwell2019() */
 
-double bi_tab_sel_probability::calc_sigmoid(double ratio1,
-                                            double ratio2,
-                                            math::rng* rng) {
-  /*
-   * No information available--just pick randomly.
-   */
-  if (!(ratio1 > 0 && ratio2 > 0)) {
-    return calc_random(rng);
-  } else if (!(ratio1 > 0)) { /* have info on tab2 only */
-    return 0.0;
-  } else if (!(ratio2 > 0)) { /* have info on tab1 only */
-    return 1.0;
-  }
+double bi_tab_sel_probability::calc_sigmoid(double ratio1, double ratio2) {
   double theta = reactivity() * (ratio1 / ratio2 - offset());
   return 1.0 / (1 + std::exp(-theta)) * gamma();
 } /* calc_sigmoid() */
@@ -105,7 +101,7 @@ double bi_tab_sel_probability::operator()(const ds::bi_tab* const tab1,
                                           const ds::bi_tab* const tab2,
                                           math::rng* rng) {
   if (kMethodHarwell2019 == mc_method) {
-    return calc_harwell2019(*tab1, *tab2, rng);
+    return calc_harwell2019(*tab1, *tab2);
   } else if (kMethodRandom == mc_method) {
     return calc_random(rng);
   }

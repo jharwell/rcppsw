@@ -92,13 +92,16 @@ class range final : public er::client<range<T>> {
    *
    * @param value The value to test.
    */
-  template<typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
-  bool contains(const T& value) const { return value >= m_lb && value <= m_ub; }
+  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
+  bool contains(const T& value) const {
+    return value >= m_lb && value <= m_ub;
+  }
 
-  template<typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   bool contains(const T& value) const {
     return value >= m_lb - RCSW_DOUBLE_EPSILON &&
-        value <= m_ub + RCSW_DOUBLE_EPSILON; }
+           value <= m_ub + RCSW_DOUBLE_EPSILON;
+  }
 
   /**
    * @brief Determine if one range completely contains another (boundary points

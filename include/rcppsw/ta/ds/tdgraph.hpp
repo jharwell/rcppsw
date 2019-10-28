@@ -167,8 +167,8 @@ class tdgraph : public er::client<tdgraph> {
    *
    * @return The task vertex, or NULL if no such vertex id
    */
-  const polled_task* find_vertex(int id) const;
-  polled_task* find_vertex(int id);
+  const polled_task* find_vertex(int id) const RCSW_PURE;
+  polled_task* find_vertex(int id) RCSW_PURE;
 
   /**
    * @brief Run the callback on each node in the graph, in an arbitrary order.

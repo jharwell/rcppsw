@@ -126,22 +126,18 @@ class bi_tab_sel_probability : public er::client<bi_tab_sel_probability>,
    *
    * @return Probability of switching.
    */
-  double calc_harwell2019(const ds::bi_tab& tab1,
-                          const ds::bi_tab& tab2,
-                          math::rng* rng);
+  double calc_harwell2019(const ds::bi_tab& tab1, const ds::bi_tab& tab2);
 
   /**
    * @brief Calculate the sigmoid activation for a pair of time estimates using
    * time estimates.
    *
-   * @param ratio1 Specifies how balanced the exec estimates are in the
-   *               current TAB. [0,1].
-   * @param ratio2 Specifies how balanced the exec estimates are in the
-   *               other TAB. [0,1].
+   * @param ratio1 Specifies how balanced the exec estimates are in TAB1
+   * @param ratio2 Specifies how balanced the exec estimates are in TAB2.
    *
    * @return Sigmoid value.
    */
-  double calc_sigmoid(double ratio1, double ratio2, math::rng* rng);
+  double calc_sigmoid(double ratio1, double ratio2) RCSW_PURE;
 
   /* clang-format off */
   const std::string mc_method;
