@@ -81,11 +81,11 @@ void bi_tdgraph::active_tab_init_max_depth(math::rng* rng) {
   } /* for(&t..) */
 
   ER_INFO("Found %zu TABs at depth %d", indices.size(), max_depth);
-  m_active_tab = indices[rng->uniform(0, indices.size() - 1)];
+  m_active_tab = indices[rng->uniform(math::rangeu(0, indices.size() - 1))];
 } /* active_tab_init_max_depth() */
 
 void bi_tdgraph::active_tab_init_random(math::rng* rng) {
-  int index = rng->uniform(0, m_tabs.size());
+  int index = rng->uniform(math::rangeu(0, m_tabs.size()));
   m_active_tab = &(*std::next(m_tabs.begin(), index));
 } /* active_tab_init_random() */
 

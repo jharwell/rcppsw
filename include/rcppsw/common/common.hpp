@@ -186,11 +186,11 @@
 #elif defined(__clang__)
 
 #define RCPPSW_WARNING_DISABLE_MISSING_VAR_DECL(...) \
-  RCSW_WARNING_DISABLE(-Wmissing - variable - declarations)
+  RCSW_WARNING_DISABLE(-Wmissing-variable-declarations)
 #define RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...) \
-  RCSW_WARNING_DISABLE(-Wmissing - prototypes)
+  RCSW_WARNING_DISABLE(-Wmissing-prototypes)
 #define RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...) \
-  RCSW_WARNING_DISABLE(-Wglobal - constructors)
+  RCSW_WARNING_DISABLE(-Wglobal-constructors)
 
 #elif defined(__GNUC__)
 

@@ -27,10 +27,9 @@ set(Boost_USE_STATIC_LIBS OFF)
 # Includes                                                                     #
 ################################################################################
 set(${target}_INCLUDE_DIRS
-  "${${target}_INC_PATH}"
+  ${${target}_INC_PATH}
   ${rcsw_INCLUDE_DIRS})
 set(${target}_SYS_INCLUDE_DIRS
-  ${Boost_INCLUDE_DIRS}
   ${CMAKE_CURRENT_SOURCE_DIR})
 
 ################################################################################

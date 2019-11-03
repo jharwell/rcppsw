@@ -58,9 +58,9 @@ struct task_executive_config;
  */
 class base_executive : public rcppsw::er::client<base_executive> {
  public:
-  using abort_notify_cb = std::function<void(const polled_task*)>;
-  using finish_notify_cb = std::function<void(const polled_task*)>;
-  using start_notify_cb = std::function<void(const polled_task*)>;
+  using abort_notify_cb = std::function<void(polled_task*)>;
+  using finish_notify_cb = std::function<void(polled_task*)>;
+  using start_notify_cb = std::function<void(polled_task*)>;
 
   /**
    * @brief Creates the base executive.

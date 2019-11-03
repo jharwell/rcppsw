@@ -43,12 +43,17 @@ void exec_estimates_parser::parse(const ticpp::Element& node) {
 
   XML_PARSE_ATTR_DFLT(enode, m_config, seed_enabled, false);
 
-  if (!m_config->seed_enabled) {
-    return;
-  }
+  /*
+   * This needs to be before the seed enabled check, because even if exec
+   * estimate seeding is disabled, we still want to be able to update our
+   * estimates.
+   */
   m_ema.parse(enode);
   m_config->ema = *m_ema.config_get<mxml::ema_parser::config_type>();
 
+  if (!m_config->seed_enabled) {
+    return;
+  }
   if (m_task_names.empty()) {
     ER_WARN("No tasks registered for parsing");
   }

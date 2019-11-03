@@ -58,7 +58,8 @@ polled_task* strict_greedy_allocator::operator()(
      * If there is more than one task with the same cost estimate, any of them
      * are OK to allocate, so pick randomly.
      */
-  return equiv_min_tasks[m_rng->uniform(0, equiv_min_tasks.size() - 1)];
+  return equiv_min_tasks[m_rng->uniform(math::rangeu(0,
+                                                     equiv_min_tasks.size() - 1))];
 } /* alloc_strict_greedy() */
 
 NS_END(ta, rcppsw);

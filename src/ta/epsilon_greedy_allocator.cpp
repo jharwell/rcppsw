@@ -67,7 +67,7 @@ polled_task* epsilon_greedy_allocator::operator()(
     return strict_greedy_allocator(m_rng)(tasks);
   }
   /* otherwise, pick randomly */
-  return tasks[m_rng->uniform(0, tasks.size() - 1)];
+  return tasks[m_rng->uniform(math::rangeu(0, tasks.size() - 1))];
 } /* operator()() */
 
 NS_END(ta, rcppsw);
