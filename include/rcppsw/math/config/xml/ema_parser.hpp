@@ -1,7 +1,7 @@
 /**
- * @file ema_parser.hpp
+ * \file ema_parser.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of FORDYCA.
  *
@@ -40,10 +40,10 @@ NS_START(rcppsw, math, config, xml);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class ema_parser
- * @ingroup rcppsw math config xml
+ * \class ema_parser
+ * \ingroup math config xml
  *
- * @brief Parses XML configuration for relating to exponential moving averages
+ * \brief Parses XML configuration for relating to exponential moving averages
  * (EMAs).
  */
 class ema_parser : public rcppsw::config::xml::xml_config_parser {
@@ -51,7 +51,7 @@ class ema_parser : public rcppsw::config::xml::xml_config_parser {
   using config_type = ema_config;
 
   /**
-   * @brief The root tag that all ema configuration values should lie under in
+   * \brief The root tag that all ema configuration values should lie under in
    * the XML tree.
    */
   static constexpr char kXMLRoot[] = "ema";

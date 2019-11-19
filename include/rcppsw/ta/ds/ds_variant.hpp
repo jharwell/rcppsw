@@ -1,7 +1,7 @@
 /**
- * @file ds_variant.hpp
+ * \file ds_variant.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -37,6 +37,10 @@ class bi_tdgraph;
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * \brief boost::variant containing one of the possible datastructures that the
+ * \ref base_executive and its derived classes can operate on.
+ */
 using ds_variant = boost::variant<bi_tdgraph>;
 
 NS_END(ds, ta, rcppsw);

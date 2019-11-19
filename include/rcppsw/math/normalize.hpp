@@ -1,7 +1,7 @@
 /**
- * @file normalize.hpp
+ * \file normalize.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -37,7 +37,7 @@ NS_START(rcppsw, math);
  * Free Functions
  ******************************************************************************/
 /*
- * @brief Normalize a value in the range [min, max] to [0, 1].
+ * \brief Normalize a value in the range [min, max] to [0, 1].
  *
  * If the max and min measurements are the same, then the normalized value is
  * 0.5.p

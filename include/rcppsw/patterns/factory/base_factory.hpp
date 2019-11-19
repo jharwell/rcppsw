@@ -1,7 +1,7 @@
 /**
- * @file base_factory.hpp
+ * \file base_factory.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -43,18 +43,18 @@ struct factory_releasing_type {};
 struct factory_sharing_type {};
 
 /**
- * @class base_factory
- * @ingroup rcppsw patterns factory
+ * \class base_factory
+ * \ingroup patterns factory
  *
- * @brief Dispatcher factory class that releases or shares ownership of the
+ * \brief Dispatcher factory class that releases or shares ownership of the
  * created objects to the class/context that requests object creation. All
  * classes of the derived type must have compatible constructor signatures.
  *
- * @tparam TPointerWrapper Type of pointer wrapper (shared or unique).
- * @tparam TBase Type of objects capable of creation from this factory
+ * \tparam TPointerWrapper Type of pointer wrapper (shared or unique).
+ * \tparam TBase Type of objects capable of creation from this factory
  * (restricted to this type and its derived types).
  *
- * @tparam Args List of constructor arguments for the types to be
+ * \tparam Args List of constructor arguments for the types to be
  * constructed.
  */
 template <typename TType,
@@ -102,7 +102,7 @@ class base_factory {
 
  private:
   /**
-   * @brief Helper interface class to actually do object creation. Must be
+   * \brief Helper interface class to actually do object creation. Must be
    * nested *inside* the factory class so that we can use the variadic arguments
    * passed to the template AND still be able to use virtual functions.
    */
@@ -113,7 +113,7 @@ class base_factory {
   };
 
   /**
-   * @brief Implementation of \ref factory_worker interface. We need different
+   * \brief Implementation of \ref factory_worker interface. We need different
    * specializations: one for std::shared_ptr, and one for std::unique_ptr,
    * because we need to maintain a list of the objects we have created for
    * std::shared_ptr. Returning the shared_ptr object without doing this can

@@ -1,7 +1,7 @@
 /**
- * @file singleton.hpp
+ * \file singleton.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -34,10 +34,10 @@ NS_START(rcppsw, patterns, singleton);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class singleton
- * @ingroup rcppsw patterns singleton
+ * \class singleton
+ * \ingroup patterns singleton
  *
- * @brief Define a class as incapable of being moved, copied, etc., and that
+ * \brief Define a class as incapable of being moved, copied, etc., and that
  * there can only ever be one of.
  */
 template <class T>

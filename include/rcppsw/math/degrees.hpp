@@ -1,7 +1,7 @@
 /**
- * @file degrees.hpp
+ * \file degrees.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -42,10 +42,10 @@ class radians;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class degrees
- * @ingroup rcppsw math
+ * \class degrees
+ * \ingroup math
  *
- * @brief Used to store an angle value in degrees (duh).
+ * \brief Used to store an angle value in degrees (duh).
  */
 class degrees {
  public:
@@ -58,12 +58,12 @@ class degrees {
   degrees(void) = default;
 
   /**
-   * @brief Initialize from the specified value in DEGREES.
+   * \brief Initialize from the specified value in DEGREES.
    */
   explicit degrees(double value) : m_value(value) {}
 
   /**
-   * @brief Initialize from the specified value in RADIANS.
+   * \brief Initialize from the specified value in RADIANS.
    */
   explicit degrees(const radians& r);
 
@@ -72,23 +72,23 @@ class degrees {
   double operator()(void) const { return value(); }
 
   /**
-   * @brief Set the current value in degrees.
+   * \brief Set the current value in degrees.
    *
-   * @param value In DEGREES.
+   * \param value In DEGREES.
    */
   void set(double value) { m_value = value; }
 
   double abs_value(void) const { return std::abs(m_value); }
 
   /**
-   * @brief Normalizes the value in the range [-180, 180]
+   * \brief Normalizes the value in the range [-180, 180]
    */
   degrees& signed_normalize(void) {
     return *this = kSignedRange.wrap_value(*this);
   }
 
   /**
-   * @brief Normalizes the value in the range [0, 360].
+   * \brief Normalizes the value in the range [0, 360].
    */
   degrees& unsigned_normalize(void) {
     return *this = kUnsignedRange.wrap_value(*this);
@@ -185,12 +185,12 @@ class degrees {
 
  private:
   /**
-   * @brief The signed normalization range [-180, 180]
+   * \brief The signed normalization range [-180, 180]
    */
   static const range<degrees> kSignedRange;
 
   /**
-   * @brief The unsigned normalization range [0, 360]
+   * \brief The unsigned normalization range [0, 360]
    */
   static const range<degrees> kUnsignedRange;
 

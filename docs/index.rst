@@ -49,10 +49,6 @@ Directory Layout
 - ``docs/`` - All documentation besides the main README lives under here,
   including all development/style guides.
 
-- ``VERSION`` - A file in the root root that holds the current/next versions of
-  the code. Versions are numbered as ``major.minor.patch``, and is updated in
-  accordance with semantic versioning/GitFlow.
-
 Debug Build
 -----------
 

@@ -1,7 +1,7 @@
 /**
- * @file overlay_grid2D.hpp
+ * \file overlay_grid2D.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -35,13 +35,13 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class overlay_grid2D
- * @ingroup rcppsw ds
+ * \class overlay_grid2D
+ * \ingroup ds
  *
- * @brief A 2D logical grid overlayed over a continuous environment using a
+ * \brief A 2D logical grid overlayed over a continuous environment using a
  * \a contiguous array of the template parameter type.
  *
- * @tparam T The type of the grid element (probably a cell of some kind). Must
+ * \tparam T The type of the grid element (probably a cell of some kind). Must
  * have must have a zero parameter constructor available or it won't compile
  * (this is a limitation of the boost underneath). Furthermore, T must also have
  * a copy constructor available, as move semantics are not supported with the
@@ -60,10 +60,10 @@ class overlay_grid2D final : public base_overlay_grid2D<T> {
   using base_overlay_grid2D<T>::access;
 
   /**
-   * @param resolution The discretization unit for the grid.
-   * @param x_max The real size in X, which will be discretized into
+   * \param resolution The discretization unit for the grid.
+   * \param x_max The real size in X, which will be discretized into
    * X/resolution discrete elements along the X dimension.
-   * @param y_max The real size in Y, which will be discretized into
+   * \param y_max The real size in Y, which will be discretized into
    * Y/resolution discrete elements along the X dimension.
    */
   overlay_grid2D(types::discretize_ratio resolution, double x_max, double y_max)
@@ -72,18 +72,18 @@ class overlay_grid2D final : public base_overlay_grid2D<T> {
             xdsize())][typename index_range::index(ydsize())]) {}
 
   /**
-   * @brief Get a subcircle gridview from a grid. The subcircle extent is
+   * \brief Get a subcircle gridview from a grid. The subcircle extent is
    * cropped to the maximum boundaries of the parent grid.
    *
    * This means that rather than getting a 2 x 2 subgrid centered at 0 with the
    * out-of-bounds elements zeroed if you request a subcircle on the boundary of
    * the overall grid, you will get a 1 x 2 subgrid (a lopsided circle).
    *
-   * @param x X coord of center of subgrid.
-   * @param y Y coord of center of subgrid.
-   * @param radius Radius of subgrid.
+   * \param x X coord of center of subgrid.
+   * \param y Y coord of center of subgrid.
+   * \param radius Radius of subgrid.
    *
-   * @return The subcircle.
+   * \return The subcircle.
    */
   grid_view subcircle(size_t x, size_t y, uint radius) {
     auto x_range = base_overlay_grid2D<T>::circle_xrange_at_point(x, radius);
@@ -105,7 +105,7 @@ class overlay_grid2D final : public base_overlay_grid2D<T> {
   }
 
   /**
-   * @brief Create a subgrid (really an array view) from a grid. The grid is
+   * \brief Create a subgrid (really an array view) from a grid. The grid is
    * clamped to the maximum boundaries of the parent grid, so rather than
    * getting a 2 x 2 subgrid centered at 0 with the out-of-bounds elements
    * zeroed, you will get a 1 x 2 subgrid.
@@ -113,7 +113,7 @@ class overlay_grid2D final : public base_overlay_grid2D<T> {
    * The 4 parameters specify the 4 corners of the subgrid in terms of the
    * indices of the grid the subgrid is being drawn from.
    *
-   * @return The subgrid.
+   * \return The subgrid.
    */
   grid_view subgrid(size_t x_min, size_t y_min, size_t x_max, size_t y_max) {
     typename grid_type::index_gen indices;
@@ -143,9 +143,9 @@ class overlay_grid2D final : public base_overlay_grid2D<T> {
   }
 
   /**
-   * @brief Get a reference to a the cell within the grid at coordinates (i, j)
+   * \brief Get a reference to a the cell within the grid at coordinates (i, j)
    *
-   * @return Reference to the cell, of type T.
+   * \return Reference to the cell, of type T.
    */
   T& access(size_t i, size_t j) override {
     return m_cells[static_cast<typename index_range::index>(i)]

@@ -1,7 +1,7 @@
 /**
- * @file rng_parser.hpp
+ * \file rng_parser.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of FORDYCA.
  *
@@ -40,17 +40,17 @@ NS_START(rcppsw, math, config, xml);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class rng_parser
- * @ingroup rcppsw math config xml
+ * \class rng_parser
+ * \ingroup math config xml
  *
- * @brief Parses XML configuration relating to RNG.
+ * \brief Parses XML configuration relating to RNG.
  */
 class rng_parser final : public rcppsw::config::xml::xml_config_parser {
  public:
   using config_type = rng_config;
 
   /**
-   * @brief The root tag that all rng configuration values should lie under in
+   * \brief The root tag that all rng configuration values should lie under in
    * the XML tree.
    */
   static constexpr char kXMLRoot[] = "rng";

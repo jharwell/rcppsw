@@ -1,7 +1,7 @@
 /**
- * @file mt_queue.hpp
+ * \file mt_queue.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -40,10 +40,10 @@ NS_START(rcppsw, multithread);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class mt_queue
- * @ingroup rcppsw multithread
+ * \class mt_queue
+ * \ingroup multithread
  *
- * @brief A simple multiple-producer/consumer queue with locking.
+ * \brief A simple multiple-producer/consumer queue with locking.
  */
 namespace decorator = rcppsw::patterns::decorator;
 template <typename T>
@@ -57,7 +57,7 @@ class mt_queue : public decorator::decorator<std::deque<T>> {
   DECORATE_FUNC_TEMPLATE(T, end, const);
 
   /**
-   * @brief Add data to the queue and notify others
+   * \brief Add data to the queue and notify others
    */
   void enqueue(const T& data) {
     boost::unique_lock<boost::mutex> lock(m_mtx);
@@ -66,7 +66,7 @@ class mt_queue : public decorator::decorator<std::deque<T>> {
   }
 
   /**
-   * @brief Get data from the queue. Wait for data if not available.
+   * \brief Get data from the queue. Wait for data if not available.
    */
   T dequeue() {
     boost::unique_lock<boost::mutex> lock(m_mtx);

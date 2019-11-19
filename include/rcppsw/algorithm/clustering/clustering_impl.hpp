@@ -1,7 +1,7 @@
 /**
- * @file clustering_impl.hpp
+ * \file clustering_impl.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -39,6 +39,14 @@ NS_START(rcppsw, algorithm, clustering, detail);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * \class clustering_impl
+ * \ingroup algorithm clustering
+ *
+ * \brief Templated implementation class interface to guide the implementation
+ * of various clustering algorithms by giving them a necessary set of functions
+ * to implement.
+ */
 template<typename T, typename Policy>
 class clustering_impl {
  public:
@@ -49,27 +57,27 @@ class clustering_impl {
   virtual ~clustering_impl(void) = default;
 
    /**
-   * @brief Determine if the clusters have converged and the algorithm should be
+   * \brief Determine if the clusters have converged and the algorithm should be
    * terminated.
    *
-   * @return \c TRUE if the algorithm has converged, \c FALSE otherwise.
+   * \return \c TRUE if the algorithm has converged, \c FALSE otherwise.
    */
   virtual bool converged(const cluster_vector& clusters) const = 0;
 
   /*
-   * @brief Perform one iteration the clustering algorithm.
+   * \brief Perform one iteration the clustering algorithm.
    */
   virtual void iterate(const std::vector<T>& data,
                        const dist_calc_ftype& dist_func,
                        cluster_vector* clusters) = 0;
 
   /*
-   * @brief Update clusters (in some algorithm-specific way) after an iteration.
+   * \brief Update clusters (in some algorithm-specific way) after an iteration.
    */
   virtual void post_iter_update(cluster_vector* clusters) = 0;
 
   /**
-   * @brief Perform algorithm-specific clustering initialization (memory
+   * \brief Perform algorithm-specific clustering initialization (memory
    * localization, etc.).
    */
   virtual void initialize(std::vector<T>* data,

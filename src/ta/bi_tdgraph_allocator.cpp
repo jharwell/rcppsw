@@ -1,7 +1,7 @@
 /**
- * @file bi_tdgraph_allocator.cpp
+ * \file bi_tdgraph_allocator.cpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *

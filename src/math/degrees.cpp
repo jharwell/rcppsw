@@ -1,7 +1,7 @@
 /**
- * @file degrees.cpp
+ * \file degrees.cpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *

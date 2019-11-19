@@ -1,7 +1,7 @@
 /**
- * @file visitor.hpp
+ * \file visitor.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -40,9 +40,9 @@ NS_START(rcppsw, patterns, visitor);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class visit_set_helper
+ * \class visit_set_helper
  *
- * @brief Helper class to provide actual implementation.
+ * \brief Helper class to provide actual implementation.
  */
 template <typename T>
 class visit_set_helper {
@@ -52,10 +52,10 @@ class visit_set_helper {
 };
 
 /**
- * @class visit_set
- * @ingroup rcppsw patterns visitor
+ * \class visit_set
+ * \ingroup patterns visitor
  *
- * @brief General case for template expansion. Provides classes the ability to
+ * \brief General case for template expansion. Provides classes the ability to
  * explicitly control what types of classes they can visit (limited to the
  * specified types AND their parent classes).
  */
@@ -63,9 +63,9 @@ template <typename... Ts>
 class visit_set {};
 
 /**
- * @class visit_set<T,R,..>
+ * \class visit_set<T,R,..>
  *
- * @brief Middle recursive case for expansion.
+ * \brief Middle recursive case for expansion.
  */
 template<typename T, typename... Ts>
 class visit_set<T, Ts...>: public visit_set_helper<T>,
@@ -76,9 +76,9 @@ class visit_set<T, Ts...>: public visit_set_helper<T>,
 };
 
 /**
- * @class visit_set<T>
+ * \class visit_set<T>
  *
- * @brief Base case for expansion.
+ * \brief Base case for expansion.
  */
 template<typename T>
 class visit_set<T>: public visit_set_helper<T> {
@@ -87,20 +87,20 @@ class visit_set<T>: public visit_set_helper<T> {
 };
 
 /**
- * @brief List of types specifying the set of visitors that a \ref
+ * \brief List of types specifying the set of visitors that a \ref
  * precise_visitor will be able to visit.
  */
 template<typename ...Args>
 using precise_visit_set = mpl::typelist<Args...>;
 
 /**
- * @brief Visitor that will only visit precisely with types that exactly match
+ * \brief Visitor that will only visit precisely with types that exactly match
  * one of the types in its type list (i.e. no implicit upcasting is
  * allowed). SFINAE FTW!
  *
- * @tparam VisitorImpl The name of the class containing the actual
+ * \tparam VisitorImpl The name of the class containing the actual
  *                     implementation of the visit functions.
- * @tparam TypeList List of types that the class will be able to visit. Must be
+ * \tparam TypeList List of types that the class will be able to visit. Must be
  * a \ref precise_visit_set.
  *
  * For each visitee type you want to be able to visit, you must (1) include it

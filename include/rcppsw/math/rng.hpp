@@ -1,7 +1,7 @@
 /**
- * @file rng.hpp
+ * \file rng.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -39,11 +39,11 @@ NS_END(detail);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class rng
- * @ingroup rcppsw math
+ * \class rng
+ * \ingroup math
  *
- * @brief Random number generator class using the PIMPL pattern in order to not
- * include <random> in the header file.
+ * \brief Random number generator class using the PIMPL pattern in order to not
+ * have to include \c \<random\>.
  */
 class rng : public patterns::pimpl::pimpl<detail::rng_impl> {
  public:

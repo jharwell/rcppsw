@@ -1,8 +1,8 @@
 /**
- * @file powerlaw_distribution.hpp
- * @ingroup rcppsw math
+ * \file powerlaw_distribution.hpp
+ * \ingroup math
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -37,20 +37,20 @@ NS_START(rcppsw, math);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class powerlaw_distribution
- * @ingroup rcppsw math
+ * \class powerlaw_distribution
+ * \ingroup math
  *
- * @brief Represents a power law distribution (duh) of x^pwr where x is in [lb,
+ * \brief Represents a power law distribution (duh) of x^pwr where x is in [lb,
  * ub]. Constructed from a uniform distribution on [0, 1].
  */
 class powerlaw_distribution {
  public:
   /**
-   * @brief Initialize distribution.
+   * \brief Initialize distribution.
    *
-   * @param lb Lower bound for distribution. Assumed to be a multiple of pwr.
-   * @param ub Upper bound for distribution. Assumed to be a multiple of pwr.
-   * @param pwr Power for distribution.
+   * \param lb Lower bound for distribution. Assumed to be a multiple of pwr.
+   * \param ub Upper bound for distribution. Assumed to be a multiple of pwr.
+   * \param pwr Power for distribution.
    */
   powerlaw_distribution(uint lb, uint ub, uint pwr)
       : m_lb(lb), m_ub(ub), m_pwr(pwr) {}

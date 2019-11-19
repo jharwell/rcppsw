@@ -1,7 +1,7 @@
 /**
- * @file waveform_parser.cpp
+ * \file waveform_parser.cpp
  *
- * @copyright 2018 John Harwell/Anthony Chen, All rights reserved.
+ * \copyright 2018 John Harwell/Anthony Chen, All rights reserved.
  *
  * This file is part of RCPPSW.
  *

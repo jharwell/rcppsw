@@ -1,7 +1,7 @@
 /**
- * @file ucb1_allocator.hpp
+ * \file ucb1_allocator.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -40,10 +40,10 @@ class polled_task;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class ucb1_allocator
- * @ingroup rcppsw ta
+ * \class ucb1_allocator
+ * \ingroup ta
  *
- * @brief Allocates a task from a given set of a tasks, using the UCB1 approach
+ * \brief Allocates a task from a given set of a tasks, using the UCB1 approach
  * from Pini2012,Auer2002, treating the task allocation problem as a multi-armed
  * bandit and achieving a logarithmic regret bound.
  */
@@ -57,10 +57,10 @@ class ucb1_allocator : er::client<ucb1_allocator> {
   const ucb1_allocator& operator=(const ucb1_allocator& other) = delete;
 
   /**
-   * @brief Perform task allocation.
+   * \brief Perform task allocation.
    *
-   * @param tasks The current set of tasks.
-   * @param alloc_count The total # of task allocations so far.
+   * \param tasks The current set of tasks.
+   * \param alloc_count The total # of task allocations so far.
    */
   polled_task* operator()(const std::vector<polled_task*>& tasks,
                           uint alloc_count) const;

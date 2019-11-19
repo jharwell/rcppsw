@@ -1,7 +1,7 @@
 /**
- * @file exec_estimates_parser.hpp
+ * \file exec_estimates_parser.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -43,10 +43,10 @@ NS_START(rcppsw, ta, config, xml);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class exec_estimates_parser
- * @ingroup rcppsw ta config xml
+ * \class exec_estimates_parser
+ * \ingroup ta config xml
  *
- * @brief Parses XML configuration used for estimation of task execution
+ * \brief Parses XML configuration used for estimation of task execution
  * times at the start of simulation.
  */
 class exec_estimates_parser final : public rcppsw::config::xml::xml_config_parser,
@@ -60,7 +60,7 @@ class exec_estimates_parser final : public rcppsw::config::xml::xml_config_parse
         m_task_names(std::move(task_names)) {}
 
   /**
-   * @brief The root tag that all cache parameters should lie under in the
+   * \brief The root tag that all cache parameters should lie under in the
    * XML tree.
    */
   static constexpr char kXMLRoot[] = "task_exec_estimates";

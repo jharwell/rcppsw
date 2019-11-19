@@ -1,7 +1,7 @@
 /**
- * @file radians.hpp
+ * \file radians.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -42,10 +42,10 @@ class degrees;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class radians
- * @ingroup rcppsw math
+ * \class radians
+ * \ingroup math
  *
- * @brief Used to store an angle value in radians (duh).
+ * \brief Used to store an angle value in radians (duh).
  */
 class radians {
  public:
@@ -68,7 +68,7 @@ class radians {
   explicit radians(const degrees& d);
 
   /**
-   * @brief Sets the value in radians.
+   * \brief Sets the value in radians.
    */
   void set(double value) { m_value = value; }
 
@@ -76,14 +76,14 @@ class radians {
   double operator()(void) const { return value(); }
 
   /**
-   * @brief Normalizes the value in the range [-pi, pi].
+   * \brief Normalizes the value in the range [-pi, pi].
    */
   radians& signed_normalize(void) {
     return *this = kSignedRange.wrap_value(*this);
   }
 
   /**
-   * @brief Normalizes the value in the range [0, 2pi]
+   * \brief Normalizes the value in the range [0, 2pi]
    */
   radians& unsigned_normalize(void) {
     return *this = kUnsignedRange.wrap_value(*this);
@@ -173,7 +173,7 @@ class radians {
 
  private:
   /**
-   * @brief The signed normalization range [-pi, pi]
+   * \brief The signed normalization range [-pi, pi]
    */
   static const range<radians> kSignedRange;
 

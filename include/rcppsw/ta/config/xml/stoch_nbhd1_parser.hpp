@@ -1,7 +1,7 @@
 /**
- * @file stoch_nbhd1_parser.hpp
+ * \file stoch_nbhd1_parser.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -42,10 +42,10 @@ NS_START(rcppsw, ta, config, xml);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class stoch_nbhd1_parser
- * @ingroup rcppsw ta config xml
+ * \class stoch_nbhd1_parser
+ * \ingroup ta config xml
  *
- * @brief Parses XML configuration used for task allocation into \ref
+ * \brief Parses XML configuration used for task allocation into \ref
  * stoch_nbhd1_config.
  */
 class stoch_nbhd1_parser final : public rcppsw::config::xml::xml_config_parser {
@@ -53,7 +53,7 @@ class stoch_nbhd1_parser final : public rcppsw::config::xml::xml_config_parser {
   using config_type = stoch_nbhd1_config;
 
   /**
-   * @brief The root tag that all task allocation XML configuration should lie
+   * \brief The root tag that all task allocation XML configuration should lie
    * under in the XML tree.
    */
   static constexpr char kXMLRoot[] = "stoch_nbhd1";

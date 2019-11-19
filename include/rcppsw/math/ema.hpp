@@ -1,7 +1,7 @@
 /**
- * @file ema.hpp
+ * \file ema.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -37,10 +37,10 @@ NS_START(rcppsw, math);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class ema
- * @ingroup rcppsw math
+ * \class ema
+ * \ingroup math
  *
- * @brief Calculates an Exponential Moving Average of SOMETHING.
+ * \brief Calculates an Exponential Moving Average of SOMETHING.
  *
  * Depends on:
  *

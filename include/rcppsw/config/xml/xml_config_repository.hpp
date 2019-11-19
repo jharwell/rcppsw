@@ -1,7 +1,7 @@
 /**
- * @file xml_config_repository.hpp
+ * \file xml_config_repository.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -42,10 +42,10 @@ NS_START(rcppsw, config, xml);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class xml_config_repository
- * @ingroup rcppsw config xml
+ * \class xml_config_repository
+ * \ingroup config xml
  *
- * @brief A repository for multiple \ref xml_config_parser objects and their
+ * \brief A repository for multiple \ref xml_config_parser objects and their
  * parsed results; allows collective operations on multiple parsers.
  *
  * Utilizes factory pattern for parser creation. Does not create any parsers on
@@ -60,27 +60,27 @@ class xml_config_repository : public er::client<xml_config_repository> {
       : ER_CLIENT_INIT("rcppsw.config.xml.repository") {}
 
   /**
-   * @brief Call the \ref xml_config_parser::parse() function on all parsers
+   * \brief Call the \ref xml_config_parser::parse() function on all parsers
    * in the repository, passing all parsers the same XML node.
    */
   void parse_all(const ticpp::Element& node) RCSW_COLD;
 
   /**
-   * @brief Call the \ref xml_config_parser::validate() function on all parsers
+   * \brief Call the \ref xml_config_parser::validate() function on all parsers
    * in the repository, and return whether or not \a ALL parsers report valid
    * configuration.
    *
-   * @return \c TRUE iff ALL parsers report valid configuration, and \c FALSE
+   * \return \c TRUE iff ALL parsers report valid configuration, and \c FALSE
    * otherwise.
    */
   bool validate_all(void) RCSW_COLD;
 
   /**
-   * @brief Get the parsed configuration associated with the parser of the
+   * \brief Get the parsed configuration associated with the parser of the
    * specified type (note that the name that the parser was registered with is
    * not needed in this formulation).
    *
-   * @return The parsed configuration (non-owning), or NULL if an invalid type
+   * \return The parsed configuration (non-owning), or NULL if an invalid type
    * of configuration was requested.
    */
   template <typename T>
@@ -94,10 +94,10 @@ class xml_config_repository : public er::client<xml_config_repository> {
   }
 
   /**
-   * @brief Get the parsed configuration associated with the parser of the
+   * \brief Get the parsed configuration associated with the parser of the
    * specified name.
    *
-   * @return The parsed configuration (non-owning).
+   * \return The parsed configuration (non-owning).
    */
   template <typename T>
   RCSW_COLD const T* config_get(const std::string& name) const {
@@ -109,11 +109,11 @@ class xml_config_repository : public er::client<xml_config_repository> {
   }
 
   /**
-   * @brief Get a registered parser by name (non-owning).
+   * \brief Get a registered parser by name (non-owning).
    *
-   * @param name The name of the parser.
+   * \param name The name of the parser.
    *
-   * @return Non-owning pointer to the requested parser, or NULL if no such
+   * \return Non-owning pointer to the requested parser, or NULL if no such
    * parser was registered.
    */
   template <typename T>
@@ -126,11 +126,11 @@ class xml_config_repository : public er::client<xml_config_repository> {
   }
 
   /**
-   * @brief Register a parser of a given type (must be derived from \ref
+   * \brief Register a parser of a given type (must be derived from \ref
    * xml_config_parser) and associate it with the specified name.
    *
-   * @tparam T The parser type.
-   * @tparam S The type of the configuration that the parser produces when
+   * \tparam T The parser type.
+   * \tparam S The type of the configuration that the parser produces when
    *           parse() is called on it.
    */
   template <typename T, typename S>
@@ -142,13 +142,13 @@ class xml_config_repository : public er::client<xml_config_repository> {
   }
 
   /**
-   * @brief Register a parser of a given type (must be derived from
+   * \brief Register a parser of a given type (must be derived from
    * \ref xml_config_parser) and associate it with the specified name.
    *
    * If you use this function, then you will have to refer to the parse results
    * by type + name, rather than just by type.
    *
-   * @tparam T The parser type.
+   * \tparam T The parser type.
    */
   template <typename T>
   RCSW_COLD void parser_register(const std::string& name) {

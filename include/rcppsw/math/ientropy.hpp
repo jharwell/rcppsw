@@ -1,7 +1,7 @@
 /**
- * @file ientropy.hpp
+ * \file ientropy.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -40,10 +40,10 @@ NS_START(rcppsw, math);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class ientropy
- * @ingroup rcppsw math
+ * \class ientropy
+ * \ingroup math
  *
- * @brief Calculates the informational entropy of a cluster (Shannon's
+ * \brief Calculates the informational entropy of a cluster (Shannon's
  * definition).
  *
  * Uses the formula:
@@ -53,9 +53,9 @@ NS_START(rcppsw, math);
 class ientropy : public math::expression<double> {
  public:
   /**
-   * @brief Calculate the informational entropy.
+   * \brief Calculate the informational entropy.
    *
-   * @param groups A vector of the proportional representation of each group
+   * \param groups A vector of the proportional representation of each group
    *               within the cluster. Should sum to 1, though this is not
    *               checked.
    */

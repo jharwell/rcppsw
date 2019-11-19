@@ -1,7 +1,7 @@
 /**
- * @file state_guard_action.hpp
+ * \file state_guard_action.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -38,14 +38,14 @@ class base_fsm;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class state_guard_condition
- * @ingroup rcppsw patterns fsm
+ * \class state_guard_condition1
+ * \ingroup patterns fsm
  *
- * @brief Condition to determine if a state's main action should be executed.
+ * \brief Condition to determine if a state's main action should be executed.
  *
- * @tparam SM A state machine class.
- * @tparam Event A state function event data type.
- * @tparam Func A state machine member function pointer that takes ONE argument
+ * \tparam SM A state machine class.
+ * \tparam Event A state function event data type.
+ * \tparam Func A state machine member function pointer that takes ONE argument
  */
 template <class SM, class Event, bool (SM::*Func)(const Event*)>
 class state_guard_condition1 : public state_guard {
@@ -65,10 +65,11 @@ class state_guard_condition1 : public state_guard {
   }
 };
 
-/** @class state_guard_condition
+/**
+ * \class state_guard_condition0
  *
- * @tparam SM A state machine class.
- * @tparam Func A state machine member function pointer that takes ZERO
+ * \tparam SM A state machine class.
+ * \tparam Func A state machine member function pointer that takes ZERO
  * arguments.
  */
 template <class SM, bool (SM::*Func)(void)>

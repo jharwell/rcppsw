@@ -1,7 +1,7 @@
 /**
- * @file epsilon_greedy_parser.hpp
+ * \file epsilon_greedy_parser.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -39,10 +39,10 @@ NS_START(rcppsw, ta, config, xml);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class epsilon_greedy_parser
- * @ingroup rcppsw ta config xml
+ * \class epsilon_greedy_parser
+ * \ingroup ta config xml
  *
- * @brief Parses XML configuration used for epsilon greedy task allocation
+ * \brief Parses XML configuration used for epsilon greedy task allocation
  * policy into \ref epsilon_greedy_config.
  */
 class epsilon_greedy_parser final : public rcppsw::config::xml::xml_config_parser {
@@ -50,7 +50,7 @@ class epsilon_greedy_parser final : public rcppsw::config::xml::xml_config_parse
   using config_type = epsilon_greedy_config;
 
   /**
-   * @brief The root tag that all task allocation XML configuration should lie
+   * \brief The root tag that all task allocation XML configuration should lie
    * under in the XML tree.
    */
   static constexpr char kXMLRoot[] = "epsilon_greedy";

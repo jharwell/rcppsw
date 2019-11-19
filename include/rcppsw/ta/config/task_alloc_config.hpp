@@ -1,7 +1,7 @@
 /**
- * @file task_alloc_config.hpp
+ * \file task_alloc_config.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -42,12 +42,15 @@ NS_START(rcppsw, ta, config);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct task_alloc_config
- * @ingroup rcppsw ta config
+ * \struct task_alloc_config
+ * \ingroup ta config
+ *
+ * \brief Task allocation configuration container, containing all
+ * necessary configuration structs for all possible task allocation policies.
  */
 struct task_alloc_config final : public rcppsw::config::base_config {
   /**
-   * @brief Policy for specifying how tasks will be allocated in the executive
+   * \brief Policy for specifying how tasks will be allocated in the executive
    * from the data structure containing the tasks to run.
    */
   std::string policy{"random"};

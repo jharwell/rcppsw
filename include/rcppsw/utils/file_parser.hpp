@@ -1,7 +1,7 @@
 /**
- * @file file_parser.hpp
+ * \file file_parser.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -44,14 +44,14 @@ NS_START(rcppsw, utils);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class file_parser
- * @ingroup rcppsw utils
+ * \class file_parser
+ * \ingroup utils
  *
- * @brief File parsing class using template design pattern. Parses each line of
+ * \brief File parsing class using template design pattern. Parses each line of
  * a file into a vector of whitespace delimited tokens, and returns a vector of
  * vectors (1 per line).
  *
- * @tparam T The type of tokens the file contains.
+ * \tparam T The type of tokens the file contains.
  */
 template <typename T>
 class file_parser {
@@ -59,9 +59,9 @@ class file_parser {
   explicit file_parser(const std::string& fname) : m_fname(fname) {}
 
   /**
-   * @brief Parse a file into a vector of sets of tokens.
+   * \brief Parse a file into a vector of sets of tokens.
    *
-   * @return A vector of the parse results.
+   * \return A vector of the parse results.
    */
   std::vector<T>* parse_file(char delim) {
     std::vector<T>* tokens_set = new std::vector<T>;

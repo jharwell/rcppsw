@@ -1,7 +1,7 @@
 /**
- * @file ucb1_allocator.cpp
+ * \file ucb1_allocator.cpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -68,8 +68,8 @@ polled_task* ucb1_allocator::operator()(const std::vector<polled_task*>& tasks,
    * If there is more than one task with the same cost estimate, any of them
    * are OK to allocate, so pick randomly.
    */
-  return equiv_min_tasks[m_rng->uniform(math::rangeu(0,
-                                                     equiv_min_tasks.size() - 1))];
+  return equiv_min_tasks[m_rng->uniform(
+      math::rangeu(0, equiv_min_tasks.size() - 1))];
 } /* alloc_ucb1() */
 
 NS_END(ta, rcppsw);

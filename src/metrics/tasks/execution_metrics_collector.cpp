@@ -1,7 +1,7 @@
 /**
- * @file execution_metrics_collector.cpp
+ * \file execution_metrics_collector.cpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -82,7 +82,7 @@ void execution_metrics_collector::collect(
    * Task finish stats are still valid because the current task in the executive
    * has not been updated (for abort or for finish).
    *
-   * @todo Right now tasks update their interface/exec estimates unconditionally
+   * \todo Right now tasks update their interface/exec estimates unconditionally
    * when running, and so are the gathered metrics, but this should be able to
    * be switched on/off.
    */

@@ -1,7 +1,7 @@
 /**
- * @file spatial_dist.hpp
+ * \file spatial_dist.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -35,7 +35,7 @@ NS_START(rcppsw, types);
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief Specifies a distance in "real" spatial space.
+ * \brief Specifies a distance in "real" spatial space.
  */
 class spatial_dist : public named_type<double, struct spatial_dist_tag> {
  public:

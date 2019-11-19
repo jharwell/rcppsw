@@ -1,7 +1,7 @@
 /**
- * @file grid2D.hpp
+ * \file grid2D.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -35,10 +35,10 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class grid2D
- * @ingroup rcppsw ds
+ * \class grid2D
+ * \ingroup ds
  *
- * @brief A 2D grid of SOMETHING. Mainly a convenience wrapper around
+ * \brief A 2D grid of SOMETHING. Mainly a convenience wrapper around
  * boost::multi_array.
  */
 template <typename T>

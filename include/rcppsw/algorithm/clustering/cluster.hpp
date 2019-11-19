@@ -1,7 +1,7 @@
 /**
- * @file cluster.hpp
+ * \file cluster.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -40,10 +40,10 @@ NS_START(rcppsw, algorithm, clustering, detail);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class nc_cluster
- * @ingroup rcppsw algorithm clustering
+ * \class nc_cluster
+ * \ingroup algorithm clustering
  *
- * @brief A policy based cluster for a Nearest Centroid (NC) cluster during the
+ * \brief A policy based cluster for a Nearest Centroid (NC) cluster during the
  * execution of the NC clustering algorithm.
 */
 template <typename T, typename Policy>
@@ -76,7 +76,7 @@ class nc_cluster {
   }
 
   /**
-   * @brief Update the center (mean) of the points in the cluster after an
+   * \brief Update the center (mean) of the points in the cluster after an
    * iteration is finished.
    **/
   void update_center(void) {
@@ -109,10 +109,10 @@ class nc_cluster {
 };
 
 /**
- * @class eh_cluster
- * @ingroup rcppsw algorithm clustering
+ * \class eh_cluster
+ * \ingroup algorithm clustering
  *
- * @brief A policy based cluster for an Event Horizon (EH) cluster during the
+ * \brief A policy based cluster for an Event Horizon (EH) cluster during the
  * execution of the EH clustering algorithm.
 */
 template <typename T, typename Policy>
@@ -133,14 +133,14 @@ class eh_cluster {
   }
 
   /*
-   * @brief Determine if the cluster has converged, by checking if the center of
+   * \brief Determine if the cluster has converged, by checking if the center of
    * the cluster has changed.
    */
   bool converged(void) const { return m_prev_size == size(); }
   size_t size(void) const { return m_membership->size(); }
 
   /**
-   * @brief Update the size of the cluster after an iteration has finished.
+   * \brief Update the size of the cluster after an iteration has finished.
    **/
   void update_size(void) { m_prev_size = size(); }
 

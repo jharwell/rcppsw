@@ -1,7 +1,7 @@
 /**
- * @file base_metric_collector.cpp
+ * \file base_metric_collector.cpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -46,7 +46,7 @@ base_metrics_collector::base_metrics_collector(const std::string& ofname,
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-bool base_metrics_collector::csv_line_write(types::timestep t) {
+bool base_metrics_collector::csv_line_write(const types::timestep& t) {
   std::string line;
   if (csv_line_build(line)) {
     if (!m_cum_only) {

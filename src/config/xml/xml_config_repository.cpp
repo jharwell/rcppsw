@@ -1,7 +1,7 @@
 /**
- * @file xml_config_repository.cpp
+ * \file xml_config_repository.cpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *

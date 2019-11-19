@@ -1,7 +1,7 @@
 /**
- * @file logical_task.hpp
+ * \file logical_task.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -37,10 +37,10 @@ NS_START(rcppsw, ta);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class logical_task
- * @ingroup rcppsw ta
+ * \class logical_task
+ * \ingroup ta
  *
- * @brief Represents the logical concept of a task, which only contains a name
+ * \brief Represents the logical concept of a task, which only contains a name
  * right now.
  */
 class logical_task {
@@ -52,7 +52,7 @@ class logical_task {
   logical_task(const logical_task& other) = default;
 
   /**
-   * @brief Get the name of the task
+   * \brief Get the name of the task
    */
   const std::string& name(void) const { return m_name; }
 

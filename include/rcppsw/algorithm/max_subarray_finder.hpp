@@ -1,7 +1,7 @@
 /**
- * @file max_subarray_finder.hpp
+ * \file max_subarray_finder.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -40,10 +40,10 @@ NS_START(rcppsw, algorithm);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class max_subarray_finder
- * @ingroup rcppsw algorithm
+ * \class max_subarray_finder
+ * \ingroup algorithm
  *
- * @brief Find the maximal subarray using Kadane's algorithm, which is O(n).
+ * \brief Find the maximal subarray using Kadane's algorithm, which is O(n).
  */
 template <typename T>
 class max_subarray_finder {
@@ -51,11 +51,11 @@ class max_subarray_finder {
   explicit max_subarray_finder(const std::vector<T>& arr) : m_arr(arr) {}
 
   /**
-   * @brief Find the maximal subarray.
+   * \brief Find the maximal subarray.
    *
-   * @param res The maximal subarray, to be filled.
+   * \param res The maximal subarray, to be filled.
    *
-   * @return \c OK if successful, \c ERROR otherwise.
+   * \return \c OK if successful, \c ERROR otherwise.
    */
   status_t find(std::vector<int>* const res) {
     FPC_CHECK(ERROR, m_arr.size() > 0);

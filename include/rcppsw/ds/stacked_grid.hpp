@@ -1,7 +1,7 @@
 /**
- * @file stacked_grid.hpp
+ * \file stacked_grid.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -41,10 +41,10 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class stacked_grid
- * @ingroup rcppsw ds
+ * \class stacked_grid
+ * \ingroup ds
  *
- * @brief A sandwich of N 2D grids of the same size (x,y) dimensions, which can
+ * \brief A sandwich of N 2D grids of the same size (x,y) dimensions, which can
  * contain different kinds of objects. The objects in each layer of the grid are
  * stored contiguously, but the grids themselves are not necessarily
  * contiguous. The layers are 0 indexed.
@@ -66,25 +66,25 @@ class stacked_grid {
   virtual ~stacked_grid(void) { rm_layers<kStackSize - 1>(); }
 
   /**
-  * @brief The type of the objects stored in a particular layer.
-  * @tparam Index The index of the layer.
+  * \brief The type of the objects stored in a particular layer.
+  * \tparam Index The index of the layer.
   */
   template <size_t Index>
   using value_type = typename std::tuple_element<Index, TupleTypes>::type;
 
   /**
-   * @brief The type of a particular layer.
-   * @tparam Index The index of the layer.
+   * \brief The type of a particular layer.
+   * \tparam Index The index of the layer.
    */
   template <size_t Index>
   using layer_value_type = rcppsw::ds::overlay_grid2D<value_type<Index>>;
 
   /**
-   * @brief Get a reference to an object at a particular (layer,i,j) location
+   * \brief Get a reference to an object at a particular (layer,i,j) location
    *
-   * @tparam Index The index of the layer.
-   * @param i The x coordinate.
-   * @param j The y coordinate.
+   * \tparam Index The index of the layer.
+   * \param i The x coordinate.
+   * \param j The y coordinate.
    */
   template <size_t Index>
   typename layer_value_type<Index>::value_type& access(size_t i, size_t j) {
@@ -100,10 +100,10 @@ class stacked_grid {
   }
 
   /**
-   * @brief Get a reference to an object at a particular (layer,i,j) location
+   * \brief Get a reference to an object at a particular (layer,i,j) location
    *
-   * @tparam Index The index of the layer.
-   * @param d The discrete coordinate pair.
+   * \tparam Index The index of the layer.
+   * \param d The discrete coordinate pair.
    */
   template <size_t Index>
   typename layer_value_type<Index>::value_type& access(const math::vector2u& d) {
@@ -125,35 +125,35 @@ class stacked_grid {
   }
 
   /**
-   * @see \ref base_overlay_grid2D::xdsize().
+   * \see \ref base_overlay_grid2D::xdsize().
    */
   size_t xdsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xdsize();
   }
 
   /**
-   * @see \ref base_overlay_grid2D::xrsize().
+   * \see \ref base_overlay_grid2D::xrsize().
    */
   double xrsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xrsize();
   }
 
   /**
-   * @see \ref base_overlay_grid2D::ydsize().
+   * \see \ref base_overlay_grid2D::ydsize().
    */
   size_t ydsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->ydsize();
   }
 
   /**
-   * @see \ref base_overlay_grid2D::yrsize().
+   * \see \ref base_overlay_grid2D::yrsize().
    */
   double yrsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->yrsize();
   }
 
   /**
-   * @see \ref base_overlay_grid2D::resolution().
+   * \see \ref base_overlay_grid2D::resolution().
    */
   types::discretize_ratio resolution(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))
@@ -164,7 +164,7 @@ class stacked_grid {
   static size_t constexpr kStackSize = std::tuple_size<TupleTypes>::value;
 
   /**
-   * @brief Add layers when you have at least 2 layers to add. SFINAE is needed
+   * \brief Add layers when you have at least 2 layers to add. SFINAE is needed
    * to prevent negative indices in the degenerate case where the stacked grid
    * only has 1 layer.
    */
@@ -175,7 +175,7 @@ class stacked_grid {
   }
 
   /**
-   * @brief Add layers when you only have 1 layer to add. SFINAE is needed to
+   * \brief Add layers when you only have 1 layer to add. SFINAE is needed to
    * prevent negative indices in the degenerate case where the stacked grid only
    * has 1 layer.
    */
@@ -185,7 +185,7 @@ class stacked_grid {
   }
 
   /**
-   * @brief Add a layer to the stacked grid.
+   * \brief Add a layer to the stacked grid.
    *
    * Note the reversal of indices! Because of the way recursive instantiation
    * works, we can only start at an index > 0, and go DOWN, but the user
@@ -204,7 +204,7 @@ class stacked_grid {
   }
 
   /**
-   * @brief Delete a layer from the stacked grid when there are at least 2
+   * \brief Delete a layer from the stacked grid when there are at least 2
    * layers. Indice reversal is not really necessary here, but doing it for
    * reasons of Principle of Least Surprise.
    */
@@ -215,7 +215,7 @@ class stacked_grid {
   }
 
   /**
-   * @brief Remove a layer from the stacked grid when you only have 1 layer.
+   * \brief Remove a layer from the stacked grid when you only have 1 layer.
    */
   template <size_t Index, RCPPSW_SFINAE_FUNC((Index == 0))>
   void rm_layer(void) {

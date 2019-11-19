@@ -1,7 +1,7 @@
 /**
- * @file execution_metrics.hpp
+ * \file execution_metrics.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -40,10 +40,10 @@ namespace ta = rcppsw::ta;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class execution_metrics
- * @ingroup rcppsw metrics tasks
+ * \class execution_metrics
+ * \ingroup metrics tasks
  *
- * @brief Interface defining metrics that can be collected on tasks as they are
+ * \brief Interface defining metrics that can be collected on tasks as they are
  * executed.
  */
 class execution_metrics : public virtual base_metrics {
@@ -52,43 +52,43 @@ class execution_metrics : public virtual base_metrics {
   ~execution_metrics(void) override = default;
 
   /**
-   * @brief If \c TRUE, then the robot is currently at a task interface for
+   * \brief If \c TRUE, then the robot is currently at a task interface for
    * this task.
    */
   virtual bool task_at_interface(void) const = 0;
 
     /**
-   * @brief This function should return the execution time of the most recent
+   * \brief This function should return the execution time of the most recent
    * execution of this task. Execution time includes interface time.
    */
   virtual types::timestep task_last_exec_time(void) const = 0;
 
   /**
-   * @brief This function should return the interface time of the most recent
+   * \brief This function should return the interface time of the most recent
    * interface time for the task.
    */
   virtual types::timestep task_last_interface_time(uint i) const = 0;
 
   /**
-   * @brief This function should return \c TRUE iff when the task has been
+   * \brief This function should return \c TRUE iff when the task has been
    * completed (not aborted), and only on the timestep on which it has done so.
    */
   virtual bool task_completed(void) const = 0;
 
   /**
-   * @brief This function should return \c TRUE iff the task has been aborted
+   * \brief This function should return \c TRUE iff the task has been aborted
    * (not completed), and only on the timestep on which it has done so.
    */
   virtual bool task_aborted(void) const = 0;
 
   /**
-   * @brief Return the current execution time estimate for a task. Execution
+   * \brief Return the current execution time estimate for a task. Execution
    * estimate should include interface time.
    */
   virtual const ta::time_estimate& task_exec_estimate(void) const = 0;
 
   /**
-   * @brief Return the current interface time estimate for interface i for a
+   * \brief Return the current interface time estimate for interface i for a
    * task.
    */
   virtual const ta::time_estimate& task_interface_estimate(uint i) const = 0;

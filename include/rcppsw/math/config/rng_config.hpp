@@ -1,7 +1,7 @@
 /**
- * @file rng_config.hpp
+ * \file rng_config.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -35,14 +35,14 @@ NS_START(rcppsw, math, config);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct rng_config
- * @ingroup rcppsw config math
+ * \struct rng_config
+ * \ingroup config math
  *
- * @brief Parameters for \ref rng objects.
+ * \brief Parameters for \ref rng objects.
  */
 struct rng_config final : public rcppsw::config::base_config {
   /**
-   * @brief The seed to use. If -1, then the current time should be used to seed
+   * \brief The seed to use. If -1, then the current time should be used to seed
    * RNG.
    */
   int seed{-1};

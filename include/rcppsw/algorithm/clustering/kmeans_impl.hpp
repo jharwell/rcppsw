@@ -1,7 +1,7 @@
 /**
- * @file kmeans_impl.hpp
+ * \file kmeans_impl.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -39,10 +39,10 @@ NS_START(rcppsw, algorithm, clustering, detail);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class kmeans_impl
- * @ingroup rcppsw algorithm clustering
+ * \class kmeans_impl
+ * \ingroup algorithm clustering
  *
- * @brief Parallel clustering using OpenMP using the Nearest Centroid (NC)
+ * \brief Parallel clustering using OpenMP using the Nearest Centroid (NC)
  * membership policy. Suitable for kmeans clustering.
  */
 template <typename T>

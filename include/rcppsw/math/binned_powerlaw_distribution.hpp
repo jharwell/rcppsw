@@ -1,8 +1,8 @@
 /**
- * @file binned_powerlaw_distribution.hpp
- * @ingroup rcppsw math
+ * \file binned_powerlaw_distribution.hpp
+ * \ingroup math
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -37,21 +37,21 @@ NS_START(rcppsw, math);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class binned_powerlaw_distribution
- * @ingroup rcppsw math
+ * \class binned_powerlaw_distribution
+ * \ingroup math
  *
- * @brief A power law distribution (duh) of x^pwr where x is in [lb,
+ * \brief A power law distribution (duh) of x^pwr where x is in [lb,
  * ub], where the outputs are rounded to the nearest power of pwr. For example,
  * instead of sampling and getting 3.78, with pwr=2 you would get 4.
  */
 class binned_powerlaw_distribution : public powerlaw_distribution {
  public:
   /**
-   * @brief Initialize distribution.
+   * \brief Initialize distribution.
    *
-   * @param lb Lower bound for distribution. Assumed to be a multiple of pwr.
-   * @param ub Upper bound for distribution. Assumed to be a multiple of pwr.
-   * @param pwr Power for distribution.
+   * \param lb Lower bound for distribution. Assumed to be a multiple of pwr.
+   * \param ub Upper bound for distribution. Assumed to be a multiple of pwr.
+   * \param pwr Power for distribution.
    */
   binned_powerlaw_distribution(uint lb, uint ub, uint pwr)
       : powerlaw_distribution(lb, ub, pwr) {}

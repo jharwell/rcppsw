@@ -1,7 +1,7 @@
 /**
- * @file discretize_ratio.hpp
+ * \file discretize_ratio.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -35,7 +35,7 @@ NS_START(rcppsw, types);
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief Specifies the ratio of discretized space to real space, and therefore
+ * \brief Specifies the ratio of discretized space to real space, and therefore
  * should always be <= 1.0.
  */
 using discretize_ratio = named_type<double, struct discretize_ratio_tag>;

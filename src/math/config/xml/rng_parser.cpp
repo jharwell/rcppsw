@@ -1,7 +1,7 @@
 /**
- * @file rng_parser.cpp
+ * \file rng_parser.cpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *

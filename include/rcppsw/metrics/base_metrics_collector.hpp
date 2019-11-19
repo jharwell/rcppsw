@@ -1,7 +1,7 @@
 /**
- * @file base_metrics_collector.hpp
+ * \file base_metrics_collector.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -41,10 +41,10 @@ class base_metrics;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class base_metrics_collector
- * @ingroup rcppsw metrics
+ * \class base_metrics_collector
+ * \ingroup metrics
  *
- * @brief Base class that uses the template design pattern to provide hooks for
+ * \brief Base class that uses the template design pattern to provide hooks for
  * derived classes so that the process of writing out metrics is centralized in
  * one place (here).
  *
@@ -54,9 +54,9 @@ class base_metrics;
 class base_metrics_collector {
  public:
   /**
-   * @param ofname Output file name.
-   * @param interval Collection interval.
-   * @param cum_only The metrics to be collected are cumulative only. This means
+   * \param ofname Output file name.
+   * \param interval Collection interval.
+   * \param cum_only The metrics to be collected are cumulative only. This means
    * that (1) no header will be written, (2) the output file will be truncated
    * each time \ref csv_line_build() returns true. Default = \c false;
    */
@@ -67,7 +67,7 @@ class base_metrics_collector {
   virtual ~base_metrics_collector(void) = default;
 
   /**
-   * @brief Reset the metrics completely, as if none have yet been collected.
+   * \brief Reset the metrics completely, as if none have yet been collected.
    *
    * Should be called only on collection start/reset.
    */
@@ -76,84 +76,111 @@ class base_metrics_collector {
   virtual void collect(const rcppsw::metrics::base_metrics& metrics) = 0;
 
   /**
-   * @brief Reset metrics at the end of an interval.
+   * \brief Reset metrics at the end of an interval.
    *
    * Can be called every timestep (and probably should be for consistency as
    * behavior of derived classes possibly changes), and metrics will only be
    * reset after the specified number of timesteps in the interval has elapsed.
   */
   void interval_reset(void);
+
+  /**
+   * \brief Return the current timestep tracked by the collector.
+   */
   types::timestep timestep(void) const { return m_timestep; }
+
+  /**
+   * \brief Increment the timestep referenced by the collector during metric
+   * collection and .csv line building.
+   */
   void timestep_inc(void) { m_timestep.set(m_timestep.v() + 1); }
 
   /**
-   * @brief Write out the gathered metrics.
+   * \brief Write out the gathered metrics.
    *
-   * @param timestep The current timestep.
+   * \param t The current timestep.
    *
-   * @return \c TRUE if a line was written, \c FALSE otherwise.
+   * \return \c TRUE if a line was written, \c FALSE otherwise.
    */
-  bool csv_line_write(types::timestep t);
+  bool csv_line_write(const types::timestep& t);
 
   /**
-   * @brief Finalize metrics and flush files.
+   * \brief Finalize metrics and flush files.
    */
   void finalize(void) { m_ofile.close(); }
 
   /**
-   * @brief Set the interval (# timesteps) for the current collector.
+   * \brief Set the output interval (# timesteps) for the current collector.
+   *
+   * \param interval The new output interval.
    */
   void interval(int interval) { m_interval = interval; }
+
+  /**
+   * \brief Return the current output interval for the current collector.
+   */
   int interval(void) const { return m_interval; }
 
  protected:
   /**
-   * @brief Reset some metrics (possibly).
+   * \brief Reset some metrics (possibly).
    *
    * Can be called at the end of every interval. By default it does nothing.
    */
   virtual void reset_after_interval(void) {}
 
   /**
-   * @brief Reset some metrics (possibly).
+   * \brief Reset some metrics (possibly).
    *
    * Can be called every timestep. By default it does nothing.
    */
   virtual void reset_after_timestep(void) {}
 
   /**
-   * @brief Return a list of additional columns that should be in the emitted
+   * \brief Return a list of additional columns that should be in the emitted
    * .csv file for the collector.
+   *
+   * \return a list of the names of the columns for the .csv.
    */
   virtual std::list<std::string> csv_header_cols(void) const = 0;
 
   /**
-   * @brief Build the next line of metrics
+   * \brief Build the next line of metrics
    *
-   * @param line The current line, to be filled.
+   * \param line The current line, to be filled.
    *
-   * @return \c TRUE if the metrics should be written out, or \c FALSE if
+   * \return \c TRUE if the metrics should be written out, or \c FALSE if
    * not. This allows metrics to be gathered across multiple timesteps, but only
    * written out once an interesting event has occurred.
    */
   virtual bool csv_line_build(std::string& line) = 0;
 
   /**
-   * @brief Return a list of default columns that should be include in (almost)
+   * \brief Return a list of default columns that should be include in (almost)
    * all emitted .csv files for the collector.
+   *
+   * \return A list of the names of the default header columns for the .csv,
+   * which is: [clock].
    */
   std::list<std::string> dflt_csv_header_cols(void) const { return {"clock"}; }
 
   /**
-   * @brief Write out constructed header.
+   * \brief Write out constructed header.
    */
   void csv_header_write(void);
 
+  /**
+   * \brief Return the separator used to separate .csv entries from each other.
+   */
   const std::string& separator(void) const { return m_separator; }
 
   /**
-   * @brief Return a string of the average value of a sum of SOMETHING over an
-   * interval + separator (if the csv entry is not the last one in a line)
+   * \brief Return a string of the average value of a sum of SOMETHING over an
+   * interval (using the value of \ref interval()) + separator (if the csv entry
+   * is not the last one in a line).
+   *
+   * \param sum The count of SOMETHING.
+   * \param last Is this the last column in the .csv row?
    */
   template <class T>
   std::string csv_entry_intavg(const T& sum, bool last = false) const {
@@ -162,9 +189,12 @@ class base_metrics_collector {
   }
 
   /**
-   * @brief Return a string of the average value of a sum of SOMETHING over the
-   * elapsed simulation time so far + separator  (if the csv entry is not the
-   * last one in a line).
+   * \brief Return a string of the average value of a sum of SOMETHING over the
+   * elapsed simulation time so far (using the value of \ref timestep()) +
+   * separator (if the csv entry is not the last one in a line).
+   *
+   * \param sum The count of SOMETHING.
+   * \param last Is this the last column in the .csv row?
    */
   template <class T>
   std::string csv_entry_tsavg(const T& sum, bool last = false) const {
@@ -173,10 +203,14 @@ class base_metrics_collector {
   }
 
   /**
-   * @brief Return a string of the average value of a sum of SOMETHING divided
+   * \brief Return a string of the average value of a sum of SOMETHING divided
    * by a COUNT + separator (if the csv entry is not the last one in a line). If
    * the count is 0, then "0" + separator (if the csv entry is not the last one
-   * in a line) is returned
+   * in a line) is returned.
+   *
+   * \param sum The count of SOMETHING.
+   * \param count The divisor for the SOMETHING.
+   * \param last Is this the last column in the .csv row?
    */
   template <class T, class U>
   std::string csv_entry_domavg(const T& sum,
@@ -190,10 +224,10 @@ class base_metrics_collector {
 
  private:
   /**
-   * @brief Build the header line for a particular collector using \ref
+   * \brief Build the header line for a particular collector using \ref
    * csv_header_cols().
    *
-   * @return The built header.
+   * \return The built header.
    */
   std::string csv_header_build(void) const;
 

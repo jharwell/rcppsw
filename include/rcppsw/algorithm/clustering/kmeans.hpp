@@ -1,7 +1,7 @@
 /**
- * @file kmeans.hpp
+ * \file kmeans.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -43,12 +43,12 @@ NS_START(rcppsw, algorithm, clustering);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class kmeans
- * @ingroup rcppsw algorithm clustering
+ * \class kmeans
+ * \ingroup algorithm clustering
  *
- * @brief Wrapper class for performing kmeans clustering.
+ * \brief Wrapper class for performing kmeans clustering.
  *
- * @tparam T The type of the data that is being clustered. It must support the
+ * \tparam T The type of the data that is being clustered. It must support the
  *           following operations: +=, /=, = .
  */
 template <typename T>
@@ -62,10 +62,10 @@ class kmeans : public er::client<kmeans<T>> {
     detail::policy::NC>::dist_calc_ftype;
 
   /**
-   * @param data_in Vector of data to cluster.
-   * @param impl The method and policy for clustering.
-   * @param k The # of clusters.
-   * @param max_iter Maximum # of iterations to perform.
+   * \param data_in Vector of data to cluster.
+   * \param impl The method and policy for clustering.
+   * \param k The # of clusters.
+   * \param max_iter Maximum # of iterations to perform.
    */
   kmeans(const std::vector<T>& data_in,
          std::unique_ptr<detail::kmeans_impl<T>> impl,
@@ -81,15 +81,14 @@ class kmeans : public er::client<kmeans<T>> {
         m_impl(std::move(impl)) {}
 
   /**
-   * @brief Perform clustering. First the \ref clustering_impl::initialize()
-   * method is called. Then, the clustering algorithm is iterated until one of
-   * the following is true:
+   * \brief Perform clustering. First the clustering_impl::initialize() method
+   * is called. Then, the clustering algorithm is iterated until one of the
+   * following is true:
    *
    * - The maximum # of iterations has been reached.
-   * - \ref cluster_impl::converged() returns \c TRUE (checked after each
-   *   iteration).
+   * - cluster_impl::converged() returns \c TRUE (checked after each iteration).
    *
-   * @return A vector where the index corresponds to the index of the data point
+   * \return A vector where the index corresponds to the index of the data point
    * in the input data, and the value corresponds to the cluster to which the
    * data point belongs.
    */
@@ -136,7 +135,7 @@ class kmeans : public er::client<kmeans<T>> {
    T,
    detail::policy::NC>::cluster_type;
   /**
-   * @brief Method for derived classes to use to initialize centroids in
+   * \brief Method for derived classes to use to initialize centroids in
    * whatever way they choose, and perform first-touch allocation if they want
    * to.
    */

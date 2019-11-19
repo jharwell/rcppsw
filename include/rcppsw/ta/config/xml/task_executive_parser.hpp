@@ -1,7 +1,7 @@
 /**
- * @file task_executive_parser.hpp
+ * \file task_executive_parser.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of FORDYCA.
  *
@@ -40,18 +40,18 @@ NS_START(rcppsw, ta, config, xml);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class task_executive_parser
- * @ingroup rcppsw ta config xml
+ * \class task_executive_parser
+ * \ingroup ta config xml
  *
- * @brief Parses XML configuration for \ref base_task_executive and its derived
- * classed into \ref task_executive_config.
+ * \brief Parses XML configuration for \ref base_executive and its derived
+ * classes into \ref task_executive_config.
  */
 class task_executive_parser final : public rcppsw::config::xml::xml_config_parser {
  public:
   using config_type = task_executive_config;
 
   /**
-   * @brief The root tag that all task task_executive parameters should lie
+   * \brief The root tag that all task task_executive parameters should lie
    * under in the XML tree.
    */
   static constexpr char kXMLRoot[] = "task_executive";

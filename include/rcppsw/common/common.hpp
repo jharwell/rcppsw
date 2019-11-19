@@ -1,8 +1,8 @@
 /**
- * @file common.hpp
- * @ingroup rcppsw common
+ * \file common.hpp
+ * \ingroup common
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -36,14 +36,14 @@
  * Macros
  ******************************************************************************/
 /**
- * @def NS_START(ns)
+ * \def NS_START(ns)
  *
  * Callback macro for recursive macro expansion for nested namespace start
  * pasting. \c ns is the namespace to paste.
  */
 #define NS_START_(ns) namespace ns {
 /**
- * @def NS_END_(ns)
+ * \def NS_END_(ns)
  *
  * Callback macro for recursive macro expansion for nested namespace end
  * pasting. \c ns is the namespace to paste. Note that it is not strictly
@@ -53,7 +53,7 @@
 #define NS_END_(ns) }
 
 /**
- * @def NS_START(...)
+ * \def NS_START(...)
  *
  * Declare a nested namespace, with each successive token in the comma-separated
  * argument list being declared inside the namespace of the previous token.
@@ -61,7 +61,7 @@
 #define NS_START(...) RCSW_XFOR_EACH1(NS_START_, __VA_ARGS__)
 
 /**
- * @def NS_END(...)
+ * \def NS_END(...)
  *
  * Close a previously declared nested namespace. Tokens should be passed to this
  * macro in the reverse order they were declared in (not actually necessary for
@@ -70,7 +70,7 @@
 #define NS_END(...) RCSW_XFOR_EACH1(NS_END_, __VA_ARGS__)
 
 /**
- * @def RCPPSW_DECLDEF_WRAP(Func, member,...)
+ * \def RCPPSW_DECLDEF_WRAP(Func, member,...)
  *
  * Wrap a public function from a member variable (or even another member
  * function that returns an object that contains the function you want to
@@ -88,7 +88,7 @@
   }
 
 /**
- * @def RCPPSW_DECLDEF_OVERRIDE(Func, member,...)
+ * \def RCPPSW_DECLDEF_OVERRIDE_WRAP(Func, member,...)
  *
  * Wrap a public function from a member variable (or even another member
  * function that returns an object that contains the function you want to
@@ -125,7 +125,7 @@
   }
 
 /**
- * @def RCPPSW_WRAP_OVERRIDE_DECL(Ret, Func, ...)
+ * \def RCPPSW_WRAP_OVERRIDE_DECL(Ret, Func, ...)
  *
  * Declare a "simple" overrnide of an inherited function with the __pure_
  * attribute. Should be *NOT* be used if the override is complex to implement
@@ -137,7 +137,7 @@
   Ret Func(void) __VA_ARGS__ override RCSW_PURE
 
 /**
- * @def RCPPSW_WRAP_OVERRIDE_DEF(Ret, Func, ...)
+ * \def RCPPSW_WRAP_OVERRIDE_DEF(Ret, Func, ...)
  *
  * Define a "simple" override of an inherited function with the __pure__
  * attribute in which the corresponding function on the handle is called and the
@@ -150,7 +150,7 @@
   RCSW_PURE RCPPSW_WRAP_DEFP(Class, Func, Handle, NullRet, __VA_ARGS__)
 
 /**
- * @def RCPPSW_SFINAE_FUNC(...)
+ * \def RCPPSW_SFINAE_FUNC(...)
  *
  * Specify the condition to enable a function for SFINAE.
  *
@@ -185,12 +185,14 @@
 
 #elif defined(__clang__)
 
+/* clang-format off */
 #define RCPPSW_WARNING_DISABLE_MISSING_VAR_DECL(...) \
   RCSW_WARNING_DISABLE(-Wmissing-variable-declarations)
 #define RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...) \
   RCSW_WARNING_DISABLE(-Wmissing-prototypes)
 #define RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...) \
   RCSW_WARNING_DISABLE(-Wglobal-constructors)
+/* clang-format on */
 
 #elif defined(__GNUC__)
 

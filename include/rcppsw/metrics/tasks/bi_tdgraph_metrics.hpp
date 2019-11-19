@@ -1,7 +1,7 @@
 /**
- * @file bi_tdgraph_metrics.hpp
+ * \file bi_tdgraph_metrics.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -36,10 +36,10 @@ NS_START(rcppsw, metrics, tasks);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class bi_tdgraph_metrics
- * @ingroup rcppsw metrics tasks
+ * \class bi_tdgraph_metrics
+ * \ingroup metrics tasks
  *
- * @brief Interface defining metrics that can be collected about the current
+ * \brief Interface defining metrics that can be collected about the current
  * task dist of a \ref bi_tdgraph.
  */
 class bi_tdgraph_metrics : public virtual base_metrics {
@@ -48,19 +48,19 @@ class bi_tdgraph_metrics : public virtual base_metrics {
   ~bi_tdgraph_metrics(void) override = default;
 
   /**
-   * @brief Return the depth of the curent task within the task decomposition
+   * \brief Return the depth of the curent task within the task decomposition
    * graph, or -1 if there is no current task.
    */
   virtual int current_task_depth(void) const = 0;
 
   /**
-   * @brief Return a uuid for the current task, for use in calculating overall
+   * \brief Return a uuid for the current task, for use in calculating overall
    * task bi_tdgraph_dist, or -1 if no current task.
    */
   virtual int current_task_id(void) const = 0;
 
   /**
-   * @brief Return a uuid for the TAB that the current task belongs to.
+   * \brief Return a uuid for the TAB that the current task belongs to.
    */
   virtual int current_task_tab(void) const = 0;
 };

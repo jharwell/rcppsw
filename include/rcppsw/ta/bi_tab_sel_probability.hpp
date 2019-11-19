@@ -1,7 +1,7 @@
 /**
- * @file bi_tab_sel_probability.hpp
+ * \file bi_tab_sel_probability.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -46,10 +46,10 @@ struct src_sigmoid_sel_config;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class bi_tab_sel_probability
- * @ingroup rcppsw ta
+ * \class bi_tab_sel_probability
+ * \ingroup ta
  *
- * @brief Calculates the probability that a robot selects a given TAB or its
+ * \brief Calculates the probability that a robot selects a given TAB or its
  * child/parent TAB (depending on whether the most recently finished/aborted
  * task is a child or the root of the current TAB).
  *
@@ -90,13 +90,13 @@ class bi_tab_sel_probability : public er::client<bi_tab_sel_probability>,
   static constexpr char kMethodRandom[] = "random";
 
   /**
-   * @brief Initialize subtask sel probability with default values, based
+   * \brief Initialize subtask sel probability with default values, based
    * on whatever the selected method is.
    */
   explicit bi_tab_sel_probability(const std::string& method);
 
   /**
-   * @brief Initialize subtask sel probability with method + parameter
+   * \brief Initialize subtask sel probability with method + parameter
    * values.
    */
   explicit bi_tab_sel_probability(const config::src_sigmoid_sel_config* config);
@@ -104,7 +104,7 @@ class bi_tab_sel_probability : public er::client<bi_tab_sel_probability>,
   const std::string& method(void) const { return mc_method; }
 
   /**
-   * @brief Calculate the sel probability based on the configured method,
+   * \brief Calculate the sel probability based on the configured method,
    * using the most recent time estimates of tasks in each TAB.
    */
   double operator()(const ds::bi_tab* tab1,
@@ -113,29 +113,29 @@ class bi_tab_sel_probability : public er::client<bi_tab_sel_probability>,
 
  private:
   /**
-   * @brief Random TAB sel, regardless of time estimates.
+   * \brief Random TAB sel, regardless of time estimates.
    */
   double calc_random(math::rng* rng);
 
   /**
-   * @brief Calculate the probability of switching from TAB 1 to TAB 2
+   * \brief Calculate the probability of switching from TAB 1 to TAB 2
    * using the piecewise method described in Harwell2019.
    *
-   * @param bi_tab1 Current TAB.
-   * @param bi_tab2 Other TAB to consider switching to.
+   * \param tab1 Current TAB.
+   * \param tab2 Other TAB to consider switching to.
    *
-   * @return Probability of switching.
+   * \return Probability of switching.
    */
   double calc_harwell2019(const ds::bi_tab& tab1, const ds::bi_tab& tab2);
 
   /**
-   * @brief Calculate the sigmoid activation for a pair of time estimates using
+   * \brief Calculate the sigmoid activation for a pair of time estimates using
    * time estimates.
    *
-   * @param ratio1 Specifies how balanced the exec estimates are in TAB1
-   * @param ratio2 Specifies how balanced the exec estimates are in TAB2.
+   * \param ratio1 Specifies how balanced the exec estimates are in TAB1
+   * \param ratio2 Specifies how balanced the exec estimates are in TAB2.
    *
-   * @return Sigmoid value.
+   * \return Sigmoid value.
    */
   double calc_sigmoid(double ratio1, double ratio2) RCSW_PURE;
 

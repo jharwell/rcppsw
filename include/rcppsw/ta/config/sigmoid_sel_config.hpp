@@ -1,7 +1,7 @@
 /**
- * @file sigmoid_sel_config.hpp
+ * \file sigmoid_sel_config.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -37,8 +37,12 @@ NS_START(rcppsw, ta, config);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct sigmoid_sel_config
- * @ingroup rcppsw config ta
+ * \struct sigmoid_sel_config
+ * \ingroup config ta
+ *
+ * \brief Configuration for sigmoid derived probabilities to choose between
+ * multiple options using one or more methods.
+ *
  */
 struct sigmoid_sel_config final : public rcppsw::config::base_config {
   std::string method{};

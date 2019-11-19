@@ -1,7 +1,7 @@
 /**
- * @file base_metrics.hpp
+ * \file base_metrics.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -35,10 +35,10 @@ NS_START(rcppsw, metrics);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class base_metrics
- * @ingroup rcppsw metrics
+ * \class base_metrics
+ * \ingroup metrics
  *
- * @brief Base class for all collected metrics in RCPPSW.
+ * \brief Base class for all collected metrics in RCPPSW.
  */
 class base_metrics {
  public:
@@ -48,7 +48,7 @@ class base_metrics {
   base_metrics& operator=(const base_metrics&) = default;
 
   /**
-   * @brief Reset gathered metrics to their initial state.
+   * \brief Reset gathered metrics to their initial state.
    */
   virtual void reset_metrics(void) {}
 };

@@ -1,7 +1,7 @@
 /**
- * @file bi_tdgraph_allocator.hpp
+ * \file bi_tdgraph_allocator.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -44,34 +44,34 @@ struct task_alloc_config;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class bi_tdgraph_allocator
- * @ingroup rcppsw ta
+ * \class bi_tdgraph_allocator
+ * \ingroup ta
  *
- * @brief Allocate a task from a \ref bi_tdgraph according to a specified
+ * \brief Allocate a task from a \ref bi_tdgraph according to a specified
  * policy.
  */
 class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
  public:
   /**
-   * @brief Allocate a task by choosing a random vertex within the graph and
+   * \brief Allocate a task by choosing a random vertex within the graph and
    * return it.
    */
   static constexpr char kPolicyRandom[] = "random";
 
   /**
-   * @brief Allocate a task using the eplison-greedy method from Pini2012,
+   * \brief Allocate a task using the eplison-greedy method from Pini2012,
    * Auer2002.
    */
   static constexpr char kPolicyEplisonGreedy[] = "epsilon_greedy";
 
   /**
-   * @brief Allocate a task using a matroid optimization approach (strict
+   * \brief Allocate a task using a matroid optimization approach (strict
    * greedy). No stochasticity is applied.
    */
   static constexpr char kPolicyStrictGreedy[] = "strict_greedy";
 
   /**
-   * @brief Allocate a task using a stochastic neighborhood approach.
+   * \brief Allocate a task using a stochastic neighborhood approach.
    *
    * Take the task with the minimum execution time within a neighborhood,
    * applying stochasticity to the task allocation process to attempt to make it
@@ -82,7 +82,7 @@ class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
   static constexpr char kPolicyStochNBHD1[] = "stoch_nbhd1";
 
   /**
-   * @brief Allocate a task using the UCB1 policy from Auer2002,Pini2012.
+   * \brief Allocate a task using the UCB1 policy from Auer2002,Pini2012.
    */
   static constexpr char kPolicyUCB1[] = "UCB1";
 
@@ -98,10 +98,10 @@ class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {
   bi_tdgraph_allocator& operator=(const bi_tdgraph_allocator&) = delete;
 
   /**
-   * @brief Allocate a task from a bi_tdgraph according to configuration
+   * \brief Allocate a task from a bi_tdgraph according to configuration
    *
-   * @param current_task The most recently executed task (just finished).
-   * @param alloc_count The total # of task allocations so far.
+   * \param current_task The most recently executed task (just finished).
+   * \param alloc_count The total # of task allocations so far.
    */
   polled_task* operator()(const polled_task* current_task,
                           uint alloc_count) const;

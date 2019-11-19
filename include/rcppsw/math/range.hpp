@@ -1,7 +1,7 @@
 /**
- * @file range.hpp
+ * \file range.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -41,10 +41,10 @@ NS_START(rcppsw, math);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class range
- * @ingroup rcppsw math
+ * \class range
+ * \ingroup math
  *
- * @brief Convenience class holding a [min, max] range. Makes comparisons like
+ * \brief Convenience class holding a [min, max] range. Makes comparisons like
  * "is this number in this range" much more intuitive and easy to debug. All
  * ranges must be non-empty sets, meaning that the min must not be equal to the
  * max (if it is an assertion will trigger).
@@ -87,10 +87,10 @@ class range final : public er::client<range<T>> {
   }
 
   /**
-   * @brief Determine if a value is within the range [lb, ub] (boundary points
+   * \brief Determine if a value is within the range [lb, ub] (boundary points
    * included).
    *
-   * @param value The value to test.
+   * \param value The value to test.
    */
   template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
   bool contains(const T& value) const {
@@ -104,7 +104,7 @@ class range final : public er::client<range<T>> {
   }
 
   /**
-   * @brief Determine if one range completely contains another (boundary points
+   * \brief Determine if one range completely contains another (boundary points
    * are included with both ranges).
    */
   bool contains(const range<T>& other) const {
@@ -112,7 +112,7 @@ class range final : public er::client<range<T>> {
   }
 
   /**
-   * @brief Determine if one range overlaps with another.
+   * \brief Determine if one range overlaps with another.
    *
    * Overlap is a commutative calculation (i.e. overlap(A,B) <-> overlap(B,A)).
    *
@@ -127,10 +127,10 @@ class range final : public er::client<range<T>> {
   }
 
   /**
-   * @brief Wrap the specified value into the range [min, max] using wrap around
+   * \brief Wrap the specified value into the range [min, max] using wrap around
    * addition/subtraction.
    *
-   * @return The wrapped value.
+   * \return The wrapped value.
    */
   RCSW_PURE T wrap_value(T value) const RCSW_CHECK_RET {
     while (value > m_ub) {
@@ -144,7 +144,7 @@ class range final : public er::client<range<T>> {
   T center(void) const { return (m_lb + m_ub) / 2.0; }
 
   /**
-   * @brief Return a string representation of the range in the form of [lb,ub]
+   * \brief Return a string representation of the range in the form of [lb,ub]
    */
   std::string to_str(void) const {
     return "[" + std::to_string(m_lb) + "-" + std::to_string(m_ub) + "]";
@@ -155,15 +155,15 @@ class range final : public er::client<range<T>> {
     return stream;
   }
   /**
-   * @brief Translate the current range to the specified value, returning a new
+   * \brief Translate the current range to the specified value, returning a new
    * range centered at that value.
    *
-   * @return The new translated range.
+   * \return The new translated range.
    */
   range translate(const T& value) { return range(m_lb + value, m_ub + value); }
 
   /**
-   * @brief For parsing a range from a string in the form of <lb>:<ub>
+   * \brief For parsing a range from a string in the form of \c "LB:UB".
    */
   friend std::istream& operator>>(std::istream& is, range& r) {
     T values[2] = {T(), T()};
@@ -180,16 +180,31 @@ class range final : public er::client<range<T>> {
   /* clang-format on */
 };
 
+/**
+ * \brief Specialization of \ref range for signed integers.
+ */
 using rangei = range<int>;
+
+/**
+ * \brief Specialization of \ref range for doubles.
+ */
 using ranged = range<double>;
+
+/**
+ * \brief Specialization of \ref range for floats.
+ */
 using rangef = range<float>;
+
+/**
+ * \brief Specialization of \ref range for unsigned integers.
+ */
 using rangeu = range<uint>;
 
 /*******************************************************************************
  * Macros
  ******************************************************************************/
 /**
- * @brief Convert range{i,u} -> ranged directly, without applying any
+ * \brief Convert range{i,u} -> ranged directly, without applying any
  * scaling.
  */
 #define RCPPSW_MATH_RANGE_DIRECT_CONV2D(prefix)                           \
@@ -198,7 +213,7 @@ using rangeu = range<uint>;
   }
 
 /**
- * @brief Convert range{i,u} -> ranged, applying a multiplicative scaling
+ * \brief Convert range{i,u} -> ranged, applying a multiplicative scaling
  * factor.
  */
 #define RCPPSW_MATH_RANGE_SCALED_CONV2D(prefix)                         \
@@ -208,7 +223,7 @@ using rangeu = range<uint>;
   }
 
 /**
- * @brief Convert ranged -> rangeu, applying a divisive scaling factor.
+ * \brief Convert ranged -> rangeu, applying a divisive scaling factor.
  */
 #define RCPPSW_MATH_RANGE_CONV2U(prefix)                                \
   static inline rangeu prefix##range2urange(const range##prefix& other, \

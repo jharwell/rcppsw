@@ -1,7 +1,7 @@
 /**
- * @file forkable.hpp
+ * \file forkable.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -42,10 +42,10 @@ NS_START(rcppsw, multiprocess);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class forkable
- * @ingroup rcppsw multiprocess
+ * \class forkable
+ * \ingroup multiprocess
  *
- * @brief Class derived from hear will be capable of being fork()ed and having
+ * \brief Class derived from hear will be capable of being fork()ed and having
  * each new process jump into the main loop defined for the class.
  */
 class forkable {
@@ -55,39 +55,39 @@ class forkable {
   pid_t pid(void) { return m_pid; }
 
   /**
-   * @brief Start a process.
+   * \brief Start a process.
    *
-   * @param core The core to bind the process (and any threads it might spawn)
+   * \param core The core to bind the process (and any threads it might spawn)
    * to. By default, no binding.
    *
-   * @return PID of child process in parent.
+   * \return PID of child process in parent.
    */
   pid_t start(int core = -1);
 
   /**
-   * @brief Start a process in a new directory.
+   * \brief Start a process in a new directory.
    *
-   * @param core The core to bind the process (and any threads it might spawn)
+   * \param core The core to bind the process (and any threads it might spawn)
    *             to. By default, no binding.
-   * @param new_wd The new working directory to start the process in.
+   * \param new_wd The new working directory to start the process in.
    *
-   * @return PID of child process in parent.
+   * \return PID of child process in parent.
    */
   pid_t start(const std::string& new_wd, int core = -1);
 
   /**
-   * @brief Signal a process that it should terminate, from outside the process.
+   * \brief Signal a process that it should terminate, from outside the process.
    */
   virtual void term(void) { m_proc_run = false; }
 
   /**
-   * @brief Entry point for the new process.
+   * \brief Entry point for the new process.
    */
   virtual void proc_main(void) = 0;
 
  protected:
   /**
-   * @brief Check if a process object has been told to terminate elsewhere.
+   * \brief Check if a process object has been told to terminate elsewhere.
    */
   bool terminated(void) { return !m_proc_run; }
 

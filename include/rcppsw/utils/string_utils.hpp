@@ -1,7 +1,7 @@
 /**
- * @file string_utils.hpp
+ * \file string_utils.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -39,14 +39,14 @@ NS_START(rcppsw, utils);
  * Non-Member Functions
  ******************************************************************************/
 /**
- * @brief Parse values from a delimited string stream into a set of tokens.
+ * \brief Parse values from a delimited string stream into a set of tokens.
  *
- * @param is The input stream.
- * @param n_fields The # of fields that should exist in the stream.
- * @param buf The buffer to put the tokens into.
- * @param delim The delimiter separating the tokens (\\n by default).
+ * \param is The input stream.
+ * \param n_fields The # of fields that should exist in the stream.
+ * \param buf The buffer to put the tokens into.
+ * \param delim The delimiter separating the tokens (\\n by default).
  *
- * @return \c TRUE if n_fields tokens were parsed from the stream, and \c FALSE
+ * \return \c TRUE if n_fields tokens were parsed from the stream, and \c FALSE
  * otherwise.
  */
 template <typename T>

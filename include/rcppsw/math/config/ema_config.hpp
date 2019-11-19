@@ -1,7 +1,7 @@
 /**
- * @file ema_config.hpp
+ * \file ema_config.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -35,10 +35,10 @@ NS_START(rcppsw, math, config);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct ema_config
- * @ingroup rcppsw config math
+ * \struct ema_config
+ * \ingroup config math
  *
- * @brief Parameters for \ref ema objects.
+ * \brief Parameters for \ref ema objects.
  */
 struct ema_config final : public rcppsw::config::base_config {
   double alpha{0.0};

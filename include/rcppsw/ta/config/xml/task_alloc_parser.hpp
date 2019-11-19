@@ -1,7 +1,7 @@
 /**
- * @file task_alloc_parser.hpp
+ * \file task_alloc_parser.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -45,10 +45,10 @@ NS_START(rcppsw, ta, config, xml);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class task_alloc_parser
- * @ingroup rcppsw ta config xml
+ * \class task_alloc_parser
+ * \ingroup ta config xml
  *
- * @brief Parses XML configuration used for task allocation into \ref
+ * \brief Parses XML configuration used for task allocation into \ref
  * task_alloc_config.
  */
 class task_alloc_parser final : public rcppsw::config::xml::xml_config_parser {
@@ -56,7 +56,7 @@ class task_alloc_parser final : public rcppsw::config::xml::xml_config_parser {
   using config_type = task_alloc_config;
 
   /**
-   * @brief The root tag that all task allocation XML configuration should lie
+   * \brief The root tag that all task allocation XML configuration should lie
    * under in the XML tree.
    */
   static constexpr char kXMLRoot[] = "task_alloc";

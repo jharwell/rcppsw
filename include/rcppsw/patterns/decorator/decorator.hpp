@@ -1,7 +1,7 @@
 /**
- * @file decorator.hpp
+ * \file decorator.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -37,7 +37,7 @@ NS_START(rcppsw, patterns, decorator);
  * Macros
  ******************************************************************************/
 /**
- * @def RCPPSW_DECORATE_FUNC(Func)
+ * \def RCPPSW_DECORATE_FUNC(Func)
  *
  * Wraps the declaration/implementation of the decoratee (non-pointer version).
  *
@@ -48,7 +48,7 @@ NS_START(rcppsw, patterns, decorator);
                                                             __VA_ARGS__)
 
 /**
- * @def RCPPSW_DECORATE_FUNC_TEMPLATE(Type, Func)
+ * \def RCPPSW_DECORATE_FUNC_TEMPLATE(Type, Func)
  *
  * Wraps the declaration/implementation of the decoratee (non-pointer
  * version). For decoratee types that are themselves templated types.
@@ -64,12 +64,12 @@ NS_START(rcppsw, patterns, decorator);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class decorator
- * @ingroup rcppsw patterns decorator
+ * \class decorator
+ * \ingroup patterns decorator
  *
- * @brief The base class for the object decorator design pattern.
+ * \brief The base class for the object decorator design pattern.
  *
- * @tparam TDecoratee The type of the decorated object.
+ * \tparam TDecoratee The type of the decorated object.
  */
 template <class TDecoratee>
 class decorator {
@@ -82,18 +82,18 @@ class decorator {
   decorator& operator=(const decorator&) = default;
 
   /**
-   * @brief Get a reference to the decorated type.
+   * \brief Get a reference to the decorated type.
    *
-   * @return The reference.
+   * \return The reference.
    */
   TDecoratee& decoratee(void) { return m_decoratee; }
   const TDecoratee& decoratee(void) const { return m_decoratee; }
 
   /**
-   * @brief Replace the current instance of the decorated type with a new one
+   * \brief Replace the current instance of the decorated type with a new one
    * constructed from the passed arguments.
    *
-   * @param args The arguments to a decoratee constructor.
+   * \param args The arguments to a decoratee constructor.
    */
   template <typename... TArgs>
   void redecorate(TArgs&&... args) {
@@ -101,10 +101,10 @@ class decorator {
   }
 
   /**
-   * @brief Replace the current decoratee instance with another existing
+   * \brief Replace the current decoratee instance with another existing
    * instance.
    *
-   * @param d The new decoratee.
+   * \param d The new decoratee.
    */
   void change_decoratee(const TDecoratee& d) { m_decoratee = d; }
 
@@ -113,12 +113,12 @@ class decorator {
 };
 
 /**
- * @class ptr_decorator
- * @ingroup rcppsw patterns decorator
+ * \class ptr_decorator
+ * \ingroup patterns decorator
  *
- * @brief The base class for the ptr-to-object decorator design pattern.
+ * \brief The base class for the ptr-to-object decorator design pattern.
  *
- * @tparam TDecoratee The type of the decorated object.
+ * \tparam TDecoratee The type of the decorated object.
  */
 template <class TDecoratee>
 class ptr_decorator {
@@ -129,10 +129,10 @@ class ptr_decorator {
   virtual ~ptr_decorator(void) {}
 
   /**
-   * @brief Replace the current instance of the decorated type with a new one
+   * \brief Replace the current instance of the decorated type with a new one
    * constructed from the passed arguments.
    *
-   * @param args The arguments to a decoratee constructor.
+   * \param args The arguments to a decoratee constructor.
    */
   template <typename... Args>
   void redecorate(Args&&... args) {
@@ -141,17 +141,17 @@ class ptr_decorator {
   }
 
   /**
-   * @brief Replace the current decoratee instance with another existing
+   * \brief Replace the current decoratee instance with another existing
    * instance.
    *
-   * @param d The new decoratee.
+   * \param d The new decoratee.
    */
   void change_decoratee(TDecoratee * const d) { m_decoratee.reset(d); }
 
   /**
-   * @brief Get a reference to the decorated type.
+   * \brief Get a reference to the decorated type.
    *
-   * @return The reference.
+   * \return The reference.
    */
   TDecoratee* decoratee(void) const { return m_decoratee.get(); }
 

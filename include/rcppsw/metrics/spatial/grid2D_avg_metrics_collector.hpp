@@ -1,7 +1,7 @@
 /**
- * @file grid2D_avg_metrics_collector.hpp
+ * \file grid2D_avg_metrics_collector.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -39,22 +39,18 @@ NS_START(rcppsw, metrics, spatial);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class grid2D_avg_metrics_collector
- * @ingroup rcppsw metrics spatial
+ * \class grid2D_avg_metrics_collector
+ * \ingroup metrics spatial
  *
- * @brief Base class for collectors using a 2D grid to fill with counts of
+ * \brief Base class for collectors using a 2D grid to fill with counts of
  * SOMETHING, to be averaged over the entire simulation.
- *
- * This class forces derived classes to implement the \ref collect() function,
- * because implementing it here will cause excessive use of dynamic_cast, which
- * will slow things down a LOT at runtime.
  */
 class grid2D_avg_metrics_collector : public metrics::base_metrics_collector {
  public:
   /**
-   * @param ofname The output file name.
-   * @param interval Collection interval.
-   * @param dims Dimensions of grid.
+   * \param ofname The output file name.
+   * \param interval Collection interval.
+   * \param dims Dimensions of grid.
    */
   grid2D_avg_metrics_collector(const std::string& ofname,
                                uint interval,

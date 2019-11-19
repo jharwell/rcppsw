@@ -1,7 +1,7 @@
 /**
- * @file sigmoid.hpp
+ * \file sigmoid.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -37,10 +37,10 @@ NS_START(rcppsw, math);
  ******************************************************************************/
 
 /**
- * @class sigmoid
- * @ingroup rcppsw math
+ * \class sigmoid
+ * \ingroup math
  *
- * @brief Encapsulates base aspects common to all sigmoid functions; does not
+ * \brief Encapsulates base aspects common to all sigmoid functions; does not
  * calculate anything itself, as derived sigmoids each have different input
  * parameter requirements to calculate the value of the function at a point in
  * space.
@@ -51,20 +51,20 @@ class sigmoid : public expression<double> {
   sigmoid(void) = default;
 
   /**
-   * @brief Construct the sigmoid using parameters.
+   * \brief Construct the sigmoid using parameters.
    */
   explicit sigmoid(const config::sigmoid_config* const config)
       : sigmoid{config->reactivity, config->offset, config->gamma} {}
 
   /**
-   * @brief Construct the sigmoid by passing each parameter explicitly. Note
+   * \brief Construct the sigmoid by passing each parameter explicitly. Note
    * that they are all of the same type, and therefore ordering is important.
    */
   sigmoid(double reactivity, double offset, double gamma)
       : m_reactivity(reactivity), m_offset(offset), m_gamma(gamma) {}
 
   /**
-   * @brief Initialize the sigmoid after construction. Needed if the sigmoid is
+   * \brief Initialize the sigmoid after construction. Needed if the sigmoid is
    * just one of many functions a class may use during its internal operations,
    * and the selection must be performed after construction of the enclosing class.
    */

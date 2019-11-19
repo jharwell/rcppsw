@@ -1,7 +1,7 @@
 /**
- * @file line_parser.hpp
+ * \file line_parser.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -38,10 +38,10 @@ NS_START(rcppsw, utils);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class line_parser
- * @ingroup rcppsw utils
+ * \class line_parser
+ * \ingroup utils
  *
- * @brief Parses a single line into a vector of tokens broken on the specified
+ * \brief Parses a single line into a vector of tokens broken on the specified
  * delimiter.
  */
 class line_parser {
@@ -49,7 +49,7 @@ class line_parser {
   explicit line_parser(char delim) : m_delim(delim) {}
 
   /**
-   * @brief Parse a line into a vector of tokens, split on delimiter.
+   * \brief Parse a line into a vector of tokens, split on delimiter.
    */
   std::vector<std::string> parse(const std::string& line);
 

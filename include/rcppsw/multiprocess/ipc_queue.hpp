@@ -1,7 +1,7 @@
 /**
- * @file ipc_queue.hpp
+ * \file ipc_queue.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -40,10 +40,10 @@ NS_START(rcppsw, multiprocess);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class ipc_queue
- * @ingroup rcppsw interprocess
+ * \class ipc_queue
+ * \ingroup interprocess
  *
- * @brief Interprocess synchronized queue (like \ref mt_queue, but for
+ * \brief Interprocess synchronized queue (like \ref mt_queue, but for
  * processes).
  */
 template <class T>
@@ -56,10 +56,10 @@ class ipc_queue {
       : m_queue(alloc), m_io_mutex(), m_wait_condition() {}
 
   /**
-   * @brief Push an element onto the queue, notifying at most 1 process waiting
+   * \brief Push an element onto the queue, notifying at most 1 process waiting
    * on the queue.
    *
-   * @param element The element to add.
+   * \param element The element to add.
    */
   void push(T element) {
     bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
@@ -67,12 +67,12 @@ class ipc_queue {
     m_wait_condition.notify_one();
   }
   /**
-   * @brief Determine if the queue is current empty or not. This function
+   * \brief Determine if the queue is current empty or not. This function
    * performs no locking, and even if it did, the result would be immediately
    * out of date, so don't depend on this value among multiple processes without
    * additional synchronization.
    *
-   * @return \c TRUE if the condition is met, \c FALSE otherwise.
+   * \return \c TRUE if the condition is met, \c FALSE otherwise.
    */
   bool is_empty() const {
     bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
@@ -80,9 +80,9 @@ class ipc_queue {
   }
 
   /**
-   * @brief Get the front element in the queue.
+   * \brief Get the front element in the queue.
    *
-   * @return The front element.
+   * \return The front element.
    */
   T pop(void) {
     bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
@@ -94,11 +94,11 @@ class ipc_queue {
   }
 
   /**
-   * @brief Get the front element in the queue if it exists.
+   * \brief Get the front element in the queue if it exists.
    *
-   * @param element To be filled with the front item in the queue if it exists.
+   * \param element To be filled with the front item in the queue if it exists.
    *
-   * @return \c TRUE if the front element was removed, \c FALSE otherwise.
+   * \return \c TRUE if the front element was removed, \c FALSE otherwise.
    */
   bool pop_try(T* const element) {
     bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
@@ -114,10 +114,10 @@ class ipc_queue {
   }
 
   /**
-   * @brief Get the front element in the queue, waiting indefinitely if the
+   * \brief Get the front element in the queue, waiting indefinitely if the
    * queue is currently empty.
    *
-   * @param element To be filled with the front item in the queue.
+   * \param element To be filled with the front item in the queue.
    */
   void pop_wait(T* const element) {
     bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
@@ -131,13 +131,13 @@ class ipc_queue {
   }
 
   /**
-   * @brief Get the front element in the queue, waiting a set # of seconds
+   * \brief Get the front element in the queue, waiting a set # of seconds
    * before timing out if the queue is currently empty.
    *
-   * @param element To be filled with the front item in the queue.
-   * @param to_sec # of seconds for timeout.
+   * \param element To be filled with the front item in the queue.
+   * \param to_sec # of seconds for timeout.
    *
-   * @return \c TRUE if an item was removed from the queue, \c FALSE otherwise.
+   * \return \c TRUE if an item was removed from the queue, \c FALSE otherwise.
    */
   bool pop_timed_wait(T* const element, int to_sec) {
     bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
@@ -153,7 +153,7 @@ class ipc_queue {
   } /* pop_timed_wait() */
 
   /**
-   * @brief Empty the queue.
+   * \brief Empty the queue.
    */
   void clear(void) {
     bip::scoped_lock<bip::interprocess_mutex> lock(m_io_mutex);
@@ -161,12 +161,12 @@ class ipc_queue {
   }
 
   /**
-   * @brief Get the current # of elements in the queue. This function performs
+   * \brief Get the current # of elements in the queue. This function performs
    * no locking, and even if it did, the result would be immediately out of
    * date, so don't depend on this value among multiple processes without
    * additional synchronization.
    *
-   * @return The current # elements in the queue.
+   * \return The current # elements in the queue.
    */
   size_t size() const { return m_queue.size(); }
 

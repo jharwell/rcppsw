@@ -1,7 +1,7 @@
 /**
- * @file pimpl.hpp
+ * \file pimpl.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -38,10 +38,10 @@ NS_START(rcppsw, patterns, pimpl);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class pimpl
- * @ingroup rcppsw pimpl
+ * \class pimpl
+ * \ingroup pimpl
  *
- * @brief Super-simple templated implementation of the PIMPL idiom. Does not
+ * \brief Super-simple templated implementation of the PIMPL idiom. Does not
  * exist in boost, and the boost candidate I found had subtle memory issues.
  */
 template<typename TImpl>

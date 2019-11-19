@@ -1,7 +1,7 @@
 /**
- * @file epsilon_greedy_allocator.hpp
+ * \file epsilon_greedy_allocator.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -41,11 +41,11 @@ class polled_task;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class epsilon_greedy_allocator
- * @ingroup rcppsw ta
+ * \class epsilon_greedy_allocator
+ * \ingroup ta
  *
- * @brief Allocates a task from a given set of a tasks, using a randomized
- * $\epsilon$ based method with either logarithmically or linearly bounded
+ * \brief Allocates a task from a given set of a tasks, using a randomized
+ * \f$\epsilon\f$ based method with either logarithmically or linearly bounded
  * regret.
  *
  * From Auer2002, Pini2012
@@ -73,10 +73,10 @@ class epsilon_greedy_allocator : er::client<epsilon_greedy_allocator> {
       const epsilon_greedy_allocator& other) = delete;
 
   /**
-   * @brief Perform task allocation.
+   * \brief Perform task allocation.
    *
-   * @param tasks The current set of tasks.
-   * @param alloc_count The total number of allocations so far.
+   * \param tasks The current set of tasks.
+   * \param alloc_count The total number of allocations so far.
    */
   polled_task* operator()(const std::vector<polled_task*>& tasks,
                           uint alloc_count) const;

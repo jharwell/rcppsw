@@ -1,7 +1,7 @@
 /**
- * @file base_fsm.hpp
+ * \file base_fsm.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -49,10 +49,10 @@ NS_START(rcppsw, patterns, fsm);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class base_fsm
- * @ingroup rcppsw patterns fsm
+ * \class base_fsm
+ * \ingroup patterns fsm
  *
- * @brief Implements a software-based state machine.
+ * \brief Implements a software-based state machine.
  */
 class base_fsm : public er::client<base_fsm> {
  public:
@@ -64,17 +64,17 @@ class base_fsm : public er::client<base_fsm> {
   base_fsm& operator=(const base_fsm& other) = delete;
 
   /**
-   * @brief Get the current state of the state machine.
+   * \brief Get the current state of the state machine.
    */
   uint8_t current_state(void) const { return m_current_state; }
 
   /**
-   * @brief Get the maximum number of states for the state machine.
+   * \brief Get the maximum number of states for the state machine.
    */
   uint8_t max_states(void) const { return mc_max_states; }
 
   /**
-   * @brief Get the previous state the the state machine was in that is
+   * \brief Get the previous state the the state machine was in that is
    * \a different than the current one.
    *
    * If a state machine has been in state \c A for the last 3 timesteps, and
@@ -84,7 +84,7 @@ class base_fsm : public er::client<base_fsm> {
   uint8_t previous_state(void) const { return m_previous_state; }
 
   /**
-   * @brief Get the state the the state machine was in the last time the state
+   * \brief Get the state the the state machine was in the last time the state
    * machine was run.
    *
    * If a state machine has been in state \c A for the last 3 timesteps, and
@@ -94,13 +94,13 @@ class base_fsm : public er::client<base_fsm> {
   uint8_t last_state(void) const { return m_last_state; }
 
   /**
-   * @brief Initialize/reset the state machine.
+   * \brief Initialize/reset the state machine.
    */
   virtual void init(void);
 
  protected:
   /**
-   * @brief Get the data associated with an event injected into the state machine.
+   * \brief Get the data associated with an event injected into the state machine.
    */
   const event_data* event_data_get(void) const { return m_event_data.get(); }
   event_data* event_data_get(void) { return m_event_data.get(); }
@@ -109,13 +109,13 @@ class base_fsm : public er::client<base_fsm> {
   bool has_generated_event(void) { return m_event_generated; }
 
   /**
-   * @brief Generates an external event. Called once per external event
+   * \brief Generates an external event. Called once per external event
    * to start the state machine executing. The data is passed through the event
    * chain without modification. The FSM owns the event data--states should try
    * to delete it.
    *
-   * @param new_state The state machine state to transition to.
-   * @param data The event data sent to the state.
+   * \param new_state The state machine state to transition to.
+   * \param data The event data sent to the state.
    */
   virtual void external_event(uint8_t new_state,
                       std::unique_ptr<event_data> data);
@@ -124,14 +124,14 @@ class base_fsm : public er::client<base_fsm> {
   }
 
   /**
-   * @brief Generates an internal event. These events are generated while
+   * \brief Generates an internal event. These events are generated while
    * executing
    * within a state machine state. Internal states can pass their own data to
    * other states without worrying about deleting the existing data--the FSM
    * owns it and will handle it.
    *
-   * @param new_state The state machine state to transition to.
-   * @param data The event data sent to the state.
+   * \param new_state The state machine state to transition to.
+   * \param data The event data sent to the state.
    */
   void internal_event(uint8_t new_state, std::unique_ptr<event_data> data);
   void internal_event(uint8_t new_state) {
@@ -139,7 +139,7 @@ class base_fsm : public er::client<base_fsm> {
   }
 
   /*
-   * @brief State machine engine that executes the external event and,
+   * \brief State machine engine that executes the external event and,
    * optionally, all internal events generated during state execution.
    */
   void state_engine(void);
@@ -150,37 +150,37 @@ class base_fsm : public er::client<base_fsm> {
   void update_state(uint8_t new_state);
 
   /**
-   * @brief Gets the state map as defined in the derived class.
+   * \brief Gets the state map as defined in the derived class.
    *
    * A state machine only needs to return a state map using either
    * \ref state_map() or \ref state_map_ex() but not both.
    *
-   * @return The row corresponding to the passed in state in the state map.
+   * \return The row corresponding to the passed in state in the state map.
    */
   virtual const state_map_row* state_map(RCSW_UNUSED size_t) {
     return nullptr;
   }
 
   /**
-   * @brief Gets the extended state map as defined in the derived class.
+   * \brief Gets the extended state map as defined in the derived class.
    *
    * A state machine only needs to return a state map using either
    * \ref state_map() or \ref state_map_ex() but not both.
    *
-   * @return The row corresponding to the passed in state in the state map.
+   * \return The row corresponding to the passed in state in the state map.
    */
   virtual const state_map_ex_row* state_map_ex(RCSW_UNUSED size_t) {
     return nullptr;
   }
 
   /**
-   * @brief Execute one step of the state machine using the simple state
+   * \brief Execute one step of the state machine using the simple state
    * definitions.
    */
   virtual void state_engine_step(const state_map_row* c_row);
 
   /**
-   * @brief Execute one step of the state machine using the extended state
+   * \brief Execute one step of the state machine using the extended state
    * definitions.
    */
   virtual void state_engine_step(const state_map_ex_row* c_row_ex);
@@ -208,14 +208,14 @@ NS_END(fsm, patterns, rcppsw);
  * State Macros With Data
  ******************************************************************************/
 /**
- * @def FSM_STATE_DECLARE(FSM, state_name, event_data)
+ * \def FSM_STATE_DECLARE(FSM, state_name, event_data)
  *
  * Declare a state \c state_name within the class definition of \c FSM, which
  * requires the input signal of \c event_data each time the state is executed.
  *
- * Should always return \ref event_signal::kHANDLED for \ref simple_fsm (anything
- * other than that will halt the state machine/crash the program). Can return
- * other signals if the state is part of a \ref hfsm.
+ * Should always return \ref event_signal::ekHANDLED for \ref simple_fsm
+ * (anything other than that will halt the state machine/crash the program). Can
+ * return other signals if the state is part of a \ref hfsm.
  */
 #define FSM_STATE_DECLARE(FSM, state_name, event_data)      \
   int ST_##state_name(const event_data*);                   \
@@ -224,7 +224,7 @@ NS_END(fsm, patterns, rcppsw);
   state_name{}
 
 /**
- * @def FSM_STATE_DEFINE(FSM, state_name, event_data)
+ * \def FSM_STATE_DEFINE(FSM, state_name, event_data)
  *
  * Define a state \c state_name for a class \c FSM, which requires the input
  * signal of \c event_data each time the state is executed.
@@ -233,7 +233,7 @@ NS_END(fsm, patterns, rcppsw);
   int FSM::ST_##state_name(const event_data)
 
 /**
- * @def FSM_GUARD_DECLARE(FSM, guard_name, event_data)
+ * \def FSM_GUARD_DECLARE(FSM, guard_name, event_data)
  *
  * Declare a guard \c guard_name within the class definition of \c FSM, which
  * requires the input signal of \c event_data each time the guard is executed.
@@ -250,7 +250,7 @@ NS_END(fsm, patterns, rcppsw);
   guard_name{}
 
 /**
- * @def FSM_GUARD_DEFINE(FSM, guard_name, event_data) Define a guard
+ * \def FSM_GUARD_DEFINE(FSM, guard_name, event_data) Define a guard
  * \c guard_name for a class  \c FSM, which requires the input
  * signal of \c event_data each time the guard is executed.
  */
@@ -259,7 +259,7 @@ NS_END(fsm, patterns, rcppsw);
 
 
 /**
- * @def FSM_ENTRY_DECLARE(FSM, entry_name, event_data)
+ * \def FSM_ENTRY_DECLARE(FSM, entry_name, event_data)
  *
  * Declare an entry \c entry_name within the class definition of \c FSM, which
  * requires the input signal of \c event_data each time the entry is executed.
@@ -276,7 +276,7 @@ NS_END(fsm, patterns, rcppsw);
   entry_name{}
 
 /**
- * @def FSM_ENTRY_DEFINE(FSM, entry_name, event_data)
+ * \def FSM_ENTRY_DEFINE(FSM, entry_name, event_data)
  *
  * Declare an entry \c entry_name for a class \c FSM, which requires the input
  * signal of \c event_data each time the entry is executed.
@@ -285,7 +285,7 @@ NS_END(fsm, patterns, rcppsw);
   void FSM::EN_##entry_name(const event_data)
 
 /**
- * @def FSM_EXIT_DECLARE(FSM, exit_name)
+ * \def FSM_EXIT_DECLARE(FSM, exit_name)
  *
  * Declare an exit \c exit_name within the class definition of \c FSM.
  *
@@ -298,7 +298,7 @@ NS_END(fsm, patterns, rcppsw);
   exit_name{}
 
 /**
- * @def FSM_EXIT_DEFINE(FSM, exit_name)
+ * \def FSM_EXIT_DEFINE(FSM, exit_name)
  *
  * Define an exit \c exit_name within the a class \c FSM.
  */
@@ -308,7 +308,7 @@ NS_END(fsm, patterns, rcppsw);
 * State Macros Without Data
 ******************************************************************************/
 /**
- * @def FSM_STATE_DECLARE_ND(FSM, state_name)
+ * \def FSM_STATE_DECLARE_ND(FSM, state_name)
  *
  * Same as \ref FSM_STATE_DECLARE(), but without any input data.
  */
@@ -318,14 +318,14 @@ NS_END(fsm, patterns, rcppsw);
   state_name{}
 
 /**
- * @def FSM_STATE_DEFINE_ND(FSM, state_name)
+ * \def FSM_STATE_DEFINE_ND(FSM, state_name)
  *
  * Same as \ref FSM_STATE_DEFINE(), but without any input data.
  */
 #define FSM_STATE_DEFINE_ND(FSM, state_name) int FSM::ST_##state_name(void)
 
 /**
- * @def FSM_GUARD_DECLARE_ND(FSM, guard_name)
+ * \def FSM_GUARD_DECLARE_ND(FSM, guard_name)
  *
  * Same as \ref FSM_GUARD_DECLARE(), but without any input data.
  */
@@ -336,14 +336,14 @@ NS_END(fsm, patterns, rcppsw);
   guard_name{}
 
 /**
- * @def FSM_GUARD_DEFINE_ND(FSM, guard_name)
+ * \def FSM_GUARD_DEFINE_ND(FSM, guard_name)
  *
  * Same as \ref FSM_GUARD_DEFINE(), but without any input data.
  */
 #define FSM_GUARD_DEFINE_ND(FSM, guard_name) bool FSM::GD_##guard_name(void)
 
 /**
- * @def FSM_ENTRY_DECLARE_ND(FSM, entry_name)
+ * \def FSM_ENTRY_DECLARE_ND(FSM, entry_name)
  *
  * Same as \ref FSM_ENTRY_DECLARE(), but without any input data.
  */
@@ -353,7 +353,7 @@ NS_END(fsm, patterns, rcppsw);
   entry_name{}
 
 /**
- * @def FSM_ENTRY_DEFINE_ND(FSM, entry_name) Same as \ref FSM_ENTRY_DEFINE(),
+ * \def FSM_ENTRY_DEFINE_ND(FSM, entry_name) Same as \ref FSM_ENTRY_DEFINE(),
  * but without any input data.
  */
 #define FSM_ENTRY_DEFINE_ND(FSM, entry_name) void FSM::EN_##entry_name(void)
@@ -362,7 +362,7 @@ NS_END(fsm, patterns, rcppsw);
  * Transition Map Macros
  ******************************************************************************/
 /**
- * @def FSM_DEFINE_TRANSITION_MAP(name)
+ * \def FSM_DEFINE_TRANSITION_MAP(name)
  *
  * Define the transition map/table for a state machine. Can only be used if \b
  * ALL instances of a class can share the same table, which is true for
@@ -372,7 +372,7 @@ NS_END(fsm, patterns, rcppsw);
 #define FSM_DEFINE_TRANSITION_MAP(name) static const uint8_t name[] =
 
 /**
- * @def FSM_VERIFY_TRANSITION_MAP(name, n_entries)
+ * \def FSM_VERIFY_TRANSITION_MAP(name, n_entries)
  *
  * Verify that all states have been covered in the defined transition map. Can
  * only be used in conjunction with the \ref FSM_DEFINE_TRANSITION_MAP() macro
@@ -390,7 +390,7 @@ NS_END(fsm, patterns, rcppsw);
  * State Map Macros
  ******************************************************************************/
 /**
- * @def FSM_DEFINE_STATE_MAP(type, name)
+ * \def FSM_DEFINE_STATE_MAP(type, name)
  *
  * Define a state map for an FSM at \b GLOBAL scope. All instances of a class
  * will share the same state map, which will not be a problem for
@@ -405,7 +405,7 @@ NS_END(fsm, patterns, rcppsw);
   static const rcppsw::patterns::fsm::RCSW_JOIN(type, _row) (name)[]
 
 /**
- * @def FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)
+ * \def FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)
  *
  * Define the function that will be used by all \ref simple_fsm state machines
  * to process events (i.e. given that a machine is in state X and event Y
@@ -421,7 +421,7 @@ NS_END(fsm, patterns, rcppsw);
       RCSW_JOIN(type, )(size_t index_var)
 
 /**
- * @def FSM_STATE_MAP_ENTRY(state_name)
+ * \def FSM_STATE_MAP_ENTRY(state_name)
  *
  * Define a state map entry for state \c state_name.
  */
@@ -429,7 +429,7 @@ NS_END(fsm, patterns, rcppsw);
   rcppsw::patterns::fsm::state_map_row(state_name)
 
 /**
- * @def FSM_STATE_MAP_ENTRY_EX(state_name)
+ * \def FSM_STATE_MAP_ENTRY_EX(state_name)
  *
  * Define an extended state map entry for state \c state_name, where the state
  * does not use any of the entry/exit/guard callbacks. Useful for reducing code
@@ -440,7 +440,7 @@ NS_END(fsm, patterns, rcppsw);
       state_name, NULL, NULL, NULL)
 
 /**
- * @def FSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name)
+ * \def FSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name)
  *
  * Define an extended state map entry for state \c state_name, along will all
  * callbacks. If entry/exit/guard callbacks are not used for the state,
@@ -452,7 +452,7 @@ NS_END(fsm, patterns, rcppsw);
       state_name, guard_name, entry_name, exit_name)
 
 /**
- * @def FSM_VERIFY_STATE_MAP(type, name n_entries)
+ * \def FSM_VERIFY_STATE_MAP(type, name n_entries)
  *
  * Verifies that the state map \c name of type \c type (must be "state_map" or
  * "state_map_ex") contains \c n_entries using a static assert.

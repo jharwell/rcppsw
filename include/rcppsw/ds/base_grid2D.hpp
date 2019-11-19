@@ -1,7 +1,7 @@
 /**
- * @file base_grid2D.hpp
+ * \file base_grid2D.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -38,10 +38,10 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class base_grid2D
- * @ingroup rcppsw ds
+ * \class base_grid2D
+ * \ingroup ds
  *
- * @brief Base class containing functionality common to all types of 2D grids.
+ * \brief Base class containing functionality common to all types of 2D grids.
  */
 template <typename T>
 class base_grid2D {
@@ -58,7 +58,7 @@ class base_grid2D {
   virtual ~base_grid2D(void) = default;
 
   /**
-   * @brief Return a reference to the element at position (i, j) in the grid.
+   * \brief Return a reference to the element at position (i, j) in the grid.
    *
    * This is provided in the base class so that the pointer/object variants of
    * the grid (\ref grid2D, \ref overlay_grid2D) can reduce code duplication.

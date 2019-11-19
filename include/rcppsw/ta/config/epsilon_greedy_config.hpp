@@ -1,7 +1,7 @@
 /**
- * @file epsilon_greedy_config.hpp
+ * \file epsilon_greedy_config.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -37,8 +37,11 @@ NS_START(rcppsw, ta, config);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct epsilon_greedy_config
- * @ingroup rcppsw ta config
+ * \struct epsilon_greedy_config
+ * \ingroup ta config
+ *
+ * \brief Configuration for the \f$\epsilon\f$-greedy task allocation method, as
+ * described in \todo paper ref.
  */
 struct epsilon_greedy_config final : public rcppsw::config::base_config {
   double epsilon{-1};

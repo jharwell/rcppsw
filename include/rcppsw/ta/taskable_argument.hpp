@@ -1,7 +1,7 @@
 /**
- * @file taskable_argument.hpp
+ * \file taskable_argument.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -35,10 +35,10 @@ NS_START(rcppsw, ta);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class taskable_argument
- * @ingroup rcppsw ta
+ * \class taskable_argument
+ * \ingroup ta
  *
- * @brief Base classthat any application specific data that should be passed to
+ * \brief Base classthat any application specific data that should be passed to
  * tasks upon task start must derive from.
  */
 class taskable_argument {

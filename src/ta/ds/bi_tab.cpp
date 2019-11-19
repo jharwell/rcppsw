@@ -1,7 +1,7 @@
 /**
- * @file bi_tab.cpp
+ * \file bi_tab.cpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -193,7 +193,7 @@ std::pair<double, double> bi_tab::subtask_sw_calc(math::rng* rng) {
   } else if (subtask_sel_probability::kMethodBrutschy2014 ==
              m_sel_prob.method()) {
     /*
-     * @todo: This will have to be updated if I ever want to use this method
+     * \todo: This will have to be updated if I ever want to use this method
      * with task with more than 1 interface. Brutschy2014 only ever used tasks
      * with 1 interface, so its OK for now.
      */

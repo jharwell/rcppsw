@@ -1,7 +1,7 @@
 /**
- * @file simple_fsm.hpp
+ * \file simple_fsm.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -34,6 +34,9 @@ NS_START(rcppsw, patterns, fsm);
 /*******************************************************************************
  * Type Definitions
  ******************************************************************************/
+/**
+ * \brief Simple non-heirarchical state machine class.
+ */
 using simple_fsm = base_fsm;
 
 NS_END(fsm, patterns, rcppsw);

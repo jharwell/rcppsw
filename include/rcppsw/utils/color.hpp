@@ -1,7 +1,7 @@
 /**
- * @file color.hpp
+ * \file color.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -35,10 +35,10 @@ NS_START(rcppsw, utils);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class color
- * @ingroup rcppsw utils
+ * \class color
+ * \ingroup utils
  *
- * @brief A simple RGBA class representing colors as 4 8-bit numbers.
+ * \brief A simple RGBA class representing colors as 4 8-bit numbers.
  *
  * Should be used to make color usage agnostic across projects, and not tied to
  * a particular platform, simulator, etc.

@@ -1,7 +1,7 @@
 /**
- * @file rngm.hpp
+ * \file rngm.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -42,10 +42,10 @@ class rng;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class rngm
- * @ingroup rcppsw math
+ * \class rngm
+ * \ingroup math
  *
- * @brief Random Number Generator (RNG) Manager. A caching factory that
+ * \brief Random Number Generator (RNG) Manager. A caching factory that
  * returns references to previously created objects rather than creating new
  * objects each time like a regular factory.
  */

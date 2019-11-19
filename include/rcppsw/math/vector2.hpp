@@ -1,7 +1,7 @@
 /**
- * @file vector2.hpp
+ * \file vector2.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -41,10 +41,10 @@ NS_START(rcppsw, math);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class vector2
- * @ingroup rcppsw math
+ * \class vector2
+ * \ingroup math
  *
- * @brief Base template class encapsulating mathematical actions on a pair of
+ * \brief Base template class encapsulating mathematical actions on a pair of
  * numbers. Is specialized by \ref vector2u, \ref vector2i, \ref vector2d.
  *
  * All operations are performed in whatever the template parameter is, so take
@@ -54,47 +54,47 @@ template <typename T>
 class vector2 {
  public:
   /**
-   * @brief Computes the square distance between the passed vectors.
+   * \brief Computes the square distance between the passed vectors.
    */
   static T square_distance(const vector2& v1, const vector2& v2) {
     return (v1 - v2).square_length();
   }
 
   /**
-   * @brief Computes the distance between the passed vectors.
+   * \brief Computes the distance between the passed vectors.
    */
   static T distance(const vector2& v1, const vector2& v2) {
     return (v1 - v2).length();
   }
 
   /**
-   * @brief The positive X axis.
+   * \brief The positive X axis.
    */
   static const vector2 X; // NOLINT
 
   /**
-   * @brief The positive Y axis.
+   * \brief The positive Y axis.
    */
   static const vector2 Y; // NOLINT
 
   /**
-   * @brief Initializes vector to (0,0)
+   * \brief Initializes vector to (0,0)
    */
   vector2(void) noexcept = default;
 
   /**
-   * @brief Initializes the vector from Cartesian coordinates.
+   * \brief Initializes the vector from Cartesian coordinates.
    *
-   * @param x The X coordinate.
-   * @param y The Y coordinate.
+   * \param x The X coordinate.
+   * \param y The Y coordinate.
    */
   vector2(const T& x, const T& y) : m_x(x), m_y(y) {}
 
   /**
-   * @brief Initializes the vector coordinates from polar coordinates.
+   * \brief Initializes the vector coordinates from polar coordinates.
    *
-   * @param length The vector length.
-   * @param angle The vector angle.
+   * \param length The vector length.
+   * \param angle The vector angle.
    */
   vector2(T length, const radians& angle) noexcept
       : m_x(std::cos(angle.value()) * length),
@@ -106,15 +106,15 @@ class vector2 {
   void y(const T& y) { m_y = y; }
 
   /**
-   * @brief Is the vector is positive definite?
+   * \brief Is the vector is positive definite?
    */
   bool is_pd(void) const { return m_x > 0 && m_y > 0; }
 
   /**
-   * @brief Sets the vector contents from Cartesian coordinates.
+   * \brief Sets the vector contents from Cartesian coordinates.
    *
-   * @param x The new X coordinate.
-   * @param y The new Y coordinate.
+   * \param x The new X coordinate.
+   * \param y The new Y coordinate.
    */
   void set(const T& x, const T& y) {
     m_x = x;
@@ -124,8 +124,8 @@ class vector2 {
   /**
    * Sets the vector contents from polar coordinates.
    *
-   * @param length The length of the vector.
-   * @param angle The angle of the vector (range [0,2pi)
+   * \param length The length of the vector.
+   * \param angle The angle of the vector (range [0,2pi)
    */
   void set_from_polar(const T& length, const radians& angle) {
     m_x = std::cos(angle.value()) * length;
@@ -133,7 +133,7 @@ class vector2 {
   }
 
   /**
-   * @brief Returns the square length of this vector.
+   * \brief Returns the square length of this vector.
    */
   T square_length(void) const RCSW_CHECK_RET {
     return (m_x * m_x) + (m_y * m_y);
@@ -145,13 +145,13 @@ class vector2 {
   T length(void) const RCSW_CHECK_RET { return std::sqrt(square_length()); }
 
   /**
-   * @brief Normalizes this vector.
+   * \brief Normalizes this vector.
    *
    * After this method is called, the vector has length 1. If the vector
    * is (0,0), this call results in a division by zero error, and your program
    * will probably crash.
    *
-   * @return A reference to the normalized vector.
+   * \return A reference to the normalized vector.
    */
   vector2& normalize(void) {
     *this /= this->length();
@@ -159,18 +159,18 @@ class vector2 {
   }
 
   /**
-   * @brief Return the angle of this vector.
+   * \brief Return the angle of this vector.
    */
   radians angle(void) const { return radians(std::atan2(m_y, m_x)); }
 
   /**
-   * @brief Rotate this vector by the specified angle.
+   * \brief Rotate this vector by the specified angle.
    *
    * This is only available if the template parameter is not an integer.
    *
-   * @param angle The rotation angle.
+   * \param angle The rotation angle.
    *p
-   * @return A reference to the rotated vector.
+   * \return A reference to the rotated vector.
    */
   template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   vector2& rotate(const radians& angle) {
@@ -182,12 +182,12 @@ class vector2 {
   }
 
   /**
-   * @brief Scales the vector by the specified values.
+   * \brief Scales the vector by the specified values.
    *
-   * @param scale_x the scale factor for the X coordinate.
-   * @param scale_y the scale factor for the Y coordinate.
+   * \param scale_x the scale factor for the X coordinate.
+   * \param scale_y the scale factor for the Y coordinate.
    *
-   * @return A reference to the scaled vector.
+   * \return A reference to the scaled vector.
    */
   vector2& scale(const T& scale_x, const T& scale_y) {
     m_x *= scale_x;
@@ -196,16 +196,16 @@ class vector2 {
   }
 
   /**
-   * @brief Scales the vector by the specified values.
+   * \brief Scales the vector by the specified values.
    *
-   * @param factor The scaling factor applied to both X and Y.
+   * \param factor The scaling factor applied to both X and Y.
    *
-   * @return A reference to the scaled vector.
+   * \return A reference to the scaled vector.
    */
   vector2& scale(const T& factor) { return scale(factor, factor); }
 
   /**
-   * @brief Returns if this vector and the argument are considered equal,
+   * \brief Returns if this vector and the argument are considered equal,
    * determined by coordinate comparison.
    *
    * Only available if the template argument is not floating point.
@@ -216,7 +216,7 @@ class vector2 {
   }
 
   /**
-   * @brief Returns if this vector and the argument are considered equal,
+   * \brief Returns if this vector and the argument are considered equal,
    * determined by coordinate comparison.
    *
    * Only available if the template argument is floating point.
@@ -228,14 +228,14 @@ class vector2 {
   }
 
   /**
-   * @brief Needed for using vectors as keys in a map.
+   * \brief Needed for using vectors as keys in a map.
    */
   bool operator<(const vector2& other) const {
     return (m_x < other.m_x) || ((m_x == other.m_x) && (m_y < other.m_y));
   }
 
   /**
-   * @brief Returns if this vector and the passed one are not equal by checking
+   * \brief Returns if this vector and the passed one are not equal by checking
    * coordinates for equality.
    *
    * Should generally not be called if the template parameter type is not an
@@ -309,15 +309,26 @@ class vector2 {
   /* clang-format on */
 };
 
+/**
+ * \brief Specialization of \ref vector2 for signed integers.
+ */
 using vector2i = vector2<int>;
+
+/**
+ * \brief Specialization of \ref vector2 for unsigned integers.
+ */
 using vector2u = vector2<uint>;
+
+/**
+ * \brief Specialization of \ref vector2 for doubles.
+ */
 using vector2d = vector2<double>;
 
 /*******************************************************************************
  * Macros
  ******************************************************************************/
 /**
- * @brief Convert vector2{i,u} -> vector2d directly, without applying any
+ * \brief Convert vector2{i,u} -> vector2d directly, without applying any
  * scaling.
  */
 #define RCPPSW_MATH_VEC_DIRECT_CONV2D(prefix)                             \
@@ -326,7 +337,7 @@ using vector2d = vector2<double>;
   }
 
 /**
- * @brief Convert vector2{i,u} -> vector2d, applying a multiplicative scaling
+ * \brief Convert vector2{i,u} -> vector2d, applying a multiplicative scaling
  * factor.
  */
 #define RCPPSW_MATH_VEC_SCALED_CONV2D(prefix)                           \
@@ -336,7 +347,7 @@ using vector2d = vector2<double>;
   }
 
 /**
- * @brief Convert vector2d -> vector2u, applying a divisive scaling factor.
+ * \brief Convert vector2d -> vector2u, applying a divisive scaling factor.
  */
 #define RCPPSW_MATH_VEC_CONV2U(prefix)                                  \
   static inline vector2u prefix##vec2uvec(const vector2##prefix& other, \

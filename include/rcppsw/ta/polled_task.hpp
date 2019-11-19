@@ -1,7 +1,7 @@
 /**
- * @file polled_task.hpp
+ * \file polled_task.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -42,10 +42,10 @@ NS_START(rcppsw, ta);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class polled_task
- * @ingroup rcppsw ta
+ * \class polled_task
+ * \ingroup ta
  *
- * @brief Represents a task whose execution can/should be monitored by the user
+ * \brief Represents a task whose execution can/should be monitored by the user
  * to determine when it has finished.
  */
 class polled_task : public executable_task, public taskable {
@@ -71,7 +71,7 @@ class polled_task : public executable_task, public taskable {
   }
 
   /**
-   * @brief Initialize the execution time estimates of the task randomly within
+   * \brief Initialize the execution time estimates of the task randomly within
    * the specified range.
    */
   void exec_estimate_init(const math::rangeu& bounds, math::rng* rng);

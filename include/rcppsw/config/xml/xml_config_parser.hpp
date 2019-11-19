@@ -1,7 +1,7 @@
 /**
- * @file xml_config_parser.hpp
+ * \file xml_config_parser.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -56,10 +56,10 @@ NS_START(xml);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class xml_config_parser
- * @ingroup rcppsw config xml
+ * \class xml_config_parser
+ * \ingroup config xml
  *
- * @brief Interface specifying functionality for parsing XML into a \ref
+ * \brief Interface specifying functionality for parsing XML into a \ref
  * base_config derived parameter structure.
  *
  */
@@ -69,30 +69,30 @@ class xml_config_parser : public er::client<xml_config_parser> {
   ~xml_config_parser(void) override = default;
 
   /**
-   * @brief Return the root XML tag that all parameters for the specified parser
+   * \brief Return the root XML tag that all parameters for the specified parser
    * should be found/placed under.
    */
   virtual std::string xml_root(void) const = 0;
 
   /**
-   * @brief Parse the provided XML node into an internal representation (should
+   * \brief Parse the provided XML node into an internal representation (should
    * be a class/struct derived from \ref base_config).
    *
-   * @param node The XML tag that the root (i.e. the value returned by
+   * \param node The XML tag that the root (i.e. the value returned by
    * \ref xml_root()) for the parser can be found under.
    */
   virtual void parse(const ticpp::Element& node) = 0;
 
   /**
-   * @brief Validate the range, value, etc. of all parsed parameters. As such,
+   * \brief Validate the range, value, etc. of all parsed parameters. As such,
    * don't call this unless the parameters have already been parsed.
    *
-   * @return \c TRUE if all parameters are valid, \c FALSE otherwise.
+   * \return \c TRUE if all parameters are valid, \c FALSE otherwise.
    */
   virtual bool validate(void) const { return true; }
 
   /**
-   * @brief Get the results of parameter parse. This is the front end of the
+   * \brief Get the results of parameter parse. This is the front end of the
    * non-virtual interface to getting the results of a parameter parse, so that
    * covariance with smart pointer return types will work.
    */
@@ -104,7 +104,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
   }
 
   /**
-   * @brief Get the node that is inside the specified one, designated by the
+   * \brief Get the node that is inside the specified one, designated by the
    * specified tag.
    *
    * If no such node exists, an assertion halts the program.
@@ -113,11 +113,11 @@ class xml_config_parser : public er::client<xml_config_parser> {
                            const std::string& tag) const;
 
   /**
-   * @brief Get an attribute inside a node.
+   * \brief Get an attribute inside a node.
    *
-   * @param node The node to search.
-   * @param attr The attribute name.
-   * @param buf  The result buffer.
+   * \param node The node to search.
+   * \param attr The attribute name.
+   * \param buf  The result buffer.
    */
   template <typename T>
   RCSW_COLD void node_attr_get(const ticpp::Element& node,
@@ -127,7 +127,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
   }
 
   /**
-   * @brief Get a boolean attribute inside a node (bools have to be handed
+   * \brief Get a boolean attribute inside a node (bools have to be handed
    * specially, or at least I can't figure out how to make them also work the
    * template version).
    */
@@ -136,13 +136,13 @@ class xml_config_parser : public er::client<xml_config_parser> {
                      bool& buf) const RCSW_COLD;
 
   /**
-   * @brief Get an attribute inside a node, or substitute a default value if the
+   * \brief Get an attribute inside a node, or substitute a default value if the
    * attribute does not exist.
    *
-   * @param node The node to search.
-   * @param attr The attribute name.
-   * @param buf  The result buffer.
-   * @param dflt The default value to use if the attribute does not exist.
+   * \param node The node to search.
+   * \param attr The attribute name.
+   * \param buf  The result buffer.
+   * \param dflt The default value to use if the attribute does not exist.
    */
   template <typename T,
             typename U = T,
@@ -155,7 +155,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
   }
 
   /**
-   * @brief Get a boolean attribute inside a node (bools have to be handed
+   * \brief Get a boolean attribute inside a node (bools have to be handed
    * specially, or at least I can't figure out how to make them also work in the
    * template version).
    */
@@ -180,7 +180,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
 
  protected:
   /**
-   * @brief Implementation (back end) of how to get the results of a parameter
+   * \brief Implementation (back end) of how to get the results of a parameter
    * parse using covariance. This is to make parameter parsing easy when you
    * only have a handle on THIS class, even if the object is actually a derived
    * class parameter parser.

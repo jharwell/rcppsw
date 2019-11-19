@@ -1,7 +1,7 @@
 /**
- * @file state_entry_action.hpp
+ * \file state_entry_action.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -39,13 +39,13 @@ class base_fsm;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class state_entry_action
- * @ingroup rcppsw patterns fsm
+ * \class state_entry_action0
+ * \ingroup patterns fsm
  *
- * @brief Action to perform upon transition to a state.
+ * \brief Action to perform upon transition to a state.
  *
- * @tparam SM A state machine class
- * @tparam Func A state machine  member function pointer that takes ZERO
+ * \tparam SM A state machine class
+ * \tparam Func A state machine  member function pointer that takes ZERO
  * arguments.
  */
 template <class SM, void (SM::*Func)(void)>
@@ -60,12 +60,12 @@ class state_entry_action0 : public state_entry {
 };
 
 /**
- * @class state_entry_action
- * @ingroup rcppsw patterns fsm
+ * \class state_entry_action1
+ * \ingroup patterns fsm
  *
- * @tparam SM A state machine class
- * @tparam Event A state function event data type (derived from event_data).
- * @tparam Func A state machine  member function pointer that takes ONE
+ * \tparam SM A state machine class
+ * \tparam Event A state function event data type (derived from event_data).
+ * \tparam Func A state machine  member function pointer that takes ONE
  * argument.
  */
 template <class SM, class Event, void (SM::*Func)(const Event*)>

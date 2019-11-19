@@ -1,7 +1,7 @@
 /**
- * @file functor_map.hpp
+ * \file type_map.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -39,9 +39,9 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class type_map
- * @ingroup rcppsw ds
- * @brief A map of a set of (possibly incomplete) types, keyed by
+ * \class type_map
+ * \ingroup ds
+ * \brief A map of a set of (possibly incomplete) types, keyed by
  * std::type_index, with the value being a boost variant. Extremely useful to
  * emulate reflection in C++ (e.g. to map a type to a variant containing actions
  * to take depending on what the type is).

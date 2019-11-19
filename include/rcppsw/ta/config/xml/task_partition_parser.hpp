@@ -1,7 +1,7 @@
 /**
- * @file task_partition_parser.hpp
+ * \file task_partition_parser.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of FORDYCA.
  *
@@ -41,10 +41,10 @@ NS_START(rcppsw, ta, config, xml);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class task_partition_parser
- * @ingroup rcppsw ta config xml
+ * \class task_partition_parser
+ * \ingroup ta config xml
  *
- * @brief Parses XML configuration for relating to task partitioning into \ref
+ * \brief Parses XML configuration for relating to task partitioning into \ref
  * task_partition_config.
  */
 class task_partition_parser final : public rcppsw::config::xml::xml_config_parser {
@@ -52,7 +52,7 @@ class task_partition_parser final : public rcppsw::config::xml::xml_config_parse
   using config_type = task_partition_config;
 
   /**
-   * @brief The root tag that all task task_partition parameters should lie
+   * \brief The root tag that all task task_partition parameters should lie
    * under in the XML tree.
    */
   static constexpr char kXMLRoot[] = "task_partition";

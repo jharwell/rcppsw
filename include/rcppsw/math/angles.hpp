@@ -1,7 +1,7 @@
 /**
- * @file angles.hpp
+ * \file angles.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -37,32 +37,32 @@ NS_START(rcppsw, math);
  * Free Functions
  ******************************************************************************/
 /**
- * @brief Converts \ref radians to \ref degrees,
+ * \brief Converts \ref radians to \ref degrees,
  */
 degrees to_degrees(const radians& r);
 
 /**
- * @brief Converts \ref degrees to \ref radians.
+ * \brief Converts \ref degrees to \ref radians.
  */
 radians to_radians(const degrees& d);
 
 /**
- * @brief Calculates the normalized difference between the given angles.
+ * \brief Calculates the normalized difference between the given angles.
  *
  * The difference is calculated as (angle1 - angle2) and then normalized
  * in [-pi,pi].
  *
- * @return The difference between the two angles.
+ * \return The difference between the two angles.
  */
 radians normalized_diff(const radians& angle1, const radians& angle2);
 
 /**
- * @brief Calculates the normalized difference between the given angles.
+ * \brief Calculates the normalized difference between the given angles.
  *
  * The difference is calculated as (angle1 - angle2) and then normalized
  * in [-180,180].
  *
- * @return The difference between the two angles.
+ * \return The difference between the two angles.
  */
 degrees normalized_diff(const degrees& angle1, const degrees& angle2);
 

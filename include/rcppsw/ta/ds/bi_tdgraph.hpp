@@ -1,7 +1,7 @@
 /**
- * @file bi_tdgraph.hpp
+ * \file bi_tdgraph.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -43,10 +43,10 @@ NS_START(rcppsw, ta, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class bi_tdgraph
- * @ingroup rcppsw ta ds
+ * \class bi_tdgraph
+ * \ingroup ta ds
  *
- * @brief Representation of an overall task (the root task) as a BINARY tree
+ * \brief Representation of an overall task (the root task) as a BINARY tree
  * representing the task decomposition of the root task at different
  * granularities (i.e. tasks of different levels of complexity).
  */
@@ -63,16 +63,17 @@ class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
   bi_tdgraph& operator=(const bi_tdgraph&) = delete;
 
   /**
-   * @brief Set the children for an existing node.
+   * \brief Set the children for an existing node.
    *
    * Do not call \ref tdgraph::set_children() directly, or your bi_tdgraph will
    * not work properly.
    *
-   * @param parent The parent node, which MUST be partitionable.
-   * @param children The list of children (must be exactly 2) to associate with
-   * the parent.
+   * \param parent The parent node, which MUST be partitionable.
+   * \param children The list of children (must be exactly 2) to associate with
+   *                 the parent.
+   * \param rng The RNG to use during installation, per configuration.
    *
-   * @return \ref status_t.
+   * \return \ref status_t.
    */
   status_t install_tab(polled_task* parent,
                        tdgraph::vertex_vector children,
@@ -82,24 +83,24 @@ class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
                        math::rng* rng);
 
   /**
-   * @brief Update the active TAB *BEFORE* task allocation is performed in the
+   * \brief Update the active TAB *BEFORE* task allocation is performed in the
    * executive that owns this graph.
    *
-   * @param current_task The current task that just finished/aborted/whatever.
-   * @param rng A random number generator for use in update calculations.
+   * \param current_task The current task that just finished/aborted/whatever.
+   * \param rng A random number generator for use in update calculations.
    */
   void active_tab_update(const polled_task* current_task,
                          math::rng* rng);
 
   /**
-   * @brief Get the active TAB for the graph.
+   * \brief Get the active TAB for the graph.
    */
   const bi_tab* active_tab(void) const { return m_active_tab; }
   bi_tab* active_tab(void) { return m_active_tab; }
   void active_tab(bi_tab* active_tab) { m_active_tab = active_tab; }
 
   /**
-   * @brief Return a uuid for the active tab (really just an index in the vector
+   * \brief Return a uuid for the active tab (really just an index in the vector
    * of TABs).
    */
   RCSW_PURE int active_tab_id(void) const {
@@ -110,7 +111,7 @@ class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
         }));
   }
   /**
-   * @brief Get the parent TAB for the argument (i.e. the TAB which has as a
+   * \brief Get the parent TAB for the argument (i.e. the TAB which has as a
    * child the root of the TAB argument).
    */
   const bi_tab* tab_parent(const bi_tab* tab) const;
@@ -118,11 +119,11 @@ class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
   bi_tab* root_tab(void);
 
   /**
-   * @brief Get the child tab for the argument (i.e. the TAB whose root is the
+   * \brief Get the child tab for the argument (i.e. the TAB whose root is the
    * left/right child of the argument)
    *
-   * @param tab The tab.
-   * @param current_task The current active task in the tab.
+   * \param tab The tab.
+   * \param current_task The current active task in the tab.
    */
   bi_tab* tab_child(const bi_tab* tab,
                     const polled_task* current_task) RCSW_PURE;

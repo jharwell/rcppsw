@@ -1,7 +1,7 @@
 /**
- * @file waveform_config.hpp
+ * \file waveform_config.hpp
  *
- * @copyright 2018 John Harwell/Anthony Chen, All rights reserved.
+ * \copyright 2018 John Harwell/Anthony Chen, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -36,8 +36,8 @@ NS_START(rcppsw, control, config);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct waveform_config
- * @ingroup rcppsw control config
+ * \struct waveform_config
+ * \ingroup control config
  *
  * Not all parameters are applicable to all waveform types.
  */

@@ -1,7 +1,7 @@
 /**
- * @file overlay_grid2D_ptr.hpp
+ * \file overlay_grid2D_ptr.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -35,10 +35,10 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class overlay_grid2D_ptr
- * @ingroup rcppsw ds
+ * \class overlay_grid2D_ptr
+ * \ingroup ds
  *
- * @brief A 2D logical grid that is overlayed over a continuous environment. It
+ * \brief A 2D logical grid that is overlayed over a continuous environment. It
  * discretizes the continuous arena into a grid of a specified resolution, using
  * pointers to the managed elements, so a zero parameter constructor is not
  * needed.
@@ -77,16 +77,16 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
   }
 
   /**
-   * @brief Create a subgrid (really an array view) from a grid. The grid is
+   * \brief Create a subgrid (really an array view) from a grid. The grid is
    * clamped to the maximum boundaries of the parent grid, so rather than
    * getting a 2 x 2 subgrid centered at 0 with the out-of-bounds elements
    * zeroed, you will get a 1 x 2 subgrid.
    *
-   * @param x X coord of center of subgrid.
-   * @param y Y coord of center of subgrid.
-   * @param radius Radius of subgrid.
+   * \param x X coord of center of subgrid.
+   * \param y Y coord of center of subgrid.
+   * \param radius Radius of subgrid.
    *
-   * @return The subcircle.
+   * \return The subcircle.
    */
   grid_view subcircle(size_t x, size_t y, uint radius) {
     auto x_range = base_overlay_grid2D<T>::circle_xrange_at_point(x, radius);
@@ -103,12 +103,12 @@ class overlay_grid2D_ptr : public base_overlay_grid2D<T> {
   }
 
   /**
-   * @brief Create a subgrid (really an array view) from a grid. The grid is
+   * \brief Create a subgrid (really an array view) from a grid. The grid is
    * clamped to the maximum boundaries of the parent grid, so rather than
    * getting a 2 x 2 subgrid centered at 0 with the out-of-bounds elements
    * zeroed, you will get a 1 x 2 subgrid.
    *
-   * @return The grid.
+   * \return The grid.
    */
   grid_view subgrid(size_t x_min, size_t y_min, size_t x_max, size_t y_max) {
     typename grid_type::index_gen indices;

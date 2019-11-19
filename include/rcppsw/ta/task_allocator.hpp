@@ -1,7 +1,7 @@
 /**
- * @file task_allocator.hpp
+ * \file task_allocator.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -41,10 +41,10 @@ NS_START(rcppsw, ta);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class task_allocator
- * @ingroup rcppsw ta
+ * \class task_allocator
+ * \ingroup ta
  *
- * @brief Maps the task data structure to its variant, and then applies the
+ * \brief Maps the task data structure to its variant, and then applies the
  * corresponding allocation policy to the mapped variant to allocate a task.
  */
 class task_allocator : public boost::static_visitor<polled_task*> {

@@ -1,7 +1,7 @@
 /**
- * @file random_allocator.hpp
+ * \file random_allocator.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -39,10 +39,10 @@ class polled_task;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class random_allocator
- * @ingroup rcppsw ta
+ * \class random_allocator
+ * \ingroup ta
  *
- * @brief Allocates a task from a given set of a tasks by choosing one randomly.
+ * \brief Allocates a task from a given set of a tasks by choosing one randomly.
  */
 class random_allocator : er::client<random_allocator> {
  public:

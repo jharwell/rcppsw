@@ -1,7 +1,7 @@
 /**
- * @file expression.hpp
+ * \file expression.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -35,10 +35,10 @@ NS_START(rcppsw, math);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class expression
- * @ingroup rcppsw math
+ * \class expression
+ * \ingroup math
  *
- * @brief A base class for easy swapping/manipulating of mathematical
+ * \brief A base class for easy swapping/manipulating of mathematical
  * expressions.
  */
 template <class T>
@@ -51,12 +51,12 @@ class expression {
   expression& operator=(const expression&) = default;
 
   /**
-   * @brief Get the last value calculated.
+   * \brief Get the last value calculated.
    */
   T v(void) const { return m_last; }
 
   /**
-   * @brief Evaluate a calculation and set a new value.
+   * \brief Evaluate a calculation and set a new value.
    */
   T eval(const T& val) { return m_last = val; }
 

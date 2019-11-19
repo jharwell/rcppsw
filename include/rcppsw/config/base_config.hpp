@@ -1,7 +1,7 @@
 /**
- * @file base_config.hpp
+ * \file base_config.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -35,10 +35,10 @@ NS_START(rcppsw, config);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct base_config
- * @ingroup rcppsw config
+ * \struct base_config
+ * \ingroup config
  *
- * @brief A stub base class for any and all derived configuration class types
+ * \brief A stub base class for any and all derived configuration class types
  * that may need polymorphism or covariance.
  */
 struct base_config {

@@ -1,7 +1,7 @@
 /**
- * @file hfsm_state.hpp
+ * \file hfsm_state.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -38,10 +38,10 @@ NS_START(rcppsw, patterns, fsm);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class hfsm_state
- * @ingroup rcppsw patterns fsm
+ * \class hfsm_state
+ * \ingroup patterns fsm
  *
- * @brief Base class representing a state within a HFSM.
+ * \brief Base class representing a state within a HFSM.
  */
 class hfsm_state : public state {
  public:
@@ -63,8 +63,8 @@ class hfsm_state : public state {
 };
 
 /**
- * @tparam FSM The current state machine class.
- * @tparam Handler A state machine member function pointer that takes ZERO
+ * \tparam FSM The current state machine class.
+ * \tparam Handler A state machine member function pointer that takes ZERO
  * arguments.
  */
 template <class FSM, int (FSM::*Handler)(void)>
@@ -81,9 +81,9 @@ class hfsm_state_action0 : public hfsm_state {
 };
 
 /**
- * @tparam FSM The current state machine class.
- * @tparam Event A state function event data type (derived from event).
- * @tparam Handler A state machine member function pointer, that takes ONE
+ * \tparam FSM The current state machine class.
+ * \tparam Event A state function event data type (derived from event).
+ * \tparam Handler A state machine member function pointer, that takes ONE
  * argument.
  */
 template <class FSM, class Event, int (FSM::*Handler)(const Event*)>

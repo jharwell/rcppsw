@@ -1,7 +1,7 @@
 /**
- * @file typelist.hpp
+ * \file typelist.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -36,7 +36,7 @@
  * Macros
  ******************************************************************************/
 /**
- * @def RCPPSW_SFINAE_TYPELIST_REQUIRE() Enable the function that this macro is
+ * \def RCPPSW_SFINAE_TYPELIST_REQUIRE() Enable the function that this macro is
  * attached to if the specified type is found in the typelist, which must be a
  * \ref typelist compile-time object.
  */
@@ -45,7 +45,7 @@
       typename boost::mpl::contains<Typelist, T>::type>::type* = nullptr
 
 /**
- * @def RCPPSW_SFINAE_TYPELIST_REJECT() Disable the function that this macro is
+ * \def RCPPSW_SFINAE_TYPELIST_REJECT() Disable the function that this macro is
  * attached to if the specified type is found in the Typelist, which must be a
  * \ref typelist compile-time object.
  */
@@ -59,29 +59,29 @@
 NS_START(rcppsw, mpl);
 
 /**
- * @brief A list of types using boost::mpl::vectors, which enables all sorts of
+ * \brief A list of types using boost::mpl::vectors, which enables all sorts of
  * nice operations from the boost MPL library.
  */
 template <typename... Ts>
 using typelist = boost::mpl::vector<Ts...>;
 
 /**
- * @brief Wrap a \ref typelist into a container/template class.
+ * \brief Wrap a \ref typelist into a container/template class.
  *
- * @tparam WrapperType The container class each of the types in the \ref
+ * \tparam WrapperType The container class each of the types in the \ref
  *                     typelist will be wrapped into. It takes the wrapped type,
  *                     as well as additional template arguments for the wrapped
  *                     type, as arguments.
  *
- * @tparam WrapperTypeArgs Additional template paramaters for the WrapperType.
+ * \tparam WrapperTypeArgs Additional template paramaters for the WrapperType.
  */
 template <template <class WrappedType, class...> class WrapperType,
           class... WrapperTypeArgs>
 struct typelist_wrap_into {
   /**
-   * @brief Perform the wrap.
+   * \brief Perform the wrap.
    *
-   * @tparam ApplyArgs The *single* wrapped type from above. Must be a parameter
+   * \tparam ApplyArgs The *single* wrapped type from above. Must be a parameter
    * pack, so that it can be concatenated with the WrapperType parameter
    * pack (which may be empty); making it a normal template argument throws
    * errors on WrapperTypes that only take a single argument.
@@ -93,7 +93,7 @@ struct typelist_wrap_into {
 };
 
 /**
- * @brief Apply a functor to each type in the \ref typelist. The functor can
+ * \brief Apply a functor to each type in the \ref typelist. The functor can
  * itself take as many template parameters as needed.
  */
 template <typename Typelist,

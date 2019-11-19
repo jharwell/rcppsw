@@ -1,7 +1,7 @@
 /**
- * @file state_exit_action.hpp
+ * \file state_exit_action.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -38,13 +38,13 @@ class base_fsm;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class state_exit_action
- * @ingroup rcppsw patterns fsm
+ * \class state_exit_action
+ * \ingroup patterns fsm
  *
- * @brief state_exit_action takes two template arguments:
+ * \brief state_exit_action takes two template arguments:
  *
- * @tparam SM A state machine class.
- * @tparam Func A state machine member function pointer.
+ * \tparam SM A state machine class.
+ * \tparam Func A state machine member function pointer.
  */
 template <class SM, void (SM::*Func)(void)>
 class state_exit_action : public state_exit {

@@ -1,7 +1,7 @@
 /**
- * @file base_executive.hpp
+ * \file base_executive.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -48,10 +48,10 @@ struct task_executive_config;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class base_executive
- * @ingroup rcppsw ta
+ * \class base_executive
+ * \ingroup ta
  *
- * @brief Base class for runtime task task executives. Supports specification of
+ * \brief Base class for runtime task task executives. Supports specification of
  * task allocation policy independent from the data structure storing
  * relationships among the tasks to be allocated (invalid combinations result in
  * compiler errors).
@@ -63,12 +63,12 @@ class base_executive : public rcppsw::er::client<base_executive> {
   using start_notify_cb = std::function<void(polled_task*)>;
 
   /**
-   * @brief Creates the base executive.
+   * \brief Creates the base executive.
    *
-   * @param exec_config Initialization config specific to executive.
-   * @param aloc_config Initialization config for task allocation.
-   * @param ds Data structure containing tasks to manage/run.
-   * @param rng Non-owning Random number generator reference.
+   * \param exec_config Initialization config specific to executive.
+   * \param alloc_config Initialization config for task allocation.
+   * \param ds Data structure containing tasks to manage/run.
+   * \param rng Non-owning Random number generator reference.
    */
   base_executive(const config::task_executive_config* exec_config,
                  const config::task_alloc_config* alloc_config,
@@ -80,7 +80,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
   base_executive(const base_executive& other) = delete;
 
   /**
-   * @brief The means by which the task executive will run one
+   * \brief The means by which the task executive will run one
    * timestep.
    */
   void run(void);
@@ -90,13 +90,13 @@ class base_executive : public rcppsw::er::client<base_executive> {
   }
 
   /**
-   * @brief Get the task currently being run.
+   * \brief Get the task currently being run.
    */
   const polled_task* current_task(void) const { return m_current_task; }
   polled_task* current_task(void) { return m_current_task; }
 
   /**
-   * @brief Set an optional callback that will be run when a task is aborted.
+   * \brief Set an optional callback that will be run when a task is aborted.
    *
    * The callback will be passed the task that was aborted, before the active
    * task is reset and after any time estimates have been updated on the aborted
@@ -110,7 +110,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
   }
 
   /**
-   * @brief Set an optional callback that will be run when after a task is
+   * \brief Set an optional callback that will be run when after a task is
    * finished.
    *
    * The callback will be passed a pointer to the task that was just finished,
@@ -126,7 +126,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
   }
 
   /**
-   * @brief Set an optional callback that will be run when a task is started.
+   * \brief Set an optional callback that will be run when a task is started.
    *
    * The callback will be passed a pointer to the task that was just started,
    * before the task is reset.
@@ -144,7 +144,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
 
  protected:
   /**
-   * @brief Handler called when a task is aborted.
+   * \brief Handler called when a task is aborted.
    *
    * The base implementation does the following, in order:
    *
@@ -157,7 +157,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
   virtual void task_abort_handle(polled_task* task);
 
   /**
-   * @brief Handler called to start a new task.
+   * \brief Handler called to start a new task.
    *
    * The base implementation does the following, in order:
    *
@@ -167,7 +167,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
   virtual void task_start_handle(polled_task* task);
 
   /**
-   * @brief Handler called when a task has been finished (not aborted).
+   * \brief Handler called when a task has been finished (not aborted).
    *
    * The base implementation does the following, in order:
    *
@@ -178,13 +178,13 @@ class base_executive : public rcppsw::er::client<base_executive> {
   virtual void task_finish_handle(polled_task* task);
 
   /**
-   * @brief Allocate a new task, given the most recently executed
+   * \brief Allocate a new task, given the most recently executed
    * one.
    */
   virtual polled_task* task_allocate(const polled_task* task) = 0;
 
   /**
-   * @brief Low-level start start handling:
+   * \brief Low-level start start handling:
    *
    * - Reset the task.
    * - Actually start the task.
@@ -193,13 +193,13 @@ class base_executive : public rcppsw::er::client<base_executive> {
   void do_task_start(polled_task* const task);
 
   /**
-   * @brief Update execution and interface time estimates (if configured to do
+   * \brief Update execution and interface time estimates (if configured to do
    * so) for the specified task.
    */
   void task_ests_update(polled_task* new_task);
 
   /**
-   * @brief Update execution and interface times for the specified task.
+   * \brief Update execution and interface times for the specified task.
    */
   void task_times_update(polled_task* new_task);
 

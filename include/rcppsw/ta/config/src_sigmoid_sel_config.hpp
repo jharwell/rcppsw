@@ -1,7 +1,7 @@
 /**
- * @file src_sigmoid_sel_config.hpp
+ * \file src_sigmoid_sel_config.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -37,15 +37,13 @@ NS_START(rcppsw, ta, config);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct src_sigmoid_sel_config
-* @ingroup rcppsw config ta
+ * \struct src_sigmoid_sel_config
+ * \ingroup config ta
+ *
+ * \brief Configuration for sigmoid derived probabilities to choose between
+ * multiple options, where the sigmoid input source is changeable.
  */
 struct src_sigmoid_sel_config final : public rcppsw::config::base_config {
-  /**
-   * @brief What should the source of the input into abort probability
-   * calculations be? Valid values are: ["exec", "interface"], referring to
-   * execution time and interface time for a task.
-   */
   std::string input_src{};
   sigmoid_sel_config sigmoid{};
 };

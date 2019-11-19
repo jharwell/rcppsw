@@ -1,7 +1,7 @@
 /**
- * @file collector_group.hpp
+ * \file collector_group.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -44,10 +44,10 @@ NS_START(rcppsw, metrics);
  ******************************************************************************/
 
 /**
- * @class collector_group
- * @ingroup rcppsw metrics
+ * \class collector_group
+ * \ingroup metrics
  *
- * @brief A group of N collectors, mapped by name, on which collective
+ * \brief A group of N collectors, mapped by name, on which collective
  * operations can be performed, in addition to individual collection; used to
  * reduce code duplication.
  */
@@ -60,16 +60,16 @@ class collector_group {
   virtual ~collector_group(void) = default;
 
   /**
-   * @brief Add a collector to the group by constructing it in place.
+   * \brief Add a collector to the group by constructing it in place.
    *
-   * @tparam T The type of the collector
+   * \tparam T The type of the collector
    *
-   * @param name The key for the collector in the group. Should be unique,
+   * \param name The key for the collector in the group. Should be unique,
    *             though it is not a requirement. If it is not unique then the
    *             older collector that was mapped to that name will be
    *             overwritten.
    *
-   * @param args 0 or more arguments to the collector constructor.
+   * \param args 0 or more arguments to the collector constructor.
    */
   template <typename T, typename... Args>
   bool collector_register(const std::string& name, Args&&... args) {
@@ -90,13 +90,13 @@ class collector_group {
   }
 
   /**
-   * @brief Collect metrics from the specified collector, passing it the
+   * \brief Collect metrics from the specified collector, passing it the
    * specified metrics set.
    *
-   * @param name The registered name of the collector.
-   * @param metrics The metrics to collect from.
+   * \param name The registered name of the collector.
+   * \param metrics The metrics to collect from.
    *
-   * @return \c TRUE if the specified collector is registered and collection was
+   * \return \c TRUE if the specified collector is registered and collection was
    * successful, \c FALSE otherwise.
    */
   bool collect(const std::string& name, const base_metrics& metrics) {
@@ -109,7 +109,7 @@ class collector_group {
   }
 
   /**
-   * @brief Collect metrics from the specified collector, passing it the
+   * \brief Collect metrics from the specified collector, passing it the
    * specified metrics set, but only if the specified condition is met by the
    * metrics.
    *
@@ -120,12 +120,12 @@ class collector_group {
    * check has to be done anyway, and predicate evaluation is potentially
    * expensive.
    *
-   * @param name The name of the collector to collect with.
-   * @param metrics The metrics to collect.
-   * @param predicate The predicate used to determine if the specified collector
+   * \param name The name of the collector to collect with.
+   * \param metrics The metrics to collect.
+   * \param predicate The predicate used to determine if the specified collector
    * should actually be invoked.
    *
-   * @return \c TRUE if metrics were collected, \c FALSE otherwise.
+   * \return \c TRUE if metrics were collected, \c FALSE otherwise.
    */
   bool collect_if(const std::string& name,
                   const base_metrics& metrics,
@@ -141,14 +141,14 @@ class collector_group {
   }
 
   /**
-   * @brief Get a reference to a collector by name.
+   * \brief Get a reference to a collector by name.
    *
-   * @param key The mapped name of the collector in the group.
+   * \param key The mapped name of the collector in the group.
    */
   mapped_type& operator[](const key_type& key) { return m_collectors[key]; }
 
   /**
-   * @brief Call the \ref base_metrics_collector::reset() function on all
+   * \brief Call the \ref base_metrics_collector::reset() function on all
    * collectors in the group.
    */
   void reset_all(void) {
@@ -160,7 +160,7 @@ class collector_group {
   }
 
   /**
-   * @brief Call the \ref base_metrics_collector::interval_reset() function on
+   * \brief Call the \ref base_metrics_collector::interval_reset() function on
    * all collectors in the group.
    */
   void interval_reset_all(void) {
@@ -172,7 +172,7 @@ class collector_group {
   }
 
   /**
-   * @brief Call the \ref base_metrics_collector::timestep_inc() function on all
+   * \brief Call the \ref base_metrics_collector::timestep_inc() function on all
    * collectors in the group.
    */
   void timestep_inc_all(void) {
@@ -184,10 +184,10 @@ class collector_group {
   }
 
   /**
-   * @brief Call the \ref base_metrics_collector::csv_line_write() function on
+   * \brief Call the \ref base_metrics_collector::csv_line_write() function on
    * all collectors in the group.
    *
-   * @return \c TRUE iff ALL collectors in the group wrote out metrics this
+   * \return \c TRUE iff ALL collectors in the group wrote out metrics this
    * timestep.
    */
   bool metrics_write_all(types::timestep t) {
@@ -200,7 +200,7 @@ class collector_group {
   }
 
   /**
-   * @brief Call the \ref base_metrics_collector::finalize() function on all
+   * \brief Call the \ref base_metrics_collector::finalize() function on all
    * collectors in the group.
    */
   void finalize_all(void) {

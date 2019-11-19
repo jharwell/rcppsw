@@ -1,7 +1,7 @@
 /**
- * @file bi_tab_metrics_collector.hpp
+ * \file bi_tab_metrics_collector.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -39,10 +39,10 @@ NS_START(rcppsw, metrics, tasks);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class bi_tab_metrics_collector
- * @ingroup rcppsw metrics tasks
+ * \class bi_tab_metrics_collector
+ * \ingroup metrics tasks
  *
- * @brief Collector for metrics for \ref bi_tab_metrics about task allocation.
+ * \brief Collector for metrics for \ref bi_tab_metrics about task allocation.
  *
  * Metrics should only be collected upon completion/abortion of a task. Metrics
  * are written out at the specified interval.
@@ -50,8 +50,8 @@ NS_START(rcppsw, metrics, tasks);
 class bi_tab_metrics_collector final : public base_metrics_collector {
  public:
   /**
-   * @param ofname Output file name.
-   * @param interval Collection interval.
+   * \param ofname Output file name.
+   * \param interval Collection interval.
    */
   bi_tab_metrics_collector(const std::string& ofname, uint interval);
 
@@ -65,45 +65,45 @@ class bi_tab_metrics_collector final : public base_metrics_collector {
  private:
   struct stats {
     /**
-     * @brief # Times subtask 1 was chosen if partitioning was employed.
+     * \brief # Times subtask 1 was chosen if partitioning was employed.
      */
     std::atomic_uint   subtask1_count{0};
 
     /**
-     * @brief # Times subtask 2 was chosen if partitioning was employed.
+     * \brief # Times subtask 2 was chosen if partitioning was employed.
      */
     std::atomic_uint   subtask2_count{0};
 
     /**
-     * @brief # Times partitioning was employed when allocating a task,
+     * \brief # Times partitioning was employed when allocating a task,
      */
     std::atomic_uint   partition_count{0};
 
     /**
-     * @brief # Times partitioning was not employed when allocating a task.
+     * \brief # Times partitioning was not employed when allocating a task.
      */
     std::atomic_uint   no_partition_count{0};
 
     /**
-     * @brief # Times when task allocation resulted in a different task being
+     * \brief # Times when task allocation resulted in a different task being
      * executed.
      */
     std::atomic_uint   task_sw_count{0};
 
     /**
-     * @brief # Times when task allocation resulted in a task of a different
+     * \brief # Times when task allocation resulted in a task of a different
      * depth being executed than previous.
      */
     std::atomic_uint   task_depth_sw_count{0};
 
 
     /**
-     * @brief The average partitioning probability of the root task in the TAB.
+     * \brief The average partitioning probability of the root task in the TAB.
      */
     std::atomic<double> partition_prob{0.0};
 
     /**
-     * @brief The average subtask selection probability of the root task in the
+     * \brief The average subtask selection probability of the root task in the
      * TAB.
      */
     std::atomic<double> subtask_sel_prob{0.0};

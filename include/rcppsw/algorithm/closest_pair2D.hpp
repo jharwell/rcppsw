@@ -1,7 +1,7 @@
 /**
- * @file closest_pair2D.hpp
+ * \file closest_pair2D.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -58,37 +58,37 @@ struct result_type2D {
  * Class Definitions
  ******************************************************************************/
 /**
- * @class closest_pair2D
- * @ingroup rcppsw algorithm
+ * \class closest_pair2D
+ * \ingroup algorithm
  *
- * @brief Calculate the closest two points from a set of 2D points in O(NLogN).
+ * \brief Calculate the closest two points from a set of 2D points in O(NLogN).
  *
  * Also has a brute force (O(N^3)) algorithm that can be used for comparision.
  *
  * Returns the two closest points, along with the distance between them.
  *
- * @tparam T Type of point in 2D plane. Can be any class, but must provide the
- * following methods (see \ref vector2 for example implementation):
+ * \tparam T Type of point in 2D plane. Can be any class, but must provide the
+ * following methods (see \ref math::vector2 for example implementation):
  *
  * - x()
  * - y()
  * - operator==()
  */
 template <typename T>
-class closest_pair {
+class closest_pair2D {
  public:
   using dist_func_type = double(const T&, const T&);
 
   /**
-   * @brief Run the calculation algorithm.
+   * \brief Run the calculation algorithm.
    *
-   * @param method The method to use.
-   * @param points A vector of points through which to search.
-   * @param dist_func A function that can be used to calculate the distance
+   * \param method The method to use.
+   * \param points A vector of points through which to search.
+   * \param dist_func A function that can be used to calculate the distance
    *                  between two points.
    *
    *
-   * @return
+   * \return
    */
   result_type2D<T> operator()(const std::string& method,
                               std::vector<T> points,
@@ -110,12 +110,12 @@ class closest_pair {
   }
 
   /**
-   * @brief Find the closest pair of points using brute force.
+   * \brief Find the closest pair of points using brute force.
    *
-   * @param points The set of points to search.
-   * @param dist_func The comparision function to use.
+   * \param points The set of points to search.
+   * \param dist_func The comparision function to use.
    *
-   * @return The two closest points, along with the distance between them.
+   * \return The two closest points, along with the distance between them.
    */
   result_type2D<T> brute_force(const std::vector<T>& points,
                                const std::function<dist_func_type>& dist_func) {
@@ -135,13 +135,13 @@ class closest_pair {
   }
 
   /**
-   * @brief Find the closest pair of points using recursion.
+   * \brief Find the closest pair of points using recursion.
    *
-   * @param points The set of points to search through.
-   * @param strip Space for the strip.
-   * @param dist_func The comparision function to use.
+   * \param points The set of points to search through.
+   * \param strip Space for the strip.
+   * \param dist_func The comparision function to use.
    *
-   * @return The two closest points, along with the distance between them.
+   * \return The two closest points, along with the distance between them.
    */
   result_type2D<T> recursive(const std::vector<T>& points,
                              std::vector<T>& strip,
@@ -178,10 +178,12 @@ class closest_pair {
 
  private:
   /**
-   * @brief Utility function to find the distance beween the closest points of
+   * \brief Utility function to find the distance beween the closest points of
    * strip of given size, sorted according to Y.
    *
-   * @param dmin Upper bound on minimum distance.
+   * \param strip The points to check.
+   * \param dmin Upper bound on minimum distance.
+   * \param dist_func The distance function callback to use during calculation.
    *
    * Note that this method seems to be a O(n^2) method, but it's a O(n) method
    * as the inner loop runs at most 6 times.

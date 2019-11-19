@@ -1,7 +1,7 @@
 /**
- * @file bi_tdgraph_executive.hpp
+ * \file bi_tdgraph_executive.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -45,10 +45,10 @@ class bi_tab;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class bi_tdgraph_executive
- * @ingroup rcppsw ta
+ * \class bi_tdgraph_executive
+ * \ingroup ta
  *
- * @brief A task executive which tasks are run one step at a time and polled
+ * \brief A task executive which tasks are run one step at a time and polled
  * until they are finished. Operates on \ref bi_tdgraph.
  */
 class bi_tdgraph_executive final : public base_executive,
@@ -63,12 +63,12 @@ class bi_tdgraph_executive final : public base_executive,
                        math::rng* rng);
 
   /**
-   * @brief Get the TAB corresponding to the currently active task.
+   * \brief Get the TAB corresponding to the currently active task.
    */
   const ds::bi_tab* active_tab(void) const RCSW_PURE;
 
   /**
-   * @brief Set an optional callback that will be run when a new task is
+   * \brief Set an optional callback that will be run when a new task is
    * started.
    *
    * The callback will be passed a pointer to the task that was just started.
@@ -80,7 +80,7 @@ class bi_tdgraph_executive final : public base_executive,
   const polled_task* root_task(void) const RCSW_PURE;
 
   /**
-   * @brief Get the parent task of the specified one.
+   * \brief Get the parent task of the specified one.
    */
   const polled_task* parent_task(const polled_task* v);
 

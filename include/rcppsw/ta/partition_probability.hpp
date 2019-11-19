@@ -1,7 +1,7 @@
 /**
- * @file partition_probability.hpp
+ * \file partition_probability.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -45,10 +45,10 @@ struct sigmoid_sel_config;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class partition_probability
- * @ingroup rcppsw ta
+ * \class partition_probability
+ * \ingroup ta
  *
- * @brief Calculates the probability that a robot partitions its current task
+ * \brief Calculates the probability that a robot partitions its current task
  * using the negative exponential distribution.
  *
  * Reactivity is assumed to be > 0.
@@ -84,7 +84,7 @@ class partition_probability : public math::sigmoid,
   static constexpr double kDEFAULT_GAMMA = 1.0;
 
   /**
-   * @brief Initialize partitioning probability with default values based on
+   * \brief Initialize partitioning probability with default values based on
    * whatever the selected method is.
    */
   explicit partition_probability(const std::string& method)
@@ -93,7 +93,7 @@ class partition_probability : public math::sigmoid,
         mc_method(method) {}
 
   /**
-   * @brief Initialize partitioning probability explicity with method +
+   * \brief Initialize partitioning probability explicity with method +
    * parameter values.
    */
   explicit partition_probability(const config::sigmoid_sel_config* config);

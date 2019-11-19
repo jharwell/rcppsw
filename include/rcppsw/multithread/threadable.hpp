@@ -1,7 +1,7 @@
 /**
- * @file threadable.hpp
+ * \file threadable.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -39,10 +39,10 @@ NS_START(rcppsw, multithread);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class threadable
- * @ingroup rcppsw multithread
+ * \class threadable
+ * \ingroup multithread
  *
- * @brief Derived classes will have the ability to spawn a new thread and run
+ * \brief Derived classes will have the ability to spawn a new thread and run
  * inside the specified main loop.
  */
 class threadable {
@@ -54,43 +54,43 @@ class threadable {
   threadable& operator=(const threadable& other) = delete;
 
   /**
-   * @brief The entry point for a thread.
+   * \brief The entry point for a thread.
    *
-   * @param arg Argument passed to thread (can be NULL).
-   * @return The return value of the thread.
+   * \param arg Argument passed to thread (can be NULL).
+   * \return The return value of the thread.
    */
   virtual void* thread_main(void* arg) = 0;
 
   /**
-   * @brief Start a thread.
+   * \brief Start a thread.
    *
-   * @param arg Argument passed to thread (can be NULL).
-   * @param core The core to bind the thread to. By default, the thread is
+   * \param arg Argument passed to thread (can be NULL).
+   * \param core The core to bind the thread to. By default, the thread is
    *             unbound.
-   * @return status_t - OK if successful, ERROR otherwise
+   * \return status_t - OK if successful, ERROR otherwise
    */
   status_t start(void* arg, int core = -1);
 
   /**
-   * @brief Signal a thread that it should terminate, from outside the thread.
+   * \brief Signal a thread that it should terminate, from outside the thread.
    */
   virtual void term(void) { m_thread_run = false; }
 
   /**
-   * @brief Join a thread (i.e. wait for it to finish).
+   * \brief Join a thread (i.e. wait for it to finish).
    */
   void join(void) { pthread_join(m_thread, nullptr); }
 
  protected:
   /**
-   * @brief Check if a thread object has been told to terminate elsewhere.
+   * \brief Check if a thread object has been told to terminate elsewhere.
    */
   bool terminated(void) { return m_thread_run; }
 
   /**
-   * @brief Exit a thread from within the thread itself.
+   * \brief Exit a thread from within the thread itself.
    *
-   * @param ret If non-NULL, will be filled with the return value of the thread
+   * \param ret If non-NULL, will be filled with the return value of the thread
    * as it exits.
    */
   RCSW_DEAD void exit(void* ret = nullptr) {
@@ -104,16 +104,16 @@ class threadable {
   }
 
   /**
-   * @brief Get the pthread handle for the thread.
+   * \brief Get the pthread handle for the thread.
    *
-   * @return The handle.
+   * \return The handle.
    */
   pthread_t thread_handle(void) { return m_thread; }
 
   /**
-   * @brief Get the ID of the thread within the parent process.
+   * \brief Get the ID of the thread within the parent process.
    *
-   * @return The thread ID (guaranteed to be unique among threads in a process).
+   * \return The thread ID (guaranteed to be unique among threads in a process).
    */
   int64_t thread_id(void) { return syscall(__NR_gettid); }
 

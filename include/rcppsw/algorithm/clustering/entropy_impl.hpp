@@ -1,7 +1,7 @@
 /**
- * @file entropy_impl.hpp
+ * \file entropy_impl.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -38,10 +38,10 @@ NS_START(rcppsw, algorithm, clustering, detail);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class entropy_impl
- * @ingroup rcppsw algorithm clustering
+ * \class entropy_impl
+ * \ingroup algorithm clustering
  *
- * @brief Sequential clustering using the Event Horizon (EH) membership
+ * \brief Sequential clustering using the Event Horizon (EH) membership
  * policy. Suitable for information entropy calculations.
  */
 template <typename T>

@@ -1,7 +1,7 @@
 /**
- * @file sigmoid_config.hpp
+ * \file sigmoid_config.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -35,10 +35,10 @@ NS_START(rcppsw, math, config);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct sigmoid_config
- * @ingroup rcppsw math
+ * \struct sigmoid_config
+ * \ingroup math
  *
- * @brief Parameters for probabilistic exponentials (aka sigmoids).
+ * \brief Parameters for probabilistic exponentials (aka sigmoids).
  */
 struct sigmoid_config final : public rcppsw::config::base_config {
   double reactivity{0.0};

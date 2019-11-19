@@ -1,7 +1,7 @@
 /**
- * @file polymorphic_visitable.hpp
+ * \file polymorphic_visitable.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -35,9 +35,9 @@ NS_START(rcppsw, patterns, visitor);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class polymorphic_accept_set_helper
+ * \class polymorphic_accept_set_helper
  *
- * @brief Helper class to provide the actual implementation of the visitor
+ * \brief Helper class to provide the actual implementation of the visitor
  * pattern, receiving end.
  */
 template <typename T>
@@ -48,10 +48,10 @@ class polymorphic_accept_set_helper {
 };
 
 /**
- * @class polymorphic_accept_set<...>
- * @ingroup rcppsw patterns visitor
+ * \class polymorphic_accept_set<...>
+ * \ingroup patterns visitor
  *
- * @brief Allows polymorphic classes (those with a pure virtual member in a base
+ * \brief Allows polymorphic classes (those with a pure virtual member in a base
  * class) to accept visitors of specific types. Allows implicit conversion to
  * base classes if both base/derived types are present in the set.
  *
@@ -67,9 +67,9 @@ template <typename... Ts>
 class polymorphic_accept_set {};
 
 /**
- * @class polymorphic_accept_set<T,...>
+ * \class polymorphic_accept_set<T,...>
  *
- * @brief Middle recursive call for template expansion.
+ * \brief Middle recursive call for template expansion.
  */
 template<typename T, typename... Ts>
 class polymorphic_accept_set<T, Ts...>: public polymorphic_accept_set_helper<T>,
@@ -80,9 +80,9 @@ class polymorphic_accept_set<T, Ts...>: public polymorphic_accept_set_helper<T>,
 };
 
 /**
- * @class polymorphic_accept_set<T>
+ * \class polymorphic_accept_set<T>
  *
- * @brief Base case for template expansion.
+ * \brief Base case for template expansion.
  */
 template<typename T>
 class polymorphic_accept_set<T>: public polymorphic_accept_set_helper<T> {

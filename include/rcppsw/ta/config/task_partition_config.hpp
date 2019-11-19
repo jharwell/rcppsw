@@ -1,7 +1,7 @@
 /**
- * @file task_partition_config.hpp
+ * \file task_partition_config.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -36,8 +36,11 @@ NS_START(rcppsw, ta, config);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct task_partition_config
-* @ingroup rcppsw config ta
+ * \struct task_partition_config
+ * \ingroup config ta
+ *
+ * \brief Configuration for task partitioning probability calculation, as
+ * described in \todo paper ref.
  */
 struct task_partition_config final : public rcppsw::config::base_config {
   src_sigmoid_sel_config src_sigmoid{};

@@ -1,7 +1,7 @@
 /**
- * @file executable_task.hpp
+ * \file executable_task.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -51,10 +51,10 @@ struct src_sigmoid_sel_config;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class executable_task
- * @ingroup rcppsw ta
+ * \class executable_task
+ * \ingroup ta
  *
- * @brief Represents the executable concept of a task, which encompasses:
+ * \brief Represents the executable concept of a task, which encompasses:
  *
  * - A possibly updated estimate of the time it takes to do a task. If a task is
  *   only made to be executed once, then this field is unused.
@@ -103,7 +103,7 @@ class executable_task : public logical_task,
   }
 
   /**
-   * @brief Update the calculated interface time for the task if the current
+   * \brief Update the calculated interface time for the task if the current
    * task has been marked as being at (one of) its task interface(s).
    *
    * This is needed for accurate task abort calculations.
@@ -117,23 +117,23 @@ class executable_task : public logical_task,
   }
 
   /**
-   * @brief Get the ID of the active interface.
+   * \brief Get the ID of the active interface.
    *
-   * @return The ID, or -1 if there is not currently an active interface.
+   * \return The ID, or -1 if there is not currently an active interface.
    */
   int active_interface(void) const RCSW_PURE;
 
   /**
-   * @brief Get the ID of the last active interface.
+   * \brief Get the ID of the last active interface.
    *
-   * @return The ID, or -1 if an interface has not yet been completed.
+   * \return The ID, or -1 if an interface has not yet been completed.
    */
   int task_last_active_interface(void) const override final {
     return m_last_active_interface;
   }
 
   /**
-   * @brief Because tasks can have multiple interfaces, they need a way to reset
+   * \brief Because tasks can have multiple interfaces, they need a way to reset
    * their interface time upon leaving/entering an interface.
    */
   void interface_time_reset(void) {
@@ -143,7 +143,7 @@ class executable_task : public logical_task,
   }
 
   /**
-   * @brief Update the calculated abort probability for the task. This should be
+   * \brief Update the calculated abort probability for the task. This should be
    * done every timestep, even if there are logical "gates" that will only
    * result in a non-zero abort probability on some timesteps.
    */
@@ -163,7 +163,7 @@ class executable_task : public logical_task,
   }
 
   /**
-   * @brief Update the calculated execution time for the task
+   * \brief Update the calculated execution time for the task
    *
    * This is needed for accurate task abort calculations.
    */
@@ -172,7 +172,7 @@ class executable_task : public logical_task,
   }
 
   /**
-   * @brief Reset the execution time for the task.
+   * \brief Reset the execution time for the task.
    */
   void exec_time_reset(void) {
     m_last_exec_time = m_exec_time;
@@ -180,44 +180,44 @@ class executable_task : public logical_task,
   }
 
   /**
-   * @brief Update the current estimate of the task interface time by using a
+   * \brief Update the current estimate of the task interface time by using a
    * weighted sum of the previous \ref time_estimate and the new value.
    *
-   * @param i The interface ID.
-   * @param last_measure The last measured time.
+   * \param i The interface ID.
+   * \param last_measure The last measured time.
    */
   void interface_estimate_update(uint i, const types::timestep& last_measure) {
     m_interface_estimates[i](last_measure.v());
   }
 
   /**
-   * @brief Update the current estimate of the task execution time by using a
+   * \brief Update the current estimate of the task execution time by using a
    * weighted sum of the previous \ref time_estimate and the new value.
    *
-   * @param last_measure The last measured time.
+   * \param last_measure The last measured time.
    */
   void exec_estimate_update(const types::timestep& last_measure) {
     m_exec_estimate(last_measure.v());
   }
 
   /**
-   * @brief Initialize the execution time estimate for the task. This ignores
+   * \brief Initialize the execution time estimate for the task. This ignores
    * the value of the alpha parameter for updating estimates.
    *
-   * @param init_measure Initial execution estimate.
+   * \param init_measure Initial execution estimate.
    */
   void exec_estimate_init(const types::timestep& init_measure) {
     m_exec_estimate.eval(init_measure.v());
   }
 
   /**
-   * @brief The method that all tasks must define that specifies how to execute
+   * \brief The method that all tasks must define that specifies how to execute
    * the task.
    */
   virtual void task_execute(void) = 0;
 
   /**
-   * @brief Get the probability of aborting an executable task.
+   * \brief Get the probability of aborting an executable task.
    *
    * Even though this class also has public functions for updating the
    * internally maintained abort probability, this function is still needed in
@@ -227,56 +227,56 @@ class executable_task : public logical_task,
   virtual double abort_prob_calc(void) = 0;
 
   /**
-   * @brief (Possibly) update/change which interface is currently active.
+   * \brief (Possibly) update/change which interface is currently active.
    *
-   * @param i The currently active interface, -1 if none active.
+   * \param i The currently active interface, -1 if none active.
    */
   virtual void active_interface_update(int i) = 0;
 
   /**
-   * @brief Get the current interface time of the task for the specified
+   * \brief Get the current interface time of the task for the specified
    * interface.
    *
-   * @param i The interface ID.
+   * \param i The interface ID.
    */
   types::timestep interface_time(uint i) const { return m_interface_times[i]; }
 
   /**
-   * @brief Get the current abort probability at the specified interface.
+   * \brief Get the current abort probability at the specified interface.
    *
    */
   double abort_prob(void) const { return m_abort_prob.v(); }
 
   /**
-   * @brief Get the current execution time of the task.
+   * \brief Get the current execution time of the task.
    */
   types::timestep exec_time(void) const { return m_exec_time; }
 
   /**
-   * @brief Get if a task is currently atomic (i.e. not abortable).
+   * \brief Get if a task is currently atomic (i.e. not abortable).
    */
   bool is_atomic(void) const { return m_is_atomic; }
 
   /**
-   * @brief Set a task as atomic, meaning that it cannot be aborted during
+   * \brief Set a task as atomic, meaning that it cannot be aborted during
    * execution.
    */
   void set_atomic(bool b) { m_is_atomic = b; }
 
   /**
-   * @brief Get if a task is partitionable.
+   * \brief Get if a task is partitionable.
    */
   bool is_partitionable(void) const { return m_is_partitionable; }
 
   /**
-   * @brief Set a task as partitionable.
+   * \brief Set a task as partitionable.
    */
   void set_partitionable(bool b) { m_is_partitionable = b; }
 
   void task_aborted(bool task_aborted) { m_task_aborted = task_aborted; }
 
   /**
-   * @brief Increment the count of the # of times the task has been
+   * \brief Increment the count of the # of times the task has been
    * executed. Execution may have terminated due to abort or completion, but
    * that is tracked elsewhere.
    */
@@ -286,18 +286,18 @@ class executable_task : public logical_task,
 
  protected:
   /**
-   * @brief Calculate the interface time of the current task for use in abort
+   * \brief Calculate the interface time of the current task for use in abort
    * calculations.
    *
-   * @param i The interface ID.
-   * @param start_time The timestep upon which the task entered the interface.
+   * \param i The interface ID.
+   * \param start_time The timestep upon which the task entered the interface.
    */
   virtual types::timestep interface_time_calc(
       uint i,
       const types::timestep& start_time) = 0;
 
   /**
-   * @brief Get the current time
+   * \brief Get the current time
    */
   virtual types::timestep current_time(void) const = 0;
 
@@ -306,7 +306,7 @@ class executable_task : public logical_task,
   }
 
   /**
-   * @brief Mark the current timestep as the begin of a task's interface.
+   * \brief Mark the current timestep as the begin of a task's interface.
    */
   void interface_time_mark_start(uint i) {
     m_interface_start_times[i] = current_time();

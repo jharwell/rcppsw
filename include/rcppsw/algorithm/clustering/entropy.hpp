@@ -1,7 +1,7 @@
 /**
- * @file entropy.hpp
+ * \file entropy.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -44,10 +44,10 @@ NS_START(rcppsw, algorithm, clustering);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class entropy_balch2000
- * @ingroup rcppsw algorithm clustering
+ * \class entropy_balch2000
+ * \ingroup algorithm clustering
  *
- * @brief Wrapper class for performing clustering using the event horizon model
+ * \brief Wrapper class for performing clustering using the event horizon model
  * in which all points within a specified distance (horizon) to a point i are
  * included in its cluster. Implements the following algorithm from Balch2000:
  *
@@ -63,7 +63,7 @@ NS_START(rcppsw, algorithm, clustering);
  * 4. Calculate entropy of remaining non-redundant clusters. Entropy is
  *    accumulated across all values of horizon.
  *
- * @tparam T The type of the data that is being clustered. It must support the
+ * \tparam T The type of the data that is being clustered. It must support the
  *           following operations: +=, /=, = .
  */
 template <typename T>
@@ -80,10 +80,10 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
   using membership_vector = std::vector<detail::membership_type<detail::policy::EH>>;
 
   /**
-   * @param impl The method and policy for clustering.
-   * @param horizon The min and maximum bounds of distances to use when
+   * \param impl The method and policy for clustering.
+   * \param horizon The min and maximum bounds of distances to use when
    *                computing clusters.
-   * @param horizon_delta The step size for moving between the min and max
+   * \param horizon_delta The step size for moving between the min and max
    *                      distance bounds; defines # of overall iterations.
    */
   entropy_balch2000(std::unique_ptr<detail::entropy_impl<T>> impl,
@@ -95,7 +95,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
         m_impl(std::move(impl)) {}
 
   /**
-   * @brief Perform entropy based clustering, returning the accumulated entropy
+   * \brief Perform entropy based clustering, returning the accumulated entropy
    * across all horizons.
    */
   double run(const std::vector<T>& data, const dist_calc_ftype& dist_func) {
@@ -156,7 +156,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
    T,
    detail::policy::EH>::cluster_type;
   /**
-   * @brief Method for derived classes to use to initialize centroids in
+   * \brief Method for derived classes to use to initialize centroids in
    * whatever way they choose, and perform first-touch allocation if they want
    * to.
    */
@@ -221,7 +221,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
   detail::membership_type<detail::policy::EH> m_membership{};
 
   /**
-   * @brief This is a member variable, rather than a local variable in
+   * \brief This is a member variable, rather than a local variable in
    * \ref balch2000_iter, in order to reduce dynamic memory management overhead.
    */
 

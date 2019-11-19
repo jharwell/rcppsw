@@ -1,7 +1,7 @@
 /**
- * @file strict_greedy_allocator.hpp
+ * \file strict_greedy_allocator.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -40,10 +40,10 @@ class polled_task;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class strict_greedy_allocator
- * @ingroup rcppsw ta
+ * \class strict_greedy_allocator
+ * \ingroup ta
  *
- * @brief Allocates a task from a given set of a tasks, using a strict greedy
+ * \brief Allocates a task from a given set of a tasks, using a strict greedy
  * approach: always taking the task of minimum cost. Provably optimal task
  * allocation policy if the task allocation space is a matroid, (probably)
  * suboptimal otherwise.
@@ -59,9 +59,9 @@ class strict_greedy_allocator : er::client<strict_greedy_allocator> {
       const strict_greedy_allocator& other) = delete;
 
   /**
-   * @brief Perform task allocation.
+   * \brief Perform task allocation.
    *
-   * @param tasks The current set of tasks.
+   * \param tasks The current set of tasks.
    */
   polled_task* operator()(const std::vector<polled_task*>& tasks) const;
 

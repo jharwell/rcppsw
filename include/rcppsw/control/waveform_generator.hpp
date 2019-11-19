@@ -1,7 +1,7 @@
 /**
- * @file waveform_generator.hpp
+ * \file waveform_generator.hpp
  *
- * @copyright 2018 John Harwell/Anthony Chen, All rights reserved.
+ * \copyright 2018 John Harwell/Anthony Chen, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -42,10 +42,10 @@ struct waveform_config;
  * Classes
  ******************************************************************************/
 /**
- * @class waveform_generator
- * @ingroup rcppsw control
+ * \class waveform_generator
+ * \ingroup control
  *
- * @brief Factory to create waveforms of different types given the name of a
+ * \brief Factory to create waveforms of different types given the name of a
  * waveform. Valid names are:
  *
  * - Sine (periodic)

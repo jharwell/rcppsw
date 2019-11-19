@@ -1,7 +1,7 @@
 /**
- * @file stoch_nbhd1_allocator.hpp
+ * \file stoch_nbhd1_allocator.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -43,10 +43,10 @@ class bi_tdgraph;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class stoch_nbhd1_allocator
- * @ingroup rcppsw ta
+ * \class stoch_nbhd1_allocator
+ * \ingroup ta
  *
- * @brief Allocates a task from a \ref bi_tdgraph using the STOCH-NBHD1 method
+ * \brief Allocates a task from a \ref bi_tdgraph using the STOCH-NBHD1 method
  * from Harwell2020.
  */
 class stoch_nbhd1_allocator : er::client<stoch_nbhd1_allocator> {

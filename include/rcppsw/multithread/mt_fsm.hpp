@@ -1,7 +1,7 @@
 /**
- * @file mt_fsm.hpp
+ * \file mt_fsm.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -40,10 +40,10 @@ namespace sm = patterns::fsm;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class mt_fsm
- * @ingroup rcppsw multithread
+ * \class mt_fsm
+ * \ingroup multithread
  *
- * @brief Extends \ref base_fsm to be threadsafe.
+ * \brief Extends \ref base_fsm to be threadsafe.
  */
 class mt_fsm : public patterns::fsm::base_fsm {
  public:

@@ -1,7 +1,7 @@
 /**
- * @file sigmoid_parser.hpp
+ * \file sigmoid_parser.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of FORDYCA.
  *
@@ -40,17 +40,17 @@ NS_START(rcppsw, math, config, xml);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class sigmoid_parser
- * @ingroup rcppsw math config xml
+ * \class sigmoid_parser
+ * \ingroup math config xml
  *
- * @brief Parses XML configuration for sigmoids into \ref sigmoid_config.
+ * \brief Parses XML configuration for sigmoids into \ref sigmoid_config.
  */
 class sigmoid_parser : public rcppsw::config::xml::xml_config_parser {
  public:
   using config_type = sigmoid_config;
 
   /**
-   * @brief The root tag that all task sigmoid configuration values should lie
+   * \brief The root tag that all task sigmoid configuration values should lie
    * under in the XML tree.
    */
   static constexpr char kXMLRoot[] = "sigmoid";

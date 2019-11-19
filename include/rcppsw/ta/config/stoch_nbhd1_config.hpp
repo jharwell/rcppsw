@@ -1,7 +1,7 @@
 /**
- * @file stoch_nbhd1_config.hpp
+ * \file stoch_nbhd1_config.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -39,12 +39,15 @@ NS_START(rcppsw, ta, config);
  * Structure Definitions
  ******************************************************************************/
 /**
- * @struct stoch_nbhd1_config
- * @ingroup rcppsw ta config
+ * \struct stoch_nbhd1_config
+ * \ingroup ta config
+ *
+ * \brief Configuration for the STOCH-NBHD1 task allocation method, as described
+ * in \todo: Paper ref.
  */
 struct stoch_nbhd1_config final : public rcppsw::config::base_config {
   /**
-   * @brief Policy for specifying how the initially active TAB in the executive
+   * \brief Policy for specifying how the initially active TAB in the executive
    * will be chosen. Valid values are: [root, random, max_depth].
    */
   std::string tab_init_policy{};

@@ -1,7 +1,7 @@
 /**
- * @file state_map_row.hpp
+ * \file state_map_row.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -36,10 +36,10 @@ NS_START(rcppsw, patterns, fsm);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class state_map_row
- * @ingroup rcppsw patterns fsm
+ * \class state_map_row
+ * \ingroup patterns fsm
  *
- * @brief A structure to hold a single row within the state map.
+ * \brief A structure to hold a single row within the state map.
  */
 class state_map_row {
  public:

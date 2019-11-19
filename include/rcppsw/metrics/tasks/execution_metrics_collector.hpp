@@ -1,7 +1,7 @@
 /**
- * @file execution_metrics_collector.hpp
+ * \file execution_metrics_collector.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -42,18 +42,18 @@ namespace ta = rcppsw::ta;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class execution_metrics_collector
- * @ingroup rcppsw metrics tasks
+ * \class execution_metrics_collector
+ * \ingroup metrics tasks
  *
- * @brief Collector for metrics for an executable task across executions of that
+ * \brief Collector for metrics for an executable task across executions of that
  * task.
  */
 class execution_metrics_collector final : public base_metrics_collector,
                                     public er::client<execution_metrics_collector> {
  public:
   /**
-   * @param ofname Output file name.
-   * @param interval Collection interval.
+   * \param ofname Output file name.
+   * \param interval Collection interval.
    */
   execution_metrics_collector(const std::string& ofname, uint interval);
 
@@ -67,27 +67,27 @@ class execution_metrics_collector final : public base_metrics_collector,
  private:
   struct stats {
     /**
-     * @brief # Times the task has been completed.
+     * \brief # Times the task has been completed.
      */
     std::atomic_uint complete_count{0};
 
     /**
-     * @brief # Times the task has been aborted.
+     * \brief # Times the task has been aborted.
      */
     std::atomic_uint abort_count{0};
 
     /**
-     * @brief # Times at their interface.
+     * \brief # Times at their interface.
      */
     std::atomic_uint interface_count{0};
 
     /**
-     * @brief Execution times of the task.
+     * \brief Execution times of the task.
      */
     std::atomic_uint exec_time{};
 
     /**
-     * @brief Interface time of the task.
+     * \brief Interface time of the task.
      */
     std::atomic_uint interface_time{0};
 

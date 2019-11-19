@@ -1,7 +1,7 @@
 /**
- * @file hfsm.hpp
+ * \file hfsm.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -37,16 +37,16 @@ NS_START(rcppsw, patterns, fsm);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class hfsm
- * @ingroup rcppsw patterns fsm
+ * \class hfsm
+ * \ingroup patterns fsm
  *
- * @brief Implements a software-based hierarchical state machine.
+ * \brief Implements a software-based hierarchical state machine.
  */
 class hfsm : public base_fsm, public er::client<hfsm> {
  public:
   /**
-   * @param max_states The maximum number of state machine states.
-   * @param initial_state Initial state machine state.
+   * \param max_states The maximum number of state machine states.
+   * \param initial_state Initial state machine state.
    */
   explicit hfsm(uint8_t max_states,
                 uint8_t initial_state = 0)
@@ -63,28 +63,28 @@ class hfsm : public base_fsm, public er::client<hfsm> {
   }
 
   /**
-   * @brief Injects a signal of the specified type into the state machine,
+   * \brief Injects a signal of the specified type into the state machine,
    * causing the state machine to execute and process the signal. This is the
    * main means of running a \ref hfsm.
    */
   void inject_event(int signal, int type);
 
   /**
-   * @brief Change the parent state of the specified state to a new state.
+   * \brief Change the parent state of the specified state to a new state.
    *
-   * @param state The state within THIS state machine to change the parent of.
-   * @param new_parent A new parent state, which can be from ANOTHER \ref hfsm.
+   * \param state The state within THIS state machine to change the parent of.
+   * \param new_parent A new parent state, which can be from ANOTHER \ref hfsm.
    */
   void change_parent(uint8_t state,
                      rcppsw::patterns::fsm::state* new_parent);
 
  protected:
   /**
-   * @brief The topmost state in the hierarchy, of which all states are
+   * \brief The topmost state in the hierarchy, of which all states are
    * children. If an event gets all the way up to here, that's bad, because it
    * should have been handled at a lower layer.
    *
-   * @return Does not return.
+   * \return Does not return.
    */
   int ST_top_state(void) {
     ER_FATAL_SENTINEL("Top state in HFSM");
@@ -105,7 +105,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
  * State Macros With Data
  ******************************************************************************/
 /**
- * @def HFSM_STATE_INHERIT(BASE_FSM, inherited_name, event_data)
+ * \def HFSM_STATE_INHERIT(BASE_FSM, inherited_name, event_data)
  *
  * Declare a state in the current HFSM to be inherited from a parent HFSM.
  *
@@ -118,7 +118,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
           inherited_name
 
 /**
- * @def HFSM_STATE_DECLARE(FSM, state_name, event_data)
+ * \def HFSM_STATE_DECLARE(FSM, state_name, event_data)
  *
  * Declare a state in the current HFSM.
  *
@@ -148,7 +148,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
   FSM_GUARD_DEFINE(FSM, guard_name, event_data)
 
 /**
- * @def HFSM_ENTRY_DECLARE(FSM, entry_name, event_data)
+ * \def HFSM_ENTRY_DECLARE(FSM, entry_name, event_data)
  *
  * Declare a state in the current HFSM.
  *
@@ -170,7 +170,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
           entry_name
 
 /**
- * @def HFSM_ENTRY_INHERIT(BASE_FSM, inherited_name, event_data)
+ * \def HFSM_ENTRY_INHERIT(BASE_FSM, inherited_name, event_data)
  *
  * Declare a entry callback in the current HFSM to be inherited from a parent
  * HFSM.
@@ -186,7 +186,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
   FSM_ENTRY_DEFINE(FSM, entry_name, event_data)
 
 /**
- * @def HFSM_EXIT_DECLARE(FSM, exit_name)
+ * \def HFSM_EXIT_DECLARE(FSM, exit_name)
  *
  * Declare an exit callback in the current HFSM.
  */
@@ -199,7 +199,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
   exit_name{}
 
 /**
- * @def HFSM_EXIT_INHERIT(BASE_FSM, inherited_name, event_data)
+ * \def HFSM_EXIT_INHERIT(BASE_FSM, inherited_name, event_data)
  *
  * Declare an exit callback in the current HFSM to be inherited from a parent
  * HFSM.
@@ -215,7 +215,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
 #define HFSM_EXIT_DEFINE(FSM, exit_name) FSM_EXIT_DEFINE(FSM, exit_name)
 
 /**
- * @brief Construct a previously declared/inherited state.
+ * \brief Construct a previously declared/inherited state.
  *
  * Should be called in the constructor, and passed the desired parent
  * state. This cannot be done at state declaration (from the compiler's point of
@@ -228,7 +228,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
  * State Macros Without Data
  ******************************************************************************/
 /**
- * @def HFSM_STATE_INHERIT_ND(FSM, inherited_name)
+ * \def HFSM_STATE_INHERIT_ND(FSM, inherited_name)
  *
  * Same as \ref HFSM_STATE_INHERIT(), but with no data.
  */
@@ -239,7 +239,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
           inherited_name
 
 /**
- * @def HFSM_STATE_DECLARE_ND(FSM, state_name)
+ * \def HFSM_STATE_DECLARE_ND(FSM, state_name)
  *
  * Same as \ref HFSM_STATE_DECLARE(), but with no data.
  */
@@ -260,7 +260,7 @@ state_name
   FSM_GUARD_DEFINE_ND(FSM, guard_name)
 
 /**
- * @def HFSM_ENTRY_DECLARE(FSM, entry_name)
+ * \def HFSM_ENTRY_DECLARE_ND(FSM, entry_name)
  *
  * Same as \ref HFSM_ENTRY_DECLARE(), but with no data.
  */
@@ -273,7 +273,7 @@ rcppsw::patterns::fsm::state_entry_action0<FSM, &FSM::EN_##entry_name> \
 entry_name{}
 
 /**
- * @def HFSM_ENTRY_INHERIT_ND(FSM, inherited_name)
+ * \def HFSM_ENTRY_INHERIT_ND(FSM, inherited_name)
  *
  * Same as \ref HFSM_ENTRY_INHERIT(), but with no data.
  */
@@ -291,8 +291,8 @@ entry_name{}
 #define HFSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var) \
   FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)
 
-/*
- * @def HFSM_DECLARE_STATE_MAP(type, name, n_entries)
+/**
+ * \def HFSM_DECLARE_STATE_MAP(type, name, n_entries)
  *
  * Declare the state map for a state machine.
  *

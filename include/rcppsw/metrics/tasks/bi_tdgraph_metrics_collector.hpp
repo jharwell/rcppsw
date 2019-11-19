@@ -1,7 +1,7 @@
 /**
- * @file bi_tdgraph_metrics_collector.hpp
+ * \file bi_tdgraph_metrics_collector.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -40,19 +40,19 @@ NS_START(rcppsw, metrics, tasks);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class bi_tdgraph_metrics_collector
- * @ingroup rcppsw metrics tasks
+ * \class bi_tdgraph_metrics_collector
+ * \ingroup metrics tasks
  *
- * @brief Collector for metrics about the current task_dist of tasks in
+ * \brief Collector for metrics about the current task_dist of tasks in
  * a collection of agents executing tasks in a \ref bi_tdgraph. Metrics are
  * written out at the specified interval.
  */
 class bi_tdgraph_metrics_collector final : public base_metrics_collector {
  public:
   /**
-   * @param ofname Output file name.
-   * @param interval Collection interval.
-   * @param decomposition_depth The maximum depth of the \ref bi_tdgraph.
+   * \param ofname Output file name.
+   * \param interval Collection interval.
+   * \param decomposition_depth The maximum depth of the \ref bi_tdgraph.
    */
   bi_tdgraph_metrics_collector(const std::string& ofname,
                                uint interval,

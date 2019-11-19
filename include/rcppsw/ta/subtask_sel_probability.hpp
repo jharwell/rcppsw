@@ -1,7 +1,7 @@
 /**
- * @file subtask_sel_probability.hpp
+ * \file subtask_sel_probability.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -44,10 +44,10 @@ struct sigmoid_sel_config;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class subtask_sel_probability
- * @ingroup rcppsw ta
+ * \class subtask_sel_probability
+ * \ingroup ta
  *
- * @brief Calculates the probability that a robot selects subtask 2 when it has
+ * \brief Calculates the probability that a robot selects subtask 2 when it has
  * most recently executed subtask 1 (assuming partitioning is employed).
  *
  * Taken/adapted from Brutschy2014, harwell2018. Note that Brutschy2014 using
@@ -87,14 +87,14 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
   static constexpr char kMethodRandom[] = "random";
 
   /**
-   * @brief Initialize subtask sel probability with default values, based
+   * \brief Initialize subtask sel probability with default values, based
    * on whatever the selected method is.
    */
   explicit subtask_sel_probability(std::string method);
   ~subtask_sel_probability(void) override = default;
 
   /**
-   * @brief Initialize subtask sel probability with method + parameter
+   * \brief Initialize subtask sel probability with method + parameter
    * values.
    */
   explicit subtask_sel_probability(const config::sigmoid_sel_config* config);
@@ -102,13 +102,13 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
   const std::string& method(void) const { return mc_method; }
 
   /**
-   * @brief After construction initialization of parameters (may be needed in
+   * \brief After construction initialization of parameters (may be needed in
    * some situations).
    */
   void init_sigmoid(double reactivity, double offset, double gamma);
 
   /**
-   * @brief Calculate the sel probability based on the configured method,
+   * \brief Calculate the sel probability based on the configured method,
    * using the most recent time estimates of each subtask.
    */
   double operator()(const time_estimate* subtask1,
@@ -117,40 +117,40 @@ class subtask_sel_probability : public er::client<subtask_sel_probability>,
 
  private:
   /**
-   * @brief Random subtask selection, regardless of time estimates.
+   * \brief Random subtask selection, regardless of time estimates.
    */
   double calc_random(math::rng* rng);
 
   /**
-   * @brief Calculate the probability of switching from subtask 1 to subtask 2
+   * \brief Calculate the probability of switching from subtask 1 to subtask 2
    * using the piecewise method described in Brutschy2014.
    *
-   * @param int_est1 Estimate of \a interface time for subtask1.
-   * @param int_est2 Estimate of \a interface time for subtask2.
+   * \param int_est1 Estimate of \a interface time for subtask1.
+   * \param int_est2 Estimate of \a interface time for subtask2.
    *
-   * @return Probability of switching.
+   * \return Probability of switching.
    */
   double calc_brutschy2014(const time_estimate& int_est1,
                            const time_estimate& int_est2);
 
   /**
-   * @brief Calculate the probability of switching from subtask 1 to subtask 2
+   * \brief Calculate the probability of switching from subtask 1 to subtask 2
    * using the piecewise method described in Harwell2018.
    *
-   * @param exec_est1 Estimate of \a exec time for subtask1.
-   * @param exec_est2 Estimate of \a exec time for subtask2.
+   * \param exec_est1 Estimate of \a exec time for subtask1.
+   * \param exec_est2 Estimate of \a exec time for subtask2.
    *
-   * @return Probability of switching.
+   * \return Probability of switching.
    */
   double calc_harwell2018(const time_estimate& exec_est1,
                           const time_estimate& exec_est2);
 
   /**
-   * @brief Calculate the sigmoid activation for a pair of time estimates using
+   * \brief Calculate the sigmoid activation for a pair of time estimates using
    * time estimates.
    *
-   * @param est1 Exec/interface estimate 1.
-   * @param est2 Exec/interface estimate 2.
+   * \param est1 Exec/interface estimate 1.
+   * \param est2 Exec/interface estimate 2.
    */
   double calc_sigmoid(const time_estimate& est1,
                       const time_estimate& est2) RCSW_PURE;

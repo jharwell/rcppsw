@@ -1,7 +1,7 @@
 /**
- * @file waveform.hpp
+ * \file waveform.hpp
  *
- * @copyright 2018 John Harwell.
+ * \copyright 2018 John Harwell.
  *
  * This file is part of RCPPSW.
  *
@@ -36,10 +36,10 @@ NS_START(rcppsw, control);
  * Classes
  ******************************************************************************/
 /**
- * @class waveform
- * @ingroup rcppsw control
+ * \class waveform
+ * \ingroup control
  *
- * @brief Base class for all types of waveforms (in the control theory
+ * \brief Base class for all types of waveforms (in the control theory
  * sense). All waveforms have [frequency, phase, amplitude, offset] components.
  */
 class waveform {
@@ -53,7 +53,7 @@ class waveform {
   virtual ~waveform(void) = default;
 
   /**
-   * @brief Get the current value of the variance function, given the current
+   * \brief Get the current value of the variance function, given the current
    * time as input.
    */
   virtual double value(double time) = 0;

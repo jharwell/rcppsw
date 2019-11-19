@@ -1,7 +1,7 @@
 /**
- * @file caching_factory.hpp
+ * \file caching_factory.hpp
  *
- * @copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2019 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -40,10 +40,10 @@ NS_START(rcppsw, patterns, prototype);
  * Class Definitions
  ******************************************************************************/
 /**
- * @class caching_factory
- * @ingroup patterns prototype
+ * \class caching_factory
+ * \ingroup patterns prototype
  *
- * @brief Each time an object construction is requested, if an object type has
+ * \brief Each time an object construction is requested, if an object type has
  * been previously created with the same name, then a reference to that a
  * previously created object of is returned, rather than a new instance of
  * it. If construction of a previously constructed type of object is requested

@@ -1,7 +1,7 @@
 /**
- * @file waveform_generator.cpp
+ * \file waveform_generator.cpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *

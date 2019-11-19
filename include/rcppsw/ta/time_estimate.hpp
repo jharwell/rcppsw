@@ -1,7 +1,7 @@
 /**
- * @file time_estimate.hpp
+ * \file time_estimate.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -34,6 +34,10 @@ NS_START(rcppsw, ta);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * \brief The type used to estimate time when performing calculations in task
+ * allocation.
+ */
 using time_estimate = math::ema<int>;
 
 NS_END(ta, rcppsw);

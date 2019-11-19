@@ -1,7 +1,7 @@
 /**
- * @file state.hpp
+ * \file state.hpp
  *
- * @copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -38,10 +38,10 @@ class event_data;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class state
- * @ingroup rcppsw patterns fsm
+ * \class state
+ * \ingroup patterns fsm
  *
- * @brief Abstract state base class that all states inherit from.
+ * \brief Abstract state base class that all states inherit from.
  */
 class state {
  public:
@@ -50,14 +50,14 @@ class state {
   virtual ~state(void) = default;
 
   /**
-   * @brief Called by the state machine engine to execute a state action. If a
+   * \brief Called by the state machine engine to execute a state action. If a
    * guard condition exists and it evaluates to false, the state action will not
    * execute.
    *
-   * @param sm A state machine instance.
-   * @param data The event data.
+   * \param sm A state machine instance.
+   * \param data The event data.
    *
-   * @return integer indicating whether or not the event was handled.
+   * \return integer indicating whether or not the event was handled.
    */
   virtual int invoke_state_action(base_fsm* sm,
                                   const event_data* data) const = 0;
