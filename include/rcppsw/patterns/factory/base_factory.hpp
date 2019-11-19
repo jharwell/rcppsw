@@ -44,7 +44,7 @@ struct factory_sharing_type {};
 
 /**
  * @class base_factory
- * @ingroup rcppsw patterns factory
+ * @ingroup patterns factory
  *
  * @brief Dispatcher factory class that releases or shares ownership of the
  * created objects to the class/context that requests object creation. All
@@ -113,7 +113,7 @@ class base_factory {
   };
 
   /**
-   * @brief Implementation of \ref factory_worker interface. We need different
+   * @brief Implementation of @ref factory_worker interface. We need different
    * specializations: one for std::shared_ptr, and one for std::unique_ptr,
    * because we need to maintain a list of the objects we have created for
    * std::shared_ptr. Returning the shared_ptr object without doing this can

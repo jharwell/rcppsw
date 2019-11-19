@@ -37,7 +37,7 @@ class base_fsm;
  ******************************************************************************/
 /**
  * @class state_exit
- * @ingroup rcppsw patterns fsm
+ * @ingroup patterns fsm
  *
  * @brief Abstract exit base class that all exit classes inherit from.
  */

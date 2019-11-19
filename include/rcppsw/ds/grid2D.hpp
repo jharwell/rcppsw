@@ -36,7 +36,7 @@ NS_START(rcppsw, ds);
  ******************************************************************************/
 /**
  * @class grid2D
- * @ingroup rcppsw ds
+ * @ingroup ds
  *
  * @brief A 2D grid of SOMETHING. Mainly a convenience wrapper around
  * boost::multi_array.

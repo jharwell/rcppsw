@@ -41,7 +41,7 @@ NS_START(rcppsw, math, config, xml);
  ******************************************************************************/
 /**
  * @class rng_parser
- * @ingroup rcppsw math config xml
+ * @ingroup math config xml
  *
  * @brief Parses XML configuration relating to RNG.
  */

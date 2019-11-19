@@ -46,9 +46,9 @@ NS_START(rcppsw, ta, config, xml);
  ******************************************************************************/
 /**
  * @class task_alloc_parser
- * @ingroup rcppsw ta config xml
+ * @ingroup ta config xml
  *
- * @brief Parses XML configuration used for task allocation into \ref
+ * @brief Parses XML configuration used for task allocation into @ref
  * task_alloc_config.
  */
 class task_alloc_parser final : public rcppsw::config::xml::xml_config_parser {

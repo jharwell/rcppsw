@@ -37,6 +37,10 @@ class bi_tdgraph;
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @brief boost::variant containing one of the possible datastructures that the
+ * \ref base_executive and its derived classes can operate on.
+ */
 using ds_variant = boost::variant<bi_tdgraph>;
 
 NS_END(ds, ta, rcppsw);

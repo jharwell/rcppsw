@@ -41,7 +41,7 @@ NS_START(rcppsw, ta, config);
  ******************************************************************************/
 /**
  * @struct exec_estimates_config
- * @ingroup rcppsw ta config
+ * @ingroup ta config
  *
  * @brief Parameters for execution time estimates of tasks involved in
  * depth0. Not needed for depth0 controllers, but needed in depth > 1

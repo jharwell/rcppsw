@@ -40,7 +40,7 @@ NS_START(rcppsw, multithread);
  ******************************************************************************/
 /**
  * @class threadable
- * @ingroup rcppsw multithread
+ * @ingroup multithread
  *
  * @brief Derived classes will have the ability to spawn a new thread and run
  * inside the specified main loop.

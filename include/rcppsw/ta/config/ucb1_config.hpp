@@ -38,7 +38,10 @@ NS_START(rcppsw, ta, config);
  ******************************************************************************/
 /**
  * @struct ucb1_config
- * @ingroup rcppsw ta config
+ * @ingroup ta config
+ *
+ * @brief Configuration for the UCB1 task allocation algorithm, as described in
+ * @todo paper ref.
  */
 struct ucb1_config final : public rcppsw::config::base_config {
   double gamma{-1};

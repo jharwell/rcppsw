@@ -45,7 +45,7 @@ NS_START(rcppsw, algorithm, clustering);
  ******************************************************************************/
 /**
  * @class entropy_balch2000
- * @ingroup rcppsw algorithm clustering
+ * @ingroup algorithm clustering
  *
  * @brief Wrapper class for performing clustering using the event horizon model
  * in which all points within a specified distance (horizon) to a point i are
@@ -222,7 +222,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
 
   /**
    * @brief This is a member variable, rather than a local variable in
-   * \ref balch2000_iter, in order to reduce dynamic memory management overhead.
+   * @ref balch2000_iter, in order to reduce dynamic memory management overhead.
    */
 
 detail::membership_type<detail::policy::EH>   m_membership_cp{};

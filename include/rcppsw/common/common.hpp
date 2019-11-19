@@ -1,6 +1,6 @@
 /**
  * @file common.hpp
- * @ingroup rcppsw common
+ * @ingroup common
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -88,7 +88,7 @@
   }
 
 /**
- * @def RCPPSW_DECLDEF_OVERRIDE(Func, member,...)
+ * @def RCPPSW_DECLDEF_OVERRIDE_WRAP(Func, member,...)
  *
  * Wrap a public function from a member variable (or even another member
  * function that returns an object that contains the function you want to
@@ -130,7 +130,7 @@
  * Declare a "simple" overrnide of an inherited function with the __pure_
  * attribute. Should be *NOT* be used if the override is complex to implement
  * (i.e. for every instance of this macro in a header file there should be an
- * instance of \ref RCPPSW_WRAP_OVERRIDE_DEF() in the corresponding source file
+ * instance of @ref RCPPSW_WRAP_OVERRIDE_DEF() in the corresponding source file
  * for a class).
  */
 #define RCPPSW_WRAP_OVERRIDE_DECL(Ret, Func, ...) \

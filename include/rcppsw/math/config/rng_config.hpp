@@ -36,9 +36,9 @@ NS_START(rcppsw, math, config);
  ******************************************************************************/
 /**
  * @struct rng_config
- * @ingroup rcppsw config math
+ * @ingroup config math
  *
- * @brief Parameters for \ref rng objects.
+ * @brief Parameters for @ref rng objects.
  */
 struct rng_config final : public rcppsw::config::base_config {
   /**

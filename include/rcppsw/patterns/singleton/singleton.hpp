@@ -35,7 +35,7 @@ NS_START(rcppsw, patterns, singleton);
  ******************************************************************************/
 /**
  * @class singleton
- * @ingroup rcppsw patterns singleton
+ * @ingroup patterns singleton
  *
  * @brief Define a class as incapable of being moved, copied, etc., and that
  * there can only ever be one of.

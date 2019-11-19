@@ -39,7 +39,7 @@ NS_START(rcppsw, patterns, fsm);
  ******************************************************************************/
 /**
  * @class state_action0
- * @ingroup rcppsw patterns fsm
+ * @ingroup patterns fsm
  *
  * @tparam SM A state machine class.
  * @tparam Func A state machine member function pointer, which takes ZERO
@@ -62,7 +62,7 @@ class state_action0 : public state {
 
 /**
  * @class state_action1
- * @ingroup rcppsw patterns fsm
+ * @ingroup patterns fsm
  *
  * @tparam SM A state machine class.
  * @tparam Event A state function event data type (derived from event_data).

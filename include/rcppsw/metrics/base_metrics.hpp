@@ -36,7 +36,7 @@ NS_START(rcppsw, metrics);
  ******************************************************************************/
 /**
  * @class base_metrics
- * @ingroup rcppsw metrics
+ * @ingroup metrics
  *
  * @brief Base class for all collected metrics in RCPPSW.
  */

@@ -47,7 +47,7 @@ struct src_sigmoid_sel_config;
  ******************************************************************************/
 /**
  * @class bi_tab_sel_probability
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief Calculates the probability that a robot selects a given TAB or its
  * child/parent TAB (depending on whether the most recently finished/aborted
@@ -121,8 +121,8 @@ class bi_tab_sel_probability : public er::client<bi_tab_sel_probability>,
    * @brief Calculate the probability of switching from TAB 1 to TAB 2
    * using the piecewise method described in Harwell2019.
    *
-   * @param bi_tab1 Current TAB.
-   * @param bi_tab2 Other TAB to consider switching to.
+   * @param tab1 Current TAB.
+   * @param tab2 Other TAB to consider switching to.
    *
    * @return Probability of switching.
    */

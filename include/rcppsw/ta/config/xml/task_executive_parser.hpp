@@ -41,10 +41,10 @@ NS_START(rcppsw, ta, config, xml);
  ******************************************************************************/
 /**
  * @class task_executive_parser
- * @ingroup rcppsw ta config xml
+ * @ingroup ta config xml
  *
- * @brief Parses XML configuration for \ref base_task_executive and its derived
- * classed into \ref task_executive_config.
+ * @brief Parses XML configuration for @ref base_executive and its derived
+ * classes into @ref task_executive_config.
  */
 class task_executive_parser final : public rcppsw::config::xml::xml_config_parser {
  public:

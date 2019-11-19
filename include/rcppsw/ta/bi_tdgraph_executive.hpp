@@ -46,10 +46,10 @@ class bi_tab;
  ******************************************************************************/
 /**
  * @class bi_tdgraph_executive
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief A task executive which tasks are run one step at a time and polled
- * until they are finished. Operates on \ref bi_tdgraph.
+ * until they are finished. Operates on @ref bi_tdgraph.
  */
 class bi_tdgraph_executive final : public base_executive,
                                    public er::client<bi_tdgraph_executive> {

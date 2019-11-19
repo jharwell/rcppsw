@@ -40,7 +40,7 @@ class polled_task;
  ******************************************************************************/
 /**
  * @class random_allocator
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief Allocates a task from a given set of a tasks by choosing one randomly.
  */

@@ -43,7 +43,7 @@ NS_START(rcppsw, ta);
  ******************************************************************************/
 /**
  * @class polled_task
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief Represents a task whose execution can/should be monitored by the user
  * to determine when it has finished.

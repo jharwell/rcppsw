@@ -39,6 +39,14 @@ NS_START(rcppsw, algorithm, clustering, detail);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class clustering_impl
+ * @ingroup algorithm clustering
+ *
+ * @brief Templated implementation class interface to guide the implementation
+ * of various clustering algorithms by giving them a necessary set of functions
+ * to implement.
+ */
 template<typename T, typename Policy>
 class clustering_impl {
  public:

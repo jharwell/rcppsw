@@ -44,7 +44,7 @@ NS_START(rcppsw, ta, config, xml);
  ******************************************************************************/
 /**
  * @class exec_estimates_parser
- * @ingroup rcppsw ta config xml
+ * @ingroup ta config xml
  *
  * @brief Parses XML configuration used for estimation of task execution
  * times at the start of simulation.

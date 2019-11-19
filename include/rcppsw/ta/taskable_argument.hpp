@@ -36,7 +36,7 @@ NS_START(rcppsw, ta);
  ******************************************************************************/
 /**
  * @class taskable_argument
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief Base classthat any application specific data that should be passed to
  * tasks upon task start must derive from.

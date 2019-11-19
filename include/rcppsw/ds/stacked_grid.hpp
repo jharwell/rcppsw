@@ -42,7 +42,7 @@ NS_START(rcppsw, ds);
  ******************************************************************************/
 /**
  * @class stacked_grid
- * @ingroup rcppsw ds
+ * @ingroup ds
  *
  * @brief A sandwich of N 2D grids of the same size (x,y) dimensions, which can
  * contain different kinds of objects. The objects in each layer of the grid are
@@ -125,35 +125,35 @@ class stacked_grid {
   }
 
   /**
-   * @see \ref base_overlay_grid2D::xdsize().
+   * @see @ref base_overlay_grid2D::xdsize().
    */
   size_t xdsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xdsize();
   }
 
   /**
-   * @see \ref base_overlay_grid2D::xrsize().
+   * @see @ref base_overlay_grid2D::xrsize().
    */
   double xrsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xrsize();
   }
 
   /**
-   * @see \ref base_overlay_grid2D::ydsize().
+   * @see @ref base_overlay_grid2D::ydsize().
    */
   size_t ydsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->ydsize();
   }
 
   /**
-   * @see \ref base_overlay_grid2D::yrsize().
+   * @see @ref base_overlay_grid2D::yrsize().
    */
   double yrsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->yrsize();
   }
 
   /**
-   * @see \ref base_overlay_grid2D::resolution().
+   * @see @ref base_overlay_grid2D::resolution().
    */
   types::discretize_ratio resolution(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))

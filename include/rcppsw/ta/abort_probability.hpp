@@ -38,7 +38,7 @@ NS_START(rcppsw, ta);
  ******************************************************************************/
 /**
  * @class abort_probability
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief Calculates the probability that a robot will abort the task it is
  * currently working on using the negative exponential distribution.

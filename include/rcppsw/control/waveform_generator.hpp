@@ -43,7 +43,7 @@ struct waveform_config;
  ******************************************************************************/
 /**
  * @class waveform_generator
- * @ingroup rcppsw control
+ * @ingroup control
  *
  * @brief Factory to create waveforms of different types given the name of a
  * waveform. Valid names are:

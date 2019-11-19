@@ -57,9 +57,9 @@ NS_START(xml);
  ******************************************************************************/
 /**
  * @class xml_config_parser
- * @ingroup rcppsw config xml
+ * @ingroup config xml
  *
- * @brief Interface specifying functionality for parsing XML into a \ref
+ * @brief Interface specifying functionality for parsing XML into a @ref
  * base_config derived parameter structure.
  *
  */
@@ -76,10 +76,10 @@ class xml_config_parser : public er::client<xml_config_parser> {
 
   /**
    * @brief Parse the provided XML node into an internal representation (should
-   * be a class/struct derived from \ref base_config).
+   * be a class/struct derived from @ref base_config).
    *
    * @param node The XML tag that the root (i.e. the value returned by
-   * \ref xml_root()) for the parser can be found under.
+   * @ref xml_root()) for the parser can be found under.
    */
   virtual void parse(const ticpp::Element& node) = 0;
 

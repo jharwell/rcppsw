@@ -37,7 +37,7 @@ NS_START(rcppsw, control);
 
 /**
  * @class constant_waveform
- * @ingroup rcppsw control
+ * @ingroup control
  *
  * @brief A special waveform that always returns a constant value: the amplitude
  * of the waveform config it was passed during construction. All other
@@ -53,7 +53,7 @@ class constant_waveform : public waveform {
 
 /**
  * @class null_waveform
- * @ingroup rcppsw control
+ * @ingroup control
  *
  * @brief A special waveform that always returns 0.0, indicating that there is
  * no waveform/nothing. All parameters are ignored during initialization.

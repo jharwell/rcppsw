@@ -40,7 +40,10 @@ NS_START(rcppsw, ta, config);
  ******************************************************************************/
 /**
  * @struct stoch_nbhd1_config
- * @ingroup rcppsw ta config
+ * @ingroup ta config
+ *
+ * @brief Configuration for the STOCH-NBHD1 task allocation method, as described
+ * in @todo: Paper ref.
  */
 struct stoch_nbhd1_config final : public rcppsw::config::base_config {
   /**

@@ -41,9 +41,9 @@ NS_START(rcppsw, math, config, xml);
  ******************************************************************************/
 /**
  * @class sigmoid_parser
- * @ingroup rcppsw math config xml
+ * @ingroup math config xml
  *
- * @brief Parses XML configuration for sigmoids into \ref sigmoid_config.
+ * @brief Parses XML configuration for sigmoids into @ref sigmoid_config.
  */
 class sigmoid_parser : public rcppsw::config::xml::xml_config_parser {
  public:

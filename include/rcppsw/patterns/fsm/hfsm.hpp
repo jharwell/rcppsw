@@ -38,7 +38,7 @@ NS_START(rcppsw, patterns, fsm);
  ******************************************************************************/
 /**
  * @class hfsm
- * @ingroup rcppsw patterns fsm
+ * @ingroup patterns fsm
  *
  * @brief Implements a software-based hierarchical state machine.
  */
@@ -65,7 +65,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
   /**
    * @brief Injects a signal of the specified type into the state machine,
    * causing the state machine to execute and process the signal. This is the
-   * main means of running a \ref hfsm.
+   * main means of running a @ref hfsm.
    */
   void inject_event(int signal, int type);
 
@@ -73,7 +73,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
    * @brief Change the parent state of the specified state to a new state.
    *
    * @param state The state within THIS state machine to change the parent of.
-   * @param new_parent A new parent state, which can be from ANOTHER \ref hfsm.
+   * @param new_parent A new parent state, which can be from ANOTHER @ref hfsm.
    */
   void change_parent(uint8_t state,
                      rcppsw::patterns::fsm::state* new_parent);
@@ -122,7 +122,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
  *
  * Declare a state in the current HFSM.
  *
- * The state handler function MUST be public in order for \ref hfsm_state_action1
+ * The state handler function MUST be public in order for @ref hfsm_state_action1
  * templating to work. Apparently when dealing with non-type template arguments,
  * any argument passed that does not EXACTLY match the one in the template will
  * cause a compilation error if the function is protected (i.e. accessible in
@@ -230,7 +230,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
 /**
  * @def HFSM_STATE_INHERIT_ND(FSM, inherited_name)
  *
- * Same as \ref HFSM_STATE_INHERIT(), but with no data.
+ * Same as @ref HFSM_STATE_INHERIT(), but with no data.
  */
 #define HFSM_STATE_INHERIT_ND(BASE_FSM, inherited_name)            \
  private:                                                          \
@@ -241,7 +241,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
 /**
  * @def HFSM_STATE_DECLARE_ND(FSM, state_name)
  *
- * Same as \ref HFSM_STATE_DECLARE(), but with no data.
+ * Same as @ref HFSM_STATE_DECLARE(), but with no data.
  */
 #define HFSM_STATE_DECLARE_ND(FSM, state_name)                          \
   public:                                                               \
@@ -260,9 +260,9 @@ state_name
   FSM_GUARD_DEFINE_ND(FSM, guard_name)
 
 /**
- * @def HFSM_ENTRY_DECLARE(FSM, entry_name)
+ * @def HFSM_ENTRY_DECLARE_ND(FSM, entry_name)
  *
- * Same as \ref HFSM_ENTRY_DECLARE(), but with no data.
+ * Same as @ref HFSM_ENTRY_DECLARE(), but with no data.
  */
 #define HFSM_ENTRY_DECLARE_ND(FSM, entry_name)                          \
   public:                                                               \
@@ -275,7 +275,7 @@ entry_name{}
 /**
  * @def HFSM_ENTRY_INHERIT_ND(FSM, inherited_name)
  *
- * Same as \ref HFSM_ENTRY_INHERIT(), but with no data.
+ * Same as @ref HFSM_ENTRY_INHERIT(), but with no data.
  */
 #define HFSM_ENTRY_INHERIT_ND(BASE_FSM, inherited_name)             \
  private:                                                           \
@@ -291,7 +291,7 @@ entry_name{}
 #define HFSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var) \
   FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)
 
-/*
+/**
  * @def HFSM_DECLARE_STATE_MAP(type, name, n_entries)
  *
  * Declare the state map for a state machine.

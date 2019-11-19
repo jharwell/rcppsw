@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_COMMON_NAMED_TYPE_HPP_
-#define INCLUDE_RCPPSW_COMMON_NAMED_TYPE_HPP_
+#ifndef INCLUDE_RCPPSW_TYPES_NAMED_TYPE_HPP_
+#define INCLUDE_RCPPSW_TYPES_NAMED_TYPE_HPP_
 
 /*******************************************************************************
  * Includes
@@ -39,7 +39,7 @@ NS_START(rcppsw, types);
  ******************************************************************************/
 /**
  * @class named_type
- * @ingroup rcppsw
+ * @ingroup types
  *
  * @brief A strong typing wrapper to be used around POD types.
  */
@@ -71,4 +71,4 @@ class named_type {
 
 NS_END(types, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_COMMON_NAMED_TYPE_HPP_ */
+#endif /* INCLUDE_RCPPSW_TYPES_NAMED_TYPE_HPP_ */

@@ -44,7 +44,7 @@ class factory_singleton : public singleton::singleton<base_factory<TType,
 
 /**
  * @class multifactory
- * @ingroup rcppsw patterns factory
+ * @ingroup patterns factory
  *
  * @brief A factory that releases or shares ownership of the created objects to
  * the class/context that requests object creation. Derived types do not have to
@@ -92,6 +92,13 @@ class multifactory {
 NS_END(detail);
 
 
+/**
+ * @class releasing_multifactory
+ * @ingroup patterns factory
+ *
+ * @brief Specialization of the @ref multifactory class for releasing ownership
+ * of created objects via std::unique_ptr.
+ */
 template<typename TBase, typename...Args>
 class releasing_multifactory : public detail::multifactory<detail::factory_releasing_type,
                                                            std::unique_ptr,
@@ -100,6 +107,13 @@ class releasing_multifactory : public detail::multifactory<detail::factory_relea
   ~releasing_multifactory(void) override = default;
 };
 
+/**
+ * @class sharing_multifactory
+ * @ingroup patterns factory
+ *
+ * @brief Specialization of the @ref multifactory class for sharing ownership of
+ * created objects via std::shared_ptr.
+ */
 template<typename TBase, typename...Args>
 class sharing_multifactory : public detail::multifactory<detail::factory_sharing_type,
                                                          std::shared_ptr,

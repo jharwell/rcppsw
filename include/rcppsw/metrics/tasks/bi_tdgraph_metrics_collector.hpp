@@ -41,10 +41,10 @@ NS_START(rcppsw, metrics, tasks);
  ******************************************************************************/
 /**
  * @class bi_tdgraph_metrics_collector
- * @ingroup rcppsw metrics tasks
+ * @ingroup metrics tasks
  *
  * @brief Collector for metrics about the current task_dist of tasks in
- * a collection of agents executing tasks in a \ref bi_tdgraph. Metrics are
+ * a collection of agents executing tasks in a @ref bi_tdgraph. Metrics are
  * written out at the specified interval.
  */
 class bi_tdgraph_metrics_collector final : public base_metrics_collector {
@@ -52,7 +52,7 @@ class bi_tdgraph_metrics_collector final : public base_metrics_collector {
   /**
    * @param ofname Output file name.
    * @param interval Collection interval.
-   * @param decomposition_depth The maximum depth of the \ref bi_tdgraph.
+   * @param decomposition_depth The maximum depth of the @ref bi_tdgraph.
    */
   bi_tdgraph_metrics_collector(const std::string& ofname,
                                uint interval,

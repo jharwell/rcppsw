@@ -39,8 +39,8 @@ class base_fsm;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class state_entry_action
- * @ingroup rcppsw patterns fsm
+ * @class state_entry_action0
+ * @ingroup patterns fsm
  *
  * @brief Action to perform upon transition to a state.
  *
@@ -60,8 +60,8 @@ class state_entry_action0 : public state_entry {
 };
 
 /**
- * @class state_entry_action
- * @ingroup rcppsw patterns fsm
+ * @class state_entry_action1
+ * @ingroup patterns fsm
  *
  * @tparam SM A state machine class
  * @tparam Event A state function event data type (derived from event_data).

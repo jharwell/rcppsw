@@ -52,7 +52,7 @@ struct src_sigmoid_sel_config;
  ******************************************************************************/
 /**
  * @class executable_task
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief Represents the executable concept of a task, which encompasses:
  *
@@ -181,7 +181,7 @@ class executable_task : public logical_task,
 
   /**
    * @brief Update the current estimate of the task interface time by using a
-   * weighted sum of the previous \ref time_estimate and the new value.
+   * weighted sum of the previous @ref time_estimate and the new value.
    *
    * @param i The interface ID.
    * @param last_measure The last measured time.
@@ -192,7 +192,7 @@ class executable_task : public logical_task,
 
   /**
    * @brief Update the current estimate of the task execution time by using a
-   * weighted sum of the previous \ref time_estimate and the new value.
+   * weighted sum of the previous @ref time_estimate and the new value.
    *
    * @param last_measure The last measured time.
    */

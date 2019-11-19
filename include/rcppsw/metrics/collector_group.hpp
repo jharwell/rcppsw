@@ -45,7 +45,7 @@ NS_START(rcppsw, metrics);
 
 /**
  * @class collector_group
- * @ingroup rcppsw metrics
+ * @ingroup metrics
  *
  * @brief A group of N collectors, mapped by name, on which collective
  * operations can be performed, in addition to individual collection; used to
@@ -148,7 +148,7 @@ class collector_group {
   mapped_type& operator[](const key_type& key) { return m_collectors[key]; }
 
   /**
-   * @brief Call the \ref base_metrics_collector::reset() function on all
+   * @brief Call the @ref base_metrics_collector::reset() function on all
    * collectors in the group.
    */
   void reset_all(void) {
@@ -160,7 +160,7 @@ class collector_group {
   }
 
   /**
-   * @brief Call the \ref base_metrics_collector::interval_reset() function on
+   * @brief Call the @ref base_metrics_collector::interval_reset() function on
    * all collectors in the group.
    */
   void interval_reset_all(void) {
@@ -172,7 +172,7 @@ class collector_group {
   }
 
   /**
-   * @brief Call the \ref base_metrics_collector::timestep_inc() function on all
+   * @brief Call the @ref base_metrics_collector::timestep_inc() function on all
    * collectors in the group.
    */
   void timestep_inc_all(void) {
@@ -184,7 +184,7 @@ class collector_group {
   }
 
   /**
-   * @brief Call the \ref base_metrics_collector::csv_line_write() function on
+   * @brief Call the @ref base_metrics_collector::csv_line_write() function on
    * all collectors in the group.
    *
    * @return \c TRUE iff ALL collectors in the group wrote out metrics this
@@ -200,7 +200,7 @@ class collector_group {
   }
 
   /**
-   * @brief Call the \ref base_metrics_collector::finalize() function on all
+   * @brief Call the @ref base_metrics_collector::finalize() function on all
    * collectors in the group.
    */
   void finalize_all(void) {

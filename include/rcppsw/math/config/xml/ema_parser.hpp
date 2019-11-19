@@ -41,7 +41,7 @@ NS_START(rcppsw, math, config, xml);
  ******************************************************************************/
 /**
  * @class ema_parser
- * @ingroup rcppsw math config xml
+ * @ingroup math config xml
  *
  * @brief Parses XML configuration for relating to exponential moving averages
  * (EMAs).

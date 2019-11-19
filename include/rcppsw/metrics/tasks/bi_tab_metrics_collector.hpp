@@ -40,9 +40,9 @@ NS_START(rcppsw, metrics, tasks);
  ******************************************************************************/
 /**
  * @class bi_tab_metrics_collector
- * @ingroup rcppsw metrics tasks
+ * @ingroup metrics tasks
  *
- * @brief Collector for metrics for \ref bi_tab_metrics about task allocation.
+ * @brief Collector for metrics for @ref bi_tab_metrics about task allocation.
  *
  * Metrics should only be collected upon completion/abortion of a task. Metrics
  * are written out at the specified interval.

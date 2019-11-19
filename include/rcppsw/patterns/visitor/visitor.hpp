@@ -53,7 +53,7 @@ class visit_set_helper {
 
 /**
  * @class visit_set
- * @ingroup rcppsw patterns visitor
+ * @ingroup patterns visitor
  *
  * @brief General case for template expansion. Provides classes the ability to
  * explicitly control what types of classes they can visit (limited to the
@@ -87,7 +87,7 @@ class visit_set<T>: public visit_set_helper<T> {
 };
 
 /**
- * @brief List of types specifying the set of visitors that a \ref
+ * @brief List of types specifying the set of visitors that a @ref
  * precise_visitor will be able to visit.
  */
 template<typename ...Args>
@@ -101,7 +101,7 @@ using precise_visit_set = mpl::typelist<Args...>;
  * @tparam VisitorImpl The name of the class containing the actual
  *                     implementation of the visit functions.
  * @tparam TypeList List of types that the class will be able to visit. Must be
- * a \ref precise_visit_set.
+ * a @ref precise_visit_set.
  *
  * For each visitee type you want to be able to visit, you must (1) include it
  * in the type list for the list, (2) define a function with the following exact

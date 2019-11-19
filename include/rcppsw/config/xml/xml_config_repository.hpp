@@ -43,14 +43,14 @@ NS_START(rcppsw, config, xml);
  ******************************************************************************/
 /**
  * @class xml_config_repository
- * @ingroup rcppsw config xml
+ * @ingroup config xml
  *
- * @brief A repository for multiple \ref xml_config_parser objects and their
+ * @brief A repository for multiple @ref xml_config_parser objects and their
  * parsed results; allows collective operations on multiple parsers.
  *
  * Utilizes factory pattern for parser creation. Does not create any parsers on
  * its own (how could it know which ones to create?). All created parsers must
- * derive from \ref xml_config_parser, and have a constructor with the same
+ * derive from @ref xml_config_parser, and have a constructor with the same
  * signature as the constructor for that class available, or cryptic compile
  * errors will result.
  */
@@ -60,13 +60,13 @@ class xml_config_repository : public er::client<xml_config_repository> {
       : ER_CLIENT_INIT("rcppsw.config.xml.repository") {}
 
   /**
-   * @brief Call the \ref xml_config_parser::parse() function on all parsers
+   * @brief Call the @ref xml_config_parser::parse() function on all parsers
    * in the repository, passing all parsers the same XML node.
    */
   void parse_all(const ticpp::Element& node) RCSW_COLD;
 
   /**
-   * @brief Call the \ref xml_config_parser::validate() function on all parsers
+   * @brief Call the @ref xml_config_parser::validate() function on all parsers
    * in the repository, and return whether or not \a ALL parsers report valid
    * configuration.
    *
@@ -126,7 +126,7 @@ class xml_config_repository : public er::client<xml_config_repository> {
   }
 
   /**
-   * @brief Register a parser of a given type (must be derived from \ref
+   * @brief Register a parser of a given type (must be derived from @ref
    * xml_config_parser) and associate it with the specified name.
    *
    * @tparam T The parser type.
@@ -143,7 +143,7 @@ class xml_config_repository : public er::client<xml_config_repository> {
 
   /**
    * @brief Register a parser of a given type (must be derived from
-   * \ref xml_config_parser) and associate it with the specified name.
+   * @ref xml_config_parser) and associate it with the specified name.
    *
    * If you use this function, then you will have to refer to the parse results
    * by type + name, rather than just by type.

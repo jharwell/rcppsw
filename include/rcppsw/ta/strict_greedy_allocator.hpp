@@ -41,7 +41,7 @@ class polled_task;
  ******************************************************************************/
 /**
  * @class strict_greedy_allocator
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief Allocates a task from a given set of a tasks, using a strict greedy
  * approach: always taking the task of minimum cost. Provably optimal task

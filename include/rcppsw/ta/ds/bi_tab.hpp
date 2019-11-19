@@ -51,7 +51,7 @@ NS_START(ds);
  ******************************************************************************/
 /**
  * @class bi_tab
- * @ingroup rcppsw ta ds
+ * @ingroup ta ds
  *
  * @brief Represents Bi Task Allocation Block (TAB) which consists of a root
  * task and two subtasks the root task decomposes into. The subtasks may or may
@@ -82,6 +82,12 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
   bi_tab(const bi_tab& other) = default;
   bi_tab& operator=(const bi_tab& other) = delete;
 
+  /**
+   * @brief Update the partition probability based after a task has been
+   * finished or aborted. Happens as part of @ref task_abort_update() and @ref
+   * task_finish_update(), so should never need to be called directly, except in
+   * corner cases during initialization.
+   */
   void partition_prob_update(math::rng* rng);
 
   /**
@@ -92,8 +98,16 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
    * 2. If partitioning is employed, one of the two subtasks in the TAB is
    *    selected, the active task is updated accordingly, and the selected
    *    subtask is returned.
+   *
+   * @param rng The RNG to use during task allocation.
    */
   polled_task* task_allocate(math::rng* rng);
+
+  /**
+   * @brief Return the activity task in the TAB (that is, the task that is
+   * currently being executed). If the active task in the executive is not in
+   * this TAB, then nullptr is returned.
+   */
 
   const polled_task* active_task(void) const { return m_active_task; }
 
@@ -105,7 +119,8 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
    * as well.
    *
    * @param aborted The task that was just aborted (which MUST be contained in
-   *                the current TAB, or an assertion will be triggered.)
+   *                the current TAB, or an assertion will be triggered).
+   * @param rng The RNG to use during updating, per configuration.
    */
   void task_abort_update(polled_task* aborted, math::rng* rng);
 
@@ -117,33 +132,64 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
    * as well.
    *
    * @param finished The task that was just finished (which MUST be contained in
-   *                 the current TAB, or an assertion will be triggered.)
+   *                 the current TAB, or an assertion will be triggered).
+   * @param rng The RNG to use during updating, per configuration.
    */
 
   void task_finish_update(polled_task* finished, math::rng* rng);
 
   /**
    * @brief Returns \c TRUE iff the argument is one of the 3 tasks in the TAB.
+   *
+   * @param task The task to check.
    */
   bool contains_task(const polled_task* task) const RCSW_PURE;
 
   /**
    * @brief Returns \c TRUE iff the argument is the root task in the TAB.
+   *
+   * @param task The task to check.
    */
   bool task_is_root(const polled_task* task) const RCSW_PURE;
 
   /**
    * @brief Returns \c TRUE iff the argument is one of the child tasks in the
    * TAB.
+   *
+   * @param task The task to check.
    */
   bool task_is_child(const polled_task* task) const RCSW_PURE;
 
+  /**
+   * @brief Return the TAB root (always a partitionable task), also known as
+   * task0 within the TAB.
+   */
   const polled_task* root(void) const { return m_root; }
-  const polled_task* child1(void) const { return m_child1; }
-  const polled_task* child2(void) const { return m_child2; }
-  const polled_task* last_task(void) const { return m_last_task; }
-  void last_task(polled_task* const last_task) { m_last_task = last_task; }
 
+  /**
+   * @brief Return the left child of the root (we use a left-to-right numbering
+   * scheme).
+   */
+  const polled_task* child1(void) const { return m_child1; }
+
+  /**
+   * @brief Return the right child of the root (we use a left-to-right numbering
+   * scheme).
+   */
+  const polled_task* child2(void) const { return m_child2; }
+
+  /**
+   * @brief Return the most recently executed task; updated on task abort or
+   * finish in @ref task_abort_update() and @ref task_finish_update
+   * respectively.
+   */
+  const polled_task* last_task(void) const { return m_last_task; }
+
+  /**
+   * @brief Return the most recently executed subtask task1 or task2; updated on
+   * task abort or finish in @ref task_abort_update() and @ref
+   * task_finish_update respectively.
+   */
   void last_subtask(const polled_task* t) { m_last_subtask = t; }
 
   /* bi TAB metrics */
@@ -153,15 +199,35 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
   bool subtask2_active(void) const override {
     return m_active_task == m_child2;
   }
-  bool root_active(void) const override { return m_active_task == m_root; }
   bool employed_partitioning(void) const override {
     return m_employed_partitioning;
   }
+
+  /**
+   * @brief As a result of the most recent allocation, did our active task
+   * change?
+   */
   bool task_changed(void) const override {
     return m_active_task != m_last_task;
   }
+
+  /**
+   * @brief As a result of the most recent allocation, did the depth of our task
+   * within the TAB change? i.e. it was the root before and now it is one of the
+   * subtasks or vice versa.
+   */
   bool task_depth_changed(void) const override;
+
+  /**
+   * @brief Return the current value of the partition probability within the
+   * TAB. Does not recompute.
+   */
   double partition_prob(void) const override { return m_partition_prob.v(); }
+
+  /**
+   * @brief Return the current value of the subtask selection probability within
+   * the TAB. Does not recompute.
+   */
   double subtask_selection_prob(void) const override { return m_sel_prob.v(); }
 
  private:

@@ -36,7 +36,7 @@ NS_START(rcppsw, patterns, fsm);
  ******************************************************************************/
 /**
  * @class event_signal
- * @ingroup rcppsw patterns fsm
+ * @ingroup patterns fsm
  *
  * @brief A class representing the different signals that can be passed between
  * states in an FSM, and/or between FSMs.
@@ -82,8 +82,8 @@ class event_signal {
 /**
  * @class event_type
  *
- * @brief A class representing the types of \ref event_signal that are passed as
- * part of \ref event_data to states.
+ * @brief A class representing the types of @ref event_signal that are passed as
+ * part of @ref event_data to states.
  */
 class event_type {
  public:
@@ -142,7 +142,7 @@ class event_data {
 /**
  * @class no_event_data
  *
- * @brief This class does NOT derived from \ref event_data so that compiler
+ * @brief This class does NOT derived from @ref event_data so that compiler
  * errors are generated if you attempt to use it outside of its intent to
  * indicate that a state does not take any data as input.
  */

@@ -34,6 +34,9 @@ NS_START(rcppsw, patterns, fsm);
 /*******************************************************************************
  * Type Definitions
  ******************************************************************************/
+/**
+ * @brief Simple non-heirarchical state machine class.
+ */
 using simple_fsm = base_fsm;
 
 NS_END(fsm, patterns, rcppsw);

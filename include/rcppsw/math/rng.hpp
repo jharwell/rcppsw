@@ -40,10 +40,10 @@ NS_END(detail);
  ******************************************************************************/
 /**
  * @class rng
- * @ingroup rcppsw math
+ * @ingroup math
  *
  * @brief Random number generator class using the PIMPL pattern in order to not
- * include <random> in the header file.
+ * have to include \c \<random\>.
  */
 class rng : public patterns::pimpl::pimpl<detail::rng_impl> {
  public:

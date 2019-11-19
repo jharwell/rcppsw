@@ -43,7 +43,7 @@ class rng;
  ******************************************************************************/
 /**
  * @class rngm
- * @ingroup rcppsw math
+ * @ingroup math
  *
  * @brief Random Number Generator (RNG) Manager. A caching factory that
  * returns references to previously created objects rather than creating new

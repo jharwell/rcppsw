@@ -49,7 +49,7 @@ struct task_executive_config;
  ******************************************************************************/
 /**
  * @class base_executive
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief Base class for runtime task task executives. Supports specification of
  * task allocation policy independent from the data structure storing
@@ -66,7 +66,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
    * @brief Creates the base executive.
    *
    * @param exec_config Initialization config specific to executive.
-   * @param aloc_config Initialization config for task allocation.
+   * @param alloc_config Initialization config for task allocation.
    * @param ds Data structure containing tasks to manage/run.
    * @param rng Non-owning Random number generator reference.
    */
@@ -152,7 +152,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
    * - Mark the task as aborted.
    * - Call the task abort callbacks with the aborted task.
    * - Mark the task as not aborted.
-   * - Start a new task via \ref task_start_handle().
+   * - Start a new task via @ref task_start_handle().
    */
   virtual void task_abort_handle(polled_task* task);
 
@@ -162,7 +162,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
    * The base implementation does the following, in order:
    *
    * - Call the task start callbacks for the new task.
-   * - Call \ref do_task_start() for the new task.
+   * - Call @ref do_task_start() for the new task.
    */
   virtual void task_start_handle(polled_task* task);
 
@@ -173,7 +173,7 @@ class base_executive : public rcppsw::er::client<base_executive> {
    *
    * - Update task exec/interface times/estimates
    * - Call the task finish callbacks for the finished task.
-   * - Start a new task via \ref task_start_handle().
+   * - Start a new task via @ref task_start_handle().
    */
   virtual void task_finish_handle(polled_task* task);
 

@@ -41,7 +41,7 @@ NS_START(rcppsw, multithread);
  ******************************************************************************/
 /**
  * @class mt_queue
- * @ingroup rcppsw multithread
+ * @ingroup multithread
  *
  * @brief A simple multiple-producer/consumer queue with locking.
  */

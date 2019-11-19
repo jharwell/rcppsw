@@ -42,7 +42,7 @@ NS_START(rcppsw, math);
  ******************************************************************************/
 /**
  * @class range
- * @ingroup rcppsw math
+ * @ingroup math
  *
  * @brief Convenience class holding a [min, max] range. Makes comparisons like
  * "is this number in this range" much more intuitive and easy to debug. All
@@ -163,7 +163,7 @@ class range final : public er::client<range<T>> {
   range translate(const T& value) { return range(m_lb + value, m_ub + value); }
 
   /**
-   * @brief For parsing a range from a string in the form of <lb>:<ub>
+   * @brief For parsing a range from a string in the form of \c "LB:UB".
    */
   friend std::istream& operator>>(std::istream& is, range& r) {
     T values[2] = {T(), T()};
@@ -180,9 +180,24 @@ class range final : public er::client<range<T>> {
   /* clang-format on */
 };
 
+/**
+ * @brief Specialization of @ref range for signed integers.
+ */
 using rangei = range<int>;
+
+/**
+ * @brief Specialization of @ref range for doubles.
+ */
 using ranged = range<double>;
+
+/**
+ * @brief Specialization of @ref range for floats.
+ */
 using rangef = range<float>;
+
+/**
+ * @brief Specialization of @ref range for unsigned integers.
+ */
 using rangeu = range<uint>;
 
 /*******************************************************************************

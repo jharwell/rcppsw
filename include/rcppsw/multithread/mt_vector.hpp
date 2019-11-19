@@ -40,7 +40,7 @@ NS_START(rcppsw, multithread);
  ******************************************************************************/
 /**
  * @class mt_vector
- * @ingroup rcppsw multithread
+ * @ingroup multithread
  *
  * @brief A thread-safe vector implementation. Use when you need fast access to
  *        a large contiguous chunk of memory.

@@ -42,7 +42,7 @@ NS_START(rcppsw, ta);
  ******************************************************************************/
 /**
  * @class task_allocator
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief Maps the task data structure to its variant, and then applies the
  * corresponding allocation policy to the mapped variant to allocate a task.

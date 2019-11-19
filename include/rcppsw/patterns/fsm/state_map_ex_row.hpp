@@ -39,7 +39,7 @@ NS_START(rcppsw, patterns, fsm);
  ******************************************************************************/
 /**
  * @class state_map_ex_row
- * @ingroup rcppsw patterns fsm
+ * @ingroup patterns fsm
  *
  * @brief A structure to hold a single row within the extended state map.
  */

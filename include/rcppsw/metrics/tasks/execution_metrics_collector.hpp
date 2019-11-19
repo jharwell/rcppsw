@@ -43,7 +43,7 @@ namespace ta = rcppsw::ta;
  ******************************************************************************/
 /**
  * @class execution_metrics_collector
- * @ingroup rcppsw metrics tasks
+ * @ingroup metrics tasks
  *
  * @brief Collector for metrics for an executable task across executions of that
  * task.

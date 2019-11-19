@@ -40,14 +40,10 @@ NS_START(rcppsw, metrics, spatial);
  ******************************************************************************/
 /**
  * @class grid2D_avg_metrics_collector
- * @ingroup rcppsw metrics spatial
+ * @ingroup metrics spatial
  *
  * @brief Base class for collectors using a 2D grid to fill with counts of
  * SOMETHING, to be averaged over the entire simulation.
- *
- * This class forces derived classes to implement the \ref collect() function,
- * because implementing it here will cause excessive use of dynamic_cast, which
- * will slow things down a LOT at runtime.
  */
 class grid2D_avg_metrics_collector : public metrics::base_metrics_collector {
  public:

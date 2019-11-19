@@ -34,6 +34,13 @@ NS_START(rcppsw, patterns, factory);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @class releasing_factory
+ * @ingroup patterns factory
+ *
+ * @brief Specialization of the @link detail::base_factory @endlink class for
+ * releasing ownership of created objects via std::unique_ptr.
+ */
 template<typename TBase, typename...Args>
 class releasing_factory : public detail::base_factory<detail::factory_releasing_type,
                                                       std::unique_ptr,
@@ -43,6 +50,14 @@ class releasing_factory : public detail::base_factory<detail::factory_releasing_
   ~releasing_factory(void) override = default;
 };
 
+
+/**
+ * @class sharing_factory
+ * @ingroup patterns factory
+ *
+ * @brief Specialization of the @line detail::base_factory @endlink class for
+ * sharing ownership of created objects via std::shared_ptr.
+ */
 template<typename TBase, typename...Args>
 class sharing_factory : public detail::base_factory<detail::factory_sharing_type,
                                                     std::shared_ptr,

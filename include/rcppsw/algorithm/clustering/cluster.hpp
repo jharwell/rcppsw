@@ -41,7 +41,7 @@ NS_START(rcppsw, algorithm, clustering, detail);
  ******************************************************************************/
 /**
  * @class nc_cluster
- * @ingroup rcppsw algorithm clustering
+ * @ingroup algorithm clustering
  *
  * @brief A policy based cluster for a Nearest Centroid (NC) cluster during the
  * execution of the NC clustering algorithm.
@@ -110,7 +110,7 @@ class nc_cluster {
 
 /**
  * @class eh_cluster
- * @ingroup rcppsw algorithm clustering
+ * @ingroup algorithm clustering
  *
  * @brief A policy based cluster for an Event Horizon (EH) cluster during the
  * execution of the EH clustering algorithm.

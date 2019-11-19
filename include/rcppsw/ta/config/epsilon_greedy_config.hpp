@@ -38,7 +38,10 @@ NS_START(rcppsw, ta, config);
  ******************************************************************************/
 /**
  * @struct epsilon_greedy_config
- * @ingroup rcppsw ta config
+ * @ingroup ta config
+ *
+ * @brief Configuration for the \f$\epsilon\f$-greedy task allocation method, as
+ * described in @todo paper ref.
  */
 struct epsilon_greedy_config final : public rcppsw::config::base_config {
   double epsilon{-1};

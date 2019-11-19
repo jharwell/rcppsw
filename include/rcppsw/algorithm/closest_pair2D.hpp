@@ -59,7 +59,7 @@ struct result_type2D {
  ******************************************************************************/
 /**
  * @class closest_pair2D
- * @ingroup rcppsw algorithm
+ * @ingroup algorithm
  *
  * @brief Calculate the closest two points from a set of 2D points in O(NLogN).
  *
@@ -68,14 +68,14 @@ struct result_type2D {
  * Returns the two closest points, along with the distance between them.
  *
  * @tparam T Type of point in 2D plane. Can be any class, but must provide the
- * following methods (see \ref vector2 for example implementation):
+ * following methods (see @ref math::vector2 for example implementation):
  *
  * - x()
  * - y()
  * - operator==()
  */
 template <typename T>
-class closest_pair {
+class closest_pair2D {
  public:
   using dist_func_type = double(const T&, const T&);
 
@@ -181,7 +181,9 @@ class closest_pair {
    * @brief Utility function to find the distance beween the closest points of
    * strip of given size, sorted according to Y.
    *
+   * @param strip The points to check.
    * @param dmin Upper bound on minimum distance.
+   * @param dist_func The distance function callback to use during calculation.
    *
    * Note that this method seems to be a O(n^2) method, but it's a O(n) method
    * as the inner loop runs at most 6 times.

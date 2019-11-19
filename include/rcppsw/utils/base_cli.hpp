@@ -40,7 +40,7 @@ NS_START(rcppsw);
  ******************************************************************************/
 /**
  * @class base_cli
- * @ingroup rcppsw utils
+ * @ingroup utils
  *
  * @brief Base class for command line interfaces. Uses boost to do the actual
  * parsing.
@@ -56,7 +56,7 @@ class base_cli {
    * @param argc The argc from main().
    * @param argv The argv from main().
    *
-   * @return \ref status_t.
+   * @return @ref status_t.
    */
   status_t parse(int argc, char** argv);
 

@@ -40,10 +40,10 @@ NS_START(rcppsw, ta, config, xml);
  ******************************************************************************/
 /**
  * @class epsilon_greedy_parser
- * @ingroup rcppsw ta config xml
+ * @ingroup ta config xml
  *
  * @brief Parses XML configuration used for epsilon greedy task allocation
- * policy into \ref epsilon_greedy_config.
+ * policy into @ref epsilon_greedy_config.
  */
 class epsilon_greedy_parser final : public rcppsw::config::xml::xml_config_parser {
  public:

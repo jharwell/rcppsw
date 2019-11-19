@@ -41,7 +41,7 @@ class polled_task;
  ******************************************************************************/
 /**
  * @class ucb1_allocator
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief Allocates a task from a given set of a tasks, using the UCB1 approach
  * from Pini2012,Auer2002, treating the task allocation problem as a multi-armed

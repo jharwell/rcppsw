@@ -36,7 +36,7 @@ degrees to_degrees(const radians& r) {
 } /* to_degrees() */
 
 /**
- * @brief Converts \ref degrees to \ref radians
+ * @brief Converts @ref degrees to @ref radians
  */
 radians to_radians(const degrees& d) {
   return radians(d.value() * degrees::kDEGREES_TO_RADIANS);

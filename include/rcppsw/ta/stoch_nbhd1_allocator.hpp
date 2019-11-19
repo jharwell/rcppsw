@@ -44,9 +44,9 @@ class bi_tdgraph;
  ******************************************************************************/
 /**
  * @class stoch_nbhd1_allocator
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
- * @brief Allocates a task from a \ref bi_tdgraph using the STOCH-NBHD1 method
+ * @brief Allocates a task from a @ref bi_tdgraph using the STOCH-NBHD1 method
  * from Harwell2020.
  */
 class stoch_nbhd1_allocator : er::client<stoch_nbhd1_allocator> {

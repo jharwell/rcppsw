@@ -36,7 +36,7 @@ NS_START(rcppsw, config);
  ******************************************************************************/
 /**
  * @struct base_config
- * @ingroup rcppsw config
+ * @ingroup config
  *
  * @brief A stub base class for any and all derived configuration class types
  * that may need polymorphism or covariance.

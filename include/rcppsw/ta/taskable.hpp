@@ -42,10 +42,10 @@ class taskable_argument;
  ******************************************************************************/
 /**
  * @class taskable
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief A class that all classes wishing to be used as the mechanism by which
- * \ref executable_task objects execute themselves must inherit from.
+ * @ref executable_task objects execute themselves must inherit from.
  */
 class taskable : public virtual metrics::base_metrics {
  public:

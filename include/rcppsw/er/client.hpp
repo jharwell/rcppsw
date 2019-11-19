@@ -164,7 +164,7 @@
  * error in your function) after reporting the event.
  *
  * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client. This macro is only available if event reporting
+ * must derive from @ref client. This macro is only available if event reporting
  * is fully enabled.
  */
 #define ER_CHECK(cond, msg, ...)  \
@@ -183,7 +183,7 @@
  * error in your function).
  *
  * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client. This macro is only available if event
+ * must derive from @ref client. This macro is only available if event
  * reporting is fully enabled.
  */
 #define ER_SENTINEL(msg, ...)   \
@@ -200,7 +200,7 @@
  * msg to be logged.
  *
  * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client.
+ * must derive from @ref client.
  */
 #define ER_ASSERT(cond, msg, ...) \
   if (!(cond)) {                  \
@@ -216,7 +216,7 @@
  * reporting the specified message.
  *
  * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client.
+ * must derive from @ref client.
  */
 #define ER_FATAL_SENTINEL(msg, ...) \
   {                                 \
@@ -276,7 +276,7 @@ NS_START(rcppsw, er);
  ******************************************************************************/
 /**
  * @class client
- * @ingroup rcppsw er
+ * @ingroup er
  *
  * @brief A class that can connect to a logging server for logging of important
  * events. Basically a thin wrapper around log4cxx. If ER_NDEBUG is defined,

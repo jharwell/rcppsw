@@ -36,9 +36,9 @@ NS_START(rcppsw, math, config);
  ******************************************************************************/
 /**
  * @struct ema_config
- * @ingroup rcppsw config math
+ * @ingroup config math
  *
- * @brief Parameters for \ref ema objects.
+ * @brief Parameters for @ref ema objects.
  */
 struct ema_config final : public rcppsw::config::base_config {
   double alpha{0.0};

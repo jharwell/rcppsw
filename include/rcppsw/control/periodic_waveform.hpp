@@ -39,7 +39,7 @@ NS_START(rcppsw, control);
 
 /**
  * @class sine_waveform
- * @ingroup rcppsw control
+ * @ingroup control
  *
  * Given the current time, outputs the current value of a sine wave according to
  * configured parameters:
@@ -61,7 +61,7 @@ class sine_waveform : public waveform {
 
 /**
  * @class square_waveform
- * @ingroup rcppsw control
+ * @ingroup control
  *
  * Given the current time, outputs the current value of a square wave according
  * to configured parameters:
@@ -85,7 +85,7 @@ class square_waveform : public waveform {
 
 /**
  * @class sawtooth_waveform
- * @ingroup rcppsw control
+ * @ingroup control
  *
  * Given the current time, outputs the current value of a sawtooth wave
  * according to configured parameters:

@@ -41,9 +41,9 @@ namespace sm = patterns::fsm;
  ******************************************************************************/
 /**
  * @class mt_fsm
- * @ingroup rcppsw multithread
+ * @ingroup multithread
  *
- * @brief Extends \ref base_fsm to be threadsafe.
+ * @brief Extends @ref base_fsm to be threadsafe.
  */
 class mt_fsm : public patterns::fsm::base_fsm {
  public:

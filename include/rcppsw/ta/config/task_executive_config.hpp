@@ -1,5 +1,5 @@
 /**
- * @File task_executive_config.hpp
+ * @file task_executive_config.hpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -36,7 +36,10 @@ NS_START(rcppsw, ta, config);
  ******************************************************************************/
 /**
  * @struct task_executive_config
- * @ingroup rcppsw config ta
+ * @ingroup config ta
+ *
+ * @brief Configuration for the @ref base_executive and all its derived
+ * classes.
  */
 struct task_executive_config final : public rcppsw::config::base_config {
   /**

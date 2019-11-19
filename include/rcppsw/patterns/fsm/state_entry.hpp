@@ -39,7 +39,7 @@ class event_data;
  ******************************************************************************/
 /**
  * @class state_entry
- * @ingroup rcppsw patterns fsm
+ * @ingroup patterns fsm
  *
  * @brief Abstract entry base class that all entry classes inherit from.
  */

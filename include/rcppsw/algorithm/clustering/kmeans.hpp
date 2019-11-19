@@ -44,7 +44,7 @@ NS_START(rcppsw, algorithm, clustering);
  ******************************************************************************/
 /**
  * @class kmeans
- * @ingroup rcppsw algorithm clustering
+ * @ingroup algorithm clustering
  *
  * @brief Wrapper class for performing kmeans clustering.
  *
@@ -81,13 +81,12 @@ class kmeans : public er::client<kmeans<T>> {
         m_impl(std::move(impl)) {}
 
   /**
-   * @brief Perform clustering. First the \ref clustering_impl::initialize()
-   * method is called. Then, the clustering algorithm is iterated until one of
-   * the following is true:
+   * @brief Perform clustering. First the clustering_impl::initialize() method
+   * is called. Then, the clustering algorithm is iterated until one of the
+   * following is true:
    *
    * - The maximum # of iterations has been reached.
-   * - \ref cluster_impl::converged() returns \c TRUE (checked after each
-   *   iteration).
+   * - cluster_impl::converged() returns \c TRUE (checked after each iteration).
    *
    * @return A vector where the index corresponds to the index of the data point
    * in the input data, and the value corresponds to the cluster to which the

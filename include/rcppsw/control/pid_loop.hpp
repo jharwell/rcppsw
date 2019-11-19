@@ -36,7 +36,7 @@ NS_START(rcppsw, control);
  ******************************************************************************/
 /**
  * @class pid_loop
- * @ingroup rcppsw control
+ * @ingroup control
  *
  * @brief A simple PID loop class.
  */

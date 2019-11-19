@@ -38,7 +38,11 @@ NS_START(rcppsw, ta, config);
  ******************************************************************************/
 /**
  * @struct sigmoid_sel_config
- * @ingroup rcppsw config ta
+ * @ingroup config ta
+ *
+ * @brief Configuration for sigmoid derived probabilities to choose between
+ * multiple options using one or more methods.
+ *
  */
 struct sigmoid_sel_config final : public rcppsw::config::base_config {
   std::string method{};

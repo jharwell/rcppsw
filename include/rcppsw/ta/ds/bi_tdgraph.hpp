@@ -44,7 +44,7 @@ NS_START(rcppsw, ta, ds);
  ******************************************************************************/
 /**
  * @class bi_tdgraph
- * @ingroup rcppsw ta ds
+ * @ingroup ta ds
  *
  * @brief Representation of an overall task (the root task) as a BINARY tree
  * representing the task decomposition of the root task at different
@@ -65,14 +65,15 @@ class bi_tdgraph final : public tdgraph, public er::client<bi_tdgraph> {
   /**
    * @brief Set the children for an existing node.
    *
-   * Do not call \ref tdgraph::set_children() directly, or your bi_tdgraph will
+   * Do not call @ref tdgraph::set_children() directly, or your bi_tdgraph will
    * not work properly.
    *
    * @param parent The parent node, which MUST be partitionable.
    * @param children The list of children (must be exactly 2) to associate with
-   * the parent.
+   *                 the parent.
+   * @param rng The RNG to use during installation, per configuration.
    *
-   * @return \ref status_t.
+   * @return @ref status_t.
    */
   status_t install_tab(polled_task* parent,
                        tdgraph::vertex_vector children,

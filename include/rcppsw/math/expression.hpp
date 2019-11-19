@@ -36,7 +36,7 @@ NS_START(rcppsw, math);
  ******************************************************************************/
 /**
  * @class expression
- * @ingroup rcppsw math
+ * @ingroup math
  *
  * @brief A base class for easy swapping/manipulating of mathematical
  * expressions.

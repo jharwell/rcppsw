@@ -39,7 +39,7 @@ NS_START(rcppsw, ds);
  ******************************************************************************/
 /**
  * @class base_grid2D
- * @ingroup rcppsw ds
+ * @ingroup ds
  *
  * @brief Base class containing functionality common to all types of 2D grids.
  */
@@ -61,7 +61,7 @@ class base_grid2D {
    * @brief Return a reference to the element at position (i, j) in the grid.
    *
    * This is provided in the base class so that the pointer/object variants of
-   * the grid (\ref grid2D, \ref overlay_grid2D) can reduce code duplication.
+   * the grid (@ref grid2D, @ref overlay_grid2D) can reduce code duplication.
    */
   virtual T& access(size_t i, size_t j) = 0;
   virtual T& access(const math::vector2u& c) = 0;

@@ -43,7 +43,10 @@ NS_START(rcppsw, ta, config);
  ******************************************************************************/
 /**
  * @struct task_alloc_config
- * @ingroup rcppsw ta config
+ * @ingroup ta config
+ *
+ * @brief Task allocation configuration container, containing all
+ * necessary configuration structs for all possible task allocation policies.
  */
 struct task_alloc_config final : public rcppsw::config::base_config {
   /**

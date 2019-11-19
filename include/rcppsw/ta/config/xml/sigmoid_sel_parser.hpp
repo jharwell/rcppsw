@@ -42,18 +42,18 @@ NS_START(rcppsw, ta, config, xml);
  ******************************************************************************/
 /**
  * @class sigmoid_sel_parser
- * @ingroup rcppsw ta config xml
+ * @ingroup ta config xml
  *
- * @brief Parses XML configuration relating to \ref sigmoid_sel_probability into
- * \ref sigmoid_sel_config.
+ * @brief Parses XML configuration relating to probabilities built on
+ * math::sigmoid to select between things into @ref sigmoid_sel_config.
  */
 class sigmoid_sel_parser : public rcppsw::config::xml::xml_config_parser {
  public:
   using config_type = sigmoid_sel_config;
 
   /**
-   * @brief The root tag that all XML configuration for \ref
-   * sigmoid_sel_probability should lie under in the XML tree.
+   * @brief The root tag that all XML configuration should lie under in the XML
+   * tree.
    */
   static constexpr char kXMLRoot[] = "sigmoid_sel";
 

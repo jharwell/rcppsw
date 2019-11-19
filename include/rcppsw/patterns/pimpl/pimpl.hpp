@@ -39,7 +39,7 @@ NS_START(rcppsw, patterns, pimpl);
  ******************************************************************************/
 /**
  * @class pimpl
- * @ingroup rcppsw pimpl
+ * @ingroup pimpl
  *
  * @brief Super-simple templated implementation of the PIMPL idiom. Does not
  * exist in boost, and the boost candidate I found had subtle memory issues.

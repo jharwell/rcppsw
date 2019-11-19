@@ -1,5 +1,5 @@
 /**
- * @file waveform_xml_parser.hpp
+ * @file waveform_parser.hpp
  *
  * @copyright 2018 John Harwell/Anthony Chen, All rights reserved.
  *
@@ -40,12 +40,12 @@ NS_START(rcppsw, control, config, xml);
  ******************************************************************************/
 /**
  * @class waveform_parser
- * @ingroup rcppsw control config xml
+ * @ingroup control config xml
  *
  * @brief Parses XML configuration related to temporal waveform generation into
- * \ref waveform_config.
+ * @ref waveform_config.
  *
- * Any configuration values not present under the \ref kXMLRoot will be given a
+ * Any configuration values not present under the @ref kXMLRoot will be given a
  * value of -1.0.
  */
 class waveform_parser final : public rcppsw::config::xml::xml_config_parser {

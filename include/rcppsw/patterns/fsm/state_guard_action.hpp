@@ -38,8 +38,8 @@ class base_fsm;
  * Class Definitions
  ******************************************************************************/
 /**
- * @class state_guard_condition
- * @ingroup rcppsw patterns fsm
+ * @class state_guard_condition1
+ * @ingroup patterns fsm
  *
  * @brief Condition to determine if a state's main action should be executed.
  *
@@ -65,7 +65,8 @@ class state_guard_condition1 : public state_guard {
   }
 };
 
-/** @class state_guard_condition
+/**
+ * @class state_guard_condition0
  *
  * @tparam SM A state machine class.
  * @tparam Func A state machine member function pointer that takes ZERO

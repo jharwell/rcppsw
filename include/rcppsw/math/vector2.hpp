@@ -42,10 +42,10 @@ NS_START(rcppsw, math);
  ******************************************************************************/
 /**
  * @class vector2
- * @ingroup rcppsw math
+ * @ingroup math
  *
  * @brief Base template class encapsulating mathematical actions on a pair of
- * numbers. Is specialized by \ref vector2u, \ref vector2i, \ref vector2d.
+ * numbers. Is specialized by @ref vector2u, @ref vector2i, @ref vector2d.
  *
  * All operations are performed in whatever the template parameter is, so take
  * care if you are trying to do scaling, trigonometric things with integers...
@@ -309,8 +309,19 @@ class vector2 {
   /* clang-format on */
 };
 
+/**
+ * @brief Specialization of @ref vector2 for signed integers.
+ */
 using vector2i = vector2<int>;
+
+/**
+ * @brief Specialization of @ref vector2 for unsigned integers.
+ */
 using vector2u = vector2<uint>;
+
+/**
+ * @brief Specialization of @ref vector2 for doubles.
+ */
 using vector2d = vector2<double>;
 
 /*******************************************************************************

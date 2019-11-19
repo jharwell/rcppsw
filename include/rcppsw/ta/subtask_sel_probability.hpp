@@ -45,7 +45,7 @@ struct sigmoid_sel_config;
  ******************************************************************************/
 /**
  * @class subtask_sel_probability
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief Calculates the probability that a robot selects subtask 2 when it has
  * most recently executed subtask 1 (assuming partitioning is employed).

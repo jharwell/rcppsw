@@ -38,7 +38,7 @@ NS_START(rcppsw, math);
 
 /**
  * @class sigmoid
- * @ingroup rcppsw math
+ * @ingroup math
  *
  * @brief Encapsulates base aspects common to all sigmoid functions; does not
  * calculate anything itself, as derived sigmoids each have different input

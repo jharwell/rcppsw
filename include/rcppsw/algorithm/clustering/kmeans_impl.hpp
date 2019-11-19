@@ -40,7 +40,7 @@ NS_START(rcppsw, algorithm, clustering, detail);
  ******************************************************************************/
 /**
  * @class kmeans_impl
- * @ingroup rcppsw algorithm clustering
+ * @ingroup algorithm clustering
  *
  * @brief Parallel clustering using OpenMP using the Nearest Centroid (NC)
  * membership policy. Suitable for kmeans clustering.

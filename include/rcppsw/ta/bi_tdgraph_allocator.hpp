@@ -45,9 +45,9 @@ struct task_alloc_config;
  ******************************************************************************/
 /**
  * @class bi_tdgraph_allocator
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
- * @brief Allocate a task from a \ref bi_tdgraph according to a specified
+ * @brief Allocate a task from a @ref bi_tdgraph according to a specified
  * policy.
  */
 class bi_tdgraph_allocator : public er::client<bi_tdgraph_allocator> {

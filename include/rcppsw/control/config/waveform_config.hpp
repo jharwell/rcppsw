@@ -37,7 +37,7 @@ NS_START(rcppsw, control, config);
  ******************************************************************************/
 /**
  * @struct waveform_config
- * @ingroup rcppsw control config
+ * @ingroup control config
  *
  * Not all parameters are applicable to all waveform types.
  */

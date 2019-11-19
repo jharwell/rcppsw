@@ -43,9 +43,9 @@ NS_START(rcppsw, ta, config, xml);
  ******************************************************************************/
 /**
  * @class stoch_nbhd1_parser
- * @ingroup rcppsw ta config xml
+ * @ingroup ta config xml
  *
- * @brief Parses XML configuration used for task allocation into \ref
+ * @brief Parses XML configuration used for task allocation into @ref
  * stoch_nbhd1_config.
  */
 class stoch_nbhd1_parser final : public rcppsw::config::xml::xml_config_parser {

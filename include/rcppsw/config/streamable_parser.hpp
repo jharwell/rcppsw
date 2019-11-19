@@ -38,7 +38,7 @@ NS_START(rcppsw, config);
  ******************************************************************************/
 /**
  * @class streamable_parser
- * @ingroup rcppsw config
+ * @ingroup config
  *
  * @brief Mixin to add pretty printing capabilities to parsers.
  */

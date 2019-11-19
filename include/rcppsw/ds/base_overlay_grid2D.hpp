@@ -40,7 +40,7 @@ NS_START(rcppsw, ds);
  ******************************************************************************/
 /**
  * @class base_overlay_grid2D
- * @ingroup rcppsw ds
+ * @ingroup ds
  *
  * @brief A 2D logical grid that is overlayed over a continuous environment. It
  * discretizes the continuous arena into a grid of a specified resolution
@@ -52,8 +52,9 @@ class base_overlay_grid2D : public base_grid2D<T> {
  public:
   using typename base_grid2D<T>::index_range;
 
-  /* @brief Contains the upper/lower X/Y coordinates of the circle when
-   * applied to the specified X/Y coordinate.
+  /**
+   * @brief Contains the upper/lower X/Y coordinates of the circle when applied
+   * to the specified X/Y coordinate.
    */
   using circle_range_ret_type =
       std::pair<typename index_range::index, typename index_range::index>;

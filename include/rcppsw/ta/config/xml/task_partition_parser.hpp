@@ -42,9 +42,9 @@ NS_START(rcppsw, ta, config, xml);
  ******************************************************************************/
 /**
  * @class task_partition_parser
- * @ingroup rcppsw ta config xml
+ * @ingroup ta config xml
  *
- * @brief Parses XML configuration for relating to task partitioning into \ref
+ * @brief Parses XML configuration for relating to task partitioning into @ref
  * task_partition_config.
  */
 class task_partition_parser final : public rcppsw::config::xml::xml_config_parser {

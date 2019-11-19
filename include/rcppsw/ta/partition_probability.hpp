@@ -46,7 +46,7 @@ struct sigmoid_sel_config;
  ******************************************************************************/
 /**
  * @class partition_probability
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief Calculates the probability that a robot partitions its current task
  * using the negative exponential distribution.

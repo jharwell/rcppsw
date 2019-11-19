@@ -36,7 +36,7 @@ NS_START(rcppsw, math, config);
  ******************************************************************************/
 /**
  * @struct sigmoid_config
- * @ingroup rcppsw math
+ * @ingroup math
  *
  * @brief Parameters for probabilistic exponentials (aka sigmoids).
  */

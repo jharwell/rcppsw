@@ -34,6 +34,10 @@ NS_START(rcppsw, ta);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @brief The type used to estimate time when performing calculations in task
+ * allocation.
+ */
 using time_estimate = math::ema<int>;
 
 NS_END(ta, rcppsw);

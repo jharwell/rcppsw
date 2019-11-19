@@ -38,7 +38,7 @@ NS_START(rcppsw, ta);
  ******************************************************************************/
 /**
  * @class logical_task
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief Represents the logical concept of a task, which only contains a name
  * right now.

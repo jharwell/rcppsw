@@ -42,10 +42,10 @@ class polled_task;
  ******************************************************************************/
 /**
  * @class epsilon_greedy_allocator
- * @ingroup rcppsw ta
+ * @ingroup ta
  *
  * @brief Allocates a task from a given set of a tasks, using a randomized
- * $\epsilon$ based method with either logarithmically or linearly bounded
+ * \f$\epsilon\f$ based method with either logarithmically or linearly bounded
  * regret.
  *
  * From Auer2002, Pini2012

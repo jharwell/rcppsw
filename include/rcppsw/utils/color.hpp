@@ -36,7 +36,7 @@ NS_START(rcppsw, utils);
  ******************************************************************************/
 /**
  * @class color
- * @ingroup rcppsw utils
+ * @ingroup utils
  *
  * @brief A simple RGBA class representing colors as 4 8-bit numbers.
  *

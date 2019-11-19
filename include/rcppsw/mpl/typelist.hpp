@@ -38,7 +38,7 @@
 /**
  * @def RCPPSW_SFINAE_TYPELIST_REQUIRE() Enable the function that this macro is
  * attached to if the specified type is found in the typelist, which must be a
- * \ref typelist compile-time object.
+ * @ref typelist compile-time object.
  */
 #define RCPPSW_SFINAE_TYPELIST_REQUIRE(Typelist, T) \
   typename boost::enable_if<                        \
@@ -47,7 +47,7 @@
 /**
  * @def RCPPSW_SFINAE_TYPELIST_REJECT() Disable the function that this macro is
  * attached to if the specified type is found in the Typelist, which must be a
- * \ref typelist compile-time object.
+ * @ref typelist compile-time object.
  */
 #define RCPPSW_SFINAE_TYPELIST_REJECT(Typelist, T) \
   typename boost::disable_if<                      \
@@ -66,9 +66,9 @@ template <typename... Ts>
 using typelist = boost::mpl::vector<Ts...>;
 
 /**
- * @brief Wrap a \ref typelist into a container/template class.
+ * @brief Wrap a @ref typelist into a container/template class.
  *
- * @tparam WrapperType The container class each of the types in the \ref
+ * @tparam WrapperType The container class each of the types in the @ref
  *                     typelist will be wrapped into. It takes the wrapped type,
  *                     as well as additional template arguments for the wrapped
  *                     type, as arguments.
@@ -93,7 +93,7 @@ struct typelist_wrap_into {
 };
 
 /**
- * @brief Apply a functor to each type in the \ref typelist. The functor can
+ * @brief Apply a functor to each type in the @ref typelist. The functor can
  * itself take as many template parameters as needed.
  */
 template <typename Typelist,
