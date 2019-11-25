@@ -27,6 +27,7 @@
 #include <fstream>
 #include <list>
 #include <string>
+#include <boost/optional.hpp>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/types/timestep.hpp"
@@ -73,6 +74,10 @@ class base_metrics_collector {
    */
   virtual void reset(void);
 
+  /**
+   * \brief Collect metrics from an object which implements the necessary
+   * interface (must be checked with a dynamic cast in the function itself).
+   */
   virtual void collect(const rcppsw::metrics::base_metrics& metrics) = 0;
 
   /**
@@ -147,13 +152,12 @@ class base_metrics_collector {
   /**
    * \brief Build the next line of metrics
    *
-   * \param line The current line, to be filled.
-   *
-   * \return \c TRUE if the metrics should be written out, or \c FALSE if
-   * not. This allows metrics to be gathered across multiple timesteps, but only
-   * written out once an interesting event has occurred.
+   * \return The line that should be added to the .csv file, or empty if the
+   * necessary conditions are not met. This allows metrics to be gathered across
+   * multiple timesteps, but only written out once an interesting event has
+   * occurred.
    */
-  virtual bool csv_line_build(std::string& line) = 0;
+  virtual boost::optional<std::string> csv_line_build(void) = 0;
 
   /**
    * \brief Return a list of default columns that should be include in (almost)

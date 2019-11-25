@@ -116,12 +116,13 @@ void execution_metrics_collector::collect(
   }
 } /* collect() */
 
-bool execution_metrics_collector::csv_line_build(std::string& line) {
+boost::optional<std::string> execution_metrics_collector::csv_line_build(void) {
   if (!((timestep() + 1) % interval() == 0)) {
-    return false;
+    return boost::none;
   }
   uint int_n_allocs = m_interval.complete_count + m_interval.abort_count;
   uint cum_n_allocs = m_cum.complete_count + m_cum.abort_count;
+  std::string line;
 
   line += csv_entry_domavg(m_interval.exec_time, int_n_allocs);
   line += csv_entry_domavg(m_cum.exec_time, cum_n_allocs);
@@ -139,7 +140,8 @@ bool execution_metrics_collector::csv_line_build(std::string& line) {
   line += csv_entry_tsavg(m_cum.complete_count);
   line += csv_entry_intavg(m_interval.interface_count);
   line += csv_entry_tsavg(m_cum.interface_count, true);
-  return true;
+
+  return boost::make_optional(line);
 } /* store_foraging_stats() */
 
 void execution_metrics_collector::reset_after_interval(void) {

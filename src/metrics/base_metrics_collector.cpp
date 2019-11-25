@@ -47,15 +47,14 @@ base_metrics_collector::base_metrics_collector(const std::string& ofname,
  * Member Functions
  ******************************************************************************/
 bool base_metrics_collector::csv_line_write(const types::timestep& t) {
-  std::string line;
-  if (csv_line_build(line)) {
+  if (auto line = csv_line_build()) {
     if (!m_cum_only) {
-      m_ofile << std::to_string(t.v()) + m_separator + line << std::endl;
+      m_ofile << std::to_string(t.v()) + m_separator + *line << std::endl;
     } else {
       fs::resize_file(m_ofname, 0);
       m_ofile.seekp(0);
       csv_header_write();
-      m_ofile << line << std::endl;
+      m_ofile << *line << std::endl;
     }
     return true;
   }

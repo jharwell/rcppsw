@@ -101,10 +101,11 @@ void bi_tdgraph_metrics_collector::collect(
   ++m_cum_tab_counts[m.current_task_tab()];
 } /* collect() */
 
-bool bi_tdgraph_metrics_collector::csv_line_build(std::string& line) {
+boost::optional<std::string> bi_tdgraph_metrics_collector::csv_line_build() {
   if (!((timestep() + 1) % interval() == 0)) {
-    return false;
+    return boost::none;
   }
+  std::string line;
 
   for (auto& count : m_int_depth_counts) {
     line += csv_entry_intavg(count);
@@ -129,8 +130,9 @@ bool bi_tdgraph_metrics_collector::csv_line_build(std::string& line) {
   for (size_t i = 0; i < m_cum_tab_counts.size() - 1; ++i) {
     line += csv_entry_tsavg(m_cum_tab_counts[i]);
   } /* for(i..) */
+
   line += csv_entry_tsavg(m_cum_tab_counts[m_cum_tab_counts.size() - 1], true);
-  return true;
+  return boost::make_optional(line);
 } /* store_foraging_stats() */
 
 void bi_tdgraph_metrics_collector::reset_after_interval(void) {

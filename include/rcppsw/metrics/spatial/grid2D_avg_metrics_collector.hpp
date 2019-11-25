@@ -68,7 +68,7 @@ class grid2D_avg_metrics_collector : public metrics::base_metrics_collector {
 
  private:
   std::list<std::string> csv_header_cols(void) const override;
-  bool csv_line_build(std::string& line) override;
+  boost::optional<std::string> csv_line_build(void) override;
 
   /* clang-format off */
   rcppsw::ds::grid2D<uint> m_stats;

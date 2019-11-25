@@ -55,10 +55,11 @@ void grid2D_avg_metrics_collector::reset(void) {
   reset_after_interval();
 } /* reset() */
 
-bool grid2D_avg_metrics_collector::csv_line_build(std::string& line) {
+boost::optional<std::string> grid2D_avg_metrics_collector::csv_line_build(void) {
   if (!((timestep() + 1) % interval() == 0)) {
-    return false;
+    return boost::none;
   }
+  std::string line;
   for (size_t i = 0; i < m_stats.xsize(); ++i) {
     for (size_t j = 0; j < m_stats.ysize(); ++j) {
       line += csv_entry_domavg(m_stats.access(i, j),
@@ -68,7 +69,7 @@ bool grid2D_avg_metrics_collector::csv_line_build(std::string& line) {
     line += "\n";
   } /* for(i..) */
 
-  return true;
+  return boost::make_optional(line);
 } /* csv_line_build() */
 
 NS_END(spatial, metrics, fordyca);

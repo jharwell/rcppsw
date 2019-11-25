@@ -60,7 +60,7 @@ class bi_tab_metrics_collector final : public base_metrics_collector {
   void reset_after_interval(void) override;
 
   std::list<std::string> csv_header_cols(void) const override;
-  bool csv_line_build(std::string& line) override;
+  boost::optional<std::string> csv_line_build(void) override;
 
  private:
   struct stats {

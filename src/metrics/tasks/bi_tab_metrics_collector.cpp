@@ -107,10 +107,11 @@ void bi_tab_metrics_collector::collect(
   m_cum.task_depth_sw_count += static_cast<uint>(m.task_depth_changed());
 } /* collect() */
 
-bool bi_tab_metrics_collector::csv_line_build(std::string& line) {
+boost::optional<std::string> bi_tab_metrics_collector::csv_line_build(void) {
   if (!((timestep() + 1) % interval() == 0)) {
-    return false;
+    return boost::none;
   }
+
   /*
    * We want to capture average probability per robot, not per
    * timestep/interval, so we divide by the total # of task allocations
@@ -118,6 +119,7 @@ bool bi_tab_metrics_collector::csv_line_build(std::string& line) {
    */
   double int_allocs = m_interval.partition_count + m_interval.no_partition_count;
   double cum_allocs = m_cum.partition_count + m_cum.no_partition_count;
+  std::string line;
 
   line += csv_entry_domavg(m_interval.subtask1_count, int_allocs);
   line += csv_entry_domavg(m_cum.subtask1_count, cum_allocs);
@@ -142,7 +144,8 @@ bool bi_tab_metrics_collector::csv_line_build(std::string& line) {
 
   line += csv_entry_domavg(m_interval.subtask_sel_prob, int_allocs);
   line += csv_entry_domavg(m_cum.subtask_sel_prob, cum_allocs, true);
-  return true;
+
+  return boost::make_optional(line);
 } /* store_foraging_stats() */
 
 void bi_tab_metrics_collector::reset_after_interval(void) {
