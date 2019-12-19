@@ -50,8 +50,8 @@ class random_allocator : er::client<random_allocator> {
       : ER_CLIENT_INIT("rcppsw.ta.random_allocator"), m_rng(rng) {}
 
   /* Not copy constructable/assignable by default */
-  random_allocator(const random_allocator& other) = delete;
-  const random_allocator& operator=(const random_allocator& other) = delete;
+  random_allocator(const random_allocator&) = delete;
+  const random_allocator& operator=(const random_allocator&) = delete;
 
   polled_task* operator()(const std::vector<polled_task*>& tasks) const {
     return tasks[m_rng->uniform(math::rangeu(0, tasks.size() - 1))];

@@ -24,10 +24,10 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <boost/optional.hpp>
 #include <fstream>
 #include <list>
 #include <string>
-#include <boost/optional.hpp>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/types/timestep.hpp"
@@ -188,7 +188,7 @@ class base_metrics_collector {
    */
   template <class T>
   std::string csv_entry_intavg(const T& sum, bool last = false) const {
-    return std::to_string(static_cast<double>(sum) / interval()) +
+    return rcppsw::to_string(static_cast<double>(sum) / interval()) +
            ((last) ? "" : separator());
   }
 
@@ -202,7 +202,7 @@ class base_metrics_collector {
    */
   template <class T>
   std::string csv_entry_tsavg(const T& sum, bool last = false) const {
-    return std::to_string(static_cast<double>(sum) / (timestep() + 1).v()) +
+    return rcppsw::to_string(static_cast<double>(sum) / (timestep() + 1).v()) +
            ((last) ? "" : separator());
   }
 
@@ -220,8 +220,8 @@ class base_metrics_collector {
   std::string csv_entry_domavg(const T& sum,
                                const U& count,
                                bool last = false) const {
-    return (count > 0) ? std::to_string(static_cast<double>(sum) /
-                                        static_cast<double>(count)) +
+    return (count > 0) ? rcppsw::to_string(static_cast<double>(sum) /
+                                           static_cast<double>(count)) +
                              ((last) ? "" : separator())
                        : "0" + ((last) ? "" : separator());
   }

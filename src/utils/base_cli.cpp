@@ -46,7 +46,7 @@ base_cli::base_cli(const std::string& mnemonic) : m_desc("Program options") {
 
   m_base_output_dir = "outputs/" + mnemonic + "/" +
                       std::string(reinterpret_cast<char*>(buffer)) + "/";
-  std::string logfile = m_base_output_dir + std::to_string(getpid()) + "-log";
+  std::string logfile = m_base_output_dir + rcppsw::to_string(getpid()) + "-log";
   m_desc.add_options()("help", "Produce this message");
 
   /* define auxillary command line options */

@@ -50,8 +50,8 @@ class threadable {
   threadable(void) = default;
   virtual ~threadable(void) = default;
 
-  threadable(const threadable& other) = delete;
-  threadable& operator=(const threadable& other) = delete;
+  threadable(const threadable&) = delete;
+  threadable& operator=(const threadable&) = delete;
 
   /**
    * \brief The entry point for a thread.

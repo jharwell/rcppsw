@@ -56,6 +56,7 @@ struct waveform_config;
  */
 class waveform_generator
     : public patterns::factory::releasing_factory<waveform,
+                                                  std::string,
                                                   const config::waveform_config*> {
  public:
   static constexpr char kSine[] = "Sine";

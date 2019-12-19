@@ -44,7 +44,7 @@ grid2D_avg_metrics_collector::grid2D_avg_metrics_collector(
 std::list<std::string> grid2D_avg_metrics_collector::csv_header_cols(void) const {
   std::list<std::string> cols;
   for (size_t j = 0; j < m_stats.ysize(); ++j) {
-    cols.push_back("y" + std::to_string(j));
+    cols.push_back("y" + rcppsw::to_string(j));
   } /* for(j..) */
 
   return cols;

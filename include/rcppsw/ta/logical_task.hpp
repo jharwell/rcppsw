@@ -56,7 +56,7 @@ class logical_task {
    */
   const std::string& name(void) const { return m_name; }
 
-  logical_task& operator=(const logical_task& other) = delete;
+  logical_task& operator=(const logical_task&) = delete;
   bool operator==(const logical_task& other) const {
     return this->m_name == other.name();
   }

@@ -55,8 +55,8 @@ class hfsm_state : public state {
     m_parent = parent;
   }
 
-  hfsm_state(const hfsm_state& other) = delete;
-  hfsm_state& operator=(const hfsm_state& other) = delete;
+  hfsm_state(const hfsm_state&) = delete;
+  hfsm_state& operator=(const hfsm_state&) = delete;
 
  private:
   rcppsw::patterns::fsm::state* m_parent;

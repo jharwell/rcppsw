@@ -72,8 +72,10 @@ class caching_factory {
 
  private:
   /* clang-format off */
-  patterns::factory::sharing_factory<TBase, Args...>   m_factory{};
-  std::map<std::string, TBase*>                        m_objs{};
+  patterns::factory::sharing_factory<TBase,
+                                     std::string, /* key type */
+                                     Args...> m_factory{};
+  std::map<std::string, TBase*>               m_objs{};
   /* clang-format on */
 };
 

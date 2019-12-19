@@ -50,8 +50,8 @@ class singleton {
 
   singleton(singleton const&) = delete;
   singleton& operator=(singleton const&) = delete;
-  singleton(singleton&& other) = delete;
-  singleton& operator=(singleton&& other) = delete;
+  singleton(singleton&&) = delete;
+  singleton& operator=(singleton&&) = delete;
 
  protected:
   singleton(void) = default;

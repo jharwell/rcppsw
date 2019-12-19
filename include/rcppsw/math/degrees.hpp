@@ -95,8 +95,8 @@ class degrees {
   }
 
   std::string to_str(void) const {
-    return "deg(" + std::to_string(m_value) + ") -> rad(" +
-           std::to_string(m_value * kDEGREES_TO_RADIANS / M_PI) + ")";
+    return "deg(" + rcppsw::to_string(m_value) + ") -> rad(" +
+           rcppsw::to_string(m_value * kDEGREES_TO_RADIANS / M_PI) + ")";
   }
 
   degrees& operator+(void) { return *this; }

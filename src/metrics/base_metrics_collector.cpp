@@ -49,7 +49,7 @@ base_metrics_collector::base_metrics_collector(const std::string& ofname,
 bool base_metrics_collector::csv_line_write(const types::timestep& t) {
   if (auto line = csv_line_build()) {
     if (!m_cum_only) {
-      m_ofile << std::to_string(t.v()) + m_separator + *line << std::endl;
+      m_ofile << rcppsw::to_string(t) + m_separator + *line << std::endl;
     } else {
       fs::resize_file(m_ofname, 0);
       m_ofile.seekp(0);
@@ -83,7 +83,7 @@ void base_metrics_collector::reset(void) {
 } /* reset() */
 
 void base_metrics_collector::interval_reset(void) {
-  if (m_timestep.v() > 0 && (m_timestep.v() % m_interval == 0)) {
+  if (m_timestep > 0 && (m_timestep % m_interval == 0)) {
     reset_after_interval();
   }
 } /* interval_reset() */

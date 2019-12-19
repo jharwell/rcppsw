@@ -53,8 +53,8 @@ class ucb1_allocator : er::client<ucb1_allocator> {
       : ER_CLIENT_INIT("rcppsw.ta.ucb1_allocator"), m_rng(rng) {}
 
   /* Not copy constructable/assignable by default */
-  ucb1_allocator(const ucb1_allocator& other) = delete;
-  const ucb1_allocator& operator=(const ucb1_allocator& other) = delete;
+  ucb1_allocator(const ucb1_allocator&) = delete;
+  const ucb1_allocator& operator=(const ucb1_allocator&) = delete;
 
   /**
    * \brief Perform task allocation.

@@ -159,8 +159,8 @@
  * for the purposes of SFINAE, so functions with 100% identical signatures
  * except for such a parameter will cause a compilation error.
  *
- * However, a non-template type parameter (e.g. a template parameter that is an
- * integer) that is defaulted (i.e. have a default value specified) ARE
+ * However, a template non-type parameter (e.g. a template parameter that is an
+ * integer) that is defaulted (i.e. have a default value specified) IS
  * considered part of a function's signature for the purposes of SFINAE, so two
  * functions that differ only in the value of the defaulted non-type parameter
  * in their template argument lists will be considered distinct and trigger
@@ -168,8 +168,6 @@
  */
 #define RCPPSW_SFINAE_FUNC(...) \
   typename std::enable_if<__VA_ARGS__, int>::type = 0
-
-#define RCPPSW_SFINAE_TYPE(...) typename std::enable_if<__VA_ARGS__, bool>::type
 
 /*******************************************************************************
  * Warning Disable Macros
@@ -208,38 +206,128 @@
 NS_START(rcppsw);
 
 /*******************************************************************************
- * Debugging Templates
+ * Trait Detection Templates
  ******************************************************************************/
 NS_START(detail);
 
-template <class unused, class = std::void_t<>>
-struct has_to_str : public std::false_type {};
+/**
+ * \brief If the specified function \p TFuncDecltype taking the specified \p
+ * Args is not well formed, then SFINAE and partial template specialization will
+ * select this template, indicating unsuccessful detection.
+ *
+ * \tparam TFailType The default type to select upon unsuccessful
+ * detection.
+ *
+ * \tparam TFuncDecltype The decltype() of the function to detect.
+ *
+ * \tparam Args The types of the arguments to the function to detect.
+ */
+template <class TFailType,
+          class AlwaysVoid,
+          template <class...> class TFuncDecltype,
+          class... Args>
+struct detector {
+  using value = std::false_type;
+  using type = TFailType;
+};
 
-template <class T>
-struct has_to_str<T, std::void_t<decltype(std::declval<T>().to_str())>>
-    : public std::true_type {};
+/**
+ * \brief If the specified function \p TFuncDecltype taking the specified \p
+ * Args is well formed, then SFINAE and partial template specialization will
+ * select this template, indicating successful detection.
+ *
+ * \tparam TFailType The default type to select upon unsuccessful
+ * detection. Unused in this version of the detector.
+ *
+ * \tparam TFuncDecltype The decltype() of the function to detect.
+ *
+ * \tparam Args The types of the arguments to the function to detect.
+ */
+template <class TFailType, template <class...> class TFuncDecltype, class... Args>
+struct detector<TFailType, std::void_t<TFuncDecltype<Args...>>, TFuncDecltype, Args...> {
+  using value = std::true_type;
+  using type = TFuncDecltype<Args...>;
+};
+
 NS_END(detail);
 
-template <typename T, RCPPSW_SFINAE_FUNC(detail::has_to_str<T>::value)>
+/**
+ * \brief Sentinel type to indicate that the specified trait was not detected.
+ */
+struct no_such_trait {
+  no_such_trait() = delete;
+  ~no_such_trait() = delete;
+  no_such_trait(no_such_trait const&) = delete;
+  void operator=(no_such_trait const&) = delete;
+};
+
+/**
+ * \brief Type trait to detect whether a function taking the specified \p Args
+ * exists for the specified type. Suitable for use in SFINAE.
+ *
+ * \tparam TFuncDecltype Should be a decltype(), something like
+ * `decltype(std::declval<T>().foo())` to detect the presence of a function
+ * named `foo()` for a type `T`.
+ *
+ * \tparam Args The argument types for the function to detect (if any).
+ */
+template <template <class...> class TFuncDecltype, class... Args>
+using is_detected =
+    typename detail::detector<no_such_trait, void, TFuncDecltype, Args...>::value;
+
+/**
+ * \brief Same as \ref is_detected, but will return the decltype itself, rather
+ * than just if it is well formed or not.
+ */
+template <template <class...> class TFuncDecltype, class... Args>
+using detected_t =
+    typename detail::detector<no_such_trait, void, TFuncDecltype, Args...>::type;
+
+/**
+ * \brief Same as \ref is_detected_t, but allows for a user specified type \p
+ * TFailType to be selected if detection fails.
+ */
+
+template <class TFailType, template <class...> class TFuncDecltype, class... Args>
+using detected_or = detail::detector<TFailType, void, TFuncDecltype, Args...>;
+
+/*******************************************************************************
+ * String Conversion Templates
+ ******************************************************************************/
+NS_START(detail);
+
+/**
+ * \brief Predicate for detecting if a type \p T defines `to_str()`.
+ *
+ * \tparam T The type to check.
+ */
+template <class T>
+using to_str_type = decltype(std::declval<T>().to_str());
+
+NS_END(detail);
+
+/**
+ * @brief If a class/type defines a to_str() method, then it can use
+ * rcppsw::to_string() in cases where rcppsw::to_string() does not work.
+ */
+template <class T, RCPPSW_SFINAE_FUNC(is_detected<detail::to_str_type, T>::value)>
 std::string to_string(const T& obj) {
   return obj.to_str();
+}
+
+/**
+ * @brief Adaptor func for types where rcppsw::to_string() works so you can
+ * ALWAYS use rcppsw::to_string().
+ */
+template <typename T,
+          RCPPSW_SFINAE_FUNC(!is_detected<detail::to_str_type, T>::value)>
+std::string to_string(const T& obj) {
+  return std::to_string(obj);
 }
 
 /*******************************************************************************
  * Misc. Templates
  ******************************************************************************/
-NS_START(detail);
-
-template <typename T, typename Functor, std::size_t... Is>
-void tuple_for_each(T&& t, const Functor& f, std::index_sequence<Is...>) {
-  __attribute__((unused)) auto dummy = {(f(std::get<Is>(t)), 0)...};
-}
-NS_END(detail);
-
-template <typename... Ts, typename Functor>
-void tuple_apply(const std::tuple<Ts...>& t, const Functor& functor) {
-  detail::tuple_for_each(t, functor, std::index_sequence_for<Ts...>{});
-}
 
 template <typename TEnum>
 constexpr typename std::underlying_type<TEnum>::type as_underlying(

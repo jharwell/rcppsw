@@ -147,7 +147,7 @@ class range final : public er::client<range<T>> {
    * \brief Return a string representation of the range in the form of [lb,ub]
    */
   std::string to_str(void) const {
-    return "[" + std::to_string(m_lb) + "-" + std::to_string(m_ub) + "]";
+    return "[" + rcppsw::to_string(m_lb) + "-" + rcppsw::to_string(m_ub) + "]";
   }
 
   friend std::ostream& operator<<(std::ostream& stream, const range& c_range) {

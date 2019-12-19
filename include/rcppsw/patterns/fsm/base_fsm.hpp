@@ -61,7 +61,7 @@ class base_fsm : public er::client<base_fsm> {
   base_fsm(const base_fsm& other);
   ~base_fsm(void) override = default;
 
-  base_fsm& operator=(const base_fsm& other) = delete;
+  base_fsm& operator=(const base_fsm&) = delete;
 
   /**
    * \brief Get the current state of the state machine.

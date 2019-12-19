@@ -54,9 +54,9 @@ class strict_greedy_allocator : er::client<strict_greedy_allocator> {
       : ER_CLIENT_INIT("rcppsw.ta.strict_greedy_allocator"), m_rng(rng) {}
 
   /* Not copy constructable/assignable by default */
-  strict_greedy_allocator(const strict_greedy_allocator& other) = delete;
-  const strict_greedy_allocator& operator=(
-      const strict_greedy_allocator& other) = delete;
+  strict_greedy_allocator(const strict_greedy_allocator&) = delete;
+  const strict_greedy_allocator& operator=(const strict_greedy_allocator&) =
+      delete;
 
   /**
    * \brief Perform task allocation.

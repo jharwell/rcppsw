@@ -80,7 +80,7 @@ class bi_tab final : public metrics::tasks::bi_tab_metrics,
 
   /* Necessary for use in boost::variant */
   bi_tab(const bi_tab& other) = default;
-  bi_tab& operator=(const bi_tab& other) = delete;
+  bi_tab& operator=(const bi_tab&) = delete;
 
 
   /* bi TAB metrics */

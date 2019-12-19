@@ -58,8 +58,8 @@ class polled_task : public executable_task, public taskable {
         m_mechanism(std::move(mechanism)) {}
   ~polled_task(void) override;
 
-  polled_task& operator=(const polled_task& other) = delete;
-  polled_task(const polled_task& other) = delete;
+  polled_task& operator=(const polled_task&) = delete;
+  polled_task(const polled_task&) = delete;
 
   taskable* mechanism(void) const { return m_mechanism.get(); }
 

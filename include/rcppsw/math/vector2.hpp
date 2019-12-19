@@ -299,7 +299,7 @@ class vector2 {
   }
 
   std::string to_str(void) const {
-    return "(" + std::to_string(m_x) + "," + std::to_string(m_y) + ")";
+    return "(" + rcppsw::to_string(m_x) + "," + rcppsw::to_string(m_y) + ")";
   }
 
  private:

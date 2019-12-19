@@ -158,9 +158,10 @@ class xml_config_repository : public er::client<xml_config_repository> {
 
  private:
   /* clang-format off */
-  std::map<std::string, xml_config_parser*>             m_parsers{};
-  std::map<std::type_index, std::string>                m_config_types{};
-  patterns::factory::sharing_factory<xml_config_parser> m_factory{};
+  std::map<std::string, xml_config_parser*>       m_parsers{};
+  std::map<std::type_index, std::string>          m_config_types{};
+  patterns::factory::sharing_factory<xml_config_parser,
+                                     std::string> m_factory{};
   /* clang-format on */
 };
 

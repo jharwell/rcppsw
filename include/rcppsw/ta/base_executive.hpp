@@ -76,8 +76,8 @@ class base_executive : public rcppsw::er::client<base_executive> {
                  math::rng* rng);
   ~base_executive(void) override;
 
-  base_executive& operator=(const base_executive& other) = delete;
-  base_executive(const base_executive& other) = delete;
+  base_executive& operator=(const base_executive&) = delete;
+  base_executive(const base_executive&) = delete;
 
   /**
    * \brief The means by which the task executive will run one

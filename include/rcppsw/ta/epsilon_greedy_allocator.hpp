@@ -68,9 +68,9 @@ class epsilon_greedy_allocator : er::client<epsilon_greedy_allocator> {
         m_rng(rng) {}
 
   /* Not copy constructable/assignable by default */
-  epsilon_greedy_allocator(const epsilon_greedy_allocator& other) = delete;
-  const epsilon_greedy_allocator& operator=(
-      const epsilon_greedy_allocator& other) = delete;
+  epsilon_greedy_allocator(const epsilon_greedy_allocator&) = delete;
+  const epsilon_greedy_allocator& operator=(const epsilon_greedy_allocator&) =
+      delete;
 
   /**
    * \brief Perform task allocation.

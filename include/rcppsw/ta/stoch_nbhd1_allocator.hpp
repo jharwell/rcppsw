@@ -57,7 +57,7 @@ class stoch_nbhd1_allocator : er::client<stoch_nbhd1_allocator> {
         m_graph(graph) {}
 
   /* Not copy constructable/assignable by default */
-  stoch_nbhd1_allocator(const stoch_nbhd1_allocator& other) = delete;
+  stoch_nbhd1_allocator(const stoch_nbhd1_allocator&) = delete;
   const stoch_nbhd1_allocator& operator=(const stoch_nbhd1_allocator& other) =
       delete;
 
