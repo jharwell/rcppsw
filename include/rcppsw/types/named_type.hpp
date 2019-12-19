@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <iosfwd>
 #include <utility>
+#include <string>
 
 #include "rcppsw/common/common.hpp"
 
@@ -57,6 +57,7 @@ class named_type {
     stream << c_type.to_str();
     return stream;
   }
+  std::string to_str(void) const { return std::to_string(m_value); }
 
   friend std::istream& operator>>(std::istream& stream, named_type& n) {
     stream >> n.m_value;
