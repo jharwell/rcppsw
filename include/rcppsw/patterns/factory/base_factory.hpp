@@ -24,7 +24,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
 #include <map>
 #include <vector>
 #include <memory>
@@ -51,8 +50,11 @@ struct factory_sharing_type {};
  * classes of the derived type must have compatible constructor signatures.
  *
  * \tparam TPointerWrapper Type of pointer wrapper (shared or unique).
+ *
  * \tparam TBase Type of objects capable of creation from this factory
  * (restricted to this type and its derived types).
+ *
+ * \tparam TKeyType Type of key for the type identifier.
  *
  * \tparam Args List of constructor arguments for the types to be
  * constructed.
@@ -60,6 +62,7 @@ struct factory_sharing_type {};
 template <typename TType,
           template <class WrappedTBase, typename...> class TPointerWrapper,
           typename TBase,
+          typename TKeyType,
           typename ...Args>
 class base_factory {
  private:
@@ -82,7 +85,7 @@ class base_factory {
                               factory_releasing_type>::value ||
                               std::is_same<TFactoryType,
                               factory_sharing_type>::value)>
-  TPointerWrapper<TBase> create(const std::string& name, Args... args) {
+  TPointerWrapper<TBase> create(const TKeyType& name, Args... args) {
     auto it = m_workers.find(name);
     if (it != m_workers.end()) {
       return it->second->create(args...);
@@ -90,8 +93,9 @@ class base_factory {
     return nullptr;
   }
 
+
   template <typename TDerived>
-  void register_type(const std::string& name) {
+  void register_type(const TKeyType& name) {
     static_assert(std::is_base_of<TBase, TDerived>::value,
                   "register_type() only accepts types derived from the base");
     if (m_workers.end() == m_workers.find(name)) {
@@ -152,7 +156,7 @@ class base_factory {
     }
   };
 
-  using worker_map_type = std::map<std::string, std::unique_ptr<factory_worker>>;
+  using worker_map_type = std::map<TKeyType, std::unique_ptr<factory_worker>>;
 
   /* clang-format off */
   worker_map_type m_workers{};
