@@ -67,4 +67,9 @@ double rng::gaussian(double mean, double std_dev) {
   return dist(this->impl->engine);
 } /* guassian() */
 
+double rng::exponential(double lambda) {
+  std::exponential_distribution<double> dist(lambda);
+  return dist(this->impl->engine);
+} /* exponential() */
+
 NS_END(math, rcppsw);

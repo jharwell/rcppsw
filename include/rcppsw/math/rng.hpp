@@ -69,6 +69,8 @@ class rng : public patterns::pimpl::pimpl<detail::rng_impl> {
 
   double gaussian(double mean, double std_dev);
 
+  double exponential(double lambda);
+
  private:
   /* clang-format off */
   uint m_seed;
