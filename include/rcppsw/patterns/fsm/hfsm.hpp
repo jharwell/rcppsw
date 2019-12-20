@@ -282,6 +282,7 @@ entry_name{}
   rcppsw::patterns::fsm::                                 \
       state_entry_action0<BASE_FSM, &BASE_FSM::EN_##inherited_name> \
  inherited_name{}
+
 #define HFSM_ENTRY_DEFINE_ND(FSM, entry_name) \
   FSM_ENTRY_DEFINE_ND(FSM, entry_name)
 
@@ -291,18 +292,10 @@ entry_name{}
 #define HFSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var) \
   FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)
 
-/**
- * \def HFSM_DECLARE_STATE_MAP(type, name, n_entries)
- *
- * Declare the state map for a state machine.
- *
- * This CANNOT be made a static variable inside a function, because if two or
- * more instances of a state machine derived class have states that do not share
- * the same parent, the global scope for the map will cause updates to the state
- * map (such as changing the parent of a state).
- */
-#define HFSM_DECLARE_STATE_MAP(type, name, n_entries) \
-    const rcppsw::patterns::fsm::RCSW_JOIN(type, _row) (name)[n_entries]
+#define HFSM_DECLARE_STATE_MAP(type, name, n_entries)   \
+  FSM_DECLARE_STATE_MAP(type, name, n_entries)
+
+#define HFSM_DEFINE_STATE_MAP(name, ...) FSM_DEFINE_STATE_MAP(name, __VA_ARGS__)
 
 #define HFSM_STATE_MAP_ENTRY_EX(state_name) FSM_STATE_MAP_ENTRY_EX(state_name)
 

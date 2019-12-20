@@ -83,7 +83,7 @@ void base_metrics_collector::reset(void) {
 } /* reset() */
 
 void base_metrics_collector::interval_reset(void) {
-  if (m_timestep > 0 && (m_timestep % m_interval == 0)) {
+  if (m_timestep > 0U && (m_timestep % m_interval == 0)) {
     reset_after_interval();
   }
 } /* interval_reset() */

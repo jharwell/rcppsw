@@ -29,6 +29,7 @@
 #include <string>
 #include <memory>
 #include <utility>
+#include <array>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
@@ -53,11 +54,20 @@ NS_START(rcppsw, patterns, fsm);
  * \ingroup patterns fsm
  *
  * \brief Implements a software-based state machine.
+ *
+ ** The FSM paradigm uses *MEMBER* function pointers, so you always need to
+ * initialize the state map cleanly WITHOUT copy construction (even inside copy
+ * constructors), otherwise all copies of the object will use the other object's
+ * state map (default behavior in default copy constructor). If the source
+ * object is destructed, then you will get a segfault due to dangling pointers
+ * or a "pure virtual function called" error.
+ *
+ * Thus, all \ref base_fsm derived classes MUST implement the copy constructor,
+ * or delete it in order to ensure proper operation in all cases.
  */
 class base_fsm : public er::client<base_fsm> {
  public:
-  explicit base_fsm(uint8_t max_states,
-                    uint8_t initial_state = 0);
+  explicit base_fsm(uint8_t max_states, uint8_t initial_state = 0);
   base_fsm(const base_fsm& other);
   ~base_fsm(void) override = default;
 
@@ -390,19 +400,30 @@ NS_END(fsm, patterns, rcppsw);
  * State Map Macros
  ******************************************************************************/
 /**
- * \def FSM_DEFINE_STATE_MAP(type, name)
+ * \def FSM_DECLARE_STATE_MAP(type, name)
  *
- * Define a state map for an FSM at \b GLOBAL scope. All instances of a class
- * will share the same state map, which will not be a problem for
- * \ref simple_fsm state machines; it is only for \ref hfsm state machines that
- * you really really don't want to do this. Use \ref HFSM_DECLARE_STATE_MAP()
- * instead.
+ * Declare a state map for an FSM. Note that even for \ref simple_fsm state
+ * machines with identical state maps across all class instances, you \b CANNOT
+ * use `static` state maps, because state maps contain states, and states use \b
+ * MEMBER function pointers, which are necessarily tied to the enclosing
+ * object. Using `static` state maps leads to all instances of a class sharing
+ * the member function pointers of the *first* instance of the class
+ * constructed, and if that object is ever destructed, segfaults will
+ * (probably) ensue.
  *
  * \c type must be either "state_map" or "state_map_ex", corresponding to which
  * type of states the state machine is comprised of. \c name can be anything.
  */
-#define FSM_DEFINE_STATE_MAP(type, name) \
-  static const rcppsw::patterns::fsm::RCSW_JOIN(type, _row) (name)[]
+#define FSM_DECLARE_STATE_MAP(type, name, n_entries)                    \
+  const std::array<rcppsw::patterns::fsm::RCSW_JOIN(type, _row),              \
+                   n_entries> name
+
+/**
+ * \def FSM_DEFINE_STATE_MAP(name, ...)
+ *
+ * Define the state map for an FSM.
+ */
+#define FSM_DEFINE_STATE_MAP(name, ...) name {__VA_ARGS__}
 
 /**
  * \def FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)
@@ -418,7 +439,7 @@ NS_END(fsm, patterns, rcppsw);
 
 #define FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)      \
   const rcppsw::patterns::fsm::RCSW_JOIN(type, _row) * \
-      RCSW_JOIN(type, )(size_t index_var)
+  type(size_t index_var)
 
 /**
  * \def FSM_STATE_MAP_ENTRY(state_name)
@@ -450,17 +471,5 @@ NS_END(fsm, patterns, rcppsw);
     state_name, guard_name, entry_name, exit_name)   \
   rcppsw::patterns::fsm::state_map_ex_row( \
       state_name, guard_name, entry_name, exit_name)
-
-/**
- * \def FSM_VERIFY_STATE_MAP(type, name n_entries)
- *
- * Verifies that the state map \c name of type \c type (must be "state_map" or
- * "state_map_ex") contains \c n_entries using a static assert.
- */
-#define FSM_VERIFY_STATE_MAP(type, name, n_entries)                            \
-  static_assert((sizeof(name) /                                                \
-                 sizeof(rcppsw::patterns::fsm::RCSW_JOIN(type, _row))) == \
-                (n_entries),                                            \
-                "State map does not cover all states");
 
 #endif /* INCLUDE_RCPPSW_PATTERNS_FSM_BASE_FSM_HPP_ */
