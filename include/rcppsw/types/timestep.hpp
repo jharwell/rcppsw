@@ -84,14 +84,20 @@ class timestep : public named_type<uint, struct timestep_tag> {
   bool operator>(const timestep& other) const { return v() > other.v(); }
   bool operator>=(const timestep& other) const { return v() >= other.v(); }
 
-  template<class T>
-  bool operator>=(const T& other) const { return v() >= other; }
+  template <class T>
+  bool operator>=(const T& other) const {
+    return v() >= other;
+  }
 
-  template<class T>
-  bool operator>(const T& other) const { return v() > other; }
+  template <class T>
+  bool operator>(const T& other) const {
+    return v() > other;
+  }
 
-  template<class T>
-  bool operator<(const T& other) const { return v() < other; }
+  template <class T>
+  bool operator<(const T& other) const {
+    return v() < other;
+  }
 };
 
 NS_END(types, rcppsw);

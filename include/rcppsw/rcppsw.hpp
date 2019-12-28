@@ -198,12 +198,6 @@ namespace decorator {}
 namespace math {}
 
 /**
- * \namespace ta
- * \ingroup ta
- */
-namespace ta {}
-
-/**
  * \namespace algorithm
  * \ingroup algorithm
  */
@@ -266,7 +260,6 @@ namespace utils {}
 namespace rmetrics = rcppsw::metrics;
 namespace rtypes = rcppsw::types;
 namespace rmath = rcppsw::math;
-namespace rta = rcppsw::ta;
 namespace ralg = rcppsw::algorithm;
 namespace rutils = rcppsw::utils;
 namespace rer = rcppsw::er;
