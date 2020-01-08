@@ -169,6 +169,22 @@
 #define RCPPSW_SFINAE_FUNC(...) \
   typename std::enable_if<__VA_ARGS__, int>::type = 0
 
+#if defined(__INTEL_COMPILER)
+/**
+ * \def RCPPSW_STRUCT_DOT_INITIALIZER(name, value)
+ *
+ * Initialize a member of a struct which is not POD using the dot ('.')
+ * initializer syntax. GCC and clang handle this for things using
+ * std::bind/member function pointers, but the Intel compiler does not. Using
+ * the dot syntax is nice, because if you have multiple members of the same type
+ * in the same struct, the intent of the programmer is clear.
+ */
+
+#define RCPPSW_STRUCT_DOT_INITIALIZER(name, value) value
+#else
+#define RCPPSW_STRUCT_DOT_INITIALIZER(name, value) .name = value
+#endif
+
 /*******************************************************************************
  * Warning Disable Macros
  ******************************************************************************/

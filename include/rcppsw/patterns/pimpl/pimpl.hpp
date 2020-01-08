@@ -47,8 +47,9 @@ NS_START(rcppsw, patterns, pimpl);
 template<typename TImpl>
 struct pimpl {
   template<typename ...Args>
-  pimpl(Args... args) :
+  explicit pimpl(Args&&... args) :
       impl(std::make_unique<TImpl>(std::forward<Args>(args)...)) {}
+  virtual ~pimpl(void) = default;
 
   std::unique_ptr<TImpl> impl;
 };

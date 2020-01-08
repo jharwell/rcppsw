@@ -240,13 +240,22 @@
 #endif /* LIBRA_ER >= LIBRA_ER_ALL */
 
 /**
- * \def ER_SET_LOGFILE(logger, fname)
+ * \def ER_LOGGING_INIT(fname)
+ *
+ * Initialize logging by specifying the log4cxx configuration file.
+ */
+#define ER_LOGGING_INIT(fname)                                          \
+  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>:: \
+  logging_init(fname)
+
+/**
+ * \def ER_LOGFILE_SET(logger, fname)
  *
  * Set the logfile for the specified logger. Idempotent.
  */
-#define ER_SET_LOGFILE(logger, fname)                                         \
+#define ER_LOGFILE_SET(logger, fname)                                         \
   rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>:: \
-      set_logfile(logger, fname)
+      logfile_set(logger, fname)
 
 /**
  * \def ER_NDC_PUSH(s)
@@ -291,7 +300,7 @@ class client {
    * \brief Initialize logging by specifying the path to the log4cxx
    * configuration file.
    */
-  static void init_logging(const std::string& fpath) {
+  static void logging_init(const std::string& fpath) {
     /*
      * Multiple initializations will cause duplicate messages to show up in
      * logfiles.
@@ -309,7 +318,7 @@ class client {
    * Logfile is an appender, which is given the same name as the logfile
    * itself.
    */
-  static void set_logfile(const log4cxx::LoggerPtr& logger,
+  static void logfile_set(const log4cxx::LoggerPtr& logger,
                           const std::string& name) {
     for (auto& a : logger->getAllAppenders()) {
       if (a->getName() == name) {
@@ -325,6 +334,18 @@ class client {
   }
 
   /**
+   * \brief Push a log4cxx NDC context.
+   *
+   * \param s The context.
+   */
+  static void push_ndc(const std::string& s) { log4cxx::NDC::push(s); }
+
+  /**
+   * \brief Pop the top of the log4cxx NDC stack.
+   */
+  static void pop_ndc(void) { log4cxx::NDC::pop(); }
+
+  /**
    * \param name Name of client/new logger.
    */
   explicit client(const std::string& name)
@@ -333,7 +354,7 @@ class client {
   /**
    * \brief Set the logfile of the current logger. Not idempotent.
    */
-  void set_logfile(const std::string& name) {
+  void logfile_set(const std::string& name) {
     log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(kFileLayout);
     log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout, name);
     logger()->addAppender(appender);
@@ -349,25 +370,13 @@ class client {
   }
 
   /**
-   * \brief Push a log4cxx NDC context.
-   *
-   * \param s The context.
-   */
-  void push_ndc(const std::string& s) { log4cxx::NDC::push(s); }
-
-  /**
-   * \brief Pop the top of the log4cxx NDC stack.
-   */
-  void pop_ndc(void) { log4cxx::NDC::pop(); }
-
-  /**
    * \brief Get a reference to the ER logger.
    */
   log4cxx::LoggerPtr logger(void) const { return m_logger; }
 
 #else
   client(void) = default;
-  void set_logfile(const std::string&) {}
+  void logfile_set(const std::string&) {}
 
   std::string logger_name(void) const { return ""; }
   void push_ndc(const std::string&) {}

@@ -48,7 +48,8 @@ NS_END(detail);
 class rng : public patterns::pimpl::pimpl<detail::rng_impl> {
  public:
   explicit rng(uint seed);
-  ~rng(void);
+  ~rng(void) override final;
+
   uint seed(void) const { return m_seed; }
   void seed(uint seed) { m_seed = seed; }
 
