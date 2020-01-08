@@ -43,9 +43,9 @@ grid2D_avg_metrics_collector::grid2D_avg_metrics_collector(
  ******************************************************************************/
 std::list<std::string> grid2D_avg_metrics_collector::csv_header_cols(void) const {
   std::list<std::string> cols;
-  for (size_t j = 0; j < m_stats.ysize(); ++j) {
-    cols.push_back("y" + rcppsw::to_string(j));
-  } /* for(j..) */
+  for (size_t i = 0; i < m_stats.xsize(); ++i) {
+    cols.push_back("x" + rcppsw::to_string(i));
+  } /* for(i..) */
 
   return cols;
 } /* csv_header_cols() */
@@ -60,14 +60,14 @@ boost::optional<std::string> grid2D_avg_metrics_collector::csv_line_build(void) 
     return boost::none;
   }
   std::string line;
-  for (size_t i = 0; i < m_stats.xsize(); ++i) {
-    for (size_t j = 0; j < m_stats.ysize(); ++j) {
+  for (size_t j = 0; j < m_stats.ysize(); ++j) {
+    for (size_t i = 0; i < m_stats.xsize(); ++i) {
       line += csv_entry_domavg(m_stats.access(i, j),
                                m_total_count,
-                               (j == m_stats.ysize() - 1));
-    } /* for(j..) */
+                               (j == m_stats.xsize() - 1));
+    } /* for(i..) */
     line += "\n";
-  } /* for(i..) */
+  } /* for(j..) */
 
   return boost::make_optional(line);
 } /* csv_line_build() */

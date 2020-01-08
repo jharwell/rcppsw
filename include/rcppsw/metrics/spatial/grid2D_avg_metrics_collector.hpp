@@ -43,7 +43,8 @@ NS_START(rcppsw, metrics, spatial);
  * \ingroup metrics spatial
  *
  * \brief Base class for collectors using a 2D grid to fill with counts of
- * SOMETHING, to be averaged over the entire simulation.
+ * SOMETHING, to be averaged over the entire simulation. Each line of the
+ * resulting .csv file corresponds directly to a row in X of the 2D grid.
  */
 class grid2D_avg_metrics_collector : public metrics::base_metrics_collector {
  public:
