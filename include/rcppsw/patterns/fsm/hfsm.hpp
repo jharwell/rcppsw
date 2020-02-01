@@ -298,6 +298,7 @@ entry_name{}
 #define HFSM_DEFINE_STATE_MAP(name, ...) FSM_DEFINE_STATE_MAP(name, __VA_ARGS__)
 
 #define HFSM_STATE_MAP_ENTRY_EX(state_name) FSM_STATE_MAP_ENTRY_EX(state_name)
+#define HFSM_STATE_MAP_ENTRY(state_name) FSM_STATE_MAP_ENTRY(state_name)
 
 #define HFSM_STATE_MAP_ENTRY_EX_ALL(               \
     state_name, guard_name, entry_name, exit_name) \

@@ -119,12 +119,12 @@ class base_metrics_collector {
    *
    * \param interval The new output interval.
    */
-  void interval(int interval) { m_interval = interval; }
+  void interval(const types::timestep& interval) { m_interval = interval; }
 
   /**
    * \brief Return the current output interval for the current collector.
    */
-  int interval(void) const { return m_interval; }
+  const types::timestep& interval(void) const { return m_interval; }
 
  protected:
   /**
@@ -188,7 +188,7 @@ class base_metrics_collector {
    */
   template <class T>
   std::string csv_entry_intavg(const T& sum, bool last = false) const {
-    return rcppsw::to_string(static_cast<double>(sum) / interval()) +
+    return rcppsw::to_string(static_cast<double>(sum) / interval().v()) +
            ((last) ? "" : separator());
   }
 
@@ -236,7 +236,7 @@ class base_metrics_collector {
   std::string csv_header_build(void) const;
 
   /* clang-format off */
-  int             m_interval;
+  types::timestep m_interval;
   types::timestep m_timestep{0};
   bool            m_cum_only;
   std::string     m_ofname;

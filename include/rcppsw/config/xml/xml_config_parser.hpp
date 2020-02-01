@@ -109,8 +109,8 @@ class xml_config_parser : public er::client<xml_config_parser> {
    *
    * If no such node exists, an assertion halts the program.
    */
-  RCSW_COLD ticpp::Element& node_get(const ticpp::Element& node,
-                           const std::string& tag) const;
+  ticpp::Element& node_get(const ticpp::Element& node,
+                           const std::string& tag) const RCSW_COLD;
 
   /**
    * \brief Get an attribute inside a node.

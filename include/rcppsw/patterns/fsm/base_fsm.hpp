@@ -119,26 +119,24 @@ class base_fsm : public er::client<base_fsm> {
   bool has_generated_event(void) { return m_event_generated; }
 
   /**
-   * \brief Generates an external event. Called once per external event
-   * to start the state machine executing. The data is passed through the event
-   * chain without modification. The FSM owns the event data--states should try
-   * to delete it.
+   * \brief Generates an external event. The data is passed through the event
+   * chain without modification. The FSM owns the event data--states should not
+   * try to delete it.
    *
    * \param new_state The state machine state to transition to.
    * \param data The event data sent to the state.
    */
   virtual void external_event(uint8_t new_state,
-                      std::unique_ptr<event_data> data);
+                              std::unique_ptr<event_data> data);
   void external_event(uint8_t new_state) {
     external_event(new_state, nullptr);
   }
 
   /**
    * \brief Generates an internal event. These events are generated while
-   * executing
-   * within a state machine state. Internal states can pass their own data to
-   * other states without worrying about deleting the existing data--the FSM
-   * owns it and will handle it.
+   * executing within a state machine state. Internal states can pass their own
+   * data to other states without worrying about deleting the existing data--the
+   * FSM owns it and will handle it.
    *
    * \param new_state The state machine state to transition to.
    * \param data The event data sent to the state.

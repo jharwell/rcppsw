@@ -72,6 +72,7 @@
   { ER_REPORT(__VA_ARGS__); }
 #define ER_REPORT(msg, ...) \
   { printf(msg "\n", ##__VA_ARGS__); }
+
 #elif (LIBRA_ER == LIBRA_ER_NONE)
 
 #define ER_REPORT(...)

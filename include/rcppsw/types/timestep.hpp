@@ -74,30 +74,24 @@ class timestep : public named_type<uint, struct timestep_tag> {
     timestep res(v() - n);
     return res;
   }
-  timestep operator%(uint n) const {
-    timestep res(v() % n);
+  timestep operator%(const timestep& other) const {
+    timestep res(v() % other.v());
     return res;
   }
-  bool operator==(uint n) const { return v() == n; }
   bool operator==(const timestep& other) const { return v() == other.v(); }
   bool operator<(const timestep& other) const { return v() < other.v(); }
   bool operator>(const timestep& other) const { return v() > other.v(); }
   bool operator>=(const timestep& other) const { return v() >= other.v(); }
+  bool operator==(uint other) const { return v() == other; }
 
   template <class T>
-  bool operator>=(const T& other) const {
-    return v() >= other;
-  }
+  bool operator>=(const T& other) const { return v() >= other; }
 
   template <class T>
-  bool operator>(const T& other) const {
-    return v() > other;
-  }
+  bool operator>(const T& other) const { return v() > other; }
 
   template <class T>
-  bool operator<(const T& other) const {
-    return v() < other;
-  }
+  bool operator<(const T& other) const { return v() < other; }
 };
 
 NS_END(types, rcppsw);
