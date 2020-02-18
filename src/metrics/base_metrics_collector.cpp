@@ -36,7 +36,7 @@ namespace fs = std::experimental::filesystem;
  * Constructors/Destructor
  ******************************************************************************/
 base_metrics_collector::base_metrics_collector(const std::string& ofname,
-                                               uint interval,
+                                               const types::timestep& interval,
                                                bool cum_only)
     : m_interval(interval),
       m_cum_only(cum_only),

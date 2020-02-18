@@ -33,7 +33,7 @@ NS_START(rcppsw, metrics, spatial);
  ******************************************************************************/
 grid2D_avg_metrics_collector::grid2D_avg_metrics_collector(
     const std::string& ofname,
-    uint interval,
+    const types::timestep& interval,
     const math::vector2u& dims)
     : base_metrics_collector(ofname, interval, true),
       m_stats(dims.x(), dims.y()) {}
@@ -44,7 +44,7 @@ grid2D_avg_metrics_collector::grid2D_avg_metrics_collector(
 std::list<std::string> grid2D_avg_metrics_collector::csv_header_cols(void) const {
   std::list<std::string> cols;
   for (size_t i = 0; i < m_stats.xsize(); ++i) {
-    cols.push_back("x" + rcppsw::to_string(i));
+    cols.push_back("y" + rcppsw::to_string(i));
   } /* for(i..) */
 
   return cols;

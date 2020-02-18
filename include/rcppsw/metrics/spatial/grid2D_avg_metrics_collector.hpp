@@ -54,7 +54,7 @@ class grid2D_avg_metrics_collector : public metrics::base_metrics_collector {
    * \param dims Dimensions of grid.
    */
   grid2D_avg_metrics_collector(const std::string& ofname,
-                               uint interval,
+                               const types::timestep& interval,
                                const math::vector2u& dims);
 
   void reset(void) override;

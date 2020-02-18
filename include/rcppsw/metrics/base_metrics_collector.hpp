@@ -58,11 +58,12 @@ class base_metrics_collector {
    * \param ofname Output file name.
    * \param interval Collection interval.
    * \param cum_only The metrics to be collected are cumulative only. This means
-   * that (1) no header will be written, (2) the output file will be truncated
-   * each time \ref csv_line_build() returns true. Default = \c false;
+   *                 that (1) no header will be written, (2) the output file
+   *                 will be truncated each time \ref csv_line_build() returns
+   *                 true. Default = \c false;
    */
   base_metrics_collector(const std::string& ofname,
-                         uint interval,
+                         const types::timestep& interval,
                          bool cum_only = false);
 
   virtual ~base_metrics_collector(void) = default;
@@ -98,7 +99,7 @@ class base_metrics_collector {
    * \brief Increment the timestep referenced by the collector during metric
    * collection and .csv line building.
    */
-  void timestep_inc(void) { m_timestep.set(m_timestep.v() + 1); }
+  void timestep_inc(void) { m_timestep += 1; }
 
   /**
    * \brief Write out the gathered metrics.
@@ -113,13 +114,6 @@ class base_metrics_collector {
    * \brief Finalize metrics and flush files.
    */
   void finalize(void) { m_ofile.close(); }
-
-  /**
-   * \brief Set the output interval (# timesteps) for the current collector.
-   *
-   * \param interval The new output interval.
-   */
-  void interval(const types::timestep& interval) { m_interval = interval; }
 
   /**
    * \brief Return the current output interval for the current collector.

@@ -96,7 +96,7 @@ class vector2 {
    * \param length The vector length.
    * \param angle The vector angle.
    */
-  vector2(T length, const radians& angle) noexcept
+  vector2(const T& length, const radians& angle) noexcept
       : m_x(std::cos(angle.value()) * length),
         m_y(std::sin(angle.value()) * length) {}
 
