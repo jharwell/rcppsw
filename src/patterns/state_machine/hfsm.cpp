@@ -34,7 +34,7 @@ NS_START(rcppsw, patterns, fsm);
 void hfsm::state_engine_step(const state_map_row* const c_row) {
   ER_ASSERT(nullptr != c_row->state(), "null state?");
   ER_TRACE("Invoking state action: state%d, data=%p",
-           current_state(),
+           current_state().v(),
            reinterpret_cast<const void*>(event_data_get()));
   auto* state = static_cast<const hfsm_state*>(c_row->state());
   int rval = event_signal::ekUNHANDLED;
@@ -60,7 +60,7 @@ void hfsm::state_engine_step(const state_map_row* const c_row) {
 void hfsm::state_engine_step(const state_map_ex_row* const c_row_ex) {
   ER_ASSERT(nullptr != c_row_ex->state(), "null state?");
   ER_TRACE("Invoking state action: state%d, data=%p",
-           current_state(),
+           current_state().v(),
            reinterpret_cast<const void*>(event_data_get()));
   auto* state = static_cast<const hfsm_state*>(c_row_ex->state());
   int rval = event_signal::ekUNHANDLED;
@@ -87,7 +87,7 @@ void hfsm::inject_event(int signal, int type) {
   external_event(current_state(), std::make_unique<event_data>(signal, type));
 } /* inject event */
 
-void hfsm::change_parent(uint8_t state,
+void hfsm::change_parent(const types::fsm_state& state,
                          rcppsw::patterns::fsm::state* new_parent) {
   auto* row = state_map(state);
   auto* row_ex = state_map_ex(state);

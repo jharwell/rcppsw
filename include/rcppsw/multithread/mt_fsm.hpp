@@ -47,7 +47,8 @@ namespace sm = patterns::fsm;
  */
 class mt_fsm : public patterns::fsm::base_fsm {
  public:
-  explicit mt_fsm(uint8_t max_states, uint8_t initial_state = 0)
+  explicit mt_fsm(const types::fsm_state& max_states,
+                  types::fsm_state initial_state = types::constants::kDefaultStartState)
       : base_fsm(max_states, initial_state) {}
 
   ~mt_fsm(void) override = default;
@@ -55,11 +56,13 @@ class mt_fsm : public patterns::fsm::base_fsm {
   void init(void) override;
 
  protected:
-  void external_event(uint8_t new_state,
+  void external_event(const types::fsm_state& new_state,
                       std::unique_ptr<sm::event_data> data) override;
 
  private:
+  /* clang-format off */
   std::mutex m_mutex{};
+  /* clang-format on */
 };
 
 NS_END(multithread, rcppsw);

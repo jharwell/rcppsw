@@ -40,6 +40,7 @@
 #include "rcppsw/patterns/fsm/state_guard_action.hpp"
 #include "rcppsw/patterns/fsm/state_map_ex_row.hpp"
 #include "rcppsw/patterns/fsm/state_map_row.hpp"
+#include "rcppsw/types/fsm_state.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -67,7 +68,8 @@ NS_START(rcppsw, patterns, fsm);
  */
 class base_fsm : public er::client<base_fsm> {
  public:
-  explicit base_fsm(uint8_t max_states, uint8_t initial_state = 0);
+  explicit base_fsm(const types::fsm_state& max_states,
+                    types::fsm_state initial = types::constants::kDefaultStartState);
   base_fsm(const base_fsm& other);
   ~base_fsm(void) override = default;
 
@@ -76,12 +78,12 @@ class base_fsm : public er::client<base_fsm> {
   /**
    * \brief Get the current state of the state machine.
    */
-  uint8_t current_state(void) const { return m_current_state; }
+  const types::fsm_state& current_state(void) const { return m_current_state; }
 
   /**
    * \brief Get the maximum number of states for the state machine.
    */
-  uint8_t max_states(void) const { return mc_max_states; }
+  const types::fsm_state& max_states(void) const { return mc_max_states; }
 
   /**
    * \brief Get the previous state the the state machine was in that is
@@ -91,7 +93,7 @@ class base_fsm : public er::client<base_fsm> {
    * state \c B before that, and the current state is \c A, then this function
    * will return \c B.
    */
-  uint8_t previous_state(void) const { return m_previous_state; }
+  const types::fsm_state& previous_state(void) const { return m_previous_state; }
 
   /**
    * \brief Get the state the the state machine was in the last time the state
@@ -101,7 +103,7 @@ class base_fsm : public er::client<base_fsm> {
    * state \c B before that, and the current state is \c A, then this function
    * will return \c A.
    */
-  uint8_t last_state(void) const { return m_last_state; }
+  const types::fsm_state& last_state(void) const { return m_last_state; }
 
   /**
    * \brief Initialize/reset the state machine.
@@ -126,9 +128,9 @@ class base_fsm : public er::client<base_fsm> {
    * \param new_state The state machine state to transition to.
    * \param data The event data sent to the state.
    */
-  virtual void external_event(uint8_t new_state,
+  virtual void external_event(const types::fsm_state& new_state,
                               std::unique_ptr<event_data> data);
-  void external_event(uint8_t new_state) {
+  void external_event(const types::fsm_state& new_state) {
     external_event(new_state, nullptr);
   }
 
@@ -141,8 +143,9 @@ class base_fsm : public er::client<base_fsm> {
    * \param new_state The state machine state to transition to.
    * \param data The event data sent to the state.
    */
-  void internal_event(uint8_t new_state, std::unique_ptr<event_data> data);
-  void internal_event(uint8_t new_state) {
+  void internal_event(const types::fsm_state& new_state,
+                      std::unique_ptr<event_data> data);
+  void internal_event(const types::fsm_state& new_state) {
     internal_event(new_state, std::move(m_event_data));
   }
 
@@ -152,10 +155,12 @@ class base_fsm : public er::client<base_fsm> {
    */
   void state_engine(void);
 
-  uint8_t next_state(void) const { return m_next_state; }
-  uint8_t initial_state(void) const { return m_initial_state; }
-  void next_state(uint8_t next_state) { m_next_state = next_state; }
-  void update_state(uint8_t new_state);
+  const types::fsm_state& next_state(void) const { return m_next_state; }
+  const types::fsm_state& initial_state(void) const { return m_initial_state; }
+  void next_state(const types::fsm_state& next_state) {
+    m_next_state = next_state;
+  }
+  void update_state(const types::fsm_state& new_state);
 
   /**
    * \brief Gets the state map as defined in the derived class.
@@ -165,7 +170,7 @@ class base_fsm : public er::client<base_fsm> {
    *
    * \return The row corresponding to the passed in state in the state map.
    */
-  virtual const state_map_row* state_map(RCSW_UNUSED size_t) {
+  virtual const state_map_row* state_map(RCSW_UNUSED const types::fsm_state&) {
     return nullptr;
   }
 
@@ -177,7 +182,8 @@ class base_fsm : public er::client<base_fsm> {
    *
    * \return The row corresponding to the passed in state in the state map.
    */
-  virtual const state_map_ex_row* state_map_ex(RCSW_UNUSED size_t) {
+  virtual const state_map_ex_row* state_map_ex(
+      RCSW_UNUSED const types::fsm_state&) {
     return nullptr;
   }
 
@@ -200,15 +206,18 @@ class base_fsm : public er::client<base_fsm> {
     m_event_data = std::move(event_data);
   }
 
-  const uint8_t               mc_max_states;
-  uint8_t                     m_current_state;
-  uint8_t                     m_next_state{0};
-  uint8_t                     m_initial_state;
-  uint8_t                     m_previous_state{0};
-  uint8_t                     m_last_state{0};
+  const types::fsm_state      mc_max_states;
+
+  types::fsm_state            m_current_state;
+  types::fsm_state            m_next_state{0};
+  types::fsm_state            m_initial_state;
+  types::fsm_state            m_previous_state{0};
+  types::fsm_state            m_last_state{0};
   bool                        m_event_generated{false};
   std::unique_ptr<event_data> m_event_data{nullptr};
 };
+
+
 
 NS_END(fsm, patterns, rcppsw);
 
@@ -377,7 +386,7 @@ NS_END(fsm, patterns, rcppsw);
  * \ref simple_fsm, but not necessarily for \ref hfsm.
  *
  */
-#define FSM_DEFINE_TRANSITION_MAP(name) static const uint8_t name[] =
+#define FSM_DEFINE_TRANSITION_MAP(name) static const types::fsm_state name[] =
 
 /**
  * \def FSM_VERIFY_TRANSITION_MAP(name, n_entries)
@@ -391,7 +400,7 @@ NS_END(fsm, patterns, rcppsw);
  * of entries the map should have.
  */
 #define FSM_VERIFY_TRANSITION_MAP(name, n_entries)                     \
-    static_assert((sizeof(name) / sizeof(uint8_t)) == (n_entries),     \
+    static_assert((sizeof(name) / sizeof(types::fsm_state)) == (n_entries),     \
                 "Transition map does not cover all states");
 
 /*******************************************************************************
@@ -413,8 +422,9 @@ NS_END(fsm, patterns, rcppsw);
  * type of states the state machine is comprised of. \c name can be anything.
  */
 #define FSM_DECLARE_STATE_MAP(type, name, n_entries)                    \
-  const std::array<rcppsw::patterns::fsm::RCSW_JOIN(type, _row),              \
+  const std::array<rcppsw::patterns::fsm::RCSW_JOIN(type, _row),        \
                    n_entries> name
+
 
 /**
  * \def FSM_DEFINE_STATE_MAP(name, ...)
@@ -437,7 +447,7 @@ NS_END(fsm, patterns, rcppsw);
 
 #define FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)      \
   const rcppsw::patterns::fsm::RCSW_JOIN(type, _row) * \
-  type(size_t index_var)
+  type(const rcppsw::types::fsm_state& index_var)
 
 /**
  * \def FSM_STATE_MAP_ENTRY(state_name)

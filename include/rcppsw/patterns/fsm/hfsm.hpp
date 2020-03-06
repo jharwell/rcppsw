@@ -48,8 +48,8 @@ class hfsm : public base_fsm, public er::client<hfsm> {
    * \param max_states The maximum number of state machine states.
    * \param initial_state Initial state machine state.
    */
-  explicit hfsm(uint8_t max_states,
-                uint8_t initial_state = 0)
+  explicit hfsm(const types::fsm_state& max_states,
+                const types::fsm_state& initial_state = types::constants::kDefaultStartState)
       : base_fsm(max_states, initial_state),
         ER_CLIENT_INIT("rcppsw.patterns.fsm.hfsm"),
         m_top_state(nullptr) {}
@@ -75,7 +75,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
    * \param state The state within THIS state machine to change the parent of.
    * \param new_parent A new parent state, which can be from ANOTHER \ref hfsm.
    */
-  void change_parent(uint8_t state,
+  void change_parent(const types::fsm_state& state,
                      rcppsw::patterns::fsm::state* new_parent);
 
  protected:
