@@ -58,7 +58,8 @@ class max_subarray_finder {
    * \return \c OK if successful, \c ERROR otherwise.
    */
   status_t find(std::vector<int>* const res) {
-    FPC_CHECK(ERROR, m_arr.size() > 0);
+    RCSW_FPC_NV(ERROR, m_arr.size() > 0);
+
     T max_sum = m_arr[0];
     T current_sum = m_arr[0];
     int start_index = 0;

@@ -1,7 +1,7 @@
 /**
- * @file server-test.cpp
+ * \file vector3.cpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2020 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,35 +21,34 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#define CATCH_CONFIG_PREFIX_ALL
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
-#include "rcppsw/er/client.hpp"
-#include <log4cxx/basicconfigurator.h>
+#include "rcppsw/math/vector3.hpp"
 
 /*******************************************************************************
- * Test Classes
+ * Namespaces/Decls
  ******************************************************************************/
-class test_client : public rcppsw::er::client<test_client> {
- public:
-  explicit test_client(const std::string &er_parent)
-      : ER_CLIENT_INIT(er_parent) {
-    /* Test if you get anything */
-    ER_FATAL("This is fatal");
-    ER_ERR("This is an error");
-    ER_WARN("This is a warning");
-    ER_INFO("This is nominal");
-    ER_DEBUG("This is a diagnostic");
-    ER_TRACE("This is verbose");
-  }
-};
+NS_START(rcppsw, math);
 
 /*******************************************************************************
- * Test Cases
+ * Class Constants
  ******************************************************************************/
-CATCH_TEST_CASE("ER Test", "[ER]") {
-  test_client client("foobar");
-  client.set_logfile("mine.log");
-  test_client client2("foobar.test_client");
-  CATCH_REQUIRE(1);
-}
+RCPPSW_WARNING_DISABLE_PUSH()
+RCPPSW_WARNING_DISABLE_GLOBAL_CTOR()
+
+template <>
+const vector3d vector3d::X(1.0, 0.0, 0.0); // NOLINT
+template <>
+const vector3i vector3i::X(1, 0, 0); // NOLINT
+
+template <>
+const vector3d vector3d::Y(0.0, 1.0, 0.0); // NOLINT
+template <>
+const vector3i vector3i::Y(0, 1, 0); // NOLINT
+
+template <>
+const vector3d vector3d::Z(0.0, 0.0, 1.0); // NOLINT
+template <>
+const vector3i vector3i::Z(0, 0, 1); // NOLINT
+
+RCPPSW_WARNING_DISABLE_POP()
+
+NS_END(math, rcppsw);

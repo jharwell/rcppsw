@@ -23,15 +23,15 @@
  ******************************************************************************/
 #define CATCH_CONFIG_MAIN
 #define CATCH_CONFIG_PREFIX_ALL
-#include "rcppsw/patterns/state_machine/event.hpp"
-#include "rcppsw/patterns/state_machine/simple_fsm.hpp"
+#include "rcppsw/patterns/fsm/event.hpp"
+#include "rcppsw/patterns/fsm/simple_fsm.hpp"
 #include <catch.hpp>
 #include <memory>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace fsm = rcppsw::patterns::state_machine;
+namespace fsm = rcppsw::patterns::fsm;
 namespace er = rcppsw::er;
 
 /*******************************************************************************
@@ -42,7 +42,11 @@ public:
   enum states { STATE1, STATE2, STATE3, STATE4, STATE5, STATE6, ST_MAX_STATES };
 
   explicit test_fsm(void)
-      : fsm::simple_fsm(ST_MAX_STATES) {}
+      : fsm::simple_fsm(ST_MAX_STATES),
+      FSM_DEFINE_STATE_MAP(mc_state_map,
+                           FSM_STATE_MAP_ENTRY(&s1), FSM_STATE_MAP_ENTRY(&s2),
+                           FSM_STATE_MAP_ENTRY(&s3), FSM_STATE_MAP_ENTRY(&s4),
+                           FSM_STATE_MAP_ENTRY(&s5), FSM_STATE_MAP_ENTRY(&s6)) {}
 
   FSM_STATE_DECLARE_ND(test_fsm, s1);
   FSM_STATE_DECLARE_ND(test_fsm, s2);
@@ -69,12 +73,9 @@ public:
     external_event(kMAP[current_state()], nullptr);
   }
 
+  FSM_DECLARE_STATE_MAP(state_map, mc_state_map, ST_MAX_STATES);
   FSM_DEFINE_STATE_MAP_ACCESSOR(state_map, index) {
-    FSM_DEFINE_STATE_MAP(state_map, kMAP){
-        FSM_STATE_MAP_ENTRY(&s1), FSM_STATE_MAP_ENTRY(&s2),
-        FSM_STATE_MAP_ENTRY(&s3), FSM_STATE_MAP_ENTRY(&s4),
-        FSM_STATE_MAP_ENTRY(&s5), FSM_STATE_MAP_ENTRY(&s6)};
-    return &kMAP[index];
+    return &mc_state_map[index];
   }
 };
 

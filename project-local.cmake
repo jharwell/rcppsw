@@ -58,12 +58,6 @@ if (NOT TARGET ${target})
   target_include_directories(${target} SYSTEM PRIVATE "${${target}_SYS_INCLUDE_DIRS}")
 endif()
 
-
-# Fix so we can build rcsw unit tests from this repo as well
-if (LIBRA_TESTS)
-  target_include_directories(rcsw-tests PUBLIC ${${target}_INCLUDE_DIRS})
-endif()
-
 ################################################################################
 # Exports                                                                      #
 ################################################################################

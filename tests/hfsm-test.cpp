@@ -23,14 +23,14 @@
  ******************************************************************************/
 #define CATCH_CONFIG_MAIN
 #define CATCH_CONFIG_PREFIX_ALL
-#include "rcppsw/patterns/state_machine/hfsm.hpp"
+#include "rcppsw/patterns/fsm/hfsm.hpp"
 #include <catch.hpp>
 #include <memory>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace fsm = rcppsw::patterns::state_machine;
+namespace fsm = rcppsw::patterns::fsm;
 namespace er = rcppsw::er;
 
 /*******************************************************************************
@@ -43,7 +43,11 @@ public:
   test_fsm(void)
       : fsm::hfsm(ST_MAX_STATES),
         s1(hfsm::top_state()), s2(hfsm::top_state()), s3(hfsm::top_state()),
-        s4(hfsm::top_state()), s5(hfsm::top_state()), s6(hfsm::top_state()) {}
+      s4(hfsm::top_state()), s5(hfsm::top_state()), s6(hfsm::top_state()),
+      FSM_DEFINE_STATE_MAP(mc_state_map,
+                           FSM_STATE_MAP_ENTRY(&s1), FSM_STATE_MAP_ENTRY(&s2),
+                           FSM_STATE_MAP_ENTRY(&s3), FSM_STATE_MAP_ENTRY(&s4),
+                           FSM_STATE_MAP_ENTRY(&s5), FSM_STATE_MAP_ENTRY(&s6)) {}
 
   void event1(void) {
     FSM_DEFINE_TRANSITION_MAP(kMAP){STATE2,
@@ -53,7 +57,7 @@ public:
                                     fsm::event_signal::ekFATAL,
                                     fsm::event_signal::ekFATAL};
     external_event(kMAP[current_state()],
-                   rcppsw::make_unique<fsm::event_data>(1));
+                   std::make_unique<fsm::event_data>(1));
   }
   void event2(void) {
     FSM_DEFINE_TRANSITION_MAP(kMAP){fsm::event_signal::ekIGNORED,
@@ -63,7 +67,7 @@ public:
                                     STATE4,
                                     STATE5};
     external_event(kMAP[current_state()],
-                   rcppsw::make_unique<fsm::event_data>(2));
+                   std::make_unique<fsm::event_data>(2));
   }
 
 private:
@@ -75,12 +79,9 @@ private:
   HFSM_STATE_DECLARE_ND(test_fsm, s6);
 
   FSM_DEFINE_STATE_MAP_ACCESSOR(state_map, index) {
-    FSM_DEFINE_STATE_MAP(state_map, kMAP){
-        FSM_STATE_MAP_ENTRY(&s1), FSM_STATE_MAP_ENTRY(&s2),
-        FSM_STATE_MAP_ENTRY(&s3), FSM_STATE_MAP_ENTRY(&s4),
-        FSM_STATE_MAP_ENTRY(&s5), FSM_STATE_MAP_ENTRY(&s6)};
-    return &kMAP[index];
+    return &mc_state_map[index];
   }
+  FSM_DECLARE_STATE_MAP(state_map, mc_state_map, ST_MAX_STATES);
 };
 
 HFSM_STATE_DEFINE_ND(test_fsm, s1) {
@@ -99,7 +100,7 @@ HFSM_STATE_DEFINE_ND(test_fsm, s3) {
 
 HFSM_STATE_DEFINE_ND(test_fsm, s4) {
   printf("Executing state4\n");
-  internal_event(STATE5, rcppsw::make_unique<fsm::event_data>(4));
+  internal_event(STATE5, std::make_unique<fsm::event_data>(4));
   return fsm::event_signal::ekHANDLED;
 }
 HFSM_STATE_DEFINE_ND(test_fsm, s5) {

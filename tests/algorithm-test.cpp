@@ -34,14 +34,12 @@
 #include "rcppsw/math/vector2.hpp"
 #include "rcppsw/algorithm/clustering/entropy.hpp"
 #include "rcppsw/algorithm/clustering/kmeans.hpp"
-#include "rcppsw/swarm/convergence/positional_entropy.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 namespace math = rcppsw::math;
 namespace clustering = rcppsw::algorithm::clustering;
-namespace swarm = rcppsw::swarm;
 
 /*******************************************************************************
  * Test Cases
@@ -67,14 +65,14 @@ CATCH_TEST_CASE("Closest Pair", "[algorithm]") {
   auto dist_func = std::bind(&math::vector2i::distance,
                              std::placeholders::_1,
                              std::placeholders::_2);
-  auto res = rcppsw::algorithm::closest_pair<math::vector2i>()("brute_force",
-                                                                       data,
-                                                                       dist_func);
+  auto res = rcppsw::algorithm::closest_pair2D<math::vector2i>()("brute_force",
+                                                                 data,
+                                                                 dist_func);
   CATCH_REQUIRE((res.p1 == math::vector2i(0, 2) || res.p1 == math::vector2i(0, 1)));
   CATCH_REQUIRE((res.p2 == math::vector2i(0, 2) || res.p2 == math::vector2i(0, 1)));
   CATCH_REQUIRE(res.dist == 1.0);
 
-  res = rcppsw::algorithm::closest_pair<math::vector2i>()("recursive",
+  res = rcppsw::algorithm::closest_pair2D<math::vector2i>()("recursive",
                                                                   data,
                                                                   dist_func);
   CATCH_REQUIRE((res.p1 == math::vector2i(0, 2) || res.p1 == math::vector2i(0, 1)));
@@ -104,21 +102,4 @@ CATCH_TEST_CASE("Kmeans", "[clustering]") {
       CATCH_REQUIRE(res[i] == 1);
     }
   } /* for(i..) */
-}
-
-CATCH_TEST_CASE("entropy", "[clustering]") {
-  std::vector<double> data = {0, 1.0, 2.0, 3.0};
-  /* std::vector<double> data; */
-  /* for (size_t i = 0; i < 10000; ++i) { */
-  /*   data.push_back(i % 10); */
-  /* } /\* for(i..) *\/ */
-
-  auto impl = std::make_unique<clustering::detail::entropy_impl<double>>(4);
-  clustering::entropy_balch2000<double> alg(std::move(impl),
-                                            math::ranged(1.0, 2.0),
-                                            1.0);
-  double res = alg.run(data,
-                       [](double a, double b) { return std::fabs(a - b); });
-
-  CATCH_REQUIRE(static_cast<int>((res * 100.0)) / 100.0 == 2.24);
 }

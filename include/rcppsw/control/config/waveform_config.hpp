@@ -41,12 +41,26 @@ NS_START(rcppsw, control, config);
  *
  * Not all parameters are applicable to all waveform types.
  */
-struct waveform_config final : public rcppsw::config::base_config {
+struct waveform_config : public rcppsw::config::base_config {
+  waveform_config(void) = default;
+
+  /* constructor needed for aggregate initialization because of base class */
+  waveform_config(const std::string& type_in,
+                  double freq_in,
+                  double phase_in,
+                  double amp_in,
+                  double offset_in) :
+      type(type_in),
+      frequency(freq_in),
+      phase(phase_in),
+      amplitude(amp_in),
+      offset(offset_in) {}
+
   std::string type{};
-  double frequency{0};
-  double phase{0};
-  double amplitude{0};
-  double offset{0};
+  double frequency{0.0};
+  double phase{0.0};
+  double amplitude{0.0};
+  double offset{0.0};
 };
 
 NS_END(config, control, rcppsw);

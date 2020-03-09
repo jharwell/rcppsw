@@ -1,5 +1,5 @@
 /**
- * \file vector2.hpp
+ * \file vector3.hpp
  *
  * \copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_VECTOR2_HPP_
-#define INCLUDE_RCPPSW_MATH_VECTOR2_HPP_
+#ifndef INCLUDE_RCPPSW_MATH_VECTOR3_HPP_
+#define INCLUDE_RCPPSW_MATH_VECTOR3_HPP_
 
 /*******************************************************************************
  * Includes
@@ -31,6 +31,7 @@
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/radians.hpp"
 #include "rcppsw/types/discretize_ratio.hpp"
+#include "rcppsw/math/vector2.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -41,76 +42,79 @@ NS_START(rcppsw, math);
  * Class Definitions
  ******************************************************************************/
 /**
- * \class vector2
+ * \class vector3
  * \ingroup math
  *
  * \brief Base template class encapsulating mathematical actions on a pair of
- * numbers. Is specialized by \ref vector2u, \ref vector2i, \ref vector2d.
+ * numbers. Is specialized by \ref vector3u, \ref vector3i, \ref vector3d.
  *
  * All operations are performed in whatever the template parameter is, so take
  * care if you are trying to do scaling, trigonometric things with integers...
  */
 template <typename T>
-class vector2 {
+class vector3 {
  public:
   /**
    * \brief Computes the square distance between the passed vectors.
    */
-  static T square_distance(const vector2& v1, const vector2& v2) {
+  static T square_distance(const vector3& v1, const vector3& v2) {
     return (v1 - v2).square_length();
   }
 
   /**
    * \brief Computes the distance between the passed vectors.
    */
-  static T distance(const vector2& v1, const vector2& v2) {
+  static T distance(const vector3& v1, const vector3& v2) {
     return (v1 - v2).length();
   }
 
   /**
    * \brief The positive X axis.
    */
-  static const vector2 X; // NOLINT
+  static const vector3 X; // NOLINT
 
   /**
    * \brief The positive Y axis.
    */
-  static const vector2 Y; // NOLINT
+  static const vector3 Y; // NOLINT
+
 
   /**
-   * \brief Initializes vector to (0,0)
+   * \brief The positive Z axis.
    */
-  vector2(void) noexcept = default;
+  static const vector3 Z; // NOLINT
+
+  /**
+   * \brief Initializes vector to (0,0,0)
+   */
+  vector3(void) noexcept = default;
 
   /**
    * \brief Initializes the vector from Cartesian coordinates.
    *
    * \param x The X coordinate.
    * \param y The Y coordinate.
+   * \param z The Z coordinate.
    */
-  constexpr vector2(const T& x, const T& y) : m_x(x), m_y(y) {}
-
-  /**
-   * \brief Initializes the vector coordinates from polar coordinates.
-   *
-   * \param length The vector length.
-   * \param angle The vector angle.
-   */
-  vector2(const T& length, const radians& angle) noexcept
-      : m_x(std::cos(angle.value()) * length),
-        m_y(std::sin(angle.value()) * length) {}
+  constexpr vector3(const T& x, const T& y, const T& z)
+  : m_x(x), m_y(y), m_z(z) {}
 
   T x(void) RCSW_CHECK_RET { return m_x; }
   T y(void) RCSW_CHECK_RET { return m_y; }
+  T z(void) RCSW_CHECK_RET { return m_z; }
+
   const T& x(void) const RCSW_CHECK_RET { return m_x; }
   const T& y(void) const RCSW_CHECK_RET { return m_y; }
+  const T& z(void) const RCSW_CHECK_RET { return m_z; }
+
   void x(const T& x) { m_x = x; }
   void y(const T& y) { m_y = y; }
+  void z(const T& z) { m_z = z; }
 
   /**
    * \brief Is the vector is positive definite?
    */
-  bool is_pd(void) const { return m_x > 0 && m_y > 0; }
+  bool is_pd(void) const { return m_x > 0 && m_y > 0 && m_z > 0; }
 
   /**
    * \brief Sets the vector contents from Cartesian coordinates.
@@ -118,27 +122,17 @@ class vector2 {
    * \param x The new X coordinate.
    * \param y The new Y coordinate.
    */
-  void set(const T& x, const T& y) {
+  void set(const T& x, const T& y, const T& z) {
     m_x = x;
     m_y = y;
-  }
-
-  /**
-   * Sets the vector contents from polar coordinates.
-   *
-   * \param length The length of the vector.
-   * \param angle The angle of the vector (range [0,2pi)
-   */
-  void set_from_polar(const T& length, const radians& angle) {
-    m_x = std::cos(angle.value()) * length;
-    m_y = std::sin(angle.value()) * length;
+    m_z = z;
   }
 
   /**
    * \brief Returns the square length of this vector.
    */
   T square_length(void) const RCSW_CHECK_RET {
-    return (m_x * m_x) + (m_y * m_y);
+    return (m_x * m_x) + (m_y * m_y) + (m_z * m_z);
   }
 
   /**
@@ -155,56 +149,65 @@ class vector2 {
    *
    * \return A reference to the normalized vector.
    */
-  vector2& normalize(void) {
+  vector3& normalize(void) {
     *this /= this->length();
     return *this;
   }
 
   /**
-   * \brief Return the angle of this vector.
+   * \brief Return angle between this vector and the X axis.
    */
-  radians angle(void) const { return radians(std::atan2(m_y, m_x)); }
+  radians xangle(void) const { return radians(std::atan2(m_z, m_y)); }
 
   /**
-   * \brief Rotate this vector by the specified angle.
-   *
-   * This is only available if the template parameter is not an integer.
-   *
-   * \param angle The rotation angle.
-   *p
-   * \return A reference to the rotated vector.
+   * \brief Return the angle between this vector and the Y axis.
    */
-  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
-  vector2& rotate(const radians& angle) {
-    T sin_val, cos_val;
-    ::sincos(angle.value(), &sin_val, &cos_val);
-    m_x = m_x * cos_val - m_y * sin_val;
-    m_y = m_x * sin_val + m_y * cos_val;
-    return *this;
-  }
+  radians yangle(void) const { return radians(std::atan2(m_x, m_z)); }
+
+  /**
+   * \brief Return the angle between this vector and the Z axis.
+   */
+  radians zangle(void) const { return radians(std::atan2(m_y, m_x)); }
+
+  /**
+   * \brief Calculates the projection of this vector onto the XY plane.
+   */
+  vector2<T> project_on_xy(void) const { return vector2(m_x, m_y); }
+
+  /**
+   * \brief Calculates the projection of this vector onto the YZ plane.
+   */
+  vector2<T> project_on_yz(void) const { return vector2(m_y, m_z); }
+
+  /**
+   * \brief Calculates the projection of this vector onto the XZ plane.
+   */
+  vector2<T> project_on_xz(void) const { return vector2(m_x, m_z); }
 
   /**
    * \brief Scales the vector by the specified values.
    *
    * \param scale_x the scale factor for the X coordinate.
    * \param scale_y the scale factor for the Y coordinate.
+   * \param scale_z the scale factor for the Z coordinate.
    *
    * \return A reference to the scaled vector.
    */
-  vector2& scale(const T& scale_x, const T& scale_y) {
+  vector3& scale(const T& scale_x, const T& scale_y, const T& scale_z) {
     m_x *= scale_x;
     m_y *= scale_y;
+    m_z *= scale_z;
     return *this;
   }
 
   /**
    * \brief Scales the vector by the specified values.
    *
-   * \param factor The scaling factor applied to both X and Y.
+   * \param factor The scaling factor applied to X,Y,Z.
    *
    * \return A reference to the scaled vector.
    */
-  vector2& scale(const T& factor) { return scale(factor, factor); }
+  vector3& scale(const T& factor) { return scale(factor, factor, factor); }
 
   /**
    * \brief Returns if this vector and the argument are considered equal,
@@ -213,8 +216,8 @@ class vector2 {
    * Only available if the template argument is not floating point.
    */
   template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
-  bool operator==(const vector2& other) const {
-    return (m_x == other.m_x && m_y == other.m_y);
+  bool operator==(const vector3& other) const {
+    return (m_x == other.m_x && m_y == other.m_y && m_z = other.m_z);
   }
 
   /**
@@ -224,15 +227,16 @@ class vector2 {
    * Only available if the template argument is floating point.
    */
   template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
-  bool operator==(const vector2& other) const {
+  bool operator==(const vector3& other) const {
     return (std::fabs(x() - other.x()) <= std::numeric_limits<T>::epsilon() &&
-            (std::fabs(y() - other.y()) <= std::numeric_limits<T>::epsilon()));
+            (std::fabs(y() - other.y()) <= std::numeric_limits<T>::epsilon()) &&
+            (std::fabs(z() - other.z()) <= std::numeric_limits<T>::epsilon()));
   }
 
   /**
    * \brief Needed for using vectors as keys in a map.
    */
-  bool operator<(const vector2& other) const {
+  bool operator<(const vector3& other) const {
     return (m_x < other.m_x) || ((m_x == other.m_x) && (m_y < other.m_y));
   }
 
@@ -243,130 +247,140 @@ class vector2 {
    * Should generally not be called if the template parameter type is not an
    * integer, as floating point comparisons in general are unsafe.
    */
-  bool operator!=(const vector2& other) const { return !(*this == other); }
+  bool operator!=(const vector3& other) const { return !(*this == other); }
 
-  vector2& operator+=(const vector2& other) {
+  vector3& operator+=(const vector3& other) {
     m_x += other.m_x;
     m_y += other.m_y;
+    m_z += other.m_z;
     return *this;
   }
 
-  vector2& operator-=(const vector2& other) {
+  vector3& operator-=(const vector3& other) {
     m_x -= other.m_x;
     m_y -= other.m_y;
+    m_z -= other.m_z;
     return *this;
   }
 
-  vector2& operator*=(T val) {
+  vector3& operator*=(T val) {
     m_x *= val;
     m_y *= val;
+    m_z *= val;
     return *this;
   }
 
-  vector2& operator/=(T val) {
+  vector3& operator/=(T val) {
     m_x /= val;
     m_y /= val;
+    m_z /= val;
     return *this;
   }
 
-  vector2 operator+(const vector2& other) const {
-    vector2 res(*this);
+  vector3 operator+(const vector3& other) const {
+    vector3 res(*this);
     res += other;
     return res;
   }
 
-  vector2<T> operator-(const vector2& other) const {
-    vector2<T> res(*this);
+  vector3<T> operator-(const vector3& other) const {
+    vector3<T> res(*this);
     res -= other;
     return res;
   }
 
-  vector2 operator*(T val) const {
-    vector2 res(*this);
+  vector3 operator*(T val) const {
+    vector3 res(*this);
     res *= val;
     return res;
   }
 
-  vector2 operator/(T val) const {
-    vector2 res(*this);
+  vector3 operator/(T val) const {
+    vector3 res(*this);
     res /= val;
     return res;
   }
 
-  vector2 operator-(void) const { return vector2(-m_x, -m_y); }
+  vector3 operator-(void) const { return vector3(-m_x, -m_y); }
 
-  friend std::ostream& operator<<(std::ostream& stream, const vector2& v) {
-    stream << "(" << v.m_x << "," << v.m_y << ")";
+  friend std::ostream& operator<<(std::ostream& stream, const vector3& v) {
+    stream << "(" << v.m_x << "," << v.m_y << "," << v.m_z << ")";
     return stream;
   }
 
   std::string to_str(void) const {
-    return "(" + rcppsw::to_string(m_x) + "," + rcppsw::to_string(m_y) + ")";
+    return "(" +
+        rcppsw::to_string(m_x) + "," +
+        rcppsw::to_string(m_y) + "," +
+        rcppsw::to_string(m_z) +
+        ")";
   }
 
  private:
   /* clang-format off */
   T m_x{0};
   T m_y{0};
+  T m_z{0};
   /* clang-format on */
 };
 
 /**
- * \brief Specialization of \ref vector2 for signed integers.
+ * \brief Specialization of \ref vector3 for signed integers.
  */
-using vector2i = vector2<int>;
+using vector3i = vector3<int>;
 
 /**
- * \brief Specialization of \ref vector2 for unsigned integers.
+ * \brief Specialization of \ref vector3 for unsigned integers.
  */
-using vector2u = vector2<uint>;
+using vector3u = vector3<uint>;
 
 /**
- * \brief Specialization of \ref vector2 for doubles.
+ * \brief Specialization of \ref vector3 for doubles.
  */
-using vector2d = vector2<double>;
+using vector3d = vector3<double>;
 
 /*******************************************************************************
  * Macros
  ******************************************************************************/
 /**
- * \brief Convert vector2{i,u} -> vector2d directly, without applying any
+ * \brief Convert vector3{i,u} -> vector3d directly, without applying any
  * scaling.
  */
-#define RCPPSW_MATH_VEC_DIRECT_CONV2D(prefix)                             \
-  static inline vector2d prefix##vec2dvec(const vector2##prefix& other) { \
-    return vector2d(other.x(), other.y());                                \
+#define RCPPSW_MATH_VEC_DIRECT_CONV3D(prefix)                             \
+  static inline vector3d prefix##vec2dvec(const vector3##prefix& other) { \
+    return vector3d(other.x(), other.y(), other.z());                   \
   }
 
 /**
- * \brief Convert vector2{i,u} -> vector2d, applying a multiplicative scaling
+ * \brief Convert vector3{i,u} -> vector3d, applying a multiplicative scaling
  * factor.
  */
-#define RCPPSW_MATH_VEC_SCALED_CONV2D(prefix)                           \
-  static inline vector2d prefix##vec2dvec(const vector2##prefix& other, \
+#define RCPPSW_MATH_VEC_SCALED_CONV3D(prefix)                           \
+  static inline vector3d prefix##vec2dvec(const vector3##prefix& other, \
                                           double scale) {               \
-    return vector2d(other.x() * scale, other.y() * scale);              \
+    return vector3d(other.x() * scale, other.y() * scale, other.z() * scale); \
   }
 
 /**
- * \brief Convert vector2d -> vector2u, applying a divisive scaling factor.
+ * \brief Convert vector3d -> vector3u, applying a divisive scaling factor.
  */
-#define RCPPSW_MATH_VEC_CONV2U(prefix)                                  \
-  static inline vector2u prefix##vec2uvec(const vector2##prefix& other, \
+#define RCPPSW_MATH_VEC_CONV3U(prefix)                                  \
+  static inline vector3u prefix##vec2uvec(const vector3##prefix& other, \
                                           double scale) {               \
-    return vector2u(static_cast<uint>(std::round(other.x() / scale)),   \
-                    static_cast<uint>(std::round(other.y() / scale)));  \
+    return vector3u(static_cast<uint>(std::round(other.x() / scale)),   \
+                    static_cast<uint>(std::round(other.y() / scale)),   \
+                    static_cast<uint>(std::round(other.z() / scale)));  \
   }
 
 /*******************************************************************************
  * Free Functions
  ******************************************************************************/
-RCPPSW_MATH_VEC_DIRECT_CONV2D(u);
-RCPPSW_MATH_VEC_DIRECT_CONV2D(i);
-RCPPSW_MATH_VEC_SCALED_CONV2D(u);
-RCPPSW_MATH_VEC_SCALED_CONV2D(i);
-RCPPSW_MATH_VEC_CONV2U(d);
+RCPPSW_MATH_VEC_DIRECT_CONV3D(u);
+RCPPSW_MATH_VEC_DIRECT_CONV3D(i);
+RCPPSW_MATH_VEC_SCALED_CONV3D(u);
+RCPPSW_MATH_VEC_SCALED_CONV3D(i);
+RCPPSW_MATH_VEC_CONV3U(d);
 
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_VECTOR2_HPP_ */
+#endif /* INCLUDE_RCPPSW_MATH_VECTOR3_HPP_ */
