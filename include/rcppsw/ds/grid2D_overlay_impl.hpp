@@ -1,5 +1,5 @@
 /**
- * \file base_overlay_grid2D.hpp
+ * \file grid2D_overlay_impl.hpp
  *
  * \copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_BASE_OVERLAY_GRID2D_HPP_
-#define INCLUDE_RCPPSW_DS_BASE_OVERLAY_GRID2D_HPP_
+#ifndef INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_IMPL_HPP_
+#define INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_IMPL_HPP_
 
 /*******************************************************************************
  * Includes
@@ -39,7 +39,7 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * \class base_overlay_grid2D
+ * \class grid2D_overlay_impl
  * \ingroup ds
  *
  * \brief A 2D logical grid that is overlayed over a continuous environment. It
@@ -48,7 +48,7 @@ NS_START(rcppsw, ds);
  * 25 grid of cells with a resolution of 0.2).
  */
 template <typename T>
-class base_overlay_grid2D : public base_grid2D<T> {
+class grid2D_overlay_impl : public base_grid2D<T> {
  public:
   using typename base_grid2D<T>::index_range;
 
@@ -59,7 +59,7 @@ class base_overlay_grid2D : public base_grid2D<T> {
   using circle_range_ret_type =
       std::pair<typename index_range::index, typename index_range::index>;
 
-  base_overlay_grid2D(types::discretize_ratio resolution,
+  grid2D_overlay_impl(types::discretize_ratio resolution,
                       double x_max,
                       double y_max)
       : base_grid2D<T>(),
@@ -67,7 +67,7 @@ class base_overlay_grid2D : public base_grid2D<T> {
         m_x_max(x_max),
         m_y_max(y_max) {}
 
-  virtual ~base_overlay_grid2D(void) = default;
+  virtual ~grid2D_overlay_impl(void) = default;
 
   /**
    * \brief Return the resolution of the grid.
@@ -158,4 +158,4 @@ class base_overlay_grid2D : public base_grid2D<T> {
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_BASE_OVERLAY_GRID2D_HPP_ */
+#endif /* INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_IMPL_HPP_ */

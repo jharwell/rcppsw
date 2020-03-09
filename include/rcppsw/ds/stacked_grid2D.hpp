@@ -1,5 +1,5 @@
 /**
- * \file stacked_grid.hpp
+ * \file stacked_grid2D.hpp
  *
  * \copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_STACKED_GRID_HPP_
-#define INCLUDE_RCPPSW_DS_STACKED_GRID_HPP_
+#ifndef INCLUDE_RCPPSW_DS_STACKED_GRID2D_HPP_
+#define INCLUDE_RCPPSW_DS_STACKED_GRID2D_HPP_
 
 /*******************************************************************************
  * Includes
@@ -28,7 +28,7 @@
 #include <utility>
 #include <vector>
 
-#include "rcppsw/ds/overlay_grid2D.hpp"
+#include "rcppsw/ds/grid2D_overlay.hpp"
 #include "rcppsw/math/vector2.hpp"
 #include "rcppsw/types/discretize_ratio.hpp"
 
@@ -41,7 +41,7 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * \class stacked_grid
+ * \class stacked_grid2D
  * \ingroup ds
  *
  * \brief A sandwich of N 2D grids of the same size (x,y) dimensions, which can
@@ -56,14 +56,16 @@ NS_START(rcppsw, ds);
  * case though.
  */
 template <typename TupleTypes>
-class stacked_grid {
+class stacked_grid2D {
  public:
-  stacked_grid(types::discretize_ratio resolution, double x_max, double y_max)
+  stacked_grid2D(const types::discretize_ratio& resolution,
+               double x_max,
+               double y_max)
       : m_layers(kStackSize) {
     add_layers<kStackSize - 1>(resolution, x_max, y_max);
   }
 
-  virtual ~stacked_grid(void) { rm_layers<kStackSize - 1>(); }
+  virtual ~stacked_grid2D(void) { rm_layers<kStackSize - 1>(); }
 
   /**
   * \brief The type of the objects stored in a particular layer.
@@ -77,7 +79,7 @@ class stacked_grid {
    * \tparam Index The index of the layer.
    */
   template <size_t Index>
-  using layer_value_type = rcppsw::ds::overlay_grid2D<value_type<Index>>;
+  using layer_value_type = rcppsw::ds::grid2D_overlay<value_type<Index>>;
 
   /**
    * \brief Get a reference to an object at a particular (layer,i,j) location
@@ -125,35 +127,35 @@ class stacked_grid {
   }
 
   /**
-   * \see \ref base_overlay_grid2D::xdsize().
+   * \see \ref grid2D_overlay_impl::xdsize().
    */
   size_t xdsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xdsize();
   }
 
   /**
-   * \see \ref base_overlay_grid2D::xrsize().
+   * \see \ref grid2D_overlay_impl::xrsize().
    */
   double xrsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xrsize();
   }
 
   /**
-   * \see \ref base_overlay_grid2D::ydsize().
+   * \see \ref grid2D_overlay_impl::ydsize().
    */
   size_t ydsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->ydsize();
   }
 
   /**
-   * \see \ref base_overlay_grid2D::yrsize().
+   * \see \ref grid2D_overlay_impl::yrsize().
    */
   double yrsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->yrsize();
   }
 
   /**
-   * \see \ref base_overlay_grid2D::resolution().
+   * \see \ref grid2D_overlay_impl::resolution().
    */
   types::discretize_ratio resolution(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))
@@ -229,4 +231,4 @@ class stacked_grid {
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_STACKED_GRID_HPP_ */
+#endif /* INCLUDE_RCPPSW_DS_STACKED_GRID2D_HPP_ */

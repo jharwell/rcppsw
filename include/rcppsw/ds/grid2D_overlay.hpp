@@ -1,5 +1,5 @@
 /**
- * \file overlay_grid2D.hpp
+ * \file grid2D_overlay.hpp
  *
  * \copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,13 +18,13 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_OVERLAY_GRID2D_HPP_
-#define INCLUDE_RCPPSW_DS_OVERLAY_GRID2D_HPP_
+#ifndef INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_HPP_
+#define INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/ds/base_overlay_grid2D.hpp"
+#include "rcppsw/ds/grid2D_overlay_impl.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -35,7 +35,7 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * \class overlay_grid2D
+ * \class grid2D_overlay
  * \ingroup ds
  *
  * \brief A 2D logical grid overlayed over a continuous environment using a
@@ -48,16 +48,16 @@ NS_START(rcppsw, ds);
  * underlying library.
  */
 template <typename T>
-class overlay_grid2D final : public base_overlay_grid2D<T> {
+class grid2D_overlay final : public grid2D_overlay_impl<T> {
  public:
   using typename base_grid2D<T>::index_range;
   using typename base_grid2D<T>::grid_view;
   using typename base_grid2D<T>::const_grid_view;
   using typename base_grid2D<T>::grid_type;
 
-  using base_overlay_grid2D<T>::xdsize;
-  using base_overlay_grid2D<T>::ydsize;
-  using base_overlay_grid2D<T>::access;
+  using grid2D_overlay_impl<T>::xdsize;
+  using grid2D_overlay_impl<T>::ydsize;
+  using grid2D_overlay_impl<T>::access;
 
   /**
    * \param resolution The discretization unit for the grid.
@@ -66,8 +66,8 @@ class overlay_grid2D final : public base_overlay_grid2D<T> {
    * \param y_max The real size in Y, which will be discretized into
    * Y/resolution discrete elements along the X dimension.
    */
-  overlay_grid2D(types::discretize_ratio resolution, double x_max, double y_max)
-      : base_overlay_grid2D<T>(resolution, x_max, y_max),
+  grid2D_overlay(types::discretize_ratio resolution, double x_max, double y_max)
+      : grid2D_overlay_impl<T>(resolution, x_max, y_max),
         m_cells(boost::extents[static_cast<typename index_range::index>(
             xdsize())][typename index_range::index(ydsize())]) {}
 
@@ -86,8 +86,8 @@ class overlay_grid2D final : public base_overlay_grid2D<T> {
    * \return The subcircle.
    */
   grid_view subcircle(size_t x, size_t y, uint radius) {
-    auto x_range = base_overlay_grid2D<T>::circle_xrange_at_point(x, radius);
-    auto y_range = base_overlay_grid2D<T>::circle_yrange_at_point(y, radius);
+    auto x_range = grid2D_overlay_impl<T>::circle_xrange_at_point(x, radius);
+    auto y_range = grid2D_overlay_impl<T>::circle_yrange_at_point(y, radius);
     typename grid_type::index_gen indices;
 
     index_range x1(x_range.first, x_range.second, 1);
@@ -95,8 +95,8 @@ class overlay_grid2D final : public base_overlay_grid2D<T> {
     return grid_view(m_cells[indices[x1][y1]]);
   }
   const_grid_view subcircle(size_t x, size_t y, uint radius) const {
-    auto x_range = base_overlay_grid2D<T>::circle_xrange_at_point(x, radius);
-    auto y_range = base_overlay_grid2D<T>::circle_yrange_at_point(y, radius);
+    auto x_range = grid2D_overlay_impl<T>::circle_xrange_at_point(x, radius);
+    auto y_range = grid2D_overlay_impl<T>::circle_yrange_at_point(y, radius);
     typename grid_type::index_gen indices;
 
     index_range x1(x_range.first, x_range.second, 1);
@@ -165,4 +165,4 @@ class overlay_grid2D final : public base_overlay_grid2D<T> {
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_OVERLAY_GRID2D_HPP_ */
+#endif /* INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_HPP_ */
