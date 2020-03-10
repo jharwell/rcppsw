@@ -32,6 +32,7 @@
 #include "rcppsw/math/radians.hpp"
 #include "rcppsw/types/discretize_ratio.hpp"
 #include "rcppsw/math/vector2.hpp"
+#include "rcppsw/math/sphere_vector.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -99,6 +100,12 @@ class vector3 {
   constexpr vector3(const T& x, const T& y, const T& z)
   : m_x(x), m_y(y), m_z(z) {}
 
+  /**
+   * \brief Initializes the 3D vector from a 2D vector, setting the Z value to
+   * 0.0.
+   */
+  explicit vector3<T>(const vector2<T>& v) : vector3(v.x(), v.y(), 0.0) {}
+
   T x(void) RCSW_CHECK_RET { return m_x; }
   T y(void) RCSW_CHECK_RET { return m_y; }
   T z(void) RCSW_CHECK_RET { return m_z; }
@@ -138,7 +145,7 @@ class vector3 {
   /**
    * Returns the length of this vector.
    */
-  T length(void) const RCSW_CHECK_RET { return std::sqrt(square_length()); }
+  double length(void) const RCSW_CHECK_RET { return std::sqrt(square_length()); }
 
   /**
    * \brief Normalizes this vector.
@@ -184,6 +191,13 @@ class vector3 {
    */
   vector2<T> project_on_xz(void) const { return vector2(m_x, m_z); }
 
+  sphere_vector<T> to_spherical(void) const {
+    double radius = length();
+    return sphere_vector<T>(radius,
+                            radians(std::acos(m_z / radius)),
+                            radians(std::atan2(m_y, m_x)));
+  }
+
   /**
    * \brief Scales the vector by the specified values.
    *
@@ -217,7 +231,7 @@ class vector3 {
    */
   template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
   bool operator==(const vector3& other) const {
-    return (m_x == other.m_x && m_y == other.m_y && m_z = other.m_z);
+    return (m_x == other.m_x && m_y == other.m_y && m_z == other.m_z);
   }
 
   /**

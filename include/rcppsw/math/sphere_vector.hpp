@@ -1,7 +1,7 @@
 /**
- * \file waveform_config.hpp
+ * \file sphere_vector.hpp
  *
- * \copyright 2018 John Harwell/Anthony Chen, All rights reserved.
+ * \copyright 2020 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,51 +18,48 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_CONFIG_WAVEFORM_CONFIG_HPP_
-#define INCLUDE_RCPPSW_CONTROL_CONFIG_WAVEFORM_CONFIG_HPP_
+#ifndef INCLUDE_RCPPSW_MATH_SPHERE_VECTOR_HPP_
+#define INCLUDE_RCPPSW_MATH_SPHERE_VECTOR_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include "rcppsw/config/base_config.hpp"
+#include "rcppsw/math/radians.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, control, config);
+NS_START(rcppsw, math);
 
 /*******************************************************************************
- * Structure Definitions
+ * Class Definitions
  ******************************************************************************/
 /**
- * \struct waveform_config
- * \ingroup control config
+ * \class sphere_vector
+ * \ingroup math
  *
- * Not all parameters are applicable to all waveform types.
+ * \brief Representation of a point in 3D space in spherical coordinates.
  */
-struct waveform_config final : public rcppsw::config::base_config {
-  waveform_config(void) = default;
+template<class T>
+class sphere_vector {
+ public:
+  sphere_vector(const T& radius,
+                const radians& inclination,
+                const radians& azimuth)
+      : m_radius(radius), m_inclination(inclination), m_azimuth(azimuth) {}
 
-  /* constructor needed for aggregate initialization because of base class */
-  waveform_config(const std::string& type_in,
-                  double freq_in,
-                  double phase_in,
-                  double amp_in,
-                  double offset_in) :
-      type(type_in),
-      frequency(freq_in),
-      phase(phase_in),
-      amplitude(amp_in),
-      offset(offset_in) {}
+  const radians& azimuth(void) const { return m_azimuth; }
+  const radians& inclination(void) const { return m_inclination; }
+  const T& radius(void) const { return m_radius; }
 
-  std::string type{};
-  double frequency{0.0};
-  double phase{0.0};
-  double amplitude{0.0};
-  double offset{0.0};
+ private:
+  /* clang-format off */
+  T       m_radius;
+  radians m_inclination;
+  radians m_azimuth;
+  /* clang-format on */
 };
 
-NS_END(config, control, rcppsw);
+NS_END(math, rcppsw);
 
-#endif // INCLUDE_RCPPSW_CONTROL_CONFIG_WAVEFORM_CONFIG_HPP_
+#endif /* INCLUDE_RCPPSW_MATH_SPHERE_VECTOR_HPP_ */

@@ -171,7 +171,7 @@ class vector2 {
    * This is only available if the template parameter is not an integer.
    *
    * \param angle The rotation angle.
-   *p
+   *
    * \return A reference to the rotated vector.
    */
   template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>

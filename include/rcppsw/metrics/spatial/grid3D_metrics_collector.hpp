@@ -67,7 +67,7 @@ class grid3D_metrics_collector : public metrics::base_metrics_collector {
     m_total_count = 0;
   }
 
-  std::list<std::string> csv_header_cols(void) const {
+  std::list<std::string> csv_header_cols(void) const override {
     std::list<std::string> cols;
     for (size_t i = 0; i < m_stats.xsize(); ++i) {
       for (size_t j = 0; j < m_stats.ysize(); ++j) {
