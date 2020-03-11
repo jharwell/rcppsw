@@ -68,10 +68,19 @@ NS_START(rcppsw, patterns, fsm);
 class base_fsm : public er::client<base_fsm> {
  public:
   explicit base_fsm(uint8_t max_states, uint8_t initial_state = 0);
-  base_fsm(const base_fsm& other);
   ~base_fsm(void) override = default;
 
-  base_fsm& operator=(const base_fsm&) = delete;
+  /**
+   * \brief Copy the FSM to initialize another. Event data and whether or not an
+   * event is present is not copied.
+   */
+  base_fsm(const base_fsm& other);
+
+  /**
+   * \brief Copy the FSM to initialize another. Event data and whether or not an
+   * event is present is not copied.
+   */
+  base_fsm& operator=(const base_fsm& other);
 
   /**
    * \brief Get the current state of the state machine.

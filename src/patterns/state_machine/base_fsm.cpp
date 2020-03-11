@@ -45,8 +45,20 @@ base_fsm::base_fsm(const base_fsm& other)
     : ER_CLIENT_INIT(other.logger_name()),
       mc_max_states(other.mc_max_states),
       m_current_state(other.current_state()),
-      m_initial_state(other.current_state()) {
+      m_next_state(other.next_state()),
+      m_initial_state(other.current_state()),
+      m_previous_state(other.previous_state()),
+      m_last_state(other.last_state()) {
   ER_ASSERT(mc_max_states < event_signal::ekIGNORED, "Too many states");
+}
+
+base_fsm& base_fsm::operator=(const base_fsm& other) {
+  m_current_state = other.m_current_state;
+  m_next_state = other.m_next_state;
+  m_initial_state = other.m_initial_state;
+  m_previous_state = other.m_previous_state;
+  m_last_state = other.m_last_state;
+  return *this;
 }
 
 /*******************************************************************************
