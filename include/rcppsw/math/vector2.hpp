@@ -300,6 +300,16 @@ class vector2 {
     return stream;
   }
 
+  /**
+   * \brief For parsing a vector from a string in the form of \c "X,Y".
+   */
+  friend std::istream& operator>>(std::istream& is, vector2<T>& v) {
+    T values[2] = {T(), T()};
+    utils::parse_values<T>(is, 2, values, ',');
+    v.set(values[0], values[1]);
+    return is;
+  }
+
   std::string to_str(void) const {
     return "(" + rcppsw::to_string(m_x) + "," + rcppsw::to_string(m_y) + ")";
   }
