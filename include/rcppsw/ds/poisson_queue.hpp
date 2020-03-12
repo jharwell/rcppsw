@@ -24,14 +24,14 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <deque>
 #include <boost/optional.hpp>
+#include <deque>
 
 #include "rcsw/common/fpc.h"
 
 #include "rcppsw/common/common.hpp"
-#include "rcppsw/types/timestep.hpp"
 #include "rcppsw/math/rng.hpp"
+#include "rcppsw/types/timestep.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -45,7 +45,7 @@ NS_START(rcppsw, ds);
  * \brief A wrapper around std::queue to make it more amenable to
  * queueing theoretic analysis by tracking queue state.
  */
-template<typename T>
+template <typename T>
 class poisson_queue {
  public:
   /**
@@ -55,12 +55,12 @@ class poisson_queue {
     /**
      * \brief The # of operations since the last reset.
      */
-    size_t          count{0};
+    size_t count{0};
 
     /**
      * \brief The # of operations since the beginning of time.
      */
-    size_t          total_count{0};
+    size_t total_count{0};
 
     /**
      * \brief The accumulated time between operations since the last reset.
@@ -75,9 +75,7 @@ class poisson_queue {
   };
 
   poisson_queue(double lambda, double mu, math::rng* rng)
-      : mc_lambda(lambda),
-        mc_mu(mu),
-        m_rng(rng) {}
+      : mc_lambda(lambda), mc_mu(mu), m_rng(rng) {}
 
   /* not assignable or copy-constructible by default */
   poisson_queue(const poisson_queue&) = delete;
@@ -137,7 +135,8 @@ class poisson_queue {
     ++m_enqueue.md.total_count;
     ++m_enqueue.md.count;
     m_enqueue.md.interval_accum = types::timestep(t - m_enqueue.last_op_time);
-    m_enqueue.md.total_interval_accum = types::timestep(t - m_enqueue.last_op_time);
+    m_enqueue.md.total_interval_accum =
+        types::timestep(t - m_enqueue.last_op_time);
 
     m_enqueue.last_op_time = t;
     m_enqueue.op_set = false;
@@ -160,7 +159,8 @@ class poisson_queue {
     ++m_dequeue.md.count;
     ++m_dequeue.md.total_count;
     m_dequeue.md.interval_accum = types::timestep(t - m_dequeue.last_op_time);
-    m_dequeue.md.total_interval_accum = types::timestep(t - m_dequeue.last_op_time);
+    m_dequeue.md.total_interval_accum =
+        types::timestep(t - m_dequeue.last_op_time);
 
     m_dequeue.last_op_time = t;
     m_dequeue.op_set = false;
@@ -182,19 +182,18 @@ class poisson_queue {
   }
 
   bool contains(const T& key) const {
-    return m_queue.end() != std::find_if(m_queue.begin(),
-                                         m_queue.end(),
-                                         [&](const auto& a) {
-                                           return a == key;
-                                         });
+    return m_queue.end() !=
+           std::find_if(m_queue.begin(), m_queue.end(), [&](const auto& a) {
+             return a == key;
+           });
   }
 
  private:
   struct op_data {
     struct op_metadata md;
-    bool               op_set{false};
-    types::timestep    last_op_time{0};
-    types::timestep    next_op_time{0};
+    bool op_set{false};
+    types::timestep last_op_time{0};
+    types::timestep next_op_time{0};
   };
 
   /* clang-format off */

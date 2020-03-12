@@ -326,8 +326,7 @@ NS_END(detail);
  * @brief If a class/type defines a to_str() method, then it can use
  * rcppsw::to_string() in cases where std::to_string() does not work.
  */
-template <class T,
-          RCPPSW_SFINAE_FUNC(is_detected<detail::to_str_type, T>::value)>
+template <class T, RCPPSW_SFINAE_FUNC(is_detected<detail::to_str_type, T>::value)>
 std::string to_string(const T& obj) {
   return obj.to_str();
 }

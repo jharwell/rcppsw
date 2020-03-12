@@ -30,9 +30,9 @@
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/math/radians.hpp"
-#include "rcppsw/types/discretize_ratio.hpp"
-#include "rcppsw/math/vector2.hpp"
 #include "rcppsw/math/sphere_vector.hpp"
+#include "rcppsw/math/vector2.hpp"
+#include "rcppsw/types/discretize_ratio.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -79,7 +79,6 @@ class vector3 {
    */
   static const vector3 Y; // NOLINT
 
-
   /**
    * \brief The positive Z axis.
    */
@@ -98,7 +97,7 @@ class vector3 {
    * \param z The Z coordinate.
    */
   constexpr vector3(const T& x, const T& y, const T& z)
-  : m_x(x), m_y(y), m_z(z) {}
+      : m_x(x), m_y(y), m_z(z) {}
 
   /**
    * \brief Initializes the 3D vector from a 2D vector, setting the Z value to
@@ -145,7 +144,9 @@ class vector3 {
   /**
    * Returns the length of this vector.
    */
-  double length(void) const RCSW_CHECK_RET { return std::sqrt(square_length()); }
+  double length(void) const RCSW_CHECK_RET {
+    return std::sqrt(square_length());
+  }
 
   /**
    * \brief Normalizes this vector.
@@ -332,11 +333,8 @@ class vector3 {
     return is;
   }
   std::string to_str(void) const {
-    return "(" +
-        rcppsw::to_string(m_x) + "," +
-        rcppsw::to_string(m_y) + "," +
-        rcppsw::to_string(m_z) +
-        ")";
+    return "(" + rcppsw::to_string(m_x) + "," + rcppsw::to_string(m_y) + "," +
+           rcppsw::to_string(m_z) + ")";
   }
 
  private:
@@ -371,16 +369,16 @@ using vector3d = vector3<double>;
  */
 #define RCPPSW_MATH_VEC_DIRECT_CONV3D(prefix)                             \
   static inline vector3d prefix##vec2dvec(const vector3##prefix& other) { \
-    return vector3d(other.x(), other.y(), other.z());                   \
+    return vector3d(other.x(), other.y(), other.z());                     \
   }
 
 /**
  * \brief Convert vector3{i,u} -> vector3d, applying a multiplicative scaling
  * factor.
  */
-#define RCPPSW_MATH_VEC_SCALED_CONV3D(prefix)                           \
-  static inline vector3d prefix##vec2dvec(const vector3##prefix& other, \
-                                          double scale) {               \
+#define RCPPSW_MATH_VEC_SCALED_CONV3D(prefix)                                 \
+  static inline vector3d prefix##vec2dvec(const vector3##prefix& other,       \
+                                          double scale) {                     \
     return vector3d(other.x() * scale, other.y() * scale, other.z() * scale); \
   }
 

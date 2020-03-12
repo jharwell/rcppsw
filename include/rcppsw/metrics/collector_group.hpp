@@ -72,7 +72,7 @@ class collector_group {
    * \param args 0 or more arguments to the collector constructor.
    */
   template <typename T, typename... Args>
-  bool collector_register(const std::string& name, Args&&... args) {
+  bool collector_register(const key_type& name, Args&&... args) {
     auto it = m_collectors.find(name);
     if (it == m_collectors.end()) {
       m_collectors[name] = std::make_unique<T>(args...);
@@ -80,7 +80,7 @@ class collector_group {
     }
     return false;
   }
-  bool collector_remove(const std::string& name) {
+  bool collector_remove(const key_type& name) {
     auto it = m_collectors.find(name);
     if (it != m_collectors.end()) {
       m_collectors.erase(name);
@@ -99,7 +99,7 @@ class collector_group {
    * \return \c TRUE if the specified collector is registered and collection was
    * successful, \c FALSE otherwise.
    */
-  bool collect(const std::string& name, const base_metrics& metrics) {
+  bool collect(const key_type& name, const base_metrics& metrics) {
     auto it = m_collectors.find(name);
     if (it != m_collectors.end()) {
       it->second->collect(metrics);
@@ -127,9 +127,9 @@ class collector_group {
    *
    * \return \c TRUE if metrics were collected, \c FALSE otherwise.
    */
-  bool collect_if(const std::string& name,
+  bool collect_if(const key_type& name,
                   const base_metrics& metrics,
-                  std::function<bool(const base_metrics&)> predicate) {
+                  const std::function<bool(const base_metrics&)>& predicate) {
     auto it = m_collectors.find(name);
     if (it != m_collectors.end()) {
       if (predicate(metrics)) {
@@ -145,7 +145,10 @@ class collector_group {
    *
    * \param key The mapped name of the collector in the group.
    */
-  mapped_type& operator[](const key_type& key) { return m_collectors[key]; }
+  template <typename T>
+  const T* get(const key_type& key) {
+    return static_cast<T*>(m_collectors[key].get());
+  }
 
   /**
    * \brief Call the \ref base_metrics_collector::reset() function on all
@@ -154,7 +157,7 @@ class collector_group {
   void reset_all(void) {
     std::for_each(m_collectors.begin(),
                   m_collectors.end(),
-                  [&](const std::pair<const std::string, mapped_type>& pair) {
+                  [&](const std::pair<const key_type, mapped_type>& pair) {
                     pair.second->reset();
                   });
   }
@@ -166,7 +169,7 @@ class collector_group {
   void interval_reset_all(void) {
     std::for_each(m_collectors.begin(),
                   m_collectors.end(),
-                  [&](const std::pair<const std::string, mapped_type>& pair) {
+                  [&](const std::pair<const key_type, mapped_type>& pair) {
                     pair.second->interval_reset();
                   });
   }
@@ -178,7 +181,7 @@ class collector_group {
   void timestep_inc_all(void) {
     std::for_each(m_collectors.begin(),
                   m_collectors.end(),
-                  [&](const std::pair<const std::string, mapped_type>& pair) {
+                  [&](const std::pair<const key_type, mapped_type>& pair) {
                     pair.second->timestep_inc();
                   });
   }
@@ -190,13 +193,12 @@ class collector_group {
    * \return \c TRUE iff ALL collectors in the group wrote out metrics this
    * timestep.
    */
-  bool metrics_write_all(types::timestep t) {
-    return std::all_of(
-        m_collectors.begin(),
-        m_collectors.end(),
-        [&](const std::pair<const std::string, mapped_type>& pair) {
-          return pair.second->csv_line_write(t);
-        });
+  bool metrics_write_all(void) {
+    return std::all_of(m_collectors.begin(),
+                       m_collectors.end(),
+                       [&](const std::pair<const key_type, mapped_type>& pair) {
+                         return pair.second->csv_line_write();
+                       });
   }
 
   /**
@@ -206,7 +208,7 @@ class collector_group {
   void finalize_all(void) {
     std::for_each(m_collectors.begin(),
                   m_collectors.end(),
-                  [&](const std::pair<const std::string, mapped_type>& pair) {
+                  [&](const std::pair<const key_type, mapped_type>& pair) {
                     pair.second->finalize();
                   });
   }

@@ -40,7 +40,7 @@ NS_START(rcppsw, math);
  *
  * \brief Representation of a point in 3D space in spherical coordinates.
  */
-template<class T>
+template <class T>
 class sphere_vector {
  public:
   sphere_vector(const T& radius,

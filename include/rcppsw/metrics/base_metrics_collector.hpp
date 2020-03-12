@@ -30,6 +30,8 @@
 #include <string>
 
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/er/client.hpp"
+#include "rcppsw/metrics/output_mode.hpp"
 #include "rcppsw/types/timestep.hpp"
 
 /*******************************************************************************
@@ -52,19 +54,17 @@ class base_metrics;
  * Metrics are written out in .csv format at whatever frequency derived classes
  * choose.
  */
-class base_metrics_collector {
+class base_metrics_collector : public er::client<base_metrics_collector> {
  public:
   /**
-   * \param ofname Output file name.
+   * \param ofname_stem Output file name stem; full path to output file, sans
+   *                    the \c .csv extension which is added internally.
    * \param interval Collection interval.
-   * \param cum_only The metrics to be collected are cumulative only. This means
-   *                 that (1) no header will be written, (2) the output file
-   *                 will be truncated each time \ref csv_line_build() returns
-   *                 true. Default = \c false;
+   * \param mode The output mode. See \ref output_mode for possible values.
    */
-  base_metrics_collector(const std::string& ofname,
+  base_metrics_collector(const std::string& ofname_stem,
                          const types::timestep& interval,
-                         bool cum_only = false);
+                         const output_mode& mode);
 
   virtual ~base_metrics_collector(void) = default;
 
@@ -108,7 +108,7 @@ class base_metrics_collector {
    *
    * \return \c TRUE if a line was written, \c FALSE otherwise.
    */
-  bool csv_line_write(const types::timestep& t);
+  bool csv_line_write(void);
 
   /**
    * \brief Finalize metrics and flush files.
@@ -170,7 +170,7 @@ class base_metrics_collector {
   /**
    * \brief Return the separator used to separate .csv entries from each other.
    */
-  const std::string& separator(void) const { return m_separator; }
+  const std::string& separator(void) const { return mc_separator; }
 
   /**
    * \brief Return a string of the average value of a sum of SOMETHING over an
@@ -230,12 +230,14 @@ class base_metrics_collector {
   std::string csv_header_build(void) const;
 
   /* clang-format off */
-  types::timestep m_interval;
-  types::timestep m_timestep{0};
-  bool            m_cum_only;
-  std::string     m_ofname;
-  std::string     m_separator;
-  std::ofstream   m_ofile{};
+  const output_mode mc_output_mode;
+  const std::string mc_separator{";"};
+  const std::string mc_ofname_ext{".csv"};
+  const std::string mc_ofname_stem;
+
+  types::timestep   m_interval;
+  types::timestep   m_timestep{0};
+  std::ofstream     m_ofile{};
   /* clang-format on */
 };
 

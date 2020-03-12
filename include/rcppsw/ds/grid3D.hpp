@@ -56,8 +56,8 @@ class grid3D : public base_grid3D<T> {
 
   T& access(size_t i, size_t j, size_t k) override {
     return m_cells[static_cast<typename index_range::index>(i)]
-        [static_cast<typename index_range::index>(j)]
-        [static_cast<typename index_range::index>(k)];
+                  [static_cast<typename index_range::index>(j)]
+                  [static_cast<typename index_range::index>(k)];
   }
 
   RCSW_PURE T& access(const math::vector3u& c) override {

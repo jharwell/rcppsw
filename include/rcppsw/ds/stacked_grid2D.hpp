@@ -59,8 +59,8 @@ template <typename TupleTypes>
 class stacked_grid2D {
  public:
   stacked_grid2D(const types::discretize_ratio& resolution,
-               double x_max,
-               double y_max)
+                 double x_max,
+                 double y_max)
       : m_layers(kStackSize) {
     add_layers<kStackSize - 1>(resolution, x_max, y_max);
   }

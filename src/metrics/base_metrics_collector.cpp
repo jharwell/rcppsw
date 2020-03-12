@@ -23,38 +23,57 @@
  ******************************************************************************/
 #include "rcppsw/metrics/base_metrics_collector.hpp"
 
-#include <experimental/filesystem>
+#include <filesystem>
+#include <iomanip>
 #include <numeric>
+#include <sstream>
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, metrics);
-namespace fs = std::experimental::filesystem;
+namespace fs = std::filesystem;
 
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_metrics_collector::base_metrics_collector(const std::string& ofname,
+base_metrics_collector::base_metrics_collector(const std::string& ofname_stem,
                                                const types::timestep& interval,
-                                               bool cum_only)
-    : m_interval(interval),
-      m_cum_only(cum_only),
-      m_ofname(ofname),
-      m_separator(";") {}
+                                               const output_mode& mode)
+    : ER_CLIENT_INIT("rcppsw.metrics.base_collector"),
+      mc_output_mode(mode),
+      mc_ofname_stem(ofname_stem),
+      m_interval(interval) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-bool base_metrics_collector::csv_line_write(const types::timestep& t) {
+bool base_metrics_collector::csv_line_write(void) {
   if (auto line = csv_line_build()) {
-    if (!m_cum_only) {
-      m_ofile << rcppsw::to_string(t) + m_separator + *line << std::endl;
-    } else {
-      fs::resize_file(m_ofname, 0);
+    if (output_mode::ekAPPEND == mc_output_mode) {
+      m_ofile << rcppsw::to_string(m_timestep) + mc_separator + *line
+              << std::endl;
+    } else if (output_mode::ekTRUNCATE == mc_output_mode) {
+      fs::resize_file(mc_ofname_stem + mc_ofname_ext, 0);
       m_ofile.seekp(0);
       csv_header_write();
       m_ofile << *line << std::endl;
+    } else if (output_mode::ekCREATE == mc_output_mode) {
+      std::stringstream ss;
+      /*
+       * +1 to get things to come out evenly because we start with
+       * timestep 0.
+       */
+      ss << std::setw(10) << std::setfill('0') << (m_timestep.v() + 1);
+
+      m_ofile.open(mc_ofname_stem + "_" + ss.str() + mc_ofname_ext,
+                   std::ios_base::trunc | std::ios_base::out);
+      csv_header_write();
+      m_ofile << *line << std::endl;
+      m_ofile.close();
+    } else {
+      ER_FATAL_SENTINEL("Bad output mode '%d'",
+                        rcppsw::as_underlying(mc_output_mode));
     }
     return true;
   }
@@ -78,8 +97,18 @@ void base_metrics_collector::reset(void) {
   if (m_ofile.is_open()) {
     m_ofile.close();
   }
-  m_ofile.open(m_ofname.c_str(), std::ios_base::trunc | std::ios_base::out);
-  csv_header_write();
+  /*
+   * Nothing to do if we are creating a new file each time, because we don't
+   * know that the timestep reset() is called on and the timestep that we will
+   * be outputting metrics are the same.
+   */
+  if (output_mode::ekAPPEND == mc_output_mode ||
+      output_mode::ekTRUNCATE == mc_output_mode) {
+    m_ofile.open(mc_ofname_stem + mc_ofname_ext,
+                 std::ios_base::trunc | std::ios_base::out);
+
+    csv_header_write();
+  }
 } /* reset() */
 
 void base_metrics_collector::interval_reset(void) {

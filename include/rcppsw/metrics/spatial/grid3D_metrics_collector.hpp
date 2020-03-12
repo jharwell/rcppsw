@@ -51,14 +51,14 @@ template<typename TCellOp>
 class grid3D_metrics_collector : public metrics::base_metrics_collector {
  public:
   /**
-   * \param ofname The output file name.
+   * \param ofname_stem The output file name.
    * \param interval Collection interval.
    * \param dims Dimensions of grid.
    */
-  grid3D_metrics_collector(const std::string& ofname,
+  grid3D_metrics_collector(const std::string& ofname_stem,
                            const types::timestep& interval,
                            const math::vector3u& dims)
-      : base_metrics_collector(ofname, interval, true),
+      : base_metrics_collector(ofname_stem, interval, output_mode::ekCREATE),
         m_stats(dims.x(), dims.y(), dims.z()) {}
 
 

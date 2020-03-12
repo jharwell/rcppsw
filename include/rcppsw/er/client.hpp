@@ -245,9 +245,9 @@
  *
  * Initialize logging by specifying the log4cxx configuration file.
  */
-#define ER_LOGGING_INIT(fname)                                          \
-  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>:: \
-  logging_init(fname)
+#define ER_LOGGING_INIT(fname) \
+  rcppsw::er::client<          \
+      typename std::remove_reference<decltype(*this)>::type>::logging_init(fname)
 
 /**
  * \def ER_LOGFILE_SET(logger, fname)

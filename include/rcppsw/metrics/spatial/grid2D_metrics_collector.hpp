@@ -52,14 +52,14 @@ template<typename TCellOp>
 class grid2D_metrics_collector : public metrics::base_metrics_collector {
  public:
   /**
-   * \param ofname The output file name.
+   * \param ofname_stem The output file name stem.
    * \param interval Collection interval.
    * \param dims Dimensions of grid.
    */
-  grid2D_metrics_collector(const std::string& ofname,
-                              const types::timestep& interval,
-                              const math::vector2u& dims)
-      : base_metrics_collector(ofname, interval, true),
+  grid2D_metrics_collector(const std::string& ofname_stem,
+                           const types::timestep& interval,
+                           const math::vector2u& dims)
+      : base_metrics_collector(ofname_stem, interval, output_mode::ekCREATE),
         m_stats(dims.x(), dims.y()) {}
 
 
