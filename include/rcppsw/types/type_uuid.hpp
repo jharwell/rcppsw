@@ -69,7 +69,7 @@ NS_START(constants);
  * \brief Null identifier to indicate an entity does not have an ID associated
  * with it.
  */
-static type_uuid kNoUUID = type_uuid(-1);
+extern type_uuid kNoUUID;
 
 NS_END(constants, types, rcppsw);
 

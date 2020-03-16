@@ -113,13 +113,23 @@ class base_fsm : public er::client<base_fsm> {
   uint8_t last_state(void) const { return m_last_state; }
 
   /**
+   * \brief Injects a signal of the specified type into the state machine,
+   * causing the state machine to execute and process the signal in its current
+   * state. This is the main means of running an FSM. Suitable for handling
+   * signals from within FSM states, and allowing outside classes to send
+   * whatever signals they want to the FSM.
+   */
+  void inject_event(int signal, int type);
+
+  /**
    * \brief Initialize/reset the state machine.
    */
   virtual void init(void);
 
  protected:
   /**
-   * \brief Get the data associated with an event injected into the state machine.
+   * \brief Get the data associated with an event injected into the state
+   * machine.
    */
   const event_data* event_data_get(void) const { return m_event_data.get(); }
   event_data* event_data_get(void) { return m_event_data.get(); }

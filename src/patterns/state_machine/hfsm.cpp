@@ -83,10 +83,6 @@ void hfsm::state_engine_step(const state_map_ex_row* const c_row_ex) {
   } /* while() */
 } /* state_engine_step() */
 
-void hfsm::inject_event(int signal, int type) {
-  external_event(current_state(), std::make_unique<event_data>(signal, type));
-} /* inject event */
-
 void hfsm::change_parent(uint8_t state,
                          rcppsw::patterns::fsm::state* new_parent) {
   auto* row = state_map(state);

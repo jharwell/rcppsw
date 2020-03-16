@@ -203,4 +203,8 @@ void base_fsm::update_state(uint8_t new_state) {
   m_current_state = new_state;
 } /* update_state() */
 
+void base_fsm::inject_event(int signal, int type) {
+  external_event(current_state(), std::make_unique<event_data>(signal, type));
+} /* inject event */
+
 NS_END(fsm, patterns, rcppssw);

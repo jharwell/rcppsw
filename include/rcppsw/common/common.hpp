@@ -307,6 +307,14 @@ using detected_t =
 template <class TFailType, template <class...> class TFuncDecltype, class... Args>
 using detected_or = detail::detector<TFailType, void, TFuncDecltype, Args...>;
 
+template <typename T, typename U, typename = void>
+struct can_static_cast : std::false_type {};
+
+template <typename T, typename U>
+struct can_static_cast<T, U,
+                       std::void_t<decltype(static_cast<U>(std::declval<T>()))>>
+    : std::true_type {};
+
 /*******************************************************************************
  * String Conversion Templates
  ******************************************************************************/

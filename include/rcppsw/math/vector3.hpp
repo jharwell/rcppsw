@@ -122,6 +122,8 @@ class vector3 {
    */
   bool is_pd(void) const { return m_x > 0 && m_y > 0 && m_z > 0; }
 
+  vector2<T> to_2D(void) const { return vector2<T>(x(), y()); }
+
   /**
    * \brief Sets the vector contents from Cartesian coordinates.
    *
@@ -180,17 +182,17 @@ class vector3 {
   /**
    * \brief Calculates the projection of this vector onto the XY plane.
    */
-  vector2<T> project_on_xy(void) const { return vector2(m_x, m_y); }
+  vector2<T> project_on_xy(void) const { return vector2<T>(m_x, m_y); }
 
   /**
    * \brief Calculates the projection of this vector onto the YZ plane.
    */
-  vector2<T> project_on_yz(void) const { return vector2(m_y, m_z); }
+  vector2<T> project_on_yz(void) const { return vector2<T>(m_y, m_z); }
 
   /**
    * \brief Calculates the projection of this vector onto the XZ plane.
    */
-  vector2<T> project_on_xz(void) const { return vector2(m_x, m_z); }
+  vector2<T> project_on_xz(void) const { return vector2<T>(m_x, m_z); }
 
   sphere_vector<T> to_spherical(void) const {
     double radius = length();
@@ -401,6 +403,9 @@ RCPPSW_MATH_VEC_DIRECT_CONV3D(i);
 RCPPSW_MATH_VEC_SCALED_CONV3D(u);
 RCPPSW_MATH_VEC_SCALED_CONV3D(i);
 RCPPSW_MATH_VEC_CONV3U(d);
+
+template<class T>
+vector2<T> to_2D(const vector3<T>& v) { return v.to_2D(); }
 
 NS_END(math, rcppsw);
 

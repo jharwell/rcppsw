@@ -54,11 +54,13 @@ class grid3D_metrics_collector : public metrics::base_metrics_collector {
    * \param ofname_stem The output file name.
    * \param interval Collection interval.
    * \param dims Dimensions of grid.
+   * \param mode The selected output mode.
    */
   grid3D_metrics_collector(const std::string& ofname_stem,
                            const types::timestep& interval,
-                           const math::vector3u& dims)
-      : base_metrics_collector(ofname_stem, interval, output_mode::ekCREATE),
+                           const math::vector3u& dims,
+                           const output_mode& mode)
+      : base_metrics_collector(ofname_stem, interval, mode),
         m_stats(dims.x(), dims.y(), dims.z()) {}
 
 
@@ -79,7 +81,7 @@ class grid3D_metrics_collector : public metrics::base_metrics_collector {
   }
 
   boost::optional<std::string> csv_line_build(void) override {
-    if (!((timestep() + 1) % interval() == 0)) {
+    if (!(timestep() % interval() == 0)) {
       return boost::none;
     }
     std::string line;
@@ -102,10 +104,10 @@ class grid3D_metrics_collector : public metrics::base_metrics_collector {
   } /* csv_line_build() */
 
  protected:
-  void inc_cell_count(const math::vector3u& c) {
-    m_stats.access(c) += 1;
+  void inc_cell_count(const math::vector3u& c, size_t count = 1) {
+    m_stats.access(c) += count;
   }
-  void inc_total_count(void) { ++m_total_count; }
+  void inc_total_count(size_t count = 1) { m_total_count += count; }
   size_t xsize(void) const { return m_stats.xsize(); }
   size_t ysize(void) const { return m_stats.ysize(); }
   size_t zsize(void) const { return m_stats.zsize(); }
@@ -113,7 +115,7 @@ class grid3D_metrics_collector : public metrics::base_metrics_collector {
  private:
   /* clang-format off */
   rcppsw::ds::grid3D<uint> m_stats;
-  uint                     m_total_count{0};
+  size_t                   m_total_count{0};
   /* clang-format on */
 };
 

@@ -41,6 +41,7 @@ RCPPSW_WARNING_DISABLE_GLOBAL_CTOR()
 
 const radians radians::kPI(M_PI);                  // NOLINT
 const radians radians::kTWO_PI(M_PI * 2.0);        // NOLINT
+const radians radians::kPI_OVER_TWO(M_PI / 2.0);   // NOLINT
 const radians radians::kPI_OVER_THREE(M_PI / 3.0); // NOLINT
 const radians radians::kPI_OVER_FOUR(M_PI / 4.0);  // NOLINT
 const radians radians::kZERO(0.0);                 // NOLINT

@@ -32,7 +32,6 @@
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, metrics);
-namespace fs = std::filesystem;
 
 /*******************************************************************************
  * Constructors/Destructor
@@ -54,7 +53,7 @@ bool base_metrics_collector::csv_line_write(void) {
       m_ofile << rcppsw::to_string(m_timestep) + mc_separator + *line
               << std::endl;
     } else if (output_mode::ekTRUNCATE == mc_output_mode) {
-      fs::resize_file(mc_ofname_stem + mc_ofname_ext, 0);
+      std::filesystem::resize_file(mc_ofname_stem + mc_ofname_ext, 0);
       m_ofile.seekp(0);
       csv_header_write();
       m_ofile << *line << std::endl;

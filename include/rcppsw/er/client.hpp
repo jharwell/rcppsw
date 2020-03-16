@@ -48,6 +48,7 @@
 #include <log4cxx/ndc.h>
 #include <log4cxx/patternlayout.h>
 #include <log4cxx/xml/domconfigurator.h>
+#include <iostream>
 #endif
 
 #include <cassert>
@@ -69,7 +70,7 @@
 #if (LIBRA_ER == LIBRA_ER_FATAL)
 
 #define ER_FATAL(...) \
-  { ER_REPORT(__VA_ARGS__); }
+  { ER_REPORT(__VA_ARGS__) }
 #define ER_REPORT(msg, ...) \
   { printf(msg "\n", ##__VA_ARGS__); }
 
@@ -235,6 +236,7 @@
 #define ER_CLIENT_INIT(name)                                                 \
   rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>( \
       name)
+
 #else
 #define ER_CLIENT_INIT(name) \
   rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>()
@@ -275,6 +277,16 @@
 #define ER_NDC_POP(...) \
   rcppsw::er::client<   \
       typename std::remove_reference<decltype(*this)>::type>::pop_ndc()
+
+/**
+ * \def ER_ENV_VERIFY()
+ *
+ * Verify the correct environment variables were set up for event reporting
+ * before the application was launched.
+ */
+#define ER_ENV_VERIFY(...)                                              \
+  rcppsw::er::client<                                                   \
+                     typename std::remove_reference<decltype(*this)>::type>::env_verify()
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -375,6 +387,18 @@ class client {
    */
   log4cxx::LoggerPtr logger(void) const { return m_logger; }
 
+  /**
+   * \brief Verify that the execution environment was properly set up for
+   * logging, and abort the program if it was not.
+   */
+  void env_verify(void) {
+    if (const char* env_p = std::getenv("LOG4CXX_CONFIGURATION")) {
+      ER_LOGGING_INIT(std::string(env_p));
+    } else {
+      std::cerr << "LOG4CXX_CONFIGURATION not defined" << std::endl;
+      std::exit(EXIT_FAILURE);
+    }
+  }
 #else
   client(void) = default;
   void logfile_set(const std::string&) {}
@@ -382,6 +406,8 @@ class client {
   std::string logger_name(void) const { return ""; }
   void push_ndc(const std::string&) {}
   void pop_ndc(void) {}
+  bool env_verify(void) { return true; }
+
 #endif /* LIBRA_ER >= LIBRA_ER_ALL */
 
   virtual ~client(void) = default;
@@ -400,6 +426,7 @@ class client {
 #endif  /* LIBRA_ER >= LIBRA_ER_ALL */
   /* clang-format on */
 };
+
 
 template <typename T>
 bool client<T>::m_initialized = false;

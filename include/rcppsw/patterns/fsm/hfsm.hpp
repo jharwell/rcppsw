@@ -63,13 +63,6 @@ class hfsm : public base_fsm, public er::client<hfsm> {
   }
 
   /**
-   * \brief Injects a signal of the specified type into the state machine,
-   * causing the state machine to execute and process the signal. This is the
-   * main means of running a \ref hfsm.
-   */
-  void inject_event(int signal, int type);
-
-  /**
    * \brief Change the parent state of the specified state to a new state.
    *
    * \param state The state within THIS state machine to change the parent of.

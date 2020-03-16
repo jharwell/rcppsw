@@ -1,7 +1,7 @@
 /**
- * \file base_config.hpp
+ * \file type_uuid.cpp
  *
- * \copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2020 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,36 +18,19 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONFIG_BASE_CONFIG_HPP_
-#define INCLUDE_RCPPSW_CONFIG_BASE_CONFIG_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/types/type_uuid.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, config);
+NS_START(rcppsw, types, constants);
 
 /*******************************************************************************
- * Structure Definitions
+ * Global Variables
  ******************************************************************************/
-/**
- * \struct base_config
- * \ingroup config
- *
- * \brief A stub base class for any and all derived configuration class types
- * that may need polymorphism or covariance.
- */
-struct base_config {
-  base_config(void) = default;
-  virtual ~base_config(void) = default;
-  base_config(const base_config&) = default;
-  base_config& operator=(const base_config&) = default;
-};
+type_uuid kNoUUID(-1);
 
-NS_END(config, config);
-
-#endif /* INCLUDE_RCPPSW_CONFIG_BASE_CONFIG_HPP_ */
+NS_END(constants, types, rcppsw);

@@ -134,8 +134,8 @@ class poisson_queue {
   void enqueue(const T& item, const types::timestep& t) {
     ++m_enqueue.md.total_count;
     ++m_enqueue.md.count;
-    m_enqueue.md.interval_accum = types::timestep(t - m_enqueue.last_op_time);
-    m_enqueue.md.total_interval_accum =
+    m_enqueue.md.interval_accum += types::timestep(t - m_enqueue.last_op_time);
+    m_enqueue.md.total_interval_accum +=
         types::timestep(t - m_enqueue.last_op_time);
 
     m_enqueue.last_op_time = t;
@@ -158,8 +158,8 @@ class poisson_queue {
   boost::optional<T> dequeue(const types::timestep& t, bool fake) {
     ++m_dequeue.md.count;
     ++m_dequeue.md.total_count;
-    m_dequeue.md.interval_accum = types::timestep(t - m_dequeue.last_op_time);
-    m_dequeue.md.total_interval_accum =
+    m_dequeue.md.interval_accum += types::timestep(t - m_dequeue.last_op_time);
+    m_dequeue.md.total_interval_accum +=
         types::timestep(t - m_dequeue.last_op_time);
 
     m_dequeue.last_op_time = t;

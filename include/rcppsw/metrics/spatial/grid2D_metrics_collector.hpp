@@ -55,11 +55,13 @@ class grid2D_metrics_collector : public metrics::base_metrics_collector {
    * \param ofname_stem The output file name stem.
    * \param interval Collection interval.
    * \param dims Dimensions of grid.
+   * \param mode The selected output mode.
    */
   grid2D_metrics_collector(const std::string& ofname_stem,
                            const types::timestep& interval,
-                           const math::vector2u& dims)
-      : base_metrics_collector(ofname_stem, interval, output_mode::ekCREATE),
+                           const math::vector2u& dims,
+                           const output_mode& mode)
+      : base_metrics_collector(ofname_stem, interval, mode),
         m_stats(dims.x(), dims.y()) {}
 
 
@@ -78,7 +80,7 @@ class grid2D_metrics_collector : public metrics::base_metrics_collector {
   }
 
   boost::optional<std::string> csv_line_build(void) override {
-    if (!((timestep() + 1) % interval() == 0)) {
+    if (!(timestep() % interval() == 0)) {
       return boost::none;
     }
     std::string line;

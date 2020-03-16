@@ -196,7 +196,7 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
    */
   template <class T>
   std::string csv_entry_tsavg(const T& sum, bool last = false) const {
-    return rcppsw::to_string(static_cast<double>(sum) / (timestep() + 1).v()) +
+    return rcppsw::to_string(static_cast<double>(sum) / timestep().v()) +
            ((last) ? "" : separator());
   }
 
