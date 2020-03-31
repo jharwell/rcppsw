@@ -58,15 +58,32 @@ class vector3 {
   /**
    * \brief Computes the square distance between the passed vectors.
    */
-  static T square_distance(const vector3& v1, const vector3& v2) {
+  static T square_distance(const vector3<T>& v1, const vector3<T>& v2) {
     return (v1 - v2).square_length();
   }
 
   /**
    * \brief Computes the distance between the passed vectors.
    */
-  static T distance(const vector3& v1, const vector3& v2) {
+  static T distance(const vector3<T>& v1, const vector3<T>& v2) {
     return (v1 - v2).length();
+  }
+
+  /**
+   * \brief Returns the absolute difference between the passed vectors.
+   */
+  static vector3<T> abs_diff(const vector3<T>& v1, const vector3<T>& v2) {
+    vector3<T> ret = v1 - v2;
+    if (ret.m_x < 0) {
+      ret.m_x *= T{-1};
+    }
+    if (ret.m_y < 0) {
+      ret.m_y *= T{-1};
+    }
+    if (ret.m_z < 0) {
+      ret.m_z *= T{-1};
+    }
+    return ret;
   }
 
   /**
@@ -254,7 +271,9 @@ class vector3 {
    * \brief Needed for using vectors as keys in a map.
    */
   bool operator<(const vector3& other) const {
-    return (m_x < other.m_x) || ((m_x == other.m_x) && (m_y < other.m_y));
+    return (m_x < other.m_x) ||
+        ((m_x == other.m_x) && (m_y < other.m_y)) ||
+        ((m_x == other.m_x) && (m_y == other.m_y) && (m_z <= other.m_z));
   }
 
   /**

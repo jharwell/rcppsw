@@ -206,6 +206,7 @@
   RCSW_WARNING_DISABLE(-Wmissing-prototypes)
 #define RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...) \
   RCSW_WARNING_DISABLE(-Wglobal-constructors)
+#define RCPPSW_WARNING_DISABLE_OVERLOADED_VIRTUAL(...)
 /* clang-format on */
 
 #elif defined(__GNUC__)
@@ -213,6 +214,8 @@
 #define RCPPSW_WARNING_DISABLE_MISSING_VAR_DECL(...)
 #define RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...)
 #define RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...)
+#define RCPPSW_WARNING_DISABLE_OVERLOADED_VIRTUAL(...)  \
+  RCSW_WARNING_DISABLE(-Woverloaded-virtual)
 
 #endif /* __INTEL_COMPILER__ */
 

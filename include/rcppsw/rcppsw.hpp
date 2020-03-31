@@ -184,6 +184,8 @@ namespace prototype {}
  * design pattern.
  */
 namespace decorator {}
+
+namespace pimpl {}
 } /* namespace patterns */
 
 /** @} */
@@ -277,5 +279,6 @@ namespace rpvisitor = rcppsw::patterns::visitor;
 namespace rpfactory = rcppsw::patterns::factory;
 namespace rpprototype = rcppsw::patterns::prototype;
 namespace rpdecorator = rcppsw::patterns::decorator;
+namespace rppimpl = rcppsw::patterns::pimpl;
 
 #endif /* INCLUDE_RCPPSW_RCPPSW_HPP_ */
