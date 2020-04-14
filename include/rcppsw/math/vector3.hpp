@@ -58,48 +58,31 @@ class vector3 {
   /**
    * \brief Computes the square distance between the passed vectors.
    */
-  static T square_distance(const vector3<T>& v1, const vector3<T>& v2) {
+  static double square_distance(const vector3<T>& v1, const vector3<T>& v2) {
     return (v1 - v2).square_length();
   }
 
   /**
    * \brief Computes the distance between the passed vectors.
    */
-  static T distance(const vector3<T>& v1, const vector3<T>& v2) {
+  static double distance(const vector3<T>& v1, const vector3<T>& v2) {
     return (v1 - v2).length();
-  }
-
-  /**
-   * \brief Returns the absolute difference between the passed vectors.
-   */
-  static vector3<T> abs_diff(const vector3<T>& v1, const vector3<T>& v2) {
-    vector3<T> ret = v1 - v2;
-    if (ret.m_x < 0) {
-      ret.m_x *= T{-1};
-    }
-    if (ret.m_y < 0) {
-      ret.m_y *= T{-1};
-    }
-    if (ret.m_z < 0) {
-      ret.m_z *= T{-1};
-    }
-    return ret;
   }
 
   /**
    * \brief The positive X axis.
    */
-  static const vector3 X; // NOLINT
+  static const vector3<T> X; // NOLINT
 
   /**
    * \brief The positive Y axis.
    */
-  static const vector3 Y; // NOLINT
+  static const vector3<T> Y; // NOLINT
 
   /**
    * \brief The positive Z axis.
    */
-  static const vector3 Z; // NOLINT
+  static const vector3<T> Z; // NOLINT
 
   /**
    * \brief Initializes vector to (0,0,0)
@@ -114,7 +97,7 @@ class vector3 {
    * \param z The Z coordinate.
    */
   constexpr vector3(const T& x, const T& y, const T& z)
-      : m_x(x), m_y(y), m_z(z) {}
+  : m_x(x), m_y(y), m_z(z) {}
 
   /**
    * \brief Initializes the 3D vector from a 2D vector, setting the Z value to
@@ -176,6 +159,8 @@ class vector3 {
    *
    * \return A reference to the normalized vector.
    */
+  template <typename U = T,
+            RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   vector3& normalize(void) {
     *this /= this->length();
     return *this;
@@ -211,6 +196,8 @@ class vector3 {
    */
   vector2<T> project_on_xz(void) const { return vector2<T>(m_x, m_z); }
 
+  template <typename U = T,
+            RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   sphere_vector<T> to_spherical(void) const {
     double radius = length();
     return sphere_vector<T>(radius,
@@ -270,10 +257,11 @@ class vector3 {
   /**
    * \brief Needed for using vectors as keys in a map.
    */
+  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
   bool operator<(const vector3& other) const {
     return (m_x < other.m_x) ||
         ((m_x == other.m_x) && (m_y < other.m_y)) ||
-        ((m_x == other.m_x) && (m_y == other.m_y) && (m_z <= other.m_z));
+        ((m_x == other.m_x) && (m_y == other.m_y) && (m_z < other.m_z));
   }
 
   /**
@@ -299,14 +287,14 @@ class vector3 {
     return *this;
   }
 
-  vector3& operator*=(T val) {
+  vector3& operator*=(const T& val) {
     m_x *= val;
     m_y *= val;
     m_z *= val;
     return *this;
   }
 
-  vector3& operator/=(T val) {
+  vector3& operator/=(const T& val) {
     m_x /= val;
     m_y /= val;
     m_z /= val;
@@ -325,19 +313,19 @@ class vector3 {
     return res;
   }
 
-  vector3 operator*(T val) const {
+  vector3 operator*(const T& val) const {
     vector3 res(*this);
     res *= val;
     return res;
   }
 
-  vector3 operator/(T val) const {
+  vector3 operator/(const T& val) const {
     vector3 res(*this);
     res /= val;
     return res;
   }
 
-  vector3 operator-(void) const { return vector3(-m_x, -m_y); }
+  vector3 operator-(void) const { return vector3(-m_x, -m_y, -m_z); }
 
   friend std::ostream& operator<<(std::ostream& stream, const vector3& v) {
     stream << "(" << v.m_x << "," << v.m_y << "," << v.m_z << ")";
@@ -355,7 +343,7 @@ class vector3 {
   }
   std::string to_str(void) const {
     return "(" + rcppsw::to_string(m_x) + "," + rcppsw::to_string(m_y) + "," +
-           rcppsw::to_string(m_z) + ")";
+        rcppsw::to_string(m_z) + ")";
   }
 
  private:
@@ -366,6 +354,9 @@ class vector3 {
   /* clang-format on */
 };
 
+/*******************************************************************************
+ * Template Specializations
+ ******************************************************************************/
 /**
  * \brief Specialization of \ref vector3 for signed integers.
  */
@@ -375,6 +366,11 @@ using vector3i = vector3<int>;
  * \brief Specialization of \ref vector3 for unsigned integers.
  */
 using vector3u = vector3<uint>;
+
+/**
+ * \brief Specialization of \ref vector3 for size_t.
+ */
+using vector3z = vector3<size_t>;
 
 /**
  * \brief Specialization of \ref vector3 for doubles.
@@ -388,40 +384,44 @@ using vector3d = vector3<double>;
  * \brief Convert vector3{i,u} -> vector3d directly, without applying any
  * scaling.
  */
-#define RCPPSW_MATH_VEC_DIRECT_CONV3D(prefix)                             \
+#define RCPPSW_MATH_VEC3_DIRECT_CONVF(prefix)                           \
   static inline vector3d prefix##vec2dvec(const vector3##prefix& other) { \
-    return vector3d(other.x(), other.y(), other.z());                     \
+    return vector3d(other.x(), other.y(), other.z());                   \
   }
 
 /**
  * \brief Convert vector3{i,u} -> vector3d, applying a multiplicative scaling
  * factor.
  */
-#define RCPPSW_MATH_VEC_SCALED_CONV3D(prefix)                                 \
-  static inline vector3d prefix##vec2dvec(const vector3##prefix& other,       \
-                                          double scale) {                     \
+#define RCPPSW_MATH_VEC3_SCALED_CONVF(prefix)                           \
+  static inline vector3d prefix##vec2dvec(const vector3##prefix& other, \
+                                          double scale) {               \
     return vector3d(other.x() * scale, other.y() * scale, other.z() * scale); \
   }
 
 /**
- * \brief Convert vector3d -> vector3u, applying a divisive scaling factor.
+ * \brief Convert vector3d -> vector3{u,z}, applying a divisive scaling factor.
  */
-#define RCPPSW_MATH_VEC_CONV3U(prefix)                                  \
-  static inline vector3u prefix##vec2uvec(const vector3##prefix& other, \
-                                          double scale) {               \
-    return vector3u(static_cast<uint>(std::round(other.x() / scale)),   \
-                    static_cast<uint>(std::round(other.y() / scale)),   \
-                    static_cast<uint>(std::round(other.z() / scale)));  \
+#define RCPPSW_MATH_VEC3_CONVD(dest_prefix, dest_type)               \
+  static inline vector3##dest_prefix dvec2##dest_prefix##vec(           \
+      const vector3d& other,                                            \
+      double scale) {                                                   \
+    return vector3##dest_prefix(static_cast<dest_type>(std::round(other.x() / scale)), \
+                                static_cast<dest_type>(std::round(other.y() / scale)), \
+                                static_cast<dest_type>(std::round(other.z() / scale))); \
   }
 
 /*******************************************************************************
  * Free Functions
  ******************************************************************************/
-RCPPSW_MATH_VEC_DIRECT_CONV3D(u);
-RCPPSW_MATH_VEC_DIRECT_CONV3D(i);
-RCPPSW_MATH_VEC_SCALED_CONV3D(u);
-RCPPSW_MATH_VEC_SCALED_CONV3D(i);
-RCPPSW_MATH_VEC_CONV3U(d);
+RCPPSW_MATH_VEC3_DIRECT_CONVF(u);
+RCPPSW_MATH_VEC3_DIRECT_CONVF(i);
+RCPPSW_MATH_VEC3_DIRECT_CONVF(z);
+RCPPSW_MATH_VEC3_SCALED_CONVF(u);
+RCPPSW_MATH_VEC3_SCALED_CONVF(i);
+RCPPSW_MATH_VEC3_SCALED_CONVF(z);
+RCPPSW_MATH_VEC3_CONVD(z, size_t);
+RCPPSW_MATH_VEC3_CONVD(u, uint);
 
 template<class T>
 vector2<T> to_2D(const vector3<T>& v) { return v.to_2D(); }

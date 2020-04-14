@@ -58,11 +58,10 @@ NS_START(rcppsw, ds);
 template <typename TupleTypes>
 class stacked_grid2D {
  public:
-  stacked_grid2D(const types::discretize_ratio& resolution,
-                 double x_max,
-                 double y_max)
+  stacked_grid2D(const math::vector2d& dims,
+                 const types::discretize_ratio& resolution)
       : m_layers(kStackSize) {
-    add_layers<kStackSize - 1>(resolution, x_max, y_max);
+    add_layers<kStackSize - 1>(dims, resolution);
   }
 
   virtual ~stacked_grid2D(void) { rm_layers<kStackSize - 1>(); }
@@ -108,12 +107,12 @@ class stacked_grid2D {
    * \param d The discrete coordinate pair.
    */
   template <size_t Index>
-  typename layer_value_type<Index>::value_type& access(const math::vector2u& d) {
+  typename layer_value_type<Index>::value_type& access(const math::vector2z& d) {
     return access<Index>(d.x(), d.y());
   }
   template <size_t Index>
   const typename layer_value_type<Index>::value_type& access(
-      const math::vector2u& d) const {
+      const math::vector2z& d) const {
     return access<Index>(d.x(), d.y());
   }
 

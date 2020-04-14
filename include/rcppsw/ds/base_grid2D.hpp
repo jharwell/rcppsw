@@ -64,9 +64,15 @@ class base_grid2D {
    * the grid (\ref grid2D, \ref overlay_grid2D) can reduce code duplication.
    */
   virtual T& access(size_t i, size_t j) = 0;
-  virtual T& access(const math::vector2u& c) = 0;
 
-  const T& access(const math::vector2u& c) const {
+  T& access(const math::vector2z& c) { return access(c.x(), c.y()); }
+
+  RCSW_PURE T& operator[](const math::vector2z& c) { return access(c); }
+  RCSW_PURE const T& operator[](const math::vector2z& c) const {
+    return access(c);
+  }
+
+  const T& access(const math::vector2z& c) const {
     return const_cast<base_grid2D*>(this)->access(c);
   }
   const T& access(size_t i, size_t j) const {

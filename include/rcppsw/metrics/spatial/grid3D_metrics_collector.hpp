@@ -58,8 +58,8 @@ class grid3D_metrics_collector : public metrics::base_metrics_collector {
    */
   grid3D_metrics_collector(const std::string& ofname_stem,
                            const types::timestep& interval,
-                           const math::vector3u& dims,
-                           const output_mode& mode)
+                           const output_mode& mode,
+                           const math::vector3z& dims)
       : base_metrics_collector(ofname_stem, interval, mode),
         m_stats(dims.x(), dims.y(), dims.z()) {}
 
@@ -104,7 +104,7 @@ class grid3D_metrics_collector : public metrics::base_metrics_collector {
   } /* csv_line_build() */
 
  protected:
-  void inc_cell_count(const math::vector3u& c, size_t count = 1) {
+  void inc_cell_count(const math::vector3z& c, size_t count = 1) {
     m_stats.access(c) += count;
   }
   void inc_total_count(size_t count = 1) { m_total_count += count; }

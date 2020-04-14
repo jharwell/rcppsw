@@ -61,17 +61,23 @@ class base_grid3D {
    * \brief Return a reference to the element at position (i, j) in the grid.
    *
    * This is provided in the base class so that the pointer/object variants of
-   * the grid (\ref grid3D, \ref overlay_grid3D) can reduce code duplication.
+   * the grid (\ref grid3D, etc.) can reduce code duplication.
    */
   virtual T& access(size_t i, size_t j, size_t k) = 0;
-  virtual T& access(const math::vector3u& c) = 0;
+  T& access(const math::vector3z& c)  { return access(c.x(), c.y(), c.z()); }
 
-  const T& access(const math::vector3u& c) const {
+  const T& access(const math::vector3z& c) const {
     return const_cast<base_grid3D*>(this)->access(c);
   }
   const T& access(size_t i, size_t j, size_t k) const {
     return const_cast<base_grid3D*>(this)->access(i, j, k);
   }
+
+  RCSW_PURE T& operator[](const math::vector3z& c) { return access(c); }
+  RCSW_PURE const T& operator[](const math::vector3z& c) const {
+    return access(c);
+  }
+
 };
 
 NS_END(ds, rcppsw);

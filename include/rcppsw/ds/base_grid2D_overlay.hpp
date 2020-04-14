@@ -1,5 +1,5 @@
 /**
- * \file grid2D_overlay_impl.hpp
+ * \file base_grid2D_overlay.hpp
  *
  * \copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_IMPL_HPP_
-#define INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_IMPL_HPP_
+#ifndef INCLUDE_RCPPSW_DS_BASE_GRID2D_OVERLAY_HPP_
+#define INCLUDE_RCPPSW_DS_BASE_GRID2D_OVERLAY_HPP_
 
 /*******************************************************************************
  * Includes
@@ -39,7 +39,7 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * \class grid2D_overlay_impl
+ * \class base_grid2D_overlay
  * \ingroup ds
  *
  * \brief A 2D logical grid that is overlayed over a continuous environment. It
@@ -48,7 +48,7 @@ NS_START(rcppsw, ds);
  * 25 grid of cells with a resolution of 0.2).
  */
 template <typename T>
-class grid2D_overlay_impl : public base_grid2D<T> {
+class base_grid2D_overlay : public base_grid2D<T> {
  public:
   using typename base_grid2D<T>::index_range;
 
@@ -59,45 +59,42 @@ class grid2D_overlay_impl : public base_grid2D<T> {
   using circle_range_ret_type =
       std::pair<typename index_range::index, typename index_range::index>;
 
-  grid2D_overlay_impl(types::discretize_ratio resolution,
-                      double x_max,
-                      double y_max)
-      : base_grid2D<T>(),
-        m_resolution(resolution),
-        m_x_max(x_max),
-        m_y_max(y_max) {}
+  base_grid2D_overlay(const math::vector2d& dim,
+                      const types::discretize_ratio& resolution)
+      : mc_resolution(resolution),
+        mc_dim(dim) {}
 
-  virtual ~grid2D_overlay_impl(void) = default;
+  virtual ~base_grid2D_overlay(void) = default;
 
   /**
    * \brief Return the resolution of the grid.
    */
-  types::discretize_ratio resolution(void) const { return m_resolution; }
+  types::discretize_ratio resolution(void) const { return mc_resolution; }
 
   /**
    * \brief Get the size of the X dimension of the discretized subgrid, at
    * whatever the resolution specified during object construction was.
    */
   size_t xdsize(void) const {
-    return static_cast<size_t>(std::ceil(m_x_max / m_resolution.v()));
+    return static_cast<size_t>(std::ceil(mc_dim.x() / mc_resolution.v()));
   }
   /**
    * \brief Get the size of the Y dimension of the discretized subgrid, at
    * whatever the resolution specified during object construction was.
    */
   size_t ydsize(void) const {
-    return static_cast<size_t>(std::ceil(m_y_max / m_resolution.v()));
+    return static_cast<size_t>(std::ceil(mc_dim.y() / mc_resolution.v()));
   }
 
   /**
    * \brief Get the size of the X dimension (non-discretized).
    */
-  double xrsize(void) const { return m_x_max; }
+  double xrsize(void) const { return mc_dim.x(); }
 
   /**
    * \brief Get the size of the Y dimension (non-discretized).
    */
-  double yrsize(void) const { return m_y_max; }
+  double yrsize(void) const { return mc_dim.y(); }
 
   /**
    * \brief Get the range in the X direction resulting from applying a circle
@@ -134,7 +131,7 @@ class grid2D_overlay_impl : public base_grid2D<T> {
    * \return A pair containing the upper/lower Y coordinates of the circle when
    * applied to the specified Y coordinate.
    */
-  circle_range_ret_type circle_yrange_at_point(size_t y, uint radius) const {
+  circle_range_ret_type circle_yrange_at_point(size_t y, size_t radius) const {
     typename index_range::index lower_y =
         static_cast<typename index_range::index>(
             std::max<int>(static_cast<int>(0),
@@ -150,12 +147,11 @@ class grid2D_overlay_impl : public base_grid2D<T> {
 
  private:
   /* clang-format off */
-  types::discretize_ratio m_resolution;
-  double                  m_x_max;
-  double                  m_y_max;
+  const types::discretize_ratio mc_resolution;
+  const math::vector2d          mc_dim;
   /* clang-format on */
 };
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_IMPL_HPP_ */
+#endif /* INCLUDE_RCPPSW_DS_BASE_GRID2D_OVERLAY_HPP_ */

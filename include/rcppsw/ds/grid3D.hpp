@@ -1,7 +1,7 @@
 /**
  * \file grid3D.hpp
  *
- * \copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2020 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -45,37 +45,72 @@ template <typename T>
 class grid3D : public base_grid3D<T> {
  public:
   using typename base_grid3D<T>::index_range;
+  using typename base_grid3D<T>::const_grid_view;
+  using typename base_grid3D<T>::grid_view;
+  using typename base_grid3D<T>::grid_type;
 
   using base_grid3D<T>::access;
 
-  explicit grid3D(const math::vector3u& dims)
+  explicit grid3D(const math::vector3z& dims)
       : grid3D(dims.x(), dims.y(), dims.z()) {}
 
   grid3D(size_t x_max, size_t y_max, size_t z_max)
       : m_cells(boost::extents[x_max][y_max][z_max]) {}
 
   T& access(size_t i, size_t j, size_t k) override {
-    return m_cells[static_cast<typename index_range::index>(i)]
-                  [static_cast<typename index_range::index>(j)]
-                  [static_cast<typename index_range::index>(k)];
-  }
-
-  RCSW_PURE T& access(const math::vector3u& c) override {
-    return access(c.x(), c.y(), c.z());
-  }
-
-  RCSW_PURE T& operator[](const math::vector3u& c) { return access(c); }
-  RCSW_PURE const T& operator[](const math::vector3u& c) const {
-    return access(c);
+    return m_cells[i][j][k];
   }
 
   size_t xsize(void) const { return m_cells.shape()[0]; }
   size_t ysize(void) const { return m_cells.shape()[1]; }
   size_t zsize(void) const { return m_cells.shape()[2]; }
 
+  /**
+   * \brief Get a view of a single layer within the grid.
+   *
+   * \param z 0-based index of layer within the grid.
+   *
+   * \return The layer.
+   */
+  grid_view layer(size_t z) {
+    return subgrid(math::vector3z(0, ysize(), z),
+                   math::vector3z(0, ysize(), z+1));
+  }
+
+  const_grid_view layer(size_t z) const {
+    return const_cast<grid3D<T>*>(this)->layer(z);
+  }
+
+  /**
+   * \brief Create a subgrid from a grid. The specified coordinates are
+   * inclusive.
+   *
+   * \return The subgrid.
+   */
+  grid_view subgrid(const math::vector3z& ll, const math::vector3z& ur) {
+    typename grid_type::index_gen indices;
+
+    index_range x(static_cast<typename index_range::index>(ll.x()),
+                  static_cast<typename index_range::index>(ur.x()),
+                  1);
+    index_range y(static_cast<typename index_range::index>(ll.y()),
+                  static_cast<typename index_range::index>(ur.y()),
+                  1);
+    index_range z(static_cast<typename index_range::index>(ll.z()),
+                  static_cast<typename index_range::index>(ur.z()),
+                  1);
+    return grid_view(m_cells[indices[x][y][z]]);
+  }
+
+  const_grid_view subgrid(const math::vector3z& ll,
+                          const math::vector3z& ur) const {
+    return const_cast<grid3D<T>*>(this)->subgrid(ll, ur);
+  }
+
+
  private:
   /* clang-format off */
-  typename base_grid3D<T>::grid_type m_cells;
+  grid_type m_cells;
   /* clang-format on */
 };
 
