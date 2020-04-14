@@ -56,26 +56,26 @@ class vector2 {
   /**
    * \brief Computes the square distance between the passed vectors.
    */
-  static T square_distance(const vector2& v1, const vector2& v2) {
+  static double square_distance(const vector2& v1, const vector2& v2) {
     return (v1 - v2).square_length();
   }
 
   /**
    * \brief Computes the distance between the passed vectors.
    */
-  static T distance(const vector2& v1, const vector2& v2) {
+  static double distance(const vector2& v1, const vector2& v2) {
     return (v1 - v2).length();
   }
 
   /**
    * \brief The positive X axis.
    */
-  static const vector2 X; // NOLINT
+  static const vector2<T> X; // NOLINT
 
   /**
    * \brief The positive Y axis.
    */
-  static const vector2 Y; // NOLINT
+  static const vector2<T> Y; // NOLINT
 
   /**
    * \brief Initializes vector to (0,0)
@@ -96,6 +96,8 @@ class vector2 {
    * \param length The vector length.
    * \param angle The vector angle.
    */
+  template <typename U = T,
+            RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   vector2(const T& length, const radians& angle) noexcept
       : m_x(std::cos(angle.value()) * length),
         m_y(std::sin(angle.value()) * length) {}
@@ -129,6 +131,8 @@ class vector2 {
    * \param length The length of the vector.
    * \param angle The angle of the vector (range [0,2pi)
    */
+  template <typename U = T,
+            RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   void set_from_polar(const T& length, const radians& angle) {
     m_x = std::cos(angle.value()) * length;
     m_y = std::sin(angle.value()) * length;
@@ -144,7 +148,7 @@ class vector2 {
   /**
    * Returns the length of this vector.
    */
-  T length(void) const RCSW_CHECK_RET { return std::sqrt(square_length()); }
+  double length(void) const RCSW_CHECK_RET { return std::sqrt(square_length()); }
 
   /**
    * \brief Normalizes this vector.
@@ -155,6 +159,8 @@ class vector2 {
    *
    * \return A reference to the normalized vector.
    */
+  template <typename U = T,
+            RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   vector2& normalize(void) {
     *this /= this->length();
     return *this;
@@ -232,6 +238,7 @@ class vector2 {
   /**
    * \brief Needed for using vectors as keys in a map.
    */
+  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
   bool operator<(const vector2& other) const {
     return (m_x < other.m_x) || ((m_x == other.m_x) && (m_y < other.m_y));
   }
@@ -321,6 +328,9 @@ class vector2 {
   /* clang-format on */
 };
 
+/*******************************************************************************
+ * Template Specializations
+ ******************************************************************************/
 /**
  * \brief Specialization of \ref vector2 for signed integers.
  */
@@ -330,6 +340,11 @@ using vector2i = vector2<int>;
  * \brief Specialization of \ref vector2 for unsigned integers.
  */
 using vector2u = vector2<uint>;
+
+/**
+ * \brief Specialization of \ref vector2 for size_t.
+ */
+using vector2z = vector2<size_t>;
 
 /**
  * \brief Specialization of \ref vector2 for doubles.
@@ -343,7 +358,7 @@ using vector2d = vector2<double>;
  * \brief Convert vector2{i,u} -> vector2d directly, without applying any
  * scaling.
  */
-#define RCPPSW_MATH_VEC_DIRECT_CONV2D(prefix)                             \
+#define RCPPSW_MATH_VEC2_DIRECT_CONVF(prefix)                             \
   static inline vector2d prefix##vec2dvec(const vector2##prefix& other) { \
     return vector2d(other.x(), other.y());                                \
   }
@@ -352,30 +367,33 @@ using vector2d = vector2<double>;
  * \brief Convert vector2{i,u} -> vector2d, applying a multiplicative scaling
  * factor.
  */
-#define RCPPSW_MATH_VEC_SCALED_CONV2D(prefix)                           \
+#define RCPPSW_MATH_VEC2_SCALED_CONVF(prefix)                           \
   static inline vector2d prefix##vec2dvec(const vector2##prefix& other, \
                                           double scale) {               \
     return vector2d(other.x() * scale, other.y() * scale);              \
   }
 
 /**
- * \brief Convert vector2d -> vector2u, applying a divisive scaling factor.
+ * \brief Convert vector2d -> vector2{u,z}, applying a divisive scaling factor.
  */
-#define RCPPSW_MATH_VEC_CONV2U(prefix)                                  \
-  static inline vector2u prefix##vec2uvec(const vector2##prefix& other, \
-                                          double scale) {               \
-    return vector2u(static_cast<uint>(std::round(other.x() / scale)),   \
-                    static_cast<uint>(std::round(other.y() / scale)));  \
+#define RCPPSW_MATH_VEC2_CONVD(dest_prefix, dest_type)                  \
+  static inline vector2##dest_prefix dvec2##dest_prefix##vec(const vector2d& other, \
+                                                             double scale) { \
+    return vector2##dest_prefix(static_cast<dest_type>(std::round(other.x() / scale)),   \
+                                 static_cast<dest_type>(std::round(other.y() / scale))); \
   }
 
 /*******************************************************************************
  * Free Functions
  ******************************************************************************/
-RCPPSW_MATH_VEC_DIRECT_CONV2D(u);
-RCPPSW_MATH_VEC_DIRECT_CONV2D(i);
-RCPPSW_MATH_VEC_SCALED_CONV2D(u);
-RCPPSW_MATH_VEC_SCALED_CONV2D(i);
-RCPPSW_MATH_VEC_CONV2U(d);
+RCPPSW_MATH_VEC2_DIRECT_CONVF(u);
+RCPPSW_MATH_VEC2_DIRECT_CONVF(i);
+RCPPSW_MATH_VEC2_DIRECT_CONVF(z);
+RCPPSW_MATH_VEC2_SCALED_CONVF(u);
+RCPPSW_MATH_VEC2_SCALED_CONVF(i);
+RCPPSW_MATH_VEC2_SCALED_CONVF(z);
+RCPPSW_MATH_VEC2_CONVD(z, size_t);
+RCPPSW_MATH_VEC2_CONVD(u, uint);
 
 NS_END(math, rcppsw);
 

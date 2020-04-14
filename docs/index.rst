@@ -10,8 +10,8 @@ exist in Boost, or that build on what boost provides. Includes such things as:
 - Logical task hierarchy, including executives capable of executing a task
   decomposition graph.
 
-- Data structures involved, such as logical occupancy
-  grids, multiprocessing/multithreading queues, vectors, type maps.
+- Data structures involved, such as 2D/3D grid graphs,
+  multiprocessing/multithreading queues/vectors, type maps.
 
 - Some reusable named type definitions.
 
@@ -94,7 +94,8 @@ script **should** be idempotent).
 Other Projects (in descending probability of interest)
 ------------------------------------------------------
 
-- `FORDYCA <https://fordyca.readthedocs.io>`_
-- `COSM <https://cosm.readthedocs.io>`_
-- `RCSW <https://rcsw.readthedocs.io>`_
-- `SIERRA <https://sierra.readthedocs.io>`_
+- `SILICON <https://swarm-robotics-silicon.readthedocs.io>`_
+- `FORDYCA <https://swarm-robotics-fordyca.readthedocs.io>`_
+- `COSM <https://swarm-robotics-cosm.readthedocs.io>`_
+- `SIERRA <https://swarm-robotics-sierra.readthedocs.io>`_
+- `RCSW <https://swarm-robotics-rcsw.readthedocs.io>`_

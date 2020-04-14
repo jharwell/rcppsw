@@ -70,7 +70,7 @@
 #define NS_END(...) RCSW_XFOR_EACH1(NS_END_, __VA_ARGS__)
 
 /**
- * \def RCPPSW_DECLDEF_WRAP(Func, member,...)
+ * \def RCPPSW_WRAP_DECLDEF(Func, member,...)
  *
  * Wrap a public function from a member variable (or even another member
  * function that returns an object that contains the function you want to
@@ -80,7 +80,7 @@
  *
  * Cannot be used to wrap overriden functions.
  */
-#define RCPPSW_DECLDEF_WRAP(Func, Member, ...)                                \
+#define RCPPSW_WRAP_DECLDEF(Func, Member, ...)                                \
   template <typename... Args>                                                 \
   auto Func(Args&&... args)                                                   \
       __VA_ARGS__->decltype(std::declval<decltype(Member)>().Func(args...)) { \
@@ -88,7 +88,7 @@
   }
 
 /**
- * \def RCPPSW_DECLDEF_OVERRIDE_WRAP(Func, member,...)
+ * \def RCPPSW_DECLDEF_WRAP_OVERRIDE(Func, member,...)
  *
  * Wrap a public function from a member variable (or even another member
  * function that returns an object that contains the function you want to
@@ -101,7 +101,7 @@
  * enclosing class implements the same interface as a member variable).
  */
 
-#define RCPPSW_DECLDEF_OVERRIDE_WRAP(Func, Member, ...)                         \
+#define RCPPSW_DECLDEF_WRAP_OVERRIDE(Func, Member, ...)                         \
   auto Func(void)                                                               \
       __VA_ARGS__->decltype(std::declval<decltype(Member)>().Func()) override { \
     return Member.Func();                                                       \

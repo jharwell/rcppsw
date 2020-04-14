@@ -29,21 +29,24 @@
 NS_START(rcppsw, math);
 
 /*******************************************************************************
- * Class Constants
+ * Template Instantiations
  ******************************************************************************/
-RCPPSW_WARNING_DISABLE_PUSH()
-RCPPSW_WARNING_DISABLE_GLOBAL_CTOR()
-
 template <>
-const vector2d vector2d::X(1.0, 0); // NOLINT
+const vector2u vector2u::X(1, 0); // NOLINT
 template <>
 const vector2i vector2i::X(1, 0); // NOLINT
+template <>
+const vector2z vector2z::X(1, 0); // NOLINT
+template <>
+const vector2d vector2d::X(1.0, 0.0); // NOLINT
 
 template <>
-const vector2d vector2d::Y(0, 1.0); // NOLINT
+const vector2u vector2u::Y(0, 1); // NOLINT
 template <>
 const vector2i vector2i::Y(0, 1); // NOLINT
-
-RCPPSW_WARNING_DISABLE_POP()
+template <>
+const vector2z vector2z::Y(0, 1); // NOLINT
+template <>
+const vector2d vector2d::Y(0.0, 1.0); // NOLINT
 
 NS_END(math, rcppsw);

@@ -55,6 +55,7 @@ class radians {
    */
   static const radians kPI;                // NOLINT
   static const radians kTWO_PI;            // NOLINT
+  static const radians kTHREE_PI_OVER_TWO; // NOLINT
   static const radians kPI_OVER_TWO;       // NOLINT
   static const radians kPI_OVER_THREE;     // NOLINT
   static const radians kPI_OVER_FOUR;      // NOLINT

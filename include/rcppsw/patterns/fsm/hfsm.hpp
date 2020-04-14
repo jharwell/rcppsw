@@ -125,7 +125,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
  */
 #define HFSM_STATE_DECLARE(FSM, state_name, event_data)          \
  public:                                                         \
-  int ST_##state_name(const event_data*);                        \
+  int ST_##state_name(event_data*);                        \
                                                                  \
  private:                                                        \
   rcppsw::patterns::fsm::                              \

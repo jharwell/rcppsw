@@ -60,7 +60,7 @@ class state {
    * \return integer indicating whether or not the event was handled.
    */
   virtual int invoke_state_action(base_fsm* sm,
-                                  const event_data* data) const = 0;
+                                  event_data* data) const = 0;
 };
 
 NS_END(fsm, patterns, rcppsw);

@@ -26,8 +26,8 @@
  ******************************************************************************/
 #include <boost/multi_array.hpp>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/math/vector3.hpp"
+#include "rcppsw/ds/utils.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -61,17 +61,131 @@ class base_grid3D {
    * \brief Return a reference to the element at position (i, j) in the grid.
    *
    * This is provided in the base class so that the pointer/object variants of
-   * the grid (\ref grid3D, \ref overlay_grid3D) can reduce code duplication.
+   * the grid (\ref grid3D, etc.) can reduce code duplication.
    */
   virtual T& access(size_t i, size_t j, size_t k) = 0;
-  virtual T& access(const math::vector3u& c) = 0;
 
-  const T& access(const math::vector3u& c) const {
+  /**
+   * \brief Get the discrete size of the X dimension of the grid (i.e. what is
+   * the array index in X?)
+   */
+  virtual size_t xdsize(void) const = 0;
+
+  /**
+   * \brief Get the discrete size of the Y dimension of the grid (i.e. what is
+   * the array index in Y?)
+   */
+  virtual size_t ydsize(void) const = 0;
+
+  /**
+   * \brief Get the discrete size of the Z dimension of the grid (i.e. what is
+   * the array index in Z?)
+   */
+  virtual size_t zdsize(void) const = 0;
+
+  T& access(const math::vector3z& c)  { return access(c.x(), c.y(), c.z()); }
+
+  const T& access(const math::vector3z& c) const {
     return const_cast<base_grid3D*>(this)->access(c);
   }
   const T& access(size_t i, size_t j, size_t k) const {
     return const_cast<base_grid3D*>(this)->access(i, j, k);
   }
+
+  RCSW_PURE T& operator[](const math::vector3z& c) { return access(c); }
+  RCSW_PURE const T& operator[](const math::vector3z& c) const {
+    return access(c);
+  }
+
+  /**
+   * \brief Get a view of a single layer within the grid.
+   *
+   * \param z 0-based index of layer within the grid.
+   *
+   * \return The layer.
+   */
+  grid_view layer(size_t z) {
+    return subgrid(math::vector3z(0, ydsize(), z),
+                   math::vector3z(0, ydsize(), z+1));
+  }
+
+  const_grid_view layer(size_t z) const {
+    return const_cast<base_grid3D<T>*>(this)->layer(z);
+  }
+
+  /**
+   * \brief Create a subgrid from a grid. The specified coordinates are
+   * inclusive.
+   *
+   * \return The subgrid.
+   */
+  grid_view subgrid(const math::vector3z& ll, const math::vector3z& ur) {
+    typename grid_type::index_gen indices;
+
+    index_range x(static_cast<typename index_range::index>(ll.x()),
+                  static_cast<typename index_range::index>(ur.x()),
+                  1);
+    index_range y(static_cast<typename index_range::index>(ll.y()),
+                  static_cast<typename index_range::index>(ur.y()),
+                  1);
+    index_range z(static_cast<typename index_range::index>(ll.z()),
+                  static_cast<typename index_range::index>(ur.z()),
+                  1);
+    return grid_view(grid()[indices[x][y][z]]);
+  }
+
+  const_grid_view subgrid(const math::vector3z& ll,
+                          const math::vector3z& ur) const {
+    typename grid_type::index_gen indices;
+    index_range x(static_cast<typename index_range::index>(ll.x()),
+                  static_cast<typename index_range::index>(ur.x()),
+                  1);
+    index_range y(static_cast<typename index_range::index>(ll.y()),
+                  static_cast<typename index_range::index>(ur.y()),
+                  1);
+    index_range z(static_cast<typename index_range::index>(ll.z()),
+                  static_cast<typename index_range::index>(ur.z()),
+                  1);
+    return const_grid_view(grid()[indices[x][y][z]]);
+  }
+
+  /**
+   * \brief Get a 2D subcircle gridview from a 3D grid. The subcircle extent is
+   * cropped to the maximum boundaries of the parent grid.
+   *
+   * This means that rather than getting a 2 x 2 subgrid centered at 0 with the
+   * out-of-bounds elements zeroed if you request a subcircle on the boundary of
+   * the overall grid, you will get a 1 x 2 subgrid (a lopsided circle).
+   *
+   * \param c The X,Y,Z coordinates of the center of the circle.
+   * \param radius Radius of subrircle.
+   *
+   * \return The subcircle.
+   */
+  grid_view subcircle(const math::vector3z& c, size_t radius) {
+    typename grid_type::index_gen indices;
+
+    auto x_range = detail::circle_xrange_at_point(c.x(), radius, xdsize());
+    auto y_range = detail::circle_yrange_at_point(c.y(), radius, ydsize());
+    index_range x1(x_range.lb(), x_range.ub(), 1);
+    index_range y1(y_range.lb(), y_range.ub(), 1);
+    index_range z1(c.z(), c.z() + 1, 1);
+    return grid_view(grid()[indices[x1][y1][z1]]);
+  }
+  const_grid_view subcircle(const math::vector3z& c, size_t radius) const {
+    typename grid_type::index_gen indices;
+
+    auto x_range = detail::circle_xrange_at_point(c.x(), radius, xdsize());
+    auto y_range = detail::circle_yrange_at_point(c.y(), radius, ydsize());
+    index_range x1(x_range.lb(), x_range.ub(), 1);
+    index_range y1(y_range.lb(), y_range.ub(), 1);
+    index_range z1(c.z(), c.z() + 1, 1);
+    return const_grid_view(grid()[indices[x1][y1][z1]]);
+  }
+
+ protected:
+  virtual const grid_type& grid(void) const = 0;
+  virtual grid_type& grid(void) = 0;
 };
 
 NS_END(ds, rcppsw);

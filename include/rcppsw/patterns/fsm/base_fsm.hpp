@@ -245,7 +245,7 @@ NS_END(fsm, patterns, rcppsw);
  * return other signals if the state is part of a \ref hfsm.
  */
 #define FSM_STATE_DECLARE(FSM, state_name, event_data)      \
-  int ST_##state_name(const event_data*);                   \
+  int ST_##state_name(event_data*);                   \
   rcppsw::patterns::fsm::                         \
       state_action1<FSM, event_data, &FSM::ST_##state_name> \
   state_name{}
@@ -257,7 +257,7 @@ NS_END(fsm, patterns, rcppsw);
  * signal of \c event_data each time the state is executed.
  */
 #define FSM_STATE_DEFINE(FSM, state_name, event_data)     \
-  int FSM::ST_##state_name(const event_data)
+  int FSM::ST_##state_name(event_data)
 
 /**
  * \def FSM_GUARD_DECLARE(FSM, guard_name, event_data)

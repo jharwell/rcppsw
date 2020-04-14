@@ -1,7 +1,7 @@
 /**
  * \file grid3D.hpp
  *
- * \copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2020 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -45,28 +45,19 @@ template <typename T>
 class grid3D : public base_grid3D<T> {
  public:
   using typename base_grid3D<T>::index_range;
-
+  using typename base_grid3D<T>::const_grid_view;
+  using typename base_grid3D<T>::grid_view;
+  using typename base_grid3D<T>::grid_type;
   using base_grid3D<T>::access;
 
-  explicit grid3D(const math::vector3u& dims)
+  explicit grid3D(const math::vector3z& dims)
       : grid3D(dims.x(), dims.y(), dims.z()) {}
 
   grid3D(size_t x_max, size_t y_max, size_t z_max)
       : m_cells(boost::extents[x_max][y_max][z_max]) {}
 
   T& access(size_t i, size_t j, size_t k) override {
-    return m_cells[static_cast<typename index_range::index>(i)]
-                  [static_cast<typename index_range::index>(j)]
-                  [static_cast<typename index_range::index>(k)];
-  }
-
-  RCSW_PURE T& access(const math::vector3u& c) override {
-    return access(c.x(), c.y(), c.z());
-  }
-
-  RCSW_PURE T& operator[](const math::vector3u& c) { return access(c); }
-  RCSW_PURE const T& operator[](const math::vector3u& c) const {
-    return access(c);
+    return m_cells[i][j][k];
   }
 
   size_t xsize(void) const { return m_cells.shape()[0]; }
@@ -74,8 +65,14 @@ class grid3D : public base_grid3D<T> {
   size_t zsize(void) const { return m_cells.shape()[2]; }
 
  private:
+  size_t xdsize(void) const override { return xsize(); }
+  size_t ydsize(void) const override { return ysize(); }
+  size_t zdsize(void) const override { return zsize(); }
+  grid_type& grid(void) override { return m_cells; }
+  const grid_type& grid(void) const override { return m_cells; }
+
   /* clang-format off */
-  typename base_grid3D<T>::grid_type m_cells;
+  grid_type m_cells;
   /* clang-format on */
 };
 

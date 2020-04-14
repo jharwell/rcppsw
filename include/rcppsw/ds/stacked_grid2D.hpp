@@ -58,11 +58,10 @@ NS_START(rcppsw, ds);
 template <typename TupleTypes>
 class stacked_grid2D {
  public:
-  stacked_grid2D(const types::discretize_ratio& resolution,
-                 double x_max,
-                 double y_max)
+  stacked_grid2D(const math::vector2d& dims,
+                 const types::discretize_ratio& resolution)
       : m_layers(kStackSize) {
-    add_layers<kStackSize - 1>(resolution, x_max, y_max);
+    add_layers<kStackSize - 1>(dims, resolution);
   }
 
   virtual ~stacked_grid2D(void) { rm_layers<kStackSize - 1>(); }
@@ -108,12 +107,12 @@ class stacked_grid2D {
    * \param d The discrete coordinate pair.
    */
   template <size_t Index>
-  typename layer_value_type<Index>::value_type& access(const math::vector2u& d) {
+  typename layer_value_type<Index>::value_type& access(const math::vector2z& d) {
     return access<Index>(d.x(), d.y());
   }
   template <size_t Index>
   const typename layer_value_type<Index>::value_type& access(
-      const math::vector2u& d) const {
+      const math::vector2z& d) const {
     return access<Index>(d.x(), d.y());
   }
 
@@ -127,37 +126,37 @@ class stacked_grid2D {
   }
 
   /**
-   * \see \ref grid2D_overlay_impl::xdsize().
+   * \see \ref overlay_grid2D::xdsize().
    */
   size_t xdsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xdsize();
   }
 
   /**
-   * \see \ref grid2D_overlay_impl::xrsize().
+   * \see \ref overlay_grid2D::xrsize().
    */
   double xrsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xrsize();
   }
 
   /**
-   * \see \ref grid2D_overlay_impl::ydsize().
+   * \see \ref overlay_grid2D::ydsize().
    */
   size_t ydsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->ydsize();
   }
 
   /**
-   * \see \ref grid2D_overlay_impl::yrsize().
+   * \see \ref overlay_grid2D::yrsize().
    */
   double yrsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->yrsize();
   }
 
   /**
-   * \see \ref grid2D_overlay_impl::resolution().
+   * \see \ref overlay_grid2D::resolution().
    */
-  types::discretize_ratio resolution(void) const {
+  const types::discretize_ratio& resolution(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))
         ->resolution();
   }

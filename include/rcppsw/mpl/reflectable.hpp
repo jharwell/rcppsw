@@ -1,5 +1,5 @@
 /**
- * \file vector3.cpp
+ * \file reflectable.hpp
  *
  * \copyright 2020 John Harwell, All rights reserved.
  *
@@ -18,44 +18,43 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_MPL_REFLECTABLE_HPP_
+#define INCLUDE_RCPPSW_MPL_REFLECTABLE_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/vector3.hpp"
+#include <typeindex>
+
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+NS_START(rcppsw, mpl);
 
 /*******************************************************************************
- * Template Instantiations
+ * Class Definitions
  ******************************************************************************/
-template <>
-const vector3u vector3u::X(1, 0, 0); // NOLINT
-template <>
-const vector3i vector3i::X(1, 0, 0); // NOLINT
-template <>
-const vector3z vector3z::X(1, 0, 0); // NOLINT
-template <>
-const vector3d vector3d::X(1.0, 0.0, 0.0); // NOLINT
+/**
+ * \class reflectable
+ * \ingroup mpl
+ *
+ * \brief Interface for classes wishing to employ pseudo-reflection in C++.
+ */
+class reflectable {
+ public:
+  virtual ~reflectable(void) = default;
 
-template <>
-const vector3u vector3u::Y(0, 1, 0); // NOLINT
-template <>
-const vector3i vector3i::Y(0, 1, 0); // NOLINT
-template <>
-const vector3z vector3z::Y(0, 1, 0); // NOLINT
-template <>
-const vector3d vector3d::Y(0.0, 1.0, 0.0); // NOLINT
+  /**
+   * \brief Return the \ref std::type_index of the derived class. This is useful
+   * in conjunction with \ref boost::variant and \ref boost::apply_visitor, as
+   * it allows for run-time reflection based on the actual type of the derived
+   * class.
+   */
+  virtual std::type_index type_index(void) const = 0;
+};
 
-template <>
-const vector3u vector3u::Z(0, 0, 1); // NOLINT
-template <>
-const vector3i vector3i::Z(0, 0, 1); // NOLINT
-template <>
-const vector3z vector3z::Z(0, 0, 1); // NOLINT
-template <>
-const vector3d vector3d::Z(0.0, 0.0, 1.0); // NOLINT
+NS_END(mpl, rcppsw);
 
-NS_END(math, rcppsw);
+#endif /* INCLUDE_RCPPSW_MPL_REFLECTABLE_HPP_ */
