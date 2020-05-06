@@ -86,15 +86,13 @@ class grid2D_overlay final : public base_grid2D<T>,
      * VERY close to the grid resolution.
      */
     if (modx >= std::numeric_limits<double>::epsilon()) {
-      ER_ASSERT(std::fabs(mc_resolution.v() - modx) <=
-                std::numeric_limits<double>::epsilon(),
+      ER_ASSERT(std::fabs(mc_resolution.v() - modx) <= 1.0 / ONEE9,
                 "X dimension (%f) not an even multiple of resolution (%f)",
                 mc_dim.x(),
                 mc_resolution.v());
     }
     if (mody >= std::numeric_limits<double>::epsilon()) {
-      ER_ASSERT(std::fabs(mc_resolution.v() - mody) <=
-                std::numeric_limits<double>::epsilon(),
+      ER_ASSERT(std::fabs(mc_resolution.v() - mody) <= 1.0 / ONEE9,
                 "Y dimension (%f) not an even multiple of resolution (%f)",
                 mc_dim.y(),
                 mc_resolution.v());

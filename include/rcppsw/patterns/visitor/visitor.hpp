@@ -24,12 +24,12 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <utility>
+
+#include <boost/variant/static_visitor.hpp>
+
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/mpl/typelist.hpp"
-#include <boost/variant/static_visitor.hpp>
-#include <boost/mpl/back_inserter.hpp>
-#include <boost/mpl/copy.hpp>
-#include <boost/mpl/joint_view.hpp>
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -101,7 +101,7 @@ using precise_visit_set = mpl::typelist<Args...>;
  * \tparam VisitorImpl The name of the class containing the actual
  *                     implementation of the visit functions.
  * \tparam TypeList List of types that the class will be able to visit. Must be
- * a \ref precise_visit_set.
+ * a \ref rmpl::typelist.
  *
  * For each visitee type you want to be able to visit, you must (1) include it
  * in the type list for the list, (2) define a function with the following exact
@@ -124,6 +124,33 @@ struct precise_visitor : public VisitorImpl,
   void visit(T& visitee) {
     VisitorImpl::visit(visitee);
   }
+};
+
+/**
+ * \class generic_precise_visitor
+ * \ingroup patterns visitor
+ *
+ * Convenience wrapper allowing generic visits to ANY type, but filtering them
+ * on the \ref rmpl::typelist passed to the \ref rpvisitor::precise_visitor.
+ */
+template<typename TVisitor>
+class generic_precise_visitor {
+ public:
+  template<typename...Args>
+  explicit generic_precise_visitor(Args&& ...args)
+      : m_impl(std::forward<Args>(args)...) {}
+
+  template<typename TAny>
+  void visit(TAny& obj) { m_impl.visit(obj); }
+
+ private:
+  /**
+   * \brief We use the precise visitor in order to force compile errors if a
+   * call to a visitor is made that involves a visitee that is not in our visit
+   * set (i.e. remove the possibility of implicit upcasting performed by the
+   * compiler).
+   */
+  precise_visitor<TVisitor, typename TVisitor::visit_typelist> m_impl;
 };
 
 NS_END(rcppsw, patterns, visitor);
