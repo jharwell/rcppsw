@@ -122,6 +122,14 @@ class base_fsm : public er::client<base_fsm> {
   void inject_event(int signal, int type);
 
   /**
+   * \brief Injects the signal of the specified type from the event argument
+   * into the state machine. This variant of inject_event() is provided for use
+   * with \ref event_data_hold(), to avoid the event data overwrite which occurs
+   * with the other version.
+   */
+  void inject_event(std::unique_ptr<event_data> event);
+
+  /**
    * \brief Initialize/reset the state machine.
    */
   virtual void init(void);
@@ -131,11 +139,20 @@ class base_fsm : public er::client<base_fsm> {
    * \brief Get the data associated with an event injected into the state
    * machine.
    */
-  const event_data* event_data_get(void) const { return m_event_data.get(); }
-  event_data* event_data_get(void) { return m_event_data.get(); }
-
+  const class event_data* event_data(void) const { return m_event_data.get(); }
+  class event_data* event_data(void) { return m_event_data.get(); }
+  std::unique_ptr<class event_data> event_data_release(void) {
+    return std::move(m_event_data);
+  }
   void generated_event(bool b) { m_event_generated = b; }
   bool has_generated_event(void) { return m_event_generated; }
+
+  /**
+   * \brief Indicate that the current event data should NOT be reset after \ref
+   * state_engine() returns (default).
+   */
+  void event_data_hold(bool b) { m_event_data_hold = b; }
+  bool event_data_hold(void) const { return m_event_data_hold; }
 
   /**
    * \brief Generates an external event. The data is passed through the event
@@ -146,7 +163,7 @@ class base_fsm : public er::client<base_fsm> {
    * \param data The event data sent to the state.
    */
   virtual void external_event(uint8_t new_state,
-                              std::unique_ptr<event_data> data);
+                              std::unique_ptr<class event_data> data);
   void external_event(uint8_t new_state) {
     external_event(new_state, nullptr);
   }
@@ -160,7 +177,7 @@ class base_fsm : public er::client<base_fsm> {
    * \param new_state The state machine state to transition to.
    * \param data The event data sent to the state.
    */
-  void internal_event(uint8_t new_state, std::unique_ptr<event_data> data);
+  void internal_event(uint8_t new_state, std::unique_ptr<class event_data> data);
   void internal_event(uint8_t new_state) {
     internal_event(new_state, std::move(m_event_data));
   }
@@ -215,18 +232,20 @@ class base_fsm : public er::client<base_fsm> {
  private:
   void state_engine_map(void);
   void state_engine_map_ex(void);
-  void event_data_set(std::unique_ptr<event_data> event_data) {
+  void event_data(std::unique_ptr<class event_data> event_data) {
     m_event_data = std::move(event_data);
   }
 
-  const uint8_t               mc_max_states;
-  uint8_t                     m_current_state;
-  uint8_t                     m_next_state{0};
-  uint8_t                     m_initial_state;
-  uint8_t                     m_previous_state{0};
-  uint8_t                     m_last_state{0};
-  bool                        m_event_generated{false};
-  std::unique_ptr<event_data> m_event_data{nullptr};
+  const uint8_t                     mc_max_states;
+  uint8_t                           m_current_state;
+  uint8_t                           m_next_state{0};
+  uint8_t                           m_initial_state;
+  uint8_t                           m_previous_state{0};
+  uint8_t                           m_last_state{0};
+
+  bool                              m_event_generated{false};
+  bool                              m_event_data_hold{false};
+  std::unique_ptr<class event_data> m_event_data{nullptr};
 };
 
 NS_END(fsm, patterns, rcppsw);

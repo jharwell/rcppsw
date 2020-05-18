@@ -60,11 +60,21 @@ RCPPSW_WARNING_DISABLE_POP()
 radians::radians(const degrees& d) : m_value(to_radians(d).value()) {}
 
 /*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+std::string radians::to_str(void) const {
+  return "rad(" + rcppsw::to_string(m_value) + ") -> deg(" +
+      rcppsw::to_string(m_value * radians::kRADIANS_TO_DEGREES) +
+      ")";
+}
+
+
+/*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
 std::ostream& operator<<(std::ostream& stream, const radians& r) {
-  stream << "radians(" << r.value() << " -> "
-         << r.value() * radians::kRADIANS_TO_DEGREES << " degrees"
+  stream << "rad(" << r.value() << ") -> deg("
+         << r.value() * radians::kRADIANS_TO_DEGREES
          << ")";
   return stream;
 } /* operator<<() */

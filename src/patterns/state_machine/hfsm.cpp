@@ -35,11 +35,11 @@ void hfsm::state_engine_step(const state_map_row* const c_row) {
   ER_ASSERT(nullptr != c_row->state(), "null state?");
   ER_TRACE("Invoking state action: state%d, data=%p",
            current_state(),
-           reinterpret_cast<const void*>(event_data_get()));
+           reinterpret_cast<const void*>(event_data()));
   auto* state = static_cast<const hfsm_state*>(c_row->state());
   int rval = event_signal::ekUNHANDLED;
   while (rval != event_signal::ekHANDLED) {
-    rval = state->invoke_state_action(this, event_data_get());
+    rval = state->invoke_state_action(this, event_data());
 
     if (event_signal::ekHANDLED == rval) {
       break;
@@ -51,8 +51,8 @@ void hfsm::state_engine_step(const state_map_row* const c_row) {
      * normally.
      */
     state = static_cast<hfsm_state*>(state->parent());
-    event_data_get()->type(event_type::ekCHILD);
-    event_data_get()->signal(rval);
+    event_data()->type(event_type::ekCHILD);
+    event_data()->signal(rval);
   } /* while() */
 } /* state_engine_step() */
 
@@ -60,11 +60,11 @@ void hfsm::state_engine_step(const state_map_ex_row* const c_row_ex) {
   ER_ASSERT(nullptr != c_row_ex->state(), "null state?");
   ER_TRACE("Invoking state action: state%d, data=%p",
            current_state(),
-           reinterpret_cast<const void*>(event_data_get()));
+           reinterpret_cast<const void*>(event_data()));
   auto* state = static_cast<const hfsm_state*>(c_row_ex->state());
   int rval = event_signal::ekUNHANDLED;
   while (rval != event_signal::ekHANDLED) {
-    rval = state->invoke_state_action(this, event_data_get());
+    rval = state->invoke_state_action(this, event_data());
 
     if (event_signal::ekHANDLED == rval) {
       break;
@@ -76,8 +76,8 @@ void hfsm::state_engine_step(const state_map_ex_row* const c_row_ex) {
      * normally.
      */
     state = static_cast<hfsm_state*>(state->parent());
-    event_data_get()->type(event_type::ekCHILD);
-    event_data_get()->signal(rval);
+    event_data()->type(event_type::ekCHILD);
+    event_data()->signal(rval);
   } /* while() */
 } /* state_engine_step() */
 

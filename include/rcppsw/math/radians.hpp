@@ -91,12 +91,7 @@ class radians {
     return *this = kUnsignedRange.wrap_value(*this);
   }
 
-  std::string to_str(void) const {
-    return "rad(" + rcppsw::to_string(m_value) + ") -> deg(" +
-           rcppsw::to_string(m_value * radians::kRADIANS_TO_DEGREES /
-                             kPI.value()) +
-           ")";
-  }
+  std::string to_str(void) const;
 
   friend std::istream& operator>>(std::istream& is, radians& r) {
     is >> r.m_value;

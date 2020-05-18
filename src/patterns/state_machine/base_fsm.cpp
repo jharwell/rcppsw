@@ -72,7 +72,7 @@ void base_fsm::init(void) {
 } /* init() */
 
 void base_fsm::external_event(uint8_t new_state,
-                              std::unique_ptr<event_data> data) {
+                              std::unique_ptr<class event_data> data) {
   ER_TRACE("Received external event: new_state=%d data=%p",
            new_state,
            reinterpret_cast<const void*>(data.get()));
@@ -80,20 +80,32 @@ void base_fsm::external_event(uint8_t new_state,
   ER_ASSERT(event_signal::ekFATAL != new_state,
             "The impossible event happened...");
 
-  /* if we are not supposed to ignore this event */
-  if (new_state != event_signal::ekIGNORED) {
-    /*
-     * Generate the event and execute the state engine. If data was passed in,
-     * pass that along to the handler function.
-     */
-    internal_event(new_state, std::move(data));
-    state_engine();
+  if (new_state == event_signal::ekIGNORED) {
+    return;
+  }
+  /* We are not supposed to ignore this event */
+
+  /*
+   * Generate the event and execute the state engine. If data was passed in,
+   * pass that along to the handler function.
+   */
+  internal_event(new_state, std::move(data));
+  m_event_data_hold = false;
+  state_engine();
+
+  /*
+   * Derived FSMs may want/need access to the same event data across multiple
+   * invocations of the FSM, which might even span multiple states, so if the
+   * derived FSM signals NOT to reset the event data, then hold onto it;
+   * otherwise reset it after each invocation of state_engine().
+   */
+  if (!m_event_data_hold) {
     m_event_data.reset(nullptr);
   }
-}
+} /* external_event() */
 
 void base_fsm::internal_event(uint8_t new_state,
-                              std::unique_ptr<event_data> data) {
+                              std::unique_ptr<class event_data> data) {
   ER_TRACE("Generated internal event: current_state=%d new_state=%d data=%p",
            current_state(),
            new_state,
@@ -101,7 +113,7 @@ void base_fsm::internal_event(uint8_t new_state,
   next_state(new_state);
   m_event_generated = true;
   if (m_event_data != data) {
-    event_data_set(std::move(data));
+    event_data(std::move(data));
   }
 }
 
@@ -185,7 +197,7 @@ void base_fsm::state_engine_step(const state_map_row* const c_row) {
   ER_TRACE("Invoking state action: state%d, data=%p",
            current_state(),
            reinterpret_cast<const void*>(m_event_data.get()));
-  c_row->state()->invoke_state_action(this, event_data_get());
+  c_row->state()->invoke_state_action(this, event_data());
 } /* state_engine_step() */
 
 void base_fsm::state_engine_step(const state_map_ex_row* const c_row_ex) {
@@ -193,7 +205,7 @@ void base_fsm::state_engine_step(const state_map_ex_row* const c_row_ex) {
   ER_TRACE("Invoking state action: state%d, data=%p",
            current_state(),
            reinterpret_cast<const void*>(m_event_data.get()));
-  c_row_ex->state()->invoke_state_action(this, event_data_get());
+  c_row_ex->state()->invoke_state_action(this, event_data());
 } /* state_engine_step() */
 
 void base_fsm::update_state(uint8_t new_state) {
@@ -205,7 +217,11 @@ void base_fsm::update_state(uint8_t new_state) {
 } /* update_state() */
 
 void base_fsm::inject_event(int signal, int type) {
-  external_event(current_state(), std::make_unique<event_data>(signal, type));
+  inject_event(std::make_unique<class event_data>(signal, type));
 } /* inject event */
+
+void base_fsm::inject_event(std::unique_ptr<class event_data> event) {
+  external_event(current_state(), std::move(event));
+} /* inject_event(std::unique_ptr<event_data> event)() */
 
 NS_END(fsm, patterns, rcppssw);
