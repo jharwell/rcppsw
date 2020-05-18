@@ -93,8 +93,7 @@ class radians {
 
   std::string to_str(void) const {
     return "rad(" + rcppsw::to_string(m_value) + ") -> deg(" +
-           rcppsw::to_string(m_value * radians::kRADIANS_TO_DEGREES /
-                             kPI.value()) +
+           rcppsw::to_string(m_value * radians::kRADIANS_TO_DEGREES) +
            ")";
   }
 

@@ -44,18 +44,18 @@ template <class T>
 class sphere_vector {
  public:
   sphere_vector(const T& radius,
-                const radians& inclination,
+                const radians& zenith,
                 const radians& azimuth)
-      : m_radius(radius), m_inclination(inclination), m_azimuth(azimuth) {}
+      : m_radius(radius), m_zenith(zenith), m_azimuth(azimuth) {}
 
   const radians& azimuth(void) const { return m_azimuth; }
-  const radians& inclination(void) const { return m_inclination; }
+  const radians& zenith(void) const { return m_zenith; }
   const T& radius(void) const { return m_radius; }
 
  private:
   /* clang-format off */
   T       m_radius;
-  radians m_inclination;
+  radians m_zenith;
   radians m_azimuth;
   /* clang-format on */
 };

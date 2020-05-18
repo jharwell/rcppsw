@@ -53,6 +53,7 @@ NS_START(rcppsw, math);
 template <typename T>
 class vector2 {
  public:
+  using value_type = T;
   /**
    * \brief Computes the square distance between the passed vectors.
    */
