@@ -127,17 +127,21 @@ struct precise_visitor : public VisitorImpl,
 };
 
 /**
- * \class generic_precise_visitor
+ * \class filtered_visitor
  * \ingroup patterns visitor
  *
  * Convenience wrapper allowing generic visits to ANY type, but filtering them
  * on the \ref rmpl::typelist passed to the \ref rpvisitor::precise_visitor.
+ *
+ * \tparam TVisitor The name of the visitor class, which must be capable of
+ *                  being used with \ref precise_visitor, and define \p
+ *                  visit_typelist.
  */
 template<typename TVisitor>
-class generic_precise_visitor {
+class filtered_visitor {
  public:
   template<typename...Args>
-  explicit generic_precise_visitor(Args&& ...args)
+  explicit filtered_visitor(Args&& ...args)
       : m_impl(std::forward<Args>(args)...) {}
 
   template<typename TAny>

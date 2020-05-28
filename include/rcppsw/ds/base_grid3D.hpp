@@ -25,9 +25,9 @@
  * Includes
  ******************************************************************************/
 #include <boost/multi_array.hpp>
+#include <algorithm>
 
 #include "rcppsw/math/vector3.hpp"
-#include "rcppsw/ds/utils.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -122,65 +122,73 @@ class base_grid3D {
   grid_view subgrid(const math::vector3z& ll, const math::vector3z& ur) {
     typename grid_type::index_gen indices;
 
-    index_range x(static_cast<typename index_range::index>(ll.x()),
-                  static_cast<typename index_range::index>(ur.x()),
-                  1);
-    index_range y(static_cast<typename index_range::index>(ll.y()),
-                  static_cast<typename index_range::index>(ur.y()),
-                  1);
-    index_range z(static_cast<typename index_range::index>(ll.z()),
-                  static_cast<typename index_range::index>(ur.z()),
-                  1);
+    index_range x(ll.x(), ur.x(), 1);
+    index_range y(ll.y(), ur.y(), 1);
+    index_range z(ll.z(), ur.z(), 1);
     return grid_view(grid()[indices[x][y][z]]);
   }
 
   const_grid_view subgrid(const math::vector3z& ll,
                           const math::vector3z& ur) const {
     typename grid_type::index_gen indices;
-    index_range x(static_cast<typename index_range::index>(ll.x()),
-                  static_cast<typename index_range::index>(ur.x()),
-                  1);
-    index_range y(static_cast<typename index_range::index>(ll.y()),
-                  static_cast<typename index_range::index>(ur.y()),
-                  1);
-    index_range z(static_cast<typename index_range::index>(ll.z()),
-                  static_cast<typename index_range::index>(ur.z()),
-                  1);
+    index_range x(ll.x(), ur.x(), 1);
+    index_range y(ll.y(), ur.y(), 1);
+    index_range z(ll.z(), ur.z(), 1);
     return const_grid_view(grid()[indices[x][y][z]]);
   }
 
   /**
-   * \brief Get a 2D subcircle gridview from a 3D grid. The subcircle extent is
-   * cropped to the maximum boundaries of the parent grid.
+   * \brief Get a 2D subcircle gridview from a 3D grid (i.e. always has height 1
+   * in Z). The subcircle extent is cropped to the maximum boundaries of the
+   * parent grid.
    *
    * This means that rather than getting a 2 x 2 subgrid centered at 0 with the
    * out-of-bounds elements zeroed if you request a subcircle on the boundary of
    * the overall grid, you will get a 1 x 2 subgrid (a lopsided circle).
    *
-   * \param c The X,Y,Z coordinates of the center of the circle.
-   * \param radius Radius of subrircle.
+   * \param c The X,Y,Z coordinates of the center of the subcircle.
+   * \param radius Radius of subcircle.
    *
    * \return The subcircle.
    */
   grid_view subcircle(const math::vector3z& c, size_t radius) {
-    typename grid_type::index_gen indices;
+    auto ll_x = std::max<int>(0,
+                              static_cast<int>(c.x()) - static_cast<int>(radius));
+    auto ll_y = std::max<int>(0,
+                              static_cast<int>(c.y()) - static_cast<int>(radius));
 
-    auto x_range = detail::circle_xrange_at_point(c.x(), radius, xdsize());
-    auto y_range = detail::circle_yrange_at_point(c.y(), radius, ydsize());
-    index_range x1(x_range.lb(), x_range.ub(), 1);
-    index_range y1(y_range.lb(), y_range.ub(), 1);
-    index_range z1(c.z(), c.z() + 1, 1);
-    return grid_view(grid()[indices[x1][y1][z1]]);
+    /*
+     * boost uses half open interval for index ranges, and we want a closed
+     * interval, so we +1.
+     */
+    auto ur_x = std::min(c.x() + radius + 1, xdsize());
+    auto ur_y = std::min(c.y() + radius + 1, ydsize());
+
+    math::vector3z ll(ll_x, ll_y, c.z());
+    math::vector3z ur(ur_x, ur_y, c.z() + 2);
+
+    return subgrid(ll, ur);
   }
+
   const_grid_view subcircle(const math::vector3z& c, size_t radius) const {
     typename grid_type::index_gen indices;
 
-    auto x_range = detail::circle_xrange_at_point(c.x(), radius, xdsize());
-    auto y_range = detail::circle_yrange_at_point(c.y(), radius, ydsize());
-    index_range x1(x_range.lb(), x_range.ub(), 1);
-    index_range y1(y_range.lb(), y_range.ub(), 1);
-    index_range z1(c.z(), c.z() + 1, 1);
-    return const_grid_view(grid()[indices[x1][y1][z1]]);
+    auto ll_x = std::max<int>(0,
+                              static_cast<int>(c.x()) - static_cast<int>(radius));
+    auto ll_y = std::max<int>(0,
+                              static_cast<int>(c.y()) - static_cast<int>(radius));
+
+    /*
+     * boost uses half open interval for index ranges, and we want a closed
+     * interval, so we +1.
+     */
+    auto ur_x = std::min(c.x() + radius + 1, xdsize());
+    auto ur_y = std::min(c.y() + radius + 1, ydsize());
+
+    math::vector3z ll(ll_x, ll_y, c.z());
+    math::vector3z ur(ur_x, ur_y, c.z() + 2);
+
+    return subgrid(ll, ur);
   }
 
  protected:
