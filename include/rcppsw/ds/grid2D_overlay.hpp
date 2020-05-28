@@ -28,6 +28,7 @@
 
 #include "rcppsw/ds/base_grid2D.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/ds/grid_overlay.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -52,7 +53,8 @@ NS_START(rcppsw, ds);
  */
 template <typename T>
 class grid2D_overlay final : public base_grid2D<T>,
-  er::client<grid2D_overlay<T>> {
+                             public grid_overlay<math::vector2d>,
+                             public er::client<grid2D_overlay<T>> {
  public:
   using typename base_grid2D<T>::index_range;
   using typename base_grid2D<T>::grid_view;
@@ -63,21 +65,27 @@ class grid2D_overlay final : public base_grid2D<T>,
   using base_grid2D<T>::xdsize;
   using base_grid2D<T>::ydsize;
 
+  using grid_overlay<math::vector2d>::resolution;
+  using grid_overlay<math::vector2d>::originr;
+  using grid_overlay<math::vector2d>::origind;
+
   /**
-   * \param resolution The discretization unit for the grid.
+   * \param origin The anchor point of the overlay grid in continuous space.
+   * \param res The discretization unit for the grid.
    * \param dims The real size in X,Y which will be discretized into
    *             X/resolution discrete elements along the X dimension and
    *             Y/resolution discrete elements along the Y dimension.
    */
-  grid2D_overlay(const math::vector2d& dims,
-                 const types::discretize_ratio& resolution)
-      : ER_CLIENT_INIT("rcppsw.ds.grid2D_overlay"),
-        mc_resolution(resolution),
+  grid2D_overlay(const math::vector2d& origin,
+                 const math::vector2d& dims,
+                 const types::discretize_ratio& res)
+      : grid_overlay(origin, res),
+        ER_CLIENT_INIT("rcppsw.ds.grid2D_overlay"),
         mc_dim(dims),
         m_cells(boost::extents[static_cast<typename index_range::index>(xdsize())]
                 [typename index_range::index(ydsize())]) {
-    double modx = std::fmod(mc_dim.x(), mc_resolution.v());
-    double mody = std::fmod(mc_dim.y(), mc_resolution.v());
+    double modx = std::fmod(mc_dim.x(), resolution().v());
+    double mody = std::fmod(mc_dim.y(), resolution().v());
 
     /*
      * Some values of dimensions and grid resolution might not be able to be
@@ -86,23 +94,18 @@ class grid2D_overlay final : public base_grid2D<T>,
      * VERY close to the grid resolution.
      */
     if (modx >= std::numeric_limits<double>::epsilon()) {
-      ER_ASSERT(std::fabs(mc_resolution.v() - modx) <= 1.0 / ONEE9,
+      ER_ASSERT(std::fabs(resolution().v() - modx) <= 1.0 / ONEE9,
                 "X dimension (%f) not an even multiple of resolution (%f)",
                 mc_dim.x(),
-                mc_resolution.v());
+                resolution().v());
     }
     if (mody >= std::numeric_limits<double>::epsilon()) {
-      ER_ASSERT(std::fabs(mc_resolution.v() - mody) <= 1.0 / ONEE9,
+      ER_ASSERT(std::fabs(resolution().v() - mody) <= 1.0 / ONEE9,
                 "Y dimension (%f) not an even multiple of resolution (%f)",
                 mc_dim.y(),
-                mc_resolution.v());
+                resolution().v());
     }
   }
-
-  /**
-   * \brief Return the resolution of the grid.
-   */
-  const types::discretize_ratio& resolution(void) const { return mc_resolution; }
 
   /**
    * \brief Get a reference to a the cell within the grid at coordinates (i, j)
@@ -115,11 +118,11 @@ class grid2D_overlay final : public base_grid2D<T>,
   }
 
   size_t xdsize(void) const override {
-    return static_cast<size_t>(std::ceil(mc_dim.x() / mc_resolution.v()));
+    return static_cast<size_t>(std::ceil(mc_dim.x() / resolution().v()));
   }
 
   size_t ydsize(void) const override {
-    return static_cast<size_t>(std::ceil(mc_dim.y() / mc_resolution.v()));
+    return static_cast<size_t>(std::ceil(mc_dim.y() / resolution().v()));
   }
 
   /**
@@ -134,7 +137,7 @@ class grid2D_overlay final : public base_grid2D<T>,
 
   const math::vector2d& dimsr(void) const { return mc_dim; }
   math::vector2z dimsd(void) const {
-    return math::dvec2zvec(mc_dim, mc_resolution.v());
+    return math::dvec2zvec(mc_dim, resolution().v());
   }
 
  private:
@@ -142,7 +145,6 @@ class grid2D_overlay final : public base_grid2D<T>,
   const grid_type& grid(void) const override { return m_cells; }
 
   /* clang-format off */
-  const types::discretize_ratio mc_resolution;
   const math::vector2d          mc_dim;
 
   grid_type                     m_cells;

@@ -186,19 +186,20 @@ class range final : public er::client<range<T>> {
 using rangei = range<int>;
 
 /**
+ * \brief Specialization of \ref range for unsigned integers.
+ */
+using rangeu = range<uint>;
+
+/**
+ * \brief Specialization of \ref range for size_t.
+ */
+using rangez = range<size_t>;
+
+/**
  * \brief Specialization of \ref range for doubles.
  */
 using ranged = range<double>;
 
-/**
- * \brief Specialization of \ref range for floats.
- */
-using rangef = range<float>;
-
-/**
- * \brief Specialization of \ref range for unsigned integers.
- */
-using rangeu = range<uint>;
 
 /*******************************************************************************
  * Macros

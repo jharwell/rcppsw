@@ -58,10 +58,11 @@ NS_START(rcppsw, ds);
 template <typename TupleTypes>
 class stacked_grid2D {
  public:
-  stacked_grid2D(const math::vector2d& dims,
+  stacked_grid2D(const math::vector2d& origin,
+                 const math::vector2d& dims,
                  const types::discretize_ratio& resolution)
       : m_layers(kStackSize) {
-    add_layers<kStackSize - 1>(dims, resolution);
+    add_layers<kStackSize - 1>(origin, dims, resolution);
   }
 
   virtual ~stacked_grid2D(void) { rm_layers<kStackSize - 1>(); }

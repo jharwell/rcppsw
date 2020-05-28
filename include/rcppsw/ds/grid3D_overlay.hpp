@@ -27,8 +27,8 @@
 #include <limits>
 
 #include "rcppsw/ds/base_grid3D.hpp"
-#include "rcppsw/types/discretize_ratio.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/ds/grid_overlay.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -55,7 +55,8 @@ NS_START(rcppsw, ds);
  */
 template <typename T>
 class grid3D_overlay : public base_grid3D<T>,
-                            public er::client<grid3D_overlay<T>> {
+                       public grid_overlay<math::vector3d>,
+                       public er::client<grid3D_overlay<T>> {
  public:
   using typename base_grid3D<T>::index_range;
   using typename base_grid3D<T>::grid_view;
@@ -67,17 +68,22 @@ class grid3D_overlay : public base_grid3D<T>,
   using base_grid3D<T>::ydsize;
   using base_grid3D<T>::zdsize;
 
-  grid3D_overlay(const math::vector3d& dim,
-                      const types::discretize_ratio& resolution)
-      : ER_CLIENT_INIT("rcppsw.ds.grid3D_overlay"),
-        mc_resolution(resolution),
+  using grid_overlay<math::vector3d>::resolution;
+  using grid_overlay<math::vector3d>::originr;
+  using grid_overlay<math::vector3d>::origind;
+
+  grid3D_overlay(const math::vector3d& origin,
+                 const math::vector3d& dim,
+                 const types::discretize_ratio& res)
+      : grid_overlay(origin, res),
+        ER_CLIENT_INIT("rcppsw.ds.grid3D_overlay"),
         mc_dim(dim),
         m_cells(boost::extents[static_cast<typename index_range::index>(xdsize())]
                 [typename index_range::index(ydsize())]
                 [typename index_range::index(zdsize())]) {
-      double modx = std::fmod(mc_dim.x(), mc_resolution.v());
-      double mody = std::fmod(mc_dim.y(), mc_resolution.v());
-      double modz = std::fmod(mc_dim.z(), mc_resolution.v());
+      double modx = std::fmod(mc_dim.x(), resolution().v());
+      double mody = std::fmod(mc_dim.y(), resolution().v());
+      double modz = std::fmod(mc_dim.z(), resolution().v());
 
     /*
      * Some values of dimensions and grid resolution might not be able to be
@@ -86,45 +92,40 @@ class grid3D_overlay : public base_grid3D<T>,
      * VERY close to the grid resolution.
      */
     if (modx >= std::numeric_limits<double>::epsilon()) {
-      ER_ASSERT(std::fabs(mc_resolution.v() - modx) <=
+      ER_ASSERT(std::fabs(resolution().v() - modx) <=
                 std::numeric_limits<double>::epsilon(),
                 "X dimension (%f) not an even multiple of resolution (%f)",
                 mc_dim.x(),
-                mc_resolution.v());
+                resolution().v());
     }
     if (mody >= std::numeric_limits<double>::epsilon()) {
-      ER_ASSERT(std::fabs(mc_resolution.v() - mody) <=
+      ER_ASSERT(std::fabs(resolution().v() - mody) <=
                 std::numeric_limits<double>::epsilon(),
                 "Y dimension (%f) not an even multiple of resolution (%f)",
                 mc_dim.y(),
-                mc_resolution.v());
+                resolution().v());
     }
     if (modz >= std::numeric_limits<double>::epsilon()) {
-      ER_ASSERT(std::fabs(mc_resolution.v() - modz) <=
+      ER_ASSERT(std::fabs(resolution().v() - modz) <=
                 std::numeric_limits<double>::epsilon(),
                 "Z dimension (%f) not an even multiple of resolution (%f)",
                 mc_dim.z(),
-                mc_resolution.v());
+                resolution().v());
     }
   }
 
   virtual ~grid3D_overlay(void) = default;
 
-  /**
-   * \brief Return the resolution of the grid.
-   */
-  const types::discretize_ratio& resolution(void) const { return mc_resolution; }
-
   size_t xdsize(void) const override {
-    return static_cast<size_t>(std::ceil(mc_dim.x() / mc_resolution.v()));
+    return static_cast<size_t>(std::ceil(mc_dim.x() / resolution().v()));
   }
 
   size_t ydsize(void) const override {
-    return static_cast<size_t>(std::ceil(mc_dim.y() / mc_resolution.v()));
+    return static_cast<size_t>(std::ceil(mc_dim.y() / resolution().v()));
   }
 
   size_t zdsize(void) const override {
-    return static_cast<size_t>(std::ceil(mc_dim.z() / mc_resolution.v()));
+    return static_cast<size_t>(std::ceil(mc_dim.z() / resolution().v()));
   }
 
   /**
@@ -144,7 +145,7 @@ class grid3D_overlay : public base_grid3D<T>,
 
   const math::vector3d& dimsr(void) const { return mc_dim; }
   math::vector3z dimsd(void) const {
-    return math::dvec2zvec(mc_dim, mc_resolution.v());
+    return math::dvec2zvec(mc_dim, resolution().v());
   }
 
   T& access(size_t i, size_t j, size_t k) override {
@@ -158,7 +159,6 @@ class grid3D_overlay : public base_grid3D<T>,
   const grid_type& grid(void) const override { return m_cells; }
 
   /* clang-format off */
-  const types::discretize_ratio mc_resolution;
   const math::vector3d          mc_dim;
 
   grid_type                     m_cells;
