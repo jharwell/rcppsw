@@ -46,6 +46,10 @@ class degrees;
  * \ingroup math
  *
  * \brief Used to store an angle value in radians (duh).
+ *
+ * When comparing instances for approxmate equality, they are compared to 6
+ * decimal places, by default; this can be overriden on a per-comparison basis
+ * if desired, or set class-wide via \ref kAPPROX_EQUALITY_TOL.
  */
 class radians {
  public:
@@ -62,10 +66,11 @@ class radians {
   static const radians kZERO;              // NOLINT
   static const double kRADIANS_TO_DEGREES; // NOLINT
 
+  static double kAPPROX_EQUALITY_TOL;
+
   static radians abs(const radians& r) { return radians(std::fabs(r.value())); }
 
   radians(void) = default;
-
   explicit radians(double value) noexcept : m_value(value) {}
   explicit radians(const degrees& d);
 
@@ -162,16 +167,32 @@ class radians {
     return m_value >= other.m_value;
   }
 
+  /**
+   * \brief Compare two radian values for equality, using the tolerance
+   * specified during construction.
+   */
   bool operator==(const radians& other) const {
     return std::fabs(m_value - other.m_value) <
-           std::numeric_limits<double>::epsilon();
+      std::numeric_limits<double>::epsilon();;
   }
 
   bool operator!=(const radians& other) const { return !(*this == other); }
 
+  /**
+   * \brief Determine if two instances are equal within the specified
+   * tolerance.
+   *
+   * This cannot be made part of \ref operator==(), because those functions
+   * cannot have default arguments.
+   */
+  bool is_equal(const radians& other, double tol = kAPPROX_EQUALITY_TOL) const {
+    return std::fabs(m_value - other.m_value) < tol;
+  }
+
+
  private:
   /**
-   * \brief The signed normalization range [-pi, pi]
+   * The signed normalization range [-pi, pi]
    */
   static const range<radians> kSignedRange;
 

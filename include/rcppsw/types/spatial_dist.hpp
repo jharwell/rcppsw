@@ -35,13 +35,14 @@ NS_START(rcppsw, types);
  * Class Definitions
  ******************************************************************************/
 /**
- * \brief Specifies a distance in "real" spatial space.
+ * \brief Specifies a distance in "real" spatial space, and as such is always
+ * positive.
  */
 class spatial_dist : public named_type<double, struct spatial_dist_tag> {
  public:
-  using named_type<double, spatial_dist_tag>::named_type;
-
+  explicit spatial_dist(const double& value);
   spatial_dist(const spatial_dist&) = default;
+
   spatial_dist& operator=(const spatial_dist& other) {
     set(other.v());
     return *this;

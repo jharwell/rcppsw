@@ -232,6 +232,8 @@ class vector3 {
    */
   vector3& scale(const T& factor) { return scale(factor, factor, factor); }
 
+  /* Relational operators */
+
   /**
    * \brief Returns if this vector and the argument are considered equal,
    * determined by coordinate comparison.
@@ -246,7 +248,7 @@ class vector3 {
   /**
    * \brief Returns if this vector and the argument are considered equal,
    * determined by coordinate comparison.
-   *
+   *p
    * Only available if the template argument is floating point.
    */
   template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
@@ -266,6 +268,21 @@ class vector3 {
         ((m_x == other.m_x) && (m_y == other.m_y) && (m_z < other.m_z));
   }
 
+  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
+  bool operator>(const vector3& other) const {
+    return (m_x > other.m_x) ||
+        ((m_x == other.m_x) && (m_y > other.m_y)) ||
+        ((m_x == other.m_x) && (m_y == other.m_y) && (m_z > other.m_z));
+  }
+
+  bool operator<=(const vector3& other) const {
+    return *this < other || *this == other;
+  }
+
+  bool operator>=(const vector3& other) const {
+    return *this > other || *this == other;
+  }
+
   /**
    * \brief Returns if this vector and the passed one are not equal by checking
    * coordinates for equality.
@@ -275,6 +292,7 @@ class vector3 {
    */
   bool operator!=(const vector3& other) const { return !(*this == other); }
 
+  /* modifier operators */
   vector3& operator+=(const vector3& other) {
     m_x += other.m_x;
     m_y += other.m_y;
@@ -408,9 +426,9 @@ using vector3d = vector3<double>;
   static inline vector3##dest_prefix dvec2##dest_prefix##vec(           \
       const vector3d& other,                                            \
       double scale) {                                                   \
-    return vector3##dest_prefix(static_cast<dest_type>(std::round(other.x() / scale)), \
-                                static_cast<dest_type>(std::round(other.y() / scale)), \
-                                static_cast<dest_type>(std::round(other.z() / scale))); \
+    return vector3##dest_prefix(static_cast<dest_type>(std::floor(other.x() / scale)), \
+                                static_cast<dest_type>(std::floor(other.y() / scale)), \
+                                static_cast<dest_type>(std::floor(other.z() / scale))); \
   }
 
 /*******************************************************************************

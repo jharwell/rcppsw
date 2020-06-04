@@ -74,16 +74,17 @@ class grid3D_overlay : public base_grid3D<T>,
 
   grid3D_overlay(const math::vector3d& origin,
                  const math::vector3d& dim,
-                 const types::discretize_ratio& res)
-      : grid_overlay(origin, res),
+                 const types::discretize_ratio& grid_res,
+                 const types::discretize_ratio& field_res)
+      : grid_overlay(origin, grid_res, field_res),
         ER_CLIENT_INIT("rcppsw.ds.grid3D_overlay"),
         mc_dim(dim),
         m_cells(boost::extents[static_cast<typename index_range::index>(xdsize())]
                 [typename index_range::index(ydsize())]
                 [typename index_range::index(zdsize())]) {
-      double modx = std::fmod(mc_dim.x(), resolution().v());
-      double mody = std::fmod(mc_dim.y(), resolution().v());
-      double modz = std::fmod(mc_dim.z(), resolution().v());
+    double remx = std::remainder(mc_dim.x(), resolution().v());
+    double remy = std::remainder(mc_dim.y(), resolution().v());
+    double remz = std::remainder(mc_dim.z(), resolution().v());
 
     /*
      * Some values of dimensions and grid resolution might not be able to be
@@ -91,41 +92,32 @@ class grid3D_overlay : public base_grid3D<T>,
      * 0.0. Instead, we verify that IF the mod result is > 0.0 that it is also
      * VERY close to the grid resolution.
      */
-    if (modx >= std::numeric_limits<double>::epsilon()) {
-      ER_ASSERT(std::fabs(resolution().v() - modx) <=
-                std::numeric_limits<double>::epsilon(),
-                "X dimension (%f) not an even multiple of resolution (%f)",
-                mc_dim.x(),
-                resolution().v());
-    }
-    if (mody >= std::numeric_limits<double>::epsilon()) {
-      ER_ASSERT(std::fabs(resolution().v() - mody) <=
-                std::numeric_limits<double>::epsilon(),
-                "Y dimension (%f) not an even multiple of resolution (%f)",
-                mc_dim.y(),
-                resolution().v());
-    }
-    if (modz >= std::numeric_limits<double>::epsilon()) {
-      ER_ASSERT(std::fabs(resolution().v() - modz) <=
-                std::numeric_limits<double>::epsilon(),
-                "Z dimension (%f) not an even multiple of resolution (%f)",
-                mc_dim.z(),
-                resolution().v());
-    }
+    ER_ASSERT(remx <= 1.0 / ONEE9,
+              "X dimension (%f) not an even multiple of resolution (%f)",
+              mc_dim.x(),
+              resolution().v());
+    ER_ASSERT(remy <= 1.0 / ONEE9,
+              "Y dimension (%f) not an even multiple of resolution (%f)",
+              mc_dim.y(),
+              resolution().v());
+    ER_ASSERT(remz <= 1.0 / ONEE9,
+              "Z dimension (%f) not an even multiple of resolution (%f)",
+              mc_dim.z(),
+              resolution().v());
   }
 
   virtual ~grid3D_overlay(void) = default;
 
   size_t xdsize(void) const override {
-    return static_cast<size_t>(std::ceil(mc_dim.x() / resolution().v()));
+    return static_cast<size_t>(mc_dim.x() / resolution().v());
   }
 
   size_t ydsize(void) const override {
-    return static_cast<size_t>(std::ceil(mc_dim.y() / resolution().v()));
+    return static_cast<size_t>(mc_dim.y() / resolution().v());
   }
 
   size_t zdsize(void) const override {
-    return static_cast<size_t>(std::ceil(mc_dim.z() / resolution().v()));
+    return static_cast<size_t>(mc_dim.z() / resolution().v());
   }
 
   /**

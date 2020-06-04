@@ -51,8 +51,7 @@ class base_grid3D {
   using grid_type = typename boost::multi_array<T, 3>;
   using grid_view = typename grid_type::template array_view<3>::type;
   using const_grid_view = typename grid_type::template const_array_view<3>::type;
-  using view_range = typename grid_type::index_range;
-  using index_range = boost::multi_array_types::index_range;
+  using index_range = typename grid_type::index_range;
 
   base_grid3D(void) = default;
   virtual ~base_grid3D(void) = default;
@@ -120,21 +119,18 @@ class base_grid3D {
    * \return The subgrid.
    */
   grid_view subgrid(const math::vector3z& ll, const math::vector3z& ur) {
-    typename grid_type::index_gen indices;
-
     index_range x(ll.x(), ur.x(), 1);
     index_range y(ll.y(), ur.y(), 1);
     index_range z(ll.z(), ur.z(), 1);
-    return grid_view(grid()[indices[x][y][z]]);
+    return grid_view(grid()[boost::indices[x][y][z]]);
   }
 
   const_grid_view subgrid(const math::vector3z& ll,
                           const math::vector3z& ur) const {
-    typename grid_type::index_gen indices;
     index_range x(ll.x(), ur.x(), 1);
     index_range y(ll.y(), ur.y(), 1);
     index_range z(ll.z(), ur.z(), 1);
-    return const_grid_view(grid()[indices[x][y][z]]);
+    return const_grid_view(grid()[boost::indices[x][y][z]]);
   }
 
   /**
@@ -171,8 +167,6 @@ class base_grid3D {
   }
 
   const_grid_view subcircle(const math::vector3z& c, size_t radius) const {
-    typename grid_type::index_gen indices;
-
     auto ll_x = std::max<int>(0,
                               static_cast<int>(c.x()) - static_cast<int>(radius));
     auto ll_y = std::max<int>(0,

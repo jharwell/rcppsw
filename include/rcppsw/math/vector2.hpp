@@ -213,6 +213,7 @@ class vector2 {
    */
   vector2& scale(const T& factor) { return scale(factor, factor); }
 
+  /* relational operators */
   /**
    * \brief Returns if this vector and the argument are considered equal,
    * determined by coordinate comparison.
@@ -244,6 +245,18 @@ class vector2 {
     return (m_x < other.m_x) || ((m_x == other.m_x) && (m_y < other.m_y));
   }
 
+  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
+  bool operator>(const vector2& other) const {
+    return (m_x > other.m_x) || ((m_x == other.m_x) && (m_y > other.m_y));
+  }
+
+  bool operator<=(const vector2& other) const {
+    return *this < other || *this == other;
+  }
+
+  bool operator>=(const vector2& other) const {
+    return *this > other || *this == other;
+  }
   /**
    * \brief Returns if this vector and the passed one are not equal by checking
    * coordinates for equality.
@@ -253,6 +266,7 @@ class vector2 {
    */
   bool operator!=(const vector2& other) const { return !(*this == other); }
 
+  /* modifier operators */
   vector2& operator+=(const vector2& other) {
     m_x += other.m_x;
     m_y += other.m_y;
@@ -380,8 +394,8 @@ using vector2d = vector2<double>;
 #define RCPPSW_MATH_VEC2_CONVD(dest_prefix, dest_type)                  \
   static inline vector2##dest_prefix dvec2##dest_prefix##vec(const vector2d& other, \
                                                              double scale) { \
-    return vector2##dest_prefix(static_cast<dest_type>(std::round(other.x() / scale)),   \
-                                 static_cast<dest_type>(std::round(other.y() / scale))); \
+    return vector2##dest_prefix(static_cast<dest_type>(std::floor(other.x() / scale)),   \
+                                 static_cast<dest_type>(std::floor(other.y() / scale))); \
   }
 
 /*******************************************************************************

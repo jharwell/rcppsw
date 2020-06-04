@@ -66,11 +66,12 @@ class grid_overlay : public er::client<grid_overlay<TOriginType>> {
                                                  math::vector2z,
                                                  math::vector3z>::type;
   grid_overlay(const origin_rtype& origin,
-               const types::discretize_ratio& resolution)
+               const types::discretize_ratio& grid_resolution,
+               const types::discretize_ratio& field_resolution)
       : ER_CLIENT_INIT("rcppsw.ds.grid_overlay"),
-        mc_resolution(resolution),
+        mc_resolution(grid_resolution),
         mc_originr(origin),
-        mc_origind(math::dvec2zvec(origin, mc_resolution.v())) {}
+        mc_origind(math::dvec2zvec(origin, field_resolution.v())) {}
 
   virtual ~grid_overlay(void) = default;
 

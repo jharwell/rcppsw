@@ -78,14 +78,15 @@ class grid2D_overlay final : public base_grid2D<T>,
    */
   grid2D_overlay(const math::vector2d& origin,
                  const math::vector2d& dims,
-                 const types::discretize_ratio& res)
-      : grid_overlay(origin, res),
+                 const types::discretize_ratio& grid_res,
+                 const types::discretize_ratio& field_res)
+      : grid_overlay(origin, grid_res, field_res),
         ER_CLIENT_INIT("rcppsw.ds.grid2D_overlay"),
         mc_dim(dims),
         m_cells(boost::extents[static_cast<typename index_range::index>(xdsize())]
                 [typename index_range::index(ydsize())]) {
-    double modx = std::fmod(mc_dim.x(), resolution().v());
-    double mody = std::fmod(mc_dim.y(), resolution().v());
+    double remx = std::remainder(mc_dim.x(), resolution().v());
+    double remy = std::remainder(mc_dim.y(), resolution().v());
 
     /*
      * Some values of dimensions and grid resolution might not be able to be
@@ -93,18 +94,14 @@ class grid2D_overlay final : public base_grid2D<T>,
      * 0.0. Instead, we verify that IF the mod result is > 0.0 that it is also
      * VERY close to the grid resolution.
      */
-    if (modx >= std::numeric_limits<double>::epsilon()) {
-      ER_ASSERT(std::fabs(resolution().v() - modx) <= 1.0 / ONEE9,
-                "X dimension (%f) not an even multiple of resolution (%f)",
-                mc_dim.x(),
-                resolution().v());
-    }
-    if (mody >= std::numeric_limits<double>::epsilon()) {
-      ER_ASSERT(std::fabs(resolution().v() - mody) <= 1.0 / ONEE9,
-                "Y dimension (%f) not an even multiple of resolution (%f)",
-                mc_dim.y(),
-                resolution().v());
-    }
+    ER_ASSERT(remx <= 1.0 / ONEE9,
+              "X dimension (%f) not an even multiple of resolution (%f)",
+              mc_dim.x(),
+              resolution().v());
+    ER_ASSERT(remy <= 1.0 / ONEE9,
+              "Y dimension (%f) not an even multiple of resolution (%f)",
+              mc_dim.y(),
+              resolution().v());
   }
 
   /**
@@ -118,11 +115,11 @@ class grid2D_overlay final : public base_grid2D<T>,
   }
 
   size_t xdsize(void) const override {
-    return static_cast<size_t>(std::ceil(mc_dim.x() / resolution().v()));
+    return static_cast<size_t>(mc_dim.x() / resolution().v());
   }
 
   size_t ydsize(void) const override {
-    return static_cast<size_t>(std::ceil(mc_dim.y() / resolution().v()));
+    return static_cast<size_t>(mc_dim.y() / resolution().v());
   }
 
   /**

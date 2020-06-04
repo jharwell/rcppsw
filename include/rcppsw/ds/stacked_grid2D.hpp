@@ -60,9 +60,10 @@ class stacked_grid2D {
  public:
   stacked_grid2D(const math::vector2d& origin,
                  const math::vector2d& dims,
-                 const types::discretize_ratio& resolution)
+                 const types::discretize_ratio& grid_res,
+                 const types::discretize_ratio& field_res)
       : m_layers(kStackSize) {
-    add_layers<kStackSize - 1>(origin, dims, resolution);
+    add_layers<kStackSize - 1>(origin, dims, grid_res, field_res);
   }
 
   virtual ~stacked_grid2D(void) { rm_layers<kStackSize - 1>(); }

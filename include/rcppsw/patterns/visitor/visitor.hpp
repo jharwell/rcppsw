@@ -130,8 +130,10 @@ struct precise_visitor : public VisitorImpl,
  * \class filtered_visitor
  * \ingroup patterns visitor
  *
- * Convenience wrapper allowing generic visits to ANY type, but filtering them
- * on the \ref rmpl::typelist passed to the \ref rpvisitor::precise_visitor.
+ * \brief Convenience wrapper allowing generic visits to ANY type, but filtering
+ * them on the \ref rmpl::typelist passed to the \ref
+ * rpvisitor::precise_visitor. This class is appropriate if no non-static
+ * methods from \p TVisitor are needed.
  *
  * \tparam TVisitor The name of the visitor class, which must be capable of
  *                  being used with \ref precise_visitor, and define \p

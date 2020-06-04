@@ -104,6 +104,16 @@ class base_factory {
     }
   }
 
+  template <typename TDerived>
+  void unregister_type(const TKeyType& name) {
+    static_assert(std::is_base_of<TBase, TDerived>::value,
+                  "unregister_type() only accepts types derived from the base");
+    auto it = m_workers.find(name);
+    if (m_workers.end() != it) {
+      m_workers.erase(it);
+    }
+  }
+
  private:
   /**
    * \brief Helper interface class to actually do object creation. Must be

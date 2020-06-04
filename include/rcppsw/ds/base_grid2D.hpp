@@ -51,8 +51,7 @@ class base_grid2D {
   using grid_type = typename boost::multi_array<T, 2>;
   using grid_view = typename grid_type::template array_view<2>::type;
   using const_grid_view = typename grid_type::template const_array_view<2>::type;
-  using view_range = typename grid_type::index_range;
-  using index_range = boost::multi_array_types::index_range;
+  using index_range = typename grid_type::index_range;
 
   base_grid2D(void) = default;
   virtual ~base_grid2D(void) = default;
@@ -153,20 +152,16 @@ class base_grid2D {
    * \return The subgrid.
    */
   grid_view subgrid(const math::vector2z& ll, const math::vector2z& ur) {
-    typename grid_type::index_gen indices;
-
     index_range x(ll.x(), ur.x(), 1);
     index_range y(ll.y(), ur.y(), 1);
-    return grid_view(grid()[indices[x][y]]);
+    return grid_view(grid()[boost::indices[x][y]]);
   }
 
   const_grid_view subgrid(const math::vector2z& ll,
                           const math::vector2z& ur) const {
-    typename grid_type::index_gen indices;
-
     index_range x(ll.x(), ur.x(), 1);
     index_range y(ll.y(), ur.y(), 1);
-    return const_grid_view(grid()[indices[x][y]]);
+    return const_grid_view(grid()[boost::indices[x][y]]);
   }
 
  protected:
