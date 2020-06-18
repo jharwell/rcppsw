@@ -120,9 +120,15 @@ struct precise_visitor : public VisitorImpl,
   explicit precise_visitor(Args&&... args)
       : VisitorImpl(std::forward<Args>(args)...) {}
 
-  template <typename T, RCPPSW_SFINAE_TYPELIST_REQUIRE(TypeList, T)>
-  void visit(T& visitee) {
-    VisitorImpl::visit(visitee);
+  template <typename T,
+            RCPPSW_SFINAE_TYPELIST_REQUIRE(TypeList, T),
+            typename ...Args>
+  /**
+   * The visit template, which can take additional arguments besides the
+   * visitee.
+   */
+  void visit(T& visitee, Args&&... args) {
+    VisitorImpl::visit(visitee, std::forward<Args>(args)...);
   }
 };
 
@@ -147,8 +153,10 @@ class filtered_visitor {
   explicit filtered_visitor(Args&& ...args)
       : m_impl(std::forward<Args>(args)...) {}
 
-  template<typename TAny>
-  void visit(TAny& obj) { m_impl.visit(obj); }
+  template<typename TAny, typename ...Args>
+  void visit(TAny& obj, Args&&... args) {
+    m_impl.visit(obj, std::forward<Args>(args)...);
+  }
 
  private:
   /**

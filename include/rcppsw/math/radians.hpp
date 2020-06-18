@@ -86,14 +86,16 @@ class radians {
    * \brief Normalizes the value in the range [-pi, pi].
    */
   radians& signed_normalize(void) {
-    return *this = kSignedRange.wrap_value(*this);
+    static range<radians> signed_range(-kPI, kPI);
+    return *this = signed_range.wrap_value(*this);
   }
 
   /**
    * \brief Normalizes the value in the range [0, 2pi]
    */
   radians& unsigned_normalize(void) {
-    return *this = kUnsignedRange.wrap_value(*this);
+    static range<radians> unsigned_range(kZERO, kTWO_PI);
+    return *this = unsigned_range.wrap_value(*this);
   }
 
   std::string to_str(void) const;
@@ -191,17 +193,9 @@ class radians {
 
 
  private:
-  /**
-   * The signed normalization range [-pi, pi]
-   */
-  static const range<radians> kSignedRange;
-
-  /**
-   * The unsigned normalization range [0, 2pi]
-   */
-  static const range<radians> kUnsignedRange;
-
+  /* clang-format off */
   double m_value{0.0};
+  /* clang-format on */
 };
 
 /*******************************************************************************

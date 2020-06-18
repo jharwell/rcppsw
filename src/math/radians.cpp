@@ -47,14 +47,10 @@ const radians radians::kPI_OVER_THREE(M_PI / 3.0);           // NOLINT
 const radians radians::kPI_OVER_FOUR(M_PI / 4.0);            // NOLINT
 const radians radians::kZERO(0.0);                           // NOLINT
 
-const double radians::kRADIANS_TO_DEGREES(180.0 / M_PI); // NOLINT
-const range<radians> radians::kSignedRange(-radians(M_PI),
-                                           radians(M_PI)); // NOLINT
-const range<radians> radians::kUnsignedRange(radians(0),
-                                             radians(2 * M_PI)); // NOLINT
-
-double radians::kAPPROX_EQUALITY_TOL = 1.0 / ONEE6;
 RCPPSW_WARNING_DISABLE_POP()
+
+const double radians::kRADIANS_TO_DEGREES(180.0 / M_PI); // NOLINT
+double radians::kAPPROX_EQUALITY_TOL = 1.0 / ONEE6;
 
 /*******************************************************************************
  * Constructors/Destructors
