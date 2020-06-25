@@ -401,47 +401,47 @@ using vector3d = vector3<double>;
  * Macros
  ******************************************************************************/
 /**
- * \brief Convert vector3{i,u} -> vector3d directly, without applying any
+ * \brief Convert vector3{i,u,z} -> vector3d directly, without applying any
  * scaling.
  */
-#define RCPPSW_MATH_VEC3_DIRECT_CONVF(prefix)                           \
+#define RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(prefix)                           \
   static inline vector3d prefix##vec2dvec(const vector3##prefix& other) { \
     return vector3d(other.x(), other.y(), other.z());                   \
   }
 
 /**
- * \brief Convert vector3{i,u} -> vector3d, applying a multiplicative scaling
+ * \brief Convert vector3{i,u,z} -> vector3d, applying a multiplicative scaling
  * factor.
  */
-#define RCPPSW_MATH_VEC3_SCALED_CONVF(prefix)                           \
+#define RCPPSW_MATH_VEC3_SCALED_CONV2FLT(prefix)                           \
   static inline vector3d prefix##vec2dvec(const vector3##prefix& other, \
                                           double scale) {               \
     return vector3d(other.x() * scale, other.y() * scale, other.z() * scale); \
   }
 
 /**
- * \brief Convert vector3d -> vector3{u,z}, applying a divisive scaling factor.
+ * \brief Convert vector3d -> vector3{i,u,z}, applying a divisive scaling factor.
  */
-#define RCPPSW_MATH_VEC3_CONVD(dest_prefix, dest_type)               \
+#define RCPPSW_MATH_VEC3_CONV2DISC(dest_prefix, dest_type)               \
   static inline vector3##dest_prefix dvec2##dest_prefix##vec(           \
       const vector3d& other,                                            \
       double scale) {                                                   \
-    return vector3##dest_prefix(static_cast<dest_type>(std::floor(other.x() / scale)), \
-                                static_cast<dest_type>(std::floor(other.y() / scale)), \
-                                static_cast<dest_type>(std::floor(other.z() / scale))); \
+    return vector3##dest_prefix(static_cast<dest_type>(other.x() / scale), \
+                                static_cast<dest_type>(other.y() / scale), \
+                                static_cast<dest_type>(other.z() / scale)); \
   }
 
 /*******************************************************************************
  * Free Functions
  ******************************************************************************/
-RCPPSW_MATH_VEC3_DIRECT_CONVF(u);
-RCPPSW_MATH_VEC3_DIRECT_CONVF(i);
-RCPPSW_MATH_VEC3_DIRECT_CONVF(z);
-RCPPSW_MATH_VEC3_SCALED_CONVF(u);
-RCPPSW_MATH_VEC3_SCALED_CONVF(i);
-RCPPSW_MATH_VEC3_SCALED_CONVF(z);
-RCPPSW_MATH_VEC3_CONVD(z, size_t);
-RCPPSW_MATH_VEC3_CONVD(u, uint);
+RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(u);
+RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(i);
+RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(z);
+RCPPSW_MATH_VEC3_SCALED_CONV2FLT(u);
+RCPPSW_MATH_VEC3_SCALED_CONV2FLT(i);
+RCPPSW_MATH_VEC3_SCALED_CONV2FLT(z);
+RCPPSW_MATH_VEC3_CONV2DISC(z, size_t);
+RCPPSW_MATH_VEC3_CONV2DISC(u, uint);
 
 template<class T>
 vector2<T> to_2D(const vector3<T>& v) { return v.to_2D(); }

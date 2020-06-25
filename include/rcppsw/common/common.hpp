@@ -343,7 +343,7 @@ std::string to_string(const T& obj) {
 }
 
 /**
- * @brief Adaptor func for types where rcppsw::to_string() works so you can
+ * @brief Adaptor func for types where std::to_string() works so you can
  * ALWAYS use rcppsw::to_string().
  */
 template <typename T,

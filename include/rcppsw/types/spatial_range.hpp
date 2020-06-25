@@ -1,5 +1,5 @@
 /**
- * \file spatial_dist.cpp
+ * \file spatial_range.hpp
  *
  * \copyright 2020 John Harwell, All rights reserved.
  *
@@ -18,12 +18,14 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_TYPES_SPATIAL_RANGE_HPP_
+#define INCLUDE_RCPPSW_TYPES_SPATIAL_RANGE_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include "rcppsw/math/range.hpp"
 #include "rcppsw/types/spatial_dist.hpp"
-
-#include <cmath>
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -31,22 +33,10 @@
 NS_START(rcppsw, types);
 
 /*******************************************************************************
- * Constructors
+ * Class Definitions
  ******************************************************************************/
-spatial_dist::spatial_dist(const double& value)
-      : named_type<double, spatial_dist_tag>(std::fabs(value)) {}
-
-/*******************************************************************************
- * Operators
- ******************************************************************************/
-spatial_dist operator*(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs * rhs.v());
-}
-spatial_dist operator-(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs - rhs.v());
-}
-spatial_dist operator+(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs + rhs.v());
-}
+using spatial_range = math::range<types::spatial_dist>;
 
 NS_END(types, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_TYPES_SPATIAL_RANGE_HPP_ */

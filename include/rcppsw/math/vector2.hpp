@@ -373,9 +373,9 @@ using vector2d = vector2<double>;
  * \brief Convert vector2{i,u} -> vector2d directly, without applying any
  * scaling.
  */
-#define RCPPSW_MATH_VEC2_DIRECT_CONVF(prefix)                             \
+#define RCPPSW_MATH_VEC2_DIRECT_CONVF(prefix)                           \
   static inline vector2d prefix##vec2dvec(const vector2##prefix& other) { \
-    return vector2d(other.x(), other.y());                                \
+    return vector2d(other.x(), other.y());                              \
   }
 
 /**
@@ -394,8 +394,8 @@ using vector2d = vector2<double>;
 #define RCPPSW_MATH_VEC2_CONVD(dest_prefix, dest_type)                  \
   static inline vector2##dest_prefix dvec2##dest_prefix##vec(const vector2d& other, \
                                                              double scale) { \
-    return vector2##dest_prefix(static_cast<dest_type>(std::floor(other.x() / scale)),   \
-                                 static_cast<dest_type>(std::floor(other.y() / scale))); \
+    return vector2##dest_prefix(static_cast<dest_type>(other.x() / scale), \
+                                static_cast<dest_type>(other.y() / scale)); \
   }
 
 /*******************************************************************************

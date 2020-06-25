@@ -63,7 +63,31 @@ class spatial_dist : public named_type<double, struct spatial_dist_tag> {
     res.set(res.v() * other);
     return res;
   }
+
+  spatial_dist& operator-=(double other) {
+    set(v() - other);
+    return *this;
+  }
+
+  spatial_dist operator-(double other) const {
+    spatial_dist res(v());
+    res.set(res.v() - other);
+    return res;
+  }
+  spatial_dist operator-(const spatial_dist& rhs) const {
+    return spatial_dist(v() - rhs.v());
+  }
+  spatial_dist operator+(const spatial_dist& rhs) const {
+    return spatial_dist(v() + rhs.v());
+  }
 };
+
+/*******************************************************************************
+ * Operators
+ ******************************************************************************/
+spatial_dist operator*(double lhs, const spatial_dist& rhs);
+spatial_dist operator-(double lhs, const spatial_dist& rhs);
+spatial_dist operator+(double lhs, const spatial_dist& rhs);
 
 NS_END(types, rcppsw);
 
