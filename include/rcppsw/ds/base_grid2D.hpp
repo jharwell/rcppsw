@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <boost/multi_array.hpp>
 #include <algorithm>
+#include <boost/multi_array.hpp>
 
 #include "rcppsw/math/vector2.hpp"
 
@@ -104,10 +104,10 @@ class base_grid2D {
    * \return The subcircle.
    */
   grid_view subcircle(const math::vector2z& c, size_t radius) {
-    auto ll_x = std::max<int>(0,
-                              static_cast<int>(c.x()) - static_cast<int>(radius));
-    auto ll_y = std::max<int>(0,
-                              static_cast<int>(c.y()) - static_cast<int>(radius));
+    auto ll_x =
+        std::max<int>(0, static_cast<int>(c.x()) - static_cast<int>(radius));
+    auto ll_y =
+        std::max<int>(0, static_cast<int>(c.y()) - static_cast<int>(radius));
 
     /*
      * boost uses half open interval for index ranges, and we want a closed
@@ -123,10 +123,10 @@ class base_grid2D {
   }
 
   const_grid_view subcircle(const math::vector2z& c, size_t radius) const {
-    auto ll_x = std::max<int>(0,
-                              static_cast<int>(c.x()) - static_cast<int>(radius));
-    auto ll_y = std::max<int>(0,
-                              static_cast<int>(c.y()) - static_cast<int>(radius));
+    auto ll_x =
+        std::max<int>(0, static_cast<int>(c.x()) - static_cast<int>(radius));
+    auto ll_y =
+        std::max<int>(0, static_cast<int>(c.y()) - static_cast<int>(radius));
 
     /*
      * boost uses half open interval for index ranges, and we want a closed

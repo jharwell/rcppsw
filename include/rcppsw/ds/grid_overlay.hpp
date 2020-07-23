@@ -24,10 +24,10 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/types/discretize_ratio.hpp"
 #include "rcppsw/er/client.hpp"
-#include "rcppsw/math/vector3.hpp"
 #include "rcppsw/math/vector2.hpp"
+#include "rcppsw/math/vector3.hpp"
+#include "rcppsw/types/discretize_ratio.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -54,17 +54,17 @@ template <typename TOriginType>
 class grid_overlay : public er::client<grid_overlay<TOriginType>> {
  public:
   static_assert(std::is_same<TOriginType, math::vector2d>::value ||
-                std::is_same<TOriginType, math::vector3d>::value,
+                    std::is_same<TOriginType, math::vector3d>::value,
                 "Bad origin type: not 2D or 3D vector");
 
-  using origin_rtype = typename std::conditional<std::is_same<TOriginType,
-                                                             math::vector2d>::value,
-                                                math::vector2d,
-                                                math::vector3d>::type;
-  using origin_dtype = typename std::conditional<std::is_same<TOriginType,
-                                                              math::vector2z>::value,
-                                                 math::vector2z,
-                                                 math::vector3z>::type;
+  using origin_rtype =
+      typename std::conditional<std::is_same<TOriginType, math::vector2d>::value,
+                                math::vector2d,
+                                math::vector3d>::type;
+  using origin_dtype =
+      typename std::conditional<std::is_same<TOriginType, math::vector2z>::value,
+                                math::vector2z,
+                                math::vector3z>::type;
   grid_overlay(const origin_rtype& origin,
                const types::discretize_ratio& grid_resolution,
                const types::discretize_ratio& field_resolution)
@@ -78,7 +78,9 @@ class grid_overlay : public er::client<grid_overlay<TOriginType>> {
   /**
    * \brief Return the resolution of the grid.
    */
-  const types::discretize_ratio& resolution(void) const { return mc_resolution; }
+  const types::discretize_ratio& resolution(void) const {
+    return mc_resolution;
+  }
 
   /**
    * \brief Return the real origin of the grid in real coordinates.

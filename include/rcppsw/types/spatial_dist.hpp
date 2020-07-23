@@ -59,7 +59,7 @@ class spatial_dist : public named_type<double, struct spatial_dist_tag> {
   bool operator<=(double other) const { return v() <= other; }
   bool operator>(double other) const { return v() > other; }
   spatial_dist operator*(double other) const {
-    spatial_dist res(v());
+    spatial_dist res(v(), false);
     res.set(res.v() * other);
     return res;
   }
@@ -70,7 +70,7 @@ class spatial_dist : public named_type<double, struct spatial_dist_tag> {
   }
 
   spatial_dist operator-(double other) const {
-    spatial_dist res(v());
+    spatial_dist res(v(), false);
     res.set(res.v() - other);
     return res;
   }
@@ -78,8 +78,11 @@ class spatial_dist : public named_type<double, struct spatial_dist_tag> {
     return spatial_dist(v() - rhs.v());
   }
   spatial_dist operator+(const spatial_dist& rhs) const {
-    return spatial_dist(v() + rhs.v());
+    return spatial_dist(v() + rhs.v(), false);
   }
+
+ private:
+  spatial_dist(const double& value, bool take_abs);
 };
 
 /*******************************************************************************

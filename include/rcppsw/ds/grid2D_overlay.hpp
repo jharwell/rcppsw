@@ -27,8 +27,8 @@
 #include <limits>
 
 #include "rcppsw/ds/base_grid2D.hpp"
-#include "rcppsw/er/client.hpp"
 #include "rcppsw/ds/grid_overlay.hpp"
+#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -83,8 +83,8 @@ class grid2D_overlay final : public base_grid2D<T>,
       : grid_overlay(origin, grid_res, field_res),
         ER_CLIENT_INIT("rcppsw.ds.grid2D_overlay"),
         mc_dim(dims),
-        m_cells(boost::extents[static_cast<typename index_range::index>(xdsize())]
-                [typename index_range::index(ydsize())]) {
+        m_cells(boost::extents[static_cast<typename index_range::index>(
+            xdsize())][typename index_range::index(ydsize())]) {
     double remx = std::remainder(mc_dim.x(), resolution().v());
     double remy = std::remainder(mc_dim.y(), resolution().v());
 

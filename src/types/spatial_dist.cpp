@@ -33,8 +33,11 @@ NS_START(rcppsw, types);
 /*******************************************************************************
  * Constructors
  ******************************************************************************/
-spatial_dist::spatial_dist(const double& value)
-      : named_type<double, spatial_dist_tag>(std::fabs(value)) {}
+spatial_dist::spatial_dist(const double& value) : spatial_dist{value, true} {}
+
+spatial_dist::spatial_dist(const double& value, bool take_abs)
+    : named_type<double, spatial_dist_tag>(take_abs ? std::fabs(value) : value) {
+}
 
 /*******************************************************************************
  * Operators

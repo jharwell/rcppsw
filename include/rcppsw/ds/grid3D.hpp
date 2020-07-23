@@ -56,9 +56,7 @@ class grid3D : public base_grid3D<T> {
   grid3D(size_t x_max, size_t y_max, size_t z_max)
       : m_cells(boost::extents[x_max][y_max][z_max]) {}
 
-  T& access(size_t i, size_t j, size_t k) override {
-    return m_cells[i][j][k];
-  }
+  T& access(size_t i, size_t j, size_t k) override { return m_cells[i][j][k]; }
 
   size_t xsize(void) const { return m_cells.shape()[0]; }
   size_t ysize(void) const { return m_cells.shape()[1]; }

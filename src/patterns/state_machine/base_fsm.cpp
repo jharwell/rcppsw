@@ -126,7 +126,7 @@ void base_fsm::state_engine(void) {
   if (map != nullptr) {
     state_engine_map();
   } else {
-  state_engine_map_ex();
+    state_engine_map_ex();
   }
 } /* state_engine() */
 

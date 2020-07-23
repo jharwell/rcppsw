@@ -59,8 +59,7 @@ template <typename T>
 class range final : public er::client<range<T>> {
  public:
   range(void) noexcept
-      : ER_CLIENT_INIT("rcppsw.math.range"),
-        m_initialized(false) {}
+      : ER_CLIENT_INIT("rcppsw.math.range"), m_initialized(false) {}
   range(const T& lb, const T& ub) noexcept
       : ER_CLIENT_INIT("rcppsw.math.range"),
         m_initialized(true),
@@ -75,7 +74,8 @@ class range final : public er::client<range<T>> {
 
   void lb(const T& lb) {
     ER_ASSERT(m_initialized, "Range not initialized");
-    ER_ASSERT(lb < m_ub, "New lower bound (%s) >= upper bound (%s)",
+    ER_ASSERT(lb < m_ub,
+              "New lower bound (%s) >= upper bound (%s)",
               rcppsw::to_string(lb).c_str(),
               rcppsw::to_string(m_ub).c_str());
     m_lb = lb;
@@ -85,7 +85,8 @@ class range final : public er::client<range<T>> {
 
   void ub(const T& ub) {
     ER_ASSERT(m_initialized, "Range not initialized");
-    ER_ASSERT(ub > m_lb, "New upper bound (%s) <= lower bound (%s)",
+    ER_ASSERT(ub > m_lb,
+              "New upper bound (%s) <= lower bound (%s)",
               rcppsw::to_string(ub).c_str(),
               rcppsw::to_string(m_lb).c_str());
 
@@ -95,7 +96,8 @@ class range final : public er::client<range<T>> {
   }
 
   void set(const T& lb, const T& ub) {
-    ER_ASSERT(lb < ub, "New lower bound (%s) >= New upper bound (%s)",
+    ER_ASSERT(lb < ub,
+              "New lower bound (%s) >= New upper bound (%s)",
               rcppsw::to_string(m_lb).c_str(),
               rcppsw::to_string(m_ub).c_str());
     m_initialized = true;
@@ -224,7 +226,6 @@ using rangez = range<size_t>;
  */
 using ranged = range<double>;
 
-
 /*******************************************************************************
  * Macros
  ******************************************************************************/
@@ -232,7 +233,7 @@ using ranged = range<double>;
  * \brief Convert range{i,u,z} -> ranged directly, without applying any
  * scaling.
  */
-#define RCPPSW_MATH_RANGE_DIRECT_CONV2FLT(prefix)                           \
+#define RCPPSW_MATH_RANGE_DIRECT_CONV2FLT(prefix)                         \
   static inline ranged prefix##range2drange(const range##prefix& other) { \
     return ranged(other.lb(), other.lb());                                \
   }
@@ -241,7 +242,7 @@ using ranged = range<double>;
  * \brief Convert range{i,u,z} -> ranged, applying a multiplicative scaling
  * factor.
  */
-#define RCPPSW_MATH_RANGE_SCALED_CONV2FLT(prefix)                         \
+#define RCPPSW_MATH_RANGE_SCALED_CONV2FLT(prefix)                       \
   static inline ranged prefix##range2drange(const range##prefix& other, \
                                             double scale) {             \
     return ranged(other.lb() * scale, other.ub() * scale);              \
@@ -250,11 +251,10 @@ using ranged = range<double>;
 /**
  * \brief Convert ranged -> range{i,u,z}, applying a divisive scaling factor.
  */
-#define RCPPSW_MATH_RANGE_CONV2DISC(dest_prefix,dest_type)                 \
-  static inline range##dest_prefix drange2##dest_prefix##range(         \
-      const range##dest_prefix& other,                                       \
-      double scale) {                                                   \
-    return range##dest_prefix(static_cast<dest_type>(other.lb() / scale),    \
+#define RCPPSW_MATH_RANGE_CONV2DISC(dest_prefix, dest_type)                \
+  static inline range##dest_prefix drange2##dest_prefix##range(            \
+      const range##dest_prefix& other, double scale) {                     \
+    return range##dest_prefix(static_cast<dest_type>(other.lb() / scale),  \
                               static_cast<dest_type>(other.ub() / scale)); \
   }
 

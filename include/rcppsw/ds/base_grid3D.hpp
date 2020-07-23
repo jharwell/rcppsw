@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <boost/multi_array.hpp>
 #include <algorithm>
+#include <boost/multi_array.hpp>
 
 #include "rcppsw/math/vector3.hpp"
 
@@ -82,7 +82,7 @@ class base_grid3D {
    */
   virtual size_t zdsize(void) const = 0;
 
-  T& access(const math::vector3z& c)  { return access(c.x(), c.y(), c.z()); }
+  T& access(const math::vector3z& c) { return access(c.x(), c.y(), c.z()); }
 
   const T& access(const math::vector3z& c) const {
     return const_cast<base_grid3D*>(this)->access(c);
@@ -105,7 +105,7 @@ class base_grid3D {
    */
   grid_view layer(size_t z) {
     return subgrid(math::vector3z(0, ydsize(), z),
-                   math::vector3z(0, ydsize(), z+1));
+                   math::vector3z(0, ydsize(), z + 1));
   }
 
   const_grid_view layer(size_t z) const {
@@ -148,10 +148,10 @@ class base_grid3D {
    * \return The subcircle.
    */
   grid_view subcircle(const math::vector3z& c, size_t radius) {
-    auto ll_x = std::max<int>(0,
-                              static_cast<int>(c.x()) - static_cast<int>(radius));
-    auto ll_y = std::max<int>(0,
-                              static_cast<int>(c.y()) - static_cast<int>(radius));
+    auto ll_x =
+        std::max<int>(0, static_cast<int>(c.x()) - static_cast<int>(radius));
+    auto ll_y =
+        std::max<int>(0, static_cast<int>(c.y()) - static_cast<int>(radius));
 
     /*
      * boost uses half open interval for index ranges, and we want a closed
@@ -167,10 +167,10 @@ class base_grid3D {
   }
 
   const_grid_view subcircle(const math::vector3z& c, size_t radius) const {
-    auto ll_x = std::max<int>(0,
-                              static_cast<int>(c.x()) - static_cast<int>(radius));
-    auto ll_y = std::max<int>(0,
-                              static_cast<int>(c.y()) - static_cast<int>(radius));
+    auto ll_x =
+        std::max<int>(0, static_cast<int>(c.x()) - static_cast<int>(radius));
+    auto ll_y =
+        std::max<int>(0, static_cast<int>(c.y()) - static_cast<int>(radius));
 
     /*
      * boost uses half open interval for index ranges, and we want a closed

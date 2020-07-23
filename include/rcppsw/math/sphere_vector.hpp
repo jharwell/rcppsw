@@ -43,9 +43,7 @@ NS_START(rcppsw, math);
 template <class T>
 class sphere_vector {
  public:
-  sphere_vector(const T& radius,
-                const radians& zenith,
-                const radians& azimuth)
+  sphere_vector(const T& radius, const radians& zenith, const radians& azimuth)
       : m_radius(radius), m_zenith(zenith), m_azimuth(azimuth) {}
 
   const radians& azimuth(void) const { return m_azimuth; }

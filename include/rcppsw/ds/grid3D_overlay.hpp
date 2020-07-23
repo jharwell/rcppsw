@@ -27,8 +27,8 @@
 #include <limits>
 
 #include "rcppsw/ds/base_grid3D.hpp"
-#include "rcppsw/er/client.hpp"
 #include "rcppsw/ds/grid_overlay.hpp"
+#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -79,9 +79,9 @@ class grid3D_overlay : public base_grid3D<T>,
       : grid_overlay(origin, grid_res, field_res),
         ER_CLIENT_INIT("rcppsw.ds.grid3D_overlay"),
         mc_dim(dim),
-        m_cells(boost::extents[static_cast<typename index_range::index>(xdsize())]
-                [typename index_range::index(ydsize())]
-                [typename index_range::index(zdsize())]) {
+        m_cells(boost::extents[static_cast<typename index_range::index>(
+            xdsize())][typename index_range::index(ydsize())]
+                              [typename index_range::index(zdsize())]) {
     double remx = std::remainder(mc_dim.x(), resolution().v());
     double remy = std::remainder(mc_dim.y(), resolution().v());
     double remz = std::remainder(mc_dim.z(), resolution().v());
@@ -142,8 +142,8 @@ class grid3D_overlay : public base_grid3D<T>,
 
   T& access(size_t i, size_t j, size_t k) override {
     return m_cells[static_cast<typename index_range::index>(i)]
-        [static_cast<typename index_range::index>(j)]
-        [static_cast<typename index_range::index>(k)];
+                  [static_cast<typename index_range::index>(j)]
+                  [static_cast<typename index_range::index>(k)];
   }
 
  private:

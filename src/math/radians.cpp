@@ -62,18 +62,15 @@ radians::radians(const degrees& d) : m_value(to_radians(d).value()) {}
  ******************************************************************************/
 std::string radians::to_str(void) const {
   return "rad(" + rcppsw::to_string(m_value) + ") -> deg(" +
-      rcppsw::to_string(m_value * radians::kRADIANS_TO_DEGREES) +
-      ")";
+         rcppsw::to_string(m_value * radians::kRADIANS_TO_DEGREES) + ")";
 }
-
 
 /*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
 std::ostream& operator<<(std::ostream& stream, const radians& r) {
   stream << "rad(" << r.value() << ") -> deg("
-         << r.value() * radians::kRADIANS_TO_DEGREES
-         << ")";
+         << r.value() * radians::kRADIANS_TO_DEGREES << ")";
   return stream;
 } /* operator<<() */
 

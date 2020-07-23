@@ -141,9 +141,8 @@ void base_cli::print(void) {
                     << std::endl;
         }
       } catch (const boost::bad_any_cast&) {
-        std::cout << "UnknownType("
-                  << it.second.value().type().name()
-                  << ")" << std::endl;
+        std::cout << "UnknownType(" << it.second.value().type().name() << ")"
+                  << std::endl;
       }
     }
   } /* for() */

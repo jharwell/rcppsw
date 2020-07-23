@@ -214,7 +214,7 @@
 #define RCPPSW_WARNING_DISABLE_MISSING_VAR_DECL(...)
 #define RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...)
 #define RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...)
-#define RCPPSW_WARNING_DISABLE_OVERLOADED_VIRTUAL(...)  \
+#define RCPPSW_WARNING_DISABLE_OVERLOADED_VIRTUAL(...) \
   RCSW_WARNING_DISABLE(-Woverloaded-virtual)
 
 #endif /* __INTEL_COMPILER__ */
@@ -314,7 +314,8 @@ template <typename T, typename U, typename = void>
 struct can_static_cast : std::false_type {};
 
 template <typename T, typename U>
-struct can_static_cast<T, U,
+struct can_static_cast<T,
+                       U,
                        std::void_t<decltype(static_cast<U>(std::declval<T>()))>>
     : std::true_type {};
 

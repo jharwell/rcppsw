@@ -48,6 +48,7 @@
 #include <log4cxx/ndc.h>
 #include <log4cxx/patternlayout.h>
 #include <log4cxx/xml/domconfigurator.h>
+
 #include <iostream>
 #endif
 
@@ -171,7 +172,7 @@
  */
 #define ER_CHECK(cond, msg, ...)  \
   {                               \
-    if (!(cond)) {                \
+    if (RCSW_UNLIKELY(!(cond))) { \
       ER_ERR(msg, ##__VA_ARGS__); \
       goto error;                 \
     }                             \
@@ -205,7 +206,7 @@
  * must derive from \ref client.
  */
 #define ER_ASSERT(cond, msg, ...) \
-  if (!(cond)) {                  \
+  if (RCSW_UNLIKELY(!(cond))) {   \
     ER_FATAL(msg, ##__VA_ARGS__); \
     assert(cond);                 \
   }
@@ -284,9 +285,9 @@
  * Verify the correct environment variables were set up for event reporting
  * before the application was launched.
  */
-#define ER_ENV_VERIFY(...)                                              \
-  rcppsw::er::client<                                                   \
-                     typename std::remove_reference<decltype(*this)>::type>::env_verify()
+#define ER_ENV_VERIFY(...) \
+  rcppsw::er::client<      \
+      typename std::remove_reference<decltype(*this)>::type>::env_verify()
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -426,7 +427,6 @@ class client {
 #endif  /* LIBRA_ER >= LIBRA_ER_ALL */
   /* clang-format on */
 };
-
 
 template <typename T>
 bool client<T>::m_initialized = false;
