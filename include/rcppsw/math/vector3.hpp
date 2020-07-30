@@ -265,10 +265,28 @@ class vector3 {
            ((m_x == other.m_x) && (m_y == other.m_y) && (m_z < other.m_z));
   }
 
+  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  bool operator<(const vector3& other) const {
+    bool equal_x = std::fabs(m_x - other.m_x) <= std::numeric_limits<T>::epsilon();
+    bool equal_y = std::fabs(m_y - other.m_y) <= std::numeric_limits<T>::epsilon();
+
+    return (m_x < other.m_x) || (equal_x && (m_y < other.m_y)) ||
+        (equal_x && equal_y && (m_z < other.m_z));
+  }
+
   template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
   bool operator>(const vector3& other) const {
     return (m_x > other.m_x) || ((m_x == other.m_x) && (m_y > other.m_y)) ||
            ((m_x == other.m_x) && (m_y == other.m_y) && (m_z > other.m_z));
+  }
+
+  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  bool operator>(const vector3& other) const {
+    bool equal_x = std::fabs(m_x - other.m_x) <= std::numeric_limits<T>::epsilon();
+    bool equal_y = std::fabs(m_y - other.m_y) <= std::numeric_limits<T>::epsilon();
+
+    return (m_x > other.m_x) || (equal_x && (m_y > other.m_y)) ||
+           (equal_x && equal_y && (m_z > other.m_z));
   }
 
   bool operator<=(const vector3& other) const {

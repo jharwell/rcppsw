@@ -56,9 +56,17 @@ class binned_powerlaw_distribution : public powerlaw_distribution {
   binned_powerlaw_distribution(uint lb, uint ub, uint pwr)
       : powerlaw_distribution(lb, ub, pwr) {}
 
-  double operator()(rng* rng) {
-    uint sample = static_cast<uint>(powerlaw_distribution::operator()(rng));
-    return std::pow(pwr(), std::ceil(std::log(sample) / std::log(pwr())));
+  uint operator()(rng* const rng) {
+    auto sample = static_cast<uint>(powerlaw_distribution::operator()(rng));
+
+    /* Round to the nearest multiple of the power for the distribution */
+    auto multiple = static_cast<uint>(std::pow(pwr(), sample));
+    auto remainder = sample % multiple;
+    if (0 == remainder) {
+      return sample;
+    } else {
+      return sample + multiple - remainder;
+    }
   }
 };
 

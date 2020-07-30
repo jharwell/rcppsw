@@ -58,6 +58,7 @@ NS_START(rcppsw, math);
 template <typename T>
 class range final : public er::client<range<T>> {
  public:
+
   range(void) noexcept
       : ER_CLIENT_INIT("rcppsw.math.range"), m_initialized(false) {}
   range(const T& lb, const T& ub) noexcept
@@ -122,8 +123,7 @@ class range final : public er::client<range<T>> {
   template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   bool contains(const T& value) const {
     ER_ASSERT(m_initialized, "Range not initialized");
-    return value >= m_lb - RCSW_DOUBLE_EPSILON &&
-           value <= m_ub + RCSW_DOUBLE_EPSILON;
+    return value >= m_lb && value <= m_ub;
   }
 
   /**

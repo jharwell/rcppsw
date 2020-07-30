@@ -78,7 +78,8 @@ void base_fsm::external_event(uint8_t new_state,
            reinterpret_cast<const void*>(data.get()));
 
   ER_ASSERT(event_signal::ekFATAL != new_state,
-            "The impossible event happened...");
+            "Received FATAL event: current_state=%u",
+            current_state());
 
   if (new_state == event_signal::ekIGNORED) {
     return;
@@ -134,7 +135,10 @@ void base_fsm::state_engine_map(void) {
   /* While events are being generated keep executing states */
   while (m_event_generated) {
     /* verity new state is valid */
-    ER_ASSERT(next_state() < max_states(), "New state is out of range");
+    ER_ASSERT(next_state() < max_states(),
+              "New state %u is out of range [0-%u]",
+              next_state(),
+              max_states() - 1);
 
     /* ready to update to new state */
     m_event_generated = false;
@@ -151,7 +155,10 @@ void base_fsm::state_engine_map_ex(void) {
   while (m_event_generated) {
     m_event_generated = false;
     /* verify new state is valid */
-    ER_ASSERT(next_state() < max_states(), "New state is out of range");
+    ER_ASSERT(next_state() < max_states(),
+              "New state %u is out of range [0-%u]",
+              next_state(),
+              max_states() - 1);
     const state_guard* guard = state_map_ex(next_state())->guard();
     const state_entry* entry = state_map_ex(next_state())->entry();
     const state_exit* exit = state_map_ex(current_state())->exit();

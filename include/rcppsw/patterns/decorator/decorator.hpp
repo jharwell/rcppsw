@@ -78,6 +78,7 @@ class decorator {
   template <typename... TArgs>
   explicit decorator(TArgs&&... args)
       : m_decoratee(std::forward<TArgs>(args)...) {}
+
   virtual ~decorator(void) = default;
   decorator(const decorator&) = default;
   decorator& operator=(const decorator&) = default;

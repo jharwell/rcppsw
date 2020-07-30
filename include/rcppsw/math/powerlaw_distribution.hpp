@@ -57,9 +57,10 @@ class powerlaw_distribution {
   virtual ~powerlaw_distribution(void) = default;
 
   double operator()(rng* rng) {
-    double y = rng->uniform(0.0, 1.0);
-    double tmp = (std::pow(m_ub, m_pwr + 1) - std::pow(m_lb, m_pwr + 1)) * y +
-                 std::pow(m_lb, m_pwr + 1);
+    double v = rng->uniform(0.0, 1.0);
+    double pmax = std::pow(m_ub, m_pwr + 1);
+    double pmin = std::pow(m_lb, m_pwr + 1);
+    double tmp = pmin + (pmax - pmin) * v;
     return std::pow(tmp, 1.0 / (m_pwr + 1));
   }
   uint pwr(void) const { return m_pwr; }

@@ -47,18 +47,14 @@ rng::~rng(void) = default;
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-double rng::uniform(double lb, double ub) {
-  std::uniform_real_distribution<> dist(lb, ub);
-  return dist(this->impl->engine);
-} /* uniform() */
+template<typename T>
+T rng::uniform(const T& lb, const T& ub) {
+  using uniform_distribution_type =
+      typename std::conditional<std::is_floating_point<T>::value,
+                                std::uniform_real_distribution<T>,
+                                std::uniform_int_distribution<T>>::type;
 
-uint rng::uniform(uint lb, uint ub) {
-  std::uniform_int_distribution<> dist(lb, ub);
-  return dist(this->impl->engine);
-} /* uniform() */
-
-int rng::uniform(int lb, int ub) {
-  std::uniform_int_distribution<> dist(lb, ub);
+  uniform_distribution_type dist(lb, ub);
   return dist(this->impl->engine);
 } /* uniform() */
 
@@ -71,5 +67,18 @@ double rng::exponential(double lambda) {
   std::exponential_distribution<double> dist(lambda);
   return dist(this->impl->engine);
 } /* exponential() */
+
+bool rng::bernoulli(double p) {
+  std::bernoulli_distribution dist(p);
+  return dist(this->impl->engine);
+} /* bernoulli() */
+
+/*******************************************************************************
+ * Template Instantiations
+ ******************************************************************************/
+template int rng::uniform(const int& lb, const int& ub);
+template uint rng::uniform(const uint& lb, const uint& ub);
+template size_t rng::uniform(const size_t& lb, const size_t& ub);
+template double rng::uniform(const double& lb, const double& ub);
 
 NS_END(math, rcppsw);

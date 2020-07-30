@@ -66,9 +66,7 @@ class radians {
   static const radians kZERO;              // NOLINT
   static const double kRADIANS_TO_DEGREES; // NOLINT
 
-  static double kAPPROX_EQUALITY_TOL;
-
-  static radians abs(const radians& r) { return radians(std::fabs(r.value())); }
+   static radians abs(const radians& r) { return radians(std::fabs(r.value())); }
 
   radians(void) = default;
   explicit radians(double value) noexcept : m_value(value) {}
@@ -188,7 +186,7 @@ class radians {
    * This cannot be made part of \ref operator==(), because those functions
    * cannot have default arguments.
    */
-  bool is_equal(const radians& other, double tol = kAPPROX_EQUALITY_TOL) const {
+  bool is_equal(const radians& other, double tol = RCSW_DOUBLE_EPSILON) const {
     return std::fabs(m_value - other.m_value) < tol;
   }
 

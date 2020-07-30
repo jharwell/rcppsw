@@ -50,7 +50,6 @@ const radians radians::kZERO(0.0);                           // NOLINT
 RCPPSW_WARNING_DISABLE_POP()
 
 const double radians::kRADIANS_TO_DEGREES(180.0 / M_PI); // NOLINT
-double radians::kAPPROX_EQUALITY_TOL = 1.0 / ONEE6;
 
 /*******************************************************************************
  * Constructors/Destructors

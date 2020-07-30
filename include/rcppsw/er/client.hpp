@@ -179,6 +179,23 @@
   }
 
 /**
+ * \def ER_CHECKW(cond, msg, ...)
+ *
+ * Check a boolean condition \a cond in a function. If condition is not true,
+ * emit a warning message.
+ *
+ * You cannot use this macro in non-class contexts, and all classes using it
+ * must derive from \ref client. This macro is only available if event reporting
+ * is fully enabled.
+ */
+#define ER_CHECKW(cond, msg, ...)                \
+  {                                             \
+    if (RCSW_UNLIKELY(!(cond))) {               \
+      ER_WARN(msg, ##__VA_ARGS__);               \
+    }                                           \
+  }
+
+/**
  * \def ER_SENTINEL(msg,...)
  *
  * Mark a place in the code as being universally bad. If execution ever reaches
@@ -224,7 +241,7 @@
 #define ER_FATAL_SENTINEL(msg, ...) \
   {                                 \
     ER_FATAL(msg, ##__VA_ARGS__);   \
-    assert(false);                  \
+    abort();                        \
   }
 
 /**
