@@ -256,6 +256,8 @@ namespace types {}
  */
 namespace utils {}
 
+namespace multithread {}
+
 } /* namespace rcppsw */
 /** @} rcppsw */
 
@@ -270,6 +272,7 @@ namespace rconfig = rcppsw::config;
 namespace rds = rcppsw::ds;
 namespace rmpl = rcppsw::mpl;
 namespace rcontrol = rcppsw::control;
+namespace rmultithread = rcppsw::multithread;
 
 namespace ralgorithm = rcppsw::algorithm;
 namespace raclustering = ralgorithm::clustering;
