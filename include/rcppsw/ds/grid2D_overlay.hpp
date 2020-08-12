@@ -85,8 +85,8 @@ class grid2D_overlay final : public base_grid2D<T>,
         mc_dim(dims),
         m_cells(boost::extents[static_cast<typename index_range::index>(
             xdsize())][typename index_range::index(ydsize())]) {
-    double remx = std::remainder(mc_dim.x(), resolution().v());
-    double remy = std::remainder(mc_dim.y(), resolution().v());
+    RCSW_UNUSED double remx = std::remainder(mc_dim.x(), resolution().v());
+    RCSW_UNUSED double remy = std::remainder(mc_dim.y(), resolution().v());
 
     /*
      * Some values of dimensions and grid resolution might not be able to be

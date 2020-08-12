@@ -33,10 +33,12 @@ NS_START(rcppsw, types);
 /*******************************************************************************
  * Constructors
  ******************************************************************************/
-spatial_dist::spatial_dist(const double& value) : spatial_dist{value, true} {}
-
-spatial_dist::spatial_dist(const double& value, bool take_abs)
-    : named_type<double, spatial_dist_tag>(take_abs ? std::fabs(value) : value) {
+spatial_dist::spatial_dist(const double& value)
+    : named_type<double, spatial_dist_tag>(value),
+    ER_CLIENT_INIT("rcppsw.types.spatial_dist") {
+  ER_ASSERT(v() >= 0.0,
+            "Spatial dist must always be positive semi-definite: %f < 0",
+            v());
 }
 
 /*******************************************************************************

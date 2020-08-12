@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/types/named_type.hpp"
+#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -38,9 +39,11 @@ NS_START(rcppsw, types);
  * \brief Specifies a distance in "real" spatial space, and as such is always
  * positive.
  */
-class spatial_dist : public named_type<double, struct spatial_dist_tag> {
+class spatial_dist final : public named_type<double, struct spatial_dist_tag>,
+                           public er::client<spatial_dist> {
  public:
   explicit spatial_dist(const double& value);
+  ~spatial_dist(void) override = default;
   spatial_dist(const spatial_dist&) = default;
 
   spatial_dist& operator=(const spatial_dist& other) {
@@ -59,7 +62,7 @@ class spatial_dist : public named_type<double, struct spatial_dist_tag> {
   bool operator<=(double other) const { return v() <= other; }
   bool operator>(double other) const { return v() > other; }
   spatial_dist operator*(double other) const {
-    spatial_dist res(v(), false);
+    spatial_dist res(v());
     res.set(res.v() * other);
     return res;
   }
@@ -70,7 +73,7 @@ class spatial_dist : public named_type<double, struct spatial_dist_tag> {
   }
 
   spatial_dist operator-(double other) const {
-    spatial_dist res(v(), false);
+    spatial_dist res(v());
     res.set(res.v() - other);
     return res;
   }
@@ -78,11 +81,8 @@ class spatial_dist : public named_type<double, struct spatial_dist_tag> {
     return spatial_dist(v() - rhs.v());
   }
   spatial_dist operator+(const spatial_dist& rhs) const {
-    return spatial_dist(v() + rhs.v(), false);
+    return spatial_dist(v() + rhs.v());
   }
-
- private:
-  spatial_dist(const double& value, bool take_abs);
 };
 
 /*******************************************************************************

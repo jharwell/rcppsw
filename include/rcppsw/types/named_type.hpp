@@ -47,6 +47,7 @@ template <typename T, typename Parameter>
 class named_type {
  public:
   explicit named_type(T const& value) noexcept : m_value(value) {}
+  virtual ~named_type(void) = default;
 
   const T& v(void) const { return m_value; }
   T& set(const T& value) { return m_value = value; }

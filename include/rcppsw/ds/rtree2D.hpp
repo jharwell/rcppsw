@@ -72,11 +72,13 @@ class rtree2D {
   std::vector<TKey> query(const math::vector2<TCoord>& ll,
                           const math::vector2<TCoord>& ur) const {
     std::vector<value_type> res1;
+    res1.reserve(MAXELTS); /* good a guess as any */
     box_type query(point_type(ll.x(), ll.y()),
                    point_type(ur.x(), ur.y()));
     m_impl.query(bgi::intersects(query), std::back_inserter(res1));
 
     std::vector<TKey> res2;
+    res2.reserve(res1.size());
     std::transform(res1.begin(),
                    res1.end(),
                    std::back_inserter(res2),

@@ -60,6 +60,39 @@
 /*******************************************************************************
  * Macros
  ******************************************************************************/
+#if (LIBRA_ER == LIBRA_ER_NONE)
+
+#define ER_FATAL(...)
+#define ER_ERR(...)
+#define ER_WARN(...)
+#define ER_INFO(...)
+#define ER_DEBUG(...)
+#define ER_TRACE(...)
+#define ER_REPORT(...)
+#define ER_CHECKI(...)
+#define ER_CHECKW(...)
+#define ER_CHECKD(...)
+
+/*
+ * Don't define the macro to be nothing, as that can leave tons of "unused
+ * variable" warnings in the code for variables which are only used in
+ * asserts. The sizeof() trick here does *NOT* actually evaluate the
+ * condition--only the size of whatever it returns. The variables are "used",
+ * making the compiler happy, but ultimately removed by the optimizer.
+ */
+#define ER_ASSERT(cond, msg, ...)  do {(void)sizeof((cond)); } while (0)
+#define ER_FATAL_SENTINEL(msg, ...)
+
+#define ER_CLIENT_INIT(name)   \
+  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>()
+
+#define ER_LOGGING_INIT(fname)
+#define ER_LOGFILE_SET(logger, fname)
+#define ER_NDC_PUSH(s)
+#define ER_NDC_POP(...)
+#define ER_ENV_VERIFY(...)
+
+#elif(LIBRA_ER == LIBRA_ER_FATAL)
 /*
  * FATAL event reporting can be enabled using log4cxx, which has much higher
  * overhead than just printf(), but also much better contextual information and
@@ -68,19 +101,115 @@
  * multithreaded contexts where the overhead of log4cxx will make possible race
  * conditions much less likely to occur.
  */
-#if (LIBRA_ER == LIBRA_ER_FATAL)
+#define ER_FATAL(...) { ER_REPORT(__VA_ARGS__) }
+#define ER_ERR(...)
+#define ER_WARN(...)
+#define ER_INFO(...)
+#define ER_DEBUG(...)
+#define ER_TRACE(...)
+#define ER_REPORT(msg, ...) { printf(msg "\n", ##__VA_ARGS__); }
+#define ER_CHECKW(...)
+#define ER_CHECKI(...)
+#define ER_CHECKD(...)
 
-#define ER_FATAL(...) \
-  { ER_REPORT(__VA_ARGS__) }
-#define ER_REPORT(msg, ...) \
-  { printf(msg "\n", ##__VA_ARGS__); }
+#define ER_CLIENT_INIT(name)
+#define ER_LOGGING_INIT(fname) \
+  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>()
+#define ER_LOGFILE_SET(logger, fname)
+#define ER_NDC_PUSH(s)
+#define ER_NDC_POP(...)
+#define ER_ENV_VERIFY(...)
 
-#elif (LIBRA_ER == LIBRA_ER_NONE)
+#elif(LIBRA_ER == LIBRA_ER_ALL)
 
-#define ER_REPORT(...)
-#define ER_FATAL(...)
+/**
+ * \def ER_CHECKW(cond, msg, ...)
+ *
+ * Check a boolean condition \a cond in a function. If condition is not true,
+ * emit a warning message.
+ *
+ * You cannot use this macro in non-class contexts, and all classes using it
+ * must derive from \ref client. This macro is only available if event reporting
+ * is fully enabled.
+ */
+#define ER_CHECKW(cond, msg, ...)                \
+  {                                             \
+    if (RCSW_UNLIKELY(!(cond))) {               \
+      ER_WARN(msg, ##__VA_ARGS__);               \
+    }                                           \
+  }
 
-#endif /* LIBRA_ER == LIBRA_ER_FATAL */
+/**
+ * \def ER_CHECKI(cond, msg, ...)
+ *
+ * Check a boolean condition \a cond in a function. If condition IS true,
+ * emit an informational message.
+ *
+ * You cannot use this macro in non-class contexts, and all classes using it
+ * must derive from \ref client. This macro is only available if event reporting
+ * is fully enabled.
+ */
+#define ER_CHECKI(cond, msg, ...)               \
+  {                                             \
+    if (RCSW_LIKELY((cond))) {                  \
+      ER_INFO(msg, ##__VA_ARGS__);              \
+    }                                           \
+  }
+
+/**
+ * \def ER_CHECKD(cond, msg, ...)
+ *
+ * Check a boolean condition \a cond in a function. If condition IS true,
+ * emit a debug message.
+ *
+ * You cannot use this macro in non-class contexts, and all classes using it
+ * must derive from \ref client. This macro is only available if event reporting
+ * is fully enabled.
+ */
+#define ER_CHECKD(cond, msg, ...)               \
+  {                                             \
+    if (RCSW_LIKELY((cond))) {                  \
+      ER_DEBUG(msg, ##__VA_ARGS__);             \
+    }                                           \
+  }
+
+#endif
+
+#if (LIBRA_ER >= LIBRA_ER_FATAL)
+
+/**
+ * \def ER_FATAL_SENTINEL(msg,...)
+ *
+ * Mark a place in the code as being universally bad, like really really
+ * bad. Fatally bad. If execution ever reaches this spot stop the program after
+ * reporting the specified message.
+ *
+ * You cannot use this macro in non-class contexts, and all classes using it
+ * must derive from \ref client.
+ */
+#define ER_FATAL_SENTINEL(msg, ...)             \
+  {                                             \
+    ER_FATAL(msg, ##__VA_ARGS__);               \
+    abort();                                    \
+  }
+
+/**
+ * \def ER_ASSERT(cond, msg, ...)
+ *
+ * Check a boolean condition \a cond in a function, halting the program if the
+ * condition is not true. Like assert(), but allows for an additional custom
+ * msg to be logged.
+ *
+ * You cannot use this macro in non-class contexts, and all classes using it
+ * must derive from \ref client.
+ */
+#define ER_ASSERT(cond, msg, ...)               \
+  if (RCSW_UNLIKELY(!(cond))) {                 \
+    ER_FATAL(msg, ##__VA_ARGS__);               \
+    assert(cond);                               \
+  }
+
+#endif /* LIBRA_ER >= LIBRA_ER_FATAL */
 
 #if (LIBRA_ER >= LIBRA_ER_ALL)
 
@@ -99,6 +228,7 @@
     snprintf(static_cast<char*>(_str), sizeof(_str), msg, ##__VA_ARGS__); \
     LOG4CXX_##lvl(logger, _str);                                          \
   }
+
 
 #define ER_FATAL(...)                                                            \
   {                                                                              \
@@ -150,99 +280,7 @@
       ER_REPORT(TRACE, logger, __VA_ARGS__)                                      \
     }                                                                            \
   }
-#else
 
-#define ER_ERR(...)
-#define ER_WARN(...)
-#define ER_INFO(...)
-#define ER_DEBUG(...)
-#define ER_TRACE(...)
-#endif /* LIBRA_ER >= LIBRA_ER_ALL */
-
-/**
- * \def ER_CHECK(cond, msg, ...)
- *
- * Check a boolean condition \a cond in a function. If condition is not true, go
- * to the error/bailout section for function (you must have a label called \c
- * error in your function) after reporting the event.
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client. This macro is only available if event reporting
- * is fully enabled.
- */
-#define ER_CHECK(cond, msg, ...)  \
-  {                               \
-    if (RCSW_UNLIKELY(!(cond))) { \
-      ER_ERR(msg, ##__VA_ARGS__); \
-      goto error;                 \
-    }                             \
-  }
-
-/**
- * \def ER_CHECKW(cond, msg, ...)
- *
- * Check a boolean condition \a cond in a function. If condition is not true,
- * emit a warning message.
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client. This macro is only available if event reporting
- * is fully enabled.
- */
-#define ER_CHECKW(cond, msg, ...)                \
-  {                                             \
-    if (RCSW_UNLIKELY(!(cond))) {               \
-      ER_WARN(msg, ##__VA_ARGS__);               \
-    }                                           \
-  }
-
-/**
- * \def ER_SENTINEL(msg,...)
- *
- * Mark a place in the code as being universally bad. If execution ever reaches
- * this spot, report the event and error out (you must have a label called \c
- * error in your function).
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client. This macro is only available if event
- * reporting is fully enabled.
- */
-#define ER_SENTINEL(msg, ...)   \
-  {                             \
-    ER_ERR(msg, ##__VA_ARGS__); \
-    goto error;                 \
-  }
-
-/**
- * \def ER_ASSERT(cond, msg, ...)
- *
- * Check a boolean condition \a cond in a function, halting the program if the
- * condition is not true. Like assert(), but allows for an additional custom
- * msg to be logged.
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client.
- */
-#define ER_ASSERT(cond, msg, ...) \
-  if (RCSW_UNLIKELY(!(cond))) {   \
-    ER_FATAL(msg, ##__VA_ARGS__); \
-    assert(cond);                 \
-  }
-
-/**
- * \def ER_FATAL_SENTINEL(msg,...)
- *
- * Mark a place in the code as being universally bad, like really really
- * bad. Fatally bad. If execution ever reaches this spot stop the program after
- * reporting the specified message.
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client.
- */
-#define ER_FATAL_SENTINEL(msg, ...) \
-  {                                 \
-    ER_FATAL(msg, ##__VA_ARGS__);   \
-    abort();                        \
-  }
 
 /**
  * \def ER_CLIENT_INIT(name)
@@ -250,15 +288,9 @@
  * Initialize a logging client with the specified name (easier to do a macro
  * than to have to try do the casting every single time).
  */
-#if (LIBRA_ER >= LIBRA_ER_ALL)
-#define ER_CLIENT_INIT(name)                                                 \
+#define ER_CLIENT_INIT(name)                                            \
   rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>( \
       name)
-
-#else
-#define ER_CLIENT_INIT(name) \
-  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>()
-#endif /* LIBRA_ER >= LIBRA_ER_ALL */
 
 /**
  * \def ER_LOGGING_INIT(fname)
@@ -305,6 +337,45 @@
 #define ER_ENV_VERIFY(...) \
   rcppsw::er::client<      \
       typename std::remove_reference<decltype(*this)>::type>::env_verify()
+
+#endif /* LIBRA_ER >= LIBRA_ER_ALL */
+
+/**
+ * \def ER_CHECK(cond, msg, ...)
+ *
+ * Check a boolean condition \a cond in a function. If condition is not true, go
+ * to the error/bailout section for function (you must have a label called \c
+ * error in your function) after reporting the event.
+ *
+ * You cannot use this macro in non-class contexts, and all classes using it
+ * must derive from \ref client. This macro is only available if event reporting
+ * is fully enabled.
+ */
+#define ER_CHECK(cond, msg, ...)  \
+  {                               \
+    if (RCSW_UNLIKELY(!(cond))) { \
+      ER_ERR(msg, ##__VA_ARGS__); \
+      goto error;                 \
+    }                             \
+  }
+
+
+/**
+ * \def ER_SENTINEL(msg,...)
+ *
+ * Mark a place in the code as being universally bad. If execution ever reaches
+ * this spot, report the event and error out (you must have a label called \c
+ * error in your function).
+ *
+ * You cannot use this macro in non-class contexts, and all classes using it
+ * must derive from \ref client. This macro is only available if event
+ * reporting is fully enabled.
+ */
+#define ER_SENTINEL(msg, ...)                   \
+  {                                             \
+    ER_ERR(msg, ##__VA_ARGS__);                 \
+    goto error;                                 \
+  }
 
 /*******************************************************************************
  * Namespaces/Decls

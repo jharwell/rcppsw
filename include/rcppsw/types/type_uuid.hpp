@@ -47,7 +47,7 @@ NS_START(rcppsw, types);
  *
  * This class is constructable, assignable, and comparable.
  */
-class type_uuid : public rtypes::named_type<int, struct type_uuid_tag> {
+class type_uuid final : public rtypes::named_type<int, struct type_uuid_tag> {
  public:
   using named_type<int, type_uuid_tag>::named_type;
 
