@@ -175,7 +175,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
 
 
   RCSW_COLD bool is_parsed(void) const {
-    return config_get_impl() ? true : false;
+    return (nullptr != config_get_impl()) ? true : false;
   }
 
  protected:

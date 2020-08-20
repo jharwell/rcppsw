@@ -7,7 +7,7 @@ dist: xenial
 before_install:
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update
-  - sudo apt-get install -y gcc-8 g++-8
+  - sudo apt-get install -y gcc-9 g++-9
 
 addons:
   apt:
@@ -30,16 +30,9 @@ branches:
     - master
     - devel
 
-before_script:
-  - git clone https://github.com/swarm-robotics/argos3.git && cd argos3
-  - mkdir -p build && cd build
-  - cmake ../src
-  - make -j 2 && make doc && sudo make install
-  - cd ../../
-
 script:
   - mkdir -p build && cd build
-  - cmake -DCMAKE_C_COMPILER=gcc-8 -DCMAKE_CXX_COMPILER=g++-8 -DBUILD_FOR_TRAVIS=YES -DLIBRA_TESTS=yes ..
+  - cmake -DCMAKE_C_COMPILER=gcc-9 -DCMAKE_CXX_COMPILER=g++-9 -DLIBRA_TESTS=yes ..
   - make -j 4
   - make unit-tests
   - make test

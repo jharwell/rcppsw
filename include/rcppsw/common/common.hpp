@@ -127,7 +127,7 @@
 /**
  * \def RCPPSW_WRAP_OVERRIDE_DECL(Ret, Func, ...)
  *
- * Declare a "simple" overrnide of an inherited function with the __pure_
+ * Declare a "simple" overrnide of an inherited function with the __pure__
  * attribute. Should be *NOT* be used if the override is complex to implement
  * (i.e. for every instance of this macro in a header file there should be an
  * instance of \ref RCPPSW_WRAP_OVERRIDE_DEF() in the corresponding source file
@@ -144,10 +144,10 @@
  * result returned.
  */
 #define RCPPSW_WRAP_OVERRIDE_DEF(Class, Func, Handle, ...) \
-  RCSW_PURE RCPPSW_WRAP_DEF(Class, Func, Handle, __VA_ARGS__)
+  RCPPSW_WRAP_DEF(Class, Func, Handle, __VA_ARGS__)
 
 #define RCPPSW_WRAP_OVERRIDE_DEFP(Class, Func, Handle, NullRet, ...) \
-  RCSW_PURE RCPPSW_WRAP_DEFP(Class, Func, Handle, NullRet, __VA_ARGS__)
+  RCPPSW_WRAP_DEFP(Class, Func, Handle, NullRet, __VA_ARGS__)
 
 /**
  * \def RCPPSW_SFINAE_FUNC(...)

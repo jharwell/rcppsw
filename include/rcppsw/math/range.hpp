@@ -58,9 +58,7 @@ NS_START(rcppsw, math);
 template <typename T>
 class range final : public er::client<range<T>> {
  public:
-
-  range(void) noexcept
-      : ER_CLIENT_INIT("rcppsw.math.range"), m_initialized(false) {}
+  range(void) noexcept : ER_CLIENT_INIT("rcppsw.math.range") {}
   range(const T& lb, const T& ub) noexcept
       : ER_CLIENT_INIT("rcppsw.math.range"),
         m_initialized(true),
@@ -199,7 +197,7 @@ class range final : public er::client<range<T>> {
 
  private:
   /* clang-format off */
-  bool m_initialized;
+  bool m_initialized{false};
   T    m_lb{};
   T    m_ub{};
   T    m_span{};

@@ -122,12 +122,12 @@ void base_fsm::state_engine(void) {
   const state_map_row* map = state_map(0);
   const state_map_ex_row* map_ex = state_map_ex(0);
 
-  ER_ASSERT(!(nullptr == map && nullptr == map_ex), "Both state maps are NULL!");
-
-  if (map != nullptr) {
+  if (nullptr != map) {
     state_engine_map();
-  } else {
+  } else if (nullptr != map_ex) {
     state_engine_map_ex();
+  } else {
+    ER_FATAL_SENTINEL("Both state maps are NULL!");
   }
 } /* state_engine() */
 

@@ -358,9 +358,9 @@ NS_END(fsm, patterns, rcppsw);
  *
  * Same as \ref FSM_STATE_DECLARE(), but without any input data.
  */
-#define FSM_STATE_DECLARE_ND(FSM, state_name)                                \
-  int ST_##state_name(void);                                                 \
-  rcppsw::patterns::fsm::state_action0<FSM, &FSM::ST_##state_name> \
+#define FSM_STATE_DECLARE_ND(FSM, state_name, ...)                       \
+  int ST_##state_name(void) __VA_ARGS__;                                            \
+  rcppsw::patterns::fsm::state_action0<FSM, &FSM::ST_##state_name>      \
   state_name{}
 
 /**
