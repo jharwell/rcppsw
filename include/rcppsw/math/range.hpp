@@ -45,15 +45,23 @@ NS_START(rcppsw, math);
  * \ingroup math
  *
  * \brief Convenience class holding a [min, max] range. Makes comparisons like
- * "is this number in this range" much more intuitive and easy to debug. All
- * ranges must be non-empty sets, meaning that the min must not be equal to the
- * max (if it is an assertion will trigger).
+ * "is this number in this range" much more intuitive and easy to debug.
+ *
+ * If you use the default constructor you must call \ref set() or read
+ * initialization from a stream before calling any member functions to avoid
+ * undefined behavior.
+ *
+ * To call any member functions other than \ref lb() and \ref ub(), the range
+ * must be non-empty, meaning that the min must not be equal to the max (if it
+ * is an assertion will trigger).
  */
 template <typename T>
 class range final : public er::client<range<T>> {
  public:
+  range(void) noexcept : ER_CLIENT_INIT("rcppsw.math.range") {}
   range(const T& lb, const T& ub) noexcept
       : ER_CLIENT_INIT("rcppsw.math.range"),
+        m_initialized(true),
         m_lb(lb),
         m_ub(ub),
         m_span(m_ub - m_lb) {}
@@ -64,14 +72,22 @@ class range final : public er::client<range<T>> {
   T span(void) const RCSW_CHECK_RET { return m_span; }
 
   void lb(const T& lb) {
-    ER_ASSERT(lb < m_ub, "Lower bound >= upper bound");
+    ER_ASSERT(m_initialized, "Range not initialized");
+    ER_ASSERT(lb < m_ub,
+              "New lower bound (%s) >= upper bound (%s)",
+              rcppsw::to_string(lb).c_str(),
+              rcppsw::to_string(m_ub).c_str());
     m_lb = lb;
     m_span = m_ub;
     m_span -= m_lb;
   }
 
   void ub(const T& ub) {
-    ER_ASSERT(ub > m_ub, "Lower bound >= upper bound");
+    ER_ASSERT(m_initialized, "Range not initialized");
+    ER_ASSERT(ub > m_lb,
+              "New upper bound (%s) <= lower bound (%s)",
+              rcppsw::to_string(ub).c_str(),
+              rcppsw::to_string(m_lb).c_str());
 
     m_ub = ub;
     m_span = m_ub;
@@ -79,7 +95,11 @@ class range final : public er::client<range<T>> {
   }
 
   void set(const T& lb, const T& ub) {
-    ER_ASSERT(lb < ub, "Lower bound >= upper bound");
+    ER_ASSERT(lb < ub,
+              "New lower bound (%s) >= New upper bound (%s)",
+              rcppsw::to_string(m_lb).c_str(),
+              rcppsw::to_string(m_ub).c_str());
+    m_initialized = true;
     m_lb = lb;
     m_ub = ub;
     m_span = m_ub;
@@ -94,13 +114,14 @@ class range final : public er::client<range<T>> {
    */
   template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
   bool contains(const T& value) const {
+    ER_ASSERT(m_initialized, "Range not initialized");
     return value >= m_lb && value <= m_ub;
   }
 
   template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   bool contains(const T& value) const {
-    return value >= m_lb - RCSW_DOUBLE_EPSILON &&
-           value <= m_ub + RCSW_DOUBLE_EPSILON;
+    ER_ASSERT(m_initialized, "Range not initialized");
+    return value >= m_lb && value <= m_ub;
   }
 
   /**
@@ -133,6 +154,8 @@ class range final : public er::client<range<T>> {
    * \return The wrapped value.
    */
   RCSW_PURE T wrap_value(T value) const RCSW_CHECK_RET {
+    ER_ASSERT(m_initialized, "Range not initialized");
+
     while (value > m_ub) {
       value -= m_span;
     }
@@ -174,9 +197,10 @@ class range final : public er::client<range<T>> {
 
  private:
   /* clang-format off */
-  T m_lb;
-  T m_ub;
-  T m_span;
+  bool m_initialized{false};
+  T    m_lb{};
+  T    m_ub{};
+  T    m_span{};
   /* clang-format on */
 };
 
@@ -186,60 +210,61 @@ class range final : public er::client<range<T>> {
 using rangei = range<int>;
 
 /**
- * \brief Specialization of \ref range for doubles.
- */
-using ranged = range<double>;
-
-/**
- * \brief Specialization of \ref range for floats.
- */
-using rangef = range<float>;
-
-/**
  * \brief Specialization of \ref range for unsigned integers.
  */
 using rangeu = range<uint>;
+
+/**
+ * \brief Specialization of \ref range for size_t.
+ */
+using rangez = range<size_t>;
+
+/**
+ * \brief Specialization of \ref range for doubles.
+ */
+using ranged = range<double>;
 
 /*******************************************************************************
  * Macros
  ******************************************************************************/
 /**
- * \brief Convert range{i,u} -> ranged directly, without applying any
+ * \brief Convert range{i,u,z} -> ranged directly, without applying any
  * scaling.
  */
-#define RCPPSW_MATH_RANGE_DIRECT_CONV2D(prefix)                           \
+#define RCPPSW_MATH_RANGE_DIRECT_CONV2FLT(prefix)                         \
   static inline ranged prefix##range2drange(const range##prefix& other) { \
     return ranged(other.lb(), other.lb());                                \
   }
 
 /**
- * \brief Convert range{i,u} -> ranged, applying a multiplicative scaling
+ * \brief Convert range{i,u,z} -> ranged, applying a multiplicative scaling
  * factor.
  */
-#define RCPPSW_MATH_RANGE_SCALED_CONV2D(prefix)                         \
+#define RCPPSW_MATH_RANGE_SCALED_CONV2FLT(prefix)                       \
   static inline ranged prefix##range2drange(const range##prefix& other, \
                                             double scale) {             \
     return ranged(other.lb() * scale, other.ub() * scale);              \
   }
 
 /**
- * \brief Convert ranged -> rangeu, applying a divisive scaling factor.
+ * \brief Convert ranged -> range{i,u,z}, applying a divisive scaling factor.
  */
-#define RCPPSW_MATH_RANGE_CONV2U(prefix)                                \
-  static inline rangeu prefix##range2urange(const range##prefix& other, \
-                                            double scale) {             \
-    return rangeu(static_cast<uint>(std::round(other.lb() / scale)),    \
-                  static_cast<uint>(std::round(other.ub() / scale)));   \
+#define RCPPSW_MATH_RANGE_CONV2DISC(dest_prefix, dest_type)                \
+  static inline range##dest_prefix drange2##dest_prefix##range(            \
+      const range##dest_prefix& other, double scale) {                     \
+    return range##dest_prefix(static_cast<dest_type>(other.lb() / scale),  \
+                              static_cast<dest_type>(other.ub() / scale)); \
   }
 
 /*******************************************************************************
  * Free Functions
  ******************************************************************************/
-RCPPSW_MATH_RANGE_DIRECT_CONV2D(u);
-RCPPSW_MATH_RANGE_DIRECT_CONV2D(i);
-RCPPSW_MATH_RANGE_SCALED_CONV2D(u);
-RCPPSW_MATH_RANGE_SCALED_CONV2D(i);
-RCPPSW_MATH_RANGE_CONV2U(d);
+RCPPSW_MATH_RANGE_DIRECT_CONV2FLT(z);
+RCPPSW_MATH_RANGE_DIRECT_CONV2FLT(i);
+RCPPSW_MATH_RANGE_SCALED_CONV2FLT(z);
+RCPPSW_MATH_RANGE_SCALED_CONV2FLT(i);
+RCPPSW_MATH_RANGE_CONV2DISC(z, size_t);
+RCPPSW_MATH_RANGE_CONV2DISC(u, uint);
 
 NS_END(math, rcppsw);
 

@@ -53,24 +53,17 @@ class rng : public patterns::pimpl::pimpl<detail::rng_impl> {
   uint seed(void) const { return m_seed; }
   void seed(uint seed) { m_seed = seed; }
 
-  double uniform(double lb, double ub);
-  double uniform(const ranged& c_range) {
-    return uniform(c_range.lb(), c_range.ub());
-  }
+  template <typename T>
+  T uniform(const T& lb, const T& ub);
 
-  uint uniform(uint lb, uint ub);
-  uint uniform(const rangeu& c_range) {
-    return uniform(c_range.lb(), c_range.ub());
-  }
-
-  int uniform(int lb, int ub);
-  int uniform(const rangei& c_range) {
+  template<typename T>
+  T uniform(const range<T>& c_range) {
     return uniform(c_range.lb(), c_range.ub());
   }
 
   double gaussian(double mean, double std_dev);
-
   double exponential(double lambda);
+  bool bernoulli(double p);
 
  private:
   /* clang-format off */

@@ -45,7 +45,6 @@ template <typename T>
 class grid2D : public base_grid2D<T> {
  public:
   using typename base_grid2D<T>::index_range;
-
   using base_grid2D<T>::access;
 
   explicit grid2D(const math::vector2z& dims) : grid2D(dims.x(), dims.y()) {}
@@ -62,8 +61,17 @@ class grid2D : public base_grid2D<T> {
   size_t ysize(void) const { return m_cells.shape()[1]; }
 
  private:
+  using base_grid2D<T>::xdsize;
+  using base_grid2D<T>::ydsize;
+  using typename base_grid2D<T>::grid_type;
+
+  size_t xdsize(void) const override { return xsize(); }
+  size_t ydsize(void) const override { return ysize(); }
+  grid_type& grid(void) override { return m_cells; }
+  const grid_type& grid(void) const override { return m_cells; }
+
   /* clang-format off */
-  typename base_grid2D<T>::grid_type m_cells;
+  grid_type m_cells;
   /* clang-format on */
 };
 

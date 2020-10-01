@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/types/named_type.hpp"
+#include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -35,13 +36,16 @@ NS_START(rcppsw, types);
  * Class Definitions
  ******************************************************************************/
 /**
- * \brief Specifies a distance in "real" spatial space.
+ * \brief Specifies a distance in "real" spatial space, and as such is always
+ * positive.
  */
-class spatial_dist : public named_type<double, struct spatial_dist_tag> {
+class spatial_dist final : public named_type<double, struct spatial_dist_tag>,
+                           public er::client<spatial_dist> {
  public:
-  using named_type<double, spatial_dist_tag>::named_type;
-
+  explicit spatial_dist(const double& value);
+  ~spatial_dist(void) override = default;
   spatial_dist(const spatial_dist&) = default;
+
   spatial_dist& operator=(const spatial_dist& other) {
     set(other.v());
     return *this;
@@ -62,7 +66,31 @@ class spatial_dist : public named_type<double, struct spatial_dist_tag> {
     res.set(res.v() * other);
     return res;
   }
+
+  spatial_dist& operator-=(double other) {
+    set(v() - other);
+    return *this;
+  }
+
+  spatial_dist operator-(double other) const {
+    spatial_dist res(v());
+    res.set(res.v() - other);
+    return res;
+  }
+  spatial_dist operator-(const spatial_dist& rhs) const {
+    return spatial_dist(v() - rhs.v());
+  }
+  spatial_dist operator+(const spatial_dist& rhs) const {
+    return spatial_dist(v() + rhs.v());
+  }
 };
+
+/*******************************************************************************
+ * Operators
+ ******************************************************************************/
+spatial_dist operator*(double lhs, const spatial_dist& rhs);
+spatial_dist operator-(double lhs, const spatial_dist& rhs);
+spatial_dist operator+(double lhs, const spatial_dist& rhs);
 
 NS_END(types, rcppsw);
 

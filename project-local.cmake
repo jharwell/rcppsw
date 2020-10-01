@@ -16,7 +16,7 @@ if (NOT TARGET ticpp)
   target_compile_options(ticpp PRIVATE -Wno-old-style-cast -Wno-suggest-override
     -Wno-effc++ -Wno-overloaded-virtual -Wno-missing-declarations
     -Wno-suggest-attribute=const -Wno-suggest-attribute=pure
-    -Wno-suggest-final-types -Wno-suggest-final-methods)
+    -Wno-suggest-final-types -Wno-suggest-final-methods -Wno-switch-default)
 endif()
 
 # Boost

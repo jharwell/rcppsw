@@ -90,7 +90,7 @@ void base_cli::print(void) {
   std::cout << m_prog_name << " invoked with: ";
   for (auto& it : m_vm) {
     std::cout << it.first;
-    if ((static_cast<boost::any>(it.second.value())).empty()) {
+    if (it.second.value().empty()) {
       std::cout << "(empty)";
     }
     if (m_vm[it.first].defaulted() || it.second.defaulted()) {
@@ -113,16 +113,13 @@ void base_cli::print(void) {
       is_str = false;
     }
 
-    if ((static_cast<boost::any>(it.second.value()).type()) == typeid(int)) {
+    if (it.second.value().type() == typeid(int)) {
       std::cout << m_vm[it.first].as<int>() << " ";
-    } else if ((static_cast<boost::any>(it.second.value()).type()) ==
-               typeid(bool)) {
+    } else if (it.second.value().type() == typeid(bool)) {
       std::cout << m_vm[it.first].as<bool>() << " ";
-    } else if ((static_cast<boost::any>(it.second.value()).type()) ==
-               typeid(double)) {
+    } else if (it.second.value().type() == typeid(double)) {
       std::cout << m_vm[it.first].as<double>() << " ";
-    } else if ((static_cast<boost::any>(it.second.value()).type()) ==
-               typeid(float)) {
+    } else if (it.second.value().type() == typeid(float)) {
       std::cout << m_vm[it.first].as<float>() << " ";
     } else if (is_char) {
       std::cout << m_vm[it.first].as<const char*>() << " ";
@@ -144,9 +141,8 @@ void base_cli::print(void) {
                     << std::endl;
         }
       } catch (const boost::bad_any_cast&) {
-        std::cout << "UnknownType("
-                  << (static_cast<boost::any>(it.second.value()).type()).name()
-                  << ")" << std::endl;
+        std::cout << "UnknownType(" << it.second.value().type().name() << ")"
+                  << std::endl;
       }
     }
   } /* for() */

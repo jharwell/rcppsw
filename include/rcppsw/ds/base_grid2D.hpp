@@ -24,9 +24,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <algorithm>
 #include <boost/multi_array.hpp>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/math/vector2.hpp"
 
 /*******************************************************************************
@@ -51,11 +51,22 @@ class base_grid2D {
   using grid_type = typename boost::multi_array<T, 2>;
   using grid_view = typename grid_type::template array_view<2>::type;
   using const_grid_view = typename grid_type::template const_array_view<2>::type;
-  using view_range = typename grid_type::index_range;
-  using index_range = boost::multi_array_types::index_range;
+  using index_range = typename grid_type::index_range;
 
   base_grid2D(void) = default;
   virtual ~base_grid2D(void) = default;
+
+  /**
+   * \brief Get the discrete size of the X dimension of the grid (i.e. what is
+   * the array index in X?)
+   */
+  virtual size_t xdsize(void) const = 0;
+
+  /**
+   * \brief Get the discrete size of the Y dimension of the grid (i.e. what is
+   * the array index in Y?)
+   */
+  virtual size_t ydsize(void) const = 0;
 
   /**
    * \brief Return a reference to the element at position (i, j) in the grid.
@@ -78,6 +89,84 @@ class base_grid2D {
   const T& access(size_t i, size_t j) const {
     return const_cast<base_grid2D*>(this)->access(i, j);
   }
+
+  /**
+   * \brief Get a subcircle gridview from a grid. The subcircle extent is
+   * cropped to the maximum boundaries of the parent grid.
+   *
+   * This means that rather than getting a 2 x 2 subgrid centered at 0 with the
+   * out-of-bounds elements zeroed if you request a subcircle on the boundary of
+   * the overall grid, you will get a 1 x 2 subgrid (a lopsided circle).
+   *
+   * \param c Coordinates of center of subcircle.
+   * \param radius Radius of subcircle.
+   *
+   * \return The subcircle.
+   */
+  grid_view subcircle(const math::vector2z& c, size_t radius) {
+    auto ll_x =
+        std::max<int>(0, static_cast<int>(c.x()) - static_cast<int>(radius));
+    auto ll_y =
+        std::max<int>(0, static_cast<int>(c.y()) - static_cast<int>(radius));
+
+    /*
+     * boost uses half open interval for index ranges, and we want a closed
+     * interval, so we +1.
+     */
+    auto ur_x = std::min(c.x() + radius + 1, xdsize() - 1);
+    auto ur_y = std::min(c.y() + radius + 1, ydsize() - 1);
+
+    math::vector2z ll(ll_x, ll_y);
+    math::vector2z ur(ur_x, ur_y);
+
+    return subgrid(ll, ur);
+  }
+
+  const_grid_view subcircle(const math::vector2z& c, size_t radius) const {
+    auto ll_x =
+        std::max<int>(0, static_cast<int>(c.x()) - static_cast<int>(radius));
+    auto ll_y =
+        std::max<int>(0, static_cast<int>(c.y()) - static_cast<int>(radius));
+
+    /*
+     * boost uses half open interval for index ranges, and we want a closed
+     * interval, so we +1.
+     */
+    auto ur_x = std::min(c.x() + radius + 1, xdsize());
+    auto ur_y = std::min(c.y() + radius + 1, ydsize());
+
+    math::vector2z ll(ll_x, ll_y);
+    math::vector2z ur(ur_x, ur_y);
+    return subgrid(ll, ur);
+  }
+
+  /**
+   * \brief Create a subgrid (really an array view) from a grid. The grid is
+   * clamped to the maximum boundaries of the parent grid, so rather than
+   * getting a 2 x 2 subgrid centered at 0 with the out-of-bounds elements
+   * zeroed, you will get a 1 x 2 subgrid.
+   *
+   * \param ll Lower left of the subgrid, inclusive.
+   * \param ur Upper right of the subgrid, inclusive.
+   *
+   * \return The subgrid.
+   */
+  grid_view subgrid(const math::vector2z& ll, const math::vector2z& ur) {
+    index_range x(ll.x(), ur.x(), 1);
+    index_range y(ll.y(), ur.y(), 1);
+    return grid_view(grid()[boost::indices[x][y]]);
+  }
+
+  const_grid_view subgrid(const math::vector2z& ll,
+                          const math::vector2z& ur) const {
+    index_range x(ll.x(), ur.x(), 1);
+    index_range y(ll.y(), ur.y(), 1);
+    return const_grid_view(grid()[boost::indices[x][y]]);
+  }
+
+ protected:
+  virtual const grid_type& grid(void) const = 0;
+  virtual grid_type& grid(void) = 0;
 };
 
 NS_END(ds, rcppsw);

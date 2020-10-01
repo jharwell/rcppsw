@@ -142,6 +142,25 @@ class xml_config_repository : public er::client<xml_config_repository> {
   }
 
   /**
+   * \brief Register a parser of a given type (must be derived from \ref
+   * xml_config_parser) and associate it with the specified name.
+   *
+   * \tparam T The parser type.
+   * \tparam S The type of the configuration that the parser produces when
+   *           parse() is called on it.
+   */
+  template <typename T, typename S>
+  RCSW_COLD void parser_unregister(const std::string& name) {
+    m_factory.unregister_type<T>(name);
+
+    std::type_index i(typeid(S));
+    auto it = m_config_types.find(i);
+    if (m_config_types.end() != it) {
+      m_config_types.erase(i);
+    }
+  }
+
+  /**
    * \brief Register a parser of a given type (must be derived from
    * \ref xml_config_parser) and associate it with the specified name.
    *

@@ -1,7 +1,7 @@
 /**
- * \file named_type.hpp
+ * \file reflectable.hpp
  *
- * \copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2020 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,58 +18,43 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TYPES_NAMED_TYPE_HPP_
-#define INCLUDE_RCPPSW_TYPES_NAMED_TYPE_HPP_
+#ifndef INCLUDE_RCPPSW_MPL_REFLECTABLE_HPP_
+#define INCLUDE_RCPPSW_MPL_REFLECTABLE_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include <utility>
+#include <typeindex>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, types);
+NS_START(rcppsw, mpl);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * \class named_type
- * \ingroup types
+ * \class reflectable
+ * \ingroup mpl
  *
- * \brief A strong typing wrapper to be used around POD types.
+ * \brief Interface for classes wishing to employ pseudo-reflection in C++.
  */
-template <typename T, typename Parameter>
-class named_type {
+class reflectable {
  public:
-  explicit named_type(T const& value) noexcept : m_value(value) {}
-  virtual ~named_type(void) = default;
+  virtual ~reflectable(void) = default;
 
-  const T& v(void) const { return m_value; }
-  T& set(const T& value) { return m_value = value; }
-
-  friend std::ostream& operator<<(std::ostream& stream,
-                                  const named_type& c_type) {
-    stream << c_type.to_str();
-    return stream;
-  }
-  std::string to_str(void) const { return std::to_string(m_value); }
-
-  friend std::istream& operator>>(std::istream& stream, named_type& n) {
-    stream >> n.m_value;
-    return stream;
-  }
-
- private:
-  /* clang-format off */
-  T m_value;
-  /* clang-format on */
+  /**
+   * \brief Return the \ref std::type_index of the derived class. This is useful
+   * in conjunction with \ref boost::variant and \ref boost::apply_visitor, as
+   * it allows for run-time reflection based on the actual type of the derived
+   * class.
+   */
+  virtual std::type_index type_index(void) const = 0;
 };
 
-NS_END(types, rcppsw);
+NS_END(mpl, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TYPES_NAMED_TYPE_HPP_ */
+#endif /* INCLUDE_RCPPSW_MPL_REFLECTABLE_HPP_ */

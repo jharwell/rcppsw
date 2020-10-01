@@ -53,7 +53,7 @@ class state_action0 : public state {
   ~state_action0(void) override = default;
 
   int invoke_state_action(base_fsm* sm,
-                          RCSW_UNUSED const event_data*) const override {
+                          RCSW_UNUSED event_data*) const override {
     /* Downcast the state machine and event data to the correct derived type */
     auto* derived_fsm = static_cast<SM*>(sm);
     return (derived_fsm->*Func)();
@@ -69,24 +69,24 @@ class state_action0 : public state {
  * \tparam Func A state machine member function pointer, which takes ONE
  * argument.
  */
-template <class SM, class Event, int (SM::*Func)(const Event*)>
+template <class SM, class Event, int (SM::*Func)(Event*)>
 class state_action1 : public state {
  public:
   state_action1(void) = default;
   ~state_action1(void) override = default;
   state_action1(const state_action1&) = default;
 
-  int invoke_state_action(base_fsm* sm, const event_data* data) const override {
+  int invoke_state_action(base_fsm* sm, event_data* data) const override {
     /* Downcast the state machine and event data to the correct derived type */
     auto* derived_fsm = static_cast<SM*>(sm);
-    const Event* derived_event = nullptr;
+    Event* derived_event = nullptr;
 
     /*
      * If this check fails, there is a mismatch between the STATE_DECLARE event
      * data type and the data type being sent to the state function.
      */
     if (nullptr != data) {
-      derived_event = dynamic_cast<const Event*>(data);
+      derived_event = dynamic_cast<Event*>(data);
       assert(derived_event);
     }
 

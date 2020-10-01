@@ -1,7 +1,7 @@
 /**
- * \file named_type.hpp
+ * \file transform.hpp
  *
- * \copyright 2019 John Harwell, All rights reserved.
+ * \copyright 2020 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,58 +18,39 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TYPES_NAMED_TYPE_HPP_
-#define INCLUDE_RCPPSW_TYPES_NAMED_TYPE_HPP_
+#ifndef INCLUDE_RCPPSW_ALGORITHM_TRANSFORM_HPP_
+#define INCLUDE_RCPPSW_ALGORITHM_TRANSFORM_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <string>
-#include <utility>
-
 #include "rcppsw/common/common.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, types);
+NS_START(rcppsw, algorithm);
 
 /*******************************************************************************
- * Class Definitions
+ * Templates
  ******************************************************************************/
-/**
- * \class named_type
- * \ingroup types
- *
- * \brief A strong typing wrapper to be used around POD types.
- */
-template <typename T, typename Parameter>
-class named_type {
- public:
-  explicit named_type(T const& value) noexcept : m_value(value) {}
-  virtual ~named_type(void) = default;
+template<class InputIterator,
+         class OutputIterator,
+         class Predicate,
+         class UnaryFunction>
+OutputIterator transform_if(InputIterator first,
+                            InputIterator last,
+                            OutputIterator result,
+                            const Predicate& pred,
+                            const UnaryFunction& f) {
+  for (; first != last; ++first) {
+    if (pred(*first)) {
+      *result++ = f(*first);
+    }
+  } /* for(...) */
+  return result;
+}
 
-  const T& v(void) const { return m_value; }
-  T& set(const T& value) { return m_value = value; }
+NS_END(algorithm, rcppsw);
 
-  friend std::ostream& operator<<(std::ostream& stream,
-                                  const named_type& c_type) {
-    stream << c_type.to_str();
-    return stream;
-  }
-  std::string to_str(void) const { return std::to_string(m_value); }
-
-  friend std::istream& operator>>(std::istream& stream, named_type& n) {
-    stream >> n.m_value;
-    return stream;
-  }
-
- private:
-  /* clang-format off */
-  T m_value;
-  /* clang-format on */
-};
-
-NS_END(types, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_TYPES_NAMED_TYPE_HPP_ */
+#endif /* INCLUDE_RCPPSW_ALGORITHM_TRANSFORM_HPP_ */

@@ -41,9 +41,10 @@ NS_START(rcppsw, patterns, decorator);
  *
  * Wraps the declaration/implementation of the decoratee (non-pointer version).
  *
- * Does not work for templated member functions in decorated class.
+ * Does not work for templated member functions in decorated class. Does not
+ * work to wrap functions in the decorated class which are virtual.
  */
-#define RCPPSW_DECORATE_FUNC(Func, ...) RCPPSW_DECLDEF_WRAP(Func,          \
+#define RCPPSW_DECORATE_FUNC(Func, ...) RCPPSW_WRAP_DECLDEF(Func,          \
                                                             decoratee(), \
                                                             __VA_ARGS__)
 
@@ -77,6 +78,7 @@ class decorator {
   template <typename... TArgs>
   explicit decorator(TArgs&&... args)
       : m_decoratee(std::forward<TArgs>(args)...) {}
+
   virtual ~decorator(void) = default;
   decorator(const decorator&) = default;
   decorator& operator=(const decorator&) = default;

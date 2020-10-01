@@ -38,7 +38,7 @@ NS_START(rcppsw, types);
  * \brief Type to be used for representing timesteps in a simulation
  * environment.
  */
-class timestep : public named_type<uint, struct timestep_tag> {
+class timestep final : public named_type<uint, struct timestep_tag> {
  public:
   using named_type<uint, timestep_tag>::named_type;
 

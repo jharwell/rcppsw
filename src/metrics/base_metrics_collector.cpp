@@ -83,7 +83,7 @@ void base_metrics_collector::csv_header_write(void) {
   auto cols = csv_header_cols();
   std::string header = std::accumulate(std::next(cols.begin()),
                                        cols.end(),
-                                       std::string(cols.front()),
+                                       cols.front(),
                                        [&](const auto& sum, const auto& col) {
                                          return sum + separator() + col;
                                        });

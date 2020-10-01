@@ -55,6 +55,8 @@ NS_START(rcppsw, math);
 template <typename T>
 class vector3 {
  public:
+  using value_type = T;
+
   /**
    * \brief Computes the square distance between the passed vectors.
    */
@@ -97,7 +99,7 @@ class vector3 {
    * \param z The Z coordinate.
    */
   constexpr vector3(const T& x, const T& y, const T& z)
-  : m_x(x), m_y(y), m_z(z) {}
+      : m_x(x), m_y(y), m_z(z) {}
 
   /**
    * \brief Initializes the 3D vector from a 2D vector, setting the Z value to
@@ -159,8 +161,7 @@ class vector3 {
    *
    * \return A reference to the normalized vector.
    */
-  template <typename U = T,
-            RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   vector3& normalize(void) {
     *this /= this->length();
     return *this;
@@ -196,8 +197,7 @@ class vector3 {
    */
   vector2<T> project_on_xz(void) const { return vector2<T>(m_x, m_z); }
 
-  template <typename U = T,
-            RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   sphere_vector<T> to_spherical(void) const {
     double radius = length();
     return sphere_vector<T>(radius,
@@ -230,6 +230,8 @@ class vector3 {
    */
   vector3& scale(const T& factor) { return scale(factor, factor, factor); }
 
+  /* Relational operators */
+
   /**
    * \brief Returns if this vector and the argument are considered equal,
    * determined by coordinate comparison.
@@ -259,9 +261,40 @@ class vector3 {
    */
   template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
   bool operator<(const vector3& other) const {
-    return (m_x < other.m_x) ||
-        ((m_x == other.m_x) && (m_y < other.m_y)) ||
-        ((m_x == other.m_x) && (m_y == other.m_y) && (m_z < other.m_z));
+    return (m_x < other.m_x) || ((m_x == other.m_x) && (m_y < other.m_y)) ||
+           ((m_x == other.m_x) && (m_y == other.m_y) && (m_z < other.m_z));
+  }
+
+  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  bool operator<(const vector3& other) const {
+    bool equal_x = std::fabs(m_x - other.m_x) <= std::numeric_limits<T>::epsilon();
+    bool equal_y = std::fabs(m_y - other.m_y) <= std::numeric_limits<T>::epsilon();
+
+    return (m_x < other.m_x) || (equal_x && (m_y < other.m_y)) ||
+        (equal_x && equal_y && (m_z < other.m_z));
+  }
+
+  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
+  bool operator>(const vector3& other) const {
+    return (m_x > other.m_x) || ((m_x == other.m_x) && (m_y > other.m_y)) ||
+           ((m_x == other.m_x) && (m_y == other.m_y) && (m_z > other.m_z));
+  }
+
+  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  bool operator>(const vector3& other) const {
+    bool equal_x = std::fabs(m_x - other.m_x) <= std::numeric_limits<T>::epsilon();
+    bool equal_y = std::fabs(m_y - other.m_y) <= std::numeric_limits<T>::epsilon();
+
+    return (m_x > other.m_x) || (equal_x && (m_y > other.m_y)) ||
+           (equal_x && equal_y && (m_z > other.m_z));
+  }
+
+  bool operator<=(const vector3& other) const {
+    return *this < other || *this == other;
+  }
+
+  bool operator>=(const vector3& other) const {
+    return *this > other || *this == other;
   }
 
   /**
@@ -273,6 +306,7 @@ class vector3 {
    */
   bool operator!=(const vector3& other) const { return !(*this == other); }
 
+  /* modifier operators */
   vector3& operator+=(const vector3& other) {
     m_x += other.m_x;
     m_y += other.m_y;
@@ -343,7 +377,7 @@ class vector3 {
   }
   std::string to_str(void) const {
     return "(" + rcppsw::to_string(m_x) + "," + rcppsw::to_string(m_y) + "," +
-        rcppsw::to_string(m_z) + ")";
+           rcppsw::to_string(m_z) + ")";
   }
 
  private:
@@ -381,50 +415,51 @@ using vector3d = vector3<double>;
  * Macros
  ******************************************************************************/
 /**
- * \brief Convert vector3{i,u} -> vector3d directly, without applying any
+ * \brief Convert vector3{i,u,z} -> vector3d directly, without applying any
  * scaling.
  */
-#define RCPPSW_MATH_VEC3_DIRECT_CONVF(prefix)                           \
+#define RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(prefix)                          \
   static inline vector3d prefix##vec2dvec(const vector3##prefix& other) { \
-    return vector3d(other.x(), other.y(), other.z());                   \
+    return vector3d(other.x(), other.y(), other.z());                     \
   }
 
 /**
- * \brief Convert vector3{i,u} -> vector3d, applying a multiplicative scaling
+ * \brief Convert vector3{i,u,z} -> vector3d, applying a multiplicative scaling
  * factor.
  */
-#define RCPPSW_MATH_VEC3_SCALED_CONVF(prefix)                           \
-  static inline vector3d prefix##vec2dvec(const vector3##prefix& other, \
-                                          double scale) {               \
+#define RCPPSW_MATH_VEC3_SCALED_CONV2FLT(prefix)                              \
+  static inline vector3d prefix##vec2dvec(const vector3##prefix& other,       \
+                                          double scale) {                     \
     return vector3d(other.x() * scale, other.y() * scale, other.z() * scale); \
   }
 
 /**
- * \brief Convert vector3d -> vector3{u,z}, applying a divisive scaling factor.
+ * \brief Convert vector3d -> vector3{i,u,z}, applying a divisive scaling factor.
  */
-#define RCPPSW_MATH_VEC3_CONVD(dest_prefix, dest_type)               \
-  static inline vector3##dest_prefix dvec2##dest_prefix##vec(           \
-      const vector3d& other,                                            \
-      double scale) {                                                   \
-    return vector3##dest_prefix(static_cast<dest_type>(std::round(other.x() / scale)), \
-                                static_cast<dest_type>(std::round(other.y() / scale)), \
-                                static_cast<dest_type>(std::round(other.z() / scale))); \
+#define RCPPSW_MATH_VEC3_CONV2DISC(dest_prefix, dest_type)                  \
+  static inline vector3##dest_prefix dvec2##dest_prefix##vec(               \
+      const vector3d& other, double scale) {                                \
+    return vector3##dest_prefix(static_cast<dest_type>(other.x() / scale),  \
+                                static_cast<dest_type>(other.y() / scale),  \
+                                static_cast<dest_type>(other.z() / scale)); \
   }
 
 /*******************************************************************************
  * Free Functions
  ******************************************************************************/
-RCPPSW_MATH_VEC3_DIRECT_CONVF(u);
-RCPPSW_MATH_VEC3_DIRECT_CONVF(i);
-RCPPSW_MATH_VEC3_DIRECT_CONVF(z);
-RCPPSW_MATH_VEC3_SCALED_CONVF(u);
-RCPPSW_MATH_VEC3_SCALED_CONVF(i);
-RCPPSW_MATH_VEC3_SCALED_CONVF(z);
-RCPPSW_MATH_VEC3_CONVD(z, size_t);
-RCPPSW_MATH_VEC3_CONVD(u, uint);
+RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(u);
+RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(i);
+RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(z);
+RCPPSW_MATH_VEC3_SCALED_CONV2FLT(u);
+RCPPSW_MATH_VEC3_SCALED_CONV2FLT(i);
+RCPPSW_MATH_VEC3_SCALED_CONV2FLT(z);
+RCPPSW_MATH_VEC3_CONV2DISC(z, size_t);
+RCPPSW_MATH_VEC3_CONV2DISC(u, uint);
 
-template<class T>
-vector2<T> to_2D(const vector3<T>& v) { return v.to_2D(); }
+template <class T>
+vector2<T> to_2D(const vector3<T>& v) {
+  return v.to_2D();
+}
 
 NS_END(math, rcppsw);
 

@@ -125,7 +125,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
  */
 #define HFSM_STATE_DECLARE(FSM, state_name, event_data)          \
  public:                                                         \
-  int ST_##state_name(const event_data*);                        \
+  int ST_##state_name(event_data*);                        \
                                                                  \
  private:                                                        \
   rcppsw::patterns::fsm::                              \
@@ -236,9 +236,9 @@ class hfsm : public base_fsm, public er::client<hfsm> {
  *
  * Same as \ref HFSM_STATE_DECLARE(), but with no data.
  */
-#define HFSM_STATE_DECLARE_ND(FSM, state_name)                          \
+#define HFSM_STATE_DECLARE_ND(FSM, state_name, ...)                     \
   public:                                                               \
-  int ST_##state_name(void);                                            \
+  int ST_##state_name(void) __VA_ARGS__;                                \
                                                                         \
 private:                                                                \
 rcppsw::patterns::fsm::hfsm_state_action0<FSM, &FSM::ST_##state_name> \

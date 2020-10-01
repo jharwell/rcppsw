@@ -48,7 +48,6 @@ class grid3D : public base_grid3D<T> {
   using typename base_grid3D<T>::const_grid_view;
   using typename base_grid3D<T>::grid_view;
   using typename base_grid3D<T>::grid_type;
-
   using base_grid3D<T>::access;
 
   explicit grid3D(const math::vector3z& dims)
@@ -57,58 +56,19 @@ class grid3D : public base_grid3D<T> {
   grid3D(size_t x_max, size_t y_max, size_t z_max)
       : m_cells(boost::extents[x_max][y_max][z_max]) {}
 
-  T& access(size_t i, size_t j, size_t k) override {
-    return m_cells[i][j][k];
-  }
+  T& access(size_t i, size_t j, size_t k) override { return m_cells[i][j][k]; }
 
   size_t xsize(void) const { return m_cells.shape()[0]; }
   size_t ysize(void) const { return m_cells.shape()[1]; }
   size_t zsize(void) const { return m_cells.shape()[2]; }
 
-  /**
-   * \brief Get a view of a single layer within the grid.
-   *
-   * \param z 0-based index of layer within the grid.
-   *
-   * \return The layer.
-   */
-  grid_view layer(size_t z) {
-    return subgrid(math::vector3z(0, ysize(), z),
-                   math::vector3z(0, ysize(), z+1));
-  }
-
-  const_grid_view layer(size_t z) const {
-    return const_cast<grid3D<T>*>(this)->layer(z);
-  }
-
-  /**
-   * \brief Create a subgrid from a grid. The specified coordinates are
-   * inclusive.
-   *
-   * \return The subgrid.
-   */
-  grid_view subgrid(const math::vector3z& ll, const math::vector3z& ur) {
-    typename grid_type::index_gen indices;
-
-    index_range x(static_cast<typename index_range::index>(ll.x()),
-                  static_cast<typename index_range::index>(ur.x()),
-                  1);
-    index_range y(static_cast<typename index_range::index>(ll.y()),
-                  static_cast<typename index_range::index>(ur.y()),
-                  1);
-    index_range z(static_cast<typename index_range::index>(ll.z()),
-                  static_cast<typename index_range::index>(ur.z()),
-                  1);
-    return grid_view(m_cells[indices[x][y][z]]);
-  }
-
-  const_grid_view subgrid(const math::vector3z& ll,
-                          const math::vector3z& ur) const {
-    return const_cast<grid3D<T>*>(this)->subgrid(ll, ur);
-  }
-
-
  private:
+  size_t xdsize(void) const override { return xsize(); }
+  size_t ydsize(void) const override { return ysize(); }
+  size_t zdsize(void) const override { return zsize(); }
+  grid_type& grid(void) override { return m_cells; }
+  const grid_type& grid(void) const override { return m_cells; }
+
   /* clang-format off */
   grid_type m_cells;
   /* clang-format on */

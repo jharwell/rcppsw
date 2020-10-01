@@ -1,5 +1,5 @@
 /**
- * \file grid2D_overlay.hpp
+ * \file grid3D_overlay.hpp
  *
  * \copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,15 +18,15 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_HPP_
-#define INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_HPP_
+#ifndef INCLUDE_RCPPSW_DS_GRID3D_OVERLAY_HPP_
+#define INCLUDE_RCPPSW_DS_GRID3D_OVERLAY_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <limits>
 
-#include "rcppsw/ds/base_grid2D.hpp"
+#include "rcppsw/ds/base_grid3D.hpp"
 #include "rcppsw/ds/grid_overlay.hpp"
 #include "rcppsw/er/client.hpp"
 
@@ -39,11 +39,13 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * \class grid2D_overlay
+ * \class grid3D_overlay
  * \ingroup ds
  *
- * \brief A 2D logical grid overlayed over a continuous environment using a
- * \a contiguous array of the template parameter type.
+ * \brief A 3D logical grid that is overlayed over a continuous environment. It
+ * discretizes the continuous volume into a grid of a specified resolution
+ * (e.g. it takes a continuous 10.0 x 5.0 x 5.0 space and discretizes it into a
+ * 50 x 25 x 25 grid of cells with a resolution of 0.2).
  *
  * \tparam T The type of the grid element (probably a cell of some kind). Must
  * have must have a zero parameter constructor available or it won't compile
@@ -52,41 +54,37 @@ NS_START(rcppsw, ds);
  * underlying library.
  */
 template <typename T>
-class grid2D_overlay final : public base_grid2D<T>,
-                             public grid_overlay<math::vector2d>,
-                             public er::client<grid2D_overlay<T>> {
+class grid3D_overlay : public base_grid3D<T>,
+                       public grid_overlay<math::vector3d>,
+                       public er::client<grid3D_overlay<T>> {
  public:
-  using typename base_grid2D<T>::index_range;
-  using typename base_grid2D<T>::grid_view;
-  using typename base_grid2D<T>::const_grid_view;
-  using typename base_grid2D<T>::grid_type;
+  using typename base_grid3D<T>::index_range;
+  using typename base_grid3D<T>::grid_view;
+  using typename base_grid3D<T>::const_grid_view;
+  using typename base_grid3D<T>::grid_type;
 
-  using base_grid2D<T>::access;
-  using base_grid2D<T>::xdsize;
-  using base_grid2D<T>::ydsize;
+  using base_grid3D<T>::access;
+  using base_grid3D<T>::xdsize;
+  using base_grid3D<T>::ydsize;
+  using base_grid3D<T>::zdsize;
 
-  using grid_overlay<math::vector2d>::resolution;
-  using grid_overlay<math::vector2d>::originr;
-  using grid_overlay<math::vector2d>::origind;
+  using grid_overlay<math::vector3d>::resolution;
+  using grid_overlay<math::vector3d>::originr;
+  using grid_overlay<math::vector3d>::origind;
 
-  /**
-   * \param origin The anchor point of the overlay grid in continuous space.
-   * \param res The discretization unit for the grid.
-   * \param dims The real size in X,Y which will be discretized into
-   *             X/resolution discrete elements along the X dimension and
-   *             Y/resolution discrete elements along the Y dimension.
-   */
-  grid2D_overlay(const math::vector2d& origin,
-                 const math::vector2d& dims,
+  grid3D_overlay(const math::vector3d& origin,
+                 const math::vector3d& dim,
                  const types::discretize_ratio& grid_res,
                  const types::discretize_ratio& field_res)
       : grid_overlay(origin, grid_res, field_res),
-        ER_CLIENT_INIT("rcppsw.ds.grid2D_overlay"),
-        mc_dim(dims),
+        ER_CLIENT_INIT("rcppsw.ds.grid3D_overlay"),
+        mc_dim(dim),
         m_cells(boost::extents[static_cast<typename index_range::index>(
-            xdsize())][typename index_range::index(ydsize())]) {
-    RCSW_UNUSED double remx = std::remainder(mc_dim.x(), resolution().v());
-    RCSW_UNUSED double remy = std::remainder(mc_dim.y(), resolution().v());
+            xdsize())][typename index_range::index(ydsize())]
+                              [typename index_range::index(zdsize())]) {
+    double remx = std::remainder(mc_dim.x(), resolution().v());
+    double remy = std::remainder(mc_dim.y(), resolution().v());
+    double remz = std::remainder(mc_dim.z(), resolution().v());
 
     /*
      * Some values of dimensions and grid resolution might not be able to be
@@ -102,17 +100,13 @@ class grid2D_overlay final : public base_grid2D<T>,
               "Y dimension (%f) not an even multiple of resolution (%f)",
               mc_dim.y(),
               resolution().v());
+    ER_ASSERT(remz <= 1.0 / ONEE9,
+              "Z dimension (%f) not an even multiple of resolution (%f)",
+              mc_dim.z(),
+              resolution().v());
   }
 
-  /**
-   * \brief Get a reference to a the cell within the grid at coordinates (i, j)
-   *
-   * \return Reference to the cell, of type T.
-   */
-  T& access(size_t i, size_t j) override {
-    return m_cells[static_cast<typename index_range::index>(i)]
-                  [static_cast<typename index_range::index>(j)];
-  }
+  virtual ~grid3D_overlay(void) = default;
 
   size_t xdsize(void) const override {
     return static_cast<size_t>(mc_dim.x() / resolution().v());
@@ -120,6 +114,10 @@ class grid2D_overlay final : public base_grid2D<T>,
 
   size_t ydsize(void) const override {
     return static_cast<size_t>(mc_dim.y() / resolution().v());
+  }
+
+  size_t zdsize(void) const override {
+    return static_cast<size_t>(mc_dim.z() / resolution().v());
   }
 
   /**
@@ -132,9 +130,20 @@ class grid2D_overlay final : public base_grid2D<T>,
    */
   double yrsize(void) const { return mc_dim.y(); }
 
-  const math::vector2d& dimsr(void) const { return mc_dim; }
-  math::vector2z dimsd(void) const {
+  /**
+   * \brief Get the size of the Y dimension (non-discretized).
+   */
+  double zrsize(void) const { return mc_dim.z(); }
+
+  const math::vector3d& dimsr(void) const { return mc_dim; }
+  math::vector3z dimsd(void) const {
     return math::dvec2zvec(mc_dim, resolution().v());
+  }
+
+  T& access(size_t i, size_t j, size_t k) override {
+    return m_cells[static_cast<typename index_range::index>(i)]
+                  [static_cast<typename index_range::index>(j)]
+                  [static_cast<typename index_range::index>(k)];
   }
 
  private:
@@ -142,7 +151,7 @@ class grid2D_overlay final : public base_grid2D<T>,
   const grid_type& grid(void) const override { return m_cells; }
 
   /* clang-format off */
-  const math::vector2d          mc_dim;
+  const math::vector3d          mc_dim;
 
   grid_type                     m_cells;
   /* clang-format on */
@@ -150,4 +159,4 @@ class grid2D_overlay final : public base_grid2D<T>,
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_HPP_ */
+#endif /* INCLUDE_RCPPSW_DS_GRID3D_OVERLAY_HPP_ */

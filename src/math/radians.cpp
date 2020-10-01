@@ -47,12 +47,9 @@ const radians radians::kPI_OVER_THREE(M_PI / 3.0);           // NOLINT
 const radians radians::kPI_OVER_FOUR(M_PI / 4.0);            // NOLINT
 const radians radians::kZERO(0.0);                           // NOLINT
 
-const double radians::kRADIANS_TO_DEGREES(180.0 / M_PI); // NOLINT
-const range<radians> radians::kSignedRange(-radians(M_PI),
-                                           radians(M_PI)); // NOLINT
-const range<radians> radians::kUnsignedRange(radians(0),
-                                             radians(2 * M_PI)); // NOLINT
 RCPPSW_WARNING_DISABLE_POP()
+
+const double radians::kRADIANS_TO_DEGREES(180.0 / M_PI); // NOLINT
 
 /*******************************************************************************
  * Constructors/Destructors
@@ -60,12 +57,19 @@ RCPPSW_WARNING_DISABLE_POP()
 radians::radians(const degrees& d) : m_value(to_radians(d).value()) {}
 
 /*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+std::string radians::to_str(void) const {
+  return "rad(" + rcppsw::to_string(m_value) + ") -> deg(" +
+         rcppsw::to_string(m_value * radians::kRADIANS_TO_DEGREES) + ")";
+}
+
+/*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
 std::ostream& operator<<(std::ostream& stream, const radians& r) {
-  stream << "radians(" << r.value() << " -> "
-         << r.value() * radians::kRADIANS_TO_DEGREES << " degrees"
-         << ")";
+  stream << "rad(" << r.value() << ") -> deg("
+         << r.value() * radians::kRADIANS_TO_DEGREES << ")";
   return stream;
 } /* operator<<() */
 

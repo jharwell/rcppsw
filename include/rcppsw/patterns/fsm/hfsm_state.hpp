@@ -74,7 +74,7 @@ class hfsm_state_action0 : public hfsm_state {
   ~hfsm_state_action0(void) override = default;
 
   int invoke_state_action(base_fsm* fsm,
-                          RCSW_UNUSED const event_data*) const override {
+                          RCSW_UNUSED event_data*) const override {
     auto* derived_fsm = static_cast<FSM*>(fsm);
     return (derived_fsm->*Handler)();
   }
@@ -86,23 +86,23 @@ class hfsm_state_action0 : public hfsm_state {
  * \tparam Handler A state machine member function pointer, that takes ONE
  * argument.
  */
-template <class FSM, class Event, int (FSM::*Handler)(const Event*)>
+template <class FSM, class Event, int (FSM::*Handler)(Event*)>
 class hfsm_state_action1 : public hfsm_state {
  public:
   explicit hfsm_state_action1(hfsm_state* parent) : hfsm_state(parent) {}
   ~hfsm_state_action1() override = default;
   int invoke_state_action(base_fsm* fsm,
-                          const event_data* event) const override {
+                          event_data* event) const override {
     /* Downcast the state machine and event data to the correct derived type */
     auto* derived_fsm = static_cast<FSM*>(fsm);
-    const Event* derived_event = nullptr;
+    Event* derived_event = nullptr;
 
     /*
      * If this check fails, there is a mismatch between the STATE_DECLARE event
      * data type and the data type being sent to the state function.
      */
     if (nullptr != event) {
-      derived_event = dynamic_cast<const Event*>(event);
+      derived_event = dynamic_cast<Event*>(event);
       assert(derived_event);
     }
 
