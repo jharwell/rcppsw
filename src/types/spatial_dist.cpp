@@ -53,5 +53,13 @@ spatial_dist operator-(double lhs, const spatial_dist& rhs) {
 spatial_dist operator+(double lhs, const spatial_dist& rhs) {
   return spatial_dist(lhs + rhs.v());
 }
+bool operator<=(double lhs, const spatial_dist& rhs) { return lhs <= rhs.v(); }
+
+/*******************************************************************************
+ * Non-Member Functions
+ ******************************************************************************/
+spatial_dist spatial_dist::make(const double& value) {
+  return spatial_dist(std::fabs(value));
+} /* make() */
 
 NS_END(types, rcppsw);

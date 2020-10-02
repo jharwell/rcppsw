@@ -31,7 +31,6 @@
                                           ))
                       (setq cc-search-directories cc-search-dirs))
                     )
-                  (c++-mode)
               )
          ))
       ))

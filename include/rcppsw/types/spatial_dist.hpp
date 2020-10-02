@@ -42,6 +42,14 @@ NS_START(rcppsw, types);
 class spatial_dist final : public named_type<double, struct spatial_dist_tag>,
                            public er::client<spatial_dist> {
  public:
+  /**
+   * Create a \ref spatial_dist from a numeric value, making it positive if
+   * necessary. This incurs a higher runtime cost, and so is a separate function
+   * from the constructor, which \a assumes the \p value to be positive
+   * semi-definite.
+   */
+  static spatial_dist make(const double &value);
+
   explicit spatial_dist(const double& value);
   ~spatial_dist(void) override = default;
   spatial_dist(const spatial_dist&) = default;
@@ -91,6 +99,7 @@ class spatial_dist final : public named_type<double, struct spatial_dist_tag>,
 spatial_dist operator*(double lhs, const spatial_dist& rhs);
 spatial_dist operator-(double lhs, const spatial_dist& rhs);
 spatial_dist operator+(double lhs, const spatial_dist& rhs);
+bool operator<=(double lhs, const spatial_dist& rhs);
 
 NS_END(types, rcppsw);
 

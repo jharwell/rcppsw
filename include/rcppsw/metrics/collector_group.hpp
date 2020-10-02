@@ -190,14 +190,25 @@ class collector_group {
    * \brief Call the \ref base_metrics_collector::csv_line_write() function on
    * all collectors in the group.
    *
-   * \return \c TRUE iff ALL collectors in the group wrote out metrics this
-   * timestep.
+   * \p fail_ok Is it OK if one or more collectors fail to write due to
+   * filesystem I/O errors, or not?
+   *
+   * \return If \p fail_ok is \c FALSE, \c TRUE iff ALL collectors in the group
+   * attempted to write out metrics this timestep and were successful, and \c
+   * FALSE otherwise. If \p fail_ok is \c TRUE, then \c TRUE if all collectors
+   * attempted to write out metrics this timestep, regardless of success, and \c
+   * FALSE otherwise.
    */
-  bool metrics_write_all(void) {
+  bool metrics_write_all(bool fail_ok) {
     return std::all_of(m_collectors.begin(),
                        m_collectors.end(),
-                       [&](const std::pair<const key_type, mapped_type>& pair) {
-                         return pair.second->csv_line_write();
+                       [&](const std::pair<const key_type, mapped_type>& pair) -> bool {
+                         auto res = pair.second->csv_line_write();
+                         if (fail_ok) {
+                           return !(res & metrics_write_status::ekNO_ATTEMPT);
+                         } else {
+                           return (res & metrics_write_status::ekSUCCESS);
+                         }
                        });
   }
 

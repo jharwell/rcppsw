@@ -33,6 +33,7 @@
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/metrics/output_mode.hpp"
 #include "rcppsw/types/timestep.hpp"
+#include "rcppsw/metrics/metrics_write_status.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -108,7 +109,7 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
    *
    * \return \c TRUE if a line was written, \c FALSE otherwise.
    */
-  bool csv_line_write(void);
+  metrics_write_status csv_line_write(void);
 
   /**
    * \brief Finalize metrics and flush files.
@@ -221,6 +222,8 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
   }
 
  private:
+  static constexpr size_t kN_RETRIES = 10;
+
   /**
    * \brief Build the header line for a particular collector using \ref
    * csv_header_cols().
@@ -228,6 +231,8 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
    * \return The built header.
    */
   std::string csv_header_build(void) const;
+
+  bool retry_io(const std::function<void(void)>& cb);
 
   /* clang-format off */
   const output_mode mc_output_mode;
