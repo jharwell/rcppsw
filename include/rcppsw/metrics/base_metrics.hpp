@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -35,7 +35,7 @@ NS_START(rcppsw, metrics);
  * Class Definitions
  ******************************************************************************/
 /**
- * \class base_metrics
+ * \interface base_metrics
  * \ingroup metrics
  *
  * \brief Base class for all collected metrics in RCPPSW.
@@ -48,7 +48,8 @@ class base_metrics {
   base_metrics& operator=(const base_metrics&) = default;
 
   /**
-   * \brief Reset gathered metrics to their initial state.
+   * \brief Reset gathered metrics to their initial state, if needed. By default
+   * it does nothing.
    */
   virtual void reset_metrics(void) {}
 };

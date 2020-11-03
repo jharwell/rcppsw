@@ -42,10 +42,8 @@ NS_START(rcppsw, ds);
  * \class grid3D_overlay
  * \ingroup ds
  *
- * \brief A 3D logical grid that is overlayed over a continuous environment. It
- * discretizes the continuous volume into a grid of a specified resolution
- * (e.g. it takes a continuous 10.0 x 5.0 x 5.0 space and discretizes it into a
- * 50 x 25 x 25 grid of cells with a resolution of 0.2).
+ * \brief A 3D logical grid overlayed over a continuous environment using a
+ * \a contiguous array of the template parameter type (\see \ref grid_overlay).
  *
  * \tparam T The type of the grid element (probably a cell of some kind). Must
  * have must have a zero parameter constructor available or it won't compile
@@ -79,8 +77,8 @@ class grid3D_overlay : public base_grid3D<T>,
       : grid_overlay(origin, grid_res, field_res),
         ER_CLIENT_INIT("rcppsw.ds.grid3D_overlay"),
         mc_dim(dim),
-        m_cells(boost::extents[static_cast<typename index_range::index>(
-            xdsize())][typename index_range::index(ydsize())]
+        m_cells(boost::extents[static_cast<typename index_range::index>(xdsize())]
+                              [typename index_range::index(ydsize())]
                               [typename index_range::index(zdsize())]) {
     double remx = std::remainder(mc_dim.x(), resolution().v());
     double remy = std::remainder(mc_dim.y(), resolution().v());
@@ -135,7 +133,16 @@ class grid3D_overlay : public base_grid3D<T>,
    */
   double zrsize(void) const { return mc_dim.z(); }
 
+  /**
+   * \brief Get the real dimensions of the grid; that is, continuous floating
+   * point.
+   */
+
   const math::vector3d& dimsr(void) const { return mc_dim; }
+
+  /**
+   * \brief Get the discrete dimensions of the grid.
+   */
   math::vector3z dimsd(void) const {
     return math::dvec2zvec(mc_dim, resolution().v());
   }

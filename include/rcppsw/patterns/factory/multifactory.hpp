@@ -24,6 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <memory>
+
 #include "rcppsw/patterns/factory/base_factory.hpp"
 #include "rcppsw/patterns/singleton/singleton.hpp"
 
@@ -35,13 +37,11 @@ NS_START(rcppsw, patterns, factory, detail);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-
 template<typename TBase, typename TType, typename...Args>
 class factory_singleton : public singleton::singleton<base_factory<TType,
                                                                    std::unique_ptr,
                                                                    TBase,
                                                                    Args...>> {};
-
 /**
  * \class multifactory
  * \ingroup patterns factory
@@ -51,7 +51,9 @@ class factory_singleton : public singleton::singleton<base_factory<TType,
  * hve compatible constructor signatures. HOWEVER, though this class can handle
  * heterogenous constructor signatures, you will likely need a switch() to
  * determine what parameters to pass based on the name of the thing you want to
- * build, thus limiting utility somewhat.
+ * build, thus defeating the purpose of a factory to some degree.
+ *
+ * \tparam TType The type of the factory.
  *
  * \tparam TBase Type of objects capable of creation from this factory
  * (restricted to this type and its derived types).

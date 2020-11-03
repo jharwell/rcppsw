@@ -25,9 +25,9 @@
 
 #include <filesystem>
 #include <iomanip>
+#include <iostream>
 #include <numeric>
 #include <sstream>
-#include <iostream>
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -57,34 +57,33 @@ metrics_write_status base_metrics_collector::csv_line_write(void) {
   bool io_success = false;
   if (output_mode::ekAPPEND == mc_output_mode) {
     auto append_line = [&](void) {
-                        m_ofile << rcppsw::to_string(m_timestep) + mc_separator + *line
-                                << std::endl;
-                      };
+      m_ofile << rcppsw::to_string(m_timestep) + mc_separator + *line
+              << std::endl;
+    };
     io_success = retry_io(append_line);
   } else if (output_mode::ekTRUNCATE == mc_output_mode) {
     auto write_truncate = [&](void) {
-                            std::filesystem::resize_file(mc_ofname_stem + mc_ofname_ext,
-                                                         0);
-                            m_ofile.seekp(0);
-                            csv_header_write();
-                            m_ofile << *line << std::endl;
-                          };
+      std::filesystem::resize_file(mc_ofname_stem + mc_ofname_ext, 0);
+      m_ofile.seekp(0);
+      csv_header_write();
+      m_ofile << *line << std::endl;
+    };
     io_success = retry_io(write_truncate);
   } else if (output_mode::ekCREATE == mc_output_mode) {
     auto write_create = [&](void) {
-                          std::stringstream ss;
-                          /*
-                           * +1 to get things to come out evenly because we start with
-                           * timestep 0.
-                           */
-                          ss << std::setw(10) << std::setfill('0') << (m_timestep.v() + 1);
+      std::stringstream ss;
+      /*
+       * +1 to get things to come out evenly because we start with
+       * timestep 0.
+       */
+      ss << std::setw(10) << std::setfill('0') << (m_timestep.v() + 1);
 
-                          m_ofile.open(mc_ofname_stem + "_" + ss.str() + mc_ofname_ext,
-                                       std::ios_base::trunc | std::ios_base::out);
-                          csv_header_write();
-                          m_ofile << *line << std::endl;
-                          m_ofile.close();
-                        };
+      m_ofile.open(mc_ofname_stem + "_" + ss.str() + mc_ofname_ext,
+                   std::ios_base::trunc | std::ios_base::out);
+      csv_header_write();
+      m_ofile << *line << std::endl;
+      m_ofile.close();
+    };
     io_success = retry_io(write_create);
   } else {
     ER_FATAL_SENTINEL("Bad output mode '%d'",
@@ -105,7 +104,8 @@ void base_metrics_collector::csv_header_write(void) {
                                        [&](const auto& sum, const auto& col) {
                                          return sum + separator() + col;
                                        });
-  ER_ASSERT(m_ofile.is_open(), "Cannot write header to %s%s: not open",
+  ER_ASSERT(m_ofile.is_open(),
+            "Cannot write header to %s%s: not open",
             mc_ofname_stem.c_str(),
             mc_ofname_ext.c_str());
 
@@ -138,8 +138,7 @@ void base_metrics_collector::interval_reset(void) {
   }
 } /* interval_reset() */
 
-bool base_metrics_collector::retry_io(
-    const std::function<void(void)>& cb) {
+bool base_metrics_collector::retry_io(const std::function<void(void)>& cb) {
   int tries = kN_RETRIES;
   std::string error;
 

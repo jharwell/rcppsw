@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/control/waveform.hpp"
+#include "rcppsw/control/base_waveform.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -43,10 +43,10 @@ NS_START(rcppsw, control);
  * of the waveform config it was passed during construction. All other
  * parameters are ignored.
  */
-class constant_waveform : public waveform {
+class constant_waveform : public base_waveform {
  public:
   explicit constant_waveform(const struct config::waveform_config* const config)
-      : waveform(config) {}
+      : base_waveform(config) {}
 
   double value(double) override { return amplitude(); }
 };
@@ -58,10 +58,10 @@ class constant_waveform : public waveform {
  * \brief A special waveform that always returns 0.0, indicating that there is
  * no waveform/nothing. All parameters are ignored during initialization.
  */
-class null_waveform : public waveform {
+class null_waveform : public base_waveform {
  public:
   explicit null_waveform(const struct config::waveform_config* const config)
-      : waveform(config) {}
+      : base_waveform(config) {}
 
   double value(double) override { return 0.0; }
 };

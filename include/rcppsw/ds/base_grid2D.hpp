@@ -72,7 +72,7 @@ class base_grid2D {
    * \brief Return a reference to the element at position (i, j) in the grid.
    *
    * This is provided in the base class so that the pointer/object variants of
-   * the grid (\ref grid2D, \ref overlay_grid2D) can reduce code duplication.
+   * the grid (\ref grid2D, \ref grid2D_overlay) can reduce code duplication.
    */
   virtual T& access(size_t i, size_t j) = 0;
 
@@ -101,7 +101,7 @@ class base_grid2D {
    * \param c Coordinates of center of subcircle.
    * \param radius Radius of subcircle.
    *
-   * \return The subcircle.
+   * \return The subcircle (closed interval).
    */
   grid_view subcircle(const math::vector2z& c, size_t radius) {
     auto ll_x =
@@ -141,15 +141,12 @@ class base_grid2D {
   }
 
   /**
-   * \brief Create a subgrid (really an array view) from a grid. The grid is
-   * clamped to the maximum boundaries of the parent grid, so rather than
-   * getting a 2 x 2 subgrid centered at 0 with the out-of-bounds elements
-   * zeroed, you will get a 1 x 2 subgrid.
+   * \brief Create a subgrid from a grid.
    *
    * \param ll Lower left of the subgrid, inclusive.
    * \param ur Upper right of the subgrid, inclusive.
    *
-   * \return The subgrid.
+   * \return The subgrid (closed interval).
    */
   grid_view subgrid(const math::vector2z& ll, const math::vector2z& ur) {
     index_range x(ll.x(), ur.x(), 1);

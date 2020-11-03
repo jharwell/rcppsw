@@ -1,5 +1,5 @@
 /**
- * \file entropy_impl.hpp
+ * \file entropy_eh_omp.hpp
  *
  * \copyright 2018 John Harwell, All rights reserved.
  *
@@ -17,8 +17,8 @@
  * You should have received a copy of the GNU General Public License along with
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
-#ifndef INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_ENTROPY_IMPL_HPP_
-#define INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_ENTROPY_IMPL_HPP_
+#ifndef INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_ENTROPY_EH_OMP_HPP_
+#define INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_ENTROPY_EH_OMP_HPP_
 
 /*******************************************************************************
  * Includes
@@ -26,34 +26,32 @@
 #include <omp.h>
 #include <vector>
 
-#include "rcppsw/common/common.hpp"
-#include "rcppsw/algorithm/clustering/clustering_impl.hpp"
+#include "rcppsw/rcppsw.hpp"
+#include "rcppsw/algorithm/clustering/eh_clustering_impl.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, algorithm, clustering, detail);
+NS_START(rcppsw, algorithm, clustering);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * \class entropy_impl
+ * \class entropy_eh_omp
  * \ingroup algorithm clustering
  *
- * \brief Sequential clustering using the Event Horizon (EH) membership
- * policy. Suitable for information entropy calculations.
+ * \brief Parallel clustering using the Event Horizon (EH) membership policy
+ * with OpenMP. Suitable for information entropy calculations.
  */
 template <typename T>
-class entropy_impl final : public clustering_impl<T, policy::EH> {
+class entropy_eh_omp final : public eh_clustering_impl<T> {
  public:
-  using typename clustering_impl<T, policy::EH>::cluster_vector;
-  using typename clustering_impl<T, policy::EH>::dist_calc_ftype;
+  using typename eh_clustering_impl<T>::cluster_vector;
+  using typename eh_clustering_impl<T>::dist_calc_ftype;
+  using eh_clustering_impl<T>::horizon;
 
-  explicit entropy_impl(uint n_threads) : mc_n_threads(n_threads) {}
-
-  uint n_threads(void) const { return mc_n_threads; }
-
+  explicit entropy_eh_omp(size_t n_threads) : mc_n_threads(n_threads) {}
 
   void initialize(std::vector<T>* const data,
                   membership_type<policy::EH>* const membership) override {
@@ -68,7 +66,7 @@ class entropy_impl final : public clustering_impl<T, policy::EH> {
     #pragma omp parallel for num_threads(mc_n_threads)
     for (size_t i = 0; i < data.size(); ++i) {
       for (size_t j = 0; j < data.size(); ++j) {
-        if (dist_func(data[i], data[j]) <= m_horizon) {
+        if (dist_func(data[i], data[j]) <= horizon()) {
           (*clusters)[i].add_point(j);
         }
       } /* for(j..) */
@@ -78,15 +76,14 @@ class entropy_impl final : public clustering_impl<T, policy::EH> {
   bool converged(const cluster_vector& ) const override { return false; }
   void post_iter_update(cluster_vector* const) override {}
 
-  void horizon(double horizon) { m_horizon = horizon; }
+  size_t n_threads(void) const { return mc_n_threads; }
 
  private:
   /* clang-format off */
-  const uint mc_n_threads;
-  double     m_horizon{-1};
+  const size_t mc_n_threads;
   /* clang-format on */
 };
 
-NS_END(detail, clustering, algorithm, rcppsw);
+NS_END(clustering, algorithm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_ENTROPY_IMPL_HPP_ */
+#endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_ENTROPY_EH_OMP_HPP_ */

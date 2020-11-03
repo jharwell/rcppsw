@@ -31,6 +31,8 @@
 #include <boost/utility/enable_if.hpp>
 
 #include "rcppsw/common/common.hpp"
+#include "rcppsw/mpl/mpl.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Macros
@@ -46,7 +48,7 @@
 
 /**
  * \def RCPPSW_SFINAE_TYPELIST_REJECT() Disable the function that this macro is
- * attached to if the specified type is found in the Typelist, which must be a
+ * attached to if the specified type is found in the typelist, which must be a
  * \ref typelist compile-time object.
  */
 #define RCPPSW_SFINAE_TYPELIST_REJECT(Typelist, T) \
@@ -58,7 +60,13 @@
  ******************************************************************************/
 NS_START(rcppsw, mpl);
 
+/*******************************************************************************
+ * Trait Detection Templates
+ ******************************************************************************/
 /**
+ * \struct typelist
+ * \ingroup mpl
+ *
  * \brief A list of types using boost::mpl::vectors, which enables all sorts of
  * nice operations from the boost MPL library.
  */
@@ -66,6 +74,9 @@ template <typename... Ts>
 using typelist = boost::mpl::vector<Ts...>;
 
 /**
+ * \struct typelist_wrap_into
+ * \ingroup mpl
+ *
  * \brief Wrap a \ref typelist into a container/template class.
  *
  * \tparam WrapperType The container class each of the types in the \ref
@@ -93,11 +104,15 @@ struct typelist_wrap_into {
 };
 
 /**
+ * \struct typelist_wrap_apply
+ * \ingroup mpl
+ *
  * \brief Apply a functor to each type in the \ref typelist. The functor can
  * itself take as many template parameters as needed.
  */
 template <typename Typelist,
-          template <class WrappedType, class...> class WrapperType,
+          template <class WrappedType, class...>
+          class WrapperType,
           class... Args>
 using typelist_wrap_apply =
     typename boost::mpl::transform<Typelist,

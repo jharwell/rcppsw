@@ -35,7 +35,7 @@ NS_START(rcppsw, types);
  ******************************************************************************/
 spatial_dist::spatial_dist(const double& value)
     : named_type<double, spatial_dist_tag>(value),
-    ER_CLIENT_INIT("rcppsw.types.spatial_dist") {
+      ER_CLIENT_INIT("rcppsw.types.spatial_dist") {
   ER_ASSERT(v() >= 0.0,
             "Spatial dist must always be positive semi-definite: %f < 0",
             v());

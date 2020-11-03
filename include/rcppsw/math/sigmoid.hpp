@@ -45,7 +45,6 @@ NS_START(rcppsw, math);
  * parameter requirements to calculate the value of the function at a point in
  * space.
  */
-
 class sigmoid : public expression<double> {
  public:
   sigmoid(void) = default;
@@ -54,7 +53,7 @@ class sigmoid : public expression<double> {
    * \brief Construct the sigmoid using parameters.
    */
   explicit sigmoid(const config::sigmoid_config* const config)
-      : sigmoid{config->reactivity, config->offset, config->gamma} {}
+      : sigmoid{ config->reactivity, config->offset, config->gamma } {}
 
   /**
    * \brief Construct the sigmoid by passing each parameter explicitly. Note

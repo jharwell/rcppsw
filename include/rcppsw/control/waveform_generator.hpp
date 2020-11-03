@@ -33,7 +33,7 @@
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, control);
-class waveform;
+class base_waveform;
 namespace config {
 struct waveform_config;
 } /* namespace config */
@@ -48,27 +48,46 @@ struct waveform_config;
  * \brief Factory to create waveforms of different types given the name of a
  * waveform. Valid names are:
  *
- * - Sine (periodic)
- * - Square (periodic)
- * - Sawtooth (periodic)
- * - Constant (aperiodic)
- * - Null (aperiodic)
+ * - \ref kSine (periodic)
+ * - \ref kSquare (periodic)
+ * - \ref kSawtooth (periodic)
+ * - \ref kConstant (aperiodic)
+ * - \ref kNull (aperiodic)
  */
 class waveform_generator
-    : public patterns::factory::releasing_factory<waveform,
+    : public patterns::factory::releasing_factory<base_waveform,
                                                   std::string,
                                                   const config::waveform_config*> {
  public:
-  static constexpr char kSine[] = "Sine";
-  static constexpr char kSquare[] = "Square";
-  static constexpr char kSawtooth[] = "Sawtooth";
-  static constexpr char kConstant[] = "Constant";
-  static constexpr char kNull[] = "Null";
+  /**
+   * \brief Generate a \ref sine_waveform.
+   */
+  static constexpr const char kSine[] = "Sine";
+
+  /**
+   * \brief Generate a \ref square_waveform.
+   */
+  static constexpr const char kSquare[] = "Square";
+
+  /**
+   * \brief Generate a \ref sawtooth_waveform.
+   */
+  static constexpr const char kSawtooth[] = "Sawtooth";
+
+  /**
+   * \brief Generate a \ref constant_waveform.
+   */
+  static constexpr const char kConstant[] = "Constant";
+
+  /**
+   * \brief Generate a \ref null_waveform.
+   */
+  static constexpr const char kNull[] = "Null";
 
   waveform_generator(void);
 
-  std::unique_ptr<waveform> operator()(const std::string& name,
-                                       const config::waveform_config* config);
+  std::unique_ptr<base_waveform>
+  operator()(const std::string& name, const config::waveform_config* config);
 };
 
 NS_END(control, rcppsw);

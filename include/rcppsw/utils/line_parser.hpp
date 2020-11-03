@@ -27,7 +27,7 @@
 #include <string>
 #include <vector>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -46,15 +46,17 @@ NS_START(rcppsw, utils);
  */
 class line_parser {
  public:
-  explicit line_parser(char delim) : m_delim(delim) {}
+  explicit line_parser(char delim) : mc_delim(delim) {}
 
   /**
    * \brief Parse a line into a vector of tokens, split on delimiter.
    */
-  std::vector<std::string> parse(const std::string& line);
+  std::vector<std::string> parse(const std::string& line) const;
 
  private:
-  char m_delim;
+  /* clang-format off */
+  const char mc_delim;
+  /* clang-format on */
 };
 
 NS_END(utils, rcppsw);

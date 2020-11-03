@@ -28,19 +28,21 @@
 
 #include <boost/variant/static_visitor.hpp>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/mpl/typelist.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, visitor);
+NS_START(rcppsw, patterns, visitor, detail);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+
 /**
  * \class visit_set_helper
+ * \ingroup patterns visitor
  *
  * \brief Helper class to provide actual implementation.
  */
@@ -50,6 +52,8 @@ class visit_set_helper {
   virtual void visit(T& visitee) = 0;
   virtual ~visit_set_helper(void) = default;
 };
+
+NS_END(detail);
 
 /**
  * \class visit_set
@@ -64,29 +68,34 @@ class visit_set {};
 
 /**
  * \class visit_set<T,R,..>
+ * \ingroup patterns visitor
  *
  * \brief Middle recursive case for expansion.
  */
 template<typename T, typename... Ts>
-class visit_set<T, Ts...>: public visit_set_helper<T>,
+class visit_set<T, Ts...>: public detail::visit_set_helper<T>,
                            public visit_set<Ts...> {
  public:
-  using visit_set_helper<T>::visit;
+  using detail::visit_set_helper<T>::visit;
   using visit_set<Ts...>::visit;
 };
 
 /**
  * \class visit_set<T>
+ * \ingroup patterns visitor
  *
  * \brief Base case for expansion.
  */
 template<typename T>
-class visit_set<T>: public visit_set_helper<T> {
+class visit_set<T>: public detail::visit_set_helper<T> {
  public:
-  using visit_set_helper<T>::visit;
+  using detail::visit_set_helper<T>::visit;
 };
 
 /**
+ * \class precise_visit_set
+ * \ingroup patterns visitor
+ *
  * \brief List of types specifying the set of visitors that a \ref
  * precise_visitor will be able to visit.
  */
@@ -94,9 +103,15 @@ template<typename ...Args>
 using precise_visit_set = mpl::typelist<Args...>;
 
 /**
+ * \class precise_visitor
+ * \ingroup patterns visitor
+ *
  * \brief Visitor that will only visit precisely with types that exactly match
  * one of the types in its type list (i.e. no implicit upcasting is
  * allowed). SFINAE FTW!
+ *
+ * \note Non-static methods from \p VisitorImpl will be available in the
+ * derived class (in contrast to \ref precise_visitor).
  *
  * \tparam VisitorImpl The name of the class containing the actual
  *                     implementation of the visit functions.
@@ -113,8 +128,9 @@ using precise_visit_set = mpl::typelist<Args...>;
  * a compiler error.
  */
 template <typename VisitorImpl, typename TypeList>
-struct precise_visitor : public VisitorImpl,
-                         public boost::static_visitor<void> {
+class precise_visitor : public VisitorImpl,
+                         protected boost::static_visitor<void> {
+ public:
   using VisitorImpl::VisitorImpl;
   template <typename... Args>
   explicit precise_visitor(Args&&... args)
@@ -138,8 +154,10 @@ struct precise_visitor : public VisitorImpl,
  *
  * \brief Convenience wrapper allowing generic visits to ANY type, but filtering
  * them on the \ref rmpl::typelist passed to the \ref
- * rpvisitor::precise_visitor. This class is appropriate if no non-static
- * methods from \p TVisitor are needed.
+ * rpvisitor::precise_visitor.
+ *
+ * \note This class is appropriate if no non-static methods from \p TVisitor are
+ * needed (they will not be accessible, because inheritance is not used).
  *
  * \tparam TVisitor The name of the visitor class, which must be capable of
  *                  being used with \ref precise_visitor, and define \p

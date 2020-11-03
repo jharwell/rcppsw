@@ -46,12 +46,11 @@ namespace clustering = rcppsw::algorithm::clustering;
  ******************************************************************************/
 CATCH_TEST_CASE("Maximum Subarray Finder", "[algorithm]") {
   std::vector<int> data = {0, 1, 2, 3, 4, 5, 6, 0, 0, 0};
-  rcppsw::algorithm::max_subarray_finder<int> finder(data);
-  std::vector<int> res;
-  CATCH_REQUIRE(OK == finder.find(&res));
-  CATCH_REQUIRE(res[0] == 21);
-  CATCH_REQUIRE(res[1] == 0);
-  CATCH_REQUIRE(res[2] == 6);
+  ralgorithm::max_subarray_finder<int> finder;
+  auto res = finder(data);
+  CATCH_REQUIRE(21 == std::get<0>(*res));
+  CATCH_REQUIRE(0 == std::get<1>(*res));
+  CATCH_REQUIRE(6 == std::get<2>(*res));
 }
 
 CATCH_TEST_CASE("Closest Pair", "[algorithm]") {
@@ -72,9 +71,9 @@ CATCH_TEST_CASE("Closest Pair", "[algorithm]") {
   CATCH_REQUIRE((res.p2 == math::vector2i(0, 2) || res.p2 == math::vector2i(0, 1)));
   CATCH_REQUIRE(res.dist == 1.0);
 
-  res = rcppsw::algorithm::closest_pair2D<math::vector2i>()("recursive",
-                                                                  data,
-                                                                  dist_func);
+  res = ralgorithm::closest_pair2D<math::vector2i>()("recursive",
+                                                     data,
+                                                     dist_func);
   CATCH_REQUIRE((res.p1 == math::vector2i(0, 2) || res.p1 == math::vector2i(0, 1)));
   CATCH_REQUIRE((res.p2 == math::vector2i(0, 2) || res.p2 == math::vector2i(0, 1)));
   CATCH_REQUIRE(res.dist == 1.0);
@@ -87,7 +86,7 @@ CATCH_TEST_CASE("Kmeans", "[clustering]") {
   /*   data.push_back(i % 10); */
   /* } /\* for(i..) *\/ */
 
-  auto impl = std::make_unique<clustering::detail::kmeans_impl<double>>(4);
+  auto impl = std::make_unique<clustering::kmeans_omp<double>>(4);
   clustering::kmeans<double> alg(data,
                                  std::move(impl),
                                  2,

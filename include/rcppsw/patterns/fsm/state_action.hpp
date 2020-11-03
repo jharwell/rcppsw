@@ -25,7 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <cassert>
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/patterns/fsm/event.hpp"
 #include "rcppsw/patterns/fsm/state.hpp"
 

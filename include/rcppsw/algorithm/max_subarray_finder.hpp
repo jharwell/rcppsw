@@ -25,11 +25,12 @@
  * Includes
  ******************************************************************************/
 #include <algorithm>
-#include <vector>
+#include <boost/optional.hpp>
+#include <tuple>
 
 #include "rcsw/common/fpc.h"
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -48,26 +49,23 @@ NS_START(rcppsw, algorithm);
 template <typename T>
 class max_subarray_finder {
  public:
-  explicit max_subarray_finder(const std::vector<T>& arr) : m_arr(arr) {}
-
   /**
-   * \brief Find the maximal subarray.
+   * \brief Find the maximal subarray from the source array.
    *
-   * \param res The maximal subarray, to be filled.
-   *
-   * \return \c OK if successful, \c ERROR otherwise.
+   * \return (sum, start index (inclusive), end index (inclusive)), if one is found.
    */
-  status_t find(std::vector<int>* const res) {
-    RCSW_FPC_NV(ERROR, m_arr.size() > 0);
+  boost::optional<std::tuple<T, int, int>> operator()(const std::vector<T>& arr) const {
+    RCSW_FPC_NV(boost::none, arr.size() > 0);
 
-    T max_sum = m_arr[0];
-    T current_sum = m_arr[0];
+    T max_sum = arr[0];
+    T current_sum = arr[0];
     int start_index = 0;
     int end_index = 0;
+    std::tuple<T, int, int> res;
 
     /* Kadane's algorithm - O(n) */
-    for (size_t i = 0; i < m_arr.size(); ++i) {
-      current_sum += m_arr[i];
+    for (size_t i = 0; i < arr.size(); ++i) {
+      current_sum += arr[i];
       if (current_sum > max_sum) {
         max_sum = current_sum;
         end_index = i;
@@ -76,15 +74,8 @@ class max_subarray_finder {
         current_sum = 0;
       }
     } /* for(i..) */
-
-    res->push_back(max_sum);
-    res->push_back(start_index);
-    res->push_back(end_index);
-    return OK;
-  } /* find() */
-
- private:
-  const std::vector<T>& m_arr;
+    return boost::make_optional(std::make_tuple(max_sum, start_index, end_index));
+  }
 };
 
 NS_END(algorithm, rcppsw);

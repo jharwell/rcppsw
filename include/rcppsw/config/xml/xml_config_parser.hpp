@@ -30,7 +30,7 @@
 #include <string>
 #include <memory>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
@@ -44,11 +44,24 @@ NS_START(xml);
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#define XML_ATTR_STR(container, name) \
-  std::string(#name) << "=" << (container)->name
+/**
+ * \def XML_PARSE_ATTR(node, container, name)
+ *
+ * Parse the attribute \p name from the parent \p node, and place the result
+ * into \p container, which \a MUST have a field named \p name or a compilation
+ * error will result.
+ *
+ * If \p name does not exist in \p node, then an exception will be thrown.
+ */
 #define XML_PARSE_ATTR(node, container, name) \
   this->node_attr_get((node), #name, (container)->name)
 
+/**
+ * \def XML_PARSE_ATTR_DFLT(node, container, name, dflt)
+ *
+ * Same as \ref XML_PARSE_ATTR_DFLT, but provide a default value in case \p name
+ * is not found in \p node.
+ */
 #define XML_PARSE_ATTR_DFLT(node, container, name, dflt) \
   this->node_attr_get((node), #name, (container)->name, dflt)
 
@@ -61,7 +74,6 @@ NS_START(xml);
  *
  * \brief Interface specifying functionality for parsing XML into a \ref
  * base_config derived parameter structure.
- *
  */
 class xml_config_parser : public er::client<xml_config_parser> {
  public:

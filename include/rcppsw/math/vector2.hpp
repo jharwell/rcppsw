@@ -28,8 +28,8 @@
 #include <limits>
 #include <string>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/math/radians.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/types/discretize_ratio.hpp"
 
 /*******************************************************************************
@@ -99,8 +99,7 @@ class vector2 {
    */
   template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   vector2(const T& length, const radians& angle) noexcept
-      : m_x(std::cos(angle.value()) * length),
-        m_y(std::sin(angle.value()) * length) {}
+      : m_x(std::cos(angle.v()) * length), m_y(std::sin(angle.v()) * length) {}
 
   T x(void) RCSW_CHECK_RET { return m_x; }
   T y(void) RCSW_CHECK_RET { return m_y; }
@@ -133,23 +132,19 @@ class vector2 {
    */
   template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   void set_from_polar(const T& length, const radians& angle) {
-    m_x = std::cos(angle.value()) * length;
-    m_y = std::sin(angle.value()) * length;
+    m_x = std::cos(angle.v()) * length;
+    m_y = std::sin(angle.v()) * length;
   }
 
   /**
    * \brief Returns the square length of this vector.
    */
-  T square_length(void) const RCSW_CHECK_RET {
-    return (m_x * m_x) + (m_y * m_y);
-  }
+  T square_length(void) const RCSW_CHECK_RET { return (m_x * m_x) + (m_y * m_y); }
 
   /**
    * Returns the length of this vector.
    */
-  double length(void) const RCSW_CHECK_RET {
-    return std::sqrt(square_length());
-  }
+  double length(void) const RCSW_CHECK_RET { return std::sqrt(square_length()); }
 
   /**
    * \brief Normalizes this vector.
@@ -183,7 +178,7 @@ class vector2 {
   template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   vector2& rotate(const radians& angle) {
     T sin_val, cos_val;
-    ::sincos(angle.value(), &sin_val, &cos_val);
+    ::sincos(angle.v(), &sin_val, &cos_val);
     m_x = m_x * cos_val - m_y * sin_val;
     m_y = m_x * sin_val + m_y * cos_val;
     return *this;
@@ -317,7 +312,7 @@ class vector2 {
   vector2 operator-(void) const { return vector2(-m_x, -m_y); }
 
   friend std::ostream& operator<<(std::ostream& stream, const vector2& v) {
-    stream << "(" << v.m_x << "," << v.m_y << ")";
+    stream << v.to_str();
     return stream;
   }
 
@@ -325,7 +320,7 @@ class vector2 {
    * \brief For parsing a vector from a string in the form of \c "X,Y".
    */
   friend std::istream& operator>>(std::istream& is, vector2<T>& v) {
-    T values[2] = {T(), T()};
+    T values[2] = { T(), T() };
     utils::parse_values<T>(is, 2, values, ',');
     v.set(values[0], values[1]);
     return is;

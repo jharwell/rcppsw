@@ -28,8 +28,8 @@
 #include <deque>
 #include <memory>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/multiprocess/ipc.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -43,8 +43,8 @@ NS_START(rcppsw, multiprocess);
  * \class ipc_queue
  * \ingroup interprocess
  *
- * \brief Interprocess synchronized queue (like \ref mt_queue, but for
- * processes).
+ * \brief Interprocess synchronized queue (like \ref multithread::mt_queue, but
+ * for processes).
  */
 template <class T>
 class ipc_queue {
@@ -171,9 +171,11 @@ class ipc_queue {
   size_t size() const { return m_queue.size(); }
 
  private:
-  bip::deque<T, allocator_type> m_queue;
-  mutable bip::interprocess_mutex m_io_mutex;
+  /* clang-format off */
+  bip::deque<T, allocator_type>       m_queue;
+  mutable bip::interprocess_mutex     m_io_mutex;
   mutable bip::interprocess_condition m_wait_condition;
+  /* clang-format on */
 };
 
 NS_END(multiprocess, rcppsw);

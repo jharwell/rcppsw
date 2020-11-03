@@ -26,9 +26,9 @@
 /*******************************************************************************
  * Constants
  ******************************************************************************/
-#define LIBRA_ER_NONE 0  /* No event reporting */
+#define LIBRA_ER_NONE 0 /* No event reporting */
 #define LIBRA_ER_FATAL 1 /* Fatal events only */
-#define LIBRA_ER_ALL 2   /* All event reporting  */
+#define LIBRA_ER_ALL 2 /* All event reporting  */
 
 /*
  * Size of buffer put on stack for creating debug strings. This probably never
@@ -55,7 +55,7 @@
 #include <cassert>
 #include <string>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Macros
@@ -80,10 +80,13 @@
  * condition--only the size of whatever it returns. The variables are "used",
  * making the compiler happy, but ultimately removed by the optimizer.
  */
-#define ER_ASSERT(cond, msg, ...)  do {(void)sizeof((cond)); } while (0)
+#define ER_ASSERT(cond, msg, ...) \
+  do {                            \
+    (void)sizeof((cond));         \
+  } while (0)
 #define ER_FATAL_SENTINEL(msg, ...)
 
-#define ER_CLIENT_INIT(name)   \
+#define ER_CLIENT_INIT(name) \
   rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>()
 
 #define ER_LOGGING_INIT(fname)
@@ -92,7 +95,7 @@
 #define ER_NDC_POP(...)
 #define ER_ENV_VERIFY(...)
 
-#elif(LIBRA_ER == LIBRA_ER_FATAL)
+#elif (LIBRA_ER == LIBRA_ER_FATAL)
 /*
  * FATAL event reporting can be enabled using log4cxx, which has much higher
  * overhead than just printf(), but also much better contextual information and
@@ -101,13 +104,15 @@
  * multithreaded contexts where the overhead of log4cxx will make possible race
  * conditions much less likely to occur.
  */
-#define ER_FATAL(...) { ER_REPORT(__VA_ARGS__) }
+#define ER_FATAL(...) \
+  { ER_REPORT(__VA_ARGS__) }
 #define ER_ERR(...)
 #define ER_WARN(...)
 #define ER_INFO(...)
 #define ER_DEBUG(...)
 #define ER_TRACE(...)
-#define ER_REPORT(msg, ...) { printf(msg "\n", ##__VA_ARGS__); }
+#define ER_REPORT(msg, ...) \
+  { printf(msg "\n", ##__VA_ARGS__); }
 #define ER_CHECKW(...)
 #define ER_CHECKI(...)
 #define ER_CHECKD(...)
@@ -120,7 +125,7 @@
 #define ER_NDC_POP(...)
 #define ER_ENV_VERIFY(...)
 
-#elif(LIBRA_ER == LIBRA_ER_ALL)
+#elif (LIBRA_ER == LIBRA_ER_ALL)
 
 /**
  * \def ER_CHECKW(cond, msg, ...)
@@ -132,11 +137,11 @@
  * must derive from \ref client. This macro is only available if event reporting
  * is fully enabled.
  */
-#define ER_CHECKW(cond, msg, ...)                \
-  {                                             \
-    if (RCSW_UNLIKELY(!(cond))) {               \
-      ER_WARN(msg, ##__VA_ARGS__);               \
-    }                                           \
+#define ER_CHECKW(cond, msg, ...)  \
+  {                                \
+    if (RCSW_UNLIKELY(!(cond))) {  \
+      ER_WARN(msg, ##__VA_ARGS__); \
+    }                              \
   }
 
 /**
@@ -149,11 +154,11 @@
  * must derive from \ref client. This macro is only available if event reporting
  * is fully enabled.
  */
-#define ER_CHECKI(cond, msg, ...)               \
-  {                                             \
-    if (RCSW_LIKELY((cond))) {                  \
-      ER_INFO(msg, ##__VA_ARGS__);              \
-    }                                           \
+#define ER_CHECKI(cond, msg, ...)  \
+  {                                \
+    if (RCSW_LIKELY((cond))) {     \
+      ER_INFO(msg, ##__VA_ARGS__); \
+    }                              \
   }
 
 /**
@@ -166,11 +171,11 @@
  * must derive from \ref client. This macro is only available if event reporting
  * is fully enabled.
  */
-#define ER_CHECKD(cond, msg, ...)               \
-  {                                             \
-    if (RCSW_LIKELY((cond))) {                  \
-      ER_DEBUG(msg, ##__VA_ARGS__);             \
-    }                                           \
+#define ER_CHECKD(cond, msg, ...)   \
+  {                                 \
+    if (RCSW_LIKELY((cond))) {      \
+      ER_DEBUG(msg, ##__VA_ARGS__); \
+    }                               \
   }
 
 #endif
@@ -187,10 +192,10 @@
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
-#define ER_FATAL_SENTINEL(msg, ...)             \
-  {                                             \
-    ER_FATAL(msg, ##__VA_ARGS__);               \
-    abort();                                    \
+#define ER_FATAL_SENTINEL(msg, ...) \
+  {                                 \
+    ER_FATAL(msg, ##__VA_ARGS__);   \
+    abort();                        \
   }
 
 /**
@@ -203,10 +208,10 @@
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client.
  */
-#define ER_ASSERT(cond, msg, ...)               \
-  if (RCSW_UNLIKELY(!(cond))) {                 \
-    ER_FATAL(msg, ##__VA_ARGS__);               \
-    assert(cond);                               \
+#define ER_ASSERT(cond, msg, ...) \
+  if (RCSW_UNLIKELY(!(cond))) {   \
+    ER_FATAL(msg, ##__VA_ARGS__); \
+    assert(cond);                 \
   }
 
 #endif /* LIBRA_ER >= LIBRA_ER_FATAL */
@@ -229,7 +234,11 @@
     LOG4CXX_##lvl(logger, _str);                                          \
   }
 
-
+/**
+ * \def ER_FATAL(...)
+ *
+ * Report a FATAL message.
+ */
 #define ER_FATAL(...)                                                            \
   {                                                                              \
     auto logger = rcppsw::er::client<typename std::remove_cv<                    \
@@ -239,6 +248,11 @@
     }                                                                            \
   }
 
+/**
+ * \def ER_ERR(...)
+ *
+ * Report a non-FATAL ERROR message.
+ */
 #define ER_ERR(...)                                                              \
   {                                                                              \
     auto logger = rcppsw::er::client<typename std::remove_cv<                    \
@@ -248,6 +262,11 @@
     }                                                                            \
   }
 
+/**
+ * \def ER_WARN(...)
+ *
+ * Report a WARNING message (duh).
+ */
 #define ER_WARN(...)                                                             \
   {                                                                              \
     auto logger = rcppsw::er::client<typename std::remove_cv<                    \
@@ -256,6 +275,12 @@
       ER_REPORT(WARN, logger, __VA_ARGS__)                                       \
     }                                                                            \
   }
+
+/**
+ * \def ER_INFON(...)
+ *
+ * Report an INFOrmational message.
+ */
 #define ER_INFO(...)                                                             \
   {                                                                              \
     auto logger = rcppsw::er::client<typename std::remove_cv<                    \
@@ -264,6 +289,12 @@
       ER_REPORT(INFO, logger, __VA_ARGS__)                                       \
     }                                                                            \
   }
+
+/**
+ * \def ER_DEBUG(...)
+ *
+ * Report a DEBUG message.
+ */
 #define ER_DEBUG(...)                                                            \
   {                                                                              \
     auto logger = rcppsw::er::client<typename std::remove_cv<                    \
@@ -272,6 +303,12 @@
       ER_REPORT(DEBUG, logger, __VA_ARGS__)                                      \
     }                                                                            \
   }
+
+/**
+ * \def ER_TRACE(...)
+ *
+ * Report a TRACE message.
+ */
 #define ER_TRACE(...)                                                            \
   {                                                                              \
     auto logger = rcppsw::er::client<typename std::remove_cv<                    \
@@ -281,16 +318,14 @@
     }                                                                            \
   }
 
-
 /**
  * \def ER_CLIENT_INIT(name)
  *
  * Initialize a logging client with the specified name (easier to do a macro
  * than to have to try do the casting every single time).
  */
-#define ER_CLIENT_INIT(name)                                            \
-  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>( \
-      name)
+#define ER_CLIENT_INIT(name) \
+  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>(name)
 
 /**
  * \def ER_LOGGING_INIT(fname)
@@ -306,9 +341,10 @@
  *
  * Set the logfile for the specified logger. Idempotent.
  */
-#define ER_LOGFILE_SET(logger, fname)                                         \
-  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>:: \
-      logfile_set(logger, fname)
+#define ER_LOGFILE_SET(logger, fname)                                             \
+  rcppsw::er::client<                                                             \
+      typename std::remove_reference<decltype(*this)>::type>::logfile_set(logger, \
+                                                                          fname)
 
 /**
  * \def ER_NDC_PUSH(s)
@@ -359,7 +395,6 @@
     }                             \
   }
 
-
 /**
  * \def ER_SENTINEL(msg,...)
  *
@@ -371,10 +406,10 @@
  * must derive from \ref client. This macro is only available if event
  * reporting is fully enabled.
  */
-#define ER_SENTINEL(msg, ...)                   \
-  {                                             \
-    ER_ERR(msg, ##__VA_ARGS__);                 \
-    goto error;                                 \
+#define ER_SENTINEL(msg, ...)   \
+  {                             \
+    ER_ERR(msg, ##__VA_ARGS__); \
+    goto error;                 \
   }
 
 /*******************************************************************************

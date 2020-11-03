@@ -28,13 +28,13 @@
 #include <limits>
 #include <cmath>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/algorithm/clustering/membership_policy.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, algorithm, clustering, detail);
+NS_START(rcppsw, algorithm, clustering);
 
 /*******************************************************************************
  * Class Definitions
@@ -43,8 +43,7 @@ NS_START(rcppsw, algorithm, clustering, detail);
  * \class nc_cluster
  * \ingroup algorithm clustering
  *
- * \brief A policy based cluster for a Nearest Centroid (NC) cluster during the
- * execution of the NC clustering algorithm.
+ * \brief A cluster representation for \ref NC clustering algorithms.
 */
 template <typename T, typename Policy>
 class nc_cluster {
@@ -112,8 +111,7 @@ class nc_cluster {
  * \class eh_cluster
  * \ingroup algorithm clustering
  *
- * \brief A policy based cluster for an Event Horizon (EH) cluster during the
- * execution of the EH clustering algorithm.
+ * \brief A cluster representation for \ref EH clustering algorithms.
 */
 template <typename T, typename Policy>
 class eh_cluster {
@@ -176,6 +174,6 @@ struct mapping<T, Policy, policy::is_eh<Policy>> {
 };
 }  // namespace cluster
 
-NS_END(detail, clustering, algorithm, rcppsw);
+NS_END(clustering, algorithm, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_CLUSTER_HPP_ */

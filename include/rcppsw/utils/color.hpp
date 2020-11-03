@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -69,7 +69,7 @@ class color {
   static const color kGRAY90;
 
   color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255)
-      : m_channels{red, green, blue, alpha} {}
+      : m_channels{ red, green, blue, alpha } {}
 
   uint8_t red() const { return m_channels[0]; }
   void red(uint8_t red) { m_channels[0] = red; }

@@ -24,11 +24,12 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <memory>
 #include <mutex>
 #include <string>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/patterns/fsm/base_fsm.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -43,9 +44,9 @@ namespace sm = patterns::fsm;
  * \class mt_fsm
  * \ingroup multithread
  *
- * \brief Extends \ref base_fsm to be threadsafe.
+ * \brief Extends \ref patterns::fsm::base_fsm to be threadsafe.
  */
-class mt_fsm : public patterns::fsm::base_fsm {
+class mt_fsm : public rpfsm::base_fsm {
  public:
   explicit mt_fsm(uint8_t max_states, uint8_t initial_state = 0)
       : base_fsm(max_states, initial_state) {}
@@ -59,7 +60,9 @@ class mt_fsm : public patterns::fsm::base_fsm {
                       std::unique_ptr<sm::event_data> data) override;
 
  private:
+  /* clang-format on */
   std::mutex m_mutex{};
+  /* clang-format off */
 };
 
 NS_END(multithread, rcppsw);

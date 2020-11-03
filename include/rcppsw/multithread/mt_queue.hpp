@@ -28,8 +28,8 @@
 #include <boost/thread/locks.hpp>
 #include <deque>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/patterns/decorator/decorator.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -43,25 +43,25 @@ NS_START(rcppsw, multithread);
  * \class mt_queue
  * \ingroup multithread
  *
- * \brief A simple multiple-producer/consumer queue with locking.
+ * \brief A simple multiple-producer/consumer queue with locking. No guarantees
+ * of fairness.
  */
-namespace decorator = rcppsw::patterns::decorator;
 template <typename T>
-class mt_queue : public decorator::decorator<std::deque<T>> {
+class mt_queue : public rpdecorator::decorator<std::deque<T>> {
  public:
-  mt_queue(void) : m_mtx(), m_cv() {}
+  using rpdecorator::decorator<std::deque<T>>::decoratee;
 
-  using const_iterator = typename std::deque<T>::const_iterator;
+  mt_queue(void) = default;
 
-  DECORATE_FUNC_TEMPLATE(T, begin, const);
-  DECORATE_FUNC_TEMPLATE(T, end, const);
+  RCPPSW_DECORATE_FUNC_TEMPLATE(T, begin, const);
+  RCPPSW_DECORATE_FUNC_TEMPLATE(T, end, const);
 
   /**
    * \brief Add data to the queue and notify others
    */
   void enqueue(const T& data) {
     boost::unique_lock<boost::mutex> lock(m_mtx);
-    decorator::decorator<std::deque<T>>::decoratee().push_back(data);
+    decoratee().push_back(data);
     m_cv.notify_one();
   }
 
@@ -74,24 +74,25 @@ class mt_queue : public decorator::decorator<std::deque<T>> {
     /* When there is no data, wait till someone fills it. Lock is automatically
      * released in the wait and obtained again after the wait.
      */
-    while (decorator::decorator<std::deque<T>>::decoratee().empty()) {
+    while (decoratee().empty()) {
       m_cv.wait(lock);
     } /* while() */
 
-    auto result =
-        static_cast<T>(decorator::decorator<std::deque<T>>::decoratee().front());
-    decorator::decorator<std::deque<T>>::decoratee().pop_front();
+    auto result = static_cast<T>(decoratee().front());
+    decoratee().pop_front();
     return result;
   }
 
-  DECORATE_FUNC_TEMPLATE(T, size, const);
-  DECORATE_FUNC_TEMPLATE(T, front, const);
-  DECORATE_FUNC_TEMPLATE(T, clear, const);
-  DECORATE_FUNC_TEMPLATE(T, operator[], const);
+  RCPPSW_DECORATE_FUNC_TEMPLATE(T, size, const);
+  RCPPSW_DECORATE_FUNC_TEMPLATE(T, front, const);
+  RCPPSW_DECORATE_FUNC_TEMPLATE(T, clear, const);
+  RCPPSW_DECORATE_FUNC_TEMPLATE(T, operator[], const);
 
  private:
-  boost::mutex m_mtx;
+  /* clang-format off */
+  boost::mutex              m_mtx;
   boost::condition_variable m_cv;
+  /* clang-format on */
 };
 
 NS_END(multithread, rcppsw);

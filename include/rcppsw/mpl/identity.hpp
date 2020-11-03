@@ -35,6 +35,9 @@ NS_START(rcppsw, mpl);
  * Struct Definitions
  ******************************************************************************/
 /**
+ * \class identity
+ * \ingroup mpl
+ *
  * \brief Some types are not not default constructible, and therefore cannot be
  * used with boost::mpl::for_each as is. If we only need the type of the class
  * during an operation, and do not need access to any of its methods, we can add

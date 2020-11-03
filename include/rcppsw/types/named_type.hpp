@@ -27,7 +27,7 @@
 #include <string>
 #include <utility>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -41,7 +41,9 @@ NS_START(rcppsw, types);
  * \class named_type
  * \ingroup types
  *
- * \brief A strong typing wrapper to be used around POD types.
+ * \brief A strong typing wrapper to be used around POD types to make implicit
+ * conversions impossible (ESPECCIALLY when the necessary compiler warnings are
+ * disabled), and force the user to be explicit about converting.
  */
 template <typename T, typename Parameter>
 class named_type {

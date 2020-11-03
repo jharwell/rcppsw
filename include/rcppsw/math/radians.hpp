@@ -28,8 +28,8 @@
 #include <limits>
 #include <string>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/math/range.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -57,16 +57,16 @@ class radians {
    * These are MATHEMATICAL constants, so they get UPPER_CASE naming convention
    * to emphasize that fact.
    */
-  static const radians kPI;                // NOLINT
-  static const radians kTWO_PI;            // NOLINT
+  static const radians kPI; // NOLINT
+  static const radians kTWO_PI; // NOLINT
   static const radians kTHREE_PI_OVER_TWO; // NOLINT
-  static const radians kPI_OVER_TWO;       // NOLINT
-  static const radians kPI_OVER_THREE;     // NOLINT
-  static const radians kPI_OVER_FOUR;      // NOLINT
-  static const radians kZERO;              // NOLINT
+  static const radians kPI_OVER_TWO; // NOLINT
+  static const radians kPI_OVER_THREE; // NOLINT
+  static const radians kPI_OVER_FOUR; // NOLINT
+  static const radians kZERO; // NOLINT
   static const double kRADIANS_TO_DEGREES; // NOLINT
 
-   static radians abs(const radians& r) { return radians(std::fabs(r.value())); }
+  static radians abs(const radians& r) { return radians(std::fabs(r.v())); }
 
   radians(void) = default;
   explicit radians(double value) noexcept : m_value(value) {}
@@ -77,8 +77,11 @@ class radians {
    */
   void set(double value) { m_value = value; }
 
-  double value(void) const { return m_value; }
-  double operator()(void) const { return value(); }
+  /**
+   * \brief Get the raw value in radians.
+   */
+  double v(void) const { return m_value; }
+  double operator()(void) const { return v(); }
 
   /**
    * \brief Normalizes the value in the range [-pi, pi].
@@ -89,13 +92,17 @@ class radians {
   }
 
   /**
-   * \brief Normalizes the value in the range [0, 2pi]
+   * \brief Normalizes the value in the range [0, 2pi].
    */
   radians& unsigned_normalize(void) {
     static range<radians> unsigned_range(kZERO, kTWO_PI);
     return *this = unsigned_range.wrap_value(*this);
   }
 
+  /**
+   * \brief Return a string representation of the radians object of the form
+   * 'rad(XX) -> deg(YY)'.
+   */
   std::string to_str(void) const;
 
   friend std::istream& operator>>(std::istream& is, radians& r) {
@@ -145,9 +152,7 @@ class radians {
     return res;
   }
 
-  double operator/(const radians& other) const {
-    return m_value / other.m_value;
-  }
+  double operator/(const radians& other) const { return m_value / other.m_value; }
 
   radians operator/(double value) const {
     radians res(*this);
@@ -157,15 +162,11 @@ class radians {
 
   bool operator<(const radians& other) const { return m_value < other.m_value; }
 
-  bool operator<=(const radians& other) const {
-    return m_value <= other.m_value;
-  }
+  bool operator<=(const radians& other) const { return m_value <= other.m_value; }
 
   bool operator>(const radians& other) const { return m_value > other.m_value; }
 
-  bool operator>=(const radians& other) const {
-    return m_value >= other.m_value;
-  }
+  bool operator>=(const radians& other) const { return m_value >= other.m_value; }
 
   /**
    * \brief Compare two radian values for equality, using the tolerance
@@ -174,7 +175,6 @@ class radians {
   bool operator==(const radians& other) const {
     return std::fabs(m_value - other.m_value) <
            std::numeric_limits<double>::epsilon();
-    ;
   }
 
   bool operator!=(const radians& other) const { return !(*this == other); }

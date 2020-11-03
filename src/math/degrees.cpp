@@ -46,7 +46,15 @@ RCPPSW_WARNING_DISABLE_POP()
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-degrees::degrees(const radians& r) : m_value(to_degrees(r).value()) {}
+degrees::degrees(const radians& r) : m_value(to_degrees(r).v()) {}
+
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+std::string degrees::to_str(void) const {
+  return "deg(" + rcppsw::to_string(m_value) + ") -> rad(" +
+         rcppsw::to_string(m_value * kDEGREES_TO_RADIANS / M_PI) + ")";
+}
 
 /*******************************************************************************
  * Non-Member Functions

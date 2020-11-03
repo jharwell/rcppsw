@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -34,6 +34,10 @@ NS_START(rcppsw, metrics);
 /*******************************************************************************
  * Type Definitions
  ******************************************************************************/
+/**
+ * \brief Status of attempts to write metrics to the filesystem. Used to
+ * correctly triage I/O errors.
+ */
 enum metrics_write_status {
   /**
    * No write was attempted this timestep.

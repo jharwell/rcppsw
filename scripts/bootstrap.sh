@@ -13,10 +13,10 @@
 mkdir -p $1 && cd $1
 
 rcppsw_pkgs=(libboost-all-dev liblog4cxx-dev catch ccache python3-pip)
-libra_pkgs=(make cmake git npm graphviz doxygen cppcheck cmake make gcc-8 g++-8
-            libclang-6.0-dev clang-tools-6.0 clang-format-6.0 clang-tidy-6.0)
+libra_pkgs=(make cmake git npm graphviz doxygen cppcheck cmake make gcc-9 g++-9
+            libclang-9-dev clang-tools-9 clang-format-9 clang-tidy-9)
 
-python_pkgs=(cpplint breathe)
+python_pkgs=(cpplint breathe exhale)
 
 # Install packages (must be loop to ignore ones that don't exist)
 for pkg in "${libra_pkgs[@]}" "${rcppsw_pkgs[@]}" "${fordyca_pkgs[@]}"
@@ -24,7 +24,7 @@ do
     sudo apt-get -my install $pkg
 done
 
-sudo -H pip3 install  "${python_pkgs[@]}"
+pip3 install  "${python_pkgs[@]}"
 
 # Exit when any command after this fails. Can't be before the package installs,
 # because it is not an error if some of the packages are not found (I just put a

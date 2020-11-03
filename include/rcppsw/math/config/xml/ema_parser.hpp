@@ -27,7 +27,7 @@
 #include <string>
 #include <memory>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/math/config/ema_config.hpp"
 #include "rcppsw/config/xml/xml_config_parser.hpp"
 

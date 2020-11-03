@@ -40,14 +40,14 @@ NS_END(detail);
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-rng::rng(uint seed) : pimpl(seed), m_seed(seed) {}
+rng::rng(size_t seed) : pimpl(seed), m_seed(seed) {}
 
 rng::~rng(void) = default;
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-template<typename T>
+template <typename T>
 T rng::uniform(const T& lb, const T& ub) {
   using uniform_distribution_type =
       typename std::conditional<std::is_floating_point<T>::value,

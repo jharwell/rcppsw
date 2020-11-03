@@ -35,6 +35,12 @@ NS_START(rcppsw, types);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * \class spatial_range
+ * \ingroup types
+ *
+ * \brief A \ref rmath::range<T> of \ref rtypes::spatial_dist.
+ */
 using spatial_range = math::range<types::spatial_dist>;
 
 NS_END(types, rcppsw);

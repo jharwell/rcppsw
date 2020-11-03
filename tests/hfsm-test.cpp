@@ -44,13 +44,13 @@ public:
       : fsm::hfsm(ST_MAX_STATES),
         s1(hfsm::top_state()), s2(hfsm::top_state()), s3(hfsm::top_state()),
       s4(hfsm::top_state()), s5(hfsm::top_state()), s6(hfsm::top_state()),
-      FSM_DEFINE_STATE_MAP(mc_state_map,
-                           FSM_STATE_MAP_ENTRY(&s1), FSM_STATE_MAP_ENTRY(&s2),
-                           FSM_STATE_MAP_ENTRY(&s3), FSM_STATE_MAP_ENTRY(&s4),
-                           FSM_STATE_MAP_ENTRY(&s5), FSM_STATE_MAP_ENTRY(&s6)) {}
+      RCPPSW_HFSM_DEFINE_STATE_MAP(mc_state_map,
+                                   RCPPSW_HFSM_STATE_MAP_ENTRY(&s1), RCPPSW_HFSM_STATE_MAP_ENTRY(&s2),
+                           RCPPSW_HFSM_STATE_MAP_ENTRY(&s3), RCPPSW_HFSM_STATE_MAP_ENTRY(&s4),
+                           RCPPSW_HFSM_STATE_MAP_ENTRY(&s5), RCPPSW_HFSM_STATE_MAP_ENTRY(&s6)) {}
 
   void event1(void) {
-    FSM_DEFINE_TRANSITION_MAP(kMAP){STATE2,
+    RCPPSW_HFSM_DEFINE_TRANSITION_MAP(kMAP){STATE2,
                                     STATE3,
                                     STATE1,
                                     fsm::event_signal::ekFATAL,
@@ -60,7 +60,7 @@ public:
                    std::make_unique<fsm::event_data>(1));
   }
   void event2(void) {
-    FSM_DEFINE_TRANSITION_MAP(kMAP){fsm::event_signal::ekIGNORED,
+    RCPPSW_HFSM_DEFINE_TRANSITION_MAP(kMAP){fsm::event_signal::ekIGNORED,
                                     STATE4,
                                     fsm::event_signal::ekFATAL,
                                     STATE4,
@@ -71,44 +71,44 @@ public:
   }
 
 private:
-  HFSM_STATE_DECLARE_ND(test_fsm, s1);
-  HFSM_STATE_DECLARE_ND(test_fsm, s2);
-  HFSM_STATE_DECLARE_ND(test_fsm, s3);
-  HFSM_STATE_DECLARE_ND(test_fsm, s4);
-  HFSM_STATE_DECLARE_ND(test_fsm, s5);
-  HFSM_STATE_DECLARE_ND(test_fsm, s6);
+  RCPPSW_HFSM_STATE_DECLARE_ND(test_fsm, s1);
+  RCPPSW_HFSM_STATE_DECLARE_ND(test_fsm, s2);
+  RCPPSW_HFSM_STATE_DECLARE_ND(test_fsm, s3);
+  RCPPSW_HFSM_STATE_DECLARE_ND(test_fsm, s4);
+  RCPPSW_HFSM_STATE_DECLARE_ND(test_fsm, s5);
+  RCPPSW_HFSM_STATE_DECLARE_ND(test_fsm, s6);
 
-  FSM_DEFINE_STATE_MAP_ACCESSOR(state_map, index) {
+  RCPPSW_HFSM_DEFINE_STATE_MAP_ACCESSOR(state_map, index) {
     return &mc_state_map[index];
   }
-  FSM_DECLARE_STATE_MAP(state_map, mc_state_map, ST_MAX_STATES);
+  RCPPSW_HFSM_DECLARE_STATE_MAP(state_map, mc_state_map, ST_MAX_STATES);
 };
 
-HFSM_STATE_DEFINE_ND(test_fsm, s1) {
+RCPPSW_HFSM_STATE_DEFINE_ND(test_fsm, s1) {
   printf("Executing state1\n");
   return fsm::event_signal::ekHANDLED;
 }
-HFSM_STATE_DEFINE_ND(test_fsm, s2) {
+RCPPSW_HFSM_STATE_DEFINE_ND(test_fsm, s2) {
   printf("Executing state2\n");
   return fsm::event_signal::ekHANDLED;
 }
 
-HFSM_STATE_DEFINE_ND(test_fsm, s3) {
+RCPPSW_HFSM_STATE_DEFINE_ND(test_fsm, s3) {
   printf("Executing state3\n");
   return fsm::event_signal::ekHANDLED;
 }
 
-HFSM_STATE_DEFINE_ND(test_fsm, s4) {
+RCPPSW_HFSM_STATE_DEFINE_ND(test_fsm, s4) {
   printf("Executing state4\n");
   internal_event(STATE5, std::make_unique<fsm::event_data>(4));
   return fsm::event_signal::ekHANDLED;
 }
-HFSM_STATE_DEFINE_ND(test_fsm, s5) {
+RCPPSW_HFSM_STATE_DEFINE_ND(test_fsm, s5) {
   printf("Executing state5\n");
   return fsm::event_signal::ekHANDLED;
 }
 
-HFSM_STATE_DEFINE_ND(test_fsm, s6) {
+RCPPSW_HFSM_STATE_DEFINE_ND(test_fsm, s6) {
   printf("Executing state6\n");
   return fsm::event_signal::ekHANDLED;
 }

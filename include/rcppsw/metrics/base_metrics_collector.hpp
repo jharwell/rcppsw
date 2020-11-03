@@ -29,11 +29,11 @@
 #include <list>
 #include <string>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
-#include "rcppsw/metrics/output_mode.hpp"
-#include "rcppsw/types/timestep.hpp"
 #include "rcppsw/metrics/metrics_write_status.hpp"
+#include "rcppsw/metrics/output_mode.hpp"
+#include "rcppsw/rcppsw.hpp"
+#include "rcppsw/types/timestep.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -88,7 +88,7 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
    * Can be called every timestep (and probably should be for consistency as
    * behavior of derived classes possibly changes), and metrics will only be
    * reset after the specified number of timesteps in the interval has elapsed.
-  */
+   */
   void interval_reset(void);
 
   /**
@@ -105,14 +105,12 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
   /**
    * \brief Write out the gathered metrics.
    *
-   * \param t The current timestep.
-   *
    * \return \c TRUE if a line was written, \c FALSE otherwise.
    */
   metrics_write_status csv_line_write(void);
 
   /**
-   * \brief Finalize metrics and flush files.
+   * \brief Finalize metrics and flush files in preparation for program exit.
    */
   void finalize(void) { m_ofile.close(); }
 
@@ -161,7 +159,7 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
    * \return A list of the names of the default header columns for the .csv,
    * which is: [clock].
    */
-  std::list<std::string> dflt_csv_header_cols(void) const { return {"clock"}; }
+  std::list<std::string> dflt_csv_header_cols(void) const { return { "clock" }; }
 
   /**
    * \brief Write out constructed header.
@@ -175,8 +173,8 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
 
   /**
    * \brief Return a string of the average value of a sum of SOMETHING over an
-   * interval (using the value of \ref interval()) + separator (if the csv entry
-   * is not the last one in a line).
+   * interval (using the value of \ref interval()) + \ref separator() (if the
+   * csv entry is not the last one in a line).
    *
    * \param sum The count of SOMETHING.
    * \param last Is this the last column in the .csv row?
@@ -189,8 +187,8 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
 
   /**
    * \brief Return a string of the average value of a sum of SOMETHING over the
-   * elapsed simulation time so far (using the value of \ref timestep()) +
-   * separator (if the csv entry is not the last one in a line).
+   * elapsed simulation time so far (using the value of \ref timestep()) + \ref
+   * separator() (if the csv entry is not the last one in a line).
    *
    * \param sum The count of SOMETHING.
    * \param last Is this the last column in the .csv row?
@@ -212,9 +210,8 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
    * \param last Is this the last column in the .csv row?
    */
   template <class T, class U>
-  std::string csv_entry_domavg(const T& sum,
-                               const U& count,
-                               bool last = false) const {
+  std::string
+  csv_entry_domavg(const T& sum, const U& count, bool last = false) const {
     return (count > 0) ? rcppsw::to_string(static_cast<double>(sum) /
                                            static_cast<double>(count)) +
                              ((last) ? "" : separator())
@@ -222,6 +219,11 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
   }
 
  private:
+  /**
+   * \brief The # of times to retry a failed I/O operation (only an issue on HPC
+   * environments generally).
+   */
+
   static constexpr size_t kN_RETRIES = 10;
 
   /**
@@ -232,6 +234,9 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
    */
   std::string csv_header_build(void) const;
 
+  /**
+   * \brief Retry the I/O operation contained in \p cb.
+   */
   bool retry_io(const std::function<void(void)>& cb);
 
   /* clang-format off */

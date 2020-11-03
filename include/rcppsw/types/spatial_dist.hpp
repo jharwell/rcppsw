@@ -24,8 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/types/named_type.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/types/named_type.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -36,6 +36,9 @@ NS_START(rcppsw, types);
  * Class Definitions
  ******************************************************************************/
 /**
+ * \class spatial_dist
+ * \ingroup types
+ *
  * \brief Specifies a distance in "real" spatial space, and as such is always
  * positive.
  */
@@ -48,7 +51,7 @@ class spatial_dist final : public named_type<double, struct spatial_dist_tag>,
    * from the constructor, which \a assumes the \p value to be positive
    * semi-definite.
    */
-  static spatial_dist make(const double &value);
+  static spatial_dist make(const double& value);
 
   explicit spatial_dist(const double& value);
   ~spatial_dist(void) override = default;
@@ -99,7 +102,7 @@ class spatial_dist final : public named_type<double, struct spatial_dist_tag>,
 spatial_dist operator*(double lhs, const spatial_dist& rhs);
 spatial_dist operator-(double lhs, const spatial_dist& rhs);
 spatial_dist operator+(double lhs, const spatial_dist& rhs);
-bool operator<=(double lhs, const spatial_dist& rhs);
+bool operator<=(double lhs, const spatial_dist& rhs) RCSW_PURE;
 
 NS_END(types, rcppsw);
 

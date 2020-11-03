@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/patterns/fsm/state.hpp"
 
 /*******************************************************************************
@@ -49,7 +49,9 @@ class state_map_row {
   rcppsw::patterns::fsm::state* state(void) const { return m_state; }
 
  private:
-  rcppsw::patterns::fsm::state* m_state;
+  /* clang-format off */
+  rpfsm::state* m_state;
+  /* clang-format on */
 };
 
 NS_END(fsm, patterns, rcppsw);

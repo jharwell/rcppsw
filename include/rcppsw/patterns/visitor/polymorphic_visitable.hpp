@@ -24,18 +24,19 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, visitor);
+NS_START(rcppsw, patterns, visitor, detail);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
  * \class polymorphic_accept_set_helper
+ * \ingroup patterns visitor
  *
  * \brief Helper class to provide the actual implementation of the visitor
  * pattern, receiving end.
@@ -46,6 +47,8 @@ class polymorphic_accept_set_helper {
   virtual void accept(T &visitor) = 0;
   virtual ~polymorphic_accept_set_helper(void) = default;
 };
+
+NS_END(detail);
 
 /**
  * \class polymorphic_accept_set<...>
@@ -68,26 +71,28 @@ class polymorphic_accept_set {};
 
 /**
  * \class polymorphic_accept_set<T,...>
+ * \ingroup patterns visitor
  *
  * \brief Middle recursive call for template expansion.
  */
 template<typename T, typename... Ts>
-class polymorphic_accept_set<T, Ts...>: public polymorphic_accept_set_helper<T>,
+class polymorphic_accept_set<T, Ts...>: public detail::polymorphic_accept_set_helper<T>,
                                         public polymorphic_accept_set<Ts...> {
  public:
-  using polymorphic_accept_set_helper<T>::accept;
+  using detail::polymorphic_accept_set_helper<T>::accept;
   using polymorphic_accept_set<Ts...>::accept;
 };
 
 /**
  * \class polymorphic_accept_set<T>
+ * \ingroup patterns visitor
  *
  * \brief Base case for template expansion.
  */
 template<typename T>
-class polymorphic_accept_set<T>: public polymorphic_accept_set_helper<T> {
+class polymorphic_accept_set<T>: public detail::polymorphic_accept_set_helper<T> {
  public:
-  using polymorphic_accept_set_helper<T>::accept;
+  using detail::polymorphic_accept_set_helper<T>::accept;
 };
 
 NS_END(rcppsw, patterns, visitor);

@@ -28,10 +28,10 @@
 #include <limits>
 #include <string>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/math/radians.hpp"
 #include "rcppsw/math/sphere_vector.hpp"
 #include "rcppsw/math/vector2.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/types/discretize_ratio.hpp"
 
 /*******************************************************************************
@@ -148,9 +148,7 @@ class vector3 {
   /**
    * Returns the length of this vector.
    */
-  double length(void) const RCSW_CHECK_RET {
-    return std::sqrt(square_length());
-  }
+  double length(void) const RCSW_CHECK_RET { return std::sqrt(square_length()); }
 
   /**
    * \brief Normalizes this vector.
@@ -200,9 +198,8 @@ class vector3 {
   template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   sphere_vector<T> to_spherical(void) const {
     double radius = length();
-    return sphere_vector<T>(radius,
-                            radians(std::acos(m_z / radius)),
-                            radians(std::atan2(m_y, m_x)));
+    return sphere_vector<T>(
+        radius, radians(std::acos(m_z / radius)), radians(std::atan2(m_y, m_x)));
   }
 
   /**
@@ -246,7 +243,7 @@ class vector3 {
   /**
    * \brief Returns if this vector and the argument are considered equal,
    * determined by coordinate comparison.
-   *p
+   *
    * Only available if the template argument is floating point.
    */
   template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
@@ -267,11 +264,13 @@ class vector3 {
 
   template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   bool operator<(const vector3& other) const {
-    bool equal_x = std::fabs(m_x - other.m_x) <= std::numeric_limits<T>::epsilon();
-    bool equal_y = std::fabs(m_y - other.m_y) <= std::numeric_limits<T>::epsilon();
+    bool equal_x = std::fabs(m_x - other.m_x) <=
+                   std::numeric_limits<T>::epsilon();
+    bool equal_y = std::fabs(m_y - other.m_y) <=
+                   std::numeric_limits<T>::epsilon();
 
     return (m_x < other.m_x) || (equal_x && (m_y < other.m_y)) ||
-        (equal_x && equal_y && (m_z < other.m_z));
+           (equal_x && equal_y && (m_z < other.m_z));
   }
 
   template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
@@ -282,8 +281,10 @@ class vector3 {
 
   template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
   bool operator>(const vector3& other) const {
-    bool equal_x = std::fabs(m_x - other.m_x) <= std::numeric_limits<T>::epsilon();
-    bool equal_y = std::fabs(m_y - other.m_y) <= std::numeric_limits<T>::epsilon();
+    bool equal_x = std::fabs(m_x - other.m_x) <=
+                   std::numeric_limits<T>::epsilon();
+    bool equal_y = std::fabs(m_y - other.m_y) <=
+                   std::numeric_limits<T>::epsilon();
 
     return (m_x > other.m_x) || (equal_x && (m_y > other.m_y)) ||
            (equal_x && equal_y && (m_z > other.m_z));
@@ -362,7 +363,7 @@ class vector3 {
   vector3 operator-(void) const { return vector3(-m_x, -m_y, -m_z); }
 
   friend std::ostream& operator<<(std::ostream& stream, const vector3& v) {
-    stream << "(" << v.m_x << "," << v.m_y << "," << v.m_z << ")";
+    stream << v.to_str();
     return stream;
   }
 
@@ -370,7 +371,7 @@ class vector3 {
    * \brief For parsing a vector from a string in the form of \c "X,Y".
    */
   friend std::istream& operator>>(std::istream& is, vector3<T>& v) {
-    T values[3] = {T(), T(), T()};
+    T values[3] = { T(), T(), T() };
     utils::parse_values<T>(is, 3, values, ',');
     v.set(values[0], values[1], values[2]);
     return is;

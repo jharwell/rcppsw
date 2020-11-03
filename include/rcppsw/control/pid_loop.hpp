@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -70,10 +70,14 @@ class pid_loop {
    */
   double calculate(double setpoint, double pv);
 
+  /**
+   * \brief Reset the integral state, previous error (setpoint - pv)
+   */
   void reset(void) {
     m_istate = 0.0;
     m_prev_error = 0.0;
   }
+
   /**
    * \brief Get the minimal value of manipulated variable/integral term.
    */
@@ -85,6 +89,7 @@ class pid_loop {
   void max(double max) { m_max = max; }
 
  private:
+  /* clang-format off */
   double m_kp;
   double m_kd;
   double m_ki;
@@ -93,6 +98,7 @@ class pid_loop {
   double m_max;
   double m_istate;
   double m_prev_error;
+  /* clang-format on */
 };
 
 NS_END(control, rcppsw);

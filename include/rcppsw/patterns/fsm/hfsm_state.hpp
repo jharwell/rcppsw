@@ -25,7 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <cassert>
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/patterns/fsm/event.hpp"
 #include "rcppsw/patterns/fsm/state.hpp"
 
@@ -59,7 +59,9 @@ class hfsm_state : public state {
   hfsm_state& operator=(const hfsm_state&) = delete;
 
  private:
+  /* clang-format off */
   rcppsw::patterns::fsm::state* m_parent;
+  /* clang-format on */
 };
 
 /**
