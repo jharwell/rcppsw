@@ -25,8 +25,9 @@
  * Includes
  ******************************************************************************/
 #include <memory>
+#include <utility>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -39,7 +40,7 @@ NS_START(rcppsw, patterns, decorator);
 /**
  * \def RCPPSW_DECORATE_FUNC(Func)
  *
- * Wraps the declaration/implementation of the decoratee (non-pointer version).
+ * Wraps the declaration/implementation of the decoratee \p Func.
  *
  * Does not work for templated member functions in decorated class. Does not
  * work to wrap functions in the decorated class which are virtual.
@@ -51,14 +52,15 @@ NS_START(rcppsw, patterns, decorator);
 /**
  * \def RCPPSW_DECORATE_FUNC_TEMPLATE(Type, Func)
  *
- * Wraps the declaration/implementation of the decoratee (non-pointer
- * version). For decoratee types that are themselves templated types.
+ * Wraps the declaration/implementation of the decoratee \p Func which is
+ * templated on \p Type. For decoratee types that are themselves templated
+ * types.
  */
 #define RCPPSW_DECORATE_FUNC_TEMPLATE(Type, Func, ...)                  \
   template<typename... Args>                                            \
   auto Func(Args&&... args) __VA_ARGS__ ->                              \
-      decltype(std::declval<decltype(decorator::decorator<Type>::decoratee())>().Func(args...)) { \
-    return decorator::decorator<Type>::decoratee().Func( std::forward<Args>(args)...); \
+      decltype(std::declval<decltype(rpdecorator::decorator<Type>::decoratee())>().Func(args...)) { \
+    return rpdecorator::decorator<Type>::decoratee().Func( std::forward<Args>(args)...); \
   }
 
 /*******************************************************************************
@@ -111,7 +113,9 @@ class decorator {
   void change_decoratee(const TDecoratee& d) { m_decoratee = d; }
 
  private:
+  /* clang-format off */
   TDecoratee m_decoratee;
+  /* clang-format on */
 };
 
 /**
@@ -158,7 +162,9 @@ class ptr_decorator {
   TDecoratee* decoratee(void) const { return m_decoratee.get(); }
 
  private:
+  /* clang-format off */
   std::unique_ptr<TDecoratee> m_decoratee;
+  /* clang-format on */
 };
 
 NS_END(rcppsw, patterns, decorator);

@@ -28,7 +28,7 @@
 #include <string>
 #include <typeindex>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/config/xml/xml_config_parser.hpp"
 #include "rcppsw/patterns/factory/factory.hpp"
 #include "rcppsw/er/client.hpp"

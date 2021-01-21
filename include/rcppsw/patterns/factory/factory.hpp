@@ -56,7 +56,7 @@ class releasing_factory : public detail::base_factory<detail::factory_releasing_
  * \class sharing_factory
  * \ingroup patterns factory
  *
- * \brief Specialization of the @link detail::base_factory @endlink class for
+ * \brief Specialization of the \ref detail::base_factory class for
  * sharing ownership of created objects via std::shared_ptr.
  */
 template<typename TBase, typename TKeyType, typename...Args>

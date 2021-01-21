@@ -1,5 +1,5 @@
 /**
- * \file kmeans_impl.hpp
+ * \file kmeans_omp.hpp
  *
  * \copyright 2018 John Harwell, All rights reserved.
  *
@@ -17,8 +17,8 @@
  * You should have received a copy of the GNU General Public License along with
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
-#ifndef INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_KMEANS_IMPL_HPP_
-#define INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_KMEANS_IMPL_HPP_
+#ifndef INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_KMEANS_OMP_HPP_
+#define INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_KMEANS_OMP_HPP_
 
 /*******************************************************************************
  * Includes
@@ -27,31 +27,31 @@
 #include <vector>
 #include <limits>
 
-#include "rcppsw/common/common.hpp"
-#include "rcppsw/algorithm/clustering/clustering_impl.hpp"
+#include "rcppsw/rcppsw.hpp"
+#include "rcppsw/algorithm/clustering/base_clustering_impl.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, algorithm, clustering, detail);
+NS_START(rcppsw, algorithm, clustering);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * \class kmeans_impl
+ * \class kmeans_omp
  * \ingroup algorithm clustering
  *
  * \brief Parallel clustering using OpenMP using the Nearest Centroid (NC)
  * membership policy. Suitable for kmeans clustering.
  */
 template <typename T>
-class kmeans_impl : public clustering_impl<T, policy::NC> {
+class kmeans_omp : public base_clustering_impl<T, policy::NC> {
  public:
-  using typename clustering_impl<T, policy::NC>::dist_calc_ftype;
-  using typename clustering_impl<T, policy::NC>::cluster_vector;
+  using typename base_clustering_impl<T, policy::NC>::dist_calc_ftype;
+  using typename base_clustering_impl<T, policy::NC>::cluster_vector;
 
-  explicit kmeans_impl(uint n_threads)
+  explicit kmeans_omp(size_t n_threads)
       : m_n_threads(n_threads) {}
 
   void initialize(std::vector<T>* const data,
@@ -104,10 +104,10 @@ class kmeans_impl : public clustering_impl<T, policy::NC> {
   }
 
   /* clang-format off */
-  uint m_n_threads;
+  size_t m_n_threads;
   /* clang-format on */
 };
 
-NS_END(detail, clustering, algorithm, rcppsw);
+NS_END(clustering, algorithm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_KMEANS_IMPL_HPP_ */
+#endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_KMEANS_OMP_HPP_ */

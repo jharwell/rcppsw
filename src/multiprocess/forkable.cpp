@@ -23,6 +23,8 @@
  ******************************************************************************/
 #include "rcppsw/multiprocess/forkable.hpp"
 
+#include <filesystem>
+
 #include "rcsw/multiprocess/procm.h"
 
 /*******************************************************************************
@@ -34,15 +36,7 @@ NS_START(rcppsw, multiprocess);
  * Member Functions
  ******************************************************************************/
 pid_t forkable::start(int core) {
-  m_proc_run = true;
-  m_pid = fork();
-  if (m_pid == 0) {
-    if (-1 != core) {
-      procm_socket_lock(core);
-    }
-    entry_point(this);
-  }
-  return m_pid;
+  return start(std::filesystem::current_path(), core);
 } /* forkable::start() */
 
 pid_t forkable::start(const std::string& new_wd, int core) {

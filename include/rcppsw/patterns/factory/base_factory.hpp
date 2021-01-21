@@ -28,7 +28,7 @@
 #include <vector>
 #include <memory>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -48,6 +48,8 @@ struct factory_sharing_type {};
  * \brief Dispatcher factory class that releases or shares ownership of the
  * created objects to the class/context that requests object creation. All
  * classes of the derived type must have compatible constructor signatures.
+ *
+ * \tparam TType The factory type.
  *
  * \tparam TPointerWrapper Type of pointer wrapper (shared or unique).
  *

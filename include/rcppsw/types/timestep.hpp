@@ -35,12 +35,16 @@ NS_START(rcppsw, types);
  * Class Definitions
  ******************************************************************************/
 /**
+ * \class timestep
+ * \ingroup types
+ *
  * \brief Type to be used for representing timesteps in a simulation
- * environment.
+ * environment. Meant to reduce the arbritrary (possibly erroneous)
+ * manipulations possible with simulation time via implicit conversion.
  */
-class timestep final : public named_type<uint, struct timestep_tag> {
+class timestep final : public named_type<size_t, struct timestep_tag> {
  public:
-  using named_type<uint, timestep_tag>::named_type;
+  using named_type<size_t, timestep_tag>::named_type;
 
   timestep(const timestep&) = default;
   timestep& operator=(const timestep& other) {
@@ -52,7 +56,7 @@ class timestep final : public named_type<uint, struct timestep_tag> {
     return res += other;
   }
 
-  timestep operator+(uint n) const {
+  timestep operator+(size_t n) const {
     timestep res(v() + n);
     return res;
   }
@@ -61,7 +65,7 @@ class timestep final : public named_type<uint, struct timestep_tag> {
     set(v() + other.v());
     return *this;
   }
-  timestep& operator+=(uint n) {
+  timestep& operator+=(size_t n) {
     set(v() + n);
     return *this;
   }
@@ -70,7 +74,7 @@ class timestep final : public named_type<uint, struct timestep_tag> {
     timestep res(v() - other.v());
     return res;
   }
-  timestep operator-(uint n) const {
+  timestep operator-(size_t n) const {
     timestep res(v() - n);
     return res;
   }
@@ -82,7 +86,7 @@ class timestep final : public named_type<uint, struct timestep_tag> {
   bool operator<(const timestep& other) const { return v() < other.v(); }
   bool operator>(const timestep& other) const { return v() > other.v(); }
   bool operator>=(const timestep& other) const { return v() >= other.v(); }
-  bool operator==(uint other) const { return v() == other; }
+  bool operator==(size_t other) const { return v() == other; }
 
   template <class T>
   bool operator>=(const T& other) const {

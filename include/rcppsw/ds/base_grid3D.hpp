@@ -117,7 +117,10 @@ class base_grid3D {
    * \brief Create a subgrid from a grid. The specified coordinates are
    * inclusive.
    *
-   * \return The subgrid.
+   * \param ll Lower left of the subgrid, inclusive.
+   * \param ur Upper right of the subgrid, inclusive.
+   *
+   * \return The subgrid (closed interval).
    */
   grid_view subgrid(const math::vector3z& ll, const math::vector3z& ur) {
     index_range x(ll.x(), ur.x(), 1);
@@ -187,6 +190,9 @@ class base_grid3D {
   }
 
  protected:
+  /**
+   * \brief Return a reference to the underlying grid, defined by derived classes.
+   */
   virtual const grid_type& grid(void) const = 0;
   virtual grid_type& grid(void) = 0;
 };

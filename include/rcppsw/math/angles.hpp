@@ -26,9 +26,9 @@
  ******************************************************************************/
 #include "rcsw/common/compilers.h"
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/math/degrees.hpp"
 #include "rcppsw/math/radians.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls

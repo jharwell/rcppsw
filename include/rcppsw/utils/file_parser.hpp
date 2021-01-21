@@ -32,7 +32,7 @@
 #include <string>
 #include <vector>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/utils/line_parser.hpp"
 
 /*******************************************************************************
@@ -49,7 +49,7 @@ NS_START(rcppsw, utils);
  *
  * \brief File parsing class using template design pattern. Parses each line of
  * a file into a vector of whitespace delimited tokens, and returns a vector of
- * vectors (1 per line).
+ * vectors (1 vector of parsed tokens per line).
  *
  * \tparam T The type of tokens the file contains.
  */
@@ -76,7 +76,9 @@ class file_parser {
   }
 
  private:
+  /* clang-format off */
   const std::string& m_fname;
+  /* clang-format on */
 };
 
 NS_END(utils, rcppsw);

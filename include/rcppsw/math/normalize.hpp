@@ -26,7 +26,7 @@
  ******************************************************************************/
 #include <limits>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -40,7 +40,7 @@ NS_START(rcppsw, math);
  * \brief Normalize a value in the range [min, max] to [0, 1].
  *
  * If the max and min measurements are the same, then the normalized value is
- * 0.5.p
+ * 0.5.o
  */
 static inline double normalize(double min, double max, double val) {
   if (max - min <= std::numeric_limits<double>::epsilon()) {

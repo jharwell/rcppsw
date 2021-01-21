@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -34,10 +34,15 @@ NS_START(rcppsw, algorithm);
 /*******************************************************************************
  * Templates
  ******************************************************************************/
-template<class InputIterator,
-         class OutputIterator,
-         class Predicate,
-         class UnaryFunction>
+/**
+ * \brief Given an input range defined by (\p first, \p last), and a filtering
+ * predicate \p pred, apply \p f to all elements from the input range that
+ * satisfy \p pred and write them to the output range \p result.
+ */
+template <class InputIterator,
+          class OutputIterator,
+          class Predicate,
+          class UnaryFunction>
 OutputIterator transform_if(InputIterator first,
                             InputIterator last,
                             OutputIterator result,

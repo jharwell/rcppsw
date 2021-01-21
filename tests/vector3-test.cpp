@@ -80,14 +80,14 @@ CATCH_TEST_CASE("Scale test", "[vector3]") {
 }
 CATCH_TEST_CASE("Angle test", "[vector3]") {
   math::vector3d t0(1, 1, 1);
-  CATCH_REQUIRE(45 == to_degrees(t0.xangle()).value());
-  CATCH_REQUIRE(45 == to_degrees(t0.yangle()).value());
-  CATCH_REQUIRE(45 == to_degrees(t0.zangle()).value());
+  CATCH_REQUIRE(45 == to_degrees(t0.xangle()).v());
+  CATCH_REQUIRE(45 == to_degrees(t0.yangle()).v());
+  CATCH_REQUIRE(45 == to_degrees(t0.zangle()).v());
 
   math::vector3d t1(-1, -1, -1);
-  CATCH_REQUIRE(225 == to_degrees(t1.xangle()).unsigned_normalize().value());
-  CATCH_REQUIRE(225 == to_degrees(t1.yangle()).unsigned_normalize().value());
-  CATCH_REQUIRE(225 == to_degrees(t1.zangle()).unsigned_normalize().value());
+  CATCH_REQUIRE(225 == to_degrees(t1.xangle()).unsigned_normalize().v());
+  CATCH_REQUIRE(225 == to_degrees(t1.yangle()).unsigned_normalize().v());
+  CATCH_REQUIRE(225 == to_degrees(t1.zangle()).unsigned_normalize().v());
 }
 
 CATCH_TEST_CASE("Operator test", "[vector3]") {

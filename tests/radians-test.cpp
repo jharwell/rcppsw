@@ -39,13 +39,21 @@ CATCH_TEST_CASE("Conversion test", "[radians]") {
   math::radians t0(M_PI/2);
   math::radians t1(M_PI);
   math::radians t2(to_radians(math::degrees(90)));
-  math::radians t3(to_radians(math::degrees(180)));
+  math::radians t3(math::degrees(180));
 
   CATCH_REQUIRE(M_PI/2 == t0());
-  CATCH_REQUIRE(90 == to_degrees(t0).value());
+  CATCH_REQUIRE(90 == to_degrees(t0).v());
 
   CATCH_REQUIRE(90 == to_degrees(t2)());
   CATCH_REQUIRE(180 == to_degrees(t3)());
+}
+
+CATCH_TEST_CASE("stdout Test", "[radians]") {
+  rmath::radians t0(0);
+  std::stringstream out;
+  out << t0;
+
+  CATCH_REQUIRE("rad(0.000000) -> deg(0.000000)" == out.str());
 }
 
 CATCH_TEST_CASE("Math Test", "[radians]") {
@@ -61,4 +69,22 @@ CATCH_TEST_CASE("Math Test", "[radians]") {
 
   CATCH_REQUIRE((t0 += t0) == t3);
   CATCH_REQUIRE((t1 -= t2) == t2);
+}
+
+CATCH_TEST_CASE("Normalized Diff", "[radians]") {
+  rmath::radians r0(0);
+  rmath::radians r90(M_PI/2);
+  rmath::radians r180(M_PI);
+  rmath::radians r270(3 * M_PI / 2);
+  rmath::radians r360(2 * M_PI);
+
+  CATCH_REQUIRE(RCPPSW_IS_BETWEEN(rmath::normalized_diff(r90, r180), -r180, r180));
+  CATCH_REQUIRE(RCPPSW_IS_BETWEEN(rmath::normalized_diff(r90, r270), -r180, r180));
+  CATCH_REQUIRE(RCPPSW_IS_BETWEEN(rmath::normalized_diff(r270, r360), -r180, r180));
+
+  CATCH_REQUIRE(-r90 == rmath::normalized_diff(r90, r180));
+  CATCH_REQUIRE(-r180 == rmath::normalized_diff(r90, r270));
+  CATCH_REQUIRE(r0 == rmath::normalized_diff(r0, r360));
+  CATCH_REQUIRE(r0 == rmath::normalized_diff(r360, r0));
+
 }

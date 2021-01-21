@@ -27,19 +27,26 @@
 #include <vector>
 #include <unordered_set>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, algorithm, clustering, detail);
+NS_START(rcppsw, algorithm, clustering);
 
 /*******************************************************************************
  * Template Helpers
  ******************************************************************************/
 namespace policy {
-  class NC {};
-  class EH {};
+/**
+ * \brief NC -> Nearest centroid
+ */
+class NC {};
+
+/**
+ * \brief EH -> Event Horizon
+ */
+class EH {};
 
 template<typename Policy>
 using is_nc_ = std::is_same<Policy, NC>;
@@ -73,7 +80,7 @@ struct mapping<Policy, policy::is_eh<Policy>> {
 template<typename Policy>
 using membership_type = typename membership::mapping<Policy>::type;
 
-NS_END(detail, clustering, algorithm, rcppsw);
+NS_END(clustering, algorithm, rcppsw);
 
 
 #endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_MEMBERSHIP_POLICY_HPP_ */

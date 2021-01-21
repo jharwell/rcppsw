@@ -26,7 +26,7 @@
  ******************************************************************************/
 #include <string>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -45,13 +45,13 @@ NS_START(rcppsw, config);
 class streamable_parser {
   virtual ~streamable_parser(void) = default;
 
-  static constexpr uint kColumnWidth = 100;
-  static constexpr uint kHeader1 = 1;
-  static constexpr uint kHeader2 = 2;
-  static constexpr uint kHeader3 = 3;
-  static constexpr uint kHeader4 = 4;
+  static constexpr size_t kColumnWidth = 100;
+  static constexpr size_t kHeader1 = 1;
+  static constexpr size_t kHeader2 = 2;
+  static constexpr size_t kHeader3 = 3;
+  static constexpr size_t kHeader4 = 4;
 
-  explicit streamable_parser(uint level) : m_level(level) {}
+  explicit streamable_parser(size_t level) : m_level(level) {}
 
   /**
    * \brief Dump the parsed (or possibly unparsed, but that's kind of useless)
@@ -75,7 +75,7 @@ class streamable_parser {
    */
   std::string footer_build(const std::string& xml_root) const;
 
-  uint level(void) const { return m_level; }
+  size_t level(void) const { return m_level; }
 
   friend std::ostream& operator<<(std::ostream& stream,
                                   const streamable_parser& parser) {
@@ -85,7 +85,7 @@ class streamable_parser {
 
  private:
   /* clang-format off */
-  uint m_level;
+  size_t m_level;
   /* clang-format on */
 };
 

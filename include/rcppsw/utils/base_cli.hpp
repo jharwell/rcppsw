@@ -27,7 +27,7 @@
 #include <boost/program_options.hpp>
 #include <string>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls

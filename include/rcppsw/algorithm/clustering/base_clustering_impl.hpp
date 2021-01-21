@@ -1,5 +1,5 @@
 /**
- * \file clustering_impl.hpp
+ * \file base_clustering_impl.hpp
  *
  * \copyright 2018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_CLUSTERING_IMPL_HPP_
-#define INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_CLUSTERING_IMPL_HPP_
+#ifndef INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_BASE_CLUSTERING_IMPL_HPP_
+#define INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_BASE_CLUSTERING_IMPL_HPP_
 
 /*******************************************************************************
  * Includes
@@ -27,34 +27,34 @@
 #include <vector>
 #include <functional>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/algorithm/clustering/cluster.hpp"
 #include "rcppsw/algorithm/clustering/membership_policy.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, algorithm, clustering, detail);
+NS_START(rcppsw, algorithm, clustering);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * \class clustering_impl
+ * \interface base_clustering_impl
  * \ingroup algorithm clustering
  *
- * \brief Templated implementation class interface to guide the implementation
- * of various clustering algorithms by giving them a necessary set of functions
- * to implement.
+ * \brief Templated class interface to guide the implementation of various
+ * clustering algorithms by giving them a necessary set of functions to
+ * implement so that they can be then run in an implementation agnostic way.
  */
 template<typename T, typename Policy>
-class clustering_impl {
+class base_clustering_impl {
  public:
   using cluster_type = typename cluster::mapping<T, Policy>::type;
   using cluster_vector = std::vector<cluster_type>;
   using dist_calc_ftype = std::function<double(const T&, const T&)>;
 
-  virtual ~clustering_impl(void) = default;
+  virtual ~base_clustering_impl(void) = default;
 
    /**
    * \brief Determine if the clusters have converged and the algorithm should be
@@ -84,6 +84,6 @@ class clustering_impl {
                           membership_type<Policy>* membership) = 0;
 };
 
-NS_END(detail, clustering, algorithm, rcppsw);
+NS_END(clustering, algorithm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_CLUSTERING_IMPL_HPP_ */
+#endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_BASE_CLUSTERING_IMPL_HPP_ */

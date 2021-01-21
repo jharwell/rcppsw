@@ -26,7 +26,7 @@
  ******************************************************************************/
 #include <cmath>
 
-#include "rcppsw/control/waveform.hpp"
+#include "rcppsw/control/base_waveform.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -47,14 +47,14 @@ NS_START(rcppsw, control);
  * value = amplitude * ( sin(2pi* frequency * time + phase)) + offset.
  *
  */
-class sine_waveform : public waveform {
+class sine_waveform : public base_waveform {
  public:
   explicit sine_waveform(const struct config::waveform_config* const config)
-      : waveform(config) {}
+      : base_waveform(config) {}
 
   double value(double time) override {
     double t = frequency() * time;
-    double v = std::sin(2 * M_PI * t + phase());
+    double v = std::sin(2 * M_PI * t + phase().v());
     return amplitude() * v + offset();
   }
 };
@@ -71,14 +71,15 @@ class sine_waveform : public waveform {
  * Can be used to create step functions as well.
  *
  */
-class square_waveform : public waveform {
+class square_waveform : public base_waveform {
  public:
   explicit square_waveform(const struct config::waveform_config* const config)
-      : waveform(config) {}
+      : base_waveform(config) {}
 
   double value(double time) override {
     double t = frequency() * time;
-    return amplitude() * std::copysign(1.0, std::sin(2 * M_PI * t + phase())) +
+    return amplitude() *
+               std::copysign(1.0, std::sin(2 * M_PI * t + phase().v())) +
            offset();
   }
 };
@@ -92,14 +93,14 @@ class square_waveform : public waveform {
  *
  * value = amplitude * ( 2 * (t - floor(time + 0.5) + phase)) + offset.
  */
-class sawtooth_waveform : public waveform {
+class sawtooth_waveform : public base_waveform {
  public:
   explicit sawtooth_waveform(const struct config::waveform_config* const config)
-      : waveform(config) {}
+      : base_waveform(config) {}
 
   double value(double time) override {
     double t = frequency() * time;
-    double v = 2.0 * (t - std::floor(t + 0.5) + phase());
+    double v = 2.0 * (t - std::floor(t + 0.5) + phase().v());
     return amplitude() * v + offset();
   }
 };

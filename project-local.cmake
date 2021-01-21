@@ -20,7 +20,7 @@ if (NOT TARGET ticpp)
 endif()
 
 # Boost
-find_package(Boost 1.58.0 COMPONENTS system filesystem thread graph)
+find_package(Boost 1.71.0 COMPONENTS system filesystem thread graph REQUIRED)
 set(Boost_USE_STATIC_LIBS OFF)
 
 ################################################################################

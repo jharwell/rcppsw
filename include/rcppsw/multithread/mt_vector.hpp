@@ -28,7 +28,7 @@
 #include <boost/thread/locks.hpp>
 #include <vector>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -48,27 +48,26 @@ NS_START(rcppsw, multithread);
 template <typename T>
 class mt_vector {
  public:
-  mt_vector(void) : m_v(), m_mtx() {}
+  using const_iterator = typename std::vector<T>::const_iterator;
 
-  /* type definitions */
-  typedef typename std::vector<T>::const_iterator const_iterator;
-  typename std::vector<T>::const_iterator begin(void) const {
-    return m_v.begin();
-  }
-  typename std::vector<T>::const_iterator end(void) const { return m_v.end(); }
+  mt_vector(void) = default;
 
   void push_back(const T& data) {
     boost::unique_lock<boost::mutex> lock(m_mtx);
     m_v.push_back(data);
   }
 
-  size_t size() const { return m_v.size(); }
-  void clear(void) { m_v.clear(); }
-  const T& operator[](std::size_t pos) const { return m_v[pos]; }
-
  private:
+  /* clang-format off */
   std::vector<T> m_v;
-  boost::mutex m_mtx;
+  boost::mutex   m_mtx;
+  /* clang-format on */
+
+ public:
+  RCPPSW_WRAP_DECLDEF(size, m_v, const);
+  RCPPSW_WRAP_DECLDEF(operator[], m_v);
+  RCPPSW_WRAP_DECLDEF(begin, m_v, const);
+  RCPPSW_WRAP_DECLDEF(end, m_v, const);
 };
 
 NS_END(multithread, rcppsw);

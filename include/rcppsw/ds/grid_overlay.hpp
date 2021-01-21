@@ -78,9 +78,7 @@ class grid_overlay : public er::client<grid_overlay<TOriginType>> {
   /**
    * \brief Return the resolution of the grid.
    */
-  const types::discretize_ratio& resolution(void) const {
-    return mc_resolution;
-  }
+  const types::discretize_ratio& resolution(void) const { return mc_resolution; }
 
   /**
    * \brief Return the real origin of the grid in real coordinates.

@@ -28,9 +28,9 @@
 #include <memory>
 #include <string>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/patterns/prototype/caching_factory.hpp"
 #include "rcppsw/patterns/singleton/singleton.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls

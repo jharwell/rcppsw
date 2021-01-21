@@ -27,8 +27,9 @@
 #include <map>
 #include <string>
 #include <memory>
+#include <utility>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/patterns/factory/factory.hpp"
 
 /*******************************************************************************
@@ -50,6 +51,9 @@ NS_START(rcppsw, patterns, prototype);
  * with a *NEW* name, then a new instance of the object type is created.
  *
  * Only objects derived from the base class can be created.
+ *
+ * \tparam TBase The base class of objects to be created.
+ * \tparam Args Arguments for class constructors.
  */
 template<typename TBase, typename...Args>
 class caching_factory {

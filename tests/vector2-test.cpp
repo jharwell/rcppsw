@@ -75,11 +75,11 @@ CATCH_TEST_CASE("Scale test", "[vector2]") {
 }
 CATCH_TEST_CASE("Angle test", "[vector2]") {
   math::vector2d t0(1, 1);
-  CATCH_REQUIRE(45 == to_degrees(t0.angle()).value());
+  CATCH_REQUIRE(45 == to_degrees(t0.angle()).v());
   math::vector2d t1(-1, -1);
-  CATCH_REQUIRE(225 == to_degrees(t1.angle()).unsigned_normalize().value());
+  CATCH_REQUIRE(225 == to_degrees(t1.angle()).unsigned_normalize().v());
   math::vector2d t2(-1, 0);
-  CATCH_REQUIRE(180 == to_degrees(t2.angle()).unsigned_normalize().value());
+  CATCH_REQUIRE(180 == to_degrees(t2.angle()).unsigned_normalize().v());
 }
 
 CATCH_TEST_CASE("Operator test", "[vector2]") {

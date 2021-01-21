@@ -28,8 +28,8 @@
 #include <limits>
 #include <string>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/math/range.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -67,9 +67,12 @@ class degrees {
    */
   explicit degrees(const radians& r);
 
-  double value(void) const { return m_value; }
+  /**
+   * \brief Get the raw value of the angle.
+   */
+  double v(void) const { return m_value; }
 
-  double operator()(void) const { return value(); }
+  double operator()(void) const { return v(); }
 
   /**
    * \brief Set the current value in degrees.
@@ -78,7 +81,7 @@ class degrees {
    */
   void set(double value) { m_value = value; }
 
-  double abs_value(void) const { return std::abs(m_value); }
+  double abs_v(void) const { return std::abs(v()); }
 
   /**
    * \brief Normalizes the value in the range [-180, 180]
@@ -94,10 +97,11 @@ class degrees {
     return *this = kUnsignedRange.wrap_value(*this);
   }
 
-  std::string to_str(void) const {
-    return "deg(" + rcppsw::to_string(m_value) + ") -> rad(" +
-           rcppsw::to_string(m_value * kDEGREES_TO_RADIANS / M_PI) + ")";
-  }
+  /**
+   * \brief Return a string representation of the degrees object of the form
+   * 'deg(XX) -> rad(YY)'.
+   */
+  std::string to_str(void) const;
 
   degrees& operator+(void) { return *this; }
 
@@ -149,9 +153,7 @@ class degrees {
     return res;
   }
 
-  double operator/(const degrees& other) const {
-    return m_value / other.m_value;
-  }
+  double operator/(const degrees& other) const { return m_value / other.m_value; }
 
   degrees operator/(double value) const {
     degrees res(*this);
@@ -161,15 +163,11 @@ class degrees {
 
   bool operator<(const degrees& other) const { return m_value < other.m_value; }
 
-  bool operator<=(const degrees& other) const {
-    return m_value <= other.m_value;
-  }
+  bool operator<=(const degrees& other) const { return m_value <= other.m_value; }
 
   bool operator>(const degrees& other) const { return m_value > other.m_value; }
 
-  bool operator>=(const degrees& other) const {
-    return m_value >= other.m_value;
-  }
+  bool operator>=(const degrees& other) const { return m_value >= other.m_value; }
 
   bool operator==(const degrees& other) const {
     return std::fabs(m_value - other.m_value) <=
@@ -194,7 +192,7 @@ class degrees {
    */
   static const range<degrees> kUnsignedRange;
 
-  double m_value{0.0};
+  double m_value{ 0.0 };
 };
 
 /*******************************************************************************
