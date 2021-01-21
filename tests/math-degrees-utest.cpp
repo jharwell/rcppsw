@@ -1,5 +1,5 @@
 /**
- * @file degrees-test.cpp
+ * @file math-degrees-test.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -35,7 +35,7 @@
 /*******************************************************************************
  * Test Cases
  ******************************************************************************/
-CATCH_TEST_CASE("Conversion test", "[degrees]") {
+CATCH_TEST_CASE("Conversion test", "[rmath::degrees]") {
   rmath::degrees t0(90);
   rmath::degrees t1(180);
   rmath::degrees t2(to_degrees(rmath::radians(M_PI/2)));
@@ -48,14 +48,14 @@ CATCH_TEST_CASE("Conversion test", "[degrees]") {
   CATCH_REQUIRE(M_PI == to_radians(t3)());
 }
 
-CATCH_TEST_CASE("stdout Test", "[degrees]") {
+CATCH_TEST_CASE("stdout Test", "[rmath::degrees]") {
   rmath::degrees t0(0);
   std::stringstream out;
   out << t0;
 
   CATCH_REQUIRE("deg(0.000000) -> rad(0.000000)" == out.str());
 }
-CATCH_TEST_CASE("Math Test", "[degrees]") {
+CATCH_TEST_CASE("Math Test", "[rmath::degrees]") {
   rmath::degrees t0(90);
   rmath::degrees t1(180);
   rmath::degrees t2(90);
@@ -76,7 +76,7 @@ CATCH_TEST_CASE("Math Test", "[degrees]") {
   CATCH_REQUIRE(80 == t5.signed_normalize().v());
 }
 
-CATCH_TEST_CASE("Normalized Diff", "[degrees]") {
+CATCH_TEST_CASE("Normalized Diff", "[rmath::degrees]") {
   rmath::degrees d0(0);
   rmath::degrees d90(90);
   rmath::degrees d180(180);

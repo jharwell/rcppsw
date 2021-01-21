@@ -72,11 +72,7 @@ metrics_write_status base_metrics_collector::csv_line_write(void) {
   } else if (output_mode::ekCREATE == mc_output_mode) {
     auto write_create = [&](void) {
       std::stringstream ss;
-      /*
-       * +1 to get things to come out evenly because we start with
-       * timestep 0.
-       */
-      ss << std::setw(10) << std::setfill('0') << (m_timestep.v() + 1);
+      ss << std::setw(10) << std::setfill('0') << m_timestep.v();
 
       m_ofile.open(mc_ofname_stem + "_" + ss.str() + mc_ofname_ext,
                    std::ios_base::trunc | std::ios_base::out);
@@ -133,7 +129,7 @@ void base_metrics_collector::reset(void) {
 } /* reset() */
 
 void base_metrics_collector::interval_reset(void) {
-  if (m_timestep > 0U && (m_timestep % m_interval == 0)) {
+  if (m_timestep > 0 && (m_timestep % m_interval == 0)) {
     reset_after_interval();
   }
 } /* interval_reset() */

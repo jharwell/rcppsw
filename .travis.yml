@@ -2,14 +2,10 @@ os:
   - linux
 
 language: cpp
-dist: xenial
+dist: focal
 
 before_install:
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo add-apt-repository ppa:savoury1/boost-defaults-1.71
-  - sudo apt-get update
-  - sudo apt-get install -y gcc-9 g++-9
-  - sudo apt-get install -y boost1.71
+  - pip install --user cpp-coveralls
 
 addons:
   apt:
@@ -20,11 +16,13 @@ addons:
       - libfreeimageplus-dev
       - doxygen
       - cppcheck
-      - libclang-6.0-dev
-      - clang-tools-6.0
-      - clang-format-6.0
-      - clang-tidy-6.0
+      - libclang-10-dev
+      - clang-tools-10
+      - clang-format-10
+      - clang-tidy-10
       - liblog4cxx-dev
+      - libboost-all-dev
+      - lcov
 
 branches:
   only:
@@ -33,7 +31,8 @@ branches:
 
 script:
   - mkdir -p build && cd build
-  - cmake -DCMAKE_C_COMPILER=gcc-9 -DCMAKE_CXX_COMPILER=g++-9 -DLIBRA_TESTS=yes ..
-  - make -j 4
-  - make unit-tests
-  - make test
+  - cmake -DLIBRA_TESTS=yes -DLIBRA_CODE_COV=yes ..
+  - make build-and-test
+
+after_success:
+  - coveralls --root .. -E '.*/ext/.*' -E '.*/CMakeFiles/.*'

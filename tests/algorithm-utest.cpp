@@ -44,7 +44,7 @@ namespace clustering = rcppsw::algorithm::clustering;
 /*******************************************************************************
  * Test Cases
  ******************************************************************************/
-CATCH_TEST_CASE("Maximum Subarray Finder", "[algorithm]") {
+CATCH_TEST_CASE("Maximum Subarray Finder", "[ralgorithm]") {
   std::vector<int> data = {0, 1, 2, 3, 4, 5, 6, 0, 0, 0};
   ralgorithm::max_subarray_finder<int> finder;
   auto res = finder(data);
@@ -53,7 +53,7 @@ CATCH_TEST_CASE("Maximum Subarray Finder", "[algorithm]") {
   CATCH_REQUIRE(6 == std::get<2>(*res));
 }
 
-CATCH_TEST_CASE("Closest Pair", "[algorithm]") {
+CATCH_TEST_CASE("Closest Pair", "[ralgorithm]") {
   std::vector<rcppsw::math::vector2i> data = {{4, 3}, {0, 2}, {0, 1}, {2, 10}, {5, 8}, {4, 1}};
   /* for (size_t i = 0; i < 1000; ++i) { */
   /*   for (size_t j = 0; j < 1000; ++j) { */
@@ -79,7 +79,7 @@ CATCH_TEST_CASE("Closest Pair", "[algorithm]") {
   CATCH_REQUIRE(res.dist == 1.0);
 }
 
-CATCH_TEST_CASE("Kmeans", "[clustering]") {
+CATCH_TEST_CASE("Kmeans", "[ralg::clustering]") {
   std::vector<double> data = {1.0, 2.0, 2.3, 1.8, 0.5, 9.8, 7.6, 8.4, 9.1, 6.4};
   /* std::vector<double> data; */
   /* for (size_t i = 0; i < 100000000; ++i) { */

@@ -24,6 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+
 #include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
@@ -94,8 +96,12 @@ class color {
     return m_channels != c_color2.m_channels;
   }
 
+  std::string to_str(void) const;
+
  private:
+  /* clang-format off */
   uint8_t m_channels[4];
+  /* clang-format on */
 };
 
 NS_END(utils, rcppsw);

@@ -1,5 +1,5 @@
 /**
- * @file radians-test.cpp
+ * @file math-radians-test.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -35,7 +35,7 @@ namespace math = rcppsw::math;
 /*******************************************************************************
  * Test Cases
  ******************************************************************************/
-CATCH_TEST_CASE("Conversion test", "[radians]") {
+CATCH_TEST_CASE("Conversion test", "[rmath::radians]") {
   math::radians t0(M_PI/2);
   math::radians t1(M_PI);
   math::radians t2(to_radians(math::degrees(90)));
@@ -48,7 +48,7 @@ CATCH_TEST_CASE("Conversion test", "[radians]") {
   CATCH_REQUIRE(180 == to_degrees(t3)());
 }
 
-CATCH_TEST_CASE("stdout Test", "[radians]") {
+CATCH_TEST_CASE("stdout Test", "[rmath::radians]") {
   rmath::radians t0(0);
   std::stringstream out;
   out << t0;
@@ -56,7 +56,7 @@ CATCH_TEST_CASE("stdout Test", "[radians]") {
   CATCH_REQUIRE("rad(0.000000) -> deg(0.000000)" == out.str());
 }
 
-CATCH_TEST_CASE("Math Test", "[radians]") {
+CATCH_TEST_CASE("Math Test", "[rmath::radians]") {
   math::radians t0(M_PI/2);
   math::radians t1(M_PI);
   math::radians t2(M_PI/2);
@@ -71,7 +71,7 @@ CATCH_TEST_CASE("Math Test", "[radians]") {
   CATCH_REQUIRE((t1 -= t2) == t2);
 }
 
-CATCH_TEST_CASE("Normalized Diff", "[radians]") {
+CATCH_TEST_CASE("Normalized Diff", "[rmath::radians]") {
   rmath::radians r0(0);
   rmath::radians r90(M_PI/2);
   rmath::radians r180(M_PI);
