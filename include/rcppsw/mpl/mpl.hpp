@@ -31,7 +31,7 @@
  * Macros
  ******************************************************************************/
 /**
- * \def RCPPSW_SFINAE_FUNC(...)
+ * \def RCPPSW_SFINAE_DECLDEF(...)
  *
  * Specify the condition to enable a function for SFINAE.
  *
@@ -46,10 +46,42 @@
  * functions that differ only in the value of the defaulted non-type parameter
  * in their template argument lists will be considered distinct and trigger
  * SFINAE as expected.
+ *
+ * This macro ONLY works for inline functions specified in the header file.
  */
 #ifndef DOXYGEN_DOCUMENTATION_BUILD
-#define RCPPSW_SFINAE_FUNC(...) \
+#define RCPPSW_SFINAE_DECLDEF(...) \
   typename std::enable_if<__VA_ARGS__, int>::type = 0
+#endif /* DOXYGEN_DOCUMENTATION_BUILD */
+
+/**
+ * \def RCPPSW_SFINAE_DECL(...)
+ *
+ * Specify the condition to enable a function for SFINAE, where the declaration
+ * and definition are separated (requiring manual template instantiation in the
+ * source file).
+ *
+ * Doing this is usually more trouble than its worth, but you CAN do it if
+ * needed.
+ */
+#ifndef DOXYGEN_DOCUMENTATION_BUILD
+#define RCPPSW_SFINAE_DECL(...) \
+  typename std::enable_if<__VA_ARGS__, int>::type = 0
+#endif /* DOXYGEN_DOCUMENTATION_BUILD */
+
+/**
+ * \def RCPPSW_SFINAE_DEF(...)
+ *
+ * Specify the condition to enable a function for SFINAE, where the declaration
+ * and definition are separated (requiring manual template instantiation in the
+ * source file).
+ *
+ * Doing this is usually more trouble than its worth, but you CAN do it if
+ * needed.
+ */
+#ifndef DOXYGEN_DOCUMENTATION_BUILD
+#define RCPPSW_SFINAE_DEF(...)                  \
+  typename std::enable_if<__VA_ARGS__, int>::type
 #endif /* DOXYGEN_DOCUMENTATION_BUILD */
 
 /*******************************************************************************

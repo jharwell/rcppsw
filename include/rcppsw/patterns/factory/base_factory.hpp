@@ -83,7 +83,7 @@ class base_factory {
   virtual ~base_factory(void) = default;
 
   template<typename TFactoryType = TType,
-           RCPPSW_SFINAE_FUNC(std::is_same<TFactoryType,
+           RCPPSW_SFINAE_DECLDEF(std::is_same<TFactoryType,
                               factory_releasing_type>::value ||
                               std::is_same<TFactoryType,
                               factory_sharing_type>::value)>

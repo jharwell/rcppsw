@@ -90,6 +90,14 @@ class base_grid2D {
     return const_cast<base_grid2D*>(this)->access(i, j);
   }
 
+  bool contains(size_t i, size_t j) {
+    return i < xdsize() && j < ydsize();
+  }
+
+  bool contains(const math::vector2z& pt) {
+    return contains(pt.x(), pt.y());
+  }
+
   /**
    * \brief Get a subcircle gridview from a grid. The subcircle extent is
    * cropped to the maximum boundaries of the parent grid.

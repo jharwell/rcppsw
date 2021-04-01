@@ -100,7 +100,7 @@ class ema final : public expression<T> {
   }
 
   template <typename U = T,
-            RCPPSW_SFINAE_FUNC(!(std::is_floating_point<T>::value))>
+            RCPPSW_SFINAE_DECLDEF(!(std::is_floating_point<T>::value))>
   bool operator==(const ema& other) const {
     return this->v() == other.v();
   }
@@ -114,7 +114,7 @@ class ema final : public expression<T> {
 /*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
-template <typename T, RCPPSW_SFINAE_FUNC(!(std::is_floating_point<T>::value))>
+template <typename T, RCPPSW_SFINAE_DECLDEF(!(std::is_floating_point<T>::value))>
 bool operator==(const T& v, const ema<T>& rhs) {
   return v == rhs.v();
 }

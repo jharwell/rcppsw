@@ -59,8 +59,7 @@ CATCH_TEST_CASE("Length test", "[rmath::vector3]") {
   CATCH_REQUIRE(std::sqrt(48) == t1.length());
   CATCH_REQUIRE(48 == t1.square_length());
 
-  CATCH_REQUIRE(12 == math::vector3d::square_distance(t0, t1));
-  CATCH_REQUIRE(std::sqrt(12) == math::vector3d::distance(t0, t1));
+  CATCH_REQUIRE(std::sqrt(12) == math::vector3d::l2norm(t0, t1));
   CATCH_REQUIRE((t0 - t1).length() == std::sqrt(12));
 }
 

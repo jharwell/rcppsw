@@ -57,7 +57,7 @@ NS_END(detail);
  * the conversion.
  */
 template <typename T,
-          RCPPSW_SFINAE_FUNC(!mpl::is_detected<detail::to_str_type, T>::value)>
+          RCPPSW_SFINAE_DECLDEF(!mpl::is_detected<detail::to_str_type, T>::value)>
 std::string to_string(const T& obj) {
   return std::to_string(obj);
 }
@@ -67,7 +67,7 @@ std::string to_string(const T& obj) {
  * defines a to_str() method, then it can still use rcppsw::to_string().
  */
 template <class T,
-          RCPPSW_SFINAE_FUNC(mpl::is_detected<detail::to_str_type, T>::value)>
+          RCPPSW_SFINAE_DECLDEF(mpl::is_detected<detail::to_str_type, T>::value)>
 std::string to_string(const T& obj) {
   return obj.to_str();
 }

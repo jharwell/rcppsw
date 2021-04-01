@@ -61,7 +61,7 @@ CATCH_TEST_CASE("Closest Pair", "[ralgorithm]") {
   /*   } /\* for(j..) *\/ */
   /* } /\* for(i..) *\/ */
 
-  auto dist_func = std::bind(&math::vector2i::distance,
+  auto dist_func = std::bind(&math::vector2i::l2norm,
                              std::placeholders::_1,
                              std::placeholders::_2);
   auto res = rcppsw::algorithm::closest_pair2D<math::vector2i>()("brute_force",

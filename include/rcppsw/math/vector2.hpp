@@ -55,20 +55,6 @@ class vector2 {
  public:
   using value_type = T;
   /**
-   * \brief Computes the square distance between the passed vectors.
-   */
-  static double square_distance(const vector2& v1, const vector2& v2) {
-    return (v1 - v2).square_length();
-  }
-
-  /**
-   * \brief Computes the distance between the passed vectors.
-   */
-  static double distance(const vector2& v1, const vector2& v2) {
-    return (v1 - v2).length();
-  }
-
-  /**
    * \brief The positive X axis.
    */
   static const vector2<T> X; // NOLINT
@@ -77,6 +63,25 @@ class vector2 {
    * \brief The positive Y axis.
    */
   static const vector2<T> Y; // NOLINT
+
+  /**
+   * \brief Computes the euclidean distance between the passed vectors.
+   */
+  static double l2norm(const vector2<T>& v1, const vector2<T>& v2) {
+    return (v1 - v2).length();
+  }
+
+  /**
+   * \brief Computes the manhattan distance between the passed vectors.
+   */
+  template<typename U,
+           typename V,
+           RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value),
+           RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<V>::value)>
+  static size_t l1norm(const vector2<U>& v1, const vector2<V>& v2) {
+    return std::abs(static_cast<int>(v1.x() - v2.x())) +
+        std::abs(static_cast<int>(v1.y() - v2.y()));
+  }
 
   /**
    * \brief Initializes vector to (0,0)
@@ -97,7 +102,7 @@ class vector2 {
    * \param length The vector length.
    * \param angle The vector angle.
    */
-  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   vector2(const T& length, const radians& angle) noexcept
       : m_x(std::cos(angle.v()) * length), m_y(std::sin(angle.v()) * length) {}
 
@@ -130,7 +135,7 @@ class vector2 {
    * \param length The length of the vector.
    * \param angle The angle of the vector (range [0,2pi)
    */
-  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   void set_from_polar(const T& length, const radians& angle) {
     m_x = std::cos(angle.v()) * length;
     m_y = std::sin(angle.v()) * length;
@@ -155,7 +160,7 @@ class vector2 {
    *
    * \return A reference to the normalized vector.
    */
-  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   vector2& normalize(void) {
     *this /= this->length();
     return *this;
@@ -175,7 +180,7 @@ class vector2 {
    *
    * \return A reference to the rotated vector.
    */
-  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   vector2& rotate(const radians& angle) {
     T sin_val, cos_val;
     ::sincos(angle.v(), &sin_val, &cos_val);
@@ -214,7 +219,7 @@ class vector2 {
    *
    * Only available if the template argument is not floating point.
    */
-  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
   bool operator==(const vector2& other) const {
     return (m_x == other.m_x && m_y == other.m_y);
   }
@@ -225,7 +230,7 @@ class vector2 {
    *
    * Only available if the template argument is floating point.
    */
-  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   bool operator==(const vector2& other) const {
     return (std::fabs(x() - other.x()) <= std::numeric_limits<T>::epsilon() &&
             (std::fabs(y() - other.y()) <= std::numeric_limits<T>::epsilon()));
@@ -234,12 +239,12 @@ class vector2 {
   /**
    * \brief Needed for using vectors as keys in a map.
    */
-  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
   bool operator<(const vector2& other) const {
     return (m_x < other.m_x) || ((m_x == other.m_x) && (m_y < other.m_y));
   }
 
-  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
   bool operator>(const vector2& other) const {
     return (m_x > other.m_x) || ((m_x == other.m_x) && (m_y > other.m_y));
   }
@@ -385,7 +390,7 @@ using vector2d = vector2<double>;
 /**
  * \brief Convert vector2d -> vector2{u,z}, applying a divisive scaling factor.
  */
-#define RCPPSW_MATH_VEC2_CONVD(dest_prefix, dest_type)                      \
+#define RCPPSW_MATH_VEC2_CONV2DISC(dest_prefix, dest_type)                      \
   static inline vector2##dest_prefix dvec2##dest_prefix##vec(               \
       const vector2d& other, double scale) {                                \
     return vector2##dest_prefix(static_cast<dest_type>(other.x() / scale),  \
@@ -401,8 +406,9 @@ RCPPSW_MATH_VEC2_DIRECT_CONVF(z);
 RCPPSW_MATH_VEC2_SCALED_CONVF(u);
 RCPPSW_MATH_VEC2_SCALED_CONVF(i);
 RCPPSW_MATH_VEC2_SCALED_CONVF(z);
-RCPPSW_MATH_VEC2_CONVD(z, size_t);
-RCPPSW_MATH_VEC2_CONVD(u, uint);
+RCPPSW_MATH_VEC2_CONV2DISC(z, size_t);
+RCPPSW_MATH_VEC2_CONV2DISC(u, uint);
+RCPPSW_MATH_VEC2_CONV2DISC(i, int);
 
 NS_END(math, rcppsw);
 

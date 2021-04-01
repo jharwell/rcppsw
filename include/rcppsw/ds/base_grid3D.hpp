@@ -91,6 +91,14 @@ class base_grid3D {
     return const_cast<base_grid3D*>(this)->access(i, j, k);
   }
 
+  bool contains(size_t i, size_t j, size_t k) {
+    return i < xdsize() && j < ydsize() && k < zdsize();
+  }
+
+  bool contains(const math::vector3z& pt) {
+    return contains(pt.x(), pt.y(), pt.z());
+  }
+
   RCSW_PURE T& operator[](const math::vector3z& c) { return access(c); }
   RCSW_PURE const T& operator[](const math::vector3z& c) const {
     return access(c);

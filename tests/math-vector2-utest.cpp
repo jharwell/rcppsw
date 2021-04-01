@@ -56,8 +56,7 @@ CATCH_TEST_CASE("Length test", "[rmath::vector2]") {
   CATCH_REQUIRE(std::fabs(8 - t0.square_length()) <= RCSW_DOUBLE_EPSILON);
   CATCH_REQUIRE(std::fabs(std::sqrt(32) - t1.length()) <= RCSW_DOUBLE_EPSILON);
   CATCH_REQUIRE(std::fabs(32 - t1.square_length()) <= RCSW_DOUBLE_EPSILON);
-  CATCH_REQUIRE(std::fabs(8 - math::vector2d::square_distance(t0, t1)) <= RCSW_DOUBLE_EPSILON);;
-  CATCH_REQUIRE(std::fabs(std::sqrt(8) - math::vector2d::distance(t0, t1)) <= RCSW_DOUBLE_EPSILON);;
+  CATCH_REQUIRE(std::fabs(std::sqrt(8) - math::vector2d::l2norm(t0, t1)) <= RCSW_DOUBLE_EPSILON);;
   CATCH_REQUIRE(std::fabs((t0 - t1).length() - std::sqrt(8) <= RCSW_DOUBLE_EPSILON));
 }
 

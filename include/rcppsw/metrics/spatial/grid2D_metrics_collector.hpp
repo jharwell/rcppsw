@@ -80,7 +80,7 @@ class grid2D_metrics_collector : public metrics::base_metrics_collector {
   }
 
   boost::optional<std::string> csv_line_build(void) override {
-    if (!(timestep() % interval() == 0)) {
+    if (!(timestep() % interval() == 0UL)) {
       return boost::none;
     }
     std::string line;

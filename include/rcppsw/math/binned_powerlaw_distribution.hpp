@@ -53,7 +53,7 @@ class binned_powerlaw_distribution : public powerlaw_distribution {
    * \param ub Upper bound for distribution. Assumed to be a multiple of pwr.
    * \param pwr Power for distribution.
    */
-  binned_powerlaw_distribution(uint lb, uint ub, uint pwr)
+  binned_powerlaw_distribution(size_t lb, size_t ub, size_t pwr)
       : powerlaw_distribution(lb, ub, pwr) {}
 
   size_t operator()(rng* const rng) {

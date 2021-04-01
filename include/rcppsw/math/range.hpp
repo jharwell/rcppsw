@@ -134,13 +134,13 @@ class range final : public er::client<range<T>> {
    *
    * \param value The value to test.
    */
-  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
   bool contains(const T& value) const {
     ER_ASSERT(m_initialized, "Range not initialized");
     return value >= m_lb && value <= m_ub;
   }
 
-  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   bool contains(const T& value) const {
     ER_ASSERT(m_initialized, "Range not initialized");
     return value >= m_lb && value <= m_ub;

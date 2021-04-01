@@ -93,7 +93,7 @@ class color {
   }
 
   bool operator!=(const color& c_color2) const {
-    return m_channels != c_color2.m_channels;
+    return !(*this == c_color2);
   }
 
   std::string to_str(void) const;

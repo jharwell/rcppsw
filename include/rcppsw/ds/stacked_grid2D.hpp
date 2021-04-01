@@ -180,7 +180,7 @@ class stacked_grid2D {
    * to prevent negative indices in the degenerate case where the stacked grid
    * only has 1 layer.
    */
-  template <size_t Index, RCPPSW_SFINAE_FUNC((Index > 0)), typename... Args>
+  template <size_t Index, RCPPSW_SFINAE_DECLDEF((Index > 0)), typename... Args>
   void add_layers(Args&&... args) {
     add_layer<Index, Args...>(std::forward<Args>(args)...);
     add_layer<Index - 1, Args...>(std::forward<Args>(args)...);
@@ -191,7 +191,7 @@ class stacked_grid2D {
    * prevent negative indices in the degenerate case where the stacked grid only
    * has 1 layer.
    */
-  template <size_t Index, RCPPSW_SFINAE_FUNC((Index == 0)), typename... Args>
+  template <size_t Index, RCPPSW_SFINAE_DECLDEF((Index == 0)), typename... Args>
   void add_layers(Args&&... args) {
     add_layer<Index, Args...>(std::forward<Args>(args)...);
   }
@@ -219,7 +219,7 @@ class stacked_grid2D {
    * layers. Indice reversal is not really necessary here, but doing it for
    * reasons of Principle of Least Surprise.
    */
-  template <size_t Index, RCPPSW_SFINAE_FUNC((Index > 0))>
+  template <size_t Index, RCPPSW_SFINAE_DECLDEF((Index > 0))>
   void rm_layer(void) {
     delete reinterpret_cast<const layer_value_type<Index>*>(
         m_layers[kStackSize - Index - 1]);
@@ -228,7 +228,7 @@ class stacked_grid2D {
   /**
    * \brief Remove a layer from the stacked grid when you only have 1 layer.
    */
-  template <size_t Index, RCPPSW_SFINAE_FUNC((Index == 0))>
+  template <size_t Index, RCPPSW_SFINAE_DECLDEF((Index == 0))>
   void rm_layer(void) {
     delete reinterpret_cast<const layer_value_type<0>*>(m_layers[0]);
   }

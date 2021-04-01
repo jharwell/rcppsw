@@ -119,10 +119,10 @@
  * enclosing class implements the same interface as a member variable).
  */
 
-#define RCPPSW_WRAP_DECLDEF_OVERRIDE(Func, Member, ...)                         \
-  auto Func(void)                                                               \
+#define RCPPSW_WRAP_DECLDEF_OVERRIDE(Func, Member, ...)                 \
+  auto Func(void)                                                       \
       __VA_ARGS__->decltype(std::declval<decltype(Member)>().Func()) override { \
-    return Member.Func();                                                       \
+    return Member.Func();                                               \
   }
 
 /**
@@ -171,35 +171,35 @@
   }
 
 /**
- * \def RCPPSW_WRAP_OVERRIDE_DECL(Ret, Func, ...)
+ * \def RCPPSW_WRAP_DECL_OVERRIDE(Ret, Func, ...)
  *
  * Declare a "simple" overrnide of an inherited function with the __pure__
  * attribute. Should be *NOT* be used if the override is complex to implement
  * (i.e. for every instance of this macro in a header file there should be an
- * instance of \ref RCPPSW_WRAP_OVERRIDE_DEF() in the corresponding source file
+ * instance of \ref RCPPSW_WRAP_DEF_OVERRIDE() in the corresponding source file
  * for a class).
  */
-#define RCPPSW_WRAP_OVERRIDE_DECL(Ret, Func, ...) \
+#define RCPPSW_WRAP_DECL_OVERRIDE(Ret, Func, ...) \
   Ret Func(void) __VA_ARGS__ override RCSW_PURE
 
 /**
- * \def RCPPSW_WRAP_OVERRIDE_DEF(Ret, Func, ...)
+ * \def RCPPSW_WRAP_DEF_OVERRIDE(Ret, Func, ...)
  *
  * Define a "simple" override of an inherited function with the __pure__
  * attribute in which the corresponding function on the handle is called and the
  * result returned.
  */
-#define RCPPSW_WRAP_OVERRIDE_DEF(Class, Func, Handle, ...) \
+#define RCPPSW_WRAP_DEF_OVERRIDE(Class, Func, Handle, ...) \
   RCPPSW_WRAP_DEF(Class, Func, Handle, __VA_ARGS__)
 
 /**
- * \def RCPPSW_WRAP_OVERRIDE_DEFP(Class, Func, Handle, ...)
+ * \def RCPPSW_WRAP_DEFP_OVERRIDE(Class, Func, Handle, ...)
  *
- * Same as \ref RCPPSW_WRAP_OVERRIDE_DEF, but for \p Handle instances which are
+ * Same as \ref RCPPSW_WRAP_DEF_OVERRIDE, but for \p Handle instances which are
  * pointers. Requires an additional specification of what to return if the \p
  * Handle is NULL.
  */
-#define RCPPSW_WRAP_OVERRIDE_DEFP(Class, Func, Handle, NullRet, ...) \
+#define RCPPSW_WRAP_DEFP_OVERRIDE(Class, Func, Handle, NullRet, ...) \
   RCPPSW_WRAP_DEFP(Class, Func, Handle, NullRet, __VA_ARGS__)
 
 #define RCPPSW_IS_ODD(n) RCSW_IS_ODD(n)
