@@ -94,7 +94,7 @@ class vector2 {
    * \param x The X coordinate.
    * \param y The Y coordinate.
    */
-  constexpr vector2(const T& x, const T& y) : m_x(x), m_y(y) {}
+  constexpr vector2(const T& x, const T& y) noexcept : m_x(x), m_y(y) {}
 
   /**
    * \brief Initializes the vector coordinates from polar coordinates.

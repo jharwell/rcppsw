@@ -16,10 +16,11 @@ addons:
       - libfreeimageplus-dev
       - doxygen
       - cppcheck
-      - libclang-10-dev
-      - clang-tools-10
-      - clang-format-10
-      - clang-tidy-10
+      # Currently crashing on travis for some reason
+      # - libclang-10-dev
+      # - clang-tools-10
+      # - clang-format-10
+      # - clang-tidy-10
       - liblog4cxx-dev
       - libboost-all-dev
       - lcov

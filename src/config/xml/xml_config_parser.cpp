@@ -33,7 +33,8 @@ NS_START(rcppsw, config, xml);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-xml_config_parser::xml_config_parser(void) : ER_CLIENT_INIT("rcppsw.config") {}
+xml_config_parser::xml_config_parser(void)
+    : ER_CLIENT_INIT("rcppsw.config.xml_config_parser") {}
 
 /*******************************************************************************
  * Member Functions

@@ -31,6 +31,7 @@
 
 #include "rcppsw/common/macros.hpp"
 #include "rcppsw/mpl/mpl.hpp"
+#include "rcppsw/common/compilers.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls

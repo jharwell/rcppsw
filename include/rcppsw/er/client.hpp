@@ -24,299 +24,46 @@
 #define INCLUDE_RCPPSW_ER_CLIENT_HPP_
 
 /*******************************************************************************
- * Constants
- ******************************************************************************/
-#define LIBRA_ER_NONE 0 /* No event reporting */
-#define LIBRA_ER_FATAL 1 /* Fatal events only */
-#define LIBRA_ER_ALL 2 /* All event reporting  */
-
-/*
- * Size of buffer put on stack for creating debug strings. This probably never
- * will need to be overridden, but if it does...
- */
-#ifndef LIBRA_ER_MSGLEN_MAX
-#define LIBRA_ER_MSGLEN_MAX 1000
-#endif
-
-/*******************************************************************************
  * Includes
  ******************************************************************************/
-#if (LIBRA_ER >= LIBRA_ER_ALL)
+#include "rcppsw/er/er.hpp"
+
+#if (RCPPSW_ER == RCPPSW_ER_ALL)
 #include <log4cxx/consoleappender.h>
 #include <log4cxx/fileappender.h>
 #include <log4cxx/logger.h>
 #include <log4cxx/ndc.h>
 #include <log4cxx/patternlayout.h>
 #include <log4cxx/xml/domconfigurator.h>
-
-#include <iostream>
 #endif
 
-#include <cassert>
-#include <string>
 
 #include "rcppsw/rcppsw.hpp"
+#include "rcppsw/er/macros.hpp"
 
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#if (LIBRA_ER == LIBRA_ER_NONE)
+#if (RCPPSW_ER == RCPPSW_ER_NONE)
 
-#define ER_FATAL(...)
-#define ER_ERR(...)
-#define ER_WARN(...)
-#define ER_INFO(...)
-#define ER_DEBUG(...)
-#define ER_TRACE(...)
-#define ER_REPORT(...)
-#define ER_CHECKI(...)
-#define ER_CHECKW(...)
-#define ER_CHECKD(...)
-
-/*
- * Don't define the macro to be nothing, as that can leave tons of "unused
- * variable" warnings in the code for variables which are only used in
- * asserts. The sizeof() trick here does *NOT* actually evaluate the
- * condition--only the size of whatever it returns. The variables are "used",
- * making the compiler happy, but ultimately removed by the optimizer.
- */
-#define ER_ASSERT(cond, msg, ...) \
-  do {                            \
-    (void)sizeof((cond));         \
-  } while (0)
-#define ER_FATAL_SENTINEL(msg, ...)
-
-#define ER_CLIENT_INIT(name) \
-  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>()
-
+#define ER_CLIENT_INIT(name) rer::client<typename std::remove_reference<decltype(*this)>::type>()
 #define ER_LOGGING_INIT(fname)
 #define ER_LOGFILE_SET(logger, fname)
 #define ER_NDC_PUSH(s)
 #define ER_NDC_POP(...)
 #define ER_ENV_VERIFY(...)
 
-#elif (LIBRA_ER == LIBRA_ER_FATAL)
-/*
- * FATAL event reporting can be enabled using log4cxx, which has much higher
- * overhead than just printf(), but also much better contextual information and
- * controllability without recompilation. However, it can also be useful to be
- * able to *JUST* see what fatal events have happened/asserts have failed in
- * multithreaded contexts where the overhead of log4cxx will make possible race
- * conditions much less likely to occur.
- */
-#define ER_FATAL(...) \
-  { ER_REPORT(__VA_ARGS__) }
-#define ER_ERR(...)
-#define ER_WARN(...)
-#define ER_INFO(...)
-#define ER_DEBUG(...)
-#define ER_TRACE(...)
-#define ER_REPORT(msg, ...) \
-  { printf(msg "\n", ##__VA_ARGS__); }
-#define ER_CHECKW(...)
-#define ER_CHECKI(...)
-#define ER_CHECKD(...)
+#elif (RCPPSW_ER == RCPPSW_ER_FATAL)
 
-#define ER_CLIENT_INIT(name)
-#define ER_LOGGING_INIT(fname) \
-  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>()
+#define ER_CLIENT_INIT(name) rer::client<typename std::remove_reference<decltype(*this)>::type>()
+#define ER_LOGGING_INIT(fname)
 #define ER_LOGFILE_SET(logger, fname)
 #define ER_NDC_PUSH(s)
 #define ER_NDC_POP(...)
 #define ER_ENV_VERIFY(...)
 
-#elif (LIBRA_ER == LIBRA_ER_ALL)
 
-/**
- * \def ER_CHECKW(cond, msg, ...)
- *
- * Check a boolean condition \a cond in a function. If condition is not true,
- * emit a warning message.
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client. This macro is only available if event reporting
- * is fully enabled.
- */
-#define ER_CHECKW(cond, msg, ...)  \
-  {                                \
-    if (RCSW_UNLIKELY(!(cond))) {  \
-      ER_WARN(msg, ##__VA_ARGS__); \
-    }                              \
-  }
-
-/**
- * \def ER_CHECKI(cond, msg, ...)
- *
- * Check a boolean condition \a cond in a function. If condition IS true,
- * emit an informational message.
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client. This macro is only available if event reporting
- * is fully enabled.
- */
-#define ER_CHECKI(cond, msg, ...)  \
-  {                                \
-    if (RCSW_LIKELY((cond))) {     \
-      ER_INFO(msg, ##__VA_ARGS__); \
-    }                              \
-  }
-
-/**
- * \def ER_CHECKD(cond, msg, ...)
- *
- * Check a boolean condition \a cond in a function. If condition IS true,
- * emit a debug message.
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client. This macro is only available if event reporting
- * is fully enabled.
- */
-#define ER_CHECKD(cond, msg, ...)   \
-  {                                 \
-    if (RCSW_LIKELY((cond))) {      \
-      ER_DEBUG(msg, ##__VA_ARGS__); \
-    }                               \
-  }
-
-#endif
-
-#if (LIBRA_ER >= LIBRA_ER_FATAL)
-
-/**
- * \def ER_FATAL_SENTINEL(msg,...)
- *
- * Mark a place in the code as being universally bad, like really really
- * bad. Fatally bad. If execution ever reaches this spot stop the program after
- * reporting the specified message.
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client.
- */
-#define ER_FATAL_SENTINEL(msg, ...) \
-  {                                 \
-    ER_FATAL(msg, ##__VA_ARGS__);   \
-    abort();                        \
-  }
-
-/**
- * \def ER_ASSERT(cond, msg, ...)
- *
- * Check a boolean condition \a cond in a function, halting the program if the
- * condition is not true. Like assert(), but allows for an additional custom
- * msg to be logged.
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client.
- */
-#define ER_ASSERT(cond, msg, ...) \
-  if (RCSW_UNLIKELY(!(cond))) {   \
-    ER_FATAL(msg, ##__VA_ARGS__); \
-    assert(cond);                 \
-  }
-
-#endif /* LIBRA_ER >= LIBRA_ER_FATAL */
-
-#if (LIBRA_ER >= LIBRA_ER_ALL)
-
-/**
- * \def ER_REPORT(lvl, msg, ...)
- *
- * Define a statement reporting the occurrence of an event with the specified
- * level. \a msg is the format string, and \a ... is the variadic argument list
- * (just like printf()).
- *
- * This macro is only available if event reporting is fully enabled.
- */
-#define ER_REPORT(lvl, logger, msg, ...)                                  \
-  {                                                                       \
-    char _str[LIBRA_ER_MSGLEN_MAX];                                       \
-    snprintf(static_cast<char*>(_str), sizeof(_str), msg, ##__VA_ARGS__); \
-    LOG4CXX_##lvl(logger, _str);                                          \
-  }
-
-/**
- * \def ER_FATAL(...)
- *
- * Report a FATAL message.
- */
-#define ER_FATAL(...)                                                            \
-  {                                                                              \
-    auto logger = rcppsw::er::client<typename std::remove_cv<                    \
-        typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
-    if (logger->isFatalEnabled()) {                                              \
-      ER_REPORT(FATAL, logger, __VA_ARGS__)                                      \
-    }                                                                            \
-  }
-
-/**
- * \def ER_ERR(...)
- *
- * Report a non-FATAL ERROR message.
- */
-#define ER_ERR(...)                                                              \
-  {                                                                              \
-    auto logger = rcppsw::er::client<typename std::remove_cv<                    \
-        typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
-    if (logger->isErrorEnabled()) {                                              \
-      ER_REPORT(ERROR, logger, __VA_ARGS__)                                      \
-    }                                                                            \
-  }
-
-/**
- * \def ER_WARN(...)
- *
- * Report a WARNING message (duh).
- */
-#define ER_WARN(...)                                                             \
-  {                                                                              \
-    auto logger = rcppsw::er::client<typename std::remove_cv<                    \
-        typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
-    if (logger->isWarnEnabled()) {                                               \
-      ER_REPORT(WARN, logger, __VA_ARGS__)                                       \
-    }                                                                            \
-  }
-
-/**
- * \def ER_INFON(...)
- *
- * Report an INFOrmational message.
- */
-#define ER_INFO(...)                                                             \
-  {                                                                              \
-    auto logger = rcppsw::er::client<typename std::remove_cv<                    \
-        typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
-    if (logger->isInfoEnabled()) {                                               \
-      ER_REPORT(INFO, logger, __VA_ARGS__)                                       \
-    }                                                                            \
-  }
-
-/**
- * \def ER_DEBUG(...)
- *
- * Report a DEBUG message.
- */
-#define ER_DEBUG(...)                                                            \
-  {                                                                              \
-    auto logger = rcppsw::er::client<typename std::remove_cv<                    \
-        typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
-    if (logger->isDebugEnabled()) {                                              \
-      ER_REPORT(DEBUG, logger, __VA_ARGS__)                                      \
-    }                                                                            \
-  }
-
-/**
- * \def ER_TRACE(...)
- *
- * Report a TRACE message.
- */
-#define ER_TRACE(...)                                                            \
-  {                                                                              \
-    auto logger = rcppsw::er::client<typename std::remove_cv<                    \
-        typename std::remove_reference<decltype(*this)>::type>::type>::logger(); \
-    if (logger->isTraceEnabled()) {                                              \
-      ER_REPORT(TRACE, logger, __VA_ARGS__)                                      \
-    }                                                                            \
-  }
+#elif (RCPPSW_ER == RCPPSW_ER_ALL)
 
 /**
  * \def ER_CLIENT_INIT(name)
@@ -325,7 +72,7 @@
  * than to have to try do the casting every single time).
  */
 #define ER_CLIENT_INIT(name) \
-  rcppsw::er::client<typename std::remove_reference<decltype(*this)>::type>(name)
+  rcppsw::er::client<typename std::remove_reference_t<decltype(*this)>>(name)
 
 /**
  * \def ER_LOGGING_INIT(fname)
@@ -334,7 +81,7 @@
  */
 #define ER_LOGGING_INIT(fname) \
   rcppsw::er::client<          \
-      typename std::remove_reference<decltype(*this)>::type>::logging_init(fname)
+      typename std::remove_reference_t<decltype(*this)>>::logging_init(fname)
 
 /**
  * \def ER_LOGFILE_SET(logger, fname)
@@ -343,7 +90,7 @@
  */
 #define ER_LOGFILE_SET(logger, fname)                                             \
   rcppsw::er::client<                                                             \
-      typename std::remove_reference<decltype(*this)>::type>::logfile_set(logger, \
+      typename std::remove_reference_t<decltype(*this)>>::logfile_set(logger, \
                                                                           fname)
 
 /**
@@ -353,7 +100,7 @@
  */
 #define ER_NDC_PUSH(s) \
   rcppsw::er::client<  \
-      typename std::remove_reference<decltype(*this)>::type>::push_ndc(s)
+      typename std::remove_reference_t<decltype(*this)>>::push_ndc(s)
 
 /**
  * \def ER_NDC_POP()
@@ -362,7 +109,7 @@
  */
 #define ER_NDC_POP(...) \
   rcppsw::er::client<   \
-      typename std::remove_reference<decltype(*this)>::type>::pop_ndc()
+      typename std::remove_reference_t<decltype(*this)>>::pop_ndc()
 
 /**
  * \def ER_ENV_VERIFY()
@@ -372,45 +119,9 @@
  */
 #define ER_ENV_VERIFY(...) \
   rcppsw::er::client<      \
-      typename std::remove_reference<decltype(*this)>::type>::env_verify()
+      typename std::remove_reference_t<decltype(*this)>>::env_verify()
 
-#endif /* LIBRA_ER >= LIBRA_ER_ALL */
-
-/**
- * \def ER_CHECK(cond, msg, ...)
- *
- * Check a boolean condition \a cond in a function. If condition is not true, go
- * to the error/bailout section for function (you must have a label called \c
- * error in your function) after reporting the event.
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client. This macro is only available if event reporting
- * is fully enabled.
- */
-#define ER_CHECK(cond, msg, ...)  \
-  {                               \
-    if (RCSW_UNLIKELY(!(cond))) { \
-      ER_ERR(msg, ##__VA_ARGS__); \
-      goto error;                 \
-    }                             \
-  }
-
-/**
- * \def ER_SENTINEL(msg,...)
- *
- * Mark a place in the code as being universally bad. If execution ever reaches
- * this spot, report the event and error out (you must have a label called \c
- * error in your function).
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client. This macro is only available if event
- * reporting is fully enabled.
- */
-#define ER_SENTINEL(msg, ...)   \
-  {                             \
-    ER_ERR(msg, ##__VA_ARGS__); \
-    goto error;                 \
-  }
+#endif
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -429,10 +140,10 @@ NS_START(rcppsw, er);
  * then this class will mostly compile away to nothing, and most member
  * functions will not be defined.
  */
+#if (RCPPSW_ER == RCPPSW_ER_ALL)
 template <typename T>
 class client {
  public:
-#if (LIBRA_ER >= LIBRA_ER_ALL)
   /**
    * \brief Initialize logging by specifying the path to the log4cxx
    * configuration file.
@@ -488,6 +199,11 @@ class client {
   explicit client(const std::string& name)
       : m_logger(log4cxx::Logger::getLogger(name)) {}
 
+  virtual ~client(void) = default;
+
+  client(const client&) = default;
+  client& operator=(const client&) = default;
+
   /**
    * \brief Set the logfile of the current logger. Not idempotent.
    */
@@ -523,40 +239,32 @@ class client {
       std::exit(EXIT_FAILURE);
     }
   }
-#else
-  client(void) = default;
-  void logfile_set(const std::string&) {}
-
-  std::string logger_name(void) const { return ""; }
-  void push_ndc(const std::string&) {}
-  void pop_ndc(void) {}
-  bool env_verify(void) { return true; }
-
-#endif /* LIBRA_ER >= LIBRA_ER_ALL */
-
-  virtual ~client(void) = default;
-  client(const client&) = default;
-  client& operator=(const client&) = default;
 
  private:
   /* clang-format off */
-  static const char         kConsoleLayout[];
-  static const char         kFileLayout[];
+  static const std::string kConsoleLayout;
+  static const std::string kFileLayout;
 
-  static bool               m_initialized;
+  static bool              m_initialized;
 
-#if(LIBRA_ER >= LIBRA_ER_ALL)
   log4cxx::LoggerPtr        m_logger{};
-#endif  /* LIBRA_ER >= LIBRA_ER_ALL */
   /* clang-format on */
 };
 
 template <typename T>
 bool client<T>::m_initialized = false;
 template <typename T>
-const char client<T>::kConsoleLayout[] = "%x [%-5p] %c - %m%n";
+const std::string client<T>::kConsoleLayout = "%x [%-5p] %c - %m%n";
 template <typename T>
-const char client<T>::kFileLayout[] = "%x [%-5p] %c %l - %m%n";
+const std::string client<T>::kFileLayout = "%x [%-5p] %c %l - %m%n";
+
+#else
+template<typename T>
+class client {
+ public:
+  virtual ~client(void) = default;
+};
+#endif
 
 NS_END(rcppsw, er);
 

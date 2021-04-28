@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <string>
+#include <array>
 
 #include "rcppsw/rcppsw.hpp"
 
@@ -86,10 +87,7 @@ class color {
   void alpha(uint8_t alpha) { m_channels[3] = alpha; }
 
   bool operator==(const color& c_color2) const {
-    return m_channels[0] == c_color2.m_channels[0] &&
-           m_channels[1] == c_color2.m_channels[1] &&
-           m_channels[2] == c_color2.m_channels[2] &&
-           m_channels[3] == c_color2.m_channels[3];
+    return m_channels == c_color2.m_channels;
   }
 
   bool operator!=(const color& c_color2) const {
@@ -100,7 +98,7 @@ class color {
 
  private:
   /* clang-format off */
-  uint8_t m_channels[4];
+  std::array<uint8_t, 4> m_channels;
   /* clang-format on */
 };
 
