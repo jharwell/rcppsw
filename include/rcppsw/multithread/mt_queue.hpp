@@ -53,8 +53,8 @@ class mt_queue : public rpdecorator::decorator<std::deque<T>> {
 
   mt_queue(void) = default;
 
-  RCPPSW_DECORATE_FUNC_TEMPLATE(T, begin, const);
-  RCPPSW_DECORATE_FUNC_TEMPLATE(T, end, const);
+  RCPPSW_DECORATE_DECLDEF_TEMPLATE(T, begin, const);
+  RCPPSW_DECORATE_DECLDEF_TEMPLATE(T, end, const);
 
   /**
    * \brief Add data to the queue and notify others
@@ -83,10 +83,10 @@ class mt_queue : public rpdecorator::decorator<std::deque<T>> {
     return result;
   }
 
-  RCPPSW_DECORATE_FUNC_TEMPLATE(T, size, const);
-  RCPPSW_DECORATE_FUNC_TEMPLATE(T, front, const);
-  RCPPSW_DECORATE_FUNC_TEMPLATE(T, clear, const);
-  RCPPSW_DECORATE_FUNC_TEMPLATE(T, operator[], const);
+  RCPPSW_DECORATE_DECLDEF_TEMPLATE(T, size, const);
+  RCPPSW_DECORATE_DECLDEF_TEMPLATE(T, front, const);
+  RCPPSW_DECORATE_DECLDEF_TEMPLATE(T, clear, const);
+  RCPPSW_DECORATE_DECLDEF_TEMPLATE(T, operator[], const);
 
  private:
   /* clang-format off */

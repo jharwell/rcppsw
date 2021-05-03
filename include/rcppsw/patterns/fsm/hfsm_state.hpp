@@ -76,7 +76,7 @@ class hfsm_state_action0 : public hfsm_state {
   ~hfsm_state_action0(void) override = default;
 
   int invoke_state_action(base_fsm* fsm,
-                          RCSW_UNUSED event_data*) const override {
+                          RCPPSW_UNUSED event_data*) const override {
     auto* derived_fsm = static_cast<FSM*>(fsm);
     return (derived_fsm->*Handler)();
   }

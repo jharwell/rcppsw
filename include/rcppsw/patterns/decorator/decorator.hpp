@@ -45,18 +45,18 @@ NS_START(rcppsw, patterns, decorator);
  * Does not work for templated member functions in decorated class. Does not
  * work to wrap functions in the decorated class which are virtual.
  */
-#define RCPPSW_DECORATE_FUNC(Func, ...) RCPPSW_WRAP_DECLDEF(Func,          \
+#define RCPPSW_DECORATE_DECLDEF(Func, ...) RCPPSW_WRAP_DECLDEF(Func,          \
                                                             decoratee(), \
                                                             __VA_ARGS__)
 
 /**
- * \def RCPPSW_DECORATE_FUNC_TEMPLATE(Type, Func)
+ * \def RCPPSW_DECORATE_DECLDEF_TEMPLATE(Type, Func)
  *
  * Wraps the declaration/implementation of the decoratee \p Func which is
  * templated on \p Type. For decoratee types that are themselves templated
  * types.
  */
-#define RCPPSW_DECORATE_FUNC_TEMPLATE(Type, Func, ...)                  \
+#define RCPPSW_DECORATE_DECLDEF_TEMPLATE(Type, Func, ...)               \
   template<typename... Args>                                            \
   auto Func(Args&&... args) __VA_ARGS__ ->                              \
       decltype(std::declval<decltype(rpdecorator::decorator<Type>::decoratee())>().Func(args...)) { \

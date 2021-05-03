@@ -39,7 +39,7 @@ exist in Boost, or that build on what boost provides. Includes such things as:
 
    setup/build.rst
    contributing/index.rst
-   api/index.rst
+   _api/api.rst
 
 Directory Layout
 ----------------

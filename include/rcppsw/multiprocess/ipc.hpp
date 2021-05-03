@@ -56,7 +56,7 @@ namespace bip = boost::interprocess;
  * Template Definitions
  ******************************************************************************/
 /**
- * \struct ipc_allocator
+ * \typedef ipc_allocator
  * \ingroup multiprocess
  *
  * \brief An allocator for shared memory for stuff allocated to be shared across
@@ -67,7 +67,7 @@ using ipc_allocator =
     bip::allocator<T, bip::managed_shared_memory::segment_manager>;
 
 /**
- * \struct ipc_vector
+ * \typedef ipc_vector
  * \ingroup multiprocess
  *
  * \brief A std::vector capable of being shared across processes.
@@ -76,7 +76,7 @@ template <typename T>
 using ipc_vector = std::vector<T, ipc_allocator<T>>;
 
 /**
- * \struct ipc_list
+ * \typedef ipc_list
  * \ingroup multiprocess
  *
  * \brief A std::list capable of being shared across processes.
@@ -85,7 +85,7 @@ template <typename T>
 using ipc_list = bip::list<T, ipc_allocator<T>>;
 
 /**
- * \struct ipc_map
+ * \typedef ipc_map
  * \ingroup multiprocess
  *
  * \brief A std::map capable of being shared across processes.
@@ -98,7 +98,7 @@ using ipc_map = bip::
  * Type Definitions
  ******************************************************************************/
 /**
- * \struct ipc_string
+ * \typedef ipc_string
  * \ingroup multiprocess
  *
  * \brief A string capable of being shared across processes.

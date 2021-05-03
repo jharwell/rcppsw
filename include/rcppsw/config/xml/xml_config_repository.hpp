@@ -63,7 +63,7 @@ class xml_config_repository : public er::client<xml_config_repository> {
    * \brief Call the \ref xml_config_parser::parse() function on all parsers
    * in the repository, passing all parsers the same XML node.
    */
-  void parse_all(const ticpp::Element& node) RCSW_COLD;
+  void parse_all(const ticpp::Element& node) RCPPSW_COLD;
 
   /**
    * \brief Call the \ref xml_config_parser::validate() function on all parsers
@@ -73,7 +73,7 @@ class xml_config_repository : public er::client<xml_config_repository> {
    * \return \c TRUE iff ALL parsers report valid configuration, and \c FALSE
    * otherwise.
    */
-  bool validate_all(void) RCSW_COLD;
+  bool validate_all(void) RCPPSW_COLD;
 
   /**
    * \brief Get the parsed configuration associated with the parser of the
@@ -84,7 +84,7 @@ class xml_config_repository : public er::client<xml_config_repository> {
    * of configuration was requested.
    */
   template <typename T>
-  RCSW_COLD const T* config_get(void) const {
+  RCPPSW_COLD const T* config_get(void) const {
     std::type_index i(typeid(T));
     auto it = m_parsers.find(m_config_types.find(i)->second);
     if (m_parsers.end() != it) {
@@ -100,7 +100,7 @@ class xml_config_repository : public er::client<xml_config_repository> {
    * \return The parsed configuration (non-owning).
    */
   template <typename T>
-  RCSW_COLD const T* config_get(const std::string& name) const {
+  RCPPSW_COLD const T* config_get(const std::string& name) const {
     auto it = m_parsers.find(name);
     if (m_parsers.end() != it) {
       return it->second->config_get<T>();
@@ -117,7 +117,7 @@ class xml_config_repository : public er::client<xml_config_repository> {
    * parser was registered.
    */
   template <typename T>
-  RCSW_COLD T* parser_find(const std::string& name) {
+  RCPPSW_COLD T* parser_find(const std::string& name) {
     auto it = m_parsers.find(name);
     if (m_parsers.end() != it) {
       return static_cast<T*>(it->second);
@@ -134,7 +134,7 @@ class xml_config_repository : public er::client<xml_config_repository> {
    *           parse() is called on it.
    */
   template <typename T, typename S>
-  RCSW_COLD void parser_register(const std::string& name) {
+  RCPPSW_COLD void parser_register(const std::string& name) {
     m_factory.register_type<T>(name);
     m_parsers[name] = m_factory.create(name).get();
     std::type_index i(typeid(S));
@@ -150,7 +150,7 @@ class xml_config_repository : public er::client<xml_config_repository> {
    *           parse() is called on it.
    */
   template <typename T, typename S>
-  RCSW_COLD void parser_unregister(const std::string& name) {
+  RCPPSW_COLD void parser_unregister(const std::string& name) {
     m_factory.unregister_type<T>(name);
 
     std::type_index i(typeid(S));
@@ -170,7 +170,7 @@ class xml_config_repository : public er::client<xml_config_repository> {
    * \tparam T The parser type.
    */
   template <typename T>
-  RCSW_COLD void parser_register(const std::string& name) {
+  RCPPSW_COLD void parser_register(const std::string& name) {
     m_factory.register_type<T>(name);
     m_parsers[name] = m_factory.create(name).get();
   }

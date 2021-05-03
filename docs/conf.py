@@ -20,6 +20,8 @@
 import os
 import sys
 import subprocess
+import textwrap
+
 sys.path.insert(0, os.path.abspath('..'))
 
 
@@ -38,6 +40,7 @@ extensions = ['sphinx.ext.intersphinx',
               'sphinx.ext.mathjax',
               'sphinx.ext.ifconfig',
               'breathe',
+              'exhale',
               'sphinx_rtd_theme']
 
 # Add any paths that contain templates here, relative to this directory.
@@ -113,10 +116,27 @@ breathe_projects_source = {'rcppsw': ('../include/rcppsw', get_subtree(''))}
 breathe_default_project = "rcppsw"
 breathe_default_members = ('members',)
 
-for k in project_keys:
-    breathe_projects.update({k: "../build/docs/rcppsw/xml"})
-    breathe_projects_source.update({k: ('../include/rcppsw/' + k, get_subtree(k))})
+# for k in project_keys:
+#     breathe_projects.update({k: "../build/docs/rcppsw/xml"})
+#     breathe_projects_source.update({k: ('../include/rcppsw/' + k, get_subtree(k))})
 
+exhale_args = {
+    "containmentFolder": "_api",
+    "rootFileName": "api.rst",
+    "rootFileTitle": "RCPPSW API",
+    "afterTitleDescription": textwrap.dedent('''
+       .. note::
+
+          Some functions declared+defined within classes using variadic macros might not be
+          included, due to limits in the doxygen+breathe+exhale toolchain. Such functions are
+          usually found in classes which wrap or decorate large portions of a base class
+          functionality/member variable functionality (e.g., Poisson Queue).
+    '''),
+    "doxygenStripFromPath": "..",
+    "verboseBuild": False,
+    'exhaleExecutesDoxygen': False,
+    "createTreeView": True
+}
 # -- Options for HTML output ----------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for

@@ -78,8 +78,8 @@ class base_grid2D {
 
   T& access(const math::vector2z& c) { return access(c.x(), c.y()); }
 
-  RCSW_PURE T& operator[](const math::vector2z& c) { return access(c); }
-  RCSW_PURE const T& operator[](const math::vector2z& c) const {
+  RCPPSW_PURE T& operator[](const math::vector2z& c) { return access(c); }
+  RCPPSW_PURE const T& operator[](const math::vector2z& c) const {
     return access(c);
   }
 

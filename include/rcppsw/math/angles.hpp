@@ -41,12 +41,12 @@ NS_START(rcppsw, math);
 /**
  * \brief Converts \ref radians to \ref degrees,
  */
-degrees to_degrees(const radians& r) RCSW_PURE;
+degrees to_degrees(const radians& r) RCPPSW_PURE;
 
 /**
  * \brief Converts \ref degrees to \ref radians.
  */
-radians to_radians(const degrees& d) RCSW_PURE;
+radians to_radians(const degrees& d) RCPPSW_PURE;
 
 /**
  * \brief Calculates the normalized difference between the given angles.

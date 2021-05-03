@@ -173,7 +173,7 @@ struct no_such_trait {
 };
 
 /**
- * \struct is_detected
+ * \typedef is_detected
  * \ingroup mpl
  *
  * \brief Type trait to detect whether a function taking the specified \p Args
@@ -190,7 +190,7 @@ using is_detected =
     typename detail::detector<no_such_trait, void, TFuncDecltype, Args...>::value;
 
 /**
- * \struct detected_t
+ * \typedef detected_t
  * \ingroup mpl
  *
  * \brief Same as \ref is_detected, but will return the decltype itself, rather
@@ -201,7 +201,7 @@ using detected_t =
     typename detail::detector<no_such_trait, void, TFuncDecltype, Args...>::type;
 
 /**
- * \struct detected_or
+ * \typedef detected_or
  * \ingroup mpl
  *
  * \brief Same as \ref is_detected, but allows for a user specified type \p

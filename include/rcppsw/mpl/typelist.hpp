@@ -64,7 +64,7 @@ NS_START(rcppsw, mpl);
  * Trait Detection Templates
  ******************************************************************************/
 /**
- * \struct typelist
+ * \typedef typelist
  * \ingroup mpl
  *
  * \brief A list of types using boost::mpl::vectors, which enables all sorts of
@@ -104,7 +104,7 @@ struct typelist_wrap_into {
 };
 
 /**
- * \struct typelist_wrap_apply
+ * \typedef typelist_wrap_apply
  * \ingroup mpl
  *
  * \brief Apply a functor to each type in the \ref typelist. The functor can

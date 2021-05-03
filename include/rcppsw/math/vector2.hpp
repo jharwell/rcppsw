@@ -106,10 +106,10 @@ class vector2 {
   vector2(const T& length, const radians& angle) noexcept
       : m_x(std::cos(angle.v()) * length), m_y(std::sin(angle.v()) * length) {}
 
-  T x(void) RCSW_CHECK_RET { return m_x; }
-  T y(void) RCSW_CHECK_RET { return m_y; }
-  const T& x(void) const RCSW_CHECK_RET { return m_x; }
-  const T& y(void) const RCSW_CHECK_RET { return m_y; }
+  RCPPSW_NODISCARD T x(void)  { return m_x; }
+  RCPPSW_NODISCARD T y(void)  { return m_y; }
+  RCPPSW_NODISCARD const T& x(void) const { return m_x; }
+  RCPPSW_NODISCARD const T& y(void) const { return m_y; }
   void x(const T& x) { m_x = x; }
   void y(const T& y) { m_y = y; }
 
@@ -144,12 +144,12 @@ class vector2 {
   /**
    * \brief Returns the square length of this vector.
    */
-  T square_length(void) const RCSW_CHECK_RET { return (m_x * m_x) + (m_y * m_y); }
+  RCPPSW_NODISCARD T square_length(void) const { return (m_x * m_x) + (m_y * m_y); }
 
   /**
    * Returns the length of this vector.
    */
-  double length(void) const RCSW_CHECK_RET { return std::sqrt(square_length()); }
+  RCPPSW_NODISCARD double length(void) const { return std::sqrt(square_length()); }
 
   /**
    * \brief Normalizes this vector.

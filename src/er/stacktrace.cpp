@@ -80,21 +80,24 @@ void terminate_handler(void) {
 } /* terminate_handler() */
 
 void stacktrace_to_file(int pid) {
-  std::string fname = "./backtrace-" + rcppsw::to_string(pid);
-  std::ofstream file;
-  file.open(fname);
-  file << "Backtrace:" << std::endl;
+  char fname[50];
+  snprintf(fname, sizeof(fname), "backtrace-%d", pid);
 
-  auto st = stacktrace::stacktrace();
-  for (size_t i = 0; i < st.size(); ++i) {
-    file << "#" << i << " ";
-    file << st[i].name() << " at ";
-    file << st[i].source_file() << ":";
-    file << st[i].source_line();
-    file << std::endl;
-  } /* for(i..) */
+  boost::stacktrace::safe_dump_to(fname);
+  /* std::ofstream file; */
+  /* file.open(fname); */
+  /* file << "Backtrace:" << std::endl; */
 
-  file.close();
+  /* auto st = stacktrace::stacktrace(); */
+  /* for (size_t i = 0; i < st.size(); ++i) { */
+  /*   file << "#" << i << " "; */
+  /*   file << st[i].name() << " at "; */
+  /*   file << st[i].source_file() << ":"; */
+  /*   file << st[i].source_line(); */
+  /*   file << std::endl; */
+  /* } /\* for(i..) *\/ */
+
+  /* file.close(); */
 } /* stacktrace_to_file() */
 
 NS_END(er, rcppsw);

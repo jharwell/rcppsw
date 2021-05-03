@@ -66,11 +66,11 @@ class nc_cluster {
    */
   template<typename U = T,
            RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
-  RCSW_PURE bool converged(void) const { return (m_prev_center == m_center); }
+  RCPPSW_PURE bool converged(void) const { return (m_prev_center == m_center); }
 
   template<typename U = T,
            RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
-  RCSW_PURE bool converged(int = 0) const {
+  RCPPSW_PURE bool converged(int = 0) const {
     return std::fabs(m_prev_center - m_center) <= std::numeric_limits<U>::epsilon();
   }
 

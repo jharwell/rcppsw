@@ -113,13 +113,13 @@ class vector3 {
    */
   explicit vector3<T>(const vector2<T>& v) : vector3(v.x(), v.y(), 0.0) {}
 
-  T x(void) RCSW_CHECK_RET { return m_x; }
-  T y(void) RCSW_CHECK_RET { return m_y; }
-  T z(void) RCSW_CHECK_RET { return m_z; }
+  RCPPSW_NODISCARD T x(void) { return m_x; }
+  RCPPSW_NODISCARD T y(void) { return m_y; }
+  RCPPSW_NODISCARD T z(void) { return m_z; }
 
-  const T& x(void) const RCSW_CHECK_RET { return m_x; }
-  const T& y(void) const RCSW_CHECK_RET { return m_y; }
-  const T& z(void) const RCSW_CHECK_RET { return m_z; }
+  RCPPSW_NODISCARD const T& x(void) const { return m_x; }
+  RCPPSW_NODISCARD const T& y(void) const { return m_y; }
+  RCPPSW_NODISCARD const T& z(void) const { return m_z; }
 
   void x(const T& x) { m_x = x; }
   void y(const T& y) { m_y = y; }
@@ -147,14 +147,14 @@ class vector3 {
   /**
    * \brief Returns the square length of this vector.
    */
-  T square_length(void) const RCSW_CHECK_RET {
+  RCPPSW_NODISCARD T square_length(void) const {
     return (m_x * m_x) + (m_y * m_y) + (m_z * m_z);
   }
 
   /**
    * Returns the length of this vector.
    */
-  double length(void) const RCSW_CHECK_RET { return std::sqrt(square_length()); }
+  RCPPSW_NODISCARD double length(void) const { return std::sqrt(square_length()); }
 
   /**
    * \brief Normalizes this vector.

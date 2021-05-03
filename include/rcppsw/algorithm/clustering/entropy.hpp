@@ -197,7 +197,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
     for (size_t i = 0; i < clusters->size(); ++i) {
       ER_TRACE("cluster%zu: n_members=%zu", i, (*clusters)[i].size());
       std::unordered_set<size_t>& cluster_i = (*clusters)[i];
-      auto comp = [&](const auto& clust) RCSW_PURE {
+      auto comp = [&](const auto& clust) RCPPSW_PURE {
         /*
          * Duplicates are defined as two of the unordered membership sets
          * containing the same points AND the sets not being in the same index

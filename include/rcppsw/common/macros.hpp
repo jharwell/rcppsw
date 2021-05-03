@@ -180,7 +180,7 @@
  * for a class).
  */
 #define RCPPSW_WRAP_DECL_OVERRIDE(Ret, Func, ...) \
-  Ret Func(void) __VA_ARGS__ override RCSW_PURE
+  Ret Func(void) __VA_ARGS__ override RCPPSW_PURE
 
 /**
  * \def RCPPSW_WRAP_DEF_OVERRIDE(Ret, Func, ...)
@@ -227,7 +227,15 @@
 #define RCPPSW_PURE RCSW_PURE
 #define RCPPSW_DEAD RCSW_DEAD
 #define RCPPSW_UNUSED RCSW_UNUSED
-#define RCPPSW_CHECK_RET RCSW_CHECK_RET
+
+/**
+ * \def RCPPSW_NODISCARD
+ *
+ * Mark a function result as no-discard, so that a compiler warning is issued if
+ * this happens.
+ */
+#define RCPPSW_NODISCARD [[nodiscard]]
+
 #define RCPPSW_ATTR(...) RCSW_ATTR(__VA_ARGS__)
 #define RCPPSW_CHECK(cond) RCSW_CHECK(cond)
 #define RCPPSW_IS_BETWEEN(n, lb, ub) RCSW_IS_BETWEEN(n, lb, ub)

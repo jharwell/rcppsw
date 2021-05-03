@@ -69,17 +69,17 @@ class range final : public er::client<range<T>> {
   /**
    * \brief Get the lower bound of the range.
    */
-  T lb(void) const RCSW_CHECK_RET { return m_lb; }
+  RCPPSW_NODISCARD T lb(void) const { return m_lb; }
 
   /**
    * \brief Get the upper bound of the range.
    */
-  T ub(void) const RCSW_CHECK_RET { return m_ub; }
+  RCPPSW_NODISCARD T ub(void) const { return m_ub; }
 
   /**
    * \brief Get the size of the range (max - max).
    */
-  T span(void) const RCSW_CHECK_RET { return m_span; }
+  RCPPSW_NODISCARD T span(void) const { return m_span; }
 
   /**
    * \brief Set the range lower bound. It must be less than the current \ref
@@ -175,7 +175,7 @@ class range final : public er::client<range<T>> {
    *
    * \return The wrapped value.
    */
-  RCSW_PURE T wrap_value(T value) const RCSW_CHECK_RET {
+  RCPPSW_NODISCARD RCPPSW_PURE T wrap_value(T value) const {
     ER_ASSERT(m_initialized, "Range not initialized");
 
     while (value > m_ub) {

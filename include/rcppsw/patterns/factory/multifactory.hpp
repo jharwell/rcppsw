@@ -95,11 +95,14 @@ NS_END(detail);
 
 
 /**
- * \class releasing_multifactory
  * \ingroup patterns factory
  *
  * \brief Specialization of the \ref multifactory class for releasing ownership
  * of created objects via std::unique_ptr.
+ *
+ * \tparam TBase The base class that all factory-constructed types must derive
+ *               from.
+ * \tparam Args Arguments common to ALL factory-constructible types.
  */
 template<typename TBase, typename...Args>
 class releasing_multifactory : public detail::multifactory<detail::factory_releasing_type,
@@ -110,11 +113,14 @@ class releasing_multifactory : public detail::multifactory<detail::factory_relea
 };
 
 /**
- * \class sharing_multifactory
  * \ingroup patterns factory
  *
  * \brief Specialization of the \ref multifactory class for sharing ownership of
  * created objects via std::shared_ptr.
+ *
+ * \tparam TBase The base class that all factory-constructed types must derive
+ *               from.
+ * \tparam Args Arguments common to ALL factory-constructible types.
  */
 template<typename TBase, typename...Args>
 class sharing_multifactory : public detail::multifactory<detail::factory_sharing_type,

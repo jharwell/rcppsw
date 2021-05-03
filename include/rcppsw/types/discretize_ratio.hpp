@@ -32,10 +32,10 @@
 NS_START(rcppsw, types);
 
 /*******************************************************************************
- * Class Definitions
+ * Type Definitions
  ******************************************************************************/
 /**
- * \class discretize_ratio
+ * \typedef discretize_ratio
  * \ingroup types
  *
  * \brief Specifies the ratio of discretized space to real space, and therefore

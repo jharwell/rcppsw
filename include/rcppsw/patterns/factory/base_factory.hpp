@@ -82,11 +82,10 @@ class base_factory {
  public:
   virtual ~base_factory(void) = default;
 
+  /* clang-format off */
   template<typename TFactoryType = TType,
-           RCPPSW_SFINAE_DECLDEF(std::is_same<TFactoryType,
-                              factory_releasing_type>::value ||
-                              std::is_same<TFactoryType,
-                              factory_sharing_type>::value)>
+           RCPPSW_SFINAE_DECLDEF(is_sharing<TFactoryType>::value || is_releasing<TFactoryType>::value)>
+  /* clang-format on */
   TPointerWrapper<TBase> create(const TKeyType& name, Args... args) {
     auto it = m_workers.find(name);
     if (it != m_workers.end()) {

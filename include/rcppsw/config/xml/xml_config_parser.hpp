@@ -109,7 +109,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
    * covariance with smart pointer return types will work.
    */
   template <typename T>
-  RCSW_COLD const T* config_get(void) const {
+  RCPPSW_COLD const T* config_get(void) const {
     static_assert(std::is_base_of<base_config, T>::value,
                   "Config type to get must be derived from base_config!");
     return static_cast<const T*>(config_get_impl());
@@ -122,7 +122,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
    * If no such node exists, an assertion halts the program.
    */
   ticpp::Element& node_get(const ticpp::Element& node,
-                           const std::string& tag) const RCSW_COLD;
+                           const std::string& tag) const RCPPSW_COLD;
 
   /**
    * \brief Get an attribute inside a node.
@@ -132,7 +132,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
    * \param buf  The result buffer.
    */
   template <typename T>
-  RCSW_COLD void node_attr_get(const ticpp::Element& node,
+  RCPPSW_COLD void node_attr_get(const ticpp::Element& node,
                      const std::string& attr,
                      T& buf) const {
     node.GetAttribute(attr, &buf, true);
@@ -145,7 +145,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
    */
    void node_attr_get(const ticpp::Element& node,
                      const std::string& attr,
-                     bool& buf) const RCSW_COLD;
+                     bool& buf) const RCPPSW_COLD;
 
   /**
    * \brief Get an attribute inside a node, or substitute a default value if the
@@ -159,7 +159,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
   template <typename T,
             typename U = T,
             RCPPSW_SFINAE_DECLDEF(!std::is_same<T, bool>::value)>
-  RCSW_COLD void node_attr_get(const ticpp::Element& node,
+  RCPPSW_COLD void node_attr_get(const ticpp::Element& node,
                      const std::string& attr,
                      T& buf,
                      const T& dflt) const {
@@ -174,7 +174,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
   template <typename T,
             typename U = T,
             RCPPSW_SFINAE_DECLDEF(std::is_same<U, bool>::value)>
-  RCSW_COLD void node_attr_get(const ticpp::Element& node,
+  RCPPSW_COLD void node_attr_get(const ticpp::Element& node,
                      const std::string& attr,
                      T& buf,
                      const T& dflt) const {
@@ -186,7 +186,7 @@ class xml_config_parser : public er::client<xml_config_parser> {
   }
 
 
-  RCSW_COLD bool is_parsed(void) const {
+  RCPPSW_COLD bool is_parsed(void) const {
     return (nullptr != config_get_impl()) ? true : false;
   }
 

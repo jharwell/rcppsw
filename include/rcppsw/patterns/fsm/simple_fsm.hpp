@@ -35,7 +35,7 @@ NS_START(rcppsw, patterns, fsm);
  * Type Definitions
  ******************************************************************************/
 /**
- * \class simple_fsm
+ * \typedef simple_fsm
  * \ingroup patterns fsm
  *
  * \brief Simple non-heirarchical state machine class.

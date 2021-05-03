@@ -93,7 +93,7 @@ class threadable {
    * \param ret If non-NULL, will be filled with the return value of the thread
    * as it exits.
    */
-  RCSW_DEAD void exit(void* ret = nullptr) {
+  RCPPSW_DEAD void exit(void* ret = nullptr) {
     m_thread_run = false;
     if (nullptr == ret) {
       int ret2;

@@ -201,7 +201,7 @@ class base_fsm : public er::client<base_fsm> {
    *
    * \return The row corresponding to the passed in state in the state map.
    */
-  virtual const state_map_row* state_map(RCSW_UNUSED size_t) {
+  virtual const state_map_row* state_map(RCPPSW_UNUSED size_t) {
     return nullptr;
   }
 
@@ -213,7 +213,7 @@ class base_fsm : public er::client<base_fsm> {
    *
    * \return The row corresponding to the passed in state in the state map.
    */
-  virtual const state_map_ex_row* state_map_ex(RCSW_UNUSED size_t) {
+  virtual const state_map_ex_row* state_map_ex(RCPPSW_UNUSED size_t) {
     return nullptr;
   }
 

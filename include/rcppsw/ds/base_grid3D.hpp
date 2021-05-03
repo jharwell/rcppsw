@@ -99,8 +99,8 @@ class base_grid3D {
     return contains(pt.x(), pt.y(), pt.z());
   }
 
-  RCSW_PURE T& operator[](const math::vector3z& c) { return access(c); }
-  RCSW_PURE const T& operator[](const math::vector3z& c) const {
+  RCPPSW_PURE T& operator[](const math::vector3z& c) { return access(c); }
+  RCPPSW_PURE const T& operator[](const math::vector3z& c) const {
     return access(c);
   }
 

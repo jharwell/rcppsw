@@ -102,7 +102,7 @@ class spatial_dist final : public named_type<double, struct spatial_dist_tag>,
 spatial_dist operator*(double lhs, const spatial_dist& rhs);
 spatial_dist operator-(double lhs, const spatial_dist& rhs);
 spatial_dist operator+(double lhs, const spatial_dist& rhs);
-bool operator<=(double lhs, const spatial_dist& rhs) RCSW_PURE;
+bool operator<=(double lhs, const spatial_dist& rhs) RCPPSW_PURE;
 
 NS_END(types, rcppsw);
 
