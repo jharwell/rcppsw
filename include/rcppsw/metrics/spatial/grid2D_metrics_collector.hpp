@@ -72,7 +72,7 @@ class grid2D_metrics_collector : public metrics::base_metrics_collector {
 
   std::list<std::string> csv_header_cols(void) const override {
     std::list<std::string> cols;
-    for (size_t i = 0; i < m_stats.xsize(); ++i) {
+    for (size_t i = 0; i < m_stats.ysize(); ++i) {
       cols.push_back("y" + rcppsw::to_string(i));
     } /* for(i..) */
 
@@ -80,23 +80,22 @@ class grid2D_metrics_collector : public metrics::base_metrics_collector {
   }
 
   boost::optional<std::string> csv_line_build(void) override {
-    if (!(timestep() % interval() == 0)) {
+    if (!(timestep() % interval() == 0UL)) {
       return boost::none;
     }
     std::string line;
-    for (size_t j = 0; j < m_stats.ysize(); ++j) {
-      for (size_t i = 0; i < m_stats.xsize(); ++i) {
+    for (size_t i = 0; i < m_stats.xsize(); ++i) {
+      for (size_t j = 0; j < m_stats.ysize(); ++j) {
         if constexpr(std::is_same<TCellOp, cell_avg>::value) {
             line += csv_entry_domavg(m_stats.access(i, j),
                                      m_total_count,
-                                     (j == m_stats.xsize() - 1));
+                                     (j == m_stats.ysize() - 1));
           } else {
           line += rcppsw::to_string(m_stats.access(i, j)) + separator();
         }
-      } /* for(i..) */
+      } /* for(j..) */
       line += "\n";
-    } /* for(j..) */
-
+    } /* for(i..) */
     return boost::make_optional(line);
   } /* csv_line_build() */
 

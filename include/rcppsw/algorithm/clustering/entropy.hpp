@@ -27,11 +27,11 @@
 #include <limits>
 #include <map>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/algorithm/clustering/cluster.hpp"
 #include "rcsw/utils/time_utils.h"
-#include "rcppsw/algorithm/clustering/entropy_impl.hpp"
+#include "rcppsw/algorithm/clustering/eh_clustering_impl.hpp"
 #include "rcppsw/math/range.hpp"
 #include "rcppsw/math/ientropy.hpp"
 
@@ -44,7 +44,6 @@ NS_START(rcppsw, algorithm, clustering);
  * Class Definitions
  ******************************************************************************/
 /**
- * \class entropy_balch2000
  * \ingroup algorithm clustering
  *
  * \brief Wrapper class for performing clustering using the event horizon model
@@ -69,15 +68,15 @@ NS_START(rcppsw, algorithm, clustering);
 template <typename T>
 class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
  public:
-  using cluster_vector = typename detail::clustering_impl<
+  using cluster_vector = typename base_clustering_impl<
    T,
-   detail::policy::EH>::cluster_vector;
-  using dist_calc_ftype = typename detail::clustering_impl<
+   policy::EH>::cluster_vector;
+  using dist_calc_ftype = typename base_clustering_impl<
     T,
-    detail::policy::EH>::dist_calc_ftype;
+    policy::EH>::dist_calc_ftype;
   using membership_map = std::map<double,
-                                  detail::membership_type<detail::policy::EH>>;
-  using membership_vector = std::vector<detail::membership_type<detail::policy::EH>>;
+                                  membership_type<policy::EH>>;
+  using membership_vector = std::vector<membership_type<policy::EH>>;
 
   /**
    * \param impl The method and policy for clustering.
@@ -86,7 +85,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
    * \param horizon_delta The step size for moving between the min and max
    *                      distance bounds; defines # of overall iterations.
    */
-  entropy_balch2000(std::unique_ptr<detail::entropy_impl<T>> impl,
+  entropy_balch2000(std::unique_ptr<eh_clustering_impl<T>> impl,
                     const math::ranged& horizon,
                     double horizon_delta)
       : ER_CLIENT_INIT("rcppsw.algorithm.clustering.entropy_balch2000"),
@@ -118,17 +117,16 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
     double t_accum = 0.0;
     double e_accum = 0.0;
     double entropy_h_1 = 0.0;
-    uint n_iter = static_cast<uint>((mc_horizon.span() / mc_horizon_delta)) + 1;
+    size_t n_iter = static_cast<size_t>((mc_horizon.span() / mc_horizon_delta)) + 1;
 
-    ER_INFO("Begin n_datapoints=%zu,horizon=%s,delta=%f,n_iter=%u,n_threads=%u",
+    ER_INFO("Begin n_datapoints=%zu,horizon=%s,delta=%f,n_iter=%zu",
             m_clusters.size(),
             mc_horizon.to_str().c_str(),
             mc_horizon_delta,
-            n_iter,
-            m_impl->n_threads());
+            n_iter);
 
     /* iterate through all horizons */
-    for (uint i = 0; i < n_iter; ++i) {
+    for (size_t i = 0; i < n_iter; ++i) {
       double start = time_monotonic_sec();
       double horizon = mc_horizon.lb() + i* mc_horizon_delta;
       double entropy_h = balch2000_iter(dist_func, horizon);
@@ -152,9 +150,9 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
   } /* run() */
 
  private:
-  using cluster_type = typename detail::clustering_impl<
+  using cluster_type = typename base_clustering_impl<
    T,
-   detail::policy::EH>::cluster_type;
+   policy::EH>::cluster_type;
   /**
    * \brief Method for derived classes to use to initialize centroids in
    * whatever way they choose, and perform first-touch allocation if they want
@@ -162,7 +160,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
    */
   cluster_vector clusters_init(void) {
     cluster_vector clusters;
-    for (uint i = 0; i < m_data.size(); ++i) {
+    for (size_t i = 0; i < m_data.size(); ++i) {
       clusters.emplace_back(cluster_type(i, m_data, &m_membership));
     } /* for(i..) */
     return clusters;
@@ -193,20 +191,20 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
     return math::ientropy()(proportions);
   }
 
-  void balch2000_rm_dup_clusters(detail::membership_type<detail::policy::EH>* const clusters) {
+  void balch2000_rm_dup_clusters(membership_type<policy::EH>* const clusters) {
     ER_TRACE("Removing duplicate clusters");
     /* for each datapoint/cluster in a given iteration */
     for (size_t i = 0; i < clusters->size(); ++i) {
       ER_TRACE("cluster%zu: n_members=%zu", i, (*clusters)[i].size());
       std::unordered_set<size_t>& cluster_i = (*clusters)[i];
-      auto comp = [&](const auto& clust) RCSW_PURE {
+      auto comp = [&](const auto& clust) RCPPSW_PURE {
         /*
          * Duplicates are defined as two of the unordered membership sets
          * containing the same points AND the sets not being in the same index
          * in the vector of results (i.e. not self equality).
          */
         return cluster_i == clust &&
-        static_cast<uint>(&clust - &((*clusters)[0])) != i;
+        static_cast<size_t>(&clust - &((*clusters)[0])) != i;
       };
       auto rm = std::remove_if(clusters->begin(), clusters->end(), comp);
       clusters->erase(rm, clusters->end());
@@ -214,20 +212,20 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
   }
 
   /* clang-format off */
-  const math::ranged                          mc_horizon;
-  const double                                mc_horizon_delta;
+  const math::ranged                     mc_horizon;
+  const double                           mc_horizon_delta;
 
-  std::vector<T>                              m_data{};
-  detail::membership_type<detail::policy::EH> m_membership{};
+  std::vector<T>                         m_data{};
+  membership_type<policy::EH>            m_membership{};
 
   /**
    * \brief This is a member variable, rather than a local variable in
    * \ref balch2000_iter, in order to reduce dynamic memory management overhead.
    */
 
-detail::membership_type<detail::policy::EH>   m_membership_cp{};
-cluster_vector                                m_clusters{};
-  std::unique_ptr<detail::entropy_impl<T>>    m_impl;
+  membership_type<policy::EH>            m_membership_cp{};
+  cluster_vector                         m_clusters{};
+  std::unique_ptr<eh_clustering_impl<T>> m_impl;
   /* clang-format on */
 };
 

@@ -57,4 +57,21 @@ const color color::kGRAY90(229, 229, 229);
 
 RCPPSW_WARNING_DISABLE_POP()
 
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+std::string color::to_str(void) const {
+  if (*this == color::kBLACK) {
+    return "BLACK";
+  } else if (*this == color::kWHITE) {
+    return "WHITE";
+  } else {
+    return "(" + rcppsw::to_string(m_channels[0]) + "," +
+        rcppsw::to_string(m_channels[1]) + "," +
+        rcppsw::to_string(m_channels[2]) + "," +
+        rcppsw::to_string(m_channels[3]) + ")";
+  }
+
+}
+
 NS_END(utils, rcppsw);

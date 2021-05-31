@@ -25,7 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <cassert>
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/patterns/fsm/event.hpp"
 #include "rcppsw/patterns/fsm/state.hpp"
 
@@ -53,7 +53,7 @@ class state_action0 : public state {
   ~state_action0(void) override = default;
 
   int invoke_state_action(base_fsm* sm,
-                          RCSW_UNUSED event_data*) const override {
+                          RCPPSW_UNUSED event_data*) const override {
     /* Downcast the state machine and event data to the correct derived type */
     auto* derived_fsm = static_cast<SM*>(sm);
     return (derived_fsm->*Func)();

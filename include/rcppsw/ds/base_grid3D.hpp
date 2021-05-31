@@ -92,8 +92,16 @@ class base_grid3D {
     return const_cast<base_grid3D*>(this)->access(i, j, k);
   }
 
-  RCSW_PURE T& operator[](const math::vector3z& c) { return access(c); }
-  RCSW_PURE const T& operator[](const math::vector3z& c) const {
+  bool contains(size_t i, size_t j, size_t k) {
+    return i < xdsize() && j < ydsize() && k < zdsize();
+  }
+
+  bool contains(const math::vector3z& pt) {
+    return contains(pt.x(), pt.y(), pt.z());
+  }
+
+  RCPPSW_PURE T& operator[](const math::vector3z& c) { return access(c); }
+  RCPPSW_PURE const T& operator[](const math::vector3z& c) const {
     return access(c);
   }
 
@@ -117,7 +125,10 @@ class base_grid3D {
    * \brief Create a subgrid from a grid. The specified coordinates are
    * inclusive.
    *
-   * \return The subgrid.
+   * \param ll Lower left of the subgrid, inclusive.
+   * \param ur Upper right of the subgrid, inclusive.
+   *
+   * \return The subgrid (closed interval).
    */
   grid_view subgrid(const math::vector3z& ll, const math::vector3z& ur) {
     index_range x(ll.x(), ur.x(), 1);
@@ -187,6 +198,9 @@ class base_grid3D {
   }
 
  protected:
+  /**
+   * \brief Return a reference to the underlying grid, defined by derived classes.
+   */
   virtual const grid_type& grid(void) const = 0;
   virtual grid_type& grid(void) = 0;
 };

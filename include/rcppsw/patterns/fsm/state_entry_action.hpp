@@ -25,7 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <cassert>
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/patterns/fsm/event.hpp"
 #include "rcppsw/patterns/fsm/state_entry.hpp"
 
@@ -53,7 +53,7 @@ class state_entry_action0 : public state_entry {
  public:
   ~state_entry_action0(void) override = default;
   void invoke_entry_action(base_fsm* sm,
-                           RCSW_UNUSED const event_data*) const override {
+                           RCPPSW_UNUSED const event_data*) const override {
     auto* derived_fsm = static_cast<SM*>(sm);
     (derived_fsm->*Func)();
   }

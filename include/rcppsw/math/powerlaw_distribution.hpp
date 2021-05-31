@@ -25,8 +25,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/math/rng.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -52,7 +52,7 @@ class powerlaw_distribution {
    * \param ub Upper bound for distribution. Assumed to be a multiple of pwr.
    * \param pwr Power for distribution.
    */
-  powerlaw_distribution(uint lb, uint ub, uint pwr)
+  powerlaw_distribution(size_t lb, size_t ub, size_t pwr)
       : m_lb(lb), m_ub(ub), m_pwr(pwr) {}
   virtual ~powerlaw_distribution(void) = default;
 
@@ -63,15 +63,15 @@ class powerlaw_distribution {
     double tmp = pmin + (pmax - pmin) * v;
     return std::pow(tmp, 1.0 / (m_pwr + 1));
   }
-  uint pwr(void) const { return m_pwr; }
-  uint lb(void) const { return m_lb; }
-  uint ub(void) const { return m_ub; }
+  size_t pwr(void) const { return m_pwr; }
+  size_t lb(void) const { return m_lb; }
+  size_t ub(void) const { return m_ub; }
 
  private:
   /* clang-format off */
-  uint m_lb;
-  uint m_ub;
-  uint m_pwr;
+  size_t m_lb;
+  size_t m_ub;
+  size_t m_pwr;
   /* clang-format on */
 };
 NS_END(math, rcppsw);

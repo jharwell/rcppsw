@@ -28,10 +28,10 @@
 #include <limits>
 #include <string>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/math/radians.hpp"
 #include "rcppsw/math/sphere_vector.hpp"
 #include "rcppsw/math/vector2.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/types/discretize_ratio.hpp"
 
 /*******************************************************************************
@@ -58,17 +58,23 @@ class vector3 {
   using value_type = T;
 
   /**
-   * \brief Computes the square distance between the passed vectors.
+   * \brief Computes the euclidean distance between the passed vectors.
    */
-  static double square_distance(const vector3<T>& v1, const vector3<T>& v2) {
-    return (v1 - v2).square_length();
+  static double l2norm(const vector3<T>& v1, const vector3<T>& v2) {
+    return (v1 - v2).length();
   }
 
   /**
    * \brief Computes the distance between the passed vectors.
    */
-  static double distance(const vector3<T>& v1, const vector3<T>& v2) {
-    return (v1 - v2).length();
+  template<typename U,
+           typename V,
+           RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value),
+           RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<V>::value)>
+  static size_t l1norm(const vector3<U>& v1, const vector3<V>& v2) {
+    return std::abs(static_cast<int>(v1.x() - v2.x())) +
+        std::abs(static_cast<int>(v1.y() - v2.y())) +
+        std::abs(static_cast<int>(v1.z() - v2.z()));
   }
 
   /**
@@ -107,22 +113,17 @@ class vector3 {
    */
   explicit vector3<T>(const vector2<T>& v) : vector3(v.x(), v.y(), 0.0) {}
 
-  T x(void) RCSW_CHECK_RET { return m_x; }
-  T y(void) RCSW_CHECK_RET { return m_y; }
-  T z(void) RCSW_CHECK_RET { return m_z; }
+  RCPPSW_NODISCARD T x(void) { return m_x; }
+  RCPPSW_NODISCARD T y(void) { return m_y; }
+  RCPPSW_NODISCARD T z(void) { return m_z; }
 
-  const T& x(void) const RCSW_CHECK_RET { return m_x; }
-  const T& y(void) const RCSW_CHECK_RET { return m_y; }
-  const T& z(void) const RCSW_CHECK_RET { return m_z; }
+  RCPPSW_NODISCARD const T& x(void) const { return m_x; }
+  RCPPSW_NODISCARD const T& y(void) const { return m_y; }
+  RCPPSW_NODISCARD const T& z(void) const { return m_z; }
 
   void x(const T& x) { m_x = x; }
   void y(const T& y) { m_y = y; }
   void z(const T& z) { m_z = z; }
-
-  /**
-   * \brief Is the vector is positive definite?
-   */
-  bool is_pd(void) const { return m_x > 0 && m_y > 0 && m_z > 0; }
 
   vector2<T> to_2D(void) const { return vector2<T>(x(), y()); }
 
@@ -139,18 +140,21 @@ class vector3 {
   }
 
   /**
+   * \brief Is the vector is positive definite?
+   */
+  bool is_pd(void) const { return m_x > 0 && m_y > 0 && m_z > 0; }
+
+  /**
    * \brief Returns the square length of this vector.
    */
-  T square_length(void) const RCSW_CHECK_RET {
+  RCPPSW_NODISCARD T square_length(void) const {
     return (m_x * m_x) + (m_y * m_y) + (m_z * m_z);
   }
 
   /**
    * Returns the length of this vector.
    */
-  double length(void) const RCSW_CHECK_RET {
-    return std::sqrt(square_length());
-  }
+  RCPPSW_NODISCARD double length(void) const { return std::sqrt(square_length()); }
 
   /**
    * \brief Normalizes this vector.
@@ -161,7 +165,8 @@ class vector3 {
    *
    * \return A reference to the normalized vector.
    */
-  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T,
+            RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   vector3& normalize(void) {
     *this /= this->length();
     return *this;
@@ -197,12 +202,11 @@ class vector3 {
    */
   vector2<T> project_on_xz(void) const { return vector2<T>(m_x, m_z); }
 
-  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   sphere_vector<T> to_spherical(void) const {
     double radius = length();
-    return sphere_vector<T>(radius,
-                            radians(std::acos(m_z / radius)),
-                            radians(std::atan2(m_y, m_x)));
+    return sphere_vector<T>(
+        radius, radians(std::acos(m_z / radius)), radians(std::atan2(m_y, m_x)));
   }
 
   /**
@@ -238,7 +242,7 @@ class vector3 {
    *
    * Only available if the template argument is not floating point.
    */
-  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
   bool operator==(const vector3& other) const {
     return (m_x == other.m_x && m_y == other.m_y && m_z == other.m_z);
   }
@@ -249,7 +253,7 @@ class vector3 {
    *
    * Only available if the template argument is floating point.
    */
-  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   bool operator==(const vector3& other) const {
     return (std::fabs(x() - other.x()) <= std::numeric_limits<T>::epsilon() &&
             (std::fabs(y() - other.y()) <= std::numeric_limits<T>::epsilon()) &&
@@ -259,31 +263,35 @@ class vector3 {
   /**
    * \brief Needed for using vectors as keys in a map.
    */
-  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
   bool operator<(const vector3& other) const {
     return (m_x < other.m_x) || ((m_x == other.m_x) && (m_y < other.m_y)) ||
            ((m_x == other.m_x) && (m_y == other.m_y) && (m_z < other.m_z));
   }
 
-  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   bool operator<(const vector3& other) const {
-    bool equal_x = std::fabs(m_x - other.m_x) <= std::numeric_limits<T>::epsilon();
-    bool equal_y = std::fabs(m_y - other.m_y) <= std::numeric_limits<T>::epsilon();
+    bool equal_x = std::fabs(m_x - other.m_x) <=
+                   std::numeric_limits<T>::epsilon();
+    bool equal_y = std::fabs(m_y - other.m_y) <=
+                   std::numeric_limits<T>::epsilon();
 
     return (m_x < other.m_x) || (equal_x && (m_y < other.m_y)) ||
-        (equal_x && equal_y && (m_z < other.m_z));
+           (equal_x && equal_y && (m_z < other.m_z));
   }
 
-  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
   bool operator>(const vector3& other) const {
     return (m_x > other.m_x) || ((m_x == other.m_x) && (m_y > other.m_y)) ||
            ((m_x == other.m_x) && (m_y == other.m_y) && (m_z > other.m_z));
   }
 
-  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   bool operator>(const vector3& other) const {
-    bool equal_x = std::fabs(m_x - other.m_x) <= std::numeric_limits<T>::epsilon();
-    bool equal_y = std::fabs(m_y - other.m_y) <= std::numeric_limits<T>::epsilon();
+    bool equal_x = std::fabs(m_x - other.m_x) <=
+                   std::numeric_limits<T>::epsilon();
+    bool equal_y = std::fabs(m_y - other.m_y) <=
+                   std::numeric_limits<T>::epsilon();
 
     return (m_x > other.m_x) || (equal_x && (m_y > other.m_y)) ||
            (equal_x && equal_y && (m_z > other.m_z));
@@ -362,7 +370,7 @@ class vector3 {
   vector3 operator-(void) const { return vector3(-m_x, -m_y, -m_z); }
 
   friend std::ostream& operator<<(std::ostream& stream, const vector3& v) {
-    stream << "(" << v.m_x << "," << v.m_y << "," << v.m_z << ")";
+    stream << v.to_str();
     return stream;
   }
 
@@ -370,7 +378,7 @@ class vector3 {
    * \brief For parsing a vector from a string in the form of \c "X,Y".
    */
   friend std::istream& operator>>(std::istream& is, vector3<T>& v) {
-    T values[3] = {T(), T(), T()};
+    T values[3] = { T(), T(), T() };
     utils::parse_values<T>(is, 3, values, ',');
     v.set(values[0], values[1], values[2]);
     return is;
@@ -455,6 +463,7 @@ RCPPSW_MATH_VEC3_SCALED_CONV2FLT(i);
 RCPPSW_MATH_VEC3_SCALED_CONV2FLT(z);
 RCPPSW_MATH_VEC3_CONV2DISC(z, size_t);
 RCPPSW_MATH_VEC3_CONV2DISC(u, uint);
+RCPPSW_MATH_VEC3_CONV2DISC(i, int);
 
 template <class T>
 vector2<T> to_2D(const vector3<T>& v) {

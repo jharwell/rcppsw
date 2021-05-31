@@ -1,7 +1,7 @@
 /**
- * @file radians-test.cpp
+ * \file stacktrace.hpp
  *
- * @copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2021 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,47 +18,40 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_ER_STACKTRACE_HPP_
+#define INCLUDE_RCPPSW_ER_STACKTRACE_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#define CATCH_CONFIG_MAIN
-#define CATCH_CONFIG_PREFIX_ALL
-#include "catch.hpp"
-#include "rcppsw/math/radians.hpp"
-#include "rcppsw/math/angles.hpp"
+#define BOOST_STACKTRACE_USE_ADDR2LINE
+#include <boost/stacktrace.hpp>
+
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
-namespace math = rcppsw::math;
+NS_START(rcppsw, er);
+
+namespace stacktrace = boost::stacktrace;
 
 /*******************************************************************************
- * Test Cases
+* Forward Decls
  ******************************************************************************/
-CATCH_TEST_CASE("Conversion test", "[radians]") {
-  math::radians t0(M_PI/2);
-  math::radians t1(M_PI);
-  math::radians t2(to_radians(math::degrees(90)));
-  math::radians t3(to_radians(math::degrees(180)));
+/**
+ * \brief A signal handler to dump the current stacktrace to a file upon a fatal
+ * signal using boost.
+ */
+void sigsegv_sighandler(int signum);
 
-  CATCH_REQUIRE(M_PI/2 == t0());
-  CATCH_REQUIRE(90 == to_degrees(t0).value());
+/**
+ * \brief A handler to be called instead of std::terminate(), for better
+ * debugging of WHERE an exception came from.
+ */
+void terminate_handler(void);
 
-  CATCH_REQUIRE(90 == to_degrees(t2)());
-  CATCH_REQUIRE(180 == to_degrees(t3)());
-}
 
-CATCH_TEST_CASE("Math Test", "[radians]") {
-  math::radians t0(M_PI/2);
-  math::radians t1(M_PI);
-  math::radians t2(M_PI/2);
-  math::radians t3(M_PI);
+NS_END(er, rcppsw);
 
-  CATCH_REQUIRE(t1 - t0 == t0);
-  CATCH_REQUIRE(t3 - t2 == t2);
-  CATCH_REQUIRE(t1 + t0 == math::radians(3 * M_PI/2));
-  CATCH_REQUIRE(t3 + t2 == math::radians(3 * M_PI/2));
-
-  CATCH_REQUIRE((t0 += t0) == t3);
-  CATCH_REQUIRE((t1 -= t2) == t2);
-}
+#endif /* INCLUDE_RCPPSW_ER_STACKTRACE_HPP_ */

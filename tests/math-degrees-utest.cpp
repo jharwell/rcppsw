@@ -1,5 +1,5 @@
 /**
- * @file degrees-test.cpp
+ * @file math-degrees-test.cpp
  *
  * @copyright 2018 John Harwell, All rights reserved.
  *
@@ -31,41 +31,65 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-namespace math = rcppsw::math;
 
 /*******************************************************************************
  * Test Cases
  ******************************************************************************/
-CATCH_TEST_CASE("Conversion test", "[degrees]") {
-  math::degrees t0(90);
-  math::degrees t1(180);
-  math::degrees t2(to_degrees(math::radians(M_PI/2)));
-  math::degrees t3(to_degrees(math::radians(M_PI)));
+CATCH_TEST_CASE("Conversion test", "[rmath::degrees]") {
+  rmath::degrees t0(90);
+  rmath::degrees t1(180);
+  rmath::degrees t2(to_degrees(rmath::radians(M_PI/2)));
+  rmath::degrees t3(rmath::radians(M_PI));
 
   CATCH_REQUIRE(90 == t0());
-  CATCH_REQUIRE(M_PI/2 == to_radians(t0).value());
+  CATCH_REQUIRE(M_PI/2 == to_radians(t0).v());
 
   CATCH_REQUIRE(M_PI/2 == to_radians(t2)());
   CATCH_REQUIRE(M_PI == to_radians(t3)());
 }
 
-CATCH_TEST_CASE("Math Test", "[degrees]") {
-  math::degrees t0(90);
-  math::degrees t1(180);
-  math::degrees t2(90);
-  math::degrees t3(180);
-  math::degrees t4(-60);
-  math::degrees t5(800);
+CATCH_TEST_CASE("stdout Test", "[rmath::degrees]") {
+  rmath::degrees t0(0);
+  std::stringstream out;
+  out << t0;
+
+  CATCH_REQUIRE("deg(0.000000) -> rad(0.000000)" == out.str());
+}
+CATCH_TEST_CASE("Math Test", "[rmath::degrees]") {
+  rmath::degrees t0(90);
+  rmath::degrees t1(180);
+  rmath::degrees t2(90);
+  rmath::degrees t3(180);
+  rmath::degrees t4(-60);
+  rmath::degrees t5(800);
 
   CATCH_REQUIRE(t1 - t0 == t0);
   CATCH_REQUIRE(t3 - t2 == t2);
-  CATCH_REQUIRE(t1 + t0 == math::degrees(270));
-  CATCH_REQUIRE(t3 + t2 == math::degrees(270));
+  CATCH_REQUIRE(t1 + t0 == rmath::degrees(270));
+  CATCH_REQUIRE(t3 + t2 == rmath::degrees(270));
 
   CATCH_REQUIRE((t0 += t0) == t3);
   CATCH_REQUIRE((t1 -= t2) == t2);
-  CATCH_REQUIRE(300 == t4.unsigned_normalize().value());
-  CATCH_REQUIRE(-60 == t4.signed_normalize().value());
-  CATCH_REQUIRE(80 == t5.unsigned_normalize().value());
-  CATCH_REQUIRE(80 == t5.signed_normalize().value());
+  CATCH_REQUIRE(300 == t4.unsigned_normalize().v());
+  CATCH_REQUIRE(-60 == t4.signed_normalize().v());
+  CATCH_REQUIRE(80 == t5.unsigned_normalize().v());
+  CATCH_REQUIRE(80 == t5.signed_normalize().v());
+}
+
+CATCH_TEST_CASE("Normalized Diff", "[rmath::degrees]") {
+  rmath::degrees d0(0);
+  rmath::degrees d90(90);
+  rmath::degrees d180(180);
+  rmath::degrees d270(270);
+  rmath::degrees d360(360);
+
+  CATCH_REQUIRE(RCPPSW_IS_BETWEEN(rmath::normalized_diff(d90, d180), -d180, d180));
+  CATCH_REQUIRE(RCPPSW_IS_BETWEEN(rmath::normalized_diff(d90, d270), -d180, d180));
+  CATCH_REQUIRE(RCPPSW_IS_BETWEEN(rmath::normalized_diff(d270, d360), -d180, d180));
+
+  CATCH_REQUIRE(-d90 == rmath::normalized_diff(d90, d180));
+  CATCH_REQUIRE(-d180 == rmath::normalized_diff(d90, d270));
+  CATCH_REQUIRE(d0 == rmath::normalized_diff(d0, d360));
+  CATCH_REQUIRE(d0 == rmath::normalized_diff(d360, d0));
+
 }

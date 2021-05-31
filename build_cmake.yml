@@ -1,0 +1,51 @@
+name: build and run tests
+on:
+  push:
+    branches: [ master, devel ]
+  pull_request:
+    branches: [ devel ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    # install and cache dependencies
+    - name: Cache boost
+      uses: actions/cache@v1.0.3
+      id: cache-boost
+      with:
+        path: "~/boost"
+        key: libboost1.71-dev
+    - name: Install boost
+      env:
+        CACHE_HIT: ${{steps.cache-boost.outputs.cache-hit}}
+      run: |
+        if [[ "$CACHE_HIT" == 'true' ]]; then
+          sudo cp --force --recursive ~/boost/* /
+        else
+          sudo apt-get update && sudo apt-get install -yq libboost1.71-dev
+          mkdir -p ~/boost
+          for dep in libboost1.71-dev; do
+              dpkg -L $dep | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ~/boost/
+          done
+        fi
+    # build project
+    - name: mkdir
+      run: mkdir build
+    - name: cmake build
+      run: cmake -Bbuild -H.
+    - name: cmake make
+      run: cmake --build build/ --target all
+      env:
+        MAKEFLAGS: "-j2"
+    # run tests
+    - name: run test 1
+      run: build/tst/Example1_tst
+    - name: run test 2
+      run: build/tst/Example2_tst
+    # upload artifact, game binary
+    - name: Upload Example binary
+      uses: actions/upload-artifact@v1
+      with:
+        name: upload binary
+        path: build/src/Example

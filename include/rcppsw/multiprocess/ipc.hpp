@@ -17,7 +17,8 @@
  * You should have received a copy of the GNU General Public License along with
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
-
+/// \file
+/// here is my file
 #ifndef INCLUDE_RCPPSW_MULTIPROCESS_IPC_HPP_
 #define INCLUDE_RCPPSW_MULTIPROCESS_IPC_HPP_
 
@@ -43,7 +44,7 @@
 #include <utility>
 #include <vector>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -54,37 +55,56 @@ namespace bip = boost::interprocess;
 /*******************************************************************************
  * Template Definitions
  ******************************************************************************/
+/**
+ * \typedef ipc_allocator
+ * \ingroup multiprocess
+ *
+ * \brief An allocator for shared memory for stuff allocated to be shared across
+ * processes.
+ */
 template <typename T>
 using ipc_allocator =
     bip::allocator<T, bip::managed_shared_memory::segment_manager>;
 
 /**
+ * \typedef ipc_vector
+ * \ingroup multiprocess
+ *
  * \brief A std::vector capable of being shared across processes.
  */
 template <typename T>
 using ipc_vector = std::vector<T, ipc_allocator<T>>;
 
 /**
+ * \typedef ipc_list
+ * \ingroup multiprocess
+ *
  * \brief A std::list capable of being shared across processes.
  */
 template <typename T>
 using ipc_list = bip::list<T, ipc_allocator<T>>;
 
 /**
+ * \typedef ipc_map
+ * \ingroup multiprocess
+ *
  * \brief A std::map capable of being shared across processes.
  */
 template <typename key, typename value>
-using ipc_map =
-    bip::map<key, value, std::less<key>, ipc_allocator<std::pair<const key, value>>>;
+using ipc_map = bip::
+    map<key, value, std::less<key>, ipc_allocator<std::pair<const key, value>>>;
 
 /*******************************************************************************
  * Type Definitions
  ******************************************************************************/
 /**
+ * \typedef ipc_string
+ * \ingroup multiprocess
+ *
  * \brief A string capable of being shared across processes.
  */
-typedef bip::basic_string<char, std::char_traits<char>, ipc_allocator<char>>
-    ipc_string;
+using ipc_string =
+    bip::basic_string<char, std::char_traits<char>, ipc_allocator<char>>;
 
 NS_END(multiprocess, rcppsw);
 

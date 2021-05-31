@@ -24,7 +24,10 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include <string>
+#include <array>
+
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -69,7 +72,7 @@ class color {
   static const color kGRAY90;
 
   color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255)
-      : m_channels{red, green, blue, alpha} {}
+      : m_channels{ red, green, blue, alpha } {}
 
   uint8_t red() const { return m_channels[0]; }
   void red(uint8_t red) { m_channels[0] = red; }
@@ -84,18 +87,19 @@ class color {
   void alpha(uint8_t alpha) { m_channels[3] = alpha; }
 
   bool operator==(const color& c_color2) const {
-    return m_channels[0] == c_color2.m_channels[0] &&
-           m_channels[1] == c_color2.m_channels[1] &&
-           m_channels[2] == c_color2.m_channels[2] &&
-           m_channels[3] == c_color2.m_channels[3];
+    return m_channels == c_color2.m_channels;
   }
 
   bool operator!=(const color& c_color2) const {
-    return m_channels != c_color2.m_channels;
+    return !(*this == c_color2);
   }
 
+  std::string to_str(void) const;
+
  private:
-  uint8_t m_channels[4];
+  /* clang-format off */
+  std::array<uint8_t, 4> m_channels;
+  /* clang-format on */
 };
 
 NS_END(utils, rcppsw);

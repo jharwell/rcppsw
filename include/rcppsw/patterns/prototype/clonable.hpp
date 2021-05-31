@@ -24,7 +24,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include <memory>
+
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -38,7 +40,13 @@ NS_START(rcppsw, patterns, prototype);
  * \class clonable
  * \ingroup patterns prototype
  *
- * \brief Define a class as being capable of being cloned (i.e. a deep copy).
+ * \brief Define a class as being capable of being cloned (i.e. a deep copy). I
+ * generally prefer this approach when copying objects, because it is explicit
+ * and not subject to compiler/language standards around operator=(), AND
+ * because the use of std::unique_ptr makes it clear the returned object has
+ * nothing to do with the source object.
+ *
+ * \tparam T The type of the class to mark as clonable.
  */
 template<typename T>
 class clonable {

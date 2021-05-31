@@ -33,7 +33,7 @@
 #include <string>
 #include <vector>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -43,11 +43,18 @@ NS_START(rcppsw, algorithm);
 /*******************************************************************************
  * Structure Definitions
  ******************************************************************************/
+/**
+ * \struct result_type2D
+ * \ingroup algorithm
+ *
+ * \brief Contains (1) the closest pair of points, (2) the distance between
+ * them, (3) comparator functions.
+ */
 template <typename T>
 struct result_type2D {
   T p1{};
   T p2{};
-  double dist{0.0};
+  double dist{ 0.0 };
   bool operator<(double d) const { return dist < d; }
   bool operator<(const result_type2D<T>& other) const {
     return this->dist < other.dist;
@@ -61,51 +68,49 @@ struct result_type2D {
  * \class closest_pair2D
  * \ingroup algorithm
  *
- * \brief Calculate the closest two points from a set of 2D points in O(NLogN).
+ * \brief Calculate the closest two points from a set of 2D points in O(NLogN)
+ * (\ref kRecursive).
  *
- * Also has a brute force (O(N^3)) algorithm that can be used for comparision.
+ * Also has a brute force (O(N^3)) algorithm (\ref kBruteForce) that can be used
+ * for comparision.
  *
- * Returns the two closest points, along with the distance between them.
+ * Returns the two closest points, along with the distance between them (\ref
+ * result_type2D).
  *
  * \tparam T Type of point in 2D plane. Can be any class, but must provide the
- * following methods (see \ref math::vector2 for example implementation):
- *
- * - x()
- * - y()
- * - operator==()
+ *           following methods: x(), y(), operator==(). See \ref math::vector2
+ *           for example implementation).
  */
 template <typename T>
 class closest_pair2D {
  public:
   using dist_func_type = double(const T&, const T&);
 
+  static constexpr const char kBruteForce[] = "brute_force";
+
+  static constexpr const char kRecursive[] = "recursive";
+
   /**
    * \brief Run the calculation algorithm.
    *
-   * \param method The method to use.
+   * \param method The method to use: "brute_force" or "recursive".
    * \param points A vector of points through which to search.
    * \param dist_func A function that can be used to calculate the distance
    *                  between two points.
-   *
-   *
-   * \return
    */
   result_type2D<T> operator()(const std::string& method,
                               std::vector<T> points,
                               const std::function<dist_func_type>& dist_func) {
-    if ("brute_force" == method) {
+    if (kBruteForce == method) {
       return brute_force(points, dist_func);
-    } else if ("recursive" == method) {
+    } else if (kRecursive == method) {
       std::sort(points.begin(), points.end(), [](const T& a, const T& b) {
         return a.x() < b.x();
       });
       std::vector<T> strip;
       return recursive(points, strip, dist_func);
-    } else {
-      assert(false);
     }
-    // Should never be hit; here only to silence the compiler with asserts are
-    // compiled away.
+    // Should never be hit
     return result_type2D<T>();
   }
 
@@ -130,7 +135,7 @@ class closest_pair2D {
           r.p2 = points[j];
         }
       } /* for(j..) */
-    }   /* for(i..) */
+    } /* for(i..) */
     return r;
   }
 
@@ -211,7 +216,7 @@ class closest_pair2D {
           min.p2 = strip[j];
         }
       } /* for(i..) */
-    }   /* for(j..) */
+    } /* for(j..) */
     return min;
   }
 };

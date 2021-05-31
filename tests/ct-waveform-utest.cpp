@@ -1,5 +1,5 @@
 /**
- * @file waveform-test.cpp
+ * @file ct-waveform-test.cpp
  *
  * @copyright 2018 John Harwell.
  *
@@ -23,6 +23,7 @@
  ******************************************************************************/
 #include "rcppsw/control/periodic_waveform.hpp"
 #include <vector>
+
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
@@ -46,7 +47,7 @@ ct::config::waveform_config config{
 /*******************************************************************************
  * Test Cases
  ******************************************************************************/
-TEST_CASE("Sine Waveform", "[periodic]") {
+TEST_CASE("Sine Waveform", "[rct::periodic]") {
   ct::sine_waveform s1(&config);
   std::vector<double> values;
   for (size_t i = 0; i < 1000; ++i) {
@@ -60,7 +61,7 @@ TEST_CASE("Sine Waveform", "[periodic]") {
   } /* for(i..) */
 }
 
-TEST_CASE("Square Waveform", "[periodic]") {
+TEST_CASE("Square Waveform", "[rct::periodic]") {
   ct::square_waveform s1(&config);
   std::vector<double> values;
   for (size_t i = 0; i < 1000; ++i) {
@@ -73,7 +74,7 @@ TEST_CASE("Square Waveform", "[periodic]") {
     f << i << ";" << values[i] << ";" << std::endl;
   } /* for(i..) */
 }
-TEST_CASE("Sawtooth Waveform", "[periodic]") {
+TEST_CASE("Sawtooth Waveform", "[rct::periodic]") {
   ct::sawtooth_waveform s1(&config);
   std::vector<double> values;
   for (size_t i = 0; i < 1000; ++i) {

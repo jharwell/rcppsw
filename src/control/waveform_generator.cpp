@@ -45,9 +45,9 @@ waveform_generator::waveform_generator(void) {
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-std::unique_ptr<waveform> waveform_generator::operator()(
-    const std::string& name,
-    const config::waveform_config* config) {
+std::unique_ptr<base_waveform>
+waveform_generator::operator()(const std::string& name,
+                               const config::waveform_config* config) {
   return create(name, config);
 } /* operator() */
 

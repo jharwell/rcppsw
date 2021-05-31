@@ -31,7 +31,7 @@
 #include <thread>
 #include <vector>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -45,35 +45,14 @@ NS_START(rcppsw, multiprocess);
  * \class forkable
  * \ingroup multiprocess
  *
- * \brief Class derived from hear will be capable of being fork()ed and having
- * each new process jump into the main loop defined for the class.
+ * \brief Daemon interface class which can be derived from to indicate that the
+ * class can be fork()ed and having each new process jump into the main loop
+ * defined for the class.
  */
 class forkable {
  public:
   forkable(void) = default;
   virtual ~forkable(void) = default;
-  pid_t pid(void) { return m_pid; }
-
-  /**
-   * \brief Start a process.
-   *
-   * \param core The core to bind the process (and any threads it might spawn)
-   * to. By default, no binding.
-   *
-   * \return PID of child process in parent.
-   */
-  pid_t start(int core = -1);
-
-  /**
-   * \brief Start a process in a new directory.
-   *
-   * \param core The core to bind the process (and any threads it might spawn)
-   *             to. By default, no binding.
-   * \param new_wd The new working directory to start the process in.
-   *
-   * \return PID of child process in parent.
-   */
-  pid_t start(const std::string& new_wd, int core = -1);
 
   /**
    * \brief Signal a process that it should terminate, from outside the process.
@@ -85,11 +64,35 @@ class forkable {
    */
   virtual void proc_main(void) = 0;
 
+  pid_t pid(void) const { return m_pid; }
+
+  /**
+   * \brief Start a process.
+   *
+   * \param core The core to bind the process (and any threads it might spawn)
+   *             to. By default, no binding.
+   *
+   * \return PID of child process in parent.
+   */
+  pid_t start(int core = -1);
+
+  /**
+   * \brief Start a process in a new directory.
+   *
+   * \param new_wd The new working directory to start the process in.
+   * \param core The core to bind the process (and any threads it might spawn)
+   *             to. By default, no binding.
+   *
+   * \return PID of child process in parent, or -1 if chdir() failed with \p
+   *         new_wd.
+   */
+  pid_t start(const std::string& new_wd, int core = -1);
+
  protected:
   /**
    * \brief Check if a process object has been told to terminate elsewhere.
    */
-  bool terminated(void) { return !m_proc_run; }
+  bool terminated(void) const { return !m_proc_run; }
 
  private:
   static void entry_point(void* this_p) {
@@ -97,8 +100,10 @@ class forkable {
     pt->proc_main();
   }
 
-  bool m_proc_run{false};
+  /* clang-format off */
+  bool  m_proc_run{false};
   pid_t m_pid{0};
+  /* clang-format on */
 };
 
 NS_END(multiprocess, rcppsw);

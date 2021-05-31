@@ -24,14 +24,14 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <algorithm>
 #include <boost/geometry.hpp>
 #include <boost/geometry/index/rtree.hpp>
-#include <vector>
 #include <utility>
-#include <algorithm>
+#include <vector>
 
-#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/math/vector2.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -45,19 +45,42 @@ namespace bgi = bg::index;
  * Class Definitions
  ******************************************************************************/
 /**
- * \class tree
+ * \class rtree2D
  * \ingroup ds
  *
  * \brief Wrapper around boost::geometry::index::rtree2D to provide very fast
- * queries of the form "How many things are in this 2D/3D arena/volume".
- * Reasonably fast build times too.
+ * queries of the form "How many things are in this 2D area", and reasonably
+ * fast tree build times as well. That is, this class is intended for
+ * applications in which large trees are built, queried frequently and updated
+ * relatively infrequently.
+ *
+ * \tparam TCoord The type of the coordinate used to define the corners and 2D
+ * shapes contained in the tree.
+ *
+ * \tparam TKey The type of the class/object/etc which has a representation
+ * projectable onto the 2D plane, which are returned by queries.
  */
-template<typename TCoord, typename TKey, size_t MAXELTS>
+template <typename TCoord, typename TKey, size_t MAXELTS>
 class rtree2D {
  public:
+  /**
+   * \brief Type of the points used to represent the rectangles managed by the tree.
+   */
   using point_type = bg::model::point<TCoord, 2, bg::cs::cartesian>;
+
+  /**
+   * \brief Representation of 2D rectangles in the tree.
+   */
   using box_type = bg::model::box<point_type>;
+
+  /**
+   * \brief Type of the elements in the tree.
+   */
   using value_type = std::pair<box_type, TKey>;
+
+  /**
+   * \brief The templated type of the underlying boost tree that does all the work.
+   */
   using tree_type = bgi::rtree<value_type, bgi::rstar<MAXELTS>>;
 
   rtree2D(void) = default;
@@ -68,13 +91,15 @@ class rtree2D {
   rtree2D(rtree2D&&) = delete;
   rtree2D& operator=(rtree2D&&) = delete;
 
-
+  /**
+   * \brief Query the tree to figure out how many objects of type \p TKey are
+   * contained in the tree.
+   */
   std::vector<TKey> query(const math::vector2<TCoord>& ll,
                           const math::vector2<TCoord>& ur) const {
     std::vector<value_type> res1;
     res1.reserve(MAXELTS); /* good a guess as any */
-    box_type query(point_type(ll.x(), ll.y()),
-                   point_type(ur.x(), ur.y()));
+    box_type query(point_type(ll.x(), ll.y()), point_type(ur.x(), ur.y()));
     m_impl.query(bgi::intersects(query), std::back_inserter(res1));
 
     std::vector<TKey> res2;
@@ -86,23 +111,34 @@ class rtree2D {
     return res2;
   }
 
+  /**
+   * \brief Query the tree to see if \p key is found in the tree. This query
+   * does not take advantage of tree properties, and is O(N).
+   */
   bool query(const TKey& key) const {
-    auto it = std::find_if(m_impl.begin(),
-                           m_impl.end(),
-                           [key](const value_type& pair) {
-                             return key == pair.second;
-                           });
+    auto it =
+        std::find_if(m_impl.begin(), m_impl.end(), [key](const value_type& pair) {
+          return key == pair.second;
+        });
     return m_impl.end() != it;
   }
 
+  /**
+   * \brief Insert the \p key into the tree, which will be placed into the tree
+   * according to its rectangle defined by \p ll, \p ur.
+   */
   void insert(const TKey& key,
               const math::vector2<TCoord>& ll,
               const math::vector2<TCoord>& ur) {
-    box_type value(point_type(ll.x(), ll.y()),
-                   point_type(ur.x(), ur.y()));
+    box_type value(point_type(ll.x(), ll.y()), point_type(ur.x(), ur.y()));
     m_impl.insert(std::make_pair(value, key));
   }
 
+  /**
+   * \brief Remove the \p key and its associated rectangle from the tree.
+   *
+   * \return The # of items removed (0 or 1).
+   */
   size_t remove(const TKey& key) {
     std::vector<value_type> victims;
     std::copy_if(m_impl.begin(),

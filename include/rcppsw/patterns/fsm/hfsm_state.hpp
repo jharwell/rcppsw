@@ -25,7 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <cassert>
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/patterns/fsm/event.hpp"
 #include "rcppsw/patterns/fsm/state.hpp"
 
@@ -59,7 +59,9 @@ class hfsm_state : public state {
   hfsm_state& operator=(const hfsm_state&) = delete;
 
  private:
+  /* clang-format off */
   rcppsw::patterns::fsm::state* m_parent;
+  /* clang-format on */
 };
 
 /**
@@ -74,7 +76,7 @@ class hfsm_state_action0 : public hfsm_state {
   ~hfsm_state_action0(void) override = default;
 
   int invoke_state_action(base_fsm* fsm,
-                          RCSW_UNUSED event_data*) const override {
+                          RCPPSW_UNUSED event_data*) const override {
     auto* derived_fsm = static_cast<FSM*>(fsm);
     return (derived_fsm->*Handler)();
   }

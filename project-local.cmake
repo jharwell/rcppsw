@@ -20,7 +20,15 @@ if (NOT TARGET ticpp)
 endif()
 
 # Boost
-find_package(Boost 1.58.0 COMPONENTS system filesystem thread graph)
+find_package(Boost 1.71.0
+  COMPONENTS
+  system
+  filesystem
+  thread
+  graph
+  stacktrace_basic
+  stacktrace_addr2line
+  REQUIRED)
 set(Boost_USE_STATIC_LIBS OFF)
 
 ################################################################################
@@ -39,6 +47,8 @@ set(${target}_LIBRARIES
   rcsw
   ticpp
   ${Boost_LIBRARIES}
+  pthread
+  dl
   )
 
 set(${target}_LIBRARY_DIRS ${rcsw_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS})
@@ -47,13 +57,11 @@ if ("${LIBRA_ER}" MATCHES "ALL")
   set(${target}_LIBRARIES ${${target}_LIBRARIES} log4cxx)
 endif()
 
-if (BUILD_FOR_MSI)
-  set(${target}_LIBRARY_DIRS ${${target}_LIBRARY_DIRS})
-endif()
-
+# Define RCPPSW library
 if (NOT TARGET ${target})
   add_library(${target} STATIC ${${target}_SRC})
   target_link_libraries(${target} ${${target}_LIBRARIES})
+  target_link_directories(${target} PUBLIC ${${target}_LIBRARY_DIRS})
   target_include_directories(${target} PUBLIC ${${target}_INCLUDE_DIRS})
   target_include_directories(${target} SYSTEM PRIVATE "${${target}_SYS_INCLUDE_DIRS}")
 endif()

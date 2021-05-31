@@ -1,5 +1,5 @@
 /**
- * @file simple_fsm-test.cpp
+ * @file fsm-simple_fsm-test.cpp
  *
  * @copyright 2017 John Harwell, All rights reserved.
  *
@@ -43,19 +43,19 @@ public:
 
   explicit test_fsm(void)
       : fsm::simple_fsm(ST_MAX_STATES),
-      FSM_DEFINE_STATE_MAP(mc_state_map,
-                           FSM_STATE_MAP_ENTRY(&s1), FSM_STATE_MAP_ENTRY(&s2),
-                           FSM_STATE_MAP_ENTRY(&s3), FSM_STATE_MAP_ENTRY(&s4),
-                           FSM_STATE_MAP_ENTRY(&s5), FSM_STATE_MAP_ENTRY(&s6)) {}
+      RCPPSW_FSM_DEFINE_STATE_MAP(mc_state_map,
+                           RCPPSW_FSM_STATE_MAP_ENTRY(&s1), RCPPSW_FSM_STATE_MAP_ENTRY(&s2),
+                           RCPPSW_FSM_STATE_MAP_ENTRY(&s3), RCPPSW_FSM_STATE_MAP_ENTRY(&s4),
+                           RCPPSW_FSM_STATE_MAP_ENTRY(&s5), RCPPSW_FSM_STATE_MAP_ENTRY(&s6)) {}
 
-  FSM_STATE_DECLARE_ND(test_fsm, s1);
-  FSM_STATE_DECLARE_ND(test_fsm, s2);
-  FSM_STATE_DECLARE_ND(test_fsm, s3);
-  FSM_STATE_DECLARE_ND(test_fsm, s4);
-  FSM_STATE_DECLARE_ND(test_fsm, s5);
-  FSM_STATE_DECLARE_ND(test_fsm, s6);
+  RCPPSW_FSM_STATE_DECLARE_ND(test_fsm, s1);
+  RCPPSW_FSM_STATE_DECLARE_ND(test_fsm, s2);
+  RCPPSW_FSM_STATE_DECLARE_ND(test_fsm, s3);
+  RCPPSW_FSM_STATE_DECLARE_ND(test_fsm, s4);
+  RCPPSW_FSM_STATE_DECLARE_ND(test_fsm, s5);
+  RCPPSW_FSM_STATE_DECLARE_ND(test_fsm, s6);
   void event1(void) {
-    FSM_DEFINE_TRANSITION_MAP(kMAP){STATE2,
+    RCPPSW_FSM_DEFINE_TRANSITION_MAP(kMAP){STATE2,
                                     STATE3,
                                     STATE1,
                                     fsm::event_signal::ekFATAL,
@@ -64,7 +64,7 @@ public:
     external_event(kMAP[current_state()], nullptr);
   }
   void event2(void) {
-    FSM_DEFINE_TRANSITION_MAP(kMAP){fsm::event_signal::ekIGNORED,
+    RCPPSW_FSM_DEFINE_TRANSITION_MAP(kMAP){fsm::event_signal::ekIGNORED,
                                     STATE4,
                                     fsm::event_signal::ekFATAL,
                                     STATE4,
@@ -73,44 +73,44 @@ public:
     external_event(kMAP[current_state()], nullptr);
   }
 
-  FSM_DECLARE_STATE_MAP(state_map, mc_state_map, ST_MAX_STATES);
-  FSM_DEFINE_STATE_MAP_ACCESSOR(state_map, index) {
+  RCPPSW_FSM_DECLARE_STATE_MAP(state_map, mc_state_map, ST_MAX_STATES);
+  RCPPSW_FSM_DEFINE_STATE_MAP_ACCESSOR(state_map, index) override {
     return &mc_state_map[index];
   }
 };
 
-FSM_STATE_DEFINE_ND(test_fsm, s1) {
+RCPPSW_FSM_STATE_DEFINE_ND(test_fsm, s1) {
   printf("Executing state1\n");
   return fsm::event_signal::ekHANDLED;
 }
-FSM_STATE_DEFINE_ND(test_fsm, s2) {
+RCPPSW_FSM_STATE_DEFINE_ND(test_fsm, s2) {
   printf("Executing state2\n");
   return fsm::event_signal::ekHANDLED;
 }
 
-FSM_STATE_DEFINE_ND(test_fsm, s3) {
+RCPPSW_FSM_STATE_DEFINE_ND(test_fsm, s3) {
   printf("Executing state3\n");
   return fsm::event_signal::ekHANDLED;
 }
 
-FSM_STATE_DEFINE_ND(test_fsm, s4) {
+RCPPSW_FSM_STATE_DEFINE_ND(test_fsm, s4) {
   printf("Executing state4\n");
   internal_event(STATE5);
   return fsm::event_signal::ekHANDLED;
 }
-FSM_STATE_DEFINE_ND(test_fsm, s5) {
+RCPPSW_FSM_STATE_DEFINE_ND(test_fsm, s5) {
   printf("Executing state5\n");
   return fsm::event_signal::ekHANDLED;
 }
 
-FSM_STATE_DEFINE_ND(test_fsm, s6) {
+RCPPSW_FSM_STATE_DEFINE_ND(test_fsm, s6) {
   printf("Executing state6\n");
   return fsm::event_signal::ekHANDLED;
 }
 /*******************************************************************************
  * Test Functions
  ******************************************************************************/
-CATCH_TEST_CASE("sanity-test", "[simple_fsm]") {
+CATCH_TEST_CASE("sanity-test", "[rpfsm::simple_fsm]") {
   test_fsm fsm;
 
   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE1);
@@ -122,7 +122,7 @@ CATCH_TEST_CASE("sanity-test", "[simple_fsm]") {
   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE1);
 }
 
-CATCH_TEST_CASE("event-test", "[simple_fsm]") {
+CATCH_TEST_CASE("event-test", "[rpfsm::simple_fsm]") {
   test_fsm fsm;
   fsm.init();
   CATCH_REQUIRE(fsm.current_state() == test_fsm::STATE1);

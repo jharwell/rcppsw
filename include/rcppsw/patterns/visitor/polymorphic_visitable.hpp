@@ -24,21 +24,23 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, visitor);
+NS_START(rcppsw, patterns, visitor, detail);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * \class polymorphic_accept_set_helper
+ * \ingroup patterns visitor
  *
  * \brief Helper class to provide the actual implementation of the visitor
  * pattern, receiving end.
+ *
+ * \tparam T The type to accept.
  */
 template <typename T>
 class polymorphic_accept_set_helper {
@@ -47,8 +49,9 @@ class polymorphic_accept_set_helper {
   virtual ~polymorphic_accept_set_helper(void) = default;
 };
 
+NS_END(detail);
+
 /**
- * \class polymorphic_accept_set<...>
  * \ingroup patterns visitor
  *
  * \brief Allows polymorphic classes (those with a pure virtual member in a base
@@ -66,28 +69,24 @@ class polymorphic_accept_set_helper {
 template <typename... Ts>
 class polymorphic_accept_set {};
 
-/**
- * \class polymorphic_accept_set<T,...>
- *
- * \brief Middle recursive call for template expansion.
+/*
+ * Middle recursive call for template expansion.
  */
 template<typename T, typename... Ts>
-class polymorphic_accept_set<T, Ts...>: public polymorphic_accept_set_helper<T>,
+class polymorphic_accept_set<T, Ts...>: public detail::polymorphic_accept_set_helper<T>,
                                         public polymorphic_accept_set<Ts...> {
  public:
-  using polymorphic_accept_set_helper<T>::accept;
+  using detail::polymorphic_accept_set_helper<T>::accept;
   using polymorphic_accept_set<Ts...>::accept;
 };
 
-/**
- * \class polymorphic_accept_set<T>
- *
- * \brief Base case for template expansion.
+/*
+ * Base case for template expansion.
  */
 template<typename T>
-class polymorphic_accept_set<T>: public polymorphic_accept_set_helper<T> {
+class polymorphic_accept_set<T>: public detail::polymorphic_accept_set_helper<T> {
  public:
-  using polymorphic_accept_set_helper<T>::accept;
+  using detail::polymorphic_accept_set_helper<T>::accept;
 };
 
 NS_END(rcppsw, patterns, visitor);

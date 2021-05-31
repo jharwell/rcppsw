@@ -43,13 +43,13 @@ NS_START(rcppsw, ds);
  * \ingroup ds
  *
  * \brief A 2D logical grid overlayed over a continuous environment using a
- * \a contiguous array of the template parameter type.
+ * \a contiguous array of the template parameter type (\see \ref grid_overlay).
  *
  * \tparam T The type of the grid element (probably a cell of some kind). Must
  * have must have a zero parameter constructor available or it won't compile
- * (this is a limitation of the boost underneath). Furthermore, T must also have
- * a copy constructor available, as move semantics are not supported with the
- * underlying library.
+ * (this is a limitation of boost::multi_array). Furthermore, \p T must also
+ * have a copy constructor available, as move semantics are not supported by
+ * boost::multi_array.
  */
 template <typename T>
 class grid2D_overlay final : public base_grid2D<T>,
@@ -71,10 +71,12 @@ class grid2D_overlay final : public base_grid2D<T>,
 
   /**
    * \param origin The anchor point of the overlay grid in continuous space.
-   * \param res The discretization unit for the grid.
    * \param dims The real size in X,Y which will be discretized into
-   *             X/resolution discrete elements along the X dimension and
-   *             Y/resolution discrete elements along the Y dimension.
+   *             X/\p grid_res discrete elements along the X dimension and
+   *             Y/\p grid_res discrete elements along the Y dimension.
+   * \param grid_res The discretization unit for the grid.
+   * \param field_res The discretization unit for the field the grid is
+   *                  contained in (can be the same as the \p grid_res).
    */
   grid2D_overlay(const math::vector2d& origin,
                  const math::vector2d& dims,
@@ -83,10 +85,10 @@ class grid2D_overlay final : public base_grid2D<T>,
       : grid_overlay(origin, grid_res, field_res),
         ER_CLIENT_INIT("rcppsw.ds.grid2D_overlay"),
         mc_dim(dims),
-        m_cells(boost::extents[static_cast<typename index_range::index>(
-            xdsize())][typename index_range::index(ydsize())]) {
-    RCSW_UNUSED double remx = std::remainder(mc_dim.x(), resolution().v());
-    RCSW_UNUSED double remy = std::remainder(mc_dim.y(), resolution().v());
+        m_cells(boost::extents[static_cast<typename index_range::index>(xdsize())]
+                              [typename index_range::index(ydsize())]) {
+    RCPPSW_UNUSED double remx = std::remainder(mc_dim.x(), resolution().v());
+    RCPPSW_UNUSED double remy = std::remainder(mc_dim.y(), resolution().v());
 
     /*
      * Some values of dimensions and grid resolution might not be able to be
@@ -132,7 +134,15 @@ class grid2D_overlay final : public base_grid2D<T>,
    */
   double yrsize(void) const { return mc_dim.y(); }
 
+  /**
+   * \brief Get the real dimensions of the grid; that is, continuous floating
+   * point.
+   */
   const math::vector2d& dimsr(void) const { return mc_dim; }
+
+  /**
+   * \brief Get the discrete dimensions of the grid.
+   */
   math::vector2z dimsd(void) const {
     return math::dvec2zvec(mc_dim, resolution().v());
   }

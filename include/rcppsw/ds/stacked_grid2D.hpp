@@ -58,6 +58,15 @@ NS_START(rcppsw, ds);
 template <typename TupleTypes>
 class stacked_grid2D {
  public:
+  /**
+   * \param origin The anchor point of the stacked grid in continuous space.
+   * \param dims The real size in X,Y which will be discretized into
+   *             X/\p grid_res discrete elements along the X dimension and
+   *             Y/\p grid_res discrete elements along the Y dimension.
+   * \param grid_res The discretization unit for the grid.
+   * \param field_res The discretization unit for the field the grid is
+   * contained in (can be the same as the \p grid_res).
+   */
   stacked_grid2D(const math::vector2d& origin,
                  const math::vector2d& dims,
                  const types::discretize_ratio& grid_res,
@@ -69,9 +78,9 @@ class stacked_grid2D {
   virtual ~stacked_grid2D(void) { rm_layers<kStackSize - 1>(); }
 
   /**
-  * \brief The type of the objects stored in a particular layer.
-  * \tparam Index The index of the layer.
-  */
+   * \brief The type of the objects stored in a particular layer.
+   * \tparam Index The index of the layer.
+   */
   template <size_t Index>
   using value_type = typename std::tuple_element<Index, TupleTypes>::type;
 
@@ -113,8 +122,8 @@ class stacked_grid2D {
     return access<Index>(d.x(), d.y());
   }
   template <size_t Index>
-  const typename layer_value_type<Index>::value_type& access(
-      const math::vector2z& d) const {
+  const typename layer_value_type<Index>::value_type&
+  access(const math::vector2z& d) const {
     return access<Index>(d.x(), d.y());
   }
 
@@ -128,35 +137,35 @@ class stacked_grid2D {
   }
 
   /**
-   * \see \ref overlay_grid2D::xdsize().
+   * \see \ref grid2D_overlay::xdsize().
    */
   size_t xdsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xdsize();
   }
 
   /**
-   * \see \ref overlay_grid2D::xrsize().
+   * \see \ref grid2D_overlay::xrsize().
    */
   double xrsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xrsize();
   }
 
   /**
-   * \see \ref overlay_grid2D::ydsize().
+   * \see \ref grid2D_overlay::ydsize().
    */
   size_t ydsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->ydsize();
   }
 
   /**
-   * \see \ref overlay_grid2D::yrsize().
+   * \see \ref grid2D_overlay::yrsize().
    */
   double yrsize(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->yrsize();
   }
 
   /**
-   * \see \ref overlay_grid2D::resolution().
+   * \see \ref grid2D_overlay::resolution().
    */
   const types::discretize_ratio& resolution(void) const {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))
@@ -171,7 +180,7 @@ class stacked_grid2D {
    * to prevent negative indices in the degenerate case where the stacked grid
    * only has 1 layer.
    */
-  template <size_t Index, RCPPSW_SFINAE_FUNC((Index > 0)), typename... Args>
+  template <size_t Index, RCPPSW_SFINAE_DECLDEF((Index > 0)), typename... Args>
   void add_layers(Args&&... args) {
     add_layer<Index, Args...>(std::forward<Args>(args)...);
     add_layer<Index - 1, Args...>(std::forward<Args>(args)...);
@@ -182,7 +191,7 @@ class stacked_grid2D {
    * prevent negative indices in the degenerate case where the stacked grid only
    * has 1 layer.
    */
-  template <size_t Index, RCPPSW_SFINAE_FUNC((Index == 0)), typename... Args>
+  template <size_t Index, RCPPSW_SFINAE_DECLDEF((Index == 0)), typename... Args>
   void add_layers(Args&&... args) {
     add_layer<Index, Args...>(std::forward<Args>(args)...);
   }
@@ -197,8 +206,7 @@ class stacked_grid2D {
   template <size_t Index, typename... Args>
   void add_layer(Args&&... args) {
     m_layers[kStackSize - Index - 1] =
-        new layer_value_type<kStackSize - Index - 1>(
-            std::forward<Args>(args)...);
+        new layer_value_type<kStackSize - Index - 1>(std::forward<Args>(args)...);
   }
 
   template <size_t Index>
@@ -211,7 +219,7 @@ class stacked_grid2D {
    * layers. Indice reversal is not really necessary here, but doing it for
    * reasons of Principle of Least Surprise.
    */
-  template <size_t Index, RCPPSW_SFINAE_FUNC((Index > 0))>
+  template <size_t Index, RCPPSW_SFINAE_DECLDEF((Index > 0))>
   void rm_layer(void) {
     delete reinterpret_cast<const layer_value_type<Index>*>(
         m_layers[kStackSize - Index - 1]);
@@ -220,7 +228,7 @@ class stacked_grid2D {
   /**
    * \brief Remove a layer from the stacked grid when you only have 1 layer.
    */
-  template <size_t Index, RCPPSW_SFINAE_FUNC((Index == 0))>
+  template <size_t Index, RCPPSW_SFINAE_DECLDEF((Index == 0))>
   void rm_layer(void) {
     delete reinterpret_cast<const layer_value_type<0>*>(m_layers[0]);
   }

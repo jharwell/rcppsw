@@ -28,7 +28,7 @@
 #include <sys/syscall.h>
 #include <sys/types.h>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -42,8 +42,8 @@ NS_START(rcppsw, multithread);
  * \class threadable
  * \ingroup multithread
  *
- * \brief Derived classes will have the ability to spawn a new thread and run
- * inside the specified main loop.
+ * \brief Daemon interface class which can be derived from to indicate that the
+ * class can spawn a new thread and jump into the main loop defined for the class.
  */
 class threadable {
  public:
@@ -85,7 +85,7 @@ class threadable {
   /**
    * \brief Check if a thread object has been told to terminate elsewhere.
    */
-  bool terminated(void) { return m_thread_run; }
+  bool terminated(void) const { return m_thread_run; }
 
   /**
    * \brief Exit a thread from within the thread itself.
@@ -93,7 +93,7 @@ class threadable {
    * \param ret If non-NULL, will be filled with the return value of the thread
    * as it exits.
    */
-  RCSW_DEAD void exit(void* ret = nullptr) {
+  RCPPSW_DEAD void exit(void* ret = nullptr) {
     m_thread_run = false;
     if (nullptr == ret) {
       int ret2;
@@ -108,14 +108,14 @@ class threadable {
    *
    * \return The handle.
    */
-  pthread_t thread_handle(void) { return m_thread; }
+  pthread_t thread_handle(void) const { return m_thread; }
 
   /**
    * \brief Get the ID of the thread within the parent process.
    *
    * \return The thread ID (guaranteed to be unique among threads in a process).
    */
-  int64_t thread_id(void) { return syscall(__NR_gettid); }
+  int64_t thread_id(void) const { return syscall(__NR_gettid); }
 
  private:
   static void* entry_point(void* this_p) {
@@ -123,9 +123,11 @@ class threadable {
     return pt->thread_main(pt->m_arg);
   } /* entry_point() */
 
-  bool m_thread_run{false};
+  /* clancg-format off */
+  bool m_thread_run{ false };
   pthread_t m_thread{};
-  void* m_arg{nullptr};
+  void* m_arg{ nullptr };
+  /* clancg-format on */
 };
 
 NS_END(multithread, rcppsw);

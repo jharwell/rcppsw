@@ -38,8 +38,8 @@ status_t threadable::start(void* arg, int core) {
   m_thread_run = true;
 
   m_arg = arg;
-  RCSW_CHECK(
-      0 == pthread_create(&m_thread, nullptr, &threadable::entry_point, this));
+  RCSW_CHECK(0 ==
+             pthread_create(&m_thread, nullptr, &threadable::entry_point, this));
   if (-1 != core) {
     RCSW_CHECK(OK == threadm_core_lock(m_thread, static_cast<size_t>(core)));
   }

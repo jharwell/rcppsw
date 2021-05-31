@@ -24,9 +24,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/math/range.hpp"
 #include "rcppsw/patterns/pimpl/pimpl.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -45,29 +45,51 @@ NS_END(detail);
  * \brief Random number generator class using the PIMPL pattern in order to not
  * have to include \c \<random\>.
  */
-class rng : public patterns::pimpl::pimpl<detail::rng_impl> {
+class rng final : public patterns::pimpl::pimpl<detail::rng_impl> {
  public:
-  explicit rng(uint seed);
-  ~rng(void) override final;
+  explicit rng(size_t seed);
+  ~rng(void) override;
 
-  uint seed(void) const { return m_seed; }
-  void seed(uint seed) { m_seed = seed; }
+  /**
+   * \brief Get the current seed.
+   */
+  size_t seed(void) const { return m_seed; }
 
+  /**
+   * \brief Return a uniform selection in the range [lb, ub].
+   */
   template <typename T>
   T uniform(const T& lb, const T& ub);
 
-  template<typename T>
+  /**
+   * \brief Return a uniform selection in the range specified by \p c_range.
+   */
+  template <typename T>
   T uniform(const range<T>& c_range) {
     return uniform(c_range.lb(), c_range.ub());
   }
 
+  /**
+   * \brief Return a selection according to the Gaussian distribution G(mean,
+   * std_dev).
+   */
   double gaussian(double mean, double std_dev);
+
+  /**
+   * \brief Return a selection according to the exponential distribution
+   * 1 - e ^(-lambda).
+   */
   double exponential(double lambda);
+
+  /**
+   * \brief Return a selection according to a Bernoulli distribution with
+   * parameter \p p.
+   */
   bool bernoulli(double p);
 
  private:
   /* clang-format off */
-  uint m_seed;
+  size_t m_seed;
   /* clang-format on */
 };
 

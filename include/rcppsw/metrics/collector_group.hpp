@@ -31,8 +31,8 @@
 #include <string>
 #include <utility>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/metrics/base_metrics_collector.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -56,7 +56,7 @@ class collector_group {
   using key_type = std::string;
   using mapped_type = std::unique_ptr<base_metrics_collector>;
 
-  collector_group(void) : m_collectors() {}
+  collector_group(void) = default;
   virtual ~collector_group(void) = default;
 
   /**
@@ -66,10 +66,14 @@ class collector_group {
    *
    * \param name The key for the collector in the group. Should be unique,
    *             though it is not a requirement. If it is not unique then the
-   *             older collector that was mapped to that name will be
-   *             overwritten.
+   *             older collector that was mapped to that name will NOT be
+   *             overwritten, and nothing is done. You have to remove it first
+   *             \ref collector_unregister().
    *
    * \param args 0 or more arguments to the collector constructor.
+   *
+   * \return \c TRUE if the collector was successfully registered, and \c FALSE
+   * otherwise.
    */
   template <typename T, typename... Args>
   bool collector_register(const key_type& name, Args&&... args) {
@@ -80,7 +84,14 @@ class collector_group {
     }
     return false;
   }
-  bool collector_remove(const key_type& name) {
+
+  /**
+   * \brief Unregister the collector with mapped name \p name from the group.
+   *
+   * \return \c TRUE if the collector was successfully unregistered, and \c
+   * FALSE otherwise.
+   */
+  bool collector_unregister(const key_type& name) {
     auto it = m_collectors.find(name);
     if (it != m_collectors.end()) {
       m_collectors.erase(name);
@@ -190,15 +201,27 @@ class collector_group {
    * \brief Call the \ref base_metrics_collector::csv_line_write() function on
    * all collectors in the group.
    *
-   * \return \c TRUE iff ALL collectors in the group wrote out metrics this
-   * timestep.
+   * \p fail_ok Is it OK if one or more collectors fail to write due to
+   * filesystem I/O errors, or not?
+   *
+   * \return If \p fail_ok is \c FALSE, \c TRUE iff ALL collectors in the group
+   * attempted to write out metrics this timestep and were successful, and \c
+   * FALSE otherwise. If \p fail_ok is \c TRUE, then \c TRUE if all collectors
+   * attempted to write out metrics this timestep, regardless of success, and \c
+   * FALSE otherwise.
    */
-  bool metrics_write_all(void) {
-    return std::all_of(m_collectors.begin(),
-                       m_collectors.end(),
-                       [&](const std::pair<const key_type, mapped_type>& pair) {
-                         return pair.second->csv_line_write();
-                       });
+  bool metrics_write_all(bool fail_ok) {
+    return std::all_of(
+        m_collectors.begin(),
+        m_collectors.end(),
+        [&](const std::pair<const key_type, mapped_type>& pair) -> bool {
+          auto res = pair.second->csv_line_write();
+          if (fail_ok) {
+            return !(res & metrics_write_status::ekNO_ATTEMPT);
+          } else {
+            return (res & metrics_write_status::ekSUCCESS);
+          }
+        });
   }
 
   /**
@@ -215,7 +238,7 @@ class collector_group {
 
  private:
   /* clang-format off */
-  std::map<key_type, mapped_type> m_collectors;
+  std::map<key_type, mapped_type> m_collectors{};
   /* clang-format on */
 };
 

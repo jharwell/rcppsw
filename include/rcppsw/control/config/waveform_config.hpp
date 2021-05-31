@@ -39,7 +39,8 @@ NS_START(rcppsw, control, config);
  * \struct waveform_config
  * \ingroup control config
  *
- * Not all parameters are applicable to all waveform types.
+ * Parameters for \ref base_waveform derived classes. Not all parameters are
+ * applicable to all waveform types.
  */
 struct waveform_config final : public rcppsw::config::base_config {
   waveform_config(void) = default;

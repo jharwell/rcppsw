@@ -29,8 +29,8 @@
 
 #include "rcsw/common/fpc.h"
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/math/rng.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/types/timestep.hpp"
 
 /*******************************************************************************
@@ -42,8 +42,11 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * \brief A wrapper around std::queue to make it more amenable to
- * queueing theoretic analysis by tracking queue state.
+ * \class poisson_queue
+ * \ingroup ds
+ *
+ * \brief A wrapper around std::queue to make it more amenable to queueing
+ * theoretic analysis by tracking queue state.
  */
 template <typename T>
 class poisson_queue {
@@ -55,25 +58,29 @@ class poisson_queue {
     /**
      * \brief The # of operations since the last reset.
      */
-    size_t count{0};
+    size_t count{ 0 };
 
     /**
      * \brief The # of operations since the beginning of time.
      */
-    size_t total_count{0};
+    size_t total_count{ 0 };
 
     /**
      * \brief The accumulated time between operations since the last reset.
      */
-    types::timestep interval_accum{0};
+    types::timestep interval_accum{ 0 };
 
     /**
      * \brief The accumulated time between operations since the beginning of
      * time.
      */
-    types::timestep total_interval_accum{0};
+    types::timestep total_interval_accum{ 0 };
   };
 
+  /**
+   * \param lambda The enqueue rate for the queue.
+   * \param mu The dequeue rate for the queue.
+   */
   poisson_queue(double lambda, double mu, math::rng* rng)
       : mc_lambda(lambda), mc_mu(mu), m_rng(rng) {}
 
@@ -81,11 +88,15 @@ class poisson_queue {
   poisson_queue(const poisson_queue&) = delete;
   const poisson_queue& operator=(const poisson_queue&) = delete;
 
+  /**
+   * \brief Get the current enqueue data.
+   */
   op_metadata enqueue_data(void) const { return m_enqueue.md; }
 
+  /**
+   * \brief Get the current dequeue data.
+   */
   op_metadata dequeue_data(void) const { return m_dequeue.md; }
-
-  size_t size(void) const { return m_queue.size(); }
 
   double lambda(void) const { return mc_lambda; }
   double mu(void) const { return mc_mu; }
@@ -109,8 +120,8 @@ class poisson_queue {
   }
 
   /**
-   * \brief Check if the conditions are ready for dequeue from the queue as
-   * part of a poisson process. Does not perform the dequeue operation.
+   * \brief Check if the conditions are ready for dequeue at time \p t from the
+   * queue as part of a poisson process. Does not perform the dequeue operation.
    *
    * \return \c TRUE if an event has been triggered for dequeueing, \c FALSE
    * otherwise.
@@ -126,10 +137,11 @@ class poisson_queue {
   }
 
   /**
-   * \brief Add an item to the queue after an event has been triggered. This is
-   * a separate function from checking for the event because it may be that
-   * generating the items to enqueue is a non-trivial and/or non-reversible
-   * task, and we only want to force the caller to do that when necessary.
+   * \brief Add an item to the queue after an event has been triggered at time
+   * \p t. This is a separate function from checking for the event because it
+   * may be that generating the items to enqueue is a non-trivial and/or
+   * non-reversible task, and we only want to force the caller to do that when
+   * necessary.
    */
   void enqueue(const T& item, const types::timestep& t) {
     ++m_enqueue.md.total_count;
@@ -181,19 +193,21 @@ class poisson_queue {
     m_dequeue.md.interval_accum = types::timestep(0);
   }
 
+  /**
+   * \brief Determine if \p key is currently contained in the queue.
+   */
   bool contains(const T& key) const {
-    return m_queue.end() !=
-           std::find_if(m_queue.begin(), m_queue.end(), [&](const auto& a) {
-             return a == key;
-           });
+    return m_queue.end() != std::find_if(m_queue.begin(),
+                                         m_queue.end(),
+                                         [&](const auto& a) { return a == key; });
   }
 
  private:
   struct op_data {
     struct op_metadata md;
-    bool op_set{false};
-    types::timestep last_op_time{0};
-    types::timestep next_op_time{0};
+    bool op_set{ false };
+    types::timestep last_op_time{ 0 };
+    types::timestep next_op_time{ 0 };
   };
 
   /* clang-format off */
@@ -203,8 +217,12 @@ class poisson_queue {
   math::rng*      m_rng;
   struct op_data  m_enqueue{};
   struct op_data  m_dequeue{};
-  std::deque<T> m_queue{};
+  std::deque<T>   m_queue{};
   /* clang-format on */
+
+ public:
+  RCPPSW_WRAP_DECLDEF(size, m_queue, const);
+  RCPPSW_WRAP_DECLDEF(size, m_queue);
 };
 
 NS_END(ds, rcppsw);

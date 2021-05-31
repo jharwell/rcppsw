@@ -28,7 +28,7 @@
 #include <string>
 #include <vector>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -50,9 +50,9 @@ NS_START(rcppsw, utils);
  * otherwise.
  */
 template <typename T>
-bool parse_values(std::istream& is, uint n_fields, T* buf, char delim = '\n') {
+bool parse_values(std::istream& is, size_t n_fields, T* buf, char delim = '\n') {
   std::vector<std::string> s(n_fields);
-  uint i = 0;
+  size_t i = 0;
 
   /*
    * Get actual # fields present in stream

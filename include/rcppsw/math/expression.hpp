@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -44,9 +44,10 @@ NS_START(rcppsw, math);
 template <class T>
 class expression {
  public:
-  expression(void) : m_last() {}
+  expression(void) = default;
   explicit expression(const T& last) : m_last(last) {}
   virtual ~expression(void) = default;
+
   expression(const expression&) = default;
   expression& operator=(const expression&) = default;
 
@@ -60,21 +61,17 @@ class expression {
    */
   T eval(const T& val) { return m_last = val; }
 
-  void reset(void) { m_last = T{0}; }
+  void reset(void) { m_last = T{ 0 }; }
 
   bool operator==(const expression& other) const {
     return this->v() == other.v();
   }
-  bool operator>(const expression& other) const {
-    return this->v() > other.v();
-  }
-  bool operator<(const expression& other) const {
-    return this->v() < other.v();
-  }
+  bool operator>(const expression& other) const { return this->v() > other.v(); }
+  bool operator<(const expression& other) const { return this->v() < other.v(); }
 
  private:
   /* clang-format off */
-  T m_last;
+  T m_last{};
   /* clang-format on */
 };
 

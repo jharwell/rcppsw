@@ -27,9 +27,9 @@
 #include <algorithm>
 #include <vector>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/math/expression.hpp"
 #include "rcppsw/math/radians.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls

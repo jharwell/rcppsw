@@ -44,17 +44,16 @@ namespace clustering = rcppsw::algorithm::clustering;
 /*******************************************************************************
  * Test Cases
  ******************************************************************************/
-CATCH_TEST_CASE("Maximum Subarray Finder", "[algorithm]") {
+CATCH_TEST_CASE("Maximum Subarray Finder", "[ralgorithm]") {
   std::vector<int> data = {0, 1, 2, 3, 4, 5, 6, 0, 0, 0};
-  rcppsw::algorithm::max_subarray_finder<int> finder(data);
-  std::vector<int> res;
-  CATCH_REQUIRE(OK == finder.find(&res));
-  CATCH_REQUIRE(res[0] == 21);
-  CATCH_REQUIRE(res[1] == 0);
-  CATCH_REQUIRE(res[2] == 6);
+  ralgorithm::max_subarray_finder<int> finder;
+  auto res = finder(data);
+  CATCH_REQUIRE(21 == std::get<0>(*res));
+  CATCH_REQUIRE(0 == std::get<1>(*res));
+  CATCH_REQUIRE(6 == std::get<2>(*res));
 }
 
-CATCH_TEST_CASE("Closest Pair", "[algorithm]") {
+CATCH_TEST_CASE("Closest Pair", "[ralgorithm]") {
   std::vector<rcppsw::math::vector2i> data = {{4, 3}, {0, 2}, {0, 1}, {2, 10}, {5, 8}, {4, 1}};
   /* for (size_t i = 0; i < 1000; ++i) { */
   /*   for (size_t j = 0; j < 1000; ++j) { */
@@ -62,7 +61,7 @@ CATCH_TEST_CASE("Closest Pair", "[algorithm]") {
   /*   } /\* for(j..) *\/ */
   /* } /\* for(i..) *\/ */
 
-  auto dist_func = std::bind(&math::vector2i::distance,
+  auto dist_func = std::bind(&math::vector2i::l2norm,
                              std::placeholders::_1,
                              std::placeholders::_2);
   auto res = rcppsw::algorithm::closest_pair2D<math::vector2i>()("brute_force",
@@ -72,22 +71,22 @@ CATCH_TEST_CASE("Closest Pair", "[algorithm]") {
   CATCH_REQUIRE((res.p2 == math::vector2i(0, 2) || res.p2 == math::vector2i(0, 1)));
   CATCH_REQUIRE(res.dist == 1.0);
 
-  res = rcppsw::algorithm::closest_pair2D<math::vector2i>()("recursive",
-                                                                  data,
-                                                                  dist_func);
+  res = ralgorithm::closest_pair2D<math::vector2i>()("recursive",
+                                                     data,
+                                                     dist_func);
   CATCH_REQUIRE((res.p1 == math::vector2i(0, 2) || res.p1 == math::vector2i(0, 1)));
   CATCH_REQUIRE((res.p2 == math::vector2i(0, 2) || res.p2 == math::vector2i(0, 1)));
   CATCH_REQUIRE(res.dist == 1.0);
 }
 
-CATCH_TEST_CASE("Kmeans", "[clustering]") {
+CATCH_TEST_CASE("Kmeans", "[ralg::clustering]") {
   std::vector<double> data = {1.0, 2.0, 2.3, 1.8, 0.5, 9.8, 7.6, 8.4, 9.1, 6.4};
   /* std::vector<double> data; */
   /* for (size_t i = 0; i < 100000000; ++i) { */
   /*   data.push_back(i % 10); */
   /* } /\* for(i..) *\/ */
 
-  auto impl = std::make_unique<clustering::detail::kmeans_impl<double>>(4);
+  auto impl = std::make_unique<clustering::kmeans_omp<double>>(4);
   clustering::kmeans<double> alg(data,
                                  std::move(impl),
                                  2,

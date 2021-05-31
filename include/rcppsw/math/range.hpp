@@ -23,13 +23,13 @@
 
 /*******************************************************************************
  * Includes
-******************************************************************************/
+ ******************************************************************************/
 #include <cmath>
 #include <iosfwd>
 #include <string>
 
-#include "rcppsw/common/common.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/utils/string_utils.hpp"
 
 /*******************************************************************************
@@ -66,11 +66,25 @@ class range final : public er::client<range<T>> {
         m_ub(ub),
         m_span(m_ub - m_lb) {}
 
-  T lb(void) const RCSW_CHECK_RET { return m_lb; }
-  T ub(void) const RCSW_CHECK_RET { return m_ub; }
+  /**
+   * \brief Get the lower bound of the range.
+   */
+  RCPPSW_NODISCARD T lb(void) const { return m_lb; }
 
-  T span(void) const RCSW_CHECK_RET { return m_span; }
+  /**
+   * \brief Get the upper bound of the range.
+   */
+  RCPPSW_NODISCARD T ub(void) const { return m_ub; }
 
+  /**
+   * \brief Get the size of the range (max - max).
+   */
+  RCPPSW_NODISCARD T span(void) const { return m_span; }
+
+  /**
+   * \brief Set the range lower bound. It must be less than the current \ref
+   * ub() or an assertion will trigger.
+   */
   void lb(const T& lb) {
     ER_ASSERT(m_initialized, "Range not initialized");
     ER_ASSERT(lb < m_ub,
@@ -82,6 +96,10 @@ class range final : public er::client<range<T>> {
     m_span -= m_lb;
   }
 
+  /**
+   * \brief Set the range upper bound. It must be greater than the current \ref
+   * lb() or an assertion will trigger.
+   */
   void ub(const T& ub) {
     ER_ASSERT(m_initialized, "Range not initialized");
     ER_ASSERT(ub > m_lb,
@@ -94,6 +112,10 @@ class range final : public er::client<range<T>> {
     m_span -= m_lb;
   }
 
+  /**
+   * \brief Set the \ref lb() and \ref ub() for the range simultaneously. The lb
+   * must be < ub or an assertion will trigger.
+   */
   void set(const T& lb, const T& ub) {
     ER_ASSERT(lb < ub,
               "New lower bound (%s) >= New upper bound (%s)",
@@ -112,13 +134,13 @@ class range final : public er::client<range<T>> {
    *
    * \param value The value to test.
    */
-  template <typename U = T, RCPPSW_SFINAE_FUNC(!std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
   bool contains(const T& value) const {
     ER_ASSERT(m_initialized, "Range not initialized");
     return value >= m_lb && value <= m_ub;
   }
 
-  template <typename U = T, RCPPSW_SFINAE_FUNC(std::is_floating_point<U>::value)>
+  template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   bool contains(const T& value) const {
     ER_ASSERT(m_initialized, "Range not initialized");
     return value >= m_lb && value <= m_ub;
@@ -153,7 +175,7 @@ class range final : public er::client<range<T>> {
    *
    * \return The wrapped value.
    */
-  RCSW_PURE T wrap_value(T value) const RCSW_CHECK_RET {
+  RCPPSW_NODISCARD RCPPSW_PURE T wrap_value(T value) const {
     ER_ASSERT(m_initialized, "Range not initialized");
 
     while (value > m_ub) {
@@ -164,10 +186,14 @@ class range final : public er::client<range<T>> {
     }
     return value;
   }
+
+  /**
+   * \brief Get the midpoint of the range.
+   */
   T center(void) const { return (m_lb + m_ub) / 2.0; }
 
   /**
-   * \brief Return a string representation of the range in the form of [lb,ub]
+   * \brief Return a string representation of the range in the form of '[lb,ub]'.
    */
   std::string to_str(void) const {
     return "[" + rcppsw::to_string(m_lb) + "-" + rcppsw::to_string(m_ub) + "]";
@@ -189,7 +215,7 @@ class range final : public er::client<range<T>> {
    * \brief For parsing a range from a string in the form of \c "LB:UB".
    */
   friend std::istream& operator>>(std::istream& is, range& r) {
-    T values[2] = {T(), T()};
+    T values[2] = { T(), T() };
     utils::parse_values<T>(is, 2, values, ':');
     r.set(values[0], values[1]);
     return is;

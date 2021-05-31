@@ -31,7 +31,7 @@
 #include <utility>
 #include <array>
 
-#include "rcppsw/common/common.hpp"
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/patterns/fsm/event.hpp"
 #include "rcppsw/patterns/fsm/state_action.hpp"
@@ -201,7 +201,7 @@ class base_fsm : public er::client<base_fsm> {
    *
    * \return The row corresponding to the passed in state in the state map.
    */
-  virtual const state_map_row* state_map(RCSW_UNUSED size_t) {
+  virtual const state_map_row* state_map(RCPPSW_UNUSED size_t) {
     return nullptr;
   }
 
@@ -213,7 +213,7 @@ class base_fsm : public er::client<base_fsm> {
    *
    * \return The row corresponding to the passed in state in the state map.
    */
-  virtual const state_map_ex_row* state_map_ex(RCSW_UNUSED size_t) {
+  virtual const state_map_ex_row* state_map_ex(RCPPSW_UNUSED size_t) {
     return nullptr;
   }
 
@@ -236,6 +236,7 @@ class base_fsm : public er::client<base_fsm> {
     m_event_data = std::move(event_data);
   }
 
+  /* clang-format off */
   const uint8_t                     mc_max_states;
   uint8_t                           m_current_state;
   uint8_t                           m_next_state{0};
@@ -246,6 +247,7 @@ class base_fsm : public er::client<base_fsm> {
   bool                              m_event_generated{false};
   bool                              m_event_data_hold{false};
   std::unique_ptr<class event_data> m_event_data{nullptr};
+  /* clang-format on */
 };
 
 NS_END(fsm, patterns, rcppsw);
@@ -254,7 +256,7 @@ NS_END(fsm, patterns, rcppsw);
  * State Macros With Data
  ******************************************************************************/
 /**
- * \def FSM_STATE_DECLARE(FSM, state_name, event_data)
+ * \def RCPPSW_FSM_STATE_DECLARE(FSM, state_name, event_data)
  *
  * Declare a state \c state_name within the class definition of \c FSM, which
  * requires the input signal of \c event_data each time the state is executed.
@@ -263,23 +265,23 @@ NS_END(fsm, patterns, rcppsw);
  * (anything other than that will halt the state machine/crash the program). Can
  * return other signals if the state is part of a \ref hfsm.
  */
-#define FSM_STATE_DECLARE(FSM, state_name, event_data)      \
+#define RCPPSW_FSM_STATE_DECLARE(FSM, state_name, event_data)      \
   int ST_##state_name(event_data*);                   \
   rcppsw::patterns::fsm::                         \
       state_action1<FSM, event_data, &FSM::ST_##state_name> \
   state_name{}
 
 /**
- * \def FSM_STATE_DEFINE(FSM, state_name, event_data)
+ * \def RCPPSW_FSM_STATE_DEFINE(FSM, state_name, event_data)
  *
  * Define a state \c state_name for a class \c FSM, which requires the input
  * signal of \c event_data each time the state is executed.
  */
-#define FSM_STATE_DEFINE(FSM, state_name, event_data)     \
+#define RCPPSW_FSM_STATE_DEFINE(FSM, state_name, event_data)     \
   int FSM::ST_##state_name(event_data)
 
 /**
- * \def FSM_GUARD_DECLARE(FSM, guard_name, event_data)
+ * \def RCPPSW_FSM_GUARD_DECLARE(FSM, guard_name, event_data)
  *
  * Declare a guard \c guard_name within the class definition of \c FSM, which
  * requires the input signal of \c event_data each time the guard is executed.
@@ -289,23 +291,23 @@ NS_END(fsm, patterns, rcppsw);
  * for the state will not be executed. If the guard returns \c TRUE, then it
  * will.
  */
-#define FSM_GUARD_DECLARE(FSM, guard_name, event_data)               \
+#define RCPPSW_FSM_GUARD_DECLARE(FSM, guard_name, event_data)               \
   bool GD_##guard_name(const event_data*);                           \
   rcppsw::patterns::fsm::                                  \
       state_guard_condition1<FSM, event_data, &FSM::GD_##guard_name> \
   guard_name{}
 
 /**
- * \def FSM_GUARD_DEFINE(FSM, guard_name, event_data) Define a guard
+ * \def RCPPSW_FSM_GUARD_DEFINE(FSM, guard_name, event_data) Define a guard
  * \c guard_name for a class  \c FSM, which requires the input
  * signal of \c event_data each time the guard is executed.
  */
-#define FSM_GUARD_DEFINE(FSM, guard_name, event_data)     \
+#define RCPPSW_FSM_GUARD_DEFINE(FSM, guard_name, event_data)     \
   bool FSM::GD_##guard_name(const event_data)
 
 
 /**
- * \def FSM_ENTRY_DECLARE(FSM, entry_name, event_data)
+ * \def RCPPSW_FSM_ENTRY_DECLARE(FSM, entry_name, event_data)
  *
  * Declare an entry \c entry_name within the class definition of \c FSM, which
  * requires the input signal of \c event_data each time the entry is executed.
@@ -315,120 +317,120 @@ NS_END(fsm, patterns, rcppsw);
  * state different than current one), then the entry function for that state
  * will be executed.
  */
-#define FSM_ENTRY_DECLARE(FSM, entry_name, event_data)            \
+#define RCPPSW_FSM_ENTRY_DECLARE(FSM, entry_name, event_data)            \
   void EN_##entry_name(const event_data*);                        \
   rcppsw::patterns::fsm::                               \
       state_entry_action1<FSM, event_data, &FSM::EN_##entry_name> \
   entry_name{}
 
 /**
- * \def FSM_ENTRY_DEFINE(FSM, entry_name, event_data)
+ * \def RCPPSW_FSM_ENTRY_DEFINE(FSM, entry_name, event_data)
  *
  * Declare an entry \c entry_name for a class \c FSM, which requires the input
  * signal of \c event_data each time the entry is executed.
  */
-#define FSM_ENTRY_DEFINE(FSM, entry_name, event_data)  \
+#define RCPPSW_FSM_ENTRY_DEFINE(FSM, entry_name, event_data)  \
   void FSM::EN_##entry_name(const event_data)
 
 /**
- * \def FSM_EXIT_DECLARE(FSM, exit_name)
+ * \def RCPPSW_FSM_EXIT_DECLARE(FSM, exit_name)
  *
  * Declare an exit \c exit_name within the class definition of \c FSM.
  *
  * Whenever a state transition occurs in the FSM, if the old state has an exit
  * function defined then it will be run before leaving the state.
  */
-#define FSM_EXIT_DECLARE(FSM, exit_name)                                        \
+#define RCPPSW_FSM_EXIT_DECLARE(FSM, exit_name)                                        \
   void EX_##exit_name(void);                                                    \
   rcppsw::patterns::fsm::state_exit_action<FSM, &FSM::EX_##exit_name> \
   exit_name{}
 
 /**
- * \def FSM_EXIT_DEFINE(FSM, exit_name)
+ * \def RCPPSW_FSM_EXIT_DEFINE(FSM, exit_name)
  *
  * Define an exit \c exit_name within the a class \c FSM.
  */
-#define FSM_EXIT_DEFINE(FSM, exit_name) void FSM::EX_##exit_name(void)
+#define RCPPSW_FSM_EXIT_DEFINE(FSM, exit_name) void FSM::EX_##exit_name(void)
 
 /*******************************************************************************
 * State Macros Without Data
 ******************************************************************************/
 /**
- * \def FSM_STATE_DECLARE_ND(FSM, state_name)
+ * \def RCPPSW_FSM_STATE_DECLARE_ND(FSM, state_name)
  *
- * Same as \ref FSM_STATE_DECLARE(), but without any input data.
+ * Same as \ref RCPPSW_FSM_STATE_DECLARE(), but without any input data.
  */
-#define FSM_STATE_DECLARE_ND(FSM, state_name, ...)                       \
+#define RCPPSW_FSM_STATE_DECLARE_ND(FSM, state_name, ...)                       \
   int ST_##state_name(void) __VA_ARGS__;                                            \
   rcppsw::patterns::fsm::state_action0<FSM, &FSM::ST_##state_name>      \
   state_name{}
 
 /**
- * \def FSM_STATE_DEFINE_ND(FSM, state_name)
+ * \def RCPPSW_FSM_STATE_DEFINE_ND(FSM, state_name)
  *
- * Same as \ref FSM_STATE_DEFINE(), but without any input data.
+ * Same as \ref RCPPSW_FSM_STATE_DEFINE(), but without any input data.
  */
-#define FSM_STATE_DEFINE_ND(FSM, state_name) int FSM::ST_##state_name(void)
+#define RCPPSW_FSM_STATE_DEFINE_ND(FSM, state_name) int FSM::ST_##state_name(void)
 
 /**
- * \def FSM_GUARD_DECLARE_ND(FSM, guard_name)
+ * \def RCPPSW_FSM_GUARD_DECLARE_ND(FSM, guard_name)
  *
- * Same as \ref FSM_GUARD_DECLARE(), but without any input data.
+ * Same as \ref RCPPSW_FSM_GUARD_DECLARE(), but without any input data.
  */
-#define FSM_GUARD_DECLARE_ND(FSM, guard_name)                                    \
+#define RCPPSW_FSM_GUARD_DECLARE_ND(FSM, guard_name)                                    \
   bool GD_##guard_name(void);                                                    \
   rcppsw::patterns::fsm::state_guard_condition0<FSM,                   \
                                                           &FSM::GD_##guard_name> \
   guard_name{}
 
 /**
- * \def FSM_GUARD_DEFINE_ND(FSM, guard_name)
+ * \def RCPPSW_FSM_GUARD_DEFINE_ND(FSM, guard_name)
  *
- * Same as \ref FSM_GUARD_DEFINE(), but without any input data.
+ * Same as \ref RCPPSW_FSM_GUARD_DEFINE(), but without any input data.
  */
-#define FSM_GUARD_DEFINE_ND(FSM, guard_name) bool FSM::GD_##guard_name(void)
+#define RCPPSW_FSM_GUARD_DEFINE_ND(FSM, guard_name) bool FSM::GD_##guard_name(void)
 
 /**
- * \def FSM_ENTRY_DECLARE_ND(FSM, entry_name)
+ * \def RCPPSW_FSM_ENTRY_DECLARE_ND(FSM, entry_name)
  *
- * Same as \ref FSM_ENTRY_DECLARE(), but without any input data.
+ * Same as \ref RCPPSW_FSM_ENTRY_DECLARE(), but without any input data.
  */
-#define FSM_ENTRY_DECLARE_ND(FSM, entry_name)                                      \
+#define RCPPSW_FSM_ENTRY_DECLARE_ND(FSM, entry_name)                                      \
   void EN_##entry_name(void);                                                      \
   rcppsw::patterns::fsm::state_entry_action0<FSM, &FSM::EN_##entry_name> \
   entry_name{}
 
 /**
- * \def FSM_ENTRY_DEFINE_ND(FSM, entry_name) Same as \ref FSM_ENTRY_DEFINE(),
- * but without any input data.
+ * \def RCPPSW_FSM_ENTRY_DEFINE_ND(FSM, entry_name) Same as \ref
+ * RCPPSW_FSM_ENTRY_DEFINE(), but without any input data.
  */
-#define FSM_ENTRY_DEFINE_ND(FSM, entry_name) void FSM::EN_##entry_name(void)
+#define RCPPSW_FSM_ENTRY_DEFINE_ND(FSM, entry_name) void FSM::EN_##entry_name(void)
 
 /*******************************************************************************
  * Transition Map Macros
  ******************************************************************************/
 /**
- * \def FSM_DEFINE_TRANSITION_MAP(name)
+ * \def RCPPSW_FSM_DEFINE_TRANSITION_MAP(name)
  *
  * Define the transition map/table for a state machine. Can only be used if \b
  * ALL instances of a class can share the same table, which is true for
  * \ref simple_fsm, but not necessarily for \ref hfsm.
  *
  */
-#define FSM_DEFINE_TRANSITION_MAP(name) static const uint8_t name[] =
+#define RCPPSW_FSM_DEFINE_TRANSITION_MAP(name) static const uint8_t name[] =
 
 /**
- * \def FSM_VERIFY_TRANSITION_MAP(name, n_entries)
+ * \def RCPPSW_FSM_VERIFY_TRANSITION_MAP(name, n_entries)
  *
  * Verify that all states have been covered in the defined transition map. Can
- * only be used in conjunction with the \ref FSM_DEFINE_TRANSITION_MAP() macro
- * (i.e. not with \ref hfsm maps--compiler error will result if the map is not
- * fully filled out regardless of any checking).
+ * only be used in conjunction with the \ref RCPPSW_FSM_DEFINE_TRANSITION_MAP()
+ * macro (i.e. not with \ref hfsm maps--compiler error will result if the map is
+ * not fully filled out regardless of any checking).
  *
  * \c name is the name of the map in the class, and \c n_entries is the number
  * of entries the map should have.
  */
-#define FSM_VERIFY_TRANSITION_MAP(name, n_entries)                     \
+#define RCPPSW_FSM_VERIFY_TRANSITION_MAP(name, n_entries)                     \
     static_assert((sizeof(name) / sizeof(uint8_t)) == (n_entries),     \
                 "Transition map does not cover all states");
 
@@ -436,7 +438,7 @@ NS_END(fsm, patterns, rcppsw);
  * State Map Macros
  ******************************************************************************/
 /**
- * \def FSM_DECLARE_STATE_MAP(type, name)
+ * \def RCPPSW_FSM_DECLARE_STATE_MAP(type, name)
  *
  * Declare a state map for an FSM. Note that even for \ref simple_fsm state
  * machines with identical state maps across all class instances, you \b CANNOT
@@ -450,19 +452,19 @@ NS_END(fsm, patterns, rcppsw);
  * \c type must be either "state_map" or "state_map_ex", corresponding to which
  * type of states the state machine is comprised of. \c name can be anything.
  */
-#define FSM_DECLARE_STATE_MAP(type, name, n_entries)                    \
+#define RCPPSW_FSM_DECLARE_STATE_MAP(type, name, n_entries)                    \
   const std::array<rcppsw::patterns::fsm::RCSW_JOIN(type, _row),              \
                    n_entries> name
 
 /**
- * \def FSM_DEFINE_STATE_MAP(name, ...)
+ * \def RCPPSW_FSM_DEFINE_STATE_MAP(name, ...)
  *
  * Define the state map for an FSM.
  */
-#define FSM_DEFINE_STATE_MAP(name, ...) name {__VA_ARGS__}
+#define RCPPSW_FSM_DEFINE_STATE_MAP(name, ...) name {__VA_ARGS__}
 
 /**
- * \def FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)
+ * \def RCPPSW_FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)
  *
  * Define the function that will be used by all \ref simple_fsm state machines
  * to process events (i.e. given that a machine is in state X and event Y
@@ -473,37 +475,37 @@ NS_END(fsm, patterns, rcppsw);
  * anything, and will have the value of the current state.
  */
 
-#define FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)      \
+#define RCPPSW_FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)      \
   const rcppsw::patterns::fsm::RCSW_JOIN(type, _row) * \
   type(size_t index_var)
 
 /**
- * \def FSM_STATE_MAP_ENTRY(state_name)
+ * \def RCPPSW_FSM_STATE_MAP_ENTRY(state_name)
  *
  * Define a state map entry for state \c state_name.
  */
-#define FSM_STATE_MAP_ENTRY(state_name) \
+#define RCPPSW_FSM_STATE_MAP_ENTRY(state_name) \
   rcppsw::patterns::fsm::state_map_row(state_name)
 
 /**
- * \def FSM_STATE_MAP_ENTRY_EX(state_name)
+ * \def RCPPSW_FSM_STATE_MAP_ENTRY_EX(state_name)
  *
  * Define an extended state map entry for state \c state_name, where the state
  * does not use any of the entry/exit/guard callbacks. Useful for reducing code
  * clutter.
  */
-#define FSM_STATE_MAP_ENTRY_EX(state_name)           \
+#define RCPPSW_FSM_STATE_MAP_ENTRY_EX(state_name)           \
   rcppsw::patterns::fsm::state_map_ex_row( \
       state_name, NULL, NULL, NULL)
 
 /**
- * \def FSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name)
+ * \def RCPPSW_FSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name)
  *
  * Define an extended state map entry for state \c state_name, along will all
  * callbacks. If entry/exit/guard callbacks are not used for the state,
  * \c nullptr should be passed.
  */
-#define FSM_STATE_MAP_ENTRY_EX_ALL(                  \
+#define RCPPSW_FSM_STATE_MAP_ENTRY_EX_ALL(                  \
     state_name, guard_name, entry_name, exit_name)   \
   rcppsw::patterns::fsm::state_map_ex_row( \
       state_name, guard_name, entry_name, exit_name)

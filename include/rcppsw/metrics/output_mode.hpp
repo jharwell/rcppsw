@@ -38,6 +38,9 @@ NS_START(rcppsw, metrics);
  * \brief Defines the behavior when metrics are written out to the filesystem.
  */
 enum class output_mode {
+  /**
+   * \brief Metrics are not written out ever. Like seriously ever.
+   */
   ekNONE = 0,
   /**
    * \brief Each time metrics are written out, they are appended to the same

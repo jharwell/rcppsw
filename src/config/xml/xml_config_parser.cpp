@@ -33,7 +33,8 @@ NS_START(rcppsw, config, xml);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-xml_config_parser::xml_config_parser(void) : ER_CLIENT_INIT("rcppsw.config") {}
+xml_config_parser::xml_config_parser(void)
+    : ER_CLIENT_INIT("rcppsw.config.xml_config_parser") {}
 
 /*******************************************************************************
  * Member Functions
@@ -59,10 +60,10 @@ void xml_config_parser::node_attr_get(const ticpp::Element& node,
   } else if ("false" == tmp) {
     buf = false;
   } else {
-    ER_FATAL_SENTINEL(
-        "Cannot convert '%s' into a bool. Accepted values are ['true', "
-        "'false']",
-        tmp.c_str());
+    ER_FATAL_SENTINEL("Cannot convert '%s' into a bool. Accepted values are "
+                      "['true', "
+                      "'false']",
+                      tmp.c_str());
   }
 } /* node_attr_get() */
 

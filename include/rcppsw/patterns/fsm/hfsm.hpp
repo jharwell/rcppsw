@@ -40,7 +40,8 @@ NS_START(rcppsw, patterns, fsm);
  * \class hfsm
  * \ingroup patterns fsm
  *
- * \brief Implements a software-based hierarchical state machine.
+ * \brief Implements a software-based hierarchical state machine (states can
+ * contain other states).
  */
 class hfsm : public base_fsm, public er::client<hfsm> {
  public:
@@ -91,27 +92,29 @@ class hfsm : public base_fsm, public er::client<hfsm> {
   void state_engine_step(const state_map_row* c_row) override;
   void state_engine_step(const state_map_ex_row* c_row_ex) override;
 
+  /* clang-format off */
   hfsm_state_action0<hfsm, &hfsm::ST_top_state> m_top_state;
+  /* clang-format on */
 };
 
 /*******************************************************************************
  * State Macros With Data
  ******************************************************************************/
 /**
- * \def HFSM_STATE_INHERIT(BASE_FSM, inherited_name, event_data)
+ * \def RCPPSW_HFSM_STATE_INHERIT(BASE_FSM, inherited_name, event_data)
  *
  * Declare a state in the current HFSM to be inherited from a parent HFSM.
  *
  * This can be private because it is just a member variable.
  */
-#define HFSM_STATE_INHERIT(BASE_FSM, inherited_name, event_data)               \
+#define RCPPSW_HFSM_STATE_INHERIT(BASE_FSM, inherited_name, event_data)               \
  private:                                                                      \
   rcppsw::patterns::fsm::                                            \
       hfsm_state_action1<BASE_FSM, event_data, &BASE_FSM::ST_##inherited_name> \
           inherited_name
 
 /**
- * \def HFSM_STATE_DECLARE(FSM, state_name, event_data)
+ * \def RCPPSW_HFSM_STATE_DECLARE(FSM, state_name, event_data)
  *
  * Declare a state in the current HFSM.
  *
@@ -123,7 +126,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
  * exposes the inner workings of the state machine, but anyone who is using this
  * class should only be manipulating it through the macros anyway.
  */
-#define HFSM_STATE_DECLARE(FSM, state_name, event_data)          \
+#define RCPPSW_HFSM_STATE_DECLARE(FSM, state_name, event_data)          \
  public:                                                         \
   int ST_##state_name(event_data*);                        \
                                                                  \
@@ -132,16 +135,16 @@ class hfsm : public base_fsm, public er::client<hfsm> {
       hfsm_state_action1<FSM, event_data, &FSM::ST_##state_name> \
           state_name
 
-#define HFSM_STATE_DEFINE(FSM, state_name, event_data)    \
-  FSM_STATE_DEFINE(FSM, state_name, event_data)
+#define RCPPSW_HFSM_STATE_DEFINE(FSM, state_name, event_data)    \
+  RCPPSW_FSM_STATE_DEFINE(FSM, state_name, event_data)
 
-#define HFSM_GUARD_DECLARE(FSM, guard_name, event_data) \
-  FSM_GUARD_DECLARE(FSM, guard_name, event_data)
-#define HFSM_GUARD_DEFINE(FSM, guard_name, event_data)    \
-  FSM_GUARD_DEFINE(FSM, guard_name, event_data)
+#define RCPPSW_HFSM_GUARD_DECLARE(FSM, guard_name, event_data) \
+  RCPPSW_FSM_GUARD_DECLARE(FSM, guard_name, event_data)
+#define RCPPSW_HFSM_GUARD_DEFINE(FSM, guard_name, event_data)    \
+  RCPPSW_FSM_GUARD_DEFINE(FSM, guard_name, event_data)
 
 /**
- * \def HFSM_ENTRY_DECLARE(FSM, entry_name, event_data)
+ * \def RCPPSW_HFSM_ENTRY_DECLARE(FSM, entry_name, event_data)
  *
  * Declare a state in the current HFSM.
  *
@@ -153,7 +156,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
  * inner workings of the state machine, but anyone who is using this class
  * should only be manipulating it through the macros anyway.
  */
-#define HFSM_ENTRY_DECLARE(FSM, entry_name, event_data)           \
+#define RCPPSW_HFSM_ENTRY_DECLARE(FSM, entry_name, event_data)           \
  public:                                                          \
   void EN_##entry_name(const event_data*);                        \
                                                                   \
@@ -163,49 +166,50 @@ class hfsm : public base_fsm, public er::client<hfsm> {
           entry_name
 
 /**
- * \def HFSM_ENTRY_INHERIT(BASE_FSM, inherited_name, event_data)
+ * \def RCPPSW_HFSM_ENTRY_INHERIT(BASE_FSM, inherited_name, event_data)
  *
  * Declare a entry callback in the current HFSM to be inherited from a parent
  * HFSM.
  *
  * This can be private because it is just a member variable.
  */
-#define HFSM_ENTRY_INHERIT(BASE_FSM, inherited_name, event_data)                \
+#define RCPPSW_HFSM_ENTRY_INHERIT(BASE_FSM, inherited_name, event_data)                \
  private:                                                                       \
   rcppsw::patterns::fsm::                                             \
       state_entry_action1<BASE_FSM, event_data, &BASE_FSM::EN_##inherited_name> \
           inherited_name
-#define HFSM_ENTRY_DEFINE(FSM, entry_name, event_data)    \
-  FSM_ENTRY_DEFINE(FSM, entry_name, event_data)
+
+#define RCPPSW_HFSM_ENTRY_DEFINE(FSM, entry_name, event_data)   \
+  RCPPSW_FSM_ENTRY_DEFINE(FSM, entry_name, event_data)
 
 /**
- * \def HFSM_EXIT_DECLARE(FSM, exit_name)
- *
- * Declare an exit callback in the current HFSM.
- */
-#define HFSM_EXIT_DECLARE(FSM, exit_name)                                       \
- public:                                                                        \
-  void EX_##exit_name(void);                                                    \
-                                                                                \
- private:                                                                       \
-  rcppsw::patterns::fsm::state_exit_action<FSM, &FSM::EX_##exit_name> \
-  exit_name{}
-
-/**
- * \def HFSM_EXIT_INHERIT(BASE_FSM, inherited_name, event_data)
+ * \def RCPPSW_HFSM_EXIT_INHERIT(BASE_FSM, inherited_name, event_data)
  *
  * Declare an exit callback in the current HFSM to be inherited from a parent
  * HFSM.
  *
  * This can be private because it is just a member variable.
  */
-#define HFSM_EXIT_INHERIT(BASE_FSM, inherited_name)               \
+#define RCPPSW_HFSM_EXIT_INHERIT(BASE_FSM, inherited_name)               \
  private:                                                         \
   rcppsw::patterns::fsm::                               \
       state_exit_action<BASE_FSM, &BASE_FSM::EX_##inherited_name> \
  inherited_name{}
 
-#define HFSM_EXIT_DEFINE(FSM, exit_name) FSM_EXIT_DEFINE(FSM, exit_name)
+/**
+ * \def RCPPSW_HFSM_EXIT_DECLARE(FSM, exit_name)
+ *
+ * Declare an exit callback in the current HFSM.
+ */
+#define RCPPSW_HFSM_EXIT_DECLARE(FSM, exit_name)                        \
+  public:                                                               \
+  void EX_##exit_name(void);                                            \
+                                                                        \
+private:                                                                \
+rcppsw::patterns::fsm::state_exit_action<FSM, &FSM::EX_##exit_name>     \
+exit_name{}
+
+#define RCPPSW_HFSM_EXIT_DEFINE(FSM, exit_name) RCPPSW_FSM_EXIT_DEFINE(FSM, exit_name)
 
 /**
  * \brief Construct a previously declared/inherited state.
@@ -214,29 +218,29 @@ class hfsm : public base_fsm, public er::client<hfsm> {
  * state. This cannot be done at state declaration (from the compiler's point of
  * view), because of the way templating works (I think).
  */
-#define HFSM_CONSTRUCT_STATE(state_name, parent)                        \
+#define RCPPSW_HFSM_CONSTRUCT_STATE(state_name, parent)                        \
   state_name(static_cast<rcppsw::patterns::fsm::hfsm_state*>(parent))
 
 /*******************************************************************************
  * State Macros Without Data
  ******************************************************************************/
 /**
- * \def HFSM_STATE_INHERIT_ND(FSM, inherited_name)
+ * \def RCPPSW_HFSM_STATE_INHERIT_ND(FSM, inherited_name)
  *
- * Same as \ref HFSM_STATE_INHERIT(), but with no data.
+ * Same as \ref RCPPSW_HFSM_STATE_INHERIT(), but with no data.
  */
-#define HFSM_STATE_INHERIT_ND(BASE_FSM, inherited_name)            \
+#define RCPPSW_HFSM_STATE_INHERIT_ND(BASE_FSM, inherited_name)            \
  private:                                                          \
   rcppsw::patterns::fsm::                                \
       hfsm_state_action0<BASE_FSM, &BASE_FSM::ST_##inherited_name> \
           inherited_name
 
 /**
- * \def HFSM_STATE_DECLARE_ND(FSM, state_name)
+ * \def RCPPSW_HFSM_STATE_DECLARE_ND(FSM, state_name)
  *
- * Same as \ref HFSM_STATE_DECLARE(), but with no data.
+ * Same as \ref RCPPSW_HFSM_STATE_DECLARE(), but with no data.
  */
-#define HFSM_STATE_DECLARE_ND(FSM, state_name, ...)                     \
+#define RCPPSW_HFSM_STATE_DECLARE_ND(FSM, state_name, ...)                     \
   public:                                                               \
   int ST_##state_name(void) __VA_ARGS__;                                \
                                                                         \
@@ -244,20 +248,20 @@ private:                                                                \
 rcppsw::patterns::fsm::hfsm_state_action0<FSM, &FSM::ST_##state_name> \
 state_name
 
-#define HFSM_STATE_DEFINE_ND(FSM, state_name) \
-  FSM_STATE_DEFINE_ND(FSM, state_name)
+#define RCPPSW_HFSM_STATE_DEFINE_ND(FSM, state_name) \
+  RCPPSW_FSM_STATE_DEFINE_ND(FSM, state_name)
 
-#define HFSM_GUARD_DECLARE_ND(FSM, guard_name) \
-  FSM_GUARD_DECLARE_ND(FSM, guard_name)
-#define HFSM_GUARD_DEFINE_ND(FSM, guard_name) \
-  FSM_GUARD_DEFINE_ND(FSM, guard_name)
+#define RCPPSW_HFSM_GUARD_DECLARE_ND(FSM, guard_name) \
+  RCPPSW_FSM_GUARD_DECLARE_ND(FSM, guard_name)
+#define RCPPSW_HFSM_GUARD_DEFINE_ND(FSM, guard_name) \
+  RCPPSW_FSM_GUARD_DEFINE_ND(FSM, guard_name)
 
 /**
- * \def HFSM_ENTRY_DECLARE_ND(FSM, entry_name)
+ * \def RCPPSW_HFSM_ENTRY_DECLARE_ND(FSM, entry_name)
  *
- * Same as \ref HFSM_ENTRY_DECLARE(), but with no data.
+ * Same as \ref RCPPSW_HFSM_ENTRY_DECLARE(), but with no data.
  */
-#define HFSM_ENTRY_DECLARE_ND(FSM, entry_name)                          \
+#define RCPPSW_HFSM_ENTRY_DECLARE_ND(FSM, entry_name)                          \
   public:                                                               \
   void EN_##entry_name(void);                                           \
                                                                         \
@@ -266,36 +270,45 @@ rcppsw::patterns::fsm::state_entry_action0<FSM, &FSM::EN_##entry_name> \
 entry_name{}
 
 /**
- * \def HFSM_ENTRY_INHERIT_ND(FSM, inherited_name)
+ * \def RCPPSW_HFSM_ENTRY_INHERIT_ND(FSM, inherited_name)
  *
- * Same as \ref HFSM_ENTRY_INHERIT(), but with no data.
+ * Same as \ref RCPPSW_HFSM_ENTRY_INHERIT(), but with no data.
  */
-#define HFSM_ENTRY_INHERIT_ND(BASE_FSM, inherited_name)             \
+#define RCPPSW_HFSM_ENTRY_INHERIT_ND(BASE_FSM, inherited_name)             \
  private:                                                           \
   rcppsw::patterns::fsm::                                 \
       state_entry_action0<BASE_FSM, &BASE_FSM::EN_##inherited_name> \
  inherited_name{}
 
-#define HFSM_ENTRY_DEFINE_ND(FSM, entry_name) \
-  FSM_ENTRY_DEFINE_ND(FSM, entry_name)
+#define RCPPSW_HFSM_ENTRY_DEFINE_ND(FSM, entry_name) \
+  RCPPSW_FSM_ENTRY_DEFINE_ND(FSM, entry_name)
+
+/*******************************************************************************
+ * Transition Map Macros
+ ******************************************************************************/
+#define RCPPSW_HFSM_DEFINE_TRANSITION_MAP(name)        \
+  RCPPSW_FSM_DEFINE_TRANSITION_MAP(name)
+
+#define RCPPSW_HFSM_VERIFY_TRANSITION_MAP(name, n_entries)      \
+  RCPPSW_FSM_VERIFY_TRANSITION_MAP(name, n_entries)
 
 /*******************************************************************************
  * State Map Macros
  ******************************************************************************/
-#define HFSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var) \
-  FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)
+#define RCPPSW_HFSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var) \
+  RCPPSW_FSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)
 
-#define HFSM_DECLARE_STATE_MAP(type, name, n_entries)   \
-  FSM_DECLARE_STATE_MAP(type, name, n_entries)
+#define RCPPSW_HFSM_DECLARE_STATE_MAP(type, name, n_entries)   \
+  RCPPSW_FSM_DECLARE_STATE_MAP(type, name, n_entries)
 
-#define HFSM_DEFINE_STATE_MAP(name, ...) FSM_DEFINE_STATE_MAP(name, __VA_ARGS__)
+#define RCPPSW_HFSM_DEFINE_STATE_MAP(name, ...) RCPPSW_FSM_DEFINE_STATE_MAP(name, __VA_ARGS__)
 
-#define HFSM_STATE_MAP_ENTRY_EX(state_name) FSM_STATE_MAP_ENTRY_EX(state_name)
-#define HFSM_STATE_MAP_ENTRY(state_name) FSM_STATE_MAP_ENTRY(state_name)
+#define RCPPSW_HFSM_STATE_MAP_ENTRY_EX(state_name) RCPPSW_FSM_STATE_MAP_ENTRY_EX(state_name)
+#define RCPPSW_HFSM_STATE_MAP_ENTRY(state_name) RCPPSW_FSM_STATE_MAP_ENTRY(state_name)
 
-#define HFSM_STATE_MAP_ENTRY_EX_ALL(               \
+#define RCPPSW_HFSM_STATE_MAP_ENTRY_EX_ALL(               \
     state_name, guard_name, entry_name, exit_name) \
-  FSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name)
+  RCPPSW_FSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name)
 
 NS_END(fsm, patterns, rcppsw);
 

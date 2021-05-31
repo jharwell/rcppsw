@@ -32,21 +32,21 @@ NS_START(rcppsw, math);
  * Non-Member Functions
  ******************************************************************************/
 degrees to_degrees(const radians& r) {
-  return degrees(r.value() * radians::kRADIANS_TO_DEGREES);
+  return degrees(r.v() * radians::kRADIANS_TO_DEGREES);
 } /* to_degrees() */
 
 /**
  * \brief Converts \ref degrees to \ref radians
  */
 radians to_radians(const degrees& d) {
-  return radians(d.value() * degrees::kDEGREES_TO_RADIANS);
+  return radians(d.v() * degrees::kDEGREES_TO_RADIANS);
 } /* to_radians() */
 
 radians normalized_diff(const radians& angle1, const radians& angle2) {
   radians res;
-  res.set(std::fmod(angle1.value() - angle2.value() + radians::kPI.value(),
-                    radians::kTWO_PI.value()));
-  if (res.value() < 0.0) {
+  res.set(std::fmod(angle1.v() - angle2.v() + radians::kPI.v(),
+                    radians::kTWO_PI.v()));
+  if (res.v() < 0.0) {
     res += radians::kTWO_PI;
   }
   res -= radians::kPI;
@@ -55,9 +55,9 @@ radians normalized_diff(const radians& angle1, const radians& angle2) {
 
 degrees normalized_diff(const degrees& angle1, const degrees& angle2) {
   degrees res;
-  res.set(std::fmod(angle1.value() - angle2.value() + 180.0, 360.0));
+  res.set(std::fmod(angle1.v() - angle2.v() + 180.0, 360.0));
 
-  if (res.value() < 0.0) {
+  if (res.v() < 0.0) {
     res += 360.0;
   }
   res -= 180.0;
