@@ -57,10 +57,11 @@ if ("${LIBRA_ER}" MATCHES "ALL")
   set(${target}_LIBRARIES ${${target}_LIBRARIES} log4cxx)
 endif()
 
+# Define RCPPSW library
 if (NOT TARGET ${target})
-
   add_library(${target} STATIC ${${target}_SRC})
   target_link_libraries(${target} ${${target}_LIBRARIES})
+  target_link_directories(${target} PUBLIC ${${target}_LIBRARY_DIRS})
   target_include_directories(${target} PUBLIC ${${target}_INCLUDE_DIRS})
   target_include_directories(${target} SYSTEM PRIVATE "${${target}_SYS_INCLUDE_DIRS}")
 endif()
