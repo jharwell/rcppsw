@@ -1,0 +1,133 @@
+/**
+ * \file csv_sink.cpp
+ *
+ * \copyright 2018 John Harwell, All rights reserved.
+ *
+ * This file is part of RCPPSW.
+ *
+ * RCPPSW is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ */
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+#include "rcppsw/metrics/csv_sink.hpp"
+
+#include <filesystem>
+#include <numeric>
+#include <fstream>
+
+/*******************************************************************************
+ * Namespaces/Decls
+ ******************************************************************************/
+NS_START(rcppsw, metrics);
+
+/*******************************************************************************
+ * Constructors/Destructor
+ ******************************************************************************/
+csv_sink::csv_sink(fs::path fpath,
+                   const enum output_mode& mode,
+                   const rtypes::timestep& interval)
+    : base_metrics_sink(fpath.replace_extension(".csv"), mode, interval),
+      ER_CLIENT_INIT("rcppsw.metrics.csv_sink") {}
+
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+metrics_write_status csv_sink::flush(const rmetrics::base_metrics_data* data,
+                                     const rtypes::timestep& t) {
+  auto line = csv_line_build(data, t);
+  if (!line) {
+    return metrics_write_status::ekNO_ATTEMPT;
+  }
+
+  bool io_success = false;
+  if (output_mode::ekAPPEND == output_mode()) {
+    auto append_line = [&](void) {
+                         *ofile() << rcppsw::to_string(t) + mc_separator + *line
+                                 << std::endl;
+    };
+    io_success = retry_io(append_line);
+  } else if (output_mode::ekTRUNCATE == output_mode()) {
+    auto write_truncate = [&](void) {
+                            std::filesystem::resize_file(fpath(), 0);
+                            ofile()->seekp(0);
+      initialize(data);
+      *ofile() << *line << std::endl;
+      ofile()->flush();
+    };
+    io_success = retry_io(write_truncate);
+  } else if (output_mode::ekCREATE == output_mode()) {
+    auto write_create = [&](void) {
+      std::stringstream ss;
+      ss << std::setw(10) << std::setfill('0') << t.v();
+
+      auto path = fpath();
+      path.replace_filename(fs::path("_" + ss.str()));
+      ofile()->open(path, std::ios_base::trunc | std::ios_base::out);
+      initialize(data);
+      *ofile() << *line << std::endl;
+      ofile()->flush();
+      ofile()->close();
+    };
+    io_success = retry_io(write_create);
+  } else {
+    ER_FATAL_SENTINEL("Bad output mode '%d'",
+                      rcppsw::as_underlying(output_mode()));
+  }
+  if (io_success) {
+    return metrics_write_status::ekSUCCESS;
+  } else {
+    return metrics_write_status::ekFAILED;
+  }
+} /* flush() */
+
+void csv_sink::initialize(const rmetrics::base_metrics_data* data) {
+  /* close file if its open so we can truncate it if needed */
+  if (ofile()->is_open()) {
+    ofile()->close();
+  }
+
+  /*
+   * Nothing to do if we are creating a new file each time. Otherwise, truncate
+   * the file and write out the header.
+   */
+  if (output_mode::ekAPPEND == output_mode() ||
+      output_mode::ekTRUNCATE == output_mode()) {
+    ofile()->open(fpath(), std::ios_base::trunc | std::ios_base::out);
+    csv_header_write(data);
+  }
+} /* initialize() */
+
+void csv_sink::csv_header_write(const rmetrics::base_metrics_data* data) {
+auto cols = csv_header_cols(data);
+  std::string header = std::accumulate(std::next(cols.begin()),
+                                       cols.end(),
+                                       cols.front(),
+                                       [&](const auto& sum, const auto& col) {
+                                         return sum + separator() + col;
+                                       });
+  ER_ASSERT(ofile()->is_open(),
+            "Cannot write header to %s: not open",
+            fpath().c_str());
+
+  *ofile() << header + "\n";
+  ofile()->flush();
+} /* csv_header_write() */
+
+void csv_sink::finalize(void) {
+  ofile()->flush();
+  ofile()->close();
+} /* finalize() */
+
+NS_END(metrics, rcppsw);

@@ -24,12 +24,11 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <list>
-#include <string>
+#include <memory>
+#include <utility>
 
-#include "rcppsw/ds/grid2D.hpp"
 #include "rcppsw/metrics/base_metrics_collector.hpp"
-#include "rcppsw/math/vector2.hpp"
+#include "rcppsw/metrics/spatial/grid2D_metrics_data.hpp"
 #include "rcppsw/metrics/spatial/spatial.hpp"
 
 /*******************************************************************************
@@ -48,69 +47,30 @@ NS_START(rcppsw, metrics, spatial);
  * SOMETHING, to be averaged over the entire simulation. Each line of the
  * resulting .csv file corresponds directly to a row in X of the 2D grid.
  */
-template<typename TCellOp>
 class grid2D_metrics_collector : public metrics::base_metrics_collector {
  public:
   /**
-   * \param ofname_stem The output file name stem.
-   * \param interval Collection interval.
+   * \param sink The metrics sink to use.
    * \param dims Dimensions of grid.
-   * \param mode The selected output mode.
    */
-  grid2D_metrics_collector(const std::string& ofname_stem,
-                           const types::timestep& interval,
-                           const output_mode& mode,
+  grid2D_metrics_collector(std::unique_ptr<base_metrics_sink> sink,
                            const math::vector2z& dims)
-      : base_metrics_collector(ofname_stem, interval, mode),
-        m_stats(dims.x(), dims.y()) {}
-
-
-  void reset(void) override {
-    base_metrics_collector::reset();
-    m_total_count = 0;
-  }
-
-  std::list<std::string> csv_header_cols(void) const override {
-    std::list<std::string> cols;
-    for (size_t i = 0; i < m_stats.ysize(); ++i) {
-      cols.push_back("y" + rcppsw::to_string(i));
-    } /* for(i..) */
-
-    return cols;
-  }
-
-  boost::optional<std::string> csv_line_build(void) override {
-    if (!(timestep() % interval() == 0UL)) {
-      return boost::none;
-    }
-    std::string line;
-    for (size_t i = 0; i < m_stats.xsize(); ++i) {
-      for (size_t j = 0; j < m_stats.ysize(); ++j) {
-        if constexpr(std::is_same<TCellOp, cell_avg>::value) {
-            line += csv_entry_domavg(m_stats.access(i, j),
-                                     m_total_count,
-                                     (j == m_stats.ysize() - 1));
-          } else {
-          line += rcppsw::to_string(m_stats.access(i, j)) + separator();
-        }
-      } /* for(j..) */
-      line += "\n";
-    } /* for(i..) */
-    return boost::make_optional(line);
-  } /* csv_line_build() */
+      : base_metrics_collector(std::move(sink)),
+        m_data(dims) {}
 
  protected:
-  void inc_cell_count(const math::vector2z& c) {
-    m_stats.access(c) += 1;
+  const base_metrics_data* data(void) const override { return &m_data; }
+
+  void inc_cell_count(const math::vector2z& c, size_t count = 1) {
+    m_data.grid.access(c) += count;
   }
-  void inc_total_count(void) { ++m_total_count; }
-  size_t xsize(void) const { return m_stats.xsize(); }
-  size_t ysize(void) const { return m_stats.ysize(); }
+  void inc_total_count(size_t count = 1) { m_data.total_count += count; }
+  size_t xsize(void) const { return m_data.grid.xsize(); }
+  size_t ysize(void) const { return m_data.grid.ysize(); }
 
  private:
   /* clang-format off */
-  rcppsw::ds::grid2D<uint> m_stats;
-  uint                     m_total_count{0};
+  grid2D_metrics_data m_data;
   /* clang-format on */
 };
 

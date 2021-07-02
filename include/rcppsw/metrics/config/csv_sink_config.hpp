@@ -1,7 +1,7 @@
 /**
- * \file vector3.cpp
+ * \file csv_sink_config.hpp
  *
- * \copyright 2020 John Harwell, All rights reserved.
+ * \copyright 2021 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,45 +18,45 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_METRICS_CONFIG_CSV_SINK_CONFIG_HPP_
+#define INCLUDE_RCPPSW_METRICS_CONFIG_CSV_SINK_CONFIG_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/vector3.hpp"
+#include <map>
+#include <string>
+
+#include "rcppsw/config/base_config.hpp"
+#include "rcppsw/rcppsw.hpp"
+#include "rcppsw/types/timestep.hpp"
 
 /*******************************************************************************
- * Namespaces/Decls
+ * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, math);
+NS_START(rcppsw, metrics, config);
 
 /*******************************************************************************
- * Template Instantiations
+ * Structure Definitions
  ******************************************************************************/
+struct csv_sink_output_mode_config {
+  using enabled_map_type = std::map<std::string, std::string>;
+  rtypes::timestep output_interval{0};
+  enabled_map_type enabled{};
+};
 
-template <>
-const vector3u vector3u::X(1, 0, 0); // NOLINT
-template <>
-const vector3i vector3i::X(1, 0, 0); // NOLINT
-template <>
-const vector3z vector3z::X(1, 0, 0); // NOLINT
-template <>
-const vector3d vector3d::X(1.0, 0.0, 0.0); // NOLINT
+/**
+ * \struct csv_sink_config
+ * \ingroup metrics config
+ *
+ * \brief Configuration for metrics which will/can be output as .csv files.
+ */
+struct csv_sink_config final : public rconfig::base_config {
+  csv_sink_output_mode_config append{};
+  csv_sink_output_mode_config truncate{};
+  csv_sink_output_mode_config create{};
+};
 
-template <>
-const vector3u vector3u::Y(0, 1, 0); // NOLINT
-template <>
-const vector3i vector3i::Y(0, 1, 0); // NOLINT
-template <>
-const vector3z vector3z::Y(0, 1, 0); // NOLINT
-template <>
-const vector3d vector3d::Y(0.0, 1.0, 0.0); // NOLINT
+NS_END(config, metrics, rcppsw);
 
-template <>
-const vector3u vector3u::Z(0, 0, 1); // NOLINT
-template <>
-const vector3i vector3i::Z(0, 0, 1); // NOLINT
-template <>
-const vector3z vector3z::Z(0, 0, 1); // NOLINT
-template <>
-const vector3d vector3d::Z(0.0, 0.0, 1.0); // NOLINT
-
-NS_END(math, rcppsw);
+#endif /* INCLUDE_RCPPSW_METRICS_CONFIG_CSV_SINK_CONFIG_HPP_ */

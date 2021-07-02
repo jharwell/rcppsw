@@ -28,7 +28,11 @@
 #include <boost/mpl/joint_view.hpp>
 #include <boost/mpl/transform.hpp>
 #include <boost/mpl/vector.hpp>
+#include <boost/mpl/set.hpp>
 #include <boost/utility/enable_if.hpp>
+#include <boost/mpl/empty.hpp>
+
+#include <boost/tuple/tuple.hpp>
 
 #include "rcppsw/common/common.hpp"
 #include "rcppsw/mpl/mpl.hpp"
@@ -73,6 +77,50 @@ NS_START(rcppsw, mpl);
 template <typename... Ts>
 using typelist = boost::mpl::vector<Ts...>;
 
+
+/**
+ * \typedef empty
+ * \ingroup mpl
+ *
+ * \brief Is the \ref typelist empty ?
+ */
+template <typename... Ts>
+using empty = boost::mpl::empty<Ts...>;
+
+NS_START(detail);
+
+template<class A, template<class...> class B> struct rename_impl;
+
+template<template<class...> class A, class... T, template<class...> class B>
+struct rename_impl<A<T...>, B> {
+  using type = B<T...>;
+};
+
+template <typename TList, typename T> struct ExtendTList;
+
+template<typename T>
+struct ExtendTList<std::tuple<void>, T>{
+  using type = std::tuple<T>;
+};
+
+template<typename T, typename... Ts>
+struct ExtendTList<std::tuple<Ts...>, T>{
+  using type = std::tuple<Ts..., T>;
+};
+
+NS_END(detail);
+
+/**
+ * \typedef rename
+ * \ingroup mpl
+ *
+ * \brief Rename a variadic type to another variadic type. E.g., std::tuple<int,
+ * float, char> -> typelist<int, float, char>.
+ */
+
+template<class A, template<class...> class B>
+using rename = typename detail::rename_impl<A, B>;
+
 /**
  * \struct typelist_wrap_into
  * \ingroup mpl
@@ -103,6 +151,7 @@ struct typelist_wrap_into {
   };
 };
 
+
 /**
  * \typedef typelist_wrap_apply
  * \ingroup mpl
@@ -111,12 +160,23 @@ struct typelist_wrap_into {
  * itself take as many template parameters as needed.
  */
 template <typename Typelist,
-          template <class WrappedType, class...>
-          class WrapperType,
+          template <class WrappedType, class...> class WrapperType,
           class... Args>
 using typelist_wrap_apply =
     typename boost::mpl::transform<Typelist,
                                    typelist_wrap_into<WrapperType, Args...> >;
+
+template<class Seq>
+using make_tuple_type = typename boost::mpl::fold<
+  typename boost::mpl::fold<
+  Seq,
+    boost::mpl::set<>,
+    boost::mpl::insert<boost::mpl::_1, boost::mpl::_2>
+    >::type,
+  boost::tuple<void>,
+  detail::ExtendTList<boost::mpl::_1, boost::mpl::_2>
+  >;
+
 NS_END(mpl, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_INCLUDE_MPL_TYPELIST_HPP_ */

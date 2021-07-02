@@ -1,7 +1,7 @@
 /**
- * \file vector3.cpp
+ * \file metrics_parser.cpp
  *
- * \copyright 2020 John Harwell, All rights reserved.
+ * \copyright 2021 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,42 +21,36 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/vector3.hpp"
+#include "rcppsw/metrics/config/xml/metrics_parser.hpp"
 
 /*******************************************************************************
- * Namespaces/Decls
+ * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, math);
+NS_START(rcppsw, metrics, config, xml);
 
 /*******************************************************************************
- * Template Instantiations
+ * Member Functions
  ******************************************************************************/
+void metrics_parser::parse(const ticpp::Element& node) {
+  /* no metrics in XML tree--that's ok */
+  if (nullptr == node.FirstChild(kXMLRoot, false)) {
+    return;
+  }
 
-template <>
-const vector3u vector3u::X(1, 0, 0); // NOLINT
-template <>
-const vector3i vector3i::X(1, 0, 0); // NOLINT
-template <>
-const vector3z vector3z::X(1, 0, 0); // NOLINT
-template <>
-const vector3d vector3d::X(1.0, 0.0, 0.0); // NOLINT
+  ticpp::Element mnode = node_get(node, kXMLRoot);
+  m_config = std::make_unique<config_type>();
 
-template <>
-const vector3u vector3u::Y(0, 1, 0); // NOLINT
-template <>
-const vector3i vector3i::Y(0, 1, 0); // NOLINT
-template <>
-const vector3z vector3z::Y(0, 1, 0); // NOLINT
-template <>
-const vector3d vector3d::Y(0.0, 1.0, 0.0); // NOLINT
+  XML_PARSE_ATTR(mnode, m_config, metrics_path);
 
-template <>
-const vector3u vector3u::Z(0, 0, 1); // NOLINT
-template <>
-const vector3i vector3i::Z(0, 0, 1); // NOLINT
-template <>
-const vector3z vector3z::Z(0, 0, 1); // NOLINT
-template <>
-const vector3d vector3d::Z(0.0, 0.0, 1.0); // NOLINT
 
-NS_END(math, rcppsw);
+  ticpp::Element snode = node_get(mnode, "sinks");
+  if (nullptr != snode.FirstChild(m_csv_sink.xml_root(), false)) {
+    m_csv_sink.parse(snode);
+  }
+
+  if (m_csv_sink.is_parsed()) {
+    m_config->csv = *m_csv_sink.config_get<rmcxml::csv_sink_parser::config_type>();
+  }
+} /* parse() */
+
+NS_END(xml, config, metrics, rcppsw);

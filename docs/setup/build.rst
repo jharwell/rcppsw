@@ -1,5 +1,6 @@
+===========
 Debug Build
------------
+===========
 
 This project should not generally need to be built on its own, but if you DO
 need to do so, download ``scripts/bootstrap.sh`` BEFORE cloning this repo. The

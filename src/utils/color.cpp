@@ -66,12 +66,13 @@ std::string color::to_str(void) const {
   } else if (*this == color::kWHITE) {
     return "WHITE";
   } else {
-    return "(" + rcppsw::to_string(m_channels[0]) + "," +
-        rcppsw::to_string(m_channels[1]) + "," +
-        rcppsw::to_string(m_channels[2]) + "," +
-        rcppsw::to_string(m_channels[3]) + ")";
+    return "(" +
+        rcppsw::to_string(static_cast<int>(m_channels[0])) + "," +
+        rcppsw::to_string(static_cast<int>(m_channels[1])) + "," +
+        rcppsw::to_string(static_cast<int>(m_channels[2])) + "," +
+        rcppsw::to_string(static_cast<int>(m_channels[3])) +
+        ")";
   }
-
-}
+} /* to_str() */
 
 NS_END(utils, rcppsw);

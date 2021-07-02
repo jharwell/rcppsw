@@ -119,6 +119,11 @@ class vector2 {
   bool is_pd(void) const { return m_x > 0 && m_y > 0; }
 
   /**
+   * \brief Is the vector is positive semi-definite?
+   */
+  bool is_psd(void) const { return m_x >= 0 && m_y >= 0; }
+
+  /**
    * \brief Sets the vector contents from Cartesian coordinates.
    *
    * \param x The new X coordinate.
@@ -369,7 +374,7 @@ using vector2d = vector2<double>;
  * Macros
  ******************************************************************************/
 /**
- * \brief Convert vector2{i,u} -> vector2d directly, without applying any
+ * \brief Convert vector2{i,u,z} -> vector2d directly, without applying any
  * scaling.
  */
 #define RCPPSW_MATH_VEC2_DIRECT_CONVF(prefix)                             \
@@ -378,7 +383,7 @@ using vector2d = vector2<double>;
   }
 
 /**
- * \brief Convert vector2{i,u} -> vector2d, applying a multiplicative scaling
+ * \brief Convert vector2{i,u,z} -> vector2d, applying a multiplicative scaling
  * factor.
  */
 #define RCPPSW_MATH_VEC2_SCALED_CONVF(prefix)                           \
@@ -388,7 +393,8 @@ using vector2d = vector2<double>;
   }
 
 /**
- * \brief Convert vector2d -> vector2{u,z}, applying a divisive scaling factor.
+ * \brief Convert vector2d -> vector2{i,u,z}, applying a divisive scaling
+ * factor.
  */
 #define RCPPSW_MATH_VEC2_CONV2DISC(dest_prefix, dest_type)                      \
   static inline vector2##dest_prefix dvec2##dest_prefix##vec(               \
@@ -398,7 +404,7 @@ using vector2d = vector2<double>;
   }
 
 /*******************************************************************************
- * Free Functions
+ * Conversion Functions
  ******************************************************************************/
 RCPPSW_MATH_VEC2_DIRECT_CONVF(u);
 RCPPSW_MATH_VEC2_DIRECT_CONVF(i);

@@ -50,7 +50,12 @@ namespace rcppsw {
 /**
  * \brief Base metric interfaces and the collectors for them.
  */
-namespace metrics {}
+namespace metrics {
+namespace spatial {}
+namespace config {
+namespace xml {}
+}
+}
 
 /**
  * \brief Design pattern templates and interfaces.
@@ -124,8 +129,10 @@ namespace er {}
 namespace control {}
 
 /**
- * \brief Base namespace for run-time configuration. Currently includes base
- * class implementations for: XML.
+ * \brief Base namespace for run-time configuration parsing and data
+ * containers. Currently includes base class implementations for:
+ *
+ * - XML
  */
 namespace config {}
 
@@ -169,6 +176,10 @@ namespace multiprocess {}
 } /* namespace rcppsw */
 
 namespace rmetrics = rcppsw::metrics;
+namespace rmconfig = rmetrics::config;
+namespace rmcxml = rmconfig::xml;
+namespace rmspatial = rmetrics::spatial;
+
 namespace rtypes = rcppsw::types;
 namespace rmath = rcppsw::math;
 namespace ralg = rcppsw::algorithm;

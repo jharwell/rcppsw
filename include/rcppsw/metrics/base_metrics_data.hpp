@@ -1,7 +1,7 @@
 /**
- * \file vector3.cpp
+ * \file base_metrics_data.hpp
  *
- * \copyright 2020 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,45 +18,34 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_METRICS_BASE_METRICS_DATA_HPP_
+#define INCLUDE_RCPPSW_METRICS_BASE_METRICS_DATA_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/vector3.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+NS_START(rcppsw, metrics);
 
 /*******************************************************************************
- * Template Instantiations
+ * Class Definitions
  ******************************************************************************/
+/**
+ * \interface base_metrics_data
+ * \ingroup metrics
+ *
+ * \brief Base class for the containers of data extracted through classes
+ * derived from \ref base_metrics.
+ */
+struct base_metrics_data {
+  base_metrics_data(void) = default;
+  virtual ~base_metrics_data(void) = default;
+};
 
-template <>
-const vector3u vector3u::X(1, 0, 0); // NOLINT
-template <>
-const vector3i vector3i::X(1, 0, 0); // NOLINT
-template <>
-const vector3z vector3z::X(1, 0, 0); // NOLINT
-template <>
-const vector3d vector3d::X(1.0, 0.0, 0.0); // NOLINT
+NS_END(metrics, rcppsw);
 
-template <>
-const vector3u vector3u::Y(0, 1, 0); // NOLINT
-template <>
-const vector3i vector3i::Y(0, 1, 0); // NOLINT
-template <>
-const vector3z vector3z::Y(0, 1, 0); // NOLINT
-template <>
-const vector3d vector3d::Y(0.0, 1.0, 0.0); // NOLINT
-
-template <>
-const vector3u vector3u::Z(0, 0, 1); // NOLINT
-template <>
-const vector3i vector3i::Z(0, 0, 1); // NOLINT
-template <>
-const vector3z vector3z::Z(0, 0, 1); // NOLINT
-template <>
-const vector3d vector3d::Z(0.0, 0.0, 1.0); // NOLINT
-
-NS_END(math, rcppsw);
+#endif /* INCLUDE_RCPPSW_METRICS_BASE_METRICS_DATA_HPP_ */

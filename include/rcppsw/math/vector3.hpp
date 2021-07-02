@@ -145,6 +145,11 @@ class vector3 {
   bool is_pd(void) const { return m_x > 0 && m_y > 0 && m_z > 0; }
 
   /**
+   * \brief Is the vector is positive semi-definite?
+   */
+  bool is_psd(void) const { return m_x >= 0 && m_y >= 0 && m_z >= 0; }
+
+  /**
    * \brief Returns the square length of this vector.
    */
   RCPPSW_NODISCARD T square_length(void) const {
@@ -453,7 +458,7 @@ using vector3d = vector3<double>;
   }
 
 /*******************************************************************************
- * Free Functions
+ * Conversion Functions
  ******************************************************************************/
 RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(u);
 RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(i);
@@ -465,6 +470,9 @@ RCPPSW_MATH_VEC3_CONV2DISC(z, size_t);
 RCPPSW_MATH_VEC3_CONV2DISC(u, uint);
 RCPPSW_MATH_VEC3_CONV2DISC(i, int);
 
+/*******************************************************************************
+ * Free Functions
+ ******************************************************************************/
 template <class T>
 vector2<T> to_2D(const vector3<T>& v) {
   return v.to_2D();

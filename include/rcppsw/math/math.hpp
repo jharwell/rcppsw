@@ -1,7 +1,7 @@
 /**
- * \file base_metric_collector.cpp
+ * \file math.hpp
  *
- * \copyright 018 John Harwell, All rights reserved.
+ * \copyright 2021 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,51 +18,54 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_MATH_MATH_HPP_
+#define INCLUDE_RCPPSW_MATH_MATH_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/base_metrics_collector.hpp"
-#include "rcppsw/metrics/base_metrics_sink.hpp"
-#include "rcppsw/utils/maskable_enum.hpp"
+#include <cmath>
 
-#include <fstream>
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+NS_START(rcppsw, math);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Constant Definitions
  ******************************************************************************/
-base_metrics_collector::base_metrics_collector(
-    std::unique_ptr<base_metrics_sink> sink)
-    : ER_CLIENT_INIT("rcppsw.metrics.base_collector"),
-      m_sink(std::move(sink)) {}
+/**
+ * \brief For comparing floating point numbers within a given tolerance when
+ * std::numeric_limits<double>::epsilon() won't work.
+ */
+static constexpr double kDOUBLE_EPSILON = RCSW_DOUBLE_EPSILON;
 
 /*******************************************************************************
- * Member Functions
+ * Free-Functions
  ******************************************************************************/
-void base_metrics_collector::initialize(void) {
-  /* initialize the sink */
-  m_sink->initialize(data());
+/**
+ * \brief Determine if two floating point values are equal, using the specified
+ * tolerance. You can't always use std::numeric_limits<double>::epsilon()
+ * because of floating point representation errors.
+ */
 
-  /* initialize the collector's data */
-  reset_after_interval();
-} /* initialize() */
+static inline bool is_equal(double lhs,
+                            double rhs,
+                            double tol = kDOUBLE_EPSILON) {
+  return std::fabs(lhs - rhs) < tol;
+}
 
-void base_metrics_collector::finalize(void) {
-  m_sink->finalize();
-} /* finalize() */
+/**
+ * \brief Determine if \p x is a multiple \p y within \p tol tolerance.
+ */
+static inline bool is_multiple_of(double x,
+                                  double y,
+                                  double tol = kDOUBLE_EPSILON) {
+  return std::remainder(x, y) < tol;
+}
 
-metrics_write_status base_metrics_collector::flush(void) {
-  return m_sink->flush(data(), m_timestep);
-} /* flush() */
+NS_END(math, rcppsw);
 
-void base_metrics_collector::interval_reset(void) {
-  if (m_timestep > 0UL && (m_timestep % m_sink->output_interval() == 0UL)) {
-    reset_after_interval();
-  }
-} /* interval_reset() */
-
-NS_END(metrics, rcppsw);
+#endif /* INCLUDE_RCPPSW_MATH_MATH_HPP_ */

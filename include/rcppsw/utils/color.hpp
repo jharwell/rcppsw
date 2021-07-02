@@ -48,8 +48,6 @@ NS_START(rcppsw, utils);
  */
 class color {
  public:
-  color(void) = default;
-
   static const color kBLACK;
   static const color kWHITE;
   static const color kRED;
@@ -70,6 +68,10 @@ class color {
   static const color kGRAY70;
   static const color kGRAY80;
   static const color kGRAY90;
+
+  color(void) = default;
+  color(const color&) = default;
+  color& operator=(const color&) = default;
 
   color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255)
       : m_channels{ red, green, blue, alpha } {}
@@ -98,7 +100,7 @@ class color {
 
  private:
   /* clang-format off */
-  std::array<uint8_t, 4> m_channels;
+  std::array<uint8_t, 4> m_channels{};
   /* clang-format on */
 };
 

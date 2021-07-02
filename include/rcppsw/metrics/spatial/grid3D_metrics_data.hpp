@@ -1,7 +1,7 @@
 /**
- * \file vector3.cpp
+ * \file grid3D_metrics_data.hpp
  *
- * \copyright 2020 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,45 +18,38 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_METRICS_SPATIAL_GRID3D_METRICS_DATA_HPP_
+#define INCLUDE_RCPPSW_METRICS_SPATIAL_GRID3D_METRICS_DATA_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/vector3.hpp"
+#include "rcppsw/metrics/base_metrics_data.hpp"
+#include "rcppsw/ds/grid3D.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+NS_START(rcppsw, metrics, spatial);
 
 /*******************************************************************************
- * Template Instantiations
+ * Class Definitions
  ******************************************************************************/
+/**
+ * \interface grid3D_metrics_data
+ * \ingroup metrics spatial
+ *
+ * \brief Container for basic metrics gather from \ref rds::grid3D.
+ */
+struct grid3D_metrics_data : public rmetrics::base_metrics_data {
+  explicit grid3D_metrics_data(const math::vector3z& dims) :
+      grid(dims.x(), dims.y(), dims.z()) {}
 
-template <>
-const vector3u vector3u::X(1, 0, 0); // NOLINT
-template <>
-const vector3i vector3i::X(1, 0, 0); // NOLINT
-template <>
-const vector3z vector3z::X(1, 0, 0); // NOLINT
-template <>
-const vector3d vector3d::X(1.0, 0.0, 0.0); // NOLINT
+  rcppsw::ds::grid3D<size_t> grid;
+  size_t                     total_count{0};
 
-template <>
-const vector3u vector3u::Y(0, 1, 0); // NOLINT
-template <>
-const vector3i vector3i::Y(0, 1, 0); // NOLINT
-template <>
-const vector3z vector3z::Y(0, 1, 0); // NOLINT
-template <>
-const vector3d vector3d::Y(0.0, 1.0, 0.0); // NOLINT
+};
 
-template <>
-const vector3u vector3u::Z(0, 0, 1); // NOLINT
-template <>
-const vector3i vector3i::Z(0, 0, 1); // NOLINT
-template <>
-const vector3z vector3z::Z(0, 0, 1); // NOLINT
-template <>
-const vector3d vector3d::Z(0.0, 0.0, 1.0); // NOLINT
+NS_END(spatial, metrics, rcppsw);
 
-NS_END(math, rcppsw);
+#endif /* INCLUDE_RCPPSW_METRICS_SPATIAL_GRID3D_METRICS_DATA_HPP_ */

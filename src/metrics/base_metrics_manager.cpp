@@ -1,5 +1,5 @@
 /**
- * \file vector3.cpp
+ * \file base_metrics_manager.cpp
  *
  * \copyright 2020 John Harwell, All rights reserved.
  *
@@ -21,42 +21,28 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/vector3.hpp"
+#include "rcppsw/metrics/base_metrics_manager.hpp"
 
 /*******************************************************************************
- * Namespaces/Decls
+ * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, math);
+NS_START(rcppsw, metrics);
+
+namespace fs = std::filesystem;
 
 /*******************************************************************************
- * Template Instantiations
+ * Constructors/Destructors
  ******************************************************************************/
+base_metrics_manager::base_metrics_manager(
+    const rmconfig::metrics_config* const mconfig,
+    const fs::path& output_root)
+    : ER_CLIENT_INIT("rcppsw.metrics.base_metrics_manager"),
+      m_metrics_path(output_root / mconfig->metrics_path) {
+  if (!fs::exists(m_metrics_path)) {
+    fs::create_directories(m_metrics_path);
+  } else {
+    ER_WARN("Output metrics path '%s' already exists", m_metrics_path.c_str());
+  }
+}
 
-template <>
-const vector3u vector3u::X(1, 0, 0); // NOLINT
-template <>
-const vector3i vector3i::X(1, 0, 0); // NOLINT
-template <>
-const vector3z vector3z::X(1, 0, 0); // NOLINT
-template <>
-const vector3d vector3d::X(1.0, 0.0, 0.0); // NOLINT
-
-template <>
-const vector3u vector3u::Y(0, 1, 0); // NOLINT
-template <>
-const vector3i vector3i::Y(0, 1, 0); // NOLINT
-template <>
-const vector3z vector3z::Y(0, 1, 0); // NOLINT
-template <>
-const vector3d vector3d::Y(0.0, 1.0, 0.0); // NOLINT
-
-template <>
-const vector3u vector3u::Z(0, 0, 1); // NOLINT
-template <>
-const vector3i vector3i::Z(0, 0, 1); // NOLINT
-template <>
-const vector3z vector3z::Z(0, 0, 1); // NOLINT
-template <>
-const vector3d vector3d::Z(0.0, 0.0, 1.0); // NOLINT
-
-NS_END(math, rcppsw);
+NS_END(metrics, rcppsw);

@@ -62,7 +62,7 @@ class collector_group {
   /**
    * \brief Add a collector to the group by constructing it in place.
    *
-   * \tparam T The type of the collector
+   * \tparam T The type of the collector.
    *
    * \param name The key for the collector in the group. Should be unique,
    *             though it is not a requirement. If it is not unique then the
@@ -79,7 +79,7 @@ class collector_group {
   bool collector_register(const key_type& name, Args&&... args) {
     auto it = m_collectors.find(name);
     if (it == m_collectors.end()) {
-      m_collectors[name] = std::make_unique<T>(args...);
+      m_collectors[name] = std::make_unique<T>(std::forward<Args>(args)...);
       return true;
     }
     return false;
@@ -162,14 +162,14 @@ class collector_group {
   }
 
   /**
-   * \brief Call the \ref base_metrics_collector::reset() function on all
+   * \brief Call the \ref base_metrics_collector::initialize() function on all
    * collectors in the group.
    */
-  void reset_all(void) {
+  void initialize(void) {
     std::for_each(m_collectors.begin(),
                   m_collectors.end(),
-                  [&](const std::pair<const key_type, mapped_type>& pair) {
-                    pair.second->reset();
+                  [&](const auto& pair) {
+                    pair.second->initialize();
                   });
   }
 
@@ -177,7 +177,7 @@ class collector_group {
    * \brief Call the \ref base_metrics_collector::interval_reset() function on
    * all collectors in the group.
    */
-  void interval_reset_all(void) {
+  void interval_reset(void) {
     std::for_each(m_collectors.begin(),
                   m_collectors.end(),
                   [&](const std::pair<const key_type, mapped_type>& pair) {
@@ -189,7 +189,7 @@ class collector_group {
    * \brief Call the \ref base_metrics_collector::timestep_inc() function on all
    * collectors in the group.
    */
-  void timestep_inc_all(void) {
+  void timestep_inc(void) {
     std::for_each(m_collectors.begin(),
                   m_collectors.end(),
                   [&](const std::pair<const key_type, mapped_type>& pair) {
@@ -198,7 +198,7 @@ class collector_group {
   }
 
   /**
-   * \brief Call the \ref base_metrics_collector::csv_line_write() function on
+   * \brief Call the \ref base_metrics_collector::flush() function on
    * all collectors in the group.
    *
    * \p fail_ok Is it OK if one or more collectors fail to write due to
@@ -210,12 +210,12 @@ class collector_group {
    * attempted to write out metrics this timestep, regardless of success, and \c
    * FALSE otherwise.
    */
-  bool metrics_write_all(bool fail_ok) {
+  bool flush(bool fail_ok) {
     return std::all_of(
         m_collectors.begin(),
         m_collectors.end(),
         [&](const std::pair<const key_type, mapped_type>& pair) -> bool {
-          auto res = pair.second->csv_line_write();
+          auto res = pair.second->flush();
           if (fail_ok) {
             return !(res & metrics_write_status::ekNO_ATTEMPT);
           } else {
@@ -228,10 +228,10 @@ class collector_group {
    * \brief Call the \ref base_metrics_collector::finalize() function on all
    * collectors in the group.
    */
-  void finalize_all(void) {
+  void finalize(void) {
     std::for_each(m_collectors.begin(),
                   m_collectors.end(),
-                  [&](const std::pair<const key_type, mapped_type>& pair) {
+                  [&](const auto& pair) {
                     pair.second->finalize();
                   });
   }

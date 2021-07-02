@@ -132,14 +132,14 @@
  *
  * This macro is only available if event reporting is fully enabled.
  */
-#define ER_REPORT(lvl, logger, msg, ...)        \
-  {                                             \
-    char _report_str[RCPPSW_ER_MSG_LEN_MAX];    \
-    snprintf(static_cast<char*>(_report_str),   \
-             sizeof(_report_str),               \
-             msg,                               \
-             ##__VA_ARGS__);                    \
-    LOG4CXX_##lvl(logger, _report_str);         \
+#define ER_REPORT(lvl, logger, msg, ...)                        \
+  {                                                             \
+    std::array<char, RCPPSW_ER_MSG_LEN_MAX> _report_str{};      \
+    snprintf(_report_str.data(),                                \
+             sizeof(_report_str),                               \
+             msg,                                               \
+             ##__VA_ARGS__);                                    \
+    LOG4CXX_##lvl(logger, _report_str.data());                  \
   }
 
 /**

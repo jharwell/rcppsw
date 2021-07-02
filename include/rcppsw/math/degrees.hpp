@@ -81,8 +81,6 @@ class degrees {
    */
   void set(double value) { m_value = value; }
 
-  double abs_v(void) const { return std::abs(v()); }
-
   /**
    * \brief Normalizes the value in the range [-180, 180]
    */
