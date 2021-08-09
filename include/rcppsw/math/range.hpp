@@ -54,6 +54,11 @@ NS_START(rcppsw, math);
  * To call any member functions other than \ref lb() and \ref ub(), the range
  * must be non-empty, meaning that the min must not be equal to the max (if it
  * is an assertion will trigger).
+ *
+ * No mutator functions are provided beyond setters, with the idea that ranges
+ * should generally be read-only. If you want to modify a range (e.g., \ref
+ * translate() it), a new range should be returned and the original range be
+ * unmodified.
  */
 template <typename T>
 class range final : public er::client<range<T>> {
@@ -189,8 +194,12 @@ class range final : public er::client<range<T>> {
 
   /**
    * \brief Get the midpoint of the range.
+   *
+   * For integer ranges where \ref span() is odd, this will truncate (i.e., the
+   * centerpoint is always of type \p T).
    */
-  T center(void) const { return (m_lb + m_ub) / 2.0; }
+  T center(void) const { return (m_lb + m_ub) / 2; }
+
 
   /**
    * \brief Return a string representation of the range in the form of '[lb,ub]'.
@@ -205,11 +214,23 @@ class range final : public er::client<range<T>> {
   }
   /**
    * \brief Translate the current range to the specified value, returning a new
-   * range centered at that value.
+   * range resulting from the translation.
    *
    * \return The new translated range.
    */
-  range translate(const T& value) { return range(m_lb + value, m_ub + value); }
+  range translate(const T& value) const {
+    return range(m_lb + value, m_ub + value);
+  }
+
+  /**
+   * \brief Re-center the current range around the specified value, returning a
+   * new range centered at that value.
+   */
+  range recenter(const T&value) const {
+    T span = this->span();
+    return range(static_cast<T>(value - span / 2.0),
+                 static_cast<T>(value + span / 2.0));
+  }
 
   /**
    * \brief For parsing a range from a string in the form of \c "LB:UB".

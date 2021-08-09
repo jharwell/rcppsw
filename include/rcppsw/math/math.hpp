@@ -63,7 +63,7 @@ static inline bool is_equal(double lhs,
 static inline bool is_multiple_of(double x,
                                   double y,
                                   double tol = kDOUBLE_EPSILON) {
-  return std::remainder(x, y) < tol;
+  return std::fabs(std::remainder(x, y)) < tol;
 }
 
 NS_END(math, rcppsw);

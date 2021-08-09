@@ -60,6 +60,7 @@ class grid2D_overlay final : public base_grid2D<T>,
   using typename base_grid2D<T>::grid_view;
   using typename base_grid2D<T>::const_grid_view;
   using typename base_grid2D<T>::grid_type;
+  using typename base_grid2D<T>::coord_type;
 
   using base_grid2D<T>::access;
   using base_grid2D<T>::xdsize;
@@ -143,7 +144,7 @@ class grid2D_overlay final : public base_grid2D<T>,
   /**
    * \brief Get the discrete dimensions of the grid.
    */
-  math::vector2z dimsd(void) const {
+  coord_type dimsd(void) const {
     return math::dvec2zvec(mc_dim, resolution().v());
   }
 

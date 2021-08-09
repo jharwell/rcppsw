@@ -60,6 +60,7 @@ class grid3D_overlay : public base_grid3D<T>,
   using typename base_grid3D<T>::grid_view;
   using typename base_grid3D<T>::const_grid_view;
   using typename base_grid3D<T>::grid_type;
+  using typename base_grid3D<T>::coord_type;
 
   using base_grid3D<T>::access;
   using base_grid3D<T>::xdsize;
@@ -143,7 +144,7 @@ class grid3D_overlay : public base_grid3D<T>,
   /**
    * \brief Get the discrete dimensions of the grid.
    */
-  math::vector3z dimsd(void) const {
+  coord_type dimsd(void) const {
     return math::dvec2zvec(mc_dim, resolution().v());
   }
 

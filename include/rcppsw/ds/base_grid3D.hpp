@@ -47,6 +47,7 @@ template <typename T>
 class base_grid3D {
  public:
   using value_type = T;
+  using coord_type = math::vector3z;
 
   using grid_type = typename boost::multi_array<T, 3>;
   using grid_view = typename grid_type::template array_view<3>::type;
@@ -82,9 +83,9 @@ class base_grid3D {
    */
   virtual size_t zdsize(void) const = 0;
 
-  T& access(const math::vector3z& c) { return access(c.x(), c.y(), c.z()); }
+  T& access(const coord_type& c) { return access(c.x(), c.y(), c.z()); }
 
-  const T& access(const math::vector3z& c) const {
+  const T& access(const coord_type& c) const {
     return const_cast<base_grid3D*>(this)->access(c);
   }
   const T& access(size_t i, size_t j, size_t k) const {
@@ -95,12 +96,12 @@ class base_grid3D {
     return i < xdsize() && j < ydsize() && k < zdsize();
   }
 
-  bool contains(const math::vector3z& pt) {
+  bool contains(const coord_type& pt) {
     return contains(pt.x(), pt.y(), pt.z());
   }
 
-  RCPPSW_PURE T& operator[](const math::vector3z& c) { return access(c); }
-  RCPPSW_PURE const T& operator[](const math::vector3z& c) const {
+  RCPPSW_PURE T& operator[](const coord_type& c) { return access(c); }
+  RCPPSW_PURE const T& operator[](const coord_type& c) const {
     return access(c);
   }
 
@@ -112,8 +113,8 @@ class base_grid3D {
    * \return The layer.
    */
   grid_view layer(size_t z) {
-    return subgrid(math::vector3z(0, ydsize(), z),
-                   math::vector3z(0, ydsize(), z + 1));
+    return subgrid(coord_type(0, ydsize(), z),
+                   coord_type(0, ydsize(), z + 1));
   }
 
   const_grid_view layer(size_t z) const {
@@ -129,15 +130,15 @@ class base_grid3D {
    *
    * \return The subgrid (closed interval).
    */
-  grid_view subgrid(const math::vector3z& ll, const math::vector3z& ur) {
+  grid_view subgrid(const coord_type& ll, const coord_type& ur) {
     index_range x(ll.x(), ur.x(), 1);
     index_range y(ll.y(), ur.y(), 1);
     index_range z(ll.z(), ur.z(), 1);
     return grid_view(grid()[boost::indices[x][y][z]]);
   }
 
-  const_grid_view subgrid(const math::vector3z& ll,
-                          const math::vector3z& ur) const {
+  const_grid_view subgrid(const coord_type& ll,
+                          const coord_type& ur) const {
     index_range x(ll.x(), ur.x(), 1);
     index_range y(ll.y(), ur.y(), 1);
     index_range z(ll.z(), ur.z(), 1);
@@ -158,7 +159,7 @@ class base_grid3D {
    *
    * \return The subcircle.
    */
-  grid_view subcircle(const math::vector3z& c, size_t radius) {
+  grid_view subcircle(const coord_type& c, size_t radius) {
     auto ll_x =
         std::max<int>(0, static_cast<int>(c.x()) - static_cast<int>(radius));
     auto ll_y =
@@ -171,13 +172,13 @@ class base_grid3D {
     auto ur_x = std::min(c.x() + radius + 1, xdsize());
     auto ur_y = std::min(c.y() + radius + 1, ydsize());
 
-    math::vector3z ll(ll_x, ll_y, c.z());
-    math::vector3z ur(ur_x, ur_y, c.z() + 1);
+    coord_type ll(ll_x, ll_y, c.z());
+    coord_type ur(ur_x, ur_y, c.z() + 1);
 
     return subgrid(ll, ur);
   }
 
-  const_grid_view subcircle(const math::vector3z& c, size_t radius) const {
+  const_grid_view subcircle(const coord_type& c, size_t radius) const {
     auto ll_x =
         std::max<int>(0, static_cast<int>(c.x()) - static_cast<int>(radius));
     auto ll_y =
@@ -190,8 +191,8 @@ class base_grid3D {
     auto ur_x = std::min(c.x() + radius + 1, xdsize());
     auto ur_y = std::min(c.y() + radius + 1, ydsize());
 
-    math::vector3z ll(ll_x, ll_y, c.z());
-    math::vector3z ur(ur_x, ur_y, c.z() + 1);
+    coord_type ll(ll_x, ll_y, c.z());
+    coord_type ur(ur_x, ur_y, c.z() + 1);
 
     return subgrid(ll, ur);
   }
