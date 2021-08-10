@@ -31,6 +31,7 @@
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/rcppsw.hpp"
 #include "rcppsw/utils/string_utils.hpp"
+#include "rcppsw/er/stringizable.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -61,7 +62,7 @@ NS_START(rcppsw, math);
  * unmodified.
  */
 template <typename T>
-class range final : public er::client<range<T>> {
+class range final : public er::client<range<T>>, er::stringizable {
  public:
   range(void) noexcept : ER_CLIENT_INIT("rcppsw.math.range") {}
   range(const T& lb, const T& ub) noexcept
@@ -204,7 +205,7 @@ class range final : public er::client<range<T>> {
   /**
    * \brief Return a string representation of the range in the form of '[lb,ub]'.
    */
-  std::string to_str(void) const {
+  std::string to_str(void) const override {
     return "[" + rcppsw::to_string(m_lb) + "-" + rcppsw::to_string(m_ub) + "]";
   }
 

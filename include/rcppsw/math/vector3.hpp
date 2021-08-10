@@ -33,6 +33,7 @@
 #include "rcppsw/math/vector2.hpp"
 #include "rcppsw/rcppsw.hpp"
 #include "rcppsw/types/discretize_ratio.hpp"
+#include "rcppsw/er/stringizable.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -53,7 +54,7 @@ NS_START(rcppsw, math);
  * care if you are trying to do scaling, trigonometric things with integers...
  */
 template <typename T>
-class vector3 {
+class vector3 : public er::stringizable {
  public:
   using value_type = T;
 
@@ -388,7 +389,8 @@ class vector3 {
     v.set(values[0], values[1], values[2]);
     return is;
   }
-  std::string to_str(void) const {
+
+  std::string to_str(void) const override {
     return "(" + rcppsw::to_string(m_x) + "," + rcppsw::to_string(m_y) + "," +
            rcppsw::to_string(m_z) + ")";
   }

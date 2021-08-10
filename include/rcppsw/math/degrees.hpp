@@ -47,7 +47,7 @@ class radians;
  *
  * \brief Used to store an angle value in degrees (duh).
  */
-class degrees {
+class degrees : public er::stringizable {
  public:
   /*
    * These are MATHEMATICAL constants, so they get UPPER_CASE naming convention
@@ -99,7 +99,7 @@ class degrees {
    * \brief Return a string representation of the degrees object of the form
    * 'deg(XX) -> rad(YY)'.
    */
-  std::string to_str(void) const;
+  std::string to_str(void) const override;
 
   degrees& operator+(void) { return *this; }
 

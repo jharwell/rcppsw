@@ -38,7 +38,7 @@ NS_START(rcppsw, patterns, decorator);
  * Macros
  ******************************************************************************/
 /**
- * \def RCPPSW_DECORATE_FUNC(Func)
+ * \def RCPPSW_DECORATE_DECLDEF(Func)
  *
  * Wraps the declaration/implementation of the decoratee \p Func.
  *
@@ -63,6 +63,23 @@ NS_START(rcppsw, patterns, decorator);
     return rpdecorator::decorator<Type>::decoratee().Func( std::forward<Args>(args)...); \
   }
 
+/**
+ * \def RCPPSW_DECORATE_DECL(Name)
+ *
+ * Wraps a using declaration from the decoratee into the derived class.
+ */
+#define RCPPSW_DECORATE_DECL(Name) \
+  using Name = typename decoratee_type::Name
+
+/**
+ * \def RCPPSW_DECORATE_CT(...)
+ *
+ * Exposes tricy constructors from the decoratee in the derived class. Generally
+ * only needed if the decoratee is an STL container or similar.
+ */
+#define RCPPSW_DECORATE_CT(...)                 \
+  using rpdecorator::decorator<decoratee_type>::decorator
+
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
@@ -77,21 +94,40 @@ NS_START(rcppsw, patterns, decorator);
 template <class TDecoratee>
 class decorator {
  public:
-  template <typename... TArgs>
-  explicit decorator(TArgs&&... args)
-      : m_decoratee(std::forward<TArgs>(args)...) {}
+  using decoratee_type = TDecoratee;
 
-  virtual ~decorator(void) = default;
+  /*
+   * Note we DO NOT use &&! If we do, then you can't use this class to decorate
+   * STL containers for cryptic reasons...This is at most an extra copy anyway.
+   */
+  template <typename... TArgs>
+  decorator(TArgs... args)
+      : m_decoratee{std::move(args)...} {}
+
+  template<typename U = TDecoratee,
+           RCPPSW_SFINAE_DECLDEF((sizeof(U::value_type) > 0))>
+  decorator(std::initializer_list<U> args)
+      : m_decoratee(std::move(args)) {}
+
+  /*
+   * These decls are MANDATORY because by also declaring the deconstructor, you
+   * lose implicitly-defined move construction which is necessary in the
+   * decoratee is a STL container of move-only types.
+   */
   decorator(const decorator&) = default;
   decorator& operator=(const decorator&) = default;
+  decorator(decorator&&) = default;
+  decorator& operator=(decorator&&) = default;
+
+  virtual ~decorator(void) = default;
 
   /**
    * \brief Get a reference to the decorated type.
    *
    * \return The reference.
    */
-  TDecoratee& decoratee(void) { return m_decoratee; }
-  const TDecoratee& decoratee(void) const { return m_decoratee; }
+  decoratee_type& decoratee(void) { return m_decoratee; }
+  const decoratee_type& decoratee(void) const { return m_decoratee; }
 
   /**
    * \brief Replace the current instance of the decorated type with a new one
@@ -101,7 +137,7 @@ class decorator {
    */
   template <typename... TArgs>
   void redecorate(TArgs&&... args) {
-    m_decoratee = TDecoratee(std::forward<TArgs>(args)...);
+    m_decoratee = decoratee_type(std::forward<TArgs>(args)...);
   }
 
   /**
@@ -110,60 +146,11 @@ class decorator {
    *
    * \param d The new decoratee.
    */
-  void change_decoratee(const TDecoratee& d) { m_decoratee = d; }
+  void redecorate_with(const decoratee_type& d) { m_decoratee = d; }
 
  private:
   /* clang-format off */
-  TDecoratee m_decoratee;
-  /* clang-format on */
-};
-
-/**
- * \class ptr_decorator
- * \ingroup patterns decorator
- *
- * \brief The base class for the ptr-to-object decorator design pattern.
- *
- * \tparam TDecoratee The type of the decorated object.
- */
-template <class TDecoratee>
-class ptr_decorator {
- public:
-  template <typename... Args>
-  explicit ptr_decorator(Args&&... args) :
-      m_decoratee(std::make_unique<TDecoratee>(std::forward<Args>(args)...)) {}
-  virtual ~ptr_decorator(void) {}
-
-  /**
-   * \brief Replace the current instance of the decorated type with a new one
-   * constructed from the passed arguments.
-   *
-   * \param args The arguments to a decoratee constructor.
-   */
-  template <typename... Args>
-  void redecorate(Args&&... args) {
-    m_decoratee = std::make_unique<TDecoratee>(std::move(m_decoratee),
-                                               std::forward<Args>(args)...);
-  }
-
-  /**
-   * \brief Replace the current decoratee instance with another existing
-   * instance.
-   *
-   * \param d The new decoratee.
-   */
-  void change_decoratee(TDecoratee * const d) { m_decoratee.reset(d); }
-
-  /**
-   * \brief Get a reference to the decorated type.
-   *
-   * \return The reference.
-   */
-  TDecoratee* decoratee(void) const { return m_decoratee.get(); }
-
- private:
-  /* clang-format off */
-  std::unique_ptr<TDecoratee> m_decoratee;
+  decoratee_type m_decoratee;
   /* clang-format on */
 };
 

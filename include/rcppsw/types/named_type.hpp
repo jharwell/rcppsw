@@ -28,6 +28,7 @@
 #include <utility>
 
 #include "rcppsw/rcppsw.hpp"
+#include "rcppsw/er/stringizable.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -46,7 +47,7 @@ NS_START(rcppsw, types);
  * disabled), and force the user to be explicit about converting.
  */
 template <typename T, typename Parameter>
-class named_type {
+class named_type : public er::stringizable {
  public:
   explicit named_type(T const& value) noexcept : m_value(value) {}
   virtual ~named_type(void) = default;
@@ -59,7 +60,7 @@ class named_type {
     stream << c_type.to_str();
     return stream;
   }
-  std::string to_str(void) const { return std::to_string(m_value); }
+  std::string to_str(void) const override { return std::to_string(m_value); }
 
   friend std::istream& operator>>(std::istream& stream, named_type& n) {
     stream >> n.m_value;

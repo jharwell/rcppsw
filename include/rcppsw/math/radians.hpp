@@ -31,6 +31,7 @@
 #include "rcppsw/math/range.hpp"
 #include "rcppsw/rcppsw.hpp"
 #include "rcppsw/math/math.hpp"
+#include "rcppsw/er/stringizable.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -52,7 +53,7 @@ class degrees;
  * decimal places, by default; this can be overriden on a per-comparison basis
  * if desired, or set class-wide via \ref kAPPROX_EQUALITY_TOL.
  */
-class radians {
+class radians : public er::stringizable {
  public:
   /*
    * These are MATHEMATICAL constants, so they get UPPER_CASE naming convention
@@ -102,7 +103,7 @@ class radians {
    * \brief Return a string representation of the radians object of the form
    * 'rad(XX) -> deg(YY)'.
    */
-  std::string to_str(void) const;
+  std::string to_str(void) const override;
 
   friend std::istream& operator>>(std::istream& is, radians& r) {
     is >> r.m_value;

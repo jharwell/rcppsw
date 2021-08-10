@@ -100,7 +100,6 @@ namespace singleton {}
 namespace pimpl {}
 } /* namespace patterns */
 
-
 /**
  * \brief Pure mathematical classes such as vectors, ranges, sigmoids, etc.
 */

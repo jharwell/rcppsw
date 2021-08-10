@@ -147,7 +147,7 @@ class kmeans : public er::client<kmeans<T>> {
   cluster_vector clusters_init(void) {
     cluster_vector clusters;
     for (size_t i = 0; i < mc_k; ++i) {
-      clusters.emplace_back(cluster_type(i, m_data, &m_membership));
+      clusters.emplace_back(cluster_type(i, m_data, m_membership));
     } /* for(i..) */
     return clusters;
   }

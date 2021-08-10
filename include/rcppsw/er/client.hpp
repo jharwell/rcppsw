@@ -240,6 +240,7 @@ class client {
     }
   }
 
+
  private:
   /* clang-format off */
   static const std::string kConsoleLayout;

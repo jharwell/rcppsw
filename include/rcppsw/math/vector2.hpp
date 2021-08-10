@@ -31,6 +31,7 @@
 #include "rcppsw/math/radians.hpp"
 #include "rcppsw/rcppsw.hpp"
 #include "rcppsw/types/discretize_ratio.hpp"
+#include "rcppsw/er/stringizable.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -51,7 +52,7 @@ NS_START(rcppsw, math);
  * care if you are trying to do scaling, trigonometric things with integers...
  */
 template <typename T>
-class vector2 {
+class vector2 : public er::stringizable {
  public:
   using value_type = T;
   /**
@@ -103,8 +104,9 @@ class vector2 {
    * \param angle The vector angle.
    */
   template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
-  vector2(const T& length, const radians& angle) noexcept
-      : m_x(std::cos(angle.v()) * length), m_y(std::sin(angle.v()) * length) {}
+  vector2(const T& length, const radians& angle)
+      : m_x(std::cos(angle.v()) * length),
+        m_y(std::sin(angle.v()) * length) {}
 
   RCPPSW_NODISCARD T x(void)  { return m_x; }
   RCPPSW_NODISCARD T y(void)  { return m_y; }
@@ -336,7 +338,7 @@ class vector2 {
     return is;
   }
 
-  std::string to_str(void) const {
+  std::string to_str(void) const override {
     return "(" + rcppsw::to_string(m_x) + "," + rcppsw::to_string(m_y) + ")";
   }
 
