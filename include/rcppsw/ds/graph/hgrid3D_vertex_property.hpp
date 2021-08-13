@@ -1,7 +1,7 @@
 /**
- * \file spatial_dist.cpp
+ * \file hgrid3D_vertex_property.hpp
  *
- * \copyright 2020 John Harwell, All rights reserved.
+ * \copyright 2021 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,40 +18,33 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VERTEX_PROPERTY_HPP_
+#define INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VERTEX_PROPERTY_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/types/spatial_dist.hpp"
-
-#include <cmath>
+#include "rcppsw/math/vector3.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, types);
+NS_START(rcppsw, ds, graph);
 
 /*******************************************************************************
- * Operators
+ * Class Definitions
  ******************************************************************************/
-spatial_dist operator*(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs * rhs.v());
-}
-spatial_dist operator/(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs / rhs.v());
-}
-spatial_dist operator-(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs - rhs.v());
-}
-spatial_dist operator+(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs + rhs.v());
-}
-bool operator<=(double lhs, const spatial_dist& rhs) { return lhs <= rhs.v(); }
+/**
+ * \struct hgrid3D_vertex_property
+ * \ingroup ds graph
+ *
+ * \brief Base class for all vertex properties used with the \ref hgrid3D
+ * graph.
+ */
+struct hgrid3D_vertex_property {
+  rmath::vector3z coord{};
+};
 
-/*******************************************************************************
- * Non-Member Functions
- ******************************************************************************/
-spatial_dist spatial_dist::make(const double& value) {
-  return spatial_dist(std::fabs(value));
-} /* make() */
+NS_END(graph, ds, rcppsw);
 
-NS_END(types, rcppsw);
+#endif /* INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VERTEX_PROPERTY_HPP_ */

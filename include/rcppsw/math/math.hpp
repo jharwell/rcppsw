@@ -66,6 +66,22 @@ static inline bool is_multiple_of(double x,
   return std::fabs(std::remainder(x, y)) < tol;
 }
 
+NS_START(detail);
+
+template <class T>
+using length_func_decltype = decltype(std::declval<T>().length());
+
+NS_END(detail);
+
+/**
+ * \brief Computes the euclidean distance between the passed vectors.
+ */
+template<typename T,
+         RCPPSW_SFINAE_DECLDEF(rmpl::is_detected<detail::length_func_decltype, T>::value)>
+static inline double l2norm(const T& lhs, const T& rhs) {
+  return (lhs - rhs).length();
+}
+
 NS_END(math, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_MATH_MATH_HPP_ */

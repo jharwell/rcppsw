@@ -1,5 +1,5 @@
 /**
- * \file grid_overlay.hpp
+ * \file base_grid_overlay.hpp
  *
  * \copyright 2020 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_GRID_OVERLAY_HPP_
-#define INCLUDE_RCPPSW_DS_GRID_OVERLAY_HPP_
+#ifndef INCLUDE_RCPPSW_DS_BASE_GRID_OVERLAY_HPP_
+#define INCLUDE_RCPPSW_DS_BASE_GRID_OVERLAY_HPP_
 
 /*******************************************************************************
  * Includes
@@ -38,7 +38,7 @@ NS_START(rcppsw, ds);
  * Class Definitions
  ******************************************************************************/
 /**
- * \class grid_overlay
+ * \class base_grid_overlay
  * \ingroup ds
  *
  * \brief Base class for logical grids that are overlayed over a continuous
@@ -51,7 +51,7 @@ NS_START(rcppsw, ds);
  * discretized grid is required.
  */
 template <typename TOriginType>
-class grid_overlay : public er::client<grid_overlay<TOriginType>> {
+class base_grid_overlay : public er::client<base_grid_overlay<TOriginType>> {
  public:
   static_assert(std::is_same<TOriginType, math::vector2d>::value ||
                     std::is_same<TOriginType, math::vector3d>::value,
@@ -65,15 +65,15 @@ class grid_overlay : public er::client<grid_overlay<TOriginType>> {
       typename std::conditional<std::is_same<TOriginType, math::vector2z>::value,
                                 math::vector2z,
                                 math::vector3z>::type;
-  grid_overlay(const origin_rtype& origin,
+  base_grid_overlay(const origin_rtype& origin,
                const types::discretize_ratio& grid_resolution,
                const types::discretize_ratio& field_resolution)
-      : ER_CLIENT_INIT("rcppsw.ds.grid_overlay"),
+      : ER_CLIENT_INIT("rcppsw.ds.base_grid_overlay"),
         mc_resolution(grid_resolution),
         mc_originr(origin),
         mc_origind(math::dvec2zvec(origin, field_resolution.v())) {}
 
-  virtual ~grid_overlay(void) = default;
+  virtual ~base_grid_overlay(void) = default;
 
   /**
    * \brief Return the resolution of the grid.
@@ -100,4 +100,4 @@ class grid_overlay : public er::client<grid_overlay<TOriginType>> {
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_GRID_OVERLAY_HPP_ */
+#endif /* INCLUDE_RCPPSW_DS_BASE_GRID_OVERLAY_HPP_ */

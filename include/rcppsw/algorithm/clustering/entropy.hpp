@@ -132,8 +132,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
       double entropy_h = balch2000_iter(dist_func, horizon);
       double end = time_monotonic_sec();
 
-      if (std::fabs(entropy_h - entropy_h_1) <=
-          std::numeric_limits<double>::epsilon()) {
+      if (std::fabs(entropy_h - entropy_h_1) <= rmath::kDOUBLE_EPSILON) {
         ER_WARN("Redundant entropy %f: horizon=%f", entropy_h, horizon);
       } else {
         e_accum += entropy_h;

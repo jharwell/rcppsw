@@ -58,16 +58,16 @@ class base_grid2D {
   virtual ~base_grid2D(void) = default;
 
   /**
-   * \brief Get the discrete size of the X dimension of the grid (i.e. what is
-   * the array index in X?)
+   * \brief Get the size of the X dimension of the grid (i.e. what is the array
+   * index in X?)
    */
-  virtual size_t xdsize(void) const = 0;
+  virtual size_t xsize(void) const = 0;
 
   /**
-   * \brief Get the discrete size of the Y dimension of the grid (i.e. what is
-   * the array index in Y?)
+   * \brief Get the size of the Y dimension of the grid (i.e. what is the array
+   * index in Y?)
    */
-  virtual size_t ydsize(void) const = 0;
+  virtual size_t ysize(void) const = 0;
 
   /**
    * \brief Return a reference to the element at position (i, j) in the grid.
@@ -92,7 +92,7 @@ class base_grid2D {
   }
 
   bool contains(size_t i, size_t j) {
-    return i < xdsize() && j < ydsize();
+    return i < xsize() && j < ysize();
   }
 
   bool contains(const coord_type& pt) {
@@ -122,8 +122,8 @@ class base_grid2D {
      * boost uses half open interval for index ranges, and we want a closed
      * interval, so we +1.
      */
-    auto ur_x = std::min(c.x() + radius + 1, xdsize() - 1);
-    auto ur_y = std::min(c.y() + radius + 1, ydsize() - 1);
+    auto ur_x = std::min(c.x() + radius + 1, xsize() - 1);
+    auto ur_y = std::min(c.y() + radius + 1, ysize() - 1);
 
     coord_type ll(ll_x, ll_y);
     coord_type ur(ur_x, ur_y);
@@ -141,8 +141,8 @@ class base_grid2D {
      * boost uses half open interval for index ranges, and we want a closed
      * interval, so we +1.
      */
-    auto ur_x = std::min(c.x() + radius + 1, xdsize());
-    auto ur_y = std::min(c.y() + radius + 1, ydsize());
+    auto ur_x = std::min(c.x() + radius + 1, xsize());
+    auto ur_y = std::min(c.y() + radius + 1, ysize());
 
     coord_type ll(ll_x, ll_y);
     coord_type ur(ur_x, ur_y);
@@ -158,8 +158,12 @@ class base_grid2D {
    * \return The subgrid (closed interval).
    */
   grid_view subgrid(const coord_type& ll, const coord_type& ur) {
-    index_range x(ll.x(), ur.x(), 1);
-    index_range y(ll.y(), ur.y(), 1);
+    /*
+     * boost uses half open interval for index ranges, and we want a closed
+     * interval, so we +1.
+     */
+    index_range x(ll.x(), ur.x() + 1, 1);
+    index_range y(ll.y(), ur.y() + 1, 1);
     return grid_view(grid()[boost::indices[x][y]]);
   }
 

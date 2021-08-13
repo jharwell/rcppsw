@@ -1,5 +1,5 @@
 /**
- * \file spatial_dist.hpp
+ * \file manhattan_dist.hpp
  *
  * \copyright 2019 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TYPES_SPATIAL_DIST_HPP_
-#define INCLUDE_RCPPSW_TYPES_SPATIAL_DIST_HPP_
+#ifndef INCLUDE_RCPPSW_TYPES_MANHATTAN_DIST_HPP_
+#define INCLUDE_RCPPSW_TYPES_MANHATTAN_DIST_HPP_
 
 /*******************************************************************************
  * Includes
@@ -35,62 +35,65 @@ NS_START(rcppsw, types);
  * Class Definitions
  ******************************************************************************/
 /**
- * \class spatial_dist
+ * \class manhattan_dist
  * \ingroup types
  *
- * \brief Specifies a distance in "real" spatial space, and as such is always
- * positive.
+ * \brief Specifies a distance between two points in manhattan distance, and as
+ * such is always positive.
  */
-class spatial_dist final : public distance_measure<double, struct spatial_dist_tag> {
+class manhattan_dist final : public distance_measure<int,
+                                                     struct manhattan_dist_tag> {
  public:
   /**
-   * Create a \ref spatial_dist from a numeric value, making it positive if
+   * Create a \ref manhattan_dist from a numeric value, making it positive if
    * necessary. This incurs a higher runtime cost, and so is a separate function
    * from the constructor, which \a assumes the \p value to be positive
    * semi-definite.
    */
-  static spatial_dist make(const double& value);
+  static manhattan_dist make(const int& value);
 
-  explicit spatial_dist(const double& v) : distance_measure(v) {}
-  ~spatial_dist(void) override = default;
-  spatial_dist(const spatial_dist&) = default;
+  explicit manhattan_dist(const int& v, bool check_psd = true)
+      : distance_measure(v, check_psd) {}
 
-  spatial_dist operator*(double rhs) const {
-    return spatial_dist(v() * rhs);
-  }
-  spatial_dist operator/(double rhs) const {
-    return spatial_dist(v() / rhs);
-  }
-  spatial_dist operator-(double rhs) const {
-    return spatial_dist(v() - rhs);
-  }
-  spatial_dist operator+(double rhs) const {
-    return spatial_dist(v() + rhs);
-  }
+  ~manhattan_dist(void) override = default;
+  manhattan_dist(const manhattan_dist&) = default;
 
-
-  spatial_dist operator*(const spatial_dist& rhs) const {
-    return spatial_dist(v() * rhs.v());
+  manhattan_dist operator*(int rhs) const {
+    return manhattan_dist(v() * rhs);
   }
-  spatial_dist operator/(const spatial_dist& rhs) const {
-    return spatial_dist(v() / rhs.v());
+  manhattan_dist operator/(int rhs) const {
+    return manhattan_dist(v() / rhs);
   }
-  spatial_dist operator-(const spatial_dist& rhs) const {
-    return spatial_dist(v() - rhs.v());
+  manhattan_dist operator-(int rhs) const {
+    return manhattan_dist(v() - rhs);
   }
-  spatial_dist operator+(const spatial_dist& rhs) const {
-    return spatial_dist(v() + rhs.v());
+  manhattan_dist operator+(int rhs) const {
+    return manhattan_dist(v() + rhs);
   }
 
-  spatial_dist& operator-=(double rhs) {
+
+  manhattan_dist operator*(const manhattan_dist& rhs) const {
+    return manhattan_dist(v() * rhs.v());
+  }
+  manhattan_dist operator/(const manhattan_dist& rhs) const {
+    return manhattan_dist(v() / rhs.v());
+  }
+  manhattan_dist operator-(const manhattan_dist& rhs) const {
+    return manhattan_dist(v() - rhs.v());
+  }
+  manhattan_dist operator+(const manhattan_dist& rhs) const {
+    return manhattan_dist(v() + rhs.v());
+  }
+
+  manhattan_dist& operator-=(int rhs) {
     set(v() - rhs);
     return *this;
   }
-  spatial_dist& operator=(const spatial_dist& rhs) {
+  manhattan_dist& operator=(const manhattan_dist& rhs) {
     set(rhs.v());
     return *this;
   }
-  spatial_dist& operator+=(const spatial_dist& rhs) {
+  manhattan_dist& operator+=(const manhattan_dist& rhs) {
     set(v() + rhs.v());
     return *this;
   }
@@ -99,12 +102,10 @@ class spatial_dist final : public distance_measure<double, struct spatial_dist_t
 /*******************************************************************************
  * Operators
  ******************************************************************************/
-spatial_dist operator*(double lhs, const spatial_dist& rhs);
-spatial_dist operator/(double lhs, const spatial_dist& rhs);
-spatial_dist operator-(double lhs, const spatial_dist& rhs);
-spatial_dist operator+(double lhs, const spatial_dist& rhs);
-bool operator<=(double lhs, const spatial_dist& rhs) RCPPSW_PURE;
+manhattan_dist operator-(int lhs, const manhattan_dist& rhs);
+manhattan_dist operator+(int lhs, const manhattan_dist& rhs);
+bool operator<=(int lhs, const manhattan_dist& rhs) RCPPSW_PURE;
 
 NS_END(types, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TYPES_SPATIAL_DIST_HPP_ */
+#endif /* INCLUDE_RCPPSW_TYPES_MANHATTAN_DIST_HPP_ */

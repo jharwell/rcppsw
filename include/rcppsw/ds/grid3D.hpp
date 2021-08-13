@@ -60,14 +60,11 @@ class grid3D : public base_grid3D<T> {
 
   T& access(size_t i, size_t j, size_t k) override { return m_cells[i][j][k]; }
 
-  size_t xsize(void) const { return m_cells.shape()[0]; }
-  size_t ysize(void) const { return m_cells.shape()[1]; }
-  size_t zsize(void) const { return m_cells.shape()[2]; }
+  size_t xsize(void) const override { return m_cells.shape()[0]; }
+  size_t ysize(void) const override { return m_cells.shape()[1]; }
+  size_t zsize(void) const override { return m_cells.shape()[2]; }
 
  private:
-  size_t xdsize(void) const override { return xsize(); }
-  size_t ydsize(void) const override { return ysize(); }
-  size_t zdsize(void) const override { return zsize(); }
   grid_type& grid(void) override { return m_cells; }
   const grid_type& grid(void) const override { return m_cells; }
 

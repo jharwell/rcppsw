@@ -1,5 +1,5 @@
 /**
- * \file spatial_dist.cpp
+ * \file manhattan_dist.cpp
  *
  * \copyright 2020 John Harwell, All rights reserved.
  *
@@ -21,7 +21,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/types/spatial_dist.hpp"
+#include "rcppsw/types/manhattan_dist.hpp"
 
 #include <cmath>
 
@@ -33,25 +33,19 @@ NS_START(rcppsw, types);
 /*******************************************************************************
  * Operators
  ******************************************************************************/
-spatial_dist operator*(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs * rhs.v());
+manhattan_dist operator-(int lhs, const manhattan_dist& rhs) {
+  return manhattan_dist(lhs - rhs.v());
 }
-spatial_dist operator/(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs / rhs.v());
+manhattan_dist operator+(int lhs, const manhattan_dist& rhs) {
+  return manhattan_dist(lhs + rhs.v());
 }
-spatial_dist operator-(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs - rhs.v());
-}
-spatial_dist operator+(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs + rhs.v());
-}
-bool operator<=(double lhs, const spatial_dist& rhs) { return lhs <= rhs.v(); }
+bool operator<=(int lhs, const manhattan_dist& rhs) { return lhs <= rhs.v(); }
 
 /*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
-spatial_dist spatial_dist::make(const double& value) {
-  return spatial_dist(std::fabs(value));
+manhattan_dist manhattan_dist::make(const int& value) {
+  return manhattan_dist(std::abs(static_cast<int>(value)));
 } /* make() */
 
 NS_END(types, rcppsw);
