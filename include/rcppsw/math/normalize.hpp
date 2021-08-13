@@ -24,9 +24,8 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <limits>
-
 #include "rcppsw/rcppsw.hpp"
+#include "rcppsw/math/math.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -43,7 +42,7 @@ NS_START(rcppsw, math);
  * 0.5.o
  */
 static inline double normalize(double min, double max, double val) {
-  if (max - min <= std::numeric_limits<double>::epsilon()) {
+  if (max - min <= rmath::kDOUBLE_EPSILON) {
     return 0.5;
   } else {
     return (val - min) / (max - min);

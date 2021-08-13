@@ -53,7 +53,7 @@ class degrees;
  * decimal places, by default; this can be overriden on a per-comparison basis
  * if desired, or set class-wide via \ref kAPPROX_EQUALITY_TOL.
  */
-class radians : public er::stringizable {
+class radians final : public er::stringizable {
  public:
   /*
    * These are MATHEMATICAL constants, so they get UPPER_CASE naming convention
@@ -173,8 +173,7 @@ class radians : public er::stringizable {
    * specified during construction.
    */
   bool operator==(const radians& other) const {
-    return std::fabs(m_value - other.m_value) <
-           std::numeric_limits<double>::epsilon();
+    return std::fabs(m_value - other.m_value) < kDOUBLE_EPSILON;
   }
 
   bool operator!=(const radians& other) const { return !(*this == other); }

@@ -30,6 +30,7 @@
 
 #include "rcppsw/math/range.hpp"
 #include "rcppsw/rcppsw.hpp"
+#include "rcppsw/math/math.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -47,7 +48,7 @@ class radians;
  *
  * \brief Used to store an angle value in degrees (duh).
  */
-class degrees : public er::stringizable {
+class degrees final : public er::stringizable {
  public:
   /*
    * These are MATHEMATICAL constants, so they get UPPER_CASE naming convention
@@ -168,8 +169,7 @@ class degrees : public er::stringizable {
   bool operator>=(const degrees& other) const { return m_value >= other.m_value; }
 
   bool operator==(const degrees& other) const {
-    return std::fabs(m_value - other.m_value) <=
-           std::numeric_limits<double>::epsilon();
+    return std::fabs(m_value - other.m_value) <= kDOUBLE_EPSILON;
   }
 
   bool operator!=(const degrees& other) const { return !(*this == other); }

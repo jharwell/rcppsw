@@ -1,7 +1,7 @@
 /**
- * \file grid3D_metrics_data.hpp
+ * \file cell_op.hpp
  *
- * \copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2020 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,38 +18,35 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_SPATIAL_GRID2D_METRICS_DATA_HPP_
-#define INCLUDE_RCPPSW_METRICS_SPATIAL_GRID2D_METRICS_DATA_HPP_
+#ifndef INCLUDE_RCPPSW_DS_METRICS_CELL_OP_HPP_
+#define INCLUDE_RCPPSW_DS_METRICS_CELL_OP_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/base_metrics_data.hpp"
-#include "rcppsw/ds/grid2D.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics, spatial);
+NS_START(rcppsw, ds, metrics);
 
 /*******************************************************************************
- * Class Definitions
+ * Aliases
  ******************************************************************************/
+
 /**
- * \interface grid2D_metrics_data
- * \ingroup metrics spatial
- *
- * \brief Container for basic metrics gather from \ref rds::grid2D.
+ * \brief Specify that the contents of the 2D or 3D cells should be averaged by
+ * dividing by the total number of occurences (i.e. a density map).
  */
-struct grid2D_metrics_data : public rmetrics::base_metrics_data {
-  explicit grid2D_metrics_data(const math::vector2z& dims) :
-      grid(dims.x(), dims.y()) {}
+using cell_avg = std::true_type;
 
-  rcppsw::ds::grid2D<size_t> grid;
-  size_t                     total_count{0};
+/**
+ * \brief Specify that the contents of the 2D or 3D cells should be accumulated
+ * without averaging.
+ */
+using cell_accum = std::false_type;
 
-};
+NS_END(metrics, ds, rcppsw);
 
-NS_END(spatial, metrics, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_METRICS_SPATIAL_GRID2D_METRICS_DATA_HPP_ */
+#endif /* INCLUDE_RCPPSW_DS_METRICS_CELL_OP_HPP_ */

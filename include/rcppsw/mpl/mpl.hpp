@@ -225,6 +225,21 @@ struct can_static_cast<T,
                        std::void_t<decltype(static_cast<U>(std::declval<T>()))>>
     : std::true_type {};
 
+
+template <class T, template <class...> class Template>
+struct is_specialization : std::false_type {};
+
+/**
+ * \struct is_specialization
+ * \ingroup mpl
+ *
+ * \brief Determine if a class Template<SomeType> is a specialization of \p
+ * Template.
+ */
+
+template <template <class...> class Template, class... Args>
+struct is_specialization<Template<Args...>, Template> : std::true_type {};
+
 NS_END(mpl, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_INCLUDE_MPL_MPL_HPP_ */

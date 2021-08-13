@@ -1,7 +1,7 @@
 /**
- * \file spatial.hpp
+ * \file grid3D_metrics_data.hpp
  *
- * \copyright 2020 John Harwell, All rights reserved.
+ * \copyright 2017 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,35 +18,38 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_SPATIAL_SPATIAL_HPP_
-#define INCLUDE_RCPPSW_METRICS_SPATIAL_SPATIAL_HPP_
+#ifndef INCLUDE_RCPPSW_DS_METRICS_GRID3D_METRICS_DATA_HPP_
+#define INCLUDE_RCPPSW_DS_METRICS_GRID3D_METRICS_DATA_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/rcppsw.hpp"
+#include "rcppsw/metrics/base_metrics_data.hpp"
+#include "rcppsw/ds/grid3D.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics, spatial);
+NS_START(rcppsw, ds, metrics);
 
 /*******************************************************************************
- * Aliases
+ * Class Definitions
  ******************************************************************************/
-
 /**
- * \brief Specify that the contents of the 2D or 3D cells should be averaged by
- * dividing by the total number of occurences (i.e. a density map).
+ * \interface grid3D_metrics_data
+ * \ingroup ds metrics
+ *
+ * \brief Container for basic metrics gather from \ref rds::grid3D.
  */
-using cell_avg = std::true_type;
+struct grid3D_metrics_data : public rmetrics::base_metrics_data {
+  explicit grid3D_metrics_data(const math::vector3z& dims) :
+      grid(dims.x(), dims.y(), dims.z()) {}
 
-/**
- * \brief Specify that the contents of the 2D or 3D cells should be accumulated
- * without averaging.
- */
-using cell_accum = std::false_type;
+  rcppsw::ds::grid3D<size_t> grid;
+  size_t                     total_count{0};
 
-NS_END(spatial, metrics, rcppsw);
+};
 
-#endif /* INCLUDE_RCPPSW_METRICS_SPATIAL_SPATIAL_HPP_ */
+NS_END(metrics, ds, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_DS_METRICS_GRID3D_METRICS_DATA_HPP_ */

@@ -143,6 +143,14 @@ class stacked_grid2D {
     return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->xdsize();
   }
 
+  rmath::vector2d rdims2D(void) const {
+    return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->rdims2D();
+  }
+
+  rmath::vector2z ddims2D(void) const {
+    return (reinterpret_cast<const layer_value_type<0>*>(m_layers[0]))->ddims2D();
+  }
+
   /**
    * \see \ref grid2D_overlay::xrsize().
    */

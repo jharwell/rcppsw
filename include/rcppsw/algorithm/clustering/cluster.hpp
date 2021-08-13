@@ -30,6 +30,7 @@
 
 #include "rcppsw/rcppsw.hpp"
 #include "rcppsw/algorithm/clustering/membership_policy.hpp"
+#include "rcppsw/math/math.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -71,7 +72,7 @@ class nc_cluster {
   template<typename U = T,
            RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   RCPPSW_PURE bool converged(int = 0) const {
-    return std::fabs(m_prev_center - m_center) <= std::numeric_limits<U>::epsilon();
+    return std::fabs(m_prev_center - m_center) <= rmath::kDOUBLE_EPSILON;
   }
 
   /**

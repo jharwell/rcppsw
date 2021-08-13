@@ -47,7 +47,7 @@ template <typename T>
 class base_grid3D {
  public:
   using value_type = T;
-  using coord_type = math::vector3z;
+  using coord_type = rmath::vector3z;
 
   using grid_type = typename boost::multi_array<T, 3>;
   using grid_view = typename grid_type::template array_view<3>::type;
@@ -66,22 +66,22 @@ class base_grid3D {
   virtual T& access(size_t i, size_t j, size_t k) = 0;
 
   /**
-   * \brief Get the discrete size of the X dimension of the grid (i.e. what is
+   * \brief Get the size of the X dimension of the grid (i.e. what is
    * the array index in X?)
    */
-  virtual size_t xdsize(void) const = 0;
+  virtual size_t xsize(void) const = 0;
 
   /**
-   * \brief Get the discrete size of the Y dimension of the grid (i.e. what is
-   * the array index in Y?)
+   * \brief Get the size of the Y dimension of the grid (i.e. what is the array
+   * index in Y?)
    */
-  virtual size_t ydsize(void) const = 0;
+  virtual size_t ysize(void) const = 0;
 
   /**
-   * \brief Get the discrete size of the Z dimension of the grid (i.e. what is
-   * the array index in Z?)
+   * \brief Get the size of the Z dimension of the grid (i.e. what is the array
+   * index in Z?)
    */
-  virtual size_t zdsize(void) const = 0;
+  virtual size_t zsize(void) const = 0;
 
   T& access(const coord_type& c) { return access(c.x(), c.y(), c.z()); }
 
@@ -93,7 +93,7 @@ class base_grid3D {
   }
 
   bool contains(size_t i, size_t j, size_t k) {
-    return i < xdsize() && j < ydsize() && k < zdsize();
+    return i < xsize() && j < ysize() && k < zsize();
   }
 
   bool contains(const coord_type& pt) {
@@ -113,8 +113,8 @@ class base_grid3D {
    * \return The layer.
    */
   grid_view layer(size_t z) {
-    return subgrid(coord_type(0, ydsize(), z),
-                   coord_type(0, ydsize(), z + 1));
+    return subgrid(coord_type(0, ysize(), z),
+                   coord_type(0, ysize(), z + 1));
   }
 
   const_grid_view layer(size_t z) const {
@@ -169,8 +169,8 @@ class base_grid3D {
      * boost uses half open interval for index ranges, and we want a closed
      * interval, so we +1.
      */
-    auto ur_x = std::min(c.x() + radius + 1, xdsize());
-    auto ur_y = std::min(c.y() + radius + 1, ydsize());
+    auto ur_x = std::min(c.x() + radius + 1, xsize());
+    auto ur_y = std::min(c.y() + radius + 1, ysize());
 
     coord_type ll(ll_x, ll_y, c.z());
     coord_type ur(ur_x, ur_y, c.z() + 1);
@@ -188,8 +188,8 @@ class base_grid3D {
      * boost uses half open interval for index ranges, and we want a closed
      * interval, so we +1.
      */
-    auto ur_x = std::min(c.x() + radius + 1, xdsize());
-    auto ur_y = std::min(c.y() + radius + 1, ydsize());
+    auto ur_x = std::min(c.x() + radius + 1, xsize());
+    auto ur_y = std::min(c.y() + radius + 1, ysize());
 
     coord_type ll(ll_x, ll_y, c.z());
     coord_type ur(ur_x, ur_y, c.z() + 1);

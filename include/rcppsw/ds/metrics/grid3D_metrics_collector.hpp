@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_SPATIAL_GRID3D_METRICS_COLLECTOR_HPP_
-#define INCLUDE_RCPPSW_METRICS_SPATIAL_GRID3D_METRICS_COLLECTOR_HPP_
+#ifndef INCLUDE_RCPPSW_DS_METRICS_GRID3D_METRICS_COLLECTOR_HPP_
+#define INCLUDE_RCPPSW_DS_METRICS_GRID3D_METRICS_COLLECTOR_HPP_
 
 /*******************************************************************************
  * Includes
@@ -28,53 +28,56 @@
 #include <utility>
 
 #include "rcppsw/metrics/base_metrics_collector.hpp"
-#include "rcppsw/metrics/spatial/grid3D_metrics_data.hpp"
-#include "rcppsw/metrics/spatial/spatial.hpp"
+#include "rcppsw/ds/metrics/grid3D_metrics_data.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics, spatial);
+NS_START(rcppsw, ds, metrics);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
  * \class grid3D_metrics_collector
- * \ingroup metrics spatial
+ * \ingroup ds metrics
  *
  * \brief Base class for collectors using a 3D grid to fill with counts of
  * SOMETHING, to be averaged over the entire simulation. Each line of the
  * resulting .csv file corresponds to an XY plane for a value of Z in the grid.
  */
-class grid3D_metrics_collector : public metrics::base_metrics_collector {
+class grid3D_metrics_collector : public rmetrics::base_metrics_collector {
  public:
   /**
    * \param sink The metrics sink to use.
    * \param dims Dimensions of grid.
    */
-  grid3D_metrics_collector(std::unique_ptr<base_metrics_sink> sink,
+  grid3D_metrics_collector(std::unique_ptr<rmetrics::base_metrics_sink> sink,
                            const math::vector3z& dims)
       : base_metrics_collector(std::move(sink)),
         m_data(dims) {}
 
  protected:
-  const base_metrics_data* data(void) const override { return &m_data; }
+  const rmetrics::base_metrics_data* data(void) const override {
+    return &m_data;
+  }
 
   void inc_cell_count(const math::vector3z& c, size_t count = 1) {
     m_data.grid.access(c) += count;
   }
   void inc_total_count(size_t count = 1) { m_data.total_count += count; }
-  size_t xsize(void) const { return m_data.grid.xsize(); }
-  size_t ysize(void) const { return m_data.grid.ysize(); }
-  size_t zsize(void) const { return m_data.grid.zsize(); }
 
  private:
   /* clang-format off */
   grid3D_metrics_data m_data;
   /* clang-format on */
+
+ public:
+  RCPPSW_WRAP_DECLDEF(xsize, m_data.grid);
+  RCPPSW_WRAP_DECLDEF(ysize, m_data.grid);
+  RCPPSW_WRAP_DECLDEF(zsize, m_data.grid);
 };
 
-NS_END(spatial, metrics, rcppsw);
+NS_END(metrics, ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_SPATIAL_GRID3D_METRICS_COLLECTOR_HPP_ */
+#endif /* INCLUDE_RCPPSW_DS_METRICS_GRID3D_METRICS_COLLECTOR_HPP_ */

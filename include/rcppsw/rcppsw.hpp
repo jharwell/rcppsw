@@ -51,7 +51,6 @@ namespace rcppsw {
  * \brief Base metric interfaces and the collectors for them.
  */
 namespace metrics {
-namespace spatial {}
 namespace config {
 namespace xml {}
 }
@@ -140,7 +139,13 @@ namespace config {}
  * overlay onto continuous space, Poisson queue, rtree for 2D space,
  * heterogeneous stacked 2D grid, type map for using in C++ quasi-reflection.
  */
-namespace ds {}
+namespace ds {
+/**
+ * \brief Graph data structures: Heterogeneous 3D grid graph.
+ */
+namespace graph {}
+namespace metrics {}
+}
 
 /**
  * \brief Meta programming namespace. Mainly a few aliases around things which
@@ -177,7 +182,6 @@ namespace multiprocess {}
 namespace rmetrics = rcppsw::metrics;
 namespace rmconfig = rmetrics::config;
 namespace rmcxml = rmconfig::xml;
-namespace rmspatial = rmetrics::spatial;
 
 namespace rtypes = rcppsw::types;
 namespace rmath = rcppsw::math;
@@ -186,13 +190,16 @@ namespace rutils = rcppsw::utils;
 namespace rer = rcppsw::er;
 namespace rct = rcppsw::control;
 namespace rconfig = rcppsw::config;
-namespace rds = rcppsw::ds;
 namespace rmpl = rcppsw::mpl;
 namespace rcontrol = rcppsw::control;
 namespace rmultithread = rcppsw::multithread;
 
 namespace ralgorithm = rcppsw::algorithm;
 namespace raclustering = ralgorithm::clustering;
+
+namespace rds = rcppsw::ds;
+namespace rdmetrics = rds::metrics;
+namespace rdgraph = rds::graph;
 
 namespace rpfsm = rcppsw::patterns::fsm;
 namespace rpvisitor = rcppsw::patterns::visitor;

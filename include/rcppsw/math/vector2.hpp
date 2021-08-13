@@ -52,9 +52,12 @@ NS_START(rcppsw, math);
  * care if you are trying to do scaling, trigonometric things with integers...
  */
 template <typename T>
-class vector2 : public er::stringizable {
+class vector2 final : public er::stringizable {
  public:
   using value_type = T;
+
+  static constexpr size_t kDIMENSIONALITY = 2;
+
   /**
    * \brief The positive X axis.
    */
@@ -104,7 +107,7 @@ class vector2 : public er::stringizable {
    * \param angle The vector angle.
    */
   template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
-  vector2(const T& length, const radians& angle)
+  vector2(const T& length, const radians& angle) noexcept
       : m_x(std::cos(angle.v()) * length),
         m_y(std::sin(angle.v()) * length) {}
 
@@ -239,8 +242,8 @@ class vector2 : public er::stringizable {
    */
   template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   bool operator==(const vector2& other) const {
-    return (std::fabs(x() - other.x()) <= std::numeric_limits<T>::epsilon() &&
-            (std::fabs(y() - other.y()) <= std::numeric_limits<T>::epsilon()));
+    return (std::fabs(x() - other.x()) <= kDOUBLE_EPSILON) &&
+        (std::fabs(y() - other.y()) <= kDOUBLE_EPSILON);
   }
 
   /**
@@ -371,6 +374,18 @@ using vector2z = vector2<size_t>;
  * \brief Specialization of \ref vector2 for doubles.
  */
 using vector2d = vector2<double>;
+
+template<> const vector2i vector2i::X;
+template<> const vector2i vector2i::Y;
+
+template<> const vector2u vector2u::X;
+template<> const vector2u vector2u::Y;
+
+template<> const vector2z vector2z::X;
+template<> const vector2z vector2z::Y;
+
+template<> const vector2d vector2d::X;
+template<> const vector2d vector2d::Y;
 
 /*******************************************************************************
  * Macros
