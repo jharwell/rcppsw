@@ -200,6 +200,8 @@ class radians final : public er::stringizable {
  ******************************************************************************/
 std::ostream& operator<<(std::ostream& stream, const radians& r);
 
+rmath::radians operator*(double lhs, const rmath::radians& rhs);
+
 NS_END(math, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_MATH_RADIANS_HPP_ */

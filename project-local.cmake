@@ -13,10 +13,12 @@ add_subdirectory(ext/rcsw)
 # robust set of warnings.
 if (NOT TARGET ticpp)
   add_subdirectory(ext/ticpp)
-  target_compile_options(ticpp PRIVATE -Wno-old-style-cast -Wno-suggest-override
+
+  target_compile_options(ticpp_ticpp PRIVATE -Wno-old-style-cast -Wno-suggest-override
     -Wno-effc++ -Wno-overloaded-virtual -Wno-missing-declarations
     -Wno-suggest-attribute=const -Wno-suggest-attribute=pure
-    -Wno-suggest-final-types -Wno-suggest-final-methods -Wno-switch-default)
+    -Wno-suggest-final-types -Wno-suggest-final-methods
+    -Wno-switch-default)
 endif()
 
 # Boost
@@ -45,7 +47,7 @@ set(${target}_SYS_INCLUDE_DIRS
 ################################################################################
 set(${target}_LIBRARIES
   rcsw
-  ticpp
+  ticpp_ticpp
   ${Boost_LIBRARIES}
   pthread
   dl

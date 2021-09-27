@@ -88,6 +88,7 @@ class hgrid3D : public rpdecorator::decorator<typename TSpecType::bgl_impl_type>
   RCPPSW_DECORATE_DECLDEF_STATIC(rdgraph, vertices, const);
   RCPPSW_DECORATE_DECLDEF_STATIC(rdgraph, adjacent_vertices, const);
   RCPPSW_DECORATE_DECLDEF_STATIC(rdgraph, out_edges, const);
+  RCPPSW_DECORATE_DECLDEF_STATIC(rdgraph, out_degree, const);
   RCPPSW_DECORATE_DECLDEF_STATIC(rdgraph, target, const);
   RCPPSW_DECORATE_DECLDEF_STATIC(rdgraph, n_vertices, const);
 
@@ -95,7 +96,6 @@ class hgrid3D : public rpdecorator::decorator<typename TSpecType::bgl_impl_type>
   RCPPSW_DECORATE_DECLDEF_STATIC(rdgraph, find);
   RCPPSW_DECORATE_DECLDEF_STATIC(rdgraph, vertices);
   RCPPSW_DECORATE_DECLDEF_STATIC(rdgraph, adjacent_vertices);
-  RCPPSW_DECORATE_DECLDEF_STATIC(rdgraph, out_edges);
   RCPPSW_DECORATE_DECLDEF_STATIC(rdgraph, target);
 
   view_type subgraph(const vertex_descriptor& start,

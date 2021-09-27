@@ -74,6 +74,12 @@ static inline auto out_edges(const TBGLGraphType& g,
 }
 
 template <typename TBGLGraphType>
+static inline auto out_degree(const TBGLGraphType& g,
+                              const typename TBGLGraphType::vertex_descriptor& v) {
+  return boost::out_degree(v, g);
+}
+
+template <typename TBGLGraphType>
 static inline auto target(const TBGLGraphType& g,
                           const typename TBGLGraphType::edge_descriptor& e) {
   return boost::target(e, g);

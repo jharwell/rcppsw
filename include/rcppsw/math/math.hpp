@@ -25,6 +25,7 @@
  * Includes
  ******************************************************************************/
 #include <cmath>
+#include <utility>
 
 #include "rcppsw/rcppsw.hpp"
 
@@ -80,6 +81,17 @@ template<typename T,
          RCPPSW_SFINAE_DECLDEF(rmpl::is_detected<detail::length_func_decltype, T>::value)>
 static inline double l2norm(const T& lhs, const T& rhs) {
   return (lhs - rhs).length();
+}
+
+/**
+ * \brief Computes the square of the euclidean distance between the passed
+ * vectors.
+ */
+template<typename T,
+         RCPPSW_SFINAE_DECLDEF(rmpl::is_detected<detail::length_func_decltype, T>::value)>
+
+static inline double l2norm_squared(const T& lhs, const T& rhs) {
+  return (lhs - rhs).squared_length();
 }
 
 NS_END(math, rcppsw);

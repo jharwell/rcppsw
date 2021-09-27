@@ -87,13 +87,13 @@ class hgrid3D_view_filter_data : public rer::client<hgrid3D_view_filter_data<TSp
   void update(const bgl_impl_type& g,
               vertex_descriptor vd,
               const rtypes::manhattan_dist& dist) {
-    m_ll = std::min(m_ll, g[vd].coord, rmath::componentwise_compare());
-    m_ur = std::max(m_ur, g[vd].coord, rmath::componentwise_compare());
-    m_ul = rmath::vector3z(std::max(m_ul.x(), g[vd].coord.x()),
-                           m_ll.y(),
+    m_ll = std::min(m_ll, g[vd].coord, rmath::vector3z::componentwise_compare());
+    m_ur = std::max(m_ur, g[vd].coord, rmath::vector3z::componentwise_compare());
+    m_ul = rmath::vector3z(m_ll.x(),
+                           std::max(m_ul.y(), g[vd].coord.y()),
                            std::max(m_ul.z(), g[vd].coord.z()));
-    m_lr = rmath::vector3z(m_ll.x(),
-                           std::min(m_lr.y(), g[vd].coord.y()),
+    m_lr = rmath::vector3z(std::max(m_lr.x(), g[vd].coord.x()),
+                           m_ll.y(),
                            std::min(m_lr.z(), g[vd].coord.z()));
     m_distances[vd] = dist;
     m_lookup[g[vd].coord] = &g[vd];
@@ -124,7 +124,7 @@ class hgrid3D_view_filter_data : public rer::client<hgrid3D_view_filter_data<TSp
 
   grid_index_map<rmath::vector3z,
                  const vertex_property_type*,
-                 rmath::key_compare>  m_lookup{};
+                 rmath::vector3z::key_compare>  m_lookup{};
 
 };
 

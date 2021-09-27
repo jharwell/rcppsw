@@ -222,6 +222,15 @@ class range final : public er::client<range<T>>, er::stringizable {
   range translate(const T& value) const {
     return range(m_lb + value, m_ub + value);
   }
+  /**
+   * \brief Shrink the current range in both directions with the specified value, returning a new
+   * range resulting from the shrink.
+   *
+   * \return The shrunken range.
+   */
+  range shrink(const T& value) const {
+    return range(m_lb + value, m_ub - value);
+  }
 
   /**
    * \brief Re-center the current range around the specified value, returning a

@@ -51,12 +51,12 @@ class bounding_box : public rer::client<bounding_box<TCoord>> {
       : bounding_box{dims, {}} {}
 
   bounding_box(const coord_type& dims,
-               const coord_type& origin)
+               const coord_type& anchor)
       : ER_CLIENT_INIT("rcppsw.math.bounding_box"),
         mc_dims(dims),
-        m_origin_initialized(true),
-        m_origin(origin) {
-    update(m_origin);
+        m_anchor_initialized(true),
+        m_anchor(anchor) {
+    update(m_anchor);
   }
 
   ~bounding_box(void) override = default;
@@ -67,16 +67,16 @@ class bounding_box : public rer::client<bounding_box<TCoord>> {
   bounding_box& operator=(bounding_box&&) = default;
 
   const coord_type& anchor3D(void) const {
-    ER_ASSERT(m_origin_initialized,
-              "%s called with no origin set",
+    ER_ASSERT(m_anchor_initialized,
+              "%s called with no anchor set",
               __FUNCTION__);
-    return m_origin;
+    return m_anchor;
   }
   const coord_type& dims3D(void) const { return mc_dims; }
 
   coord_type center3D(void) const {
-    ER_ASSERT(m_origin_initialized,
-              "%s called with no origin set",
+    ER_ASSERT(m_anchor_initialized,
+              "%s called with no anchor set",
               __FUNCTION__);
 
     return m_center;
@@ -86,9 +86,9 @@ class bounding_box : public rer::client<bounding_box<TCoord>> {
   coord_value_type ysize(void) const { return mc_dims.y(); }
   coord_value_type zsize(void) const { return mc_dims.z(); }
 
-  void update(const coord_type& origin) {
-    m_origin = origin;
-    m_center = m_origin + coord_type(xsize(),
+  void update(const coord_type& anchor) {
+    m_anchor = anchor;
+    m_center = m_anchor + coord_type(xsize(),
                                      ysize(),
                                      zsize()) / 2.0;
     m_xspan = rmath::xspan(anchor3D(), xsize());
@@ -97,20 +97,20 @@ class bounding_box : public rer::client<bounding_box<TCoord>> {
   }
 
   rmath::range<coord_value_type> xspan(void) const {
-    ER_ASSERT(m_origin_initialized,
-              "%s called with no origin set",
+    ER_ASSERT(m_anchor_initialized,
+              "%s called with no anchor set",
               __FUNCTION__);
     return m_xspan;
   }
   rmath::range<coord_value_type> yspan(void) const {
-    ER_ASSERT(m_origin_initialized,
-              "%s called with no origin set",
+    ER_ASSERT(m_anchor_initialized,
+              "%s called with no anchor set",
               __FUNCTION__);
     return m_yspan;
   }
   rmath::range<coord_value_type> zspan(void) const {
-    ER_ASSERT(m_origin_initialized,
-              "%s called with no origin set",
+    ER_ASSERT(m_anchor_initialized,
+              "%s called with no anchor set",
               __FUNCTION__);
     return m_zspan;
   }
@@ -119,8 +119,8 @@ class bounding_box : public rer::client<bounding_box<TCoord>> {
   /* clang-format off */
   const coord_type               mc_dims;
 
-  bool                           m_origin_initialized{false};
-  coord_type                     m_origin{};
+  bool                           m_anchor_initialized{false};
+  coord_type                     m_anchor{};
   coord_type                     m_center{};
 
   rmath::range<coord_value_type> m_xspan{};

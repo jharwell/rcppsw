@@ -56,6 +56,40 @@ class vector2 final : public er::stringizable {
  public:
   using value_type = T;
 
+  /**
+ * \brief Needed for using vectors as keys in a map.
+ */
+  struct key_compare {
+    template<typename U = T,
+             RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
+    bool operator()(const vector2<U>& lhs, const vector2<U>& rhs) const {
+      /* Order based on X unless X's are equal, if so order on Y, etc. */
+      if (lhs.x() != rhs.x()) {
+        return lhs.x() < rhs.x();
+      }
+      return lhs.y() < rhs.y();
+    }
+    template<typename U = T,
+             RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
+    bool operator()(const vector2<U>& lhs, const vector2<U>& rhs) const {
+      bool equal_x = std::fabs(lhs.x() - rhs.x()) <= kDOUBLE_EPSILON;
+
+      if (!equal_x) {
+        return lhs.x() < rhs.x();
+      }
+      return lhs.y() < rhs.y();
+    }
+  };
+
+  /**
+   * \brief Needed to compare in mathematical contexts.
+   */
+  struct componentwise_compare {
+    bool operator()(const vector2<T>& lhs, const vector2<T>& rhs) const {
+      return lhs.x() <= rhs.x() && lhs.y() <= rhs.y();
+    }
+  };
+
   static constexpr size_t kDIMENSIONALITY = 2;
 
   /**
@@ -67,13 +101,6 @@ class vector2 final : public er::stringizable {
    * \brief The positive Y axis.
    */
   static const vector2<T> Y; // NOLINT
-
-  /**
-   * \brief Computes the euclidean distance between the passed vectors.
-   */
-  static double l2norm(const vector2<T>& v1, const vector2<T>& v2) {
-    return (v1 - v2).length();
-  }
 
   /**
    * \brief Computes the manhattan distance between the passed vectors.
@@ -432,6 +459,10 @@ RCPPSW_MATH_VEC2_SCALED_CONVF(z);
 RCPPSW_MATH_VEC2_CONV2DISC(z, size_t);
 RCPPSW_MATH_VEC2_CONV2DISC(u, uint);
 RCPPSW_MATH_VEC2_CONV2DISC(i, int);
+
+/*******************************************************************************
+ * Free Functions
+ ******************************************************************************/
 
 NS_END(math, rcppsw);
 

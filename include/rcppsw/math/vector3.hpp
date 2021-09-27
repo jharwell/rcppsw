@@ -58,6 +58,48 @@ class vector3 final : public er::stringizable {
  public:
   using value_type = T;
 
+  /**
+ * \brief Needed for using vectors as keys in a map.
+ */
+  struct key_compare {
+    template<typename U,
+             RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
+    bool operator()(const vector3<U>& lhs, const vector3<U>& rhs) const {
+      /* Order based on X unless X's are equal, if so order on Y, etc. */
+      if (lhs.x() != rhs.x()) {
+        return lhs.x() < rhs.x();
+      }
+      if (lhs.y() != rhs.y()) {
+        return lhs.y() < rhs.y();
+      }
+      return lhs.z() < rhs.z();
+    }
+    template<typename U,
+             RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
+    bool operator()(const vector3<U>& lhs, const vector3<U>& rhs) const {
+      bool equal_x = std::fabs(lhs.x() - rhs.x()) <= kDOUBLE_EPSILON;
+      bool equal_y = std::fabs(lhs.y() - rhs.y()) <= kDOUBLE_EPSILON;
+
+      if (!equal_x) {
+        return lhs.x() < rhs.x();
+      }
+      if (!equal_y) {
+        return lhs.y() < rhs.y();
+      }
+      return lhs.z() < rhs.z();
+    }
+  };
+
+  /**
+   * \brief Needed to compare in mathematical contexts.
+   */
+  struct componentwise_compare {
+    template <typename U>
+    bool operator()(const vector3<U>& lhs, const vector3<U>& rhs) const {
+      return lhs.x() <= rhs.x() && lhs.y() <= rhs.y() && lhs.z() <= rhs.z();
+    }
+  };
+
   static constexpr size_t kDIMENSIONALITY = 3;
 
   /**
@@ -469,48 +511,6 @@ static inline size_t l1norm(const vector3<U>& v1, const vector3<V>& v2) {
       std::abs(static_cast<int>(v1.y() - v2.y())) +
       std::abs(static_cast<int>(v1.z() - v2.z()));
 }
-
-/**
- * \brief Needed for using vectors as keys in a map.
- */
-struct key_compare {
-  template<typename U,
-           RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
-  bool operator()(const vector3<U>& lhs, const vector3<U>& rhs) const {
-    /* Order based on X unless X's are equal, if so order on Y, etc. */
-    if (lhs.x() != rhs.x()) {
-      return lhs.x() < rhs.x();
-    }
-    if (lhs.y() != rhs.y()) {
-      return lhs.y() < rhs.y();
-    }
-    return lhs.z() < rhs.z();
-  }
-  template<typename U,
-           RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
-  bool operator()(const vector3<U>& lhs, const vector3<U>& rhs) const {
-    bool equal_x = std::fabs(lhs.x() - rhs.x()) <= kDOUBLE_EPSILON;
-    bool equal_y = std::fabs(lhs.y() - rhs.y()) <= kDOUBLE_EPSILON;
-
-    if (!equal_x) {
-      return lhs.x() < rhs.x();
-    }
-    if (!equal_y) {
-      return lhs.y() < rhs.y();
-    }
-    return lhs.z() < rhs.z();
-  }
-};
-/**
- * \brief Needed to compare in mathematical contexts.
- */
-
-struct componentwise_compare {
-  template <typename T>
-  bool operator()(const vector3<T>& lhs, const vector3<T>& rhs) const {
-      return lhs.x() <= rhs.x() && lhs.y() <= rhs.y() && lhs.z() <= rhs.z();
-  }
-};
 
 NS_END(math, rcppsw);
 

@@ -19,11 +19,17 @@ exist in Boost, or that build on what boost provides. Includes such things as:
 - Implementation of various design patterns:
 
   - polled FSM, Hierarchical FSM
+
   - decorator
+
   - visitor
+
   - factory (releasing/sharing variants)
+
   - prototype
+
   - singleton
+
   - PIMPL
 
 - Components that DO exist elsewhere, but I found their implementations somewhat

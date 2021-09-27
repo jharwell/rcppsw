@@ -84,6 +84,8 @@
   typename std::enable_if<__VA_ARGS__, int>::type
 #endif /* DOXYGEN_DOCUMENTATION_BUILD */
 
+#define RCPPSW_SFINAE_TYPE(...) typename std::enable_if<__VA_ARGS__>::value
+
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/

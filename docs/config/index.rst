@@ -5,7 +5,7 @@ XML Configuration
 The following root XML tags are defined:
 
 .. list-table::
-   :widths: 25,50,50
+   :widths: 25,50
    :header-rows: 1
 
    * - Root XML Tag
@@ -58,11 +58,10 @@ XML configuration:
 .. code-block:: XML
 
     <output>
-        ...
         <metrics
             metrics_path="metrics">
-            <sinks
-               <csv ... />
+            <sinks>
+                ...
             </sinks>
         </metrics>
         ...
@@ -111,8 +110,8 @@ XML configuration:
     <csv>
         ...
         <create
-             output_interval="INTEGER"
-             />
+            output_interval="INTEGER"
+            />
         <append
             output_interval="INTEGER"
             />

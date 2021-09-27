@@ -51,7 +51,7 @@ class nc_cluster {
  public:
   nc_cluster(uint id,
              const std::vector<T>& data,
-             membership_type<Policy>* const membership)
+             membership_type<Policy>& membership)
       : mc_data(data),
         m_id(id),
         m_membership(membership),
