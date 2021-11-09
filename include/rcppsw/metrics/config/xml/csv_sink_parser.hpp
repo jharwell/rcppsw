@@ -57,7 +57,7 @@ class csv_sink_parser : public rconfig::xml::xml_config_parser {
    * \brief The root tag that all configuration relating to the .csv metrics
    * sink should in lie under in the XML tree.
    */
-  inline static const std::string kXMLRoot = "csv";
+  static inline const std::string kXMLRoot = "csv";
 
   void parse(const ticpp::Element& node) override RCPPSW_COLD;
 

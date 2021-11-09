@@ -53,7 +53,7 @@ class sigmoid_parser : public rcppsw::config::xml::xml_config_parser {
    * \brief The root tag that all task sigmoid configuration values should lie
    * under in the XML tree.
    */
-  static constexpr char kXMLRoot[] = "sigmoid";
+  static inline const std::string kXMLRoot = "sigmoid";
 
   void parse(const ticpp::Element& node) override RCPPSW_COLD;
   bool validate(void) const override RCPPSW_ATTR(pure, cold);

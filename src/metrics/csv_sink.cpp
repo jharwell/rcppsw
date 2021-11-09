@@ -72,8 +72,14 @@ metrics_write_status csv_sink::flush(const rmetrics::base_metrics_data* data,
       std::stringstream ss;
       ss << std::setw(10) << std::setfill('0') << t.v();
 
+      /*
+       * Insert a '_XXXX' before the '.csv' part of the output filename, where
+       * XXXX is the current timestep.
+       */
       auto path = fpath();
-      path.replace_filename(fs::path("_" + ss.str()));
+      path.replace_filename(path.stem().string() +
+                            fs::path("_" + ss.str()).string() +
+                            path.extension().string());
       ofile()->open(path, std::ios_base::trunc | std::ios_base::out);
       initialize(data);
       *ofile() << *line << std::endl;
@@ -93,19 +99,19 @@ metrics_write_status csv_sink::flush(const rmetrics::base_metrics_data* data,
 } /* flush() */
 
 void csv_sink::initialize(const rmetrics::base_metrics_data* data) {
-  /* close file if its open so we can truncate it if needed */
-  if (ofile()->is_open()) {
-    ofile()->close();
-  }
-
-  /*
-   * Nothing to do if we are creating a new file each time. Otherwise, truncate
-   * the file and write out the header.
-   */
   if (output_mode::ekAPPEND == output_mode() ||
       output_mode::ekTRUNCATE == output_mode()) {
+    /* close file if its open so we can truncate it if needed */
+    if (ofile()->is_open()) {
+      ofile()->close();
+    }
+
     ofile()->open(fpath(), std::ios_base::trunc | std::ios_base::out);
     csv_header_write(data);
+  } else if (output_mode::ekCREATE == output_mode()) {
+    if (ofile()->is_open()) {
+      csv_header_write(data);
+    }
   }
 } /* initialize() */
 

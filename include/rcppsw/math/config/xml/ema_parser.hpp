@@ -54,7 +54,7 @@ class ema_parser : public rcppsw::config::xml::xml_config_parser {
    * \brief The root tag that all ema configuration values should lie under in
    * the XML tree.
    */
-  static constexpr char kXMLRoot[] = "ema";
+  static inline const std::string kXMLRoot = "ema";
 
   bool validate(void) const override RCPPSW_ATTR(pure, cold);
   void parse(const ticpp::Element& node) override RCPPSW_COLD;

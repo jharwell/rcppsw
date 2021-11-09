@@ -62,27 +62,27 @@ class waveform_generator
   /**
    * \brief Generate a \ref sine_waveform.
    */
-  static constexpr const char kSine[] = "Sine";
+  static inline const std::string kSine = "Sine";
 
   /**
    * \brief Generate a \ref square_waveform.
    */
-  static constexpr const char kSquare[] = "Square";
+  static inline const std::string kSquare = "Square";
 
   /**
    * \brief Generate a \ref sawtooth_waveform.
    */
-  static constexpr const char kSawtooth[] = "Sawtooth";
+  static inline const std::string kSawtooth = "Sawtooth";
 
   /**
    * \brief Generate a \ref constant_waveform.
    */
-  static constexpr const char kConstant[] = "Constant";
+  static inline const std::string kConstant = "Constant";
 
   /**
    * \brief Generate a \ref null_waveform.
    */
-  static constexpr const char kNull[] = "Null";
+  static inline const std::string kNull = "Null";
 
   waveform_generator(void);
 

@@ -84,9 +84,9 @@ struct result_type2D {
 template <typename T>
 class closest_pair2D {
  public:
-  static constexpr const char kBruteForce[] = "brute_force";
+  static inline const std::string kBruteForce = "brute_force";
 
-  static constexpr const char kRecursive[] = "recursive";
+  static inline const std::string kRecursive = "recursive";
 
   /**
    * \brief Run the calculation algorithm.

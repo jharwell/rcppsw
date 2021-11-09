@@ -59,7 +59,7 @@ class metrics_parser : public rconfig::xml::xml_config_parser {
    * \brief The root tag that all loop functions relating to metrics parameters
    * should lie under in the XML tree.
    */
-  inline static const std::string kXMLRoot = "metrics";
+  static inline const std::string kXMLRoot = "metrics";
 
   void parse(const ticpp::Element& node) override RCPPSW_COLD;
 

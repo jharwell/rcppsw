@@ -252,7 +252,7 @@ class register_with_csv_sink : public detail::register_by_sink<TExtraArgsType>,
               "Collector '%s' present in more than 1 CSV sink collector group in XML file",
               xml_name.c_str());
 
-     collector_registration_spec ret;
+    collector_registration_spec ret;
     if (append_it != mc_config->append.enabled.end()) {
       ER_ASSERT(allowed & rmetrics::output_mode::ekAPPEND,
                 "Output mode %d for collector '%s' does not contain ekAPPEND",
@@ -278,7 +278,9 @@ class register_with_csv_sink : public detail::register_by_sink<TExtraArgsType>,
                 rcppsw::as_underlying(allowed),
                 xml_name.c_str());
       /* Give them their own directory to output stuff into for cleanliness */
-      auto dirpath = manager()->metrics_path() / create_it->second;
+      auto csv_dir = fs::path(create_it->second);
+      csv_dir.replace_extension(fs::path());
+      auto dirpath = manager()->metrics_path() / csv_dir;
       fs::create_directories(dirpath);
 
       ret.is_enabled = true;

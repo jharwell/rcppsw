@@ -60,7 +60,6 @@ class grid2D_metrics_csv_sink : public rmetrics::csv_sink {
                           const types::timestep& interval)
       : csv_sink(fpath_stem, mode, interval) {}
 
-
   std::list<std::string> csv_header_cols(
       const rmetrics::base_metrics_data* data) const override {
     std::list<std::string> cols;
