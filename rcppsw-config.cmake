@@ -3,6 +3,11 @@
 ################################################################################
 set(${target}_CHECK_LANGUAGE "CXX")
 
+# Each conference tag=minor increment. Each minor feature added=patch increment.
+set(PROJECT_VERSION_MAJOR 1)
+set(PROJECT_VERSION_MINOR 3)
+set(PROJECT_VERSION_PATCH 0)
+
 ################################################################################
 # External Projects                                                            #
 ################################################################################
@@ -14,11 +19,18 @@ add_subdirectory(ext/rcsw)
 if (NOT TARGET ticpp)
   add_subdirectory(ext/ticpp)
 
-  target_compile_options(ticpp_ticpp PRIVATE -Wno-old-style-cast -Wno-suggest-override
-    -Wno-effc++ -Wno-overloaded-virtual -Wno-missing-declarations
-    -Wno-suggest-attribute=const -Wno-suggest-attribute=pure
-    -Wno-suggest-final-types -Wno-suggest-final-methods
-    -Wno-switch-default)
+  target_compile_options(ticpp_ticpp PRIVATE
+    -Wno-old-style-cast
+    -Wno-suggest-override
+    -Wno-effc++
+    -Wno-overloaded-virtual
+    -Wno-missing-declarations
+    -Wno-suggest-attribute=const
+    -Wno-suggest-attribute=pure
+    -Wno-suggest-final-types
+    -Wno-suggest-final-methods
+    -Wno-switch-default
+    )
 endif()
 
 # Boost
@@ -47,7 +59,7 @@ set(${target}_SYS_INCLUDE_DIRS
 ################################################################################
 set(${target}_LIBRARIES
   rcsw
-  ticpp_ticpp
+  ticpp::ticpp
   ${Boost_LIBRARIES}
   pthread
   dl
@@ -67,6 +79,18 @@ if (NOT TARGET ${target})
   target_include_directories(${target} PUBLIC ${${target}_INCLUDE_DIRS})
   target_include_directories(${target} SYSTEM PRIVATE "${${target}_SYS_INCLUDE_DIRS}")
 endif()
+
+################################################################################
+# Installation                                                                 #
+################################################################################
+# Define package dependencies
+set(${target}_PACKAGE_DEPENDS
+  ${_PACKAGE_DEPENDS}
+  )
+
+set(CPACK_DEBIAN_PACKAGE_DEPENDS
+  ${cosm_PACKAGE_DEPENDS}
+  )
 
 ################################################################################
 # Exports                                                                      #
