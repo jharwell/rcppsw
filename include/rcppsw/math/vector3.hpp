@@ -48,7 +48,7 @@ NS_START(rcppsw, math);
  * \ingroup math
  *
  * \brief Base template class encapsulating mathematical actions on a pair of
- * numbers. Is specialized by \ref vector3u, \ref vector3i, \ref vector3d.
+ * numbers. Is specialized by  \ref vector3i, \ref vector3d.
  *
  * All operations are performed in whatever the template parameter is, so take
  * care if you are trying to do scaling, trigonometric things with integers...
@@ -420,11 +420,6 @@ class vector3 final : public er::stringizable {
 using vector3i = vector3<int>;
 
 /**
- * \brief Specialization of \ref vector3 for unsigned integers.
- */
-using vector3u = vector3<uint>;
-
-/**
  * \brief Specialization of \ref vector3 for size_t.
  */
 using vector3z = vector3<size_t>;
@@ -437,10 +432,6 @@ using vector3d = vector3<double>;
 template<> const vector3i vector3i::X;
 template<> const vector3i vector3i::Y;
 template<> const vector3i vector3i::Z;
-
-template<> const vector3u vector3u::X;
-template<> const vector3u vector3u::Y;
-template<> const vector3u vector3u::Z;
 
 template<> const vector3z vector3z::X;
 template<> const vector3z vector3z::Y;
@@ -486,14 +477,11 @@ template<> const vector3d vector3d::Z;
 /*******************************************************************************
  * Conversion Functions
  ******************************************************************************/
-RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(u);
 RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(i);
 RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(z);
-RCPPSW_MATH_VEC3_SCALED_CONV2FLT(u);
 RCPPSW_MATH_VEC3_SCALED_CONV2FLT(i);
 RCPPSW_MATH_VEC3_SCALED_CONV2FLT(z);
 RCPPSW_MATH_VEC3_CONV2DISC(z, size_t);
-RCPPSW_MATH_VEC3_CONV2DISC(u, uint);
 RCPPSW_MATH_VEC3_CONV2DISC(i, int);
 
 /*******************************************************************************

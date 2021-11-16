@@ -41,7 +41,6 @@ find_package(Boost 1.71.0
   thread
   graph
   stacktrace_basic
-  stacktrace_addr2line
   REQUIRED)
 set(Boost_USE_STATIC_LIBS OFF)
 
@@ -72,12 +71,17 @@ if ("${LIBRA_ER}" MATCHES "ALL")
 endif()
 
 # Define RCPPSW library
-if (NOT TARGET ${target})
-  add_library(${target} STATIC ${${target}_SRC})
-  target_link_libraries(${target} ${${target}_LIBRARIES})
-  target_link_directories(${target} PUBLIC ${${target}_LIBRARY_DIRS})
-  target_include_directories(${target} PUBLIC ${${target}_INCLUDE_DIRS})
-  target_include_directories(${target} SYSTEM PRIVATE "${${target}_SYS_INCLUDE_DIRS}")
+set(${target}_LIBRARY_NAME ${target}-${CMAKE_SYSTEM_PROCESSOR})
+if (NOT TARGET ${${target}_LIBRARY_NAME})
+  add_library(${${target}_LIBRARY_NAME} STATIC ${${target}_SRC})
+
+  # Alias so we plug into the LIBRA framework properly
+  add_library(${target} ALIAS ${${target}_LIBRARY_NAME})
+
+  target_link_libraries(${${target}_LIBRARY_NAME} ${${target}_LIBRARIES})
+  target_link_directories(${${target}_LIBRARY_NAME} PUBLIC ${${target}_LIBRARY_DIRS})
+  target_include_directories(${${target}_LIBRARY_NAME} PUBLIC ${${target}_INCLUDE_DIRS})
+  target_include_directories(${${target}_LIBRARY_NAME} SYSTEM PRIVATE "${${target}_SYS_INCLUDE_DIRS}")
 endif()
 
 ################################################################################
@@ -100,4 +104,5 @@ if (NOT IS_ROOT_PROJECT)
   set(${target}_SYS_INCLUDE_DIRS "${${target}_SYS_INCLUDE_DIRS}" PARENT_SCOPE)
   set(${target}_LIBRARIES "${${target}_LIBRARIES}" PARENT_SCOPE)
   set(${target}_LIBRARY_DIRS "${${target}_LIBRARY_DIRS}" PARENT_SCOPE)
+  set(${target}_LIBRARY_NAME "${${target}_LIBRARY_NAME}" PARENT_SCOPE)
 endif()

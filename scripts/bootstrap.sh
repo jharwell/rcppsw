@@ -30,6 +30,12 @@ EOF
     exit 1
 }
 
+# Make sure script was not run as root or with sudo
+if [ $(id -u) = 0 ]; then
+    echo "This script cannot be run as root."
+    exit 1
+fi
+
 repo_root=$HOME/research
 install_sys_pkgs="YES"
 do_build="YES"
@@ -53,73 +59,89 @@ while true; do
     shift;
 done
 
-echo -e "********************************************************************************"
-echo -e "RCPPSW BOOTSTRAP START:"
-echo -e "REPO_ROOT=$repo_root"
-echo -e "N_CORES=$n_cores"
-echo -e "SYSPKGS=$install_sys_pkgs"
-echo -e "BUILD_TYPE=$build_type"
-echo -e "DO_BUILD=$do_build"
-echo -e "********************************************************************************"
 
-mkdir -p $repo_root && cd $repo_root
+################################################################################
+# Bootstrap main
+################################################################################
+function bootstrap_main() {
+    mkdir -p $repo_root && cd $repo_root
 
-# Install system packages
-if [ "YES" = "$install_sys_pkgs" ]; then
-    rcppsw_pkgs=(libboost-all-dev liblog4cxx-dev catch ccache python3-pip)
-    libra_pkgs=(make cmake git nodejs npm graphviz doxygen cppcheck
-                gcc-9 g++-9 libclang-9-dev clang-tools-9
-                clang-format-9 clang-tidy-9)
+    # First, bootstrap LIBRA
+    wget \
+        --no-cache\
+        --no-cookies\
+        https://raw.githubusercontent.com/swarm-robotics/libra/devel/scripts/bootstrap.sh \
+        -O bootstrap-libra.sh
 
-    # Modern cmake required, default with most ubuntu versions is too
-    # old--use kitware PPA.
-    wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
-    echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
-    sudo apt-get update
+    chmod +x bootstrap-libra.sh
+    libra_syspkgs=$([ "YES" = "$install_sys_pkgs" ] && echo "" || echo "--nosyspkgs")
 
-    # Install packages (must be loop to ignore ones that don't exist)
-    for pkg in "${libra_pkgs[@]}" "${rcppsw_pkgs[@]}"
-    do
-        sudo apt-get -my install $pkg
-    done
-fi
+    ./bootstrap-libra.sh $libra_syspkgs
+
+    echo -e "********************************************************************************"
+    echo -e "RCPPSW BOOTSTRAP START:"
+    echo -e "REPO_ROOT=$repo_root"
+    echo -e "N_CORES=$n_cores"
+    echo -e "SYSPKGS=$install_sys_pkgs"
+    echo -e "BUILD_TYPE=$build_type"
+    echo -e "DO_BUILD=$do_build"
+    echo -e "********************************************************************************"
 
 
-python_pkgs=(cpplint breathe exhale)
-pip3 install --user  "${python_pkgs[@]}"
+    # Install system packages
+    if [ "YES" = "$install_sys_pkgs" ]; then
+        rcppsw_pkgs=(libboost-all-dev
+                     liblog4cxx-dev
+                     catch
+                     ccache
+                     python3-pip)
 
-# Exit when any command after this fails. Can't be before the package installs,
-# because it is not an error if some of the packages are not found (I just put a
-# list of possible packages that might exist on debian systems to satisfy
-# project requirements).
-set -e
-
-# Bootstrap rcppsw
-if [ -d rcppsw ]; then rm -rf rcppsw; fi
-git clone https://github.com/swarm-robotics/rcppsw.git
-cd rcppsw
-git checkout devel
-git submodule update --init --recursive --remote
-
-# Build rcppsw and documentation
-if [ "YES" = "$do_build" ]; then
-    if [ "OPT" = "$build_type" ]; then
-    er="NONE"
-    else
-        er="ALL"
+        # Install packages (must be loop to ignore ones that don't exist)
+        for pkg in "${rcppsw_pkgs[@]}"
+        do
+            sudo apt-get -my install $pkg
+        done
     fi
-    npm install
-    mkdir -p build && cd build
-    cmake -DCMAKE_C_COMPILER=gcc-9 -DCMAKE_CXX_COMPILER=g++-9 ..
-    make -j $n_cores
-    make documentation
+
+
+    python_pkgs=(cpplint breathe exhale)
+    pip3 install --user  "${python_pkgs[@]}"
+
+    # Exit when any command after this fails. Can't be before the
+    # package installs, because it is not an error if some of the
+    # packages are not found (I just put a list of possible packages
+    # that might exist on debian systems to satisfy project
+    # requirements).
+    set -e
+
+    # Bootstrap rcppsw
+    if [ -d rcppsw ]; then rm -rf rcppsw; fi
+    git clone https://github.com/swarm-robotics/rcppsw.git
+    cd rcppsw
+    git checkout devel
+    git submodule update --init --recursive --remote
+
+    # Build rcppsw and documentation
+    if [ "YES" = "$do_build" ]; then
+        if [ "OPT" = "$build_type" ]; then
+            er="NONE"
+        else
+            er="ALL"
+        fi
+        npm install
+        mkdir -p build && cd build
+        cmake -DCMAKE_C_COMPILER=gcc-9 -DCMAKE_CXX_COMPILER=g++-9 ..
+        make -j $n_cores
+        make documentation
+        cd ..
+    fi;
+
     cd ..
-fi;
 
-cd ..
+    # Made it!
+    echo -e "********************************************************************************"
+    echo -e "RCPPSW BOOTSTRAP SUCCESS!"
+    echo -e "********************************************************************************"
+}
 
-
-# Made it!
-echo -e "********************************************************************************"
-echo -e "RCPPSW BOOTSTRAP SUCCESS!"
-echo -e "******************************************************************************"
+bootstrap_main

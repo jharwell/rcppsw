@@ -267,11 +267,6 @@ class range final : public er::client<range<T>>, er::stringizable {
 using rangei = range<int>;
 
 /**
- * \brief Specialization of \ref range for unsigned integers.
- */
-using rangeu = range<uint>;
-
-/**
  * \brief Specialization of \ref range for size_t.
  */
 using rangez = range<size_t>;
@@ -321,7 +316,6 @@ RCPPSW_MATH_RANGE_DIRECT_CONV2FLT(i);
 RCPPSW_MATH_RANGE_SCALED_CONV2FLT(z);
 RCPPSW_MATH_RANGE_SCALED_CONV2FLT(i);
 RCPPSW_MATH_RANGE_CONV2DISC(z, size_t);
-RCPPSW_MATH_RANGE_CONV2DISC(u, uint);
 
 NS_END(math, rcppsw);
 
