@@ -302,7 +302,8 @@
  *
  * Warning 1418.
  */
-#define RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...) RCPPSW_WARNING_DISABLE(1418)
+#define RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...) \
+  RCPPSW_WARNING_DISABLE(1418)
 
 /**
  * \def RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...)
@@ -310,6 +311,27 @@
  * Not needed by intel compiler.
  */
 #define RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...)
+ *
+ * Not needed by intel compiler.
+ */
+#define RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_USELESS_CAST(...)
+ *
+ * Not needed by intel compiler.
+ */
+#define RCPPSW_WARNING_DISABLE_USELESS_CAST(...)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...)
+ *
+ * Not needed by intel compiler.
+ */
+#define RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...)
 
 #elif defined(__clang__)
 
@@ -352,6 +374,27 @@
 #define RCPPSW_WARNING_DISABLE_EFFCXX(...)      \
   RCPPSW_WARNING_DISABLE(-Weffc++)
 
+/**
+ * \def RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...)
+ *
+ * Not needed by clang.
+ */
+#define RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_USELESS_CAST(...)
+ *
+ * Not needed by clang.
+ */
+#define RCPPSW_WARNING_DISABLE_USELESS_CAST(...)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...)
+ *
+ * Not needed by clang.
+ */
+#define RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...)
+
 #elif defined(__GNUC__)
 
 /**
@@ -390,6 +433,30 @@
  */
 #define RCPPSW_WARNING_DISABLE_EFFCXX(...) \
   RCPPSW_WARNING_DISABLE(-Weffc++)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...)
+ *
+ * -Wsuggest-override
+ */
+#define RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...) \
+  RCPPSW_WARNING_DISABLE(-Wsuggest-override)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_USELESS_CAST(...)
+ *
+ * -Wuseless-cast
+ */
+#define RCPPSW_WARNING_DISABLE_USELESS_CAST(...) \
+  RCPPSW_WARNING_DISABLE(-Wuseless-cast)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...)
+ *
+ * -Wold-style-cast
+ */
+#define RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...) \
+  RCPPSW_WARNING_DISABLE(-Wold-style-cast)
 
 #endif /* __INTEL_COMPILER__ */
 /* clang-format on */

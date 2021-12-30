@@ -11,9 +11,6 @@ set(PROJECT_VERSION_PATCH 0)
 ################################################################################
 # External Projects                                                            #
 ################################################################################
-# RCSW
-add_subdirectory(ext/rcsw)
-
 # TICPP, which emits hundreds of compiler warnings if I compile with my usual
 # robust set of warnings.
 if (NOT TARGET ticpp)
@@ -44,20 +41,25 @@ find_package(Boost 1.71.0
   REQUIRED)
 set(Boost_USE_STATIC_LIBS OFF)
 
+# RCSW
+find_package(rcsw
+  COMPONENTS
+  algorithm
+  REQUIRED
+  )
+
 ################################################################################
 # Includes                                                                     #
 ################################################################################
 set(${target}_INCLUDE_DIRS
-  ${${target}_INC_PATH}
-  ${rcsw_INCLUDE_DIRS})
-set(${target}_SYS_INCLUDE_DIRS
-  ${CMAKE_CURRENT_SOURCE_DIR})
+  ${rcsw_INCLUDE_DIRS}
+  )
 
 ################################################################################
 # Libraries                                                                    #
 ################################################################################
+
 set(${target}_LIBRARIES
-  rcsw
   ticpp::ticpp
   ${Boost_LIBRARIES}
   pthread
@@ -73,15 +75,38 @@ endif()
 # Define RCPPSW library
 set(${target}_LIBRARY_NAME ${target}-${CMAKE_SYSTEM_PROCESSOR})
 if (NOT TARGET ${${target}_LIBRARY_NAME})
-  add_library(${${target}_LIBRARY_NAME} STATIC ${${target}_SRC})
+  # The actual library
+  add_library(
+    ${${target}_LIBRARY_NAME}
+    STATIC
+    ${${target}_SRC}
+    )
+
+  # Single-component alias
+  add_library(
+    ${target}::${target}
+    ALIAS
+    ${${target}_LIBRARY_NAME}
+    )
 
   # Alias so we plug into the LIBRA framework properly
-  add_library(${target} ALIAS ${${target}_LIBRARY_NAME})
+  add_library(
+    ${target}
+    ALIAS
+    ${${target}_LIBRARY_NAME}
+    )
 
-  target_link_libraries(${${target}_LIBRARY_NAME} ${${target}_LIBRARIES})
-  target_link_directories(${${target}_LIBRARY_NAME} PUBLIC ${${target}_LIBRARY_DIRS})
-  target_include_directories(${${target}_LIBRARY_NAME} PUBLIC ${${target}_INCLUDE_DIRS})
-  target_include_directories(${${target}_LIBRARY_NAME} SYSTEM PRIVATE "${${target}_SYS_INCLUDE_DIRS}")
+  target_include_directories(
+    ${${target}_LIBRARY_NAME}
+    PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>  # <prefix>/rcppsw
+    )
+  target_include_directories(${${target}_LIBRARY_NAME} PUBLIC "${${target}_INCLUDE_DIRS}")
+  # target_include_directories(${${target}_LIBRARY_NAME} SYSTEM PRIVATE "${${target}_SYS_INCLUDE_DIRS}")
+  # target_link_libraries(${${target}_LIBRARY_NAME} ${${target}_LIBRARIES})
+  # target_link_directories(${${target}_LIBRARY_NAME} PUBLIC ${${target}_LIBRARY_DIRS})
+
 endif()
 
 ################################################################################
@@ -100,8 +125,8 @@ set(CPACK_DEBIAN_PACKAGE_DEPENDS
 # Exports                                                                      #
 ################################################################################
 if (NOT IS_ROOT_PROJECT)
-  set(${target}_INCLUDE_DIRS "${${target}_INCLUDE_DIRS}" PARENT_SCOPE)
-  set(${target}_SYS_INCLUDE_DIRS "${${target}_SYS_INCLUDE_DIRS}" PARENT_SCOPE)
+  # set(${target}_INCLUDE_DIRS "${${target}_INCLUDE_DIRS}" PARENT_SCOPE)
+  # set(${target}_SYS_INCLUDE_DIRS "${${target}_SYS_INCLUDE_DIRS}" PARENT_SCOPE)
   set(${target}_LIBRARIES "${${target}_LIBRARIES}" PARENT_SCOPE)
   set(${target}_LIBRARY_DIRS "${${target}_LIBRARY_DIRS}" PARENT_SCOPE)
   set(${target}_LIBRARY_NAME "${${target}_LIBRARY_NAME}" PARENT_SCOPE)

@@ -81,7 +81,6 @@ class radians final : public er::stringizable {
    * \brief Get the raw value in radians.
    */
   double v(void) const { return m_value; }
-  double operator()(void) const { return v(); }
 
   /**
    * \brief Normalizes the value in the range [-pi, pi].
