@@ -19,11 +19,12 @@ Usage: $0 [--rroot <dir>] [--cores <n_cores>] [--nosyspkgs ] [--opt] [-h|--help]
 --nosyspkgs: If passed, then do not install system packages (requires sudo
              access). Default=YES (install system packages).
 
---nobuild: Do everything but actually build RCPPSW. Used when RCPPSW
-           is a sub-project/submodule which will be built by the main
-           project as needed.
-
 --opt: Perform an optimized build of RCPPSW. Default=NO.
+
+--prefix: The path to install RCSW and other dependencies
+          to. Default=$HOME/.local.
+
+--arch: The target architecture. Can be 'native', 'armhf'. Default=native.
 
 -h|--help: Show this message.
 EOF
@@ -38,10 +39,11 @@ fi
 
 repo_root=$HOME/research
 install_sys_pkgs="YES"
-do_build="YES"
+prefix=$HOME/.local
+arch="native"
 n_cores=$(nproc)
 build_type="DEV"
-options=$(getopt -o h --long help,rroot:,cores:,nosyspkgs,opt,nobuild  -n "BOOTSTRAP" -- "$@")
+options=$(getopt -o h --long help,rroot:,cores:,prefix:,arch:,nosyspkgs,opt,nobuild  -n "BOOTSTRAP" -- "$@")
 if [ $? != 0 ]; then usage; exit 1; fi
 
 eval set -- "$options"
@@ -51,7 +53,8 @@ while true; do
         --rroot) repo_root=$2; shift;;
         --cores) n_cores=$2; shift;;
         --nosyspkgs) install_sys_pkgs="NO";;
-        --nobuild) do_build="NO";;
+        --prefix) prefix=$2; shift;;
+        --arch) arch=$2; shift;;
         --opt) build_type="OPT";;
         --) break;;
         *) break;;
@@ -66,27 +69,32 @@ done
 function bootstrap_main() {
     mkdir -p $repo_root && cd $repo_root
 
-    # First, bootstrap LIBRA
+    # First, bootstrap RCSW
     wget \
         --no-cache\
         --no-cookies\
-        https://raw.githubusercontent.com/swarm-robotics/libra/devel/scripts/bootstrap.sh \
-        -O bootstrap-libra.sh
+        https://raw.githubusercontent.com/swarm-robotics/rcsw/devel/scripts/bootstrap.sh \
+        -O bootstrap-rcsw.sh
 
-    chmod +x bootstrap-libra.sh
-    libra_syspkgs=$([ "YES" = "$install_sys_pkgs" ] && echo "" || echo "--nosyspkgs")
-
-    ./bootstrap-libra.sh $libra_syspkgs
+    chmod +x bootstrap-rcsw.sh
+    rcsw_syspkgs=$([ "YES" = "$install_sys_pkgs" ] && echo "" || echo "--nosyspkgs")
+    rcsw_opt=$([ "OPT" = "$build_type" ] && echo "--opt" || echo "")
+    ./bootstrap-rcsw.sh \
+        --rroot $repo_root \
+        --cores $n_cores \
+        $rcsw_syspkgs \
+        $rcsw_opt\
+        --prefix $prefix\
+        --arch $arch
 
     echo -e "********************************************************************************"
     echo -e "RCPPSW BOOTSTRAP START:"
+    echo -e "INSTALL_PREFIX=$prefix"
     echo -e "REPO_ROOT=$repo_root"
     echo -e "N_CORES=$n_cores"
     echo -e "SYSPKGS=$install_sys_pkgs"
     echo -e "BUILD_TYPE=$build_type"
-    echo -e "DO_BUILD=$do_build"
     echo -e "********************************************************************************"
-
 
     # Install system packages
     if [ "YES" = "$install_sys_pkgs" ]; then
@@ -122,19 +130,29 @@ function bootstrap_main() {
     git submodule update --init --recursive --remote
 
     # Build rcppsw and documentation
-    if [ "YES" = "$do_build" ]; then
-        if [ "OPT" = "$build_type" ]; then
-            er="NONE"
-        else
-            er="ALL"
-        fi
-        npm install
-        mkdir -p build && cd build
-        cmake -DCMAKE_C_COMPILER=gcc-9 -DCMAKE_CXX_COMPILER=g++-9 ..
-        make -j $n_cores
-        make documentation
-        cd ..
-    fi;
+    if [ "OPT" = "$build_type" ]; then
+        er="NONE"
+    else
+        er="ALL"
+    fi
+
+    npm install
+    mkdir -p build && cd build
+    if [ "native" = "$arch" ]; then
+        cmake\
+            -DCMAKE_C_COMPILER=gcc-9 \
+            -DCMAKE_CXX_COMPILER=g++-9 \
+            -DCMAKE_INSTALL_PREFIX=$prefix \
+            ..
+    elif [ "armhf" = "$arch" ]; then
+        cmake\
+            -DCMAKE_TOOLCHAIN_FILE=../libra/cmake/arm-linux-gnueabihf-toolchain.cmake \
+            -DCMAKE_INSTALL_PREFIX=$prefix \
+            ..
+    fi
+    make -j $n_cores
+    make install
+    cd ..
 
     cd ..
 
