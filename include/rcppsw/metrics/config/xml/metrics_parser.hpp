@@ -49,9 +49,13 @@ NS_START(rcppsw, metrics, config, xml);
  * \brief Parses XML parameters related to metric collection into
  * \ref metrics_config.
  */
-class metrics_parser : public rconfig::xml::xml_config_parser {
+class metrics_parser : public rer::client<metrics_parser>,
+                       public rconfig::xml::xml_config_parser {
  public:
   using config_type = metrics_config;
+
+  metrics_parser(void)
+      : ER_CLIENT_INIT("rcppsw.metrics.config.xml.metrics_parser") {}
 
   ~metrics_parser(void) override = default;
 

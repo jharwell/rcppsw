@@ -41,11 +41,11 @@ CATCH_TEST_CASE("Conversion test", "[rmath::degrees]") {
   rmath::degrees t2(to_degrees(rmath::radians(M_PI/2)));
   rmath::degrees t3(rmath::radians(M_PI));
 
-  CATCH_REQUIRE(90 == t0());
+  CATCH_REQUIRE(90 == t0.v());
   CATCH_REQUIRE(M_PI/2 == to_radians(t0).v());
 
-  CATCH_REQUIRE(M_PI/2 == to_radians(t2)());
-  CATCH_REQUIRE(M_PI == to_radians(t3)());
+  CATCH_REQUIRE(M_PI/2 == to_radians(t2).v());
+  CATCH_REQUIRE(M_PI == to_radians(t3).v());
 }
 
 CATCH_TEST_CASE("stdout Test", "[rmath::degrees]") {

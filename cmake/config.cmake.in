@@ -13,6 +13,7 @@ find_package(Boost 1.71.0
   thread
   graph
   stacktrace_basic
+  program_options
   REQUIRED
   )
 find_package(rcsw

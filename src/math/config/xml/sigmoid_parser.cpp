@@ -32,7 +32,11 @@ NS_START(rcppsw, math, config, xml);
  * Member Functions
  ******************************************************************************/
 void sigmoid_parser::parse(const ticpp::Element& node) {
-  ticpp::Element snode = node_get(node, kXMLRoot);
+  ER_DEBUG("Parent node=%s: search for child=%s",
+           node.Value().c_str(),
+           kXMLRoot.c_str());
+
+    ticpp::Element snode = node_get(node, kXMLRoot);
   m_config = std::make_unique<config_type>();
 
   XML_PARSE_ATTR(snode, m_config, reactivity);

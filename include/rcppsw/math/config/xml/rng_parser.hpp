@@ -45,9 +45,12 @@ NS_START(rcppsw, math, config, xml);
  *
  * \brief Parses XML configuration relating to RNG.
  */
-class rng_parser final : public rcppsw::config::xml::xml_config_parser {
+class rng_parser final : public rer::client<rng_parser>,
+                         public rconfig::xml::xml_config_parser {
  public:
   using config_type = rng_config;
+
+  rng_parser(void) : ER_CLIENT_INIT("rcppsw.math.config.xml.rng_parser") {}
 
   /**
    * \brief The root tag that all rng configuration values should lie under in

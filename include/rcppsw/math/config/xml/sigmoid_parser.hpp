@@ -45,9 +45,13 @@ NS_START(rcppsw, math, config, xml);
  *
  * \brief Parses XML configuration for sigmoids into \ref sigmoid_config.
  */
-class sigmoid_parser : public rcppsw::config::xml::xml_config_parser {
+class sigmoid_parser : public rer::client<sigmoid_parser>,
+                       public rconfig::xml::xml_config_parser {
  public:
   using config_type = sigmoid_config;
+
+  sigmoid_parser(void)
+      : ER_CLIENT_INIT("rcppsw.math.config.xml.sigmoid_parser") {}
 
   /**
    * \brief The root tag that all task sigmoid configuration values should lie

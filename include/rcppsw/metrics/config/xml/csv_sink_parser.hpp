@@ -47,9 +47,13 @@ NS_START(rcppsw, metrics, config, xml);
  * \brief Parses XML parameters related to the \ref rmetrics::csv_sink  into
  * \ref csv_sink_config.
  */
-class csv_sink_parser : public rconfig::xml::xml_config_parser {
+class csv_sink_parser : public rer::client<csv_sink_parser>,
+                        public rconfig::xml::xml_config_parser {
  public:
   using config_type = csv_sink_config;
+
+  csv_sink_parser(void)
+      : ER_CLIENT_INIT("rcppsw.metrics.config.xml.csv_sink_parser") {}
 
   ~csv_sink_parser(void) override = default;
 

@@ -46,9 +46,12 @@ NS_START(rcppsw, math, config, xml);
  * \brief Parses XML configuration for relating to exponential moving averages
  * (EMAs).
  */
-class ema_parser : public rcppsw::config::xml::xml_config_parser {
+class ema_parser : public rer::client<ema_parser>,
+                   public rconfig::xml::xml_config_parser {
  public:
   using config_type = ema_config;
+
+  ema_parser(void) : ER_CLIENT_INIT("rcppsw.math.config.xml.ema_parser") {}
 
   /**
    * \brief The root tag that all ema configuration values should lie under in

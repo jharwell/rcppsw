@@ -37,6 +37,10 @@ void metrics_parser::parse(const ticpp::Element& node) {
     return;
   }
 
+  ER_DEBUG("Parent node=%s: search for child=%s",
+           node.Value().c_str(),
+           kXMLRoot.c_str());
+
   ticpp::Element mnode = node_get(node, kXMLRoot);
   m_config = std::make_unique<config_type>();
 

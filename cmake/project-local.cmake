@@ -130,6 +130,7 @@ find_package(Boost 1.71.0
   thread
   graph
   stacktrace_basic
+  program_options
   REQUIRED)
 
 # Log4cxx
@@ -157,6 +158,11 @@ add_library(
   ${rcppsw_components_SRC}
   )
 
+# Ensure the whole archive is linked
+target_link_options(rcppsw
+  INTERFACE
+  -Wl,--whole-archive ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/librcppsw.a -Wl,--no-whole-archive
+  )
 target_include_directories(
   rcppsw
   PUBLIC
