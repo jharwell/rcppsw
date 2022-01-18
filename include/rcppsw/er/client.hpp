@@ -29,6 +29,8 @@
 #include "rcppsw/er/er.hpp"
 
 #if (RCPPSW_ER == RCPPSW_ER_ALL)
+#include <string>
+#include <memory>
 #include <log4cxx/consoleappender.h>
 #include <log4cxx/fileappender.h>
 #include <log4cxx/logger.h>
@@ -174,9 +176,10 @@ class client {
       }
     } /* for(&a..) */
 
-    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(kFileLayout);
-    log4cxx::AppenderPtr appender =
-        new log4cxx::FileAppender(layout, name, false);
+    auto layout = std::make_shared<log4cxx::PatternLayout>(kFileLayout);
+    auto appender = std::make_shared<log4cxx::FileAppender>(layout,
+                                                            name,
+                                                            false);
     appender->setName(name);
     logger->addAppender(appender);
   }
@@ -197,7 +200,14 @@ class client {
    * \param name Name of client/new logger.
    */
   explicit client(const std::string& name)
-      : m_logger(log4cxx::Logger::getLogger(name)) {}
+      : m_logger(log4cxx::Logger::getLogger(name)) {
+    if (0 == m_logger->getAllAppenders().size()) {
+      auto layout = std::make_shared<log4cxx::PatternLayout>(kConsoleLayout);
+      auto appender = std::make_shared<log4cxx::ConsoleAppender>(layout);
+      appender->setName(name);
+      logger()->addAppender(appender);
+    }
+  }
 
   virtual ~client(void) = default;
 
@@ -205,7 +215,12 @@ class client {
   client& operator=(const client&) = default;
 
   /**
-   * \brief Set the logfile of the current logger. Not idempotent.
+   * \brief Set the logfile of the logger with the specified name. Not
+   * idempotent.
+   *
+   * This is not done during construction because you often want to direct
+   * entire namespaces of loggers to a single output file (e.g.,
+   * rcppsw.patterns).
    */
   void logfile_set(const std::string& name) {
     log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(kFileLayout);
@@ -243,21 +258,14 @@ class client {
 
  private:
   /* clang-format off */
-  static const std::string kConsoleLayout;
-  static const std::string kFileLayout;
+  static inline const std::string kConsoleLayout = "%x %Y[%-5p]%y %c - %m%n";
+  static inline const std::string kFileLayout = "%x %Y[%-5p]%y %c %l - %m%n";
 
-  static bool              m_initialized;
+  static inline bool       m_initialized{false};
 
-  log4cxx::LoggerPtr        m_logger{};
+  log4cxx::LoggerPtr       m_logger{};
   /* clang-format on */
 };
-
-template <typename T>
-bool client<T>::m_initialized = false;
-template <typename T>
-const std::string client<T>::kConsoleLayout = "%x [%-5p] %c - %m%n";
-template <typename T>
-const std::string client<T>::kFileLayout = "%x [%-5p] %c %l - %m%n";
 
 #else
 template<typename T>

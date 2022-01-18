@@ -43,8 +43,8 @@ colored_pattern_layout::colored_pattern_layout(const LogString &s)
 IMPLEMENT_LOG4CXX_OBJECT(colored_pattern_layout);
 
 void colored_pattern_layout::format(LogString &output,
-                                    const spi::LoggingEventPtr
-                                    &event, helpers::Pool &pool) const {
+                                    const spi::LoggingEventPtr &event,
+                                    helpers::Pool &pool) const {
   log4cxx::LogString tmp;
   log4cxx::PatternLayout::format(tmp, event, pool);
   log4cxx::LevelPtr lvl = event->getLevel();
@@ -62,10 +62,10 @@ void colored_pattern_layout::format(LogString &output,
       output.append("\u001b[1m"); /* Bright */
       break;
     case log4cxx::Level::DEBUG_INT:
-      output.append("\u001b[0;32m"); /* Green FG */
+      /* output.append("\u001b[0;32m"); /\* Green FG *\/ */
       break;
     case log4cxx::Level::TRACE_INT:
-      output.append("\u001b[0;34m"); /* Blue FG */
+      /* output.append("\u001b[0;34m"); /\* Blue FG *\/ */
       break;
     default:
       break;

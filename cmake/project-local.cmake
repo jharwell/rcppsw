@@ -134,8 +134,8 @@ find_package(Boost 1.71.0
   REQUIRED)
 
 # Log4cxx
-set(CMAKE_MODULE_PATH "${rcppsw_DIR}/cmake;${CMAKE_MODULE_PATH}")
-find_package(Log4cxx)
+set(log4cxx_ROOT ${LIBRA_DEPS_PREFIX})
+find_package(log4cxx)
 
 # RCSW
 find_package(rcsw)
@@ -168,12 +168,13 @@ target_include_directories(
   PUBLIC
   $<BUILD_INTERFACE:${rcppsw_DIR}/include>
   $<BUILD_INTERFACE:${rcsw_INCLUDE_DIRS}>
+  $<INSTALL_INTERFACE:include>
   )
 target_include_directories(
   rcppsw
   SYSTEM PUBLIC
   $<BUILD_INTERFACE:${rcppsw_DIR}/ext>
-  $<BUILD_INTERFACE:${Log4cxx_INCLUDE_DIR}>
+  $<BUILD_INTERFACE:${log4cxx_INCLUDE_DIR}>
   $<BUILD_INTERFACE:${Boost_INCLUDE_DIRS}>
   )
 target_link_libraries(rcppsw
@@ -184,6 +185,7 @@ target_link_libraries(rcppsw
   dl
   )
 if ("${LIBRA_ER}" MATCHES "ALL")
+  target_link_directories(rcppsw PUBLIC ${LIBRA_DEPS_PREFIX}/lib)
   target_link_libraries(rcppsw log4cxx)
 endif()
 
