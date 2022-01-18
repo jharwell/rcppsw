@@ -53,6 +53,8 @@
 #define ER_LOGFILE_SET(logger, fname)
 #define ER_NDC_PUSH(s)
 #define ER_NDC_POP(...)
+#define ER_MDC_ADD(key, value)
+#define ER_MDC_RM(key)
 #define ER_ENV_VERIFY(...)
 
 #elif (RCPPSW_ER == RCPPSW_ER_FATAL)
@@ -62,6 +64,8 @@
 #define ER_LOGFILE_SET(logger, fname)
 #define ER_NDC_PUSH(s)
 #define ER_NDC_POP(...)
+#define ER_MDC_ADD(key, value)
+#define ER_MDC_RM(key)
 #define ER_ENV_VERIFY(...)
 
 
@@ -102,7 +106,7 @@
  */
 #define ER_NDC_PUSH(s) \
   rcppsw::er::client<  \
-      typename std::remove_reference_t<decltype(*this)>>::push_ndc(s)
+      typename std::remove_reference_t<decltype(*this)>>::ndc_do_push(s)
 
 /**
  * \def ER_NDC_POP()
@@ -111,7 +115,25 @@
  */
 #define ER_NDC_POP(...) \
   rcppsw::er::client<   \
-      typename std::remove_reference_t<decltype(*this)>>::pop_ndc()
+      typename std::remove_reference_t<decltype(*this)>>::ndc_do_pop()
+
+/**
+ * \def ER_MDC_ADD(key, value)
+ *
+ * Add the specified mdc context (prepended to every message).
+ */
+#define ER_MDC_ADD(key, value)                  \
+  rer::client<  \
+                typename std::remove_reference_t<decltype(*this)>>::mdc_add(key, value)
+
+/**
+ * \def ER_MDC_RM(key)
+ *
+ * Remove the specified pushed NDC context.
+ */
+#define ER_MDC_RM(key) \
+  rer::client<   \
+      typename std::remove_reference_t<decltype(*this)>>::mdc_rm(key)
 
 /**
  * \def ER_ENV_VERIFY()
@@ -119,9 +141,9 @@
  * Verify the correct environment variables were set up for event reporting
  * before the application was launched.
  */
-#define ER_ENV_VERIFY(...) \
-  rcppsw::er::client<      \
-      typename std::remove_reference_t<decltype(*this)>>::env_verify()
+#define ER_ENV_VERIFY(...)                                              \
+  rcppsw::er::client<                                                   \
+                           typename std::remove_reference_t<decltype(*this)>>::env_verify()
 
 #endif
 
@@ -189,12 +211,31 @@ class client {
    *
    * \param s The context.
    */
-  static void push_ndc(const std::string& s) { log4cxx::NDC::push(s); }
+  static void ndc_do_push(const std::string& s) { log4cxx::NDC::push(s); }
 
   /**
    * \brief Pop the top of the log4cxx NDC stack.
    */
-  static void pop_ndc(void) { log4cxx::NDC::pop(); }
+  static void ndc_do_pop(void) { log4cxx::NDC::pop(); }
+
+  /**
+   * \brief Add a log4cxx MDC context.
+   *
+   * \param key The context key.
+   *
+   * \param value The context.
+   */
+  static void mdc_add(const std::string& key,
+                       const std::string& value) {
+    log4cxx::MDC::put(key, value);
+  }
+
+  /**
+   * \brief Remove a log4cxx MDC context.
+   */
+  static void mdc_rm(const std::string& key) {
+    log4cxx::MDC::remove(key);
+  }
 
   /**
    * \param name Name of client/new logger.
@@ -223,8 +264,8 @@ class client {
    * rcppsw.patterns).
    */
   void logfile_set(const std::string& name) {
-    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(kFileLayout);
-    log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout, name);
+    auto layout = std::make_shared<log4cxx::PatternLayout>(kFileLayout);
+    auto appender = std::make_shared<log4cxx::FileAppender>(layout, name);
     logger()->addAppender(appender);
   }
 
@@ -258,8 +299,8 @@ class client {
 
  private:
   /* clang-format off */
-  static inline const std::string kConsoleLayout = "%x %Y[%-5p]%y %c - %m%n";
-  static inline const std::string kFileLayout = "%x %Y[%-5p]%y %c %l - %m%n";
+  static inline const std::string kConsoleLayout = "%X{time} %x %Y[%-5p]%y %c - %m%n";
+  static inline const std::string kFileLayout = "%X{time} %x %Y[%-5p]%y %c %l - %m%n";
 
   static inline bool       m_initialized{false};
 
