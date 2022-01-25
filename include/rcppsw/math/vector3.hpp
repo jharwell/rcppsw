@@ -445,7 +445,7 @@ template<> const vector3d vector3d::Z;
  * Macros
  ******************************************************************************/
 /**
- * \brief Convert vector3{i,u,z} -> vector3d directly, without applying any
+ * \brief Convert vector3{i,z} -> vector3d directly, without applying any
  * scaling.
  */
 #define RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(prefix)                          \
@@ -454,7 +454,7 @@ template<> const vector3d vector3d::Z;
   }
 
 /**
- * \brief Convert vector3{i,u,z} -> vector3d, applying a multiplicative scaling
+ * \brief Convert vector3{i,z} -> vector3d, applying a multiplicative scaling
  * factor.
  */
 #define RCPPSW_MATH_VEC3_SCALED_CONV2FLT(prefix)                              \
@@ -464,12 +464,13 @@ template<> const vector3d vector3d::Z;
   }
 
 /**
- * \brief Convert vector3d -> vector3{i,u,z}, applying a divisive scaling factor.
+ * \brief Convert vector3d -> vector3{i,z}, applying a divisive scaling
+ * factor.
  */
 #define RCPPSW_MATH_VEC3_CONV2DISC(dest_prefix, dest_type)                  \
   static inline vector3##dest_prefix dvec2##dest_prefix##vec(               \
       const vector3d& other, double scale) {                                \
-    return vector3##dest_prefix(static_cast<dest_type>(other.x() / scale),  \
+     return vector3##dest_prefix(static_cast<dest_type>(other.x() / scale),  \
                                 static_cast<dest_type>(other.y() / scale),  \
                                 static_cast<dest_type>(other.z() / scale)); \
   }

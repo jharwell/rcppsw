@@ -27,12 +27,6 @@ rcppsw_control_SRC
   control
   "src/control")
 component_register_as_src(
-rcppsw_er_SRC
-  rcppsw
-  "${rcppsw_SRC}"
-  er
-  "src/er")
-component_register_as_src(
 rcppsw_math_SRC
   rcppsw
   "${rcppsw_SRC}"
@@ -74,7 +68,12 @@ rcppsw_utils_SRC
   "${rcppsw_SRC}"
   utils
   "src/utils")
-
+component_register_as_src(
+  rcppsw_er_SRC
+  rcppsw
+  "${rcppsw_SRC}"
+  er
+  "src/er")
 # Root project (not used in find_package())
 if (NOT rcppsw_FIND_COMPONENTS)
   set(rcppsw_FIND_COMPONENTS

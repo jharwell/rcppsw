@@ -87,10 +87,15 @@ class bounding_box : public rer::client<bounding_box<TCoord>> {
   coord_value_type zsize(void) const { return mc_dims.z(); }
 
   void update(const coord_type& anchor) {
+    ER_TRACE("anchor: %s", rcppsw::to_string(anchor).c_str());
+    ER_TRACE("bb: %s", rcppsw::to_string(coord_type(xsize(),
+                                                    ysize(),
+                                                    zsize())).c_str());
     m_anchor = anchor;
     m_center = m_anchor + coord_type(xsize(),
                                      ysize(),
                                      zsize()) / 2.0;
+    ER_TRACE("center: %s", rcppsw::to_string(m_center).c_str());
     m_xspan = rmath::xspan(anchor3D(), xsize());
     m_yspan = rmath::yspan(anchor3D(), ysize());
     m_zspan = rmath::zspan(anchor3D(), zsize());

@@ -242,12 +242,16 @@ class client {
    */
   explicit client(const std::string& name)
       : m_logger(log4cxx::Logger::getLogger(name)) {
-    if (0 == m_logger->getAllAppenders().size()) {
-      auto layout = std::make_shared<log4cxx::PatternLayout>(kConsoleLayout);
-      auto appender = std::make_shared<log4cxx::ConsoleAppender>(layout);
-      appender->setName(name);
-      logger()->addAppender(appender);
-    }
+    /*
+     * DON'T add the appender here--results in multiple copies of some messages
+     * for reasons I can't understand. Doing it in the config file works though.
+     */
+    /* if (0 == m_logger->getAllAppenders().size()) { */
+    /*   auto layout = std::make_shared<log4cxx::PatternLayout>(kConsoleLayout); */
+    /*   auto appender = std::make_shared<log4cxx::ConsoleAppender>(layout); */
+    /*   appender->setName(name); */
+    /*   logger()->addAppender(appender); */
+    /* } */
   }
 
   virtual ~client(void) = default;
