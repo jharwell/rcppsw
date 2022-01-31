@@ -1,5 +1,5 @@
 /**
- * \file base_metrics_manager.cpp
+ * \file write_status.hpp
  *
  * \copyright 2020 John Harwell, All rights reserved.
  *
@@ -18,31 +18,43 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_METRICS_WRITE_STATUS_HPP_
+#define INCLUDE_RCPPSW_METRICS_WRITE_STATUS_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/base_metrics_manager.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, metrics);
 
-namespace fs = std::filesystem;
-
 /*******************************************************************************
- * Constructors/Destructors
+ * Type Definitions
  ******************************************************************************/
-base_metrics_manager::base_metrics_manager(
-    const rmconfig::metrics_config* const mconfig,
-    const fs::path& output_root)
-    : ER_CLIENT_INIT("rcppsw.metrics.base_metrics_manager"),
-      m_metrics_path(output_root / mconfig->metrics_path) {
-  if (!fs::exists(m_metrics_path)) {
-    fs::create_directories(m_metrics_path);
-  } else {
-    ER_WARN("Output metrics path '%s' already exists", m_metrics_path.c_str());
-  }
-}
+/**
+ * \brief Status of attempts to write metrics to the filesystem. Used to
+ * correctly triage I/O errors.
+ */
+enum write_status {
+  /**
+   * No write was attempted this timestep.
+   */
+  ekNO_ATTEMPT = 1 << 0,
+
+  /**
+   * A write was attempted, but was unsuccessful this timestep.
+   */
+  ekFAILED = 1 << 1,
+
+  /**
+   * A write was attempted and was successful this timestep.
+   */
+  ekSUCCESS = 1 << 2
+};
 
 NS_END(metrics, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_METRICS_WRITE_STATUS_HPP_ */

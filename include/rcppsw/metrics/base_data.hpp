@@ -1,5 +1,5 @@
 /**
- * \file grid3D_metrics_data.hpp
+ * \file base_data.hpp
  *
  * \copyright 2017 John Harwell, All rights reserved.
  *
@@ -18,39 +18,34 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_
-#define INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_BASE_DATA_HPP_
+#define INCLUDE_RCPPSW_METRICS_BASE_DATA_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/base_data.hpp"
-#include "rcppsw/ds/grid2D.hpp"
-#include "rcppsw/al/multithread.hpp"
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, metrics);
+NS_START(rcppsw, metrics);
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * \interface grid2D_metrics_data
- * \ingroup ds metrics
+ * \interface base_data
+ * \ingroup metrics
  *
- * \brief Container for basic metrics gather from \ref rds::grid2D.
+ * \brief Base class for the containers of data extracted through classes
+ * derived from \ref base_metrics.
  */
-struct grid2D_metrics_data : public rmetrics::base_data {
-  explicit grid2D_metrics_data(const math::vector2z& dims) :
-      grid(dims.x(), dims.y()) {}
-
-  rcppsw::ds::grid2D<ral::mt_size_t> grid;
-  ral::mt_size_t                     total_count{0};
-
+struct base_data {
+  base_data(void) = default;
+  virtual ~base_data(void) = default;
 };
 
-NS_END(metrics, ds, rcppsw);
+NS_END(metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_ */
+#endif /* INCLUDE_RCPPSW_METRICS_BASE_DATA_HPP_ */

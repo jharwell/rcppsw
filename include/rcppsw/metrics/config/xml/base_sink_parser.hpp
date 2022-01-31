@@ -1,5 +1,5 @@
 /**
- * \file metrics_config.hpp
+ * \file base_sink_parser.hpp
  *
  * \copyright 2021 John Harwell, All rights reserved.
  *
@@ -18,42 +18,49 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_CONFIG_METRICS_CONFIG_HPP_
-#define INCLUDE_RCPPSW_METRICS_CONFIG_METRICS_CONFIG_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_CONFIG_XML_BASE_SINK_PARSER_HPP_
+#define INCLUDE_RCPPSW_METRICS_CONFIG_XML_BASE_SINK_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <filesystem>
-
-#include "rcppsw/config/base_config.hpp"
-#include "rcppsw/metrics/config/file_sink_config.hpp"
-#include "rcppsw/metrics/config/network_sink_config.hpp"
+#include "rcppsw/config/xml/xml_config_parser.hpp"
+#include "rcppsw/metrics/config/output_mode_config.hpp"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics, config);
-
-namespace fs = std::filesystem;
+NS_START(rcppsw, metrics, config, xml);
 
 /*******************************************************************************
- * Structure Definitions
+ * Class Definitions
  ******************************************************************************/
 /**
- * \struct metrics_config
- * \ingroup metrics config
+ * \class base_sink_parser
+ * \ingroup metrics config xml
+ *
+ * \brief Base class for parsing parameters for \ref rmetrics::base_sink derived
+ * classes.
  */
-struct metrics_config final : public rconfig::base_config {
+class base_sink_parser : public rer::client<base_sink_parser>,
+                        public rconfig::xml::xml_config_parser {
+ public:
+  base_sink_parser(void)
+      : ER_CLIENT_INIT("rcppsw.metrics.config.xml.base_sink_parser") {}
+
+  ~base_sink_parser(void) override = default;
+
+ protected:
   /**
-   * \brief Path to the output directory for metrics RELATIVE to the overall
-   * output directory.
+   * \brief Determine if a particular attribute under the a node is the name of
+   * a metric collector or some other type of parameter.
    */
-  fs::path                      metrics_path{};
-  rmconfig::file_sink_config    csv{};
-  rmconfig::network_sink_config network{};
+  bool is_collector_name(const ticpp::Attribute& attr) const RCPPSW_COLD;
+
+  void output_mode_parse(const ticpp::Element& element,
+                         rmetrics::config::output_mode_config* config);
 };
 
-NS_END(config, metrics, rcppsw);
+NS_END(xml, config, metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_CONFIG_METRICS_CONFIG_HPP_ */
+#endif /* INCLUDE_RCPPSW_METRICS_CONFIG_XML_BASE_SINK_PARSER_HPP_ */

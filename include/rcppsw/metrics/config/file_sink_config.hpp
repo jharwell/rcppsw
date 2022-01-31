@@ -1,7 +1,7 @@
 /**
- * \file grid3D_metrics_data.hpp
+ * \file file_sink_config.hpp
  *
- * \copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2021 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,39 +18,35 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_
-#define INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_CONFIG_FILE_SINK_CONFIG_HPP_
+#define INCLUDE_RCPPSW_METRICS_CONFIG_FILE_SINK_CONFIG_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/base_data.hpp"
-#include "rcppsw/ds/grid2D.hpp"
-#include "rcppsw/al/multithread.hpp"
+#include "rcppsw/config/base_config.hpp"
+#include "rcppsw/metrics/config/output_mode_config.hpp"
 
 /*******************************************************************************
- * Namespaces/Decls
+ * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, ds, metrics);
+NS_START(rcppsw, metrics, config);
 
 /*******************************************************************************
- * Class Definitions
+ * Structure Definitions
  ******************************************************************************/
 /**
- * \interface grid2D_metrics_data
- * \ingroup ds metrics
+ * \struct file_sink_config
+ * \ingroup metrics config
  *
- * \brief Container for basic metrics gather from \ref rds::grid2D.
+ * \brief Configuration for metrics which will/can be output as files.
  */
-struct grid2D_metrics_data : public rmetrics::base_data {
-  explicit grid2D_metrics_data(const math::vector2z& dims) :
-      grid(dims.x(), dims.y()) {}
-
-  rcppsw::ds::grid2D<ral::mt_size_t> grid;
-  ral::mt_size_t                     total_count{0};
-
+struct file_sink_config final : public rconfig::base_config {
+  rmetrics::config::output_mode_config append{};
+  rmetrics::config::output_mode_config truncate{};
+  rmetrics::config::output_mode_config create{};
 };
 
-NS_END(metrics, ds, rcppsw);
+NS_END(config, metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_ */
+#endif /* INCLUDE_RCPPSW_METRICS_CONFIG_FILE_SINK_CONFIG_HPP_ */

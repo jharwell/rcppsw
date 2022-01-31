@@ -62,7 +62,7 @@ class grid3D_metrics_csv_sink : public rmetrics::csv_sink {
 
 
   std::list<std::string> csv_header_cols(
-      const rmetrics::base_metrics_data* data) const override {
+      const rmetrics::base_data* data) const override {
     auto* d = dynamic_cast<const grid3D_metrics_data*>(data);
     std::list<std::string> cols;
     for (size_t i = 0; i < d->grid.xsize(); ++i) {
@@ -75,7 +75,7 @@ class grid3D_metrics_csv_sink : public rmetrics::csv_sink {
   }
 
   boost::optional<std::string>
-  csv_line_build(const rmetrics::base_metrics_data* data,
+  csv_line_build(const rmetrics::base_data* data,
                  const rtypes::timestep& t) override {
     if (!ready_to_flush(t)) {
       return boost::none;

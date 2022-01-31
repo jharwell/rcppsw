@@ -27,7 +27,7 @@
 #include <memory>
 #include <utility>
 
-#include "rcppsw/metrics/base_metrics_collector.hpp"
+#include "rcppsw/metrics/base_collector.hpp"
 #include "rcppsw/ds/metrics/grid2D_metrics_data.hpp"
 
 /*******************************************************************************
@@ -46,19 +46,19 @@ NS_START(rcppsw, ds, metrics);
  * SOMETHING, to be averaged over the entire simulation. Each line of the
  * resulting .csv file corresponds directly to a row in X of the 2D grid.
  */
-class grid2D_metrics_collector : public rmetrics::base_metrics_collector {
+class grid2D_metrics_collector : public rmetrics::base_collector {
  public:
   /**
    * \param sink The metrics sink to use.
    * \param dims Dimensions of grid.
    */
-  grid2D_metrics_collector(std::unique_ptr<rmetrics::base_metrics_sink> sink,
+  grid2D_metrics_collector(std::unique_ptr<rmetrics::base_sink> sink,
                            const math::vector2z& dims)
-      : base_metrics_collector(std::move(sink)),
+      : base_collector(std::move(sink)),
         m_data(dims) {}
 
  protected:
-  const rmetrics::base_metrics_data* data(void) const override {
+  const rmetrics::base_data* data(void) const override {
     return &m_data;
   }
 

@@ -36,19 +36,19 @@ NS_START(rcppsw, metrics);
  * Constructors/Destructor
  ******************************************************************************/
 csv_sink::csv_sink(fs::path fpath,
-                   const enum output_mode& mode,
+                   const rmetrics::output_mode& mode,
                    const rtypes::timestep& interval)
-    : base_metrics_sink(fpath.replace_extension(".csv"), mode, interval),
+    : file_sink(fpath.replace_extension(".csv"), mode, interval),
       ER_CLIENT_INIT("rcppsw.metrics.csv_sink") {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-metrics_write_status csv_sink::flush(const rmetrics::base_metrics_data* data,
-                                     const rtypes::timestep& t) {
+write_status csv_sink::flush(const rmetrics::base_data* data,
+                             const rtypes::timestep& t) {
   auto line = csv_line_build(data, t);
   if (!line) {
-    return metrics_write_status::ekNO_ATTEMPT;
+    return write_status::ekNO_ATTEMPT;
   }
 
   bool io_success = false;
@@ -92,13 +92,13 @@ metrics_write_status csv_sink::flush(const rmetrics::base_metrics_data* data,
                       rcppsw::as_underlying(output_mode()));
   }
   if (io_success) {
-    return metrics_write_status::ekSUCCESS;
+    return write_status::ekSUCCESS;
   } else {
-    return metrics_write_status::ekFAILED;
+    return write_status::ekFAILED;
   }
 } /* flush() */
 
-void csv_sink::initialize(const rmetrics::base_metrics_data* data) {
+void csv_sink::initialize(const rmetrics::base_data* data) {
   if (output_mode::ekAPPEND == output_mode() ||
       output_mode::ekTRUNCATE == output_mode()) {
     /* close file if its open so we can truncate it if needed */
@@ -115,7 +115,7 @@ void csv_sink::initialize(const rmetrics::base_metrics_data* data) {
   }
 } /* initialize() */
 
-void csv_sink::csv_header_write(const rmetrics::base_metrics_data* data) {
+void csv_sink::csv_header_write(const rmetrics::base_data* data) {
 auto cols = csv_header_cols(data);
   std::string header = std::accumulate(std::next(cols.begin()),
                                        cols.end(),

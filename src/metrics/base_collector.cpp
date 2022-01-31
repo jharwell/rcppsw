@@ -1,7 +1,7 @@
 /**
- * \file base_metrics_sink.cpp
+ * \file base_metric_collector.cpp
  *
- * \copyright 2018 John Harwell, All rights reserved.
+ * \copyright 018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,10 +21,12 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/base_metrics_sink.hpp"
+#include "rcppsw/metrics/base_collector.hpp"
 
 #include <fstream>
-#include <iostream>
+
+#include "rcppsw/metrics/base_sink.hpp"
+#include "rcppsw/utils/maskable_enum.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -34,43 +36,34 @@ NS_START(rcppsw, metrics);
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-base_metrics_sink::base_metrics_sink(fs::path fpath,
-                                     const enum output_mode& mode,
-                                     const rtypes::timestep& interval)
-    : ER_CLIENT_INIT("rcppsw.metrics.base_sink"),
-      mc_fpath(fpath),
-      mc_output_mode(mode),
-      mc_output_interval(interval),
-      m_ofile(std::make_unique<std::ofstream>()) {
-  ER_ASSERT(mc_fpath.has_extension(),
-            "Output path %s does not include extension!", mc_fpath.c_str());
-}
-
-base_metrics_sink::~base_metrics_sink(void) = default;
+base_collector::base_collector(
+    std::unique_ptr<base_sink> sink)
+    : ER_CLIENT_INIT("rcppsw.metrics.base_collector"),
+      m_sink(std::move(sink)) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-bool base_metrics_sink::retry_io(const std::function<void(void)>& cb) {
-  int tries = kN_RETRIES;
-  std::string error;
+void base_collector::initialize(void) {
+  /* initialize the sink */
+  m_sink->initialize(data());
 
-  do {
-    try {
-      cb();
-      return true;
-    } catch (std::filesystem::filesystem_error& e) {
-      error = e.what();
-      tries--;
-    }
-  } while (tries > 0);
+  /* initialize the collector's data */
+  reset_after_interval();
+} /* initialize() */
 
-  std::cout << error << std::endl;
-  return false;
-} /* retry_io() */
+void base_collector::finalize(void) {
+  m_sink->finalize();
+} /* finalize() */
 
-bool base_metrics_sink::ready_to_flush(const rtypes::timestep& t) const {
-  return t % mc_output_interval == 0UL;
-} /* ready_to_flush() */
+write_status base_collector::flush(void) {
+  return m_sink->flush(data(), m_timestep);
+} /* flush() */
+
+void base_collector::interval_reset(void) {
+  if (m_timestep > 0UL && (m_timestep % m_sink->output_interval() == 0UL)) {
+    reset_after_interval();
+  }
+} /* interval_reset() */
 
 NS_END(metrics, rcppsw);

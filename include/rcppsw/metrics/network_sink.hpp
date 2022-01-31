@@ -1,7 +1,7 @@
 /**
- * \file base_metric_collector.cpp
+ * \file network_sink.hpp
  *
- * \copyright 018 John Harwell, All rights reserved.
+ * \copyright 2022 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,14 +18,15 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#ifndef INCLUDE_RCPPSW_METRICS_NETWORK_SINK_HPP_
+#define INCLUDE_RCPPSW_METRICS_NETWORK_SINK_HPP_
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/base_metrics_collector.hpp"
-#include "rcppsw/metrics/base_metrics_sink.hpp"
-#include "rcppsw/utils/maskable_enum.hpp"
+#include <string>
 
-#include <fstream>
+#include "rcppsw/metrics/base_sink.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -33,36 +34,36 @@
 NS_START(rcppsw, metrics);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Class Definitions
  ******************************************************************************/
-base_metrics_collector::base_metrics_collector(
-    std::unique_ptr<base_metrics_sink> sink)
-    : ER_CLIENT_INIT("rcppsw.metrics.base_collector"),
-      m_sink(std::move(sink)) {}
+/**
+ * \class network_sink
+ * \ingroup pal ros metrics
+ *
+ * \brief Metrics sink so that collectors can output their metrics to a machine
+ * elsewhere on the network. Metrics are written at the specified interval to
+ * the specified machine to collect and process.
+ */
+class network_sink : public rmetrics::base_sink,
+                     public rer::client<network_sink> {
+ public:
+  network_sink(const std::string& dest,
+               const rmetrics::output_mode& mode,
+               const rtypes::timestep& interval)
+      : base_sink(mode, interval),
+        ER_CLIENT_INIT("rcppsw.metrics.network_sink"),
+        mc_dest(dest) {}
 
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-void base_metrics_collector::initialize(void) {
-  /* initialize the sink */
-  m_sink->initialize(data());
+  virtual ~network_sink(void) = default;
 
-  /* initialize the collector's data */
-  reset_after_interval();
-} /* initialize() */
+  const std::string& dest(void) const { return mc_dest; }
 
-void base_metrics_collector::finalize(void) {
-  m_sink->finalize();
-} /* finalize() */
-
-metrics_write_status base_metrics_collector::flush(void) {
-  return m_sink->flush(data(), m_timestep);
-} /* flush() */
-
-void base_metrics_collector::interval_reset(void) {
-  if (m_timestep > 0UL && (m_timestep % m_sink->output_interval() == 0UL)) {
-    reset_after_interval();
-  }
-} /* interval_reset() */
+ private:
+  /* clang-format off */
+  const std::string mc_dest;
+  /* clang-format on */
+};
 
 NS_END(metrics, rcppsw);
+
+#endif /* INCLUDE_RCPPSW_METRICS_NETWORK_SINK_HPP_ */

@@ -1,7 +1,7 @@
 /**
- * \file grid3D_metrics_data.hpp
+ * \file fs_output_manager.cpp
  *
- * \copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2020 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,39 +18,29 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_
-#define INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/base_data.hpp"
-#include "rcppsw/ds/grid2D.hpp"
-#include "rcppsw/al/multithread.hpp"
+#include "rcppsw/metrics/fs_output_manager.hpp"
 
 /*******************************************************************************
- * Namespaces/Decls
+ * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, ds, metrics);
+NS_START(rcppsw, metrics);
 
 /*******************************************************************************
- * Class Definitions
+ * Constructors/Destructors
  ******************************************************************************/
-/**
- * \interface grid2D_metrics_data
- * \ingroup ds metrics
- *
- * \brief Container for basic metrics gather from \ref rds::grid2D.
- */
-struct grid2D_metrics_data : public rmetrics::base_data {
-  explicit grid2D_metrics_data(const math::vector2z& dims) :
-      grid(dims.x(), dims.y()) {}
+fs_output_manager::fs_output_manager(
+    const rmconfig::metrics_config* const mconfig,
+    const fs::path& output_root)
+    : ER_CLIENT_INIT("rcppsw.metrics.fs_output_manager"),
+      m_metrics_path(output_root / mconfig->metrics_path) {
+  if (!fs::exists(m_metrics_path)) {
+    fs::create_directories(m_metrics_path);
+  } else {
+    ER_WARN("Output metrics path '%s' already exists", m_metrics_path.c_str());
+  }
+}
 
-  rcppsw::ds::grid2D<ral::mt_size_t> grid;
-  ral::mt_size_t                     total_count{0};
-
-};
-
-NS_END(metrics, ds, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_ */
+NS_END(metrics, rcppsw);

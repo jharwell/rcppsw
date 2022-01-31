@@ -1,5 +1,5 @@
 /**
- * \file csv_sink_config.hpp
+ * \file base_sink_parser.cpp
  *
  * \copyright 2021 John Harwell, All rights reserved.
  *
@@ -18,45 +18,41 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_CONFIG_CSV_SINK_CONFIG_HPP_
-#define INCLUDE_RCPPSW_METRICS_CONFIG_CSV_SINK_CONFIG_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <map>
-#include <string>
+#include "rcppsw/metrics/config/xml/base_sink_parser.hpp"
 
-#include "rcppsw/config/base_config.hpp"
-#include "rcppsw/rcppsw.hpp"
-#include "rcppsw/types/timestep.hpp"
+#include <list>
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics, config);
+NS_START(rcppsw, metrics, config, xml);
 
 /*******************************************************************************
- * Structure Definitions
+ * Member Functions
  ******************************************************************************/
-struct csv_sink_output_mode_config {
-  using enabled_map_type = std::map<std::string, std::string>;
-  rtypes::timestep output_interval{0};
-  enabled_map_type enabled{};
-};
+void base_sink_parser::output_mode_parse(const ticpp::Element& element,
+                                         output_mode_config* config) {
+  XML_PARSE_ATTR(element, config, output_interval);
+  ticpp::Iterator<ticpp::Attribute> it;
+  for (it = element.FirstAttribute(); it != it.end(); ++it) {
+    if (is_collector_name(*it)) {
+      std::string name;
+      std::string value;
+      it->GetName(&name);
+      it->GetValue(&value);
+      config->enabled.insert({ name, value });
+    }
+  } /* for(it..) */
+} /* output_mode_parse() */
 
-/**
- * \struct csv_sink_config
- * \ingroup metrics config
- *
- * \brief Configuration for metrics which will/can be output as .csv files.
- */
-struct csv_sink_config final : public rconfig::base_config {
-  csv_sink_output_mode_config append{};
-  csv_sink_output_mode_config truncate{};
-  csv_sink_output_mode_config create{};
-};
+bool base_sink_parser::is_collector_name(const ticpp::Attribute& attr) const {
+  std::list<std::string> non_names = { "output_interval" };
+  std::string name;
+  attr.GetName(&name);
+  return non_names.end() == std::find(non_names.begin(), non_names.end(), name);
+} /* is_collector_name() */
 
-NS_END(config, metrics, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_METRICS_CONFIG_CSV_SINK_CONFIG_HPP_ */
+NS_END(xml, config, metrics, rcppsw);

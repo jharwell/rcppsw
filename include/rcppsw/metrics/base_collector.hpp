@@ -1,5 +1,5 @@
 /**
- * \file base_metrics_collector.hpp
+ * \file base_collector.hpp
  *
  * \copyright 018 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_BASE_METRICS_COLLECTOR_HPP_
-#define INCLUDE_RCPPSW_METRICS_BASE_METRICS_COLLECTOR_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_BASE_COLLECTOR_HPP_
+#define INCLUDE_RCPPSW_METRICS_BASE_COLLECTOR_HPP_
 
 /*******************************************************************************
  * Includes
@@ -29,9 +29,9 @@
 
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/types/timestep.hpp"
-#include "rcppsw/metrics/metrics_write_status.hpp"
-#include "rcppsw/metrics/base_metrics_data.hpp"
-#include "rcppsw/metrics/base_metrics_sink.hpp"
+#include "rcppsw/metrics/write_status.hpp"
+#include "rcppsw/metrics/base_data.hpp"
+#include "rcppsw/metrics/base_sink.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -43,7 +43,7 @@ class base_metrics;
  * Class Definitions
  ******************************************************************************/
 /**
- * \class base_metrics_collector
+ * \class base_collector
  * \ingroup metrics
  *
  * \brief Base class that uses the template design pattern to provide hooks for
@@ -53,15 +53,15 @@ class base_metrics;
  * Metrics are written out in .csv format at whatever frequency derived classes
  * choose.
  */
-class base_metrics_collector : public er::client<base_metrics_collector> {
+class base_collector : public er::client<base_collector> {
  public:
   /**
    * \param sinks The sinks for the metrics that determines how they will be
    *              written to the filesystem.
    */
-  explicit base_metrics_collector(std::unique_ptr<base_metrics_sink> sink);
+  explicit base_collector(std::unique_ptr<base_sink> sink);
 
-  virtual ~base_metrics_collector(void) = default;
+  virtual ~base_collector(void) = default;
 
   /**
    * \brief Collect metrics from an object which implements the necessary
@@ -77,14 +77,14 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
   void initialize(void);
 
   /**
-   * \see base_metrics_sink::finalize();
+   * \see base_sink::finalize();
    */
   void finalize(void);
 
   /**
-   * \see base_metrics_sink::flush();
+   * \see base_sink::flush();
    */
-  metrics_write_status flush(void);
+  write_status flush(void);
 
   /**
    * \brief Reset metrics at the end of an interval.
@@ -106,6 +106,12 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
    */
   void timestep_inc(void) { m_timestep += 1; }
 
+
+  /**
+   * \brief Get a handle to the gathered data.
+   */
+  virtual const rmetrics::base_data* data(void) const = 0;
+
  protected:
   /**
    * \brief Reset some metrics (possibly).
@@ -114,18 +120,13 @@ class base_metrics_collector : public er::client<base_metrics_collector> {
    */
   virtual void reset_after_interval(void) {}
 
-  /**
-   * \brief Get a handle to the gathered data.
-   */
-  virtual const rmetrics::base_metrics_data* data(void) const = 0;
-
  private:
   /* clang-format off */
-  types::timestep                    m_timestep{0};
-  std::unique_ptr<base_metrics_sink> m_sink;
+  types::timestep            m_timestep{0};
+  std::unique_ptr<base_sink> m_sink;
   /* clang-format on */
 };
 
 NS_END(metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_BASE_METRICS_COLLECTOR_HPP_ */
+#endif /* INCLUDE_RCPPSW_METRICS_BASE_COLLECTOR_HPP_ */

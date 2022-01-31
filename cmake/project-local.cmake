@@ -11,6 +11,10 @@ set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 3)
 set(PROJECT_VERSION_PATCH 0)
 
+if (NOT DEFINED RCPPSW_AL_MT_SAFE_TYPES)
+  set(RCPPSW_AL_MT_SAFE_TYPES YES)
+endif()
+
 ################################################################################
 # Components                                                                   #
 ################################################################################
@@ -183,6 +187,10 @@ target_link_libraries(rcppsw
   pthread
   dl
   )
+if(${RCPPSW_AL_MT_SAFE_TYPES})
+  target_compile_definitions(rcppsw PUBLIC RCPPSW_AL_MT_SAFE_TYPES)
+endif()
+
 if ("${LIBRA_ER}" MATCHES "ALL")
   target_link_directories(rcppsw PUBLIC ${LIBRA_DEPS_PREFIX}/lib)
   target_link_libraries(rcppsw log4cxx)
@@ -211,7 +219,8 @@ message(STATUS "")
 message(STATUS "")
 message(STATUS "RCPPSW Configuration Summary:")
 message(STATUS "")
+message(STATUS "Enable std::atomic types..............: RCPPSW_AL_MT_SAFE_TYPES=${RCPPSW_AL_MT_SAFE_TYPES}")
 
 if(CMAKE_CROSSCOMPILING)
-  message(STATUS "Boost root hint.......................: ${ColorBold}${BOOST_ROOT}${ColorReset}")
+  message(STATUS "Boost root hint.......................: BOOST_ROOT=${BOOST_ROOT}")
 endif()

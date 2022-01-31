@@ -1,7 +1,7 @@
 /**
- * \file grid3D_metrics_data.hpp
+ * \file base_sink.cpp
  *
- * \copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2018 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,39 +18,32 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_
-#define INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/base_data.hpp"
-#include "rcppsw/ds/grid2D.hpp"
-#include "rcppsw/al/multithread.hpp"
+#include "rcppsw/metrics/base_sink.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, metrics);
+NS_START(rcppsw, metrics);
 
 /*******************************************************************************
- * Class Definitions
+ * Constructors/Destructor
  ******************************************************************************/
-/**
- * \interface grid2D_metrics_data
- * \ingroup ds metrics
- *
- * \brief Container for basic metrics gather from \ref rds::grid2D.
- */
-struct grid2D_metrics_data : public rmetrics::base_data {
-  explicit grid2D_metrics_data(const math::vector2z& dims) :
-      grid(dims.x(), dims.y()) {}
+base_sink::base_sink(const rmetrics::output_mode& mode,
+                     const rtypes::timestep& interval)
+    : ER_CLIENT_INIT("rcppsw.metrics.base_sink"),
+      mc_output_mode(mode),
+      mc_output_interval(interval) {}
 
-  rcppsw::ds::grid2D<ral::mt_size_t> grid;
-  ral::mt_size_t                     total_count{0};
+base_sink::~base_sink(void) = default;
 
-};
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+bool base_sink::ready_to_flush(const rtypes::timestep& t) const {
+  return t % mc_output_interval == 0UL;
+} /* ready_to_flush() */
 
-NS_END(metrics, ds, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_ */
+NS_END(metrics, rcppsw);

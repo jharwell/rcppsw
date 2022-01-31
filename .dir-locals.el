@@ -16,6 +16,7 @@
                     (add-to-list 'flycheck-clang-args "-std=c++17")
                     (add-to-list 'flycheck-clang-args (concat "-isystem" (substitute-in-file-name
                                                                           "$localroot/system/include")))
+                    (add-to-list 'flycheck-clang-definitions "LIBRA_ER=LIBRA_ER_ALL")
 
 
                     (setq flycheck-gcc-include-path includes-list)
@@ -23,6 +24,8 @@
                     (add-to-list 'flycheck-gcc-args "-std=c++17")
                     (add-to-list 'flycheck-gcc-args (concat "-isystem" (substitute-in-file-name
                                                                         "$localroot/system/include")))
+
+                    (add-to-list 'flycheck-gcc-definitions "LIBRA_ER=LIBRA_ER_ALL")
                     (let ((cc-search-dirs (list (concat (projectile-project-root) "include/rcppsw/*/*")
                                                 (concat (projectile-project-root) "src/*/*")
                                                 (concat (projectile-project-root) "include"))

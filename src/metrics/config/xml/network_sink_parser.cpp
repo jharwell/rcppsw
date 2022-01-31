@@ -1,7 +1,7 @@
 /**
- * \file grid3D_metrics_data.hpp
+ * \file network_sink_parser.cpp
  *
- * \copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2021 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,39 +18,35 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_
-#define INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/base_data.hpp"
-#include "rcppsw/ds/grid2D.hpp"
-#include "rcppsw/al/multithread.hpp"
+#include "rcppsw/metrics/config/xml/network_sink_parser.hpp"
 
 /*******************************************************************************
- * Namespaces/Decls
+ * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, ds, metrics);
+NS_START(rcppsw, metrics, config, xml);
 
 /*******************************************************************************
- * Class Definitions
+ * Member Functions
  ******************************************************************************/
-/**
- * \interface grid2D_metrics_data
- * \ingroup ds metrics
- *
- * \brief Container for basic metrics gather from \ref rds::grid2D.
- */
-struct grid2D_metrics_data : public rmetrics::base_data {
-  explicit grid2D_metrics_data(const math::vector2z& dims) :
-      grid(dims.x(), dims.y()) {}
+void network_sink_parser::parse(const ticpp::Element& node) {
+  /* This sink may not be used */
+  if (nullptr == node.FirstChild(kXMLRoot, false)) {
+    return;
+  }
+  ER_DEBUG("Parent node=%s: child=%s",
+           node.Value().c_str(),
+           kXMLRoot.c_str());
 
-  rcppsw::ds::grid2D<ral::mt_size_t> grid;
-  ral::mt_size_t                     total_count{0};
+  ticpp::Element mnode = node_get(node, kXMLRoot);
+  m_config = std::make_unique<config_type>();
 
-};
+  if (nullptr != mnode.FirstChild("stream", false)) {
+    output_mode_parse(node_get(mnode, "stream"), &m_config->stream);
+  }
+} /* parse() */
 
-NS_END(metrics, ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_METRICS_GRID2D_METRICS_DATA_HPP_ */
+NS_END(xml, config, metrics, rcppsw);

@@ -1,5 +1,5 @@
 /**
- * \file base_metrics_sink.hpp
+ * \file file_sink.hpp
  *
  * \copyright 2021 John Harwell, All rights reserved.
  *
@@ -18,8 +18,8 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_BASE_METRICS_SINK_HPP_
-#define INCLUDE_RCPPSW_METRICS_BASE_METRICS_SINK_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_FILE_SINK_HPP_
+#define INCLUDE_RCPPSW_METRICS_FILE_SINK_HPP_
 
 /*******************************************************************************
  * Includes
@@ -29,11 +29,7 @@
 #include <string>
 #include <filesystem>
 
-#include "rcppsw/er/client.hpp"
-#include "rcppsw/metrics/metrics_write_status.hpp"
-#include "rcppsw/metrics/output_mode.hpp"
-#include "rcppsw/types/timestep.hpp"
-#include "rcppsw/metrics/base_metrics_data.hpp"
+#include "rcppsw/metrics/base_sink.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -46,58 +42,26 @@ NS_START(rcppsw, metrics);
  * Class Definitions
  ******************************************************************************/
 /**
- * \class base_metrics_sink
+ * \class file_sink
  * \ingroup metrics
  *
- * \brief Base class that uses the template design pattern to provide hooks for
- * derived classes so that the process of writing out collected metrics is
- * centralized in one place (here).
- *
- * Metrics are written out in .csv format at whatever frequency derived classes
- * choose.
+ * \brief Base class for all metrics which are to be written out to a file.
  */
-class base_metrics_sink : public er::client<base_metrics_sink> {
+class file_sink : public rer::client<file_sink>,
+                  public rmetrics::base_sink {
  public:
   /**
    * \param fpath Full path to output file, including the extension.
    * \param mode The output mode. See \ref output_mode for possible values.
    * \param interval Metric output interval.
    */
-  base_metrics_sink(fs::path fpath,
-                    const enum output_mode& mode,
-                    const rtypes::timestep& interval);
+  file_sink(fs::path fpath,
+            const rmetrics::output_mode& mode,
+            const rtypes::timestep& interval);
 
-  virtual ~base_metrics_sink(void);
-
-  /**
-   * \brief Initialize any required files for the metrics sink (i.e., .csv
-   * headers).
-   */
-  virtual void initialize(const rmetrics::base_metrics_data* data) = 0;
-
-  /**
-   * \brief Finalize metrics and flush files in preparation for program exit.
-   */
-  virtual void finalize(void) = 0;
-
-  /**
-   * \brief Flush gathered metrics data to file; might do nothing if the
-   * internal conditions for writing metrics (e.g., the configured interval) are
-   * not met.
-   */
-  virtual metrics_write_status flush(const rmetrics::base_metrics_data* data,
-                                     const rtypes::timestep& t) = 0;
-
-  /**
-   * \brief Have the conditions been met to flush the metrics ?
-   */
-  bool ready_to_flush(const rtypes::timestep& t) const RCPPSW_PURE;
+  virtual ~file_sink(void);
 
   const fs::path& fpath(void) const { return mc_fpath; }
-  const enum output_mode& output_mode(void) const { return mc_output_mode; }
-  const rtypes::timestep& output_interval(void) const {
-    return mc_output_interval;
-  }
 
  protected:
   std::ofstream* ofile(void) { return m_ofile.get(); }
@@ -117,8 +81,6 @@ class base_metrics_sink : public er::client<base_metrics_sink> {
 
   /* clang-format off */
   const fs::path                 mc_fpath;
-  const rmetrics::output_mode    mc_output_mode;
-  const rtypes::timestep         mc_output_interval;
 
   std::unique_ptr<std::ofstream> m_ofile;
   /* clang-format on */
@@ -126,4 +88,4 @@ class base_metrics_sink : public er::client<base_metrics_sink> {
 
 NS_END(metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_BASE_METRICS_SINK_HPP_ */
+#endif /* INCLUDE_RCPPSW_METRICS_FILE_SINK_HPP_ */

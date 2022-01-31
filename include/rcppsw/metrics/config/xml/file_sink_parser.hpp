@@ -1,5 +1,5 @@
 /**
- * \file metrics_parser.hpp
+ * \file file_sink_parser.hpp
  *
  * \copyright 2021 John Harwell, All rights reserved.
  *
@@ -18,22 +18,18 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_CONFIG_XML_METRICS_PARSER_HPP_
-#define INCLUDE_RCPPSW_METRICS_CONFIG_XML_METRICS_PARSER_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_CONFIG_XML_FILE_SINK_PARSER_HPP_
+#define INCLUDE_RCPPSW_METRICS_CONFIG_XML_FILE_SINK_PARSER_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <list>
 #include <memory>
 #include <string>
 
-#include "rcppsw/config/xml/xml_config_parser.hpp"
-#include "rcppsw/metrics/config/xml/file_sink_parser.hpp"
-#include "rcppsw/metrics/config/xml/network_sink_parser.hpp"
+#include "rcppsw/metrics/config/xml/base_sink_parser.hpp"
 
-#include "rcppsw/metrics/config/metrics_config.hpp"
-#include "rcppsw/rcppsw.hpp"
+#include "rcppsw/metrics/config/file_sink_config.hpp"
 
 /*******************************************************************************
  * Namespaces
@@ -44,27 +40,27 @@ NS_START(rcppsw, metrics, config, xml);
  * Class Definitions
  ******************************************************************************/
 /**
- * \class metrics_parser
+ * \class file_sink_parser
  * \ingroup metrics config xml
  *
- * \brief Parses XML parameters related to metric collection into
- * \ref metrics_config.
+ * \brief Parses XML parameters related to the \ref rmetrics::file_sink  into
+ * \ref file_sink_config.
  */
-class metrics_parser : public rer::client<metrics_parser>,
-                       public rconfig::xml::xml_config_parser {
+class file_sink_parser : public rer::client<file_sink_parser>,
+                         public rmetrics::config::xml::base_sink_parser {
  public:
-  using config_type = metrics_config;
+  using config_type = file_sink_config;
 
-  metrics_parser(void)
-      : ER_CLIENT_INIT("rcppsw.metrics.config.xml.metrics_parser") {}
+  file_sink_parser(void)
+      : ER_CLIENT_INIT("rcppsw.metrics.config.xml.file_sink_parser") {}
 
-  ~metrics_parser(void) override = default;
+  ~file_sink_parser(void) override = default;
 
   /**
-   * \brief The root tag that all loop functions relating to metrics parameters
-   * should lie under in the XML tree.
+   * \brief The root tag that all configuration relating to the .file metrics
+   * sink should in lie under in the XML tree.
    */
-  static inline const std::string kXMLRoot = "metrics";
+  static inline const std::string kXMLRoot = "file";
 
   void parse(const ticpp::Element& node) override RCPPSW_COLD;
 
@@ -77,11 +73,9 @@ class metrics_parser : public rer::client<metrics_parser>,
 
   /* clang-format off */
   std::unique_ptr<config_type> m_config{nullptr};
-  rmcxml::file_sink_parser     m_csv_sinks{};
-  rmcxml::file_sink_parser     m_network_sinks{};
   /* clang-format on */
 };
 
 NS_END(xml, config, metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_CONFIG_XML_METRICS_PARSER_HPP_ */
+#endif /* INCLUDE_RCPPSW_METRICS_CONFIG_XML_FILE_SINK_PARSER_HPP_ */

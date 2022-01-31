@@ -24,8 +24,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/base_metrics_data.hpp"
+#include "rcppsw/metrics/base_data.hpp"
 #include "rcppsw/ds/grid3D.hpp"
+#include "rcppsw/al/multithread.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -41,13 +42,12 @@ NS_START(rcppsw, ds, metrics);
  *
  * \brief Container for basic metrics gather from \ref rds::grid3D.
  */
-struct grid3D_metrics_data : public rmetrics::base_metrics_data {
+struct grid3D_metrics_data : public rmetrics::base_data {
   explicit grid3D_metrics_data(const math::vector3z& dims) :
       grid(dims.x(), dims.y(), dims.z()) {}
 
-  rcppsw::ds::grid3D<size_t> grid;
-  size_t                     total_count{0};
-
+  rcppsw::ds::grid3D<ral::mt_size_t> grid;
+  ral::mt_size_t                     total_count{0};
 };
 
 NS_END(metrics, ds, rcppsw);

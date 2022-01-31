@@ -1,7 +1,7 @@
 /**
- * \file base_metrics_data.hpp
+ * \file network_sink_config.hpp
  *
- * \copyright 2017 John Harwell, All rights reserved.
+ * \copyright 2021 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,34 +18,33 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_BASE_METRICS_DATA_HPP_
-#define INCLUDE_RCPPSW_METRICS_BASE_METRICS_DATA_HPP_
+#ifndef INCLUDE_RCPPSW_METRICS_CONFIG_NETWORK_SINK_CONFIG_HPP_
+#define INCLUDE_RCPPSW_METRICS_CONFIG_NETWORK_SINK_CONFIG_HPP_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/rcppsw.hpp"
+#include "rcppsw/config/base_config.hpp"
+#include "rcppsw/metrics/config/output_mode_config.hpp"
 
 /*******************************************************************************
- * Namespaces/Decls
+ * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+NS_START(rcppsw, metrics, config);
 
 /*******************************************************************************
- * Class Definitions
+ * Structure Definitions
  ******************************************************************************/
 /**
- * \interface base_metrics_data
- * \ingroup metrics
+ * \struct network_sink_config
+ * \ingroup metrics config
  *
- * \brief Base class for the containers of data extracted through classes
- * derived from \ref base_metrics.
+ * \brief Configuration for metrics which will/can be output to the network.
  */
-struct base_metrics_data {
-  base_metrics_data(void) = default;
-  virtual ~base_metrics_data(void) = default;
+struct network_sink_config final : public rconfig::base_config {
+  rmetrics::config::output_mode_config stream{};
 };
 
-NS_END(metrics, rcppsw);
+NS_END(config, metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_BASE_METRICS_DATA_HPP_ */
+#endif /* INCLUDE_RCPPSW_METRICS_CONFIG_NETWORK_SINK_CONFIG_HPP_ */

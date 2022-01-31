@@ -31,7 +31,7 @@
 #include <memory>
 
 #include "rcppsw/metrics/output_mode.hpp"
-#include "rcppsw/metrics/base_metrics_sink.hpp"
+#include "rcppsw/metrics/base_sink.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -44,9 +44,10 @@ NS_START(rcppsw, metrics);
 /**
  * \brief The data needed to create an enabled collector.
  */
+template<typename TSink>
 struct collector_registration_spec {
-  bool                                         is_enabled{false};
-  std::unique_ptr<rmetrics::base_metrics_sink> sink{};
+  bool                   is_enabled{false};
+  std::unique_ptr<TSink> sink{};
 };
 
 /**

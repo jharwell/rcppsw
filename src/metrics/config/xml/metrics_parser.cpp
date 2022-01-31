@@ -48,12 +48,18 @@ void metrics_parser::parse(const ticpp::Element& node) {
 
 
   ticpp::Element snode = node_get(mnode, "sinks");
-  if (nullptr != snode.FirstChild(m_csv_sink.xml_root(), false)) {
-    m_csv_sink.parse(snode);
+  if (nullptr != snode.FirstChild(m_csv_sinks.xml_root(), false)) {
+    m_csv_sinks.parse(snode);
+  }
+  if (nullptr != snode.FirstChild(m_network_sinks.xml_root(), false)) {
+    m_network_sinks.parse(snode);
   }
 
-  if (m_csv_sink.is_parsed()) {
-    m_config->csv = *m_csv_sink.config_get<rmcxml::csv_sink_parser::config_type>();
+  if (m_csv_sinks.is_parsed()) {
+    m_config->csv = *m_csv_sinks.config_get<rmcxml::file_sink_parser::config_type>();
+  }
+  if (m_network_sinks.is_parsed()) {
+    m_config->network = *m_network_sinks.config_get<rmcxml::network_sink_parser::config_type>();
   }
 } /* parse() */
 

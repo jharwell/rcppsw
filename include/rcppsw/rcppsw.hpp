@@ -177,6 +177,7 @@ namespace multithread {}
  */
 namespace multiprocess {}
 
+namespace al {}
 } /* namespace rcppsw */
 
 namespace rmetrics = rcppsw::metrics;
@@ -200,6 +201,8 @@ namespace raclustering = ralgorithm::clustering;
 namespace rds = rcppsw::ds;
 namespace rdmetrics = rds::metrics;
 namespace rdgraph = rds::graph;
+
+namespace ral = rcppsw::al;
 
 namespace rpfsm = rcppsw::patterns::fsm;
 namespace rpvisitor = rcppsw::patterns::visitor;
