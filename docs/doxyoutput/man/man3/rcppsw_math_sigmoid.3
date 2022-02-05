@@ -1,0 +1,76 @@
+.TH "rcppsw::math::sigmoid" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math::sigmoid \- Encapsulates base aspects common to all sigmoid functions; does not calculate anything itself, as derived sigmoids each have different input parameter requirements to calculate the value of the function at a point in space\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <sigmoid\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::math::expression< double >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsigmoid\fP (const \fBconfig::sigmoid_config\fP *const config)"
+.br
+.RI "Construct the sigmoid using parameters\&. "
+.ti -1c
+.RI "\fBsigmoid\fP (double \fBreactivity\fP, double \fBoffset\fP, double \fBgamma\fP)"
+.br
+.RI "Construct the sigmoid by passing each parameter explicitly\&. Note that they are all of the same type, and therefore ordering is important\&. "
+.ti -1c
+.RI "\fBsigmoid\fP (void)=default"
+.br
+.ti -1c
+.RI "void \fBinit\fP (double \fBreactivity\fP, double \fBoffset\fP, double \fBgamma\fP)"
+.br
+.RI "Initialize the sigmoid after construction\&. Needed if the sigmoid is just one of many functions a class may use during its internal operations, and the selection must be performed after construction of the enclosing class\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "double \fBgamma\fP (void) const"
+.br
+.ti -1c
+.RI "double \fBoffset\fP (void) const"
+.br
+.ti -1c
+.RI "double \fBreactivity\fP (void) const"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Encapsulates base aspects common to all sigmoid functions; does not calculate anything itself, as derived sigmoids each have different input parameter requirements to calculate the value of the function at a point in space\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::math::sigmoid::sigmoid (void)\fC [default]\fP"
+
+.SS "rcppsw::math::sigmoid::sigmoid (const \fBconfig::sigmoid_config\fP *const config)\fC [inline]\fP, \fC [explicit]\fP"
+
+.PP
+Construct the sigmoid using parameters\&. 
+.SS "rcppsw::math::sigmoid::sigmoid (double reactivity, double offset, double gamma)\fC [inline]\fP"
+
+.PP
+Construct the sigmoid by passing each parameter explicitly\&. Note that they are all of the same type, and therefore ordering is important\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "double rcppsw::math::sigmoid::gamma (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "void rcppsw::math::sigmoid::init (double reactivity, double offset, double gamma)\fC [inline]\fP"
+
+.PP
+Initialize the sigmoid after construction\&. Needed if the sigmoid is just one of many functions a class may use during its internal operations, and the selection must be performed after construction of the enclosing class\&. 
+.SS "double rcppsw::math::sigmoid::offset (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "double rcppsw::math::sigmoid::reactivity (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,425 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1ds_1_1rtree" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::ds::rtree</compoundname>
+    <basecompoundref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" prot="private" virt="non-virtual">rcppsw::patterns::decorator::decorator&lt; TSpecType::tree_type &gt;</basecompoundref>
+    <includes refid="rtree_8hpp" local="no">rtree.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TSpecType</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1rtree_1a7c64c4a1254c2434d2bbea4927fef923" prot="public" static="no">
+        <type>typename spec_type::coord_type</type>
+        <definition>using rcppsw::ds::rtree&lt; TSpecType &gt;::coord_type =  typename spec_type::coord_type</definition>
+        <argsstring></argsstring>
+        <name>coord_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="119" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1rtree_1ace1800dafdf6daed6b6c2bd153d405f5" prot="public" static="no">
+        <type>typename spec_type::element_type</type>
+        <definition>using rcppsw::ds::rtree&lt; TSpecType &gt;::element_type =  typename spec_type::element_type</definition>
+        <argsstring></argsstring>
+        <name>element_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="117" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1rtree_1ad793e193bdeba029bd2a8eefcfd4a33d" prot="public" static="no">
+        <type>typename spec_type::geometry_type</type>
+        <definition>using rcppsw::ds::rtree&lt; TSpecType &gt;::geometry_type =  typename spec_type::geometry_type</definition>
+        <argsstring></argsstring>
+        <name>geometry_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="118" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1rtree_1a9839a5d4fa134589d676b55df649ccda" prot="public" static="no">
+        <type>TSpecType</type>
+        <definition>using rcppsw::ds::rtree&lt; TSpecType &gt;::spec_type =  TSpecType</definition>
+        <argsstring></argsstring>
+        <name>spec_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="115" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1rtree_1a87914a1ab6098b747e35067e44afc883" prot="public" static="no">
+        <type>typename spec_type::value_type</type>
+        <definition>using rcppsw::ds::rtree&lt; TSpecType &gt;::value_type =  typename spec_type::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="116" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1a4c918a9326f3a831ee698e4f0ba03d58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::rtree&lt; TSpecType &gt;::rtree</definition>
+        <argsstring>(const rtree &amp;)=delete</argsstring>
+        <name>rtree</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1rtree" kindref="compound">rtree</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="125" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1ab38cad0f92eceb522bfd10ea76efe365" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::rtree&lt; TSpecType &gt;::rtree</definition>
+        <argsstring>(rtree &amp;&amp;)=delete</argsstring>
+        <name>rtree</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1ds_1_1rtree" kindref="compound">rtree</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="127" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1aa4de5f185c7e9701e0496c9c0e1a97d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::rtree&lt; TSpecType &gt;::rtree</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>rtree</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="122" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1a773b98e704f7ddb7483516b38ad73818" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::ds::rtree&lt; TSpecType &gt;::contains</definition>
+        <argsstring>(const value_type &amp;key) const</argsstring>
+        <name>contains</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1rtree_1a87914a1ab6098b747e35067e44afc883" kindref="member">value_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Query the tree to see if <computeroutput>key</computeroutput> is found in the tree. This query does not take advantage of tree properties, and is O(N). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="170" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="170" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1a65cf686ea1ae2627b8d42bcce8be0ddf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::ds::rtree&lt; TSpecType &gt;::insert</definition>
+        <argsstring>(const value_type &amp;value, const geometry_type &amp;key)</argsstring>
+        <name>insert</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1rtree_1a87914a1ab6098b747e35067e44afc883" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1rtree_1ad793e193bdeba029bd2a8eefcfd4a33d" kindref="member">geometry_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Insert the <computeroutput>key</computeroutput> into the tree, which will be placed into the tree according to its rectangle defined by <computeroutput>ll</computeroutput>, <computeroutput>ur</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="182" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="182" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1a251ac583c53d6807ffb9c1b48f3f0c01" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classrcppsw_1_1ds_1_1rtree_1a87914a1ab6098b747e35067e44afc883" kindref="member">value_type</ref> &gt;</type>
+        <definition>std::vector&lt;value_type&gt; rcppsw::ds::rtree&lt; TSpecType &gt;::intersections</definition>
+        <argsstring>(const rtree_box&lt; coord_type &gt; &amp;query) const</argsstring>
+        <name>intersections</name>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1ds_1ab6204211b4072bc13dc807ed29c4119e" kindref="member">rtree_box</ref>&lt; <ref refid="classrcppsw_1_1ds_1_1rtree_1a7c64c4a1254c2434d2bbea4927fef923" kindref="member">coord_type</ref> &gt; &amp;</type>
+          <declname>query</declname>
+        </param>
+        <briefdescription>
+<para>Query the tree to figure out how many objects intersect the rectangle <computeroutput>query</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="134" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="134" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1a5d295fd83ae5297e278b724bbe1e92ca" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classrcppsw_1_1ds_1_1rtree_1a87914a1ab6098b747e35067e44afc883" kindref="member">value_type</ref> &gt;</type>
+        <definition>std::vector&lt;value_type&gt; rcppsw::ds::rtree&lt; TSpecType &gt;::nearest</definition>
+        <argsstring>(const rtree_point&lt; coord_type &gt; &amp;query, size_t k) const</argsstring>
+        <name>nearest</name>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1ds_1a54d5b03ae8dd86c3ba54653e4713325e" kindref="member">rtree_point</ref>&lt; <ref refid="classrcppsw_1_1ds_1_1rtree_1a7c64c4a1254c2434d2bbea4927fef923" kindref="member">coord_type</ref> &gt; &amp;</type>
+          <declname>query</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+<para>Query the tree to find the <computeroutput>k</computeroutput> nearest objects to <computeroutput>point</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="151" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="151" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1a11e26ad5a252a429e4e07ab3f800bbaf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classrcppsw_1_1ds_1_1rtree" kindref="compound">rtree</ref> &amp;</type>
+        <definition>const rtree&amp; rcppsw::ds::rtree&lt; TSpecType &gt;::operator=</definition>
+        <argsstring>(const rtree &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1rtree" kindref="compound">rtree</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="126" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1aba93e1a3a67019c840f90e19dd5ee682" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1ds_1_1rtree" kindref="compound">rtree</ref> &amp;</type>
+        <definition>rtree&amp; rcppsw::ds::rtree&lt; TSpecType &gt;::operator=</definition>
+        <argsstring>(rtree &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1ds_1_1rtree" kindref="compound">rtree</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="128" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1ae5ca1a2ef5598bf906647c9ab774617d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::rtree&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(begin, const)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type>begin</type>
+        </param>
+        <param>
+          <type>const</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="210" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1ac3edf4479b072eb112914fa1b4135d56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::rtree&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(end, const)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type>end</type>
+        </param>
+        <param>
+          <type>const</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="211" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1aa63319e075ce6eed5cdf9ad455fca97e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::rtree&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(insert)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1ds_1_1rtree_1a65cf686ea1ae2627b8d42bcce8be0ddf" kindref="member">insert</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="209" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1a3b86c0295c499d526cc86d6978669c4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::rtree&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(size, const)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type>size</type>
+        </param>
+        <param>
+          <type>const</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="212" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1a0a5e061d3ed4cc55a93174110837c62d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t rcppsw::ds::rtree&lt; TSpecType &gt;::remove</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>remove</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1rtree_1a87914a1ab6098b747e35067e44afc883" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Remove the <computeroutput>key</computeroutput> and its associated rectangle from the tree. Does not take advantage of tree properties, and therefore is O(N). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The # of items removed (0 or 1). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="192" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="192" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1rtree_1ab20cf99176a0cf4861b6474b6cb6bde1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t rcppsw::ds::rtree&lt; TSpecType &gt;::remove</definition>
+        <argsstring>(const value_type &amp;value, const geometry_type &amp;key)</argsstring>
+        <name>remove</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1rtree_1a87914a1ab6098b747e35067e44afc883" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1rtree_1ad793e193bdeba029bd2a8eefcfd4a33d" kindref="member">geometry_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Remove the <computeroutput>key</computeroutput> and its associated rectangle from the tree. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The # of items removed (0 or 1). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="205" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="205" bodyend="207"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Wrapper around boost::geometry::index::rtree to provide very fast queries of the form &quot;How many things are in this  area&quot;, and reasonably fast tree build times as well. That is, this class is intended for applications in which large trees are built, queried frequently and updated relatively infrequently. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TSpecType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The specification for the rtree of type <ref refid="structrcppsw_1_1ds_1_1rtree__spec" kindref="compound">rtree_spec</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::ds::rtree&lt; TSpecType &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1rtree"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::decorator::decorator&lt; TSpecType::tree_type &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::ds::rtree&lt; TSpecType &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1rtree"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::decorator::decorator&lt; TSpecType::tree_type &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="113" column="45" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="113" bodyend="213"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1a773b98e704f7ddb7483516b38ad73818" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>contains</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1a7c64c4a1254c2434d2bbea4927fef923" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>coord_type</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1ace1800dafdf6daed6b6c2bd153d405f5" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>element_type</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1ad793e193bdeba029bd2a8eefcfd4a33d" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>geometry_type</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1a65cf686ea1ae2627b8d42bcce8be0ddf" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>insert</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1a251ac583c53d6807ffb9c1b48f3f0c01" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>intersections</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1a5d295fd83ae5297e278b724bbe1e92ca" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>nearest</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1a11e26ad5a252a429e4e07ab3f800bbaf" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1aba93e1a3a67019c840f90e19dd5ee682" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a0f947db92e941d973426b19c1aa1fa9c" prot="private" virt="non-virtual" ambiguityscope="decorator&lt; TSpecType::tree_type &gt;::"><scope>rcppsw::ds::rtree</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1aa7dcaa3ec447cb1af590f4a64de10b09" prot="private" virt="non-virtual" ambiguityscope="decorator&lt; TSpecType::tree_type &gt;::"><scope>rcppsw::ds::rtree</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1aa63319e075ce6eed5cdf9ad455fca97e" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1ae5ca1a2ef5598bf906647c9ab774617d" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1ac3edf4479b072eb112914fa1b4135d56" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1a3b86c0295c499d526cc86d6978669c4b" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1a0a5e061d3ed4cc55a93174110837c62d" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>remove</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1ab20cf99176a0cf4861b6474b6cb6bde1" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>remove</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1aa4de5f185c7e9701e0496c9c0e1a97d1" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>rtree</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1a4c918a9326f3a831ee698e4f0ba03d58" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>rtree</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1ab38cad0f92eceb522bfd10ea76efe365" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>rtree</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1a9839a5d4fa134589d676b55df649ccda" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>spec_type</name></member>
+      <member refid="classrcppsw_1_1ds_1_1rtree_1a87914a1ab6098b747e35067e44afc883" prot="public" virt="non-virtual"><scope>rcppsw::ds::rtree</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

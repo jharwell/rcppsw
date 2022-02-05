@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="lockable_8hpp" kind="file" language="C++">
+    <compoundname>lockable.hpp</compoundname>
+    <includes local="no">shared_mutex</includes>
+    <includes refid="rcppsw_8hpp" local="yes">rcppsw/rcppsw.hpp</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="4">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
+      <node id="3">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp</label>
+        <link refid="lockable_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>shared_mutex</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classrcppsw_1_1multithread_1_1lockable" prot="public">rcppsw::multithread::lockable</innerclass>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1multithread">rcppsw::multithread</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2020 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="21"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_MULTITHREAD_LOCKABLE_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_MULTITHREAD_LOCKABLE_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;shared_mutex&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="rcppsw_8hpp" kindref="compound">rcppsw/rcppsw.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="namespacercppsw_1_1multithread" refkind="compound"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>multithread);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*<sp/>Class<sp/>Definitions</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="47"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref><sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>~<ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="51" refid="classrcppsw_1_1multithread_1_1lockable" refkind="compound"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*<sp/>Not<sp/>move/copy<sp/>constructable/assignable<sp/>by<sp/>default<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref>(<ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref>&amp;<sp/>operator=(<ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>maybe_lock_wr(std::shared_mutex*<sp/>mtx,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>cond)<sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cond)<sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>mtx-&gt;lock();</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="65" refid="classrcppsw_1_1multithread_1_1lockable_1ac5f9bff5360285c3e54d4e2cf48f46a9" refkind="member"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>maybe_unlock_wr(std::shared_mutex*<sp/>mtx,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>cond)<sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cond)<sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>mtx-&gt;unlock();</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74" refid="classrcppsw_1_1multithread_1_1lockable_1a3d04959c9167145978422a66c2737309" refkind="member"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>maybe_lock_rd(std::shared_mutex*<sp/>mtx,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>cond)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cond)<sp/>{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>mtx-&gt;lock_shared();</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="84" refid="classrcppsw_1_1multithread_1_1lockable_1a75286e74c37a908615a7a4c57ca95ceb" refkind="member"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>maybe_unlock_rd(std::shared_mutex*<sp/>mtx,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>cond)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cond)<sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>mtx-&gt;unlock_shared();</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="93" refid="classrcppsw_1_1multithread_1_1lockable_1a812f2cfd92e4137de647320f265d34bd" refkind="member"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>lock_wr(std::shared_mutex*<sp/>mtx)<sp/>{<sp/>maybe_lock_wr(mtx,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>unlock_wr(std::shared_mutex*<sp/>mtx)<sp/>{<sp/>maybe_unlock_wr(mtx,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>lock_rd(std::shared_mutex*<sp/>mtx)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/>maybe_lock_rd(mtx,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>unlock_rd(std::shared_mutex*<sp/>mtx)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/>maybe_unlock_rd(mtx,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
+<codeline lineno="114"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(multithread,<sp/><ref refid="namespacercppsw" kindref="compound">rcppsw</ref>);</highlight></codeline>
+<codeline lineno="117" refid="classrcppsw_1_1multithread_1_1lockable_1a6f7ebdb93c8940e99dd08302cfbae919" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_MULTITHREAD_LOCKABLE_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp"/>
+  </compounddef>
+</doxygen>

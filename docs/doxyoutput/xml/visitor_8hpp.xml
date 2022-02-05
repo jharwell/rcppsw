@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="visitor_8hpp" kind="file" language="C++">
+    <compoundname>visitor.hpp</compoundname>
+    <includes local="no">utility</includes>
+    <includes local="no">boost/variant/static_visitor.hpp</includes>
+    <includes refid="rcppsw_8hpp" local="yes">rcppsw/rcppsw.hpp</includes>
+    <includes refid="typelist_8hpp" local="yes">rcppsw/mpl/typelist.hpp</includes>
+    <incdepgraph>
+      <node id="14">
+        <label>boost/mpl/vector.hpp</label>
+      </node>
+      <node id="15">
+        <label>boost/mpl/set.hpp</label>
+      </node>
+      <node id="18">
+        <label>boost/tuple/tuple.hpp</label>
+      </node>
+      <node id="7">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="5">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>boost/mpl/empty.hpp</label>
+      </node>
+      <node id="6">
+        <label>string</label>
+      </node>
+      <node id="13">
+        <label>boost/mpl/transform.hpp</label>
+      </node>
+      <node id="4">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>boost/mpl/contains.hpp</label>
+      </node>
+      <node id="16">
+        <label>boost/utility/enable_if.hpp</label>
+      </node>
+      <node id="2">
+        <label>utility</label>
+      </node>
+      <node id="3">
+        <label>boost/variant/static_visitor.hpp</label>
+      </node>
+      <node id="10">
+        <label>rcppsw/mpl/typelist.hpp</label>
+        <link refid="typelist_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp</label>
+        <link refid="visitor_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>boost/mpl/joint_view.hpp</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classfiltered__visitor" prot="public">filtered_visitor</innerclass>
+    <innerclass refid="classprecise__visitor" prot="public">precise_visitor</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1visit__set__helper" prot="public">rcppsw::patterns::visitor::detail::visit_set_helper</innerclass>
+    <innerclass refid="classvisit__set" prot="public">visit_set</innerclass>
+    <innerclass refid="classvisit__set_3_01T_01_4" prot="public">visit_set&lt; T &gt;</innerclass>
+    <innerclass refid="classvisit__set_3_01T_00_01Ts_8_8_8_01_4" prot="public">visit_set&lt; T, Ts... &gt;</innerclass>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns">rcppsw::patterns</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns_1_1visitor">rcppsw::patterns::visitor</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns_1_1visitor_1_1detail">rcppsw::patterns::visitor::detail</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="visitor_8hpp_1aee3c2fb91be50db41b47fe05b0d51285" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename ...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>mpl::typelist&lt; Args... &gt;</type>
+        <definition>using precise_visit_set =  mpl::typelist&lt;Args...&gt;</definition>
+        <argsstring></argsstring>
+        <name>precise_visit_set</name>
+        <briefdescription>
+<para>List of types specifying the set of visitors that a <ref refid="classprecise__visitor" kindref="compound">precise_visitor</ref> will be able to visit. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" line="105" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2017 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="21"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITOR_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITOR_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/variant/static_visitor.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="rcppsw_8hpp" kindref="compound">rcppsw/rcppsw.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="typelist_8hpp" kindref="compound">rcppsw/mpl/typelist.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>patterns,<sp/>visitor,<sp/>detail);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>*<sp/>Class<sp/>Definitions</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">visit_set_helper<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>visit(T&amp;<sp/>visitee)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>~visit_set_helper(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="56" refid="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1visit__set__helper" refkind="compound"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(detail);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Ts&gt;</highlight></codeline>
+<codeline lineno="68" refid="classvisit__set" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classvisit__set" kindref="compound">visit_set</ref><sp/>{};</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Ts&gt;</highlight></codeline>
+<codeline lineno="79" refid="classvisit__set_3_01T_00_01Ts_8_8_8_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classvisit__set" kindref="compound">visit_set</ref>&lt;T,<sp/>Ts...&gt;:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>detail::visit_set_helper&lt;T&gt;,</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classvisit__set" kindref="compound">visit_set</ref>&lt;Ts...&gt;<sp/>{</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>detail::visit_set_helper&lt;T&gt;::visit;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classvisit__set" kindref="compound">visit_set</ref>&lt;Ts...&gt;::visit;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="93" refid="classvisit__set_3_01T_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classvisit__set" kindref="compound">visit_set</ref>&lt;T&gt;:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>detail::visit_set_helper&lt;T&gt;<sp/>{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>detail::visit_set_helper&lt;T&gt;::visit;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>...Args&gt;</highlight></codeline>
+<codeline lineno="105" refid="visitor_8hpp_1aee3c2fb91be50db41b47fe05b0d51285" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="visitor_8hpp_1aee3c2fb91be50db41b47fe05b0d51285" kindref="member">precise_visit_set</ref><sp/>=<sp/><ref refid="namespacercppsw_1_1mpl_1a087641491e12b257b1c6ecf5414aa192" kindref="member">mpl::typelist</ref>&lt;Args...&gt;;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>VisitorImpl,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TypeList&gt;</highlight></codeline>
+<codeline lineno="133" refid="classprecise__visitor" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classprecise__visitor" kindref="compound">precise_visitor</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>VisitorImpl,</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal"><sp/>boost::static_visitor&lt;void&gt;<sp/>{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>VisitorImpl::VisitorImpl;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
+<codeline lineno="138" refid="classprecise__visitor_1abbbbd393bff9e9c8ceea813b45b90b55" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classprecise__visitor_1abbbbd393bff9e9c8ceea813b45b90b55" kindref="member">precise_visitor</ref>(Args&amp;&amp;...<sp/>args)</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>VisitorImpl(std::forward&lt;Args&gt;(args)...)<sp/>{}</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="typelist_8hpp_1a30edd63818e9cff35a4db192dc8af59f" kindref="member">RCPPSW_SFINAE_TYPELIST_REQUIRE</ref>(TypeList,<sp/>T),</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>...Args&gt;</highlight></codeline>
+<codeline lineno="148" refid="classprecise__visitor_1a480f3254456f2f9b806bf09d37629aab" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classprecise__visitor_1a480f3254456f2f9b806bf09d37629aab" kindref="member">visit</ref>(T&amp;<sp/>visitee,<sp/>Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>VisitorImpl::visit(visitee,<sp/>std::forward&lt;Args&gt;(args)...);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="151"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TVisitor&gt;</highlight></codeline>
+<codeline lineno="170" refid="classfiltered__visitor" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classfiltered__visitor" kindref="compound">filtered_visitor</ref><sp/>{</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="172" refid="classfiltered__visitor_1a1ca5a707ffff72c6a526a5b99d0833aa" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classfiltered__visitor_1a1ca5a707ffff72c6a526a5b99d0833aa" kindref="member">visitor_type</ref><sp/>=<sp/>TVisitor;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...Args&gt;</highlight></codeline>
+<codeline lineno="174" refid="classfiltered__visitor_1a38febe87bb67000cba89db253018298e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classfiltered__visitor_1a38febe87bb67000cba89db253018298e" kindref="member">filtered_visitor</ref>(Args&amp;&amp;<sp/>...args)</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_impl(std::forward&lt;Args&gt;(args)...)<sp/>{}</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TAny,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>...Args&gt;</highlight></codeline>
+<codeline lineno="178" refid="classfiltered__visitor_1a64161f17809797db29b51c0f5a7c893d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classfiltered__visitor_1a64161f17809797db29b51c0f5a7c893d" kindref="member">visit</ref>(TAny&amp;<sp/>obj,<sp/>Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>m_impl.<ref refid="classprecise__visitor_1a480f3254456f2f9b806bf09d37629aab" kindref="member">visit</ref>(obj,<sp/>std::forward&lt;Args&gt;(args)...);</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><ref refid="classprecise__visitor" kindref="compound">precise_visitor&lt;TVisitor, typename TVisitor::visit_typelist&gt;</ref><sp/>m_impl;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>patterns,<sp/>visitor);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_PATTERNS_VISITOR_VISITOR_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp"/>
+  </compounddef>
+</doxygen>

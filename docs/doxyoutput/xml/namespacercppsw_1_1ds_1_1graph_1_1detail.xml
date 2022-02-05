@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1ds_1_1graph_1_1detail" kind="namespace" language="C++">
+    <compoundname>rcppsw::ds::graph::detail</compoundname>
+    <innerclass refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__builder" prot="public">rcppsw::ds::graph::detail::hgrid3D_view_builder</innerclass>
+    <innerclass refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter" prot="public">rcppsw::ds::graph::detail::hgrid3D_view_filter</innerclass>
+    <innerclass refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1is__decorator" prot="public">rcppsw::ds::graph::detail::is_decorator</innerclass>
+    <innerclass refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1is__decorator_3_01T_00_01std_1_1void__t_3_01decltype_0797869b44197aeec6ced20fc5796ab80b" prot="public">rcppsw::ds::graph::detail::is_decorator&lt; T, std::void_t&lt; decltype(std::declval&lt; T &gt;().decoratee())&gt; &gt;</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacercppsw_1_1ds_1_1graph_1_1detail_1a2c9bda01f8c338e7729fe49a9bedb89c" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename TBGLGraphType</type>
+          </param>
+        </templateparamlist>
+        <type>typename std::add_pointer&lt; decltype(std::declval&lt; TBGLGraphType &gt;().operator[](std::declval&lt; typename TBGLGraphType::vertex_descriptor &gt;())) &gt;::type</type>
+        <definition>using rcppsw::ds::graph::detail::find_result_type = typedef typename std::add_pointer&lt; decltype(std::declval&lt;TBGLGraphType&gt;().operator[](std::declval&lt;typename TBGLGraphType::vertex_descriptor&gt;())) &gt;::type</definition>
+        <argsstring></argsstring>
+        <name>find_result_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graph.hpp" line="44" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graph.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graph.hpp" line="37" column="38"/>
+  </compounddef>
+</doxygen>

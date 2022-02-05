@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::ds::graph::detail::hgrid3D_view_filter</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; hgrid3D_view_filter&lt; TSpecType &gt; &gt;</basecompoundref>
+    <includes refid="hgrid3D__view__filter_8hpp" local="no">hgrid3D_view_filter.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TSpecType</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1a9f9471f437bdc24ce632b254d5a49218" prot="public" static="no">
+        <type>typename TSpecType::bgl_impl_type</type>
+        <definition>using rcppsw::ds::graph::detail::hgrid3D_view_filter&lt; TSpecType &gt;::bgl_impl_type =  typename TSpecType::bgl_impl_type</definition>
+        <argsstring></argsstring>
+        <name>bgl_impl_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" line="61" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1a9825c1eaceebf56dc5250ca57f29c84e" prot="public" static="no">
+        <type>typename bgl_impl_type::edge_descriptor</type>
+        <definition>using rcppsw::ds::graph::detail::hgrid3D_view_filter&lt; TSpecType &gt;::edge_descriptor =  typename bgl_impl_type::edge_descriptor</definition>
+        <argsstring></argsstring>
+        <name>edge_descriptor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" line="63" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1ab0f3ff6f574104c9b11cbeb59eaeb45b" prot="public" static="no">
+        <type>typename TSpecType::vertex_coord_type</type>
+        <definition>using rcppsw::ds::graph::detail::hgrid3D_view_filter&lt; TSpecType &gt;::vertex_coord_type =  typename TSpecType::vertex_coord_type</definition>
+        <argsstring></argsstring>
+        <name>vertex_coord_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" line="65" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1a5977462823c9d68619eb7cc720208639" prot="public" static="no">
+        <type>typename bgl_impl_type::vertex_descriptor</type>
+        <definition>using rcppsw::ds::graph::detail::hgrid3D_view_filter&lt; TSpecType &gt;::vertex_descriptor =  typename bgl_impl_type::vertex_descriptor</definition>
+        <argsstring></argsstring>
+        <name>vertex_descriptor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" line="62" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1a96eb53a078c8d36e5fbd57290d220684" prot="public" static="no">
+        <type>typename bgl_impl_type::vertex_property_type</type>
+        <definition>using rcppsw::ds::graph::detail::hgrid3D_view_filter&lt; TSpecType &gt;::vertex_property_type =  typename bgl_impl_type::vertex_property_type</definition>
+        <argsstring></argsstring>
+        <name>vertex_property_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" line="64" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1aebabb078f06f885bc2185e731d86ccca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::detail::hgrid3D_view_filter&lt; TSpecType &gt;::hgrid3D_view_filter</definition>
+        <argsstring>(void)</argsstring>
+        <name>hgrid3D_view_filter</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" line="67" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" bodystart="67" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1a82980c92d7450ac12e1f491fa1303bda" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data" kindref="compound">hgrid3D_view_filter_data</ref>&lt; TSpecType &gt; &gt;</type>
+        <definition>std::unique_ptr&lt;hgrid3D_view_filter_data&lt;TSpecType&gt; &gt; rcppsw::ds::graph::detail::hgrid3D_view_filter&lt; TSpecType &gt;::operator()</definition>
+        <argsstring>(const bgl_impl_type &amp;graph, const vertex_descriptor &amp;start, const rtypes::manhattan_dist &amp;max_dist, boost::optional&lt; vertex_coord_type &gt; axis) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1a9f9471f437bdc24ce632b254d5a49218" kindref="member">bgl_impl_type</ref> &amp;</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1a5977462823c9d68619eb7cc720208639" kindref="member">vertex_descriptor</ref> &amp;</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">rtypes::manhattan_dist</ref> &amp;</type>
+          <declname>max_dist</declname>
+        </param>
+        <param>
+          <type>boost::optional&lt; <ref refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1ab0f3ff6f574104c9b11cbeb59eaeb45b" kindref="member">vertex_coord_type</ref> &gt;</type>
+          <declname>axis</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" line="71" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" bodystart="71" bodyend="142"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1abde0bfaeb4b8ce7462e5606b3e7d1bfe" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr size_t</type>
+        <definition>static constexpr size_t rcppsw::ds::graph::detail::hgrid3D_view_filter&lt; TSpecType &gt;::max_visited_vertices</definition>
+        <argsstring>(const rtypes::manhattan_dist &amp;max_dist)</argsstring>
+        <name>max_visited_vertices</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">rtypes::manhattan_dist</ref> &amp;</type>
+          <declname>max_dist</declname>
+        </param>
+        <briefdescription>
+<para>The most vertices that could appear in the induced subgraph is (2*max_dist)^3, assuming a basic grid graph. If there is heterogeneity, there will be less. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" line="150" column="27" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" bodystart="150" bodyend="153"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Predicate for filtering <ref refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D" kindref="compound">hgrid3D</ref> into <ref refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view" kindref="compound">hgrid3D_view</ref> objects. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::ds::graph::detail::hgrid3D_view_filter&lt; TSpecType &gt;</label>
+        <link refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; hgrid3D_view_filter&lt; TSpecType &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::ds::graph::detail::hgrid3D_view_filter&lt; TSpecType &gt;</label>
+        <link refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; hgrid3D_view_filter&lt; TSpecType &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" line="59" column="47" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp" bodystart="59" bodyend="154"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1a9f9471f437bdc24ce632b254d5a49218" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>bgl_impl_type</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>client</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1a9825c1eaceebf56dc5250ca57f29c84e" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>edge_descriptor</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>env_verify</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1aebabb078f06f885bc2185e731d86ccca" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>hgrid3D_view_filter</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>logging_init</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1abde0bfaeb4b8ce7462e5606b3e7d1bfe" prot="private" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>max_visited_vertices</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>ndc_do_push</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1a82980c92d7450ac12e1f491fa1303bda" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>operator()</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>operator=</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1ab0f3ff6f574104c9b11cbeb59eaeb45b" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>vertex_coord_type</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1a5977462823c9d68619eb7cc720208639" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>vertex_descriptor</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__filter_1a96eb53a078c8d36e5fbd57290d220684" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>vertex_property_type</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_filter</scope><name>~client</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

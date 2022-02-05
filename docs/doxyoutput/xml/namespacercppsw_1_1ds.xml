@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1ds" kind="namespace" language="C++">
+    <compoundname>rcppsw::ds</compoundname>
+    <innerclass refid="classrcppsw_1_1ds_1_1base__grid2D" prot="public">rcppsw::ds::base_grid2D</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1base__grid3D" prot="public">rcppsw::ds::base_grid3D</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1base__grid__overlay" prot="public">rcppsw::ds::base_grid_overlay</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1grid2D" prot="public">rcppsw::ds::grid2D</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1grid2D__overlay" prot="public">rcppsw::ds::grid2D_overlay</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1grid3D" prot="public">rcppsw::ds::grid3D</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1grid3D__overlay" prot="public">rcppsw::ds::grid3D_overlay</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1poisson__queue" prot="public">rcppsw::ds::poisson_queue</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1rtree" prot="public">rcppsw::ds::rtree</innerclass>
+    <innerclass refid="structrcppsw_1_1ds_1_1rtree__spec" prot="public">rcppsw::ds::rtree_spec</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1stacked__grid2D" prot="public">rcppsw::ds::stacked_grid2D</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1type__map" prot="public">rcppsw::ds::type_map</innerclass>
+    <innernamespace refid="namespacercppsw_1_1ds_1_1graph">rcppsw::ds::graph</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1ds_1_1metrics">rcppsw::ds::metrics</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacercppsw_1_1ds_1ab6204211b4072bc13dc807ed29c4119e" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename TCoordType</type>
+          </param>
+        </templateparamlist>
+        <type>bg::model::box&lt; <ref refid="namespacercppsw_1_1ds_1a54d5b03ae8dd86c3ba54653e4713325e" kindref="member">rtree_point</ref>&lt; TCoordType &gt; &gt;</type>
+        <definition>using rcppsw::ds::rtree_box = typedef bg::model::box&lt;rtree_point&lt;TCoordType&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>rtree_box</name>
+        <briefdescription>
+<para>Representation of rectangles in the rtree. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="62" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1ds_1a54d5b03ae8dd86c3ba54653e4713325e" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename TCoordType</type>
+          </param>
+        </templateparamlist>
+        <type>bg::model::point&lt; typename TCoordType::value_type, TCoordType::kDIMENSIONALITY, bg::cs::cartesian &gt;</type>
+        <definition>using rcppsw::ds::rtree_point = typedef bg::model::point&lt;typename TCoordType::value_type, TCoordType::kDIMENSIONALITY, bg::cs::cartesian&gt;</definition>
+        <argsstring></argsstring>
+        <name>rtree_point</name>
+        <briefdescription>
+<para>A 2D or 3D geometrical point, as defined by boost. Loose adaptor to rmath::vector2 or rmath::vector3. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="54" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacercppsw_1_1ds_1a7fa16818dd1112e1177d430d5c62fd4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TCoordType</type>
+          </param>
+          <param>
+            <type>RCPPSW_SFINAE_DECLDEF(<ref refid="structrcppsw_1_1mpl_1_1is__specialization" kindref="compound">rmpl::is_specialization</ref>&lt; TCoordType, <ref refid="classrcppsw_1_1math_1_1vector2" kindref="compound">rmath::vector2</ref> &gt;::value)</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="namespacercppsw_1_1ds_1ab6204211b4072bc13dc807ed29c4119e" kindref="member">rtree_box</ref>&lt; TCoordType &gt;</type>
+        <definition>rtree_box&lt; TCoordType &gt; rcppsw::ds::make_rtree_box</definition>
+        <argsstring>(const TCoordType &amp;ll, const TCoordType &amp;ur)</argsstring>
+        <name>make_rtree_box</name>
+        <param>
+          <type>const TCoordType &amp;</type>
+          <declname>ll</declname>
+        </param>
+        <param>
+          <type>const TCoordType &amp;</type>
+          <declname>ur</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="235" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="235" bodyend="241"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacercppsw_1_1ds_1aff578e47a24623687163f1e8449538c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TCoordType</type>
+          </param>
+          <param>
+            <type>RCPPSW_SFINAE_DECLDEF(<ref refid="structrcppsw_1_1mpl_1_1is__specialization" kindref="compound">rmpl::is_specialization</ref>&lt; TCoordType, <ref refid="classrcppsw_1_1math_1_1vector2" kindref="compound">rmath::vector2</ref> &gt;::value)</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="namespacercppsw_1_1ds_1a54d5b03ae8dd86c3ba54653e4713325e" kindref="member">rtree_point</ref>&lt; TCoordType &gt;</type>
+        <definition>rtree_point&lt; TCoordType &gt; rcppsw::ds::make_rtree_point</definition>
+        <argsstring>(const TCoordType &amp;c)</argsstring>
+        <name>make_rtree_point</name>
+        <param>
+          <type>const TCoordType &amp;</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" line="221" column="13" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" bodystart="221" bodyend="223"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Data structures: 2D/3D lattice grids, 2D/3D discretizing grids to overlay onto continuous space, Poisson queue, rtree for 2D space, heterogeneous stacked 2D grid, type map for using in C++ quasi-reflection. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid2D.hpp" line="35" column="21"/>
+  </compounddef>
+</doxygen>

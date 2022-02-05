@@ -1,0 +1,67 @@
+.TH "rcppsw::patterns::factory::detail::base_factory< TType, TPointerWrapper, TBase, TKeyType, Args >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::factory::detail::base_factory< TType, TPointerWrapper, TBase, TKeyType, Args > \- Dispatcher factory class that releases or shares ownership of the created objects to the class/context that requests object creation\&. All classes of the derived type must have compatible constructor signatures\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <base_factory\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~base_factory\fP (void)=default"
+.br
+.ti -1c
+.RI "template<typename TFactoryType  = TType, typename std::enable_if<(is_sharing< TFactoryType >::value||is_releasing< TFactoryType >::value), int >::type  = 0> TPointerWrapper< TBase > \fBcreate\fP (const TKeyType &name, Args\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "template<typename TDerived > void \fBregister_type\fP (const TKeyType &name)"
+.br
+.ti -1c
+.RI "template<typename TDerived > void \fBunregister_type\fP (const TKeyType &name)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TType, template< class WrappedTBase, typename\&.\&.\&. > class TPointerWrapper, typename TBase, typename TKeyType, typename \&.\&.\&. Args>
+.br
+class rcppsw::patterns::factory::detail::base_factory< TType, TPointerWrapper, TBase, TKeyType, Args >"
+Dispatcher factory class that releases or shares ownership of the created objects to the class/context that requests object creation\&. All classes of the derived type must have compatible constructor signatures\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fITType\fP The factory type\&.
+.br
+\fITPointerWrapper\fP Type of pointer wrapper (shared or unique)\&.
+.br
+\fITBase\fP Type of objects capable of creation from this factory (restricted to this type and its derived types)\&.
+.br
+\fITKeyType\fP Type of key for the type identifier\&.
+.br
+\fIArgs\fP List of constructor arguments for the types to be constructed\&. 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TType , template< class WrappedTBase, typename\&.\&.\&. > class TPointerWrapper, typename TBase , typename TKeyType , typename \&.\&.\&. Args> virtual \fBrcppsw::patterns::factory::detail::base_factory\fP< TType, TPointerWrapper, TBase, TKeyType, Args >::~\fBbase_factory\fP (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TType , template< class WrappedTBase, typename\&.\&.\&. > class TPointerWrapper, typename TBase , typename TKeyType , typename \&.\&.\&. Args> template<typename TFactoryType  = TType, typename std::enable_if<(is_sharing< TFactoryType >::value||is_releasing< TFactoryType >::value), int >::type  = 0> TPointerWrapper<TBase> \fBrcppsw::patterns::factory::detail::base_factory\fP< TType, TPointerWrapper, TBase, TKeyType, Args >::create (const TKeyType & name, Args\&.\&.\&. args)\fC [inline]\fP"
+
+.SS "template<typename TType , template< class WrappedTBase, typename\&.\&.\&. > class TPointerWrapper, typename TBase , typename TKeyType , typename \&.\&.\&. Args> template<typename TDerived > void \fBrcppsw::patterns::factory::detail::base_factory\fP< TType, TPointerWrapper, TBase, TKeyType, Args >::register_type (const TKeyType & name)\fC [inline]\fP"
+
+.SS "template<typename TType , template< class WrappedTBase, typename\&.\&.\&. > class TPointerWrapper, typename TBase , typename TKeyType , typename \&.\&.\&. Args> template<typename TDerived > void \fBrcppsw::patterns::factory::detail::base_factory\fP< TType, TPointerWrapper, TBase, TKeyType, Args >::unregister_type (const TKeyType & name)\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1math_1_1rngm" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::math::rngm</compoundname>
+    <basecompoundref refid="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory" prot="public" virt="non-virtual">rcppsw::patterns::prototype::caching_factory&lt; rng, uint &gt;</basecompoundref>
+    <basecompoundref refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton" prot="public" virt="non-virtual">rcppsw::patterns::singleton::singleton&lt; rngm &gt;</basecompoundref>
+    <includes refid="rngm_8hpp" local="no">rngm.hpp</includes>
+    <briefdescription>
+<para>Random Number Generator (RNG) Manager. A caching factory that returns references to previously created objects rather than creating new objects each time like a regular factory. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>rcppsw::patterns::singleton::singleton&lt; rngm &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::math::rngm</label>
+        <link refid="classrcppsw_1_1math_1_1rngm"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::prototype::caching_factory&lt; rng, uint &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>rcppsw::patterns::singleton::singleton&lt; rngm &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::math::rngm</label>
+        <link refid="classrcppsw_1_1math_1_1rngm"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::prototype::caching_factory&lt; rng, uint &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/rngm.hpp" line="57" column="52" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/rngm.hpp" bodystart="56" bodyend="57"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory_1a4bab8f07f5cf01ee0652c3c3c42aba52" prot="public" virt="non-virtual"><scope>rcppsw::math::rngm</scope><name>create</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a080214d86ac9c51f69da83a896d331e8" prot="public" virt="non-virtual"><scope>rcppsw::math::rngm</scope><name>instance</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1afe5efa34b5fc04803e8c3583ec255317" prot="public" virt="non-virtual"><scope>rcppsw::math::rngm</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1aefa0b0e4d0dba612e0db004016b1a0ef" prot="public" virt="non-virtual"><scope>rcppsw::math::rngm</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory_1afc718b5957ca25141ce476ad792f5ce2" prot="public" virt="non-virtual"><scope>rcppsw::math::rngm</scope><name>register_type</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a7c6f169aa093f4606aa656d5a01cdcac" prot="public" virt="non-virtual"><scope>rcppsw::math::rngm</scope><name>singleton</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a1a4420728a87f18d237d14a9fbb8a8bd" prot="public" virt="non-virtual"><scope>rcppsw::math::rngm</scope><name>singleton</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a91423fa6a5a9062bbfc1c1c7162e4a64" prot="protected" virt="non-virtual"><scope>rcppsw::math::rngm</scope><name>singleton</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a867cf961a5992f3555d6c7273f04137f" prot="protected" virt="non-virtual"><scope>rcppsw::math::rngm</scope><name>~singleton</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

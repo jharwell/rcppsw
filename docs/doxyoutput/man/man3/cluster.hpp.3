@@ -1,0 +1,121 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <vector>\fP
+.br
+\fC#include <type_traits>\fP
+.br
+\fC#include <limits>\fP
+.br
+\fC#include <cmath>\fP
+.br
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+\fC#include 'rcppsw/algorithm/clustering/membership_policy\&.hpp'\fP
+.br
+\fC#include 'rcppsw/math/math\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBrcppsw::algorithm::clustering::cluster::mapping< T, Policy, Enable >\fP"
+.br
+.ti -1c
+.RI "struct \fBrcppsw::algorithm::clustering::cluster::mapping< T, Policy, policy::is_eh< Policy > >\fP"
+.br
+.ti -1c
+.RI "struct \fBrcppsw::algorithm::clustering::cluster::mapping< T, Policy, policy::is_nc< Policy > >\fP"
+.br
+.ti -1c
+.RI "class \fBrcppsw::algorithm::clustering::eh_cluster< T, Policy >\fP"
+.br
+.RI "A cluster representation for \fBEH\fP clustering algorithms\&. "
+.ti -1c
+.RI "class \fBrcppsw::algorithm::clustering::nc_cluster< T, Policy >\fP"
+.br
+.RI "A cluster representation for \fBNC\fP clustering algorithms\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::algorithm\fP"
+.br
+.RI "Various algorithms: closest pair, max subarray, clustering\&. "
+.ti -1c
+.RI " \fBrcppsw::algorithm::clustering\fP"
+.br
+.RI "Different clustering algorithms: kmeans, entropy\&. "
+.ti -1c
+.RI " \fBrcppsw::algorithm::clustering::cluster\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2018 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Class Documentation"
+.PP 
+.SH "struct rcppsw::algorithm::clustering::cluster::mapping"
+.PP 
+
+.SS "template<typename T, typename Policy, typename Enable = void>
+.br
+struct rcppsw::algorithm::clustering::cluster::mapping< T, Policy, Enable >"
+
+.SH "struct rcppsw::algorithm::clustering::cluster::mapping< T, Policy, policy::is_eh< Policy > >"
+.PP 
+
+.SS "template<typename T, typename Policy>
+.br
+struct rcppsw::algorithm::clustering::cluster::mapping< T, Policy, policy::is_eh< Policy > >"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+typedef \fBeh_cluster\fP< T, Policy > \fItype\fP 
+.br
+.PP
+.RE
+.PP
+.SH "struct rcppsw::algorithm::clustering::cluster::mapping< T, Policy, policy::is_nc< Policy > >"
+.PP 
+
+.SS "template<typename T, typename Policy>
+.br
+struct rcppsw::algorithm::clustering::cluster::mapping< T, Policy, policy::is_nc< Policy > >"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+typedef \fBnc_cluster\fP< T, Policy > \fItype\fP 
+.br
+.PP
+.RE
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

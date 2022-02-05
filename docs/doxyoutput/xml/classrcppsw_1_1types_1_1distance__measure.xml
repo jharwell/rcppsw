@@ -1,0 +1,295 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1types_1_1distance__measure" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::types::distance_measure</compoundname>
+    <basecompoundref refid="classrcppsw_1_1types_1_1named__type" prot="public" virt="non-virtual">rcppsw::types::named_type&lt; T, Tag &gt;</basecompoundref>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; distance_measure&lt; T, Tag &gt; &gt;</basecompoundref>
+    <includes refid="distance__measure_8hpp" local="no">distance_measure.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Tag</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1types_1_1distance__measure_1aea4a37b0610e8c0aafd27b41d60278d7" prot="public" static="no">
+        <type>T</type>
+        <definition>using rcppsw::types::distance_measure&lt; T, Tag &gt;::value_type =  T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" line="52" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1distance__measure_1a8b9eabce8e4ef1226385264a358f7467" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::types::distance_measure&lt; T, Tag &gt;::distance_measure</definition>
+        <argsstring>(const distance_measure &amp;)=default</argsstring>
+        <name>distance_measure</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1distance__measure" kindref="compound">distance_measure</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" line="66" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1distance__measure_1a1a2df64630ac102d9d432373922e0900" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::types::distance_measure&lt; T, Tag &gt;::distance_measure</definition>
+        <argsstring>(const T &amp;value, bool check_psd=true)</argsstring>
+        <name>distance_measure</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>check_psd</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" line="57" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" bodystart="57" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1distance__measure_1a90138f34ada5eb86657b6fb869d07bb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::types::distance_measure&lt; T, Tag &gt;::~distance_measure</definition>
+        <argsstring>(void) override=default</argsstring>
+        <name>~distance_measure</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" line="65" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1distance__measure_1a4c1fef0674c235cd8523abb84047654e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::types::distance_measure&lt; T, Tag &gt;::operator&lt;</definition>
+        <argsstring>(const distance_measure &amp;rhs) const</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1distance__measure" kindref="compound">distance_measure</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" line="69" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1distance__measure_1a174ee7f7675692e22288c07948a4b8b6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::types::distance_measure&lt; T, Tag &gt;::operator&lt;=</definition>
+        <argsstring>(const distance_measure &amp;rhs) const</argsstring>
+        <name>operator&lt;=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1distance__measure" kindref="compound">distance_measure</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" line="73" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1distance__measure_1a119ce1e7927cd4ad28c6ed556fc6269a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::types::distance_measure&lt; T, Tag &gt;::operator&lt;=</definition>
+        <argsstring>(T rhs) const</argsstring>
+        <name>operator&lt;=</name>
+        <param>
+          <type>T</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" line="74" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1distance__measure_1a313e22de24f4a672f66da8e593aa7425" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::types::distance_measure&lt; T, Tag &gt;::operator&gt;</definition>
+        <argsstring>(const distance_measure &amp;rhs) const</argsstring>
+        <name>operator&gt;</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1distance__measure" kindref="compound">distance_measure</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" line="70" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1distance__measure_1ae5abceecbe8e7ee73a12142c080bb4c9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::types::distance_measure&lt; T, Tag &gt;::operator&gt;</definition>
+        <argsstring>(T rhs) const</argsstring>
+        <name>operator&gt;</name>
+        <param>
+          <type>T</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" line="75" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1distance__measure_1aa9ba96ab2957ce3cdad5857c55fc097d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::types::distance_measure&lt; T, Tag &gt;::operator&gt;=</definition>
+        <argsstring>(const distance_measure &amp;rhs) const</argsstring>
+        <name>operator&gt;=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1distance__measure" kindref="compound">distance_measure</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" line="71" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1distance__measure_1afebaafc7a799abb0b72e086d9f06a2a6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::types::distance_measure&lt; T, Tag &gt;::operator&gt;=</definition>
+        <argsstring>(T rhs) const</argsstring>
+        <name>operator&gt;=</name>
+        <param>
+          <type>T</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" line="72" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" bodystart="72" bodyend="72"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Specifies a distance between two points. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::types::distance_measure&lt; T, Tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1distance__measure"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::types::named_type&lt; T, Tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcppsw::er::client&lt; distance_measure&lt; T, Tag &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::types::distance_measure&lt; T, Tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1distance__measure"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::types::named_type&lt; T, Tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcppsw::er::client&lt; distance_measure&lt; T, Tag &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" line="50" column="46" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp" bodystart="49" bodyend="76"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1a1a2df64630ac102d9d432373922e0900" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>distance_measure</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1a8b9eabce8e4ef1226385264a358f7467" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>distance_measure</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1a45531d5cc915d48d5132f711dfb5541b" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>named_type</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1a4c1fef0674c235cd8523abb84047654e" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>operator&lt;</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1a174ee7f7675692e22288c07948a4b8b6" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>operator&lt;=</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1a119ce1e7927cd4ad28c6ed556fc6269a" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>operator&lt;=</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1a313e22de24f4a672f66da8e593aa7425" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>operator&gt;</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1ae5abceecbe8e7ee73a12142c080bb4c9" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>operator&gt;</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1aa9ba96ab2957ce3cdad5857c55fc097d" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>operator&gt;=</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1afebaafc7a799abb0b72e086d9f06a2a6" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>operator&gt;=</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1ae3adaef7b9d236a163a83fdfc2e8a5c8" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>set</name></member>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1a613eefda69afcc13383029355cb8cfe9" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>stringizable</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1a5be785b00b2a79f27ede7953446c9bad" prot="public" virt="virtual"><scope>rcppsw::types::distance_measure</scope><name>to_str</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1ab5e5d9c79710dbd92eea31dbe0357de5" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>v</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1aea4a37b0610e8c0aafd27b41d60278d7" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>value_type</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::types::distance_measure</scope><name>~client</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1a90138f34ada5eb86657b6fb869d07bb5" prot="public" virt="non-virtual"><scope>rcppsw::types::distance_measure</scope><name>~distance_measure</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1ad2fd23fa3879f2cfd77c5ad9c65b9a57" prot="public" virt="virtual"><scope>rcppsw::types::distance_measure</scope><name>~named_type</name></member>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1ad025418a3c3349948cbea5c6facdb391" prot="public" virt="virtual"><scope>rcppsw::types::distance_measure</scope><name>~stringizable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

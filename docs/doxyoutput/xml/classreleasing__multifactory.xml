@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classreleasing__multifactory" kind="class" language="C++" prot="public">
+    <compoundname>releasing_multifactory</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">detail::multifactory&lt; detail::factory_releasing_type, std::unique_ptr, TBase &gt;</basecompoundref>
+    <includes refid="multifactory_8hpp" local="no">multifactory.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TBase</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Args</declname>
+        <defname>Args</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classreleasing__multifactory_1a2969ee382cf6c770587b6a90eb91a061" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>releasing_multifactory&lt; TBase, Args &gt;::~releasing_multifactory</definition>
+        <argsstring>(void) override=default</argsstring>
+        <name>~releasing_multifactory</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" line="112" column="3"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Specialization of the multifactory class for releasing ownership of created objects via std::unique_ptr. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TBase</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base class that all factory-constructed types must derive from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments common to ALL factory-constructible types. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>releasing_multifactory&lt; TBase, Args &gt;</label>
+        <link refid="classreleasing__multifactory"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>detail::multifactory&lt; detail::factory_releasing_type, std::unique_ptr, TBase &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>releasing_multifactory&lt; TBase, Args &gt;</label>
+        <link refid="classreleasing__multifactory"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>detail::multifactory&lt; detail::factory_releasing_type, std::unique_ptr, TBase &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" line="110" column="60" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" bodystart="108" bodyend="113"/>
+    <listofallmembers>
+      <member refid="classreleasing__multifactory_1a2969ee382cf6c770587b6a90eb91a061" prot="public" virt="non-virtual"><scope>releasing_multifactory</scope><name>~releasing_multifactory</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

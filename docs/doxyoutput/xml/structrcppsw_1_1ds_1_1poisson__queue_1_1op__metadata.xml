@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::ds::poisson_queue::op_metadata</compoundname>
+    <includes refid="poisson__queue_8hpp" local="no">poisson_queue.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata_1a18fd344168562e3a6e88a4da7d3279d9" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t rcppsw::ds::poisson_queue&lt; T &gt;::op_metadata::count</definition>
+        <argsstring></argsstring>
+        <name>count</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+<para>The # of operations since the last reset. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="65" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata_1ab8ee7325dbbbec286735941d6f46ffca" prot="public" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">types::timestep</ref></type>
+        <definition>types::timestep rcppsw::ds::poisson_queue&lt; T &gt;::op_metadata::interval_accum</definition>
+        <argsstring></argsstring>
+        <name>interval_accum</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+<para>The accumulated time between operations since the last reset. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="75" column="21" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata_1a797c69f7315c9aa42e63ab2d93f07d72" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t rcppsw::ds::poisson_queue&lt; T &gt;::op_metadata::total_count</definition>
+        <argsstring></argsstring>
+        <name>total_count</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+<para>The # of operations since the beginning of time. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="70" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata_1ac14f5d9774cedd0beec1f950335f14eb" prot="public" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">types::timestep</ref></type>
+        <definition>types::timestep rcppsw::ds::poisson_queue&lt; T &gt;::op_metadata::total_interval_accum</definition>
+        <argsstring></argsstring>
+        <name>total_interval_accum</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+<para>The accumulated time between operations since the beginning of time. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="81" column="21" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Metadata for tracking enqueue_queue/dequeue operations. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="2">
+        <label>rcppsw::types::timestep</label>
+        <link refid="classrcppsw_1_1types_1_1timestep"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw::types::named_type&lt; size_t, struct timestep_tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::poisson_queue&lt; T &gt;::op_metadata</label>
+        <link refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+total_interval_accum</edgelabel>
+          <edgelabel>+interval_accum</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="61" column="20" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="61" bodyend="82"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata_1a18fd344168562e3a6e88a4da7d3279d9" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue::op_metadata</scope><name>count</name></member>
+      <member refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata_1ab8ee7325dbbbec286735941d6f46ffca" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue::op_metadata</scope><name>interval_accum</name></member>
+      <member refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata_1a797c69f7315c9aa42e63ab2d93f07d72" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue::op_metadata</scope><name>total_count</name></member>
+      <member refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata_1ac14f5d9774cedd0beec1f950335f14eb" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue::op_metadata</scope><name>total_interval_accum</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

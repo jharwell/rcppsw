@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1visit__set__helper" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>rcppsw::patterns::visitor::detail::visit_set_helper</compoundname>
+    <includes refid="visitor_8hpp" local="no">visitor.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1visit__set__helper_1a46b1de9a0c5ebe2d62e230f6d1c965aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::patterns::visitor::detail::visit_set_helper&lt; T &gt;::~visit_set_helper</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~visit_set_helper</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" line="59" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1visit__set__helper_1ab278cb93b0fb1a064a6dae7340921b74" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::patterns::visitor::detail::visit_set_helper&lt; T &gt;::visit</definition>
+        <argsstring>(T &amp;visitee)=0</argsstring>
+        <name>visit</name>
+        <param>
+          <type>T &amp;</type>
+          <declname>visitee</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" line="58" column="16"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Helper class to provide actual implementation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A type to visit. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::visitor::detail::visit_set_helper&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1visit__set__helper"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" line="56" column="23" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" bodystart="56" bodyend="60"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1visit__set__helper_1ab278cb93b0fb1a064a6dae7340921b74" prot="public" virt="pure-virtual"><scope>rcppsw::patterns::visitor::detail::visit_set_helper</scope><name>visit</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1visit__set__helper_1a46b1de9a0c5ebe2d62e230f6d1c965aa" prot="public" virt="virtual"><scope>rcppsw::patterns::visitor::detail::visit_set_helper</scope><name>~visit_set_helper</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

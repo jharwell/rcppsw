@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1fsm_1_1no__event__data" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::fsm::no_event_data</compoundname>
+    <includes refid="event_8hpp" local="no">event.hpp</includes>
+    <briefdescription>
+<para>This class does NOT derived from <ref refid="classrcppsw_1_1patterns_1_1fsm_1_1event__data" kindref="compound">event_data</ref> so that compiler errors are generated if you attempt to use it outside of its intent to indicate that a state does not take any data as input. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::no_event_data</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1no__event__data"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp" line="153" column="20" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp" bodystart="153" bodyend="153"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

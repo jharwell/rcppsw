@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_0137dcf85346e2766e34a45b6015c624" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/utils</compoundname>
+    <innerfile refid="base__cli_8hpp">base_cli.hpp</innerfile>
+    <innerfile refid="color_8hpp">color.hpp</innerfile>
+    <innerfile refid="file__parser_8hpp">file_parser.hpp</innerfile>
+    <innerfile refid="line__parser_8hpp">line_parser.hpp</innerfile>
+    <innerfile refid="maskable__enum_8hpp">maskable_enum.hpp</innerfile>
+    <innerfile refid="string__utils_8hpp">string_utils.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,240 @@
+.TH "rcppsw::math::radians" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math::radians \- Used to store an angle value in radians (duh)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <radians\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::stringizable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBradians\fP (const \fBdegrees\fP &d)"
+.br
+.ti -1c
+.RI "\fBradians\fP (double value) noexcept"
+.br
+.ti -1c
+.RI "\fBradians\fP (void)=default"
+.br
+.ti -1c
+.RI "bool \fBis_equal\fP (const \fBradians\fP &other, double tol=\fBkDOUBLE_EPSILON\fP) const"
+.br
+.RI "Determine if two instances are equal within the specified tolerance\&. "
+.ti -1c
+.RI "bool \fBoperator!=\fP (const \fBradians\fP &other) const"
+.br
+.ti -1c
+.RI "\fBradians\fP \fBoperator*\fP (double value) const"
+.br
+.ti -1c
+.RI "\fBradians\fP & \fBoperator*=\fP (double value)"
+.br
+.ti -1c
+.RI "\fBradians\fP \fBoperator+\fP (const \fBradians\fP &other) const"
+.br
+.ti -1c
+.RI "\fBradians\fP & \fBoperator+\fP (void)"
+.br
+.ti -1c
+.RI "\fBradians\fP & \fBoperator+=\fP (const \fBradians\fP &other)"
+.br
+.ti -1c
+.RI "\fBradians\fP \fBoperator\-\fP (const \fBradians\fP &other) const"
+.br
+.ti -1c
+.RI "\fBradians\fP \fBoperator\-\fP (void) const"
+.br
+.ti -1c
+.RI "\fBradians\fP & \fBoperator\-=\fP (const \fBradians\fP &other)"
+.br
+.ti -1c
+.RI "double \fBoperator/\fP (const \fBradians\fP &other) const"
+.br
+.ti -1c
+.RI "\fBradians\fP \fBoperator/\fP (double value) const"
+.br
+.ti -1c
+.RI "\fBradians\fP & \fBoperator/=\fP (double value)"
+.br
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBradians\fP &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator<=\fP (const \fBradians\fP &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBradians\fP &other) const"
+.br
+.RI "Compare two radian values for equality, using the tolerance specified during construction\&. "
+.ti -1c
+.RI "bool \fBoperator>\fP (const \fBradians\fP &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator>=\fP (const \fBradians\fP &other) const"
+.br
+.ti -1c
+.RI "void \fBset\fP (double value)"
+.br
+.RI "Sets the value in radians\&. "
+.ti -1c
+.RI "\fBradians\fP & \fBsigned_normalize\fP (void)"
+.br
+.RI "Normalizes the value in the range [-pi, pi]\&. "
+.ti -1c
+.RI "std::string \fBto_str\fP (void) const override"
+.br
+.RI "Return a string representation of the radians object of the form 'rad(XX) -> deg(YY)'\&. "
+.ti -1c
+.RI "\fBradians\fP & \fBunsigned_normalize\fP (void)"
+.br
+.RI "Normalizes the value in the range [0, 2pi]\&. "
+.ti -1c
+.RI "double \fBv\fP (void) const"
+.br
+.RI "Get the raw value in radians\&. "
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const \fBradians\fP \fBkPI\fP"
+.br
+.ti -1c
+.RI "static const \fBradians\fP \fBkPI_OVER_FOUR\fP"
+.br
+.ti -1c
+.RI "static const \fBradians\fP \fBkPI_OVER_THREE\fP"
+.br
+.ti -1c
+.RI "static const \fBradians\fP \fBkPI_OVER_TWO\fP"
+.br
+.ti -1c
+.RI "static const double \fBkRADIANS_TO_DEGREES\fP"
+.br
+.ti -1c
+.RI "static const \fBradians\fP \fBkTHREE_PI_OVER_TWO\fP"
+.br
+.ti -1c
+.RI "static const \fBradians\fP \fBkTWO_PI\fP"
+.br
+.ti -1c
+.RI "static const \fBradians\fP \fBkZERO\fP"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "std::istream & \fBoperator>>\fP (std::istream &is, \fBradians\fP &r)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Used to store an angle value in radians (duh)\&. 
+
+When comparing instances for approxmate equality, they are compared to 6 decimal places, by default; this can be overriden on a per-comparison basis if desired, or set class-wide via \fBkAPPROX_EQUALITY_TOL\fP\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::math::radians::radians (void)\fC [default]\fP"
+
+.SS "rcppsw::math::radians::radians (double value)\fC [inline]\fP, \fC [explicit]\fP, \fC [noexcept]\fP"
+
+.SS "rcppsw::math::radians::radians (const \fBdegrees\fP & d)\fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool rcppsw::math::radians::is_equal (const \fBradians\fP & other, double tol = \fC\fBkDOUBLE_EPSILON\fP\fP) const\fC [inline]\fP"
+
+.PP
+Determine if two instances are equal within the specified tolerance\&. This cannot be made part of \fBoperator==()\fP, because those functions cannot have default arguments\&. 
+.SS "bool rcppsw::math::radians::operator!= (const \fBradians\fP & other) const\fC [inline]\fP"
+
+.SS "\fBradians\fP rcppsw::math::radians::operator* (double value) const\fC [inline]\fP"
+
+.SS "\fBradians\fP& rcppsw::math::radians::operator*= (double value)\fC [inline]\fP"
+
+.SS "\fBradians\fP rcppsw::math::radians::operator+ (const \fBradians\fP & other) const\fC [inline]\fP"
+
+.SS "\fBradians\fP& rcppsw::math::radians::operator+ (void)\fC [inline]\fP"
+
+.SS "\fBradians\fP& rcppsw::math::radians::operator+= (const \fBradians\fP & other)\fC [inline]\fP"
+
+.SS "\fBradians\fP rcppsw::math::radians::operator\- (const \fBradians\fP & other) const\fC [inline]\fP"
+
+.SS "\fBradians\fP rcppsw::math::radians::operator\- (void) const\fC [inline]\fP"
+
+.SS "\fBradians\fP& rcppsw::math::radians::operator\-= (const \fBradians\fP & other)\fC [inline]\fP"
+
+.SS "double rcppsw::math::radians::operator/ (const \fBradians\fP & other) const\fC [inline]\fP"
+
+.SS "\fBradians\fP rcppsw::math::radians::operator/ (double value) const\fC [inline]\fP"
+
+.SS "\fBradians\fP& rcppsw::math::radians::operator/= (double value)\fC [inline]\fP"
+
+.SS "bool rcppsw::math::radians::operator< (const \fBradians\fP & other) const\fC [inline]\fP"
+
+.SS "bool rcppsw::math::radians::operator<= (const \fBradians\fP & other) const\fC [inline]\fP"
+
+.SS "bool rcppsw::math::radians::operator== (const \fBradians\fP & other) const\fC [inline]\fP"
+
+.PP
+Compare two radian values for equality, using the tolerance specified during construction\&. 
+.SS "bool rcppsw::math::radians::operator> (const \fBradians\fP & other) const\fC [inline]\fP"
+
+.SS "bool rcppsw::math::radians::operator>= (const \fBradians\fP & other) const\fC [inline]\fP"
+
+.SS "void rcppsw::math::radians::set (double value)\fC [inline]\fP"
+
+.PP
+Sets the value in radians\&. 
+.SS "\fBradians\fP& rcppsw::math::radians::signed_normalize (void)\fC [inline]\fP"
+
+.PP
+Normalizes the value in the range [-pi, pi]\&. 
+.SS "std::string rcppsw::math::radians::to_str (void) const\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Return a string representation of the radians object of the form 'rad(XX) -> deg(YY)'\&. 
+.PP
+Reimplemented from \fBrcppsw::er::stringizable\fP\&.
+.SS "\fBradians\fP& rcppsw::math::radians::unsigned_normalize (void)\fC [inline]\fP"
+
+.PP
+Normalizes the value in the range [0, 2pi]\&. 
+.SS "double rcppsw::math::radians::v (void) const\fC [inline]\fP"
+
+.PP
+Get the raw value in radians\&. 
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "std::istream& operator>> (std::istream & is, \fBradians\fP & r)\fC [friend]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "const \fBradians\fP rcppsw::math::radians::kPI\fC [static]\fP"
+
+.SS "const \fBradians\fP rcppsw::math::radians::kPI_OVER_FOUR\fC [static]\fP"
+
+.SS "const \fBradians\fP rcppsw::math::radians::kPI_OVER_THREE\fC [static]\fP"
+
+.SS "const \fBradians\fP rcppsw::math::radians::kPI_OVER_TWO\fC [static]\fP"
+
+.SS "const double rcppsw::math::radians::kRADIANS_TO_DEGREES\fC [static]\fP"
+
+.SS "const \fBradians\fP rcppsw::math::radians::kTHREE_PI_OVER_TWO\fC [static]\fP"
+
+.SS "const \fBradians\fP rcppsw::math::radians::kTWO_PI\fC [static]\fP"
+
+.SS "const \fBradians\fP rcppsw::math::radians::kZERO\fC [static]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

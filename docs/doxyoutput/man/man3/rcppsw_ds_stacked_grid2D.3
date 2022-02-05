@@ -1,0 +1,223 @@
+.TH "rcppsw::ds::stacked_grid2D< TupleTypes >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::stacked_grid2D< TupleTypes > \- A sandwich of N 2D grids of the same size (x,y) dimensions, which can contain different kinds of objects\&. The objects in each layer of the grid are stored contiguously, but the grids themselves are not necessarily contiguous\&. The layers are 0 indexed\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <stacked_grid2D\&.hpp>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "template<size_t Index> using \fBlayer_value_type\fP = \fBrcppsw::ds::grid2D_overlay\fP< \fBvalue_type\fP< Index > >"
+.br
+.RI "The type of a particular layer\&. "
+.ti -1c
+.RI "template<size_t Index> using \fBvalue_type\fP = typename std::tuple_element< Index, TupleTypes >::type"
+.br
+.RI "The type of the objects stored in a particular layer\&. "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBstacked_grid2D\fP (const \fBmath::vector2d\fP &origin, const \fBmath::vector2d\fP &dims, const \fBtypes::discretize_ratio\fP &grid_res, const \fBtypes::discretize_ratio\fP &field_res)"
+.br
+.ti -1c
+.RI "virtual \fB~stacked_grid2D\fP (void)"
+.br
+.ti -1c
+.RI "template<size_t Index> \fBlayer_value_type\fP< Index >::\fBvalue_type\fP & \fBaccess\fP (const \fBmath::vector2z\fP &d)"
+.br
+.RI "Get a reference to an object at a particular (layer,i,j) location\&. "
+.ti -1c
+.RI "template<size_t Index> const \fBlayer_value_type\fP< Index >::\fBvalue_type\fP & \fBaccess\fP (const \fBmath::vector2z\fP &d) const"
+.br
+.ti -1c
+.RI "template<size_t Index> \fBlayer_value_type\fP< Index >::\fBvalue_type\fP & \fBaccess\fP (size_t i, size_t j)"
+.br
+.RI "Get a reference to an object at a particular (layer,i,j) location\&. "
+.ti -1c
+.RI "template<size_t Index> const \fBlayer_value_type\fP< Index >::\fBvalue_type\fP & \fBaccess\fP (size_t i, size_t j) const"
+.br
+.ti -1c
+.RI "\fBrmath::vector2z\fP \fBddims2D\fP (void) const"
+.br
+.ti -1c
+.RI "template<size_t Index> \fBlayer_value_type\fP< Index > * \fBlayer\fP (void)"
+.br
+.ti -1c
+.RI "template<size_t Index> const \fBlayer_value_type\fP< Index > * \fBlayer\fP (void) const"
+.br
+.ti -1c
+.RI "\fBrmath::vector2d\fP \fBrdims2D\fP (void) const"
+.br
+.ti -1c
+.RI "const \fBtypes::discretize_ratio\fP & \fBresolution\fP (void) const"
+.br
+.ti -1c
+.RI "size_t \fBxdsize\fP (void) const"
+.br
+.ti -1c
+.RI "double \fBxrsize\fP (void) const"
+.br
+.ti -1c
+.RI "size_t \fBydsize\fP (void) const"
+.br
+.ti -1c
+.RI "double \fByrsize\fP (void) const"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TupleTypes>
+.br
+class rcppsw::ds::stacked_grid2D< TupleTypes >"
+A sandwich of N 2D grids of the same size (x,y) dimensions, which can contain different kinds of objects\&. The objects in each layer of the grid are stored contiguously, but the grids themselves are not necessarily contiguous\&. The layers are 0 indexed\&. 
+
+This was implemented because the BGL only appears to support layered graphs/grids of the same object type\&. Although in hindsight I could have done this with grid_graph and boost::variant (was not aware of this when I implemented this class)\&. Might not have been as highly performing in that case though\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename TupleTypes > template<size_t Index> using \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::\fBlayer_value_type\fP =  \fBrcppsw::ds::grid2D_overlay\fP<\fBvalue_type\fP<Index> >"
+
+.PP
+The type of a particular layer\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIIndex\fP The index of the layer\&. 
+.RE
+.PP
+
+.SS "template<typename TupleTypes > template<size_t Index> using \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::\fBvalue_type\fP =  typename std::tuple_element<Index, TupleTypes>::type"
+
+.PP
+The type of the objects stored in a particular layer\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIIndex\fP The index of the layer\&. 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TupleTypes > \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::\fBstacked_grid2D\fP (const \fBmath::vector2d\fP & origin, const \fBmath::vector2d\fP & dims, const \fBtypes::discretize_ratio\fP & grid_res, const \fBtypes::discretize_ratio\fP & field_res)\fC [inline]\fP"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIorigin\fP The anchor point of the stacked grid in continuous space\&. 
+.br
+\fIdims\fP The real size in X,Y which will be discretized into X/\fCgrid_res\fP discrete elements along the X dimension and Y/\fCgrid_res\fP discrete elements along the Y dimension\&. 
+.br
+\fIgrid_res\fP The discretization unit for the grid\&. 
+.br
+\fIfield_res\fP The discretization unit for the field the grid is contained in (can be the same as the \fCgrid_res\fP)\&. 
+.RE
+.PP
+
+.SS "template<typename TupleTypes > virtual \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::~\fBstacked_grid2D\fP (void)\fC [inline]\fP, \fC [virtual]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TupleTypes > template<size_t Index> \fBlayer_value_type\fP<Index>::\fBvalue_type\fP& \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::access (const \fBmath::vector2z\fP & d)\fC [inline]\fP"
+
+.PP
+Get a reference to an object at a particular (layer,i,j) location\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIIndex\fP The index of the layer\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fId\fP The discrete coordinate pair\&. 
+.RE
+.PP
+
+.SS "template<typename TupleTypes > template<size_t Index> const \fBlayer_value_type\fP<Index>::\fBvalue_type\fP& \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::access (const \fBmath::vector2z\fP & d) const\fC [inline]\fP"
+
+.SS "template<typename TupleTypes > template<size_t Index> \fBlayer_value_type\fP<Index>::\fBvalue_type\fP& \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::access (size_t i, size_t j)\fC [inline]\fP"
+
+.PP
+Get a reference to an object at a particular (layer,i,j) location\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIIndex\fP The index of the layer\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIi\fP The x coordinate\&. 
+.br
+\fIj\fP The y coordinate\&. 
+.RE
+.PP
+
+.SS "template<typename TupleTypes > template<size_t Index> const \fBlayer_value_type\fP<Index>::\fBvalue_type\fP& \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::access (size_t i, size_t j) const\fC [inline]\fP"
+
+.SS "template<typename TupleTypes > \fBrmath::vector2z\fP \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::ddims2D (void) const\fC [inline]\fP"
+
+.SS "template<typename TupleTypes > template<size_t Index> \fBlayer_value_type\fP<Index>* \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::layer (void)\fC [inline]\fP"
+
+.SS "template<typename TupleTypes > template<size_t Index> const \fBlayer_value_type\fP<Index>* \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::layer (void) const\fC [inline]\fP"
+
+.SS "template<typename TupleTypes > \fBrmath::vector2d\fP \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::rdims2D (void) const\fC [inline]\fP"
+
+.SS "template<typename TupleTypes > const \fBtypes::discretize_ratio\fP& \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::resolution (void) const\fC [inline]\fP"
+
+.PP
+\fBSee also\fP
+.RS 4
+\fBgrid2D_overlay::resolution()\fP\&. 
+.RE
+.PP
+
+.SS "template<typename TupleTypes > size_t \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::xdsize (void) const\fC [inline]\fP"
+
+.PP
+\fBSee also\fP
+.RS 4
+\fBgrid2D_overlay::xdsize()\fP\&. 
+.RE
+.PP
+
+.SS "template<typename TupleTypes > double \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::xrsize (void) const\fC [inline]\fP"
+
+.PP
+\fBSee also\fP
+.RS 4
+\fBgrid2D_overlay::xrsize()\fP\&. 
+.RE
+.PP
+
+.SS "template<typename TupleTypes > size_t \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::ydsize (void) const\fC [inline]\fP"
+
+.PP
+\fBSee also\fP
+.RS 4
+\fBgrid2D_overlay::ydsize()\fP\&. 
+.RE
+.PP
+
+.SS "template<typename TupleTypes > double \fBrcppsw::ds::stacked_grid2D\fP< TupleTypes >::yrsize (void) const\fC [inline]\fP"
+
+.PP
+\fBSee also\fP
+.RS 4
+\fBgrid2D_overlay::yrsize()\fP\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -26,8 +26,6 @@
 #include "catch.hpp"
 #include "rcppsw/math/rng.hpp"
 
-#include "rcppsw/math/config/xml/ema_parser.hpp"
-
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
@@ -39,12 +37,6 @@ namespace math = rcppsw::math;
 CATCH_TEST_CASE("Sanity", "[math::rng]") {
   math::rng r1(0);
   CATCH_REQUIRE(0 == r1.seed());
-  math::config::xml::ema_parser parser;
-  std::ifstream in;
-  in.open("/home/jharwell/git/fordyca/exp/demo.argos", std::ios::in);
-  ticpp::Document doc;
-  in >> doc;
-  parser.parse(*doc.FirstChildElement());
 }
 
 CATCH_TEST_CASE("Uniform", "[math::rng]") {

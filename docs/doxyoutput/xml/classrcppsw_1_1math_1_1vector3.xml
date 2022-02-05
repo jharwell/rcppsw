@@ -1,0 +1,1227 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1math_1_1vector3" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>rcppsw::math::vector3</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1stringizable" prot="public" virt="non-virtual">rcppsw::er::stringizable</basecompoundref>
+    <includes refid="vector3_8hpp" local="no">vector3.hpp</includes>
+    <innerclass refid="structrcppsw_1_1math_1_1vector3_1_1componentwise__compare" prot="public">rcppsw::math::vector3::componentwise_compare</innerclass>
+    <innerclass refid="structrcppsw_1_1math_1_1vector3_1_1key__compare" prot="public">rcppsw::math::vector3::key_compare</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1math_1_1vector3_1a739ce11cfdb230ad302f9bc8d015ea59" prot="public" static="no">
+        <type>T</type>
+        <definition>using rcppsw::math::vector3&lt; T &gt;::value_type =  T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="63" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1vector3_1a93980b91c27120cfe690a6996116f287" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr size_t</type>
+        <definition>constexpr size_t rcppsw::math::vector3&lt; T &gt;::kDIMENSIONALITY</definition>
+        <argsstring></argsstring>
+        <name>kDIMENSIONALITY</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="107" column="27" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1vector3_1a55bb07c75717b618ba64df1ad8bd2ed7" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref>&lt; T &gt;</type>
+        <definition>const vector3d rcppsw::math::vector3d::X</definition>
+        <argsstring></argsstring>
+        <name>X</name>
+        <briefdescription>
+<para>The positive X axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="112" column="24" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1vector3_1a0c41e403a6df01fcf37b0a578ca62ebc" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref>&lt; T &gt;</type>
+        <definition>const vector3d rcppsw::math::vector3d::Y</definition>
+        <argsstring></argsstring>
+        <name>Y</name>
+        <briefdescription>
+<para>The positive Y axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="117" column="24" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1vector3_1a8a95bc145378e7ed938f639342e61c6c" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref>&lt; T &gt;</type>
+        <definition>const vector3d rcppsw::math::vector3d::Z</definition>
+        <argsstring></argsstring>
+        <name>Z</name>
+        <briefdescription>
+<para>The positive Z axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="122" column="24" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1vector3_1a88e1c1f4de886b51c6975181a3b57338" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T rcppsw::math::vector3&lt; T &gt;::m_x</definition>
+        <argsstring></argsstring>
+        <name>m_x</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="412" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="412" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1vector3_1adcf16dcfbc01b0151706b664941add8e" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T rcppsw::math::vector3&lt; T &gt;::m_y</definition>
+        <argsstring></argsstring>
+        <name>m_y</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="413" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="413" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1vector3_1ad4c24205fd35e7fd229e770979131237" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T rcppsw::math::vector3&lt; T &gt;::m_z</definition>
+        <argsstring></argsstring>
+        <name>m_z</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="414" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="414" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a6cf8b83fe9b381b6dba5f127238a0854" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>constexpr rcppsw::math::vector3&lt; T &gt;::vector3</definition>
+        <argsstring>(const T &amp;x, const T &amp;y, const T &amp;z)</argsstring>
+        <name>vector3</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the vector from Cartesian coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The X coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Y coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>z</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Z coordinate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="136" column="13" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="136" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a708562e6ace86390ab4ccf98a1f9c992" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::vector3&lt; T &gt;::vector3</definition>
+        <argsstring>(const vector2&lt; T &gt; &amp;v)</argsstring>
+        <name>vector3</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector2" kindref="compound">vector2</ref>&lt; T &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the 3D vector from a 2D vector, setting the Z value to 0.0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="136" column="13" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="143" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a6b571ba519a42a0a2a01371e0e0d13b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::vector3&lt; T &gt;::vector3</definition>
+        <argsstring>(const vector2&lt; T &gt; &amp;v, const T &amp;z)</argsstring>
+        <name>vector3</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector2" kindref="compound">vector2</ref>&lt; T &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+<para>Initialize the 3D vector from a 2D vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="136" column="13" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="148" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1ad289346fb20b1556ce77bb4abff45f94" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::vector3&lt; T &gt;::vector3</definition>
+        <argsstring>(void) noexcept=default</argsstring>
+        <name>vector3</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Initializes vector to (0,0,0) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="127" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a7a57d77550cf228cc68c2b3b4caf2598" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::vector3&lt; T &gt;::is_pd</definition>
+        <argsstring>(void) const</argsstring>
+        <name>is_pd</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Is the vector is positive definite? </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="179" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="179" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a226263beff3f224787bb66a2a4a4ae49" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::vector3&lt; T &gt;::is_psd</definition>
+        <argsstring>(void) const</argsstring>
+        <name>is_psd</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Is the vector is positive semi-definite? </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="184" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="184" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a30553f030523ffea82ee4572c3ba2990" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::math::vector3&lt; T &gt;::length</definition>
+        <argsstring>(void) const</argsstring>
+        <name>length</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns the length of this vector. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="196" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="196" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1adf8370d65a8d6bfe42d5c1d3a743d20b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref></type>
+        <definition>vector3 rcppsw::math::vector3&lt; T &gt;::mask</definition>
+        <argsstring>(const vector3 &amp;the_mask) const</argsstring>
+        <name>mask</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+          <declname>the_mask</declname>
+        </param>
+        <briefdescription>
+<para>Mask a vector using another vector, using <computeroutput>mask</computeroutput> as a boolean mask by treating each non-zero entry as a 1. Should only be used if <computeroutput>mask</computeroutput> is a unit vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="219" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="219" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1ae41ac681f082dd801b6ad9d1db95f8af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(std::is_floating_point&lt; U &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+        <definition>vector3&amp; rcppsw::math::vector3&lt; T &gt;::normalize</definition>
+        <argsstring>(void)</argsstring>
+        <name>normalize</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Normalizes this vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>After this method is called, the vector has length 1. If the vector is (0,0), this call results in a division by zero error, and your program will probably crash.</para>
+<para><simplesect kind="return"><para>A reference to the normalized vector. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="209" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="209" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a03cd69520169ee49edc9d3e585529262" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::vector3&lt; T &gt;::operator!=</definition>
+        <argsstring>(const vector3 &amp;other) const</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Returns if this vector and the passed one are not equal by checking coordinates for equality. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Should generally not be called if the template parameter type is not an integer, as floating point comparisons in general are unsafe. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="333" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="333" bodyend="333"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a66afcd7b1135737a499f5e77aa817153" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref></type>
+        <definition>vector3 rcppsw::math::vector3&lt; T &gt;::operator*</definition>
+        <argsstring>(const T &amp;val) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="376" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="376" bodyend="380"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a953c4eb0133320addd861608161bf190" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+        <definition>vector3&amp; rcppsw::math::vector3&lt; T &gt;::operator*=</definition>
+        <argsstring>(const T &amp;val)</argsstring>
+        <name>operator*=</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="350" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="350" bodyend="355"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a72322a01ac4b0f852c1b9ec6f5153a5c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref></type>
+        <definition>vector3 rcppsw::math::vector3&lt; T &gt;::operator+</definition>
+        <argsstring>(const vector3 &amp;other) const</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="364" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="364" bodyend="368"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a8be1ab84c0fc3ac51355b7347ff18e1a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+        <definition>vector3&amp; rcppsw::math::vector3&lt; T &gt;::operator+=</definition>
+        <argsstring>(const vector3 &amp;other)</argsstring>
+        <name>operator+=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="336" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="336" bodyend="341"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1adef32e4a5953b5da3f27d46200dae1ca" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref>&lt; T &gt;</type>
+        <definition>vector3&lt;T&gt; rcppsw::math::vector3&lt; T &gt;::operator-</definition>
+        <argsstring>(const vector3 &amp;other) const</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="370" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="370" bodyend="374"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a8311b043688e8046ba24a89ac6455278" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref></type>
+        <definition>vector3 rcppsw::math::vector3&lt; T &gt;::operator-</definition>
+        <argsstring>(void) const</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="388" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="388" bodyend="388"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a9f1949fc3bf3925d01ecd47cd5c5705c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+        <definition>vector3&amp; rcppsw::math::vector3&lt; T &gt;::operator-=</definition>
+        <argsstring>(const vector3 &amp;other)</argsstring>
+        <name>operator-=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="343" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="343" bodyend="348"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1ada42e246e5ff48f8b34a28706cba0fdc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref></type>
+        <definition>vector3 rcppsw::math::vector3&lt; T &gt;::operator/</definition>
+        <argsstring>(const T &amp;val) const</argsstring>
+        <name>operator/</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="382" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="382" bodyend="386"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a9a0d83dc5e6d9e346687c8e509369f92" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+        <definition>vector3&amp; rcppsw::math::vector3&lt; T &gt;::operator/=</definition>
+        <argsstring>(const T &amp;val)</argsstring>
+        <name>operator/=</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="357" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="357" bodyend="362"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a2d40303f578168224e057f0b406388c9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(!std::is_floating_point&lt; U &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::math::vector3&lt; T &gt;::operator==</definition>
+        <argsstring>(const vector3 &amp;other) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Returns if this vector and the argument are considered equal, determined by coordinate comparison. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Only available if the template argument is not floating point. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="294" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="294" bodyend="296"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a2d40303f578168224e057f0b406388c9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(std::is_floating_point&lt; U &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::math::vector3&lt; T &gt;::operator==</definition>
+        <argsstring>(const vector3 &amp;other) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Returns if this vector and the argument are considered equal, determined by coordinate comparison. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Only available if the template argument is floating point. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="305" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="305" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a2c051ae63c3855eee41cf12ff81096cd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(!std::is_floating_point&lt; U &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::math::vector3&lt; T &gt;::operator&gt;</definition>
+        <argsstring>(const vector3 &amp;other) const</argsstring>
+        <name>operator&gt;</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="312" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="312" bodyend="315"/>
+        <references refid="namespacercppsw_1_1math_1a3de3b99c93e96d09928476864d7ecf59" compoundref="math_8hpp" startline="48">rcppsw::math::kDOUBLE_EPSILON</references>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a2c051ae63c3855eee41cf12ff81096cd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(std::is_floating_point&lt; U &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::math::vector3&lt; T &gt;::operator&gt;</definition>
+        <argsstring>(const vector3 &amp;other) const</argsstring>
+        <name>operator&gt;</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="318" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="318" bodyend="324"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1abc15df272ca5f34fb6e0125b6e5496bc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector2" kindref="compound">vector2</ref>&lt; T &gt;</type>
+        <definition>vector2&lt;T&gt; rcppsw::math::vector3&lt; T &gt;::project_on_xy</definition>
+        <argsstring>(void) const</argsstring>
+        <name>project_on_xy</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Calculates the projection of this vector onto the XY plane. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="241" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="241" bodyend="241"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a0a2270f74ac620c48125a88a2706d2ee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector2" kindref="compound">vector2</ref>&lt; T &gt;</type>
+        <definition>vector2&lt;T&gt; rcppsw::math::vector3&lt; T &gt;::project_on_xz</definition>
+        <argsstring>(void) const</argsstring>
+        <name>project_on_xz</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Calculates the projection of this vector onto the XZ plane. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="251" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="251" bodyend="251"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a7f5062a957b84c4714c5f59bfaefb3bc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector2" kindref="compound">vector2</ref>&lt; T &gt;</type>
+        <definition>vector2&lt;T&gt; rcppsw::math::vector3&lt; T &gt;::project_on_yz</definition>
+        <argsstring>(void) const</argsstring>
+        <name>project_on_yz</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Calculates the projection of this vector onto the YZ plane. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="246" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="246" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a760dbe17d724e05562c7635ff247c332" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+        <definition>vector3&amp; rcppsw::math::vector3&lt; T &gt;::scale</definition>
+        <argsstring>(const T &amp;factor)</argsstring>
+        <name>scale</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>factor</declname>
+        </param>
+        <briefdescription>
+<para>Scales the vector by the specified values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>factor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scaling factor applied to X,Y,Z.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the scaled vector. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="283" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="283" bodyend="283"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1ac027990eb820257587b44a13e315f1c5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+        <definition>vector3&amp; rcppsw::math::vector3&lt; T &gt;::scale</definition>
+        <argsstring>(const T &amp;scale_x, const T &amp;scale_y, const T &amp;scale_z)</argsstring>
+        <name>scale</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>scale_x</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>scale_y</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>scale_z</declname>
+        </param>
+        <briefdescription>
+<para>Scales the vector by the specified values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scale_x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scale factor for the X coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scale_y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scale factor for the Y coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scale_z</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scale factor for the Z coordinate.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the scaled vector. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="269" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="269" bodyend="274"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1ae5d6e4c3ec99f5f4c3983de6b43f1ee1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::math::vector3&lt; T &gt;::set</definition>
+        <argsstring>(const T &amp;x, const T &amp;y, const T &amp;z)</argsstring>
+        <name>set</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+<para>Sets the vector contents from Cartesian coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new X coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new Y coordinate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="170" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="170" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1adebe9e210da98636efede25cc1e88b8e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::math::vector3&lt; T &gt;::square_length</definition>
+        <argsstring>(void) const</argsstring>
+        <name>square_length</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Returns the square length of this vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="189" column="6" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="189" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a8260ef63ae96ce2c8b1ab96e9d438b58" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1vector2" kindref="compound">vector2</ref>&lt; T &gt;</type>
+        <definition>vector2&lt;T&gt; rcppsw::math::vector3&lt; T &gt;::to_2D</definition>
+        <argsstring>(void) const</argsstring>
+        <name>to_2D</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="162" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="162" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a0b454e398870a844c776cf4f144ef951" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(std::is_floating_point&lt; U &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classrcppsw_1_1math_1_1sphere__vector" kindref="compound">sphere_vector</ref>&lt; T &gt;</type>
+        <definition>sphere_vector&lt;T&gt; rcppsw::math::vector3&lt; T &gt;::to_spherical</definition>
+        <argsstring>(void) const</argsstring>
+        <name>to_spherical</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="254" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="254" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1af3f46555472226e6249d1d0a4c73c749" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string rcppsw::math::vector3&lt; T &gt;::to_str</definition>
+        <argsstring>(void) const override</argsstring>
+        <name>to_str</name>
+        <reimplements refid="classrcppsw_1_1er_1_1stringizable_1a0776b3b6278cc72e8b04448c016bc197">to_str</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return a string representation of a class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="405" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="405" bodyend="408"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a1a4e7832538fbc198c08ed30e5cdbbd4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::math::vector3&lt; T &gt;::x</definition>
+        <argsstring>(const T &amp;x)</argsstring>
+        <name>x</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="158" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="158" bodyend="158"/>
+        <references refid="classrcppsw_1_1math_1_1vector3_1a1a4e7832538fbc198c08ed30e5cdbbd4" compoundref="vector3_8hpp" startline="158" endline="158">rcppsw::math::vector3&lt; T &gt;::x</references>
+        <referencedby refid="classrcppsw_1_1math_1_1vector3_1a1a4e7832538fbc198c08ed30e5cdbbd4" compoundref="vector3_8hpp" startline="158" endline="158">rcppsw::math::vector3&lt; T &gt;::x</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1af99af271d2aed6d806dccf2b9966ddfd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::math::vector3&lt; T &gt;::x</definition>
+        <argsstring>(void)</argsstring>
+        <name>x</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="150" column="6" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="150" bodyend="150"/>
+        <referencedby refid="classrcppsw_1_1ds_1_1base__grid3D_1aab1aa33a5733948556a87562d27656e6" compoundref="base__grid3D_8hpp" startline="99" endline="101">rcppsw::ds::base_grid3D&lt; ral::mt_size_t &gt;::contains</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1aee373928453e09ce4e1a1631fe25e2f9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T&amp; rcppsw::math::vector3&lt; T &gt;::x</definition>
+        <argsstring>(void) const</argsstring>
+        <name>x</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="154" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="154" bodyend="154"/>
+        <references refid="classrcppsw_1_1math_1_1vector3_1aee373928453e09ce4e1a1631fe25e2f9" compoundref="vector3_8hpp" startline="154" endline="154">rcppsw::math::vector3&lt; T &gt;::x</references>
+        <referencedby refid="classrcppsw_1_1math_1_1vector3_1aee373928453e09ce4e1a1631fe25e2f9" compoundref="vector3_8hpp" startline="154" endline="154">rcppsw::math::vector3&lt; T &gt;::x</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a90a7caf85fe7c470c148885a93b9fa26" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">radians</ref></type>
+        <definition>radians rcppsw::math::vector3&lt; T &gt;::xangle</definition>
+        <argsstring>(void) const</argsstring>
+        <name>xangle</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return angle between this vector and the X axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="226" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="226" bodyend="226"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1ad9f4def6cf134f23a899f1f77ad9fae9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::math::vector3&lt; T &gt;::y</definition>
+        <argsstring>(const T &amp;y)</argsstring>
+        <name>y</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="159" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="159" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1ab28e8dab3f10afa3a18eb125cfe7e56c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::math::vector3&lt; T &gt;::y</definition>
+        <argsstring>(void)</argsstring>
+        <name>y</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="151" column="6" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="151" bodyend="151"/>
+        <referencedby refid="classrcppsw_1_1ds_1_1base__grid3D_1aab1aa33a5733948556a87562d27656e6" compoundref="base__grid3D_8hpp" startline="99" endline="101">rcppsw::ds::base_grid3D&lt; ral::mt_size_t &gt;::contains</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a291c8f4ebbac2a3fb1fee59ee28ed6c2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T&amp; rcppsw::math::vector3&lt; T &gt;::y</definition>
+        <argsstring>(void) const</argsstring>
+        <name>y</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="155" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="155" bodyend="155"/>
+        <references refid="classrcppsw_1_1math_1_1vector3_1a291c8f4ebbac2a3fb1fee59ee28ed6c2" compoundref="vector3_8hpp" startline="155" endline="155">rcppsw::math::vector3&lt; T &gt;::y</references>
+        <referencedby refid="classrcppsw_1_1math_1_1vector3_1a291c8f4ebbac2a3fb1fee59ee28ed6c2" compoundref="vector3_8hpp" startline="155" endline="155">rcppsw::math::vector3&lt; T &gt;::y</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a80b4a4ff1e4f76a467ae560ecaa78c5a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">radians</ref></type>
+        <definition>radians rcppsw::math::vector3&lt; T &gt;::yangle</definition>
+        <argsstring>(void) const</argsstring>
+        <name>yangle</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return the angle between this vector and the Y axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="231" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="231" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1aeeb435e7f32406e79f582dd79296aa76" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::math::vector3&lt; T &gt;::z</definition>
+        <argsstring>(const T &amp;z)</argsstring>
+        <name>z</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="160" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="160" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1ad9ca2096fd3b063623246722dd0cf68b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::math::vector3&lt; T &gt;::z</definition>
+        <argsstring>(void)</argsstring>
+        <name>z</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="152" column="6" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="152" bodyend="152"/>
+        <referencedby refid="classrcppsw_1_1ds_1_1base__grid3D_1aab1aa33a5733948556a87562d27656e6" compoundref="base__grid3D_8hpp" startline="99" endline="101">rcppsw::ds::base_grid3D&lt; ral::mt_size_t &gt;::contains</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1ae1e7015cf7b040f4e1b0aacd794b2b91" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T&amp; rcppsw::math::vector3&lt; T &gt;::z</definition>
+        <argsstring>(void) const</argsstring>
+        <name>z</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="156" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="156" bodyend="156"/>
+        <references refid="classrcppsw_1_1math_1_1vector3_1ae1e7015cf7b040f4e1b0aacd794b2b91" compoundref="vector3_8hpp" startline="156" endline="156">rcppsw::math::vector3&lt; T &gt;::z</references>
+        <referencedby refid="classrcppsw_1_1math_1_1vector3_1ae1e7015cf7b040f4e1b0aacd794b2b91" compoundref="vector3_8hpp" startline="156" endline="156">rcppsw::math::vector3&lt; T &gt;::z</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1vector3_1a83934a52c83d0b25b37094b7b5884de5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">radians</ref></type>
+        <definition>radians rcppsw::math::vector3&lt; T &gt;::zangle</definition>
+        <argsstring>(void) const</argsstring>
+        <name>zangle</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return the angle between this vector and the Z axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="236" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="236" bodyend="236"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classrcppsw_1_1math_1_1vector3_1a1863fd7f5a2da8679ca0bc725f1f00bb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>friend std::ostream &amp;</type>
+        <definition>std::ostream&amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;stream, const vector3 &amp;v)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref> &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="390" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="390" bodyend="393"/>
+      </memberdef>
+      <memberdef kind="friend" id="classrcppsw_1_1math_1_1vector3_1a9c58ecd78127822b1012ec5675efbb74" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>friend std::istream &amp;</type>
+        <definition>std::istream&amp; operator&gt;&gt;</definition>
+        <argsstring>(std::istream &amp;is, vector3&lt; T &gt; &amp;v)</argsstring>
+        <name>operator&gt;&gt;</name>
+        <param>
+          <type>std::istream &amp;</type>
+          <declname>is</declname>
+        </param>
+        <param>
+          <type><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref>&lt; T &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>For parsing a vector from a string in the form of <computeroutput>&quot;X,Y,Z&quot;</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="398" column="23" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="398" bodyend="403"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base template class encapsulating mathematical actions on a pair of numbers. Is specialized by <ref refid="namespacercppsw_1_1math_1a013f4548331430677be3d5c65796845a" kindref="member">vector3i</ref>, <ref refid="namespacercppsw_1_1math_1af66a56a5aa1b099f8fa9da9a346847f3" kindref="member">vector3d</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>All operations are performed in whatever the template parameter is, so take care if you are trying to do scaling, trigonometric things with integers... </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::math::vector3&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1vector3"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::math::vector3&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1vector3"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="61" column="38" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="61" bodyend="416"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a7a57d77550cf228cc68c2b3b4caf2598" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>is_pd</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a226263beff3f224787bb66a2a4a4ae49" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>is_psd</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a93980b91c27120cfe690a6996116f287" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>kDIMENSIONALITY</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a30553f030523ffea82ee4572c3ba2990" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>length</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a88e1c1f4de886b51c6975181a3b57338" prot="private" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>m_x</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1adcf16dcfbc01b0151706b664941add8e" prot="private" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>m_y</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1ad4c24205fd35e7fd229e770979131237" prot="private" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>m_z</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1adf8370d65a8d6bfe42d5c1d3a743d20b" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>mask</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1ae41ac681f082dd801b6ad9d1db95f8af" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>normalize</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a03cd69520169ee49edc9d3e585529262" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator!=</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a66afcd7b1135737a499f5e77aa817153" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator*</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a953c4eb0133320addd861608161bf190" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator*=</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a72322a01ac4b0f852c1b9ec6f5153a5c" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator+</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a8be1ab84c0fc3ac51355b7347ff18e1a" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator+=</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1adef32e4a5953b5da3f27d46200dae1ca" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator-</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a8311b043688e8046ba24a89ac6455278" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator-</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a9f1949fc3bf3925d01ecd47cd5c5705c" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator-=</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1ada42e246e5ff48f8b34a28706cba0fdc" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator/</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a9a0d83dc5e6d9e346687c8e509369f92" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator/=</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a1863fd7f5a2da8679ca0bc725f1f00bb" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator&lt;&lt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a2d40303f578168224e057f0b406388c9" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator==</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a2d40303f578168224e057f0b406388c9" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator==</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a2c051ae63c3855eee41cf12ff81096cd" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator&gt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a2c051ae63c3855eee41cf12ff81096cd" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator&gt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a9c58ecd78127822b1012ec5675efbb74" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>operator&gt;&gt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1abc15df272ca5f34fb6e0125b6e5496bc" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>project_on_xy</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a0a2270f74ac620c48125a88a2706d2ee" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>project_on_xz</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a7f5062a957b84c4714c5f59bfaefb3bc" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>project_on_yz</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1ac027990eb820257587b44a13e315f1c5" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>scale</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a760dbe17d724e05562c7635ff247c332" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>scale</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1ae5d6e4c3ec99f5f4c3983de6b43f1ee1" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>set</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1adebe9e210da98636efede25cc1e88b8e" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>square_length</name></member>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1a613eefda69afcc13383029355cb8cfe9" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>stringizable</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a8260ef63ae96ce2c8b1ab96e9d438b58" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>to_2D</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a0b454e398870a844c776cf4f144ef951" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>to_spherical</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1af3f46555472226e6249d1d0a4c73c749" prot="public" virt="virtual"><scope>rcppsw::math::vector3</scope><name>to_str</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a739ce11cfdb230ad302f9bc8d015ea59" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>value_type</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1ad289346fb20b1556ce77bb4abff45f94" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>vector3</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a6cf8b83fe9b381b6dba5f127238a0854" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>vector3</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a708562e6ace86390ab4ccf98a1f9c992" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>vector3</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a6b571ba519a42a0a2a01371e0e0d13b9" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>vector3</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1af99af271d2aed6d806dccf2b9966ddfd" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>x</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1aee373928453e09ce4e1a1631fe25e2f9" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>x</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a1a4e7832538fbc198c08ed30e5cdbbd4" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>x</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a55bb07c75717b618ba64df1ad8bd2ed7" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>X</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a90a7caf85fe7c470c148885a93b9fa26" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>xangle</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1ab28e8dab3f10afa3a18eb125cfe7e56c" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>y</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a291c8f4ebbac2a3fb1fee59ee28ed6c2" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>y</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1ad9f4def6cf134f23a899f1f77ad9fae9" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>y</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a0c41e403a6df01fcf37b0a578ca62ebc" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>Y</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a80b4a4ff1e4f76a467ae560ecaa78c5a" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>yangle</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a8a95bc145378e7ed938f639342e61c6c" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>Z</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1ad9ca2096fd3b063623246722dd0cf68b" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>z</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1ae1e7015cf7b040f4e1b0aacd794b2b91" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>z</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1aeeb435e7f32406e79f582dd79296aa76" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>z</name></member>
+      <member refid="classrcppsw_1_1math_1_1vector3_1a83934a52c83d0b25b37094b7b5884de5" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3</scope><name>zangle</name></member>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1ad025418a3c3349948cbea5c6facdb391" prot="public" virt="virtual"><scope>rcppsw::math::vector3</scope><name>~stringizable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

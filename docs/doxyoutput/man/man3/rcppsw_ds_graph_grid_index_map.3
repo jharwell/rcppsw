@@ -1,0 +1,96 @@
+.TH "rcppsw::ds::graph::grid_index_map< TGrid, TVertex, TCompare >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::graph::grid_index_map< TGrid, TVertex, TCompare > \- Maps a coordinate (e\&.g\&., XYZ tuple) to a vertex property\&. Used for fast queries of 'Does this graph contain this vertex', because in general there is no way to answer that query other than to search the whole graph\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <grid_index_map\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::patterns::decorator::decorator< std::map< TGrid, TVertex, std::less< TGrid > > >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBdecoratee_type\fP = typename decorator_type::decoratee_type"
+.br
+.ti -1c
+.RI "using \fBdecorator_type\fP = typename \fBrpdecorator::decorator\fP< std::map< TGrid, TVertex, TCompare > >::\fBdecorator_type\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_CT\fP ()"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (begin)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (begin, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (end)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (end, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (\fBfind\fP)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (\fBfind\fP, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (insert)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (operator[])"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (size, const)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TGrid, typename TVertex, typename TCompare = std::less<TGrid>>
+.br
+class rcppsw::ds::graph::grid_index_map< TGrid, TVertex, TCompare >"
+Maps a coordinate (e\&.g\&., XYZ tuple) to a vertex property\&. Used for fast queries of 'Does this graph contain this vertex', because in general there is no way to answer that query other than to search the whole graph\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename TGrid , typename TVertex , typename TCompare  = std::less<TGrid>> using \fBrcppsw::ds::graph::grid_index_map\fP< TGrid, TVertex, TCompare >::\fBdecoratee_type\fP =  typename decorator_type::decoratee_type"
+
+.SS "template<typename TGrid , typename TVertex , typename TCompare  = std::less<TGrid>> using \fBrcppsw::ds::graph::grid_index_map\fP< TGrid, TVertex, TCompare >::\fBdecorator_type\fP =  typename \fBrpdecorator::decorator\fP< std::map<TGrid, TVertex, TCompare> >::\fBdecorator_type\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TGrid , typename TVertex , typename TCompare  = std::less<TGrid>> \fBrcppsw::ds::graph::grid_index_map\fP< TGrid, TVertex, TCompare >::RCPPSW_DECORATE_CT ()"
+
+.SS "template<typename TGrid , typename TVertex , typename TCompare  = std::less<TGrid>> \fBrcppsw::ds::graph::grid_index_map\fP< TGrid, TVertex, TCompare >::RCPPSW_DECORATE_DECLDEF (begin)"
+
+.SS "template<typename TGrid , typename TVertex , typename TCompare  = std::less<TGrid>> \fBrcppsw::ds::graph::grid_index_map\fP< TGrid, TVertex, TCompare >::RCPPSW_DECORATE_DECLDEF (begin, const)"
+
+.SS "template<typename TGrid , typename TVertex , typename TCompare  = std::less<TGrid>> \fBrcppsw::ds::graph::grid_index_map\fP< TGrid, TVertex, TCompare >::RCPPSW_DECORATE_DECLDEF (end)"
+
+.SS "template<typename TGrid , typename TVertex , typename TCompare  = std::less<TGrid>> \fBrcppsw::ds::graph::grid_index_map\fP< TGrid, TVertex, TCompare >::RCPPSW_DECORATE_DECLDEF (end, const)"
+
+.SS "template<typename TGrid , typename TVertex , typename TCompare  = std::less<TGrid>> \fBrcppsw::ds::graph::grid_index_map\fP< TGrid, TVertex, TCompare >::RCPPSW_DECORATE_DECLDEF (\fBfind\fP)"
+
+.SS "template<typename TGrid , typename TVertex , typename TCompare  = std::less<TGrid>> \fBrcppsw::ds::graph::grid_index_map\fP< TGrid, TVertex, TCompare >::RCPPSW_DECORATE_DECLDEF (\fBfind\fP, const)"
+
+.SS "template<typename TGrid , typename TVertex , typename TCompare  = std::less<TGrid>> \fBrcppsw::ds::graph::grid_index_map\fP< TGrid, TVertex, TCompare >::RCPPSW_DECORATE_DECLDEF (insert)"
+
+.SS "template<typename TGrid , typename TVertex , typename TCompare  = std::less<TGrid>> \fBrcppsw::ds::graph::grid_index_map\fP< TGrid, TVertex, TCompare >::RCPPSW_DECORATE_DECLDEF (operator[])"
+
+.SS "template<typename TGrid , typename TVertex , typename TCompare  = std::less<TGrid>> \fBrcppsw::ds::graph::grid_index_map\fP< TGrid, TVertex, TCompare >::RCPPSW_DECORATE_DECLDEF (size, const)"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

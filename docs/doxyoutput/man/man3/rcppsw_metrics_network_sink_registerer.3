@@ -1,0 +1,69 @@
+.TH "rcppsw::metrics::network_sink_registerer" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::network_sink_registerer \- Register all collectors configured with \fBrmetrics::network_sink\fP with a \fBbase_manager\fP or a class derived from it\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <network_sink_registerer\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< network_sink_registerer >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBnetwork_sink_registerer\fP (const \fBnetwork_sink_registerer\fP &)=default"
+.br
+.ti -1c
+.RI "\fBnetwork_sink_registerer\fP (void)"
+.br
+.ti -1c
+.RI "template<typename TSink > \fBcollector_registration_spec\fP< TSink > \fBcalc_registration_spec\fP (\fBnetwork_output_manager\fP *, const rmconfig::network_sink_config *const config, const std::string &xml_name, const \fBrmetrics::output_mode\fP &allowed) const"
+.br
+.RI "Figure out: "
+.ti -1c
+.RI "template<typename TIterator , typename TSink > void \fBemit_diagnostic\fP (const TIterator &it, const \fBcollector_registration_spec\fP< TSink > &spec)"
+.br
+.ti -1c
+.RI "\fBnetwork_sink_registerer\fP & \fBoperator=\fP (const \fBnetwork_sink_registerer\fP &)=default"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Register all collectors configured with \fBrmetrics::network_sink\fP with a \fBbase_manager\fP or a class derived from it\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::metrics::network_sink_registerer::network_sink_registerer (void)\fC [inline]\fP"
+
+.SS "rcppsw::metrics::network_sink_registerer::network_sink_registerer (const \fBnetwork_sink_registerer\fP &)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TSink > \fBcollector_registration_spec\fP<TSink> rcppsw::metrics::network_sink_registerer::calc_registration_spec (\fBnetwork_output_manager\fP *, const rmconfig::network_sink_config *const config, const std::string & xml_name, const \fBrmetrics::output_mode\fP & allowed) const\fC [inline]\fP"
+
+.PP
+Figure out: 
+.IP "\(bu" 2
+If the selected output mode is valid for the specified collector\&.
+.IP "\(bu" 2
+The appropriate network dest for the collector if the output mode is OK\&.
+.PP
+.PP
+\fBReturns\fP
+.RS 4
+\fBcollector_register_spec\fP, or empty if the collector fails any pre-initialization checks\&. 
+.RE
+.PP
+
+.SS "template<typename TIterator , typename TSink > void rcppsw::metrics::network_sink_registerer::emit_diagnostic (const TIterator & it, const \fBcollector_registration_spec\fP< TSink > & spec)\fC [inline]\fP"
+
+.SS "\fBnetwork_sink_registerer\fP& rcppsw::metrics::network_sink_registerer::operator= (const \fBnetwork_sink_registerer\fP &)\fC [default]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

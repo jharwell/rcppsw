@@ -1,0 +1,48 @@
+.TH "rcppsw::er" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::er \- The Event Reporting framework used in RCPPSW and its derived projects\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBclient\fP"
+.br
+.RI "A class that can connect to a logging server for logging of important events\&. Basically a thin wrapper around log4cxx\&. If ER_NDEBUG is defined, then this class will mostly compile away to nothing, and most member functions will not be defined\&. "
+.ti -1c
+.RI "class \fBstringizable\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsigsegv_sighandler\fP (int signum)"
+.br
+.RI "A signal handler to dump the current stacktrace to a file upon a fatal signal using boost\&. "
+.ti -1c
+.RI "void \fBterminate_handler\fP (void)"
+.br
+.RI "A handler to be called instead of std::terminate(), for better debugging of WHERE an exception came from\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+The Event Reporting framework used in RCPPSW and its derived projects\&. 
+.SH "Function Documentation"
+.PP 
+.SS "void rcppsw::er::sigsegv_sighandler (int signum)"
+
+.PP
+A signal handler to dump the current stacktrace to a file upon a fatal signal using boost\&. 
+.SS "void rcppsw::er::terminate_handler (void)"
+
+.PP
+A handler to be called instead of std::terminate(), for better debugging of WHERE an exception came from\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

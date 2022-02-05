@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1multiprocess" kind="namespace" language="C++">
+    <compoundname>rcppsw::multiprocess</compoundname>
+    <innerclass refid="classrcppsw_1_1multiprocess_1_1forkable" prot="public">rcppsw::multiprocess::forkable</innerclass>
+    <innerclass refid="classrcppsw_1_1multiprocess_1_1ipc__queue" prot="public">rcppsw::multiprocess::ipc_queue</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__multiprocess_1a7918d72183b46eeca78d7a14702b60de" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bip::allocator&lt; T, bip::managed_shared_memory::segment_manager &gt;</type>
+        <definition>rcppsw::multiprocess::ipc_allocator</definition>
+        <argsstring></argsstring>
+        <name>ipc_allocator</name>
+        <briefdescription>
+<para>An allocator for shared memory for stuff allocated to be shared across processes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp" line="70" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__multiprocess_1aaaae42cec9ec13257e6419ba6b887316" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bip::list&lt; T, ipc_allocator&lt; T &gt; &gt;</type>
+        <definition>rcppsw::multiprocess::ipc_list</definition>
+        <argsstring></argsstring>
+        <name>ipc_list</name>
+        <briefdescription>
+<para>A std::list capable of being shared across processes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp" line="89" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__multiprocess_1a4df3d87592ecced419a03bae56841c5a" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename key</type>
+          </param>
+          <param>
+            <type>typename value</type>
+          </param>
+        </templateparamlist>
+        <type>bip::map&lt; key, value, std::less&lt; key &gt;, ipc_allocator&lt; std::pair&lt; const key, value &gt; &gt;&gt;</type>
+        <definition>rcppsw::multiprocess::ipc_map</definition>
+        <argsstring></argsstring>
+        <name>ipc_map</name>
+        <briefdescription>
+<para>A std::map capable of being shared across processes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp" line="98" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__multiprocess_1a878e7d0dae07737a1a57f633cc50a9ed" prot="public" static="no">
+        <type>bip::basic_string&lt; char, std::char_traits&lt; char &gt;, ipc_allocator&lt; char &gt; &gt;</type>
+        <definition>rcppsw::multiprocess::ipc_string</definition>
+        <argsstring></argsstring>
+        <name>ipc_string</name>
+        <briefdescription>
+<para>A string capable of being shared across processes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp" line="110" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__multiprocess_1af00b9e4609b851754b70f96473a0ab70" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; T, ipc_allocator&lt; T &gt; &gt;</type>
+        <definition>rcppsw::multiprocess::ipc_vector</definition>
+        <argsstring></argsstring>
+        <name>ipc_vector</name>
+        <briefdescription>
+<para>A std::vector capable of being shared across processes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp" line="80" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Multi-process variants of other classes: queue. Forkable interface. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" line="39" column="31"/>
+  </compounddef>
+</doxygen>

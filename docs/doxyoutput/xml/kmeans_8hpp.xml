@@ -1,0 +1,413 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="kmeans_8hpp" kind="file" language="C++">
+    <compoundname>kmeans.hpp</compoundname>
+    <includes local="no">algorithm</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">random</includes>
+    <includes local="no">functional</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">utility</includes>
+    <includes refid="rcppsw_8hpp" local="yes">rcppsw/rcppsw.hpp</includes>
+    <includes refid="client_8hpp" local="yes">rcppsw/er/client.hpp</includes>
+    <includes refid="cluster_8hpp" local="yes">rcppsw/algorithm/clustering/cluster.hpp</includes>
+    <includes local="yes">rcsw/utils/time_utils.h</includes>
+    <includes refid="kmeans__omp_8hpp" local="yes">rcppsw/algorithm/clustering/kmeans_omp.hpp</includes>
+    <includes refid="base__clustering__impl_8hpp" local="yes">rcppsw/algorithm/clustering/base_clustering_impl.hpp</includes>
+    <incdepgraph>
+      <node id="35">
+        <label>rcsw/utils/time_utils.h</label>
+        <link refid="time__utils_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="34">
+        <label>rcppsw/math/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>functional</label>
+      </node>
+      <node id="30">
+        <label>limits</label>
+      </node>
+      <node id="24">
+        <label>boost/stacktrace.hpp</label>
+      </node>
+      <node id="17">
+        <label>log4cxx/fileappender.h</label>
+      </node>
+      <node id="11">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="9">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>cmath</label>
+      </node>
+      <node id="21">
+        <label>log4cxx/xml/domconfigurator.h</label>
+      </node>
+      <node id="26">
+        <label>cassert</label>
+      </node>
+      <node id="23">
+        <label>rcppsw/er/stacktrace.hpp</label>
+        <link refid="stacktrace_8hpp"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>string</label>
+      </node>
+      <node id="29">
+        <label>rcppsw/algorithm/clustering/cluster.hpp</label>
+        <link refid="cluster_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>unordered_set</label>
+      </node>
+      <node id="37">
+        <label>omp.h</label>
+      </node>
+      <node id="20">
+        <label>log4cxx/patternlayout.h</label>
+      </node>
+      <node id="36">
+        <label>rcppsw/algorithm/clustering/kmeans_omp.hpp</label>
+        <link refid="kmeans__omp_8hpp"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans.hpp</label>
+        <link refid="kmeans_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>log4cxx/ndc.h</label>
+      </node>
+      <node id="4">
+        <label>random</label>
+      </node>
+      <node id="16">
+        <label>log4cxx/consoleappender.h</label>
+      </node>
+      <node id="15">
+        <label>rcppsw/er/er.hpp</label>
+        <link refid="er_8hpp"/>
+      </node>
+      <node id="13">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>rcppsw/algorithm/clustering/membership_policy.hpp</label>
+        <link refid="membership__policy_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>vector</label>
+      </node>
+      <node id="7">
+        <label>utility</label>
+      </node>
+      <node id="25">
+        <label>array</label>
+      </node>
+      <node id="27">
+        <label>iostream</label>
+      </node>
+      <node id="12">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>rcppsw/algorithm/clustering/base_clustering_impl.hpp</label>
+        <link refid="base__clustering__impl_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>rcppsw/er/client.hpp</label>
+        <link refid="client_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>type_traits</label>
+      </node>
+      <node id="22">
+        <label>rcppsw/er/macros.hpp</label>
+        <link refid="er_2macros_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>algorithm</label>
+      </node>
+      <node id="18">
+        <label>log4cxx/logger.h</label>
+      </node>
+      <node id="6">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans" prot="public">rcppsw::algorithm::clustering::kmeans</innerclass>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1algorithm">rcppsw::algorithm</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1algorithm_1_1clustering">rcppsw::algorithm::clustering</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2018 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="20"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_KMEANS_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_KMEANS_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;random&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="rcppsw_8hpp" kindref="compound">rcppsw/rcppsw.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="client_8hpp" kindref="compound">rcppsw/er/client.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="cluster_8hpp" kindref="compound">rcppsw/algorithm/clustering/cluster.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="time__utils_8h.html" kindref="compound" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">rcsw/utils/time_utils.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="kmeans__omp_8hpp" kindref="compound">rcppsw/algorithm/clustering/kmeans_omp.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="base__clustering__impl_8hpp" kindref="compound">rcppsw/algorithm/clustering/base_clustering_impl.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>algorithm,<sp/>clustering);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/>*<sp/>Class<sp/>Definitions</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="57"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">kmeans<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>er::client&lt;kmeans&lt;T&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>cluster_vector<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>base_clustering_impl&lt;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/>T,</highlight></codeline>
+<codeline lineno="62" refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1NC" kindref="compound">policy::NC</ref>&gt;<ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans_1ab60d2b177e97789ce7f6eee447f5cf2d" kindref="member">::cluster_vector</ref>;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans_1ad3b17da5d28333b05bdc287af92202b5" kindref="member">dist_calc_ftype</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl" kindref="compound">base_clustering_impl</ref>&lt;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>T,</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1NC" kindref="compound">policy::NC</ref>&gt;<ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans_1ad3b17da5d28333b05bdc287af92202b5" kindref="member">::dist_calc_ftype</ref>;</highlight></codeline>
+<codeline lineno="66" refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans_1ab60d2b177e97789ce7f6eee447f5cf2d" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans" kindref="compound">kmeans</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;T&gt;&amp;<sp/>data_in,</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;<ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl" kindref="compound">base_clustering_impl</ref>&lt;T,</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1NC" kindref="compound">policy::NC</ref>&gt;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&gt;<sp/>impl,</highlight></codeline>
+<codeline lineno="77" refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans_1a7b193045912d2f3593b8b4648ff2c7c9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>k,</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>max_iter)</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="client_8hpp_1a2e46a4046efab8f06e9e8316c5760a4d" kindref="member">ER_CLIENT_INIT</ref>(</highlight><highlight class="stringliteral">&quot;rcppsw.algorithm.clustering.kmeans&quot;</highlight><highlight class="normal">),</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mc_max_iter(max_iter),</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mc_k(k),</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_data_in(data_in),</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_data(data_in.size()),</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_membership(data_in.size()),</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_clusters(),</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_impl(std::move(impl))<sp/>{}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><ref refid="namespacercppsw_1_1algorithm_1_1clustering_1ae4bdc3c1b255447703e70a19e7c90aef" kindref="member">membership_type&lt;policy::NC&gt;</ref><sp/>run(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dist_calc_ftype&amp;<sp/>dist_func)<sp/>{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1adcf63ebd51cba1bf7ec00484800bd728" kindref="member">ER_INFO</ref>(</highlight><highlight class="stringliteral">&quot;Initialize&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>First,<sp/>initialize<sp/>the<sp/>buffer<sp/>that<sp/>each<sp/>OpenMP<sp/>thread<sp/>will<sp/>be<sp/>using.<sp/>This</highlight></codeline>
+<codeline lineno="104" refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans_1a0592585fbe15c78016f5a0348d4bb405" refkind="member"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>needs<sp/>to<sp/>be<sp/>done<sp/>BEFORE<sp/>copying<sp/>our<sp/>data<sp/>into<sp/>it,<sp/>in<sp/>order<sp/>to<sp/>maximize</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>per-thread<sp/>memory<sp/>locality.</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>m_impl-&gt;initialize(&amp;m_data,<sp/>&amp;m_membership);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>m_data<sp/>=<sp/>m_data_in;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Once<sp/>per-thread<sp/>memory<sp/>is<sp/>initialized,<sp/>initialize<sp/>the<sp/>clusters<sp/>based<sp/>on</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>now-copied<sp/>data.</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>m_clusters<sp/>=<sp/>clusters_init();</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1adcf63ebd51cba1bf7ec00484800bd728" kindref="member">ER_INFO</ref>(</highlight><highlight class="stringliteral">&quot;Begin<sp/>n_clusters=%zu,<sp/>n_datapoints=%zu&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_clusters.size(),</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_data.size());</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>end<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>start<sp/>=<sp/><ref refid="time__utils_8h_1a45b016f1122e07fce3e3881ecafd697b" kindref="member" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">time_monotonic_sec</ref>();</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>mc_max_iter;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>iter_start<sp/>=<sp/><ref refid="time__utils_8h_1a45b016f1122e07fce3e3881ecafd697b" kindref="member" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">time_monotonic_sec</ref>();</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>m_impl-&gt;iterate(m_data,<sp/>dist_func,<sp/>&amp;m_clusters);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>end<sp/>=<sp/><ref refid="time__utils_8h_1a45b016f1122e07fce3e3881ecafd697b" kindref="member" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">time_monotonic_sec</ref>();</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_impl-&gt;converged(m_clusters))<sp/>{</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1adcf63ebd51cba1bf7ec00484800bd728" kindref="member">ER_INFO</ref>(</highlight><highlight class="stringliteral">&quot;Converged<sp/>on<sp/>iter%zu&quot;</highlight><highlight class="normal">,<sp/>i);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>m_impl-&gt;post_iter_update(&amp;m_clusters);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1adcf63ebd51cba1bf7ec00484800bd728" kindref="member">ER_INFO</ref>(</highlight><highlight class="stringliteral">&quot;Iter%zu:<sp/>time=%.8fms&quot;</highlight><highlight class="normal">,<sp/>i,<sp/>(end<sp/>-<sp/>iter_start)<sp/>*<sp/>1000);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">/*<sp/>for(i..)<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1adcf63ebd51cba1bf7ec00484800bd728" kindref="member">ER_INFO</ref>(</highlight><highlight class="stringliteral">&quot;Finish:<sp/>time=%0.04fs&quot;</highlight><highlight class="normal">,<sp/>end<sp/>-<sp/>start);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_membership;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="comment">/*<sp/>run()<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>cluster_type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>base_clustering_impl&lt;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/>T,</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/>policy::NC&gt;::cluster_type;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/>cluster_vector<sp/>clusters_init(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>cluster_vector<sp/>clusters;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>mc_k;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>clusters.emplace_back(cluster_type(i,<sp/>m_data,<sp/>m_membership));</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">/*<sp/>for(i..)<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>clusters;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*<sp/>clang-format<sp/>off<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mc_max_iter;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mc_k;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/>std::vector&lt;T&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_data_in;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/>std::vector&lt;T&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_data;</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/>membership_type&lt;policy::NC&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_membership;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>cluster_vector<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_clusters;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/>std::unique_ptr&lt;base_clustering_impl&lt;T,</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>policy::NC&gt;&gt;<sp/>m_impl;</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*<sp/>clang-format<sp/>on<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(clustering,<sp/>algorithm,<sp/><ref refid="namespacercppsw" kindref="compound">rcppsw</ref>);</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_KMEANS_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans.hpp"/>
+  </compounddef>
+</doxygen>

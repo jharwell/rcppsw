@@ -1,0 +1,38 @@
+.TH "rcppsw::patterns::factory::detail" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::factory::detail
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBbase_factory\fP"
+.br
+.RI "Dispatcher factory class that releases or shares ownership of the created objects to the class/context that requests object creation\&. All classes of the derived type must have compatible constructor signatures\&. "
+.ti -1c
+.RI "struct \fBfactory_releasing_type\fP"
+.br
+.ti -1c
+.RI "struct \fBfactory_sharing_type\fP"
+.br
+.ti -1c
+.RI "class \fBfactory_singleton\fP"
+.br
+.ti -1c
+.RI "class \fBmultifactory\fP"
+.br
+.RI "A factory that releases or shares ownership of the created objects to the class/context that requests object creation\&. Derived types do not have to hve compatible constructor signatures\&. HOWEVER, though this class can handle heterogenous constructor signatures, you will likely need a switch() to determine what parameters to pass based on the name of the thing you want to build, thus defeating the purpose of a factory to some degree\&. "
+.in -1c
+.SH "Class Documentation"
+.PP 
+.SH "struct rcppsw::patterns::factory::detail::factory_releasing_type"
+.PP 
+.SH "struct rcppsw::patterns::factory::detail::factory_sharing_type"
+.PP 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

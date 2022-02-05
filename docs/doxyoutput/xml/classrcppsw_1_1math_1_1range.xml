@@ -1,0 +1,571 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1math_1_1range" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>rcppsw::math::range</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; range&lt; T &gt; &gt;</basecompoundref>
+    <basecompoundref refid="classrcppsw_1_1er_1_1stringizable" prot="private" virt="non-virtual">rcppsw::er::stringizable</basecompoundref>
+    <includes refid="range_8hpp" local="no">range.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1range_1a3e8f9bb810b7aee7e53ceacdabafff39" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool rcppsw::math::range&lt; T &gt;::m_initialized</definition>
+        <argsstring></argsstring>
+        <name>m_initialized</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="261" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="261" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1range_1a0f7fc394aee8555321723827a664a373" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T rcppsw::math::range&lt; T &gt;::m_lb</definition>
+        <argsstring></argsstring>
+        <name>m_lb</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="262" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="262" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1range_1ac219b5c729ac17653922b57da27305c9" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T rcppsw::math::range&lt; T &gt;::m_span</definition>
+        <argsstring></argsstring>
+        <name>m_span</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="264" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="264" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1range_1a47f5bb7f2b538cf5c64593e897423740" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T rcppsw::math::range&lt; T &gt;::m_ub</definition>
+        <argsstring></argsstring>
+        <name>m_ub</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="263" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="263" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a3ab0c3bc0145a373b8402326e48832f4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::range&lt; T &gt;::range</definition>
+        <argsstring>(const T &amp;lb, const T &amp;ub) noexcept</argsstring>
+        <name>range</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>lb</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>ub</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="72" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="72" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a51646a21baf91b11727e42bae296f1f3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::range&lt; T &gt;::range</definition>
+        <argsstring>(void) noexcept</argsstring>
+        <name>range</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="71" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a7fd959194720f7109c79bbe9a3899e18" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::math::range&lt; T &gt;::center</definition>
+        <argsstring>(void) const</argsstring>
+        <name>center</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the midpoint of the range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For integer ranges where <ref refid="classrcppsw_1_1math_1_1range_1a4b26e811d65942ad13b8df83c17a16db" kindref="member">span()</ref> is odd, this will truncate (i.e., the centerpoint is always of type <computeroutput>T</computeroutput>). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="206" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="206" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a236cd91f4d84f3bf342adc67c50a2879" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::range&lt; T &gt;::contains</definition>
+        <argsstring>(const range&lt; T &gt; &amp;other) const</argsstring>
+        <name>contains</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range</ref>&lt; T &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Determine if one range completely contains another (boundary points are included with both ranges). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="163" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="163" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a935c2fb3c1f164d146619bfc573d5e6c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(!std::is_floating_point&lt; U &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::math::range&lt; T &gt;::contains</definition>
+        <argsstring>(const T &amp;value) const</argsstring>
+        <name>contains</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Determine if a value is within the range [lb, ub] (boundary points included). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to test. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="148" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="148" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a935c2fb3c1f164d146619bfc573d5e6c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(std::is_floating_point&lt; U &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::math::range&lt; T &gt;::contains</definition>
+        <argsstring>(const T &amp;value) const</argsstring>
+        <name>contains</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="154" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="154" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1ad7874a03108e2d36070b758e26eed0e3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::math::range&lt; T &gt;::lb</definition>
+        <argsstring>(const T &amp;lb)</argsstring>
+        <name>lb</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>lb</declname>
+        </param>
+        <briefdescription>
+<para>Set the range lower bound. It must be less than the current <ref refid="classrcppsw_1_1math_1_1range_1af8213dcf44eddc9ebec8803d87db67fa" kindref="member">ub()</ref> or an assertion will trigger. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="98" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="98" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a98216301a5274242d0807fdb6ef0a9e5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::math::range&lt; T &gt;::lb</definition>
+        <argsstring>(void) const</argsstring>
+        <name>lb</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the lower bound of the range. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="82" column="6" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a37e7e41044185c0a22991162843b1797" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::range&lt; T &gt;::overlaps_with</definition>
+        <argsstring>(const range&lt; T &gt; &amp;other) const</argsstring>
+        <name>overlaps_with</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range</ref>&lt; T &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Determine if one range overlaps with another. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Overlap is a commutative calculation (i.e. overlap(A,B) &lt;-&gt; overlap(B,A)).</para>
+<para>To implement this, we need to check if either bound of the argument is contained in our range, AND if either of our bounds are contained in the argument&apos;s range. The second part is necessary if A is completely contained inside B in order for the calculation to be commutative. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="177" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="177" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a3b2461aa1d5ea6949e1c3f1369f71617" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range</ref></type>
+        <definition>range rcppsw::math::range&lt; T &gt;::recenter</definition>
+        <argsstring>(const T &amp;value) const</argsstring>
+        <name>recenter</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Re-center the current range around the specified value, returning a new range centered at that value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="243" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="243" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1af0a4297b73f93d2ec286cf308976a73c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::math::range&lt; T &gt;::set</definition>
+        <argsstring>(const T &amp;lb, const T &amp;ub)</argsstring>
+        <name>set</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>lb</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>ub</declname>
+        </param>
+        <briefdescription>
+<para>Set the <ref refid="classrcppsw_1_1math_1_1range_1a98216301a5274242d0807fdb6ef0a9e5" kindref="member">lb()</ref> and <ref refid="classrcppsw_1_1math_1_1range_1af8213dcf44eddc9ebec8803d87db67fa" kindref="member">ub()</ref> for the range simultaneously. The lb must be &lt; ub or an assertion will trigger. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="129" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="129" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a98d5d14dd91aa4e10d26ec82ea1113df" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range</ref></type>
+        <definition>range rcppsw::math::range&lt; T &gt;::shrink</definition>
+        <argsstring>(const T &amp;value) const</argsstring>
+        <name>shrink</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Shrink the current range in both directions with the specified value, returning a new range resulting from the shrink. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The shrunken range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="235" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="235" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a4b26e811d65942ad13b8df83c17a16db" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::math::range&lt; T &gt;::span</definition>
+        <argsstring>(void) const</argsstring>
+        <name>span</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the size of the range (max - max). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="92" column="6" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="92" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a0ade48e4a0e80910b805169e2c186bd4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string rcppsw::math::range&lt; T &gt;::to_str</definition>
+        <argsstring>(void) const override</argsstring>
+        <name>to_str</name>
+        <reimplements refid="classrcppsw_1_1er_1_1stringizable_1a0776b3b6278cc72e8b04448c016bc197">to_str</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return a string representation of the range in the form of &apos;[lb,ub]&apos;. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="212" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="212" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a0d9bc5b47f120de08c42a5a00a4b0563" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range</ref></type>
+        <definition>range rcppsw::math::range&lt; T &gt;::translate</definition>
+        <argsstring>(const T &amp;value) const</argsstring>
+        <name>translate</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Translate the current range to the specified value, returning a new range resulting from the translation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The new translated range. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="226" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="226" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a0213db565ba4678555abe0f8ef66bc85" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::math::range&lt; T &gt;::ub</definition>
+        <argsstring>(const T &amp;ub)</argsstring>
+        <name>ub</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>ub</declname>
+        </param>
+        <briefdescription>
+<para>Set the range upper bound. It must be greater than the current <ref refid="classrcppsw_1_1math_1_1range_1a98216301a5274242d0807fdb6ef0a9e5" kindref="member">lb()</ref> or an assertion will trigger. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="113" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="113" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1af8213dcf44eddc9ebec8803d87db67fa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::math::range&lt; T &gt;::ub</definition>
+        <argsstring>(void) const</argsstring>
+        <name>ub</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the upper bound of the range. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="87" column="6" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1range_1a564e5d1adac98d5e1ff4e6d0542b3ae7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::math::range&lt; T &gt;::wrap_value</definition>
+        <argsstring>(T value) const</argsstring>
+        <name>wrap_value</name>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Wrap the specified value into the range [min, max] using wrap around addition/subtraction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The wrapped value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="188" column="7" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="188" bodyend="198"/>
+        <referencedby refid="classrcppsw_1_1math_1_1radians_1adec8fa0947dfb11575045d3acb391b57" compoundref="radians_8hpp" startline="92" endline="95">rcppsw::math::radians::signed_normalize</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classrcppsw_1_1math_1_1range_1a4659bf314aa29a0ca9b3847e68e819bd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>friend std::ostream &amp;</type>
+        <definition>std::ostream&amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;stream, const range &amp;c_range)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range</ref> &amp;</type>
+          <declname>c_range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="216" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="216" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="friend" id="classrcppsw_1_1math_1_1range_1a5d38c5c46b1f429c37395c60ba4474ad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>friend std::istream &amp;</type>
+        <definition>std::istream&amp; operator&gt;&gt;</definition>
+        <argsstring>(std::istream &amp;is, range &amp;r)</argsstring>
+        <name>operator&gt;&gt;</name>
+        <param>
+          <type>std::istream &amp;</type>
+          <declname>is</declname>
+        </param>
+        <param>
+          <type><ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range</ref> &amp;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+<para>For parsing a range from a string in the form of <computeroutput>&quot;LB:UB&quot;</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="252" column="23" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="252" bodyend="257"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Convenience class holding a [min, max] range. Makes comparisons like &quot;is this number in this range&quot; much more intuitive and easy to debug. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>If you use the default constructor you must call <ref refid="classrcppsw_1_1math_1_1range_1af0a4297b73f93d2ec286cf308976a73c" kindref="member">set()</ref> or read initialization from a stream before calling any member functions to avoid undefined behavior.</para>
+<para>To call any member functions other than <ref refid="classrcppsw_1_1math_1_1range_1a98216301a5274242d0807fdb6ef0a9e5" kindref="member">lb()</ref> and <ref refid="classrcppsw_1_1math_1_1range_1af8213dcf44eddc9ebec8803d87db67fa" kindref="member">ub()</ref>, the range must be non-empty, meaning that the min must not be equal to the max (if it is an assertion will trigger).</para>
+<para>No mutator functions are provided beyond setters, with the idea that ranges should generally be read-only. If you want to modify a range (e.g., <ref refid="classrcppsw_1_1math_1_1range_1a0d9bc5b47f120de08c42a5a00a4b0563" kindref="member">translate()</ref> it), a new range should be returned and the original range be unmodified. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::math::range&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1range"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; range&lt; T &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::math::range&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1range"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; range&lt; T &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="69" column="50" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="69" bodyend="266"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1math_1_1range_1a7fd959194720f7109c79bbe9a3899e18" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>center</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a935c2fb3c1f164d146619bfc573d5e6c" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>contains</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a935c2fb3c1f164d146619bfc573d5e6c" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>contains</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a236cd91f4d84f3bf342adc67c50a2879" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>contains</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a98216301a5274242d0807fdb6ef0a9e5" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>lb</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1ad7874a03108e2d36070b758e26eed0e3" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>lb</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a3e8f9bb810b7aee7e53ceacdabafff39" prot="private" virt="non-virtual"><scope>rcppsw::math::range</scope><name>m_initialized</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a0f7fc394aee8555321723827a664a373" prot="private" virt="non-virtual"><scope>rcppsw::math::range</scope><name>m_lb</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1ac219b5c729ac17653922b57da27305c9" prot="private" virt="non-virtual"><scope>rcppsw::math::range</scope><name>m_span</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a47f5bb7f2b538cf5c64593e897423740" prot="private" virt="non-virtual"><scope>rcppsw::math::range</scope><name>m_ub</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a4659bf314aa29a0ca9b3847e68e819bd" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>operator&lt;&lt;</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a5d38c5c46b1f429c37395c60ba4474ad" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>operator&gt;&gt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a37e7e41044185c0a22991162843b1797" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>overlaps_with</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a51646a21baf91b11727e42bae296f1f3" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>range</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a3ab0c3bc0145a373b8402326e48832f4" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>range</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a3b2461aa1d5ea6949e1c3f1369f71617" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>recenter</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1af0a4297b73f93d2ec286cf308976a73c" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>set</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a98d5d14dd91aa4e10d26ec82ea1113df" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>shrink</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a4b26e811d65942ad13b8df83c17a16db" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>span</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a0ade48e4a0e80910b805169e2c186bd4" prot="public" virt="virtual"><scope>rcppsw::math::range</scope><name>to_str</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a0d9bc5b47f120de08c42a5a00a4b0563" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>translate</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1af8213dcf44eddc9ebec8803d87db67fa" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>ub</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a0213db565ba4678555abe0f8ef66bc85" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>ub</name></member>
+      <member refid="classrcppsw_1_1math_1_1range_1a564e5d1adac98d5e1ff4e6d0542b3ae7" prot="public" virt="non-virtual"><scope>rcppsw::math::range</scope><name>wrap_value</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::math::range</scope><name>~client</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

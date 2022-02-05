@@ -1,0 +1,45 @@
+.TH "rcppsw::ds::type_map< Typelist >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::type_map< Typelist > \- A map of a set of (possibly incomplete) types, keyed by std::type_index, with the value being a boost::variant\&. Extremely useful to emulate reflection in C++ (e\&.g\&. to map a type to a variant containing actions to take depending on what the actual type in the variant is)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <type_map\&.hpp>\fP
+.PP
+Inherits  map< std::type_index, boost::make_variant_over< Typelist >::type >\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBkey_type\fP = std::type_index"
+.br
+.ti -1c
+.RI "using \fBmap_type\fP = boost::container::map< \fBkey_type\fP, \fBvalue_type\fP >"
+.br
+.ti -1c
+.RI "using \fBvalue_type\fP = typename boost::make_variant_over< Typelist >::type"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename Typelist>
+.br
+class rcppsw::ds::type_map< Typelist >"
+A map of a set of (possibly incomplete) types, keyed by std::type_index, with the value being a boost::variant\&. Extremely useful to emulate reflection in C++ (e\&.g\&. to map a type to a variant containing actions to take depending on what the actual type in the variant is)\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename Typelist > using \fBrcppsw::ds::type_map\fP< Typelist >::\fBkey_type\fP =  std::type_index"
+
+.SS "template<typename Typelist > using \fBrcppsw::ds::type_map\fP< Typelist >::\fBmap_type\fP =  boost::container::map<\fBkey_type\fP, \fBvalue_type\fP>"
+
+.SS "template<typename Typelist > using \fBrcppsw::ds::type_map\fP< Typelist >::\fBvalue_type\fP =  typename boost::make_variant_over<Typelist>::type"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

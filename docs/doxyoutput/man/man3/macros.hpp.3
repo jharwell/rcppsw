@@ -1,0 +1,156 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/er/macros.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/er/macros.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'rcppsw/er/er\&.hpp'\fP
+.br
+\fC#include 'rcppsw/er/stacktrace\&.hpp'\fP
+.br
+\fC#include <array>\fP
+.br
+\fC#include <cassert>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <iostream>\fP
+.br
+\fC#include <type_traits>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#\fBdefine\fP \fBER_ASSERT\fP(cond,  msg, \&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_CHECK\fP(cond,  msg, \&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_CONDD\fP(\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_CONDI\fP(\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_CONDW\fP(\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_DEBUG\fP(\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_ERR\fP(\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_FATAL\fP(\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_FATAL_SENTINEL\fP(\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_GET_LOGGER\fP(\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_INFO\fP(\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_SENTINEL\fP(msg, \&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_TRACE\fP(\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_WARN\fP(\&.\&.\&.)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2021 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#\fBdefine\fP ER_ASSERT(cond, msg,  \&.\&.\&.)"
+\fBValue:\fP
+.PP
+.nf
+  do {                                          \
+    (void)sizeof((cond));                       \
+  } while (0)
+.fi
+.SS "#\fBdefine\fP ER_CHECK(cond, msg,  \&.\&.\&.)"
+\fBValue:\fP
+.PP
+.nf
+  {                                             \
+    if (RCPPSW_UNLIKELY(!(cond))) {             \
+      ER_ERR(msg, ##__VA_ARGS__);               \
+      goto error;                               \
+    }                                           \
+  }
+.fi
+Check a boolean condition \fIcond\fP in a function\&. If condition is not true, go to the error/bailout section for function (you must have a label called \fCerror\fP in your function) after reporting the event\&.
+.PP
+You cannot use this macro in non-class contexts, and all classes using it must derive from \fBclient\fP\&. This macro is only available if event reporting is fully enabled\&. 
+.SS "#\fBdefine\fP ER_CONDD( \&.\&.\&.)"
+
+.SS "#\fBdefine\fP ER_CONDI( \&.\&.\&.)"
+
+.SS "#\fBdefine\fP ER_CONDW( \&.\&.\&.)"
+
+.SS "#\fBdefine\fP ER_DEBUG( \&.\&.\&.)"
+
+.SS "#\fBdefine\fP ER_ERR( \&.\&.\&.)"
+
+.SS "#\fBdefine\fP ER_FATAL( \&.\&.\&.)"
+
+.SS "#\fBdefine\fP ER_FATAL_SENTINEL( \&.\&.\&.)"
+
+.SS "#\fBdefine\fP ER_GET_LOGGER( \&.\&.\&.)"
+\fBValue:\fP
+.PP
+.nf
+  rer::client                                                           \
+  <typename std::remove_cv                                              \
+   <typename std::remove_reference                                      \
+    <decltype(*this)                                                    \
+     >::type                                                            \
+    >::type                                                             \
+   >::logger();
+.fi
+.SS "#\fBdefine\fP ER_INFO( \&.\&.\&.)"
+
+.SS "#\fBdefine\fP ER_SENTINEL(msg,  \&.\&.\&.)"
+\fBValue:\fP
+.PP
+.nf
+  {                             \
+    ER_ERR(msg, ##__VA_ARGS__); \
+    goto error;                 \
+  }
+.fi
+Mark a place in the code as being universally bad\&. If execution ever reaches this spot, report the event and error out (you must have a label called \fCerror\fP in your function)\&.
+.PP
+You cannot use this macro in non-class contexts, and all classes using it must derive from \fBclient\fP\&. This macro is only available if event reporting is fully enabled\&. 
+.SS "#\fBdefine\fP ER_TRACE( \&.\&.\&.)"
+
+.SS "#\fBdefine\fP ER_WARN( \&.\&.\&.)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

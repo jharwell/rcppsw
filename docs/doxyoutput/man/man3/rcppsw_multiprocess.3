@@ -1,0 +1,51 @@
+.TH "rcppsw::multiprocess" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::multiprocess \- Multi-process variants of other classes: queue\&. Forkable interface\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBforkable\fP"
+.br
+.RI "Daemon interface class which can be derived from to indicate that the class can be fork()ed and having each new process jump into the main loop defined for the class\&. "
+.ti -1c
+.RI "class \fBipc_queue\fP"
+.br
+.RI "Interprocess synchronized queue (like \fBmultithread::mt_queue\fP, but for processes)\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<typename T > using \fBipc_allocator\fP = bip::allocator< T, bip::managed_shared_memory::segment_manager >"
+.br
+.RI "An allocator for shared memory for stuff allocated to be shared across processes\&. "
+.ti -1c
+.RI "template<typename T > using \fBipc_list\fP = bip::list< T, ipc_allocator< T > >"
+.br
+.RI "A std::list capable of being shared across processes\&. "
+.ti -1c
+.RI "template<typename key , typename value > using \fBipc_map\fP = bip::map< key, value, std::less< key >, ipc_allocator< std::pair< const key, value > >>"
+.br
+.RI "A std::map capable of being shared across processes\&. "
+.ti -1c
+.RI "using \fBipc_string\fP = bip::basic_string< char, std::char_traits< char >, ipc_allocator< char > >"
+.br
+.RI "A string capable of being shared across processes\&. "
+.ti -1c
+.RI "template<typename T > using \fBipc_vector\fP = std::vector< T, ipc_allocator< T > >"
+.br
+.RI "A std::vector capable of being shared across processes\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Multi-process variants of other classes: queue\&. Forkable interface\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

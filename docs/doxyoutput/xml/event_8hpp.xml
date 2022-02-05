@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="event_8hpp" kind="file" language="C++">
+    <compoundname>event.hpp</compoundname>
+    <includes refid="rcppsw_8hpp" local="yes">rcppsw/rcppsw.hpp</includes>
+    <includedby refid="base__fsm_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/base_fsm.hpp</includedby>
+    <includedby refid="hfsm__state_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm_state.hpp</includedby>
+    <includedby refid="state__action_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_action.hpp</includedby>
+    <includedby refid="state__entry__action_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_entry_action.hpp</includedby>
+    <includedby refid="state__exit__action_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_exit_action.hpp</includedby>
+    <includedby refid="state__guard__action_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_guard_action.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp</label>
+        <link refid="event_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="3">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>string</label>
+      </node>
+      <node id="2">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp</label>
+        <link refid="event_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_fsm.hpp</label>
+        <link refid="mt__fsm_8hpp"/>
+      </node>
+      <node id="4">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp</label>
+        <link refid="hfsm_8hpp"/>
+      </node>
+      <node id="6">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm_state.hpp</label>
+        <link refid="hfsm__state_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_exit_action.hpp</label>
+        <link refid="state__exit__action_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/simple_fsm.hpp</label>
+        <link refid="simple__fsm_8hpp"/>
+      </node>
+      <node id="7">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_action.hpp</label>
+        <link refid="state__action_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_guard_action.hpp</label>
+        <link refid="state__guard__action_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/base_fsm.hpp</label>
+        <link refid="base__fsm_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_entry_action.hpp</label>
+        <link refid="state__entry__action_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1event__data" prot="public">rcppsw::patterns::fsm::event_data</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1event__signal" prot="public">rcppsw::patterns::fsm::event_signal</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1event__type" prot="public">rcppsw::patterns::fsm::event_type</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1no__event__data" prot="public">rcppsw::patterns::fsm::no_event_data</innerclass>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns">rcppsw::patterns</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns_1_1fsm">rcppsw::patterns::fsm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2017 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="21"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_PATTERNS_FSM_EVENT_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_PATTERNS_FSM_EVENT_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="rcppsw_8hpp" kindref="compound">rcppsw/rcppsw.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>patterns,<sp/>fsm);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*<sp/>Class<sp/>Definitions</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="44"><highlight class="keyword">class<sp/></highlight><highlight class="normal">event_signal<sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>type<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>ekIGNORED<sp/>=<sp/>0xFE,<sp/><sp/></highlight></codeline>
+<codeline lineno="48" refid="classrcppsw_1_1patterns_1_1fsm_1_1event__signal" refkind="compound"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>ekFATAL<sp/>=<sp/>0xFF,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>ekHANDLED<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>ekUNHANDLED<sp/>=<sp/>1,</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>ekRUN<sp/>=<sp/>2,</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>ekEXTERNAL_SIGNALS,</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="80"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="keyword">class<sp/></highlight><highlight class="normal">event_type<sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>ekNORMAL<sp/>=<sp/>0,<sp/><sp/></highlight></codeline>
+<codeline lineno="92" refid="classrcppsw_1_1patterns_1_1fsm_1_1event__type" refkind="compound"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>ekCHILD<sp/>=<sp/>1,</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>ekEXTERNAL_TYPES,</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="106"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="keyword">class<sp/></highlight><highlight class="normal">event_data<sp/>{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/>event_data(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>event_data(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>signal,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>type<sp/>=<sp/>event_type::ekNORMAL)</highlight></codeline>
+<codeline lineno="119" refid="classrcppsw_1_1patterns_1_1fsm_1_1event__data" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_signal(signal),<sp/>m_type(type)<sp/>{}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>~<ref refid="classrcppsw_1_1patterns_1_1fsm_1_1event__data" kindref="compound">event_data</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122" refid="classrcppsw_1_1patterns_1_1fsm_1_1event__data_1ae5d46e23fb325bc0320530e81be056dd" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>signal(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_signal;<sp/>}</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>signal(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>signal)<sp/>{<sp/>m_signal<sp/>=<sp/>signal;<sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>type(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_type;<sp/>}</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>type(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>type)<sp/>{<sp/>m_type<sp/>=<sp/>type;<sp/>}</highlight></codeline>
+<codeline lineno="126" refid="classrcppsw_1_1patterns_1_1fsm_1_1event__data_1a8236d8d3654fd2127c235e5bc85df12f" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>reset(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>signal(event_signal::ekIGNORED);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>type(event_type::ekNORMAL);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="134" refid="classrcppsw_1_1patterns_1_1fsm_1_1event__data_1a4b52acccdcd60dae62843e7a3145c974" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*<sp/>clang-format<sp/>off<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>m_signal{event_signal::ekIGNORED};</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>m_type{event_type::ekNORMAL};</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*<sp/>clang-format<sp/>on<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="keyword">class<sp/></highlight><highlight class="normal">no_event_data<sp/>{};</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(fsm,<sp/>patterns,<sp/><ref refid="namespacercppsw" kindref="compound">rcppsw</ref>);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153" refid="classrcppsw_1_1patterns_1_1fsm_1_1no__event__data" refkind="compound"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_PATTERNS_FSM_EVENT_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp"/>
+  </compounddef>
+</doxygen>

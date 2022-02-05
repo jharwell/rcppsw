@@ -1,0 +1,459 @@
+.TH "rcppsw::math::vector3< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math::vector3< T > \- Base template class encapsulating mathematical actions on a pair of numbers\&. Is specialized by \fBvector3i\fP, \fBvector3d\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <vector3\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::stringizable\fP\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBcomponentwise_compare\fP"
+.br
+.RI "Needed to compare in mathematical contexts\&. "
+.ti -1c
+.RI "struct \fBkey_compare\fP"
+.br
+.RI "Needed for using vectors as keys in a map\&. "
+.in -1c
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBvalue_type\fP = T"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "constexpr \fBvector3\fP (const T &\fBx\fP, const T &\fBy\fP, const T &\fBz\fP)"
+.br
+.RI "Initializes the vector from Cartesian coordinates\&. "
+.ti -1c
+.RI "\fBvector3\fP (const \fBvector2\fP< T > &v)"
+.br
+.RI "Initializes the 3D vector from a 2D vector, setting the Z value to 0\&.0\&. "
+.ti -1c
+.RI "\fBvector3\fP (const \fBvector2\fP< T > &v, const T &\fBz\fP)"
+.br
+.RI "Initialize the 3D vector from a 2D vector\&. "
+.ti -1c
+.RI "\fBvector3\fP (void) noexcept=default"
+.br
+.RI "Initializes vector to (0,0,0) "
+.ti -1c
+.RI "bool \fBis_pd\fP (void) const"
+.br
+.RI "Is the vector is positive definite? "
+.ti -1c
+.RI "bool \fBis_psd\fP (void) const"
+.br
+.RI "Is the vector is positive semi-definite? "
+.ti -1c
+.RI "double \fBlength\fP (void) const"
+.br
+.ti -1c
+.RI "\fBvector3\fP \fBmask\fP (const \fBvector3\fP &the_mask) const"
+.br
+.RI "Mask a vector using another vector, using \fCmask\fP as a boolean mask by treating each non-zero entry as a 1\&. Should only be used if \fCmask\fP is a unit vector\&. "
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> \fBvector3\fP & \fBnormalize\fP (void)"
+.br
+.RI "Normalizes this vector\&. "
+.ti -1c
+.RI "bool \fBoperator!=\fP (const \fBvector3\fP &other) const"
+.br
+.RI "Returns if this vector and the passed one are not equal by checking coordinates for equality\&. "
+.ti -1c
+.RI "\fBvector3\fP \fBoperator*\fP (const T &val) const"
+.br
+.ti -1c
+.RI "\fBvector3\fP & \fBoperator*=\fP (const T &val)"
+.br
+.ti -1c
+.RI "\fBvector3\fP \fBoperator+\fP (const \fBvector3\fP &other) const"
+.br
+.ti -1c
+.RI "\fBvector3\fP & \fBoperator+=\fP (const \fBvector3\fP &other)"
+.br
+.ti -1c
+.RI "\fBvector3\fP< T > \fBoperator\-\fP (const \fBvector3\fP &other) const"
+.br
+.ti -1c
+.RI "\fBvector3\fP \fBoperator\-\fP (void) const"
+.br
+.ti -1c
+.RI "\fBvector3\fP & \fBoperator\-=\fP (const \fBvector3\fP &other)"
+.br
+.ti -1c
+.RI "\fBvector3\fP \fBoperator/\fP (const T &val) const"
+.br
+.ti -1c
+.RI "\fBvector3\fP & \fBoperator/=\fP (const T &val)"
+.br
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBoperator==\fP (const \fBvector3\fP &other) const"
+.br
+.RI "Returns if this vector and the argument are considered equal, determined by coordinate comparison\&. "
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> bool \fBoperator==\fP (const \fBvector3\fP &other) const"
+.br
+.RI "Returns if this vector and the argument are considered equal, determined by coordinate comparison\&. "
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBoperator>\fP (const \fBvector3\fP &other) const"
+.br
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> bool \fBoperator>\fP (const \fBvector3\fP &other) const"
+.br
+.ti -1c
+.RI "\fBvector2\fP< T > \fBproject_on_xy\fP (void) const"
+.br
+.RI "Calculates the projection of this vector onto the XY plane\&. "
+.ti -1c
+.RI "\fBvector2\fP< T > \fBproject_on_xz\fP (void) const"
+.br
+.RI "Calculates the projection of this vector onto the XZ plane\&. "
+.ti -1c
+.RI "\fBvector2\fP< T > \fBproject_on_yz\fP (void) const"
+.br
+.RI "Calculates the projection of this vector onto the YZ plane\&. "
+.ti -1c
+.RI "\fBvector3\fP & \fBscale\fP (const T &factor)"
+.br
+.RI "Scales the vector by the specified values\&. "
+.ti -1c
+.RI "\fBvector3\fP & \fBscale\fP (const T &scale_x, const T &scale_y, const T &scale_z)"
+.br
+.RI "Scales the vector by the specified values\&. "
+.ti -1c
+.RI "void \fBset\fP (const T &\fBx\fP, const T &\fBy\fP, const T &\fBz\fP)"
+.br
+.RI "Sets the vector contents from Cartesian coordinates\&. "
+.ti -1c
+.RI "T \fBsquare_length\fP (void) const"
+.br
+.RI "Returns the square length of this vector\&. "
+.ti -1c
+.RI "\fBvector2\fP< T > \fBto_2D\fP (void) const"
+.br
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> \fBsphere_vector\fP< T > \fBto_spherical\fP (void) const"
+.br
+.ti -1c
+.RI "std::string \fBto_str\fP (void) const override"
+.br
+.RI "Return a string representation of a class\&. "
+.ti -1c
+.RI "void \fBx\fP (const T &x)"
+.br
+.ti -1c
+.RI "T \fBx\fP (void)"
+.br
+.ti -1c
+.RI "const T & \fBx\fP (void) const"
+.br
+.ti -1c
+.RI "\fBradians\fP \fBxangle\fP (void) const"
+.br
+.RI "Return angle between this vector and the X axis\&. "
+.ti -1c
+.RI "void \fBy\fP (const T &y)"
+.br
+.ti -1c
+.RI "T \fBy\fP (void)"
+.br
+.ti -1c
+.RI "const T & \fBy\fP (void) const"
+.br
+.ti -1c
+.RI "\fBradians\fP \fByangle\fP (void) const"
+.br
+.RI "Return the angle between this vector and the Y axis\&. "
+.ti -1c
+.RI "void \fBz\fP (const T &z)"
+.br
+.ti -1c
+.RI "T \fBz\fP (void)"
+.br
+.ti -1c
+.RI "const T & \fBz\fP (void) const"
+.br
+.ti -1c
+.RI "\fBradians\fP \fBzangle\fP (void) const"
+.br
+.RI "Return the angle between this vector and the Z axis\&. "
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static constexpr size_t \fBkDIMENSIONALITY\fP = 3"
+.br
+.ti -1c
+.RI "static const \fBvector3\fP< T > \fBX\fP"
+.br
+.RI "The positive X axis\&. "
+.ti -1c
+.RI "static const \fBvector3\fP< T > \fBY\fP"
+.br
+.RI "The positive Y axis\&. "
+.ti -1c
+.RI "static const \fBvector3\fP< T > \fBZ\fP"
+.br
+.RI "The positive Z axis\&. "
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &stream, const \fBvector3\fP &v)"
+.br
+.ti -1c
+.RI "std::istream & \fBoperator>>\fP (std::istream &is, \fBvector3\fP< T > &v)"
+.br
+.RI "For parsing a vector from a string in the form of \fC'X,Y,Z'\fP\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::math::vector3< T >"
+Base template class encapsulating mathematical actions on a pair of numbers\&. Is specialized by \fBvector3i\fP, \fBvector3d\fP\&. 
+
+All operations are performed in whatever the template parameter is, so take care if you are trying to do scaling, trigonometric things with integers\&.\&.\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename T > using \fBrcppsw::math::vector3\fP< T >::\fBvalue_type\fP =  T"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::math::vector3\fP< T >::\fBvector3\fP (void)\fC [default]\fP, \fC [noexcept]\fP"
+
+.PP
+Initializes vector to (0,0,0) 
+.SS "template<typename T > constexpr \fBrcppsw::math::vector3\fP< T >::\fBvector3\fP (const T & x, const T & y, const T & z)\fC [inline]\fP, \fC [constexpr]\fP"
+
+.PP
+Initializes the vector from Cartesian coordinates\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIx\fP The X coordinate\&. 
+.br
+\fIy\fP The Y coordinate\&. 
+.br
+\fIz\fP The Z coordinate\&. 
+.RE
+.PP
+
+.SS "template<typename T > \fBrcppsw::math::vector3\fP< T >::\fBvector3\fP (const \fBvector2\fP< T > & v)\fC [inline]\fP, \fC [explicit]\fP"
+
+.PP
+Initializes the 3D vector from a 2D vector, setting the Z value to 0\&.0\&. 
+.SS "template<typename T > \fBrcppsw::math::vector3\fP< T >::\fBvector3\fP (const \fBvector2\fP< T > & v, const T & z)\fC [inline]\fP"
+
+.PP
+Initialize the 3D vector from a 2D vector\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > bool \fBrcppsw::math::vector3\fP< T >::is_pd (void) const\fC [inline]\fP"
+
+.PP
+Is the vector is positive definite? 
+.SS "template<typename T > bool \fBrcppsw::math::vector3\fP< T >::is_psd (void) const\fC [inline]\fP"
+
+.PP
+Is the vector is positive semi-definite? 
+.SS "template<typename T > double \fBrcppsw::math::vector3\fP< T >::length (void) const\fC [inline]\fP"
+Returns the length of this vector\&. 
+.SS "template<typename T > \fBvector3\fP \fBrcppsw::math::vector3\fP< T >::mask (const \fBvector3\fP< T > & the_mask) const\fC [inline]\fP"
+
+.PP
+Mask a vector using another vector, using \fCmask\fP as a boolean mask by treating each non-zero entry as a 1\&. Should only be used if \fCmask\fP is a unit vector\&. 
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> \fBvector3\fP& \fBrcppsw::math::vector3\fP< T >::normalize (void)\fC [inline]\fP"
+
+.PP
+Normalizes this vector\&. After this method is called, the vector has length 1\&. If the vector is (0,0), this call results in a division by zero error, and your program will probably crash\&.
+.PP
+\fBReturns\fP
+.RS 4
+A reference to the normalized vector\&. 
+.RE
+.PP
+
+.SS "template<typename T > bool \fBrcppsw::math::vector3\fP< T >::operator!= (const \fBvector3\fP< T > & other) const\fC [inline]\fP"
+
+.PP
+Returns if this vector and the passed one are not equal by checking coordinates for equality\&. Should generally not be called if the template parameter type is not an integer, as floating point comparisons in general are unsafe\&. 
+.SS "template<typename T > \fBvector3\fP \fBrcppsw::math::vector3\fP< T >::operator* (const T & val) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector3\fP& \fBrcppsw::math::vector3\fP< T >::operator*= (const T & val)\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector3\fP \fBrcppsw::math::vector3\fP< T >::operator+ (const \fBvector3\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector3\fP& \fBrcppsw::math::vector3\fP< T >::operator+= (const \fBvector3\fP< T > & other)\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector3\fP<T> \fBrcppsw::math::vector3\fP< T >::operator\- (const \fBvector3\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector3\fP \fBrcppsw::math::vector3\fP< T >::operator\- (void) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector3\fP& \fBrcppsw::math::vector3\fP< T >::operator\-= (const \fBvector3\fP< T > & other)\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector3\fP \fBrcppsw::math::vector3\fP< T >::operator/ (const T & val) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector3\fP& \fBrcppsw::math::vector3\fP< T >::operator/= (const T & val)\fC [inline]\fP"
+
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBrcppsw::math::vector3\fP< T >::operator== (const \fBvector3\fP< T > & other) const\fC [inline]\fP"
+
+.PP
+Returns if this vector and the argument are considered equal, determined by coordinate comparison\&. Only available if the template argument is not floating point\&. 
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> bool \fBrcppsw::math::vector3\fP< T >::operator== (const \fBvector3\fP< T > & other) const\fC [inline]\fP"
+
+.PP
+Returns if this vector and the argument are considered equal, determined by coordinate comparison\&. Only available if the template argument is floating point\&. 
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBrcppsw::math::vector3\fP< T >::operator> (const \fBvector3\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> bool \fBrcppsw::math::vector3\fP< T >::operator> (const \fBvector3\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector2\fP<T> \fBrcppsw::math::vector3\fP< T >::project_on_xy (void) const\fC [inline]\fP"
+
+.PP
+Calculates the projection of this vector onto the XY plane\&. 
+.SS "template<typename T > \fBvector2\fP<T> \fBrcppsw::math::vector3\fP< T >::project_on_xz (void) const\fC [inline]\fP"
+
+.PP
+Calculates the projection of this vector onto the XZ plane\&. 
+.SS "template<typename T > \fBvector2\fP<T> \fBrcppsw::math::vector3\fP< T >::project_on_yz (void) const\fC [inline]\fP"
+
+.PP
+Calculates the projection of this vector onto the YZ plane\&. 
+.SS "template<typename T > \fBvector3\fP& \fBrcppsw::math::vector3\fP< T >::scale (const T & factor)\fC [inline]\fP"
+
+.PP
+Scales the vector by the specified values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfactor\fP The scaling factor applied to X,Y,Z\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A reference to the scaled vector\&. 
+.RE
+.PP
+
+.SS "template<typename T > \fBvector3\fP& \fBrcppsw::math::vector3\fP< T >::scale (const T & scale_x, const T & scale_y, const T & scale_z)\fC [inline]\fP"
+
+.PP
+Scales the vector by the specified values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIscale_x\fP The scale factor for the X coordinate\&. 
+.br
+\fIscale_y\fP The scale factor for the Y coordinate\&. 
+.br
+\fIscale_z\fP The scale factor for the Z coordinate\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A reference to the scaled vector\&. 
+.RE
+.PP
+
+.SS "template<typename T > void \fBrcppsw::math::vector3\fP< T >::set (const T & x, const T & y, const T & z)\fC [inline]\fP"
+
+.PP
+Sets the vector contents from Cartesian coordinates\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIx\fP The new X coordinate\&. 
+.br
+\fIy\fP The new Y coordinate\&. 
+.RE
+.PP
+
+.SS "template<typename T > T \fBrcppsw::math::vector3\fP< T >::square_length (void) const\fC [inline]\fP"
+
+.PP
+Returns the square length of this vector\&. 
+.SS "template<typename T > \fBvector2\fP<T> \fBrcppsw::math::vector3\fP< T >::to_2D (void) const\fC [inline]\fP"
+
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> \fBsphere_vector\fP<T> \fBrcppsw::math::vector3\fP< T >::to_spherical (void) const\fC [inline]\fP"
+
+.SS "template<typename T > std::string \fBrcppsw::math::vector3\fP< T >::to_str (void) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Return a string representation of a class\&. 
+.PP
+Reimplemented from \fBrcppsw::er::stringizable\fP\&.
+.SS "template<typename T > void \fBrcppsw::math::vector3\fP< T >::x (const T & x)\fC [inline]\fP"
+
+.SS "template<typename T > T \fBrcppsw::math::vector3\fP< T >::x (void)\fC [inline]\fP"
+
+.SS "template<typename T > const T& \fBrcppsw::math::vector3\fP< T >::x (void) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBradians\fP \fBrcppsw::math::vector3\fP< T >::xangle (void) const\fC [inline]\fP"
+
+.PP
+Return angle between this vector and the X axis\&. 
+.SS "template<typename T > void \fBrcppsw::math::vector3\fP< T >::y (const T & y)\fC [inline]\fP"
+
+.SS "template<typename T > T \fBrcppsw::math::vector3\fP< T >::y (void)\fC [inline]\fP"
+
+.SS "template<typename T > const T& \fBrcppsw::math::vector3\fP< T >::y (void) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBradians\fP \fBrcppsw::math::vector3\fP< T >::yangle (void) const\fC [inline]\fP"
+
+.PP
+Return the angle between this vector and the Y axis\&. 
+.SS "template<typename T > void \fBrcppsw::math::vector3\fP< T >::z (const T & z)\fC [inline]\fP"
+
+.SS "template<typename T > T \fBrcppsw::math::vector3\fP< T >::z (void)\fC [inline]\fP"
+
+.SS "template<typename T > const T& \fBrcppsw::math::vector3\fP< T >::z (void) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBradians\fP \fBrcppsw::math::vector3\fP< T >::zangle (void) const\fC [inline]\fP"
+
+.PP
+Return the angle between this vector and the Z axis\&. 
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "template<typename T > std::ostream& operator<< (std::ostream & stream, const \fBvector3\fP< T > & v)\fC [friend]\fP"
+
+.SS "template<typename T > std::istream& operator>> (std::istream & is, \fBvector3\fP< T > & v)\fC [friend]\fP"
+
+.PP
+For parsing a vector from a string in the form of \fC'X,Y,Z'\fP\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "template<typename T > constexpr size_t \fBrcppsw::math::vector3\fP< T >::kDIMENSIONALITY = 3\fC [static]\fP, \fC [constexpr]\fP"
+
+.SS "const \fBvector3d\fP rcppsw::math::vector3d::X\fC [static]\fP"
+
+.PP
+The positive X axis\&. 
+.SS "const \fBvector3d\fP rcppsw::math::vector3d::Y\fC [static]\fP"
+
+.PP
+The positive Y axis\&. 
+.SS "const \fBvector3d\fP rcppsw::math::vector3d::Z\fC [static]\fP"
+
+.PP
+The positive Z axis\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

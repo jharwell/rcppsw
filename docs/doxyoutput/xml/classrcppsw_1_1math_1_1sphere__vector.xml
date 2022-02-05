@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1math_1_1sphere__vector" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::math::sphere_vector</compoundname>
+    <includes refid="sphere__vector_8hpp" local="no">sphere_vector.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1sphere__vector_1a51ba708f7327aaabd048d223a200b154" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref></type>
+        <definition>rmath::radians rcppsw::math::sphere_vector&lt; T &gt;::m_azimuth</definition>
+        <argsstring></argsstring>
+        <name>m_azimuth</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" line="63" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1sphere__vector_1afa6ce339e9b1fae97fee785b9cd4b209" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T rcppsw::math::sphere_vector&lt; T &gt;::m_radius</definition>
+        <argsstring></argsstring>
+        <name>m_radius</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" line="61" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1sphere__vector_1a13bba9f6ae74decef697677337c0f321" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref></type>
+        <definition>rmath::radians rcppsw::math::sphere_vector&lt; T &gt;::m_zenith</definition>
+        <argsstring></argsstring>
+        <name>m_zenith</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" line="62" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1sphere__vector_1a2a4f23e8ec57af6e672c9587d8c57be5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::sphere_vector&lt; T &gt;::sphere_vector</definition>
+        <argsstring>(const T &amp;radius, const rmath::radians &amp;zenith, const rmath::radians &amp;azimuth)</argsstring>
+        <name>sphere_vector</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>radius</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref> &amp;</type>
+          <declname>zenith</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref> &amp;</type>
+          <declname>azimuth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" line="50" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" bodystart="50" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1sphere__vector_1a747fdf0ba928e6e52ea762e4a5a8d52d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref> &amp;</type>
+        <definition>const rmath::radians&amp; rcppsw::math::sphere_vector&lt; T &gt;::azimuth</definition>
+        <argsstring>(void) const</argsstring>
+        <name>azimuth</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" line="55" column="24" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1sphere__vector_1ae4de7c5d190156ebf49075c769c49ed1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T&amp; rcppsw::math::sphere_vector&lt; T &gt;::radius</definition>
+        <argsstring>(void) const</argsstring>
+        <name>radius</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" line="57" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1sphere__vector_1a19cdabe5d5b88e37cb3569f7720a17c4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref> &amp;</type>
+        <definition>const rmath::radians&amp; rcppsw::math::sphere_vector&lt; T &gt;::zenith</definition>
+        <argsstring>(void) const</argsstring>
+        <name>zenith</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" line="56" column="24" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Representation of a point in 3D space in spherical coordinates. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::math::sphere_vector&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1sphere__vector"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" line="48" column="20" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp" bodystart="48" bodyend="65"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1math_1_1sphere__vector_1a747fdf0ba928e6e52ea762e4a5a8d52d" prot="public" virt="non-virtual"><scope>rcppsw::math::sphere_vector</scope><name>azimuth</name></member>
+      <member refid="classrcppsw_1_1math_1_1sphere__vector_1a51ba708f7327aaabd048d223a200b154" prot="private" virt="non-virtual"><scope>rcppsw::math::sphere_vector</scope><name>m_azimuth</name></member>
+      <member refid="classrcppsw_1_1math_1_1sphere__vector_1afa6ce339e9b1fae97fee785b9cd4b209" prot="private" virt="non-virtual"><scope>rcppsw::math::sphere_vector</scope><name>m_radius</name></member>
+      <member refid="classrcppsw_1_1math_1_1sphere__vector_1a13bba9f6ae74decef697677337c0f321" prot="private" virt="non-virtual"><scope>rcppsw::math::sphere_vector</scope><name>m_zenith</name></member>
+      <member refid="classrcppsw_1_1math_1_1sphere__vector_1ae4de7c5d190156ebf49075c769c49ed1" prot="public" virt="non-virtual"><scope>rcppsw::math::sphere_vector</scope><name>radius</name></member>
+      <member refid="classrcppsw_1_1math_1_1sphere__vector_1a2a4f23e8ec57af6e672c9587d8c57be5" prot="public" virt="non-virtual"><scope>rcppsw::math::sphere_vector</scope><name>sphere_vector</name></member>
+      <member refid="classrcppsw_1_1math_1_1sphere__vector_1a19cdabe5d5b88e37cb3569f7720a17c4" prot="public" virt="non-virtual"><scope>rcppsw::math::sphere_vector</scope><name>zenith</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

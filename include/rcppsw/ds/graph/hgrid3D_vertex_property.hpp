@@ -18,12 +18,12 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VERTEX_PROPERTY_HPP_
-#define INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VERTEX_PROPERTY_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include "rcppsw/ds/graph/base_vertex_property.hpp"
 #include "rcppsw/math/vector3.hpp"
 
 /*******************************************************************************
@@ -41,10 +41,8 @@ NS_START(rcppsw, ds, graph);
  * \brief Base class for all vertex properties used with the \ref hgrid3D
  * graph.
  */
-struct hgrid3D_vertex_property {
+struct hgrid3D_vertex_property : public base_vertex_property {
   rmath::vector3z coord{};
 };
 
 NS_END(graph, ds, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VERTEX_PROPERTY_HPP_ */

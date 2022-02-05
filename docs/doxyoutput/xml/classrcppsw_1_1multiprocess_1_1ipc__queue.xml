@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1multiprocess_1_1ipc__queue" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::multiprocess::ipc_queue</compoundname>
+    <includes refid="ipc__queue_8hpp" local="no">ipc_queue.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1multiprocess_1_1ipc__queue_1a836cfee1a48aa7f051e99976ec108dfe" prot="public" static="no">
+        <type>bip::allocator&lt; T, bip::managed_shared_memory::segment_manager &gt;</type>
+        <definition>typedef bip::allocator&lt;T, bip::managed_shared_memory::segment_manager&gt; rcppsw::multiprocess::ipc_queue&lt; T &gt;::allocator_type</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" line="57" column="7" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1multiprocess_1_1ipc__queue_1af8475fa649992c5de9ccf2e2bb28a5b0" prot="private" static="no" mutable="yes">
+        <type>bip::interprocess_mutex</type>
+        <definition>bip::interprocess_mutex rcppsw::multiprocess::ipc_queue&lt; T &gt;::m_io_mutex</definition>
+        <argsstring></argsstring>
+        <name>m_io_mutex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" line="180" column="39" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1multiprocess_1_1ipc__queue_1a5d8503e2e1c667e566f18d26ea95804b" prot="private" static="no" mutable="no">
+        <type>bip::deque&lt; T, <ref refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1a836cfee1a48aa7f051e99976ec108dfe" kindref="member">allocator_type</ref> &gt;</type>
+        <definition>bip::deque&lt;T, allocator_type&gt; rcppsw::multiprocess::ipc_queue&lt; T &gt;::m_queue</definition>
+        <argsstring></argsstring>
+        <name>m_queue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" line="179" column="20" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1multiprocess_1_1ipc__queue_1abc35dce3e57cd74c1c69e8ddfe52c491" prot="private" static="no" mutable="yes">
+        <type>bip::interprocess_condition</type>
+        <definition>bip::interprocess_condition rcppsw::multiprocess::ipc_queue&lt; T &gt;::m_wait_condition</definition>
+        <argsstring></argsstring>
+        <name>m_wait_condition</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" line="181" column="39" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1ipc__queue_1aff4d27a914500b1a2505c0ed5a1ebd96" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::multiprocess::ipc_queue&lt; T &gt;::ipc_queue</definition>
+        <argsstring>(allocator_type alloc)</argsstring>
+        <name>ipc_queue</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1a836cfee1a48aa7f051e99976ec108dfe" kindref="member">allocator_type</ref></type>
+          <declname>alloc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" line="59" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" bodystart="59" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1ipc__queue_1adc4e7e3e17dc639b748d724444eaea36" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multiprocess::ipc_queue&lt; T &gt;::clear</definition>
+        <argsstring>(void)</argsstring>
+        <name>clear</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Empty the queue. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" line="162" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" bodystart="162" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1ipc__queue_1aa9cf47972f0b547ab320b4d87596055d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::multiprocess::ipc_queue&lt; T &gt;::is_empty</definition>
+        <argsstring>() const</argsstring>
+        <name>is_empty</name>
+        <briefdescription>
+<para>Determine if the queue is current empty or not. This function performs no locking, and even if it did, the result would be immediately out of date, so don&apos;t depend on this value among multiple processes without additional synchronization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>TRUE</computeroutput> if the condition is met, <computeroutput>FALSE</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" line="81" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" bodystart="81" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1ipc__queue_1aa719051f801b8c4314920e27e84b8490" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::multiprocess::ipc_queue&lt; T &gt;::pop</definition>
+        <argsstring>(void)</argsstring>
+        <name>pop</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the front element in the queue. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The front element. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" line="91" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" bodystart="91" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1ipc__queue_1aaed593576202cac7d3ec4fb46ddf59de" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::multiprocess::ipc_queue&lt; T &gt;::pop_timed_wait</definition>
+        <argsstring>(T *const element, int to_sec)</argsstring>
+        <name>pop_timed_wait</name>
+        <param>
+          <type>T *const</type>
+          <declname>element</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>to_sec</declname>
+        </param>
+        <briefdescription>
+<para>Get the front element in the queue, waiting a set # of seconds before timing out if the queue is currently empty. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>To be filled with the front item in the queue. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>to_sec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para># of seconds for timeout.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>TRUE</computeroutput> if an item was removed from the queue, <computeroutput>FALSE</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" line="146" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" bodystart="146" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1ipc__queue_1a67313b521681ee48539ca013abd0abca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::multiprocess::ipc_queue&lt; T &gt;::pop_try</definition>
+        <argsstring>(T *const element)</argsstring>
+        <name>pop_try</name>
+        <param>
+          <type>T *const</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+<para>Get the front element in the queue if it exists. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>To be filled with the front item in the queue if it exists.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>TRUE</computeroutput> if the front element was removed, <computeroutput>FALSE</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" line="107" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" bodystart="107" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1ipc__queue_1a9f81062818670ade7f8a2d77549655ea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multiprocess::ipc_queue&lt; T &gt;::pop_wait</definition>
+        <argsstring>(T *const element)</argsstring>
+        <name>pop_wait</name>
+        <param>
+          <type>T *const</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+<para>Get the front element in the queue, waiting indefinitely if the queue is currently empty. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>To be filled with the front item in the queue. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" line="126" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" bodystart="126" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1ipc__queue_1a1048d7baafead7675460b6a5b8ded80b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multiprocess::ipc_queue&lt; T &gt;::push</definition>
+        <argsstring>(T element)</argsstring>
+        <name>push</name>
+        <param>
+          <type>T</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+<para>Push an element onto the queue, notifying at most 1 process waiting on the queue. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The element to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" line="68" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" bodystart="68" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1ipc__queue_1a0e863292433bcd72c393696df5708710" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t rcppsw::multiprocess::ipc_queue&lt; T &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+<para>Get the current # of elements in the queue. This function performs no locking, and even if it did, the result would be immediately out of date, so don&apos;t depend on this value among multiple processes without additional synchronization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current # elements in the queue. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" line="175" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" bodystart="175" bodyend="175"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interprocess synchronized queue (like <ref refid="classrcppsw_1_1multithread_1_1mt__queue" kindref="compound">multithread::mt_queue</ref>, but for processes). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::multiprocess::ipc_queue&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1multiprocess_1_1ipc__queue"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" line="54" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp" bodystart="54" bodyend="183"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1a836cfee1a48aa7f051e99976ec108dfe" prot="public" virt="non-virtual"><scope>rcppsw::multiprocess::ipc_queue</scope><name>allocator_type</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1adc4e7e3e17dc639b748d724444eaea36" prot="public" virt="non-virtual"><scope>rcppsw::multiprocess::ipc_queue</scope><name>clear</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1aff4d27a914500b1a2505c0ed5a1ebd96" prot="public" virt="non-virtual"><scope>rcppsw::multiprocess::ipc_queue</scope><name>ipc_queue</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1aa9cf47972f0b547ab320b4d87596055d" prot="public" virt="non-virtual"><scope>rcppsw::multiprocess::ipc_queue</scope><name>is_empty</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1af8475fa649992c5de9ccf2e2bb28a5b0" prot="private" virt="non-virtual"><scope>rcppsw::multiprocess::ipc_queue</scope><name>m_io_mutex</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1a5d8503e2e1c667e566f18d26ea95804b" prot="private" virt="non-virtual"><scope>rcppsw::multiprocess::ipc_queue</scope><name>m_queue</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1abc35dce3e57cd74c1c69e8ddfe52c491" prot="private" virt="non-virtual"><scope>rcppsw::multiprocess::ipc_queue</scope><name>m_wait_condition</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1aa719051f801b8c4314920e27e84b8490" prot="public" virt="non-virtual"><scope>rcppsw::multiprocess::ipc_queue</scope><name>pop</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1aaed593576202cac7d3ec4fb46ddf59de" prot="public" virt="non-virtual"><scope>rcppsw::multiprocess::ipc_queue</scope><name>pop_timed_wait</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1a67313b521681ee48539ca013abd0abca" prot="public" virt="non-virtual"><scope>rcppsw::multiprocess::ipc_queue</scope><name>pop_try</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1a9f81062818670ade7f8a2d77549655ea" prot="public" virt="non-virtual"><scope>rcppsw::multiprocess::ipc_queue</scope><name>pop_wait</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1a1048d7baafead7675460b6a5b8ded80b" prot="public" virt="non-virtual"><scope>rcppsw::multiprocess::ipc_queue</scope><name>push</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1ipc__queue_1a0e863292433bcd72c393696df5708710" prot="public" virt="non-virtual"><scope>rcppsw::multiprocess::ipc_queue</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

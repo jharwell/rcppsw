@@ -1,0 +1,216 @@
+.TH "rcppsw::utils::color" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::utils::color \- A simple RGBA class representing colors as 4 8-bit numbers\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <color\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::stringizable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBcolor\fP (const \fBcolor\fP &)=default"
+.br
+.ti -1c
+.RI "\fBcolor\fP (uint8_t \fBred\fP, uint8_t \fBgreen\fP, uint8_t \fBblue\fP, uint8_t \fBalpha\fP=255)"
+.br
+.ti -1c
+.RI "\fBcolor\fP (void)=default"
+.br
+.ti -1c
+.RI "uint8_t \fBalpha\fP () const"
+.br
+.ti -1c
+.RI "void \fBalpha\fP (uint8_t alpha)"
+.br
+.ti -1c
+.RI "uint8_t \fBblue\fP () const"
+.br
+.ti -1c
+.RI "void \fBblue\fP (uint8_t blue)"
+.br
+.ti -1c
+.RI "uint8_t \fBgreen\fP () const"
+.br
+.ti -1c
+.RI "void \fBgreen\fP (uint8_t green)"
+.br
+.ti -1c
+.RI "bool \fBoperator!=\fP (const \fBcolor\fP &c_color2) const"
+.br
+.ti -1c
+.RI "\fBcolor\fP & \fBoperator=\fP (const \fBcolor\fP &)=default"
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBcolor\fP &c_color2) const"
+.br
+.ti -1c
+.RI "uint8_t \fBred\fP () const"
+.br
+.ti -1c
+.RI "void \fBred\fP (uint8_t red)"
+.br
+.ti -1c
+.RI "std::string \fBto_str\fP (void) const override"
+.br
+.RI "Return a string representation of a class\&. "
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const \fBcolor\fP \fBkBLACK\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkBLUE\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkBROWN\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkCYAN\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkGRAY10\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkGRAY20\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkGRAY30\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkGRAY40\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkGRAY50\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkGRAY60\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkGRAY70\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkGRAY80\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkGRAY90\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkGREEN\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkMAGENTA\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkORANGE\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkPURPLE\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkRED\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkWHITE\fP"
+.br
+.ti -1c
+.RI "static const \fBcolor\fP \fBkYELLOW\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A simple RGBA class representing colors as 4 8-bit numbers\&. 
+
+Should be used to make color usage agnostic across projects, and not tied to a particular platform, simulator, etc\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::utils::color::color (void)\fC [default]\fP"
+
+.SS "rcppsw::utils::color::color (const \fBcolor\fP &)\fC [default]\fP"
+
+.SS "rcppsw::utils::color::color (uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = \fC255\fP)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "uint8_t rcppsw::utils::color::alpha () const\fC [inline]\fP"
+
+.SS "void rcppsw::utils::color::alpha (uint8_t alpha)\fC [inline]\fP"
+
+.SS "uint8_t rcppsw::utils::color::blue () const\fC [inline]\fP"
+
+.SS "void rcppsw::utils::color::blue (uint8_t blue)\fC [inline]\fP"
+
+.SS "uint8_t rcppsw::utils::color::green () const\fC [inline]\fP"
+
+.SS "void rcppsw::utils::color::green (uint8_t green)\fC [inline]\fP"
+
+.SS "bool rcppsw::utils::color::operator!= (const \fBcolor\fP & c_color2) const\fC [inline]\fP"
+
+.SS "\fBcolor\fP& rcppsw::utils::color::operator= (const \fBcolor\fP &)\fC [default]\fP"
+
+.SS "bool rcppsw::utils::color::operator== (const \fBcolor\fP & c_color2) const\fC [inline]\fP"
+
+.SS "uint8_t rcppsw::utils::color::red () const\fC [inline]\fP"
+
+.SS "void rcppsw::utils::color::red (uint8_t red)\fC [inline]\fP"
+
+.SS "std::string rcppsw::utils::color::to_str (void) const\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Return a string representation of a class\&. 
+.PP
+Reimplemented from \fBrcppsw::er::stringizable\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "const \fBcolor\fP rcppsw::utils::color::kBLACK\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kBLUE\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kBROWN\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kCYAN\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kGRAY10\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kGRAY20\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kGRAY30\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kGRAY40\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kGRAY50\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kGRAY60\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kGRAY70\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kGRAY80\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kGRAY90\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kGREEN\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kMAGENTA\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kORANGE\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kPURPLE\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kRED\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kWHITE\fC [static]\fP"
+
+.SS "const \fBcolor\fP rcppsw::utils::color::kYELLOW\fC [static]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

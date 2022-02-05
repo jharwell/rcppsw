@@ -1,0 +1,74 @@
+.TH "rcppsw::patterns::fsm::hfsm_state_action0< FSM, Handler >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::fsm::hfsm_state_action0< FSM, Handler >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <hfsm_state\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::patterns::fsm::hfsm_state\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBhfsm_state_action0\fP (\fBhfsm_state\fP *\fBparent\fP)"
+.br
+.ti -1c
+.RI "\fB~hfsm_state_action0\fP (void) override=default"
+.br
+.ti -1c
+.RI "int \fBinvoke_state_action\fP (\fBbase_fsm\fP *fsm, \fBevent_data\fP *) const override"
+.br
+.RI "Called by the state machine engine to execute a state action\&. If a guard condition exists and it evaluates to false, the state action will not execute\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class FSM, int(FSM::*)(void) Handler>
+.br
+class rcppsw::patterns::fsm::hfsm_state_action0< FSM, Handler >"
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIFSM\fP The current state machine class\&. 
+.br
+\fIHandler\fP A state machine member function pointer that takes ZERO arguments\&. 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class FSM , int(FSM::*)(void) Handler> \fBrcppsw::patterns::fsm::hfsm_state_action0\fP< FSM, Handler >::\fBhfsm_state_action0\fP (\fBhfsm_state\fP * parent)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "template<class FSM , int(FSM::*)(void) Handler> \fBrcppsw::patterns::fsm::hfsm_state_action0\fP< FSM, Handler >::~\fBhfsm_state_action0\fP (void)\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class FSM , int(FSM::*)(void) Handler> int \fBrcppsw::patterns::fsm::hfsm_state_action0\fP< FSM, Handler >::invoke_state_action (\fBbase_fsm\fP * sm, \fBevent_data\fP * data) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Called by the state machine engine to execute a state action\&. If a guard condition exists and it evaluates to false, the state action will not execute\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsm\fP A state machine instance\&. 
+.br
+\fIdata\fP The event data\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+integer indicating whether or not the event was handled\&. 
+.RE
+.PP
+
+.PP
+Implements \fBrcppsw::patterns::fsm::state\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

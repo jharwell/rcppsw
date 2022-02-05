@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1fsm_1_1state__map__row" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::fsm::state_map_row</compoundname>
+    <includes refid="state__map__row_8hpp" local="no">state_map_row.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1patterns_1_1fsm_1_1state__map__row_1a71b379c2f9e9be216d2381fa10c9b004" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1state" kindref="compound">rpfsm::state</ref> *</type>
+        <definition>rpfsm::state* rcppsw::patterns::fsm::state_map_row::m_state</definition>
+        <argsstring></argsstring>
+        <name>m_state</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_map_row.hpp" line="57" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_map_row.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1state__map__row_1ae9001a4195e58d0baa3a9f0551b5755f" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::fsm::state_map_row::state_map_row</definition>
+        <argsstring>(rcppsw::patterns::fsm::state *state)</argsstring>
+        <name>state_map_row</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1state" kindref="compound">rcppsw::patterns::fsm::state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_map_row.hpp" line="50" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_map_row.hpp" bodystart="50" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1state__map__row_1ab12e8da584c1539ae75bb449e7a60c4b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1state" kindref="compound">rcppsw::patterns::fsm::state</ref> *</type>
+        <definition>rcppsw::patterns::fsm::state* rcppsw::patterns::fsm::state_map_row::state</definition>
+        <argsstring>(void) const</argsstring>
+        <name>state</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_map_row.hpp" line="53" column="32" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_map_row.hpp" bodystart="53" bodyend="53"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A structure to hold a single row within the state map. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::state_map_row</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__map__row"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_map_row.hpp" line="48" column="20" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_map_row.hpp" bodystart="48" bodyend="59"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__map__row_1a71b379c2f9e9be216d2381fa10c9b004" prot="private" virt="non-virtual"><scope>rcppsw::patterns::fsm::state_map_row</scope><name>m_state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__map__row_1ab12e8da584c1539ae75bb449e7a60c4b" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::state_map_row</scope><name>state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__map__row_1ae9001a4195e58d0baa3a9f0551b5755f" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::state_map_row</scope><name>state_map_row</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

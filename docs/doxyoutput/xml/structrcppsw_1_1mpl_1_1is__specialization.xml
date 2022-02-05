@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1mpl_1_1is__specialization" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::mpl::is_specialization</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">false_type</basecompoundref>
+    <includes refid="mpl_8hpp" local="no">mpl.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+      <param>
+        <type>template&lt; class... &gt; class</type>
+        <declname>Template</declname>
+        <defname>Template</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>Determine if a class Template&lt;SomeType&gt; is a specialization of <computeroutput>Template</computeroutput>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::mpl::is_specialization&lt; T, Template &gt;</label>
+        <link refid="structrcppsw_1_1mpl_1_1is__specialization"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::false_type</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::mpl::is_specialization&lt; T, Template &gt;</label>
+        <link refid="structrcppsw_1_1mpl_1_1is__specialization"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::false_type</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/mpl.hpp" line="234" column="40" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/mpl.hpp" bodystart="234" bodyend="234"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

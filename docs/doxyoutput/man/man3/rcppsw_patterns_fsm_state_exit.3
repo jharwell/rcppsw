@@ -1,0 +1,50 @@
+.TH "rcppsw::patterns::fsm::state_exit" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::fsm::state_exit \- Abstract exit base class that all exit classes inherit from\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <state_exit\&.hpp>\fP
+.PP
+Inherited by \fBrcppsw::patterns::fsm::state_exit_action< SM, Func >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~state_exit\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual void \fBinvoke_exit_action\fP (\fBbase_fsm\fP *sm) const =0"
+.br
+.RI "Called by the state machine engine to execute a state exit action\&. Called when leaving a state\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Abstract exit base class that all exit classes inherit from\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "virtual rcppsw::patterns::fsm::state_exit::~state_exit (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void rcppsw::patterns::fsm::state_exit::invoke_exit_action (\fBbase_fsm\fP * sm) const\fC [pure virtual]\fP"
+
+.PP
+Called by the state machine engine to execute a state exit action\&. Called when leaving a state\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsm\fP A state machine instance\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBrcppsw::patterns::fsm::state_exit_action< SM, Func >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrng" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>rng</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">patterns::pimpl::pimpl&lt; detail::rng_impl &gt;</basecompoundref>
+    <includes refid="rng_8hpp" local="no">rng.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrng_1aeb17faad33099c44f967005998b19929" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t rng::m_seed</definition>
+        <argsstring></argsstring>
+        <name>m_seed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp" line="92" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrng_1a66941b058dcc602e2d80b7efddb061b1" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rng::rng</definition>
+        <argsstring>(size_t seed)</argsstring>
+        <name>rng</name>
+        <param>
+          <type>size_t</type>
+          <declname>seed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp" line="50" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classrng_1ab18cfec8df971f3778552ddc78cb24fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rng::~rng</definition>
+        <argsstring>(void) override</argsstring>
+        <name>~rng</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp" line="51" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrng_1a2c502c6565aac52db7ff9283201b494e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rng::bernoulli</definition>
+        <argsstring>(double p)</argsstring>
+        <name>bernoulli</name>
+        <param>
+          <type>double</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Return a selection according to a Bernoulli distribution with parameter <computeroutput>p</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp" line="88" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classrng_1a87be3fc53217acb4049c6f8dedde1d0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double rng::exponential</definition>
+        <argsstring>(double lambda)</argsstring>
+        <name>exponential</name>
+        <param>
+          <type>double</type>
+          <declname>lambda</declname>
+        </param>
+        <briefdescription>
+<para>Return a selection according to the exponential distribution 1 - e ^(-lambda). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp" line="82" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classrng_1aba86d0fa8248a60eaea060f871a14423" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double rng::gaussian</definition>
+        <argsstring>(double mean, double std_dev)</argsstring>
+        <name>gaussian</name>
+        <param>
+          <type>double</type>
+          <declname>mean</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>std_dev</declname>
+        </param>
+        <briefdescription>
+<para>Return a selection according to the Gaussian distribution G(mean, std_dev). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp" line="76" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classrng_1a2534cb52709dee8305640c950b24c4ff" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t rng::seed</definition>
+        <argsstring>(void) const</argsstring>
+        <name>seed</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the current seed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp" line="56" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classrng_1a0fb53333f775ca28cd68c1033fc94773" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T rng::uniform</definition>
+        <argsstring>(const range&lt; T &gt; &amp;c_range)</argsstring>
+        <name>uniform</name>
+        <param>
+          <type>const range&lt; T &gt; &amp;</type>
+          <declname>c_range</declname>
+        </param>
+        <briefdescription>
+<para>Return a uniform selection in the range specified by <computeroutput>c_range</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp" line="68" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp" bodystart="68" bodyend="70"/>
+        <references refid="classrng_1a5ed45300bbf2358aa5f024dee1baa0ea">uniform</references>
+      </memberdef>
+      <memberdef kind="function" id="classrng_1a5ed45300bbf2358aa5f024dee1baa0ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T rng::uniform</definition>
+        <argsstring>(const T &amp;lb, const T &amp;ub)</argsstring>
+        <name>uniform</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>lb</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>ub</declname>
+        </param>
+        <briefdescription>
+<para>Return a uniform selection in the range [lb, ub]. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp" line="62" column="5"/>
+        <referencedby refid="classrcppsw_1_1math_1_1powerlaw__distribution_1af1536ee8f046ac025aa7d1cc84780442" compoundref="powerlaw__distribution_8hpp" startline="59" endline="60">rcppsw::math::powerlaw_distribution::powerlaw_distribution</referencedby>
+        <referencedby refid="classrng_1a0fb53333f775ca28cd68c1033fc94773" compoundref="rng_8hpp" startline="68" endline="70">uniform</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Random number generator class using the PIMPL pattern in order to not have to include <computeroutput>&lt;random&gt;</computeroutput>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>patterns::pimpl::pimpl&lt; detail::rng_impl &gt;</label>
+      </node>
+      <node id="1">
+        <label>rng</label>
+        <link refid="classrng"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>patterns::pimpl::pimpl&lt; detail::rng_impl &gt;</label>
+      </node>
+      <node id="1">
+        <label>rng</label>
+        <link refid="classrng"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp" line="48" column="41" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp" bodystart="48" bodyend="94"/>
+    <listofallmembers>
+      <member refid="classrng_1a2c502c6565aac52db7ff9283201b494e" prot="public" virt="non-virtual"><scope>rng</scope><name>bernoulli</name></member>
+      <member refid="classrng_1a87be3fc53217acb4049c6f8dedde1d0e" prot="public" virt="non-virtual"><scope>rng</scope><name>exponential</name></member>
+      <member refid="classrng_1aba86d0fa8248a60eaea060f871a14423" prot="public" virt="non-virtual"><scope>rng</scope><name>gaussian</name></member>
+      <member refid="classrng_1aeb17faad33099c44f967005998b19929" prot="private" virt="non-virtual"><scope>rng</scope><name>m_seed</name></member>
+      <member refid="classrng_1a66941b058dcc602e2d80b7efddb061b1" prot="public" virt="non-virtual"><scope>rng</scope><name>rng</name></member>
+      <member refid="classrng_1a2534cb52709dee8305640c950b24c4ff" prot="public" virt="non-virtual"><scope>rng</scope><name>seed</name></member>
+      <member refid="classrng_1a5ed45300bbf2358aa5f024dee1baa0ea" prot="public" virt="non-virtual"><scope>rng</scope><name>uniform</name></member>
+      <member refid="classrng_1a0fb53333f775ca28cd68c1033fc94773" prot="public" virt="non-virtual"><scope>rng</scope><name>uniform</name></member>
+      <member refid="classrng_1ab18cfec8df971f3778552ddc78cb24fc" prot="public" virt="non-virtual"><scope>rng</scope><name>~rng</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

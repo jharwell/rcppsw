@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1metrics_1_1collector__registration__spec" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::metrics::collector_registration_spec</compoundname>
+    <includes refid="creatable__collector__set_8hpp" local="no">creatable_collector_set.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TSink</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1collector__registration__spec_1a2426c1971ac8d5e5b4559c5404ec2dd6" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::collector_registration_spec&lt; TSink &gt;::is_enabled</definition>
+        <argsstring></argsstring>
+        <name>is_enabled</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" line="59" column="26" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1collector__registration__spec_1a395ebc5719baefeb343dd27387d66e9e" prot="public" static="no" mutable="no">
+        <type>std::unique_ptr&lt; TSink &gt;</type>
+        <definition>std::unique_ptr&lt;TSink&gt; rcppsw::metrics::collector_registration_spec&lt; TSink &gt;::sink</definition>
+        <argsstring></argsstring>
+        <name>sink</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" line="60" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The data needed to create an enabled collector. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>std::unique_ptr&lt; TSink &gt;</label>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::collector_registration_spec&lt; TSink &gt;</label>
+        <link refid="structrcppsw_1_1metrics_1_1collector__registration__spec"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+sink</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" line="52" column="34" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" bodystart="52" bodyend="55"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1metrics_1_1collector__registration__spec_1a2426c1971ac8d5e5b4559c5404ec2dd6" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_registration_spec</scope><name>is_enabled</name></member>
+      <member refid="structrcppsw_1_1metrics_1_1collector__registration__spec_1a395ebc5719baefeb343dd27387d66e9e" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_registration_spec</scope><name>sink</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

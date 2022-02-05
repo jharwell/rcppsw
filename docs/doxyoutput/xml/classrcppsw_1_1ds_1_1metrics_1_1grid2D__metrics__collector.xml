@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::ds::metrics::grid2D_metrics_collector</compoundname>
+    <basecompoundref refid="classrcppsw_1_1metrics_1_1base__collector" prot="public" virt="non-virtual">rcppsw::metrics::base_collector</basecompoundref>
+    <includes refid="grid2D__metrics__collector_8hpp" local="no">grid2D_metrics_collector.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1a8f27cfba3fe35d572d888539cc3b14cf" prot="private" static="no" mutable="no">
+        <type><ref refid="structrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__data" kindref="compound">grid2D_metrics_data</ref></type>
+        <definition>grid2D_metrics_data rcppsw::ds::metrics::grid2D_metrics_collector::m_data</definition>
+        <argsstring></argsstring>
+        <name>m_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" line="76" column="23" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1a17dfb84ad085ce6628caed6df72dbc01" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::metrics::grid2D_metrics_collector::grid2D_metrics_collector</definition>
+        <argsstring>(std::unique_ptr&lt; rmetrics::base_sink &gt; sink, const math::vector2z &amp;dims)</argsstring>
+        <name>grid2D_metrics_collector</name>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classrcppsw_1_1metrics_1_1base__sink" kindref="compound">rmetrics::base_sink</ref> &gt;</type>
+          <declname>sink</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1math_1aa61ac5b9e211ad9913993fe03c12af7c" kindref="member">math::vector2z</ref> &amp;</type>
+          <declname>dims</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sink</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The metrics sink to use. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Dimensions of grid. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" line="59" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" bodystart="59" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1ac8d33303e8a9bd90f7ecb1be2de3f473" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto rcppsw::ds::metrics::grid2D_metrics_collector::Func</definition>
+        <argsstring>(Args &amp;&amp;... args) -&gt; decltype(std::declval&lt; decltype(Member)&gt;().Func(args...))</argsstring>
+        <name>Func</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" line="80" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1ac8d33303e8a9bd90f7ecb1be2de3f473" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto rcppsw::ds::metrics::grid2D_metrics_collector::Func</definition>
+        <argsstring>(Args &amp;&amp;... args) -&gt; decltype(std::declval&lt; decltype(Member)&gt;().Func(args...))</argsstring>
+        <name>Func</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" line="81" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" bodystart="81" bodyend="81"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1a1939e3abed4e63e3e056732ef323427e" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>const <ref refid="structrcppsw_1_1metrics_1_1base__data" kindref="compound">rmetrics::base_data</ref> *</type>
+        <definition>const rmetrics::base_data* rcppsw::ds::metrics::grid2D_metrics_collector::data</definition>
+        <argsstring>(void) const override</argsstring>
+        <name>data</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__collector_1a65ee808c4f9ce878a1cc172dfc2473d6">data</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get a handle to the gathered data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" line="65" column="29" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" bodystart="65" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1a2cde6fa21cee2949c572dbbdc996c5d8" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::ds::metrics::grid2D_metrics_collector::inc_cell_count</definition>
+        <argsstring>(const math::vector2z &amp;c, size_t count=1)</argsstring>
+        <name>inc_cell_count</name>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1math_1aa61ac5b9e211ad9913993fe03c12af7c" kindref="member">math::vector2z</ref> &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" line="69" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" bodystart="69" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1a0b393d365341e9544051fdf87da93c6f" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::ds::metrics::grid2D_metrics_collector::inc_total_count</definition>
+        <argsstring>(size_t count=1)</argsstring>
+        <name>inc_total_count</name>
+        <param>
+          <type>size_t</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" line="72" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" bodystart="72" bodyend="72"/>
+        <references refid="structrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__data_1a91720446563f9f0d0da9470c5f94335b" compoundref="grid2D__metrics__data_8hpp" startline="53">rcppsw::ds::metrics::grid2D_metrics_data::grid</references>
+        <references refid="classrcppsw_1_1ds_1_1grid2D_1a9d7cb43e0ae820ecbd02601eb5130e45" compoundref="grid2D_8hpp" startline="66" endline="66">rcppsw::ds::grid2D&lt; T &gt;::xsize</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class for collectors using a 2D grid to fill with counts of SOMETHING, to be averaged over the entire simulation. Each line of the resulting .csv file corresponds directly to a row in X of the 2D grid. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::metrics::base_collector</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__collector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw::er::client&lt; base_collector &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::metrics::grid2D_metrics_collector</label>
+        <link refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::metrics::base_collector</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__collector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw::er::client&lt; base_collector &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::metrics::grid2D_metrics_collector</label>
+        <link refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" line="53" column="63" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp" bodystart="53" bodyend="82"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a3e5df8d514725acf00cd8917bdfc0c95" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>base_collector</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a2ea13b8891f64d4f9c508e01aa1fb84d" prot="public" virt="pure-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>collect</name></member>
+      <member refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1a1939e3abed4e63e3e056732ef323427e" prot="protected" virt="virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>data</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a65d77f74eb89ae2648fc03a5e3208d71" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>finalize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1ac802aa3e05bed414bb1a0c741c1f9310" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>flush</name></member>
+      <member refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1ac8d33303e8a9bd90f7ecb1be2de3f473" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>Func</name></member>
+      <member refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1ac8d33303e8a9bd90f7ecb1be2de3f473" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>Func</name></member>
+      <member refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1a17dfb84ad085ce6628caed6df72dbc01" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>grid2D_metrics_collector</name></member>
+      <member refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1a2cde6fa21cee2949c572dbbdc996c5d8" prot="protected" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>inc_cell_count</name></member>
+      <member refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1a0b393d365341e9544051fdf87da93c6f" prot="protected" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>inc_total_count</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a0e211e635c7452e3cb000518f1735c3f" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>initialize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a357c5d4d01dedf0ca5a0298066cc8fb8" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>interval_reset</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1a8f27cfba3fe35d572d888539cc3b14cf" prot="private" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>m_data</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1afcdf89f71d05cc03018ea2b19a0c1510" prot="protected" virt="virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>reset_after_interval</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1abd4351fa4f7d837c4f68bfb8a0cf230d" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>timestep</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a47c206d306e62b30110281108e19e58a" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>timestep_inc</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a4d0ba973e177e1a003a39b5652e2db9c" prot="public" virt="virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>~base_collector</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_collector</scope><name>~client</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

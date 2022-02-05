@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw" kind="namespace" language="C++">
+    <compoundname>rcppsw</compoundname>
+    <innernamespace refid="namespacercppsw_1_1al">rcppsw::al</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1algorithm">rcppsw::algorithm</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1config">rcppsw::config</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1control">rcppsw::control</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1detail">rcppsw::detail</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1ds">rcppsw::ds</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1er">rcppsw::er</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1math">rcppsw::math</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1metrics">rcppsw::metrics</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1mpl">rcppsw::mpl</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1multiprocess">rcppsw::multiprocess</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1multithread">rcppsw::multithread</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns">rcppsw::patterns</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1types">rcppsw::types</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1utils">rcppsw::utils</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacercppsw_1a8947a64dc8b866fbf1b0e47526552828" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TEnum</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr std::underlying_type&lt; TEnum &gt;::type</type>
+        <definition>constexpr std::underlying_type&lt;TEnum&gt;::type rcppsw::as_underlying</definition>
+        <argsstring>(const TEnum &amp;e) noexcept</argsstring>
+        <name>as_underlying</name>
+        <param>
+          <type>const TEnum &amp;</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+<para>Get the value of a strongly typed enum as its underlying type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/common.hpp" line="87" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/common.hpp" bodystart="87" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacercppsw_1a067e7fdc1e45476ca82cb106d0809015" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(!mpl::is_detected&lt; detail::to_str_type, T &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>std::string</type>
+        <definition>std::string rcppsw::to_string</definition>
+        <argsstring>(const T &amp;obj)</argsstring>
+        <name>to_string</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>For <computeroutput>T</computeroutput> where std::to_string(<computeroutput>T</computeroutput>) works let the stdandard library to the conversion. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For <computeroutput>T</computeroutput> where std::to_string(<computeroutput>T</computeroutput>) does not work, if <computeroutput>T</computeroutput> defines a to_str() method, then it can still use <ref refid="namespacercppsw_1a067e7fdc1e45476ca82cb106d0809015" kindref="member">rcppsw::to_string()</ref>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/common.hpp" line="65" column="13" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/common.hpp" bodystart="65" bodyend="67"/>
+        <referencedby refid="classrcppsw_1_1metrics_1_1csv__sink_1a5b7de877691ddf0ddf91af350e197bbe" compoundref="csv__sink_8hpp" startline="140" endline="143">rcppsw::metrics::csv_sink::csv_entry_intavg</referencedby>
+        <referencedby refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__csv__sink_1afe2ee5935c9266a75a1fb8e9575f799c" compoundref="grid2D__metrics__csv__sink_8hpp" startline="67" endline="77">rcppsw::ds::metrics::grid2D_metrics_csv_sink&lt; TCellOp &gt;::csv_header_cols</referencedby>
+        <referencedby refid="classrcppsw_1_1ds_1_1metrics_1_1grid3D__metrics__csv__sink_1a5cb4bed8b95ef64a834586caa629fce2" compoundref="grid3D__metrics__csv__sink_8hpp" startline="68" endline="79">rcppsw::ds::metrics::grid3D_metrics_csv_sink&lt; TCellOp &gt;::csv_header_cols</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The root namespace of the RCPPSW library. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>It is better to define the namespace aliases exported by RCPPSW here, rather than having them be multiply defined in different downstream projects (DRY FTW!).</para>
+<para>Convention: Namespace aliases from RCPPSW all start with <computeroutput>&apos;r&apos;</computeroutput>, and the first letter of all nested namespaces except the innermost one should be included before the innermost. For example, <ref refid="namespacercppsw_1_1patterns_1_1visitor" kindref="compound">rcppsw::patterns::visitor</ref> should have the <computeroutput>&apos;r&apos;</computeroutput> from <computeroutput>&apos;rcppsw&apos;</computeroutput> and the <computeroutput>&apos;p&apos;</computeroutput> from <computeroutput>&apos;patterns&apos;</computeroutput> before the target namespace <computeroutput>&apos;visitor&apos;</computeroutput>. </para>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp" line="36" column="21"/>
+  </compounddef>
+</doxygen>

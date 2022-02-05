@@ -1,0 +1,68 @@
+.TH "rcppsw::algorithm::clustering::eh_cluster< T, Policy >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::algorithm::clustering::eh_cluster< T, Policy > \- A cluster representation for \fBEH\fP clustering algorithms\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <cluster\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBeh_cluster\fP (uint id, const std::vector< T > &data, \fBmembership_type\fP< Policy > &membership)"
+.br
+.ti -1c
+.RI "void \fBadd_point\fP (size_t point_idx)"
+.br
+.ti -1c
+.RI "const T & \fBcenter\fP (void) const"
+.br
+.ti -1c
+.RI "bool \fBconverged\fP (void) const"
+.br
+.ti -1c
+.RI "\fBeh_cluster\fP & \fBoperator=\fP (const \fBeh_cluster\fP &)=delete"
+.br
+.ti -1c
+.RI "size_t \fBsize\fP (void) const"
+.br
+.ti -1c
+.RI "void \fBupdate_size\fP (void)"
+.br
+.RI "Update the size of the cluster after an iteration has finished\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T, typename Policy>
+.br
+class rcppsw::algorithm::clustering::eh_cluster< T, Policy >"
+A cluster representation for \fBEH\fP clustering algorithms\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T , typename Policy > \fBrcppsw::algorithm::clustering::eh_cluster\fP< T, Policy >::\fBeh_cluster\fP (uint id, const std::vector< T > & data, \fBmembership_type\fP< Policy > & membership)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T , typename Policy > void \fBrcppsw::algorithm::clustering::eh_cluster\fP< T, Policy >::add_point (size_t point_idx)\fC [inline]\fP"
+
+.SS "template<typename T , typename Policy > const T& \fBrcppsw::algorithm::clustering::eh_cluster\fP< T, Policy >::center (void) const\fC [inline]\fP"
+
+.SS "template<typename T , typename Policy > bool \fBrcppsw::algorithm::clustering::eh_cluster\fP< T, Policy >::converged (void) const\fC [inline]\fP"
+
+.SS "template<typename T , typename Policy > \fBeh_cluster\fP& \fBrcppsw::algorithm::clustering::eh_cluster\fP< T, Policy >::operator= (const \fBeh_cluster\fP< T, Policy > &)\fC [delete]\fP"
+
+.SS "template<typename T , typename Policy > size_t \fBrcppsw::algorithm::clustering::eh_cluster\fP< T, Policy >::size (void) const\fC [inline]\fP"
+
+.SS "template<typename T , typename Policy > void \fBrcppsw::algorithm::clustering::eh_cluster\fP< T, Policy >::update_size (void)\fC [inline]\fP"
+
+.PP
+Update the size of the cluster after an iteration has finished\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

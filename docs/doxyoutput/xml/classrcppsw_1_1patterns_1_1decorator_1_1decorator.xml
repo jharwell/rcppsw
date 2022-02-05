@@ -1,0 +1,343 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::decorator::decorator</compoundname>
+    <includes refid="decorator_8hpp" local="no">decorator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class TDecoratee</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a741c896a38d2c22bfcd68382fc0aee64" prot="public" static="no">
+        <type>TDecoratee</type>
+        <definition>using rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::decoratee_type =  TDecoratee</definition>
+        <argsstring></argsstring>
+        <name>decoratee_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="99" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a1b8e1bf59abf4cb7039f657c1351dbf5" prot="public" static="no">
+        <type><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref>&lt; <ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a741c896a38d2c22bfcd68382fc0aee64" kindref="member">decoratee_type</ref> &gt;</type>
+        <definition>using rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::decorator_type =  decorator&lt;decoratee_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>decorator_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="100" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a387b4149dfe74319da733f9abe1cb99a" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a741c896a38d2c22bfcd68382fc0aee64" kindref="member">decoratee_type</ref></type>
+        <definition>decoratee_type rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::m_decoratee</definition>
+        <argsstring></argsstring>
+        <name>m_decoratee</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="162" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a0e7167ad4e2d030d6c451a867db8af5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::decorator</definition>
+        <argsstring>(const decorator &amp;)=default</argsstring>
+        <name>decorator</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="126" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a32c13ab58d3bd71c61030090590a9d62" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::decorator</definition>
+        <argsstring>(decoratee_type &amp;&amp;arg)</argsstring>
+        <name>decorator</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a741c896a38d2c22bfcd68382fc0aee64" kindref="member">decoratee_type</ref> &amp;&amp;</type>
+          <declname>arg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="110" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="110" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a3856e90a033659fc506a77c613bfc89f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::decorator</definition>
+        <argsstring>(decorator &amp;&amp;)=default</argsstring>
+        <name>decorator</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="128" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a280934f4a5829a42c7916ba29560d645" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>TDecoratee</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;((sizeof(U::value_type) &gt; 0)), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::decorator</definition>
+        <argsstring>(std::initializer_list&lt; U &gt; args)</argsstring>
+        <name>decorator</name>
+        <param>
+          <type>std::initializer_list&lt; U &gt;</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="118" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="118" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a64c494d06f4fcbc9e52345db78510791" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>TArgs</declname>
+            <defname>TArgs</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::decorator</definition>
+        <argsstring>(TArgs... args)</argsstring>
+        <name>decorator</name>
+        <param>
+          <type>TArgs...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="107" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="107" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a1816de4c343796e84f48c3603b8041ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::~decorator</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~decorator</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="131" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a519a95005089f4b8c476dc3b5dc0f3ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a741c896a38d2c22bfcd68382fc0aee64" kindref="member">decoratee_type</ref> &amp;</type>
+        <definition>decoratee_type&amp; rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::decoratee</definition>
+        <argsstring>(void)</argsstring>
+        <name>decoratee</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get a reference to the decorated type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The reference. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="138" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="138" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a34ab8f2525dae8185bf161985885e8c2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a741c896a38d2c22bfcd68382fc0aee64" kindref="member">decoratee_type</ref> &amp;</type>
+        <definition>const decoratee_type&amp; rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::decoratee</definition>
+        <argsstring>(void) const</argsstring>
+        <name>decoratee</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="139" column="24" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="139" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a0f947db92e941d973426b19c1aa1fa9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref> &amp;</type>
+        <definition>decorator&amp; rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::operator=</definition>
+        <argsstring>(const decorator &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="127" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1aa7dcaa3ec447cb1af590f4a64de10b09" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref> &amp;</type>
+        <definition>decorator&amp; rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::operator=</definition>
+        <argsstring>(decorator &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="129" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1aa91bf92ef0eda53cc43ce584c40f5c49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>TArgs</declname>
+            <defname>TArgs</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::redecorate</definition>
+        <argsstring>(TArgs &amp;&amp;... args)</argsstring>
+        <name>redecorate</name>
+        <param>
+          <type>TArgs &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Replace the current instance of the decorated type with a new one constructed from the passed arguments. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The arguments to a decoratee constructor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="148" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="148" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1af34e316851d6ccde1ab339f9dadf0c2a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;::redecorate_with</definition>
+        <argsstring>(const decoratee_type &amp;d)</argsstring>
+        <name>redecorate_with</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a741c896a38d2c22bfcd68382fc0aee64" kindref="member">decoratee_type</ref> &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+<para>Replace the current decoratee instance with another existing instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>d</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new decoratee. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="158" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="158" bodyend="158"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The base class for the object decorator design pattern. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TDecoratee</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the decorated object. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::decorator::decorator&lt; TDecoratee &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="97" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="97" bodyend="164"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a519a95005089f4b8c476dc3b5dc0f3ab" prot="public" virt="non-virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>decoratee</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a34ab8f2525dae8185bf161985885e8c2" prot="public" virt="non-virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>decoratee</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a741c896a38d2c22bfcd68382fc0aee64" prot="public" virt="non-virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>decoratee_type</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a64c494d06f4fcbc9e52345db78510791" prot="public" virt="non-virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a32c13ab58d3bd71c61030090590a9d62" prot="public" virt="non-virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a280934f4a5829a42c7916ba29560d645" prot="public" virt="non-virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a0e7167ad4e2d030d6c451a867db8af5e" prot="public" virt="non-virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a3856e90a033659fc506a77c613bfc89f" prot="public" virt="non-virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a1b8e1bf59abf4cb7039f657c1351dbf5" prot="public" virt="non-virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>decorator_type</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a387b4149dfe74319da733f9abe1cb99a" prot="private" virt="non-virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>m_decoratee</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a0f947db92e941d973426b19c1aa1fa9c" prot="public" virt="non-virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1aa7dcaa3ec447cb1af590f4a64de10b09" prot="public" virt="non-virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1aa91bf92ef0eda53cc43ce584c40f5c49" prot="public" virt="non-virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>redecorate</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1af34e316851d6ccde1ab339f9dadf0c2a" prot="public" virt="non-virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>redecorate_with</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a1816de4c343796e84f48c3603b8041ab" prot="public" virt="virtual"><scope>rcppsw::patterns::decorator::decorator</scope><name>~decorator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,392 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1metrics_1_1base__manager" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>rcppsw::metrics::base_manager</compoundname>
+    <derivedcompoundref refid="classrcppsw_1_1metrics_1_1fs__output__manager" prot="public" virt="non-virtual">rcppsw::metrics::fs_output_manager</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1metrics_1_1network__output__manager" prot="public" virt="non-virtual">rcppsw::metrics::network_output_manager</derivedcompoundref>
+    <includes refid="base__manager_8hpp" local="no">base_manager.hpp</includes>
+      <sectiondef kind="protected-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1metrics_1_1base__manager_1ab4b144bce60014574080956e061e2f78" prot="protected" static="no">
+        <type>std::map&lt; std::string, <ref refid="classrcppsw_1_1metrics_1_1collector__group" kindref="compound">rmetrics::collector_group</ref> * &gt;</type>
+        <definition>using rcppsw::metrics::base_manager::collector_map_type =  std::map&lt;std::string, rmetrics::collector_group*&gt;</definition>
+        <argsstring></argsstring>
+        <name>collector_map_type</name>
+        <briefdescription>
+<para>Maps the scoped name of the collector to the <ref refid="classrcppsw_1_1metrics_1_1collector__group" kindref="compound">collector_group</ref> it belongs in. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="153" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1base__manager_1a551cfe1fe9c1a084aee81a3a61e2d4d2" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1metrics_1_1base__manager_1ab4b144bce60014574080956e061e2f78" kindref="member">collector_map_type</ref></type>
+        <definition>collector_map_type rcppsw::metrics::base_manager::m_collector_map</definition>
+        <argsstring></argsstring>
+        <name>m_collector_map</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="160" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__manager_1a8bbb1e653e3eeda4c7e6f229fd289763" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::base_manager::base_manager</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>base_manager</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="57" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__manager_1af1eed86e00ad1557925cc07f33d86e97" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::metrics::base_manager::~base_manager</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~base_manager</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="58" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__manager_1a0c8cb07c3e3aaac94854c345a74597ff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::metrics::base_manager::collect</definition>
+        <argsstring>(const std::string &amp;scoped_name, const T &amp;collectee)</argsstring>
+        <name>collect</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>scoped_name</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>collectee</declname>
+        </param>
+        <briefdescription>
+<para>Decorator around <ref refid="classrcppsw_1_1metrics_1_1collector__group_1a2c84a509242e695ece1a1bdb8913fb7b" kindref="member">collector_group::collect()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="108" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" bodystart="108" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__manager_1a9ada1fd8998e902a52e67c4b8eb30476" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::metrics::base_manager::collect_if</definition>
+        <argsstring>(const std::string &amp;scoped_name, const T &amp;collectee, const std::function&lt; bool(const rmetrics::base_metrics &amp;)&gt; &amp;pred)</argsstring>
+        <name>collect_if</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>scoped_name</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>collectee</declname>
+        </param>
+        <param>
+          <type>const std::function&lt; bool(const <ref refid="classrcppsw_1_1metrics_1_1base__metrics" kindref="compound">rmetrics::base_metrics</ref> &amp;)&gt; &amp;</type>
+          <declname>pred</declname>
+        </param>
+        <briefdescription>
+<para>Decorator around <ref refid="classrcppsw_1_1metrics_1_1collector__group_1ad9f9e75d10a93f49ce6eb92f286d9773" kindref="member">collector_group::collect_if()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="120" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" bodystart="120" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__manager_1ac400893189c8599c6b362433b5fdec11" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::metrics::base_manager::collector_preregister</definition>
+        <argsstring>(const std::string &amp;scoped_name, const rmetrics::output_mode &amp;mode)=0</argsstring>
+        <name>collector_preregister</name>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1network__output__manager_1a25ff616824b471c8885d185f131655cc">collector_preregister</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1fs__output__manager_1a997d09a6f858d87dd63401de9c138288">collector_preregister</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>scoped_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" kindref="member">rmetrics::output_mode</ref> &amp;</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+<para>To be called before <ref refid="classrcppsw_1_1metrics_1_1base__manager_1ab4c78173cfdbd539b96e319b5a6b8f26" kindref="member">collector_register()</ref>, in order to correctly set up the collector map for the collector with the specified scoped name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If you forget to do this you will get a segfault. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="89" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__manager_1ab4c78173cfdbd539b96e319b5a6b8f26" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TCollector</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::base_manager::collector_register</definition>
+        <argsstring>(const std::string &amp;scoped_name, Args &amp;&amp;... args)</argsstring>
+        <name>collector_register</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>scoped_name</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Decorator around <ref refid="classrcppsw_1_1metrics_1_1collector__group_1ad30b871dbfac96f7384c17b870b00a36" kindref="member">collector_group::collector_register()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="96" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" bodystart="96" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__manager_1a803b2fd9fe0072dc8bd4438c005d257b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::base_manager::collector_unregister</definition>
+        <argsstring>(const std::string &amp;scoped_name)</argsstring>
+        <name>collector_unregister</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>scoped_name</declname>
+        </param>
+        <briefdescription>
+<para>Decorator around <ref refid="classrcppsw_1_1metrics_1_1collector__group_1aed16d0548444b278056354ed89fd0204" kindref="member">collector_group::collector_unregister()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="132" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" bodystart="132" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__manager_1a0fe2f062a289ae6064aeb539fcb123ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::metrics::base_manager::finalize</definition>
+        <argsstring>(void)=0</argsstring>
+        <name>finalize</name>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1network__output__manager_1a779dcdd9871d9c6f0506b6af5eba82f4">finalize</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1fs__output__manager_1adf94cef27fba9e24f8aa9405b9930da6">finalize</reimplementedby>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decorator around collector_group::finalize_all(). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="80" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__manager_1a885a1c83f6b6cd6c4bd758144672354e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool rcppsw::metrics::base_manager::flush</definition>
+        <argsstring>(const rmetrics::output_mode &amp;mode)=0</argsstring>
+        <name>flush</name>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1network__output__manager_1a8c11bc304d813efe4cd02ed433ed9e1a">flush</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1fs__output__manager_1afc172d19400e7cd33bbeb287bffb5f98">flush</reimplementedby>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" kindref="member">rmetrics::output_mode</ref> &amp;</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="65" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__manager_1a759f30a9314723cc72b1e96242c4666f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T* rcppsw::metrics::base_manager::get</definition>
+        <argsstring>(const std::string &amp;key)</argsstring>
+        <name>get</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Decorator around <ref refid="classrcppsw_1_1metrics_1_1collector__group_1a54fd312a23df2644d385be0d4f04411f" kindref="member">collector_group::get()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="144" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" bodystart="144" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__manager_1aee2d6c7bcba2625b53a0341a6c17cf4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::metrics::base_manager::initialize</definition>
+        <argsstring>(void)=0</argsstring>
+        <name>initialize</name>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1network__output__manager_1afe5609252ab6298dcb2d1a9ed0f7ee7e">initialize</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1fs__output__manager_1a45b3ffdde94b1ef6e63d3e00b08301ee">initialize</reimplementedby>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decorator around <ref refid="classrcppsw_1_1metrics_1_1collector__group_1ab5a0b85257c72d34ef06260a66a1b5a6" kindref="member">collector_group::initialize()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="63" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__manager_1ac393bd539adbd14781d44d1fc18c6303" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::metrics::base_manager::interval_reset</definition>
+        <argsstring>(void)=0</argsstring>
+        <name>interval_reset</name>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1network__output__manager_1a7be1ba72b5c41a5cb8a5c68ce7e1f96d">interval_reset</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1fs__output__manager_1a8e60a5b664259e30bcf970356d383121">interval_reset</reimplementedby>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decorator around <ref refid="classrcppsw_1_1metrics_1_1collector__group_1a158e9534e8654ea1d4cea07d9d819572" kindref="member">collector_group::interval_reset()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="75" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__manager_1ab8d4923c9f9a641d76c72c424ff0943e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::metrics::base_manager::timestep_inc</definition>
+        <argsstring>(void)=0</argsstring>
+        <name>timestep_inc</name>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1network__output__manager_1ac35707ad934b1d2b4f24f444e505371a">timestep_inc</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1fs__output__manager_1a48064828936c8c36fb4de3dc4ecc372b">timestep_inc</reimplementedby>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decorator around <ref refid="classrcppsw_1_1metrics_1_1collector__group_1a23ddbcd59ffecbb724ef65e52216463e" kindref="member">collector_group::timestep_inc()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="70" column="16"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__manager_1a76debcfab748d9e56fc6c46f03a95cc7" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1metrics_1_1base__manager_1ab4b144bce60014574080956e061e2f78" kindref="member">collector_map_type</ref> *</type>
+        <definition>collector_map_type* rcppsw::metrics::base_manager::collector_map</definition>
+        <argsstring>(void)</argsstring>
+        <name>collector_map</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="155" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" bodystart="155" bodyend="155"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class for managing metrics collected from variable sources across all possible collector output modes and sinks. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::metrics::base_manager</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__manager"/>
+      </node>
+      <node id="3">
+        <label>rcppsw::metrics::network_output_manager</label>
+        <link refid="classrcppsw_1_1metrics_1_1network__output__manager"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::metrics::fs_output_manager</label>
+        <link refid="classrcppsw_1_1metrics_1_1fs__output__manager"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::metrics::base_manager</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__manager"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" line="55" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp" bodystart="55" bodyend="162"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a8bbb1e653e3eeda4c7e6f229fd289763" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_manager</scope><name>base_manager</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a0c8cb07c3e3aaac94854c345a74597ff" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_manager</scope><name>collect</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a9ada1fd8998e902a52e67c4b8eb30476" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_manager</scope><name>collect_if</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a76debcfab748d9e56fc6c46f03a95cc7" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::base_manager</scope><name>collector_map</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1ab4b144bce60014574080956e061e2f78" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::base_manager</scope><name>collector_map_type</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1ac400893189c8599c6b362433b5fdec11" prot="public" virt="pure-virtual"><scope>rcppsw::metrics::base_manager</scope><name>collector_preregister</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1ab4c78173cfdbd539b96e319b5a6b8f26" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_manager</scope><name>collector_register</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a803b2fd9fe0072dc8bd4438c005d257b" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_manager</scope><name>collector_unregister</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a0fe2f062a289ae6064aeb539fcb123ba" prot="public" virt="pure-virtual"><scope>rcppsw::metrics::base_manager</scope><name>finalize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a885a1c83f6b6cd6c4bd758144672354e" prot="public" virt="pure-virtual"><scope>rcppsw::metrics::base_manager</scope><name>flush</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a759f30a9314723cc72b1e96242c4666f" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_manager</scope><name>get</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1aee2d6c7bcba2625b53a0341a6c17cf4f" prot="public" virt="pure-virtual"><scope>rcppsw::metrics::base_manager</scope><name>initialize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1ac393bd539adbd14781d44d1fc18c6303" prot="public" virt="pure-virtual"><scope>rcppsw::metrics::base_manager</scope><name>interval_reset</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a551cfe1fe9c1a084aee81a3a61e2d4d2" prot="private" virt="non-virtual"><scope>rcppsw::metrics::base_manager</scope><name>m_collector_map</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1ab8d4923c9f9a641d76c72c424ff0943e" prot="public" virt="pure-virtual"><scope>rcppsw::metrics::base_manager</scope><name>timestep_inc</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1af1eed86e00ad1557925cc07f33d86e97" prot="public" virt="virtual"><scope>rcppsw::metrics::base_manager</scope><name>~base_manager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

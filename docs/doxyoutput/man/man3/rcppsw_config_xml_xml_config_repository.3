@@ -1,0 +1,158 @@
+.TH "rcppsw::config::xml::xml_config_repository" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::config::xml::xml_config_repository \- A repository for multiple \fBxml_config_parser\fP objects and their parsed results; allows collective operations on multiple parsers\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <xml_config_repository\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< xml_config_repository >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBxml_config_repository\fP (void)"
+.br
+.ti -1c
+.RI "template<typename T > const T * \fBconfig_get\fP (const std::string &name) const"
+.br
+.RI "Get the parsed configuration associated with the parser of the specified name\&. "
+.ti -1c
+.RI "template<typename T > const T * \fBconfig_get\fP (void) const"
+.br
+.RI "Get the parsed configuration associated with the parser of the specified type (note that the name that the parser was registered with is not needed in this formulation)\&. "
+.ti -1c
+.RI "void \fBparse_all\fP (const ticpp::Element &node)"
+.br
+.RI "Call the \fBxml_config_parser::parse()\fP function on all parsers in the repository, passing all parsers the same XML node\&. "
+.ti -1c
+.RI "template<typename T > T * \fBparser_find\fP (const std::string &name)"
+.br
+.RI "Get a registered parser by name (non-owning)\&. "
+.ti -1c
+.RI "template<typename T , typename S > void \fBparser_register\fP (const std::string &name)"
+.br
+.RI "Register a parser of a given type (must be derived from \fBxml_config_parser\fP) and associate it with the specified name\&. "
+.ti -1c
+.RI "template<typename T > void \fBparser_register\fP (const std::string &name)"
+.br
+.RI "Register a parser of a given type (must be derived from \fBxml_config_parser\fP) and associate it with the specified name\&. "
+.ti -1c
+.RI "template<typename T , typename S > void \fBparser_unregister\fP (const std::string &name)"
+.br
+.RI "Register a parser of a given type (must be derived from \fBxml_config_parser\fP) and associate it with the specified name\&. "
+.ti -1c
+.RI "bool \fBvalidate_all\fP (void)"
+.br
+.RI "Call the \fBxml_config_parser::validate()\fP function on all parsers in the repository, and return whether or not \fIALL\fP parsers report valid configuration\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+A repository for multiple \fBxml_config_parser\fP objects and their parsed results; allows collective operations on multiple parsers\&. 
+
+Utilizes factory pattern for parser creation\&. Does not create any parsers on its own (how could it know which ones to create?)\&. All created parsers must derive from \fBxml_config_parser\fP, and have a constructor with the same signature as the constructor for that class available, or cryptic compile errors will result\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::config::xml::xml_config_repository::xml_config_repository (void)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > const T* rcppsw::config::xml::xml_config_repository::config_get (const std::string & name) const\fC [inline]\fP"
+
+.PP
+Get the parsed configuration associated with the parser of the specified name\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The parsed configuration (non-owning)\&. 
+.RE
+.PP
+
+.SS "template<typename T > const T* rcppsw::config::xml::xml_config_repository::config_get (void) const\fC [inline]\fP"
+
+.PP
+Get the parsed configuration associated with the parser of the specified type (note that the name that the parser was registered with is not needed in this formulation)\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The parsed configuration (non-owning), or NULL if an invalid type of configuration was requested\&. 
+.RE
+.PP
+
+.SS "void rcppsw::config::xml::xml_config_repository::parse_all (const ticpp::Element & node)"
+
+.PP
+Call the \fBxml_config_parser::parse()\fP function on all parsers in the repository, passing all parsers the same XML node\&. 
+.SS "template<typename T > T* rcppsw::config::xml::xml_config_repository::parser_find (const std::string & name)\fC [inline]\fP"
+
+.PP
+Get a registered parser by name (non-owning)\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP The name of the parser\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Non-owning pointer to the requested parser, or NULL if no such parser was registered\&. 
+.RE
+.PP
+
+.SS "template<typename T , typename S > void rcppsw::config::xml::xml_config_repository::parser_register (const std::string & name)\fC [inline]\fP"
+
+.PP
+Register a parser of a given type (must be derived from \fBxml_config_parser\fP) and associate it with the specified name\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIT\fP The parser type\&. 
+.br
+\fIS\fP The type of the configuration that the parser produces when parse() is called on it\&. 
+.RE
+.PP
+
+.SS "template<typename T > void rcppsw::config::xml::xml_config_repository::parser_register (const std::string & name)\fC [inline]\fP"
+
+.PP
+Register a parser of a given type (must be derived from \fBxml_config_parser\fP) and associate it with the specified name\&. If you use this function, then you will have to refer to the parse results by type + name, rather than just by type\&.
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIT\fP The parser type\&. 
+.RE
+.PP
+
+.SS "template<typename T , typename S > void rcppsw::config::xml::xml_config_repository::parser_unregister (const std::string & name)\fC [inline]\fP"
+
+.PP
+Register a parser of a given type (must be derived from \fBxml_config_parser\fP) and associate it with the specified name\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIT\fP The parser type\&. 
+.br
+\fIS\fP The type of the configuration that the parser produces when parse() is called on it\&. 
+.RE
+.PP
+
+.SS "bool rcppsw::config::xml::xml_config_repository::validate_all (void)"
+
+.PP
+Call the \fBxml_config_parser::validate()\fP function on all parsers in the repository, and return whether or not \fIALL\fP parsers report valid configuration\&. 
+.PP
+\fBReturns\fP
+.RS 4
+\fCTRUE\fP iff ALL parsers report valid configuration, and \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1config_1_1base__config" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::config::base_config</compoundname>
+    <derivedcompoundref refid="structrcppsw_1_1control_1_1config_1_1waveform__config" prot="public" virt="non-virtual">rcppsw::control::config::waveform_config</derivedcompoundref>
+    <derivedcompoundref refid="structrcppsw_1_1math_1_1config_1_1ema__config" prot="public" virt="non-virtual">rcppsw::math::config::ema_config</derivedcompoundref>
+    <derivedcompoundref refid="structrcppsw_1_1math_1_1config_1_1rng__config" prot="public" virt="non-virtual">rcppsw::math::config::rng_config</derivedcompoundref>
+    <derivedcompoundref refid="structrcppsw_1_1math_1_1config_1_1sigmoid__config" prot="public" virt="non-virtual">rcppsw::math::config::sigmoid_config</derivedcompoundref>
+    <derivedcompoundref refid="structrcppsw_1_1metrics_1_1config_1_1file__sink__config" prot="public" virt="non-virtual">rcppsw::metrics::config::file_sink_config</derivedcompoundref>
+    <derivedcompoundref refid="structrcppsw_1_1metrics_1_1config_1_1metrics__config" prot="public" virt="non-virtual">rcppsw::metrics::config::metrics_config</derivedcompoundref>
+    <derivedcompoundref refid="structrcppsw_1_1metrics_1_1config_1_1network__sink__config" prot="public" virt="non-virtual">rcppsw::metrics::config::network_sink_config</derivedcompoundref>
+    <includes refid="base__config_8hpp" local="no">base_config.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structrcppsw_1_1config_1_1base__config_1a9a86158e067c0ed5b8b3c16760878473" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::config::base_config::base_config</definition>
+        <argsstring>(const base_config &amp;)=default</argsstring>
+        <name>base_config</name>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1config_1_1base__config" kindref="compound">base_config</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/base_config.hpp" line="51" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="structrcppsw_1_1config_1_1base__config_1a1cfd52de449665fdfe4b2a42c2248f96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::config::base_config::base_config</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>base_config</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/base_config.hpp" line="49" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="structrcppsw_1_1config_1_1base__config_1a4ddde3073572a1095a9aeeb7591cb226" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::config::base_config::~base_config</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~base_config</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/base_config.hpp" line="50" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="structrcppsw_1_1config_1_1base__config_1a32d1e916aa385603fec11cefc9fa30be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structrcppsw_1_1config_1_1base__config" kindref="compound">base_config</ref> &amp;</type>
+        <definition>base_config&amp; rcppsw::config::base_config::operator=</definition>
+        <argsstring>(const base_config &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1config_1_1base__config" kindref="compound">base_config</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/base_config.hpp" line="52" column="15"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A stub base class for any and all derived configuration class types that may need polymorphism or covariance. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>rcppsw::math::config::rng_config</label>
+        <link refid="structrcppsw_1_1math_1_1config_1_1rng__config"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>rcppsw::metrics::config::network_sink_config</label>
+        <link refid="structrcppsw_1_1metrics_1_1config_1_1network__sink__config"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>rcppsw::metrics::config::file_sink_config</label>
+        <link refid="structrcppsw_1_1metrics_1_1config_1_1file__sink__config"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::control::config::waveform_config</label>
+        <link refid="structrcppsw_1_1control_1_1config_1_1waveform__config"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>rcppsw::config::base_config</label>
+        <link refid="structrcppsw_1_1config_1_1base__config"/>
+      </node>
+      <node id="3">
+        <label>rcppsw::math::config::ema_config</label>
+        <link refid="structrcppsw_1_1math_1_1config_1_1ema__config"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>rcppsw::metrics::config::metrics_config</label>
+        <link refid="structrcppsw_1_1metrics_1_1config_1_1metrics__config"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>rcppsw::math::config::sigmoid_config</label>
+        <link refid="structrcppsw_1_1math_1_1config_1_1sigmoid__config"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::config::base_config</label>
+        <link refid="structrcppsw_1_1config_1_1base__config"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/base_config.hpp" line="48" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/config/base_config.hpp" bodystart="48" bodyend="53"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a1cfd52de449665fdfe4b2a42c2248f96" prot="public" virt="non-virtual"><scope>rcppsw::config::base_config</scope><name>base_config</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a9a86158e067c0ed5b8b3c16760878473" prot="public" virt="non-virtual"><scope>rcppsw::config::base_config</scope><name>base_config</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a32d1e916aa385603fec11cefc9fa30be" prot="public" virt="non-virtual"><scope>rcppsw::config::base_config</scope><name>operator=</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a4ddde3073572a1095a9aeeb7591cb226" prot="public" virt="virtual"><scope>rcppsw::config::base_config</scope><name>~base_config</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

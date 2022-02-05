@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="color_8hpp" kind="file" language="C++">
+    <compoundname>color.hpp</compoundname>
+    <includes local="no">string</includes>
+    <includes local="no">array</includes>
+    <includes refid="rcppsw_8hpp" local="yes">rcppsw/rcppsw.hpp</includes>
+    <includes refid="stringizable_8hpp" local="yes">rcppsw/er/stringizable.hpp</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp</label>
+        <link refid="color_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="5">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="4">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>rcppsw/er/stringizable.hpp</label>
+        <link refid="stringizable_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>array</label>
+      </node>
+      <node id="7">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classrcppsw_1_1utils_1_1color" prot="public">rcppsw::utils::color</innerclass>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1utils">rcppsw::utils</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2018 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="21"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_UTILS_COLOR_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_UTILS_COLOR_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;array&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="rcppsw_8hpp" kindref="compound">rcppsw/rcppsw.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="stringizable_8hpp" kindref="compound">rcppsw/er/stringizable.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>utils);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*<sp/>Class<sp/>Definitions</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="50"><highlight class="keyword">class<sp/></highlight><highlight class="normal">color<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>er::stringizable<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>color<sp/>kBLACK;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>color<sp/>kWHITE;</highlight></codeline>
+<codeline lineno="54" refid="classrcppsw_1_1utils_1_1color" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kRED;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kGREEN;</highlight></codeline>
+<codeline lineno="56" refid="classrcppsw_1_1utils_1_1color_1a43f1f53ecd05b56843d3738007450ddc" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kBLUE;</highlight></codeline>
+<codeline lineno="57" refid="classrcppsw_1_1utils_1_1color_1aca413c780ac543f1f0c02751ab56a08e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kMAGENTA;</highlight></codeline>
+<codeline lineno="58" refid="classrcppsw_1_1utils_1_1color_1aab4b755e0c5e87994773471696d160e6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kCYAN;</highlight></codeline>
+<codeline lineno="59" refid="classrcppsw_1_1utils_1_1color_1afc100cfbaf9d43890491ca94fb0f1467" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kYELLOW;</highlight></codeline>
+<codeline lineno="60" refid="classrcppsw_1_1utils_1_1color_1afe38b3f08ef1e1aba9221640d09edb17" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kORANGE;</highlight></codeline>
+<codeline lineno="61" refid="classrcppsw_1_1utils_1_1color_1ab53b155c72ea451c1462ef9b1f6b8fd3" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kBROWN;</highlight></codeline>
+<codeline lineno="62" refid="classrcppsw_1_1utils_1_1color_1ab29a9d0cd873ec791385528044d7841c" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kPURPLE;</highlight></codeline>
+<codeline lineno="63" refid="classrcppsw_1_1utils_1_1color_1ab900ab14a2ac2b9bc8f31bdf70fbca29" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kGRAY10;</highlight></codeline>
+<codeline lineno="64" refid="classrcppsw_1_1utils_1_1color_1ae2478bca34c664ee01d43078684a3a94" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kGRAY20;</highlight></codeline>
+<codeline lineno="65" refid="classrcppsw_1_1utils_1_1color_1aa29d21a45c10fc95e3f99344157449dd" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kGRAY30;</highlight></codeline>
+<codeline lineno="66" refid="classrcppsw_1_1utils_1_1color_1ac7f5d9b0171253ed66b5819d90d832a4" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kGRAY40;</highlight></codeline>
+<codeline lineno="67" refid="classrcppsw_1_1utils_1_1color_1a91aa5a4b8f7b16393d645e9a43a2ba47" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kGRAY50;</highlight></codeline>
+<codeline lineno="68" refid="classrcppsw_1_1utils_1_1color_1ac1ad79909fe4f47823f4c97addf79a25" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kGRAY60;</highlight></codeline>
+<codeline lineno="69" refid="classrcppsw_1_1utils_1_1color_1ab8a47a5dc3bcdf8a58d772608f7a99d6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kGRAY70;</highlight></codeline>
+<codeline lineno="70" refid="classrcppsw_1_1utils_1_1color_1a27736622de0229f6ada7eb659d079a70" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kGRAY80;</highlight></codeline>
+<codeline lineno="71" refid="classrcppsw_1_1utils_1_1color_1a771dc9b3875d55be647e3969d6b52ce6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref><sp/>kGRAY90;</highlight></codeline>
+<codeline lineno="72" refid="classrcppsw_1_1utils_1_1color_1a1e66c808aa0f68e9b57154c965b28dfb" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73" refid="classrcppsw_1_1utils_1_1color_1a54405239143717a254436bd289ea5822" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="74" refid="classrcppsw_1_1utils_1_1color_1a31d78077433be73c2cf7bbce34078886" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="75" refid="classrcppsw_1_1utils_1_1color_1ab7b09fa6cbfb5673279bbc5152ed86ec" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref>(uint8_t<sp/>red,<sp/>uint8_t<sp/>green,<sp/>uint8_t<sp/>blue,<sp/>uint8_t<sp/>alpha<sp/>=<sp/>255)</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_channels{<sp/>red,<sp/>green,<sp/>blue,<sp/>alpha<sp/>}<sp/>{}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*<sp/>stringizable<sp/>overrides<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81" refid="classrcppsw_1_1utils_1_1color_1acb05fb4367e48c4d80131fa22bff9c8f" refkind="member"><highlight class="normal"><sp/><sp/>std::string<sp/>to_str(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>uint8_t<sp/>red()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_channels[0];<sp/>}</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>red(uint8_t<sp/>red)<sp/>{<sp/>m_channels[0]<sp/>=<sp/>red;<sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>uint8_t<sp/>green()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_channels[1];<sp/>}</highlight></codeline>
+<codeline lineno="87" refid="classrcppsw_1_1utils_1_1color_1aaa67de22e38a997687e0ef74020c601c" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>green(uint8_t<sp/>green)<sp/>{<sp/>m_channels[2]<sp/>=<sp/>green;<sp/>}</highlight></codeline>
+<codeline lineno="88" refid="classrcppsw_1_1utils_1_1color_1a6d5d089d69dec861136c7db4ceb0ebb6" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>uint8_t<sp/>blue()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_channels[2];<sp/>}</highlight></codeline>
+<codeline lineno="90" refid="classrcppsw_1_1utils_1_1color_1ab02424227508af2e8c8afbd967172bd2" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>blue(uint8_t<sp/>blue)<sp/>{<sp/>m_channels[2]<sp/>=<sp/>blue;<sp/>}</highlight></codeline>
+<codeline lineno="91" refid="classrcppsw_1_1utils_1_1color_1a1f54f4b8f752df8ebcf05e0aea1928e1" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>uint8_t<sp/>alpha()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_channels[3];<sp/>}</highlight></codeline>
+<codeline lineno="93" refid="classrcppsw_1_1utils_1_1color_1a6eb4cd25dc99e510931d6b70e552a0f6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>alpha(uint8_t<sp/>alpha)<sp/>{<sp/>m_channels[3]<sp/>=<sp/>alpha;<sp/>}</highlight></codeline>
+<codeline lineno="94" refid="classrcppsw_1_1utils_1_1color_1a369bc027d2eb39e59d98fe174aff916e" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespacercppsw_1_1math_1a53c97519cd1429ba1ea1ace8ba1e0a4c" kindref="member">operator==</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref>&amp;<sp/>c_color2)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="96" refid="classrcppsw_1_1utils_1_1color_1a8c04ca0d31be2cde6b5f82266baefc38" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_channels<sp/>==<sp/>c_color2.m_channels;</highlight></codeline>
+<codeline lineno="97" refid="classrcppsw_1_1utils_1_1color_1af3e8d0eefc1e8711854a47fe96029366" refkind="member"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99" refid="classrcppsw_1_1utils_1_1color_1a8bbda303f6428d493465628eeb13a6a1" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator!=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref>&amp;<sp/>c_color2)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!(*</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>==<sp/>c_color2);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103" refid="classrcppsw_1_1utils_1_1color_1aa014b71a4cf2715cd9fb425cdae3e721" refkind="member"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*<sp/>clang-format<sp/>off<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>std::array&lt;uint8_t,<sp/>4&gt;<sp/>m_channels{};</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*<sp/>clang-format<sp/>on<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(utils,<sp/><ref refid="namespacercppsw" kindref="compound">rcppsw</ref>);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_UTILS_COLOR_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp"/>
+  </compounddef>
+</doxygen>

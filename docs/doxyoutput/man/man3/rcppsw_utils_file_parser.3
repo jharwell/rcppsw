@@ -1,0 +1,59 @@
+.TH "rcppsw::utils::file_parser< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::utils::file_parser< T > \- File parsing class using template design pattern\&. Parses each line of a file into a vector of whitespace delimited tokens, and returns a vector of vectors (1 vector of parsed tokens per line)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <file_parser\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBfile_parser\fP (const std::string &fname)"
+.br
+.ti -1c
+.RI "std::vector< T > * \fBparse_file\fP (char delim)"
+.br
+.RI "Parse a file into a vector of sets of tokens\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::utils::file_parser< T >"
+File parsing class using template design pattern\&. Parses each line of a file into a vector of whitespace delimited tokens, and returns a vector of vectors (1 vector of parsed tokens per line)\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIT\fP The type of tokens the file contains\&. 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::utils::file_parser\fP< T >::\fBfile_parser\fP (const std::string & fname)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > std::vector<T>* \fBrcppsw::utils::file_parser\fP< T >::parse_file (char delim)\fC [inline]\fP"
+
+.PP
+Parse a file into a vector of sets of tokens\&. 
+.PP
+\fBReturns\fP
+.RS 4
+A vector of the parse results\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

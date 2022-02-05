@@ -1,0 +1,67 @@
+.TH "rcppsw::patterns::fsm::state_entry_action0< SM, Func >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::fsm::state_entry_action0< SM, Func > \- Action to perform upon transition to a state\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <state_entry_action\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::patterns::fsm::state_entry\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB~state_entry_action0\fP (void) override=default"
+.br
+.ti -1c
+.RI "void \fBinvoke_entry_action\fP (\fBbase_fsm\fP *sm, const \fBevent_data\fP *) const override"
+.br
+.RI "Called by the state machine engine to execute a state entry action (when entering a state)\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class SM, void(SM::*)(void) Func>
+.br
+class rcppsw::patterns::fsm::state_entry_action0< SM, Func >"
+Action to perform upon transition to a state\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fISM\fP A state machine class 
+.br
+\fIFunc\fP A state machine member function pointer that takes ZERO arguments\&. 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class SM , void(SM::*)(void) Func> \fBrcppsw::patterns::fsm::state_entry_action0\fP< SM, Func >::~\fBstate_entry_action0\fP (void)\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class SM , void(SM::*)(void) Func> void \fBrcppsw::patterns::fsm::state_entry_action0\fP< SM, Func >::invoke_entry_action (\fBbase_fsm\fP * sm, const \fBevent_data\fP * data) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Called by the state machine engine to execute a state entry action (when entering a state)\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsm\fP A state machine instance\&. 
+.br
+\fIdata\fP The event data\&. 
+.RE
+.PP
+
+.PP
+Implements \fBrcppsw::patterns::fsm::state_entry\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

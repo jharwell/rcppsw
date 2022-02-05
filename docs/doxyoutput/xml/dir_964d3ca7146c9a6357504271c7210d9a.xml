@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_964d3ca7146c9a6357504271c7210d9a" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/ds</compoundname>
+    <innerdir refid="dir_e56a5e7e6b580d0fa5ff98f9cd5dc0c1">/home/jharwell/git/rcppsw/include/rcppsw/ds/graph</innerdir>
+    <innerdir refid="dir_c132d57be5a698bf4df457f460e61d91">/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics</innerdir>
+    <innerfile refid="base__grid2D_8hpp">base_grid2D.hpp</innerfile>
+    <innerfile refid="base__grid3D_8hpp">base_grid3D.hpp</innerfile>
+    <innerfile refid="base__grid__overlay_8hpp">base_grid_overlay.hpp</innerfile>
+    <innerfile refid="grid2D_8hpp">grid2D.hpp</innerfile>
+    <innerfile refid="grid2D__overlay_8hpp">grid2D_overlay.hpp</innerfile>
+    <innerfile refid="grid3D_8hpp">grid3D.hpp</innerfile>
+    <innerfile refid="grid3D__overlay_8hpp">grid3D_overlay.hpp</innerfile>
+    <innerfile refid="poisson__queue_8hpp">poisson_queue.hpp</innerfile>
+    <innerfile refid="rtree_8hpp">rtree.hpp</innerfile>
+    <innerfile refid="stacked__grid2D_8hpp">stacked_grid2D.hpp</innerfile>
+    <innerfile refid="type__map_8hpp">type_map.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/"/>
+  </compounddef>
+</doxygen>

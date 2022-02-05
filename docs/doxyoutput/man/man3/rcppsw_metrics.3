@@ -1,0 +1,215 @@
+.TH "rcppsw::metrics" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics \- Base metric interfaces and the collectors for them\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBconfig\fP"
+.br
+.ti -1c
+.RI " \fBdetail\fP"
+.br
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBbase_collector\fP"
+.br
+.RI "Base class that uses the template design pattern to provide hooks for derived classes so that the process of writing out metrics is centralized in one place (here)\&. "
+.ti -1c
+.RI "interface \fBbase_data\fP"
+.br
+.RI "Base class for the containers of data extracted through classes derived from \fBbase_metrics\fP\&. "
+.ti -1c
+.RI "class \fBbase_manager\fP"
+.br
+.RI "Base class for managing metrics collected from variable sources across all possible collector output modes and sinks\&. "
+.ti -1c
+.RI "interface \fBbase_metrics\fP"
+.br
+.RI "Base class for all collected metrics in RCPPSW\&. "
+.ti -1c
+.RI "class \fBbase_sink\fP"
+.br
+.RI "Base class that uses the template design pattern to provide hooks for derived classes so that the process of writing out collected metrics is centralized in one place (here)\&. "
+.ti -1c
+.RI "class \fBcollector_group\fP"
+.br
+.RI "A group of N collectors, mapped by name, on which collective operations can be performed, in addition to individual collection; used to reduce code duplication\&. "
+.ti -1c
+.RI "struct \fBcollector_registration_spec\fP"
+.br
+.RI "The data needed to create an enabled collector\&. "
+.ti -1c
+.RI "struct \fBcreatable_collector_spec\fP"
+.br
+.RI "Each entry in the set of collectors that CAN be created (if they are actually created dependent on configuration) has: "
+.ti -1c
+.RI "class \fBcsv_sink\fP"
+.br
+.RI "Metrics sink so that collectors can output their metrics to a \fC\fP\&.csv file\&. Metrics are written out in \&.csv format at whatever frequency derived classes choose\&. "
+.ti -1c
+.RI "class \fBfile_sink\fP"
+.br
+.RI "Base class for all metrics which are to be written out to a file\&. "
+.ti -1c
+.RI "class \fBfile_sink_registerer\fP"
+.br
+.RI "Register all collectors configured with \fBrmetrics::file_sink\fP with a \fBbase_manager\fP or a class derived from it\&. "
+.ti -1c
+.RI "class \fBfs_output_manager\fP"
+.br
+.RI "Base class for managing metrics collected from variable sources across all possible collector output modes and sinks which ultimately output their metrics to the filesystem\&. "
+.ti -1c
+.RI "class \fBnetwork_output_manager\fP"
+.br
+.RI "Base class for managing metrics collected from variable sources across all possible collector output modes and sinks which ultimately output their metrics to the filesystem\&. "
+.ti -1c
+.RI "class \fBnetwork_sink\fP"
+.br
+.RI "Metrics sink so that collectors can output their metrics to a machine elsewhere on the network\&. Metrics are written at the specified interval to the specified machine to collect and process\&. "
+.ti -1c
+.RI "class \fBnetwork_sink_registerer\fP"
+.br
+.RI "Register all collectors configured with \fBrmetrics::network_sink\fP with a \fBbase_manager\fP or a class derived from it\&. "
+.ti -1c
+.RI "class \fBregister_using_config\fP"
+.br
+.RI "After enabled collectors have been parsed from an XML input file, register the enabled collectors with a \fBbase_manager\fP or a class derived from it\&. "
+.ti -1c
+.RI "class \fBregister_with_sink\fP"
+.br
+.RI "After enabled collectors have been parsed from an XML input file, register the enabled collectors with a \fBbase_manager\fP or a class derived from it\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBcreatable_collector_set\fP = std::multiset< \fBcreatable_collector_spec\fP, \fBdetail::creatable_collector_set_comparator\fP >"
+.br
+.RI "Set of \fBset_value_type\fP in which duplicates are allowed, because when we compare elements, we only use the typeid as the key, which can be the same between collectors, even if the other parts of each element are different\&. "
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBoutput_mode\fP { \fBoutput_mode::ekNONE\fP = 0, \fBoutput_mode::ekAPPEND\fP = 1 << 0, \fBoutput_mode::ekTRUNCATE\fP = 1 << 1, \fBoutput_mode::ekCREATE\fP = 1 << 2, \fBoutput_mode::ekSTREAM\fP = 1 << 3 }"
+.br
+.RI "Defines the behavior when metrics are written out to the filesystem\&. "
+.ti -1c
+.RI "enum \fBwrite_status\fP { \fBekNO_ATTEMPT\fP = 1 << 0, \fBekFAILED\fP = 1 << 1, \fBekSUCCESS\fP = 1 << 2 }"
+.br
+.RI "Status of attempts to write metrics to the filesystem\&. Used to correctly triage I/O errors\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base metric interfaces and the collectors for them\&. 
+.SH "Class Documentation"
+.PP 
+.SH "struct rcppsw::metrics::collector_registration_spec"
+.PP 
+
+.SS "template<typename TSink>
+.br
+struct rcppsw::metrics::collector_registration_spec< TSink >"
+The data needed to create an enabled collector\&. 
+.PP
+\fBClass Members:\fP
+.RS 4
+bool \fIis_enabled\fP 
+.br
+.PP
+unique_ptr< TSink > \fIsink\fP 
+.br
+.PP
+.RE
+.PP
+.SH "struct rcppsw::metrics::creatable_collector_spec"
+.PP 
+Each entry in the set of collectors that CAN be created (if they are actually created dependent on configuration) has: 
+
+
+.IP "\(bu" 2
+The typeid of the collector, so that functions templated on collector type can figure out the correct item in the set to read from\&.
+.IP "\(bu" 2
+The name of the collector in the input src (e\&.g\&. the XML attribute name)\&.
+.IP "\(bu" 2
+The scoped name of the collector that will be used to refer to the created collector during simulation\&.
+.IP "\(bu" 2
+The set of output modes that are valid for the collector\&. 
+.PP
+
+.PP
+\fBClass Members:\fP
+.RS 4
+type_index \fIid\fP 
+.br
+.PP
+string \fIinput_name\fP 
+.br
+.PP
+string \fIscoped_name\fP 
+.br
+.PP
+\fBoutput_mode\fP \fIvalid_modes\fP 
+.br
+.PP
+.RE
+.PP
+.SH "Typedef Documentation"
+.PP 
+.SS "using \fBrcppsw::metrics::creatable_collector_set\fP = typedef std::multiset<\fBcreatable_collector_spec\fP, \fBdetail::creatable_collector_set_comparator\fP>"
+
+.PP
+Set of \fBset_value_type\fP in which duplicates are allowed, because when we compare elements, we only use the typeid as the key, which can be the same between collectors, even if the other parts of each element are different\&. 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBrcppsw::metrics::output_mode\fP\fC [strong]\fP"
+
+.PP
+Defines the behavior when metrics are written out to the filesystem\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIekNONE \fP\fP
+Metrics are not written out ever\&. Like seriously ever\&. 
+.TP
+\fB\fIekAPPEND \fP\fP
+Each time metrics are written out, they are appended to the same file\&. This is suitable for metric collectors that output data for a set of one dimensional signals\&. Only valid for \fBfil_sink\fP based sinks\&. 
+.TP
+\fB\fIekTRUNCATE \fP\fP
+Each time metrics are written out, the output file is truncated and the header re-written with the current data\&. Suitable for metric collectors that output a single two dimensional signal as a cumulative average (that is, each time the signal is written out, it is a cumulative average of that signal up to that point in time)\&. Only valid for \fBfile_sink\fP based sinks\&. 
+.TP
+\fB\fIekCREATE \fP\fP
+Each time metrics are written out, a new output file is created with the header and the current data, with the current timestep being added to the name stem for the output file in order to guarantee uniqueness of output files\&. Suitable for metric collectors for signals of any dimensionality where post-processing to create a set of images/movie illustrating how the signal changes over time is desired\&. Only valid for \fBfile_sink\fP based sinks\&. 
+.TP
+\fB\fIekSTREAM \fP\fP
+Each time metrics are written out, they are sent directly to the network socket/stream/whatever\&. Only valid for \fBnetwork_sink\fP based sinks\&. 
+.SS "enum \fBrcppsw::metrics::write_status\fP"
+
+.PP
+Status of attempts to write metrics to the filesystem\&. Used to correctly triage I/O errors\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIekNO_ATTEMPT \fP\fP
+No write was attempted this timestep\&. 
+.TP
+\fB\fIekFAILED \fP\fP
+A write was attempted, but was unsuccessful this timestep\&. 
+.TP
+\fB\fIekSUCCESS \fP\fP
+A write was attempted and was successful this timestep\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

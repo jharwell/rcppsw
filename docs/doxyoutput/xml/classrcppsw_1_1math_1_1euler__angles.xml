@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1math_1_1euler__angles" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::math::euler_angles</compoundname>
+    <includes refid="orientation_8hpp" local="no">orientation.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1euler__angles_1a5e6dd06f4c5572021cb15cd24efee706" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref></type>
+        <definition>rmath::radians rcppsw::math::euler_angles::m_x</definition>
+        <argsstring></argsstring>
+        <name>m_x</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" line="65" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1euler__angles_1a29d98c653813f421b226af611616d48e" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref></type>
+        <definition>rmath::radians rcppsw::math::euler_angles::m_y</definition>
+        <argsstring></argsstring>
+        <name>m_y</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" line="66" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1euler__angles_1a1364154ab202dde5f8686c96d141f42e" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref></type>
+        <definition>rmath::radians rcppsw::math::euler_angles::m_z</definition>
+        <argsstring></argsstring>
+        <name>m_z</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" line="67" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1euler__angles_1a10f7d9c718c70a73dfe59f06e7d9bf23" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::euler_angles::euler_angles</definition>
+        <argsstring>(const rmath::radians &amp;x, const rmath::radians &amp;y, const rmath::radians &amp;z)</argsstring>
+        <name>euler_angles</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref> &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref> &amp;</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref> &amp;</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" line="55" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" bodystart="55" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1euler__angles_1a8d0941eaf9396f1858582213d2e68e5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::euler_angles::euler_angles</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>euler_angles</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Initializes to (0,0,0). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" line="53" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1euler__angles_1ae38cd63749fb4e5051201c5b081c84e2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref> &amp;</type>
+        <definition>const rmath::radians&amp; rcppsw::math::euler_angles::x</definition>
+        <argsstring>(void) const</argsstring>
+        <name>x</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" line="59" column="24" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1euler__angles_1acc64be83786ecb4854c91c7ba00c100f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref> &amp;</type>
+        <definition>const rmath::radians&amp; rcppsw::math::euler_angles::y</definition>
+        <argsstring>(void) const</argsstring>
+        <name>y</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" line="60" column="24" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1euler__angles_1af3a2c53222727d94fb5fca51f97e670d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">rmath::radians</ref> &amp;</type>
+        <definition>const rmath::radians&amp; rcppsw::math::euler_angles::z</definition>
+        <argsstring>(void) const</argsstring>
+        <name>z</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" line="61" column="24" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" bodystart="61" bodyend="61"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A class representing the orientation of a point or body in space using Euler angles. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::math::euler_angles</label>
+        <link refid="classrcppsw_1_1math_1_1euler__angles"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" line="48" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp" bodystart="48" bodyend="69"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1math_1_1euler__angles_1a8d0941eaf9396f1858582213d2e68e5a" prot="public" virt="non-virtual"><scope>rcppsw::math::euler_angles</scope><name>euler_angles</name></member>
+      <member refid="classrcppsw_1_1math_1_1euler__angles_1a10f7d9c718c70a73dfe59f06e7d9bf23" prot="public" virt="non-virtual"><scope>rcppsw::math::euler_angles</scope><name>euler_angles</name></member>
+      <member refid="classrcppsw_1_1math_1_1euler__angles_1a5e6dd06f4c5572021cb15cd24efee706" prot="private" virt="non-virtual"><scope>rcppsw::math::euler_angles</scope><name>m_x</name></member>
+      <member refid="classrcppsw_1_1math_1_1euler__angles_1a29d98c653813f421b226af611616d48e" prot="private" virt="non-virtual"><scope>rcppsw::math::euler_angles</scope><name>m_y</name></member>
+      <member refid="classrcppsw_1_1math_1_1euler__angles_1a1364154ab202dde5f8686c96d141f42e" prot="private" virt="non-virtual"><scope>rcppsw::math::euler_angles</scope><name>m_z</name></member>
+      <member refid="classrcppsw_1_1math_1_1euler__angles_1ae38cd63749fb4e5051201c5b081c84e2" prot="public" virt="non-virtual"><scope>rcppsw::math::euler_angles</scope><name>x</name></member>
+      <member refid="classrcppsw_1_1math_1_1euler__angles_1acc64be83786ecb4854c91c7ba00c100f" prot="public" virt="non-virtual"><scope>rcppsw::math::euler_angles</scope><name>y</name></member>
+      <member refid="classrcppsw_1_1math_1_1euler__angles_1af3a2c53222727d94fb5fca51f97e670d" prot="public" virt="non-virtual"><scope>rcppsw::math::euler_angles</scope><name>z</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

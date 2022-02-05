@@ -1,0 +1,220 @@
+.TH "rcppsw::math::degrees" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math::degrees \- Used to store an angle value in degrees (duh)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <degrees\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::stringizable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBdegrees\fP (const \fBradians\fP &r)"
+.br
+.RI "Initialize from the specified value in RADIANS\&. "
+.ti -1c
+.RI "\fBdegrees\fP (double value)"
+.br
+.RI "Initialize from the specified value in DEGREES\&. "
+.ti -1c
+.RI "\fBdegrees\fP (void)=default"
+.br
+.ti -1c
+.RI "bool \fBoperator!=\fP (const \fBdegrees\fP &other) const"
+.br
+.ti -1c
+.RI "double \fBoperator()\fP (void) const"
+.br
+.ti -1c
+.RI "\fBdegrees\fP \fBoperator*\fP (double value) const"
+.br
+.ti -1c
+.RI "\fBdegrees\fP & \fBoperator*=\fP (double value)"
+.br
+.ti -1c
+.RI "\fBdegrees\fP \fBoperator+\fP (const \fBdegrees\fP &other) const"
+.br
+.ti -1c
+.RI "\fBdegrees\fP & \fBoperator+\fP (void)"
+.br
+.ti -1c
+.RI "\fBdegrees\fP & \fBoperator+=\fP (const \fBdegrees\fP &other)"
+.br
+.ti -1c
+.RI "\fBdegrees\fP & \fBoperator+=\fP (double value)"
+.br
+.ti -1c
+.RI "\fBdegrees\fP \fBoperator\-\fP (const \fBdegrees\fP &other) const"
+.br
+.ti -1c
+.RI "\fBdegrees\fP \fBoperator\-\fP (void) const"
+.br
+.ti -1c
+.RI "\fBdegrees\fP & \fBoperator\-=\fP (const \fBdegrees\fP &other)"
+.br
+.ti -1c
+.RI "\fBdegrees\fP & \fBoperator\-=\fP (double value)"
+.br
+.ti -1c
+.RI "double \fBoperator/\fP (const \fBdegrees\fP &other) const"
+.br
+.ti -1c
+.RI "\fBdegrees\fP \fBoperator/\fP (double value) const"
+.br
+.ti -1c
+.RI "\fBdegrees\fP & \fBoperator/=\fP (double value)"
+.br
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBdegrees\fP &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator<=\fP (const \fBdegrees\fP &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBdegrees\fP &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator>\fP (const \fBdegrees\fP &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator>=\fP (const \fBdegrees\fP &other) const"
+.br
+.ti -1c
+.RI "void \fBset\fP (double value)"
+.br
+.RI "Set the current value in degrees\&. "
+.ti -1c
+.RI "\fBdegrees\fP & \fBsigned_normalize\fP (void)"
+.br
+.RI "Normalizes the value in the range [-180, 180]\&. "
+.ti -1c
+.RI "std::string \fBto_str\fP (void) const override"
+.br
+.RI "Return a string representation of the degrees object of the form 'deg(XX) -> rad(YY)'\&. "
+.ti -1c
+.RI "\fBdegrees\fP & \fBunsigned_normalize\fP (void)"
+.br
+.RI "Normalizes the value in the range [0, 360]\&. "
+.ti -1c
+.RI "double \fBv\fP (void) const"
+.br
+.RI "Get the raw value of the angle\&. "
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const double \fBkDEGREES_TO_RADIANS\fP"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "std::istream & \fBoperator>>\fP (std::istream &is, \fBdegrees\fP &d)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Used to store an angle value in degrees (duh)\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::math::degrees::degrees (void)\fC [default]\fP"
+
+.SS "rcppsw::math::degrees::degrees (double value)\fC [inline]\fP, \fC [explicit]\fP"
+
+.PP
+Initialize from the specified value in DEGREES\&. 
+.SS "rcppsw::math::degrees::degrees (const \fBradians\fP & r)\fC [explicit]\fP"
+
+.PP
+Initialize from the specified value in RADIANS\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "bool rcppsw::math::degrees::operator!= (const \fBdegrees\fP & other) const\fC [inline]\fP"
+
+.SS "double rcppsw::math::degrees::operator() (void) const\fC [inline]\fP"
+
+.SS "\fBdegrees\fP rcppsw::math::degrees::operator* (double value) const\fC [inline]\fP"
+
+.SS "\fBdegrees\fP& rcppsw::math::degrees::operator*= (double value)\fC [inline]\fP"
+
+.SS "\fBdegrees\fP rcppsw::math::degrees::operator+ (const \fBdegrees\fP & other) const\fC [inline]\fP"
+
+.SS "\fBdegrees\fP& rcppsw::math::degrees::operator+ (void)\fC [inline]\fP"
+
+.SS "\fBdegrees\fP& rcppsw::math::degrees::operator+= (const \fBdegrees\fP & other)\fC [inline]\fP"
+
+.SS "\fBdegrees\fP& rcppsw::math::degrees::operator+= (double value)\fC [inline]\fP"
+
+.SS "\fBdegrees\fP rcppsw::math::degrees::operator\- (const \fBdegrees\fP & other) const\fC [inline]\fP"
+
+.SS "\fBdegrees\fP rcppsw::math::degrees::operator\- (void) const\fC [inline]\fP"
+
+.SS "\fBdegrees\fP& rcppsw::math::degrees::operator\-= (const \fBdegrees\fP & other)\fC [inline]\fP"
+
+.SS "\fBdegrees\fP& rcppsw::math::degrees::operator\-= (double value)\fC [inline]\fP"
+
+.SS "double rcppsw::math::degrees::operator/ (const \fBdegrees\fP & other) const\fC [inline]\fP"
+
+.SS "\fBdegrees\fP rcppsw::math::degrees::operator/ (double value) const\fC [inline]\fP"
+
+.SS "\fBdegrees\fP& rcppsw::math::degrees::operator/= (double value)\fC [inline]\fP"
+
+.SS "bool rcppsw::math::degrees::operator< (const \fBdegrees\fP & other) const\fC [inline]\fP"
+
+.SS "bool rcppsw::math::degrees::operator<= (const \fBdegrees\fP & other) const\fC [inline]\fP"
+
+.SS "bool rcppsw::math::degrees::operator== (const \fBdegrees\fP & other) const\fC [inline]\fP"
+
+.SS "bool rcppsw::math::degrees::operator> (const \fBdegrees\fP & other) const\fC [inline]\fP"
+
+.SS "bool rcppsw::math::degrees::operator>= (const \fBdegrees\fP & other) const\fC [inline]\fP"
+
+.SS "void rcppsw::math::degrees::set (double value)\fC [inline]\fP"
+
+.PP
+Set the current value in degrees\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvalue\fP In DEGREES\&. 
+.RE
+.PP
+
+.SS "\fBdegrees\fP& rcppsw::math::degrees::signed_normalize (void)\fC [inline]\fP"
+
+.PP
+Normalizes the value in the range [-180, 180]\&. 
+.SS "std::string rcppsw::math::degrees::to_str (void) const\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Return a string representation of the degrees object of the form 'deg(XX) -> rad(YY)'\&. 
+.PP
+Reimplemented from \fBrcppsw::er::stringizable\fP\&.
+.SS "\fBdegrees\fP& rcppsw::math::degrees::unsigned_normalize (void)\fC [inline]\fP"
+
+.PP
+Normalizes the value in the range [0, 360]\&. 
+.SS "double rcppsw::math::degrees::v (void) const\fC [inline]\fP"
+
+.PP
+Get the raw value of the angle\&. 
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "std::istream& operator>> (std::istream & is, \fBdegrees\fP & d)\fC [friend]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "const double rcppsw::math::degrees::kDEGREES_TO_RADIANS\fC [static]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,60 @@
+.TH "rcppsw::patterns::fsm::hfsm_state" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::fsm::hfsm_state \- Base class representing a state within a HFSM\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <hfsm_state\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::patterns::fsm::state\fP\&.
+.PP
+Inherited by \fBrcppsw::patterns::fsm::hfsm_state_action0< rcppsw::patterns::fsm::hfsm, &hfsm::ST_top_state >\fP, \fBrcppsw::patterns::fsm::hfsm_state_action0< FSM, Handler >\fP, and \fBrcppsw::patterns::fsm::hfsm_state_action1< FSM, Event, Handler >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBhfsm_state\fP (const \fBhfsm_state\fP &)=delete"
+.br
+.ti -1c
+.RI "\fBhfsm_state\fP (\fBhfsm_state\fP *\fBparent\fP)"
+.br
+.ti -1c
+.RI "\fB~hfsm_state\fP () override=default"
+.br
+.ti -1c
+.RI "\fBhfsm_state\fP & \fBoperator=\fP (const \fBhfsm_state\fP &)=delete"
+.br
+.ti -1c
+.RI "void \fBparent\fP (\fBrcppsw::patterns::fsm::state\fP *parent)"
+.br
+.ti -1c
+.RI "\fBrcppsw::patterns::fsm::state\fP * \fBparent\fP (void) const"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base class representing a state within a HFSM\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::patterns::fsm::hfsm_state::hfsm_state (\fBhfsm_state\fP * parent)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "rcppsw::patterns::fsm::hfsm_state::~hfsm_state ()\fC [override]\fP, \fC [default]\fP"
+
+.SS "rcppsw::patterns::fsm::hfsm_state::hfsm_state (const \fBhfsm_state\fP &)\fC [delete]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBhfsm_state\fP& rcppsw::patterns::fsm::hfsm_state::operator= (const \fBhfsm_state\fP &)\fC [delete]\fP"
+
+.SS "void rcppsw::patterns::fsm::hfsm_state::parent (\fBrcppsw::patterns::fsm::state\fP * parent)\fC [inline]\fP"
+
+.SS "\fBrcppsw::patterns::fsm::state\fP* rcppsw::patterns::fsm::hfsm_state::parent (void) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

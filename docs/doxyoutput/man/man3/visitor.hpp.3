@@ -1,0 +1,106 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <utility>\fP
+.br
+\fC#include <boost/variant/static_visitor\&.hpp>\fP
+.br
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+\fC#include 'rcppsw/mpl/typelist\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBfiltered_visitor< TVisitor >\fP"
+.br
+.RI "Convenience wrapper allowing generic visits to ANY type, but filtering them on the \fBrmpl::typelist\fP passed to the \fBrpvisitor::precise_visitor\fP\&. "
+.ti -1c
+.RI "class \fBprecise_visitor< VisitorImpl, TypeList >\fP"
+.br
+.RI "Visitor that will only visit precisely with types that exactly match one of the types in its type list (i\&.e\&. no implicit upcasting is allowed)\&. SFINAE FTW! "
+.ti -1c
+.RI "class \fBrcppsw::patterns::visitor::detail::visit_set_helper< T >\fP"
+.br
+.RI "Helper class to provide actual implementation\&. "
+.ti -1c
+.RI "class \fBvisit_set< Ts >\fP"
+.br
+.RI "General case for template expansion\&. Provides classes the ability to explicitly control what types of classes they can visit (limited to the specified types AND their parent classes)\&. "
+.ti -1c
+.RI "class \fBvisit_set< T >\fP"
+.br
+.RI "Base case for expansion\&. "
+.ti -1c
+.RI "class \fBvisit_set< T, Ts\&.\&.\&. >\fP"
+.br
+.RI "Middle recursive case for expansion\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns\fP"
+.br
+.RI "Design pattern templates and interfaces\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns::visitor\fP"
+.br
+.RI "Visitor design pattern variants: polymorphic, filtered, etc\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns::visitor::detail\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<typename \&.\&.\&. Args> using \fBprecise_visit_set\fP = mpl::typelist< Args\&.\&.\&. >"
+.br
+.RI "List of types specifying the set of visitors that a \fBprecise_visitor\fP will be able to visit\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2017 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Class Documentation"
+.PP 
+.SH "class visit_set"
+.PP 
+
+.SS "template<typename\&.\&.\&. Ts>
+.br
+class visit_set< Ts >"
+General case for template expansion\&. Provides classes the ability to explicitly control what types of classes they can visit (limited to the specified types AND their parent classes)\&. 
+.SH "Typedef Documentation"
+.PP 
+.SS "template<typename \&.\&.\&. Args> using \fBprecise_visit_set\fP =  mpl::typelist<Args\&.\&.\&.>"
+
+.PP
+List of types specifying the set of visitors that a \fBprecise_visitor\fP will be able to visit\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

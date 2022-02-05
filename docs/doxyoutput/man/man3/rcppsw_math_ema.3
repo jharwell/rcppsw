@@ -1,0 +1,99 @@
+.TH "rcppsw::math::ema< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math::ema< T > \- Calculates an Exponential Moving Average of SOMETHING\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ema\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::math::expression< T >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBema\fP (double \fBalpha\fP)"
+.br
+.ti -1c
+.RI "\fBema\fP (double \fBalpha\fP, const T &result)"
+.br
+.ti -1c
+.RI "double \fBalpha\fP (void) const"
+.br
+.ti -1c
+.RI "\fBema\fP & \fBcalc\fP (const \fBema\fP &other)"
+.br
+.ti -1c
+.RI "T \fBcalc\fP (const T &measure)"
+.br
+.ti -1c
+.RI "\fBema\fP & \fBoperator()\fP (const \fBema\fP &other)"
+.br
+.ti -1c
+.RI "T \fBoperator()\fP (const T &measure)"
+.br
+.ti -1c
+.RI "\fBema\fP \fBoperator+\fP (const \fBema\fP &other) const"
+.br
+.ti -1c
+.RI "\fBema\fP & \fBoperator+=\fP (const \fBema\fP &other)"
+.br
+.ti -1c
+.RI "\fBema\fP \fBoperator\-\fP (const \fBema\fP &other) const"
+.br
+.ti -1c
+.RI "\fBema\fP \fBoperator/\fP (const \fBema\fP &other) const"
+.br
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(!(std::is_floating_point< T >::value)), int >::type  = 0> bool \fBoperator==\fP (const \fBema\fP &other) const"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T>
+.br
+class rcppsw::math::ema< T >"
+Calculates an Exponential Moving Average of SOMETHING\&. 
+
+Depends on:
+.PP
+.IP "\(bu" 2
+Alpha: How much weight to give the past estimate, and how much to give the new measurement? 
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class T > \fBrcppsw::math::ema\fP< T >::\fBema\fP (double alpha)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "template<class T > \fBrcppsw::math::ema\fP< T >::\fBema\fP (double alpha, const T & result)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T > double \fBrcppsw::math::ema\fP< T >::alpha (void) const\fC [inline]\fP"
+
+.SS "template<class T > \fBema\fP& \fBrcppsw::math::ema\fP< T >::calc (const \fBema\fP< T > & other)\fC [inline]\fP"
+
+.SS "template<class T > T \fBrcppsw::math::ema\fP< T >::calc (const T & measure)\fC [inline]\fP"
+
+.SS "template<class T > \fBema\fP& \fBrcppsw::math::ema\fP< T >::operator() (const \fBema\fP< T > & other)\fC [inline]\fP"
+
+.SS "template<class T > T \fBrcppsw::math::ema\fP< T >::operator() (const T & measure)\fC [inline]\fP"
+
+.SS "template<class T > \fBema\fP \fBrcppsw::math::ema\fP< T >::operator+ (const \fBema\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<class T > \fBema\fP& \fBrcppsw::math::ema\fP< T >::operator+= (const \fBema\fP< T > & other)\fC [inline]\fP"
+
+.SS "template<class T > \fBema\fP \fBrcppsw::math::ema\fP< T >::operator\- (const \fBema\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<class T > \fBema\fP \fBrcppsw::math::ema\fP< T >::operator/ (const \fBema\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<class T > template<typename U  = T, typename std::enable_if<(!(std::is_floating_point< T >::value)), int >::type  = 0> bool \fBrcppsw::math::ema\fP< T >::operator== (const \fBema\fP< T > & other) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,2037 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="common_2macros_8hpp" kind="file" language="C++">
+    <compoundname>macros.hpp</compoundname>
+    <includes local="yes">rcsw/common/common.h</includes>
+    <includedby refid="common_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/common/common.hpp</includedby>
+    <includedby refid="mpl_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/mpl/mpl.hpp</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="44">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp</label>
+        <link refid="file__sink__parser_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="164">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/utils/maskable_enum.hpp</label>
+        <link refid="maskable__enum_8hpp"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="145">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp</label>
+        <link refid="event_8hpp"/>
+        <childnode refid="102" relation="include">
+        </childnode>
+        <childnode refid="146" relation="include">
+        </childnode>
+        <childnode refid="147" relation="include">
+        </childnode>
+        <childnode refid="148" relation="include">
+        </childnode>
+        <childnode refid="149" relation="include">
+        </childnode>
+        <childnode refid="150" relation="include">
+        </childnode>
+      </node>
+      <node id="120">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="121" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+      </node>
+      <node id="87">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp</label>
+        <link refid="register__with__sink_8hpp"/>
+      </node>
+      <node id="79">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp</label>
+        <link refid="sphere__vector_8hpp"/>
+        <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="144">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp</label>
+        <link refid="multifactory_8hpp"/>
+      </node>
+      <node id="24">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/config/base_config.hpp</label>
+        <link refid="base__config_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/type_map.hpp</label>
+        <link refid="type__map_8hpp"/>
+      </node>
+      <node id="107">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/manhattan_dist.hpp</label>
+        <link refid="manhattan__dist_8hpp"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+      </node>
+      <node id="142">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp</label>
+        <link refid="waveform__generator_8hpp"/>
+      </node>
+      <node id="163">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/utils/line_parser.hpp</label>
+        <link refid="line__parser_8hpp"/>
+        <childnode refid="162" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp</label>
+        <link refid="degrees_8hpp"/>
+        <childnode refid="75" relation="include">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/spatial.hpp</label>
+        <link refid="spatial_8hpp"/>
+        <childnode refid="84" relation="include">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/cell_op.hpp</label>
+        <link refid="cell__op_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp</label>
+        <link refid="vector3_8hpp"/>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+      </node>
+      <node id="117">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp</label>
+        <link refid="color_8hpp"/>
+      </node>
+      <node id="30">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/config/ema_config.hpp</label>
+        <link refid="ema__config_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="143">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/caching_factory.hpp</label>
+        <link refid="caching__factory_8hpp"/>
+        <childnode refid="122" relation="include">
+        </childnode>
+      </node>
+      <node id="96">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp</label>
+        <link refid="collector__group_8hpp"/>
+        <childnode refid="86" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid3D_metrics_data.hpp</label>
+        <link refid="grid3D__metrics__data_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="92">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/binned_powerlaw_distribution.hpp</label>
+        <link refid="binned__powerlaw__distribution_8hpp"/>
+      </node>
+      <node id="88">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/vector2.hpp</label>
+        <link refid="vector2_8hpp"/>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+      </node>
+      <node id="162">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/utils/file_parser.hpp</label>
+        <link refid="file__parser_8hpp"/>
+      </node>
+      <node id="63">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter_data.hpp</label>
+        <link refid="hgrid3D__view__filter__data_8hpp"/>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="165">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/utils/string_utils.hpp</label>
+        <link refid="string__utils_8hpp"/>
+        <childnode refid="73" relation="include">
+        </childnode>
+      </node>
+      <node id="114">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/timestep.hpp</label>
+        <link refid="timestep_8hpp"/>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="115" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp</label>
+        <link refid="orientation_8hpp"/>
+      </node>
+      <node id="60">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graphml.hpp</label>
+        <link refid="graphml_8hpp"/>
+      </node>
+      <node id="72">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/grid3D_overlay.hpp</label>
+        <link refid="grid3D__overlay_8hpp"/>
+      </node>
+      <node id="51">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp</label>
+        <link refid="pid__loop_8hpp"/>
+      </node>
+      <node id="101">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink.hpp</label>
+        <link refid="network__sink_8hpp"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/grid2D_overlay.hpp</label>
+        <link refid="grid2D__overlay_8hpp"/>
+        <childnode refid="71" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp</label>
+        <link refid="base__grid3D_8hpp"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy_eh_omp.hpp</label>
+        <link refid="entropy__eh__omp_8hpp"/>
+      </node>
+      <node id="131">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp</label>
+        <link refid="forkable_8hpp"/>
+      </node>
+      <node id="35">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/config/xml/sigmoid_parser.hpp</label>
+        <link refid="sigmoid__parser_8hpp"/>
+      </node>
+      <node id="47">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp</label>
+        <link refid="streamable__parser_8hpp"/>
+      </node>
+      <node id="99">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/file_sink.hpp</label>
+        <link refid="file__sink_8hpp"/>
+        <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="138">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp</label>
+        <link refid="decorator_8hpp"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="139" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="135" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/config/rng_config.hpp</label>
+        <link refid="rng__config_8hpp"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="109">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/er/stacktrace.hpp</label>
+        <link refid="stacktrace_8hpp"/>
+        <childnode refid="110" relation="include">
+        </childnode>
+      </node>
+      <node id="160">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/polymorphic_visitable.hpp</label>
+        <link refid="polymorphic__visitable_8hpp"/>
+      </node>
+      <node id="73">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp</label>
+        <link refid="range_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp</label>
+        <link refid="cluster_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/file_sink_registerer.hpp</label>
+        <link refid="file__sink__registerer_8hpp"/>
+      </node>
+      <node id="108">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp</label>
+        <link refid="spatial__dist_8hpp"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/file_sink_config.hpp</label>
+        <link refid="file__sink__config_8hpp"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="127">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/write_status.hpp</label>
+        <link refid="write__status_8hpp"/>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/max_subarray_finder.hpp</label>
+        <link refid="max__subarray__finder_8hpp"/>
+      </node>
+      <node id="57">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D.hpp</label>
+        <link refid="hgrid3D_8hpp"/>
+      </node>
+      <node id="154">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_entry.hpp</label>
+        <link refid="state__entry_8hpp"/>
+        <childnode refid="148" relation="include">
+        </childnode>
+        <childnode refid="152" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp</label>
+        <link refid="entropy_8hpp"/>
+      </node>
+      <node id="106">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp</label>
+        <link refid="distance__measure_8hpp"/>
+        <childnode refid="107" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+      </node>
+      <node id="153">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_map_row.hpp</label>
+        <link refid="state__map__row_8hpp"/>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp</label>
+        <link refid="base__manager_8hpp"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp</label>
+        <link refid="kmeans__omp_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="126">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_using_config.hpp</label>
+        <link refid="register__using__config_8hpp"/>
+      </node>
+      <node id="36">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp</label>
+        <link refid="sigmoid_8hpp"/>
+      </node>
+      <node id="103">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_fsm.hpp</label>
+        <link refid="mt__fsm_8hpp"/>
+      </node>
+      <node id="97">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_sink.hpp</label>
+        <link refid="base__sink_8hpp"/>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp</label>
+        <link refid="hgrid3D__view_8hpp"/>
+        <childnode refid="57" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/control/periodic_waveform.hpp</label>
+        <link refid="periodic__waveform_8hpp"/>
+      </node>
+      <node id="89">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid2D.hpp</label>
+        <link refid="base__grid2D_8hpp"/>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/control/config/xml/waveform_parser.hpp</label>
+        <link refid="waveform__parser_8hpp"/>
+      </node>
+      <node id="104">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp</label>
+        <link refid="hfsm_8hpp"/>
+      </node>
+      <node id="119">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp</label>
+        <link refid="ema_8hpp"/>
+      </node>
+      <node id="5">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+        <childnode refid="111" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="118" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="120" relation="include">
+        </childnode>
+        <childnode refid="121" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="122" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="123" relation="include">
+        </childnode>
+        <childnode refid="124" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="115" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="125" relation="include">
+        </childnode>
+        <childnode refid="126" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="127" relation="include">
+        </childnode>
+        <childnode refid="128" relation="include">
+        </childnode>
+        <childnode refid="129" relation="include">
+        </childnode>
+        <childnode refid="130" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="131" relation="include">
+        </childnode>
+        <childnode refid="132" relation="include">
+        </childnode>
+        <childnode refid="133" relation="include">
+        </childnode>
+        <childnode refid="134" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+        <childnode refid="135" relation="include">
+        </childnode>
+        <childnode refid="136" relation="include">
+        </childnode>
+        <childnode refid="137" relation="include">
+        </childnode>
+        <childnode refid="138" relation="include">
+        </childnode>
+        <childnode refid="140" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+        <childnode refid="145" relation="include">
+        </childnode>
+        <childnode refid="146" relation="include">
+        </childnode>
+        <childnode refid="151" relation="include">
+        </childnode>
+        <childnode refid="147" relation="include">
+        </childnode>
+        <childnode refid="154" relation="include">
+        </childnode>
+        <childnode refid="148" relation="include">
+        </childnode>
+        <childnode refid="155" relation="include">
+        </childnode>
+        <childnode refid="149" relation="include">
+        </childnode>
+        <childnode refid="156" relation="include">
+        </childnode>
+        <childnode refid="153" relation="include">
+        </childnode>
+        <childnode refid="157" relation="include">
+        </childnode>
+        <childnode refid="143" relation="include">
+        </childnode>
+        <childnode refid="158" relation="include">
+        </childnode>
+        <childnode refid="159" relation="include">
+        </childnode>
+        <childnode refid="160" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="112" relation="include">
+        </childnode>
+        <childnode refid="116" relation="include">
+        </childnode>
+        <childnode refid="161" relation="include">
+        </childnode>
+        <childnode refid="117" relation="include">
+        </childnode>
+        <childnode refid="162" relation="include">
+        </childnode>
+        <childnode refid="163" relation="include">
+        </childnode>
+        <childnode refid="164" relation="include">
+        </childnode>
+        <childnode refid="165" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/config/xml/xml_config_parser.hpp</label>
+        <link refid="xml__config__parser_8hpp"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans.hpp</label>
+        <link refid="kmeans_8hpp"/>
+      </node>
+      <node id="158">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/clonable.hpp</label>
+        <link refid="clonable_8hpp"/>
+      </node>
+      <node id="146">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm_state.hpp</label>
+        <link refid="hfsm__state_8hpp"/>
+        <childnode refid="104" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp</label>
+        <link refid="base__grid__overlay_8hpp"/>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="115">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/output_mode_config.hpp</label>
+        <link refid="output__mode__config_8hpp"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="124">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics.hpp</label>
+        <link refid="base__metrics_8hpp"/>
+      </node>
+      <node id="129">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="98">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp</label>
+        <link refid="creatable__collector__set_8hpp"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+      </node>
+      <node id="122">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/rngm.hpp</label>
+        <link refid="rngm_8hpp"/>
+      </node>
+      <node id="39">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/metrics_parser.hpp</label>
+        <link refid="metrics__parser_8hpp"/>
+      </node>
+      <node id="125">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/output_mode.hpp</label>
+        <link refid="output__mode_8hpp"/>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/angles.hpp</label>
+        <link refid="angles_8hpp"/>
+      </node>
+      <node id="140">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp</label>
+        <link refid="base__factory_8hpp"/>
+        <childnode refid="141" relation="include">
+        </childnode>
+        <childnode refid="144" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp</label>
+        <link refid="directed__graph__spec_8hpp"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp</label>
+        <link refid="network__output__manager_8hpp"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp</label>
+        <link refid="multithread_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graph.hpp</label>
+        <link refid="graph_8hpp"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="151">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state.hpp</label>
+        <link refid="state_8hpp"/>
+        <childnode refid="146" relation="include">
+        </childnode>
+        <childnode refid="147" relation="include">
+        </childnode>
+        <childnode refid="152" relation="include">
+        </childnode>
+        <childnode refid="153" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid3D_metrics_collector.hpp</label>
+        <link refid="grid3D__metrics__collector_8hpp"/>
+      </node>
+      <node id="90">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/grid2D.hpp</label>
+        <link refid="grid2D_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/control/aperiodic_waveform.hpp</label>
+        <link refid="aperiodic__waveform_8hpp"/>
+      </node>
+      <node id="7">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_data.hpp</label>
+        <link refid="grid2D__metrics__data_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="94">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_range.hpp</label>
+        <link refid="spatial__range_8hpp"/>
+      </node>
+      <node id="21">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/membership_policy.hpp</label>
+        <link refid="membership__policy_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="111">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/er/stringizable.hpp</label>
+        <link refid="stringizable_8hpp"/>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="112" relation="include">
+        </childnode>
+        <childnode refid="117" relation="include">
+        </childnode>
+      </node>
+      <node id="123">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_data.hpp</label>
+        <link refid="base__data_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+      </node>
+      <node id="134">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp</label>
+        <link refid="lockable_8hpp"/>
+      </node>
+      <node id="132">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp</label>
+        <link refid="ipc_8hpp"/>
+        <childnode refid="133" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/eh_clustering_impl.hpp</label>
+        <link refid="eh__clustering__impl_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="149">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_exit_action.hpp</label>
+        <link refid="state__exit__action_8hpp"/>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+      <node id="156">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_guard.hpp</label>
+        <link refid="state__guard_8hpp"/>
+        <childnode refid="150" relation="include">
+        </childnode>
+        <childnode refid="152" relation="include">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/powerlaw_distribution.hpp</label>
+        <link refid="powerlaw__distribution_8hpp"/>
+        <childnode refid="92" relation="include">
+        </childnode>
+      </node>
+      <node id="130">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/mpl/reflectable.hpp</label>
+        <link refid="reflectable_8hpp"/>
+      </node>
+      <node id="136">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp</label>
+        <link refid="mt__vector_8hpp"/>
+      </node>
+      <node id="155">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_exit.hpp</label>
+        <link refid="state__exit_8hpp"/>
+        <childnode refid="149" relation="include">
+        </childnode>
+        <childnode refid="152" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp</label>
+        <link refid="typelist_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink_registerer.hpp</label>
+        <link refid="network__sink__registerer_8hpp"/>
+      </node>
+      <node id="137">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp</label>
+        <link refid="threadable_8hpp"/>
+      </node>
+      <node id="54">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp</label>
+        <link refid="directed__graph_8hpp"/>
+      </node>
+      <node id="83">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp</label>
+        <link refid="rtree_8hpp"/>
+      </node>
+      <node id="121">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/normalize.hpp</label>
+        <link refid="normalize_8hpp"/>
+      </node>
+      <node id="33">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/config/xml/rng_parser.hpp</label>
+        <link refid="rng__parser_8hpp"/>
+      </node>
+      <node id="55">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_vertex_property.hpp</label>
+        <link refid="hgrid3D__vertex__property_8hpp"/>
+        <childnode refid="56" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/radians.hpp</label>
+        <link refid="radians_8hpp"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="139">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp</label>
+        <link refid="grid__index__map_8hpp"/>
+        <childnode refid="63" relation="include">
+        </childnode>
+      </node>
+      <node id="161">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/utils/base_cli.hpp</label>
+        <link refid="base__cli_8hpp"/>
+      </node>
+      <node id="133">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp</label>
+        <link refid="ipc__queue_8hpp"/>
+      </node>
+      <node id="52">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/base_vertex_property.hpp</label>
+        <link refid="base__vertex__property_8hpp"/>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp</label>
+        <link refid="closest__pair2D_8hpp"/>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="129" relation="include">
+        </childnode>
+      </node>
+      <node id="113">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/discretize_ratio.hpp</label>
+        <link refid="discretize__ratio_8hpp"/>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="116">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/type_uuid.hpp</label>
+        <link refid="type__uuid_8hpp"/>
+      </node>
+      <node id="34">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/config/sigmoid_config.hpp</label>
+        <link refid="sigmoid__config_8hpp"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="135">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp</label>
+        <link refid="mt__queue_8hpp"/>
+      </node>
+      <node id="128">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/mpl/identity.hpp</label>
+        <link refid="identity_8hpp"/>
+      </node>
+      <node id="71">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp</label>
+        <link refid="stacked__grid2D_8hpp"/>
+      </node>
+      <node id="46">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/network_sink_parser.hpp</label>
+        <link refid="network__sink__parser_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/base_clustering_impl.hpp</label>
+        <link refid="base__clustering__impl_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/transform.hpp</label>
+        <link refid="transform_8hpp"/>
+      </node>
+      <node id="4">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp</label>
+        <link refid="visitor_8hpp"/>
+      </node>
+      <node id="82">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/grid3D.hpp</label>
+        <link refid="grid3D_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/base_sink_parser.hpp</label>
+        <link refid="base__sink__parser_8hpp"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_csv_sink.hpp</label>
+        <link refid="grid2D__metrics__csv__sink_8hpp"/>
+      </node>
+      <node id="77">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/ientropy.hpp</label>
+        <link refid="ientropy_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="105">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/simple_fsm.hpp</label>
+        <link refid="simple__fsm_8hpp"/>
+      </node>
+      <node id="56">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_spec.hpp</label>
+        <link refid="hgrid3D__spec_8hpp"/>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+      </node>
+      <node id="84">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/bounding_box.hpp</label>
+        <link refid="bounding__box_8hpp"/>
+        <childnode refid="58" relation="include">
+        </childnode>
+      </node>
+      <node id="147">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_action.hpp</label>
+        <link refid="state__action_8hpp"/>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+      <node id="159">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/singleton/singleton.hpp</label>
+        <link refid="singleton_8hpp"/>
+        <childnode refid="122" relation="include">
+        </childnode>
+        <childnode refid="144" relation="include">
+        </childnode>
+      </node>
+      <node id="100">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp</label>
+        <link refid="csv__sink_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="150">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_guard_action.hpp</label>
+        <link refid="state__guard__action_8hpp"/>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/convex_hull2D.hpp</label>
+        <link refid="convex__hull2D_8hpp"/>
+      </node>
+      <node id="12">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid3D_metrics_csv_sink.hpp</label>
+        <link refid="grid3D__metrics__csv__sink_8hpp"/>
+      </node>
+      <node id="67">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp</label>
+        <link refid="client_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/control/base_waveform.hpp</label>
+        <link refid="base__waveform_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="141">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/factory.hpp</label>
+        <link refid="factory_8hpp"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="142" relation="include">
+        </childnode>
+        <childnode refid="143" relation="include">
+        </childnode>
+      </node>
+      <node id="102">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/base_fsm.hpp</label>
+        <link refid="base__fsm_8hpp"/>
+        <childnode refid="103" relation="include">
+        </childnode>
+        <childnode refid="104" relation="include">
+        </childnode>
+        <childnode refid="105" relation="include">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_builder.hpp</label>
+        <link refid="hgrid3D__view__builder_8hpp"/>
+      </node>
+      <node id="91">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp</label>
+        <link refid="rng_8hpp"/>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/network_sink_config.hpp</label>
+        <link refid="network__sink__config_8hpp"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="110">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/er/macros.hpp</label>
+        <link refid="er_2macros_8hpp"/>
+        <childnode refid="67" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/metrics_config.hpp</label>
+        <link refid="metrics__config_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp</label>
+        <link refid="fs__output__manager_8hpp"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp</label>
+        <link refid="grid2D__metrics__collector_8hpp"/>
+      </node>
+      <node id="31">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/config/xml/ema_parser.hpp</label>
+        <link refid="ema__parser_8hpp"/>
+      </node>
+      <node id="25">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp</label>
+        <link refid="waveform__config_8hpp"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp</label>
+        <link refid="hgrid3D__view__filter_8hpp"/>
+        <childnode refid="57" relation="include">
+        </childnode>
+      </node>
+      <node id="148">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_entry_action.hpp</label>
+        <link refid="state__entry__action_8hpp"/>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+      <node id="152">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_map_ex_row.hpp</label>
+        <link refid="state__map__ex__row_8hpp"/>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+      <node id="112">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp</label>
+        <link refid="named__type_8hpp"/>
+        <childnode refid="113" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
+        <childnode refid="114" relation="include">
+        </childnode>
+        <childnode refid="116" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/config/xml/xml_config_repository.hpp</label>
+        <link refid="xml__config__repository_8hpp"/>
+      </node>
+      <node id="118">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp</label>
+        <link refid="expression_8hpp"/>
+        <childnode refid="119" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="95">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp</label>
+        <link refid="base__collector_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+      </node>
+      <node id="157">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/pimpl/pimpl.hpp</label>
+        <link refid="pimpl_8hpp"/>
+        <childnode refid="91" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp</label>
+        <link refid="poisson__queue_8hpp"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="common_2macros_8hpp_1a0ec3f1f76900803ac4f041eb90b84a34" prot="public" static="no">
+        <name>define</name>
+        <initializer>RCPPSW_CHECK(cond) <ref refid="common_8h_1a33bb1600c8c72eddf77858fc9e329059" kindref="member" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">RCSW_CHECK</ref>(cond)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="249" column="9"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" prot="public" static="no">
+        <name>NS_END</name>
+        <param><defname>...</defname></param>
+        <initializer>RCSW_XFOR_EACH1(<ref refid="common_2macros_8hpp_1a9ad0eb293f54247c59c75d849c45df67" kindref="member">NS_END_</ref>, __VA_ARGS__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Close a previously declared nested namespace. Tokens should be passed to this macro in the reverse order they were declared in (not actually necessary for valid code, but it is more self documentating to do so). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="65" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a9ad0eb293f54247c59c75d849c45df67" prot="public" static="no">
+        <name>NS_END_</name>
+        <param><defname>ns</defname></param>
+        <initializer>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Callback macro for recursive macro expansion for nested namespace end pasting. <computeroutput>ns</computeroutput> is the namespace to paste. Note that it is not strictly necessary to pass the namespace name to this macro, as it only pastes a single bracket; it is more self documenting to do so, however. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="48" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" prot="public" static="no">
+        <name>NS_START</name>
+        <param><defname>...</defname></param>
+        <initializer>RCSW_XFOR_EACH1(<ref refid="common_2macros_8hpp_1a8a6cf97b5307c71b6cfc574f88081818" kindref="member">NS_START_</ref>, __VA_ARGS__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Declare a nested namespace, with each successive token in the comma-separated argument list being declared inside the namespace of the previous token. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="56" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a8a6cf97b5307c71b6cfc574f88081818" prot="public" static="no">
+        <name>NS_START_</name>
+        <param><defname>ns</defname></param>
+        <initializer>namespace ns {</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Callback macro for recursive macro expansion for nested namespace start pasting. <computeroutput>ns</computeroutput> is the namespace to paste. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="39" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1aab1daefd51d059d6774569e9590d4fb8" prot="public" static="no">
+        <name>RCPPSW_COLD</name>
+        <initializer>RCSW_COLD</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="235" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1ac9a179ff9e10d391a9a794175729493f" prot="public" static="no">
+        <name>RCPPSW_CONST</name>
+        <initializer><ref refid="compilers_8h_1a9ba6593ce3ccf08687a09a3ba011900b" kindref="member" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">RCSW_CONST</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="234" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1ad10e83a2ab0471c0e95bca6e8d822557" prot="public" static="no">
+        <name>RCPPSW_DEAD</name>
+        <initializer>RCSW_DEAD</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="237" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a0ea9c4e875ed1ff7ea3805fd70bedadc" prot="public" static="no">
+        <name>RCPPSW_FPC_RET_V</name>
+        <param><defname>cond</defname></param>
+        <initializer><ref refid="fpc_8h_1aae29e687d4edc2db28048aff44e1bffc" kindref="member" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">RCSW_FPC_RET_V</ref>(cond)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="253" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="253" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1aa37b1bea2856518ad91b6407e42e88cb" prot="public" static="no">
+        <name>RCPPSW_IS_BETWEEN</name>
+        <param><defname>n</defname></param>
+        <param><defname>lb</defname></param>
+        <param><defname>ub</defname></param>
+        <initializer><ref refid="common_8h_1a761d18067139c5d3a23bcb11ebfcca37" kindref="member" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">RCSW_IS_BETWEEN</ref>(n, lb, ub)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="250" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="250" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a252ccf92abf5da261a39dbbf3c1724e5" prot="public" static="no">
+        <name>RCPPSW_IS_EVEN</name>
+        <param><defname>n</defname></param>
+        <initializer><ref refid="common_8h_1af3cb23b02707f18b367153764060ef6e" kindref="member" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">RCSW_IS_EVEN</ref>(n)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="254" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="254" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1af19b142b99e0e3eb22d3eec2ba54d1bd" prot="public" static="no">
+        <name>RCPPSW_IS_ODD</name>
+        <param><defname>n</defname></param>
+        <initializer><ref refid="common_8h_1a6ff31a2f95a9a20ab8a077fcf3f628d5" kindref="member" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">RCSW_IS_ODD</ref>(n)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="214" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a87b5ff6118f9c04219cbc01e39c5982a" prot="public" static="no">
+        <name>RCPPSW_LIKELY</name>
+        <param><defname>cond</defname></param>
+        <initializer><ref refid="common_8h_1a34c71484e17c5a7cab790b61c87c355c" kindref="member" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">RCSW_LIKELY</ref>(cond)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="251" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="251" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a4160e6a58445c478750f981632097665" prot="public" static="no">
+        <name>RCPPSW_NODISCARD</name>
+        <initializer>[[nodiscard]]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Mark a function result as no-discard, so that a compiler warning is issued if this happens. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="246" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="246" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a5c02369dbdd1a76f31cbc10b6fe6e87a" prot="public" static="no">
+        <name>RCPPSW_PTRREF_DECLDEF</name>
+        <param><defname>Func</defname></param>
+        <param><defname>Member</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>  std::add_pointer&lt;__VA_ARGS__ decltype(Member)&gt;::type Func(void) {     \
+    return &amp;Member;                                                     \
+  }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Expose a pointer reference for an instance member <computeroutput>Member</computeroutput> named <computeroutput>Func</computeroutput>. The variable argument list is to allow specification of &apos;const&apos; as part of the function return type. This is the non-const member function version. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="85" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a7fedd56824caca9558ffca4adf523bd3" prot="public" static="no">
+        <name>RCPPSW_PTRREF_DECLDEF_CONST</name>
+        <param><defname>Func</defname></param>
+        <param><defname>Member</defname></param>
+        <initializer>  std::add_pointer&lt;const decltype(Member)&gt;::type Func(void) const {           \
+    return &amp;Member;                                                     \
+  }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Expose a pointer reference for an instance member <computeroutput>Member</computeroutput> named <computeroutput>Func</computeroutput>. This is the const member function version. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="73" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a080d8af20d6aa955d4db7ef068309a7c" prot="public" static="no">
+        <name>RCPPSW_PURE</name>
+        <initializer>RCSW_PURE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="236" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="236" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a7923482659a79cf40aec0fd929aa8c4b" prot="public" static="no">
+        <name>RCPPSW_STRUCT_DOT_INITIALIZER</name>
+        <param><defname>name</defname></param>
+        <param><defname>value</defname></param>
+        <initializer>.name = value</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initialize a member of a struct which is not POD using the dot (&apos;.&apos;) initializer syntax. GCC and clang handle this for things using std::bind/member function pointers, but the Intel compiler does not. Using the dot syntax is nice, because if you have multiple members of the same type in the same struct, the intent of the programmer is clear. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="231" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="231" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a318d7a1e5f231434bb28321d941ddce3" prot="public" static="no">
+        <name>RCPPSW_UNLIKELY</name>
+        <param><defname>cond</defname></param>
+        <initializer><ref refid="common_8h_1ac9fae41eb6e5974881537863932522a6" kindref="member" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">RCSW_UNLIKELY</ref>(cond)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="252" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="252" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a182007b022ff477677d33b31a89cb7fe" prot="public" static="no">
+        <name>RCPPSW_UNUSED</name>
+        <initializer>RCSW_UNUSED</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="238" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1abd3fccfd919cadd321de43b436a7f50f" prot="public" static="no">
+        <name>RCPPSW_WARNING_DISABLE</name>
+        <param><defname>...</defname></param>
+        <initializer>RCSW_WARNING_DISABLE(__VA_ARGS__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Alias for RCSW_WARNING_DISABLE, a compiler-agnostic way to ignore compiler warnings within a given diagnostic context. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="287" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="287" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a5e18d29b5090a524f0317886f2539bc4" prot="public" static="no">
+        <name>RCPPSW_WARNING_DISABLE_POP</name>
+        <param><defname>...</defname></param>
+        <initializer>RCSW_WARNING_DISABLE_POP(__VA_ARGS__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Alias for RCSW_WARNING_DISABLE_POP, a compiler-agnostic way to pop warning ignores from the stack.</para>
+<para>Very useful for disabling warnings from headers/frameworks which you have no control over. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="279" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="279" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a753de85e03181f93c89a5b39285670fd" prot="public" static="no">
+        <name>RCPPSW_WARNING_DISABLE_PUSH</name>
+        <param><defname>...</defname></param>
+        <initializer>RCSW_WARNING_DISABLE_PUSH(__VA_ARGS__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Alias for RCSW_WARNING_DISABLE_PUSH, a compiler-agnostic way to push warning ignores onto the stack.</para>
+<para>Very useful for disabling warnings from headers/frameworks which you have no control over. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="268" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a0b47b5230c652d927b3486dd6056c2de" prot="public" static="no">
+        <name>RCPPSW_WRAP_DECL</name>
+        <param><defname>Ret</defname></param>
+        <param><defname>Func</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>Ret Func(void) __VA_ARGS__</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Readability-enhancing macro for declaring that you are wrapping a function provided by a member variable/parent class/etc. You don&apos;t HAVE to use this macro, but doing so generally saves some typing, and makes your code more self-documenting.</para>
+<para>The variable argument list is to allow specification of &apos;const&apos; as part of the function declaration. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="148" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1aeab6d90820e57a2708a9fb57d17362af" prot="public" static="no">
+        <name>RCPPSW_WRAP_DECL_OVERRIDE</name>
+        <param><defname>Ret</defname></param>
+        <param><defname>Func</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>Ret Func(void) __VA_ARGS__ override <ref refid="common_2macros_8hpp_1a080d8af20d6aa955d4db7ef068309a7c" kindref="member">RCPPSW_PURE</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Declare a &quot;simple&quot; overrnide of an inherited function with the <bold>pure</bold> attribute. Should be <emphasis>NOT</emphasis> be used if the override is complex to implement (i.e. for every instance of this macro in a header file there should be an instance of <ref refid="common_2macros_8hpp_1a28f0630dfa16c654b0ec4f414335b656" kindref="member">RCPPSW_WRAP_DEF_OVERRIDE()</ref> in the corresponding source file for a class). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="191" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1ac325bbd230ae35d40462ed95ddb468db" prot="public" static="no">
+        <name>RCPPSW_WRAP_DECLDEF</name>
+        <param><defname>Func</defname></param>
+        <param><defname>Callable</defname></param>
+        <param><defname>...</defname></param>
+        <initializer><ref refid="common_2macros_8hpp_1a308f81475fb65ca59ee3a3ae5a7581d3" kindref="member">RCPPSW_WRAP_DECLDEF_AS</ref>(Func, Callable, Func, __VA_ARGS__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Wrap a public function, member variable (can&apos;t be a pointer type), or even another member function that returns an object that contains the function you want to wrap). The variable argument list is to allow specification of &apos;const&apos; as part of the function definition. Wrapped functions can take any number of arguments of any type.</para>
+<para>Cannot be used to wrap overriden functions. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="101" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a308f81475fb65ca59ee3a3ae5a7581d3" prot="public" static="no">
+        <name>RCPPSW_WRAP_DECLDEF_AS</name>
+        <param><defname>Func</defname></param>
+        <param><defname>Callable</defname></param>
+        <param><defname>NewName</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>  template &lt;typename... Args&gt;                                           \
+  auto NewName(Args&amp;&amp;... args)                                          \
+      __VA_ARGS__-&gt;decltype(std::declval&lt;decltype(Callable)&gt;().Func(args...)) { \
+    return (Callable).Func(std::forward&lt;Args&gt;(args)...);                \
+  }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Same as <ref refid="common_2macros_8hpp_1ac325bbd230ae35d40462ed95ddb468db" kindref="member">RCPPSW_WRAP_DECLDEF</ref>, but renames the function wrapper. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="110" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1ad6c93faf754b45bd3d4c9c5def3fcaba" prot="public" static="no">
+        <name>RCPPSW_WRAP_DECLDEF_OVERRIDE</name>
+        <param><defname>Func</defname></param>
+        <param><defname>Callable</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>  auto Func(void)                                                       \
+      __VA_ARGS__-&gt;decltype(std::declval&lt;decltype(Callable)&gt;().Func()) override { \
+    return (Callable).Func();                                             \
+  }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Wrap a public function from a member variable (or even another member function that returns an object that contains the function you want to wrap). The variable argument list is to allow specification of &apos;const&apos; as part of the function definition. Wrapped functions must take 0 arguments (can&apos;t do anything other than that for a general macro that works with virtual functions).</para>
+<para>Should be used to wrap overriden functions in the current class (e.g the enclosing class implements the same interface as a member variable). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="131" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a77cd57707ddc6b4f3dd0de2b866e5cb2" prot="public" static="no">
+        <name>RCPPSW_WRAP_DEF</name>
+        <param><defname>Class</defname></param>
+        <param><defname>Func</defname></param>
+        <param><defname>Handle</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>  auto Class::Func(void)                                               \
+      __VA_ARGS__-&gt;decltype(std::declval&lt;decltype(Handle)&gt;().Func()) { \
+    return (Handle).Func();                                            \
+  }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Readability-enhancing macro for defining the body of a function which wraps <computeroutput>Func</computeroutput> provided by <computeroutput>Handle</computeroutput>. You don&apos;t HAVE to use this macro, but doing so generally saves some typing, and makes your code more self-documenting.</para>
+<para>The variable argument list is to allow specification of &apos;const&apos; as part of the function definition. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="160" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a28f0630dfa16c654b0ec4f414335b656" prot="public" static="no">
+        <name>RCPPSW_WRAP_DEF_OVERRIDE</name>
+        <param><defname>Class</defname></param>
+        <param><defname>Func</defname></param>
+        <param><defname>Handle</defname></param>
+        <param><defname>...</defname></param>
+        <initializer><ref refid="common_2macros_8hpp_1a77cd57707ddc6b4f3dd0de2b866e5cb2" kindref="member">RCPPSW_WRAP_DEF</ref>(Class, Func, Handle, __VA_ARGS__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Define a &quot;simple&quot; override of an inherited function with the <bold>pure</bold> attribute in which the corresponding function on the handle is called and the result returned. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="201" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="201" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1afb0404b009333e643b3aff1341c0cdd1" prot="public" static="no">
+        <name>RCPPSW_WRAP_DEFP</name>
+        <param><defname>Class</defname></param>
+        <param><defname>Func</defname></param>
+        <param><defname>Handle</defname></param>
+        <param><defname>NullRet</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>  auto Class::Func(void)                                                \
+      __VA_ARGS__-&gt;decltype(std::declval&lt;decltype(*Handle)&gt;().Func()) { \
+    if (nullptr == Handle) {                                            \
+      return NullRet;                                                   \
+    }                                                                   \
+    return (Handle)-&gt;Func();                                            \
+  }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Same as <ref refid="common_2macros_8hpp_1a77cd57707ddc6b4f3dd0de2b866e5cb2" kindref="member">RCPPSW_WRAP_DEF</ref>, but for <computeroutput>Handle</computeroutput> instances which are pointers. Requires an additional specification of what to return if the <computeroutput>Handle</computeroutput> is NULL. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="173" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_2macros_8hpp_1a697ec27047c2fcc8041986662581cc97" prot="public" static="no">
+        <name>RCPPSW_WRAP_DEFP_OVERRIDE</name>
+        <param><defname>Class</defname></param>
+        <param><defname>Func</defname></param>
+        <param><defname>Handle</defname></param>
+        <param><defname>NullRet</defname></param>
+        <param><defname>...</defname></param>
+        <initializer><ref refid="common_2macros_8hpp_1afb0404b009333e643b3aff1341c0cdd1" kindref="member">RCPPSW_WRAP_DEFP</ref>(Class, Func, Handle, NullRet, __VA_ARGS__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Same as <ref refid="common_2macros_8hpp_1a28f0630dfa16c654b0ec4f414335b656" kindref="member">RCPPSW_WRAP_DEF_OVERRIDE</ref>, but for <computeroutput>Handle</computeroutput> instances which are pointers. Requires an additional specification of what to return if the <computeroutput>Handle</computeroutput> is NULL. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" line="211" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp" bodystart="211" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2020 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="22"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_COMMON_MACROS_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_COMMON_MACROS_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="common_8h.html" kindref="compound" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">rcsw/common/common.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*<sp/>Macros</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="39" refid="common_2macros_8hpp_1a8a6cf97b5307c71b6cfc574f88081818" refkind="member"><highlight class="preprocessor">#define<sp/>NS_START_(ns)<sp/>namespace<sp/>ns<sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="common_2macros_8hpp_1a9ad0eb293f54247c59c75d849c45df67" refkind="member"><highlight class="preprocessor">#define<sp/>NS_END_(ns)<sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56" refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" refkind="member"><highlight class="preprocessor">#define<sp/>NS_START(...)<sp/>RCSW_XFOR_EACH1(NS_START_,<sp/>__VA_ARGS__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" refkind="member"><highlight class="preprocessor">#define<sp/>NS_END(...)<sp/>RCSW_XFOR_EACH1(NS_END_,<sp/>__VA_ARGS__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73" refid="common_2macros_8hpp_1a7fedd56824caca9558ffca4adf523bd3" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_PTRREF_DECLDEF_CONST(Func,<sp/>Member)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="74"><highlight class="preprocessor"><sp/><sp/>std::add_pointer&lt;const<sp/>decltype(Member)&gt;::type<sp/>Func(void)<sp/>const<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="75"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>return<sp/>&amp;Member;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="76"><highlight class="preprocessor"><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85" refid="common_2macros_8hpp_1a5c02369dbdd1a76f31cbc10b6fe6e87a" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_PTRREF_DECLDEF(Func,<sp/>Member,<sp/>...)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="86"><highlight class="preprocessor"><sp/><sp/>std::add_pointer&lt;__VA_ARGS__<sp/>decltype(Member)&gt;::type<sp/>Func(void)<sp/>{<sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="87"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>return<sp/>&amp;Member;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="88"><highlight class="preprocessor"><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101" refid="common_2macros_8hpp_1ac325bbd230ae35d40462ed95ddb468db" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_WRAP_DECLDEF(Func,<sp/>Callable,<sp/>...)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="102"><highlight class="preprocessor"><sp/><sp/>RCPPSW_WRAP_DECLDEF_AS(Func,<sp/>Callable,<sp/>Func,<sp/>__VA_ARGS__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110" refid="common_2macros_8hpp_1a308f81475fb65ca59ee3a3ae5a7581d3" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_WRAP_DECLDEF_AS(Func,<sp/>Callable,<sp/>NewName,<sp/>...)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="111"><highlight class="preprocessor"><sp/><sp/>template<sp/>&lt;typename...<sp/>Args&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="112"><highlight class="preprocessor"><sp/><sp/>auto<sp/>NewName(Args&amp;&amp;...<sp/>args)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="113"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>__VA_ARGS__-&gt;decltype(std::declval&lt;decltype(Callable)&gt;().Func(args...))<sp/>{<sp/>\</highlight></codeline>
+<codeline lineno="114"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>return<sp/>(Callable).Func(std::forward&lt;Args&gt;(args)...);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="115"><highlight class="preprocessor"><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131" refid="common_2macros_8hpp_1ad6c93faf754b45bd3d4c9c5def3fcaba" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_WRAP_DECLDEF_OVERRIDE(Func,<sp/>Callable,<sp/>...)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="132"><highlight class="preprocessor"><sp/><sp/>auto<sp/>Func(void)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="133"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>__VA_ARGS__-&gt;decltype(std::declval&lt;decltype(Callable)&gt;().Func())<sp/>override<sp/>{<sp/>\</highlight></codeline>
+<codeline lineno="134"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>return<sp/>(Callable).Func();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="135"><highlight class="preprocessor"><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148" refid="common_2macros_8hpp_1a0b47b5230c652d927b3486dd6056c2de" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_WRAP_DECL(Ret,<sp/>Func,<sp/>...)<sp/>Ret<sp/>Func(void)<sp/>__VA_ARGS__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160" refid="common_2macros_8hpp_1a77cd57707ddc6b4f3dd0de2b866e5cb2" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_WRAP_DEF(Class,<sp/>Func,<sp/>Handle,<sp/>...)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="161"><highlight class="preprocessor"><sp/><sp/>auto<sp/>Class::Func(void)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="162"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>__VA_ARGS__-&gt;decltype(std::declval&lt;decltype(Handle)&gt;().Func())<sp/>{<sp/>\</highlight></codeline>
+<codeline lineno="163"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>return<sp/>(Handle).Func();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="164"><highlight class="preprocessor"><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173" refid="common_2macros_8hpp_1afb0404b009333e643b3aff1341c0cdd1" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_WRAP_DEFP(Class,<sp/>Func,<sp/>Handle,<sp/>NullRet,<sp/>...)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="174"><highlight class="preprocessor"><sp/><sp/>auto<sp/>Class::Func(void)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="175"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>__VA_ARGS__-&gt;decltype(std::declval&lt;decltype(*Handle)&gt;().Func())<sp/>{<sp/>\</highlight></codeline>
+<codeline lineno="176"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>if<sp/>(nullptr<sp/>==<sp/>Handle)<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="177"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>NullRet;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="178"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="179"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>return<sp/>(Handle)-&gt;Func();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="180"><highlight class="preprocessor"><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191" refid="common_2macros_8hpp_1aeab6d90820e57a2708a9fb57d17362af" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_WRAP_DECL_OVERRIDE(Ret,<sp/>Func,<sp/>...)<sp/>\</highlight></codeline>
+<codeline lineno="192"><highlight class="preprocessor"><sp/><sp/>Ret<sp/>Func(void)<sp/>__VA_ARGS__<sp/>override<sp/>RCPPSW_PURE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201" refid="common_2macros_8hpp_1a28f0630dfa16c654b0ec4f414335b656" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_WRAP_DEF_OVERRIDE(Class,<sp/>Func,<sp/>Handle,<sp/>...)<sp/>\</highlight></codeline>
+<codeline lineno="202"><highlight class="preprocessor"><sp/><sp/>RCPPSW_WRAP_DEF(Class,<sp/>Func,<sp/>Handle,<sp/>__VA_ARGS__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211" refid="common_2macros_8hpp_1a697ec27047c2fcc8041986662581cc97" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_WRAP_DEFP_OVERRIDE(Class,<sp/>Func,<sp/>Handle,<sp/>NullRet,<sp/>...)<sp/>\</highlight></codeline>
+<codeline lineno="212"><highlight class="preprocessor"><sp/><sp/>RCPPSW_WRAP_DEFP(Class,<sp/>Func,<sp/>Handle,<sp/>NullRet,<sp/>__VA_ARGS__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214" refid="common_2macros_8hpp_1af19b142b99e0e3eb22d3eec2ba54d1bd" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_IS_ODD(n)<sp/>RCSW_IS_ODD(n)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="217"><highlight class="comment"><sp/>*<sp/>Compiler<sp/>Macros</highlight></codeline>
+<codeline lineno="218"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__INTEL_COMPILER)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_STRUCT_DOT_INITIALIZER(name,<sp/>value)<sp/>value</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231" refid="common_2macros_8hpp_1a7923482659a79cf40aec0fd929aa8c4b" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_STRUCT_DOT_INITIALIZER(name,<sp/>value)<sp/>.name<sp/>=<sp/>value</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="234" refid="common_2macros_8hpp_1ac9a179ff9e10d391a9a794175729493f" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_CONST<sp/>RCSW_CONST</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="235" refid="common_2macros_8hpp_1aab1daefd51d059d6774569e9590d4fb8" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_COLD<sp/>RCSW_COLD</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="236" refid="common_2macros_8hpp_1a080d8af20d6aa955d4db7ef068309a7c" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_PURE<sp/>RCSW_PURE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="237" refid="common_2macros_8hpp_1ad10e83a2ab0471c0e95bca6e8d822557" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_DEAD<sp/>RCSW_DEAD</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="238" refid="common_2macros_8hpp_1a182007b022ff477677d33b31a89cb7fe" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_UNUSED<sp/>RCSW_UNUSED</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="246" refid="common_2macros_8hpp_1a4160e6a58445c478750f981632097665" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_NODISCARD<sp/>[[nodiscard]]</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_ATTR(...)<sp/>RCSW_ATTR(__VA_ARGS__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_CHECK(cond)<sp/>RCSW_CHECK(cond)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="250" refid="common_2macros_8hpp_1aa37b1bea2856518ad91b6407e42e88cb" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_IS_BETWEEN(n,<sp/>lb,<sp/>ub)<sp/>RCSW_IS_BETWEEN(n,<sp/>lb,<sp/>ub)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="251" refid="common_2macros_8hpp_1a87b5ff6118f9c04219cbc01e39c5982a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_LIKELY(cond)<sp/>RCSW_LIKELY(cond)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="252" refid="common_2macros_8hpp_1a318d7a1e5f231434bb28321d941ddce3" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_UNLIKELY(cond)<sp/>RCSW_UNLIKELY(cond)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="253" refid="common_2macros_8hpp_1a0ea9c4e875ed1ff7ea3805fd70bedadc" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_FPC_RET_V(cond)<sp/>RCSW_FPC_RET_V(cond)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="254" refid="common_2macros_8hpp_1a252ccf92abf5da261a39dbbf3c1724e5" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_IS_EVEN(n)<sp/>RCSW_IS_EVEN(n)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="257"><highlight class="comment"><sp/>*<sp/>Warning<sp/>Disable<sp/>Macros</highlight></codeline>
+<codeline lineno="258"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="268" refid="common_2macros_8hpp_1a753de85e03181f93c89a5b39285670fd" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_PUSH(...)<sp/>RCSW_WARNING_DISABLE_PUSH(__VA_ARGS__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"></highlight></codeline>
+<codeline lineno="279" refid="common_2macros_8hpp_1a5e18d29b5090a524f0317886f2539bc4" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_POP(...)<sp/>RCSW_WARNING_DISABLE_POP(__VA_ARGS__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight></codeline>
+<codeline lineno="287" refid="common_2macros_8hpp_1abd3fccfd919cadd321de43b436a7f50f" refkind="member"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE(...)<sp/>RCSW_WARNING_DISABLE(__VA_ARGS__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="288"><highlight class="normal"></highlight></codeline>
+<codeline lineno="289"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>clang-format<sp/>off<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="290"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__INTEL_COMPILER)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="292"><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_MISSING_VAR_DECL(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="299"><highlight class="normal"></highlight></codeline>
+<codeline lineno="305"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...)<sp/>\</highlight></codeline>
+<codeline lineno="306"><highlight class="preprocessor"><sp/><sp/>RCPPSW_WARNING_DISABLE(1418)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="307"><highlight class="normal"></highlight></codeline>
+<codeline lineno="313"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal"></highlight></codeline>
+<codeline lineno="320"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="321"><highlight class="normal"></highlight></codeline>
+<codeline lineno="327"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_USELESS_CAST(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="328"><highlight class="normal"></highlight></codeline>
+<codeline lineno="334"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="335"><highlight class="normal"></highlight></codeline>
+<codeline lineno="336"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(__clang__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="337"><highlight class="normal"></highlight></codeline>
+<codeline lineno="343"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_MISSING_VAR_DECL(...)<sp/>\</highlight></codeline>
+<codeline lineno="344"><highlight class="preprocessor"><sp/><sp/>RCPPSW_WARNING_DISABLE(-Wmissing-variable-declarations)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="345"><highlight class="normal"></highlight></codeline>
+<codeline lineno="351"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...)<sp/>\</highlight></codeline>
+<codeline lineno="352"><highlight class="preprocessor"><sp/><sp/>RCPPSW_WARNING_DISABLE(-Wmissing-prototypes)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="353"><highlight class="normal"></highlight></codeline>
+<codeline lineno="359"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...)<sp/>\</highlight></codeline>
+<codeline lineno="360"><highlight class="preprocessor"><sp/><sp/>RCPPSW_WARNING_DISABLE(-Wglobal-constructors)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="361"><highlight class="normal"></highlight></codeline>
+<codeline lineno="367"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_OVERLOADED_VIRTUAL(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="368"><highlight class="normal"></highlight></codeline>
+<codeline lineno="374"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_EFFCXX(...)<sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="375"><highlight class="preprocessor"><sp/><sp/>RCPPSW_WARNING_DISABLE(-Weffc++)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="376"><highlight class="normal"></highlight></codeline>
+<codeline lineno="382"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="383"><highlight class="normal"></highlight></codeline>
+<codeline lineno="389"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_USELESS_CAST(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="390"><highlight class="normal"></highlight></codeline>
+<codeline lineno="396"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="397"><highlight class="normal"></highlight></codeline>
+<codeline lineno="398"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(__GNUC__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="399"><highlight class="normal"></highlight></codeline>
+<codeline lineno="405"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_MISSING_VAR_DECL(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="406"><highlight class="normal"></highlight></codeline>
+<codeline lineno="412"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="413"><highlight class="normal"></highlight></codeline>
+<codeline lineno="419"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="420"><highlight class="normal"></highlight></codeline>
+<codeline lineno="426"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_OVERLOADED_VIRTUAL(...)<sp/>\</highlight></codeline>
+<codeline lineno="427"><highlight class="preprocessor"><sp/><sp/>RCPPSW_WARNING_DISABLE(-Woverloaded-virtual)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="428"><highlight class="normal"></highlight></codeline>
+<codeline lineno="434"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_EFFCXX(...)<sp/>\</highlight></codeline>
+<codeline lineno="435"><highlight class="preprocessor"><sp/><sp/>RCPPSW_WARNING_DISABLE(-Weffc++)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="436"><highlight class="normal"></highlight></codeline>
+<codeline lineno="442"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...)<sp/>\</highlight></codeline>
+<codeline lineno="443"><highlight class="preprocessor"><sp/><sp/>RCPPSW_WARNING_DISABLE(-Wsuggest-override)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="444"><highlight class="normal"></highlight></codeline>
+<codeline lineno="450"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_USELESS_CAST(...)<sp/>\</highlight></codeline>
+<codeline lineno="451"><highlight class="preprocessor"><sp/><sp/>RCPPSW_WARNING_DISABLE(-Wuseless-cast)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="452"><highlight class="normal"></highlight></codeline>
+<codeline lineno="458"><highlight class="preprocessor">#define<sp/>RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...)<sp/>\</highlight></codeline>
+<codeline lineno="459"><highlight class="preprocessor"><sp/><sp/>RCPPSW_WARNING_DISABLE(-Wold-style-cast)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="460"><highlight class="normal"></highlight></codeline>
+<codeline lineno="461"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>__INTEL_COMPILER__<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="462"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>clang-format<sp/>on<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="463"><highlight class="normal"></highlight></codeline>
+<codeline lineno="464"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_COMMON_MACROS_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/macros.hpp"/>
+  </compounddef>
+</doxygen>

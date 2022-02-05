@@ -1,0 +1,136 @@
+.TH "rcppsw::metrics::base_metrics_collector" 3 "Mon Nov 29 2021" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::base_metrics_collector \- Base class that uses the template design pattern to provide hooks for derived classes so that the process of writing out metrics is centralized in one place (here)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <base_metrics_collector\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< base_metrics_collector >\fP\&.
+.PP
+Inherited by \fBrcppsw::ds::metrics::grid2D_metrics_collector\fP, and \fBrcppsw::ds::metrics::grid3D_metrics_collector\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbase_metrics_collector\fP (std::unique_ptr< \fBbase_metrics_sink\fP > sink)"
+.br
+.ti -1c
+.RI "virtual \fB~base_metrics_collector\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual void \fBcollect\fP (const \fBrcppsw::metrics::base_metrics\fP &metrics)=0"
+.br
+.RI "Collect metrics from an object which implements the necessary interface (must be checked with a dynamic cast in the function itself)\&. "
+.ti -1c
+.RI "void \fBfinalize\fP (void)"
+.br
+.ti -1c
+.RI "\fBmetrics_write_status\fP \fBflush\fP (void)"
+.br
+.ti -1c
+.RI "void \fBinitialize\fP (void)"
+.br
+.RI "Initialize metrics collection\&. "
+.ti -1c
+.RI "void \fBinterval_reset\fP (void)"
+.br
+.RI "Reset metrics at the end of an interval\&. "
+.ti -1c
+.RI "\fBtypes::timestep\fP \fBtimestep\fP (void) const"
+.br
+.RI "Return the current timestep tracked by the collector\&. "
+.ti -1c
+.RI "void \fBtimestep_inc\fP (void)"
+.br
+.RI "Increment the timestep referenced by the collector during metric collection and \&.csv line building\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual const \fBrmetrics::base_metrics_data\fP * \fBdata\fP (void) const =0"
+.br
+.RI "Get a handle to the gathered data\&. "
+.ti -1c
+.RI "virtual void \fBreset_after_interval\fP (void)"
+.br
+.RI "Reset some metrics (possibly)\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Base class that uses the template design pattern to provide hooks for derived classes so that the process of writing out metrics is centralized in one place (here)\&. 
+
+Metrics are written out in \&.csv format at whatever frequency derived classes choose\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::metrics::base_metrics_collector::base_metrics_collector (std::unique_ptr< \fBbase_metrics_sink\fP > sink)\fC [explicit]\fP"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIsinks\fP The sinks for the metrics that determines how they will be written to the filesystem\&. 
+.RE
+.PP
+
+.SS "virtual rcppsw::metrics::base_metrics_collector::~base_metrics_collector (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void rcppsw::metrics::base_metrics_collector::collect (const \fBrcppsw::metrics::base_metrics\fP & metrics)\fC [pure virtual]\fP"
+
+.PP
+Collect metrics from an object which implements the necessary interface (must be checked with a dynamic cast in the function itself)\&. 
+.SS "virtual const \fBrmetrics::base_metrics_data\fP* rcppsw::metrics::base_metrics_collector::data (void) const\fC [protected]\fP, \fC [pure virtual]\fP"
+
+.PP
+Get a handle to the gathered data\&. 
+.PP
+Implemented in \fBrcppsw::ds::metrics::grid2D_metrics_collector\fP, and \fBrcppsw::ds::metrics::grid3D_metrics_collector\fP\&.
+.SS "void rcppsw::metrics::base_metrics_collector::finalize (void)"
+
+.PP
+\fBSee also\fP
+.RS 4
+\fBbase_metrics_sink::finalize()\fP; 
+.RE
+.PP
+
+.SS "\fBmetrics_write_status\fP rcppsw::metrics::base_metrics_collector::flush (void)"
+
+.PP
+\fBSee also\fP
+.RS 4
+\fBbase_metrics_sink::flush()\fP; 
+.RE
+.PP
+
+.SS "void rcppsw::metrics::base_metrics_collector::initialize (void)"
+
+.PP
+Initialize metrics collection\&. Should be called only on collection start\&. 
+.SS "void rcppsw::metrics::base_metrics_collector::interval_reset (void)"
+
+.PP
+Reset metrics at the end of an interval\&. Can be called every timestep (and probably should be for consistency as behavior of derived classes possibly changes), and metrics will only be reset after the specified number of timesteps in the interval has elapsed\&. 
+.SS "virtual void rcppsw::metrics::base_metrics_collector::reset_after_interval (void)\fC [inline]\fP, \fC [protected]\fP, \fC [virtual]\fP"
+
+.PP
+Reset some metrics (possibly)\&. Can be called at the end of every interval\&. By default it does nothing\&. 
+.SS "\fBtypes::timestep\fP rcppsw::metrics::base_metrics_collector::timestep (void) const\fC [inline]\fP"
+
+.PP
+Return the current timestep tracked by the collector\&. 
+.SS "void rcppsw::metrics::base_metrics_collector::timestep_inc (void)\fC [inline]\fP"
+
+.PP
+Increment the timestep referenced by the collector during metric collection and \&.csv line building\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

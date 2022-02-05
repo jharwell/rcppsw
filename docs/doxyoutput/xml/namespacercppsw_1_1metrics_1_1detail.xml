@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1metrics_1_1detail" kind="namespace" language="C++">
+    <compoundname>rcppsw::metrics::detail</compoundname>
+    <innerclass refid="structrcppsw_1_1metrics_1_1detail_1_1creatable__collector__set__comparator" prot="public">rcppsw::metrics::detail::creatable_collector_set_comparator</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" line="78" column="16"/>
+  </compounddef>
+</doxygen>

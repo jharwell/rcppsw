@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="ipc_8hpp" kind="file" language="C++">
+    <compoundname>ipc.hpp</compoundname>
+    <includes local="no">boost/interprocess/allocators/allocator.hpp</includes>
+    <includes local="no">boost/interprocess/containers/deque.hpp</includes>
+    <includes local="no">boost/interprocess/containers/list.hpp</includes>
+    <includes local="no">boost/interprocess/containers/map.hpp</includes>
+    <includes local="no">boost/interprocess/containers/string.hpp</includes>
+    <includes local="no">boost/interprocess/ipc/message_queue.hpp</includes>
+    <includes local="no">boost/interprocess/managed_shared_memory.hpp</includes>
+    <includes local="no">boost/interprocess/sync/interprocess_condition.hpp</includes>
+    <includes local="no">boost/interprocess/sync/interprocess_mutex.hpp</includes>
+    <includes local="no">boost/interprocess/sync/interprocess_semaphore.hpp</includes>
+    <includes local="no">boost/interprocess/sync/named_mutex.hpp</includes>
+    <includes local="no">functional</includes>
+    <includes local="no">list</includes>
+    <includes local="no">map</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">string</includes>
+    <includes local="no">utility</includes>
+    <includes local="no">vector</includes>
+    <includes refid="rcppsw_8hpp" local="yes">rcppsw/rcppsw.hpp</includes>
+    <includedby refid="ipc__queue_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp</includedby>
+    <incdepgraph>
+      <node id="14">
+        <label>list</label>
+      </node>
+      <node id="13">
+        <label>functional</label>
+      </node>
+      <node id="11">
+        <label>boost/interprocess/sync/interprocess_semaphore.hpp</label>
+      </node>
+      <node id="22">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="21">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>boost/interprocess/sync/interprocess_condition.hpp</label>
+      </node>
+      <node id="6">
+        <label>boost/interprocess/containers/string.hpp</label>
+      </node>
+      <node id="4">
+        <label>boost/interprocess/containers/list.hpp</label>
+      </node>
+      <node id="17">
+        <label>string</label>
+      </node>
+      <node id="15">
+        <label>map</label>
+      </node>
+      <node id="20">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>boost/interprocess/sync/named_mutex.hpp</label>
+      </node>
+      <node id="24">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>vector</label>
+      </node>
+      <node id="3">
+        <label>boost/interprocess/containers/deque.hpp</label>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp</label>
+        <link refid="ipc_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>utility</label>
+      </node>
+      <node id="7">
+        <label>boost/interprocess/ipc/message_queue.hpp</label>
+      </node>
+      <node id="2">
+        <label>boost/interprocess/allocators/allocator.hpp</label>
+      </node>
+      <node id="23">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>boost/interprocess/sync/interprocess_mutex.hpp</label>
+      </node>
+      <node id="8">
+        <label>boost/interprocess/managed_shared_memory.hpp</label>
+      </node>
+      <node id="5">
+        <label>boost/interprocess/containers/map.hpp</label>
+      </node>
+      <node id="16">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp</label>
+        <link refid="ipc_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc_queue.hpp</label>
+        <link refid="ipc__queue_8hpp"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1multiprocess">rcppsw::multiprocess</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2017 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink></para>
+<para>here is my file </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="20"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_MULTIPROCESS_IPC_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_MULTIPROCESS_IPC_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/interprocess/allocators/allocator.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/interprocess/containers/deque.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/interprocess/containers/list.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/interprocess/containers/map.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/interprocess/containers/string.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/interprocess/ipc/message_queue.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/interprocess/managed_shared_memory.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/interprocess/sync/interprocess_condition.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/interprocess/sync/interprocess_mutex.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/interprocess/sync/interprocess_semaphore.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/interprocess/sync/named_mutex.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;list&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="rcppsw_8hpp" kindref="compound">rcppsw/rcppsw.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>multiprocess);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">bip<sp/>=<sp/>boost::interprocess;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/>*<sp/>Template<sp/>Definitions</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="65"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>ipc_allocator<sp/>=</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>bip::allocator&lt;T,<sp/>bip::managed_shared_memory::segment_manager&gt;;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>ipc_vector<sp/>=<sp/>std::vector&lt;T,<sp/>ipc_allocator&lt;T&gt;&gt;;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>ipc_list<sp/>=<sp/>bip::list&lt;T,<sp/>ipc_allocator&lt;T&gt;&gt;;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>key,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>value&gt;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>ipc_map<sp/>=<sp/>bip::</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>map&lt;key,<sp/>value,<sp/>std::less&lt;key&gt;,<sp/>ipc_allocator&lt;std::pair&lt;const<sp/>key,<sp/>value&gt;&gt;&gt;;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/>*<sp/>Type<sp/>Definitions</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="106"><highlight class="keyword">using</highlight><highlight class="normal"><sp/>ipc_string<sp/>=</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>bip::basic_string&lt;char,<sp/>std::char_traits&lt;char&gt;,<sp/>ipc_allocator&lt;char&gt;&gt;;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(multiprocess,<sp/><ref refid="namespacercppsw" kindref="compound">rcppsw</ref>);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_MULTIPROCESS_IPC_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp"/>
+  </compounddef>
+</doxygen>

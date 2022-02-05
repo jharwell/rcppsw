@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1types" kind="namespace" language="C++">
+    <compoundname>rcppsw::types</compoundname>
+    <innerclass refid="classrcppsw_1_1types_1_1distance__measure" prot="public">rcppsw::types::distance_measure</innerclass>
+    <innerclass refid="classrcppsw_1_1types_1_1manhattan__dist" prot="public">rcppsw::types::manhattan_dist</innerclass>
+    <innerclass refid="classrcppsw_1_1types_1_1named__type" prot="public">rcppsw::types::named_type</innerclass>
+    <innerclass refid="classrcppsw_1_1types_1_1spatial__dist" prot="public">rcppsw::types::spatial_dist</innerclass>
+    <innerclass refid="classrcppsw_1_1types_1_1timestep" prot="public">rcppsw::types::timestep</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacercppsw_1_1types_1ae7dfad2612de94a0c90840e1e872dfa0" prot="public" static="no">
+        <type><ref refid="classrcppsw_1_1types_1_1named__type" kindref="compound">named_type</ref>&lt; double, struct discretize_ratio_tag &gt;</type>
+        <definition>rcppsw::types::discretize_ratio</definition>
+        <argsstring></argsstring>
+        <name>discretize_ratio</name>
+        <briefdescription>
+<para>Specifies the ratio of discretized space to real space, and therefore should always be &lt;= 1.0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/discretize_ratio.hpp" line="48" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/discretize_ratio.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1types_1ab416cfd1a6af16a3dec61d9ae8f5ce6a" prot="public" static="no">
+        <type><ref refid="classrcppsw_1_1math_1_1range" kindref="compound">math::range</ref>&lt; <ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">types::spatial_dist</ref> &gt;</type>
+        <definition>rcppsw::types::spatial_range</definition>
+        <argsstring></argsstring>
+        <name>spatial_range</name>
+        <briefdescription>
+<para>A rmath::range&lt;T&gt; of rtypes::spatial_dist. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_range.hpp" line="48" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_range.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacercppsw_1_1types_1aef760b91a956f697f983d4cb76adcc90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref></type>
+        <definition>spatial_dist rcppsw::types::operator*</definition>
+        <argsstring>(double lhs, const spatial_dist &amp;rhs)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>double</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="106" column="14" declfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" declline="106" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacercppsw_1_1types_1ae02d68adeec2cc3ab1bc30dd738f0730" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref></type>
+        <definition>spatial_dist rcppsw::types::operator+</definition>
+        <argsstring>(double lhs, const spatial_dist &amp;rhs)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>double</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="109" column="14" declfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" declline="109" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacercppsw_1_1types_1a27802aa16293b7b518133955db138a4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref></type>
+        <definition>manhattan_dist rcppsw::types::operator+</definition>
+        <argsstring>(int lhs, const manhattan_dist &amp;rhs)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>int</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/manhattan_dist.hpp" line="110" column="16" declfile="/home/jharwell/git/rcppsw/include/rcppsw/types/manhattan_dist.hpp" declline="110" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacercppsw_1_1types_1ac6dd93090803a932374969b7a697bad0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref></type>
+        <definition>spatial_dist rcppsw::types::operator-</definition>
+        <argsstring>(double lhs, const spatial_dist &amp;rhs)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>double</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="108" column="14" declfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" declline="108" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacercppsw_1_1types_1a3f4858fc7f1c09ed8666732797def584" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref></type>
+        <definition>manhattan_dist rcppsw::types::operator-</definition>
+        <argsstring>(int lhs, const manhattan_dist &amp;rhs)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>int</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/manhattan_dist.hpp" line="109" column="16" declfile="/home/jharwell/git/rcppsw/include/rcppsw/types/manhattan_dist.hpp" declline="109" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacercppsw_1_1types_1ac584d6f672ae57b8a27cb5ddf7fbca7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref></type>
+        <definition>spatial_dist rcppsw::types::operator/</definition>
+        <argsstring>(double lhs, const spatial_dist &amp;rhs)</argsstring>
+        <name>operator/</name>
+        <param>
+          <type>double</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="107" column="14" declfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" declline="107" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacercppsw_1_1types_1a606bae202ce4cf5a0697a4b72ced5b6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::types::operator&lt;=</definition>
+        <argsstring>(double lhs, const spatial_dist &amp;rhs)</argsstring>
+        <name>operator&lt;=</name>
+        <param>
+          <type>double</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="110" column="1" declfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" declline="110" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacercppsw_1_1types_1ac22882e200d1ff6bc2933e156640e01d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::types::operator&lt;=</definition>
+        <argsstring>(int lhs, const manhattan_dist &amp;rhs)</argsstring>
+        <name>operator&lt;=</name>
+        <param>
+          <type>int</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/manhattan_dist.hpp" line="111" column="1" declfile="/home/jharwell/git/rcppsw/include/rcppsw/types/manhattan_dist.hpp" declline="111" declcolumn="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Common non-primitive types: Spatial distance/range, timestep, UUID for types, named type (for eliminating bugs caused by implicit conversions between primitive types which do not elicit a compiler warning). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/rcppsw.hpp" line="161" column="15"/>
+  </compounddef>
+</doxygen>

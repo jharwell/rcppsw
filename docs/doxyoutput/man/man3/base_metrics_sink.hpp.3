@@ -1,0 +1,66 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" 3 "Mon Nov 29 2021" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iosfwd>\fP
+.br
+\fC#include <memory>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <filesystem>\fP
+.br
+\fC#include 'rcppsw/er/client\&.hpp'\fP
+.br
+\fC#include 'rcppsw/metrics/metrics_write_status\&.hpp'\fP
+.br
+\fC#include 'rcppsw/metrics/output_mode\&.hpp'\fP
+.br
+\fC#include 'rcppsw/types/timestep\&.hpp'\fP
+.br
+\fC#include 'rcppsw/metrics/base_metrics_data\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBrcppsw::metrics::base_metrics_sink\fP"
+.br
+.RI "Base class that uses the template design pattern to provide hooks for derived classes so that the process of writing out collected metrics is centralized in one place (here)\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::metrics\fP"
+.br
+.RI "Base metric interfaces and the collectors for them\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2021 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1fsm_1_1state__action0" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::fsm::state_action0</compoundname>
+    <basecompoundref refid="classrcppsw_1_1patterns_1_1fsm_1_1state" prot="public" virt="non-virtual">rcppsw::patterns::fsm::state</basecompoundref>
+    <includes refid="state__action_8hpp" local="no">state_action.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class SM</type>
+      </param>
+      <param>
+        <type>int(SM::*)(void)</type>
+        <declname>Func</declname>
+        <defname>Func</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1state__action0_1a4b0357cefef978eb07b3ee48617b1f41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::fsm::state_action0&lt; SM, Func &gt;::state_action0</definition>
+        <argsstring>(const state_action0 &amp;)=default</argsstring>
+        <name>state_action0</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1patterns_1_1fsm_1_1state__action0" kindref="compound">state_action0</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_action.hpp" line="56" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1state__action0_1a9a7bd3a49322d6be6d143ffd8d17bfb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::fsm::state_action0&lt; SM, Func &gt;::state_action0</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>state_action0</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_action.hpp" line="55" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1state__action0_1a8ac062ce1eabbaf371f7db85098dd70c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::fsm::state_action0&lt; SM, Func &gt;::~state_action0</definition>
+        <argsstring>(void) override=default</argsstring>
+        <name>~state_action0</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_action.hpp" line="57" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1state__action0_1a0f7bb062aa3f05be77558d2a6be5e7e6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>int</type>
+        <definition>int rcppsw::patterns::fsm::state_action0&lt; SM, Func &gt;::invoke_state_action</definition>
+        <argsstring>(base_fsm *sm, event_data *) const override</argsstring>
+        <name>invoke_state_action</name>
+        <reimplements refid="classrcppsw_1_1patterns_1_1fsm_1_1state_1a4eccda20940c245258784556c9713eee">invoke_state_action</reimplements>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm" kindref="compound">base_fsm</ref> *</type>
+          <declname>sm</declname>
+        </param>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1event__data" kindref="compound">event_data</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Called by the state machine engine to execute a state action. If a guard condition exists and it evaluates to false, the state action will not execute. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state machine instance. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event data.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>integer indicating whether or not the event was handled. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_action.hpp" line="59" column="7" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_action.hpp" bodystart="59" bodyend="64"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>SM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state machine class. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state machine member function pointer, which takes ZERO arguments. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::state_action0&lt; SM, Func &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__action0"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::fsm::state</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::state_action0&lt; SM, Func &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__action0"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::fsm::state</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_action.hpp" line="53" column="33" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_action.hpp" bodystart="53" bodyend="65"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__action0_1a0f7bb062aa3f05be77558d2a6be5e7e6" prot="public" virt="virtual"><scope>rcppsw::patterns::fsm::state_action0</scope><name>invoke_state_action</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state_1ae8e0476fb14103a9ee266aa2ba4e96b3" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::state_action0</scope><name>state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state_1a990ded646f9c5c46c0c99212c0856797" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::state_action0</scope><name>state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__action0_1a9a7bd3a49322d6be6d143ffd8d17bfb9" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::state_action0</scope><name>state_action0</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__action0_1a4b0357cefef978eb07b3ee48617b1f41" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::state_action0</scope><name>state_action0</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state_1a786e9d8746a76418b78dd7df21dd8136" prot="public" virt="virtual"><scope>rcppsw::patterns::fsm::state_action0</scope><name>~state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__action0_1a8ac062ce1eabbaf371f7db85098dd70c" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::state_action0</scope><name>~state_action0</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

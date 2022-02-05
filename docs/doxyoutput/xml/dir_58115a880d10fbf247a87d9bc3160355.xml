@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_58115a880d10fbf247a87d9bc3160355" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/math/config/xml</compoundname>
+    <innerfile refid="ema__parser_8hpp">ema_parser.hpp</innerfile>
+    <innerfile refid="rng__parser_8hpp">rng_parser.hpp</innerfile>
+    <innerfile refid="sigmoid__parser_8hpp">sigmoid_parser.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/config/xml/"/>
+  </compounddef>
+</doxygen>

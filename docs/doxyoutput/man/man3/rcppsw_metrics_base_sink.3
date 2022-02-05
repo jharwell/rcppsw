@@ -1,0 +1,100 @@
+.TH "rcppsw::metrics::base_sink" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::base_sink \- Base class that uses the template design pattern to provide hooks for derived classes so that the process of writing out collected metrics is centralized in one place (here)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <base_sink\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< base_sink >\fP\&.
+.PP
+Inherited by \fBrcppsw::metrics::file_sink\fP, and \fBrcppsw::metrics::network_sink\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbase_sink\fP (const \fBrmetrics::output_mode\fP &mode, const \fBrtypes::timestep\fP &interval)"
+.br
+.ti -1c
+.RI "virtual \fB~base_sink\fP (void)"
+.br
+.ti -1c
+.RI "virtual void \fBfinalize\fP (void)=0"
+.br
+.RI "Finalize metrics and flush files in preparation for program exit\&. "
+.ti -1c
+.RI "virtual \fBwrite_status\fP \fBflush\fP (const \fBrmetrics::base_data\fP *data, const \fBrtypes::timestep\fP &t)=0"
+.br
+.RI "Flush gathered metrics data to file; might do nothing if the internal conditions for writing metrics (e\&.g\&., the configured interval) are not met\&. "
+.ti -1c
+.RI "virtual void \fBinitialize\fP (const \fBrmetrics::base_data\fP *data)=0"
+.br
+.RI "Initialize any required files for the metrics sink (i\&.e\&., \&.csv headers)\&. "
+.ti -1c
+.RI "const \fBrtypes::timestep\fP & \fBoutput_interval\fP (void) const"
+.br
+.ti -1c
+.RI "const \fBrmetrics::output_mode\fP & \fBoutput_mode\fP (void) const"
+.br
+.ti -1c
+.RI "bool \fBready_to_flush\fP (const \fBrtypes::timestep\fP &t) const"
+.br
+.RI "Have the conditions been met to flush the metrics ? "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Base class that uses the template design pattern to provide hooks for derived classes so that the process of writing out collected metrics is centralized in one place (here)\&. 
+
+Metrics are written out in \&.csv format at whatever frequency derived classes choose\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::metrics::base_sink::base_sink (const \fBrmetrics::output_mode\fP & mode, const \fBrtypes::timestep\fP & interval)"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fImode\fP The output mode\&. See \fBoutput_mode\fP for possible values\&. 
+.br
+\fIinterval\fP Metric output interval\&. 
+.RE
+.PP
+
+.SS "virtual rcppsw::metrics::base_sink::~base_sink (void)\fC [virtual]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void rcppsw::metrics::base_sink::finalize (void)\fC [pure virtual]\fP"
+
+.PP
+Finalize metrics and flush files in preparation for program exit\&. 
+.PP
+Implemented in \fBrcppsw::metrics::csv_sink\fP\&.
+.SS "virtual \fBwrite_status\fP rcppsw::metrics::base_sink::flush (const \fBrmetrics::base_data\fP * data, const \fBrtypes::timestep\fP & t)\fC [pure virtual]\fP"
+
+.PP
+Flush gathered metrics data to file; might do nothing if the internal conditions for writing metrics (e\&.g\&., the configured interval) are not met\&. 
+.PP
+Implemented in \fBrcppsw::metrics::csv_sink\fP\&.
+.SS "virtual void rcppsw::metrics::base_sink::initialize (const \fBrmetrics::base_data\fP * data)\fC [pure virtual]\fP"
+
+.PP
+Initialize any required files for the metrics sink (i\&.e\&., \&.csv headers)\&. 
+.PP
+Implemented in \fBrcppsw::metrics::csv_sink\fP\&.
+.SS "const \fBrtypes::timestep\fP& rcppsw::metrics::base_sink::output_interval (void) const\fC [inline]\fP"
+
+.SS "const \fBrmetrics::output_mode\fP& rcppsw::metrics::base_sink::output_mode (void) const\fC [inline]\fP"
+
+.SS "bool rcppsw::metrics::base_sink::ready_to_flush (const \fBrtypes::timestep\fP & t) const"
+
+.PP
+Have the conditions been met to flush the metrics ? 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

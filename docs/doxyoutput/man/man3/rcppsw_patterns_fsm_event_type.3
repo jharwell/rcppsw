@@ -1,0 +1,40 @@
+.TH "rcppsw::patterns::fsm::event_type" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::fsm::event_type \- A class representing the types of \fBevent_signal\fP that are passed as part of \fBevent_data\fP to states\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <event\&.hpp>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBekNORMAL\fP = 0, \fBekCHILD\fP = 1, \fBekEXTERNAL_TYPES\fP }"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A class representing the types of \fBevent_signal\fP that are passed as part of \fBevent_data\fP to states\&. 
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "anonymous enum"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIekNORMAL \fP\fP
+.TP
+\fB\fIekCHILD \fP\fP
+A normal, external state machine event\&. A signal from a child state, conveying something that it couldn't handle or that something important happened that it felt a parent FSM should know about\&. 
+.TP
+\fB\fIekEXTERNAL_TYPES \fP\fP
+Applications wishing to defined their own event types should start here\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

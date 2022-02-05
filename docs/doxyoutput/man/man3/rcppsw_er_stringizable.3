@@ -1,0 +1,47 @@
+.TH "rcppsw::er::stringizable" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::er::stringizable
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <stringizable\&.hpp>\fP
+.PP
+Inherited by \fBrcppsw::types::named_type< double, struct spatial_dist_tag >\fP, \fBrcppsw::types::named_type< int, struct manhattan_dist_tag >\fP, \fBrcppsw::types::named_type< size_t, struct timestep_tag >\fP, \fBrcppsw::types::named_type< T, Tag >\fP, \fBrcppsw::math::range< coord_value_type >\fP\fC [private]\fP, \fBrcppsw::math::range< rcppsw::math::degrees >\fP\fC [private]\fP, \fBrcppsw::math::degrees\fP, \fBrcppsw::math::radians\fP, \fBrcppsw::math::range< T >\fP\fC [private]\fP, \fBrcppsw::math::vector2< T >\fP, \fBrcppsw::math::vector3< T >\fP, \fBrcppsw::types::named_type< T, Parameter >\fP, and \fBrcppsw::utils::color\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBstringizable\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual \fB~stringizable\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual std::string \fBto_str\fP (void) const"
+.br
+.RI "Return a string representation of a class\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface for converting classes to string representations\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::er::stringizable::stringizable (void)\fC [default]\fP"
+
+.SS "virtual rcppsw::er::stringizable::~stringizable (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual std::string rcppsw::er::stringizable::to_str (void) const\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+Return a string representation of a class\&. 
+.PP
+Reimplemented in \fBrcppsw::math::vector3< T >\fP, \fBrcppsw::math::vector2< T >\fP, \fBrcppsw::math::range< T >\fP, \fBrcppsw::math::range< rcppsw::math::degrees >\fP, \fBrcppsw::math::range< coord_value_type >\fP, \fBrcppsw::math::radians\fP, \fBrcppsw::math::degrees\fP, \fBrcppsw::utils::color\fP, \fBrcppsw::types::named_type< T, Parameter >\fP, \fBrcppsw::types::named_type< int, struct manhattan_dist_tag >\fP, \fBrcppsw::types::named_type< double, struct spatial_dist_tag >\fP, \fBrcppsw::types::named_type< T, Tag >\fP, and \fBrcppsw::types::named_type< size_t, struct timestep_tag >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

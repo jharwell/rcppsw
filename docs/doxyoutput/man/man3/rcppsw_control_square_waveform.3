@@ -1,0 +1,46 @@
+.TH "rcppsw::control::square_waveform" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::control::square_waveform
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <periodic_waveform\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::control::base_waveform\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsquare_waveform\fP (const struct \fBconfig::waveform_config\fP *const config)"
+.br
+.ti -1c
+.RI "double \fBvalue\fP (double time) override"
+.br
+.RI "Get the current value of the waveform at time \fCt\fP\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Given the current time, outputs the current value of a square wave according to configured parameters:
+.PP
+value = amplitude * signof(sin(2pi* frequency * time + phase)) + offset\&.
+.PP
+Can be used to create step functions as well\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::control::square_waveform::square_waveform (const struct \fBconfig::waveform_config\fP *const config)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "double rcppsw::control::square_waveform::value (double time)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Get the current value of the waveform at time \fCt\fP\&. 
+.PP
+Implements \fBrcppsw::control::base_waveform\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

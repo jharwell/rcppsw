@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1ds_1_1graph" kind="namespace" language="C++">
+    <compoundname>rcppsw::ds::graph</compoundname>
+    <innerclass refid="structrcppsw_1_1ds_1_1graph_1_1base__vertex__property" prot="public">rcppsw::ds::graph::base_vertex_property</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph" prot="public">rcppsw::ds::graph::directed_graph</innerclass>
+    <innerclass refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec" prot="public">rcppsw::ds::graph::directed_graph_spec</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map" prot="public">rcppsw::ds::graph::grid_index_map</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D" prot="public">rcppsw::ds::graph::hgrid3D</innerclass>
+    <innerclass refid="structrcppsw_1_1ds_1_1graph_1_1hgrid3D__spec" prot="public">rcppsw::ds::graph::hgrid3D_spec</innerclass>
+    <innerclass refid="structrcppsw_1_1ds_1_1graph_1_1hgrid3D__vertex__property" prot="public">rcppsw::ds::graph::hgrid3D_vertex_property</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view" prot="public">rcppsw::ds::graph::hgrid3D_view</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data" prot="public">rcppsw::ds::graph::hgrid3D_view_filter_data</innerclass>
+    <innernamespace refid="namespacercppsw_1_1ds_1_1graph_1_1detail">rcppsw::ds::graph::detail</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacercppsw_1_1ds_1_1graph_1a3d1aea379fd27c507e19570793754cb1" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename TSpecType</type>
+          </param>
+        </templateparamlist>
+        <type>std::function&lt; bool(typename TSpecType::bgl_impl_type::edge_descriptor)&gt;</type>
+        <definition>using rcppsw::ds::graph::hgrid3D_view_edge_filter_type = typedef std::function&lt;bool(typename TSpecType::bgl_impl_type::edge_descriptor)&gt;</definition>
+        <argsstring></argsstring>
+        <name>hgrid3D_view_edge_filter_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp" line="48" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1ds_1_1graph_1a9ab64f12c0361cab4cae411667f942c0" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename TSpecType</type>
+          </param>
+        </templateparamlist>
+        <type>std::function&lt; bool(typename TSpecType::bgl_impl_type::vertex_descriptor)&gt;</type>
+        <definition>using rcppsw::ds::graph::hgrid3D_view_vertex_filter_type = typedef std::function&lt;bool(typename TSpecType::bgl_impl_type::vertex_descriptor)&gt;</definition>
+        <argsstring></argsstring>
+        <name>hgrid3D_view_vertex_filter_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp" line="50" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Graph data structures: Heterogeneous 3D grid graph. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/base_vertex_property.hpp" line="31" column="29"/>
+  </compounddef>
+</doxygen>

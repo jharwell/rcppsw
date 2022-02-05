@@ -1,0 +1,71 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBrcppsw::patterns::fsm::event_data\fP"
+.br
+.RI "Base class for all data that will be passed to state machine states upon execution of their callback functions\&. Custom application event data classes must derive from here, or things will not compile\&. "
+.ti -1c
+.RI "class \fBrcppsw::patterns::fsm::event_signal\fP"
+.br
+.RI "A class representing the different signals that can be passed between states in an FSM, and/or between FSMs\&. "
+.ti -1c
+.RI "class \fBrcppsw::patterns::fsm::event_type\fP"
+.br
+.RI "A class representing the types of \fBevent_signal\fP that are passed as part of \fBevent_data\fP to states\&. "
+.ti -1c
+.RI "class \fBrcppsw::patterns::fsm::no_event_data\fP"
+.br
+.RI "This class does NOT derived from \fBevent_data\fP so that compiler errors are generated if you attempt to use it outside of its intent to indicate that a state does not take any data as input\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns\fP"
+.br
+.RI "Design pattern templates and interfaces\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns::fsm\fP"
+.br
+.RI "The Finite State Machine (FSM) design pattern: simple and hierarchical variants\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2017 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Class Documentation"
+.PP 
+.SH "class rcppsw::patterns::fsm::no_event_data"
+.PP 
+This class does NOT derived from \fBevent_data\fP so that compiler errors are generated if you attempt to use it outside of its intent to indicate that a state does not take any data as input\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

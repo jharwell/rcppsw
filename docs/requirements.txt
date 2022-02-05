@@ -1,3 +1,2 @@
 breathe
-exhale
-cmake
+exhale >= 0.2.3

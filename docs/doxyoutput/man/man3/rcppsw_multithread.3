@@ -1,0 +1,39 @@
+.TH "rcppsw::multithread" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::multithread \- Multi-threaded variants of other classes: FSM, queue, vector, threadable interface for daemon-esque classes, lockable interface\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBlockable\fP"
+.br
+.RI "Simple class allowing explicit declaration that a derived class can be locked (un)conditionally in exclusive write and non-exclusive read-only contexts\&. Used mainly to reduce the if()s where possible\&. "
+.ti -1c
+.RI "class \fBmt_fsm\fP"
+.br
+.RI "Extends \fBpatterns::fsm::base_fsm\fP to be threadsafe\&. "
+.ti -1c
+.RI "class \fBmt_queue\fP"
+.br
+.RI "A simple multiple-producer/consumer queue with locking\&. No guarantees of fairness\&. "
+.ti -1c
+.RI "class \fBmt_vector\fP"
+.br
+.RI "A thread-safe vector implementation\&. Use when you need fast access to a large contiguous chunk of memory\&. "
+.ti -1c
+.RI "class \fBthreadable\fP"
+.br
+.RI "Daemon interface class which can be derived from to indicate that the class can spawn a new thread and jump into the main loop defined for the class\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Multi-threaded variants of other classes: FSM, queue, vector, threadable interface for daemon-esque classes, lockable interface\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1singleton_1_1singleton" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::singleton::singleton</compoundname>
+    <includes refid="singleton_8hpp" local="no">singleton.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a080214d86ac9c51f69da83a896d331e8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>static T&amp; rcppsw::patterns::singleton::singleton&lt; T &gt;::instance</definition>
+        <argsstring>()</argsstring>
+        <name>instance</name>
+        <briefdescription>
+<para>Get the instance of the singleton. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/singleton/singleton.hpp" line="55" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/singleton/singleton.hpp" bodystart="55" bodyend="58"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a1a4420728a87f18d237d14a9fbb8a8bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::singleton::singleton&lt; T &gt;::singleton</definition>
+        <argsstring>(singleton &amp;&amp;)=delete</argsstring>
+        <name>singleton</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton" kindref="compound">singleton</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/singleton/singleton.hpp" line="62" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a7c6f169aa093f4606aa656d5a01cdcac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::singleton::singleton&lt; T &gt;::singleton</definition>
+        <argsstring>(singleton const &amp;)=delete</argsstring>
+        <name>singleton</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton" kindref="compound">singleton</ref> const &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/singleton/singleton.hpp" line="60" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1aefa0b0e4d0dba612e0db004016b1a0ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton" kindref="compound">singleton</ref> &amp;</type>
+        <definition>singleton&amp; rcppsw::patterns::singleton::singleton&lt; T &gt;::operator=</definition>
+        <argsstring>(singleton &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton" kindref="compound">singleton</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/singleton/singleton.hpp" line="63" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1afe5efa34b5fc04803e8c3583ec255317" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton" kindref="compound">singleton</ref> &amp;</type>
+        <definition>singleton&amp; rcppsw::patterns::singleton::singleton&lt; T &gt;::operator=</definition>
+        <argsstring>(singleton const &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton" kindref="compound">singleton</ref> const &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/singleton/singleton.hpp" line="61" column="13"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a91423fa6a5a9062bbfc1c1c7162e4a64" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::singleton::singleton&lt; T &gt;::singleton</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>singleton</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/singleton/singleton.hpp" line="66" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a867cf961a5992f3555d6c7273f04137f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::singleton::singleton&lt; T &gt;::~singleton</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~singleton</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/singleton/singleton.hpp" line="67" column="3"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Define a class as incapable of being moved, copied, etc., and that there can only ever be one of. The only restriction on derived classes is that the must have a zero parameter constructor available. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::singleton::singleton&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/singleton/singleton.hpp" line="49" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/singleton/singleton.hpp" bodystart="49" bodyend="68"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a080214d86ac9c51f69da83a896d331e8" prot="public" virt="non-virtual"><scope>rcppsw::patterns::singleton::singleton</scope><name>instance</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1afe5efa34b5fc04803e8c3583ec255317" prot="public" virt="non-virtual"><scope>rcppsw::patterns::singleton::singleton</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1aefa0b0e4d0dba612e0db004016b1a0ef" prot="public" virt="non-virtual"><scope>rcppsw::patterns::singleton::singleton</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a7c6f169aa093f4606aa656d5a01cdcac" prot="public" virt="non-virtual"><scope>rcppsw::patterns::singleton::singleton</scope><name>singleton</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a1a4420728a87f18d237d14a9fbb8a8bd" prot="public" virt="non-virtual"><scope>rcppsw::patterns::singleton::singleton</scope><name>singleton</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a91423fa6a5a9062bbfc1c1c7162e4a64" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::singleton::singleton</scope><name>singleton</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a867cf961a5992f3555d6c7273f04137f" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::singleton::singleton</scope><name>~singleton</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,309 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="distance__measure_8hpp" kind="file" language="C++">
+    <compoundname>distance_measure.hpp</compoundname>
+    <includes refid="client_8hpp" local="yes">rcppsw/er/client.hpp</includes>
+    <includes refid="named__type_8hpp" local="yes">rcppsw/types/named_type.hpp</includes>
+    <includedby refid="manhattan__dist_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/types/manhattan_dist.hpp</includedby>
+    <includedby refid="spatial__dist_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp</includedby>
+    <incdepgraph>
+      <node id="19">
+        <label>boost/stacktrace.hpp</label>
+      </node>
+      <node id="7">
+        <label>log4cxx/fileappender.h</label>
+      </node>
+      <node id="14">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="13">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>log4cxx/xml/domconfigurator.h</label>
+      </node>
+      <node id="21">
+        <label>cassert</label>
+      </node>
+      <node id="18">
+        <label>rcppsw/er/stacktrace.hpp</label>
+        <link refid="stacktrace_8hpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>string</label>
+      </node>
+      <node id="10">
+        <label>log4cxx/patternlayout.h</label>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp</label>
+        <link refid="distance__measure_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>log4cxx/ndc.h</label>
+      </node>
+      <node id="6">
+        <label>log4cxx/consoleappender.h</label>
+      </node>
+      <node id="3">
+        <label>rcppsw/er/er.hpp</label>
+        <link refid="er_8hpp"/>
+      </node>
+      <node id="16">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>rcppsw/er/stringizable.hpp</label>
+        <link refid="stringizable_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>utility</label>
+      </node>
+      <node id="20">
+        <label>array</label>
+      </node>
+      <node id="22">
+        <label>iostream</label>
+      </node>
+      <node id="15">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw/er/client.hpp</label>
+        <link refid="client_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>type_traits</label>
+      </node>
+      <node id="17">
+        <label>rcppsw/er/macros.hpp</label>
+        <link refid="er_2macros_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>log4cxx/logger.h</label>
+      </node>
+      <node id="24">
+        <label>rcppsw/types/named_type.hpp</label>
+        <link refid="named__type_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/manhattan_dist.hpp</label>
+        <link refid="manhattan__dist_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/spatial.hpp</label>
+        <link refid="spatial_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter_data.hpp</label>
+        <link refid="hgrid3D__view__filter__data_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp</label>
+        <link refid="spatial__dist_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D.hpp</label>
+        <link refid="hgrid3D_8hpp"/>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp</label>
+        <link refid="distance__measure_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp</label>
+        <link refid="hgrid3D__view_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_range.hpp</label>
+        <link refid="spatial__range_8hpp"/>
+      </node>
+      <node id="9">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/bounding_box.hpp</label>
+        <link refid="bounding__box_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp</label>
+        <link refid="hgrid3D__view__filter_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classrcppsw_1_1types_1_1distance__measure" prot="public">rcppsw::types::distance_measure</innerclass>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1types">rcppsw::types</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2019 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="21"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_TYPES_DISTANCE_MEASURE_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_TYPES_DISTANCE_MEASURE_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="client_8hpp" kindref="compound">rcppsw/er/client.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="named__type_8hpp" kindref="compound">rcppsw/types/named_type.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>types);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*<sp/>Class<sp/>Definitions</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="44"><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Tag&gt;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">distance_measure<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>named_type&lt;T,<sp/>Tag&gt;,</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>er::client&lt;distance_measure&lt;T,<sp/>Tag&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>value_type<sp/>=<sp/>T;</highlight></codeline>
+<codeline lineno="49" refid="classrcppsw_1_1types_1_1distance__measure" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1named__type" kindref="compound">named_type&lt;T, Tag&gt;::v</ref>;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1named__type" kindref="compound">named_type&lt;T, Tag&gt;::set</ref>;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1named__type" kindref="compound">named_type&lt;T, Tag&gt;::to_str</ref>;</highlight></codeline>
+<codeline lineno="52" refid="classrcppsw_1_1types_1_1distance__measure_1aea4a37b0610e8c0aafd27b41d60278d7" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1distance__measure" kindref="compound">distance_measure</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>value,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>check_psd<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classrcppsw_1_1types_1_1named__type" kindref="compound">named_type</ref>&lt;T,<sp/>Tag&gt;(value),</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="client_8hpp_1a2e46a4046efab8f06e9e8316c5760a4d" kindref="member">ER_CLIENT_INIT</ref>(</highlight><highlight class="stringliteral">&quot;rcppsw.types.distance_measure&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1abd0e460b9aa8c2ffef233474c3486dd1" kindref="member">ER_ASSERT</ref>(!(check_psd<sp/>&amp;&amp;<sp/>v()<sp/>&lt;<sp/>T{0}),</highlight></codeline>
+<codeline lineno="57" refid="classrcppsw_1_1types_1_1distance__measure_1a1a2df64630ac102d9d432373922e0900" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Distance<sp/>should<sp/>be<sp/>positive<sp/>semi-definite:<sp/>%s<sp/>&lt;<sp/>0&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacercppsw_1a067e7fdc1e45476ca82cb106d0809015" kindref="member">rcppsw::to_string</ref>(v()).c_str());</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/>~<ref refid="classrcppsw_1_1types_1_1distance__measure" kindref="compound">distance_measure</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1types_1_1distance__measure" kindref="compound">distance_measure</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1distance__measure" kindref="compound">distance_measure</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator&lt;(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1distance__measure" kindref="compound">distance_measure</ref>&amp;<sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>v()<sp/>&lt;<sp/>rhs.v();<sp/>}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator&gt;(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>distance_measure&amp;<sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>v()<sp/>&gt;<sp/>rhs.v();<sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator&gt;=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>distance_measure&amp;<sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>v()<sp/>&gt;=<sp/>rhs.v();<sp/>}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator&gt;=(T<sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>v()<sp/>&gt;=<sp/>rhs;<sp/>}</highlight></codeline>
+<codeline lineno="69" refid="classrcppsw_1_1types_1_1distance__measure_1a4c1fef0674c235cd8523abb84047654e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespacercppsw_1_1types_1ac22882e200d1ff6bc2933e156640e01d" kindref="member">operator&lt;=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1distance__measure" kindref="compound">distance_measure</ref>&amp;<sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>v()<sp/>&lt;=<sp/>rhs.v();<sp/>}</highlight></codeline>
+<codeline lineno="70" refid="classrcppsw_1_1types_1_1distance__measure_1a313e22de24f4a672f66da8e593aa7425" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespacercppsw_1_1types_1ac22882e200d1ff6bc2933e156640e01d" kindref="member">operator&lt;=</ref>(T<sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>v()<sp/>&lt;=<sp/>rhs;<sp/>}</highlight></codeline>
+<codeline lineno="71" refid="classrcppsw_1_1types_1_1distance__measure_1aa9ba96ab2957ce3cdad5857c55fc097d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator&gt;(T<sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>v()<sp/>&gt;<sp/>rhs;<sp/>}</highlight></codeline>
+<codeline lineno="72" refid="classrcppsw_1_1types_1_1distance__measure_1afebaafc7a799abb0b72e086d9f06a2a6" refkind="member"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="73" refid="classrcppsw_1_1types_1_1distance__measure_1a174ee7f7675692e22288c07948a4b8b6" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="classrcppsw_1_1types_1_1distance__measure_1a119ce1e7927cd4ad28c6ed556fc6269a" refkind="member"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(types,<sp/><ref refid="namespacercppsw" kindref="compound">rcppsw</ref>);</highlight></codeline>
+<codeline lineno="75" refid="classrcppsw_1_1types_1_1distance__measure_1ae5abceecbe8e7ee73a12142c080bb4c9" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_TYPES_DISTANCE_MEASURE_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp"/>
+  </compounddef>
+</doxygen>

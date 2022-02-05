@@ -1,0 +1,312 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="decorator_8hpp" kind="file" language="C++">
+    <compoundname>decorator.hpp</compoundname>
+    <includes local="no">memory</includes>
+    <includes local="no">utility</includes>
+    <includes refid="rcppsw_8hpp" local="yes">rcppsw/rcppsw.hpp</includes>
+    <includedby refid="directed__graph_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp</includedby>
+    <includedby refid="graphml_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graphml.hpp</includedby>
+    <includedby refid="grid__index__map_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp</includedby>
+    <includedby refid="hgrid3D_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D.hpp</includedby>
+    <includedby refid="hgrid3D__view_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp</includedby>
+    <includedby refid="rtree_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp</includedby>
+    <includedby refid="mt__queue_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp</includedby>
+    <incdepgraph>
+      <node id="7">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="5">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp</label>
+        <link refid="decorator_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>string</label>
+      </node>
+      <node id="4">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>utility</label>
+      </node>
+      <node id="8">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter_data.hpp</label>
+        <link refid="hgrid3D__view__filter__data_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graphml.hpp</label>
+        <link refid="graphml_8hpp"/>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp</label>
+        <link refid="decorator_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D.hpp</label>
+        <link refid="hgrid3D_8hpp"/>
+      </node>
+      <node id="6">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp</label>
+        <link refid="hgrid3D__view_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp</label>
+        <link refid="directed__graph_8hpp"/>
+      </node>
+      <node id="9">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp</label>
+        <link refid="rtree_8hpp"/>
+      </node>
+      <node id="4">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp</label>
+        <link refid="grid__index__map_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp</label>
+        <link refid="mt__queue_8hpp"/>
+      </node>
+      <node id="8">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp</label>
+        <link refid="hgrid3D__view__filter_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" prot="public">rcppsw::patterns::decorator::decorator</innerclass>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns">rcppsw::patterns</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns_1_1decorator">rcppsw::patterns::decorator</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="decorator_8hpp_1a176a5c0ce692ad036e0ee365520f4fe8" prot="public" static="no">
+        <name>RCPPSW_DECORATE_CT</name>
+        <param><defname>...</defname></param>
+        <initializer>using <ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">rpdecorator::decorator</ref>&lt;decoratee_type&gt;::decorator</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Exposes tricky constructors from the decoratee in the derived class. Generally only needed if the decoratee is an STL container or similar. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="78" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="decorator_8hpp_1a806cbfcb6fd695462ee45a08525360e4" prot="public" static="no">
+        <name>RCPPSW_DECORATE_DECL</name>
+        <param><defname>Name</defname></param>
+        <initializer>using Name = typename decoratee_type::Name</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Wraps a using declaration from the decoratee into the derived class. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="69" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="decorator_8hpp_1a95ec2800347ba0818c0cafe374c20267" prot="public" static="no">
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param><defname>Func</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>template &lt;typename... Args&gt;auto Func(Args&amp;&amp;... args)  __VA_ARGS__ -&gt;decltype(std::declval&lt;decltype(Member)&gt;().Func(args...)) { return  decoratee().Func(std::forward&lt;Args&gt;(args)...); }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Wraps the declaration/implementation of the decoratee <computeroutput>Func</computeroutput>.</para>
+<para>work to wrap functions in the decorated class which are virtual. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="47" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="decorator_8hpp_1ae61d423fbb7e3fb1f7862815da772b65" prot="public" static="no">
+        <name>RCPPSW_DECORATE_DECLDEF_STATIC</name>
+        <param><defname>Class</defname></param>
+        <param><defname>Func</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>  template &lt;typename TDecorateeType = decoratee_type, typename... Args&gt; \
+  auto Func(Args&amp;&amp;... args) __VA_ARGS__ -&gt; decltype(Class::Func&lt;__VA_ARGS__ TDecorateeType&gt;(decoratee(), (args)...)) { \
+    return Class::Func&lt;__VA_ARGS__ TDecorateeType&gt;(decoratee(), std::forward&lt;Args&gt;(args)...); \
+  }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Wrap a static/non-member function from a base class/other accessible class/namespace using the decoratee.</para>
+<para>ADL says you cannot put qualifiers on the name of the static function. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="58" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2017 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="21"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_PATTERNS_DECORATOR_DECORATOR_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_PATTERNS_DECORATOR_DECORATOR_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="rcppsw_8hpp" kindref="compound">rcppsw/rcppsw.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="namespacercppsw_1_1patterns_1_1decorator" refkind="compound"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>patterns,<sp/><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref>);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>*<sp/>Macros</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="47"><highlight class="preprocessor">#define<sp/>RCPPSW_DECORATE_DECLDEF(Func,<sp/>...)<sp/>\</highlight></codeline>
+<codeline lineno="48"><highlight class="preprocessor"><sp/><sp/>RCPPSW_WRAP_DECLDEF(Func,<sp/>decoratee(),<sp/>__VA_ARGS__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="preprocessor">#define<sp/>RCPPSW_DECORATE_DECLDEF_STATIC(Class,<sp/>Func,<sp/>...)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="59"><highlight class="preprocessor"><sp/><sp/>template<sp/>&lt;typename<sp/>TDecorateeType<sp/>=<sp/>decoratee_type,<sp/>typename...<sp/>Args&gt;<sp/>\</highlight></codeline>
+<codeline lineno="60"><highlight class="preprocessor"><sp/><sp/>auto<sp/>Func(Args&amp;&amp;...<sp/>args)<sp/>__VA_ARGS__<sp/>-&gt;<sp/>decltype(Class::Func&lt;__VA_ARGS__<sp/>TDecorateeType&gt;(decoratee(),<sp/>(args)...))<sp/>{<sp/>\</highlight></codeline>
+<codeline lineno="61"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>return<sp/>Class::Func&lt;__VA_ARGS__<sp/>TDecorateeType&gt;(decoratee(),<sp/>std::forward&lt;Args&gt;(args)...);<sp/>\</highlight></codeline>
+<codeline lineno="62" refid="decorator_8hpp_1ae61d423fbb7e3fb1f7862815da772b65" refkind="member"><highlight class="preprocessor"><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="preprocessor">#define<sp/>RCPPSW_DECORATE_DECL(Name)<sp/>\</highlight></codeline>
+<codeline lineno="70"><highlight class="preprocessor"><sp/><sp/>using<sp/>Name<sp/>=<sp/>typename<sp/>decoratee_type::Name</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="preprocessor">#define<sp/>RCPPSW_DECORATE_CT(...)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="79"><highlight class="preprocessor"><sp/><sp/>using<sp/>rpdecorator::decorator&lt;decoratee_type&gt;::decorator</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="82" refid="decorator_8hpp_1a176a5c0ce692ad036e0ee365520f4fe8" refkind="member"><highlight class="comment"><sp/>*<sp/>Class<sp/>Definitions</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="92"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TDecoratee&gt;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">decorator<sp/>{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>decoratee_type<sp/>=<sp/>TDecoratee;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>decorator_type<sp/>=<sp/>decorator&lt;decoratee_type&gt;;</highlight></codeline>
+<codeline lineno="97" refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" refkind="compound"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="99" refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a741c896a38d2c22bfcd68382fc0aee64" refkind="member"><highlight class="comment"><sp/><sp/><sp/>*<sp/>Note<sp/>we<sp/>DO<sp/>NOT<sp/>use<sp/>&amp;&amp;!<sp/>If<sp/>we<sp/>do,<sp/>then<sp/>you<sp/>can&apos;t<sp/>use<sp/>this<sp/>class<sp/>to<sp/>decorate</highlight></codeline>
+<codeline lineno="100" refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a1b8e1bf59abf4cb7039f657c1351dbf5" refkind="member"><highlight class="comment"><sp/><sp/><sp/>*<sp/>STL<sp/>containers<sp/>for<sp/>cryptic<sp/>reasons...This<sp/>is<sp/>at<sp/>most<sp/>an<sp/>extra<sp/>copy<sp/>anyway.</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>TArgs&gt;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref>(TArgs...<sp/>args)</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_decoratee{std::move(args)...}<sp/>{}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/>decorator(decoratee_type&amp;&amp;<sp/>arg)<sp/>:<sp/>m_decoratee(std::move(arg))<sp/>{}</highlight></codeline>
+<codeline lineno="107" refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a64c494d06f4fcbc9e52345db78510791" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/><sp/><sp/>*<sp/>Enable<sp/>initializer<sp/>list<sp/>syntax,<sp/>if<sp/>the<sp/>decoratee<sp/>is<sp/>a<sp/>std::vector<sp/>(for</highlight></codeline>
+<codeline lineno="110" refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a32c13ab58d3bd71c61030090590a9d62" refkind="member"><highlight class="comment"><sp/><sp/><sp/>*<sp/>example)</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U<sp/>=<sp/>TDecoratee,</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RCPPSW_SFINAE_DECLDEF((</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(U::value_type)<sp/>&gt;<sp/>0))&gt;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref>(std::initializer_list&lt;U&gt;<sp/>args)</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_decoratee(std::move(args))<sp/>{}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="118" refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a280934f4a5829a42c7916ba29560d645" refkind="member"><highlight class="comment"><sp/><sp/><sp/>*<sp/>These<sp/>decls<sp/>are<sp/>MANDATORY<sp/>because<sp/>by<sp/>also<sp/>declaring<sp/>the<sp/>destructor,<sp/>you</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/><sp/><sp/>*<sp/>lose<sp/>implicitly-defined<sp/>move<sp/>construction<sp/>which<sp/>is<sp/>necessary<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/><sp/><sp/>*<sp/>decoratee<sp/>is<sp/>a<sp/>STL<sp/>container<sp/>of<sp/>move-only<sp/>types.</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref>(<ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref>&amp;<sp/>operator=(<ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>~<ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a741c896a38d2c22bfcd68382fc0aee64" kindref="member">decoratee_type</ref>&amp;<sp/>decoratee(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_decoratee;<sp/>}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>decoratee_type&amp;<sp/>decoratee(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_decoratee;<sp/>}</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>TArgs&gt;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>redecorate(TArgs&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>m_decoratee<sp/>=<sp/>decoratee_type(std::forward&lt;TArgs&gt;(args)...);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>redecorate_with(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>decoratee_type&amp;<sp/>d)<sp/>{<sp/>m_decoratee<sp/>=<sp/>d;<sp/>}</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*<sp/>clang-format<sp/>off<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158" refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1af34e316851d6ccde1ab339f9dadf0c2a" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a741c896a38d2c22bfcd68382fc0aee64" kindref="member">decoratee_type</ref><sp/>m_decoratee;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*<sp/>clang-format<sp/>on<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>patterns,<sp/><ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">decorator</ref>);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_PATTERNS_DECORATOR_DECORATOR_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp"/>
+  </compounddef>
+</doxygen>

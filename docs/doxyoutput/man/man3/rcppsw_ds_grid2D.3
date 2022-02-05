@@ -1,0 +1,73 @@
+.TH "rcppsw::ds::grid2D< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::grid2D< T > \- A 2D grid of SOMETHING\&. Mainly a convenience wrapper around boost::multi_array\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <grid2D\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::ds::base_grid2D< T >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgrid2D\fP (const \fBcoord_type\fP &dims)"
+.br
+.ti -1c
+.RI "\fBgrid2D\fP (size_t x_max, size_t y_max)"
+.br
+.ti -1c
+.RI "T & \fBaccess\fP (size_t i, size_t j) override"
+.br
+.RI "Return a reference to the element at position (i, j) in the grid\&. "
+.ti -1c
+.RI "size_t \fBxsize\fP (void) const override"
+.br
+.RI "Get the size of the X dimension of the grid (i\&.e\&. what is the array index in X?) "
+.ti -1c
+.RI "size_t \fBysize\fP (void) const override"
+.br
+.RI "Get the size of the Y dimension of the grid (i\&.e\&. what is the array index in Y?) "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::ds::grid2D< T >"
+A 2D grid of SOMETHING\&. Mainly a convenience wrapper around boost::multi_array\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::ds::grid2D\fP< T >::\fBgrid2D\fP (const \fBcoord_type\fP & dims)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "template<typename T > \fBrcppsw::ds::grid2D\fP< T >::\fBgrid2D\fP (size_t x_max, size_t y_max)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > T& \fBrcppsw::ds::grid2D\fP< T >::access (size_t i, size_t j)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Return a reference to the element at position (i, j) in the grid\&. This is provided in the base class so that the pointer/object variants of the grid (\fBgrid2D\fP, \fBgrid2D_overlay\fP) can reduce code duplication\&. 
+.PP
+Implements \fBrcppsw::ds::base_grid2D< T >\fP\&.
+.SS "template<typename T > size_t \fBrcppsw::ds::grid2D\fP< T >::xsize (void) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Get the size of the X dimension of the grid (i\&.e\&. what is the array index in X?) 
+.PP
+Implements \fBrcppsw::ds::base_grid2D< T >\fP\&.
+.SS "template<typename T > size_t \fBrcppsw::ds::grid2D\fP< T >::ysize (void) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Get the size of the Y dimension of the grid (i\&.e\&. what is the array index in Y?) 
+.PP
+Implements \fBrcppsw::ds::base_grid2D< T >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

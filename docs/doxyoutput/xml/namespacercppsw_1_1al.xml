@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1al" kind="namespace" language="C++">
+    <compoundname>rcppsw::al</compoundname>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacercppsw_1_1al_1a120235a88ff5b87aecc2b6671e2aa34d" prot="public" static="no">
+        <type>double</type>
+        <definition>using rcppsw::al::mt_double_t = typedef double</definition>
+        <argsstring></argsstring>
+        <name>mt_double_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp" line="82" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1al_1adde22a9fc824f252937cfda2ceca8b18" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>using rcppsw::al::mt_size_t = typedef std::size_t</definition>
+        <argsstring></argsstring>
+        <name>mt_size_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp" line="81" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacercppsw_1_1al_1a2b2f1a1104dd40f0ba23f12ad48ed8df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename V</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::al::mt_add</definition>
+        <argsstring>(U &amp;lhs, const V &amp;rhs)</argsstring>
+        <name>mt_add</name>
+        <param>
+          <type>U &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const V &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp" line="90" column="6" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp" bodystart="90" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacercppsw_1_1al_1a9c316463739f65c5fc7994d9e38e96f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename LHS</type>
+          </param>
+          <param>
+            <type>typename RHS</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::al::mt_init</definition>
+        <argsstring>(LHS *lhs, RHS rhs)</argsstring>
+        <name>mt_init</name>
+        <param>
+          <type>LHS *</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>RHS</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp" line="84" column="6" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacercppsw_1_1al_1aa2cfd83ab696496e080e73a168e31c21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T rcppsw::al::mt_load</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>mt_load</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp" line="87" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacercppsw_1_1al_1a34ba8f4c71fd6d74cc9b1a2f70a47340" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename V</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::al::mt_set</definition>
+        <argsstring>(U &amp;lhs, const V &amp;rhs)</argsstring>
+        <name>mt_set</name>
+        <param>
+          <type>U &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const V &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp" line="95" column="6" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp" bodystart="95" bodyend="95"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/al/multithread.hpp" line="36" column="21"/>
+  </compounddef>
+</doxygen>

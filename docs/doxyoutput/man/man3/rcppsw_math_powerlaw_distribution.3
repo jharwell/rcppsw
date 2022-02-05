@@ -1,0 +1,72 @@
+.TH "rcppsw::math::powerlaw_distribution" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math::powerlaw_distribution \- Represents a power law distribution (duh) of x^pwr where x is in [lb, ub]\&. Constructed from a uniform distribution on [0, 1]\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <powerlaw_distribution\&.hpp>\fP
+.PP
+Inherited by \fBrcppsw::math::binned_powerlaw_distribution\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBpowerlaw_distribution\fP (size_t \fBlb\fP, size_t \fBub\fP, size_t \fBpwr\fP)"
+.br
+.RI "Initialize distribution\&. "
+.ti -1c
+.RI "virtual \fB~powerlaw_distribution\fP (void)=default"
+.br
+.ti -1c
+.RI "size_t \fBlb\fP (void) const"
+.br
+.ti -1c
+.RI "double \fBoperator()\fP (\fBrng\fP *\fBrng\fP)"
+.br
+.ti -1c
+.RI "size_t \fBpwr\fP (void) const"
+.br
+.ti -1c
+.RI "size_t \fBub\fP (void) const"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents a power law distribution (duh) of x^pwr where x is in [lb, ub]\&. Constructed from a uniform distribution on [0, 1]\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::math::powerlaw_distribution::powerlaw_distribution (size_t lb, size_t ub, size_t pwr)\fC [inline]\fP"
+
+.PP
+Initialize distribution\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIlb\fP Lower bound for distribution\&. Assumed to be a multiple of pwr\&. 
+.br
+\fIub\fP Upper bound for distribution\&. Assumed to be a multiple of pwr\&. 
+.br
+\fIpwr\fP Power for distribution\&. 
+.RE
+.PP
+
+.SS "virtual rcppsw::math::powerlaw_distribution::~powerlaw_distribution (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "size_t rcppsw::math::powerlaw_distribution::lb (void) const\fC [inline]\fP"
+
+.SS "double rcppsw::math::powerlaw_distribution::operator() (\fBrng\fP * rng)\fC [inline]\fP"
+
+.SS "size_t rcppsw::math::powerlaw_distribution::pwr (void) const\fC [inline]\fP"
+
+.SS "size_t rcppsw::math::powerlaw_distribution::ub (void) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

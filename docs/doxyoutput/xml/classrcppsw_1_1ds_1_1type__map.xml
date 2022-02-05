@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1ds_1_1type__map" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::ds::type_map</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">boost::container:: map&lt; std::type_index, boost::make_variant_over&lt; Typelist &gt;::type &gt;</basecompoundref>
+    <includes refid="type__map_8hpp" local="no">type_map.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Typelist</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1type__map_1a0a3753df88efcab10bcad0fdba1191a7" prot="public" static="no">
+        <type>std::type_index</type>
+        <definition>using rcppsw::ds::type_map&lt; Typelist &gt;::key_type =  std::type_index</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/type_map.hpp" line="60" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/type_map.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1type__map_1add21df97aecb31833dff7e27541e4eb6" prot="public" static="no">
+        <type>boost::container::map&lt; <ref refid="classrcppsw_1_1ds_1_1type__map_1a0a3753df88efcab10bcad0fdba1191a7" kindref="member">key_type</ref>, <ref refid="classrcppsw_1_1ds_1_1type__map_1aba6e8e094f72dfe7ab2201f2de71751b" kindref="member">value_type</ref> &gt;</type>
+        <definition>using rcppsw::ds::type_map&lt; Typelist &gt;::map_type =  boost::container::map&lt;key_type, value_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>map_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/type_map.hpp" line="61" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/type_map.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1type__map_1aba6e8e094f72dfe7ab2201f2de71751b" prot="public" static="no">
+        <type>typename boost::make_variant_over&lt; Typelist &gt;::type</type>
+        <definition>using rcppsw::ds::type_map&lt; Typelist &gt;::value_type =  typename boost::make_variant_over&lt;Typelist&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/type_map.hpp" line="59" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/type_map.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A map of a set of (possibly incomplete) types, keyed by std::type_index, with the value being a boost::variant. Extremely useful to emulate reflection in C++ (e.g. to map a type to a variant containing actions to take depending on what the actual type in the variant is). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>boost::container::
+          map&lt; std::type_index, boost::make_variant_over&lt; Typelist &gt;::type &gt;</label>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::type_map&lt; Typelist &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1type__map"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>boost::container::
+          map&lt; std::type_index, boost::make_variant_over&lt; Typelist &gt;::type &gt;</label>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::type_map&lt; Typelist &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1type__map"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/type_map.hpp" line="57" column="25" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/type_map.hpp" bodystart="55" bodyend="63"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1ds_1_1type__map_1a0a3753df88efcab10bcad0fdba1191a7" prot="public" virt="non-virtual"><scope>rcppsw::ds::type_map</scope><name>key_type</name></member>
+      <member refid="classrcppsw_1_1ds_1_1type__map_1add21df97aecb31833dff7e27541e4eb6" prot="public" virt="non-virtual"><scope>rcppsw::ds::type_map</scope><name>map_type</name></member>
+      <member refid="classrcppsw_1_1ds_1_1type__map_1aba6e8e094f72dfe7ab2201f2de71751b" prot="public" virt="non-virtual"><scope>rcppsw::ds::type_map</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_c132d57be5a698bf4df457f460e61d91" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics</compoundname>
+    <innerfile refid="cell__op_8hpp">cell_op.hpp</innerfile>
+    <innerfile refid="grid2D__metrics__collector_8hpp">grid2D_metrics_collector.hpp</innerfile>
+    <innerfile refid="grid2D__metrics__csv__sink_8hpp">grid2D_metrics_csv_sink.hpp</innerfile>
+    <innerfile refid="grid2D__metrics__data_8hpp">grid2D_metrics_data.hpp</innerfile>
+    <innerfile refid="grid3D__metrics__collector_8hpp">grid3D_metrics_collector.hpp</innerfile>
+    <innerfile refid="grid3D__metrics__csv__sink_8hpp">grid3D_metrics_csv_sink.hpp</innerfile>
+    <innerfile refid="grid3D__metrics__data_8hpp">grid3D_metrics_data.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/"/>
+  </compounddef>
+</doxygen>

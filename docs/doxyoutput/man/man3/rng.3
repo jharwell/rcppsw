@@ -1,0 +1,86 @@
+.TH "rng" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rng \- Random number generator class using the PIMPL pattern in order to not have to include \fC<random>\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <rng\&.hpp>\fP
+.PP
+Inherits pimpl< detail::rng_impl >\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBrng\fP (size_t \fBseed\fP)"
+.br
+.ti -1c
+.RI "\fB~rng\fP (void) override"
+.br
+.ti -1c
+.RI "bool \fBbernoulli\fP (double p)"
+.br
+.RI "Return a selection according to a Bernoulli distribution with parameter \fCp\fP\&. "
+.ti -1c
+.RI "double \fBexponential\fP (double lambda)"
+.br
+.RI "Return a selection according to the exponential distribution 1 - e ^(-lambda)\&. "
+.ti -1c
+.RI "double \fBgaussian\fP (double mean, double std_dev)"
+.br
+.RI "Return a selection according to the Gaussian distribution G(mean, std_dev)\&. "
+.ti -1c
+.RI "size_t \fBseed\fP (void) const"
+.br
+.RI "Get the current seed\&. "
+.ti -1c
+.RI "template<typename T > T \fBuniform\fP (const range< T > &c_range)"
+.br
+.RI "Return a uniform selection in the range specified by \fCc_range\fP\&. "
+.ti -1c
+.RI "template<typename T > T \fBuniform\fP (const T &lb, const T &ub)"
+.br
+.RI "Return a uniform selection in the range [lb, ub]\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Random number generator class using the PIMPL pattern in order to not have to include \fC<random>\fP\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rng::rng (size_t seed)\fC [explicit]\fP"
+
+.SS "rng::~rng (void)\fC [override]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool rng::bernoulli (double p)"
+
+.PP
+Return a selection according to a Bernoulli distribution with parameter \fCp\fP\&. 
+.SS "double rng::exponential (double lambda)"
+
+.PP
+Return a selection according to the exponential distribution 1 - e ^(-lambda)\&. 
+.SS "double rng::gaussian (double mean, double std_dev)"
+
+.PP
+Return a selection according to the Gaussian distribution G(mean, std_dev)\&. 
+.SS "size_t rng::seed (void) const\fC [inline]\fP"
+
+.PP
+Get the current seed\&. 
+.SS "template<typename T > T rng::uniform (const range< T > & c_range)\fC [inline]\fP"
+
+.PP
+Return a uniform selection in the range specified by \fCc_range\fP\&. 
+.SS "template<typename T > T rng::uniform (const T & lb, const T & ub)"
+
+.PP
+Return a uniform selection in the range [lb, ub]\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

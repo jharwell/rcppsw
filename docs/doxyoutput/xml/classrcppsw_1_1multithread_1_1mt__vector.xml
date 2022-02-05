@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1multithread_1_1mt__vector" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::multithread::mt_vector</compoundname>
+    <includes refid="mt__vector_8hpp" local="no">mt_vector.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1multithread_1_1mt__vector_1a139f7d7d0672468747a19e133c5cddee" prot="public" static="no">
+        <type>typename std::vector&lt; T &gt;::<ref refid="classrcppsw_1_1multithread_1_1mt__vector_1a139f7d7d0672468747a19e133c5cddee" kindref="member">const_iterator</ref></type>
+        <definition>using rcppsw::multithread::mt_vector&lt; T &gt;::const_iterator =  typename std::vector&lt;T&gt;::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" line="55" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1multithread_1_1mt__vector_1a9155d579b36cf0a0932bd27a5a066eb1" prot="private" static="no" mutable="no">
+        <type>boost::mutex</type>
+        <definition>boost::mutex rcppsw::multithread::mt_vector&lt; T &gt;::m_mtx</definition>
+        <argsstring></argsstring>
+        <name>m_mtx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" line="67" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1multithread_1_1mt__vector_1ad5efb2162ae053f80ed79b548e101c78" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt;T&gt; rcppsw::multithread::mt_vector&lt; T &gt;::m_v</definition>
+        <argsstring></argsstring>
+        <name>m_v</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" line="66" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__vector_1a7a4f43d0b4cd8db2c4b1be45d3e25c51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::multithread::mt_vector&lt; T &gt;::mt_vector</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>mt_vector</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" line="57" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__vector_1a3ad67f3d7cb97af6ffdab45f209f7155" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto rcppsw::multithread::mt_vector&lt; T &gt;::Func</definition>
+        <argsstring>(Args &amp;&amp;... args) -&gt; decltype(std::declval&lt; decltype(Member)&gt;().Func(args...))</argsstring>
+        <name>Func</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" line="72" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__vector_1a49bc892aa394754b32d5425d34e31aeb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto rcppsw::multithread::mt_vector&lt; T &gt;::Func</definition>
+        <argsstring>(Args &amp;&amp;... args) const -&gt; decltype(std::declval&lt; decltype(Member)&gt;().Func(args...))</argsstring>
+        <name>Func</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" line="71" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__vector_1a49bc892aa394754b32d5425d34e31aeb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto rcppsw::multithread::mt_vector&lt; T &gt;::Func</definition>
+        <argsstring>(Args &amp;&amp;... args) const -&gt; decltype(std::declval&lt; decltype(Member)&gt;().Func(args...))</argsstring>
+        <name>Func</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" line="73" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__vector_1a49bc892aa394754b32d5425d34e31aeb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto rcppsw::multithread::mt_vector&lt; T &gt;::Func</definition>
+        <argsstring>(Args &amp;&amp;... args) const -&gt; decltype(std::declval&lt; decltype(Member)&gt;().Func(args...))</argsstring>
+        <name>Func</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" line="74" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__vector_1adc4c6c0dce0345bd2db43ce6afa71b55" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multithread::mt_vector&lt; T &gt;::push_back</definition>
+        <argsstring>(const T &amp;data)</argsstring>
+        <name>push_back</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" line="59" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" bodystart="59" bodyend="62"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A thread-safe vector implementation. Use when you need fast access to a large contiguous chunk of memory. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::multithread::mt_vector&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1multithread_1_1mt__vector"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" line="53" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_vector.hpp" bodystart="53" bodyend="75"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1multithread_1_1mt__vector_1a139f7d7d0672468747a19e133c5cddee" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_vector</scope><name>const_iterator</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__vector_1a49bc892aa394754b32d5425d34e31aeb" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_vector</scope><name>Func</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__vector_1a3ad67f3d7cb97af6ffdab45f209f7155" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_vector</scope><name>Func</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__vector_1a49bc892aa394754b32d5425d34e31aeb" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_vector</scope><name>Func</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__vector_1a49bc892aa394754b32d5425d34e31aeb" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_vector</scope><name>Func</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__vector_1a9155d579b36cf0a0932bd27a5a066eb1" prot="private" virt="non-virtual"><scope>rcppsw::multithread::mt_vector</scope><name>m_mtx</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__vector_1ad5efb2162ae053f80ed79b548e101c78" prot="private" virt="non-virtual"><scope>rcppsw::multithread::mt_vector</scope><name>m_v</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__vector_1a7a4f43d0b4cd8db2c4b1be45d3e25c51" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_vector</scope><name>mt_vector</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__vector_1adc4c6c0dce0345bd2db43ce6afa71b55" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_vector</scope><name>push_back</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

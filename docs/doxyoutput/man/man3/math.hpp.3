@@ -1,0 +1,84 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/math/math.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/math/math.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cmath>\fP
+.br
+\fC#include <utility>\fP
+.br
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::math\fP"
+.br
+.RI "Pure mathematical classes such as vectors, ranges, sigmoids, etc\&. "
+.ti -1c
+.RI " \fBrcppsw::math::detail\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<class T > using \fBrcppsw::math::detail::length_func_decltype\fP = decltype(std::declval< T >()\&.length())"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBrcppsw::math::is_equal\fP (double lhs, double rhs, double tol=kDOUBLE_EPSILON)"
+.br
+.RI "Determine if two floating point values are equal, using the specified tolerance\&. You can't always use std::numeric_limits<double>::epsilon() because of floating point representation errors\&. "
+.ti -1c
+.RI "static bool \fBrcppsw::math::is_multiple_of\fP (double x, double y, double tol=kDOUBLE_EPSILON)"
+.br
+.RI "Determine if \fCx\fP is a multiple \fCy\fP within \fCtol\fP tolerance\&. "
+.ti -1c
+.RI "template<typename T , typename std::enable_if<(rmpl::is_detected< detail::length_func_decltype, T >::value), int >::type  = 0> static double \fBrcppsw::math::l2norm\fP (const T &lhs, const T &rhs)"
+.br
+.RI "Computes the euclidean distance between the passed vectors\&. "
+.ti -1c
+.RI "template<typename T , typename std::enable_if<(rmpl::is_detected< detail::length_func_decltype, T >::value), int >::type  = 0> static double \fBrcppsw::math::l2norm_squared\fP (const T &lhs, const T &rhs)"
+.br
+.RI "Computes the square of the euclidean distance between the passed vectors\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static constexpr double \fBrcppsw::math::kDOUBLE_EPSILON\fP = \fBRCSW_DOUBLE_EPSILON\fP"
+.br
+.RI "For comparing floating point numbers within a given tolerance when std::numeric_limits<double>::epsilon() won't work\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2021 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

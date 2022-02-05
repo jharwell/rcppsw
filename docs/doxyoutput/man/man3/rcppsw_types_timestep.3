@@ -1,0 +1,113 @@
+.TH "rcppsw::types::timestep" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::types::timestep \- Type to be used for representing timesteps in a simulation environment\&. Meant to reduce the arbritrary (possibly erroneous) manipulations possible with simulation time via implicit conversion\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <timestep\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::types::named_type< size_t, struct timestep_tag >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBtimestep\fP (const \fBtimestep\fP &)=default"
+.br
+.ti -1c
+.RI "\fBtimestep\fP \fBoperator%\fP (const \fBtimestep\fP &other) const"
+.br
+.ti -1c
+.RI "\fBtimestep\fP \fBoperator+\fP (const \fBtimestep\fP &other) const"
+.br
+.ti -1c
+.RI "\fBtimestep\fP \fBoperator+\fP (size_t n) const"
+.br
+.ti -1c
+.RI "\fBtimestep\fP & \fBoperator+=\fP (const \fBtimestep\fP &other)"
+.br
+.ti -1c
+.RI "\fBtimestep\fP & \fBoperator+=\fP (size_t n)"
+.br
+.ti -1c
+.RI "\fBtimestep\fP \fBoperator\-\fP (const \fBtimestep\fP &other) const"
+.br
+.ti -1c
+.RI "\fBtimestep\fP \fBoperator\-\fP (size_t n) const"
+.br
+.ti -1c
+.RI "template<class T > bool \fBoperator<\fP (const T &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBtimestep\fP &other) const"
+.br
+.ti -1c
+.RI "\fBtimestep\fP & \fBoperator=\fP (const \fBtimestep\fP &other)"
+.br
+.ti -1c
+.RI "template<class T > bool \fBoperator==\fP (const T &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBtimestep\fP &other) const"
+.br
+.ti -1c
+.RI "template<class T > bool \fBoperator>\fP (const T &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator>\fP (const \fBtimestep\fP &other) const"
+.br
+.ti -1c
+.RI "template<class T > bool \fBoperator>=\fP (const T &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator>=\fP (const \fBtimestep\fP &other) const"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Type to be used for representing timesteps in a simulation environment\&. Meant to reduce the arbritrary (possibly erroneous) manipulations possible with simulation time via implicit conversion\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::types::timestep::timestep (const \fBtimestep\fP &)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBtimestep\fP rcppsw::types::timestep::operator% (const \fBtimestep\fP & other) const\fC [inline]\fP"
+
+.SS "\fBtimestep\fP rcppsw::types::timestep::operator+ (const \fBtimestep\fP & other) const\fC [inline]\fP"
+
+.SS "\fBtimestep\fP rcppsw::types::timestep::operator+ (size_t n) const\fC [inline]\fP"
+
+.SS "\fBtimestep\fP& rcppsw::types::timestep::operator+= (const \fBtimestep\fP & other)\fC [inline]\fP"
+
+.SS "\fBtimestep\fP& rcppsw::types::timestep::operator+= (size_t n)\fC [inline]\fP"
+
+.SS "\fBtimestep\fP rcppsw::types::timestep::operator\- (const \fBtimestep\fP & other) const\fC [inline]\fP"
+
+.SS "\fBtimestep\fP rcppsw::types::timestep::operator\- (size_t n) const\fC [inline]\fP"
+
+.SS "template<class T > bool rcppsw::types::timestep::operator< (const T & other) const\fC [inline]\fP"
+
+.SS "bool rcppsw::types::timestep::operator< (const \fBtimestep\fP & other) const\fC [inline]\fP"
+
+.SS "\fBtimestep\fP& rcppsw::types::timestep::operator= (const \fBtimestep\fP & other)\fC [inline]\fP"
+
+.SS "template<class T > bool rcppsw::types::timestep::operator== (const T & other) const\fC [inline]\fP"
+
+.SS "bool rcppsw::types::timestep::operator== (const \fBtimestep\fP & other) const\fC [inline]\fP"
+
+.SS "template<class T > bool rcppsw::types::timestep::operator> (const T & other) const\fC [inline]\fP"
+
+.SS "bool rcppsw::types::timestep::operator> (const \fBtimestep\fP & other) const\fC [inline]\fP"
+
+.SS "template<class T > bool rcppsw::types::timestep::operator>= (const T & other) const\fC [inline]\fP"
+
+.SS "bool rcppsw::types::timestep::operator>= (const \fBtimestep\fP & other) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

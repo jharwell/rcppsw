@@ -1,0 +1,308 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1math_1_1ema" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>rcppsw::math::ema</compoundname>
+    <basecompoundref refid="classrcppsw_1_1math_1_1expression" prot="public" virt="non-virtual">rcppsw::math::expression&lt; T &gt;</basecompoundref>
+    <includes refid="ema_8hpp" local="no">ema.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1ema_1a3e371b1cbb8266ff1084a2aca04ab46c" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::math::ema&lt; T &gt;::m_alpha</definition>
+        <argsstring></argsstring>
+        <name>m_alpha</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" line="114" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1ema_1a49b02c1b467c68e2ed2e281bbec6b276" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::ema&lt; T &gt;::ema</definition>
+        <argsstring>(double alpha)</argsstring>
+        <name>ema</name>
+        <param>
+          <type>double</type>
+          <declname>alpha</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" line="60" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1ema_1a98d4468710952cdf4085c28d60af2f49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::ema&lt; T &gt;::ema</definition>
+        <argsstring>(double alpha, const T &amp;result)</argsstring>
+        <name>ema</name>
+        <param>
+          <type>double</type>
+          <declname>alpha</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" line="61" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1ema_1ae02e87e7f3970969b2032019b9ea5149" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::math::ema&lt; T &gt;::alpha</definition>
+        <argsstring>(void) const</argsstring>
+        <name>alpha</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" line="63" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1ema_1af5a1fab422faa3ef6195ad742af06b6a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1ema" kindref="compound">ema</ref> &amp;</type>
+        <definition>ema&amp; rcppsw::math::ema&lt; T &gt;::calc</definition>
+        <argsstring>(const ema &amp;other)</argsstring>
+        <name>calc</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1ema" kindref="compound">ema</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" line="66" column="7" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" bodystart="66" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1ema_1ae4985609d6aacf4900dda5f41a621923" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::math::ema&lt; T &gt;::calc</definition>
+        <argsstring>(const T &amp;measure)</argsstring>
+        <name>calc</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>measure</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" line="65" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1ema_1aec5cda0f81742780f3bfa9c66cc42457" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1ema" kindref="compound">ema</ref> &amp;</type>
+        <definition>ema&amp; rcppsw::math::ema&lt; T &gt;::operator()</definition>
+        <argsstring>(const ema &amp;other)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1ema" kindref="compound">ema</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" line="79" column="7" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" bodystart="79" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1ema_1a62733d7d607b997ee9667e4abd7a7080" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::math::ema&lt; T &gt;::operator()</definition>
+        <argsstring>(const T &amp;measure)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>measure</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" line="71" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" bodystart="71" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1ema_1ab2fbe5f636d21064398e4531fc336d94" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1ema" kindref="compound">ema</ref></type>
+        <definition>ema rcppsw::math::ema&lt; T &gt;::operator+</definition>
+        <argsstring>(const ema &amp;other) const</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1ema" kindref="compound">ema</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" line="89" column="7" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" bodystart="89" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1ema_1af1442875ff9190623e346b4668cbe251" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1ema" kindref="compound">ema</ref> &amp;</type>
+        <definition>ema&amp; rcppsw::math::ema&lt; T &gt;::operator+=</definition>
+        <argsstring>(const ema &amp;other)</argsstring>
+        <name>operator+=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1ema" kindref="compound">ema</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" line="84" column="7" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" bodystart="84" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1ema_1a785bc7890406eb103fde69e849bc0f74" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1ema" kindref="compound">ema</ref></type>
+        <definition>ema rcppsw::math::ema&lt; T &gt;::operator-</definition>
+        <argsstring>(const ema &amp;other) const</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1ema" kindref="compound">ema</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" line="94" column="7" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" bodystart="94" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1ema_1aef586dcc33c69c23676f9c84d9f2c3ed" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1ema" kindref="compound">ema</ref></type>
+        <definition>ema rcppsw::math::ema&lt; T &gt;::operator/</definition>
+        <argsstring>(const ema &amp;other) const</argsstring>
+        <name>operator/</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1ema" kindref="compound">ema</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" line="100" column="7" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" bodystart="100" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1ema_1a5ad1d4aa2fca8f8510bcd99ac7266223" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(!(std::is_floating_point&lt; T &gt;::value)), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::math::ema&lt; T &gt;::operator==</definition>
+        <argsstring>(const ema &amp;other) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1ema" kindref="compound">ema</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" line="108" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" bodystart="108" bodyend="110"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Calculates an Exponential Moving Average of SOMETHING. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Depends on:</para>
+<para><itemizedlist>
+<listitem><para>Alpha: How much weight to give the past estimate, and how much to give the new measurement? </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::math::ema&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1ema"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::math::expression&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1expression"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::math::ema&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1ema"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::math::expression&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1expression"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" line="55" column="29" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ema.hpp" bodystart="55" bodyend="116"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1math_1_1ema_1ae02e87e7f3970969b2032019b9ea5149" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>alpha</name></member>
+      <member refid="classrcppsw_1_1math_1_1ema_1ae4985609d6aacf4900dda5f41a621923" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>calc</name></member>
+      <member refid="classrcppsw_1_1math_1_1ema_1af5a1fab422faa3ef6195ad742af06b6a" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>calc</name></member>
+      <member refid="classrcppsw_1_1math_1_1ema_1a49b02c1b467c68e2ed2e281bbec6b276" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>ema</name></member>
+      <member refid="classrcppsw_1_1math_1_1ema_1a98d4468710952cdf4085c28d60af2f49" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>ema</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a2ca96a1dc826983e83f6e1e78f9f7d91" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>eval</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a93c2ef3e3dca75b4d332b3f3dbdeabcf" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>expression</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1ad04caaa756da846454de4eb50a56c440" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>expression</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1aaf5f6c5239b011cc50e0660435796d42" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>expression</name></member>
+      <member refid="classrcppsw_1_1math_1_1ema_1a3e371b1cbb8266ff1084a2aca04ab46c" prot="private" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>m_alpha</name></member>
+      <member refid="classrcppsw_1_1math_1_1ema_1a62733d7d607b997ee9667e4abd7a7080" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>operator()</name></member>
+      <member refid="classrcppsw_1_1math_1_1ema_1aec5cda0f81742780f3bfa9c66cc42457" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>operator()</name></member>
+      <member refid="classrcppsw_1_1math_1_1ema_1ab2fbe5f636d21064398e4531fc336d94" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>operator+</name></member>
+      <member refid="classrcppsw_1_1math_1_1ema_1af1442875ff9190623e346b4668cbe251" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>operator+=</name></member>
+      <member refid="classrcppsw_1_1math_1_1ema_1a785bc7890406eb103fde69e849bc0f74" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>operator-</name></member>
+      <member refid="classrcppsw_1_1math_1_1ema_1aef586dcc33c69c23676f9c84d9f2c3ed" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>operator/</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a9cb4fefa68b3548f05417e43eb5277b0" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>operator&lt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a485d8341d75d4b27202152a55440508c" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1math_1_1ema_1a5ad1d4aa2fca8f8510bcd99ac7266223" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>operator==</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1afa8fda64acb803192fc82eab2e3ac2c1" prot="public" virt="non-virtual" ambiguityscope="rcppsw::math::expression::"><scope>rcppsw::math::ema</scope><name>operator==</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1ad8efa9b86f5cc28bd10a4b6418830667" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>operator&gt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1aa9e95f4e981ff13149304f3ead544aaa" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>reset</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a80f64efdd897e7287fef8624ef456810" prot="public" virt="non-virtual"><scope>rcppsw::math::ema</scope><name>v</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1af75b4f349110ceaac4efbf36cd278a82" prot="public" virt="virtual"><scope>rcppsw::math::ema</scope><name>~expression</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

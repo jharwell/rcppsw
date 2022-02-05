@@ -1,0 +1,79 @@
+.TH "rcppsw::algorithm::convex_hull2D< TCoord >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::algorithm::convex_hull2D< TCoord > \- Calculate the convex hull of a set of points in the 2D plane\&. The resulting list of points will be in counter-clockwise order\&. Implementation 'Graham Scan' algorithm\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <convex_hull2D\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< convex_hull2D< TCoord > >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBcoord_type\fP = TCoord"
+.br
+.ti -1c
+.RI "using \fBcoord_value_type\fP = typename coord_type::value_type"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBconvex_hull2D\fP (const \fBconvex_hull2D\fP &)=delete"
+.br
+.ti -1c
+.RI "\fBconvex_hull2D\fP (\fBconvex_hull2D\fP &&)=delete"
+.br
+.ti -1c
+.RI "\fBconvex_hull2D\fP (void)"
+.br
+.ti -1c
+.RI "boost::optional< std::list< \fBcoord_type\fP > > \fBoperator()\fP (std::vector< \fBcoord_type\fP > &&points)"
+.br
+.ti -1c
+.RI "\fBconvex_hull2D\fP & \fBoperator=\fP (const \fBconvex_hull2D\fP &)=delete"
+.br
+.ti -1c
+.RI "\fBconvex_hull2D\fP & \fBoperator=\fP (\fBconvex_hull2D\fP &&)=delete"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TCoord>
+.br
+class rcppsw::algorithm::convex_hull2D< TCoord >"
+Calculate the convex hull of a set of points in the 2D plane\&. The resulting list of points will be in counter-clockwise order\&. Implementation 'Graham Scan' algorithm\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename TCoord > using \fBrcppsw::algorithm::convex_hull2D\fP< TCoord >::\fBcoord_type\fP =  TCoord"
+
+.SS "template<typename TCoord > using \fBrcppsw::algorithm::convex_hull2D\fP< TCoord >::\fBcoord_value_type\fP =  typename coord_type::value_type"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TCoord > \fBrcppsw::algorithm::convex_hull2D\fP< TCoord >::\fBconvex_hull2D\fP (void)\fC [inline]\fP"
+
+.SS "template<typename TCoord > \fBrcppsw::algorithm::convex_hull2D\fP< TCoord >::\fBconvex_hull2D\fP (const \fBconvex_hull2D\fP< TCoord > &)\fC [delete]\fP"
+
+.SS "template<typename TCoord > \fBrcppsw::algorithm::convex_hull2D\fP< TCoord >::\fBconvex_hull2D\fP (\fBconvex_hull2D\fP< TCoord > &&)\fC [delete]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TCoord > boost::optional<std::list<\fBcoord_type\fP> > \fBrcppsw::algorithm::convex_hull2D\fP< TCoord >::operator() (std::vector< \fBcoord_type\fP > && points)\fC [inline]\fP"
+
+.SS "template<typename TCoord > \fBconvex_hull2D\fP& \fBrcppsw::algorithm::convex_hull2D\fP< TCoord >::operator= (const \fBconvex_hull2D\fP< TCoord > &)\fC [delete]\fP"
+
+.SS "template<typename TCoord > \fBconvex_hull2D\fP& \fBrcppsw::algorithm::convex_hull2D\fP< TCoord >::operator= (\fBconvex_hull2D\fP< TCoord > &&)\fC [delete]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

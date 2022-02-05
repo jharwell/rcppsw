@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_92ce6197395db8faf06fa3e040a9dc9e" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/multithread</compoundname>
+    <innerfile refid="lockable_8hpp">lockable.hpp</innerfile>
+    <innerfile refid="mt__fsm_8hpp">mt_fsm.hpp</innerfile>
+    <innerfile refid="mt__queue_8hpp">mt_queue.hpp</innerfile>
+    <innerfile refid="mt__vector_8hpp">mt_vector.hpp</innerfile>
+    <innerfile refid="threadable_8hpp">threadable.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/"/>
+  </compounddef>
+</doxygen>

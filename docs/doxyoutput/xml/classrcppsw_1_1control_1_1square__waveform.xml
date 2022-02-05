@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1control_1_1square__waveform" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::control::square_waveform</compoundname>
+    <basecompoundref refid="classrcppsw_1_1control_1_1base__waveform" prot="public" virt="non-virtual">rcppsw::control::base_waveform</basecompoundref>
+    <includes refid="periodic__waveform_8hpp" local="no">periodic_waveform.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1control_1_1square__waveform_1ac7b7f84907d640e166fc944746d10ba2" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::control::square_waveform::square_waveform</definition>
+        <argsstring>(const struct config::waveform_config *const config)</argsstring>
+        <name>square_waveform</name>
+        <param>
+          <type>const struct <ref refid="structrcppsw_1_1control_1_1config_1_1waveform__config" kindref="compound">config::waveform_config</ref> *const</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/periodic_waveform.hpp" line="80" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/periodic_waveform.hpp" bodystart="80" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1control_1_1square__waveform_1a709f48b6f560d807d93b55c0e3e30ce6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double rcppsw::control::square_waveform::value</definition>
+        <argsstring>(double time) override</argsstring>
+        <name>value</name>
+        <reimplements refid="classrcppsw_1_1control_1_1base__waveform_1a68747b81e14cdafce887753a477bb7b7">value</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+<para>Get the current value of the waveform at time <computeroutput>t</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/periodic_waveform.hpp" line="83" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/periodic_waveform.hpp" bodystart="83" bodyend="88"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Given the current time, outputs the current value of a square wave according to configured parameters:</para>
+<para>value = amplitude * signof(sin(2pi* frequency * time + phase)) + offset.</para>
+<para>Can be used to create step functions as well. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::control::base_waveform</label>
+        <link refid="classrcppsw_1_1control_1_1base__waveform"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::control::square_waveform</label>
+        <link refid="classrcppsw_1_1control_1_1square__waveform"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::control::base_waveform</label>
+        <link refid="classrcppsw_1_1control_1_1base__waveform"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::control::square_waveform</label>
+        <link refid="classrcppsw_1_1control_1_1square__waveform"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/periodic_waveform.hpp" line="78" column="43" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/periodic_waveform.hpp" bodystart="78" bodyend="89"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1control_1_1base__waveform_1ae1bb9d59522638807f5f8f6c80fe33b7" prot="public" virt="non-virtual"><scope>rcppsw::control::square_waveform</scope><name>amplitude</name></member>
+      <member refid="classrcppsw_1_1control_1_1base__waveform_1aa1d503bc6d4e2ed057fd13935ca83031" prot="public" virt="non-virtual"><scope>rcppsw::control::square_waveform</scope><name>base_waveform</name></member>
+      <member refid="classrcppsw_1_1control_1_1base__waveform_1a3852a7b39f17eb8a2537979b209f7423" prot="public" virt="non-virtual"><scope>rcppsw::control::square_waveform</scope><name>frequency</name></member>
+      <member refid="classrcppsw_1_1control_1_1base__waveform_1ac57ebf7711aaeee4b0a4c9d70d24183d" prot="public" virt="non-virtual"><scope>rcppsw::control::square_waveform</scope><name>offset</name></member>
+      <member refid="classrcppsw_1_1control_1_1base__waveform_1aa6242201d9d1560e6eab025c9658a073" prot="public" virt="non-virtual"><scope>rcppsw::control::square_waveform</scope><name>phase</name></member>
+      <member refid="classrcppsw_1_1control_1_1square__waveform_1ac7b7f84907d640e166fc944746d10ba2" prot="public" virt="non-virtual"><scope>rcppsw::control::square_waveform</scope><name>square_waveform</name></member>
+      <member refid="classrcppsw_1_1control_1_1square__waveform_1a709f48b6f560d807d93b55c0e3e30ce6" prot="public" virt="virtual"><scope>rcppsw::control::square_waveform</scope><name>value</name></member>
+      <member refid="classrcppsw_1_1control_1_1base__waveform_1a88fac93072f67aaaa424b2985cfed241" prot="public" virt="virtual"><scope>rcppsw::control::square_waveform</scope><name>~base_waveform</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

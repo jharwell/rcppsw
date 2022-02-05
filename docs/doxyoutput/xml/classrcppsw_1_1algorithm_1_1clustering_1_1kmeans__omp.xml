@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::algorithm::clustering::kmeans_omp</compoundname>
+    <basecompoundref refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl" prot="public" virt="non-virtual">rcppsw::algorithm::clustering::base_clustering_impl&lt; T, policy::NC &gt;</basecompoundref>
+    <includes refid="kmeans__omp_8hpp" local="no">kmeans_omp.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp_1a4e776a7a39d496544278c8994a2d146f" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t rcppsw::algorithm::clustering::kmeans_omp&lt; T &gt;::m_n_threads</definition>
+        <argsstring></argsstring>
+        <name>m_n_threads</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" line="111" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp_1a9417dd5a2433834f7c76506e1662990b" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::algorithm::clustering::kmeans_omp&lt; T &gt;::kmeans_omp</definition>
+        <argsstring>(size_t n_threads)</argsstring>
+        <name>kmeans_omp</name>
+        <param>
+          <type>size_t</type>
+          <declname>n_threads</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" line="58" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" bodystart="58" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp_1afd335812f1785c0d89a39643cbe0a4b7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::algorithm::clustering::kmeans_omp&lt; T &gt;::converged</definition>
+        <argsstring>(const cluster_vector &amp;clusters) const override</argsstring>
+        <name>converged</name>
+        <reimplements refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1a66ad621088e5c8007b62d527ed5fc001">converged</reimplements>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1af7c16dc09eba724dd34e5afb5070b5b5" kindref="member">cluster_vector</ref> &amp;</type>
+          <declname>clusters</declname>
+        </param>
+        <briefdescription>
+<para>Determine if the clusters have converged and the algorithm should be terminated. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>TRUE</computeroutput> if the algorithm has converged, <computeroutput>FALSE</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" line="66" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" bodystart="66" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp_1ad75d0c14be090ed69b8a5e5e7b4b3c4a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::algorithm::clustering::kmeans_omp&lt; T &gt;::initialize</definition>
+        <argsstring>(std::vector&lt; T &gt; *const data, membership_type&lt; policy::NC &gt; *const membership) override</argsstring>
+        <name>initialize</name>
+        <reimplements refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1a5931c398b226c9b0fd1719157a0f3774">initialize</reimplements>
+        <param>
+          <type>std::vector&lt; T &gt; *const</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacercppsw_1_1algorithm_1_1clustering_1ae4bdc3c1b255447703e70a19e7c90aef" kindref="member">membership_type</ref>&lt; <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1NC" kindref="compound">policy::NC</ref> &gt; *const</type>
+          <declname>membership</declname>
+        </param>
+        <briefdescription>
+<para>Perform algorithm-specific clustering initialization (memory localization, etc.). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" line="61" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" bodystart="61" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp_1aef49a2ecbb8133b2e92dfd55a2d1a622" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::algorithm::clustering::kmeans_omp&lt; T &gt;::iterate</definition>
+        <argsstring>(const std::vector&lt; T &gt; &amp;data, const dist_calc_ftype &amp;dist_func, cluster_vector *const clusters) override</argsstring>
+        <name>iterate</name>
+        <reimplements refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1a57b1d1b0a37630e02f8c0bbf49679c42">iterate</reimplements>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1a6d0cb28b21790eb053a2fa7a423e46da" kindref="member">dist_calc_ftype</ref> &amp;</type>
+          <declname>dist_func</declname>
+        </param>
+        <param>
+          <type><ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1af7c16dc09eba724dd34e5afb5070b5b5" kindref="member">cluster_vector</ref> *const</type>
+          <declname>clusters</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" line="82" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" bodystart="82" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp_1a88460fcb2a69cec9a17d315d4f877ed2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::algorithm::clustering::kmeans_omp&lt; T &gt;::post_iter_update</definition>
+        <argsstring>(cluster_vector *const clusters) override</argsstring>
+        <name>post_iter_update</name>
+        <reimplements refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1a0331abbc18e66c066f7c4bc256d95144">post_iter_update</reimplements>
+        <param>
+          <type><ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1af7c16dc09eba724dd34e5afb5070b5b5" kindref="member">cluster_vector</ref> *const</type>
+          <declname>clusters</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" line="75" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" bodystart="75" bodyend="80"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp_1ac07f9db5262fb8044da367a898be9c7b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::algorithm::clustering::kmeans_omp&lt; T &gt;::first_touch_allocation</definition>
+        <argsstring>(std::vector&lt; T &gt; *const data, membership_type&lt; policy::NC &gt; *const membership)</argsstring>
+        <name>first_touch_allocation</name>
+        <param>
+          <type>std::vector&lt; T &gt; *const</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacercppsw_1_1algorithm_1_1clustering_1ae4bdc3c1b255447703e70a19e7c90aef" kindref="member">membership_type</ref>&lt; <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1NC" kindref="compound">policy::NC</ref> &gt; *const</type>
+          <declname>membership</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" line="101" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" bodystart="101" bodyend="108"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Parallel clustering using OpenMP using the Nearest Centroid (NC) membership policy. Suitable for kmeans clustering. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::algorithm::clustering::kmeans_omp&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::algorithm::clustering::base_clustering_impl&lt; T, policy::NC &gt;</label>
+        <link refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::algorithm::clustering::kmeans_omp&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::algorithm::clustering::base_clustering_impl&lt; T, policy::NC &gt;</label>
+        <link refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" line="53" column="47" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans_omp.hpp" bodystart="53" bodyend="113"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1af36eb09f7dedf9887de013daa1b77c6f" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::kmeans_omp</scope><name>cluster_type</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1af7c16dc09eba724dd34e5afb5070b5b5" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::kmeans_omp</scope><name>cluster_vector</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp_1afd335812f1785c0d89a39643cbe0a4b7" prot="public" virt="virtual"><scope>rcppsw::algorithm::clustering::kmeans_omp</scope><name>converged</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1a6d0cb28b21790eb053a2fa7a423e46da" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::kmeans_omp</scope><name>dist_calc_ftype</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp_1ac07f9db5262fb8044da367a898be9c7b" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::kmeans_omp</scope><name>first_touch_allocation</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp_1ad75d0c14be090ed69b8a5e5e7b4b3c4a" prot="public" virt="virtual"><scope>rcppsw::algorithm::clustering::kmeans_omp</scope><name>initialize</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp_1aef49a2ecbb8133b2e92dfd55a2d1a622" prot="public" virt="virtual"><scope>rcppsw::algorithm::clustering::kmeans_omp</scope><name>iterate</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp_1a9417dd5a2433834f7c76506e1662990b" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::kmeans_omp</scope><name>kmeans_omp</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp_1a4e776a7a39d496544278c8994a2d146f" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::kmeans_omp</scope><name>m_n_threads</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp_1a88460fcb2a69cec9a17d315d4f877ed2" prot="public" virt="virtual"><scope>rcppsw::algorithm::clustering::kmeans_omp</scope><name>post_iter_update</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1a54140d4d5406e8a29ff5915561569a8a" prot="public" virt="virtual"><scope>rcppsw::algorithm::clustering::kmeans_omp</scope><name>~base_clustering_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

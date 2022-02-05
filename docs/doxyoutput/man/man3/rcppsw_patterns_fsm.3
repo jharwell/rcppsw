@@ -1,0 +1,120 @@
+.TH "rcppsw::patterns::fsm" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::fsm \- The Finite State Machine (FSM) design pattern: simple and hierarchical variants\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBbase_fsm\fP"
+.br
+.RI "Implements a software-based state machine\&. "
+.ti -1c
+.RI "class \fBevent_data\fP"
+.br
+.RI "Base class for all data that will be passed to state machine states upon execution of their callback functions\&. Custom application event data classes must derive from here, or things will not compile\&. "
+.ti -1c
+.RI "class \fBevent_signal\fP"
+.br
+.RI "A class representing the different signals that can be passed between states in an FSM, and/or between FSMs\&. "
+.ti -1c
+.RI "class \fBevent_type\fP"
+.br
+.RI "A class representing the types of \fBevent_signal\fP that are passed as part of \fBevent_data\fP to states\&. "
+.ti -1c
+.RI "class \fBhfsm\fP"
+.br
+.RI "Implements a software-based hierarchical state machine (states can contain other states)\&. "
+.ti -1c
+.RI "class \fBhfsm_state\fP"
+.br
+.RI "Base class representing a state within a HFSM\&. "
+.ti -1c
+.RI "class \fBhfsm_state_action0\fP"
+.br
+.ti -1c
+.RI "class \fBhfsm_state_action1\fP"
+.br
+.ti -1c
+.RI "class \fBno_event_data\fP"
+.br
+.RI "This class does NOT derived from \fBevent_data\fP so that compiler errors are generated if you attempt to use it outside of its intent to indicate that a state does not take any data as input\&. "
+.ti -1c
+.RI "class \fBstate\fP"
+.br
+.RI "Abstract state base class that all states inherit from\&. "
+.ti -1c
+.RI "class \fBstate_action0\fP"
+.br
+.ti -1c
+.RI "class \fBstate_action1\fP"
+.br
+.ti -1c
+.RI "class \fBstate_entry\fP"
+.br
+.RI "Abstract entry base class that all entry classes inherit from\&. "
+.ti -1c
+.RI "class \fBstate_entry_action0\fP"
+.br
+.RI "Action to perform upon transition to a state\&. "
+.ti -1c
+.RI "class \fBstate_entry_action1\fP"
+.br
+.ti -1c
+.RI "class \fBstate_exit\fP"
+.br
+.RI "Abstract exit base class that all exit classes inherit from\&. "
+.ti -1c
+.RI "class \fBstate_exit_action\fP"
+.br
+.RI "\fBstate_exit_action\fP takes two template arguments: "
+.ti -1c
+.RI "class \fBstate_guard\fP"
+.br
+.RI "Abstract guard base class that all guards classes inherit from\&. "
+.ti -1c
+.RI "class \fBstate_guard_condition0\fP"
+.br
+.ti -1c
+.RI "class \fBstate_guard_condition1\fP"
+.br
+.RI "Condition to determine if a state's main action should be executed\&. "
+.ti -1c
+.RI "class \fBstate_map_ex_row\fP"
+.br
+.RI "A structure to hold a single row within the extended state map (a state map which includes entry, exit, and guard hooks)\&. "
+.ti -1c
+.RI "class \fBstate_map_row\fP"
+.br
+.RI "A structure to hold a single row within the state map\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBsimple_fsm\fP = \fBbase_fsm\fP"
+.br
+.RI "Simple non-heirarchical state machine class\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+The Finite State Machine (FSM) design pattern: simple and hierarchical variants\&. 
+.SH "Class Documentation"
+.PP 
+.SH "class rcppsw::patterns::fsm::no_event_data"
+.PP 
+This class does NOT derived from \fBevent_data\fP so that compiler errors are generated if you attempt to use it outside of its intent to indicate that a state does not take any data as input\&. 
+.SH "Typedef Documentation"
+.PP 
+.SS "\fBrcppsw::patterns::fsm::simple_fsm\fP"
+
+.PP
+Simple non-heirarchical state machine class\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

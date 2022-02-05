@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1fsm_1_1state__guard" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>rcppsw::patterns::fsm::state_guard</compoundname>
+    <derivedcompoundref refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition0" prot="public" virt="non-virtual">rcppsw::patterns::fsm::state_guard_condition0&lt; SM, Func &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition1" prot="public" virt="non-virtual">rcppsw::patterns::fsm::state_guard_condition1&lt; SM, Event, Func &gt;</derivedcompoundref>
+    <includes refid="state__guard_8hpp" local="no">state_guard.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1state__guard_1ae53d9b86decff789563840ca8255a862" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::patterns::fsm::state_guard::~state_guard</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~state_guard</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_guard.hpp" line="52" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1state__guard_1ab4fc458dfd439257b0439a070bc59716" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool rcppsw::patterns::fsm::state_guard::invoke_guard_condition</definition>
+        <argsstring>(base_fsm *sm, const event_data *) const =0</argsstring>
+        <name>invoke_guard_condition</name>
+        <reimplementedby refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition0_1a571228012b8298330b5cb12d282ee8a6">invoke_guard_condition</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition1_1a68932eb848f27d91363aed9ab0a4704a">invoke_guard_condition</reimplementedby>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm" kindref="compound">base_fsm</ref> *</type>
+          <declname>sm</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1patterns_1_1fsm_1_1event__data" kindref="compound">event_data</ref> *</type>
+        </param>
+        <briefdescription>
+<para>Called by the state machine engine to execute a guard condition action. If guard condition evaluates to TRUE the state action is executed. If FALSE, no state transition is performed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state machine instance.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Returns TRUE if no guard condition or the guard condition evaluates to TRUE. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_guard.hpp" line="64" column="16"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Abstract guard base class that all guards classes inherit from. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::patterns::fsm::state_guard_condition0&lt; SM, Func &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition0"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw::patterns::fsm::state_guard_condition1&lt; SM, Event, Func &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition1"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::state_guard</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::state_guard</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_guard.hpp" line="50" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_guard.hpp" bodystart="50" bodyend="65"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard_1ab4fc458dfd439257b0439a070bc59716" prot="public" virt="pure-virtual"><scope>rcppsw::patterns::fsm::state_guard</scope><name>invoke_guard_condition</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard_1ae53d9b86decff789563840ca8255a862" prot="public" virt="virtual"><scope>rcppsw::patterns::fsm::state_guard</scope><name>~state_guard</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

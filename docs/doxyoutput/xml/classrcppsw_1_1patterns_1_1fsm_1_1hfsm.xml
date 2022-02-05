@@ -1,0 +1,336 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1fsm_1_1hfsm" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::fsm::hfsm</compoundname>
+    <basecompoundref refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm" prot="public" virt="non-virtual">rcppsw::patterns::fsm::base_fsm</basecompoundref>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; hfsm &gt;</basecompoundref>
+    <includes refid="hfsm_8hpp" local="no">hfsm.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a6e62a883cb251f185aa796ac2e370be1" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action0" kindref="compound">hfsm_state_action0</ref>&lt; <ref refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm" kindref="compound">hfsm</ref>, &amp;<ref refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a61e88139080279ad7cd17a361cde8361" kindref="member">hfsm::ST_top_state</ref> &gt;</type>
+        <definition>hfsm_state_action0&lt;hfsm, &amp;hfsm::ST_top_state&gt; rcppsw::patterns::fsm::hfsm::m_top_state</definition>
+        <argsstring></argsstring>
+        <name>m_top_state</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="100" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1ab972b29b2e2bc2a546db6dbd9ce203ba" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::fsm::hfsm::hfsm</definition>
+        <argsstring>(uint8_t max_states, uint8_t initial_state=0)</argsstring>
+        <name>hfsm</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>max_states</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>initial_state</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>max_states</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum number of state machine states. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>initial_state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initial state machine state. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="56" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="56" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a9fad16bf2241fc85cad45190b5f3f7e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::fsm::hfsm::~hfsm</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~hfsm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="62" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1aa1061578cad33acdfda315e9dfbd84ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::patterns::fsm::hfsm::change_parent</definition>
+        <argsstring>(uint8_t state, rcppsw::patterns::fsm::state *new_parent)</argsstring>
+        <name>change_parent</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1state" kindref="compound">rcppsw::patterns::fsm::state</ref> *</type>
+          <declname>new_parent</declname>
+        </param>
+        <briefdescription>
+<para>Change the parent state of the specified state to a new state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state within THIS state machine to change the parent of. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>new_parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A new parent state, which can be from ANOTHER <ref refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm" kindref="compound">hfsm</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="76" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a6418e104518e7f0b4c6e89e994249b05" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::patterns::fsm::hfsm::init</definition>
+        <argsstring>(void) override</argsstring>
+        <name>init</name>
+        <reimplements refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a28dcbf6903171b491f9f49e76b380a47">init</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Initialize/reset the state machine. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="64" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="64" bodyend="68"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a61e88139080279ad7cd17a361cde8361" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int rcppsw::patterns::fsm::hfsm::ST_top_state</definition>
+        <argsstring>(void)</argsstring>
+        <name>ST_top_state</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>The topmost state in the hierarchy, of which all states are children. If an event gets all the way up to here, that&apos;s bad, because it should have been handled at a lower layer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Does not return. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="87" column="7" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="87" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a8302a271ce6a8b8abc64f2835e2d5019" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action0" kindref="compound">hfsm_state_action0</ref>&lt; <ref refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm" kindref="compound">hfsm</ref>, &amp;<ref refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a61e88139080279ad7cd17a361cde8361" kindref="member">hfsm::ST_top_state</ref> &gt; *</type>
+        <definition>hfsm_state_action0&lt;hfsm, &amp;hfsm::ST_top_state&gt;* rcppsw::patterns::fsm::hfsm::top_state</definition>
+        <argsstring>(void)</argsstring>
+        <name>top_state</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="91" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="91" bodyend="93"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a40701ed24fbbfa62ca940f2b4b8d9252" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::patterns::fsm::hfsm::state_engine_step</definition>
+        <argsstring>(const state_map_ex_row *c_row_ex) override</argsstring>
+        <name>state_engine_step</name>
+        <reimplements refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1afddb540ea0cc710481164d8a2890fcae">state_engine_step</reimplements>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1patterns_1_1fsm_1_1state__map__ex__row" kindref="compound">state_map_ex_row</ref> *</type>
+          <declname>c_row_ex</declname>
+        </param>
+        <briefdescription>
+<para>Execute one step of the state machine using the extended state definitions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="97" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a0e44197a84df2172440ea87401f1fcbd" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::patterns::fsm::hfsm::state_engine_step</definition>
+        <argsstring>(const state_map_row *c_row) override</argsstring>
+        <name>state_engine_step</name>
+        <reimplements refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a18b15e2f252daaf1e15ee0ea502b5370">state_engine_step</reimplements>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1patterns_1_1fsm_1_1state__map__row" kindref="compound">state_map_row</ref> *</type>
+          <declname>c_row</declname>
+        </param>
+        <briefdescription>
+<para>Execute one step of the state machine using the simple state definitions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="96" column="8"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implements a software-based hierarchical state machine (states can contain other states). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>rcppsw::er::client&lt; base_fsm &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::fsm::base_fsm</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcppsw::er::client&lt; hfsm &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::hfsm</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>rcppsw::er::client&lt; base_fsm &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::fsm::base_fsm</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcppsw::er::client&lt; hfsm &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::hfsm</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="50" column="47" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="50" bodyend="102"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a6b0ab3c20b50882d7e145bfbabffed92" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>base_fsm</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a02f75749183246e300210cd6a7a308d8" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>base_fsm</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1aa1061578cad33acdfda315e9dfbd84ca" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>change_parent</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual" ambiguityscope="client&lt; hfsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual" ambiguityscope="client&lt; hfsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a857086bfbdd54b829cf2e839a8f78587" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>current_state</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual" ambiguityscope="client&lt; hfsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1ae81d3007d6d0e4aa1b6c9521ae59455f" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>event_data</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a7e7f9c272b0db4c1a8766f6f76cb0585" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>event_data</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1af18293d39b40e1e2c60a81cded8a9e5a" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>event_data_hold</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a82ea8aed531c4b4951b095bb863f091f" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>event_data_hold</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a70d0b834423157fe8b09690afa80a83d" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>event_data_release</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1aa7fbf7096bfea773455ec2f9265e0b1b" prot="protected" virt="virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>external_event</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1adb6921a6426dec4efed0e16cba15cbe4" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>external_event</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a00a0983368a370e3a807a831c24709f4" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>generated_event</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a9b5897b7785ebcabce2a118daf57b4a0" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>has_generated_event</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1ab972b29b2e2bc2a546db6dbd9ce203ba" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>hfsm</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a6418e104518e7f0b4c6e89e994249b05" prot="public" virt="virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>init</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1ad97c446c7cb456dabbcc93b96b8076c5" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>initial_state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a585739cca322eda48b2d788e16cb36a3" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>inject_event</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a5f3eb45a6e8c0d402e8ba3fbe18027eb" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>inject_event</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1afeb001abffdcc060bde5d9bbdfd1af37" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>internal_event</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1ab6ab7bbe02e3f0bcdba23e6547d8afa5" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>internal_event</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a22ed6eb5646dd2bfcdfd29effb44c895" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>last_state</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual" ambiguityscope="client&lt; hfsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual" ambiguityscope="client&lt; hfsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual" ambiguityscope="client&lt; hfsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual" ambiguityscope="client&lt; hfsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual" ambiguityscope="client&lt; hfsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a6e62a883cb251f185aa796ac2e370be1" prot="private" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>m_top_state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1abc6dd4426ea4b66799d82084301e5d56" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>max_states</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual" ambiguityscope="client&lt; hfsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual" ambiguityscope="client&lt; hfsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual" ambiguityscope="client&lt; hfsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual" ambiguityscope="client&lt; hfsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a363425a1ba6f260851673e2f1b78efee" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>next_state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a2ace41a1c2879201b362ede5898e0047" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>next_state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a7a56e00ed9b58320416ff440c173fead" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual" ambiguityscope="rcppsw::client&lt; base_fsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual" ambiguityscope="client&lt; hfsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a0d83a8f65d17d2932608bc33aa015581" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>previous_state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a61e88139080279ad7cd17a361cde8361" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>ST_top_state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a3c5718316ff2a98a9459307fcf4c148e" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>state_engine</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a0e44197a84df2172440ea87401f1fcbd" prot="private" virt="virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>state_engine_step</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a40701ed24fbbfa62ca940f2b4b8d9252" prot="private" virt="virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>state_engine_step</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a8e5583c34d8c99b092fb60e948748090" prot="protected" virt="virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>state_map</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1add40018c388e8fb9f4d76a7df7546582" prot="protected" virt="virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>state_map_ex</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a8302a271ce6a8b8abc64f2835e2d5019" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>top_state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1ab5d7452fd568e2beef757bcb56649ad9" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>update_state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm_1a14bebe9ef1225637a95971f17734eecd" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>~base_fsm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual" ambiguityscope="rcppsw::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>~client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual" ambiguityscope="client&lt; hfsm &gt;::"><scope>rcppsw::patterns::fsm::hfsm</scope><name>~client</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a9fad16bf2241fc85cad45190b5f3f7e0" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm</scope><name>~hfsm</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

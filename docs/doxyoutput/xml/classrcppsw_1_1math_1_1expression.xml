@@ -1,0 +1,252 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1math_1_1expression" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::math::expression</compoundname>
+    <derivedcompoundref refid="classrcppsw_1_1math_1_1ema" prot="public" virt="non-virtual">rcppsw::math::ema&lt; T &gt;</derivedcompoundref>
+    <includes refid="expression_8hpp" local="no">expression.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1expression_1a679e4217792d1d59f0bbde1b3479ee71" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T rcppsw::math::expression&lt; T &gt;::m_last</definition>
+        <argsstring></argsstring>
+        <name>m_last</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" line="78" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1expression_1aaf5f6c5239b011cc50e0660435796d42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::expression&lt; T &gt;::expression</definition>
+        <argsstring>(const expression &amp;)=default</argsstring>
+        <name>expression</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1expression" kindref="compound">expression</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" line="55" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1expression_1ad04caaa756da846454de4eb50a56c440" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::expression&lt; T &gt;::expression</definition>
+        <argsstring>(const T &amp;last)</argsstring>
+        <name>expression</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" line="52" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1expression_1a93c2ef3e3dca75b4d332b3f3dbdeabcf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::expression&lt; T &gt;::expression</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>expression</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" line="51" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1expression_1af75b4f349110ceaac4efbf36cd278a82" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::math::expression&lt; T &gt;::~expression</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~expression</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" line="53" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1expression_1a2ca96a1dc826983e83f6e1e78f9f7d91" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::math::expression&lt; T &gt;::eval</definition>
+        <argsstring>(const T &amp;val)</argsstring>
+        <name>eval</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate a calculation and set a new value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" line="66" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1expression_1a9cb4fefa68b3548f05417e43eb5277b0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::expression&lt; T &gt;::operator&lt;</definition>
+        <argsstring>(const expression &amp;other) const</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1expression" kindref="compound">expression</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" line="74" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1expression_1a485d8341d75d4b27202152a55440508c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1expression" kindref="compound">expression</ref> &amp;</type>
+        <definition>expression&amp; rcppsw::math::expression&lt; T &gt;::operator=</definition>
+        <argsstring>(const expression &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1expression" kindref="compound">expression</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" line="56" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1expression_1afa8fda64acb803192fc82eab2e3ac2c1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::expression&lt; T &gt;::operator==</definition>
+        <argsstring>(const expression &amp;other) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1expression" kindref="compound">expression</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" line="70" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" bodystart="70" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1expression_1ad8efa9b86f5cc28bd10a4b6418830667" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::expression&lt; T &gt;::operator&gt;</definition>
+        <argsstring>(const expression &amp;other) const</argsstring>
+        <name>operator&gt;</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1expression" kindref="compound">expression</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" line="73" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1expression_1aa9e95f4e981ff13149304f3ead544aaa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::math::expression&lt; T &gt;::reset</definition>
+        <argsstring>(void)</argsstring>
+        <name>reset</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" line="68" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1expression_1a80f64efdd897e7287fef8624ef456810" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::math::expression&lt; T &gt;::v</definition>
+        <argsstring>(void) const</argsstring>
+        <name>v</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the last value calculated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" line="61" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" bodystart="61" bodyend="61"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A base class for easy swapping/manipulating of mathematical expressions. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::math::ema&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1ema"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>rcppsw::math::expression&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1expression"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::math::expression&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1expression"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" line="49" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/expression.hpp" bodystart="49" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1math_1_1expression_1a2ca96a1dc826983e83f6e1e78f9f7d91" prot="public" virt="non-virtual"><scope>rcppsw::math::expression</scope><name>eval</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a93c2ef3e3dca75b4d332b3f3dbdeabcf" prot="public" virt="non-virtual"><scope>rcppsw::math::expression</scope><name>expression</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1ad04caaa756da846454de4eb50a56c440" prot="public" virt="non-virtual"><scope>rcppsw::math::expression</scope><name>expression</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1aaf5f6c5239b011cc50e0660435796d42" prot="public" virt="non-virtual"><scope>rcppsw::math::expression</scope><name>expression</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a679e4217792d1d59f0bbde1b3479ee71" prot="private" virt="non-virtual"><scope>rcppsw::math::expression</scope><name>m_last</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a9cb4fefa68b3548f05417e43eb5277b0" prot="public" virt="non-virtual"><scope>rcppsw::math::expression</scope><name>operator&lt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a485d8341d75d4b27202152a55440508c" prot="public" virt="non-virtual"><scope>rcppsw::math::expression</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1afa8fda64acb803192fc82eab2e3ac2c1" prot="public" virt="non-virtual"><scope>rcppsw::math::expression</scope><name>operator==</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1ad8efa9b86f5cc28bd10a4b6418830667" prot="public" virt="non-virtual"><scope>rcppsw::math::expression</scope><name>operator&gt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1aa9e95f4e981ff13149304f3ead544aaa" prot="public" virt="non-virtual"><scope>rcppsw::math::expression</scope><name>reset</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a80f64efdd897e7287fef8624ef456810" prot="public" virt="non-virtual"><scope>rcppsw::math::expression</scope><name>v</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1af75b4f349110ceaac4efbf36cd278a82" prot="public" virt="virtual"><scope>rcppsw::math::expression</scope><name>~expression</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

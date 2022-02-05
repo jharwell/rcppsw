@@ -1,0 +1,133 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <tuple>\fP
+.br
+\fC#include <set>\fP
+.br
+\fC#include <typeindex>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <memory>\fP
+.br
+\fC#include 'rcppsw/metrics/output_mode\&.hpp'\fP
+.br
+\fC#include 'rcppsw/metrics/base_sink\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBrcppsw::metrics::collector_registration_spec< TSink >\fP"
+.br
+.RI "The data needed to create an enabled collector\&. "
+.ti -1c
+.RI "struct \fBrcppsw::metrics::creatable_collector_spec\fP"
+.br
+.RI "Each entry in the set of collectors that CAN be created (if they are actually created dependent on configuration) has: "
+.ti -1c
+.RI "struct \fBrcppsw::metrics::detail::creatable_collector_set_comparator\fP"
+.br
+.RI "Comparator for \fBset_value_type\fP objects within the \fBcreatable_collector_set\fP\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::metrics\fP"
+.br
+.RI "Base metric interfaces and the collectors for them\&. "
+.ti -1c
+.RI " \fBrcppsw::metrics::detail\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBrcppsw::metrics::creatable_collector_set\fP = std::multiset< creatable_collector_spec, detail::creatable_collector_set_comparator >"
+.br
+.RI "Set of \fBset_value_type\fP in which duplicates are allowed, because when we compare elements, we only use the typeid as the key, which can be the same between collectors, even if the other parts of each element are different\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2021 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Class Documentation"
+.PP 
+.SH "struct rcppsw::metrics::collector_registration_spec"
+.PP 
+
+.SS "template<typename TSink>
+.br
+struct rcppsw::metrics::collector_registration_spec< TSink >"
+The data needed to create an enabled collector\&. 
+.PP
+\fBClass Members:\fP
+.RS 4
+bool \fIis_enabled\fP 
+.br
+.PP
+unique_ptr< TSink > \fIsink\fP 
+.br
+.PP
+.RE
+.PP
+.SH "struct rcppsw::metrics::creatable_collector_spec"
+.PP 
+Each entry in the set of collectors that CAN be created (if they are actually created dependent on configuration) has: 
+
+
+.IP "\(bu" 2
+The typeid of the collector, so that functions templated on collector type can figure out the correct item in the set to read from\&.
+.IP "\(bu" 2
+The name of the collector in the input src (e\&.g\&. the XML attribute name)\&.
+.IP "\(bu" 2
+The scoped name of the collector that will be used to refer to the created collector during simulation\&.
+.IP "\(bu" 2
+The set of output modes that are valid for the collector\&. 
+.PP
+
+.PP
+\fBClass Members:\fP
+.RS 4
+type_index \fIid\fP 
+.br
+.PP
+string \fIinput_name\fP 
+.br
+.PP
+string \fIscoped_name\fP 
+.br
+.PP
+\fBoutput_mode\fP \fIvalid_modes\fP 
+.br
+.PP
+.RE
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

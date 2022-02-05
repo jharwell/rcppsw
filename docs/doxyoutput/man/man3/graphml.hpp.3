@@ -1,0 +1,108 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graphml.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graphml.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <boost/graph/graphml\&.hpp>\fP
+.br
+\fC#include <boost/property_map/dynamic_property_map\&.hpp>\fP
+.br
+\fC#include <filesystem>\fP
+.br
+\fC#include <fstream>\fP
+.br
+\fC#include 'rcppsw/ds/graph/graph\&.hpp'\fP
+.br
+\fC#include 'rcppsw/patterns/decorator/decorator\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBrcppsw::ds::graph::detail::is_decorator< T, typename >\fP"
+.br
+.RI "Determine if\&. "
+.ti -1c
+.RI "struct \fBrcppsw::ds::graph::detail::is_decorator< T, std::void_t< decltype(std::declval< T >()\&.decoratee())> >\fP"
+.br
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::ds\fP"
+.br
+.RI "Data structures: 2D/3D lattice grids, 2D/3D discretizing grids to overlay onto continuous space, Poisson queue, rtree for 2D space, heterogeneous stacked 2D grid, type map for using in C++ quasi-reflection\&. "
+.ti -1c
+.RI " \fBrcppsw::ds::graph\fP"
+.br
+.RI "Graph data structures: Heterogeneous 3D grid graph\&. "
+.ti -1c
+.RI " \fBrcppsw::ds::graph::detail\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename TMapType , typename TBGLGraphType > static TMapType \fBproperty_map_gen\fP (TBGLGraphType &g, std::function< void(TMapType &map, TBGLGraphType &g)> cb)"
+.br
+.RI "Generate a property map of arbitrary type over a BGL graph\&. "
+.ti -1c
+.RI "template<typename TMapType , typename TGraphType , typename std::enable_if<(detail::is_decorator< TGraphType >::value), int >::type  = 0> static TMapType \fBproperty_map_gen\fP (TGraphType &g, std::function< void(TMapType &map, typename TGraphType::decoratee_type &g)> cb)"
+.br
+.RI "Generate a property map of arbitrary type over a decorated BGL graph\&. "
+.ti -1c
+.RI "template<typename TBGLGraphType , typename std::enable_if<(!detail::is_decorator< TBGLGraphType >::value), int >::type  = 0> static void \fBread_graphml\fP (const fs::path &path, TBGLGraphType &g, boost::dynamic_properties &dp)"
+.br
+.RI "Read the the contents of a BGL graph from a GraphML file\&. "
+.ti -1c
+.RI "template<typename TDecoratorType , typename std::enable_if<(detail::is_decorator< TDecoratorType >::value), int >::type  = 0> static void \fBread_graphml\fP (const fs::path &path, TDecoratorType &g, boost::dynamic_properties &dp)"
+.br
+.RI "Read the the contents of a decorated BGL graph from a GraphML file\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2021 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Function Documentation"
+.PP 
+.SS "template<typename TMapType , typename TBGLGraphType > static TMapType property_map_gen (TBGLGraphType & g, std::function< void(TMapType &map, TBGLGraphType &g)> cb)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Generate a property map of arbitrary type over a BGL graph\&. 
+.SS "template<typename TMapType , typename TGraphType , typename std::enable_if<(detail::is_decorator< TGraphType >::value), int >::type  = 0> static TMapType property_map_gen (TGraphType & g, std::function< void(TMapType &map, typename TGraphType::decoratee_type &g)> cb)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Generate a property map of arbitrary type over a decorated BGL graph\&. 
+.SS "template<typename TBGLGraphType , typename std::enable_if<(!detail::is_decorator< TBGLGraphType >::value), int >::type  = 0> static void read_graphml (const fs::path & path, TBGLGraphType & g, boost::dynamic_properties & dp)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Read the the contents of a BGL graph from a GraphML file\&. 
+.SS "template<typename TDecoratorType , typename std::enable_if<(detail::is_decorator< TDecoratorType >::value), int >::type  = 0> static void read_graphml (const fs::path & path, TDecoratorType & g, boost::dynamic_properties & dp)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Read the the contents of a decorated BGL graph from a GraphML file\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

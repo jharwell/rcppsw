@@ -1,0 +1,44 @@
+.TH "rcppsw::metrics::network_sink" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::network_sink \- Metrics sink so that collectors can output their metrics to a machine elsewhere on the network\&. Metrics are written at the specified interval to the specified machine to collect and process\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <network_sink\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::metrics::base_sink\fP, and \fBrcppsw::er::client< network_sink >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBnetwork_sink\fP (const std::string &\fBdest\fP, const \fBrmetrics::output_mode\fP &mode, const \fBrtypes::timestep\fP &interval)"
+.br
+.ti -1c
+.RI "virtual \fB~network_sink\fP (void)=default"
+.br
+.ti -1c
+.RI "const std::string & \fBdest\fP (void) const"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Metrics sink so that collectors can output their metrics to a machine elsewhere on the network\&. Metrics are written at the specified interval to the specified machine to collect and process\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::metrics::network_sink::network_sink (const std::string & dest, const \fBrmetrics::output_mode\fP & mode, const \fBrtypes::timestep\fP & interval)\fC [inline]\fP"
+
+.SS "virtual rcppsw::metrics::network_sink::~network_sink (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "const std::string& rcppsw::metrics::network_sink::dest (void) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

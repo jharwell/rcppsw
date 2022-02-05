@@ -14,6 +14,8 @@
                     (setq flycheck-clang-include-path includes-list)
                     (add-to-list 'flycheck-clang-args "-fPIC")
                     (add-to-list 'flycheck-clang-args "-std=c++17")
+                    (add-to-list 'flycheck-clang-args "-std=c++17")
+                    (add-to-list 'flycheck-clang-args "-Wno-pragma-once-outside-header")
                     (add-to-list 'flycheck-clang-args (concat "-isystem" (substitute-in-file-name
                                                                           "$localroot/system/include")))
                     (add-to-list 'flycheck-clang-definitions "LIBRA_ER=LIBRA_ER_ALL")

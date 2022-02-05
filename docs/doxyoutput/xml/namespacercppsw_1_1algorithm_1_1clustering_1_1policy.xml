@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1algorithm_1_1clustering_1_1policy" kind="namespace" language="C++">
+    <compoundname>rcppsw::algorithm::clustering::policy</compoundname>
+    <innerclass refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1EH" prot="public">rcppsw::algorithm::clustering::policy::EH</innerclass>
+    <innerclass refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1NC" prot="public">rcppsw::algorithm::clustering::policy::NC</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacercppsw_1_1algorithm_1_1clustering_1_1policy_1a93e2541d4b7b87c962aa26a820961171" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Policy</type>
+          </param>
+        </templateparamlist>
+        <type>typename std::enable_if_t&lt; <ref refid="namespacercppsw_1_1algorithm_1_1clustering_1_1policy_1ae00d598179a3129379523bc8225148d9" kindref="member">is_eh_</ref>&lt; Policy &gt;::value &gt;</type>
+        <definition>using rcppsw::algorithm::clustering::policy::is_eh = typedef typename std::enable_if_t&lt;is_eh_&lt;Policy&gt;::value&gt;</definition>
+        <argsstring></argsstring>
+        <name>is_eh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/membership_policy.hpp" line="71" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/membership_policy.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1algorithm_1_1clustering_1_1policy_1ae00d598179a3129379523bc8225148d9" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Policy</type>
+          </param>
+        </templateparamlist>
+        <type>std::is_same&lt; Policy, <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1EH" kindref="compound">EH</ref> &gt;</type>
+        <definition>using rcppsw::algorithm::clustering::policy::is_eh_ = typedef std::is_same&lt;Policy, EH&gt;</definition>
+        <argsstring></argsstring>
+        <name>is_eh_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/membership_policy.hpp" line="65" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/membership_policy.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1algorithm_1_1clustering_1_1policy_1a6ad2a498aaa8af4df9552dc8a64c81bf" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Policy</type>
+          </param>
+        </templateparamlist>
+        <type>typename std::enable_if_t&lt; <ref refid="namespacercppsw_1_1algorithm_1_1clustering_1_1policy_1ad73f8261d3fab385cbd1cf263d937e6f" kindref="member">is_nc_</ref>&lt; Policy &gt;::value &gt;</type>
+        <definition>using rcppsw::algorithm::clustering::policy::is_nc = typedef typename std::enable_if_t&lt;is_nc_&lt;Policy&gt;::value&gt;</definition>
+        <argsstring></argsstring>
+        <name>is_nc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/membership_policy.hpp" line="68" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/membership_policy.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1algorithm_1_1clustering_1_1policy_1ad73f8261d3fab385cbd1cf263d937e6f" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Policy</type>
+          </param>
+        </templateparamlist>
+        <type>std::is_same&lt; Policy, <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1NC" kindref="compound">NC</ref> &gt;</type>
+        <definition>using rcppsw::algorithm::clustering::policy::is_nc_ = typedef std::is_same&lt;Policy, NC&gt;</definition>
+        <argsstring></argsstring>
+        <name>is_nc_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/membership_policy.hpp" line="62" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/membership_policy.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/membership_policy.hpp" line="44" column="16"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,308 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="manhattan__dist_8hpp" kind="file" language="C++">
+    <compoundname>manhattan_dist.hpp</compoundname>
+    <includes refid="distance__measure_8hpp" local="yes">rcppsw/types/distance_measure.hpp</includes>
+    <includedby refid="hgrid3D__view__filter_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp</includedby>
+    <includedby refid="hgrid3D__view__filter__data_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter_data.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/manhattan_dist.hpp</label>
+        <link refid="manhattan__dist_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>boost/stacktrace.hpp</label>
+      </node>
+      <node id="8">
+        <label>log4cxx/fileappender.h</label>
+      </node>
+      <node id="15">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="14">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>log4cxx/xml/domconfigurator.h</label>
+      </node>
+      <node id="22">
+        <label>cassert</label>
+      </node>
+      <node id="19">
+        <label>rcppsw/er/stacktrace.hpp</label>
+        <link refid="stacktrace_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
+      <node id="11">
+        <label>log4cxx/patternlayout.h</label>
+      </node>
+      <node id="2">
+        <label>rcppsw/types/distance_measure.hpp</label>
+        <link refid="distance__measure_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>log4cxx/ndc.h</label>
+      </node>
+      <node id="7">
+        <label>log4cxx/consoleappender.h</label>
+      </node>
+      <node id="4">
+        <label>rcppsw/er/er.hpp</label>
+        <link refid="er_8hpp"/>
+      </node>
+      <node id="17">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>rcppsw/er/stringizable.hpp</label>
+        <link refid="stringizable_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>utility</label>
+      </node>
+      <node id="21">
+        <label>array</label>
+      </node>
+      <node id="23">
+        <label>iostream</label>
+      </node>
+      <node id="16">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw/er/client.hpp</label>
+        <link refid="client_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>type_traits</label>
+      </node>
+      <node id="18">
+        <label>rcppsw/er/macros.hpp</label>
+        <link refid="er_2macros_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>log4cxx/logger.h</label>
+      </node>
+      <node id="25">
+        <label>rcppsw/types/named_type.hpp</label>
+        <link refid="named__type_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/manhattan_dist.hpp</label>
+        <link refid="manhattan__dist_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter_data.hpp</label>
+        <link refid="hgrid3D__view__filter__data_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D.hpp</label>
+        <link refid="hgrid3D_8hpp"/>
+      </node>
+      <node id="5">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp</label>
+        <link refid="hgrid3D__view_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp</label>
+        <link refid="hgrid3D__view__filter_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classrcppsw_1_1types_1_1manhattan__dist" prot="public">rcppsw::types::manhattan_dist</innerclass>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1types">rcppsw::types</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2019 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="21"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_TYPES_MANHATTAN_DIST_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_TYPES_MANHATTAN_DIST_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="distance__measure_8hpp" kindref="compound">rcppsw/types/distance_measure.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>types);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*<sp/>Class<sp/>Definitions</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="44"><highlight class="keyword">class<sp/></highlight><highlight class="normal">manhattan_dist<sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>distance_measure&lt;int,</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>struct<sp/>manhattan_dist_tag&gt;<sp/>{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>manhattan_dist<sp/>make(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&amp;<sp/>value);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>manhattan_dist(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&amp;<sp/>v,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>check_psd<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>distance_measure(v,<sp/>check_psd)<sp/>{}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/>~manhattan_dist(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="59" refid="classrcppsw_1_1types_1_1manhattan__dist_1a29f075442496a4687e14234d8793a859" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist_1a29f075442496a4687e14234d8793a859" kindref="member">manhattan_dist</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref><sp/><ref refid="namespacercppsw_1_1math_1af676ea466603dec88e6310deccc2d150" kindref="member">operator*</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>(v()<sp/>*<sp/>rhs);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref><sp/><ref refid="namespacercppsw_1_1math_1afd8c377515b4ac3383951e754edc9d20" kindref="member">operator/</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="65" refid="classrcppsw_1_1types_1_1manhattan__dist_1affb2cadaaaac0d2576669a5e4bd3ed75" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>(v()<sp/>/<sp/>rhs);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref><sp/><ref refid="namespacercppsw_1_1types_1a3f4858fc7f1c09ed8666732797def584" kindref="member">operator-</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="68" refid="classrcppsw_1_1types_1_1manhattan__dist_1a28b6d8e450468d387a6280967a768fd6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>(v()<sp/>-<sp/>rhs);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref><sp/><ref refid="namespacercppsw_1_1types_1a27802aa16293b7b518133955db138a4b" kindref="member">operator+</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="71" refid="classrcppsw_1_1types_1_1manhattan__dist_1aadb5cd8a4d696f2a26eff5caf5b850b6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>(v()<sp/>+<sp/>rhs);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="classrcppsw_1_1types_1_1manhattan__dist_1aa424686a052fab9f5028b421498beaa4" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref><sp/><ref refid="namespacercppsw_1_1math_1af676ea466603dec88e6310deccc2d150" kindref="member">operator*</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>&amp;<sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>(v()<sp/>*<sp/>rhs.v());</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref><sp/><ref refid="namespacercppsw_1_1math_1afd8c377515b4ac3383951e754edc9d20" kindref="member">operator/</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>&amp;<sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="79" refid="classrcppsw_1_1types_1_1manhattan__dist_1a0474e2dfbb19167b1a2a2107c4097286" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>(v()<sp/>/<sp/>rhs.v());</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref><sp/><ref refid="namespacercppsw_1_1types_1a3f4858fc7f1c09ed8666732797def584" kindref="member">operator-</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>&amp;<sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="82" refid="classrcppsw_1_1types_1_1manhattan__dist_1a735df41ed8f60c276dc873ccd98dd567" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>(v()<sp/>-<sp/>rhs.v());</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref><sp/><ref refid="namespacercppsw_1_1types_1a27802aa16293b7b518133955db138a4b" kindref="member">operator+</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>&amp;<sp/>rhs)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="85" refid="classrcppsw_1_1types_1_1manhattan__dist_1a40497f6b805c9af1c4cde2737d78d75d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>(v()<sp/>+<sp/>rhs.v());</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="classrcppsw_1_1types_1_1manhattan__dist_1ab8ff728cc820c48178aacd2852e9698d" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>&amp;<sp/>operator-=(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>set(v()<sp/>-<sp/>rhs);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92" refid="classrcppsw_1_1types_1_1manhattan__dist_1a2a630779a4f82efa4c075957dc10618f" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>set(rhs.v());</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96" refid="classrcppsw_1_1types_1_1manhattan__dist_1ad2b82a03e08cd3d81b8ad680279b1279" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>&amp;<sp/>operator+=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>set(v()<sp/>+<sp/>rhs.v());</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="100" refid="classrcppsw_1_1types_1_1manhattan__dist_1a24e6b397cd8446197c6beb79b396f888" refkind="member"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/>*<sp/>Operators</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref><sp/><ref refid="namespacercppsw_1_1types_1a3f4858fc7f1c09ed8666732797def584" kindref="member">operator-</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>&amp;<sp/>rhs);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref><sp/><ref refid="namespacercppsw_1_1types_1a27802aa16293b7b518133955db138a4b" kindref="member">operator+</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>&amp;<sp/>rhs);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespacercppsw_1_1types_1ac22882e200d1ff6bc2933e156640e01d" kindref="member">operator&lt;=</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">manhattan_dist</ref>&amp;<sp/>rhs)<sp/><ref refid="common_2macros_8hpp_1a080d8af20d6aa955d4db7ef068309a7c" kindref="member">RCPPSW_PURE</ref>;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(types,<sp/><ref refid="namespacercppsw" kindref="compound">rcppsw</ref>);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_TYPES_MANHATTAN_DIST_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/manhattan_dist.hpp"/>
+  </compounddef>
+</doxygen>

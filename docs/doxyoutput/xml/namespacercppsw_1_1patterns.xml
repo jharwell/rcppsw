@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1patterns" kind="namespace" language="C++">
+    <compoundname>rcppsw::patterns</compoundname>
+    <innernamespace refid="namespacercppsw_1_1patterns_1_1decorator">rcppsw::patterns::decorator</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns_1_1factory">rcppsw::patterns::factory</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns_1_1fsm">rcppsw::patterns::fsm</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns_1_1pimpl">rcppsw::patterns::pimpl</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns_1_1prototype">rcppsw::patterns::prototype</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns_1_1singleton">rcppsw::patterns::singleton</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns_1_1visitor">rcppsw::patterns::visitor</innernamespace>
+    <briefdescription>
+<para>Design pattern templates and interfaces. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" line="35" column="39"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,49 @@
+.TH "rcppsw::patterns::prototype::caching_factory< TBase, Args >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::prototype::caching_factory< TBase, Args > \- Each time an object construction is requested, if an object type has been previously created with the same name, then a reference to that a previously created object of is returned, rather than a new instance of it\&. If construction of a previously constructed type of object is requested with a \fINEW\fP name, then a new instance of the object type is created\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <caching_factory\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "TBase * \fBcreate\fP (const std::string &name, Args\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "template<typename TDerived > void \fBregister_type\fP (const std::string &name)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TBase, typename\&.\&.\&. Args>
+.br
+class rcppsw::patterns::prototype::caching_factory< TBase, Args >"
+Each time an object construction is requested, if an object type has been previously created with the same name, then a reference to that a previously created object of is returned, rather than a new instance of it\&. If construction of a previously constructed type of object is requested with a \fINEW\fP name, then a new instance of the object type is created\&. 
+
+Only objects derived from the base class can be created\&.
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fITBase\fP The base class of objects to be created\&. 
+.br
+\fIArgs\fP Arguments for class constructors\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TBase , typename\&.\&.\&. Args> TBase* \fBrcppsw::patterns::prototype::caching_factory\fP< TBase, Args >::create (const std::string & name, Args\&.\&.\&. args)\fC [inline]\fP"
+
+.SS "template<typename TBase , typename\&.\&.\&. Args> template<typename TDerived > void \fBrcppsw::patterns::prototype::caching_factory\fP< TBase, Args >::register_type (const std::string & name)\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

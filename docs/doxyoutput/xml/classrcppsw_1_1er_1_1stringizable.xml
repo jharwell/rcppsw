@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1er_1_1stringizable" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::er::stringizable</compoundname>
+    <derivedcompoundref refid="classrcppsw_1_1types_1_1named__type" prot="public" virt="non-virtual">rcppsw::types::named_type&lt; double, struct spatial_dist_tag &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1types_1_1named__type" prot="public" virt="non-virtual">rcppsw::types::named_type&lt; int, struct manhattan_dist_tag &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1types_1_1named__type" prot="public" virt="non-virtual">rcppsw::types::named_type&lt; size_t, struct timestep_tag &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1types_1_1named__type" prot="public" virt="non-virtual">rcppsw::types::named_type&lt; T, Tag &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1math_1_1range" prot="private" virt="non-virtual">rcppsw::math::range&lt; coord_value_type &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1math_1_1range" prot="private" virt="non-virtual">rcppsw::math::range&lt; rcppsw::math::degrees &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1math_1_1degrees" prot="public" virt="non-virtual">rcppsw::math::degrees</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1math_1_1radians" prot="public" virt="non-virtual">rcppsw::math::radians</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1math_1_1range" prot="private" virt="non-virtual">rcppsw::math::range&lt; T &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1math_1_1vector2" prot="public" virt="non-virtual">rcppsw::math::vector2&lt; T &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1math_1_1vector3" prot="public" virt="non-virtual">rcppsw::math::vector3&lt; T &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1types_1_1named__type" prot="public" virt="non-virtual">rcppsw::types::named_type&lt; T, Parameter &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1utils_1_1color" prot="public" virt="non-virtual">rcppsw::utils::color</derivedcompoundref>
+    <includes refid="stringizable_8hpp" local="no">stringizable.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1stringizable_1a613eefda69afcc13383029355cb8cfe9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::er::stringizable::stringizable</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>stringizable</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/stringizable.hpp" line="51" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1stringizable_1ad025418a3c3349948cbea5c6facdb391" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::er::stringizable::~stringizable</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~stringizable</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/stringizable.hpp" line="52" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1stringizable_1a0776b3b6278cc72e8b04448c016bc197" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::string</type>
+        <definition>virtual std::string rcppsw::er::stringizable::to_str</definition>
+        <argsstring>(void) const</argsstring>
+        <name>to_str</name>
+        <reimplementedby refid="classrcppsw_1_1types_1_1named__type_1a5be785b00b2a79f27ede7953446c9bad">to_str</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1types_1_1named__type_1a5be785b00b2a79f27ede7953446c9bad">to_str</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1types_1_1named__type_1a5be785b00b2a79f27ede7953446c9bad">to_str</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1types_1_1named__type_1a5be785b00b2a79f27ede7953446c9bad">to_str</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1types_1_1named__type_1a5be785b00b2a79f27ede7953446c9bad">to_str</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1utils_1_1color_1a2fde472bf5988d8be1aa27fb82e42199">to_str</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1math_1_1degrees_1a2b9ac8293d697e031261d104259d501a">to_str</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1math_1_1radians_1aefe7c811628dee4db881ce70cead7049">to_str</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1math_1_1range_1a0ade48e4a0e80910b805169e2c186bd4">to_str</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1math_1_1range_1a0ade48e4a0e80910b805169e2c186bd4">to_str</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1math_1_1range_1a0ade48e4a0e80910b805169e2c186bd4">to_str</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1math_1_1vector2_1a234346d2bf083d6effbbc67b21369fe2">to_str</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1math_1_1vector3_1af3f46555472226e6249d1d0a4c73c749">to_str</reimplementedby>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return a string representation of a class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/stringizable.hpp" line="57" column="23" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/stringizable.hpp" bodystart="57" bodyend="57"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Interface for converting classes to string representations. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="5">
+        <label>rcppsw::types::named_type&lt; int, struct manhattan_dist_tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="11">
+        <label>rcppsw::types::distance_measure&lt; T, Tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1distance__measure"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>rcppsw::math::range&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1range"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>rcppsw::types::timestep</label>
+        <link refid="classrcppsw_1_1types_1_1timestep"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>rcppsw::types::named_type&lt; T, Parameter &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>rcppsw::types::named_type&lt; T, Tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>rcppsw::math::range&lt; coord_value_type &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1range"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>rcppsw::types::manhattan_dist</label>
+        <link refid="classrcppsw_1_1types_1_1manhattan__dist"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::types::named_type&lt; double, struct spatial_dist_tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>rcppsw::types::named_type&lt; size_t, struct timestep_tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>rcppsw::types::distance_measure&lt; int, struct manhattan_dist_tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1distance__measure"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>rcppsw::math::vector2&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1vector2"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcppsw::types::spatial_dist</label>
+        <link refid="classrcppsw_1_1types_1_1spatial__dist"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>rcppsw::utils::color</label>
+        <link refid="classrcppsw_1_1utils_1_1color"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw::types::distance_measure&lt; double, struct spatial_dist_tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1distance__measure"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>rcppsw::math::range&lt; rcppsw::math::degrees &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1range"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>rcppsw::math::degrees</label>
+        <link refid="classrcppsw_1_1math_1_1degrees"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>rcppsw::math::radians</label>
+        <link refid="classrcppsw_1_1math_1_1radians"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>rcppsw::math::vector3&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1vector3"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/stringizable.hpp" line="49" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/stringizable.hpp" bodystart="49" bodyend="58"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1a613eefda69afcc13383029355cb8cfe9" prot="public" virt="non-virtual"><scope>rcppsw::er::stringizable</scope><name>stringizable</name></member>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1a0776b3b6278cc72e8b04448c016bc197" prot="public" virt="virtual"><scope>rcppsw::er::stringizable</scope><name>to_str</name></member>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1ad025418a3c3349948cbea5c6facdb391" prot="public" virt="virtual"><scope>rcppsw::er::stringizable</scope><name>~stringizable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

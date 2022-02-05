@@ -1,0 +1,941 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="hfsm_8hpp" kind="file" language="C++">
+    <compoundname>hfsm.hpp</compoundname>
+    <includes local="no">string</includes>
+    <includes refid="base__fsm_8hpp" local="yes">rcppsw/patterns/fsm/base_fsm.hpp</includes>
+    <includes refid="hfsm__state_8hpp" local="yes">rcppsw/patterns/fsm/hfsm_state.hpp</includes>
+    <incdepgraph>
+      <node id="28">
+        <label>rcppsw/patterns/fsm/event.hpp</label>
+        <link refid="event_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>boost/stacktrace.hpp</label>
+      </node>
+      <node id="17">
+        <label>log4cxx/fileappender.h</label>
+      </node>
+      <node id="11">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="10">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>log4cxx/xml/domconfigurator.h</label>
+      </node>
+      <node id="25">
+        <label>cassert</label>
+      </node>
+      <node id="23">
+        <label>rcppsw/er/stacktrace.hpp</label>
+        <link refid="stacktrace_8hpp"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="32">
+        <label>rcppsw/patterns/fsm/state_entry.hpp</label>
+        <link refid="state__entry_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>log4cxx/patternlayout.h</label>
+      </node>
+      <node id="38">
+        <label>rcppsw/patterns/fsm/state_map_row.hpp</label>
+        <link refid="state__map__row_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp</label>
+        <link refid="hfsm_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>log4cxx/ndc.h</label>
+      </node>
+      <node id="39">
+        <label>rcppsw/patterns/fsm/hfsm_state.hpp</label>
+        <link refid="hfsm__state_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>log4cxx/consoleappender.h</label>
+      </node>
+      <node id="15">
+        <label>rcppsw/er/er.hpp</label>
+        <link refid="er_8hpp"/>
+      </node>
+      <node id="13">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>cstdio</label>
+      </node>
+      <node id="30">
+        <label>rcppsw/patterns/fsm/state.hpp</label>
+        <link refid="state_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>rcppsw/patterns/fsm/state_exit_action.hpp</label>
+        <link refid="state__exit__action_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>rcppsw/patterns/fsm/state_guard.hpp</label>
+        <link refid="state__guard_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>utility</label>
+      </node>
+      <node id="8">
+        <label>array</label>
+      </node>
+      <node id="34">
+        <label>rcppsw/patterns/fsm/state_exit.hpp</label>
+        <link refid="state__exit_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>iostream</label>
+      </node>
+      <node id="12">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>cstddef</label>
+      </node>
+      <node id="29">
+        <label>rcppsw/patterns/fsm/state_action.hpp</label>
+        <link refid="state__action_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>rcppsw/patterns/fsm/state_guard_action.hpp</label>
+        <link refid="state__guard__action_8hpp"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>rcppsw/er/client.hpp</label>
+        <link refid="client_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>type_traits</label>
+      </node>
+      <node id="3">
+        <label>rcppsw/patterns/fsm/base_fsm.hpp</label>
+        <link refid="base__fsm_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>rcppsw/er/macros.hpp</label>
+        <link refid="er_2macros_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>log4cxx/logger.h</label>
+      </node>
+      <node id="31">
+        <label>rcppsw/patterns/fsm/state_entry_action.hpp</label>
+        <link refid="state__entry__action_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>rcppsw/patterns/fsm/state_map_ex_row.hpp</label>
+        <link refid="state__map__ex__row_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm" prot="public">rcppsw::patterns::fsm::hfsm</innerclass>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns">rcppsw::patterns</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1patterns_1_1fsm">rcppsw::patterns::fsm</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="hfsm_8hpp_1a569b518ce0c2a22dd23e33f247d23c8f" prot="public" static="no">
+        <name>RCPPSW_HFSM_CONSTRUCT_STATE</name>
+        <param><defname>state_name</defname></param>
+        <param><defname>parent</defname></param>
+        <initializer>state_name(static_cast&lt;<ref refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state" kindref="compound">rcppsw::patterns::fsm::hfsm_state</ref>*&gt;(parent))</initializer>
+        <briefdescription>
+<para>Construct a previously declared/inherited state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Should be called in the constructor, and passed the desired parent state. This cannot be done at state declaration (from the compiler&apos;s point of view), because of the way templating works (I think). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="221" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="225" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1a7f6ff8b7c300043296606ac06ef34b77" prot="public" static="no">
+        <name>RCPPSW_HFSM_DECLARE_STATE_MAP</name>
+        <param><defname>type</defname></param>
+        <param><defname>name</defname></param>
+        <param><defname>n_entries</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1ad21add893b4681b75f3330628a9cef82" kindref="member">RCPPSW_FSM_DECLARE_STATE_MAP</ref>(type, name, n_entries)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="301" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="305" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1a7c0378cf6ef0957182091c676ba82751" prot="public" static="no">
+        <name>RCPPSW_HFSM_DEFINE_STATE_MAP</name>
+        <param><defname>name</defname></param>
+        <param><defname>...</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1a106e381ed3ccaa73c3ca8df4b21dbfe4" kindref="member">RCPPSW_FSM_DEFINE_STATE_MAP</ref>(name, __VA_ARGS__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="304" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="308" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1abfeb3292116c0baa3c634018527e10e8" prot="public" static="no">
+        <name>RCPPSW_HFSM_DEFINE_STATE_MAP_ACCESSOR</name>
+        <param><defname>type</defname></param>
+        <param><defname>index_var</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1abb60c7531dd9aaec7ed7f797ac7166ed" kindref="member">RCPPSW_FSM_DEFINE_STATE_MAP_ACCESSOR</ref>(type, index_var)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="298" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="302" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1a421bdfc9f5d2cb0881d70a5412006f10" prot="public" static="no">
+        <name>RCPPSW_HFSM_DEFINE_TRANSITION_MAP</name>
+        <param><defname>name</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1abceeba8f37d7e7c986f645648c5f6200" kindref="member">RCPPSW_FSM_DEFINE_TRANSITION_MAP</ref>(name)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="289" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="293" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1ae55ddb8922ba607d9048e9a70a22c859" prot="public" static="no">
+        <name>RCPPSW_HFSM_ENTRY_DECLARE</name>
+        <param><defname>FSM</defname></param>
+        <param><defname>entry_name</defname></param>
+        <param><defname>event_data</defname></param>
+        <initializer> public:                                                          \
+  void EN_##entry_name(const event_data*);                        \
+                                                                  \
+ private:                                                         \
+  rcppsw::patterns::fsm::                               \
+      state_entry_action1&lt;FSM, event_data, &amp;FSM::EN_##entry_name&gt; \
+          entry_name</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Declare a state in the current HFSM.</para>
+<para>The entry handler function MUST be public in order for templating to work. Apparently when dealing with non-type template arguments, any argument passed that does not EXACTLY match the one in the template will cause a compilation error if the function is protected (i.e. accessible in derived classes). The solution: make it public. Not the best, because it exposes the inner workings of the state machine, but anyone who is using this class should only be manipulating it through the macros anyway. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="159" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1ad25721f37609784248bc1ff819eafec6" prot="public" static="no">
+        <name>RCPPSW_HFSM_ENTRY_DECLARE_ND</name>
+        <param><defname>FSM</defname></param>
+        <param><defname>entry_name</defname></param>
+        <initializer>  public:                                                               \
+  void EN_##entry_name(void);                                           \
+                                                                        \
+private:                                                                \
+<ref refid="classrcppsw_1_1patterns_1_1fsm_1_1state__entry__action0" kindref="compound">rcppsw::patterns::fsm::state_entry_action0</ref>&lt;FSM, &amp;FSM::EN_##entry_name&gt; \
+entry_name{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Same as <ref refid="hfsm_8hpp_1ae55ddb8922ba607d9048e9a70a22c859" kindref="member">RCPPSW_HFSM_ENTRY_DECLARE()</ref>, but with no data. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="264" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1a4b501816fa38c10af91143cf8f05ee2f" prot="public" static="no">
+        <name>RCPPSW_HFSM_ENTRY_DEFINE</name>
+        <param><defname>FSM</defname></param>
+        <param><defname>entry_name</defname></param>
+        <param><defname>event_data</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1a26c186919a4b2b4eb6c315a0e60ea3e6" kindref="member">RCPPSW_FSM_ENTRY_DEFINE</ref>(FSM, entry_name, event_data)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="182" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1ae16ba8a406aeba812960edf4854e8f0d" prot="public" static="no">
+        <name>RCPPSW_HFSM_ENTRY_DEFINE_ND</name>
+        <param><defname>FSM</defname></param>
+        <param><defname>entry_name</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1a6fba88c00121f3415eadc41d24dd6b23" kindref="member">RCPPSW_FSM_ENTRY_DEFINE_ND</ref>(FSM, entry_name)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="283" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="287" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1afdd984d6d11d319f3e40ba93f69cf619" prot="public" static="no">
+        <name>RCPPSW_HFSM_ENTRY_INHERIT</name>
+        <param><defname>BASE_FSM</defname></param>
+        <param><defname>inherited_name</defname></param>
+        <param><defname>event_data</defname></param>
+        <initializer> private:                                                                       \
+  rcppsw::patterns::fsm::                                             \
+      state_entry_action1&lt;BASE_FSM, event_data, &amp;BASE_FSM::EN_##inherited_name&gt; \
+          inherited_name</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Declare a entry callback in the current HFSM to be inherited from a parent HFSM.</para>
+<para>This can be private because it is just a member variable. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="176" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1afa76ce030542ff10168d5e1a602d7c15" prot="public" static="no">
+        <name>RCPPSW_HFSM_ENTRY_INHERIT_ND</name>
+        <param><defname>BASE_FSM</defname></param>
+        <param><defname>inherited_name</defname></param>
+        <initializer> private:                                                           \
+  rcppsw::patterns::fsm::                                 \
+      state_entry_action0&lt;BASE_FSM, &amp;BASE_FSM::EN_##inherited_name&gt; \
+ inherited_name{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Same as <ref refid="hfsm_8hpp_1afdd984d6d11d319f3e40ba93f69cf619" kindref="member">RCPPSW_HFSM_ENTRY_INHERIT()</ref>, but with no data. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="277" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="281" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1a84284e1085bf1270f34eaa76080336b0" prot="public" static="no">
+        <name>RCPPSW_HFSM_EXIT_DECLARE</name>
+        <param><defname>FSM</defname></param>
+        <param><defname>exit_name</defname></param>
+        <initializer>  public:                                                               \
+  void EX_##exit_name(void);                                            \
+                                                                        \
+private:                                                                \
+<ref refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit__action" kindref="compound">rcppsw::patterns::fsm::state_exit_action</ref>&lt;FSM, &amp;FSM::EX_##exit_name&gt;     \
+exit_name{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Declare an exit callback in the current HFSM. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="204" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1afbb29ae58bfc03e0cb7b279e189e13d8" prot="public" static="no">
+        <name>RCPPSW_HFSM_EXIT_DEFINE</name>
+        <param><defname>FSM</defname></param>
+        <param><defname>exit_name</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1aa0ea31c0c20490670454ed0629b15783" kindref="member">RCPPSW_FSM_EXIT_DEFINE</ref>(FSM, exit_name)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="212" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1a38daed0017442d091d5af00ef7d9f122" prot="public" static="no">
+        <name>RCPPSW_HFSM_EXIT_INHERIT</name>
+        <param><defname>BASE_FSM</defname></param>
+        <param><defname>inherited_name</defname></param>
+        <initializer> private:                                                         \
+  rcppsw::patterns::fsm::                               \
+      state_exit_action&lt;BASE_FSM, &amp;BASE_FSM::EX_##inherited_name&gt; \
+ inherited_name{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Declare an exit callback in the current HFSM to be inherited from a parent HFSM.</para>
+<para>This can be private because it is just a member variable. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="193" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1a0e034c5b8f888aa43830a9f0c383864f" prot="public" static="no">
+        <name>RCPPSW_HFSM_GUARD_DECLARE</name>
+        <param><defname>FSM</defname></param>
+        <param><defname>guard_name</defname></param>
+        <param><defname>event_data</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1a82ae35b954317bea77f350c4ed32a9bf" kindref="member">RCPPSW_FSM_GUARD_DECLARE</ref>(FSM, guard_name, event_data)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="141" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1a218c9be47acb4e88ad3acb2f1160c6b2" prot="public" static="no">
+        <name>RCPPSW_HFSM_GUARD_DECLARE_ND</name>
+        <param><defname>FSM</defname></param>
+        <param><defname>guard_name</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1a7b80757aca15251a256e84f3a6c13bb4" kindref="member">RCPPSW_FSM_GUARD_DECLARE_ND</ref>(FSM, guard_name)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="254" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="258" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1ab17273d0044fa6410dd4e8e50a01a0d1" prot="public" static="no">
+        <name>RCPPSW_HFSM_GUARD_DEFINE</name>
+        <param><defname>FSM</defname></param>
+        <param><defname>guard_name</defname></param>
+        <param><defname>event_data</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1a93e6f3fbe0a7e14dee20dfbea8a14bf9" kindref="member">RCPPSW_FSM_GUARD_DEFINE</ref>(FSM, guard_name, event_data)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="143" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1a4396f62ea3e6282b8cda88e0458c3e85" prot="public" static="no">
+        <name>RCPPSW_HFSM_GUARD_DEFINE_ND</name>
+        <param><defname>FSM</defname></param>
+        <param><defname>guard_name</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1a57affe48a2f92f5de10b91c860eea23f" kindref="member">RCPPSW_FSM_GUARD_DEFINE_ND</ref>(FSM, guard_name)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="256" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="260" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1aba8c7a247769dee1d78993fe82ee40c7" prot="public" static="no">
+        <name>RCPPSW_HFSM_STATE_DECLARE</name>
+        <param><defname>FSM</defname></param>
+        <param><defname>state_name</defname></param>
+        <param><defname>event_data</defname></param>
+        <initializer> public:                                                         \
+  int ST_##state_name(event_data*);                        \
+                                                                 \
+ private:                                                        \
+  rcppsw::patterns::fsm::                              \
+      hfsm_state_action1&lt;FSM, event_data, &amp;FSM::ST_##state_name&gt; \
+          state_name</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Declare a state in the current HFSM.</para>
+<para>The state handler function MUST be public in order for hfsm_state_action1 templating to work. Apparently when dealing with non-type template arguments, any argument passed that does not EXACTLY match the one in the template will cause a compilation error if the function is protected (i.e. accessible in derived classes). The solution: make it public. Not the best, because it exposes the inner workings of the state machine, but anyone who is using this class should only be manipulating it through the macros anyway. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="129" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1ab82ea118a1a446e2d0a443cc92385348" prot="public" static="no">
+        <name>RCPPSW_HFSM_STATE_DECLARE_ND</name>
+        <param><defname>FSM</defname></param>
+        <param><defname>state_name</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>  public:                                                               \
+  int ST_##state_name(void) __VA_ARGS__;                                \
+                                                                        \
+private:                                                                \
+<ref refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action0" kindref="compound">rcppsw::patterns::fsm::hfsm_state_action0</ref>&lt;FSM, &amp;FSM::ST_##state_name&gt; \
+state_name</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Same as <ref refid="hfsm_8hpp_1aba8c7a247769dee1d78993fe82ee40c7" kindref="member">RCPPSW_HFSM_STATE_DECLARE()</ref>, but with no data. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="243" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="247" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1ab012438d01b1a63f12fb8d10f1aca637" prot="public" static="no">
+        <name>RCPPSW_HFSM_STATE_DEFINE</name>
+        <param><defname>FSM</defname></param>
+        <param><defname>state_name</defname></param>
+        <param><defname>event_data</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1ae44cf11beab465c0a6008120ff3ccfe7" kindref="member">RCPPSW_FSM_STATE_DEFINE</ref>(FSM, state_name, event_data)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="138" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1a42c377a10ebc484d2e3a52a895b98bde" prot="public" static="no">
+        <name>RCPPSW_HFSM_STATE_DEFINE_ND</name>
+        <param><defname>FSM</defname></param>
+        <param><defname>state_name</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1a34b5e6fa39098c75b439136d7281910e" kindref="member">RCPPSW_FSM_STATE_DEFINE_ND</ref>(FSM, state_name)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="251" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="255" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1a8434ed2a98fe974ab7d30192b9f79528" prot="public" static="no">
+        <name>RCPPSW_HFSM_STATE_INHERIT</name>
+        <param><defname>BASE_FSM</defname></param>
+        <param><defname>inherited_name</defname></param>
+        <param><defname>event_data</defname></param>
+        <initializer> private:                                                                      \
+  rcppsw::patterns::fsm::                                            \
+      hfsm_state_action1&lt;BASE_FSM, event_data, &amp;BASE_FSM::ST_##inherited_name&gt; \
+          inherited_name</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Declare a state in the current HFSM to be inherited from a parent HFSM.</para>
+<para>This can be private because it is just a member variable. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="110" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1a6e5e2e1d6445d61b2870e8e8ec97feba" prot="public" static="no">
+        <name>RCPPSW_HFSM_STATE_INHERIT_ND</name>
+        <param><defname>BASE_FSM</defname></param>
+        <param><defname>inherited_name</defname></param>
+        <initializer> private:                                                          \
+  rcppsw::patterns::fsm::                                \
+      hfsm_state_action0&lt;BASE_FSM, &amp;BASE_FSM::ST_##inherited_name&gt; \
+          inherited_name</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Same as <ref refid="hfsm_8hpp_1a8434ed2a98fe974ab7d30192b9f79528" kindref="member">RCPPSW_HFSM_STATE_INHERIT()</ref>, but with no data. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="232" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="236" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1abcf7d939058780b62676d74c3735c01d" prot="public" static="no">
+        <name>RCPPSW_HFSM_STATE_MAP_ENTRY</name>
+        <param><defname>state_name</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1ac7b9bc6fd0af7e1404d63fa93c025fbd" kindref="member">RCPPSW_FSM_STATE_MAP_ENTRY</ref>(state_name)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="307" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="311" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1a0e3c64f1b88dcdb873a8fe21cfe503af" prot="public" static="no">
+        <name>RCPPSW_HFSM_STATE_MAP_ENTRY_EX</name>
+        <param><defname>state_name</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1af92a64de21c45a2308fd8c006acd677a" kindref="member">RCPPSW_FSM_STATE_MAP_ENTRY_EX</ref>(state_name)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="306" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="310" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1a9bbfbe999eb67a0d258763e84a7cf4d5" prot="public" static="no">
+        <name>RCPPSW_HFSM_STATE_MAP_ENTRY_EX_ALL</name>
+        <param><defname>state_name</defname></param>
+        <param><defname>guard_name</defname></param>
+        <param><defname>entry_name</defname></param>
+        <param><defname>exit_name</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1a9aaafb3db64e0b2d268d22d092571753" kindref="member">RCPPSW_FSM_STATE_MAP_ENTRY_EX_ALL</ref>(state_name, guard_name, entry_name, exit_name)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="310" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="313" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="hfsm_8hpp_1aa99f0fc82151b8165402891688f4cbb3" prot="public" static="no">
+        <name>RCPPSW_HFSM_VERIFY_TRANSITION_MAP</name>
+        <param><defname>name</defname></param>
+        <param><defname>n_entries</defname></param>
+        <initializer><ref refid="base__fsm_8hpp_1a02dcb91b382a63d1c6cb9d4b73acf189" kindref="member">RCPPSW_FSM_VERIFY_TRANSITION_MAP</ref>(name, n_entries)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" line="292" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" bodystart="296" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2017 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="21"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_PATTERNS_FSM_HFSM_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_PATTERNS_FSM_HFSM_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="base__fsm_8hpp" kindref="compound">rcppsw/patterns/fsm/base_fsm.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hfsm__state_8hpp" kindref="compound">rcppsw/patterns/fsm/hfsm_state.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>patterns,<sp/>fsm);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*<sp/>Class<sp/>Definitions</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="46"><highlight class="keyword">class<sp/></highlight><highlight class="normal">hfsm<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>base_fsm,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>er::client&lt;hfsm&gt;<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>hfsm(uint8_t<sp/>max_states,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>initial_state<sp/>=<sp/>0)</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>base_fsm(max_states,<sp/>initial_state),</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="client_8hpp_1a2e46a4046efab8f06e9e8316c5760a4d" kindref="member">ER_CLIENT_INIT</ref>(</highlight><highlight class="stringliteral">&quot;rcppsw.patterns.fsm.hfsm&quot;</highlight><highlight class="normal">),</highlight></codeline>
+<codeline lineno="56" refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1ab972b29b2e2bc2a546db6dbd9ce203ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_top_state(nullptr)<sp/>{}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/>~<ref refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm" kindref="compound">hfsm</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>init(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1abd0e460b9aa8c2ffef233474c3486dd1" kindref="member">ER_ASSERT</ref>(initial_state()<sp/>&lt;<sp/>event_signal::ekIGNORED,</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Bad<sp/>initial<sp/>state&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>base_fsm::init();</highlight></codeline>
+<codeline lineno="64" refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a6418e104518e7f0b4c6e89e994249b05" refkind="member"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>change_parent(uint8_t<sp/><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1state" kindref="compound">state</ref>,</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1state" kindref="compound">rcppsw::patterns::fsm::state</ref>*<sp/>new_parent);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ST_top_state(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1a77ef3bf40622ab52772e57524467bbbc" kindref="member">ER_FATAL_SENTINEL</ref>(</highlight><highlight class="stringliteral">&quot;Top<sp/>state<sp/>in<sp/>HFSM&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="87" refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a61e88139080279ad7cd17a361cde8361" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action0" kindref="compound">hfsm_state_action0&lt;hfsm, &amp;hfsm::ST_top_state&gt;</ref>*<sp/>top_state(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;m_top_state;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91" refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm_1a8302a271ce6a8b8abc64f2835e2d5019" refkind="member"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>state_engine_step(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1state__map__row" kindref="compound">state_map_row</ref>*<sp/>c_row)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>state_engine_step(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1state__map__ex__row" kindref="compound">state_map_ex_row</ref>*<sp/>c_row_ex)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*<sp/>clang-format<sp/>off<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action0" kindref="compound">hfsm_state_action0&lt;hfsm, &amp;hfsm::ST_top_state&gt;</ref><sp/>m_top_state;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*<sp/>clang-format<sp/>on<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/>*<sp/>State<sp/>Macros<sp/>With<sp/>Data</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="110"><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_STATE_INHERIT(BASE_FSM,<sp/>inherited_name,<sp/>event_data)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="111"><highlight class="preprocessor"><sp/>private:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="112"><highlight class="preprocessor"><sp/><sp/>rcppsw::patterns::fsm::<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="113"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>hfsm_state_action1&lt;BASE_FSM,<sp/>event_data,<sp/>&amp;BASE_FSM::ST_##inherited_name&gt;<sp/>\</highlight></codeline>
+<codeline lineno="114" refid="hfsm_8hpp_1a8434ed2a98fe974ab7d30192b9f79528" refkind="member"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inherited_name</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_STATE_DECLARE(FSM,<sp/>state_name,<sp/>event_data)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="130"><highlight class="preprocessor"><sp/>public:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="131"><highlight class="preprocessor"><sp/><sp/>int<sp/>ST_##state_name(event_data*);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="132"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="133" refid="hfsm_8hpp_1aba8c7a247769dee1d78993fe82ee40c7" refkind="member"><highlight class="preprocessor"><sp/>private:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="134"><highlight class="preprocessor"><sp/><sp/>rcppsw::patterns::fsm::<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="135"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>hfsm_state_action1&lt;FSM,<sp/>event_data,<sp/>&amp;FSM::ST_##state_name&gt;<sp/>\</highlight></codeline>
+<codeline lineno="136"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state_name</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_STATE_DEFINE(FSM,<sp/>state_name,<sp/>event_data)<sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="139"><highlight class="preprocessor"><sp/><sp/>RCPPSW_FSM_STATE_DEFINE(FSM,<sp/>state_name,<sp/>event_data)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_GUARD_DECLARE(FSM,<sp/>guard_name,<sp/>event_data)<sp/>\</highlight></codeline>
+<codeline lineno="142" refid="hfsm_8hpp_1ab012438d01b1a63f12fb8d10f1aca637" refkind="member"><highlight class="preprocessor"><sp/><sp/>RCPPSW_FSM_GUARD_DECLARE(FSM,<sp/>guard_name,<sp/>event_data)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_GUARD_DEFINE(FSM,<sp/>guard_name,<sp/>event_data)<sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="144"><highlight class="preprocessor"><sp/><sp/>RCPPSW_FSM_GUARD_DEFINE(FSM,<sp/>guard_name,<sp/>event_data)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145" refid="hfsm_8hpp_1a0e034c5b8f888aa43830a9f0c383864f" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_ENTRY_DECLARE(FSM,<sp/>entry_name,<sp/>event_data)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="160"><highlight class="preprocessor"><sp/>public:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="161"><highlight class="preprocessor"><sp/><sp/>void<sp/>EN_##entry_name(const<sp/>event_data*);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="162"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="163" refid="hfsm_8hpp_1ae55ddb8922ba607d9048e9a70a22c859" refkind="member"><highlight class="preprocessor"><sp/>private:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="164"><highlight class="preprocessor"><sp/><sp/>rcppsw::patterns::fsm::<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="165"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>state_entry_action1&lt;FSM,<sp/>event_data,<sp/>&amp;FSM::EN_##entry_name&gt;<sp/>\</highlight></codeline>
+<codeline lineno="166"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>entry_name</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_ENTRY_INHERIT(BASE_FSM,<sp/>inherited_name,<sp/>event_data)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="177"><highlight class="preprocessor"><sp/>private:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="178"><highlight class="preprocessor"><sp/><sp/>rcppsw::patterns::fsm::<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="179"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>state_entry_action1&lt;BASE_FSM,<sp/>event_data,<sp/>&amp;BASE_FSM::EN_##inherited_name&gt;<sp/>\</highlight></codeline>
+<codeline lineno="180" refid="hfsm_8hpp_1afdd984d6d11d319f3e40ba93f69cf619" refkind="member"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inherited_name</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_ENTRY_DEFINE(FSM,<sp/>entry_name,<sp/>event_data)<sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="183"><highlight class="preprocessor"><sp/><sp/>RCPPSW_FSM_ENTRY_DEFINE(FSM,<sp/>entry_name,<sp/>event_data)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_EXIT_INHERIT(BASE_FSM,<sp/>inherited_name)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="194"><highlight class="preprocessor"><sp/>private:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="195"><highlight class="preprocessor"><sp/><sp/>rcppsw::patterns::fsm::<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="196"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>state_exit_action&lt;BASE_FSM,<sp/>&amp;BASE_FSM::EX_##inherited_name&gt;<sp/>\</highlight></codeline>
+<codeline lineno="197" refid="hfsm_8hpp_1a38daed0017442d091d5af00ef7d9f122" refkind="member"><highlight class="preprocessor"><sp/>inherited_name{}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_EXIT_DECLARE(FSM,<sp/>exit_name)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="205"><highlight class="preprocessor"><sp/><sp/>public:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="206"><highlight class="preprocessor"><sp/><sp/>void<sp/>EX_##exit_name(void);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="207"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="208" refid="hfsm_8hpp_1a84284e1085bf1270f34eaa76080336b0" refkind="member"><highlight class="preprocessor">private:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="209"><highlight class="preprocessor">rcppsw::patterns::fsm::state_exit_action&lt;FSM,<sp/>&amp;FSM::EX_##exit_name&gt;<sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="210"><highlight class="preprocessor">exit_name{}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_EXIT_DEFINE(FSM,<sp/>exit_name)<sp/>RCPPSW_FSM_EXIT_DEFINE(FSM,<sp/>exit_name)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_CONSTRUCT_STATE(state_name,<sp/>parent)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="222"><highlight class="preprocessor"><sp/><sp/>state_name(static_cast&lt;rcppsw::patterns::fsm::hfsm_state*&gt;(parent))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="225" refid="hfsm_8hpp_1a569b518ce0c2a22dd23e33f247d23c8f" refkind="member"><highlight class="comment"><sp/>*<sp/>State<sp/>Macros<sp/>Without<sp/>Data</highlight></codeline>
+<codeline lineno="226"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="232"><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_STATE_INHERIT_ND(BASE_FSM,<sp/>inherited_name)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="233"><highlight class="preprocessor"><sp/>private:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="234"><highlight class="preprocessor"><sp/><sp/>rcppsw::patterns::fsm::<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="235"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>hfsm_state_action0&lt;BASE_FSM,<sp/>&amp;BASE_FSM::ST_##inherited_name&gt;<sp/>\</highlight></codeline>
+<codeline lineno="236" refid="hfsm_8hpp_1a6e5e2e1d6445d61b2870e8e8ec97feba" refkind="member"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inherited_name</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_STATE_DECLARE_ND(FSM,<sp/>state_name,<sp/>...)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="244"><highlight class="preprocessor"><sp/><sp/>public:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="245"><highlight class="preprocessor"><sp/><sp/>int<sp/>ST_##state_name(void)<sp/>__VA_ARGS__;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="246"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="247" refid="hfsm_8hpp_1ab82ea118a1a446e2d0a443cc92385348" refkind="member"><highlight class="preprocessor">private:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="248"><highlight class="preprocessor">rcppsw::patterns::fsm::hfsm_state_action0&lt;FSM,<sp/>&amp;FSM::ST_##state_name&gt;<sp/>\</highlight></codeline>
+<codeline lineno="249"><highlight class="preprocessor">state_name</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_STATE_DEFINE_ND(FSM,<sp/>state_name)<sp/>\</highlight></codeline>
+<codeline lineno="252"><highlight class="preprocessor"><sp/><sp/>RCPPSW_FSM_STATE_DEFINE_ND(FSM,<sp/>state_name)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_GUARD_DECLARE_ND(FSM,<sp/>guard_name)<sp/>\</highlight></codeline>
+<codeline lineno="255" refid="hfsm_8hpp_1a42c377a10ebc484d2e3a52a895b98bde" refkind="member"><highlight class="preprocessor"><sp/><sp/>RCPPSW_FSM_GUARD_DECLARE_ND(FSM,<sp/>guard_name)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_GUARD_DEFINE_ND(FSM,<sp/>guard_name)<sp/>\</highlight></codeline>
+<codeline lineno="257"><highlight class="preprocessor"><sp/><sp/>RCPPSW_FSM_GUARD_DEFINE_ND(FSM,<sp/>guard_name)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="258" refid="hfsm_8hpp_1a218c9be47acb4e88ad3acb2f1160c6b2" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="264"><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_ENTRY_DECLARE_ND(FSM,<sp/>entry_name)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="265"><highlight class="preprocessor"><sp/><sp/>public:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="266"><highlight class="preprocessor"><sp/><sp/>void<sp/>EN_##entry_name(void);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="267"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="268" refid="hfsm_8hpp_1ad25721f37609784248bc1ff819eafec6" refkind="member"><highlight class="preprocessor">private:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="269"><highlight class="preprocessor">rcppsw::patterns::fsm::state_entry_action0&lt;FSM,<sp/>&amp;FSM::EN_##entry_name&gt;<sp/>\</highlight></codeline>
+<codeline lineno="270"><highlight class="preprocessor">entry_name{}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_ENTRY_INHERIT_ND(BASE_FSM,<sp/>inherited_name)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="278"><highlight class="preprocessor"><sp/>private:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="279"><highlight class="preprocessor"><sp/><sp/>rcppsw::patterns::fsm::<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="280"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>state_entry_action0&lt;BASE_FSM,<sp/>&amp;BASE_FSM::EN_##inherited_name&gt;<sp/>\</highlight></codeline>
+<codeline lineno="281" refid="hfsm_8hpp_1afa76ce030542ff10168d5e1a602d7c15" refkind="member"><highlight class="preprocessor"><sp/>inherited_name{}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="282"><highlight class="normal"></highlight></codeline>
+<codeline lineno="283"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_ENTRY_DEFINE_ND(FSM,<sp/>entry_name)<sp/>\</highlight></codeline>
+<codeline lineno="284"><highlight class="preprocessor"><sp/><sp/>RCPPSW_FSM_ENTRY_DEFINE_ND(FSM,<sp/>entry_name)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"></highlight></codeline>
+<codeline lineno="286"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="287" refid="hfsm_8hpp_1ae16ba8a406aeba812960edf4854e8f0d" refkind="member"><highlight class="comment"><sp/>*<sp/>Transition<sp/>Map<sp/>Macros</highlight></codeline>
+<codeline lineno="288"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="289"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_DEFINE_TRANSITION_MAP(name)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="290"><highlight class="preprocessor"><sp/><sp/>RCPPSW_FSM_DEFINE_TRANSITION_MAP(name)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight></codeline>
+<codeline lineno="292"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_VERIFY_TRANSITION_MAP(name,<sp/>n_entries)<sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="293" refid="hfsm_8hpp_1a421bdfc9f5d2cb0881d70a5412006f10" refkind="member"><highlight class="preprocessor"><sp/><sp/>RCPPSW_FSM_VERIFY_TRANSITION_MAP(name,<sp/>n_entries)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="296" refid="hfsm_8hpp_1aa99f0fc82151b8165402891688f4cbb3" refkind="member"><highlight class="comment"><sp/>*<sp/>State<sp/>Map<sp/>Macros</highlight></codeline>
+<codeline lineno="297"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_DEFINE_STATE_MAP_ACCESSOR(type,<sp/>index_var)<sp/>\</highlight></codeline>
+<codeline lineno="299"><highlight class="preprocessor"><sp/><sp/>RCPPSW_FSM_DEFINE_STATE_MAP_ACCESSOR(type,<sp/>index_var)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="300"><highlight class="normal"></highlight></codeline>
+<codeline lineno="301"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_DECLARE_STATE_MAP(type,<sp/>name,<sp/>n_entries)<sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="302" refid="hfsm_8hpp_1abfeb3292116c0baa3c634018527e10e8" refkind="member"><highlight class="preprocessor"><sp/><sp/>RCPPSW_FSM_DECLARE_STATE_MAP(type,<sp/>name,<sp/>n_entries)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="303"><highlight class="normal"></highlight></codeline>
+<codeline lineno="304"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_DEFINE_STATE_MAP(name,<sp/>...)<sp/>RCPPSW_FSM_DEFINE_STATE_MAP(name,<sp/>__VA_ARGS__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="305" refid="hfsm_8hpp_1a7f6ff8b7c300043296606ac06ef34b77" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="306"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_STATE_MAP_ENTRY_EX(state_name)<sp/>RCPPSW_FSM_STATE_MAP_ENTRY_EX(state_name)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="307"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_STATE_MAP_ENTRY(state_name)<sp/>RCPPSW_FSM_STATE_MAP_ENTRY(state_name)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="308" refid="hfsm_8hpp_1a7c0378cf6ef0957182091c676ba82751" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_HFSM_STATE_MAP_ENTRY_EX_ALL(<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="310" refid="hfsm_8hpp_1a0e3c64f1b88dcdb873a8fe21cfe503af" refkind="member"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>state_name,<sp/>guard_name,<sp/>entry_name,<sp/>exit_name)<sp/>\</highlight></codeline>
+<codeline lineno="311" refid="hfsm_8hpp_1abcf7d939058780b62676d74c3735c01d" refkind="member"><highlight class="preprocessor"><sp/><sp/>RCPPSW_FSM_STATE_MAP_ENTRY_EX_ALL(state_name,<sp/>guard_name,<sp/>entry_name,<sp/>exit_name)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="312"><highlight class="normal"></highlight></codeline>
+<codeline lineno="313" refid="hfsm_8hpp_1a9bbfbe999eb67a0d258763e84a7cf4d5" refkind="member"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(fsm,<sp/>patterns,<sp/><ref refid="namespacercppsw" kindref="compound">rcppsw</ref>);</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"></highlight></codeline>
+<codeline lineno="315"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_PATTERNS_FSM_HFSM_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp"/>
+  </compounddef>
+</doxygen>

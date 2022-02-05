@@ -1,0 +1,55 @@
+.TH "rcppsw::patterns::fsm::state_guard" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::fsm::state_guard \- Abstract guard base class that all guards classes inherit from\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <state_guard\&.hpp>\fP
+.PP
+Inherited by \fBrcppsw::patterns::fsm::state_guard_condition0< SM, Func >\fP, and \fBrcppsw::patterns::fsm::state_guard_condition1< SM, Event, Func >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~state_guard\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual bool \fBinvoke_guard_condition\fP (\fBbase_fsm\fP *sm, const \fBevent_data\fP *) const =0"
+.br
+.RI "Called by the state machine engine to execute a guard condition action\&. If guard condition evaluates to TRUE the state action is executed\&. If FALSE, no state transition is performed\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Abstract guard base class that all guards classes inherit from\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "virtual rcppsw::patterns::fsm::state_guard::~state_guard (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual bool rcppsw::patterns::fsm::state_guard::invoke_guard_condition (\fBbase_fsm\fP * sm, const \fBevent_data\fP *) const\fC [pure virtual]\fP"
+
+.PP
+Called by the state machine engine to execute a guard condition action\&. If guard condition evaluates to TRUE the state action is executed\&. If FALSE, no state transition is performed\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsm\fP A state machine instance\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Returns TRUE if no guard condition or the guard condition evaluates to TRUE\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBrcppsw::patterns::fsm::state_guard_condition1< SM, Event, Func >\fP, and \fBrcppsw::patterns::fsm::state_guard_condition0< SM, Func >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

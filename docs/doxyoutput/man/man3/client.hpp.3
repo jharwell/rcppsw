@@ -1,0 +1,116 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'rcppsw/er/er\&.hpp'\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <memory>\fP
+.br
+\fC#include <log4cxx/consoleappender\&.h>\fP
+.br
+\fC#include <log4cxx/fileappender\&.h>\fP
+.br
+\fC#include <log4cxx/logger\&.h>\fP
+.br
+\fC#include <log4cxx/ndc\&.h>\fP
+.br
+\fC#include <log4cxx/patternlayout\&.h>\fP
+.br
+\fC#include <log4cxx/xml/domconfigurator\&.h>\fP
+.br
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+\fC#include 'rcppsw/er/macros\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBrcppsw::er::client< T >\fP"
+.br
+.RI "A class that can connect to a logging server for logging of important events\&. Basically a thin wrapper around log4cxx\&. If ER_NDEBUG is defined, then this class will mostly compile away to nothing, and most member functions will not be defined\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::er\fP"
+.br
+.RI "The Event Reporting framework used in RCPPSW and its derived projects\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#\fBdefine\fP \fBER_CLIENT_INIT\fP(name)   \fBrer::client\fP<typename std::remove_reference<decltype(*this)>::type>()"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_ENV_VERIFY\fP(\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_LOGFILE_SET\fP(logger,  fname)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_LOGGING_INIT\fP(fname)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_MDC_ADD\fP(key,  value)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_MDC_RM\fP(key)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_NDC_POP\fP(\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBER_NDC_PUSH\fP(s)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface for classes that want to be able to use the ER Server\&.
+.PP
+\fBCopyright\fP
+.RS 4
+2017 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#\fBdefine\fP ER_CLIENT_INIT(name)   \fBrer::client\fP<typename std::remove_reference<decltype(*this)>::type>()"
+
+.SS "#\fBdefine\fP ER_ENV_VERIFY( \&.\&.\&.)"
+
+.SS "#\fBdefine\fP ER_LOGFILE_SET(logger, fname)"
+
+.SS "#\fBdefine\fP ER_LOGGING_INIT(fname)"
+
+.SS "#\fBdefine\fP ER_MDC_ADD(key, value)"
+
+.SS "#\fBdefine\fP ER_MDC_RM(key)"
+
+.SS "#\fBdefine\fP ER_NDC_POP( \&.\&.\&.)"
+
+.SS "#\fBdefine\fP ER_NDC_PUSH(s)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

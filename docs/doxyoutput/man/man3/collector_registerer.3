@@ -1,0 +1,52 @@
+.TH "collector_registerer< TSinkRegisterer >" 3 "Mon Nov 29 2021" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+collector_registerer< TSinkRegisterer > \- After enabled collectors have been parsed from an XML input file, register the enabled collectors with a \fBbase_metrics_manager\fP or a class derived from it\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <collector_registerer\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBcollector_registerer\fP (const \fBcollector_registerer\fP &)=default"
+.br
+.ti -1c
+.RI "\fBcollector_registerer\fP (const TSinkRegisterer &&registerer)"
+.br
+.ti -1c
+.RI "template<typename TPair > void \fBoperator()\fP (const TPair &pair)"
+.br
+.ti -1c
+.RI "\fBcollector_registerer\fP & \fBoperator=\fP (const \fBcollector_registerer\fP &)=default"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TSinkRegisterer>
+.br
+class collector_registerer< TSinkRegisterer >"
+After enabled collectors have been parsed from an XML input file, register the enabled collectors with a \fBbase_metrics_manager\fP or a class derived from it\&. 
+
+This is a separate class from \fBcollector_registerer_impl\fP so you don't ALWAYS have to pass it a list of extra arguments for building some finicky metrics collectors\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TSinkRegisterer > \fBcollector_registerer\fP< TSinkRegisterer >::\fBcollector_registerer\fP (const TSinkRegisterer && registerer)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "template<typename TSinkRegisterer > \fBcollector_registerer\fP< TSinkRegisterer >::\fBcollector_registerer\fP (const \fBcollector_registerer\fP< TSinkRegisterer > &)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TSinkRegisterer > template<typename TPair > void \fBcollector_registerer\fP< TSinkRegisterer >::operator() (const TPair & pair)\fC [inline]\fP"
+
+.SS "template<typename TSinkRegisterer > \fBcollector_registerer\fP& \fBcollector_registerer\fP< TSinkRegisterer >::operator= (const \fBcollector_registerer\fP< TSinkRegisterer > &)\fC [default]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,93 @@
+.TH "rcppsw::math::expression< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math::expression< T > \- A base class for easy swapping/manipulating of mathematical expressions\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <expression\&.hpp>\fP
+.PP
+Inherited by \fBrcppsw::math::ema< T >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBexpression\fP (const \fBexpression\fP &)=default"
+.br
+.ti -1c
+.RI "\fBexpression\fP (const T &last)"
+.br
+.ti -1c
+.RI "\fBexpression\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual \fB~expression\fP (void)=default"
+.br
+.ti -1c
+.RI "T \fBeval\fP (const T &val)"
+.br
+.RI "Evaluate a calculation and set a new value\&. "
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBexpression\fP &other) const"
+.br
+.ti -1c
+.RI "\fBexpression\fP & \fBoperator=\fP (const \fBexpression\fP &)=default"
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBexpression\fP &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator>\fP (const \fBexpression\fP &other) const"
+.br
+.ti -1c
+.RI "void \fBreset\fP (void)"
+.br
+.ti -1c
+.RI "T \fBv\fP (void) const"
+.br
+.RI "Get the last value calculated\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T>
+.br
+class rcppsw::math::expression< T >"
+A base class for easy swapping/manipulating of mathematical expressions\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class T > \fBrcppsw::math::expression\fP< T >::\fBexpression\fP (void)\fC [default]\fP"
+
+.SS "template<class T > \fBrcppsw::math::expression\fP< T >::\fBexpression\fP (const T & last)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "template<class T > virtual \fBrcppsw::math::expression\fP< T >::~\fBexpression\fP (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SS "template<class T > \fBrcppsw::math::expression\fP< T >::\fBexpression\fP (const \fBexpression\fP< T > &)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T > T \fBrcppsw::math::expression\fP< T >::eval (const T & val)\fC [inline]\fP"
+
+.PP
+Evaluate a calculation and set a new value\&. 
+.SS "template<class T > bool \fBrcppsw::math::expression\fP< T >::operator< (const \fBexpression\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<class T > \fBexpression\fP& \fBrcppsw::math::expression\fP< T >::operator= (const \fBexpression\fP< T > &)\fC [default]\fP"
+
+.SS "template<class T > bool \fBrcppsw::math::expression\fP< T >::operator== (const \fBexpression\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<class T > bool \fBrcppsw::math::expression\fP< T >::operator> (const \fBexpression\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<class T > void \fBrcppsw::math::expression\fP< T >::reset (void)\fC [inline]\fP"
+
+.SS "template<class T > T \fBrcppsw::math::expression\fP< T >::v (void) const\fC [inline]\fP"
+
+.PP
+Get the last value calculated\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

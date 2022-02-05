@@ -1,0 +1,120 @@
+.TH "rcppsw::multithread::lockable" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::multithread::lockable \- Simple class allowing explicit declaration that a derived class can be locked (un)conditionally in exclusive write and non-exclusive read-only contexts\&. Used mainly to reduce the if()s where possible\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <lockable\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBlockable\fP (const \fBlockable\fP &)=delete"
+.br
+.ti -1c
+.RI "\fBlockable\fP (\fBlockable\fP &&)=delete"
+.br
+.ti -1c
+.RI "\fBlockable\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual \fB~lockable\fP (void)=default"
+.br
+.ti -1c
+.RI "void \fBlock_rd\fP (std::shared_mutex *mtx) const"
+.br
+.RI "Unconditionally lock \fCmtx\fP for shared reader access\&. "
+.ti -1c
+.RI "void \fBlock_wr\fP (std::shared_mutex *mtx)"
+.br
+.RI "Unconditionally lock \fCmtx\fP for exclusive access\&. "
+.ti -1c
+.RI "void \fBmaybe_lock_rd\fP (std::shared_mutex *mtx, bool cond) const"
+.br
+.RI "Lock \fCmtx\fP for read-only access if \fCcond\fP is \fCTRUE\fP\&. Other readers will still be allowed access to the resource\&. "
+.ti -1c
+.RI "void \fBmaybe_lock_wr\fP (std::shared_mutex *mtx, bool cond)"
+.br
+.RI "Lock \fCmtx\fP for exclusive access if \fCcond\fP is \fCTRUE\fP\&. "
+.ti -1c
+.RI "void \fBmaybe_unlock_rd\fP (std::shared_mutex *mtx, bool cond) const"
+.br
+.RI "Unlock \fCmtx\fP for read-only access if \fCcond\fP is \fCTRUE\fP\&. "
+.ti -1c
+.RI "void \fBmaybe_unlock_wr\fP (std::shared_mutex *mtx, bool cond)"
+.br
+.RI "Unlock \fCmtx\fP for exclusive access if \fCcond\fP is \fCTRUE\fP\&. "
+.ti -1c
+.RI "const \fBlockable\fP & \fBoperator=\fP (const \fBlockable\fP &)=delete"
+.br
+.ti -1c
+.RI "\fBlockable\fP & \fBoperator=\fP (\fBlockable\fP &&)=delete"
+.br
+.ti -1c
+.RI "void \fBunlock_rd\fP (std::shared_mutex *mtx) const"
+.br
+.RI "Unconditionally unlock \fCmtx\fP for shared reader access\&. "
+.ti -1c
+.RI "void \fBunlock_wr\fP (std::shared_mutex *mtx)"
+.br
+.RI "Unconditionally unlock \fCmtx\fP for exclusive access\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Simple class allowing explicit declaration that a derived class can be locked (un)conditionally in exclusive write and non-exclusive read-only contexts\&. Used mainly to reduce the if()s where possible\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::multithread::lockable::lockable (void)\fC [default]\fP"
+
+.SS "virtual rcppsw::multithread::lockable::~lockable (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SS "rcppsw::multithread::lockable::lockable (const \fBlockable\fP &)\fC [delete]\fP"
+
+.SS "rcppsw::multithread::lockable::lockable (\fBlockable\fP &&)\fC [delete]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void rcppsw::multithread::lockable::lock_rd (std::shared_mutex * mtx) const\fC [inline]\fP"
+
+.PP
+Unconditionally lock \fCmtx\fP for shared reader access\&. 
+.SS "void rcppsw::multithread::lockable::lock_wr (std::shared_mutex * mtx)\fC [inline]\fP"
+
+.PP
+Unconditionally lock \fCmtx\fP for exclusive access\&. 
+.SS "void rcppsw::multithread::lockable::maybe_lock_rd (std::shared_mutex * mtx, bool cond) const\fC [inline]\fP"
+
+.PP
+Lock \fCmtx\fP for read-only access if \fCcond\fP is \fCTRUE\fP\&. Other readers will still be allowed access to the resource\&. 
+.SS "void rcppsw::multithread::lockable::maybe_lock_wr (std::shared_mutex * mtx, bool cond)\fC [inline]\fP"
+
+.PP
+Lock \fCmtx\fP for exclusive access if \fCcond\fP is \fCTRUE\fP\&. 
+.SS "void rcppsw::multithread::lockable::maybe_unlock_rd (std::shared_mutex * mtx, bool cond) const\fC [inline]\fP"
+
+.PP
+Unlock \fCmtx\fP for read-only access if \fCcond\fP is \fCTRUE\fP\&. 
+.SS "void rcppsw::multithread::lockable::maybe_unlock_wr (std::shared_mutex * mtx, bool cond)\fC [inline]\fP"
+
+.PP
+Unlock \fCmtx\fP for exclusive access if \fCcond\fP is \fCTRUE\fP\&. 
+.SS "const \fBlockable\fP& rcppsw::multithread::lockable::operator= (const \fBlockable\fP &)\fC [delete]\fP"
+
+.SS "\fBlockable\fP& rcppsw::multithread::lockable::operator= (\fBlockable\fP &&)\fC [delete]\fP"
+
+.SS "void rcppsw::multithread::lockable::unlock_rd (std::shared_mutex * mtx) const\fC [inline]\fP"
+
+.PP
+Unconditionally unlock \fCmtx\fP for shared reader access\&. 
+.SS "void rcppsw::multithread::lockable::unlock_wr (std::shared_mutex * mtx)\fC [inline]\fP"
+
+.PP
+Unconditionally unlock \fCmtx\fP for exclusive access\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

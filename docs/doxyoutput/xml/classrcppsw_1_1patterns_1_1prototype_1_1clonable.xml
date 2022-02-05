@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1prototype_1_1clonable" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>rcppsw::patterns::prototype::clonable</compoundname>
+    <includes refid="clonable_8hpp" local="no">clonable.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1prototype_1_1clonable_1a9685eea9186584a14c426c44d757dd69" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::prototype::clonable&lt; T &gt;::clonable</definition>
+        <argsstring>(const clonable &amp;)=default</argsstring>
+        <name>clonable</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1patterns_1_1prototype_1_1clonable" kindref="compound">clonable</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/clonable.hpp" line="60" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1prototype_1_1clonable_1a8f14f762f8570d0ea3cb27d2d0784642" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::prototype::clonable&lt; T &gt;::clonable</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>clonable</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/clonable.hpp" line="58" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1prototype_1_1clonable_1a63c8bd02f1a9701eb87963043dea17b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::patterns::prototype::clonable&lt; T &gt;::~clonable</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~clonable</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/clonable.hpp" line="59" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1prototype_1_1clonable_1a777274bf47dba8ae03529bf7ac1fc936" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::unique_ptr&lt; T &gt;</type>
+        <definition>virtual std::unique_ptr&lt;T&gt; rcppsw::patterns::prototype::clonable&lt; T &gt;::clone</definition>
+        <argsstring>(void) const =0</argsstring>
+        <name>clone</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Clone the calling object, transfering ownership of the copy explicitly to the calling context. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/clonable.hpp" line="67" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1prototype_1_1clonable_1abb7c5101a6cb0452cb8c7973c89b543d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1patterns_1_1prototype_1_1clonable" kindref="compound">clonable</ref> &amp;</type>
+        <definition>clonable&amp; rcppsw::patterns::prototype::clonable&lt; T &gt;::operator=</definition>
+        <argsstring>(const clonable &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1patterns_1_1prototype_1_1clonable" kindref="compound">clonable</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/clonable.hpp" line="61" column="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Define a class as being capable of being cloned (i.e. a deep copy). I generally prefer this approach when copying objects, because it is explicit and not subject to compiler/language standards around <ref refid="classrcppsw_1_1patterns_1_1prototype_1_1clonable_1abb7c5101a6cb0452cb8c7973c89b543d" kindref="member">operator=()</ref>, AND because the use of std::unique_ptr makes it clear the returned object has nothing to do with the source object. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the class to mark as clonable. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::prototype::clonable&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1prototype_1_1clonable"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/clonable.hpp" line="56" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/clonable.hpp" bodystart="56" bodyend="68"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1prototype_1_1clonable_1a8f14f762f8570d0ea3cb27d2d0784642" prot="public" virt="non-virtual"><scope>rcppsw::patterns::prototype::clonable</scope><name>clonable</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1prototype_1_1clonable_1a9685eea9186584a14c426c44d757dd69" prot="public" virt="non-virtual"><scope>rcppsw::patterns::prototype::clonable</scope><name>clonable</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1prototype_1_1clonable_1a777274bf47dba8ae03529bf7ac1fc936" prot="public" virt="pure-virtual"><scope>rcppsw::patterns::prototype::clonable</scope><name>clone</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1prototype_1_1clonable_1abb7c5101a6cb0452cb8c7973c89b543d" prot="public" virt="non-virtual"><scope>rcppsw::patterns::prototype::clonable</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1prototype_1_1clonable_1a63c8bd02f1a9701eb87963043dea17b9" prot="public" virt="virtual"><scope>rcppsw::patterns::prototype::clonable</scope><name>~clonable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

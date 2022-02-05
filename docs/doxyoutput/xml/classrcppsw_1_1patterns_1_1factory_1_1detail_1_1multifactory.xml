@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1multifactory" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::factory::detail::multifactory</compoundname>
+    <includes refid="multifactory_8hpp" local="no">multifactory.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TType</type>
+      </param>
+      <param>
+        <type>template&lt; class WrappedTBase, typename... &gt; class</type>
+        <declname>TPointerWrapper</declname>
+        <defname>TPointerWrapper</defname>
+      </param>
+      <param>
+        <type>typename TBase</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1multifactory_1a7aea995f16d899b4eb3ce20c891b9716" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::factory::detail::multifactory&lt; TType, TPointerWrapper, TBase &gt;::multifactory</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>multifactory</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" line="72" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1multifactory_1a7645498b980dcd47cc365de1abfc9532" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::patterns::factory::detail::multifactory&lt; TType, TPointerWrapper, TBase &gt;::~multifactory</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~multifactory</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" line="73" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1multifactory_1a448cef77182ecef716177f7b2c6b0d73" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TDerived</type>
+          </param>
+          <param>
+            <type>typename ...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>TPointerWrapper&lt; TBase &gt;</type>
+        <definition>TPointerWrapper&lt;TBase&gt; rcppsw::patterns::factory::detail::multifactory&lt; TType, TPointerWrapper, TBase &gt;::create</definition>
+        <argsstring>(const std::string &amp;name, Args...args)</argsstring>
+        <name>create</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>Args...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" line="91" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" bodystart="91" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1multifactory_1a1e227e19a25a827e7e441c62a4758967" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TDerived</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::patterns::factory::detail::multifactory&lt; TType, TPointerWrapper, TBase &gt;::register_type</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>register_type</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Register a type with the factory, and associate it with the specified name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The type to register must be derived from the factory base class. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" line="82" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" bodystart="82" bodyend="88"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A factory that releases or shares ownership of the created objects to the class/context that requests object creation. Derived types do not have to hve compatible constructor signatures. HOWEVER, though this class can handle heterogenous constructor signatures, you will likely need a switch() to determine what parameters to pass based on the name of the thing you want to build, thus defeating the purpose of a factory to some degree. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the factory.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TBase</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of objects capable of creation from this factory (restricted to this type and its derived types).</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TPointerWrapper</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>std::shared_ptr or std::unique_ptr. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::factory::detail::multifactory&lt; TType, TPointerWrapper, TBase &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1multifactory"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" line="70" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" bodystart="70" bodyend="96"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1multifactory_1a448cef77182ecef716177f7b2c6b0d73" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::detail::multifactory</scope><name>create</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1multifactory_1a7aea995f16d899b4eb3ce20c891b9716" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::detail::multifactory</scope><name>multifactory</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1multifactory_1a1e227e19a25a827e7e441c62a4758967" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::detail::multifactory</scope><name>register_type</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1multifactory_1a7645498b980dcd47cc365de1abfc9532" prot="public" virt="virtual"><scope>rcppsw::patterns::factory::detail::multifactory</scope><name>~multifactory</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_95aba3d6948105df78b99a4cb6dcbff7" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/mpl</compoundname>
+    <innerfile refid="identity_8hpp">identity.hpp</innerfile>
+    <innerfile refid="mpl_8hpp">mpl.hpp</innerfile>
+    <innerfile refid="reflectable_8hpp">reflectable.hpp</innerfile>
+    <innerfile refid="typelist_8hpp">typelist.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition1" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::fsm::state_guard_condition1</compoundname>
+    <basecompoundref refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard" prot="public" virt="non-virtual">rcppsw::patterns::fsm::state_guard</basecompoundref>
+    <includes refid="state__guard__action_8hpp" local="no">state_guard_action.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class SM</type>
+      </param>
+      <param>
+        <type>class Event</type>
+      </param>
+      <param>
+        <type>bool(SM::*)(const Event *)</type>
+        <declname>Func</declname>
+        <defname>Func</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition1_1add75eefd014290c710ad3a8ad4d6daf2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::fsm::state_guard_condition1&lt; SM, Event, Func &gt;::~state_guard_condition1</definition>
+        <argsstring>(void) override=default</argsstring>
+        <name>~state_guard_condition1</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_guard_action.hpp" line="57" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition1_1a68932eb848f27d91363aed9ab0a4704a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::patterns::fsm::state_guard_condition1&lt; SM, Event, Func &gt;::invoke_guard_condition</definition>
+        <argsstring>(base_fsm *sm, const event_data *data) const override</argsstring>
+        <name>invoke_guard_condition</name>
+        <reimplements refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard_1ab4fc458dfd439257b0439a070bc59716">invoke_guard_condition</reimplements>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm" kindref="compound">base_fsm</ref> *</type>
+          <declname>sm</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1patterns_1_1fsm_1_1event__data" kindref="compound">event_data</ref> *</type>
+        </param>
+        <briefdescription>
+<para>Called by the state machine engine to execute a guard condition action. If guard condition evaluates to TRUE the state action is executed. If FALSE, no state transition is performed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state machine instance.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Returns TRUE if no guard condition or the guard condition evaluates to TRUE. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_guard_action.hpp" line="59" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_guard_action.hpp" bodystart="59" bodyend="69"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Condition to determine if a state&apos;s main action should be executed. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>SM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state machine class. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state function event data type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state machine member function pointer that takes ONE argument </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::state_guard_condition1&lt; SM, Event, Func &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition1"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::fsm::state_guard</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::state_guard_condition1&lt; SM, Event, Func &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition1"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::fsm::state_guard</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_guard_action.hpp" line="55" column="48" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_guard_action.hpp" bodystart="55" bodyend="70"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition1_1a68932eb848f27d91363aed9ab0a4704a" prot="public" virt="virtual"><scope>rcppsw::patterns::fsm::state_guard_condition1</scope><name>invoke_guard_condition</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard_1ae53d9b86decff789563840ca8255a862" prot="public" virt="virtual"><scope>rcppsw::patterns::fsm::state_guard_condition1</scope><name>~state_guard</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition1_1add75eefd014290c710ad3a8ad4d6daf2" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::state_guard_condition1</scope><name>~state_guard_condition1</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

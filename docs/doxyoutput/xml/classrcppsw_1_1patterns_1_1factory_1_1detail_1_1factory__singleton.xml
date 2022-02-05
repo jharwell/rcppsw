@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1factory__singleton" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::factory::detail::factory_singleton</compoundname>
+    <basecompoundref refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton" prot="public" virt="non-virtual">rcppsw::patterns::singleton::singleton&lt; base_factory&lt; TType, std::unique_ptr, TBase, Args... &gt; &gt;</basecompoundref>
+    <includes refid="multifactory_8hpp" local="no">multifactory.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TBase</type>
+      </param>
+      <param>
+        <type>typename TType</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Args</declname>
+        <defname>Args</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::patterns::singleton::singleton&lt; base_factory&lt; TType, std::unique_ptr, TBase, Args... &gt; &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::patterns::factory::detail::factory_singleton&lt; TBase, TType, Args &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1factory__singleton"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::patterns::singleton::singleton&lt; base_factory&lt; TType, std::unique_ptr, TBase, Args... &gt; &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::patterns::factory::detail::factory_singleton&lt; TBase, TType, Args &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1factory__singleton"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" line="48" column="69" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" bodystart="45" bodyend="48"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a080214d86ac9c51f69da83a896d331e8" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::detail::factory_singleton</scope><name>instance</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1afe5efa34b5fc04803e8c3583ec255317" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::detail::factory_singleton</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1aefa0b0e4d0dba612e0db004016b1a0ef" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::detail::factory_singleton</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a7c6f169aa093f4606aa656d5a01cdcac" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::detail::factory_singleton</scope><name>singleton</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a1a4420728a87f18d237d14a9fbb8a8bd" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::detail::factory_singleton</scope><name>singleton</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a91423fa6a5a9062bbfc1c1c7162e4a64" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::factory::detail::factory_singleton</scope><name>singleton</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton_1a867cf961a5992f3555d6c7273f04137f" prot="protected" virt="non-virtual"><scope>rcppsw::patterns::factory::detail::factory_singleton</scope><name>~singleton</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

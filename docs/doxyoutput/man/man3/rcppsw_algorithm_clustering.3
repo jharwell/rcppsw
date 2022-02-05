@@ -1,0 +1,75 @@
+.TH "rcppsw::algorithm::clustering" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::algorithm::clustering \- Different clustering algorithms: kmeans, entropy\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBcluster\fP"
+.br
+.ti -1c
+.RI " \fBmembership\fP"
+.br
+.ti -1c
+.RI " \fBpolicy\fP"
+.br
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "interface \fBbase_clustering_impl\fP"
+.br
+.RI "Templated class interface to guide the implementation of various clustering algorithms by giving them a necessary set of functions to implement so that they can be then run in an implementation agnostic way\&. "
+.ti -1c
+.RI "class \fBeh_cluster\fP"
+.br
+.RI "A cluster representation for \fBEH\fP clustering algorithms\&. "
+.ti -1c
+.RI "interface \fBeh_clustering_impl\fP"
+.br
+.RI "Templated implementation class interface to guide the implementation of various Event Horizon (EH) clustering algorithms\&. "
+.ti -1c
+.RI "class \fBentropy_balch2000\fP"
+.br
+.RI "Wrapper class for performing clustering using the event horizon model in which all points within a specified distance (horizon) to a point i are included in its cluster\&. Implements the following algorithm from Balch2000: "
+.ti -1c
+.RI "class \fBentropy_eh_omp\fP"
+.br
+.RI "Parallel clustering using the Event Horizon (EH) membership policy with OpenMP\&. Suitable for information entropy calculations\&. "
+.ti -1c
+.RI "class \fBkmeans\fP"
+.br
+.RI "Wrapper class for performing kmeans clustering\&. "
+.ti -1c
+.RI "class \fBkmeans_omp\fP"
+.br
+.RI "Parallel clustering using OpenMP using the Nearest Centroid (NC) membership policy\&. Suitable for kmeans clustering\&. "
+.ti -1c
+.RI "class \fBnc_cluster\fP"
+.br
+.RI "A cluster representation for \fBNC\fP clustering algorithms\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<typename Policy > using \fBmembership_type\fP = typename \fBmembership::mapping\fP< Policy >::type"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Different clustering algorithms: kmeans, entropy\&. 
+.SH "Typedef Documentation"
+.PP 
+.SS "template<typename Policy > using \fBrcppsw::algorithm::clustering::membership_type\fP = typedef typename \fBmembership::mapping\fP<Policy>::type"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

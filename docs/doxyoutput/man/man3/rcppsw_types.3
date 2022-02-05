@@ -1,0 +1,107 @@
+.TH "rcppsw::types" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::types \- Common non-primitive types: Spatial distance/range, timestep, UUID for types, named type (for eliminating bugs caused by implicit conversions between primitive types which do not elicit a compiler warning)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBdistance_measure\fP"
+.br
+.RI "Specifies a distance between two points\&. "
+.ti -1c
+.RI "class \fBmanhattan_dist\fP"
+.br
+.RI "Specifies a distance between two points in manhattan distance, and as such is always positive\&. "
+.ti -1c
+.RI "class \fBnamed_type\fP"
+.br
+.RI "A strong typing wrapper to be used around POD types to make implicit conversions impossible (ESPECCIALLY when the necessary compiler warnings are disabled), and force the user to be explicit about converting\&. "
+.ti -1c
+.RI "class \fBspatial_dist\fP"
+.br
+.RI "Specifies a distance in 'real' spatial space, and as such is always positive\&. "
+.ti -1c
+.RI "class \fBtimestep\fP"
+.br
+.RI "Type to be used for representing timesteps in a simulation environment\&. Meant to reduce the arbritrary (possibly erroneous) manipulations possible with simulation time via implicit conversion\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBdiscretize_ratio\fP = \fBnamed_type\fP< double, struct discretize_ratio_tag >"
+.br
+.RI "Specifies the ratio of discretized space to real space, and therefore should always be <= 1\&.0\&. "
+.ti -1c
+.RI "using \fBspatial_range\fP = \fBmath::range\fP< \fBtypes::spatial_dist\fP >"
+.br
+.RI "A \fBrmath::range<T>\fP of \fBrtypes::spatial_dist\fP\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBspatial_dist\fP \fBoperator*\fP (double lhs, const \fBspatial_dist\fP &rhs)"
+.br
+.ti -1c
+.RI "\fBspatial_dist\fP \fBoperator+\fP (double lhs, const \fBspatial_dist\fP &rhs)"
+.br
+.ti -1c
+.RI "\fBmanhattan_dist\fP \fBoperator+\fP (int lhs, const \fBmanhattan_dist\fP &rhs)"
+.br
+.ti -1c
+.RI "\fBspatial_dist\fP \fBoperator\-\fP (double lhs, const \fBspatial_dist\fP &rhs)"
+.br
+.ti -1c
+.RI "\fBmanhattan_dist\fP \fBoperator\-\fP (int lhs, const \fBmanhattan_dist\fP &rhs)"
+.br
+.ti -1c
+.RI "\fBspatial_dist\fP \fBoperator/\fP (double lhs, const \fBspatial_dist\fP &rhs)"
+.br
+.ti -1c
+.RI "bool \fBoperator<=\fP (double lhs, const \fBspatial_dist\fP &rhs)"
+.br
+.ti -1c
+.RI "bool \fBoperator<=\fP (int lhs, const \fBmanhattan_dist\fP &rhs)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Common non-primitive types: Spatial distance/range, timestep, UUID for types, named type (for eliminating bugs caused by implicit conversions between primitive types which do not elicit a compiler warning)\&. 
+.SH "Typedef Documentation"
+.PP 
+.SS "\fBrcppsw::types::discretize_ratio\fP"
+
+.PP
+Specifies the ratio of discretized space to real space, and therefore should always be <= 1\&.0\&. 
+.SS "\fBrcppsw::types::spatial_range\fP"
+
+.PP
+A \fBrmath::range<T>\fP of \fBrtypes::spatial_dist\fP\&. 
+.SH "Function Documentation"
+.PP 
+.SS "\fBspatial_dist\fP rcppsw::types::operator* (double lhs, const \fBspatial_dist\fP & rhs)"
+
+.SS "\fBspatial_dist\fP rcppsw::types::operator+ (double lhs, const \fBspatial_dist\fP & rhs)"
+
+.SS "\fBmanhattan_dist\fP rcppsw::types::operator+ (int lhs, const \fBmanhattan_dist\fP & rhs)"
+
+.SS "\fBspatial_dist\fP rcppsw::types::operator\- (double lhs, const \fBspatial_dist\fP & rhs)"
+
+.SS "\fBmanhattan_dist\fP rcppsw::types::operator\- (int lhs, const \fBmanhattan_dist\fP & rhs)"
+
+.SS "\fBspatial_dist\fP rcppsw::types::operator/ (double lhs, const \fBspatial_dist\fP & rhs)"
+
+.SS "bool rcppsw::types::operator<= (double lhs, const \fBspatial_dist\fP & rhs)"
+
+.SS "bool rcppsw::types::operator<= (int lhs, const \fBmanhattan_dist\fP & rhs)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

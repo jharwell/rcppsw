@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1_1factory__worker" kind="struct" language="C++" prot="private" abstract="yes">
+    <compoundname>rcppsw::patterns::factory::detail::base_factory::factory_worker</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1_1factory__worker_1ae9fca892e7a93ee46a60ed3c12b3ab11" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::patterns::factory::detail::base_factory&lt; TType, TPointerWrapper, TBase, TKeyType, Args &gt;::factory_worker::~factory_worker</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~factory_worker</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" line="130" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1_1factory__worker_1ae18b287868ac5d4e696a57085af3b713" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>TPointerWrapper&lt; TBase &gt;</type>
+        <definition>virtual TPointerWrapper&lt;TBase&gt; rcppsw::patterns::factory::detail::base_factory&lt; TType, TPointerWrapper, TBase, TKeyType, Args &gt;::factory_worker::create</definition>
+        <argsstring>(Args...args)=0</argsstring>
+        <name>create</name>
+        <param>
+          <type>Args...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" line="131" column="29"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Helper interface class to actually do object creation. Must be nested <emphasis>inside</emphasis> the factory class so that we can use the variadic arguments passed to the template AND still be able to use virtual functions. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::factory::detail::base_factory&lt; TType, TPointerWrapper, TBase, TKeyType, Args &gt;::factory_worker</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" line="129" column="23" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" bodystart="129" bodyend="132"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1_1factory__worker_1ae18b287868ac5d4e696a57085af3b713" prot="public" virt="pure-virtual"><scope>rcppsw::patterns::factory::detail::base_factory::factory_worker</scope><name>create</name></member>
+      <member refid="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1_1factory__worker_1ae9fca892e7a93ee46a60ed3c12b3ab11" prot="public" virt="virtual"><scope>rcppsw::patterns::factory::detail::base_factory::factory_worker</scope><name>~factory_worker</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

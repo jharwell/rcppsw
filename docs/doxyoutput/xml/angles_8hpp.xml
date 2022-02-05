@@ -1,0 +1,311 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="angles_8hpp" kind="file" language="C++">
+    <compoundname>angles.hpp</compoundname>
+    <includes local="yes">rcsw/common/compilers.h</includes>
+    <includes refid="degrees_8hpp" local="yes">rcppsw/math/degrees.hpp</includes>
+    <includes refid="radians_8hpp" local="yes">rcppsw/math/radians.hpp</includes>
+    <includes refid="rcppsw_8hpp" local="yes">rcppsw/rcppsw.hpp</includes>
+    <incdepgraph>
+      <node id="34">
+        <label>rcppsw/math/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>limits</label>
+      </node>
+      <node id="25">
+        <label>boost/stacktrace.hpp</label>
+      </node>
+      <node id="13">
+        <label>log4cxx/fileappender.h</label>
+      </node>
+      <node id="3">
+        <label>rcppsw/math/degrees.hpp</label>
+        <link refid="degrees_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="19">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>rcppsw/utils/string_utils.hpp</label>
+        <link refid="string__utils_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>log4cxx/xml/domconfigurator.h</label>
+      </node>
+      <node id="4">
+        <label>cmath</label>
+      </node>
+      <node id="27">
+        <label>cassert</label>
+      </node>
+      <node id="24">
+        <label>rcppsw/er/stacktrace.hpp</label>
+        <link refid="stacktrace_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>string</label>
+      </node>
+      <node id="7">
+        <label>rcppsw/math/range.hpp</label>
+        <link refid="range_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>log4cxx/patternlayout.h</label>
+      </node>
+      <node id="2">
+        <label>rcsw/common/compilers.h</label>
+        <link refid="compilers_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="18">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>log4cxx/ndc.h</label>
+      </node>
+      <node id="12">
+        <label>log4cxx/consoleappender.h</label>
+      </node>
+      <node id="10">
+        <label>rcppsw/er/er.hpp</label>
+        <link refid="er_8hpp"/>
+      </node>
+      <node id="22">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/angles.hpp</label>
+        <link refid="angles_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>vector</label>
+      </node>
+      <node id="33">
+        <label>rcppsw/er/stringizable.hpp</label>
+        <link refid="stringizable_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>utility</label>
+      </node>
+      <node id="26">
+        <label>array</label>
+      </node>
+      <node id="31">
+        <label>sstream</label>
+      </node>
+      <node id="36">
+        <label>rcppsw/math/radians.hpp</label>
+        <link refid="radians_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>iosfwd</label>
+      </node>
+      <node id="28">
+        <label>iostream</label>
+      </node>
+      <node id="21">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>rcppsw/er/client.hpp</label>
+        <link refid="client_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>type_traits</label>
+      </node>
+      <node id="23">
+        <label>rcppsw/er/macros.hpp</label>
+        <link refid="er_2macros_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>log4cxx/logger.h</label>
+      </node>
+      <node id="11">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1math">rcppsw::math</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2018 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="21"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_MATH_ANGLES_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_MATH_ANGLES_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="compilers_8h.html" kindref="compound" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">rcsw/common/compilers.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="degrees_8hpp" kindref="compound">rcppsw/math/degrees.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="radians_8hpp" kindref="compound">rcppsw/math/radians.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="rcppsw_8hpp" kindref="compound">rcppsw/rcppsw.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="namespacercppsw_1_1math" refkind="compound"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>math);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*<sp/>Free<sp/>Functions</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref><sp/><ref refid="namespacercppsw_1_1math_1af5131d3da982b91cdb4ec521ddac59b8" kindref="member">to_degrees</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">radians</ref>&amp;<sp/>r)<sp/><ref refid="common_2macros_8hpp_1a080d8af20d6aa955d4db7ef068309a7c" kindref="member">RCPPSW_PURE</ref>;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">radians</ref><sp/><ref refid="namespacercppsw_1_1math_1a84f217d997fcca5cc7480e6973607a13" kindref="member">to_radians</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref>&amp;<sp/>d)<sp/><ref refid="common_2macros_8hpp_1a080d8af20d6aa955d4db7ef068309a7c" kindref="member">RCPPSW_PURE</ref>;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">radians</ref><sp/><ref refid="namespacercppsw_1_1math_1ad9e36b73d4cf7997dd91497a11002a31" kindref="member">normalized_diff</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">radians</ref>&amp;<sp/>angle1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">radians</ref>&amp;<sp/>angle2);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref><sp/><ref refid="namespacercppsw_1_1math_1ad9e36b73d4cf7997dd91497a11002a31" kindref="member">normalized_diff</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref>&amp;<sp/>angle1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref>&amp;<sp/>angle2);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TAngleType&gt;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/>TAngleType<sp/><ref refid="namespacercppsw_1_1math_1a08642e8d3e916a6836bd252d108b4d30" kindref="member">abs</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>TAngleType&amp;<sp/>angle)<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>TAngleType(std::fabs(angle.v()));</highlight></codeline>
+<codeline lineno="78"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="namespacercppsw_1_1math_1a08642e8d3e916a6836bd252d108b4d30" refkind="member"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(math,<sp/><ref refid="namespacercppsw" kindref="compound">rcppsw</ref>);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_MATH_ANGLES_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/angles.hpp"/>
+  </compounddef>
+</doxygen>

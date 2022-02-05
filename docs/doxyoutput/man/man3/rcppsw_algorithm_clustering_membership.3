@@ -1,0 +1,63 @@
+.TH "rcppsw::algorithm::clustering::membership" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::algorithm::clustering::membership
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBmapping\fP"
+.br
+.ti -1c
+.RI "struct \fBmapping< Policy, policy::is_eh< Policy > >\fP"
+.br
+.ti -1c
+.RI "struct \fBmapping< Policy, policy::is_nc< Policy > >\fP"
+.br
+.in -1c
+.SH "Class Documentation"
+.PP 
+.SH "struct rcppsw::algorithm::clustering::membership::mapping"
+.PP 
+
+.SS "template<typename Policy, typename Enable = void>
+.br
+struct rcppsw::algorithm::clustering::membership::mapping< Policy, Enable >"
+
+.SH "struct rcppsw::algorithm::clustering::membership::mapping< Policy, policy::is_eh< Policy > >"
+.PP 
+
+.SS "template<typename Policy>
+.br
+struct rcppsw::algorithm::clustering::membership::mapping< Policy, policy::is_eh< Policy > >"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+typedef vector< unordered_set< size_t > > \fItype\fP 
+.br
+.PP
+.RE
+.PP
+.SH "struct rcppsw::algorithm::clustering::membership::mapping< Policy, policy::is_nc< Policy > >"
+.PP 
+
+.SS "template<typename Policy>
+.br
+struct rcppsw::algorithm::clustering::membership::mapping< Policy, policy::is_nc< Policy > >"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+typedef vector< size_t > \fItype\fP 
+.br
+.PP
+.RE
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

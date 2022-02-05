@@ -1,0 +1,369 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="hgrid3D__vertex__property_8hpp" kind="file" language="C++">
+    <compoundname>hgrid3D_vertex_property.hpp</compoundname>
+    <includes refid="base__vertex__property_8hpp" local="yes">rcppsw/ds/graph/base_vertex_property.hpp</includes>
+    <includes refid="vector3_8hpp" local="yes">rcppsw/math/vector3.hpp</includes>
+    <includedby refid="hgrid3D__spec_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_spec.hpp</includedby>
+    <incdepgraph>
+      <node id="35">
+        <label>rcppsw/math/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>limits</label>
+      </node>
+      <node id="37">
+        <label>rcppsw/math/sphere_vector.hpp</label>
+        <link refid="sphere__vector_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>boost/stacktrace.hpp</label>
+      </node>
+      <node id="19">
+        <label>log4cxx/fileappender.h</label>
+      </node>
+      <node id="9">
+        <label>rcppsw/math/vector3.hpp</label>
+        <link refid="vector3_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="38">
+        <label>rcppsw/math/vector2.hpp</label>
+        <link refid="vector2_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>rcppsw/utils/string_utils.hpp</label>
+        <link refid="string__utils_8hpp"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>log4cxx/xml/domconfigurator.h</label>
+      </node>
+      <node id="10">
+        <label>cmath</label>
+      </node>
+      <node id="28">
+        <label>cassert</label>
+      </node>
+      <node id="25">
+        <label>rcppsw/er/stacktrace.hpp</label>
+        <link refid="stacktrace_8hpp"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
+      <node id="13">
+        <label>rcppsw/math/range.hpp</label>
+        <link refid="range_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>log4cxx/patternlayout.h</label>
+      </node>
+      <node id="3">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>log4cxx/ndc.h</label>
+      </node>
+      <node id="18">
+        <label>log4cxx/consoleappender.h</label>
+      </node>
+      <node id="16">
+        <label>rcppsw/er/er.hpp</label>
+        <link refid="er_8hpp"/>
+      </node>
+      <node id="8">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>vector</label>
+      </node>
+      <node id="34">
+        <label>rcppsw/er/stringizable.hpp</label>
+        <link refid="stringizable_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>utility</label>
+      </node>
+      <node id="27">
+        <label>array</label>
+      </node>
+      <node id="32">
+        <label>sstream</label>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_vertex_property.hpp</label>
+        <link refid="hgrid3D__vertex__property_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>rcppsw/math/radians.hpp</label>
+        <link refid="radians_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>iosfwd</label>
+      </node>
+      <node id="2">
+        <label>rcppsw/ds/graph/base_vertex_property.hpp</label>
+        <link refid="base__vertex__property_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>iostream</label>
+      </node>
+      <node id="7">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>rcppsw/types/discretize_ratio.hpp</label>
+        <link refid="discretize__ratio_8hpp"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>rcppsw/er/client.hpp</label>
+        <link refid="client_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>type_traits</label>
+      </node>
+      <node id="24">
+        <label>rcppsw/er/macros.hpp</label>
+        <link refid="er_2macros_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>log4cxx/logger.h</label>
+      </node>
+      <node id="40">
+        <label>rcppsw/types/named_type.hpp</label>
+        <link refid="named__type_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D.hpp</label>
+        <link refid="hgrid3D_8hpp"/>
+      </node>
+      <node id="4">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp</label>
+        <link refid="hgrid3D__view_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_vertex_property.hpp</label>
+        <link refid="hgrid3D__vertex__property_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_spec.hpp</label>
+        <link refid="hgrid3D__spec_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structrcppsw_1_1ds_1_1graph_1_1hgrid3D__vertex__property" prot="public">rcppsw::ds::graph::hgrid3D_vertex_property</innerclass>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1ds">rcppsw::ds</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1ds_1_1graph">rcppsw::ds::graph</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2021 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="21"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="base__vertex__property_8hpp" kindref="compound">rcppsw/ds/graph/base_vertex_property.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="vector3_8hpp" kindref="compound">rcppsw/math/vector3.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>ds,<sp/>graph);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*<sp/>Class<sp/>Definitions</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="44"><highlight class="keyword">struct<sp/></highlight><highlight class="normal">hgrid3D_vertex_property<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>base_vertex_property<sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">rmath::vector3z</ref><sp/>coord{};</highlight></codeline>
+<codeline lineno="46"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="structrcppsw_1_1ds_1_1graph_1_1hgrid3D__vertex__property" refkind="compound"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(graph,<sp/>ds,<sp/><ref refid="namespacercppsw" kindref="compound">rcppsw</ref>);</highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_vertex_property.hpp"/>
+  </compounddef>
+</doxygen>

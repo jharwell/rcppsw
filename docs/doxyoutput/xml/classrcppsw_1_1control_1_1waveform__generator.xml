@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1control_1_1waveform__generator" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::control::waveform_generator</compoundname>
+    <basecompoundref refid="classrcppsw_1_1patterns_1_1factory_1_1releasing__factory" prot="public" virt="non-virtual">rcppsw::patterns::factory::releasing_factory&lt; base_waveform, std::string, const config::waveform_config * &gt;</basecompoundref>
+    <includes refid="waveform__generator_8hpp" local="no">waveform_generator.hpp</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1control_1_1waveform__generator_1a98ea4eba631e0be5f794006890233fbe" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string rcppsw::control::waveform_generator::kConstant</definition>
+        <argsstring></argsstring>
+        <name>kConstant</name>
+        <initializer>= &quot;Constant&quot;</initializer>
+        <briefdescription>
+<para>Generate a <ref refid="classrcppsw_1_1control_1_1constant__waveform" kindref="compound">constant_waveform</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp" line="84" column="35" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1control_1_1waveform__generator_1a9db80ced1b1036d7727ab63058b2e10d" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string rcppsw::control::waveform_generator::kNull</definition>
+        <argsstring></argsstring>
+        <name>kNull</name>
+        <initializer>= &quot;Null&quot;</initializer>
+        <briefdescription>
+<para>Generate a <ref refid="classrcppsw_1_1control_1_1null__waveform" kindref="compound">null_waveform</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp" line="89" column="35" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1control_1_1waveform__generator_1a869766a5352ad4a9ec3bd2af58ef56ad" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string rcppsw::control::waveform_generator::kSawtooth</definition>
+        <argsstring></argsstring>
+        <name>kSawtooth</name>
+        <initializer>= &quot;Sawtooth&quot;</initializer>
+        <briefdescription>
+<para>Generate a <ref refid="classrcppsw_1_1control_1_1sawtooth__waveform" kindref="compound">sawtooth_waveform</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp" line="79" column="35" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1control_1_1waveform__generator_1a6be555947c2eb4be1ee6db636300e18a" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string rcppsw::control::waveform_generator::kSine</definition>
+        <argsstring></argsstring>
+        <name>kSine</name>
+        <initializer>= &quot;Sine&quot;</initializer>
+        <briefdescription>
+<para>Generate a <ref refid="classrcppsw_1_1control_1_1sine__waveform" kindref="compound">sine_waveform</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp" line="69" column="35" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1control_1_1waveform__generator_1a44af0522714edee1f87667ff01f83ad1" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string rcppsw::control::waveform_generator::kSquare</definition>
+        <argsstring></argsstring>
+        <name>kSquare</name>
+        <initializer>= &quot;Square&quot;</initializer>
+        <briefdescription>
+<para>Generate a <ref refid="classrcppsw_1_1control_1_1square__waveform" kindref="compound">square_waveform</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp" line="74" column="35" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1control_1_1waveform__generator_1a7bedb9295a9f441546c40728ae3e33b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::control::waveform_generator::waveform_generator</definition>
+        <argsstring>(void)</argsstring>
+        <name>waveform_generator</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp" line="91" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1control_1_1waveform__generator_1a9dfdc263f32ede6751b855000726c498" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="classrcppsw_1_1control_1_1base__waveform" kindref="compound">base_waveform</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;base_waveform&gt; rcppsw::control::waveform_generator::operator()</definition>
+        <argsstring>(const std::string &amp;name, const config::waveform_config *config)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1control_1_1config_1_1waveform__config" kindref="compound">config::waveform_config</ref> *</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp" line="94" column="3"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Factory to create waveforms of different types given the name of a waveform. Valid names are: </para>
+    </briefdescription>
+    <detaileddescription>
+<para><itemizedlist>
+<listitem><para><ref refid="classrcppsw_1_1control_1_1waveform__generator_1a6be555947c2eb4be1ee6db636300e18a" kindref="member">kSine</ref> (periodic)</para>
+</listitem><listitem><para><ref refid="classrcppsw_1_1control_1_1waveform__generator_1a44af0522714edee1f87667ff01f83ad1" kindref="member">kSquare</ref> (periodic)</para>
+</listitem><listitem><para><ref refid="classrcppsw_1_1control_1_1waveform__generator_1a869766a5352ad4a9ec3bd2af58ef56ad" kindref="member">kSawtooth</ref> (periodic)</para>
+</listitem><listitem><para><ref refid="classrcppsw_1_1control_1_1waveform__generator_1a98ea4eba631e0be5f794006890233fbe" kindref="member">kConstant</ref> (aperiodic)</para>
+</listitem><listitem><para><ref refid="classrcppsw_1_1control_1_1waveform__generator_1a9db80ced1b1036d7727ab63058b2e10d" kindref="member">kNull</ref> (aperiodic) </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::patterns::factory::releasing_factory&lt; base_waveform, std::string, const config::waveform_config * &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1factory_1_1releasing__factory"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw::patterns::factory::detail::base_factory&lt; detail::factory_releasing_type, std::unique_ptr, base_waveform, std::string, Args... &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::control::waveform_generator</label>
+        <link refid="classrcppsw_1_1control_1_1waveform__generator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::patterns::factory::releasing_factory&lt; base_waveform, std::string, const config::waveform_config * &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1factory_1_1releasing__factory"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw::patterns::factory::detail::base_factory&lt; detail::factory_releasing_type, std::unique_ptr, base_waveform, std::string, Args... &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::control::waveform_generator</label>
+        <link refid="classrcppsw_1_1control_1_1waveform__generator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+kNull</edgelabel>
+          <edgelabel>+kSawtooth</edgelabel>
+          <edgelabel>+kSine</edgelabel>
+          <edgelabel>+kSquare</edgelabel>
+          <edgelabel>+kConstant</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="4">
+        <label>std::string</label>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp" line="64" column="52" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/waveform_generator.hpp" bodystart="61" bodyend="95"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1ab4878ff7354eb99c0a3a52a2c8c6ea6d" prot="public" virt="non-virtual"><scope>rcppsw::control::waveform_generator</scope><name>create</name></member>
+      <member refid="classrcppsw_1_1control_1_1waveform__generator_1a98ea4eba631e0be5f794006890233fbe" prot="public" virt="non-virtual"><scope>rcppsw::control::waveform_generator</scope><name>kConstant</name></member>
+      <member refid="classrcppsw_1_1control_1_1waveform__generator_1a9db80ced1b1036d7727ab63058b2e10d" prot="public" virt="non-virtual"><scope>rcppsw::control::waveform_generator</scope><name>kNull</name></member>
+      <member refid="classrcppsw_1_1control_1_1waveform__generator_1a869766a5352ad4a9ec3bd2af58ef56ad" prot="public" virt="non-virtual"><scope>rcppsw::control::waveform_generator</scope><name>kSawtooth</name></member>
+      <member refid="classrcppsw_1_1control_1_1waveform__generator_1a6be555947c2eb4be1ee6db636300e18a" prot="public" virt="non-virtual"><scope>rcppsw::control::waveform_generator</scope><name>kSine</name></member>
+      <member refid="classrcppsw_1_1control_1_1waveform__generator_1a44af0522714edee1f87667ff01f83ad1" prot="public" virt="non-virtual"><scope>rcppsw::control::waveform_generator</scope><name>kSquare</name></member>
+      <member refid="classrcppsw_1_1control_1_1waveform__generator_1a9dfdc263f32ede6751b855000726c498" prot="public" virt="non-virtual"><scope>rcppsw::control::waveform_generator</scope><name>operator()</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1a6d82ea282d6e32ce743632f249fb724a" prot="public" virt="non-virtual"><scope>rcppsw::control::waveform_generator</scope><name>register_type</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1afa8c84b04fd09d44cd97b2c6505c67b4" prot="public" virt="non-virtual"><scope>rcppsw::control::waveform_generator</scope><name>unregister_type</name></member>
+      <member refid="classrcppsw_1_1control_1_1waveform__generator_1a7bedb9295a9f441546c40728ae3e33b3" prot="public" virt="non-virtual"><scope>rcppsw::control::waveform_generator</scope><name>waveform_generator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1a000d4b0250412166a44ddef9e75ab21d" prot="public" virt="virtual"><scope>rcppsw::control::waveform_generator</scope><name>~base_factory</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1factory_1_1releasing__factory_1a931a4c9130d95d9158243580f7b48ace" prot="public" virt="non-virtual"><scope>rcppsw::control::waveform_generator</scope><name>~releasing_factory</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

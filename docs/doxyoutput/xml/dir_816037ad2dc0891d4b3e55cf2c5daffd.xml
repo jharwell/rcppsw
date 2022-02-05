@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_816037ad2dc0891d4b3e55cf2c5daffd" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/er</compoundname>
+    <innerfile refid="client_8hpp">client.hpp</innerfile>
+    <innerfile refid="er_8hpp">er.hpp</innerfile>
+    <innerfile refid="er_2macros_8hpp">macros.hpp</innerfile>
+    <innerfile refid="stacktrace_8hpp">stacktrace.hpp</innerfile>
+    <innerfile refid="stringizable_8hpp">stringizable.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/"/>
+  </compounddef>
+</doxygen>

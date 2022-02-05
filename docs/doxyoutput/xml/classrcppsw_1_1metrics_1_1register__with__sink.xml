@@ -1,0 +1,380 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1metrics_1_1register__with__sink" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::metrics::register_with_sink</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; register_with_sink&lt; TMetricsManager, TSinkMixin, void &gt; &gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">TSinkMixin</basecompoundref>
+    <includes refid="register__with__sink_8hpp" local="no">register_with_sink.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TMetricsManager</type>
+      </param>
+      <param>
+        <type>typename TSinkMixin</type>
+      </param>
+      <param>
+        <type>typename TExtraArgsType</type>
+        <defval>void</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1metrics_1_1register__with__sink_1a330b3fef4514d2ea2030c8b1fa149b46" prot="public" static="no">
+        <type>typename std::conditional&lt; std::is_same&lt; TExtraArgsType, void &gt;::value, std::tuple&lt; int &gt;, TExtraArgsType &gt;::type</type>
+        <definition>using rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;::extra_args_type =  typename std::conditional&lt; std::is_same&lt;TExtraArgsType, void&gt;::value, std::tuple&lt;int&gt;, TExtraArgsType&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>extra_args_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" line="76" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1metrics_1_1register__with__sink_1ab7879c9376d1842e0fc217cf0d1232f1" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename std::is_same&lt; T, void &gt;</type>
+        <definition>using rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;::no_extra_args =  typename std::is_same&lt;T, void&gt;</definition>
+        <argsstring></argsstring>
+        <name>no_extra_args</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" line="74" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1register__with__sink_1a671ef48ed96222e70ca2289ceca5ce2f" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1metrics_1_1register__with__sink_1a330b3fef4514d2ea2030c8b1fa149b46" kindref="member">extra_args_type</ref></type>
+        <definition>extra_args_type rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;::m_extra_args</definition>
+        <argsstring></argsstring>
+        <name>m_extra_args</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" line="188" column="33" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" bodystart="188" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1register__with__sink_1a5b799fb4f1a2a8839ea03850089a0619" prot="private" static="no" mutable="no">
+        <type>TMetricsManager *const</type>
+        <definition>TMetricsManager* const rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;::m_manager</definition>
+        <argsstring></argsstring>
+        <name>m_manager</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" line="189" column="32" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1register__with__sink_1ab0ebea27479c7414a56c4726c2b3f66e" prot="private" static="no" mutable="no">
+        <type>const <ref refid="namespacercppsw_1_1metrics_1adc89b6e34f69346cce13197bc5c01330" kindref="member">creatable_collector_set</ref></type>
+        <definition>const creatable_collector_set rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;::mc_create_set</definition>
+        <argsstring></argsstring>
+        <name>mc_create_set</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" line="186" column="33" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1register__with__sink_1a9b289bb9175ccee5f5c5017e2fa81cd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;::register_with_sink</definition>
+        <argsstring>(const register_with_sink &amp;)=default</argsstring>
+        <name>register_with_sink</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1register__with__sink" kindref="compound">register_with_sink</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" line="97" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1register__with__sink_1aeccf64a10e94bf3d3d8fa87cc3173ddd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;::register_with_sink</definition>
+        <argsstring>(TMetricsManager *const manager, const creatable_collector_set &amp;set, const extra_args_type &amp;extra_args={})</argsstring>
+        <name>register_with_sink</name>
+        <param>
+          <type>TMetricsManager *const</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1metrics_1adc89b6e34f69346cce13197bc5c01330" kindref="member">creatable_collector_set</ref> &amp;</type>
+          <declname>set</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1register__with__sink_1a330b3fef4514d2ea2030c8b1fa149b46" kindref="member">extra_args_type</ref> &amp;</type>
+          <declname>extra_args</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Initialize the registerer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>manager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The metrics manager to register the collectors with.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>create_set</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Definitions for all the possible collectors to create. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" line="88" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" bodystart="88" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1register__with__sink_1a3769b44c3d58a6865979236860051b49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TSinkTypeWrapped</type>
+          </param>
+          <param>
+            <type>typename TConfig</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;::operator()</definition>
+        <argsstring>(const TSinkTypeWrapped &amp;, const TConfig *config)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const TSinkTypeWrapped &amp;</type>
+        </param>
+        <param>
+          <type>const TConfig *</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" line="100" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" bodystart="100" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1register__with__sink_1af512fd717da51304eaf5e9a35c7ddf6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1metrics_1_1register__with__sink" kindref="compound">register_with_sink</ref> &amp;</type>
+        <definition>register_with_sink&amp; rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;::operator=</definition>
+        <argsstring>(const register_with_sink &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1register__with__sink" kindref="compound">register_with_sink</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" line="96" column="22"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1register__with__sink_1aa7c9a0424d4e5697f93823ec392ee1b9" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="namespacercppsw_1_1metrics_1adc89b6e34f69346cce13197bc5c01330" kindref="member">creatable_collector_set</ref> &amp;</type>
+        <definition>const creatable_collector_set&amp; rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;::creatable_set</definition>
+        <argsstring>(void) const</argsstring>
+        <name>creatable_set</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" line="146" column="33" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" bodystart="146" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1register__with__sink_1a6e8cf5c695c72c3cbdbac87c00055fe8" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TCollector</type>
+          </param>
+          <param>
+            <type>typename TSink</type>
+          </param>
+          <param>
+            <type>typename U</type>
+            <defval>TExtraArgsType</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(!<ref refid="classrcppsw_1_1metrics_1_1register__with__sink_1ab7879c9376d1842e0fc217cf0d1232f1" kindref="member">no_extra_args</ref>&lt; U &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;::do_register</definition>
+        <argsstring>(const std::string &amp;scoped_name, collector_registration_spec&lt; TSink &gt; &amp;&amp;spec)</argsstring>
+        <name>do_register</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>scoped_name</declname>
+        </param>
+        <param>
+          <type><ref refid="structrcppsw_1_1metrics_1_1collector__registration__spec" kindref="compound">collector_registration_spec</ref>&lt; TSink &gt; &amp;&amp;</type>
+          <declname>spec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" line="154" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" bodystart="154" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1register__with__sink_1a6e8cf5c695c72c3cbdbac87c00055fe8" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TCollector</type>
+          </param>
+          <param>
+            <type>typename TSink</type>
+          </param>
+          <param>
+            <type>typename U</type>
+            <defval>TExtraArgsType</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(<ref refid="classrcppsw_1_1metrics_1_1register__with__sink_1ab7879c9376d1842e0fc217cf0d1232f1" kindref="member">no_extra_args</ref>&lt; U &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;::do_register</definition>
+        <argsstring>(const std::string &amp;scoped_name, collector_registration_spec&lt; TSink &gt; &amp;&amp;spec)</argsstring>
+        <name>do_register</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>scoped_name</declname>
+        </param>
+        <param>
+          <type><ref refid="structrcppsw_1_1metrics_1_1collector__registration__spec" kindref="compound">collector_registration_spec</ref>&lt; TSink &gt; &amp;&amp;</type>
+          <declname>spec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" line="177" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" bodystart="177" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1register__with__sink_1ab18137473187b4379212122c217ee405" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>TMetricsManager *</type>
+        <definition>TMetricsManager* rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;::manager</definition>
+        <argsstring>(void) const</argsstring>
+        <name>manager</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" line="145" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" bodystart="145" bodyend="145"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>After enabled collectors have been parsed from an XML input file, register the enabled collectors with a <ref refid="classrcppsw_1_1metrics_1_1base__manager" kindref="compound">base_manager</ref> or a class derived from it. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class is a partial specialization which specializes the generic collector_registerer_impl, which can take an arbitrary # of types, to take a std::tuple which in turn takes an arbitrary # of types. This is a better design than simply having a class that takes an arbitrary # of types, because it makes it clearer that the template parameters are considered a single unit, and are NOT part of the constructor arguments for the class. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;</label>
+        <link refid="classrcppsw_1_1metrics_1_1register__with__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; register_with_sink&lt; TMetricsManager, TSinkMixin, void &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="3">
+        <label>TSinkMixin</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::metrics::register_with_sink&lt; TMetricsManager, TSinkMixin, TExtraArgsType &gt;</label>
+        <link refid="classrcppsw_1_1metrics_1_1register__with__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; register_with_sink&lt; TMetricsManager, TSinkMixin, void &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="3">
+        <label>TSinkMixin</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" line="71" column="44" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp" bodystart="66" bodyend="191"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__with__sink_1aa7c9a0424d4e5697f93823ec392ee1b9" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>creatable_set</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__with__sink_1a6e8cf5c695c72c3cbdbac87c00055fe8" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>do_register</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__with__sink_1a6e8cf5c695c72c3cbdbac87c00055fe8" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>do_register</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__with__sink_1a330b3fef4514d2ea2030c8b1fa149b46" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>extra_args_type</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__with__sink_1a671ef48ed96222e70ca2289ceca5ce2f" prot="private" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>m_extra_args</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__with__sink_1a5b799fb4f1a2a8839ea03850089a0619" prot="private" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>m_manager</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__with__sink_1ab18137473187b4379212122c217ee405" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>manager</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__with__sink_1ab0ebea27479c7414a56c4726c2b3f66e" prot="private" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>mc_create_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__with__sink_1ab7879c9376d1842e0fc217cf0d1232f1" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>no_extra_args</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__with__sink_1a3769b44c3d58a6865979236860051b49" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>operator()</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__with__sink_1af512fd717da51304eaf5e9a35c7ddf6d" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual" ambiguityscope="client&lt; register_with_sink&lt; TMetricsManager, TSinkMixin, void &gt; &gt;::"><scope>rcppsw::metrics::register_with_sink</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__with__sink_1aeccf64a10e94bf3d3d8fa87cc3173ddd" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>register_with_sink</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__with__sink_1a9b289bb9175ccee5f5c5017e2fa81cd5" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>register_with_sink</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::metrics::register_with_sink</scope><name>~client</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

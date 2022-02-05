@@ -1,0 +1,233 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1ds_1_1base__grid__overlay" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::ds::base_grid_overlay</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; base_grid_overlay&lt; TOriginType &gt; &gt;</basecompoundref>
+    <includes refid="base__grid__overlay_8hpp" local="no">base_grid_overlay.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TOriginType</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1base__grid__overlay_1a96e5b9199f0d17c8c3c33961ab2f5189" prot="public" static="no">
+        <type>typename std::conditional&lt; std::is_same&lt; TOriginType, <ref refid="namespacercppsw_1_1math_1aa61ac5b9e211ad9913993fe03c12af7c" kindref="member">math::vector2z</ref> &gt;::value, <ref refid="namespacercppsw_1_1math_1aa61ac5b9e211ad9913993fe03c12af7c" kindref="member">math::vector2z</ref>, <ref refid="namespacercppsw_1_1math_1a72e9a2c7f7fb0b33f22a664371912a36" kindref="member">math::vector3z</ref> &gt;::type</type>
+        <definition>using rcppsw::ds::base_grid_overlay&lt; TOriginType &gt;::origin_dtype =  typename std::conditional&lt;std::is_same&lt;TOriginType, math::vector2z&gt;::value, math::vector2z, math::vector3z&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>origin_dtype</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" line="68" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1base__grid__overlay_1afe8b9dc76f0d8b237f8ea794479966dd" prot="public" static="no">
+        <type>typename std::conditional&lt; std::is_same&lt; TOriginType, <ref refid="namespacercppsw_1_1math_1aeee4cbfec7ec35d102de51e287b8edeb" kindref="member">math::vector2d</ref> &gt;::value, <ref refid="namespacercppsw_1_1math_1aeee4cbfec7ec35d102de51e287b8edeb" kindref="member">math::vector2d</ref>, <ref refid="namespacercppsw_1_1math_1af66a56a5aa1b099f8fa9da9a346847f3" kindref="member">math::vector3d</ref> &gt;::type</type>
+        <definition>using rcppsw::ds::base_grid_overlay&lt; TOriginType &gt;::origin_rtype =  typename std::conditional&lt;std::is_same&lt;TOriginType, math::vector2d&gt;::value, math::vector2d, math::vector3d&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>origin_rtype</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" line="64" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1ds_1_1base__grid__overlay_1ad5b514e44aee02a8174bfb9e42a3faee" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid__overlay_1a96e5b9199f0d17c8c3c33961ab2f5189" kindref="member">origin_dtype</ref></type>
+        <definition>const origin_dtype rcppsw::ds::base_grid_overlay&lt; TOriginType &gt;::mc_origind</definition>
+        <argsstring></argsstring>
+        <name>mc_origind</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" line="101" column="33" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1ds_1_1base__grid__overlay_1aca72908b3c8d9c9ab639f1612995d2fe" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid__overlay_1afe8b9dc76f0d8b237f8ea794479966dd" kindref="member">origin_rtype</ref></type>
+        <definition>const origin_rtype rcppsw::ds::base_grid_overlay&lt; TOriginType &gt;::mc_originr</definition>
+        <argsstring></argsstring>
+        <name>mc_originr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" line="100" column="33" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1ds_1_1base__grid__overlay_1a7668714ea2a2886d87fcf7ff277be155" prot="private" static="no" mutable="no">
+        <type>const <ref refid="namespacercppsw_1_1types_1ae7dfad2612de94a0c90840e1e872dfa0" kindref="member">types::discretize_ratio</ref></type>
+        <definition>const types::discretize_ratio rcppsw::ds::base_grid_overlay&lt; TOriginType &gt;::mc_resolution</definition>
+        <argsstring></argsstring>
+        <name>mc_resolution</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" line="99" column="33" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid__overlay_1ac2caf268914e47144c6522fe40659f2f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::base_grid_overlay&lt; TOriginType &gt;::base_grid_overlay</definition>
+        <argsstring>(const origin_rtype &amp;origin, const types::discretize_ratio &amp;grid_resolution, const types::discretize_ratio &amp;field_resolution)</argsstring>
+        <name>base_grid_overlay</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid__overlay_1afe8b9dc76f0d8b237f8ea794479966dd" kindref="member">origin_rtype</ref> &amp;</type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1types_1ae7dfad2612de94a0c90840e1e872dfa0" kindref="member">types::discretize_ratio</ref> &amp;</type>
+          <declname>grid_resolution</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1types_1ae7dfad2612de94a0c90840e1e872dfa0" kindref="member">types::discretize_ratio</ref> &amp;</type>
+          <declname>field_resolution</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" line="72" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" bodystart="72" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid__overlay_1afb568100d17252a34e067bbc1dc21fbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::ds::base_grid_overlay&lt; TOriginType &gt;::~base_grid_overlay</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~base_grid_overlay</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" line="80" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid__overlay_1ad2539759a5ec1dc2990a2d7b003ec26b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid__overlay_1a96e5b9199f0d17c8c3c33961ab2f5189" kindref="member">origin_dtype</ref> &amp;</type>
+        <definition>const origin_dtype&amp; rcppsw::ds::base_grid_overlay&lt; TOriginType &gt;::origind</definition>
+        <argsstring>(void) const</argsstring>
+        <name>origind</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return the discretized origin of the grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" line="95" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" bodystart="95" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid__overlay_1adc80be69e0e1700c2337c0da479481a7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid__overlay_1afe8b9dc76f0d8b237f8ea794479966dd" kindref="member">origin_rtype</ref> &amp;</type>
+        <definition>const origin_rtype&amp; rcppsw::ds::base_grid_overlay&lt; TOriginType &gt;::originr</definition>
+        <argsstring>(void) const</argsstring>
+        <name>originr</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return the real origin of the grid in real coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" line="90" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid__overlay_1a54243210a50361cc50a9359632d99f0c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="namespacercppsw_1_1types_1ae7dfad2612de94a0c90840e1e872dfa0" kindref="member">types::discretize_ratio</ref> &amp;</type>
+        <definition>const types::discretize_ratio&amp; rcppsw::ds::base_grid_overlay&lt; TOriginType &gt;::resolution</definition>
+        <argsstring>(void) const</argsstring>
+        <name>resolution</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return the resolution of the grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" line="85" column="33" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class for logical grids that are overlayed over a continuous environment. It discretizes the continuous volume into a grid of a specified resolution (e.g. it takes a continuous 10.0 x 5.0 x 5.0 space and discretizes it into a 50 x 25 x 25 grid of cells with a resolution of 0.2). </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The origin of the continuous environment onto which the discretized grid is overlayed are not necessarily the same, so an anchor/origin point for the discretized grid is required. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::er::client&lt; base_grid_overlay&lt; TOriginType &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::base_grid_overlay&lt; TOriginType &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1base__grid__overlay"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::er::client&lt; base_grid_overlay&lt; TOriginType &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::base_grid_overlay&lt; TOriginType &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1base__grid__overlay"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" line="58" column="44" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp" bodystart="58" bodyend="103"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1ds_1_1base__grid__overlay_1ac2caf268914e47144c6522fe40659f2f" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>base_grid_overlay</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid__overlay_1ad5b514e44aee02a8174bfb9e42a3faee" prot="private" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>mc_origind</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid__overlay_1aca72908b3c8d9c9ab639f1612995d2fe" prot="private" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>mc_originr</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid__overlay_1a7668714ea2a2886d87fcf7ff277be155" prot="private" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>mc_resolution</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid__overlay_1a96e5b9199f0d17c8c3c33961ab2f5189" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>origin_dtype</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid__overlay_1afe8b9dc76f0d8b237f8ea794479966dd" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>origin_rtype</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid__overlay_1ad2539759a5ec1dc2990a2d7b003ec26b" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>origind</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid__overlay_1adc80be69e0e1700c2337c0da479481a7" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>originr</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid__overlay_1a54243210a50361cc50a9359632d99f0c" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>resolution</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid__overlay_1afb568100d17252a34e067bbc1dc21fbf" prot="public" virt="virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>~base_grid_overlay</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::ds::base_grid_overlay</scope><name>~client</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

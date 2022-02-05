@@ -1,5 +1,5 @@
 /**
- * \file hgrid3D_graph.hpp
+ * \file hgrid3D.hpp
  *
  * \copyright 2021 John Harwell, All rights reserved.
  *

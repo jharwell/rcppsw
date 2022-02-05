@@ -1,0 +1,256 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::algorithm::clustering::nc_cluster</compoundname>
+    <includes refid="cluster_8hpp" local="no">cluster.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Policy</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a879a76282ab50407137a7beec199532e" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T rcppsw::algorithm::clustering::nc_cluster&lt; T, Policy &gt;::m_center</definition>
+        <argsstring></argsstring>
+        <name>m_center</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="110" column="34" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a616609b745bf064f17cf2794be45492f" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t rcppsw::algorithm::clustering::nc_cluster&lt; T, Policy &gt;::m_id</definition>
+        <argsstring></argsstring>
+        <name>m_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="108" column="34" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a7e35cb850229ae9a12f41d6e61abdafb" prot="private" static="no" mutable="no">
+        <type><ref refid="namespacercppsw_1_1algorithm_1_1clustering_1ae4bdc3c1b255447703e70a19e7c90aef" kindref="member">membership_type</ref>&lt; Policy &gt; &amp;</type>
+        <definition>membership_type&lt;Policy&gt;&amp; rcppsw::algorithm::clustering::nc_cluster&lt; T, Policy &gt;::m_membership</definition>
+        <argsstring></argsstring>
+        <name>m_membership</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="109" column="25" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a37197cd55bc22ed3a356d007ce565be5" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T rcppsw::algorithm::clustering::nc_cluster&lt; T, Policy &gt;::m_prev_center</definition>
+        <argsstring></argsstring>
+        <name>m_prev_center</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="111" column="34" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a80722e8df1e76db56d41e912e3adfe38" prot="private" static="no" mutable="no">
+        <type>const std::vector&lt; T &gt; &amp;</type>
+        <definition>const std::vector&lt;T&gt;&amp; rcppsw::algorithm::clustering::nc_cluster&lt; T, Policy &gt;::mc_data</definition>
+        <argsstring></argsstring>
+        <name>mc_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="106" column="30" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1af0eab49772dce07be4e7c5a7c6af8900" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::algorithm::clustering::nc_cluster&lt; T, Policy &gt;::nc_cluster</definition>
+        <argsstring>(uint id, const std::vector&lt; T &gt; &amp;data, membership_type&lt; Policy &gt; &amp;membership)</argsstring>
+        <name>nc_cluster</name>
+        <param>
+          <type>uint</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacercppsw_1_1algorithm_1_1clustering_1ae4bdc3c1b255447703e70a19e7c90aef" kindref="member">membership_type</ref>&lt; Policy &gt; &amp;</type>
+          <declname>membership</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="56" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="56" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1acfba75742a31fdecde23ecafec7c3d9e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::algorithm::clustering::nc_cluster&lt; T, Policy &gt;::add_point</definition>
+        <argsstring>(size_t idx)</argsstring>
+        <name>add_point</name>
+        <param>
+          <type>size_t</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="66" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a2c3a3b5c2f113d46f7a5c44ee550027d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T&amp; rcppsw::algorithm::clustering::nc_cluster&lt; T, Policy &gt;::center</definition>
+        <argsstring>(void) const</argsstring>
+        <name>center</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="102" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a6885ce2753c2aaf3b59e592a3c9e7983" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(std::is_floating_point&lt; U &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::algorithm::clustering::nc_cluster&lt; T, Policy &gt;::converged</definition>
+        <argsstring>(int=0) const</argsstring>
+        <name>converged</name>
+        <param>
+          <type>int</type>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="78" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="78" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a023eaa03c3bd2bca1ea31d01bab6ac6b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(!std::is_floating_point&lt; U &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::algorithm::clustering::nc_cluster&lt; T, Policy &gt;::converged</definition>
+        <argsstring>(void) const</argsstring>
+        <name>converged</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="74" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="74" bodyend="74"/>
+        <references refid="namespacercppsw_1_1math_1a3de3b99c93e96d09928476864d7ecf59" compoundref="math_8hpp" startline="48">rcppsw::math::kDOUBLE_EPSILON</references>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a217f0af257ea6dcd3785e851d9e77705" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster" kindref="compound">nc_cluster</ref> &amp;</type>
+        <definition>nc_cluster&amp; rcppsw::algorithm::clustering::nc_cluster&lt; T, Policy &gt;::operator=</definition>
+        <argsstring>(const nc_cluster &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster" kindref="compound">nc_cluster</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="64" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1ae784ba448b8cc04c54b94a5911e062d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::algorithm::clustering::nc_cluster&lt; T, Policy &gt;::update_center</definition>
+        <argsstring>(void)</argsstring>
+        <name>update_center</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Update the center (mean) of the points in the cluster after an iteration is finished. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="86" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="86" bodyend="100"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A cluster representation for NC clustering algorithms. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::algorithm::clustering::nc_cluster&lt; T, Policy &gt;</label>
+        <link refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="54" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="54" bodyend="113"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1acfba75742a31fdecde23ecafec7c3d9e" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::nc_cluster</scope><name>add_point</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a2c3a3b5c2f113d46f7a5c44ee550027d" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::nc_cluster</scope><name>center</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a023eaa03c3bd2bca1ea31d01bab6ac6b" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::nc_cluster</scope><name>converged</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a6885ce2753c2aaf3b59e592a3c9e7983" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::nc_cluster</scope><name>converged</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a879a76282ab50407137a7beec199532e" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::nc_cluster</scope><name>m_center</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a616609b745bf064f17cf2794be45492f" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::nc_cluster</scope><name>m_id</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a7e35cb850229ae9a12f41d6e61abdafb" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::nc_cluster</scope><name>m_membership</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a37197cd55bc22ed3a356d007ce565be5" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::nc_cluster</scope><name>m_prev_center</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a80722e8df1e76db56d41e912e3adfe38" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::nc_cluster</scope><name>mc_data</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1af0eab49772dce07be4e7c5a7c6af8900" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::nc_cluster</scope><name>nc_cluster</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1a217f0af257ea6dcd3785e851d9e77705" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::nc_cluster</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster_1ae784ba448b8cc04c54b94a5911e062d4" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::nc_cluster</scope><name>update_center</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

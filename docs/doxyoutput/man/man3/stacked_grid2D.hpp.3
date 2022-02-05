@@ -1,0 +1,60 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <tuple>\fP
+.br
+\fC#include <utility>\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include 'rcppsw/ds/grid2D_overlay\&.hpp'\fP
+.br
+\fC#include 'rcppsw/math/vector2\&.hpp'\fP
+.br
+\fC#include 'rcppsw/types/discretize_ratio\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBrcppsw::ds::stacked_grid2D< TupleTypes >\fP"
+.br
+.RI "A sandwich of N 2D grids of the same size (x,y) dimensions, which can contain different kinds of objects\&. The objects in each layer of the grid are stored contiguously, but the grids themselves are not necessarily contiguous\&. The layers are 0 indexed\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::ds\fP"
+.br
+.RI "Data structures: 2D/3D lattice grids, 2D/3D discretizing grids to overlay onto continuous space, Poisson queue, rtree for 2D space, heterogeneous stacked 2D grid, type map for using in C++ quasi-reflection\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2018 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

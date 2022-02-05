@@ -1,0 +1,381 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1types_1_1spatial__dist" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>rcppsw::types::spatial_dist</compoundname>
+    <basecompoundref refid="classrcppsw_1_1types_1_1distance__measure" prot="public" virt="non-virtual">rcppsw::types::distance_measure&lt; double, struct spatial_dist_tag &gt;</basecompoundref>
+    <includes refid="spatial__dist_8hpp" local="no">spatial_dist.hpp</includes>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1ac9c8ad41267f2b62636cd9467186c0fd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref></type>
+        <definition>static spatial_dist rcppsw::types::spatial_dist::make</definition>
+        <argsstring>(const double &amp;value)</argsstring>
+        <name>make</name>
+        <param>
+          <type>const double &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a <ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> from a numeric value, making it positive if necessary. This incurs a higher runtime cost, and so is a separate function from the constructor, which <emphasis>assumes</emphasis> the <computeroutput>value</computeroutput> to be positive semi-definite. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="56" column="23"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1a887596d1cb23279dcd1d7dc99c9ce64e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::types::spatial_dist::spatial_dist</definition>
+        <argsstring>(const double &amp;v)</argsstring>
+        <name>spatial_dist</name>
+        <param>
+          <type>const double &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="58" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1a08fb715aaca1ebbfd356e3c31f189bcc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::types::spatial_dist::spatial_dist</definition>
+        <argsstring>(const spatial_dist &amp;)=default</argsstring>
+        <name>spatial_dist</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="60" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1aa4c4fa45b80a4d8c6db532ba002e4fb0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::types::spatial_dist::~spatial_dist</definition>
+        <argsstring>(void) override=default</argsstring>
+        <name>~spatial_dist</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="59" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1af3d605d6b5a324235634f68423f77454" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref></type>
+        <definition>spatial_dist rcppsw::types::spatial_dist::operator*</definition>
+        <argsstring>(const spatial_dist &amp;rhs) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="76" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" bodystart="76" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1a4ebbe2a13a1cfa896aceb4bd949995da" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref></type>
+        <definition>spatial_dist rcppsw::types::spatial_dist::operator*</definition>
+        <argsstring>(double rhs) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>double</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="62" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" bodystart="62" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1abf23970ff98c35f9db3f2a6fb1e53423" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref></type>
+        <definition>spatial_dist rcppsw::types::spatial_dist::operator+</definition>
+        <argsstring>(const spatial_dist &amp;rhs) const</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="85" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" bodystart="85" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1ac5178c200d42b19d86b0a17bc7c4cc84" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref></type>
+        <definition>spatial_dist rcppsw::types::spatial_dist::operator+</definition>
+        <argsstring>(double rhs) const</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>double</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="71" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" bodystart="71" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1aa6bf23f3b956e01dbb3a1e2ec11de8fd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+        <definition>spatial_dist&amp; rcppsw::types::spatial_dist::operator+=</definition>
+        <argsstring>(const spatial_dist &amp;rhs)</argsstring>
+        <name>operator+=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="97" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" bodystart="97" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1afadf0b87509f903dba2023c45c71a2b3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref></type>
+        <definition>spatial_dist rcppsw::types::spatial_dist::operator-</definition>
+        <argsstring>(const spatial_dist &amp;rhs) const</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="82" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" bodystart="82" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1ad623c1e1b4e8f4790ccb5c9d93dc062c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref></type>
+        <definition>spatial_dist rcppsw::types::spatial_dist::operator-</definition>
+        <argsstring>(double rhs) const</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>double</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="68" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" bodystart="68" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1ac32f75b75c298829c4e750d2732a68b3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+        <definition>spatial_dist&amp; rcppsw::types::spatial_dist::operator-=</definition>
+        <argsstring>(double rhs)</argsstring>
+        <name>operator-=</name>
+        <param>
+          <type>double</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="89" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" bodystart="89" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1af6eff1d573a2e3588f8fba702218e80d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref></type>
+        <definition>spatial_dist rcppsw::types::spatial_dist::operator/</definition>
+        <argsstring>(const spatial_dist &amp;rhs) const</argsstring>
+        <name>operator/</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="79" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" bodystart="79" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1a51bb9e6a2f6c366c80cb1b02417d647e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref></type>
+        <definition>spatial_dist rcppsw::types::spatial_dist::operator/</definition>
+        <argsstring>(double rhs) const</argsstring>
+        <name>operator/</name>
+        <param>
+          <type>double</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="65" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" bodystart="65" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1spatial__dist_1a3628c7006b56b285487d0460e9605c9b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+        <definition>spatial_dist&amp; rcppsw::types::spatial_dist::operator=</definition>
+        <argsstring>(const spatial_dist &amp;rhs)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1spatial__dist" kindref="compound">spatial_dist</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="93" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" bodystart="93" bodyend="96"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Specifies a distance in &quot;real&quot; spatial space, and as such is always positive. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="3">
+        <label>rcppsw::types::named_type&lt; double, struct spatial_dist_tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>rcppsw::er::client&lt; distance_measure&lt; double, struct spatial_dist_tag &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::types::spatial_dist</label>
+        <link refid="classrcppsw_1_1types_1_1spatial__dist"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::types::distance_measure&lt; double, struct spatial_dist_tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1distance__measure"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="3">
+        <label>rcppsw::types::named_type&lt; double, struct spatial_dist_tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>rcppsw::er::client&lt; distance_measure&lt; double, struct spatial_dist_tag &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::types::spatial_dist</label>
+        <link refid="classrcppsw_1_1types_1_1spatial__dist"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::types::distance_measure&lt; double, struct spatial_dist_tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1distance__measure"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" line="48" column="46" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp" bodystart="48" bodyend="101"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1a1a2df64630ac102d9d432373922e0900" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>distance_measure</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1a8b9eabce8e4ef1226385264a358f7467" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>distance_measure</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1ac9c8ad41267f2b62636cd9467186c0fd" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>make</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1a45531d5cc915d48d5132f711dfb5541b" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>named_type</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1a4ebbe2a13a1cfa896aceb4bd949995da" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator*</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1af3d605d6b5a324235634f68423f77454" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator*</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1ac5178c200d42b19d86b0a17bc7c4cc84" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator+</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1abf23970ff98c35f9db3f2a6fb1e53423" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator+</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1aa6bf23f3b956e01dbb3a1e2ec11de8fd" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator+=</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1ad623c1e1b4e8f4790ccb5c9d93dc062c" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator-</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1afadf0b87509f903dba2023c45c71a2b3" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator-</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1ac32f75b75c298829c4e750d2732a68b3" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator-=</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1a51bb9e6a2f6c366c80cb1b02417d647e" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator/</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1af6eff1d573a2e3588f8fba702218e80d" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator/</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1a4c1fef0674c235cd8523abb84047654e" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator&lt;</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1a174ee7f7675692e22288c07948a4b8b6" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator&lt;=</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1a119ce1e7927cd4ad28c6ed556fc6269a" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator&lt;=</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1a3628c7006b56b285487d0460e9605c9b" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual" ambiguityscope="distance_measure&lt; double, struct spatial_dist_tag &gt;::"><scope>rcppsw::types::spatial_dist</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1a313e22de24f4a672f66da8e593aa7425" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator&gt;</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1ae5abceecbe8e7ee73a12142c080bb4c9" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator&gt;</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1aa9ba96ab2957ce3cdad5857c55fc097d" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator&gt;=</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1afebaafc7a799abb0b72e086d9f06a2a6" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>operator&gt;=</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1ae3adaef7b9d236a163a83fdfc2e8a5c8" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>set</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1a887596d1cb23279dcd1d7dc99c9ce64e" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>spatial_dist</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1a08fb715aaca1ebbfd356e3c31f189bcc" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>spatial_dist</name></member>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1a613eefda69afcc13383029355cb8cfe9" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>stringizable</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1a5be785b00b2a79f27ede7953446c9bad" prot="public" virt="virtual"><scope>rcppsw::types::spatial_dist</scope><name>to_str</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1ab5e5d9c79710dbd92eea31dbe0357de5" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>v</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1aea4a37b0610e8c0aafd27b41d60278d7" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>value_type</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::types::spatial_dist</scope><name>~client</name></member>
+      <member refid="classrcppsw_1_1types_1_1distance__measure_1a90138f34ada5eb86657b6fb869d07bb5" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>~distance_measure</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1ad2fd23fa3879f2cfd77c5ad9c65b9a57" prot="public" virt="virtual"><scope>rcppsw::types::spatial_dist</scope><name>~named_type</name></member>
+      <member refid="classrcppsw_1_1types_1_1spatial__dist_1aa4c4fa45b80a4d8c6db532ba002e4fb0" prot="public" virt="non-virtual"><scope>rcppsw::types::spatial_dist</scope><name>~spatial_dist</name></member>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1ad025418a3c3349948cbea5c6facdb391" prot="public" virt="virtual"><scope>rcppsw::types::spatial_dist</scope><name>~stringizable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

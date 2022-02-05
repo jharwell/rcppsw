@@ -1,0 +1,394 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::algorithm::clustering::entropy_balch2000</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; entropy_balch2000&lt; T &gt; &gt;</basecompoundref>
+    <includes refid="entropy_8hpp" local="no">entropy.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a85372f4788bada11f448caa66f2889a1" prot="public" static="no">
+        <type>typename <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl" kindref="compound">base_clustering_impl</ref>&lt; T, <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1EH" kindref="compound">policy::EH</ref> &gt;::<ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a85372f4788bada11f448caa66f2889a1" kindref="member">cluster_vector</ref></type>
+        <definition>using rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::cluster_vector =  typename base_clustering_impl&lt; T, policy::EH&gt;::cluster_vector</definition>
+        <argsstring></argsstring>
+        <name>cluster_vector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="81" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a1cb2d57a57d667a57df66a4b3ec4b46d" prot="public" static="no">
+        <type>typename <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl" kindref="compound">base_clustering_impl</ref>&lt; T, <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1EH" kindref="compound">policy::EH</ref> &gt;::<ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a1cb2d57a57d667a57df66a4b3ec4b46d" kindref="member">dist_calc_ftype</ref></type>
+        <definition>using rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::dist_calc_ftype =  typename base_clustering_impl&lt; T, policy::EH&gt;::dist_calc_ftype</definition>
+        <argsstring></argsstring>
+        <name>dist_calc_ftype</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="84" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a2d6474261036ecab5026eb5830f5e4d2" prot="public" static="no">
+        <type>std::map&lt; double, <ref refid="namespacercppsw_1_1algorithm_1_1clustering_1ae4bdc3c1b255447703e70a19e7c90aef" kindref="member">membership_type</ref>&lt; <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1EH" kindref="compound">policy::EH</ref> &gt; &gt;</type>
+        <definition>using rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::membership_map =  std::map&lt;double, membership_type&lt;policy::EH&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>membership_map</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="87" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a72bbfc8437ba58a167118b6032850395" prot="public" static="no">
+        <type>std::vector&lt; <ref refid="namespacercppsw_1_1algorithm_1_1clustering_1ae4bdc3c1b255447703e70a19e7c90aef" kindref="member">membership_type</ref>&lt; <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1EH" kindref="compound">policy::EH</ref> &gt; &gt;</type>
+        <definition>using rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::membership_vector =  std::vector&lt;membership_type&lt;policy::EH&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>membership_vector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="89" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a6d3155477d5df5408a019f408c622fc5" prot="private" static="no">
+        <type>typename <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl" kindref="compound">base_clustering_impl</ref>&lt; T, <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1EH" kindref="compound">policy::EH</ref> &gt;::cluster_type</type>
+        <definition>using rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::cluster_type =  typename base_clustering_impl&lt; T, policy::EH&gt;::cluster_type</definition>
+        <argsstring></argsstring>
+        <name>cluster_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="162" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a27636acbb214ad82e99ca74de6e511f7" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a85372f4788bada11f448caa66f2889a1" kindref="member">cluster_vector</ref></type>
+        <definition>cluster_vector rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::m_clusters</definition>
+        <argsstring></argsstring>
+        <name>m_clusters</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="236" column="42" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="236" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1ae6c0cab2f1a6fe6f4e8b588cbb155608" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt;T&gt; rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::m_data</definition>
+        <argsstring></argsstring>
+        <name>m_data</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="227" column="39" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="227" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1af77aa13979d2aa2779b637ccb8b2926e" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1eh__clustering__impl" kindref="compound">eh_clustering_impl</ref>&lt; T &gt; &gt;</type>
+        <definition>std::unique_ptr&lt;eh_clustering_impl&lt;T&gt; &gt; rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::m_impl</definition>
+        <argsstring></argsstring>
+        <name>m_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="237" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a31a8b874fff79ab833da4294f42ca275" prot="private" static="no" mutable="no">
+        <type><ref refid="namespacercppsw_1_1algorithm_1_1clustering_1ae4bdc3c1b255447703e70a19e7c90aef" kindref="member">membership_type</ref>&lt; <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1EH" kindref="compound">policy::EH</ref> &gt;</type>
+        <definition>membership_type&lt;policy::EH&gt; rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::m_membership</definition>
+        <argsstring></argsstring>
+        <name>m_membership</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="228" column="30" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="228" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1aa2833459a198663024d615bddbae9b77" prot="private" static="no" mutable="no">
+        <type><ref refid="namespacercppsw_1_1algorithm_1_1clustering_1ae4bdc3c1b255447703e70a19e7c90aef" kindref="member">membership_type</ref>&lt; <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1EH" kindref="compound">policy::EH</ref> &gt;</type>
+        <definition>membership_type&lt;policy::EH&gt; rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::m_membership_cp</definition>
+        <argsstring></argsstring>
+        <name>m_membership_cp</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>This is a member variable, rather than a local variable in balch2000_iter, in order to reduce dynamic memory management overhead. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="235" column="30" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1ad85812d8eab6a9a415d507407d992a8e" prot="private" static="no" mutable="no">
+        <type>const <ref refid="namespacercppsw_1_1math_1a5ff0a4d528d5429045da4f1d3fd382f2" kindref="member">math::ranged</ref></type>
+        <definition>const math::ranged rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::mc_horizon</definition>
+        <argsstring></argsstring>
+        <name>mc_horizon</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="224" column="42" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1ac643f5d8c7cdff76c7dbf2411207df40" prot="private" static="no" mutable="no">
+        <type>const double</type>
+        <definition>const double rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::mc_horizon_delta</definition>
+        <argsstring></argsstring>
+        <name>mc_horizon_delta</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="225" column="42" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="225" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a972632362bb6007697e2b69f248c2337" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::entropy_balch2000</definition>
+        <argsstring>(std::unique_ptr&lt; eh_clustering_impl&lt; T &gt;&gt; impl, const math::ranged &amp;horizon, double horizon_delta)</argsstring>
+        <name>entropy_balch2000</name>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1eh__clustering__impl" kindref="compound">eh_clustering_impl</ref>&lt; T &gt;&gt;</type>
+          <declname>impl</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1math_1a5ff0a4d528d5429045da4f1d3fd382f2" kindref="member">math::ranged</ref> &amp;</type>
+          <declname>horizon</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>horizon_delta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>impl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The method and policy for clustering. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>horizon</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The min and maximum bounds of distances to use when computing clusters. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>horizon_delta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The step size for moving between the min and max distance bounds; defines # of overall iterations. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="98" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="98" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1aa90a6d33e455efe1839e2040d17c92c0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::run</definition>
+        <argsstring>(const std::vector&lt; T &gt; &amp;data, const dist_calc_ftype &amp;dist_func)</argsstring>
+        <name>run</name>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a1cb2d57a57d667a57df66a4b3ec4b46d" kindref="member">dist_calc_ftype</ref> &amp;</type>
+          <declname>dist_func</declname>
+        </param>
+        <briefdescription>
+<para>Perform entropy based clustering, returning the accumulated entropy across all horizons. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="110" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="110" bodyend="159"/>
+        <references refid="time__utils_8h_1a45b016f1122e07fce3e3881ecafd697b">time_monotonic_sec</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a0aa35c4667402942cb51ab340e7f8cb3" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::balch2000_iter</definition>
+        <argsstring>(const dist_calc_ftype &amp;dist_func, double horizon)</argsstring>
+        <name>balch2000_iter</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a1cb2d57a57d667a57df66a4b3ec4b46d" kindref="member">dist_calc_ftype</ref> &amp;</type>
+          <declname>dist_func</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>horizon</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="178" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="178" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1acf745f70355267bb167f592c8c4f223f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::balch2000_rm_dup_clusters</definition>
+        <argsstring>(membership_type&lt; policy::EH &gt; *const clusters)</argsstring>
+        <name>balch2000_rm_dup_clusters</name>
+        <param>
+          <type><ref refid="namespacercppsw_1_1algorithm_1_1clustering_1ae4bdc3c1b255447703e70a19e7c90aef" kindref="member">membership_type</ref>&lt; <ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1EH" kindref="compound">policy::EH</ref> &gt; *const</type>
+          <declname>clusters</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="203" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="203" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a2f98dacf16302171a8610eee69de4372" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a85372f4788bada11f448caa66f2889a1" kindref="member">cluster_vector</ref></type>
+        <definition>cluster_vector rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;::clusters_init</definition>
+        <argsstring>(void)</argsstring>
+        <name>clusters_init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Method for derived classes to use to initialize centroids in whatever way they choose, and perform first-touch allocation if they want to. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="170" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="170" bodyend="176"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Wrapper class for performing clustering using the event horizon model in which all points within a specified distance (horizon) to a point i are included in its cluster. Implements the following algorithm from Balch2000: </para>
+    </briefdescription>
+    <detaileddescription>
+<para>For each value of horizon:</para>
+<para><orderedlist>
+<listitem><para>Initialize N clusters, one for each datapoint in the input vector.</para>
+</listitem><listitem><para>For each cluster c_i centered at point p_i, check every point p_j (i != j), and if distance(p_i, p_j) &lt;= horizon, add p_j to c_i.</para>
+</listitem><listitem><para>Discard redundant clusters.</para>
+</listitem><listitem><para>Calculate entropy of remaining non-redundant clusters. Entropy is accumulated across all values of horizon.</para>
+</listitem></orderedlist>
+</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the data that is being clustered. It must support the following operations: +=, /=, = . </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::er::client&lt; entropy_balch2000&lt; T &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::er::client&lt; entropy_balch2000&lt; T &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::algorithm::clustering::entropy_balch2000&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" line="73" column="44" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp" bodystart="73" bodyend="233"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a0aa35c4667402942cb51ab340e7f8cb3" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>balch2000_iter</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1acf745f70355267bb167f592c8c4f223f" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>balch2000_rm_dup_clusters</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a6d3155477d5df5408a019f408c622fc5" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>cluster_type</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a85372f4788bada11f448caa66f2889a1" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>cluster_vector</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a2f98dacf16302171a8610eee69de4372" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>clusters_init</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a1cb2d57a57d667a57df66a4b3ec4b46d" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>dist_calc_ftype</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a972632362bb6007697e2b69f248c2337" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>entropy_balch2000</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a27636acbb214ad82e99ca74de6e511f7" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>m_clusters</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1ae6c0cab2f1a6fe6f4e8b588cbb155608" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>m_data</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1af77aa13979d2aa2779b637ccb8b2926e" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>m_impl</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a31a8b874fff79ab833da4294f42ca275" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>m_membership</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1aa2833459a198663024d615bddbae9b77" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>m_membership_cp</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1ad85812d8eab6a9a415d507407d992a8e" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>mc_horizon</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1ac643f5d8c7cdff76c7dbf2411207df40" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>mc_horizon_delta</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a2d6474261036ecab5026eb5830f5e4d2" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>membership_map</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1a72bbfc8437ba58a167118b6032850395" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>membership_vector</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000_1aa90a6d33e455efe1839e2040d17c92c0" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>run</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::algorithm::clustering::entropy_balch2000</scope><name>~client</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

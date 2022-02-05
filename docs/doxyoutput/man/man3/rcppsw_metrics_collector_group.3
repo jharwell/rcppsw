@@ -1,0 +1,227 @@
+.TH "rcppsw::metrics::collector_group" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::collector_group \- A group of N collectors, mapped by name, on which collective operations can be performed, in addition to individual collection; used to reduce code duplication\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <collector_group\&.hpp>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBkey_type\fP = std::string"
+.br
+.ti -1c
+.RI "using \fBmapped_type\fP = std::unique_ptr< \fBbase_collector\fP >"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBcollector_group\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual \fB~collector_group\fP (void)=default"
+.br
+.ti -1c
+.RI "bool \fBcollect\fP (const \fBkey_type\fP &name, const \fBbase_metrics\fP &metrics)"
+.br
+.RI "Collect metrics from the specified collector, passing it the specified metrics set\&. This function only works if you are collecting metrics from something that is present on the \fIsame\fP machine as the collector\&. "
+.ti -1c
+.RI "template<typename TNetworkHandle > bool \fBcollect\fP (const \fBkey_type\fP &name, const TNetworkHandle &handle)"
+.br
+.RI "Collect metrics from the specified collector, passing it the specified metrics set\&. This function only works if you are collecting metrics from something that is present on \fIdifferent\fP machine as the collector (i\&.e\&., over the network)\&. "
+.ti -1c
+.RI "bool \fBcollect_if\fP (const \fBkey_type\fP &name, const \fBbase_metrics\fP &metrics, const std::function< bool(const \fBbase_metrics\fP &)> &predicate)"
+.br
+.RI "Collect metrics from the specified collector, passing it the specified metrics set, but only if the specified condition is met by the metrics\&. "
+.ti -1c
+.RI "template<typename T , typename\&.\&.\&. Args> bool \fBcollector_register\fP (const \fBkey_type\fP &name, Args &&\&.\&.\&. args)"
+.br
+.RI "Add a collector to the group by constructing it in place\&. "
+.ti -1c
+.RI "bool \fBcollector_unregister\fP (const \fBkey_type\fP &name)"
+.br
+.RI "Unregister the collector with mapped name \fCname\fP from the group\&. "
+.ti -1c
+.RI "void \fBfinalize\fP (void)"
+.br
+.RI "Call the \fBbase_collector::finalize()\fP function on all collectors in the group\&. "
+.ti -1c
+.RI "bool \fBflush\fP (bool fail_ok)"
+.br
+.RI "Call the \fBbase_collector::flush()\fP function on all collectors in the group\&. "
+.ti -1c
+.RI "template<typename T > T * \fBget\fP (const \fBkey_type\fP &key)"
+.br
+.RI "Get a reference to a collector by name\&. "
+.ti -1c
+.RI "void \fBinitialize\fP (void)"
+.br
+.RI "Call the \fBbase_collector::initialize()\fP function on all collectors in the group\&. "
+.ti -1c
+.RI "void \fBinterval_reset\fP (void)"
+.br
+.RI "Call the \fBbase_collector::interval_reset()\fP function on all collectors in the group\&. "
+.ti -1c
+.RI "void \fBtimestep_inc\fP (void)"
+.br
+.RI "Call the \fBbase_collector::timestep_inc()\fP function on all collectors in the group\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+A group of N collectors, mapped by name, on which collective operations can be performed, in addition to individual collection; used to reduce code duplication\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "using \fBrcppsw::metrics::collector_group::key_type\fP =  std::string"
+
+.SS "using \fBrcppsw::metrics::collector_group::mapped_type\fP =  std::unique_ptr<\fBbase_collector\fP>"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::metrics::collector_group::collector_group (void)\fC [default]\fP"
+
+.SS "virtual rcppsw::metrics::collector_group::~collector_group (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool rcppsw::metrics::collector_group::collect (const \fBkey_type\fP & name, const \fBbase_metrics\fP & metrics)\fC [inline]\fP"
+
+.PP
+Collect metrics from the specified collector, passing it the specified metrics set\&. This function only works if you are collecting metrics from something that is present on the \fIsame\fP machine as the collector\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP The registered name of the collector\&. 
+.br
+\fImetrics\fP The metrics to collect from\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fCTRUE\fP if the specified collector is registered and collection was successful, \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+.SS "template<typename TNetworkHandle > bool rcppsw::metrics::collector_group::collect (const \fBkey_type\fP & name, const TNetworkHandle & handle)\fC [inline]\fP"
+
+.PP
+Collect metrics from the specified collector, passing it the specified metrics set\&. This function only works if you are collecting metrics from something that is present on \fIdifferent\fP machine as the collector (i\&.e\&., over the network)\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fITNetworkHandle\fP The handle of the metrics to collect (IP address, domain name, etc\&.)\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP The registered name of the collector\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fCTRUE\fP if the specified collector is registered and collection was successful, \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+.SS "bool rcppsw::metrics::collector_group::collect_if (const \fBkey_type\fP & name, const \fBbase_metrics\fP & metrics, const std::function< bool(const \fBbase_metrics\fP &)> & predicate)\fC [inline]\fP"
+
+.PP
+Collect metrics from the specified collector, passing it the specified metrics set, but only if the specified condition is met by the metrics\&. Useful if you have a 'polymorphic' set of metrics that are very similar, but need to be captured in different files, and you don't want to have to derive nearly identical classes to handle it\&. The predicate is evaluated \fIafter\fP checking to see if the specified collector is enabled, because that check has to be done anyway, and predicate evaluation is potentially expensive\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP The name of the collector to collect with\&. 
+.br
+\fImetrics\fP The metrics to collect\&. 
+.br
+\fIpredicate\fP The predicate used to determine if the specified collector should actually be invoked\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fCTRUE\fP if metrics were collected, \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+.SS "template<typename T , typename\&.\&.\&. Args> bool rcppsw::metrics::collector_group::collector_register (const \fBkey_type\fP & name, Args &&\&.\&.\&. args)\fC [inline]\fP"
+
+.PP
+Add a collector to the group by constructing it in place\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIT\fP The type of the collector\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP The key for the collector in the group\&. Should be unique, though it is not a requirement\&. If it is not unique then the older collector that was mapped to that name will NOT be overwritten, and nothing is done\&. You have to remove it first \fBcollector_unregister()\fP\&.
+.br
+\fIargs\fP 0 or more arguments to the collector constructor\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fCTRUE\fP if the collector was successfully registered, and \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+.SS "bool rcppsw::metrics::collector_group::collector_unregister (const \fBkey_type\fP & name)\fC [inline]\fP"
+
+.PP
+Unregister the collector with mapped name \fCname\fP from the group\&. 
+.PP
+\fBReturns\fP
+.RS 4
+\fCTRUE\fP if the collector was successfully unregistered, and \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+.SS "void rcppsw::metrics::collector_group::finalize (void)\fC [inline]\fP"
+
+.PP
+Call the \fBbase_collector::finalize()\fP function on all collectors in the group\&. 
+.SS "bool rcppsw::metrics::collector_group::flush (bool fail_ok)\fC [inline]\fP"
+
+.PP
+Call the \fBbase_collector::flush()\fP function on all collectors in the group\&. \fCfail_ok\fP Is it OK if one or more collectors fail to write due to filesystem I/O errors, or not?
+.PP
+\fBReturns\fP
+.RS 4
+If \fCfail_ok\fP is \fCFALSE\fP, \fCTRUE\fP iff ALL collectors in the group attempted to write out metrics this timestep and were successful, and \fCFALSE\fP otherwise\&. If \fCfail_ok\fP is \fCTRUE\fP, then \fCTRUE\fP if all collectors attempted to write out metrics this timestep, regardless of success, and \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+.SS "template<typename T > T* rcppsw::metrics::collector_group::get (const \fBkey_type\fP & key)\fC [inline]\fP"
+
+.PP
+Get a reference to a collector by name\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP The mapped name of the collector in the group\&. 
+.RE
+.PP
+
+.SS "void rcppsw::metrics::collector_group::initialize (void)\fC [inline]\fP"
+
+.PP
+Call the \fBbase_collector::initialize()\fP function on all collectors in the group\&. 
+.SS "void rcppsw::metrics::collector_group::interval_reset (void)\fC [inline]\fP"
+
+.PP
+Call the \fBbase_collector::interval_reset()\fP function on all collectors in the group\&. 
+.SS "void rcppsw::metrics::collector_group::timestep_inc (void)\fC [inline]\fP"
+
+.PP
+Call the \fBbase_collector::timestep_inc()\fP function on all collectors in the group\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

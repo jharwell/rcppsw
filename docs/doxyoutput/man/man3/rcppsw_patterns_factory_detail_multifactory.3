@@ -1,0 +1,66 @@
+.TH "rcppsw::patterns::factory::detail::multifactory< TType, TPointerWrapper, TBase >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::factory::detail::multifactory< TType, TPointerWrapper, TBase > \- A factory that releases or shares ownership of the created objects to the class/context that requests object creation\&. Derived types do not have to hve compatible constructor signatures\&. HOWEVER, though this class can handle heterogenous constructor signatures, you will likely need a switch() to determine what parameters to pass based on the name of the thing you want to build, thus defeating the purpose of a factory to some degree\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <multifactory\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBmultifactory\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual \fB~multifactory\fP (void)=default"
+.br
+.ti -1c
+.RI "template<typename TDerived , typename \&.\&.\&. Args> TPointerWrapper< TBase > \fBcreate\fP (const std::string &name, Args\&.\&.\&.args)"
+.br
+.ti -1c
+.RI "template<typename TDerived , typename\&.\&.\&. Args> void \fBregister_type\fP (const std::string &name)"
+.br
+.RI "Register a type with the factory, and associate it with the specified name\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TType, template< class WrappedTBase, typename\&.\&.\&. > class TPointerWrapper, typename TBase>
+.br
+class rcppsw::patterns::factory::detail::multifactory< TType, TPointerWrapper, TBase >"
+A factory that releases or shares ownership of the created objects to the class/context that requests object creation\&. Derived types do not have to hve compatible constructor signatures\&. HOWEVER, though this class can handle heterogenous constructor signatures, you will likely need a switch() to determine what parameters to pass based on the name of the thing you want to build, thus defeating the purpose of a factory to some degree\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fITType\fP The type of the factory\&.
+.br
+\fITBase\fP Type of objects capable of creation from this factory (restricted to this type and its derived types)\&.
+.br
+\fITPointerWrapper\fP std::shared_ptr or std::unique_ptr\&. 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TType , template< class WrappedTBase, typename\&.\&.\&. > class TPointerWrapper, typename TBase > \fBrcppsw::patterns::factory::detail::multifactory\fP< TType, TPointerWrapper, TBase >::\fBmultifactory\fP (void)\fC [default]\fP"
+
+.SS "template<typename TType , template< class WrappedTBase, typename\&.\&.\&. > class TPointerWrapper, typename TBase > virtual \fBrcppsw::patterns::factory::detail::multifactory\fP< TType, TPointerWrapper, TBase >::~\fBmultifactory\fP (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TType , template< class WrappedTBase, typename\&.\&.\&. > class TPointerWrapper, typename TBase > template<typename TDerived , typename \&.\&.\&. Args> TPointerWrapper<TBase> \fBrcppsw::patterns::factory::detail::multifactory\fP< TType, TPointerWrapper, TBase >::create (const std::string & name, Args\&.\&.\&. args)\fC [inline]\fP"
+
+.SS "template<typename TType , template< class WrappedTBase, typename\&.\&.\&. > class TPointerWrapper, typename TBase > template<typename TDerived , typename\&.\&.\&. Args> void \fBrcppsw::patterns::factory::detail::multifactory\fP< TType, TPointerWrapper, TBase >::register_type (const std::string & name)\fC [inline]\fP"
+
+.PP
+Register a type with the factory, and associate it with the specified name\&. The type to register must be derived from the factory base class\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,479 @@
+.TH "rcppsw::math" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math \- Pure mathematical classes such as vectors, ranges, sigmoids, etc\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBconfig\fP"
+.br
+.ti -1c
+.RI " \fBdetail\fP"
+.br
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBbinned_powerlaw_distribution\fP"
+.br
+.RI "A power law distribution (duh) of x^pwr where x is in [lb, ub], where the outputs are rounded to the nearest power of pwr\&. For example, instead of sampling and getting 3\&.78, with pwr=2 you would get 4\&. "
+.ti -1c
+.RI "class \fBbounding_box\fP"
+.br
+.RI "Mathematical abstraction of the 3D bounding box of an object\&. "
+.ti -1c
+.RI "class \fBdegrees\fP"
+.br
+.RI "Used to store an angle value in degrees (duh)\&. "
+.ti -1c
+.RI "class \fBema\fP"
+.br
+.RI "Calculates an Exponential Moving Average of SOMETHING\&. "
+.ti -1c
+.RI "class \fBeuler_angles\fP"
+.br
+.RI "A class representing the orientation of a point or body in space using Euler angles\&. "
+.ti -1c
+.RI "class \fBexpression\fP"
+.br
+.RI "A base class for easy swapping/manipulating of mathematical expressions\&. "
+.ti -1c
+.RI "class \fBientropy\fP"
+.br
+.RI "Calculates the informational entropy of a cluster (Shannon's definition)\&. "
+.ti -1c
+.RI "class \fBpowerlaw_distribution\fP"
+.br
+.RI "Represents a power law distribution (duh) of x^pwr where x is in [lb, ub]\&. Constructed from a uniform distribution on [0, 1]\&. "
+.ti -1c
+.RI "class \fBradians\fP"
+.br
+.RI "Used to store an angle value in radians (duh)\&. "
+.ti -1c
+.RI "class \fBrange\fP"
+.br
+.RI "Convenience class holding a [min, max] range\&. Makes comparisons like 'is this number in this range' much more intuitive and easy to debug\&. "
+.ti -1c
+.RI "class \fBrngm\fP"
+.br
+.RI "Random Number Generator (RNG) Manager\&. A caching factory that returns references to previously created objects rather than creating new objects each time like a regular factory\&. "
+.ti -1c
+.RI "class \fBsigmoid\fP"
+.br
+.RI "Encapsulates base aspects common to all sigmoid functions; does not calculate anything itself, as derived sigmoids each have different input parameter requirements to calculate the value of the function at a point in space\&. "
+.ti -1c
+.RI "class \fBsphere_vector\fP"
+.br
+.RI "Representation of a point in 3D space in spherical coordinates\&. "
+.ti -1c
+.RI "class \fBvector2\fP"
+.br
+.RI "Base template class encapsulating mathematical actions on a pair of numbers\&. Is specialized by \fBvector2i\fP, \fBvector2d\fP\&. "
+.ti -1c
+.RI "class \fBvector3\fP"
+.br
+.RI "Base template class encapsulating mathematical actions on a pair of numbers\&. Is specialized by \fBvector3i\fP, \fBvector3d\fP\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBranged\fP = \fBrange\fP< double >"
+.br
+.RI "Specialization of \fBrange\fP for doubles\&. "
+.ti -1c
+.RI "using \fBrangei\fP = \fBrange\fP< int >"
+.br
+.RI "Specialization of \fBrange\fP for signed integers\&. "
+.ti -1c
+.RI "using \fBrangez\fP = \fBrange\fP< size_t >"
+.br
+.RI "Specialization of \fBrange\fP for size_t\&. "
+.ti -1c
+.RI "using \fBvector2d\fP = \fBvector2\fP< double >"
+.br
+.RI "Specialization of \fBvector2\fP for doubles\&. "
+.ti -1c
+.RI "using \fBvector2i\fP = \fBvector2\fP< int >"
+.br
+.RI "Specialization of \fBvector2\fP for signed integers\&. "
+.ti -1c
+.RI "using \fBvector2z\fP = \fBvector2\fP< size_t >"
+.br
+.RI "Specialization of \fBvector2\fP for size_t\&. "
+.ti -1c
+.RI "using \fBvector3d\fP = \fBvector3\fP< double >"
+.br
+.RI "Specialization of \fBvector3\fP for doubles\&. "
+.ti -1c
+.RI "using \fBvector3i\fP = \fBvector3\fP< int >"
+.br
+.RI "Specialization of \fBvector3\fP for signed integers\&. "
+.ti -1c
+.RI "using \fBvector3z\fP = \fBvector3\fP< size_t >"
+.br
+.RI "Specialization of \fBvector3\fP for size_t\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename TAngleType > TAngleType \fBabs\fP (const TAngleType &angle)"
+.br
+.RI "Calculate the absolute value of a \fBradians\fP or \fBdegrees\fP value\&. This does not perform any wrapping/normalizing\&. "
+.ti -1c
+.RI "static \fBrangez\fP \fBdrange2zrange\fP (const \fBrangez\fP &other, double scale)"
+.br
+.ti -1c
+.RI "static \fBvector2i\fP \fBdvec2ivec\fP (const \fBvector2d\fP &other, double scale)"
+.br
+.ti -1c
+.RI "static \fBvector3i\fP \fBdvec2ivec\fP (const \fBvector3d\fP &other, double scale)"
+.br
+.ti -1c
+.RI "static \fBvector2z\fP \fBdvec2zvec\fP (const \fBvector2d\fP &other, double scale)"
+.br
+.ti -1c
+.RI "static \fBvector3z\fP \fBdvec2zvec\fP (const \fBvector3d\fP &other, double scale)"
+.br
+.ti -1c
+.RI "static \fBranged\fP \fBirange2drange\fP (const \fBrangei\fP &other)"
+.br
+.ti -1c
+.RI "static \fBranged\fP \fBirange2drange\fP (const \fBrangei\fP &other, double scale)"
+.br
+.ti -1c
+.RI "static bool \fBis_equal\fP (double lhs, double rhs, double tol=\fBkDOUBLE_EPSILON\fP)"
+.br
+.RI "Determine if two floating point values are equal, using the specified tolerance\&. You can't always use std::numeric_limits<double>::epsilon() because of floating point representation errors\&. "
+.ti -1c
+.RI "static bool \fBis_multiple_of\fP (double x, double y, double tol=\fBkDOUBLE_EPSILON\fP)"
+.br
+.RI "Determine if \fCx\fP is a multiple \fCy\fP within \fCtol\fP tolerance\&. "
+.ti -1c
+.RI "static \fBvector2d\fP \fBivec2dvec\fP (const \fBvector2i\fP &other)"
+.br
+.ti -1c
+.RI "static \fBvector2d\fP \fBivec2dvec\fP (const \fBvector2i\fP &other, double scale)"
+.br
+.ti -1c
+.RI "static \fBvector3d\fP \fBivec2dvec\fP (const \fBvector3i\fP &other)"
+.br
+.ti -1c
+.RI "static \fBvector3d\fP \fBivec2dvec\fP (const \fBvector3i\fP &other, double scale)"
+.br
+.ti -1c
+.RI "template<typename U , typename V , typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0, typename std::enable_if<(!std::is_floating_point< V >::value), int >::type  = 0> static size_t \fBl1norm\fP (const \fBvector2\fP< U > &v1, const \fBvector2\fP< V > &v2)"
+.br
+.RI "Computes the distance between the passed vectors\&. "
+.ti -1c
+.RI "template<typename U , typename V , typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0, typename std::enable_if<(!std::is_floating_point< V >::value), int >::type  = 0> static size_t \fBl1norm\fP (const \fBvector3\fP< U > &v1, const \fBvector3\fP< V > &v2)"
+.br
+.RI "Computes the distance between the passed vectors\&. "
+.ti -1c
+.RI "template<typename T , typename std::enable_if<(rmpl::is_detected< detail::length_func_decltype, T >::value), int >::type  = 0> static double \fBl2norm\fP (const T &lhs, const T &rhs)"
+.br
+.RI "Computes the euclidean distance between the passed vectors\&. "
+.ti -1c
+.RI "template<typename T , typename std::enable_if<(rmpl::is_detected< detail::length_func_decltype, T >::value), int >::type  = 0> static double \fBl2norm_squared\fP (const T &lhs, const T &rhs)"
+.br
+.RI "Computes the square of the euclidean distance between the passed vectors\&. "
+.ti -1c
+.RI "static double \fBnormalize\fP (double min, double max, double val)"
+.br
+.ti -1c
+.RI "\fBdegrees\fP \fBnormalized_diff\fP (const \fBdegrees\fP &angle1, const \fBdegrees\fP &angle2)"
+.br
+.RI "Calculates the normalized difference between the given angles\&. "
+.ti -1c
+.RI "\fBradians\fP \fBnormalized_diff\fP (const \fBradians\fP &angle1, const \fBradians\fP &angle2)"
+.br
+.RI "Calculates the normalized difference between the given angles\&. "
+.ti -1c
+.RI "template<class T , class U > \fBema\fP< T > \fBoperator*\fP (const \fBema\fP< T > &lhs, const U &rhs)"
+.br
+.ti -1c
+.RI "template<class T , class U > \fBema\fP< T > \fBoperator*\fP (const U &lhs, const \fBema\fP< T > &rhs)"
+.br
+.ti -1c
+.RI "\fBrmath::radians\fP \fBoperator*\fP (double lhs, const \fBrmath::radians\fP &rhs)"
+.br
+.ti -1c
+.RI "template<class T , class U > \fBema\fP< T > \fBoperator\-\fP (const \fBema\fP< T > &lhs, const U &rhs)"
+.br
+.ti -1c
+.RI "template<class T , class U > \fBema\fP< T > \fBoperator\-\fP (const U &lhs, const \fBema\fP< T > &rhs)"
+.br
+.ti -1c
+.RI "template<class T > \fBema\fP< T > \fBoperator/\fP (const \fBema\fP< T > &lhs, const double &rhs)"
+.br
+.ti -1c
+.RI "template<class T , class U > \fBema\fP< T > \fBoperator/\fP (const U &lhs, const \fBema\fP< T > &rhs)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &stream, const \fBdegrees\fP &d)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &stream, const \fBradians\fP &r)"
+.br
+.ti -1c
+.RI "template<typename T , typename std::enable_if<(!(std::is_floating_point< T >::value)), int >::type  = 0> bool \fBoperator==\fP (const T &v, const \fBema\fP< T > &rhs)"
+.br
+.ti -1c
+.RI "\fBdegrees\fP \fBto_degrees\fP (const \fBradians\fP &r)"
+.br
+.RI "Converts \fBradians\fP to \fBdegrees\fP,\&. "
+.ti -1c
+.RI "\fBradians\fP \fBto_radians\fP (const \fBdegrees\fP &d)"
+.br
+.RI "Converts \fBdegrees\fP to \fBradians\fP\&. "
+.ti -1c
+.RI "template<typename TCoord , typename std::enable_if<(std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::ranged\fP \fBxspan\fP (const TCoord &anchor, const double &dim)"
+.br
+.RI "Calculate the span in {X,Y,Z} in real coordinates of an entity given the position of its 3D center and dimension in {X,Y<Z}\&. "
+.ti -1c
+.RI "template<typename TCoord , typename std::enable_if<(!std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::rangez\fP \fBxspan\fP (const TCoord &anchor, size_t dim)"
+.br
+.RI "Calculate the span in {X,Y,Z} in discrete coordinates of an entity given its discrete anchor (2D or 3D) and {X,Y,Z} dimension\&. "
+.ti -1c
+.RI "template<typename TCoord , typename std::enable_if<(std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::ranged\fP \fByspan\fP (const TCoord &anchor, const double &dim)"
+.br
+.ti -1c
+.RI "template<typename TCoord , typename std::enable_if<(!std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::rangez\fP \fByspan\fP (const TCoord &anchor, size_t dim)"
+.br
+.ti -1c
+.RI "static \fBranged\fP \fBzrange2drange\fP (const \fBrangez\fP &other)"
+.br
+.ti -1c
+.RI "static \fBranged\fP \fBzrange2drange\fP (const \fBrangez\fP &other, double scale)"
+.br
+.ti -1c
+.RI "template<typename TCoord , typename std::enable_if<(std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::ranged\fP \fBzspan\fP (const TCoord &anchor, const double &dim)"
+.br
+.ti -1c
+.RI "template<typename TCoord , typename std::enable_if<(!std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::rangez\fP \fBzspan\fP (const TCoord &anchor, size_t dim)"
+.br
+.ti -1c
+.RI "static \fBvector2d\fP \fBzvec2dvec\fP (const \fBvector2z\fP &other)"
+.br
+.ti -1c
+.RI "static \fBvector2d\fP \fBzvec2dvec\fP (const \fBvector2z\fP &other, double scale)"
+.br
+.ti -1c
+.RI "static \fBvector3d\fP \fBzvec2dvec\fP (const \fBvector3z\fP &other)"
+.br
+.ti -1c
+.RI "static \fBvector3d\fP \fBzvec2dvec\fP (const \fBvector3z\fP &other, double scale)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static constexpr double \fBkDOUBLE_EPSILON\fP = \fBRCSW_DOUBLE_EPSILON\fP"
+.br
+.RI "For comparing floating point numbers within a given tolerance when std::numeric_limits<double>::epsilon() won't work\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Pure mathematical classes such as vectors, ranges, sigmoids, etc\&. 
+.SH "Typedef Documentation"
+.PP 
+.SS "using \fBrcppsw::math::ranged\fP = typedef \fBrange\fP<double>"
+
+.PP
+Specialization of \fBrange\fP for doubles\&. 
+.SS "using \fBrcppsw::math::rangei\fP = typedef \fBrange\fP<int>"
+
+.PP
+Specialization of \fBrange\fP for signed integers\&. 
+.SS "using \fBrcppsw::math::rangez\fP = typedef \fBrange\fP<size_t>"
+
+.PP
+Specialization of \fBrange\fP for size_t\&. 
+.SS "using \fBrcppsw::math::vector2d\fP = typedef \fBvector2\fP<double>"
+
+.PP
+Specialization of \fBvector2\fP for doubles\&. 
+.SS "using \fBrcppsw::math::vector2i\fP = typedef \fBvector2\fP<int>"
+
+.PP
+Specialization of \fBvector2\fP for signed integers\&. 
+.SS "using \fBrcppsw::math::vector2z\fP = typedef \fBvector2\fP<size_t>"
+
+.PP
+Specialization of \fBvector2\fP for size_t\&. 
+.SS "using \fBrcppsw::math::vector3d\fP = typedef \fBvector3\fP<double>"
+
+.PP
+Specialization of \fBvector3\fP for doubles\&. 
+.SS "using \fBrcppsw::math::vector3i\fP = typedef \fBvector3\fP<int>"
+
+.PP
+Specialization of \fBvector3\fP for signed integers\&. 
+.SS "using \fBrcppsw::math::vector3z\fP = typedef \fBvector3\fP<size_t>"
+
+.PP
+Specialization of \fBvector3\fP for size_t\&. 
+.SH "Function Documentation"
+.PP 
+.SS "template<typename TAngleType > TAngleType rcppsw::math::abs (const TAngleType & angle)"
+
+.PP
+Calculate the absolute value of a \fBradians\fP or \fBdegrees\fP value\&. This does not perform any wrapping/normalizing\&. 
+.SS "static \fBrangez\fP rcppsw::math::drange2zrange (const \fBrangez\fP & other, double scale)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBvector2i\fP rcppsw::math::dvec2ivec (const \fBvector2d\fP & other, double scale)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBvector3i\fP rcppsw::math::dvec2ivec (const \fBvector3d\fP & other, double scale)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBvector2z\fP rcppsw::math::dvec2zvec (const \fBvector2d\fP & other, double scale)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBvector3z\fP rcppsw::math::dvec2zvec (const \fBvector3d\fP & other, double scale)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBranged\fP rcppsw::math::irange2drange (const \fBrangei\fP & other)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBranged\fP rcppsw::math::irange2drange (const \fBrangei\fP & other, double scale)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static bool rcppsw::math::is_equal (double lhs, double rhs, double tol = \fC\fBkDOUBLE_EPSILON\fP\fP)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Determine if two floating point values are equal, using the specified tolerance\&. You can't always use std::numeric_limits<double>::epsilon() because of floating point representation errors\&. 
+.SS "static bool rcppsw::math::is_multiple_of (double x, double y, double tol = \fC\fBkDOUBLE_EPSILON\fP\fP)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Determine if \fCx\fP is a multiple \fCy\fP within \fCtol\fP tolerance\&. 
+.SS "static \fBvector2d\fP rcppsw::math::ivec2dvec (const \fBvector2i\fP & other)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBvector2d\fP rcppsw::math::ivec2dvec (const \fBvector2i\fP & other, double scale)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBvector3d\fP rcppsw::math::ivec2dvec (const \fBvector3i\fP & other)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBvector3d\fP rcppsw::math::ivec2dvec (const \fBvector3i\fP & other, double scale)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "template<typename U , typename V , typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0, typename std::enable_if<(!std::is_floating_point< V >::value), int >::type  = 0> static size_t rcppsw::math::l1norm (const \fBvector2\fP< U > & v1, const \fBvector2\fP< V > & v2)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Computes the distance between the passed vectors\&. 
+.SS "template<typename U , typename V , typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0, typename std::enable_if<(!std::is_floating_point< V >::value), int >::type  = 0> static size_t rcppsw::math::l1norm (const \fBvector3\fP< U > & v1, const \fBvector3\fP< V > & v2)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Computes the distance between the passed vectors\&. 
+.SS "template<typename T , typename std::enable_if<(rmpl::is_detected< detail::length_func_decltype, T >::value), int >::type  = 0> static double rcppsw::math::l2norm (const T & lhs, const T & rhs)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Computes the euclidean distance between the passed vectors\&. 
+.SS "template<typename T , typename std::enable_if<(rmpl::is_detected< detail::length_func_decltype, T >::value), int >::type  = 0> static double rcppsw::math::l2norm_squared (const T & lhs, const T & rhs)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Computes the square of the euclidean distance between the passed vectors\&. 
+.SS "static double rcppsw::math::normalize (double min, double max, double val)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "\fBdegrees\fP rcppsw::math::normalized_diff (const \fBdegrees\fP & angle1, const \fBdegrees\fP & angle2)"
+
+.PP
+Calculates the normalized difference between the given angles\&. The difference is calculated as (angle1 - angle2) and then normalized in [-180,180]\&.
+.PP
+\fBReturns\fP
+.RS 4
+The difference between the two angles\&. 
+.RE
+.PP
+
+.SS "\fBradians\fP rcppsw::math::normalized_diff (const \fBradians\fP & angle1, const \fBradians\fP & angle2)"
+
+.PP
+Calculates the normalized difference between the given angles\&. The difference is calculated as (angle1 - angle2) and then normalized in [-pi,pi]\&.
+.PP
+\fBReturns\fP
+.RS 4
+The difference between the two angles\&. 
+.RE
+.PP
+
+.SS "template<class T , class U > \fBema\fP<T> rcppsw::math::operator* (const \fBema\fP< T > & lhs, const U & rhs)"
+
+.SS "template<class T , class U > \fBema\fP<T> rcppsw::math::operator* (const U & lhs, const \fBema\fP< T > & rhs)"
+
+.SS "\fBrmath::radians\fP rcppsw::math::operator* (double lhs, const \fBrmath::radians\fP & rhs)"
+
+.SS "template<class T , class U > \fBema\fP<T> rcppsw::math::operator\- (const \fBema\fP< T > & lhs, const U & rhs)"
+
+.SS "template<class T , class U > \fBema\fP<T> rcppsw::math::operator\- (const U & lhs, const \fBema\fP< T > & rhs)"
+
+.SS "template<class T > \fBema\fP<T> rcppsw::math::operator/ (const \fBema\fP< T > & lhs, const double & rhs)"
+
+.SS "template<class T , class U > \fBema\fP<T> rcppsw::math::operator/ (const U & lhs, const \fBema\fP< T > & rhs)"
+
+.SS "std::ostream& rcppsw::math::operator<< (std::ostream & stream, const \fBdegrees\fP & d)"
+
+.SS "std::ostream& rcppsw::math::operator<< (std::ostream & stream, const \fBradians\fP & r)"
+
+.SS "template<typename T , typename std::enable_if<(!(std::is_floating_point< T >::value)), int >::type  = 0> bool rcppsw::math::operator== (const T & v, const \fBema\fP< T > & rhs)"
+
+.SS "\fBdegrees\fP rcppsw::math::to_degrees (const \fBradians\fP & r)"
+
+.PP
+Converts \fBradians\fP to \fBdegrees\fP,\&. 
+.SS "\fBradians\fP rcppsw::math::to_radians (const \fBdegrees\fP & d)"
+
+.PP
+Converts \fBdegrees\fP to \fBradians\fP\&. 
+.SS "template<typename TCoord , typename std::enable_if<(std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::ranged\fP rcppsw::math::xspan (const TCoord & anchor, const double & dim)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Calculate the span in {X,Y,Z} in real coordinates of an entity given the position of its 3D center and dimension in {X,Y<Z}\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The span in {X,Y,Z} of the entity\&. 
+.RE
+.PP
+
+.SS "template<typename TCoord , typename std::enable_if<(!std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::rangez\fP rcppsw::math::xspan (const TCoord & anchor, size_t dim)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Calculate the span in {X,Y,Z} in discrete coordinates of an entity given its discrete anchor (2D or 3D) and {X,Y,Z} dimension\&. This function can only be called for entities which have a defined discrete center\&.
+.PP
+\fBReturns\fP
+.RS 4
+The span in {X,Y,Z} of the entity (closed interval)\&. 
+.RE
+.PP
+
+.SS "template<typename TCoord , typename std::enable_if<(std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::ranged\fP rcppsw::math::yspan (const TCoord & anchor, const double & dim)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "template<typename TCoord , typename std::enable_if<(!std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::rangez\fP rcppsw::math::yspan (const TCoord & anchor, size_t dim)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBranged\fP rcppsw::math::zrange2drange (const \fBrangez\fP & other)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBranged\fP rcppsw::math::zrange2drange (const \fBrangez\fP & other, double scale)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "template<typename TCoord , typename std::enable_if<(std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::ranged\fP rcppsw::math::zspan (const TCoord & anchor, const double & dim)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "template<typename TCoord , typename std::enable_if<(!std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::rangez\fP rcppsw::math::zspan (const TCoord & anchor, size_t dim)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBvector2d\fP rcppsw::math::zvec2dvec (const \fBvector2z\fP & other)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBvector2d\fP rcppsw::math::zvec2dvec (const \fBvector2z\fP & other, double scale)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBvector3d\fP rcppsw::math::zvec2dvec (const \fBvector3z\fP & other)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBvector3d\fP rcppsw::math::zvec2dvec (const \fBvector3z\fP & other, double scale)\fC [inline]\fP, \fC [static]\fP"
+
+.SH "Variable Documentation"
+.PP 
+.SS "constexpr double rcppsw::math::kDOUBLE_EPSILON = \fBRCSW_DOUBLE_EPSILON\fP\fC [static]\fP, \fC [constexpr]\fP"
+
+.PP
+For comparing floating point numbers within a given tolerance when std::numeric_limits<double>::epsilon() won't work\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

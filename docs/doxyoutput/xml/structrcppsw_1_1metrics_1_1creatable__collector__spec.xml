@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1metrics_1_1creatable__collector__spec" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::metrics::creatable_collector_spec</compoundname>
+    <includes refid="creatable__collector__set_8hpp" local="no">creatable_collector_set.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1creatable__collector__spec_1a6390a65d0a7a5881811c5f964ac67bfd" prot="public" static="no" mutable="no">
+        <type>std::type_index</type>
+        <definition>std::type_index rcppsw::metrics::creatable_collector_spec::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" line="72" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1creatable__collector__spec_1ac0ddc4b80b6e4f7fb7abd7ff21fd3298" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string rcppsw::metrics::creatable_collector_spec::input_name</definition>
+        <argsstring></argsstring>
+        <name>input_name</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" line="73" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1creatable__collector__spec_1a8240ce8ad6fa16304301eb50e3f82a1a" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string rcppsw::metrics::creatable_collector_spec::scoped_name</definition>
+        <argsstring></argsstring>
+        <name>scoped_name</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" line="74" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1creatable__collector__spec_1a55e908c9a9495d99060944f5a3cc0896" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" kindref="member">rmetrics::output_mode</ref></type>
+        <definition>rmetrics::output_mode rcppsw::metrics::creatable_collector_spec::valid_modes</definition>
+        <argsstring></argsstring>
+        <name>valid_modes</name>
+        <initializer>{rmetrics::output_mode::ekNONE}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" line="75" column="25" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Each entry in the set of collectors that CAN be created (if they are actually created dependent on configuration) has: </para>
+    </briefdescription>
+    <detaileddescription>
+<para><itemizedlist>
+<listitem><para>The typeid of the collector, so that functions templated on collector type can figure out the correct item in the set to read from.</para>
+</listitem><listitem><para>The name of the collector in the input src (e.g. the XML attribute name).</para>
+</listitem><listitem><para>The scoped name of the collector that will be used to refer to the created collector during simulation.</para>
+</listitem><listitem><para>The set of output modes that are valid for the collector. </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::creatable_collector_spec</label>
+        <link refid="structrcppsw_1_1metrics_1_1creatable__collector__spec"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+input_name</edgelabel>
+          <edgelabel>+scoped_name</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::string</label>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" line="71" column="31" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" bodystart="71" bodyend="76"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1metrics_1_1creatable__collector__spec_1a6390a65d0a7a5881811c5f964ac67bfd" prot="public" virt="non-virtual"><scope>rcppsw::metrics::creatable_collector_spec</scope><name>id</name></member>
+      <member refid="structrcppsw_1_1metrics_1_1creatable__collector__spec_1ac0ddc4b80b6e4f7fb7abd7ff21fd3298" prot="public" virt="non-virtual"><scope>rcppsw::metrics::creatable_collector_spec</scope><name>input_name</name></member>
+      <member refid="structrcppsw_1_1metrics_1_1creatable__collector__spec_1a8240ce8ad6fa16304301eb50e3f82a1a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::creatable_collector_spec</scope><name>scoped_name</name></member>
+      <member refid="structrcppsw_1_1metrics_1_1creatable__collector__spec_1a55e908c9a9495d99060944f5a3cc0896" prot="public" virt="non-virtual"><scope>rcppsw::metrics::creatable_collector_spec</scope><name>valid_modes</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

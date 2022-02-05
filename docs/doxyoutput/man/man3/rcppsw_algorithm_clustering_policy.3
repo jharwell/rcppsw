@@ -1,0 +1,57 @@
+.TH "rcppsw::algorithm::clustering::policy" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::algorithm::clustering::policy
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBEH\fP"
+.br
+.RI "\fBEH\fP -> Event Horizon\&. "
+.ti -1c
+.RI "class \fBNC\fP"
+.br
+.RI "\fBNC\fP -> Nearest centroid\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<typename Policy > using \fBis_eh\fP = typename std::enable_if_t< \fBis_eh_\fP< Policy >::value >"
+.br
+.ti -1c
+.RI "template<typename Policy > using \fBis_eh_\fP = std::is_same< Policy, \fBEH\fP >"
+.br
+.ti -1c
+.RI "template<typename Policy > using \fBis_nc\fP = typename std::enable_if_t< \fBis_nc_\fP< Policy >::value >"
+.br
+.ti -1c
+.RI "template<typename Policy > using \fBis_nc_\fP = std::is_same< Policy, \fBNC\fP >"
+.br
+.in -1c
+.SH "Class Documentation"
+.PP 
+.SH "class rcppsw::algorithm::clustering::policy::EH"
+.PP 
+\fBEH\fP -> Event Horizon\&. 
+.SH "class rcppsw::algorithm::clustering::policy::NC"
+.PP 
+\fBNC\fP -> Nearest centroid\&. 
+.SH "Typedef Documentation"
+.PP 
+.SS "template<typename Policy > using \fBrcppsw::algorithm::clustering::policy::is_eh\fP = typedef typename std::enable_if_t<\fBis_eh_\fP<Policy>::value>"
+
+.SS "template<typename Policy > using \fBrcppsw::algorithm::clustering::policy::is_eh_\fP = typedef std::is_same<Policy, \fBEH\fP>"
+
+.SS "template<typename Policy > using \fBrcppsw::algorithm::clustering::policy::is_nc\fP = typedef typename std::enable_if_t<\fBis_nc_\fP<Policy>::value>"
+
+.SS "template<typename Policy > using \fBrcppsw::algorithm::clustering::policy::is_nc_\fP = typedef std::is_same<Policy, \fBNC\fP>"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

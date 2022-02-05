@@ -1,0 +1,505 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="hgrid3D__view__filter__data_8hpp" kind="file" language="C++">
+    <compoundname>hgrid3D_view_filter_data.hpp</compoundname>
+    <includes local="no">vector</includes>
+    <includes local="no">algorithm</includes>
+    <includes refid="rcppsw_8hpp" local="yes">rcppsw/rcppsw.hpp</includes>
+    <includes refid="vector3_8hpp" local="yes">rcppsw/math/vector3.hpp</includes>
+    <includes refid="manhattan__dist_8hpp" local="yes">rcppsw/types/manhattan_dist.hpp</includes>
+    <includes refid="grid__index__map_8hpp" local="yes">rcppsw/ds/graph/grid_index_map.hpp</includes>
+    <includedby refid="hgrid3D__view_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp</includedby>
+    <includedby refid="hgrid3D__view__filter_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp</includedby>
+    <incdepgraph>
+      <node id="35">
+        <label>rcppsw/math/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>functional</label>
+      </node>
+      <node id="12">
+        <label>limits</label>
+      </node>
+      <node id="37">
+        <label>rcppsw/math/sphere_vector.hpp</label>
+        <link refid="sphere__vector_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>rcppsw/types/manhattan_dist.hpp</label>
+        <link refid="manhattan__dist_8hpp"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>boost/stacktrace.hpp</label>
+      </node>
+      <node id="20">
+        <label>log4cxx/fileappender.h</label>
+      </node>
+      <node id="10">
+        <label>rcppsw/math/vector3.hpp</label>
+        <link refid="vector3_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="38">
+        <label>rcppsw/math/vector2.hpp</label>
+        <link refid="vector2_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter_data.hpp</label>
+        <link refid="hgrid3D__view__filter__data_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>rcppsw/utils/string_utils.hpp</label>
+        <link refid="string__utils_8hpp"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>log4cxx/xml/domconfigurator.h</label>
+      </node>
+      <node id="11">
+        <label>cmath</label>
+      </node>
+      <node id="29">
+        <label>cassert</label>
+      </node>
+      <node id="46">
+        <label>rcppsw/patterns/decorator/decorator.hpp</label>
+        <link refid="decorator_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>rcppsw/er/stacktrace.hpp</label>
+        <link refid="stacktrace_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>string</label>
+      </node>
+      <node id="14">
+        <label>rcppsw/math/range.hpp</label>
+        <link refid="range_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>map</label>
+      </node>
+      <node id="23">
+        <label>log4cxx/patternlayout.h</label>
+      </node>
+      <node id="42">
+        <label>rcppsw/types/distance_measure.hpp</label>
+        <link refid="distance__measure_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>log4cxx/ndc.h</label>
+      </node>
+      <node id="19">
+        <label>log4cxx/consoleappender.h</label>
+      </node>
+      <node id="17">
+        <label>rcppsw/er/er.hpp</label>
+        <link refid="er_8hpp"/>
+      </node>
+      <node id="9">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+      <node id="34">
+        <label>rcppsw/er/stringizable.hpp</label>
+        <link refid="stringizable_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>utility</label>
+      </node>
+      <node id="28">
+        <label>array</label>
+      </node>
+      <node id="33">
+        <label>sstream</label>
+      </node>
+      <node id="13">
+        <label>rcppsw/math/radians.hpp</label>
+        <link refid="radians_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>rcppsw/ds/graph/grid_index_map.hpp</label>
+        <link refid="grid__index__map_8hpp"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>iosfwd</label>
+      </node>
+      <node id="30">
+        <label>iostream</label>
+      </node>
+      <node id="8">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>rcppsw/types/discretize_ratio.hpp</label>
+        <link refid="discretize__ratio_8hpp"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>rcppsw/er/client.hpp</label>
+        <link refid="client_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>type_traits</label>
+      </node>
+      <node id="25">
+        <label>rcppsw/er/macros.hpp</label>
+        <link refid="er_2macros_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>algorithm</label>
+      </node>
+      <node id="21">
+        <label>log4cxx/logger.h</label>
+      </node>
+      <node id="40">
+        <label>rcppsw/types/named_type.hpp</label>
+        <link refid="named__type_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter_data.hpp</label>
+        <link refid="hgrid3D__view__filter__data_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D.hpp</label>
+        <link refid="hgrid3D_8hpp"/>
+      </node>
+      <node id="2">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp</label>
+        <link refid="hgrid3D__view_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp</label>
+        <link refid="hgrid3D__view__filter_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data" prot="public">rcppsw::ds::graph::hgrid3D_view_filter_data</innerclass>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1ds">rcppsw::ds</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1ds_1_1graph">rcppsw::ds::graph</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2021 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="21"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VIEW_FILTER_DATA_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VIEW_FILTER_DATA_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="rcppsw_8hpp" kindref="compound">rcppsw/rcppsw.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="vector3_8hpp" kindref="compound">rcppsw/math/vector3.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="manhattan__dist_8hpp" kindref="compound">rcppsw/types/manhattan_dist.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="grid__index__map_8hpp" kindref="compound">rcppsw/ds/graph/grid_index_map.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>ds,<sp/>graph);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*<sp/>Class<sp/>Definitions</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="49"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TSpecType&gt;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">hgrid3D_view_filter_data<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1er_1_1client" kindref="compound">rer::client</ref>&lt;hgrid3D_view_filter_data&lt;TSpecType&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>bgl_impl_type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TSpecType::bgl_impl_type;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>vertex_descriptor<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>bgl_impl_type::vertex_descriptor;</highlight></codeline>
+<codeline lineno="54" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1a2662c3a13d690a684854515912feb2c3" kindref="member">edge_descriptor</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>bgl_impl_type::edge_descriptor;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1aab0a17b7becbfc073b5a2c39e1a97cc2" kindref="member">vertex_property_type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>bgl_impl_type::vertex_property_type;</highlight></codeline>
+<codeline lineno="56" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1a2ebaaed36501134082a410b4e7fe85cf" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1aebb8d386448d350651e6e8b0c6e65b4f" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data" kindref="compound">hgrid3D_view_filter_data</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">rmath::vector3z</ref>&amp;<sp/>center,</highlight></codeline>
+<codeline lineno="58" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1a2662c3a13d690a684854515912feb2c3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">rtypes::manhattan_dist</ref>&amp;<sp/>max_dist,</highlight></codeline>
+<codeline lineno="59" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1aab0a17b7becbfc073b5a2c39e1a97cc2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>max_vertices)</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="client_8hpp_1a2e46a4046efab8f06e9e8316c5760a4d" kindref="member">ER_CLIENT_INIT</ref>(</highlight><highlight class="stringliteral">&quot;rcppsw.ds.graph.hgrid3D_view_filter_data&quot;</highlight><highlight class="normal">),</highlight></codeline>
+<codeline lineno="61" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1abf8a36be7b7ac7ecf0ae38a400ef29d4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mc_max_dist(max_dist),</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mc_center(center),</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Record<sp/>the<sp/>LL,<sp/>UR<sp/>corners<sp/>of<sp/>the<sp/>bounding<sp/>box<sp/>for<sp/>the<sp/>subgraph<sp/>to</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>provide<sp/>efficient<sp/>computation<sp/>of<sp/>graph<sp/>geometry/bounding<sp/>box.</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_ll(mc_center),</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_ur(mc_center),</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>All<sp/>vertices<sp/>within<sp/>range<sp/>will<sp/>be<sp/>marked<sp/>with<sp/>distance<sp/>&gt;<sp/>0<sp/>during<sp/>the</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>filter,<sp/>so<sp/>set<sp/>all<sp/>distances<sp/>to<sp/>-1<sp/>so<sp/>that<sp/>after<sp/>build<sp/>excluded</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>vertices<sp/>can<sp/>be<sp/>filtered<sp/>out.</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_distances(max_vertices,<sp/><ref refid="namespacercppsw_1_1types" kindref="compound">rtypes</ref>::manhattan_dist(-1,<sp/>false))<sp/>{}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>edge_filter(edge_descriptor)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>vertex_filter(vertex_descriptor<sp/>vd)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1a8973874d9049f2fb8e3c6b7c3d8a981e" kindref="member">ER_TRACE</ref>(</highlight><highlight class="stringliteral">&quot;Evaluate<sp/>vertex<sp/>filter:<sp/>vd=%zu,dist=%d,max_dist=%d<sp/>-&gt;<sp/>%d&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vd,</highlight></codeline>
+<codeline lineno="81" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1ade32d4bfd92d5a050516447c8d9397d8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_distances[vd].v(),</highlight></codeline>
+<codeline lineno="82" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1a1cfdb0835bafa067d2081ad6029c2fe0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mc_max_dist.v(),</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_distances[vd]<sp/>&gt;<sp/>-1<sp/>&amp;&amp;<sp/>m_distances[vd]<sp/>&lt;=<sp/>mc_max_dist);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_distances[vd]<sp/>&gt;<sp/>-1<sp/>&amp;&amp;<sp/>m_distances[vd]<sp/>&lt;=<sp/>mc_max_dist;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>update(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>bgl_impl_type&amp;<sp/>g,</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vertex_descriptor<sp/>vd,</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">rtypes::manhattan_dist</ref>&amp;<sp/>dist)<sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>m_ll<sp/>=<sp/>std::min(m_ll,<sp/>g[vd].coord,<sp/>rmath::vector3z::componentwise_compare());</highlight></codeline>
+<codeline lineno="91" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1a06850ef6c4430c4b5b2f7c71339b887f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>m_ur<sp/>=<sp/>std::max(m_ur,<sp/>g[vd].coord,<sp/>rmath::vector3z::componentwise_compare());</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>m_ul<sp/>=<sp/><ref refid="namespacercppsw_1_1math_1a72e9a2c7f7fb0b33f22a664371912a36" kindref="member">rmath::vector3z</ref>(m_ll.x(),</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::max(m_ul.y(),<sp/>g[vd].coord.y()),</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::max(m_ul.z(),<sp/>g[vd].coord.z()));</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>m_lr<sp/>=<sp/><ref refid="namespacercppsw_1_1math_1a72e9a2c7f7fb0b33f22a664371912a36" kindref="member">rmath::vector3z</ref>(std::max(m_lr.x(),<sp/>g[vd].coord.x()),</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_ll.y(),</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::min(m_lr.z(),<sp/>g[vd].coord.z()));</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>m_distances[vd]<sp/>=<sp/>dist;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>m_lookup[g[vd].coord]<sp/>=<sp/>&amp;g[vd];</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ll(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_ll;<sp/>}</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ul(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_ul;<sp/>}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ur(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_ur;<sp/>}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>lr(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_lr;<sp/>}</highlight></codeline>
+<codeline lineno="105" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1aa7aaf32c859f4eb3903c6047e90d59ca" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1ad48e2d44597778c508786764eef64111" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="graph_8hpp_1a2a17a8cdf486ffc7a07c462721e565f9" kindref="member">n_vertices</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_lookup.size();<sp/>}</highlight></codeline>
+<codeline lineno="107" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1a17f32b998d62d05fb255cd7e04fed26a" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1af55217e6bfe226ebde6594f63a0d0a10" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;rtypes::manhattan_dist&gt;*<sp/>distances(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;m_distances;<sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1a328a88b82fc23fd8fbbaa595ed03f0c2" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>center(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mc_center;<sp/>}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>lookup(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;m_lookup;<sp/>}</highlight></codeline>
+<codeline lineno="112" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1aedd3701c7a211bef0eade7acda9e3da4" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>lookup(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;m_lookup;<sp/>}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1a5b185a20aa44b4fb661f07b5faf73d76" refkind="member"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="115" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1a13f08d0e4db02cdec7be4e1ac617c6fa" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1types_1_1manhattan__dist" kindref="compound">rtypes::manhattan_dist</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mc_max_dist;</highlight></codeline>
+<codeline lineno="116" refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D__view__filter__data_1a434438e9955422e4f7b122e790066bee" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">rmath::vector3z</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mc_center;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_n_vertices{0};</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">rmath::vector3z</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_ll{};</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">rmath::vector3z</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_ul{};</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">rmath::vector3z</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_ur{};</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">rmath::vector3z</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_lr{};</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>std::vector&lt;rtypes::manhattan_dist&gt;<sp/>m_distances;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/>grid_index_map&lt;<ref refid="namespacercppsw_1_1math_1a72e9a2c7f7fb0b33f22a664371912a36" kindref="member">rmath::vector3z</ref>,</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vertex_property_type*,</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rmath::vector3z::key_compare&gt;<sp/><sp/>m_lookup{};</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(graph,<sp/>ds,<sp/><ref refid="namespacercppsw" kindref="compound">rcppsw</ref>);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VIEW_FILTER_DATA_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter_data.hpp"/>
+  </compounddef>
+</doxygen>

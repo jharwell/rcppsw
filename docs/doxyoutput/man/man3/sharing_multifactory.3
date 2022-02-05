@@ -1,0 +1,46 @@
+.TH "sharing_multifactory< TBase, Args >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sharing_multifactory< TBase, Args > \- Specialization of the \fBmultifactory\fP class for sharing ownership of created objects via std::shared_ptr\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <multifactory\&.hpp>\fP
+.PP
+Inherits multifactory< detail::factory_sharing_type, std::shared_ptr, TBase >\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB~sharing_multifactory\fP (void) override=default"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TBase, typename\&.\&.\&. Args>
+.br
+class sharing_multifactory< TBase, Args >"
+Specialization of the \fBmultifactory\fP class for sharing ownership of created objects via std::shared_ptr\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fITBase\fP The base class that all factory-constructed types must derive from\&. 
+.br
+\fIArgs\fP Arguments common to ALL factory-constructible types\&. 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TBase , typename\&.\&.\&. Args> \fBsharing_multifactory\fP< TBase, Args >::~\fBsharing_multifactory\fP (void)\fC [override]\fP, \fC [default]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

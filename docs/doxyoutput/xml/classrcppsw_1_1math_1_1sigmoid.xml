@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1math_1_1sigmoid" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::math::sigmoid</compoundname>
+    <basecompoundref refid="classrcppsw_1_1math_1_1expression" prot="public" virt="non-virtual">rcppsw::math::expression&lt; double &gt;</basecompoundref>
+    <includes refid="sigmoid_8hpp" local="no">sigmoid.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1sigmoid_1abd8e17f74f8ba09803f989e8d3cff34d" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::math::sigmoid::m_gamma</definition>
+        <argsstring></argsstring>
+        <name>m_gamma</name>
+        <initializer>{0.0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" line="89" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1sigmoid_1a00aa2d629f72418012bf31ccec7f74b7" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::math::sigmoid::m_offset</definition>
+        <argsstring></argsstring>
+        <name>m_offset</name>
+        <initializer>{0.0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" line="88" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1sigmoid_1ae6a912b294970c159cefdb82b466a977" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::math::sigmoid::m_reactivity</definition>
+        <argsstring></argsstring>
+        <name>m_reactivity</name>
+        <initializer>{0.0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" line="87" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1sigmoid_1a02040f1094116d33a077abb3558fed91" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::sigmoid::sigmoid</definition>
+        <argsstring>(const config::sigmoid_config *const config)</argsstring>
+        <name>sigmoid</name>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1math_1_1config_1_1sigmoid__config" kindref="compound">config::sigmoid_config</ref> *const</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>Construct the sigmoid using parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" line="59" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" bodystart="59" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1sigmoid_1a714164a89762f4cd66d6b360fad3f54d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::sigmoid::sigmoid</definition>
+        <argsstring>(double reactivity, double offset, double gamma)</argsstring>
+        <name>sigmoid</name>
+        <param>
+          <type>double</type>
+          <declname>reactivity</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>gamma</declname>
+        </param>
+        <briefdescription>
+<para>Construct the sigmoid by passing each parameter explicitly. Note that they are all of the same type, and therefore ordering is important. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" line="66" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" bodystart="66" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1sigmoid_1ac730323cab6d88df5a89cd6f1d3aa7fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::sigmoid::sigmoid</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>sigmoid</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" line="54" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1sigmoid_1a7b8f300631bfdab0293a6fd3f76b6b39" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::math::sigmoid::init</definition>
+        <argsstring>(double reactivity, double offset, double gamma)</argsstring>
+        <name>init</name>
+        <param>
+          <type>double</type>
+          <declname>reactivity</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>gamma</declname>
+        </param>
+        <briefdescription>
+<para>Initialize the sigmoid after construction. Needed if the sigmoid is just one of many functions a class may use during its internal operations, and the selection must be performed after construction of the enclosing class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" line="74" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" bodystart="74" bodyend="78"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1sigmoid_1a3fa81eb07154adda31c801310526c7f6" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::math::sigmoid::gamma</definition>
+        <argsstring>(void) const</argsstring>
+        <name>gamma</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" line="83" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1sigmoid_1aa8d1dd1c69577d5f3c617d7f2efd9835" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::math::sigmoid::offset</definition>
+        <argsstring>(void) const</argsstring>
+        <name>offset</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" line="82" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1sigmoid_1a16796586e0f2566e10f597f73fc289d2" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::math::sigmoid::reactivity</definition>
+        <argsstring>(void) const</argsstring>
+        <name>reactivity</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" line="81" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" bodystart="81" bodyend="81"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Encapsulates base aspects common to all sigmoid functions; does not calculate anything itself, as derived sigmoids each have different input parameter requirements to calculate the value of the function at a point in space. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::math::sigmoid</label>
+        <link refid="classrcppsw_1_1math_1_1sigmoid"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::math::expression&lt; double &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1expression"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::math::sigmoid</label>
+        <link refid="classrcppsw_1_1math_1_1sigmoid"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::math::expression&lt; double &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1expression"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" line="52" column="33" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/sigmoid.hpp" bodystart="52" bodyend="91"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1math_1_1expression_1a2ca96a1dc826983e83f6e1e78f9f7d91" prot="public" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>eval</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a93c2ef3e3dca75b4d332b3f3dbdeabcf" prot="public" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>expression</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1ad04caaa756da846454de4eb50a56c440" prot="public" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>expression</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1aaf5f6c5239b011cc50e0660435796d42" prot="public" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>expression</name></member>
+      <member refid="classrcppsw_1_1math_1_1sigmoid_1a3fa81eb07154adda31c801310526c7f6" prot="protected" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>gamma</name></member>
+      <member refid="classrcppsw_1_1math_1_1sigmoid_1a7b8f300631bfdab0293a6fd3f76b6b39" prot="public" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>init</name></member>
+      <member refid="classrcppsw_1_1math_1_1sigmoid_1abd8e17f74f8ba09803f989e8d3cff34d" prot="private" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>m_gamma</name></member>
+      <member refid="classrcppsw_1_1math_1_1sigmoid_1a00aa2d629f72418012bf31ccec7f74b7" prot="private" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>m_offset</name></member>
+      <member refid="classrcppsw_1_1math_1_1sigmoid_1ae6a912b294970c159cefdb82b466a977" prot="private" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>m_reactivity</name></member>
+      <member refid="classrcppsw_1_1math_1_1sigmoid_1aa8d1dd1c69577d5f3c617d7f2efd9835" prot="protected" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>offset</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a9cb4fefa68b3548f05417e43eb5277b0" prot="public" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>operator&lt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a485d8341d75d4b27202152a55440508c" prot="public" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1afa8fda64acb803192fc82eab2e3ac2c1" prot="public" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>operator==</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1ad8efa9b86f5cc28bd10a4b6418830667" prot="public" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>operator&gt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1sigmoid_1a16796586e0f2566e10f597f73fc289d2" prot="protected" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>reactivity</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1aa9e95f4e981ff13149304f3ead544aaa" prot="public" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>reset</name></member>
+      <member refid="classrcppsw_1_1math_1_1sigmoid_1ac730323cab6d88df5a89cd6f1d3aa7fc" prot="public" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>sigmoid</name></member>
+      <member refid="classrcppsw_1_1math_1_1sigmoid_1a02040f1094116d33a077abb3558fed91" prot="public" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>sigmoid</name></member>
+      <member refid="classrcppsw_1_1math_1_1sigmoid_1a714164a89762f4cd66d6b360fad3f54d" prot="public" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>sigmoid</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a80f64efdd897e7287fef8624ef456810" prot="public" virt="non-virtual"><scope>rcppsw::math::sigmoid</scope><name>v</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1af75b4f349110ceaac4efbf36cd278a82" prot="public" virt="virtual"><scope>rcppsw::math::sigmoid</scope><name>~expression</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

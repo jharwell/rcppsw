@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__data" kind="interface" language="C++" prot="public">
+    <compoundname>rcppsw::ds::metrics::grid2D_metrics_data</compoundname>
+    <basecompoundref refid="structrcppsw_1_1metrics_1_1base__data" prot="public" virt="non-virtual">rcppsw::metrics::base_data</basecompoundref>
+    <includes refid="grid2D__metrics__data_8hpp" local="no">grid2D_metrics_data.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__data_1a91720446563f9f0d0da9470c5f94335b" prot="public" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1ds_1_1grid2D" kindref="compound">rcppsw::ds::grid2D</ref>&lt; <ref refid="namespacercppsw_1_1al_1adde22a9fc824f252937cfda2ceca8b18" kindref="member">ral::mt_size_t</ref> &gt;</type>
+        <definition>rcppsw::ds::grid2D&lt;ral::mt_size_t&gt; rcppsw::ds::metrics::grid2D_metrics_data::grid</definition>
+        <argsstring></argsstring>
+        <name>grid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_data.hpp" line="53" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_data.hpp" bodystart="53" bodyend="-1"/>
+        <referencedby refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1a0b393d365341e9544051fdf87da93c6f" compoundref="grid2D__metrics__collector_8hpp" startline="72" endline="72">rcppsw::ds::metrics::grid2D_metrics_collector::inc_total_count</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__data_1a0377ff8c10e78e20dc9f079d54cf4061" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacercppsw_1_1al_1adde22a9fc824f252937cfda2ceca8b18" kindref="member">ral::mt_size_t</ref></type>
+        <definition>ral::mt_size_t rcppsw::ds::metrics::grid2D_metrics_data::total_count</definition>
+        <argsstring></argsstring>
+        <name>total_count</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_data.hpp" line="54" column="38" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_data.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__data_1a843502873ca2a016c9fbd2a031e8cd43" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::metrics::grid2D_metrics_data::grid2D_metrics_data</definition>
+        <argsstring>(const math::vector2z &amp;dims)</argsstring>
+        <name>grid2D_metrics_data</name>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1math_1aa61ac5b9e211ad9913993fe03c12af7c" kindref="member">math::vector2z</ref> &amp;</type>
+          <declname>dims</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_data.hpp" line="50" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_data.hpp" bodystart="50" bodyend="51"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Container for basic metrics gather from rds::grid2D. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::ds::metrics::grid2D_metrics_data</label>
+        <link refid="structrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__data"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::metrics::base_data</label>
+        <link refid="structrcppsw_1_1metrics_1_1base__data"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::ds::metrics::grid2D_metrics_data</label>
+        <link refid="structrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__data"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+grid</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::metrics::base_data</label>
+        <link refid="structrcppsw_1_1metrics_1_1base__data"/>
+      </node>
+      <node id="4">
+        <label>rcppsw::ds::base_grid2D&lt; ral::mt_size_t &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1base__grid2D"/>
+      </node>
+      <node id="3">
+        <label>rcppsw::ds::grid2D&lt; ral::mt_size_t &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1grid2D"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_data.hpp" line="49" column="53" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_data.hpp" bodystart="49" bodyend="56"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1metrics_1_1base__data_1ace48ba7589a9d7bddfea013e981b9ea2" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_data</scope><name>base_data</name></member>
+      <member refid="structrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__data_1a91720446563f9f0d0da9470c5f94335b" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_data</scope><name>grid</name></member>
+      <member refid="structrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__data_1a843502873ca2a016c9fbd2a031e8cd43" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_data</scope><name>grid2D_metrics_data</name></member>
+      <member refid="structrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__data_1a0377ff8c10e78e20dc9f079d54cf4061" prot="public" virt="non-virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_data</scope><name>total_count</name></member>
+      <member refid="structrcppsw_1_1metrics_1_1base__data_1a18701c89bbbcdd6fe05d7d3a52c53c1e" prot="public" virt="virtual"><scope>rcppsw::ds::metrics::grid2D_metrics_data</scope><name>~base_data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

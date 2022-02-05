@@ -1,0 +1,67 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/common/common.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/common/common.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <string>\fP
+.br
+\fC#include 'rcsw/common/common\&.h'\fP
+.br
+\fC#include 'rcppsw/common/macros\&.hpp'\fP
+.br
+\fC#include 'rcppsw/mpl/mpl\&.hpp'\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::detail\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<class T > using \fBrcppsw::detail::to_str_type\fP = decltype(std::declval< T >()\&.to_str())"
+.br
+.RI "Predicate for detecting if a type \fCT\fP defines \fCto_str()\fP\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename TEnum > constexpr std::underlying_type< TEnum >::type \fBrcppsw::as_underlying\fP (const TEnum &e) noexcept"
+.br
+.RI "Get the value of a strongly typed enum as its underlying type\&. "
+.ti -1c
+.RI "template<typename T , typename std::enable_if<(!mpl::is_detected< detail::to_str_type, T >::value), int >::type  = 0> std::string \fBrcppsw::to_string\fP (const T &obj)"
+.br
+.RI "For \fCT\fP where std::to_string(\fCT\fP) works let the stdandard library to the conversion\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2017 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

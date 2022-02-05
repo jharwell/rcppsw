@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1patterns_1_1factory" kind="namespace" language="C++">
+    <compoundname>rcppsw::patterns::factory</compoundname>
+    <innerclass refid="classrcppsw_1_1patterns_1_1factory_1_1releasing__factory" prot="public">rcppsw::patterns::factory::releasing_factory</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1factory_1_1sharing__factory" prot="public">rcppsw::patterns::factory::sharing_factory</innerclass>
+    <innernamespace refid="namespacercppsw_1_1patterns_1_1factory_1_1detail">rcppsw::patterns::factory::detail</innernamespace>
+    <briefdescription>
+<para>Factory design pattern: sharing/releasing, multifactory. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" line="36" column="46"/>
+  </compounddef>
+</doxygen>

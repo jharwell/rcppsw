@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1algorithm_1_1clustering_1_1cluster_1_1mapping_3_01T_00_01Policy_00_01policy_1_1is__nc_3_01Policy_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::algorithm::clustering::cluster::mapping&lt; T, Policy, policy::is_nc&lt; Policy &gt; &gt;</compoundname>
+    <includes refid="cluster_8hpp" local="no">cluster.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Policy</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structrcppsw_1_1algorithm_1_1clustering_1_1cluster_1_1mapping_3_01T_00_01Policy_00_01policy_1_1is__nc_3_01Policy_01_4_01_4_1abaa825a44d52cfcacfe897a482deee05" prot="public" static="no">
+        <type><ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster" kindref="compound">nc_cluster</ref>&lt; T, Policy &gt;</type>
+        <definition>using rcppsw::algorithm::clustering::cluster::mapping&lt; T, Policy, policy::is_nc&lt; Policy &gt; &gt;::type =  nc_cluster&lt;T, Policy&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="175" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="175" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::algorithm::clustering::cluster::mapping&lt; T, Policy, policy::is_nc&lt; Policy &gt; &gt;</label>
+        <link refid="structrcppsw_1_1algorithm_1_1clustering_1_1cluster_1_1mapping_3_01T_00_01Policy_00_01policy_1_1is__nc_3_01Policy_01_4_01_4"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="174" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="174" bodyend="176"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1algorithm_1_1clustering_1_1cluster_1_1mapping_3_01T_00_01Policy_00_01policy_1_1is__nc_3_01Policy_01_4_01_4_1abaa825a44d52cfcacfe897a482deee05" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::cluster::mapping&lt; T, Policy, policy::is_nc&lt; Policy &gt; &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,67 @@
+.TH "rcppsw::patterns::fsm::state" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::fsm::state \- Abstract state base class that all states inherit from\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <state\&.hpp>\fP
+.PP
+Inherited by \fBrcppsw::patterns::fsm::hfsm_state\fP, \fBrcppsw::patterns::fsm::state_action0< SM, Func >\fP, and \fBrcppsw::patterns::fsm::state_action1< SM, Event, Func >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBstate\fP (const \fBstate\fP &)=default"
+.br
+.ti -1c
+.RI "\fBstate\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual \fB~state\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual int \fBinvoke_state_action\fP (\fBbase_fsm\fP *sm, \fBevent_data\fP *data) const =0"
+.br
+.RI "Called by the state machine engine to execute a state action\&. If a guard condition exists and it evaluates to false, the state action will not execute\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Abstract state base class that all states inherit from\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::patterns::fsm::state::state (void)\fC [default]\fP"
+
+.SS "rcppsw::patterns::fsm::state::state (const \fBstate\fP &)\fC [default]\fP"
+
+.SS "virtual rcppsw::patterns::fsm::state::~state (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual int rcppsw::patterns::fsm::state::invoke_state_action (\fBbase_fsm\fP * sm, \fBevent_data\fP * data) const\fC [pure virtual]\fP"
+
+.PP
+Called by the state machine engine to execute a state action\&. If a guard condition exists and it evaluates to false, the state action will not execute\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsm\fP A state machine instance\&. 
+.br
+\fIdata\fP The event data\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+integer indicating whether or not the event was handled\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBrcppsw::patterns::fsm::state_action1< SM, Event, Func >\fP, \fBrcppsw::patterns::fsm::state_action0< SM, Func >\fP, \fBrcppsw::patterns::fsm::hfsm_state_action1< FSM, Event, Handler >\fP, \fBrcppsw::patterns::fsm::hfsm_state_action0< FSM, Handler >\fP, and \fBrcppsw::patterns::fsm::hfsm_state_action0< rcppsw::patterns::fsm::hfsm, &hfsm::ST_top_state >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

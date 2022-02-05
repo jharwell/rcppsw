@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1config" kind="namespace" language="C++">
+    <compoundname>rcppsw::config</compoundname>
+    <innerclass refid="structrcppsw_1_1config_1_1base__config" prot="public">rcppsw::config::base_config</innerclass>
+    <innerclass refid="classrcppsw_1_1config_1_1streamable__parser" prot="public">rcppsw::config::streamable_parser</innerclass>
+    <innernamespace refid="namespacercppsw_1_1config_1_1xml">rcppsw::config::xml</innernamespace>
+    <briefdescription>
+<para>Base namespace for run-time configuration parsing and data containers. Currently includes base class implementations for: </para>
+    </briefdescription>
+    <detaileddescription>
+<para><itemizedlist>
+<listitem><para>XML </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/base_config.hpp" line="32" column="25"/>
+  </compounddef>
+</doxygen>

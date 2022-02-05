@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classsharing__multifactory" kind="class" language="C++" prot="public">
+    <compoundname>sharing_multifactory</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">detail::multifactory&lt; detail::factory_sharing_type, std::shared_ptr, TBase &gt;</basecompoundref>
+    <includes refid="multifactory_8hpp" local="no">multifactory.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TBase</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Args</declname>
+        <defname>Args</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsharing__multifactory_1a848bd948b13cd074c4bb3aedf8711d09" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>sharing_multifactory&lt; TBase, Args &gt;::~sharing_multifactory</definition>
+        <argsstring>(void) override=default</argsstring>
+        <name>~sharing_multifactory</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" line="130" column="3"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Specialization of the multifactory class for sharing ownership of created objects via std::shared_ptr. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TBase</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base class that all factory-constructed types must derive from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments common to ALL factory-constructible types. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>detail::multifactory&lt; detail::factory_sharing_type, std::shared_ptr, TBase &gt;</label>
+      </node>
+      <node id="1">
+        <label>sharing_multifactory&lt; TBase, Args &gt;</label>
+        <link refid="classsharing__multifactory"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>detail::multifactory&lt; detail::factory_sharing_type, std::shared_ptr, TBase &gt;</label>
+      </node>
+      <node id="1">
+        <label>sharing_multifactory&lt; TBase, Args &gt;</label>
+        <link refid="classsharing__multifactory"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" line="128" column="58" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/multifactory.hpp" bodystart="126" bodyend="131"/>
+    <listofallmembers>
+      <member refid="classsharing__multifactory_1a848bd948b13cd074c4bb3aedf8711d09" prot="public" virt="non-virtual"><scope>sharing_multifactory</scope><name>~sharing_multifactory</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

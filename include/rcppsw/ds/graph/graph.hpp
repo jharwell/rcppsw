@@ -91,14 +91,31 @@ static inline auto adjacent_vertices(const TBGLGraphType& g,
   return boost::adjacent_vertices(v, g);
 }
 
+template <typename TBGLGraphType>
+static inline auto add_vertex(TBGLGraphType& g) {
+  return boost::add_vertex(g);
+}
+template <typename TBGLGraphType>
+static inline auto remove_vertex(TBGLGraphType& g,
+                                 typename TBGLGraphType::vertex_descriptor v) {
+  return boost::remove_vertex(v, g);
+}
+
+template <typename TBGLGraphType>
+static inline auto add_edge(TBGLGraphType& g,
+                            typename TBGLGraphType::vertex_descriptor u,
+                            typename TBGLGraphType::vertex_descriptor v) {
+  return boost::add_edge(u, v, g);
+}
+
 /**
  * \brief Search for the vertex with coordinates \p c in \p g.
  *
  * \return The descriptor of the matching vertex, or -1 if not found.
  */
-template <typename TBGLGraphType>
+template <typename TBGLGraphType, typename TCoordType>
 static inline boost::optional<typename TBGLGraphType::vertex_descriptor> find(
-    const TBGLGraphType& g, const rmath::vector3z& c) {
+    const TBGLGraphType& g, const TCoordType& c) {
 
   auto [v_i, v_end] = boost::vertices(g);
 

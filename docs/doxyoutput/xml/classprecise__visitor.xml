@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classprecise__visitor" kind="class" language="C++" prot="public">
+    <compoundname>precise_visitor</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">VisitorImpl</basecompoundref>
+    <basecompoundref prot="protected" virt="non-virtual">boost::static_visitor&lt; void &gt;</basecompoundref>
+    <includes refid="visitor_8hpp" local="no">visitor.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename VisitorImpl</type>
+      </param>
+      <param>
+        <type>typename TypeList</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classprecise__visitor_1abbbbd393bff9e9c8ceea813b45b90b55" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>precise_visitor&lt; VisitorImpl, TypeList &gt;::precise_visitor</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>precise_visitor</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" line="138" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" bodystart="138" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classprecise__visitor_1a480f3254456f2f9b806bf09d37629aab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="typelist_8hpp_1a30edd63818e9cff35a4db192dc8af59f" kindref="member">RCPPSW_SFINAE_TYPELIST_REQUIRE</ref>(TypeList, T)</type>
+          </param>
+          <param>
+            <type>typename ...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void precise_visitor&lt; VisitorImpl, TypeList &gt;::visit</definition>
+        <argsstring>(T &amp;visitee, Args &amp;&amp;... args)</argsstring>
+        <name>visit</name>
+        <param>
+          <type>T &amp;</type>
+          <declname>visitee</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The visit template, which can take additional arguments besides the visitee. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" line="148" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" bodystart="148" bodyend="150"/>
+        <referencedby refid="classfiltered__visitor_1a64161f17809797db29b51c0f5a7c893d" compoundref="visitor_8hpp" startline="178" endline="180">filtered_visitor&lt; TVisitor &gt;::visit</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Visitor that will only visit precisely with types that exactly match one of the types in its type list (i.e. no implicit upcasting is allowed). SFINAE FTW! </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>VisitorImpl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the class containing the actual implementation of the visit functions. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TypeList</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>List of types that the class will be able to visit. Must be a rmpl::typelist.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+For each visitee type you want to be able to visit, you must (1) include it in the type list for the list, (2) define a function with the following exact signature:</para>
+<para>void visit(&lt;vistee_type&gt;&amp;)</para>
+<para>If these conditions are not meant, then trying to call <ref refid="classprecise__visitor_1a480f3254456f2f9b806bf09d37629aab" kindref="member">visit()</ref> will result in a compiler error.</para>
+<para><simplesect kind="note"><para>Non-static methods from <computeroutput>VisitorImpl</computeroutput> will be available in the derived class (in contrast to <ref refid="classprecise__visitor" kindref="compound">precise_visitor</ref>). </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>boost::static_visitor&lt; void &gt;</label>
+      </node>
+      <node id="1">
+        <label>precise_visitor&lt; VisitorImpl, TypeList &gt;</label>
+        <link refid="classprecise__visitor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="protected-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>VisitorImpl</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>boost::static_visitor&lt; void &gt;</label>
+      </node>
+      <node id="1">
+        <label>precise_visitor&lt; VisitorImpl, TypeList &gt;</label>
+        <link refid="classprecise__visitor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="protected-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>VisitorImpl</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" line="134" column="57" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" bodystart="133" bodyend="151"/>
+    <listofallmembers>
+      <member refid="classprecise__visitor_1abbbbd393bff9e9c8ceea813b45b90b55" prot="public" virt="non-virtual"><scope>precise_visitor</scope><name>precise_visitor</name></member>
+      <member refid="classprecise__visitor_1a480f3254456f2f9b806bf09d37629aab" prot="public" virt="non-virtual"><scope>precise_visitor</scope><name>visit</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

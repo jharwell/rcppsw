@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_a6dcf768a914f47739c3fbfb9efa15e3" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/metrics</compoundname>
+    <innerdir refid="dir_ae5ed11b67cfedf3b2c99ce71c5c9c1c">/home/jharwell/git/rcppsw/include/rcppsw/metrics/config</innerdir>
+    <innerfile refid="base__collector_8hpp">base_collector.hpp</innerfile>
+    <innerfile refid="base__data_8hpp">base_data.hpp</innerfile>
+    <innerfile refid="base__manager_8hpp">base_manager.hpp</innerfile>
+    <innerfile refid="base__metrics_8hpp">base_metrics.hpp</innerfile>
+    <innerfile refid="base__sink_8hpp">base_sink.hpp</innerfile>
+    <innerfile refid="collector__group_8hpp">collector_group.hpp</innerfile>
+    <innerfile refid="creatable__collector__set_8hpp">creatable_collector_set.hpp</innerfile>
+    <innerfile refid="csv__sink_8hpp">csv_sink.hpp</innerfile>
+    <innerfile refid="file__sink_8hpp">file_sink.hpp</innerfile>
+    <innerfile refid="file__sink__registerer_8hpp">file_sink_registerer.hpp</innerfile>
+    <innerfile refid="fs__output__manager_8hpp">fs_output_manager.hpp</innerfile>
+    <innerfile refid="network__output__manager_8hpp">network_output_manager.hpp</innerfile>
+    <innerfile refid="network__sink_8hpp">network_sink.hpp</innerfile>
+    <innerfile refid="network__sink__registerer_8hpp">network_sink_registerer.hpp</innerfile>
+    <innerfile refid="output__mode_8hpp">output_mode.hpp</innerfile>
+    <innerfile refid="register__using__config_8hpp">register_using_config.hpp</innerfile>
+    <innerfile refid="register__with__sink_8hpp">register_with_sink.hpp</innerfile>
+    <innerfile refid="write__status_8hpp">write_status.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/"/>
+  </compounddef>
+</doxygen>

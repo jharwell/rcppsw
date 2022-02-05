@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1patterns_1_1prototype" kind="namespace" language="C++">
+    <compoundname>rcppsw::patterns::prototype</compoundname>
+    <innerclass refid="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory" prot="public">rcppsw::patterns::prototype::caching_factory</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1prototype_1_1clonable" prot="public">rcppsw::patterns::prototype::clonable</innerclass>
+    <briefdescription>
+<para>Prototype design pattern interfaces and classes: clonable, caching factory. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/caching_factory.hpp" line="38" column="39"/>
+  </compounddef>
+</doxygen>

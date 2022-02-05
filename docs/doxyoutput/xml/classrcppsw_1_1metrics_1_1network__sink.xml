@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1metrics_1_1network__sink" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::metrics::network_sink</compoundname>
+    <basecompoundref refid="classrcppsw_1_1metrics_1_1base__sink" prot="public" virt="non-virtual">rcppsw::metrics::base_sink</basecompoundref>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; network_sink &gt;</basecompoundref>
+    <includes refid="network__sink_8hpp" local="no">network_sink.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1network__sink_1a40973e4f1d4cc67debb256eec6f952b3" prot="private" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string rcppsw::metrics::network_sink::mc_dest</definition>
+        <argsstring></argsstring>
+        <name>mc_dest</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink.hpp" line="67" column="21" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__sink_1ace8e2a0c987f47a4b7b53ace14086314" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::network_sink::network_sink</definition>
+        <argsstring>(const std::string &amp;dest, const rmetrics::output_mode &amp;mode, const rtypes::timestep &amp;interval)</argsstring>
+        <name>network_sink</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" kindref="member">rmetrics::output_mode</ref> &amp;</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">rtypes::timestep</ref> &amp;</type>
+          <declname>interval</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink.hpp" line="54" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink.hpp" bodystart="54" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__sink_1a452b0b4d122e859590b7094ad3185858" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::metrics::network_sink::~network_sink</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~network_sink</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink.hpp" line="61" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__sink_1a636f9bd96eb8a80f075114f3f3ab19ce" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string&amp; rcppsw::metrics::network_sink::dest</definition>
+        <argsstring>(void) const</argsstring>
+        <name>dest</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink.hpp" line="63" column="21" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink.hpp" bodystart="63" bodyend="63"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Metrics sink so that collectors can output their metrics to a machine elsewhere on the network. Metrics are written at the specified interval to the specified machine to collect and process. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>rcppsw::er::client&lt; base_sink &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::network_sink</label>
+        <link refid="classrcppsw_1_1metrics_1_1network__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::metrics::base_sink</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__sink"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcppsw::er::client&lt; network_sink &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>rcppsw::er::client&lt; base_sink &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::network_sink</label>
+        <link refid="classrcppsw_1_1metrics_1_1network__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::metrics::base_sink</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__sink"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcppsw::er::client&lt; network_sink &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink.hpp" line="52" column="41" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink.hpp" bodystart="51" bodyend="69"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1metrics_1_1base__sink_1a30d0e24af23d9d416bbe2541752b53d3" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink</scope><name>base_sink</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::metrics::network_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::metrics::network_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual" ambiguityscope="client&lt; network_sink &gt;::"><scope>rcppsw::metrics::network_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual" ambiguityscope="client&lt; network_sink &gt;::"><scope>rcppsw::metrics::network_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__sink_1a636f9bd96eb8a80f075114f3f3ab19ce" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink</scope><name>dest</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::metrics::network_sink</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual" ambiguityscope="client&lt; network_sink &gt;::"><scope>rcppsw::metrics::network_sink</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__sink_1a0ad1688ea1c8a323d6f6435280274a4d" prot="public" virt="pure-virtual"><scope>rcppsw::metrics::network_sink</scope><name>finalize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__sink_1a6c44de6709e712b9c5e54cb96a12764c" prot="public" virt="pure-virtual"><scope>rcppsw::metrics::network_sink</scope><name>flush</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__sink_1ad360db7add933a07e862ebee79a9b4a1" prot="public" virt="pure-virtual"><scope>rcppsw::metrics::network_sink</scope><name>initialize</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::metrics::network_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::metrics::network_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual" ambiguityscope="client&lt; network_sink &gt;::"><scope>rcppsw::metrics::network_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual" ambiguityscope="client&lt; network_sink &gt;::"><scope>rcppsw::metrics::network_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::metrics::network_sink</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual" ambiguityscope="client&lt; network_sink &gt;::"><scope>rcppsw::metrics::network_sink</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::metrics::network_sink</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual" ambiguityscope="client&lt; network_sink &gt;::"><scope>rcppsw::metrics::network_sink</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::metrics::network_sink</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual" ambiguityscope="client&lt; network_sink &gt;::"><scope>rcppsw::metrics::network_sink</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__sink_1a40973e4f1d4cc67debb256eec6f952b3" prot="private" virt="non-virtual"><scope>rcppsw::metrics::network_sink</scope><name>mc_dest</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::metrics::network_sink</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual" ambiguityscope="client&lt; network_sink &gt;::"><scope>rcppsw::metrics::network_sink</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::metrics::network_sink</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual" ambiguityscope="client&lt; network_sink &gt;::"><scope>rcppsw::metrics::network_sink</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::metrics::network_sink</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual" ambiguityscope="client&lt; network_sink &gt;::"><scope>rcppsw::metrics::network_sink</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::metrics::network_sink</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual" ambiguityscope="client&lt; network_sink &gt;::"><scope>rcppsw::metrics::network_sink</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__sink_1ace8e2a0c987f47a4b7b53ace14086314" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink</scope><name>network_sink</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual" ambiguityscope="rcppsw::"><scope>rcppsw::metrics::network_sink</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual" ambiguityscope="client&lt; network_sink &gt;::"><scope>rcppsw::metrics::network_sink</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__sink_1a33bce9116b8249d17c2c5ed7088aa6ff" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink</scope><name>output_interval</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__sink_1a8ee14d13a97dfaf7166e6dccfdbb96ba" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink</scope><name>output_mode</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__sink_1ae6c46d822bd9c6384bc46e8bb1c5f1ee" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink</scope><name>ready_to_flush</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__sink_1ae644dfd6d29ce48030897690de5dff19" prot="public" virt="virtual"><scope>rcppsw::metrics::network_sink</scope><name>~base_sink</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual" ambiguityscope="rcppsw::"><scope>rcppsw::metrics::network_sink</scope><name>~client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual" ambiguityscope="client&lt; network_sink &gt;::"><scope>rcppsw::metrics::network_sink</scope><name>~client</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__sink_1a452b0b4d122e859590b7094ad3185858" prot="public" virt="virtual"><scope>rcppsw::metrics::network_sink</scope><name>~network_sink</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

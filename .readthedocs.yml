@@ -8,12 +8,12 @@ build:
   os: ubuntu-20.04
   tools:
     python: "3.6"
-  apt_packages:
-    - libboost-all-dev
-    - liblog4cxx-dev
-    - git
-    - graphviz
-    - doxygen
+  # apt_packages:
+  #   - libboost-all-dev
+  #   - liblog4cxx-dev
+  #   - git
+  #   - graphviz
+  #   - doxygen
 
 # Build documentation in the docs/ directory with Sphinx
 sphinx:

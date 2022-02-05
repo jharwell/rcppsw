@@ -1,0 +1,465 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1metrics_1_1collector__group" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::metrics::collector_group</compoundname>
+    <includes refid="collector__group_8hpp" local="no">collector_group.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1metrics_1_1collector__group_1ace196cc8b4dba7196e0019f45fd217d3" prot="public" static="no">
+        <type>std::string</type>
+        <definition>using rcppsw::metrics::collector_group::key_type =  std::string</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="61" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1metrics_1_1collector__group_1a3e516d5b4e103704b564d0fc1bdf1d79" prot="public" static="no">
+        <type>std::unique_ptr&lt; <ref refid="classrcppsw_1_1metrics_1_1base__collector" kindref="compound">base_collector</ref> &gt;</type>
+        <definition>using rcppsw::metrics::collector_group::mapped_type =  std::unique_ptr&lt;base_collector&gt;</definition>
+        <argsstring></argsstring>
+        <name>mapped_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="62" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1collector__group_1af1b35a3ac3fca95e968750222a711e3b" prot="private" static="no" mutable="no">
+        <type>std::map&lt; <ref refid="classrcppsw_1_1metrics_1_1collector__group_1ace196cc8b4dba7196e0019f45fd217d3" kindref="member">key_type</ref>, <ref refid="classrcppsw_1_1metrics_1_1collector__group_1a3e516d5b4e103704b564d0fc1bdf1d79" kindref="member">mapped_type</ref> &gt;</type>
+        <definition>std::map&lt;key_type, mapped_type&gt; rcppsw::metrics::collector_group::m_collectors</definition>
+        <argsstring></argsstring>
+        <name>m_collectors</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="272" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="272" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1collector__group_1a02a4359dd2cd6701774c4359d093c89d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::collector_group::collector_group</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>collector_group</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="64" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1collector__group_1adc945b32925db0c5f558d7c9b71113e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::metrics::collector_group::~collector_group</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~collector_group</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="65" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1collector__group_1a2c84a509242e695ece1a1bdb8913fb7b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::collector_group::collect</definition>
+        <argsstring>(const key_type &amp;name, const base_metrics &amp;metrics)</argsstring>
+        <name>collect</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1collector__group_1ace196cc8b4dba7196e0019f45fd217d3" kindref="member">key_type</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1base__metrics" kindref="compound">base_metrics</ref> &amp;</type>
+          <declname>metrics</declname>
+        </param>
+        <briefdescription>
+<para>Collect metrics from the specified collector, passing it the specified metrics set. This function only works if you are collecting metrics from something that is present on the <emphasis>same</emphasis> machine as the collector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The registered name of the collector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>metrics</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The metrics to collect from.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>TRUE</computeroutput> if the specified collector is registered and collection was successful, <computeroutput>FALSE</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="120" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="120" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1collector__group_1a1d81c739802b925ddc9616f5d602d107" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TNetworkHandle</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::collector_group::collect</definition>
+        <argsstring>(const key_type &amp;name, const TNetworkHandle &amp;handle)</argsstring>
+        <name>collect</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1collector__group_1ace196cc8b4dba7196e0019f45fd217d3" kindref="member">key_type</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const TNetworkHandle &amp;</type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Collect metrics from the specified collector, passing it the specified metrics set. This function only works if you are collecting metrics from something that is present on <emphasis>different</emphasis> machine as the collector (i.e., over the network). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TNetworkHandle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The handle of the metrics to collect (IP address, domain name, etc.).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The registered name of the collector.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>TRUE</computeroutput> if the specified collector is registered and collection was successful, <computeroutput>FALSE</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="144" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="144" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1collector__group_1ad9f9e75d10a93f49ce6eb92f286d9773" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::collector_group::collect_if</definition>
+        <argsstring>(const key_type &amp;name, const base_metrics &amp;metrics, const std::function&lt; bool(const base_metrics &amp;)&gt; &amp;predicate)</argsstring>
+        <name>collect_if</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1collector__group_1ace196cc8b4dba7196e0019f45fd217d3" kindref="member">key_type</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1base__metrics" kindref="compound">base_metrics</ref> &amp;</type>
+          <declname>metrics</declname>
+        </param>
+        <param>
+          <type>const std::function&lt; bool(const <ref refid="classrcppsw_1_1metrics_1_1base__metrics" kindref="compound">base_metrics</ref> &amp;)&gt; &amp;</type>
+          <declname>predicate</declname>
+        </param>
+        <briefdescription>
+<para>Collect metrics from the specified collector, passing it the specified metrics set, but only if the specified condition is met by the metrics. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Useful if you have a &quot;polymorphic&quot; set of metrics that are very similar, but need to be captured in different files, and you don&apos;t want to have to derive nearly identical classes to handle it. The predicate is evaluated <emphasis>after</emphasis> checking to see if the specified collector is enabled, because that check has to be done anyway, and predicate evaluation is potentially expensive.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the collector to collect with. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>metrics</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The metrics to collect. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>predicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The predicate used to determine if the specified collector should actually be invoked.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>TRUE</computeroutput> if metrics were collected, <computeroutput>FALSE</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="172" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="172" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1collector__group_1ad30b871dbfac96f7384c17b870b00a36" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::collector_group::collector_register</definition>
+        <argsstring>(const key_type &amp;name, Args &amp;&amp;... args)</argsstring>
+        <name>collector_register</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1collector__group_1ace196cc8b4dba7196e0019f45fd217d3" kindref="member">key_type</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Add a collector to the group by constructing it in place. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the collector.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key for the collector in the group. Should be unique, though it is not a requirement. If it is not unique then the older collector that was mapped to that name will NOT be overwritten, and nothing is done. You have to remove it first <ref refid="classrcppsw_1_1metrics_1_1collector__group_1aed16d0548444b278056354ed89fd0204" kindref="member">collector_unregister()</ref>.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>0 or more arguments to the collector constructor.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>TRUE</computeroutput> if the collector was successfully registered, and <computeroutput>FALSE</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="84" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="84" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1collector__group_1aed16d0548444b278056354ed89fd0204" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::collector_group::collector_unregister</definition>
+        <argsstring>(const key_type &amp;name)</argsstring>
+        <name>collector_unregister</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1collector__group_1ace196cc8b4dba7196e0019f45fd217d3" kindref="member">key_type</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Unregister the collector with mapped name <computeroutput>name</computeroutput> from the group. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>TRUE</computeroutput> if the collector was successfully unregistered, and <computeroutput>FALSE</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="99" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="99" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1collector__group_1aca92644952284f9eb41f5879ff61543a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::collector_group::finalize</definition>
+        <argsstring>(void)</argsstring>
+        <name>finalize</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Call the <ref refid="classrcppsw_1_1metrics_1_1base__collector_1a65d77f74eb89ae2648fc03a5e3208d71" kindref="member">base_collector::finalize()</ref> function on all collectors in the group. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="262" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="262" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1collector__group_1a6eb030086e19dee9e9f7ef063a22f0cb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::collector_group::flush</definition>
+        <argsstring>(bool fail_ok)</argsstring>
+        <name>flush</name>
+        <param>
+          <type>bool</type>
+          <declname>fail_ok</declname>
+        </param>
+        <briefdescription>
+<para>Call the <ref refid="classrcppsw_1_1metrics_1_1base__collector_1ac802aa3e05bed414bb1a0c741c1f9310" kindref="member">base_collector::flush()</ref> function on all collectors in the group. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><computeroutput>fail_ok</computeroutput> Is it OK if one or more collectors fail to write due to filesystem I/O errors, or not?</para>
+<para><simplesect kind="return"><para>If <computeroutput>fail_ok</computeroutput> is <computeroutput>FALSE</computeroutput>, <computeroutput>TRUE</computeroutput> iff ALL collectors in the group attempted to write out metrics this timestep and were successful, and <computeroutput>FALSE</computeroutput> otherwise. If <computeroutput>fail_ok</computeroutput> is <computeroutput>TRUE</computeroutput>, then <computeroutput>TRUE</computeroutput> if all collectors attempted to write out metrics this timestep, regardless of success, and <computeroutput>FALSE</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="244" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="244" bodyend="256"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1collector__group_1a54fd312a23df2644d385be0d4f04411f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T* rcppsw::metrics::collector_group::get</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>get</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1collector__group_1ace196cc8b4dba7196e0019f45fd217d3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Get a reference to a collector by name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mapped name of the collector in the group. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="191" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="191" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1collector__group_1ab5a0b85257c72d34ef06260a66a1b5a6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::collector_group::initialize</definition>
+        <argsstring>(void)</argsstring>
+        <name>initialize</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Call the <ref refid="classrcppsw_1_1metrics_1_1base__collector_1a0e211e635c7452e3cb000518f1735c3f" kindref="member">base_collector::initialize()</ref> function on all collectors in the group. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="199" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="199" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1collector__group_1a158e9534e8654ea1d4cea07d9d819572" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::collector_group::interval_reset</definition>
+        <argsstring>(void)</argsstring>
+        <name>interval_reset</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Call the <ref refid="classrcppsw_1_1metrics_1_1base__collector_1a357c5d4d01dedf0ca5a0298066cc8fb8" kindref="member">base_collector::interval_reset()</ref> function on all collectors in the group. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="211" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="211" bodyend="217"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1collector__group_1a23ddbcd59ffecbb724ef65e52216463e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::collector_group::timestep_inc</definition>
+        <argsstring>(void)</argsstring>
+        <name>timestep_inc</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Call the <ref refid="classrcppsw_1_1metrics_1_1base__collector_1a47c206d306e62b30110281108e19e58a" kindref="member">base_collector::timestep_inc()</ref> function on all collectors in the group. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="223" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="223" bodyend="229"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A group of N collectors, mapped by name, on which collective operations can be performed, in addition to individual collection; used to reduce code duplication. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::metrics::collector_group</label>
+        <link refid="classrcppsw_1_1metrics_1_1collector__group"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" line="59" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp" bodystart="59" bodyend="274"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1a2c84a509242e695ece1a1bdb8913fb7b" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>collect</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1a1d81c739802b925ddc9616f5d602d107" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>collect</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1ad9f9e75d10a93f49ce6eb92f286d9773" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>collect_if</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1a02a4359dd2cd6701774c4359d093c89d" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>collector_group</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1ad30b871dbfac96f7384c17b870b00a36" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>collector_register</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1aed16d0548444b278056354ed89fd0204" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>collector_unregister</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1aca92644952284f9eb41f5879ff61543a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>finalize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1a6eb030086e19dee9e9f7ef063a22f0cb" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>flush</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1a54fd312a23df2644d385be0d4f04411f" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>get</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1ab5a0b85257c72d34ef06260a66a1b5a6" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>initialize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1a158e9534e8654ea1d4cea07d9d819572" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>interval_reset</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1ace196cc8b4dba7196e0019f45fd217d3" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>key_type</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1af1b35a3ac3fca95e968750222a711e3b" prot="private" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>m_collectors</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1a3e516d5b4e103704b564d0fc1bdf1d79" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>mapped_type</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1a23ddbcd59ffecbb724ef65e52216463e" prot="public" virt="non-virtual"><scope>rcppsw::metrics::collector_group</scope><name>timestep_inc</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1collector__group_1adc945b32925db0c5f558d7c9b71113e6" prot="public" virt="virtual"><scope>rcppsw::metrics::collector_group</scope><name>~collector_group</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

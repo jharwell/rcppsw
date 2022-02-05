@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1multithread" kind="namespace" language="C++">
+    <compoundname>rcppsw::multithread</compoundname>
+    <innerclass refid="classrcppsw_1_1multithread_1_1lockable" prot="public">rcppsw::multithread::lockable</innerclass>
+    <innerclass refid="classrcppsw_1_1multithread_1_1mt__fsm" prot="public">rcppsw::multithread::mt_fsm</innerclass>
+    <innerclass refid="classrcppsw_1_1multithread_1_1mt__queue" prot="public">rcppsw::multithread::mt_queue</innerclass>
+    <innerclass refid="classrcppsw_1_1multithread_1_1mt__vector" prot="public">rcppsw::multithread::mt_vector</innerclass>
+    <innerclass refid="classrcppsw_1_1multithread_1_1threadable" prot="public">rcppsw::multithread::threadable</innerclass>
+    <briefdescription>
+<para>Multi-threaded variants of other classes: FSM, queue, vector, threadable interface for daemon-esque classes, lockable interface. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="34" column="30"/>
+  </compounddef>
+</doxygen>

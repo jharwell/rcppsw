@@ -449,10 +449,6 @@ RCPPSW_MATH_VEC2_SCALED_CONVF(z);
 RCPPSW_MATH_VEC2_CONV2DISC(z, size_t);
 RCPPSW_MATH_VEC2_CONV2DISC(i, int);
 
-/*******************************************************************************
- * Free Functions
- ******************************************************************************/
-
 NS_END(math, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_MATH_VECTOR2_HPP_ */

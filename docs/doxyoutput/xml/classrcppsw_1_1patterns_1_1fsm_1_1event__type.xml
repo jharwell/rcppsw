@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1fsm_1_1event__type" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::fsm::event_type</compoundname>
+    <includes refid="event_8hpp" local="no">event.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classrcppsw_1_1patterns_1_1fsm_1_1event__type_1a4f25bc6ab040618d7184758739008fc4" prot="public" static="no" strong="no">
+        <type></type>
+        <name>@0</name>
+        <enumvalue id="classrcppsw_1_1patterns_1_1fsm_1_1event__type_1a4f25bc6ab040618d7184758739008fc4a58e644f0aac2b5af59ac5bd21baa6acc" prot="public">
+          <name>ekNORMAL</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classrcppsw_1_1patterns_1_1fsm_1_1event__type_1a4f25bc6ab040618d7184758739008fc4a57d821f860506bdb3e4e745b229ec849" prot="public">
+          <name>ekCHILD</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>A normal, external state machine event. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>A signal from a child state, conveying something that it couldn&apos;t handle or that something important happened that it felt a parent FSM should know about. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classrcppsw_1_1patterns_1_1fsm_1_1event__type_1a4f25bc6ab040618d7184758739008fc4ac74d5bbd9dd0d0a5567bac475d696aeb" prot="public">
+          <name>ekEXTERNAL_TYPES</name>
+          <briefdescription>
+<para>Applications wishing to defined their own event types should start here. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp" line="94" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp" bodystart="94" bodyend="109"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A class representing the types of <ref refid="classrcppsw_1_1patterns_1_1fsm_1_1event__signal" kindref="compound">event_signal</ref> that are passed as part of <ref refid="classrcppsw_1_1patterns_1_1fsm_1_1event__data" kindref="compound">event_data</ref> to states. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::event_type</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1event__type"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp" line="92" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp" bodystart="92" bodyend="110"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1event__type_1a4f25bc6ab040618d7184758739008fc4a57d821f860506bdb3e4e745b229ec849" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::event_type</scope><name>ekCHILD</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1event__type_1a4f25bc6ab040618d7184758739008fc4ac74d5bbd9dd0d0a5567bac475d696aeb" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::event_type</scope><name>ekEXTERNAL_TYPES</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1event__type_1a4f25bc6ab040618d7184758739008fc4a58e644f0aac2b5af59ac5bd21baa6acc" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::event_type</scope><name>ekNORMAL</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

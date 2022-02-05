@@ -1,0 +1,161 @@
+.TH "rcppsw::multithread::threadable" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::multithread::threadable \- Daemon interface class which can be derived from to indicate that the class can spawn a new thread and jump into the main loop defined for the class\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <threadable\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBthreadable\fP (const \fBthreadable\fP &)=delete"
+.br
+.ti -1c
+.RI "\fBthreadable\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual \fB~threadable\fP (void)=default"
+.br
+.ti -1c
+.RI "void \fBjoin\fP (void)"
+.br
+.RI "Join a thread (i\&.e\&. wait for it to finish)\&. "
+.ti -1c
+.RI "\fBthreadable\fP & \fBoperator=\fP (const \fBthreadable\fP &)=delete"
+.br
+.ti -1c
+.RI "\fBstatus_t\fP \fBstart\fP (void *arg, int core=\-1)"
+.br
+.RI "Start a thread\&. "
+.ti -1c
+.RI "virtual void \fBterm\fP (void)"
+.br
+.RI "Signal a thread that it should terminate, from outside the thread\&. "
+.ti -1c
+.RI "virtual void * \fBthread_main\fP (void *arg)=0"
+.br
+.RI "The entry point for a thread\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBexit\fP (void *ret=nullptr)"
+.br
+.RI "Exit a thread from within the thread itself\&. "
+.ti -1c
+.RI "bool \fBterminated\fP (void) const"
+.br
+.RI "Check if a thread object has been told to terminate elsewhere\&. "
+.ti -1c
+.RI "pthread_t \fBthread_handle\fP (void) const"
+.br
+.RI "Get the pthread handle for the thread\&. "
+.ti -1c
+.RI "int64_t \fBthread_id\fP (void) const"
+.br
+.RI "Get the ID of the thread within the parent process\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Daemon interface class which can be derived from to indicate that the class can spawn a new thread and jump into the main loop defined for the class\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::multithread::threadable::threadable (void)\fC [default]\fP"
+
+.SS "virtual rcppsw::multithread::threadable::~threadable (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SS "rcppsw::multithread::threadable::threadable (const \fBthreadable\fP &)\fC [delete]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void rcppsw::multithread::threadable::exit (void * ret = \fCnullptr\fP)\fC [inline]\fP, \fC [protected]\fP"
+
+.PP
+Exit a thread from within the thread itself\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIret\fP If non-NULL, will be filled with the return value of the thread as it exits\&. 
+.RE
+.PP
+
+.SS "void rcppsw::multithread::threadable::join (void)\fC [inline]\fP"
+
+.PP
+Join a thread (i\&.e\&. wait for it to finish)\&. 
+.SS "\fBthreadable\fP& rcppsw::multithread::threadable::operator= (const \fBthreadable\fP &)\fC [delete]\fP"
+
+.SS "\fBstatus_t\fP rcppsw::multithread::threadable::start (void * arg, int core = \fC\-1\fP)"
+
+.PP
+Start a thread\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIarg\fP Argument passed to thread (can be NULL)\&. 
+.br
+\fIcore\fP The core to bind the thread to\&. By default, the thread is unbound\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+status_t - OK if successful, ERROR otherwise 
+.RE
+.PP
+
+.SS "virtual void rcppsw::multithread::threadable::term (void)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+Signal a thread that it should terminate, from outside the thread\&. 
+.SS "bool rcppsw::multithread::threadable::terminated (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+.PP
+Check if a thread object has been told to terminate elsewhere\&. 
+.SS "pthread_t rcppsw::multithread::threadable::thread_handle (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+.PP
+Get the pthread handle for the thread\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The handle\&. 
+.RE
+.PP
+
+.SS "int64_t rcppsw::multithread::threadable::thread_id (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+.PP
+Get the ID of the thread within the parent process\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The thread ID (guaranteed to be unique among threads in a process)\&. 
+.RE
+.PP
+
+.SS "virtual void* rcppsw::multithread::threadable::thread_main (void * arg)\fC [pure virtual]\fP"
+
+.PP
+The entry point for a thread\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIarg\fP Argument passed to thread (can be NULL)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The return value of the thread\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

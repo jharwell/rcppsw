@@ -1,0 +1,53 @@
+.TH "rcppsw::utils::line_parser" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::utils::line_parser \- Parses a single line into a vector of tokens broken on the specified delimiter\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <line_parser\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBline_parser\fP (char delim)"
+.br
+.ti -1c
+.RI "std::vector< std::string > \fBoperator()\fP (const std::string &line) const"
+.br
+.RI "Parse a line into a vector of tokens, split on delimiter\&. "
+.ti -1c
+.RI "std::vector< std::string > \fBoperator()\fP (std::stringstream &ss) const"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename T > static std::vector< T > \fBas\fP (const std::vector< std::string > &v)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Parses a single line into a vector of tokens broken on the specified delimiter\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::utils::line_parser::line_parser (char delim)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > static std::vector<T> rcppsw::utils::line_parser::as (const std::vector< std::string > & v)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "std::vector<std::string> rcppsw::utils::line_parser::operator() (const std::string & line) const\fC [inline]\fP"
+
+.PP
+Parse a line into a vector of tokens, split on delimiter\&. 
+.SS "std::vector<std::string> rcppsw::utils::line_parser::operator() (std::stringstream & ss) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

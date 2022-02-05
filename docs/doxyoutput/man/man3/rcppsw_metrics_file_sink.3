@@ -1,0 +1,74 @@
+.TH "rcppsw::metrics::file_sink" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::file_sink \- Base class for all metrics which are to be written out to a file\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <file_sink\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< file_sink >\fP, and \fBrcppsw::metrics::base_sink\fP\&.
+.PP
+Inherited by \fBrcppsw::metrics::csv_sink\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBfile_sink\fP (fs::path \fBfpath\fP, const \fBrmetrics::output_mode\fP &mode, const \fBrtypes::timestep\fP &interval)"
+.br
+.ti -1c
+.RI "virtual \fB~file_sink\fP (void)"
+.br
+.ti -1c
+.RI "const fs::path & \fBfpath\fP (void) const"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "std::ofstream * \fBofile\fP (void)"
+.br
+.ti -1c
+.RI "bool \fBretry_io\fP (const std::function< void(void)> &cb)"
+.br
+.RI "Retry the I/O operation contained in \fCcb\fP\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Base class for all metrics which are to be written out to a file\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::metrics::file_sink::file_sink (fs::path fpath, const \fBrmetrics::output_mode\fP & mode, const \fBrtypes::timestep\fP & interval)"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIfpath\fP Full path to output file, including the extension\&. 
+.br
+\fImode\fP The output mode\&. See \fBoutput_mode\fP for possible values\&. 
+.br
+\fIinterval\fP Metric output interval\&. 
+.RE
+.PP
+
+.SS "virtual rcppsw::metrics::file_sink::~file_sink (void)\fC [virtual]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "const fs::path& rcppsw::metrics::file_sink::fpath (void) const\fC [inline]\fP"
+
+.SS "std::ofstream* rcppsw::metrics::file_sink::ofile (void)\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "bool rcppsw::metrics::file_sink::retry_io (const std::function< void(void)> & cb)\fC [protected]\fP"
+
+.PP
+Retry the I/O operation contained in \fCcb\fP\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

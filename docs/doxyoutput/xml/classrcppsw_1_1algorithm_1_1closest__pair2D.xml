@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1algorithm_1_1closest__pair2D" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::algorithm::closest_pair2D</compoundname>
+    <includes refid="closest__pair2D_8hpp" local="no">closest_pair2D.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1closest__pair2D_1a8b7d99a065768ce9e44781ece607891b" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string rcppsw::algorithm::closest_pair2D&lt; T &gt;::kBruteForce</definition>
+        <argsstring></argsstring>
+        <name>kBruteForce</name>
+        <initializer>= &quot;brute_force&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" line="91" column="35" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1closest__pair2D_1aa5afedbbe06ffa00f60ead29d167fca2" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string rcppsw::algorithm::closest_pair2D&lt; T &gt;::kRecursive</definition>
+        <argsstring></argsstring>
+        <name>kRecursive</name>
+        <initializer>= &quot;recursive&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" line="93" column="35" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1closest__pair2D_1a784956b3a297251c4a89b2dca5506e33" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TDistFunc</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structrcppsw_1_1algorithm_1_1result__type2D" kindref="compound">result_type2D</ref>&lt; T &gt;</type>
+        <definition>result_type2D&lt;T&gt; rcppsw::algorithm::closest_pair2D&lt; T &gt;::brute_force</definition>
+        <argsstring>(const std::vector&lt; T &gt; &amp;points, const TDistFunc &amp;dist_func)</argsstring>
+        <name>brute_force</name>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>points</declname>
+        </param>
+        <param>
+          <type>const TDistFunc &amp;</type>
+          <declname>dist_func</declname>
+        </param>
+        <briefdescription>
+<para>Find the closest pair of points using brute force. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>points</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The set of points to search. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dist_func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The comparision function to use.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The two closest points, along with the distance between them. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" line="129" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" bodystart="129" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1closest__pair2D_1abf56b93bdb6e9af1d984f0e841225793" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TDistFunc</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structrcppsw_1_1algorithm_1_1result__type2D" kindref="compound">result_type2D</ref>&lt; T &gt;</type>
+        <definition>result_type2D&lt;T&gt; rcppsw::algorithm::closest_pair2D&lt; T &gt;::operator()</definition>
+        <argsstring>(const std::string &amp;method, std::vector&lt; T &gt; points, const TDistFunc &amp;dist_func)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>method</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; T &gt;</type>
+          <declname>points</declname>
+        </param>
+        <param>
+          <type>const TDistFunc &amp;</type>
+          <declname>dist_func</declname>
+        </param>
+        <briefdescription>
+<para>Run the calculation algorithm. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>method</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The method to use: &quot;brute_force&quot; or &quot;recursive&quot;. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>points</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of points through which to search. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dist_func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A function that can be used to calculate the distance between two points. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" line="104" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" bodystart="104" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1closest__pair2D_1ad09120cb78788305b4c0ec3e096b14b7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TDistFunc</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structrcppsw_1_1algorithm_1_1result__type2D" kindref="compound">result_type2D</ref>&lt; T &gt;</type>
+        <definition>result_type2D&lt;T&gt; rcppsw::algorithm::closest_pair2D&lt; T &gt;::recursive</definition>
+        <argsstring>(const std::vector&lt; T &gt; &amp;points, std::vector&lt; T &gt; &amp;strip, const TDistFunc &amp;dist_func)</argsstring>
+        <name>recursive</name>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>points</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; T &gt; &amp;</type>
+          <declname>strip</declname>
+        </param>
+        <param>
+          <type>const TDistFunc &amp;</type>
+          <declname>dist_func</declname>
+        </param>
+        <briefdescription>
+<para>Find the closest pair of points using recursion. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>points</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The set of points to search through. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>strip</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Space for the strip. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dist_func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The comparision function to use.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The two closest points, along with the distance between them. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" line="156" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" bodystart="156" bodyend="187"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1closest__pair2D_1acb8bd8a2c4481bdae6cbed92573deba1" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TDistFunc</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structrcppsw_1_1algorithm_1_1result__type2D" kindref="compound">result_type2D</ref>&lt; T &gt;</type>
+        <definition>result_type2D&lt;T&gt; rcppsw::algorithm::closest_pair2D&lt; T &gt;::strip_points</definition>
+        <argsstring>(std::vector&lt; T &gt; strip, const result_type2D&lt; T &gt; &amp;dmin, const TDistFunc &amp;dist_func)</argsstring>
+        <name>strip_points</name>
+        <param>
+          <type>std::vector&lt; T &gt;</type>
+          <declname>strip</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1algorithm_1_1result__type2D" kindref="compound">result_type2D</ref>&lt; T &gt; &amp;</type>
+          <declname>dmin</declname>
+        </param>
+        <param>
+          <type>const TDistFunc &amp;</type>
+          <declname>dist_func</declname>
+        </param>
+        <briefdescription>
+<para>Utility function to find the distance beween the closest points of strip of given size, sorted according to Y. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>strip</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The points to check. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dmin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Upper bound on minimum distance. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dist_func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distance function callback to use during calculation.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+Note that this method seems to be a O(n^2) method, but it&apos;s a O(n) method as the inner loop runs at most 6 times. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" line="202" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" bodystart="202" bodyend="227"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Calculate the closest two points from a set of 2D points in O(NLogN) (<ref refid="classrcppsw_1_1algorithm_1_1closest__pair2D_1aa5afedbbe06ffa00f60ead29d167fca2" kindref="member">kRecursive</ref>). </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Also has a brute force (O(N^3)) algorithm (<ref refid="classrcppsw_1_1algorithm_1_1closest__pair2D_1a8b7d99a065768ce9e44781ece607891b" kindref="member">kBruteForce</ref>) that can be used for comparision.</para>
+<para>Returns the two closest points, along with the distance between them (<ref refid="structrcppsw_1_1algorithm_1_1result__type2D" kindref="compound">result_type2D</ref>).</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of point in 2D plane. Can be any class, but must provide the following methods: x(), y(), <ref refid="namespacercppsw_1_1math_1a53c97519cd1429ba1ea1ace8ba1e0a4c" kindref="member">operator==()</ref>. See <ref refid="classrcppsw_1_1math_1_1vector2" kindref="compound">math::vector2</ref> for example implementation). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::algorithm::closest_pair2D&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1algorithm_1_1closest__pair2D"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+kRecursive</edgelabel>
+          <edgelabel>+kBruteForce</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="2">
+        <label>std::string</label>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" line="89" column="21" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" bodystart="89" bodyend="228"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1algorithm_1_1closest__pair2D_1a784956b3a297251c4a89b2dca5506e33" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::closest_pair2D</scope><name>brute_force</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1closest__pair2D_1a8b7d99a065768ce9e44781ece607891b" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::closest_pair2D</scope><name>kBruteForce</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1closest__pair2D_1aa5afedbbe06ffa00f60ead29d167fca2" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::closest_pair2D</scope><name>kRecursive</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1closest__pair2D_1abf56b93bdb6e9af1d984f0e841225793" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::closest_pair2D</scope><name>operator()</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1closest__pair2D_1ad09120cb78788305b4c0ec3e096b14b7" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::closest_pair2D</scope><name>recursive</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1closest__pair2D_1acb8bd8a2c4481bdae6cbed92573deba1" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::closest_pair2D</scope><name>strip_points</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

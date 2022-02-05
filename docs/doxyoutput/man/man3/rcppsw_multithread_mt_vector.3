@@ -1,0 +1,71 @@
+.TH "rcppsw::multithread::mt_vector< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::multithread::mt_vector< T > \- A thread-safe vector implementation\&. Use when you need fast access to a large contiguous chunk of memory\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <mt_vector\&.hpp>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBconst_iterator\fP = typename std::vector< T >::\fBconst_iterator\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBmt_vector\fP (void)=default"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) \-> decltype(std::declval< decltype(Member)>()\&.Func(args\&.\&.\&.))"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) const \-> decltype(std::declval< decltype(Member)>()\&.Func(args\&.\&.\&.))"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) const \-> decltype(std::declval< decltype(Member)>()\&.Func(args\&.\&.\&.))"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) const \-> decltype(std::declval< decltype(Member)>()\&.Func(args\&.\&.\&.))"
+.br
+.ti -1c
+.RI "void \fBpush_back\fP (const T &data)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::multithread::mt_vector< T >"
+A thread-safe vector implementation\&. Use when you need fast access to a large contiguous chunk of memory\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename T > using \fBrcppsw::multithread::mt_vector\fP< T >::\fBconst_iterator\fP =  typename std::vector<T>::\fBconst_iterator\fP"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::multithread::mt_vector\fP< T >::\fBmt_vector\fP (void)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > template<typename\&.\&.\&. Args> auto \fBrcppsw::multithread::mt_vector\fP< T >::Func (Args &&\&.\&.\&. args) \-> decltype(std::declval<decltype(Member)>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+.SS "template<typename T > template<typename\&.\&.\&. Args> auto \fBrcppsw::multithread::mt_vector\fP< T >::Func (Args &&\&.\&.\&. args) const \-> decltype(std::declval<decltype(Member)>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+.SS "template<typename T > template<typename\&.\&.\&. Args> auto \fBrcppsw::multithread::mt_vector\fP< T >::Func (Args &&\&.\&.\&. args) const \-> decltype(std::declval<decltype(Member)>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+.SS "template<typename T > template<typename\&.\&.\&. Args> auto \fBrcppsw::multithread::mt_vector\fP< T >::Func (Args &&\&.\&.\&. args) const \-> decltype(std::declval<decltype(Member)>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+.SS "template<typename T > void \fBrcppsw::multithread::mt_vector\fP< T >::push_back (const T & data)\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

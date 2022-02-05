@@ -1,0 +1,92 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_builder.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_builder.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <boost/graph/depth_first_search\&.hpp>\fP
+.br
+\fC#include <boost/graph/filtered_graph\&.hpp>\fP
+.br
+\fC#include <boost/optional\&.hpp>\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include <algorithm>\fP
+.br
+\fC#include 'rcppsw/ds/graph/graph\&.hpp'\fP
+.br
+\fC#include 'rcppsw/math/vector3\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBrcppsw::ds::graph::detail::hgrid3D_view_builder< TSpecType >\fP"
+.br
+.RI "Predicate for filtering \fBhgrid3D\fP into \fBhgrid3D_view\fP objects\&. "
+.ti -1c
+.RI "struct \fBrcppsw::ds::graph::detail::hgrid3D_view_builder< TSpecType >::trace_data\fP"
+.br
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::ds\fP"
+.br
+.RI "Data structures: 2D/3D lattice grids, 2D/3D discretizing grids to overlay onto continuous space, Poisson queue, rtree for 2D space, heterogeneous stacked 2D grid, type map for using in C++ quasi-reflection\&. "
+.ti -1c
+.RI " \fBrcppsw::ds::graph\fP"
+.br
+.RI "Graph data structures: Heterogeneous 3D grid graph\&. "
+.ti -1c
+.RI " \fBrcppsw::ds::graph::detail\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2021 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Class Documentation"
+.PP 
+.SH "struct rcppsw::ds::graph::detail::hgrid3D_view_builder::trace_data"
+.PP 
+
+.SS "template<typename TSpecType>
+.br
+struct rcppsw::ds::graph::detail::hgrid3D_view_builder< TSpecType >::trace_data"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+vector3z \fIll\fP 
+.br
+.PP
+vector3z \fIur\fP 
+.br
+.PP
+.RE
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

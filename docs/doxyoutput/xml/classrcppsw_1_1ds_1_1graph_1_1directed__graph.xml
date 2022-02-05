@@ -1,0 +1,598 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1ds_1_1graph_1_1directed__graph" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::ds::graph::directed_graph</compoundname>
+    <basecompoundref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" prot="public" virt="non-virtual">rcppsw::patterns::decorator::decorator&lt; TSpecType::bgl_impl_type &gt;</basecompoundref>
+    <includes refid="directed__graph_8hpp" local="no">directed_graph.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TSpecType</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a01e01cd2bd17a25438435ade77a04457" prot="public" static="no">
+        <type>typename spec_type::bgl_impl_type</type>
+        <definition>using rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::bgl_impl_type =  typename spec_type::bgl_impl_type</definition>
+        <argsstring></argsstring>
+        <name>bgl_impl_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="56" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a4cd52f8618684dc661ae5556e78460ac" prot="public" static="no">
+        <type>typename <ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">rpdecorator::decorator</ref>&lt; <ref refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a01e01cd2bd17a25438435ade77a04457" kindref="member">bgl_impl_type</ref> &gt;::<ref refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a4cd52f8618684dc661ae5556e78460ac" kindref="member">decoratee_type</ref></type>
+        <definition>using rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::decoratee_type =  typename rpdecorator::decorator&lt; bgl_impl_type&gt;::decoratee_type</definition>
+        <argsstring></argsstring>
+        <name>decoratee_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="60" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a739da315cb21d57623d908559540d932" prot="public" static="no">
+        <type>typename <ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">rpdecorator::decorator</ref>&lt; <ref refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a01e01cd2bd17a25438435ade77a04457" kindref="member">bgl_impl_type</ref> &gt;::<ref refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a739da315cb21d57623d908559540d932" kindref="member">decorator_type</ref></type>
+        <definition>using rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::decorator_type =  typename rpdecorator::decorator&lt; bgl_impl_type&gt;::decorator_type</definition>
+        <argsstring></argsstring>
+        <name>decorator_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="58" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1aa10bafa99047e003d7768b2d6bd8f4e5" prot="public" static="no">
+        <type>typename spec_type::edge_property_type</type>
+        <definition>using rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::edge_property_type =  typename spec_type::edge_property_type</definition>
+        <argsstring></argsstring>
+        <name>edge_property_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="72" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a7e7a147797c9f3251a2a47b6921d4ee7" prot="public" static="no">
+        <type>TSpecType</type>
+        <definition>using rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::spec_type =  TSpecType</definition>
+        <argsstring></argsstring>
+        <name>spec_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="55" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a3124d99872c2ba074fe74c46f430e64b" prot="public" static="no">
+        <type>typename spec_type::vertex_property_type</type>
+        <definition>using rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::vertex_property_type =  typename spec_type::vertex_property_type</definition>
+        <argsstring></argsstring>
+        <name>vertex_property_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="71" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a7dcea262b3ff7690f7059b85025cb2a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::directed_graph</definition>
+        <argsstring>(const directed_graph &amp;)=default</argsstring>
+        <name>directed_graph</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph" kindref="compound">directed_graph</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="75" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a0284109da9a872723749266db2f47d6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::directed_graph</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>directed_graph</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="74" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1aaf374260625dd132037b47fa01c59015" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECL</definition>
+        <argsstring>(directed_category)</argsstring>
+        <name>RCPPSW_DECORATE_DECL</name>
+        <param>
+          <type>directed_category</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="66" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a73599224aaf39b88c84fb73951b10188" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECL</definition>
+        <argsstring>(edge_descriptor)</argsstring>
+        <name>RCPPSW_DECORATE_DECL</name>
+        <param>
+          <type>edge_descriptor</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="65" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a4b89fbe3d0a1dd9176080628c8fc069a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECL</definition>
+        <argsstring>(edge_parallel_category)</argsstring>
+        <name>RCPPSW_DECORATE_DECL</name>
+        <param>
+          <type>edge_parallel_category</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="67" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1ac76725d7b04c7e9e614e7c8768d70a20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECL</definition>
+        <argsstring>(traversal_category)</argsstring>
+        <name>RCPPSW_DECORATE_DECL</name>
+        <param>
+          <type>traversal_category</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="68" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a3518df8d9e707ef4a666d00e17fbe156" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECL</definition>
+        <argsstring>(vertex_descriptor)</argsstring>
+        <name>RCPPSW_DECORATE_DECL</name>
+        <param>
+          <type>vertex_descriptor</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="64" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a2d4f57d8a464008a3585c988bbfa5c61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECL</definition>
+        <argsstring>(vertex_iterator)</argsstring>
+        <name>RCPPSW_DECORATE_DECL</name>
+        <param>
+          <type>vertex_iterator</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="69" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a771e55e7ba7c53667f2bad052b4e2960" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(operator[])</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type>operator</type>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="85" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a09672e4e01638728933d5e0b32ecd5de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(operator[], const)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type>operator</type>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="77" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1af081fcbf62ca8025ae273f4be1c9f471" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF_STATIC</definition>
+        <argsstring>(rdgraph, add_edge)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF_STATIC</name>
+        <param>
+          <type>rdgraph</type>
+        </param>
+        <param>
+          <type><ref refid="graph_8hpp_1a728ba2f07edc3a2f9de61e879884274a" kindref="member">add_edge</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="88" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1ab9985f704a58ed1885504226f29b3c7c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF_STATIC</definition>
+        <argsstring>(rdgraph, add_vertex)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF_STATIC</name>
+        <param>
+          <type>rdgraph</type>
+        </param>
+        <param>
+          <type><ref refid="graph_8hpp_1a6f1130cb6bca74a465baf0c8575b7250" kindref="member">add_vertex</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="86" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a3b9fd22f6a5faf05ad6f3d6bcd13a74c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF_STATIC</definition>
+        <argsstring>(rdgraph, adjacent_vertices)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF_STATIC</name>
+        <param>
+          <type>rdgraph</type>
+        </param>
+        <param>
+          <type><ref refid="graph_8hpp_1a2b1e5f47a4374b0b9fa3b25436eae969" kindref="member">adjacent_vertices</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="91" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1aa835d453ec37ce93f1da9ef41f8d8de1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF_STATIC</definition>
+        <argsstring>(rdgraph, adjacent_vertices, const)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF_STATIC</name>
+        <param>
+          <type>rdgraph</type>
+        </param>
+        <param>
+          <type><ref refid="graph_8hpp_1a2b1e5f47a4374b0b9fa3b25436eae969" kindref="member">adjacent_vertices</ref></type>
+        </param>
+        <param>
+          <type>const</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="80" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a817e267250b6a4762512148149f3a349" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF_STATIC</definition>
+        <argsstring>(rdgraph, find)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF_STATIC</name>
+        <param>
+          <type>rdgraph</type>
+        </param>
+        <param>
+          <type><ref refid="graph_8hpp_1a2b2d4d13c8b1fc4fb15e97c21264a80b" kindref="member">find</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="89" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1ad7f91e580c422d24301a79b0f5558c63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF_STATIC</definition>
+        <argsstring>(rdgraph, find, const)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF_STATIC</name>
+        <param>
+          <type>rdgraph</type>
+        </param>
+        <param>
+          <type><ref refid="graph_8hpp_1a2b2d4d13c8b1fc4fb15e97c21264a80b" kindref="member">find</ref></type>
+        </param>
+        <param>
+          <type>const</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="79" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1aa0e5aacc5e4ae27aef7723a56d3a2914" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF_STATIC</definition>
+        <argsstring>(rdgraph, n_vertices, const)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF_STATIC</name>
+        <param>
+          <type>rdgraph</type>
+        </param>
+        <param>
+          <type><ref refid="graph_8hpp_1a2a17a8cdf486ffc7a07c462721e565f9" kindref="member">n_vertices</ref></type>
+        </param>
+        <param>
+          <type>const</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="83" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a42571fe9c35732398b345190d22e5c98" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF_STATIC</definition>
+        <argsstring>(rdgraph, out_edges, const)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF_STATIC</name>
+        <param>
+          <type>rdgraph</type>
+        </param>
+        <param>
+          <type><ref refid="graph_8hpp_1aaa3f849f6d4a554ba04b592f4992118a" kindref="member">out_edges</ref></type>
+        </param>
+        <param>
+          <type>const</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="81" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a1e86dc18f5fccfefb5157f51b729c198" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF_STATIC</definition>
+        <argsstring>(rdgraph, remove_vertex)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF_STATIC</name>
+        <param>
+          <type>rdgraph</type>
+        </param>
+        <param>
+          <type><ref refid="graph_8hpp_1a5b1771af2778d689f0dc497c8911ce1d" kindref="member">remove_vertex</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="87" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1addb6bb2e272cb2283a42b6a6973b15ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF_STATIC</definition>
+        <argsstring>(rdgraph, target)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF_STATIC</name>
+        <param>
+          <type>rdgraph</type>
+        </param>
+        <param>
+          <type><ref refid="graph_8hpp_1abef0e24d8523e68c5460191be4752557" kindref="member">target</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="92" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1aeac4d00f3c93ee911de69b6bc53be248" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF_STATIC</definition>
+        <argsstring>(rdgraph, target, const)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF_STATIC</name>
+        <param>
+          <type>rdgraph</type>
+        </param>
+        <param>
+          <type><ref refid="graph_8hpp_1abef0e24d8523e68c5460191be4752557" kindref="member">target</ref></type>
+        </param>
+        <param>
+          <type>const</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="82" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a803b4b2e7d200dd70315a8e08cfc409b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF_STATIC</definition>
+        <argsstring>(rdgraph, vertices)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF_STATIC</name>
+        <param>
+          <type>rdgraph</type>
+        </param>
+        <param>
+          <type><ref refid="graph_8hpp_1abc02a164df941675b9b395bfd9d54a30" kindref="member">vertices</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="90" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a11fc018e8a01af84aefb4d086619decc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;::RCPPSW_DECORATE_DECLDEF_STATIC</definition>
+        <argsstring>(rdgraph, vertices, const)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF_STATIC</name>
+        <param>
+          <type>rdgraph</type>
+        </param>
+        <param>
+          <type><ref refid="graph_8hpp_1abc02a164df941675b9b395bfd9d54a30" kindref="member">vertices</ref></type>
+        </param>
+        <param>
+          <type>const</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="78" column="3"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A simple directed (not necessarily acyclic) graph. Uses boost::graph adjacency list representation. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::decorator::decorator&lt; TSpecType::bgl_impl_type &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::ds::graph::directed_graph&lt; TSpecType &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::decorator::decorator&lt; TSpecType::bgl_impl_type &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" line="53" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp" bodystart="51" bodyend="93"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a01e01cd2bd17a25438435ade77a04457" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>bgl_impl_type</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a519a95005089f4b8c476dc3b5dc0f3ab" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>decoratee</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a34ab8f2525dae8185bf161985885e8c2" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>decoratee</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a4cd52f8618684dc661ae5556e78460ac" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>decoratee_type</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a64c494d06f4fcbc9e52345db78510791" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a32c13ab58d3bd71c61030090590a9d62" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a280934f4a5829a42c7916ba29560d645" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a0e7167ad4e2d030d6c451a867db8af5e" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a3856e90a033659fc506a77c613bfc89f" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a739da315cb21d57623d908559540d932" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>decorator_type</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a0284109da9a872723749266db2f47d6c" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>directed_graph</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a7dcea262b3ff7690f7059b85025cb2a9" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>directed_graph</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1aa10bafa99047e003d7768b2d6bd8f4e5" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>edge_property_type</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a0f947db92e941d973426b19c1aa1fa9c" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1aa7dcaa3ec447cb1af590f4a64de10b09" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a3518df8d9e707ef4a666d00e17fbe156" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECL</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a73599224aaf39b88c84fb73951b10188" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECL</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1aaf374260625dd132037b47fa01c59015" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECL</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a4b89fbe3d0a1dd9176080628c8fc069a" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECL</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1ac76725d7b04c7e9e614e7c8768d70a20" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECL</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a2d4f57d8a464008a3585c988bbfa5c61" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECL</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a09672e4e01638728933d5e0b32ecd5de" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a771e55e7ba7c53667f2bad052b4e2960" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a11fc018e8a01af84aefb4d086619decc" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF_STATIC</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1ad7f91e580c422d24301a79b0f5558c63" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF_STATIC</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1aa835d453ec37ce93f1da9ef41f8d8de1" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF_STATIC</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a42571fe9c35732398b345190d22e5c98" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF_STATIC</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1aeac4d00f3c93ee911de69b6bc53be248" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF_STATIC</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1aa0e5aacc5e4ae27aef7723a56d3a2914" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF_STATIC</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1ab9985f704a58ed1885504226f29b3c7c" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF_STATIC</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a1e86dc18f5fccfefb5157f51b729c198" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF_STATIC</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1af081fcbf62ca8025ae273f4be1c9f471" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF_STATIC</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a817e267250b6a4762512148149f3a349" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF_STATIC</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a803b4b2e7d200dd70315a8e08cfc409b" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF_STATIC</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a3b9fd22f6a5faf05ad6f3d6bcd13a74c" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF_STATIC</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1addb6bb2e272cb2283a42b6a6973b15ef" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>RCPPSW_DECORATE_DECLDEF_STATIC</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1aa91bf92ef0eda53cc43ce584c40f5c49" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>redecorate</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1af34e316851d6ccde1ab339f9dadf0c2a" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>redecorate_with</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a7e7a147797c9f3251a2a47b6921d4ee7" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>spec_type</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1directed__graph_1a3124d99872c2ba074fe74c46f430e64b" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>vertex_property_type</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a1816de4c343796e84f48c3603b8041ab" prot="public" virt="virtual"><scope>rcppsw::ds::graph::directed_graph</scope><name>~decorator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

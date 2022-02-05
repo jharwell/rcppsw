@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1types_1_1named__type" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::types::named_type</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1stringizable" prot="public" virt="non-virtual">rcppsw::er::stringizable</basecompoundref>
+    <includes refid="named__type_8hpp" local="no">named_type.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Parameter</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1types_1_1named__type_1a14b47a49497d635f6e2cd8c465272851" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T rcppsw::types::named_type&lt; T, Parameter &gt;::m_value</definition>
+        <argsstring></argsstring>
+        <name>m_value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" line="76" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1named__type_1a45531d5cc915d48d5132f711dfb5541b" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::types::named_type&lt; T, Parameter &gt;::named_type</definition>
+        <argsstring>(T const &amp;value) noexcept</argsstring>
+        <name>named_type</name>
+        <param>
+          <type>T const &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" line="56" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1named__type_1ad2fd23fa3879f2cfd77c5ad9c65b9a57" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::types::named_type&lt; T, Parameter &gt;::~named_type</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~named_type</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" line="57" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1named__type_1ae3adaef7b9d236a163a83fdfc2e8a5c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T&amp; rcppsw::types::named_type&lt; T, Parameter &gt;::set</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>set</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" line="60" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1named__type_1a5be785b00b2a79f27ede7953446c9bad" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string rcppsw::types::named_type&lt; T, Parameter &gt;::to_str</definition>
+        <argsstring>(void) const override</argsstring>
+        <name>to_str</name>
+        <reimplements refid="classrcppsw_1_1er_1_1stringizable_1a0776b3b6278cc72e8b04448c016bc197">to_str</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return a string representation of a class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" line="67" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1types_1_1named__type_1ab5e5d9c79710dbd92eea31dbe0357de5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T&amp; rcppsw::types::named_type&lt; T, Parameter &gt;::v</definition>
+        <argsstring>(void) const</argsstring>
+        <name>v</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" line="59" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" bodystart="59" bodyend="59"/>
+        <referencedby refid="classrcppsw_1_1metrics_1_1csv__sink_1a5b7de877691ddf0ddf91af350e197bbe" compoundref="csv__sink_8hpp" startline="140" endline="143">rcppsw::metrics::csv_sink::csv_entry_intavg</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classrcppsw_1_1types_1_1named__type_1a61be9ff951c2a54898fc3e0d6037adcc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>friend std::ostream &amp;</type>
+        <definition>std::ostream&amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;stream, const named_type &amp;c_type)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1named__type" kindref="compound">named_type</ref> &amp;</type>
+          <declname>c_type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" line="62" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" bodystart="62" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="friend" id="classrcppsw_1_1types_1_1named__type_1afea5f975654f3c41ef3eb12cec92914d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>friend std::istream &amp;</type>
+        <definition>std::istream&amp; operator&gt;&gt;</definition>
+        <argsstring>(std::istream &amp;stream, named_type &amp;n)</argsstring>
+        <name>operator&gt;&gt;</name>
+        <param>
+          <type>std::istream &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type><ref refid="classrcppsw_1_1types_1_1named__type" kindref="compound">named_type</ref> &amp;</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" line="69" column="23" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" bodystart="69" bodyend="72"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A strong typing wrapper to be used around POD types to make implicit conversions impossible (ESPECCIALLY when the necessary compiler warnings are disabled), and force the user to be explicit about converting. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::types::named_type&lt; T, Parameter &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::types::named_type&lt; T, Parameter &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" line="54" column="41" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/types/named_type.hpp" bodystart="54" bodyend="78"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1types_1_1named__type_1a14b47a49497d635f6e2cd8c465272851" prot="private" virt="non-virtual"><scope>rcppsw::types::named_type</scope><name>m_value</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1a45531d5cc915d48d5132f711dfb5541b" prot="public" virt="non-virtual"><scope>rcppsw::types::named_type</scope><name>named_type</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1a61be9ff951c2a54898fc3e0d6037adcc" prot="public" virt="non-virtual"><scope>rcppsw::types::named_type</scope><name>operator&lt;&lt;</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1afea5f975654f3c41ef3eb12cec92914d" prot="public" virt="non-virtual"><scope>rcppsw::types::named_type</scope><name>operator&gt;&gt;</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1ae3adaef7b9d236a163a83fdfc2e8a5c8" prot="public" virt="non-virtual"><scope>rcppsw::types::named_type</scope><name>set</name></member>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1a613eefda69afcc13383029355cb8cfe9" prot="public" virt="non-virtual"><scope>rcppsw::types::named_type</scope><name>stringizable</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1a5be785b00b2a79f27ede7953446c9bad" prot="public" virt="virtual"><scope>rcppsw::types::named_type</scope><name>to_str</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1ab5e5d9c79710dbd92eea31dbe0357de5" prot="public" virt="non-virtual"><scope>rcppsw::types::named_type</scope><name>v</name></member>
+      <member refid="classrcppsw_1_1types_1_1named__type_1ad2fd23fa3879f2cfd77c5ad9c65b9a57" prot="public" virt="virtual"><scope>rcppsw::types::named_type</scope><name>~named_type</name></member>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1ad025418a3c3349948cbea5c6facdb391" prot="public" virt="virtual"><scope>rcppsw::types::named_type</scope><name>~stringizable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

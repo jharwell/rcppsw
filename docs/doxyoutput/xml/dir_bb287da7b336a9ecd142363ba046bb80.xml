@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_bb287da7b336a9ecd142363ba046bb80" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/math</compoundname>
+    <innerdir refid="dir_3d3c2318109489cce81d37adc24bc783">/home/jharwell/git/rcppsw/include/rcppsw/math/config</innerdir>
+    <innerfile refid="angles_8hpp">angles.hpp</innerfile>
+    <innerfile refid="binned__powerlaw__distribution_8hpp">binned_powerlaw_distribution.hpp</innerfile>
+    <innerfile refid="bounding__box_8hpp">bounding_box.hpp</innerfile>
+    <innerfile refid="degrees_8hpp">degrees.hpp</innerfile>
+    <innerfile refid="ema_8hpp">ema.hpp</innerfile>
+    <innerfile refid="expression_8hpp">expression.hpp</innerfile>
+    <innerfile refid="ientropy_8hpp">ientropy.hpp</innerfile>
+    <innerfile refid="math_8hpp">math.hpp</innerfile>
+    <innerfile refid="normalize_8hpp">normalize.hpp</innerfile>
+    <innerfile refid="orientation_8hpp">orientation.hpp</innerfile>
+    <innerfile refid="powerlaw__distribution_8hpp">powerlaw_distribution.hpp</innerfile>
+    <innerfile refid="radians_8hpp">radians.hpp</innerfile>
+    <innerfile refid="range_8hpp">range.hpp</innerfile>
+    <innerfile refid="rng_8hpp">rng.hpp</innerfile>
+    <innerfile refid="rngm_8hpp">rngm.hpp</innerfile>
+    <innerfile refid="sigmoid_8hpp">sigmoid.hpp</innerfile>
+    <innerfile refid="spatial_8hpp">spatial.hpp</innerfile>
+    <innerfile refid="sphere__vector_8hpp">sphere_vector.hpp</innerfile>
+    <innerfile refid="vector2_8hpp">vector2.hpp</innerfile>
+    <innerfile refid="vector3_8hpp">vector3.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/"/>
+  </compounddef>
+</doxygen>

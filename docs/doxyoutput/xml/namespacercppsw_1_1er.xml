@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1er" kind="namespace" language="C++">
+    <compoundname>rcppsw::er</compoundname>
+    <innerclass refid="classrcppsw_1_1er_1_1client" prot="public">rcppsw::er::client</innerclass>
+    <innerclass refid="classrcppsw_1_1er_1_1stringizable" prot="public">rcppsw::er::stringizable</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacercppsw_1_1er_1af85843c56e74e1e6ce8822a09d4615ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::er::sigsegv_sighandler</definition>
+        <argsstring>(int signum)</argsstring>
+        <name>sigsegv_sighandler</name>
+        <param>
+          <type>int</type>
+          <declname>signum</declname>
+        </param>
+        <briefdescription>
+<para>A signal handler to dump the current stacktrace to a file upon a fatal signal using boost. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/stacktrace.hpp" line="48" column="6" declfile="/home/jharwell/git/rcppsw/include/rcppsw/er/stacktrace.hpp" declline="48" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacercppsw_1_1er_1a50ccdc4c3117669b5d38dd117cae9391" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::er::terminate_handler</definition>
+        <argsstring>(void)</argsstring>
+        <name>terminate_handler</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>A handler to be called instead of std::terminate(), for better debugging of WHERE an exception came from. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/stacktrace.hpp" line="54" column="6" declfile="/home/jharwell/git/rcppsw/include/rcppsw/er/stacktrace.hpp" declline="54" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The Event Reporting framework used in RCPPSW and its derived projects. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="153" column="21"/>
+  </compounddef>
+</doxygen>

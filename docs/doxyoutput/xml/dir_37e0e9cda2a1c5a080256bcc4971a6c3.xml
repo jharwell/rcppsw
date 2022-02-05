@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_37e0e9cda2a1c5a080256bcc4971a6c3" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/patterns</compoundname>
+    <innerdir refid="dir_cc4a60b3149024778a7f514f7e0a10ba">/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator</innerdir>
+    <innerdir refid="dir_b913be45d460070d01ce42a568af9ab1">/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory</innerdir>
+    <innerdir refid="dir_3bb716029241097869d96ccf27a2f299">/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm</innerdir>
+    <innerdir refid="dir_32d3c0c18d91564b23aa91536ef04269">/home/jharwell/git/rcppsw/include/rcppsw/patterns/pimpl</innerdir>
+    <innerdir refid="dir_0623d68cd88c7f79440ce143ebb8f247">/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype</innerdir>
+    <innerdir refid="dir_dc2cb7a68a285caa173dcba72c5dc89d">/home/jharwell/git/rcppsw/include/rcppsw/patterns/singleton</innerdir>
+    <innerdir refid="dir_ec7b8f2e2d46dace3b2e703c034f8ca5">/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/"/>
+  </compounddef>
+</doxygen>

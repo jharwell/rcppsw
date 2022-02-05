@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1ds_1_1poisson__queue_1_1op__data" kind="struct" language="C++" prot="private">
+    <compoundname>rcppsw::ds::poisson_queue::op_data</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1ds_1_1poisson__queue_1_1op__data_1a9b363c379cbcfd5b91bc7b1e289cf0d1" prot="public" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">types::timestep</ref></type>
+        <definition>types::timestep rcppsw::ds::poisson_queue&lt; T &gt;::op_data::last_op_time</definition>
+        <argsstring></argsstring>
+        <name>last_op_time</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="213" column="21" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1ds_1_1poisson__queue_1_1op__data_1a7f9e79c708e2467762ad90d64053722e" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata" kindref="compound">op_metadata</ref></type>
+        <definition>struct op_metadata rcppsw::ds::poisson_queue&lt; T &gt;::op_data::md</definition>
+        <argsstring></argsstring>
+        <name>md</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="81" column="21" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="211" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1ds_1_1poisson__queue_1_1op__data_1a942193f4119128ae96ea00f6e90805d2" prot="public" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">types::timestep</ref></type>
+        <definition>types::timestep rcppsw::ds::poisson_queue&lt; T &gt;::op_data::next_op_time</definition>
+        <argsstring></argsstring>
+        <name>next_op_time</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="214" column="21" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1ds_1_1poisson__queue_1_1op__data_1ad33162aea6adc2bc37fa87be1902d843" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool rcppsw::ds::poisson_queue&lt; T &gt;::op_data::op_set</definition>
+        <argsstring></argsstring>
+        <name>op_set</name>
+        <initializer>{ false }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="212" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="212" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="2">
+        <label>rcppsw::types::timestep</label>
+        <link refid="classrcppsw_1_1types_1_1timestep"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw::types::named_type&lt; size_t, struct timestep_tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>rcppsw::ds::poisson_queue&lt; T &gt;::op_metadata</label>
+        <link refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+total_interval_accum</edgelabel>
+          <edgelabel>+interval_accum</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::poisson_queue&lt; T &gt;::op_data</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+last_op_time</edgelabel>
+          <edgelabel>+next_op_time</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>+md</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="210" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="210" bodyend="215"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__data_1a9b363c379cbcfd5b91bc7b1e289cf0d1" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue::op_data</scope><name>last_op_time</name></member>
+      <member refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__data_1a7f9e79c708e2467762ad90d64053722e" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue::op_data</scope><name>md</name></member>
+      <member refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__data_1a942193f4119128ae96ea00f6e90805d2" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue::op_data</scope><name>next_op_time</name></member>
+      <member refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__data_1ad33162aea6adc2bc37fa87be1902d843" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue::op_data</scope><name>op_set</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

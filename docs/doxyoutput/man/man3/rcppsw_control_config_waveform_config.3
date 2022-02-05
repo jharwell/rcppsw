@@ -1,0 +1,66 @@
+.TH "rcppsw::control::config::waveform_config" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::control::config::waveform_config
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <waveform_config\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::config::base_config\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBwaveform_config\fP (const std::string &type_in, double freq_in, double phase_in, double amp_in, double offset_in)"
+.br
+.ti -1c
+.RI "\fBwaveform_config\fP (void)=default"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "double \fBamplitude\fP {0\&.0}"
+.br
+.ti -1c
+.RI "double \fBfrequency\fP {0\&.0}"
+.br
+.ti -1c
+.RI "double \fBoffset\fP {0\&.0}"
+.br
+.ti -1c
+.RI "double \fBphase\fP {0\&.0}"
+.br
+.ti -1c
+.RI "std::string \fBtype\fP {}"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Parameters for \fBbase_waveform\fP derived classes\&. Not all parameters are applicable to all waveform types\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::control::config::waveform_config::waveform_config (void)\fC [default]\fP"
+
+.SS "rcppsw::control::config::waveform_config::waveform_config (const std::string & type_in, double freq_in, double phase_in, double amp_in, double offset_in)\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "double rcppsw::control::config::waveform_config::amplitude {0\&.0}"
+
+.SS "double rcppsw::control::config::waveform_config::frequency {0\&.0}"
+
+.SS "double rcppsw::control::config::waveform_config::offset {0\&.0}"
+
+.SS "double rcppsw::control::config::waveform_config::phase {0\&.0}"
+
+.SS "std::string rcppsw::control::config::waveform_config::type {}"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

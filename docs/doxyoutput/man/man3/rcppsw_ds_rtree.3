@@ -1,0 +1,179 @@
+.TH "rcppsw::ds::rtree< TSpecType >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::rtree< TSpecType > \- Wrapper around boost::geometry::index::rtree to provide very fast queries of the form 'How many things are in this  area', and reasonably fast tree build times as well\&. That is, this class is intended for applications in which large trees are built, queried frequently and updated relatively infrequently\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <rtree\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::patterns::decorator::decorator< TSpecType::tree_type >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBcoord_type\fP = typename spec_type::coord_type"
+.br
+.ti -1c
+.RI "using \fBelement_type\fP = typename spec_type::element_type"
+.br
+.ti -1c
+.RI "using \fBgeometry_type\fP = typename spec_type::geometry_type"
+.br
+.ti -1c
+.RI "using \fBspec_type\fP = TSpecType"
+.br
+.ti -1c
+.RI "using \fBvalue_type\fP = typename spec_type::value_type"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBrtree\fP (const \fBrtree\fP &)=delete"
+.br
+.ti -1c
+.RI "\fBrtree\fP (\fBrtree\fP &&)=delete"
+.br
+.ti -1c
+.RI "\fBrtree\fP (void)=default"
+.br
+.ti -1c
+.RI "bool \fBcontains\fP (const \fBvalue_type\fP &key) const"
+.br
+.RI "Query the tree to see if \fCkey\fP is found in the tree\&. This query does not take advantage of tree properties, and is O(N)\&. "
+.ti -1c
+.RI "void \fBinsert\fP (const \fBvalue_type\fP &value, const \fBgeometry_type\fP &key)"
+.br
+.RI "Insert the \fCkey\fP into the tree, which will be placed into the tree according to its rectangle defined by \fCll\fP, \fCur\fP\&. "
+.ti -1c
+.RI "std::vector< \fBvalue_type\fP > \fBintersections\fP (const \fBrtree_box\fP< \fBcoord_type\fP > &query) const"
+.br
+.RI "Query the tree to figure out how many objects intersect the rectangle \fCquery\fP\&. "
+.ti -1c
+.RI "std::vector< \fBvalue_type\fP > \fBnearest\fP (const \fBrtree_point\fP< \fBcoord_type\fP > &query, size_t k) const"
+.br
+.RI "Query the tree to find the \fCk\fP nearest objects to \fCpoint\fP\&. "
+.ti -1c
+.RI "const \fBrtree\fP & \fBoperator=\fP (const \fBrtree\fP &)=delete"
+.br
+.ti -1c
+.RI "\fBrtree\fP & \fBoperator=\fP (\fBrtree\fP &&)=delete"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (begin, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (end, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (\fBinsert\fP)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (size, const)"
+.br
+.ti -1c
+.RI "size_t \fBremove\fP (const \fBvalue_type\fP &value)"
+.br
+.RI "Remove the \fCkey\fP and its associated rectangle from the tree\&. Does not take advantage of tree properties, and therefore is O(N)\&. "
+.ti -1c
+.RI "size_t \fBremove\fP (const \fBvalue_type\fP &value, const \fBgeometry_type\fP &key)"
+.br
+.RI "Remove the \fCkey\fP and its associated rectangle from the tree\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TSpecType>
+.br
+class rcppsw::ds::rtree< TSpecType >"
+Wrapper around boost::geometry::index::rtree to provide very fast queries of the form 'How many things are in this  area', and reasonably fast tree build times as well\&. That is, this class is intended for applications in which large trees are built, queried frequently and updated relatively infrequently\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fITSpecType\fP The specification for the rtree of type \fBrtree_spec\fP\&. 
+.RE
+.PP
+
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename TSpecType > using \fBrcppsw::ds::rtree\fP< TSpecType >::\fBcoord_type\fP =  typename spec_type::coord_type"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::rtree\fP< TSpecType >::\fBelement_type\fP =  typename spec_type::element_type"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::rtree\fP< TSpecType >::\fBgeometry_type\fP =  typename spec_type::geometry_type"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::rtree\fP< TSpecType >::\fBspec_type\fP =  TSpecType"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::rtree\fP< TSpecType >::\fBvalue_type\fP =  typename spec_type::value_type"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TSpecType > \fBrcppsw::ds::rtree\fP< TSpecType >::\fBrtree\fP (void)\fC [default]\fP"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::rtree\fP< TSpecType >::\fBrtree\fP (const \fBrtree\fP< TSpecType > &)\fC [delete]\fP"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::rtree\fP< TSpecType >::\fBrtree\fP (\fBrtree\fP< TSpecType > &&)\fC [delete]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TSpecType > bool \fBrcppsw::ds::rtree\fP< TSpecType >::contains (const \fBvalue_type\fP & key) const\fC [inline]\fP"
+
+.PP
+Query the tree to see if \fCkey\fP is found in the tree\&. This query does not take advantage of tree properties, and is O(N)\&. 
+.SS "template<typename TSpecType > void \fBrcppsw::ds::rtree\fP< TSpecType >::insert (const \fBvalue_type\fP & value, const \fBgeometry_type\fP & key)\fC [inline]\fP"
+
+.PP
+Insert the \fCkey\fP into the tree, which will be placed into the tree according to its rectangle defined by \fCll\fP, \fCur\fP\&. 
+.SS "template<typename TSpecType > std::vector<\fBvalue_type\fP> \fBrcppsw::ds::rtree\fP< TSpecType >::intersections (const \fBrtree_box\fP< \fBcoord_type\fP > & query) const\fC [inline]\fP"
+
+.PP
+Query the tree to figure out how many objects intersect the rectangle \fCquery\fP\&. 
+.SS "template<typename TSpecType > std::vector<\fBvalue_type\fP> \fBrcppsw::ds::rtree\fP< TSpecType >::nearest (const \fBrtree_point\fP< \fBcoord_type\fP > & query, size_t k) const\fC [inline]\fP"
+
+.PP
+Query the tree to find the \fCk\fP nearest objects to \fCpoint\fP\&. 
+.SS "template<typename TSpecType > const \fBrtree\fP& \fBrcppsw::ds::rtree\fP< TSpecType >::operator= (const \fBrtree\fP< TSpecType > &)\fC [delete]\fP"
+
+.SS "template<typename TSpecType > \fBrtree\fP& \fBrcppsw::ds::rtree\fP< TSpecType >::operator= (\fBrtree\fP< TSpecType > &&)\fC [delete]\fP"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::rtree\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF (begin, const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::rtree\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF (end, const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::rtree\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF (\fBinsert\fP)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::rtree\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF (size, const)"
+
+.SS "template<typename TSpecType > size_t \fBrcppsw::ds::rtree\fP< TSpecType >::remove (const \fBvalue_type\fP & value)\fC [inline]\fP"
+
+.PP
+Remove the \fCkey\fP and its associated rectangle from the tree\&. Does not take advantage of tree properties, and therefore is O(N)\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The # of items removed (0 or 1)\&. 
+.RE
+.PP
+
+.SS "template<typename TSpecType > size_t \fBrcppsw::ds::rtree\fP< TSpecType >::remove (const \fBvalue_type\fP & value, const \fBgeometry_type\fP & key)\fC [inline]\fP"
+
+.PP
+Remove the \fCkey\fP and its associated rectangle from the tree\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The # of items removed (0 or 1)\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

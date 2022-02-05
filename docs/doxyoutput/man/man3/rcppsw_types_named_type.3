@@ -1,0 +1,78 @@
+.TH "rcppsw::types::named_type< T, Parameter >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::types::named_type< T, Parameter > \- A strong typing wrapper to be used around POD types to make implicit conversions impossible (ESPECCIALLY when the necessary compiler warnings are disabled), and force the user to be explicit about converting\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <named_type\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::stringizable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBnamed_type\fP (T const &value) noexcept"
+.br
+.ti -1c
+.RI "virtual \fB~named_type\fP (void)=default"
+.br
+.ti -1c
+.RI "T & \fBset\fP (const T &value)"
+.br
+.ti -1c
+.RI "std::string \fBto_str\fP (void) const override"
+.br
+.RI "Return a string representation of a class\&. "
+.ti -1c
+.RI "const T & \fBv\fP (void) const"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &stream, const \fBnamed_type\fP &c_type)"
+.br
+.ti -1c
+.RI "std::istream & \fBoperator>>\fP (std::istream &stream, \fBnamed_type\fP &n)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T, typename Parameter>
+.br
+class rcppsw::types::named_type< T, Parameter >"
+A strong typing wrapper to be used around POD types to make implicit conversions impossible (ESPECCIALLY when the necessary compiler warnings are disabled), and force the user to be explicit about converting\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T , typename Parameter > \fBrcppsw::types::named_type\fP< T, Parameter >::\fBnamed_type\fP (T const & value)\fC [inline]\fP, \fC [explicit]\fP, \fC [noexcept]\fP"
+
+.SS "template<typename T , typename Parameter > virtual \fBrcppsw::types::named_type\fP< T, Parameter >::~\fBnamed_type\fP (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T , typename Parameter > T& \fBrcppsw::types::named_type\fP< T, Parameter >::set (const T & value)\fC [inline]\fP"
+
+.SS "template<typename T , typename Parameter > std::string \fBrcppsw::types::named_type\fP< T, Parameter >::to_str (void) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Return a string representation of a class\&. 
+.PP
+Reimplemented from \fBrcppsw::er::stringizable\fP\&.
+.SS "template<typename T , typename Parameter > const T& \fBrcppsw::types::named_type\fP< T, Parameter >::v (void) const\fC [inline]\fP"
+
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "template<typename T , typename Parameter > std::ostream& operator<< (std::ostream & stream, const \fBnamed_type\fP< T, Parameter > & c_type)\fC [friend]\fP"
+
+.SS "template<typename T , typename Parameter > std::istream& operator>> (std::istream & stream, \fBnamed_type\fP< T, Parameter > & n)\fC [friend]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

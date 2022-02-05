@@ -1,0 +1,72 @@
+.TH "rcppsw::multithread::mt_fsm" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::multithread::mt_fsm \- Extends \fBpatterns::fsm::base_fsm\fP to be threadsafe\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <mt_fsm\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::patterns::fsm::base_fsm\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBmt_fsm\fP (uint8_t \fBmax_states\fP, uint8_t \fBinitial_state\fP=0)"
+.br
+.ti -1c
+.RI "\fB~mt_fsm\fP (void) override=default"
+.br
+.ti -1c
+.RI "void \fBinit\fP (void) override"
+.br
+.RI "Initialize/reset the state machine\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBexternal_event\fP (uint8_t new_state, std::unique_ptr< \fBsm::event_data\fP > data) override"
+.br
+.RI "Generates an external event\&. The data is passed through the event chain without modification\&. The FSM owns the event data--states should not try to delete it\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Extends \fBpatterns::fsm::base_fsm\fP to be threadsafe\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::multithread::mt_fsm::mt_fsm (uint8_t max_states, uint8_t initial_state = \fC0\fP)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "rcppsw::multithread::mt_fsm::~mt_fsm (void)\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void rcppsw::multithread::mt_fsm::external_event (uint8_t new_state, std::unique_ptr< \fBsm::event_data\fP > data)\fC [override]\fP, \fC [protected]\fP, \fC [virtual]\fP"
+
+.PP
+Generates an external event\&. The data is passed through the event chain without modification\&. The FSM owns the event data--states should not try to delete it\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInew_state\fP The state machine state to transition to\&. 
+.br
+\fIdata\fP The event data sent to the state\&. 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBrcppsw::patterns::fsm::base_fsm\fP\&.
+.SS "void rcppsw::multithread::mt_fsm::init (void)\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Initialize/reset the state machine\&. 
+.PP
+Reimplemented from \fBrcppsw::patterns::fsm::base_fsm\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.
