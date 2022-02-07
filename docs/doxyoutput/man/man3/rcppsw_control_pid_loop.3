@@ -1,0 +1,94 @@
+.TH "rcppsw::control::pid_loop" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::control::pid_loop \- A simple PID loop class\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <pid_loop\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBpid_loop\fP (double kp, double kd, double ki, double dt, double \fBmin\fP, double \fBmax\fP)"
+.br
+.ti -1c
+.RI "double \fBcalculate\fP (double setpoint, double pv)"
+.br
+.RI "Calculate a new value for the manipulated variable\&. "
+.ti -1c
+.RI "void \fBmax\fP (double max)"
+.br
+.RI "Get the max value of manipulated variable/integral term\&. "
+.ti -1c
+.RI "void \fBmin\fP (double min)"
+.br
+.RI "Get the minimal value of manipulated variable/integral term\&. "
+.ti -1c
+.RI "void \fBreset\fP (void)"
+.br
+.RI "Reset the integral state, previous error (setpoint - pv) "
+.in -1c
+.SH "Detailed Description"
+.PP 
+A simple PID loop class\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::control::pid_loop::pid_loop (double kp, double kd, double ki, double dt, double min, double max)\fC [inline]\fP"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIkp\fP proportional gain\&. 
+.br
+\fIki\fP Integral gain\&. 
+.br
+\fIkd\fP Derivative gain\&. 
+.br
+\fIdt\fP Loop interval time (linear interpolation used)\&. 
+.br
+\fImax\fP Maximum value of manipulated variable and integral term\&. 
+.br
+\fImin\fP Minimum value of manipulated variable and integral term\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "double rcppsw::control::pid_loop::calculate (double setpoint, double pv)"
+
+.PP
+Calculate a new value for the manipulated variable\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsetpoint\fP Desired value of the manipulated variable\&. 
+.br
+\fIpv\fP Current value of the variable\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Correctional term\&. 
+.RE
+.PP
+
+.SS "void rcppsw::control::pid_loop::max (double max)\fC [inline]\fP"
+
+.PP
+Get the max value of manipulated variable/integral term\&. 
+.SS "void rcppsw::control::pid_loop::min (double min)\fC [inline]\fP"
+
+.PP
+Get the minimal value of manipulated variable/integral term\&. 
+.SS "void rcppsw::control::pid_loop::reset (void)\fC [inline]\fP"
+
+.PP
+Reset the integral state, previous error (setpoint - pv) 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

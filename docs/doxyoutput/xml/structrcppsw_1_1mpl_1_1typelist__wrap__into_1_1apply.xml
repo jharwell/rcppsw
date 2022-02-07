@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1mpl_1_1typelist__wrap__into_1_1apply" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::mpl::typelist_wrap_into::apply</compoundname>
+    <includes refid="typelist_8hpp" local="no">typelist.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class...</type>
+        <declname>ApplyArgs</declname>
+        <defname>ApplyArgs</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structrcppsw_1_1mpl_1_1typelist__wrap__into_1_1apply_1abe33e62fdc251b0bf8411c66180e8a06" prot="public" static="no">
+        <type>WrapperType&lt; ApplyArgs..., WrapperTypeArgs... &gt;</type>
+        <definition>using rcppsw::mpl::typelist_wrap_into&lt; WrapperType, WrapperTypeArgs &gt;::apply&lt; ApplyArgs &gt;::type =  WrapperType&lt;ApplyArgs..., WrapperTypeArgs...&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" line="152" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Perform the wrap. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ApplyArgs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <emphasis>single</emphasis> wrapped type from above. Must be a parameter pack, so that it can be concatenated with the WrapperType parameter pack (which may be empty); making it a normal template argument throws errors on WrapperTypes that only take a single argument. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::mpl::typelist_wrap_into&lt; WrapperType, WrapperTypeArgs &gt;::apply&lt; ApplyArgs &gt;</label>
+        <link refid="structrcppsw_1_1mpl_1_1typelist__wrap__into_1_1apply"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" line="151" column="14" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" bodystart="151" bodyend="153"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1mpl_1_1typelist__wrap__into_1_1apply_1abe33e62fdc251b0bf8411c66180e8a06" prot="public" virt="non-virtual"><scope>rcppsw::mpl::typelist_wrap_into::apply</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

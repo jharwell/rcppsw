@@ -1,0 +1,124 @@
+.TH "rcppsw::ds::graph::hgrid3D_view_filter_data< TSpecType >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::graph::hgrid3D_view_filter_data< TSpecType > \- The data gathered during building the \fBhgrid3D_view\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <hgrid3D_view_filter_data\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< hgrid3D_view_filter_data< TSpecType > >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBbgl_impl_type\fP = typename TSpecType::bgl_impl_type"
+.br
+.ti -1c
+.RI "using \fBedge_descriptor\fP = typename bgl_impl_type::edge_descriptor"
+.br
+.ti -1c
+.RI "using \fBvertex_descriptor\fP = typename bgl_impl_type::vertex_descriptor"
+.br
+.ti -1c
+.RI "using \fBvertex_property_type\fP = typename bgl_impl_type::vertex_property_type"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBhgrid3D_view_filter_data\fP (const \fBrmath::vector3z\fP &\fBcenter\fP, const \fBrtypes::manhattan_dist\fP &max_dist, size_t max_vertices)"
+.br
+.ti -1c
+.RI "const auto & \fBcenter\fP (void) const"
+.br
+.ti -1c
+.RI "std::vector< \fBrtypes::manhattan_dist\fP > * \fBdistances\fP (void)"
+.br
+.ti -1c
+.RI "bool \fBedge_filter\fP (\fBedge_descriptor\fP) const"
+.br
+.ti -1c
+.RI "const auto & \fBll\fP (void) const"
+.br
+.ti -1c
+.RI "auto * \fBlookup\fP (void)"
+.br
+.ti -1c
+.RI "const auto * \fBlookup\fP (void) const"
+.br
+.ti -1c
+.RI "const auto & \fBlr\fP (void) const"
+.br
+.ti -1c
+.RI "size_t \fBn_vertices\fP (void) const"
+.br
+.ti -1c
+.RI "const auto & \fBul\fP (void) const"
+.br
+.ti -1c
+.RI "void \fBupdate\fP (const \fBbgl_impl_type\fP &g, \fBvertex_descriptor\fP vd, const \fBrtypes::manhattan_dist\fP &dist)"
+.br
+.ti -1c
+.RI "const auto & \fBur\fP (void) const"
+.br
+.ti -1c
+.RI "bool \fBvertex_filter\fP (\fBvertex_descriptor\fP vd) const"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TSpecType>
+.br
+class rcppsw::ds::graph::hgrid3D_view_filter_data< TSpecType >"
+The data gathered during building the \fBhgrid3D_view\fP\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::\fBbgl_impl_type\fP =  typename TSpecType::bgl_impl_type"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::\fBedge_descriptor\fP =  typename bgl_impl_type::edge_descriptor"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::\fBvertex_descriptor\fP =  typename bgl_impl_type::vertex_descriptor"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::\fBvertex_property_type\fP =  typename bgl_impl_type::vertex_property_type"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::\fBhgrid3D_view_filter_data\fP (const \fBrmath::vector3z\fP & center, const \fBrtypes::manhattan_dist\fP & max_dist, size_t max_vertices)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TSpecType > const auto& \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::center (void) const\fC [inline]\fP"
+
+.SS "template<typename TSpecType > std::vector<\fBrtypes::manhattan_dist\fP>* \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::distances (void)\fC [inline]\fP"
+
+.SS "template<typename TSpecType > bool \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::edge_filter (\fBedge_descriptor\fP) const\fC [inline]\fP"
+
+.SS "template<typename TSpecType > const auto& \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::ll (void) const\fC [inline]\fP"
+
+.SS "template<typename TSpecType > auto* \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::lookup (void)\fC [inline]\fP"
+
+.SS "template<typename TSpecType > const auto* \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::lookup (void) const\fC [inline]\fP"
+
+.SS "template<typename TSpecType > const auto& \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::lr (void) const\fC [inline]\fP"
+
+.SS "template<typename TSpecType > size_t \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::n_vertices (void) const\fC [inline]\fP"
+
+.SS "template<typename TSpecType > const auto& \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::ul (void) const\fC [inline]\fP"
+
+.SS "template<typename TSpecType > void \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::update (const \fBbgl_impl_type\fP & g, \fBvertex_descriptor\fP vd, const \fBrtypes::manhattan_dist\fP & dist)\fC [inline]\fP"
+
+.SS "template<typename TSpecType > const auto& \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::ur (void) const\fC [inline]\fP"
+
+.SS "template<typename TSpecType > bool \fBrcppsw::ds::graph::hgrid3D_view_filter_data\fP< TSpecType >::vertex_filter (\fBvertex_descriptor\fP vd) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

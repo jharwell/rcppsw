@@ -1,0 +1,104 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/ipc.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <boost/interprocess/allocators/allocator\&.hpp>\fP
+.br
+\fC#include <boost/interprocess/containers/deque\&.hpp>\fP
+.br
+\fC#include <boost/interprocess/containers/list\&.hpp>\fP
+.br
+\fC#include <boost/interprocess/containers/map\&.hpp>\fP
+.br
+\fC#include <boost/interprocess/containers/string\&.hpp>\fP
+.br
+\fC#include <boost/interprocess/ipc/message_queue\&.hpp>\fP
+.br
+\fC#include <boost/interprocess/managed_shared_memory\&.hpp>\fP
+.br
+\fC#include <boost/interprocess/sync/interprocess_condition\&.hpp>\fP
+.br
+\fC#include <boost/interprocess/sync/interprocess_mutex\&.hpp>\fP
+.br
+\fC#include <boost/interprocess/sync/interprocess_semaphore\&.hpp>\fP
+.br
+\fC#include <boost/interprocess/sync/named_mutex\&.hpp>\fP
+.br
+\fC#include <functional>\fP
+.br
+\fC#include <list>\fP
+.br
+\fC#include <map>\fP
+.br
+\fC#include <memory>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <utility>\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::multiprocess\fP"
+.br
+.RI "Multi-process variants of other classes: queue\&. Forkable interface\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<typename T > using \fBrcppsw::multiprocess::ipc_allocator\fP = bip::allocator< T, bip::managed_shared_memory::segment_manager >"
+.br
+.RI "An allocator for shared memory for stuff allocated to be shared across processes\&. "
+.ti -1c
+.RI "template<typename T > using \fBrcppsw::multiprocess::ipc_list\fP = bip::list< T, ipc_allocator< T > >"
+.br
+.RI "A std::list capable of being shared across processes\&. "
+.ti -1c
+.RI "template<typename key , typename value > using \fBrcppsw::multiprocess::ipc_map\fP = bip::map< key, value, std::less< key >, ipc_allocator< std::pair< const key, value > >>"
+.br
+.RI "A std::map capable of being shared across processes\&. "
+.ti -1c
+.RI "using \fBrcppsw::multiprocess::ipc_string\fP = bip::basic_string< char, std::char_traits< char >, ipc_allocator< char > >"
+.br
+.RI "A string capable of being shared across processes\&. "
+.ti -1c
+.RI "template<typename T > using \fBrcppsw::multiprocess::ipc_vector\fP = std::vector< T, ipc_allocator< T > >"
+.br
+.RI "A std::vector capable of being shared across processes\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2017 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/
+.PP
+here is my file 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

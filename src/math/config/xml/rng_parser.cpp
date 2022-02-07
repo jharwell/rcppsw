@@ -32,10 +32,13 @@ NS_START(rcppsw, math, config, xml);
  * Member Functions
  ******************************************************************************/
 void rng_parser::parse(const ticpp::Element& node) {
-  m_config = std::make_unique<config_type>();
-
   /* tag optional in all cases */
   if (nullptr != node.FirstChild(kXMLRoot, false)) {
+    m_config = std::make_unique<config_type>();
+    ER_DEBUG("Parent node=%s: child=%s",
+             node.Value().c_str(),
+             kXMLRoot.c_str());
+
     ticpp::Element enode = node_get(node, kXMLRoot);
     XML_PARSE_ATTR(enode, m_config, seed);
   }

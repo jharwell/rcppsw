@@ -1,0 +1,34 @@
+.TH "rcppsw::patterns::factory" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::factory \- Factory design pattern: sharing/releasing, multifactory\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBdetail\fP"
+.br
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBreleasing_factory\fP"
+.br
+.RI "Specialization of the \fBdetail::base_factory\fP class for releasing ownership of created objects via std::unique_ptr\&. "
+.ti -1c
+.RI "class \fBsharing_factory\fP"
+.br
+.RI "Specialization of the \fBdetail::base_factory\fP class for sharing ownership of created objects via std::shared_ptr\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Factory design pattern: sharing/releasing, multifactory\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

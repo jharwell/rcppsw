@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1math_1_1config_1_1ema__config" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>rcppsw::math::config::ema_config</compoundname>
+    <basecompoundref refid="structrcppsw_1_1config_1_1base__config" prot="public" virt="non-virtual">rcppsw::config::base_config</basecompoundref>
+    <includes refid="ema__config_8hpp" local="no">ema_config.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1math_1_1config_1_1ema__config_1a681f0ab181e36917103771b9486cbd83" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::math::config::ema_config::alpha</definition>
+        <argsstring></argsstring>
+        <name>alpha</name>
+        <initializer>{0.0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/config/ema_config.hpp" line="48" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/config/ema_config.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Parameters for <ref refid="classrcppsw_1_1math_1_1ema" kindref="compound">ema</ref> objects. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::config::base_config</label>
+        <link refid="structrcppsw_1_1config_1_1base__config"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::math::config::ema_config</label>
+        <link refid="structrcppsw_1_1math_1_1config_1_1ema__config"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::config::base_config</label>
+        <link refid="structrcppsw_1_1config_1_1base__config"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::math::config::ema_config</label>
+        <link refid="structrcppsw_1_1math_1_1config_1_1ema__config"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/config/ema_config.hpp" line="47" column="52" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/config/ema_config.hpp" bodystart="47" bodyend="49"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1math_1_1config_1_1ema__config_1a681f0ab181e36917103771b9486cbd83" prot="public" virt="non-virtual"><scope>rcppsw::math::config::ema_config</scope><name>alpha</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a1cfd52de449665fdfe4b2a42c2248f96" prot="public" virt="non-virtual"><scope>rcppsw::math::config::ema_config</scope><name>base_config</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a9a86158e067c0ed5b8b3c16760878473" prot="public" virt="non-virtual"><scope>rcppsw::math::config::ema_config</scope><name>base_config</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a32d1e916aa385603fec11cefc9fa30be" prot="public" virt="non-virtual"><scope>rcppsw::math::config::ema_config</scope><name>operator=</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a4ddde3073572a1095a9aeeb7591cb226" prot="public" virt="virtual"><scope>rcppsw::math::config::ema_config</scope><name>~base_config</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

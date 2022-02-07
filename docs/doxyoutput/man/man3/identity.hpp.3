@@ -1,0 +1,67 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/mpl/identity.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/mpl/identity.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBrcppsw::mpl::identity< T >\fP"
+.br
+.RI "Some types are not not default constructible, and therefore cannot be used with boost::mpl::for_each as is\&. If we only need the type of the class during an operation, and do not need access to any of its methods, we can add a layer of indirection with a simple struct that IS default constructible that we CAN use\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::mpl\fP"
+.br
+.RI "Meta programming namespace\&. Mainly a few aliases around things which boost provides\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2020 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Class Documentation"
+.PP 
+.SH "class rcppsw::mpl::identity"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::mpl::identity< T >"
+Some types are not not default constructible, and therefore cannot be used with boost::mpl::for_each as is\&. If we only need the type of the class during an operation, and do not need access to any of its methods, we can add a layer of indirection with a simple struct that IS default constructible that we CAN use\&. 
+.PP
+\fBClass Members:\fP
+.RS 4
+typedef T \fItype\fP 
+.br
+.PP
+.RE
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

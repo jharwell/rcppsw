@@ -1,0 +1,111 @@
+.TH "rcppsw::multiprocess::forkable" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::multiprocess::forkable \- Daemon interface class which can be derived from to indicate that the class can be fork()ed and having each new process jump into the main loop defined for the class\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <forkable\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBforkable\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual \fB~forkable\fP (void)=default"
+.br
+.ti -1c
+.RI "pid_t \fBpid\fP (void) const"
+.br
+.ti -1c
+.RI "virtual void \fBproc_main\fP (void)=0"
+.br
+.RI "Entry point for the new process\&. "
+.ti -1c
+.RI "pid_t \fBstart\fP (const std::string &new_wd, int core=\-1)"
+.br
+.RI "Start a process in a new directory\&. "
+.ti -1c
+.RI "pid_t \fBstart\fP (int core=\-1)"
+.br
+.RI "Start a process\&. "
+.ti -1c
+.RI "virtual void \fBterm\fP (void)"
+.br
+.RI "Signal a process that it should terminate, from outside the process\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBterminated\fP (void) const"
+.br
+.RI "Check if a process object has been told to terminate elsewhere\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Daemon interface class which can be derived from to indicate that the class can be fork()ed and having each new process jump into the main loop defined for the class\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::multiprocess::forkable::forkable (void)\fC [default]\fP"
+
+.SS "virtual rcppsw::multiprocess::forkable::~forkable (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "pid_t rcppsw::multiprocess::forkable::pid (void) const\fC [inline]\fP"
+
+.SS "virtual void rcppsw::multiprocess::forkable::proc_main (void)\fC [pure virtual]\fP"
+
+.PP
+Entry point for the new process\&. 
+.SS "pid_t rcppsw::multiprocess::forkable::start (const std::string & new_wd, int core = \fC\-1\fP)"
+
+.PP
+Start a process in a new directory\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInew_wd\fP The new working directory to start the process in\&. 
+.br
+\fIcore\fP The core to bind the process (and any threads it might spawn) to\&. By default, no binding\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+PID of child process in parent, or -1 if chdir() failed with \fCnew_wd\fP\&. 
+.RE
+.PP
+
+.SS "pid_t rcppsw::multiprocess::forkable::start (int core = \fC\-1\fP)"
+
+.PP
+Start a process\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcore\fP The core to bind the process (and any threads it might spawn) to\&. By default, no binding\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+PID of child process in parent\&. 
+.RE
+.PP
+
+.SS "virtual void rcppsw::multiprocess::forkable::term (void)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+Signal a process that it should terminate, from outside the process\&. 
+.SS "bool rcppsw::multiprocess::forkable::terminated (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+.PP
+Check if a process object has been told to terminate elsewhere\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

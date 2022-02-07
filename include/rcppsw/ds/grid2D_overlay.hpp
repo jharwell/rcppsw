@@ -27,7 +27,7 @@
 #include <limits>
 
 #include "rcppsw/ds/base_grid2D.hpp"
-#include "rcppsw/ds/grid_overlay.hpp"
+#include "rcppsw/ds/base_grid_overlay.hpp"
 #include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
@@ -43,7 +43,7 @@ NS_START(rcppsw, ds);
  * \ingroup ds
  *
  * \brief A 2D logical grid overlayed over a continuous environment using a
- * \a contiguous array of the template parameter type (\see \ref grid_overlay).
+ * \a contiguous array of the template parameter type (\see \ref base_grid_overlay).
  *
  * \tparam T The type of the grid element (probably a cell of some kind). Must
  * have must have a zero parameter constructor available or it won't compile
@@ -53,21 +53,20 @@ NS_START(rcppsw, ds);
  */
 template <typename T>
 class grid2D_overlay final : public base_grid2D<T>,
-                             public grid_overlay<math::vector2d>,
+                             public base_grid_overlay<math::vector2d>,
                              public er::client<grid2D_overlay<T>> {
  public:
   using typename base_grid2D<T>::index_range;
   using typename base_grid2D<T>::grid_view;
   using typename base_grid2D<T>::const_grid_view;
   using typename base_grid2D<T>::grid_type;
+  using typename base_grid2D<T>::coord_type;
 
   using base_grid2D<T>::access;
-  using base_grid2D<T>::xdsize;
-  using base_grid2D<T>::ydsize;
 
-  using grid_overlay<math::vector2d>::resolution;
-  using grid_overlay<math::vector2d>::originr;
-  using grid_overlay<math::vector2d>::origind;
+  using base_grid_overlay<math::vector2d>::resolution;
+  using base_grid_overlay<math::vector2d>::originr;
+  using base_grid_overlay<math::vector2d>::origind;
 
   /**
    * \param origin The anchor point of the overlay grid in continuous space.
@@ -82,7 +81,7 @@ class grid2D_overlay final : public base_grid2D<T>,
                  const math::vector2d& dims,
                  const types::discretize_ratio& grid_res,
                  const types::discretize_ratio& field_res)
-      : grid_overlay(origin, grid_res, field_res),
+      : base_grid_overlay(origin, grid_res, field_res),
         ER_CLIENT_INIT("rcppsw.ds.grid2D_overlay"),
         mc_dim(dims),
         m_cells(boost::extents[static_cast<typename index_range::index>(xdsize())]
@@ -113,14 +112,22 @@ class grid2D_overlay final : public base_grid2D<T>,
    */
   T& access(size_t i, size_t j) override {
     return m_cells[static_cast<typename index_range::index>(i)]
-                  [static_cast<typename index_range::index>(j)];
+        [static_cast<typename index_range::index>(j)];
   }
 
-  size_t xdsize(void) const override {
+  /**
+   * \brief Get the discrete size of the X dimension of the grid (i.e. what is
+   * the array index in X?)
+   */
+  size_t xdsize(void) const {
     return static_cast<size_t>(mc_dim.x() / resolution().v());
   }
 
-  size_t ydsize(void) const override {
+  /**
+   * \brief Get the discrete size of the Y dimension of the grid (i.e. what is
+   * the array index in Y?)
+   */
+  size_t ydsize(void) const {
     return static_cast<size_t>(mc_dim.y() / resolution().v());
   }
 
@@ -138,16 +145,19 @@ class grid2D_overlay final : public base_grid2D<T>,
    * \brief Get the real dimensions of the grid; that is, continuous floating
    * point.
    */
-  const math::vector2d& dimsr(void) const { return mc_dim; }
+  const math::vector2d& rdims2D(void) const { return mc_dim; }
 
   /**
    * \brief Get the discrete dimensions of the grid.
    */
-  math::vector2z dimsd(void) const {
+  coord_type ddims2D(void) const {
     return math::dvec2zvec(mc_dim, resolution().v());
   }
 
  private:
+  size_t xsize(void) const override { return xdsize(); }
+  size_t ysize(void) const override { return ydsize(); }
+
   grid_type& grid(void) override { return m_cells; }
   const grid_type& grid(void) const override { return m_cells; }
 

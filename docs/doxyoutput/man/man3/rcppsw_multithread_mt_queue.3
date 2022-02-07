@@ -1,0 +1,84 @@
+.TH "rcppsw::multithread::mt_queue< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::multithread::mt_queue< T > \- A simple multiple-producer/consumer queue with locking\&. No guarantees of fairness\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <mt_queue\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::patterns::decorator::decorator< std::deque< T > >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBmt_queue\fP (void)=default"
+.br
+.ti -1c
+.RI "T \fBdequeue\fP ()"
+.br
+.RI "Get data from the queue\&. Wait for data if not available\&. "
+.ti -1c
+.RI "void \fBenqueue\fP (const T &data)"
+.br
+.RI "Add data to the queue and notify others\&. "
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) const \-> decltype(std::declval< decltype(\fBrpdecorator::decorator\fP< T >::\fBdecoratee\fP())>()\&.Func(args\&.\&.\&.))"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) const \-> decltype(std::declval< decltype(\fBrpdecorator::decorator\fP< T >::\fBdecoratee\fP())>()\&.Func(args\&.\&.\&.))"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) const \-> decltype(std::declval< decltype(\fBrpdecorator::decorator\fP< T >::\fBdecoratee\fP())>()\&.Func(args\&.\&.\&.))"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) const \-> decltype(std::declval< decltype(\fBrpdecorator::decorator\fP< T >::\fBdecoratee\fP())>()\&.Func(args\&.\&.\&.))"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) const \-> decltype(std::declval< decltype(\fBrpdecorator::decorator\fP< T >::\fBdecoratee\fP())>()\&.Func(args\&.\&.\&.))"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) const \-> decltype(std::declval< decltype(\fBrpdecorator::decorator\fP< T >::\fBdecoratee\fP())>()\&.Func(args\&.\&.\&.))"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::multithread::mt_queue< T >"
+A simple multiple-producer/consumer queue with locking\&. No guarantees of fairness\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::multithread::mt_queue\fP< T >::\fBmt_queue\fP (void)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > T \fBrcppsw::multithread::mt_queue\fP< T >::dequeue ()\fC [inline]\fP"
+
+.PP
+Get data from the queue\&. Wait for data if not available\&. 
+.SS "template<typename T > void \fBrcppsw::multithread::mt_queue\fP< T >::enqueue (const T & data)\fC [inline]\fP"
+
+.PP
+Add data to the queue and notify others\&. 
+.SS "template<typename T > template<typename\&.\&.\&. Args> auto \fBrcppsw::multithread::mt_queue\fP< T >::Func (Args &&\&.\&.\&. args) const \-> decltype(std::declval<decltype(\fBrpdecorator::decorator\fP<T>::\fBdecoratee\fP())>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+.SS "template<typename T > template<typename\&.\&.\&. Args> auto \fBrcppsw::multithread::mt_queue\fP< T >::Func (Args &&\&.\&.\&. args) const \-> decltype(std::declval<decltype(\fBrpdecorator::decorator\fP<T>::\fBdecoratee\fP())>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+.SS "template<typename T > template<typename\&.\&.\&. Args> auto \fBrcppsw::multithread::mt_queue\fP< T >::Func (Args &&\&.\&.\&. args) const \-> decltype(std::declval<decltype(\fBrpdecorator::decorator\fP<T>::\fBdecoratee\fP())>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+.SS "template<typename T > template<typename\&.\&.\&. Args> auto \fBrcppsw::multithread::mt_queue\fP< T >::Func (Args &&\&.\&.\&. args) const \-> decltype(std::declval<decltype(\fBrpdecorator::decorator\fP<T>::\fBdecoratee\fP())>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+.SS "template<typename T > template<typename\&.\&.\&. Args> auto \fBrcppsw::multithread::mt_queue\fP< T >::Func (Args &&\&.\&.\&. args) const \-> decltype(std::declval<decltype(\fBrpdecorator::decorator\fP<T>::\fBdecoratee\fP())>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+.SS "template<typename T > template<typename\&.\&.\&. Args> auto \fBrcppsw::multithread::mt_queue\fP< T >::Func (Args &&\&.\&.\&. args) const \-> decltype(std::declval<decltype(\fBrpdecorator::decorator\fP<T>::\fBdecoratee\fP())>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

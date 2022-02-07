@@ -1,0 +1,728 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="er_8hpp" kind="file" language="C++">
+    <compoundname>er.hpp</compoundname>
+    <includedby refid="client_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp</includedby>
+    <includedby refid="er_2macros_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/er/macros.hpp</includedby>
+    <invincdepgraph>
+      <node id="13">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp</label>
+        <link refid="file__sink__parser_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp</label>
+        <link refid="register__with__sink_8hpp"/>
+      </node>
+      <node id="29">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp</label>
+        <link refid="sphere__vector_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/manhattan_dist.hpp</label>
+        <link refid="manhattan__dist_8hpp"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp</label>
+        <link refid="degrees_8hpp"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/spatial.hpp</label>
+        <link refid="spatial_8hpp"/>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp</label>
+        <link refid="vector3_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_group.hpp</label>
+        <link refid="collector__group_8hpp"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid3D_metrics_data.hpp</label>
+        <link refid="grid3D__metrics__data_8hpp"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/binned_powerlaw_distribution.hpp</label>
+        <link refid="binned__powerlaw__distribution_8hpp"/>
+      </node>
+      <node id="55">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/vector2.hpp</label>
+        <link refid="vector2_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter_data.hpp</label>
+        <link refid="hgrid3D__view__filter__data_8hpp"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp</label>
+        <link refid="orientation_8hpp"/>
+      </node>
+      <node id="38">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graphml.hpp</label>
+        <link refid="graphml_8hpp"/>
+      </node>
+      <node id="19">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/grid3D_overlay.hpp</label>
+        <link refid="grid3D__overlay_8hpp"/>
+      </node>
+      <node id="72">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink.hpp</label>
+        <link refid="network__sink_8hpp"/>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/grid2D_overlay.hpp</label>
+        <link refid="grid2D__overlay_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp</label>
+        <link refid="base__grid3D_8hpp"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/config/xml/sigmoid_parser.hpp</label>
+        <link refid="sigmoid__parser_8hpp"/>
+      </node>
+      <node id="70">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/file_sink.hpp</label>
+        <link refid="file__sink_8hpp"/>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp</label>
+        <link refid="range_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/file_sink_registerer.hpp</label>
+        <link refid="file__sink__registerer_8hpp"/>
+      </node>
+      <node id="79">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_dist.hpp</label>
+        <link refid="spatial__dist_8hpp"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D.hpp</label>
+        <link refid="hgrid3D_8hpp"/>
+      </node>
+      <node id="3">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp</label>
+        <link refid="entropy_8hpp"/>
+      </node>
+      <node id="77">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/distance_measure.hpp</label>
+        <link refid="distance__measure_8hpp"/>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp</label>
+        <link refid="base__manager_8hpp"/>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_fsm.hpp</label>
+        <link refid="mt__fsm_8hpp"/>
+      </node>
+      <node id="68">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_sink.hpp</label>
+        <link refid="base__sink_8hpp"/>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp</label>
+        <link refid="hgrid3D__view_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/control/periodic_waveform.hpp</label>
+        <link refid="periodic__waveform_8hpp"/>
+      </node>
+      <node id="56">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid2D.hpp</label>
+        <link refid="base__grid2D_8hpp"/>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/control/config/xml/waveform_parser.hpp</label>
+        <link refid="waveform__parser_8hpp"/>
+      </node>
+      <node id="75">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp</label>
+        <link refid="hfsm_8hpp"/>
+      </node>
+      <node id="6">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/config/xml/xml_config_parser.hpp</label>
+        <link refid="xml__config__parser_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/kmeans.hpp</label>
+        <link refid="kmeans_8hpp"/>
+      </node>
+      <node id="16">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp</label>
+        <link refid="base__grid__overlay_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp</label>
+        <link refid="er_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp</label>
+        <link refid="creatable__collector__set_8hpp"/>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/metrics_parser.hpp</label>
+        <link refid="metrics__parser_8hpp"/>
+      </node>
+      <node id="22">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/angles.hpp</label>
+        <link refid="angles_8hpp"/>
+      </node>
+      <node id="52">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp</label>
+        <link refid="network__output__manager_8hpp"/>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graph.hpp</label>
+        <link refid="graph_8hpp"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid3D_metrics_collector.hpp</label>
+        <link refid="grid3D__metrics__collector_8hpp"/>
+      </node>
+      <node id="57">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/grid2D.hpp</label>
+        <link refid="grid2D_8hpp"/>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/control/aperiodic_waveform.hpp</label>
+        <link refid="aperiodic__waveform_8hpp"/>
+      </node>
+      <node id="59">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_data.hpp</label>
+        <link refid="grid2D__metrics__data_8hpp"/>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_range.hpp</label>
+        <link refid="spatial__range_8hpp"/>
+      </node>
+      <node id="64">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/powerlaw_distribution.hpp</label>
+        <link refid="powerlaw__distribution_8hpp"/>
+        <childnode refid="63" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink_registerer.hpp</label>
+        <link refid="network__sink__registerer_8hpp"/>
+      </node>
+      <node id="37">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp</label>
+        <link refid="directed__graph_8hpp"/>
+      </node>
+      <node id="46">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp</label>
+        <link refid="rtree_8hpp"/>
+      </node>
+      <node id="10">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/config/xml/rng_parser.hpp</label>
+        <link refid="rng__parser_8hpp"/>
+      </node>
+      <node id="43">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_vertex_property.hpp</label>
+        <link refid="hgrid3D__vertex__property_8hpp"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/radians.hpp</label>
+        <link refid="radians_8hpp"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp</label>
+        <link refid="stacked__grid2D_8hpp"/>
+      </node>
+      <node id="15">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/network_sink_parser.hpp</label>
+        <link refid="network__sink__parser_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/grid3D.hpp</label>
+        <link refid="grid3D_8hpp"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/base_sink_parser.hpp</label>
+        <link refid="base__sink__parser_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_csv_sink.hpp</label>
+        <link refid="grid2D__metrics__csv__sink_8hpp"/>
+      </node>
+      <node id="27">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/ientropy.hpp</label>
+        <link refid="ientropy_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/simple_fsm.hpp</label>
+        <link refid="simple__fsm_8hpp"/>
+      </node>
+      <node id="44">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_spec.hpp</label>
+        <link refid="hgrid3D__spec_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/bounding_box.hpp</label>
+        <link refid="bounding__box_8hpp"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp</label>
+        <link refid="csv__sink_8hpp"/>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid3D_metrics_csv_sink.hpp</label>
+        <link refid="grid3D__metrics__csv__sink_8hpp"/>
+      </node>
+      <node id="5">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/convex_hull2D.hpp</label>
+        <link refid="convex__hull2D_8hpp"/>
+      </node>
+      <node id="2">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp</label>
+        <link refid="client_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/control/base_waveform.hpp</label>
+        <link refid="base__waveform_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/base_fsm.hpp</label>
+        <link refid="base__fsm_8hpp"/>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_builder.hpp</label>
+        <link refid="hgrid3D__view__builder_8hpp"/>
+      </node>
+      <node id="61">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp</label>
+        <link refid="rng_8hpp"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/er/macros.hpp</label>
+        <link refid="er_2macros_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp</label>
+        <link refid="fs__output__manager_8hpp"/>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp</label>
+        <link refid="grid2D__metrics__collector_8hpp"/>
+      </node>
+      <node id="9">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/config/xml/ema_parser.hpp</label>
+        <link refid="ema__parser_8hpp"/>
+      </node>
+      <node id="42">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp</label>
+        <link refid="hgrid3D__view__filter_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/config/xml/xml_config_repository.hpp</label>
+        <link refid="xml__config__repository_8hpp"/>
+      </node>
+      <node id="66">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp</label>
+        <link refid="base__collector_8hpp"/>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp</label>
+        <link refid="poisson__queue_8hpp"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="er_8hpp_1a0513de2aff32d8d79e1c91e13c092a4a" prot="public" static="no">
+        <name>LIBRA_ER_ALL</name>
+        <initializer>2 /* All event reporting  */</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" line="31" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="er_8hpp_1a20527fd868e8326d6f5688f6b018170d" prot="public" static="no">
+        <name>LIBRA_ER_FATAL</name>
+        <initializer>1 /* Fatal events only */</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" line="30" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="er_8hpp_1a6551d5f2cd31da2caa3860f4d84b5830" prot="public" static="no">
+        <name>LIBRA_ER_NONE</name>
+        <initializer>0 /* No event reporting */</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" line="29" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="er_8hpp_1ae44e3cdede3b012954e89258c0570aeb" prot="public" static="no">
+        <name>RCPPSW_ER</name>
+        <initializer>LIBRA_ER</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" line="27" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="er_8hpp_1a7e0d90c199a86067828ae55672e88295" prot="public" static="no">
+        <name>RCPPSW_ER_ALL</name>
+        <initializer><ref refid="er_8hpp_1a0513de2aff32d8d79e1c91e13c092a4a" kindref="member">LIBRA_ER_ALL</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" line="35" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="er_8hpp_1a6e23d03e90003e24aef9e873ccc8e315" prot="public" static="no">
+        <name>RCPPSW_ER_FATAL</name>
+        <initializer><ref refid="er_8hpp_1a20527fd868e8326d6f5688f6b018170d" kindref="member">LIBRA_ER_FATAL</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" line="34" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="er_8hpp_1a54d737c499a19e8ef76de54051db89cc" prot="public" static="no">
+        <name>RCPPSW_ER_FATAL_MSG_LEN_MAX</name>
+        <initializer>10000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" line="41" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="er_8hpp_1a0697b9f40c686bdda11e0cd0837e02f0" prot="public" static="no">
+        <name>RCPPSW_ER_MSG_LEN_MAX</name>
+        <initializer>1000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" line="40" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="er_8hpp_1a6887501415f5f401a84f4d8e958f3082" prot="public" static="no">
+        <name>RCPPSW_ER_NONE</name>
+        <initializer><ref refid="er_8hpp_1a6551d5f2cd31da2caa3860f4d84b5830" kindref="member">LIBRA_ER_NONE</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" line="33" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2021 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="21"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_ER_ER_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_ER_ER_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>Macros</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="er_8hpp_1ae44e3cdede3b012954e89258c0570aeb" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_ER<sp/>LIBRA_ER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="er_8hpp_1a6551d5f2cd31da2caa3860f4d84b5830" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LIBRA_ER_NONE<sp/><sp/>0<sp/></highlight><highlight class="comment">/*<sp/>No<sp/>event<sp/>reporting<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="er_8hpp_1a20527fd868e8326d6f5688f6b018170d" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LIBRA_ER_FATAL<sp/>1<sp/></highlight><highlight class="comment">/*<sp/>Fatal<sp/>events<sp/>only<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="er_8hpp_1a0513de2aff32d8d79e1c91e13c092a4a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LIBRA_ER_ALL<sp/><sp/><sp/>2<sp/></highlight><highlight class="comment">/*<sp/>All<sp/>event<sp/>reporting<sp/><sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="er_8hpp_1a6887501415f5f401a84f4d8e958f3082" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_ER_NONE<sp/><sp/>LIBRA_ER_NONE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="er_8hpp_1a6e23d03e90003e24aef9e873ccc8e315" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_ER_FATAL<sp/>LIBRA_ER_FATAL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="er_8hpp_1a7e0d90c199a86067828ae55672e88295" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_ER_ALL<sp/><sp/><sp/>LIBRA_ER_ALL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>*<sp/>Size<sp/>of<sp/>buffers<sp/>to<sp/>put<sp/>on<sp/>stack<sp/>for<sp/>creating<sp/>debug<sp/>strings.</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="er_8hpp_1a0697b9f40c686bdda11e0cd0837e02f0" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_ER_MSG_LEN_MAX<sp/>1000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41" refid="er_8hpp_1a54d737c499a19e8ef76de54051db89cc" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_ER_FATAL_MSG_LEN_MAX<sp/>10000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_ER_ER_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/er.hpp"/>
+  </compounddef>
+</doxygen>

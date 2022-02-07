@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1utils" kind="namespace" language="C++">
+    <compoundname>rcppsw::utils</compoundname>
+    <innerclass refid="classrcppsw_1_1utils_1_1base__cli" prot="public">rcppsw::utils::base_cli</innerclass>
+    <innerclass refid="classrcppsw_1_1utils_1_1color" prot="public">rcppsw::utils::color</innerclass>
+    <innerclass refid="classrcppsw_1_1utils_1_1file__parser" prot="public">rcppsw::utils::file_parser</innerclass>
+    <innerclass refid="classrcppsw_1_1utils_1_1line__parser" prot="public">rcppsw::utils::line_parser</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacercppsw_1_1utils_1a24de48f591600b86f2163575d342cfe3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::utils::parse_values</definition>
+        <argsstring>(std::istream &amp;is, size_t n_fields, T *buf, char delim=&apos;\n&apos;)</argsstring>
+        <name>parse_values</name>
+        <param>
+          <type>std::istream &amp;</type>
+          <declname>is</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>n_fields</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>delim</declname>
+          <defval>&apos;\n&apos;</defval>
+        </param>
+        <briefdescription>
+<para>Parse values from a delimited string stream into a set of tokens. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>is</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input stream. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n_fields</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The # of fields that should exist in the stream. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The buffer to put the tokens into. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The delimiter separating the tokens (\n by default).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>TRUE</computeroutput> if n_fields tokens were parsed from the stream, and <computeroutput>FALSE</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/string_utils.hpp" line="57" column="6" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/string_utils.hpp" bodystart="57" bodyend="79"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Various utility things which don&apos;t fit anywhere else: Base CLI parsing class, file/line parsers, colors, enum utilities, string utilities. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/rcppsw.hpp" line="167" column="15"/>
+  </compounddef>
+</doxygen>

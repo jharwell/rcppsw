@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1algorithm_1_1clustering" kind="namespace" language="C++">
+    <compoundname>rcppsw::algorithm::clustering</compoundname>
+    <innerclass refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl" prot="public">rcppsw::algorithm::clustering::base_clustering_impl</innerclass>
+    <innerclass refid="classrcppsw_1_1algorithm_1_1clustering_1_1eh__cluster" prot="public">rcppsw::algorithm::clustering::eh_cluster</innerclass>
+    <innerclass refid="classrcppsw_1_1algorithm_1_1clustering_1_1eh__clustering__impl" prot="public">rcppsw::algorithm::clustering::eh_clustering_impl</innerclass>
+    <innerclass refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__balch2000" prot="public">rcppsw::algorithm::clustering::entropy_balch2000</innerclass>
+    <innerclass refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__eh__omp" prot="public">rcppsw::algorithm::clustering::entropy_eh_omp</innerclass>
+    <innerclass refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans" prot="public">rcppsw::algorithm::clustering::kmeans</innerclass>
+    <innerclass refid="classrcppsw_1_1algorithm_1_1clustering_1_1kmeans__omp" prot="public">rcppsw::algorithm::clustering::kmeans_omp</innerclass>
+    <innerclass refid="classrcppsw_1_1algorithm_1_1clustering_1_1nc__cluster" prot="public">rcppsw::algorithm::clustering::nc_cluster</innerclass>
+    <innernamespace refid="namespacercppsw_1_1algorithm_1_1clustering_1_1cluster">rcppsw::algorithm::clustering::cluster</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1algorithm_1_1clustering_1_1membership">rcppsw::algorithm::clustering::membership</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1algorithm_1_1clustering_1_1policy">rcppsw::algorithm::clustering::policy</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacercppsw_1_1algorithm_1_1clustering_1ae4bdc3c1b255447703e70a19e7c90aef" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Policy</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structrcppsw_1_1algorithm_1_1clustering_1_1membership_1_1mapping" kindref="compound">membership::mapping</ref>&lt; Policy &gt;::type</type>
+        <definition>using rcppsw::algorithm::clustering::membership_type = typedef typename membership::mapping&lt;Policy&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>membership_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/membership_policy.hpp" line="85" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/membership_policy.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Different clustering algorithms: kmeans, entropy. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/base_clustering_impl.hpp" line="37" column="41"/>
+  </compounddef>
+</doxygen>

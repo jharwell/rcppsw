@@ -1,0 +1,192 @@
+.TH "rcppsw::ds::poisson_queue< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::poisson_queue< T > \- A wrapper around std::queue to make it more amenable to queueing theoretic analysis by tracking queue state\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <poisson_queue\&.hpp>\fP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBop_metadata\fP"
+.br
+.RI "Metadata for tracking enqueue_queue/dequeue operations\&. "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBpoisson_queue\fP (const \fBpoisson_queue\fP &)=delete"
+.br
+.ti -1c
+.RI "\fBpoisson_queue\fP (double \fBlambda\fP, double \fBmu\fP, math::rng *\fBrng\fP)"
+.br
+.ti -1c
+.RI "bool \fBcontains\fP (const T &key) const"
+.br
+.RI "Determine if \fCkey\fP is currently contained in the queue\&. "
+.ti -1c
+.RI "boost::optional< T > \fBdequeue\fP (const \fBtypes::timestep\fP &t, bool fake)"
+.br
+.RI "Remove an item from the queue after an event has been triggered\&. This is a separate function from checking for the event for symmetry with the enqueue operation\&. "
+.ti -1c
+.RI "bool \fBdequeue_check\fP (const \fBtypes::timestep\fP &t)"
+.br
+.RI "Check if the conditions are ready for dequeue at time \fCt\fP from the queue as part of a poisson process\&. Does not perform the dequeue operation\&. "
+.ti -1c
+.RI "\fBop_metadata\fP \fBdequeue_data\fP (void) const"
+.br
+.RI "Get the current dequeue data\&. "
+.ti -1c
+.RI "void \fBenqueue\fP (const T &item, const \fBtypes::timestep\fP &t)"
+.br
+.RI "Add an item to the queue after an event has been triggered at time \fCt\fP\&. This is a separate function from checking for the event because it may be that generating the items to enqueue is a non-trivial and/or non-reversible task, and we only want to force the caller to do that when necessary\&. "
+.ti -1c
+.RI "bool \fBenqueue_check\fP (const \fBtypes::timestep\fP &t)"
+.br
+.RI "Check if the conditions are ready for enqueueing into the queue as part of a poisson process\&. Does not perform the enqueue operation\&. "
+.ti -1c
+.RI "\fBop_metadata\fP \fBenqueue_data\fP (void) const"
+.br
+.RI "Get the current enqueue data\&. "
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) \-> decltype(std::declval< decltype(Member)>()\&.Func(args\&.\&.\&.))"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) const \-> decltype(std::declval< decltype(Member)>()\&.Func(args\&.\&.\&.))"
+.br
+.ti -1c
+.RI "double \fBlambda\fP (void) const"
+.br
+.ti -1c
+.RI "double \fBmu\fP (void) const"
+.br
+.ti -1c
+.RI "const \fBpoisson_queue\fP & \fBoperator=\fP (const \fBpoisson_queue\fP &)=delete"
+.br
+.ti -1c
+.RI "void \fBreset_metrics\fP (void)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::ds::poisson_queue< T >"
+A wrapper around std::queue to make it more amenable to queueing theoretic analysis by tracking queue state\&. 
+.SH "Class Documentation"
+.PP 
+.SH "struct rcppsw::ds::poisson_queue::op_metadata"
+.PP 
+
+.SS "template<typename T>
+.br
+struct rcppsw::ds::poisson_queue< T >::op_metadata"
+Metadata for tracking enqueue_queue/dequeue operations\&. 
+.PP
+\fBClass Members:\fP
+.RS 4
+size_t \fIcount\fP The # of operations since the last reset\&. 
+.br
+.PP
+timestep \fIinterval_accum\fP The accumulated time between operations since the last reset\&. 
+.br
+.PP
+size_t \fItotal_count\fP The # of operations since the beginning of time\&. 
+.br
+.PP
+timestep \fItotal_interval_accum\fP The accumulated time between operations since the beginning of time\&. 
+.br
+.PP
+.RE
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::ds::poisson_queue\fP< T >::\fBpoisson_queue\fP (double lambda, double mu, math::rng * rng)\fC [inline]\fP"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIlambda\fP The enqueue rate for the queue\&. 
+.br
+\fImu\fP The dequeue rate for the queue\&. 
+.RE
+.PP
+
+.SS "template<typename T > \fBrcppsw::ds::poisson_queue\fP< T >::\fBpoisson_queue\fP (const \fBpoisson_queue\fP< T > &)\fC [delete]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > bool \fBrcppsw::ds::poisson_queue\fP< T >::contains (const T & key) const\fC [inline]\fP"
+
+.PP
+Determine if \fCkey\fP is currently contained in the queue\&. 
+.SS "template<typename T > boost::optional<T> \fBrcppsw::ds::poisson_queue\fP< T >::dequeue (const \fBtypes::timestep\fP & t, bool fake)\fC [inline]\fP"
+
+.PP
+Remove an item from the queue after an event has been triggered\&. This is a separate function from checking for the event for symmetry with the enqueue operation\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfake\fP Allow for a fake dequeue in which nothing is returned but the metadata for dequeueing is still updated as if there was something in the queue\&. Useful for simulating queues of infinite size/queues where the objects to dequeue cannot be put into the queue a priori\&.
+.br
+\fIt\fP The current timestep\&. 
+.RE
+.PP
+
+.SS "template<typename T > bool \fBrcppsw::ds::poisson_queue\fP< T >::dequeue_check (const \fBtypes::timestep\fP & t)\fC [inline]\fP"
+
+.PP
+Check if the conditions are ready for dequeue at time \fCt\fP from the queue as part of a poisson process\&. Does not perform the dequeue operation\&. 
+.PP
+\fBReturns\fP
+.RS 4
+\fCTRUE\fP if an event has been triggered for dequeueing, \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+.SS "template<typename T > \fBop_metadata\fP \fBrcppsw::ds::poisson_queue\fP< T >::dequeue_data (void) const\fC [inline]\fP"
+
+.PP
+Get the current dequeue data\&. 
+.SS "template<typename T > void \fBrcppsw::ds::poisson_queue\fP< T >::enqueue (const T & item, const \fBtypes::timestep\fP & t)\fC [inline]\fP"
+
+.PP
+Add an item to the queue after an event has been triggered at time \fCt\fP\&. This is a separate function from checking for the event because it may be that generating the items to enqueue is a non-trivial and/or non-reversible task, and we only want to force the caller to do that when necessary\&. 
+.SS "template<typename T > bool \fBrcppsw::ds::poisson_queue\fP< T >::enqueue_check (const \fBtypes::timestep\fP & t)\fC [inline]\fP"
+
+.PP
+Check if the conditions are ready for enqueueing into the queue as part of a poisson process\&. Does not perform the enqueue operation\&. 
+.PP
+\fBReturns\fP
+.RS 4
+\fCTRUE\fP if an event has been triggered for enqueueing, \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+.SS "template<typename T > \fBop_metadata\fP \fBrcppsw::ds::poisson_queue\fP< T >::enqueue_data (void) const\fC [inline]\fP"
+
+.PP
+Get the current enqueue data\&. 
+.SS "template<typename T > template<typename\&.\&.\&. Args> auto \fBrcppsw::ds::poisson_queue\fP< T >::Func (Args &&\&.\&.\&. args) \-> decltype(std::declval<decltype(Member)>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+.SS "template<typename T > template<typename\&.\&.\&. Args> auto \fBrcppsw::ds::poisson_queue\fP< T >::Func (Args &&\&.\&.\&. args) const \-> decltype(std::declval<decltype(Member)>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+.SS "template<typename T > double \fBrcppsw::ds::poisson_queue\fP< T >::lambda (void) const\fC [inline]\fP"
+
+.SS "template<typename T > double \fBrcppsw::ds::poisson_queue\fP< T >::mu (void) const\fC [inline]\fP"
+
+.SS "template<typename T > const \fBpoisson_queue\fP& \fBrcppsw::ds::poisson_queue\fP< T >::operator= (const \fBpoisson_queue\fP< T > &)\fC [delete]\fP"
+
+.SS "template<typename T > void \fBrcppsw::ds::poisson_queue\fP< T >::reset_metrics (void)\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

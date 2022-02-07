@@ -1,0 +1,211 @@
+.TH "rcppsw::ds::base_grid2D< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::base_grid2D< T > \- Base class containing functionality common to all types of 2D grids\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <base_grid2D\&.hpp>\fP
+.PP
+Inherited by \fBrcppsw::ds::grid2D< T >\fP, and \fBrcppsw::ds::grid2D_overlay< T >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBconst_grid_view\fP = typename grid_type::template const_array_view< 2 >::type"
+.br
+.ti -1c
+.RI "using \fBcoord_type\fP = \fBmath::vector2z\fP"
+.br
+.ti -1c
+.RI "using \fBgrid_type\fP = typename boost::multi_array< T, 2 >"
+.br
+.ti -1c
+.RI "using \fBgrid_view\fP = typename grid_type::template array_view< 2 >::type"
+.br
+.ti -1c
+.RI "using \fBindex_range\fP = typename grid_type::index_range"
+.br
+.ti -1c
+.RI "using \fBvalue_type\fP = T"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbase_grid2D\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual \fB~base_grid2D\fP (void)=default"
+.br
+.ti -1c
+.RI "T & \fBaccess\fP (const \fBcoord_type\fP &c)"
+.br
+.ti -1c
+.RI "const T & \fBaccess\fP (const \fBcoord_type\fP &c) const"
+.br
+.ti -1c
+.RI "const T & \fBaccess\fP (size_t i, size_t j) const"
+.br
+.ti -1c
+.RI "virtual T & \fBaccess\fP (size_t i, size_t j)=0"
+.br
+.RI "Return a reference to the element at position (i, j) in the grid\&. "
+.ti -1c
+.RI "bool \fBcontains\fP (const \fBcoord_type\fP &pt)"
+.br
+.ti -1c
+.RI "bool \fBcontains\fP (size_t i, size_t j)"
+.br
+.ti -1c
+.RI "T & \fBoperator[]\fP (const \fBcoord_type\fP &c)"
+.br
+.ti -1c
+.RI "const T & \fBoperator[]\fP (const \fBcoord_type\fP &c) const"
+.br
+.ti -1c
+.RI "\fBgrid_view\fP \fBsubcircle\fP (const \fBcoord_type\fP &c, size_t radius)"
+.br
+.RI "Get a subcircle gridview from a grid\&. The subcircle extent is cropped to the maximum boundaries of the parent grid\&. "
+.ti -1c
+.RI "\fBconst_grid_view\fP \fBsubcircle\fP (const \fBcoord_type\fP &c, size_t radius) const"
+.br
+.ti -1c
+.RI "\fBgrid_view\fP \fBsubgrid\fP (const \fBcoord_type\fP &ll, const \fBcoord_type\fP &ur)"
+.br
+.RI "Create a subgrid from a grid\&. "
+.ti -1c
+.RI "\fBconst_grid_view\fP \fBsubgrid\fP (const \fBcoord_type\fP &ll, const \fBcoord_type\fP &ur) const"
+.br
+.ti -1c
+.RI "virtual size_t \fBxsize\fP (void) const =0"
+.br
+.RI "Get the size of the X dimension of the grid (i\&.e\&. what is the array index in X?) "
+.ti -1c
+.RI "virtual size_t \fBysize\fP (void) const =0"
+.br
+.RI "Get the size of the Y dimension of the grid (i\&.e\&. what is the array index in Y?) "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual const \fBgrid_type\fP & \fBgrid\fP (void) const =0"
+.br
+.ti -1c
+.RI "virtual \fBgrid_type\fP & \fBgrid\fP (void)=0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::ds::base_grid2D< T >"
+Base class containing functionality common to all types of 2D grids\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename T > using \fBrcppsw::ds::base_grid2D\fP< T >::\fBconst_grid_view\fP =  typename grid_type::template const_array_view<2>::type"
+
+.SS "template<typename T > using \fBrcppsw::ds::base_grid2D\fP< T >::\fBcoord_type\fP =  \fBmath::vector2z\fP"
+
+.SS "template<typename T > using \fBrcppsw::ds::base_grid2D\fP< T >::\fBgrid_type\fP =  typename boost::multi_array<T, 2>"
+
+.SS "template<typename T > using \fBrcppsw::ds::base_grid2D\fP< T >::\fBgrid_view\fP =  typename grid_type::template array_view<2>::type"
+
+.SS "template<typename T > using \fBrcppsw::ds::base_grid2D\fP< T >::\fBindex_range\fP =  typename grid_type::index_range"
+
+.SS "template<typename T > using \fBrcppsw::ds::base_grid2D\fP< T >::\fBvalue_type\fP =  T"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::ds::base_grid2D\fP< T >::\fBbase_grid2D\fP (void)\fC [default]\fP"
+
+.SS "template<typename T > virtual \fBrcppsw::ds::base_grid2D\fP< T >::~\fBbase_grid2D\fP (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > T& \fBrcppsw::ds::base_grid2D\fP< T >::access (const \fBcoord_type\fP & c)\fC [inline]\fP"
+
+.SS "template<typename T > const T& \fBrcppsw::ds::base_grid2D\fP< T >::access (const \fBcoord_type\fP & c) const\fC [inline]\fP"
+
+.SS "template<typename T > const T& \fBrcppsw::ds::base_grid2D\fP< T >::access (size_t i, size_t j) const\fC [inline]\fP"
+
+.SS "template<typename T > virtual T& \fBrcppsw::ds::base_grid2D\fP< T >::access (size_t i, size_t j)\fC [pure virtual]\fP"
+
+.PP
+Return a reference to the element at position (i, j) in the grid\&. This is provided in the base class so that the pointer/object variants of the grid (\fBgrid2D\fP, \fBgrid2D_overlay\fP) can reduce code duplication\&. 
+.PP
+Implemented in \fBrcppsw::ds::grid2D_overlay< T >\fP, \fBrcppsw::ds::grid2D< T >\fP, and \fBrcppsw::ds::grid2D< ral::mt_size_t >\fP\&.
+.SS "template<typename T > bool \fBrcppsw::ds::base_grid2D\fP< T >::contains (const \fBcoord_type\fP & pt)\fC [inline]\fP"
+
+.SS "template<typename T > bool \fBrcppsw::ds::base_grid2D\fP< T >::contains (size_t i, size_t j)\fC [inline]\fP"
+
+.SS "template<typename T > virtual const \fBgrid_type\fP& \fBrcppsw::ds::base_grid2D\fP< T >::grid (void) const\fC [protected]\fP, \fC [pure virtual]\fP"
+
+.SS "template<typename T > virtual \fBgrid_type\fP& \fBrcppsw::ds::base_grid2D\fP< T >::grid (void)\fC [protected]\fP, \fC [pure virtual]\fP"
+
+.SS "template<typename T > T& \fBrcppsw::ds::base_grid2D\fP< T >::operator[] (const \fBcoord_type\fP & c)\fC [inline]\fP"
+
+.SS "template<typename T > const T& \fBrcppsw::ds::base_grid2D\fP< T >::operator[] (const \fBcoord_type\fP & c) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBgrid_view\fP \fBrcppsw::ds::base_grid2D\fP< T >::subcircle (const \fBcoord_type\fP & c, size_t radius)\fC [inline]\fP"
+
+.PP
+Get a subcircle gridview from a grid\&. The subcircle extent is cropped to the maximum boundaries of the parent grid\&. This means that rather than getting a 2 x 2 subgrid centered at 0 with the out-of-bounds elements zeroed if you request a subcircle on the boundary of the overall grid, you will get a 1 x 2 subgrid (a lopsided circle)\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIc\fP Coordinates of center of subcircle\&. 
+.br
+\fIradius\fP Radius of subcircle\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The subcircle (closed interval)\&. 
+.RE
+.PP
+
+.SS "template<typename T > \fBconst_grid_view\fP \fBrcppsw::ds::base_grid2D\fP< T >::subcircle (const \fBcoord_type\fP & c, size_t radius) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBgrid_view\fP \fBrcppsw::ds::base_grid2D\fP< T >::subgrid (const \fBcoord_type\fP & ll, const \fBcoord_type\fP & ur)\fC [inline]\fP"
+
+.PP
+Create a subgrid from a grid\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIll\fP Lower left of the subgrid, inclusive\&. 
+.br
+\fIur\fP Upper right of the subgrid, inclusive\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The subgrid (closed interval)\&. 
+.RE
+.PP
+
+.SS "template<typename T > \fBconst_grid_view\fP \fBrcppsw::ds::base_grid2D\fP< T >::subgrid (const \fBcoord_type\fP & ll, const \fBcoord_type\fP & ur) const\fC [inline]\fP"
+
+.SS "template<typename T > virtual size_t \fBrcppsw::ds::base_grid2D\fP< T >::xsize (void) const\fC [pure virtual]\fP"
+
+.PP
+Get the size of the X dimension of the grid (i\&.e\&. what is the array index in X?) 
+.PP
+Implemented in \fBrcppsw::ds::grid2D< T >\fP, and \fBrcppsw::ds::grid2D< ral::mt_size_t >\fP\&.
+.SS "template<typename T > virtual size_t \fBrcppsw::ds::base_grid2D\fP< T >::ysize (void) const\fC [pure virtual]\fP"
+
+.PP
+Get the size of the Y dimension of the grid (i\&.e\&. what is the array index in Y?) 
+.PP
+Implemented in \fBrcppsw::ds::grid2D< T >\fP, and \fBrcppsw::ds::grid2D< ral::mt_size_t >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

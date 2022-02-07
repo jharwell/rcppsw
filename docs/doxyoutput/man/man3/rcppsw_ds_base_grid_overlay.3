@@ -1,0 +1,85 @@
+.TH "rcppsw::ds::base_grid_overlay< TOriginType >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::base_grid_overlay< TOriginType > \- Base class for logical grids that are overlayed over a continuous environment\&. It discretizes the continuous volume into a grid of a specified resolution (e\&.g\&. it takes a continuous 10\&.0 x 5\&.0 x 5\&.0 space and discretizes it into a 50 x 25 x 25 grid of cells with a resolution of 0\&.2)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <base_grid_overlay\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< base_grid_overlay< TOriginType > >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBorigin_dtype\fP = typename std::conditional< std::is_same< TOriginType, \fBmath::vector2z\fP >::value, \fBmath::vector2z\fP, \fBmath::vector3z\fP >::type"
+.br
+.ti -1c
+.RI "using \fBorigin_rtype\fP = typename std::conditional< std::is_same< TOriginType, \fBmath::vector2d\fP >::value, \fBmath::vector2d\fP, \fBmath::vector3d\fP >::type"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbase_grid_overlay\fP (const \fBorigin_rtype\fP &origin, const \fBtypes::discretize_ratio\fP &grid_resolution, const \fBtypes::discretize_ratio\fP &field_resolution)"
+.br
+.ti -1c
+.RI "virtual \fB~base_grid_overlay\fP (void)=default"
+.br
+.ti -1c
+.RI "const \fBorigin_dtype\fP & \fBorigind\fP (void) const"
+.br
+.RI "Return the discretized origin of the grid\&. "
+.ti -1c
+.RI "const \fBorigin_rtype\fP & \fBoriginr\fP (void) const"
+.br
+.RI "Return the real origin of the grid in real coordinates\&. "
+.ti -1c
+.RI "const \fBtypes::discretize_ratio\fP & \fBresolution\fP (void) const"
+.br
+.RI "Return the resolution of the grid\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TOriginType>
+.br
+class rcppsw::ds::base_grid_overlay< TOriginType >"
+Base class for logical grids that are overlayed over a continuous environment\&. It discretizes the continuous volume into a grid of a specified resolution (e\&.g\&. it takes a continuous 10\&.0 x 5\&.0 x 5\&.0 space and discretizes it into a 50 x 25 x 25 grid of cells with a resolution of 0\&.2)\&. 
+
+The origin of the continuous environment onto which the discretized grid is overlayed are not necessarily the same, so an anchor/origin point for the discretized grid is required\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename TOriginType > using \fBrcppsw::ds::base_grid_overlay\fP< TOriginType >::\fBorigin_dtype\fP =  typename std::conditional<std::is_same<TOriginType, \fBmath::vector2z\fP>::value, \fBmath::vector2z\fP, \fBmath::vector3z\fP>::type"
+
+.SS "template<typename TOriginType > using \fBrcppsw::ds::base_grid_overlay\fP< TOriginType >::\fBorigin_rtype\fP =  typename std::conditional<std::is_same<TOriginType, \fBmath::vector2d\fP>::value, \fBmath::vector2d\fP, \fBmath::vector3d\fP>::type"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TOriginType > \fBrcppsw::ds::base_grid_overlay\fP< TOriginType >::\fBbase_grid_overlay\fP (const \fBorigin_rtype\fP & origin, const \fBtypes::discretize_ratio\fP & grid_resolution, const \fBtypes::discretize_ratio\fP & field_resolution)\fC [inline]\fP"
+
+.SS "template<typename TOriginType > virtual \fBrcppsw::ds::base_grid_overlay\fP< TOriginType >::~\fBbase_grid_overlay\fP (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TOriginType > const \fBorigin_dtype\fP& \fBrcppsw::ds::base_grid_overlay\fP< TOriginType >::origind (void) const\fC [inline]\fP"
+
+.PP
+Return the discretized origin of the grid\&. 
+.SS "template<typename TOriginType > const \fBorigin_rtype\fP& \fBrcppsw::ds::base_grid_overlay\fP< TOriginType >::originr (void) const\fC [inline]\fP"
+
+.PP
+Return the real origin of the grid in real coordinates\&. 
+.SS "template<typename TOriginType > const \fBtypes::discretize_ratio\fP& \fBrcppsw::ds::base_grid_overlay\fP< TOriginType >::resolution (void) const\fC [inline]\fP"
+
+.PP
+Return the resolution of the grid\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

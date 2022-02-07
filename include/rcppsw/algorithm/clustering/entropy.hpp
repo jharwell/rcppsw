@@ -132,8 +132,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
       double entropy_h = balch2000_iter(dist_func, horizon);
       double end = time_monotonic_sec();
 
-      if (std::fabs(entropy_h - entropy_h_1) <=
-          std::numeric_limits<double>::epsilon()) {
+      if (std::fabs(entropy_h - entropy_h_1) <= rmath::kDOUBLE_EPSILON) {
         ER_WARN("Redundant entropy %f: horizon=%f", entropy_h, horizon);
       } else {
         e_accum += entropy_h;
@@ -161,7 +160,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
   cluster_vector clusters_init(void) {
     cluster_vector clusters;
     for (size_t i = 0; i < m_data.size(); ++i) {
-      clusters.emplace_back(cluster_type(i, m_data, &m_membership));
+      clusters.emplace_back(cluster_type(i, m_data, m_membership));
     } /* for(i..) */
     return clusters;
   }

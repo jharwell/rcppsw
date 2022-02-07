@@ -1,0 +1,74 @@
+.TH "rcppsw::metrics::config::xml::file_sink_parser" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::config::xml::file_sink_parser \- Parses XML parameters related to the \fBrmetrics::file_sink\fP into \fBfile_sink_config\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <file_sink_parser\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< file_sink_parser >\fP, and base_sink_parser\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBconfig_type\fP = \fBfile_sink_config\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBfile_sink_parser\fP (void)"
+.br
+.ti -1c
+.RI "\fB~file_sink_parser\fP (void) override=default"
+.br
+.ti -1c
+.RI "void \fBparse\fP (const ticpp::Element &node) override"
+.br
+.ti -1c
+.RI "std::string \fBxml_root\fP (void) const override"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const std::string \fBkXMLRoot\fP = 'file'"
+.br
+.RI "The root tag that all configuration relating to the \&.file metrics sink should in lie under in the XML tree\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Parses XML parameters related to the \fBrmetrics::file_sink\fP into \fBfile_sink_config\fP\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "using \fBrcppsw::metrics::config::xml::file_sink_parser::config_type\fP =  \fBfile_sink_config\fP"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::metrics::config::xml::file_sink_parser::file_sink_parser (void)\fC [inline]\fP"
+
+.SS "rcppsw::metrics::config::xml::file_sink_parser::~file_sink_parser (void)\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void rcppsw::metrics::config::xml::file_sink_parser::parse (const ticpp::Element & node)\fC [override]\fP"
+
+.SS "std::string rcppsw::metrics::config::xml::file_sink_parser::xml_root (void) const\fC [inline]\fP, \fC [override]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "const std::string rcppsw::metrics::config::xml::file_sink_parser::kXMLRoot = 'file'\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+The root tag that all configuration relating to the \&.file metrics sink should in lie under in the XML tree\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

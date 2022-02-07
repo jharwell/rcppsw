@@ -1,0 +1,153 @@
+.TH "rcppsw::mpl::detail" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::mpl::detail
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBdetector\fP"
+.br
+.RI "If the specified function \fCTFuncDecltype\fP taking the specified \fCArgs\fP is not well formed, then SFINAE and partial template specialization will select this template, indicating unsuccessful detection\&. "
+.ti -1c
+.RI "struct \fBdetector< TFailType, std::void_t< TFuncDecltype< Args\&.\&.\&. > >, TFuncDecltype, Args\&.\&.\&. >\fP"
+.br
+.ti -1c
+.RI "struct \fBExtendTList\fP"
+.br
+.ti -1c
+.RI "struct \fBExtendTList< std::tuple< Ts\&.\&.\&. >, T >\fP"
+.br
+.ti -1c
+.RI "struct \fBExtendTList< std::tuple< void >, T >\fP"
+.br
+.ti -1c
+.RI "struct \fBrename_impl\fP"
+.br
+.ti -1c
+.RI "struct \fBrename_impl< A< T\&.\&.\&. >, B >\fP"
+.br
+.in -1c
+.SH "Class Documentation"
+.PP 
+.SH "struct rcppsw::mpl::detail::detector"
+.PP 
+
+.SS "template<class TFailType, class AlwaysVoid, template< class\&.\&.\&. > class TFuncDecltype, class\&.\&.\&. Args>
+.br
+struct rcppsw::mpl::detail::detector< TFailType, AlwaysVoid, TFuncDecltype, Args >"
+If the specified function \fCTFuncDecltype\fP taking the specified \fCArgs\fP is not well formed, then SFINAE and partial template specialization will select this template, indicating unsuccessful detection\&. 
+
+If the specified function \fCTFuncDecltype\fP taking the specified \fCArgs\fP is well formed, then SFINAE and partial template specialization will select this template, indicating successful detection\&.
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fITFailType\fP The default type to select upon unsuccessful detection\&.
+.br
+\fITFuncDecltype\fP The decltype() of the function to detect\&.
+.br
+\fIArgs\fP The types of the arguments to the function to detect\&.
+.br
+\fITFailType\fP The default type to select upon unsuccessful detection\&. Unused in this version of the detector\&.
+.br
+\fITFuncDecltype\fP The decltype() of the function to detect\&.
+.br
+\fIArgs\fP The types of the arguments to the function to detect\&. 
+.RE
+.PP
+
+.PP
+\fBClass Members:\fP
+.RS 4
+typedef TFailType \fItype\fP Captures \fCTFailType\fP for future use\&. 
+.br
+.PP
+typedef false_type \fIvalue\fP Always \fIFALSE\fP for unsuccessful detection\&. 
+.br
+.PP
+.RE
+.PP
+.SH "struct rcppsw::mpl::detail::detector< TFailType, std::void_t< TFuncDecltype< Args\&.\&.\&. > >, TFuncDecltype, Args\&.\&.\&. >"
+.PP 
+
+.SS "template<class TFailType, template< class\&.\&.\&. > class TFuncDecltype, class\&.\&.\&. Args>
+.br
+struct rcppsw::mpl::detail::detector< TFailType, std::void_t< TFuncDecltype< Args\&.\&.\&. > >, TFuncDecltype, Args\&.\&.\&. >"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+ \fItype\fP Captures \fCTFuncDeclType\fP argument for future use\&. 
+.br
+.PP
+typedef true_type \fIvalue\fP Always \fITRUE\fP for successful detection\&. 
+.br
+.PP
+.RE
+.PP
+.SH "struct rcppsw::mpl::detail::ExtendTList"
+.PP 
+
+.SS "template<typename TList, typename T>
+.br
+struct rcppsw::mpl::detail::ExtendTList< TList, T >"
+
+.SH "struct rcppsw::mpl::detail::ExtendTList< std::tuple< Ts\&.\&.\&. >, T >"
+.PP 
+
+.SS "template<typename T, typename\&.\&.\&. Ts>
+.br
+struct rcppsw::mpl::detail::ExtendTList< std::tuple< Ts\&.\&.\&. >, T >"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+ \fItype\fP 
+.br
+.PP
+.RE
+.PP
+.SH "struct rcppsw::mpl::detail::ExtendTList< std::tuple< void >, T >"
+.PP 
+
+.SS "template<typename T>
+.br
+struct rcppsw::mpl::detail::ExtendTList< std::tuple< void >, T >"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+typedef tuple< T > \fItype\fP 
+.br
+.PP
+.RE
+.PP
+.SH "struct rcppsw::mpl::detail::rename_impl"
+.PP 
+
+.SS "template<class A, template< class\&.\&.\&. > class B>
+.br
+struct rcppsw::mpl::detail::rename_impl< A, B >"
+
+.SH "struct rcppsw::mpl::detail::rename_impl< A< T\&.\&.\&. >, B >"
+.PP 
+
+.SS "template<template< class\&.\&.\&. > class A, class\&.\&.\&. T, template< class\&.\&.\&. > class B>
+.br
+struct rcppsw::mpl::detail::rename_impl< A< T\&.\&.\&. >, B >"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+ \fItype\fP 
+.br
+.PP
+.RE
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

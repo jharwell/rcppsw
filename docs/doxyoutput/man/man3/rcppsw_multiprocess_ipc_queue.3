@@ -1,0 +1,171 @@
+.TH "rcppsw::multiprocess::ipc_queue< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::multiprocess::ipc_queue< T > \- Interprocess synchronized queue (like \fBmultithread::mt_queue\fP, but for processes)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ipc_queue\&.hpp>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "typedef bip::allocator< T, bip::managed_shared_memory::segment_manager > \fBallocator_type\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBipc_queue\fP (\fBallocator_type\fP alloc)"
+.br
+.ti -1c
+.RI "void \fBclear\fP (void)"
+.br
+.RI "Empty the queue\&. "
+.ti -1c
+.RI "bool \fBis_empty\fP () const"
+.br
+.RI "Determine if the queue is current empty or not\&. This function performs no locking, and even if it did, the result would be immediately out of date, so don't depend on this value among multiple processes without additional synchronization\&. "
+.ti -1c
+.RI "T \fBpop\fP (void)"
+.br
+.RI "Get the front element in the queue\&. "
+.ti -1c
+.RI "bool \fBpop_timed_wait\fP (T *const element, int to_sec)"
+.br
+.RI "Get the front element in the queue, waiting a set # of seconds before timing out if the queue is currently empty\&. "
+.ti -1c
+.RI "bool \fBpop_try\fP (T *const element)"
+.br
+.RI "Get the front element in the queue if it exists\&. "
+.ti -1c
+.RI "void \fBpop_wait\fP (T *const element)"
+.br
+.RI "Get the front element in the queue, waiting indefinitely if the queue is currently empty\&. "
+.ti -1c
+.RI "void \fBpush\fP (T element)"
+.br
+.RI "Push an element onto the queue, notifying at most 1 process waiting on the queue\&. "
+.ti -1c
+.RI "size_t \fBsize\fP () const"
+.br
+.RI "Get the current # of elements in the queue\&. This function performs no locking, and even if it did, the result would be immediately out of date, so don't depend on this value among multiple processes without additional synchronization\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T>
+.br
+class rcppsw::multiprocess::ipc_queue< T >"
+Interprocess synchronized queue (like \fBmultithread::mt_queue\fP, but for processes)\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<class T > typedef bip::allocator<T, bip::managed_shared_memory::segment_manager> \fBrcppsw::multiprocess::ipc_queue\fP< T >::\fBallocator_type\fP"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class T > \fBrcppsw::multiprocess::ipc_queue\fP< T >::\fBipc_queue\fP (\fBallocator_type\fP alloc)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T > void \fBrcppsw::multiprocess::ipc_queue\fP< T >::clear (void)\fC [inline]\fP"
+
+.PP
+Empty the queue\&. 
+.SS "template<class T > bool \fBrcppsw::multiprocess::ipc_queue\fP< T >::is_empty () const\fC [inline]\fP"
+
+.PP
+Determine if the queue is current empty or not\&. This function performs no locking, and even if it did, the result would be immediately out of date, so don't depend on this value among multiple processes without additional synchronization\&. 
+.PP
+\fBReturns\fP
+.RS 4
+\fCTRUE\fP if the condition is met, \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+.SS "template<class T > T \fBrcppsw::multiprocess::ipc_queue\fP< T >::pop (void)\fC [inline]\fP"
+
+.PP
+Get the front element in the queue\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The front element\&. 
+.RE
+.PP
+
+.SS "template<class T > bool \fBrcppsw::multiprocess::ipc_queue\fP< T >::pop_timed_wait (T *const element, int to_sec)\fC [inline]\fP"
+
+.PP
+Get the front element in the queue, waiting a set # of seconds before timing out if the queue is currently empty\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIelement\fP To be filled with the front item in the queue\&. 
+.br
+\fIto_sec\fP # of seconds for timeout\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fCTRUE\fP if an item was removed from the queue, \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+.SS "template<class T > bool \fBrcppsw::multiprocess::ipc_queue\fP< T >::pop_try (T *const element)\fC [inline]\fP"
+
+.PP
+Get the front element in the queue if it exists\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIelement\fP To be filled with the front item in the queue if it exists\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fCTRUE\fP if the front element was removed, \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+.SS "template<class T > void \fBrcppsw::multiprocess::ipc_queue\fP< T >::pop_wait (T *const element)\fC [inline]\fP"
+
+.PP
+Get the front element in the queue, waiting indefinitely if the queue is currently empty\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIelement\fP To be filled with the front item in the queue\&. 
+.RE
+.PP
+
+.SS "template<class T > void \fBrcppsw::multiprocess::ipc_queue\fP< T >::push (T element)\fC [inline]\fP"
+
+.PP
+Push an element onto the queue, notifying at most 1 process waiting on the queue\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIelement\fP The element to add\&. 
+.RE
+.PP
+
+.SS "template<class T > size_t \fBrcppsw::multiprocess::ipc_queue\fP< T >::size () const\fC [inline]\fP"
+
+.PP
+Get the current # of elements in the queue\&. This function performs no locking, and even if it did, the result would be immediately out of date, so don't depend on this value among multiple processes without additional synchronization\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The current # elements in the queue\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

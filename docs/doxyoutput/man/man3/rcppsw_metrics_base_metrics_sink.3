@@ -1,0 +1,124 @@
+.TH "rcppsw::metrics::base_metrics_sink" 3 "Mon Nov 29 2021" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::base_metrics_sink \- Base class that uses the template design pattern to provide hooks for derived classes so that the process of writing out collected metrics is centralized in one place (here)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <base_metrics_sink\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< base_metrics_sink >\fP\&.
+.PP
+Inherited by \fBrcppsw::metrics::csv_sink\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbase_metrics_sink\fP (fs::path \fBfpath\fP, const enum \fBoutput_mode\fP &mode, const \fBrtypes::timestep\fP &interval)"
+.br
+.ti -1c
+.RI "virtual \fB~base_metrics_sink\fP (void)"
+.br
+.ti -1c
+.RI "virtual void \fBfinalize\fP (void)=0"
+.br
+.RI "Finalize metrics and flush files in preparation for program exit\&. "
+.ti -1c
+.RI "virtual \fBmetrics_write_status\fP \fBflush\fP (const \fBrmetrics::base_metrics_data\fP *data, const \fBrtypes::timestep\fP &t)=0"
+.br
+.RI "Flush gathered metrics data to file; might do nothing if the internal conditions for writing metrics (e\&.g\&., the configured interval) are not met\&. "
+.ti -1c
+.RI "const fs::path & \fBfpath\fP (void) const"
+.br
+.ti -1c
+.RI "virtual void \fBinitialize\fP (const \fBrmetrics::base_metrics_data\fP *data)=0"
+.br
+.RI "Initialize any required files for the metrics sink (i\&.e\&., \&.csv headers)\&. "
+.ti -1c
+.RI "const \fBrtypes::timestep\fP & \fBoutput_interval\fP (void) const"
+.br
+.ti -1c
+.RI "enum \fBoutput_mode\fP & \fBoutput_mode\fP (void) const"
+.br
+.ti -1c
+.RI "bool \fBready_to_flush\fP (const \fBrtypes::timestep\fP &t) const"
+.br
+.RI "Have the conditions been met to flush the metrics ? "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "std::ofstream * \fBofile\fP (void)"
+.br
+.ti -1c
+.RI "bool \fBretry_io\fP (const std::function< void(void)> &cb)"
+.br
+.RI "Retry the I/O operation contained in \fCcb\fP\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Base class that uses the template design pattern to provide hooks for derived classes so that the process of writing out collected metrics is centralized in one place (here)\&. 
+
+Metrics are written out in \&.csv format at whatever frequency derived classes choose\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::metrics::base_metrics_sink::base_metrics_sink (fs::path fpath, const enum \fBoutput_mode\fP & mode, const \fBrtypes::timestep\fP & interval)"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIfpath\fP Full path to output file, including the extension\&. 
+.br
+\fImode\fP The output mode\&. See \fBoutput_mode\fP for possible values\&. 
+.br
+\fIinterval\fP Metric output interval\&. 
+.RE
+.PP
+
+.SS "virtual rcppsw::metrics::base_metrics_sink::~base_metrics_sink (void)\fC [virtual]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void rcppsw::metrics::base_metrics_sink::finalize (void)\fC [pure virtual]\fP"
+
+.PP
+Finalize metrics and flush files in preparation for program exit\&. 
+.PP
+Implemented in \fBrcppsw::metrics::csv_sink\fP\&.
+.SS "virtual \fBmetrics_write_status\fP rcppsw::metrics::base_metrics_sink::flush (const \fBrmetrics::base_metrics_data\fP * data, const \fBrtypes::timestep\fP & t)\fC [pure virtual]\fP"
+
+.PP
+Flush gathered metrics data to file; might do nothing if the internal conditions for writing metrics (e\&.g\&., the configured interval) are not met\&. 
+.PP
+Implemented in \fBrcppsw::metrics::csv_sink\fP\&.
+.SS "const fs::path& rcppsw::metrics::base_metrics_sink::fpath (void) const\fC [inline]\fP"
+
+.SS "virtual void rcppsw::metrics::base_metrics_sink::initialize (const \fBrmetrics::base_metrics_data\fP * data)\fC [pure virtual]\fP"
+
+.PP
+Initialize any required files for the metrics sink (i\&.e\&., \&.csv headers)\&. 
+.PP
+Implemented in \fBrcppsw::metrics::csv_sink\fP\&.
+.SS "std::ofstream* rcppsw::metrics::base_metrics_sink::ofile (void)\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "const \fBrtypes::timestep\fP& rcppsw::metrics::base_metrics_sink::output_interval (void) const\fC [inline]\fP"
+
+.SS "enum \fBoutput_mode\fP& rcppsw::metrics::base_metrics_sink::output_mode (void) const\fC [inline]\fP"
+
+.SS "bool rcppsw::metrics::base_metrics_sink::ready_to_flush (const \fBrtypes::timestep\fP & t) const"
+
+.PP
+Have the conditions been met to flush the metrics ? 
+.SS "bool rcppsw::metrics::base_metrics_sink::retry_io (const std::function< void(void)> & cb)\fC [protected]\fP"
+
+.PP
+Retry the I/O operation contained in \fCcb\fP\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,101 @@
+.TH "rcppsw::metrics::fs_output_manager" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::fs_output_manager \- Base class for managing metrics collected from variable sources across all possible collector output modes and sinks which ultimately output their metrics to the filesystem\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fs_output_manager\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< fs_output_manager >\fP, and \fBrcppsw::metrics::base_manager\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBfs_output_manager\fP (const rmconfig::metrics_config *mconfig, const fs::path &output_root)"
+.br
+.ti -1c
+.RI "\fB~fs_output_manager\fP (void) override=default"
+.br
+.ti -1c
+.RI "void \fBcollector_preregister\fP (const std::string &scoped_name, const \fBrmetrics::output_mode\fP &mode) override"
+.br
+.RI "To be called before \fBcollector_register()\fP, in order to correctly set up the collector map for the collector with the specified scoped name\&. "
+.ti -1c
+.RI "void \fBfinalize\fP (void) override"
+.br
+.RI "Decorator around \fBcollector_group::finalize_all()\fP\&. "
+.ti -1c
+.RI "bool \fBflush\fP (const \fBrmetrics::output_mode\fP &mode) override"
+.br
+.ti -1c
+.RI "void \fBinitialize\fP (void) override"
+.br
+.RI "Decorator around \fBcollector_group::initialize()\fP\&. "
+.ti -1c
+.RI "void \fBinterval_reset\fP (void) override"
+.br
+.RI "Decorator around \fBcollector_group::interval_reset()\fP\&. "
+.ti -1c
+.RI "const fs::path & \fBmetrics_path\fP (void) const"
+.br
+.ti -1c
+.RI "void \fBtimestep_inc\fP (void) override"
+.br
+.RI "Decorator around \fBcollector_group::timestep_inc()\fP\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Base class for managing metrics collected from variable sources across all possible collector output modes and sinks which ultimately output their metrics to the filesystem\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::metrics::fs_output_manager::fs_output_manager (const rmconfig::metrics_config * mconfig, const fs::path & output_root)"
+
+.SS "rcppsw::metrics::fs_output_manager::~fs_output_manager (void)\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void rcppsw::metrics::fs_output_manager::collector_preregister (const std::string & scoped_name, const \fBrmetrics::output_mode\fP & mode)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+To be called before \fBcollector_register()\fP, in order to correctly set up the collector map for the collector with the specified scoped name\&. If you forget to do this you will get a segfault\&. 
+.PP
+Implements \fBrcppsw::metrics::base_manager\fP\&.
+.SS "void rcppsw::metrics::fs_output_manager::finalize (void)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Decorator around \fBcollector_group::finalize_all()\fP\&. 
+.PP
+Implements \fBrcppsw::metrics::base_manager\fP\&.
+.SS "bool rcppsw::metrics::fs_output_manager::flush (const \fBrmetrics::output_mode\fP & mode)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBrcppsw::metrics::base_manager\fP\&.
+.SS "void rcppsw::metrics::fs_output_manager::initialize (void)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Decorator around \fBcollector_group::initialize()\fP\&. 
+.PP
+Implements \fBrcppsw::metrics::base_manager\fP\&.
+.SS "void rcppsw::metrics::fs_output_manager::interval_reset (void)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Decorator around \fBcollector_group::interval_reset()\fP\&. 
+.PP
+Implements \fBrcppsw::metrics::base_manager\fP\&.
+.SS "const fs::path& rcppsw::metrics::fs_output_manager::metrics_path (void) const\fC [inline]\fP"
+
+.SS "void rcppsw::metrics::fs_output_manager::timestep_inc (void)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Decorator around \fBcollector_group::timestep_inc()\fP\&. 
+.PP
+Implements \fBrcppsw::metrics::base_manager\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,444 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="spatial_8hpp" kind="file" language="C++">
+    <compoundname>spatial.hpp</compoundname>
+    <includes refid="vector3_8hpp" local="yes">rcppsw/math/vector3.hpp</includes>
+    <includes refid="vector2_8hpp" local="yes">rcppsw/math/vector2.hpp</includes>
+    <includes refid="spatial__dist_8hpp" local="yes">rcppsw/types/spatial_dist.hpp</includes>
+    <includes refid="rcppsw_8hpp" local="yes">rcppsw/rcppsw.hpp</includes>
+    <includedby refid="bounding__box_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/math/bounding_box.hpp</includedby>
+    <incdepgraph>
+      <node id="34">
+        <label>rcppsw/math/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>limits</label>
+      </node>
+      <node id="36">
+        <label>rcppsw/math/sphere_vector.hpp</label>
+        <link refid="sphere__vector_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>boost/stacktrace.hpp</label>
+      </node>
+      <node id="13">
+        <label>log4cxx/fileappender.h</label>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/spatial.hpp</label>
+        <link refid="spatial_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw/math/vector3.hpp</label>
+        <link refid="vector3_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="37">
+        <label>rcppsw/math/vector2.hpp</label>
+        <link refid="vector2_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>rcppsw/utils/string_utils.hpp</label>
+        <link refid="string__utils_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>log4cxx/xml/domconfigurator.h</label>
+      </node>
+      <node id="3">
+        <label>cmath</label>
+      </node>
+      <node id="27">
+        <label>cassert</label>
+      </node>
+      <node id="24">
+        <label>rcppsw/er/stacktrace.hpp</label>
+        <link refid="stacktrace_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
+      <node id="7">
+        <label>rcppsw/math/range.hpp</label>
+        <link refid="range_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>rcppsw/types/spatial_dist.hpp</label>
+        <link refid="spatial__dist_8hpp"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>log4cxx/patternlayout.h</label>
+      </node>
+      <node id="41">
+        <label>rcppsw/types/distance_measure.hpp</label>
+        <link refid="distance__measure_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>log4cxx/ndc.h</label>
+      </node>
+      <node id="12">
+        <label>log4cxx/consoleappender.h</label>
+      </node>
+      <node id="10">
+        <label>rcppsw/er/er.hpp</label>
+        <link refid="er_8hpp"/>
+      </node>
+      <node id="22">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>vector</label>
+      </node>
+      <node id="33">
+        <label>rcppsw/er/stringizable.hpp</label>
+        <link refid="stringizable_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>utility</label>
+      </node>
+      <node id="26">
+        <label>array</label>
+      </node>
+      <node id="31">
+        <label>sstream</label>
+      </node>
+      <node id="6">
+        <label>rcppsw/math/radians.hpp</label>
+        <link refid="radians_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>iosfwd</label>
+      </node>
+      <node id="28">
+        <label>iostream</label>
+      </node>
+      <node id="21">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>rcppsw/types/discretize_ratio.hpp</label>
+        <link refid="discretize__ratio_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>rcppsw/er/client.hpp</label>
+        <link refid="client_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>type_traits</label>
+      </node>
+      <node id="23">
+        <label>rcppsw/er/macros.hpp</label>
+        <link refid="er_2macros_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>log4cxx/logger.h</label>
+      </node>
+      <node id="39">
+        <label>rcppsw/types/named_type.hpp</label>
+        <link refid="named__type_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/spatial.hpp</label>
+        <link refid="spatial_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D.hpp</label>
+        <link refid="hgrid3D_8hpp"/>
+      </node>
+      <node id="3">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp</label>
+        <link refid="hgrid3D__view_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/bounding_box.hpp</label>
+        <link refid="bounding__box_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1math">rcppsw::math</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="spatial_8hpp_1ab1761c4cb5784c46eaaad94c96ed2603" prot="public" static="no">
+        <name>RCPPSW_MATH_SPAN_FUNC_DISC</name>
+        <param><defname>component</defname></param>
+        <initializer>  template &lt;typename TCoord,                                            \
+            typename std::enable_if&lt;(!std::is_floating_point&lt;typename TCoord::value_type&gt;::value),int&gt;::type =0&gt;\
+static inline <ref refid="namespacercppsw_1_1math_1afc75f115f30ec3888181ea1bdd921e17" kindref="member">rmath::rangez</ref> component##span(const TCoord&amp; anchor, size_t dim) { \
+  /* rely on truncation of the 0.5 remainder (if it exists) to 0 */     \
+  return { anchor.component(), anchor.component() + dim - 1 };          \
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/spatial.hpp" line="49" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/spatial.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="spatial_8hpp_1ab842213e5cb530401fe07d0ef2354d97" prot="public" static="no">
+        <name>RCPPSW_MATH_SPAN_FUNC_FLT</name>
+        <param><defname>component</defname></param>
+        <initializer>  template&lt;typename TCoord,                                             \
+           typename std::enable_if&lt;(std::is_floating_point&lt;typename TCoord::value_type&gt;::value),int&gt;::type =0&gt; \
+static inline <ref refid="namespacercppsw_1_1math_1a5ff0a4d528d5429045da4f1d3fd382f2" kindref="member">rmath::ranged</ref> component##span(const TCoord&amp; anchor, \
+                                            const double&amp; dim) {        \
+    return { anchor.component(), (anchor.component() + dim) }; \
+  }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/spatial.hpp" line="41" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/spatial.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2021 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="21"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_MATH_SPATIAL_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_MATH_SPATIAL_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="vector3_8hpp" kindref="compound">rcppsw/math/vector3.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="vector2_8hpp" kindref="compound">rcppsw/math/vector2.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="spatial__dist_8hpp" kindref="compound">rcppsw/types/spatial_dist.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="rcppsw_8hpp" kindref="compound">rcppsw/rcppsw.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>math);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*<sp/>Macros</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_MATH_SPAN_FUNC_FLT(component)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="42"><highlight class="preprocessor"><sp/><sp/>template&lt;typename<sp/>TCoord,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="43"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RCPPSW_SFINAE_DECLDEF(std::is_floating_point&lt;typename<sp/>TCoord::value_type&gt;::value)&gt;<sp/>\</highlight></codeline>
+<codeline lineno="44"><highlight class="preprocessor">static<sp/>inline<sp/>rmath::ranged<sp/>component##span(const<sp/>TCoord&amp;<sp/>anchor,<sp/>\</highlight></codeline>
+<codeline lineno="45" refid="spatial_8hpp_1ab842213e5cb530401fe07d0ef2354d97" refkind="member"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>double&amp;<sp/>dim)<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="46"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>return<sp/>{<sp/>anchor.component(),<sp/>(anchor.component()<sp/>+<sp/>dim)<sp/>};<sp/>\</highlight></codeline>
+<codeline lineno="47"><highlight class="preprocessor"><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RCPPSW_MATH_SPAN_FUNC_DISC(component)<sp/>\</highlight></codeline>
+<codeline lineno="50"><highlight class="preprocessor"><sp/><sp/>template<sp/>&lt;typename<sp/>TCoord,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="51"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RCPPSW_SFINAE_DECLDEF(!std::is_floating_point&lt;typename<sp/>TCoord::value_type&gt;::value)&gt;\</highlight></codeline>
+<codeline lineno="52"><highlight class="preprocessor">static<sp/>inline<sp/>rmath::rangez<sp/>component##span(const<sp/>TCoord&amp;<sp/>anchor,<sp/>size_t<sp/>dim)<sp/>{<sp/>\</highlight></codeline>
+<codeline lineno="53" refid="spatial_8hpp_1ab1761c4cb5784c46eaaad94c96ed2603" refkind="member"><highlight class="preprocessor"><sp/><sp/></highlight><highlight class="comment">/*<sp/>rely<sp/>on<sp/>truncation<sp/>of<sp/>the<sp/>0.5<sp/>remainder<sp/>(if<sp/>it<sp/>exists)<sp/>to<sp/>0<sp/>*/</highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="54"><highlight class="preprocessor"><sp/><sp/>return<sp/>{<sp/>anchor.component(),<sp/>anchor.component()<sp/>+<sp/>dim<sp/>-<sp/>1<sp/>};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="55"><highlight class="preprocessor">}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/>*<sp/>Free<sp/>Functions</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><ref refid="spatial_8hpp_1ab842213e5cb530401fe07d0ef2354d97" kindref="member">RCPPSW_MATH_SPAN_FUNC_FLT</ref>(x);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><ref refid="spatial_8hpp_1ab842213e5cb530401fe07d0ef2354d97" kindref="member">RCPPSW_MATH_SPAN_FUNC_FLT</ref>(y);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><ref refid="spatial_8hpp_1ab842213e5cb530401fe07d0ef2354d97" kindref="member">RCPPSW_MATH_SPAN_FUNC_FLT</ref>(z);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><ref refid="spatial_8hpp_1ab1761c4cb5784c46eaaad94c96ed2603" kindref="member">RCPPSW_MATH_SPAN_FUNC_DISC</ref>(x);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><ref refid="spatial_8hpp_1ab1761c4cb5784c46eaaad94c96ed2603" kindref="member">RCPPSW_MATH_SPAN_FUNC_DISC</ref>(y);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><ref refid="spatial_8hpp_1ab1761c4cb5784c46eaaad94c96ed2603" kindref="member">RCPPSW_MATH_SPAN_FUNC_DISC</ref>(z);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="namespacercppsw_1_1math_1a5fb321b2ade79ebbfd0ef1f3d41559b8" refkind="member"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(math,<sp/><ref refid="namespacercppsw" kindref="compound">rcppsw</ref>);</highlight></codeline>
+<codeline lineno="84" refid="namespacercppsw_1_1math_1a85847e546ad69933d10d3cfc5f909f10" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85" refid="namespacercppsw_1_1math_1a33983279d2ba7a443a8a653056a123b7" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_MATH_SPATIAL_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/spatial.hpp"/>
+  </compounddef>
+</doxygen>

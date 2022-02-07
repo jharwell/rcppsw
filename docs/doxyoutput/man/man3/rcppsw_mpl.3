@@ -1,0 +1,167 @@
+.TH "rcppsw::mpl" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::mpl \- Meta programming namespace\&. Mainly a few aliases around things which boost provides\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBdetail\fP"
+.br
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBcan_static_cast\fP"
+.br
+.RI "Determine if \fCT\fP can be cast to \fCU\fP via static_cast<>\&. "
+.ti -1c
+.RI "struct \fBcan_static_cast< T, U, std::void_t< decltype(static_cast< U >(std::declval< T >()))> >\fP"
+.br
+.ti -1c
+.RI "class \fBidentity\fP"
+.br
+.RI "Some types are not not default constructible, and therefore cannot be used with boost::mpl::for_each as is\&. If we only need the type of the class during an operation, and do not need access to any of its methods, we can add a layer of indirection with a simple struct that IS default constructible that we CAN use\&. "
+.ti -1c
+.RI "struct \fBis_specialization\fP"
+.br
+.RI "Determine if a class Template<SomeType> is a specialization of \fCTemplate\fP\&. "
+.ti -1c
+.RI "struct \fBis_specialization< Template< Args\&.\&.\&. >, Template >\fP"
+.br
+.ti -1c
+.RI "struct \fBno_such_trait\fP"
+.br
+.RI "Sentinel type to indicate that the specified trait was not detected\&. "
+.ti -1c
+.RI "class \fBreflectable\fP"
+.br
+.RI "Interface for classes wishing to employ pseudo-reflection in C++\&. "
+.ti -1c
+.RI "struct \fBtypelist_wrap_into\fP"
+.br
+.RI "Wrap a \fBtypelist\fP into a container/template class\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<class TFailType , template< class\&.\&.\&. > class TFuncDecltype, class\&.\&.\&. Args> using \fBdetected_or\fP = \fBdetail::detector\fP< TFailType, void, TFuncDecltype, Args\&.\&.\&. >"
+.br
+.RI "Same as \fBis_detected\fP, but allows for a user specified type \fCTFailType\fP to be selected if detection fails\&. "
+.ti -1c
+.RI "template<template< class\&.\&.\&. > class TFuncDecltype, class\&.\&.\&. Args> using \fBdetected_t\fP = typename \fBdetail::detector\fP< \fBno_such_trait\fP, void, TFuncDecltype, Args\&.\&.\&. >::type"
+.br
+.RI "Same as \fBis_detected\fP, but will return the decltype itself, rather than just if it is well formed or not\&. "
+.ti -1c
+.RI "template<typename\&.\&.\&. Ts> using \fBempty\fP = boost::mpl::empty< Ts\&.\&.\&. >"
+.br
+.RI "Is the \fBtypelist\fP empty ? "
+.ti -1c
+.RI "template<template< class\&.\&.\&. > class TFuncDecltype, class\&.\&.\&. Args> using \fBis_detected\fP = typename \fBdetail::detector\fP< \fBno_such_trait\fP, void, TFuncDecltype, Args\&.\&.\&. >::value"
+.br
+.RI "Type trait to detect whether a function taking the specified \fCArgs\fP exists for the specified type\&. Suitable for use in SFINAE\&. "
+.ti -1c
+.RI "template<class Seq > using \fBmake_tuple_type\fP = typename boost::mpl::fold< typename boost::mpl::fold< Seq, boost::mpl::set<>, boost::mpl::insert< boost::mpl::_1, boost::mpl::_2 > >::type, boost::tuple< void >, \fBdetail::ExtendTList\fP< boost::mpl::_1, boost::mpl::_2 > >"
+.br
+.ti -1c
+.RI "template<class A , template< class\&.\&.\&. > class B> using \fBrename\fP = typename \fBdetail::rename_impl\fP< A, B >"
+.br
+.RI "Rename a variadic type to another variadic type\&. E\&.g\&., std::tuple<int, float, char> -> typelist<int, float, char>\&. "
+.ti -1c
+.RI "template<typename\&.\&.\&. Ts> using \fBtypelist\fP = boost::mpl::vector< Ts\&.\&.\&. >"
+.br
+.RI "A list of types using boost::mpl::vectors, which enables all sorts of nice operations from the boost MPL library\&. "
+.ti -1c
+.RI "template<typename Typelist , template< class WrappedType, class\&.\&.\&. > class WrapperType, class\&.\&.\&. Args> using \fBtypelist_wrap_apply\fP = typename boost::mpl::transform< Typelist, \fBtypelist_wrap_into\fP< WrapperType, Args\&.\&.\&. > >"
+.br
+.RI "Apply a functor to each type in the \fBtypelist\fP\&. The functor can itself take as many template parameters as needed\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Meta programming namespace\&. Mainly a few aliases around things which boost provides\&. 
+.SH "Class Documentation"
+.PP 
+.SH "class rcppsw::mpl::identity"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::mpl::identity< T >"
+Some types are not not default constructible, and therefore cannot be used with boost::mpl::for_each as is\&. If we only need the type of the class during an operation, and do not need access to any of its methods, we can add a layer of indirection with a simple struct that IS default constructible that we CAN use\&. 
+.PP
+\fBClass Members:\fP
+.RS 4
+typedef T \fItype\fP 
+.br
+.PP
+.RE
+.PP
+.SH "struct rcppsw::mpl::typelist_wrap_into"
+.PP 
+
+.SS "template<template< class WrappedType, class\&.\&.\&. > class WrapperType, class\&.\&.\&. WrapperTypeArgs>
+.br
+struct rcppsw::mpl::typelist_wrap_into< WrapperType, WrapperTypeArgs >"
+Wrap a \fBtypelist\fP into a container/template class\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIWrapperType\fP The container class each of the types in the \fBtypelist\fP will be wrapped into\&. It takes the wrapped type, as well as additional template arguments for the wrapped type, as arguments\&.
+.br
+\fIWrapperTypeArgs\fP Additional template paramaters for the WrapperType\&. 
+.RE
+.PP
+
+.SH "Typedef Documentation"
+.PP 
+.SS "template<class TFailType , template< class\&.\&.\&. > class TFuncDecltype, class\&.\&.\&. Args> \fBrcppsw::mpl::detected_or\fP"
+
+.PP
+Same as \fBis_detected\fP, but allows for a user specified type \fCTFailType\fP to be selected if detection fails\&. 
+.SS "template<template< class\&.\&.\&. > class TFuncDecltype, class\&.\&.\&. Args> \fBrcppsw::mpl::detected_t\fP"
+
+.PP
+Same as \fBis_detected\fP, but will return the decltype itself, rather than just if it is well formed or not\&. 
+.SS "template<typename\&.\&.\&. Ts> \fBrcppsw::mpl::empty\fP"
+
+.PP
+Is the \fBtypelist\fP empty ? 
+.SS "template<template< class\&.\&.\&. > class TFuncDecltype, class\&.\&.\&. Args> \fBrcppsw::mpl::is_detected\fP"
+
+.PP
+Type trait to detect whether a function taking the specified \fCArgs\fP exists for the specified type\&. Suitable for use in SFINAE\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fITFuncDecltype\fP Should be a decltype(), something like \fCdecltype(std::declval<T>()\&.foo())\fP to detect the presence of a function named \fCfoo()\fP for a type \fCT\fP\&.
+.br
+\fIArgs\fP The argument types for the function to detect (if any)\&. 
+.RE
+.PP
+
+.SS "template<class Seq > using \fBrcppsw::mpl::make_tuple_type\fP = typedef typename boost::mpl::fold< typename boost::mpl::fold< Seq, boost::mpl::set<>, boost::mpl::insert<boost::mpl::_1, boost::mpl::_2> >::type, boost::tuple<void>, \fBdetail::ExtendTList\fP<boost::mpl::_1, boost::mpl::_2> >"
+
+.SS "template<class A , template< class\&.\&.\&. > class B> \fBrcppsw::mpl::rename\fP"
+
+.PP
+Rename a variadic type to another variadic type\&. E\&.g\&., std::tuple<int, float, char> -> typelist<int, float, char>\&. 
+.SS "template<typename\&.\&.\&. Ts> \fBrcppsw::mpl::typelist\fP"
+
+.PP
+A list of types using boost::mpl::vectors, which enables all sorts of nice operations from the boost MPL library\&. 
+.SS "template<typename Typelist , template< class WrappedType, class\&.\&.\&. > class WrapperType, class\&.\&.\&. Args> \fBrcppsw::mpl::typelist_wrap_apply\fP"
+
+.PP
+Apply a functor to each type in the \fBtypelist\fP\&. The functor can itself take as many template parameters as needed\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

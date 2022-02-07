@@ -24,8 +24,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/er/client.hpp"
-#include "rcppsw/types/named_type.hpp"
+#include "rcppsw/types/distance_measure.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -42,8 +41,7 @@ NS_START(rcppsw, types);
  * \brief Specifies a distance in "real" spatial space, and as such is always
  * positive.
  */
-class spatial_dist final : public named_type<double, struct spatial_dist_tag>,
-                           public er::client<spatial_dist> {
+class spatial_dist final : public distance_measure<double, struct spatial_dist_tag> {
  public:
   /**
    * Create a \ref spatial_dist from a numeric value, making it positive if
@@ -53,40 +51,29 @@ class spatial_dist final : public named_type<double, struct spatial_dist_tag>,
    */
   static spatial_dist make(const double& value);
 
-  explicit spatial_dist(const double& value);
+  explicit spatial_dist(const double& v) : distance_measure(v) {}
   ~spatial_dist(void) override = default;
   spatial_dist(const spatial_dist&) = default;
 
-  spatial_dist& operator=(const spatial_dist& other) {
-    set(other.v());
-    return *this;
+  spatial_dist operator*(double rhs) const {
+    return spatial_dist(v() * rhs);
   }
-  spatial_dist& operator+=(const spatial_dist& other) {
-    set(v() + other.v());
-    return *this;
+  spatial_dist operator/(double rhs) const {
+    return spatial_dist(v() / rhs);
   }
-  bool operator<(const spatial_dist& other) const { return v() < other.v(); }
-  bool operator>(const spatial_dist& other) const { return v() > other.v(); }
-  bool operator>=(const spatial_dist& other) const { return v() >= other.v(); }
-  bool operator>=(double other) const { return v() >= other; }
-  bool operator<=(const spatial_dist& other) const { return v() <= other.v(); }
-  bool operator<=(double other) const { return v() <= other; }
-  bool operator>(double other) const { return v() > other; }
-  spatial_dist operator*(double other) const {
-    spatial_dist res(v());
-    res.set(res.v() * other);
-    return res;
+  spatial_dist operator-(double rhs) const {
+    return spatial_dist(v() - rhs);
+  }
+  spatial_dist operator+(double rhs) const {
+    return spatial_dist(v() + rhs);
   }
 
-  spatial_dist& operator-=(double other) {
-    set(v() - other);
-    return *this;
-  }
 
-  spatial_dist operator-(double other) const {
-    spatial_dist res(v());
-    res.set(res.v() - other);
-    return res;
+  spatial_dist operator*(const spatial_dist& rhs) const {
+    return spatial_dist(v() * rhs.v());
+  }
+  spatial_dist operator/(const spatial_dist& rhs) const {
+    return spatial_dist(v() / rhs.v());
   }
   spatial_dist operator-(const spatial_dist& rhs) const {
     return spatial_dist(v() - rhs.v());
@@ -94,12 +81,26 @@ class spatial_dist final : public named_type<double, struct spatial_dist_tag>,
   spatial_dist operator+(const spatial_dist& rhs) const {
     return spatial_dist(v() + rhs.v());
   }
+
+  spatial_dist& operator-=(double rhs) {
+    set(v() - rhs);
+    return *this;
+  }
+  spatial_dist& operator=(const spatial_dist& rhs) {
+    set(rhs.v());
+    return *this;
+  }
+  spatial_dist& operator+=(const spatial_dist& rhs) {
+    set(v() + rhs.v());
+    return *this;
+  }
 };
 
 /*******************************************************************************
  * Operators
  ******************************************************************************/
 spatial_dist operator*(double lhs, const spatial_dist& rhs);
+spatial_dist operator/(double lhs, const spatial_dist& rhs);
 spatial_dist operator-(double lhs, const spatial_dist& rhs);
 spatial_dist operator+(double lhs, const spatial_dist& rhs);
 bool operator<=(double lhs, const spatial_dist& rhs) RCPPSW_PURE;

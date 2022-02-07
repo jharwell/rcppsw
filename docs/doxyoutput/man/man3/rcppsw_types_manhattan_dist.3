@@ -1,0 +1,108 @@
+.TH "rcppsw::types::manhattan_dist" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::types::manhattan_dist \- Specifies a distance between two points in manhattan distance, and as such is always positive\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <manhattan_dist\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::types::distance_measure< int, struct manhattan_dist_tag >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBmanhattan_dist\fP (const int &\fBv\fP, bool check_psd=true)"
+.br
+.ti -1c
+.RI "\fBmanhattan_dist\fP (const \fBmanhattan_dist\fP &)=default"
+.br
+.ti -1c
+.RI "\fB~manhattan_dist\fP (void) override=default"
+.br
+.ti -1c
+.RI "\fBmanhattan_dist\fP \fBoperator*\fP (const \fBmanhattan_dist\fP &rhs) const"
+.br
+.ti -1c
+.RI "\fBmanhattan_dist\fP \fBoperator*\fP (int rhs) const"
+.br
+.ti -1c
+.RI "\fBmanhattan_dist\fP \fBoperator+\fP (const \fBmanhattan_dist\fP &rhs) const"
+.br
+.ti -1c
+.RI "\fBmanhattan_dist\fP \fBoperator+\fP (int rhs) const"
+.br
+.ti -1c
+.RI "\fBmanhattan_dist\fP & \fBoperator+=\fP (const \fBmanhattan_dist\fP &rhs)"
+.br
+.ti -1c
+.RI "\fBmanhattan_dist\fP \fBoperator\-\fP (const \fBmanhattan_dist\fP &rhs) const"
+.br
+.ti -1c
+.RI "\fBmanhattan_dist\fP \fBoperator\-\fP (int rhs) const"
+.br
+.ti -1c
+.RI "\fBmanhattan_dist\fP & \fBoperator\-=\fP (int rhs)"
+.br
+.ti -1c
+.RI "\fBmanhattan_dist\fP \fBoperator/\fP (const \fBmanhattan_dist\fP &rhs) const"
+.br
+.ti -1c
+.RI "\fBmanhattan_dist\fP \fBoperator/\fP (int rhs) const"
+.br
+.ti -1c
+.RI "\fBmanhattan_dist\fP & \fBoperator=\fP (const \fBmanhattan_dist\fP &rhs)"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBmanhattan_dist\fP \fBmake\fP (const int &value)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Specifies a distance between two points in manhattan distance, and as such is always positive\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::types::manhattan_dist::manhattan_dist (const int & v, bool check_psd = \fCtrue\fP)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "rcppsw::types::manhattan_dist::~manhattan_dist (void)\fC [override]\fP, \fC [default]\fP"
+
+.SS "rcppsw::types::manhattan_dist::manhattan_dist (const \fBmanhattan_dist\fP &)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "static \fBmanhattan_dist\fP rcppsw::types::manhattan_dist::make (const int & value)\fC [static]\fP"
+Create a \fBmanhattan_dist\fP from a numeric value, making it positive if necessary\&. This incurs a higher runtime cost, and so is a separate function from the constructor, which \fIassumes\fP the \fCvalue\fP to be positive semi-definite\&. 
+.SS "\fBmanhattan_dist\fP rcppsw::types::manhattan_dist::operator* (const \fBmanhattan_dist\fP & rhs) const\fC [inline]\fP"
+
+.SS "\fBmanhattan_dist\fP rcppsw::types::manhattan_dist::operator* (int rhs) const\fC [inline]\fP"
+
+.SS "\fBmanhattan_dist\fP rcppsw::types::manhattan_dist::operator+ (const \fBmanhattan_dist\fP & rhs) const\fC [inline]\fP"
+
+.SS "\fBmanhattan_dist\fP rcppsw::types::manhattan_dist::operator+ (int rhs) const\fC [inline]\fP"
+
+.SS "\fBmanhattan_dist\fP& rcppsw::types::manhattan_dist::operator+= (const \fBmanhattan_dist\fP & rhs)\fC [inline]\fP"
+
+.SS "\fBmanhattan_dist\fP rcppsw::types::manhattan_dist::operator\- (const \fBmanhattan_dist\fP & rhs) const\fC [inline]\fP"
+
+.SS "\fBmanhattan_dist\fP rcppsw::types::manhattan_dist::operator\- (int rhs) const\fC [inline]\fP"
+
+.SS "\fBmanhattan_dist\fP& rcppsw::types::manhattan_dist::operator\-= (int rhs)\fC [inline]\fP"
+
+.SS "\fBmanhattan_dist\fP rcppsw::types::manhattan_dist::operator/ (const \fBmanhattan_dist\fP & rhs) const\fC [inline]\fP"
+
+.SS "\fBmanhattan_dist\fP rcppsw::types::manhattan_dist::operator/ (int rhs) const\fC [inline]\fP"
+
+.SS "\fBmanhattan_dist\fP& rcppsw::types::manhattan_dist::operator= (const \fBmanhattan_dist\fP & rhs)\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,148 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cmath>\fP
+.br
+\fC#include <iosfwd>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include 'rcppsw/er/client\&.hpp'\fP
+.br
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+\fC#include 'rcppsw/utils/string_utils\&.hpp'\fP
+.br
+\fC#include 'rcppsw/er/stringizable\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBrcppsw::math::range< T >\fP"
+.br
+.RI "Convenience class holding a [min, max] range\&. Makes comparisons like 'is this number in this range' much more intuitive and easy to debug\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::math\fP"
+.br
+.RI "Pure mathematical classes such as vectors, ranges, sigmoids, etc\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_MATH_RANGE_CONV2DISC\fP(dest_prefix,  dest_type)"
+.br
+.RI "Convert ranged -> range{i,u,z}, applying a divisive scaling factor\&. "
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_MATH_RANGE_DIRECT_CONV2FLT\fP(prefix)"
+.br
+.RI "Convert range{i,u,z} -> ranged directly, without applying any scaling\&. "
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_MATH_RANGE_SCALED_CONV2FLT\fP(prefix)"
+.br
+.RI "Convert range{i,u,z} -> ranged, applying a multiplicative scaling factor\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBrcppsw::math::ranged\fP = range< double >"
+.br
+.RI "Specialization of \fBrange\fP for doubles\&. "
+.ti -1c
+.RI "using \fBrcppsw::math::rangei\fP = range< int >"
+.br
+.RI "Specialization of \fBrange\fP for signed integers\&. "
+.ti -1c
+.RI "using \fBrcppsw::math::rangez\fP = range< size_t >"
+.br
+.RI "Specialization of \fBrange\fP for size_t\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static rangez \fBrcppsw::math::drange2zrange\fP (const rangez &other, double scale)"
+.br
+.ti -1c
+.RI "static ranged \fBrcppsw::math::irange2drange\fP (const rangei &other)"
+.br
+.ti -1c
+.RI "static ranged \fBrcppsw::math::irange2drange\fP (const rangei &other, double scale)"
+.br
+.ti -1c
+.RI "static ranged \fBrcppsw::math::zrange2drange\fP (const rangez &other)"
+.br
+.ti -1c
+.RI "static ranged \fBrcppsw::math::zrange2drange\fP (const rangez &other, double scale)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2018 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#\fBdefine\fP RCPPSW_MATH_RANGE_CONV2DISC(dest_prefix, dest_type)"
+\fBValue:\fP
+.PP
+.nf
+  static inline range##dest_prefix drange2##dest_prefix##range(            \
+      const range##dest_prefix& other, double scale) {                     \
+    return range##dest_prefix(static_cast<dest_type>(other\&.lb() / scale),  \
+                              static_cast<dest_type>(other\&.ub() / scale)); \
+  }
+.fi
+.PP
+Convert ranged -> range{i,u,z}, applying a divisive scaling factor\&. 
+.SS "#\fBdefine\fP RCPPSW_MATH_RANGE_DIRECT_CONV2FLT(prefix)"
+\fBValue:\fP
+.PP
+.nf
+  static inline ranged prefix##range2drange(const range##prefix& other) { \
+    return ranged(other\&.lb(), other\&.lb());                                \
+  }
+.fi
+.PP
+Convert range{i,u,z} -> ranged directly, without applying any scaling\&. 
+.SS "#\fBdefine\fP RCPPSW_MATH_RANGE_SCALED_CONV2FLT(prefix)"
+\fBValue:\fP
+.PP
+.nf
+  static inline ranged prefix##range2drange(const range##prefix& other, \
+                                            double scale) {             \
+    return ranged(other\&.lb() * scale, other\&.ub() * scale);              \
+  }
+.fi
+.PP
+Convert range{i,u,z} -> ranged, applying a multiplicative scaling factor\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

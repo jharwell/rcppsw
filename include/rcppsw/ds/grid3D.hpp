@@ -48,9 +48,11 @@ class grid3D : public base_grid3D<T> {
   using typename base_grid3D<T>::const_grid_view;
   using typename base_grid3D<T>::grid_view;
   using typename base_grid3D<T>::grid_type;
+  using typename base_grid3D<T>::coord_type;
+
   using base_grid3D<T>::access;
 
-  explicit grid3D(const math::vector3z& dims)
+  explicit grid3D(const coord_type& dims)
       : grid3D(dims.x(), dims.y(), dims.z()) {}
 
   grid3D(size_t x_max, size_t y_max, size_t z_max)
@@ -58,14 +60,11 @@ class grid3D : public base_grid3D<T> {
 
   T& access(size_t i, size_t j, size_t k) override { return m_cells[i][j][k]; }
 
-  size_t xsize(void) const { return m_cells.shape()[0]; }
-  size_t ysize(void) const { return m_cells.shape()[1]; }
-  size_t zsize(void) const { return m_cells.shape()[2]; }
+  size_t xsize(void) const override { return m_cells.shape()[0]; }
+  size_t ysize(void) const override { return m_cells.shape()[1]; }
+  size_t zsize(void) const override { return m_cells.shape()[2]; }
 
  private:
-  size_t xdsize(void) const override { return xsize(); }
-  size_t ydsize(void) const override { return ysize(); }
-  size_t zdsize(void) const override { return zsize(); }
   grid_type& grid(void) override { return m_cells; }
   const grid_type& grid(void) const override { return m_cells; }
 

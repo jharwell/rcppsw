@@ -1,0 +1,39 @@
+.TH "rcppsw::mpl::reflectable" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::mpl::reflectable \- Interface for classes wishing to employ pseudo-reflection in C++\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <reflectable\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~reflectable\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual std::type_index \fBtype_index\fP (void) const =0"
+.br
+.RI "Return the \fBstd::type_index\fP of the derived class\&. This is useful in conjunction with \fBboost::variant\fP and \fBboost::apply_visitor\fP, as it allows for run-time reflection based on the actual type of the derived class\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface for classes wishing to employ pseudo-reflection in C++\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "virtual rcppsw::mpl::reflectable::~reflectable (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual std::type_index rcppsw::mpl::reflectable::type_index (void) const\fC [pure virtual]\fP"
+
+.PP
+Return the \fBstd::type_index\fP of the derived class\&. This is useful in conjunction with \fBboost::variant\fP and \fBboost::apply_visitor\fP, as it allows for run-time reflection based on the actual type of the derived class\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

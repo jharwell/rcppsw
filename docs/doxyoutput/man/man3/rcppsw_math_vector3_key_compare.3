@@ -1,0 +1,38 @@
+.TH "rcppsw::math::vector3< T >::key_compare" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math::vector3< T >::key_compare \- Needed for using vectors as keys in a map\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <vector3\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename U , typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBoperator()\fP (const \fBvector3\fP< U > &lhs, const \fBvector3\fP< U > &rhs) const"
+.br
+.ti -1c
+.RI "template<typename U , typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> bool \fBoperator()\fP (const \fBvector3\fP< U > &lhs, const \fBvector3\fP< U > &rhs) const"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+struct rcppsw::math::vector3< T >::key_compare"
+Needed for using vectors as keys in a map\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > template<typename U , typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBrcppsw::math::vector3\fP< T >::key_compare::operator() (const \fBvector3\fP< U > & lhs, const \fBvector3\fP< U > & rhs) const\fC [inline]\fP"
+
+.SS "template<typename T > template<typename U , typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> bool \fBrcppsw::math::vector3\fP< T >::key_compare::operator() (const \fBvector3\fP< U > & lhs, const \fBvector3\fP< U > & rhs) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

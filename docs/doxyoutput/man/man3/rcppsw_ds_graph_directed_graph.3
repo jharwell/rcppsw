@@ -1,0 +1,183 @@
+.TH "rcppsw::ds::graph::directed_graph< TSpecType >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::graph::directed_graph< TSpecType > \- A simple directed (not necessarily acyclic) graph\&. Uses boost::graph adjacency list representation\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <directed_graph\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::patterns::decorator::decorator< TSpecType::bgl_impl_type >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBbgl_impl_type\fP = typename spec_type::bgl_impl_type"
+.br
+.ti -1c
+.RI "using \fBdecoratee_type\fP = typename \fBrpdecorator::decorator\fP< \fBbgl_impl_type\fP >::\fBdecoratee_type\fP"
+.br
+.ti -1c
+.RI "using \fBdecorator_type\fP = typename \fBrpdecorator::decorator\fP< \fBbgl_impl_type\fP >::\fBdecorator_type\fP"
+.br
+.ti -1c
+.RI "using \fBedge_property_type\fP = typename spec_type::edge_property_type"
+.br
+.ti -1c
+.RI "using \fBspec_type\fP = TSpecType"
+.br
+.ti -1c
+.RI "using \fBvertex_property_type\fP = typename spec_type::vertex_property_type"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBdirected_graph\fP (const \fBdirected_graph\fP &)=default"
+.br
+.ti -1c
+.RI "\fBdirected_graph\fP (void)=default"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECL\fP (directed_category)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECL\fP (edge_descriptor)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECL\fP (edge_parallel_category)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECL\fP (traversal_category)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECL\fP (vertex_descriptor)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECL\fP (vertex_iterator)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (operator[])"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (operator[], const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBadd_edge\fP)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBadd_vertex\fP)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBadjacent_vertices\fP)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBadjacent_vertices\fP, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBfind\fP)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBfind\fP, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBn_vertices\fP, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBout_edges\fP, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBremove_vertex\fP)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBtarget\fP)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBtarget\fP, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBvertices\fP)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBvertices\fP, const)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TSpecType>
+.br
+class rcppsw::ds::graph::directed_graph< TSpecType >"
+A simple directed (not necessarily acyclic) graph\&. Uses boost::graph adjacency list representation\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::\fBbgl_impl_type\fP =  typename spec_type::bgl_impl_type"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::\fBdecoratee_type\fP =  typename \fBrpdecorator::decorator\fP< \fBbgl_impl_type\fP>::\fBdecoratee_type\fP"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::\fBdecorator_type\fP =  typename \fBrpdecorator::decorator\fP< \fBbgl_impl_type\fP>::\fBdecorator_type\fP"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::\fBedge_property_type\fP =  typename spec_type::edge_property_type"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::\fBspec_type\fP =  TSpecType"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::\fBvertex_property_type\fP =  typename spec_type::vertex_property_type"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::\fBdirected_graph\fP (void)\fC [default]\fP"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::\fBdirected_graph\fP (const \fBdirected_graph\fP< TSpecType > &)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECL (directed_category)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECL (edge_descriptor)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECL (edge_parallel_category)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECL (traversal_category)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECL (vertex_descriptor)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECL (vertex_iterator)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF (operator[])"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF (operator[], const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBadd_edge\fP)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBadd_vertex\fP)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBadjacent_vertices\fP)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBadjacent_vertices\fP, const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBfind\fP)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBfind\fP, const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBn_vertices\fP, const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBout_edges\fP, const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBremove_vertex\fP)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBtarget\fP)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBtarget\fP, const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBvertices\fP)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::directed_graph\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBvertices\fP, const)"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

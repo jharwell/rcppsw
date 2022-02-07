@@ -65,11 +65,15 @@ std::string radians::to_str(void) const {
 }
 
 /*******************************************************************************
- * Non-Member Functions
+ * Operators Functions
  ******************************************************************************/
 std::ostream& operator<<(std::ostream& stream, const radians& r) {
   stream << r.to_str();
   return stream;
 } /* operator<<() */
+
+rmath::radians operator*(double lhs, const rmath::radians& rhs) {
+  return rhs * lhs;
+} /* operator*() */
 
 NS_END(math, rcppsw);

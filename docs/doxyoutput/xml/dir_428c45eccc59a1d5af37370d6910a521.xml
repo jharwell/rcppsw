@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_428c45eccc59a1d5af37370d6910a521" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/algorithm</compoundname>
+    <innerdir refid="dir_04cf8817d8ef8397b0868feef7bf7648">/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering</innerdir>
+    <innerfile refid="closest__pair2D_8hpp">closest_pair2D.hpp</innerfile>
+    <innerfile refid="convex__hull2D_8hpp">convex_hull2D.hpp</innerfile>
+    <innerfile refid="max__subarray__finder_8hpp">max_subarray_finder.hpp</innerfile>
+    <innerfile refid="transform_8hpp">transform.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/"/>
+  </compounddef>
+</doxygen>

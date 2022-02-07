@@ -1,0 +1,160 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/mpl/mpl.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/mpl/mpl.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'rcppsw/common/macros\&.hpp'\fP
+.br
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBrcppsw::mpl::can_static_cast< T, U, typename >\fP"
+.br
+.RI "Determine if \fCT\fP can be cast to \fCU\fP via static_cast<>\&. "
+.ti -1c
+.RI "struct \fBrcppsw::mpl::can_static_cast< T, U, std::void_t< decltype(static_cast< U >(std::declval< T >()))> >\fP"
+.br
+.ti -1c
+.RI "struct \fBrcppsw::mpl::detail::detector< TFailType, AlwaysVoid, TFuncDecltype, Args >\fP"
+.br
+.RI "If the specified function \fCTFuncDecltype\fP taking the specified \fCArgs\fP is not well formed, then SFINAE and partial template specialization will select this template, indicating unsuccessful detection\&. "
+.ti -1c
+.RI "struct \fBrcppsw::mpl::detail::detector< TFailType, std::void_t< TFuncDecltype< Args\&.\&.\&. > >, TFuncDecltype, Args\&.\&.\&. >\fP"
+.br
+.ti -1c
+.RI "struct \fBrcppsw::mpl::is_specialization< T, Template >\fP"
+.br
+.RI "Determine if a class Template<SomeType> is a specialization of \fCTemplate\fP\&. "
+.ti -1c
+.RI "struct \fBrcppsw::mpl::is_specialization< Template< Args\&.\&.\&. >, Template >\fP"
+.br
+.ti -1c
+.RI "struct \fBrcppsw::mpl::no_such_trait\fP"
+.br
+.RI "Sentinel type to indicate that the specified trait was not detected\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::mpl\fP"
+.br
+.RI "Meta programming namespace\&. Mainly a few aliases around things which boost provides\&. "
+.ti -1c
+.RI " \fBrcppsw::mpl::detail\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_SFINAE_TYPE\fP(\&.\&.\&.)   typename std::enable_if<__VA_ARGS__>::value"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<class TFailType , template< class\&.\&.\&. > class TFuncDecltype, class\&.\&.\&. Args> using \fBrcppsw::mpl::detected_or\fP = detail::detector< TFailType, void, TFuncDecltype, Args\&.\&.\&. >"
+.br
+.RI "Same as \fBis_detected\fP, but allows for a user specified type \fCTFailType\fP to be selected if detection fails\&. "
+.ti -1c
+.RI "template<template< class\&.\&.\&. > class TFuncDecltype, class\&.\&.\&. Args> using \fBrcppsw::mpl::detected_t\fP = typename detail::detector< no_such_trait, void, TFuncDecltype, Args\&.\&.\&. >::type"
+.br
+.RI "Same as \fBis_detected\fP, but will return the decltype itself, rather than just if it is well formed or not\&. "
+.ti -1c
+.RI "template<template< class\&.\&.\&. > class TFuncDecltype, class\&.\&.\&. Args> using \fBrcppsw::mpl::is_detected\fP = typename detail::detector< no_such_trait, void, TFuncDecltype, Args\&.\&.\&. >::value"
+.br
+.RI "Type trait to detect whether a function taking the specified \fCArgs\fP exists for the specified type\&. Suitable for use in SFINAE\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2020 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Class Documentation"
+.PP 
+.SH "struct rcppsw::mpl::detail::detector"
+.PP 
+
+.SS "template<class TFailType, class AlwaysVoid, template< class\&.\&.\&. > class TFuncDecltype, class\&.\&.\&. Args>
+.br
+struct rcppsw::mpl::detail::detector< TFailType, AlwaysVoid, TFuncDecltype, Args >"
+If the specified function \fCTFuncDecltype\fP taking the specified \fCArgs\fP is not well formed, then SFINAE and partial template specialization will select this template, indicating unsuccessful detection\&. 
+
+If the specified function \fCTFuncDecltype\fP taking the specified \fCArgs\fP is well formed, then SFINAE and partial template specialization will select this template, indicating successful detection\&.
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fITFailType\fP The default type to select upon unsuccessful detection\&.
+.br
+\fITFuncDecltype\fP The decltype() of the function to detect\&.
+.br
+\fIArgs\fP The types of the arguments to the function to detect\&.
+.br
+\fITFailType\fP The default type to select upon unsuccessful detection\&. Unused in this version of the detector\&.
+.br
+\fITFuncDecltype\fP The decltype() of the function to detect\&.
+.br
+\fIArgs\fP The types of the arguments to the function to detect\&. 
+.RE
+.PP
+
+.PP
+\fBClass Members:\fP
+.RS 4
+typedef TFailType \fItype\fP Captures \fCTFailType\fP for future use\&. 
+.br
+.PP
+typedef false_type \fIvalue\fP Always \fIFALSE\fP for unsuccessful detection\&. 
+.br
+.PP
+.RE
+.PP
+.SH "struct rcppsw::mpl::detail::detector< TFailType, std::void_t< TFuncDecltype< Args\&.\&.\&. > >, TFuncDecltype, Args\&.\&.\&. >"
+.PP 
+
+.SS "template<class TFailType, template< class\&.\&.\&. > class TFuncDecltype, class\&.\&.\&. Args>
+.br
+struct rcppsw::mpl::detail::detector< TFailType, std::void_t< TFuncDecltype< Args\&.\&.\&. > >, TFuncDecltype, Args\&.\&.\&. >"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+ \fItype\fP Captures \fCTFuncDeclType\fP argument for future use\&. 
+.br
+.PP
+typedef true_type \fIvalue\fP Always \fITRUE\fP for successful detection\&. 
+.br
+.PP
+.RE
+.PP
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#\fBdefine\fP RCPPSW_SFINAE_TYPE( \&.\&.\&.)   typename std::enable_if<__VA_ARGS__>::value"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

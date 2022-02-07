@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1ds_1_1graph_1_1base__vertex__property" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::ds::graph::base_vertex_property</compoundname>
+    <derivedcompoundref refid="structrcppsw_1_1ds_1_1graph_1_1hgrid3D__vertex__property" prot="public" virt="non-virtual">rcppsw::ds::graph::hgrid3D_vertex_property</derivedcompoundref>
+    <includes refid="base__vertex__property_8hpp" local="no">base_vertex_property.hpp</includes>
+    <briefdescription>
+<para>Base class for all base_vertex properties used with all graphs. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::ds::graph::hgrid3D_vertex_property</label>
+        <link refid="structrcppsw_1_1ds_1_1graph_1_1hgrid3D__vertex__property"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::graph::base_vertex_property</label>
+        <link refid="structrcppsw_1_1ds_1_1graph_1_1base__vertex__property"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::ds::graph::base_vertex_property</label>
+        <link refid="structrcppsw_1_1ds_1_1graph_1_1base__vertex__property"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/base_vertex_property.hpp" line="46" column="27" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/base_vertex_property.hpp" bodystart="46" bodyend="46"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

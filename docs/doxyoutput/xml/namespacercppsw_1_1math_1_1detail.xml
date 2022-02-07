@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1math_1_1detail" kind="namespace" language="C++">
+    <compoundname>rcppsw::math::detail</compoundname>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacercppsw_1_1math_1_1detail_1a8df4a58ef0ebabc5c34175ea202ab1db" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(std::declval&lt; T &gt;().length())</type>
+        <definition>using rcppsw::math::detail::length_func_decltype = typedef decltype(std::declval&lt;T&gt;().length())</definition>
+        <argsstring></argsstring>
+        <name>length_func_decltype</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/math.hpp" line="77" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/math.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/math.hpp" line="74" column="16"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,94 @@
+.TH "rcppsw::types::distance_measure< T, Tag >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::types::distance_measure< T, Tag > \- Specifies a distance between two points\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <distance_measure\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::types::named_type< T, Tag >\fP, and \fBrcppsw::er::client< distance_measure< T, Tag > >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBvalue_type\fP = T"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBdistance_measure\fP (const \fBdistance_measure\fP &)=default"
+.br
+.ti -1c
+.RI "\fBdistance_measure\fP (const T &value, bool check_psd=true)"
+.br
+.ti -1c
+.RI "\fB~distance_measure\fP (void) override=default"
+.br
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBdistance_measure\fP &rhs) const"
+.br
+.ti -1c
+.RI "bool \fBoperator<=\fP (const \fBdistance_measure\fP &rhs) const"
+.br
+.ti -1c
+.RI "bool \fBoperator<=\fP (T rhs) const"
+.br
+.ti -1c
+.RI "bool \fBoperator>\fP (const \fBdistance_measure\fP &rhs) const"
+.br
+.ti -1c
+.RI "bool \fBoperator>\fP (T rhs) const"
+.br
+.ti -1c
+.RI "bool \fBoperator>=\fP (const \fBdistance_measure\fP &rhs) const"
+.br
+.ti -1c
+.RI "bool \fBoperator>=\fP (T rhs) const"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T, typename Tag>
+.br
+class rcppsw::types::distance_measure< T, Tag >"
+Specifies a distance between two points\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename T , typename Tag > using \fBrcppsw::types::distance_measure\fP< T, Tag >::\fBvalue_type\fP =  T"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T , typename Tag > \fBrcppsw::types::distance_measure\fP< T, Tag >::\fBdistance_measure\fP (const T & value, bool check_psd = \fCtrue\fP)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "template<typename T , typename Tag > \fBrcppsw::types::distance_measure\fP< T, Tag >::~\fBdistance_measure\fP (void)\fC [override]\fP, \fC [default]\fP"
+
+.SS "template<typename T , typename Tag > \fBrcppsw::types::distance_measure\fP< T, Tag >::\fBdistance_measure\fP (const \fBdistance_measure\fP< T, Tag > &)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T , typename Tag > bool \fBrcppsw::types::distance_measure\fP< T, Tag >::operator< (const \fBdistance_measure\fP< T, Tag > & rhs) const\fC [inline]\fP"
+
+.SS "template<typename T , typename Tag > bool \fBrcppsw::types::distance_measure\fP< T, Tag >::operator<= (const \fBdistance_measure\fP< T, Tag > & rhs) const\fC [inline]\fP"
+
+.SS "template<typename T , typename Tag > bool \fBrcppsw::types::distance_measure\fP< T, Tag >::operator<= (T rhs) const\fC [inline]\fP"
+
+.SS "template<typename T , typename Tag > bool \fBrcppsw::types::distance_measure\fP< T, Tag >::operator> (const \fBdistance_measure\fP< T, Tag > & rhs) const\fC [inline]\fP"
+
+.SS "template<typename T , typename Tag > bool \fBrcppsw::types::distance_measure\fP< T, Tag >::operator> (T rhs) const\fC [inline]\fP"
+
+.SS "template<typename T , typename Tag > bool \fBrcppsw::types::distance_measure\fP< T, Tag >::operator>= (const \fBdistance_measure\fP< T, Tag > & rhs) const\fC [inline]\fP"
+
+.SS "template<typename T , typename Tag > bool \fBrcppsw::types::distance_measure\fP< T, Tag >::operator>= (T rhs) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -30,6 +30,8 @@
 
 #include "rcppsw/math/range.hpp"
 #include "rcppsw/rcppsw.hpp"
+#include "rcppsw/math/math.hpp"
+#include "rcppsw/er/stringizable.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -51,7 +53,7 @@ class degrees;
  * decimal places, by default; this can be overriden on a per-comparison basis
  * if desired, or set class-wide via \ref kAPPROX_EQUALITY_TOL.
  */
-class radians {
+class radians final : public er::stringizable {
  public:
   /*
    * These are MATHEMATICAL constants, so they get UPPER_CASE naming convention
@@ -66,8 +68,6 @@ class radians {
   static const radians kZERO; // NOLINT
   static const double kRADIANS_TO_DEGREES; // NOLINT
 
-  static radians abs(const radians& r) { return radians(std::fabs(r.v())); }
-
   radians(void) = default;
   explicit radians(double value) noexcept : m_value(value) {}
   explicit radians(const degrees& d);
@@ -81,7 +81,6 @@ class radians {
    * \brief Get the raw value in radians.
    */
   double v(void) const { return m_value; }
-  double operator()(void) const { return v(); }
 
   /**
    * \brief Normalizes the value in the range [-pi, pi].
@@ -103,7 +102,7 @@ class radians {
    * \brief Return a string representation of the radians object of the form
    * 'rad(XX) -> deg(YY)'.
    */
-  std::string to_str(void) const;
+  std::string to_str(void) const override;
 
   friend std::istream& operator>>(std::istream& is, radians& r) {
     is >> r.m_value;
@@ -173,8 +172,7 @@ class radians {
    * specified during construction.
    */
   bool operator==(const radians& other) const {
-    return std::fabs(m_value - other.m_value) <
-           std::numeric_limits<double>::epsilon();
+    return std::fabs(m_value - other.m_value) < kDOUBLE_EPSILON;
   }
 
   bool operator!=(const radians& other) const { return !(*this == other); }
@@ -186,8 +184,8 @@ class radians {
    * This cannot be made part of \ref operator==(), because those functions
    * cannot have default arguments.
    */
-  bool is_equal(const radians& other, double tol = RCSW_DOUBLE_EPSILON) const {
-    return std::fabs(m_value - other.m_value) < tol;
+  bool is_equal(const radians& other, double tol = kDOUBLE_EPSILON) const {
+    return rmath::is_equal(m_value, other.m_value, tol);
   }
 
  private:
@@ -200,6 +198,8 @@ class radians {
  * Operators
  ******************************************************************************/
 std::ostream& operator<<(std::ostream& stream, const radians& r);
+
+rmath::radians operator*(double lhs, const rmath::radians& rhs);
 
 NS_END(math, rcppsw);
 

@@ -74,3 +74,19 @@ CATCH_TEST_CASE("overlap test", "[rmath::range]") {
   t1.lb(2);
   CATCH_REQUIRE(t1.contains(t0));
 }
+
+CATCH_TEST_CASE("manipulation test", "[rmath::range]") {
+  math::rangei t0(2, 6);
+
+  CATCH_REQUIRE(t0.center() == 4);
+
+  auto t1 = t0.translate(1);
+  CATCH_REQUIRE(t0.center() == 4);
+  CATCH_REQUIRE(t1.center() == 5);
+
+  auto t2 = t0.recenter(9);
+  CATCH_REQUIRE(t0.center() == 4);
+  CATCH_REQUIRE(t2.center() == 9);
+  CATCH_REQUIRE(t2.lb() == 7);
+  CATCH_REQUIRE(t2.ub() == 11);
+}

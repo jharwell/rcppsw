@@ -77,7 +77,6 @@ bool rng::bernoulli(double p) {
  * Template Instantiations
  ******************************************************************************/
 template int rng::uniform(const int& lb, const int& ub);
-template uint rng::uniform(const uint& lb, const uint& ub);
 template size_t rng::uniform(const size_t& lb, const size_t& ub);
 template double rng::uniform(const double& lb, const double& ub);
 

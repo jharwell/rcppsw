@@ -1,0 +1,82 @@
+.TH "rcppsw::ds::metrics::grid3D_metrics_collector" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::metrics::grid3D_metrics_collector \- Base class for collectors using a 3D grid to fill with counts of SOMETHING, to be averaged over the entire simulation\&. Each line of the resulting \&.csv file corresponds to an XY plane for a value of Z in the grid\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <grid3D_metrics_collector\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::metrics::base_collector\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgrid3D_metrics_collector\fP (std::unique_ptr< \fBrmetrics::base_sink\fP > sink, const \fBmath::vector3z\fP &dims)"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) \-> decltype(std::declval< decltype(Member)>()\&.Func(args\&.\&.\&.))"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) \-> decltype(std::declval< decltype(Member)>()\&.Func(args\&.\&.\&.))"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> auto \fBFunc\fP (Args &&\&.\&.\&. args) \-> decltype(std::declval< decltype(Member)>()\&.Func(args\&.\&.\&.))"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "const \fBrmetrics::base_data\fP * \fBdata\fP (void) const override"
+.br
+.RI "Get a handle to the gathered data\&. "
+.ti -1c
+.RI "void \fBinc_cell_count\fP (const \fBmath::vector3z\fP &c, size_t count=1)"
+.br
+.ti -1c
+.RI "void \fBinc_total_count\fP (size_t count=1)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Base class for collectors using a 3D grid to fill with counts of SOMETHING, to be averaged over the entire simulation\&. Each line of the resulting \&.csv file corresponds to an XY plane for a value of Z in the grid\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::ds::metrics::grid3D_metrics_collector::grid3D_metrics_collector (std::unique_ptr< \fBrmetrics::base_sink\fP > sink, const \fBmath::vector3z\fP & dims)\fC [inline]\fP"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIsink\fP The metrics sink to use\&. 
+.br
+\fIdims\fP Dimensions of grid\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "const \fBrmetrics::base_data\fP* rcppsw::ds::metrics::grid3D_metrics_collector::data (void) const\fC [inline]\fP, \fC [override]\fP, \fC [protected]\fP, \fC [virtual]\fP"
+
+.PP
+Get a handle to the gathered data\&. 
+.PP
+Implements \fBrcppsw::metrics::base_collector\fP\&.
+.SS "template<typename\&.\&.\&. Args> auto rcppsw::ds::metrics::grid3D_metrics_collector::Func (Args &&\&.\&.\&. args) \-> decltype(std::declval<decltype(Member)>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+.SS "template<typename\&.\&.\&. Args> auto rcppsw::ds::metrics::grid3D_metrics_collector::Func (Args &&\&.\&.\&. args) \-> decltype(std::declval<decltype(Member)>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+.SS "template<typename\&.\&.\&. Args> auto rcppsw::ds::metrics::grid3D_metrics_collector::Func (Args &&\&.\&.\&. args) \-> decltype(std::declval<decltype(Member)>()\&.Func(args\&.\&.\&.)) \fC [inline]\fP"
+
+.SS "void rcppsw::ds::metrics::grid3D_metrics_collector::inc_cell_count (const \fBmath::vector3z\fP & c, size_t count = \fC1\fP)\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "void rcppsw::ds::metrics::grid3D_metrics_collector::inc_total_count (size_t count = \fC1\fP)\fC [inline]\fP, \fC [protected]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

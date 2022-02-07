@@ -1,0 +1,79 @@
+.TH "rcppsw::algorithm::clustering::kmeans_omp< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::algorithm::clustering::kmeans_omp< T > \- Parallel clustering using OpenMP using the Nearest Centroid (NC) membership policy\&. Suitable for kmeans clustering\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <kmeans_omp\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::algorithm::clustering::base_clustering_impl< T, policy::NC >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBkmeans_omp\fP (size_t n_threads)"
+.br
+.ti -1c
+.RI "bool \fBconverged\fP (const \fBcluster_vector\fP &clusters) const override"
+.br
+.RI "Determine if the clusters have converged and the algorithm should be terminated\&. "
+.ti -1c
+.RI "void \fBinitialize\fP (std::vector< T > *const data, \fBmembership_type\fP< \fBpolicy::NC\fP > *const membership) override"
+.br
+.RI "Perform algorithm-specific clustering initialization (memory localization, etc\&.)\&. "
+.ti -1c
+.RI "void \fBiterate\fP (const std::vector< T > &data, const \fBdist_calc_ftype\fP &dist_func, \fBcluster_vector\fP *const clusters) override"
+.br
+.ti -1c
+.RI "void \fBpost_iter_update\fP (\fBcluster_vector\fP *const clusters) override"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::algorithm::clustering::kmeans_omp< T >"
+Parallel clustering using OpenMP using the Nearest Centroid (NC) membership policy\&. Suitable for kmeans clustering\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::algorithm::clustering::kmeans_omp\fP< T >::\fBkmeans_omp\fP (size_t n_threads)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > bool \fBrcppsw::algorithm::clustering::kmeans_omp\fP< T >::converged (const \fBcluster_vector\fP & clusters) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Determine if the clusters have converged and the algorithm should be terminated\&. 
+.PP
+\fBReturns\fP
+.RS 4
+\fCTRUE\fP if the algorithm has converged, \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+.PP
+Implements \fBrcppsw::algorithm::clustering::base_clustering_impl< T, policy::NC >\fP\&.
+.SS "template<typename T > void \fBrcppsw::algorithm::clustering::kmeans_omp\fP< T >::initialize (std::vector< T > *const data, \fBmembership_type\fP< \fBpolicy::NC\fP > *const membership)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Perform algorithm-specific clustering initialization (memory localization, etc\&.)\&. 
+.PP
+Implements \fBrcppsw::algorithm::clustering::base_clustering_impl< T, policy::NC >\fP\&.
+.SS "template<typename T > void \fBrcppsw::algorithm::clustering::kmeans_omp\fP< T >::iterate (const std::vector< T > & data, const \fBdist_calc_ftype\fP & dist_func, \fBcluster_vector\fP *const clusters)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBrcppsw::algorithm::clustering::base_clustering_impl< T, policy::NC >\fP\&.
+.SS "template<typename T > void \fBrcppsw::algorithm::clustering::kmeans_omp\fP< T >::post_iter_update (\fBcluster_vector\fP *const clusters)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBrcppsw::algorithm::clustering::base_clustering_impl< T, policy::NC >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

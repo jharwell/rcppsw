@@ -1,0 +1,68 @@
+.TH "rcppsw::algorithm::clustering::nc_cluster< T, Policy >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::algorithm::clustering::nc_cluster< T, Policy > \- A cluster representation for \fBNC\fP clustering algorithms\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <cluster\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBnc_cluster\fP (uint id, const std::vector< T > &data, \fBmembership_type\fP< Policy > &membership)"
+.br
+.ti -1c
+.RI "void \fBadd_point\fP (size_t idx)"
+.br
+.ti -1c
+.RI "const T & \fBcenter\fP (void) const"
+.br
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> bool \fBconverged\fP (int=0) const"
+.br
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBconverged\fP (void) const"
+.br
+.ti -1c
+.RI "\fBnc_cluster\fP & \fBoperator=\fP (const \fBnc_cluster\fP &)=delete"
+.br
+.ti -1c
+.RI "void \fBupdate_center\fP (void)"
+.br
+.RI "Update the center (mean) of the points in the cluster after an iteration is finished\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T, typename Policy>
+.br
+class rcppsw::algorithm::clustering::nc_cluster< T, Policy >"
+A cluster representation for \fBNC\fP clustering algorithms\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T , typename Policy > \fBrcppsw::algorithm::clustering::nc_cluster\fP< T, Policy >::\fBnc_cluster\fP (uint id, const std::vector< T > & data, \fBmembership_type\fP< Policy > & membership)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T , typename Policy > void \fBrcppsw::algorithm::clustering::nc_cluster\fP< T, Policy >::add_point (size_t idx)\fC [inline]\fP"
+
+.SS "template<typename T , typename Policy > const T& \fBrcppsw::algorithm::clustering::nc_cluster\fP< T, Policy >::center (void) const\fC [inline]\fP"
+
+.SS "template<typename T , typename Policy > template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> bool \fBrcppsw::algorithm::clustering::nc_cluster\fP< T, Policy >::converged (int = \fC0\fP) const\fC [inline]\fP"
+
+.SS "template<typename T , typename Policy > template<typename U  = T, typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBrcppsw::algorithm::clustering::nc_cluster\fP< T, Policy >::converged (void) const\fC [inline]\fP"
+
+.SS "template<typename T , typename Policy > \fBnc_cluster\fP& \fBrcppsw::algorithm::clustering::nc_cluster\fP< T, Policy >::operator= (const \fBnc_cluster\fP< T, Policy > &)\fC [delete]\fP"
+
+.SS "template<typename T , typename Policy > void \fBrcppsw::algorithm::clustering::nc_cluster\fP< T, Policy >::update_center (void)\fC [inline]\fP"
+
+.PP
+Update the center (mean) of the points in the cluster after an iteration is finished\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

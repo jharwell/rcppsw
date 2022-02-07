@@ -1,0 +1,622 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1utils_1_1color" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::utils::color</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1stringizable" prot="public" virt="non-virtual">rcppsw::er::stringizable</basecompoundref>
+    <includes refid="color_8hpp" local="no">color.hpp</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1a43f1f53ecd05b56843d3738007450ddc" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kBLACK</definition>
+        <argsstring></argsstring>
+        <name>kBLACK</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="56" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1afe38b3f08ef1e1aba9221640d09edb17" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kBLUE</definition>
+        <argsstring></argsstring>
+        <name>kBLUE</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="60" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1aa29d21a45c10fc95e3f99344157449dd" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kBROWN</definition>
+        <argsstring></argsstring>
+        <name>kBROWN</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="65" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1ab29a9d0cd873ec791385528044d7841c" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kCYAN</definition>
+        <argsstring></argsstring>
+        <name>kCYAN</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="62" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1a91aa5a4b8f7b16393d645e9a43a2ba47" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kGRAY10</definition>
+        <argsstring></argsstring>
+        <name>kGRAY10</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="67" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1ac1ad79909fe4f47823f4c97addf79a25" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kGRAY20</definition>
+        <argsstring></argsstring>
+        <name>kGRAY20</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="68" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1ab8a47a5dc3bcdf8a58d772608f7a99d6" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kGRAY30</definition>
+        <argsstring></argsstring>
+        <name>kGRAY30</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="69" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1a27736622de0229f6ada7eb659d079a70" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kGRAY40</definition>
+        <argsstring></argsstring>
+        <name>kGRAY40</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="70" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1a771dc9b3875d55be647e3969d6b52ce6" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kGRAY50</definition>
+        <argsstring></argsstring>
+        <name>kGRAY50</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="71" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1a1e66c808aa0f68e9b57154c965b28dfb" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kGRAY60</definition>
+        <argsstring></argsstring>
+        <name>kGRAY60</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="72" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1a54405239143717a254436bd289ea5822" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kGRAY70</definition>
+        <argsstring></argsstring>
+        <name>kGRAY70</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="73" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1a31d78077433be73c2cf7bbce34078886" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kGRAY80</definition>
+        <argsstring></argsstring>
+        <name>kGRAY80</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="74" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1ab7b09fa6cbfb5673279bbc5152ed86ec" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kGRAY90</definition>
+        <argsstring></argsstring>
+        <name>kGRAY90</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="75" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1afc100cfbaf9d43890491ca94fb0f1467" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kGREEN</definition>
+        <argsstring></argsstring>
+        <name>kGREEN</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="59" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1ab53b155c72ea451c1462ef9b1f6b8fd3" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kMAGENTA</definition>
+        <argsstring></argsstring>
+        <name>kMAGENTA</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="61" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1ae2478bca34c664ee01d43078684a3a94" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kORANGE</definition>
+        <argsstring></argsstring>
+        <name>kORANGE</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="64" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1ac7f5d9b0171253ed66b5819d90d832a4" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kPURPLE</definition>
+        <argsstring></argsstring>
+        <name>kPURPLE</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="66" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1aab4b755e0c5e87994773471696d160e6" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kRED</definition>
+        <argsstring></argsstring>
+        <name>kRED</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="58" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1aca413c780ac543f1f0c02751ab56a08e" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kWHITE</definition>
+        <argsstring></argsstring>
+        <name>kWHITE</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="57" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1ab900ab14a2ac2b9bc8f31bdf70fbca29" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref></type>
+        <definition>const color rcppsw::utils::color::kYELLOW</definition>
+        <argsstring></argsstring>
+        <name>kYELLOW</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="63" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1utils_1_1color_1ae67286b42a0909aed61b566e93230faf" prot="private" static="no" mutable="no">
+        <type>std::array&lt; uint8_t, 4 &gt;</type>
+        <definition>std::array&lt;uint8_t, 4&gt; rcppsw::utils::color::m_channels</definition>
+        <argsstring></argsstring>
+        <name>m_channels</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="109" column="14" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1a72b000429b44d72712102b1ab1dcbc4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::utils::color::color</definition>
+        <argsstring>(const color &amp;)=default</argsstring>
+        <name>color</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="78" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1acb05fb4367e48c4d80131fa22bff9c8f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::utils::color::color</definition>
+        <argsstring>(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha=255)</argsstring>
+        <name>color</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>red</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>green</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>blue</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>alpha</declname>
+          <defval>255</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="81" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="81" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1a760814e4557f9a1ed936950be0f96c91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::utils::color::color</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>color</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="77" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1a8c04ca0d31be2cde6b5f82266baefc38" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t rcppsw::utils::color::alpha</definition>
+        <argsstring>() const</argsstring>
+        <name>alpha</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="96" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="96" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1af3e8d0eefc1e8711854a47fe96029366" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::utils::color::alpha</definition>
+        <argsstring>(uint8_t alpha)</argsstring>
+        <name>alpha</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>alpha</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="97" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="97" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1a6eb4cd25dc99e510931d6b70e552a0f6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t rcppsw::utils::color::blue</definition>
+        <argsstring>() const</argsstring>
+        <name>blue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="93" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="93" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1a369bc027d2eb39e59d98fe174aff916e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::utils::color::blue</definition>
+        <argsstring>(uint8_t blue)</argsstring>
+        <name>blue</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>blue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="94" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="94" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1ab02424227508af2e8c8afbd967172bd2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t rcppsw::utils::color::green</definition>
+        <argsstring>() const</argsstring>
+        <name>green</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="90" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1a1f54f4b8f752df8ebcf05e0aea1928e1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::utils::color::green</definition>
+        <argsstring>(uint8_t green)</argsstring>
+        <name>green</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>green</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="91" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="91" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1aa014b71a4cf2715cd9fb425cdae3e721" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::utils::color::operator!=</definition>
+        <argsstring>(const color &amp;c_color2) const</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>c_color2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="103" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="103" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1a8724d21e3fa28905b1d4f6913ae2ebe3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref> &amp;</type>
+        <definition>color&amp; rcppsw::utils::color::operator=</definition>
+        <argsstring>(const color &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="79" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1a8bbda303f6428d493465628eeb13a6a1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::utils::color::operator==</definition>
+        <argsstring>(const color &amp;c_color2) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1utils_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>c_color2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="99" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="99" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1aaa67de22e38a997687e0ef74020c601c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t rcppsw::utils::color::red</definition>
+        <argsstring>() const</argsstring>
+        <name>red</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="87" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1a6d5d089d69dec861136c7db4ceb0ebb6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::utils::color::red</definition>
+        <argsstring>(uint8_t red)</argsstring>
+        <name>red</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>red</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="88" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1utils_1_1color_1a2fde472bf5988d8be1aa27fb82e42199" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string rcppsw::utils::color::to_str</definition>
+        <argsstring>(void) const override</argsstring>
+        <name>to_str</name>
+        <reimplements refid="classrcppsw_1_1er_1_1stringizable_1a0776b3b6278cc72e8b04448c016bc197">to_str</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return a string representation of a class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="85" column="15"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A simple RGBA class representing colors as 4 8-bit numbers. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Should be used to make color usage agnostic across projects, and not tied to a particular platform, simulator, etc. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::utils::color</label>
+        <link refid="classrcppsw_1_1utils_1_1color"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::utils::color</label>
+        <link refid="classrcppsw_1_1utils_1_1color"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>+kRED</edgelabel>
+          <edgelabel>+kYELLOW</edgelabel>
+          <edgelabel>+kGRAY90</edgelabel>
+          <edgelabel>+kGREEN</edgelabel>
+          <edgelabel>+kBLACK</edgelabel>
+          <edgelabel>+kGRAY70</edgelabel>
+          <edgelabel>+kMAGENTA</edgelabel>
+          <edgelabel>+kBLUE</edgelabel>
+          <edgelabel>+kGRAY80</edgelabel>
+          <edgelabel>+kGRAY50</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" line="54" column="36" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/utils/color.hpp" bodystart="54" bodyend="111"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1utils_1_1color_1a8c04ca0d31be2cde6b5f82266baefc38" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>alpha</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1af3e8d0eefc1e8711854a47fe96029366" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>alpha</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a6eb4cd25dc99e510931d6b70e552a0f6" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>blue</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a369bc027d2eb39e59d98fe174aff916e" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>blue</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a760814e4557f9a1ed936950be0f96c91" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>color</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a72b000429b44d72712102b1ab1dcbc4d" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>color</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1acb05fb4367e48c4d80131fa22bff9c8f" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>color</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1ab02424227508af2e8c8afbd967172bd2" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>green</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a1f54f4b8f752df8ebcf05e0aea1928e1" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>green</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a43f1f53ecd05b56843d3738007450ddc" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kBLACK</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1afe38b3f08ef1e1aba9221640d09edb17" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kBLUE</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1aa29d21a45c10fc95e3f99344157449dd" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kBROWN</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1ab29a9d0cd873ec791385528044d7841c" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kCYAN</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a91aa5a4b8f7b16393d645e9a43a2ba47" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kGRAY10</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1ac1ad79909fe4f47823f4c97addf79a25" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kGRAY20</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1ab8a47a5dc3bcdf8a58d772608f7a99d6" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kGRAY30</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a27736622de0229f6ada7eb659d079a70" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kGRAY40</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a771dc9b3875d55be647e3969d6b52ce6" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kGRAY50</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a1e66c808aa0f68e9b57154c965b28dfb" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kGRAY60</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a54405239143717a254436bd289ea5822" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kGRAY70</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a31d78077433be73c2cf7bbce34078886" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kGRAY80</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1ab7b09fa6cbfb5673279bbc5152ed86ec" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kGRAY90</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1afc100cfbaf9d43890491ca94fb0f1467" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kGREEN</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1ab53b155c72ea451c1462ef9b1f6b8fd3" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kMAGENTA</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1ae2478bca34c664ee01d43078684a3a94" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kORANGE</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1ac7f5d9b0171253ed66b5819d90d832a4" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kPURPLE</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1aab4b755e0c5e87994773471696d160e6" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kRED</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1aca413c780ac543f1f0c02751ab56a08e" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kWHITE</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1ab900ab14a2ac2b9bc8f31bdf70fbca29" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>kYELLOW</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1ae67286b42a0909aed61b566e93230faf" prot="private" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>m_channels</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1aa014b71a4cf2715cd9fb425cdae3e721" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>operator!=</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a8724d21e3fa28905b1d4f6913ae2ebe3" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a8bbda303f6428d493465628eeb13a6a1" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>operator==</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1aaa67de22e38a997687e0ef74020c601c" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>red</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a6d5d089d69dec861136c7db4ceb0ebb6" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>red</name></member>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1a613eefda69afcc13383029355cb8cfe9" prot="public" virt="non-virtual"><scope>rcppsw::utils::color</scope><name>stringizable</name></member>
+      <member refid="classrcppsw_1_1utils_1_1color_1a2fde472bf5988d8be1aa27fb82e42199" prot="public" virt="virtual"><scope>rcppsw::utils::color</scope><name>to_str</name></member>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1ad025418a3c3349948cbea5c6facdb391" prot="public" virt="virtual"><scope>rcppsw::utils::color</scope><name>~stringizable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

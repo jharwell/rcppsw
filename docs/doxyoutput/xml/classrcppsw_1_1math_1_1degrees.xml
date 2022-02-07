@@ -1,0 +1,648 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1math_1_1degrees" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>rcppsw::math::degrees</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1stringizable" prot="public" virt="non-virtual">rcppsw::er::stringizable</basecompoundref>
+    <includes refid="degrees_8hpp" local="no">degrees.hpp</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1degrees_1aead0e7367bec51dbfab82500e67e0289" prot="public" static="yes" mutable="no">
+        <type>const double</type>
+        <definition>const double rcppsw::math::degrees::kDEGREES_TO_RADIANS</definition>
+        <argsstring></argsstring>
+        <name>kDEGREES_TO_RADIANS</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="61" column="23" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1degrees_1ace7d5eb8b6dec35c06bae990e757c635" prot="private" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range</ref>&lt; <ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &gt;</type>
+        <definition>const range&lt;degrees&gt; rcppsw::math::degrees::kSignedRange</definition>
+        <argsstring></argsstring>
+        <name>kSignedRange</name>
+        <briefdescription>
+<para>The signed normalization range [-180, 180]. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="190" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1degrees_1aba21799439acdba4a704330073417e7c" prot="private" static="yes" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range</ref>&lt; <ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &gt;</type>
+        <definition>const range&lt;degrees&gt; rcppsw::math::degrees::kUnsignedRange</definition>
+        <argsstring></argsstring>
+        <name>kUnsignedRange</name>
+        <briefdescription>
+<para>The unsigned normalization range [0, 360]. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="195" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1math_1_1degrees_1ad61a2b6d41cdb64eee16a97e93a12064" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::math::degrees::m_value</definition>
+        <argsstring></argsstring>
+        <name>m_value</name>
+        <initializer>{ 0.0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="197" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a60c362008cce3980fc310a1f10d1b5d7" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::degrees::degrees</definition>
+        <argsstring>(const radians &amp;r)</argsstring>
+        <name>degrees</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1radians" kindref="compound">radians</ref> &amp;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+<para>Initialize from the specified value in RADIANS. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="73" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a08f54095cf40db4a5c3c275f86e804d0" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::degrees::degrees</definition>
+        <argsstring>(double value)</argsstring>
+        <name>degrees</name>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Initialize from the specified value in DEGREES. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="68" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1acce60a481b17de6565aec64f1f875fbb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::math::degrees::degrees</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>degrees</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="63" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1ac2fb6b3897ef09502bc97f14108999d1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::degrees::operator!=</definition>
+        <argsstring>(const degrees &amp;other) const</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="179" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="179" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1abd3bf729743a8f89a691858d1cb76890" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::math::degrees::operator()</definition>
+        <argsstring>(void) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="80" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1af9b557e372c9a0bdc73f8fb33093b627" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref></type>
+        <definition>degrees rcppsw::math::degrees::operator*</definition>
+        <argsstring>(double value) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="153" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="153" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a796450bda318af72e27fdaebafd315a6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+        <definition>degrees&amp; rcppsw::math::degrees::operator*=</definition>
+        <argsstring>(double value)</argsstring>
+        <name>operator*=</name>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="131" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="131" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a289c712fe8f24553652e568912d841af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref></type>
+        <definition>degrees rcppsw::math::degrees::operator+</definition>
+        <argsstring>(const degrees &amp;other) const</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="141" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="141" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a185ee8cb73a871afdc50e928e76d56bb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+        <definition>degrees&amp; rcppsw::math::degrees::operator+</definition>
+        <argsstring>(void)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="109" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="109" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1abeb696849d45d8d7e5a75904658e7f2c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+        <definition>degrees&amp; rcppsw::math::degrees::operator+=</definition>
+        <argsstring>(const degrees &amp;other)</argsstring>
+        <name>operator+=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="113" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="113" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a274ab8681ed840b50040bbf29b88793d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+        <definition>degrees&amp; rcppsw::math::degrees::operator+=</definition>
+        <argsstring>(double value)</argsstring>
+        <name>operator+=</name>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="118" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="118" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a55a073c04c4006164c444239b02e825b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref></type>
+        <definition>degrees rcppsw::math::degrees::operator-</definition>
+        <argsstring>(const degrees &amp;other) const</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="147" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="147" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1af60394475d3ac5dc173fa02ab9c4db2e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref></type>
+        <definition>degrees rcppsw::math::degrees::operator-</definition>
+        <argsstring>(void) const</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="111" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="111" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a04cee97b1ad663da72f5f6302c241556" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+        <definition>degrees&amp; rcppsw::math::degrees::operator-=</definition>
+        <argsstring>(const degrees &amp;other)</argsstring>
+        <name>operator-=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="123" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="123" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1ad941a8d2bd0b9872be101928f10216ac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+        <definition>degrees&amp; rcppsw::math::degrees::operator-=</definition>
+        <argsstring>(double value)</argsstring>
+        <name>operator-=</name>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="127" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="127" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1aa811182eb59968a8de270332ca953d49" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::math::degrees::operator/</definition>
+        <argsstring>(const degrees &amp;other) const</argsstring>
+        <name>operator/</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="159" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="159" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a5193d9447198871c73e67efa21db6fb2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref></type>
+        <definition>degrees rcppsw::math::degrees::operator/</definition>
+        <argsstring>(double value) const</argsstring>
+        <name>operator/</name>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="161" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="161" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1ad0f05ef65d871d8583634b501bea76b5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+        <definition>degrees&amp; rcppsw::math::degrees::operator/=</definition>
+        <argsstring>(double value)</argsstring>
+        <name>operator/=</name>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="136" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="136" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1af055f627e914acebd603555e615d15c6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::degrees::operator&lt;</definition>
+        <argsstring>(const degrees &amp;other) const</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="167" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="167" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1aa48f4bac046c35413fd5726b926b7a79" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::degrees::operator&lt;=</definition>
+        <argsstring>(const degrees &amp;other) const</argsstring>
+        <name>operator&lt;=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="169" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="169" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a1e38e5948d7a74800accc34ae24ce1fd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::degrees::operator==</definition>
+        <argsstring>(const degrees &amp;other) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="175" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="175" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a666c8fa5da8019001e015f759ec5121a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::degrees::operator&gt;</definition>
+        <argsstring>(const degrees &amp;other) const</argsstring>
+        <name>operator&gt;</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="171" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="171" bodyend="171"/>
+        <references refid="namespacercppsw_1_1math_1a3de3b99c93e96d09928476864d7ecf59" compoundref="math_8hpp" startline="48">rcppsw::math::kDOUBLE_EPSILON</references>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1afbfbbbe9eadbfd9596cd1c957d922ee7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::degrees::operator&gt;=</definition>
+        <argsstring>(const degrees &amp;other) const</argsstring>
+        <name>operator&gt;=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="173" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="173" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a4ed6a0fb16957b97bc4a57b20b72b5e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::math::degrees::set</definition>
+        <argsstring>(double value)</argsstring>
+        <name>set</name>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Set the current value in degrees. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>In DEGREES. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="87" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a3752c3a8c6875735822aaa0df8c66ad2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+        <definition>degrees&amp; rcppsw::math::degrees::signed_normalize</definition>
+        <argsstring>(void)</argsstring>
+        <name>signed_normalize</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Normalizes the value in the range [-180, 180]. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="92" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="92" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a2b9ac8293d697e031261d104259d501a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string rcppsw::math::degrees::to_str</definition>
+        <argsstring>(void) const override</argsstring>
+        <name>to_str</name>
+        <reimplements refid="classrcppsw_1_1er_1_1stringizable_1a0776b3b6278cc72e8b04448c016bc197">to_str</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return a string representation of the degrees object of the form &apos;deg(XX) -&gt; rad(YY)&apos;. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="107" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a20e8205a28034b1cb6d5b8a771d7b822" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+        <definition>degrees&amp; rcppsw::math::degrees::unsigned_normalize</definition>
+        <argsstring>(void)</argsstring>
+        <name>unsigned_normalize</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Normalizes the value in the range [0, 360]. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="99" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="99" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1degrees_1a72ea4fc1769badaec4acc5f77817ec0a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::math::degrees::v</definition>
+        <argsstring>(void) const</argsstring>
+        <name>v</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the raw value of the angle. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="78" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="78" bodyend="78"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classrcppsw_1_1math_1_1degrees_1ae05756b80d65072b3d4f8b4b721d47b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>friend std::istream &amp;</type>
+        <definition>std::istream&amp; operator&gt;&gt;</definition>
+        <argsstring>(std::istream &amp;is, degrees &amp;d)</argsstring>
+        <name>operator&gt;&gt;</name>
+        <param>
+          <type>std::istream &amp;</type>
+          <declname>is</declname>
+        </param>
+        <param>
+          <type><ref refid="classrcppsw_1_1math_1_1degrees" kindref="compound">degrees</ref> &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="181" column="23" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="181" bodyend="184"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Used to store an angle value in degrees (duh). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::math::degrees</label>
+        <link refid="classrcppsw_1_1math_1_1degrees"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::math::degrees</label>
+        <link refid="classrcppsw_1_1math_1_1degrees"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" line="55" column="38" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp" bodystart="55" bodyend="198"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1math_1_1degrees_1acce60a481b17de6565aec64f1f875fbb" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>degrees</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a08f54095cf40db4a5c3c275f86e804d0" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>degrees</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a60c362008cce3980fc310a1f10d1b5d7" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>degrees</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1aead0e7367bec51dbfab82500e67e0289" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>kDEGREES_TO_RADIANS</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1ace7d5eb8b6dec35c06bae990e757c635" prot="private" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>kSignedRange</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1aba21799439acdba4a704330073417e7c" prot="private" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>kUnsignedRange</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1ad61a2b6d41cdb64eee16a97e93a12064" prot="private" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>m_value</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1ac2fb6b3897ef09502bc97f14108999d1" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator!=</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1abd3bf729743a8f89a691858d1cb76890" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator()</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1af9b557e372c9a0bdc73f8fb33093b627" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator*</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a796450bda318af72e27fdaebafd315a6" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator*=</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a185ee8cb73a871afdc50e928e76d56bb" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator+</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a289c712fe8f24553652e568912d841af" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator+</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1abeb696849d45d8d7e5a75904658e7f2c" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator+=</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a274ab8681ed840b50040bbf29b88793d" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator+=</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1af60394475d3ac5dc173fa02ab9c4db2e" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator-</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a55a073c04c4006164c444239b02e825b" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator-</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a04cee97b1ad663da72f5f6302c241556" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator-=</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1ad941a8d2bd0b9872be101928f10216ac" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator-=</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1aa811182eb59968a8de270332ca953d49" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator/</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a5193d9447198871c73e67efa21db6fb2" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator/</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1ad0f05ef65d871d8583634b501bea76b5" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator/=</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1af055f627e914acebd603555e615d15c6" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator&lt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1aa48f4bac046c35413fd5726b926b7a79" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator&lt;=</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a1e38e5948d7a74800accc34ae24ce1fd" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator==</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a666c8fa5da8019001e015f759ec5121a" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator&gt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1afbfbbbe9eadbfd9596cd1c957d922ee7" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator&gt;=</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1ae05756b80d65072b3d4f8b4b721d47b6" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>operator&gt;&gt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a4ed6a0fb16957b97bc4a57b20b72b5e2" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>set</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a3752c3a8c6875735822aaa0df8c66ad2" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>signed_normalize</name></member>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1a613eefda69afcc13383029355cb8cfe9" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>stringizable</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a2b9ac8293d697e031261d104259d501a" prot="public" virt="virtual"><scope>rcppsw::math::degrees</scope><name>to_str</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a20e8205a28034b1cb6d5b8a771d7b822" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>unsigned_normalize</name></member>
+      <member refid="classrcppsw_1_1math_1_1degrees_1a72ea4fc1769badaec4acc5f77817ec0a" prot="public" virt="non-virtual"><scope>rcppsw::math::degrees</scope><name>v</name></member>
+      <member refid="classrcppsw_1_1er_1_1stringizable_1ad025418a3c3349948cbea5c6facdb391" prot="public" virt="virtual"><scope>rcppsw::math::degrees</scope><name>~stringizable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

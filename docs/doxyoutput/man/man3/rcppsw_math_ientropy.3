@@ -1,0 +1,45 @@
+.TH "rcppsw::math::ientropy" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math::ientropy \- Calculates the informational entropy of a cluster (Shannon's definition)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ientropy\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::math::expression< double >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "double \fBoperator()\fP (const std::vector< double > &groups)"
+.br
+.RI "Calculate the informational entropy\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Calculates the informational entropy of a cluster (Shannon's definition)\&. 
+
+Uses the formula:
+.PP
+H(S) = - SUM( p_i * log2(p_i)) over all i in m\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "double rcppsw::math::ientropy::operator() (const std::vector< double > & groups)\fC [inline]\fP"
+
+.PP
+Calculate the informational entropy\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIgroups\fP A vector of the proportional representation of each group within the cluster\&. Should sum to 1, though this is not checked\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

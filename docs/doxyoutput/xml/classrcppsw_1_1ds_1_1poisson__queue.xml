@@ -1,0 +1,434 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1ds_1_1poisson__queue" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::ds::poisson_queue</compoundname>
+    <includes refid="poisson__queue_8hpp" local="no">poisson_queue.hpp</includes>
+    <innerclass refid="structrcppsw_1_1ds_1_1poisson__queue_1_1m__dequeue" prot="private">rcppsw::ds::poisson_queue::m_dequeue</innerclass>
+    <innerclass refid="structrcppsw_1_1ds_1_1poisson__queue_1_1m__enqueue" prot="private">rcppsw::ds::poisson_queue::m_enqueue</innerclass>
+    <innerclass refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__data" prot="private">rcppsw::ds::poisson_queue::op_data</innerclass>
+    <innerclass refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata" prot="public">rcppsw::ds::poisson_queue::op_metadata</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1ds_1_1poisson__queue_1aa3fa21cc27791b63ab9e94b3d0b2893e" prot="private" static="no" mutable="no">
+        <type>std::deque&lt; T &gt;</type>
+        <definition>std::deque&lt;T&gt; rcppsw::ds::poisson_queue&lt; T &gt;::m_queue</definition>
+        <argsstring></argsstring>
+        <name>m_queue</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="224" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1ds_1_1poisson__queue_1a620131724318bec65b3c1adcb5050906" prot="private" static="no" mutable="no">
+        <type>math::rng *</type>
+        <definition>math::rng* rcppsw::ds::poisson_queue&lt; T &gt;::m_rng</definition>
+        <argsstring></argsstring>
+        <name>m_rng</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="221" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="221" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1ds_1_1poisson__queue_1a16038861cd4e3cdb964914863eb62e7a" prot="private" static="no" mutable="no">
+        <type>const double</type>
+        <definition>const double rcppsw::ds::poisson_queue&lt; T &gt;::mc_lambda</definition>
+        <argsstring></argsstring>
+        <name>mc_lambda</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="218" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1ds_1_1poisson__queue_1ab7d1519b786d9461b7bad3a9a2769a42" prot="private" static="no" mutable="no">
+        <type>const double</type>
+        <definition>const double rcppsw::ds::poisson_queue&lt; T &gt;::mc_mu</definition>
+        <argsstring></argsstring>
+        <name>mc_mu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="219" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="219" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1a2d88a7e757d18698a16868aa353bb365" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::poisson_queue&lt; T &gt;::poisson_queue</definition>
+        <argsstring>(const poisson_queue &amp;)=delete</argsstring>
+        <name>poisson_queue</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1poisson__queue" kindref="compound">poisson_queue</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="92" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1aefc3504e7b08b9fb406f3322c9aa26fe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::poisson_queue&lt; T &gt;::poisson_queue</definition>
+        <argsstring>(double lambda, double mu, math::rng *rng)</argsstring>
+        <name>poisson_queue</name>
+        <param>
+          <type>double</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>mu</declname>
+        </param>
+        <param>
+          <type>math::rng *</type>
+          <declname>rng</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The enqueue rate for the queue. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dequeue rate for the queue. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="88" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="88" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1a1d3117f7971bc149d4d38bcac031ce40" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::ds::poisson_queue&lt; T &gt;::contains</definition>
+        <argsstring>(const T &amp;key) const</argsstring>
+        <name>contains</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Determine if <computeroutput>key</computeroutput> is currently contained in the queue. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="203" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="203" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1abdc9429ec4656fefd52202846966fd53" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boost::optional&lt; T &gt;</type>
+        <definition>boost::optional&lt;T&gt; rcppsw::ds::poisson_queue&lt; T &gt;::dequeue</definition>
+        <argsstring>(const types::timestep &amp;t, bool fake)</argsstring>
+        <name>dequeue</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">types::timestep</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>fake</declname>
+        </param>
+        <briefdescription>
+<para>Remove an item from the queue after an event has been triggered. This is a separate function from checking for the event for symmetry with the enqueue operation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fake</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Allow for a fake dequeue in which nothing is returned but the metadata for dequeueing is still updated as if there was something in the queue. Useful for simulating queues of infinite size/queues where the objects to dequeue cannot be put into the queue a priori.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current timestep. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="174" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="174" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1abed5cdf82164fe9fed62174fe6f2bced" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::ds::poisson_queue&lt; T &gt;::dequeue_check</definition>
+        <argsstring>(const types::timestep &amp;t)</argsstring>
+        <name>dequeue_check</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">types::timestep</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Check if the conditions are ready for dequeue at time <computeroutput>t</computeroutput> from the queue as part of a poisson process. Does not perform the dequeue operation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>TRUE</computeroutput> if an event has been triggered for dequeueing, <computeroutput>FALSE</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="133" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="133" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1a50b34a5f6fb667c3e65bc7fa53da1f76" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata" kindref="compound">op_metadata</ref></type>
+        <definition>op_metadata rcppsw::ds::poisson_queue&lt; T &gt;::dequeue_data</definition>
+        <argsstring>(void) const</argsstring>
+        <name>dequeue_data</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the current dequeue data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="103" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="103" bodyend="103"/>
+        <references refid="fpc_8h_1a20f1f339480bf24e5a10a93ce3f9d508">RCSW_FPC_NV</references>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1a609ab14ea489f180bfe0f4fde6592e04" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::ds::poisson_queue&lt; T &gt;::enqueue</definition>
+        <argsstring>(const T &amp;item, const types::timestep &amp;t)</argsstring>
+        <name>enqueue</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>item</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">types::timestep</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Add an item to the queue after an event has been triggered at time <computeroutput>t</computeroutput>. This is a separate function from checking for the event because it may be that generating the items to enqueue is a non-trivial and/or non-reversible task, and we only want to force the caller to do that when necessary. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="150" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="150" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1a8e2343d5a9e84e3d1ac4dfc8f6499e2a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::ds::poisson_queue&lt; T &gt;::enqueue_check</definition>
+        <argsstring>(const types::timestep &amp;t)</argsstring>
+        <name>enqueue_check</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">types::timestep</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Check if the conditions are ready for enqueueing into the queue as part of a poisson process. Does not perform the enqueue operation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>TRUE</computeroutput> if an event has been triggered for enqueueing, <computeroutput>FALSE</computeroutput> otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="115" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="115" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1aaff0fe8f7b42a26d1474e4abd6f7ca60" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structrcppsw_1_1ds_1_1poisson__queue_1_1op__metadata" kindref="compound">op_metadata</ref></type>
+        <definition>op_metadata rcppsw::ds::poisson_queue&lt; T &gt;::enqueue_data</definition>
+        <argsstring>(void) const</argsstring>
+        <name>enqueue_data</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the current enqueue data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="98" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="98" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1a701ccfd4cf6b204df2ee05c182ebeae4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto rcppsw::ds::poisson_queue&lt; T &gt;::Func</definition>
+        <argsstring>(Args &amp;&amp;... args) -&gt; decltype(std::declval&lt; decltype(Member)&gt;().Func(args...))</argsstring>
+        <name>Func</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="229" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="229" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1a0aafa3dc89cb688ceb3c65ed1d96a766" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto rcppsw::ds::poisson_queue&lt; T &gt;::Func</definition>
+        <argsstring>(Args &amp;&amp;... args) const -&gt; decltype(std::declval&lt; decltype(Member)&gt;().Func(args...))</argsstring>
+        <name>Func</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="228" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="228" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1a6d24bf0b8fa3f6f67e032b3e86913c6b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::ds::poisson_queue&lt; T &gt;::lambda</definition>
+        <argsstring>(void) const</argsstring>
+        <name>lambda</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="105" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1af4c7166f6afa916545b9f376aaf4f9b6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::ds::poisson_queue&lt; T &gt;::mu</definition>
+        <argsstring>(void) const</argsstring>
+        <name>mu</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="106" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="106" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1adf98c441abafbae970c7c78076d40949" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classrcppsw_1_1ds_1_1poisson__queue" kindref="compound">poisson_queue</ref> &amp;</type>
+        <definition>const poisson_queue&amp; rcppsw::ds::poisson_queue&lt; T &gt;::operator=</definition>
+        <argsstring>(const poisson_queue &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1poisson__queue" kindref="compound">poisson_queue</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="93" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1poisson__queue_1ad3d4f66311f6822c6d4ee532a6adb68d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::ds::poisson_queue&lt; T &gt;::reset_metrics</definition>
+        <argsstring>(void)</argsstring>
+        <name>reset_metrics</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="192" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="192" bodyend="198"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A wrapper around std::queue to make it more amenable to queueing theoretic analysis by tracking queue state. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::ds::poisson_queue&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1poisson__queue"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="56" column="20" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="56" bodyend="230"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1a1d3117f7971bc149d4d38bcac031ce40" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>contains</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1abdc9429ec4656fefd52202846966fd53" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>dequeue</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1abed5cdf82164fe9fed62174fe6f2bced" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>dequeue_check</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1a50b34a5f6fb667c3e65bc7fa53da1f76" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>dequeue_data</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1a609ab14ea489f180bfe0f4fde6592e04" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>enqueue</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1a8e2343d5a9e84e3d1ac4dfc8f6499e2a" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>enqueue_check</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1aaff0fe8f7b42a26d1474e4abd6f7ca60" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>enqueue_data</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1a0aafa3dc89cb688ceb3c65ed1d96a766" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>Func</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1a701ccfd4cf6b204df2ee05c182ebeae4" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>Func</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1a6d24bf0b8fa3f6f67e032b3e86913c6b" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>lambda</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1aa3fa21cc27791b63ab9e94b3d0b2893e" prot="private" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>m_queue</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1a620131724318bec65b3c1adcb5050906" prot="private" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>m_rng</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1a16038861cd4e3cdb964914863eb62e7a" prot="private" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>mc_lambda</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1ab7d1519b786d9461b7bad3a9a2769a42" prot="private" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>mc_mu</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1af4c7166f6afa916545b9f376aaf4f9b6" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>mu</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1adf98c441abafbae970c7c78076d40949" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1aefc3504e7b08b9fb406f3322c9aa26fe" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>poisson_queue</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1a2d88a7e757d18698a16868aa353bb365" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>poisson_queue</name></member>
+      <member refid="classrcppsw_1_1ds_1_1poisson__queue_1ad3d4f66311f6822c6d4ee532a6adb68d" prot="public" virt="non-virtual"><scope>rcppsw::ds::poisson_queue</scope><name>reset_metrics</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

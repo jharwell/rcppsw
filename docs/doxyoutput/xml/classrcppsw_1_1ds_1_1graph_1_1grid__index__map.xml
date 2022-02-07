@@ -1,0 +1,276 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1ds_1_1graph_1_1grid__index__map" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::ds::graph::grid_index_map</compoundname>
+    <basecompoundref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" prot="public" virt="non-virtual">rcppsw::patterns::decorator::decorator&lt; std::map&lt; TGrid, TVertex, std::less&lt; TGrid &gt; &gt; &gt;</basecompoundref>
+    <includes refid="grid__index__map_8hpp" local="no">grid_index_map.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TGrid</type>
+      </param>
+      <param>
+        <type>typename TVertex</type>
+      </param>
+      <param>
+        <type>typename TCompare</type>
+        <defval>std::less&lt;TGrid&gt;</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1ac1db8ba22924c7051310d3de81f1011c" prot="public" static="no">
+        <type>typename decorator_type::decoratee_type</type>
+        <definition>using rcppsw::ds::graph::grid_index_map&lt; TGrid, TVertex, TCompare &gt;::decoratee_type =  typename decorator_type::decoratee_type</definition>
+        <argsstring></argsstring>
+        <name>decoratee_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" line="62" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a08df0561cc4f5e0209a6c35ef1f25b24" prot="public" static="no">
+        <type>typename <ref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" kindref="compound">rpdecorator::decorator</ref>&lt; std::map&lt; TGrid, TVertex, TCompare &gt; &gt;::<ref refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a08df0561cc4f5e0209a6c35ef1f25b24" kindref="member">decorator_type</ref></type>
+        <definition>using rcppsw::ds::graph::grid_index_map&lt; TGrid, TVertex, TCompare &gt;::decorator_type =  typename rpdecorator::decorator&lt; std::map&lt;TGrid, TVertex, TCompare&gt; &gt;::decorator_type</definition>
+        <argsstring></argsstring>
+        <name>decorator_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" line="59" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a0c7ab5af1e1b9e49b63e6923ce09a441" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::grid_index_map&lt; TGrid, TVertex, TCompare &gt;::RCPPSW_DECORATE_CT</definition>
+        <argsstring>()</argsstring>
+        <name>RCPPSW_DECORATE_CT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" line="66" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a0c7bb472a2025dc4de107d3bfd8c19ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::grid_index_map&lt; TGrid, TVertex, TCompare &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(begin)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type>begin</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" line="72" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a1d47d204060ade02fd51594bd79d9739" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::grid_index_map&lt; TGrid, TVertex, TCompare &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(begin, const)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type>begin</type>
+        </param>
+        <param>
+          <type>const</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" line="74" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1ae38d6920eae699f15c54c50cc3dbc564" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::grid_index_map&lt; TGrid, TVertex, TCompare &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(end)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type>end</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" line="73" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a69f949c94d70d3c8659dc47877df9095" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::grid_index_map&lt; TGrid, TVertex, TCompare &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(end, const)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type>end</type>
+        </param>
+        <param>
+          <type>const</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" line="75" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a4bc87e2e932dc049883a869938d71615" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::grid_index_map&lt; TGrid, TVertex, TCompare &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(find)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type><ref refid="graph_8hpp_1a2b2d4d13c8b1fc4fb15e97c21264a80b" kindref="member">find</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" line="71" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a22327314e471598a3fa589b7485068e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::grid_index_map&lt; TGrid, TVertex, TCompare &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(find, const)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type><ref refid="graph_8hpp_1a2b2d4d13c8b1fc4fb15e97c21264a80b" kindref="member">find</ref></type>
+        </param>
+        <param>
+          <type>const</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" line="70" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1acbdbed72d27d06f53a426db1d231f40e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::grid_index_map&lt; TGrid, TVertex, TCompare &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(insert)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type>insert</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" line="68" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a451f49a3b2d28e15f4d83ecb083043d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::grid_index_map&lt; TGrid, TVertex, TCompare &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(operator[])</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type>operator</type>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" line="69" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1af5286ed9fd911fadd44e4c055cf0447b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::graph::grid_index_map&lt; TGrid, TVertex, TCompare &gt;::RCPPSW_DECORATE_DECLDEF</definition>
+        <argsstring>(size, const)</argsstring>
+        <name>RCPPSW_DECORATE_DECLDEF</name>
+        <param>
+          <type>size</type>
+        </param>
+        <param>
+          <type>const</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" line="76" column="3"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Maps a coordinate (e.g., XYZ tuple) to a vertex property. Used for fast queries of &quot;Does this graph contain this vertex&quot;, because in general there is no way to answer that query other than to search the whole graph. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::patterns::decorator::decorator&lt; std::map&lt; TGrid, TVertex, std::less&lt; TGrid &gt; &gt; &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::graph::grid_index_map&lt; TGrid, TVertex, TCompare &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::patterns::decorator::decorator&lt; std::map&lt; TGrid, TVertex, std::less&lt; TGrid &gt; &gt; &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::graph::grid_index_map&lt; TGrid, TVertex, TCompare &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" line="57" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/grid_index_map.hpp" bodystart="55" bodyend="77"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a519a95005089f4b8c476dc3b5dc0f3ab" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>decoratee</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a34ab8f2525dae8185bf161985885e8c2" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>decoratee</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1ac1db8ba22924c7051310d3de81f1011c" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>decoratee_type</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a64c494d06f4fcbc9e52345db78510791" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a32c13ab58d3bd71c61030090590a9d62" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a280934f4a5829a42c7916ba29560d645" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a0e7167ad4e2d030d6c451a867db8af5e" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a3856e90a033659fc506a77c613bfc89f" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a08df0561cc4f5e0209a6c35ef1f25b24" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>decorator_type</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a0f947db92e941d973426b19c1aa1fa9c" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1aa7dcaa3ec447cb1af590f4a64de10b09" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a0c7ab5af1e1b9e49b63e6923ce09a441" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>RCPPSW_DECORATE_CT</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1acbdbed72d27d06f53a426db1d231f40e" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a451f49a3b2d28e15f4d83ecb083043d7" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a22327314e471598a3fa589b7485068e8" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a4bc87e2e932dc049883a869938d71615" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a0c7bb472a2025dc4de107d3bfd8c19ab" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1ae38d6920eae699f15c54c50cc3dbc564" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a1d47d204060ade02fd51594bd79d9739" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1a69f949c94d70d3c8659dc47877df9095" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1ds_1_1graph_1_1grid__index__map_1af5286ed9fd911fadd44e4c055cf0447b" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>RCPPSW_DECORATE_DECLDEF</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1aa91bf92ef0eda53cc43ce584c40f5c49" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>redecorate</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1af34e316851d6ccde1ab339f9dadf0c2a" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>redecorate_with</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a1816de4c343796e84f48c3603b8041ab" prot="public" virt="virtual"><scope>rcppsw::ds::graph::grid_index_map</scope><name>~decorator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

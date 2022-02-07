@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1metrics_1_1config_1_1metrics__config" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>rcppsw::metrics::config::metrics_config</compoundname>
+    <basecompoundref refid="structrcppsw_1_1config_1_1base__config" prot="public" virt="non-virtual">rcppsw::config::base_config</basecompoundref>
+    <includes refid="metrics__config_8hpp" local="no">metrics_config.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1config_1_1metrics__config_1a66016b842e5447753846a6907340d3ea" prot="public" static="no" mutable="no">
+        <type>rmconfig::file_sink_config</type>
+        <definition>rmconfig::file_sink_config rcppsw::metrics::config::metrics_config::csv</definition>
+        <argsstring></argsstring>
+        <name>csv</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/metrics_config.hpp" line="57" column="33" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/metrics_config.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1config_1_1metrics__config_1a03a4d5ce60dfccffcecace24f987747d" prot="public" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path rcppsw::metrics::config::metrics_config::metrics_path</definition>
+        <argsstring></argsstring>
+        <name>metrics_path</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Path to the output directory for metrics RELATIVE to the overall output directory. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/metrics_config.hpp" line="56" column="33" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/metrics_config.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1config_1_1metrics__config_1aa02faf2d4edd8151dc6faf2990fc2913" prot="public" static="no" mutable="no">
+        <type>rmconfig::network_sink_config</type>
+        <definition>rmconfig::network_sink_config rcppsw::metrics::config::metrics_config::network</definition>
+        <argsstring></argsstring>
+        <name>network</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/metrics_config.hpp" line="58" column="33" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/metrics_config.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::config::base_config</label>
+        <link refid="structrcppsw_1_1config_1_1base__config"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::config::metrics_config</label>
+        <link refid="structrcppsw_1_1metrics_1_1config_1_1metrics__config"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::config::base_config</label>
+        <link refid="structrcppsw_1_1config_1_1base__config"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::config::metrics_config</label>
+        <link refid="structrcppsw_1_1metrics_1_1config_1_1metrics__config"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/metrics_config.hpp" line="51" column="49" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/metrics_config.hpp" bodystart="51" bodyend="59"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a1cfd52de449665fdfe4b2a42c2248f96" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::metrics_config</scope><name>base_config</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a9a86158e067c0ed5b8b3c16760878473" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::metrics_config</scope><name>base_config</name></member>
+      <member refid="structrcppsw_1_1metrics_1_1config_1_1metrics__config_1a66016b842e5447753846a6907340d3ea" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::metrics_config</scope><name>csv</name></member>
+      <member refid="structrcppsw_1_1metrics_1_1config_1_1metrics__config_1a03a4d5ce60dfccffcecace24f987747d" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::metrics_config</scope><name>metrics_path</name></member>
+      <member refid="structrcppsw_1_1metrics_1_1config_1_1metrics__config_1aa02faf2d4edd8151dc6faf2990fc2913" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::metrics_config</scope><name>network</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a32d1e916aa385603fec11cefc9fa30be" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::metrics_config</scope><name>operator=</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a4ddde3073572a1095a9aeeb7591cb226" prot="public" virt="virtual"><scope>rcppsw::metrics::config::metrics_config</scope><name>~base_config</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

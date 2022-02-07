@@ -1,0 +1,138 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/rcppsw.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/rcppsw.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'rcppsw/common/common\&.hpp'\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::al\fP"
+.br
+.ti -1c
+.RI " \fBrcppsw::algorithm\fP"
+.br
+.RI "Various algorithms: closest pair, max subarray, clustering\&. "
+.ti -1c
+.RI " \fBrcppsw::algorithm::clustering\fP"
+.br
+.RI "Different clustering algorithms: kmeans, entropy\&. "
+.ti -1c
+.RI " \fBrcppsw::config\fP"
+.br
+.RI "Base namespace for run-time configuration parsing and data containers\&. Currently includes base class implementations for: "
+.ti -1c
+.RI " \fBrcppsw::control\fP"
+.br
+.RI "Control theory classes: periodic/aperiodic waveform generators, PID loops, etc\&. and their configuration\&. "
+.ti -1c
+.RI " \fBrcppsw::ds\fP"
+.br
+.RI "Data structures: 2D/3D lattice grids, 2D/3D discretizing grids to overlay onto continuous space, Poisson queue, rtree for 2D space, heterogeneous stacked 2D grid, type map for using in C++ quasi-reflection\&. "
+.ti -1c
+.RI " \fBrcppsw::ds::graph\fP"
+.br
+.RI "Graph data structures: Heterogeneous 3D grid graph\&. "
+.ti -1c
+.RI " \fBrcppsw::ds::metrics\fP"
+.br
+.ti -1c
+.RI " \fBrcppsw::er\fP"
+.br
+.RI "The Event Reporting framework used in RCPPSW and its derived projects\&. "
+.ti -1c
+.RI " \fBrcppsw::math\fP"
+.br
+.RI "Pure mathematical classes such as vectors, ranges, sigmoids, etc\&. "
+.ti -1c
+.RI " \fBrcppsw::metrics\fP"
+.br
+.RI "Base metric interfaces and the collectors for them\&. "
+.ti -1c
+.RI " \fBrcppsw::metrics::config\fP"
+.br
+.ti -1c
+.RI " \fBrcppsw::metrics::config::xml\fP"
+.br
+.ti -1c
+.RI " \fBrcppsw::mpl\fP"
+.br
+.RI "Meta programming namespace\&. Mainly a few aliases around things which boost provides\&. "
+.ti -1c
+.RI " \fBrcppsw::multiprocess\fP"
+.br
+.RI "Multi-process variants of other classes: queue\&. Forkable interface\&. "
+.ti -1c
+.RI " \fBrcppsw::multithread\fP"
+.br
+.RI "Multi-threaded variants of other classes: FSM, queue, vector, threadable interface for daemon-esque classes, lockable interface\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns\fP"
+.br
+.RI "Design pattern templates and interfaces\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns::decorator\fP"
+.br
+.RI "Decorator design pattern: pointer and member variants\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns::factory\fP"
+.br
+.RI "Factory design pattern: sharing/releasing, multifactory\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns::fsm\fP"
+.br
+.RI "The Finite State Machine (FSM) design pattern: simple and hierarchical variants\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns::pimpl\fP"
+.br
+.RI "The PIMPL design pattern (the boost candidate did not work)\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns::prototype\fP"
+.br
+.RI "Prototype design pattern interfaces and classes: clonable, caching factory\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns::singleton\fP"
+.br
+.RI "Interfaces for the singleton design pattern\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns::visitor\fP"
+.br
+.RI "Visitor design pattern variants: polymorphic, filtered, etc\&. "
+.ti -1c
+.RI " \fBrcppsw::types\fP"
+.br
+.RI "Common non-primitive types: Spatial distance/range, timestep, UUID for types, named type (for eliminating bugs caused by implicit conversions between primitive types which do not elicit a compiler warning)\&. "
+.ti -1c
+.RI " \fBrcppsw::utils\fP"
+.br
+.RI "Various utility things which don't fit anywhere else: Base CLI parsing class, file/line parsers, colors, enum utilities, string utilities\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2019 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

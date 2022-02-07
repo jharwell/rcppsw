@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action1" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::fsm::hfsm_state_action1</compoundname>
+    <basecompoundref refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state" prot="public" virt="non-virtual">rcppsw::patterns::fsm::hfsm_state</basecompoundref>
+    <includes refid="hfsm__state_8hpp" local="no">hfsm_state.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class FSM</type>
+      </param>
+      <param>
+        <type>class Event</type>
+      </param>
+      <param>
+        <type>int(FSM::*)(Event *)</type>
+        <declname>Handler</declname>
+        <defname>Handler</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action1_1a522e3becda60a040fefc3df17d21d7ad" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::fsm::hfsm_state_action1&lt; FSM, Event, Handler &gt;::hfsm_state_action1</definition>
+        <argsstring>(hfsm_state *parent)</argsstring>
+        <name>hfsm_state_action1</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state" kindref="compound">hfsm_state</ref> *</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm_state.hpp" line="98" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm_state.hpp" bodystart="98" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action1_1afa2ac61ee00be44878241d9d443476fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::fsm::hfsm_state_action1&lt; FSM, Event, Handler &gt;::~hfsm_state_action1</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~hfsm_state_action1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm_state.hpp" line="99" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action1_1a491d1acb9146b6ed579daca9b9d24589" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>int</type>
+        <definition>int rcppsw::patterns::fsm::hfsm_state_action1&lt; FSM, Event, Handler &gt;::invoke_state_action</definition>
+        <argsstring>(base_fsm *fsm, event_data *event) const override</argsstring>
+        <name>invoke_state_action</name>
+        <reimplements refid="classrcppsw_1_1patterns_1_1fsm_1_1state_1a4eccda20940c245258784556c9713eee">invoke_state_action</reimplements>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm" kindref="compound">base_fsm</ref> *</type>
+          <declname>sm</declname>
+        </param>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1event__data" kindref="compound">event_data</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Called by the state machine engine to execute a state action. If a guard condition exists and it evaluates to false, the state action will not execute. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state machine instance. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event data.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>integer indicating whether or not the event was handled. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm_state.hpp" line="100" column="7" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm_state.hpp" bodystart="100" bodyend="116"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>FSM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current state machine class. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state function event data type (derived from event). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state machine member function pointer, that takes ONE argument. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::patterns::fsm::hfsm_state</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::hfsm_state_action1&lt; FSM, Event, Handler &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action1"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw::patterns::fsm::state</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::patterns::fsm::hfsm_state</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::hfsm_state_action1&lt; FSM, Event, Handler &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action1"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw::patterns::fsm::state</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm_state.hpp" line="96" column="43" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm_state.hpp" bodystart="96" bodyend="117"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state_1a32dfa6e4b98b84b7bb5c9438847736a3" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm_state_action1</scope><name>hfsm_state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state_1ad735282dd42da06f59f8b994b589241c" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm_state_action1</scope><name>hfsm_state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action1_1a522e3becda60a040fefc3df17d21d7ad" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm_state_action1</scope><name>hfsm_state_action1</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action1_1a491d1acb9146b6ed579daca9b9d24589" prot="public" virt="virtual"><scope>rcppsw::patterns::fsm::hfsm_state_action1</scope><name>invoke_state_action</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state_1a9df9ce9a9d78a76d72e88c0f7932cafe" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm_state_action1</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state_1a13da60f5e2a5993712f74c3aa67cafab" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm_state_action1</scope><name>parent</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state_1ac78ff2658dfb74144a37ae37fbfc2b8f" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm_state_action1</scope><name>parent</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state_1ae8e0476fb14103a9ee266aa2ba4e96b3" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm_state_action1</scope><name>state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state_1a990ded646f9c5c46c0c99212c0856797" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm_state_action1</scope><name>state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state_1ad564015589ba2e1c9f4980f71b15f520" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm_state_action1</scope><name>~hfsm_state</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action1_1afa2ac61ee00be44878241d9d443476fd" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::hfsm_state_action1</scope><name>~hfsm_state_action1</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state_1a786e9d8746a76418b78dd7df21dd8136" prot="public" virt="virtual"><scope>rcppsw::patterns::fsm::hfsm_state_action1</scope><name>~state</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

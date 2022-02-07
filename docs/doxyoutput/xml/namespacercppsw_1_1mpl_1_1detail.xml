@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1mpl_1_1detail" kind="namespace" language="C++">
+    <compoundname>rcppsw::mpl::detail</compoundname>
+    <innerclass refid="structrcppsw_1_1mpl_1_1detail_1_1detector" prot="public">rcppsw::mpl::detail::detector</innerclass>
+    <innerclass refid="structrcppsw_1_1mpl_1_1detail_1_1detector_3_01TFailType_00_01std_1_1void__t_3_01TFuncDecltype_3_32bc8d388b776506b636a744392f8897" prot="public">rcppsw::mpl::detail::detector&lt; TFailType, std::void_t&lt; TFuncDecltype&lt; Args... &gt; &gt;, TFuncDecltype, Args... &gt;</innerclass>
+    <innerclass refid="structrcppsw_1_1mpl_1_1detail_1_1ExtendTList" prot="public">rcppsw::mpl::detail::ExtendTList</innerclass>
+    <innerclass refid="structrcppsw_1_1mpl_1_1detail_1_1ExtendTList_3_01std_1_1tuple_3_01Ts_8_8_8_01_4_00_01T_01_4" prot="public">rcppsw::mpl::detail::ExtendTList&lt; std::tuple&lt; Ts... &gt;, T &gt;</innerclass>
+    <innerclass refid="structrcppsw_1_1mpl_1_1detail_1_1ExtendTList_3_01std_1_1tuple_3_01void_01_4_00_01T_01_4" prot="public">rcppsw::mpl::detail::ExtendTList&lt; std::tuple&lt; void &gt;, T &gt;</innerclass>
+    <innerclass refid="structrcppsw_1_1mpl_1_1detail_1_1rename__impl" prot="public">rcppsw::mpl::detail::rename_impl</innerclass>
+    <innerclass refid="structrcppsw_1_1mpl_1_1detail_1_1rename__impl_3_01A_3_01T_8_8_8_01_4_00_01B_01_4" prot="public">rcppsw::mpl::detail::rename_impl&lt; A&lt; T... &gt;, B &gt;</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/mpl.hpp" line="99" column="16"/>
+  </compounddef>
+</doxygen>

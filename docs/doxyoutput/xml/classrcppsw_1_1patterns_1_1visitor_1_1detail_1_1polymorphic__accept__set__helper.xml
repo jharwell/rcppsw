@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1polymorphic__accept__set__helper" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>rcppsw::patterns::visitor::detail::polymorphic_accept_set_helper</compoundname>
+    <includes refid="polymorphic__visitable_8hpp" local="no">polymorphic_visitable.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1polymorphic__accept__set__helper_1a6bedb556cb2eb54ee8963c0740990029" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::patterns::visitor::detail::polymorphic_accept_set_helper&lt; T &gt;::~polymorphic_accept_set_helper</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~polymorphic_accept_set_helper</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/polymorphic_visitable.hpp" line="59" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1polymorphic__accept__set__helper_1ad681ab3094fe51fbc422c1c5d39d44a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::patterns::visitor::detail::polymorphic_accept_set_helper&lt; T &gt;::accept</definition>
+        <argsstring>(T &amp;visitor)=0</argsstring>
+        <name>accept</name>
+        <param>
+          <type>T &amp;</type>
+          <declname>visitor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/polymorphic_visitable.hpp" line="58" column="16"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Helper class to provide the actual implementation of the visitor pattern, receiving end. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type to accept. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::visitor::detail::polymorphic_accept_set_helper&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1polymorphic__accept__set__helper"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/polymorphic_visitable.hpp" line="50" column="36" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/polymorphic_visitable.hpp" bodystart="50" bodyend="54"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1polymorphic__accept__set__helper_1ad681ab3094fe51fbc422c1c5d39d44a5" prot="public" virt="pure-virtual"><scope>rcppsw::patterns::visitor::detail::polymorphic_accept_set_helper</scope><name>accept</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1polymorphic__accept__set__helper_1a6bedb556cb2eb54ee8963c0740990029" prot="public" virt="virtual"><scope>rcppsw::patterns::visitor::detail::polymorphic_accept_set_helper</scope><name>~polymorphic_accept_set_helper</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

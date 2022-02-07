@@ -111,7 +111,8 @@ project_keys = ['algorithm',
                 'multithread',
                 'multiprocess']
 
-breathe_projects = {'rcppsw': '../build/docs/rcppsw/xml'}
+# breathe_projects = {'rcppsw': '../build/docs/rcppsw/xml'}
+breathe_projects = {'rcppsw': '../docs/doxyoutput/xml'}
 breathe_projects_source = {'rcppsw': ('../include/rcppsw', get_subtree(''))}
 breathe_default_project = "rcppsw"
 breathe_default_members = ('members',)
@@ -127,11 +128,12 @@ exhale_args = {
     "afterTitleDescription": textwrap.dedent('''
        .. note::
 
-          Some functions declared+defined within classes using variadic macros might not be
-          included, due to limits in the doxygen+breathe+exhale toolchain. Such functions are
-          usually found in classes which wrap or decorate large portions of a base class
-          functionality/member variable functionality (e.g., Poisson Queue).
-    '''),
+          Some functions declared+defined within classes using variadic macros
+          might not be included, due to limits in the doxygen+breathe+exhale
+          toolchain. Such functions are usually found in classes which wrap or
+          decorate large portions of a base class functionality/member variable
+          functionality (e.g., Poisson Queue).  '''),
+
     "doxygenStripFromPath": "..",
     "verboseBuild": False,
     'exhaleExecutesDoxygen': False,
@@ -250,10 +252,22 @@ epub_exclude_files = ['search.html']
 intersphinx_mapping = {'https://docs.python.org/': None}
 
 # HACK HACK HACK
-if os.environ.get('READTHEDOCS', None):
-    subprocess.call('cd ../libra; git checkout devel', shell=True)
-    subprocess.call('cd .. ;mkdir build; cd build; ls -alh', shell=True)
-    subprocess.call(
-        'cd ../build; cmake -DCMAKE_BUILD_TYPE=DEV -DLIBRA_RTD_BUILD=YES ..',
-        shell=True)
-    subprocess.call('cd ../build; make documentation', shell=True)
+#
+# 2022/2/5: This doesn't work anymore on ReadTheDocs, because you can't use sudo
+# to install stuff system-wide, and it (apparently) can't find things that are
+# installed elsewhere, and there is no way to upload pre-built docs.
+#
+# So for now, I built the XML locally and commit it to github so it is accessible.
+#
+# if os.environ.get('READTHEDOCS', None):
+#     subprocess.call(("wget https://raw.githubusercontent.com/swarm-robotics/bootstrap/master/bootstrap.sh;"
+#                      "chmod +x bootstrap.sh;"
+#                      "./bootstrap.sh -f"),
+#                     shell=True)
+
+#     subprocess.call(('mkdir ../build;'
+#                      'cd ../build;'
+#                      'cmake -DCMAKE_BUILD_TYPE=DEV -DCMAKE_INSTALL_PREFIX=$HOME/.local -DLIBRA_RTD_BUILD=YES -DLIBRA_ER=NONE ..;'
+#                      'make;'
+#                      'make documentation;'),
+#                     shell=True)

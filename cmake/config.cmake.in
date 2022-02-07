@@ -1,0 +1,45 @@
+@PACKAGE_INIT@
+
+set(rcppsw_INSTALL_PREFIX @CMAKE_INSTALL_PREFIX@)
+
+if(CMAKE_CROSSCOMPILING)
+  set(BOOST_ROOT @CMAKE_INSTALL_PREFIX@)
+endif()
+
+find_package(Boost 1.71.0
+  COMPONENTS
+  system
+  filesystem
+  thread
+  graph
+  stacktrace_basic
+  program_options
+  REQUIRED
+  )
+find_package(rcsw
+  COMPONENTS
+  common
+  REQUIRED)
+
+add_library(ticpp_ticpp::ticpp_ticpp STATIC IMPORTED GLOBAL)
+set_target_properties(ticpp_ticpp::ticpp_ticpp PROPERTIES
+  IMPORTED_LOCATION ${rcppsw_INSTALL_PREFIX}/lib/libticpp.a
+  )
+
+set(rcppsw_config_FOUND @rcppsw_config_FOUND@)
+set(rcppsw_control_FOUND @rcppsw_control_FOUND@)
+set(rcppsw_er_FOUND @rcppsw_er_FOUND@)
+set(rcppsw_math_FOUND @rcppsw_math_FOUND@)
+set(rcppsw_metrics_FOUND @rcppsw_metrics_FOUND@)
+set(rcppsw_multiprocess_FOUND @rcppsw_multiprocess_FOUND@)
+set(rcppsw_multithread_FOUND @rcppsw_multithread_FOUND@)
+set(rcppsw_patterns_FOUND @rcppsw_patterns_FOUND@)
+set(rcppsw_utils_FOUND @rcppsw_utils_FOUND@)
+set(rcppsw_types_FOUND @rcppsw_types_FOUND@)
+
+include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@-exports.cmake")
+
+set(rcppsw_INCLUDE_DIRS ${rcppsw_INSTALL_PREFIX}/include)
+
+check_required_components(rcppsw)
+# set(rcppsw_FOUND 1)

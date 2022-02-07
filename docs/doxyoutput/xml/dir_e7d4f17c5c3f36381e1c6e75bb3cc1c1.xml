@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_e7d4f17c5c3f36381e1c6e75bb3cc1c1" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/types</compoundname>
+    <innerfile refid="discretize__ratio_8hpp">discretize_ratio.hpp</innerfile>
+    <innerfile refid="distance__measure_8hpp">distance_measure.hpp</innerfile>
+    <innerfile refid="manhattan__dist_8hpp">manhattan_dist.hpp</innerfile>
+    <innerfile refid="named__type_8hpp">named_type.hpp</innerfile>
+    <innerfile refid="spatial__dist_8hpp">spatial_dist.hpp</innerfile>
+    <innerfile refid="spatial__range_8hpp">spatial_range.hpp</innerfile>
+    <innerfile refid="timestep_8hpp">timestep.hpp</innerfile>
+    <innerfile refid="type__uuid_8hpp">type_uuid.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/types/"/>
+  </compounddef>
+</doxygen>

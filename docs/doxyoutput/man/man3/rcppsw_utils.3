@@ -1,0 +1,67 @@
+.TH "rcppsw::utils" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::utils \- Various utility things which don't fit anywhere else: Base CLI parsing class, file/line parsers, colors, enum utilities, string utilities\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBbase_cli\fP"
+.br
+.RI "Base class for command line interfaces\&. Uses boost to do the actual parsing\&. "
+.ti -1c
+.RI "class \fBcolor\fP"
+.br
+.RI "A simple RGBA class representing colors as 4 8-bit numbers\&. "
+.ti -1c
+.RI "class \fBfile_parser\fP"
+.br
+.RI "File parsing class using template design pattern\&. Parses each line of a file into a vector of whitespace delimited tokens, and returns a vector of vectors (1 vector of parsed tokens per line)\&. "
+.ti -1c
+.RI "class \fBline_parser\fP"
+.br
+.RI "Parses a single line into a vector of tokens broken on the specified delimiter\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename T > bool \fBparse_values\fP (std::istream &is, size_t n_fields, T *buf, char delim='\\n')"
+.br
+.RI "Parse values from a delimited string stream into a set of tokens\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Various utility things which don't fit anywhere else: Base CLI parsing class, file/line parsers, colors, enum utilities, string utilities\&. 
+.SH "Function Documentation"
+.PP 
+.SS "template<typename T > bool rcppsw::utils::parse_values (std::istream & is, size_t n_fields, T * buf, char delim = \fC'\\n'\fP)"
+
+.PP
+Parse values from a delimited string stream into a set of tokens\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIis\fP The input stream\&. 
+.br
+\fIn_fields\fP The # of fields that should exist in the stream\&. 
+.br
+\fIbuf\fP The buffer to put the tokens into\&. 
+.br
+\fIdelim\fP The delimiter separating the tokens (\\n by default)\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fCTRUE\fP if n_fields tokens were parsed from the stream, and \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

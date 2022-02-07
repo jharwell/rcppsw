@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classvisit__set" kind="class" language="C++" prot="public">
+    <compoundname>visit_set</compoundname>
+    <includes refid="visitor_8hpp" local="no">visitor.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename...</type>
+        <declname>Ts</declname>
+        <defname>Ts</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>General case for template expansion. Provides classes the ability to explicitly control what types of classes they can visit (limited to the specified types AND their parent classes). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>visit_set&lt; Ts &gt;</label>
+        <link refid="classvisit__set"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" line="68" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" bodystart="68" bodyend="68"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

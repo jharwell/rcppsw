@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1algorithm_1_1result__type2D" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::algorithm::result_type2D</compoundname>
+    <includes refid="closest__pair2D_8hpp" local="no">closest_pair2D.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1algorithm_1_1result__type2D_1a9757a4d6d9262dcf8e946202ef4a6889" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::algorithm::result_type2D&lt; T &gt;::dist</definition>
+        <argsstring></argsstring>
+        <name>dist</name>
+        <initializer>{ 0.0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" line="61" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1algorithm_1_1result__type2D_1acd18e361e6ab058dd2c6b5f4e7206eff" prot="public" static="no" mutable="no">
+        <type>T</type>
+        <definition>T rcppsw::algorithm::result_type2D&lt; T &gt;::p1</definition>
+        <argsstring></argsstring>
+        <name>p1</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" line="59" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1algorithm_1_1result__type2D_1a35eea635ee45a6151de871a8a57c1182" prot="public" static="no" mutable="no">
+        <type>T</type>
+        <definition>T rcppsw::algorithm::result_type2D&lt; T &gt;::p2</definition>
+        <argsstring></argsstring>
+        <name>p2</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" line="60" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structrcppsw_1_1algorithm_1_1result__type2D_1aab8ee9744e099b0a3d04ca28aac4c024" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::algorithm::result_type2D&lt; T &gt;::operator&lt;</definition>
+        <argsstring>(const result_type2D&lt; T &gt; &amp;other) const</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1algorithm_1_1result__type2D" kindref="compound">result_type2D</ref>&lt; T &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" line="63" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" bodystart="63" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="structrcppsw_1_1algorithm_1_1result__type2D_1a3e08d3a8e444c88e72f127007143283f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::algorithm::result_type2D&lt; T &gt;::operator&lt;</definition>
+        <argsstring>(double d) const</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>double</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" line="62" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" bodystart="62" bodyend="62"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Contains (1) the closest pair of points, (2) the distance between them, (3) comparator functions. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::algorithm::result_type2D&lt; T &gt;</label>
+        <link refid="structrcppsw_1_1algorithm_1_1result__type2D"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" line="58" column="20" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" bodystart="58" bodyend="66"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1algorithm_1_1result__type2D_1a9757a4d6d9262dcf8e946202ef4a6889" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::result_type2D</scope><name>dist</name></member>
+      <member refid="structrcppsw_1_1algorithm_1_1result__type2D_1a3e08d3a8e444c88e72f127007143283f" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::result_type2D</scope><name>operator&lt;</name></member>
+      <member refid="structrcppsw_1_1algorithm_1_1result__type2D_1aab8ee9744e099b0a3d04ca28aac4c024" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::result_type2D</scope><name>operator&lt;</name></member>
+      <member refid="structrcppsw_1_1algorithm_1_1result__type2D_1acd18e361e6ab058dd2c6b5f4e7206eff" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::result_type2D</scope><name>p1</name></member>
+      <member refid="structrcppsw_1_1algorithm_1_1result__type2D_1a35eea635ee45a6151de871a8a57c1182" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::result_type2D</scope><name>p2</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,315 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1metrics_1_1fs__output__manager" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::metrics::fs_output_manager</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; fs_output_manager &gt;</basecompoundref>
+    <basecompoundref refid="classrcppsw_1_1metrics_1_1base__manager" prot="public" virt="non-virtual">rcppsw::metrics::base_manager</basecompoundref>
+    <includes refid="fs__output__manager_8hpp" local="no">fs_output_manager.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1fs__output__manager_1ab0b37e4b277ae128f448ba09995fdd49" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1metrics_1_1collector__group" kindref="compound">rmetrics::collector_group</ref></type>
+        <definition>rmetrics::collector_group rcppsw::metrics::fs_output_manager::m_append</definition>
+        <argsstring></argsstring>
+        <name>m_append</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" line="123" column="29" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1fs__output__manager_1a143cda269a0eb13f6dd98dc2a234f51e" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1metrics_1_1collector__group" kindref="compound">rmetrics::collector_group</ref></type>
+        <definition>rmetrics::collector_group rcppsw::metrics::fs_output_manager::m_create</definition>
+        <argsstring></argsstring>
+        <name>m_create</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" line="125" column="29" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1fs__output__manager_1af0539441bcae44e94b8fa9670ee0bbab" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path rcppsw::metrics::fs_output_manager::m_metrics_path</definition>
+        <argsstring></argsstring>
+        <name>m_metrics_path</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" line="122" column="29" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1fs__output__manager_1ad8500c35869b2051c1f06b29cee78bce" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1metrics_1_1collector__group" kindref="compound">rmetrics::collector_group</ref></type>
+        <definition>rmetrics::collector_group rcppsw::metrics::fs_output_manager::m_truncate</definition>
+        <argsstring></argsstring>
+        <name>m_truncate</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" line="124" column="29" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1fs__output__manager_1a3d3d483b116801516461d12074b7f81a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::fs_output_manager::fs_output_manager</definition>
+        <argsstring>(const rmconfig::metrics_config *mconfig, const fs::path &amp;output_root)</argsstring>
+        <name>fs_output_manager</name>
+        <param>
+          <type>const rmconfig::metrics_config *</type>
+          <declname>mconfig</declname>
+        </param>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>output_root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" line="60" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1fs__output__manager_1a4cef3f8a13f707a690fa7832790de833" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::fs_output_manager::~fs_output_manager</definition>
+        <argsstring>(void) override=default</argsstring>
+        <name>~fs_output_manager</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" line="62" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1fs__output__manager_1a997d09a6f858d87dd63401de9c138288" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::fs_output_manager::collector_preregister</definition>
+        <argsstring>(const std::string &amp;scoped_name, const rmetrics::output_mode &amp;mode) override</argsstring>
+        <name>collector_preregister</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__manager_1ac400893189c8599c6b362433b5fdec11">collector_preregister</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>scoped_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" kindref="member">rmetrics::output_mode</ref> &amp;</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+<para>To be called before <ref refid="classrcppsw_1_1metrics_1_1base__manager_1ab4c78173cfdbd539b96e319b5a6b8f26" kindref="member">collector_register()</ref>, in order to correctly set up the collector map for the collector with the specified scoped name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If you forget to do this you will get a segfault. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" line="66" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" bodystart="66" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1fs__output__manager_1adf94cef27fba9e24f8aa9405b9930da6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::fs_output_manager::finalize</definition>
+        <argsstring>(void) override</argsstring>
+        <name>finalize</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__manager_1a0fe2f062a289ae6064aeb539fcb123ba">finalize</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decorator around collector_group::finalize_all(). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" line="114" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" bodystart="114" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1fs__output__manager_1afc172d19400e7cd33bbeb287bffb5f98" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::fs_output_manager::flush</definition>
+        <argsstring>(const rmetrics::output_mode &amp;mode) override</argsstring>
+        <name>flush</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__manager_1a885a1c83f6b6cd6c4bd758144672354e">flush</reimplements>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" kindref="member">rmetrics::output_mode</ref> &amp;</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" line="86" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" bodystart="86" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1fs__output__manager_1a45b3ffdde94b1ef6e63d3e00b08301ee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::fs_output_manager::initialize</definition>
+        <argsstring>(void) override</argsstring>
+        <name>initialize</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__manager_1aee2d6c7bcba2625b53a0341a6c17cf4f">initialize</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decorator around <ref refid="classrcppsw_1_1metrics_1_1collector__group_1ab5a0b85257c72d34ef06260a66a1b5a6" kindref="member">collector_group::initialize()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" line="80" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" bodystart="80" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1fs__output__manager_1a8e60a5b664259e30bcf970356d383121" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::fs_output_manager::interval_reset</definition>
+        <argsstring>(void) override</argsstring>
+        <name>interval_reset</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__manager_1ac393bd539adbd14781d44d1fc18c6303">interval_reset</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decorator around <ref refid="classrcppsw_1_1metrics_1_1collector__group_1a158e9534e8654ea1d4cea07d9d819572" kindref="member">collector_group::interval_reset()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" line="108" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" bodystart="108" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1fs__output__manager_1a3dd662269c6ef990f22750d1a5c9c5bc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fs::path &amp;</type>
+        <definition>const fs::path&amp; rcppsw::metrics::fs_output_manager::metrics_path</definition>
+        <argsstring>(void) const</argsstring>
+        <name>metrics_path</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" line="64" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" bodystart="64" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1fs__output__manager_1a48064828936c8c36fb4de3dc4ecc372b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::fs_output_manager::timestep_inc</definition>
+        <argsstring>(void) override</argsstring>
+        <name>timestep_inc</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__manager_1ab8d4923c9f9a641d76c72c424ff0943e">timestep_inc</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decorator around <ref refid="classrcppsw_1_1metrics_1_1collector__group_1a23ddbcd59ffecbb724ef65e52216463e" kindref="member">collector_group::timestep_inc()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" line="102" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" bodystart="102" bodyend="106"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class for managing metrics collected from variable sources across all possible collector output modes and sinks which ultimately output their metrics to the filesystem. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>rcppsw::metrics::base_manager</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__manager"/>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; fs_output_manager &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::fs_output_manager</label>
+        <link refid="classrcppsw_1_1metrics_1_1fs__output__manager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>rcppsw::metrics::base_manager</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__manager"/>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; fs_output_manager &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::fs_output_manager</label>
+        <link refid="classrcppsw_1_1metrics_1_1fs__output__manager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" line="58" column="56" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp" bodystart="57" bodyend="127"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a8bbb1e653e3eeda4c7e6f229fd289763" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>base_manager</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a0c8cb07c3e3aaac94854c345a74597ff" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>collect</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a9ada1fd8998e902a52e67c4b8eb30476" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>collect_if</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a76debcfab748d9e56fc6c46f03a95cc7" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>collector_map</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1ab4b144bce60014574080956e061e2f78" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>collector_map_type</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1fs__output__manager_1a997d09a6f858d87dd63401de9c138288" prot="public" virt="virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>collector_preregister</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1ab4c78173cfdbd539b96e319b5a6b8f26" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>collector_register</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a803b2fd9fe0072dc8bd4438c005d257b" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>collector_unregister</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1fs__output__manager_1adf94cef27fba9e24f8aa9405b9930da6" prot="public" virt="virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>finalize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1fs__output__manager_1afc172d19400e7cd33bbeb287bffb5f98" prot="public" virt="virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>flush</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1fs__output__manager_1a3d3d483b116801516461d12074b7f81a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>fs_output_manager</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a759f30a9314723cc72b1e96242c4666f" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>get</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1fs__output__manager_1a45b3ffdde94b1ef6e63d3e00b08301ee" prot="public" virt="virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>initialize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1fs__output__manager_1a8e60a5b664259e30bcf970356d383121" prot="public" virt="virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>interval_reset</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1fs__output__manager_1ab0b37e4b277ae128f448ba09995fdd49" prot="private" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>m_append</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1fs__output__manager_1a143cda269a0eb13f6dd98dc2a234f51e" prot="private" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>m_create</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1fs__output__manager_1af0539441bcae44e94b8fa9670ee0bbab" prot="private" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>m_metrics_path</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1fs__output__manager_1ad8500c35869b2051c1f06b29cee78bce" prot="private" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>m_truncate</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1fs__output__manager_1a3dd662269c6ef990f22750d1a5c9c5bc" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>metrics_path</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1fs__output__manager_1a48064828936c8c36fb4de3dc4ecc372b" prot="public" virt="virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>timestep_inc</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1af1eed86e00ad1557925cc07f33d86e97" prot="public" virt="virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>~base_manager</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>~client</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1fs__output__manager_1a4cef3f8a13f707a690fa7832790de833" prot="public" virt="non-virtual"><scope>rcppsw::metrics::fs_output_manager</scope><name>~fs_output_manager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

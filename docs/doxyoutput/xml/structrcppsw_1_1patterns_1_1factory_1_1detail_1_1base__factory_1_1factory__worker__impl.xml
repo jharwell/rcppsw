@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1_1factory__worker__impl" kind="struct" language="C++" prot="private">
+    <compoundname>rcppsw::patterns::factory::detail::base_factory::factory_worker_impl</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename TDerived</type>
+      </param>
+      <param>
+        <type>typename TFactoryWorkerType</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>Implementation of factory_worker interface. We need different specializations: one for std::shared_ptr, and one for std::unique_ptr, because we need to maintain a list of the objects we have created for std::shared_ptr. Returning the shared_ptr object without doing this can result in dangling references if the calling application thinks <emphasis>we</emphasis> are maintaining a copy of the shared_ptr, and it is safe for them to use the underlying raw pointer to indicate non-owning access. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::factory::detail::base_factory&lt; TType, TPointerWrapper, TBase, TKeyType, Args &gt;::factory_worker_impl&lt; TDerived, TFactoryWorkerType &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" line="144" column="28" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" bodystart="144" bodyend="144"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

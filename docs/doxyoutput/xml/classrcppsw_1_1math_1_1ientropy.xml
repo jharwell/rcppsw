@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1math_1_1ientropy" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::math::ientropy</compoundname>
+    <basecompoundref refid="classrcppsw_1_1math_1_1expression" prot="public" virt="non-virtual">rcppsw::math::expression&lt; double &gt;</basecompoundref>
+    <includes refid="ientropy_8hpp" local="no">ientropy.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1math_1_1ientropy_1ac8234d814950bd53a746377e69a0d619" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::math::ientropy::operator()</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;groups)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>groups</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the informational entropy. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>groups</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of the proportional representation of each group within the cluster. Should sum to 1, though this is not checked. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ientropy.hpp" line="66" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ientropy.hpp" bodystart="66" bodyend="72"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Calculates the informational entropy of a cluster (Shannon&apos;s definition). </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Uses the formula:</para>
+<para>H(S) = - SUM( p_i * log2(p_i)) over all i in m. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::math::ientropy</label>
+        <link refid="classrcppsw_1_1math_1_1ientropy"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::math::expression&lt; double &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1expression"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::math::ientropy</label>
+        <link refid="classrcppsw_1_1math_1_1ientropy"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::math::expression&lt; double &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1expression"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/ientropy.hpp" line="57" column="40" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/ientropy.hpp" bodystart="57" bodyend="73"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1math_1_1expression_1a2ca96a1dc826983e83f6e1e78f9f7d91" prot="public" virt="non-virtual"><scope>rcppsw::math::ientropy</scope><name>eval</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a93c2ef3e3dca75b4d332b3f3dbdeabcf" prot="public" virt="non-virtual"><scope>rcppsw::math::ientropy</scope><name>expression</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1ad04caaa756da846454de4eb50a56c440" prot="public" virt="non-virtual"><scope>rcppsw::math::ientropy</scope><name>expression</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1aaf5f6c5239b011cc50e0660435796d42" prot="public" virt="non-virtual"><scope>rcppsw::math::ientropy</scope><name>expression</name></member>
+      <member refid="classrcppsw_1_1math_1_1ientropy_1ac8234d814950bd53a746377e69a0d619" prot="public" virt="non-virtual"><scope>rcppsw::math::ientropy</scope><name>operator()</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a9cb4fefa68b3548f05417e43eb5277b0" prot="public" virt="non-virtual"><scope>rcppsw::math::ientropy</scope><name>operator&lt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a485d8341d75d4b27202152a55440508c" prot="public" virt="non-virtual"><scope>rcppsw::math::ientropy</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1afa8fda64acb803192fc82eab2e3ac2c1" prot="public" virt="non-virtual"><scope>rcppsw::math::ientropy</scope><name>operator==</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1ad8efa9b86f5cc28bd10a4b6418830667" prot="public" virt="non-virtual"><scope>rcppsw::math::ientropy</scope><name>operator&gt;</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1aa9e95f4e981ff13149304f3ead544aaa" prot="public" virt="non-virtual"><scope>rcppsw::math::ientropy</scope><name>reset</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1a80f64efdd897e7287fef8624ef456810" prot="public" virt="non-virtual"><scope>rcppsw::math::ientropy</scope><name>v</name></member>
+      <member refid="classrcppsw_1_1math_1_1expression_1af75b4f349110ceaac4efbf36cd278a82" prot="public" virt="virtual"><scope>rcppsw::math::ientropy</scope><name>~expression</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

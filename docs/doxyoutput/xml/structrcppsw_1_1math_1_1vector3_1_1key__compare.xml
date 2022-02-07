@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1math_1_1vector3_1_1key__compare" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::math::vector3::key_compare</compoundname>
+    <includes refid="vector3_8hpp" local="no">vector3.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structrcppsw_1_1math_1_1vector3_1_1key__compare_1a7f01eb24b7cd100dc7cd98eb3cc6d4e0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(!std::is_floating_point&lt; U &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::math::vector3&lt; T &gt;::key_compare::operator()</definition>
+        <argsstring>(const vector3&lt; U &gt; &amp;lhs, const vector3&lt; U &gt; &amp;rhs) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref>&lt; U &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref>&lt; U &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="71" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="71" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="structrcppsw_1_1math_1_1vector3_1_1key__compare_1a7f01eb24b7cd100dc7cd98eb3cc6d4e0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;(std::is_floating_point&lt; U &gt;::value), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool rcppsw::math::vector3&lt; T &gt;::key_compare::operator()</definition>
+        <argsstring>(const vector3&lt; U &gt; &amp;lhs, const vector3&lt; U &gt; &amp;rhs) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref>&lt; U &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector3" kindref="compound">vector3</ref>&lt; U &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="83" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="83" bodyend="94"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Needed for using vectors as keys in a map. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::math::vector3&lt; T &gt;::key_compare</label>
+        <link refid="structrcppsw_1_1math_1_1vector3_1_1key__compare"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" line="68" column="20" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" bodystart="68" bodyend="95"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1math_1_1vector3_1_1key__compare_1a7f01eb24b7cd100dc7cd98eb3cc6d4e0" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3::key_compare</scope><name>operator()</name></member>
+      <member refid="structrcppsw_1_1math_1_1vector3_1_1key__compare_1a7f01eb24b7cd100dc7cd98eb3cc6d4e0" prot="public" virt="non-virtual"><scope>rcppsw::math::vector3::key_compare</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

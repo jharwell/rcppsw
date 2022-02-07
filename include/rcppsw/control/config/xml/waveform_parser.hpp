@@ -48,14 +48,18 @@ NS_START(rcppsw, control, config, xml);
  * Any configuration values not present under the \ref kXMLRoot will be given a
  * value of -1.0.
  */
-class waveform_parser final : public rcppsw::config::xml::xml_config_parser {
+class waveform_parser final : public rer::client<waveform_parser>,
+                              public rconfig::xml::xml_config_parser {
  public:
   using config_type = waveform_config;
+
+  waveform_parser(void)
+      : ER_CLIENT_INIT("rcppsw.controller.config.xml.waveform_parser") {}
 
   /**
    * \brief The XML tag that all configration values should appear under.
    */
-  static constexpr char kXMLRoot[] = "waveform";
+  static inline const std::string kXMLRoot = "waveform";
 
   void parse(const ticpp::Element& node) override RCPPSW_COLD;
 

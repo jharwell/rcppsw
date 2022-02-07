@@ -28,6 +28,7 @@
 #include <array>
 
 #include "rcppsw/rcppsw.hpp"
+#include "rcppsw/er/stringizable.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -46,10 +47,8 @@ NS_START(rcppsw, utils);
  * Should be used to make color usage agnostic across projects, and not tied to
  * a particular platform, simulator, etc.
  */
-class color {
+class color : public er::stringizable {
  public:
-  color(void) = default;
-
   static const color kBLACK;
   static const color kWHITE;
   static const color kRED;
@@ -71,8 +70,15 @@ class color {
   static const color kGRAY80;
   static const color kGRAY90;
 
+  color(void) = default;
+  color(const color&) = default;
+  color& operator=(const color&) = default;
+
   color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255)
       : m_channels{ red, green, blue, alpha } {}
+
+  /* stringizable overrides */
+  std::string to_str(void) const override;
 
   uint8_t red() const { return m_channels[0]; }
   void red(uint8_t red) { m_channels[0] = red; }
@@ -94,11 +100,9 @@ class color {
     return !(*this == c_color2);
   }
 
-  std::string to_str(void) const;
-
  private:
   /* clang-format off */
-  std::array<uint8_t, 4> m_channels;
+  std::array<uint8_t, 4> m_channels{};
   /* clang-format on */
 };
 

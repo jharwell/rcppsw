@@ -1,0 +1,309 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/hfsm.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <string>\fP
+.br
+\fC#include 'rcppsw/patterns/fsm/base_fsm\&.hpp'\fP
+.br
+\fC#include 'rcppsw/patterns/fsm/hfsm_state\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBrcppsw::patterns::fsm::hfsm\fP"
+.br
+.RI "Implements a software-based hierarchical state machine (states can contain other states)\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns\fP"
+.br
+.RI "Design pattern templates and interfaces\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns::fsm\fP"
+.br
+.RI "The Finite State Machine (FSM) design pattern: simple and hierarchical variants\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_CONSTRUCT_STATE\fP(state_name,  parent)   state_name(static_cast<\fBrcppsw::patterns::fsm::hfsm_state\fP*>(parent))"
+.br
+.RI "Construct a previously declared/inherited state\&. "
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_DECLARE_STATE_MAP\fP(type,  name,  n_entries)   \fBRCPPSW_FSM_DECLARE_STATE_MAP\fP(type, name, n_entries)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_DEFINE_STATE_MAP\fP(name, \&.\&.\&.)   \fBRCPPSW_FSM_DEFINE_STATE_MAP\fP(name, __VA_ARGS__)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_DEFINE_STATE_MAP_ACCESSOR\fP(type,  index_var)   \fBRCPPSW_FSM_DEFINE_STATE_MAP_ACCESSOR\fP(type, index_var)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_DEFINE_TRANSITION_MAP\fP(name)   \fBRCPPSW_FSM_DEFINE_TRANSITION_MAP\fP(name)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_ENTRY_DECLARE\fP(FSM,  entry_name,  event_data)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_ENTRY_DECLARE_ND\fP(FSM,  entry_name)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_ENTRY_DEFINE\fP(FSM,  entry_name,  event_data)   \fBRCPPSW_FSM_ENTRY_DEFINE\fP(FSM, entry_name, event_data)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_ENTRY_DEFINE_ND\fP(FSM,  entry_name)   \fBRCPPSW_FSM_ENTRY_DEFINE_ND\fP(FSM, entry_name)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_ENTRY_INHERIT\fP(BASE_FSM,  inherited_name,  event_data)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_ENTRY_INHERIT_ND\fP(BASE_FSM,  inherited_name)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_EXIT_DECLARE\fP(FSM,  exit_name)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_EXIT_DEFINE\fP(FSM,  exit_name)   \fBRCPPSW_FSM_EXIT_DEFINE\fP(FSM, exit_name)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_EXIT_INHERIT\fP(BASE_FSM,  inherited_name)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_GUARD_DECLARE\fP(FSM,  guard_name,  event_data)   \fBRCPPSW_FSM_GUARD_DECLARE\fP(FSM, guard_name, event_data)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_GUARD_DECLARE_ND\fP(FSM,  guard_name)   \fBRCPPSW_FSM_GUARD_DECLARE_ND\fP(FSM, guard_name)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_GUARD_DEFINE\fP(FSM,  guard_name,  event_data)   \fBRCPPSW_FSM_GUARD_DEFINE\fP(FSM, guard_name, event_data)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_GUARD_DEFINE_ND\fP(FSM,  guard_name)   \fBRCPPSW_FSM_GUARD_DEFINE_ND\fP(FSM, guard_name)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_STATE_DECLARE\fP(FSM,  state_name,  event_data)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_STATE_DECLARE_ND\fP(FSM,  state_name, \&.\&.\&.)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_STATE_DEFINE\fP(FSM,  state_name,  event_data)   \fBRCPPSW_FSM_STATE_DEFINE\fP(FSM, state_name, event_data)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_STATE_DEFINE_ND\fP(FSM,  state_name)   \fBRCPPSW_FSM_STATE_DEFINE_ND\fP(FSM, state_name)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_STATE_INHERIT\fP(BASE_FSM,  inherited_name,  event_data)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_STATE_INHERIT_ND\fP(BASE_FSM,  inherited_name)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_STATE_MAP_ENTRY\fP(state_name)   \fBRCPPSW_FSM_STATE_MAP_ENTRY\fP(state_name)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_STATE_MAP_ENTRY_EX\fP(state_name)   \fBRCPPSW_FSM_STATE_MAP_ENTRY_EX\fP(state_name)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_STATE_MAP_ENTRY_EX_ALL\fP( state_name,  guard_name,  entry_name,  exit_name)   \fBRCPPSW_FSM_STATE_MAP_ENTRY_EX_ALL\fP(state_name, guard_name, entry_name, exit_name)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_HFSM_VERIFY_TRANSITION_MAP\fP(name,  n_entries)   \fBRCPPSW_FSM_VERIFY_TRANSITION_MAP\fP(name, n_entries)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2017 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#\fBdefine\fP RCPPSW_HFSM_CONSTRUCT_STATE(state_name, parent)   state_name(static_cast<\fBrcppsw::patterns::fsm::hfsm_state\fP*>(parent))"
+
+.PP
+Construct a previously declared/inherited state\&. Should be called in the constructor, and passed the desired parent state\&. This cannot be done at state declaration (from the compiler's point of view), because of the way templating works (I think)\&. 
+.SS "#\fBdefine\fP RCPPSW_HFSM_DECLARE_STATE_MAP(type, name, n_entries)   \fBRCPPSW_FSM_DECLARE_STATE_MAP\fP(type, name, n_entries)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_DEFINE_STATE_MAP(name,  \&.\&.\&.)   \fBRCPPSW_FSM_DEFINE_STATE_MAP\fP(name, __VA_ARGS__)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_DEFINE_STATE_MAP_ACCESSOR(type, index_var)   \fBRCPPSW_FSM_DEFINE_STATE_MAP_ACCESSOR\fP(type, index_var)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_DEFINE_TRANSITION_MAP(name)   \fBRCPPSW_FSM_DEFINE_TRANSITION_MAP\fP(name)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_ENTRY_DECLARE(FSM, entry_name, event_data)"
+\fBValue:\fP
+.PP
+.nf
+ public:                                                          \
+  void EN_##entry_name(const event_data*);                        \
+                                                                  \
+ private:                                                         \
+  rcppsw::patterns::fsm::                               \
+      state_entry_action1<FSM, event_data, &FSM::EN_##entry_name> \
+          entry_name
+.fi
+Declare a state in the current HFSM\&.
+.PP
+The entry handler function MUST be public in order for templating to work\&. Apparently when dealing with non-type template arguments, any argument passed that does not EXACTLY match the one in the template will cause a compilation error if the function is protected (i\&.e\&. accessible in derived classes)\&. The solution: make it public\&. Not the best, because it exposes the inner workings of the state machine, but anyone who is using this class should only be manipulating it through the macros anyway\&. 
+.SS "#\fBdefine\fP RCPPSW_HFSM_ENTRY_DECLARE_ND(FSM, entry_name)"
+\fBValue:\fP
+.PP
+.nf
+  public:                                                               \
+  void EN_##entry_name(void);                                           \
+                                                                        \
+private:                                                                \
+rcppsw::patterns::fsm::state_entry_action0<FSM, &FSM::EN_##entry_name> \
+entry_name{}
+.fi
+Same as \fBRCPPSW_HFSM_ENTRY_DECLARE()\fP, but with no data\&. 
+.SS "#\fBdefine\fP RCPPSW_HFSM_ENTRY_DEFINE(FSM, entry_name, event_data)   \fBRCPPSW_FSM_ENTRY_DEFINE\fP(FSM, entry_name, event_data)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_ENTRY_DEFINE_ND(FSM, entry_name)   \fBRCPPSW_FSM_ENTRY_DEFINE_ND\fP(FSM, entry_name)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_ENTRY_INHERIT(BASE_FSM, inherited_name, event_data)"
+\fBValue:\fP
+.PP
+.nf
+ private:                                                                       \
+  rcppsw::patterns::fsm::                                             \
+      state_entry_action1<BASE_FSM, event_data, &BASE_FSM::EN_##inherited_name> \
+          inherited_name
+.fi
+Declare a entry callback in the current HFSM to be inherited from a parent HFSM\&.
+.PP
+This can be private because it is just a member variable\&. 
+.SS "#\fBdefine\fP RCPPSW_HFSM_ENTRY_INHERIT_ND(BASE_FSM, inherited_name)"
+\fBValue:\fP
+.PP
+.nf
+ private:                                                           \
+  rcppsw::patterns::fsm::                                 \
+      state_entry_action0<BASE_FSM, &BASE_FSM::EN_##inherited_name> \
+ inherited_name{}
+.fi
+Same as \fBRCPPSW_HFSM_ENTRY_INHERIT()\fP, but with no data\&. 
+.SS "#\fBdefine\fP RCPPSW_HFSM_EXIT_DECLARE(FSM, exit_name)"
+\fBValue:\fP
+.PP
+.nf
+  public:                                                               \
+  void EX_##exit_name(void);                                            \
+                                                                        \
+private:                                                                \
+rcppsw::patterns::fsm::state_exit_action<FSM, &FSM::EX_##exit_name>     \
+exit_name{}
+.fi
+Declare an exit callback in the current HFSM\&. 
+.SS "#\fBdefine\fP RCPPSW_HFSM_EXIT_DEFINE(FSM, exit_name)   \fBRCPPSW_FSM_EXIT_DEFINE\fP(FSM, exit_name)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_EXIT_INHERIT(BASE_FSM, inherited_name)"
+\fBValue:\fP
+.PP
+.nf
+ private:                                                         \
+  rcppsw::patterns::fsm::                               \
+      state_exit_action<BASE_FSM, &BASE_FSM::EX_##inherited_name> \
+ inherited_name{}
+.fi
+Declare an exit callback in the current HFSM to be inherited from a parent HFSM\&.
+.PP
+This can be private because it is just a member variable\&. 
+.SS "#\fBdefine\fP RCPPSW_HFSM_GUARD_DECLARE(FSM, guard_name, event_data)   \fBRCPPSW_FSM_GUARD_DECLARE\fP(FSM, guard_name, event_data)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_GUARD_DECLARE_ND(FSM, guard_name)   \fBRCPPSW_FSM_GUARD_DECLARE_ND\fP(FSM, guard_name)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_GUARD_DEFINE(FSM, guard_name, event_data)   \fBRCPPSW_FSM_GUARD_DEFINE\fP(FSM, guard_name, event_data)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_GUARD_DEFINE_ND(FSM, guard_name)   \fBRCPPSW_FSM_GUARD_DEFINE_ND\fP(FSM, guard_name)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_STATE_DECLARE(FSM, state_name, event_data)"
+\fBValue:\fP
+.PP
+.nf
+ public:                                                         \
+  int ST_##state_name(event_data*);                        \
+                                                                 \
+ private:                                                        \
+  rcppsw::patterns::fsm::                              \
+      hfsm_state_action1<FSM, event_data, &FSM::ST_##state_name> \
+          state_name
+.fi
+Declare a state in the current HFSM\&.
+.PP
+The state handler function MUST be public in order for \fBhfsm_state_action1\fP templating to work\&. Apparently when dealing with non-type template arguments, any argument passed that does not EXACTLY match the one in the template will cause a compilation error if the function is protected (i\&.e\&. accessible in derived classes)\&. The solution: make it public\&. Not the best, because it exposes the inner workings of the state machine, but anyone who is using this class should only be manipulating it through the macros anyway\&. 
+.SS "#\fBdefine\fP RCPPSW_HFSM_STATE_DECLARE_ND(FSM, state_name,  \&.\&.\&.)"
+\fBValue:\fP
+.PP
+.nf
+  public:                                                               \
+  int ST_##state_name(void) __VA_ARGS__;                                \
+                                                                        \
+private:                                                                \
+rcppsw::patterns::fsm::hfsm_state_action0<FSM, &FSM::ST_##state_name> \
+state_name
+.fi
+Same as \fBRCPPSW_HFSM_STATE_DECLARE()\fP, but with no data\&. 
+.SS "#\fBdefine\fP RCPPSW_HFSM_STATE_DEFINE(FSM, state_name, event_data)   \fBRCPPSW_FSM_STATE_DEFINE\fP(FSM, state_name, event_data)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_STATE_DEFINE_ND(FSM, state_name)   \fBRCPPSW_FSM_STATE_DEFINE_ND\fP(FSM, state_name)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_STATE_INHERIT(BASE_FSM, inherited_name, event_data)"
+\fBValue:\fP
+.PP
+.nf
+ private:                                                                      \
+  rcppsw::patterns::fsm::                                            \
+      hfsm_state_action1<BASE_FSM, event_data, &BASE_FSM::ST_##inherited_name> \
+          inherited_name
+.fi
+Declare a state in the current HFSM to be inherited from a parent HFSM\&.
+.PP
+This can be private because it is just a member variable\&. 
+.SS "#\fBdefine\fP RCPPSW_HFSM_STATE_INHERIT_ND(BASE_FSM, inherited_name)"
+\fBValue:\fP
+.PP
+.nf
+ private:                                                          \
+  rcppsw::patterns::fsm::                                \
+      hfsm_state_action0<BASE_FSM, &BASE_FSM::ST_##inherited_name> \
+          inherited_name
+.fi
+Same as \fBRCPPSW_HFSM_STATE_INHERIT()\fP, but with no data\&. 
+.SS "#\fBdefine\fP RCPPSW_HFSM_STATE_MAP_ENTRY(state_name)   \fBRCPPSW_FSM_STATE_MAP_ENTRY\fP(state_name)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_STATE_MAP_ENTRY_EX(state_name)   \fBRCPPSW_FSM_STATE_MAP_ENTRY_EX\fP(state_name)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name)   \fBRCPPSW_FSM_STATE_MAP_ENTRY_EX_ALL\fP(state_name, guard_name, entry_name, exit_name)"
+
+.SS "#\fBdefine\fP RCPPSW_HFSM_VERIFY_TRANSITION_MAP(name, n_entries)   \fBRCPPSW_FSM_VERIFY_TRANSITION_MAP\fP(name, n_entries)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

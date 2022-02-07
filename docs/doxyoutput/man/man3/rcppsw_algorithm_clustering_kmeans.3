@@ -1,0 +1,96 @@
+.TH "rcppsw::algorithm::clustering::kmeans< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::algorithm::clustering::kmeans< T > \- Wrapper class for performing kmeans clustering\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <kmeans\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< kmeans< T > >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBcluster_vector\fP = typename \fBbase_clustering_impl\fP< T, \fBpolicy::NC\fP >::\fBcluster_vector\fP"
+.br
+.ti -1c
+.RI "using \fBdist_calc_ftype\fP = typename \fBbase_clustering_impl\fP< T, \fBpolicy::NC\fP >::\fBdist_calc_ftype\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBkmeans\fP (const std::vector< T > &data_in, std::unique_ptr< \fBbase_clustering_impl\fP< T, \fBpolicy::NC\fP > > impl, size_t k, size_t max_iter)"
+.br
+.ti -1c
+.RI "\fBmembership_type\fP< \fBpolicy::NC\fP > \fBrun\fP (const \fBdist_calc_ftype\fP &dist_func)"
+.br
+.RI "Perform clustering\&. First the clustering_impl::initialize() method is called\&. Then, the clustering algorithm is iterated until one of the following is true: "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::algorithm::clustering::kmeans< T >"
+Wrapper class for performing kmeans clustering\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIT\fP The type of the data that is being clustered\&. It must support the following operations: +=, /=, = \&. 
+.RE
+.PP
+
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename T > using \fBrcppsw::algorithm::clustering::kmeans\fP< T >::\fBcluster_vector\fP =  typename \fBbase_clustering_impl\fP< T, \fBpolicy::NC\fP>::\fBcluster_vector\fP"
+
+.SS "template<typename T > using \fBrcppsw::algorithm::clustering::kmeans\fP< T >::\fBdist_calc_ftype\fP =  typename \fBbase_clustering_impl\fP< T, \fBpolicy::NC\fP>::\fBdist_calc_ftype\fP"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::algorithm::clustering::kmeans\fP< T >::\fBkmeans\fP (const std::vector< T > & data_in, std::unique_ptr< \fBbase_clustering_impl\fP< T, \fBpolicy::NC\fP > > impl, size_t k, size_t max_iter)\fC [inline]\fP"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata_in\fP Vector of data to cluster\&. 
+.br
+\fIimpl\fP The method and policy for clustering\&. 
+.br
+\fIk\fP The # of clusters\&. 
+.br
+\fImax_iter\fP Maximum # of iterations to perform\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > \fBmembership_type\fP<\fBpolicy::NC\fP> \fBrcppsw::algorithm::clustering::kmeans\fP< T >::run (const \fBdist_calc_ftype\fP & dist_func)\fC [inline]\fP"
+
+.PP
+Perform clustering\&. First the clustering_impl::initialize() method is called\&. Then, the clustering algorithm is iterated until one of the following is true: 
+.IP "\(bu" 2
+The maximum # of iterations has been reached\&.
+.IP "\(bu" 2
+cluster_impl::converged() returns \fCTRUE\fP (checked after each iteration)\&.
+.PP
+.PP
+\fBReturns\fP
+.RS 4
+A vector where the index corresponds to the index of the data point in the input data, and the value corresponds to the cluster to which the data point belongs\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

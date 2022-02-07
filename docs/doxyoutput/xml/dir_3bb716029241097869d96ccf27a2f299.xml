@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_3bb716029241097869d96ccf27a2f299" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm</compoundname>
+    <innerfile refid="base__fsm_8hpp">base_fsm.hpp</innerfile>
+    <innerfile refid="event_8hpp">event.hpp</innerfile>
+    <innerfile refid="hfsm_8hpp">hfsm.hpp</innerfile>
+    <innerfile refid="hfsm__state_8hpp">hfsm_state.hpp</innerfile>
+    <innerfile refid="simple__fsm_8hpp">simple_fsm.hpp</innerfile>
+    <innerfile refid="state_8hpp">state.hpp</innerfile>
+    <innerfile refid="state__action_8hpp">state_action.hpp</innerfile>
+    <innerfile refid="state__entry_8hpp">state_entry.hpp</innerfile>
+    <innerfile refid="state__entry__action_8hpp">state_entry_action.hpp</innerfile>
+    <innerfile refid="state__exit_8hpp">state_exit.hpp</innerfile>
+    <innerfile refid="state__exit__action_8hpp">state_exit_action.hpp</innerfile>
+    <innerfile refid="state__guard_8hpp">state_guard.hpp</innerfile>
+    <innerfile refid="state__guard__action_8hpp">state_guard_action.hpp</innerfile>
+    <innerfile refid="state__map__ex__row_8hpp">state_map_ex_row.hpp</innerfile>
+    <innerfile refid="state__map__row_8hpp">state_map_row.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/"/>
+  </compounddef>
+</doxygen>

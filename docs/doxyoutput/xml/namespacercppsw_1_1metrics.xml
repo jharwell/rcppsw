@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1metrics" kind="namespace" language="C++">
+    <compoundname>rcppsw::metrics</compoundname>
+    <innerclass refid="classrcppsw_1_1metrics_1_1base__collector" prot="public">rcppsw::metrics::base_collector</innerclass>
+    <innerclass refid="structrcppsw_1_1metrics_1_1base__data" prot="public">rcppsw::metrics::base_data</innerclass>
+    <innerclass refid="classrcppsw_1_1metrics_1_1base__manager" prot="public">rcppsw::metrics::base_manager</innerclass>
+    <innerclass refid="classrcppsw_1_1metrics_1_1base__metrics" prot="public">rcppsw::metrics::base_metrics</innerclass>
+    <innerclass refid="classrcppsw_1_1metrics_1_1base__sink" prot="public">rcppsw::metrics::base_sink</innerclass>
+    <innerclass refid="classrcppsw_1_1metrics_1_1collector__group" prot="public">rcppsw::metrics::collector_group</innerclass>
+    <innerclass refid="structrcppsw_1_1metrics_1_1collector__registration__spec" prot="public">rcppsw::metrics::collector_registration_spec</innerclass>
+    <innerclass refid="structrcppsw_1_1metrics_1_1creatable__collector__spec" prot="public">rcppsw::metrics::creatable_collector_spec</innerclass>
+    <innerclass refid="classrcppsw_1_1metrics_1_1csv__sink" prot="public">rcppsw::metrics::csv_sink</innerclass>
+    <innerclass refid="classrcppsw_1_1metrics_1_1file__sink" prot="public">rcppsw::metrics::file_sink</innerclass>
+    <innerclass refid="classrcppsw_1_1metrics_1_1file__sink__registerer" prot="public">rcppsw::metrics::file_sink_registerer</innerclass>
+    <innerclass refid="classrcppsw_1_1metrics_1_1fs__output__manager" prot="public">rcppsw::metrics::fs_output_manager</innerclass>
+    <innerclass refid="classrcppsw_1_1metrics_1_1network__output__manager" prot="public">rcppsw::metrics::network_output_manager</innerclass>
+    <innerclass refid="classrcppsw_1_1metrics_1_1network__sink" prot="public">rcppsw::metrics::network_sink</innerclass>
+    <innerclass refid="classrcppsw_1_1metrics_1_1network__sink__registerer" prot="public">rcppsw::metrics::network_sink_registerer</innerclass>
+    <innerclass refid="classrcppsw_1_1metrics_1_1register__using__config" prot="public">rcppsw::metrics::register_using_config</innerclass>
+    <innerclass refid="classrcppsw_1_1metrics_1_1register__with__sink" prot="public">rcppsw::metrics::register_with_sink</innerclass>
+    <innernamespace refid="namespacercppsw_1_1metrics_1_1config">rcppsw::metrics::config</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1metrics_1_1detail">rcppsw::metrics::detail</innernamespace>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>output_mode</name>
+        <enumvalue id="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587fa46ea291249caff31653a439e2a7fed9c" prot="public">
+          <name>ekNONE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>Metrics are not written out ever. Like seriously ever. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587faeb6d39ff8f11b0c4148abaf0b9da90c5" prot="public">
+          <name>ekAPPEND</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+<para>Each time metrics are written out, they are appended to the same file. This is suitable for metric collectors that output data for a set of one dimensional signals. Only valid for fil_sink based sinks. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587fa36e7d4cce81688522a04e5435c1512d9" prot="public">
+          <name>ekTRUNCATE</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+<para>Each time metrics are written out, the output file is truncated and the header re-written with the current data. Suitable for metric collectors that output a single two dimensional signal as a cumulative average (that is, each time the signal is written out, it is a cumulative average of that signal up to that point in time). Only valid for <ref refid="classrcppsw_1_1metrics_1_1file__sink" kindref="compound">file_sink</ref> based sinks. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587fa46f4cb8693fdba815a1187d688f3580e" prot="public">
+          <name>ekCREATE</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+<para>Each time metrics are written out, a new output file is created with the header and the current data, with the current timestep being added to the name stem for the output file in order to guarantee uniqueness of output files. Suitable for metric collectors for signals of any dimensionality where post-processing to create a set of images/movie illustrating how the signal changes over time is desired. Only valid for <ref refid="classrcppsw_1_1metrics_1_1file__sink" kindref="compound">file_sink</ref> based sinks. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587fafcb9fec17836aea1b6069f9d19f72f50" prot="public">
+          <name>ekSTREAM</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+<para>Each time metrics are written out, they are sent directly to the network socket/stream/whatever. Only valid for <ref refid="classrcppsw_1_1metrics_1_1network__sink" kindref="compound">network_sink</ref> based sinks. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Defines the behavior when metrics are written out to the filesystem. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/output_mode.hpp" line="44" column="23" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/output_mode.hpp" bodystart="44" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacercppsw_1_1metrics_1a9deb89f55ed769b27bdaf97be97c3d5b" prot="public" static="no" strong="no">
+        <type></type>
+        <name>write_status</name>
+        <enumvalue id="namespacercppsw_1_1metrics_1a9deb89f55ed769b27bdaf97be97c3d5baa58c01134d64c97192932b3f98d2647d" prot="public">
+          <name>ekNO_ATTEMPT</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>No write was attempted this timestep. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacercppsw_1_1metrics_1a9deb89f55ed769b27bdaf97be97c3d5bab30168a8c0e4f097972513b87708bdc6" prot="public">
+          <name>ekFAILED</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>A write was attempted, but was unsuccessful this timestep. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacercppsw_1_1metrics_1a9deb89f55ed769b27bdaf97be97c3d5ba2dbb241488e975a9a3ff19065d293570" prot="public">
+          <name>ekSUCCESS</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>A write was attempted and was successful this timestep. </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Status of attempts to write metrics to the filesystem. Used to correctly triage I/O errors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/write_status.hpp" line="45" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/write_status.hpp" bodystart="45" bodyend="60"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacercppsw_1_1metrics_1adc89b6e34f69346cce13197bc5c01330" prot="public" static="no">
+        <type>std::multiset&lt; <ref refid="structrcppsw_1_1metrics_1_1creatable__collector__spec" kindref="compound">creatable_collector_spec</ref>, <ref refid="structrcppsw_1_1metrics_1_1detail_1_1creatable__collector__set__comparator" kindref="compound">detail::creatable_collector_set_comparator</ref> &gt;</type>
+        <definition>using rcppsw::metrics::creatable_collector_set = typedef std::multiset&lt;creatable_collector_spec, detail::creatable_collector_set_comparator&gt;</definition>
+        <argsstring></argsstring>
+        <name>creatable_collector_set</name>
+        <briefdescription>
+<para>Set of set_value_type in which duplicates are allowed, because when we compare elements, we only use the typeid as the key, which can be the same between collectors, even if the other parts of each element are different. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" line="99" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/creatable_collector_set.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base metric interfaces and the collectors for them. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="39" column="26"/>
+  </compounddef>
+</doxygen>

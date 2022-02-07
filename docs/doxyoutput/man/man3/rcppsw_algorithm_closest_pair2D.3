@@ -1,0 +1,120 @@
+.TH "rcppsw::algorithm::closest_pair2D< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::algorithm::closest_pair2D< T > \- Calculate the closest two points from a set of 2D points in O(NLogN) (\fBkRecursive\fP)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <closest_pair2D\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename TDistFunc > \fBresult_type2D\fP< T > \fBbrute_force\fP (const std::vector< T > &points, const TDistFunc &dist_func)"
+.br
+.RI "Find the closest pair of points using brute force\&. "
+.ti -1c
+.RI "template<typename TDistFunc > \fBresult_type2D\fP< T > \fBoperator()\fP (const std::string &method, std::vector< T > points, const TDistFunc &dist_func)"
+.br
+.RI "Run the calculation algorithm\&. "
+.ti -1c
+.RI "template<typename TDistFunc > \fBresult_type2D\fP< T > \fBrecursive\fP (const std::vector< T > &points, std::vector< T > &strip, const TDistFunc &dist_func)"
+.br
+.RI "Find the closest pair of points using recursion\&. "
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const std::string \fBkBruteForce\fP = 'brute_force'"
+.br
+.ti -1c
+.RI "static const std::string \fBkRecursive\fP = 'recursive'"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::algorithm::closest_pair2D< T >"
+Calculate the closest two points from a set of 2D points in O(NLogN) (\fBkRecursive\fP)\&. 
+
+Also has a brute force (O(N^3)) algorithm (\fBkBruteForce\fP) that can be used for comparision\&.
+.PP
+Returns the two closest points, along with the distance between them (\fBresult_type2D\fP)\&.
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIT\fP Type of point in 2D plane\&. Can be any class, but must provide the following methods: x(), y(), \fBoperator==()\fP\&. See \fBmath::vector2\fP for example implementation)\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > template<typename TDistFunc > \fBresult_type2D\fP<T> \fBrcppsw::algorithm::closest_pair2D\fP< T >::brute_force (const std::vector< T > & points, const TDistFunc & dist_func)\fC [inline]\fP"
+
+.PP
+Find the closest pair of points using brute force\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpoints\fP The set of points to search\&. 
+.br
+\fIdist_func\fP The comparision function to use\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The two closest points, along with the distance between them\&. 
+.RE
+.PP
+
+.SS "template<typename T > template<typename TDistFunc > \fBresult_type2D\fP<T> \fBrcppsw::algorithm::closest_pair2D\fP< T >::operator() (const std::string & method, std::vector< T > points, const TDistFunc & dist_func)\fC [inline]\fP"
+
+.PP
+Run the calculation algorithm\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImethod\fP The method to use: 'brute_force' or 'recursive'\&. 
+.br
+\fIpoints\fP A vector of points through which to search\&. 
+.br
+\fIdist_func\fP A function that can be used to calculate the distance between two points\&. 
+.RE
+.PP
+
+.SS "template<typename T > template<typename TDistFunc > \fBresult_type2D\fP<T> \fBrcppsw::algorithm::closest_pair2D\fP< T >::recursive (const std::vector< T > & points, std::vector< T > & strip, const TDistFunc & dist_func)\fC [inline]\fP"
+
+.PP
+Find the closest pair of points using recursion\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpoints\fP The set of points to search through\&. 
+.br
+\fIstrip\fP Space for the strip\&. 
+.br
+\fIdist_func\fP The comparision function to use\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The two closest points, along with the distance between them\&. 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "template<typename T > const std::string \fBrcppsw::algorithm::closest_pair2D\fP< T >::kBruteForce = 'brute_force'\fC [inline]\fP, \fC [static]\fP"
+
+.SS "template<typename T > const std::string \fBrcppsw::algorithm::closest_pair2D\fP< T >::kRecursive = 'recursive'\fC [inline]\fP, \fC [static]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

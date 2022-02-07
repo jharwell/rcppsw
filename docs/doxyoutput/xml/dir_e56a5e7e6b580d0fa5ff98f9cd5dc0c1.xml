@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_e56a5e7e6b580d0fa5ff98f9cd5dc0c1" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph</compoundname>
+    <innerfile refid="base__vertex__property_8hpp">base_vertex_property.hpp</innerfile>
+    <innerfile refid="directed__graph_8hpp">directed_graph.hpp</innerfile>
+    <innerfile refid="directed__graph__spec_8hpp">directed_graph_spec.hpp</innerfile>
+    <innerfile refid="graph_8hpp">graph.hpp</innerfile>
+    <innerfile refid="graphml_8hpp">graphml.hpp</innerfile>
+    <innerfile refid="grid__index__map_8hpp">grid_index_map.hpp</innerfile>
+    <innerfile refid="hgrid3D_8hpp">hgrid3D.hpp</innerfile>
+    <innerfile refid="hgrid3D__spec_8hpp">hgrid3D_spec.hpp</innerfile>
+    <innerfile refid="hgrid3D__vertex__property_8hpp">hgrid3D_vertex_property.hpp</innerfile>
+    <innerfile refid="hgrid3D__view_8hpp">hgrid3D_view.hpp</innerfile>
+    <innerfile refid="hgrid3D__view__builder_8hpp">hgrid3D_view_builder.hpp</innerfile>
+    <innerfile refid="hgrid3D__view__filter_8hpp">hgrid3D_view_filter.hpp</innerfile>
+    <innerfile refid="hgrid3D__view__filter__data_8hpp">hgrid3D_view_filter_data.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/"/>
+  </compounddef>
+</doxygen>

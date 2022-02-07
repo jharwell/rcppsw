@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1control_1_1constant__waveform" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::control::constant_waveform</compoundname>
+    <basecompoundref refid="classrcppsw_1_1control_1_1base__waveform" prot="public" virt="non-virtual">rcppsw::control::base_waveform</basecompoundref>
+    <includes refid="aperiodic__waveform_8hpp" local="no">aperiodic_waveform.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1control_1_1constant__waveform_1ac8dc39a42c1dd23f109d6e108534aae1" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::control::constant_waveform::constant_waveform</definition>
+        <argsstring>(const struct config::waveform_config *const config)</argsstring>
+        <name>constant_waveform</name>
+        <param>
+          <type>const struct <ref refid="structrcppsw_1_1control_1_1config_1_1waveform__config" kindref="compound">config::waveform_config</ref> *const</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/aperiodic_waveform.hpp" line="52" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/aperiodic_waveform.hpp" bodystart="52" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1control_1_1constant__waveform_1a0318dc4d98621b55508eac1728ac5ff7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double rcppsw::control::constant_waveform::value</definition>
+        <argsstring>(double) override</argsstring>
+        <name>value</name>
+        <reimplements refid="classrcppsw_1_1control_1_1base__waveform_1a68747b81e14cdafce887753a477bb7b7">value</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+<para>Get the current value of the waveform at time <computeroutput>t</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/aperiodic_waveform.hpp" line="55" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/aperiodic_waveform.hpp" bodystart="55" bodyend="55"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A special waveform that always returns a constant value: the amplitude of the waveform config it was passed during construction. All other parameters are ignored. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::control::constant_waveform</label>
+        <link refid="classrcppsw_1_1control_1_1constant__waveform"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::control::base_waveform</label>
+        <link refid="classrcppsw_1_1control_1_1base__waveform"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::control::constant_waveform</label>
+        <link refid="classrcppsw_1_1control_1_1constant__waveform"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::control::base_waveform</label>
+        <link refid="classrcppsw_1_1control_1_1base__waveform"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/aperiodic_waveform.hpp" line="50" column="45" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/aperiodic_waveform.hpp" bodystart="50" bodyend="56"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1control_1_1base__waveform_1ae1bb9d59522638807f5f8f6c80fe33b7" prot="public" virt="non-virtual"><scope>rcppsw::control::constant_waveform</scope><name>amplitude</name></member>
+      <member refid="classrcppsw_1_1control_1_1base__waveform_1aa1d503bc6d4e2ed057fd13935ca83031" prot="public" virt="non-virtual"><scope>rcppsw::control::constant_waveform</scope><name>base_waveform</name></member>
+      <member refid="classrcppsw_1_1control_1_1constant__waveform_1ac8dc39a42c1dd23f109d6e108534aae1" prot="public" virt="non-virtual"><scope>rcppsw::control::constant_waveform</scope><name>constant_waveform</name></member>
+      <member refid="classrcppsw_1_1control_1_1base__waveform_1a3852a7b39f17eb8a2537979b209f7423" prot="public" virt="non-virtual"><scope>rcppsw::control::constant_waveform</scope><name>frequency</name></member>
+      <member refid="classrcppsw_1_1control_1_1base__waveform_1ac57ebf7711aaeee4b0a4c9d70d24183d" prot="public" virt="non-virtual"><scope>rcppsw::control::constant_waveform</scope><name>offset</name></member>
+      <member refid="classrcppsw_1_1control_1_1base__waveform_1aa6242201d9d1560e6eab025c9658a073" prot="public" virt="non-virtual"><scope>rcppsw::control::constant_waveform</scope><name>phase</name></member>
+      <member refid="classrcppsw_1_1control_1_1constant__waveform_1a0318dc4d98621b55508eac1728ac5ff7" prot="public" virt="virtual"><scope>rcppsw::control::constant_waveform</scope><name>value</name></member>
+      <member refid="classrcppsw_1_1control_1_1base__waveform_1a88fac93072f67aaaa424b2985cfed241" prot="public" virt="virtual"><scope>rcppsw::control::constant_waveform</scope><name>~base_waveform</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

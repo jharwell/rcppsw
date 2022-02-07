@@ -31,6 +31,7 @@
 #include "rcppsw/math/radians.hpp"
 #include "rcppsw/rcppsw.hpp"
 #include "rcppsw/types/discretize_ratio.hpp"
+#include "rcppsw/er/stringizable.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -45,15 +46,52 @@ NS_START(rcppsw, math);
  * \ingroup math
  *
  * \brief Base template class encapsulating mathematical actions on a pair of
- * numbers. Is specialized by \ref vector2u, \ref vector2i, \ref vector2d.
+ * numbers. Is specialized by \ref vector2i, \ref vector2d.
  *
  * All operations are performed in whatever the template parameter is, so take
  * care if you are trying to do scaling, trigonometric things with integers...
  */
 template <typename T>
-class vector2 {
+class vector2 final : public er::stringizable {
  public:
   using value_type = T;
+
+  /**
+ * \brief Needed for using vectors as keys in a map.
+ */
+  struct key_compare {
+    template<typename U = T,
+             RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
+    bool operator()(const vector2<U>& lhs, const vector2<U>& rhs) const {
+      /* Order based on X unless X's are equal, if so order on Y, etc. */
+      if (lhs.x() != rhs.x()) {
+        return lhs.x() < rhs.x();
+      }
+      return lhs.y() < rhs.y();
+    }
+    template<typename U = T,
+             RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
+    bool operator()(const vector2<U>& lhs, const vector2<U>& rhs) const {
+      bool equal_x = std::fabs(lhs.x() - rhs.x()) <= kDOUBLE_EPSILON;
+
+      if (!equal_x) {
+        return lhs.x() < rhs.x();
+      }
+      return lhs.y() < rhs.y();
+    }
+  };
+
+  /**
+   * \brief Needed to compare in mathematical contexts.
+   */
+  struct componentwise_compare {
+    bool operator()(const vector2<T>& lhs, const vector2<T>& rhs) const {
+      return lhs.x() <= rhs.x() && lhs.y() <= rhs.y();
+    }
+  };
+
+  static constexpr size_t kDIMENSIONALITY = 2;
+
   /**
    * \brief The positive X axis.
    */
@@ -63,13 +101,6 @@ class vector2 {
    * \brief The positive Y axis.
    */
   static const vector2<T> Y; // NOLINT
-
-  /**
-   * \brief Computes the euclidean distance between the passed vectors.
-   */
-  static double l2norm(const vector2<T>& v1, const vector2<T>& v2) {
-    return (v1 - v2).length();
-  }
 
   /**
    * \brief Computes the manhattan distance between the passed vectors.
@@ -104,7 +135,8 @@ class vector2 {
    */
   template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   vector2(const T& length, const radians& angle) noexcept
-      : m_x(std::cos(angle.v()) * length), m_y(std::sin(angle.v()) * length) {}
+      : m_x(std::cos(angle.v()) * length),
+        m_y(std::sin(angle.v()) * length) {}
 
   RCPPSW_NODISCARD T x(void)  { return m_x; }
   RCPPSW_NODISCARD T y(void)  { return m_y; }
@@ -117,6 +149,11 @@ class vector2 {
    * \brief Is the vector is positive definite?
    */
   bool is_pd(void) const { return m_x > 0 && m_y > 0; }
+
+  /**
+   * \brief Is the vector is positive semi-definite?
+   */
+  bool is_psd(void) const { return m_x >= 0 && m_y >= 0; }
 
   /**
    * \brief Sets the vector contents from Cartesian coordinates.
@@ -232,8 +269,8 @@ class vector2 {
    */
   template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   bool operator==(const vector2& other) const {
-    return (std::fabs(x() - other.x()) <= std::numeric_limits<T>::epsilon() &&
-            (std::fabs(y() - other.y()) <= std::numeric_limits<T>::epsilon()));
+    return (std::fabs(x() - other.x()) <= kDOUBLE_EPSILON) &&
+        (std::fabs(y() - other.y()) <= kDOUBLE_EPSILON);
   }
 
   /**
@@ -331,7 +368,7 @@ class vector2 {
     return is;
   }
 
-  std::string to_str(void) const {
+  std::string to_str(void) const override {
     return "(" + rcppsw::to_string(m_x) + "," + rcppsw::to_string(m_y) + ")";
   }
 
@@ -351,11 +388,6 @@ class vector2 {
 using vector2i = vector2<int>;
 
 /**
- * \brief Specialization of \ref vector2 for unsigned integers.
- */
-using vector2u = vector2<uint>;
-
-/**
  * \brief Specialization of \ref vector2 for size_t.
  */
 using vector2z = vector2<size_t>;
@@ -365,11 +397,20 @@ using vector2z = vector2<size_t>;
  */
 using vector2d = vector2<double>;
 
+template<> const vector2i vector2i::X;
+template<> const vector2i vector2i::Y;
+
+template<> const vector2z vector2z::X;
+template<> const vector2z vector2z::Y;
+
+template<> const vector2d vector2d::X;
+template<> const vector2d vector2d::Y;
+
 /*******************************************************************************
  * Macros
  ******************************************************************************/
 /**
- * \brief Convert vector2{i,u} -> vector2d directly, without applying any
+ * \brief Convert vector2{i,u,z} -> vector2d directly, without applying any
  * scaling.
  */
 #define RCPPSW_MATH_VEC2_DIRECT_CONVF(prefix)                             \
@@ -378,7 +419,7 @@ using vector2d = vector2<double>;
   }
 
 /**
- * \brief Convert vector2{i,u} -> vector2d, applying a multiplicative scaling
+ * \brief Convert vector2{i,u,z} -> vector2d, applying a multiplicative scaling
  * factor.
  */
 #define RCPPSW_MATH_VEC2_SCALED_CONVF(prefix)                           \
@@ -388,7 +429,8 @@ using vector2d = vector2<double>;
   }
 
 /**
- * \brief Convert vector2d -> vector2{u,z}, applying a divisive scaling factor.
+ * \brief Convert vector2d -> vector2{i,u,z}, applying a divisive scaling
+ * factor.
  */
 #define RCPPSW_MATH_VEC2_CONV2DISC(dest_prefix, dest_type)                      \
   static inline vector2##dest_prefix dvec2##dest_prefix##vec(               \
@@ -398,16 +440,13 @@ using vector2d = vector2<double>;
   }
 
 /*******************************************************************************
- * Free Functions
+ * Conversion Functions
  ******************************************************************************/
-RCPPSW_MATH_VEC2_DIRECT_CONVF(u);
 RCPPSW_MATH_VEC2_DIRECT_CONVF(i);
 RCPPSW_MATH_VEC2_DIRECT_CONVF(z);
-RCPPSW_MATH_VEC2_SCALED_CONVF(u);
 RCPPSW_MATH_VEC2_SCALED_CONVF(i);
 RCPPSW_MATH_VEC2_SCALED_CONVF(z);
 RCPPSW_MATH_VEC2_CONV2DISC(z, size_t);
-RCPPSW_MATH_VEC2_CONV2DISC(u, uint);
 RCPPSW_MATH_VEC2_CONV2DISC(i, int);
 
 NS_END(math, rcppsw);

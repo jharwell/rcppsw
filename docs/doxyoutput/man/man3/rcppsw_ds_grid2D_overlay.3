@@ -1,0 +1,130 @@
+.TH "rcppsw::ds::grid2D_overlay< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::grid2D_overlay< T > \- A 2D logical grid overlayed over a continuous environment using a \fIcontiguous\fP array of the template parameter type (\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <grid2D_overlay\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::ds::base_grid2D< T >\fP, \fBrcppsw::ds::base_grid_overlay< math::vector2d >\fP, and \fBrcppsw::er::client< grid2D_overlay< T > >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgrid2D_overlay\fP (const \fBmath::vector2d\fP &origin, const \fBmath::vector2d\fP &dims, const \fBtypes::discretize_ratio\fP &grid_res, const \fBtypes::discretize_ratio\fP &field_res)"
+.br
+.ti -1c
+.RI "T & \fBaccess\fP (size_t i, size_t j) override"
+.br
+.RI "Get a reference to a the cell within the grid at coordinates (i, j) "
+.ti -1c
+.RI "\fBcoord_type\fP \fBddims2D\fP (void) const"
+.br
+.RI "Get the discrete dimensions of the grid\&. "
+.ti -1c
+.RI "const \fBmath::vector2d\fP & \fBrdims2D\fP (void) const"
+.br
+.RI "Get the real dimensions of the grid; that is, continuous floating point\&. "
+.ti -1c
+.RI "size_t \fBxdsize\fP (void) const"
+.br
+.RI "Get the discrete size of the X dimension of the grid (i\&.e\&. what is the array index in X?) "
+.ti -1c
+.RI "double \fBxrsize\fP (void) const"
+.br
+.RI "Get the size of the X dimension (non-discretized)\&. "
+.ti -1c
+.RI "size_t \fBydsize\fP (void) const"
+.br
+.RI "Get the discrete size of the Y dimension of the grid (i\&.e\&. what is the array index in Y?) "
+.ti -1c
+.RI "double \fByrsize\fP (void) const"
+.br
+.RI "Get the size of the Y dimension (non-discretized)\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::ds::grid2D_overlay< T >"
+A 2D logical grid overlayed over a continuous environment using a \fIcontiguous\fP array of the template parameter type (\&. 
+
+
+.PP
+\fBSee also\fP
+.RS 4
+\fBbase_grid_overlay\fP)\&.
+.RE
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIT\fP The type of the grid element (probably a cell of some kind)\&. Must have must have a zero parameter constructor available or it won't compile (this is a limitation of boost::multi_array)\&. Furthermore, \fCT\fP must also have a copy constructor available, as move semantics are not supported by boost::multi_array\&. 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::ds::grid2D_overlay\fP< T >::\fBgrid2D_overlay\fP (const \fBmath::vector2d\fP & origin, const \fBmath::vector2d\fP & dims, const \fBtypes::discretize_ratio\fP & grid_res, const \fBtypes::discretize_ratio\fP & field_res)\fC [inline]\fP"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIorigin\fP The anchor point of the overlay grid in continuous space\&. 
+.br
+\fIdims\fP The real size in X,Y which will be discretized into X/\fCgrid_res\fP discrete elements along the X dimension and Y/\fCgrid_res\fP discrete elements along the Y dimension\&. 
+.br
+\fIgrid_res\fP The discretization unit for the grid\&. 
+.br
+\fIfield_res\fP The discretization unit for the field the grid is contained in (can be the same as the \fCgrid_res\fP)\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > T& \fBrcppsw::ds::grid2D_overlay\fP< T >::access (size_t i, size_t j)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Get a reference to a the cell within the grid at coordinates (i, j) 
+.PP
+\fBReturns\fP
+.RS 4
+Reference to the cell, of type T\&. 
+.RE
+.PP
+
+.PP
+Implements \fBrcppsw::ds::base_grid2D< T >\fP\&.
+.SS "template<typename T > \fBcoord_type\fP \fBrcppsw::ds::grid2D_overlay\fP< T >::ddims2D (void) const\fC [inline]\fP"
+
+.PP
+Get the discrete dimensions of the grid\&. 
+.SS "template<typename T > const \fBmath::vector2d\fP& \fBrcppsw::ds::grid2D_overlay\fP< T >::rdims2D (void) const\fC [inline]\fP"
+
+.PP
+Get the real dimensions of the grid; that is, continuous floating point\&. 
+.SS "template<typename T > size_t \fBrcppsw::ds::grid2D_overlay\fP< T >::xdsize (void) const\fC [inline]\fP"
+
+.PP
+Get the discrete size of the X dimension of the grid (i\&.e\&. what is the array index in X?) 
+.SS "template<typename T > double \fBrcppsw::ds::grid2D_overlay\fP< T >::xrsize (void) const\fC [inline]\fP"
+
+.PP
+Get the size of the X dimension (non-discretized)\&. 
+.SS "template<typename T > size_t \fBrcppsw::ds::grid2D_overlay\fP< T >::ydsize (void) const\fC [inline]\fP"
+
+.PP
+Get the discrete size of the Y dimension of the grid (i\&.e\&. what is the array index in Y?) 
+.SS "template<typename T > double \fBrcppsw::ds::grid2D_overlay\fP< T >::yrsize (void) const\fC [inline]\fP"
+
+.PP
+Get the size of the Y dimension (non-discretized)\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1algorithm_1_1clustering_1_1cluster_1_1mapping" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::algorithm::clustering::cluster::mapping</compoundname>
+    <includes refid="cluster_8hpp" local="no">cluster.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Policy</type>
+      </param>
+      <param>
+        <type>typename Enable</type>
+        <defval>void</defval>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::algorithm::clustering::cluster::mapping&lt; T, Policy, Enable &gt;</label>
+        <link refid="structrcppsw_1_1algorithm_1_1clustering_1_1cluster_1_1mapping"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="171" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" bodystart="171" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

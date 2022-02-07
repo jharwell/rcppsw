@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1factory_1_1sharing__factory" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::factory::sharing_factory</compoundname>
+    <basecompoundref refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory" prot="public" virt="non-virtual">rcppsw::patterns::factory::detail::base_factory&lt; detail::factory_sharing_type, std::shared_ptr, TBase, TKeyType, Args... &gt;</basecompoundref>
+    <includes refid="factory_8hpp" local="no">factory.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TBase</type>
+      </param>
+      <param>
+        <type>typename TKeyType</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Args</declname>
+        <defname>Args</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1factory_1_1sharing__factory_1a4a72638b4415afc7384536d8074d2990" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::factory::sharing_factory&lt; TBase, TKeyType, Args &gt;::~sharing_factory</definition>
+        <argsstring>(void) override=default</argsstring>
+        <name>~sharing_factory</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/factory.hpp" line="73" column="3"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Specialization of the <ref refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory" kindref="compound">detail::base_factory</ref> class for sharing ownership of created objects via std::shared_ptr. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::patterns::factory::sharing_factory&lt; TBase, TKeyType, Args &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1factory_1_1sharing__factory"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::factory::detail::base_factory&lt; detail::factory_sharing_type, std::shared_ptr, TBase, TKeyType, Args... &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::factory::sharing_factory&lt; TBase, TKeyType, Args &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1factory_1_1sharing__factory"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::factory::detail::base_factory&lt; detail::factory_sharing_type, std::shared_ptr, TBase, TKeyType, Args... &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/factory.hpp" line="71" column="53" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/factory.hpp" bodystart="67" bodyend="74"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1ab4878ff7354eb99c0a3a52a2c8c6ea6d" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::sharing_factory</scope><name>create</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1a6d82ea282d6e32ce743632f249fb724a" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::sharing_factory</scope><name>register_type</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1afa8c84b04fd09d44cd97b2c6505c67b4" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::sharing_factory</scope><name>unregister_type</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1a000d4b0250412166a44ddef9e75ab21d" prot="public" virt="virtual"><scope>rcppsw::patterns::factory::sharing_factory</scope><name>~base_factory</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1factory_1_1sharing__factory_1a4a72638b4415afc7384536d8074d2990" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::sharing_factory</scope><name>~sharing_factory</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

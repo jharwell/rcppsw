@@ -1,0 +1,74 @@
+.TH "rcppsw::ds::graph::detail::hgrid3D_view_filter< TSpecType >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::graph::detail::hgrid3D_view_filter< TSpecType > \- Predicate for filtering \fBhgrid3D\fP into \fBhgrid3D_view\fP objects\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <hgrid3D_view_filter\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< hgrid3D_view_filter< TSpecType > >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBbgl_impl_type\fP = typename TSpecType::bgl_impl_type"
+.br
+.ti -1c
+.RI "using \fBedge_descriptor\fP = typename bgl_impl_type::edge_descriptor"
+.br
+.ti -1c
+.RI "using \fBvertex_coord_type\fP = typename TSpecType::vertex_coord_type"
+.br
+.ti -1c
+.RI "using \fBvertex_descriptor\fP = typename bgl_impl_type::vertex_descriptor"
+.br
+.ti -1c
+.RI "using \fBvertex_property_type\fP = typename bgl_impl_type::vertex_property_type"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBhgrid3D_view_filter\fP (void)"
+.br
+.ti -1c
+.RI "std::unique_ptr< \fBhgrid3D_view_filter_data\fP< TSpecType > > \fBoperator()\fP (const \fBbgl_impl_type\fP &graph, const \fBvertex_descriptor\fP &start, const \fBrtypes::manhattan_dist\fP &max_dist, boost::optional< \fBvertex_coord_type\fP > axis) const"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TSpecType>
+.br
+class rcppsw::ds::graph::detail::hgrid3D_view_filter< TSpecType >"
+Predicate for filtering \fBhgrid3D\fP into \fBhgrid3D_view\fP objects\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::detail::hgrid3D_view_filter\fP< TSpecType >::\fBbgl_impl_type\fP =  typename TSpecType::bgl_impl_type"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::detail::hgrid3D_view_filter\fP< TSpecType >::\fBedge_descriptor\fP =  typename bgl_impl_type::edge_descriptor"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::detail::hgrid3D_view_filter\fP< TSpecType >::\fBvertex_coord_type\fP =  typename TSpecType::vertex_coord_type"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::detail::hgrid3D_view_filter\fP< TSpecType >::\fBvertex_descriptor\fP =  typename bgl_impl_type::vertex_descriptor"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::detail::hgrid3D_view_filter\fP< TSpecType >::\fBvertex_property_type\fP =  typename bgl_impl_type::vertex_property_type"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::detail::hgrid3D_view_filter\fP< TSpecType >::\fBhgrid3D_view_filter\fP (void)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TSpecType > std::unique_ptr<\fBhgrid3D_view_filter_data\fP<TSpecType> > \fBrcppsw::ds::graph::detail::hgrid3D_view_filter\fP< TSpecType >::operator() (const \fBbgl_impl_type\fP & graph, const \fBvertex_descriptor\fP & start, const \fBrtypes::manhattan_dist\fP & max_dist, boost::optional< \fBvertex_coord_type\fP > axis) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

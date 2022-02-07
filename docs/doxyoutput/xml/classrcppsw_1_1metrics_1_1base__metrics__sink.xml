@@ -1,0 +1,390 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1metrics_1_1base__metrics__sink" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>rcppsw::metrics::base_metrics_sink</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; base_metrics_sink &gt;</basecompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1metrics_1_1csv__sink" prot="public" virt="non-virtual">rcppsw::metrics::csv_sink</derivedcompoundref>
+    <includes refid="base__metrics__sink_8hpp" local="no">base_metrics_sink.hpp</includes>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1a25d28a45fd512c2f1b265039501df33f" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr size_t</type>
+        <definition>constexpr size_t rcppsw::metrics::base_metrics_sink::kN_RETRIES</definition>
+        <argsstring></argsstring>
+        <name>kN_RETRIES</name>
+        <initializer>= 10</initializer>
+        <briefdescription>
+<para>The # of times to retry a failed I/O operation (only an issue on HPC environments generally). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="119" column="27" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1a7e33f5dc8ab917bba8f7910dd6008d98" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; std::ofstream &gt;</type>
+        <definition>std::unique_ptr&lt;std::ofstream&gt; rcppsw::metrics::base_metrics_sink::m_ofile</definition>
+        <argsstring></argsstring>
+        <name>m_ofile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="127" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1aa10d8e830279726cca9498c1532261c7" prot="private" static="no" mutable="no">
+        <type>const fs::path</type>
+        <definition>const fs::path rcppsw::metrics::base_metrics_sink::mc_fpath</definition>
+        <argsstring></argsstring>
+        <name>mc_fpath</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="123" column="34" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1a2edeee3631908418c4f91df7fada60a0" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">rtypes::timestep</ref></type>
+        <definition>const rtypes::timestep rcppsw::metrics::base_metrics_sink::mc_output_interval</definition>
+        <argsstring></argsstring>
+        <name>mc_output_interval</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="125" column="34" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1aeb6a9917f62c9555831f3656bd662a1c" prot="private" static="no" mutable="no">
+        <type>const <ref refid="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" kindref="member">rmetrics::output_mode</ref></type>
+        <definition>const rmetrics::output_mode rcppsw::metrics::base_metrics_sink::mc_output_mode</definition>
+        <argsstring></argsstring>
+        <name>mc_output_mode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="124" column="34" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1acfd634f805129202b9281bf07e73425c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::base_metrics_sink::base_metrics_sink</definition>
+        <argsstring>(fs::path fpath, const enum output_mode &amp;mode, const rtypes::timestep &amp;interval)</argsstring>
+        <name>base_metrics_sink</name>
+        <param>
+          <type>fs::path</type>
+          <declname>fpath</declname>
+        </param>
+        <param>
+          <type>const enum <ref refid="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" kindref="member">output_mode</ref> &amp;</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">rtypes::timestep</ref> &amp;</type>
+          <declname>interval</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fpath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Full path to output file, including the extension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output mode. See <ref refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1af0b4833ff69cf3fac1bd7c25f0934425" kindref="member">output_mode</ref> for possible values. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>interval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Metric output interval. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="70" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1a271430beb55d9f505f7c2a59695795fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::metrics::base_metrics_sink::~base_metrics_sink</definition>
+        <argsstring>(void)</argsstring>
+        <name>~base_metrics_sink</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="74" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1ad158f2620f24851b7ef027236ef6cff2" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::metrics::base_metrics_sink::finalize</definition>
+        <argsstring>(void)=0</argsstring>
+        <name>finalize</name>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1csv__sink_1a465a3dcbcb00f4f802fcbbb54b468cc6">finalize</reimplementedby>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Finalize metrics and flush files in preparation for program exit. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="85" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1a3eda560deb98d0bad5af0685ddb343ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="namespacercppsw_1_1metrics_1a70b7e79624204d45d1aae1e004ccd048" kindref="member">metrics_write_status</ref></type>
+        <definition>virtual metrics_write_status rcppsw::metrics::base_metrics_sink::flush</definition>
+        <argsstring>(const rmetrics::base_metrics_data *data, const rtypes::timestep &amp;t)=0</argsstring>
+        <name>flush</name>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1csv__sink_1afde8629b2754e0b26ca786c70620c12d">flush</reimplementedby>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1metrics_1_1base__metrics__data" kindref="compound">rmetrics::base_metrics_data</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">rtypes::timestep</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Flush gathered metrics data to file; might do nothing if the internal conditions for writing metrics (e.g., the configured interval) are not met. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="92" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1a3e824e44474555c750fccac18db19e13" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fs::path &amp;</type>
+        <definition>const fs::path&amp; rcppsw::metrics::base_metrics_sink::fpath</definition>
+        <argsstring>(void) const</argsstring>
+        <name>fpath</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="100" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" bodystart="100" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1ac02a50aeee8d997179bc6f90ab6d39c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::metrics::base_metrics_sink::initialize</definition>
+        <argsstring>(const rmetrics::base_metrics_data *data)=0</argsstring>
+        <name>initialize</name>
+        <reimplementedby refid="classrcppsw_1_1metrics_1_1csv__sink_1a8ecc9a907e8642c0f8f3394e8333fd7d">initialize</reimplementedby>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1metrics_1_1base__metrics__data" kindref="compound">rmetrics::base_metrics_data</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Initialize any required files for the metrics sink (i.e., .csv headers). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="80" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1acadc48d3632d4d8074ff0a471f5e821b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">rtypes::timestep</ref> &amp;</type>
+        <definition>const rtypes::timestep&amp; rcppsw::metrics::base_metrics_sink::output_interval</definition>
+        <argsstring>(void) const</argsstring>
+        <name>output_interval</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="102" column="26" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" bodystart="102" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1af0b4833ff69cf3fac1bd7c25f0934425" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>enum <ref refid="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" kindref="member">output_mode</ref> &amp;</type>
+        <definition>enum output_mode&amp; rcppsw::metrics::base_metrics_sink::output_mode</definition>
+        <argsstring>(void) const</argsstring>
+        <name>output_mode</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="101" column="26" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1a94679ff78a24f9cfecc224baa6cc99e4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::base_metrics_sink::ready_to_flush</definition>
+        <argsstring>(const rtypes::timestep &amp;t) const</argsstring>
+        <name>ready_to_flush</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">rtypes::timestep</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Have the conditions been met to flush the metrics ? </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="98" column="8"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1a7bc7a48c73aea7b6fc05e345afb83f3c" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::ofstream *</type>
+        <definition>std::ofstream* rcppsw::metrics::base_metrics_sink::ofile</definition>
+        <argsstring>(void)</argsstring>
+        <name>ofile</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="107" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" bodystart="107" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__metrics__sink_1a2a1a9f653f889847e55324fe4a92ea04" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::base_metrics_sink::retry_io</definition>
+        <argsstring>(const std::function&lt; void(void)&gt; &amp;cb)</argsstring>
+        <name>retry_io</name>
+        <param>
+          <type>const std::function&lt; void(void)&gt; &amp;</type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+<para>Retry the I/O operation contained in <computeroutput>cb</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="112" column="8"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class that uses the template design pattern to provide hooks for derived classes so that the process of writing out collected metrics is centralized in one place (here). </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Metrics are written out in .csv format at whatever frequency derived classes choose. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::metrics::base_metrics_sink</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__metrics__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcppsw::ds::metrics::grid2D_metrics_csv_sink&lt; TCellOp &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__csv__sink"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>rcppsw::ds::metrics::grid3D_metrics_csv_sink&lt; TCellOp &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1metrics_1_1grid3D__metrics__csv__sink"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw::metrics::csv_sink</label>
+        <link refid="classrcppsw_1_1metrics_1_1csv__sink"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; base_metrics_sink &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::metrics::base_metrics_sink</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__metrics__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; base_metrics_sink &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" line="63" column="43" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_sink.hpp" bodystart="63" bodyend="129"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1acfd634f805129202b9281bf07e73425c" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>base_metrics_sink</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1ad158f2620f24851b7ef027236ef6cff2" prot="public" virt="pure-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>finalize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1a3eda560deb98d0bad5af0685ddb343ad" prot="public" virt="pure-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>flush</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1a3e824e44474555c750fccac18db19e13" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>fpath</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1ac02a50aeee8d997179bc6f90ab6d39c5" prot="public" virt="pure-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>initialize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1a25d28a45fd512c2f1b265039501df33f" prot="private" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>kN_RETRIES</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1a7e33f5dc8ab917bba8f7910dd6008d98" prot="private" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>m_ofile</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1aa10d8e830279726cca9498c1532261c7" prot="private" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>mc_fpath</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1a2edeee3631908418c4f91df7fada60a0" prot="private" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>mc_output_interval</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1aeb6a9917f62c9555831f3656bd662a1c" prot="private" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>mc_output_mode</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1a7bc7a48c73aea7b6fc05e345afb83f3c" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>ofile</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1acadc48d3632d4d8074ff0a471f5e821b" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>output_interval</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1af0b4833ff69cf3fac1bd7c25f0934425" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>output_mode</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a7397a85f18f00a25a9aa8b822712bfea" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>pop_ndc</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a549446ba1beb41b347998dbdf031dc60" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>push_ndc</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1a94679ff78a24f9cfecc224baa6cc99e4" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>ready_to_flush</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1a2a1a9f653f889847e55324fe4a92ea04" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>retry_io</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__metrics__sink_1a271430beb55d9f505f7c2a59695795fe" prot="public" virt="virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>~base_metrics_sink</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::metrics::base_metrics_sink</scope><name>~client</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

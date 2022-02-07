@@ -33,6 +33,7 @@
 #include "rcppsw/math/vector2.hpp"
 #include "rcppsw/rcppsw.hpp"
 #include "rcppsw/types/discretize_ratio.hpp"
+#include "rcppsw/er/stringizable.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -47,35 +48,59 @@ NS_START(rcppsw, math);
  * \ingroup math
  *
  * \brief Base template class encapsulating mathematical actions on a pair of
- * numbers. Is specialized by \ref vector3u, \ref vector3i, \ref vector3d.
+ * numbers. Is specialized by  \ref vector3i, \ref vector3d.
  *
  * All operations are performed in whatever the template parameter is, so take
  * care if you are trying to do scaling, trigonometric things with integers...
  */
 template <typename T>
-class vector3 {
+class vector3 final : public er::stringizable {
  public:
   using value_type = T;
 
   /**
-   * \brief Computes the euclidean distance between the passed vectors.
-   */
-  static double l2norm(const vector3<T>& v1, const vector3<T>& v2) {
-    return (v1 - v2).length();
-  }
+ * \brief Needed for using vectors as keys in a map.
+ */
+  struct key_compare {
+    template<typename U,
+             RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
+    bool operator()(const vector3<U>& lhs, const vector3<U>& rhs) const {
+      /* Order based on X unless X's are equal, if so order on Y, etc. */
+      if (lhs.x() != rhs.x()) {
+        return lhs.x() < rhs.x();
+      }
+      if (lhs.y() != rhs.y()) {
+        return lhs.y() < rhs.y();
+      }
+      return lhs.z() < rhs.z();
+    }
+    template<typename U,
+             RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
+    bool operator()(const vector3<U>& lhs, const vector3<U>& rhs) const {
+      bool equal_x = std::fabs(lhs.x() - rhs.x()) <= kDOUBLE_EPSILON;
+      bool equal_y = std::fabs(lhs.y() - rhs.y()) <= kDOUBLE_EPSILON;
+
+      if (!equal_x) {
+        return lhs.x() < rhs.x();
+      }
+      if (!equal_y) {
+        return lhs.y() < rhs.y();
+      }
+      return lhs.z() < rhs.z();
+    }
+  };
 
   /**
-   * \brief Computes the distance between the passed vectors.
+   * \brief Needed to compare in mathematical contexts.
    */
-  template<typename U,
-           typename V,
-           RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value),
-           RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<V>::value)>
-  static size_t l1norm(const vector3<U>& v1, const vector3<V>& v2) {
-    return std::abs(static_cast<int>(v1.x() - v2.x())) +
-        std::abs(static_cast<int>(v1.y() - v2.y())) +
-        std::abs(static_cast<int>(v1.z() - v2.z()));
-  }
+  struct componentwise_compare {
+    template <typename U>
+    bool operator()(const vector3<U>& lhs, const vector3<U>& rhs) const {
+      return lhs.x() <= rhs.x() && lhs.y() <= rhs.y() && lhs.z() <= rhs.z();
+    }
+  };
+
+  static constexpr size_t kDIMENSIONALITY = 3;
 
   /**
    * \brief The positive X axis.
@@ -111,7 +136,12 @@ class vector3 {
    * \brief Initializes the 3D vector from a 2D vector, setting the Z value to
    * 0.0.
    */
-  explicit vector3<T>(const vector2<T>& v) : vector3(v.x(), v.y(), 0.0) {}
+  explicit vector3<T>(const vector2<T>& v) : vector3{v, T{0}} {}
+
+  /**
+   * \brief Initialize the 3D vector from a 2D vector.
+   */
+  vector3<T>(const vector2<T>& v, const T& z) : vector3(v.x(), v.y(), z) {}
 
   RCPPSW_NODISCARD T x(void) { return m_x; }
   RCPPSW_NODISCARD T y(void) { return m_y; }
@@ -145,6 +175,11 @@ class vector3 {
   bool is_pd(void) const { return m_x > 0 && m_y > 0 && m_z > 0; }
 
   /**
+   * \brief Is the vector is positive semi-definite?
+   */
+  bool is_psd(void) const { return m_x >= 0 && m_y >= 0 && m_z >= 0; }
+
+  /**
    * \brief Returns the square length of this vector.
    */
   RCPPSW_NODISCARD T square_length(void) const {
@@ -170,6 +205,15 @@ class vector3 {
   vector3& normalize(void) {
     *this /= this->length();
     return *this;
+  }
+
+  /**
+   * \brief Mask a vector using another vector, using \p mask as a boolean mask
+   * by treating each non-zero entry as a 1. Should only be used if \p mask is a
+   * unit vector.
+   */
+  vector3 mask(const vector3& the_mask) const {
+    return vector3(m_x * the_mask.m_x, m_y * the_mask.m_y, m_z * the_mask.m_z);
   }
 
   /**
@@ -212,9 +256,9 @@ class vector3 {
   /**
    * \brief Scales the vector by the specified values.
    *
-   * \param scale_x the scale factor for the X coordinate.
-   * \param scale_y the scale factor for the Y coordinate.
-   * \param scale_z the scale factor for the Z coordinate.
+   * \param scale_x The scale factor for the X coordinate.
+   * \param scale_y The scale factor for the Y coordinate.
+   * \param scale_z The scale factor for the Z coordinate.
    *
    * \return A reference to the scaled vector.
    */
@@ -255,29 +299,9 @@ class vector3 {
    */
   template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   bool operator==(const vector3& other) const {
-    return (std::fabs(x() - other.x()) <= std::numeric_limits<T>::epsilon() &&
-            (std::fabs(y() - other.y()) <= std::numeric_limits<T>::epsilon()) &&
-            (std::fabs(z() - other.z()) <= std::numeric_limits<T>::epsilon()));
-  }
-
-  /**
-   * \brief Needed for using vectors as keys in a map.
-   */
-  template <typename U = T, RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
-  bool operator<(const vector3& other) const {
-    return (m_x < other.m_x) || ((m_x == other.m_x) && (m_y < other.m_y)) ||
-           ((m_x == other.m_x) && (m_y == other.m_y) && (m_z < other.m_z));
-  }
-
-  template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
-  bool operator<(const vector3& other) const {
-    bool equal_x = std::fabs(m_x - other.m_x) <=
-                   std::numeric_limits<T>::epsilon();
-    bool equal_y = std::fabs(m_y - other.m_y) <=
-                   std::numeric_limits<T>::epsilon();
-
-    return (m_x < other.m_x) || (equal_x && (m_y < other.m_y)) ||
-           (equal_x && equal_y && (m_z < other.m_z));
+    return (std::fabs(x() - other.x()) <= kDOUBLE_EPSILON) &&
+        (std::fabs(y() - other.y()) <= kDOUBLE_EPSILON) &&
+        (std::fabs(z() - other.z()) <= kDOUBLE_EPSILON);
   }
 
   template <typename U = T, RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value)>
@@ -288,21 +312,11 @@ class vector3 {
 
   template <typename U = T, RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   bool operator>(const vector3& other) const {
-    bool equal_x = std::fabs(m_x - other.m_x) <=
-                   std::numeric_limits<T>::epsilon();
-    bool equal_y = std::fabs(m_y - other.m_y) <=
-                   std::numeric_limits<T>::epsilon();
+    bool equal_x = std::fabs(m_x - other.m_x) <= kDOUBLE_EPSILON;
+    bool equal_y = std::fabs(m_y - other.m_y) <= kDOUBLE_EPSILON;
 
     return (m_x > other.m_x) || (equal_x && (m_y > other.m_y)) ||
            (equal_x && equal_y && (m_z > other.m_z));
-  }
-
-  bool operator<=(const vector3& other) const {
-    return *this < other || *this == other;
-  }
-
-  bool operator>=(const vector3& other) const {
-    return *this > other || *this == other;
   }
 
   /**
@@ -375,7 +389,7 @@ class vector3 {
   }
 
   /**
-   * \brief For parsing a vector from a string in the form of \c "X,Y".
+   * \brief For parsing a vector from a string in the form of \c "X,Y,Z".
    */
   friend std::istream& operator>>(std::istream& is, vector3<T>& v) {
     T values[3] = { T(), T(), T() };
@@ -383,7 +397,8 @@ class vector3 {
     v.set(values[0], values[1], values[2]);
     return is;
   }
-  std::string to_str(void) const {
+
+  std::string to_str(void) const override {
     return "(" + rcppsw::to_string(m_x) + "," + rcppsw::to_string(m_y) + "," +
            rcppsw::to_string(m_z) + ")";
   }
@@ -405,11 +420,6 @@ class vector3 {
 using vector3i = vector3<int>;
 
 /**
- * \brief Specialization of \ref vector3 for unsigned integers.
- */
-using vector3u = vector3<uint>;
-
-/**
  * \brief Specialization of \ref vector3 for size_t.
  */
 using vector3z = vector3<size_t>;
@@ -419,11 +429,23 @@ using vector3z = vector3<size_t>;
  */
 using vector3d = vector3<double>;
 
+template<> const vector3i vector3i::X;
+template<> const vector3i vector3i::Y;
+template<> const vector3i vector3i::Z;
+
+template<> const vector3z vector3z::X;
+template<> const vector3z vector3z::Y;
+template<> const vector3z vector3z::Z;
+
+template<> const vector3d vector3d::X;
+template<> const vector3d vector3d::Y;
+template<> const vector3d vector3d::Z;
+
 /*******************************************************************************
  * Macros
  ******************************************************************************/
 /**
- * \brief Convert vector3{i,u,z} -> vector3d directly, without applying any
+ * \brief Convert vector3{i,z} -> vector3d directly, without applying any
  * scaling.
  */
 #define RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(prefix)                          \
@@ -432,7 +454,7 @@ using vector3d = vector3<double>;
   }
 
 /**
- * \brief Convert vector3{i,u,z} -> vector3d, applying a multiplicative scaling
+ * \brief Convert vector3{i,z} -> vector3d, applying a multiplicative scaling
  * factor.
  */
 #define RCPPSW_MATH_VEC3_SCALED_CONV2FLT(prefix)                              \
@@ -442,32 +464,41 @@ using vector3d = vector3<double>;
   }
 
 /**
- * \brief Convert vector3d -> vector3{i,u,z}, applying a divisive scaling factor.
+ * \brief Convert vector3d -> vector3{i,z}, applying a divisive scaling
+ * factor.
  */
 #define RCPPSW_MATH_VEC3_CONV2DISC(dest_prefix, dest_type)                  \
   static inline vector3##dest_prefix dvec2##dest_prefix##vec(               \
       const vector3d& other, double scale) {                                \
-    return vector3##dest_prefix(static_cast<dest_type>(other.x() / scale),  \
+     return vector3##dest_prefix(static_cast<dest_type>(other.x() / scale),  \
                                 static_cast<dest_type>(other.y() / scale),  \
                                 static_cast<dest_type>(other.z() / scale)); \
   }
 
 /*******************************************************************************
- * Free Functions
+ * Conversion Functions
  ******************************************************************************/
-RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(u);
 RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(i);
 RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(z);
-RCPPSW_MATH_VEC3_SCALED_CONV2FLT(u);
 RCPPSW_MATH_VEC3_SCALED_CONV2FLT(i);
 RCPPSW_MATH_VEC3_SCALED_CONV2FLT(z);
 RCPPSW_MATH_VEC3_CONV2DISC(z, size_t);
-RCPPSW_MATH_VEC3_CONV2DISC(u, uint);
 RCPPSW_MATH_VEC3_CONV2DISC(i, int);
 
-template <class T>
-vector2<T> to_2D(const vector3<T>& v) {
-  return v.to_2D();
+/*******************************************************************************
+ * Free Functions
+ ******************************************************************************/
+/**
+ * \brief Computes the distance between the passed vectors.
+ */
+template<typename U,
+         typename V,
+         RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value),
+         RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<V>::value)>
+static inline size_t l1norm(const vector3<U>& v1, const vector3<V>& v2) {
+  return std::abs(static_cast<int>(v1.x() - v2.x())) +
+      std::abs(static_cast<int>(v1.y() - v2.y())) +
+      std::abs(static_cast<int>(v1.z() - v2.z()));
 }
 
 NS_END(math, rcppsw);

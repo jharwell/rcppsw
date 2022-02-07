@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1patterns_1_1factory_1_1detail" kind="namespace" language="C++">
+    <compoundname>rcppsw::patterns::factory::detail</compoundname>
+    <innerclass refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory" prot="public">rcppsw::patterns::factory::detail::base_factory</innerclass>
+    <innerclass refid="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1factory__releasing__type" prot="public">rcppsw::patterns::factory::detail::factory_releasing_type</innerclass>
+    <innerclass refid="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1factory__sharing__type" prot="public">rcppsw::patterns::factory::detail::factory_sharing_type</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1factory__singleton" prot="public">rcppsw::patterns::factory::detail::factory_singleton</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1factory_1_1detail_1_1multifactory" prot="public">rcppsw::patterns::factory::detail::multifactory</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" line="36" column="46"/>
+  </compounddef>
+</doxygen>

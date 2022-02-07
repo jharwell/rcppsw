@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1metrics_1_1config_1_1xml_1_1base__sink__parser" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::metrics::config::xml::base_sink_parser</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; base_sink_parser &gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">xml_config_parser</basecompoundref>
+    <includes refid="base__sink__parser_8hpp" local="no">base_sink_parser.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1config_1_1xml_1_1base__sink__parser_1a67d784a1e3335c92312f54c033dbb37e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::config::xml::base_sink_parser::base_sink_parser</definition>
+        <argsstring>(void)</argsstring>
+        <name>base_sink_parser</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/base_sink_parser.hpp" line="52" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/base_sink_parser.hpp" bodystart="52" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1config_1_1xml_1_1base__sink__parser_1a9f0a64db6a8940284dc1c26288f7eaf7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::config::xml::base_sink_parser::~base_sink_parser</definition>
+        <argsstring>(void) override=default</argsstring>
+        <name>~base_sink_parser</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/base_sink_parser.hpp" line="55" column="3"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1config_1_1xml_1_1base__sink__parser_1a89fb56f4d736196973ea1e8a19712dfb" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::config::xml::base_sink_parser::is_collector_name</definition>
+        <argsstring>(const ticpp::Attribute &amp;attr) const</argsstring>
+        <name>is_collector_name</name>
+        <param>
+          <type>const ticpp::Attribute &amp;</type>
+          <declname>attr</declname>
+        </param>
+        <briefdescription>
+<para>Determine if a particular attribute under the a node is the name of a metric collector or some other type of parameter. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/base_sink_parser.hpp" line="62" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1config_1_1xml_1_1base__sink__parser_1a7505fcecb2d6eed30277eb9d2603e321" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::config::xml::base_sink_parser::output_mode_parse</definition>
+        <argsstring>(const ticpp::Element &amp;element, rmetrics::config::output_mode_config *config)</argsstring>
+        <name>output_mode_parse</name>
+        <param>
+          <type>const ticpp::Element &amp;</type>
+          <declname>element</declname>
+        </param>
+        <param>
+          <type>rmetrics::config::output_mode_config *</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/base_sink_parser.hpp" line="64" column="8"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class for parsing parameters for rmetrics::base_sink derived classes. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::er::client&lt; base_sink_parser &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::config::xml::base_sink_parser</label>
+        <link refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1base__sink__parser"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>xml_config_parser</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::er::client&lt; base_sink_parser &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::config::xml::base_sink_parser</label>
+        <link refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1base__sink__parser"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>xml_config_parser</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/base_sink_parser.hpp" line="50" column="63" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/base_sink_parser.hpp" bodystart="49" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1base__sink__parser_1a67d784a1e3335c92312f54c033dbb37e" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>base_sink_parser</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1base__sink__parser_1a89fb56f4d736196973ea1e8a19712dfb" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>is_collector_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1base__sink__parser_1a7505fcecb2d6eed30277eb9d2603e321" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>output_mode_parse</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1base__sink__parser_1a9f0a64db6a8940284dc1c26288f7eaf7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>~base_sink_parser</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::metrics::config::xml::base_sink_parser</scope><name>~client</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

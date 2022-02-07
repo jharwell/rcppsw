@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_b9e378b8961e243b8d0ca71e2bec6361" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw</compoundname>
+    <innerdir refid="dir_859b57279e04c7ca7dd2cafff8c96463">/home/jharwell/git/rcppsw/include/rcppsw/al</innerdir>
+    <innerdir refid="dir_428c45eccc59a1d5af37370d6910a521">/home/jharwell/git/rcppsw/include/rcppsw/algorithm</innerdir>
+    <innerdir refid="dir_e71ecde19d5ee9bec748982b9e13af55">/home/jharwell/git/rcppsw/include/rcppsw/common</innerdir>
+    <innerdir refid="dir_3dc8ad57bb3cb9c8813e50e27d06d5a3">/home/jharwell/git/rcppsw/include/rcppsw/config</innerdir>
+    <innerdir refid="dir_4cf2f317641eb868ffdec0f5b4a9a15c">/home/jharwell/git/rcppsw/include/rcppsw/control</innerdir>
+    <innerdir refid="dir_964d3ca7146c9a6357504271c7210d9a">/home/jharwell/git/rcppsw/include/rcppsw/ds</innerdir>
+    <innerdir refid="dir_816037ad2dc0891d4b3e55cf2c5daffd">/home/jharwell/git/rcppsw/include/rcppsw/er</innerdir>
+    <innerdir refid="dir_bb287da7b336a9ecd142363ba046bb80">/home/jharwell/git/rcppsw/include/rcppsw/math</innerdir>
+    <innerdir refid="dir_a6dcf768a914f47739c3fbfb9efa15e3">/home/jharwell/git/rcppsw/include/rcppsw/metrics</innerdir>
+    <innerdir refid="dir_95aba3d6948105df78b99a4cb6dcbff7">/home/jharwell/git/rcppsw/include/rcppsw/mpl</innerdir>
+    <innerdir refid="dir_311bb3273c2be28f6e33e3a5740bad70">/home/jharwell/git/rcppsw/include/rcppsw/multiprocess</innerdir>
+    <innerdir refid="dir_92ce6197395db8faf06fa3e040a9dc9e">/home/jharwell/git/rcppsw/include/rcppsw/multithread</innerdir>
+    <innerdir refid="dir_37e0e9cda2a1c5a080256bcc4971a6c3">/home/jharwell/git/rcppsw/include/rcppsw/patterns</innerdir>
+    <innerdir refid="dir_e7d4f17c5c3f36381e1c6e75bb3cc1c1">/home/jharwell/git/rcppsw/include/rcppsw/types</innerdir>
+    <innerdir refid="dir_0137dcf85346e2766e34a45b6015c624">/home/jharwell/git/rcppsw/include/rcppsw/utils</innerdir>
+    <innerfile refid="rcppsw_8hpp">rcppsw.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/"/>
+  </compounddef>
+</doxygen>

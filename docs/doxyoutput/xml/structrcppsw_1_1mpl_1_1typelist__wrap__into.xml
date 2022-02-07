@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1mpl_1_1typelist__wrap__into" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::mpl::typelist_wrap_into</compoundname>
+    <includes refid="typelist_8hpp" local="no">typelist.hpp</includes>
+    <innerclass refid="structrcppsw_1_1mpl_1_1typelist__wrap__into_1_1apply" prot="public">rcppsw::mpl::typelist_wrap_into::apply</innerclass>
+    <templateparamlist>
+      <param>
+        <type>template&lt; class WrappedType, class... &gt; class</type>
+        <declname>WrapperType</declname>
+        <defname>WrapperType</defname>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>WrapperTypeArgs</declname>
+        <defname>WrapperTypeArgs</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>Wrap a <ref refid="namespacercppsw_1_1mpl_1a087641491e12b257b1c6ecf5414aa192" kindref="member">typelist</ref> into a container/template class. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>WrapperType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The container class each of the types in the <ref refid="namespacercppsw_1_1mpl_1a087641491e12b257b1c6ecf5414aa192" kindref="member">typelist</ref> will be wrapped into. It takes the wrapped type, as well as additional template arguments for the wrapped type, as arguments.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>WrapperTypeArgs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Additional template paramaters for the WrapperType. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::mpl::typelist_wrap_into&lt; WrapperType, WrapperTypeArgs &gt;</label>
+        <link refid="structrcppsw_1_1mpl_1_1typelist__wrap__into"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" line="141" column="25" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" bodystart="141" bodyend="154"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

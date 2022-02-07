@@ -1,0 +1,321 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1metrics_1_1base__collector" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>rcppsw::metrics::base_collector</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; base_collector &gt;</basecompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector" prot="public" virt="non-virtual">rcppsw::ds::metrics::grid2D_metrics_collector</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1ds_1_1metrics_1_1grid3D__metrics__collector" prot="public" virt="non-virtual">rcppsw::ds::metrics::grid3D_metrics_collector</derivedcompoundref>
+    <includes refid="base__collector_8hpp" local="no">base_collector.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1base__collector_1aaf393682ec3f12ffbe59e58cabfb6e2d" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classrcppsw_1_1metrics_1_1base__sink" kindref="compound">base_sink</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;base_sink&gt; rcppsw::metrics::base_collector::m_sink</definition>
+        <argsstring></argsstring>
+        <name>m_sink</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="130" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1base__collector_1a670fe98b62c4132d8663e36a35a2976e" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">types::timestep</ref></type>
+        <definition>types::timestep rcppsw::metrics::base_collector::m_timestep</definition>
+        <argsstring></argsstring>
+        <name>m_timestep</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="129" column="30" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__collector_1a3e5df8d514725acf00cd8917bdfc0c95" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::base_collector::base_collector</definition>
+        <argsstring>(std::unique_ptr&lt; base_sink &gt; sink)</argsstring>
+        <name>base_collector</name>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classrcppsw_1_1metrics_1_1base__sink" kindref="compound">base_sink</ref> &gt;</type>
+          <declname>sink</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sinks</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The sinks for the metrics that determines how they will be written to the filesystem. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="66" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__collector_1a4d0ba973e177e1a003a39b5652e2db9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::metrics::base_collector::~base_collector</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~base_collector</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="68" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__collector_1a2ea13b8891f64d4f9c508e01aa1fb84d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::metrics::base_collector::collect</definition>
+        <argsstring>(const rcppsw::metrics::base_metrics &amp;metrics)=0</argsstring>
+        <name>collect</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1base__metrics" kindref="compound">rcppsw::metrics::base_metrics</ref> &amp;</type>
+          <declname>metrics</declname>
+        </param>
+        <briefdescription>
+<para>Collect metrics from an object which implements the necessary interface (must be checked with a dynamic cast in the function itself). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="74" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__collector_1a65ee808c4f9ce878a1cc172dfc2473d6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const <ref refid="structrcppsw_1_1metrics_1_1base__data" kindref="compound">rmetrics::base_data</ref> *</type>
+        <definition>virtual const rmetrics::base_data* rcppsw::metrics::base_collector::data</definition>
+        <argsstring>(void) const =0</argsstring>
+        <name>data</name>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1metrics_1_1grid3D__metrics__collector_1a95c775666d5905bddf0a355c1e02a893">data</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector_1a1939e3abed4e63e3e056732ef323427e">data</reimplementedby>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get a handle to the gathered data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="117" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__collector_1a65d77f74eb89ae2648fc03a5e3208d71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::base_collector::finalize</definition>
+        <argsstring>(void)</argsstring>
+        <name>finalize</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classrcppsw_1_1metrics_1_1base__sink_1a0ad1688ea1c8a323d6f6435280274a4d" kindref="member">base_sink::finalize()</ref>; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="86" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__collector_1ac802aa3e05bed414bb1a0c741c1f9310" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespacercppsw_1_1metrics_1a9deb89f55ed769b27bdaf97be97c3d5b" kindref="member">write_status</ref></type>
+        <definition>write_status rcppsw::metrics::base_collector::flush</definition>
+        <argsstring>(void)</argsstring>
+        <name>flush</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classrcppsw_1_1metrics_1_1base__sink_1a6c44de6709e712b9c5e54cb96a12764c" kindref="member">base_sink::flush()</ref>; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="91" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__collector_1a0e211e635c7452e3cb000518f1735c3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::base_collector::initialize</definition>
+        <argsstring>(void)</argsstring>
+        <name>initialize</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Initialize metrics collection. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Should be called only on collection start. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="81" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__collector_1a357c5d4d01dedf0ca5a0298066cc8fb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::base_collector::interval_reset</definition>
+        <argsstring>(void)</argsstring>
+        <name>interval_reset</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Reset metrics at the end of an interval. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Can be called every timestep (and probably should be for consistency as behavior of derived classes possibly changes), and metrics will only be reset after the specified number of timesteps in the interval has elapsed. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="100" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__collector_1abd4351fa4f7d837c4f68bfb8a0cf230d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">types::timestep</ref></type>
+        <definition>types::timestep rcppsw::metrics::base_collector::timestep</definition>
+        <argsstring>(void) const</argsstring>
+        <name>timestep</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return the current timestep tracked by the collector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="105" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__collector_1a47c206d306e62b30110281108e19e58a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::base_collector::timestep_inc</definition>
+        <argsstring>(void)</argsstring>
+        <name>timestep_inc</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Increment the timestep referenced by the collector during metric collection and .csv line building. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="111" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" bodystart="111" bodyend="111"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1base__collector_1afcdf89f71d05cc03018ea2b19a0c1510" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::metrics::base_collector::reset_after_interval</definition>
+        <argsstring>(void)</argsstring>
+        <name>reset_after_interval</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Reset some metrics (possibly). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Can be called at the end of every interval. By default it does nothing. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="125" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" bodystart="125" bodyend="125"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class that uses the template design pattern to provide hooks for derived classes so that the process of writing out metrics is centralized in one place (here). </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Metrics are written out in .csv format at whatever frequency derived classes choose. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::metrics::base_collector</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__collector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcppsw::ds::metrics::grid3D_metrics_collector</label>
+        <link refid="classrcppsw_1_1ds_1_1metrics_1_1grid3D__metrics__collector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; base_collector &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="3">
+        <label>rcppsw::ds::metrics::grid2D_metrics_collector</label>
+        <link refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::metrics::base_collector</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__collector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; base_collector &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" line="60" column="40" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_collector.hpp" bodystart="60" bodyend="132"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a3e5df8d514725acf00cd8917bdfc0c95" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>base_collector</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a2ea13b8891f64d4f9c508e01aa1fb84d" prot="public" virt="pure-virtual"><scope>rcppsw::metrics::base_collector</scope><name>collect</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a65ee808c4f9ce878a1cc172dfc2473d6" prot="public" virt="pure-virtual"><scope>rcppsw::metrics::base_collector</scope><name>data</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a65d77f74eb89ae2648fc03a5e3208d71" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>finalize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1ac802aa3e05bed414bb1a0c741c1f9310" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>flush</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a0e211e635c7452e3cb000518f1735c3f" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>initialize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a357c5d4d01dedf0ca5a0298066cc8fb8" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>interval_reset</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1aaf393682ec3f12ffbe59e58cabfb6e2d" prot="private" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>m_sink</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a670fe98b62c4132d8663e36a35a2976e" prot="private" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>m_timestep</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1afcdf89f71d05cc03018ea2b19a0c1510" prot="protected" virt="virtual"><scope>rcppsw::metrics::base_collector</scope><name>reset_after_interval</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1abd4351fa4f7d837c4f68bfb8a0cf230d" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>timestep</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a47c206d306e62b30110281108e19e58a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_collector</scope><name>timestep_inc</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__collector_1a4d0ba973e177e1a003a39b5652e2db9c" prot="public" virt="virtual"><scope>rcppsw::metrics::base_collector</scope><name>~base_collector</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::metrics::base_collector</scope><name>~client</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

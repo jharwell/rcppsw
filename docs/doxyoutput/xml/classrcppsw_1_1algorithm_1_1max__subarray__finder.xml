@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1algorithm_1_1max__subarray__finder" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::algorithm::max_subarray_finder</compoundname>
+    <includes refid="max__subarray__finder_8hpp" local="no">max_subarray_finder.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1max__subarray__finder_1afe9431a293493420ffec107190fea371" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>boost::optional&lt; std::tuple&lt; T, int, int &gt; &gt;</type>
+        <definition>boost::optional&lt;std::tuple&lt;T, int, int&gt; &gt; rcppsw::algorithm::max_subarray_finder&lt; T &gt;::operator()</definition>
+        <argsstring>(const std::vector&lt; T &gt; &amp;arr) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Find the maximal subarray from the source array. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>(sum, start index (inclusive), end index (inclusive)), if one is found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/max_subarray_finder.hpp" line="61" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/max_subarray_finder.hpp" bodystart="61" bodyend="82"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Find the maximal subarray using Kadane&apos;s algorithm, which is O(n). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::algorithm::max_subarray_finder&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1algorithm_1_1max__subarray__finder"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/max_subarray_finder.hpp" line="54" column="26" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/max_subarray_finder.hpp" bodystart="54" bodyend="83"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1algorithm_1_1max__subarray__finder_1afe9431a293493420ffec107190fea371" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::max_subarray_finder</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

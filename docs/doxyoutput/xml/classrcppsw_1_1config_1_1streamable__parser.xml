@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1config_1_1streamable__parser" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>rcppsw::config::streamable_parser</compoundname>
+    <includes refid="streamable__parser_8hpp" local="no">streamable_parser.hpp</includes>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1config_1_1streamable__parser_1aed5d018916a2d3a84e5ea02a8a128c72" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr size_t</type>
+        <definition>constexpr size_t rcppsw::config::streamable_parser::kColumnWidth</definition>
+        <argsstring></argsstring>
+        <name>kColumnWidth</name>
+        <initializer>= 100</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" line="52" column="27" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1config_1_1streamable__parser_1a64afed58c278dcf2242e9a3e4094437e" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr size_t</type>
+        <definition>constexpr size_t rcppsw::config::streamable_parser::kHeader1</definition>
+        <argsstring></argsstring>
+        <name>kHeader1</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" line="53" column="27" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1config_1_1streamable__parser_1afed253298a3cd5c162b922dd65448065" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr size_t</type>
+        <definition>constexpr size_t rcppsw::config::streamable_parser::kHeader2</definition>
+        <argsstring></argsstring>
+        <name>kHeader2</name>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" line="54" column="27" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1config_1_1streamable__parser_1ad89d9c833707f5748b8b0eb558ba38a5" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr size_t</type>
+        <definition>constexpr size_t rcppsw::config::streamable_parser::kHeader3</definition>
+        <argsstring></argsstring>
+        <name>kHeader3</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" line="55" column="27" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1config_1_1streamable__parser_1a6254d50d1c5052a3a5c7115aa82c54c2" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr size_t</type>
+        <definition>constexpr size_t rcppsw::config::streamable_parser::kHeader4</definition>
+        <argsstring></argsstring>
+        <name>kHeader4</name>
+        <initializer>= 4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" line="56" column="27" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1config_1_1streamable__parser_1a4b41f804debdc069da426faa53f51127" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t rcppsw::config::streamable_parser::m_level</definition>
+        <argsstring></argsstring>
+        <name>m_level</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" line="92" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classrcppsw_1_1config_1_1streamable__parser_1adb225b3e1f72aadddf324dd1116e551e" prot="private" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::config::streamable_parser::streamable_parser</definition>
+        <argsstring>(size_t level)</argsstring>
+        <name>streamable_parser</name>
+        <param>
+          <type>size_t</type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" line="58" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1config_1_1streamable__parser_1a2d1422e8fec8b9c98e517cbbf7a43eab" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::config::streamable_parser::~streamable_parser</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~streamable_parser</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" line="50" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1config_1_1streamable__parser_1a7fcdbd36c5b00db2186796281097c739" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string rcppsw::config::streamable_parser::footer_build</definition>
+        <argsstring>(const std::string &amp;xml_root) const</argsstring>
+        <name>footer_build</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>xml_root</declname>
+        </param>
+        <briefdescription>
+<para>Build a footer suitable for inclusion in dumping parsed parameters to a stream. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The constructed footer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" line="80" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1config_1_1streamable__parser_1ac6380415977c1ffea1cf23bc7e6daab4" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string rcppsw::config::streamable_parser::header_build</definition>
+        <argsstring>(const std::string &amp;xml_root) const</argsstring>
+        <name>header_build</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>xml_root</declname>
+        </param>
+        <briefdescription>
+<para>Build a header suitable for inclusion in dumping parsed parameters to a stream. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The constructed header. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" line="72" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1config_1_1streamable__parser_1af3ad13e86e6b1cc5b0cc41ff299230ab" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t rcppsw::config::streamable_parser::level</definition>
+        <argsstring>(void) const</argsstring>
+        <name>level</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" line="82" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1config_1_1streamable__parser_1ab46751312a6b9e3171304aae7a0869be" prot="private" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::config::streamable_parser::show</definition>
+        <argsstring>(std::ostream &amp;) const =0</argsstring>
+        <name>show</name>
+        <param>
+          <type>std::ostream &amp;</type>
+        </param>
+        <briefdescription>
+<para>Dump the parsed (or possibly unparsed, but that&apos;s kind of useless) parameters to the specified stream. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" line="64" column="16"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classrcppsw_1_1config_1_1streamable__parser_1a5f352c40b91b7a00bdf38cc0e919fbda" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>friend std::ostream &amp;</type>
+        <definition>std::ostream&amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;stream, const streamable_parser &amp;parser)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1config_1_1streamable__parser" kindref="compound">streamable_parser</ref> &amp;</type>
+          <declname>parser</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" line="84" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" bodystart="84" bodyend="88"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Mixin to add pretty printing capabilities to parsers. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::config::streamable_parser</label>
+        <link refid="classrcppsw_1_1config_1_1streamable__parser"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" line="49" column="24" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/config/streamable_parser.hpp" bodystart="49" bodyend="94"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1config_1_1streamable__parser_1a7fcdbd36c5b00db2186796281097c739" prot="private" virt="non-virtual"><scope>rcppsw::config::streamable_parser</scope><name>footer_build</name></member>
+      <member refid="classrcppsw_1_1config_1_1streamable__parser_1ac6380415977c1ffea1cf23bc7e6daab4" prot="private" virt="non-virtual"><scope>rcppsw::config::streamable_parser</scope><name>header_build</name></member>
+      <member refid="classrcppsw_1_1config_1_1streamable__parser_1aed5d018916a2d3a84e5ea02a8a128c72" prot="private" virt="non-virtual"><scope>rcppsw::config::streamable_parser</scope><name>kColumnWidth</name></member>
+      <member refid="classrcppsw_1_1config_1_1streamable__parser_1a64afed58c278dcf2242e9a3e4094437e" prot="private" virt="non-virtual"><scope>rcppsw::config::streamable_parser</scope><name>kHeader1</name></member>
+      <member refid="classrcppsw_1_1config_1_1streamable__parser_1afed253298a3cd5c162b922dd65448065" prot="private" virt="non-virtual"><scope>rcppsw::config::streamable_parser</scope><name>kHeader2</name></member>
+      <member refid="classrcppsw_1_1config_1_1streamable__parser_1ad89d9c833707f5748b8b0eb558ba38a5" prot="private" virt="non-virtual"><scope>rcppsw::config::streamable_parser</scope><name>kHeader3</name></member>
+      <member refid="classrcppsw_1_1config_1_1streamable__parser_1a6254d50d1c5052a3a5c7115aa82c54c2" prot="private" virt="non-virtual"><scope>rcppsw::config::streamable_parser</scope><name>kHeader4</name></member>
+      <member refid="classrcppsw_1_1config_1_1streamable__parser_1af3ad13e86e6b1cc5b0cc41ff299230ab" prot="private" virt="non-virtual"><scope>rcppsw::config::streamable_parser</scope><name>level</name></member>
+      <member refid="classrcppsw_1_1config_1_1streamable__parser_1a4b41f804debdc069da426faa53f51127" prot="private" virt="non-virtual"><scope>rcppsw::config::streamable_parser</scope><name>m_level</name></member>
+      <member refid="classrcppsw_1_1config_1_1streamable__parser_1a5f352c40b91b7a00bdf38cc0e919fbda" prot="private" virt="non-virtual"><scope>rcppsw::config::streamable_parser</scope><name>operator&lt;&lt;</name></member>
+      <member refid="classrcppsw_1_1config_1_1streamable__parser_1ab46751312a6b9e3171304aae7a0869be" prot="private" virt="pure-virtual"><scope>rcppsw::config::streamable_parser</scope><name>show</name></member>
+      <member refid="classrcppsw_1_1config_1_1streamable__parser_1adb225b3e1f72aadddf324dd1116e551e" prot="private" virt="non-virtual"><scope>rcppsw::config::streamable_parser</scope><name>streamable_parser</name></member>
+      <member refid="classrcppsw_1_1config_1_1streamable__parser_1a2d1422e8fec8b9c98e517cbbf7a43eab" prot="private" virt="virtual"><scope>rcppsw::config::streamable_parser</scope><name>~streamable_parser</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

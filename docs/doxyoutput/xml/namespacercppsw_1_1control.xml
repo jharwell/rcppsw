@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1control" kind="namespace" language="C++">
+    <compoundname>rcppsw::control</compoundname>
+    <innerclass refid="classrcppsw_1_1control_1_1base__waveform" prot="public">rcppsw::control::base_waveform</innerclass>
+    <innerclass refid="classrcppsw_1_1control_1_1constant__waveform" prot="public">rcppsw::control::constant_waveform</innerclass>
+    <innerclass refid="classrcppsw_1_1control_1_1null__waveform" prot="public">rcppsw::control::null_waveform</innerclass>
+    <innerclass refid="classrcppsw_1_1control_1_1pid__loop" prot="public">rcppsw::control::pid_loop</innerclass>
+    <innerclass refid="classrcppsw_1_1control_1_1sawtooth__waveform" prot="public">rcppsw::control::sawtooth_waveform</innerclass>
+    <innerclass refid="classrcppsw_1_1control_1_1sine__waveform" prot="public">rcppsw::control::sine_waveform</innerclass>
+    <innerclass refid="classrcppsw_1_1control_1_1square__waveform" prot="public">rcppsw::control::square_waveform</innerclass>
+    <innerclass refid="classrcppsw_1_1control_1_1waveform__generator" prot="public">rcppsw::control::waveform_generator</innerclass>
+    <innernamespace refid="namespacercppsw_1_1control_1_1config">rcppsw::control::config</innernamespace>
+    <briefdescription>
+<para>Control theory classes: periodic/aperiodic waveform generators, PID loops, etc. and their configuration. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/aperiodic_waveform.hpp" line="32" column="26"/>
+  </compounddef>
+</doxygen>

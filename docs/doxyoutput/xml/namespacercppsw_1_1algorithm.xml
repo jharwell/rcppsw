@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1algorithm" kind="namespace" language="C++">
+    <compoundname>rcppsw::algorithm</compoundname>
+    <innerclass refid="classrcppsw_1_1algorithm_1_1closest__pair2D" prot="public">rcppsw::algorithm::closest_pair2D</innerclass>
+    <innerclass refid="classrcppsw_1_1algorithm_1_1convex__hull2D" prot="public">rcppsw::algorithm::convex_hull2D</innerclass>
+    <innerclass refid="classrcppsw_1_1algorithm_1_1max__subarray__finder" prot="public">rcppsw::algorithm::max_subarray_finder</innerclass>
+    <innerclass refid="structrcppsw_1_1algorithm_1_1result__type2D" prot="public">rcppsw::algorithm::result_type2D</innerclass>
+    <innernamespace refid="namespacercppsw_1_1algorithm_1_1clustering">rcppsw::algorithm::clustering</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacercppsw_1_1algorithm_1a708f58ee6c37c53495f944f28499ea28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class InputIterator</type>
+          </param>
+          <param>
+            <type>class OutputIterator</type>
+          </param>
+          <param>
+            <type>class Predicate</type>
+          </param>
+          <param>
+            <type>class UnaryFunction</type>
+          </param>
+        </templateparamlist>
+        <type>OutputIterator</type>
+        <definition>OutputIterator rcppsw::algorithm::transform_if</definition>
+        <argsstring>(InputIterator first, InputIterator last, OutputIterator result, const Predicate &amp;pred, const UnaryFunction &amp;f)</argsstring>
+        <name>transform_if</name>
+        <param>
+          <type>InputIterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>InputIterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>OutputIterator</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>const Predicate &amp;</type>
+          <declname>pred</declname>
+        </param>
+        <param>
+          <type>const UnaryFunction &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>Given an input range defined by (<computeroutput>first</computeroutput>, <computeroutput>last</computeroutput>), and a filtering predicate <computeroutput>pred</computeroutput>, apply <computeroutput>f</computeroutput> to all elements from the input range that satisfy <computeroutput>pred</computeroutput> and write them to the output range <computeroutput>result</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/transform.hpp" line="50" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/transform.hpp" bodystart="50" bodyend="61"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Various algorithms: closest pair, max subarray, clustering. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/closest_pair2D.hpp" line="41" column="28"/>
+  </compounddef>
+</doxygen>

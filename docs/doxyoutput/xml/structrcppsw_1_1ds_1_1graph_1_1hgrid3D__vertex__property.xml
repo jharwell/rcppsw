@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1ds_1_1graph_1_1hgrid3D__vertex__property" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::ds::graph::hgrid3D_vertex_property</compoundname>
+    <basecompoundref refid="structrcppsw_1_1ds_1_1graph_1_1base__vertex__property" prot="public" virt="non-virtual">rcppsw::ds::graph::base_vertex_property</basecompoundref>
+    <includes refid="hgrid3D__vertex__property_8hpp" local="no">hgrid3D_vertex_property.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1ds_1_1graph_1_1hgrid3D__vertex__property_1a972b7ffdf2cc75642f761a878c7e3857" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacercppsw_1_1math_1a72e9a2c7f7fb0b33f22a664371912a36" kindref="member">rmath::vector3z</ref></type>
+        <definition>rmath::vector3z rcppsw::ds::graph::hgrid3D_vertex_property::coord</definition>
+        <argsstring></argsstring>
+        <name>coord</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_vertex_property.hpp" line="49" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_vertex_property.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class for all vertex properties used with the <ref refid="classrcppsw_1_1ds_1_1graph_1_1hgrid3D" kindref="compound">hgrid3D</ref> graph. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::ds::graph::hgrid3D_vertex_property</label>
+        <link refid="structrcppsw_1_1ds_1_1graph_1_1hgrid3D__vertex__property"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::ds::graph::base_vertex_property</label>
+        <link refid="structrcppsw_1_1ds_1_1graph_1_1base__vertex__property"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::graph::hgrid3D_vertex_property</label>
+        <link refid="structrcppsw_1_1ds_1_1graph_1_1hgrid3D__vertex__property"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+coord</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::ds::graph::base_vertex_property</label>
+        <link refid="structrcppsw_1_1ds_1_1graph_1_1base__vertex__property"/>
+      </node>
+      <node id="3">
+        <label>rcppsw::math::vector3&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1vector3"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_vertex_property.hpp" line="48" column="58" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_vertex_property.hpp" bodystart="48" bodyend="50"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1hgrid3D__vertex__property_1a972b7ffdf2cc75642f761a878c7e3857" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::hgrid3D_vertex_property</scope><name>coord</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

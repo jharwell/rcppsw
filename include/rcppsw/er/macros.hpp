@@ -41,7 +41,14 @@
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#define ER_GET_LOGGER(...) rer::client<typename std::remove_cv<typename std::remove_reference<decltype(*this)>::type>::type>::logger();
+#define ER_GET_LOGGER(...) \
+  rer::client                                                           \
+  <typename std::remove_cv                                              \
+   <typename std::remove_reference                                      \
+    <decltype(*this)                                                    \
+     >::type                                                            \
+    >::type                                                             \
+   >::logger();
 
 #if (RCPPSW_ER == RCPPSW_ER_NONE)
 
@@ -65,9 +72,9 @@
 #define ER_INFO(...)
 #define ER_DEBUG(...)
 #define ER_TRACE(...)
-#define ER_CHECKW(...)
-#define ER_CHECKI(...)
-#define ER_CHECKD(...)
+#define ER_CONDW(...)
+#define ER_CONDI(...)
+#define ER_CONDD(...)
 
 #elif (RCPPSW_ER == RCPPSW_ER_FATAL)
 
@@ -77,9 +84,9 @@
 #define ER_DEBUG(...)
 #define ER_TRACE(...)
 #define ER_REPORT(...)
-#define ER_CHECKI(...)
-#define ER_CHECKW(...)
-#define ER_CHECKD(...)
+#define ER_CONDI(...)
+#define ER_CONDW(...)
+#define ER_CONDD(...)
 
 #define ER_FATAL_NO_CLIENT(msg, ...)                                    \
   {                                                                     \
@@ -132,14 +139,14 @@
  *
  * This macro is only available if event reporting is fully enabled.
  */
-#define ER_REPORT(lvl, logger, msg, ...)        \
-  {                                             \
-    char _report_str[RCPPSW_ER_MSG_LEN_MAX];    \
-    snprintf(static_cast<char*>(_report_str),   \
-             sizeof(_report_str),               \
-             msg,                               \
-             ##__VA_ARGS__);                    \
-    LOG4CXX_##lvl(logger, _report_str);         \
+#define ER_REPORT(lvl, logger, msg, ...)                        \
+  {                                                             \
+    std::array<char, RCPPSW_ER_MSG_LEN_MAX> _report_str{};      \
+    snprintf(_report_str.data(),                                \
+             sizeof(_report_str),                               \
+             msg,                                               \
+             ##__VA_ARGS__);                                    \
+    LOG4CXX_##lvl(logger, _report_str.data());                  \
   }
 
 /**
@@ -257,16 +264,16 @@
 /**
  * \def ER_CHECKW(cond, msg, ...)
  *
- * Check a boolean condition \a cond in a function. If condition is not true,
+ * Check a boolean condition \a cond in a function. If condition IS true,
  * emit a warning message.
  *
  * You cannot use this macro in non-class contexts, and all classes using it
  * must derive from \ref client. This macro is only available if event reporting
  * is fully enabled.
  */
-#define ER_CHECKW(cond, msg, ...)               \
+#define ER_CONDW(cond, msg, ...)                \
   {                                             \
-    if (RCPPSW_UNLIKELY(!(cond))) {             \
+    if (RCPPSW_LIKELY((cond))) {                  \
       ER_WARN(msg, ##__VA_ARGS__);              \
     }                                           \
   }
@@ -281,7 +288,7 @@
  * must derive from \ref client. This macro is only available if event reporting
  * is fully enabled.
  */
-#define ER_CHECKI(cond, msg, ...)               \
+#define ER_CONDI(cond, msg, ...)               \
   {                                             \
     if (RCPPSW_LIKELY((cond))) {                \
       ER_INFO(msg, ##__VA_ARGS__);              \
@@ -298,7 +305,7 @@
  * must derive from \ref client. This macro is only available if event reporting
  * is fully enabled.
  */
-#define ER_CHECKD(cond, msg, ...)               \
+#define ER_CONDD(cond, msg, ...)               \
   {                                             \
     if (RCPPSW_LIKELY((cond))) {                \
       ER_DEBUG(msg, ##__VA_ARGS__);             \
@@ -319,11 +326,11 @@
  * is fully enabled.
  */
 #define ER_CHECK(cond, msg, ...)  \
-  {                               \
-    if (RCPPSW_UNLIKELY(!(cond))) { \
-      ER_ERR(msg, ##__VA_ARGS__); \
-      goto error;                 \
-    }                             \
+  {                                             \
+    if (RCPPSW_UNLIKELY(!(cond))) {             \
+      ER_ERR(msg, ##__VA_ARGS__);               \
+      goto error;                               \
+    }                                           \
   }
 
 /**

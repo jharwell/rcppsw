@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfiltered__visitor" kind="class" language="C++" prot="public">
+    <compoundname>filtered_visitor</compoundname>
+    <includes refid="visitor_8hpp" local="no">visitor.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TVisitor</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classfiltered__visitor_1a1ca5a707ffff72c6a526a5b99d0833aa" prot="public" static="no">
+        <type>TVisitor</type>
+        <definition>using filtered_visitor&lt; TVisitor &gt;::visitor_type =  TVisitor</definition>
+        <argsstring></argsstring>
+        <name>visitor_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" line="172" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfiltered__visitor_1a8a3ccdb29cc3085a1191c361f9463d33" prot="private" static="no" mutable="no">
+        <type><ref refid="classprecise__visitor" kindref="compound">precise_visitor</ref>&lt; TVisitor, typename TVisitor::visit_typelist &gt;</type>
+        <definition>precise_visitor&lt;TVisitor, typename TVisitor::visit_typelist&gt; filtered_visitor&lt; TVisitor &gt;::m_impl</definition>
+        <argsstring></argsstring>
+        <name>m_impl</name>
+        <briefdescription>
+<para>We use the precise visitor in order to force compile errors if a call to a visitor is made that involves a visitee that is not in our visit set (i.e. remove the possibility of implicit upcasting performed by the compiler). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" line="189" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfiltered__visitor_1a38febe87bb67000cba89db253018298e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>filtered_visitor&lt; TVisitor &gt;::filtered_visitor</definition>
+        <argsstring>(Args &amp;&amp;...args)</argsstring>
+        <name>filtered_visitor</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" line="174" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" bodystart="174" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="function" id="classfiltered__visitor_1a64161f17809797db29b51c0f5a7c893d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TAny</type>
+          </param>
+          <param>
+            <type>typename ...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void filtered_visitor&lt; TVisitor &gt;::visit</definition>
+        <argsstring>(TAny &amp;obj, Args &amp;&amp;... args)</argsstring>
+        <name>visit</name>
+        <param>
+          <type>TAny &amp;</type>
+          <declname>obj</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" line="178" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" bodystart="178" bodyend="180"/>
+        <references refid="classprecise__visitor_1a480f3254456f2f9b806bf09d37629aab" compoundref="visitor_8hpp" startline="148" endline="150">precise_visitor&lt; VisitorImpl, TypeList &gt;::visit</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Convenience wrapper allowing generic visits to ANY type, but filtering them on the rmpl::typelist passed to the rpvisitor::precise_visitor. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TVisitor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the visitor class, which must be capable of being used with <ref refid="classprecise__visitor" kindref="compound">precise_visitor</ref>, and define <computeroutput>visit_typelist</computeroutput>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>This class is appropriate if no non-static methods from <computeroutput>TVisitor</computeroutput> are needed (they will not be accessible, because inheritance is not used). </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>filtered_visitor&lt; TVisitor &gt;</label>
+        <link refid="classfiltered__visitor"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" line="170" column="23" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/visitor.hpp" bodystart="170" bodyend="190"/>
+    <listofallmembers>
+      <member refid="classfiltered__visitor_1a38febe87bb67000cba89db253018298e" prot="public" virt="non-virtual"><scope>filtered_visitor</scope><name>filtered_visitor</name></member>
+      <member refid="classfiltered__visitor_1a8a3ccdb29cc3085a1191c361f9463d33" prot="private" virt="non-virtual"><scope>filtered_visitor</scope><name>m_impl</name></member>
+      <member refid="classfiltered__visitor_1a64161f17809797db29b51c0f5a7c893d" prot="public" virt="non-virtual"><scope>filtered_visitor</scope><name>visit</name></member>
+      <member refid="classfiltered__visitor_1a1ca5a707ffff72c6a526a5b99d0833aa" prot="public" virt="non-virtual"><scope>filtered_visitor</scope><name>visitor_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

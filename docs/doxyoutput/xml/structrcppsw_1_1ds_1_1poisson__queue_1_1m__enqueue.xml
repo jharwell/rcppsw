@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1ds_1_1poisson__queue_1_1m__enqueue" kind="struct" language="C++" prot="private">
+    <compoundname>rcppsw::ds::poisson_queue::m_enqueue</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::ds::poisson_queue&lt; T &gt;::m_enqueue</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" line="222" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp" bodystart="222" bodyend="222"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

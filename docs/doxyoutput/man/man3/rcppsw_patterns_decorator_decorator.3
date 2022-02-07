@@ -1,0 +1,145 @@
+.TH "rcppsw::patterns::decorator::decorator< TDecoratee >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::decorator::decorator< TDecoratee > \- The base class for the object decorator design pattern\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <decorator\&.hpp>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBdecoratee_type\fP = TDecoratee"
+.br
+.ti -1c
+.RI "using \fBdecorator_type\fP = \fBdecorator\fP< \fBdecoratee_type\fP >"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBdecorator\fP (const \fBdecorator\fP &)=default"
+.br
+.ti -1c
+.RI "\fBdecorator\fP (\fBdecoratee_type\fP &&arg)"
+.br
+.ti -1c
+.RI "\fBdecorator\fP (\fBdecorator\fP &&)=default"
+.br
+.ti -1c
+.RI "template<typename U  = TDecoratee, typename std::enable_if<((sizeof(U::value_type) > 0)), int >::type  = 0> \fBdecorator\fP (std::initializer_list< U > args)"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. TArgs> \fBdecorator\fP (TArgs\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "virtual \fB~decorator\fP (void)=default"
+.br
+.ti -1c
+.RI "\fBdecoratee_type\fP & \fBdecoratee\fP (void)"
+.br
+.RI "Get a reference to the decorated type\&. "
+.ti -1c
+.RI "const \fBdecoratee_type\fP & \fBdecoratee\fP (void) const"
+.br
+.ti -1c
+.RI "\fBdecorator\fP & \fBoperator=\fP (const \fBdecorator\fP &)=default"
+.br
+.ti -1c
+.RI "\fBdecorator\fP & \fBoperator=\fP (\fBdecorator\fP &&)=default"
+.br
+.ti -1c
+.RI "template<typename\&.\&.\&. TArgs> void \fBredecorate\fP (TArgs &&\&.\&.\&. args)"
+.br
+.RI "Replace the current instance of the decorated type with a new one constructed from the passed arguments\&. "
+.ti -1c
+.RI "void \fBredecorate_with\fP (const \fBdecoratee_type\fP &d)"
+.br
+.RI "Replace the current decoratee instance with another existing instance\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class TDecoratee>
+.br
+class rcppsw::patterns::decorator::decorator< TDecoratee >"
+The base class for the object decorator design pattern\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fITDecoratee\fP The type of the decorated object\&. 
+.RE
+.PP
+
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<class TDecoratee > using \fBrcppsw::patterns::decorator::decorator\fP< TDecoratee >::\fBdecoratee_type\fP =  TDecoratee"
+
+.SS "template<class TDecoratee > using \fBrcppsw::patterns::decorator::decorator\fP< TDecoratee >::\fBdecorator_type\fP =  \fBdecorator\fP<\fBdecoratee_type\fP>"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class TDecoratee > template<typename\&.\&.\&. TArgs> \fBrcppsw::patterns::decorator::decorator\fP< TDecoratee >::\fBdecorator\fP (TArgs\&.\&.\&. args)\fC [inline]\fP"
+
+.SS "template<class TDecoratee > \fBrcppsw::patterns::decorator::decorator\fP< TDecoratee >::\fBdecorator\fP (\fBdecoratee_type\fP && arg)\fC [inline]\fP"
+
+.SS "template<class TDecoratee > template<typename U  = TDecoratee, typename std::enable_if<((sizeof(U::value_type) > 0)), int >::type  = 0> \fBrcppsw::patterns::decorator::decorator\fP< TDecoratee >::\fBdecorator\fP (std::initializer_list< U > args)\fC [inline]\fP"
+
+.SS "template<class TDecoratee > \fBrcppsw::patterns::decorator::decorator\fP< TDecoratee >::\fBdecorator\fP (const \fBdecorator\fP< TDecoratee > &)\fC [default]\fP"
+
+.SS "template<class TDecoratee > \fBrcppsw::patterns::decorator::decorator\fP< TDecoratee >::\fBdecorator\fP (\fBdecorator\fP< TDecoratee > &&)\fC [default]\fP"
+
+.SS "template<class TDecoratee > virtual \fBrcppsw::patterns::decorator::decorator\fP< TDecoratee >::~\fBdecorator\fP (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class TDecoratee > \fBdecoratee_type\fP& \fBrcppsw::patterns::decorator::decorator\fP< TDecoratee >::decoratee (void)\fC [inline]\fP"
+
+.PP
+Get a reference to the decorated type\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The reference\&. 
+.RE
+.PP
+
+.SS "template<class TDecoratee > const \fBdecoratee_type\fP& \fBrcppsw::patterns::decorator::decorator\fP< TDecoratee >::decoratee (void) const\fC [inline]\fP"
+
+.SS "template<class TDecoratee > \fBdecorator\fP& \fBrcppsw::patterns::decorator::decorator\fP< TDecoratee >::operator= (const \fBdecorator\fP< TDecoratee > &)\fC [default]\fP"
+
+.SS "template<class TDecoratee > \fBdecorator\fP& \fBrcppsw::patterns::decorator::decorator\fP< TDecoratee >::operator= (\fBdecorator\fP< TDecoratee > &&)\fC [default]\fP"
+
+.SS "template<class TDecoratee > template<typename\&.\&.\&. TArgs> void \fBrcppsw::patterns::decorator::decorator\fP< TDecoratee >::redecorate (TArgs &&\&.\&.\&. args)\fC [inline]\fP"
+
+.PP
+Replace the current instance of the decorated type with a new one constructed from the passed arguments\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIargs\fP The arguments to a decoratee constructor\&. 
+.RE
+.PP
+
+.SS "template<class TDecoratee > void \fBrcppsw::patterns::decorator::decorator\fP< TDecoratee >::redecorate_with (const \fBdecoratee_type\fP & d)\fC [inline]\fP"
+
+.PP
+Replace the current decoratee instance with another existing instance\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fId\fP The new decoratee\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

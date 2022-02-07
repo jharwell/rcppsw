@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1metrics_1_1config_1_1output__mode__config" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::metrics::config::output_mode_config</compoundname>
+    <includes refid="output__mode__config_8hpp" local="no">output_mode_config.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structrcppsw_1_1metrics_1_1config_1_1output__mode__config_1a6a47448a338cb200de291ee59a20223a" prot="public" static="no">
+        <type>std::map&lt; std::string, std::string &gt;</type>
+        <definition>using rcppsw::metrics::config::output_mode_config::enabled_map_type =  std::map&lt;std::string, std::string&gt;</definition>
+        <argsstring></argsstring>
+        <name>enabled_map_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/output_mode_config.hpp" line="52" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/output_mode_config.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1config_1_1output__mode__config_1aa41ae2eb0f29d5073cb2f413a329103d" prot="public" static="no" mutable="no">
+        <type><ref refid="structrcppsw_1_1metrics_1_1config_1_1output__mode__config_1a6a47448a338cb200de291ee59a20223a" kindref="member">enabled_map_type</ref></type>
+        <definition>enabled_map_type rcppsw::metrics::config::output_mode_config::enabled</definition>
+        <argsstring></argsstring>
+        <name>enabled</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/output_mode_config.hpp" line="54" column="20" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/output_mode_config.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1config_1_1output__mode__config_1abcf55d00ff374cf307df926460f31190" prot="public" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">rtypes::timestep</ref></type>
+        <definition>rtypes::timestep rcppsw::metrics::config::output_mode_config::output_interval</definition>
+        <argsstring></argsstring>
+        <name>output_interval</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/output_mode_config.hpp" line="53" column="20" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/output_mode_config.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::metrics::config::output_mode_config</label>
+        <link refid="structrcppsw_1_1metrics_1_1config_1_1output__mode__config"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+output_interval</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>+enabled</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="2">
+        <label>rcppsw::types::timestep</label>
+        <link refid="classrcppsw_1_1types_1_1timestep"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="5">
+        <label>std::map&lt; std::string, std::string &gt;</label>
+        <childnode refid="6" relation="usage">
+          <edgelabel>+elements</edgelabel>
+          <edgelabel>+keys</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw::types::named_type&lt; size_t, struct timestep_tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>std::string</label>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/output_mode_config.hpp" line="45" column="25" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/output_mode_config.hpp" bodystart="45" bodyend="49"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1metrics_1_1config_1_1output__mode__config_1aa41ae2eb0f29d5073cb2f413a329103d" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::output_mode_config</scope><name>enabled</name></member>
+      <member refid="structrcppsw_1_1metrics_1_1config_1_1output__mode__config_1a6a47448a338cb200de291ee59a20223a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::output_mode_config</scope><name>enabled_map_type</name></member>
+      <member refid="structrcppsw_1_1metrics_1_1config_1_1output__mode__config_1abcf55d00ff374cf307df926460f31190" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::output_mode_config</scope><name>output_interval</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

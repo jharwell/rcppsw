@@ -1,0 +1,80 @@
+.TH "rcppsw::control::base_waveform" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::control::base_waveform \- Base class for all types of waveforms (in the control theory sense)\&. All waveforms have [frequency, phase, amplitude, offset] components\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <base_waveform\&.hpp>\fP
+.PP
+Inherited by \fBrcppsw::control::constant_waveform\fP, \fBrcppsw::control::null_waveform\fP, \fBrcppsw::control::sawtooth_waveform\fP, \fBrcppsw::control::sine_waveform\fP, and \fBrcppsw::control::square_waveform\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbase_waveform\fP (const struct \fBconfig::waveform_config\fP *const config)"
+.br
+.ti -1c
+.RI "virtual \fB~base_waveform\fP (void)=default"
+.br
+.ti -1c
+.RI "double \fBamplitude\fP (void) const"
+.br
+.RI "Get the amplitude of the waveform\&. "
+.ti -1c
+.RI "double \fBfrequency\fP (void) const"
+.br
+.RI "Get the frequency of the waveform\&. "
+.ti -1c
+.RI "double \fBoffset\fP (void) const"
+.br
+.RI "Get the offset of the waveform\&. "
+.ti -1c
+.RI "const \fBmath::radians\fP & \fBphase\fP (void) const"
+.br
+.RI "Get the phase of the waveform in radians\&. "
+.ti -1c
+.RI "virtual double \fBvalue\fP (double time)=0"
+.br
+.RI "Get the current value of the waveform at time \fCt\fP\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base class for all types of waveforms (in the control theory sense)\&. All waveforms have [frequency, phase, amplitude, offset] components\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::control::base_waveform::base_waveform (const struct \fBconfig::waveform_config\fP *const config)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "virtual rcppsw::control::base_waveform::~base_waveform (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "double rcppsw::control::base_waveform::amplitude (void) const\fC [inline]\fP"
+
+.PP
+Get the amplitude of the waveform\&. 
+.SS "double rcppsw::control::base_waveform::frequency (void) const\fC [inline]\fP"
+
+.PP
+Get the frequency of the waveform\&. 
+.SS "double rcppsw::control::base_waveform::offset (void) const\fC [inline]\fP"
+
+.PP
+Get the offset of the waveform\&. 
+.SS "const \fBmath::radians\fP& rcppsw::control::base_waveform::phase (void) const\fC [inline]\fP"
+
+.PP
+Get the phase of the waveform in radians\&. 
+.SS "virtual double rcppsw::control::base_waveform::value (double time)\fC [pure virtual]\fP"
+
+.PP
+Get the current value of the waveform at time \fCt\fP\&. 
+.PP
+Implemented in \fBrcppsw::control::null_waveform\fP, \fBrcppsw::control::constant_waveform\fP, \fBrcppsw::control::sawtooth_waveform\fP, \fBrcppsw::control::square_waveform\fP, and \fBrcppsw::control::sine_waveform\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

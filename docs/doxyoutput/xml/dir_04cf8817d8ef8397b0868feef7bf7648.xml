@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_04cf8817d8ef8397b0868feef7bf7648" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering</compoundname>
+    <innerfile refid="base__clustering__impl_8hpp">base_clustering_impl.hpp</innerfile>
+    <innerfile refid="cluster_8hpp">cluster.hpp</innerfile>
+    <innerfile refid="eh__clustering__impl_8hpp">eh_clustering_impl.hpp</innerfile>
+    <innerfile refid="entropy_8hpp">entropy.hpp</innerfile>
+    <innerfile refid="entropy__eh__omp_8hpp">entropy_eh_omp.hpp</innerfile>
+    <innerfile refid="kmeans_8hpp">kmeans.hpp</innerfile>
+    <innerfile refid="kmeans__omp_8hpp">kmeans_omp.hpp</innerfile>
+    <innerfile refid="membership__policy_8hpp">membership_policy.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/"/>
+  </compounddef>
+</doxygen>

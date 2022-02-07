@@ -1,0 +1,58 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <boost/graph/depth_first_search\&.hpp>\fP
+.br
+\fC#include <boost/graph/filtered_graph\&.hpp>\fP
+.br
+\fC#include <boost/property_map/dynamic_property_map\&.hpp>\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include <utility>\fP
+.br
+\fC#include 'rcppsw/ds/graph/graph\&.hpp'\fP
+.br
+\fC#include 'rcppsw/math/vector3\&.hpp'\fP
+.br
+\fC#include 'rcppsw/patterns/decorator/decorator\&.hpp'\fP
+.br
+\fC#include 'rcppsw/ds/graph/hgrid3D_spec\&.hpp'\fP
+.br
+\fC#include 'rcppsw/ds/graph/hgrid3D_view\&.hpp'\fP
+.br
+\fC#include 'rcppsw/ds/graph/hgrid3D_view_filter\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBrcppsw::ds::graph::hgrid3D< TSpecType >\fP"
+.br
+.RI "A heterogeneous gridded graph (i\&.e\&., a basic grid graph with some vertices missing) where edge lengths have structural relevance; that is, if two vertices (u,v) are 3 units apart, then there are two vertices along the path (u,v) which would be present in a basic grid graph which are missing here\&. Useful for representing distances and such in the real world\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::ds\fP"
+.br
+.RI "Data structures: 2D/3D lattice grids, 2D/3D discretizing grids to overlay onto continuous space, Poisson queue, rtree for 2D space, heterogeneous stacked 2D grid, type map for using in C++ quasi-reflection\&. "
+.ti -1c
+.RI " \fBrcppsw::ds::graph\fP"
+.br
+.RI "Graph data structures: Heterogeneous 3D grid graph\&. "
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

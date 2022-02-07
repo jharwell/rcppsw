@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1ds_1_1graph_1_1detail_1_1is__decorator" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::ds::graph::detail::is_decorator</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">false_type</basecompoundref>
+    <includes refid="graphml_8hpp" local="no">graphml.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename</type>
+        <defval>void</defval>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>Determine if. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is derived from rpdecorator::decorator. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>false_type</label>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::graph::detail::is_decorator&lt; T, typename &gt;</label>
+        <link refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1is__decorator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>false_type</label>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::graph::detail::is_decorator&lt; T, typename &gt;</label>
+        <link refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1is__decorator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graphml.hpp" line="52" column="35" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graphml.hpp" bodystart="52" bodyend="52"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1metrics_1_1network__sink__registerer" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::metrics::network_sink_registerer</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; network_sink_registerer &gt;</basecompoundref>
+    <includes refid="network__sink__registerer_8hpp" local="no">network_sink_registerer.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__sink__registerer_1afd0e352056c799c5c6b8d20029ed7ed8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::network_sink_registerer::network_sink_registerer</definition>
+        <argsstring>(const network_sink_registerer &amp;)=default</argsstring>
+        <name>network_sink_registerer</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1network__sink__registerer" kindref="compound">network_sink_registerer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink_registerer.hpp" line="63" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__sink__registerer_1a1dd9239e9f4568f5f82fae05a202d901" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::network_sink_registerer::network_sink_registerer</definition>
+        <argsstring>(void)</argsstring>
+        <name>network_sink_registerer</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink_registerer.hpp" line="59" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink_registerer.hpp" bodystart="59" bodyend="60"/>
+        <references refid="er_2macros_8hpp_1adcf63ebd51cba1bf7ec00484800bd728" compoundref="er_2macros_8hpp" startline="72">ER_INFO</references>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__sink__registerer_1a98115d3c0ff1a4e538424950a84616dc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TSink</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structrcppsw_1_1metrics_1_1collector__registration__spec" kindref="compound">collector_registration_spec</ref>&lt; TSink &gt;</type>
+        <definition>collector_registration_spec&lt;TSink&gt; rcppsw::metrics::network_sink_registerer::calc_registration_spec</definition>
+        <argsstring>(network_output_manager *, const rmconfig::network_sink_config *const config, const std::string &amp;xml_name, const rmetrics::output_mode &amp;allowed) const</argsstring>
+        <name>calc_registration_spec</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1metrics_1_1network__output__manager" kindref="compound">network_output_manager</ref> *</type>
+        </param>
+        <param>
+          <type>const rmconfig::network_sink_config *const</type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>xml_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" kindref="member">rmetrics::output_mode</ref> &amp;</type>
+          <declname>allowed</declname>
+        </param>
+        <briefdescription>
+<para>Figure out: </para>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>If the selected output mode is valid for the specified collector.</para>
+</listitem><listitem><para>The appropriate network dest for the collector if the output mode is OK.</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="return"><para>collector_register_spec, or empty if the collector fails any pre-initialization checks. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink_registerer.hpp" line="90" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink_registerer.hpp" bodystart="90" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__sink__registerer_1a918a62594da5be8b63a933594633537b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TIterator</type>
+          </param>
+          <param>
+            <type>typename TSink</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::metrics::network_sink_registerer::emit_diagnostic</definition>
+        <argsstring>(const TIterator &amp;it, const collector_registration_spec&lt; TSink &gt; &amp;spec)</argsstring>
+        <name>emit_diagnostic</name>
+        <param>
+          <type>const TIterator &amp;</type>
+          <declname>it</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1metrics_1_1collector__registration__spec" kindref="compound">collector_registration_spec</ref>&lt; TSink &gt; &amp;</type>
+          <declname>spec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink_registerer.hpp" line="66" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink_registerer.hpp" bodystart="66" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__sink__registerer_1af42c05a0495c7247bb4fc6440eaccdc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1metrics_1_1network__sink__registerer" kindref="compound">network_sink_registerer</ref> &amp;</type>
+        <definition>network_sink_registerer&amp; rcppsw::metrics::network_sink_registerer::operator=</definition>
+        <argsstring>(const network_sink_registerer &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1network__sink__registerer" kindref="compound">network_sink_registerer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink_registerer.hpp" line="62" column="27"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Register all collectors configured with rmetrics::network_sink with a <ref refid="classrcppsw_1_1metrics_1_1base__manager" kindref="compound">base_manager</ref> or a class derived from it. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::metrics::network_sink_registerer</label>
+        <link refid="classrcppsw_1_1metrics_1_1network__sink__registerer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; network_sink_registerer &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::metrics::network_sink_registerer</label>
+        <link refid="classrcppsw_1_1metrics_1_1network__sink__registerer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; network_sink_registerer &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink_registerer.hpp" line="57" column="49" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink_registerer.hpp" bodystart="57" bodyend="114"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1metrics_1_1network__sink__registerer_1a98115d3c0ff1a4e538424950a84616dc" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>calc_registration_spec</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__sink__registerer_1a918a62594da5be8b63a933594633537b" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>emit_diagnostic</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__sink__registerer_1a1dd9239e9f4568f5f82fae05a202d901" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>network_sink_registerer</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__sink__registerer_1afd0e352056c799c5c6b8d20029ed7ed8" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>network_sink_registerer</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__sink__registerer_1af42c05a0495c7247bb4fc6440eaccdc0" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual" ambiguityscope="client&lt; network_sink_registerer &gt;::"><scope>rcppsw::metrics::network_sink_registerer</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::metrics::network_sink_registerer</scope><name>~client</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

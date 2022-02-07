@@ -1,0 +1,58 @@
+.TH "rcppsw::patterns::pimpl::pimpl< TImpl >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::pimpl::pimpl< TImpl > \- Super-simple templated implementation of the PIMPL idiom\&. Does not exist in boost, and the boost candidate I found had subtle memory issues when optimizations were on\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <pimpl\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename \&.\&.\&. Args> \fBpimpl\fP (Args &&\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "virtual \fB~pimpl\fP (void)=default"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::unique_ptr< TImpl > \fBimpl\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TImpl>
+.br
+class rcppsw::patterns::pimpl::pimpl< TImpl >"
+Super-simple templated implementation of the PIMPL idiom\&. Does not exist in boost, and the boost candidate I found had subtle memory issues when optimizations were on\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fITImpl\fP The type of the implementation you wish to hide\&. 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TImpl > template<typename \&.\&.\&. Args> \fBrcppsw::patterns::pimpl::pimpl\fP< TImpl >::\fBpimpl\fP (Args &&\&.\&.\&. args)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "template<typename TImpl > virtual \fBrcppsw::patterns::pimpl::pimpl\fP< TImpl >::~\fBpimpl\fP (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "template<typename TImpl > std::unique_ptr<TImpl> \fBrcppsw::patterns::pimpl::pimpl\fP< TImpl >::impl"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::prototype::caching_factory</compoundname>
+    <includes refid="caching__factory_8hpp" local="no">caching_factory.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TBase</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Args</declname>
+        <defname>Args</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory_1abae40e8703f10580d4f477d5691cc019" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1patterns_1_1factory_1_1sharing__factory" kindref="compound">patterns::factory::sharing_factory</ref>&lt; TBase, std::string, Args... &gt;</type>
+        <definition>patterns::factory::sharing_factory&lt;TBase, std::string, Args...&gt; rcppsw::patterns::prototype::caching_factory&lt; TBase, Args &gt;::m_factory</definition>
+        <argsstring></argsstring>
+        <name>m_factory</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/caching_factory.hpp" line="85" column="2" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/caching_factory.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory_1a51f9d8ea8d1681d5f7383e4958efa70f" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, TBase * &gt;</type>
+        <definition>std::map&lt;std::string, TBase*&gt; rcppsw::patterns::prototype::caching_factory&lt; TBase, Args &gt;::m_objs</definition>
+        <argsstring></argsstring>
+        <name>m_objs</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/caching_factory.hpp" line="86" column="26" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/caching_factory.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory_1a4bab8f07f5cf01ee0652c3c3c42aba52" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>TBase *</type>
+        <definition>TBase* rcppsw::patterns::prototype::caching_factory&lt; TBase, Args &gt;::create</definition>
+        <argsstring>(const std::string &amp;name, Args... args)</argsstring>
+        <name>create</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>Args...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/caching_factory.hpp" line="70" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/caching_factory.hpp" bodystart="70" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory_1afc718b5957ca25141ce476ad792f5ce2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TDerived</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::patterns::prototype::caching_factory&lt; TBase, Args &gt;::register_type</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>register_type</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/caching_factory.hpp" line="66" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/caching_factory.hpp" bodystart="66" bodyend="68"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Each time an object construction is requested, if an object type has been previously created with the same name, then a reference to that a previously created object of is returned, rather than a new instance of it. If construction of a previously constructed type of object is requested with a <emphasis>NEW</emphasis> name, then a new instance of the object type is created. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Only objects derived from the base class can be created.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TBase</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base class of objects to be created. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments for class constructors. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::prototype::caching_factory&lt; TBase, Args &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/caching_factory.hpp" line="63" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/prototype/caching_factory.hpp" bodystart="63" bodyend="88"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory_1a4bab8f07f5cf01ee0652c3c3c42aba52" prot="public" virt="non-virtual"><scope>rcppsw::patterns::prototype::caching_factory</scope><name>create</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory_1abae40e8703f10580d4f477d5691cc019" prot="private" virt="non-virtual"><scope>rcppsw::patterns::prototype::caching_factory</scope><name>m_factory</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory_1a51f9d8ea8d1681d5f7383e4958efa70f" prot="private" virt="non-virtual"><scope>rcppsw::patterns::prototype::caching_factory</scope><name>m_objs</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1prototype_1_1caching__factory_1afc718b5957ca25141ce476ad792f5ce2" prot="public" virt="non-virtual"><scope>rcppsw::patterns::prototype::caching_factory</scope><name>register_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

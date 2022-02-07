@@ -1,0 +1,293 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1multithread_1_1lockable" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::multithread::lockable</compoundname>
+    <includes refid="lockable_8hpp" local="no">lockable.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1lockable_1a7f8d2ca723c77c97f69df373c24a226e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::multithread::lockable::lockable</definition>
+        <argsstring>(const lockable &amp;)=delete</argsstring>
+        <name>lockable</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="57" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1lockable_1a4a57948a6905677a60b0226342b8eded" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::multithread::lockable::lockable</definition>
+        <argsstring>(lockable &amp;&amp;)=delete</argsstring>
+        <name>lockable</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="59" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1lockable_1a3da8c8e084fa236201fa7b7d45bdf00d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::multithread::lockable::lockable</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>lockable</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="53" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1lockable_1ab6b444cfb796c73351a1552e0079529c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::multithread::lockable::~lockable</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~lockable</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="54" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1lockable_1af2733e55cc4b9602b1534cd0d004d2c7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multithread::lockable::lock_rd</definition>
+        <argsstring>(std::shared_mutex *mtx) const</argsstring>
+        <name>lock_rd</name>
+        <param>
+          <type>std::shared_mutex *</type>
+          <declname>mtx</declname>
+        </param>
+        <briefdescription>
+<para>Unconditionally lock <computeroutput>mtx</computeroutput> for shared reader access. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="112" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" bodystart="112" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1lockable_1ac2d3b0309d2e3abef4a0bb1b29d4e5d6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multithread::lockable::lock_wr</definition>
+        <argsstring>(std::shared_mutex *mtx)</argsstring>
+        <name>lock_wr</name>
+        <param>
+          <type>std::shared_mutex *</type>
+          <declname>mtx</declname>
+        </param>
+        <briefdescription>
+<para>Unconditionally lock <computeroutput>mtx</computeroutput> for exclusive access. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="102" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1lockable_1a75286e74c37a908615a7a4c57ca95ceb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multithread::lockable::maybe_lock_rd</definition>
+        <argsstring>(std::shared_mutex *mtx, bool cond) const</argsstring>
+        <name>maybe_lock_rd</name>
+        <param>
+          <type>std::shared_mutex *</type>
+          <declname>mtx</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>cond</declname>
+        </param>
+        <briefdescription>
+<para>Lock <computeroutput>mtx</computeroutput> for read-only access if <computeroutput>cond</computeroutput> is <computeroutput>TRUE</computeroutput>. Other readers will still be allowed access to the resource. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="84" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" bodystart="84" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1lockable_1ac5f9bff5360285c3e54d4e2cf48f46a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multithread::lockable::maybe_lock_wr</definition>
+        <argsstring>(std::shared_mutex *mtx, bool cond)</argsstring>
+        <name>maybe_lock_wr</name>
+        <param>
+          <type>std::shared_mutex *</type>
+          <declname>mtx</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>cond</declname>
+        </param>
+        <briefdescription>
+<para>Lock <computeroutput>mtx</computeroutput> for exclusive access if <computeroutput>cond</computeroutput> is <computeroutput>TRUE</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="65" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" bodystart="65" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1lockable_1a812f2cfd92e4137de647320f265d34bd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multithread::lockable::maybe_unlock_rd</definition>
+        <argsstring>(std::shared_mutex *mtx, bool cond) const</argsstring>
+        <name>maybe_unlock_rd</name>
+        <param>
+          <type>std::shared_mutex *</type>
+          <declname>mtx</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>cond</declname>
+        </param>
+        <briefdescription>
+<para>Unlock <computeroutput>mtx</computeroutput> for read-only access if <computeroutput>cond</computeroutput> is <computeroutput>TRUE</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="93" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" bodystart="93" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1lockable_1a3d04959c9167145978422a66c2737309" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multithread::lockable::maybe_unlock_wr</definition>
+        <argsstring>(std::shared_mutex *mtx, bool cond)</argsstring>
+        <name>maybe_unlock_wr</name>
+        <param>
+          <type>std::shared_mutex *</type>
+          <declname>mtx</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>cond</declname>
+        </param>
+        <briefdescription>
+<para>Unlock <computeroutput>mtx</computeroutput> for exclusive access if <computeroutput>cond</computeroutput> is <computeroutput>TRUE</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="74" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" bodystart="74" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1lockable_1a7523b8edbd1f63347abaebb883119d43" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref> &amp;</type>
+        <definition>const lockable&amp; rcppsw::multithread::lockable::operator=</definition>
+        <argsstring>(const lockable &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="58" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1lockable_1ada13577a604c8734a0aaf25b6faf19b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref> &amp;</type>
+        <definition>lockable&amp; rcppsw::multithread::lockable::operator=</definition>
+        <argsstring>(lockable &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classrcppsw_1_1multithread_1_1lockable" kindref="compound">lockable</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="60" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1lockable_1a6f7ebdb93c8940e99dd08302cfbae919" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multithread::lockable::unlock_rd</definition>
+        <argsstring>(std::shared_mutex *mtx) const</argsstring>
+        <name>unlock_rd</name>
+        <param>
+          <type>std::shared_mutex *</type>
+          <declname>mtx</declname>
+        </param>
+        <briefdescription>
+<para>Unconditionally unlock <computeroutput>mtx</computeroutput> for shared reader access. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="117" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" bodystart="117" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1lockable_1aaa9230cd9f7ea275a0abd9978783e3a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multithread::lockable::unlock_wr</definition>
+        <argsstring>(std::shared_mutex *mtx)</argsstring>
+        <name>unlock_wr</name>
+        <param>
+          <type>std::shared_mutex *</type>
+          <declname>mtx</declname>
+        </param>
+        <briefdescription>
+<para>Unconditionally unlock <computeroutput>mtx</computeroutput> for exclusive access. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="107" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" bodystart="107" bodyend="107"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Simple class allowing explicit declaration that a derived class can be locked (un)conditionally in exclusive write and non-exclusive read-only contexts. Used mainly to reduce the if()s where possible. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::multithread::lockable</label>
+        <link refid="classrcppsw_1_1multithread_1_1lockable"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" line="51" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/lockable.hpp" bodystart="51" bodyend="118"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1multithread_1_1lockable_1af2733e55cc4b9602b1534cd0d004d2c7" prot="public" virt="non-virtual"><scope>rcppsw::multithread::lockable</scope><name>lock_rd</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1lockable_1ac2d3b0309d2e3abef4a0bb1b29d4e5d6" prot="public" virt="non-virtual"><scope>rcppsw::multithread::lockable</scope><name>lock_wr</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1lockable_1a3da8c8e084fa236201fa7b7d45bdf00d" prot="public" virt="non-virtual"><scope>rcppsw::multithread::lockable</scope><name>lockable</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1lockable_1a7f8d2ca723c77c97f69df373c24a226e" prot="public" virt="non-virtual"><scope>rcppsw::multithread::lockable</scope><name>lockable</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1lockable_1a4a57948a6905677a60b0226342b8eded" prot="public" virt="non-virtual"><scope>rcppsw::multithread::lockable</scope><name>lockable</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1lockable_1a75286e74c37a908615a7a4c57ca95ceb" prot="public" virt="non-virtual"><scope>rcppsw::multithread::lockable</scope><name>maybe_lock_rd</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1lockable_1ac5f9bff5360285c3e54d4e2cf48f46a9" prot="public" virt="non-virtual"><scope>rcppsw::multithread::lockable</scope><name>maybe_lock_wr</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1lockable_1a812f2cfd92e4137de647320f265d34bd" prot="public" virt="non-virtual"><scope>rcppsw::multithread::lockable</scope><name>maybe_unlock_rd</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1lockable_1a3d04959c9167145978422a66c2737309" prot="public" virt="non-virtual"><scope>rcppsw::multithread::lockable</scope><name>maybe_unlock_wr</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1lockable_1a7523b8edbd1f63347abaebb883119d43" prot="public" virt="non-virtual"><scope>rcppsw::multithread::lockable</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1lockable_1ada13577a604c8734a0aaf25b6faf19b8" prot="public" virt="non-virtual"><scope>rcppsw::multithread::lockable</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1lockable_1a6f7ebdb93c8940e99dd08302cfbae919" prot="public" virt="non-virtual"><scope>rcppsw::multithread::lockable</scope><name>unlock_rd</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1lockable_1aaa9230cd9f7ea275a0abd9978783e3a1" prot="public" virt="non-virtual"><scope>rcppsw::multithread::lockable</scope><name>unlock_wr</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1lockable_1ab6b444cfb796c73351a1552e0079529c" prot="public" virt="virtual"><scope>rcppsw::multithread::lockable</scope><name>~lockable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

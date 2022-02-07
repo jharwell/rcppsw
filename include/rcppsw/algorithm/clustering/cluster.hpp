@@ -30,6 +30,7 @@
 
 #include "rcppsw/rcppsw.hpp"
 #include "rcppsw/algorithm/clustering/membership_policy.hpp"
+#include "rcppsw/math/math.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -50,7 +51,7 @@ class nc_cluster {
  public:
   nc_cluster(uint id,
              const std::vector<T>& data,
-             membership_type<Policy>* const membership)
+             membership_type<Policy>& membership)
       : mc_data(data),
         m_id(id),
         m_membership(membership),
@@ -58,7 +59,7 @@ class nc_cluster {
 
   nc_cluster& operator=(const nc_cluster&) = delete;
 
-  void add_point(size_t idx) { (*m_membership)[idx] = m_id; }
+  void add_point(size_t idx) { m_membership[idx] = m_id; }
 
   /*
    * Determine if the cluster has converged, by checking if the center of the
@@ -71,7 +72,7 @@ class nc_cluster {
   template<typename U = T,
            RCPPSW_SFINAE_DECLDEF(std::is_floating_point<U>::value)>
   RCPPSW_PURE bool converged(int = 0) const {
-    return std::fabs(m_prev_center - m_center) <= std::numeric_limits<U>::epsilon();
+    return std::fabs(m_prev_center - m_center) <= rmath::kDOUBLE_EPSILON;
   }
 
   /**
@@ -84,7 +85,7 @@ class nc_cluster {
 
     uint n_points = 0;
     for (size_t i = 0; i < mc_data.size(); ++i) {
-      if ((*m_membership)[i] == m_id) {
+      if ((m_membership)[i] == m_id) {
         accum += mc_data[i];
         ++n_points;
       }
@@ -101,7 +102,7 @@ class nc_cluster {
   const std::vector<T>&          mc_data;
 
   size_t                         m_id;
-  membership_type<Policy>* const m_membership;
+  membership_type<Policy>&       m_membership;
   T                              m_center;
   T                              m_prev_center{};
   /* clang-format on */
@@ -118,7 +119,7 @@ class eh_cluster {
  public:
   eh_cluster(uint id,
              const std::vector<T>& data,
-             membership_type<Policy>* const membership)
+             membership_type<Policy>& membership)
       : mc_data(data),
         m_id(id),
         m_membership(membership),
@@ -127,7 +128,7 @@ class eh_cluster {
   eh_cluster& operator=(const eh_cluster&) = delete;
 
   void add_point(size_t point_idx) {
-    (*m_membership)[m_id].insert(point_idx);
+    m_membership[m_id].insert(point_idx);
   }
 
   /*
@@ -135,7 +136,7 @@ class eh_cluster {
    * the cluster has changed.
    */
   bool converged(void) const { return m_prev_size == size(); }
-  size_t size(void) const { return m_membership->size(); }
+  size_t size(void) const { return m_membership.size(); }
 
   /**
    * \brief Update the size of the cluster after an iteration has finished.
@@ -149,7 +150,7 @@ class eh_cluster {
   const std::vector<T>&          mc_data;
 
   size_t                         m_id;
-  membership_type<Policy>* const m_membership;
+  membership_type<Policy>&       m_membership;
   T                              m_center;
   size_t                         m_prev_size{0};
   /* clang-format on */

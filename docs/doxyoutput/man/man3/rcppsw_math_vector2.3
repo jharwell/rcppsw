@@ -1,0 +1,434 @@
+.TH "rcppsw::math::vector2< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math::vector2< T > \- Base template class encapsulating mathematical actions on a pair of numbers\&. Is specialized by \fBvector2i\fP, \fBvector2d\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <vector2\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::stringizable\fP\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBcomponentwise_compare\fP"
+.br
+.RI "Needed to compare in mathematical contexts\&. "
+.ti -1c
+.RI "struct \fBkey_compare\fP"
+.br
+.RI "Needed for using vectors as keys in a map\&. "
+.in -1c
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBvalue_type\fP = T"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> \fBvector2\fP (const T &\fBlength\fP, const \fBradians\fP &\fBangle\fP) noexcept"
+.br
+.RI "Initializes the vector coordinates from polar coordinates\&. "
+.ti -1c
+.RI "constexpr \fBvector2\fP (const T &\fBx\fP, const T &\fBy\fP) noexcept"
+.br
+.RI "Initializes the vector from Cartesian coordinates\&. "
+.ti -1c
+.RI "\fBvector2\fP (void) noexcept=default"
+.br
+.RI "Initializes vector to (0,0) "
+.ti -1c
+.RI "\fBradians\fP \fBangle\fP (void) const"
+.br
+.RI "Return the angle of this vector\&. "
+.ti -1c
+.RI "bool \fBis_pd\fP (void) const"
+.br
+.RI "Is the vector is positive definite? "
+.ti -1c
+.RI "bool \fBis_psd\fP (void) const"
+.br
+.RI "Is the vector is positive semi-definite? "
+.ti -1c
+.RI "double \fBlength\fP (void) const"
+.br
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> \fBvector2\fP & \fBnormalize\fP (void)"
+.br
+.RI "Normalizes this vector\&. "
+.ti -1c
+.RI "bool \fBoperator!=\fP (const \fBvector2\fP &other) const"
+.br
+.RI "Returns if this vector and the passed one are not equal by checking coordinates for equality\&. "
+.ti -1c
+.RI "\fBvector2\fP \fBoperator*\fP (T val) const"
+.br
+.ti -1c
+.RI "\fBvector2\fP & \fBoperator*=\fP (T val)"
+.br
+.ti -1c
+.RI "\fBvector2\fP \fBoperator+\fP (const \fBvector2\fP &other) const"
+.br
+.ti -1c
+.RI "\fBvector2\fP & \fBoperator+=\fP (const \fBvector2\fP &other)"
+.br
+.ti -1c
+.RI "\fBvector2\fP< T > \fBoperator\-\fP (const \fBvector2\fP &other) const"
+.br
+.ti -1c
+.RI "\fBvector2\fP \fBoperator\-\fP (void) const"
+.br
+.ti -1c
+.RI "\fBvector2\fP & \fBoperator\-=\fP (const \fBvector2\fP &other)"
+.br
+.ti -1c
+.RI "\fBvector2\fP \fBoperator/\fP (T val) const"
+.br
+.ti -1c
+.RI "\fBvector2\fP & \fBoperator/=\fP (T val)"
+.br
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBoperator<\fP (const \fBvector2\fP &other) const"
+.br
+.RI "Needed for using vectors as keys in a map\&. "
+.ti -1c
+.RI "bool \fBoperator<=\fP (const \fBvector2\fP &other) const"
+.br
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBoperator==\fP (const \fBvector2\fP &other) const"
+.br
+.RI "Returns if this vector and the argument are considered equal, determined by coordinate comparison\&. "
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> bool \fBoperator==\fP (const \fBvector2\fP &other) const"
+.br
+.RI "Returns if this vector and the argument are considered equal, determined by coordinate comparison\&. "
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBoperator>\fP (const \fBvector2\fP &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator>=\fP (const \fBvector2\fP &other) const"
+.br
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> \fBvector2\fP & \fBrotate\fP (const \fBradians\fP &\fBangle\fP)"
+.br
+.RI "Rotate this vector by the specified angle\&. "
+.ti -1c
+.RI "\fBvector2\fP & \fBscale\fP (const T &factor)"
+.br
+.RI "Scales the vector by the specified values\&. "
+.ti -1c
+.RI "\fBvector2\fP & \fBscale\fP (const T &scale_x, const T &scale_y)"
+.br
+.RI "Scales the vector by the specified values\&. "
+.ti -1c
+.RI "void \fBset\fP (const T &\fBx\fP, const T &\fBy\fP)"
+.br
+.RI "Sets the vector contents from Cartesian coordinates\&. "
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> void \fBset_from_polar\fP (const T &\fBlength\fP, const \fBradians\fP &\fBangle\fP)"
+.br
+.ti -1c
+.RI "T \fBsquare_length\fP (void) const"
+.br
+.RI "Returns the square length of this vector\&. "
+.ti -1c
+.RI "std::string \fBto_str\fP (void) const override"
+.br
+.RI "Return a string representation of a class\&. "
+.ti -1c
+.RI "void \fBx\fP (const T &x)"
+.br
+.ti -1c
+.RI "T \fBx\fP (void)"
+.br
+.ti -1c
+.RI "const T & \fBx\fP (void) const"
+.br
+.ti -1c
+.RI "void \fBy\fP (const T &y)"
+.br
+.ti -1c
+.RI "T \fBy\fP (void)"
+.br
+.ti -1c
+.RI "const T & \fBy\fP (void) const"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename U , typename V , typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0, typename std::enable_if<(!std::is_floating_point< V >::value), int >::type  = 0> static size_t \fBl1norm\fP (const \fBvector2\fP< U > &v1, const \fBvector2\fP< V > &v2)"
+.br
+.RI "Computes the manhattan distance between the passed vectors\&. "
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static constexpr size_t \fBkDIMENSIONALITY\fP = 2"
+.br
+.ti -1c
+.RI "static const \fBvector2\fP< T > \fBX\fP"
+.br
+.RI "The positive X axis\&. "
+.ti -1c
+.RI "static const \fBvector2\fP< T > \fBY\fP"
+.br
+.RI "The positive Y axis\&. "
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &stream, const \fBvector2\fP &v)"
+.br
+.ti -1c
+.RI "std::istream & \fBoperator>>\fP (std::istream &is, \fBvector2\fP< T > &v)"
+.br
+.RI "For parsing a vector from a string in the form of \fC'X,Y'\fP\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::math::vector2< T >"
+Base template class encapsulating mathematical actions on a pair of numbers\&. Is specialized by \fBvector2i\fP, \fBvector2d\fP\&. 
+
+All operations are performed in whatever the template parameter is, so take care if you are trying to do scaling, trigonometric things with integers\&.\&.\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename T > using \fBrcppsw::math::vector2\fP< T >::\fBvalue_type\fP =  T"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::math::vector2\fP< T >::\fBvector2\fP (void)\fC [default]\fP, \fC [noexcept]\fP"
+
+.PP
+Initializes vector to (0,0) 
+.SS "template<typename T > constexpr \fBrcppsw::math::vector2\fP< T >::\fBvector2\fP (const T & x, const T & y)\fC [inline]\fP, \fC [constexpr]\fP, \fC [noexcept]\fP"
+
+.PP
+Initializes the vector from Cartesian coordinates\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIx\fP The X coordinate\&. 
+.br
+\fIy\fP The Y coordinate\&. 
+.RE
+.PP
+
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> \fBrcppsw::math::vector2\fP< T >::\fBvector2\fP (const T & length, const \fBradians\fP & angle)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.PP
+Initializes the vector coordinates from polar coordinates\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIlength\fP The vector length\&. 
+.br
+\fIangle\fP The vector angle\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > \fBradians\fP \fBrcppsw::math::vector2\fP< T >::angle (void) const\fC [inline]\fP"
+
+.PP
+Return the angle of this vector\&. 
+.SS "template<typename T > bool \fBrcppsw::math::vector2\fP< T >::is_pd (void) const\fC [inline]\fP"
+
+.PP
+Is the vector is positive definite? 
+.SS "template<typename T > bool \fBrcppsw::math::vector2\fP< T >::is_psd (void) const\fC [inline]\fP"
+
+.PP
+Is the vector is positive semi-definite? 
+.SS "template<typename T > template<typename U , typename V , typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0, typename std::enable_if<(!std::is_floating_point< V >::value), int >::type  = 0> static size_t \fBrcppsw::math::vector2\fP< T >::l1norm (const \fBvector2\fP< U > & v1, const \fBvector2\fP< V > & v2)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Computes the manhattan distance between the passed vectors\&. 
+.SS "template<typename T > double \fBrcppsw::math::vector2\fP< T >::length (void) const\fC [inline]\fP"
+Returns the length of this vector\&. 
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> \fBvector2\fP& \fBrcppsw::math::vector2\fP< T >::normalize (void)\fC [inline]\fP"
+
+.PP
+Normalizes this vector\&. After this method is called, the vector has length 1\&. If the vector is (0,0), this call results in a division by zero error, and your program will probably crash\&.
+.PP
+\fBReturns\fP
+.RS 4
+A reference to the normalized vector\&. 
+.RE
+.PP
+
+.SS "template<typename T > bool \fBrcppsw::math::vector2\fP< T >::operator!= (const \fBvector2\fP< T > & other) const\fC [inline]\fP"
+
+.PP
+Returns if this vector and the passed one are not equal by checking coordinates for equality\&. Should generally not be called if the template parameter type is not an integer, as floating point comparisons in general are unsafe\&. 
+.SS "template<typename T > \fBvector2\fP \fBrcppsw::math::vector2\fP< T >::operator* (T val) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector2\fP& \fBrcppsw::math::vector2\fP< T >::operator*= (T val)\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector2\fP \fBrcppsw::math::vector2\fP< T >::operator+ (const \fBvector2\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector2\fP& \fBrcppsw::math::vector2\fP< T >::operator+= (const \fBvector2\fP< T > & other)\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector2\fP<T> \fBrcppsw::math::vector2\fP< T >::operator\- (const \fBvector2\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector2\fP \fBrcppsw::math::vector2\fP< T >::operator\- (void) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector2\fP& \fBrcppsw::math::vector2\fP< T >::operator\-= (const \fBvector2\fP< T > & other)\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector2\fP \fBrcppsw::math::vector2\fP< T >::operator/ (T val) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBvector2\fP& \fBrcppsw::math::vector2\fP< T >::operator/= (T val)\fC [inline]\fP"
+
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBrcppsw::math::vector2\fP< T >::operator< (const \fBvector2\fP< T > & other) const\fC [inline]\fP"
+
+.PP
+Needed for using vectors as keys in a map\&. 
+.SS "template<typename T > bool \fBrcppsw::math::vector2\fP< T >::operator<= (const \fBvector2\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBrcppsw::math::vector2\fP< T >::operator== (const \fBvector2\fP< T > & other) const\fC [inline]\fP"
+
+.PP
+Returns if this vector and the argument are considered equal, determined by coordinate comparison\&. Only available if the template argument is not floating point\&. 
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> bool \fBrcppsw::math::vector2\fP< T >::operator== (const \fBvector2\fP< T > & other) const\fC [inline]\fP"
+
+.PP
+Returns if this vector and the argument are considered equal, determined by coordinate comparison\&. Only available if the template argument is floating point\&. 
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBrcppsw::math::vector2\fP< T >::operator> (const \fBvector2\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<typename T > bool \fBrcppsw::math::vector2\fP< T >::operator>= (const \fBvector2\fP< T > & other) const\fC [inline]\fP"
+
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> \fBvector2\fP& \fBrcppsw::math::vector2\fP< T >::rotate (const \fBradians\fP & angle)\fC [inline]\fP"
+
+.PP
+Rotate this vector by the specified angle\&. This is only available if the template parameter is not an integer\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIangle\fP The rotation angle\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A reference to the rotated vector\&. 
+.RE
+.PP
+
+.SS "template<typename T > \fBvector2\fP& \fBrcppsw::math::vector2\fP< T >::scale (const T & factor)\fC [inline]\fP"
+
+.PP
+Scales the vector by the specified values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfactor\fP The scaling factor applied to both X and Y\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A reference to the scaled vector\&. 
+.RE
+.PP
+
+.SS "template<typename T > \fBvector2\fP& \fBrcppsw::math::vector2\fP< T >::scale (const T & scale_x, const T & scale_y)\fC [inline]\fP"
+
+.PP
+Scales the vector by the specified values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIscale_x\fP the scale factor for the X coordinate\&. 
+.br
+\fIscale_y\fP the scale factor for the Y coordinate\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A reference to the scaled vector\&. 
+.RE
+.PP
+
+.SS "template<typename T > void \fBrcppsw::math::vector2\fP< T >::set (const T & x, const T & y)\fC [inline]\fP"
+
+.PP
+Sets the vector contents from Cartesian coordinates\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIx\fP The new X coordinate\&. 
+.br
+\fIy\fP The new Y coordinate\&. 
+.RE
+.PP
+
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> void \fBrcppsw::math::vector2\fP< T >::set_from_polar (const T & length, const \fBradians\fP & angle)\fC [inline]\fP"
+Sets the vector contents from polar coordinates\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIlength\fP The length of the vector\&. 
+.br
+\fIangle\fP The angle of the vector (range [0,2pi) 
+.RE
+.PP
+
+.SS "template<typename T > T \fBrcppsw::math::vector2\fP< T >::square_length (void) const\fC [inline]\fP"
+
+.PP
+Returns the square length of this vector\&. 
+.SS "template<typename T > std::string \fBrcppsw::math::vector2\fP< T >::to_str (void) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Return a string representation of a class\&. 
+.PP
+Reimplemented from \fBrcppsw::er::stringizable\fP\&.
+.SS "template<typename T > void \fBrcppsw::math::vector2\fP< T >::x (const T & x)\fC [inline]\fP"
+
+.SS "template<typename T > T \fBrcppsw::math::vector2\fP< T >::x (void)\fC [inline]\fP"
+
+.SS "template<typename T > const T& \fBrcppsw::math::vector2\fP< T >::x (void) const\fC [inline]\fP"
+
+.SS "template<typename T > void \fBrcppsw::math::vector2\fP< T >::y (const T & y)\fC [inline]\fP"
+
+.SS "template<typename T > T \fBrcppsw::math::vector2\fP< T >::y (void)\fC [inline]\fP"
+
+.SS "template<typename T > const T& \fBrcppsw::math::vector2\fP< T >::y (void) const\fC [inline]\fP"
+
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "template<typename T > std::ostream& operator<< (std::ostream & stream, const \fBvector2\fP< T > & v)\fC [friend]\fP"
+
+.SS "template<typename T > std::istream& operator>> (std::istream & is, \fBvector2\fP< T > & v)\fC [friend]\fP"
+
+.PP
+For parsing a vector from a string in the form of \fC'X,Y'\fP\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "template<typename T > constexpr size_t \fBrcppsw::math::vector2\fP< T >::kDIMENSIONALITY = 2\fC [static]\fP, \fC [constexpr]\fP"
+
+.SS "const \fBvector2d\fP rcppsw::math::vector2d::X\fC [static]\fP"
+
+.PP
+The positive X axis\&. 
+.SS "const \fBvector2d\fP rcppsw::math::vector2d::Y\fC [static]\fP"
+
+.PP
+The positive Y axis\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

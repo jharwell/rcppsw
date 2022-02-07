@@ -1,0 +1,98 @@
+.TH "rcppsw::ds::graph::detail::hgrid3D_view_builder< TSpecType >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::graph::detail::hgrid3D_view_builder< TSpecType > \- Predicate for filtering \fBhgrid3D\fP into \fBhgrid3D_view\fP objects\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <hgrid3D_view_builder\&.hpp>\fP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBtrace_data\fP"
+.br
+.in -1c
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBbgl_impl_type\fP = typename TSpecType::bgl_impl_type"
+.br
+.ti -1c
+.RI "using \fBedge_descriptor\fP = typename bgl_impl_type::edge_descriptor"
+.br
+.ti -1c
+.RI "using \fBvertex_descriptor\fP = typename bgl_impl_type::vertex_descriptor"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBhgrid3D_view_builder\fP (const \fBbgl_impl_type\fP &graph, const \fBvertex_descriptor\fP &start, size_t max_dist, boost::optional< \fBrmath::vector3z\fP > axis)"
+.br
+.ti -1c
+.RI "bool \fBoperator()\fP (\fBedge_descriptor\fP) const"
+.br
+.ti -1c
+.RI "bool \fBoperator()\fP (\fBvertex_descriptor\fP vd) const"
+.br
+.ti -1c
+.RI "const \fBtrace_data\fP & \fBtrace\fP (void) const"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TSpecType>
+.br
+class rcppsw::ds::graph::detail::hgrid3D_view_builder< TSpecType >"
+Predicate for filtering \fBhgrid3D\fP into \fBhgrid3D_view\fP objects\&. 
+.SH "Class Documentation"
+.PP 
+.SH "struct rcppsw::ds::graph::detail::hgrid3D_view_builder::trace_data"
+.PP 
+
+.SS "template<typename TSpecType>
+.br
+struct rcppsw::ds::graph::detail::hgrid3D_view_builder< TSpecType >::trace_data"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+vector3z \fIll\fP 
+.br
+.PP
+vector3z \fIur\fP 
+.br
+.PP
+.RE
+.PP
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::detail::hgrid3D_view_builder\fP< TSpecType >::\fBbgl_impl_type\fP =  typename TSpecType::bgl_impl_type"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::detail::hgrid3D_view_builder\fP< TSpecType >::\fBedge_descriptor\fP =  typename bgl_impl_type::edge_descriptor"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::detail::hgrid3D_view_builder\fP< TSpecType >::\fBvertex_descriptor\fP =  typename bgl_impl_type::vertex_descriptor"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::detail::hgrid3D_view_builder\fP< TSpecType >::\fBhgrid3D_view_builder\fP (const \fBbgl_impl_type\fP & graph, const \fBvertex_descriptor\fP & start, size_t max_dist, boost::optional< \fBrmath::vector3z\fP > axis)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TSpecType > bool \fBrcppsw::ds::graph::detail::hgrid3D_view_builder\fP< TSpecType >::operator() (\fBedge_descriptor\fP) const\fC [inline]\fP"
+
+.SS "template<typename TSpecType > bool \fBrcppsw::ds::graph::detail::hgrid3D_view_builder\fP< TSpecType >::operator() (\fBvertex_descriptor\fP vd) const\fC [inline]\fP"
+
+.SS "template<typename TSpecType > const \fBtrace_data\fP& \fBrcppsw::ds::graph::detail::hgrid3D_view_builder\fP< TSpecType >::trace (void) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

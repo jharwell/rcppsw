@@ -1,0 +1,361 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1multithread_1_1threadable" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>rcppsw::multithread::threadable</compoundname>
+    <includes refid="threadable_8hpp" local="no">threadable.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1multithread_1_1threadable_1af41e840a29282a4252a0fe2672284781" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* rcppsw::multithread::threadable::m_arg</definition>
+        <argsstring></argsstring>
+        <name>m_arg</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="133" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1multithread_1_1threadable_1a4aef68ed5d5b3d2b9e0d724373fc555f" prot="private" static="no" mutable="no">
+        <type>pthread_t</type>
+        <definition>pthread_t rcppsw::multithread::threadable::m_thread</definition>
+        <argsstring></argsstring>
+        <name>m_thread</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="132" column="13" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1multithread_1_1threadable_1a705ab0259798fced02008d1ade35786d" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool rcppsw::multithread::threadable::m_thread_run</definition>
+        <argsstring></argsstring>
+        <name>m_thread_run</name>
+        <initializer>{ false }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="131" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1threadable_1a8a88b65989e47d2fa7cf4e4b7f22c7cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::multithread::threadable::threadable</definition>
+        <argsstring>(const threadable &amp;)=delete</argsstring>
+        <name>threadable</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1multithread_1_1threadable" kindref="compound">threadable</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="57" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1threadable_1ae1082e3cabb7f10d94701f7609f47433" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::multithread::threadable::threadable</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>threadable</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="54" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1threadable_1a84af36ca4a1b5623190f4aea1a5eb57d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::multithread::threadable::~threadable</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~threadable</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="55" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1threadable_1ab16685fa3dfd268468a04c9d435054ec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multithread::threadable::join</definition>
+        <argsstring>(void)</argsstring>
+        <name>join</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Join a thread (i.e. wait for it to finish). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="86" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1threadable_1abb754eb863ad7870af44dac57adec344" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1multithread_1_1threadable" kindref="compound">threadable</ref> &amp;</type>
+        <definition>threadable&amp; rcppsw::multithread::threadable::operator=</definition>
+        <argsstring>(const threadable &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1multithread_1_1threadable" kindref="compound">threadable</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="58" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1threadable_1ad0c3ee8f133c56e0cad5b9c6ef6fd397" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="types_8h_1af9bff8ff1154a04a899276af806b8586" kindref="member" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag">status_t</ref></type>
+        <definition>status_t rcppsw::multithread::threadable::start</definition>
+        <argsstring>(void *arg, int core=-1)</argsstring>
+        <name>start</name>
+        <param>
+          <type>void *</type>
+          <declname>arg</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>core</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>Start a thread. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Argument passed to thread (can be NULL). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>core</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The core to bind the thread to. By default, the thread is unbound. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>status_t - OK if successful, ERROR otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="76" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1threadable_1a1154f96356b7ed6609db39f56806f002" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::multithread::threadable::term</definition>
+        <argsstring>(void)</argsstring>
+        <name>term</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Signal a thread that it should terminate, from outside the thread. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="81" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" bodystart="81" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1threadable_1abd675da47c1456146727e6d095d6a9af" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void *</type>
+        <definition>virtual void* rcppsw::multithread::threadable::thread_main</definition>
+        <argsstring>(void *arg)=0</argsstring>
+        <name>thread_main</name>
+        <param>
+          <type>void *</type>
+          <declname>arg</declname>
+        </param>
+        <briefdescription>
+<para>The entry point for a thread. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Argument passed to thread (can be NULL). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The return value of the thread. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="66" column="16"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1threadable_1afffdf59b6d1651307e24107d1264228b" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multithread::threadable::exit</definition>
+        <argsstring>(void *ret=nullptr)</argsstring>
+        <name>exit</name>
+        <param>
+          <type>void *</type>
+          <declname>ret</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Exit a thread from within the thread itself. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ret</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If non-NULL, will be filled with the return value of the thread as it exits. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="100" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" bodystart="100" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1threadable_1a985a5b76b26acb46cd27f2013ad4236b" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::multithread::threadable::terminated</definition>
+        <argsstring>(void) const</argsstring>
+        <name>terminated</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Check if a thread object has been told to terminate elsewhere. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="92" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" bodystart="92" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1threadable_1ac2973e83a76951ab840c86bfb0164241" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>pthread_t</type>
+        <definition>pthread_t rcppsw::multithread::threadable::thread_handle</definition>
+        <argsstring>(void) const</argsstring>
+        <name>thread_handle</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the pthread handle for the thread. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The handle. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="115" column="13" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" bodystart="115" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1threadable_1ae958a1996893228ed5f6413281a3e3c9" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int64_t</type>
+        <definition>int64_t rcppsw::multithread::threadable::thread_id</definition>
+        <argsstring>(void) const</argsstring>
+        <name>thread_id</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the ID of the thread within the parent process. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The thread ID (guaranteed to be unique among threads in a process). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="122" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" bodystart="122" bodyend="122"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1threadable_1a375d8d9918ae48aba7d8c0644359841b" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void *</type>
+        <definition>static void* rcppsw::multithread::threadable::entry_point</definition>
+        <argsstring>(void *this_p)</argsstring>
+        <name>entry_point</name>
+        <param>
+          <type>void *</type>
+          <declname>this_p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="125" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" bodystart="125" bodyend="128"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Daemon interface class which can be derived from to indicate that the class can spawn a new thread and jump into the main loop defined for the class. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::multithread::threadable</label>
+        <link refid="classrcppsw_1_1multithread_1_1threadable"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" line="52" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/threadable.hpp" bodystart="52" bodyend="135"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1a375d8d9918ae48aba7d8c0644359841b" prot="private" virt="non-virtual"><scope>rcppsw::multithread::threadable</scope><name>entry_point</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1afffdf59b6d1651307e24107d1264228b" prot="protected" virt="non-virtual"><scope>rcppsw::multithread::threadable</scope><name>exit</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1ab16685fa3dfd268468a04c9d435054ec" prot="public" virt="non-virtual"><scope>rcppsw::multithread::threadable</scope><name>join</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1af41e840a29282a4252a0fe2672284781" prot="private" virt="non-virtual"><scope>rcppsw::multithread::threadable</scope><name>m_arg</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1a4aef68ed5d5b3d2b9e0d724373fc555f" prot="private" virt="non-virtual"><scope>rcppsw::multithread::threadable</scope><name>m_thread</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1a705ab0259798fced02008d1ade35786d" prot="private" virt="non-virtual"><scope>rcppsw::multithread::threadable</scope><name>m_thread_run</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1abb754eb863ad7870af44dac57adec344" prot="public" virt="non-virtual"><scope>rcppsw::multithread::threadable</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1ad0c3ee8f133c56e0cad5b9c6ef6fd397" prot="public" virt="non-virtual"><scope>rcppsw::multithread::threadable</scope><name>start</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1a1154f96356b7ed6609db39f56806f002" prot="public" virt="virtual"><scope>rcppsw::multithread::threadable</scope><name>term</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1a985a5b76b26acb46cd27f2013ad4236b" prot="protected" virt="non-virtual"><scope>rcppsw::multithread::threadable</scope><name>terminated</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1ac2973e83a76951ab840c86bfb0164241" prot="protected" virt="non-virtual"><scope>rcppsw::multithread::threadable</scope><name>thread_handle</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1ae958a1996893228ed5f6413281a3e3c9" prot="protected" virt="non-virtual"><scope>rcppsw::multithread::threadable</scope><name>thread_id</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1abd675da47c1456146727e6d095d6a9af" prot="public" virt="pure-virtual"><scope>rcppsw::multithread::threadable</scope><name>thread_main</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1ae1082e3cabb7f10d94701f7609f47433" prot="public" virt="non-virtual"><scope>rcppsw::multithread::threadable</scope><name>threadable</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1a8a88b65989e47d2fa7cf4e4b7f22c7cf" prot="public" virt="non-virtual"><scope>rcppsw::multithread::threadable</scope><name>threadable</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1threadable_1a84af36ca4a1b5623190f4aea1a5eb57d" prot="public" virt="virtual"><scope>rcppsw::multithread::threadable</scope><name>~threadable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

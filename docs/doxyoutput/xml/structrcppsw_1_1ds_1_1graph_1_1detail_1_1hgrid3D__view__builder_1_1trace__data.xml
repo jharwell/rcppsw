@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__builder_1_1trace__data" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::ds::graph::detail::hgrid3D_view_builder::trace_data</compoundname>
+    <includes refid="hgrid3D__view__builder_8hpp" local="no">hgrid3D_view_builder.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__builder_1_1trace__data_1acab4be570b19deb95f7fcfcfcaa9beac" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacercppsw_1_1math_1a72e9a2c7f7fb0b33f22a664371912a36" kindref="member">rmath::vector3z</ref></type>
+        <definition>rmath::vector3z rcppsw::ds::graph::detail::hgrid3D_view_builder&lt; TSpecType &gt;::trace_data::ll</definition>
+        <argsstring></argsstring>
+        <name>ll</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_builder.hpp" line="62" column="21" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_builder.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__builder_1_1trace__data_1ad87a08d1d08d955c5d19f94ca2d0544d" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacercppsw_1_1math_1a72e9a2c7f7fb0b33f22a664371912a36" kindref="member">rmath::vector3z</ref></type>
+        <definition>rmath::vector3z rcppsw::ds::graph::detail::hgrid3D_view_builder&lt; TSpecType &gt;::trace_data::ur</definition>
+        <argsstring></argsstring>
+        <name>ur</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_builder.hpp" line="63" column="21" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_builder.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::graph::detail::hgrid3D_view_builder&lt; TSpecType &gt;::trace_data</label>
+        <link refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__builder_1_1trace__data"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+ur</edgelabel>
+          <edgelabel>+ll</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::math::vector3&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1math_1_1vector3"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_builder.hpp" line="61" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_builder.hpp" bodystart="61" bodyend="64"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__builder_1_1trace__data_1acab4be570b19deb95f7fcfcfcaa9beac" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_builder::trace_data</scope><name>ll</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1detail_1_1hgrid3D__view__builder_1_1trace__data_1ad87a08d1d08d955c5d19f94ca2d0544d" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::detail::hgrid3D_view_builder::trace_data</scope><name>ur</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

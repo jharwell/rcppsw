@@ -1,0 +1,56 @@
+.TH "rcppsw::metrics::config::xml::base_sink_parser" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::config::xml::base_sink_parser \- Base class for parsing parameters for \fBrmetrics::base_sink\fP derived classes\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <base_sink_parser\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< base_sink_parser >\fP, and xml_config_parser\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbase_sink_parser\fP (void)"
+.br
+.ti -1c
+.RI "\fB~base_sink_parser\fP (void) override=default"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBis_collector_name\fP (const ticpp::Attribute &attr) const"
+.br
+.RI "Determine if a particular attribute under the a node is the name of a metric collector or some other type of parameter\&. "
+.ti -1c
+.RI "void \fBoutput_mode_parse\fP (const ticpp::Element &element, rmetrics::config::output_mode_config *config)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Base class for parsing parameters for \fBrmetrics::base_sink\fP derived classes\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::metrics::config::xml::base_sink_parser::base_sink_parser (void)\fC [inline]\fP"
+
+.SS "rcppsw::metrics::config::xml::base_sink_parser::~base_sink_parser (void)\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool rcppsw::metrics::config::xml::base_sink_parser::is_collector_name (const ticpp::Attribute & attr) const\fC [protected]\fP"
+
+.PP
+Determine if a particular attribute under the a node is the name of a metric collector or some other type of parameter\&. 
+.SS "void rcppsw::metrics::config::xml::base_sink_parser::output_mode_parse (const ticpp::Element & element, rmetrics::config::output_mode_config * config)\fC [protected]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

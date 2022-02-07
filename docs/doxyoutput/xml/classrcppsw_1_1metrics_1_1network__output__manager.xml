@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1metrics_1_1network__output__manager" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::metrics::network_output_manager</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; network_output_manager &gt;</basecompoundref>
+    <basecompoundref refid="classrcppsw_1_1metrics_1_1base__manager" prot="public" virt="non-virtual">rcppsw::metrics::base_manager</basecompoundref>
+    <includes refid="network__output__manager_8hpp" local="no">network_output_manager.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1network__output__manager_1a4d9d25807cd7c458696e127b2c1c8e4a" prot="private" static="no" mutable="no">
+        <type><ref refid="classrcppsw_1_1metrics_1_1collector__group" kindref="compound">rmetrics::collector_group</ref></type>
+        <definition>rmetrics::collector_group rcppsw::metrics::network_output_manager::m_stream</definition>
+        <argsstring></argsstring>
+        <name>m_stream</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" line="99" column="29" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__output__manager_1a7fe6c273b229d5fdb5c9aaf0995c53de" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::network_output_manager::network_output_manager</definition>
+        <argsstring>(void)</argsstring>
+        <name>network_output_manager</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" line="57" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" bodystart="57" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__output__manager_1a9b2332e1dcb4bfe8ce8da95e02e51c08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::network_output_manager::~network_output_manager</definition>
+        <argsstring>(void) override=default</argsstring>
+        <name>~network_output_manager</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" line="59" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__output__manager_1a25ff616824b471c8885d185f131655cc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::network_output_manager::collector_preregister</definition>
+        <argsstring>(const std::string &amp;scoped_name, const rmetrics::output_mode &amp;mode) override</argsstring>
+        <name>collector_preregister</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__manager_1ac400893189c8599c6b362433b5fdec11">collector_preregister</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>scoped_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" kindref="member">rmetrics::output_mode</ref> &amp;</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+<para>To be called before <ref refid="classrcppsw_1_1metrics_1_1base__manager_1ab4c78173cfdbd539b96e319b5a6b8f26" kindref="member">collector_register()</ref>, in order to correctly set up the collector map for the collector with the specified scoped name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If you forget to do this you will get a segfault. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" line="61" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" bodystart="61" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__output__manager_1a779dcdd9871d9c6f0506b6af5eba82f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::network_output_manager::finalize</definition>
+        <argsstring>(void) override</argsstring>
+        <name>finalize</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__manager_1a0fe2f062a289ae6064aeb539fcb123ba">finalize</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decorator around collector_group::finalize_all(). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" line="93" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" bodystart="93" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__output__manager_1a8c11bc304d813efe4cd02ed433ed9e1a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::metrics::network_output_manager::flush</definition>
+        <argsstring>(const rmetrics::output_mode &amp;mode) override</argsstring>
+        <name>flush</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__manager_1a885a1c83f6b6cd6c4bd758144672354e">flush</reimplements>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" kindref="member">rmetrics::output_mode</ref> &amp;</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" line="75" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" bodystart="75" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__output__manager_1afe5609252ab6298dcb2d1a9ed0f7ee7e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::network_output_manager::initialize</definition>
+        <argsstring>(void) override</argsstring>
+        <name>initialize</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__manager_1aee2d6c7bcba2625b53a0341a6c17cf4f">initialize</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decorator around <ref refid="classrcppsw_1_1metrics_1_1collector__group_1ab5a0b85257c72d34ef06260a66a1b5a6" kindref="member">collector_group::initialize()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" line="71" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" bodystart="71" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__output__manager_1a7be1ba72b5c41a5cb8a5c68ce7e1f96d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::network_output_manager::interval_reset</definition>
+        <argsstring>(void) override</argsstring>
+        <name>interval_reset</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__manager_1ac393bd539adbd14781d44d1fc18c6303">interval_reset</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decorator around <ref refid="classrcppsw_1_1metrics_1_1collector__group_1a158e9534e8654ea1d4cea07d9d819572" kindref="member">collector_group::interval_reset()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" line="89" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" bodystart="89" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1network__output__manager_1ac35707ad934b1d2b4f24f444e505371a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::network_output_manager::timestep_inc</definition>
+        <argsstring>(void) override</argsstring>
+        <name>timestep_inc</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__manager_1ab8d4923c9f9a641d76c72c424ff0943e">timestep_inc</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decorator around <ref refid="classrcppsw_1_1metrics_1_1collector__group_1a23ddbcd59ffecbb724ef65e52216463e" kindref="member">collector_group::timestep_inc()</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" line="85" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" bodystart="85" bodyend="87"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class for managing metrics collected from variable sources across all possible collector output modes and sinks which ultimately output their metrics to the filesystem. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>rcppsw::metrics::base_manager</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__manager"/>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; network_output_manager &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::network_output_manager</label>
+        <link refid="classrcppsw_1_1metrics_1_1network__output__manager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>rcppsw::metrics::base_manager</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__manager"/>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; network_output_manager &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::network_output_manager</label>
+        <link refid="classrcppsw_1_1metrics_1_1network__output__manager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" line="55" column="56" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp" bodystart="54" bodyend="101"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a8bbb1e653e3eeda4c7e6f229fd289763" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>base_manager</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a0c8cb07c3e3aaac94854c345a74597ff" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>collect</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a9ada1fd8998e902a52e67c4b8eb30476" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>collect_if</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a76debcfab748d9e56fc6c46f03a95cc7" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>collector_map</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1ab4b144bce60014574080956e061e2f78" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>collector_map_type</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__output__manager_1a25ff616824b471c8885d185f131655cc" prot="public" virt="virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>collector_preregister</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1ab4c78173cfdbd539b96e319b5a6b8f26" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>collector_register</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a803b2fd9fe0072dc8bd4438c005d257b" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>collector_unregister</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__output__manager_1a779dcdd9871d9c6f0506b6af5eba82f4" prot="public" virt="virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>finalize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__output__manager_1a8c11bc304d813efe4cd02ed433ed9e1a" prot="public" virt="virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>flush</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1a759f30a9314723cc72b1e96242c4666f" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>get</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__output__manager_1afe5609252ab6298dcb2d1a9ed0f7ee7e" prot="public" virt="virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>initialize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__output__manager_1a7be1ba72b5c41a5cb8a5c68ce7e1f96d" prot="public" virt="virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>interval_reset</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__output__manager_1a4d9d25807cd7c458696e127b2c1c8e4a" prot="private" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>m_stream</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__output__manager_1a7fe6c273b229d5fdb5c9aaf0995c53de" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>network_output_manager</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__output__manager_1ac35707ad934b1d2b4f24f444e505371a" prot="public" virt="virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>timestep_inc</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__manager_1af1eed86e00ad1557925cc07f33d86e97" prot="public" virt="virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>~base_manager</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>~client</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1network__output__manager_1a9b2332e1dcb4bfe8ce8da95e02e51c08" prot="public" virt="non-virtual"><scope>rcppsw::metrics::network_output_manager</scope><name>~network_output_manager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

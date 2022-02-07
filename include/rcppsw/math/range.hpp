@@ -31,6 +31,7 @@
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/rcppsw.hpp"
 #include "rcppsw/utils/string_utils.hpp"
+#include "rcppsw/er/stringizable.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -54,9 +55,14 @@ NS_START(rcppsw, math);
  * To call any member functions other than \ref lb() and \ref ub(), the range
  * must be non-empty, meaning that the min must not be equal to the max (if it
  * is an assertion will trigger).
+ *
+ * No mutator functions are provided beyond setters, with the idea that ranges
+ * should generally be read-only. If you want to modify a range (e.g., \ref
+ * translate() it), a new range should be returned and the original range be
+ * unmodified.
  */
 template <typename T>
-class range final : public er::client<range<T>> {
+class range final : public er::client<range<T>>, er::stringizable {
  public:
   range(void) noexcept : ER_CLIENT_INIT("rcppsw.math.range") {}
   range(const T& lb, const T& ub) noexcept
@@ -189,13 +195,17 @@ class range final : public er::client<range<T>> {
 
   /**
    * \brief Get the midpoint of the range.
+   *
+   * For integer ranges where \ref span() is odd, this will truncate (i.e., the
+   * centerpoint is always of type \p T).
    */
-  T center(void) const { return (m_lb + m_ub) / 2.0; }
+  T center(void) const { return (m_lb + m_ub) / 2; }
+
 
   /**
    * \brief Return a string representation of the range in the form of '[lb,ub]'.
    */
-  std::string to_str(void) const {
+  std::string to_str(void) const override {
     return "[" + rcppsw::to_string(m_lb) + "-" + rcppsw::to_string(m_ub) + "]";
   }
 
@@ -205,11 +215,32 @@ class range final : public er::client<range<T>> {
   }
   /**
    * \brief Translate the current range to the specified value, returning a new
-   * range centered at that value.
+   * range resulting from the translation.
    *
    * \return The new translated range.
    */
-  range translate(const T& value) { return range(m_lb + value, m_ub + value); }
+  range translate(const T& value) const {
+    return range(m_lb + value, m_ub + value);
+  }
+  /**
+   * \brief Shrink the current range in both directions with the specified value, returning a new
+   * range resulting from the shrink.
+   *
+   * \return The shrunken range.
+   */
+  range shrink(const T& value) const {
+    return range(m_lb + value, m_ub - value);
+  }
+
+  /**
+   * \brief Re-center the current range around the specified value, returning a
+   * new range centered at that value.
+   */
+  range recenter(const T&value) const {
+    T span = this->span();
+    return range(static_cast<T>(value - span / 2.0),
+                 static_cast<T>(value + span / 2.0));
+  }
 
   /**
    * \brief For parsing a range from a string in the form of \c "LB:UB".
@@ -234,11 +265,6 @@ class range final : public er::client<range<T>> {
  * \brief Specialization of \ref range for signed integers.
  */
 using rangei = range<int>;
-
-/**
- * \brief Specialization of \ref range for unsigned integers.
- */
-using rangeu = range<uint>;
 
 /**
  * \brief Specialization of \ref range for size_t.
@@ -290,7 +316,6 @@ RCPPSW_MATH_RANGE_DIRECT_CONV2FLT(i);
 RCPPSW_MATH_RANGE_SCALED_CONV2FLT(z);
 RCPPSW_MATH_RANGE_SCALED_CONV2FLT(i);
 RCPPSW_MATH_RANGE_CONV2DISC(z, size_t);
-RCPPSW_MATH_RANGE_CONV2DISC(u, uint);
 
 NS_END(math, rcppsw);
 

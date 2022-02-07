@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1patterns_1_1singleton" kind="namespace" language="C++">
+    <compoundname>rcppsw::patterns::singleton</compoundname>
+    <innerclass refid="classrcppsw_1_1patterns_1_1singleton_1_1singleton" prot="public">rcppsw::patterns::singleton::singleton</innerclass>
+    <briefdescription>
+<para>Interfaces for the singleton design pattern. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/singleton/singleton.hpp" line="31" column="39"/>
+  </compounddef>
+</doxygen>

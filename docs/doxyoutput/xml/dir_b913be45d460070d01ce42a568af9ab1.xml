@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_b913be45d460070d01ce42a568af9ab1" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory</compoundname>
+    <innerfile refid="base__factory_8hpp">base_factory.hpp</innerfile>
+    <innerfile refid="factory_8hpp">factory.hpp</innerfile>
+    <innerfile refid="multifactory_8hpp">multifactory.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/"/>
+  </compounddef>
+</doxygen>

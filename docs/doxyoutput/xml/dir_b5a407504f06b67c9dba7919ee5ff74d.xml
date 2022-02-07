@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_b5a407504f06b67c9dba7919ee5ff74d" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/control/config</compoundname>
+    <innerdir refid="dir_dbef6fea93543541617d52c3b6d7585b">/home/jharwell/git/rcppsw/include/rcppsw/control/config/xml</innerdir>
+    <innerfile refid="waveform__config_8hpp">waveform_config.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/config/"/>
+  </compounddef>
+</doxygen>

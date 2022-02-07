@@ -1,0 +1,248 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <boost/mpl/contains\&.hpp>\fP
+.br
+\fC#include <boost/mpl/joint_view\&.hpp>\fP
+.br
+\fC#include <boost/mpl/transform\&.hpp>\fP
+.br
+\fC#include <boost/mpl/vector\&.hpp>\fP
+.br
+\fC#include <boost/mpl/set\&.hpp>\fP
+.br
+\fC#include <boost/utility/enable_if\&.hpp>\fP
+.br
+\fC#include <boost/mpl/empty\&.hpp>\fP
+.br
+\fC#include <boost/tuple/tuple\&.hpp>\fP
+.br
+\fC#include 'rcppsw/common/common\&.hpp'\fP
+.br
+\fC#include 'rcppsw/mpl/mpl\&.hpp'\fP
+.br
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBrcppsw::mpl::detail::ExtendTList< TList, T >\fP"
+.br
+.ti -1c
+.RI "struct \fBrcppsw::mpl::detail::ExtendTList< std::tuple< Ts\&.\&.\&. >, T >\fP"
+.br
+.ti -1c
+.RI "struct \fBrcppsw::mpl::detail::ExtendTList< std::tuple< void >, T >\fP"
+.br
+.ti -1c
+.RI "struct \fBrcppsw::mpl::detail::rename_impl< A, B >\fP"
+.br
+.ti -1c
+.RI "struct \fBrcppsw::mpl::detail::rename_impl< A< T\&.\&.\&. >, B >\fP"
+.br
+.ti -1c
+.RI "struct \fBrcppsw::mpl::typelist_wrap_into< WrapperType, WrapperTypeArgs >\fP"
+.br
+.RI "Wrap a \fBtypelist\fP into a container/template class\&. "
+.ti -1c
+.RI "struct \fBrcppsw::mpl::typelist_wrap_into< WrapperType, WrapperTypeArgs >::apply< ApplyArgs >\fP"
+.br
+.RI "Perform the wrap\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::mpl\fP"
+.br
+.RI "Meta programming namespace\&. Mainly a few aliases around things which boost provides\&. "
+.ti -1c
+.RI " \fBrcppsw::mpl::detail\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_SFINAE_TYPELIST_REJECT\fP(Typelist,  T)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_SFINAE_TYPELIST_REQUIRE\fP(Typelist,  T)"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<typename\&.\&.\&. Ts> using \fBrcppsw::mpl::empty\fP = boost::mpl::empty< Ts\&.\&.\&. >"
+.br
+.RI "Is the \fBtypelist\fP empty ? "
+.ti -1c
+.RI "template<class Seq > using \fBrcppsw::mpl::make_tuple_type\fP = typename boost::mpl::fold< typename boost::mpl::fold< Seq, boost::mpl::set<>, boost::mpl::insert< boost::mpl::_1, boost::mpl::_2 > >::type, boost::tuple< void >, detail::ExtendTList< boost::mpl::_1, boost::mpl::_2 > >"
+.br
+.ti -1c
+.RI "template<class A , template< class\&.\&.\&. > class B> using \fBrcppsw::mpl::rename\fP = typename detail::rename_impl< A, B >"
+.br
+.RI "Rename a variadic type to another variadic type\&. E\&.g\&., std::tuple<int, float, char> -> typelist<int, float, char>\&. "
+.ti -1c
+.RI "template<typename\&.\&.\&. Ts> using \fBrcppsw::mpl::typelist\fP = boost::mpl::vector< Ts\&.\&.\&. >"
+.br
+.RI "A list of types using boost::mpl::vectors, which enables all sorts of nice operations from the boost MPL library\&. "
+.ti -1c
+.RI "template<typename Typelist , template< class WrappedType, class\&.\&.\&. > class WrapperType, class\&.\&.\&. Args> using \fBrcppsw::mpl::typelist_wrap_apply\fP = typename boost::mpl::transform< Typelist, typelist_wrap_into< WrapperType, Args\&.\&.\&. > >"
+.br
+.RI "Apply a functor to each type in the \fBtypelist\fP\&. The functor can itself take as many template parameters as needed\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2019 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Class Documentation"
+.PP 
+.SH "struct rcppsw::mpl::detail::ExtendTList"
+.PP 
+
+.SS "template<typename TList, typename T>
+.br
+struct rcppsw::mpl::detail::ExtendTList< TList, T >"
+
+.SH "struct rcppsw::mpl::detail::ExtendTList< std::tuple< Ts\&.\&.\&. >, T >"
+.PP 
+
+.SS "template<typename T, typename\&.\&.\&. Ts>
+.br
+struct rcppsw::mpl::detail::ExtendTList< std::tuple< Ts\&.\&.\&. >, T >"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+ \fItype\fP 
+.br
+.PP
+.RE
+.PP
+.SH "struct rcppsw::mpl::detail::ExtendTList< std::tuple< void >, T >"
+.PP 
+
+.SS "template<typename T>
+.br
+struct rcppsw::mpl::detail::ExtendTList< std::tuple< void >, T >"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+typedef tuple< T > \fItype\fP 
+.br
+.PP
+.RE
+.PP
+.SH "struct rcppsw::mpl::detail::rename_impl"
+.PP 
+
+.SS "template<class A, template< class\&.\&.\&. > class B>
+.br
+struct rcppsw::mpl::detail::rename_impl< A, B >"
+
+.SH "struct rcppsw::mpl::detail::rename_impl< A< T\&.\&.\&. >, B >"
+.PP 
+
+.SS "template<template< class\&.\&.\&. > class A, class\&.\&.\&. T, template< class\&.\&.\&. > class B>
+.br
+struct rcppsw::mpl::detail::rename_impl< A< T\&.\&.\&. >, B >"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+ \fItype\fP 
+.br
+.PP
+.RE
+.PP
+.SH "struct rcppsw::mpl::typelist_wrap_into"
+.PP 
+
+.SS "template<template< class WrappedType, class\&.\&.\&. > class WrapperType, class\&.\&.\&. WrapperTypeArgs>
+.br
+struct rcppsw::mpl::typelist_wrap_into< WrapperType, WrapperTypeArgs >"
+Wrap a \fBtypelist\fP into a container/template class\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIWrapperType\fP The container class each of the types in the \fBtypelist\fP will be wrapped into\&. It takes the wrapped type, as well as additional template arguments for the wrapped type, as arguments\&.
+.br
+\fIWrapperTypeArgs\fP Additional template paramaters for the WrapperType\&. 
+.RE
+.PP
+
+.SH "struct rcppsw::mpl::typelist_wrap_into::apply"
+.PP 
+
+.SS "template<template< class WrappedType, class\&.\&.\&. > class WrapperType, class\&.\&.\&. WrapperTypeArgs>
+.br
+template<class\&.\&.\&. ApplyArgs>
+.br
+struct rcppsw::mpl::typelist_wrap_into< WrapperType, WrapperTypeArgs >::apply< ApplyArgs >"
+Perform the wrap\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIApplyArgs\fP The \fIsingle\fP wrapped type from above\&. Must be a parameter pack, so that it can be concatenated with the WrapperType parameter pack (which may be empty); making it a normal template argument throws errors on WrapperTypes that only take a single argument\&. 
+.RE
+.PP
+
+.PP
+\fBClass Members:\fP
+.RS 4
+ \fItype\fP 
+.br
+.PP
+.RE
+.PP
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#\fBdefine\fP RCPPSW_SFINAE_TYPELIST_REJECT(Typelist, T)"
+\fBValue:\fP
+.PP
+.nf
+  typename boost::disable_if<                      \
+      typename boost::mpl::contains<Typelist, T>::type>::type* = nullptr
+.fi
+attached to if the specified type is found in the typelist, which must be a \fBtypelist\fP compile-time object\&. 
+.SS "#\fBdefine\fP RCPPSW_SFINAE_TYPELIST_REQUIRE(Typelist, T)"
+\fBValue:\fP
+.PP
+.nf
+  typename boost::enable_if<                        \
+      typename boost::mpl::contains<Typelist, T>::type>::type* = nullptr
+.fi
+attached to if the specified type is found in the typelist, which must be a \fBtypelist\fP compile-time object\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

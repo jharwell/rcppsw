@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1patterns_1_1visitor_1_1detail" kind="namespace" language="C++">
+    <compoundname>rcppsw::patterns::visitor::detail</compoundname>
+    <innerclass refid="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1polymorphic__accept__set__helper" prot="public">rcppsw::patterns::visitor::detail::polymorphic_accept_set_helper</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1visitor_1_1detail_1_1visit__set__helper" prot="public">rcppsw::patterns::visitor::detail::visit_set_helper</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/polymorphic_visitable.hpp" line="32" column="46"/>
+  </compounddef>
+</doxygen>

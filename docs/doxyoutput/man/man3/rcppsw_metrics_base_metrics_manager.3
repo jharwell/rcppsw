@@ -1,0 +1,129 @@
+.TH "rcppsw::metrics::base_metrics_manager" 3 "Mon Nov 29 2021" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::base_metrics_manager \- Base class for managing metrics collected from variable sources across all possible collector output modes and sinks\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <base_metrics_manager\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< base_metrics_manager >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbase_metrics_manager\fP (const rmconfig::metrics_config *mconfig, const fs::path &output_root)"
+.br
+.ti -1c
+.RI "\fB~base_metrics_manager\fP (void) override=default"
+.br
+.ti -1c
+.RI "template<typename T > void \fBcollect\fP (const std::string &scoped_name, const T &collectee)"
+.br
+.RI "Decorator around \fBcollector_group::collect()\fP\&. "
+.ti -1c
+.RI "template<typename T > void \fBcollect_if\fP (const std::string &scoped_name, const T &collectee, const std::function< bool(const \fBrmetrics::base_metrics\fP &)> &pred)"
+.br
+.RI "Decorator around \fBcollector_group::collect_if()\fP\&. "
+.ti -1c
+.RI "void \fBcollector_preregister\fP (const std::string &scoped_name, const \fBrmetrics::output_mode\fP &mode)"
+.br
+.RI "To be called before \fBcollector_register()\fP, in order to correctly set up the collector map for the collector with the specified scoped name\&. "
+.ti -1c
+.RI "template<typename TCollector , typename\&.\&.\&. Args> bool \fBcollector_register\fP (const std::string &scoped_name, Args &&\&.\&.\&. args)"
+.br
+.RI "Decorator around \fBcollector_group::collector_register()\fP\&. "
+.ti -1c
+.RI "bool \fBcollector_unregister\fP (const std::string &scoped_name)"
+.br
+.RI "Decorator around \fBcollector_group::collector_unregister()\fP\&. "
+.ti -1c
+.RI "void \fBfinalize\fP (void)"
+.br
+.RI "Decorator around \fBcollector_group::finalize_all()\fP\&. "
+.ti -1c
+.RI "bool \fBflush\fP (const \fBrmetrics::output_mode\fP &mode)"
+.br
+.ti -1c
+.RI "template<typename T > const T * \fBget\fP (const std::string &key)"
+.br
+.RI "Decorator around \fBcollector_group::get()\fP\&. "
+.ti -1c
+.RI "void \fBinitialize\fP (void)"
+.br
+.RI "Decorator around \fBcollector_group::initialize()\fP\&. "
+.ti -1c
+.RI "void \fBinterval_reset\fP (void)"
+.br
+.RI "Decorator around \fBcollector_group::interval_reset()\fP\&. "
+.ti -1c
+.RI "const fs::path & \fBmetrics_path\fP (void) const"
+.br
+.ti -1c
+.RI "void \fBtimestep_inc\fP (void)"
+.br
+.RI "Decorator around \fBcollector_group::timestep_inc()\fP\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Base class for managing metrics collected from variable sources across all possible collector output modes and sinks\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::metrics::base_metrics_manager::base_metrics_manager (const rmconfig::metrics_config * mconfig, const fs::path & output_root)"
+
+.SS "rcppsw::metrics::base_metrics_manager::~base_metrics_manager (void)\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > void rcppsw::metrics::base_metrics_manager::collect (const std::string & scoped_name, const T & collectee)\fC [inline]\fP"
+
+.PP
+Decorator around \fBcollector_group::collect()\fP\&. 
+.SS "template<typename T > void rcppsw::metrics::base_metrics_manager::collect_if (const std::string & scoped_name, const T & collectee, const std::function< bool(const \fBrmetrics::base_metrics\fP &)> & pred)\fC [inline]\fP"
+
+.PP
+Decorator around \fBcollector_group::collect_if()\fP\&. 
+.SS "void rcppsw::metrics::base_metrics_manager::collector_preregister (const std::string & scoped_name, const \fBrmetrics::output_mode\fP & mode)\fC [inline]\fP"
+
+.PP
+To be called before \fBcollector_register()\fP, in order to correctly set up the collector map for the collector with the specified scoped name\&. If you forget to do this you will get a segfault\&. 
+.SS "template<typename TCollector , typename\&.\&.\&. Args> bool rcppsw::metrics::base_metrics_manager::collector_register (const std::string & scoped_name, Args &&\&.\&.\&. args)\fC [inline]\fP"
+
+.PP
+Decorator around \fBcollector_group::collector_register()\fP\&. 
+.SS "bool rcppsw::metrics::base_metrics_manager::collector_unregister (const std::string & scoped_name)\fC [inline]\fP"
+
+.PP
+Decorator around \fBcollector_group::collector_unregister()\fP\&. 
+.SS "void rcppsw::metrics::base_metrics_manager::finalize (void)\fC [inline]\fP"
+
+.PP
+Decorator around \fBcollector_group::finalize_all()\fP\&. 
+.SS "bool rcppsw::metrics::base_metrics_manager::flush (const \fBrmetrics::output_mode\fP & mode)\fC [inline]\fP"
+
+.SS "template<typename T > const T* rcppsw::metrics::base_metrics_manager::get (const std::string & key)\fC [inline]\fP"
+
+.PP
+Decorator around \fBcollector_group::get()\fP\&. 
+.SS "void rcppsw::metrics::base_metrics_manager::initialize (void)\fC [inline]\fP"
+
+.PP
+Decorator around \fBcollector_group::initialize()\fP\&. 
+.SS "void rcppsw::metrics::base_metrics_manager::interval_reset (void)\fC [inline]\fP"
+
+.PP
+Decorator around \fBcollector_group::interval_reset()\fP\&. 
+.SS "const fs::path& rcppsw::metrics::base_metrics_manager::metrics_path (void) const\fC [inline]\fP"
+
+.SS "void rcppsw::metrics::base_metrics_manager::timestep_inc (void)\fC [inline]\fP"
+
+.PP
+Decorator around \fBcollector_group::timestep_inc()\fP\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

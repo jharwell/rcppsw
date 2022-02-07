@@ -1,0 +1,281 @@
+.TH "rcppsw::patterns::fsm::base_fsm" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::fsm::base_fsm \- Implements a software-based state machine\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <base_fsm\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< base_fsm >\fP\&.
+.PP
+Inherited by \fBrcppsw::multithread::mt_fsm\fP, and \fBrcppsw::patterns::fsm::hfsm\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbase_fsm\fP (const \fBbase_fsm\fP &other)"
+.br
+.RI "Copy the FSM to initialize another\&. Event data and whether or not an event is present is not copied\&. "
+.ti -1c
+.RI "\fBbase_fsm\fP (uint8_t \fBmax_states\fP, uint8_t \fBinitial_state\fP=0)"
+.br
+.ti -1c
+.RI "\fB~base_fsm\fP (void) override=default"
+.br
+.ti -1c
+.RI "uint8_t \fBcurrent_state\fP (void) const"
+.br
+.RI "Get the current state of the state machine\&. "
+.ti -1c
+.RI "virtual void \fBinit\fP (void)"
+.br
+.RI "Initialize/reset the state machine\&. "
+.ti -1c
+.RI "void \fBinject_event\fP (int signal, int type)"
+.br
+.RI "Injects a signal of the specified type into the state machine, causing the state machine to execute and process the signal in its current state\&. This is the main means of running an FSM\&. Suitable for handling signals from within FSM states, and allowing outside classes to send whatever signals they want to the FSM\&. "
+.ti -1c
+.RI "void \fBinject_event\fP (std::unique_ptr< \fBevent_data\fP > event)"
+.br
+.RI "Injects the signal of the specified type from the event argument into the state machine\&. This variant of \fBinject_event()\fP is provided for use with \fBevent_data_hold()\fP, to avoid the event data overwrite which occurs with the other version\&. "
+.ti -1c
+.RI "uint8_t \fBlast_state\fP (void) const"
+.br
+.RI "Get the state the the state machine was in the last time the state machine was run\&. "
+.ti -1c
+.RI "uint8_t \fBmax_states\fP (void) const"
+.br
+.RI "Get the maximum number of states for the state machine\&. "
+.ti -1c
+.RI "\fBbase_fsm\fP & \fBoperator=\fP (const \fBbase_fsm\fP &other)"
+.br
+.RI "Copy the FSM to initialize another\&. Event data and whether or not an event is present is not copied\&. "
+.ti -1c
+.RI "uint8_t \fBprevious_state\fP (void) const"
+.br
+.RI "Get the previous state the the state machine was in that is \fIdifferent\fP than the current one\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "class \fBevent_data\fP * \fBevent_data\fP (void)"
+.br
+.ti -1c
+.RI "const class \fBevent_data\fP * \fBevent_data\fP (void) const"
+.br
+.RI "Get the data associated with an event injected into the state machine\&. "
+.ti -1c
+.RI "void \fBevent_data_hold\fP (bool b)"
+.br
+.RI "Indicate that the current event data should NOT be reset after \fBstate_engine()\fP returns (default)\&. "
+.ti -1c
+.RI "bool \fBevent_data_hold\fP (void) const"
+.br
+.ti -1c
+.RI "std::unique_ptr< class \fBevent_data\fP > \fBevent_data_release\fP (void)"
+.br
+.ti -1c
+.RI "void \fBexternal_event\fP (uint8_t new_state)"
+.br
+.ti -1c
+.RI "virtual void \fBexternal_event\fP (uint8_t new_state, std::unique_ptr< class \fBevent_data\fP > data)"
+.br
+.RI "Generates an external event\&. The data is passed through the event chain without modification\&. The FSM owns the event data--states should not try to delete it\&. "
+.ti -1c
+.RI "void \fBgenerated_event\fP (bool b)"
+.br
+.ti -1c
+.RI "bool \fBhas_generated_event\fP (void)"
+.br
+.ti -1c
+.RI "uint8_t \fBinitial_state\fP (void) const"
+.br
+.ti -1c
+.RI "void \fBinternal_event\fP (uint8_t new_state)"
+.br
+.ti -1c
+.RI "void \fBinternal_event\fP (uint8_t new_state, std::unique_ptr< class \fBevent_data\fP > data)"
+.br
+.RI "Generates an internal event\&. These events are generated while executing within a state machine state\&. Internal states can pass their own data to other states without worrying about deleting the existing data--the FSM owns it and will handle it\&. "
+.ti -1c
+.RI "void \fBnext_state\fP (uint8_t next_state)"
+.br
+.ti -1c
+.RI "uint8_t \fBnext_state\fP (void) const"
+.br
+.ti -1c
+.RI "void \fBstate_engine\fP (void)"
+.br
+.ti -1c
+.RI "virtual void \fBstate_engine_step\fP (const \fBstate_map_ex_row\fP *c_row_ex)"
+.br
+.RI "Execute one step of the state machine using the extended state definitions\&. "
+.ti -1c
+.RI "virtual void \fBstate_engine_step\fP (const \fBstate_map_row\fP *c_row)"
+.br
+.RI "Execute one step of the state machine using the simple state definitions\&. "
+.ti -1c
+.RI "virtual const \fBstate_map_row\fP * \fBstate_map\fP (size_t)"
+.br
+.RI "Gets the state map as defined in the derived class\&. "
+.ti -1c
+.RI "virtual const \fBstate_map_ex_row\fP * \fBstate_map_ex\fP (size_t)"
+.br
+.RI "Gets the extended state map as defined in the derived class\&. "
+.ti -1c
+.RI "void \fBupdate_state\fP (uint8_t new_state)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Implements a software-based state machine\&. 
+
+The FSM paradigm uses \fIMEMBER\fP function pointers, so you always need to initialize the state map cleanly WITHOUT copy construction (even inside copy constructors), otherwise all copies of the object will use the other object's state map (default behavior in default copy constructor)\&. If the source object is destructed, then you will get a segfault due to dangling pointers or a 'pure virtual function called' error\&.
+.PP
+Thus, all \fBbase_fsm\fP derived classes MUST implement the copy constructor, or delete it in order to ensure proper operation in all cases\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::patterns::fsm::base_fsm::base_fsm (uint8_t max_states, uint8_t initial_state = \fC0\fP)\fC [explicit]\fP"
+
+.SS "rcppsw::patterns::fsm::base_fsm::~base_fsm (void)\fC [override]\fP, \fC [default]\fP"
+
+.SS "rcppsw::patterns::fsm::base_fsm::base_fsm (const \fBbase_fsm\fP & other)"
+
+.PP
+Copy the FSM to initialize another\&. Event data and whether or not an event is present is not copied\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "uint8_t rcppsw::patterns::fsm::base_fsm::current_state (void) const\fC [inline]\fP"
+
+.PP
+Get the current state of the state machine\&. 
+.SS "class \fBevent_data\fP* rcppsw::patterns::fsm::base_fsm::event_data (void)\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "const class \fBevent_data\fP* rcppsw::patterns::fsm::base_fsm::event_data (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+.PP
+Get the data associated with an event injected into the state machine\&. 
+.SS "void rcppsw::patterns::fsm::base_fsm::event_data_hold (bool b)\fC [inline]\fP, \fC [protected]\fP"
+
+.PP
+Indicate that the current event data should NOT be reset after \fBstate_engine()\fP returns (default)\&. 
+.SS "bool rcppsw::patterns::fsm::base_fsm::event_data_hold (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "std::unique_ptr<class \fBevent_data\fP> rcppsw::patterns::fsm::base_fsm::event_data_release (void)\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "void rcppsw::patterns::fsm::base_fsm::external_event (uint8_t new_state)\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "virtual void rcppsw::patterns::fsm::base_fsm::external_event (uint8_t new_state, std::unique_ptr< class \fBevent_data\fP > data)\fC [protected]\fP, \fC [virtual]\fP"
+
+.PP
+Generates an external event\&. The data is passed through the event chain without modification\&. The FSM owns the event data--states should not try to delete it\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInew_state\fP The state machine state to transition to\&. 
+.br
+\fIdata\fP The event data sent to the state\&. 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBrcppsw::multithread::mt_fsm\fP\&.
+.SS "void rcppsw::patterns::fsm::base_fsm::generated_event (bool b)\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "bool rcppsw::patterns::fsm::base_fsm::has_generated_event (void)\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "virtual void rcppsw::patterns::fsm::base_fsm::init (void)\fC [virtual]\fP"
+
+.PP
+Initialize/reset the state machine\&. 
+.PP
+Reimplemented in \fBrcppsw::patterns::fsm::hfsm\fP, and \fBrcppsw::multithread::mt_fsm\fP\&.
+.SS "uint8_t rcppsw::patterns::fsm::base_fsm::initial_state (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "void rcppsw::patterns::fsm::base_fsm::inject_event (int signal, int type)"
+
+.PP
+Injects a signal of the specified type into the state machine, causing the state machine to execute and process the signal in its current state\&. This is the main means of running an FSM\&. Suitable for handling signals from within FSM states, and allowing outside classes to send whatever signals they want to the FSM\&. 
+.SS "void rcppsw::patterns::fsm::base_fsm::inject_event (std::unique_ptr< \fBevent_data\fP > event)"
+
+.PP
+Injects the signal of the specified type from the event argument into the state machine\&. This variant of \fBinject_event()\fP is provided for use with \fBevent_data_hold()\fP, to avoid the event data overwrite which occurs with the other version\&. 
+.SS "void rcppsw::patterns::fsm::base_fsm::internal_event (uint8_t new_state)\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "void rcppsw::patterns::fsm::base_fsm::internal_event (uint8_t new_state, std::unique_ptr< class \fBevent_data\fP > data)\fC [protected]\fP"
+
+.PP
+Generates an internal event\&. These events are generated while executing within a state machine state\&. Internal states can pass their own data to other states without worrying about deleting the existing data--the FSM owns it and will handle it\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInew_state\fP The state machine state to transition to\&. 
+.br
+\fIdata\fP The event data sent to the state\&. 
+.RE
+.PP
+
+.SS "uint8_t rcppsw::patterns::fsm::base_fsm::last_state (void) const\fC [inline]\fP"
+
+.PP
+Get the state the the state machine was in the last time the state machine was run\&. If a state machine has been in state \fCA\fP for the last 3 timesteps, and state \fCB\fP before that, and the current state is \fCA\fP, then this function will return \fCA\fP\&. 
+.SS "uint8_t rcppsw::patterns::fsm::base_fsm::max_states (void) const\fC [inline]\fP"
+
+.PP
+Get the maximum number of states for the state machine\&. 
+.SS "void rcppsw::patterns::fsm::base_fsm::next_state (uint8_t next_state)\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "uint8_t rcppsw::patterns::fsm::base_fsm::next_state (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "\fBbase_fsm\fP& rcppsw::patterns::fsm::base_fsm::operator= (const \fBbase_fsm\fP & other)"
+
+.PP
+Copy the FSM to initialize another\&. Event data and whether or not an event is present is not copied\&. 
+.SS "uint8_t rcppsw::patterns::fsm::base_fsm::previous_state (void) const\fC [inline]\fP"
+
+.PP
+Get the previous state the the state machine was in that is \fIdifferent\fP than the current one\&. If a state machine has been in state \fCA\fP for the last 3 timesteps, and state \fCB\fP before that, and the current state is \fCA\fP, then this function will return \fCB\fP\&. 
+.SS "void rcppsw::patterns::fsm::base_fsm::state_engine (void)\fC [protected]\fP"
+
+.SS "virtual void rcppsw::patterns::fsm::base_fsm::state_engine_step (const \fBstate_map_ex_row\fP * c_row_ex)\fC [protected]\fP, \fC [virtual]\fP"
+
+.PP
+Execute one step of the state machine using the extended state definitions\&. 
+.SS "virtual void rcppsw::patterns::fsm::base_fsm::state_engine_step (const \fBstate_map_row\fP * c_row)\fC [protected]\fP, \fC [virtual]\fP"
+
+.PP
+Execute one step of the state machine using the simple state definitions\&. 
+.SS "virtual const \fBstate_map_row\fP* rcppsw::patterns::fsm::base_fsm::state_map (size_t)\fC [inline]\fP, \fC [protected]\fP, \fC [virtual]\fP"
+
+.PP
+Gets the state map as defined in the derived class\&. A state machine only needs to return a state map using either \fBstate_map()\fP or \fBstate_map_ex()\fP but not both\&.
+.PP
+\fBReturns\fP
+.RS 4
+The row corresponding to the passed in state in the state map\&. 
+.RE
+.PP
+
+.SS "virtual const \fBstate_map_ex_row\fP* rcppsw::patterns::fsm::base_fsm::state_map_ex (size_t)\fC [inline]\fP, \fC [protected]\fP, \fC [virtual]\fP"
+
+.PP
+Gets the extended state map as defined in the derived class\&. A state machine only needs to return a state map using either \fBstate_map()\fP or \fBstate_map_ex()\fP but not both\&.
+.PP
+\fBReturns\fP
+.RS 4
+The row corresponding to the passed in state in the state map\&. 
+.RE
+.PP
+
+.SS "void rcppsw::patterns::fsm::base_fsm::update_state (uint8_t new_state)\fC [protected]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

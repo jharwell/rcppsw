@@ -1,0 +1,156 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graph.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graph.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <boost/graph/adjacency_list\&.hpp>\fP
+.br
+\fC#include <boost/optional\&.hpp>\fP
+.br
+\fC#include <boost/range/adaptor/transformed\&.hpp>\fP
+.br
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+\fC#include 'rcppsw/math/vector3\&.hpp'\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::ds\fP"
+.br
+.RI "Data structures: 2D/3D lattice grids, 2D/3D discretizing grids to overlay onto continuous space, Poisson queue, rtree for 2D space, heterogeneous stacked 2D grid, type map for using in C++ quasi-reflection\&. "
+.ti -1c
+.RI " \fBrcppsw::ds::graph\fP"
+.br
+.RI "Graph data structures: Heterogeneous 3D grid graph\&. "
+.ti -1c
+.RI " \fBrcppsw::ds::graph::detail\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<typename TBGLGraphType > using \fBrcppsw::ds::graph::detail::find_result_type\fP = typename std::add_pointer< decltype(std::declval< TBGLGraphType >()\&.operator[](std::declval< typename TBGLGraphType::vertex_descriptor >())) >::type"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename TBGLGraphType > static auto \fBadd_edge\fP (TBGLGraphType &g, typename TBGLGraphType::vertex_descriptor u, typename TBGLGraphType::vertex_descriptor v)"
+.br
+.ti -1c
+.RI "template<typename TBGLGraphType > static auto \fBadd_vertex\fP (TBGLGraphType &g)"
+.br
+.ti -1c
+.RI "template<typename TBGLGraphType > static auto \fBadjacent_vertices\fP (const TBGLGraphType &g, typename TBGLGraphType::vertex_descriptor v)"
+.br
+.ti -1c
+.RI "template<typename TBGLGraphType > static bool \fBcontains\fP (const TBGLGraphType &g, const \fBrmath::vector3z\fP &c)"
+.br
+.RI "Determine if \fCg\fP contains a vertex with coordinates \fCc\fP\&. "
+.ti -1c
+.RI "template<typename TBGLGraphType , typename TCoordType > static boost::optional< typename TBGLGraphType::vertex_descriptor > \fBfind\fP (const TBGLGraphType &g, const TCoordType &c)"
+.br
+.RI "Search for the vertex with coordinates \fCc\fP in \fCg\fP\&. "
+.ti -1c
+.RI "template<typename TBGLGraphType > static size_t \fBn_vertices\fP (const TBGLGraphType &g)"
+.br
+.RI "Get the # of vertices in \fCg\fP\&. "
+.ti -1c
+.RI "template<typename TBGLGraphType > static auto \fBout_degree\fP (const TBGLGraphType &g, const typename TBGLGraphType::vertex_descriptor &v)"
+.br
+.ti -1c
+.RI "template<typename TBGLGraphType > static auto \fBout_edges\fP (const TBGLGraphType &g, const typename TBGLGraphType::vertex_descriptor &v)"
+.br
+.ti -1c
+.RI "template<typename TBGLGraphType > static auto \fBremove_vertex\fP (TBGLGraphType &g, typename TBGLGraphType::vertex_descriptor v)"
+.br
+.ti -1c
+.RI "template<typename TBGLGraphType > static auto \fBtarget\fP (const TBGLGraphType &g, const typename TBGLGraphType::edge_descriptor &e)"
+.br
+.ti -1c
+.RI "template<typename TBGLGraphType > static auto \fBvertex_properties\fP (const TBGLGraphType &g)"
+.br
+.ti -1c
+.RI "template<typename TBGLGraphType > static auto \fBvertices\fP (const TBGLGraphType &g) \-> decltype(boost::vertices(std::declval< const TBGLGraphType >()))"
+.br
+.RI "Get the vertices in the specified graph, as an iterator range\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2021 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Function Documentation"
+.PP 
+.SS "template<typename TBGLGraphType > static auto add_edge (TBGLGraphType & g, typename TBGLGraphType::vertex_descriptor u, typename TBGLGraphType::vertex_descriptor v)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "template<typename TBGLGraphType > static auto add_vertex (TBGLGraphType & g)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "template<typename TBGLGraphType > static auto adjacent_vertices (const TBGLGraphType & g, typename TBGLGraphType::vertex_descriptor v)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "template<typename TBGLGraphType > static bool contains (const TBGLGraphType & g, const \fBrmath::vector3z\fP & c)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Determine if \fCg\fP contains a vertex with coordinates \fCc\fP\&. 
+.SS "template<typename TBGLGraphType , typename TCoordType > static boost::optional<typename TBGLGraphType::vertex_descriptor> find (const TBGLGraphType & g, const TCoordType & c)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Search for the vertex with coordinates \fCc\fP in \fCg\fP\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The descriptor of the matching vertex, or -1 if not found\&. 
+.RE
+.PP
+
+.SS "template<typename TBGLGraphType > static size_t n_vertices (const TBGLGraphType & g)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Get the # of vertices in \fCg\fP\&. 
+.SS "template<typename TBGLGraphType > static auto out_degree (const TBGLGraphType & g, const typename TBGLGraphType::vertex_descriptor & v)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "template<typename TBGLGraphType > static auto out_edges (const TBGLGraphType & g, const typename TBGLGraphType::vertex_descriptor & v)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "template<typename TBGLGraphType > static auto remove_vertex (TBGLGraphType & g, typename TBGLGraphType::vertex_descriptor v)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "template<typename TBGLGraphType > static auto target (const TBGLGraphType & g, const typename TBGLGraphType::edge_descriptor & e)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "template<typename TBGLGraphType > static auto vertex_properties (const TBGLGraphType & g)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "template<typename TBGLGraphType > static auto vertices (const TBGLGraphType & g) \-> decltype(boost::vertices(std::declval<const TBGLGraphType>())) \fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Get the vertices in the specified graph, as an iterator range\&. 
+.PP
+\fBNote\fP
+.RS 4
+We can't use boost::make_iterator_range here, because that doesn't work with filtered_graph types, for whatever reason\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

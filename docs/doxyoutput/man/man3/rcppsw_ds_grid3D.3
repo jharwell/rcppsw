@@ -1,0 +1,83 @@
+.TH "rcppsw::ds::grid3D< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::grid3D< T > \- A 3D grid of SOMETHING\&. Mainly a convenience wrapper around boost::multi_array\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <grid3D\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::ds::base_grid3D< T >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgrid3D\fP (const \fBcoord_type\fP &dims)"
+.br
+.ti -1c
+.RI "\fBgrid3D\fP (size_t x_max, size_t y_max, size_t z_max)"
+.br
+.ti -1c
+.RI "T & \fBaccess\fP (size_t i, size_t j, size_t k) override"
+.br
+.RI "Return a reference to the element at position (i, j) in the grid\&. "
+.ti -1c
+.RI "size_t \fBxsize\fP (void) const override"
+.br
+.RI "Get the size of the X dimension of the grid (i\&.e\&. what is the array index in X?) "
+.ti -1c
+.RI "size_t \fBysize\fP (void) const override"
+.br
+.RI "Get the size of the Y dimension of the grid (i\&.e\&. what is the array index in Y?) "
+.ti -1c
+.RI "size_t \fBzsize\fP (void) const override"
+.br
+.RI "Get the size of the Z dimension of the grid (i\&.e\&. what is the array index in Z?) "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::ds::grid3D< T >"
+A 3D grid of SOMETHING\&. Mainly a convenience wrapper around boost::multi_array\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::ds::grid3D\fP< T >::\fBgrid3D\fP (const \fBcoord_type\fP & dims)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "template<typename T > \fBrcppsw::ds::grid3D\fP< T >::\fBgrid3D\fP (size_t x_max, size_t y_max, size_t z_max)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > T& \fBrcppsw::ds::grid3D\fP< T >::access (size_t i, size_t j, size_t k)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Return a reference to the element at position (i, j) in the grid\&. This is provided in the base class so that the pointer/object variants of the grid (\fBgrid3D\fP, etc\&.) can reduce code duplication\&. 
+.PP
+Implements \fBrcppsw::ds::base_grid3D< T >\fP\&.
+.SS "template<typename T > size_t \fBrcppsw::ds::grid3D\fP< T >::xsize (void) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Get the size of the X dimension of the grid (i\&.e\&. what is the array index in X?) 
+.PP
+Implements \fBrcppsw::ds::base_grid3D< T >\fP\&.
+.SS "template<typename T > size_t \fBrcppsw::ds::grid3D\fP< T >::ysize (void) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Get the size of the Y dimension of the grid (i\&.e\&. what is the array index in Y?) 
+.PP
+Implements \fBrcppsw::ds::base_grid3D< T >\fP\&.
+.SS "template<typename T > size_t \fBrcppsw::ds::grid3D\fP< T >::zsize (void) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Get the size of the Z dimension of the grid (i\&.e\&. what is the array index in Z?) 
+.PP
+Implements \fBrcppsw::ds::base_grid3D< T >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

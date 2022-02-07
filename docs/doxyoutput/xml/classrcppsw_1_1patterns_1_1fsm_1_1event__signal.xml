@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1fsm_1_1event__signal" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::fsm::event_signal</compoundname>
+    <includes refid="event_8hpp" local="no">event.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classrcppsw_1_1patterns_1_1fsm_1_1event__signal_1af5e4be7e8737e5a31fac049059e5fe88" prot="public" static="no" strong="no">
+        <type></type>
+        <name>type</name>
+        <enumvalue id="classrcppsw_1_1patterns_1_1fsm_1_1event__signal_1af5e4be7e8737e5a31fac049059e5fe88a6936548aa7b50c598d7638d37f967729" prot="public">
+          <name>ekIGNORED</name>
+          <initializer>= 0xFE</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classrcppsw_1_1patterns_1_1fsm_1_1event__signal_1af5e4be7e8737e5a31fac049059e5fe88a238493360658526d1c0645b9c89778a7" prot="public">
+          <name>ekFATAL</name>
+          <initializer>= 0xFF</initializer>
+          <briefdescription>
+<para>A signal that can be ignored. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>A signal indicating that something VERY BAD has happened. Will cause the parent FSM to halt the program. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classrcppsw_1_1patterns_1_1fsm_1_1event__signal_1af5e4be7e8737e5a31fac049059e5fe88a4dd7177517305a54770dcd36ff94bec8" prot="public">
+          <name>ekHANDLED</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>A signal indicating that all signals input into a given state have been handled successfully. All states should return this signal in the nomitive case. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classrcppsw_1_1patterns_1_1fsm_1_1event__signal_1af5e4be7e8737e5a31fac049059e5fe88af12ba96dbdd357dd79626a1d119ec596" prot="public">
+          <name>ekUNHANDLED</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>A signal from a lower/child state that could not be handled by a lower state, OR a signal that a lower state sent to indicate that it encountered a situation that it does not know how to handle in the normal turn of events. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classrcppsw_1_1patterns_1_1fsm_1_1event__signal_1af5e4be7e8737e5a31fac049059e5fe88a0f7fe3e925bd12ef093a6af49e31beda" prot="public">
+          <name>ekRUN</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>A signal indicating nominal run operation should occur upon injection. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classrcppsw_1_1patterns_1_1fsm_1_1event__signal_1af5e4be7e8737e5a31fac049059e5fe88a5d10d7249aa2765720aef8506b50da60" prot="public">
+          <name>ekEXTERNAL_SIGNALS</name>
+          <briefdescription>
+<para>Applications wishing to defined their own event signals should start here. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp" line="50" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp" bodystart="50" bodyend="83"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A class representing the different signals that can be passed between states in an FSM, and/or between FSMs. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::event_signal</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1event__signal"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp" line="48" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/event.hpp" bodystart="48" bodyend="84"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1event__signal_1af5e4be7e8737e5a31fac049059e5fe88a5d10d7249aa2765720aef8506b50da60" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::event_signal</scope><name>ekEXTERNAL_SIGNALS</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1event__signal_1af5e4be7e8737e5a31fac049059e5fe88a238493360658526d1c0645b9c89778a7" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::event_signal</scope><name>ekFATAL</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1event__signal_1af5e4be7e8737e5a31fac049059e5fe88a4dd7177517305a54770dcd36ff94bec8" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::event_signal</scope><name>ekHANDLED</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1event__signal_1af5e4be7e8737e5a31fac049059e5fe88a6936548aa7b50c598d7638d37f967729" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::event_signal</scope><name>ekIGNORED</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1event__signal_1af5e4be7e8737e5a31fac049059e5fe88a0f7fe3e925bd12ef093a6af49e31beda" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::event_signal</scope><name>ekRUN</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1event__signal_1af5e4be7e8737e5a31fac049059e5fe88af12ba96dbdd357dd79626a1d119ec596" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::event_signal</scope><name>ekUNHANDLED</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1event__signal_1af5e4be7e8737e5a31fac049059e5fe88" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::event_signal</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

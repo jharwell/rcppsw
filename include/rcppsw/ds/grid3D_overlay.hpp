@@ -27,7 +27,7 @@
 #include <limits>
 
 #include "rcppsw/ds/base_grid3D.hpp"
-#include "rcppsw/ds/grid_overlay.hpp"
+#include "rcppsw/ds/base_grid_overlay.hpp"
 #include "rcppsw/er/client.hpp"
 
 /*******************************************************************************
@@ -43,7 +43,7 @@ NS_START(rcppsw, ds);
  * \ingroup ds
  *
  * \brief A 3D logical grid overlayed over a continuous environment using a
- * \a contiguous array of the template parameter type (\see \ref grid_overlay).
+ * \a contiguous array of the template parameter type (\see \ref base_grid_overlay).
  *
  * \tparam T The type of the grid element (probably a cell of some kind). Must
  * have must have a zero parameter constructor available or it won't compile
@@ -53,28 +53,26 @@ NS_START(rcppsw, ds);
  */
 template <typename T>
 class grid3D_overlay : public base_grid3D<T>,
-                       public grid_overlay<math::vector3d>,
+                       public base_grid_overlay<math::vector3d>,
                        public er::client<grid3D_overlay<T>> {
  public:
   using typename base_grid3D<T>::index_range;
   using typename base_grid3D<T>::grid_view;
   using typename base_grid3D<T>::const_grid_view;
   using typename base_grid3D<T>::grid_type;
+  using typename base_grid3D<T>::coord_type;
 
   using base_grid3D<T>::access;
-  using base_grid3D<T>::xdsize;
-  using base_grid3D<T>::ydsize;
-  using base_grid3D<T>::zdsize;
 
-  using grid_overlay<math::vector3d>::resolution;
-  using grid_overlay<math::vector3d>::originr;
-  using grid_overlay<math::vector3d>::origind;
+  using base_grid_overlay<math::vector3d>::resolution;
+  using base_grid_overlay<math::vector3d>::originr;
+  using base_grid_overlay<math::vector3d>::origind;
 
   grid3D_overlay(const math::vector3d& origin,
                  const math::vector3d& dim,
                  const types::discretize_ratio& grid_res,
                  const types::discretize_ratio& field_res)
-      : grid_overlay(origin, grid_res, field_res),
+      : base_grid_overlay(origin, grid_res, field_res),
         ER_CLIENT_INIT("rcppsw.ds.grid3D_overlay"),
         mc_dim(dim),
         m_cells(boost::extents[static_cast<typename index_range::index>(xdsize())]
@@ -106,15 +104,29 @@ class grid3D_overlay : public base_grid3D<T>,
 
   virtual ~grid3D_overlay(void) = default;
 
-  size_t xdsize(void) const override {
+  /**
+   * \brief Get the discrete size of the X dimension of the grid (i.e. what is
+   * the array index in X?)
+   */
+  size_t xdsize(void) const {
     return static_cast<size_t>(mc_dim.x() / resolution().v());
   }
 
-  size_t ydsize(void) const override {
+  /**
+   * \brief Get the discrete size of the Y dimension of the grid (i.e. what is
+   * the array index in Y?)
+   */
+
+  size_t ydsize(void) const {
     return static_cast<size_t>(mc_dim.y() / resolution().v());
   }
 
-  size_t zdsize(void) const override {
+  /**
+   * \brief Get the discrete size of the Z dimension of the grid (i.e. what is
+   * the array index in Z?)
+   */
+
+  size_t zdsize(void) const {
     return static_cast<size_t>(mc_dim.z() / resolution().v());
   }
 
@@ -138,12 +150,12 @@ class grid3D_overlay : public base_grid3D<T>,
    * point.
    */
 
-  const math::vector3d& dimsr(void) const { return mc_dim; }
+  const math::vector3d& rdims3D(void) const { return mc_dim; }
 
   /**
    * \brief Get the discrete dimensions of the grid.
    */
-  math::vector3z dimsd(void) const {
+  coord_type ddims3D(void) const {
     return math::dvec2zvec(mc_dim, resolution().v());
   }
 
@@ -154,6 +166,10 @@ class grid3D_overlay : public base_grid3D<T>,
   }
 
  private:
+  size_t xsize(void) const override { return xdsize(); }
+  size_t ysize(void) const override { return ydsize(); }
+  size_t zsize(void) const override { return zdsize(); }
+
   grid_type& grid(void) override { return m_cells; }
   const grid_type& grid(void) const override { return m_cells; }
 

@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1metrics_1_1config_1_1csv__sink__config" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>rcppsw::metrics::config::csv_sink_config</compoundname>
+    <basecompoundref refid="structrcppsw_1_1config_1_1base__config" prot="public" virt="non-virtual">rcppsw::config::base_config</basecompoundref>
+    <includes refid="csv__sink__config_8hpp" local="no">csv_sink_config.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1config_1_1csv__sink__config_1a268e4280f7167be6d72c71d94e2ce606" prot="public" static="no" mutable="no">
+        <type><ref refid="structrcppsw_1_1metrics_1_1config_1_1csv__sink__output__mode__config" kindref="compound">csv_sink_output_mode_config</ref></type>
+        <definition>csv_sink_output_mode_config rcppsw::metrics::config::csv_sink_config::append</definition>
+        <argsstring></argsstring>
+        <name>append</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/csv_sink_config.hpp" line="59" column="31" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/csv_sink_config.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1config_1_1csv__sink__config_1ac8637d942cfcba32ad91d37abb00d7fa" prot="public" static="no" mutable="no">
+        <type><ref refid="structrcppsw_1_1metrics_1_1config_1_1csv__sink__output__mode__config" kindref="compound">csv_sink_output_mode_config</ref></type>
+        <definition>csv_sink_output_mode_config rcppsw::metrics::config::csv_sink_config::create</definition>
+        <argsstring></argsstring>
+        <name>create</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/csv_sink_config.hpp" line="61" column="31" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/csv_sink_config.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1config_1_1csv__sink__config_1af55b0417ff42a6d1b1ed4532f7768230" prot="public" static="no" mutable="no">
+        <type><ref refid="structrcppsw_1_1metrics_1_1config_1_1csv__sink__output__mode__config" kindref="compound">csv_sink_output_mode_config</ref></type>
+        <definition>csv_sink_output_mode_config rcppsw::metrics::config::csv_sink_config::truncate</definition>
+        <argsstring></argsstring>
+        <name>truncate</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/csv_sink_config.hpp" line="60" column="31" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/csv_sink_config.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Configuration for metrics which will/can be output as .csv files. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::config::base_config</label>
+        <link refid="structrcppsw_1_1config_1_1base__config"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::config::csv_sink_config</label>
+        <link refid="structrcppsw_1_1metrics_1_1config_1_1csv__sink__config"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>rcppsw::metrics::config::csv_sink_output_mode_config</label>
+        <link refid="structrcppsw_1_1metrics_1_1config_1_1csv__sink__output__mode__config"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+output_interval</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>+enabled</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>rcppsw::er::stringizable</label>
+        <link refid="classrcppsw_1_1er_1_1stringizable"/>
+      </node>
+      <node id="4">
+        <label>rcppsw::types::timestep</label>
+        <link refid="classrcppsw_1_1types_1_1timestep"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="7">
+        <label>std::map&lt; std::string, std::string &gt;</label>
+        <childnode refid="8" relation="usage">
+          <edgelabel>+elements</edgelabel>
+          <edgelabel>+keys</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::config::base_config</label>
+        <link refid="structrcppsw_1_1config_1_1base__config"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::config::csv_sink_config</label>
+        <link refid="structrcppsw_1_1metrics_1_1config_1_1csv__sink__config"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+append</edgelabel>
+          <edgelabel>+truncate</edgelabel>
+          <edgelabel>+create</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>rcppsw::types::named_type&lt; size_t, struct timestep_tag &gt;</label>
+        <link refid="classrcppsw_1_1types_1_1named__type"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>std::string</label>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/csv_sink_config.hpp" line="58" column="50" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/csv_sink_config.hpp" bodystart="58" bodyend="62"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1metrics_1_1config_1_1csv__sink__config_1a268e4280f7167be6d72c71d94e2ce606" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::csv_sink_config</scope><name>append</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a1cfd52de449665fdfe4b2a42c2248f96" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::csv_sink_config</scope><name>base_config</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a9a86158e067c0ed5b8b3c16760878473" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::csv_sink_config</scope><name>base_config</name></member>
+      <member refid="structrcppsw_1_1metrics_1_1config_1_1csv__sink__config_1ac8637d942cfcba32ad91d37abb00d7fa" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::csv_sink_config</scope><name>create</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a32d1e916aa385603fec11cefc9fa30be" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::csv_sink_config</scope><name>operator=</name></member>
+      <member refid="structrcppsw_1_1metrics_1_1config_1_1csv__sink__config_1af55b0417ff42a6d1b1ed4532f7768230" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::csv_sink_config</scope><name>truncate</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a4ddde3073572a1095a9aeeb7591cb226" prot="public" virt="virtual"><scope>rcppsw::metrics::config::csv_sink_config</scope><name>~base_config</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

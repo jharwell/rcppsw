@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_ae5ed11b67cfedf3b2c99ce71c5c9c1c" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/metrics/config</compoundname>
+    <innerdir refid="dir_0d8b0c176cc7250904bcccb49724f1ed">/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml</innerdir>
+    <innerfile refid="file__sink__config_8hpp">file_sink_config.hpp</innerfile>
+    <innerfile refid="metrics__config_8hpp">metrics_config.hpp</innerfile>
+    <innerfile refid="network__sink__config_8hpp">network_sink_config.hpp</innerfile>
+    <innerfile refid="output__mode__config_8hpp">output_mode_config.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1multiprocess_1_1forkable" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>rcppsw::multiprocess::forkable</compoundname>
+    <includes refid="forkable_8hpp" local="no">forkable.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1multiprocess_1_1forkable_1ad5e58ce537fad871f823cc8f9c29ab60" prot="private" static="no" mutable="no">
+        <type>pid_t</type>
+        <definition>pid_t rcppsw::multiprocess::forkable::m_pid</definition>
+        <argsstring></argsstring>
+        <name>m_pid</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" line="109" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1multiprocess_1_1forkable_1a3cff74c49351fa1915aea3302b022784" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool rcppsw::multiprocess::forkable::m_proc_run</definition>
+        <argsstring></argsstring>
+        <name>m_proc_run</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" line="108" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1forkable_1a1bcd483d9d6d566e754715623b673b74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::multiprocess::forkable::forkable</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>forkable</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" line="58" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1forkable_1a5514402bdb1689f2dfd676fb2048f1bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::multiprocess::forkable::~forkable</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~forkable</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" line="59" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1forkable_1ace8aca0b043e59d17704803b6a1b846e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>pid_t</type>
+        <definition>pid_t rcppsw::multiprocess::forkable::pid</definition>
+        <argsstring>(void) const</argsstring>
+        <name>pid</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" line="71" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1forkable_1a58dff0ac93ea2dad017c0c8c80899851" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::multiprocess::forkable::proc_main</definition>
+        <argsstring>(void)=0</argsstring>
+        <name>proc_main</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Entry point for the new process. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" line="69" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1forkable_1a1aa329ad122f73b47497646382a241ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>pid_t</type>
+        <definition>pid_t rcppsw::multiprocess::forkable::start</definition>
+        <argsstring>(const std::string &amp;new_wd, int core=-1)</argsstring>
+        <name>start</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>new_wd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>core</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>Start a process in a new directory. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>new_wd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new working directory to start the process in. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>core</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The core to bind the process (and any threads it might spawn) to. By default, no binding.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>PID of child process in parent, or -1 if chdir() failed with <computeroutput>new_wd</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" line="93" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1forkable_1a198f77b7c15252aa0a86b4537824f840" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>pid_t</type>
+        <definition>pid_t rcppsw::multiprocess::forkable::start</definition>
+        <argsstring>(int core=-1)</argsstring>
+        <name>start</name>
+        <param>
+          <type>int</type>
+          <declname>core</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>Start a process. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>core</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The core to bind the process (and any threads it might spawn) to. By default, no binding.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>PID of child process in parent. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" line="81" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1forkable_1aa3890fb6502b176c11d3cf325e88523e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::multiprocess::forkable::term</definition>
+        <argsstring>(void)</argsstring>
+        <name>term</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Signal a process that it should terminate, from outside the process. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" line="64" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" bodystart="64" bodyend="64"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1forkable_1afdcc1f1ca6c887bfe5c332f532fcd75d" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::multiprocess::forkable::terminated</definition>
+        <argsstring>(void) const</argsstring>
+        <name>terminated</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Check if a process object has been told to terminate elsewhere. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" line="99" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" bodystart="99" bodyend="99"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classrcppsw_1_1multiprocess_1_1forkable_1a7780055245924391d9b279db63c4d7b3" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void rcppsw::multiprocess::forkable::entry_point</definition>
+        <argsstring>(void *this_p)</argsstring>
+        <name>entry_point</name>
+        <param>
+          <type>void *</type>
+          <declname>this_p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" line="102" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" bodystart="102" bodyend="105"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Daemon interface class which can be derived from to indicate that the class can be fork()ed and having each new process jump into the main loop defined for the class. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::multiprocess::forkable</label>
+        <link refid="classrcppsw_1_1multiprocess_1_1forkable"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" line="56" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multiprocess/forkable.hpp" bodystart="56" bodyend="111"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1multiprocess_1_1forkable_1a7780055245924391d9b279db63c4d7b3" prot="private" virt="non-virtual"><scope>rcppsw::multiprocess::forkable</scope><name>entry_point</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1forkable_1a1bcd483d9d6d566e754715623b673b74" prot="public" virt="non-virtual"><scope>rcppsw::multiprocess::forkable</scope><name>forkable</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1forkable_1ad5e58ce537fad871f823cc8f9c29ab60" prot="private" virt="non-virtual"><scope>rcppsw::multiprocess::forkable</scope><name>m_pid</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1forkable_1a3cff74c49351fa1915aea3302b022784" prot="private" virt="non-virtual"><scope>rcppsw::multiprocess::forkable</scope><name>m_proc_run</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1forkable_1ace8aca0b043e59d17704803b6a1b846e" prot="public" virt="non-virtual"><scope>rcppsw::multiprocess::forkable</scope><name>pid</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1forkable_1a58dff0ac93ea2dad017c0c8c80899851" prot="public" virt="pure-virtual"><scope>rcppsw::multiprocess::forkable</scope><name>proc_main</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1forkable_1a198f77b7c15252aa0a86b4537824f840" prot="public" virt="non-virtual"><scope>rcppsw::multiprocess::forkable</scope><name>start</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1forkable_1a1aa329ad122f73b47497646382a241ce" prot="public" virt="non-virtual"><scope>rcppsw::multiprocess::forkable</scope><name>start</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1forkable_1aa3890fb6502b176c11d3cf325e88523e" prot="public" virt="virtual"><scope>rcppsw::multiprocess::forkable</scope><name>term</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1forkable_1afdcc1f1ca6c887bfe5c332f532fcd75d" prot="protected" virt="non-virtual"><scope>rcppsw::multiprocess::forkable</scope><name>terminated</name></member>
+      <member refid="classrcppsw_1_1multiprocess_1_1forkable_1a5514402bdb1689f2dfd676fb2048f1bd" prot="public" virt="virtual"><scope>rcppsw::multiprocess::forkable</scope><name>~forkable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

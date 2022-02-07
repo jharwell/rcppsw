@@ -1,0 +1,818 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="range_8hpp" kind="file" language="C++">
+    <compoundname>range.hpp</compoundname>
+    <includes local="no">cmath</includes>
+    <includes local="no">iosfwd</includes>
+    <includes local="no">string</includes>
+    <includes refid="client_8hpp" local="yes">rcppsw/er/client.hpp</includes>
+    <includes refid="rcppsw_8hpp" local="yes">rcppsw/rcppsw.hpp</includes>
+    <includes refid="string__utils_8hpp" local="yes">rcppsw/utils/string_utils.hpp</includes>
+    <includes refid="stringizable_8hpp" local="yes">rcppsw/er/stringizable.hpp</includes>
+    <includedby refid="entropy_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp</includedby>
+    <includedby refid="degrees_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp</includedby>
+    <includedby refid="radians_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/math/radians.hpp</includedby>
+    <includedby refid="rng_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp</includedby>
+    <includedby refid="spatial__range_8hpp" local="yes">/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_range.hpp</includedby>
+    <incdepgraph>
+      <node id="21">
+        <label>boost/stacktrace.hpp</label>
+      </node>
+      <node id="9">
+        <label>log4cxx/fileappender.h</label>
+      </node>
+      <node id="16">
+        <label>rcsw/common/common.h</label>
+        <link refid="common_8h.html" external="/home/jharwell/git/rcppsw/build/docs/rcsw/RCSW.tag"/>
+      </node>
+      <node id="15">
+        <label>rcppsw/common/common.hpp</label>
+        <link refid="common_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>rcppsw/utils/string_utils.hpp</label>
+        <link refid="string__utils_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>log4cxx/xml/domconfigurator.h</label>
+      </node>
+      <node id="2">
+        <label>cmath</label>
+      </node>
+      <node id="23">
+        <label>cassert</label>
+      </node>
+      <node id="20">
+        <label>rcppsw/er/stacktrace.hpp</label>
+        <link refid="stacktrace_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp</label>
+        <link refid="range_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>log4cxx/patternlayout.h</label>
+      </node>
+      <node id="14">
+        <label>rcppsw/rcppsw.hpp</label>
+        <link refid="rcppsw_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>log4cxx/ndc.h</label>
+      </node>
+      <node id="8">
+        <label>log4cxx/consoleappender.h</label>
+      </node>
+      <node id="6">
+        <label>rcppsw/er/er.hpp</label>
+        <link refid="er_8hpp"/>
+      </node>
+      <node id="18">
+        <label>rcppsw/mpl/mpl.hpp</label>
+        <link refid="mpl_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>vector</label>
+      </node>
+      <node id="29">
+        <label>rcppsw/er/stringizable.hpp</label>
+        <link refid="stringizable_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>array</label>
+      </node>
+      <node id="27">
+        <label>sstream</label>
+      </node>
+      <node id="3">
+        <label>iosfwd</label>
+      </node>
+      <node id="24">
+        <label>iostream</label>
+      </node>
+      <node id="17">
+        <label>rcppsw/common/macros.hpp</label>
+        <link refid="common_2macros_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>rcppsw/er/client.hpp</label>
+        <link refid="client_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>type_traits</label>
+      </node>
+      <node id="19">
+        <label>rcppsw/er/macros.hpp</label>
+        <link refid="er_2macros_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>log4cxx/logger.h</label>
+      </node>
+      <node id="7">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="40">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_with_sink.hpp</label>
+        <link refid="register__with__sink_8hpp"/>
+      </node>
+      <node id="11">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/sphere_vector.hpp</label>
+        <link refid="sphere__vector_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/degrees.hpp</label>
+        <link refid="degrees_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/spatial.hpp</label>
+        <link refid="spatial_8hpp"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp</label>
+        <link refid="vector3_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid3D_metrics_data.hpp</label>
+        <link refid="grid3D__metrics__data_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/binned_powerlaw_distribution.hpp</label>
+        <link refid="binned__powerlaw__distribution_8hpp"/>
+      </node>
+      <node id="41">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/vector2.hpp</label>
+        <link refid="vector2_8hpp"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter_data.hpp</label>
+        <link refid="hgrid3D__view__filter__data_8hpp"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/orientation.hpp</label>
+        <link refid="orientation_8hpp"/>
+      </node>
+      <node id="24">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graphml.hpp</label>
+        <link refid="graphml_8hpp"/>
+      </node>
+      <node id="18">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/grid3D_overlay.hpp</label>
+        <link refid="grid3D__overlay_8hpp"/>
+      </node>
+      <node id="20">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/grid2D_overlay.hpp</label>
+        <link refid="grid2D__overlay_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp</label>
+        <link refid="base__grid3D_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp</label>
+        <link refid="range_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/file_sink_registerer.hpp</label>
+        <link refid="file__sink__registerer_8hpp"/>
+      </node>
+      <node id="25">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D.hpp</label>
+        <link refid="hgrid3D_8hpp"/>
+      </node>
+      <node id="2">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/entropy.hpp</label>
+        <link refid="entropy_8hpp"/>
+      </node>
+      <node id="35">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_manager.hpp</label>
+        <link refid="base__manager_8hpp"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view.hpp</label>
+        <link refid="hgrid3D__view_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/control/periodic_waveform.hpp</label>
+        <link refid="periodic__waveform_8hpp"/>
+      </node>
+      <node id="43">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid2D.hpp</label>
+        <link refid="base__grid2D_8hpp"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid_overlay.hpp</label>
+        <link refid="base__grid__overlay_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/angles.hpp</label>
+        <link refid="angles_8hpp"/>
+      </node>
+      <node id="38">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_output_manager.hpp</label>
+        <link refid="network__output__manager_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/graph.hpp</label>
+        <link refid="graph_8hpp"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid3D_metrics_collector.hpp</label>
+        <link refid="grid3D__metrics__collector_8hpp"/>
+      </node>
+      <node id="44">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/grid2D.hpp</label>
+        <link refid="grid2D_8hpp"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/control/aperiodic_waveform.hpp</label>
+        <link refid="aperiodic__waveform_8hpp"/>
+      </node>
+      <node id="46">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_data.hpp</label>
+        <link refid="grid2D__metrics__data_8hpp"/>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/types/spatial_range.hpp</label>
+        <link refid="spatial__range_8hpp"/>
+      </node>
+      <node id="51">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/powerlaw_distribution.hpp</label>
+        <link refid="powerlaw__distribution_8hpp"/>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/network_sink_registerer.hpp</label>
+        <link refid="network__sink__registerer_8hpp"/>
+      </node>
+      <node id="23">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph.hpp</label>
+        <link refid="directed__graph_8hpp"/>
+      </node>
+      <node id="32">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp</label>
+        <link refid="rtree_8hpp"/>
+      </node>
+      <node id="29">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_vertex_property.hpp</label>
+        <link refid="hgrid3D__vertex__property_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/radians.hpp</label>
+        <link refid="radians_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp</label>
+        <link refid="stacked__grid2D_8hpp"/>
+      </node>
+      <node id="14">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/grid3D.hpp</label>
+        <link refid="grid3D_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_csv_sink.hpp</label>
+        <link refid="grid2D__metrics__csv__sink_8hpp"/>
+      </node>
+      <node id="9">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/ientropy.hpp</label>
+        <link refid="ientropy_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_spec.hpp</label>
+        <link refid="hgrid3D__spec_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/bounding_box.hpp</label>
+        <link refid="bounding__box_8hpp"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/algorithm/convex_hull2D.hpp</label>
+        <link refid="convex__hull2D_8hpp"/>
+      </node>
+      <node id="15">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid3D_metrics_csv_sink.hpp</label>
+        <link refid="grid3D__metrics__csv__sink_8hpp"/>
+      </node>
+      <node id="6">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/control/base_waveform.hpp</label>
+        <link refid="base__waveform_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_builder.hpp</label>
+        <link refid="hgrid3D__view__builder_8hpp"/>
+      </node>
+      <node id="48">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/math/rng.hpp</label>
+        <link refid="rng_8hpp"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/metrics/fs_output_manager.hpp</label>
+        <link refid="fs__output__manager_8hpp"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/grid2D_metrics_collector.hpp</label>
+        <link refid="grid2D__metrics__collector_8hpp"/>
+      </node>
+      <node id="28">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/hgrid3D_view_filter.hpp</label>
+        <link refid="hgrid3D__view__filter_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>/home/jharwell/git/rcppsw/include/rcppsw/ds/poisson_queue.hpp</label>
+        <link refid="poisson__queue_8hpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classrcppsw_1_1math_1_1range" prot="public">rcppsw::math::range</innerclass>
+    <innernamespace refid="namespacercppsw">rcppsw</innernamespace>
+    <innernamespace refid="namespacercppsw_1_1math">rcppsw::math</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="range_8hpp_1a2707a7872c6554ef36da5c1cfaa47a4c" prot="public" static="no">
+        <name>RCPPSW_MATH_RANGE_CONV2DISC</name>
+        <param><defname>dest_prefix</defname></param>
+        <param><defname>dest_type</defname></param>
+        <initializer>  static inline range##dest_prefix drange2##dest_prefix##range(            \
+      const range##dest_prefix&amp; other, double scale) {                     \
+    return range##dest_prefix(static_cast&lt;dest_type&gt;(other.lb() / scale),  \
+                              static_cast&lt;dest_type&gt;(other.ub() / scale)); \
+  }</initializer>
+        <briefdescription>
+<para>Convert ranged -&gt; range{i,u,z}, applying a divisive scaling factor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="304" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="308" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="range_8hpp_1a3e73b5567b118e3df763fcd00cc5fd94" prot="public" static="no">
+        <name>RCPPSW_MATH_RANGE_DIRECT_CONV2FLT</name>
+        <param><defname>prefix</defname></param>
+        <initializer>  static inline ranged prefix##range2drange(const range##prefix&amp; other) { \
+    return ranged(other.lb(), other.lb());                                \
+  }</initializer>
+        <briefdescription>
+<para>Convert range{i,u,z} -&gt; ranged directly, without applying any scaling. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="286" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="290" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="range_8hpp_1af29ff3af9c0a1925611a9b3219b9b699" prot="public" static="no">
+        <name>RCPPSW_MATH_RANGE_SCALED_CONV2FLT</name>
+        <param><defname>prefix</defname></param>
+        <initializer>  static inline ranged prefix##range2drange(const range##prefix&amp; other, \
+                                            double scale) {             \
+    return ranged(other.lb() * scale, other.ub() * scale);              \
+  }</initializer>
+        <briefdescription>
+<para>Convert range{i,u,z} -&gt; ranged, applying a multiplicative scaling factor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" line="295" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp" bodystart="299" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>2018 John Harwell, All rights reserved.</para>
+</simplesect>
+This file is part of RCPPSW.</para>
+<para>RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</para>
+<para>RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</para>
+<para>You should have received a copy of the GNU General Public License along with RCPPSW. If not, see &lt;<ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="21"><highlight class="preprocessor">#ifndef<sp/>INCLUDE_RCPPSW_MATH_RANGE_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INCLUDE_RCPPSW_MATH_RANGE_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>Includes</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cmath&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iosfwd&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="client_8hpp" kindref="compound">rcppsw/er/client.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="rcppsw_8hpp" kindref="compound">rcppsw/rcppsw.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="string__utils_8hpp" kindref="compound">rcppsw/utils/string_utils.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="stringizable_8hpp" kindref="compound">rcppsw/er/stringizable.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*<sp/>Namespaces/Decls</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><ref refid="common_2macros_8hpp_1a553c4f9d95d9ac867c32675925e86368" kindref="member">NS_START</ref>(<ref refid="namespacercppsw" kindref="compound">rcppsw</ref>,<sp/>math);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*<sp/>Class<sp/>Definitions</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="64"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">range<sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>er::client&lt;range&lt;T&gt;&gt;,<sp/>er::stringizable<sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/>range(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)<sp/>noexcept<sp/>:<sp/><ref refid="client_8hpp_1a2e46a4046efab8f06e9e8316c5760a4d" kindref="member">ER_CLIENT_INIT</ref>(</highlight><highlight class="stringliteral">&quot;rcppsw.math.range&quot;</highlight><highlight class="normal">)<sp/>{}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>range(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>lb,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>ub)<sp/>noexcept</highlight></codeline>
+<codeline lineno="69" refid="classrcppsw_1_1math_1_1range" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="client_8hpp_1a2e46a4046efab8f06e9e8316c5760a4d" kindref="member">ER_CLIENT_INIT</ref>(</highlight><highlight class="stringliteral">&quot;rcppsw.math.range&quot;</highlight><highlight class="normal">),</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_initialized(</highlight><highlight class="keyword">true</highlight><highlight class="normal">),</highlight></codeline>
+<codeline lineno="71" refid="classrcppsw_1_1math_1_1range_1a51646a21baf91b11727e42bae296f1f3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_lb(lb),</highlight></codeline>
+<codeline lineno="72" refid="classrcppsw_1_1math_1_1range_1a3ab0c3bc0145a373b8402326e48832f4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_ub(ub),</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_span(m_ub<sp/>-<sp/>m_lb)<sp/>{}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><ref refid="common_2macros_8hpp_1a4160e6a58445c478750f981632097665" kindref="member">RCPPSW_NODISCARD</ref><sp/>T<sp/>lb(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_lb;<sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><ref refid="common_2macros_8hpp_1a4160e6a58445c478750f981632097665" kindref="member">RCPPSW_NODISCARD</ref><sp/>T<sp/>ub(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_ub;<sp/>}</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><ref refid="common_2macros_8hpp_1a4160e6a58445c478750f981632097665" kindref="member">RCPPSW_NODISCARD</ref><sp/>T<sp/>span(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_span;<sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>lb(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>lb)<sp/>{</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1abd0e460b9aa8c2ffef233474c3486dd1" kindref="member">ER_ASSERT</ref>(m_initialized,<sp/></highlight><highlight class="stringliteral">&quot;Range<sp/>not<sp/>initialized&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1abd0e460b9aa8c2ffef233474c3486dd1" kindref="member">ER_ASSERT</ref>(lb<sp/>&lt;<sp/>m_ub,</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;New<sp/>lower<sp/>bound<sp/>(%s)<sp/>&gt;=<sp/>upper<sp/>bound<sp/>(%s)&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="98" refid="classrcppsw_1_1math_1_1range_1ad7874a03108e2d36070b758e26eed0e3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacercppsw_1a067e7fdc1e45476ca82cb106d0809015" kindref="member">rcppsw::to_string</ref>(lb).c_str(),</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacercppsw_1a067e7fdc1e45476ca82cb106d0809015" kindref="member">rcppsw::to_string</ref>(m_ub).c_str());</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>m_lb<sp/>=<sp/>lb;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>m_span<sp/>=<sp/>m_ub;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>m_span<sp/>-=<sp/>m_lb;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ub(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>ub)<sp/>{</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1abd0e460b9aa8c2ffef233474c3486dd1" kindref="member">ER_ASSERT</ref>(m_initialized,<sp/></highlight><highlight class="stringliteral">&quot;Range<sp/>not<sp/>initialized&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1abd0e460b9aa8c2ffef233474c3486dd1" kindref="member">ER_ASSERT</ref>(ub<sp/>&gt;<sp/>m_lb,</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;New<sp/>upper<sp/>bound<sp/>(%s)<sp/>&lt;=<sp/>lower<sp/>bound<sp/>(%s)&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="113" refid="classrcppsw_1_1math_1_1range_1a0213db565ba4678555abe0f8ef66bc85" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacercppsw_1a067e7fdc1e45476ca82cb106d0809015" kindref="member">rcppsw::to_string</ref>(ub).c_str(),</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacercppsw_1a067e7fdc1e45476ca82cb106d0809015" kindref="member">rcppsw::to_string</ref>(m_lb).c_str());</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>m_ub<sp/>=<sp/>ub;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>m_span<sp/>=<sp/>m_ub;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>m_span<sp/>-=<sp/>m_lb;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>lb,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>ub)<sp/>{</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1abd0e460b9aa8c2ffef233474c3486dd1" kindref="member">ER_ASSERT</ref>(lb<sp/>&lt;<sp/>ub,</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;New<sp/>lower<sp/>bound<sp/>(%s)<sp/>&gt;=<sp/>New<sp/>upper<sp/>bound<sp/>(%s)&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacercppsw_1a067e7fdc1e45476ca82cb106d0809015" kindref="member">rcppsw::to_string</ref>(m_lb).c_str(),</highlight></codeline>
+<codeline lineno="129" refid="classrcppsw_1_1math_1_1range_1af0a4297b73f93d2ec286cf308976a73c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacercppsw_1a067e7fdc1e45476ca82cb106d0809015" kindref="member">rcppsw::to_string</ref>(m_ub).c_str());</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>m_initialized<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>m_lb<sp/>=<sp/>lb;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>m_ub<sp/>=<sp/>ub;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>m_span<sp/>=<sp/>m_ub;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/>m_span<sp/>-=<sp/>m_lb;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U<sp/>=<sp/>T,<sp/>RCPPSW_SFINAE_DECLDEF(!std::is_</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">ing_po</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&lt;U&gt;::value)&gt;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="graph_8hpp_1ab90eab37470416a242c969f02bde4a2a" kindref="member">contains</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>value)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1abd0e460b9aa8c2ffef233474c3486dd1" kindref="member">ER_ASSERT</ref>(m_initialized,<sp/></highlight><highlight class="stringliteral">&quot;Range<sp/>not<sp/>initialized&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>value<sp/>&gt;=<sp/>m_lb<sp/>&amp;&amp;<sp/>value<sp/>&lt;=<sp/>m_ub;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148" refid="classrcppsw_1_1math_1_1range_1a935c2fb3c1f164d146619bfc573d5e6c" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U<sp/>=<sp/>T,<sp/>RCPPSW_SFINAE_DECLDEF(std::is_</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">ing_po</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&lt;U&gt;::value)&gt;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="graph_8hpp_1ab90eab37470416a242c969f02bde4a2a" kindref="member">contains</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>value)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1abd0e460b9aa8c2ffef233474c3486dd1" kindref="member">ER_ASSERT</ref>(m_initialized,<sp/></highlight><highlight class="stringliteral">&quot;Range<sp/>not<sp/>initialized&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>value<sp/>&gt;=<sp/>m_lb<sp/>&amp;&amp;<sp/>value<sp/>&lt;=<sp/>m_ub;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="154" refid="classrcppsw_1_1math_1_1range_1a935c2fb3c1f164d146619bfc573d5e6c" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="graph_8hpp_1ab90eab37470416a242c969f02bde4a2a" kindref="member">contains</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range&lt;T&gt;</ref>&amp;<sp/>other)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>this-&gt;<ref refid="graph_8hpp_1ab90eab37470416a242c969f02bde4a2a" kindref="member">contains</ref>(other.m_lb)<sp/>&amp;&amp;<sp/>this-&gt;<ref refid="graph_8hpp_1ab90eab37470416a242c969f02bde4a2a" kindref="member">contains</ref>(other.m_ub);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>overlaps_with(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range&lt;T&gt;</ref>&amp;<sp/>other)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>this-&gt;<ref refid="graph_8hpp_1ab90eab37470416a242c969f02bde4a2a" kindref="member">contains</ref>(other.m_lb)<sp/>||<sp/>this-&gt;<ref refid="graph_8hpp_1ab90eab37470416a242c969f02bde4a2a" kindref="member">contains</ref>(other.m_ub)<sp/>||</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.contains(this-&gt;m_lb)<sp/>||<sp/>other.contains(this-&gt;m_ub);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="177" refid="classrcppsw_1_1math_1_1range_1a37e7e41044185c0a22991162843b1797" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><ref refid="common_2macros_8hpp_1a4160e6a58445c478750f981632097665" kindref="member">RCPPSW_NODISCARD</ref><sp/><ref refid="common_2macros_8hpp_1a080d8af20d6aa955d4db7ef068309a7c" kindref="member">RCPPSW_PURE</ref><sp/>T<sp/>wrap_value(T<sp/>value)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="er_2macros_8hpp_1abd0e460b9aa8c2ffef233474c3486dd1" kindref="member">ER_ASSERT</ref>(m_initialized,<sp/></highlight><highlight class="stringliteral">&quot;Range<sp/>not<sp/>initialized&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(value<sp/>&gt;<sp/>m_ub)<sp/>{</highlight></codeline>
+<codeline lineno="188" refid="classrcppsw_1_1math_1_1range_1a564e5d1adac98d5e1ff4e6d0542b3ae7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>value<sp/>-=<sp/>m_span;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(value<sp/>&lt;<sp/>m_lb)<sp/>{</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>value<sp/>+=<sp/>m_span;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>value;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/>T<sp/>center(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(m_lb<sp/>+<sp/>m_ub)<sp/>/<sp/>2;<sp/>}</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/>std::string<sp/>to_str(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;[&quot;</highlight><highlight class="normal"><sp/>+<sp/><ref refid="namespacercppsw_1a067e7fdc1e45476ca82cb106d0809015" kindref="member">rcppsw::to_string</ref>(m_lb)<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;-&quot;</highlight><highlight class="normal"><sp/>+<sp/><ref refid="namespacercppsw_1a067e7fdc1e45476ca82cb106d0809015" kindref="member">rcppsw::to_string</ref>(m_ub)<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;]&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212" refid="classrcppsw_1_1math_1_1range_1a0ade48e4a0e80910b805169e2c186bd4" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/>std::ostream&amp;<sp/><ref refid="namespacercppsw_1_1math_1ab9a74f174a2ea8affb6bff17a1179394" kindref="member">operator&lt;&lt;</ref>(std::ostream&amp;<sp/>stream,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range</ref>&amp;<sp/>c_range)<sp/>{</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>stream<sp/>&lt;&lt;<sp/>c_range.to_str();</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>stream;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range</ref><sp/>translate(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>value)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range</ref>(m_lb<sp/>+<sp/>value,<sp/>m_ub<sp/>+<sp/>value);</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/>range<sp/>shrink(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>value)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>range(m_lb<sp/>+<sp/>value,<sp/>m_ub<sp/>-<sp/>value);</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/>range<sp/>recenter(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;value)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/>T<sp/>span<sp/>=<sp/>this-&gt;span();</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>range(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(value<sp/>-<sp/>span<sp/>/<sp/>2.0),</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(value<sp/>+<sp/>span<sp/>/<sp/>2.0));</highlight></codeline>
+<codeline lineno="243" refid="classrcppsw_1_1math_1_1range_1a3b2461aa1d5ea6949e1c3f1369f71617" refkind="member"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/>std::istream&amp;<sp/>operator&gt;&gt;(std::istream&amp;<sp/>is,<sp/><ref refid="classrcppsw_1_1math_1_1range" kindref="compound">range</ref>&amp;<sp/>r)<sp/>{</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/>T<sp/>values[2]<sp/>=<sp/>{<sp/>T(),<sp/>T()<sp/>};</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/>utils::parse_values&lt;T&gt;(is,<sp/>2,<sp/>values,<sp/></highlight><highlight class="charliteral">&apos;:&apos;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/>r.set(values[0],<sp/>values[1]);</highlight></codeline>
+<codeline lineno="252" refid="classrcppsw_1_1math_1_1range_1a5d38c5c46b1f429c37395c60ba4474ad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>is;</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*<sp/>clang-format<sp/>off<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_initialized{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/>T<sp/><sp/><sp/><sp/>m_lb{};</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/>T<sp/><sp/><sp/><sp/>m_ub{};</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/>T<sp/><sp/><sp/><sp/>m_span{};</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*<sp/>clang-format<sp/>on<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespacercppsw_1_1math_1a94eace0e741aaeada9e9e08d8de34e47" kindref="member">rangei</ref><sp/>=<sp/>range&lt;int&gt;;</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespacercppsw_1_1math_1afc75f115f30ec3888181ea1bdd921e17" kindref="member">rangez</ref><sp/>=<sp/>range&lt;size_t&gt;;</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespacercppsw_1_1math_1a5ff0a4d528d5429045da4f1d3fd382f2" kindref="member">ranged</ref><sp/>=<sp/>range&lt;double&gt;;</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="280"><highlight class="comment"><sp/>*<sp/>Macros</highlight></codeline>
+<codeline lineno="281" refid="namespacercppsw_1_1math_1a5ff0a4d528d5429045da4f1d3fd382f2" refkind="member"><highlight class="comment"><sp/>******************************************************************************/</highlight></codeline>
+<codeline lineno="286"><highlight class="preprocessor">#define<sp/>RCPPSW_MATH_RANGE_DIRECT_CONV2FLT(prefix)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="287"><highlight class="preprocessor"><sp/><sp/>static<sp/>inline<sp/>ranged<sp/>prefix##range2drange(const<sp/>range##prefix&amp;<sp/>other)<sp/>{<sp/>\</highlight></codeline>
+<codeline lineno="288"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>return<sp/>ranged(other.lb(),<sp/>other.lb());<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="289"><highlight class="preprocessor"><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="290" refid="range_8hpp_1a3e73b5567b118e3df763fcd00cc5fd94" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="295"><highlight class="preprocessor">#define<sp/>RCPPSW_MATH_RANGE_SCALED_CONV2FLT(prefix)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="296"><highlight class="preprocessor"><sp/><sp/>static<sp/>inline<sp/>ranged<sp/>prefix##range2drange(const<sp/>range##prefix&amp;<sp/>other,<sp/>\</highlight></codeline>
+<codeline lineno="297"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>double<sp/>scale)<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="298"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>return<sp/>ranged(other.lb()<sp/>*<sp/>scale,<sp/>other.ub()<sp/>*<sp/>scale);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="299" refid="range_8hpp_1af29ff3af9c0a1925611a9b3219b9b699" refkind="member"><highlight class="preprocessor"><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="300"><highlight class="normal"></highlight></codeline>
+<codeline lineno="304"><highlight class="preprocessor">#define<sp/>RCPPSW_MATH_RANGE_CONV2DISC(dest_prefix,<sp/>dest_type)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="305"><highlight class="preprocessor"><sp/><sp/>static<sp/>inline<sp/>range##dest_prefix<sp/>drange2##dest_prefix##range(<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="306"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>range##dest_prefix&amp;<sp/>other,<sp/>double<sp/>scale)<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="307"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>return<sp/>range##dest_prefix(static_cast&lt;dest_type&gt;(other.lb()<sp/>/<sp/>scale),<sp/><sp/>\</highlight></codeline>
+<codeline lineno="308" refid="range_8hpp_1a2707a7872c6554ef36da5c1cfaa47a4c" refkind="member"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>static_cast&lt;dest_type&gt;(other.ub()<sp/>/<sp/>scale));<sp/>\</highlight></codeline>
+<codeline lineno="309"><highlight class="preprocessor"><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight></codeline>
+<codeline lineno="311"><highlight class="normal"></highlight><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="312"><highlight class="comment"><sp/>*<sp/>Free<sp/>Functions</highlight></codeline>
+<codeline lineno="313"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><ref refid="range_8hpp_1a3e73b5567b118e3df763fcd00cc5fd94" kindref="member">RCPPSW_MATH_RANGE_DIRECT_CONV2FLT</ref>(z);</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><ref refid="range_8hpp_1a3e73b5567b118e3df763fcd00cc5fd94" kindref="member">RCPPSW_MATH_RANGE_DIRECT_CONV2FLT</ref>(i);</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><ref refid="range_8hpp_1af29ff3af9c0a1925611a9b3219b9b699" kindref="member">RCPPSW_MATH_RANGE_SCALED_CONV2FLT</ref>(z);</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><ref refid="range_8hpp_1af29ff3af9c0a1925611a9b3219b9b699" kindref="member">RCPPSW_MATH_RANGE_SCALED_CONV2FLT</ref>(i);</highlight></codeline>
+<codeline lineno="318" refid="namespacercppsw_1_1math_1a28a134c46abc211cb7a95e997c856663" refkind="member"><highlight class="normal"><ref refid="range_8hpp_1a2707a7872c6554ef36da5c1cfaa47a4c" kindref="member">RCPPSW_MATH_RANGE_CONV2DISC</ref>(z,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="319" refid="namespacercppsw_1_1math_1a8d8df93fe4ad4d82761ea7b56bfaee81" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="320" refid="namespacercppsw_1_1math_1ac5b7f20bdffaad00d3c41740b7a59024" refkind="member"><highlight class="normal"><ref refid="common_2macros_8hpp_1af6c55b58384045452cc8ce88f54e3265" kindref="member">NS_END</ref>(math,<sp/><ref refid="namespacercppsw" kindref="compound">rcppsw</ref>);</highlight></codeline>
+<codeline lineno="321" refid="namespacercppsw_1_1math_1a9947aa65ad754480dfb5d59827424523" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="322" refid="namespacercppsw_1_1math_1a9c696ef894fd3e9030aacf3b89dec0ba" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>INCLUDE_RCPPSW_MATH_RANGE_HPP_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/range.hpp"/>
+  </compounddef>
+</doxygen>

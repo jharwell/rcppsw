@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1mpl_1_1reflectable" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>rcppsw::mpl::reflectable</compoundname>
+    <includes refid="reflectable_8hpp" local="no">reflectable.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1mpl_1_1reflectable_1a7b1025532b03e6fe7619811597ed8781" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::mpl::reflectable::~reflectable</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~reflectable</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/reflectable.hpp" line="51" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1mpl_1_1reflectable_1a9f48ae849aaca6d7dc638cc89625d5a4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::type_index</type>
+        <definition>virtual std::type_index rcppsw::mpl::reflectable::type_index</definition>
+        <argsstring>(void) const =0</argsstring>
+        <name>type_index</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return the std::type_index of the derived class. This is useful in conjunction with boost::variant and boost::apply_visitor, as it allows for run-time reflection based on the actual type of the derived class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/reflectable.hpp" line="59" column="27"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface for classes wishing to employ pseudo-reflection in C++. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::mpl::reflectable</label>
+        <link refid="classrcppsw_1_1mpl_1_1reflectable"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/reflectable.hpp" line="49" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/reflectable.hpp" bodystart="49" bodyend="60"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1mpl_1_1reflectable_1a9f48ae849aaca6d7dc638cc89625d5a4" prot="public" virt="pure-virtual"><scope>rcppsw::mpl::reflectable</scope><name>type_index</name></member>
+      <member refid="classrcppsw_1_1mpl_1_1reflectable_1a7b1025532b03e6fe7619811597ed8781" prot="public" virt="virtual"><scope>rcppsw::mpl::reflectable</scope><name>~reflectable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

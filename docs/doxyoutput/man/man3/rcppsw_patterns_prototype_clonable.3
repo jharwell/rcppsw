@@ -1,0 +1,67 @@
+.TH "rcppsw::patterns::prototype::clonable< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::prototype::clonable< T > \- Define a class as being capable of being cloned (i\&.e\&. a deep copy)\&. I generally prefer this approach when copying objects, because it is explicit and not subject to compiler/language standards around \fBoperator=()\fP, AND because the use of std::unique_ptr makes it clear the returned object has nothing to do with the source object\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <clonable\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBclonable\fP (const \fBclonable\fP &)=default"
+.br
+.ti -1c
+.RI "\fBclonable\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual \fB~clonable\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual std::unique_ptr< T > \fBclone\fP (void) const =0"
+.br
+.RI "Clone the calling object, transfering ownership of the copy explicitly to the calling context\&. "
+.ti -1c
+.RI "\fBclonable\fP & \fBoperator=\fP (const \fBclonable\fP &)=default"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::patterns::prototype::clonable< T >"
+Define a class as being capable of being cloned (i\&.e\&. a deep copy)\&. I generally prefer this approach when copying objects, because it is explicit and not subject to compiler/language standards around \fBoperator=()\fP, AND because the use of std::unique_ptr makes it clear the returned object has nothing to do with the source object\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIT\fP The type of the class to mark as clonable\&. 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::patterns::prototype::clonable\fP< T >::\fBclonable\fP (void)\fC [default]\fP"
+
+.SS "template<typename T > virtual \fBrcppsw::patterns::prototype::clonable\fP< T >::~\fBclonable\fP (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SS "template<typename T > \fBrcppsw::patterns::prototype::clonable\fP< T >::\fBclonable\fP (const \fBclonable\fP< T > &)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > virtual std::unique_ptr<T> \fBrcppsw::patterns::prototype::clonable\fP< T >::clone (void) const\fC [pure virtual]\fP"
+
+.PP
+Clone the calling object, transfering ownership of the copy explicitly to the calling context\&. 
+.SS "template<typename T > \fBclonable\fP& \fBrcppsw::patterns::prototype::clonable\fP< T >::operator= (const \fBclonable\fP< T > &)\fC [default]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -32,16 +32,12 @@ NS_START(rcppsw, math);
  * Template Instantiations
  ******************************************************************************/
 template <>
-const vector2u vector2u::X(1, 0); // NOLINT
-template <>
 const vector2i vector2i::X(1, 0); // NOLINT
 template <>
 const vector2z vector2z::X(1, 0); // NOLINT
 template <>
 const vector2d vector2d::X(1.0, 0.0); // NOLINT
 
-template <>
-const vector2u vector2u::Y(0, 1); // NOLINT
 template <>
 const vector2i vector2i::Y(0, 1); // NOLINT
 template <>

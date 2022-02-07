@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1math_1_1vector2_1_1componentwise__compare" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::math::vector2::componentwise_compare</compoundname>
+    <includes refid="vector2_8hpp" local="no">vector2.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structrcppsw_1_1math_1_1vector2_1_1componentwise__compare_1ace479ac4b6cffc43131b9851baead20f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::math::vector2&lt; T &gt;::componentwise_compare::operator()</definition>
+        <argsstring>(const vector2&lt; T &gt; &amp;lhs, const vector2&lt; T &gt; &amp;rhs) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector2" kindref="compound">vector2</ref>&lt; T &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1math_1_1vector2" kindref="compound">vector2</ref>&lt; T &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector2.hpp" line="92" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector2.hpp" bodystart="92" bodyend="94"/>
+        <references refid="namespacercppsw_1_1math_1a08642e8d3e916a6836bd252d108b4d30" compoundref="angles_8hpp" startline="80" endline="82">rcppsw::math::abs</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Needed to compare in mathematical contexts. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::math::vector2&lt; T &gt;::componentwise_compare</label>
+        <link refid="structrcppsw_1_1math_1_1vector2_1_1componentwise__compare"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/vector2.hpp" line="91" column="30" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/math/vector2.hpp" bodystart="91" bodyend="95"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1math_1_1vector2_1_1componentwise__compare_1ace479ac4b6cffc43131b9851baead20f" prot="public" virt="non-virtual"><scope>rcppsw::math::vector2::componentwise_compare</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

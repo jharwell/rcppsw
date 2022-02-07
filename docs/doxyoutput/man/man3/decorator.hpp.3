@@ -1,0 +1,96 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/patterns/decorator/decorator.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <memory>\fP
+.br
+\fC#include <utility>\fP
+.br
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBrcppsw::patterns::decorator::decorator< TDecoratee >\fP"
+.br
+.RI "The base class for the object decorator design pattern\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns\fP"
+.br
+.RI "Design pattern templates and interfaces\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns::decorator\fP"
+.br
+.RI "Decorator design pattern: pointer and member variants\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_DECORATE_CT\fP(\&.\&.\&.)   using \fBrpdecorator::decorator\fP<decoratee_type>::decorator"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_DECORATE_DECL\fP(Name)   using Name = typename decoratee_type::Name"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_DECORATE_DECLDEF\fP(Func, \&.\&.\&.)   template <typename\&.\&.\&. Args>auto Func(Args&&\&.\&.\&. args)  __VA_ARGS__ \->decltype(std::declval<decltype(Member)>()\&.Func(args\&.\&.\&.)) { return  decoratee()\&.Func(std::forward<Args>(args)\&.\&.\&.); }"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_DECORATE_DECLDEF_STATIC\fP(Class,  Func, \&.\&.\&.)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2017 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#\fBdefine\fP RCPPSW_DECORATE_CT( \&.\&.\&.)   using \fBrpdecorator::decorator\fP<decoratee_type>::decorator"
+Exposes tricky constructors from the decoratee in the derived class\&. Generally only needed if the decoratee is an STL container or similar\&. 
+.SS "#\fBdefine\fP RCPPSW_DECORATE_DECL(Name)   using Name = typename decoratee_type::Name"
+Wraps a using declaration from the decoratee into the derived class\&. 
+.SS "#\fBdefine\fP RCPPSW_DECORATE_DECLDEF(Func,  \&.\&.\&.)   template <typename\&.\&.\&. Args>auto Func(Args&&\&.\&.\&. args)  __VA_ARGS__ \->decltype(std::declval<decltype(Member)>()\&.Func(args\&.\&.\&.)) { return  decoratee()\&.Func(std::forward<Args>(args)\&.\&.\&.); }"
+Wraps the declaration/implementation of the decoratee \fCFunc\fP\&.
+.PP
+work to wrap functions in the decorated class which are virtual\&. 
+.SS "#\fBdefine\fP RCPPSW_DECORATE_DECLDEF_STATIC(Class, Func,  \&.\&.\&.)"
+\fBValue:\fP
+.PP
+.nf
+  template <typename TDecorateeType = decoratee_type, typename\&.\&.\&. Args> \
+  auto Func(Args&&\&.\&.\&. args) __VA_ARGS__ -> decltype(Class::Func<__VA_ARGS__ TDecorateeType>(decoratee(), (args)\&.\&.\&.)) { \
+    return Class::Func<__VA_ARGS__ TDecorateeType>(decoratee(), std::forward<Args>(args)\&.\&.\&.); \
+  }
+.fi
+Wrap a static/non-member function from a base class/other accessible class/namespace using the decoratee\&.
+.PP
+ADL says you cannot put qualifiers on the name of the static function\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1_1factory__worker__impl_3_01TDer4e8ff26f0ad539609504bc3a288a858d" kind="struct" language="C++" prot="private" final="yes">
+    <compoundname>rcppsw::patterns::factory::detail::base_factory::factory_worker_impl&lt; TDerived, factory_sharing_type &gt;</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">rcppsw::patterns::factory::detail::base_factory&lt; TType, TPointerWrapper, TBase, TKeyType, Args &gt;::factory_worker</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename TDerived</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1_1factory__worker__impl_3_01TDer4e8ff26f0ad539609504bc3a288a858d_1a08a97c80481d6fcec18225c6fbf5ad7a" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; TPointerWrapper&lt; TBase &gt; &gt;</type>
+        <definition>std::vector&lt;TPointerWrapper&lt;TBase&gt; &gt; rcppsw::patterns::factory::detail::base_factory&lt; TType, TPointerWrapper, TBase, TKeyType, Args &gt;::factory_worker_impl&lt; TDerived, factory_sharing_type &gt;::m_items</definition>
+        <argsstring></argsstring>
+        <name>m_items</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" line="158" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1_1factory__worker__impl_3_01TDer4e8ff26f0ad539609504bc3a288a858d_1a95ff0b880edf170bda748c7bc94d52b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::factory::detail::base_factory&lt; TType, TPointerWrapper, TBase, TKeyType, Args &gt;::factory_worker_impl&lt; TDerived, factory_sharing_type &gt;::~factory_worker_impl</definition>
+        <argsstring>(void) override=default</argsstring>
+        <name>~factory_worker_impl</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" line="153" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1_1factory__worker__impl_3_01TDer4e8ff26f0ad539609504bc3a288a858d_1a33a99f98185552bda1a546e9fda6c7a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; TBase &gt;</type>
+        <definition>std::shared_ptr&lt;TBase&gt; rcppsw::patterns::factory::detail::base_factory&lt; TType, TPointerWrapper, TBase, TKeyType, Args &gt;::factory_worker_impl&lt; TDerived, factory_sharing_type &gt;::create</definition>
+        <argsstring>(Args... args) override</argsstring>
+        <name>create</name>
+        <param>
+          <type>Args...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" line="154" column="21" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" bodystart="154" bodyend="157"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::patterns::factory::detail::base_factory&lt; TType, TPointerWrapper, TBase, TKeyType, Args &gt;::factory_worker</label>
+      </node>
+      <node id="1">
+        <label>rcppsw::patterns::factory::detail::base_factory&lt; TType, TPointerWrapper, TBase, TKeyType, Args &gt;::factory_worker_impl&lt; TDerived, factory_sharing_type &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::patterns::factory::detail::base_factory&lt; TType, TPointerWrapper, TBase, TKeyType, Args &gt;::factory_worker</label>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; TPointerWrapper&lt; TBase &gt; &gt;</label>
+      </node>
+      <node id="1">
+        <label>rcppsw::patterns::factory::detail::base_factory&lt; TType, TPointerWrapper, TBase, TKeyType, Args &gt;::factory_worker_impl&lt; TDerived, factory_sharing_type &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+m_items</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" line="152" column="24" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/factory/base_factory.hpp" bodystart="151" bodyend="159"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1_1factory__worker__impl_3_01TDer4e8ff26f0ad539609504bc3a288a858d_1a33a99f98185552bda1a546e9fda6c7a1" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::detail::base_factory::factory_worker_impl&lt; TDerived, factory_sharing_type &gt;</scope><name>create</name></member>
+      <member refid="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1_1factory__worker__impl_3_01TDer4e8ff26f0ad539609504bc3a288a858d_1a08a97c80481d6fcec18225c6fbf5ad7a" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::detail::base_factory::factory_worker_impl&lt; TDerived, factory_sharing_type &gt;</scope><name>m_items</name></member>
+      <member refid="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1_1factory__worker_1ae9fca892e7a93ee46a60ed3c12b3ab11" prot="public" virt="virtual"><scope>rcppsw::patterns::factory::detail::base_factory::factory_worker_impl&lt; TDerived, factory_sharing_type &gt;</scope><name>~factory_worker</name></member>
+      <member refid="structrcppsw_1_1patterns_1_1factory_1_1detail_1_1base__factory_1_1factory__worker__impl_3_01TDer4e8ff26f0ad539609504bc3a288a858d_1a95ff0b880edf170bda748c7bc94d52b9" prot="public" virt="non-virtual"><scope>rcppsw::patterns::factory::detail::base_factory::factory_worker_impl&lt; TDerived, factory_sharing_type &gt;</scope><name>~factory_worker_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

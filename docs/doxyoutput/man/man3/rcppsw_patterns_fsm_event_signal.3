@@ -1,0 +1,49 @@
+.TH "rcppsw::patterns::fsm::event_signal" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::fsm::event_signal \- A class representing the different signals that can be passed between states in an FSM, and/or between FSMs\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <event\&.hpp>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBtype\fP { \fBekIGNORED\fP = 0xFE, \fBekFATAL\fP = 0xFF, \fBekHANDLED\fP = 0, \fBekUNHANDLED\fP = 1, \fBekRUN\fP = 2, \fBekEXTERNAL_SIGNALS\fP }"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A class representing the different signals that can be passed between states in an FSM, and/or between FSMs\&. 
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "enum \fBrcppsw::patterns::fsm::event_signal::type\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIekIGNORED \fP\fP
+.TP
+\fB\fIekFATAL \fP\fP
+A signal that can be ignored\&. A signal indicating that something VERY BAD has happened\&. Will cause the parent FSM to halt the program\&. 
+.TP
+\fB\fIekHANDLED \fP\fP
+A signal indicating that all signals input into a given state have been handled successfully\&. All states should return this signal in the nomitive case\&. 
+.TP
+\fB\fIekUNHANDLED \fP\fP
+A signal from a lower/child state that could not be handled by a lower state, OR a signal that a lower state sent to indicate that it encountered a situation that it does not know how to handle in the normal turn of events\&. 
+.TP
+\fB\fIekRUN \fP\fP
+A signal indicating nominal run operation should occur upon injection\&. 
+.TP
+\fB\fIekEXTERNAL_SIGNALS \fP\fP
+Applications wishing to defined their own event signals should start here\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1algorithm_1_1clustering_1_1eh__clustering__impl" kind="interface" language="C++" prot="public">
+    <compoundname>rcppsw::algorithm::clustering::eh_clustering_impl</compoundname>
+    <basecompoundref refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl" prot="public" virt="non-virtual">rcppsw::algorithm::clustering::base_clustering_impl&lt; T, policy::EH &gt;</basecompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__eh__omp" prot="public" virt="non-virtual">rcppsw::algorithm::clustering::entropy_eh_omp&lt; T &gt;</derivedcompoundref>
+    <includes refid="eh__clustering__impl_8hpp" local="no">eh_clustering_impl.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1algorithm_1_1clustering_1_1eh__clustering__impl_1a923433cbce563466834a265de8c01488" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::algorithm::clustering::eh_clustering_impl&lt; T &gt;::m_horizon</definition>
+        <argsstring></argsstring>
+        <name>m_horizon</name>
+        <initializer>{-1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/eh_clustering_impl.hpp" line="60" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/eh_clustering_impl.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1eh__clustering__impl_1a3c179e0984d0a66bb81150cdb8d35ad6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::algorithm::clustering::eh_clustering_impl&lt; T &gt;::~eh_clustering_impl</definition>
+        <argsstring>(void) override=default</argsstring>
+        <name>~eh_clustering_impl</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/eh_clustering_impl.hpp" line="53" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1eh__clustering__impl_1aa7062eb40a44b1d7bd2000fb4c229c3d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::algorithm::clustering::eh_clustering_impl&lt; T &gt;::horizon</definition>
+        <argsstring>(double horizon)</argsstring>
+        <name>horizon</name>
+        <param>
+          <type>double</type>
+          <declname>horizon</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/eh_clustering_impl.hpp" line="55" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/eh_clustering_impl.hpp" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1algorithm_1_1clustering_1_1eh__clustering__impl_1a6575ba584276f776a67640e03f8b0627" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::algorithm::clustering::eh_clustering_impl&lt; T &gt;::horizon</definition>
+        <argsstring>(void) const</argsstring>
+        <name>horizon</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/eh_clustering_impl.hpp" line="56" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/eh_clustering_impl.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Templated implementation class interface to guide the implementation of various Event Horizon (EH) clustering algorithms. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::algorithm::clustering::eh_clustering_impl&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1algorithm_1_1clustering_1_1eh__clustering__impl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::algorithm::clustering::base_clustering_impl&lt; T, policy::EH &gt;</label>
+        <link refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl"/>
+      </node>
+      <node id="3">
+        <label>rcppsw::algorithm::clustering::entropy_eh_omp&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1algorithm_1_1clustering_1_1entropy__eh__omp"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::algorithm::clustering::eh_clustering_impl&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1algorithm_1_1clustering_1_1eh__clustering__impl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::algorithm::clustering::base_clustering_impl&lt; T, policy::EH &gt;</label>
+        <link refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/eh_clustering_impl.hpp" line="51" column="55" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/eh_clustering_impl.hpp" bodystart="51" bodyend="62"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1af36eb09f7dedf9887de013daa1b77c6f" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::eh_clustering_impl</scope><name>cluster_type</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1af7c16dc09eba724dd34e5afb5070b5b5" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::eh_clustering_impl</scope><name>cluster_vector</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1a66ad621088e5c8007b62d527ed5fc001" prot="public" virt="pure-virtual"><scope>rcppsw::algorithm::clustering::eh_clustering_impl</scope><name>converged</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1a6d0cb28b21790eb053a2fa7a423e46da" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::eh_clustering_impl</scope><name>dist_calc_ftype</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1eh__clustering__impl_1aa7062eb40a44b1d7bd2000fb4c229c3d" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::eh_clustering_impl</scope><name>horizon</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1eh__clustering__impl_1a6575ba584276f776a67640e03f8b0627" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::eh_clustering_impl</scope><name>horizon</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1a5931c398b226c9b0fd1719157a0f3774" prot="public" virt="pure-virtual"><scope>rcppsw::algorithm::clustering::eh_clustering_impl</scope><name>initialize</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1a57b1d1b0a37630e02f8c0bbf49679c42" prot="public" virt="pure-virtual"><scope>rcppsw::algorithm::clustering::eh_clustering_impl</scope><name>iterate</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1eh__clustering__impl_1a923433cbce563466834a265de8c01488" prot="private" virt="non-virtual"><scope>rcppsw::algorithm::clustering::eh_clustering_impl</scope><name>m_horizon</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1a0331abbc18e66c066f7c4bc256d95144" prot="public" virt="pure-virtual"><scope>rcppsw::algorithm::clustering::eh_clustering_impl</scope><name>post_iter_update</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1base__clustering__impl_1a54140d4d5406e8a29ff5915561569a8a" prot="public" virt="virtual"><scope>rcppsw::algorithm::clustering::eh_clustering_impl</scope><name>~base_clustering_impl</name></member>
+      <member refid="classrcppsw_1_1algorithm_1_1clustering_1_1eh__clustering__impl_1a3c179e0984d0a66bb81150cdb8d35ad6" prot="public" virt="non-virtual"><scope>rcppsw::algorithm::clustering::eh_clustering_impl</scope><name>~eh_clustering_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

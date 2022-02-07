@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_3dc8ad57bb3cb9c8813e50e27d06d5a3" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/config</compoundname>
+    <innerdir refid="dir_b3c6ff9a8451865e144498520e1aad70">/home/jharwell/git/rcppsw/include/rcppsw/config/xml</innerdir>
+    <innerfile refid="base__config_8hpp">base_config.hpp</innerfile>
+    <innerfile refid="streamable__parser_8hpp">streamable_parser.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/config/"/>
+  </compounddef>
+</doxygen>

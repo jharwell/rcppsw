@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classpolymorphic__accept__set" kind="class" language="C++" prot="public">
+    <compoundname>polymorphic_accept_set</compoundname>
+    <includes refid="polymorphic__visitable_8hpp" local="no">polymorphic_visitable.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename...</type>
+        <declname>Ts</declname>
+        <defname>Ts</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>Allows polymorphic classes (those with a pure virtual member in a base class) to accept visitors of specific types. Allows implicit conversion to base classes if both base/derived types are present in the set. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This is more &quot;single dispatch&quot; than &quot;double dispatch&quot;, and so is not precisely the visitor pattern, as classes deriving from this class need to implement the second part of the dispatch themselves. However, for situations where you have disparate classes that all share a common interface this is a far more elegant solution than a brittle series of if-else to determine the proper type of the object via dynamic_cast&lt;&gt; before calling a chained visit() function. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>polymorphic_accept_set&lt; Ts &gt;</label>
+        <link refid="classpolymorphic__accept__set"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/polymorphic_visitable.hpp" line="70" column="29" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/polymorphic_visitable.hpp" bodystart="70" bodyend="70"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

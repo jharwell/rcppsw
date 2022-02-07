@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1metrics_1_1config_1_1network__sink__config" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>rcppsw::metrics::config::network_sink_config</compoundname>
+    <basecompoundref refid="structrcppsw_1_1config_1_1base__config" prot="public" virt="non-virtual">rcppsw::config::base_config</basecompoundref>
+    <includes refid="network__sink__config_8hpp" local="no">network_sink_config.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1metrics_1_1config_1_1network__sink__config_1abf014c41d350763c4d5c4f450535e8af" prot="public" static="no" mutable="no">
+        <type>rmetrics::config::output_mode_config</type>
+        <definition>rmetrics::config::output_mode_config rcppsw::metrics::config::network_sink_config::stream</definition>
+        <argsstring></argsstring>
+        <name>stream</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/network_sink_config.hpp" line="49" column="40" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/network_sink_config.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Configuration for metrics which will/can be output to the network. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::metrics::config::network_sink_config</label>
+        <link refid="structrcppsw_1_1metrics_1_1config_1_1network__sink__config"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::config::base_config</label>
+        <link refid="structrcppsw_1_1config_1_1base__config"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::metrics::config::network_sink_config</label>
+        <link refid="structrcppsw_1_1metrics_1_1config_1_1network__sink__config"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::config::base_config</label>
+        <link refid="structrcppsw_1_1config_1_1base__config"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/network_sink_config.hpp" line="48" column="54" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/network_sink_config.hpp" bodystart="48" bodyend="50"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a1cfd52de449665fdfe4b2a42c2248f96" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::network_sink_config</scope><name>base_config</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a9a86158e067c0ed5b8b3c16760878473" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::network_sink_config</scope><name>base_config</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a32d1e916aa385603fec11cefc9fa30be" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::network_sink_config</scope><name>operator=</name></member>
+      <member refid="structrcppsw_1_1metrics_1_1config_1_1network__sink__config_1abf014c41d350763c4d5c4f450535e8af" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::network_sink_config</scope><name>stream</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a4ddde3073572a1095a9aeeb7591cb226" prot="public" virt="virtual"><scope>rcppsw::metrics::config::network_sink_config</scope><name>~base_config</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

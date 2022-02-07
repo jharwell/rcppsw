@@ -1,0 +1,252 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classregister__with__csv__sink" kind="class" language="C++" prot="public">
+    <compoundname>register_with_csv_sink</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">detail::register_by_sink&lt; void &gt;</basecompoundref>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; register_with_csv_sink&lt; void &gt; &gt;</basecompoundref>
+    <includes refid="collector__registerer_8hpp" local="no">collector_registerer.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TExtraArgsType</type>
+        <defval>void</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classregister__with__csv__sink_1abe000409364cd7e1b46d5cb61bdd9544" prot="public" static="no" mutable="no">
+        <type>const rmconfig::csv_sink_config *const</type>
+        <definition>const rmconfig::csv_sink_config* const register_with_csv_sink&lt; TExtraArgsType &gt;::mc_config</definition>
+        <argsstring></argsstring>
+        <name>mc_config</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_registerer.hpp" line="295" column="41" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_registerer.hpp" bodystart="295" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classregister__with__csv__sink_1a21d08dcbc80c6ed98703e6521cc24c00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>register_with_csv_sink&lt; TExtraArgsType &gt;::register_with_csv_sink</definition>
+        <argsstring>(const register_with_csv_sink &amp;)=default</argsstring>
+        <name>register_with_csv_sink</name>
+        <param>
+          <type>const <ref refid="classregister__with__csv__sink" kindref="compound">register_with_csv_sink</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_registerer.hpp" line="180" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classregister__with__csv__sink_1a13629790ddd32a8a6c3e4100a7cf8a7e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>register_with_csv_sink&lt; TExtraArgsType &gt;::register_with_csv_sink</definition>
+        <argsstring>(const rmconfig::csv_sink_config *const config, const creatable_collector_set &amp;set, base_metrics_manager *const m, Args &amp;&amp;... extra_args)</argsstring>
+        <name>register_with_csv_sink</name>
+        <param>
+          <type>const rmconfig::csv_sink_config *const</type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>const creatable_collector_set &amp;</type>
+          <declname>set</declname>
+        </param>
+        <param>
+          <type>base_metrics_manager *const</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>extra_args</declname>
+        </param>
+        <briefdescription>
+<para>Initialize the registerer for collectors configured with rmetrics::csv_sinks. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Metrics configuration. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>create_set</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Definitions for all the possible collectors to create. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>manager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The metrics manager to register the collectors with.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+We use a variadic template here to handle collectors which need extra args and those that don&apos;t transparently. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_registerer.hpp" line="170" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_registerer.hpp" bodystart="170" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="classregister__with__csv__sink_1a4afc3abb024558b941b9b594bb7c929a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TSink</type>
+          </param>
+        </templateparamlist>
+        <type>collector_registration_spec</type>
+        <definition>collector_registration_spec register_with_csv_sink&lt; TExtraArgsType &gt;::calc_registration_spec</definition>
+        <argsstring>(const std::string &amp;xml_name, const rmetrics::output_mode &amp;allowed) const</argsstring>
+        <name>calc_registration_spec</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>xml_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" kindref="member">rmetrics::output_mode</ref> &amp;</type>
+          <declname>allowed</declname>
+        </param>
+        <briefdescription>
+<para>Figure out: </para>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>If the selected output mode is valid for the specified collector.</para>
+</listitem><listitem><para>The appropriate filename output stem for the collector if the output mode is OK.</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="return"><para>collector_register_spec, or empty if the collector fails any pre-initialization checks. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_registerer.hpp" line="242" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_registerer.hpp" bodystart="242" bodyend="292"/>
+        <references refid="namespacercppsw_1a8947a64dc8b866fbf1b0e47526552828" compoundref="common_8hpp" startline="87" endline="89">rcppsw::as_underlying</references>
+        <references refid="er_2macros_8hpp_1abd0e460b9aa8c2ffef233474c3486dd1" compoundref="er_2macros_8hpp" startline="55">ER_ASSERT</references>
+        <references refid="classrcppsw_1_1metrics_1_1base__metrics__manager_1afef9ebd13206126daecdb87b67f43af6" compoundref="base__metrics__manager_8hpp" startline="68" endline="68">rcppsw::metrics::base_metrics_manager::metrics_path</references>
+      </memberdef>
+      <memberdef kind="function" id="classregister__with__csv__sink_1a608ffcb785303d15f1fe777fdf384da6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TSinkTypeWrapped</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void register_with_csv_sink&lt; TExtraArgsType &gt;::operator()</definition>
+        <argsstring>(const TSinkTypeWrapped &amp;)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const TSinkTypeWrapped &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_registerer.hpp" line="183" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_registerer.hpp" bodystart="183" bodyend="228"/>
+        <references refid="namespacercppsw_1a8947a64dc8b866fbf1b0e47526552828" compoundref="common_8hpp" startline="87" endline="89">rcppsw::as_underlying</references>
+        <references refid="er_2macros_8hpp_1abd0e460b9aa8c2ffef233474c3486dd1" compoundref="er_2macros_8hpp" startline="55">ER_ASSERT</references>
+        <references refid="er_2macros_8hpp_1aca509f60c625066554367ccf8150e10b" compoundref="er_2macros_8hpp" startline="66">ER_DEBUG</references>
+        <references refid="er_2macros_8hpp_1adcf63ebd51cba1bf7ec00484800bd728" compoundref="er_2macros_8hpp" startline="65">ER_INFO</references>
+        <references refid="er_2macros_8hpp_1a8fd8dc21eb70bd0c45fc5f2921a33b09" compoundref="er_2macros_8hpp" startline="64">ER_WARN</references>
+        <references refid="graph_8hpp_1a4e633e7afe9a1d85501061f88ef1f84f" compoundref="graph_8hpp" startline="100" endline="112">find</references>
+      </memberdef>
+      <memberdef kind="function" id="classregister__with__csv__sink_1a3b1702ca847a26c846df68da8a93774a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classregister__with__csv__sink" kindref="compound">register_with_csv_sink</ref> &amp;</type>
+        <definition>register_with_csv_sink&amp; register_with_csv_sink&lt; TExtraArgsType &gt;::operator=</definition>
+        <argsstring>(const register_with_csv_sink &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classregister__with__csv__sink" kindref="compound">register_with_csv_sink</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_registerer.hpp" line="179" column="26"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Register all collectors configured with rmetrics::csv_sink with a base_metrics_manager or a class derived from it. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>detail::register_by_sink&lt; void  &gt;</label>
+      </node>
+      <node id="3">
+        <label>rcppsw::er::client&lt; register_with_csv_sink&lt; void &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>register_with_csv_sink&lt; TExtraArgsType &gt;</label>
+        <link refid="classregister__with__csv__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>detail::register_by_sink&lt; void  &gt;</label>
+      </node>
+      <node id="3">
+        <label>rcppsw::er::client&lt; register_with_csv_sink&lt; void &gt; &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>register_with_csv_sink&lt; TExtraArgsType &gt;</label>
+        <link refid="classregister__with__csv__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_registerer.hpp" line="153" column="52" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/collector_registerer.hpp" bodystart="152" bodyend="297"/>
+    <listofallmembers>
+      <member refid="classregister__with__csv__sink_1a4afc3abb024558b941b9b594bb7c929a" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>calc_registration_spec</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>logging_init</name></member>
+      <member refid="classregister__with__csv__sink_1abe000409364cd7e1b46d5cb61bdd9544" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>mc_config</name></member>
+      <member refid="classregister__with__csv__sink_1a608ffcb785303d15f1fe777fdf384da6" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>operator()</name></member>
+      <member refid="classregister__with__csv__sink_1a3b1702ca847a26c846df68da8a93774a" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual" ambiguityscope="client&lt; register_with_csv_sink&lt; void &gt; &gt;::"><scope>register_with_csv_sink</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a7397a85f18f00a25a9aa8b822712bfea" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>pop_ndc</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a549446ba1beb41b347998dbdf031dc60" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>push_ndc</name></member>
+      <member refid="classregister__with__csv__sink_1a13629790ddd32a8a6c3e4100a7cf8a7e" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>register_with_csv_sink</name></member>
+      <member refid="classregister__with__csv__sink_1a21d08dcbc80c6ed98703e6521cc24c00" prot="public" virt="non-virtual"><scope>register_with_csv_sink</scope><name>register_with_csv_sink</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>register_with_csv_sink</scope><name>~client</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

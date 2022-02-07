@@ -1,0 +1,69 @@
+.TH "rcppsw::math::config::xml::rng_parser" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math::config::xml::rng_parser \- Parses XML configuration relating to RNG\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <rng_parser\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< rng_parser >\fP, and xml_config_parser\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBconfig_type\fP = \fBrng_config\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBrng_parser\fP (void)"
+.br
+.ti -1c
+.RI "void \fBparse\fP (const ticpp::Element &node) override"
+.br
+.ti -1c
+.RI "std::string \fBxml_root\fP (void) const override"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const std::string \fBkXMLRoot\fP = 'rng'"
+.br
+.RI "The root tag that all rng configuration values should lie under in the XML tree\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Parses XML configuration relating to RNG\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "using \fBrcppsw::math::config::xml::rng_parser::config_type\fP =  \fBrng_config\fP"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::math::config::xml::rng_parser::rng_parser (void)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void rcppsw::math::config::xml::rng_parser::parse (const ticpp::Element & node)\fC [override]\fP"
+
+.SS "std::string rcppsw::math::config::xml::rng_parser::xml_root (void) const\fC [inline]\fP, \fC [override]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "const std::string rcppsw::math::config::xml::rng_parser::kXMLRoot = 'rng'\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+The root tag that all rng configuration values should lie under in the XML tree\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

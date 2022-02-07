@@ -1,0 +1,131 @@
+.TH "rcppsw::ds::grid3D_overlay< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::grid3D_overlay< T > \- A 3D logical grid overlayed over a continuous environment using a \fIcontiguous\fP array of the template parameter type (\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <grid3D_overlay\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::ds::base_grid3D< T >\fP, \fBrcppsw::ds::base_grid_overlay< math::vector3d >\fP, and \fBrcppsw::er::client< grid3D_overlay< T > >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgrid3D_overlay\fP (const \fBmath::vector3d\fP &origin, const \fBmath::vector3d\fP &dim, const \fBtypes::discretize_ratio\fP &grid_res, const \fBtypes::discretize_ratio\fP &field_res)"
+.br
+.ti -1c
+.RI "virtual \fB~grid3D_overlay\fP (void)=default"
+.br
+.ti -1c
+.RI "T & \fBaccess\fP (size_t i, size_t j, size_t k) override"
+.br
+.RI "Return a reference to the element at position (i, j) in the grid\&. "
+.ti -1c
+.RI "\fBcoord_type\fP \fBddims3D\fP (void) const"
+.br
+.RI "Get the discrete dimensions of the grid\&. "
+.ti -1c
+.RI "const \fBmath::vector3d\fP & \fBrdims3D\fP (void) const"
+.br
+.RI "Get the real dimensions of the grid; that is, continuous floating point\&. "
+.ti -1c
+.RI "size_t \fBxdsize\fP (void) const"
+.br
+.RI "Get the discrete size of the X dimension of the grid (i\&.e\&. what is the array index in X?) "
+.ti -1c
+.RI "double \fBxrsize\fP (void) const"
+.br
+.RI "Get the size of the X dimension (non-discretized)\&. "
+.ti -1c
+.RI "size_t \fBydsize\fP (void) const"
+.br
+.RI "Get the discrete size of the Y dimension of the grid (i\&.e\&. what is the array index in Y?) "
+.ti -1c
+.RI "double \fByrsize\fP (void) const"
+.br
+.RI "Get the size of the Y dimension (non-discretized)\&. "
+.ti -1c
+.RI "size_t \fBzdsize\fP (void) const"
+.br
+.RI "Get the discrete size of the Z dimension of the grid (i\&.e\&. what is the array index in Z?) "
+.ti -1c
+.RI "double \fBzrsize\fP (void) const"
+.br
+.RI "Get the size of the Y dimension (non-discretized)\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::ds::grid3D_overlay< T >"
+A 3D logical grid overlayed over a continuous environment using a \fIcontiguous\fP array of the template parameter type (\&. 
+
+
+.PP
+\fBSee also\fP
+.RS 4
+\fBbase_grid_overlay\fP)\&.
+.RE
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIT\fP The type of the grid element (probably a cell of some kind)\&. Must have must have a zero parameter constructor available or it won't compile (this is a limitation of the boost underneath)\&. Furthermore, T must also have a copy constructor available, as move semantics are not supported with the underlying library\&. 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::ds::grid3D_overlay\fP< T >::\fBgrid3D_overlay\fP (const \fBmath::vector3d\fP & origin, const \fBmath::vector3d\fP & dim, const \fBtypes::discretize_ratio\fP & grid_res, const \fBtypes::discretize_ratio\fP & field_res)\fC [inline]\fP"
+
+.SS "template<typename T > virtual \fBrcppsw::ds::grid3D_overlay\fP< T >::~\fBgrid3D_overlay\fP (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > T& \fBrcppsw::ds::grid3D_overlay\fP< T >::access (size_t i, size_t j, size_t k)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Return a reference to the element at position (i, j) in the grid\&. This is provided in the base class so that the pointer/object variants of the grid (\fBgrid3D\fP, etc\&.) can reduce code duplication\&. 
+.PP
+Implements \fBrcppsw::ds::base_grid3D< T >\fP\&.
+.SS "template<typename T > \fBcoord_type\fP \fBrcppsw::ds::grid3D_overlay\fP< T >::ddims3D (void) const\fC [inline]\fP"
+
+.PP
+Get the discrete dimensions of the grid\&. 
+.SS "template<typename T > const \fBmath::vector3d\fP& \fBrcppsw::ds::grid3D_overlay\fP< T >::rdims3D (void) const\fC [inline]\fP"
+
+.PP
+Get the real dimensions of the grid; that is, continuous floating point\&. 
+.SS "template<typename T > size_t \fBrcppsw::ds::grid3D_overlay\fP< T >::xdsize (void) const\fC [inline]\fP"
+
+.PP
+Get the discrete size of the X dimension of the grid (i\&.e\&. what is the array index in X?) 
+.SS "template<typename T > double \fBrcppsw::ds::grid3D_overlay\fP< T >::xrsize (void) const\fC [inline]\fP"
+
+.PP
+Get the size of the X dimension (non-discretized)\&. 
+.SS "template<typename T > size_t \fBrcppsw::ds::grid3D_overlay\fP< T >::ydsize (void) const\fC [inline]\fP"
+
+.PP
+Get the discrete size of the Y dimension of the grid (i\&.e\&. what is the array index in Y?) 
+.SS "template<typename T > double \fBrcppsw::ds::grid3D_overlay\fP< T >::yrsize (void) const\fC [inline]\fP"
+
+.PP
+Get the size of the Y dimension (non-discretized)\&. 
+.SS "template<typename T > size_t \fBrcppsw::ds::grid3D_overlay\fP< T >::zdsize (void) const\fC [inline]\fP"
+
+.PP
+Get the discrete size of the Z dimension of the grid (i\&.e\&. what is the array index in Z?) 
+.SS "template<typename T > double \fBrcppsw::ds::grid3D_overlay\fP< T >::zrsize (void) const\fC [inline]\fP"
+
+.PP
+Get the size of the Y dimension (non-discretized)\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

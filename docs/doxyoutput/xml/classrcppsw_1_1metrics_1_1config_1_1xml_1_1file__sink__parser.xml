@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::metrics::config::xml::file_sink_parser</compoundname>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; file_sink_parser &gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">base_sink_parser</basecompoundref>
+    <includes refid="file__sink__parser_8hpp" local="no">file_sink_parser.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a820ee9512ccfe5ad63efa6091a9c3c6d" prot="public" static="no">
+        <type><ref refid="structrcppsw_1_1metrics_1_1config_1_1file__sink__config" kindref="compound">file_sink_config</ref></type>
+        <definition>using rcppsw::metrics::config::xml::file_sink_parser::config_type =  file_sink_config</definition>
+        <argsstring></argsstring>
+        <name>config_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" line="56" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a18a61416e6e5eafcbc56d1d88789f59e" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string rcppsw::metrics::config::xml::file_sink_parser::kXMLRoot</definition>
+        <argsstring></argsstring>
+        <name>kXMLRoot</name>
+        <initializer>= &quot;file&quot;</initializer>
+        <briefdescription>
+<para>The root tag that all configuration relating to the .file metrics sink should in lie under in the XML tree. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" line="67" column="35" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a762e05ba8cf71c75d40cc9a93e6c66c4" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a820ee9512ccfe5ad63efa6091a9c3c6d" kindref="member">config_type</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;config_type&gt; rcppsw::metrics::config::xml::file_sink_parser::m_config</definition>
+        <argsstring></argsstring>
+        <name>m_config</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" line="79" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a78f9425da7dc1e2d64c6abfb140e9841" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::config::xml::file_sink_parser::file_sink_parser</definition>
+        <argsstring>(void)</argsstring>
+        <name>file_sink_parser</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" line="58" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" bodystart="58" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a0c95246765647f7d338a201ee3884e92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::config::xml::file_sink_parser::~file_sink_parser</definition>
+        <argsstring>(void) override=default</argsstring>
+        <name>~file_sink_parser</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" line="61" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a8175c977c7363766f325ddf2f08b00db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::config::xml::file_sink_parser::parse</definition>
+        <argsstring>(const ticpp::Element &amp;node) override</argsstring>
+        <name>parse</name>
+        <param>
+          <type>const ticpp::Element &amp;</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" line="69" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a1086ac8aa85266727196e9a6e753d405" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string rcppsw::metrics::config::xml::file_sink_parser::xml_root</definition>
+        <argsstring>(void) const override</argsstring>
+        <name>xml_root</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" line="71" column="16" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" bodystart="71" bodyend="71"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a3826f11fccec7028a06a5cddde77ded1" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="structrcppsw_1_1config_1_1base__config" kindref="compound">rconfig::base_config</ref> *</type>
+        <definition>const rconfig::base_config* rcppsw::metrics::config::xml::file_sink_parser::config_get_impl</definition>
+        <argsstring>(void) const override</argsstring>
+        <name>config_get_impl</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" line="74" column="31" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" bodystart="74" bodyend="76"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Parses XML parameters related to the rmetrics::file_sink into <ref refid="structrcppsw_1_1metrics_1_1config_1_1file__sink__config" kindref="compound">file_sink_config</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>rmetrics::config::xml::base_sink_parser</label>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; file_sink_parser &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::config::xml::file_sink_parser</label>
+        <link refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>rmetrics::config::xml::base_sink_parser</label>
+      </node>
+      <node id="5">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="2">
+        <label>rcppsw::er::client&lt; file_sink_parser &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::config::xml::file_sink_parser</label>
+        <link refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+kXMLRoot</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::string</label>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" line="54" column="72" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/file_sink_parser.hpp" bodystart="53" bodyend="81"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a3826f11fccec7028a06a5cddde77ded1" prot="private" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>config_get_impl</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a820ee9512ccfe5ad63efa6091a9c3c6d" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>config_type</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a78f9425da7dc1e2d64c6abfb140e9841" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>file_sink_parser</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a18a61416e6e5eafcbc56d1d88789f59e" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>kXMLRoot</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a762e05ba8cf71c75d40cc9a93e6c66c4" prot="private" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>m_config</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a8175c977c7363766f325ddf2f08b00db" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>parse</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a1086ac8aa85266727196e9a6e753d405" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>xml_root</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>~client</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1config_1_1xml_1_1file__sink__parser_1a0c95246765647f7d338a201ee3884e92" prot="public" virt="non-virtual"><scope>rcppsw::metrics::config::xml::file_sink_parser</scope><name>~file_sink_parser</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

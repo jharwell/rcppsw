@@ -50,7 +50,11 @@ namespace rcppsw {
 /**
  * \brief Base metric interfaces and the collectors for them.
  */
-namespace metrics {}
+namespace metrics {
+namespace config {
+namespace xml {}
+}
+}
 
 /**
  * \brief Design pattern templates and interfaces.
@@ -95,7 +99,6 @@ namespace singleton {}
 namespace pimpl {}
 } /* namespace patterns */
 
-
 /**
  * \brief Pure mathematical classes such as vectors, ranges, sigmoids, etc.
 */
@@ -124,8 +127,10 @@ namespace er {}
 namespace control {}
 
 /**
- * \brief Base namespace for run-time configuration. Currently includes base
- * class implementations for: XML.
+ * \brief Base namespace for run-time configuration parsing and data
+ * containers. Currently includes base class implementations for:
+ *
+ * - XML
  */
 namespace config {}
 
@@ -134,7 +139,13 @@ namespace config {}
  * overlay onto continuous space, Poisson queue, rtree for 2D space,
  * heterogeneous stacked 2D grid, type map for using in C++ quasi-reflection.
  */
-namespace ds {}
+namespace ds {
+/**
+ * \brief Graph data structures: Heterogeneous 3D grid graph.
+ */
+namespace graph {}
+namespace metrics {}
+}
 
 /**
  * \brief Meta programming namespace. Mainly a few aliases around things which
@@ -166,9 +177,13 @@ namespace multithread {}
  */
 namespace multiprocess {}
 
+namespace al {}
 } /* namespace rcppsw */
 
 namespace rmetrics = rcppsw::metrics;
+namespace rmconfig = rmetrics::config;
+namespace rmcxml = rmconfig::xml;
+
 namespace rtypes = rcppsw::types;
 namespace rmath = rcppsw::math;
 namespace ralg = rcppsw::algorithm;
@@ -176,13 +191,18 @@ namespace rutils = rcppsw::utils;
 namespace rer = rcppsw::er;
 namespace rct = rcppsw::control;
 namespace rconfig = rcppsw::config;
-namespace rds = rcppsw::ds;
 namespace rmpl = rcppsw::mpl;
 namespace rcontrol = rcppsw::control;
 namespace rmultithread = rcppsw::multithread;
 
 namespace ralgorithm = rcppsw::algorithm;
 namespace raclustering = ralgorithm::clustering;
+
+namespace rds = rcppsw::ds;
+namespace rdmetrics = rds::metrics;
+namespace rdgraph = rds::graph;
+
+namespace ral = rcppsw::al;
 
 namespace rpfsm = rcppsw::patterns::fsm;
 namespace rpvisitor = rcppsw::patterns::visitor;

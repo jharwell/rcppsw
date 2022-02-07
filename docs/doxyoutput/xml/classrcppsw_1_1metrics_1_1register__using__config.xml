@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1metrics_1_1register__using__config" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::metrics::register_using_config</compoundname>
+    <includes refid="register__using__config_8hpp" local="no">register_using_config.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TSinkRegisterer</type>
+      </param>
+      <param>
+        <type>typename TConfig</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1register__using__config_1ac04ef60e32ba12ffdad422fe369b0855" prot="private" static="no" mutable="no">
+        <type>TSinkRegisterer</type>
+        <definition>TSinkRegisterer rcppsw::metrics::register_using_config&lt; TSinkRegisterer, TConfig &gt;::m_registerer</definition>
+        <argsstring></argsstring>
+        <name>m_registerer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_using_config.hpp" line="76" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_using_config.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1register__using__config_1afe41854d45b9e9029d88cde9408061a4" prot="private" static="no" mutable="no">
+        <type>const TConfig *</type>
+        <definition>const TConfig* rcppsw::metrics::register_using_config&lt; TSinkRegisterer, TConfig &gt;::mc_config</definition>
+        <argsstring></argsstring>
+        <name>mc_config</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_using_config.hpp" line="74" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_using_config.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1register__using__config_1a9e69d369ed3f4494b4d0ef5568b537ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::register_using_config&lt; TSinkRegisterer, TConfig &gt;::register_using_config</definition>
+        <argsstring>(const register_using_config &amp;)=default</argsstring>
+        <name>register_using_config</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1register__using__config" kindref="compound">register_using_config</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_using_config.hpp" line="65" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1register__using__config_1a73390b2a85706f6212b88b7abb669b83" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::register_using_config&lt; TSinkRegisterer, TConfig &gt;::register_using_config</definition>
+        <argsstring>(const TSinkRegisterer &amp;&amp;registerer, const TConfig *config)</argsstring>
+        <name>register_using_config</name>
+        <param>
+          <type>const TSinkRegisterer &amp;&amp;</type>
+          <declname>registerer</declname>
+        </param>
+        <param>
+          <type>const TConfig *</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_using_config.hpp" line="59" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_using_config.hpp" bodystart="59" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1register__using__config_1a125f562d60b1d2ce2011c5868e286494" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TPair</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::metrics::register_using_config&lt; TSinkRegisterer, TConfig &gt;::operator()</definition>
+        <argsstring>(const TPair &amp;pair)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const TPair &amp;</type>
+          <declname>pair</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_using_config.hpp" line="68" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_using_config.hpp" bodystart="68" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1register__using__config_1a40c0a445f3768cb2bf912face4fe07b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1metrics_1_1register__using__config" kindref="compound">register_using_config</ref> &amp;</type>
+        <definition>register_using_config&amp; rcppsw::metrics::register_using_config&lt; TSinkRegisterer, TConfig &gt;::operator=</definition>
+        <argsstring>(const register_using_config &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1metrics_1_1register__using__config" kindref="compound">register_using_config</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_using_config.hpp" line="64" column="25"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>After enabled collectors have been parsed from an XML input file, register the enabled collectors with a <ref refid="classrcppsw_1_1metrics_1_1base__manager" kindref="compound">base_manager</ref> or a class derived from it. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This is a separate class from register_by_sink so you don&apos;t ALWAYS have to pass it a list of extra arguments for building some finicky metrics collectors. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::metrics::register_using_config&lt; TSinkRegisterer, TConfig &gt;</label>
+        <link refid="classrcppsw_1_1metrics_1_1register__using__config"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_using_config.hpp" line="57" column="28" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/register_using_config.hpp" bodystart="57" bodyend="78"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1metrics_1_1register__using__config_1ac04ef60e32ba12ffdad422fe369b0855" prot="private" virt="non-virtual"><scope>rcppsw::metrics::register_using_config</scope><name>m_registerer</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__using__config_1afe41854d45b9e9029d88cde9408061a4" prot="private" virt="non-virtual"><scope>rcppsw::metrics::register_using_config</scope><name>mc_config</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__using__config_1a125f562d60b1d2ce2011c5868e286494" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_using_config</scope><name>operator()</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__using__config_1a40c0a445f3768cb2bf912face4fe07b8" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_using_config</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__using__config_1a73390b2a85706f6212b88b7abb669b83" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_using_config</scope><name>register_using_config</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1register__using__config_1a9e69d369ed3f4494b4d0ef5568b537ff" prot="public" virt="non-virtual"><scope>rcppsw::metrics::register_using_config</scope><name>register_using_config</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

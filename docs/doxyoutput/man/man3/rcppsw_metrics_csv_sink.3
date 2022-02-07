@@ -1,0 +1,213 @@
+.TH "rcppsw::metrics::csv_sink" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::csv_sink \- Metrics sink so that collectors can output their metrics to a \fC\fP\&.csv file\&. Metrics are written out in \&.csv format at whatever frequency derived classes choose\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <csv_sink\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::metrics::file_sink\fP, and \fBrcppsw::er::client< csv_sink >\fP\&.
+.PP
+Inherited by \fBrcppsw::ds::metrics::grid2D_metrics_csv_sink< TCellOp >\fP, and \fBrcppsw::ds::metrics::grid3D_metrics_csv_sink< TCellOp >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBcsv_sink\fP (fs::path \fBfpath\fP, const \fBrmetrics::output_mode\fP &mode, const \fBrtypes::timestep\fP &interval)"
+.br
+.ti -1c
+.RI "virtual \fB~csv_sink\fP (void)=default"
+.br
+.ti -1c
+.RI "void \fBfinalize\fP (void) override"
+.br
+.RI "Finalize metrics and flush files in preparation for program exit\&. "
+.ti -1c
+.RI "\fBwrite_status\fP \fBflush\fP (const \fBrmetrics::base_data\fP *data, const \fBrtypes::timestep\fP &t) override"
+.br
+.RI "Flush gathered metrics data to file; might do nothing if the internal conditions for writing metrics (e\&.g\&., the configured interval) are not met\&. "
+.ti -1c
+.RI "void \fBinitialize\fP (const \fBrmetrics::base_data\fP *data) override"
+.br
+.RI "Initialize any required files for the metrics sink (i\&.e\&., \&.csv headers)\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<class T , class U > std::string \fBcsv_entry_domavg\fP (const T &sum, const U &count, bool last=false) const"
+.br
+.RI "Return a string of the average value of a sum of SOMETHING divided by a COUNT + separator (if the csv entry is not the last one in a line)\&. If the count is 0, then '0' + separator (if the csv entry is not the last one in a line) is returned\&. "
+.ti -1c
+.RI "template<class T > std::string \fBcsv_entry_intavg\fP (const T &sum, bool last=false) const"
+.br
+.RI "Return a string of the average value of a sum of SOMETHING over an interval (using the value of \fBinterval()\fP) + \fBseparator()\fP (if the csv entry is not the last one in a line)\&. "
+.ti -1c
+.RI "template<class T > std::string \fBcsv_entry_tsavg\fP (const T &sum, const \fBrtypes::timestep\fP &t, bool last=false) const"
+.br
+.RI "Return a string of the average value of a sum of SOMETHING over the elapsed simulation time so far (using the value of \fBtimestep()\fP) + \fBseparator()\fP (if the csv entry is not the last one in a line)\&. "
+.ti -1c
+.RI "virtual std::list< std::string > \fBcsv_header_cols\fP (const \fBrmetrics::base_data\fP *data) const =0"
+.br
+.RI "Return a list of additional columns that should be in the emitted \&.csv file for the sink\&. "
+.ti -1c
+.RI "void \fBcsv_header_write\fP (const \fBrmetrics::base_data\fP *data)"
+.br
+.RI "Construct and write out the \&.csv header\&. "
+.ti -1c
+.RI "virtual boost::optional< std::string > \fBcsv_line_build\fP (const \fBrmetrics::base_data\fP *data, const \fBrtypes::timestep\fP &t)=0"
+.br
+.RI "Build the next line of metrics\&. "
+.ti -1c
+.RI "std::list< std::string > \fBdflt_csv_header_cols\fP (void) const"
+.br
+.RI "Return a list of default columns that should be include in (almost) all emitted \&.csv files for the sink\&. "
+.ti -1c
+.RI "const std::string & \fBseparator\fP (void) const"
+.br
+.RI "Return the separator used to separate \&.csv entries from each other\&. "
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "const std::string \fBmc_separator\fP {';'}"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Metrics sink so that collectors can output their metrics to a \fC\fP\&.csv file\&. Metrics are written out in \&.csv format at whatever frequency derived classes choose\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::metrics::csv_sink::csv_sink (fs::path fpath, const \fBrmetrics::output_mode\fP & mode, const \fBrtypes::timestep\fP & interval)"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIfpath\fP Full path to output file, sans the \fC\fP\&.csv extension\&. 
+.br
+\fImode\fP The output mode\&. See \fBoutput_mode\fP for possible values\&. 
+.RE
+.PP
+
+.SS "virtual rcppsw::metrics::csv_sink::~csv_sink (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T , class U > std::string rcppsw::metrics::csv_sink::csv_entry_domavg (const T & sum, const U & count, bool last = \fCfalse\fP) const\fC [inline]\fP, \fC [protected]\fP"
+
+.PP
+Return a string of the average value of a sum of SOMETHING divided by a COUNT + separator (if the csv entry is not the last one in a line)\&. If the count is 0, then '0' + separator (if the csv entry is not the last one in a line) is returned\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsum\fP The count of SOMETHING\&. 
+.br
+\fIcount\fP The divisor for the SOMETHING\&. 
+.br
+\fIlast\fP Is this the last column in the \&.csv row? 
+.RE
+.PP
+
+.SS "template<class T > std::string rcppsw::metrics::csv_sink::csv_entry_intavg (const T & sum, bool last = \fCfalse\fP) const\fC [inline]\fP, \fC [protected]\fP"
+
+.PP
+Return a string of the average value of a sum of SOMETHING over an interval (using the value of \fBinterval()\fP) + \fBseparator()\fP (if the csv entry is not the last one in a line)\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsum\fP The count of SOMETHING\&. 
+.br
+\fIlast\fP Is this the last column in the \&.csv row? 
+.RE
+.PP
+
+.SS "template<class T > std::string rcppsw::metrics::csv_sink::csv_entry_tsavg (const T & sum, const \fBrtypes::timestep\fP & t, bool last = \fCfalse\fP) const\fC [inline]\fP, \fC [protected]\fP"
+
+.PP
+Return a string of the average value of a sum of SOMETHING over the elapsed simulation time so far (using the value of \fBtimestep()\fP) + \fBseparator()\fP (if the csv entry is not the last one in a line)\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsum\fP The count of SOMETHING\&. 
+.br
+\fIlast\fP Is this the last column in the \&.csv row? 
+.RE
+.PP
+
+.SS "virtual std::list<std::string> rcppsw::metrics::csv_sink::csv_header_cols (const \fBrmetrics::base_data\fP * data) const\fC [protected]\fP, \fC [pure virtual]\fP"
+
+.PP
+Return a list of additional columns that should be in the emitted \&.csv file for the sink\&. 
+.PP
+\fBReturns\fP
+.RS 4
+a list of the names of the columns for the \&.csv\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBrcppsw::ds::metrics::grid3D_metrics_csv_sink< TCellOp >\fP, and \fBrcppsw::ds::metrics::grid2D_metrics_csv_sink< TCellOp >\fP\&.
+.SS "void rcppsw::metrics::csv_sink::csv_header_write (const \fBrmetrics::base_data\fP * data)\fC [protected]\fP"
+
+.PP
+Construct and write out the \&.csv header\&. 
+.SS "virtual boost::optional<std::string> rcppsw::metrics::csv_sink::csv_line_build (const \fBrmetrics::base_data\fP * data, const \fBrtypes::timestep\fP & t)\fC [protected]\fP, \fC [pure virtual]\fP"
+
+.PP
+Build the next line of metrics\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The line that should be added to the \&.csv file, or empty if the necessary conditions are not met\&. This allows metrics to be gathered across multiple timesteps, but only written out once an interesting event has occurred\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBrcppsw::ds::metrics::grid3D_metrics_csv_sink< TCellOp >\fP, and \fBrcppsw::ds::metrics::grid2D_metrics_csv_sink< TCellOp >\fP\&.
+.SS "std::list<std::string> rcppsw::metrics::csv_sink::dflt_csv_header_cols (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+.PP
+Return a list of default columns that should be include in (almost) all emitted \&.csv files for the sink\&. 
+.PP
+\fBReturns\fP
+.RS 4
+A list of the names of the default header columns for the \&.csv, which is: [clock]\&. 
+.RE
+.PP
+
+.SS "void rcppsw::metrics::csv_sink::finalize (void)\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Finalize metrics and flush files in preparation for program exit\&. 
+.PP
+Implements \fBrcppsw::metrics::base_sink\fP\&.
+.SS "\fBwrite_status\fP rcppsw::metrics::csv_sink::flush (const \fBrmetrics::base_data\fP * data, const \fBrtypes::timestep\fP & t)\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Flush gathered metrics data to file; might do nothing if the internal conditions for writing metrics (e\&.g\&., the configured interval) are not met\&. 
+.PP
+Implements \fBrcppsw::metrics::base_sink\fP\&.
+.SS "void rcppsw::metrics::csv_sink::initialize (const \fBrmetrics::base_data\fP * data)\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Initialize any required files for the metrics sink (i\&.e\&., \&.csv headers)\&. 
+.PP
+Implements \fBrcppsw::metrics::base_sink\fP\&.
+.SS "const std::string& rcppsw::metrics::csv_sink::separator (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+.PP
+Return the separator used to separate \&.csv entries from each other\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "const std::string rcppsw::metrics::csv_sink::mc_separator {';'}\fC [protected]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

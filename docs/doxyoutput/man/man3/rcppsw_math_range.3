@@ -1,0 +1,225 @@
+.TH "rcppsw::math::range< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math::range< T > \- Convenience class holding a [min, max] range\&. Makes comparisons like 'is this number in this range' much more intuitive and easy to debug\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <range\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< range< T > >\fP, and \fBrcppsw::er::stringizable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBrange\fP (const T &\fBlb\fP, const T &\fBub\fP) noexcept"
+.br
+.ti -1c
+.RI "\fBrange\fP (void) noexcept"
+.br
+.ti -1c
+.RI "T \fBcenter\fP (void) const"
+.br
+.RI "Get the midpoint of the range\&. "
+.ti -1c
+.RI "bool \fBcontains\fP (const \fBrange\fP< T > &other) const"
+.br
+.RI "Determine if one range completely contains another (boundary points are included with both ranges)\&. "
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBcontains\fP (const T &value) const"
+.br
+.RI "Determine if a value is within the range [lb, ub] (boundary points included)\&. "
+.ti -1c
+.RI "template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> bool \fBcontains\fP (const T &value) const"
+.br
+.ti -1c
+.RI "void \fBlb\fP (const T &lb)"
+.br
+.RI "Set the range lower bound\&. It must be less than the current \fBub()\fP or an assertion will trigger\&. "
+.ti -1c
+.RI "T \fBlb\fP (void) const"
+.br
+.RI "Get the lower bound of the range\&. "
+.ti -1c
+.RI "bool \fBoverlaps_with\fP (const \fBrange\fP< T > &other) const"
+.br
+.RI "Determine if one range overlaps with another\&. "
+.ti -1c
+.RI "\fBrange\fP \fBrecenter\fP (const T &value) const"
+.br
+.RI "Re-center the current range around the specified value, returning a new range centered at that value\&. "
+.ti -1c
+.RI "void \fBset\fP (const T &\fBlb\fP, const T &\fBub\fP)"
+.br
+.RI "Set the \fBlb()\fP and \fBub()\fP for the range simultaneously\&. The lb must be < ub or an assertion will trigger\&. "
+.ti -1c
+.RI "\fBrange\fP \fBshrink\fP (const T &value) const"
+.br
+.RI "Shrink the current range in both directions with the specified value, returning a new range resulting from the shrink\&. "
+.ti -1c
+.RI "T \fBspan\fP (void) const"
+.br
+.RI "Get the size of the range (max - max)\&. "
+.ti -1c
+.RI "std::string \fBto_str\fP (void) const override"
+.br
+.RI "Return a string representation of the range in the form of '[lb,ub]'\&. "
+.ti -1c
+.RI "\fBrange\fP \fBtranslate\fP (const T &value) const"
+.br
+.RI "Translate the current range to the specified value, returning a new range resulting from the translation\&. "
+.ti -1c
+.RI "void \fBub\fP (const T &ub)"
+.br
+.RI "Set the range upper bound\&. It must be greater than the current \fBlb()\fP or an assertion will trigger\&. "
+.ti -1c
+.RI "T \fBub\fP (void) const"
+.br
+.RI "Get the upper bound of the range\&. "
+.ti -1c
+.RI "T \fBwrap_value\fP (T value) const"
+.br
+.RI "Wrap the specified value into the range [min, max] using wrap around addition/subtraction\&. "
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &stream, const \fBrange\fP &c_range)"
+.br
+.ti -1c
+.RI "std::istream & \fBoperator>>\fP (std::istream &is, \fBrange\fP &r)"
+.br
+.RI "For parsing a range from a string in the form of \fC'LB:UB'\fP\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::math::range< T >"
+Convenience class holding a [min, max] range\&. Makes comparisons like 'is this number in this range' much more intuitive and easy to debug\&. 
+
+If you use the default constructor you must call \fBset()\fP or read initialization from a stream before calling any member functions to avoid undefined behavior\&.
+.PP
+To call any member functions other than \fBlb()\fP and \fBub()\fP, the range must be non-empty, meaning that the min must not be equal to the max (if it is an assertion will trigger)\&.
+.PP
+No mutator functions are provided beyond setters, with the idea that ranges should generally be read-only\&. If you want to modify a range (e\&.g\&., \fBtranslate()\fP it), a new range should be returned and the original range be unmodified\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::math::range\fP< T >::\fBrange\fP (void)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.SS "template<typename T > \fBrcppsw::math::range\fP< T >::\fBrange\fP (const T & lb, const T & ub)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > T \fBrcppsw::math::range\fP< T >::center (void) const\fC [inline]\fP"
+
+.PP
+Get the midpoint of the range\&. For integer ranges where \fBspan()\fP is odd, this will truncate (i\&.e\&., the centerpoint is always of type \fCT\fP)\&. 
+.SS "template<typename T > bool \fBrcppsw::math::range\fP< T >::contains (const \fBrange\fP< T > & other) const\fC [inline]\fP"
+
+.PP
+Determine if one range completely contains another (boundary points are included with both ranges)\&. 
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0> bool \fBrcppsw::math::range\fP< T >::contains (const T & value) const\fC [inline]\fP"
+
+.PP
+Determine if a value is within the range [lb, ub] (boundary points included)\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvalue\fP The value to test\&. 
+.RE
+.PP
+
+.SS "template<typename T > template<typename U  = T, typename std::enable_if<(std::is_floating_point< U >::value), int >::type  = 0> bool \fBrcppsw::math::range\fP< T >::contains (const T & value) const\fC [inline]\fP"
+
+.SS "template<typename T > void \fBrcppsw::math::range\fP< T >::lb (const T & lb)\fC [inline]\fP"
+
+.PP
+Set the range lower bound\&. It must be less than the current \fBub()\fP or an assertion will trigger\&. 
+.SS "template<typename T > T \fBrcppsw::math::range\fP< T >::lb (void) const\fC [inline]\fP"
+
+.PP
+Get the lower bound of the range\&. 
+.SS "template<typename T > bool \fBrcppsw::math::range\fP< T >::overlaps_with (const \fBrange\fP< T > & other) const\fC [inline]\fP"
+
+.PP
+Determine if one range overlaps with another\&. Overlap is a commutative calculation (i\&.e\&. overlap(A,B) <-> overlap(B,A))\&.
+.PP
+To implement this, we need to check if either bound of the argument is contained in our range, AND if either of our bounds are contained in the argument's range\&. The second part is necessary if A is completely contained inside B in order for the calculation to be commutative\&. 
+.SS "template<typename T > \fBrange\fP \fBrcppsw::math::range\fP< T >::recenter (const T & value) const\fC [inline]\fP"
+
+.PP
+Re-center the current range around the specified value, returning a new range centered at that value\&. 
+.SS "template<typename T > void \fBrcppsw::math::range\fP< T >::set (const T & lb, const T & ub)\fC [inline]\fP"
+
+.PP
+Set the \fBlb()\fP and \fBub()\fP for the range simultaneously\&. The lb must be < ub or an assertion will trigger\&. 
+.SS "template<typename T > \fBrange\fP \fBrcppsw::math::range\fP< T >::shrink (const T & value) const\fC [inline]\fP"
+
+.PP
+Shrink the current range in both directions with the specified value, returning a new range resulting from the shrink\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The shrunken range\&. 
+.RE
+.PP
+
+.SS "template<typename T > T \fBrcppsw::math::range\fP< T >::span (void) const\fC [inline]\fP"
+
+.PP
+Get the size of the range (max - max)\&. 
+.SS "template<typename T > std::string \fBrcppsw::math::range\fP< T >::to_str (void) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Return a string representation of the range in the form of '[lb,ub]'\&. 
+.PP
+Reimplemented from \fBrcppsw::er::stringizable\fP\&.
+.SS "template<typename T > \fBrange\fP \fBrcppsw::math::range\fP< T >::translate (const T & value) const\fC [inline]\fP"
+
+.PP
+Translate the current range to the specified value, returning a new range resulting from the translation\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The new translated range\&. 
+.RE
+.PP
+
+.SS "template<typename T > void \fBrcppsw::math::range\fP< T >::ub (const T & ub)\fC [inline]\fP"
+
+.PP
+Set the range upper bound\&. It must be greater than the current \fBlb()\fP or an assertion will trigger\&. 
+.SS "template<typename T > T \fBrcppsw::math::range\fP< T >::ub (void) const\fC [inline]\fP"
+
+.PP
+Get the upper bound of the range\&. 
+.SS "template<typename T > T \fBrcppsw::math::range\fP< T >::wrap_value (T value) const\fC [inline]\fP"
+
+.PP
+Wrap the specified value into the range [min, max] using wrap around addition/subtraction\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The wrapped value\&. 
+.RE
+.PP
+
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "template<typename T > std::ostream& operator<< (std::ostream & stream, const \fBrange\fP< T > & c_range)\fC [friend]\fP"
+
+.SS "template<typename T > std::istream& operator>> (std::istream & is, \fBrange\fP< T > & r)\fC [friend]\fP"
+
+.PP
+For parsing a range from a string in the form of \fC'LB:UB'\fP\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

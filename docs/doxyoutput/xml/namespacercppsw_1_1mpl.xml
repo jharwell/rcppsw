@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1mpl" kind="namespace" language="C++">
+    <compoundname>rcppsw::mpl</compoundname>
+    <innerclass refid="structrcppsw_1_1mpl_1_1can__static__cast" prot="public">rcppsw::mpl::can_static_cast</innerclass>
+    <innerclass refid="structrcppsw_1_1mpl_1_1can__static__cast_3_01T_00_01U_00_01std_1_1void__t_3_01decltype_07static_37ec0c91c9199650d131864804302a11" prot="public">rcppsw::mpl::can_static_cast&lt; T, U, std::void_t&lt; decltype(static_cast&lt; U &gt;(std::declval&lt; T &gt;()))&gt; &gt;</innerclass>
+    <innerclass refid="structrcppsw_1_1mpl_1_1identity" prot="public">rcppsw::mpl::identity</innerclass>
+    <innerclass refid="structrcppsw_1_1mpl_1_1is__specialization" prot="public">rcppsw::mpl::is_specialization</innerclass>
+    <innerclass refid="structrcppsw_1_1mpl_1_1is__specialization_3_01Template_3_01Args_8_8_8_01_4_00_01Template_01_4" prot="public">rcppsw::mpl::is_specialization&lt; Template&lt; Args... &gt;, Template &gt;</innerclass>
+    <innerclass refid="structrcppsw_1_1mpl_1_1no__such__trait" prot="public">rcppsw::mpl::no_such_trait</innerclass>
+    <innerclass refid="classrcppsw_1_1mpl_1_1reflectable" prot="public">rcppsw::mpl::reflectable</innerclass>
+    <innerclass refid="structrcppsw_1_1mpl_1_1typelist__wrap__into" prot="public">rcppsw::mpl::typelist_wrap_into</innerclass>
+    <innernamespace refid="namespacercppsw_1_1mpl_1_1detail">rcppsw::mpl::detail</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacercppsw_1_1mpl_1a06f783c764e189077611aff2eb5b3677" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class TFailType</type>
+          </param>
+          <param>
+            <type>template&lt; class... &gt; class</type>
+            <declname>TFuncDecltype</declname>
+            <defname>TFuncDecltype</defname>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structrcppsw_1_1mpl_1_1detail_1_1detector" kindref="compound">detail::detector</ref>&lt; TFailType, void, TFuncDecltype, Args... &gt;</type>
+        <definition>rcppsw::mpl::detected_or</definition>
+        <argsstring></argsstring>
+        <name>detected_or</name>
+        <briefdescription>
+<para>Same as <ref refid="namespacercppsw_1_1mpl_1aa2874711ad74f595a443da11e77fdbf2" kindref="member">is_detected</ref>, but allows for a user specified type <computeroutput>TFailType</computeroutput> to be selected if detection fails. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/mpl.hpp" line="215" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/mpl.hpp" bodystart="215" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1mpl_1a03714aecbca890aef4edc33a86e331c0" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>template&lt; class... &gt; class</type>
+            <declname>TFuncDecltype</declname>
+            <defname>TFuncDecltype</defname>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structrcppsw_1_1mpl_1_1detail_1_1detector" kindref="compound">detail::detector</ref>&lt; <ref refid="structrcppsw_1_1mpl_1_1no__such__trait" kindref="compound">no_such_trait</ref>, void, TFuncDecltype, Args... &gt;::type</type>
+        <definition>rcppsw::mpl::detected_t</definition>
+        <argsstring></argsstring>
+        <name>detected_t</name>
+        <briefdescription>
+<para>Same as <ref refid="namespacercppsw_1_1mpl_1aa2874711ad74f595a443da11e77fdbf2" kindref="member">is_detected</ref>, but will return the decltype itself, rather than just if it is well formed or not. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/mpl.hpp" line="204" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/mpl.hpp" bodystart="205" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1mpl_1a95f260d74410ea011c23268337bd9d02" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Ts</declname>
+            <defname>Ts</defname>
+          </param>
+        </templateparamlist>
+        <type>boost::mpl::empty&lt; Ts... &gt;</type>
+        <definition>rcppsw::mpl::empty</definition>
+        <argsstring></argsstring>
+        <name>empty</name>
+        <briefdescription>
+<para>Is the <ref refid="namespacercppsw_1_1mpl_1a087641491e12b257b1c6ecf5414aa192" kindref="member">typelist</ref> empty ? </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" line="90" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1mpl_1aa2874711ad74f595a443da11e77fdbf2" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>template&lt; class... &gt; class</type>
+            <declname>TFuncDecltype</declname>
+            <defname>TFuncDecltype</defname>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structrcppsw_1_1mpl_1_1detail_1_1detector" kindref="compound">detail::detector</ref>&lt; <ref refid="structrcppsw_1_1mpl_1_1no__such__trait" kindref="compound">no_such_trait</ref>, void, TFuncDecltype, Args... &gt;::value</type>
+        <definition>rcppsw::mpl::is_detected</definition>
+        <argsstring></argsstring>
+        <name>is_detected</name>
+        <briefdescription>
+<para>Type trait to detect whether a function taking the specified <computeroutput>Args</computeroutput> exists for the specified type. Suitable for use in SFINAE. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TFuncDecltype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Should be a decltype(), something like <computeroutput>decltype(std::declval&lt;T&gt;().foo())</computeroutput> to detect the presence of a function named <computeroutput>foo()</computeroutput> for a type <computeroutput>T</computeroutput>.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The argument types for the function to detect (if any). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/mpl.hpp" line="193" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/mpl.hpp" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1mpl_1a7253bb9de384d7440b6631c56dd4fea3" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class Seq</type>
+          </param>
+        </templateparamlist>
+        <type>typename boost::mpl::fold&lt; typename boost::mpl::fold&lt; Seq, boost::mpl::set&lt;&gt;, boost::mpl::insert&lt; boost::mpl::_1, boost::mpl::_2 &gt; &gt;::type, boost::tuple&lt; void &gt;, <ref refid="structrcppsw_1_1mpl_1_1detail_1_1ExtendTList" kindref="compound">detail::ExtendTList</ref>&lt; boost::mpl::_1, boost::mpl::_2 &gt; &gt;</type>
+        <definition>using rcppsw::mpl::make_tuple_type = typedef typename boost::mpl::fold&lt; typename boost::mpl::fold&lt; Seq, boost::mpl::set&lt;&gt;, boost::mpl::insert&lt;boost::mpl::_1, boost::mpl::_2&gt; &gt;::type, boost::tuple&lt;void&gt;, detail::ExtendTList&lt;boost::mpl::_1, boost::mpl::_2&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>make_tuple_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" line="172" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1mpl_1a8f16170d63177182637c57126fa14c70" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class A</type>
+          </param>
+          <param>
+            <type>template&lt; class... &gt; class</type>
+            <declname>B</declname>
+            <defname>B</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structrcppsw_1_1mpl_1_1detail_1_1rename__impl" kindref="compound">detail::rename_impl</ref>&lt; A, B &gt;</type>
+        <definition>rcppsw::mpl::rename</definition>
+        <argsstring></argsstring>
+        <name>rename</name>
+        <briefdescription>
+<para>Rename a variadic type to another variadic type. E.g., std::tuple&lt;int, float, char&gt; -&gt; typelist&lt;int, float, char&gt;. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" line="124" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1mpl_1a087641491e12b257b1c6ecf5414aa192" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Ts</declname>
+            <defname>Ts</defname>
+          </param>
+        </templateparamlist>
+        <type>boost::mpl::vector&lt; Ts... &gt;</type>
+        <definition>rcppsw::mpl::typelist</definition>
+        <argsstring></argsstring>
+        <name>typelist</name>
+        <briefdescription>
+<para>A list of types using boost::mpl::vectors, which enables all sorts of nice operations from the boost MPL library. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" line="80" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1mpl_1af62bfb86a6e582b117607194c2e0ec8e" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Typelist</type>
+          </param>
+          <param>
+            <type>template&lt; class WrappedType, class... &gt; class</type>
+            <declname>WrapperType</declname>
+            <defname>WrapperType</defname>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>typename boost::mpl::transform&lt; Typelist, <ref refid="structrcppsw_1_1mpl_1_1typelist__wrap__into" kindref="compound">typelist_wrap_into</ref>&lt; WrapperType, Args... &gt; &gt;</type>
+        <definition>rcppsw::mpl::typelist_wrap_apply</definition>
+        <argsstring></argsstring>
+        <name>typelist_wrap_apply</name>
+        <briefdescription>
+<para>Apply a functor to each type in the <ref refid="namespacercppsw_1_1mpl_1a087641491e12b257b1c6ecf5414aa192" kindref="member">typelist</ref>. The functor can itself take as many template parameters as needed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" line="167" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Meta programming namespace. Mainly a few aliases around things which boost provides. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/identity.hpp" line="32" column="22"/>
+  </compounddef>
+</doxygen>

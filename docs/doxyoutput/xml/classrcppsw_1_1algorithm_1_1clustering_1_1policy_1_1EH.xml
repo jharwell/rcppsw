@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1EH" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::algorithm::clustering::policy::EH</compoundname>
+    <includes refid="membership__policy_8hpp" local="no">membership_policy.hpp</includes>
+    <briefdescription>
+<para><ref refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1EH" kindref="compound">EH</ref> -&gt; Event Horizon. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::algorithm::clustering::policy::EH</label>
+        <link refid="classrcppsw_1_1algorithm_1_1clustering_1_1policy_1_1EH"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/membership_policy.hpp" line="59" column="9" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/membership_policy.hpp" bodystart="59" bodyend="59"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

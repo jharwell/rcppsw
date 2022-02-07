@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::ds::graph::directed_graph_spec</compoundname>
+    <includes refid="directed__graph__spec_8hpp" local="no">directed_graph_spec.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TVertexPropertyType</type>
+      </param>
+      <param>
+        <type>typename TEdgePropertyType</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a258ba71680b6ddac71ec566017e971a2" prot="public" static="no">
+        <type>boost::adjacency_list&lt; <ref refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a280599728b4d0b75f40c6af6c52a660f" kindref="member">vertex_edge_list_type</ref>, <ref refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a3280d187adf08e7003ae46a8299d9b30" kindref="member">vertex_list_type</ref>, <ref refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a5bc6f44f63c765e4911945966ddb95f0" kindref="member">directedness_type</ref>, <ref refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a32bcd29175fa1444dfa3d659357f79dd" kindref="member">vertex_property_type</ref>, <ref refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a6680b8234fa5f6027f980a6223898545" kindref="member">edge_property_type</ref>, <ref refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a3cc17ac4bc098b49ae32b491c1b1bba5" kindref="member">graph_property_type</ref>, <ref refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a89baad1c0025aca9fdf7ae13bb42aa13" kindref="member">graph_edge_list_type</ref> &gt;</type>
+        <definition>using rcppsw::ds::graph::directed_graph_spec&lt; TVertexPropertyType, TEdgePropertyType &gt;::bgl_impl_type =  boost::adjacency_list&lt; vertex_edge_list_type, vertex_list_type, directedness_type, vertex_property_type, edge_property_type, graph_property_type, graph_edge_list_type &gt;</definition>
+        <argsstring></argsstring>
+        <name>bgl_impl_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" line="76" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a5bc6f44f63c765e4911945966ddb95f0" prot="public" static="no">
+        <type>boost::directedS</type>
+        <definition>using rcppsw::ds::graph::directed_graph_spec&lt; TVertexPropertyType, TEdgePropertyType &gt;::directedness_type =  boost::directedS</definition>
+        <argsstring></argsstring>
+        <name>directedness_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" line="62" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a6680b8234fa5f6027f980a6223898545" prot="public" static="no">
+        <type>TEdgePropertyType</type>
+        <definition>using rcppsw::ds::graph::directed_graph_spec&lt; TVertexPropertyType, TEdgePropertyType &gt;::edge_property_type =  TEdgePropertyType</definition>
+        <argsstring></argsstring>
+        <name>edge_property_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" line="68" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a89baad1c0025aca9fdf7ae13bb42aa13" prot="public" static="no">
+        <type>boost::listS</type>
+        <definition>using rcppsw::ds::graph::directed_graph_spec&lt; TVertexPropertyType, TEdgePropertyType &gt;::graph_edge_list_type =  boost::listS</definition>
+        <argsstring></argsstring>
+        <name>graph_edge_list_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" line="74" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a3cc17ac4bc098b49ae32b491c1b1bba5" prot="public" static="no">
+        <type>boost::no_property</type>
+        <definition>using rcppsw::ds::graph::directed_graph_spec&lt; TVertexPropertyType, TEdgePropertyType &gt;::graph_property_type =  boost::no_property</definition>
+        <argsstring></argsstring>
+        <name>graph_property_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" line="71" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a280599728b4d0b75f40c6af6c52a660f" prot="public" static="no">
+        <type>boost::vecS</type>
+        <definition>using rcppsw::ds::graph::directed_graph_spec&lt; TVertexPropertyType, TEdgePropertyType &gt;::vertex_edge_list_type =  boost::vecS</definition>
+        <argsstring></argsstring>
+        <name>vertex_edge_list_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" line="56" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a3280d187adf08e7003ae46a8299d9b30" prot="public" static="no">
+        <type>boost::listS</type>
+        <definition>using rcppsw::ds::graph::directed_graph_spec&lt; TVertexPropertyType, TEdgePropertyType &gt;::vertex_list_type =  boost::listS</definition>
+        <argsstring></argsstring>
+        <name>vertex_list_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" line="59" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a32bcd29175fa1444dfa3d659357f79dd" prot="public" static="no">
+        <type>TVertexPropertyType</type>
+        <definition>using rcppsw::ds::graph::directed_graph_spec&lt; TVertexPropertyType, TEdgePropertyType &gt;::vertex_property_type =  TVertexPropertyType</definition>
+        <argsstring></argsstring>
+        <name>vertex_property_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" line="65" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::ds::graph::directed_graph_spec&lt; TVertexPropertyType, TEdgePropertyType &gt;</label>
+        <link refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" line="44" column="26" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/graph/directed_graph_spec.hpp" bodystart="44" bodyend="79"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a258ba71680b6ddac71ec566017e971a2" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph_spec</scope><name>bgl_impl_type</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a5bc6f44f63c765e4911945966ddb95f0" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph_spec</scope><name>directedness_type</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a6680b8234fa5f6027f980a6223898545" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph_spec</scope><name>edge_property_type</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a89baad1c0025aca9fdf7ae13bb42aa13" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph_spec</scope><name>graph_edge_list_type</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a3cc17ac4bc098b49ae32b491c1b1bba5" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph_spec</scope><name>graph_property_type</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a280599728b4d0b75f40c6af6c52a660f" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph_spec</scope><name>vertex_edge_list_type</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a3280d187adf08e7003ae46a8299d9b30" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph_spec</scope><name>vertex_list_type</name></member>
+      <member refid="structrcppsw_1_1ds_1_1graph_1_1directed__graph__spec_1a32bcd29175fa1444dfa3d659357f79dd" prot="public" virt="non-virtual"><scope>rcppsw::ds::graph::directed_graph_spec</scope><name>vertex_property_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

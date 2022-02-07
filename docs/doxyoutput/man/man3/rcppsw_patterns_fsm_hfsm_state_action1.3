@@ -1,0 +1,76 @@
+.TH "rcppsw::patterns::fsm::hfsm_state_action1< FSM, Event, Handler >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::fsm::hfsm_state_action1< FSM, Event, Handler >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <hfsm_state\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::patterns::fsm::hfsm_state\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBhfsm_state_action1\fP (\fBhfsm_state\fP *\fBparent\fP)"
+.br
+.ti -1c
+.RI "\fB~hfsm_state_action1\fP () override=default"
+.br
+.ti -1c
+.RI "int \fBinvoke_state_action\fP (\fBbase_fsm\fP *fsm, \fBevent_data\fP *event) const override"
+.br
+.RI "Called by the state machine engine to execute a state action\&. If a guard condition exists and it evaluates to false, the state action will not execute\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class FSM, class Event, int(FSM::*)(Event *) Handler>
+.br
+class rcppsw::patterns::fsm::hfsm_state_action1< FSM, Event, Handler >"
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIFSM\fP The current state machine class\&. 
+.br
+\fIEvent\fP A state function event data type (derived from event)\&. 
+.br
+\fIHandler\fP A state machine member function pointer, that takes ONE argument\&. 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class FSM , class Event , int(FSM::*)(Event *) Handler> \fBrcppsw::patterns::fsm::hfsm_state_action1\fP< FSM, Event, Handler >::\fBhfsm_state_action1\fP (\fBhfsm_state\fP * parent)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "template<class FSM , class Event , int(FSM::*)(Event *) Handler> \fBrcppsw::patterns::fsm::hfsm_state_action1\fP< FSM, Event, Handler >::~\fBhfsm_state_action1\fP ()\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class FSM , class Event , int(FSM::*)(Event *) Handler> int \fBrcppsw::patterns::fsm::hfsm_state_action1\fP< FSM, Event, Handler >::invoke_state_action (\fBbase_fsm\fP * sm, \fBevent_data\fP * data) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Called by the state machine engine to execute a state action\&. If a guard condition exists and it evaluates to false, the state action will not execute\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsm\fP A state machine instance\&. 
+.br
+\fIdata\fP The event data\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+integer indicating whether or not the event was handled\&. 
+.RE
+.PP
+
+.PP
+Implements \fBrcppsw::patterns::fsm::state\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

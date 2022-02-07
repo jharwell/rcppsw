@@ -1,0 +1,168 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/math/vector3.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cmath>\fP
+.br
+\fC#include <limits>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include 'rcppsw/math/radians\&.hpp'\fP
+.br
+\fC#include 'rcppsw/math/sphere_vector\&.hpp'\fP
+.br
+\fC#include 'rcppsw/math/vector2\&.hpp'\fP
+.br
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+\fC#include 'rcppsw/types/discretize_ratio\&.hpp'\fP
+.br
+\fC#include 'rcppsw/er/stringizable\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBrcppsw::math::vector3< T >\fP"
+.br
+.RI "Base template class encapsulating mathematical actions on a pair of numbers\&. Is specialized by \fBvector3i\fP, \fBvector3d\fP\&. "
+.ti -1c
+.RI "struct \fBrcppsw::math::vector3< T >::componentwise_compare\fP"
+.br
+.RI "Needed to compare in mathematical contexts\&. "
+.ti -1c
+.RI "struct \fBrcppsw::math::vector3< T >::key_compare\fP"
+.br
+.RI "Needed for using vectors as keys in a map\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::math\fP"
+.br
+.RI "Pure mathematical classes such as vectors, ranges, sigmoids, etc\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_MATH_VEC3_CONV2DISC\fP(dest_prefix,  dest_type)"
+.br
+.RI "Convert vector3d -> vector3{i,z}, applying a divisive scaling factor\&. "
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_MATH_VEC3_DIRECT_CONV2FLT\fP(prefix)"
+.br
+.RI "Convert vector3{i,z} -> vector3d directly, without applying any scaling\&. "
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_MATH_VEC3_SCALED_CONV2FLT\fP(prefix)"
+.br
+.RI "Convert vector3{i,z} -> vector3d, applying a multiplicative scaling factor\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBrcppsw::math::vector3d\fP = vector3< double >"
+.br
+.RI "Specialization of \fBvector3\fP for doubles\&. "
+.ti -1c
+.RI "using \fBrcppsw::math::vector3i\fP = vector3< int >"
+.br
+.RI "Specialization of \fBvector3\fP for signed integers\&. "
+.ti -1c
+.RI "using \fBrcppsw::math::vector3z\fP = vector3< size_t >"
+.br
+.RI "Specialization of \fBvector3\fP for size_t\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static vector3i \fBrcppsw::math::dvec2ivec\fP (const vector3d &other, double scale)"
+.br
+.ti -1c
+.RI "static vector3z \fBrcppsw::math::dvec2zvec\fP (const vector3d &other, double scale)"
+.br
+.ti -1c
+.RI "static vector3d \fBrcppsw::math::ivec2dvec\fP (const vector3i &other)"
+.br
+.ti -1c
+.RI "static vector3d \fBrcppsw::math::ivec2dvec\fP (const vector3i &other, double scale)"
+.br
+.ti -1c
+.RI "template<typename U , typename V , typename std::enable_if<(!std::is_floating_point< U >::value), int >::type  = 0, typename std::enable_if<(!std::is_floating_point< V >::value), int >::type  = 0> static size_t \fBrcppsw::math::l1norm\fP (const vector3< U > &v1, const vector3< V > &v2)"
+.br
+.RI "Computes the distance between the passed vectors\&. "
+.ti -1c
+.RI "static vector3d \fBrcppsw::math::zvec2dvec\fP (const vector3z &other)"
+.br
+.ti -1c
+.RI "static vector3d \fBrcppsw::math::zvec2dvec\fP (const vector3z &other, double scale)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2018 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#\fBdefine\fP RCPPSW_MATH_VEC3_CONV2DISC(dest_prefix, dest_type)"
+\fBValue:\fP
+.PP
+.nf
+  static inline vector3##dest_prefix dvec2##dest_prefix##vec(               \
+      const vector3d& other, double scale) {                                \
+     return vector3##dest_prefix(static_cast<dest_type>(other\&.x() / scale),  \
+                                static_cast<dest_type>(other\&.y() / scale),  \
+                                static_cast<dest_type>(other\&.z() / scale)); \
+  }
+.fi
+.PP
+Convert vector3d -> vector3{i,z}, applying a divisive scaling factor\&. 
+.SS "#\fBdefine\fP RCPPSW_MATH_VEC3_DIRECT_CONV2FLT(prefix)"
+\fBValue:\fP
+.PP
+.nf
+  static inline vector3d prefix##vec2dvec(const vector3##prefix& other) { \
+    return vector3d(other\&.x(), other\&.y(), other\&.z());                     \
+  }
+.fi
+.PP
+Convert vector3{i,z} -> vector3d directly, without applying any scaling\&. 
+.SS "#\fBdefine\fP RCPPSW_MATH_VEC3_SCALED_CONV2FLT(prefix)"
+\fBValue:\fP
+.PP
+.nf
+  static inline vector3d prefix##vec2dvec(const vector3##prefix& other,       \
+                                          double scale) {                     \
+    return vector3d(other\&.x() * scale, other\&.y() * scale, other\&.z() * scale); \
+  }
+.fi
+.PP
+Convert vector3{i,z} -> vector3d, applying a multiplicative scaling factor\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

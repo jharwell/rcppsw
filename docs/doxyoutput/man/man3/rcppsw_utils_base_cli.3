@@ -1,0 +1,126 @@
+.TH "rcppsw::utils::base_cli" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::utils::base_cli \- Base class for command line interfaces\&. Uses boost to do the actual parsing\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <base_cli\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbase_cli\fP (const std::string &mnemonic='')"
+.br
+.ti -1c
+.RI "virtual \fB~base_cli\fP (void)=default"
+.br
+.ti -1c
+.RI "bpo::options_description * \fBdesc\fP (void)"
+.br
+.RI "Get a handle on the options description\&. "
+.ti -1c
+.RI "\fBstatus_t\fP \fBparse\fP (int argc, char **argv)"
+.br
+.RI "Parse command line options\&. "
+.ti -1c
+.RI "void \fBprint\fP (void)"
+.br
+.RI "Print all options and their help to stdout\&. "
+.ti -1c
+.RI "const std::string & \fBprog_name\fP (void)"
+.br
+.RI "Get the program name\&. "
+.ti -1c
+.RI "virtual bool \fBvalidate\fP (void)"
+.br
+.RI "Determine if parameters passed are valid, by some criterion\&. "
+.ti -1c
+.RI "const bpo::variables_map & \fBvm\fP (void)"
+.br
+.RI "Get a handle on the variables map\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base class for command line interfaces\&. Uses boost to do the actual parsing\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::utils::base_cli::base_cli (const std::string & mnemonic = \fC''\fP)\fC [explicit]\fP"
+
+.SS "virtual rcppsw::utils::base_cli::~base_cli (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bpo::options_description* rcppsw::utils::base_cli::desc (void)\fC [inline]\fP"
+
+.PP
+Get a handle on the options description\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The variables map handle\&. 
+.RE
+.PP
+
+.SS "\fBstatus_t\fP rcppsw::utils::base_cli::parse (int argc, char ** argv)"
+
+.PP
+Parse command line options\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIargc\fP The argc from main()\&. 
+.br
+\fIargv\fP The argv from main()\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fBstatus_t\fP\&. 
+.RE
+.PP
+
+.SS "void rcppsw::utils::base_cli::print (void)"
+
+.PP
+Print all options and their help to stdout\&. 
+.SS "const std::string& rcppsw::utils::base_cli::prog_name (void)\fC [inline]\fP"
+
+.PP
+Get the program name\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The program name\&. 
+.RE
+.PP
+
+.SS "virtual bool rcppsw::utils::base_cli::validate (void)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+Determine if parameters passed are valid, by some criterion\&. 
+.PP
+\fBReturns\fP
+.RS 4
+\fCTRUE\fP if the condition is met, and \fCFALSE\fP otherwise\&. 
+.RE
+.PP
+
+.SS "const bpo::variables_map& rcppsw::utils::base_cli::vm (void)\fC [inline]\fP"
+
+.PP
+Get a handle on the variables map\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The variables map handle\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

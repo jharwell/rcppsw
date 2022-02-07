@@ -1,0 +1,397 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1er_1_1client" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::er::client</compoundname>
+    <includes refid="client_8hpp" local="no">client.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1er_1_1client_1a7f256876c40917f1bc8e06209d010699" prot="private" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string rcppsw::er::client&lt; T &gt;::kConsoleLayout</definition>
+        <argsstring></argsstring>
+        <name>kConsoleLayout</name>
+        <initializer>= &quot;%X{time} %x %Y[%-5p]%y %c - %m%n&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="308" column="35" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="308" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1er_1_1client_1a8daf01360a8de37d0e2bc8d84bf4dc56" prot="private" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string rcppsw::er::client&lt; T &gt;::kFileLayout</definition>
+        <argsstring></argsstring>
+        <name>kFileLayout</name>
+        <initializer>= &quot;%X{time} %x %Y[%-5p]%y %c %l - %m%n&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="309" column="35" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="309" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1er_1_1client_1ae735eedc3aaca6df8d1f0bf3abcef06f" prot="private" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool rcppsw::er::client&lt; T &gt;::m_initialized</definition>
+        <argsstring></argsstring>
+        <name>m_initialized</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="311" column="28" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="311" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1er_1_1client_1a8b1e6c0ded1a65951290fb76aff28892" prot="private" static="no" mutable="no">
+        <type>log4cxx::LoggerPtr</type>
+        <definition>log4cxx::LoggerPtr rcppsw::er::client&lt; T &gt;::m_logger</definition>
+        <argsstring></argsstring>
+        <name>m_logger</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="313" column="28" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="313" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void rcppsw::er::client&lt; T &gt;::logfile_set</definition>
+        <argsstring>(const log4cxx::LoggerPtr &amp;logger, const std::string &amp;name)</argsstring>
+        <name>logfile_set</name>
+        <param>
+          <type>const log4cxx::LoggerPtr &amp;</type>
+          <declname>logger</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Set the log file for the specified logger. Idempotent. If the logfile currently exists, it will be truncated. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Logfile is an appender, which is given the same name as the logfile itself. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="195" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="195" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void rcppsw::er::client&lt; T &gt;::logging_init</definition>
+        <argsstring>(const std::string &amp;fpath)</argsstring>
+        <name>logging_init</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>fpath</declname>
+        </param>
+        <briefdescription>
+<para>Initialize logging by specifying the path to the log4cxx configuration file. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="177" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="177" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void rcppsw::er::client&lt; T &gt;::mdc_add</definition>
+        <argsstring>(const std::string &amp;key, const std::string &amp;value)</argsstring>
+        <name>mdc_add</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Add a log4cxx MDC context. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The context key.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="230" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="230" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void rcppsw::er::client&lt; T &gt;::mdc_rm</definition>
+        <argsstring>(const std::string &amp;key)</argsstring>
+        <name>mdc_rm</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Remove a log4cxx MDC context. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="238" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="238" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void rcppsw::er::client&lt; T &gt;::ndc_do_pop</definition>
+        <argsstring>(void)</argsstring>
+        <name>ndc_do_pop</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Pop the top of the log4cxx NDC stack. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="221" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="221" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void rcppsw::er::client&lt; T &gt;::ndc_do_push</definition>
+        <argsstring>(const std::string &amp;s)</argsstring>
+        <name>ndc_do_push</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Push a log4cxx NDC context. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="216" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="216" bodyend="216"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::er::client&lt; T &gt;::client</definition>
+        <argsstring>(const client &amp;)=default</argsstring>
+        <name>client</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1er_1_1client" kindref="compound">client</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="261" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::er::client&lt; T &gt;::client</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>client</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of client/new logger. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="245" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="245" bodyend="257"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::er::client&lt; T &gt;::~client</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~client</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="259" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::er::client&lt; T &gt;::env_verify</definition>
+        <argsstring>(void)</argsstring>
+        <name>env_verify</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Verify that the execution environment was properly set up for logging, and abort the program if it was not. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="296" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="296" bodyend="303"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::er::client&lt; T &gt;::logfile_set</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>logfile_set</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Set the logfile of the logger with the specified name. Not idempotent. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is not done during construction because you often want to direct entire namespaces of loggers to a single output file (e.g., <ref refid="namespacercppsw_1_1patterns" kindref="compound">rcppsw.patterns</ref>). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="272" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="272" bodyend="276"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>log4cxx::LoggerPtr</type>
+        <definition>log4cxx::LoggerPtr rcppsw::er::client&lt; T &gt;::logger</definition>
+        <argsstring>(void) const</argsstring>
+        <name>logger</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get a reference to the ER logger. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="290" column="22" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="290" bodyend="290"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string rcppsw::er::client&lt; T &gt;::logger_name</definition>
+        <argsstring>(void) const</argsstring>
+        <name>logger_name</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get current logger name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="281" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="281" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1er_1_1client" kindref="compound">client</ref> &amp;</type>
+        <definition>client&amp; rcppsw::er::client&lt; T &gt;::operator=</definition>
+        <argsstring>(const client &amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1er_1_1client" kindref="compound">client</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="262" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A class that can connect to a logging server for logging of important events. Basically a thin wrapper around log4cxx. If ER_NDEBUG is defined, then this class will mostly compile away to nothing, and most member functions will not be defined. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::er::client&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" line="171" column="13" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/er/client.hpp" bodystart="171" bodyend="315"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual"><scope>rcppsw::er::client</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual"><scope>rcppsw::er::client</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual"><scope>rcppsw::er::client</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a7f256876c40917f1bc8e06209d010699" prot="private" virt="non-virtual"><scope>rcppsw::er::client</scope><name>kConsoleLayout</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8daf01360a8de37d0e2bc8d84bf4dc56" prot="private" virt="non-virtual"><scope>rcppsw::er::client</scope><name>kFileLayout</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual"><scope>rcppsw::er::client</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual"><scope>rcppsw::er::client</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual"><scope>rcppsw::er::client</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual"><scope>rcppsw::er::client</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual"><scope>rcppsw::er::client</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae735eedc3aaca6df8d1f0bf3abcef06f" prot="private" virt="non-virtual"><scope>rcppsw::er::client</scope><name>m_initialized</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8b1e6c0ded1a65951290fb76aff28892" prot="private" virt="non-virtual"><scope>rcppsw::er::client</scope><name>m_logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual"><scope>rcppsw::er::client</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual"><scope>rcppsw::er::client</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual"><scope>rcppsw::er::client</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual"><scope>rcppsw::er::client</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual"><scope>rcppsw::er::client</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual"><scope>rcppsw::er::client</scope><name>~client</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

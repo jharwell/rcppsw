@@ -1,0 +1,79 @@
+.TH "rcppsw::ds::metrics::grid2D_metrics_csv_sink< TCellOp >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::metrics::grid2D_metrics_csv_sink< TCellOp > \- Base class for the \&.csv sinks for metrics using a 2D grid to fill with counts of SOMETHING, to be averaged over the entire simulation\&. Each line of the resulting \&.csv file corresponds to an XY plane for a value of Z in the grid\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <grid2D_metrics_csv_sink\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::metrics::csv_sink\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgrid2D_metrics_csv_sink\fP (const std::string &fpath_stem, const \fBrmetrics::output_mode\fP &mode, const \fBtypes::timestep\fP &interval)"
+.br
+.ti -1c
+.RI "std::list< std::string > \fBcsv_header_cols\fP (const \fBrmetrics::base_data\fP *data) const override"
+.br
+.RI "Return a list of additional columns that should be in the emitted \&.csv file for the sink\&. "
+.ti -1c
+.RI "boost::optional< std::string > \fBcsv_line_build\fP (const \fBrmetrics::base_data\fP *data, const \fBrtypes::timestep\fP &t) override"
+.br
+.RI "Build the next line of metrics\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TCellOp>
+.br
+class rcppsw::ds::metrics::grid2D_metrics_csv_sink< TCellOp >"
+Base class for the \&.csv sinks for metrics using a 2D grid to fill with counts of SOMETHING, to be averaged over the entire simulation\&. Each line of the resulting \&.csv file corresponds to an XY plane for a value of Z in the grid\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TCellOp > \fBrcppsw::ds::metrics::grid2D_metrics_csv_sink\fP< TCellOp >::\fBgrid2D_metrics_csv_sink\fP (const std::string & fpath_stem, const \fBrmetrics::output_mode\fP & mode, const \fBtypes::timestep\fP & interval)\fC [inline]\fP"
+
+.PP
+\fBSee also\fP
+.RS 4
+rmetrics::csv_sink\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TCellOp > std::list<std::string> \fBrcppsw::ds::metrics::grid2D_metrics_csv_sink\fP< TCellOp >::csv_header_cols (const \fBrmetrics::base_data\fP * data) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Return a list of additional columns that should be in the emitted \&.csv file for the sink\&. 
+.PP
+\fBReturns\fP
+.RS 4
+a list of the names of the columns for the \&.csv\&. 
+.RE
+.PP
+
+.PP
+Implements \fBrcppsw::metrics::csv_sink\fP\&.
+.SS "template<typename TCellOp > boost::optional<std::string> \fBrcppsw::ds::metrics::grid2D_metrics_csv_sink\fP< TCellOp >::csv_line_build (const \fBrmetrics::base_data\fP * data, const \fBrtypes::timestep\fP & t)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Build the next line of metrics\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The line that should be added to the \&.csv file, or empty if the necessary conditions are not met\&. This allows metrics to be gathered across multiple timesteps, but only written out once an interesting event has occurred\&. 
+.RE
+.PP
+
+.PP
+Implements \fBrcppsw::metrics::csv_sink\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

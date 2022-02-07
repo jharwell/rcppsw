@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1patterns_1_1fsm" kind="namespace" language="C++">
+    <compoundname>rcppsw::patterns::fsm</compoundname>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm" prot="public">rcppsw::patterns::fsm::base_fsm</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1event__data" prot="public">rcppsw::patterns::fsm::event_data</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1event__signal" prot="public">rcppsw::patterns::fsm::event_signal</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1event__type" prot="public">rcppsw::patterns::fsm::event_type</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm" prot="public">rcppsw::patterns::fsm::hfsm</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state" prot="public">rcppsw::patterns::fsm::hfsm_state</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action0" prot="public">rcppsw::patterns::fsm::hfsm_state_action0</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1hfsm__state__action1" prot="public">rcppsw::patterns::fsm::hfsm_state_action1</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1no__event__data" prot="public">rcppsw::patterns::fsm::no_event_data</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1state" prot="public">rcppsw::patterns::fsm::state</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1state__action0" prot="public">rcppsw::patterns::fsm::state_action0</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1state__action1" prot="public">rcppsw::patterns::fsm::state_action1</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1state__entry" prot="public">rcppsw::patterns::fsm::state_entry</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1state__entry__action0" prot="public">rcppsw::patterns::fsm::state_entry_action0</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1state__entry__action1" prot="public">rcppsw::patterns::fsm::state_entry_action1</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit" prot="public">rcppsw::patterns::fsm::state_exit</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit__action" prot="public">rcppsw::patterns::fsm::state_exit_action</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard" prot="public">rcppsw::patterns::fsm::state_guard</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition0" prot="public">rcppsw::patterns::fsm::state_guard_condition0</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1state__guard__condition1" prot="public">rcppsw::patterns::fsm::state_guard_condition1</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1state__map__ex__row" prot="public">rcppsw::patterns::fsm::state_map_ex_row</innerclass>
+    <innerclass refid="classrcppsw_1_1patterns_1_1fsm_1_1state__map__row" prot="public">rcppsw::patterns::fsm::state_map_row</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacercppsw_1_1patterns_1_1fsm_1af9a95d8b12a4275318c36b763fce11c9" prot="public" static="no">
+        <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm" kindref="compound">base_fsm</ref></type>
+        <definition>rcppsw::patterns::fsm::simple_fsm</definition>
+        <argsstring></argsstring>
+        <name>simple_fsm</name>
+        <briefdescription>
+<para>Simple non-heirarchical state machine class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/simple_fsm.hpp" line="47" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/simple_fsm.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The Finite State Machine (FSM) design pattern: simple and hierarchical variants. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/base_fsm.hpp" line="47" column="33"/>
+  </compounddef>
+</doxygen>

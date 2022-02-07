@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1detail" kind="namespace" language="C++">
+    <compoundname>rcppsw::detail</compoundname>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacercppsw_1_1detail_1ab58299866908c24e5cb4283812dd0b73" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(std::declval&lt; T &gt;().to_str())</type>
+        <definition>using rcppsw::detail::to_str_type = typedef decltype(std::declval&lt;T&gt;().to_str())</definition>
+        <argsstring></argsstring>
+        <name>to_str_type</name>
+        <briefdescription>
+<para>Predicate for detecting if a type <computeroutput>T</computeroutput> defines <computeroutput>to_str()</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type to check. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/common.hpp" line="61" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/common/common.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/common/common.hpp" line="47" column="16"/>
+  </compounddef>
+</doxygen>

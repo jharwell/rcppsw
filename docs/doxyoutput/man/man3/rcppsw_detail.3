@@ -1,0 +1,32 @@
+.TH "rcppsw::detail" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::detail
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<class T > using \fBto_str_type\fP = decltype(std::declval< T >()\&.to_str())"
+.br
+.RI "Predicate for detecting if a type \fCT\fP defines \fCto_str()\fP\&. "
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "template<class T > using \fBrcppsw::detail::to_str_type\fP = typedef decltype(std::declval<T>()\&.to_str())"
+
+.PP
+Predicate for detecting if a type \fCT\fP defines \fCto_str()\fP\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIT\fP The type to check\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

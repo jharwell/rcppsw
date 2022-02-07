@@ -1,0 +1,41 @@
+.TH "rcppsw::ds::graph::detail" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::graph::detail
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBhgrid3D_view_builder\fP"
+.br
+.RI "Predicate for filtering \fBhgrid3D\fP into \fBhgrid3D_view\fP objects\&. "
+.ti -1c
+.RI "class \fBhgrid3D_view_filter\fP"
+.br
+.RI "Predicate for filtering \fBhgrid3D\fP into \fBhgrid3D_view\fP objects\&. "
+.ti -1c
+.RI "struct \fBis_decorator\fP"
+.br
+.RI "Determine if\&. "
+.ti -1c
+.RI "struct \fBis_decorator< T, std::void_t< decltype(std::declval< T >()\&.decoratee())> >\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<typename TBGLGraphType > using \fBfind_result_type\fP = typename std::add_pointer< decltype(std::declval< TBGLGraphType >()\&.operator[](std::declval< typename TBGLGraphType::vertex_descriptor >())) >::type"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "template<typename TBGLGraphType > using \fBrcppsw::ds::graph::detail::find_result_type\fP = typedef typename std::add_pointer< decltype(std::declval<TBGLGraphType>()\&.operator[](std::declval<typename TBGLGraphType::vertex_descriptor>())) >::type"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

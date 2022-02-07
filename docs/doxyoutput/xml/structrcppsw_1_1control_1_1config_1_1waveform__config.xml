@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1control_1_1config_1_1waveform__config" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>rcppsw::control::config::waveform_config</compoundname>
+    <basecompoundref refid="structrcppsw_1_1config_1_1base__config" prot="public" virt="non-virtual">rcppsw::config::base_config</basecompoundref>
+    <includes refid="waveform__config_8hpp" local="no">waveform_config.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structrcppsw_1_1control_1_1config_1_1waveform__config_1aac371bcc54cd45e5e8d275adea39e260" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::control::config::waveform_config::amplitude</definition>
+        <argsstring></argsstring>
+        <name>amplitude</name>
+        <initializer>{0.0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" line="67" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1control_1_1config_1_1waveform__config_1a4e33919e6f28fd202688549c3573755e" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::control::config::waveform_config::frequency</definition>
+        <argsstring></argsstring>
+        <name>frequency</name>
+        <initializer>{0.0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" line="65" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1control_1_1config_1_1waveform__config_1aad60e3fa8a9434995a201366304c6fa5" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::control::config::waveform_config::offset</definition>
+        <argsstring></argsstring>
+        <name>offset</name>
+        <initializer>{0.0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" line="68" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1control_1_1config_1_1waveform__config_1ae53ca171a9183b11a85a676a11761bc9" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::control::config::waveform_config::phase</definition>
+        <argsstring></argsstring>
+        <name>phase</name>
+        <initializer>{0.0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" line="66" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structrcppsw_1_1control_1_1config_1_1waveform__config_1abad1a2dcf994247cb2d5feb6980eea3f" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string rcppsw::control::config::waveform_config::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" line="64" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structrcppsw_1_1control_1_1config_1_1waveform__config_1aa24b0d9b6e84b1a8c0cdb548ed33a407" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::control::config::waveform_config::waveform_config</definition>
+        <argsstring>(const std::string &amp;type_in, double freq_in, double phase_in, double amp_in, double offset_in)</argsstring>
+        <name>waveform_config</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>type_in</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>freq_in</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>phase_in</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>amp_in</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>offset_in</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" line="53" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" bodystart="53" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="structrcppsw_1_1control_1_1config_1_1waveform__config_1ab49e4e0164295d3d56d89a9b856457d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::control::config::waveform_config::waveform_config</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>waveform_config</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" line="50" column="3"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Parameters for <ref refid="classrcppsw_1_1control_1_1base__waveform" kindref="compound">base_waveform</ref> derived classes. Not all parameters are applicable to all waveform types. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::control::config::waveform_config</label>
+        <link refid="structrcppsw_1_1control_1_1config_1_1waveform__config"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>rcppsw::config::base_config</label>
+        <link refid="structrcppsw_1_1config_1_1base__config"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::control::config::waveform_config</label>
+        <link refid="structrcppsw_1_1control_1_1config_1_1waveform__config"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+type</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="2">
+        <label>rcppsw::config::base_config</label>
+        <link refid="structrcppsw_1_1config_1_1base__config"/>
+      </node>
+      <node id="3">
+        <label>std::string</label>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" line="49" column="57" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/config/waveform_config.hpp" bodystart="49" bodyend="69"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1control_1_1config_1_1waveform__config_1aac371bcc54cd45e5e8d275adea39e260" prot="public" virt="non-virtual"><scope>rcppsw::control::config::waveform_config</scope><name>amplitude</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a1cfd52de449665fdfe4b2a42c2248f96" prot="public" virt="non-virtual"><scope>rcppsw::control::config::waveform_config</scope><name>base_config</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a9a86158e067c0ed5b8b3c16760878473" prot="public" virt="non-virtual"><scope>rcppsw::control::config::waveform_config</scope><name>base_config</name></member>
+      <member refid="structrcppsw_1_1control_1_1config_1_1waveform__config_1a4e33919e6f28fd202688549c3573755e" prot="public" virt="non-virtual"><scope>rcppsw::control::config::waveform_config</scope><name>frequency</name></member>
+      <member refid="structrcppsw_1_1control_1_1config_1_1waveform__config_1aad60e3fa8a9434995a201366304c6fa5" prot="public" virt="non-virtual"><scope>rcppsw::control::config::waveform_config</scope><name>offset</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a32d1e916aa385603fec11cefc9fa30be" prot="public" virt="non-virtual"><scope>rcppsw::control::config::waveform_config</scope><name>operator=</name></member>
+      <member refid="structrcppsw_1_1control_1_1config_1_1waveform__config_1ae53ca171a9183b11a85a676a11761bc9" prot="public" virt="non-virtual"><scope>rcppsw::control::config::waveform_config</scope><name>phase</name></member>
+      <member refid="structrcppsw_1_1control_1_1config_1_1waveform__config_1abad1a2dcf994247cb2d5feb6980eea3f" prot="public" virt="non-virtual"><scope>rcppsw::control::config::waveform_config</scope><name>type</name></member>
+      <member refid="structrcppsw_1_1control_1_1config_1_1waveform__config_1ab49e4e0164295d3d56d89a9b856457d2" prot="public" virt="non-virtual"><scope>rcppsw::control::config::waveform_config</scope><name>waveform_config</name></member>
+      <member refid="structrcppsw_1_1control_1_1config_1_1waveform__config_1aa24b0d9b6e84b1a8c0cdb548ed33a407" prot="public" virt="non-virtual"><scope>rcppsw::control::config::waveform_config</scope><name>waveform_config</name></member>
+      <member refid="structrcppsw_1_1config_1_1base__config_1a4ddde3073572a1095a9aeeb7591cb226" prot="public" virt="virtual"><scope>rcppsw::control::config::waveform_config</scope><name>~base_config</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

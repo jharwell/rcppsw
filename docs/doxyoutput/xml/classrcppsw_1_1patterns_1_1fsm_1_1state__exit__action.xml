@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1fsm_1_1state__exit__action" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::patterns::fsm::state_exit_action</compoundname>
+    <basecompoundref refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit" prot="public" virt="non-virtual">rcppsw::patterns::fsm::state_exit</basecompoundref>
+    <includes refid="state__exit__action_8hpp" local="no">state_exit_action.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class SM</type>
+      </param>
+      <param>
+        <type>void(SM::*)(void)</type>
+        <declname>Func</declname>
+        <defname>Func</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1state__exit__action_1ae5fc3e2e8b3511cb7d1660784dd2e444" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::patterns::fsm::state_exit_action&lt; SM, Func &gt;::~state_exit_action</definition>
+        <argsstring>(void) override=default</argsstring>
+        <name>~state_exit_action</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_exit_action.hpp" line="56" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1state__exit__action_1a41ec770cde01a270ae71041870421b36" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::patterns::fsm::state_exit_action&lt; SM, Func &gt;::invoke_exit_action</definition>
+        <argsstring>(base_fsm *sm) const override</argsstring>
+        <name>invoke_exit_action</name>
+        <reimplements refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit_1a7559869b70c96a58f545b6adaaeb6f94">invoke_exit_action</reimplements>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm" kindref="compound">base_fsm</ref> *</type>
+          <declname>sm</declname>
+        </param>
+        <briefdescription>
+<para>Called by the state machine engine to execute a state exit action. Called when leaving a state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state machine instance. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_exit_action.hpp" line="58" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_exit_action.hpp" bodystart="58" bodyend="61"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit__action" kindref="compound">state_exit_action</ref> takes two template arguments: </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>SM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state machine class. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state machine member function pointer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::patterns::fsm::state_exit</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::state_exit_action&lt; SM, Func &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit__action"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::patterns::fsm::state_exit</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::state_exit_action&lt; SM, Func &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit__action"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_exit_action.hpp" line="54" column="42" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_exit_action.hpp" bodystart="54" bodyend="62"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit__action_1a41ec770cde01a270ae71041870421b36" prot="public" virt="virtual"><scope>rcppsw::patterns::fsm::state_exit_action</scope><name>invoke_exit_action</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit_1a9abe2c072e1ff2b4653f303dccaf74eb" prot="public" virt="virtual"><scope>rcppsw::patterns::fsm::state_exit_action</scope><name>~state_exit</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit__action_1ae5fc3e2e8b3511cb7d1660784dd2e444" prot="public" virt="non-virtual"><scope>rcppsw::patterns::fsm::state_exit_action</scope><name>~state_exit_action</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

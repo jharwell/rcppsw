@@ -1,0 +1,43 @@
+.TH "rcppsw::control::null_waveform" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::control::null_waveform \- A special waveform that always returns 0\&.0, indicating that there is no waveform/nothing\&. All parameters are ignored during initialization\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <aperiodic_waveform\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::control::base_waveform\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBnull_waveform\fP (const struct \fBconfig::waveform_config\fP *const config)"
+.br
+.ti -1c
+.RI "double \fBvalue\fP (double) override"
+.br
+.RI "Get the current value of the waveform at time \fCt\fP\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+A special waveform that always returns 0\&.0, indicating that there is no waveform/nothing\&. All parameters are ignored during initialization\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::control::null_waveform::null_waveform (const struct \fBconfig::waveform_config\fP *const config)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "double rcppsw::control::null_waveform::value (double time)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Get the current value of the waveform at time \fCt\fP\&. 
+.PP
+Implements \fBrcppsw::control::base_waveform\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

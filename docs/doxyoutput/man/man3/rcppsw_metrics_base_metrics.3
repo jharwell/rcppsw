@@ -1,0 +1,54 @@
+.TH "rcppsw::metrics::base_metrics" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::base_metrics \- Base class for all collected metrics in RCPPSW\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <base_metrics\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbase_metrics\fP (const \fBbase_metrics\fP &)=default"
+.br
+.ti -1c
+.RI "\fBbase_metrics\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual \fB~base_metrics\fP (void)=default"
+.br
+.ti -1c
+.RI "\fBbase_metrics\fP & \fBoperator=\fP (const \fBbase_metrics\fP &)=default"
+.br
+.ti -1c
+.RI "virtual void \fBreset_metrics\fP (void)"
+.br
+.RI "Reset gathered metrics to their initial state, if needed\&. By default it does nothing\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base class for all collected metrics in RCPPSW\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::metrics::base_metrics::base_metrics (void)\fC [default]\fP"
+
+.SS "virtual rcppsw::metrics::base_metrics::~base_metrics (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SS "rcppsw::metrics::base_metrics::base_metrics (const \fBbase_metrics\fP &)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBbase_metrics\fP& rcppsw::metrics::base_metrics::operator= (const \fBbase_metrics\fP &)\fC [default]\fP"
+
+.SS "virtual void rcppsw::metrics::base_metrics::reset_metrics (void)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+Reset gathered metrics to their initial state, if needed\&. By default it does nothing\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

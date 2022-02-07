@@ -1,0 +1,76 @@
+.TH "rcppsw::patterns::singleton::singleton< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::singleton::singleton< T > \- Define a class as incapable of being moved, copied, etc\&., and that there can only ever be one of\&. The only restriction on derived classes is that the must have a zero parameter constructor available\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <singleton\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsingleton\fP (\fBsingleton\fP &&)=delete"
+.br
+.ti -1c
+.RI "\fBsingleton\fP (\fBsingleton\fP const &)=delete"
+.br
+.ti -1c
+.RI "\fBsingleton\fP & \fBoperator=\fP (\fBsingleton\fP &&)=delete"
+.br
+.ti -1c
+.RI "\fBsingleton\fP & \fBoperator=\fP (\fBsingleton\fP const &)=delete"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static T & \fBinstance\fP ()"
+.br
+.RI "Get the instance of the singleton\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsingleton\fP (void)=default"
+.br
+.ti -1c
+.RI "\fB~singleton\fP (void)=default"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T>
+.br
+class rcppsw::patterns::singleton::singleton< T >"
+Define a class as incapable of being moved, copied, etc\&., and that there can only ever be one of\&. The only restriction on derived classes is that the must have a zero parameter constructor available\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class T > \fBrcppsw::patterns::singleton::singleton\fP< T >::\fBsingleton\fP (\fBsingleton\fP< T > const &)\fC [delete]\fP"
+
+.SS "template<class T > \fBrcppsw::patterns::singleton::singleton\fP< T >::\fBsingleton\fP (\fBsingleton\fP< T > &&)\fC [delete]\fP"
+
+.SS "template<class T > \fBrcppsw::patterns::singleton::singleton\fP< T >::\fBsingleton\fP (void)\fC [protected]\fP, \fC [default]\fP"
+
+.SS "template<class T > \fBrcppsw::patterns::singleton::singleton\fP< T >::~\fBsingleton\fP (void)\fC [protected]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T > static T& \fBrcppsw::patterns::singleton::singleton\fP< T >::instance ()\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Get the instance of the singleton\&. 
+.SS "template<class T > \fBsingleton\fP& \fBrcppsw::patterns::singleton::singleton\fP< T >::operator= (\fBsingleton\fP< T > &&)\fC [delete]\fP"
+
+.SS "template<class T > \fBsingleton\fP& \fBrcppsw::patterns::singleton::singleton\fP< T >::operator= (\fBsingleton\fP< T > const &)\fC [delete]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

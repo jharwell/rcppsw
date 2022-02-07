@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1mpl_1_1detail_1_1rename__impl" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::mpl::detail::rename_impl</compoundname>
+    <includes refid="typelist_8hpp" local="no">typelist.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class A</type>
+      </param>
+      <param>
+        <type>template&lt; class... &gt; class</type>
+        <declname>B</declname>
+        <defname>B</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::mpl::detail::rename_impl&lt; A, B &gt;</label>
+        <link refid="structrcppsw_1_1mpl_1_1detail_1_1rename__impl"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" line="94" column="14" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" bodystart="94" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

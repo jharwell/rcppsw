@@ -1,0 +1,68 @@
+.TH "rcppsw::ds::rtree_spec< TCoordType, TGeometryType, TValueType, MAXELTS >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::rtree_spec< TCoordType, TGeometryType, TValueType, MAXELTS >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <rtree\&.hpp>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBcoord_type\fP = TCoordType"
+.br
+.ti -1c
+.RI "using \fBelement_type\fP = std::pair< \fBgeometry_type\fP, \fBvalue_type\fP >"
+.br
+.RI "Type of the elements in the tree\&. "
+.ti -1c
+.RI "using \fBgeometry_type\fP = TGeometryType"
+.br
+.RI "The type of geometry that the rtree will be built from (e\&.g\&., points, rectangles, etc\&.)\&. "
+.ti -1c
+.RI "using \fBtree_type\fP = bgi::rtree< \fBelement_type\fP, bgi::rstar< MAXELTS > >"
+.br
+.RI "The templated type of the underlying boost tree that does all the work\&. "
+.ti -1c
+.RI "using \fBvalue_type\fP = TValueType"
+.br
+.RI "The type of the thing you want to track with the rtree (i\&.e\&., what is associated with each rectangle)\&. "
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static constexpr const size_t \fBkMAXELTS\fP = 16"
+.br
+.in -1c
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename TCoordType , typename TGeometryType , typename TValueType , size_t MAXELTS = 16> using \fBrcppsw::ds::rtree_spec\fP< TCoordType, TGeometryType, TValueType, MAXELTS >::\fBcoord_type\fP =  TCoordType"
+
+.SS "template<typename TCoordType , typename TGeometryType , typename TValueType , size_t MAXELTS = 16> using \fBrcppsw::ds::rtree_spec\fP< TCoordType, TGeometryType, TValueType, MAXELTS >::\fBelement_type\fP =  std::pair<\fBgeometry_type\fP, \fBvalue_type\fP>"
+
+.PP
+Type of the elements in the tree\&. 
+.SS "template<typename TCoordType , typename TGeometryType , typename TValueType , size_t MAXELTS = 16> using \fBrcppsw::ds::rtree_spec\fP< TCoordType, TGeometryType, TValueType, MAXELTS >::\fBgeometry_type\fP =  TGeometryType"
+
+.PP
+The type of geometry that the rtree will be built from (e\&.g\&., points, rectangles, etc\&.)\&. 
+.SS "template<typename TCoordType , typename TGeometryType , typename TValueType , size_t MAXELTS = 16> using \fBrcppsw::ds::rtree_spec\fP< TCoordType, TGeometryType, TValueType, MAXELTS >::\fBtree_type\fP =  bgi::rtree<\fBelement_type\fP, bgi::rstar<MAXELTS> >"
+
+.PP
+The templated type of the underlying boost tree that does all the work\&. 
+.SS "template<typename TCoordType , typename TGeometryType , typename TValueType , size_t MAXELTS = 16> using \fBrcppsw::ds::rtree_spec\fP< TCoordType, TGeometryType, TValueType, MAXELTS >::\fBvalue_type\fP =  TValueType"
+
+.PP
+The type of the thing you want to track with the rtree (i\&.e\&., what is associated with each rectangle)\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "template<typename TCoordType , typename TGeometryType , typename TValueType , size_t MAXELTS = 16> constexpr const size_t \fBrcppsw::ds::rtree_spec\fP< TCoordType, TGeometryType, TValueType, MAXELTS >::kMAXELTS = 16\fC [static]\fP, \fC [constexpr]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,27 @@
+.TH "rcppsw::patterns::prototype" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::prototype \- Prototype design pattern interfaces and classes: clonable, caching factory\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBcaching_factory\fP"
+.br
+.RI "Each time an object construction is requested, if an object type has been previously created with the same name, then a reference to that a previously created object of is returned, rather than a new instance of it\&. If construction of a previously constructed type of object is requested with a \fINEW\fP name, then a new instance of the object type is created\&. "
+.ti -1c
+.RI "class \fBclonable\fP"
+.br
+.RI "Define a class as being capable of being cloned (i\&.e\&. a deep copy)\&. I generally prefer this approach when copying objects, because it is explicit and not subject to compiler/language standards around \fBoperator=()\fP, AND because the use of std::unique_ptr makes it clear the returned object has nothing to do with the source object\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Prototype design pattern interfaces and classes: clonable, caching factory\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

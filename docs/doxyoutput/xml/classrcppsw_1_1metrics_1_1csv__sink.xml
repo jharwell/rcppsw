@@ -1,0 +1,583 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1metrics_1_1csv__sink" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>rcppsw::metrics::csv_sink</compoundname>
+    <basecompoundref refid="classrcppsw_1_1metrics_1_1file__sink" prot="public" virt="non-virtual">rcppsw::metrics::file_sink</basecompoundref>
+    <basecompoundref refid="classrcppsw_1_1er_1_1client" prot="public" virt="non-virtual">rcppsw::er::client&lt; csv_sink &gt;</basecompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__csv__sink" prot="public" virt="non-virtual">rcppsw::ds::metrics::grid2D_metrics_csv_sink&lt; TCellOp &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1ds_1_1metrics_1_1grid3D__metrics__csv__sink" prot="public" virt="non-virtual">rcppsw::ds::metrics::grid3D_metrics_csv_sink&lt; TCellOp &gt;</derivedcompoundref>
+    <includes refid="csv__sink_8hpp" local="no">csv_sink.hpp</includes>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1metrics_1_1csv__sink_1a800932f6484931752cd57c34caf94b97" prot="protected" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string rcppsw::metrics::csv_sink::mc_separator</definition>
+        <argsstring></argsstring>
+        <name>mc_separator</name>
+        <initializer>{&quot;;&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="168" column="21" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1csv__sink_1a3ab1564a8a30cfb2e3371a276c3881d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::csv_sink::csv_sink</definition>
+        <argsstring>(fs::path fpath, const rmetrics::output_mode &amp;mode, const rtypes::timestep &amp;interval)</argsstring>
+        <name>csv_sink</name>
+        <param>
+          <type>fs::path</type>
+          <declname>fpath</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1metrics_1ac42f08cd0253142d3dacdf5339f3587f" kindref="member">rmetrics::output_mode</ref> &amp;</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">rtypes::timestep</ref> &amp;</type>
+          <declname>interval</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fpath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Full path to output file, sans the <computeroutput></computeroutput>.csv extension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output mode. See <ref refid="classrcppsw_1_1metrics_1_1base__sink_1a8ee14d13a97dfaf7166e6dccfdbb96ba" kindref="member">output_mode</ref> for possible values. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="64" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1csv__sink_1ad70c9f5b7ce74901f17d4f02c2e730be" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::metrics::csv_sink::~csv_sink</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~csv_sink</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="68" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1csv__sink_1a465a3dcbcb00f4f802fcbbb54b468cc6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::csv_sink::finalize</definition>
+        <argsstring>(void) override</argsstring>
+        <name>finalize</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__sink_1a0ad1688ea1c8a323d6f6435280274a4d">finalize</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Finalize metrics and flush files in preparation for program exit. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="71" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1csv__sink_1ae5a5abf2b9970700890cea317b19c7f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="namespacercppsw_1_1metrics_1a9deb89f55ed769b27bdaf97be97c3d5b" kindref="member">write_status</ref></type>
+        <definition>write_status rcppsw::metrics::csv_sink::flush</definition>
+        <argsstring>(const rmetrics::base_data *data, const rtypes::timestep &amp;t) override</argsstring>
+        <name>flush</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__sink_1a6c44de6709e712b9c5e54cb96a12764c">flush</reimplements>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1metrics_1_1base__data" kindref="compound">rmetrics::base_data</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">rtypes::timestep</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Flush gathered metrics data to file; might do nothing if the internal conditions for writing metrics (e.g., the configured interval) are not met. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="73" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1csv__sink_1a8a80d487979b8cf299c98861e5933dff" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::csv_sink::initialize</definition>
+        <argsstring>(const rmetrics::base_data *data) override</argsstring>
+        <name>initialize</name>
+        <reimplements refid="classrcppsw_1_1metrics_1_1base__sink_1ad360db7add933a07e862ebee79a9b4a1">initialize</reimplements>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1metrics_1_1base__data" kindref="compound">rmetrics::base_data</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Initialize any required files for the metrics sink (i.e., .csv headers). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="72" column="8"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1csv__sink_1a10ecbaca06a54da222c68dc04c3daaa5" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class U</type>
+          </param>
+        </templateparamlist>
+        <type>std::string</type>
+        <definition>std::string rcppsw::metrics::csv_sink::csv_entry_domavg</definition>
+        <argsstring>(const T &amp;sum, const U &amp;count, bool last=false) const</argsstring>
+        <name>csv_entry_domavg</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>sum</declname>
+        </param>
+        <param>
+          <type>const U &amp;</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>last</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Return a string of the average value of a sum of SOMETHING divided by a COUNT + separator (if the csv entry is not the last one in a line). If the count is 0, then &quot;0&quot; + separator (if the csv entry is not the last one in a line) is returned. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The count of SOMETHING. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The divisor for the SOMETHING. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Is this the last column in the .csv row? </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="124" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" bodystart="124" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1csv__sink_1a5b7de877691ddf0ddf91af350e197bbe" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>std::string</type>
+        <definition>std::string rcppsw::metrics::csv_sink::csv_entry_intavg</definition>
+        <argsstring>(const T &amp;sum, bool last=false) const</argsstring>
+        <name>csv_entry_intavg</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>sum</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>last</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Return a string of the average value of a sum of SOMETHING over an interval (using the value of interval()) + <ref refid="classrcppsw_1_1metrics_1_1csv__sink_1a28553f32e242b0a4787243520bc5f1ef" kindref="member">separator()</ref> (if the csv entry is not the last one in a line). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The count of SOMETHING. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Is this the last column in the .csv row? </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="140" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" bodystart="140" bodyend="143"/>
+        <references refid="namespacercppsw_1a067e7fdc1e45476ca82cb106d0809015" compoundref="common_8hpp" startline="65" endline="67">rcppsw::to_string</references>
+        <references refid="classrcppsw_1_1types_1_1named__type_1ab5e5d9c79710dbd92eea31dbe0357de5" compoundref="named__type_8hpp" startline="59" endline="59">rcppsw::types::named_type&lt; T, Parameter &gt;::v</references>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1csv__sink_1a289090fa1bdd45959d2d96a27a28975e" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>std::string</type>
+        <definition>std::string rcppsw::metrics::csv_sink::csv_entry_tsavg</definition>
+        <argsstring>(const T &amp;sum, const rtypes::timestep &amp;t, bool last=false) const</argsstring>
+        <name>csv_entry_tsavg</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>sum</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">rtypes::timestep</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>last</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Return a string of the average value of a sum of SOMETHING over the elapsed simulation time so far (using the value of timestep()) + <ref refid="classrcppsw_1_1metrics_1_1csv__sink_1a28553f32e242b0a4787243520bc5f1ef" kindref="member">separator()</ref> (if the csv entry is not the last one in a line). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The count of SOMETHING. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Is this the last column in the .csv row? </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="154" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" bodystart="154" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1csv__sink_1ae322c7b3480dad5c9c0acc055cc52b75" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::list&lt; std::string &gt;</type>
+        <definition>virtual std::list&lt;std::string&gt; rcppsw::metrics::csv_sink::csv_header_cols</definition>
+        <argsstring>(const rmetrics::base_data *data) const =0</argsstring>
+        <name>csv_header_cols</name>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__csv__sink_1afe2ee5935c9266a75a1fb8e9575f799c">csv_header_cols</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1metrics_1_1grid3D__metrics__csv__sink_1a5cb4bed8b95ef64a834586caa629fce2">csv_header_cols</reimplementedby>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1metrics_1_1base__data" kindref="compound">rmetrics::base_data</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Return a list of additional columns that should be in the emitted .csv file for the sink. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a list of the names of the columns for the .csv. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="83" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1csv__sink_1adb5b6ba9d507686bb0776f8b731b1604" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::metrics::csv_sink::csv_header_write</definition>
+        <argsstring>(const rmetrics::base_data *data)</argsstring>
+        <name>csv_header_write</name>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1metrics_1_1base__data" kindref="compound">rmetrics::base_data</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Construct and write out the .csv header. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="164" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1csv__sink_1a864f67c5dbdc5a9824084ee9aa8534d8" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>boost::optional&lt; std::string &gt;</type>
+        <definition>virtual boost::optional&lt;std::string&gt; rcppsw::metrics::csv_sink::csv_line_build</definition>
+        <argsstring>(const rmetrics::base_data *data, const rtypes::timestep &amp;t)=0</argsstring>
+        <name>csv_line_build</name>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__csv__sink_1a6cce01da4d33cec5a7943ce7c054774f">csv_line_build</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1metrics_1_1grid3D__metrics__csv__sink_1ab0eff365bb92b5d91f983dbd1d94bb28">csv_line_build</reimplementedby>
+        <param>
+          <type>const <ref refid="structrcppsw_1_1metrics_1_1base__data" kindref="compound">rmetrics::base_data</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1types_1_1timestep" kindref="compound">rtypes::timestep</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Build the next line of metrics. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The line that should be added to the .csv file, or empty if the necessary conditions are not met. This allows metrics to be gathered across multiple timesteps, but only written out once an interesting event has occurred. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="94" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1csv__sink_1aac2c32da9f80eee0458b2fe79a343df5" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::list&lt; std::string &gt;</type>
+        <definition>std::list&lt;std::string&gt; rcppsw::metrics::csv_sink::dflt_csv_header_cols</definition>
+        <argsstring>(void) const</argsstring>
+        <name>dflt_csv_header_cols</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return a list of default columns that should be include in (almost) all emitted .csv files for the sink. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A list of the names of the default header columns for the .csv, which is: [clock]. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="105" column="13" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1metrics_1_1csv__sink_1a28553f32e242b0a4787243520bc5f1ef" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string&amp; rcppsw::metrics::csv_sink::separator</definition>
+        <argsstring>(void) const</argsstring>
+        <name>separator</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return the separator used to separate .csv entries from each other. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="110" column="21" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" bodystart="110" bodyend="110"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Metrics sink so that collectors can output their metrics to a <computeroutput></computeroutput>.csv file. Metrics are written out in .csv format at whatever frequency derived classes choose. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>rcppsw::er::client&lt; file_sink &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="7">
+        <label>rcppsw::ds::metrics::grid2D_metrics_csv_sink&lt; TCellOp &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__csv__sink"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>rcppsw::er::client&lt; base_sink &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="8">
+        <label>rcppsw::ds::metrics::grid3D_metrics_csv_sink&lt; TCellOp &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1metrics_1_1grid3D__metrics__csv__sink"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::csv_sink</label>
+        <link refid="classrcppsw_1_1metrics_1_1csv__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcppsw::metrics::base_sink</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__sink"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>rcppsw::er::client&lt; csv_sink &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="2">
+        <label>rcppsw::metrics::file_sink</label>
+        <link refid="classrcppsw_1_1metrics_1_1file__sink"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>rcppsw::er::client&lt; file_sink &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="8">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="5">
+        <label>rcppsw::er::client&lt; base_sink &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::csv_sink</label>
+        <link refid="classrcppsw_1_1metrics_1_1csv__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>#mc_separator</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcppsw::metrics::base_sink</label>
+        <link refid="classrcppsw_1_1metrics_1_1base__sink"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>rcppsw::er::client&lt; csv_sink &gt;</label>
+        <link refid="classrcppsw_1_1er_1_1client"/>
+      </node>
+      <node id="2">
+        <label>rcppsw::metrics::file_sink</label>
+        <link refid="classrcppsw_1_1metrics_1_1file__sink"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::string</label>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" line="58" column="37" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/csv_sink.hpp" bodystart="57" bodyend="170"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1metrics_1_1base__sink_1a30d0e24af23d9d416bbe2541752b53d3" prot="public" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>base_sink</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual" ambiguityscope="rcppsw::client&lt; file_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual" ambiguityscope="rcppsw::client&lt; file_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual" ambiguityscope="rcppsw::metrics::base_sink::"><scope>rcppsw::metrics::csv_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual" ambiguityscope="rcppsw::metrics::base_sink::"><scope>rcppsw::metrics::csv_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6f82007aff2abc0424c3aea112f4d338" prot="public" virt="non-virtual" ambiguityscope="client&lt; csv_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac240653183e3bc50cdd7b94ab573dfdd" prot="public" virt="non-virtual" ambiguityscope="client&lt; csv_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>client</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1csv__sink_1a10ecbaca06a54da222c68dc04c3daaa5" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>csv_entry_domavg</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1csv__sink_1a5b7de877691ddf0ddf91af350e197bbe" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>csv_entry_intavg</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1csv__sink_1a289090fa1bdd45959d2d96a27a28975e" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>csv_entry_tsavg</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1csv__sink_1ae322c7b3480dad5c9c0acc055cc52b75" prot="protected" virt="pure-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>csv_header_cols</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1csv__sink_1adb5b6ba9d507686bb0776f8b731b1604" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>csv_header_write</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1csv__sink_1a864f67c5dbdc5a9824084ee9aa8534d8" prot="protected" virt="pure-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>csv_line_build</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1csv__sink_1a3ab1564a8a30cfb2e3371a276c3881d9" prot="public" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>csv_sink</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1csv__sink_1aac2c32da9f80eee0458b2fe79a343df5" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>dflt_csv_header_cols</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual" ambiguityscope="rcppsw::client&lt; file_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual" ambiguityscope="rcppsw::metrics::base_sink::"><scope>rcppsw::metrics::csv_sink</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8dbae2145314c17f94296af27e986ec7" prot="public" virt="non-virtual" ambiguityscope="client&lt; csv_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>env_verify</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1file__sink_1ad43844ff4f9c9502bfd3ca74e4967c3f" prot="public" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>file_sink</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1csv__sink_1a465a3dcbcb00f4f802fcbbb54b468cc6" prot="public" virt="virtual"><scope>rcppsw::metrics::csv_sink</scope><name>finalize</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1csv__sink_1ae5a5abf2b9970700890cea317b19c7f2" prot="public" virt="virtual"><scope>rcppsw::metrics::csv_sink</scope><name>flush</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1file__sink_1a1c6dcbd414a50e24cc65f46d3a684136" prot="public" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>fpath</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1csv__sink_1a8a80d487979b8cf299c98861e5933dff" prot="public" virt="virtual"><scope>rcppsw::metrics::csv_sink</scope><name>initialize</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual" ambiguityscope="rcppsw::client&lt; file_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual" ambiguityscope="rcppsw::client&lt; file_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual" ambiguityscope="rcppsw::metrics::base_sink::"><scope>rcppsw::metrics::csv_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual" ambiguityscope="rcppsw::metrics::base_sink::"><scope>rcppsw::metrics::csv_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fb3fcd567a3f7e65bbf8938ab5e8db7" prot="public" virt="non-virtual" ambiguityscope="client&lt; csv_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4fca204898963d5d8ecb91e00cd84b88" prot="public" virt="non-virtual" ambiguityscope="client&lt; csv_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>logfile_set</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual" ambiguityscope="rcppsw::client&lt; file_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual" ambiguityscope="rcppsw::metrics::base_sink::"><scope>rcppsw::metrics::csv_sink</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a6b752123f721497e565e028571a1a37b" prot="public" virt="non-virtual" ambiguityscope="client&lt; csv_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>logger</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual" ambiguityscope="rcppsw::client&lt; file_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual" ambiguityscope="rcppsw::metrics::base_sink::"><scope>rcppsw::metrics::csv_sink</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab40243dbcdd2e695bace0708788d7ee2" prot="public" virt="non-virtual" ambiguityscope="client&lt; csv_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>logger_name</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual" ambiguityscope="rcppsw::client&lt; file_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual" ambiguityscope="rcppsw::metrics::base_sink::"><scope>rcppsw::metrics::csv_sink</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ae3f3005bc9b32db29bd751bc8511d72a" prot="public" virt="non-virtual" ambiguityscope="client&lt; csv_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>logging_init</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1csv__sink_1a800932f6484931752cd57c34caf94b97" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>mc_separator</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual" ambiguityscope="rcppsw::client&lt; file_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual" ambiguityscope="rcppsw::metrics::base_sink::"><scope>rcppsw::metrics::csv_sink</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a8e8addf09ab47c9ff19b70ebb72d614a" prot="public" virt="non-virtual" ambiguityscope="client&lt; csv_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>mdc_add</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual" ambiguityscope="rcppsw::client&lt; file_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual" ambiguityscope="rcppsw::metrics::base_sink::"><scope>rcppsw::metrics::csv_sink</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ab8d0b0946f73dc6ed3c0f6c6981f7a93" prot="public" virt="non-virtual" ambiguityscope="client&lt; csv_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>mdc_rm</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual" ambiguityscope="rcppsw::client&lt; file_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual" ambiguityscope="rcppsw::metrics::base_sink::"><scope>rcppsw::metrics::csv_sink</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a4b552cb8803ac3cc5c96a6a97deaaec0" prot="public" virt="non-virtual" ambiguityscope="client&lt; csv_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>ndc_do_pop</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual" ambiguityscope="rcppsw::client&lt; file_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual" ambiguityscope="rcppsw::metrics::base_sink::"><scope>rcppsw::metrics::csv_sink</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a2b3dbedbca4f96b9e2e2ce91fb3bac3d" prot="public" virt="non-virtual" ambiguityscope="client&lt; csv_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>ndc_do_push</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1file__sink_1a4b52acd537867288ec6fbbbc0dc2ba5c" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>ofile</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual" ambiguityscope="rcppsw::client&lt; file_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual" ambiguityscope="rcppsw::metrics::base_sink::"><scope>rcppsw::metrics::csv_sink</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1ac18e66461acd38f97e1cefe7611ca9fb" prot="public" virt="non-virtual" ambiguityscope="client&lt; csv_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__sink_1a33bce9116b8249d17c2c5ed7088aa6ff" prot="public" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>output_interval</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__sink_1a8ee14d13a97dfaf7166e6dccfdbb96ba" prot="public" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>output_mode</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__sink_1ae6c46d822bd9c6384bc46e8bb1c5f1ee" prot="public" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>ready_to_flush</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1file__sink_1ae1af0e39e5af916ea1da34c4f151b939" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>retry_io</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1csv__sink_1a28553f32e242b0a4787243520bc5f1ef" prot="protected" virt="non-virtual"><scope>rcppsw::metrics::csv_sink</scope><name>separator</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1base__sink_1ae644dfd6d29ce48030897690de5dff19" prot="public" virt="virtual"><scope>rcppsw::metrics::csv_sink</scope><name>~base_sink</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual" ambiguityscope="rcppsw::client&lt; file_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>~client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual" ambiguityscope="rcppsw::metrics::base_sink::"><scope>rcppsw::metrics::csv_sink</scope><name>~client</name></member>
+      <member refid="classrcppsw_1_1er_1_1client_1a0e6a2aa2f2d0af9352f3ca3044e015d0" prot="public" virt="virtual" ambiguityscope="client&lt; csv_sink &gt;::"><scope>rcppsw::metrics::csv_sink</scope><name>~client</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1csv__sink_1ad70c9f5b7ce74901f17d4f02c2e730be" prot="public" virt="virtual"><scope>rcppsw::metrics::csv_sink</scope><name>~csv_sink</name></member>
+      <member refid="classrcppsw_1_1metrics_1_1file__sink_1a2b95fa5bb1151a10c24448406e0bdd66" prot="public" virt="virtual"><scope>rcppsw::metrics::csv_sink</scope><name>~file_sink</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

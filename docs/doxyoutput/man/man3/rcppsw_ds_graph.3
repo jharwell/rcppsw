@@ -1,0 +1,156 @@
+.TH "rcppsw::ds::graph" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::graph \- Graph data structures: Heterogeneous 3D grid graph\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBdetail\fP"
+.br
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBbase_vertex_property\fP"
+.br
+.RI "Base class for all base_vertex properties used with all graphs\&. "
+.ti -1c
+.RI "class \fBdirected_graph\fP"
+.br
+.RI "A simple directed (not necessarily acyclic) graph\&. Uses boost::graph adjacency list representation\&. "
+.ti -1c
+.RI "struct \fBdirected_graph_spec\fP"
+.br
+.ti -1c
+.RI "class \fBgrid_index_map\fP"
+.br
+.RI "Maps a coordinate (e\&.g\&., XYZ tuple) to a vertex property\&. Used for fast queries of 'Does this graph contain this vertex', because in general there is no way to answer that query other than to search the whole graph\&. "
+.ti -1c
+.RI "class \fBhgrid3D\fP"
+.br
+.RI "A heterogeneous gridded graph (i\&.e\&., a basic grid graph with some vertices missing) where edge lengths have structural relevance; that is, if two vertices (u,v) are 3 units apart, then there are two vertices along the path (u,v) which would be present in a basic grid graph which are missing here\&. Useful for representing distances and such in the real world\&. "
+.ti -1c
+.RI "struct \fBhgrid3D_spec\fP"
+.br
+.ti -1c
+.RI "struct \fBhgrid3D_vertex_property\fP"
+.br
+.RI "Base class for all vertex properties used with the \fBhgrid3D\fP graph\&. "
+.ti -1c
+.RI "class \fBhgrid3D_view\fP"
+.br
+.RI "A view of a \fBhgrid3D\fP using boost::filtered_graph\&. "
+.ti -1c
+.RI "class \fBhgrid3D_view_filter_data\fP"
+.br
+.RI "The data gathered during building the \fBhgrid3D_view\fP\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<typename TSpecType > using \fBhgrid3D_view_edge_filter_type\fP = std::function< bool(typename TSpecType::bgl_impl_type::edge_descriptor)>"
+.br
+.ti -1c
+.RI "template<typename TSpecType > using \fBhgrid3D_view_vertex_filter_type\fP = std::function< bool(typename TSpecType::bgl_impl_type::vertex_descriptor)>"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Graph data structures: Heterogeneous 3D grid graph\&. 
+.SH "Class Documentation"
+.PP 
+.SH "struct rcppsw::ds::graph::directed_graph_spec"
+.PP 
+
+.SS "template<typename TVertexPropertyType, typename TEdgePropertyType>
+.br
+struct rcppsw::ds::graph::directed_graph_spec< TVertexPropertyType, TEdgePropertyType >"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+typedef adjacency_list< \fBvertex_edge_list_type\fP, \fBvertex_list_type\fP, \fBdirectedness_type\fP, \fBvertex_property_type\fP, \fBedge_property_type\fP, \fBgraph_property_type\fP, \fBgraph_edge_list_type\fP > \fIbgl_impl_type\fP 
+.br
+.PP
+typedef directedS \fIdirectedness_type\fP 
+.br
+.PP
+typedef TEdgePropertyType \fIedge_property_type\fP 
+.br
+.PP
+typedef listS \fIgraph_edge_list_type\fP 
+.br
+.PP
+typedef no_property \fIgraph_property_type\fP 
+.br
+.PP
+typedef vecS \fIvertex_edge_list_type\fP 
+.br
+.PP
+typedef listS \fIvertex_list_type\fP 
+.br
+.PP
+typedef TVertexPropertyType \fIvertex_property_type\fP 
+.br
+.PP
+.RE
+.PP
+.SH "struct rcppsw::ds::graph::hgrid3D_spec"
+.PP 
+
+.SS "template<typename TVertexPropertyType, typename TEdgePropertyType>
+.br
+struct rcppsw::ds::graph::hgrid3D_spec< TVertexPropertyType, TEdgePropertyType >"
+
+.PP
+\fBClass Members:\fP
+.RS 4
+typedef adjacency_list< \fBvertex_edge_list_type\fP, \fBvertex_list_type\fP, \fBdirectedness_type\fP, \fBvertex_property_type\fP, \fBedge_property_type\fP, \fBgraph_property_type\fP, \fBgraph_edge_list_type\fP > \fIbgl_impl_type\fP 
+.br
+.PP
+typedef filtered_graph< \fBbgl_impl_type\fP, TEdgePredicateType, TVertexPredicateType > \fIbgl_view_impl_type\fP 
+.br
+.PP
+typedef undirectedS \fIdirectedness_type\fP 
+.br
+.PP
+typedef TEdgePropertyType \fIedge_property_type\fP 
+.br
+.PP
+typedef listS \fIgraph_edge_list_type\fP 
+.br
+.PP
+typedef no_property \fIgraph_property_type\fP 
+.br
+.PP
+typedef decltype(coord) \fIvertex_coord_type\fP 
+.br
+.PP
+typedef vecS \fIvertex_edge_list_type\fP 
+.br
+.PP
+typedef vecS \fIvertex_list_type\fP 
+.br
+.PP
+typedef TVertexPropertyType \fIvertex_property_type\fP 
+.br
+.PP
+.RE
+.PP
+.SH "Typedef Documentation"
+.PP 
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::hgrid3D_view_edge_filter_type\fP = typedef std::function<bool(typename TSpecType::bgl_impl_type::edge_descriptor)>"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::hgrid3D_view_vertex_filter_type\fP = typedef std::function<bool(typename TSpecType::bgl_impl_type::vertex_descriptor)>"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

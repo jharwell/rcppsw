@@ -1,1 +1,0 @@
-{"traceEvents":[{"pid":1,"tid":0,"ph":"X","ts":34,"dur":55474,"name":"ExecuteCompiler","args":{"detail":""}},{"pid":1,"tid":1,"ph":"X","ts":0,"dur":55474,"name":"Total ExecuteCompiler","args":{"count":1,"avg ms":55}},{"cat":"","pid":1,"tid":0,"ts":0,"ph":"M","name":"process_name","args":{"name":"clang"}}]}

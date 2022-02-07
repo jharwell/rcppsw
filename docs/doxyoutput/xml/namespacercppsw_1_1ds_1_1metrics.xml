@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1ds_1_1metrics" kind="namespace" language="C++">
+    <compoundname>rcppsw::ds::metrics</compoundname>
+    <innerclass refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__collector" prot="public">rcppsw::ds::metrics::grid2D_metrics_collector</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__csv__sink" prot="public">rcppsw::ds::metrics::grid2D_metrics_csv_sink</innerclass>
+    <innerclass refid="structrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__data" prot="public">rcppsw::ds::metrics::grid2D_metrics_data</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1metrics_1_1grid3D__metrics__collector" prot="public">rcppsw::ds::metrics::grid3D_metrics_collector</innerclass>
+    <innerclass refid="classrcppsw_1_1ds_1_1metrics_1_1grid3D__metrics__csv__sink" prot="public">rcppsw::ds::metrics::grid3D_metrics_csv_sink</innerclass>
+    <innerclass refid="structrcppsw_1_1ds_1_1metrics_1_1grid3D__metrics__data" prot="public">rcppsw::ds::metrics::grid3D_metrics_data</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacercppsw_1_1ds_1_1metrics_1a0fd0a886443527d9cade0ae0000bcbb6" prot="public" static="no">
+        <type>std::false_type</type>
+        <definition>using rcppsw::ds::metrics::cell_accum = typedef std::false_type</definition>
+        <argsstring></argsstring>
+        <name>cell_accum</name>
+        <briefdescription>
+<para>Specify that the contents of the 2D or 3D cells should be accumulated without averaging. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/cell_op.hpp" line="52" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/cell_op.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacercppsw_1_1ds_1_1metrics_1a8950dadfb171492419a562b3f4f9713c" prot="public" static="no">
+        <type>std::true_type</type>
+        <definition>using rcppsw::ds::metrics::cell_avg = typedef std::true_type</definition>
+        <argsstring></argsstring>
+        <name>cell_avg</name>
+        <briefdescription>
+<para>Specify that the contents of the 2D or 3D cells should be averaged by dividing by the total number of occurences (i.e. a density map). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/cell_op.hpp" line="46" column="1" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/cell_op.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/metrics/cell_op.hpp" line="32" column="31"/>
+  </compounddef>
+</doxygen>

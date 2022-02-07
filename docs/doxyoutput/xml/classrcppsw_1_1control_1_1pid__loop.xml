@@ -1,0 +1,324 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1control_1_1pid__loop" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::control::pid_loop</compoundname>
+    <includes refid="pid__loop_8hpp" local="no">pid_loop.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1control_1_1pid__loop_1a39ca65d1db0d53ab6856dde5fb868db2" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::control::pid_loop::m_dt</definition>
+        <argsstring></argsstring>
+        <name>m_dt</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" line="100" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1control_1_1pid__loop_1a63c22b48286674643a42f5695a2a0fbe" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::control::pid_loop::m_istate</definition>
+        <argsstring></argsstring>
+        <name>m_istate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" line="103" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1control_1_1pid__loop_1a914dcbdef7dc0d382d734137cc4e6d17" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::control::pid_loop::m_kd</definition>
+        <argsstring></argsstring>
+        <name>m_kd</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" line="98" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1control_1_1pid__loop_1a0b2bca243a791ffc556a6199f7fa3c93" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::control::pid_loop::m_ki</definition>
+        <argsstring></argsstring>
+        <name>m_ki</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" line="99" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1control_1_1pid__loop_1a8ec59f947e16736904b0ecd9f45ac988" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::control::pid_loop::m_kp</definition>
+        <argsstring></argsstring>
+        <name>m_kp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" line="97" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1control_1_1pid__loop_1a37fe87a7e44594fe7879cc63aed75107" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::control::pid_loop::m_max</definition>
+        <argsstring></argsstring>
+        <name>m_max</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" line="102" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1control_1_1pid__loop_1af1ec9e028331deca8226cde21476bc73" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::control::pid_loop::m_min</definition>
+        <argsstring></argsstring>
+        <name>m_min</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" line="101" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1control_1_1pid__loop_1ab3abc025b76a6e0af094b735bc01aa9a" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double rcppsw::control::pid_loop::m_prev_error</definition>
+        <argsstring></argsstring>
+        <name>m_prev_error</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" line="104" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1control_1_1pid__loop_1af6acfefc1d14641616bc5f78e3c0fa32" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::control::pid_loop::pid_loop</definition>
+        <argsstring>(double kp, double kd, double ki, double dt, double min, double max)</argsstring>
+        <name>pid_loop</name>
+        <param>
+          <type>double</type>
+          <declname>kp</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>kd</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>ki</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>kp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proportional gain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ki</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Integral gain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>kd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Derivative gain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Loop interval time (linear interpolation used). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum value of manipulated variable and integral term. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>min</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Minimum value of manipulated variable and integral term. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" line="57" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" bodystart="57" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1control_1_1pid__loop_1a7095cbd5539987300a4b85ff36eb56a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::control::pid_loop::calculate</definition>
+        <argsstring>(double setpoint, double pv)</argsstring>
+        <name>calculate</name>
+        <param>
+          <type>double</type>
+          <declname>setpoint</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>pv</declname>
+        </param>
+        <briefdescription>
+<para>Calculate a new value for the manipulated variable. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>setpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Desired value of the manipulated variable. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current value of the variable.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Correctional term. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" line="75" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1control_1_1pid__loop_1a817a1d834b7c2166856ca127b30364e8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::control::pid_loop::max</definition>
+        <argsstring>(double max)</argsstring>
+        <name>max</name>
+        <param>
+          <type>double</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>Get the max value of manipulated variable/integral term. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" line="93" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" bodystart="93" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1control_1_1pid__loop_1a398c622e8ca7b872d774eec1c7dc2211" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::control::pid_loop::min</definition>
+        <argsstring>(double min)</argsstring>
+        <name>min</name>
+        <param>
+          <type>double</type>
+          <declname>min</declname>
+        </param>
+        <briefdescription>
+<para>Get the minimal value of manipulated variable/integral term. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" line="88" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1control_1_1pid__loop_1a6692e8798ce9d318cb0be21f050b3ed9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::control::pid_loop::reset</definition>
+        <argsstring>(void)</argsstring>
+        <name>reset</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Reset the integral state, previous error (setpoint - pv) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" line="80" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" bodystart="80" bodyend="83"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A simple PID loop class. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::control::pid_loop</label>
+        <link refid="classrcppsw_1_1control_1_1pid__loop"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" line="47" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/control/pid_loop.hpp" bodystart="47" bodyend="106"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1control_1_1pid__loop_1a7095cbd5539987300a4b85ff36eb56a3" prot="public" virt="non-virtual"><scope>rcppsw::control::pid_loop</scope><name>calculate</name></member>
+      <member refid="classrcppsw_1_1control_1_1pid__loop_1a39ca65d1db0d53ab6856dde5fb868db2" prot="private" virt="non-virtual"><scope>rcppsw::control::pid_loop</scope><name>m_dt</name></member>
+      <member refid="classrcppsw_1_1control_1_1pid__loop_1a63c22b48286674643a42f5695a2a0fbe" prot="private" virt="non-virtual"><scope>rcppsw::control::pid_loop</scope><name>m_istate</name></member>
+      <member refid="classrcppsw_1_1control_1_1pid__loop_1a914dcbdef7dc0d382d734137cc4e6d17" prot="private" virt="non-virtual"><scope>rcppsw::control::pid_loop</scope><name>m_kd</name></member>
+      <member refid="classrcppsw_1_1control_1_1pid__loop_1a0b2bca243a791ffc556a6199f7fa3c93" prot="private" virt="non-virtual"><scope>rcppsw::control::pid_loop</scope><name>m_ki</name></member>
+      <member refid="classrcppsw_1_1control_1_1pid__loop_1a8ec59f947e16736904b0ecd9f45ac988" prot="private" virt="non-virtual"><scope>rcppsw::control::pid_loop</scope><name>m_kp</name></member>
+      <member refid="classrcppsw_1_1control_1_1pid__loop_1a37fe87a7e44594fe7879cc63aed75107" prot="private" virt="non-virtual"><scope>rcppsw::control::pid_loop</scope><name>m_max</name></member>
+      <member refid="classrcppsw_1_1control_1_1pid__loop_1af1ec9e028331deca8226cde21476bc73" prot="private" virt="non-virtual"><scope>rcppsw::control::pid_loop</scope><name>m_min</name></member>
+      <member refid="classrcppsw_1_1control_1_1pid__loop_1ab3abc025b76a6e0af094b735bc01aa9a" prot="private" virt="non-virtual"><scope>rcppsw::control::pid_loop</scope><name>m_prev_error</name></member>
+      <member refid="classrcppsw_1_1control_1_1pid__loop_1a817a1d834b7c2166856ca127b30364e8" prot="public" virt="non-virtual"><scope>rcppsw::control::pid_loop</scope><name>max</name></member>
+      <member refid="classrcppsw_1_1control_1_1pid__loop_1a398c622e8ca7b872d774eec1c7dc2211" prot="public" virt="non-virtual"><scope>rcppsw::control::pid_loop</scope><name>min</name></member>
+      <member refid="classrcppsw_1_1control_1_1pid__loop_1af6acfefc1d14641616bc5f78e3c0fa32" prot="public" virt="non-virtual"><scope>rcppsw::control::pid_loop</scope><name>pid_loop</name></member>
+      <member refid="classrcppsw_1_1control_1_1pid__loop_1a6692e8798ce9d318cb0be21f050b3ed9" prot="public" virt="non-virtual"><scope>rcppsw::control::pid_loop</scope><name>reset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

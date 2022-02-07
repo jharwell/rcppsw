@@ -1,0 +1,57 @@
+.TH "rcppsw::algorithm" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::algorithm \- Various algorithms: closest pair, max subarray, clustering\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBclustering\fP"
+.br
+.RI "Different clustering algorithms: kmeans, entropy\&. "
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBclosest_pair2D\fP"
+.br
+.RI "Calculate the closest two points from a set of 2D points in O(NLogN) (\fBkRecursive\fP)\&. "
+.ti -1c
+.RI "class \fBconvex_hull2D\fP"
+.br
+.RI "Calculate the convex hull of a set of points in the 2D plane\&. The resulting list of points will be in counter-clockwise order\&. Implementation 'Graham Scan' algorithm\&. "
+.ti -1c
+.RI "class \fBmax_subarray_finder\fP"
+.br
+.RI "Find the maximal subarray using Kadane's algorithm, which is O(n)\&. "
+.ti -1c
+.RI "struct \fBresult_type2D\fP"
+.br
+.RI "Contains (1) the closest pair of points, (2) the distance between them, (3) comparator functions\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<class InputIterator , class OutputIterator , class Predicate , class UnaryFunction > OutputIterator \fBtransform_if\fP (InputIterator first, InputIterator last, OutputIterator result, const Predicate &pred, const UnaryFunction &f)"
+.br
+.RI "Given an input range defined by (\fCfirst\fP, \fClast\fP), and a filtering predicate \fCpred\fP, apply \fCf\fP to all elements from the input range that satisfy \fCpred\fP and write them to the output range \fCresult\fP\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Various algorithms: closest pair, max subarray, clustering\&. 
+.SH "Function Documentation"
+.PP 
+.SS "template<class InputIterator , class OutputIterator , class Predicate , class UnaryFunction > OutputIterator rcppsw::algorithm::transform_if (InputIterator first, InputIterator last, OutputIterator result, const Predicate & pred, const UnaryFunction & f)"
+
+.PP
+Given an input range defined by (\fCfirst\fP, \fClast\fP), and a filtering predicate \fCpred\fP, apply \fCf\fP to all elements from the input range that satisfy \fCpred\fP and write them to the output range \fCresult\fP\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

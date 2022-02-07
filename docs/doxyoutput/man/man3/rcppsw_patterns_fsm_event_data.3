@@ -1,0 +1,69 @@
+.TH "rcppsw::patterns::fsm::event_data" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::fsm::event_data \- Base class for all data that will be passed to state machine states upon execution of their callback functions\&. Custom application event data classes must derive from here, or things will not compile\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <event\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBevent_data\fP (int \fBsignal\fP, int \fBtype\fP=\fBevent_type::ekNORMAL\fP)"
+.br
+.ti -1c
+.RI "\fBevent_data\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual \fB~event_data\fP (void)=default"
+.br
+.ti -1c
+.RI "void \fBreset\fP (void)"
+.br
+.RI "Reset the event data type and signal to nominal/normal values\&. "
+.ti -1c
+.RI "void \fBsignal\fP (int signal)"
+.br
+.ti -1c
+.RI "int \fBsignal\fP (void) const"
+.br
+.ti -1c
+.RI "void \fBtype\fP (int type)"
+.br
+.ti -1c
+.RI "int \fBtype\fP (void) const"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base class for all data that will be passed to state machine states upon execution of their callback functions\&. Custom application event data classes must derive from here, or things will not compile\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::patterns::fsm::event_data::event_data (void)\fC [default]\fP"
+
+.SS "rcppsw::patterns::fsm::event_data::event_data (int signal, int type = \fC\fBevent_type::ekNORMAL\fP\fP)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "virtual rcppsw::patterns::fsm::event_data::~event_data (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void rcppsw::patterns::fsm::event_data::reset (void)\fC [inline]\fP"
+
+.PP
+Reset the event data type and signal to nominal/normal values\&. 
+.SS "void rcppsw::patterns::fsm::event_data::signal (int signal)\fC [inline]\fP"
+
+.SS "int rcppsw::patterns::fsm::event_data::signal (void) const\fC [inline]\fP"
+
+.SS "void rcppsw::patterns::fsm::event_data::type (int type)\fC [inline]\fP"
+
+.SS "int rcppsw::patterns::fsm::event_data::type (void) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

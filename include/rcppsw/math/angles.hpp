@@ -68,6 +68,15 @@ radians normalized_diff(const radians& angle1, const radians& angle2);
  */
 degrees normalized_diff(const degrees& angle1, const degrees& angle2);
 
+/**
+ * \brief Calculate the absolute value of a \ref radians or \ref degrees
+ * value. This does not perform any wrapping/normalizing.
+ */
+template<typename TAngleType>
+ TAngleType abs(const TAngleType& angle) {
+  return TAngleType(std::fabs(angle.v()));
+}
+
 NS_END(math, rcppsw);
 
 #endif /* INCLUDE_RCPPSW_MATH_ANGLES_HPP_ */

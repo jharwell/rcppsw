@@ -1,0 +1,61 @@
+.TH "rcppsw::ds::metrics" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::metrics
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBgrid2D_metrics_collector\fP"
+.br
+.RI "Base class for collectors using a 2D grid to fill with counts of SOMETHING, to be averaged over the entire simulation\&. Each line of the resulting \&.csv file corresponds directly to a row in X of the 2D grid\&. "
+.ti -1c
+.RI "class \fBgrid2D_metrics_csv_sink\fP"
+.br
+.RI "Base class for the \&.csv sinks for metrics using a 2D grid to fill with counts of SOMETHING, to be averaged over the entire simulation\&. Each line of the resulting \&.csv file corresponds to an XY plane for a value of Z in the grid\&. "
+.ti -1c
+.RI "interface \fBgrid2D_metrics_data\fP"
+.br
+.RI "Container for basic metrics gather from \fBrds::grid2D\fP\&. "
+.ti -1c
+.RI "class \fBgrid3D_metrics_collector\fP"
+.br
+.RI "Base class for collectors using a 3D grid to fill with counts of SOMETHING, to be averaged over the entire simulation\&. Each line of the resulting \&.csv file corresponds to an XY plane for a value of Z in the grid\&. "
+.ti -1c
+.RI "class \fBgrid3D_metrics_csv_sink\fP"
+.br
+.RI "Base class for the \&.csv sinks for metrics using a 3D grid to fill with counts of SOMETHING, to be averaged over the entire simulation\&. Each line of the resulting \&.csv file corresponds to an XY plane for a value of Z in the grid\&. "
+.ti -1c
+.RI "interface \fBgrid3D_metrics_data\fP"
+.br
+.RI "Container for basic metrics gather from \fBrds::grid3D\fP\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBcell_accum\fP = std::false_type"
+.br
+.RI "Specify that the contents of the 2D or 3D cells should be accumulated without averaging\&. "
+.ti -1c
+.RI "using \fBcell_avg\fP = std::true_type"
+.br
+.RI "Specify that the contents of the 2D or 3D cells should be averaged by dividing by the total number of occurences (i\&.e\&. a density map)\&. "
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "using \fBrcppsw::ds::metrics::cell_accum\fP = typedef std::false_type"
+
+.PP
+Specify that the contents of the 2D or 3D cells should be accumulated without averaging\&. 
+.SS "using \fBrcppsw::ds::metrics::cell_avg\fP = typedef std::true_type"
+
+.PP
+Specify that the contents of the 2D or 3D cells should be averaged by dividing by the total number of occurences (i\&.e\&. a density map)\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

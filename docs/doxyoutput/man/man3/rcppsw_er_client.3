@@ -1,0 +1,157 @@
+.TH "rcppsw::er::client< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::er::client< T > \- A class that can connect to a logging server for logging of important events\&. Basically a thin wrapper around log4cxx\&. If ER_NDEBUG is defined, then this class will mostly compile away to nothing, and most member functions will not be defined\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <client\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBclient\fP (const \fBclient\fP &)=default"
+.br
+.ti -1c
+.RI "\fBclient\fP (const std::string &name)"
+.br
+.ti -1c
+.RI "virtual \fB~client\fP (void)=default"
+.br
+.ti -1c
+.RI "void \fBenv_verify\fP (void)"
+.br
+.RI "Verify that the execution environment was properly set up for logging, and abort the program if it was not\&. "
+.ti -1c
+.RI "void \fBlogfile_set\fP (const std::string &name)"
+.br
+.RI "Set the logfile of the logger with the specified name\&. Not idempotent\&. "
+.ti -1c
+.RI "log4cxx::LoggerPtr \fBlogger\fP (void) const"
+.br
+.RI "Get a reference to the ER logger\&. "
+.ti -1c
+.RI "std::string \fBlogger_name\fP (void) const"
+.br
+.RI "Get current logger name\&. "
+.ti -1c
+.RI "\fBclient\fP & \fBoperator=\fP (const \fBclient\fP &)=default"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBlogfile_set\fP (const log4cxx::LoggerPtr &\fBlogger\fP, const std::string &name)"
+.br
+.RI "Set the log file for the specified logger\&. Idempotent\&. If the logfile currently exists, it will be truncated\&. "
+.ti -1c
+.RI "static void \fBlogging_init\fP (const std::string &fpath)"
+.br
+.RI "Initialize logging by specifying the path to the log4cxx configuration file\&. "
+.ti -1c
+.RI "static void \fBmdc_add\fP (const std::string &key, const std::string &value)"
+.br
+.RI "Add a log4cxx MDC context\&. "
+.ti -1c
+.RI "static void \fBmdc_rm\fP (const std::string &key)"
+.br
+.RI "Remove a log4cxx MDC context\&. "
+.ti -1c
+.RI "static void \fBndc_do_pop\fP (void)"
+.br
+.RI "Pop the top of the log4cxx NDC stack\&. "
+.ti -1c
+.RI "static void \fBndc_do_push\fP (const std::string &s)"
+.br
+.RI "Push a log4cxx NDC context\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::er::client< T >"
+A class that can connect to a logging server for logging of important events\&. Basically a thin wrapper around log4cxx\&. If ER_NDEBUG is defined, then this class will mostly compile away to nothing, and most member functions will not be defined\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::er::client\fP< T >::\fBclient\fP (const std::string & name)\fC [inline]\fP, \fC [explicit]\fP"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP Name of client/new logger\&. 
+.RE
+.PP
+
+.SS "template<typename T > virtual \fBrcppsw::er::client\fP< T >::~\fBclient\fP (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SS "template<typename T > \fBrcppsw::er::client\fP< T >::\fBclient\fP (const \fBclient\fP< T > &)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > void \fBrcppsw::er::client\fP< T >::env_verify (void)\fC [inline]\fP"
+
+.PP
+Verify that the execution environment was properly set up for logging, and abort the program if it was not\&. 
+.SS "template<typename T > static void \fBrcppsw::er::client\fP< T >::logfile_set (const log4cxx::LoggerPtr & logger, const std::string & name)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Set the log file for the specified logger\&. Idempotent\&. If the logfile currently exists, it will be truncated\&. Logfile is an appender, which is given the same name as the logfile itself\&. 
+.SS "template<typename T > void \fBrcppsw::er::client\fP< T >::logfile_set (const std::string & name)\fC [inline]\fP"
+
+.PP
+Set the logfile of the logger with the specified name\&. Not idempotent\&. This is not done during construction because you often want to direct entire namespaces of loggers to a single output file (e\&.g\&., \fBrcppsw\&.patterns\fP)\&. 
+.SS "template<typename T > log4cxx::LoggerPtr \fBrcppsw::er::client\fP< T >::logger (void) const\fC [inline]\fP"
+
+.PP
+Get a reference to the ER logger\&. 
+.SS "template<typename T > std::string \fBrcppsw::er::client\fP< T >::logger_name (void) const\fC [inline]\fP"
+
+.PP
+Get current logger name\&. 
+.SS "template<typename T > static void \fBrcppsw::er::client\fP< T >::logging_init (const std::string & fpath)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Initialize logging by specifying the path to the log4cxx configuration file\&. 
+.SS "template<typename T > static void \fBrcppsw::er::client\fP< T >::mdc_add (const std::string & key, const std::string & value)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Add a log4cxx MDC context\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP The context key\&.
+.br
+\fIvalue\fP The context\&. 
+.RE
+.PP
+
+.SS "template<typename T > static void \fBrcppsw::er::client\fP< T >::mdc_rm (const std::string & key)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Remove a log4cxx MDC context\&. 
+.SS "template<typename T > static void \fBrcppsw::er::client\fP< T >::ndc_do_pop (void)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Pop the top of the log4cxx NDC stack\&. 
+.SS "template<typename T > static void \fBrcppsw::er::client\fP< T >::ndc_do_push (const std::string & s)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Push a log4cxx NDC context\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP The context\&. 
+.RE
+.PP
+
+.SS "template<typename T > \fBclient\fP& \fBrcppsw::er::client\fP< T >::operator= (const \fBclient\fP< T > &)\fC [default]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

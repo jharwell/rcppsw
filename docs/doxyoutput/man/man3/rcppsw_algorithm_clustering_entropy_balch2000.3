@@ -1,0 +1,102 @@
+.TH "rcppsw::algorithm::clustering::entropy_balch2000< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::algorithm::clustering::entropy_balch2000< T > \- Wrapper class for performing clustering using the event horizon model in which all points within a specified distance (horizon) to a point i are included in its cluster\&. Implements the following algorithm from Balch2000:  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <entropy\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< entropy_balch2000< T > >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBcluster_vector\fP = typename \fBbase_clustering_impl\fP< T, \fBpolicy::EH\fP >::\fBcluster_vector\fP"
+.br
+.ti -1c
+.RI "using \fBdist_calc_ftype\fP = typename \fBbase_clustering_impl\fP< T, \fBpolicy::EH\fP >::\fBdist_calc_ftype\fP"
+.br
+.ti -1c
+.RI "using \fBmembership_map\fP = std::map< double, \fBmembership_type\fP< \fBpolicy::EH\fP > >"
+.br
+.ti -1c
+.RI "using \fBmembership_vector\fP = std::vector< \fBmembership_type\fP< \fBpolicy::EH\fP > >"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBentropy_balch2000\fP (std::unique_ptr< \fBeh_clustering_impl\fP< T >> impl, const \fBmath::ranged\fP &horizon, double horizon_delta)"
+.br
+.ti -1c
+.RI "double \fBrun\fP (const std::vector< T > &data, const \fBdist_calc_ftype\fP &dist_func)"
+.br
+.RI "Perform entropy based clustering, returning the accumulated entropy across all horizons\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::algorithm::clustering::entropy_balch2000< T >"
+Wrapper class for performing clustering using the event horizon model in which all points within a specified distance (horizon) to a point i are included in its cluster\&. Implements the following algorithm from Balch2000: 
+
+For each value of horizon:
+.PP
+.IP "1." 4
+Initialize N clusters, one for each datapoint in the input vector\&.
+.IP "2." 4
+For each cluster c_i centered at point p_i, check every point p_j (i != j), and if distance(p_i, p_j) <= horizon, add p_j to c_i\&.
+.IP "3." 4
+Discard redundant clusters\&.
+.IP "4." 4
+Calculate entropy of remaining non-redundant clusters\&. Entropy is accumulated across all values of horizon\&.
+.PP
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIT\fP The type of the data that is being clustered\&. It must support the following operations: +=, /=, = \&. 
+.RE
+.PP
+
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename T > using \fBrcppsw::algorithm::clustering::entropy_balch2000\fP< T >::\fBcluster_vector\fP =  typename \fBbase_clustering_impl\fP< T, \fBpolicy::EH\fP>::\fBcluster_vector\fP"
+
+.SS "template<typename T > using \fBrcppsw::algorithm::clustering::entropy_balch2000\fP< T >::\fBdist_calc_ftype\fP =  typename \fBbase_clustering_impl\fP< T, \fBpolicy::EH\fP>::\fBdist_calc_ftype\fP"
+
+.SS "template<typename T > using \fBrcppsw::algorithm::clustering::entropy_balch2000\fP< T >::\fBmembership_map\fP =  std::map<double, \fBmembership_type\fP<\fBpolicy::EH\fP> >"
+
+.SS "template<typename T > using \fBrcppsw::algorithm::clustering::entropy_balch2000\fP< T >::\fBmembership_vector\fP =  std::vector<\fBmembership_type\fP<\fBpolicy::EH\fP> >"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBrcppsw::algorithm::clustering::entropy_balch2000\fP< T >::\fBentropy_balch2000\fP (std::unique_ptr< \fBeh_clustering_impl\fP< T >> impl, const \fBmath::ranged\fP & horizon, double horizon_delta)\fC [inline]\fP"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIimpl\fP The method and policy for clustering\&. 
+.br
+\fIhorizon\fP The min and maximum bounds of distances to use when computing clusters\&. 
+.br
+\fIhorizon_delta\fP The step size for moving between the min and max distance bounds; defines # of overall iterations\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > double \fBrcppsw::algorithm::clustering::entropy_balch2000\fP< T >::run (const std::vector< T > & data, const \fBdist_calc_ftype\fP & dist_func)\fC [inline]\fP"
+
+.PP
+Perform entropy based clustering, returning the accumulated entropy across all horizons\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

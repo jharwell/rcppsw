@@ -1,0 +1,71 @@
+.TH "rcppsw::control::config::xml::waveform_parser" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::control::config::xml::waveform_parser \- Parses XML configuration related to temporal waveform generation into \fBwaveform_config\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <waveform_parser\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< waveform_parser >\fP, and xml_config_parser\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBconfig_type\fP = \fBwaveform_config\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBwaveform_parser\fP (void)"
+.br
+.ti -1c
+.RI "void \fBparse\fP (const ticpp::Element &node) override"
+.br
+.ti -1c
+.RI "std::string \fBxml_root\fP (void) const override"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const std::string \fBkXMLRoot\fP = 'waveform'"
+.br
+.RI "The XML tag that all configration values should appear under\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Parses XML configuration related to temporal waveform generation into \fBwaveform_config\fP\&. 
+
+Any configuration values not present under the \fBkXMLRoot\fP will be given a value of -1\&.0\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "using \fBrcppsw::control::config::xml::waveform_parser::config_type\fP =  \fBwaveform_config\fP"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::control::config::xml::waveform_parser::waveform_parser (void)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void rcppsw::control::config::xml::waveform_parser::parse (const ticpp::Element & node)\fC [override]\fP"
+
+.SS "std::string rcppsw::control::config::xml::waveform_parser::xml_root (void) const\fC [inline]\fP, \fC [override]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "const std::string rcppsw::control::config::xml::waveform_parser::kXMLRoot = 'waveform'\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+The XML tag that all configration values should appear under\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,735 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1ds_1_1stacked__grid2D" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::ds::stacked_grid2D</compoundname>
+    <includes refid="stacked__grid2D_8hpp" local="no">stacked_grid2D.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TupleTypes</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a300c2bf53fc47eb7382483d3a22eb407" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>size_t</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classrcppsw_1_1ds_1_1grid2D__overlay" kindref="compound">rcppsw::ds::grid2D_overlay</ref>&lt; <ref refid="classrcppsw_1_1ds_1_1stacked__grid2D_1ad9742960b071ab063071b207db5da158" kindref="member">value_type</ref>&lt; Index &gt; &gt;</type>
+        <definition>using rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::layer_value_type =  rcppsw::ds::grid2D_overlay&lt;value_type&lt;Index&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>layer_value_type</name>
+        <briefdescription>
+<para>The type of a particular layer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the layer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="96" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1stacked__grid2D_1ad9742960b071ab063071b207db5da158" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>size_t</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+        </templateparamlist>
+        <type>typename std::tuple_element&lt; Index, TupleTypes &gt;::type</type>
+        <definition>using rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::value_type =  typename std::tuple_element&lt;Index, TupleTypes&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+<para>The type of the objects stored in a particular layer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the layer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="89" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1ds_1_1stacked__grid2D_1afa17ba385f84bc74ee476b6f22631fec" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr size_t</type>
+        <definition>constexpr size_t rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::kStackSize</definition>
+        <argsstring></argsstring>
+        <name>kStackSize</name>
+        <initializer>= std::tuple_size&lt;TupleTypes&gt;::value</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="188" column="27" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="188" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a271148fa9dba50e4f68345be0f732d18" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; void * &gt;</type>
+        <definition>std::vector&lt;void*&gt; rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::m_layers</definition>
+        <argsstring></argsstring>
+        <name>m_layers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="249" column="15" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a80cc7ebceae23bf8aa0b889a9d3a5994" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::stacked_grid2D</definition>
+        <argsstring>(const math::vector2d &amp;origin, const math::vector2d &amp;dims, const types::discretize_ratio &amp;grid_res, const types::discretize_ratio &amp;field_res)</argsstring>
+        <name>stacked_grid2D</name>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1math_1aeee4cbfec7ec35d102de51e287b8edeb" kindref="member">math::vector2d</ref> &amp;</type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1math_1aeee4cbfec7ec35d102de51e287b8edeb" kindref="member">math::vector2d</ref> &amp;</type>
+          <declname>dims</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1types_1ae7dfad2612de94a0c90840e1e872dfa0" kindref="member">types::discretize_ratio</ref> &amp;</type>
+          <declname>grid_res</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1types_1ae7dfad2612de94a0c90840e1e872dfa0" kindref="member">types::discretize_ratio</ref> &amp;</type>
+          <declname>field_res</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>origin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The anchor point of the stacked grid in continuous space. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The real size in X,Y which will be discretized into X/<computeroutput>grid_res</computeroutput> discrete elements along the X dimension and Y/<computeroutput>grid_res</computeroutput> discrete elements along the Y dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>grid_res</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The discretization unit for the grid. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>field_res</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The discretization unit for the field the grid is contained in (can be the same as the <computeroutput>grid_res</computeroutput>). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="74" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="74" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a2250631b454f0b6744e889d150b098cf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::~stacked_grid2D</definition>
+        <argsstring>(void)</argsstring>
+        <name>~stacked_grid2D</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="82" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a0dde45b8a31ba7ee6c4cbd55d8bad655" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>size_t</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a300c2bf53fc47eb7382483d3a22eb407" kindref="member">layer_value_type</ref>&lt; Index &gt;::<ref refid="classrcppsw_1_1ds_1_1stacked__grid2D_1ad9742960b071ab063071b207db5da158" kindref="member">value_type</ref> &amp;</type>
+        <definition>layer_value_type&lt;Index&gt;::value_type&amp; rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::access</definition>
+        <argsstring>(const math::vector2z &amp;d)</argsstring>
+        <name>access</name>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1math_1aa61ac5b9e211ad9913993fe03c12af7c" kindref="member">math::vector2z</ref> &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+<para>Get a reference to an object at a particular (layer,i,j) location. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the layer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>d</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The discrete coordinate pair. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="125" column="42" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="125" bodyend="127"/>
+        <references refid="classrcppsw_1_1math_1_1vector2_1af6b34be0d7fab15a93723bf246171910" compoundref="vector2_8hpp" startline="145" endline="145">rcppsw::math::vector2&lt; T &gt;::x</references>
+        <references refid="classrcppsw_1_1math_1_1vector2_1aea0d9eeaaf6e39905818271cf972cc36" compoundref="vector2_8hpp" startline="146" endline="146">rcppsw::math::vector2&lt; T &gt;::y</references>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a6d32c11e50ac15865428d4d3921ca8b8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>size_t</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+        </templateparamlist>
+        <type>const <ref refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a300c2bf53fc47eb7382483d3a22eb407" kindref="member">layer_value_type</ref>&lt; Index &gt;::<ref refid="classrcppsw_1_1ds_1_1stacked__grid2D_1ad9742960b071ab063071b207db5da158" kindref="member">value_type</ref> &amp;</type>
+        <definition>const layer_value_type&lt;Index&gt;::value_type&amp; rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::access</definition>
+        <argsstring>(const math::vector2z &amp;d) const</argsstring>
+        <name>access</name>
+        <param>
+          <type>const <ref refid="namespacercppsw_1_1math_1aa61ac5b9e211ad9913993fe03c12af7c" kindref="member">math::vector2z</ref> &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="130" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="130" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1ac29cc3be297831efe519a6d0a8ea3150" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>size_t</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a300c2bf53fc47eb7382483d3a22eb407" kindref="member">layer_value_type</ref>&lt; Index &gt;::<ref refid="classrcppsw_1_1ds_1_1stacked__grid2D_1ad9742960b071ab063071b207db5da158" kindref="member">value_type</ref> &amp;</type>
+        <definition>layer_value_type&lt;Index&gt;::value_type&amp; rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::access</definition>
+        <argsstring>(size_t i, size_t j)</argsstring>
+        <name>access</name>
+        <param>
+          <type>size_t</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>j</declname>
+        </param>
+        <briefdescription>
+<para>Get a reference to an object at a particular (layer,i,j) location. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the layer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>i</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The x coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>j</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The y coordinate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="106" column="42" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="106" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a792bd9b232b193fc814e1071d15be993" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>size_t</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+        </templateparamlist>
+        <type>const <ref refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a300c2bf53fc47eb7382483d3a22eb407" kindref="member">layer_value_type</ref>&lt; Index &gt;::<ref refid="classrcppsw_1_1ds_1_1stacked__grid2D_1ad9742960b071ab063071b207db5da158" kindref="member">value_type</ref> &amp;</type>
+        <definition>const layer_value_type&lt;Index&gt;::value_type&amp; rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::access</definition>
+        <argsstring>(size_t i, size_t j) const</argsstring>
+        <name>access</name>
+        <param>
+          <type>size_t</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>j</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="112" column="48" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="112" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a394122d8ca05534138f2a6e6ee855263" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespacercppsw_1_1math_1aa61ac5b9e211ad9913993fe03c12af7c" kindref="member">rmath::vector2z</ref></type>
+        <definition>rmath::vector2z rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::ddims2D</definition>
+        <argsstring>(void) const</argsstring>
+        <name>ddims2D</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="154" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="154" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1aa31ce60dc795afe396ff0a7a9b71fc00" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>size_t</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a300c2bf53fc47eb7382483d3a22eb407" kindref="member">layer_value_type</ref>&lt; Index &gt; *</type>
+        <definition>layer_value_type&lt;Index&gt;* rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::layer</definition>
+        <argsstring>(void)</argsstring>
+        <name>layer</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="135" column="20" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="135" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a18ac38ff32f544310a6aa3ecab54de95" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>size_t</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+        </templateparamlist>
+        <type>const <ref refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a300c2bf53fc47eb7382483d3a22eb407" kindref="member">layer_value_type</ref>&lt; Index &gt; *</type>
+        <definition>const layer_value_type&lt;Index&gt;* rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::layer</definition>
+        <argsstring>(void) const</argsstring>
+        <name>layer</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="139" column="26" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="139" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a1a258b5a7a9d8afe9b666792cf964123" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespacercppsw_1_1math_1aeee4cbfec7ec35d102de51e287b8edeb" kindref="member">rmath::vector2d</ref></type>
+        <definition>rmath::vector2d rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::rdims2D</definition>
+        <argsstring>(void) const</argsstring>
+        <name>rdims2D</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="150" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="150" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a33e3924c4b93385ce16f202deded4e6e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="namespacercppsw_1_1types_1ae7dfad2612de94a0c90840e1e872dfa0" kindref="member">types::discretize_ratio</ref> &amp;</type>
+        <definition>const types::discretize_ratio&amp; rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::resolution</definition>
+        <argsstring>(void) const</argsstring>
+        <name>resolution</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classrcppsw_1_1ds_1_1base__grid__overlay_1a54243210a50361cc50a9359632d99f0c" kindref="member">grid2D_overlay::resolution()</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="182" column="33" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="182" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1ad0f08c39d0a9ed7ebc479b0cca29b71f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::xdsize</definition>
+        <argsstring>(void) const</argsstring>
+        <name>xdsize</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classrcppsw_1_1ds_1_1grid2D__overlay_1a312fceb52e79f9c9d5381fe97c6d26c3" kindref="member">grid2D_overlay::xdsize()</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="146" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="146" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1abeda566887c56c64c084a591d2d176bb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::xrsize</definition>
+        <argsstring>(void) const</argsstring>
+        <name>xrsize</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classrcppsw_1_1ds_1_1grid2D__overlay_1a127b5b97fb0b1ca888fb2bb838665965" kindref="member">grid2D_overlay::xrsize()</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="161" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="161" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1af4fa2b26493ee19729ebf2308640594f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::ydsize</definition>
+        <argsstring>(void) const</argsstring>
+        <name>ydsize</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classrcppsw_1_1ds_1_1grid2D__overlay_1ac49cd6926dc2fe3ebf36296c47c7fbf2" kindref="member">grid2D_overlay::ydsize()</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="168" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="168" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a2cc384c51758f750f1f0fa53e0105444" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::yrsize</definition>
+        <argsstring>(void) const</argsstring>
+        <name>yrsize</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classrcppsw_1_1ds_1_1grid2D__overlay_1a162e17d6011cad9ab10ba82ab9c78a6d" kindref="member">grid2D_overlay::yrsize()</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="175" column="10" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="175" bodyend="177"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1aafe454d56f8b852dfe0cf91d7ec2a157" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>size_t</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::add_layer</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>add_layer</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Add a layer to the stacked grid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Note the reversal of indices! Because of the way recursive instantiation works, we can only start at an index &gt; 0, and go DOWN, but the user specified the order of layers going FORWARD/UP. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="219" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="219" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a74a8c14b7341477b1e6aa87256c40d98" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>size_t</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;((Index &gt; 0)), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::add_layers</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>add_layers</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Add layers when you have at least 2 layers to add. SFINAE is needed to prevent negative indices in the degenerate case where the stacked grid only has 1 layer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="196" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="196" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a74a8c14b7341477b1e6aa87256c40d98" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>size_t</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;((Index==0)), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::add_layers</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>add_layers</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Add layers when you only have 1 layer to add. SFINAE is needed to prevent negative indices in the degenerate case where the stacked grid only has 1 layer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="207" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="207" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a60f22a8b713ef0ff89071068e2ad3ec6" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>size_t</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;((Index &gt; 0)), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::rm_layer</definition>
+        <argsstring>(void)</argsstring>
+        <name>rm_layer</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Delete a layer from the stacked grid when there are at least 2 layers. Indice reversal is not really necessary here, but doing it for reasons of Principle of Least Surprise. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="235" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="235" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a60f22a8b713ef0ff89071068e2ad3ec6" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>size_t</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename std::enable_if&lt;((Index==0)), int &gt;::type</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::rm_layer</definition>
+        <argsstring>(void)</argsstring>
+        <name>rm_layer</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Remove a layer from the stacked grid when you only have 1 layer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="244" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="244" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1stacked__grid2D_1a6dac2f4575a5132c45e663bd128677ce" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>size_t</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;::rm_layers</definition>
+        <argsstring>(void)</argsstring>
+        <name>rm_layers</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="225" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="225" bodyend="227"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A sandwich of N 2D grids of the same size (x,y) dimensions, which can contain different kinds of objects. The objects in each layer of the grid are stored contiguously, but the grids themselves are not necessarily contiguous. The layers are 0 indexed. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This was implemented because the BGL only appears to support layered graphs/grids of the same object type. Although in hindsight I could have done this with grid_graph and boost::variant (was not aware of this when I implemented this class). Might not have been as highly performing in that case though. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::ds::stacked_grid2D&lt; TupleTypes &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1stacked__grid2D"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" line="63" column="21" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/stacked_grid2D.hpp" bodystart="63" bodyend="251"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1ac29cc3be297831efe519a6d0a8ea3150" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>access</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a792bd9b232b193fc814e1071d15be993" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>access</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a0dde45b8a31ba7ee6c4cbd55d8bad655" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>access</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a6d32c11e50ac15865428d4d3921ca8b8" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>access</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1aafe454d56f8b852dfe0cf91d7ec2a157" prot="private" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>add_layer</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a74a8c14b7341477b1e6aa87256c40d98" prot="private" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>add_layers</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a74a8c14b7341477b1e6aa87256c40d98" prot="private" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>add_layers</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a394122d8ca05534138f2a6e6ee855263" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>ddims2D</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1afa17ba385f84bc74ee476b6f22631fec" prot="private" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>kStackSize</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1aa31ce60dc795afe396ff0a7a9b71fc00" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>layer</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a18ac38ff32f544310a6aa3ecab54de95" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>layer</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a300c2bf53fc47eb7382483d3a22eb407" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>layer_value_type</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a271148fa9dba50e4f68345be0f732d18" prot="private" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>m_layers</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a1a258b5a7a9d8afe9b666792cf964123" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>rdims2D</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a33e3924c4b93385ce16f202deded4e6e" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>resolution</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a60f22a8b713ef0ff89071068e2ad3ec6" prot="private" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>rm_layer</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a60f22a8b713ef0ff89071068e2ad3ec6" prot="private" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>rm_layer</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a6dac2f4575a5132c45e663bd128677ce" prot="private" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>rm_layers</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a80cc7ebceae23bf8aa0b889a9d3a5994" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>stacked_grid2D</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1ad9742960b071ab063071b207db5da158" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>value_type</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1ad0f08c39d0a9ed7ebc479b0cca29b71f" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>xdsize</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1abeda566887c56c64c084a591d2d176bb" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>xrsize</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1af4fa2b26493ee19729ebf2308640594f" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>ydsize</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a2cc384c51758f750f1f0fa53e0105444" prot="public" virt="non-virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>yrsize</name></member>
+      <member refid="classrcppsw_1_1ds_1_1stacked__grid2D_1a2250631b454f0b6744e889d150b098cf" prot="public" virt="virtual"><scope>rcppsw::ds::stacked_grid2D</scope><name>~stacked_grid2D</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

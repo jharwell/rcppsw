@@ -45,9 +45,11 @@ template <typename T>
 class grid2D : public base_grid2D<T> {
  public:
   using typename base_grid2D<T>::index_range;
+  using typename base_grid2D<T>::coord_type;
+
   using base_grid2D<T>::access;
 
-  explicit grid2D(const math::vector2z& dims) : grid2D(dims.x(), dims.y()) {}
+  explicit grid2D(const coord_type& dims) : grid2D(dims.x(), dims.y()) {}
 
   grid2D(size_t x_max, size_t y_max)
       : base_grid2D<T>(), m_cells(boost::extents[x_max][y_max]) {}
@@ -57,16 +59,12 @@ class grid2D : public base_grid2D<T> {
                   [static_cast<typename index_range::index>(j)];
   }
 
-  size_t xsize(void) const { return m_cells.shape()[0]; }
-  size_t ysize(void) const { return m_cells.shape()[1]; }
+  size_t xsize(void) const override { return m_cells.shape()[0]; }
+  size_t ysize(void) const override { return m_cells.shape()[1]; }
 
  private:
-  using base_grid2D<T>::xdsize;
-  using base_grid2D<T>::ydsize;
   using typename base_grid2D<T>::grid_type;
 
-  size_t xdsize(void) const override { return xsize(); }
-  size_t ydsize(void) const override { return ysize(); }
   grid_type& grid(void) override { return m_cells; }
   const grid_type& grid(void) const override { return m_cells; }
 

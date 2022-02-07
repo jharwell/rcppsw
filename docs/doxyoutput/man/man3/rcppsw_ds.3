@@ -1,0 +1,115 @@
+.TH "rcppsw::ds" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds \- Data structures: 2D/3D lattice grids, 2D/3D discretizing grids to overlay onto continuous space, Poisson queue, rtree for 2D space, heterogeneous stacked 2D grid, type map for using in C++ quasi-reflection\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBgraph\fP"
+.br
+.RI "Graph data structures: Heterogeneous 3D grid graph\&. "
+.ti -1c
+.RI " \fBmetrics\fP"
+.br
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBbase_grid2D\fP"
+.br
+.RI "Base class containing functionality common to all types of 2D grids\&. "
+.ti -1c
+.RI "class \fBbase_grid3D\fP"
+.br
+.RI "Base class containing functionality common to all types of 3D grids\&. "
+.ti -1c
+.RI "class \fBbase_grid_overlay\fP"
+.br
+.RI "Base class for logical grids that are overlayed over a continuous environment\&. It discretizes the continuous volume into a grid of a specified resolution (e\&.g\&. it takes a continuous 10\&.0 x 5\&.0 x 5\&.0 space and discretizes it into a 50 x 25 x 25 grid of cells with a resolution of 0\&.2)\&. "
+.ti -1c
+.RI "class \fBgrid2D\fP"
+.br
+.RI "A 2D grid of SOMETHING\&. Mainly a convenience wrapper around boost::multi_array\&. "
+.ti -1c
+.RI "class \fBgrid2D_overlay\fP"
+.br
+.RI "A 2D logical grid overlayed over a continuous environment using a \fIcontiguous\fP array of the template parameter type (\&. "
+.ti -1c
+.RI "class \fBgrid3D\fP"
+.br
+.RI "A 3D grid of SOMETHING\&. Mainly a convenience wrapper around boost::multi_array\&. "
+.ti -1c
+.RI "class \fBgrid3D_overlay\fP"
+.br
+.RI "A 3D logical grid overlayed over a continuous environment using a \fIcontiguous\fP array of the template parameter type (\&. "
+.ti -1c
+.RI "class \fBpoisson_queue\fP"
+.br
+.RI "A wrapper around std::queue to make it more amenable to queueing theoretic analysis by tracking queue state\&. "
+.ti -1c
+.RI "class \fBrtree\fP"
+.br
+.RI "Wrapper around boost::geometry::index::rtree to provide very fast queries of the form 'How many things are in this  area', and reasonably fast tree build times as well\&. That is, this class is intended for applications in which large trees are built, queried frequently and updated relatively infrequently\&. "
+.ti -1c
+.RI "struct \fBrtree_spec\fP"
+.br
+.ti -1c
+.RI "class \fBstacked_grid2D\fP"
+.br
+.RI "A sandwich of N 2D grids of the same size (x,y) dimensions, which can contain different kinds of objects\&. The objects in each layer of the grid are stored contiguously, but the grids themselves are not necessarily contiguous\&. The layers are 0 indexed\&. "
+.ti -1c
+.RI "class \fBtype_map\fP"
+.br
+.RI "A map of a set of (possibly incomplete) types, keyed by std::type_index, with the value being a boost::variant\&. Extremely useful to emulate reflection in C++ (e\&.g\&. to map a type to a variant containing actions to take depending on what the actual type in the variant is)\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<typename TCoordType > using \fBrtree_box\fP = bg::model::box< \fBrtree_point\fP< TCoordType > >"
+.br
+.RI "Representation of rectangles in the rtree\&. "
+.ti -1c
+.RI "template<typename TCoordType > using \fBrtree_point\fP = bg::model::point< typename TCoordType::value_type, TCoordType::kDIMENSIONALITY, bg::cs::cartesian >"
+.br
+.RI "A 2D or 3D geometrical point, as defined by boost\&. Loose adaptor to \fBrmath::vector2\fP or \fBrmath::vector3\fP\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename TCoordType , RCPPSW_SFINAE_DECLDEF(rmpl::is_specialization< TCoordType, rmath::vector2 >::value) > \fBrtree_box\fP< TCoordType > \fBmake_rtree_box\fP (const TCoordType &ll, const TCoordType &ur)"
+.br
+.ti -1c
+.RI "template<typename TCoordType , RCPPSW_SFINAE_DECLDEF(rmpl::is_specialization< TCoordType, rmath::vector2 >::value) > \fBrtree_point\fP< TCoordType > \fBmake_rtree_point\fP (const TCoordType &c)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Data structures: 2D/3D lattice grids, 2D/3D discretizing grids to overlay onto continuous space, Poisson queue, rtree for 2D space, heterogeneous stacked 2D grid, type map for using in C++ quasi-reflection\&. 
+.SH "Typedef Documentation"
+.PP 
+.SS "template<typename TCoordType > using \fBrcppsw::ds::rtree_box\fP = typedef bg::model::box<\fBrtree_point\fP<TCoordType> >"
+
+.PP
+Representation of rectangles in the rtree\&. 
+.SS "template<typename TCoordType > using \fBrcppsw::ds::rtree_point\fP = typedef bg::model::point<typename TCoordType::value_type, TCoordType::kDIMENSIONALITY, bg::cs::cartesian>"
+
+.PP
+A 2D or 3D geometrical point, as defined by boost\&. Loose adaptor to \fBrmath::vector2\fP or \fBrmath::vector3\fP\&. 
+.SH "Function Documentation"
+.PP 
+.SS "template<typename TCoordType , RCPPSW_SFINAE_DECLDEF(rmpl::is_specialization< TCoordType, rmath::vector2 >::value) > \fBrtree_box\fP< TCoordType > rcppsw::ds::make_rtree_box (const TCoordType & ll, const TCoordType & ur)"
+
+.SS "template<typename TCoordType , RCPPSW_SFINAE_DECLDEF(rmpl::is_specialization< TCoordType, rmath::vector2 >::value) > \fBrtree_point\fP< TCoordType > rcppsw::ds::make_rtree_point (const TCoordType & c)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

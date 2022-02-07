@@ -1,0 +1,43 @@
+.TH "rcppsw::algorithm::max_subarray_finder< T >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::algorithm::max_subarray_finder< T > \- Find the maximal subarray using Kadane's algorithm, which is O(n)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <max_subarray_finder\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "boost::optional< std::tuple< T, int, int > > \fBoperator()\fP (const std::vector< T > &arr) const"
+.br
+.RI "Find the maximal subarray from the source array\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class rcppsw::algorithm::max_subarray_finder< T >"
+Find the maximal subarray using Kadane's algorithm, which is O(n)\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > boost::optional<std::tuple<T, int, int> > \fBrcppsw::algorithm::max_subarray_finder\fP< T >::operator() (const std::vector< T > & arr) const\fC [inline]\fP"
+
+.PP
+Find the maximal subarray from the source array\&. 
+.PP
+\fBReturns\fP
+.RS 4
+(sum, start index (inclusive), end index (inclusive)), if one is found\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

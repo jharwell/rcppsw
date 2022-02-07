@@ -1,0 +1,99 @@
+.TH "rcppsw::patterns::fsm::hfsm" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::fsm::hfsm \- Implements a software-based hierarchical state machine (states can contain other states)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <hfsm\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::patterns::fsm::base_fsm\fP, and \fBrcppsw::er::client< hfsm >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBhfsm\fP (uint8_t \fBmax_states\fP, uint8_t \fBinitial_state\fP=0)"
+.br
+.ti -1c
+.RI "\fB~hfsm\fP () override=default"
+.br
+.ti -1c
+.RI "void \fBchange_parent\fP (uint8_t \fBstate\fP, \fBrcppsw::patterns::fsm::state\fP *new_parent)"
+.br
+.RI "Change the parent state of the specified state to a new state\&. "
+.ti -1c
+.RI "void \fBinit\fP (void) override"
+.br
+.RI "Initialize/reset the state machine\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBST_top_state\fP (void)"
+.br
+.RI "The topmost state in the hierarchy, of which all states are children\&. If an event gets all the way up to here, that's bad, because it should have been handled at a lower layer\&. "
+.ti -1c
+.RI "\fBhfsm_state_action0\fP< \fBhfsm\fP, &\fBhfsm::ST_top_state\fP > * \fBtop_state\fP (void)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Implements a software-based hierarchical state machine (states can contain other states)\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::patterns::fsm::hfsm::hfsm (uint8_t max_states, uint8_t initial_state = \fC0\fP)\fC [inline]\fP, \fC [explicit]\fP"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fImax_states\fP The maximum number of state machine states\&. 
+.br
+\fIinitial_state\fP Initial state machine state\&. 
+.RE
+.PP
+
+.SS "rcppsw::patterns::fsm::hfsm::~hfsm ()\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void rcppsw::patterns::fsm::hfsm::change_parent (uint8_t state, \fBrcppsw::patterns::fsm::state\fP * new_parent)"
+
+.PP
+Change the parent state of the specified state to a new state\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstate\fP The state within THIS state machine to change the parent of\&. 
+.br
+\fInew_parent\fP A new parent state, which can be from ANOTHER \fBhfsm\fP\&. 
+.RE
+.PP
+
+.SS "void rcppsw::patterns::fsm::hfsm::init (void)\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Initialize/reset the state machine\&. 
+.PP
+Reimplemented from \fBrcppsw::patterns::fsm::base_fsm\fP\&.
+.SS "int rcppsw::patterns::fsm::hfsm::ST_top_state (void)\fC [inline]\fP, \fC [protected]\fP"
+
+.PP
+The topmost state in the hierarchy, of which all states are children\&. If an event gets all the way up to here, that's bad, because it should have been handled at a lower layer\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Does not return\&. 
+.RE
+.PP
+
+.SS "\fBhfsm_state_action0\fP<\fBhfsm\fP, &\fBhfsm::ST_top_state\fP>* rcppsw::patterns::fsm::hfsm::top_state (void)\fC [inline]\fP, \fC [protected]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

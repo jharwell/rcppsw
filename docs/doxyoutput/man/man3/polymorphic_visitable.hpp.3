@@ -1,0 +1,78 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/polymorphic_visitable.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/patterns/visitor/polymorphic_visitable.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBpolymorphic_accept_set< Ts >\fP"
+.br
+.RI "Allows polymorphic classes (those with a pure virtual member in a base class) to accept visitors of specific types\&. Allows implicit conversion to base classes if both base/derived types are present in the set\&. "
+.ti -1c
+.RI "class \fBpolymorphic_accept_set< T >\fP"
+.br
+.ti -1c
+.RI "class \fBpolymorphic_accept_set< T, Ts\&.\&.\&. >\fP"
+.br
+.ti -1c
+.RI "class \fBrcppsw::patterns::visitor::detail::polymorphic_accept_set_helper< T >\fP"
+.br
+.RI "Helper class to provide the actual implementation of the visitor pattern, receiving end\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns\fP"
+.br
+.RI "Design pattern templates and interfaces\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns::visitor\fP"
+.br
+.RI "Visitor design pattern variants: polymorphic, filtered, etc\&. "
+.ti -1c
+.RI " \fBrcppsw::patterns::visitor::detail\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2017 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Class Documentation"
+.PP 
+.SH "class polymorphic_accept_set"
+.PP 
+
+.SS "template<typename\&.\&.\&. Ts>
+.br
+class polymorphic_accept_set< Ts >"
+Allows polymorphic classes (those with a pure virtual member in a base class) to accept visitors of specific types\&. Allows implicit conversion to base classes if both base/derived types are present in the set\&. 
+
+This is more 'single dispatch' than 'double dispatch', and so is not precisely the visitor pattern, as classes deriving from this class need to implement the second part of the dispatch themselves\&. However, for situations where you have disparate classes that all share a common interface this is a far more elegant solution than a brittle series of if-else to determine the proper type of the object via dynamic_cast<> before calling a chained visit() function\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

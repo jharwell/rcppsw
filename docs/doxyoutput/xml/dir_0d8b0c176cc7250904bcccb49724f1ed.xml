@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_0d8b0c176cc7250904bcccb49724f1ed" kind="dir">
+    <compoundname>/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml</compoundname>
+    <innerfile refid="base__sink__parser_8hpp">base_sink_parser.hpp</innerfile>
+    <innerfile refid="file__sink__parser_8hpp">file_sink_parser.hpp</innerfile>
+    <innerfile refid="metrics__parser_8hpp">metrics_parser.hpp</innerfile>
+    <innerfile refid="network__sink__parser_8hpp">network_sink_parser.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/config/xml/"/>
+  </compounddef>
+</doxygen>

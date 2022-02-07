@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1math_1_1config_1_1xml" kind="namespace" language="C++">
+    <compoundname>rcppsw::math::config::xml</compoundname>
+    <innerclass refid="classrcppsw_1_1math_1_1config_1_1xml_1_1ema__parser" prot="public">rcppsw::math::config::xml::ema_parser</innerclass>
+    <innerclass refid="classrcppsw_1_1math_1_1config_1_1xml_1_1rng__parser" prot="public">rcppsw::math::config::xml::rng_parser</innerclass>
+    <innerclass refid="classrcppsw_1_1math_1_1config_1_1xml_1_1sigmoid__parser" prot="public">rcppsw::math::config::xml::sigmoid_parser</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/math/config/xml/ema_parser.hpp" line="37" column="38"/>
+  </compounddef>
+</doxygen>

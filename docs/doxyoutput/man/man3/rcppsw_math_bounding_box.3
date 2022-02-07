@@ -1,0 +1,134 @@
+.TH "rcppsw::math::bounding_box< TCoord >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math::bounding_box< TCoord > \- Mathematical abstraction of the 3D bounding box of an object\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <bounding_box\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< bounding_box< TCoord > >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBcoord_type\fP = TCoord"
+.br
+.ti -1c
+.RI "using \fBcoord_value_type\fP = typename coord_type::value_type"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbounding_box\fP (\fBbounding_box\fP &&)=default"
+.br
+.ti -1c
+.RI "\fBbounding_box\fP (const \fBbounding_box\fP &)=default"
+.br
+.ti -1c
+.RI "\fBbounding_box\fP (const \fBcoord_type\fP &dims)"
+.br
+.ti -1c
+.RI "\fBbounding_box\fP (const \fBcoord_type\fP &dims, const \fBcoord_type\fP &anchor)"
+.br
+.ti -1c
+.RI "\fB~bounding_box\fP (void) override=default"
+.br
+.ti -1c
+.RI "const \fBcoord_type\fP & \fBanchor3D\fP (void) const"
+.br
+.ti -1c
+.RI "\fBcoord_type\fP \fBcenter3D\fP (void) const"
+.br
+.ti -1c
+.RI "const \fBcoord_type\fP & \fBdims3D\fP (void) const"
+.br
+.ti -1c
+.RI "\fBbounding_box\fP & \fBoperator=\fP (\fBbounding_box\fP &&)=default"
+.br
+.ti -1c
+.RI "\fBbounding_box\fP & \fBoperator=\fP (const \fBbounding_box\fP &)=default"
+.br
+.ti -1c
+.RI "void \fBupdate\fP (const \fBcoord_type\fP &anchor)"
+.br
+.ti -1c
+.RI "\fBcoord_value_type\fP \fBxsize\fP (void) const"
+.br
+.ti -1c
+.RI "\fBrmath::range\fP< \fBcoord_value_type\fP > \fBxspan\fP (void) const"
+.br
+.ti -1c
+.RI "\fBcoord_value_type\fP \fBysize\fP (void) const"
+.br
+.ti -1c
+.RI "\fBrmath::range\fP< \fBcoord_value_type\fP > \fByspan\fP (void) const"
+.br
+.ti -1c
+.RI "\fBcoord_value_type\fP \fBzsize\fP (void) const"
+.br
+.ti -1c
+.RI "\fBrmath::range\fP< \fBcoord_value_type\fP > \fBzspan\fP (void) const"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TCoord>
+.br
+class rcppsw::math::bounding_box< TCoord >"
+Mathematical abstraction of the 3D bounding box of an object\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename TCoord > using \fBrcppsw::math::bounding_box\fP< TCoord >::\fBcoord_type\fP =  TCoord"
+
+.SS "template<typename TCoord > using \fBrcppsw::math::bounding_box\fP< TCoord >::\fBcoord_value_type\fP =  typename coord_type::value_type"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TCoord > \fBrcppsw::math::bounding_box\fP< TCoord >::\fBbounding_box\fP (const \fBcoord_type\fP & dims)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "template<typename TCoord > \fBrcppsw::math::bounding_box\fP< TCoord >::\fBbounding_box\fP (const \fBcoord_type\fP & dims, const \fBcoord_type\fP & anchor)\fC [inline]\fP"
+
+.SS "template<typename TCoord > \fBrcppsw::math::bounding_box\fP< TCoord >::~\fBbounding_box\fP (void)\fC [override]\fP, \fC [default]\fP"
+
+.SS "template<typename TCoord > \fBrcppsw::math::bounding_box\fP< TCoord >::\fBbounding_box\fP (const \fBbounding_box\fP< TCoord > &)\fC [default]\fP"
+
+.SS "template<typename TCoord > \fBrcppsw::math::bounding_box\fP< TCoord >::\fBbounding_box\fP (\fBbounding_box\fP< TCoord > &&)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TCoord > const \fBcoord_type\fP& \fBrcppsw::math::bounding_box\fP< TCoord >::anchor3D (void) const\fC [inline]\fP"
+
+.SS "template<typename TCoord > \fBcoord_type\fP \fBrcppsw::math::bounding_box\fP< TCoord >::center3D (void) const\fC [inline]\fP"
+
+.SS "template<typename TCoord > const \fBcoord_type\fP& \fBrcppsw::math::bounding_box\fP< TCoord >::dims3D (void) const\fC [inline]\fP"
+
+.SS "template<typename TCoord > \fBbounding_box\fP& \fBrcppsw::math::bounding_box\fP< TCoord >::operator= (\fBbounding_box\fP< TCoord > &&)\fC [default]\fP"
+
+.SS "template<typename TCoord > \fBbounding_box\fP& \fBrcppsw::math::bounding_box\fP< TCoord >::operator= (const \fBbounding_box\fP< TCoord > &)\fC [default]\fP"
+
+.SS "template<typename TCoord > void \fBrcppsw::math::bounding_box\fP< TCoord >::update (const \fBcoord_type\fP & anchor)\fC [inline]\fP"
+
+.SS "template<typename TCoord > \fBcoord_value_type\fP \fBrcppsw::math::bounding_box\fP< TCoord >::xsize (void) const\fC [inline]\fP"
+
+.SS "template<typename TCoord > \fBrmath::range\fP<\fBcoord_value_type\fP> \fBrcppsw::math::bounding_box\fP< TCoord >::xspan (void) const\fC [inline]\fP"
+
+.SS "template<typename TCoord > \fBcoord_value_type\fP \fBrcppsw::math::bounding_box\fP< TCoord >::ysize (void) const\fC [inline]\fP"
+
+.SS "template<typename TCoord > \fBrmath::range\fP<\fBcoord_value_type\fP> \fBrcppsw::math::bounding_box\fP< TCoord >::yspan (void) const\fC [inline]\fP"
+
+.SS "template<typename TCoord > \fBcoord_value_type\fP \fBrcppsw::math::bounding_box\fP< TCoord >::zsize (void) const\fC [inline]\fP"
+
+.SS "template<typename TCoord > \fBrmath::range\fP<\fBcoord_value_type\fP> \fBrcppsw::math::bounding_box\fP< TCoord >::zspan (void) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

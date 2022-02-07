@@ -1,0 +1,52 @@
+.TH "rcppsw::math::binned_powerlaw_distribution" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::math::binned_powerlaw_distribution \- A power law distribution (duh) of x^pwr where x is in [lb, ub], where the outputs are rounded to the nearest power of pwr\&. For example, instead of sampling and getting 3\&.78, with pwr=2 you would get 4\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <binned_powerlaw_distribution\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::math::powerlaw_distribution\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbinned_powerlaw_distribution\fP (size_t \fBlb\fP, size_t \fBub\fP, size_t \fBpwr\fP)"
+.br
+.RI "Initialize distribution\&. "
+.ti -1c
+.RI "size_t \fBoperator()\fP (\fBrng\fP *const \fBrng\fP)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A power law distribution (duh) of x^pwr where x is in [lb, ub], where the outputs are rounded to the nearest power of pwr\&. For example, instead of sampling and getting 3\&.78, with pwr=2 you would get 4\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::math::binned_powerlaw_distribution::binned_powerlaw_distribution (size_t lb, size_t ub, size_t pwr)\fC [inline]\fP"
+
+.PP
+Initialize distribution\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIlb\fP Lower bound for distribution\&. Assumed to be a multiple of pwr\&. 
+.br
+\fIub\fP Upper bound for distribution\&. Assumed to be a multiple of pwr\&. 
+.br
+\fIpwr\fP Power for distribution\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "size_t rcppsw::math::binned_powerlaw_distribution::operator() (\fBrng\fP *const rng)\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

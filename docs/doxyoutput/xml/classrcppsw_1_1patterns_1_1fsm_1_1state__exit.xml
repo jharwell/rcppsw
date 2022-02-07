@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1patterns_1_1fsm_1_1state__exit" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>rcppsw::patterns::fsm::state_exit</compoundname>
+    <derivedcompoundref refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit__action" prot="public" virt="non-virtual">rcppsw::patterns::fsm::state_exit_action&lt; SM, Func &gt;</derivedcompoundref>
+    <includes refid="state__exit_8hpp" local="no">state_exit.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1state__exit_1a9abe2c072e1ff2b4653f303dccaf74eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::patterns::fsm::state_exit::~state_exit</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~state_exit</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_exit.hpp" line="50" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1patterns_1_1fsm_1_1state__exit_1a7559869b70c96a58f545b6adaaeb6f94" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void rcppsw::patterns::fsm::state_exit::invoke_exit_action</definition>
+        <argsstring>(base_fsm *sm) const =0</argsstring>
+        <name>invoke_exit_action</name>
+        <reimplementedby refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit__action_1a41ec770cde01a270ae71041870421b36">invoke_exit_action</reimplementedby>
+        <param>
+          <type><ref refid="classrcppsw_1_1patterns_1_1fsm_1_1base__fsm" kindref="compound">base_fsm</ref> *</type>
+          <declname>sm</declname>
+        </param>
+        <briefdescription>
+<para>Called by the state machine engine to execute a state exit action. Called when leaving a state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A state machine instance. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_exit.hpp" line="58" column="16"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Abstract exit base class that all exit classes inherit from. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::state_exit</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit"/>
+      </node>
+      <node id="2">
+        <label>rcppsw::patterns::fsm::state_exit_action&lt; SM, Func &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit__action"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::patterns::fsm::state_exit</label>
+        <link refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_exit.hpp" line="48" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/patterns/fsm/state_exit.hpp" bodystart="48" bodyend="59"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit_1a7559869b70c96a58f545b6adaaeb6f94" prot="public" virt="pure-virtual"><scope>rcppsw::patterns::fsm::state_exit</scope><name>invoke_exit_action</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1fsm_1_1state__exit_1a9abe2c072e1ff2b4653f303dccaf74eb" prot="public" virt="virtual"><scope>rcppsw::patterns::fsm::state_exit</scope><name>~state_exit</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

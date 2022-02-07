@@ -88,25 +88,34 @@
   }
 
 /**
- * \def RCPPSW_WRAP_DECLDEF(Func, member,...)
+ * \def RCPPSW_WRAP_DECLDEF(Func, Callable, ...)
  *
- * Wrap a public function from a member variable (or even another member
- * function that returns an object that contains the function you want to
- * wrap). The variable argument list is to allow specification of 'const' as
- * part of the function definition. Wrapped functions can take any number of
- * arguments of any type.
+ * Wrap a public function, member variable (can't be a pointer type), or even
+ * another member function that returns an object that contains the function you
+ * want to wrap). The variable argument list is to allow specification of
+ * 'const' as part of the function definition. Wrapped functions can take any
+ * number of arguments of any type.
  *
  * Cannot be used to wrap overriden functions.
  */
-#define RCPPSW_WRAP_DECLDEF(Func, Member, ...)                                \
-  template <typename... Args>                                                 \
-  auto Func(Args&&... args)                                                   \
-      __VA_ARGS__->decltype(std::declval<decltype(Member)>().Func(args...)) { \
-    return Member.Func(std::forward<Args>(args)...);                          \
+#define RCPPSW_WRAP_DECLDEF(Func, Callable, ...)                                \
+  RCPPSW_WRAP_DECLDEF_AS(Func, Callable, Func, __VA_ARGS__)
+
+/**
+ * \def RCPPSW_WRAP_DECLDEF_AS(Func, Callable, NewName, ...)
+ *
+ * Same as \ref RCPPSW_WRAP_DECLDEF, but renames the function wrapper.
+ */
+
+#define RCPPSW_WRAP_DECLDEF_AS(Func, Callable, NewName, ...)            \
+  template <typename... Args>                                           \
+  auto NewName(Args&&... args)                                          \
+      __VA_ARGS__->decltype(std::declval<decltype(Callable)>().Func(args...)) { \
+    return (Callable).Func(std::forward<Args>(args)...);                \
   }
 
 /**
- * \def RCPPSW_WRAP_DECLDEF_OVERRIDE(Func, member,...)
+ * \def RCPPSW_WRAP_DECLDEF_OVERRIDE(Func, Callable,...)
  *
  * Wrap a public function from a member variable (or even another member
  * function that returns an object that contains the function you want to
@@ -119,10 +128,10 @@
  * enclosing class implements the same interface as a member variable).
  */
 
-#define RCPPSW_WRAP_DECLDEF_OVERRIDE(Func, Member, ...)                 \
+#define RCPPSW_WRAP_DECLDEF_OVERRIDE(Func, Callable, ...)                 \
   auto Func(void)                                                       \
-      __VA_ARGS__->decltype(std::declval<decltype(Member)>().Func()) override { \
-    return Member.Func();                                               \
+      __VA_ARGS__->decltype(std::declval<decltype(Callable)>().Func()) override { \
+    return (Callable).Func();                                             \
   }
 
 /**
@@ -250,7 +259,7 @@
 /**
  * \def RCPPSW_WARNING_DISABLE_PUSH(...)
  *
- * Alias for\ref RCSW_WARNING_DISABLE_PUSH, a compiler-agnostic way to push
+ * Alias for \ref RCSW_WARNING_DISABLE_PUSH, a compiler-agnostic way to push
  * warning ignores onto the stack.
  *
  * Very useful for disabling warnings from headers/frameworks which you have no
@@ -261,7 +270,7 @@
 /**
  * \def RCPPSW_WARNING_DISABLE_POP(...)
  *
- * Alias for\ref RCSW_WARNING_DISABLE_POP, a compiler-agnostic way to pop
+ * Alias for \ref RCSW_WARNING_DISABLE_POP, a compiler-agnostic way to pop
  * warning ignores from the stack.
  *
  * Very useful for disabling warnings from headers/frameworks which you have no
@@ -269,7 +278,16 @@
  */
 #define RCPPSW_WARNING_DISABLE_POP(...) RCSW_WARNING_DISABLE_POP(__VA_ARGS__)
 
+/**
+ * \def RCPPSW_WARNING_DISABLE(...)
+ *
+ * Alias for \ref RCSW_WARNING_DISABLE, a compiler-agnostic way to ignore
+ * compiler warnings within a given diagnostic context.
+ */
+#define RCPPSW_WARNING_DISABLE(...) RCSW_WARNING_DISABLE(__VA_ARGS__)
+
 /* clang-format off */
+
 #if defined(__INTEL_COMPILER)
 
 /**
@@ -284,7 +302,8 @@
  *
  * Warning 1418.
  */
-#define RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...) RCSW_WARNING_DISABLE(1418)
+#define RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...) \
+  RCPPSW_WARNING_DISABLE(1418)
 
 /**
  * \def RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...)
@@ -292,6 +311,27 @@
  * Not needed by intel compiler.
  */
 #define RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...)
+ *
+ * Not needed by intel compiler.
+ */
+#define RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_USELESS_CAST(...)
+ *
+ * Not needed by intel compiler.
+ */
+#define RCPPSW_WARNING_DISABLE_USELESS_CAST(...)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...)
+ *
+ * Not needed by intel compiler.
+ */
+#define RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...)
 
 #elif defined(__clang__)
 
@@ -301,7 +341,7 @@
  * -Wmissing-variable-declarations.
  */
 #define RCPPSW_WARNING_DISABLE_MISSING_VAR_DECL(...) \
-  RCSW_WARNING_DISABLE(-Wmissing-variable-declarations)
+  RCPPSW_WARNING_DISABLE(-Wmissing-variable-declarations)
 
 /**
  * \def RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...)
@@ -309,7 +349,7 @@
  * -Wmissing-prototypes.
  */
 #define RCPPSW_WARNING_DISABLE_MISSING_PROTOTYPE(...) \
-  RCSW_WARNING_DISABLE(-Wmissing-prototypes)
+  RCPPSW_WARNING_DISABLE(-Wmissing-prototypes)
 
 /**
  * \def RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...)
@@ -317,7 +357,7 @@
  * -Wglobal-constructors
  */
 #define RCPPSW_WARNING_DISABLE_GLOBAL_CTOR(...) \
-  RCSW_WARNING_DISABLE(-Wglobal-constructors)
+  RCPPSW_WARNING_DISABLE(-Wglobal-constructors)
 
 /**
  * \def RCPPSW_WARNING_DISABLE_OVERLOADED_VIRTUAL(...)
@@ -325,6 +365,35 @@
  * Not needed by clang.
  */
 #define RCPPSW_WARNING_DISABLE_OVERLOADED_VIRTUAL(...)
+
+/**
+* \def RCPPSW_WARNING_DISABLE_EFFCXX(...)
+*
+* -Weffc++
+*/
+#define RCPPSW_WARNING_DISABLE_EFFCXX(...)      \
+  RCPPSW_WARNING_DISABLE(-Weffc++)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...)
+ *
+ * Not needed by clang.
+ */
+#define RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_USELESS_CAST(...)
+ *
+ * Not needed by clang.
+ */
+#define RCPPSW_WARNING_DISABLE_USELESS_CAST(...)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...)
+ *
+ * Not needed by clang.
+ */
+#define RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...)
 
 #elif defined(__GNUC__)
 
@@ -355,7 +424,39 @@
  * -Woverloaded-virtual
  */
 #define RCPPSW_WARNING_DISABLE_OVERLOADED_VIRTUAL(...) \
-  RCSW_WARNING_DISABLE(-Woverloaded-virtual)
+  RCPPSW_WARNING_DISABLE(-Woverloaded-virtual)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_EFFCXX(...)
+ *
+ * -Weffc++
+ */
+#define RCPPSW_WARNING_DISABLE_EFFCXX(...) \
+  RCPPSW_WARNING_DISABLE(-Weffc++)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...)
+ *
+ * -Wsuggest-override
+ */
+#define RCPPSW_WARNING_DISABLE_SUGGEST_OVERRIDE(...) \
+  RCPPSW_WARNING_DISABLE(-Wsuggest-override)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_USELESS_CAST(...)
+ *
+ * -Wuseless-cast
+ */
+#define RCPPSW_WARNING_DISABLE_USELESS_CAST(...) \
+  RCPPSW_WARNING_DISABLE(-Wuseless-cast)
+
+/**
+ * \def RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...)
+ *
+ * -Wold-style-cast
+ */
+#define RCPPSW_WARNING_DISABLE_OLD_STYLE_CAST(...) \
+  RCPPSW_WARNING_DISABLE(-Wold-style-cast)
 
 #endif /* __INTEL_COMPILER__ */
 /* clang-format on */

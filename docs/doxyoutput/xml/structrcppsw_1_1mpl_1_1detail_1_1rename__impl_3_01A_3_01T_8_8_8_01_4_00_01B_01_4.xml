@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1mpl_1_1detail_1_1rename__impl_3_01A_3_01T_8_8_8_01_4_00_01B_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>rcppsw::mpl::detail::rename_impl&lt; A&lt; T... &gt;, B &gt;</compoundname>
+    <includes refid="typelist_8hpp" local="no">typelist.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>template&lt; class... &gt; class</type>
+        <declname>A</declname>
+        <defname>A</defname>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>T</declname>
+        <defname>T</defname>
+      </param>
+      <param>
+        <type>template&lt; class... &gt; class</type>
+        <declname>B</declname>
+        <defname>B</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structrcppsw_1_1mpl_1_1detail_1_1rename__impl_3_01A_3_01T_8_8_8_01_4_00_01B_01_4_1a231486196efc151ec7f5b95c3bf4043a" prot="public" static="no">
+        <type>B&lt; T... &gt;</type>
+        <definition>using rcppsw::mpl::detail::rename_impl&lt; A&lt; T... &gt;, B &gt;::type =  B&lt;T...&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" line="98" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::mpl::detail::rename_impl&lt; A&lt; T... &gt;, B &gt;</label>
+        <link refid="structrcppsw_1_1mpl_1_1detail_1_1rename__impl_3_01A_3_01T_8_8_8_01_4_00_01B_01_4"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" line="97" column="20" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/mpl/typelist.hpp" bodystart="97" bodyend="99"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1mpl_1_1detail_1_1rename__impl_3_01A_3_01T_8_8_8_01_4_00_01B_01_4_1a231486196efc151ec7f5b95c3bf4043a" prot="public" virt="non-virtual"><scope>rcppsw::mpl::detail::rename_impl&lt; A&lt; T... &gt;, B &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

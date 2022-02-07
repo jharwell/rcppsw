@@ -1,0 +1,51 @@
+.TH "rcppsw::patterns::fsm::state_map_ex_row" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::patterns::fsm::state_map_ex_row \- A structure to hold a single row within the extended state map (a state map which includes entry, exit, and guard hooks)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <state_map_ex_row\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBstate_map_ex_row\fP (\fBrpfsm::state\fP *\fBstate\fP, \fBstate_guard\fP *\fBguard\fP, \fBstate_entry\fP *\fBentry\fP, \fBstate_exit\fP *\fBexit\fP)"
+.br
+.ti -1c
+.RI "\fBstate_entry\fP * \fBentry\fP (void) const"
+.br
+.ti -1c
+.RI "\fBstate_exit\fP * \fBexit\fP (void) const"
+.br
+.ti -1c
+.RI "\fBstate_guard\fP * \fBguard\fP (void) const"
+.br
+.ti -1c
+.RI "\fBrpfsm::state\fP * \fBstate\fP (void) const"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A structure to hold a single row within the extended state map (a state map which includes entry, exit, and guard hooks)\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::patterns::fsm::state_map_ex_row::state_map_ex_row (\fBrpfsm::state\fP * state, \fBstate_guard\fP * guard, \fBstate_entry\fP * entry, \fBstate_exit\fP * exit)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBstate_entry\fP* rcppsw::patterns::fsm::state_map_ex_row::entry (void) const\fC [inline]\fP"
+
+.SS "\fBstate_exit\fP* rcppsw::patterns::fsm::state_map_ex_row::exit (void) const\fC [inline]\fP"
+
+.SS "\fBstate_guard\fP* rcppsw::patterns::fsm::state_map_ex_row::guard (void) const\fC [inline]\fP"
+
+.SS "\fBrpfsm::state\fP* rcppsw::patterns::fsm::state_map_ex_row::state (void) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

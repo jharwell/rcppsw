@@ -1,0 +1,98 @@
+.TH "rcppsw::control::waveform_generator" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::control::waveform_generator \- Factory to create waveforms of different types given the name of a waveform\&. Valid names are:  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <waveform_generator\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::patterns::factory::releasing_factory< base_waveform, std::string, const config::waveform_config * >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBwaveform_generator\fP (void)"
+.br
+.ti -1c
+.RI "std::unique_ptr< \fBbase_waveform\fP > \fBoperator()\fP (const std::string &name, const \fBconfig::waveform_config\fP *config)"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const std::string \fBkConstant\fP = 'Constant'"
+.br
+.RI "Generate a \fBconstant_waveform\fP\&. "
+.ti -1c
+.RI "static const std::string \fBkNull\fP = 'Null'"
+.br
+.RI "Generate a \fBnull_waveform\fP\&. "
+.ti -1c
+.RI "static const std::string \fBkSawtooth\fP = 'Sawtooth'"
+.br
+.RI "Generate a \fBsawtooth_waveform\fP\&. "
+.ti -1c
+.RI "static const std::string \fBkSine\fP = 'Sine'"
+.br
+.RI "Generate a \fBsine_waveform\fP\&. "
+.ti -1c
+.RI "static const std::string \fBkSquare\fP = 'Square'"
+.br
+.RI "Generate a \fBsquare_waveform\fP\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Factory to create waveforms of different types given the name of a waveform\&. Valid names are: 
+
+
+.IP "\(bu" 2
+\fBkSine\fP (periodic)
+.IP "\(bu" 2
+\fBkSquare\fP (periodic)
+.IP "\(bu" 2
+\fBkSawtooth\fP (periodic)
+.IP "\(bu" 2
+\fBkConstant\fP (aperiodic)
+.IP "\(bu" 2
+\fBkNull\fP (aperiodic) 
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::control::waveform_generator::waveform_generator (void)"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "std::unique_ptr<\fBbase_waveform\fP> rcppsw::control::waveform_generator::operator() (const std::string & name, const \fBconfig::waveform_config\fP * config)"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "const std::string rcppsw::control::waveform_generator::kConstant = 'Constant'\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Generate a \fBconstant_waveform\fP\&. 
+.SS "const std::string rcppsw::control::waveform_generator::kNull = 'Null'\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Generate a \fBnull_waveform\fP\&. 
+.SS "const std::string rcppsw::control::waveform_generator::kSawtooth = 'Sawtooth'\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Generate a \fBsawtooth_waveform\fP\&. 
+.SS "const std::string rcppsw::control::waveform_generator::kSine = 'Sine'\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Generate a \fBsine_waveform\fP\&. 
+.SS "const std::string rcppsw::control::waveform_generator::kSquare = 'Square'\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Generate a \fBsquare_waveform\fP\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

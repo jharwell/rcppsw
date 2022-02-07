@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1multithread_1_1mt__queue" kind="class" language="C++" prot="public">
+    <compoundname>rcppsw::multithread::mt_queue</compoundname>
+    <basecompoundref refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator" prot="public" virt="non-virtual">rcppsw::patterns::decorator::decorator&lt; std::deque&lt; T &gt; &gt;</basecompoundref>
+    <includes refid="mt__queue_8hpp" local="no">mt_queue.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrcppsw_1_1multithread_1_1mt__queue_1a074a2d2d60d0f06ec2f30a3bda599b7d" prot="private" static="no" mutable="no">
+        <type>boost::condition_variable</type>
+        <definition>boost::condition_variable rcppsw::multithread::mt_queue&lt; T &gt;::m_cv</definition>
+        <argsstring></argsstring>
+        <name>m_cv</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" line="98" column="29" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrcppsw_1_1multithread_1_1mt__queue_1a55a20a30b111bb56de166d7f6758f3f7" prot="private" static="no" mutable="no">
+        <type>boost::mutex</type>
+        <definition>boost::mutex rcppsw::multithread::mt_queue&lt; T &gt;::m_mtx</definition>
+        <argsstring></argsstring>
+        <name>m_mtx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" line="97" column="29" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__queue_1a6b162fc767aea1cb4cdd0ae5a5711861" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::multithread::mt_queue&lt; T &gt;::mt_queue</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>mt_queue</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" line="58" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__queue_1a5f27543cd548d2f4118286d5c0182120" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T rcppsw::multithread::mt_queue&lt; T &gt;::dequeue</definition>
+        <argsstring>()</argsstring>
+        <name>dequeue</name>
+        <briefdescription>
+<para>Get data from the queue. Wait for data if not available. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" line="75" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" bodystart="75" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__queue_1a56437ecee9d10320c52cdbbad7751710" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rcppsw::multithread::mt_queue&lt; T &gt;::enqueue</definition>
+        <argsstring>(const T &amp;data)</argsstring>
+        <name>enqueue</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Add data to the queue and notify others. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" line="66" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" bodystart="66" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__queue_1a03e23ef6cd9bddcd69711119403776d8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto rcppsw::multithread::mt_queue&lt; T &gt;::Func</definition>
+        <argsstring>(Args &amp;&amp;... args) const -&gt; decltype(std::declval&lt; decltype(rpdecorator::decorator&lt; T &gt;::decoratee())&gt;().Func(args...))</argsstring>
+        <name>Func</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" line="60" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__queue_1a03e23ef6cd9bddcd69711119403776d8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto rcppsw::multithread::mt_queue&lt; T &gt;::Func</definition>
+        <argsstring>(Args &amp;&amp;... args) const -&gt; decltype(std::declval&lt; decltype(rpdecorator::decorator&lt; T &gt;::decoratee())&gt;().Func(args...))</argsstring>
+        <name>Func</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" line="61" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__queue_1a03e23ef6cd9bddcd69711119403776d8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto rcppsw::multithread::mt_queue&lt; T &gt;::Func</definition>
+        <argsstring>(Args &amp;&amp;... args) const -&gt; decltype(std::declval&lt; decltype(rpdecorator::decorator&lt; T &gt;::decoratee())&gt;().Func(args...))</argsstring>
+        <name>Func</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" line="90" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__queue_1a03e23ef6cd9bddcd69711119403776d8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto rcppsw::multithread::mt_queue&lt; T &gt;::Func</definition>
+        <argsstring>(Args &amp;&amp;... args) const -&gt; decltype(std::declval&lt; decltype(rpdecorator::decorator&lt; T &gt;::decoratee())&gt;().Func(args...))</argsstring>
+        <name>Func</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" line="91" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" bodystart="91" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__queue_1a03e23ef6cd9bddcd69711119403776d8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto rcppsw::multithread::mt_queue&lt; T &gt;::Func</definition>
+        <argsstring>(Args &amp;&amp;... args) const -&gt; decltype(std::declval&lt; decltype(rpdecorator::decorator&lt; T &gt;::decoratee())&gt;().Func(args...))</argsstring>
+        <name>Func</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" line="92" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" bodystart="92" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1multithread_1_1mt__queue_1a03e23ef6cd9bddcd69711119403776d8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto rcppsw::multithread::mt_queue&lt; T &gt;::Func</definition>
+        <argsstring>(Args &amp;&amp;... args) const -&gt; decltype(std::declval&lt; decltype(rpdecorator::decorator&lt; T &gt;::decoratee())&gt;().Func(args...))</argsstring>
+        <name>Func</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" line="93" column="17" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" bodystart="93" bodyend="93"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A simple multiple-producer/consumer queue with locking. No guarantees of fairness. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::patterns::decorator::decorator&lt; std::deque&lt; T &gt; &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::multithread::mt_queue&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1multithread_1_1mt__queue"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>rcppsw::patterns::decorator::decorator&lt; std::deque&lt; T &gt; &gt;</label>
+        <link refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator"/>
+      </node>
+      <node id="1">
+        <label>rcppsw::multithread::mt_queue&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1multithread_1_1mt__queue"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" line="54" column="47" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/multithread/mt_queue.hpp" bodystart="54" bodyend="100"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a519a95005089f4b8c476dc3b5dc0f3ab" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>decoratee</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a34ab8f2525dae8185bf161985885e8c2" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>decoratee</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a741c896a38d2c22bfcd68382fc0aee64" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>decoratee_type</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a64c494d06f4fcbc9e52345db78510791" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a32c13ab58d3bd71c61030090590a9d62" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a280934f4a5829a42c7916ba29560d645" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a0e7167ad4e2d030d6c451a867db8af5e" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a3856e90a033659fc506a77c613bfc89f" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>decorator</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a1b8e1bf59abf4cb7039f657c1351dbf5" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>decorator_type</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__queue_1a5f27543cd548d2f4118286d5c0182120" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>dequeue</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__queue_1a56437ecee9d10320c52cdbbad7751710" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>enqueue</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__queue_1a03e23ef6cd9bddcd69711119403776d8" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>Func</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__queue_1a03e23ef6cd9bddcd69711119403776d8" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>Func</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__queue_1a03e23ef6cd9bddcd69711119403776d8" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>Func</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__queue_1a03e23ef6cd9bddcd69711119403776d8" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>Func</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__queue_1a03e23ef6cd9bddcd69711119403776d8" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>Func</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__queue_1a03e23ef6cd9bddcd69711119403776d8" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>Func</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__queue_1a074a2d2d60d0f06ec2f30a3bda599b7d" prot="private" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>m_cv</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__queue_1a55a20a30b111bb56de166d7f6758f3f7" prot="private" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>m_mtx</name></member>
+      <member refid="classrcppsw_1_1multithread_1_1mt__queue_1a6b162fc767aea1cb4cdd0ae5a5711861" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>mt_queue</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a0f947db92e941d973426b19c1aa1fa9c" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1aa7dcaa3ec447cb1af590f4a64de10b09" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>operator=</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1aa91bf92ef0eda53cc43ce584c40f5c49" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>redecorate</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1af34e316851d6ccde1ab339f9dadf0c2a" prot="public" virt="non-virtual"><scope>rcppsw::multithread::mt_queue</scope><name>redecorate_with</name></member>
+      <member refid="classrcppsw_1_1patterns_1_1decorator_1_1decorator_1a1816de4c343796e84f48c3603b8041ab" prot="public" virt="virtual"><scope>rcppsw::multithread::mt_queue</scope><name>~decorator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -84,11 +84,9 @@ struct result_type2D {
 template <typename T>
 class closest_pair2D {
  public:
-  using dist_func_type = double(const T&, const T&);
+  static inline const std::string kBruteForce = "brute_force";
 
-  static constexpr const char kBruteForce[] = "brute_force";
-
-  static constexpr const char kRecursive[] = "recursive";
+  static inline const std::string kRecursive = "recursive";
 
   /**
    * \brief Run the calculation algorithm.
@@ -98,9 +96,10 @@ class closest_pair2D {
    * \param dist_func A function that can be used to calculate the distance
    *                  between two points.
    */
+  template<typename TDistFunc>
   result_type2D<T> operator()(const std::string& method,
                               std::vector<T> points,
-                              const std::function<dist_func_type>& dist_func) {
+                              const TDistFunc& dist_func) {
     if (kBruteForce == method) {
       return brute_force(points, dist_func);
     } else if (kRecursive == method) {
@@ -122,8 +121,9 @@ class closest_pair2D {
    *
    * \return The two closest points, along with the distance between them.
    */
+  template <typename TDistFunc>
   result_type2D<T> brute_force(const std::vector<T>& points,
-                               const std::function<dist_func_type>& dist_func) {
+                               const TDistFunc& dist_func) {
     result_type2D<T> r;
     r.dist = std::numeric_limits<double>::max();
 
@@ -148,9 +148,10 @@ class closest_pair2D {
    *
    * \return The two closest points, along with the distance between them.
    */
+  template <typename TDistFunc>
   result_type2D<T> recursive(const std::vector<T>& points,
                              std::vector<T>& strip,
-                             const std::function<dist_func_type>& dist_func) {
+                             const TDistFunc& dist_func) {
     /* base case */
     if (points.size() <= 3) {
       return brute_force(points, dist_func);
@@ -193,9 +194,10 @@ class closest_pair2D {
    * Note that this method seems to be a O(n^2) method, but it's a O(n) method
    * as the inner loop runs at most 6 times.
    */
+  template <typename TDistFunc>
   result_type2D<T> strip_points(std::vector<T> strip,
                                 const result_type2D<T>& dmin,
-                                const std::function<dist_func_type>& dist_func) {
+                                const TDistFunc& dist_func) {
     result_type2D<T> min = dmin;
 
     std::sort(strip.begin(), strip.end(), [](const T& a, const T& b) {

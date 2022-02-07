@@ -1,0 +1,65 @@
+.TH "filtered_visitor< TVisitor >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+filtered_visitor< TVisitor > \- Convenience wrapper allowing generic visits to ANY type, but filtering them on the \fBrmpl::typelist\fP passed to the \fBrpvisitor::precise_visitor\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <visitor\&.hpp>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBvisitor_type\fP = TVisitor"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> \fBfiltered_visitor\fP (Args &&\&.\&.\&.args)"
+.br
+.ti -1c
+.RI "template<typename TAny , typename \&.\&.\&. Args> void \fBvisit\fP (TAny &obj, Args &&\&.\&.\&. args)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TVisitor>
+.br
+class filtered_visitor< TVisitor >"
+Convenience wrapper allowing generic visits to ANY type, but filtering them on the \fBrmpl::typelist\fP passed to the \fBrpvisitor::precise_visitor\fP\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fITVisitor\fP The name of the visitor class, which must be capable of being used with \fBprecise_visitor\fP, and define \fCvisit_typelist\fP\&.
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This class is appropriate if no non-static methods from \fCTVisitor\fP are needed (they will not be accessible, because inheritance is not used)\&. 
+.RE
+.PP
+
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename TVisitor > using \fBfiltered_visitor\fP< TVisitor >::\fBvisitor_type\fP =  TVisitor"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TVisitor > template<typename\&.\&.\&. Args> \fBfiltered_visitor\fP< TVisitor >::\fBfiltered_visitor\fP (Args &&\&.\&.\&. args)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TVisitor > template<typename TAny , typename \&.\&.\&. Args> void \fBfiltered_visitor\fP< TVisitor >::visit (TAny & obj, Args &&\&.\&.\&. args)\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

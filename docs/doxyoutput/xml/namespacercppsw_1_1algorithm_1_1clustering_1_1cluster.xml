@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacercppsw_1_1algorithm_1_1clustering_1_1cluster" kind="namespace" language="C++">
+    <compoundname>rcppsw::algorithm::clustering::cluster</compoundname>
+    <innerclass refid="structrcppsw_1_1algorithm_1_1clustering_1_1cluster_1_1mapping" prot="public">rcppsw::algorithm::clustering::cluster::mapping</innerclass>
+    <innerclass refid="structrcppsw_1_1algorithm_1_1clustering_1_1cluster_1_1mapping_3_01T_00_01Policy_00_01policy_1_1is__eh_3_01Policy_01_4_01_4" prot="public">rcppsw::algorithm::clustering::cluster::mapping&lt; T, Policy, policy::is_eh&lt; Policy &gt; &gt;</innerclass>
+    <innerclass refid="structrcppsw_1_1algorithm_1_1clustering_1_1cluster_1_1mapping_3_01T_00_01Policy_00_01policy_1_1is__nc_3_01Policy_01_4_01_4" prot="public">rcppsw::algorithm::clustering::cluster::mapping&lt; T, Policy, policy::is_nc&lt; Policy &gt; &gt;</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/algorithm/clustering/cluster.hpp" line="166" column="17"/>
+  </compounddef>
+</doxygen>

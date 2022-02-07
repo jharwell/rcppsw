@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structrcppsw_1_1metrics_1_1base__metrics__data" kind="interface" language="C++" prot="public">
+    <compoundname>rcppsw::metrics::base_metrics_data</compoundname>
+    <derivedcompoundref refid="structrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__data" prot="public" virt="non-virtual">rcppsw::ds::metrics::grid2D_metrics_data</derivedcompoundref>
+    <derivedcompoundref refid="structrcppsw_1_1ds_1_1metrics_1_1grid3D__metrics__data" prot="public" virt="non-virtual">rcppsw::ds::metrics::grid3D_metrics_data</derivedcompoundref>
+    <includes refid="base__metrics__data_8hpp" local="no">base_metrics_data.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structrcppsw_1_1metrics_1_1base__metrics__data_1a44835728389802dc38d75ee6381cc434" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::metrics::base_metrics_data::base_metrics_data</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>base_metrics_data</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_data.hpp" line="49" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="structrcppsw_1_1metrics_1_1base__metrics__data_1ac92be512b13bc185b9892695ac24f1f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::metrics::base_metrics_data::~base_metrics_data</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~base_metrics_data</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_data.hpp" line="50" column="11"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class for the containers of data extracted through classes derived from <ref refid="classrcppsw_1_1metrics_1_1base__metrics" kindref="compound">base_metrics</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::ds::metrics::grid2D_metrics_data</label>
+        <link refid="structrcppsw_1_1ds_1_1metrics_1_1grid2D__metrics__data"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw::ds::metrics::grid3D_metrics_data</label>
+        <link refid="structrcppsw_1_1ds_1_1metrics_1_1grid3D__metrics__data"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>rcppsw::metrics::base_metrics_data</label>
+        <link refid="structrcppsw_1_1metrics_1_1base__metrics__data"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::metrics::base_metrics_data</label>
+        <link refid="structrcppsw_1_1metrics_1_1base__metrics__data"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_data.hpp" line="48" column="24" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/metrics/base_metrics_data.hpp" bodystart="48" bodyend="51"/>
+    <listofallmembers>
+      <member refid="structrcppsw_1_1metrics_1_1base__metrics__data_1a44835728389802dc38d75ee6381cc434" prot="public" virt="non-virtual"><scope>rcppsw::metrics::base_metrics_data</scope><name>base_metrics_data</name></member>
+      <member refid="structrcppsw_1_1metrics_1_1base__metrics__data_1ac92be512b13bc185b9892695ac24f1f3" prot="public" virt="virtual"><scope>rcppsw::metrics::base_metrics_data</scope><name>~base_metrics_data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,102 @@
+.TH "rcppsw::metrics::detail::register_by_sink< TExtraArgsType >" 3 "Mon Nov 29 2021" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::detail::register_by_sink< TExtraArgsType > \- After enabled collectors have been parsed from an XML input file, register the enabled collectors with a \fBrcppsw_metrics_manager\fP or a class derived from it\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <collector_registerer\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::er::client< register_by_sink< void > >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBextra_args_type\fP = typename std::conditional< std::is_same< TExtraArgsType, void >::value, std::tuple< int >, TExtraArgsType >::type"
+.br
+.ti -1c
+.RI "template<typename T > using \fBno_extra_args\fP = typename std::is_same< T, void >"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBregister_by_sink\fP (const \fBcreatable_collector_set\fP &set, \fBbase_metrics_manager\fP *const \fBmanager\fP, const \fBextra_args_type\fP &extra_args={})"
+.br
+.RI "Initialize the registerer\&. "
+.ti -1c
+.RI "\fBregister_by_sink\fP (const \fBregister_by_sink\fP &)=default"
+.br
+.ti -1c
+.RI "\fBregister_by_sink\fP & \fBoperator=\fP (const \fBregister_by_sink\fP &)=default"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "const \fBcreatable_collector_set\fP & \fBcreatable_set\fP (void) const"
+.br
+.ti -1c
+.RI "template<typename TCollector , typename U  = TExtraArgsType, typename std::enable_if<(!no_extra_args< U >::value), int >::type  = 0> bool \fBdo_register\fP (const std::string &scoped_name, \fBcollector_registration_spec\fP &&spec)"
+.br
+.ti -1c
+.RI "template<typename TCollector , typename U  = TExtraArgsType, typename std::enable_if<(no_extra_args< U >::value), int >::type  = 0> bool \fBdo_register\fP (const std::string &scoped_name, \fBcollector_registration_spec\fP &&spec)"
+.br
+.ti -1c
+.RI "\fBbase_metrics_manager\fP * \fBmanager\fP (void) const"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TExtraArgsType = void>
+.br
+class rcppsw::metrics::detail::register_by_sink< TExtraArgsType >"
+After enabled collectors have been parsed from an XML input file, register the enabled collectors with a \fBrcppsw_metrics_manager\fP or a class derived from it\&. 
+
+This class is a partial specialization which specializes the generic collector_registerer_impl, which can take an arbitrary # of types, to take a std::tuple which in turn takes an arbitrary # of types\&. This is a better design than simply having a class that takes an arbitrary # of types, because it makes it clearer that the template parameters are considered a single unit, and are NOT part of the constructor arguments for the class\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename TExtraArgsType  = void> using \fBrcppsw::metrics::detail::register_by_sink\fP< TExtraArgsType >::\fBextra_args_type\fP =  typename std::conditional< std::is_same<TExtraArgsType, void>::value, std::tuple<int>, TExtraArgsType>::type"
+
+.SS "template<typename TExtraArgsType  = void> template<typename T > using \fBrcppsw::metrics::detail::register_by_sink\fP< TExtraArgsType >::\fBno_extra_args\fP =  typename std::is_same<T, void>"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TExtraArgsType  = void> \fBrcppsw::metrics::detail::register_by_sink\fP< TExtraArgsType >::\fBregister_by_sink\fP (const \fBcreatable_collector_set\fP & set, \fBbase_metrics_manager\fP *const manager, const \fBextra_args_type\fP & extra_args = \fC{}\fP)\fC [inline]\fP"
+
+.PP
+Initialize the registerer\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImanager\fP The metrics manager to register the collectors with\&.
+.br
+\fIcreate_set\fP Definitions for all the possible collectors to create\&. 
+.RE
+.PP
+
+.SS "template<typename TExtraArgsType  = void> \fBrcppsw::metrics::detail::register_by_sink\fP< TExtraArgsType >::\fBregister_by_sink\fP (const \fBregister_by_sink\fP< TExtraArgsType > &)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TExtraArgsType  = void> const \fBcreatable_collector_set\fP& \fBrcppsw::metrics::detail::register_by_sink\fP< TExtraArgsType >::creatable_set (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "template<typename TExtraArgsType  = void> template<typename TCollector , typename U  = TExtraArgsType, typename std::enable_if<(!no_extra_args< U >::value), int >::type  = 0> bool \fBrcppsw::metrics::detail::register_by_sink\fP< TExtraArgsType >::do_register (const std::string & scoped_name, \fBcollector_registration_spec\fP && spec)\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "template<typename TExtraArgsType  = void> template<typename TCollector , typename U  = TExtraArgsType, typename std::enable_if<(no_extra_args< U >::value), int >::type  = 0> bool \fBrcppsw::metrics::detail::register_by_sink\fP< TExtraArgsType >::do_register (const std::string & scoped_name, \fBcollector_registration_spec\fP && spec)\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "template<typename TExtraArgsType  = void> \fBbase_metrics_manager\fP* \fBrcppsw::metrics::detail::register_by_sink\fP< TExtraArgsType >::manager (void) const\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "template<typename TExtraArgsType  = void> \fBregister_by_sink\fP& \fBrcppsw::metrics::detail::register_by_sink\fP< TExtraArgsType >::operator= (const \fBregister_by_sink\fP< TExtraArgsType > &)\fC [default]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

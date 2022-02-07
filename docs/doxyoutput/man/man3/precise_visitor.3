@@ -1,0 +1,64 @@
+.TH "precise_visitor< VisitorImpl, TypeList >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+precise_visitor< VisitorImpl, TypeList > \- Visitor that will only visit precisely with types that exactly match one of the types in its type list (i\&.e\&. no implicit upcasting is allowed)\&. SFINAE FTW!  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <visitor\&.hpp>\fP
+.PP
+Inherits VisitorImpl, and static_visitor< void >\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename\&.\&.\&. Args> \fBprecise_visitor\fP (Args &&\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "template<typename T , RCPPSW_SFINAE_TYPELIST_REQUIRE(TypeList, T) , typename \&.\&.\&. Args> void \fBvisit\fP (T &visitee, Args &&\&.\&.\&. args)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename VisitorImpl, typename TypeList>
+.br
+class precise_visitor< VisitorImpl, TypeList >"
+Visitor that will only visit precisely with types that exactly match one of the types in its type list (i\&.e\&. no implicit upcasting is allowed)\&. SFINAE FTW! 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIVisitorImpl\fP The name of the class containing the actual implementation of the visit functions\&. 
+.br
+\fITypeList\fP List of types that the class will be able to visit\&. Must be a \fBrmpl::typelist\fP\&.
+.RE
+.PP
+For each visitee type you want to be able to visit, you must (1) include it in the type list for the list, (2) define a function with the following exact signature:
+.PP
+void visit(<vistee_type>&)
+.PP
+If these conditions are not meant, then trying to call \fBvisit()\fP will result in a compiler error\&.
+.PP
+\fBNote\fP
+.RS 4
+Non-static methods from \fCVisitorImpl\fP will be available in the derived class (in contrast to \fBprecise_visitor\fP)\&. 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename VisitorImpl , typename TypeList > template<typename\&.\&.\&. Args> \fBprecise_visitor\fP< VisitorImpl, TypeList >::\fBprecise_visitor\fP (Args &&\&.\&.\&. args)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename VisitorImpl , typename TypeList > template<typename T , RCPPSW_SFINAE_TYPELIST_REQUIRE(TypeList, T) , typename \&.\&.\&. Args> void \fBprecise_visitor\fP< VisitorImpl, TypeList >::visit (T & visitee, Args &&\&.\&.\&. args)\fC [inline]\fP"
+The visit template, which can take additional arguments besides the visitee\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

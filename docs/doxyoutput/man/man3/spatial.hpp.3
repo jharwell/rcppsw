@@ -1,0 +1,106 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/math/spatial.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/math/spatial.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'rcppsw/math/vector3\&.hpp'\fP
+.br
+\fC#include 'rcppsw/math/vector2\&.hpp'\fP
+.br
+\fC#include 'rcppsw/types/spatial_dist\&.hpp'\fP
+.br
+\fC#include 'rcppsw/rcppsw\&.hpp'\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::math\fP"
+.br
+.RI "Pure mathematical classes such as vectors, ranges, sigmoids, etc\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_MATH_SPAN_FUNC_DISC\fP(component)"
+.br
+.ti -1c
+.RI "#\fBdefine\fP \fBRCPPSW_MATH_SPAN_FUNC_FLT\fP(component)"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename TCoord , typename std::enable_if<(std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::ranged\fP \fBrcppsw::math::xspan\fP (const TCoord &anchor, const double &dim)"
+.br
+.RI "Calculate the span in {X,Y,Z} in real coordinates of an entity given the position of its 3D center and dimension in {X,Y<Z}\&. "
+.ti -1c
+.RI "template<typename TCoord , typename std::enable_if<(!std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::rangez\fP \fBrcppsw::math::xspan\fP (const TCoord &anchor, size_t dim)"
+.br
+.RI "Calculate the span in {X,Y,Z} in discrete coordinates of an entity given its discrete anchor (2D or 3D) and {X,Y,Z} dimension\&. "
+.ti -1c
+.RI "template<typename TCoord , typename std::enable_if<(std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::ranged\fP \fBrcppsw::math::yspan\fP (const TCoord &anchor, const double &dim)"
+.br
+.ti -1c
+.RI "template<typename TCoord , typename std::enable_if<(!std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::rangez\fP \fBrcppsw::math::yspan\fP (const TCoord &anchor, size_t dim)"
+.br
+.ti -1c
+.RI "template<typename TCoord , typename std::enable_if<(std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::ranged\fP \fBrcppsw::math::zspan\fP (const TCoord &anchor, const double &dim)"
+.br
+.ti -1c
+.RI "template<typename TCoord , typename std::enable_if<(!std::is_floating_point< typename TCoord::value_type >::value), int >::type  = 0> static \fBrmath::rangez\fP \fBrcppsw::math::zspan\fP (const TCoord &anchor, size_t dim)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2021 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#\fBdefine\fP RCPPSW_MATH_SPAN_FUNC_DISC(component)"
+\fBValue:\fP
+.PP
+.nf
+  template <typename TCoord,                                            \
+            typename std::enable_if<(!std::is_floating_point<typename TCoord::value_type>::value),int>::type =0>\
+static inline rmath::rangez component##span(const TCoord& anchor, size_t dim) { \
+  /* rely on truncation of the 0\&.5 remainder (if it exists) to 0 */     \
+  return { anchor\&.component(), anchor\&.component() + dim - 1 };          \
+}
+.fi
+.SS "#\fBdefine\fP RCPPSW_MATH_SPAN_FUNC_FLT(component)"
+\fBValue:\fP
+.PP
+.nf
+  template<typename TCoord,                                             \
+           typename std::enable_if<(std::is_floating_point<typename TCoord::value_type>::value),int>::type =0> \
+static inline rmath::ranged component##span(const TCoord& anchor, \
+                                            const double& dim) {        \
+    return { anchor\&.component(), (anchor\&.component() + dim) }; \
+  }
+.fi
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

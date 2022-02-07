@@ -1,0 +1,193 @@
+.TH "rcppsw::ds::graph::hgrid3D< TSpecType >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::ds::graph::hgrid3D< TSpecType > \- A heterogeneous gridded graph (i\&.e\&., a basic grid graph with some vertices missing) where edge lengths have structural relevance; that is, if two vertices (u,v) are 3 units apart, then there are two vertices along the path (u,v) which would be present in a basic grid graph which are missing here\&. Useful for representing distances and such in the real world\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <hgrid3D\&.hpp>\fP
+.PP
+Inherits \fBrcppsw::patterns::decorator::decorator< TSpecType::bgl_impl_type >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBbgl_impl_type\fP = typename spec_type::bgl_impl_type"
+.br
+.ti -1c
+.RI "using \fBdecoratee_type\fP = typename \fBrpdecorator::decorator\fP< \fBbgl_impl_type\fP >::\fBdecoratee_type\fP"
+.br
+.ti -1c
+.RI "using \fBdecorator_type\fP = typename \fBrpdecorator::decorator\fP< \fBbgl_impl_type\fP >::\fBdecorator_type\fP"
+.br
+.ti -1c
+.RI "using \fBedge_property_type\fP = typename spec_type::edge_property_type"
+.br
+.ti -1c
+.RI "using \fBspec_type\fP = TSpecType"
+.br
+.ti -1c
+.RI "using \fBvertex_coord_type\fP = typename spec_type::vertex_coord_type"
+.br
+.ti -1c
+.RI "using \fBvertex_property_type\fP = typename spec_type::vertex_property_type"
+.br
+.ti -1c
+.RI "using \fBview_type\fP = \fBhgrid3D_view\fP< \fBspec_type\fP >"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBhgrid3D\fP (const \fBhgrid3D\fP &)=default"
+.br
+.ti -1c
+.RI "\fBhgrid3D\fP (void)=default"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECL\fP (directed_category)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECL\fP (edge_descriptor)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECL\fP (edge_parallel_category)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECL\fP (traversal_category)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECL\fP (vertex_descriptor)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECL\fP (vertex_iterator)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (operator[])"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF\fP (operator[], const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBadjacent_vertices\fP)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBadjacent_vertices\fP, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBcontains\fP, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBfind\fP)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBfind\fP, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBn_vertices\fP, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBout_degree\fP, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBout_edges\fP, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBtarget\fP)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBtarget\fP, const)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBvertices\fP)"
+.br
+.ti -1c
+.RI "\fBRCPPSW_DECORATE_DECLDEF_STATIC\fP (rdgraph, \fBvertices\fP, const)"
+.br
+.ti -1c
+.RI "\fBview_type\fP \fBsubgraph\fP (const vertex_descriptor &start, const \fBrtypes::manhattan_dist\fP &max_dist, boost::optional< \fBrmath::vector3z\fP > axis=boost::none) const"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TSpecType>
+.br
+class rcppsw::ds::graph::hgrid3D< TSpecType >"
+A heterogeneous gridded graph (i\&.e\&., a basic grid graph with some vertices missing) where edge lengths have structural relevance; that is, if two vertices (u,v) are 3 units apart, then there are two vertices along the path (u,v) which would be present in a basic grid graph which are missing here\&. Useful for representing distances and such in the real world\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::\fBbgl_impl_type\fP =  typename spec_type::bgl_impl_type"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::\fBdecoratee_type\fP =  typename \fBrpdecorator::decorator\fP<\fBbgl_impl_type\fP>::\fBdecoratee_type\fP"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::\fBdecorator_type\fP =  typename \fBrpdecorator::decorator\fP<\fBbgl_impl_type\fP>::\fBdecorator_type\fP"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::\fBedge_property_type\fP =  typename spec_type::edge_property_type"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::\fBspec_type\fP =  TSpecType"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::\fBvertex_coord_type\fP =  typename spec_type::vertex_coord_type"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::\fBvertex_property_type\fP =  typename spec_type::vertex_property_type"
+
+.SS "template<typename TSpecType > using \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::\fBview_type\fP =  \fBhgrid3D_view\fP<\fBspec_type\fP>"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::\fBhgrid3D\fP (void)\fC [default]\fP"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::\fBhgrid3D\fP (const \fBhgrid3D\fP< TSpecType > &)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECL (directed_category)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECL (edge_descriptor)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECL (edge_parallel_category)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECL (traversal_category)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECL (vertex_descriptor)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECL (vertex_iterator)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF (operator[])"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF (operator[], const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBadjacent_vertices\fP)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBadjacent_vertices\fP, const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBcontains\fP, const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBfind\fP)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBfind\fP, const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBn_vertices\fP, const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBout_degree\fP, const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBout_edges\fP, const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBtarget\fP)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBtarget\fP, const)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBvertices\fP)"
+
+.SS "template<typename TSpecType > \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::RCPPSW_DECORATE_DECLDEF_STATIC (rdgraph, \fBvertices\fP, const)"
+
+.SS "template<typename TSpecType > \fBview_type\fP \fBrcppsw::ds::graph::hgrid3D\fP< TSpecType >::subgraph (const vertex_descriptor & start, const \fBrtypes::manhattan_dist\fP & max_dist, boost::optional< \fBrmath::vector3z\fP > axis = \fCboost::none\fP) const\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

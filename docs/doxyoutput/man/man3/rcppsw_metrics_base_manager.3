@@ -1,0 +1,158 @@
+.TH "rcppsw::metrics::base_manager" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::base_manager \- Base class for managing metrics collected from variable sources across all possible collector output modes and sinks\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <base_manager\&.hpp>\fP
+.PP
+Inherited by \fBrcppsw::metrics::fs_output_manager\fP, and \fBrcppsw::metrics::network_output_manager\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbase_manager\fP (void)=default"
+.br
+.ti -1c
+.RI "virtual \fB~base_manager\fP (void)=default"
+.br
+.ti -1c
+.RI "template<typename T > void \fBcollect\fP (const std::string &scoped_name, const T &collectee)"
+.br
+.RI "Decorator around \fBcollector_group::collect()\fP\&. "
+.ti -1c
+.RI "template<typename T > void \fBcollect_if\fP (const std::string &scoped_name, const T &collectee, const std::function< bool(const \fBrmetrics::base_metrics\fP &)> &pred)"
+.br
+.RI "Decorator around \fBcollector_group::collect_if()\fP\&. "
+.ti -1c
+.RI "virtual void \fBcollector_preregister\fP (const std::string &scoped_name, const \fBrmetrics::output_mode\fP &mode)=0"
+.br
+.RI "To be called before \fBcollector_register()\fP, in order to correctly set up the collector map for the collector with the specified scoped name\&. "
+.ti -1c
+.RI "template<typename TCollector , typename\&.\&.\&. Args> bool \fBcollector_register\fP (const std::string &scoped_name, Args &&\&.\&.\&. args)"
+.br
+.RI "Decorator around \fBcollector_group::collector_register()\fP\&. "
+.ti -1c
+.RI "bool \fBcollector_unregister\fP (const std::string &scoped_name)"
+.br
+.RI "Decorator around \fBcollector_group::collector_unregister()\fP\&. "
+.ti -1c
+.RI "virtual void \fBfinalize\fP (void)=0"
+.br
+.RI "Decorator around \fBcollector_group::finalize_all()\fP\&. "
+.ti -1c
+.RI "virtual bool \fBflush\fP (const \fBrmetrics::output_mode\fP &mode)=0"
+.br
+.ti -1c
+.RI "template<typename T > T * \fBget\fP (const std::string &key)"
+.br
+.RI "Decorator around \fBcollector_group::get()\fP\&. "
+.ti -1c
+.RI "virtual void \fBinitialize\fP (void)=0"
+.br
+.RI "Decorator around \fBcollector_group::initialize()\fP\&. "
+.ti -1c
+.RI "virtual void \fBinterval_reset\fP (void)=0"
+.br
+.RI "Decorator around \fBcollector_group::interval_reset()\fP\&. "
+.ti -1c
+.RI "virtual void \fBtimestep_inc\fP (void)=0"
+.br
+.RI "Decorator around \fBcollector_group::timestep_inc()\fP\&. "
+.in -1c
+.SS "Protected Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBcollector_map_type\fP = std::map< std::string, \fBrmetrics::collector_group\fP * >"
+.br
+.RI "Maps the scoped name of the collector to the \fBcollector_group\fP it belongs in\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBcollector_map_type\fP * \fBcollector_map\fP (void)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base class for managing metrics collected from variable sources across all possible collector output modes and sinks\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "using \fBrcppsw::metrics::base_manager::collector_map_type\fP =  std::map<std::string, \fBrmetrics::collector_group\fP*>\fC [protected]\fP"
+
+.PP
+Maps the scoped name of the collector to the \fBcollector_group\fP it belongs in\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "rcppsw::metrics::base_manager::base_manager (void)\fC [default]\fP"
+
+.SS "virtual rcppsw::metrics::base_manager::~base_manager (void)\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > void rcppsw::metrics::base_manager::collect (const std::string & scoped_name, const T & collectee)\fC [inline]\fP"
+
+.PP
+Decorator around \fBcollector_group::collect()\fP\&. 
+.SS "template<typename T > void rcppsw::metrics::base_manager::collect_if (const std::string & scoped_name, const T & collectee, const std::function< bool(const \fBrmetrics::base_metrics\fP &)> & pred)\fC [inline]\fP"
+
+.PP
+Decorator around \fBcollector_group::collect_if()\fP\&. 
+.SS "\fBcollector_map_type\fP* rcppsw::metrics::base_manager::collector_map (void)\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "virtual void rcppsw::metrics::base_manager::collector_preregister (const std::string & scoped_name, const \fBrmetrics::output_mode\fP & mode)\fC [pure virtual]\fP"
+
+.PP
+To be called before \fBcollector_register()\fP, in order to correctly set up the collector map for the collector with the specified scoped name\&. If you forget to do this you will get a segfault\&. 
+.PP
+Implemented in \fBrcppsw::metrics::fs_output_manager\fP, and \fBrcppsw::metrics::network_output_manager\fP\&.
+.SS "template<typename TCollector , typename\&.\&.\&. Args> bool rcppsw::metrics::base_manager::collector_register (const std::string & scoped_name, Args &&\&.\&.\&. args)\fC [inline]\fP"
+
+.PP
+Decorator around \fBcollector_group::collector_register()\fP\&. 
+.SS "bool rcppsw::metrics::base_manager::collector_unregister (const std::string & scoped_name)\fC [inline]\fP"
+
+.PP
+Decorator around \fBcollector_group::collector_unregister()\fP\&. 
+.SS "virtual void rcppsw::metrics::base_manager::finalize (void)\fC [pure virtual]\fP"
+
+.PP
+Decorator around \fBcollector_group::finalize_all()\fP\&. 
+.PP
+Implemented in \fBrcppsw::metrics::fs_output_manager\fP, and \fBrcppsw::metrics::network_output_manager\fP\&.
+.SS "virtual bool rcppsw::metrics::base_manager::flush (const \fBrmetrics::output_mode\fP & mode)\fC [pure virtual]\fP"
+
+.PP
+Implemented in \fBrcppsw::metrics::fs_output_manager\fP, and \fBrcppsw::metrics::network_output_manager\fP\&.
+.SS "template<typename T > T* rcppsw::metrics::base_manager::get (const std::string & key)\fC [inline]\fP"
+
+.PP
+Decorator around \fBcollector_group::get()\fP\&. 
+.SS "virtual void rcppsw::metrics::base_manager::initialize (void)\fC [pure virtual]\fP"
+
+.PP
+Decorator around \fBcollector_group::initialize()\fP\&. 
+.PP
+Implemented in \fBrcppsw::metrics::fs_output_manager\fP, and \fBrcppsw::metrics::network_output_manager\fP\&.
+.SS "virtual void rcppsw::metrics::base_manager::interval_reset (void)\fC [pure virtual]\fP"
+
+.PP
+Decorator around \fBcollector_group::interval_reset()\fP\&. 
+.PP
+Implemented in \fBrcppsw::metrics::fs_output_manager\fP, and \fBrcppsw::metrics::network_output_manager\fP\&.
+.SS "virtual void rcppsw::metrics::base_manager::timestep_inc (void)\fC [pure virtual]\fP"
+
+.PP
+Decorator around \fBcollector_group::timestep_inc()\fP\&. 
+.PP
+Implemented in \fBrcppsw::metrics::fs_output_manager\fP, and \fBrcppsw::metrics::network_output_manager\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

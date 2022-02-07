@@ -1,0 +1,98 @@
+.TH "register_with_csv_sink< TExtraArgsType >" 3 "Mon Nov 29 2021" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+register_with_csv_sink< TExtraArgsType > \- Register all collectors configured with \fBrmetrics::csv_sink\fP with a \fBbase_metrics_manager\fP or a class derived from it\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <collector_registerer\&.hpp>\fP
+.PP
+Inherits register_by_sink< void >, and \fBrcppsw::er::client< register_with_csv_sink< void > >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBregister_with_csv_sink\fP (const \fBregister_with_csv_sink\fP &)=default"
+.br
+.ti -1c
+.RI "template<typename \&.\&.\&. Args> \fBregister_with_csv_sink\fP (const rmconfig::csv_sink_config *const config, const creatable_collector_set &set, base_metrics_manager *const m, Args &&\&.\&.\&. extra_args)"
+.br
+.RI "Initialize the registerer for collectors configured with \fBrmetrics::csv_sinks\fP\&. "
+.ti -1c
+.RI "template<typename TSink > collector_registration_spec \fBcalc_registration_spec\fP (const std::string &xml_name, const \fBrmetrics::output_mode\fP &allowed) const"
+.br
+.RI "Figure out: "
+.ti -1c
+.RI "template<typename TSinkTypeWrapped > void \fBoperator()\fP (const TSinkTypeWrapped &)"
+.br
+.ti -1c
+.RI "\fBregister_with_csv_sink\fP & \fBoperator=\fP (const \fBregister_with_csv_sink\fP &)=default"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "const rmconfig::csv_sink_config *const \fBmc_config\fP"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TExtraArgsType = void>
+.br
+class register_with_csv_sink< TExtraArgsType >"
+Register all collectors configured with \fBrmetrics::csv_sink\fP with a \fBbase_metrics_manager\fP or a class derived from it\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TExtraArgsType  = void> template<typename \&.\&.\&. Args> \fBregister_with_csv_sink\fP< TExtraArgsType >::\fBregister_with_csv_sink\fP (const rmconfig::csv_sink_config *const config, const creatable_collector_set & set, base_metrics_manager *const m, Args &&\&.\&.\&. extra_args)\fC [inline]\fP"
+
+.PP
+Initialize the registerer for collectors configured with \fBrmetrics::csv_sinks\fP\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIconfig\fP Metrics configuration\&. 
+.br
+\fIcreate_set\fP Definitions for all the possible collectors to create\&. 
+.br
+\fImanager\fP The metrics manager to register the collectors with\&.
+.RE
+.PP
+We use a variadic template here to handle collectors which need extra args and those that don't transparently\&. 
+.SS "template<typename TExtraArgsType  = void> \fBregister_with_csv_sink\fP< TExtraArgsType >::\fBregister_with_csv_sink\fP (const \fBregister_with_csv_sink\fP< TExtraArgsType > &)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TExtraArgsType  = void> template<typename TSink > collector_registration_spec \fBregister_with_csv_sink\fP< TExtraArgsType >::calc_registration_spec (const std::string & xml_name, const \fBrmetrics::output_mode\fP & allowed) const\fC [inline]\fP"
+
+.PP
+Figure out: 
+.IP "\(bu" 2
+If the selected output mode is valid for the specified collector\&.
+.IP "\(bu" 2
+The appropriate filename output stem for the collector if the output mode is OK\&.
+.PP
+.PP
+\fBReturns\fP
+.RS 4
+\fBcollector_register_spec\fP, or empty if the collector fails any pre-initialization checks\&. 
+.RE
+.PP
+
+.SS "template<typename TExtraArgsType  = void> template<typename TSinkTypeWrapped > void \fBregister_with_csv_sink\fP< TExtraArgsType >::operator() (const TSinkTypeWrapped &)\fC [inline]\fP"
+
+.SS "template<typename TExtraArgsType  = void> \fBregister_with_csv_sink\fP& \fBregister_with_csv_sink\fP< TExtraArgsType >::operator= (const \fBregister_with_csv_sink\fP< TExtraArgsType > &)\fC [default]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "template<typename TExtraArgsType  = void> const rmconfig::csv_sink_config* const \fBregister_with_csv_sink\fP< TExtraArgsType >::mc_config"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

@@ -1,0 +1,89 @@
+.TH "/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jharwell/git/rcppsw/include/rcppsw/ds/rtree.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <algorithm>\fP
+.br
+\fC#include <boost/geometry\&.hpp>\fP
+.br
+\fC#include <boost/geometry/index/rtree\&.hpp>\fP
+.br
+\fC#include <utility>\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include 'rcppsw/math/vector2\&.hpp'\fP
+.br
+\fC#include 'rcppsw/math/vector3\&.hpp'\fP
+.br
+\fC#include 'rcppsw/patterns/decorator/decorator\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBrcppsw::ds::rtree< TSpecType >\fP"
+.br
+.RI "Wrapper around boost::geometry::index::rtree to provide very fast queries of the form 'How many things are in this  area', and reasonably fast tree build times as well\&. That is, this class is intended for applications in which large trees are built, queried frequently and updated relatively infrequently\&. "
+.ti -1c
+.RI "struct \fBrcppsw::ds::rtree_spec< TCoordType, TGeometryType, TValueType, MAXELTS >\fP"
+.br
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrcppsw\fP"
+.br
+.RI "The root namespace of the RCPPSW library\&. "
+.ti -1c
+.RI " \fBrcppsw::ds\fP"
+.br
+.RI "Data structures: 2D/3D lattice grids, 2D/3D discretizing grids to overlay onto continuous space, Poisson queue, rtree for 2D space, heterogeneous stacked 2D grid, type map for using in C++ quasi-reflection\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<typename TCoordType > using \fBrcppsw::ds::rtree_box\fP = bg::model::box< rtree_point< TCoordType > >"
+.br
+.RI "Representation of rectangles in the rtree\&. "
+.ti -1c
+.RI "template<typename TCoordType > using \fBrcppsw::ds::rtree_point\fP = bg::model::point< typename TCoordType::value_type, TCoordType::kDIMENSIONALITY, bg::cs::cartesian >"
+.br
+.RI "A 2D or 3D geometrical point, as defined by boost\&. Loose adaptor to \fBrmath::vector2\fP or \fBrmath::vector3\fP\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename TCoordType , RCPPSW_SFINAE_DECLDEF(rmpl::is_specialization< TCoordType, rmath::vector2 >::value) > rtree_box< TCoordType > \fBrcppsw::ds::make_rtree_box\fP (const TCoordType &ll, const TCoordType &ur)"
+.br
+.ti -1c
+.RI "template<typename TCoordType , RCPPSW_SFINAE_DECLDEF(rmpl::is_specialization< TCoordType, rmath::vector2 >::value) > rtree_point< TCoordType > \fBrcppsw::ds::make_rtree_point\fP (const TCoordType &c)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+2020 John Harwell, All rights reserved\&.
+.RE
+.PP
+This file is part of RCPPSW\&.
+.PP
+RCPPSW is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version\&.
+.PP
+RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\&. See the GNU General Public License for more details\&.
+.PP
+You should have received a copy of the GNU General Public License along with RCPPSW\&. If not, see <http://www.gnu.org/licenses/ 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

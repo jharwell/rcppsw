@@ -1,0 +1,52 @@
+.TH "rcppsw::metrics::register_using_config< TSinkRegisterer, TConfig >" 3 "Sat Feb 5 2022" "RCPPSW" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rcppsw::metrics::register_using_config< TSinkRegisterer, TConfig > \- After enabled collectors have been parsed from an XML input file, register the enabled collectors with a \fBbase_manager\fP or a class derived from it\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <register_using_config\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBregister_using_config\fP (const \fBregister_using_config\fP &)=default"
+.br
+.ti -1c
+.RI "\fBregister_using_config\fP (const TSinkRegisterer &&registerer, const TConfig *config)"
+.br
+.ti -1c
+.RI "template<typename TPair > void \fBoperator()\fP (const TPair &pair)"
+.br
+.ti -1c
+.RI "\fBregister_using_config\fP & \fBoperator=\fP (const \fBregister_using_config\fP &)=default"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename TSinkRegisterer, typename TConfig>
+.br
+class rcppsw::metrics::register_using_config< TSinkRegisterer, TConfig >"
+After enabled collectors have been parsed from an XML input file, register the enabled collectors with a \fBbase_manager\fP or a class derived from it\&. 
+
+This is a separate class from \fBregister_by_sink\fP so you don't ALWAYS have to pass it a list of extra arguments for building some finicky metrics collectors\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename TSinkRegisterer , typename TConfig > \fBrcppsw::metrics::register_using_config\fP< TSinkRegisterer, TConfig >::\fBregister_using_config\fP (const TSinkRegisterer && registerer, const TConfig * config)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "template<typename TSinkRegisterer , typename TConfig > \fBrcppsw::metrics::register_using_config\fP< TSinkRegisterer, TConfig >::\fBregister_using_config\fP (const \fBregister_using_config\fP< TSinkRegisterer, TConfig > &)\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename TSinkRegisterer , typename TConfig > template<typename TPair > void \fBrcppsw::metrics::register_using_config\fP< TSinkRegisterer, TConfig >::operator() (const TPair & pair)\fC [inline]\fP"
+
+.SS "template<typename TSinkRegisterer , typename TConfig > \fBregister_using_config\fP& \fBrcppsw::metrics::register_using_config\fP< TSinkRegisterer, TConfig >::operator= (const \fBregister_using_config\fP< TSinkRegisterer, TConfig > &)\fC [default]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for RCPPSW from the source code\&.

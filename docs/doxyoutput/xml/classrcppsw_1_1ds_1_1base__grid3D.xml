@@ -1,0 +1,627 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classrcppsw_1_1ds_1_1base__grid3D" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>rcppsw::ds::base_grid3D</compoundname>
+    <derivedcompoundref refid="classrcppsw_1_1ds_1_1grid3D" prot="public" virt="non-virtual">rcppsw::ds::grid3D&lt; T &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrcppsw_1_1ds_1_1grid3D__overlay" prot="public" virt="non-virtual">rcppsw::ds::grid3D_overlay&lt; T &gt;</derivedcompoundref>
+    <includes refid="base__grid3D_8hpp" local="no">base_grid3D.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1base__grid3D_1a11f0150a4712763146110d537c54a845" prot="public" static="no">
+        <type>typename grid_type::template const_array_view&lt; 3 &gt;::type</type>
+        <definition>using rcppsw::ds::base_grid3D&lt; T &gt;::const_grid_view =  typename grid_type::template const_array_view&lt;3&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>const_grid_view</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="58" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1base__grid3D_1a5bbb33160f11fe1da0e514e6cae6137f" prot="public" static="no">
+        <type><ref refid="namespacercppsw_1_1math_1a72e9a2c7f7fb0b33f22a664371912a36" kindref="member">rmath::vector3z</ref></type>
+        <definition>using rcppsw::ds::base_grid3D&lt; T &gt;::coord_type =  rmath::vector3z</definition>
+        <argsstring></argsstring>
+        <name>coord_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="54" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1base__grid3D_1a12c8081a19d25404fbe90644e80d52a8" prot="public" static="no">
+        <type>typename boost::multi_array&lt; T, 3 &gt;</type>
+        <definition>using rcppsw::ds::base_grid3D&lt; T &gt;::grid_type =  typename boost::multi_array&lt;T, 3&gt;</definition>
+        <argsstring></argsstring>
+        <name>grid_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="56" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1base__grid3D_1aaed03eaf8692fd97ec345336d7f5c02d" prot="public" static="no">
+        <type>typename grid_type::template array_view&lt; 3 &gt;::type</type>
+        <definition>using rcppsw::ds::base_grid3D&lt; T &gt;::grid_view =  typename grid_type::template array_view&lt;3&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>grid_view</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="57" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1base__grid3D_1aa2c6c466838e04dbc65c24ebb27e1baa" prot="public" static="no">
+        <type>typename grid_type::index_range</type>
+        <definition>using rcppsw::ds::base_grid3D&lt; T &gt;::index_range =  typename grid_type::index_range</definition>
+        <argsstring></argsstring>
+        <name>index_range</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="59" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrcppsw_1_1ds_1_1base__grid3D_1aee4614688e422a4ebff86371057487c9" prot="public" static="no">
+        <type>T</type>
+        <definition>using rcppsw::ds::base_grid3D&lt; T &gt;::value_type =  T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="53" column="3" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a98630a3263180ffce82dedfe146b5cb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>rcppsw::ds::base_grid3D&lt; T &gt;::base_grid3D</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>base_grid3D</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="61" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a9ab7a2cdb1230dd391a9eaf1849f624a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual rcppsw::ds::base_grid3D&lt; T &gt;::~base_grid3D</definition>
+        <argsstring>(void)=default</argsstring>
+        <name>~base_grid3D</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="62" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a78d172bf2633fc0aa93f12f13c3d6ab5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T&amp; rcppsw::ds::base_grid3D&lt; T &gt;::access</definition>
+        <argsstring>(const coord_type &amp;c)</argsstring>
+        <name>access</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a5bbb33160f11fe1da0e514e6cae6137f" kindref="member">coord_type</ref> &amp;</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="90" column="5" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a08257423dfc688b275fb26a29dd7b9f7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T&amp; rcppsw::ds::base_grid3D&lt; T &gt;::access</definition>
+        <argsstring>(const coord_type &amp;c) const</argsstring>
+        <name>access</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a5bbb33160f11fe1da0e514e6cae6137f" kindref="member">coord_type</ref> &amp;</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="92" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="92" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a0c9b342c2cc3b9ec68233489eba29bb6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T&amp; rcppsw::ds::base_grid3D&lt; T &gt;::access</definition>
+        <argsstring>(size_t i, size_t j, size_t k) const</argsstring>
+        <name>access</name>
+        <param>
+          <type>size_t</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>j</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="95" column="11" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="95" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a05eff4a346b7a328df19257206129686" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>T &amp;</type>
+        <definition>virtual T&amp; rcppsw::ds::base_grid3D&lt; T &gt;::access</definition>
+        <argsstring>(size_t i, size_t j, size_t k)=0</argsstring>
+        <name>access</name>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D_1a0d73673d2360919a8be92eb0ccbd501f">access</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D_1a0d73673d2360919a8be92eb0ccbd501f">access</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D__overlay_1a0fa4f281d3006096d8f2b30ca7584790">access</reimplementedby>
+        <param>
+          <type>size_t</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>j</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+<para>Return a reference to the element at position (i, j) in the grid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is provided in the base class so that the pointer/object variants of the grid (<ref refid="classrcppsw_1_1ds_1_1grid3D" kindref="compound">grid3D</ref>, etc.) can reduce code duplication. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="70" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a422e5f43277bd0bbe48d8007a433c087" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::ds::base_grid3D&lt; T &gt;::contains</definition>
+        <argsstring>(const coord_type &amp;pt)</argsstring>
+        <name>contains</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a5bbb33160f11fe1da0e514e6cae6137f" kindref="member">coord_type</ref> &amp;</type>
+          <declname>pt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="103" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="103" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1aab1aa33a5733948556a87562d27656e6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool rcppsw::ds::base_grid3D&lt; T &gt;::contains</definition>
+        <argsstring>(size_t i, size_t j, size_t k)</argsstring>
+        <name>contains</name>
+        <param>
+          <type>size_t</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>j</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="99" column="8" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="99" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a2050360303873cf0af2c5bdc0d2c2d87" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1ds_1_1base__grid3D_1aaed03eaf8692fd97ec345336d7f5c02d" kindref="member">grid_view</ref></type>
+        <definition>grid_view rcppsw::ds::base_grid3D&lt; T &gt;::layer</definition>
+        <argsstring>(size_t z)</argsstring>
+        <name>layer</name>
+        <param>
+          <type>size_t</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+<para>Get a view of a single layer within the grid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>z</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>0-based index of layer within the grid.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The layer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="119" column="13" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="119" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a829b5ba9183465925d1f0419210178ae" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a11f0150a4712763146110d537c54a845" kindref="member">const_grid_view</ref></type>
+        <definition>const_grid_view rcppsw::ds::base_grid3D&lt; T &gt;::layer</definition>
+        <argsstring>(size_t z) const</argsstring>
+        <name>layer</name>
+        <param>
+          <type>size_t</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="124" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="124" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a9210a9e7e110aa4a16f5c4d89ee90748" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T&amp; rcppsw::ds::base_grid3D&lt; T &gt;::operator[]</definition>
+        <argsstring>(const coord_type &amp;c)</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a5bbb33160f11fe1da0e514e6cae6137f" kindref="member">coord_type</ref> &amp;</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="107" column="6" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="107" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a986b32fdf343b43ae6726a46dc23c8b0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T&amp; rcppsw::ds::base_grid3D&lt; T &gt;::operator[]</definition>
+        <argsstring>(const coord_type &amp;c) const</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a5bbb33160f11fe1da0e514e6cae6137f" kindref="member">coord_type</ref> &amp;</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="108" column="12" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="108" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a6a3ae0e9a28e50781ca9e21a04c194f5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1ds_1_1base__grid3D_1aaed03eaf8692fd97ec345336d7f5c02d" kindref="member">grid_view</ref></type>
+        <definition>grid_view rcppsw::ds::base_grid3D&lt; T &gt;::subcircle</definition>
+        <argsstring>(const coord_type &amp;c, size_t radius)</argsstring>
+        <name>subcircle</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a5bbb33160f11fe1da0e514e6cae6137f" kindref="member">coord_type</ref> &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>radius</declname>
+        </param>
+        <briefdescription>
+<para>Get a 2D subcircle gridview from a 3D grid (i.e. always has height 1 in Z). The subcircle extent is cropped to the maximum boundaries of the parent grid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This means that rather than getting a 2 x 2 subgrid centered at 0 with the out-of-bounds elements zeroed if you request a subcircle on the boundary of the overall grid, you will get a 1 x 2 subgrid (a lopsided circle).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The X,Y,Z coordinates of the center of the subcircle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>radius</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radius of subcircle.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The subcircle. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="166" column="13" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="166" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a00b0b17091ae0db0006aed2f4727cf87" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a11f0150a4712763146110d537c54a845" kindref="member">const_grid_view</ref></type>
+        <definition>const_grid_view rcppsw::ds::base_grid3D&lt; T &gt;::subcircle</definition>
+        <argsstring>(const coord_type &amp;c, size_t radius) const</argsstring>
+        <name>subcircle</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a5bbb33160f11fe1da0e514e6cae6137f" kindref="member">coord_type</ref> &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>radius</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="185" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="185" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a07bab3b66558618e52cb8d99364f4716" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1ds_1_1base__grid3D_1aaed03eaf8692fd97ec345336d7f5c02d" kindref="member">grid_view</ref></type>
+        <definition>grid_view rcppsw::ds::base_grid3D&lt; T &gt;::subgrid</definition>
+        <argsstring>(const coord_type &amp;ll, const coord_type &amp;ur)</argsstring>
+        <name>subgrid</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a5bbb33160f11fe1da0e514e6cae6137f" kindref="member">coord_type</ref> &amp;</type>
+          <declname>ll</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a5bbb33160f11fe1da0e514e6cae6137f" kindref="member">coord_type</ref> &amp;</type>
+          <declname>ur</declname>
+        </param>
+        <briefdescription>
+<para>Create a subgrid from a grid. The specified coordinates are inclusive. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ll</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Lower left of the subgrid, inclusive. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Upper right of the subgrid, inclusive.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The subgrid (closed interval). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="137" column="13" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="137" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1acc0579502af1077c1662faa7031c4966" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a11f0150a4712763146110d537c54a845" kindref="member">const_grid_view</ref></type>
+        <definition>const_grid_view rcppsw::ds::base_grid3D&lt; T &gt;::subgrid</definition>
+        <argsstring>(const coord_type &amp;ll, const coord_type &amp;ur) const</argsstring>
+        <name>subgrid</name>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a5bbb33160f11fe1da0e514e6cae6137f" kindref="member">coord_type</ref> &amp;</type>
+          <declname>ll</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a5bbb33160f11fe1da0e514e6cae6137f" kindref="member">coord_type</ref> &amp;</type>
+          <declname>ur</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="144" column="19" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="144" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a46f68ceadbbc4797cc51e7e35a658e34" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t rcppsw::ds::base_grid3D&lt; T &gt;::xsize</definition>
+        <argsstring>(void) const =0</argsstring>
+        <name>xsize</name>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D_1a32398b282a42be7e82df930b5902bfd4">xsize</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D_1a32398b282a42be7e82df930b5902bfd4">xsize</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D__overlay_1a871d9c714330cdadb33e5ebf401477c8">xsize</reimplementedby>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the size of the X dimension of the grid (i.e. what is the array index in X?) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="76" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1ade178e757b57e3b7d0d6150cce12f7bf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t rcppsw::ds::base_grid3D&lt; T &gt;::ysize</definition>
+        <argsstring>(void) const =0</argsstring>
+        <name>ysize</name>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D_1aa868060e23e0ada5282f472d2957f472">ysize</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D_1aa868060e23e0ada5282f472d2957f472">ysize</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D__overlay_1a14624a914147039077185e409758049c">ysize</reimplementedby>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the size of the Y dimension of the grid (i.e. what is the array index in Y?) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="82" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a8a76901a1d4b4910a7acfadfa2fadc0a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t rcppsw::ds::base_grid3D&lt; T &gt;::zsize</definition>
+        <argsstring>(void) const =0</argsstring>
+        <name>zsize</name>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D_1a25bf450199dfe72bd1f82d1d3cea7a88">zsize</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D_1a25bf450199dfe72bd1f82d1d3cea7a88">zsize</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D__overlay_1ae7943161ef2d01239a8cbb2ae822e5ee">zsize</reimplementedby>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the size of the Z dimension of the grid (i.e. what is the array index in Z?) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="88" column="18"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1ab15b0f41b6390a5af5042941e9aa57e8" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const <ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a12c8081a19d25404fbe90644e80d52a8" kindref="member">grid_type</ref> &amp;</type>
+        <definition>virtual const grid_type&amp; rcppsw::ds::base_grid3D&lt; T &gt;::grid</definition>
+        <argsstring>(void) const =0</argsstring>
+        <name>grid</name>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D_1a998d3ecc00a230c11db38345bf4de1a5">grid</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D_1a998d3ecc00a230c11db38345bf4de1a5">grid</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D__overlay_1a17d8e313c1bbf2a94bf6587bc69aa7c5">grid</reimplementedby>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Return a reference to the underlying grid, defined by derived classes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="208" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classrcppsw_1_1ds_1_1base__grid3D_1a83721a9d073cb119200ccddf93bbf99f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classrcppsw_1_1ds_1_1base__grid3D_1a12c8081a19d25404fbe90644e80d52a8" kindref="member">grid_type</ref> &amp;</type>
+        <definition>virtual grid_type&amp; rcppsw::ds::base_grid3D&lt; T &gt;::grid</definition>
+        <argsstring>(void)=0</argsstring>
+        <name>grid</name>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D_1a37ea014f940ff59c182d3e459d1f2e7d">grid</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D_1a37ea014f940ff59c182d3e459d1f2e7d">grid</reimplementedby>
+        <reimplementedby refid="classrcppsw_1_1ds_1_1grid3D__overlay_1a032b6a1e1fa561056b2c3bbe1a05515f">grid</reimplementedby>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="209" column="21"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class containing functionality common to all types of 3D grids. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>rcppsw::ds::grid3D&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1grid3D"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>rcppsw::ds::grid3D_overlay&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1grid3D__overlay"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>rcppsw::ds::base_grid3D&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1base__grid3D"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>rcppsw::ds::base_grid3D&lt; T &gt;</label>
+        <link refid="classrcppsw_1_1ds_1_1base__grid3D"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" line="51" column="18" bodyfile="/home/jharwell/git/rcppsw/include/rcppsw/ds/base_grid3D.hpp" bodystart="51" bodyend="210"/>
+    <listofallmembers>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a05eff4a346b7a328df19257206129686" prot="public" virt="pure-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>access</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a78d172bf2633fc0aa93f12f13c3d6ab5" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>access</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a08257423dfc688b275fb26a29dd7b9f7" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>access</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a0c9b342c2cc3b9ec68233489eba29bb6" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>access</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a98630a3263180ffce82dedfe146b5cb8" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>base_grid3D</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a11f0150a4712763146110d537c54a845" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>const_grid_view</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1aab1aa33a5733948556a87562d27656e6" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>contains</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a422e5f43277bd0bbe48d8007a433c087" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>contains</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a5bbb33160f11fe1da0e514e6cae6137f" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>coord_type</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1ab15b0f41b6390a5af5042941e9aa57e8" prot="protected" virt="pure-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>grid</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a83721a9d073cb119200ccddf93bbf99f" prot="protected" virt="pure-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>grid</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a12c8081a19d25404fbe90644e80d52a8" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>grid_type</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1aaed03eaf8692fd97ec345336d7f5c02d" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>grid_view</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1aa2c6c466838e04dbc65c24ebb27e1baa" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>index_range</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a2050360303873cf0af2c5bdc0d2c2d87" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>layer</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a829b5ba9183465925d1f0419210178ae" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>layer</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a9210a9e7e110aa4a16f5c4d89ee90748" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>operator[]</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a986b32fdf343b43ae6726a46dc23c8b0" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>operator[]</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a6a3ae0e9a28e50781ca9e21a04c194f5" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>subcircle</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a00b0b17091ae0db0006aed2f4727cf87" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>subcircle</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a07bab3b66558618e52cb8d99364f4716" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>subgrid</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1acc0579502af1077c1662faa7031c4966" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>subgrid</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1aee4614688e422a4ebff86371057487c9" prot="public" virt="non-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>value_type</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a46f68ceadbbc4797cc51e7e35a658e34" prot="public" virt="pure-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>xsize</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1ade178e757b57e3b7d0d6150cce12f7bf" prot="public" virt="pure-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>ysize</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a8a76901a1d4b4910a7acfadfa2fadc0a" prot="public" virt="pure-virtual"><scope>rcppsw::ds::base_grid3D</scope><name>zsize</name></member>
+      <member refid="classrcppsw_1_1ds_1_1base__grid3D_1a9ab7a2cdb1230dd391a9eaf1849f624a" prot="public" virt="virtual"><scope>rcppsw::ds::base_grid3D</scope><name>~base_grid3D</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
