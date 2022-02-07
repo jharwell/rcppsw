@@ -15,6 +15,10 @@ if (NOT DEFINED RCPPSW_AL_MT_SAFE_TYPES)
   set(RCPPSW_AL_MT_SAFE_TYPES YES)
 endif()
 
+if (NOT DEFINED RCPPSW_ER_SYSTEM_LOG4CXX)
+  set(RCPPSW_ER_SYSTEM_LOG4CXX ON)
+endif()
+
 ################################################################################
 # Components                                                                   #
 ################################################################################
@@ -141,10 +145,17 @@ endif()
 
 find_package(rcsw)
 
-# Log4cxx
+# Log4cxx does not provide a cmake config package that works (either
+# the system package or the latest master if build from source) so we
+# mock it here.
 if ("${LIBRA_ER}" MATCHES "ALL")
-  set(log4cxx_ROOT ${LIBRA_DEPS_PREFIX})
-  find_package(log4cxx)
+  # If we are using the system version, everything will be found
+  # automatically. Otherwise, we have to specify.
+  if(NOT ${RCPPSW_ER_SYSTEM_LOG4CXX})
+    set(log4cxx_INCLUDE_DIR ${LIBRA_DEPS_PREFIX}/include)
+    set(log4cxx_LIBRARIES log4cxx)
+    set(log4cxx_LIBRARY_DIR ${LIBRA_DEPS_PREFIX}/lib)
+  endif()
 endif()
 
 ################################################################################
@@ -197,8 +208,11 @@ if(${RCPPSW_AL_MT_SAFE_TYPES})
 endif()
 
 if ("${LIBRA_ER}" MATCHES "ALL")
-  target_link_directories(rcppsw PUBLIC ${LIBRA_DEPS_PREFIX}/lib)
+  if(NOT ${RCPPSW_ER_SYSTEM_LOG4CXX})
+    target_link_directories(rcppsw PUBLIC ${LIBRA_DEPS_PREFIX}/lib)
+  endif()
   target_link_libraries(rcppsw log4cxx)
+  target_compile_definitions(rcppsw PUBLIC RCPPSW_ER_SYSTEM_LOG4CXX)
 endif()
 
 
@@ -224,7 +238,15 @@ message(STATUS "")
 message(STATUS "")
 message(STATUS "RCPPSW Configuration Summary:")
 message(STATUS "")
+
 message(STATUS "Enable std::atomic types..............: RCPPSW_AL_MT_SAFE_TYPES=${RCPPSW_AL_MT_SAFE_TYPES}")
+message(STATUS "Use system log4cxx....................: RCPPSW_ER_SYSTEM_LOG4CXX=${RCPPSW_ER_SYSTEM_LOG4CXX}" )
+if(NOT ${RCPPSW_ER_SYSTEM_LOG4CXX})
+
+  message(STATUS "log4cxx include dir...................: log4cxx_INCLUDE_DIR=${log4cxx_INCLUDE_DIR}" )
+  message(STATUS "log4cxx libdir........................: log4cxx_LIBRARY_DIR=${log4cxx_LIBRARY_DIR}" )
+endif()
+
 
 if(CMAKE_CROSSCOMPILING)
   message(STATUS "Boost root hint.......................: BOOST_ROOT=${BOOST_ROOT}")

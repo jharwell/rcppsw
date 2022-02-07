@@ -197,11 +197,18 @@ class client {
         return;
       }
     } /* for(&a..) */
-
+#if defined(RCPPSW_ER_SYSTEM_LOG4CXX)
+    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(kFileLayout);
+        log4cxx::AppenderPtr appender =
+            new log4cxx::FileAppender(layout, name, false);
+        appender->setName(name);
+        logger->addAppender(appender);
+#else
     auto layout = std::make_shared<log4cxx::PatternLayout>(kFileLayout);
     auto appender = std::make_shared<log4cxx::FileAppender>(layout,
                                                             name,
                                                             false);
+#endif
     appender->setName(name);
     logger->addAppender(appender);
   }
@@ -268,8 +275,13 @@ class client {
    * rcppsw.patterns).
    */
   void logfile_set(const std::string& name) {
+#if defined(RCPPSW_ER_SYSTEM_LOG4CXX)
+    log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(kFileLayout);
+    log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout, name);
+#else
     auto layout = std::make_shared<log4cxx::PatternLayout>(kFileLayout);
     auto appender = std::make_shared<log4cxx::FileAppender>(layout, name);
+#endif
     logger()->addAppender(appender);
   }
 
