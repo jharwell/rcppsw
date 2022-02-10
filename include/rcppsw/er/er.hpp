@@ -23,7 +23,20 @@
 
 /*******************************************************************************
  * Macros
+
  ******************************************************************************/
+/*
+ * If rcppsw is used in a context where this is not defined it is almost
+ * assuredly an error.
+ */
+#if !defined(LIBRA_ER)
+#error LIBRA_ER not defined--defaulting to ER_NONE
+#endif
+
+#if defined(LIBRA_ER_INHERIT) && !defined(LIBRA_ER)
+#error LIBRA_ER_INHERIT but LIBRA_ER not defined
+#endif
+
 #define RCPPSW_ER LIBRA_ER
 
 #define LIBRA_ER_NONE  0 /* No event reporting */

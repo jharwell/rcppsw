@@ -177,11 +177,9 @@ add_library(
   ${rcppsw_components_SRC}
   )
 
-# Ensure the whole archive is linked
-target_link_options(rcppsw
-  INTERFACE
-  -Wl,--whole-archive ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/librcppsw.a -Wl,--no-whole-archive
-  )
+########################################
+# Include directories
+########################################
 target_include_directories(
   rcppsw
   PUBLIC
@@ -196,6 +194,16 @@ target_include_directories(
   $<BUILD_INTERFACE:${log4cxx_INCLUDE_DIR}>
   $<BUILD_INTERFACE:${Boost_INCLUDE_DIRS}>
   )
+
+
+########################################
+# Link Libraries
+########################################
+# Ensure the whole archive is linked
+target_link_options(rcppsw
+  INTERFACE
+  -Wl,--whole-archive ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/librcppsw.a -Wl,--no-whole-archive
+  )
 target_link_libraries(rcppsw
   rcsw::rcsw
   ticpp::ticpp
@@ -203,6 +211,11 @@ target_link_libraries(rcppsw
   pthread
   dl
   )
+
+########################################
+# Compile Options/Definitions
+########################################
+
 if(${RCPPSW_AL_MT_SAFE_TYPES})
   target_compile_definitions(rcppsw PUBLIC RCPPSW_AL_MT_SAFE_TYPES)
 endif()
@@ -210,11 +223,16 @@ endif()
 if ("${LIBRA_ER}" MATCHES "ALL")
   if(NOT ${RCPPSW_ER_SYSTEM_LOG4CXX})
     target_link_directories(rcppsw PUBLIC ${LIBRA_DEPS_PREFIX}/lib)
+  else()
+    target_compile_definitions(rcppsw PUBLIC RCPPSW_ER_SYSTEM_LOG4CXX)
   endif()
   target_link_libraries(rcppsw log4cxx)
-  target_compile_definitions(rcppsw PUBLIC RCPPSW_ER_SYSTEM_LOG4CXX)
 endif()
 
+target_compile_definitions(rcppsw
+  INTERFACE
+  LIBRA_ER=LIBRA_ER_${LIBRA_ER}
+  )
 
 ################################################################################
 # Installation                                                                 #
