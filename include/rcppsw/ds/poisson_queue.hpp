@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_POISSON_QUEUE_HPP_
-#define INCLUDE_RCPPSW_DS_POISSON_QUEUE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -227,4 +226,3 @@ class poisson_queue {
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_POISSON_QUEUE_HPP_ */

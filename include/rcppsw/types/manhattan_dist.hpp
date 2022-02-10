@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TYPES_MANHATTAN_DIST_HPP_
-#define INCLUDE_RCPPSW_TYPES_MANHATTAN_DIST_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -108,4 +107,3 @@ bool operator<=(int lhs, const manhattan_dist& rhs) RCPPSW_PURE;
 
 NS_END(types, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TYPES_MANHATTAN_DIST_HPP_ */

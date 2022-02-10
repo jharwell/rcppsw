@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_WAVEFORM_GENERATOR_HPP_
-#define INCLUDE_RCPPSW_CONTROL_WAVEFORM_GENERATOR_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -92,4 +91,3 @@ class waveform_generator
 
 NS_END(control, rcppsw);
 
-#endif // INCLUDE_RCPPSW_CONTROL_WAVEFORM_GENERATOR_HPP_

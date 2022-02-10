@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_CONFIG_WAVEFORM_CONFIG_HPP_
-#define INCLUDE_RCPPSW_CONTROL_CONFIG_WAVEFORM_CONFIG_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -66,4 +65,3 @@ struct waveform_config final : public rcppsw::config::base_config {
 
 NS_END(config, control, rcppsw);
 
-#endif // INCLUDE_RCPPSW_CONTROL_CONFIG_WAVEFORM_CONFIG_HPP_

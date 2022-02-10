@@ -17,8 +17,7 @@
  * You should have received a copy of the GNU General Public License along with
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
-#ifndef INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_ENTROPY_HPP_
-#define INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_ENTROPY_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -230,4 +229,3 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
 
 NS_END(clustering, algorithm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_ENTROPY_HPP_ */

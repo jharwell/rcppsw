@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VIEW_BUILDER_HPP_
-#define INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VIEW_BUILDER_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -132,4 +131,3 @@ struct hgrid3D_view_builder {
 
 NS_END(detail, graph, ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VIEW_BUILDER_HPP_ */

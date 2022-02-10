@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_RANGE_HPP_
-#define INCLUDE_RCPPSW_MATH_RANGE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -319,4 +318,3 @@ RCPPSW_MATH_RANGE_CONV2DISC(z, size_t);
 
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_RANGE_HPP_ */

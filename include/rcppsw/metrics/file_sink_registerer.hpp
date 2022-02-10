@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_FILE_SINK_REGISTERER_HPP_
-#define INCLUDE_RCPPSW_METRICS_FILE_SINK_REGISTERER_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -140,5 +139,3 @@ class file_sink_registerer : public rer::client<file_sink_registerer> {
 };
 
 NS_END(metrics, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_METRICS_FILE_SINK_REGISTERER_HPP_ */

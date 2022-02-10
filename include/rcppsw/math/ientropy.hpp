@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_IENTROPY_HPP_
-#define INCLUDE_RCPPSW_MATH_IENTROPY_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -70,4 +69,3 @@ class ientropy : public math::expression<double> {
 
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_IENTROPY_HPP_ */

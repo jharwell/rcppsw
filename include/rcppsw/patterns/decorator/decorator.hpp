@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_DECORATOR_DECORATOR_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_DECORATOR_DECORATOR_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -161,4 +160,3 @@ class decorator {
 
 NS_END(rcppsw, patterns, decorator);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_DECORATOR_DECORATOR_HPP_ */

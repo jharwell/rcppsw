@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_EMA_HPP_
-#define INCLUDE_RCPPSW_MATH_EMA_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -164,4 +163,3 @@ ema<T> operator/(const ema<T>& lhs, const double& rhs) {
 
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_EMA_HPP_ */

@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_SIGMOID_HPP_
-#define INCLUDE_RCPPSW_MATH_SIGMOID_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -88,4 +87,3 @@ class sigmoid : public expression<double> {
 
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_SIGMOID_HPP_ */

@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_FACTORY_FACTORY_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_FACTORY_FACTORY_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -71,4 +70,3 @@ class sharing_factory : public detail::base_factory<detail::factory_sharing_type
 
 NS_END(factory, patterns, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_FACTORY_FACTORY_HPP_ */

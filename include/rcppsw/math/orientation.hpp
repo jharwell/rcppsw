@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_ORIENTATION_HPP_
-#define INCLUDE_RCPPSW_MATH_ORIENTATION_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -66,4 +65,3 @@ class euler_angles {
 
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_ORIENTATION_HPP_ */

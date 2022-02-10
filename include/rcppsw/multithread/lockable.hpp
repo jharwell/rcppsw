@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MULTITHREAD_LOCKABLE_HPP_
-#define INCLUDE_RCPPSW_MULTITHREAD_LOCKABLE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -115,4 +114,3 @@ class lockable {
 
 NS_END(multithread, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MULTITHREAD_LOCKABLE_HPP_ */

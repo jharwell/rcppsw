@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_FSM_SIMPLE_FSM_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_FSM_SIMPLE_FSM_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -44,4 +43,3 @@ using simple_fsm = base_fsm;
 
 NS_END(fsm, patterns, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_FSM_SIMPLE_FSM_HPP_ */

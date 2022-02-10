@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_ANGLES_HPP_
-#define INCLUDE_RCPPSW_MATH_ANGLES_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -79,4 +78,3 @@ template<typename TAngleType>
 
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_ANGLES_HPP_ */

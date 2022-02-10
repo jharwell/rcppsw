@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_UTILS_MASKABLE_ENUM_HPP_
-#define INCLUDE_RCPPSW_UTILS_MASKABLE_ENUM_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -48,4 +47,3 @@ TEnum operator|=(TEnum& lhs, const TEnum& rhs) {
   return lhs = lhs | rhs;
 }
 
-#endif /* INCLUDE_RCPPSW_COMMON_MASKABLE_ENUM_HPP_ */

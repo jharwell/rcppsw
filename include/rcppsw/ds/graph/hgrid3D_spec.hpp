@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_SPEC_HPP_
-#define INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_SPEC_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -88,4 +87,3 @@ struct hgrid3D_spec {
 
 NS_END(graph, ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_GRAPH_DS_HGRID3D_SPEC_HPP_ */

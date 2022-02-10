@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_RTREE_HPP_
-#define INCLUDE_RCPPSW_DS_RTREE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -251,4 +250,3 @@ rtree_box<TCoordType> make_rtree_box(const TCoordType& ll,
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_RTREE_HPP_ */

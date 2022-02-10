@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TYPES_DISCRETIZE_RATIO_HPP_
-#define INCLUDE_RCPPSW_TYPES_DISCRETIZE_RATIO_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -45,4 +44,3 @@ using discretize_ratio = named_type<double, struct discretize_ratio_tag>;
 
 NS_END(types, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TYPES_DISCRETIZE_RATIO_HPP_ */

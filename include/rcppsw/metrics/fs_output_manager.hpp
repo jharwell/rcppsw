@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_FS_OUTPUT_MANAGER_HPP_
-#define INCLUDE_RCPPSW_METRICS_FS_OUTPUT_MANAGER_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -62,11 +61,11 @@ class fs_output_manager : public rer::client<fs_output_manager>,
   void collector_preregister(const std::string& scoped_name,
                              const rmetrics::output_mode& mode) override {
     if (rmetrics::output_mode::ekAPPEND == mode) {
-      collector_map()->at(scoped_name) = &m_append;
+      collector_map()->insert({scoped_name, &m_append});
     } else if (rmetrics::output_mode::ekTRUNCATE == mode) {
-      collector_map()->at(scoped_name) = &m_truncate;
+      collector_map()->insert({scoped_name, &m_truncate});
     } else if (rmetrics::output_mode::ekCREATE == mode) {
-      collector_map()->at(scoped_name) = &m_create;
+      collector_map()->insert({scoped_name,&m_create});
     } else {
       ER_FATAL_SENTINEL("Unhandled output mode %d",
                         rcppsw::as_underlying(mode));
@@ -123,5 +122,3 @@ class fs_output_manager : public rer::client<fs_output_manager>,
 };
 
 NS_END(metrics, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_METRICS_FS_OUTPUT_MANAGER_HPP_ */

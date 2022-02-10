@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_REGISTER_WITH_SINK_HPP_
-#define INCLUDE_RCPPSW_METRICS_REGISTER_WITH_SINK_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -84,7 +83,7 @@ class register_with_sink : public rer::client<
   register_with_sink(TMetricsManager* const manager,
                     const creatable_collector_set& set,
                     const extra_args_type& extra_args = {})
-      : ER_CLIENT_INIT("rcppsw.metrics.collector_registerer"),
+      : ER_CLIENT_INIT("rcppsw.metrics.register_with_sink"),
         mc_create_set(set),
         m_extra_args(extra_args),
         m_manager(manager) {}
@@ -188,4 +187,3 @@ class register_with_sink : public rer::client<
 
 NS_END(metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_REGISTER_WITH_SINK_HPP_ */

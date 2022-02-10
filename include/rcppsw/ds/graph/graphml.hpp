@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_GRAPH_GRAPHML_HPP_
-#define INCLUDE_RCPPSW_DS_GRAPH_GRAPHML_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -109,4 +108,3 @@ static inline void read_graphml(const fs::path& path,
 
 NS_END(graph, ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_GRAPH_GRAPHML_HPP_ */

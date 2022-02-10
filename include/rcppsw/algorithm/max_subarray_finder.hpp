@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ALGORITHM_MAX_SUBARRAY_FINDER_HPP_
-#define INCLUDE_RCPPSW_ALGORITHM_MAX_SUBARRAY_FINDER_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -80,4 +79,3 @@ class max_subarray_finder {
 
 NS_END(algorithm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ALGORITHM_MAX_SUBARRAY_FINDER_HPP_ */

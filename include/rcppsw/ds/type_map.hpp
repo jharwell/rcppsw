@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_TYPE_MAP_HPP_
-#define INCLUDE_RCPPSW_DS_TYPE_MAP_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -60,4 +59,3 @@ class type_map
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_TYPE_MAP_HPP_ */

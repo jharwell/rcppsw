@@ -20,8 +20,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ER_CLIENT_HPP_
-#define INCLUDE_RCPPSW_ER_CLIENT_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -334,4 +333,3 @@ class client {
 
 NS_END(rcppsw, er);
 
-#endif /* INCLUDE_RCPPSW_ER_CLIENT_HPP_ */

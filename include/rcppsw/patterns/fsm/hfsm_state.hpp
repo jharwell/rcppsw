@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_FSM_HFSM_STATE_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_FSM_HFSM_STATE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -114,4 +113,3 @@ class hfsm_state_action1 : public hfsm_state {
 
 NS_END(fsm, patterns, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_FSM_HFSM_STATE_HPP_ */

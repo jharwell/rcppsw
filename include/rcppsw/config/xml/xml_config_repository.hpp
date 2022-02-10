@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONFIG_XML_XML_CONFIG_REPOSITORY_HPP_
-#define INCLUDE_RCPPSW_CONFIG_XML_XML_CONFIG_REPOSITORY_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -186,4 +185,3 @@ class xml_config_repository : public er::client<xml_config_repository> {
 
 NS_END(xml, config, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_CONFIG_XML_XML_CONFIG_REPOSITORY_HPP_ */

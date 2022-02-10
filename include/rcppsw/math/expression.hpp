@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_EXPRESSION_HPP_
-#define INCLUDE_RCPPSW_MATH_EXPRESSION_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -77,4 +76,3 @@ class expression {
 
 NS_END(rcppsw, math);
 
-#endif /* INCLUDE_RCPPSW_MATH_EXPRESSION_HPP_ */

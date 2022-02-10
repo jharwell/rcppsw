@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_GRAPH_GRID_INDEX_MAP_HPP_
-#define INCLUDE_RCPPSW_DS_GRAPH_GRID_INDEX_MAP_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -74,4 +73,3 @@ class grid_index_map : public rpdecorator::decorator<
 
 NS_END(graph, ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_GRAPH_GRID_INDEX_MAP_HPP_ */

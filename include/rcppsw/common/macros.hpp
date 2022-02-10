@@ -19,8 +19,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_COMMON_MACROS_HPP_
-#define INCLUDE_RCPPSW_COMMON_MACROS_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -461,4 +460,3 @@
 #endif /* __INTEL_COMPILER__ */
 /* clang-format on */
 
-#endif /* INCLUDE_RCPPSW_COMMON_MACROS_HPP_ */

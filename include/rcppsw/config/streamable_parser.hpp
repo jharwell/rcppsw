@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONFIG_STREAMABLE_PARSER_HPP_
-#define INCLUDE_RCPPSW_CONFIG_STREAMABLE_PARSER_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -91,4 +90,3 @@ class streamable_parser {
 
 NS_END(config, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_CONFIG_STREAMABLE_PARSER_HPP_ */

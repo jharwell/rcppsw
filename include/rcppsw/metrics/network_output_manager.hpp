@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_NETWORK_OUTPUT_MANAGER_HPP_
-#define INCLUDE_RCPPSW_METRICS_NETWORK_OUTPUT_MANAGER_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -98,4 +97,3 @@ class network_output_manager : public rer::client<network_output_manager>,
 
 NS_END(metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_NETWORK_OUTPUT_MANAGER_HPP_ */

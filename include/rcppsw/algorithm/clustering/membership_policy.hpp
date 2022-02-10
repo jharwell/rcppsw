@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_MEMBERSHIP_POLICY_HPP_
-#define INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_MEMBERSHIP_POLICY_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -83,4 +82,3 @@ using membership_type = typename membership::mapping<Policy>::type;
 NS_END(clustering, algorithm, rcppsw);
 
 
-#endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_MEMBERSHIP_POLICY_HPP_ */

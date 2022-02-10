@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ER_MACROS_HPP_
-#define INCLUDE_RCPPSW_ER_MACROS_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -350,4 +349,3 @@
     goto error;                 \
   }
 
-#endif /* INCLUDE_RCPPSW_ER_MACROS_HPP_ */

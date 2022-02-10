@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_CONFIG_FILE_SINK_CONFIG_HPP_
-#define INCLUDE_RCPPSW_METRICS_CONFIG_FILE_SINK_CONFIG_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -49,4 +48,3 @@ struct file_sink_config final : public rconfig::base_config {
 
 NS_END(config, metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_CONFIG_FILE_SINK_CONFIG_HPP_ */

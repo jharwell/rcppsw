@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TYPES_TIMESTEP_HPP_
-#define INCLUDE_RCPPSW_TYPES_TIMESTEP_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -103,4 +102,3 @@ class timestep final : public named_type<size_t, struct timestep_tag> {
 
 NS_END(types, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TYPES_TIMESTEP_HPP_ */

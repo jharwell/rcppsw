@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_BASE_GRID3D_HPP_
-#define INCLUDE_RCPPSW_DS_BASE_GRID3D_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -208,4 +207,3 @@ class base_grid3D {
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_BASE_GRID3D_HPP_ */

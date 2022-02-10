@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VIEW_FILTER_DATA_HPP_
-#define INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VIEW_FILTER_DATA_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -130,4 +129,3 @@ class hgrid3D_view_filter_data : public rer::client<hgrid3D_view_filter_data<TSp
 
 NS_END(graph, ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_GRAPH_HGRID3D_VIEW_FILTER_DATA_HPP_ */

@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_UTILS_COLOR_HPP_
-#define INCLUDE_RCPPSW_UTILS_COLOR_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -108,4 +107,3 @@ class color : public er::stringizable {
 
 NS_END(utils, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_UTILS_COLOR_HPP_ */

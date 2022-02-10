@@ -19,8 +19,7 @@
  */
 /// \file
 /// here is my file
-#ifndef INCLUDE_RCPPSW_MULTIPROCESS_IPC_HPP_
-#define INCLUDE_RCPPSW_MULTIPROCESS_IPC_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -108,4 +107,3 @@ using ipc_string =
 
 NS_END(multiprocess, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MULTIPROCESS_IPC_HPP_ */

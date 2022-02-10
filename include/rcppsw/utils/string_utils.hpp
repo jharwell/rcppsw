@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_UTILS_STRING_UTILS_HPP_
-#define INCLUDE_RCPPSW_UTILS_STRING_UTILS_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -76,4 +75,3 @@ bool parse_values(std::istream& is, size_t n_fields, T* buf, char delim = '\n') 
 
 NS_END(utils, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_UTILS_STRING_UTILS_HPP_ */

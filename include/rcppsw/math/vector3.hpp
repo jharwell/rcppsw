@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_VECTOR3_HPP_
-#define INCLUDE_RCPPSW_MATH_VECTOR3_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -503,4 +502,3 @@ static inline size_t l1norm(const vector3<U>& v1, const vector3<V>& v2) {
 
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_VECTOR3_HPP_ */

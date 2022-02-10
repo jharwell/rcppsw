@@ -18,8 +18,7 @@
  * FORDYCA.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_CONFIG_XML_RNG_PARSER_HPP_
-#define INCLUDE_RCPPSW_MATH_CONFIG_XML_RNG_PARSER_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -74,4 +73,3 @@ class rng_parser final : public rer::client<rng_parser>,
 
 NS_END(xml, config, math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_CONFIG_XML_RNG_PARSER_HPP_ */

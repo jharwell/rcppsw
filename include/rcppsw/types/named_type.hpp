@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TYPES_NAMED_TYPE_HPP_
-#define INCLUDE_RCPPSW_TYPES_NAMED_TYPE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -75,4 +74,3 @@ class named_type : public er::stringizable {
 
 NS_END(types, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TYPES_NAMED_TYPE_HPP_ */

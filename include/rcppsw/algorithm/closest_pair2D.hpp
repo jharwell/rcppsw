@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ALGORITHM_CLOSEST_PAIR2D_HPP_
-#define INCLUDE_RCPPSW_ALGORITHM_CLOSEST_PAIR2D_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -225,4 +224,3 @@ class closest_pair2D {
 
 NS_END(algorithm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ALGORITHM_CLOSEST_PAIR2D_HPP_ */

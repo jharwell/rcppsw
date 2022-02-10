@@ -17,8 +17,7 @@
  * You should have received a copy of the GNU General Public License along with
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
-#ifndef INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_CLUSTER_HPP_
-#define INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_CLUSTER_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -177,4 +176,3 @@ struct mapping<T, Policy, policy::is_eh<Policy>> {
 
 NS_END(clustering, algorithm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_CLUSTER_HPP_ */

@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MPL_IDENTITY_HPP_
-#define INCLUDE_RCPPSW_MPL_IDENTITY_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -51,4 +50,3 @@ struct identity {
 
 NS_END(mpl, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MPL_IDENTITY_HPP_ */

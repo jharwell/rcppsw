@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_UTILS_FILE_PARSER_HPP_
-#define INCLUDE_RCPPSW_UTILS_FILE_PARSER_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -83,4 +82,3 @@ class file_parser {
 
 NS_END(utils, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_UTILS_FILE_PARSER_HPP_ */

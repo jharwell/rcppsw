@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_VISITOR_POLYMORPHIC_VISITABLE_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_VISITOR_POLYMORPHIC_VISITABLE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -91,4 +90,3 @@ class polymorphic_accept_set<T>: public detail::polymorphic_accept_set_helper<T>
 
 NS_END(rcppsw, patterns, visitor);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_VISITOR_POLYMORPHIC_VISITABLE_HPP_ */

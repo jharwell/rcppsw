@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_BASE_METRICS_HPP_
-#define INCLUDE_RCPPSW_METRICS_BASE_METRICS_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -56,4 +55,3 @@ class base_metrics {
 
 NS_END(metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_BASE_METRICS_HPP_ */

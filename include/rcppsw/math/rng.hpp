@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_RNG_HPP_
-#define INCLUDE_RCPPSW_MATH_RNG_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -95,4 +94,3 @@ class rng final : public patterns::pimpl::pimpl<detail::rng_impl> {
 
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_RNG_HPP_ */

@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MPL_MPL_HPP_
-#define INCLUDE_RCPPSW_MPL_MPL_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -244,4 +243,3 @@ struct is_specialization<Template<Args...>, Template> : std::true_type {};
 
 NS_END(mpl, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_INCLUDE_MPL_MPL_HPP_ */

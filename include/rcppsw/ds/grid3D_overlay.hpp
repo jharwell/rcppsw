@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_GRID3D_OVERLAY_HPP_
-#define INCLUDE_RCPPSW_DS_GRID3D_OVERLAY_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -182,4 +181,3 @@ class grid3D_overlay : public base_grid3D<T>,
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_GRID3D_OVERLAY_HPP_ */

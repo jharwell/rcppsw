@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_METRICS_GRID3D_METRICS_COLLECTOR_HPP_
-#define INCLUDE_RCPPSW_DS_METRICS_GRID3D_METRICS_COLLECTOR_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -80,4 +79,3 @@ class grid3D_metrics_collector : public rmetrics::base_collector {
 
 NS_END(metrics, ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_METRICS_GRID3D_METRICS_COLLECTOR_HPP_ */

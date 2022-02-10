@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_CREATABLE_COLLECTOR_SET_HPP_
-#define INCLUDE_RCPPSW_METRICS_CREATABLE_COLLECTOR_SET_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -97,4 +96,3 @@ using creatable_collector_set = std::multiset<creatable_collector_spec,
 
 NS_END(metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_CREATABLE_COLLECTOR_SET_HPP_ */

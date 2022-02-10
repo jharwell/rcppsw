@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONFIG_BASE_CONFIG_HPP_
-#define INCLUDE_RCPPSW_CONFIG_BASE_CONFIG_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -50,4 +49,3 @@ struct base_config {
 
 NS_END(config, config);
 
-#endif /* INCLUDE_RCPPSW_CONFIG_BASE_CONFIG_HPP_ */

@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_SPHERE_VECTOR_HPP_
-#define INCLUDE_RCPPSW_MATH_SPHERE_VECTOR_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -62,4 +61,3 @@ class sphere_vector {
 
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_SPHERE_VECTOR_HPP_ */

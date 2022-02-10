@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TYPES_SPATIAL_RANGE_HPP_
-#define INCLUDE_RCPPSW_TYPES_SPATIAL_RANGE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -45,4 +44,3 @@ using spatial_range = math::range<types::spatial_dist>;
 
 NS_END(types, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TYPES_SPATIAL_RANGE_HPP_ */

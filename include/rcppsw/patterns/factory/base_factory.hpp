@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_FACTORY_BASE_FACTORY_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_FACTORY_BASE_FACTORY_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -176,4 +175,3 @@ class base_factory {
 
 NS_END(detail, factory, patterns, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_FACTORY_BASE_FACTORY_HPP_ */

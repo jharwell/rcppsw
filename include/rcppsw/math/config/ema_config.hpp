@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_CONFIG_EMA_CONFIG_HPP_
-#define INCLUDE_RCPPSW_MATH_CONFIG_EMA_CONFIG_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -46,4 +45,3 @@ struct ema_config final : public rcppsw::config::base_config {
 
 NS_END(config, math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_CONFIG_EMA_CONFIG_HPP_ */

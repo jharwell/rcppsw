@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_FSM_STATE_MAP_ROW_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_FSM_STATE_MAP_ROW_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -56,4 +55,3 @@ class state_map_row {
 
 NS_END(fsm, patterns, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_FSM_STATE_MAP_ROW_HPP_ */

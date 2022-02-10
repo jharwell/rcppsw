@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_FSM_BASE_FSM_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_FSM_BASE_FSM_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -510,4 +509,3 @@ NS_END(fsm, patterns, rcppsw);
   rcppsw::patterns::fsm::state_map_ex_row( \
       state_name, guard_name, entry_name, exit_name)
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_FSM_BASE_FSM_HPP_ */

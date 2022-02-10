@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ER_STRINGIZABLE_HPP_
-#define INCLUDE_RCPPSW_ER_STRINGIZABLE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -55,4 +54,3 @@ class stringizable {
 
 NS_END(er, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ER_STRINGIZABLE_HPP_ */

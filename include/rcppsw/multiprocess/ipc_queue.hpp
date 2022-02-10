@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MULTIPROCESS_IPC_QUEUE_HPP_
-#define INCLUDE_RCPPSW_MULTIPROCESS_IPC_QUEUE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -180,4 +179,3 @@ class ipc_queue {
 
 NS_END(multiprocess, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MULTIPROCESS_IPC_QUEUE_HPP_ */

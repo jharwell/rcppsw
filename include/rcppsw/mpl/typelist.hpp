@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MPL_TYPELIST_HPP_
-#define INCLUDE_RCPPSW_MPL_TYPELIST_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -179,4 +178,3 @@ using make_tuple_type = typename boost::mpl::fold<
 
 NS_END(mpl, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_INCLUDE_MPL_TYPELIST_HPP_ */

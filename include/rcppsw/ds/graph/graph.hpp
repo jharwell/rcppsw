@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_GRAPH_GRAPH_HPP_
-#define INCLUDE_RCPPSW_DS_GRAPH_GRAPH_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -146,4 +145,3 @@ static inline size_t n_vertices(const TBGLGraphType& g) {
 
 NS_END(graph, ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_GRAPH_GRAPH_HPP_ */

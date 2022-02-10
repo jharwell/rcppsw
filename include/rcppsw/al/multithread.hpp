@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_AL_MULTITHREAD_HPP_
-#define INCLUDE_RCPPSW_AL_MULTITHREAD_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -127,4 +126,3 @@ void mt_set(U& lhs, const V& rhs) { lhs = rhs; }
 
 NS_END(al, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_AL_MULTITHREAD_HPP_ */

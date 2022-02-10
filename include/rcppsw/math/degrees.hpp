@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_DEGREES_HPP_
-#define INCLUDE_RCPPSW_MATH_DEGREES_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -200,4 +199,3 @@ std::ostream& operator<<(std::ostream& stream, const degrees& d);
 
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_DEGREES_HPP_ */

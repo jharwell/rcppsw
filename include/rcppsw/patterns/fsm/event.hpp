@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_FSM_EVENT_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_FSM_EVENT_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -150,4 +149,3 @@ class no_event_data {};
 
 NS_END(fsm, patterns, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_FSM_EVENT_HPP_ */

@@ -17,8 +17,7 @@
  * You should have received a copy of the GNU General Public License along with
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
-#ifndef INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_KMEANS_HPP_
-#define INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_KMEANS_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -167,4 +166,3 @@ class kmeans : public er::client<kmeans<T>> {
 
 NS_END(clustering, algorithm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_KMEANS_HPP_ */

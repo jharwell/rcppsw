@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_COLLECTOR_GROUP_HPP_
-#define INCLUDE_RCPPSW_METRICS_COLLECTOR_GROUP_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -271,4 +270,3 @@ class collector_group {
 
 NS_END(metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_COLLECTOR_GROUP_HPP_ */

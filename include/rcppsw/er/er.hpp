@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ER_ER_HPP_
-#define INCLUDE_RCPPSW_ER_ER_HPP_
+#pragma once
 
 /*******************************************************************************
  * Macros
@@ -53,4 +52,3 @@
 #define RCPPSW_ER_MSG_LEN_MAX 1000
 #define RCPPSW_ER_FATAL_MSG_LEN_MAX 10000
 
-#endif /* INCLUDE_RCPPSW_ER_ER_HPP_ */

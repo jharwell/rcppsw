@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_STACKED_GRID2D_HPP_
-#define INCLUDE_RCPPSW_DS_STACKED_GRID2D_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -248,4 +247,3 @@ class stacked_grid2D {
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_STACKED_GRID2D_HPP_ */

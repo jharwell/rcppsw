@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_PID_LOOP_HPP_
-#define INCLUDE_RCPPSW_CONTROL_PID_LOOP_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -103,4 +102,3 @@ class pid_loop {
 
 NS_END(control, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_CONTROL_PID_LOOP_HPP_ */

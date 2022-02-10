@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_WRITE_STATUS_HPP_
-#define INCLUDE_RCPPSW_METRICS_WRITE_STATUS_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -57,4 +56,3 @@ enum write_status {
 
 NS_END(metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_WRITE_STATUS_HPP_ */

@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_NETWORK_SINK_HPP_
-#define INCLUDE_RCPPSW_METRICS_NETWORK_SINK_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -66,4 +65,3 @@ class network_sink : public rmetrics::base_sink,
 
 NS_END(metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_NETWORK_SINK_HPP_ */

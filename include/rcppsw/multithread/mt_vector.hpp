@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MULTITHREAD_MT_VECTOR_HPP_
-#define INCLUDE_RCPPSW_MULTITHREAD_MT_VECTOR_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -72,4 +71,3 @@ class mt_vector {
 
 NS_END(multithread, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MULTITHREAD_MT_VECTOR_HPP_ */

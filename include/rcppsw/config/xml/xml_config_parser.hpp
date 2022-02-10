@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONFIG_XML_XML_CONFIG_PARSER_HPP_
-#define INCLUDE_RCPPSW_CONFIG_XML_XML_CONFIG_PARSER_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -203,4 +202,3 @@ class xml_config_parser : public er::client<xml_config_parser> {
 
 NS_END(xml, config, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_CONFIG_XML_XML_CONFIG_PARSER_HPP_ */

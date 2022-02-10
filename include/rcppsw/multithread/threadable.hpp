@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MULTITHREAD_THREADABLE_HPP_
-#define INCLUDE_RCPPSW_MULTITHREAD_THREADABLE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -132,4 +131,3 @@ class threadable {
 
 NS_END(multithread, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MULTITHREAD_THREADABLE_HPP_ */

@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_SPATIAL_HPP_
-#define INCLUDE_RCPPSW_MATH_SPATIAL_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -82,4 +81,3 @@ RCPPSW_MATH_SPAN_FUNC_DISC(z);
 
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_SPATIAL_HPP_ */

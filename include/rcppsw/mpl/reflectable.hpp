@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MPL_REFLECTABLE_HPP_
-#define INCLUDE_RCPPSW_MPL_REFLECTABLE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -57,4 +56,3 @@ class reflectable {
 
 NS_END(mpl, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MPL_REFLECTABLE_HPP_ */

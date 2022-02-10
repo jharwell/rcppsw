@@ -17,8 +17,7 @@
  * You should have received a copy of the GNU General Public License along with
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
-#ifndef INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_ENTROPY_EH_OMP_HPP_
-#define INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_ENTROPY_EH_OMP_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -86,4 +85,3 @@ class entropy_eh_omp final : public eh_clustering_impl<T> {
 
 NS_END(clustering, algorithm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_ENTROPY_EH_OMP_HPP_ */

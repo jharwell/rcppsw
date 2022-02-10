@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_BASE_CLUSTERING_IMPL_HPP_
-#define INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_BASE_CLUSTERING_IMPL_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -86,4 +85,3 @@ class base_clustering_impl {
 
 NS_END(clustering, algorithm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_BASE_CLUSTERING_IMPL_HPP_ */

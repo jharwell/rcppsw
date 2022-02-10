@@ -19,8 +19,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_COMMON_COMMON_HPP_
-#define INCLUDE_RCPPSW_COMMON_COMMON_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -86,4 +85,3 @@ as_underlying(const TEnum& e) noexcept {
 
 NS_END(rcppsw);
 
-#endif /* INCLUDE_RCPPSW_COMMON_COMMON_HPP_ */

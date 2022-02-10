@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_EH_CLUSTERING_IMPL_HPP_
-#define INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_EH_CLUSTERING_IMPL_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -59,4 +58,3 @@ class eh_clustering_impl : public base_clustering_impl<T, policy::EH> {
 
 NS_END(clustering, algorithm, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ALGORITHM_CLUSTERING_EH_CLUSTERING_IMPL_HPP_ */

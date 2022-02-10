@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_HPP_
-#define INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -170,4 +169,3 @@ class grid2D_overlay final : public base_grid2D<T>,
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_GRID2D_OVERLAY_HPP_ */

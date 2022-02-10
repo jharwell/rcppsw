@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_CONFIG_XML_WAVEFORM_PARSER_HPP_
-#define INCLUDE_RCPPSW_CONTROL_CONFIG_XML_WAVEFORM_PARSER_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -77,4 +76,3 @@ class waveform_parser final : public rer::client<waveform_parser>,
 
 NS_END(xml, config, control, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_CONTROL_CONFIG_XML_WAVEFORM_PARSER_HPP_ */

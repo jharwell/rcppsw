@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_RNGM_HPP_
-#define INCLUDE_RCPPSW_MATH_RNGM_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -54,4 +53,3 @@ class rngm : public patterns::prototype::caching_factory<rng, uint>,
 
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_RNGM_HPP_ */

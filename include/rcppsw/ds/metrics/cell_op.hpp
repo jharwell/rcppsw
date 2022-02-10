@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_METRICS_CELL_OP_HPP_
-#define INCLUDE_RCPPSW_DS_METRICS_CELL_OP_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -49,4 +48,3 @@ using cell_accum = std::false_type;
 
 NS_END(metrics, ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_METRICS_CELL_OP_HPP_ */

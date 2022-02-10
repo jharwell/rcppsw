@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_RCPPSW_HPP_
-#define INCLUDE_RCPPSW_RCPPSW_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -211,4 +210,3 @@ namespace rpprototype = rcppsw::patterns::prototype;
 namespace rpdecorator = rcppsw::patterns::decorator;
 namespace rppimpl = rcppsw::patterns::pimpl;
 
-#endif /* INCLUDE_RCPPSW_RCPPSW_HPP_ */

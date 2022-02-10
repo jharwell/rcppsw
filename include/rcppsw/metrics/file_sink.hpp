@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_FILE_SINK_HPP_
-#define INCLUDE_RCPPSW_METRICS_FILE_SINK_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -88,4 +87,3 @@ class file_sink : public rer::client<file_sink>,
 
 NS_END(metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_FILE_SINK_HPP_ */

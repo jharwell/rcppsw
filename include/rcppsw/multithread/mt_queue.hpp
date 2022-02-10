@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MULTITHREAD_MT_QUEUE_HPP_
-#define INCLUDE_RCPPSW_MULTITHREAD_MT_QUEUE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -97,4 +96,3 @@ class mt_queue : public rpdecorator::decorator<std::deque<T>> {
 
 NS_END(multithread, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MULTITHREAD_MT_QUEUE_HPP_ */

@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_ER_STACKTRACE_HPP_
-#define INCLUDE_RCPPSW_ER_STACKTRACE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -54,4 +53,3 @@ void terminate_handler(void);
 
 NS_END(er, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_ER_STACKTRACE_HPP_ */

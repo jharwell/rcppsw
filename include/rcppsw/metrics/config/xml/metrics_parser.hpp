@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_CONFIG_XML_METRICS_PARSER_HPP_
-#define INCLUDE_RCPPSW_METRICS_CONFIG_XML_METRICS_PARSER_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -78,10 +77,8 @@ class metrics_parser : public rer::client<metrics_parser>,
   /* clang-format off */
   std::unique_ptr<config_type> m_config{nullptr};
   rmcxml::file_sink_parser     m_csv_sinks{};
-  rmcxml::file_sink_parser     m_network_sinks{};
+  rmcxml::network_sink_parser  m_network_sinks{};
   /* clang-format on */
 };
 
 NS_END(xml, config, metrics, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_METRICS_CONFIG_XML_METRICS_PARSER_HPP_ */

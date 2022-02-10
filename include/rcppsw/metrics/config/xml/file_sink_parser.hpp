@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_CONFIG_XML_FILE_SINK_PARSER_HPP_
-#define INCLUDE_RCPPSW_METRICS_CONFIG_XML_FILE_SINK_PARSER_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -56,13 +55,13 @@ class file_sink_parser : public rer::client<file_sink_parser>,
 
   ~file_sink_parser(void) override = default;
 
+
   /**
    * \brief The root tag that all configuration relating to the .file metrics
    * sink should in lie under in the XML tree.
    */
   static inline const std::string kXMLRoot = "file";
-
-  void parse(const ticpp::Element& node) override RCPPSW_COLD;
+ void parse(const ticpp::Element& node) override RCPPSW_COLD;
 
   RCPPSW_COLD std::string xml_root(void) const override { return kXMLRoot; }
 
@@ -77,5 +76,3 @@ class file_sink_parser : public rer::client<file_sink_parser>,
 };
 
 NS_END(xml, config, metrics, rcppsw);
-
-#endif /* INCLUDE_RCPPSW_METRICS_CONFIG_XML_FILE_SINK_PARSER_HPP_ */

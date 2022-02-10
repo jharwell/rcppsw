@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_CLONABLE_HPP_
-#define INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_CLONABLE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -65,4 +64,3 @@ class clonable {
 
 NS_END(rcppsw, patterns, prototype);
 
-#endif /* INCLUDE_RCPPSW_PATTERNS_PROTOTYPE_CLONABLE_HPP_ */

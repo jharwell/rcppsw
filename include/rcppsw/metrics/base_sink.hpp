@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_METRICS_BASE_SINK_HPP_
-#define INCLUDE_RCPPSW_METRICS_BASE_SINK_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -99,4 +98,3 @@ class base_sink : public er::client<base_sink> {
 
 NS_END(metrics, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_METRICS_BASE_SINK_HPP_ */

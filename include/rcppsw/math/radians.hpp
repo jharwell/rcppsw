@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_MATH_RADIANS_HPP_
-#define INCLUDE_RCPPSW_MATH_RADIANS_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -203,4 +202,3 @@ rmath::radians operator*(double lhs, const rmath::radians& rhs);
 
 NS_END(math, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_MATH_RADIANS_HPP_ */

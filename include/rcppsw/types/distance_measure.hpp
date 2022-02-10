@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_TYPES_DISTANCE_MEASURE_HPP_
-#define INCLUDE_RCPPSW_TYPES_DISTANCE_MEASURE_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -73,4 +72,3 @@ class distance_measure : public named_type<T, Tag>,
 
 NS_END(types, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_TYPES_DISTANCE_MEASURE_HPP_ */

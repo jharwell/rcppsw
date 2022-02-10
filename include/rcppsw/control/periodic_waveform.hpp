@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_CONTROL_PERIODIC_WAVEFORM_HPP_
-#define INCLUDE_RCPPSW_CONTROL_PERIODIC_WAVEFORM_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -107,4 +106,3 @@ class sawtooth_waveform : public base_waveform {
 
 NS_END(control, rcppsw);
 
-#endif // INCLUDE_RCPPSW_CONTROL_PERIODIC_WAVEFORM_HPP_

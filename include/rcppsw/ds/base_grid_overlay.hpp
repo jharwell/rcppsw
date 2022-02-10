@@ -18,8 +18,7 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#ifndef INCLUDE_RCPPSW_DS_BASE_GRID_OVERLAY_HPP_
-#define INCLUDE_RCPPSW_DS_BASE_GRID_OVERLAY_HPP_
+#pragma once
 
 /*******************************************************************************
  * Includes
@@ -100,4 +99,3 @@ class base_grid_overlay : public er::client<base_grid_overlay<TOriginType>> {
 
 NS_END(ds, rcppsw);
 
-#endif /* INCLUDE_RCPPSW_DS_BASE_GRID_OVERLAY_HPP_ */
