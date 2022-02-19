@@ -82,7 +82,7 @@ class network_sink_registerer :public rer::client<network_sink_registerer> {
    */
   template<typename TSink>
   collector_registration_spec<TSink>
-  calc_registration_spec(network_output_manager*,
+  calc_registration_spec(network_output_manager* manager,
                          const rmconfig::network_sink_config* const config,
                          const std::string& xml_name,
                          const rmetrics::output_mode& allowed) const {
@@ -100,7 +100,7 @@ class network_sink_registerer :public rer::client<network_sink_registerer> {
                 rcppsw::as_underlying(allowed),
                 xml_name.c_str());
       ret.is_enabled = true;
-      ret.sink = std::make_unique<TSink>(stream_it->second,
+      ret.sink = std::make_unique<TSink>(manager->dest_prefix() + stream_it->second,
                                          rmetrics::output_mode::ekSTREAM,
                                          config->stream.output_interval);
     }
@@ -109,4 +109,3 @@ class network_sink_registerer :public rer::client<network_sink_registerer> {
 };
 
 NS_END(metrics, rcppsw);
-

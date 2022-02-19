@@ -62,7 +62,7 @@ class file_sink_registerer : public rer::client<file_sink_registerer> {
   void emit_diagnostic(const TIterator& it,
                        const collector_registration_spec<TSink>& spec) {
       ER_INFO("Metrics enabled: "
-              "xml_name='%s',scoped_name='%s','fpath=%s',output_interval=%lu,"
+              "xml_name='%s',scoped_name='%s',fpath='%s',output_interval=%lu,"
               "mode=%x",
               it->input_name.c_str(),
               it->scoped_name.c_str(),

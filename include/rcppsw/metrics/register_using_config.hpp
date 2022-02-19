@@ -51,8 +51,8 @@ NS_START(rcppsw, metrics);
 template <typename TSinkRegisterer, typename TConfig>
 class register_using_config {
  public:
-  explicit register_using_config(const TSinkRegisterer&& registerer,
-                                 const TConfig* config)
+  register_using_config(const TSinkRegisterer&& registerer,
+                        const TConfig* config)
       : mc_config(config),
         m_registerer(std::move(registerer)) {}
 

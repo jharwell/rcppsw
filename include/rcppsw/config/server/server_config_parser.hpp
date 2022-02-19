@@ -1,7 +1,7 @@
 /**
- * \file fs_output_manager.cpp
+ * \file server_config_parser.hpp
  *
- * \copyright 2020 John Harwell, All rights reserved.
+ * \copyright 2022 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,30 +18,38 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#pragma once
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/fs_output_manager.hpp"
+#include "rcppsw/config/base_parser.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+NS_START(rcppsw, config, server);
 
 /*******************************************************************************
- * Constructors/Destructors
+ * Class Definitions
  ******************************************************************************/
-fs_output_manager::fs_output_manager(
-    const rmconfig::metrics_config* const mconfig,
-    const fs::path& output_root)
-    : ER_CLIENT_INIT("rcppsw.metrics.fs_output_manager"),
-      m_metrics_path(fs::current_path() / output_root / mconfig->metrics_path) {
-  ER_DEBUG("Output metrics root: %s", m_metrics_path.c_str());
-  if (!fs::exists(m_metrics_path)) {
-    fs::create_directories(m_metrics_path);
-  } else {
-    ER_WARN("Output metrics root '%s' already exists", m_metrics_path.c_str());
-  }
-}
+/**
+ * \class server_config_parser
+ * \ingroup config server
+ *
+ * \brief Interface specifying functionality for parsing parameters from a
+ * server into a \ref base_config derived parameter structure.
+ */
+class server_config_parser : public rconfig::base_parser {
+ public:
+  server_config_parser(void) = default;
+  ~server_config_parser(void) override = default;
 
-NS_END(metrics, rcppsw);
+  /**
+   * \brief Parse the necessary parameters from the server into an internal
+   * representation (should be a class/struct derived from \ref base_config).
+   */
+  virtual void parse(void) = 0;
+};
+
+NS_END(server, config, rcppsw);

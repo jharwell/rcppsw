@@ -25,13 +25,8 @@
  ******************************************************************************/
 #include <ticpp/ticpp.h>
 
-#include <boost/optional.hpp>
-#include <iosfwd>
-#include <string>
-#include <memory>
-
-#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/er/client.hpp"
+#include "rcppsw/config/base_parser.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -75,7 +70,8 @@ NS_START(xml);
  * \brief Interface specifying functionality for parsing XML into a \ref
  * base_config derived parameter structure.
  */
-class xml_config_parser : public er::client<xml_config_parser> {
+class xml_config_parser : public rer::client<xml_config_parser>,
+                          public rconfig::base_parser {
  public:
   xml_config_parser(void);
   ~xml_config_parser(void) override = default;
@@ -94,26 +90,6 @@ class xml_config_parser : public er::client<xml_config_parser> {
    * \ref xml_root()) for the parser can be found under.
    */
   virtual void parse(const ticpp::Element& node) = 0;
-
-  /**
-   * \brief Validate the range, value, etc. of all parsed parameters. As such,
-   * don't call this unless the parameters have already been parsed.
-   *
-   * \return \c TRUE if all parameters are valid, \c FALSE otherwise.
-   */
-  virtual bool validate(void) const { return true; }
-
-  /**
-   * \brief Get the results of parameter parse. This is the front end of the
-   * non-virtual interface to getting the results of a parameter parse, so that
-   * covariance with smart pointer return types will work.
-   */
-  template <typename T>
-  RCPPSW_COLD const T* config_get(void) const {
-    static_assert(std::is_base_of<base_config, T>::value,
-                  "Config type to get must be derived from base_config!");
-    return static_cast<const T*>(config_get_impl());
-  }
 
   /**
    * \brief Get the node that is inside the specified one, designated by the
@@ -184,21 +160,6 @@ class xml_config_parser : public er::client<xml_config_parser> {
     }
     node_attr_get(node, attr, buf);
   }
-
-
-  RCPPSW_COLD bool is_parsed(void) const {
-    return (nullptr != config_get_impl()) ? true : false;
-  }
-
- protected:
-  /**
-   * \brief Implementation (back end) of how to get the results of a parameter
-   * parse using covariance. This is to make parameter parsing easy when you
-   * only have a handle on THIS class, even if the object is actually a derived
-   * class parameter parser.
-   */
-  virtual const base_config* config_get_impl(void) const = 0;
 };
 
 NS_END(xml, config, rcppsw);
-

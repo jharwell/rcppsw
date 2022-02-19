@@ -100,5 +100,11 @@ class timestep final : public named_type<size_t, struct timestep_tag> {
   bool operator<(const T& other) const { return v() < other; }
 };
 
-NS_END(types, rcppsw);
+NS_START(constants);
 
+/**
+ * \brief Null identifier to indicate an unset value.
+ */
+extern timestep kNoTime;
+
+NS_END(constants, types, rcppsw);

@@ -50,7 +50,7 @@ write_status csv_sink::flush(const rmetrics::base_data* data,
   if (!line) {
     return write_status::ekNO_ATTEMPT;
   }
-
+  ER_DEBUG("Write data to '%s'", fpath().c_str());
   bool io_success = false;
   if (output_mode::ekAPPEND == output_mode()) {
     auto append_line = [&](void) {

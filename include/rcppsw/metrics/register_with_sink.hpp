@@ -121,7 +121,8 @@ class register_with_sink : public rer::client<
           it->input_name,
           it->valid_modes);
       if (!spec.is_enabled) {
-           ER_DEBUG("Metrics with xml_name='%s' disabled", it->input_name.c_str());
+           ER_DEBUG("Metrics with xml_name='%s' disabled",
+                    it->input_name.c_str());
            continue;
       }
       this->template emit_diagnostic(it, spec);

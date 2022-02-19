@@ -1,7 +1,7 @@
 /**
- * \file fs_output_manager.cpp
+ * \file hertz.cpp
  *
- * \copyright 2020 John Harwell, All rights reserved.
+ * \copyright 2022 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,27 +21,16 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/fs_output_manager.hpp"
+#include "rcppsw/types/hertz.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+NS_START(rcppsw, types, constants);
 
 /*******************************************************************************
- * Constructors/Destructors
+ * Global Variables
  ******************************************************************************/
-fs_output_manager::fs_output_manager(
-    const rmconfig::metrics_config* const mconfig,
-    const fs::path& output_root)
-    : ER_CLIENT_INIT("rcppsw.metrics.fs_output_manager"),
-      m_metrics_path(fs::current_path() / output_root / mconfig->metrics_path) {
-  ER_DEBUG("Output metrics root: %s", m_metrics_path.c_str());
-  if (!fs::exists(m_metrics_path)) {
-    fs::create_directories(m_metrics_path);
-  } else {
-    ER_WARN("Output metrics root '%s' already exists", m_metrics_path.c_str());
-  }
-}
+hertz kNoRate(-1);
 
-NS_END(metrics, rcppsw);
+NS_END(constants, types, rcppsw);

@@ -64,4 +64,3 @@ class network_sink : public rmetrics::base_sink,
 };
 
 NS_END(metrics, rcppsw);
-

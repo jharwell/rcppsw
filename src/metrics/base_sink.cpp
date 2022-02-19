@@ -43,7 +43,7 @@ base_sink::~base_sink(void) = default;
  * Member Functions
  ******************************************************************************/
 bool base_sink::ready_to_flush(const rtypes::timestep& t) const {
-  return t % mc_output_interval == 0UL;
+  return t > 0UL && t % mc_output_interval == 0UL;
 } /* ready_to_flush() */
 
 NS_END(metrics, rcppsw);

@@ -73,6 +73,11 @@ class fs_output_manager : public rer::client<fs_output_manager>,
   }
 
   void initialize(void) override {
+    ER_DEBUG("Initialize %zu collectors", collector_map()->size());
+    for (auto &pair : *collector_map()) {
+      ER_DEBUG("'%s' -> %p", pair.first.c_str(), pair.second);
+    } /* for(&pair..) */
+
     m_create.initialize();
     m_append.initialize();
     m_truncate.initialize();
@@ -80,12 +85,13 @@ class fs_output_manager : public rer::client<fs_output_manager>,
 
   bool flush(const rmetrics::output_mode& mode) override {
     if (rmetrics::output_mode::ekAPPEND == mode) {
+      ER_DEBUG("Flush %zu ekAPPEND collectors", m_append.size());
       return m_append.flush(true);
     } else if (rmetrics::output_mode::ekTRUNCATE == mode) {
+      ER_DEBUG("Flush %zu ekTRUNCATE collectors", m_truncate.size());
       return m_truncate.flush(true);
     } else if (rmetrics::output_mode::ekCREATE == mode) {
-      return m_create.flush(true);
-    } else if (rmetrics::output_mode::ekSTREAM == mode) {
+      ER_DEBUG("Flush %zu ekCREATE collectors", m_create.size());
       return m_create.flush(true);
     } else {
       ER_FATAL_SENTINEL("Unhandled output mode %d",

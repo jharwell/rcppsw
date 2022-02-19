@@ -49,14 +49,18 @@ NS_START(rcppsw, metrics);
 class network_output_manager : public rer::client<network_output_manager>,
                           public rmetrics::base_manager {
  public:
-  network_output_manager(void)
-      : ER_CLIENT_INIT("rcppsw.metrics.network_output_manager") {}
+  network_output_manager(const std::string& dest_prefix)
+      : ER_CLIENT_INIT("rcppsw.metrics.network_output_manager"),
+        mc_dest_prefix(dest_prefix) {}
+
   ~network_output_manager(void) override = default;
+
+  const std::string& dest_prefix(void) const { return mc_dest_prefix; }
 
   void collector_preregister(const std::string& scoped_name,
                              const rmetrics::output_mode& mode) override {
     if (rmetrics::output_mode::ekSTREAM == mode) {
-      collector_map()->at(scoped_name) = &m_stream;
+      collector_map()->insert({scoped_name, &m_stream});
     } else {
       ER_FATAL_SENTINEL("Unhandled output mode %d",
                         rcppsw::as_underlying(mode));
@@ -64,11 +68,17 @@ class network_output_manager : public rer::client<network_output_manager>,
   }
 
   void initialize(void) override {
+    ER_DEBUG("Initialize %zu collectors", collector_map()->size());
+    for (auto &pair : *collector_map()) {
+      ER_DEBUG("'%s' -> %p", pair.first.c_str(), pair.second);
+    } /* for(&pair..) */
+
     m_stream.initialize();
   }
 
   bool flush(const rmetrics::output_mode& mode) override {
     if (rmetrics::output_mode::ekSTREAM == mode) {
+      ER_DEBUG("Flush %zu ekSTREAM collectors", m_stream.size());
       return m_stream.flush(true);
     } else {
       ER_FATAL_SENTINEL("Unhandled output mode %d",
@@ -91,6 +101,8 @@ class network_output_manager : public rer::client<network_output_manager>,
 
  private:
   /* clang-format off */
+  const std::string         mc_dest_prefix{};
+
   rmetrics::collector_group m_stream{};
   /* clang-format on */
 };

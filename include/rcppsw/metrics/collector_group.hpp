@@ -51,13 +51,15 @@ NS_START(rcppsw, metrics);
  * operations can be performed, in addition to individual collection; used to
  * reduce code duplication.
  */
-class collector_group {
+class collector_group : public rer::client<collector_group> {
  public:
   using key_type = std::string;
   using mapped_type = std::unique_ptr<base_collector>;
 
-  collector_group(void) = default;
+  collector_group(void) : ER_CLIENT_INIT("rcppsw.metrics.collector_group") {}
   virtual ~collector_group(void) = default;
+
+  size_t size(void) const { return m_collectors.size(); }
 
   /**
    * \brief Add a collector to the group by constructing it in place.
@@ -237,17 +239,18 @@ class collector_group {
    * FALSE otherwise.
    */
   bool flush(bool fail_ok) {
-    return std::all_of(
-        m_collectors.begin(),
-        m_collectors.end(),
-        [&](const std::pair<const key_type, mapped_type>& pair) -> bool {
-          auto res = pair.second->flush();
-          if (fail_ok) {
-            return !(res & write_status::ekNO_ATTEMPT);
-          } else {
-            return (res & write_status::ekSUCCESS);
-          }
-        });
+    bool ret = true;
+    ER_TRACE("Flushing %zu collectors", m_collectors.size());
+    for (auto &pair : m_collectors) {
+        auto res = pair.second->flush();
+        ER_TRACE("Flushed '%s': %d", pair.first.c_str(), res);
+        if (fail_ok) {
+          ret &= !(res & write_status::ekNO_ATTEMPT);
+        } else {
+          ret &= (res & write_status::ekSUCCESS);
+        }
+    } /* for(&pair..) */
+    return ret;
   }
 
   /**
@@ -269,4 +272,3 @@ class collector_group {
 };
 
 NS_END(metrics, rcppsw);
-

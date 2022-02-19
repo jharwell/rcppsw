@@ -1,7 +1,7 @@
 /**
- * \file fs_output_manager.cpp
+ * \file md5.hpp
  *
- * \copyright 2020 John Harwell, All rights reserved.
+ * \copyright 2022 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,30 +18,48 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#pragma once
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/fs_output_manager.hpp"
+#include <iosfwd>
+#include <array>
+
+#include <openssl/md5.h>
+
+#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+NS_START(rcppsw, utils);
 
 /*******************************************************************************
- * Constructors/Destructors
+ * Class Definitions
  ******************************************************************************/
-fs_output_manager::fs_output_manager(
-    const rmconfig::metrics_config* const mconfig,
-    const fs::path& output_root)
-    : ER_CLIENT_INIT("rcppsw.metrics.fs_output_manager"),
-      m_metrics_path(fs::current_path() / output_root / mconfig->metrics_path) {
-  ER_DEBUG("Output metrics root: %s", m_metrics_path.c_str());
-  if (!fs::exists(m_metrics_path)) {
-    fs::create_directories(m_metrics_path);
-  } else {
-    ER_WARN("Output metrics root '%s' already exists", m_metrics_path.c_str());
-  }
-}
+/**
+ * \class md5
+ * \ingroup utils
+ *
+ * \brief Calculates the MD5 sum of various things.
+ */
+class md5 {
+ public:
+  md5(void) = default;
 
-NS_END(metrics, rcppsw);
+  /* Not move/copy constructable/assignable by default */
+  md5(const md5&) = delete;
+  md5& operator=(const md5&) = delete;
+  md5(md5&&) = delete;
+  md5& operator=(md5&&) = delete;
+
+  std::array<unsigned char, MD5_DIGEST_LENGTH>
+  operator()(std::ifstream& file) const;
+
+ private:
+  /* clang-format off */
+  /* clang-format on */
+};
+
+NS_END(utils, rcppsw);

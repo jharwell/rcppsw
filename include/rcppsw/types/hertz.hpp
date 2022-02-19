@@ -1,7 +1,7 @@
 /**
- * \file fs_output_manager.cpp
+ * \file hertz.hpp
  *
- * \copyright 2020 John Harwell, All rights reserved.
+ * \copyright 2022 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,30 +18,48 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#pragma once
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/fs_output_manager.hpp"
+#include "rcppsw/rcppsw.hpp"
+#include "rcppsw/types/named_type.hpp"
 
 /*******************************************************************************
- * Namespaces
+ * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+NS_START(rcppsw, types);
 
 /*******************************************************************************
- * Constructors/Destructors
+ * Type Definitions
  ******************************************************************************/
-fs_output_manager::fs_output_manager(
-    const rmconfig::metrics_config* const mconfig,
-    const fs::path& output_root)
-    : ER_CLIENT_INIT("rcppsw.metrics.fs_output_manager"),
-      m_metrics_path(fs::current_path() / output_root / mconfig->metrics_path) {
-  ER_DEBUG("Output metrics root: %s", m_metrics_path.c_str());
-  if (!fs::exists(m_metrics_path)) {
-    fs::create_directories(m_metrics_path);
-  } else {
-    ER_WARN("Output metrics root '%s' already exists", m_metrics_path.c_str());
+/**
+ * \class hertz
+ * \ingroup types
+ *
+ * \brief A class fo representing rates.
+ */
+class hertz final : public rtypes::named_type<size_t, struct hertz_tag> {
+ public:
+  using named_type<size_t, hertz_tag>::named_type;
+
+  hertz(const hertz&) = default;
+  hertz& operator=(const hertz& other) {
+    set(other.v());
+    return *this;
   }
-}
+  template<class T>
+  bool operator<(const T& other) const { return v() < other; }
+  template<class T>
+  bool operator>(const T& other) const { return v() > other; }
+};
 
-NS_END(metrics, rcppsw);
+NS_START(constants);
+
+/**
+ * \brief Null identifier to indicate an unset value.
+ */
+extern hertz kNoRate;
+
+NS_END(constants, types, rcppsw);
