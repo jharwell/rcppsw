@@ -158,6 +158,11 @@ struct detector<TFailType,
   using type = TFuncDecltype<Args...>;
 };
 
+template <class T, std::size_t = sizeof(T)>
+std::true_type is_complete_impl(T *);
+
+std::false_type is_complete_impl(...);
+
 NS_END(detail);
 
 /**
@@ -237,9 +242,21 @@ struct is_specialization : std::false_type {};
  * \brief Determine if a class Template<SomeType> is a specialization of \p
  * Template.
  */
-
 template <template <class...> class Template, class... Args>
 struct is_specialization<Template<Args...>, Template> : std::true_type {};
 
-NS_END(mpl, rcppsw);
+template<typename, typename = void>
+struct is_complete_type : std::false_type {};
 
+/**
+ * \struct is_complete_type
+ * \ingroup mpl
+ *
+ * \brief Determine if a type is defined. For use in checking if a partial
+ * specialization of an undefined template exists.
+ */
+template<typename T>
+struct is_complete_type<T, std::void_t<decltype(sizeof(T))>> : std::true_type {};
+
+
+NS_END(mpl, rcppsw);

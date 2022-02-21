@@ -65,7 +65,7 @@ void mt_init(LHS* lhs, RHS rhs) { return std::atomic_init(lhs, rhs); }
  * provide a common interface.
  */
 template<typename T>
-T mt_load(const T& value) { return value.load(); }
+typename T::value_type mt_load(const T& value) { return value.load(); }
 
 /**
  * \brief Set a \ref mt_double_t to a specific value.
@@ -90,7 +90,7 @@ void mt_set(U& lhs, const V& rhs) { lhs = rhs; }
  */
 template<typename U, typename V,
          RCPPSW_SFINAE_DECLDEF(std::is_same<U, std::atomic<double>>::value)>
-void mt_add(U& lhs, const V& rhs) {
+void mt_accum(U& lhs, const V& rhs) {
   auto tmp = lhs.load();
   lhs.compare_exchange_strong(tmp, tmp + rhs);
 }
@@ -100,7 +100,7 @@ void mt_add(U& lhs, const V& rhs) {
  */
 template<typename U, typename V,
          RCPPSW_SFINAE_DECLDEF(std::is_same<U, std::atomic<size_t>>::value)>
-void mt_add(U& lhs, const V& rhs) {
+void mt_accum(U& lhs, const V& rhs) {
   lhs += rhs;
 }
 
@@ -115,7 +115,7 @@ template<typename T>
 T mt_load(const T& value) { return value; }
 
 template<typename U, typename V>
-void mt_add(U& lhs, const V& rhs) {
+void mt_accum(U& lhs, const V& rhs) {
   lhs += rhs;
 }
 
@@ -125,4 +125,3 @@ void mt_set(U& lhs, const V& rhs) { lhs = rhs; }
 #endif
 
 NS_END(al, rcppsw);
-

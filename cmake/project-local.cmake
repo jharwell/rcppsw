@@ -126,10 +126,10 @@ if(CMAKE_CROSSCOMPILING)
   set(BOOST_ROOT ${LIBRA_DEPS_PREFIX})
 endif()
 
-set(Boost_USE_STATIC_LIBS        ON)  # only find static libs
+# set(Boost_USE_STATIC_LIBS        OFF)  # only find static libs
 set(Boost_USE_DEBUG_LIBS         OFF) # ignore debug libs and
 set(Boost_USE_RELEASE_LIBS       ON)  # only find release libs
-set(Boost_USE_MULTITHREADED      OFF)
+# set(Boost_USE_MULTITHREADED      OFF)
 set(Boost_USE_STATIC_RUNTIME     OFF)
 find_package(Boost 1.71.0
   COMPONENTS
@@ -259,8 +259,8 @@ message(STATUS "")
 
 message(STATUS "Enable std::atomic types..............: RCPPSW_AL_MT_SAFE_TYPES=${RCPPSW_AL_MT_SAFE_TYPES}")
 message(STATUS "Use system log4cxx....................: RCPPSW_ER_SYSTEM_LOG4CXX=${RCPPSW_ER_SYSTEM_LOG4CXX}" )
-if(NOT ${RCPPSW_ER_SYSTEM_LOG4CXX})
 
+if(NOT ${RCPPSW_ER_SYSTEM_LOG4CXX})
   message(STATUS "log4cxx include dir...................: log4cxx_INCLUDE_DIR=${log4cxx_INCLUDE_DIR}" )
   message(STATUS "log4cxx libdir........................: log4cxx_LIBRARY_DIR=${log4cxx_LIBRARY_DIR}" )
 endif()

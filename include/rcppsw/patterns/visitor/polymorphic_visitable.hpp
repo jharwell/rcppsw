@@ -26,6 +26,23 @@
 #include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
+ * Macros
+ ******************************************************************************/
+/**
+ * \def RCPPSW_VISITOR_ACCEPT_STUB
+ *
+ * \brief A stub of a visitor acceptance function necessary to conform to an
+ * unspecified interface, with the added benefit that if this stub is ever
+ * executed you get an assertion failure rather than a silent error.
+ *
+ * You can only use this macro in a class which inherits from \ref rer::client.
+ */
+#define RCPPSW_VISITOR_ACCEPT_STUB(Visitor) \
+  void accept(Visitor&) override {                      \
+    ER_FATAL_SENTINEL("Stub function %s hit", __FUNCTION__);    \
+  }
+
+/*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
 NS_START(rcppsw, patterns, visitor, detail);
@@ -89,4 +106,3 @@ class polymorphic_accept_set<T>: public detail::polymorphic_accept_set_helper<T>
 };
 
 NS_END(rcppsw, patterns, visitor);
-

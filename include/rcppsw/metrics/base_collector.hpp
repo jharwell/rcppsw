@@ -83,7 +83,7 @@ class base_collector : public er::client<base_collector> {
   /**
    * \see base_sink::flush();
    */
-  write_status flush(void);
+  write_status flush(const rtypes::timestep& t);
 
   /**
    * \brief Reset metrics at the end of an interval.
@@ -92,19 +92,7 @@ class base_collector : public er::client<base_collector> {
    * behavior of derived classes possibly changes), and metrics will only be
    * reset after the specified number of timesteps in the interval has elapsed.
    */
-  void interval_reset(void);
-
-  /**
-   * \brief Return the current timestep tracked by the collector.
-   */
-  types::timestep timestep(void) const { return m_timestep; }
-
-  /**
-   * \brief Increment the timestep referenced by the collector during metric
-   * collection and .csv line building.
-   */
-  void timestep_inc(void) { m_timestep += 1; }
-
+  void interval_reset(const rtypes::timestep& t);
 
   /**
    * \brief Get a handle to the gathered data.
@@ -121,10 +109,12 @@ class base_collector : public er::client<base_collector> {
 
  private:
   /* clang-format off */
-  types::timestep            m_timestep{0};
   std::unique_ptr<base_sink> m_sink;
   /* clang-format on */
+
+ public:
+  RCPPSW_WRAP_DECLDEF(output_mode, *m_sink, const);
+  RCPPSW_WRAP_DECLDEF(ready_to_flush, *m_sink, const);
 };
 
 NS_END(metrics, rcppsw);
-

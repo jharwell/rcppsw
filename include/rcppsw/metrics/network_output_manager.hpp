@@ -57,47 +57,14 @@ class network_output_manager : public rer::client<network_output_manager>,
 
   const std::string& dest_prefix(void) const { return mc_dest_prefix; }
 
+  /* base_manager overrides */
   void collector_preregister(const std::string& scoped_name,
-                             const rmetrics::output_mode& mode) override {
-    if (rmetrics::output_mode::ekSTREAM == mode) {
-      collector_map()->insert({scoped_name, &m_stream});
-    } else {
-      ER_FATAL_SENTINEL("Unhandled output mode %d",
-                        rcppsw::as_underlying(mode));
-    }
-  }
-
-  void initialize(void) override {
-    ER_DEBUG("Initialize %zu collectors", collector_map()->size());
-    for (auto &pair : *collector_map()) {
-      ER_DEBUG("'%s' -> %p", pair.first.c_str(), pair.second);
-    } /* for(&pair..) */
-
-    m_stream.initialize();
-  }
-
-  bool flush(const rmetrics::output_mode& mode) override {
-    if (rmetrics::output_mode::ekSTREAM == mode) {
-      ER_DEBUG("Flush %zu ekSTREAM collectors", m_stream.size());
-      return m_stream.flush(true);
-    } else {
-      ER_FATAL_SENTINEL("Unhandled output mode %d",
-                        rcppsw::as_underlying(mode));
-    }
-    return false;
-  }
-
-  void timestep_inc(void) override {
-    m_stream.timestep_inc();
-  }
-
-  void interval_reset(void) override {
-    m_stream.interval_reset();
-  }
-
-  void finalize(void) override {
-    m_stream.finalize();
-  }
+                             const rmetrics::output_mode& mode) override;
+  void initialize(void) override;
+  bool flush(const rmetrics::output_mode& mode,
+             const rtypes::timestep& t) override;
+  void interval_reset(const rtypes::timestep& t) override;
+  void finalize(void) override;
 
  private:
   /* clang-format off */
@@ -108,4 +75,3 @@ class network_output_manager : public rer::client<network_output_manager>,
 };
 
 NS_END(metrics, rcppsw);
-

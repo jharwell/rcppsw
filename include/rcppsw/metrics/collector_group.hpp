@@ -56,7 +56,7 @@ class collector_group : public rer::client<collector_group> {
   using key_type = std::string;
   using mapped_type = std::unique_ptr<base_collector>;
 
-  collector_group(void) : ER_CLIENT_INIT("rcppsw.metrics.collector_group") {}
+  collector_group(void);
   virtual ~collector_group(void) = default;
 
   size_t size(void) const { return m_collectors.size(); }
@@ -93,14 +93,7 @@ class collector_group : public rer::client<collector_group> {
    * \return \c TRUE if the collector was successfully unregistered, and \c
    * FALSE otherwise.
    */
-  bool collector_unregister(const key_type& name) {
-    auto it = m_collectors.find(name);
-    if (it != m_collectors.end()) {
-      m_collectors.erase(name);
-      return true;
-    }
-    return false;
-  }
+  bool collector_unregister(const key_type& name);
 
   /**
    * \brief Collect metrics from the specified collector, passing it the
@@ -114,38 +107,7 @@ class collector_group : public rer::client<collector_group> {
    * \return \c TRUE if the specified collector is registered and collection was
    * successful, \c FALSE otherwise.
    */
-  bool collect(const key_type& name, const base_metrics& metrics) {
-    auto it = m_collectors.find(name);
-    if (it != m_collectors.end()) {
-      it->second->collect(metrics);
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * \brief Collect metrics from the specified collector, passing it the
-   * specified metrics set. This function only works if you are collecting
-   * metrics from something that is present on \a different machine as the
-   * collector (i.e., over the network).
-   *
-   * \tparam TNetworkHandle The handle of the metrics to collect (IP address,
-   * domain name, etc.).
-   *
-   * \param name The registered name of the collector.
-   *
-   * \return \c TRUE if the specified collector is registered and collection was
-   * successful, \c FALSE otherwise.
-   */
-  template<typename TNetworkHandle>
-  bool collect(const key_type& name, const TNetworkHandle& handle) {
-    auto it = m_collectors.find(name);
-    if (it != m_collectors.end()) {
-      it->second->collect(handle);
-      return true;
-    }
-    return false;
-  }
+  bool collect(const key_type& name, const base_metrics& metrics);
 
   /**
    * \brief Collect metrics from the specified collector, passing it the
@@ -168,23 +130,13 @@ class collector_group : public rer::client<collector_group> {
    */
   bool collect_if(const key_type& name,
                   const base_metrics& metrics,
-                  const std::function<bool(const base_metrics&)>& predicate) {
-    auto it = m_collectors.find(name);
-    if (it != m_collectors.end()) {
-      if (predicate(metrics)) {
-        it->second->collect(metrics);
-        return true;
-      }
-    }
-    return false;
-  }
-
+                  const std::function<bool(const base_metrics&)>& predicate);
   /**
    * \brief Get a reference to a collector by name.
    *
    * \param key The mapped name of the collector in the group.
    */
-  template <typename T>
+  template <typename T = base_collector>
   T* get(const key_type& key) {
     return static_cast<T*>(m_collectors[key].get());
   }
@@ -193,37 +145,15 @@ class collector_group : public rer::client<collector_group> {
    * \brief Call the \ref base_collector::initialize() function on all
    * collectors in the group.
    */
-  void initialize(void) {
-    std::for_each(m_collectors.begin(),
-                  m_collectors.end(),
-                  [&](const auto& pair) {
-                    pair.second->initialize();
-                  });
-  }
+  void initialize(void);
 
   /**
    * \brief Call the \ref base_collector::interval_reset() function on
    * all collectors in the group.
    */
-  void interval_reset(void) {
-    std::for_each(m_collectors.begin(),
-                  m_collectors.end(),
-                  [&](const std::pair<const key_type, mapped_type>& pair) {
-                    pair.second->interval_reset();
-                  });
-  }
+  void interval_reset(const rtypes::timestep& t);
 
-  /**
-   * \brief Call the \ref base_collector::timestep_inc() function on all
-   * collectors in the group.
-   */
-  void timestep_inc(void) {
-    std::for_each(m_collectors.begin(),
-                  m_collectors.end(),
-                  [&](const std::pair<const key_type, mapped_type>& pair) {
-                    pair.second->timestep_inc();
-                  });
-  }
+  void finalize(void);
 
   /**
    * \brief Call the \ref base_collector::flush() function on
@@ -238,32 +168,7 @@ class collector_group : public rer::client<collector_group> {
    * attempted to write out metrics this timestep, regardless of success, and \c
    * FALSE otherwise.
    */
-  bool flush(bool fail_ok) {
-    bool ret = true;
-    ER_TRACE("Flushing %zu collectors", m_collectors.size());
-    for (auto &pair : m_collectors) {
-        auto res = pair.second->flush();
-        ER_TRACE("Flushed '%s': %d", pair.first.c_str(), res);
-        if (fail_ok) {
-          ret &= !(res & write_status::ekNO_ATTEMPT);
-        } else {
-          ret &= (res & write_status::ekSUCCESS);
-        }
-    } /* for(&pair..) */
-    return ret;
-  }
-
-  /**
-   * \brief Call the \ref base_collector::finalize() function on all
-   * collectors in the group.
-   */
-  void finalize(void) {
-    std::for_each(m_collectors.begin(),
-                  m_collectors.end(),
-                  [&](const auto& pair) {
-                    pair.second->finalize();
-                  });
-  }
+  bool flush(bool fail_ok, const rtypes::timestep& t);
 
  private:
   /* clang-format off */

@@ -28,6 +28,7 @@
 #include "rcppsw/types/timestep.hpp"
 #include "rcppsw/metrics/base_data.hpp"
 #include "rcppsw/metrics/output_mode.hpp"
+#include "rcppsw/metrics/utils.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -97,4 +98,3 @@ class base_sink : public er::client<base_sink> {
 };
 
 NS_END(metrics, rcppsw);
-

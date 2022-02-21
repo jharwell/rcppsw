@@ -57,17 +57,13 @@ class base_manager {
    */
   virtual void initialize(void) = 0;
 
-  virtual bool flush(const rmetrics::output_mode& mode)  = 0;
-
-  /**
-   * \brief Decorator around \ref collector_group::timestep_inc().
-   */
-  virtual void timestep_inc(void) = 0;
+  virtual bool flush(const rmetrics::output_mode& mode,
+                     const rtypes::timestep& t)  = 0;
 
   /**
    * \brief Decorator around \ref collector_group::interval_reset().
    */
-  virtual void interval_reset(void) = 0;
+  virtual void interval_reset(const rtypes::timestep& t) = 0;
 
   /**
    * \brief Decorator around \ref collector_group::finalize_all().
@@ -135,7 +131,7 @@ class base_manager {
   /**
    * \brief Decorator around \ref collector_group::get().
    */
-  template <typename T>
+  template <typename T = base_collector>
   T* get(const std::string& key) {
     return m_collector_map[key]->get<T>(key);
   }

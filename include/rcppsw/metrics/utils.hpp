@@ -1,7 +1,7 @@
 /**
- * \file base_sink.cpp
+ * \file utils.hpp
  *
- * \copyright 2018 John Harwell, All rights reserved.
+ * \copyright 2022 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -18,32 +18,26 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#pragma once
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/base_sink.hpp"
+#include "rcppsw/rcppsw.hpp"
+
+#include "rcppsw/types/timestep.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+NS_START(rcppsw, utils);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Free Functions
  ******************************************************************************/
-base_sink::base_sink(const rmetrics::output_mode& mode,
-                     const rtypes::timestep& interval)
-    : ER_CLIENT_INIT("rcppsw.metrics.base_sink"),
-      mc_output_mode(mode),
-      mc_output_interval(interval) {}
+static inline bool ready_to_flush(const rtypes::timestep& output_interval,
+                                  const rtypes::timestep& t) {
+  return t > 0UL && t % output_interval == 0UL;
+}
 
-base_sink::~base_sink(void) = default;
-
-/*******************************************************************************
- * Member Functions
- ******************************************************************************/
-bool base_sink::ready_to_flush(const rtypes::timestep& t) const {
-  return utils::ready_to_flush(mc_output_interval, t);
-} /* ready_to_flush() */
-
-NS_END(metrics, rcppsw);
+NS_END(utils, rcppsw);

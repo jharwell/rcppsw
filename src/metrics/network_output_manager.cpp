@@ -1,7 +1,7 @@
 /**
- * \file base_metric_collector.cpp
+ * \file network_output_manager.cpp
  *
- * \copyright 018 John Harwell, All rights reserved.
+ * \copyright 2022 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -21,12 +21,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/metrics/base_collector.hpp"
-
-#include <fstream>
-
-#include "rcppsw/metrics/base_sink.hpp"
-#include "rcppsw/utils/maskable_enum.hpp"
+#include "rcppsw/metrics/network_output_manager.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -34,36 +29,49 @@
 NS_START(rcppsw, metrics);
 
 /*******************************************************************************
- * Constructors/Destructor
+ * Constructors/Destructors
  ******************************************************************************/
-base_collector::base_collector(
-    std::unique_ptr<base_sink> sink)
-    : ER_CLIENT_INIT("rcppsw.metrics.base_collector"),
-      m_sink(std::move(sink)) {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void base_collector::initialize(void) {
-  /* initialize the sink */
-  m_sink->initialize(data());
-
-  /* initialize the collector's data */
-  reset_after_interval();
-} /* initialize() */
-
-void base_collector::finalize(void) {
-  m_sink->finalize();
-} /* finalize() */
-
-write_status base_collector::flush(const rtypes::timestep& t) {
-  return m_sink->flush(data(), t);
-} /* flush() */
-
-void base_collector::interval_reset(const rtypes::timestep& t) {
-  if (m_sink->ready_to_flush(t)) {
-    reset_after_interval();
+void network_output_manager::collector_preregister(const std::string& scoped_name,
+                           const rmetrics::output_mode& mode) {
+  if (rmetrics::output_mode::ekSTREAM == mode) {
+    collector_map()->insert({scoped_name, &m_stream});
+  } else {
+    ER_FATAL_SENTINEL("Unhandled output mode %d",
+                      rcppsw::as_underlying(mode));
   }
-} /* interval_reset() */
+}
+
+void network_output_manager::initialize(void) {
+  ER_DEBUG("Initialize %zu collectors", collector_map()->size());
+  for (auto &pair : *collector_map()) {
+    ER_DEBUG("'%s' -> %p", pair.first.c_str(), pair.second);
+  } /* for(&pair..) */
+
+  m_stream.initialize();
+}
+
+bool network_output_manager::flush(const rmetrics::output_mode& mode,
+                                   const rtypes::timestep& t) {
+  if (rmetrics::output_mode::ekSTREAM == mode) {
+    ER_DEBUG("Flush %zu ekSTREAM collectors", m_stream.size());
+    return m_stream.flush(true, t);
+  } else {
+    ER_FATAL_SENTINEL("Unhandled output mode %d",
+                      rcppsw::as_underlying(mode));
+  }
+  return false;
+}
+
+void network_output_manager::interval_reset(const rtypes::timestep& t) {
+  m_stream.interval_reset(t);
+}
+
+void network_output_manager::finalize(void) {
+  m_stream.finalize();
+}
 
 NS_END(metrics, rcppsw);

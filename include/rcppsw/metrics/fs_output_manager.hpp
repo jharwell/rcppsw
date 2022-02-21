@@ -58,65 +58,14 @@ class fs_output_manager : public rer::client<fs_output_manager>,
 
   const fs::path& metrics_path(void) const { return m_metrics_path; }
 
+  /* base_manager overrides */
   void collector_preregister(const std::string& scoped_name,
-                             const rmetrics::output_mode& mode) override {
-    if (rmetrics::output_mode::ekAPPEND == mode) {
-      collector_map()->insert({scoped_name, &m_append});
-    } else if (rmetrics::output_mode::ekTRUNCATE == mode) {
-      collector_map()->insert({scoped_name, &m_truncate});
-    } else if (rmetrics::output_mode::ekCREATE == mode) {
-      collector_map()->insert({scoped_name,&m_create});
-    } else {
-      ER_FATAL_SENTINEL("Unhandled output mode %d",
-                        rcppsw::as_underlying(mode));
-    }
-  }
-
-  void initialize(void) override {
-    ER_DEBUG("Initialize %zu collectors", collector_map()->size());
-    for (auto &pair : *collector_map()) {
-      ER_DEBUG("'%s' -> %p", pair.first.c_str(), pair.second);
-    } /* for(&pair..) */
-
-    m_create.initialize();
-    m_append.initialize();
-    m_truncate.initialize();
-  }
-
-  bool flush(const rmetrics::output_mode& mode) override {
-    if (rmetrics::output_mode::ekAPPEND == mode) {
-      ER_DEBUG("Flush %zu ekAPPEND collectors", m_append.size());
-      return m_append.flush(true);
-    } else if (rmetrics::output_mode::ekTRUNCATE == mode) {
-      ER_DEBUG("Flush %zu ekTRUNCATE collectors", m_truncate.size());
-      return m_truncate.flush(true);
-    } else if (rmetrics::output_mode::ekCREATE == mode) {
-      ER_DEBUG("Flush %zu ekCREATE collectors", m_create.size());
-      return m_create.flush(true);
-    } else {
-      ER_FATAL_SENTINEL("Unhandled output mode %d",
-                        rcppsw::as_underlying(mode));
-    }
-    return false;
-  }
-
-  void timestep_inc(void) override {
-    m_append.timestep_inc();
-    m_truncate.timestep_inc();
-    m_create.timestep_inc();
-  }
-
-  void interval_reset(void) override {
-    m_append.interval_reset();
-    m_truncate.interval_reset();
-    m_create.interval_reset();
-  }
-
-  void finalize(void) override {
-    m_append.finalize();
-    m_truncate.finalize();
-    m_create.finalize();
-  }
+                             const rmetrics::output_mode& mode) override;
+  void initialize(void) override;
+  bool flush(const rmetrics::output_mode& mode,
+             const rtypes::timestep& t) override;
+  void interval_reset(const rtypes::timestep& t) override;
+  void finalize(void) override;
 
  private:
   /* clang-format off */
