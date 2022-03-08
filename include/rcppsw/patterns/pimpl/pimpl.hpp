@@ -57,4 +57,3 @@ struct pimpl {
 };
 
 NS_END(pimpl, patterns, rcppsw);
-

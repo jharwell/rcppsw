@@ -24,17 +24,18 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/er/er.hpp"
-#include "rcppsw/er/stacktrace.hpp"
 
 #if (RCPPSW_ER >= RCPPSW_ER_FATAL)
 #include <array>
 #include <cassert>
 #include <string>
 #include <iostream>
+
 #endif
 
 #if (RCPPSW_ER == RCPPSW_ER_ALL)
 #include <type_traits>
+#include "rcppsw/er/stacktrace.hpp"
 #endif
 
 /*******************************************************************************

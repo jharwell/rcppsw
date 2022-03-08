@@ -187,4 +187,3 @@ class register_with_sink : public rer::client<
 };
 
 NS_END(metrics, rcppsw);
-

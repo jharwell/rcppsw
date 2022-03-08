@@ -59,8 +59,8 @@ void terminate_handler(void) {
     try {
       int status;
       auto const etype = abi::__cxa_demangle(abi::__cxa_current_exception_type()->name(),
-                                             0,
-                                             0,
+                                             nullptr,
+                                             nullptr,
                                              &status);
       std::cerr << "Terminating: uncaught exception of type `" << etype << "`";
       std::rethrow_exception(ep);

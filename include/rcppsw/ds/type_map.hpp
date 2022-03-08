@@ -58,4 +58,3 @@ class type_map
 };
 
 NS_END(ds, rcppsw);
-

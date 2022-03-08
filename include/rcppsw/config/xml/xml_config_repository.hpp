@@ -184,4 +184,3 @@ class xml_config_repository : public er::client<xml_config_repository> {
 };
 
 NS_END(xml, config, rcppsw);
-

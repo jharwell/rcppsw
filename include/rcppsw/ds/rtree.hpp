@@ -249,4 +249,3 @@ rtree_box<TCoordType> make_rtree_box(const TCoordType& ll,
 }
 
 NS_END(ds, rcppsw);
-

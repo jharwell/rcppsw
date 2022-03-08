@@ -246,4 +246,3 @@ class stacked_grid2D {
 };
 
 NS_END(ds, rcppsw);
-

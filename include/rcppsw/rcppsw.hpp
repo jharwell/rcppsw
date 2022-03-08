@@ -209,4 +209,3 @@ namespace rpfactory = rcppsw::patterns::factory;
 namespace rpprototype = rcppsw::patterns::prototype;
 namespace rpdecorator = rcppsw::patterns::decorator;
 namespace rppimpl = rcppsw::patterns::pimpl;
-

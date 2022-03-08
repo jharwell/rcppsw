@@ -32,8 +32,38 @@ branches:
 
 script:
   - mkdir -p build && cd build
-  - cmake -DLIBRA_TESTS=yes -DLIBRA_CODE_COV=yes ..
+  - >
+    cmake
+    -DCMAKE_BUILD_TYPE=DEV
+    -DRCPPSW_AL_MT_SAFE_TYPES=YES
+    -DLIBRA_TESTS=yes
+    -DLIBRA_CODE_COV=yes
+    ..
   - make build-and-test
+  - >
+    cmake
+    -DCMAKE_BUILD_TYPE=DEV
+    -DRCPPSW_AL_MT_SAFE_TYPES=NO
+    -DLIBRA_TESTS=yes
+    -DLIBRA_CODE_COV=yes
+    ..
+    - make build-and-test
+  - >
+    cmake
+    -DCMAKE_BUILD_TYPE=OPT
+    -DRCPPSW_AL_MT_SAFE_TYPES=YES
+    -DLIBRA_TESTS=yes
+    -DLIBRA_CODE_COV=yes
+    ..
+    - make build-and-test
+  - >
+    cmake
+    -DCMAKE_BUILD_TYPE=OPT
+    -DRCPPSW_AL_MT_SAFE_TYPES=NO
+    -DLIBRA_TESTS=yes
+    -DLIBRA_CODE_COV=yes
+    ..
+    - make build-and-test
 
 after_success:
   - coveralls --root .. -E '.*/ext/.*' -E '.*/CMakeFiles/.*'

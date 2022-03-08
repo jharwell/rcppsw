@@ -1,7 +1,7 @@
 ################################################################################
 # Configuration Options                                                        #
 ################################################################################
-# We are might be linking with a shared library
+# We might be linking with a shared library
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 set(rcppsw_CHECK_LANGUAGE "CXX")
@@ -103,45 +103,32 @@ requested_components_check(rcppsw)
 ################################################################################
 # External Projects                                                            #
 ################################################################################
-# TICPP, which emits hundreds of compiler warnings if I compile with my usual
-# robust set of warnings.
-add_subdirectory(ext/ticpp)
-set_property(TARGET ticpp_ticpp PROPERTY POSITION_INDEPENDENT_CODE ON)
-target_compile_options(ticpp_ticpp PRIVATE
-  -Wno-old-style-cast
-  -Wno-useless-cast
-  -Wno-suggest-override
-  -Wno-effc++
-  -Wno-overloaded-virtual
-  -Wno-missing-declarations
-  -Wno-suggest-attribute=const
-  -Wno-suggest-attribute=pure
-  -Wno-suggest-final-types
-  -Wno-suggest-final-methods
-  -Wno-switch-default
+# ticpp
+add_library(ticpp_ticpp::ticpp_ticpp STATIC IMPORTED GLOBAL)
+set_target_properties(ticpp_ticpp::ticpp_ticpp PROPERTIES
+  IMPORTED_LOCATION ${LIBRA_DEPS_PREFIX}/lib/libticpp.a
   )
 
 if (NOT ${LIBRA_RTD_BUILD})
-if(CMAKE_CROSSCOMPILING)
-  set(BOOST_ROOT ${LIBRA_DEPS_PREFIX})
-endif()
+  if(CMAKE_CROSSCOMPILING)
+    set(BOOST_ROOT ${LIBRA_DEPS_PREFIX})
+  endif()
 
-# set(Boost_USE_STATIC_LIBS        OFF)  # only find static libs
-set(Boost_USE_DEBUG_LIBS         OFF) # ignore debug libs and
-set(Boost_USE_RELEASE_LIBS       ON)  # only find release libs
-# set(Boost_USE_MULTITHREADED      OFF)
-set(Boost_USE_STATIC_RUNTIME     OFF)
-find_package(Boost 1.71.0
-  COMPONENTS
-  system
-  filesystem
-  thread
-  graph
-  stacktrace_basic
-  program_options
-  REQUIRED)
+  # set(Boost_USE_STATIC_LIBS        OFF)  # only find static libs
+  set(Boost_USE_DEBUG_LIBS         OFF) # ignore debug libs and
+  set(Boost_USE_RELEASE_LIBS       ON)  # only find release libs
+  # set(Boost_USE_MULTITHREADED      OFF)
+  set(Boost_USE_STATIC_RUNTIME     OFF)
+  find_package(Boost 1.71.0
+    COMPONENTS
+    system
+    filesystem
+    thread
+    graph
+    stacktrace_basic
+    program_options
+    REQUIRED)
 endif()
-
 
 find_package(rcsw)
 
@@ -183,14 +170,14 @@ add_library(
 target_include_directories(
   rcppsw
   PUBLIC
-  $<BUILD_INTERFACE:${rcppsw_DIR}/include>
+  $<BUILD_INTERFACE:${LIBRA_DEPS_PREFIX}/include>
   $<BUILD_INTERFACE:${rcsw_INCLUDE_DIRS}>
   $<INSTALL_INTERFACE:include>
   )
 target_include_directories(
   rcppsw
   SYSTEM PUBLIC
-  $<BUILD_INTERFACE:${rcppsw_DIR}/ext>
+  $<BUILD_INTERFACE:${LIBRA_DEPS_PREFIX}/include>
   $<BUILD_INTERFACE:${log4cxx_INCLUDE_DIR}>
   $<BUILD_INTERFACE:${Boost_INCLUDE_DIRS}>
   )
@@ -206,7 +193,7 @@ target_link_options(rcppsw
   )
 target_link_libraries(rcppsw
   rcsw::rcsw
-  ticpp::ticpp
+  ticpp_ticpp::ticpp_ticpp
   ${Boost_LIBRARIES}
   pthread
   dl
@@ -237,11 +224,7 @@ target_compile_definitions(rcppsw
 ################################################################################
 # Installation                                                                 #
 ################################################################################
-configure_exports_as(rcppsw)
-
-# Install ticpp
-register_target_for_install(ticpp_ticpp ${CMAKE_INSTALL_PREFIX}/system)
-register_headers_for_install(${CMAKE_CURRENT_SOURCE_DIR}/ext/ticpp ${CMAKE_INSTALL_PREFIX}/system)
+configure_exports_as(rcppsw ${CMAKE_INSTALL_PREFIX})
 
 # Install rcppsw
 register_target_for_install(rcppsw ${CMAKE_INSTALL_PREFIX})

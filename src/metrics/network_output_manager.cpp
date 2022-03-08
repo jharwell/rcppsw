@@ -47,7 +47,7 @@ void network_output_manager::collector_preregister(const std::string& scoped_nam
 
 void network_output_manager::initialize(void) {
   ER_DEBUG("Initialize %zu collectors", collector_map()->size());
-  for (auto &pair : *collector_map()) {
+  for (RCPPSW_UNUSED auto &pair : *collector_map()) {
     ER_DEBUG("'%s' -> %p", pair.first.c_str(), pair.second);
   } /* for(&pair..) */
 
@@ -62,8 +62,8 @@ bool network_output_manager::flush(const rmetrics::output_mode& mode,
   } else {
     ER_FATAL_SENTINEL("Unhandled output mode %d",
                       rcppsw::as_underlying(mode));
+    return false;
   }
-  return false;
 }
 
 void network_output_manager::interval_reset(const rtypes::timestep& t) {

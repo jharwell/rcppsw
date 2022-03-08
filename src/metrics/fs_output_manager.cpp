@@ -86,8 +86,8 @@ bool fs_output_manager::flush(const rmetrics::output_mode& mode,
   } else {
     ER_FATAL_SENTINEL("Unhandled output mode %d",
                       rcppsw::as_underlying(mode));
+    return false;
   }
-  return false;
 }
 
 void fs_output_manager::interval_reset(const rtypes::timestep& t) {

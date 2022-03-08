@@ -23,9 +23,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <type_traits>
-
-#include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Templates
@@ -46,4 +43,3 @@ template <typename TEnum, RCPPSW_SFINAE_DECLDEF(std::is_enum<TEnum>::value)>
 TEnum operator|=(TEnum& lhs, const TEnum& rhs) {
   return lhs = lhs | rhs;
 }
-

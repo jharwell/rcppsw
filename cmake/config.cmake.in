@@ -23,7 +23,7 @@ find_package(rcsw
 
 add_library(ticpp_ticpp::ticpp_ticpp STATIC IMPORTED GLOBAL)
 set_target_properties(ticpp_ticpp::ticpp_ticpp PROPERTIES
-  IMPORTED_LOCATION ${rcppsw_INSTALL_PREFIX}/lib/libticpp.a
+  IMPORTED_LOCATION ${LIBRA_DEPS_PREFIX}/lib/libticpp.a
   )
 
 set(rcppsw_config_FOUND @rcppsw_config_FOUND@)
@@ -42,4 +42,3 @@ include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@-exports.cmake")
 set(rcppsw_INCLUDE_DIRS ${rcppsw_INSTALL_PREFIX}/include)
 
 check_required_components(rcppsw)
-# set(rcppsw_FOUND 1)

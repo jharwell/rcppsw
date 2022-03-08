@@ -42,7 +42,7 @@ NS_START(rcppsw, control);
  * of the waveform config it was passed during construction. All other
  * parameters are ignored.
  */
-class constant_waveform : public base_waveform {
+class constant_waveform final : public base_waveform {
  public:
   explicit constant_waveform(const struct config::waveform_config* const config)
       : base_waveform(config) {}
@@ -57,7 +57,7 @@ class constant_waveform : public base_waveform {
  * \brief A special waveform that always returns 0.0, indicating that there is
  * no waveform/nothing. All parameters are ignored during initialization.
  */
-class null_waveform : public base_waveform {
+class null_waveform final : public base_waveform {
  public:
   explicit null_waveform(const struct config::waveform_config* const config)
       : base_waveform(config) {}
@@ -66,4 +66,3 @@ class null_waveform : public base_waveform {
 };
 
 NS_END(control, rcppsw);
-

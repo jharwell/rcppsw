@@ -48,8 +48,7 @@ void sigsegv_sighandler(int signum);
  * \brief A handler to be called instead of std::terminate(), for better
  * debugging of WHERE an exception came from.
  */
-void terminate_handler(void);
+RCPPSW_DEAD void terminate_handler(void);
 
 
 NS_END(er, rcppsw);
-

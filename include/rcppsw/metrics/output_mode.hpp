@@ -80,4 +80,3 @@ enum class output_mode {
 };
 
 NS_END(metrics, rcppsw);
-

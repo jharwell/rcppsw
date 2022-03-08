@@ -40,9 +40,9 @@ NS_START(rcppsw, types);
  *
  * \brief A class fo representing rates.
  */
-class hertz final : public rtypes::named_type<size_t, struct hertz_tag> {
+class hertz final : public rtypes::named_type<int, struct hertz_tag> {
  public:
-  using named_type<size_t, hertz_tag>::named_type;
+  using named_type<int, hertz_tag>::named_type;
 
   hertz(const hertz&) = default;
   hertz& operator=(const hertz& other) {

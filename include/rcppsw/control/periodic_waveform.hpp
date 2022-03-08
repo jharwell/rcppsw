@@ -46,7 +46,7 @@ NS_START(rcppsw, control);
  * value = amplitude * ( sin(2pi* frequency * time + phase)) + offset.
  *
  */
-class sine_waveform : public base_waveform {
+class sine_waveform final : public base_waveform {
  public:
   explicit sine_waveform(const struct config::waveform_config* const config)
       : base_waveform(config) {}
@@ -70,7 +70,7 @@ class sine_waveform : public base_waveform {
  * Can be used to create step functions as well.
  *
  */
-class square_waveform : public base_waveform {
+class square_waveform final : public base_waveform {
  public:
   explicit square_waveform(const struct config::waveform_config* const config)
       : base_waveform(config) {}

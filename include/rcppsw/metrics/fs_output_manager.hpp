@@ -60,7 +60,7 @@ class fs_output_manager : public rer::client<fs_output_manager>,
 
   /* base_manager overrides */
   void collector_preregister(const std::string& scoped_name,
-                             const rmetrics::output_mode& mode) override;
+                             const rmetrics::output_mode& mode) override final;
   void initialize(void) override;
   bool flush(const rmetrics::output_mode& mode,
              const rtypes::timestep& t) override;
