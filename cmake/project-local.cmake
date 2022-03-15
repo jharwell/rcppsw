@@ -158,40 +158,42 @@ foreach(component ${rcppsw_FIND_COMPONENTS})
 endforeach()
 
 # Define RCPPSW library
+set(rcppsw_LIBRARY rcppsw)
 add_library(
-  rcppsw
+  ${rcppsw_LIBRARY}
   STATIC
   ${rcppsw_components_SRC}
   )
+
+execute_process(COMMAND git rev-list --count HEAD
+  OUTPUT_VARIABLE RCPPSW_VERSION
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
+set(rcppsw_LIBRARY_NAME ${rcppsw_LIBRARY}-v${RCPPSW_VERSION})
+set_target_properties(${rcppsw_LIBRARY} PROPERTIES OUTPUT_NAME ${rcppsw_LIBRARY_NAME})
 
 ########################################
 # Include directories
 ########################################
 target_include_directories(
-  rcppsw
+  ${rcppsw_LIBRARY}
   PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${rcsw_INCLUDE_DIRS}>
   $<BUILD_INTERFACE:${LIBRA_DEPS_PREFIX}/include>
-  $<BUILD_INTERFACE:${rcsw_INCLUDE_DIRS}>
   $<INSTALL_INTERFACE:include>
   )
 target_include_directories(
-  rcppsw
+  ${rcppsw_LIBRARY}
   SYSTEM PUBLIC
   $<BUILD_INTERFACE:${LIBRA_DEPS_PREFIX}/include>
   $<BUILD_INTERFACE:${log4cxx_INCLUDE_DIR}>
   $<BUILD_INTERFACE:${Boost_INCLUDE_DIRS}>
   )
 
-
 ########################################
 # Link Libraries
 ########################################
-# Ensure the whole archive is linked
-target_link_options(rcppsw
-  INTERFACE
-  -Wl,--whole-archive ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/librcppsw.a -Wl,--no-whole-archive
-  )
-target_link_libraries(rcppsw
+target_link_libraries(${rcppsw_LIBRARY}
   rcsw::rcsw
   ticpp_ticpp::ticpp_ticpp
   ${Boost_LIBRARIES}
@@ -204,19 +206,19 @@ target_link_libraries(rcppsw
 ########################################
 
 if(${RCPPSW_AL_MT_SAFE_TYPES})
-  target_compile_definitions(rcppsw PUBLIC RCPPSW_AL_MT_SAFE_TYPES)
+  target_compile_definitions(${rcppsw_LIBRARY} PUBLIC RCPPSW_AL_MT_SAFE_TYPES)
 endif()
 
 if ("${LIBRA_ER}" MATCHES "ALL")
   if(NOT ${RCPPSW_ER_SYSTEM_LOG4CXX})
-    target_link_directories(rcppsw PUBLIC ${LIBRA_DEPS_PREFIX}/lib)
+    target_link_directories(${rcppsw_LIBRARY} PUBLIC ${LIBRA_DEPS_PREFIX}/lib)
   else()
-    target_compile_definitions(rcppsw PUBLIC RCPPSW_ER_SYSTEM_LOG4CXX)
+    target_compile_definitions(${rcppsw_LIBRARY} PUBLIC RCPPSW_ER_SYSTEM_LOG4CXX)
   endif()
-  target_link_libraries(rcppsw log4cxx)
+  target_link_libraries(${rcppsw_LIBRARY} log4cxx)
 endif()
 
-target_compile_definitions(rcppsw
+target_compile_definitions(${rcppsw_LIBRARY}
   INTERFACE
   LIBRA_ER=LIBRA_ER_${LIBRA_ER}
   )
@@ -224,11 +226,11 @@ target_compile_definitions(rcppsw
 ################################################################################
 # Installation                                                                 #
 ################################################################################
-configure_exports_as(rcppsw ${CMAKE_INSTALL_PREFIX})
+configure_exports_as(${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
 
 # Install rcppsw
-register_target_for_install(rcppsw ${CMAKE_INSTALL_PREFIX})
-register_headers_for_install(include/rcppsw ${CMAKE_INSTALL_PREFIX})
+register_target_for_install(${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
+register_headers_for_install(include/${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
 
 ################################################################################
 # Status                                                                       #

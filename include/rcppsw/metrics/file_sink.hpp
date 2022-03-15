@@ -27,6 +27,7 @@
 #include <memory>
 #include <string>
 #include <filesystem>
+#include <functional>
 
 #include "rcppsw/metrics/base_sink.hpp"
 

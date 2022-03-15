@@ -24,6 +24,7 @@
 #include "rcppsw/metrics/config/xml/base_sink_parser.hpp"
 
 #include <list>
+#include <algorithm>
 
 /*******************************************************************************
  * Namespaces
