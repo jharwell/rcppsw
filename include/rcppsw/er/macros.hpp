@@ -33,8 +33,11 @@
 
 #endif
 
-#if (RCPPSW_ER == RCPPSW_ER_ALL)
+#if (RCPPSW_ER == RCPPSW_ER_FATAL)
 #include <type_traits>
+#endif
+
+#if (RCPPSW_ER >= RCPPSW_ER_FATAL)
 #include "rcppsw/er/stacktrace.hpp"
 #endif
 

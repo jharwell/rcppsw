@@ -47,7 +47,7 @@ class reflectable {
 
   /**
    * \brief Return the \ref std::type_index of the derived class. This is useful
-   * in conjunction with \ref boost::variant and \ref boost::apply_visitor, as
+   * in conjunction with \ref std::variant and \ref std::visit, as
    * it allows for run-time reflection based on the actual type of the derived
    * class.
    */
@@ -55,4 +55,3 @@ class reflectable {
 };
 
 NS_END(mpl, rcppsw);
-

@@ -122,7 +122,6 @@ if (NOT ${LIBRA_RTD_BUILD})
   find_package(Boost 1.71.0
     COMPONENTS
     system
-    filesystem
     thread
     graph
     stacktrace_basic

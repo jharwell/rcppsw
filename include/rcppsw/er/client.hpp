@@ -38,7 +38,6 @@
 #include <log4cxx/xml/domconfigurator.h>
 #endif
 
-
 #include "rcppsw/rcppsw.hpp"
 #include "rcppsw/er/macros.hpp"
 
@@ -314,9 +313,13 @@ class client {
 
  private:
   /* clang-format off */
+#if defined(RCPPSW_ER_SYSTEM_LOG4CXX)
+  static inline const std::string kConsoleLayout = "%X{time} %x [%-5p] %c - %m%n";
+  static inline const std::string kFileLayout = "%X{time} %x [%-5p] %c %l - %m%n";
+#else
   static inline const std::string kConsoleLayout = "%X{time} %x %Y[%-5p]%y %c - %m%n";
   static inline const std::string kFileLayout = "%X{time} %x %Y[%-5p]%y %c %l - %m%n";
-
+#endif
   static inline bool       m_initialized{false};
 
   log4cxx::LoggerPtr       m_logger{};
@@ -332,4 +335,3 @@ class client {
 #endif
 
 NS_END(rcppsw, er);
-

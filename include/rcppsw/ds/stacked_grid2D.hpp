@@ -50,7 +50,7 @@ NS_START(rcppsw, ds);
  *
  * This was implemented because the BGL only appears to support layered
  * graphs/grids of the same object type. Although in hindsight I could have done
- * this with grid_graph and boost::variant (was not aware of this when I
+ * this with grid_graph and std::variant (was not aware of this when I
  * implemented this class). Might not have been as highly performing in that
  * case though.
  */
