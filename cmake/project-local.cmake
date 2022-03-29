@@ -82,12 +82,20 @@ component_register_as_src(
   "${rcppsw_SRC}"
   er
   "src/er")
+component_register_as_src(
+  rcppsw_init_SRC
+  rcppsw
+  "${rcppsw_SRC}"
+  init
+  "src/init")
+
 # Root project (not used in find_package())
 if (NOT rcppsw_FIND_COMPONENTS)
   set(rcppsw_FIND_COMPONENTS
     config
     control
     er
+    init
     math
     metrics
     multiprocess
@@ -149,12 +157,23 @@ endif()
 ################################################################################
 # Create the source for the SINGLE library to build by combining the
 # source of the selected components
-
 foreach(component ${rcppsw_FIND_COMPONENTS})
   if(${rcppsw_${component}_FOUND})
     list(APPEND rcppsw_components_SRC ${rcppsw_} ${rcppsw_${component}_SRC})
   endif()
 endforeach()
+
+# Configure version
+execute_process(COMMAND git rev-list --count HEAD
+  OUTPUT_VARIABLE RCPPSW_VERSION
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/version.cpp.in
+  ${CMAKE_CURRENT_BINARY_DIR}/src/version.cpp
+  @ONLY
+  )
+list(APPEND rcppsw_components_SRC "${CMAKE_CURRENT_BINARY_DIR}/src/version.cpp")
 
 # Define RCPPSW library
 set(rcppsw_LIBRARY rcppsw)
@@ -164,10 +183,8 @@ add_library(
   ${rcppsw_components_SRC}
   )
 
-execute_process(COMMAND git rev-list --count HEAD
-  OUTPUT_VARIABLE RCPPSW_VERSION
-  OUTPUT_STRIP_TRAILING_WHITESPACE)
-set(rcppsw_LIBRARY_NAME ${rcppsw_LIBRARY}-v${RCPPSW_VERSION})
+
+set(rcppsw_LIBRARY_NAME ${rcppsw_LIBRARY})
 set_target_properties(${rcppsw_LIBRARY} PROPERTIES OUTPUT_NAME ${rcppsw_LIBRARY_NAME})
 
 ########################################

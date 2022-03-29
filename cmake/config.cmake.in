@@ -1,6 +1,8 @@
 @PACKAGE_INIT@
 
 set(rcppsw_INSTALL_PREFIX @CMAKE_INSTALL_PREFIX@)
+set(rcppsw_INCLUDE_DIRS ${rcppsw_INSTALL_PREFIX}/include)
+set(LIBRA_DEPS_PREFIX @LIBRA_DEPS_PREFIX@)
 
 if(CMAKE_CROSSCOMPILING)
   set(BOOST_ROOT @CMAKE_INSTALL_PREFIX@)
@@ -29,6 +31,7 @@ set_target_properties(ticpp_ticpp::ticpp_ticpp PROPERTIES
 set(rcppsw_config_FOUND @rcppsw_config_FOUND@)
 set(rcppsw_control_FOUND @rcppsw_control_FOUND@)
 set(rcppsw_er_FOUND @rcppsw_er_FOUND@)
+set(rcppsw_init_FOUND @rcppsw_init_FOUND@)
 set(rcppsw_math_FOUND @rcppsw_math_FOUND@)
 set(rcppsw_metrics_FOUND @rcppsw_metrics_FOUND@)
 set(rcppsw_multiprocess_FOUND @rcppsw_multiprocess_FOUND@)
@@ -39,6 +42,5 @@ set(rcppsw_types_FOUND @rcppsw_types_FOUND@)
 
 include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@-exports.cmake")
 
-set(rcppsw_INCLUDE_DIRS ${rcppsw_INSTALL_PREFIX}/include)
 
 check_required_components(rcppsw)

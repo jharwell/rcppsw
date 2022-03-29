@@ -1,5 +1,5 @@
 /**
- * \file utils.hpp
+ * \file init.cpp
  *
  * \copyright 2022 John Harwell, All rights reserved.
  *
@@ -18,26 +18,24 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#pragma once
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/rcppsw.hpp"
+#include "rcppsw/init/init.hpp"
 
-#include "rcppsw/types/timestep.hpp"
+#include <iostream>
+#include "rcppsw/version.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, utils);
+NS_START(rcppsw, init);
 
 /*******************************************************************************
  * Free Functions
  ******************************************************************************/
-static inline bool ready_to_flush(const rtypes::timestep& output_interval,
-                                  const rtypes::timestep& t) {
-  return (t > 0UL) && ((t % output_interval) == 0UL);
+void init(void) {
+  std::cout << "Loaded rcppsw.v" << kVERSION << std::endl;
 }
 
-NS_END(utils, rcppsw);
+NS_END(init, rcppsw);

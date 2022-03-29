@@ -1,5 +1,5 @@
 /**
- * \file utils.hpp
+ * \file init.hpp
  *
  * \copyright 2022 John Harwell, All rights reserved.
  *
@@ -25,19 +25,19 @@
  ******************************************************************************/
 #include "rcppsw/rcppsw.hpp"
 
-#include "rcppsw/types/timestep.hpp"
-
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, utils);
+NS_START(rcppsw, init);
 
 /*******************************************************************************
  * Free Functions
  ******************************************************************************/
-static inline bool ready_to_flush(const rtypes::timestep& output_interval,
-                                  const rtypes::timestep& t) {
-  return (t > 0UL) && ((t % output_interval) == 0UL);
-}
+/**
+ * \brief Initialize RCPPSW library.
+ *
+ * Current this just prints the version.
+ */
+void init(void) RCPPSW_LIB_INIT;
 
-NS_END(utils, rcppsw);
+NS_END(init, rcppsw);

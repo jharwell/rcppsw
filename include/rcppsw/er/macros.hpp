@@ -96,7 +96,7 @@
     std::array<char, RCPPSW_ER_MSG_LEN_MAX> _str{};                     \
     snprintf(_str.data(), RCPPSW_ER_MSG_LEN_MAX, msg, ##__VA_ARGS__);   \
     std::cerr                                                           \
-        << _str.data() << "\n"                                          \
+        << "FATAL: " << _str.data() << "\n"                             \
         << "Backtrace:\n" << rer::stacktrace::stacktrace() << '\n';     \
   }                                                                     \
 

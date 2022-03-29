@@ -245,6 +245,22 @@
  */
 #define RCPPSW_NODISCARD [[nodiscard]]
 
+/**
+ * \def RCPPSW_LIB_INIT
+ *
+ * Mark a function that should be run when the the library it belongs to is
+ * loaded.
+ */
+#define RCPPSW_LIB_INIT __attribute__((constructor))
+
+/**
+ * \def RCPPSW_LIB_FINI
+ *
+ * Mark a function that should be run when the the library it belongs to is
+ * unloaded.
+ */
+#define RCPPSW_LIB_FINI __attribute__((destructor))
+
 #define RCPPSW_ATTR(...) RCSW_ATTR(__VA_ARGS__)
 #define RCPPSW_CHECK(cond) RCSW_CHECK(cond)
 #define RCPPSW_IS_BETWEEN(n, lb, ub) RCSW_IS_BETWEEN(n, lb, ub)
