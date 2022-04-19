@@ -21,7 +21,8 @@ find_package(Boost 1.71.0
 find_package(rcsw
   COMPONENTS
   common
-  REQUIRED)
+  REQUIRED
+  HINTS ${rcppsw_INSTALL_PREFIX})
 
 add_library(ticpp_ticpp::ticpp_ticpp STATIC IMPORTED GLOBAL)
 set_target_properties(ticpp_ticpp::ticpp_ticpp PROPERTIES

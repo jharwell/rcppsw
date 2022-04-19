@@ -46,6 +46,11 @@ class timestep final : public named_type<size_t, struct timestep_tag> {
   using named_type<size_t, timestep_tag>::named_type;
 
   timestep(const timestep&) = default;
+
+  timestep& operator++(void) {
+    set(v() + 1);
+    return *this;
+  }
   timestep& operator=(const timestep& other) {
     set(other.v());
     return *this;
@@ -86,6 +91,7 @@ class timestep final : public named_type<size_t, struct timestep_tag> {
   bool operator<(const timestep& other) const { return v() < other.v(); }
   bool operator>(const timestep& other) const { return v() > other.v(); }
   bool operator>=(const timestep& other) const { return v() >= other.v(); }
+  bool operator<=(const timestep& other) const { return v() <= other.v(); }
 
   template <class T>
   bool operator==(const T& other) const { return v() == other; }
@@ -98,6 +104,9 @@ class timestep final : public named_type<size_t, struct timestep_tag> {
 
   template <class T>
   bool operator<(const T& other) const { return v() < other; }
+
+  template <class T>
+  bool operator<=(const T& other) const { return v() <= other; }
 };
 
 NS_START(constants);

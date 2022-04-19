@@ -71,4 +71,7 @@ CATCH_TEST_CASE("Operations", "[rtypes::timestep]") {
   CATCH_REQUIRE(t1 >= t2);
   CATCH_REQUIRE(t1 + 1 > t2);
   CATCH_REQUIRE(t1 - 1 < t2);
+
+  CATCH_REQUIRE(++t1 == 3);
+  CATCH_REQUIRE(t1 == 3);
 }
