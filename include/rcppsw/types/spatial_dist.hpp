@@ -85,6 +85,10 @@ class spatial_dist final : public distance_measure<double, struct spatial_dist_t
     set(v() - rhs);
     return *this;
   }
+  spatial_dist& operator+=(double rhs) {
+    set(v() + rhs);
+    return *this;
+  }
   spatial_dist& operator=(const spatial_dist& rhs) {
     set(rhs.v());
     return *this;

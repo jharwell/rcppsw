@@ -58,7 +58,7 @@ static inline bool is_equal(double lhs,
 }
 
 /**
- * \brief Determine if \p x is a multiple \p y within \p tol tolerance.
+ * \brief Determine if \p x is a multiple of \p y within \p tol tolerance.
  */
 static inline bool is_multiple_of(double x,
                                   double y,

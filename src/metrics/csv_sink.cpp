@@ -116,7 +116,7 @@ void csv_sink::initialize(const rmetrics::base_data* data) {
 } /* initialize() */
 
 void csv_sink::csv_header_write(const rmetrics::base_data* data) {
-auto cols = csv_header_cols(data);
+  auto cols = csv_header_cols(data);
   std::string header = std::accumulate(std::next(cols.begin()),
                                        cols.end(),
                                        cols.front(),
@@ -132,6 +132,9 @@ auto cols = csv_header_cols(data);
 } /* csv_header_write() */
 
 void csv_sink::finalize(void) {
+  ER_ASSERT(ofile()->is_open(),
+            "Destination file '%s' not open?",
+            fpath().c_str());
   ofile()->flush();
   ofile()->close();
 } /* finalize() */
