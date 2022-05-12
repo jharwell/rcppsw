@@ -165,4 +165,3 @@ class csv_sink : public rmetrics::file_sink,
 };
 
 NS_END(metrics, rcppsw);
-

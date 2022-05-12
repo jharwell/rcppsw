@@ -81,8 +81,17 @@ void mt_set(U& lhs, const V& rhs) {
  * \brief Set a \ref mt_size_t to a specific value.
  */
 template<typename U, typename V,
-         RCPPSW_SFINAE_DECLDEF(std::is_same<U, std::atomic<size_t>>::value)>
+         RCPPSW_SFINAE_DECLDEF(std::is_same<U, std::atomic<size_t>>::value &&
+                               !std::is_same<V, std::atomic<size_t>>::value)>
 void mt_set(U& lhs, const V& rhs) { lhs = rhs; }
+
+/**
+ * \brief Set a \ref mt_size_t to a specific value.
+ */
+template<typename U, typename V,
+         RCPPSW_SFINAE_DECLDEF(std::is_same<U, std::atomic<size_t>>::value &&
+                               std::is_same<V, std::atomic<size_t>>::value)>
+void mt_set(U& lhs, const V& rhs) { lhs = rhs.load(); }
 
 /**
  * \brief Add two \ref mt_double together, which involves a compare-exchange,
