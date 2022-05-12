@@ -18,6 +18,8 @@ find_package(Boost 1.71.0
   program_options
   REQUIRED
   )
+# I assume rcsw is installed/will be installed alongside rcppsw; I
+# can't think of any reason you wouldn't want to do that.
 find_package(rcsw
   COMPONENTS
   common

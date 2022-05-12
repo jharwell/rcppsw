@@ -71,4 +71,3 @@ NS_START(constants);
 extern type_uuid kNoUUID;
 
 NS_END(constants, types, rcppsw);
-

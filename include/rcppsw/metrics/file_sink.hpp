@@ -78,7 +78,6 @@ class file_sink : public rer::client<file_sink>,
    */
   static constexpr size_t kN_RETRIES = 10;
 
-
   /* clang-format off */
   const fs::path                 mc_fpath;
 
@@ -87,4 +86,3 @@ class file_sink : public rer::client<file_sink>,
 };
 
 NS_END(metrics, rcppsw);
-
