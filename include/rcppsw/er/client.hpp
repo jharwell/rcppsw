@@ -195,7 +195,7 @@ class client {
         return;
       }
     } /* for(&a..) */
-#if defined(RCPPSW_ER_SYSTEM_LOG4CXX)
+#if defined(RCPPSW_ER_OLD_LOG4CXX)
     log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(kFileLayout);
         log4cxx::AppenderPtr appender =
             new log4cxx::FileAppender(layout, name, false);
@@ -273,7 +273,7 @@ class client {
    * rcppsw.patterns).
    */
   void logfile_set(const std::string& name) {
-#if defined(RCPPSW_ER_SYSTEM_LOG4CXX)
+#if defined(RCPPSW_ER_OLD_LOG4CXX)
     log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(kFileLayout);
     log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout, name);
 #else
@@ -313,13 +313,9 @@ class client {
 
  private:
   /* clang-format off */
-#if defined(RCPPSW_ER_SYSTEM_LOG4CXX)
   static inline const std::string kConsoleLayout = "%X{time} %x [%-5p] %c - %m%n";
   static inline const std::string kFileLayout = "%X{time} %x [%-5p] %c %l - %m%n";
-#else
-  static inline const std::string kConsoleLayout = "%X{time} %x %Y[%-5p]%y %c - %m%n";
-  static inline const std::string kFileLayout = "%X{time} %x %Y[%-5p]%y %c %l - %m%n";
-#endif
+
   static inline bool       m_initialized{false};
 
   log4cxx::LoggerPtr       m_logger{};

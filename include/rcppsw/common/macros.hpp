@@ -215,21 +215,6 @@
 /*******************************************************************************
  * Compiler Macros
  ******************************************************************************/
-#if defined(__INTEL_COMPILER)
-#define RCPPSW_STRUCT_DOT_INITIALIZER(name, value) value
-#else
-/**
- * \def RCPPSW_STRUCT_DOT_INITIALIZER(name, value)
- *
- * Initialize a member of a struct which is not POD using the dot ('.')
- * initializer syntax. GCC and clang handle this for things using
- * std::bind/member function pointers, but the Intel compiler does not. Using
- * the dot syntax is nice, because if you have multiple members of the same type
- * in the same struct, the intent of the programmer is clear.
- */
-#define RCPPSW_STRUCT_DOT_INITIALIZER(name, value) .name = value
-#endif
-
 #define RCPPSW_CONST RCSW_CONST
 #define RCPPSW_COLD RCSW_COLD
 #define RCPPSW_PURE RCSW_PURE
