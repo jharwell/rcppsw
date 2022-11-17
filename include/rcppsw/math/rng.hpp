@@ -23,16 +23,19 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include "rcppsw/rcppsw.hpp"
 #include "rcppsw/math/range.hpp"
 #include "rcppsw/patterns/pimpl/pimpl.hpp"
-#include "rcppsw/rcppsw.hpp"
+#include "rcppsw/math/probability.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math, detail);
+namespace rcppsw::math {
+
+namespace detail {
 struct rng_impl;
-NS_END(detail);
+} /* namespace detail */
 
 /*******************************************************************************
  * Class Definitions
@@ -69,14 +72,14 @@ class rng final : public patterns::pimpl::pimpl<detail::rng_impl> {
   }
 
   /**
-   * \brief Return a selection according to the Gaussian distribution G(mean,
-   * std_dev).
+   * \brief Return a selection according to the Gaussian distribution \f$G(\mu,
+   * \sigma)\f$.
    */
   double gaussian(double mean, double std_dev);
 
   /**
    * \brief Return a selection according to the exponential distribution
-   * 1 - e ^(-lambda).
+   * \f$1 - e ^(-lambda)\f$.
    */
   double exponential(double lambda);
 
@@ -92,5 +95,4 @@ class rng final : public patterns::pimpl::pimpl<detail::rng_impl> {
   /* clang-format on */
 };
 
-NS_END(math, rcppsw);
-
+} /* namespace rcppsw::math */

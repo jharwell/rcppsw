@@ -1,5 +1,5 @@
 /**
- * \file spatial_range.hpp
+ * \file manhattan_dist.cpp
  *
  * \copyright 2020 John Harwell, All rights reserved.
  *
@@ -18,29 +18,34 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
-#pragma once
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/range.hpp"
-#include "rcppsw/types/spatial_dist.hpp"
+#include "rcppsw/spatial/manhattan_dist.hpp"
+
+#include <cmath>
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, types);
+namespace rcppsw::spatial {
 
 /*******************************************************************************
- * Class Definitions
+ * Operators
  ******************************************************************************/
-/**
- * \typedef spatial_range
- * \ingroup types
- *
- * \brief A \ref rmath::range<T> of \ref rtypes::spatial_dist.
- */
-using spatial_range = math::range<types::spatial_dist>;
+manhattan_dist operator-(int lhs, const manhattan_dist& rhs) {
+  return manhattan_dist(lhs - rhs.v());
+}
+manhattan_dist operator+(int lhs, const manhattan_dist& rhs) {
+  return manhattan_dist(lhs + rhs.v());
+}
+bool operator<=(int lhs, const manhattan_dist& rhs) { return lhs <= rhs.v(); }
 
-NS_END(types, rcppsw);
+/*******************************************************************************
+ * Non-Member Functions
+ ******************************************************************************/
+manhattan_dist manhattan_dist::make(const int& value) {
+  return manhattan_dist(std::abs(static_cast<int>(value)));
+} /* make() */
 
+} /* namespace rcppsw::spatial */

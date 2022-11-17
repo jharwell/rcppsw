@@ -153,9 +153,9 @@ namespace metrics {}
 namespace mpl {}
 
 /**
- * \brief Common non-primitive types: Spatial distance/range, timestep, UUID for
- * types, named type (for eliminating bugs caused by implicit conversions
- * between primitive types which do not elicit a compiler warning).
+ * \brief Common non-primitive types: timestep, UUID for types, etc. Mainly for
+ * eliminating bugs caused by implicit conversions between primitive types which
+ * do not elicit a compiler warning.
  */
 namespace types {}
 
@@ -176,7 +176,17 @@ namespace multithread {}
  */
 namespace multiprocess {}
 
+/**
+ * \brief Abstraction Layer (AL) for types which can be compiled differently for
+ * different targets.
+ */
 namespace al {}
+
+/**
+ * \brief Named types for spatial distance/range measurements and related
+ * calculations.
+ */
+namespace spatial {}
 } /* namespace rcppsw */
 
 namespace rmetrics = rcppsw::metrics;
@@ -196,6 +206,8 @@ namespace rmultithread = rcppsw::multithread;
 
 namespace ralgorithm = rcppsw::algorithm;
 namespace raclustering = ralgorithm::clustering;
+
+namespace rspatial = rcppsw::spatial;
 
 namespace rds = rcppsw::ds;
 namespace rdmetrics = rds::metrics;

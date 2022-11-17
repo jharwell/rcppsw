@@ -25,14 +25,12 @@
  ******************************************************************************/
 #include "rcppsw/math/vector3.hpp"
 #include "rcppsw/math/vector2.hpp"
-#include "rcppsw/types/spatial_dist.hpp"
-
-#include "rcppsw/rcppsw.hpp"
+#include "rcppsw/spatial/euclidean_dist.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::spatial {
 
 /*******************************************************************************
  * Macros
@@ -79,5 +77,4 @@ RCPPSW_MATH_SPAN_FUNC_DISC(x);
 RCPPSW_MATH_SPAN_FUNC_DISC(y);
 RCPPSW_MATH_SPAN_FUNC_DISC(z);
 
-NS_END(math, rcppsw);
-
+} /* namespace rcppsw::spatial */

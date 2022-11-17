@@ -24,19 +24,19 @@
  * Includes
  ******************************************************************************/
 #include "rcppsw/math/vector3.hpp"
-#include "rcppsw/math/spatial.hpp"
+#include "rcppsw/spatial/spatial.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::spatial {
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
  * \class bounding_box
- * \ingroup math
+ * \ingroup spatial
  *
  * \brief Mathematical abstraction of the 3D bounding box of an object.
  */
@@ -95,9 +95,9 @@ class bounding_box : public rer::client<bounding_box<TCoord>> {
                                      ysize(),
                                      zsize()) / 2.0;
     ER_TRACE("center: %s", rcppsw::to_string(m_center).c_str());
-    m_xspan = rmath::xspan(anchor3D(), xsize());
-    m_yspan = rmath::yspan(anchor3D(), ysize());
-    m_zspan = rmath::zspan(anchor3D(), zsize());
+    m_xspan = rspatial::xspan(anchor3D(), xsize());
+    m_yspan = rspatial::yspan(anchor3D(), ysize());
+    m_zspan = rspatial::zspan(anchor3D(), zsize());
   }
 
   rmath::range<coord_value_type> xspan(void) const {
@@ -133,5 +133,4 @@ class bounding_box : public rer::client<bounding_box<TCoord>> {
   /* clang-format on */
 };
 
-NS_END(math, rcppsw);
-
+} /* namespace rcppsw::spatial */

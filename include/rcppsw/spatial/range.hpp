@@ -1,5 +1,5 @@
 /**
- * \file spatial_dist.cpp
+ * \file range.hpp
  *
  * \copyright 2020 John Harwell, All rights reserved.
  *
@@ -18,40 +18,28 @@
  * RCPPSW.  If not, see <http://www.gnu.org/licenses/
  */
 
+#pragma once
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/types/spatial_dist.hpp"
-
-#include <cmath>
+#include "rcppsw/math/range.hpp"
+#include "rcppsw/spatial/euclidean_dist.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, types);
+namespace rcppsw::spatial {
 
 /*******************************************************************************
- * Operators
+ * Class Definitions
  ******************************************************************************/
-spatial_dist operator*(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs * rhs.v());
-}
-spatial_dist operator/(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs / rhs.v());
-}
-spatial_dist operator-(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs - rhs.v());
-}
-spatial_dist operator+(double lhs, const spatial_dist& rhs) {
-  return spatial_dist(lhs + rhs.v());
-}
-bool operator<=(double lhs, const spatial_dist& rhs) { return lhs <= rhs.v(); }
+/**
+ * \typedef range
+ * \ingroup spatial
+ *
+ * \brief A \ref rmath::range<T> of \ref rspatial::euclidean_dist.
+ */
+using erange = math::range<spatial::euclidean_dist>;
 
-/*******************************************************************************
- * Non-Member Functions
- ******************************************************************************/
-spatial_dist spatial_dist::make(const double& value) {
-  return spatial_dist(std::fabs(value));
-} /* make() */
-
-NS_END(types, rcppsw);
+} /* namespace rcppsw::spatial */

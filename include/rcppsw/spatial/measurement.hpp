@@ -1,5 +1,5 @@
 /**
- * \file distance_measure.hpp
+ * \file measurement.hpp
  *
  * \copyright 2019 John Harwell, All rights reserved.
  *
@@ -29,46 +29,47 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, types);
+namespace rcppsw::spatial {
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * \class distance_measure
- * \ingroup types
+ * \class measurement
+ * \ingroup spatial
  *
- * \brief Specifies a distance between two points.
+ * \brief The result of a measurement between elements of a spatial space.
+ *
+ * It should always be >= 0.
  */
 template<typename T, typename Tag>
-class distance_measure : public named_type<T, Tag>,
-                         public er::client<distance_measure<T, Tag>> {
+class measurement : public rtypes::named_type<T, Tag>,
+                         public er::client<measurement<T, Tag>> {
  public:
   using value_type = T;
-  using named_type<T, Tag>::v;
-  using named_type<T, Tag>::set;
-  using named_type<T, Tag>::to_str;
+  using rtypes::named_type<T, Tag>::v;
+  using rtypes::named_type<T, Tag>::set;
+  using rtypes::named_type<T, Tag>::to_str;
 
-  explicit distance_measure(const T& value, bool check_psd = true)
-      : named_type<T, Tag>(value),
-        ER_CLIENT_INIT("rcppsw.types.distance_measure") {
+  explicit measurement(const T& value, bool check_psd = true)
+      : rtypes::named_type<T, Tag>(value),
+        ER_CLIENT_INIT("rcppsw.types.measurement") {
     ER_ASSERT(!(check_psd && v() < T{0}),
               "Distance should be positive semi-definite: %s < 0",
               rcppsw::to_string(v()).c_str());
   }
 
-  ~distance_measure(void) override = default;
-  distance_measure(const distance_measure&) = default;
+  ~measurement(void) override = default;
+  measurement(const measurement&) = default;
 
 
-  bool operator<(const distance_measure& rhs) const { return v() < rhs.v(); }
-  bool operator>(const distance_measure& rhs) const { return v() > rhs.v(); }
-  bool operator>=(const distance_measure& rhs) const { return v() >= rhs.v(); }
+  bool operator<(const measurement& rhs) const { return v() < rhs.v(); }
+  bool operator>(const measurement& rhs) const { return v() > rhs.v(); }
+  bool operator>=(const measurement& rhs) const { return v() >= rhs.v(); }
   bool operator>=(T rhs) const { return v() >= rhs; }
-  bool operator<=(const distance_measure& rhs) const { return v() <= rhs.v(); }
+  bool operator<=(const measurement& rhs) const { return v() <= rhs.v(); }
   bool operator<=(T rhs) const { return v() <= rhs; }
   bool operator>(T rhs) const { return v() > rhs; }
 };
 
-NS_END(types, rcppsw);
-
+} /* namespace rcppsw::spatial */

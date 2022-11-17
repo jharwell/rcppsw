@@ -54,9 +54,9 @@ class ientropy : public math::expression<double> {
   /**
    * \brief Calculate the informational entropy.
    *
-   * \param groups A vector of the proportional representation of each group
-   *               within the cluster. Should sum to 1, though this is not
-   *               checked.
+   * \param[in] groups A vector of the proportional representation of each group
+   *                   within the cluster. Should sum to 1, though this is not
+   *                   checked.
    */
   double operator()(const std::vector<double>& groups) {
     double entropy = 0.0;
@@ -68,4 +68,3 @@ class ientropy : public math::expression<double> {
 };
 
 NS_END(math, rcppsw);
-

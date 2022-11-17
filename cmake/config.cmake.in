@@ -40,6 +40,7 @@ set(rcppsw_metrics_FOUND @rcppsw_metrics_FOUND@)
 set(rcppsw_multiprocess_FOUND @rcppsw_multiprocess_FOUND@)
 set(rcppsw_multithread_FOUND @rcppsw_multithread_FOUND@)
 set(rcppsw_patterns_FOUND @rcppsw_patterns_FOUND@)
+set(rcppsw_spatial_FOUND @rcppsw_spatial_FOUND@)
 set(rcppsw_utils_FOUND @rcppsw_utils_FOUND@)
 set(rcppsw_types_FOUND @rcppsw_types_FOUND@)
 

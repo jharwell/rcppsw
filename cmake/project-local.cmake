@@ -65,6 +65,12 @@ rcppsw_patterns_SRC
   patterns
   "src/patterns")
 component_register_as_src(
+rcppsw_spatial_SRC
+  rcppsw
+  "${rcppsw_SRC}"
+  spatial
+  "src/spatial")
+component_register_as_src(
 rcppsw_types_SRC
   rcppsw
   "${rcppsw_SRC}"
@@ -101,8 +107,9 @@ if (NOT rcppsw_FIND_COMPONENTS)
     multiprocess
     multithread
     patterns
-    utils
+    spatial
     types
+    utils
     )
 endif()
 

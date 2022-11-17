@@ -1,5 +1,5 @@
 /**
- * \file manhattan_dist.cpp
+ * \file euclidean_dist.cpp
  *
  * \copyright 2020 John Harwell, All rights reserved.
  *
@@ -21,31 +21,37 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/types/manhattan_dist.hpp"
+#include "rcppsw/spatial/euclidean_dist.hpp"
 
 #include <cmath>
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, types);
+namespace rcppsw::spatial {
 
 /*******************************************************************************
  * Operators
  ******************************************************************************/
-manhattan_dist operator-(int lhs, const manhattan_dist& rhs) {
-  return manhattan_dist(lhs - rhs.v());
+euclidean_dist operator*(double lhs, const euclidean_dist& rhs) {
+  return euclidean_dist(lhs * rhs.v());
 }
-manhattan_dist operator+(int lhs, const manhattan_dist& rhs) {
-  return manhattan_dist(lhs + rhs.v());
+euclidean_dist operator/(double lhs, const euclidean_dist& rhs) {
+  return euclidean_dist(lhs / rhs.v());
 }
-bool operator<=(int lhs, const manhattan_dist& rhs) { return lhs <= rhs.v(); }
+euclidean_dist operator-(double lhs, const euclidean_dist& rhs) {
+  return euclidean_dist(lhs - rhs.v());
+}
+euclidean_dist operator+(double lhs, const euclidean_dist& rhs) {
+  return euclidean_dist(lhs + rhs.v());
+}
+bool operator<=(double lhs, const euclidean_dist& rhs) { return lhs <= rhs.v(); }
 
 /*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
-manhattan_dist manhattan_dist::make(const int& value) {
-  return manhattan_dist(std::abs(static_cast<int>(value)));
+euclidean_dist euclidean_dist::make(const double& value) {
+  return euclidean_dist(std::fabs(value));
 } /* make() */
 
-NS_END(types, rcppsw);
+} /* namespace rcppsw::spatial */

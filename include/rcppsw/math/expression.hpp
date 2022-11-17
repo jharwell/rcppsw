@@ -75,4 +75,3 @@ class expression {
 };
 
 NS_END(rcppsw, math);
-

@@ -1,5 +1,5 @@
 /**
- * \file spatial_dist.hpp
+ * \file euclidean_dist.hpp
  *
  * \copyright 2019 John Harwell, All rights reserved.
  *
@@ -23,77 +23,77 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/types/distance_measure.hpp"
+#include "rcppsw/spatial/measurement.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, types);
+namespace rcppsw::spatial {
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
 /**
- * \class spatial_dist
- * \ingroup types
+ * \class euclidean_dist
+ * \ingroup spatial
  *
  * \brief Specifies a distance in "real" spatial space, and as such is always
  * positive.
  */
-class spatial_dist final : public distance_measure<double, struct spatial_dist_tag> {
+class euclidean_dist final : public measurement<double, struct euclidean_dist_tag> {
  public:
   /**
-   * Create a \ref spatial_dist from a numeric value, making it positive if
+   * Create a \ref euclidean_dist from a numeric value, making it positive if
    * necessary. This incurs a higher runtime cost, and so is a separate function
    * from the constructor, which \a assumes the \p value to be positive
    * semi-definite.
    */
-  static spatial_dist make(const double& value);
+  static euclidean_dist make(const double& value);
 
-  explicit spatial_dist(const double& v) : distance_measure(v) {}
-  ~spatial_dist(void) override = default;
-  spatial_dist(const spatial_dist&) = default;
+  explicit euclidean_dist(const double& v) : measurement(v) {}
+  ~euclidean_dist(void) override = default;
+  euclidean_dist(const euclidean_dist&) = default;
 
-  spatial_dist operator*(double rhs) const {
-    return spatial_dist(v() * rhs);
+  euclidean_dist operator*(double rhs) const {
+    return euclidean_dist(v() * rhs);
   }
-  spatial_dist operator/(double rhs) const {
-    return spatial_dist(v() / rhs);
+  euclidean_dist operator/(double rhs) const {
+    return euclidean_dist(v() / rhs);
   }
-  spatial_dist operator-(double rhs) const {
-    return spatial_dist(v() - rhs);
+  euclidean_dist operator-(double rhs) const {
+    return euclidean_dist(v() - rhs);
   }
-  spatial_dist operator+(double rhs) const {
-    return spatial_dist(v() + rhs);
-  }
-
-
-  spatial_dist operator*(const spatial_dist& rhs) const {
-    return spatial_dist(v() * rhs.v());
-  }
-  spatial_dist operator/(const spatial_dist& rhs) const {
-    return spatial_dist(v() / rhs.v());
-  }
-  spatial_dist operator-(const spatial_dist& rhs) const {
-    return spatial_dist(v() - rhs.v());
-  }
-  spatial_dist operator+(const spatial_dist& rhs) const {
-    return spatial_dist(v() + rhs.v());
+  euclidean_dist operator+(double rhs) const {
+    return euclidean_dist(v() + rhs);
   }
 
-  spatial_dist& operator-=(double rhs) {
+
+  euclidean_dist operator*(const euclidean_dist& rhs) const {
+    return euclidean_dist(v() * rhs.v());
+  }
+  euclidean_dist operator/(const euclidean_dist& rhs) const {
+    return euclidean_dist(v() / rhs.v());
+  }
+  euclidean_dist operator-(const euclidean_dist& rhs) const {
+    return euclidean_dist(v() - rhs.v());
+  }
+  euclidean_dist operator+(const euclidean_dist& rhs) const {
+    return euclidean_dist(v() + rhs.v());
+  }
+
+  euclidean_dist& operator-=(double rhs) {
     set(v() - rhs);
     return *this;
   }
-  spatial_dist& operator+=(double rhs) {
+  euclidean_dist& operator+=(double rhs) {
     set(v() + rhs);
     return *this;
   }
-  spatial_dist& operator=(const spatial_dist& rhs) {
+  euclidean_dist& operator=(const euclidean_dist& rhs) {
     set(rhs.v());
     return *this;
   }
-  spatial_dist& operator+=(const spatial_dist& rhs) {
+  euclidean_dist& operator+=(const euclidean_dist& rhs) {
     set(v() + rhs.v());
     return *this;
   }
@@ -102,11 +102,10 @@ class spatial_dist final : public distance_measure<double, struct spatial_dist_t
 /*******************************************************************************
  * Operators
  ******************************************************************************/
-spatial_dist operator*(double lhs, const spatial_dist& rhs);
-spatial_dist operator/(double lhs, const spatial_dist& rhs);
-spatial_dist operator-(double lhs, const spatial_dist& rhs);
-spatial_dist operator+(double lhs, const spatial_dist& rhs);
-bool operator<=(double lhs, const spatial_dist& rhs) RCPPSW_PURE;
+euclidean_dist operator*(double lhs, const euclidean_dist& rhs);
+euclidean_dist operator/(double lhs, const euclidean_dist& rhs);
+euclidean_dist operator-(double lhs, const euclidean_dist& rhs);
+euclidean_dist operator+(double lhs, const euclidean_dist& rhs);
+bool operator<=(double lhs, const euclidean_dist& rhs) RCPPSW_PURE;
 
-NS_END(types, rcppsw);
-
+} /* namespace rcppsw::spatial */
