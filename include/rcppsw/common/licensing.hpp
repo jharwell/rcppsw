@@ -1,7 +1,7 @@
 /**
- * \file spatial_range.hpp
+ * \file licensing.hpp
  *
- * \copyright 2020 John Harwell, All rights reserved.
+ * \copyright 2022 John Harwell, All rights reserved.
  *
  * This file is part of RCPPSW.
  *
@@ -23,24 +23,10 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/math/range.hpp"
-#include "rcppsw/types/spatial_dist.hpp"
+#include "rcsw/common/licensing.h"
 
 /*******************************************************************************
- * Namespaces/Decls
+ * Macros
  ******************************************************************************/
-NS_START(rcppsw, types);
-
-/*******************************************************************************
- * Class Definitions
- ******************************************************************************/
-/**
- * \typedef spatial_range
- * \ingroup types
- *
- * \brief A \ref rmath::range<T> of \ref rtypes::spatial_dist.
- */
-using spatial_range = math::range<types::spatial_dist>;
-
-NS_END(types, rcppsw);
-
+#define RCPPSW_LICENSE(license, project, year, author)  \
+  RCSW_LICENSE(license, project, year, author)

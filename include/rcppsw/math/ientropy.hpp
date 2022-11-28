@@ -3,19 +3,7 @@
  *
  * \copyright 2018 John Harwell, All rights reserved.
  *
- * This file is part of RCPPSW.
- *
- * RCPPSW is free software: you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ * SPDX-License-Identifier: MIT
  */
 
 #pragma once
@@ -54,9 +42,9 @@ class ientropy : public math::expression<double> {
   /**
    * \brief Calculate the informational entropy.
    *
-   * \param groups A vector of the proportional representation of each group
-   *               within the cluster. Should sum to 1, though this is not
-   *               checked.
+   * \param[in] groups A vector of the proportional representation of each group
+   *                   within the cluster. Should sum to 1, though this is not
+   *                   checked.
    */
   double operator()(const std::vector<double>& groups) {
     double entropy = 0.0;
@@ -68,4 +56,3 @@ class ientropy : public math::expression<double> {
 };
 
 NS_END(math, rcppsw);
-

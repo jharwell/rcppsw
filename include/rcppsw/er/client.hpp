@@ -5,19 +5,7 @@
  *
  * \copyright 2017 John Harwell, All rights reserved.
  *
- * This file is part of RCPPSW.
- *
- * RCPPSW is free software: you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ * SPDX-License-Identifier: MIT
  */
 
 #pragma once
@@ -195,7 +183,7 @@ class client {
         return;
       }
     } /* for(&a..) */
-#if defined(RCPPSW_ER_SYSTEM_LOG4CXX)
+#if defined(RCPPSW_ER_OLD_LOG4CXX)
     log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(kFileLayout);
         log4cxx::AppenderPtr appender =
             new log4cxx::FileAppender(layout, name, false);
@@ -273,7 +261,7 @@ class client {
    * rcppsw.patterns).
    */
   void logfile_set(const std::string& name) {
-#if defined(RCPPSW_ER_SYSTEM_LOG4CXX)
+#if defined(RCPPSW_ER_OLD_LOG4CXX)
     log4cxx::LayoutPtr layout = new log4cxx::PatternLayout(kFileLayout);
     log4cxx::AppenderPtr appender = new log4cxx::FileAppender(layout, name);
 #else
@@ -313,13 +301,9 @@ class client {
 
  private:
   /* clang-format off */
-#if defined(RCPPSW_ER_SYSTEM_LOG4CXX)
   static inline const std::string kConsoleLayout = "%X{time} %x [%-5p] %c - %m%n";
   static inline const std::string kFileLayout = "%X{time} %x [%-5p] %c %l - %m%n";
-#else
-  static inline const std::string kConsoleLayout = "%X{time} %x %Y[%-5p]%y %c - %m%n";
-  static inline const std::string kFileLayout = "%X{time} %x %Y[%-5p]%y %c %l - %m%n";
-#endif
+
   static inline bool       m_initialized{false};
 
   log4cxx::LoggerPtr       m_logger{};

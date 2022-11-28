@@ -1,0 +1,46 @@
+name: 'Setup RCPPSW'
+description: 'Setup RCPPSW for CI and testing'
+# inputs:
+  # who-to-greet:  # id of input
+  #   description: 'Who to greet'
+  #   required: true
+  #   default: 'World'
+# outputs:
+#   time: # id of output
+#     description: 'The time we greeted you'
+runs:
+  using: 'composite'
+  steps:
+
+    - name: Install deb packages
+      shell: bash
+      run: |
+        sudo apt-get install catch  cmake qtbase5-dev \
+        libfreeimageplus-dev doxygen cppcheck liblog4cxx-dev \
+        libboost-all-dev lcov
+
+    - name: Install pip packages
+      shell: bash
+      run: |
+          pip install --user cpp-coveralls
+
+    - name: Init submodules
+      shell: bash
+      run: |
+        git submodule update --init --recursive --remote
+
+    - name: Clone and build RCSW, TICPP
+      shell: bash
+      run: |
+        git clone https://github.com/jharwell/bootstrap.git
+        cd bootstrap
+
+        ./bootstrap.sh \
+        --rprefix=$HOME/.local \
+        --rroot=/tmp \
+        --disablerepo cosm \
+        --disablerepo fordyca \
+        --disablerepo argos \
+        --disablerepo sierra \
+        --disablerepo titerra  \
+        --force

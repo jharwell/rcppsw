@@ -3,19 +3,7 @@
  *
  * \copyright 2019 John Harwell, All rights reserved.
  *
- * This file is part of RCPPSW.
- *
- * RCPPSW is free software: you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ * SPDX-License-Identifier: MIT
  */
 
 #pragma once
@@ -153,9 +141,9 @@ namespace metrics {}
 namespace mpl {}
 
 /**
- * \brief Common non-primitive types: Spatial distance/range, timestep, UUID for
- * types, named type (for eliminating bugs caused by implicit conversions
- * between primitive types which do not elicit a compiler warning).
+ * \brief Common non-primitive types: timestep, UUID for types, etc. Mainly for
+ * eliminating bugs caused by implicit conversions between primitive types which
+ * do not elicit a compiler warning.
  */
 namespace types {}
 
@@ -176,7 +164,17 @@ namespace multithread {}
  */
 namespace multiprocess {}
 
+/**
+ * \brief Abstraction Layer (AL) for types which can be compiled differently for
+ * different targets.
+ */
 namespace al {}
+
+/**
+ * \brief Named types for spatial distance/range measurements and related
+ * calculations.
+ */
+namespace spatial {}
 } /* namespace rcppsw */
 
 namespace rmetrics = rcppsw::metrics;
@@ -196,6 +194,8 @@ namespace rmultithread = rcppsw::multithread;
 
 namespace ralgorithm = rcppsw::algorithm;
 namespace raclustering = ralgorithm::clustering;
+
+namespace rspatial = rcppsw::spatial;
 
 namespace rds = rcppsw::ds;
 namespace rdmetrics = rds::metrics;

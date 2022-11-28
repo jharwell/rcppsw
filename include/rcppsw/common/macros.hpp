@@ -4,19 +4,7 @@
  *
  * \copyright 2020 John Harwell, All rights reserved.
  *
- * This file is part of RCPPSW.
- *
- * RCPPSW is free software: you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * RCPPSW is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * RCPPSW.  If not, see <http://www.gnu.org/licenses/
+ * SPDX-License-Identifier: MIT
  */
 
 #pragma once
@@ -27,7 +15,7 @@
 #include "rcsw/common/common.h"
 
 /*******************************************************************************
- * Macros
+ * General Macros
  ******************************************************************************/
 /**
  * \def NS_START_(ns)
@@ -215,21 +203,6 @@
 /*******************************************************************************
  * Compiler Macros
  ******************************************************************************/
-#if defined(__INTEL_COMPILER)
-#define RCPPSW_STRUCT_DOT_INITIALIZER(name, value) value
-#else
-/**
- * \def RCPPSW_STRUCT_DOT_INITIALIZER(name, value)
- *
- * Initialize a member of a struct which is not POD using the dot ('.')
- * initializer syntax. GCC and clang handle this for things using
- * std::bind/member function pointers, but the Intel compiler does not. Using
- * the dot syntax is nice, because if you have multiple members of the same type
- * in the same struct, the intent of the programmer is clear.
- */
-#define RCPPSW_STRUCT_DOT_INITIALIZER(name, value) .name = value
-#endif
-
 #define RCPPSW_CONST RCSW_CONST
 #define RCPPSW_COLD RCSW_COLD
 #define RCPPSW_PURE RCSW_PURE
