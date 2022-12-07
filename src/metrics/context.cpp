@@ -1,30 +1,28 @@
 /**
- * \file version.hpp
+ * \file context.cpp
  *
  * \copyright 2022 John Harwell, All rights reserved.
  *
  * SPDX-License-Identifier: MIT
  */
 
-#pragma once
-
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/rcppsw.hpp"
+#include "rcppsw/metrics/context.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw);
+namespace rcppsw::metrics {
+
+namespace constants {
 
 /*******************************************************************************
  * Global Variables
  ******************************************************************************/
-/**
- * \brief The current version of the library, to aid with debugging sanity
- * checks.
- */
-extern char kVERSION[];
+context kNoContext(-1);
 
-NS_END(rcppsw);
+} /* namespace constants */
+
+} /* namespace rcppsw::metrics */

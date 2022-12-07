@@ -175,6 +175,12 @@ namespace al {}
  * calculations.
  */
 namespace spatial {}
+
+/**
+ * \brief Version, build information for the library.
+ */
+namespace version {}
+
 } /* namespace rcppsw */
 
 namespace rmetrics = rcppsw::metrics;
@@ -209,3 +215,5 @@ namespace rpfactory = rcppsw::patterns::factory;
 namespace rpprototype = rcppsw::patterns::prototype;
 namespace rpdecorator = rcppsw::patterns::decorator;
 namespace rppimpl = rcppsw::patterns::pimpl;
+
+namespace rversion = rcppsw::version;

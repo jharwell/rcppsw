@@ -98,17 +98,28 @@ class csv_sink : public rmetrics::file_sink,
    * the count is 0, then "0" + separator (if the csv entry is not the last one
    * in a line) is returned.
    *
-   * \param sum The count of SOMETHING.
+   * \param sum The sum of SOMETHING.
+   *
    * \param count The divisor for the SOMETHING.
+   *
    * \param last Is this the last column in the .csv row?
    */
   template <class T, class U>
   std::string
   csv_entry_domavg(const T& sum, const U& count, bool last = false) const {
-    return (count > 0) ? rcppsw::to_string(static_cast<double>(sum) /
-                                           static_cast<double>(count)) +
-                             ((last) ? "" : separator())
-                       : "0" + ((last) ? "" : separator());
+    std::string tmp;
+    if (count > 0) {
+      /*
+       * If the thing we have summed is int, size_t, etc., casting the count to
+       * double makes sure we get good averages. This form also supports
+       * non-primitive types that are summable and define an appropriate
+       * operator/() and can be converted to a string.
+       */
+      tmp = rcppsw::to_string(sum / static_cast<double>(count));
+    } else {
+      tmp = "0";
+    }
+    return tmp + ((last) ? "" : separator());
   }
 
   /**
@@ -116,12 +127,19 @@ class csv_sink : public rmetrics::file_sink,
    * interval (using the value of \ref interval()) + \ref separator() (if the
    * csv entry is not the last one in a line).
    *
-   * \param sum The count of SOMETHING.
+   * \param sum The sum of SOMETHING.
+   *
    * \param last Is this the last column in the .csv row?
    */
   template <class T>
   std::string csv_entry_intavg(const T& sum, bool last = false) const {
-    return rcppsw::to_string(static_cast<double>(sum) / output_interval().v()) +
+    /*
+     * If the thing we have summed is int, size_t, etc., casting the count to
+     * double makes sure we get good averages. This form also supports
+     * non-primitive types that are summable and define an appropriate
+     * operator/() and can be converted to a string.
+     */
+    return  rcppsw::to_string(sum / static_cast<double>(output_interval().v())) +
         ((last) ? "" : separator());
   }
 
@@ -131,13 +149,14 @@ class csv_sink : public rmetrics::file_sink,
    * separator() (if the csv entry is not the last one in a line).
    *
    * \param sum The count of SOMETHING.
+   *
    * \param last Is this the last column in the .csv row?
    */
   template <class T>
   std::string csv_entry_tsavg(const T& sum,
                               const rtypes::timestep& t,
                               bool last = false) const {
-    return rcppsw::to_string(static_cast<double>(sum) / t.v()) +
+    return rcppsw::to_string(sum / static_cast<double>(t.v())) +
         ((last) ? "" : separator());
   }
 

@@ -1,24 +1,28 @@
 /**
- * \file version.cpp
+ * \file meta_info.hpp
  *
  * \copyright 2022 John Harwell, All rights reserved.
  *
  * SPDX-License-Identifier: MIT
  */
 
+#pragma once
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/version.hpp"
+#include <string>
+
+#include "rcsw/version/meta_info.h"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw);
+namespace rcppsw::version {
 
 /*******************************************************************************
- * Global Variables
+ * Type Definitions
  ******************************************************************************/
-char kVERSION[] = "v@RCPPSW_VERSION@";
+using meta_info = ::meta_info;
 
-NS_END(rcppsw);
+} /* namespace rcppsw::version */

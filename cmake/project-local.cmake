@@ -9,7 +9,7 @@ set(rcppsw_CHECK_LANGUAGE "CXX")
 # Each conference tag=minor increment. Each minor feature added=patch increment.
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 3)
-set(PROJECT_VERSION_PATCH 0)
+set(PROJECT_VERSION_PATCH 1)
 
 if (NOT DEFINED RCPPSW_AL_MT_SAFE_TYPES)
   set(RCPPSW_AL_MT_SAFE_TYPES YES)
@@ -18,6 +18,13 @@ endif()
 if (NOT DEFINED RCPPSW_ER_OLD_LOG4CXX)
   set(RCPPSW_ER_OLD_LOG4CXX OFF)
 endif()
+
+libra_configure_version(
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/version/version.cpp.in
+  ${CMAKE_CURRENT_BINARY_DIR}/src/version/version.cpp
+ )
+
+list(APPEND rcppsw_components_SRC "${CMAKE_CURRENT_BINARY_DIR}/src/version/version.cpp")
 
 ################################################################################
 # Components                                                                   #
@@ -157,18 +164,6 @@ foreach(component ${rcppsw_FIND_COMPONENTS})
   endif()
 endforeach()
 
-# Configure version
-execute_process(COMMAND git rev-list --count HEAD
-  OUTPUT_VARIABLE RCPPSW_VERSION
-  OUTPUT_STRIP_TRAILING_WHITESPACE)
-
-configure_file(
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/version.cpp.in
-  ${CMAKE_CURRENT_BINARY_DIR}/src/version.cpp
-  @ONLY
-  )
-list(APPEND rcppsw_components_SRC "${CMAKE_CURRENT_BINARY_DIR}/src/version.cpp")
-
 # Define RCPPSW library
 set(rcppsw_LIBRARY rcppsw)
 add_library(
@@ -176,7 +171,6 @@ add_library(
   STATIC
   ${rcppsw_components_SRC}
   )
-
 
 set(rcppsw_LIBRARY_NAME ${rcppsw_LIBRARY})
 set_target_properties(${rcppsw_LIBRARY} PROPERTIES OUTPUT_NAME ${rcppsw_LIBRARY_NAME})

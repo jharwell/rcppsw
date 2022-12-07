@@ -1,0 +1,56 @@
+/**
+ * \file version.cpp
+ *
+ * \copyright 2022 John Harwell, All rights reserved.
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+#include "rcppsw/version/version.hpp"
+#include "rcppsw/version/licenses.hpp"
+
+/*******************************************************************************
+ * Namespaces/Decls
+ ******************************************************************************/
+namespace rcppsw::version {
+
+/*******************************************************************************
+ * Free Functions
+ ******************************************************************************/
+std::string meta_info_to_str(meta_info* info) {
+  return
+      std::string() +
+      info->version.version + "\n" +
+      info->version.license.copyright  +
+      info->version.license.abbrev +
+      "Build: " +
+      "GIT_REV=" + info->build.git_rev + " " +
+      "GIT_DIFF=" + info->build.git_diff + " " +
+      "GIT_TAG=" + info->build.git_tag + " " +
+      "GIT_BRANCH=" + info->build.git_branch + "\n\n";
+}
+
+/*******************************************************************************
+ * Global Variables
+ ******************************************************************************/
+meta_info kVersion = {
+  .version = {
+    .version = "v@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@.@PROJECT_VERSION_PATCH@",
+    .license = {
+      .abbrev = RCPPSW_LICENSE_SHORT(MIT, RCPPSW),
+      .full = RCPPSW_LICENSE_FULL(MIT, RCPPSW),
+      .copyright = RCPPSW_COPYRIGHT(2022, John Harwell)
+    },
+  },
+  .build = {
+    .git_rev = "@GIT_REV@",
+    .git_diff = "@GIT_DIFF@",
+    .git_tag = "@GIT_TAG@",
+    .git_branch = "@GIT_BRANCH@"
+  }
+};
+
+} /* namespace rcppsw::version */

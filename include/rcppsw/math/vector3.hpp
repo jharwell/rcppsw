@@ -41,7 +41,7 @@ NS_START(rcppsw, math);
  * care if you are trying to do scaling, trigonometric things with integers...
  */
 template <typename T>
-class vector3 final : public er::stringizable {
+class vector3 final : public rer::stringizable {
  public:
   using value_type = T;
 

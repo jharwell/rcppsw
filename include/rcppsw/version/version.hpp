@@ -1,31 +1,37 @@
 /**
- * \file init.cpp
+ * \file version.hpp
  *
  * \copyright 2022 John Harwell, All rights reserved.
  *
  * SPDX-License-Identifier: MIT
  */
 
+#pragma once
+
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/init/init.hpp"
+#include <string>
 
-#include <iostream>
-
-#include "rcppsw/version/version.hpp"
+#include "rcppsw/rcppsw.hpp"
+#include "rcppsw/version/meta_info.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-namespace rcppsw::init {
+namespace rcppsw::version {
 
 /*******************************************************************************
  * Free Functions
  ******************************************************************************/
-void init(void) {
-  std::cout << "Loaded Reusable C++ Software (RCPPSW): ";
-  std::cout << rversion::meta_info_to_str(&rversion::kVersion);
-}
+std::string meta_info_to_str(meta_info* info);
 
-} /* namespace rcppsw::init */
+/*******************************************************************************
+ * Global Variables
+ ******************************************************************************/
+/**
+ * \brief The version of the library, to aid with debugging sanity checks.
+ */
+extern meta_info kVersion;
+
+} /* namespace rcppsw::version */

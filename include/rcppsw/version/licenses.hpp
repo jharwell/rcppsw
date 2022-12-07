@@ -23,10 +23,16 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcsw/common/licensing.h"
+#include "rcsw/version/licenses.h"
 
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#define RCPPSW_LICENSE(license, project, year, author)  \
-  RCSW_LICENSE(license, project, year, author)
+#define RCPPSW_LICENSE_FULL(license, project)  \
+  RCSW_LICENSE_FULL(license, project)
+
+#define RCPPSW_LICENSE_SHORT(license, project)  \
+  RCSW_LICENSE_SHORT(license, project)
+
+#define RCPPSW_COPYRIGHT(year, author)        \
+  RCSW_COPYRIGHT(year, author)
