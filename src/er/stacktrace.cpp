@@ -14,7 +14,8 @@
 #include <csignal>
 #include <fstream>
 #include <iostream>
-#include <cxxabi.h>
+
+#include "rcppsw/abi/abi.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -45,11 +46,7 @@ void terminate_handler(void) {
   auto const ep = std::current_exception();
   if (ep) {
     try {
-      int status;
-      auto const etype = abi::__cxa_demangle(abi::__cxa_current_exception_type()->name(),
-                                             nullptr,
-                                             nullptr,
-                                             &status);
+      auto const etype = rabi::demangle(rabi::current_exception_type()->name());
       std::cerr << "Terminating: uncaught exception of type `" << etype << "`";
       std::rethrow_exception(ep);
     } catch(const std::exception& e) {

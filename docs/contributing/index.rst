@@ -1,17 +1,18 @@
+============
 Contributing
 ============
 
-`C++ development guide <https://github.com/swarm-robotics/libra/tree/devel/cxx-dev-guide.md>`_
+- :ref:`ln-libra-cxx-dev-guide`
 
-`Git commit guide <https://github.com/swarm-robotics/libra/tree/devel/git-commit-guide.md>`_.
+- :ref:`ln-libra-git-commit-guide`
 
-`Git issue guide <https://github.com/swarm-robotics/libra/tree/devel/git-issue-guide.md>`_
+- :ref:`ln-libra-git-issue-guide`
 
 Workflow
---------
+========
 
-For the general contribution workflow, see the docs over in `libra
-<https://github.com/swarm-robotics/libra/tree/devel/workflow.md>`_
+For the general contribution workflow, see the docs over in
+:ref:`ln-libra-dev-workflow`.
 
 For the static analysis step:
 

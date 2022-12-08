@@ -19,6 +19,7 @@
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/metrics/base_manager.hpp"
 #include "rcppsw/metrics/creatable_collector_set.hpp"
+#include "rcppsw/common/abi.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
@@ -84,25 +85,32 @@ class register_with_sink : public rer::client<
     using TSinkType = typename TSinkTypeWrapped::type;
     using TCollectorType = typename TSinkType::collector_type;
 
-    std::type_index id(typeid(typename TSinkType::collector_type));
+    std::type_index collector_id(typeid(TCollectorType));
+    std::type_index sink_id(typeid(TSinkType));
 
-    auto key = creatable_collector_spec{
-      id,
-      "",
-      "",
-      rmetrics::output_mode::ekNONE
-    };
+    auto key = creatable_collector_spec{ collector_id };
     auto range = creatable_set().equal_range(key);
 
-    ER_ASSERT(creatable_set().end() != creatable_set().find(key),
-              "Unknown collector: type_index='%s'",
-              id.name());
+    ER_ASSERT(std::distance(range.first, range.second) > 0,
+              "Unknown collector %s: not in creatable set?",
+              rabi::demangle(collector_id.name()));
+
+    ER_DEBUG("%zu %s instances configured",
+             std::distance(range.first, range.second),
+             rabi::demangle(collector_id.name()));
 
     /*
      * Multiple collectors of the same type can be registered as different
      * scoped/runtime names, so we need to iterate.
      */
     for (auto it = range.first; it != range.second; ++it) {
+      /*
+       * Avoid duplicate registration if the same collector is used with
+       * multiple sinks.
+       */
+      if (it->sink_id != sink_id) {
+        continue;
+      }
       auto spec = this->template calc_registration_spec<TSinkType>(
           m_manager,
           config,

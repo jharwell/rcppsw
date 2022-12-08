@@ -13,6 +13,7 @@
  * Includes
  ******************************************************************************/
 #include <string>
+#include <cxxabi.h>
 
 #include "rcsw/common/common.h"
 
@@ -22,12 +23,12 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw);
+namespace rcppsw {
 
 /*******************************************************************************
  * String Conversion Templates
  ******************************************************************************/
-NS_START(detail);
+namespace detail {
 
 /**
  * \brief Predicate for detecting if a type \p T defines `to_str()`.
@@ -37,7 +38,7 @@ NS_START(detail);
 template <class T>
 using to_str_type = decltype(std::declval<T>().to_str());
 
-NS_END(detail);
+} /* namespace detail */
 
 /**
  * @brief For \p T where std::to_string(\p T) works let the stdandard library to
@@ -71,5 +72,4 @@ as_underlying(const TEnum& e) noexcept {
   return static_cast<typename std::underlying_type<TEnum>::type>(e);
 }
 
-NS_END(rcppsw);
-
+} /* namespace rcppsw */

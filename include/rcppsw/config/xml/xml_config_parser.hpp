@@ -61,6 +61,13 @@ NS_START(xml);
 class xml_config_parser : public rer::client<xml_config_parser>,
                           public rconfig::base_parser {
  public:
+  /**
+   * \brief A sentinel value for XML fields which are strings, for indicating
+   * that the field is set to NOTHING (as opposed to being omitted, which could
+   * result in a default which is different than the desired NOTHING).
+   */
+  static inline const std::string kNone = "none";
+
   xml_config_parser(void);
   ~xml_config_parser(void) override = default;
 

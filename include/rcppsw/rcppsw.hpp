@@ -181,6 +181,10 @@ namespace spatial {}
  */
 namespace version {}
 
+/**
+ * \brief ABI manipulation bits.
+ */
+namespace abi {}
 } /* namespace rcppsw */
 
 namespace rmetrics = rcppsw::metrics;
@@ -217,3 +221,5 @@ namespace rpdecorator = rcppsw::patterns::decorator;
 namespace rppimpl = rcppsw::patterns::pimpl;
 
 namespace rversion = rcppsw::version;
+
+namespace rabi = rcppsw::abi;
