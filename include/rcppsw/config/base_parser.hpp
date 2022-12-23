@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, config);
+namespace rcppsw::config {
 struct base_config;
 
 /*******************************************************************************
@@ -68,4 +68,4 @@ class base_parser {
   virtual const base_config* config_get_impl(void) const = 0;
 };
 
-NS_END(config, rcppsw);
+} /* namespace rcppsw::config */

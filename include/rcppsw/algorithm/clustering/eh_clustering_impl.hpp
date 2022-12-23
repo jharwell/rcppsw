@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, algorithm, clustering);
+namespace rcppsw::algorithm::clustering {
 
 /*******************************************************************************
  * Class Definitions
@@ -44,5 +44,5 @@ class eh_clustering_impl : public base_clustering_impl<T, policy::EH> {
   /* clang-format on */
 };
 
-NS_END(clustering, algorithm, rcppsw);
+} /* namespace rcppsw::algorithm::clustering */
 

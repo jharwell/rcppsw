@@ -23,7 +23,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 class degrees;
 
@@ -35,10 +35,6 @@ class degrees;
  * \ingroup math
  *
  * \brief Used to store an angle value in radians (duh).
- *
- * When comparing instances for approxmate equality, they are compared to 6
- * decimal places, by default; this can be overriden on a per-comparison basis
- * if desired, or set class-wide via \ref kAPPROX_EQUALITY_TOL.
  */
 class radians final : public er::stringizable {
  public:
@@ -189,5 +185,5 @@ std::ostream& operator<<(std::ostream& stream, const radians& r);
 
 rmath::radians operator*(double lhs, const rmath::radians& rhs);
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */
 

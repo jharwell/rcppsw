@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, algorithm);
+namespace rcppsw::algorithm {
 
 /*******************************************************************************
  * Class Definitions
@@ -191,5 +191,5 @@ class convex_hull2D : public rer::client<convex_hull2D<TCoord>> {
   /* clang-format on */
 };
 
-NS_END(algorithm, rcppsw);
+} /* namespace rcppsw::algorithm */
 

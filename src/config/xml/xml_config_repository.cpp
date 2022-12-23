@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, config, xml);
+namespace rcppsw::config::xml {
 
 /*******************************************************************************
  * Member Functions
@@ -40,4 +40,4 @@ void xml_config_repository::parse_all(const ticpp::Element& node) {
                 });
 } /* parse_all() */
 
-NS_END(xml, config, rcppsw);
+} /* namespace rcppsw::config::xml */

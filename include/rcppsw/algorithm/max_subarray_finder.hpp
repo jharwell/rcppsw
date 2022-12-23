@@ -22,7 +22,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, algorithm);
+namespace rcppsw::algorithm {
 
 /*******************************************************************************
  * Class Definitions
@@ -65,5 +65,5 @@ class max_subarray_finder {
   }
 };
 
-NS_END(algorithm, rcppsw);
+} /* namespace rcppsw::algorithm */
 

@@ -14,7 +14,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Non-Member Functions
@@ -52,4 +52,4 @@ degrees normalized_diff(const degrees& angle1, const degrees& angle2) {
   return res;
 } /* normalized_diff() */
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */

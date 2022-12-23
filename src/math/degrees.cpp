@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Class Constants
@@ -52,4 +52,4 @@ std::ostream& operator<<(std::ostream& stream, const degrees& d) {
   return stream;
 } /* operator<<() */
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */

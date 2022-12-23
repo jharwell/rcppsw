@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, factory, detail);
+namespace rcppsw::patterns::factory::detail {
 
 /*******************************************************************************
  * Class Definitions
@@ -161,5 +161,5 @@ class base_factory {
   /* clang-format on */
 };
 
-NS_END(detail, factory, patterns, rcppsw);
+} /* namespace rcppsw::patterns::detail, factory */
 

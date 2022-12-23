@@ -19,7 +19,9 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, factory, detail);
+namespace rcppsw::patterns::factory {
+
+namespace detail {
 
 /*******************************************************************************
  * Class Definitions
@@ -78,7 +80,7 @@ class multifactory {
   }
 };
 
-NS_END(detail);
+} /* namespace detail */
 
 
 /**
@@ -117,5 +119,5 @@ class sharing_multifactory : public detail::multifactory<detail::factory_sharing
   ~sharing_multifactory(void) override = default;
 };
 
-NS_END(factory, patterns, rcppsw);
+} /* namespace rcppsw::patterns::factory */
 

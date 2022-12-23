@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, config);
+namespace rcppsw::config {
 
 /*******************************************************************************
  * Class Definitions
@@ -76,5 +76,5 @@ class streamable_parser {
   /* clang-format on */
 };
 
-NS_END(config, rcppsw);
+} /* namespace rcppsw::config */
 

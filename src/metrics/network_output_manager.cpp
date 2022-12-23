@@ -14,7 +14,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Constructors/Destructors
@@ -62,4 +62,4 @@ void network_output_manager::finalize(void) {
   m_stream.finalize();
 }
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

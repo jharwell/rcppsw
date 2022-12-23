@@ -22,7 +22,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, graph, detail);
+namespace rcppsw::ds::graph::detail {
 
 
 /*******************************************************************************
@@ -41,7 +41,7 @@ struct is_decorator<
   > : std::true_type {};
 
 
-NS_END(detail);
+} /* namespace detail */
 
 namespace fs = std::filesystem;
 
@@ -94,5 +94,5 @@ static inline void read_graphml(const fs::path& path,
   boost::read_graphml(file, g, dp);
 }
 
-NS_END(graph, ds, rcppsw);
+} /* namespace rcppsw::ds::graph */
 

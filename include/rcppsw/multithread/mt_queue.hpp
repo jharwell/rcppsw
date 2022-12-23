@@ -21,7 +21,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, multithread);
+namespace rcppsw::multithread {
 
 /*******************************************************************************
  * Class Definitions
@@ -40,8 +40,8 @@ class mt_queue : public rpdecorator::decorator<std::deque<T>> {
 
   mt_queue(void) = default;
 
-  RCPPSW_DECORATE_DECLDEF_TEMPLATE(T, begin, const);
-  RCPPSW_DECORATE_DECLDEF_TEMPLATE(T, end, const);
+  RCPPSW_DECORATE_DECLDEF(begin, const);
+  RCPPSW_DECORATE_DECLDEF(end, const);
 
   /**
    * \brief Add data to the queue and notify others
@@ -82,5 +82,5 @@ class mt_queue : public rpdecorator::decorator<std::deque<T>> {
   /* clang-format on */
 };
 
-NS_END(multithread, rcppsw);
+} /* namespace rcppsw::multithread */
 

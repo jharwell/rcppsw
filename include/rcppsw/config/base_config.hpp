@@ -11,12 +11,15 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+
 #include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, config);
+namespace rcppsw::config {
+
 
 /*******************************************************************************
  * Structure Definitions
@@ -35,5 +38,13 @@ struct base_config {
   base_config& operator=(const base_config&) = default;
 };
 
-NS_END(config, config);
+namespace constants {
+/**
+ * \brief A sentinel value for XML fields which are strings, for indicating
+ * that the field is set to NOTHING (as opposed to being omitted, which could
+ * result in a default which is different than the desired NOTHING).
+ */
+static inline const std::string kNoValue = "none";
 
+} /* namespace constants */
+} /* namespace rcppsw::config */

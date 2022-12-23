@@ -17,7 +17,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics, config);
+namespace rcppsw::metrics::config {
 
 /*******************************************************************************
  * Structure Definitions
@@ -32,5 +32,5 @@ struct network_sink_config final : public rconfig::base_config {
   rmetrics::config::output_mode_config stream{};
 };
 
-NS_END(config, metrics, rcppsw);
+} /* namespace rcppsw::metrics::config */
 

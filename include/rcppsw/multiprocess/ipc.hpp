@@ -36,7 +36,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, multiprocess);
+namespace rcppsw::multiprocess {
 namespace bip = boost::interprocess;
 
 /*******************************************************************************
@@ -93,5 +93,5 @@ using ipc_map = bip::
 using ipc_string =
     bip::basic_string<char, std::char_traits<char>, ipc_allocator<char>>;
 
-NS_END(multiprocess, rcppsw);
+} /* namespace rcppsw::multiprocess */
 

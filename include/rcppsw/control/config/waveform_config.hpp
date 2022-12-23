@@ -17,7 +17,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, control, config);
+namespace rcppsw::control::config {
 
 /*******************************************************************************
  * Structure Definitions
@@ -51,5 +51,5 @@ struct waveform_config final : public rcppsw::config::base_config {
   double offset{0.0};
 };
 
-NS_END(config, control, rcppsw);
+} /* namespace rcppsw::control::config */
 

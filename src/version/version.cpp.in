@@ -30,7 +30,8 @@ std::string meta_info_to_str(meta_info* info) {
       "GIT_REV=" + info->build.git_rev + " " +
       "GIT_DIFF=" + info->build.git_diff + " " +
       "GIT_TAG=" + info->build.git_tag + " " +
-      "GIT_BRANCH=" + info->build.git_branch + "\n\n";
+      "GIT_BRANCH=" + info->build.git_branch + "\n" +
+      "CXXFLAGS=" + info->build.compiler_flags + "\n\n";
 }
 
 /*******************************************************************************
@@ -46,10 +47,11 @@ meta_info kVersion = {
     },
   },
   .build = {
-    .git_rev = "@GIT_REV@",
-    .git_diff = "@GIT_DIFF@",
-    .git_tag = "@GIT_TAG@",
-    .git_branch = "@GIT_BRANCH@"
+    .git_rev = "@LIBRA_GIT_REV@",
+    .git_diff = "@LIBRA_GIT_DIFF@",
+    .git_tag = "@LIBRA_GIT_TAG@",
+    .git_branch = "@LIBRA_GIT_BRANCH@",
+    .compiler_flags = "@LIBRA_CXX_FLAGS_BUILD@"
   }
 };
 

@@ -9,8 +9,8 @@ set(rcppsw_CHECK_LANGUAGE "CXX")
 # Each conference tag=minor increment. Each minor feature added=patch increment.
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 3)
-set(PROJECT_VERSION_PATCH 4)
-set(RCPPSW_VERSION "v${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
+set(PROJECT_VERSION_PATCH 11)
+set(rcppsw_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
 
 if (NOT DEFINED RCPPSW_AL_MT_SAFE_TYPES)
   set(RCPPSW_AL_MT_SAFE_TYPES YES)
@@ -23,9 +23,8 @@ endif()
 libra_configure_version(
   ${CMAKE_CURRENT_SOURCE_DIR}/src/version/version.cpp.in
   ${CMAKE_CURRENT_BINARY_DIR}/src/version/version.cpp
+  rcppsw_components_SRC
  )
-
-list(APPEND rcppsw_components_SRC "${CMAKE_CURRENT_BINARY_DIR}/src/version/version.cpp")
 
 ################################################################################
 # Components
@@ -181,7 +180,20 @@ add_library(
   )
 
 set(rcppsw_LIBRARY_NAME ${rcppsw_LIBRARY})
-set_target_properties(${rcppsw_LIBRARY} PROPERTIES OUTPUT_NAME ${rcppsw_LIBRARY_NAME})
+set_target_properties(${rcppsw_LIBRARY}
+  PROPERTIES
+  OUTPUT_NAME ${rcppsw_LIBRARY_NAME}
+  )
+
+# Setting this results in TWO files being installed: the actual
+# library with the version embedded, and a symlink to the actual
+# library with the same name sans the embedded version (if rcppsw is
+# built as a shared library).
+set_target_properties(${rcppsw_LIBRARY}
+  PROPERTIES
+  VERSION ${RCPPSW_VERSION}
+  SOVERSION ${RCPPSW_VERSION}
+  )
 
 ########################################
 # Include directories
@@ -244,6 +256,7 @@ libra_configure_exports_as(${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
 libra_register_target_for_install(${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
 libra_register_headers_for_install(include/${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
 
+set(CPACK_SET_DESTDIR YES)
 libra_configure_cpack(
   "DEB;TGZ"
   "RCPPSW is a collection of reusable C++ software (design patterns, boost gaps,
@@ -259,15 +272,19 @@ etc.), independent of any C++ project."
 ################################################################################
 libra_config_summary()
 
-message(STATUS "")
-message(STATUS "")
-message(STATUS "RCPPSW Configuration Summary:")
-message(STATUS "")
+message("")
+message("--------------------------------------------------------------------------------")
+message("                         RCPPSW Configuration Summary")
+message("--------------------------------------------------------------------------------")
+message("")
 
-message(STATUS "Version                               : RCPPSW_VERSION=${RCPPSW_VERSION}")
+message(STATUS "Version                               : rcppsw_VERSION=${rcppsw_VERSION}")
 message(STATUS "Enable std::atomic types..............: RCPPSW_AL_MT_SAFE_TYPES=${RCPPSW_AL_MT_SAFE_TYPES}")
 message(STATUS "Use old log4cxx.......................: RCPPSW_ER_OLD_LOG4CXX=${RCPPSW_ER_OLD_LOG4CXX}" )
 
 if(CMAKE_CROSSCOMPILING)
   message(STATUS "Boost root hint.......................: BOOST_ROOT=${BOOST_ROOT}")
 endif()
+
+message("")
+message("--------------------------------------------------------------------------------")

@@ -19,10 +19,10 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, config);
+namespace rcppsw::config {
 struct base_config;
-
-NS_START(xml);
+}
+namespace rcppsw::config::xml {
 
 /*******************************************************************************
  * Macros
@@ -61,13 +61,6 @@ NS_START(xml);
 class xml_config_parser : public rer::client<xml_config_parser>,
                           public rconfig::base_parser {
  public:
-  /**
-   * \brief A sentinel value for XML fields which are strings, for indicating
-   * that the field is set to NOTHING (as opposed to being omitted, which could
-   * result in a default which is different than the desired NOTHING).
-   */
-  static inline const std::string kNone = "none";
-
   xml_config_parser(void);
   ~xml_config_parser(void) override = default;
 
@@ -157,4 +150,4 @@ class xml_config_parser : public rer::client<xml_config_parser>,
   }
 };
 
-NS_END(xml, config, rcppsw);
+} /* namespace rcppsw::config::xml */

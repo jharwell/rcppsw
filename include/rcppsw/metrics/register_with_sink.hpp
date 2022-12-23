@@ -19,12 +19,12 @@
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/metrics/base_manager.hpp"
 #include "rcppsw/metrics/creatable_collector_set.hpp"
-#include "rcppsw/common/abi.hpp"
+#include "rcppsw/abi/abi.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Class Definitions
@@ -182,4 +182,4 @@ class register_with_sink : public rer::client<
   /* clang-format on */
 };
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

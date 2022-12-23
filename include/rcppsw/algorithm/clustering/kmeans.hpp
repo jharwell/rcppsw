@@ -27,7 +27,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, algorithm, clustering);
+namespace rcppsw::algorithm::clustering {
 
 /*******************************************************************************
  * Class Definitions
@@ -152,5 +152,5 @@ class kmeans : public er::client<kmeans<T>> {
   /* clang-format on */
 };
 
-NS_END(clustering, algorithm, rcppsw);
+} /* namespace rcppsw::algorithm::clustering */
 

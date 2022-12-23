@@ -25,7 +25,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Class Definitions
@@ -488,5 +488,5 @@ static inline size_t l1norm(const vector3<U>& v1, const vector3<V>& v2) {
       std::abs(static_cast<int>(v1.z() - v2.z()));
 }
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */
 

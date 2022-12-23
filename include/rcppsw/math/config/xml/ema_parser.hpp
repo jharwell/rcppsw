@@ -21,7 +21,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math, config, xml);
+namespace rcppsw::math::config::xml {
 
 /*******************************************************************************
  * Class Definitions
@@ -61,5 +61,5 @@ class ema_parser : public rer::client<ema_parser>,
   /* clang-format on */
 };
 
-NS_END(xml, config, math, rcppsw);
+} /* namespace rcppsw::math::xml, config */
 

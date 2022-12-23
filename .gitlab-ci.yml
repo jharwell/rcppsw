@@ -18,7 +18,6 @@ before_script:
     --force
 
   - cd ..
-  - ls -alh .
 
   # Install RCSW so RCPPSW can find it
   - git clone https://oauth2:${JHARWELL_CI_TOKEN}@git.sift.net/jharwell/rcsw.git
@@ -30,13 +29,13 @@ before_script:
   - git submodule update --init
   - mkdir build && cd build
   - cmake
-    -DCMAKE_INSTALL_PREFIX=$HOME/.local
+    -DCMAKE_INSTALL_PREFIX=/usr/local
     -DCMAKE_BUILD_TYPE=DEV
     ..
+  - JOBS=$(grep -c ^processor /proc/cpuinfo)
+  - make -j${JOBS} install
 
-  - make install
   - cd ../..
-  - ls -alh .
 
 # If all tests pass, deploy.
 stages:
@@ -50,10 +49,6 @@ build-and-test:
   tags:
     - docker
   stage: build-and-test
-  variables:
-    GIT_SUBMODULE_STRATEGY: recursive
-    GIT_SUBMODULE_DEPTH: 1
-
   coverage: /Total:\|(\d+\.?\d+\%)/
 
   script:
@@ -66,7 +61,7 @@ build-and-test:
     - mkdir -p build && cd build
 
     - cmake
-      -DCMAKE_INSTALL_PREFIX=$HOME/.local
+      -DCMAKE_INSTALL_PREFIX=/usr/local
       -DCMAKE_BUILD_TYPE=DEV
       -DRCPPSW_AL_MT_SAFE_TYPES=YES
       -DLIBRA_TESTS=yes
@@ -101,13 +96,14 @@ package-and-deploy:
     - mkdir -p build && cd build
 
     - cmake
-      -DCMAKE_INSTALL_PREFIX=$HOME/.local
+      -DCMAKE_INSTALL_PREFIX=/usr/local
       -DCMAKE_BUILD_TYPE=DEV
-      -DLIBRA_TESTS=yes
       -DLIBRA_ER=ALL
       ..
-
+    - JOBS=$(nproc)
+    - make -j${JOBS}
     - make package
+
     - VERSION_MAJOR=$(sed -nE 's/.*PROJECT_VERSION_MAJOR ([0-9]+).*/\1/p' ../cmake/project-local.cmake)
     - VERSION_MINOR=$(sed -nE 's/.*PROJECT_VERSION_MINOR ([0-9]+).*/\1/p' ../cmake/project-local.cmake)
     - VERSION_PATCH=$(sed -nE 's/.*PROJECT_VERSION_PATCH ([0-9]+).*/\1/p' ../cmake/project-local.cmake)
@@ -120,21 +116,22 @@ package-and-deploy:
     - |
         curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ${RCPPSW_TGZ_PACKAGE} ${PACKAGE_REGISTRY_URL}/${RCPPSW_TGZ_PACKAGE}
 
-    - BETA_TAG_VERSION=v$PACKAGE_VERSION.beta
-    - BETA_TAG_MESSAGE="Development release $BETA_TAG_VERSION"
+    - BETA_TAG_VERSION=${PACKAGE_VERSION}.beta
+    - BETA_TAG_MESSAGE="Development release ${BETA_TAG_VERSION}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git remote set-url origin https://oauth2:${JHARWELL_CI_TOKEN}@git.sift.net/${CI_PROJECT_PATH}
-    - git tag $BETA_TAG_VERSION -m "$BETA_TAG_MESSAGE"
-    - git push origin $BETA_TAG_VERSION
+    - git tag ${BETA_TAG_VERSION} -m "$BETA_TAG_MESSAGE"
+    - git push -o ci.skip origin ${BETA_TAG_VERSION} # don't trigger another run
 
     - curl --location --output /usr/local/bin/release-cli "https://gitlab.com/api/v4/projects/gitlab-org%2Frelease-cli/packages/generic/release-cli/latest/release-cli-linux-amd64"
     - chmod +x /usr/local/bin/release-cli
     - echo "release-cli create --name "${BETA_TAG_MESSAGE}" --tag-name $CI_COMMIT_TAG --assets-link "{\"name\":\"${RCPPSW_TGZ_PACKAGE}\",\"url\":\"${PACKAGE_REGISTRY_URL}/${RCPPSW_TGZ_PACKAGE}\"}" --assets-link"{\"name\":\"${RCPPSW_DEB_PACKAGE}\",\"url\":\"${PACKAGE_REGISTRY_URL}/${RCPPSW_DEB_PACKAGE}\"}""
     - release-cli
       create
-      --name "${BETA_TAG_MESSAGE}"
+      --name ${BETA_TAG_VERSION}
       --tag-name ${BETA_TAG_VERSION}
+      --description "${BETA_TAG_MESSAGE}"
       --assets-link "{\"name\":\"${RCPPSW_TGZ_PACKAGE}\",\"url\":\"${PACKAGE_REGISTRY_URL}/${RCPPSW_TGZ_PACKAGE}\"}"
       --assets-link "{\"name\":\"${RCPPSW_DEB_PACKAGE}\",\"url\":\"${PACKAGE_REGISTRY_URL}/${RCPPSW_DEB_PACKAGE}\"}"
 
@@ -160,7 +157,6 @@ pages:
 
     - cmake
       -DCMAKE_INSTALL_PREFIX=$HOME/.local
-      -DCMAKE_BUILD_TYPE=DEV
       ..
     - make apidoc
 

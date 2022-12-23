@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds);
+namespace rcppsw::ds {
 
 /*******************************************************************************
  * Class Definitions
@@ -155,5 +155,5 @@ class grid2D_overlay final : public base_grid2D<T>,
   /* clang-format on */
 };
 
-NS_END(ds, rcppsw);
+} /* namespace rcppsw::ds */
 

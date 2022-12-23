@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, config, server);
+namespace rcppsw::config::server {
 
 /*******************************************************************************
  * Class Definitions
@@ -40,4 +40,4 @@ class server_config_parser : public rconfig::base_parser {
   virtual void parse(void) = 0;
 };
 
-NS_END(server, config, rcppsw);
+} /* namespace rcppsw::config::server */

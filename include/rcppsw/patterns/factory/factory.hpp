@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, factory);
+namespace rcppsw::patterns::factory {
 
 /*******************************************************************************
  * Class Definitions
@@ -56,5 +56,5 @@ class sharing_factory : public detail::base_factory<detail::factory_sharing_type
   ~sharing_factory(void) override = default;
 };
 
-NS_END(factory, patterns, rcppsw);
+} /* namespace rcppsw::patterns::factory */
 

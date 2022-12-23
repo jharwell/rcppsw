@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, config);
+namespace rcppsw::config {
 
 /*******************************************************************************
  * Member Functions
@@ -37,4 +37,4 @@ std::string streamable_parser::footer_build(const std::string& xml_root) const {
          "\n";
 } /* footer_build() */
 
-NS_END(config, rcppsw);
+} /* namespace rcppsw::config */

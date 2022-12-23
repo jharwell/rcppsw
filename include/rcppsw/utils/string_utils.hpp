@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, utils);
+namespace rcppsw::utils {
 
 /*******************************************************************************
  * Non-Member Functions
@@ -61,5 +61,5 @@ bool parse_values(std::istream& is, size_t n_fields, T* buf, char delim = '\n') 
   return false;
 }
 
-NS_END(utils, rcppsw);
+} /* namespace rcppsw::utils */
 

@@ -14,7 +14,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Constructors/Destructors
@@ -102,4 +102,4 @@ bool collector_group::flush(bool fail_ok,
   return ret;
 }
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

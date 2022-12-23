@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, utils);
+namespace rcppsw::utils {
 
 /*******************************************************************************
  * Free Functions
@@ -28,4 +28,4 @@ static inline bool ready_to_flush(const rtypes::timestep& output_interval,
   return (t > 0UL) && ((t % output_interval) == 0UL);
 }
 
-NS_END(utils, rcppsw);
+} /* namespace rcppsw::utils */

@@ -23,7 +23,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 namespace fs = std::filesystem;
 
 /*******************************************************************************
@@ -171,4 +171,4 @@ class csv_sink : public rmetrics::file_sink,
   /* clang-format on */
 };
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

@@ -27,7 +27,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, graph);
+namespace rcppsw::ds::graph {
 
 /*******************************************************************************
  * Class Definitions
@@ -115,5 +115,5 @@ class hgrid3D : public rpdecorator::decorator<typename TSpecType::bgl_impl_type>
 };
 
 
-NS_END(graph, ds, rcppsw);
+} /* namespace rcppsw::ds::graph */
 

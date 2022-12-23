@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, utils);
+namespace rcppsw::utils {
 
 /*******************************************************************************
  * Constructors/Destructor
@@ -137,4 +137,4 @@ void base_cli::print(void) {
   std::cout << "\n";
 } /* print() */
 
-NS_END(utils, rcppsw);
+} /* namespace rcppsw::utils */

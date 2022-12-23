@@ -27,7 +27,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, graph, detail);
+namespace rcppsw::ds::graph::detail {
 
 /*******************************************************************************
  * Class Definitions
@@ -136,5 +136,5 @@ struct hgrid3D_view_filter : public rer::client<hgrid3D_view_filter<TSpecType>> 
   }
 };
 
-NS_END(detail, graph, ds, rcppsw);
+} /* namespace rcppsw::ds::detail, graph */
 

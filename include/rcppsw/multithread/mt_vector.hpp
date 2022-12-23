@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, multithread);
+namespace rcppsw::multithread {
 
 /*******************************************************************************
  * Class Definitions
@@ -57,5 +57,5 @@ class mt_vector {
   RCPPSW_WRAP_DECLDEF(end, m_v, const);
 };
 
-NS_END(multithread, rcppsw);
+} /* namespace rcppsw::multithread */
 

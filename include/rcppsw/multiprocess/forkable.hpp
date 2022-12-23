@@ -23,7 +23,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, multiprocess);
+namespace rcppsw::multiprocess {
 
 /*******************************************************************************
  * Class Definitions
@@ -93,5 +93,5 @@ class forkable {
   /* clang-format on */
 };
 
-NS_END(multiprocess, rcppsw);
+} /* namespace rcppsw::multiprocess */
 

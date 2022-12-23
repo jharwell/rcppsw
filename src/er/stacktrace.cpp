@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, er);
+namespace rcppsw::er {
 
 static void stacktrace_to_file(int pid);
 
@@ -75,4 +75,4 @@ void stacktrace_to_file(int pid) {
   boost::stacktrace::safe_dump_to(fname);
 } /* stacktrace_to_file() */
 
-NS_END(er, rcppsw);
+} /* namespace rcppsw::er */

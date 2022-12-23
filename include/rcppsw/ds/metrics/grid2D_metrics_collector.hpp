@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, ds, metrics);
+namespace rcppsw::ds::metrics {
 
 /*******************************************************************************
  * Class Definitions
@@ -64,5 +64,5 @@ class grid2D_metrics_collector : public rmetrics::base_collector {
   RCPPSW_WRAP_DECLDEF(ysize, m_data.grid);
 };
 
-NS_END(metrics, ds, rcppsw);
+} /* namespace rcppsw::ds::metrics */
 

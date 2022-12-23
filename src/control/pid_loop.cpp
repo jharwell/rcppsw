@@ -14,7 +14,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, control);
+namespace rcppsw::control {
 
 /*******************************************************************************
  * Member Functions
@@ -46,4 +46,4 @@ double pid_loop::calculate(double setpoint, double pv) {
   return output;
 } /* calculate() */
 
-NS_END(control, rcppsw);
+} /* namespace rcppsw::control */

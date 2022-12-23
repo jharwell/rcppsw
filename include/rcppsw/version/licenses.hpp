@@ -28,11 +28,11 @@
 /*******************************************************************************
  * Macros
  ******************************************************************************/
-#define RCPPSW_LICENSE_FULL(license, project)  \
-  RCSW_LICENSE_FULL(license, project)
+#define RCPPSW_LICENSE_FULL(license, project, ...)  \
+  RCSW_LICENSE_FULL(license, project, __VA_ARGS__)
 
-#define RCPPSW_LICENSE_SHORT(license, project)  \
-  RCSW_LICENSE_SHORT(license, project)
+#define RCPPSW_LICENSE_SHORT(license, project, ...) \
+  RCSW_LICENSE_SHORT(license, project, __VA_ARGS__)
 
 #define RCPPSW_COPYRIGHT(year, author)        \
   RCSW_COPYRIGHT(year, author)

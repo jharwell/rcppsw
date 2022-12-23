@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, fsm);
+namespace rcppsw::patterns::fsm {
 class base_fsm;
 
 /*******************************************************************************
@@ -41,5 +41,5 @@ class state_exit {
   virtual void invoke_exit_action(base_fsm* sm) const = 0;
 };
 
-NS_END(fsm, patterns, rcppsw);
+} /* namespace rcppsw::patterns::fsm */
 

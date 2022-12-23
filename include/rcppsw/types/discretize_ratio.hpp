@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, types);
+namespace rcppsw::types {
 
 /*******************************************************************************
  * Type Definitions
@@ -30,5 +30,5 @@ NS_START(rcppsw, types);
  */
 using discretize_ratio = named_type<double, struct discretize_ratio_tag>;
 
-NS_END(types, rcppsw);
+} /* namespace rcppsw::types */
 

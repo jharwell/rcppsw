@@ -13,6 +13,7 @@
  ******************************************************************************/
 #include "rcppsw/common/macros.hpp"
 #include "rcppsw/rcppsw.hpp"
+#include "rcppsw/mpl/detail/detector.hpp"
 
 /*******************************************************************************
  * Macros
@@ -76,83 +77,11 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, mpl);
+namespace rcppsw::mpl {
 
 /*******************************************************************************
  * Trait Detection Templates
  ******************************************************************************/
-NS_START(detail);
-
-/**
- * \struct detector
- * \ingroup mpl
- *
- * \brief If the specified function \p TFuncDecltype taking the specified \p
- * Args is not well formed, then SFINAE and partial template specialization will
- * select this template, indicating unsuccessful detection.
- *
- * \tparam TFailType The default type to select upon unsuccessful
- * detection.
- *
- * \tparam TFuncDecltype The decltype() of the function to detect.
- *
- * \tparam Args The types of the arguments to the function to detect.
- */
-template <class TFailType,
-          class AlwaysVoid,
-          template <class...>
-          class TFuncDecltype,
-          class... Args>
-struct detector {
-  /**
-   * Always \a FALSE for unsuccessful detection.
-   */
-  using value = std::false_type;
-
-  /**
-   * Captures \p TFailType for future use.
-   */
-  using type = TFailType;
-};
-
-/**
- * \struct detector
- * \ingroup mpl
- *
- * \brief If the specified function \p TFuncDecltype taking the specified \p
- * Args is well formed, then SFINAE and partial template specialization will
- * select this template, indicating successful detection.
- *
- * \tparam TFailType The default type to select upon unsuccessful
- * detection. Unused in this version of the detector.
- *
- * \tparam TFuncDecltype The decltype() of the function to detect.
- *
- * \tparam Args The types of the arguments to the function to detect.
- */
-template <class TFailType, template <class...> class TFuncDecltype, class... Args>
-struct detector<TFailType,
-                std::void_t<TFuncDecltype<Args...>>,
-                TFuncDecltype,
-                Args...> {
-  /**
-   * Always \a TRUE for successful detection.
-   */
-  using value = std::true_type;
-
-  /**
-   * Captures \p TFuncDeclType argument for future use.
-   */
-  using type = TFuncDecltype<Args...>;
-};
-
-template <class T, std::size_t = sizeof(T)>
-std::true_type is_complete_impl(T *);
-
-std::false_type is_complete_impl(...);
-
-NS_END(detail);
-
 /**
  * \struct no_such_trait
  * \ingroup mpl
@@ -246,5 +175,4 @@ struct is_complete_type : std::false_type {};
 template<typename T>
 struct is_complete_type<T, std::void_t<decltype(sizeof(T))>> : std::true_type {};
 
-
-NS_END(mpl, rcppsw);
+} /* namespace rcppsw::mpl */

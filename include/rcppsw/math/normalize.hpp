@@ -17,7 +17,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Free Functions
@@ -36,5 +36,5 @@ static inline double normalize(double min, double max, double val) {
   }
 } /* normalize() */
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */
 

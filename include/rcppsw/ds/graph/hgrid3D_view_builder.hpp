@@ -23,7 +23,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, graph, detail);
+namespace rcppsw::ds::graph::detail {
 
 /*******************************************************************************
  * Class Definitions
@@ -117,5 +117,5 @@ struct hgrid3D_view_builder {
   /* clang-format on */
 };
 
-NS_END(detail, graph, ds, rcppsw);
+} /* namespace rcppsw::ds::detail, graph */
 

@@ -17,7 +17,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Constructors/Destructor
@@ -56,4 +56,4 @@ bool file_sink::retry_io(const std::function<void(void)>& cb) {
   return false;
 } /* retry_io() */
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

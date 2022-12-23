@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, fsm);
+namespace rcppsw::patterns::fsm {
 
 /*******************************************************************************
  * Constructors/Destructor
@@ -219,4 +219,4 @@ void base_fsm::inject_event(std::unique_ptr<class event_data> event) {
   external_event(current_state(), std::move(event));
 } /* inject_event(std::unique_ptr<event_data> event)() */
 
-NS_END(fsm, patterns, rcppssw);
+} /* namespace rcppssw::patterns::fsm */

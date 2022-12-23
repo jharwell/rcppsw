@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Class Constants
@@ -66,4 +66,4 @@ rmath::radians operator*(double lhs, const rmath::radians& rhs) {
   return rhs * lhs;
 } /* operator*() */
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */

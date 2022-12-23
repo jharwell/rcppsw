@@ -14,7 +14,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Constructors/Destructors
@@ -91,4 +91,4 @@ void fs_output_manager::finalize(void) {
 }
 
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

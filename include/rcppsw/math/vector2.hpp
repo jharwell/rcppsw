@@ -23,7 +23,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Class Definitions
@@ -94,8 +94,8 @@ class vector2 final : public er::stringizable {
    */
   template<typename U,
            typename V,
-           RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value),
-           RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<V>::value)>
+           RCPPSW_SFINAE_DECLDEF(!std::is_floating_point<U>::value &&
+                                 !std::is_floating_point<V>::value)>
   static size_t l1norm(const vector2<U>& v1, const vector2<V>& v2) {
     return std::abs(static_cast<int>(v1.x() - v2.x())) +
         std::abs(static_cast<int>(v1.y() - v2.y()));
@@ -436,5 +436,5 @@ RCPPSW_MATH_VEC2_SCALED_CONVF(z);
 RCPPSW_MATH_VEC2_CONV2DISC(z, size_t);
 RCPPSW_MATH_VEC2_CONV2DISC(i, int);
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */
 

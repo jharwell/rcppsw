@@ -44,22 +44,8 @@ exist in Boost, or that build on what boost provides. Includes such things as:
    :maxdepth: 2
    :caption: Contents:
 
-   config/index.rst
-   contributing/index.rst
+   src/setup/index.rst
+   src/usage/index.rst
+   src/contributing/index.rst
+
    _api/api.rst
-
-Directory Layout
-================
-
-- ``src/`` - All ``.cpp`` files live under here, in their respective modules.
-
-- ``include/`` - All ``.hpp`` files live under here.
-
-- ``docs/`` - All documentation besides the main README lives under here.
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

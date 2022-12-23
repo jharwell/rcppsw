@@ -19,7 +19,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Constant Definitions
@@ -54,12 +54,12 @@ static inline bool is_multiple_of(double x,
   return std::fabs(std::remainder(x, y)) < tol;
 }
 
-NS_START(detail);
+namespace detail {
 
 template <class T>
 using length_func_decltype = decltype(std::declval<T>().length());
 
-NS_END(detail);
+} /* namespace detail */
 
 /**
  * \brief Computes the euclidean distance between the passed vectors.
@@ -81,5 +81,5 @@ static inline double l2norm_squared(const T& lhs, const T& rhs) {
   return (lhs - rhs).squared_length();
 }
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */
 

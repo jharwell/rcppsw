@@ -11,19 +11,12 @@
  ******************************************************************************/
 #include "rcppsw/math/rng.hpp"
 
-#include <random>
+#include "rcppsw/math/detail/rng_impl.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math, detail);
-
-struct rng_impl {
-  explicit rng_impl(uint seed) : engine(seed) {}
-  std::default_random_engine engine;
-};
-
-NS_END(detail);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Constructors/Destructors
@@ -68,4 +61,4 @@ template int rng::uniform(const int& lb, const int& ub);
 template size_t rng::uniform(const size_t& lb, const size_t& ub);
 template double rng::uniform(const double& lb, const double& ub);
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */

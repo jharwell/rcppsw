@@ -14,7 +14,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Template Instantiations
@@ -33,4 +33,4 @@ const vector2z vector2z::Y(0, 1); // NOLINT
 template <>
 const vector2d vector2d::Y(0.0, 1.0); // NOLINT
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */

@@ -25,7 +25,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, graph);
+namespace rcppsw::ds::graph {
 
 template <typename TSpecType>
 using hgrid3D_view_edge_filter_type = std::function<bool(typename TSpecType::bgl_impl_type::edge_descriptor)>;
@@ -142,5 +142,5 @@ class hgrid3D_view : public rpdecorator::decorator<
 };
 
 
-NS_END(graph, ds, rcppsw);
+} /* namespace rcppsw::ds::graph */
 

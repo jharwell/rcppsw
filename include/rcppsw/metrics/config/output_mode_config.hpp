@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics, config);
+namespace rcppsw::metrics::config {
 
 /*******************************************************************************
  * Structure Definitions
@@ -31,5 +31,5 @@ struct output_mode_config {
   enabled_map_type enabled{};
 };
 
-NS_END(config, metrics, rcppsw);
+} /* namespace rcppsw::metrics::config */
 

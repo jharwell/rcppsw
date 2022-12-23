@@ -17,7 +17,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, types);
+namespace rcppsw::types {
 
 /*******************************************************************************
  * Type Definitions
@@ -43,11 +43,12 @@ class hertz final : public rtypes::named_type<int, struct hertz_tag> {
   bool operator>(const T& other) const { return v() > other; }
 };
 
-NS_START(constants);
+namespace constants {
 
 /**
  * \brief Null identifier to indicate an unset value.
  */
 extern hertz kNoRate;
+} /* namespace constants */
 
-NS_END(constants, types, rcppsw);
+} /* namespace rcppsw::types::constants */
