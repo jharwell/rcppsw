@@ -9,7 +9,7 @@ set(rcppsw_CHECK_LANGUAGE "CXX")
 # Each conference tag=minor increment. Each minor feature added=patch increment.
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 3)
-set(PROJECT_VERSION_PATCH 11)
+set(PROJECT_VERSION_PATCH 13)
 set(rcppsw_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
 
 if (NOT DEFINED RCPPSW_AL_MT_SAFE_TYPES)
@@ -133,10 +133,12 @@ libra_requested_components_check(rcppsw)
 # External Projects
 ################################################################################
 # ticpp
-add_library(ticpp_ticpp::ticpp_ticpp STATIC IMPORTED GLOBAL)
-set_target_properties(ticpp_ticpp::ticpp_ticpp PROPERTIES
-  IMPORTED_LOCATION ${LIBRA_DEPS_PREFIX}/lib/libticpp.a
-  )
+if ("metrics" IN_LIST "${rcppsw_FIND_COMPONENTS}")
+  add_library(ticpp_ticpp::ticpp_ticpp STATIC IMPORTED GLOBAL)
+  set_target_properties(ticpp_ticpp::ticpp_ticpp PROPERTIES
+    IMPORTED_LOCATION ${LIBRA_DEPS_PREFIX}/lib/libticpp.a
+    )
+endif()
 
 if (NOT ${LIBRA_RTD_BUILD})
   if(CMAKE_CROSSCOMPILING)
@@ -219,11 +221,16 @@ target_include_directories(
 ########################################
 target_link_libraries(${rcppsw_LIBRARY}
   rcsw::rcsw
-  ticpp_ticpp::ticpp_ticpp
   ${Boost_LIBRARIES}
   pthread
   dl
   )
+
+if ("metrics" IN_LIST "${rcppsw_FIND_COMPONENTS}")
+  target_link_libraries(${rcppsw_LIBRARY}
+      ticpp_ticpp::ticpp_ticpp
+      )
+  endif()
 
 ########################################
 # Compile Options/Definitions

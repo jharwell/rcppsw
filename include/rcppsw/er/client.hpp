@@ -92,7 +92,7 @@
  */
 #define ER_NDC_PUSH(s) \
   rcppsw::er::client<  \
-      typename std::remove_reference_t<decltype(*this)>>::ndc_do_push(s)
+      typename std::remove_reference_t<decltype(*this)>>::ndc_push(s)
 
 /**
  * \def ER_NDC_POP()
@@ -101,7 +101,7 @@
  */
 #define ER_NDC_POP(...) \
   rcppsw::er::client<   \
-      typename std::remove_reference_t<decltype(*this)>>::ndc_do_pop()
+      typename std::remove_reference_t<decltype(*this)>>::ndc_pop()
 
 /**
  * \def ER_MDC_ADD(key, value)
@@ -204,12 +204,12 @@ class client {
    *
    * \param s The context.
    */
-  static void ndc_do_push(const std::string& s) { log4cxx::NDC::push(s); }
+  static void ndc_push(const std::string& s) { log4cxx::NDC::push(s); }
 
   /**
    * \brief Pop the top of the log4cxx NDC stack.
    */
-  static void ndc_do_pop(void) { log4cxx::NDC::pop(); }
+  static void ndc_pop(void) { log4cxx::NDC::pop(); }
 
   /**
    * \brief Add a log4cxx MDC context.
@@ -314,8 +314,12 @@ class client {
 template<typename T>
 class client {
  public:
+  client(void) = default;
+
+  /* So that client objects can be constructed outside of class contexts */
+  explicit client(const std::string& ) {}
   virtual ~client(void) = default;
 };
 #endif
 
-} /* namespace er::rcppsw */
+} /* namespace rcppsw::er */
