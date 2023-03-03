@@ -11,10 +11,9 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <ticpp/ticpp.h>
-
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/config/base_parser.hpp"
+#include "rcppsw/config/xml/ticpp.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls

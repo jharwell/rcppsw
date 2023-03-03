@@ -9,7 +9,7 @@ set(rcppsw_CHECK_LANGUAGE "CXX")
 # Each conference tag=minor increment. Each minor feature added=patch increment.
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 3)
-set(PROJECT_VERSION_PATCH 13)
+set(PROJECT_VERSION_PATCH 14)
 set(rcppsw_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
 
 if (NOT DEFINED RCPPSW_AL_MT_SAFE_TYPES)
@@ -133,12 +133,24 @@ libra_requested_components_check(rcppsw)
 # External Projects
 ################################################################################
 # ticpp
-if ("metrics" IN_LIST "${rcppsw_FIND_COMPONENTS}")
-  add_library(ticpp_ticpp::ticpp_ticpp STATIC IMPORTED GLOBAL)
-  set_target_properties(ticpp_ticpp::ticpp_ticpp PROPERTIES
-    IMPORTED_LOCATION ${LIBRA_DEPS_PREFIX}/lib/libticpp.a
-    )
-endif()
+ExternalProject_Add(ticpp
+  GIT_REPOSITORY https://github.com/wxFormBuilder/ticpp.git
+  GIT_TAG master
+  CONFIGURE_COMMAND ${CMAKE_COMMAND}
+  -DCMAKE_BUILD_TYPE=RelWithDebInfo
+  -DCMAKE_INSTALL_PREFIX=${LIBRA_DEPS_PREFIX}
+  -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+  ../ticpp-src
+  PATCH_COMMAND git apply ${CMAKE_CURRENT_SOURCE_DIR}/scripts/ticpp.patch || true
+  BUILD_COMMAND make CFLAGS="-fPIC"
+  INSTALL_COMMAND make install
+  SOURCE_DIR ${CMAKE_BINARY_DIR}/ticpp-src
+  BINARY_DIR ${CMAKE_BINARY_DIR}/ticpp-build
+  )
+add_library(ticpp_ticpp::ticpp_ticpp STATIC IMPORTED GLOBAL)
+set_target_properties(ticpp_ticpp::ticpp_ticpp PROPERTIES
+  IMPORTED_LOCATION ${LIBRA_DEPS_PREFIX}/lib/libticpp.a
+  )
 
 if (NOT ${LIBRA_RTD_BUILD})
   if(CMAKE_CROSSCOMPILING)
@@ -226,11 +238,9 @@ target_link_libraries(${rcppsw_LIBRARY}
   dl
   )
 
-if ("metrics" IN_LIST "${rcppsw_FIND_COMPONENTS}")
-  target_link_libraries(${rcppsw_LIBRARY}
-      ticpp_ticpp::ticpp_ticpp
-      )
-  endif()
+target_link_libraries(${rcppsw_LIBRARY}
+  ticpp_ticpp::ticpp_ticpp
+  )
 
 ########################################
 # Compile Options/Definitions

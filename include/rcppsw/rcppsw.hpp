@@ -201,6 +201,7 @@ namespace rconfig = rcppsw::config;
 namespace rmpl = rcppsw::mpl;
 namespace rcontrol = rcppsw::control;
 namespace rmultithread = rcppsw::multithread;
+namespace rmultiprocess = rcppsw::multiprocess;
 
 namespace ralgorithm = rcppsw::algorithm;
 namespace raclustering = ralgorithm::clustering;
