@@ -14,7 +14,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, utils);
+namespace rcppsw::utils {
 
 /*******************************************************************************
  * Global Variables
@@ -63,4 +63,4 @@ std::string color::to_str(void) const {
   }
 } /* to_str() */
 
-NS_END(utils, rcppsw);
+} /* namespace rcppsw::utils */

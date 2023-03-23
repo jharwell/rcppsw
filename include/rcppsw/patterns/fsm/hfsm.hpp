@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, fsm);
+namespace rcppsw::patterns::fsm {
 
 /*******************************************************************************
  * Class Definitions
@@ -297,5 +297,5 @@ entry_name{}
     state_name, guard_name, entry_name, exit_name) \
   RCPPSW_FSM_STATE_MAP_ENTRY_EX_ALL(state_name, guard_name, entry_name, exit_name)
 
-NS_END(fsm, patterns, rcppsw);
+} /* namespace rcppsw::patterns::fsm */
 

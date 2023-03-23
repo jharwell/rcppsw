@@ -25,7 +25,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, algorithm);
+namespace rcppsw::algorithm {
 
 /*******************************************************************************
  * Structure Definitions
@@ -210,5 +210,5 @@ class closest_pair2D {
   }
 };
 
-NS_END(algorithm, rcppsw);
+} /* namespace rcppsw::algorithm */
 

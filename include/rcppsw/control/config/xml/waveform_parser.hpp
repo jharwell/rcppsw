@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, control, config, xml);
+namespace rcppsw::control::config::xml {
 
 /*******************************************************************************
  * Class Definitions
@@ -62,5 +62,5 @@ class waveform_parser final : public rer::client<waveform_parser>,
   /* clang-format on */
 };
 
-NS_END(xml, config, control, rcppsw);
+} /* namespace rcppsw::control::xml, config */
 

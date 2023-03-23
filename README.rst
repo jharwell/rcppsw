@@ -11,19 +11,25 @@ RCPPSW (Reusable C++ Software)
 .. |license| image:: https://img.shields.io/github/license/jharwell/rcppsw
                      :target: https://img.shields.io/github/license/jharwell/rcppsw
 
-.. |docs| image:: https://readthedocs.org/projects/rcppsw/badge/?version=master
-                  :target: https://rcppsw.readthedocs.io/en/master/?badge=master
+.. |docs| image:: https://github.com/jharwell/rcppsw/actions/workflows/pages.yml/badge.svg?branch=master
+                  :target: https://jharwell.github.io/rcppsw
 
 .. |maintenance| image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
+
+.. |coverage-master| image:: https://coveralls.io/repos/github/jharwell/rcppsw/badge.svg?branch=master
+                             :target: https://coveralls.io/github/jharwell/rcppsw?branch=master
+
+.. |coverage-devel| image:: https://coveralls.io/repos/github/jharwell/rcppsw/badge.svg?branch=devel
+                             :target: https://coveralls.io/github/jharwell/rcppsw?branch=devel
 
 
 :Release:
 
-   |ci-master|
+   |ci-master| |coverage-master|
 
 :Development:
 
-   |ci-devel|
+   |ci-devel| |coverage-devel|
 
 :Misc:
 
@@ -33,7 +39,7 @@ RCPPSW (Reusable C++ Software)
 RCPPSW is a collection of reusable C++ software (design patterns, boost gaps,
 etc.), independent of any C++ project.
 
-Project documentation is here: `<https://rcppsw.readthedocs.io>`_.
+Project documentation is here: `<https://jharwell.github.io/rcppsw>`_.
 
 License
 =======

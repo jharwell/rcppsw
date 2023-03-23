@@ -22,7 +22,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, ds, metrics);
+namespace rcppsw::ds::metrics {
 
 /*******************************************************************************
  * Class Definitions
@@ -90,5 +90,5 @@ class grid3D_metrics_csv_sink : public rmetrics::csv_sink {
   } /* csv_line_build() */
 };
 
-NS_END(metrics, ds, rcppsw);
+} /* namespace rcppsw::ds::metrics */
 

@@ -19,7 +19,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, decorator);
+namespace rcppsw::patterns::decorator {
 
 /*******************************************************************************
  * Macros
@@ -146,5 +146,5 @@ class decorator {
   /* clang-format on */
 };
 
-NS_END(rcppsw, patterns, decorator);
+} /* namespace decorator::patterns::rcppsw */
 

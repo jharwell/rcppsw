@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, control);
+namespace rcppsw::control {
 
 /*******************************************************************************
  * Classes
@@ -92,5 +92,5 @@ class sawtooth_waveform : public base_waveform {
   }
 };
 
-NS_END(control, rcppsw);
+} /* namespace rcppsw::control */
 

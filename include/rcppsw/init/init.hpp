@@ -11,12 +11,14 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
+
 #include "rcppsw/rcppsw.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, init);
+namespace rcppsw::init {
 
 /*******************************************************************************
  * Free Functions
@@ -24,8 +26,8 @@ NS_START(rcppsw, init);
 /**
  * \brief Initialize RCPPSW library.
  *
- * Current this just prints the version.
+ * Current this just prints the version and build information.
  */
 void init(void) RCPPSW_LIB_INIT;
 
-NS_END(init, rcppsw);
+} /* namespace rcppsw::init */

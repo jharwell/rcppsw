@@ -15,7 +15,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, singleton);
+namespace rcppsw::patterns::singleton {
 
 /*******************************************************************************
  * Class Definitions
@@ -50,5 +50,5 @@ class singleton {
   ~singleton(void) = default;
 };
 
-NS_END(singleton, patterns, rcppsw);
+} /* namespace rcppsw::patterns::singleton */
 

@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, metrics);
+namespace rcppsw::ds::metrics {
 
 /*******************************************************************************
  * Aliases
@@ -34,5 +34,5 @@ using cell_avg = std::true_type;
  */
 using cell_accum = std::false_type;
 
-NS_END(metrics, ds, rcppsw);
+} /* namespace rcppsw::ds::metrics */
 

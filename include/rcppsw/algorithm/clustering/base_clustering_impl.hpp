@@ -21,7 +21,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, algorithm, clustering);
+namespace rcppsw::algorithm::clustering {
 
 /*******************************************************************************
  * Class Definitions
@@ -71,5 +71,5 @@ class base_clustering_impl {
                           membership_type<Policy>* membership) = 0;
 };
 
-NS_END(clustering, algorithm, rcppsw);
+} /* namespace rcppsw::algorithm::clustering */
 

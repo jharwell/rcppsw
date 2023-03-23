@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, mpl);
+namespace rcppsw::mpl {
 
 /*******************************************************************************
  * Class Definitions
@@ -42,4 +42,4 @@ class reflectable {
   virtual std::type_index type_index(void) const = 0;
 };
 
-NS_END(mpl, rcppsw);
+} /* namespace rcppsw::mpl */

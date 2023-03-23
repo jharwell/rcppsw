@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, metrics);
+namespace rcppsw::ds::metrics {
 
 /*******************************************************************************
  * Class Definitions
@@ -38,5 +38,5 @@ struct grid2D_metrics_data : public rmetrics::base_data {
 
 };
 
-NS_END(metrics, ds, rcppsw);
+} /* namespace rcppsw::ds::metrics */
 

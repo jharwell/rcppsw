@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Type Definitions
@@ -42,5 +42,5 @@ enum write_status {
   ekSUCCESS = 1 << 2
 };
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */
 

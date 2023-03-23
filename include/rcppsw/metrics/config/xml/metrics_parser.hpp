@@ -25,7 +25,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics, config, xml);
+namespace rcppsw::metrics::config::xml {
 
 /*******************************************************************************
  * Class Definitions
@@ -69,4 +69,4 @@ class metrics_parser : public rer::client<metrics_parser>,
   /* clang-format on */
 };
 
-NS_END(xml, config, metrics, rcppsw);
+} /* namespace rcppsw::metrics::xml, config */

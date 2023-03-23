@@ -14,12 +14,13 @@
 #include <csignal>
 #include <fstream>
 #include <iostream>
-#include <cxxabi.h>
+
+#include "rcppsw/abi/abi.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, er);
+namespace rcppsw::er {
 
 static void stacktrace_to_file(int pid);
 
@@ -45,11 +46,7 @@ void terminate_handler(void) {
   auto const ep = std::current_exception();
   if (ep) {
     try {
-      int status;
-      auto const etype = abi::__cxa_demangle(abi::__cxa_current_exception_type()->name(),
-                                             nullptr,
-                                             nullptr,
-                                             &status);
+      auto const etype = rabi::demangle(rabi::current_exception_type()->name());
       std::cerr << "Terminating: uncaught exception of type `" << etype << "`";
       std::rethrow_exception(ep);
     } catch(const std::exception& e) {
@@ -78,4 +75,4 @@ void stacktrace_to_file(int pid) {
   boost::stacktrace::safe_dump_to(fname);
 } /* stacktrace_to_file() */
 
-NS_END(er, rcppsw);
+} /* namespace rcppsw::er */

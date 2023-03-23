@@ -23,7 +23,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Class Definitions
@@ -50,15 +50,36 @@ struct collector_registration_spec {
  *   created collector during simulation.
  *
  * - The set of output modes that are valid for the collector.
+ *
+ * - Which sink the collector is associated with (only necessary if the same
+ *   collector will be used with multiple sinks). If omitted for a single
+ *   collector which has multiple sinks, the behavior is undefined.
  */
 struct creatable_collector_spec {
-  std::type_index id;
-  std::string input_name{};
-  std::string scoped_name{};
+  creatable_collector_spec(const std::type_index& collector_id_in,
+                           const std::string& input_name_in,
+                           const std::string& scoped_name_in,
+                           const rmetrics::output_mode& valid_modes_in,
+                           std::type_index sink_id_in = std::type_index(typeid(nullptr)))
+      : collector_id(collector_id_in),
+        input_name(input_name_in),
+        scoped_name(scoped_name_in),
+        valid_modes(valid_modes_in),
+        sink_id(sink_id_in) {}
+
+  explicit creatable_collector_spec(const std::type_index& collector_id_in)
+      : collector_id(collector_id_in) {}
+
+  /* clang-format off */
+  std::type_index       collector_id;
+  std::string           input_name{};
+  std::string           scoped_name{};
   rmetrics::output_mode valid_modes{rmetrics::output_mode::ekNONE};
+  std::type_index       sink_id{typeid(nullptr)};
+  /* clang-format on */
 };
 
-NS_START(detail);
+namespace detail {
 
 /**
  * \brief Comparator for \ref set_value_type objects within the \ref
@@ -67,11 +88,11 @@ NS_START(detail);
 struct creatable_collector_set_comparator {
   bool operator()(const creatable_collector_spec& lhs,
                   const creatable_collector_spec& rhs) const {
-    return lhs.id < rhs.id;
+    return lhs.collector_id < rhs.collector_id;
   }
 };
 
-NS_END(detail);
+} /* namespace detail */
 
 /**
  * \brief Set of \ref set_value_type in which duplicates are allowed, because
@@ -82,5 +103,4 @@ NS_END(detail);
 using creatable_collector_set = std::multiset<creatable_collector_spec,
                                               detail::creatable_collector_set_comparator>;
 
-NS_END(metrics, rcppsw);
-
+} /* namespace rcppsw::metrics */

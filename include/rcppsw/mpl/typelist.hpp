@@ -49,7 +49,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, mpl);
+namespace rcppsw::mpl {
 
 /*******************************************************************************
  * Trait Detection Templates
@@ -74,7 +74,7 @@ using typelist = boost::mpl::vector<Ts...>;
 template <typename... Ts>
 using empty = boost::mpl::empty<Ts...>;
 
-NS_START(detail);
+namespace detail {
 
 template<class A, template<class...> class B> struct rename_impl;
 
@@ -95,7 +95,7 @@ struct ExtendTList<std::tuple<Ts...>, T>{
   using type = std::tuple<Ts..., T>;
 };
 
-NS_END(detail);
+} /* namespace detail */
 
 /**
  * \typedef rename
@@ -164,5 +164,5 @@ using make_tuple_type = typename boost::mpl::fold<
   detail::ExtendTList<boost::mpl::_1, boost::mpl::_2>
   >;
 
-NS_END(mpl, rcppsw);
+} /* namespace rcppsw::mpl */
 

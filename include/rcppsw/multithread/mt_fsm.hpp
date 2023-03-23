@@ -21,7 +21,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, multithread);
+namespace rcppsw::multithread {
 namespace sm = patterns::fsm;
 
 /*******************************************************************************
@@ -52,5 +52,5 @@ class mt_fsm : public rpfsm::base_fsm {
   /* clang-format off */
 };
 
-NS_END(multithread, rcppsw);
+} /* namespace rcppsw::multithread */
 

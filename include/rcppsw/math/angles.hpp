@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Free Functions
@@ -64,5 +64,5 @@ template<typename TAngleType>
   return TAngleType(std::fabs(angle.v()));
 }
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */
 

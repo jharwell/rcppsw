@@ -33,7 +33,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, visitor, detail);
+namespace rcppsw::patterns::visitor::detail {
 
 /*******************************************************************************
  * Class Definitions
@@ -53,7 +53,7 @@ class polymorphic_accept_set_helper {
   virtual ~polymorphic_accept_set_helper(void) = default;
 };
 
-NS_END(detail);
+} /* namespace detail */
 
 /**
  * \ingroup patterns visitor
@@ -93,4 +93,4 @@ class polymorphic_accept_set<T>: public detail::polymorphic_accept_set_helper<T>
   using detail::polymorphic_accept_set_helper<T>::accept;
 };
 
-NS_END(rcppsw, patterns, visitor);
+} /* namespace visitor::patterns::rcppsw */

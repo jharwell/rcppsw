@@ -19,7 +19,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds);
+namespace rcppsw::ds {
 
 /*******************************************************************************
  * Class Definitions
@@ -85,5 +85,5 @@ class base_grid_overlay : public er::client<base_grid_overlay<TOriginType>> {
   /* clang-format on */
 };
 
-NS_END(ds, rcppsw);
+} /* namespace rcppsw::ds */
 

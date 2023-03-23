@@ -14,7 +14,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Constructors/Destructor
@@ -34,4 +34,4 @@ bool base_sink::ready_to_flush(const rtypes::timestep& t) const {
   return utils::ready_to_flush(mc_output_interval, t);
 } /* ready_to_flush() */
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

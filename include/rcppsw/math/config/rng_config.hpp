@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math, config);
+namespace rcppsw::math::config {
 
 /*******************************************************************************
  * Structure Definitions
@@ -35,5 +35,5 @@ struct rng_config final : public rcppsw::config::base_config {
   int seed{-1};
 };
 
-NS_END(config, math, rcppsw);
+} /* namespace rcppsw::math::config */
 

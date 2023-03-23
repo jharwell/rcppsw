@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Type Definitions
@@ -67,4 +67,4 @@ enum class output_mode {
   ekSTREAM = 1 << 3
 };
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

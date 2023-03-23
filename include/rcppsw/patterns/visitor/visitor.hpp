@@ -21,12 +21,12 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, visitor, detail);
+namespace rcppsw::patterns::visitor {
 
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-
+namespace detail {
 /**
  * \class visit_set_helper
  * \ingroup patterns visitor
@@ -42,7 +42,7 @@ class visit_set_helper {
   virtual ~visit_set_helper(void) = default;
 };
 
-NS_END(detail);
+} /* namespace detail */
 
 /**
  * \ingroup patterns visitor
@@ -176,5 +176,4 @@ class filtered_visitor {
   precise_visitor<TVisitor, typename TVisitor::visit_typelist> m_impl;
 };
 
-NS_END(rcppsw, patterns, visitor);
-
+} /* namespace visitor::patterns::rcppsw */

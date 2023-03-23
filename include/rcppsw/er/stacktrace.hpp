@@ -19,7 +19,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, er);
+namespace rcppsw::er {
 
 namespace stacktrace = boost::stacktrace;
 
@@ -39,4 +39,4 @@ void sigsegv_sighandler(int signum);
 RCPPSW_DEAD void terminate_handler(void);
 
 
-NS_END(er, rcppsw);
+} /* namespace rcppsw::er */

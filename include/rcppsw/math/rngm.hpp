@@ -22,7 +22,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 class rng;
 
 /*******************************************************************************
@@ -39,5 +39,5 @@ class rng;
 class rngm : public patterns::prototype::caching_factory<rng, uint>,
              public patterns::singleton::singleton<rngm> {};
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */
 

@@ -14,7 +14,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, multithread);
+namespace rcppsw::multithread {
 
 /*******************************************************************************
  * Member Functions
@@ -32,4 +32,4 @@ void mt_fsm::init(void) {
   m_mutex.unlock();
 } /* init() */
 
-NS_END(multithread, rcppsw);
+} /* namespace rcppsw::multithread */

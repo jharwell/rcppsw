@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, graph);
+namespace rcppsw::ds::graph {
 
 /*******************************************************************************
  * Class Definitions
@@ -29,4 +29,4 @@ NS_START(rcppsw, ds, graph);
  */
 struct base_vertex_property {};
 
-NS_END(graph, ds, rcppsw);
+} /* namespace rcppsw::ds::graph */

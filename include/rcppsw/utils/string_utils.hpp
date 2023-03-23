@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, utils);
+namespace rcppsw::utils {
 
 /*******************************************************************************
  * Non-Member Functions
@@ -61,5 +61,12 @@ bool parse_values(std::istream& is, size_t n_fields, T* buf, char delim = '\n') 
   return false;
 }
 
-NS_END(utils, rcppsw);
+/**
+ * \brief Break a string into sub-strings using a delimiter.
+ */
 
+void tokenize(std::string const &str,
+              const char* delim,
+              std::vector<std::string>& out);
+
+} /* namespace rcppsw::utils */

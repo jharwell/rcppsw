@@ -19,7 +19,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, fsm);
+namespace rcppsw::patterns::fsm {
 
 /*******************************************************************************
  * Class Definitions
@@ -99,5 +99,5 @@ class hfsm_state_action1 : public hfsm_state {
   }
 };
 
-NS_END(fsm, patterns, rcppsw);
+} /* namespace rcppsw::patterns::fsm */
 

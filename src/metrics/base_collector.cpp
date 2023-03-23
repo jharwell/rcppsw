@@ -19,7 +19,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Constructors/Destructor
@@ -54,4 +54,4 @@ void base_collector::interval_reset(const rtypes::timestep& t) {
   }
 } /* interval_reset() */
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

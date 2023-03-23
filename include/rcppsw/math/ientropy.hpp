@@ -21,7 +21,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Class Definitions
@@ -55,4 +55,4 @@ class ientropy : public math::expression<double> {
   }
 };
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */

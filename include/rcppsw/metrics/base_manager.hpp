@@ -23,7 +23,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Class Definitions
@@ -140,4 +140,4 @@ class base_manager {
   /* clang-format on */
 };
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

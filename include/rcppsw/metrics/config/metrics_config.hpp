@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics, config);
+namespace rcppsw::metrics::config {
 
 namespace fs = std::filesystem;
 
@@ -41,5 +41,5 @@ struct metrics_config final : public rconfig::base_config {
   rmconfig::network_sink_config network{};
 };
 
-NS_END(config, metrics, rcppsw);
+} /* namespace rcppsw::metrics::config */
 

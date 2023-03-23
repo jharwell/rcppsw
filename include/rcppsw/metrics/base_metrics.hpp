@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Class Definitions
@@ -41,5 +41,5 @@ class base_metrics {
   virtual void reset_metrics(void) {}
 };
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */
 

@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Class Definitions
@@ -149,5 +149,5 @@ ema<T> operator/(const ema<T>& lhs, const double& rhs) {
   return r;
 }
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */
 

@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Class Definitions
@@ -33,5 +33,5 @@ struct base_data {
   virtual ~base_data(void) = default;
 };
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */
 

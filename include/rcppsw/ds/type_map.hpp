@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces/Decls/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds);
+namespace rcppsw::ds {
 
 /*******************************************************************************
  * Class Definitions
@@ -45,4 +45,4 @@ class type_map
   using typename map_type::map;
 };
 
-NS_END(ds, rcppsw);
+} /* namespace rcppsw::ds */

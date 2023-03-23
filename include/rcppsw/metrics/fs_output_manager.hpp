@@ -22,7 +22,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 namespace fs = std::filesystem;
 
@@ -64,4 +64,4 @@ class fs_output_manager : public rer::client<fs_output_manager>,
   /* clang-format on */
 };
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

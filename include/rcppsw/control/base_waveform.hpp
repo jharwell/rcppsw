@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, control);
+namespace rcppsw::control {
 
 /*******************************************************************************
  * Classes
@@ -74,5 +74,5 @@ class base_waveform {
   /* clang-format on */
 };
 
-NS_END(control, rcppsw);
+} /* namespace rcppsw::control */
 

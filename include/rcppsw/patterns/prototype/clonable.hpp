@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, prototype);
+namespace rcppsw::patterns::prototype {
 
 /*******************************************************************************
  * Class Definitions
@@ -50,5 +50,5 @@ class clonable {
   virtual std::unique_ptr<T> clone(void) const = 0;
 };
 
-NS_END(rcppsw, patterns, prototype);
+} /* namespace prototype::patterns::rcppsw */
 

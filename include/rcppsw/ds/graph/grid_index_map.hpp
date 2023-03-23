@@ -19,7 +19,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, graph);
+namespace rcppsw::ds::graph {
 
 /*******************************************************************************
  * Class Definitions
@@ -59,5 +59,5 @@ class grid_index_map : public rpdecorator::decorator<
   RCPPSW_DECORATE_DECLDEF(size, const);
 };
 
-NS_END(graph, ds, rcppsw);
+} /* namespace rcppsw::ds::graph */
 

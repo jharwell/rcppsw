@@ -11,18 +11,17 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <ticpp/ticpp.h>
-
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/config/base_parser.hpp"
+#include "rcppsw/config/xml/ticpp.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, config);
+namespace rcppsw::config {
 struct base_config;
-
-NS_START(xml);
+}
+namespace rcppsw::config::xml {
 
 /*******************************************************************************
  * Macros
@@ -150,4 +149,4 @@ class xml_config_parser : public rer::client<xml_config_parser>,
   }
 };
 
-NS_END(xml, config, rcppsw);
+} /* namespace rcppsw::config::xml */

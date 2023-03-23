@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, utils);
+namespace rcppsw::utils {
 
 /*******************************************************************************
  * Class Definitions
@@ -93,5 +93,5 @@ class color : public er::stringizable {
   /* clang-format on */
 };
 
-NS_END(utils, rcppsw);
+} /* namespace rcppsw::utils */
 

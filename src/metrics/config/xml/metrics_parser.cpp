@@ -14,7 +14,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics, config, xml);
+namespace rcppsw::metrics::config::xml {
 
 /*******************************************************************************
  * Member Functions
@@ -51,4 +51,4 @@ void metrics_parser::parse(const ticpp::Element& node) {
   }
 } /* parse() */
 
-NS_END(xml, config, metrics, rcppsw);
+} /* namespace rcppsw::metrics::xml, config */

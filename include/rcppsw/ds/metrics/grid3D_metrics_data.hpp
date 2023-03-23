@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, metrics);
+namespace rcppsw::ds::metrics {
 
 /*******************************************************************************
  * Class Definitions
@@ -37,5 +37,5 @@ struct grid3D_metrics_data : public rmetrics::base_data {
   ral::mt_size_t                     total_count{0};
 };
 
-NS_END(metrics, ds, rcppsw);
+} /* namespace rcppsw::ds::metrics */
 

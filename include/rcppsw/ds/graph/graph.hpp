@@ -21,14 +21,14 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, graph, detail);
+namespace rcppsw::ds::graph::detail {
 
 template <typename TBGLGraphType>
 using find_result_type = typename std::add_pointer<
   decltype(std::declval<TBGLGraphType>().operator[](std::declval<typename TBGLGraphType::vertex_descriptor>()))
   >::type;
 
-NS_END(detail);
+} /* namespace detail */
 
 /*******************************************************************************
  * Templates
@@ -131,5 +131,5 @@ static inline size_t n_vertices(const TBGLGraphType& g) {
   return boost::num_vertices(g);
 }
 
-NS_END(graph, ds, rcppsw);
+} /* namespace rcppsw::ds::graph */
 

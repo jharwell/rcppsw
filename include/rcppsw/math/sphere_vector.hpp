@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Class Definitions
@@ -47,5 +47,5 @@ class sphere_vector {
   /* clang-format on */
 };
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */
 

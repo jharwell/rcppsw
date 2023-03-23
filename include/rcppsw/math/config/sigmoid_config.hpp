@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math, config);
+namespace rcppsw::math::config {
 
 /*******************************************************************************
  * Structure Definitions
@@ -33,5 +33,5 @@ struct sigmoid_config final : public rcppsw::config::base_config {
   double gamma{0.0};
 };
 
-NS_END(config, math, rcppsw);
+} /* namespace rcppsw::math::config */
 

@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, multithread);
+namespace rcppsw::multithread {
 
 /*******************************************************************************
  * Class Definitions
@@ -100,5 +100,5 @@ class lockable {
   void unlock_rd(std::shared_mutex* mtx) const { maybe_unlock_rd(mtx, true); }
 };
 
-NS_END(multithread, rcppsw);
+} /* namespace rcppsw::multithread */
 

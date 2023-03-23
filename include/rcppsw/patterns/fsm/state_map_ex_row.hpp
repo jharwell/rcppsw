@@ -19,7 +19,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, fsm);
+namespace rcppsw::patterns::fsm {
 
 /*******************************************************************************
  * Class Definitions
@@ -53,5 +53,5 @@ class state_map_ex_row {
   /* clang-format on */
 };
 
-NS_END(fsm, patterns, rcppsw);
+} /* namespace rcppsw::patterns::fsm */
 
