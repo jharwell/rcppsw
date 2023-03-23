@@ -12,18 +12,20 @@
 #include "rcppsw/init/init.hpp"
 
 #include <iostream>
-#include "rcppsw/version.hpp"
+
+#include "rcppsw/version/version.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, init);
+namespace rcppsw::init {
 
 /*******************************************************************************
  * Free Functions
  ******************************************************************************/
 void init(void) {
-  std::cout << "Loaded rcppsw.v" << kVERSION << std::endl;
+  std::cout << "Loaded Reusable C++ Software (RCPPSW): ";
+  std::cout << rversion::meta_info_to_str(&rversion::kVersion);
 }
 
-NS_END(init, rcppsw);
+} /* namespace rcppsw::init */

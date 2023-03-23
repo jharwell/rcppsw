@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Constructors/Destructor
@@ -127,4 +127,4 @@ void csv_sink::finalize(void) {
   ofile()->close();
 } /* finalize() */
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

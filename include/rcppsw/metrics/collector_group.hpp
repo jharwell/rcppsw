@@ -25,7 +25,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Class Definitions
@@ -164,4 +164,4 @@ class collector_group : public rer::client<collector_group> {
   /* clang-format on */
 };
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

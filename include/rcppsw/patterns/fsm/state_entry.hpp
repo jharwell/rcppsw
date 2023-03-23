@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, fsm);
+namespace rcppsw::patterns::fsm {
 
 class base_fsm;
 class event_data;
@@ -45,5 +45,5 @@ class state_entry {
                                    const event_data* data) const = 0;
 };
 
-NS_END(fsm, patterns, rcppsw);
+} /* namespace rcppsw::patterns::fsm */
 

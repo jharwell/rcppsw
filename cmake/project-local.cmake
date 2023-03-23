@@ -1,5 +1,5 @@
 ################################################################################
-# Configuration Options                                                        #
+# Configuration Options
 ################################################################################
 # We might be linking with a shared library
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -9,7 +9,8 @@ set(rcppsw_CHECK_LANGUAGE "CXX")
 # Each conference tag=minor increment. Each minor feature added=patch increment.
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 3)
-set(PROJECT_VERSION_PATCH 0)
+set(PROJECT_VERSION_PATCH 14)
+set(rcppsw_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
 
 if (NOT DEFINED RCPPSW_AL_MT_SAFE_TYPES)
   set(RCPPSW_AL_MT_SAFE_TYPES YES)
@@ -19,76 +20,88 @@ if (NOT DEFINED RCPPSW_ER_OLD_LOG4CXX)
   set(RCPPSW_ER_OLD_LOG4CXX OFF)
 endif()
 
+libra_configure_version(
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/version/version.cpp.in
+  ${CMAKE_CURRENT_BINARY_DIR}/src/version/version.cpp
+  rcppsw_components_SRC
+ )
+
 ################################################################################
-# Components                                                                   #
+# Components
 ################################################################################
-component_register_as_src(
+libra_component_register_as_src(
 rcppsw_config_SRC
   rcppsw
   "${rcppsw_SRC}"
   config
   "src/config")
-component_register_as_src(
+libra_component_register_as_src(
+rcppsw_abi_SRC
+  rcppsw
+  "${rcppsw_SRC}"
+  abi
+  "src/abi")
+libra_component_register_as_src(
 rcppsw_control_SRC
   rcppsw
   "${rcppsw_SRC}"
   control
   "src/control")
-component_register_as_src(
+libra_component_register_as_src(
 rcppsw_math_SRC
   rcppsw
   "${rcppsw_SRC}"
   math
   "src/math")
-component_register_as_src(
+libra_component_register_as_src(
 rcppsw_metrics_SRC
   rcppsw
   "${rcppsw_SRC}"
   metrics
   "src/metrics")
-component_register_as_src(
+libra_component_register_as_src(
 rcppsw_multiprocess_SRC
   rcppsw
   "${rcppsw_SRC}"
   multiprocess
   "src/multiprocess")
-component_register_as_src(
+libra_component_register_as_src(
 rcppsw_multithread_SRC
   rcppsw
   "${rcppsw_SRC}"
   multithread
   "src/multithread")
-component_register_as_src(
+libra_component_register_as_src(
 rcppsw_patterns_SRC
   rcppsw
   "${rcppsw_SRC}"
   patterns
   "src/patterns")
-component_register_as_src(
+libra_component_register_as_src(
 rcppsw_spatial_SRC
   rcppsw
   "${rcppsw_SRC}"
   spatial
   "src/spatial")
-component_register_as_src(
+libra_component_register_as_src(
 rcppsw_types_SRC
   rcppsw
   "${rcppsw_SRC}"
   types
   "src/types")
-component_register_as_src(
+libra_component_register_as_src(
 rcppsw_utils_SRC
   rcppsw
   "${rcppsw_SRC}"
   utils
   "src/utils")
-component_register_as_src(
+libra_component_register_as_src(
   rcppsw_er_SRC
   rcppsw
   "${rcppsw_SRC}"
   er
   "src/er")
-component_register_as_src(
+libra_component_register_as_src(
   rcppsw_init_SRC
   rcppsw
   "${rcppsw_SRC}"
@@ -98,6 +111,7 @@ component_register_as_src(
 # Root project (not used in find_package())
 if (NOT rcppsw_FIND_COMPONENTS)
   set(rcppsw_FIND_COMPONENTS
+    abi
     config
     control
     er
@@ -113,12 +127,26 @@ if (NOT rcppsw_FIND_COMPONENTS)
     )
 endif()
 
-requested_components_check(rcppsw)
+libra_requested_components_check(rcppsw)
 
 ################################################################################
-# External Projects                                                            #
+# External Projects
 ################################################################################
 # ticpp
+ExternalProject_Add(ticpp
+  GIT_REPOSITORY https://github.com/wxFormBuilder/ticpp.git
+  GIT_TAG master
+  CONFIGURE_COMMAND ${CMAKE_COMMAND}
+  -DCMAKE_BUILD_TYPE=RelWithDebInfo
+  -DCMAKE_INSTALL_PREFIX=${LIBRA_DEPS_PREFIX}
+  -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+  ../ticpp-src
+  PATCH_COMMAND git apply ${CMAKE_CURRENT_SOURCE_DIR}/scripts/ticpp.patch || true
+  BUILD_COMMAND make CFLAGS="-fPIC"
+  INSTALL_COMMAND make install
+  SOURCE_DIR ${CMAKE_BINARY_DIR}/ticpp-src
+  BINARY_DIR ${CMAKE_BINARY_DIR}/ticpp-build
+  )
 add_library(ticpp_ticpp::ticpp_ticpp STATIC IMPORTED GLOBAL)
 set_target_properties(ticpp_ticpp::ticpp_ticpp PROPERTIES
   IMPORTED_LOCATION ${LIBRA_DEPS_PREFIX}/lib/libticpp.a
@@ -135,7 +163,7 @@ if (NOT ${LIBRA_RTD_BUILD})
   # set(Boost_USE_MULTITHREADED      OFF)
   set(Boost_USE_STATIC_RUNTIME     OFF)
   find_package(Boost 1.71.0
-    COMPONENTS
+     COMPONENTS
     system
     thread
     graph
@@ -147,7 +175,7 @@ endif()
 find_package(rcsw)
 
 ################################################################################
-# Libraries                                                                    #
+# Libraries
 ################################################################################
 # Create the source for the SINGLE library to build by combining the
 # source of the selected components
@@ -157,18 +185,6 @@ foreach(component ${rcppsw_FIND_COMPONENTS})
   endif()
 endforeach()
 
-# Configure version
-execute_process(COMMAND git rev-list --count HEAD
-  OUTPUT_VARIABLE RCPPSW_VERSION
-  OUTPUT_STRIP_TRAILING_WHITESPACE)
-
-configure_file(
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/version.cpp.in
-  ${CMAKE_CURRENT_BINARY_DIR}/src/version.cpp
-  @ONLY
-  )
-list(APPEND rcppsw_components_SRC "${CMAKE_CURRENT_BINARY_DIR}/src/version.cpp")
-
 # Define RCPPSW library
 set(rcppsw_LIBRARY rcppsw)
 add_library(
@@ -177,9 +193,21 @@ add_library(
   ${rcppsw_components_SRC}
   )
 
-
 set(rcppsw_LIBRARY_NAME ${rcppsw_LIBRARY})
-set_target_properties(${rcppsw_LIBRARY} PROPERTIES OUTPUT_NAME ${rcppsw_LIBRARY_NAME})
+set_target_properties(${rcppsw_LIBRARY}
+  PROPERTIES
+  OUTPUT_NAME ${rcppsw_LIBRARY_NAME}
+  )
+
+# Setting this results in TWO files being installed: the actual
+# library with the version embedded, and a symlink to the actual
+# library with the same name sans the embedded version (if rcppsw is
+# built as a shared library).
+set_target_properties(${rcppsw_LIBRARY}
+  PROPERTIES
+  VERSION ${RCPPSW_VERSION}
+  SOVERSION ${RCPPSW_VERSION}
+  )
 
 ########################################
 # Include directories
@@ -205,10 +233,13 @@ target_include_directories(
 ########################################
 target_link_libraries(${rcppsw_LIBRARY}
   rcsw::rcsw
-  ticpp_ticpp::ticpp_ticpp
   ${Boost_LIBRARIES}
   pthread
   dl
+  )
+
+target_link_libraries(${rcppsw_LIBRARY}
+  ticpp_ticpp::ticpp_ticpp
   )
 
 ########################################
@@ -234,27 +265,43 @@ target_compile_definitions(${rcppsw_LIBRARY}
   )
 
 ################################################################################
-# Installation                                                                 #
+# Installation and Deployment
 ################################################################################
-configure_exports_as(${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
+libra_configure_exports_as(${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
 
 # Install rcppsw
-register_target_for_install(${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
-register_headers_for_install(include/${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
+libra_register_target_for_install(${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
+libra_register_headers_for_install(include/${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
+
+set(CPACK_SET_DESTDIR YES)
+libra_configure_cpack(
+  "DEB;TGZ"
+  "RCPPSW is a collection of reusable C++ software (design patterns, boost gaps,
+etc.), independent of any C++ project."
+
+  "John Harwell"
+  "https://rcppsw.readthedocs.io/en/master"
+  "John Harwell <john.r.harwell@gmail.com>")
+
 
 ################################################################################
-# Status                                                                       #
+# Status
 ################################################################################
 libra_config_summary()
 
-message(STATUS "")
-message(STATUS "")
-message(STATUS "RCPPSW Configuration Summary:")
-message(STATUS "")
+message("")
+message("--------------------------------------------------------------------------------")
+message("                         RCPPSW Configuration Summary")
+message("--------------------------------------------------------------------------------")
+message("")
 
+message(STATUS "Version                               : rcppsw_VERSION=${rcppsw_VERSION}")
 message(STATUS "Enable std::atomic types..............: RCPPSW_AL_MT_SAFE_TYPES=${RCPPSW_AL_MT_SAFE_TYPES}")
 message(STATUS "Use old log4cxx.......................: RCPPSW_ER_OLD_LOG4CXX=${RCPPSW_ER_OLD_LOG4CXX}" )
 
 if(CMAKE_CROSSCOMPILING)
   message(STATUS "Boost root hint.......................: BOOST_ROOT=${BOOST_ROOT}")
 endif()
+
+message("")
+message("--------------------------------------------------------------------------------")

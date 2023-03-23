@@ -23,7 +23,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Class Definitions
@@ -304,5 +304,5 @@ RCPPSW_MATH_RANGE_SCALED_CONV2FLT(z);
 RCPPSW_MATH_RANGE_SCALED_CONV2FLT(i);
 RCPPSW_MATH_RANGE_CONV2DISC(z, size_t);
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */
 

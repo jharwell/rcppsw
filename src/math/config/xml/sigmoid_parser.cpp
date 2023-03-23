@@ -14,7 +14,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math, config, xml);
+namespace rcppsw::math::config::xml {
 
 /*******************************************************************************
  * Member Functions
@@ -41,4 +41,4 @@ error:
   return false;
 } /* validate() */
 
-NS_END(xml, config, math, rcppsw);
+} /* namespace rcppsw::math::xml, config */

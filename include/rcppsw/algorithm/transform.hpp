@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, algorithm);
+namespace rcppsw::algorithm {
 
 /*******************************************************************************
  * Templates
@@ -24,7 +24,8 @@ NS_START(rcppsw, algorithm);
 /**
  * \brief Given an input range defined by (\p first, \p last), and a filtering
  * predicate \p pred, apply \p f to all elements from the input range that
- * satisfy \p pred and write them to the output range \p result.
+ * satisfy \p pred and write them to the output range \p result, transforming
+ * them each via \p f.
  */
 template <class InputIterator,
           class OutputIterator,
@@ -43,5 +44,4 @@ OutputIterator transform_if(InputIterator first,
   return result;
 }
 
-NS_END(algorithm, rcppsw);
-
+} /* namespace rcppsw::algorithm */

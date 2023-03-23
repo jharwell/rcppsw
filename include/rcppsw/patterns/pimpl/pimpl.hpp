@@ -19,7 +19,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, pimpl);
+namespace rcppsw::patterns::pimpl {
 
 /*******************************************************************************
  * Class Definitions
@@ -44,4 +44,4 @@ struct pimpl {
   std::unique_ptr<TImpl> impl;
 };
 
-NS_END(pimpl, patterns, rcppsw);
+} /* namespace rcppsw::patterns::pimpl */

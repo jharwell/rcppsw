@@ -22,7 +22,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, prototype);
+namespace rcppsw::patterns::prototype {
 
 /*******************************************************************************
  * Class Definitions
@@ -70,5 +70,5 @@ class caching_factory {
   /* clang-format on */
 };
 
-NS_END(prototype, patterns, rcppsw);
+} /* namespace rcppsw::patterns::prototype */
 

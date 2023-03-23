@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, config, xml);
+namespace rcppsw::config::xml {
 
 /*******************************************************************************
  * Constructors/Destructor
@@ -55,4 +55,4 @@ void xml_config_parser::node_attr_get(const ticpp::Element& node,
   }
 } /* node_attr_get() */
 
-NS_END(xml, config, rcppsw);
+} /* namespace rcppsw::config::xml */

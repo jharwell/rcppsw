@@ -21,7 +21,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math, config, xml);
+namespace rcppsw::math::config::xml {
 
 /*******************************************************************************
  * Class Definitions
@@ -59,5 +59,5 @@ class rng_parser final : public rer::client<rng_parser>,
   /* clang-format on */
 };
 
-NS_END(xml, config, math, rcppsw);
+} /* namespace rcppsw::math::xml, config */
 

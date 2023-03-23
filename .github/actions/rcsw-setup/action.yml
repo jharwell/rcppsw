@@ -1,0 +1,32 @@
+name: 'Setup RCSW'
+description: 'Setup RCSW for CI and testing'
+# inputs:
+  # who-to-greet:  # id of input
+  #   description: 'Who to greet'
+  #   required: true
+  #   default: 'World'
+# outputs:
+#   time: # id of output
+#     description: 'The time we greeted you'
+runs:
+  using: 'composite'
+  steps:
+    - name: Install RCSW
+      shell: bash
+      run: |
+        mkdir -p build && cd build
+        git clone https://github.com/jharwell/rcsw.git
+        cd rcsw
+
+        git config --global --add safe.directory $PWD
+        git checkout devel
+        git submodule update --init --remote --recursive
+        mkdir build && cd build
+
+        cmake \
+        -DCMAKE_INSTALL_PREFIX=/usr/local \
+        -DCMAKE_BUILD_TYPE=DEV \
+        ..
+
+        JOBS=$(grep -c ^processor /proc/cpuinfo)
+        make -j${JOBS} install

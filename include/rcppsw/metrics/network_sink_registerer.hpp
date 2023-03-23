@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Class Definitions
@@ -96,4 +96,4 @@ class network_sink_registerer :public rer::client<network_sink_registerer> {
   }
 };
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

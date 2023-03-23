@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, fsm);
+namespace rcppsw::patterns::fsm {
 
 class base_fsm;
 class event_data;
@@ -47,5 +47,5 @@ class state_guard {
   virtual bool invoke_guard_condition(base_fsm* sm, const event_data*) const = 0;
 };
 
-NS_END(fsm, patterns, rcppsw);
+} /* namespace rcppsw::patterns::fsm */
 

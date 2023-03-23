@@ -31,7 +31,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, fsm);
+namespace rcppsw::patterns::fsm {
 
 /*******************************************************************************
  * Class Definitions
@@ -237,7 +237,7 @@ class base_fsm : public er::client<base_fsm> {
   /* clang-format on */
 };
 
-NS_END(fsm, patterns, rcppsw);
+} /* namespace rcppsw::patterns::fsm */
 
 /*******************************************************************************
  * State Macros With Data

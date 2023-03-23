@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, types);
+namespace rcppsw::types {
 
 /*******************************************************************************
  * Class Definitions
@@ -37,7 +37,7 @@ template <typename T, typename Parameter>
 class named_type : public er::stringizable {
  public:
   explicit named_type(T const& value) noexcept : m_value(value) {}
-  virtual ~named_type(void) = default;
+  ~named_type(void) override = default;
 
   const T& v(void) const { return m_value; }
   T& set(const T& value) { return m_value = value; }
@@ -60,5 +60,5 @@ class named_type : public er::stringizable {
   /* clang-format on */
 };
 
-NS_END(types, rcppsw);
+} /* namespace rcppsw::types */
 

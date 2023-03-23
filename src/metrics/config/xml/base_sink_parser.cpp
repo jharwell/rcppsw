@@ -17,7 +17,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics, config, xml);
+namespace rcppsw::metrics::config::xml {
 
 /*******************************************************************************
  * Member Functions
@@ -44,4 +44,4 @@ bool base_sink_parser::is_collector_name(const ticpp::Attribute& attr) const {
   return non_names.end() == std::find(non_names.begin(), non_names.end(), name);
 } /* is_collector_name() */
 
-NS_END(xml, config, metrics, rcppsw);
+} /* namespace rcppsw::metrics::xml, config */

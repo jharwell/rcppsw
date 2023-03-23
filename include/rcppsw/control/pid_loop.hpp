@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, control);
+namespace rcppsw::control {
 
 /*******************************************************************************
  * Class Definitions
@@ -88,5 +88,5 @@ class pid_loop {
   /* clang-format on */
 };
 
-NS_END(control, rcppsw);
+} /* namespace rcppsw::control */
 

@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, multiprocess);
+namespace rcppsw::multiprocess {
 
 /*******************************************************************************
  * Member Functions
@@ -43,4 +43,4 @@ error:
   return -1;
 } /* forkable::start() */
 
-NS_END(multiprocess, rcppsw);
+} /* namespace rcppsw::multiprocess */

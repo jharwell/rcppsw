@@ -17,7 +17,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, control);
+namespace rcppsw::control {
 
 /*******************************************************************************
  * Constructors/Destructors
@@ -27,7 +27,7 @@ waveform_generator::waveform_generator(void) {
   register_type<square_waveform>(kSquare);
   register_type<sawtooth_waveform>(kSawtooth);
   register_type<constant_waveform>(kConstant);
-  register_type<null_waveform>(kNull);
+  register_type<null_waveform>(kNone);
 }
 
 /*******************************************************************************
@@ -39,4 +39,4 @@ waveform_generator::operator()(const std::string& name,
   return create(name, config);
 } /* operator() */
 
-NS_END(control, rcppsw);
+} /* namespace rcppsw::control */

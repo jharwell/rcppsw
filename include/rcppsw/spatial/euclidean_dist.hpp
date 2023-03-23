@@ -95,5 +95,6 @@ euclidean_dist operator/(double lhs, const euclidean_dist& rhs);
 euclidean_dist operator-(double lhs, const euclidean_dist& rhs);
 euclidean_dist operator+(double lhs, const euclidean_dist& rhs);
 bool operator<=(double lhs, const euclidean_dist& rhs) RCPPSW_PURE;
+bool operator<(double lhs, const euclidean_dist& rhs) RCPPSW_PURE;
 
 } /* namespace rcppsw::spatial */

@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, multithread);
+namespace rcppsw::multithread {
 
 /*******************************************************************************
  * Member Functions
@@ -37,4 +37,4 @@ error:
   return ERROR;
 } /* start() */
 
-NS_END(multithread, rcppsw);
+} /* namespace rcppsw::multithread */

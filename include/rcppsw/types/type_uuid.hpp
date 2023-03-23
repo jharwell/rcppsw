@@ -17,7 +17,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, types);
+namespace rcppsw::types {
 
 /*******************************************************************************
  * Type Definitions
@@ -50,7 +50,7 @@ class type_uuid final : public rtypes::named_type<int, struct type_uuid_tag> {
   bool operator!=(const type_uuid& other) const { return v() != other.v(); }
 };
 
-NS_START(constants);
+namespace constants {
 
 /**
  * \brief Null identifier to indicate an entity does not have an ID associated
@@ -58,4 +58,6 @@ NS_START(constants);
  */
 extern type_uuid kNoUUID;
 
-NS_END(constants, types, rcppsw);
+} /* namespace constants */
+
+} /* namespace rcppsw::types::constants */

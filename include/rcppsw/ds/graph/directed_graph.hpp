@@ -19,7 +19,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, graph);
+namespace rcppsw::ds::graph {
 
 /*******************************************************************************
  * Class Definitions
@@ -76,4 +76,4 @@ class directed_graph : public rpdecorator::decorator<
   RCPPSW_DECORATE_DECLDEF_STATIC(rdgraph, target);
 };
 
-NS_END(graph, ds, rcppsw);
+} /* namespace rcppsw::ds::graph */

@@ -17,7 +17,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics, config, xml);
+namespace rcppsw::metrics::config::xml {
 
 /*******************************************************************************
  * Class Definitions
@@ -48,5 +48,5 @@ class base_sink_parser : public rer::client<base_sink_parser>,
                          rmetrics::config::output_mode_config* config);
 };
 
-NS_END(xml, config, metrics, rcppsw);
+} /* namespace rcppsw::metrics::xml, config */
 

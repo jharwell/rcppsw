@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, control);
+namespace rcppsw::control {
 
 /*******************************************************************************
  * Classes
@@ -53,4 +53,4 @@ class null_waveform final : public base_waveform {
   double value(double) override { return 0.0; }
 };
 
-NS_END(control, rcppsw);
+} /* namespace rcppsw::control */

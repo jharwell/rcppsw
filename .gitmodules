@@ -1,4 +1,4 @@
 [submodule "libra"]
 	path = libra
-	url = https://github.com/swarm-robotics/libra.git
+	url = https://github.com/jharwell/libra.git
 	branch = devel

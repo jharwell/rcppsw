@@ -14,7 +14,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, control, config, xml);
+namespace rcppsw::control::config::xml {
 
 /*******************************************************************************
  * Member Functions
@@ -43,4 +43,4 @@ void waveform_parser::parse(const ticpp::Element& node) {
   XML_PARSE_ATTR_DFLT(vnode, m_config, phase, -1.0);
 } /* parse() */
 
-NS_END(xml, config, control, rcppsw);
+} /* namespace rcppsw::control::xml, config */

@@ -22,7 +22,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 class radians;
 
@@ -185,5 +185,5 @@ class degrees final : public er::stringizable {
  ******************************************************************************/
 std::ostream& operator<<(std::ostream& stream, const degrees& d);
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */
 

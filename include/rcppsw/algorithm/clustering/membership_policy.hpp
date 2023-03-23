@@ -19,7 +19,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, algorithm, clustering);
+namespace rcppsw::algorithm::clustering {
 
 /*******************************************************************************
  * Template Helpers
@@ -67,6 +67,6 @@ struct mapping<Policy, policy::is_eh<Policy>> {
 template<typename Policy>
 using membership_type = typename membership::mapping<Policy>::type;
 
-NS_END(clustering, algorithm, rcppsw);
+} /* namespace rcppsw::algorithm::clustering */
 
 

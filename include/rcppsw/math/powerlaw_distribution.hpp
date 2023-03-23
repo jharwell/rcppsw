@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Class Definitions
@@ -61,5 +61,5 @@ class powerlaw_distribution {
   size_t m_pwr;
   /* clang-format on */
 };
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */
 

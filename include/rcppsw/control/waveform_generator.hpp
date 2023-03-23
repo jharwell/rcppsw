@@ -15,15 +15,14 @@
 #include <string>
 
 #include "rcppsw/patterns/factory/factory.hpp"
+#include "rcppsw/control/config/waveform_config.hpp"
 
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, control);
+namespace rcppsw::control {
+
 class base_waveform;
-namespace config {
-struct waveform_config;
-} /* namespace config */
 
 /*******************************************************************************
  * Classes
@@ -39,7 +38,7 @@ struct waveform_config;
  * - \ref kSquare (periodic)
  * - \ref kSawtooth (periodic)
  * - \ref kConstant (aperiodic)
- * - \ref kNull (aperiodic)
+ * - \ref kNone (no waveform)
  */
 class waveform_generator
     : public patterns::factory::releasing_factory<base_waveform,
@@ -49,27 +48,27 @@ class waveform_generator
   /**
    * \brief Generate a \ref sine_waveform.
    */
-  static inline const std::string kSine = "Sine";
+  static inline const std::string kSine = "sine";
 
   /**
    * \brief Generate a \ref square_waveform.
    */
-  static inline const std::string kSquare = "Square";
+  static inline const std::string kSquare = "square";
 
   /**
    * \brief Generate a \ref sawtooth_waveform.
    */
-  static inline const std::string kSawtooth = "Sawtooth";
+  static inline const std::string kSawtooth = "sawtooth";
 
   /**
    * \brief Generate a \ref constant_waveform.
    */
-  static inline const std::string kConstant = "Constant";
+  static inline const std::string kConstant = "constant";
 
   /**
    * \brief Generate a \ref null_waveform.
    */
-  static inline const std::string kNull = "Null";
+  static inline const std::string kNone = rconfig::constants::kNoValue;
 
   waveform_generator(void);
 
@@ -77,5 +76,4 @@ class waveform_generator
   operator()(const std::string& name, const config::waveform_config* config);
 };
 
-NS_END(control, rcppsw);
-
+} /* namespace rcppsw::control */

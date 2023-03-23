@@ -19,7 +19,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, algorithm, clustering);
+namespace rcppsw::algorithm::clustering {
 
 /*******************************************************************************
  * Class Definitions
@@ -71,5 +71,5 @@ class entropy_eh_omp final : public eh_clustering_impl<T> {
   /* clang-format on */
 };
 
-NS_END(clustering, algorithm, rcppsw);
+} /* namespace rcppsw::algorithm::clustering */
 

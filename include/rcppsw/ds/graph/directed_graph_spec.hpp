@@ -19,7 +19,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, graph);
+namespace rcppsw::ds::graph {
 
 /*******************************************************************************
  * Class Definitions
@@ -62,4 +62,4 @@ struct directed_graph_spec {
     >;
 };
 
-NS_END(graph, ds, rcppsw);
+} /* namespace rcppsw::ds::graph */

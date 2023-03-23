@@ -20,7 +20,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, multithread);
+namespace rcppsw::multithread {
 
 /*******************************************************************************
  * Class Definitions
@@ -117,5 +117,5 @@ class threadable {
   /* clancg-format on */
 };
 
-NS_END(multithread, rcppsw);
+} /* namespace rcppsw::multithread */
 

@@ -23,7 +23,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, config, xml);
+namespace rcppsw::config::xml {
 
 /*******************************************************************************
  * Class Definitions
@@ -171,4 +171,4 @@ class xml_config_repository : public er::client<xml_config_repository> {
   /* clang-format on */
 };
 
-NS_END(xml, config, rcppsw);
+} /* namespace rcppsw::config::xml */

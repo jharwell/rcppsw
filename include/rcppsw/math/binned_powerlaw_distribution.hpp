@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, math);
+namespace rcppsw::math {
 
 /*******************************************************************************
  * Class Definitions
@@ -57,5 +57,5 @@ class binned_powerlaw_distribution : public powerlaw_distribution {
   }
 };
 
-NS_END(math, rcppsw);
+} /* namespace rcppsw::math */
 

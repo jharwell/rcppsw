@@ -17,7 +17,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds, graph);
+namespace rcppsw::ds::graph {
 
 /*******************************************************************************
  * Class Definitions
@@ -33,4 +33,4 @@ struct hgrid3D_vertex_property : public base_vertex_property {
   rmath::vector3z coord{};
 };
 
-NS_END(graph, ds, rcppsw);
+} /* namespace rcppsw::ds::graph */

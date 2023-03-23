@@ -23,7 +23,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 class base_metrics;
 
 /*******************************************************************************
@@ -105,4 +105,4 @@ class base_collector : public er::client<base_collector> {
   RCPPSW_WRAP_DECLDEF(ready_to_flush, *m_sink, const);
 };
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

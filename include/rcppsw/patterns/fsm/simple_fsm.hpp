@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, patterns, fsm);
+namespace rcppsw::patterns::fsm {
 
 /*******************************************************************************
  * Type Definitions
@@ -29,5 +29,5 @@ NS_START(rcppsw, patterns, fsm);
  */
 using simple_fsm = base_fsm;
 
-NS_END(fsm, patterns, rcppsw);
+} /* namespace rcppsw::patterns::fsm */
 

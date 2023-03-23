@@ -24,7 +24,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, ds);
+namespace rcppsw::ds {
 
 namespace bg = boost::geometry;
 namespace bgi = bg::index;
@@ -236,4 +236,4 @@ rtree_box<TCoordType> make_rtree_box(const TCoordType& ll,
                                                        ur.z()));
 }
 
-NS_END(ds, rcppsw);
+} /* namespace rcppsw::ds */

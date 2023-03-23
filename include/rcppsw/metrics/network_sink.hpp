@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Class Definitions
@@ -51,4 +51,4 @@ class network_sink : public rmetrics::base_sink,
   /* clang-format on */
 };
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

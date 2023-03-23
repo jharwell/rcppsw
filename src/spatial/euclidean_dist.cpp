@@ -34,6 +34,7 @@ euclidean_dist operator+(double lhs, const euclidean_dist& rhs) {
   return euclidean_dist(lhs + rhs.v());
 }
 bool operator<=(double lhs, const euclidean_dist& rhs) { return lhs <= rhs.v(); }
+bool operator<(double lhs, const euclidean_dist& rhs) { return lhs < rhs.v(); }
 
 /*******************************************************************************
  * Non-Member Functions

@@ -20,7 +20,7 @@
  * Namespaces/Decls
  ******************************************************************************/
 namespace bpo = boost::program_options;
-NS_START(rcppsw, utils);
+namespace rcppsw::utils {
 
 /*******************************************************************************
  * Class Definitions
@@ -90,5 +90,5 @@ class base_cli {
   /* clang-format on */
 };
 
-NS_END(utils, rcppsw);
+} /* namespace rcppsw::utils */
 

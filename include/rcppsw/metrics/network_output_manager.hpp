@@ -21,7 +21,7 @@
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
-NS_START(rcppsw, metrics);
+namespace rcppsw::metrics {
 
 /*******************************************************************************
  * Class Definitions
@@ -62,4 +62,4 @@ class network_output_manager : public rer::client<network_output_manager>,
   /* clang-format on */
 };
 
-NS_END(metrics, rcppsw);
+} /* namespace rcppsw::metrics */

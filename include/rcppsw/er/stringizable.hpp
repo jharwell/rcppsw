@@ -18,7 +18,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, er);
+namespace rcppsw::er {
 
 /*******************************************************************************
  * Class Definitions
@@ -40,5 +40,5 @@ class stringizable {
   virtual std::string to_str(void) const { return "to_str() not defined"; }
 };
 
-NS_END(er, rcppsw);
+} /* namespace rcppsw::er */
 

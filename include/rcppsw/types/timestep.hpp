@@ -16,7 +16,7 @@
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
-NS_START(rcppsw, types);
+namespace rcppsw::types {
 
 /*******************************************************************************
  * Class Definitions
@@ -97,11 +97,13 @@ class timestep final : public named_type<size_t, struct timestep_tag> {
   bool operator<=(const T& other) const { return v() <= other; }
 };
 
-NS_START(constants);
+namespace constants {
 
 /**
  * \brief Null identifier to indicate an unset value.
  */
 extern timestep kNoTime;
 
-NS_END(constants, types, rcppsw);
+} /* namespace constants */
+
+} /* namespace rcppsw::types */
