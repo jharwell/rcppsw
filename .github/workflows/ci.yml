@@ -14,7 +14,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     container:
-      image: jharwell/ubuntu22.04:2023-03-23
+      image: jharwell/ubuntu22.04:2023-04-12
     strategy:
       matrix:
         CMAKE_BUILD_TYPE:
@@ -22,8 +22,15 @@ jobs:
           - DEV
 
     steps:
+      - name: Install RCSW
+        shell: bash
+        run: |
+          curl -s --compressed "https://jharwell.github.io/ppa/KEY.gpg" | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/ppa.gpg >/dev/null
+          sudo curl -s --compressed -o /etc/apt/sources.list.d/ppa.list "https://jharwell.github.io/ppa/ppa.list"
+          sudo apt update
+          sudo apt-get install rcsw
+
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/rcsw-setup
       - name: Build=${{ matrix.CMAKE_BUILD_TYPE }}
         shell: bash
         run: |
@@ -62,7 +69,7 @@ jobs:
     needs:
       - build-and-test
     container:
-      image: jharwell/ubuntu22.04:2023-03-23
+      image: jharwell/ubuntu22.04:2023-04-12
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -91,3 +98,76 @@ jobs:
           fi
           git tag ${TAG_VERSION} -m "${TAG_MESSAGE}"
           git push -o ci.skip origin ${TAG_VERSION}
+
+  deploy-release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs:
+      - tag-release
+
+    container:
+      image: jharwell/ubuntu22.04:2023-04-12
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install RCSW
+        shell: bash
+        run: |
+          curl -s --compressed "https://jharwell.github.io/ppa/KEY.gpg" | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/ppa.gpg >/dev/null
+          sudo curl -s --compressed -o /etc/apt/sources.list.d/ppa.list "https://jharwell.github.io/ppa/ppa.list"
+          sudo apt update
+          sudo apt-get install rcsw
+
+      - name: Build for deploy
+        shell: bash
+        run: |
+          git config --global --add safe.directory $PWD
+          git config --global user.email "${{ github.event.pusher.email }}"
+          git config --global user.name "${{ github.event.pusher.name }}"
+          echo "${{ github.ref }}"
+
+          git submodule update --init --remote --recursive
+
+          VERSION_MAJOR=$(sed -nE 's/.*PROJECT_VERSION_MAJOR ([0-9]+).*/\1/p' cmake/project-local.cmake)
+          VERSION_MINOR=$(sed -nE 's/.*PROJECT_VERSION_MINOR ([0-9]+).*/\1/p' cmake/project-local.cmake)
+          VERSION_PATCH=$(sed -nE 's/.*PROJECT_VERSION_PATCH ([0-9]+).*/\1/p' cmake/project-local.cmake)
+          PACKAGE_VERSION=$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH
+
+          git changelog --start-tag 1.4.0 -n -x > changelog
+
+          mkdir -p build && cd build
+
+          cmake  \
+          -DCMAKE_INSTALL_PREFIX=/usr \
+          -DCMAKE_BUILD_TYPE=OPT \
+          -DLIBRA_ER=ALL \
+          ..
+
+          make ticpp
+          make package -j$(nproc)
+          lintian *.deb
+
+
+      - name: Clone PPA
+        uses: actions/checkout@v2
+        with:
+          repository: jharwell/ppa
+          path: ppa
+          token: ${{ secrets.RCPPSW_DEPLOY_TOKEN }}
+
+      - name: Deploy to PPA
+        shell: bash
+        run: |
+          cd ppa
+          cp ../build/*.deb .
+          ls -al ..
+          echo  "${{ secrets.RCPPSW_GPG_SECRET_KEY }}" | base64 --decode | gpg --import
+          ./scripts/update-packages.sh
+          git add -A
+          git commit -m "Deploy RCPPSW ${PACKAGE_VERSION}"
+          git remote set-url origin https://jharwell:${{ secrets.RCPPSW_DEPLOY_TOKEN }}@github.com/jharwell/ppa.git
+          git push -u origin master

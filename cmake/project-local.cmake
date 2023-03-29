@@ -9,7 +9,7 @@ set(rcppsw_CHECK_LANGUAGE "CXX")
 # Each conference tag=minor increment. Each minor feature added=patch increment.
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 4)
-set(PROJECT_VERSION_PATCH 0)
+set(PROJECT_VERSION_PATCH 1)
 set(rcppsw_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
 
 if (NOT DEFINED RCPPSW_AL_MT_SAFE_TYPES)
@@ -268,12 +268,13 @@ target_compile_definitions(${rcppsw_LIBRARY}
 # Installation and Deployment
 ################################################################################
 libra_configure_exports_as(${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
-
-# Install rcppsw
 libra_register_target_for_install(${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
 libra_register_headers_for_install(include/${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
+libra_register_copyright_for_install(${CMAKE_CURRENT_SOURCE_DIR}/LICENSE)
+if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/changelog)
+  libra_register_changelog_for_install(${CMAKE_CURRENT_SOURCE_DIR}/changelog)
+endif()
 
-set(CPACK_SET_DESTDIR YES)
 libra_configure_cpack(
   "DEB;TGZ"
   "RCPPSW is a collection of reusable C++ software (design patterns, boost gaps,

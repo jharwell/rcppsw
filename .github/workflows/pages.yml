@@ -28,8 +28,16 @@ jobs:
     container:
       image: jharwell/ubuntu22.04:2023-03-23
     steps:
+      - name: Install RCSW
+        shell: bash
+        run: |
+          curl -s --compressed "https://jharwell.github.io/ppa/KEY.gpg" | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/ppa.gpg >/dev/null
+          sudo curl -s --compressed -o /etc/apt/sources.list.d/ppa.list "https://jharwell.github.io/ppa/ppa.list"
+          sudo apt update
+          sudo apt-get install rcsw
+
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/rcsw-setup
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
