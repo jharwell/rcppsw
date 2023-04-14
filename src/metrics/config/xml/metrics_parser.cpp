@@ -51,4 +51,4 @@ void metrics_parser::parse(const ticpp::Element& node) {
   }
 } /* parse() */
 
-} /* namespace rcppsw::metrics::xml, config */
+} /* namespace rcppsw::metrics::xml::config */

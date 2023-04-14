@@ -44,9 +44,8 @@ class base_sink_parser : public rer::client<base_sink_parser>,
    */
   bool is_collector_name(const ticpp::Attribute& attr) const RCPPSW_COLD;
 
-  void output_mode_parse(const ticpp::Element& element,
+  void  output_mode_parse(const ticpp::Element& element,
                          rmetrics::config::output_mode_config* config);
 };
 
-} /* namespace rcppsw::metrics::xml, config */
-
+} /* namespace rcppsw::metrics::xml::config */

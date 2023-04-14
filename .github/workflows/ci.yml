@@ -92,12 +92,16 @@ jobs:
           if [ "${{ github.ref }}" = "refs/heads/devel" ]; then
             TAG_VERSION=${PACKAGE_VERSION}.beta
             TAG_MESSAGE="Development release ${TAG_VERSION}"
+            git tag ${TAG_VERSION} -m "${TAG_MESSAGE}" -f
+            git push -o ci.skip origin ${TAG_VERSION} -f
           else
             TAG_VERSION=${PACKAGE_VERSION}
             TAG_MESSAGE="Release ${TAG_VERSION}"
+            git tag ${TAG_VERSION} -m "${TAG_MESSAGE}"
+            git push -o ci.skip origin ${TAG_VERSION}
           fi
-          git tag ${TAG_VERSION} -m "${TAG_MESSAGE}"
-          git push -o ci.skip origin ${TAG_VERSION}
+
+
 
   deploy-release:
     runs-on: ubuntu-latest
@@ -162,6 +166,11 @@ jobs:
       - name: Deploy to PPA
         shell: bash
         run: |
+          VERSION_MAJOR=$(sed -nE 's/.*PROJECT_VERSION_MAJOR ([0-9]+).*/\1/p' cmake/project-local.cmake)
+          VERSION_MINOR=$(sed -nE 's/.*PROJECT_VERSION_MINOR ([0-9]+).*/\1/p' cmake/project-local.cmake)
+          VERSION_PATCH=$(sed -nE 's/.*PROJECT_VERSION_PATCH ([0-9]+).*/\1/p' cmake/project-local.cmake)
+          PACKAGE_VERSION=$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH
+
           cd ppa
           cp ../build/*.deb .
           ls -al ..

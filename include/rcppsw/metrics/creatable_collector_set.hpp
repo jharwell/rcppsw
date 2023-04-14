@@ -51,16 +51,15 @@ struct collector_registration_spec {
  *
  * - The set of output modes that are valid for the collector.
  *
- * - Which sink the collector is associated with (only necessary if the same
- *   collector will be used with multiple sinks). If omitted for a single
- *   collector which has multiple sinks, the behavior is undefined.
+ * - Which sink the collector is associated with. Only necessary if the same
+ *   collector will be used with multiple sinks, but enforced for consistency.
  */
 struct creatable_collector_spec {
   creatable_collector_spec(const std::type_index& collector_id_in,
                            const std::string& input_name_in,
                            const std::string& scoped_name_in,
                            const rmetrics::output_mode& valid_modes_in,
-                           std::type_index sink_id_in = std::type_index(typeid(nullptr)))
+                           const std::type_index& sink_id_in)
       : collector_id(collector_id_in),
         input_name(input_name_in),
         scoped_name(scoped_name_in),

@@ -111,6 +111,7 @@ class register_with_sink : public rer::client<
       if (it->sink_id != sink_id) {
         continue;
       }
+
       auto spec = this->template calc_registration_spec<TSinkType>(
           m_manager,
           config,

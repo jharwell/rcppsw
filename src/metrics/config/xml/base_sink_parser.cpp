@@ -44,4 +44,4 @@ bool base_sink_parser::is_collector_name(const ticpp::Attribute& attr) const {
   return non_names.end() == std::find(non_names.begin(), non_names.end(), name);
 } /* is_collector_name() */
 
-} /* namespace rcppsw::metrics::xml, config */
+} /* namespace rcppsw::metrics::xml::config */

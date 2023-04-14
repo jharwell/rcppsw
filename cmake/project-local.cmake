@@ -9,7 +9,7 @@ set(rcppsw_CHECK_LANGUAGE "CXX")
 # Each conference tag=minor increment. Each minor feature added=patch increment.
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 4)
-set(PROJECT_VERSION_PATCH 1)
+set(PROJECT_VERSION_PATCH 2)
 set(rcppsw_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
 
 if (NOT DEFINED RCPPSW_AL_MT_SAFE_TYPES)
@@ -147,7 +147,7 @@ ExternalProject_Add(ticpp
   SOURCE_DIR ${CMAKE_BINARY_DIR}/ticpp-src
   BINARY_DIR ${CMAKE_BINARY_DIR}/ticpp-build
   )
-add_library(ticpp_ticpp::ticpp_ticpp STATIC IMPORTED GLOBAL)
+add_library(ticpp_ticpp::ticpp_ticpp SHARED IMPORTED GLOBAL)
 set_target_properties(ticpp_ticpp::ticpp_ticpp PROPERTIES
   IMPORTED_LOCATION ${LIBRA_DEPS_PREFIX}/lib/libticpp.a
   )
@@ -163,7 +163,7 @@ if (NOT ${LIBRA_RTD_BUILD})
   # set(Boost_USE_MULTITHREADED      OFF)
   set(Boost_USE_STATIC_RUNTIME     OFF)
   find_package(Boost 1.71.0
-     COMPONENTS
+    COMPONENTS
     system
     thread
     graph
@@ -189,7 +189,7 @@ endforeach()
 set(rcppsw_LIBRARY rcppsw)
 add_library(
   ${rcppsw_LIBRARY}
-  STATIC
+  SHARED
   ${rcppsw_components_SRC}
   )
 
@@ -205,8 +205,8 @@ set_target_properties(${rcppsw_LIBRARY}
 # built as a shared library).
 set_target_properties(${rcppsw_LIBRARY}
   PROPERTIES
-  VERSION ${RCPPSW_VERSION}
-  SOVERSION ${RCPPSW_VERSION}
+  VERSION ${rcppsw_VERSION}
+  SOVERSION ${rcppsw_VERSION}
   )
 
 ########################################
@@ -270,9 +270,9 @@ target_compile_definitions(${rcppsw_LIBRARY}
 libra_configure_exports_as(${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
 libra_register_target_for_install(${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
 libra_register_headers_for_install(include/${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
-libra_register_copyright_for_install(${CMAKE_CURRENT_SOURCE_DIR}/LICENSE)
+libra_register_copyright_for_install(${rcppsw_LIBRARY} ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE)
 if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/changelog)
-  libra_register_changelog_for_install(${CMAKE_CURRENT_SOURCE_DIR}/changelog)
+  libra_register_changelog_for_install(${rcppsw_LIBRARY} ${CMAKE_CURRENT_SOURCE_DIR}/changelog)
 endif()
 
 libra_configure_cpack(
