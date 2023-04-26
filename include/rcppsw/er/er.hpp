@@ -9,8 +9,7 @@
 #pragma once
 
 /*******************************************************************************
- * Macros
-
+ * Constant Definitions
  ******************************************************************************/
 /*
  * If rcppsw is used in a context where this is not defined it is almost
@@ -39,4 +38,3 @@
  */
 #define RCPPSW_ER_MSG_LEN_MAX 1000
 #define RCPPSW_ER_FATAL_MSG_LEN_MAX 10000
-

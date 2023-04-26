@@ -9,15 +9,12 @@ set(rcppsw_CHECK_LANGUAGE "CXX")
 # Each conference tag=minor increment. Each minor feature added=patch increment.
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 4)
-set(PROJECT_VERSION_PATCH 2)
+set(PROJECT_VERSION_PATCH 3)
 set(rcppsw_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
+set(rcppsw_SOVERSION 1)
 
 if (NOT DEFINED RCPPSW_AL_MT_SAFE_TYPES)
   set(RCPPSW_AL_MT_SAFE_TYPES YES)
-endif()
-
-if (NOT DEFINED RCPPSW_ER_OLD_LOG4CXX)
-  set(RCPPSW_ER_OLD_LOG4CXX OFF)
 endif()
 
 libra_configure_version(
@@ -132,6 +129,7 @@ libra_requested_components_check(rcppsw)
 ################################################################################
 # External Projects
 ################################################################################
+
 # ticpp
 ExternalProject_Add(ticpp
   GIT_REPOSITORY https://github.com/wxFormBuilder/ticpp.git
@@ -174,6 +172,19 @@ endif()
 
 find_package(rcsw)
 
+if ("${LIBRA_ER}" MATCHES "ALL")
+  find_package(log4cxx QUIET) # optional
+
+  # Cmake module only available with newer versions of log4cxx
+  if (NOT ${log4cxx_FOUND})
+    set(RCPPSW_ER_OLD_LOG4CXX ON)
+    message(STATUS "Found log4cxx < 0.12")
+  else()
+    set(RCPPSW_ER_OLD_LOG4CXX OFF)
+    message(STATUS "Found log4cxx >= 0.12")
+  endif()
+endif()
+
 ################################################################################
 # Libraries
 ################################################################################
@@ -193,10 +204,9 @@ add_library(
   ${rcppsw_components_SRC}
   )
 
-set(rcppsw_LIBRARY_NAME ${rcppsw_LIBRARY})
 set_target_properties(${rcppsw_LIBRARY}
   PROPERTIES
-  OUTPUT_NAME ${rcppsw_LIBRARY_NAME}
+  OUTPUT_NAME ${rcppsw_LIBRARY}
   )
 
 # Setting this results in TWO files being installed: the actual
@@ -205,7 +215,6 @@ set_target_properties(${rcppsw_LIBRARY}
 # built as a shared library).
 set_target_properties(${rcppsw_LIBRARY}
   PROPERTIES
-  VERSION ${rcppsw_VERSION}
   SOVERSION ${rcppsw_VERSION}
   )
 
@@ -251,9 +260,7 @@ if(${RCPPSW_AL_MT_SAFE_TYPES})
 endif()
 
 if ("${LIBRA_ER}" MATCHES "ALL")
-  if(NOT ${RCPPSW_ER_OLD_LOG4CXX})
-    target_link_directories(${rcppsw_LIBRARY} PUBLIC ${LIBRA_DEPS_PREFIX}/lib)
-  else()
+  if( ${RCPPSW_ER_OLD_LOG4CXX})
     target_compile_definitions(${rcppsw_LIBRARY} PUBLIC RCPPSW_ER_OLD_LOG4CXX)
   endif()
   target_link_libraries(${rcppsw_LIBRARY} log4cxx)
@@ -267,16 +274,22 @@ target_compile_definitions(${rcppsw_LIBRARY}
 ################################################################################
 # Installation and Deployment
 ################################################################################
+# Installation
 libra_configure_exports_as(${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
 libra_register_target_for_install(${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
 libra_register_headers_for_install(include/${rcppsw_LIBRARY} ${CMAKE_INSTALL_PREFIX})
-libra_register_copyright_for_install(${rcppsw_LIBRARY} ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE)
+
+# Deployment
+if(NOT CPACK_PACKAGE_NAME)
+  set(CPACK_PACKAGE_NAME ${rcppsw_LIBRARY})
+endif()
+libra_register_copyright_for_install(${CPACK_PACKAGE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE)
 if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/changelog)
-  libra_register_changelog_for_install(${rcppsw_LIBRARY} ${CMAKE_CURRENT_SOURCE_DIR}/changelog)
+  libra_register_changelog_for_install(${CPACK_PACKAGE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/changelog)
 endif()
 
 libra_configure_cpack(
-  "DEB;TGZ"
+  "DEB"
   "RCPPSW is a collection of reusable C++ software (design patterns, boost gaps,
 etc.), independent of any C++ project."
 
@@ -296,9 +309,9 @@ message("                         RCPPSW Configuration Summary")
 message("--------------------------------------------------------------------------------")
 message("")
 
-message(STATUS "Version                               : rcppsw_VERSION=${rcppsw_VERSION}")
+message(STATUS "Build version.........................: rcppsw_VERSION=${rcppsw_VERSION}")
+message(STATUS "API version...........................: rcppsw_SOVERSION=${rcppsw_SOVERSION}")
 message(STATUS "Enable std::atomic types..............: RCPPSW_AL_MT_SAFE_TYPES=${RCPPSW_AL_MT_SAFE_TYPES}")
-message(STATUS "Use old log4cxx.......................: RCPPSW_ER_OLD_LOG4CXX=${RCPPSW_ER_OLD_LOG4CXX}" )
 
 if(CMAKE_CROSSCOMPILING)
   message(STATUS "Boost root hint.......................: BOOST_ROOT=${BOOST_ROOT}")

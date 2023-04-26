@@ -23,4 +23,3 @@ tmp=$(echo "$tmp" | sed -E 's/^[ \t]*RCPPSW_WRAP_DECLDEF\((.*),(.*),(.*)\)/templ
 tmp=$(echo "$tmp" | sed -E 's/^[ \t]*RCPPSW_WRAP_DECLDEF\((.*),(.*)\)/template <typename... Args>auto Func\(Args\&\&\.\.\. args\) ->decltype(std::declval<decltype(Member)>().Func(args...)) { return \2\.\1(std::forward<Args>(args)...); }/g')
 
 echo "$tmp"
-

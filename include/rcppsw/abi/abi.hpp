@@ -13,6 +13,8 @@
  ******************************************************************************/
 #include <cxxabi.h>
 
+#include "rcppsw/rcppsw.hpp"
+
 /*******************************************************************************
  * Namespaces/Decls
  ******************************************************************************/
@@ -30,6 +32,6 @@ char* demangle(const char* name);
  * \brief Return type info for the the current exception using the compiler
  * ABI.
  */
-std::type_info* current_exception_type(void);
+RCPPSW_PURE std::type_info* current_exception_type(void);
 
 } /* namespace rcppsw::abi */

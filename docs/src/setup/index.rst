@@ -58,11 +58,3 @@ Developer Setup
 
         - Sets ``rcppsw::al::mt*`` to use ``std::atomic`` types if
           enabled. Otherwise, uses non-atomic versions. Default=YES.
-
-      * - RCPPSW_ER_OLD_LOG4CXX
-
-        - YES/NO
-
-        - Sets ``rcppsw::er`` to use an older version of log4cxx. Needed for
-          older versions of the library with slightly different
-          API. Default=NO.

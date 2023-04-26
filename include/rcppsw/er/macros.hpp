@@ -188,7 +188,7 @@
   }
 
 #define ER_INFO_IMPL(logger, ...) {             \
-    if (logger->isErrorEnabled()) {            \
+    if (logger->isInfoEnabled()) {            \
       ER_REPORT(INFO, logger, __VA_ARGS__)    \
     }                                          \
   }
@@ -205,7 +205,7 @@
   }
 #define ER_DEBUG_IMPL(logger, ...) {               \
     if (logger->isDebugEnabled()) {             \
-      ER_REPORT(TRACE, logger, __VA_ARGS__)     \
+      ER_REPORT(DEBUG, logger, __VA_ARGS__)     \
     }                                           \
   }
 #define ER_TRACE_IMPL(logger, ...) {               \
