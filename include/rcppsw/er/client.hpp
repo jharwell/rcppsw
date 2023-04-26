@@ -194,9 +194,9 @@ class client {
     auto appender = std::make_shared<log4cxx::FileAppender>(layout,
                                                             name,
                                                             false);
-#endif
     appender->setName(name);
     logger->addAppender(appender);
+#endif
   }
 
   /**
