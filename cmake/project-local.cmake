@@ -10,8 +10,7 @@ set(rcppsw_CHECK_LANGUAGE "CXX")
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 4)
 set(PROJECT_VERSION_PATCH 3)
-set(rcppsw_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
-set(rcppsw_SOVERSION 1)
+set(RCPPSW_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
 
 if (NOT DEFINED RCPPSW_AL_MT_SAFE_TYPES)
   set(RCPPSW_AL_MT_SAFE_TYPES YES)
@@ -22,6 +21,18 @@ libra_configure_version(
   ${CMAKE_CURRENT_BINARY_DIR}/src/version/version.cpp
   rcppsw_components_SRC
  )
+
+ if(NOT RCPPSW_ER_PLUGIN)
+   set(RCPPSW_ER_PLUGIN  LOG4CXX)
+ endif()
+
+ if (NOT RCPPSW_SUMMARY)
+   set(RCPPSW_SUMMARY YES)
+ endif()
+
+ if(NOT RCPPSW_LIBTYPE)
+   set(RCPPSW_LIBTYPE STATIC)
+ endif()
 
 ################################################################################
 # Components
@@ -172,17 +183,15 @@ endif()
 
 find_package(rcsw)
 
-if ("${LIBRA_ER}" MATCHES "ALL")
-  find_package(log4cxx QUIET) # optional
+find_package(log4cxx QUIET) # optional
 
-  # Cmake module only available with newer versions of log4cxx
-  if (NOT ${log4cxx_FOUND})
-    set(RCPPSW_ER_OLD_LOG4CXX ON)
-    message(STATUS "Found log4cxx < 0.12")
-  else()
-    set(RCPPSW_ER_OLD_LOG4CXX OFF)
-    message(STATUS "Found log4cxx >= 0.12")
-  endif()
+# Cmake module only available with newer versions of log4cxx
+if (NOT ${log4cxx_FOUND})
+  set(RCPPSW_ER_OLD_LOG4CXX ON)
+  message(STATUS "Found log4cxx < 0.12")
+else()
+  set(RCPPSW_ER_OLD_LOG4CXX OFF)
+  message(STATUS "Found log4cxx >= 0.12")
 endif()
 
 ################################################################################
@@ -200,7 +209,7 @@ endforeach()
 set(rcppsw_LIBRARY rcppsw)
 add_library(
   ${rcppsw_LIBRARY}
-  SHARED
+  ${RCPPSW_LIBTYPE}
   ${rcppsw_components_SRC}
   )
 
@@ -215,6 +224,7 @@ set_target_properties(${rcppsw_LIBRARY}
 # built as a shared library).
 set_target_properties(${rcppsw_LIBRARY}
   PROPERTIES
+  VERSION ${rcppsw_VERSION}
   SOVERSION ${rcppsw_VERSION}
   )
 
@@ -259,11 +269,27 @@ if(${RCPPSW_AL_MT_SAFE_TYPES})
   target_compile_definitions(${rcppsw_LIBRARY} PUBLIC RCPPSW_AL_MT_SAFE_TYPES)
 endif()
 
-if ("${LIBRA_ER}" MATCHES "ALL")
-  if( ${RCPPSW_ER_OLD_LOG4CXX})
-    target_compile_definitions(${rcppsw_LIBRARY} PUBLIC RCPPSW_ER_OLD_LOG4CXX)
+target_compile_definitions(${rcppsw_LIBRARY}
+  PUBLIC
+  LIBRA_ERL=LIBRA_ERL_${LIBRA_ERL}
+)
+
+target_compile_definitions(${rcppsw_LIBRARY}
+  PUBLIC
+  RCPPSW_ER_PLUGIN=RCPPSW_ER_PLUGIN_${RCPPSW_ER_PLUGIN}
+)
+target_compile_definitions(${rcppsw_LIBRARY}
+  PUBLIC
+  RCPPSW_ER_PLUGIN_PATH=${RCPPSW_ER_PLUGIN_PATH}
+)
+
+if (NOT "${LIBRA_ERL}" MATCHES "NONE")
+  if("${RCPPSW_ER_PLUGIN}" MATCHES "LOG4CXX")
+    if( ${RCPPSW_ER_OLD_LOG4CXX})
+      target_compile_definitions(${rcppsw_LIBRARY} PUBLIC RCPPSW_ER_OLD_LOG4CXX)
+    endif()
+    target_link_libraries(${rcppsw_LIBRARY} log4cxx)  
   endif()
-  target_link_libraries(${rcppsw_LIBRARY} log4cxx)
 endif()
 
 target_compile_definitions(${rcppsw_LIBRARY}
@@ -301,21 +327,30 @@ etc.), independent of any C++ project."
 ################################################################################
 # Status
 ################################################################################
-libra_config_summary()
+if(${RCPPSW_SUMMARY})
+  message("")
+  message("${BoldBlue}--------------------------------------------------------------------------------")
+  message("${BoldBlue}                          RCPPSW Configuration Summary")
+  message("${BoldBlue}--------------------------------------------------------------------------------")
+  message("")
+
+
+  set(fields
+    RCPPSW_VERSION
+    RCPPSW_LIBTYPE
+    RCPPSW_AL_MT_SAFE_TYPES
+    RCPPSW_ER_PLUGIN
+    RCPPSW_ER_PLUGIN_PATH
+  )
+  libra_config_summary_prepare_fields("${fields}")
+
+message(STATUS "Build version.........................: ${ColorBold}${EMIT_RCPPSW_VERSION}${ColorReset} [RCPPSW_VERSION]")
+message(STATUS "Library type..........................: ${ColorBold}${EMIT_RCPPSW_LIBTYPE}${ColorReset} [RCPPSW_LIBTYPE={STATIC,SHARED}]")
+message(STATUS "Enable std::atomic types..............: ${ColorBold}${EMIT_RCPPSW_AL_MT_SAFE_TYPES}${ColorReset} [RCPPSW_AL_MT_SAFE_TYPES]")
+message(STATUS "Event reporting plugin................: ${ColorBold}${EMIT_RCPPSW_ER_PLUGIN}${ColorReset} [RCPPSW_ER_PLUGIN]")
+message(STATUS "Event reporting custom plugin path....: ${ColorBold}${EMIT_RCPPSW_ER_PLUGIN_PATH}${ColorReset} [RCPPSW_ER_PLUGIN_PATH]")
 
 message("")
-message("--------------------------------------------------------------------------------")
-message("                         RCPPSW Configuration Summary")
-message("--------------------------------------------------------------------------------")
-message("")
+message("${BoldBlue}--------------------------------------------------------------------------------${ColorReset}")
 
-message(STATUS "Build version.........................: rcppsw_VERSION=${rcppsw_VERSION}")
-message(STATUS "API version...........................: rcppsw_SOVERSION=${rcppsw_SOVERSION}")
-message(STATUS "Enable std::atomic types..............: RCPPSW_AL_MT_SAFE_TYPES=${RCPPSW_AL_MT_SAFE_TYPES}")
-
-if(CMAKE_CROSSCOMPILING)
-  message(STATUS "Boost root hint.......................: BOOST_ROOT=${BOOST_ROOT}")
 endif()
-
-message("")
-message("--------------------------------------------------------------------------------")

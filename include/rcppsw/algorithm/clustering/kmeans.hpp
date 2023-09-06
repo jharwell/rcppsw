@@ -20,7 +20,7 @@
 #include "rcppsw/rcppsw.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/algorithm/clustering/cluster.hpp"
-#include "rcsw/utils/time_utils.h"
+#include "rcsw/utils/time.h"
 #include "rcppsw/algorithm/clustering/kmeans_omp.hpp"
 #include "rcppsw/algorithm/clustering/base_clustering_impl.hpp"
 

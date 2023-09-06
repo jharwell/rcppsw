@@ -15,7 +15,7 @@
 
 #define CATCH_CONFIG_MAIN
 #define CATCH_CONFIG_PREFIX_ALL
-#include "catch.hpp"
+#include <catch.hpp>
 
 #include "rcppsw/algorithm/max_subarray_finder.hpp"
 #include "rcppsw/algorithm/closest_pair2D.hpp"
