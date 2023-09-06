@@ -236,11 +236,12 @@
 
 #define RCPPSW_ATTR(...) RCSW_ATTR(__VA_ARGS__)
 #define RCPPSW_CHECK(cond) RCSW_CHECK(cond)
-#define RCPPSW_IS_BETWEEN(n, lb, ub) RCSW_IS_BETWEEN(n, lb, ub)
+#define RCPPSW_IS_BETWEENC(n, lb, ub) RCSW_IS_BETWEENC(n, lb, ub)
 #define RCPPSW_LIKELY(cond) RCSW_LIKELY(cond)
 #define RCPPSW_UNLIKELY(cond) RCSW_UNLIKELY(cond)
 #define RCPPSW_FPC_RET_V(cond) RCSW_FPC_RET_V(cond)
 #define RCPPSW_IS_EVEN(n) RCSW_IS_EVEN(n)
+#define RCPPSW_JOIN(x, y) RCSW_JOIN(x, y)
 
 /*******************************************************************************
  * Warning Disable Macros

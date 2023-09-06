@@ -123,12 +123,12 @@ class vector3 final : public rer::stringizable {
    * \brief Initializes the 3D vector from a 2D vector, setting the Z value to
    * 0.0.
    */
-  explicit vector3<T>(const vector2<T>& v) : vector3{v, T{0}} {}
+  explicit vector3(const vector2<T>& v) : vector3{v, T{0}} {}
 
   /**
    * \brief Initialize the 3D vector from a 2D vector.
    */
-  vector3<T>(const vector2<T>& v, const T& z) : vector3(v.x(), v.y(), z) {}
+  vector3(const vector2<T>& v, const T& z) : vector3(v.x(), v.y(), z) {}
 
   RCPPSW_NODISCARD T x(void) { return m_x; }
   RCPPSW_NODISCARD T y(void) { return m_y; }

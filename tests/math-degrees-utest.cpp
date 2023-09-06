@@ -71,9 +71,9 @@ CATCH_TEST_CASE("Normalized Diff", "[rmath::degrees]") {
   rmath::degrees d270(270);
   rmath::degrees d360(360);
 
-  CATCH_REQUIRE(RCPPSW_IS_BETWEEN(rmath::normalized_diff(d90, d180), -d180, d180));
-  CATCH_REQUIRE(RCPPSW_IS_BETWEEN(rmath::normalized_diff(d90, d270), -d180, d180));
-  CATCH_REQUIRE(RCPPSW_IS_BETWEEN(rmath::normalized_diff(d270, d360), -d180, d180));
+  CATCH_REQUIRE(RCPPSW_IS_BETWEENC(rmath::normalized_diff(d90, d180), -d180, d180));
+  CATCH_REQUIRE(RCPPSW_IS_BETWEENC(rmath::normalized_diff(d90, d270), -d180, d180));
+  CATCH_REQUIRE(RCPPSW_IS_BETWEENC(rmath::normalized_diff(d270, d360), -d180, d180));
 
   CATCH_REQUIRE(-d90 == rmath::normalized_diff(d90, d180));
   CATCH_REQUIRE(-d180 == rmath::normalized_diff(d90, d270));

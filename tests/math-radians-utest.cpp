@@ -66,9 +66,9 @@ CATCH_TEST_CASE("Normalized Diff", "[rmath::radians]") {
   rmath::radians r270(3 * M_PI / 2);
   rmath::radians r360(2 * M_PI);
 
-  CATCH_REQUIRE(RCPPSW_IS_BETWEEN(rmath::normalized_diff(r90, r180), -r180, r180));
-  CATCH_REQUIRE(RCPPSW_IS_BETWEEN(rmath::normalized_diff(r90, r270), -r180, r180));
-  CATCH_REQUIRE(RCPPSW_IS_BETWEEN(rmath::normalized_diff(r270, r360), -r180, r180));
+  CATCH_REQUIRE(RCPPSW_IS_BETWEENC(rmath::normalized_diff(r90, r180), -r180, r180));
+  CATCH_REQUIRE(RCPPSW_IS_BETWEENC(rmath::normalized_diff(r90, r270), -r180, r180));
+  CATCH_REQUIRE(RCPPSW_IS_BETWEENC(rmath::normalized_diff(r270, r360), -r180, r180));
 
   CATCH_REQUIRE(-r90 == rmath::normalized_diff(r90, r180));
   CATCH_REQUIRE(-r180 == rmath::normalized_diff(r90, r270));

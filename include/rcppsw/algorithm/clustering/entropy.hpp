@@ -17,7 +17,7 @@
 #include "rcppsw/rcppsw.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/algorithm/clustering/cluster.hpp"
-#include "rcsw/utils/time_utils.h"
+#include "rcsw/utils/time.h"
 #include "rcppsw/algorithm/clustering/eh_clustering_impl.hpp"
 #include "rcppsw/math/range.hpp"
 #include "rcppsw/math/ientropy.hpp"

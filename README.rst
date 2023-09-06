@@ -4,9 +4,9 @@
 RCPPSW (Reusable C++ Software)
 ==============================
 
-.. |ci-master| image:: https://github.com/jharwell/rcppsw/actions/workflows/build-and-test.yml/badge.svg?branch=master
+.. |ci-master| image:: https://github.com/jharwell/rcppsw/actions/workflows/ci.yml/badge.svg?branch=master
 
-.. |ci-devel| image:: https://github.com/jharwell/rcppsw/actions/workflows/build-and-test.yml/badge.svg?branch=devel
+.. |ci-devel| image:: https://github.com/jharwell/rcppsw/actions/workflows/ci.yml/badge.svg?branch=devel
 
 .. |license| image:: https://img.shields.io/github/license/jharwell/rcppsw
                      :target: https://img.shields.io/github/license/jharwell/rcppsw
@@ -36,8 +36,23 @@ RCPPSW (Reusable C++ Software)
    |license| |docs| |maintenance|
 
 
-RCPPSW is a collection of reusable C++ software (design patterns, boost gaps,
-etc.), independent of any C++ project.
+RCPPSW is a collection of reusable C++ software intended to jump-start new
+software development and generally make your C++ development life
+easier. Briefly, it contains:
+
+- Design patterns (FSM, visitor, decorator, etc)
+
+- Event reporting framework
+
+- Control theory class for PID loops, waveform generation, etc
+
+- Metric collection framework for gathering data from large applications
+
+- Multiprocess/multithread management tools
+
+- Helpful named types
+
+- Math class for RNG, sigmoids, etc
 
 Project documentation is here: `<https://jharwell.github.io/rcppsw>`_.
 

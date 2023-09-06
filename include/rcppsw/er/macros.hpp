@@ -13,27 +13,218 @@
  ******************************************************************************/
 #include "rcppsw/er/er.hpp"
 
-#if (RCPPSW_ER >= RCPPSW_ER_FATAL)
+#if (RCPPSW_ERL >= RCPPSW_ERL_FATAL)
+#endif
+
+/* #if (RCPPSW_ERL == RCPPSW_ERL_FATAL) */
+/* #include <type_traits> */
+/* #endif */
+
+#if (RCPPSW_ERL >= RCPPSW_ERL_FATAL)
 #include <array>
 #include <cassert>
 #include <string>
 #include <iostream>
 
-#endif
-
-#if (RCPPSW_ER == RCPPSW_ER_FATAL)
-#include <type_traits>
-#endif
-
-#if (RCPPSW_ER >= RCPPSW_ER_FATAL)
 #include "rcppsw/er/stacktrace.hpp"
 #endif
 
 /*******************************************************************************
- * Macros
+ * Macros when ER is enabled for severity level >= FATAL:
+ *
+ * - The configured plugin is disabled. Only [FATAL] events are compiled in;
+ *   others are discarded.
  ******************************************************************************/
-#if (RCPPSW_ER == RCPPSW_ER_NONE)
+#if (RCPPSW_ERL == RCPPSW_ERL_FATAL)
 
+/**
+ * \brief Emit a FATAL message.
+ */
+#define ER_FATAL(msg, ...)                                              \
+  {                                                                     \
+    std::array<char, RCPPSW_ER_MSG_LEN_MAX> _str{};                     \
+    snprintf(_str.data(), RCPPSW_ER_MSG_LEN_MAX, msg, ##__VA_ARGS__);   \
+    std::ostringstream _buf;                                            \
+    _buf                                                                \
+    << _str.data() << "\n"                                              \
+    << "Backtrace:\n" << rer::stacktrace::stacktrace() << '\n';         \
+  }
+
+#elif (RCPPSW_ERL > RCPPSW_ERL_FATAL)
+
+#define ER_FATAL(...) ER_FATAL_IMPL(RCPPSW_ER_PLUGIN_HANDLE(), __VA_ARGS__)
+
+/* \cond INTERNAL */
+#define ER_FATAL_IMPL(handle, ...) {                                    \
+    if (RCPPSW_ER_PLUGIN_LVL_CHECK(handle, FATAL)) {         \
+      ER_REPORT(FATAL, handle, __VA_ARGS__)                             \
+    }                                                                   \
+  }
+/* \endcond */
+#endif
+
+/*******************************************************************************
+ * Macros when ER is enabled for severity level >= ERROR:
+ *
+ * - The configured plugin is used. Only [FATAL,ERROR] events are compiled in;
+ *   others are discarded.
+ ******************************************************************************/
+#if (RCPPSW_ERL >= RCPPSW_ERL_ERROR)
+/**
+ * \def ER_ERR(...)
+ *
+ * Report a non-FATAL ERROR message.
+ */
+#define ER_ERR(...)  ER_ERR_IMPL(RCPPSW_ER_PLUGIN_HANDLE(), __VA_ARGS__)
+
+/* \cond INTERNAL */
+#define ER_ERR_IMPL(handle, ...) {                                      \
+    if (RCPPSW_ER_PLUGIN_LVL_CHECK(handle, ERROR)) {       \
+      ER_REPORT(ERROR, handle, __VA_ARGS__)                             \
+    }                                                                   \
+  }
+/* \endcond */
+
+#endif /* RCPPSW_ERL >= RCPPSW_ERL_ERROR */
+
+/*******************************************************************************
+ * Macros when ER is enabled for severity level >= WARN:
+ *
+ * - The configured plugin is used. Only [FATAL,ERROR,WARN] events are compiled
+ *   in; others are discarded.
+ ******************************************************************************/
+#if (RCPPSW_ERL >= RCPPSW_ERL_WARN)
+
+/**
+ * \def ER_WARN(...)
+ *
+ * Report a WARNING message (duh).
+ */
+#define ER_WARN(...)  ER_WARN_IMPL(RCPPSW_ER_PLUGIN_HANDLE(), __VA_ARGS__)
+
+
+/* \cond INTERNAL */
+#define ER_WARN_IMPL(handle, ...) {                                     \
+    if (RCPPSW_ER_PLUGIN_LVL_CHECK(handle, WARN)) {        \
+      ER_REPORT(WARN, handle, ## __VA_ARGS__)                           \
+    }                                                                   \
+  }
+/* \endcond */
+#endif /* RCPPSW_ERL >= RCPPSW_ERL_WARN */
+
+/*******************************************************************************
+ * Macros when ER is enabled for severity level >= INFO:
+ *
+ * - The configured plugin is used. Only [FATAL,ERROR,WARN,INFO] events are
+ *   compiled in; others are discarded.
+ ******************************************************************************/
+#if (RCPPSW_ERL >= RCPPSW_ERL_INFO)
+
+/**
+ * \def ER_INFO(...)
+ *
+ * Report a INFOrmational message.
+ */
+#define ER_INFO(...)  ER_INFO_IMPL(RCPPSW_ER_PLUGIN_HANDLE(), __VA_ARGS__)
+
+/* \cond INTERNAL */
+#define ER_INFO_IMPL(handle, ...) {                                     \
+    if (RCPPSW_ER_PLUGIN_LVL_CHECK(handle, INFO)) {        \
+      ER_REPORT(INFO, handle, ## __VA_ARGS__)                           \
+    }                                                                   \
+  }
+/* \endcond */
+#endif /* RCPPSW_ERL >= RCPPSW_ERL_INFO */
+
+/*******************************************************************************
+ * Macros when ER is enabled for severity level >= DEBUG:
+ *
+ * - The configured plugin is used. Only [FATAL,ERROR,WARN,INFO,DEBUG] events
+ *   are compiled in; others are discarded.
+ ******************************************************************************/
+#if (RCPPSW_ERL >= RCPPSW_ERL_DEBUG)
+
+/**
+ * \def ER_DEBUG(...)
+ *
+ * Report a DEBUGging message.
+ */
+#define ER_DEBUG(...)  ER_DEBUG_IMPL(RCPPSW_ER_PLUGIN_HANDLE(), __VA_ARGS__)
+
+/* \cond INTERNAL */
+#define ER_DEBUG_IMPL(handle, ...) {                                     \
+    if (RCPPSW_ER_PLUGIN_LVL_CHECK(handle, DEBUG)) {        \
+      ER_REPORT(DEBUG, handle, ## __VA_ARGS__)                           \
+    }                                                                   \
+  }
+/* \endcond */
+#endif /* RCPPSW_ERL >= RCPPSW_ERL_DEBUG */
+
+/*******************************************************************************
+ * Macros when ER is enabled for severity level >= TRACE:
+ *
+ * - The configured plugin is used. Only [FATAL,ERROR,WARN,INFO,DEBUG,TRACE]
+ *   events are compiled in; others are discarded.
+ *
+ * - Debug printing macros enabled.
+ ******************************************************************************/
+#if (RCPPSW_ERL >= RCPPSW_ERL_TRACE)
+
+/**
+ * \def ER_TRACE(...)
+ *
+ * Report a TRACE message.
+ */
+#define ER_TRACE(...)  ER_TRACE_IMPL(RCPPSW_ER_PLUGIN_HANDLE(), __VA_ARGS__)
+
+/* \cond INTERNAL */
+#define ER_TRACE_IMPL(handle, ...) {                                     \
+    if (RCPPSW_ER_PLUGIN_LVL_CHECK(handle, TRACE)) {        \
+      ER_REPORT(TRACE, handle, ## __VA_ARGS__)                           \
+    }                                                                   \
+  }
+/* \endcond */
+#endif /* RCPPSW_ERL >= RCPPSW_ERL_TRACE */
+
+
+/*******************************************************************************
+ * General ER macros for when ER is != NONE.
+ ******************************************************************************/
+#if RCPPSW_ERL != RCPPSW_ERL_NONE
+
+/**
+ * \def ER_REPORT(lvl, msg, ...)
+ *
+ * Define a statement reporting the occurrence of an event with the specified
+ * level \a lvl.
+ *
+ * This macro is only available if the event reporting level is > NONE.
+ */
+#define ER_REPORT(LVL, HANDLE, MSG, ...)        \
+  {                                             \
+    RCPPSW_ER_PLUGIN_REPORT(LVL,                \
+                            HANDLE,             \
+                            MSG "\n",           \
+                            ## __VA_ARGS__)     \
+  }
+
+#endif /* (RCPPSW_ERL != RCPPSW_ERL_NONE) */
+
+/*******************************************************************************
+ * General ER macros independent of level
+ ******************************************************************************/
+/**
+ * \brief Platform/OS independent macro for printing to the terminal
+ */
+#define PRINTF(...) RCPPSW_ER_PLUGIN_PRINTF(__VA_ARGS__)
+
+/**
+ * \def ER_ASSERT(cond, msg, ...)
+ *
+ * Check a boolean condition \a cond in a function, halting the program if the
+ * condition is not true. Like assert(), but allows for an additional custom
+ * msg to be logged.
+ */
 /*
  * Don't define the macro to be nothing, as that can leave tons of "unused
  * variable" warnings in the code for variables which are only used in
@@ -44,256 +235,17 @@
 #define ER_ASSERT(cond, msg, ...)               \
   do {                                          \
     (void)sizeof((cond));                       \
-  } while (0)
-
-#define ER_FATAL(...)
-
-#define ER_ERR(...)
-#define ER_WARN(...)
-#define ER_INFO(...)
-#define ER_DEBUG(...)
-#define ER_TRACE(...)
-#define ER_CONDW(...)
-#define ER_CONDI(...)
-#define ER_CONDD(...)
-#define ER_REPORT(...)
-
-#if defined(RCPPSW_ER_CLASSFREE)
-#define ER_GET_LOGGER(logger)
-#else
-#define ER_GET_LOGGER(...)
-#endif
-
-#elif (RCPPSW_ER == RCPPSW_ER_FATAL)
-
-#define ER_ERR(...)
-#define ER_WARN(...)
-#define ER_INFO(...)
-#define ER_DEBUG(...)
-#define ER_TRACE(...)
-#define ER_REPORT(...)
-#define ER_CONDI(...)
-#define ER_CONDW(...)
-#define ER_CONDD(...)
-
-#define ER_FATAL(msg, ...)                                              \
-  {                                                                     \
-    std::array<char, RCPPSW_ER_MSG_LEN_MAX> _str{};                     \
-    snprintf(_str.data(), RCPPSW_ER_MSG_LEN_MAX, msg, ##__VA_ARGS__);   \
-    std::cerr                                                           \
-    << "FATAL: " << _str.data() << "\n"                                 \
-    << "Backtrace:\n" << rer::stacktrace::stacktrace() << '\n';         \
-  }                                                                     \
-
-
-/**
- * \def ER_ASSERT(cond, msg, ...)
- *
- * Check a boolean condition \a cond in a function, halting the program if the
- * condition is not true. Like assert(), but allows for an additional custom
- * msg to be logged.
- *
- * You can use this macro in non-class contexts.
- */
-#define ER_ASSERT(cond, msg, ...) {                     \
-    if (RCPPSW_UNLIKELY(!(cond))) {                     \
-      ER_FATAL(msg, ##__VA_ARGS__);                     \
-    }                                                   \
-  }
-
-/**
- * \def ER_FATAL_SENTINEL(msg,...)
- *
- * Mark a place in the code as being universally bad, like really really
- * bad. Fatally bad. If execution ever reaches this spot stop the program after
- * reporting the specified message.
- *
- * You can use this macro in non-class contexts.
- */
-#define ER_FATAL_SENTINEL(msg, ...)                     \
-  {                                                     \
-    ER_FATAL(msg, ##__VA_ARGS__);              \
-    std::abort();                                       \
-  }
-
-#elif (RCPPSW_ER == RCPPSW_ER_ALL)
-
-#if defined RCPPSW_ER_CLASSFREE
-/**
- * \def ER_GET_LOGGER(logger)
- *
- * Get the log4cxx logger associated with a \ref rer::client instance. For use
- * in non-class contexts.
- */
-#define ER_GET_LOGGER(logger) logger.logger()
-
-#define ER_FATAL(msg, ...)                                              \
-  {                                                                     \
-    std::array<char, RCPPSW_ER_MSG_LEN_MAX> _str{};                     \
-    snprintf(_str.data(), RCPPSW_ER_MSG_LEN_MAX, msg, ##__VA_ARGS__);   \
-    std::cerr                                                           \
-    << "FATAL: " << _str.data() << "\n"                                 \
-    << "Backtrace:\n" << rer::stacktrace::stacktrace() << '\n';         \
-  }                                                                     \
-
-#else
-/**
- * \def ER_GET_LOGGER(logger)
- *
- * Get the log4cxx logger associated with a \ref rer::client instance. For use
- * in class contexts.
- */
-#define ER_GET_LOGGER(...) \
-  rer::client                                                           \
-  <typename std::remove_cv                                              \
-   <typename std::remove_reference                                      \
-    <decltype(*this)                                                    \
-     >::type                                                            \
-    >::type                                                             \
-   >::logger()
-
-#define ER_FATAL(msg, ...)                                      \
-  {                                                                     \
-    std::array<char, RCPPSW_ER_MSG_LEN_MAX> _str{};                     \
-    snprintf(_str.data(), RCPPSW_ER_MSG_LEN_MAX, msg, ##__VA_ARGS__);   \
-    std::ostringstream _buf;                                            \
-    _buf                                                                \
-    << _str.data() << "\n"                                              \
-    << "Backtrace:\n" << rer::stacktrace::stacktrace() << '\n';         \
-    auto logger = ER_GET_LOGGER();                                      \
-    if (logger->isFatalEnabled()) {                                     \
-      LOG4CXX_FATAL(logger, _buf.str());                                \
-    }                                                                   \
-  }
-
-#endif /* RCPPS_ER_CLASSFREE */
-
-/**
- * \def ER_REPORT(lvl, msg, ...)
- *
- * Define a statement reporting the occurrence of an event with the specified
- * level. \a msg is the format string, and \a ... is the variadic argument list
- * (just like printf()).
- *
- * This macro is only available if event reporting is fully enabled.
- */
-#define ER_REPORT(lvl, logger, msg, ...)                        \
-  {                                                             \
-    std::array<char, RCPPSW_ER_MSG_LEN_MAX> _report_str{};      \
-    snprintf(_report_str.data(),                                \
-             sizeof(_report_str),                               \
-             msg,                                               \
-             ##__VA_ARGS__);                                    \
-    LOG4CXX_##lvl(logger, _report_str.data());                  \
-  }
-
-#define ER_INFO_IMPL(logger, ...) {             \
-    if (logger->isInfoEnabled()) {            \
-      ER_REPORT(INFO, logger, __VA_ARGS__)    \
-    }                                          \
-  }
-#define ER_ERR_IMPL(logger, ...) {              \
-    if (logger->isErrorEnabled()) {            \
-      ER_REPORT(ERROR, logger, __VA_ARGS__)    \
-    }                                          \
-  }
-
-#define ER_WARN_IMPL(logger, ...) {               \
-    if (logger->isWarnEnabled()) {             \
-      ER_REPORT(WARN, logger, __VA_ARGS__)     \
+    if (RCPPSW_UNLIKELY(!(cond))) {               \
+      ER_FATAL( msg, ##__VA_ARGS__);            \
+      assert(cond);                             \
     }                                           \
-  }
-#define ER_DEBUG_IMPL(logger, ...) {               \
-    if (logger->isDebugEnabled()) {             \
-      ER_REPORT(DEBUG, logger, __VA_ARGS__)     \
-    }                                           \
-  }
-#define ER_TRACE_IMPL(logger, ...) {               \
-    if (logger->isTraceEnabled()) {             \
-      ER_REPORT(TRACE, logger, __VA_ARGS__)     \
-    }                                           \
-  }
+  } while (0);
 
 /**
- * \def ER_ERR(...)
- *
- * Report a non-FATAL ERROR message.
- */
-#if defined RCPPSW_ER_CLASSFREE
-#define ER_ERR(client, ...)  ER_ERR_IMPL(ER_GET_LOGGER(client), __VA_ARGS__)
-#else
-#define ER_ERR(...)  ER_ERR_IMPL(ER_GET_LOGGER(), __VA_ARGS__)
-#endif /* RCPPSW_ER_CLASSFREE */
-
-/**
- * \def ER_WARN(...)
- *
- * Report a WARNING message (duh).
- */
-#if defined RCPPSW_ER_CLASSFREE
-#define ER_WARN(client, ...)  ER_WARN_IMPL(ER_GET_LOGGER(client), __VA_ARGS__)
-#else
-#define ER_WARN(...)  ER_WARN_IMPL(ER_GET_LOGGER(), __VA_ARGS__)
-#endif /* RCPPSW_ER_CLASSFREE */
-
-/**
- * \def ER_INFO(...)
- *
- * Report an INFOrmational message.
- */
-#if defined RCPPSW_ER_CLASSFREE
-#define ER_INFO(client, ...)  ER_INFO_IMPL(ER_GET_LOGGER(client), __VA_ARGS__)
-#else
-#define ER_INFO(...)  ER_INFO_IMPL(ER_GET_LOGGER(), __VA_ARGS__)
-#endif /* RCPPSW_ER_CLASSFREE */
-
-/**
- * \def ER_DEBUG(...)
- *
- * Report a DEBUG message.
- */
-#if defined RCPPSW_ER_CLASSFREE
-#define ER_DEBUG(client, ...)  ER_DEBUG_IMPL(ER_GET_LOGGER(client), __VA_ARGS__)
-#else
-#define ER_DEBUG(...)  ER_DEBUG_IMPL(ER_GET_LOGGER(), __VA_ARGS__)
-#endif /* RCPPSW_ER_CLASSFREE */
-
-/**
- * \def ER_TRACE(...)
- *
- * Report a TRACE message.
- */
-#if defined RCPPSW_ER_CLASSFREE
-#define ER_TRACE(client, ...)  ER_TRACE_IMPL(ER_GET_LOGGER(client), __VA_ARGS__)
-#else
-#define ER_TRACE(...)  ER_TRACE_IMPL(ER_GET_LOGGER(), __VA_ARGS__)
-#endif /* RCPPSW_ER_CLASSFREE */
-
-/**
- * \def ER_ASSERT(cond, msg, ...)
- *
- * Check a boolean condition \a cond in a function, halting the program if the
- * condition is not true. Like assert(), but allows for an additional custom
- * msg to be logged.
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client.
- */
-#define ER_ASSERT(cond, msg, ...)                       \
-  if (RCPPSW_UNLIKELY(!(cond))) {                       \
-    ER_FATAL( msg, ##__VA_ARGS__); \
-    assert(cond);                                       \
-  }
-
-/**
- * \def ER_CHECKW(cond, msg, ...)
+ * \def ER_CONDW(cond, msg, ...)
  *
  * Check a boolean condition \a cond in a function. If condition IS true,
  * emit a warning message.
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client. This macro is only available if event reporting
- * is fully enabled.
  */
 #define ER_CONDW(cond, msg, ...)                \
   {                                             \
@@ -303,43 +255,31 @@
   }
 
 /**
- * \def ER_CHECKI(cond, msg, ...)
+ * \def ER_CONDI(cond, msg, ...)
  *
  * Check a boolean condition \a cond in a function. If condition IS true,
  * emit an informational message.
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client. This macro is only available if event reporting
- * is fully enabled.
  */
-#define ER_CONDI(cond, msg, ...)               \
+#define ER_CONDI(cond, msg, ...)                \
   {                                             \
-    if (RCPPSW_LIKELY((cond))) {                \
+    if (RCPPSW_LIKELY((cond))) {                  \
       ER_INFO(msg, ##__VA_ARGS__);              \
     }                                           \
   }
 
 /**
- * \def ER_CHECKD(cond, msg, ...)
+ * \def ER_CONDD(cond, msg, ...)
  *
  * Check a boolean condition \a cond in a function. If condition IS true,
  * emit a debug message.
- *
- * You cannot use this macro in non-class contexts, and all classes using it
- * must derive from \ref client. This macro is only available if event reporting
- * is fully enabled.
  */
-#define ER_CONDD(cond, msg, ...)               \
+#define ER_CONDD(cond, msg, ...)                \
   {                                             \
-    if (RCPPSW_LIKELY((cond))) {                \
+    if (RCPPSW_LIKELY((cond))) {                  \
       ER_DEBUG(msg, ##__VA_ARGS__);             \
     }                                           \
   }
 
-
-#endif /* (RCPPSW_ER == RCPPSW_ER_ALL) */
-
-#if !defined RCPPSW_ER_CLASSFREE
 
 /**
  * \def ER_FATAL_SENTINEL(msg,...)
@@ -348,10 +288,10 @@
  * bad. Fatally bad. If execution ever reaches this spot stop the program after
  * reporting the specified message.
  */
-#define ER_FATAL_SENTINEL(msg, ...)                     \
-  {                                                     \
-    ER_FATAL(msg, ##__VA_ARGS__);    \
-    std::abort();                                       \
+#define ER_FATAL_SENTINEL(msg, ...)             \
+  {                                             \
+    ER_FATAL(msg, ##__VA_ARGS__);               \
+    std::abort();                               \
   }
 
 
@@ -362,9 +302,9 @@
  * to the error/bailout section for function (you must have a label called \c
  * error in your function) after reporting the event.
  */
-#define ER_CHECK(cond, msg, ...)  \
+#define ER_CHECK(cond, msg, ...)                \
   {                                             \
-    if (RCPPSW_UNLIKELY(!(cond))) {             \
+    if (RCPPSW_UNLIKELY(!(cond))) {               \
       ER_ERR(msg, ##__VA_ARGS__);               \
       goto error;                               \
     }                                           \
@@ -377,10 +317,43 @@
  * this spot, report the event and error out (you must have a label called \c
  * error in your function).
  */
-#define ER_SENTINEL(msg, ...)   \
-  {                             \
-    ER_ERR(msg, ##__VA_ARGS__); \
-    goto error;                 \
+#define ER_SENTINEL(msg, ...)                   \
+  {                                             \
+    ER_ERR(msg, ##__VA_ARGS__);                 \
+    goto error;                                 \
   }
 
-#endif /* !RCPPSW_ER_CLASSFREE */
+/*******************************************************************************
+ * Macro Cleanup
+ *
+ * Depending on compile-time level, one or more of these macros may be
+ * undefined, so make sure everything is defined so things build cleanly.
+ ******************************************************************************/
+#ifndef ER_FATAL
+#define ER_FATAL(...)
+#endif
+
+#ifndef ER_ERR
+#define ER_ERR(...)
+#endif
+
+#ifndef ER_WARN
+#define ER_WARN(...)
+#endif
+
+#ifndef ER_INFO
+#define ER_INFO(...)
+#endif
+
+#ifndef ER_DEBUG
+#define ER_DEBUG(...)
+#endif
+
+#ifndef ER_TRACE
+#define ER_TRACE(...)
+#endif
+
+#ifndef ER_REPORT
+#define ER_REPORT(...)
+#endif
+
