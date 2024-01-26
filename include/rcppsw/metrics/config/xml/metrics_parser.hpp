@@ -43,7 +43,7 @@ class metrics_parser : public rer::client<metrics_parser>,
   using config_type = metrics_config;
 
   metrics_parser(void)
-      : ER_CLIENT_INIT("rcppsw.metrics.config.xml.metrics_parser") {}
+      : ER_CLIENT_INIT() {}
 
   ~metrics_parser(void) override = default;
 

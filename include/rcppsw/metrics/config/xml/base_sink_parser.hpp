@@ -33,7 +33,7 @@ class base_sink_parser : public rer::client<base_sink_parser>,
                         public rconfig::xml::xml_config_parser {
  public:
   base_sink_parser(void)
-      : ER_CLIENT_INIT("rcppsw.metrics.config.xml.base_sink_parser") {}
+      : ER_CLIENT_INIT() {}
 
   ~base_sink_parser(void) override = default;
 

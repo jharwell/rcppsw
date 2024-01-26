@@ -48,7 +48,7 @@ struct hgrid3D_view_filter : public rer::client<hgrid3D_view_filter<TSpecType>> 
   using vertex_coord_type = typename TSpecType::vertex_coord_type;
 
   hgrid3D_view_filter(void)
-      : ER_CLIENT_INIT("rcppsw.ds.graph.hgrid3D_view_filter") {}
+      : ER_CLIENT_INIT() {}
 
   std::unique_ptr<hgrid3D_view_filter_data<TSpecType>>
   operator()(const bgl_impl_type& graph,

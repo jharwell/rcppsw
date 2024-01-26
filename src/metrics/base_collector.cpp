@@ -26,7 +26,7 @@ namespace rcppsw::metrics {
  ******************************************************************************/
 base_collector::base_collector(
     std::unique_ptr<base_sink> sink)
-    : ER_CLIENT_INIT("rcppsw.metrics.base_collector"),
+    : ER_CLIENT_INIT(),
       m_sink(std::move(sink)) {}
 
 /*******************************************************************************

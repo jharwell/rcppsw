@@ -13,10 +13,12 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "rcppsw/er/er.hpp"
+#include <typeindex>
 
+#include "rcppsw/er/er.hpp"
 #include "rcppsw/er/plugin/plugin.hpp"
 #include "rcppsw/er/macros.hpp"
+#include "rcppsw/abi/abi.hpp"
 
 /*******************************************************************************
  * Macros
@@ -52,8 +54,11 @@
  * Initialize a logging client with the specified name (easier to do a macro
  * than to have to try do the casting every single time).
  */
-#define ER_CLIENT_INIT(name) \
-  rcppsw::er::client<typename std::remove_reference_t<decltype(*this)>>(name)
+#define ER_CLIENT_INIT()                                                \
+  rcppsw::er::client<                                                   \
+                     typename std::remove_reference_t<decltype(*this)>  \
+                     >                                                  \
+  (rcppsw::abi::demangle(std::type_index(typeid(*this)).name()))
 
 /**
  * \def ER_LOGGING_INIT(fname)
@@ -220,10 +225,10 @@ class client {
   }
 
   /**
-   * \param name Name of client/new logger.
+   * \param abiname The demangled ABI name of the client class.
    */
-  explicit client(const std::string& name)
-      : m_logger(log4cxx::Logger::getLogger(name)) {
+  explicit client(const char* abiname)
+      : m_logger(log4cxx::Logger::getLogger(abi_name_to_logger_name(abiname))) {
     /*
      * DON'T add the appender here--results in multiple copies of some messages
      * for reasons I can't understand. Doing it in the config file works though.
@@ -283,6 +288,33 @@ class client {
 
 
  private:
+  /**
+   * \brief Convert the demangled ABI name for a class to the log4cxx fully
+   * qualified path for the class.
+   *
+   * - Convert all \code :: \endcode -> \c .
+   *
+   * - Remove all templated types from the name: \code <...> \endcode -> ''.
+   */
+  static std::string abi_name_to_logger_name(const char* name) {
+    std::string tmp = name;
+    auto index1 = tmp.find("::");
+
+    /* replace all occurences of '::' with '.' */
+    while (index1 != tmp.npos) {
+      tmp = tmp.replace(index1, 2, ".");
+      index1 = tmp.find("::");
+    } /* while() */
+
+    /* remove all <..> in the typeid */
+    index1 = tmp.find("<");
+    while (index1 != tmp.npos) {
+      auto index2 = tmp.find(">");
+      tmp = tmp.erase(index1, index2 - index1 + 1);
+      index1 = tmp.find("<");
+    } /* while() */
+    return tmp;
+  }
   /* clang-format off */
   static inline const std::string kConsoleLayout = "%X{time} %x [%-5p] %c - %m%n";
   static inline const std::string kFileLayout = "%X{time} %x [%-5p] %c %l - %m%n";

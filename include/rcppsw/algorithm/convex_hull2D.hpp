@@ -43,7 +43,7 @@ class convex_hull2D : public rer::client<convex_hull2D<TCoord>> {
   using coord_type = TCoord;
   using coord_value_type = typename coord_type::value_type;
 
-  convex_hull2D(void) : ER_CLIENT_INIT("rcppsw.algorithm.convex_hull2D") {}
+  convex_hull2D(void) : ER_CLIENT_INIT() {}
 
   /* Not move/copy constructable/assignable by default */
   convex_hull2D(const convex_hull2D&) = delete;

@@ -40,8 +40,7 @@ class waveform_parser final : public rer::client<waveform_parser>,
  public:
   using config_type = waveform_config;
 
-  waveform_parser(void)
-      : ER_CLIENT_INIT("rcppsw.controller.config.xml.waveform_parser") {}
+  waveform_parser(void) : ER_CLIENT_INIT() {}
 
   /**
    * \brief The XML tag that all configration values should appear under.

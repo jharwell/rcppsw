@@ -72,7 +72,7 @@ class register_with_sink : public rer::client<
   register_with_sink(TMetricsManager* const manager,
                     const creatable_collector_set& set,
                     const extra_args_type& extra_args = {})
-      : ER_CLIENT_INIT("rcppsw.metrics.register_with_sink"),
+      : ER_CLIENT_INIT(),
         mc_create_set(set),
         m_extra_args(extra_args),
         m_manager(manager) {}

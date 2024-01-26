@@ -38,7 +38,7 @@ class sigmoid_parser : public rer::client<sigmoid_parser>,
   using config_type = sigmoid_config;
 
   sigmoid_parser(void)
-      : ER_CLIENT_INIT("rcppsw.math.config.xml.sigmoid_parser") {}
+      : ER_CLIENT_INIT() {}
 
   /**
    * \brief The root tag that all task sigmoid configuration values should lie

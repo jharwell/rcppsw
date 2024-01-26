@@ -39,7 +39,7 @@ class hfsm : public base_fsm, public er::client<hfsm> {
   explicit hfsm(uint8_t max_states,
                 uint8_t initial_state = 0)
       : base_fsm(max_states, initial_state),
-        ER_CLIENT_INIT("rcppsw.patterns.fsm.hfsm"),
+        ER_CLIENT_INIT(),
         m_top_state(nullptr) {}
 
   ~hfsm() override = default;

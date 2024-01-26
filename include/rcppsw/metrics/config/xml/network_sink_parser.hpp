@@ -39,7 +39,7 @@ class network_sink_parser : public rer::client<network_sink_parser>,
   using config_type = network_sink_config;
 
   network_sink_parser(void)
-      : ER_CLIENT_INIT("rcppsw.metrics.config.xml.network_sink_parser") {}
+      : ER_CLIENT_INIT() {}
 
   ~network_sink_parser(void) override = default;
 

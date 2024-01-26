@@ -21,7 +21,7 @@ namespace rcppsw::metrics {
  ******************************************************************************/
 base_sink::base_sink(const rmetrics::output_mode& mode,
                      const rtypes::timestep& interval)
-    : ER_CLIENT_INIT("rcppsw.metrics.base_sink"),
+    : ER_CLIENT_INIT(),
       mc_output_mode(mode),
       mc_output_interval(interval) {}
 

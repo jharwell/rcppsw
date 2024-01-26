@@ -22,7 +22,7 @@ namespace rcppsw::patterns::fsm {
  * Constructors/Destructor
  ******************************************************************************/
 base_fsm::base_fsm(uint8_t max_states, uint8_t initial_state)
-    : ER_CLIENT_INIT("rcppsw.patterns.fsm.fsm"),
+    : ER_CLIENT_INIT(),
       mc_max_states(max_states),
       m_current_state(initial_state),
       m_initial_state(initial_state) {
@@ -30,7 +30,7 @@ base_fsm::base_fsm(uint8_t max_states, uint8_t initial_state)
 }
 
 base_fsm::base_fsm(const base_fsm& other)
-    : ER_CLIENT_INIT(other.logger_name()),
+    : ER_CLIENT_INIT(),
       mc_max_states(other.mc_max_states),
       m_current_state(other.current_state()),
       m_next_state(other.next_state()),

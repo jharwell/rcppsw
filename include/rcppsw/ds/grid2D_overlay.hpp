@@ -69,7 +69,7 @@ class grid2D_overlay final : public base_grid2D<T>,
                  const types::discretize_ratio& grid_res,
                  const types::discretize_ratio& field_res)
       : base_grid_overlay(origin, grid_res, field_res),
-        ER_CLIENT_INIT("rcppsw.ds.grid2D_overlay"),
+        ER_CLIENT_INIT(),
         mc_dim(dims),
         m_cells(boost::extents[static_cast<typename index_range::index>(xdsize())]
                               [typename index_range::index(ydsize())]) {

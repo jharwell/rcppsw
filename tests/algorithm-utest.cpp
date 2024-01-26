@@ -79,7 +79,7 @@ CATCH_TEST_CASE("Kmeans", "[ralg::clustering]") {
                                  std::move(impl),
                                  2,
                                  10);
-  auto res = alg.run([](double a, double b) { return std::fabs(a - b); });
+  auto res = alg.run([](double a, double b) noexcept { return std::fabs(a - b); });
   CATCH_REQUIRE(10 == res.size());
 
   for (size_t i = 0; i < res.size(); ++i) {

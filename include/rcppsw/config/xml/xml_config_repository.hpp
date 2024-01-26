@@ -44,7 +44,7 @@ namespace rcppsw::config::xml {
 class xml_config_repository : public er::client<xml_config_repository> {
  public:
   xml_config_repository(void)
-      : ER_CLIENT_INIT("rcppsw.config.xml.repository") {}
+      : ER_CLIENT_INIT() {}
 
   /**
    * \brief Call the \ref xml_config_parser::parse() function on all parsers

@@ -37,7 +37,7 @@ class rng_parser final : public rer::client<rng_parser>,
  public:
   using config_type = rng_config;
 
-  rng_parser(void) : ER_CLIENT_INIT("rcppsw.math.config.xml.rng_parser") {}
+  rng_parser(void) : ER_CLIENT_INIT() {}
 
   /**
    * \brief The root tag that all rng configuration values should lie under in

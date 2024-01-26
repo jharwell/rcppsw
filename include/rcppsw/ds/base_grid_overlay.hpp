@@ -55,7 +55,7 @@ class base_grid_overlay : public er::client<base_grid_overlay<TOriginType>> {
   base_grid_overlay(const origin_rtype& origin,
                const types::discretize_ratio& grid_resolution,
                const types::discretize_ratio& field_resolution)
-      : ER_CLIENT_INIT("rcppsw.ds.base_grid_overlay"),
+      : ER_CLIENT_INIT(),
         mc_resolution(grid_resolution),
         mc_originr(origin),
         mc_origind(math::dvec2zvec(origin, field_resolution.v())) {}

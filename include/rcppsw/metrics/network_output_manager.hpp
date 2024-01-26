@@ -38,7 +38,7 @@ class network_output_manager : public rer::client<network_output_manager>,
                           public rmetrics::base_manager {
  public:
   network_output_manager(const std::string& dest_prefix)
-      : ER_CLIENT_INIT("rcppsw.metrics.network_output_manager"),
+      : ER_CLIENT_INIT(),
         mc_dest_prefix(dest_prefix) {}
 
   ~network_output_manager(void) override = default;

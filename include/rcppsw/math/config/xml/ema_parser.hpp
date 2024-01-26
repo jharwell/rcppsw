@@ -38,7 +38,7 @@ class ema_parser : public rer::client<ema_parser>,
  public:
   using config_type = ema_config;
 
-  ema_parser(void) : ER_CLIENT_INIT("rcppsw.math.config.xml.ema_parser") {}
+  ema_parser(void) : ER_CLIENT_INIT() {}
 
   /**
    * \brief The root tag that all ema configuration values should lie under in

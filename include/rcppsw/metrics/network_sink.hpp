@@ -38,7 +38,7 @@ class network_sink : public rmetrics::base_sink,
                const rmetrics::output_mode& mode,
                const rtypes::timestep& interval)
       : base_sink(mode, interval),
-        ER_CLIENT_INIT("rcppsw.metrics.network_sink"),
+        ER_CLIENT_INIT(),
         mc_dest(dest) {}
 
   virtual ~network_sink(void) = default;

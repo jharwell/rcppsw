@@ -41,7 +41,7 @@ class measurement : public rtypes::named_type<T, Tag>,
 
   explicit measurement(const T& value, bool check_psd = true)
       : rtypes::named_type<T, Tag>(value),
-        ER_CLIENT_INIT("rcppsw.types.measurement") {
+        ER_CLIENT_INIT() {
     ER_ASSERT(!(check_psd && v() < T{0}),
               "Distance should be positive semi-definite: %s < 0",
               rcppsw::to_string(v()).c_str());

@@ -27,7 +27,7 @@ csv_sink::csv_sink(fs::path fpath,
                    const rmetrics::output_mode& mode,
                    const rtypes::timestep& interval)
     : file_sink(fpath.replace_extension(".csv"), mode, interval),
-      ER_CLIENT_INIT("rcppsw.metrics.csv_sink") {}
+      ER_CLIENT_INIT() {}
 
 /*******************************************************************************
  * Member Functions

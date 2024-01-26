@@ -41,7 +41,7 @@ namespace rcppsw::metrics {
 class file_sink_registerer : public rer::client<file_sink_registerer> {
  public:
   file_sink_registerer(void)
-      : ER_CLIENT_INIT("rcppsw.metrics.detail.file_sink_registerer") {}
+      : ER_CLIENT_INIT() {}
 
   file_sink_registerer& operator=(const file_sink_registerer&) = default;
   file_sink_registerer(const file_sink_registerer&) = default;

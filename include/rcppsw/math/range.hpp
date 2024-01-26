@@ -51,9 +51,9 @@ namespace rcppsw::math {
 template <typename T>
 class range final : public er::client<range<T>>, er::stringizable {
  public:
-  range(void) noexcept : ER_CLIENT_INIT("rcppsw.math.range") {}
+  range(void) noexcept : ER_CLIENT_INIT() {}
   range(const T& lb, const T& ub) noexcept
-      : ER_CLIENT_INIT("rcppsw.math.range"),
+      : ER_CLIENT_INIT(),
         m_initialized(true),
         m_lb(lb),
         m_ub(ub),

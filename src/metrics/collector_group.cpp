@@ -20,7 +20,7 @@ namespace rcppsw::metrics {
  * Constructors/Destructors
  ******************************************************************************/
 collector_group::collector_group(void)
-    : ER_CLIENT_INIT("rcppsw.metrics.collector_group") {}
+    : ER_CLIENT_INIT() {}
 
 /*******************************************************************************
  * Member Functions

@@ -25,7 +25,7 @@ namespace rcppsw::metrics {
 file_sink::file_sink(fs::path fpath,
                      const rmetrics::output_mode& mode,
                      const rtypes::timestep& interval)
-    : ER_CLIENT_INIT("rcppsw.metrics.file_sink"),
+    : ER_CLIENT_INIT(),
       base_sink(mode, interval),
       mc_fpath(fpath),
       m_ofile(std::make_unique<std::ofstream>()) {

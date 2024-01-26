@@ -20,6 +20,7 @@
 #include "rcppsw/rcppsw.hpp"
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/algorithm/clustering/cluster.hpp"
+#include "rcsw/al/clock.h"
 #include "rcsw/utils/time.h"
 #include "rcppsw/algorithm/clustering/kmeans_omp.hpp"
 #include "rcppsw/algorithm/clustering/base_clustering_impl.hpp"
@@ -63,7 +64,7 @@ class kmeans : public er::client<kmeans<T>> {
          > impl,
          size_t k,
          size_t max_iter)
-      : ER_CLIENT_INIT("rcppsw.algorithm.clustering.kmeans"),
+      : ER_CLIENT_INIT(),
         mc_max_iter(max_iter),
         mc_k(k),
         m_data_in(data_in),
@@ -103,22 +104,28 @@ class kmeans : public er::client<kmeans<T>> {
     ER_INFO("Begin n_clusters=%zu, n_datapoints=%zu",
             m_clusters.size(),
             m_data.size());
-    double end = 0.0;
-    double start = time_monotonic_sec();
+    struct timespec end;
+    struct timespec start = clock_monotime();
 
     for (size_t i = 0; i < mc_max_iter; ++i) {
-      double iter_start = time_monotonic_sec();
+      struct timespec iter_start = clock_monotime();
       m_impl->iterate(m_data, dist_func, &m_clusters);
-      end = time_monotonic_sec();
+      end = clock_monotime();
       if (m_impl->converged(m_clusters)) {
         ER_INFO("Converged on iter%zu", i);
         break;
       }
       m_impl->post_iter_update(&m_clusters);
-      ER_INFO("Iter%zu: time=%.8fms", i, (end - iter_start) * 1000);
+      struct timespec diff;
+      time_ts_diff(&iter_start, &end, &diff);
+      double diff2 = time_ts2monons(&diff);
+      ER_INFO("Iter%zu: time=%.8fms", i, diff2);
     } /* for(i..) */
 
-    ER_INFO("Finish: time=%0.04fs", end - start);
+    struct timespec diff;
+    time_ts_diff(&start, &end, &diff);
+    double diff2 = time_ts2mono(&diff);
+    ER_INFO("Finish: time=%0.04fs", diff2);
     return m_membership;
   } /* run() */
 

@@ -22,7 +22,7 @@ namespace rcppsw::metrics {
 fs_output_manager::fs_output_manager(
     const rmconfig::metrics_config* const mconfig,
     const fs::path& output_root)
-    : ER_CLIENT_INIT("rcppsw.metrics.fs_output_manager"),
+    : ER_CLIENT_INIT(),
       m_metrics_path(fs::current_path() / output_root / mconfig->metrics_path) {
   ER_DEBUG("Output metrics root: %s", m_metrics_path.c_str());
   if (!fs::exists(m_metrics_path)) {

@@ -18,6 +18,7 @@
 #include "rcppsw/er/client.hpp"
 #include "rcppsw/algorithm/clustering/cluster.hpp"
 #include "rcsw/utils/time.h"
+#include "rcsw/al/clock.h"
 #include "rcppsw/algorithm/clustering/eh_clustering_impl.hpp"
 #include "rcppsw/math/range.hpp"
 #include "rcppsw/math/ientropy.hpp"
@@ -75,7 +76,7 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
   entropy_balch2000(std::unique_ptr<eh_clustering_impl<T>> impl,
                     const math::ranged& horizon,
                     double horizon_delta)
-      : ER_CLIENT_INIT("rcppsw.algorithm.clustering.entropy_balch2000"),
+      : ER_CLIENT_INIT(),
         mc_horizon(horizon),
         mc_horizon_delta(horizon_delta),
         m_impl(std::move(impl)) {}
@@ -114,22 +115,25 @@ class entropy_balch2000 : public er::client<entropy_balch2000<T>> {
 
     /* iterate through all horizons */
     for (size_t i = 0; i < n_iter; ++i) {
-      double start = time_monotonic_sec();
+      struct timespec start = clock_monotime();
       double horizon = mc_horizon.lb() + i* mc_horizon_delta;
       double entropy_h = balch2000_iter(dist_func, horizon);
-      double end = time_monotonic_sec();
+      struct timespec end = clock_monotime();
 
       if (std::fabs(entropy_h - entropy_h_1) <= rmath::kDOUBLE_EPSILON) {
         ER_WARN("Redundant entropy %f: horizon=%f", entropy_h, horizon);
       } else {
         e_accum += entropy_h;
       }
+      struct timespec diff;
+      time_ts_diff(&start, &end, &diff);
+      double diff2 = time_ts2monons(&diff);
       ER_DEBUG("Horizon=%f: time=%.8fms,entropy=%f",
-              horizon,
-              (end - start) * 1000,
-              entropy_h);
+               horizon,
+               diff2,
+               entropy_h);
       entropy_h_1 = entropy_h;
-      t_accum += end - start;
+      t_accum += diff2;
     } /* for(i..) */
     ER_INFO("Finish: time=%0.04fs,entropy=%f", t_accum, e_accum);
     return e_accum;

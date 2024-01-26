@@ -39,7 +39,7 @@ class bounding_box : public rer::client<bounding_box<TCoord>> {
 
   bounding_box(const coord_type& dims,
                const coord_type& anchor)
-      : ER_CLIENT_INIT("rcppsw.math.bounding_box"),
+      : ER_CLIENT_INIT(),
         mc_dims(dims),
         m_anchor_initialized(true),
         m_anchor(anchor) {

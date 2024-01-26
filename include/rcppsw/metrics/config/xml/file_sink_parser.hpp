@@ -39,7 +39,7 @@ class file_sink_parser : public rer::client<file_sink_parser>,
   using config_type = file_sink_config;
 
   file_sink_parser(void)
-      : ER_CLIENT_INIT("rcppsw.metrics.config.xml.file_sink_parser") {}
+      : ER_CLIENT_INIT() {}
 
   ~file_sink_parser(void) override = default;
 

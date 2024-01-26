@@ -44,7 +44,7 @@ class hgrid3D_view_filter_data : public rer::client<hgrid3D_view_filter_data<TSp
   hgrid3D_view_filter_data(const rmath::vector3z& center,
                           const rtypes::manhattan_dist& max_dist,
                           size_t max_vertices)
-      : ER_CLIENT_INIT("rcppsw.ds.graph.hgrid3D_view_filter_data"),
+      : ER_CLIENT_INIT(),
         mc_max_dist(max_dist),
         mc_center(center),
         /*

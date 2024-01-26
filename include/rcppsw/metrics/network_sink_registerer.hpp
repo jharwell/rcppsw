@@ -40,7 +40,7 @@ namespace rcppsw::metrics {
 class network_sink_registerer :public rer::client<network_sink_registerer> {
  public:
   network_sink_registerer(void)
-      : ER_CLIENT_INIT("rcppsw.metrics.detail.network_sink_registerer") {}
+      : ER_CLIENT_INIT() {}
 
   network_sink_registerer& operator=(const network_sink_registerer&) = default;
   network_sink_registerer(const network_sink_registerer&) = default;
