@@ -51,7 +51,9 @@ meta_info kVersion = {
     .git_diff = "@LIBRA_GIT_DIFF@",
     .git_tag = "@LIBRA_GIT_TAG@",
     .git_branch = "@LIBRA_GIT_BRANCH@",
-    .compiler_flags = "@LIBRA_CXX_FLAGS_BUILD@"
+    .compiler_flags = "@LIBRA_CXX_FLAGS_BUILD@",
+    .date = __DATE__,
+    .time = __TIME__
   }
 };
 
