@@ -186,4 +186,3 @@ class degrees final : public er::stringizable {
 std::ostream& operator<<(std::ostream& stream, const degrees& d);
 
 } /* namespace rcppsw::math */
-

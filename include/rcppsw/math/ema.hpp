@@ -29,10 +29,12 @@ namespace rcppsw::math {
  *
  * \brief Calculates an Exponential Moving Average of SOMETHING.
  *
- * Depends on:
+ * Implements:
  *
- * - Alpha: How much weight to give the past estimate, and how much to give the
- *   new measurement?
+ * \f$ f_{i} = \alpha{f_{i}} + (1-\alpha)f_{i-1}\f$
+ *
+ * \f$ \alpha\f$ contrals how much weight to give the past estimate, and how
+ *   much to give the new measurement.
  */
 template <class T>
 class ema final : public expression<T> {
@@ -43,13 +45,12 @@ class ema final : public expression<T> {
   explicit ema(double alpha) : m_alpha(alpha) {}
   ema(double alpha, const T& result) : expression<T>(result), m_alpha(alpha) {}
 
+  /**
+   * @brief Get the alpha value used in calculations.
+   */
   double alpha(void) const { return m_alpha; }
 
   T calc(const T& measure) { return operator()(measure); }
-  ema& calc(const ema& other) {
-    this->calc(other.v());
-    return *this;
-  }
 
   T operator()(const T& measure) {
     /*
@@ -86,8 +87,8 @@ class ema final : public expression<T> {
     return r;
   }
 
-  template <typename U = T,
-            RCPPSW_SFINAE_DECLDEF(!(std::is_floating_point<T>::value))>
+  template <typename U = T>
+  requires (!std::is_floating_point_v<U>)
   bool operator==(const ema& other) const {
     return this->v() == other.v();
   }
@@ -101,7 +102,8 @@ class ema final : public expression<T> {
 /*******************************************************************************
  * Non-Member Functions
  ******************************************************************************/
-template <typename T, RCPPSW_SFINAE_DECLDEF(!(std::is_floating_point<T>::value))>
+template <typename T>
+requires (!(std::is_floating_point_v<T>))
 bool operator==(const T& v, const ema<T>& rhs) {
   return v == rhs.v();
 }
@@ -150,4 +152,3 @@ ema<T> operator/(const ema<T>& lhs, const double& rhs) {
 }
 
 } /* namespace rcppsw::math */
-

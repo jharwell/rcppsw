@@ -1,1 +1,1 @@
-./libra/cmake/project.cmake
+libra/cmake/libra/project.cmake

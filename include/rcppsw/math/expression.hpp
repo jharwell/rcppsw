@@ -32,29 +32,37 @@ template <class T>
 class expression {
  public:
   expression(void) = default;
+ /**
+   * \brief Initialize the expression with an initial value.
+   */
   explicit expression(const T& last) : m_last(last) {}
   virtual ~expression(void) = default;
 
   expression(const expression&) = default;
-  expression& operator=(const expression&) = default;
+  auto operator=(const expression&) -> expression& = default;
 
   /**
    * \brief Get the last value calculated.
    */
-  T v(void) const { return m_last; }
+  auto v(void) -> T const { return m_last; }
 
   /**
    * \brief Evaluate a calculation and set a new value.
    */
-  T eval(const T& val) { return m_last = val; }
+  auto eval(const T& val) -> T { return m_last = val; }
 
-  void reset(void) { m_last = T{ 0 }; }
+  /**
+   * @brief Reset the expression to 0. Requires \tparam T to be constructible
+   * with an argument of 0.
+   */
+  auto reset(void) -> void { m_last = T{ 0 }; }
 
-  bool operator==(const expression& other) const {
-    return this->v() == other.v();
+  /**
+   * @brief Compare two expressions.
+   */
+  auto operator<=>(const expression& other) const {
+    return v() <=> other.v();
   }
-  bool operator>(const expression& other) const { return this->v() > other.v(); }
-  bool operator<(const expression& other) const { return this->v() < other.v(); }
 
  private:
   /* clang-format off */
